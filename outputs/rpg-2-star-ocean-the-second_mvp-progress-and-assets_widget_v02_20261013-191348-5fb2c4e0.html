@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RPG production tracker</title>
+<style>
+  :root { color-scheme: light dark; --bg:#f7f8fa; --fg:#20252d; --muted:#5e6875; --line:#d9dfe6; --card:#fff; --accent:#186b74; --soft:#e1f1f0; --track:#e2e7ea; --good:#247647; --warn:#a46809; }
+  @media (prefers-color-scheme:dark) { :root { --bg:#15191e; --fg:#e9edf1; --muted:#a8b4c0; --line:#39434d; --card:#20262d; --accent:#6bd2ce; --soft:#15363a; --track:#354048; --good:#70c990; --warn:#e1af5b; } }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg); font:14px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif; }
+  main { max-width:680px; margin:auto; padding:16px; }
+  header { display:flex; align-items:start; justify-content:space-between; gap:12px; }
+  h1 { margin:0; font-size:20px; line-height:1.2; font-weight:650; }
+  h2 { margin:0 0 8px; font-size:15px; }
+  .muted { color:var(--muted); }
+  .small { font-size:12px; }
+  .count { font-size:24px; font-weight:700; line-height:1; white-space:nowrap; }
+  .progress { margin:14px 0 6px; height:9px; border-radius:999px; background:var(--track); overflow:hidden; }
+  .fill { height:100%; width:0; background:var(--accent); transition:width .25s ease; }
+  .current { margin:18px 0 10px; padding:12px; background:var(--soft); border-radius:10px; }
+  .current strong { display:block; }
+  .steps { display:grid; gap:7px; }
+  .step { width:100%; display:grid; grid-template-columns:32px 1fr auto; gap:8px; align-items:center; padding:10px 11px; border:1px solid var(--line); border-radius:10px; background:var(--card); color:var(--fg); text-align:left; font:inherit; }
+  .step:hover { border-color:var(--accent); }
+  .step[aria-pressed="true"] { border-color:var(--accent); background:var(--soft); }
+  .id { font-weight:700; color:var(--accent); }
+  .step-title { font-weight:600; }
+  .status { color:var(--muted); font-size:12px; white-space:nowrap; }
+  .status.done { color:var(--good); }
+  .status.in-progress,.status.review { color:var(--warn); }
+  .detail { margin-top:14px; padding:14px; border:1px solid var(--line); border-radius:10px; background:var(--card); }
+  .detail p { margin:7px 0 0; }
+  .label { display:block; margin-top:12px; font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; }
+  ul { margin:5px 0 0; padding-left:19px; }
+  li { margin:3px 0; }
+  footer { display:flex; gap:12px; align-items:center; justify-content:space-between; margin-top:14px; }
+  a { color:var(--accent); }
+  button { cursor:pointer; }
+  button:focus-visible,a:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  [hidden] { display:none !important; }
+  .tabs { display:flex; gap:8px; margin:0 0 16px; }
+  .tab { flex:1; padding:9px 10px; border:1px solid var(--line); border-radius:9px; background:var(--card); color:var(--fg); font:inherit; font-weight:600; }
+  .tab[aria-selected="true"] { border-color:var(--accent); background:var(--soft); color:var(--accent); }
+  .asset-summary { padding:13px; border-radius:10px; background:var(--soft); margin-bottom:12px; }
+  .asset-summary strong { font-size:19px; }
+  .filter { display:flex; gap:8px; margin:12px 0; }
+  .filter button { border:1px solid var(--line); border-radius:8px; padding:6px 10px; background:var(--card); color:var(--fg); font:inherit; }
+  .filter button[aria-pressed="true"] { border-color:var(--accent); color:var(--accent); }
+  details.group { margin:8px 0; border:1px solid var(--line); border-radius:10px; background:var(--card); }
+  details.group > summary { cursor:pointer; padding:11px 12px; font-weight:650; }
+  details.subgroup { margin:0 10px 9px; border-top:1px solid var(--line); }
+  details.subgroup > summary { cursor:pointer; padding:9px 2px; font-weight:600; }
+  .group-count { float:right; color:var(--muted); font-size:12px; font-weight:400; }
+  .asset-list { display:grid; gap:7px; padding:0 0 9px; }
+  .asset-row { display:grid; grid-template-columns:18px 1fr; gap:8px; align-items:start; padding:8px; border:1px solid var(--line); border-radius:8px; }
+  .asset-row input { margin-top:3px; accent-color:var(--accent); }
+  .asset-name { font-weight:550; }
+  .asset-meta { color:var(--muted); font-size:12px; margin-top:2px; }
+  .asset-link { margin-left:7px; }
+  @media (max-width:370px) { main { padding:12px; } .step { grid-template-columns:26px 1fr; } .status { grid-column:2; } }
+</style>
+</head>
+<body>
+<main>
+  <nav class="tabs" aria-label="Tracker views"><button class="tab" id="tab-plan" aria-selected="true" type="button">MVP 计划</button><button class="tab" id="tab-assets" aria-selected="false" type="button">资产清单</button></nav>
+  <div id="plan-view">
+  <header>
+    <div><h1>RPG MVP</h1><div class="muted small">Exploration → companions → combat</div></div>
+    <div class="count" id="count" aria-live="polite">0 / 8</div>
+  </header>
+  <div class="progress" role="progressbar" aria-label="Completed MVP steps" aria-valuemin="0" aria-valuemax="8" aria-valuenow="0" id="progress"><div class="fill" id="fill"></div></div>
+  <div class="muted small" id="summary">Loading progress…</div>
+  <section class="current" aria-label="Current step"><span class="small muted">CURRENT STEP</span><strong id="current">Loading…</strong></section>
+  <section aria-label="MVP steps"><h2>Steps</h2><div class="steps" id="steps"></div></section>
+  <section class="detail" id="detail" aria-live="polite"></section>
+  <footer><a href="/plan" target="_blank" rel="noopener">Full MVP plan</a><span class="muted small" id="updated"></span></footer>
+  </div>
+  <div id="assets-view" hidden>
+    <header><div><h1>资产清单</h1><div class="muted small">概念稿与游戏可用素材分别记录</div></div><div class="count" id="asset-count">0 / 0</div></header>
+    <div class="asset-summary"><strong id="asset-summary">载入中…</strong><div class="muted small" id="asset-summary-detail"></div></div>
+    <div class="filter"><button type="button" id="filter-all" aria-pressed="true">全部</button><button type="button" id="filter-mvp" aria-pressed="false">仅 MVP</button></div>
+    <div id="asset-categories"></div>
+    <p class="muted small">勾选表示该项已验收。未制作的项目会保持禁用；人物概念稿与游戏精灵分别验收。</p>
+  </div>
+</main>
+<script>
+(() => {
+  const statusText = {todo:"Not started",ready:"Ready",in_progress:"In progress",review:"Needs review",done:"Done",blocked:"Blocked"};
+  const els = Object.fromEntries(["count","progress","fill","summary","current","steps","detail","updated"].map(id => [id,document.getElementById(id)]));
+  let data = null;
+  let selected = sessionStorage.getItem("rpg-mvp-selected") || "M1";
+  function detail(step) {
+    els.detail.replaceChildren();
+    const heading = document.createElement("h2"); heading.textContent = step.id + " · " + step.title; els.detail.append(heading);
+    const summary = document.createElement("p"); summary.textContent = step.summary; els.detail.append(summary);
+    const label = document.createElement("span"); label.className = "label"; label.textContent = "Acceptance"; els.detail.append(label);
+    const acceptance = document.createElement("p"); acceptance.textContent = step.acceptance; els.detail.append(acceptance);
+    if (step.blocker) { const b = document.createElement("p"); b.textContent = "Blocked: " + step.blocker; els.detail.append(b); }
+    if (step.evidence && step.evidence.length) {
+      const e = document.createElement("span"); e.className="label"; e.textContent="Evidence"; els.detail.append(e);
+      const ul=document.createElement("ul");
+      step.evidence.forEach(item => { const li=document.createElement("li"); li.textContent=item; ul.append(li); });
+      els.detail.append(ul);
+    }
+  }
+  function render() {
+    if (!data || !Array.isArray(data.steps)) return;
+    const done = data.steps.filter(s => s.status === "done").length;
+    els.count.textContent = done + " / " + data.steps.length;
+    els.progress.setAttribute("aria-valuemax",String(data.steps.length));
+    els.progress.setAttribute("aria-valuenow",String(done));
+    els.fill.style.width = (100 * done / data.steps.length) + "%";
+    els.summary.textContent = done === data.steps.length ? "MVP complete" : (data.steps.length-done) + " steps remaining";
+    const active=data.steps.find(s => s.id === data.currentStep) || data.steps.find(s=>s.status!=="done") || data.steps[0];
+    els.current.textContent = active.id + " · " + active.title + " — " + (statusText[active.status] || active.status);
+    els.steps.replaceChildren();
+    data.steps.forEach(step => {
+      const b=document.createElement("button"); b.type="button"; b.className="step"; b.setAttribute("aria-pressed",String(step.id===selected));
+      b.setAttribute("aria-label",step.id+" "+step.title+", "+(statusText[step.status] || step.status));
+      const id=document.createElement("span"); id.className="id"; id.textContent=step.id;
+      const title=document.createElement("span"); title.className="step-title"; title.textContent=step.title;
+      const status=document.createElement("span"); status.className="status "+step.status.replace("_","-"); status.textContent=statusText[step.status] || step.status;
+      b.append(id,title,status); b.addEventListener("click",()=>{selected=step.id;sessionStorage.setItem("rpg-mvp-selected",selected);render();});
+      els.steps.append(b);
+    });
+    detail(data.steps.find(s=>s.id===selected) || active);
+    const date=new Date(data.updatedAt);
+    els.updated.textContent = Number.isNaN(date.valueOf()) ? "" : "Updated "+date.toLocaleString(undefined,{month:"short",day:"numeric",hour:"numeric",minute:"2-digit"});
+  }
+  async function refresh() {
+    try {
+      const response=await fetch("/state",{cache:"no-store"});
+      if (!response.ok) throw new Error("Progress unavailable");
+      data=await response.json(); render();
+    } catch (_) {
+      els.summary.textContent="Progress file unavailable. Reopen this panel after the local tracker starts.";
+    }
+  }
+  refresh(); setInterval(refresh,8000); document.addEventListener("visibilitychange",()=>{if(!document.hidden) refresh();});
+})();
+</script>
+<script>
+(() => {
+  const planTab=document.getElementById('tab-plan'), assetsTab=document.getElementById('tab-assets');
+  const planView=document.getElementById('plan-view'), assetsView=document.getElementById('assets-view');
+  const categories=document.getElementById('asset-categories');
+  const stageText={planned:'待制作',concept:'概念稿',approved:'已修订',production:'制作中',ready:'可验收'};
+  let inventory=null, filter='all';
+  function view(which) {
+    const assets=which==='assets'; planView.hidden=assets; assetsView.hidden=!assets;
+    planTab.setAttribute('aria-selected',String(!assets)); assetsTab.setAttribute('aria-selected',String(assets));
+    sessionStorage.setItem('rpg-tracker-view',which);
+    if(assets) refresh();
+  }
+  planTab.addEventListener('click',()=>view('plan')); assetsTab.addEventListener('click',()=>view('assets'));
+  for(const which of ['all','mvp']) document.getElementById('filter-'+which).addEventListener('click',()=>{
+    filter=which;
+    document.getElementById('filter-all').setAttribute('aria-pressed',String(which==='all'));
+    document.getElementById('filter-mvp').setAttribute('aria-pressed',String(which==='mvp'));
+    render();
+  });
+  function visible(items) { return items.filter(i=>filter==='all'||i.scope==='MVP'); }
+  function render() {
+    if(!inventory)return;
+    const all=inventory.categories.flatMap(c=>c.subcategories.flatMap(s=>visible(s.items)));
+    const accepted=all.filter(i=>i.checked).length;
+    const concepts=all.filter(i=>i.id.startsWith('portrait.')&&i.stage!=='planned').length;
+    document.getElementById('asset-count').textContent=accepted+' / '+all.length;
+    document.getElementById('asset-summary').textContent=accepted+' 项已验收';
+    document.getElementById('asset-summary-detail').textContent=concepts+' 张人物设定图已有初稿 · '+all.length+' 项清单条目';
+    categories.replaceChildren();
+    inventory.categories.forEach(cat=>{
+      const catItems=cat.subcategories.flatMap(s=>visible(s.items)); if(!catItems.length)return;
+      const outer=document.createElement('details'); outer.className='group'; outer.open=cat.id==='characters';
+      const heading=document.createElement('summary'); heading.textContent=cat.name;
+      const tally=document.createElement('span'); tally.className='group-count'; tally.textContent=catItems.filter(i=>i.checked).length+' / '+catItems.length; heading.append(tally); outer.append(heading);
+      cat.subcategories.forEach(sub=>{
+        const items=visible(sub.items); if(!items.length)return;
+        const inner=document.createElement('details'); inner.className='subgroup';
+        const title=document.createElement('summary'); title.textContent=sub.name;
+        const count=document.createElement('span'); count.className='group-count'; count.textContent=items.filter(i=>i.checked).length+' / '+items.length; title.append(count); inner.append(title);
+        const list=document.createElement('div'); list.className='asset-list';
+        items.forEach(item=>{
+          const row=document.createElement('label'); row.className='asset-row';
+          const box=document.createElement('input'); box.type='checkbox'; box.checked=Boolean(item.checked); box.disabled=item.stage==='planned'; box.setAttribute('aria-label',item.name+' 已验收');
+          box.addEventListener('change',async()=>{
+            box.disabled=true;
+            try {const r=await fetch('/asset-check',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({id:item.id,checked:box.checked})}); if(!r.ok)throw new Error('Save failed'); await refresh();}
+            catch(_) {box.checked=!box.checked; box.disabled=false; alert('无法保存清单状态，请稍后重试。');}
+          });
+          const body=document.createElement('div');
+          const name=document.createElement('div'); name.className='asset-name'; name.textContent=item.name; body.append(name);
+          const meta=document.createElement('div'); meta.className='asset-meta'; meta.textContent=(item.scope==='MVP'?'MVP · ':'完整游戏 · ')+(stageText[item.stage]||item.stage)+(item.target>1?' · 目标 '+item.target+' 份':'')+(item.board?' · '+item.board:'');
+          if(item.file){const a=document.createElement('a'); a.className='asset-link'; a.href=item.file; a.target='_blank'; a.rel='noopener'; a.textContent='查看'; meta.append(a);}
+          body.append(meta); if(item.note){const note=document.createElement('div');note.className='asset-meta';note.textContent=item.note;body.append(note);}
+          row.append(box,body); list.append(row);
+        });
+        inner.append(list); outer.append(inner);
+      }); categories.append(outer);
+    });
+  }
+  async function refresh() {
+    try {const r=await fetch('/inventory',{cache:'no-store'}); if(!r.ok)throw new Error('Unavailable'); inventory=await r.json(); render();}
+    catch(_) {document.getElementById('asset-summary').textContent='清单暂时无法读取';}
+  }
+  view(sessionStorage.getItem('rpg-tracker-view')==='assets'?'assets':'plan');
+  setInterval(()=>{if(!assetsView.hidden)refresh();},8000);
+})();
+</script>
+</body>
+</html>
