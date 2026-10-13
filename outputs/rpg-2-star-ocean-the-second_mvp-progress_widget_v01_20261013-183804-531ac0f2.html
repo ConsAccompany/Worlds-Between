@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RPG MVP progress</title>
+<style>
+  :root { color-scheme: light dark; --bg:#f7f8fa; --fg:#20252d; --muted:#5e6875; --line:#d9dfe6; --card:#fff; --accent:#186b74; --soft:#e1f1f0; --track:#e2e7ea; --good:#247647; --warn:#a46809; }
+  @media (prefers-color-scheme:dark) { :root { --bg:#15191e; --fg:#e9edf1; --muted:#a8b4c0; --line:#39434d; --card:#20262d; --accent:#6bd2ce; --soft:#15363a; --track:#354048; --good:#70c990; --warn:#e1af5b; } }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg); font:14px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif; }
+  main { max-width:680px; margin:auto; padding:16px; }
+  header { display:flex; align-items:start; justify-content:space-between; gap:12px; }
+  h1 { margin:0; font-size:20px; line-height:1.2; font-weight:650; }
+  h2 { margin:0 0 8px; font-size:15px; }
+  .muted { color:var(--muted); }
+  .small { font-size:12px; }
+  .count { font-size:24px; font-weight:700; line-height:1; white-space:nowrap; }
+  .progress { margin:14px 0 6px; height:9px; border-radius:999px; background:var(--track); overflow:hidden; }
+  .fill { height:100%; width:0; background:var(--accent); transition:width .25s ease; }
+  .current { margin:18px 0 10px; padding:12px; background:var(--soft); border-radius:10px; }
+  .current strong { display:block; }
+  .steps { display:grid; gap:7px; }
+  .step { width:100%; display:grid; grid-template-columns:32px 1fr auto; gap:8px; align-items:center; padding:10px 11px; border:1px solid var(--line); border-radius:10px; background:var(--card); color:var(--fg); text-align:left; font:inherit; }
+  .step:hover { border-color:var(--accent); }
+  .step[aria-pressed="true"] { border-color:var(--accent); background:var(--soft); }
+  .id { font-weight:700; color:var(--accent); }
+  .step-title { font-weight:600; }
+  .status { color:var(--muted); font-size:12px; white-space:nowrap; }
+  .status.done { color:var(--good); }
+  .status.in-progress,.status.review { color:var(--warn); }
+  .detail { margin-top:14px; padding:14px; border:1px solid var(--line); border-radius:10px; background:var(--card); }
+  .detail p { margin:7px 0 0; }
+  .label { display:block; margin-top:12px; font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; }
+  ul { margin:5px 0 0; padding-left:19px; }
+  li { margin:3px 0; }
+  footer { display:flex; gap:12px; align-items:center; justify-content:space-between; margin-top:14px; }
+  a { color:var(--accent); }
+  button { cursor:pointer; }
+  button:focus-visible,a:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  @media (max-width:370px) { main { padding:12px; } .step { grid-template-columns:26px 1fr; } .status { grid-column:2; } }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div><h1>RPG MVP</h1><div class="muted small">Exploration → companions → combat</div></div>
+    <div class="count" id="count" aria-live="polite">0 / 8</div>
+  </header>
+  <div class="progress" role="progressbar" aria-label="Completed MVP steps" aria-valuemin="0" aria-valuemax="8" aria-valuenow="0" id="progress"><div class="fill" id="fill"></div></div>
+  <div class="muted small" id="summary">Loading progress…</div>
+  <section class="current" aria-label="Current step"><span class="small muted">CURRENT STEP</span><strong id="current">Loading…</strong></section>
+  <section aria-label="MVP steps"><h2>Steps</h2><div class="steps" id="steps"></div></section>
+  <section class="detail" id="detail" aria-live="polite"></section>
+  <footer><a href="/plan" target="_blank" rel="noopener">Full MVP plan</a><span class="muted small" id="updated"></span></footer>
+</main>
+<script>
+(() => {
+  const statusText = {todo:"Not started",ready:"Ready",in_progress:"In progress",review:"Needs review",done:"Done",blocked:"Blocked"};
+  const els = Object.fromEntries(["count","progress","fill","summary","current","steps","detail","updated"].map(id => [id,document.getElementById(id)]));
+  let data = null;
+  let selected = sessionStorage.getItem("rpg-mvp-selected") || "M1";
+  function detail(step) {
+    els.detail.replaceChildren();
+    const heading = document.createElement("h2"); heading.textContent = step.id + " · " + step.title; els.detail.append(heading);
+    const summary = document.createElement("p"); summary.textContent = step.summary; els.detail.append(summary);
+    const label = document.createElement("span"); label.className = "label"; label.textContent = "Acceptance"; els.detail.append(label);
+    const acceptance = document.createElement("p"); acceptance.textContent = step.acceptance; els.detail.append(acceptance);
+    if (step.blocker) { const b = document.createElement("p"); b.textContent = "Blocked: " + step.blocker; els.detail.append(b); }
+    if (step.evidence && step.evidence.length) {
+      const e = document.createElement("span"); e.className="label"; e.textContent="Evidence"; els.detail.append(e);
+      const ul=document.createElement("ul");
+      step.evidence.forEach(item => { const li=document.createElement("li"); li.textContent=item; ul.append(li); });
+      els.detail.append(ul);
+    }
+  }
+  function render() {
+    if (!data || !Array.isArray(data.steps)) return;
+    const done = data.steps.filter(s => s.status === "done").length;
+    els.count.textContent = done + " / " + data.steps.length;
+    els.progress.setAttribute("aria-valuemax",String(data.steps.length));
+    els.progress.setAttribute("aria-valuenow",String(done));
+    els.fill.style.width = (100 * done / data.steps.length) + "%";
+    els.summary.textContent = done === data.steps.length ? "MVP complete" : (data.steps.length-done) + " steps remaining";
+    const active=data.steps.find(s => s.id === data.currentStep) || data.steps.find(s=>s.status!=="done") || data.steps[0];
+    els.current.textContent = active.id + " · " + active.title + " — " + (statusText[active.status] || active.status);
+    els.steps.replaceChildren();
+    data.steps.forEach(step => {
+      const b=document.createElement("button"); b.type="button"; b.className="step"; b.setAttribute("aria-pressed",String(step.id===selected));
+      b.setAttribute("aria-label",step.id+" "+step.title+", "+(statusText[step.status] || step.status));
+      const id=document.createElement("span"); id.className="id"; id.textContent=step.id;
+      const title=document.createElement("span"); title.className="step-title"; title.textContent=step.title;
+      const status=document.createElement("span"); status.className="status "+step.status.replace("_","-"); status.textContent=statusText[step.status] || step.status;
+      b.append(id,title,status); b.addEventListener("click",()=>{selected=step.id;sessionStorage.setItem("rpg-mvp-selected",selected);render();});
+      els.steps.append(b);
+    });
+    detail(data.steps.find(s=>s.id===selected) || active);
+    const date=new Date(data.updatedAt);
+    els.updated.textContent = Number.isNaN(date.valueOf()) ? "" : "Updated "+date.toLocaleString(undefined,{month:"short",day:"numeric",hour:"numeric",minute:"2-digit"});
+  }
+  async function refresh() {
+    try {
+      const response=await fetch("/state",{cache:"no-store"});
+      if (!response.ok) throw new Error("Progress unavailable");
+      data=await response.json(); render();
+    } catch (_) {
+      els.summary.textContent="Progress file unavailable. Reopen this panel after the local tracker starts.";
+    }
+  }
+  refresh(); setInterval(refresh,8000); document.addEventListener("visibilitychange",()=>{if(!document.hidden) refresh();});
+})();
+</script>
+</body>
+</html>
