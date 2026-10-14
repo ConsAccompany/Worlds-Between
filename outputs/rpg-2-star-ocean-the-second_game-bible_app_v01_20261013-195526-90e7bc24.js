@@ -130,17 +130,20 @@
       M8:['验收与调整','完整试玩、记录转场时间和易用性问题，并修复阻碍。','两次新存档完整试玩无阻碍；存档和回访招募通过核验。'],
     };
     const place={'scifi.city':'城市','scifi.outskirts':'城外','scifi.ruins':'遗址'};
+    const shortTime=seconds=>{const whole=Math.round(seconds);return `${Math.floor(whole/60)}:${String(whole%60).padStart(2,'0')}`;};
     const playtestRows=state.playtests.map(run=>{
       const seconds=Math.round(run.durationSeconds);
       const elapsed=`${Math.floor(seconds/60)} 分 ${String(seconds%60).padStart(2,'0')} 秒`;
       const route=run.visits.map(id=>place[id]).filter(Boolean).join(' → ')||'未记录';
-      return `<div class="playtest-run"><strong>${esc(elapsed)}</strong><span class="muted small">${esc(run.recordedAt)} · ${run.language==='en'?'英文':'中文'}</span><div class="small">路线：${esc(route)}</div><div class="small muted">已招募 ${run.recruited.length}/3 · 完成调查 ${run.surveysCompleted}/3 · 同行交流 ${run.conversationsHeard}/6 · 战斗 ${run.battles} 场 · 错误证据关联 ${run.wrongEvidencePairs} 次 · 错误研判 ${run.wrongJudgments} 次</div><div class="small muted receipt-name">原始记录：outputs/${esc(run.id)}</div></div>`;
+      const placeTimes=Object.entries(run.timeByDestination||{}).filter(([id])=>place[id]).map(([id,seconds])=>`${place[id]} ${shortTime(seconds)}`).join(' · ');
+      const surveyTimes=(run.surveyTimeline||[]).map(item=>`${place[item.destination]} ${shortTime(item.atSeconds)}`).join(' → ');
+      return `<div class="playtest-run"><strong>${esc(elapsed)}</strong><span class="muted small">${esc(run.recordedAt)} · ${run.language==='en'?'英文':'中文'}</span><div class="small">路线：${esc(route)}</div><div class="small muted">已招募 ${run.recruited.length}/3 · 完成调查 ${run.surveysCompleted}/3 · 同行交流 ${run.conversationsHeard}/6 · 战斗 ${run.battles} 场 · 错误证据关联 ${run.wrongEvidencePairs} 次 · 错误研判 ${run.wrongJudgments} 次</div>${placeTimes?`<div class="small">各地累计停留：${esc(placeTimes)}</div>`:''}${surveyTimes?`<div class="small muted">调查完成时点：${esc(surveyTimes)}</div>`:''}<div class="small muted receipt-name">原始记录：outputs/${esc(run.id)}</div></div>`;
     }).join('');
     const routeTrials=new Set(state.playtests.filter(run=>run.visits.length===3&&run.surveysCompleted===3&&run.recruited.length===3&&run.durationSeconds>=1500&&run.durationSeconds<=2100).map(run=>run.visits.join('>')));
     const launchPhase=state.playtestStatus.phase;
     const launchText={loading:'正在检查本地试玩入口…',idle:'可以从此处打开游戏。请从新档开始，完成城市汇报后关闭游戏，记录会自动显示在下方。',running:'游戏正在运行。完成城市汇报后关闭游戏，记录会自动回传。',completed:'上一轮试玩记录已回传，可以开始另一条路线。',no_report:'上一轮在完成城市汇报前结束，没有生成完成记录。可以重新开始。',error:'上一轮启动或运行失败，请检查本地游戏文件。',unavailable:'当前面板没有连接试玩入口。请打开最新版本地面板。'};
     const launchDisabled=!['idle','completed','no_report','error'].includes(launchPhase);
-    const launchHint=launchPhase==='unavailable' ? '当前面板没有连接试玩入口。<a href="http://127.0.0.1:18726/">打开当前面板</a>。' : esc(launchText[launchPhase]||launchText.loading);
+    const launchHint=launchPhase==='unavailable' ? '当前面板没有连接试玩入口。<a href="http://127.0.0.1:18727/">打开当前面板</a>。' : esc(launchText[launchPhase]||launchText.loading);
     const pct=Math.round(100*done/p.steps.length);
     content.innerHTML=`${head('制作路线','MVP 阶段状态与尚待细化的完整游戏设计',badge(done+' / '+p.steps.length+' 阶段','accent'))}
       <div class="card"><div class="step-top"><strong>MVP 完成情况</strong><span>${pct}%</span></div><div class="meter" role="progressbar" aria-valuemin="0" aria-valuemax="${p.steps.length}" aria-valuenow="${done}"><span style="width:${pct}%"></span></div><p class="muted small">当前：${current?esc(current.id+' · '+copy[current.id][0]):'全部阶段已完成'}</p></div>

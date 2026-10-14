@@ -23,6 +23,7 @@ var destination_buttons: Dictionary = {}
 
 
 func _ready() -> void:
+	AppState.record_playtest_event("location")
 	_build_ui()
 	AppState.language_changed.connect(_refresh_text)
 	_refresh_text()

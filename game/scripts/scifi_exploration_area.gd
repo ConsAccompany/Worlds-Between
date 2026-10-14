@@ -67,6 +67,7 @@ func _ready() -> void:
 	destination_id = AppState.current_destination_id
 	if not AREA_CONFIG.has(destination_id):
 		destination_id = "scifi.city"
+	AppState.record_playtest_event("location", destination_id)
 	var config: Dictionary = AREA_CONFIG[destination_id]
 	npc_position = config["npc"]
 	recruit_id = config["recruit"]

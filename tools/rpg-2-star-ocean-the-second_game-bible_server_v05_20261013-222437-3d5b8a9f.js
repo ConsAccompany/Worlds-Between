@@ -1,0 +1,114 @@
+const http = require('node:http');
+const fs = require('node:fs');
+const path = require('node:path');
+const {spawn} = require('node:child_process');
+
+const output = path.resolve(__dirname, '..', 'outputs');
+const port = Number(process.env.WORLDS_BETWEEN_BIBLE_PORT || 18727);
+const launcher = path.resolve(__dirname, 'rpg-2-star-ocean-the-second_scifi-region_playtest-launcher_m7_20261013-214924-6c8e0d47.ps1');
+let playtestStatus = {phase:'idle',startedAt:null,endedAt:null,receipt:null,message:''};
+const inventoryName = 'rpg-2-star-ocean-the-second_asset-inventory_state_v01_20261013-191033-7d1e0a8b.json';
+const receiptPattern = /^rpg-2-star-ocean-the-second_scifi-region_playtest-receipt_m7_\d{8}-\d{6}-[0-9a-f]{8}\.json$/;
+const routes = {
+  '/': ['rpg-2-star-ocean-the-second_game-bible_widget_v03_20261013-195526-8e5a1c43.html','text/html; charset=utf-8'],
+  '/bible.css': ['rpg-2-star-ocean-the-second_game-bible_styles_v01_20261013-195526-6c13fa09.css','text/css; charset=utf-8'],
+  '/bible.js': ['rpg-2-star-ocean-the-second_game-bible_app_v01_20261013-195526-90e7bc24.js','text/javascript; charset=utf-8'],
+  '/bible': ['rpg-2-star-ocean-the-second_game-bible_state_v01_20261013-195422-b8c16d42.json','application/json; charset=utf-8'],
+  '/inventory': [inventoryName,'application/json; charset=utf-8'],
+  '/state': ['rpg-2-star-ocean-the-second_mvp-progress_state_v01_20261013-183804-28a1c7e4.json','application/json; charset=utf-8'],
+  '/source/brief': ['rpg-2-star-ocean-the-second_game-design-brief_v01_20261012-233611-7c2e1f4a.md','text/markdown; charset=utf-8'],
+  '/source/core': ['rpg-2-star-ocean-the-second_core-cast_character-bible_v01_20261012-234158-cc7e91a4.md','text/markdown; charset=utf-8'],
+  '/source/extra': ['rpg-2-star-ocean-the-second_remaining-companions_character-bible_v01_20261013-181920-6d2a4f8c.md','text/markdown; charset=utf-8'],
+  '/source/mvp': ['rpg-2-star-ocean-the-second_mvp-implementation-plan_v01_20261013-183550-0f7c4d21.md','text/markdown; charset=utf-8'],
+};
+function respond(response, code, value, mime='text/plain; charset=utf-8') {
+  response.writeHead(code,{'content-type':mime,'cache-control':'no-store','x-content-type-options':'nosniff'});
+  response.end(value);
+}
+function saveCheck(request,response) {
+  let body='';
+  request.on('data',chunk=>{body+=chunk;if(body.length>1024)request.destroy();});
+  request.on('end',()=>{
+    try {
+      const {id,checked}=JSON.parse(body);
+      if(typeof id!=='string'||typeof checked!=='boolean')return respond(response,400,'Invalid check');
+      const file=path.join(output,inventoryName);
+      const inventory=JSON.parse(fs.readFileSync(file,'utf8'));
+      const item=inventory.categories.flatMap(c=>c.subcategories.flatMap(s=>s.items)).find(i=>i.id===id);
+      if(!item||item.stage==='planned')return respond(response,400,'Asset not ready for acceptance');
+      item.checked=checked;inventory.updatedAt=new Date().toISOString();
+      fs.writeFileSync(file,JSON.stringify(inventory,null,2)+'\n','utf8');
+      respond(response,200,JSON.stringify({id,checked}),'application/json; charset=utf-8');
+    } catch(_) {respond(response,400,'Could not save check');}
+  });
+}
+function playtestSummaries() {
+  const files = fs.readdirSync(output).filter(name => receiptPattern.test(name)).sort().reverse().slice(0,20);
+  const runs=[];
+  for (const name of files) {
+    try {
+      const file=path.join(output,name);
+      if (fs.statSync(file).size>65536) continue;
+      const receipt=JSON.parse(fs.readFileSync(file,'utf8'));
+      if (receipt.schemaVersion!==1 || receipt.project!=='rpg-2-star-ocean-the-second' || receipt.milestone!=='M7' || receipt.reportCompleted!==true || !Number.isFinite(receipt.durationSeconds) || receipt.durationSeconds<0 || !Array.isArray(receipt.events)) continue;
+      const visits=[];
+      for (const event of receipt.events) if (event?.type==='visit' && ['scifi.city','scifi.outskirts','scifi.ruins'].includes(event.destination) && !visits.includes(event.destination)) visits.push(event.destination);
+      const retryTotal=counts => counts && typeof counts==='object' ? Object.values(counts).reduce((sum,value)=>sum+(Number.isInteger(value)&&value>0?value:0),0) : 0;
+      const timeByDestination={};
+      for (const place of ['scifi.city','scifi.outskirts','scifi.ruins','map_and_setup']) {
+        const seconds=receipt.timeByDestinationSeconds?.[place];
+        if (Number.isFinite(seconds)&&seconds>=0&&seconds<=receipt.durationSeconds+0.2) timeByDestination[place]=seconds;
+      }
+      const surveyTimeline=receipt.events.filter(event=>event?.type==='survey_complete'&&['scifi.city','scifi.outskirts','scifi.ruins'].includes(event.destination)&&Number.isFinite(event.atSeconds)&&event.atSeconds>=0&&event.atSeconds<=receipt.durationSeconds+0.2).map(event=>({destination:event.destination,atSeconds:event.atSeconds})).slice(0,3);
+      runs.push({id:name,recordedAt:String(receipt.recordedAt||''),durationSeconds:receipt.durationSeconds,language:receipt.language==='en'?'en':'zh',visits,recruited:Array.isArray(receipt.recruited)?receipt.recruited.filter(id=>typeof id==='string').slice(0,3):[],surveysCompleted:Array.isArray(receipt.surveysCompleted)?receipt.surveysCompleted.length:0,conversationsHeard:Array.isArray(receipt.conversationsHeard)?receipt.conversationsHeard.length:0,wrongEvidencePairs:retryTotal(receipt.wrongEvidencePairs),wrongJudgments:retryTotal(receipt.wrongJudgments),battles:receipt.events.filter(event=>event?.type==='battle_start').length,timeByDestination,surveyTimeline});
+    } catch (_) { /* A damaged receipt does not hide the other runs. */ }
+  }
+  return runs;
+}
+function startPlaytest(request,response) {
+  if (request.headers.origin !== `http://127.0.0.1:${port}`) return respond(response,403,'Invalid origin');
+  if (playtestStatus.phase==='running') return respond(response,409,'Playtest already running');
+  if (!fs.existsSync(launcher)) return respond(response,503,'Playtest launcher unavailable');
+  const previous = new Set(playtestSummaries().map(run=>run.id));
+  playtestStatus = {phase:'running',startedAt:new Date().toISOString(),endedAt:null,receipt:null,message:'The game is starting.'};
+  const child = spawn('powershell.exe',['-NoProfile','-ExecutionPolicy','Bypass','-File',launcher],{
+    cwd:path.resolve(__dirname,'..'),windowsHide:true,stdio:['ignore','pipe','pipe']
+  });
+  child.stdout.on('data',()=>{});
+  child.stderr.on('data',()=>{});
+  child.on('error',error=>{
+    playtestStatus = {...playtestStatus,phase:'error',endedAt:new Date().toISOString(),message:error.message};
+  });
+  child.on('close',code=>{
+    const latest = playtestSummaries().find(run=>!previous.has(run.id));
+    playtestStatus = {...playtestStatus,
+      phase:latest?'completed':code===0?'no_report':'error',
+      endedAt:new Date().toISOString(),receipt:latest?.id||null,
+      message:latest?'The playtest receipt is ready.':code===0?'The game closed before the city report.':'The game or launcher exited with an error.'
+    };
+  });
+  respond(response,202,JSON.stringify(playtestStatus),'application/json; charset=utf-8');
+}
+http.createServer((request,response)=>{
+  let pathname;
+  try {pathname=new URL(request.url,'http://127.0.0.1').pathname;}
+  catch(_) {return respond(response,400,'Invalid URL');}
+  if(pathname==='/asset-check'&&request.method==='POST')return saveCheck(request,response);
+  if(pathname==='/start-playtest'&&request.method==='POST')return startPlaytest(request,response);
+  if(request.method!=='GET')return respond(response,405,'Method not allowed');
+  if(pathname==='/health')return respond(response,200,'ok');
+  if(pathname==='/playtest-status')return respond(response,200,JSON.stringify(playtestStatus),'application/json; charset=utf-8');
+  if(pathname==='/playtests')return respond(response,200,JSON.stringify({runs:playtestSummaries()}),'application/json; charset=utf-8');
+  if(pathname.startsWith('/assets/')){
+    let filename;
+    try {filename=decodeURIComponent(pathname.slice('/assets/'.length));}
+    catch(_) {return respond(response,400,'Invalid image path');}
+    if(path.basename(filename)!==filename||!filename.endsWith('.png'))return respond(response,404,'Not found');
+    fs.readFile(path.join(output,filename),(error,data)=>error?respond(response,404,'Not found'):respond(response,200,data,'image/png'));
+    return;
+  }
+  if(!Object.hasOwn(routes,pathname))return respond(response,404,'Not found');
+  const [filename,mime]=routes[pathname];
+  fs.readFile(path.join(output,filename),(error,data)=>error?respond(response,503,'File unavailable'):respond(response,200,data,mime));
+}).listen(port,'127.0.0.1');
+

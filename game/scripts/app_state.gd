@@ -505,6 +505,24 @@ func record_playtest_event(event_type: String, destination_id: String = "") -> v
 		playtest_events.append({"type": event_type, "destination": destination_id, "atSeconds": snappedf(play_time_seconds, 0.1)})
 
 
+func playtest_time_by_destination() -> Dictionary:
+	var totals := {"scifi.city": 0.0, "scifi.outskirts": 0.0, "scifi.ruins": 0.0, "map_and_setup": 0.0}
+	var active := "map_and_setup"
+	var previous := 0.0
+	for event in playtest_events:
+		if typeof(event) != TYPE_DICTIONARY or event.get("type", "") != "location":
+			continue
+		var at_seconds := clampf(float(event.get("atSeconds", previous)), previous, play_time_seconds)
+		totals[active] += at_seconds - previous
+		var destination := String(event.get("destination", ""))
+		active = destination if DESTINATIONS.has(destination) else "map_and_setup"
+		previous = at_seconds
+	totals[active] += maxf(0.0, play_time_seconds - previous)
+	for key in totals:
+		totals[key] = snappedf(totals[key], 0.1)
+	return totals
+
+
 func record_playtest_mistake(kind: String, destination_id: String) -> void:
 	if not DESTINATIONS.has(destination_id):
 		return
@@ -525,6 +543,7 @@ func write_playtest_receipt() -> String:
 		"milestone": "M7",
 		"recordedAt": Time.get_datetime_string_from_system(),
 		"durationSeconds": snappedf(play_time_seconds, 0.1),
+		"timeByDestinationSeconds": playtest_time_by_destination(),
 		"language": language,
 		"events": playtest_events.duplicate(true),
 		"wrongEvidencePairs": wrong_pair_attempts.duplicate(true),

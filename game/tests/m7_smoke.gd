@@ -11,6 +11,18 @@ func _initialize() -> void:
 func _run() -> void:
 	SaveStore.root_path = "user://test-saves/m7"
 	var app: Node = root.get_node("AppState")
+	app.begin_new_run()
+	app.play_time_seconds = 65.0
+	app.playtest_events = [
+		{"type": "location", "destination": "scifi.city", "atSeconds": 10.0},
+		{"type": "location", "destination": "", "atSeconds": 20.0},
+		{"type": "location", "destination": "scifi.ruins", "atSeconds": 25.0},
+		{"type": "location", "destination": "", "atSeconds": 45.0},
+		{"type": "location", "destination": "scifi.city", "atSeconds": 55.0},
+	]
+	var split: Dictionary = app.playtest_time_by_destination()
+	if not _check(split["scifi.city"] == 20.0 and split["scifi.ruins"] == 20.0 and split["map_and_setup"] == 25.0 and split["scifi.outskirts"] == 0.0, "destination time accumulates across revisits"):
+		return
 	if not _check(TALK.TOPICS.size() == 6, "six companion conversation topics"):
 		return
 	for topic in TALK.TOPICS:
@@ -219,6 +231,12 @@ func _run() -> void:
 			return
 		var receipt: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(app.playtest_receipt_path))
 		if not _check(int(receipt.get("schemaVersion", 0)) == 1 and bool(receipt.get("reportCompleted", false)), "playtest receipt schema and completion"):
+			return
+		var place_time: Dictionary = receipt.get("timeByDestinationSeconds", {})
+		var place_sum := 0.0
+		for seconds in place_time.values():
+			place_sum += float(seconds)
+		if not _check(place_time.size() == 4 and absf(place_sum - float(receipt["durationSeconds"])) < 0.5 and place_time["scifi.city"] > 0.0 and place_time["scifi.ruins"] > 0.0, "receipt includes complete destination time accounting"):
 			return
 		if not _check(receipt.get("surveysCompleted", []).size() == 3 and int(receipt.get("wrongEvidencePairs", {}).get("scifi.city", 0)) == 1 and int(receipt.get("wrongJudgments", {}).get("scifi.city", 0)) == 1, "playtest receipt surveys and retry counts"):
 			return

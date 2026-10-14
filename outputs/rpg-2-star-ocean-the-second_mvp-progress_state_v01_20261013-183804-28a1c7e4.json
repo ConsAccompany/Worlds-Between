@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
   "planVersion": "v0.1",
-  "updatedAt": "2026-10-13T22:19:57-04:00",
+  "updatedAt": "2026-10-13T22:25:33-04:00",
   "currentStep": "M7",
   "steps": [
     {
@@ -107,29 +107,30 @@
         "城市档案馆、城外中继区与遗址各有外层和内层，共六处勘察空间、18 条中英文线索、九组证据关联与三道可重试研判题。",
         "完成每处研判仅奖励一次 JP；线索、证据关联、结果、所在房间与位置可保存并恢复。",
         "六段中英文同行交流随招募与调查逐步开放，可回访重听；首次完成记录伙伴默契并自动存档。",
-    "实地日志显示勘察进度与本次用时；首次汇报写入本地试玩记录，完成后仍可自由探索。",
-    "Windows 试玩入口调用工作区内的 Godot，退出后将记录复制到 outputs/；测试已核对两种探索顺序的记录结构和关键数值。",
-    "右侧游戏圣经的制作页读取本地试玩记录，显示路线、时长、招募、调查、战斗与重试次数；尚未有真实玩家记录。",
-    "证据关联与最终研判时可打开双语线索笔记、翻阅已发现线索全文，返回后保留当前关联选择。",
-    "机械绕行只有在玩家实际移动进入绕行区域时才会记录；从勘察室返回或读取存档不会误记。",
-    "游戏圣经制作页可直接启动本地试玩，并显示运行、完成汇报或未完成状态；完成记录会在退出游戏后回传。",
-    "三处地点各有一个可回访的伙伴专长互动：梁序校准城市配额表、赵铃测距城外节点、纪澄回读遗址面板；首次完成给予该伙伴 4 JP 与 2 点默契，并写入双语实地日志。",
-    "制作页的试玩按钮已从实际浏览器点击验证：可打开可见游戏窗口；提前退出后回到未汇报状态且不生成假记录。旧版面板提供当前面板入口。"
+        "实地日志显示勘察进度与本次用时；首次汇报写入本地试玩记录，完成后仍可自由探索。",
+        "Windows 试玩入口调用工作区内的 Godot，退出后将记录复制到 outputs/；测试已核对两种探索顺序的记录结构和关键数值。",
+        "右侧游戏圣经的制作页读取本地试玩记录，显示路线、时长、招募、调查、战斗与重试次数；尚未有真实玩家记录。",
+        "证据关联与最终研判时可打开双语线索笔记、翻阅已发现线索全文，返回后保留当前关联选择。",
+        "机械绕行只有在玩家实际移动进入绕行区域时才会记录；从勘察室返回或读取存档不会误记。",
+        "游戏圣经制作页可直接启动本地试玩，并显示运行、完成汇报或未完成状态；完成记录会在退出游戏后回传。",
+        "三处地点各有一个可回访的伙伴专长互动：梁序校准城市配额表、赵铃测距城外节点、纪澄回读遗址面板；首次完成给予该伙伴 4 JP 与 2 点默契，并写入双语实地日志。",
+        "制作页的试玩按钮已从实际浏览器点击验证：可打开可见游戏窗口；提前退出后回到未汇报状态且不生成假记录。旧版面板提供当前面板入口。",
+        "试玩记录按三处地点及地图/角色设置累计时间；制作页同时显示每处调查完成时点。回访时间合并计入对应地点。"
       ],
       "remaining": [
         "从新档进行两条不同顺序的真实计时试玩，确认是否达到 25–35 分钟且内容不靠等待填充。",
         "按实际试玩结果补足内容或调整节奏，并修复发现的操作或文本问题。"
       ],
       "evidence": [
-    "game/tests/m7_smoke.gd: M7_SMOKE_OK (two destination orders, all nine evidence links, retry counts, one-time JP reward, six-topic unlock, one-time bond, conversation save/load, report endpoint and playtest receipt)",
-    "game/tests/m7_smoke.gd: bilingual clue notebook review and return preserve evidence selection and final judgment",
-    "game/tests/m2_smoke.gd and m7_smoke.gd: scene placement inside a bypass zone does not create an observation; player movement into the zone does",
-    "Local panel at http://127.0.0.1:18726/: launch button, idle status, receipt list and same-origin launch restriction checked; a full human playthrough remains outstanding",
-    "game/tests/m7_smoke.gd: three optional field assists, locked-before-recruitment cases, one-time JP/bond, save recovery, both route orders and receipt inclusion",
-    "outputs/rpg-2-star-ocean-the-second_scifi-field-assists_visual-manifest_m7_20261013-221344-6c9a8f31.json (five separate bilingual/field-log captures inspected)",
-    "outputs/rpg-2-star-ocean-the-second_scifi-region_playtest-launch-qa_m7_20261013-221919-73b6ac48.md (live browser launch, visible game process, no-report exit, no receipt, old-panel link)",
-    "outputs/rpg-2-star-ocean-the-second_scifi-city_clue-notes-visual-manifest_m7_20261013-215942-1c5d7a80.json (two inspected 640x360 captures)",
-    "tools/rpg-2-star-ocean-the-second_scifi-region_playtest-launcher_m7_20261013-214924-6c8e0d47.ps1: QuickCheck exits 0 with bundled Godot 4.7.2",
+        "game/tests/m7_smoke.gd: M7_SMOKE_OK (two destination orders, all nine evidence links, retry counts, one-time JP reward, six-topic unlock, one-time bond, conversation save/load, report endpoint and playtest receipt)",
+        "game/tests/m7_smoke.gd: bilingual clue notebook review and return preserve evidence selection and final judgment",
+        "game/tests/m2_smoke.gd and m7_smoke.gd: scene placement inside a bypass zone does not create an observation; player movement into the zone does",
+        "Local panel at http://127.0.0.1:18726/: launch button, idle status, receipt list and same-origin launch restriction checked; a full human playthrough remains outstanding",
+        "game/tests/m7_smoke.gd: three optional field assists, locked-before-recruitment cases, one-time JP/bond, save recovery, both route orders and receipt inclusion",
+        "outputs/rpg-2-star-ocean-the-second_scifi-field-assists_visual-manifest_m7_20261013-221344-6c9a8f31.json (five separate bilingual/field-log captures inspected)",
+        "outputs/rpg-2-star-ocean-the-second_scifi-region_playtest-launch-qa_m7_20261013-221919-73b6ac48.md (live browser launch, visible game process, no-report exit, no receipt, old-panel link)",
+        "outputs/rpg-2-star-ocean-the-second_scifi-city_clue-notes-visual-manifest_m7_20261013-215942-1c5d7a80.json (two inspected 640x360 captures)",
+        "tools/rpg-2-star-ocean-the-second_scifi-region_playtest-launcher_m7_20261013-214924-6c8e0d47.ps1: QuickCheck exits 0 with bundled Godot 4.7.2",
         "outputs/rpg-2-star-ocean-the-second_scifi-surveys_pacing-audit_m7_20261013-213603-4c1e9a70.md (31-second direct survey-room walking lower bound; not a playthrough duration)",
         "game/tests/m1_smoke.gd through m6_smoke.gd remain passing",
         "outputs/rpg-2-star-ocean-the-second_protagonist_female-setup_m7_20261013-211621-3b112fff.png",
@@ -144,7 +145,9 @@
         "outputs/rpg-2-star-ocean-the-second_scifi-party_talk-topics-english_m7_20261013-214301-e46f681b.png",
         "outputs/rpg-2-star-ocean-the-second_scifi-liang-xu_talk-dialogue-chinese_m7_20261013-214301-91f85663.png",
         "outputs/rpg-2-star-ocean-the-second_scifi-city_completion-report-english_m7_20261013-212705-7fa3d964.png",
-        "outputs/rpg-2-star-ocean-the-second_scifi-map_field-log-english_m7_20261013-212705-3687dd8f.png"
+        "outputs/rpg-2-star-ocean-the-second_scifi-map_field-log-english_m7_20261013-212705-3687dd8f.png",
+        "game/tests/m7_smoke.gd: synthetic revisit split plus two route receipts with destination time sums matching total duration",
+        "Local panel at http://127.0.0.1:18727/: production page shows live launch control and remains at 0/2 without human playtest receipts"
       ],
       "blocker": null
     },

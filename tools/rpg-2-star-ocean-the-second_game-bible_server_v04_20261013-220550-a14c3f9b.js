@@ -54,7 +54,13 @@ function playtestSummaries() {
       const visits=[];
       for (const event of receipt.events) if (event?.type==='visit' && ['scifi.city','scifi.outskirts','scifi.ruins'].includes(event.destination) && !visits.includes(event.destination)) visits.push(event.destination);
       const retryTotal=counts => counts && typeof counts==='object' ? Object.values(counts).reduce((sum,value)=>sum+(Number.isInteger(value)&&value>0?value:0),0) : 0;
-      runs.push({id:name,recordedAt:String(receipt.recordedAt||''),durationSeconds:receipt.durationSeconds,language:receipt.language==='en'?'en':'zh',visits,recruited:Array.isArray(receipt.recruited)?receipt.recruited.filter(id=>typeof id==='string').slice(0,3):[],surveysCompleted:Array.isArray(receipt.surveysCompleted)?receipt.surveysCompleted.length:0,conversationsHeard:Array.isArray(receipt.conversationsHeard)?receipt.conversationsHeard.length:0,wrongEvidencePairs:retryTotal(receipt.wrongEvidencePairs),wrongJudgments:retryTotal(receipt.wrongJudgments),battles:receipt.events.filter(event=>event?.type==='battle_start').length});
+      const timeByDestination={};
+      for (const place of ['scifi.city','scifi.outskirts','scifi.ruins','map_and_setup']) {
+        const seconds=receipt.timeByDestinationSeconds?.[place];
+        if (Number.isFinite(seconds)&&seconds>=0&&seconds<=receipt.durationSeconds+0.2) timeByDestination[place]=seconds;
+      }
+      const surveyTimeline=receipt.events.filter(event=>event?.type==='survey_complete'&&['scifi.city','scifi.outskirts','scifi.ruins'].includes(event.destination)&&Number.isFinite(event.atSeconds)&&event.atSeconds>=0&&event.atSeconds<=receipt.durationSeconds+0.2).map(event=>({destination:event.destination,atSeconds:event.atSeconds})).slice(0,3);
+      runs.push({id:name,recordedAt:String(receipt.recordedAt||''),durationSeconds:receipt.durationSeconds,language:receipt.language==='en'?'en':'zh',visits,recruited:Array.isArray(receipt.recruited)?receipt.recruited.filter(id=>typeof id==='string').slice(0,3):[],surveysCompleted:Array.isArray(receipt.surveysCompleted)?receipt.surveysCompleted.length:0,conversationsHeard:Array.isArray(receipt.conversationsHeard)?receipt.conversationsHeard.length:0,wrongEvidencePairs:retryTotal(receipt.wrongEvidencePairs),wrongJudgments:retryTotal(receipt.wrongJudgments),battles:receipt.events.filter(event=>event?.type==='battle_start').length,timeByDestination,surveyTimeline});
     } catch (_) { /* A damaged receipt does not hide the other runs. */ }
   }
   return runs;
