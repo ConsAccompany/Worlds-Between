@@ -7,6 +7,7 @@ const CITY_HERO_MALE := preload("res://assets/characters/rpg-2-star-ocean-the-se
 const CITY_HERO_FEMALE := preload("res://assets/characters/rpg-2-star-ocean-the-second_protagonist-female_exploration-cutout_m8-sample_20261013-233258-e2c0419a.png")
 const CITY_LIANG_XU := preload("res://assets/characters/rpg-2-star-ocean-the-second_liang-xu_exploration-cutout_m8-sample_20261013-231655-2f45a173.png")
 const BATTLE_SCENE := preload("res://scenes/battle_arena.tscn")
+const CityNavigation := preload("res://scripts/city_navigation.gd")
 const MOVE_SPEED := 140.0
 const SPAWN := Vector2(82, 260)
 const CITY_SPAWN := Vector2(340, 253)
@@ -43,6 +44,9 @@ const AREA_CONFIG := {
 var destination_id := ""
 var hero: Sprite2D
 var city_npc: Sprite2D
+var city_canopy: Polygon2D
+var city_hero_silhouette: Sprite2D
+var city_occlusion_indicator: Label
 var npc_position := Vector2.ZERO
 var recruit_id := ""
 var enemy_position := Vector2(-100, -100)
@@ -89,6 +93,8 @@ func _ready() -> void:
 	if destination_id == "scifi.city":
 		texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
 	_build_actors()
+	if destination_id == "scifi.city":
+		_build_city_foreground()
 	if AppState.returning_from_battle:
 		hero.position = AppState.battle_return_position
 		AppState.returning_from_battle = false
@@ -106,6 +112,7 @@ func _ready() -> void:
 	_start_audio()
 	AppState.language_changed.connect(_refresh_text)
 	_refresh_text()
+	_update_city_labels()
 
 
 func _process(delta: float) -> void:
@@ -135,6 +142,7 @@ func _process(delta: float) -> void:
 		AppState.machine_observed = true
 		feedback_key = "bypass_notice"
 		_refresh_text()
+	_update_city_labels()
 
 
 func _draw() -> void:
@@ -183,42 +191,100 @@ func _draw() -> void:
 
 
 func _draw_city_hotspots() -> void:
-	_draw_city_marker(REPORT_POSITION, Color("#75d8ce"))
-	_draw_city_marker(SURVEY_ENTRANCES[destination_id], Color("#75d8ce" if AppState.survey_solved.has(destination_id) else "#f2cb81"))
-	_draw_city_marker(FIELD_ASSISTS[destination_id]["position"], Color("#75d8ce" if AppState.field_insights.has(destination_id) else "#f2cb81"))
+	_draw_city_marker(REPORT_POSITION, Color("#75d8ce"), "report")
+	_draw_city_marker(SURVEY_ENTRANCES[destination_id], Color("#75d8ce" if AppState.survey_solved.has(destination_id) else "#f2cb81"), "survey")
+	_draw_city_marker(FIELD_ASSISTS[destination_id]["position"], Color("#75d8ce" if AppState.field_insights.has(destination_id) else "#f2cb81"), "assist")
 	for index in 2:
 		var recorded: bool = AppState.field_traces.has("%s:%d" % [destination_id, index])
-		_draw_city_marker(FIELD_TRACES[destination_id][index], Color("#75d8ce" if recorded else "#f2cb81"))
+		_draw_city_marker(FIELD_TRACES[destination_id][index], Color("#75d8ce" if recorded else "#f2cb81"), "trace")
 
 
-func _draw_city_marker(at: Vector2, color: Color) -> void:
-	draw_circle(at, 9.0, Color(color.r, color.g, color.b, 0.30))
-	draw_arc(at, 8.0, 0.0, TAU, 24, Color(color.r, color.g, color.b, 0.85), 1.4)
-	draw_circle(at, 2.0, color)
+func _draw_city_marker(at: Vector2, color: Color, kind: String) -> void:
+	draw_circle(at, 11.0, Color(0.03, 0.10, 0.14, 0.60))
+	draw_arc(at, 9.0, 0.0, TAU, 24, color, 1.7)
+	match kind:
+		"report":
+			for row in 3:
+				draw_line(at + Vector2(-4, row * 3 - 3), at + Vector2(4, row * 3 - 3), color, 1.5)
+		"survey":
+			draw_rect(Rect2(at + Vector2(-4, -5), Vector2(8, 10)), color, false, 1.5)
+			draw_circle(at + Vector2(2, 0), 1.0, color)
+		"assist":
+			draw_colored_polygon(PackedVector2Array([at + Vector2(0, -5), at + Vector2(5, 0), at + Vector2(0, 5), at + Vector2(-5, 0)]), color)
+		"trace":
+			draw_circle(at, 3.5, color)
+			draw_circle(at, 1.25, Color("#16313a"))
+
+
+func _build_city_foreground() -> void:
+	# Reuse exact pixels from the city plate. These polygons draw in front of
+	# actors whose feet are behind the garden canopy or street furniture.
+	# They are scene geometry, not a second edited copy of the illustration.
+	city_canopy = _add_city_foreground(PackedVector2Array([
+		Vector2(31, 223), Vector2(46, 211), Vector2(63, 209), Vector2(70, 187),
+		Vector2(85, 174), Vector2(95, 159), Vector2(112, 155), Vector2(126, 165),
+		Vector2(144, 169), Vector2(158, 183), Vector2(174, 188), Vector2(185, 203),
+		Vector2(203, 212), Vector2(216, 226), Vector2(217, 243), Vector2(199, 259),
+		Vector2(178, 261), Vector2(157, 253), Vector2(132, 254), Vector2(111, 248),
+		Vector2(87, 251), Vector2(65, 243), Vector2(46, 242)
+	]), 305)
+	_add_city_foreground(PackedVector2Array([
+		Vector2(230, 192), Vector2(246, 192), Vector2(249, 205),
+		Vector2(249, 275), Vector2(231, 275), Vector2(232, 207)
+	]), 276)
+	_add_city_foreground(PackedVector2Array([
+		Vector2(497, 157), Vector2(509, 154), Vector2(519, 167),
+		Vector2(524, 187), Vector2(518, 211), Vector2(504, 212), Vector2(498, 195)
+	]), 213)
+	city_hero_silhouette = Sprite2D.new()
+	city_hero_silhouette.texture = hero.texture
+	city_hero_silhouette.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
+	city_hero_silhouette.offset = hero.offset
+	city_hero_silhouette.scale = hero.scale
+	city_hero_silhouette.modulate = Color(0.72, 0.93, 1.0, 0.55)
+	city_hero_silhouette.z_index = 306
+	city_hero_silhouette.visible = false
+	add_child(city_hero_silhouette)
+
+
+func _add_city_foreground(points: PackedVector2Array, depth: int) -> Polygon2D:
+	var layer := Polygon2D.new()
+	layer.polygon = points
+	var uv := PackedVector2Array()
+	var source_scale := CITY_BACKGROUND.get_size() / Vector2(640, 360)
+	for point in points:
+		uv.append(point * source_scale)
+	layer.uv = uv
+	layer.texture = CITY_BACKGROUND
+	layer.z_index = depth
+	add_child(layer)
+	return layer
+
+
+func _update_city_labels() -> void:
+	if destination_id != "scifi.city" or hero == null or not is_instance_valid(hero) or assist_label == null:
+		return
+	var position := hero.position
+	var hidden_by_canopy := Geometry2D.is_point_in_polygon(position, city_canopy.polygon)
+	city_hero_silhouette.position = position
+	city_hero_silhouette.visible = hidden_by_canopy
+	city_occlusion_indicator.visible = hidden_by_canopy
+	city_occlusion_indicator.position = position + Vector2(-7, -58)
+	assist_label.visible = position.distance_to(FIELD_ASSISTS[destination_id]["position"]) < 82.0
+	for index in 2:
+		trace_labels[index].visible = position.distance_to(FIELD_TRACES[destination_id][index]) < 72.0
 
 
 func _city_safe_position(at: Vector2) -> Vector2:
-	var safe := Vector2(clampf(at.x, 24.0, 616.0), clampf(at.y, 160.0, 305.0))
-	if safe.x < 252.0 and safe.y > 208.0:
-		safe.y = 208.0
-	return safe
+	return CityNavigation.safe_position(at)
 
 
 func _city_slide_position(at: Vector2) -> Vector2:
-	var bounded := Vector2(clampf(at.x, 24.0, 616.0), clampf(at.y, 160.0, 305.0))
-	if _city_walkable(bounded):
-		return bounded
-	var horizontal := Vector2(bounded.x, hero.position.y)
-	if _city_walkable(horizontal):
-		return horizontal
-	var vertical := Vector2(hero.position.x, bounded.y)
-	if _city_walkable(vertical):
-		return vertical
-	return hero.position
+	return CityNavigation.slide_position(hero.position, at)
 
 
 func _city_walkable(at: Vector2) -> bool:
-	return at.x >= 24.0 and at.x <= 616.0 and at.y >= 160.0 and at.y <= 305.0 and not (at.x < 252.0 and at.y > 208.0)
+	return CityNavigation.walkable(at)
 
 
 func _draw_outskirts() -> void:
@@ -268,20 +334,26 @@ func _draw_enemy() -> void:
 	draw_rect(Rect2(enemy_position + Vector2(9, 11), Vector2(8, 7)), Color("#463942"))
 
 
+func _fit_city_actor(actor: Sprite2D) -> void:
+	# Anchor each cutout by its visible bounds, not shared transparent padding.
+	var bounds := actor.texture.get_image().get_used_rect()
+	var factor := 44.0 / maxf(float(bounds.size.y), 1.0)
+	actor.scale = Vector2(factor, factor)
+	actor.offset = actor.texture.get_size() * 0.5 - Vector2(bounds.position.x + bounds.size.x * 0.5, bounds.end.y)
+
+
 func _build_actors() -> void:
 	hero = Sprite2D.new()
 	if destination_id == "scifi.city":
 		hero.texture = CITY_HERO_FEMALE if AppState.hero_appearance == "female" else CITY_HERO_MALE
 		hero.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
-		hero.scale = Vector2(0.054, 0.054)
-		hero.offset = Vector2(0, -704)
+		_fit_city_actor(hero)
 		hero.position = CITY_SPAWN
 		hero.z_index = int(hero.position.y)
 		city_npc = Sprite2D.new()
 		city_npc.texture = CITY_LIANG_XU
 		city_npc.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
-		city_npc.scale = Vector2(0.054, 0.054)
-		city_npc.offset = Vector2(0, -704)
+		_fit_city_actor(city_npc)
 		city_npc.position = npc_position
 		city_npc.z_index = int(npc_position.y)
 		city_npc.visible = not AppState.recruited_members.has(recruit_id)
@@ -350,6 +422,15 @@ func _build_ui() -> void:
 	help_label.add_theme_font_size_override("font_size", 10)
 	help_label.add_theme_color_override("font_color", Color("#9dbab9"))
 	canvas.add_child(help_label)
+	if destination_id == "scifi.city":
+		city_occlusion_indicator = Label.new()
+		city_occlusion_indicator.text = "▼"
+		city_occlusion_indicator.add_theme_font_size_override("font_size", 14)
+		city_occlusion_indicator.add_theme_color_override("font_color", Color("#aff1e6"))
+		city_occlusion_indicator.add_theme_color_override("font_outline_color", Color("#0d1723"))
+		city_occlusion_indicator.add_theme_constant_override("outline_size", 3)
+		city_occlusion_indicator.visible = false
+		canvas.add_child(city_occlusion_indicator)
 	enemy_label = Label.new()
 	enemy_label.position = enemy_position + Vector2(-39, -47)
 	enemy_label.add_theme_font_size_override("font_size", 10)
@@ -357,7 +438,7 @@ func _build_ui() -> void:
 	enemy_label.visible = enemy_visible
 	canvas.add_child(enemy_label)
 	npc_label = Label.new()
-	npc_label.position = npc_position + Vector2(-38, -49)
+	npc_label.position = npc_position + Vector2(-38, -58)
 	npc_label.add_theme_font_size_override("font_size", 11)
 	npc_label.add_theme_color_override("font_color", Color("#f4e6b9"))
 	canvas.add_child(npc_label)
@@ -368,8 +449,8 @@ func _build_ui() -> void:
 	canvas.add_child(records_label)
 	station_label = Label.new()
 	station_label.position = (RELAY_POSITION if destination_id == "scifi.outskirts" else REPORT_POSITION) + Vector2(-40, -42)
-	station_label.add_theme_font_size_override("font_size", 11)
-	station_label.add_theme_color_override("font_color", Color("#f0dda8"))
+	station_label.add_theme_font_size_override("font_size", 12 if destination_id == "scifi.city" else 11)
+	station_label.add_theme_color_override("font_color", Color("#fff1c7" if destination_id == "scifi.city" else "#f0dda8"))
 	canvas.add_child(station_label)
 	survey_label = Label.new()
 	survey_label.position = SURVEY_ENTRANCES[destination_id] + Vector2(-50, -42)
@@ -388,6 +469,9 @@ func _build_ui() -> void:
 		trace_label.add_theme_color_override("font_color", Color("#f0dda8"))
 		canvas.add_child(trace_label)
 		trace_labels.append(trace_label)
+	for marker_label in [npc_label, station_label, survey_label, assist_label] + trace_labels:
+		marker_label.add_theme_color_override("font_outline_color", Color("#0d1723"))
+		marker_label.add_theme_constant_override("outline_size", 3)
 	_build_dialogue(canvas)
 
 
