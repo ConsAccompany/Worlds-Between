@@ -20,6 +20,8 @@ func _run() -> void:
 		return
 	if not _check(_cues_match(city, app), "Chinese city cues are present"):
 		return
+	if not _check(_nearby_cues_appear(city), "Chinese proximity cues appear near their hotspots"):
+		return
 	city.get("hero").position = Vector2(282, 180)
 	city._unhandled_input(_interact())
 	if not _check(city.get("dialogue_open") and city.get("dialogue_mode") == "recruit", "Liang conversation opens"):
@@ -39,6 +41,8 @@ func _run() -> void:
 	if not _check(city.get("city_npc").visible and city.get("npc_label").visible, "Liang remains visible on revisit"):
 		return
 	if not _check(_cues_match(city, app), "English city cues are present on revisit"):
+		return
+	if not _check(_nearby_cues_appear(city), "English proximity cues appear near their hotspots"):
 		return
 	city.get("hero").position = Vector2(282, 180)
 	city._unhandled_input(_interact())
@@ -73,9 +77,23 @@ func _run() -> void:
 
 func _cues_match(city: Node2D, app: Node) -> bool:
 	return city.get("survey_label").visible and city.get("survey_label").text == app.text_for("survey_marker") \
-		and city.get("assist_label").visible and city.get("assist_label").text == app.text_for("field_assist_marker_city") \
+		and city.get("assist_label").text == app.text_for("field_assist_marker_city") \
 		and city.get("station_label").visible and city.get("station_label").text == app.text_for("report_marker") \
-		and city.get("trace_labels").size() == 2 and city.get("trace_labels")[0].visible and city.get("trace_labels")[0].text.begins_with(app.text_for("field_trace_marker"))
+		and city.get("trace_labels").size() == 2 and city.get("trace_labels")[0].text.begins_with(app.text_for("field_trace_marker"))
+
+
+func _nearby_cues_appear(city: Node2D) -> bool:
+	var actor: Sprite2D = city.get("hero")
+	var original_position := actor.position
+	actor.position = city.FIELD_ASSISTS["scifi.city"]["position"]
+	city._update_city_labels()
+	var assist_visible: bool = city.get("assist_label").visible
+	actor.position = city.FIELD_TRACES["scifi.city"][0]
+	city._update_city_labels()
+	var trace_visible: bool = city.get("trace_labels")[0].visible
+	actor.position = original_position
+	city._update_city_labels()
+	return assist_visible and trace_visible
 
 
 func _interact() -> InputEventAction:
