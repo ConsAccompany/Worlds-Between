@@ -121,6 +121,15 @@ func _run() -> void:
 			if not _check(final_annex.get("overlay_mode") == "link", "six clues open evidence links " + destination):
 				return
 			final_annex.get("link_buttons")[0].pressed.emit()
+			final_annex.get("notes_button").pressed.emit()
+			if not _check(final_annex.get("overlay_mode") == "notes" and final_annex.get("overlay_body").text.find(String(final_annex._data()["clues"][0]["text"])) >= 0, "collected clue body readable during links " + destination):
+				return
+			final_annex.get("next_note_button").pressed.emit()
+			if not _check(final_annex.get("overlay_body").text.find(String(final_annex._data()["clues"][1]["text"])) >= 0, "clue notes can advance " + destination):
+				return
+			final_annex._back_room()
+			if not _check(final_annex.get("overlay_mode") == "link" and final_annex.get("link_selected_index") == 0, "evidence selection survives clue review " + destination):
+				return
 			final_annex.get("link_buttons")[1 if destination != "scifi.ruins" else 2].pressed.emit()
 			if not _check(final_annex.get("overlay_message") == app.text_for("survey_link_wrong") and final_annex._link_count() == 0, "wrong evidence pair is retryable"):
 				return
@@ -131,6 +140,12 @@ func _run() -> void:
 				return
 			final_annex.get("close_button").pressed.emit()
 			if not _check(final_annex.get("overlay_mode") == "question", "links unlock final judgment " + destination):
+				return
+			final_annex.get("notes_button").pressed.emit()
+			if not _check(final_annex.get("overlay_mode") == "notes", "clue notes available during final judgment " + destination):
+				return
+			final_annex.get("close_button").pressed.emit()
+			if not _check(final_annex.get("overlay_mode") == "question", "clue notes return to final judgment " + destination):
 				return
 			var correct: int = final_annex._data()["answer"]
 			final_annex.get("option_buttons")[(correct + 1) % 3].pressed.emit()

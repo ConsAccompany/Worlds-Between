@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
   "planVersion": "v0.1",
-  "updatedAt": "2026-10-13T21:54:22-04:00",
+  "updatedAt": "2026-10-13T22:00:50-04:00",
   "currentStep": "M7",
   "steps": [
     {
@@ -100,7 +100,7 @@
       "id": "M7",
       "title": "Playable content",
       "status": "in_progress",
-      "summary": "Three freely ordered destinations now include six survey rooms, eighteen bilingual clues, nine evidence links, three retryable final judgments, six optional companion conversations, recruit options, machine choice, a field log, a report endpoint, and a local playtest receipt. Human timed playthrough remains outstanding.",
+      "summary": "Three freely ordered destinations now include six survey rooms, eighteen bilingual clues with an in-analysis notebook, nine evidence links, three retryable final judgments, six optional companion conversations, recruit options, machine choice, a field log, a report endpoint, and a local playtest receipt. Human timed playthrough remains outstanding.",
       "acceptance": "Finish without developer tools in a 25–35 minute route; two exploration/recruit orders; both languages fit.",
       "details": [
         "三处地点可自由选择顺序；梁序、赵铃、纪澄仍可暂不邀请并回访。",
@@ -109,7 +109,8 @@
         "六段中英文同行交流随招募与调查逐步开放，可回访重听；首次完成记录伙伴默契并自动存档。",
     "实地日志显示勘察进度与本次用时；首次汇报写入本地试玩记录，完成后仍可自由探索。",
     "Windows 试玩入口调用工作区内的 Godot，退出后将记录复制到 outputs/；测试已核对两种探索顺序的记录结构和关键数值。",
-    "右侧游戏圣经的制作页读取本地试玩记录，显示路线、时长、招募、调查、战斗与重试次数；尚未有真实玩家记录。"
+    "右侧游戏圣经的制作页读取本地试玩记录，显示路线、时长、招募、调查、战斗与重试次数；尚未有真实玩家记录。",
+    "证据关联与最终研判时可打开双语线索笔记、翻阅已发现线索全文，返回后保留当前关联选择。"
       ],
       "remaining": [
         "从新档进行两条不同顺序的真实计时试玩，确认是否达到 25–35 分钟且内容不靠等待填充。",
@@ -117,6 +118,8 @@
       ],
       "evidence": [
     "game/tests/m7_smoke.gd: M7_SMOKE_OK (two destination orders, all nine evidence links, retry counts, one-time JP reward, six-topic unlock, one-time bond, conversation save/load, report endpoint and playtest receipt)",
+    "game/tests/m7_smoke.gd: bilingual clue notebook review and return preserve evidence selection and final judgment",
+    "outputs/rpg-2-star-ocean-the-second_scifi-city_clue-notes-visual-manifest_m7_20261013-215942-1c5d7a80.json (two inspected 640x360 captures)",
     "tools/rpg-2-star-ocean-the-second_scifi-region_playtest-launcher_m7_20261013-214924-6c8e0d47.ps1: QuickCheck exits 0 with bundled Godot 4.7.2",
         "outputs/rpg-2-star-ocean-the-second_scifi-surveys_pacing-audit_m7_20261013-213603-4c1e9a70.md (31-second direct survey-room walking lower bound; not a playthrough duration)",
         "game/tests/m1_smoke.gd through m6_smoke.gd remain passing",

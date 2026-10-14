@@ -37,8 +37,13 @@ var overlay_title: Label
 var overlay_body: RichTextLabel
 var option_buttons: Array[Button] = []
 var link_buttons: Array[Button] = []
+var notes_button: Button
+var previous_note_button: Button
+var next_note_button: Button
 var close_button: Button
 var overlay_mode := ""
+var notes_return_mode := ""
+var notes_index := 0
 var overlay_clue_index := -1
 var link_selected_index := -1
 var overlay_message := ""
@@ -233,6 +238,9 @@ func _build_overlay(canvas: CanvasLayer) -> void:
 		var button := _button(overlay, Vector2(75 + (index % 2) * 249, 155 + (index / 2) * 37), Vector2(239, 32), _select_link_clue.bind(index))
 		button.add_theme_font_size_override("font_size", 11)
 		link_buttons.append(button)
+	notes_button = _button(overlay, Vector2(409, 56), Vector2(154, 29), _open_notes)
+	previous_note_button = _button(overlay, Vector2(75, 275), Vector2(145, 32), _shift_note.bind(-1))
+	next_note_button = _button(overlay, Vector2(232, 275), Vector2(145, 32), _shift_note.bind(1))
 	close_button = _button(overlay, Vector2(409, 275), Vector2(154, 32), _on_close_button)
 
 
@@ -279,9 +287,15 @@ func _refresh_overlay() -> void:
 		button.visible = overlay_mode == "question"
 	for button in link_buttons:
 		button.visible = overlay_mode == "link"
+	notes_button.visible = overlay_mode in ["link", "question", "message"] and _clue_count() > 0
+	notes_button.text = AppState.text_for("survey_notes")
+	previous_note_button.visible = overlay_mode == "notes"
+	next_note_button.visible = overlay_mode == "notes"
+	previous_note_button.text = AppState.text_for("survey_notes_previous")
+	next_note_button.text = AppState.text_for("survey_notes_next")
 	close_button.visible = overlay_mode != "question"
-	close_button.text = AppState.text_for("survey_link_continue" if overlay_mode == "link" and _link_count() == 3 else "survey_close")
-	overlay_body.size.y = 50 if overlay_mode == "link" else 92
+	close_button.text = AppState.text_for("survey_notes_back" if overlay_mode == "notes" else ("survey_link_continue" if overlay_mode == "link" and _link_count() == 3 else "survey_close"))
+	overlay_body.size.y = 151 if overlay_mode == "notes" else (50 if overlay_mode == "link" else 92)
 	match overlay_mode:
 		"clue":
 			var clue: Dictionary = data["clues"][overlay_clue_index]
@@ -301,6 +315,12 @@ func _refresh_overlay() -> void:
 		"message":
 			overlay_title.text = AppState.text_for("survey_terminal")
 			overlay_body.text = overlay_message
+		"notes":
+			var clue: Dictionary = data["clues"][notes_index]
+			overlay_title.text = AppState.text_for("survey_notes") + " %d/6" % (notes_index + 1)
+			overlay_body.text = String(clue["name"]) + "\n\n" + String(clue["text"])
+			previous_note_button.disabled = _clue_count() < 2
+			next_note_button.disabled = _clue_count() < 2
 
 
 func _inspect_clue(index: int) -> void:
@@ -371,10 +391,42 @@ func _select_link_clue(index: int) -> void:
 
 
 func _on_close_button() -> void:
-	if overlay_mode == "link" and _link_count() == 3:
+	if overlay_mode == "notes":
+		overlay_mode = notes_return_mode
+		_refresh_overlay()
+		(notes_button if notes_button.visible else close_button).grab_focus()
+	elif overlay_mode == "link" and _link_count() == 3:
 		_open_question()
 	else:
 		_close_overlay()
+
+
+func _open_notes() -> void:
+	if not overlay.visible or overlay_mode == "notes" or _clue_count() == 0:
+		return
+	AppState.record_playtest_event("notes_open", destination_id)
+	notes_return_mode = overlay_mode
+	for index in 6:
+		if AppState.survey_clues.has(_clue_key(index)):
+			notes_index = index
+			break
+	overlay_mode = "notes"
+	_refresh_overlay()
+	next_note_button.grab_focus()
+
+
+func _shift_note(direction: int) -> void:
+	if overlay_mode != "notes":
+		return
+	var available: Array[int] = []
+	for index in 6:
+		if AppState.survey_clues.has(_clue_key(index)):
+			available.append(index)
+	if available.size() < 2:
+		return
+	var current := available.find(notes_index)
+	notes_index = available[posmod(current + direction, available.size())]
+	_refresh_overlay()
 
 
 func _choose_answer(index: int) -> void:
@@ -414,7 +466,10 @@ func _go_next_room() -> void:
 
 func _back_room() -> void:
 	if overlay.visible:
-		_close_overlay()
+		if overlay_mode == "notes":
+			_on_close_button()
+		else:
+			_close_overlay()
 		return
 	if room == 2:
 		AppState.current_annex_room = 1
