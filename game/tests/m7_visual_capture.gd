@@ -50,6 +50,21 @@ func _capture() -> void:
 		current_scene._close_overlay()
 	current_scene._open_question()
 	await _settle()
+	if not _save("scifi-city", "evidence-links-chinese", stamp): return
+	app.toggle_language()
+	await _settle()
+	if not _save("scifi-city", "evidence-links-english", stamp): return
+	var first_link := true
+	for link in current_scene._data()["links"]:
+		current_scene.get("link_buttons")[int(link["pair"][0])].pressed.emit()
+		current_scene.get("link_buttons")[int(link["pair"][1])].pressed.emit()
+		if first_link:
+			await _settle()
+			if not _save("scifi-city", "evidence-link-success-english", stamp): return
+			first_link = false
+	current_scene.get("close_button").pressed.emit()
+	app.toggle_language()
+	await _settle()
 	if not _save("scifi-city", "survey-question-chinese", stamp): return
 	app.toggle_language()
 	await _settle()

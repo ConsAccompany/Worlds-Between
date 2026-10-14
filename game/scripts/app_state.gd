@@ -132,6 +132,9 @@ const STRINGS := {
 		"survey_help": "WASD 移动 · E 查看线索/门/终端 · Esc 返回",
 		"survey_next": "深入", "survey_leave": "返回地表", "survey_previous": "返回外层",
 		"survey_terminal": "研判终端", "survey_locked": "先查看此处六条线索，再作判断。",
+		"survey_link_title": "证据关联", "survey_link_instruction": "选择两条有关联的线索。已找到 %d/3 组。",
+		"survey_link_wrong": "这两条线索暂时无法形成可核查的关联。请再比较。",
+		"survey_link_found": "这组关联已记录。", "survey_link_continue": "进入最终研判",
 		"survey_retry": "这项判断缺少证据支持。可以重新对照线索。",
 		"survey_completed": "此处勘察已完成。资料仍可重新查看。",
 		"survey_close": "继续探索", "save_survey_note": "勘察记录",
@@ -280,6 +283,9 @@ const STRINGS := {
 		"survey_help": "WASD move · E inspect clues, doors and console · Esc back",
 		"survey_next": "Go deeper", "survey_leave": "Return outside", "survey_previous": "Outer room",
 		"survey_terminal": "Analysis console", "survey_locked": "Inspect all six clues here before deciding.",
+		"survey_link_title": "Connect evidence", "survey_link_instruction": "Select two related clues. Links found: %d/3.",
+		"survey_link_wrong": "These clues do not yet form a testable connection. Compare them again.",
+		"survey_link_found": "This link is already recorded.", "survey_link_continue": "Make final judgment",
 		"survey_retry": "The evidence does not support that conclusion. Compare the clues again.",
 		"survey_completed": "Survey complete. You can still review the evidence.",
 		"survey_close": "Keep exploring", "save_survey_note": "Survey record",
@@ -317,6 +323,7 @@ var demo_completed := false
 var play_time_seconds := 0.0
 var run_active := false
 var survey_clues: Dictionary = {}
+var survey_links: Dictionary = {}
 var survey_solved: Dictionary = {}
 var current_annex_room := 1
 var annex_surface_return_position := Vector2(558, 143)
@@ -393,6 +400,7 @@ func begin_new_run() -> void:
 	play_time_seconds = 0.0
 	run_active = true
 	survey_clues.clear()
+	survey_links.clear()
 	survey_solved.clear()
 	current_annex_room = 1
 	annex_surface_return_position = Vector2(558, 143)
@@ -599,6 +607,7 @@ func make_snapshot(scene_kind: String, position: Vector2, note: String) -> Dicti
 		"demoCompleted": demo_completed,
 		"playTimeSeconds": play_time_seconds,
 		"surveyClues": survey_clues.duplicate(true),
+		"surveyLinks": survey_links.duplicate(true),
 		"surveySolved": survey_solved.duplicate(true),
 		"annexRoom": current_annex_room,
 		"annexSurfaceReturnPosition": [annex_surface_return_position.x, annex_surface_return_position.y],
@@ -640,6 +649,7 @@ func load_save(id: String) -> bool:
 	play_time_seconds = float(snapshot.get("playTimeSeconds", 0.0))
 	run_active = true
 	survey_clues = snapshot.get("surveyClues", {}).duplicate(true)
+	survey_links = snapshot.get("surveyLinks", {}).duplicate(true)
 	survey_solved = snapshot.get("surveySolved", {}).duplicate(true)
 	current_annex_room = int(snapshot.get("annexRoom", 1))
 	var surface_position: Array = snapshot.get("annexSurfaceReturnPosition", [558.0, 143.0])
@@ -697,7 +707,7 @@ func _valid_snapshot(snapshot: Dictionary) -> bool:
 		return false
 	if typeof(snapshot.get("heroName", "")) != TYPE_STRING or snapshot.get("heroAppearance", "male") not in ["male", "female"]:
 		return false
-	if typeof(snapshot.get("surveyClues", {})) != TYPE_DICTIONARY or typeof(snapshot.get("surveySolved", {})) != TYPE_DICTIONARY or int(snapshot.get("annexRoom", 1)) not in [1, 2]:
+	if typeof(snapshot.get("surveyClues", {})) != TYPE_DICTIONARY or typeof(snapshot.get("surveyLinks", {})) != TYPE_DICTIONARY or typeof(snapshot.get("surveySolved", {})) != TYPE_DICTIONARY or int(snapshot.get("annexRoom", 1)) not in [1, 2]:
 		return false
 	var surface_position: Variant = snapshot.get("annexSurfaceReturnPosition", [558.0, 143.0])
 	if typeof(surface_position) != TYPE_ARRAY or surface_position.size() != 2:
@@ -708,6 +718,10 @@ func _valid_snapshot(snapshot: Dictionary) -> bool:
 	for clue_key in snapshot.get("surveyClues", {}).keys():
 		var parts: PackedStringArray = String(clue_key).split(":")
 		if parts.size() != 2 or not DESTINATIONS.has(parts[0]) or not parts[1].is_valid_int() or int(parts[1]) not in [0, 1, 2, 3, 4, 5] or snapshot["surveyClues"][clue_key] != true:
+			return false
+	for link_key in snapshot.get("surveyLinks", {}).keys():
+		var parts: PackedStringArray = String(link_key).split(":")
+		if parts.size() != 2 or not DESTINATIONS.has(parts[0]) or not parts[1].is_valid_int() or int(parts[1]) not in [0, 1, 2] or snapshot["surveyLinks"][link_key] != true:
 			return false
 	for destination_id in snapshot.get("areasVisited", {}).keys():
 		if not DESTINATIONS.has(destination_id) or snapshot["areasVisited"][destination_id] != true:

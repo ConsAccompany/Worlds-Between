@@ -36,9 +36,11 @@ var overlay: ColorRect
 var overlay_title: Label
 var overlay_body: RichTextLabel
 var option_buttons: Array[Button] = []
+var link_buttons: Array[Button] = []
 var close_button: Button
 var overlay_mode := ""
 var overlay_clue_index := -1
+var link_selected_index := -1
 var overlay_message := ""
 var cue_player: AudioStreamPlayer
 
@@ -72,6 +74,26 @@ func _clue_count() -> int:
 		if AppState.survey_clues.has(_clue_key(index)):
 			count += 1
 	return count
+
+
+func _link_key(index: int) -> String:
+	return "%s:%d" % [destination_id, index]
+
+
+func _link_count() -> int:
+	var count := 0
+	for index in 3:
+		if AppState.survey_links.has(_link_key(index)):
+			count += 1
+	return count
+
+
+func _linked_clue(index: int) -> bool:
+	var links: Array = _data()["links"]
+	for link_index in 3:
+		if AppState.survey_links.has(_link_key(link_index)) and links[link_index]["pair"].has(index):
+			return true
+	return false
 
 
 func _process(delta: float) -> void:
@@ -207,7 +229,11 @@ func _build_overlay(canvas: CanvasLayer) -> void:
 		var button := _button(overlay, Vector2(75, 190 + index * 34), Vector2(488, 30), _choose_answer.bind(index))
 		button.add_theme_font_size_override("font_size", 11)
 		option_buttons.append(button)
-	close_button = _button(overlay, Vector2(432, 275), Vector2(131, 32), _close_overlay)
+	for index in 6:
+		var button := _button(overlay, Vector2(75 + (index % 2) * 249, 155 + (index / 2) * 37), Vector2(239, 32), _select_link_clue.bind(index))
+		button.add_theme_font_size_override("font_size", 11)
+		link_buttons.append(button)
+	close_button = _button(overlay, Vector2(409, 275), Vector2(154, 32), _on_close_button)
 
 
 func _label(parent: Node, position: Vector2, font_size: int, color: Color) -> Label:
@@ -251,8 +277,11 @@ func _refresh_overlay() -> void:
 	var data := _data()
 	for button in option_buttons:
 		button.visible = overlay_mode == "question"
+	for button in link_buttons:
+		button.visible = overlay_mode == "link"
 	close_button.visible = overlay_mode != "question"
-	close_button.text = AppState.text_for("survey_close")
+	close_button.text = AppState.text_for("survey_link_continue" if overlay_mode == "link" and _link_count() == 3 else "survey_close")
+	overlay_body.size.y = 50 if overlay_mode == "link" else 92
 	match overlay_mode:
 		"clue":
 			var clue: Dictionary = data["clues"][overlay_clue_index]
@@ -263,6 +292,12 @@ func _refresh_overlay() -> void:
 			overlay_body.text = String(data["question"]) + ("\n" + overlay_message if overlay_message != "" else "")
 			for index in 3:
 				option_buttons[index].text = String(data["options"][index])
+		"link":
+			overlay_title.text = AppState.text_for("survey_link_title")
+			overlay_body.text = overlay_message if overlay_message != "" else AppState.text_for("survey_link_instruction") % _link_count()
+			for index in 6:
+				var prefix := "▶ " if link_selected_index == index else ("✓ " if _linked_clue(index) else "")
+				link_buttons[index].text = prefix + String(data["clues"][index]["name"])
 		"message":
 			overlay_title.text = AppState.text_for("survey_terminal")
 			overlay_body.text = overlay_message
@@ -290,11 +325,55 @@ func _open_question() -> void:
 	elif _clue_count() < 6:
 		overlay_mode = "message"
 		overlay_message = AppState.text_for("survey_locked")
+	elif _link_count() < 3:
+		overlay_mode = "link"
+		overlay_message = ""
+		link_selected_index = -1
 	else:
 		overlay_mode = "question"
 		overlay_message = ""
 	_refresh_text()
-	(option_buttons[0] if overlay_mode == "question" else close_button).grab_focus()
+	(option_buttons[0] if overlay_mode == "question" else (link_buttons[0] if overlay_mode == "link" else close_button)).grab_focus()
+
+
+func _select_link_clue(index: int) -> void:
+	if overlay_mode != "link" or index < 0 or index >= 6:
+		return
+	if link_selected_index < 0:
+		link_selected_index = index
+		overlay_message = AppState.text_for("survey_link_instruction") % _link_count()
+		_refresh_overlay()
+		return
+	if link_selected_index == index:
+		link_selected_index = -1
+		overlay_message = ""
+		_refresh_overlay()
+		return
+	var first := link_selected_index
+	link_selected_index = -1
+	var data := _data()
+	for link_index in 3:
+		var link: Dictionary = data["links"][link_index]
+		var pair: Array = link["pair"]
+		if pair.has(first) and pair.has(index):
+			if AppState.survey_links.has(_link_key(link_index)):
+				overlay_message = AppState.text_for("survey_link_found")
+			else:
+				AppState.survey_links[_link_key(link_index)] = true
+				AppState.write_auto_save("annex", hero.position, "survey_note")
+				cue_player.play()
+				overlay_message = String(link["insight"]) + "\n" + AppState.text_for("survey_link_instruction") % _link_count()
+			_refresh_overlay()
+			return
+	overlay_message = AppState.text_for("survey_link_wrong")
+	_refresh_overlay()
+
+
+func _on_close_button() -> void:
+	if overlay_mode == "link" and _link_count() == 3:
+		_open_question()
+	else:
+		_close_overlay()
 
 
 func _choose_answer(index: int) -> void:

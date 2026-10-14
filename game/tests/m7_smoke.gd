@@ -13,7 +13,21 @@ func _run() -> void:
 	for destination in app.DESTINATIONS:
 		for locale in ["zh", "en"]:
 			var content: Dictionary = CONTENT.DATA[destination][locale]
-			if not _check(content["rooms"].size() == 2 and content["clues"].size() == 6 and content["options"].size() == 3 and int(content["answer"]) in [0, 1, 2], "bilingual survey content " + destination + "/" + locale):
+			if not _check(content["rooms"].size() == 2 and content["clues"].size() == 6 and content["links"].size() == 3 and content["options"].size() == 3 and int(content["answer"]) in [0, 1, 2], "bilingual survey content " + destination + "/" + locale):
+				return
+			for link in content["links"]:
+				if not _check(link["pair"].size() == 2 and int(link["pair"][0]) in [0, 1, 2, 3, 4, 5] and int(link["pair"][1]) in [0, 1, 2, 3, 4, 5], "valid evidence pair " + destination + "/" + locale):
+					return
+			var used_clues: Array = []
+			for link in content["links"]:
+				for clue_index in link["pair"]:
+					if not _check(not used_clues.has(clue_index), "each clue belongs to one link " + destination + "/" + locale):
+						return
+					used_clues.append(clue_index)
+			if not _check(used_clues.size() == 6, "all six clues are linked " + destination + "/" + locale):
+				return
+		for index in 3:
+			if not _check(CONTENT.DATA[destination]["zh"]["links"][index]["pair"] == CONTENT.DATA[destination]["en"]["links"][index]["pair"], "same bilingual evidence links " + destination):
 				return
 	app.begin_new_run()
 	change_scene_to_file("res://scenes/hero_setup.tscn")
@@ -97,6 +111,20 @@ func _run() -> void:
 			var final_annex: Node2D = current_scene
 			final_annex.get("hero").position = Vector2(320, 263)
 			final_annex._unhandled_input(_interact())
+			if not _check(final_annex.get("overlay_mode") == "link", "six clues open evidence links " + destination):
+				return
+			final_annex.get("link_buttons")[0].pressed.emit()
+			final_annex.get("link_buttons")[1 if destination != "scifi.ruins" else 2].pressed.emit()
+			if not _check(final_annex.get("overlay_message") == app.text_for("survey_link_wrong") and final_annex._link_count() == 0, "wrong evidence pair is retryable"):
+				return
+			for link in final_annex._data()["links"]:
+				final_annex.get("link_buttons")[int(link["pair"][0])].pressed.emit()
+				final_annex.get("link_buttons")[int(link["pair"][1])].pressed.emit()
+			if not _check(final_annex._link_count() == 3 and final_annex.get("close_button").text == app.text_for("survey_link_continue"), "three evidence links complete " + destination):
+				return
+			final_annex.get("close_button").pressed.emit()
+			if not _check(final_annex.get("overlay_mode") == "question", "links unlock final judgment " + destination):
+				return
 			var correct: int = final_annex._data()["answer"]
 			final_annex.get("option_buttons")[(correct + 1) % 3].pressed.emit()
 			if not _check(not app.survey_solved.has(destination) and final_annex.get("overlay_message") != "", "wrong answer is retryable"):
@@ -122,7 +150,7 @@ func _run() -> void:
 					return
 				change_scene_to_file(app.loaded_scene_path())
 				await _settle()
-				if not _check(current_scene.get("hero").position == Vector2(311, 258) and app.survey_solved.has(destination) and app.survey_clues.size() == 6, "annex position and clues restored"):
+				if not _check(current_scene.get("hero").position == Vector2(311, 258) and app.survey_solved.has(destination) and app.survey_clues.size() == 6 and app.survey_links.size() == 3, "annex position, clues and links restored"):
 					return
 				final_annex = current_scene
 			final_annex._back_room()

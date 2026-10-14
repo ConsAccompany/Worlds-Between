@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
   "planVersion": "v0.1",
-  "updatedAt": "2026-10-13T21:28:43-04:00",
+  "updatedAt": "2026-10-13T21:36:03-04:00",
   "currentStep": "M7",
   "steps": [
     {
@@ -100,20 +100,21 @@
       "id": "M7",
       "title": "Playable content",
       "status": "in_progress",
-      "summary": "Three freely ordered destinations now include six survey rooms, eighteen bilingual clues, three retryable evidence questions, recruit options, machine choice, a field log, and a report endpoint. Timed playthrough remains outstanding.",
+      "summary": "Three freely ordered destinations now include six survey rooms, eighteen bilingual clues, nine evidence links, three retryable final judgments, recruit options, machine choice, a field log, and a report endpoint. Timed playthrough remains outstanding.",
       "acceptance": "Finish without developer tools in a 25–35 minute route; two exploration/recruit orders; both languages fit.",
       "details": [
         "三处地点可自由选择顺序；梁序、赵铃、纪澄仍可暂不邀请并回访。",
-        "城市档案馆、城外中继区与遗址各有外层和内层，共六处勘察空间、18 条中英文线索与三道可重试研判题。",
-        "完成每处研判仅奖励一次 JP；线索、结果、所在房间与位置可保存并恢复。",
+        "城市档案馆、城外中继区与遗址各有外层和内层，共六处勘察空间、18 条中英文线索、九组证据关联与三道可重试研判题。",
+        "完成每处研判仅奖励一次 JP；线索、证据关联、结果、所在房间与位置可保存并恢复。",
         "实地日志显示勘察进度与本次用时；完成汇报后仍可自由探索。"
       ],
       "remaining": [
-        "从新档进行真实计时试玩，确认是否达到 25–35 分钟且内容不靠等待填充。",
+        "从新档进行两条不同顺序的真实计时试玩，确认是否达到 25–35 分钟且内容不靠等待填充。",
         "按实际试玩结果补足内容或调整节奏，并修复发现的操作或文本问题。"
       ],
       "evidence": [
-        "game/tests/m7_smoke.gd: M7_SMOKE_OK (two destination orders, all three surveys, wrong-answer retry, one-time JP reward, annex save/load, report endpoint)",
+        "game/tests/m7_smoke.gd: M7_SMOKE_OK (two destination orders, all nine evidence links, wrong-pair and wrong-answer retry, one-time JP reward, annex save/load, report endpoint)",
+        "outputs/rpg-2-star-ocean-the-second_scifi-surveys_pacing-audit_m7_20261013-213603-4c1e9a70.md (31-second direct survey-room walking lower bound; not a playthrough duration)",
         "game/tests/m1_smoke.gd through m6_smoke.gd remain passing",
         "outputs/rpg-2-star-ocean-the-second_protagonist_female-setup_m7_20261013-211621-3b112fff.png",
         "outputs/rpg-2-star-ocean-the-second_scifi-map_field-log-chinese_m7_20261013-211403-9f2949ca.png",
@@ -121,6 +122,9 @@
         "outputs/rpg-2-star-ocean-the-second_scifi-city_survey-outer-room_m7_20261013-212250-336fb175.png",
         "outputs/rpg-2-star-ocean-the-second_scifi-city_survey-question-chinese_m7_20261013-212250-5aec78d7.png",
         "outputs/rpg-2-star-ocean-the-second_scifi-city_survey-question-english_m7_20261013-212250-e614975c.png",
+        "outputs/rpg-2-star-ocean-the-second_scifi-city_evidence-links-chinese_m7_20261013-213526-d7bfb2bc.png",
+        "outputs/rpg-2-star-ocean-the-second_scifi-city_evidence-links-english_m7_20261013-213526-8b13ff89.png",
+        "outputs/rpg-2-star-ocean-the-second_scifi-city_evidence-link-success-english_m7_20261013-213526-c0b454b5.png",
         "outputs/rpg-2-star-ocean-the-second_scifi-city_completion-report-english_m7_20261013-212705-7fa3d964.png",
         "outputs/rpg-2-star-ocean-the-second_scifi-map_field-log-english_m7_20261013-212705-3687dd8f.png"
       ],
