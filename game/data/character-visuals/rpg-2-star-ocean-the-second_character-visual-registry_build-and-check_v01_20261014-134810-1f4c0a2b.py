@@ -79,7 +79,7 @@ def main() -> None:
                 },
                 "exploration": {
                     "production_status": "directional_draft" if visual_id in SAMPLES else "not_started",
-                    "review_status": "pending",
+                    "review_status": "rejected_for_runtime_sprite_use" if visual_id in SAMPLES else "pending",
                     "directions": SAMPLES.get(visual_id, {}),
                 },
                 "runtime_display": {"production_status": "not_started", "review_status": "pending"},
