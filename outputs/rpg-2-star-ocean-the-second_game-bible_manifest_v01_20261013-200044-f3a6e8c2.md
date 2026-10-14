@@ -1,0 +1,27 @@
+# 世界之间：右侧游戏圣经
+
+面板入口：<http://127.0.0.1:18724/>
+
+## 已收录
+
+- **总览：** 游戏定位、核心体验、规模和设定状态。
+- **世界：** 地下社区、五个板块、幕后势力及结局结构。
+- **规则：** 核心定位、探索与战斗、等级与职业、伙伴关系、装备与经营、二周目。
+- **角色：** 主角与 50 位伙伴的 51 份独立档案；按板块和招募来源筛选，打开对应画像。
+- **制作：** 8 个 MVP 阶段、当前进度、验收条件和仍待确定的设计问题。
+- **资产：** 6 个大类、18 个子类、111 项清单；保留全部／仅 MVP 筛选和验收勾选。
+- **搜索：** 跨设计章节、角色档案和资产名称检索。
+
+规则章节来自已确认的设计稿，标为“需求基线”；角色姓名和外观来自人物提案，仍待审定。人物概念图和游戏精灵分开记录。资产勾选写入原资产状态文件。
+
+## 面板文件
+
+- [游戏圣经页面](./rpg-2-star-ocean-the-second_game-bible_widget_v03_20261013-195526-8e5a1c43.html)
+- [页面样式](./rpg-2-star-ocean-the-second_game-bible_styles_v01_20261013-195526-6c13fa09.css)
+- [查阅与筛选功能](./rpg-2-star-ocean-the-second_game-bible_app_v01_20261013-195526-90e7bc24.js)
+- [结构化内容](./rpg-2-star-ocean-the-second_game-bible_state_v01_20261013-195422-b8c16d42.json)
+- [资产清单数据](./rpg-2-star-ocean-the-second_asset-inventory_state_v01_20261013-191033-7d1e0a8b.json)
+
+## 后续维护
+
+修改原始设定文档后，运行 `tools/rpg-2-star-ocean-the-second_game-bible-builder_v01_20261013-195422-7e2a4f19.js` 重新生成结构化内容，再刷新面板。面板服务由 `tools/rpg-2-star-ocean-the-second_game-bible_server_v03_20261013-195526-4d891a2f.js` 提供。
