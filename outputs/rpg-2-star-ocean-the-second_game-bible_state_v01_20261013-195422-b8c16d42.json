@@ -4,7 +4,7 @@
   "title": "世界之间",
   "englishTitle": "Worlds Between",
   "edition": "设计基线 v0.1",
-  "updatedAt": "2026-10-14T02:54:12.956Z",
+  "updatedAt": "2026-10-14T02:57:14.454Z",
   "note": "规则以玩家确认的设计稿为基线；人物姓名与外观是待审提案，具体剧情留待后续设计。",
   "pitch": "从地下社区走出的旅人，以好奇心探索多元文明，招募伙伴，并成为不同世界认知差异的桥梁。",
   "pillars": [
@@ -2677,12 +2677,392 @@
             "effect": "为队友提供短时异常抗性，并让已被反应标记的敌人在下一次受击时额外承受一次反应伤害。"
           }
         ]
+      },
+      {
+        "seriesId": "sacred",
+        "name": "圣源",
+        "nodes": [
+          {
+            "id": "sacred_small_restoration",
+            "tier": 1,
+            "name": "微光修复",
+            "type": "主动",
+            "energy": 18,
+            "tags": [
+              "光源",
+              "治疗"
+            ],
+            "effect": "恢复一名存活队友的部分生命；不能让倒下者复苏。"
+          },
+          {
+            "id": "sacred_light_veil",
+            "tier": 2,
+            "branch": "护光",
+            "name": "光幕",
+            "type": "主动",
+            "energy": 22,
+            "tags": [
+              "光源",
+              "护盾"
+            ],
+            "effect": "为一名队友提供短时护盾，并减轻下一次受到的攻击。"
+          },
+          {
+            "id": "sacred_clear_radiance",
+            "tier": 2,
+            "branch": "净辉",
+            "name": "清辉",
+            "type": "主动",
+            "energy": 20,
+            "tags": [
+              "光源",
+              "净化"
+            ],
+            "effect": "移除一名队友身上的一种常见异常状态，并给予短时同类异常抗性。"
+          },
+          {
+            "id": "sacred_illumination",
+            "tier": 3,
+            "name": "照见",
+            "type": "被动",
+            "energy": 0,
+            "tags": [
+              "光源",
+              "预警"
+            ],
+            "effect": "施放光源治疗或净化后，短时提示附近队友将受到的下一次异常攻击；提示不暂停时间。"
+          },
+          {
+            "id": "sacred_reflective_glow",
+            "tier": 4,
+            "branch": "护光",
+            "name": "辉光反照",
+            "type": "主动",
+            "energy": 32,
+            "tags": [
+              "光源",
+              "反击"
+            ],
+            "effect": "为一名队友施加短时护光；护光首次承受直接攻击时，对攻击者造成少量光源伤害。"
+          },
+          {
+            "id": "sacred_life_pulse",
+            "tier": 4,
+            "branch": "净辉",
+            "name": "生命脉冲",
+            "type": "主动",
+            "energy": 38,
+            "tags": [
+              "光源",
+              "范围治疗"
+            ],
+            "effect": "恢复最多五名存活队友的生命；倒下者须先由复苏技能救起。"
+          },
+          {
+            "id": "sacred_dawn_resonance",
+            "tier": 5,
+            "name": "晨星共鸣",
+            "type": "主动",
+            "energy": 52,
+            "tags": [
+              "光源",
+              "团队守护"
+            ],
+            "effect": "为最多五名上场队友提供短时护盾，并在护盾自然结束时恢复仍存活者少量生命。"
+          }
+        ]
+      },
+      {
+        "seriesId": "dark",
+        "name": "魔源",
+        "nodes": [
+          {
+            "id": "dark_shadow_draw",
+            "tier": 1,
+            "name": "暗流汲取",
+            "type": "主动",
+            "energy": 18,
+            "tags": [
+              "暗源",
+              "吸收"
+            ],
+            "effect": "伤害一名敌人并将造成伤害的一小部分转化为自身临时护盾；不直接回复能量。"
+          },
+          {
+            "id": "dark_night_armor",
+            "tier": 2,
+            "branch": "蓄势",
+            "name": "夜幕护甲",
+            "type": "主动",
+            "energy": 22,
+            "tags": [
+              "暗源",
+              "守护"
+            ],
+            "effect": "为自己施加短时护甲；护甲受到的第一击会储存少量反击力量。"
+          },
+          {
+            "id": "dark_current_pull",
+            "tier": 2,
+            "branch": "扰动",
+            "name": "暗流牵引",
+            "type": "主动",
+            "energy": 20,
+            "tags": [
+              "暗源",
+              "控制"
+            ],
+            "effect": "将一名普通敌人拉近少许并短时降低其攻击速度；首领仅受到较弱减速。"
+          },
+          {
+            "id": "dark_source_adaptation",
+            "tier": 3,
+            "name": "深源适配",
+            "type": "被动",
+            "energy": 0,
+            "tags": [
+              "暗源",
+              "节能"
+            ],
+            "effect": "同一场战斗中连续使用两种不同魔源主动技能后，下一次魔源技能少耗少量能量；短时间只触发一次。"
+          },
+          {
+            "id": "dark_stored_release",
+            "tier": 4,
+            "branch": "蓄势",
+            "name": "蓄源回击",
+            "type": "主动",
+            "energy": 30,
+            "tags": [
+              "暗源",
+              "反击"
+            ],
+            "effect": "释放夜幕护甲储存的反击力量攻击一名敌人；没有储存时仍造成基础伤害。"
+          },
+          {
+            "id": "dark_dusk_cycle",
+            "tier": 4,
+            "branch": "扰动",
+            "name": "灰影回环",
+            "type": "主动",
+            "energy": 34,
+            "tags": [
+              "暗源",
+              "范围"
+            ],
+            "effect": "伤害附近敌人，并按实际命中数为自身生成有上限的短时护盾。"
+          },
+          {
+            "id": "dark_final_equilibrium",
+            "tier": 5,
+            "name": "终夜均衡",
+            "type": "主动",
+            "energy": 50,
+            "tags": [
+              "暗源",
+              "团队守护"
+            ],
+            "effect": "将最多五名队友在短时间内受到的部分伤害转为各自的临时护盾；转化量有单人上限，不能使伤害归零。"
+          }
+        ]
+      },
+      {
+        "seriesId": "summoning",
+        "name": "召唤",
+        "nodes": [
+          {
+            "id": "summoning_brief_projection",
+            "tier": 1,
+            "name": "短影召唤",
+            "type": "主动",
+            "energy": 18,
+            "tags": [
+              "召唤",
+              "攻击"
+            ],
+            "effect": "唤出短时投影攻击指定敌人；投影是技能效果，不占上场角色位。"
+          },
+          {
+            "id": "summoning_watcher_form",
+            "tier": 2,
+            "branch": "守望",
+            "name": "守望像",
+            "type": "主动",
+            "energy": 22,
+            "tags": [
+              "召唤",
+              "守护"
+            ],
+            "effect": "唤出短时守望投影，减轻指定队友下一次受到的攻击后消散。"
+          },
+          {
+            "id": "summoning_pursuer_form",
+            "tier": 2,
+            "branch": "追逐",
+            "name": "追踪像",
+            "type": "主动",
+            "energy": 22,
+            "tags": [
+              "召唤",
+              "标记"
+            ],
+            "effect": "唤出短时追踪投影，优先打击已经被标记的目标；无标记时攻击施放者当前目标。"
+          },
+          {
+            "id": "summoning_contract_sync",
+            "tier": 3,
+            "name": "同调契印",
+            "type": "被动",
+            "energy": 0,
+            "tags": [
+              "召唤",
+              "协同"
+            ],
+            "effect": "守望像保护队友后，下一次追踪像攻击略有增强；每组投影只触发一次。"
+          },
+          {
+            "id": "summoning_two_forms",
+            "tier": 4,
+            "branch": "追逐",
+            "name": "双像共行",
+            "type": "主动",
+            "energy": 36,
+            "tags": [
+              "召唤",
+              "协同"
+            ],
+            "effect": "同时唤出守望像与追踪像，各执行一次基础动作后消散。"
+          },
+          {
+            "id": "summoning_guard_conversion",
+            "tier": 4,
+            "branch": "守望",
+            "name": "替像收束",
+            "type": "主动",
+            "energy": 28,
+            "tags": [
+              "召唤",
+              "护盾"
+            ],
+            "effect": "提前结束一名现存投影，为指定队友生成短时护盾；无投影时生成较弱护盾。"
+          },
+          {
+            "id": "summoning_creation_score",
+            "tier": 5,
+            "name": "创生图谱",
+            "type": "主动",
+            "energy": 52,
+            "tags": [
+              "召唤",
+              "团队协同"
+            ],
+            "effect": "唤出三种短时投影，分别完成一次攻击、一次守护与一次标记；它们不能复制角色技能或独立行动整场战斗。"
+          }
+        ]
+      },
+      {
+        "seriesId": "relics",
+        "name": "遗物",
+        "nodes": [
+          {
+            "id": "relics_basic_resonance",
+            "tier": 1,
+            "name": "遗物共鸣",
+            "type": "主动",
+            "energy": 18,
+            "tags": [
+              "遗物",
+              "攻击"
+            ],
+            "effect": "用职业基础共鸣器造成一次源纹伤害；不要求持有特定剧情遗物。"
+          },
+          {
+            "id": "relics_pattern_read",
+            "tier": 2,
+            "branch": "解读",
+            "name": "回读",
+            "type": "主动",
+            "energy": 20,
+            "tags": [
+              "遗物",
+              "分析"
+            ],
+            "effect": "显示一名敌人下一种可能的攻击模式；在考古互动中额外提示一条可选线索。"
+          },
+          {
+            "id": "relics_age_guard",
+            "tier": 2,
+            "branch": "防卫",
+            "name": "断代防护",
+            "type": "主动",
+            "energy": 22,
+            "tags": [
+              "遗物",
+              "守护"
+            ],
+            "effect": "为一名队友生成短时护盾，对自动机械的下一次攻击提供额外减伤。"
+          },
+          {
+            "id": "relics_document_join",
+            "tier": 3,
+            "name": "文献拼合",
+            "type": "被动",
+            "energy": 0,
+            "tags": [
+              "遗物",
+              "考古"
+            ],
+            "effect": "考古时提示残片之间可能存在的关联，并在完成基础调查后增加可选背景信息；不锁住主线发现。"
+          },
+          {
+            "id": "relics_source_replay",
+            "tier": 4,
+            "branch": "防卫",
+            "name": "源纹复现",
+            "type": "主动",
+            "energy": 34,
+            "tags": [
+              "遗物",
+              "范围"
+            ],
+            "effect": "重现一次受控源纹脉冲，对附近敌人造成伤害，并削弱其下一次对护盾的伤害。"
+          },
+          {
+            "id": "relics_distortion_check",
+            "tier": 4,
+            "branch": "解读",
+            "name": "失真校正",
+            "type": "被动",
+            "energy": 0,
+            "tags": [
+              "遗物",
+              "考古"
+            ],
+            "effect": "对互相矛盾的记录额外标注可能的失真来源；标注是推测，不直接给出真相。"
+          },
+          {
+            "id": "relics_civilization_echo",
+            "tier": 5,
+            "name": "文明回响",
+            "type": "主动",
+            "energy": 50,
+            "tags": [
+              "遗物",
+              "团队支援"
+            ],
+            "effect": "以共鸣器为队友施加短时抗性，并压低附近敌人的强化效果；在考古互动中可提供可选历史语境。"
+          }
+        ]
       }
     ],
     "designNotes": [
       "工程装置和机偶是短时技能效果，不占五名上场角色的位置。",
       "药剂职业在战斗中产生的临时配方不会进入背包，也不会替代商会或道具经济。",
-      "战斗结束时仍倒下者按上限 10% 复活；若已在战斗中被复苏，则作为存活者在剩余数值上加上限 20%。"
+      "战斗结束时仍倒下者按上限 10% 复活；若已在战斗中被复苏，则作为存活者在剩余数值上加上限 20%。",
+      "圣源与魔源是同一社会中功能互补的两种力量，不表示角色的道德立场。",
+      "召唤物是短时技能效果，不占五名上场角色的位置，不独立获得经验，也不复制任何角色的个人专属技能。",
+      "遗物技能提供考古线索和额外优势；主线线索仍可由其他职业通过基础探索获得。",
+      "四条系列均不依赖地形、高度差或障碍物造成战斗效果。"
     ]
   },
   "openQuestions": [
