@@ -39,6 +39,7 @@ Last updated: 2026-10-13
 - The remaining Spiritual aptitude series now have seven-node proposals: Luminous Source, Umbral Source, Summoning, and Relic Studies. The game bible displays 20/20 career trees and 140 unique nodes. These are design proposals pending player confirmation and balance work. Light and dark are complementary sources, summons are temporary effects outside the five-member party, and relic skills add optional archaeological insight without gating discoveries.
 - The player ended the first attempted M7 playtest in the city before traveling. The game exited normally and produced no city-report receipt. The player clarified that they simply stopped for now; this does not indicate an onboarding defect. No formal timed run has been completed yet.
 - Personal skill tree proposals now cover the protagonist and all 15 main companions. Each keeps the character bible's unique signature skill, with five level-gated nodes at character levels 1/10/20/30/40. The game bible displays these proposals in each character profile. The remaining 35 companions' personal trees, JP costs and combat balance remain open. M7 still awaits two completed human playthrough receipts.
+- MVP scope was revised by the player: all 51 characters need in-game visual identities (52 image variants because the protagonist has male and female versions), while the playable content remains the science region. The environment target is the perceived quality of Wandering Sword, judged from running scenes rather than concept art. The new v0.2 plan adds M8 visual production and M9 integrated acceptance. The asset inventory now separately tracks 52 source sheets (9 previously accepted), 52 in-game displays, 52 four-direction exploration sprites, five playable combat identities, three visual-direction gates, and eleven science-region scene-quality gates. Existing geometric rooms remain functionality proofs, not accepted final visuals.
 
 ## Milestones Checklist
 
@@ -87,7 +88,14 @@ Last updated: 2026-10-13
 - [x] Add six optional field traces that give each recruited local companion a concrete investigation to finish.
 - [ ] Time a fresh start-to-finish playthrough and fix any blockers or text overflow.
 
-### Phase M8 - Acceptance and tuning
+### Phase M8 - Character and environment art
 
-- [ ] Complete fresh playthroughs and fix blockers.
+- [x] Revise MVP scope, asset inventory and side panel gates for 52 character variants and eleven science-region scene visuals.
+- [ ] Approve the character and city visual sample before batch production.
+- [ ] Integrate and review the 52 in-game displays and four-direction sprites.
+- [ ] Finish the playable team's battle art and the eleven scene visuals.
+
+### Phase M9 - Integrated acceptance
+
+- [ ] Complete two fresh playthroughs with the finished art and fix any blockers.
 

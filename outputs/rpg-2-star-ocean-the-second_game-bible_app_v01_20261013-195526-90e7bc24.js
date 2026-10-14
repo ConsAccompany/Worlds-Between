@@ -136,7 +136,8 @@
       M5:['等级与职业','加入经验、JP、四项天分、四条职业系列和 10 级必选职业。','可留任、晋升、切换并保留原系列进度；候补获得 25% 收益。'],
       M6:['存档与恢复','加入战后自动存档、手动存档及队伍和职业状态加载。','重新启动后能读取关键状态；战败回菜单后可加载。'],
       M7:['可玩内容','科技板块三地探索、六处勘察空间、九组证据关联、六处现场痕迹、六段伙伴交流、三位伙伴招募与回城汇报已连通。','不用开发工具通关；两种探索和招募顺序可行；中英文显示完整，并实测 25–35 分钟内容长度。'],
-      M8:['验收与调整','完整试玩、记录转场时间和易用性问题，并修复阻碍。','两次新存档完整试玩无阻碍；存档和回访招募通过核验。'],
+      M8:['角色与场景美术','51 位角色的游戏内展示图和探索精灵；科技区地图、三地点、六勘察空间及战场的完成画面。','52 份视觉身份可按角色读取；可玩角色使用独立动作；11 项场景画质通过运行画面审查。'],
+      M9:['整体验收与调整','将科技区玩法与完成美术合并，实测画质、性能、操作、招募、存档与双语。','两次不同顺序的新档试玩均完整通关；画面与内容通过验收。'],
     };
     const place={'scifi.city':'城市','scifi.outskirts':'城外','scifi.ruins':'遗址'};
     const shortTime=seconds=>{const whole=Math.round(seconds);return `${Math.floor(whole/60)}:${String(whole%60).padStart(2,'0')}`;};
@@ -154,13 +155,19 @@
     const launchDisabled=!['idle','completed','no_report','error'].includes(launchPhase);
     const launchHint=launchPhase==='unavailable' ? '当前面板没有连接试玩入口。<a href="http://127.0.0.1:18727/">打开当前面板</a>。' : esc(launchText[launchPhase]||launchText.loading);
     const feedbackFields=[['first','第一轮 · 城市 → 城外 → 遗址'],['second','第二轮 · 遗址 → 城外 → 城市']].map(([key,label])=>`<label class="feedback-field"><strong>${label}</strong><textarea data-feedback="${key}" rows="4" maxlength="4000" placeholder="记下迷路、操作不明、文字溢出、战斗难度，以及你想继续探索的原因。">${esc(readFeedback(key))}</textarea></label>`).join('');
+    const assets=state.inventory.categories.flatMap(category=>category.subcategories.flatMap(group=>group.items));
+    const countAssets=prefix=>assets.filter(item=>item.id.startsWith(prefix));
+    const portraits=countAssets('portrait.'), displays=countAssets('display.'), sprites=countAssets('runtime-sprite.'), scenes=countAssets('visual-scene.');
+    const checked=items=>items.filter(item=>item.checked).length;
     const pct=Math.round(100*done/p.steps.length);
-    content.innerHTML=`${head('制作路线','MVP 阶段状态与尚待细化的完整游戏设计',badge(done+' / '+p.steps.length+' 阶段','accent'))}
-      <div class="card"><div class="step-top"><strong>MVP 完成情况</strong><span>${pct}%</span></div><div class="meter" role="progressbar" aria-valuemin="0" aria-valuemax="${p.steps.length}" aria-valuenow="${done}"><span style="width:${pct}%"></span></div><p class="muted small">当前：${current?esc(current.id+' · '+copy[current.id][0]):'全部阶段已完成'}</p></div>
+    content.innerHTML=`${head('制作路线','新版 MVP：完整角色视觉身份与精致科技区场景',badge(done+' / '+p.steps.length+' 阶段','accent'))}
+      <div class="card"><div class="step-top"><strong>已完成阶段</strong><span>${done} / ${p.steps.length}</span></div><div class="meter" role="progressbar" aria-valuemin="0" aria-valuemax="${p.steps.length}" aria-valuenow="${done}"><span style="width:${pct}%"></span></div><p class="muted small">当前重点：${current?esc(current.id+' · '+copy[current.id][0]):'全部阶段已完成'}。阶段数量不代表剩余工作量。</p></div>
+      <div class="section-label">新版画面验收</div>
+      <section class="card"><h3>51 位角色 · 科技区完成画面</h3><p>主角男女两版与 50 位伙伴均制作游戏内展示图及四方向探索精灵；试玩仍只开放科技区角色。场景画质以《逸剑风云决》为参考，验收科技区自己的完成画面。</p><p class="small">来源设定图 ${checked(portraits)} / ${portraits.length} 已验收 · 游戏内展示图 ${checked(displays)} / ${displays.length} · 探索精灵 ${checked(sprites)} / ${sprites.length} · 场景画质 ${checked(scenes)} / ${scenes.length}</p><p class="muted small">已有概念图和可运行占位画面不计为游戏内美术验收。先做城市与两名角色的比例样板，再展开批量制作。</p><button type="button" class="chip" id="open-visual-assets">查看视觉资产清单</button></section>
       <div class="section-label">分步实施</div>
       <div class="stack">${p.steps.map(step=>`<details class="group"><summary>${esc(step.id+' · '+copy[step.id][0])} <span class="group-count">${esc(status[step.status]||step.status)}</span></summary><div class="card"><p>${esc(copy[step.id][1])}</p><strong>验收标准</strong><p>${esc(copy[step.id][2])}</p>${step.details?.length?'<strong>当前内容</strong><ul>'+step.details.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>':''}${step.remaining?.length?'<strong>尚需完成</strong><ul>'+step.remaining.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>':''}${step.evidence?.length?'<strong>已有依据</strong><ul>'+step.evidence.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>':''}</div></details>`).join('')}</div>
       <div class="section-label">M7 试玩记录</div>
-      <section class="card"><div class="step-top"><h3>本地汇报记录</h3><button type="button" class="chip" id="refresh-playtests">刷新记录</button></div><div class="playtest-launch"><button type="button" class="chip" id="start-playtest" ${launchDisabled?'disabled':''}>${launchPhase==='running'?'试玩进行中':'开始新档试玩'}</button><span class="muted small" role="status">${launchHint}</span></div><p class="muted small">请分别用两个新档试玩。满足不同首访顺序、25–35 分钟、三处勘察和三位伙伴的路线：${Math.min(2,routeTrials.size)}/2。时间由游戏计时，是否有卡点和内容节奏还需玩家判断。</p><details class="group"><summary>两轮试玩指引</summary><div class="card small"><p><strong>第一轮：</strong>城市 → 城外 → 遗址。<strong>第二轮：</strong>遗址 → 城外 → 城市。每轮都从主菜单开始新游戏，三位伙伴可暂缓邀请，但在回城汇报前请招募齐。</p><ol><li>各地查看六条线索、完成三组证据关联与最终研判。</li><li>检查城外中继和遗址记录；绕过或击败一台机械。两处现场痕迹和伙伴协助是可选内容。</li><li>回城市提交汇报。出现完成画面后关闭游戏，等待记录回传。</li></ol><p>试玩时留意迷路、操作不明、文字溢出、战斗难度和想继续探索的动力；这些体验无法由自动记录判断。</p></div></details><div class="stack">${playtestRows||'<div class="empty">尚无正式试玩记录。M7 仍需两次不同顺序的实际计时试玩。</div>'}</div></section>
+      <section class="card"><div class="step-top"><h3>本地汇报记录</h3><button type="button" class="chip" id="refresh-playtests">刷新记录</button></div><div class="playtest-launch"><button type="button" class="chip" id="start-playtest" ${launchDisabled?'disabled':''}>${launchPhase==='running'?'试玩进行中':'开始新档试玩'}</button><span class="muted small" role="status">${launchHint}</span></div><p class="muted small">目前这份游戏可用于 M7 内容试玩，画面仍是原型；最终 MVP 要在 M8 美术完成后再进行 M9 整体验收。两条不同首访顺序、25–35 分钟、三处勘察和三位伙伴的内容记录：${Math.min(2,routeTrials.size)}/2。</p><details class="group"><summary>两轮试玩指引</summary><div class="card small"><p><strong>第一轮：</strong>城市 → 城外 → 遗址。<strong>第二轮：</strong>遗址 → 城外 → 城市。每轮都从主菜单开始新游戏，三位伙伴可暂缓邀请，但在回城汇报前请招募齐。</p><ol><li>各地查看六条线索、完成三组证据关联与最终研判。</li><li>检查城外中继和遗址记录；绕过或击败一台机械。两处现场痕迹和伙伴协助是可选内容。</li><li>回城市提交汇报。出现完成画面后关闭游戏，等待记录回传。</li></ol><p>试玩时留意迷路、操作不明、文字溢出、战斗难度和想继续探索的动力；这些体验无法由自动记录判断。</p></div></details><div class="stack">${playtestRows||'<div class="empty">尚无正式试玩记录。M7 仍需两次不同顺序的实际计时试玩。</div>'}</div></section>
       <details class="group" id="playtest-feedback" ${state.feedbackOpen?'open':''}><summary>试玩感受记录</summary><div class="card"><p class="muted small">试玩时随手记下观察；输入后自动保存在当前浏览器。完成后请把反馈发到聊天里，以便纳入项目验收。</p>${feedbackFields}<p class="muted small" role="status" id="feedback-status">等待输入</p></div></details>
       <div class="section-label">仍待确定</div>
       <div class="stack">${state.bible.openQuestions.map(q=>`<div class="card"><h3>${esc(q.title)}</h3><p>${esc(q.detail)}</p></div>`).join('')}</div>
@@ -170,6 +177,7 @@
       <div class="section-label">计划与完整实施顺序</div>
       <div class="card"><a href="/source/mvp" target="_blank" rel="noopener">打开 MVP 实施计划</a> · <a href="/source/brief" target="_blank" rel="noopener">打开完整设计稿</a></div>`;
     content.querySelector('#refresh-playtests').addEventListener('click',()=>refreshPlaytests().catch(()=>{document.getElementById('footer-status').textContent='试玩记录暂时无法读取';}));
+    content.querySelector('#open-visual-assets').addEventListener('click',()=>{state.assetScope='mvp';state.openGroups.add('characters');state.openGroups.add('world');state.openGroups.delete('characters.runtime-displays');state.openGroups.delete('world.scene-quality');navigate('assets');});
     content.querySelector('#start-playtest').addEventListener('click',startPlaytest);
     content.querySelector('#open-job-proposal').addEventListener('click',()=>navigate('rules',{chapter:'chapter-4'}));
     content.querySelector('#playtest-feedback').addEventListener('toggle',event=>{state.feedbackOpen=event.target.open;});

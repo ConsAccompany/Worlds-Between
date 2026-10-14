@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
-  "planVersion": "v0.1",
-  "updatedAt": "2026-10-13T22:39:46-04:00",
-  "currentStep": "M7",
+  "planVersion": "v0.2",
+  "updatedAt": "2026-10-14T03:11:12.635Z",
+  "currentStep": "M8",
   "steps": [
     {
       "id": "M1",
@@ -121,8 +121,8 @@
         "制作页另有两轮独立的试玩感受输入框，随输入保存在当前浏览器，供玩家结束后反馈操作、文字、战斗和探索体验。"
       ],
       "remaining": [
-        "从新档进行两条不同顺序的真实计时试玩，确认是否达到 25–35 分钟且内容不靠等待填充。",
-        "按实际试玩结果补足内容或调整节奏，并修复发现的操作或文本问题。"
+        "从新档进行两条不同顺序的真实计时试玩，确认科技区内容是否达到 25–35 分钟且没有人为等待。",
+        "按实际试玩结果补足内容或调整节奏；这项内容验收与 M8 美术样板可并行。"
       ],
       "evidence": [
         "game/tests/m7_smoke.gd: M7_SMOKE_OK (two destination orders, all nine evidence links, retry counts, one-time JP reward, six-topic unlock, one-time bond, conversation save/load, report endpoint and playtest receipt)",
@@ -160,10 +160,41 @@
     },
     {
       "id": "M8",
-      "title": "Acceptance and tuning",
+      "title": "Visual identity and environment quality",
+      "status": "ready",
+      "summary": "Use all 52 existing character identities in-engine; make the science-region map, three locations, six survey rooms and battle arena reach the approved visual quality target.",
+      "acceptance": "52 identity displays and four-direction sprites load by character ID; playable team uses individual art; all eleven scene-quality gates pass screenshot and in-game review.",
+      "evidence": [
+        "52 份角色设定图已在资产清单登记；9 份已验收，其余是概念稿。",
+        "当前游戏的城市和遗址运行截图显示功能原型，尚不能证明新画质要求。",
+        "outputs/rpg-2-star-ocean-the-second_mvp-implementation-plan_visual-first_v02_20261013-230524-29cf8a61.md"
+      ],
+      "blocker": null,
+      "details": [
+        "主角男女两版与 50 位伙伴，共 52 份来源画像；只有 9 份设定图已在旧清单中标为验收，未验收的图仍须逐张修订或批准。",
+        "51 位角色均有游戏内展示图和四方向探索形象；试玩仍只开放科技区角色。",
+        "主角两版、梁序、赵铃、纪澄另有独立战斗动作；其他角色战斗动作留待其可玩阶段。",
+        "科技地图、三个主场景、六个勘察空间及战斗场地共 11 项独立画质验收。",
+        "先完成城市画面及两名角色的比例样板，依据实际画面决定是否需要调整 2D／2.5D 技术路线。"
+      ],
+      "remaining": [
+        "建立原创视觉基准，审查 43 份未验收的人物概念图。",
+        "制作并导入 52 份展示图、52 套四方向探索精灵和科技区可玩队伍战斗动画。",
+        "完成 11 项场景画质升级并逐场检查读图、性能和交互。"
+      ]
+    },
+    {
+      "id": "M9",
+      "title": "Final integrated acceptance",
       "status": "todo",
-      "summary": "Full playthroughs, transition timing, usability findings, blocker fixes.",
-      "acceptance": "Two fresh playthroughs without blockers; save/recruit revisit verified.",
+      "summary": "Review the combined playable route and completed visual assets in two fresh human playthroughs.",
+      "acceptance": "Two different route orders complete in 25–35 minutes without blockers; all visual, bilingual, save and recruitment checks pass.",
+      "details": [
+        "M7 内容与 M8 美术均通过后，进行整体验收。"
+      ],
+      "remaining": [
+        "完成两轮真实试玩并处理问题。"
+      ],
       "evidence": [],
       "blocker": null
     }

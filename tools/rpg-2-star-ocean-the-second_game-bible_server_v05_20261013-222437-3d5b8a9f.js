@@ -19,7 +19,7 @@ const routes = {
   '/source/brief': ['rpg-2-star-ocean-the-second_game-design-brief_v01_20261012-233611-7c2e1f4a.md','text/markdown; charset=utf-8'],
   '/source/core': ['rpg-2-star-ocean-the-second_core-cast_character-bible_v01_20261012-234158-cc7e91a4.md','text/markdown; charset=utf-8'],
   '/source/extra': ['rpg-2-star-ocean-the-second_remaining-companions_character-bible_v01_20261013-181920-6d2a4f8c.md','text/markdown; charset=utf-8'],
-  '/source/mvp': ['rpg-2-star-ocean-the-second_mvp-implementation-plan_v01_20261013-183550-0f7c4d21.md','text/markdown; charset=utf-8'],
+  '/source/mvp': ['rpg-2-star-ocean-the-second_mvp-implementation-plan_visual-first_v02_20261013-230524-29cf8a61.md','text/markdown; charset=utf-8'],
 };
 function respond(response, code, value, mime='text/plain; charset=utf-8') {
   response.writeHead(code,{'content-type':mime,'cache-control':'no-store','x-content-type-options':'nosniff'});

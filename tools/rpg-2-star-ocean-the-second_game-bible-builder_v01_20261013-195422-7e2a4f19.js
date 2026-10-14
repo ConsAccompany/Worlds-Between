@@ -7,7 +7,7 @@ const names = {
   brief: 'rpg-2-star-ocean-the-second_game-design-brief_v01_20261012-233611-7c2e1f4a.md',
   core: 'rpg-2-star-ocean-the-second_core-cast_character-bible_v01_20261012-234158-cc7e91a4.md',
   extra: 'rpg-2-star-ocean-the-second_remaining-companions_character-bible_v01_20261013-181920-6d2a4f8c.md',
-  mvp: 'rpg-2-star-ocean-the-second_mvp-implementation-plan_v01_20261013-183550-0f7c4d21.md',
+  mvp: 'rpg-2-star-ocean-the-second_mvp-implementation-plan_visual-first_v02_20261013-230524-29cf8a61.md',
   jobs: 'rpg-2-star-ocean-the-second_all-jobs_five-tier-proposal_v01_20261013-224236-6f2b9c11.json',
   skillTrees: 'rpg-2-star-ocean-the-second_four-job-trees_skill-node-proposal_v01_20261013-224554-5a72d0be.json',
   martialTrees: 'rpg-2-star-ocean-the-second_martial-job-trees_skill-node-proposal_v01_20261013-224832-1c9e73ab.json',
@@ -134,6 +134,7 @@ if (coreCharacters.length !== 16 || personalSkillTrees.trees.length !== 16 || ne
 
 const openQuestions = [
   {title:'10 位可恋爱伙伴',detail:'人选与开放阶段尚未确定；不要从角色画像推断恋爱资格。'},
+  {title:'MVP 美术技术路线',detail:'目标是完成画面的品质。先用 Godot 2D 分层完成科技城市场景样板，再根据实际游戏画面决定是否需要 2.5D 场景技术。'},
   {title:'职业与个人技能数值',detail:'20 个职业系列的五阶名称、终阶任务和七节点技能树均有待确认提案；主角与 15 位主线伙伴另有五节点个人技能树提案。实际平衡数值及其余 35 位伙伴的个人树仍需设计。'},
   {title:'地点与任务内容',detail:'五个板块的城市、社区、野外地点和独立主线任务尚需逐项命名与编写。'},
   {title:'数值与经营平衡',detail:'JP 折扣、敌人数值、终局难度奖励、商会利润与日历结算需试玩后定稿。'},
