@@ -34,8 +34,8 @@ function portrait(slug, name, board, scope) {
   const id = `portrait.${slug}`;
   return {id,name:`${name} · 21:9 人物设定图`,scope,board,target:1,stage:file ? (approvedHair.has(slug) ? 'approved' : 'concept') : 'planned',checked:oldItems.get(id)?.checked ?? approvedHair.has(slug),file:file ? `/assets/${encodeURIComponent(file)}` : null};
 }
-function fixed(id,name,scope,target=1,stage='planned',note='') {
-  return {id,name,scope,target,stage,checked:oldItems.get(id)?.checked ?? stage==='approved',note};
+function fixed(id,name,scope,target=1,stage='planned',note='',file=null) {
+  return {id,name,scope,target,stage,checked:oldItems.get(id)?.checked ?? stage==='approved',note,file:file ? `/assets/${encodeURIComponent(file)}` : null};
 }
 function sub(id,name,items) {return {id,name,items};}
 function cat(id,name,subcategories) {return {id,name,subcategories};}
@@ -67,11 +67,13 @@ const categories = [
   ]),
   cat('world','世界与场景',[
     sub('world-map','世界地图',[
-      fixed('world-map.mvp','科技板块三地点地图与道路','MVP'),
+      fixed('world-map.mvp','科技板块三地点地图与道路','MVP',1,'production','M2 可玩原型；正式地图美术待制作','rpg-2-star-ocean-the-second_scifi-map_visual-proof_m2_20261013-201352-8194746e.png'),
       fixed('world-map.full','五板块全世界地图及传送门入口','Full',5),
     ]),
     sub('scenes','可探索场景',[
-      fixed('scene.mvp-city','MVP 科技城市片区','MVP'),fixed('scene.mvp-outskirts','MVP 城外场景','MVP'),fixed('scene.mvp-ruin','MVP 遗址室内场景','MVP'),
+      fixed('scene.mvp-city','MVP 科技城市片区','MVP',1,'production','M2 可玩原型；正式场景美术待制作','rpg-2-star-ocean-the-second_scifi-city_visual-proof_m2_20261013-201352-4940f7f5.png'),
+      fixed('scene.mvp-outskirts','MVP 城外场景','MVP',1,'production','M2 可玩原型；正式场景美术待制作','rpg-2-star-ocean-the-second_scifi-outskirts_visual-proof_m2_20261013-201352-7e3fc6e6.png'),
+      fixed('scene.mvp-ruin','MVP 遗址室内场景','MVP',1,'production','M2 可玩原型；正式场景美术待制作','rpg-2-star-ocean-the-second_scifi-ruins_visual-proof_m2_20261013-201352-0302dc4c.png'),
       fixed('scene.cities','五板块大城市基础场景','Full',25),fixed('scene.communities','五板块小社区基础场景','Full',25),fixed('scene.wilderness','五板块野外基础场景','Full',25),
       fixed('scene.special','板块专属遗迹、传送门与地下社区扩展场景','Full',1,'planned','实际数量随地点设计增加'),
     ]),
@@ -95,7 +97,9 @@ const categories = [
   ]),
   cat('interface','界面',[
     sub('navigation','导航与探索',[
-      fixed('ui.menu','中英文主菜单与基础按钮','MVP',1,'approved'),fixed('ui.map','世界地图地点选择','MVP'),fixed('ui.explore','探索提示、交互、对话与招募','MVP'),
+      fixed('ui.menu','中英文主菜单与基础按钮','MVP',1,'approved'),
+      fixed('ui.map','世界地图地点选择','MVP',1,'production','M2 已实现中英文可点击地点选择','rpg-2-star-ocean-the-second_scifi-map_visual-proof_m2_20261013-201352-8194746e.png'),
+      fixed('ui.explore','探索提示、交互、对话与招募','MVP',1,'production','M2 已实现移动提示和 NPC 对话；招募在 M4'),
     ]),
     sub('battle-ui','战斗界面',[
       fixed('ui.battle-hud','五人队伍、HP/能量、角色切换','MVP'),fixed('ui.skills','快捷技能与暂停指令菜单','MVP'),fixed('ui.results','战斗结算与收益','MVP'),

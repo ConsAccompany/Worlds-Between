@@ -50,7 +50,7 @@ func _build_ui() -> void:
 
 	start_button = Button.new()
 	start_button.custom_minimum_size = Vector2(0, 36)
-	start_button.pressed.connect(func(): get_tree().change_scene_to_file("res://scenes/prototype_room.tscn"))
+	start_button.pressed.connect(func(): get_tree().change_scene_to_file("res://scenes/scifi_world_map.tscn"))
 	column.add_child(start_button)
 
 	language_button = Button.new()

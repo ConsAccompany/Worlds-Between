@@ -13,11 +13,11 @@ func _run_checks() -> void:
 	var menu: Node = current_scene
 	if not _check(menu != null, "menu scene loads"):
 		return
-	if not _check(menu.get("start_button").text == "开始原型", "Chinese menu label"):
+	if not _check(menu.get("start_button").text == "开始探索", "Chinese menu label"):
 		return
 	app.toggle_language()
 	await process_frame
-	if not _check(menu.get("start_button").text == "Start prototype", "English menu label"):
+	if not _check(menu.get("start_button").text == "Start exploring", "English menu label"):
 		return
 	if not _check(InputMap.has_action("move_left") and InputMap.has_action("move_right"), "movement actions"):
 		return
@@ -25,8 +25,14 @@ func _run_checks() -> void:
 	start_button.pressed.emit()
 	await process_frame
 	await process_frame
+	var map: Node2D = current_scene
+	if not _check(map != null and map.name == "ScifiWorldMap", "menu enters world map"):
+		return
+	change_scene_to_file("res://scenes/prototype_room.tscn")
+	await process_frame
+	await process_frame
 	var room: Node2D = current_scene
-	if not _check(room != null and room.name == "PrototypeRoom", "menu enters prototype"):
+	if not _check(room != null and room.name == "PrototypeRoom", "foundation room loads"):
 		return
 	if not _check(room.get("hero").texture != null, "temporary hero sprite"):
 		return

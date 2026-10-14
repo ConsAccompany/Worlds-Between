@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
   "planVersion": "v0.1",
-  "updatedAt": "2026-10-13T19:01:27-04:00",
-  "currentStep": "M2",
+  "updatedAt": "2026-10-13T20:14:00-04:00",
+  "currentStep": "M3",
   "steps": [
     {
       "id": "M1",
@@ -22,16 +22,22 @@
     {
       "id": "M2",
       "title": "World map and exploration",
-      "status": "ready",
+      "status": "done",
       "summary": "Three destinations, top-down movement, NPCs, visible avoidable enemies.",
       "acceptance": "Reach and leave all three locations without developer tools; bypass one normal fight.",
-      "evidence": [],
+      "evidence": [
+        "game/tests/m2_smoke.gd: M2_SMOKE_OK (three destinations, map/area return, movement, NPC interaction, bypass, contact, enemy reset)",
+        "outputs/rpg-2-star-ocean-the-second_scifi-map_visual-proof_m2_20261013-201352-8194746e.png",
+        "outputs/rpg-2-star-ocean-the-second_scifi-city_visual-proof_m2_20261013-201352-4940f7f5.png",
+        "outputs/rpg-2-star-ocean-the-second_scifi-outskirts_visual-proof_m2_20261013-201352-7e3fc6e6.png",
+        "outputs/rpg-2-star-ocean-the-second_scifi-ruins_visual-proof_m2_20261013-201352-0302dc4c.png"
+      ],
       "blocker": null
     },
     {
       "id": "M3",
       "title": "Combat core",
-      "status": "todo",
+      "status": "ready",
       "summary": "Flat side-view arena, actions, energy, enemy types, post-battle recovery.",
       "acceptance": "Win or lose a contact battle; no jump; verify 20%/10% recovery and repeat encounters.",
       "evidence": [],
