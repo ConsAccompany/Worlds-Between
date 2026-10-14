@@ -258,6 +258,16 @@
       ['selout','选择性描线版 selout','轮廓按各材质取最深色，26 色；无外挑睫毛，带腮红像素。','4d141ad5'],
     ];
     const idleRefineCard=([variant,title,note,hash])=>`<section class="card" id="idle-refine-${variant}"><div class="step-top"><h3>女主南向静态待机 · ${esc(title)}</h3>${badge('待用户审阅 · 未批准','warn')}</div><p class="small">${esc(note)} 80×112 单帧，可见身体 43×96，按 48 逻辑像素显示。</p><figure class="visual-sample idle-refine"><a href="${idleRefineCapture('city',variant)}" target="_blank" rel="noopener"><img src="${idleRefineCapture('city',variant)}" alt="科技城 1280×720 Godot 实机画面：女主南向待机 ${esc(variant)} 候选与 32×48 占位并排" loading="lazy"></a><figcaption>科技城 1280×720 实机画面，左侧为旧 32×48 占位。点击打开原尺寸。</figcaption></figure><p class="small">其他 1280×720 实机画面：<a href="${idleRefineCapture('outskirts-bright',variant)}" target="_blank" rel="noopener">明亮城外</a> · <a href="${idleRefineCapture('prototype-room-dark',variant)}" target="_blank" rel="noopener">暗色原型室</a></p><p class="muted small">先定静态帧，行走帧暂停，尚未开始任何行走帧。未接入可玩角色。探索精灵验收仍为 0/52，场景画质仍为 0/11。自动 QA 只做测量，未经人工审阅。</p><p class="muted small receipt-name">源文件：game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-refine-${variant}-candidate_m8-v01_20261014-231100-${hash}.png</p></section>`;
+    // Selout v2 static polish (2026-10-14): the user chose selout v1 as closer and called v2 closer still, but v2 is NOT approved.
+    const seloutV2Capture=(area,variant)=>`/assets/rpg-2-star-ocean-the-second_${area}_protagonist-female-south-idle-selout-${variant}-h48_m8-v02_20261014-234215-2a1b6b58.png`;
+    const seloutV2Areas=[
+      ['city','科技城','科技城默认首访布局，左侧为旧 32×48 占位'],
+      ['outskirts-bright','明亮城外','阳光下的城外铺地（亮场景），右侧为旧 32×48 占位'],
+      ['survey-annex-room2-dark','暗色勘察附楼','科技城勘察附楼 2 号室（最暗的可玩房间），左侧为旧 32×48 占位'],
+    ];
+    const seloutV2Figure=([area,label,note])=>`<figure class="visual-sample idle-refine"><a href="${seloutV2Capture(area,'v2')}" target="_blank" rel="noopener"><img src="${seloutV2Capture(area,'v2')}" alt="${esc(label)} 1280×720 Godot 实机画面：女主南向待机 selout v2 候选" loading="lazy"></a><figcaption>${esc(label)} · ${esc(note)}。<a href="${seloutV2Capture(area,'v1-reference')}" target="_blank" rel="noopener">同场景 v1 对照</a></figcaption></figure>`;
+    const pilotDir='game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-';
+    const seloutV2Card=`<section class="card" id="idle-selout-v2"><div class="step-top"><h3>女主南向静态待机 · 选择性描线版 selout v2 精修</h3>${badge('比 v1 更接近 · 仍未批准','warn')}</div><p class="small">在 selout v1 上逐像素精修 550 个像素：马尾轮廓与留白、马尾暖色高光走向、3/4 侧脸五官与下巴、青色围巾与棕色外套分界、外套与双手分离。27 色（新增嘴部 1 色），80×112 单帧，可见身体 43×96，按 48 逻辑像素显示；第 72 行以下（护膝、腿、靴）与 v1 逐字节相同。</p><div class="idle-v2-grid">${seloutV2Areas.map(seloutV2Figure).join('')}</div><p class="small">另一张暗场景：<a href="${seloutV2Capture('prototype-room-dark','v2')}" target="_blank" rel="noopener">暗色原型测试室 v2</a>（<a href="${seloutV2Capture('prototype-room-dark','v1-reference')}" target="_blank" rel="noopener">v1 对照</a>）。均为单独的 1280×720 Godot 画面，v1 对照为同一次运行所拍。</p><p class="muted small"><strong>状态：未批准。</strong>用户认为 v2 比 v1 更接近，但尚未批准；静态帧继续打磨，行走帧仍暂停，尚未开始任何行走帧。未接入可玩角色。探索精灵验收仍为 0/52，场景画质仍为 0/11。自动 QA 只做测量（human_reviewed: false）。</p><p class="muted small receipt-name">v2 源文件：${pilotDir}selout-v2-polish-candidate_m8-v02_20261014-233300-d2eeefa2.png</p><p class="muted small receipt-name">v1 可编辑基线（Pixelorama .pxo，内容为 v1，不是 v2）：${pilotDir}selout-pixelorama-baseline_m8-v01_20261014-233500-5e93c40a.pxo</p></section>`;
     content.innerHTML=`${head('制作路线','新版 MVP：完整角色视觉身份与精致科技区场景',badge(done+' / '+p.steps.length+' 阶段','accent'))}
       <div class="card"><div class="step-top"><strong>已完成阶段</strong><span>${done} / ${p.steps.length}</span></div><div class="meter" role="progressbar" aria-valuemin="0" aria-valuemax="${p.steps.length}" aria-valuenow="${done}"><span style="width:${pct}%"></span></div><p class="muted small">当前重点：${current?esc(current.id+' · '+copy[current.id][0]):'全部阶段已完成'}。阶段数量不代表剩余工作量。</p></div>
       <div class="section-label">新版画面验收</div>
@@ -265,6 +275,9 @@
       <div class="section-label">女主南向静态待机 · 两张新候选待审阅</div>
       <p class="muted small">此前 Box 与 Lanczos 两张量化候选已被用户否定。以下两张为新的静态候选，各自独立审阅；不代表批准。</p>
       ${idleRefineCandidates.map(idleRefineCard).join('')}
+      <div class="section-label">女主南向静态待机 · selout v2 精修待审阅</div>
+      <p class="muted small">用户在上面两张中选了 selout v1，认为它更接近目标；v1 本身未获批准。下面是在 v1 基础上的 v2 静态精修，单独审阅。</p>
+      ${seloutV2Card}
       ${readinessSection()}
       <div class="section-label">分步实施</div>
       <div class="stack">${p.steps.map(step=>`<details class="group"><summary>${esc(step.id+' · '+copy[step.id][0])} <span class="group-count">${esc(status[step.status]||step.status)}</span></summary><div class="card"><p>${esc(copy[step.id][1])}</p><strong>验收标准</strong><p>${esc(copy[step.id][2])}</p>${step.details?.length?'<strong>当前内容</strong><ul>'+step.details.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>':''}${step.remaining?.length?'<strong>尚需完成</strong><ul>'+step.remaining.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>':''}${step.evidence?.length?'<strong>已有依据</strong><ul>'+step.evidence.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>':''}</div></details>`).join('')}</div>
