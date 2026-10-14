@@ -268,20 +268,26 @@ func _draw_enemy() -> void:
 	draw_rect(Rect2(enemy_position + Vector2(9, 11), Vector2(8, 7)), Color("#463942"))
 
 
+func _fit_city_actor(actor: Sprite2D) -> void:
+	# Anchor each cutout by its visible bounds, not shared transparent padding.
+	var bounds := actor.texture.get_image().get_used_rect()
+	var factor := 44.0 / maxf(float(bounds.size.y), 1.0)
+	actor.scale = Vector2(factor, factor)
+	actor.offset = actor.texture.get_size() * 0.5 - Vector2(bounds.position.x + bounds.size.x * 0.5, bounds.end.y)
+
+
 func _build_actors() -> void:
 	hero = Sprite2D.new()
 	if destination_id == "scifi.city":
 		hero.texture = CITY_HERO_FEMALE if AppState.hero_appearance == "female" else CITY_HERO_MALE
 		hero.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
-		hero.scale = Vector2(0.054, 0.054)
-		hero.offset = Vector2(0, -704)
+		_fit_city_actor(hero)
 		hero.position = CITY_SPAWN
 		hero.z_index = int(hero.position.y)
 		city_npc = Sprite2D.new()
 		city_npc.texture = CITY_LIANG_XU
 		city_npc.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
-		city_npc.scale = Vector2(0.054, 0.054)
-		city_npc.offset = Vector2(0, -704)
+		_fit_city_actor(city_npc)
 		city_npc.position = npc_position
 		city_npc.z_index = int(npc_position.y)
 		city_npc.visible = not AppState.recruited_members.has(recruit_id)
@@ -357,7 +363,7 @@ func _build_ui() -> void:
 	enemy_label.visible = enemy_visible
 	canvas.add_child(enemy_label)
 	npc_label = Label.new()
-	npc_label.position = npc_position + Vector2(-38, -49)
+	npc_label.position = npc_position + Vector2(-38, -58)
 	npc_label.add_theme_font_size_override("font_size", 11)
 	npc_label.add_theme_color_override("font_color", Color("#f4e6b9"))
 	canvas.add_child(npc_label)
@@ -388,6 +394,9 @@ func _build_ui() -> void:
 		trace_label.add_theme_color_override("font_color", Color("#f0dda8"))
 		canvas.add_child(trace_label)
 		trace_labels.append(trace_label)
+	for marker_label in [npc_label, station_label, survey_label, assist_label] + trace_labels:
+		marker_label.add_theme_color_override("font_outline_color", Color("#0d1723"))
+		marker_label.add_theme_constant_override("outline_size", 3)
 	_build_dialogue(canvas)
 
 
