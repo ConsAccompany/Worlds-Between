@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "project": "rpg-2-star-ocean-the-second",
+  "status": "设计提案，尚待玩家确认",
+  "scope": "剑术、重武、武道、长兵四条武艺系列的七节点职业技能树",
+  "trees": [
+    {"seriesId":"sword","name":"剑术","nodes":[
+      {"id":"sword_double_cut","tier":1,"name":"连刃","type":"主动","energy":14,"tags":["斩击","连段"],"effect":"对近身目标连续出两剑；第二剑须在第一剑命中后才触发。"},
+      {"id":"sword_stance_break","tier":2,"branch":"破势","name":"破势斩","type":"主动","energy":20,"tags":["斩击","打断"],"effect":"攻击正在蓄力的敌人，命中时削弱其本次攻击并提高打断机会。"},
+      {"id":"sword_parry_focus","tier":2,"branch":"守势","name":"听锋","type":"被动","energy":0,"tags":["格挡","反击"],"effect":"成功防御后，下一次普通剑击获得短暂伤害加成；不能无限叠加。"},
+      {"id":"sword_flowing_blades","tier":3,"name":"流刃追击","type":"主动","energy":26,"tags":["斩击","机动"],"effect":"追上刚被击退的目标并追加一剑；若目标未被击退，则只完成普通追击。"},
+      {"id":"sword_riposte","tier":4,"branch":"破势","name":"逆隙反斩","type":"主动","energy":30,"tags":["反击","打断"],"effect":"准备一次短时反击窗口；敌人出手时可抢先斩击并削弱其攻击。"},
+      {"id":"sword_precise_edge","tier":4,"branch":"守势","name":"无隙锋线","type":"被动","energy":0,"tags":["连段","破甲"],"effect":"连续命中同一目标后，下一次剑技忽略其部分护甲；换目标后重新计数。"},
+      {"id":"sword_boundary_slash","tier":5,"name":"界线一闪","type":"主动","energy":46,"tags":["斩击","范围"],"effect":"沿固定战场快速穿过数名敌人并各斩一次；没有目标时不产生额外攻击。"}
+    ]},
+    {"seriesId":"heavy","name":"重武","nodes":[
+      {"id":"heavy_armor_crack","tier":1,"name":"裂甲重击","type":"主动","energy":18,"tags":["冲击","破甲"],"effect":"以较长起手换取高冲击伤害，命中后短暂降低目标护甲。"},
+      {"id":"heavy_shock_push","tier":2,"branch":"震击","name":"震退","type":"主动","energy":22,"tags":["冲击","控场"],"effect":"将近身敌人击退一小段距离；大型敌人仅受到短暂硬直。"},
+      {"id":"heavy_guard_charge","tier":2,"branch":"蓄势","name":"持重蓄势","type":"被动","energy":0,"tags":["蓄力","守护"],"effect":"防御成功后积累一层冲击，下一次重武主动技消耗层数提高效果。"},
+      {"id":"heavy_line_sweep","tier":3,"name":"破阵横扫","type":"主动","energy":30,"tags":["冲击","范围"],"effect":"横扫前方多名敌人；距离越远的目标受到的伤害越低。"},
+      {"id":"heavy_plate_collapse","tier":4,"branch":"震击","name":"崩甲连携","type":"主动","energy":32,"tags":["破甲","协同"],"effect":"重击已被破甲的目标，使其接下来承受一次队友攻击时受到额外伤害。"},
+      {"id":"heavy_unmoving_anchor","tier":4,"branch":"蓄势","name":"山岳定锚","type":"被动","energy":0,"tags":["稳固","守护"],"effect":"蓄力期间降低被打断概率；连续受击仍可打断，不提供免伤。"},
+      {"id":"heavy_earth_pulse","tier":5,"name":"地脉震响","type":"主动","energy":50,"tags":["冲击","范围"],"effect":"释放一次以自身为中心的冲击波，命中附近敌人；效果不依赖场地地形、高度或障碍。"}
+    ]},
+    {"seriesId":"martial","name":"武道","nodes":[
+      {"id":"martial_breath_strike","tier":1,"name":"调息击","type":"主动","energy":12,"tags":["体术","连段"],"effect":"短距离打击目标，命中时为下一次防御缩短起手时间。"},
+      {"id":"martial_borrow_force","tier":2,"branch":"借力","name":"借力回击","type":"被动","energy":0,"tags":["格挡","反击"],"effect":"成功防御近身攻击后，下一次普通攻击附加少量反击伤害。"},
+      {"id":"martial_still_breath","tier":2,"branch":"调息","name":"稳息","type":"主动","energy":18,"tags":["体魄","治疗"],"effect":"短时间内缓慢恢复少量自身生命；战斗中使用后需等待较长间隔才能再用。"},
+      {"id":"martial_chain_step","tier":3,"name":"连环身法","type":"主动","energy":24,"tags":["机动","反击"],"effect":"快速闪开当前目标的近身攻击，并在成功闪避时追加一次体术攻击。"},
+      {"id":"martial_yielding_palm","tier":4,"branch":"借力","name":"化劲掌","type":"主动","energy":28,"tags":["反击","控场"],"effect":"在短时窗口中把部分近身冲击转为推退目标的掌击；对远距攻击无效。"},
+      {"id":"martial_clear_mind","tier":4,"branch":"调息","name":"静心守势","type":"被动","energy":0,"tags":["体魄","抗性"],"effect":"提高常见异常状态的抵抗力；连续防御时效果小幅增强但有上限。"},
+      {"id":"martial_formless_chain","tier":5,"name":"无形连环","type":"主动","energy":44,"tags":["体术","连段"],"effect":"根据目标当前是否蓄力选择破势或追击的连续体术；每次施放仅走其中一种结果。"}
+    ]},
+    {"seriesId":"polearm","name":"长兵","nodes":[
+      {"id":"polearm_line_thrust","tier":1,"name":"直线突刺","type":"主动","energy":14,"tags":["穿刺","控距"],"effect":"在中距离向前突刺，敌人过近时威力降低。"},
+      {"id":"polearm_intercept_sweep","tier":2,"branch":"拦截","name":"拦截扫","type":"主动","energy":20,"tags":["控距","守护"],"effect":"扫击正接近队友的敌人，命中时短暂减速。"},
+      {"id":"polearm_point_guard","tier":2,"branch":"压制","name":"支点守势","type":"被动","energy":0,"tags":["控距","格挡"],"effect":"防御时扩大正前方可拦截的近身范围，但背后攻击不受影响。"},
+      {"id":"polearm_pierce_line","tier":3,"name":"贯阵","type":"主动","energy":28,"tags":["穿刺","范围"],"effect":"在一条水平攻击线上依次命中敌人；后续目标伤害递减。"},
+      {"id":"polearm_wheel_control","tier":4,"branch":"拦截","name":"牵制旋","type":"主动","energy":30,"tags":["控场","范围"],"effect":"短时间压制周围敌人的接近速度，为队友重整距离。"},
+      {"id":"polearm_shared_line","tier":4,"branch":"压制","name":"枪线协防","type":"被动","energy":0,"tags":["守护","协同"],"effect":"当附近队友防御成功时，长兵角色的下一次突刺获得小幅控距加成。"},
+      {"id":"polearm_star_pierce","tier":5,"name":"星轨贯穿","type":"主动","energy":46,"tags":["穿刺","标记"],"effect":"连续突刺同一直线上的敌人，对已被队友标记的目标追加一击。"}
+    ]}
+  ]
+}

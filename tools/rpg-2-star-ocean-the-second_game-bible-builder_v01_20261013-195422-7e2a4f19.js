@@ -10,6 +10,7 @@ const names = {
   mvp: 'rpg-2-star-ocean-the-second_mvp-implementation-plan_v01_20261013-183550-0f7c4d21.md',
   jobs: 'rpg-2-star-ocean-the-second_all-jobs_five-tier-proposal_v01_20261013-224236-6f2b9c11.json',
   skillTrees: 'rpg-2-star-ocean-the-second_four-job-trees_skill-node-proposal_v01_20261013-224554-5a72d0be.json',
+  martialTrees: 'rpg-2-star-ocean-the-second_martial-job-trees_skill-node-proposal_v01_20261013-224832-1c9e73ab.json',
   inventory: 'rpg-2-star-ocean-the-second_asset-inventory_state_v01_20261013-191033-7d1e0a8b.json',
 };
 const dest = path.join(out, 'rpg-2-star-ocean-the-second_game-bible_state_v01_20261013-195422-b8c16d42.json');
@@ -20,11 +21,13 @@ const extra = read('extra');
 const inventory = JSON.parse(read('inventory'));
 const jobs = JSON.parse(read('jobs'));
 const skillTrees = JSON.parse(read('skillTrees'));
+const martialTrees = JSON.parse(read('martialTrees'));
+const skillTreeProposal = {...skillTrees, trees:[...skillTrees.trees, ...martialTrees.trees]};
 if (jobs.series?.length !== 20 || !['武艺','应变','研学','灵觉'].every(aptitude => jobs.series.filter(series => series.aptitude === aptitude).length === 5) || jobs.series.some(series => series.stages?.length !== 5 || !series.finalQuest)) {
   throw new Error('Job proposal must contain four aptitudes with five complete series each');
 }
-if (skillTrees.trees?.length !== 4 || skillTrees.trees.some(tree => !jobs.series.some(series => series.id === tree.seriesId) || tree.nodes?.length !== 7 || [1,2,3,4,5].some(tier => tree.nodes.filter(node => node.tier === tier).length !== ([1,3,5].includes(tier) ? 1 : 2))) || new Set(skillTrees.trees.flatMap(tree => tree.nodes.map(node => node.id))).size !== 28) {
-  throw new Error('Skill tree proposal must contain four complete seven-node examples');
+if (skillTreeProposal.trees.length !== 8 || new Set(skillTreeProposal.trees.map(tree => tree.seriesId)).size !== 8 || skillTreeProposal.trees.some(tree => !jobs.series.some(series => series.id === tree.seriesId) || tree.nodes?.length !== 7 || [1,2,3,4,5].some(tier => tree.nodes.filter(node => node.tier === tier).length !== ([1,3,5].includes(tier) ? 1 : 2))) || new Set(skillTreeProposal.trees.flatMap(tree => tree.nodes.map(node => node.id))).size !== 56) {
+  throw new Error('Skill tree proposal must contain eight complete seven-node series');
 }
 const portraits = new Map(inventory.categories[0].subcategories[0].items.map(item => [item.id.slice(9), item]));
 const slug = text => text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
@@ -110,12 +113,12 @@ if (chapters.length!==9 || characters.length!==51 || characters.at(-1).number!==
 
 const openQuestions = [
   {title:'10 位可恋爱伙伴',detail:'人选与开放阶段尚未确定；不要从角色画像推断恋爱资格。'},
-  {title:'职业技能与数值',detail:'20 个系列的五阶名称及终阶任务已有待确认提案；四条系列已有七节点技能树样板，其余十六条与实际平衡数值仍需设计。'},
+  {title:'职业技能与数值',detail:'20 个系列的五阶名称及终阶任务已有待确认提案；八条系列已有七节点技能树样板，其余十二条与实际平衡数值仍需设计。'},
   {title:'地点与任务内容',detail:'五个板块的城市、社区、野外地点和独立主线任务尚需逐项命名与编写。'},
   {title:'数值与经营平衡',detail:'JP 折扣、敌人数值、终局难度奖励、商会利润与日历结算需试玩后定稿。'},
   {title:'组合技与 AI 细则',detail:'关系及技能标签的组合规则、AI 条件冲突与自动战斗优先级需细化。'},
 ];
-const sources = Object.entries(names).filter(([key])=>!['inventory','jobs','skillTrees'].includes(key)).map(([id,filename])=>({id,filename,url:'/source/'+id}));
+const sources = Object.entries(names).filter(([key])=>!['inventory','jobs','skillTrees','martialTrees'].includes(key)).map(([id,filename])=>({id,filename,url:'/source/'+id}));
 const bible = {
   schemaVersion:1,
   project:'rpg-2-star-ocean-the-second',
@@ -133,7 +136,7 @@ const bible = {
     {label:'同伴',value:'50 位 · 最多 5 人上场'},
     {label:'职业',value:'20 系列 × 5 阶'},
   ],
-  chapters, characters, jobProposal:jobs, skillTreeProposal:skillTrees, openQuestions, sources,
+  chapters, characters, jobProposal:jobs, skillTreeProposal, openQuestions, sources,
 };
 fs.writeFileSync(dest,JSON.stringify(bible,null,2)+'\n','utf8');
 console.log(JSON.stringify({file:path.relative(root,dest),chapters:chapters.length,characters:characters.length,sources:sources.length}));
