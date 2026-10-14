@@ -83,10 +83,12 @@
   function renderRules() {
     const chapters=state.bible.chapters.filter(c=>[1,3,4,5,6,7].includes(c.number));
     const selected=chapters.find(c=>c.id===state.chapter)||chapters[0];
+    const jobs=state.bible.jobProposal;
+    const jobProposal=selected.number===4&&jobs ? `<div class="section-label">20 系列 × 5 阶 · 待确认提案</div><div class="card small"><strong>设计边界</strong><ul>${jobs.rules.map(rule=>`<li>${esc(rule)}</li>`).join('')}</ul></div>${['武艺','应变','研学','灵觉'].map(aptitude=>`<details class="group"><summary>${aptitude} · 5 个系列</summary><div class="card">${jobs.series.filter(series=>series.aptitude===aptitude).map(series=>`<details class="subgroup"><summary>${esc(series.name)} <span class="group-count">${esc(series.en)}</span></summary><div class="card small"><p><strong>定位：</strong>${esc(series.role)}</p><p><strong>五阶：</strong>${series.stages.map((name,index)=>`${index+1}. ${esc(name)}`).join(' → ')}</p><p><strong>终阶解锁：</strong>${esc(series.finalQuest)}</p></div></details>`).join('')}</div></details>`).join('')}<p class="muted small">本表先确定职业轮廓；各阶技能树、JP 成本和数值仍待设计。</p>`:'';
     content.innerHTML=`${head('系统规则','点击章节阅读完整需求基线',badge('6 个章节','accent'))}
       <div class="subnav" role="group" aria-label="规则章节">${chapters.map(c=>`<button type="button" data-chapter="${c.id}" aria-pressed="${c.id===selected.id}">${esc(c.title)}</button>`).join('')}</div>
       <div class="card"><div class="kicker">第 ${selected.number} 章 · ${esc(selected.status)}</div><h3>${esc(selected.title)}</h3><p class="muted">${esc(selected.summary)}</p></div>
-      <article class="document">${markdown(selected.body)}${sourceLine(selected.source)}</article>`;
+      <article class="document">${markdown(selected.body)}${sourceLine(selected.source)}</article>${jobProposal}`;
     content.querySelectorAll('[data-chapter]').forEach(el=>el.addEventListener('click',()=>{state.chapter=el.dataset.chapter;render();}));
   }
   function renderCharacters() {
@@ -157,12 +159,14 @@
       <details class="group" id="playtest-feedback" ${state.feedbackOpen?'open':''}><summary>试玩感受记录</summary><div class="card"><p class="muted small">试玩时随手记下观察；输入后自动保存在当前浏览器。完成后请把反馈发到聊天里，以便纳入项目验收。</p>${feedbackFields}<p class="muted small" role="status" id="feedback-status">等待输入</p></div></details>
       <div class="section-label">仍待确定</div>
       <div class="stack">${state.bible.openQuestions.map(q=>`<div class="card"><h3>${esc(q.title)}</h3><p>${esc(q.detail)}</p></div>`).join('')}</div>
+      <div class="card"><button type="button" class="chip" id="open-job-proposal">查看 20 系列五阶职业提案</button></div>
       <div class="section-label">设计稿中的实施顺序与待细化清单</div>
       <div class="stack">${state.bible.chapters.filter(c=>[8,9].includes(c.number)).map(c=>`<details class="group" data-production-chapter="${c.id}"><summary>${esc(c.title)}</summary><div class="document">${markdown(c.body)}${sourceLine(c.source)}</div></details>`).join('')}</div>
       <div class="section-label">计划与完整实施顺序</div>
       <div class="card"><a href="/source/mvp" target="_blank" rel="noopener">打开 MVP 实施计划</a> · <a href="/source/brief" target="_blank" rel="noopener">打开完整设计稿</a></div>`;
     content.querySelector('#refresh-playtests').addEventListener('click',()=>refreshPlaytests().catch(()=>{document.getElementById('footer-status').textContent='试玩记录暂时无法读取';}));
     content.querySelector('#start-playtest').addEventListener('click',startPlaytest);
+    content.querySelector('#open-job-proposal').addEventListener('click',()=>navigate('rules',{chapter:'chapter-4'}));
     content.querySelector('#playtest-feedback').addEventListener('toggle',event=>{state.feedbackOpen=event.target.open;});
     content.querySelectorAll('[data-feedback]').forEach(field=>field.addEventListener('input',()=>{
       const message=content.querySelector('#feedback-status');
