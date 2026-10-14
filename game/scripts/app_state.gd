@@ -29,7 +29,7 @@ const STRINGS := {
 		"npc_prompt": "靠近人物按 E 交谈",
 		"enemy_label": "自动机械",
 		"battle_title": "即时战斗 · %s",
-		"battle_help": "A/D 移动 · J 攻击 · K 闪避 · L 防御 · Q 技能 · Tab 换人 · P 暂停 · T 自动",
+		"battle_help": "A/D 移动 · J 攻击 · K 闪避 · L 防御 · Q 个人技 · R 职业技 · Tab 换人 · P 暂停 · T 自动",
 		"battle_attack": "攻击",
 		"battle_dodge": "闪避",
 		"battle_guard": "防御",
@@ -88,6 +88,26 @@ const STRINGS := {
 		"battle_skill_used": "%s 使用了 %s。",
 		"battle_member_down": "%s 倒下了。",
 		"battle_party_status": "队伍：%s",
+		"growth_title": "角色成长与职业",
+		"growth_open": "角色与职业",
+		"growth_back": "返回地图",
+		"growth_pending": "达到十级关口：请选择职业去向",
+		"growth_level": "等级 %d · XP %d/%d · JP %d",
+		"growth_aptitudes": "天分  武 %d · 变 %d · 学 %d · 灵 %d  （60 可入职）",
+		"growth_job": "当前：%s · 第 %d 阶",
+		"growth_stay": "留任当前职业",
+		"growth_promote": "晋升当前系列",
+		"growth_switch": "转入 %s",
+		"growth_upgrade": "升级技能 %s · %d JP",
+		"growth_skill": "职业技能：%s",
+		"growth_personal": "个人技能 %s Lv%d · 升级 %d JP",
+		"growth_rewards": "战斗奖励：%d XP / %d JP；候补获得 25%%",
+		"growth_locked": "天分未达到 60",
+		"growth_done": "职业选择已完成",
+		"job_skill_sword_slash": "破锋斩", "job_skill_sword_arc": "回旋剑势",
+		"job_skill_firearms_shot": "精准射击", "job_skill_firearms_burst": "连发压制",
+		"job_skill_tactics_mark": "战术标记", "job_skill_tactics_rally": "全队整备",
+		"job_skill_relics_echo": "遗物共鸣", "job_skill_relics_delay": "时序迟滞",
 		"bypass_notice": "已绕过敌人，抵达另一侧。",
 	},
 	"en": {
@@ -116,7 +136,7 @@ const STRINGS := {
 		"npc_prompt": "Approach someone and press E to talk",
 		"enemy_label": "Automated machine",
 		"battle_title": "Real-time battle · %s",
-		"battle_help": "A/D move · J attack · K dodge · L guard · Q skill · Tab swap · P pause · T auto",
+		"battle_help": "A/D move · J attack · K dodge · L guard · Q personal · R job · Tab swap · P pause · T auto",
 		"battle_attack": "Attack",
 		"battle_dodge": "Dodge",
 		"battle_guard": "Guard",
@@ -175,6 +195,26 @@ const STRINGS := {
 		"battle_skill_used": "%s used %s.",
 		"battle_member_down": "%s fell.",
 		"battle_party_status": "Party: %s",
+		"growth_title": "Character Growth & Jobs",
+		"growth_open": "Characters & Jobs",
+		"growth_back": "Back to map",
+		"growth_pending": "Level 10 threshold: choose a job path",
+		"growth_level": "Level %d · XP %d/%d · JP %d",
+		"growth_aptitudes": "Aptitudes  Martial %d · Adaptive %d · Scholarly %d · Spiritual %d  (60 required)",
+		"growth_job": "Current: %s · Stage %d",
+		"growth_stay": "Stay in current job",
+		"growth_promote": "Promote in current series",
+		"growth_switch": "Switch to %s",
+		"growth_upgrade": "Upgrade %s · %d JP",
+		"growth_skill": "Job skills: %s",
+		"growth_personal": "Personal %s Lv%d · upgrade %d JP",
+		"growth_rewards": "Battle rewards: %d XP / %d JP; reserves earn 25%%",
+		"growth_locked": "Aptitude below 60",
+		"growth_done": "Job choice complete",
+		"job_skill_sword_slash": "Edge Break", "job_skill_sword_arc": "Sword Arc",
+		"job_skill_firearms_shot": "Precision Shot", "job_skill_firearms_burst": "Suppressive Burst",
+		"job_skill_tactics_mark": "Tactical Mark", "job_skill_tactics_rally": "Team Rally",
+		"job_skill_relics_echo": "Relic Echo", "job_skill_relics_delay": "Time Delay",
 		"bypass_notice": "You bypassed the enemy and reached the far side.",
 	},
 }
@@ -192,6 +232,7 @@ var enemy_cleared_for_return := false
 var returning_from_battle := false
 var battle_transition_started_usec := 0
 var last_battle_transition_ms := 0.0
+var growth_return_scene := "res://scenes/scifi_world_map.tscn"
 
 const DESTINATIONS := ["scifi.city", "scifi.outskirts", "scifi.ruins"]
 const DESTINATION_KEYS := {
@@ -230,7 +271,7 @@ func select_destination(destination_id: String) -> bool:
 
 
 func begin_new_run() -> void:
-	hero_state = {"hp": 100, "max_hp": 100, "energy": 60, "max_energy": 60, "level": 1, "job_series": "sword", "job_stage": 1, "ai_policy": "balanced"}
+	hero_state = {"hp": 100, "max_hp": 100, "energy": 60, "max_energy": 60, "level": 1, "xp": 0, "jp": 0, "pending_job_choices": 0, "job_series": "sword", "job_stage": 1, "job_records": {"sword": {"stage": 1, "skills": {"sword_slash": 1}}}, "personal_skill_rank": 1, "aptitudes": [60, 60, 60, 60], "ai_policy": "balanced"}
 	member_states.clear()
 	active_party_ids = ["hero"]
 	recruited_members.clear()
@@ -239,6 +280,7 @@ func begin_new_run() -> void:
 	enemy_cleared_for_return = false
 	returning_from_battle = false
 	current_destination_id = "scifi.city"
+	growth_return_scene = "res://scenes/scifi_world_map.tscn"
 
 
 func member_name(member_id: String) -> String:
@@ -262,13 +304,114 @@ func recruit_member(member_id: String) -> bool:
 	member_states[member_id] = {
 		"hp": int(definition["max_hp"]), "max_hp": int(definition["max_hp"]),
 		"energy": int(definition["max_energy"]), "max_energy": int(definition["max_energy"]),
-		"level": level, "job_series": definition["job_series"], "job_stage": stage,
+		"level": level, "xp": 0, "jp": 0, "pending_job_choices": 0,
+		"job_series": definition["job_series"], "job_stage": stage,
+		"job_records": {definition["job_series"]: {"stage": stage, "skills": {String(GrowthRules.SERIES[definition["job_series"]]["skills"][0]): 1, String(GrowthRules.SERIES[definition["job_series"]]["skills"][stage - 1]): 1}}},
+		"personal_skill_rank": mini(3, 1 + (level - 1) / 20),
 		"ai_policy": "balanced",
 		"learned_skill_ids": ["basic", "advanced"] if stage > 1 else ["basic"],
 		"aptitudes": definition["aptitudes"].duplicate(),
 	}
 	recruited_members[member_id] = true
 	active_party_ids.append(member_id)
+	return true
+
+
+func award_battle_rewards(enemy_id: String) -> Dictionary:
+	var xp := 26 if enemy_id == "patrol" else 44
+	var jp := 12 if enemy_id == "patrol" else 20
+	for member_id in active_party_ids:
+		_grant_growth(member_state(member_id), xp, jp)
+	for member_id in member_states:
+		if not active_party_ids.has(member_id):
+			_grant_growth(member_states[member_id], ceili(float(xp) * 0.25), ceili(float(jp) * 0.25))
+	return {"xp": xp, "jp": jp}
+
+
+func _grant_growth(member: Dictionary, xp: int, jp: int) -> void:
+	member["xp"] = int(member.get("xp", 0)) + xp
+	member["jp"] = int(member.get("jp", 0)) + jp
+	_process_levels(member)
+
+
+func _process_levels(member: Dictionary) -> void:
+	while int(member.get("pending_job_choices", 0)) == 0 and int(member["xp"]) >= GrowthRules.xp_to_next(int(member["level"])):
+		member["xp"] = int(member["xp"]) - GrowthRules.xp_to_next(int(member["level"]))
+		member["level"] = int(member["level"]) + 1
+		member["max_hp"] = int(member["max_hp"]) + 3
+		member["max_energy"] = int(member["max_energy"]) + 2
+		member["hp"] = member["max_hp"]
+		member["energy"] = member["max_energy"]
+		if int(member["level"]) % 10 == 0:
+			member["pending_job_choices"] = 1
+
+
+func has_pending_job_choice() -> bool:
+	for member_id in active_party_ids:
+		if int(member_state(member_id).get("pending_job_choices", 0)) > 0:
+			return true
+	return false
+
+
+func choose_job(member_id: String, action: String, target_series: String = "") -> bool:
+	var member := member_state(member_id)
+	if member.is_empty() or int(member.get("pending_job_choices", 0)) < 1:
+		return false
+	var current: String = member["job_series"]
+	var records: Dictionary = member["job_records"]
+	match action:
+		"stay":
+			pass
+		"promote":
+			if int(member["job_stage"]) >= 2:
+				return false
+			member["job_stage"] = int(member["job_stage"]) + 1
+			var record: Dictionary = records[current]
+			record["stage"] = member["job_stage"]
+			record["skills"][GrowthRules.current_skill_id(member)] = 1
+		"switch":
+			if target_series == current or not GrowthRules.can_enter(member, target_series):
+				return false
+			if not records.has(target_series):
+				records[target_series] = {"stage": 1, "skills": {String(GrowthRules.SERIES[target_series]["skills"][0]): 1}}
+			member["job_series"] = target_series
+			member["job_stage"] = int(records[target_series]["stage"])
+		_:
+			return false
+	member["pending_job_choices"] = int(member["pending_job_choices"]) - 1
+	_process_levels(member)
+	return true
+
+
+func upgrade_job_skill(member_id: String, skill_id: String) -> bool:
+	var member := member_state(member_id)
+	if member.is_empty():
+		return false
+	var series_id: String = member["job_series"]
+	var skills: Array = GrowthRules.SERIES[series_id]["skills"]
+	if not skills.has(skill_id) or skills.find(skill_id) >= int(member["job_stage"]):
+		return false
+	var record: Dictionary = member["job_records"][series_id]
+	var rank := int(record["skills"].get(skill_id, 0))
+	var cost := GrowthRules.jp_cost(member, series_id, rank + 1)
+	if cost < 0 or int(member["jp"]) < cost:
+		return false
+	member["jp"] = int(member["jp"]) - cost
+	record["skills"][skill_id] = rank + 1
+	return true
+
+
+func upgrade_personal_skill(member_id: String) -> bool:
+	var member := member_state(member_id)
+	if member.is_empty() or not MEMBER_DEFS.has(member_id):
+		return false
+	var rank := int(member.get("personal_skill_rank", 1))
+	var home_series: String = MEMBER_DEFS[member_id]["job_series"]
+	var cost := GrowthRules.jp_cost(member, home_series, rank + 1)
+	if cost < 0 or int(member.get("jp", 0)) < cost:
+		return false
+	member["jp"] = int(member["jp"]) - cost
+	member["personal_skill_rank"] = rank + 1
 	return true
 
 
@@ -303,6 +446,7 @@ func _install_default_controls() -> void:
 	_add_key_action("battle_pause", KEY_P)
 	_add_key_action("battle_auto", KEY_T)
 	_add_key_action("battle_skill", KEY_Q)
+	_add_key_action("battle_job_skill", KEY_R)
 
 
 func _add_key_action(action: StringName, key: Key) -> void:

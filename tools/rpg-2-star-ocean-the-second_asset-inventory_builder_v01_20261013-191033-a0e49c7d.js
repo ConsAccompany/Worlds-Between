@@ -105,12 +105,12 @@ const categories = [
     ]),
     sub('battle-ui','战斗界面',[
       fixed('ui.battle-hud','五人队伍、HP/能量、角色切换','MVP',1,'production','M4 五人位、角色切换及全自动开关已实现；正式视觉待制作','rpg-2-star-ocean-the-second_scifi-party_battle-hud_m4_20261013-203138-11f66e25.png'),
-      fixed('ui.skills','快捷技能与暂停指令菜单','MVP',1,'production','M4 Q 快捷技能、暂停技能与队友指令已实现；职业技能在 M5','rpg-2-star-ocean-the-second_scifi-party_pause-orders_m4_20261013-203138-e007d25b.png'),
-      fixed('ui.results','战斗结算与收益','MVP',1,'production','M3 已有胜败与恢复结算；经验、JP 等收益在 M5','rpg-2-star-ocean-the-second_scifi-patrol_victory-visual-proof_m3_20261013-201830-4cdeebfa.png'),
+      fixed('ui.skills','快捷技能与暂停指令菜单','MVP',1,'production','M5 已接入 Q 个人技、R 当前职业技、暂停菜单选择职业前两阶技能；正式技能动效待制作','rpg-2-star-ocean-the-second_scifi-party_job-skills-pause_m5_20261013-204216-b5254efa.png'),
+      fixed('ui.results','战斗结算与收益','MVP',1,'production','M5 已接入独立 XP/JP、升级回满与职业关口；正式结算视觉待制作','rpg-2-star-ocean-the-second_scifi-patrol_victory-visual-proof_m3_20261013-201830-4cdeebfa.png'),
     ]),
     sub('management','角色与系统',[
       fixed('ui.party','队伍与候补','MVP',1,'production','M4 五人上场位已实现；候补管理在队伍扩容时补齐','rpg-2-star-ocean-the-second_scifi-party_battle-hud_m4_20261013-203138-11f66e25.png'),
-      fixed('ui.jobs','天分、职业树、技能 JP','MVP'),fixed('ui.saves','自动/手动存档和加载','MVP'),fixed('ui.settings','语言、声音与输入设置','MVP'),
+      fixed('ui.jobs','天分、职业树、技能 JP','MVP',1,'production','M5 四项天分、四系列前两阶、十级必选、职业与个人技能 JP 升级已可操作；正式视觉待制作','rpg-2-star-ocean-the-second_hero_promoted-skill-growth_m5_20261013-204016-031a5f3d.png'),fixed('ui.saves','自动/手动存档和加载','MVP'),fixed('ui.settings','语言、声音与输入设置','MVP'),
       fixed('ui.guild','商会经营和周结算','Full'),fixed('ui.reputation','板块与全球名声','Full'),fixed('ui.relationship','关系与组合技','Full'),fixed('ui.codex','考古记录与发现图鉴','Full'),
     ]),
   ]),

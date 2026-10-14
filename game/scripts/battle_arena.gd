@@ -22,12 +22,15 @@ var controlled_index := 0
 var auto_mode := false
 var paused := false
 var queued_skill := false
+var queued_job_skill := false
+var queued_job_skill_id := ""
 var selected_order_id := ""
 var next_attack_bonus := 0
 var battle_finished := false
 var battle_won := false
 var feedback_key := "battle_ready"
 var feedback_message := ""
+var result_reward_text := ""
 
 var title_label: Label
 var help_label: Label
@@ -45,6 +48,7 @@ var quick_skill_button: Button
 var pause_overlay: ColorRect
 var pause_title: Label
 var pause_skill_button: Button
+var pause_job_skill_buttons: Array[Button] = []
 var pause_target_label: Label
 var pause_order_feedback: Label
 var pause_policy_button: Button
@@ -89,6 +93,8 @@ func _process(delta: float) -> void:
 			_try_dodge()
 		if Input.is_action_just_pressed("battle_skill"):
 			_use_skill()
+		if Input.is_action_just_pressed("battle_job_skill"):
+			_use_job_skill()
 		if float(current["dodge_time"]) == 0.0:
 			current["x"] = clampf(float(current["x"]) + Input.get_axis("move_left", "move_right") * MOVE_SPEED * delta, 28.0, 612.0)
 	for index in fighters.size():
@@ -136,6 +142,8 @@ func _update_ai(index: int, delta: float) -> void:
 	if float(fighter["dodge_time"]) > 0.0:
 		return
 	if (command == "skill" or (command == "default" and policy == "aggressive")) and float(fighter["skill_cooldown"]) == 0.0 and int(member["energy"]) >= 14:
+		if int(member.get("level", 1)) >= 10 and _use_job_skill(index):
+			return
 		if _use_skill(index):
 			return
 	if separation > float(definition["attack_range"]) - 8.0:
@@ -232,20 +240,67 @@ func _use_skill(index: int = -1) -> bool:
 		return false
 	member["energy"] = int(member["energy"]) - cost
 	fighter["skill_cooldown"] = 2.2
+	var rank := int(member.get("personal_skill_rank", 1))
 	match member_id:
 		"hero":
-			next_attack_bonus += 5
+			next_attack_bonus += 5 * rank
 		"liang-xu":
 			for ally in fighters:
 				if ally != fighter and int(AppState.member_state(String(ally["id"]))["hp"]) > 0:
 					ally["command"] = "focus"
-					ally["boost"] = int(ally["boost"]) + 4
+					ally["boost"] = int(ally["boost"]) + 4 * rank
 		"zhao-ling":
-			next_attack_bonus += 8
+			next_attack_bonus += 8 * rank
 		"ji-cheng":
-			enemy_windup += 0.65 if enemy_windup > 0.0 else 0.0
-			enemy_cooldown += 0.65
+			enemy_windup += 0.65 * rank if enemy_windup > 0.0 else 0.0
+			enemy_cooldown += 0.65 * rank
 	feedback_message = AppState.text_for("battle_skill_used") % [AppState.member_name(member_id), AppState.text_for(String(AppState.MEMBER_DEFS[member_id]["skill_key"]))]
+	return true
+
+
+func _use_job_skill(index: int = -1, requested_skill_id: String = "") -> bool:
+	if index < 0:
+		index = controlled_index
+	if battle_finished or not _is_alive(index):
+		return false
+	var fighter: Dictionary = fighters[index]
+	var member_id: String = fighter["id"]
+	var member: Dictionary = AppState.member_state(member_id)
+	var skill_id := requested_skill_id if requested_skill_id != "" else GrowthRules.current_skill_id(member)
+	var available: Array = GrowthRules.SERIES[String(member["job_series"])]["skills"]
+	if not available.has(skill_id) or available.find(skill_id) >= int(member["job_stage"]):
+		return false
+	var rank := GrowthRules.skill_rank(member, skill_id)
+	var skill_stage: int = available.find(skill_id) + 1
+	var cost := 10 + 3 * skill_stage
+	if rank < 1 or float(fighter["skill_cooldown"]) > 0.0:
+		return false
+	if int(member["energy"]) < cost:
+		feedback_message = ""
+		feedback_key = "battle_no_energy"
+		return false
+	var series_id: String = member["job_series"]
+	var range_needed := 175.0 if series_id == "firearms" else 105.0
+	if ["sword", "firearms"].has(series_id) and absf(enemy_x - float(fighter["x"])) > range_needed:
+		feedback_message = ""
+		feedback_key = "battle_far"
+		return false
+	member["energy"] = int(member["energy"]) - cost
+	fighter["skill_cooldown"] = 2.2
+	match series_id:
+		"sword", "firearms":
+			enemy_hp = maxi(0, enemy_hp - (8 + rank * 4 + skill_stage * 3))
+		"tactics":
+			for ally in fighters:
+				if int(AppState.member_state(String(ally["id"]))["hp"]) > 0:
+					ally["boost"] = int(ally["boost"]) + 2 + rank * 2 + (skill_stage - 1) * 2
+		"relics":
+			enemy_cooldown += 0.25 + 0.2 * rank + 0.2 * (skill_stage - 1)
+			if enemy_windup > 0.0:
+				enemy_windup += 0.25 + 0.2 * rank + 0.2 * (skill_stage - 1)
+	feedback_message = AppState.text_for("battle_skill_used") % [AppState.member_name(member_id), AppState.text_for("job_skill_" + skill_id)]
+	if enemy_hp == 0:
+		_finish_battle(true)
 	return true
 
 
@@ -324,11 +379,21 @@ func _toggle_pause() -> void:
 		if queued_skill:
 			queued_skill = false
 			_use_skill(controlled_index)
+		if queued_job_skill:
+			queued_job_skill = false
+			_use_job_skill(controlled_index, queued_job_skill_id)
+			queued_job_skill_id = ""
 		_refresh_text()
 
 
 func _queue_skill() -> void:
 	queued_skill = true
+	_refresh_text()
+
+
+func _queue_job_skill(skill_id: String) -> void:
+	queued_job_skill = true
+	queued_job_skill_id = skill_id
 	_refresh_text()
 
 
@@ -373,6 +438,8 @@ func _finish_battle(won: bool) -> void:
 				AppState.member_states[member_id] = recovered
 		AppState.enemy_cleared_for_return = true
 		AppState.returning_from_battle = true
+		var rewards := AppState.award_battle_rewards(enemy_id)
+		result_reward_text = AppState.text_for("growth_rewards") % [int(rewards["xp"]), int(rewards["jp"])]
 	else:
 		AppState.enemy_cleared_for_return = false
 		AppState.returning_from_battle = false
@@ -386,7 +453,11 @@ func _finish_battle(won: bool) -> void:
 func _return_after_result() -> void:
 	if battle_won:
 		AppState.battle_enemy_id = ""
-		get_tree().change_scene_to_file("res://scenes/scifi_exploration_area.tscn")
+		if AppState.has_pending_job_choice():
+			AppState.growth_return_scene = "res://scenes/scifi_exploration_area.tscn"
+			get_tree().change_scene_to_file("res://scenes/growth_screen.tscn")
+		else:
+			get_tree().change_scene_to_file("res://scenes/scifi_exploration_area.tscn")
 	else:
 		_return_to_menu()
 
@@ -559,12 +630,20 @@ func _build_pause_overlay(canvas: CanvasLayer) -> void:
 	pause_title = _label(pause_overlay, Vector2(78, 57), 19, Color("#f2e7c8"))
 	pause_skill_button = Button.new()
 	pause_skill_button.position = Vector2(78, 99)
-	pause_skill_button.size = Vector2(270, 36)
+	pause_skill_button.size = Vector2(139, 36)
 	pause_skill_button.pressed.connect(_queue_skill)
 	pause_overlay.add_child(pause_skill_button)
+	for stage in 2:
+		var button := Button.new()
+		button.position = Vector2(223 + stage * 135, 99)
+		button.size = Vector2(130, 36)
+		button.add_theme_font_size_override("font_size", 10)
+		button.pressed.connect(_queue_job_skill.bind(""))
+		pause_overlay.add_child(button)
+		pause_job_skill_buttons.append(button)
 	pause_resume_button = Button.new()
-	pause_resume_button.position = Vector2(385, 99)
-	pause_resume_button.size = Vector2(169, 36)
+	pause_resume_button.position = Vector2(493, 99)
+	pause_resume_button.size = Vector2(61, 36)
 	pause_resume_button.pressed.connect(_toggle_pause)
 	pause_overlay.add_child(pause_resume_button)
 	pause_target_label = _label(pause_overlay, Vector2(78, 151), 12, Color("#bfd7d3"))
@@ -633,6 +712,17 @@ func _refresh_text() -> void:
 	var skill_key: String = AppState.MEMBER_DEFS[String(fighters[controlled_index]["id"])]["skill_key"]
 	quick_skill_button.text = "Q · " + AppState.text_for(skill_key)
 	pause_skill_button.text = AppState.text_for("battle_skill_use") + " · " + AppState.text_for(skill_key) + (" ✓" if queued_skill else "")
+	var job_skill_id := GrowthRules.current_skill_id(AppState.member_state(String(fighters[controlled_index]["id"])))
+	var controlled_member: Dictionary = AppState.member_state(String(fighters[controlled_index]["id"]))
+	var skills: Array = GrowthRules.SERIES[String(controlled_member["job_series"])]["skills"]
+	for stage in pause_job_skill_buttons.size():
+		var button: Button = pause_job_skill_buttons[stage]
+		var id: String = skills[stage]
+		button.visible = stage < int(controlled_member["job_stage"])
+		button.text = AppState.text_for("job_skill_" + id) + (" ✓" if queued_job_skill_id == id else "")
+		for connection in button.pressed.get_connections():
+			button.pressed.disconnect(connection["callable"])
+		button.pressed.connect(_queue_job_skill.bind(id))
 	pause_resume_button.text = AppState.text_for("battle_resume")
 	pause_target_label.text = AppState.text_for("battle_target") % (AppState.member_name(selected_order_id) if selected_order_id != "" else "—")
 	pause_policy_button.disabled = selected_order_id == ""
@@ -660,7 +750,7 @@ func _refresh_text() -> void:
 					button.pressed.disconnect(connection["callable"])
 				button.pressed.connect(_select_order_target.bind(targets[slot]))
 	result_title.text = AppState.text_for("battle_win" if battle_won else "battle_loss")
-	result_note.text = AppState.text_for("battle_win_note" if battle_won else "battle_loss_note")
+	result_note.text = AppState.text_for("battle_win_note" if battle_won else "battle_loss_note") + ("\n" + result_reward_text if battle_won else "")
 	result_button.text = AppState.text_for("battle_continue" if battle_won else "battle_menu")
 	_update_hud()
 

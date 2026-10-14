@@ -10,7 +10,9 @@ Last updated: 2026-10-13
 - M3 combat core is complete: contact opens a fixed side-view arena with two fixed enemy types, horizontal movement, attack, dodge, guard, HP and energy, victory recovery, and defeat return to the menu.
 - Godot M1–M3 smoke checks pass; three M3 captures were inspected. The measured encounter transition stayed below the provisional one-second target on this development machine.
 - M4 companions and AI are complete: three distinct recruit routes with decline and return, level-matched party seeds, five active slots, switching, rule-based AI policies, temporary teammate orders, pause, quick skills, and full auto.
-- Godot M1–M4 smoke checks pass. A four-character AI party won a battle; four M4 captures were inspected. Formal sprite animation and job skill progression remain later work.
+- Godot M1–M4 smoke checks pass. A four-character AI party won a battle; four M4 captures were inspected. Formal sprite animation remains later work.
+- M5 levels and jobs are complete: independent XP/JP, level-up recovery, a mandatory choice at each ten-level threshold, four aptitude gates and job series with two stages each, preserved cross-series progress, JP ranks for job and personal skills, reserve quarter rewards, and a bilingual playable growth screen.
+- Godot M1–M5 smoke checks pass. M5 checks cover staying, promotion, switching away and back, skill ranks, aptitude discounts and gates, reserve rewards, combat skill use, and battle-to-growth routing. Five M5 captures were inspected. Final job art and effects remain later work.
 - The right-side MVP widget reads the named JSON progress file in `outputs/`.
 
 ## Milestones Checklist
@@ -36,7 +38,7 @@ Last updated: 2026-10-13
 
 ### Phase M5 - Levels and jobs
 
-- [ ] Implement XP, JP, aptitudes, and the four MVP job series.
+- [x] Implement XP, JP, aptitudes, and the four MVP job series.
 
 ### Phase M6 - Saves and recovery
 

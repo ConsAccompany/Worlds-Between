@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
   "planVersion": "v0.1",
-  "updatedAt": "2026-10-13T20:32:13-04:00",
-  "currentStep": "M5",
+  "updatedAt": "2026-10-13T20:42:48-04:00",
+  "currentStep": "M6",
   "steps": [
     {
       "id": "M1",
@@ -67,16 +67,23 @@
     {
       "id": "M5",
       "title": "Levels and jobs",
-      "status": "ready",
-      "summary": "XP, JP, aptitudes, four job series, mandatory choice at level 10.",
+      "status": "done",
+      "summary": "Individual XP/JP, four aptitudes, four two-stage job series, mandatory ten-level choices, saved progress and JP ranks for job and personal skills.",
       "acceptance": "Stay, promote and switch jobs; return with prior progress; 25% reserve rewards.",
-      "evidence": [],
+      "evidence": [
+        "game/tests/m5_smoke.gd: M5_SMOKE_OK (level 10 gate, stay, promote, switch and return, job and personal JP upgrades, aptitude costs and gates, reserve quarter rewards, combat job skill and battle-to-growth routing)",
+        "outputs/rpg-2-star-ocean-the-second_hero_mandatory-job-choice_m5_20261013-204016-ab92432a.png",
+        "outputs/rpg-2-star-ocean-the-second_hero_promoted-skill-growth_m5_20261013-204016-031a5f3d.png",
+        "outputs/rpg-2-star-ocean-the-second_hero_job-growth-english_m5_20261013-204016-8281a2c6.png",
+        "outputs/rpg-2-star-ocean-the-second_scifi-party_job-skills-battle_m5_20261013-204216-9290c8d5.png",
+        "outputs/rpg-2-star-ocean-the-second_scifi-party_job-skills-pause_m5_20261013-204216-b5254efa.png"
+      ],
       "blocker": null
     },
     {
       "id": "M6",
       "title": "Saves and recovery",
-      "status": "todo",
+      "status": "ready",
       "summary": "Battle autosaves, manual saves, reload of party/world/job state.",
       "acceptance": "Restart and load key states; loss returns to menu with load available.",
       "evidence": [],
