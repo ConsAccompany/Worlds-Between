@@ -450,7 +450,7 @@ func _build_ui() -> void:
 	station_label = Label.new()
 	station_label.position = (RELAY_POSITION if destination_id == "scifi.outskirts" else REPORT_POSITION) + Vector2(-40, -42)
 	station_label.add_theme_font_size_override("font_size", 12 if destination_id == "scifi.city" else 11)
-	station_label.add_theme_color_override("font_color", Color("#fff1c7"))
+	station_label.add_theme_color_override("font_color", Color("#fff1c7" if destination_id == "scifi.city" else "#f0dda8"))
 	canvas.add_child(station_label)
 	survey_label = Label.new()
 	survey_label.position = SURVEY_ENTRANCES[destination_id] + Vector2(-50, -42)
