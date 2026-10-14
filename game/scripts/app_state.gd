@@ -124,8 +124,19 @@ const STRINGS := {
 		"job_skill_relics_echo": "遗物共鸣", "job_skill_relics_delay": "时序迟滞",
 		"bypass_notice": "已绕过敌人，抵达另一侧。",
 		"field_log": "实地日志",
-		"field_log_hint": "任意顺序探索三处地点；调查中继站与遗址记录；观察或击退一台机械，最后回城汇报。",
-		"field_log_count": "地点 %d/3 · 中继 %s · 记录 %s · 机械 %s",
+		"field_log_hint": "任意顺序探索三处地点；完成各地实地勘察；调查中继站与遗址记录；观察或击退一台机械，最后回城汇报。",
+		"field_log_count": "地点 %d/3 · 勘察 %d/3 · 中继 %s · 记录 %s · 机械 %s",
+		"survey_marker": "实地勘察入口", "survey_prompt": "靠近勘察入口按 E 进入",
+		"survey_log": "实地勘察：城市 %s · 城外 %s · 遗址 %s",
+		"survey_progress": "线索 %d/6 · 本地勘察 %s",
+		"survey_help": "WASD 移动 · E 查看线索/门/终端 · Esc 返回",
+		"survey_next": "深入", "survey_leave": "返回地表", "survey_previous": "返回外层",
+		"survey_terminal": "研判终端", "survey_locked": "先查看此处六条线索，再作判断。",
+		"survey_retry": "这项判断缺少证据支持。可以重新对照线索。",
+		"survey_completed": "此处勘察已完成。资料仍可重新查看。",
+		"survey_close": "继续探索", "save_survey_note": "勘察记录",
+		"survey_reward": "勘察奖励：上场角色各获 8 JP，候补各获 2 JP。",
+		"run_time": "本次探索 %02d:%02d",
 		"field_yes": "完成", "field_no": "待办",
 		"relay_marker": "中继站", "relay_prompt": "靠近中继站按 E 调查",
 		"relay_done": "中继站的故障来自一段被重复改写的线路图。赵铃已记下异常。",
@@ -136,7 +147,7 @@ const STRINGS := {
 		"report_locked": "仍需完成实地日志中的调查项目。",
 		"report_ready": "资料已齐备。靠近汇报台按 E 提交。",
 		"report_title": "科技板块试玩完成",
-		"report_summary": "%s 已走访三处地点、核对两份记录，并观察了自动机械。同行伙伴：%d/3。",
+		"report_summary": "%s 已走访三处地点、完成三处实地勘察、核对两份记录，并观察了自动机械。同行伙伴：%d/3。",
 		"report_continue": "继续自由探索", "report_map": "返回世界地图",
 		"report_note": "这份资料揭示了新的问题。完整故事将在后续章节展开。",
 	},
@@ -261,8 +272,19 @@ const STRINGS := {
 		"job_skill_relics_echo": "Relic Echo", "job_skill_relics_delay": "Time Delay",
 		"bypass_notice": "You bypassed the enemy and reached the far side.",
 		"field_log": "Field log",
-		"field_log_hint": "Explore all three locations in any order. Check the relay and ruins records, observe or defeat a machine, then report back in the city.",
-		"field_log_count": "Places %d/3 · Relay %s · Records %s · Machine %s",
+		"field_log_hint": "Explore all three places in any order. Complete each field survey, check the relay and ruin records, observe or defeat a machine, then report in the city.",
+		"field_log_count": "Places %d/3 · Surveys %d/3 · Relay %s · Records %s · Machine %s",
+		"survey_marker": "Field survey", "survey_prompt": "Approach the survey entrance and press E",
+		"survey_log": "Field surveys: City %s · Outskirts %s · Ruins %s",
+		"survey_progress": "Clues %d/6 · Survey %s",
+		"survey_help": "WASD move · E inspect clues, doors and console · Esc back",
+		"survey_next": "Go deeper", "survey_leave": "Return outside", "survey_previous": "Outer room",
+		"survey_terminal": "Analysis console", "survey_locked": "Inspect all six clues here before deciding.",
+		"survey_retry": "The evidence does not support that conclusion. Compare the clues again.",
+		"survey_completed": "Survey complete. You can still review the evidence.",
+		"survey_close": "Keep exploring", "save_survey_note": "Survey record",
+		"survey_reward": "Survey reward: 8 JP for each active member, 2 JP for each reserve.",
+		"run_time": "Run time %02d:%02d",
 		"field_yes": "Done", "field_no": "Open",
 		"relay_marker": "Relay", "relay_prompt": "Approach the relay and press E",
 		"relay_done": "The relay fault points to a circuit plan rewritten several times. Zhao Ling notes the anomaly.",
@@ -273,7 +295,7 @@ const STRINGS := {
 		"report_locked": "The field log still has unfinished investigations.",
 		"report_ready": "The evidence is ready. Press E at the report desk to submit it.",
 		"report_title": "Science region demo complete",
-		"report_summary": "%s visited three places, checked two records, and observed a machine. Companions: %d/3.",
+		"report_summary": "%s visited three places, completed three surveys, checked two records, and observed a machine. Companions: %d/3.",
 		"report_continue": "Continue exploring", "report_map": "World map",
 		"report_note": "The evidence raises further questions. The full story will develop in later chapters.",
 	},
@@ -292,6 +314,14 @@ var relay_checked := false
 var areas_visited: Dictionary = {}
 var machine_observed := false
 var demo_completed := false
+var play_time_seconds := 0.0
+var run_active := false
+var survey_clues: Dictionary = {}
+var survey_solved: Dictionary = {}
+var current_annex_room := 1
+var annex_surface_return_position := Vector2(558, 143)
+var resume_annex_pending := false
+var resume_annex_position := Vector2(84, 238)
 var show_initial_guide := false
 var battle_enemy_id := ""
 var battle_return_position := Vector2(82, 260)
@@ -326,6 +356,11 @@ func _ready() -> void:
 	_install_default_controls()
 
 
+func _process(delta: float) -> void:
+	if run_active and get_tree().current_scene != null and get_tree().current_scene.name != "MainMenu":
+		play_time_seconds += delta
+
+
 func text_for(key: String) -> String:
 	return STRINGS[language].get(key, key)
 
@@ -355,6 +390,13 @@ func begin_new_run() -> void:
 	areas_visited.clear()
 	machine_observed = false
 	demo_completed = false
+	play_time_seconds = 0.0
+	run_active = true
+	survey_clues.clear()
+	survey_solved.clear()
+	current_annex_room = 1
+	annex_surface_return_position = Vector2(558, 143)
+	resume_annex_pending = false
 	show_initial_guide = false
 	battle_enemy_id = ""
 	enemy_cleared_for_return = false
@@ -374,11 +416,22 @@ func member_name(member_id: String) -> String:
 func field_log_text() -> String:
 	var state := text_for("field_yes")
 	var open := text_for("field_no")
-	return text_for("field_log_count") % [areas_visited.size(), state if relay_checked else open, state if ji_records_checked else open, state if machine_observed else open]
+	return text_for("field_log_count") % [areas_visited.size(), survey_solved.size(), state if relay_checked else open, state if ji_records_checked else open, state if machine_observed else open]
+
+
+func survey_log_text() -> String:
+	var state := text_for("field_yes")
+	var open := text_for("field_no")
+	return text_for("survey_log") % [state if survey_solved.has("scifi.city") else open, state if survey_solved.has("scifi.outskirts") else open, state if survey_solved.has("scifi.ruins") else open]
+
+
+func play_time_text() -> String:
+	var total := maxi(0, int(play_time_seconds))
+	return text_for("run_time") % [total / 60, total % 60]
 
 
 func can_submit_report() -> bool:
-	return areas_visited.size() == DESTINATIONS.size() and relay_checked and ji_records_checked and machine_observed
+	return areas_visited.size() == DESTINATIONS.size() and survey_solved.size() == DESTINATIONS.size() and relay_checked and ji_records_checked and machine_observed
 
 
 func member_state(member_id: String) -> Dictionary:
@@ -420,6 +473,15 @@ func award_battle_rewards(enemy_id: String) -> Dictionary:
 		if not active_party_ids.has(member_id):
 			_grant_growth(member_states[member_id], ceili(float(xp) * 0.25), ceili(float(jp) * 0.25))
 	return {"xp": xp, "jp": jp}
+
+
+func award_survey_jp() -> void:
+	for member_id in active_party_ids:
+		var state := member_state(member_id)
+		state["jp"] = int(state.get("jp", 0)) + 8
+	for member_id in member_states:
+		if not active_party_ids.has(member_id):
+			member_states[member_id]["jp"] = int(member_states[member_id].get("jp", 0)) + 2
 
 
 func _grant_growth(member: Dictionary, xp: int, jp: int) -> void:
@@ -535,13 +597,18 @@ func make_snapshot(scene_kind: String, position: Vector2, note: String) -> Dicti
 		"areasVisited": areas_visited.duplicate(true),
 		"machineObserved": machine_observed,
 		"demoCompleted": demo_completed,
+		"playTimeSeconds": play_time_seconds,
+		"surveyClues": survey_clues.duplicate(true),
+		"surveySolved": survey_solved.duplicate(true),
+		"annexRoom": current_annex_room,
+		"annexSurfaceReturnPosition": [annex_surface_return_position.x, annex_surface_return_position.y],
 		"language": language,
 		"note": note,
 	}
 
 
 func write_manual_save(slot: int) -> String:
-	var kind := "area" if save_return_scene.ends_with("scifi_exploration_area.tscn") else "map"
+	var kind := "annex" if save_return_scene.ends_with("survey_annex.tscn") else ("area" if save_return_scene.ends_with("scifi_exploration_area.tscn") else "map")
 	return SaveStore.write_entry("manual", slot, make_snapshot(kind, save_return_position, "manual_note"))
 
 
@@ -570,6 +637,13 @@ func load_save(id: String) -> bool:
 	areas_visited = snapshot.get("areasVisited", {}).duplicate(true)
 	machine_observed = bool(snapshot.get("machineObserved", false))
 	demo_completed = bool(snapshot.get("demoCompleted", false))
+	play_time_seconds = float(snapshot.get("playTimeSeconds", 0.0))
+	run_active = true
+	survey_clues = snapshot.get("surveyClues", {}).duplicate(true)
+	survey_solved = snapshot.get("surveySolved", {}).duplicate(true)
+	current_annex_room = int(snapshot.get("annexRoom", 1))
+	var surface_position: Array = snapshot.get("annexSurfaceReturnPosition", [558.0, 143.0])
+	annex_surface_return_position = Vector2(float(surface_position[0]), float(surface_position[1]))
 	show_initial_guide = false
 	current_destination_id = String(snapshot["destination"])
 	language = String(snapshot["language"])
@@ -577,6 +651,8 @@ func load_save(id: String) -> bool:
 	loaded_scene_kind = String(snapshot["scene"])
 	resume_area_position = Vector2(float(snapshot["position"][0]), float(snapshot["position"][1]))
 	resume_area_pending = loaded_scene_kind == "area"
+	resume_annex_position = resume_area_position
+	resume_annex_pending = loaded_scene_kind == "annex"
 	returning_from_battle = false
 	battle_enemy_id = ""
 	battle_return_position = resume_area_position
@@ -585,7 +661,11 @@ func load_save(id: String) -> bool:
 
 
 func loaded_scene_path() -> String:
-	var path := "res://scenes/scifi_exploration_area.tscn" if loaded_scene_kind == "area" else "res://scenes/scifi_world_map.tscn"
+	var path := "res://scenes/scifi_world_map.tscn"
+	if loaded_scene_kind == "area":
+		path = "res://scenes/scifi_exploration_area.tscn"
+	elif loaded_scene_kind == "annex":
+		path = "res://scenes/survey_annex.tscn"
 	if has_pending_job_choice():
 		growth_return_scene = path
 		return "res://scenes/growth_screen.tscn"
@@ -593,7 +673,7 @@ func loaded_scene_path() -> String:
 
 
 func _valid_snapshot(snapshot: Dictionary) -> bool:
-	if snapshot.get("scene", "") not in ["map", "area"] or not DESTINATIONS.has(snapshot.get("destination", "")):
+	if snapshot.get("scene", "") not in ["map", "area", "annex"] or not DESTINATIONS.has(snapshot.get("destination", "")):
 		return false
 	var position: Variant = snapshot.get("position")
 	if typeof(position) != TYPE_ARRAY or position.size() != 2:
@@ -613,8 +693,22 @@ func _valid_snapshot(snapshot: Dictionary) -> bool:
 		return false
 	if typeof(snapshot.get("relayChecked", false)) != TYPE_BOOL or typeof(snapshot.get("areasVisited", {})) != TYPE_DICTIONARY or typeof(snapshot.get("machineObserved", false)) != TYPE_BOOL or typeof(snapshot.get("demoCompleted", false)) != TYPE_BOOL:
 		return false
+	if typeof(snapshot.get("playTimeSeconds", 0.0)) not in [TYPE_FLOAT, TYPE_INT] or float(snapshot.get("playTimeSeconds", 0.0)) < 0.0:
+		return false
 	if typeof(snapshot.get("heroName", "")) != TYPE_STRING or snapshot.get("heroAppearance", "male") not in ["male", "female"]:
 		return false
+	if typeof(snapshot.get("surveyClues", {})) != TYPE_DICTIONARY or typeof(snapshot.get("surveySolved", {})) != TYPE_DICTIONARY or int(snapshot.get("annexRoom", 1)) not in [1, 2]:
+		return false
+	var surface_position: Variant = snapshot.get("annexSurfaceReturnPosition", [558.0, 143.0])
+	if typeof(surface_position) != TYPE_ARRAY or surface_position.size() != 2:
+		return false
+	for destination_id in snapshot.get("surveySolved", {}).keys():
+		if not DESTINATIONS.has(destination_id) or snapshot["surveySolved"][destination_id] != true:
+			return false
+	for clue_key in snapshot.get("surveyClues", {}).keys():
+		var parts: PackedStringArray = String(clue_key).split(":")
+		if parts.size() != 2 or not DESTINATIONS.has(parts[0]) or not parts[1].is_valid_int() or int(parts[1]) not in [0, 1, 2, 3, 4, 5] or snapshot["surveyClues"][clue_key] != true:
+			return false
 	for destination_id in snapshot.get("areasVisited", {}).keys():
 		if not DESTINATIONS.has(destination_id) or snapshot["areasVisited"][destination_id] != true:
 			return false

@@ -6,6 +6,7 @@ func _initialize() -> void:
 
 
 func _capture() -> void:
+	SaveStore.root_path = "user://test-saves/m7-visual"
 	var app: Node = root.get_node("AppState")
 	app.begin_new_run()
 	var stamp := Time.get_datetime_string_from_system().replace("-", "").replace(":", "").replace("T", "-")
@@ -31,6 +32,37 @@ func _capture() -> void:
 	app.current_destination_id = "scifi.city"
 	change_scene_to_file("res://scenes/scifi_exploration_area.tscn")
 	await _settle()
+	current_scene.get("hero").position = Vector2(558, 143)
+	current_scene._unhandled_input(_interact())
+	await _settle()
+	if not _save("scifi-city", "survey-outer-room", stamp): return
+	current_scene._inspect_clue(0)
+	await _settle()
+	if not _save("scifi-city", "survey-clue-chinese", stamp): return
+	current_scene._close_overlay()
+	for index in [1, 2]:
+		current_scene._inspect_clue(index)
+		current_scene._close_overlay()
+	current_scene._go_next_room()
+	await _settle()
+	for index in [3, 4, 5]:
+		current_scene._inspect_clue(index)
+		current_scene._close_overlay()
+	current_scene._open_question()
+	await _settle()
+	if not _save("scifi-city", "survey-question-chinese", stamp): return
+	app.toggle_language()
+	await _settle()
+	if not _save("scifi-city", "survey-question-english", stamp): return
+	current_scene._choose_answer(1)
+	current_scene._close_overlay()
+	current_scene._back_room()
+	await _settle()
+	current_scene._back_room()
+	await _settle()
+	app.toggle_language()
+	app.survey_solved["scifi.outskirts"] = true
+	app.survey_solved["scifi.ruins"] = true
 	current_scene.get("hero").position = Vector2(470, 247)
 	current_scene._unhandled_input(_interact())
 	await _settle()

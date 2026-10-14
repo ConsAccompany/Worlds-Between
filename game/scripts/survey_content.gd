@@ -1,0 +1,100 @@
+extends RefCounted
+
+const DATA := {
+	"scifi.city": {
+		"zh": {
+			"rooms": ["公共档案馆", "公共设施层"],
+			"clues": [
+				{"name": "用量表", "text": "电力曲线在清晨升高，早于公开记录中的工厂换班时间。表格没有说明这部分用量来自哪里。"},
+				{"name": "旧管道", "text": "一条被保留的北侧管道绕过新计量器，仍连接着公共告示系统。维护员遵循‘能用就不拆’的原则。"},
+				{"name": "居民留言", "text": "停电留言集中在每第六天的清晨。居民的描述不完全一致，但时间记录相互吻合。"},
+				{"name": "维修手册", "text": "新网络会按固定周期同步固件。手册旁注提醒，旧线路在同步时会短暂承担告示系统的负载。"},
+				{"name": "轮值记录", "text": "维修小组每第六天清晨检查一次北侧旁路线，恰好与留言中的时间相同。检查结果却只写着‘正常’。"},
+				{"name": "负载注释", "text": "旧计量器没有被纳入新版报表，因此两套记录都可能准确，却呈现了不同范围的用量。"},
+			],
+			"question": "如何先验证停电报告与用量数据为何不一致？",
+			"options": ["直接提高供电配额", "对照同步时刻与旧旁路线计量", "关闭重复的居民留言"],
+			"answer": 1,
+			"success": "你保留两套原始记录，并标出它们各自覆盖的范围。矛盾变成了可核查的问题。",
+		},
+		"en": {
+			"rooms": ["Civic Archive", "Public Works Level"],
+			"clues": [
+				{"name": "Usage Meter", "text": "Power demand rises before dawn, earlier than the factory shift in the public schedule. The meter does not identify the source."},
+				{"name": "Old Conduit", "text": "A retained north conduit bypasses the new meter and still feeds the public notice system. The maintenance team keeps working parts in place."},
+				{"name": "Resident Notes", "text": "Outage reports cluster at dawn every sixth day. Descriptions differ, but the recorded times agree."},
+				{"name": "Service Manual", "text": "The new network synchronizes firmware on a fixed cycle. A margin note says the old line briefly carries the notice board's load during sync."},
+				{"name": "Duty Roster", "text": "A team checks the north bypass line at dawn every sixth day, matching the reports. Its results only say 'normal.'"},
+				{"name": "Load Annotation", "text": "The old meter is absent from the new report. Both records may be accurate while covering different parts of the network."},
+			],
+			"question": "What should you check first to explain the mismatch between outages and usage?",
+			"options": ["Raise the power quota", "Compare sync times with the old bypass meter", "Close duplicate resident reports"],
+			"answer": 1,
+			"success": "You preserve both original records and mark their coverage. The contradiction becomes a testable question.",
+		},
+	},
+	"scifi.outskirts": {
+		"zh": {
+			"rooms": ["天线走廊", "信号维护室"],
+			"clues": [
+				{"name": "天线 A", "text": "A 路信号最强，读数却每隔几秒跳变。附近自动机械的传感器也使用这个频段。"},
+				{"name": "天线 B", "text": "B 路信号较弱，但波形平稳。它的覆盖范围足够将一条校验讯息送回城市。"},
+				{"name": "天线 C", "text": "C 路在风起时经常掉线。更换天线头没有解决这个问题。"},
+				{"name": "线缆检查", "text": "B 路的接头和线缆完整。维护表上只要求再次确认接地，不需要更换元件。"},
+				{"name": "巡逻记录", "text": "自动机械经过 A 路附近时，A 的跳变更频繁。它们并没有攻击中继站。"},
+				{"name": "电池日志", "text": "C 路的备用电池在低温时放电异常。风起时通常也会降温。"},
+			],
+			"question": "若只发送一条校验讯息，先选哪一路？",
+			"options": ["A：最强信号", "B：稳定且线缆完整", "C：刚换过天线头"],
+			"answer": 1,
+			"success": "校验讯息经 B 路稳定传出。赵铃记录了 A、C 两路的待修问题。",
+		},
+		"en": {
+			"rooms": ["Antenna Walkway", "Signal Workshop"],
+			"clues": [
+				{"name": "Antenna A", "text": "A has the strongest signal, but its readings jump every few seconds. Nearby machines use the same band for their sensors."},
+				{"name": "Antenna B", "text": "B is weaker but steady. Its range is enough to send one verification message to the city."},
+				{"name": "Antenna C", "text": "C often disconnects when the wind rises. Replacing its antenna head did not solve the problem."},
+				{"name": "Cable Check", "text": "B's connector and cable are intact. The service sheet only calls for another grounding check."},
+				{"name": "Patrol Log", "text": "A fluctuates more when machines pass nearby. They have not attacked the relay station."},
+				{"name": "Battery Log", "text": "C's backup battery drains abnormally in cold weather. Windy periods are usually colder too."},
+			],
+			"question": "Which channel should carry one verification message first?",
+			"options": ["A: strongest signal", "B: stable with intact cable", "C: recently replaced antenna head"],
+			"answer": 1,
+			"success": "The verification reaches the city through B. Zhao Ling records the remaining faults in A and C.",
+		},
+	},
+	"scifi.ruins": {
+		"zh": {
+			"rooms": ["遗址外环", "记录内室"],
+			"clues": [
+				{"name": "分层墙面", "text": "下层封砖早于上方走道，但两处的年代标签由同一台机器生成。纪澄提醒你先保留原始照片。"},
+				{"name": "残缺索引", "text": "能源记录按编号而非日期排列。缺页使你无法直接判断事件先后。"},
+				{"name": "编号四七", "text": "旧记录的‘四七’编号也出现在现行中继网络中。编号相同不等于功能完全相同。"},
+				{"name": "机器译文", "text": "自动译文将一处模糊词标为‘奉献’，但置信度很低。原文并未写出接受者。"},
+				{"name": "平行铭文", "text": "相邻铭文的相似词更接近‘转移’。两份文本可能谈论不同的过程。"},
+				{"name": "擦除标题", "text": "主标题遭到人为擦除。残余笔画不足以复原词句，只能说明有人不希望它被轻易读到。"},
+			],
+			"question": "面对互相矛盾的年代与译文，哪种记录方法最可靠？",
+			"options": ["保留原始编号并标注不确定性", "凭上下文补全被擦除的标题", "删去与自动译文矛盾的证据"],
+			"answer": 0,
+			"success": "纪澄将原文、机器译文和疑点并列保存。新的线索仍是谜团，但不会因猜测而失真。",
+		},
+		"en": {
+			"rooms": ["Ruin Outer Ring", "Records Chamber"],
+			"clues": [
+				{"name": "Layered Wall", "text": "Lower sealing bricks predate the upper walkway, yet one machine assigned both the same age. Ji Cheng asks you to keep the original images."},
+				{"name": "Broken Index", "text": "Energy records are arranged by identifier, not date. Missing leaves prevent a simple chronology."},
+				{"name": "Code Forty-Seven", "text": "Code forty-seven also appears in the current relay network. Matching codes do not prove matching functions."},
+				{"name": "Machine Translation", "text": "A blurred word is rendered as 'offering' with low confidence. The source text names no recipient."},
+				{"name": "Parallel Inscription", "text": "A similar word nearby is closer to 'transfer.' The texts may describe different processes."},
+				{"name": "Erased Heading", "text": "Someone erased the title. The remaining strokes cannot restore its wording; they only show an attempt to hide it."},
+			],
+			"question": "The dates and translations conflict. How should the evidence be recorded?",
+			"options": ["Keep original codes and mark uncertainty", "Guess the erased heading from context", "Discard evidence that conflicts with the machine translation"],
+			"answer": 0,
+			"success": "Ji Cheng stores the source, translation, and doubts side by side. The clue remains a mystery without being distorted by a guess.",
+		},
+	},
+}

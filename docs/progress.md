@@ -17,6 +17,7 @@ Last updated: 2026-10-13
 - Godot M6 scenario and separate-process restart checks pass. Four Chinese/English M6 captures were inspected. The right-side game bible reads the named JSON progress and asset inventory files in `outputs/`.
 - M7 is in progress: character name and appearance choice, optional field guide, three-location objective log, relay and ruin findings, machine observation, city report and continued play are implemented. The route remains open to multiple location and recruit orders. Four location/battle ambient loops and one discovery cue are connected.
 - Godot M7 route checks pass and six Chinese/English captures were reviewed. A 25–35 minute content length has not yet been demonstrated; more meaningful exploration content and a timed playthrough are required before M7 can be marked complete.
+- M7 now includes two survey rooms in each of the three science-region destinations: 18 bilingual clues, three evidence questions with retry, one-time JP rewards, room/position save recovery, and an in-game run timer. Two freely ordered routes and an annex save/load check pass; new Chinese/English survey screenshots were reviewed. The planned 25–35 minute duration still needs a real timed playthrough.
 
 ## Milestones Checklist
 
@@ -51,7 +52,7 @@ Last updated: 2026-10-13
 
 - [x] Connect character setup, three locations, discoveries, companions, machine choice, field log and report endpoint.
 - [x] Save and reload route, name and appearance state; review Chinese/English screens.
-- [ ] Expand the route with substantial interactive exploration to support the 25–35 minute target.
+- [x] Add six survey rooms, 18 readable clues and three evidence decisions without blocking recruit order.
 - [ ] Time a fresh start-to-finish playthrough and fix any blockers or text overflow.
 
 ### Phase M8 - Acceptance and tuning

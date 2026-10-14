@@ -1,5 +1,7 @@
 extends SceneTree
 
+const CONTENT := preload("res://scripts/survey_content.gd")
+
 
 func _initialize() -> void:
 	call_deferred("_run")
@@ -8,6 +10,11 @@ func _initialize() -> void:
 func _run() -> void:
 	SaveStore.root_path = "user://test-saves/m7"
 	var app: Node = root.get_node("AppState")
+	for destination in app.DESTINATIONS:
+		for locale in ["zh", "en"]:
+			var content: Dictionary = CONTENT.DATA[destination][locale]
+			if not _check(content["rooms"].size() == 2 and content["clues"].size() == 6 and content["options"].size() == 3 and int(content["answer"]) in [0, 1, 2], "bilingual survey content " + destination + "/" + locale):
+				return
 	app.begin_new_run()
 	change_scene_to_file("res://scenes/hero_setup.tscn")
 	await _settle()
@@ -18,9 +25,10 @@ func _run() -> void:
 	await _settle()
 	if not _check(current_scene.name == "ScifiWorldMap" and app.hero_name == "阿澈" and app.hero_appearance == "female" and not app.show_initial_guide, "name, appearance and guide skip"):
 		return
+	app.play_time_seconds = 125.0
 	var setup_save: String = app.write_auto_save("map", Vector2.ZERO, "manual_note")
 	app.begin_new_run()
-	if not _check(app.load_save(setup_save) and app.member_name("hero") == "阿澈" and app.hero_appearance == "female", "character setup survives load"):
+	if not _check(app.load_save(setup_save) and app.member_name("hero") == "阿澈" and app.hero_appearance == "female" and app.play_time_seconds >= 125.0, "character setup and run time survive load"):
 		return
 	for route in [0, 1]:
 		app.begin_new_run()
@@ -66,6 +74,63 @@ func _run() -> void:
 					area.get("invite_button").pressed.emit()
 					if not _check(app.recruited_members.has("ji-cheng"), "ruin companion invited"):
 						return
+			var entrance := Vector2(558, 143) if destination == "scifi.city" else (Vector2(558, 277) if destination == "scifi.outskirts" else Vector2(548, 142))
+			area.get("hero").position = entrance
+			area._unhandled_input(_interact())
+			await _settle()
+			if not _check(current_scene.name == "SurveyAnnex" and app.current_annex_room == 1, "survey entrance " + destination):
+				return
+			for room_index in [1, 2]:
+				var annex: Node2D = current_scene
+				for local_index in 3:
+					annex.get("hero").position = Vector2(163 + local_index * 157, 165)
+					annex._unhandled_input(_interact())
+					if not _check(annex.get("overlay").visible, "clue can be read"):
+						return
+					annex.get("close_button").pressed.emit()
+				if room_index == 1:
+					annex.get("hero").position = Vector2(580, 257)
+					annex._unhandled_input(_interact())
+					await _settle()
+					if not _check(current_scene.name == "SurveyAnnex" and app.current_annex_room == 2, "inner survey room"):
+						return
+			var final_annex: Node2D = current_scene
+			final_annex.get("hero").position = Vector2(320, 263)
+			final_annex._unhandled_input(_interact())
+			var correct: int = final_annex._data()["answer"]
+			final_annex.get("option_buttons")[(correct + 1) % 3].pressed.emit()
+			if not _check(not app.survey_solved.has(destination) and final_annex.get("overlay_message") != "", "wrong answer is retryable"):
+				return
+			var jp_before: int = app.hero_state["jp"]
+			final_annex.get("option_buttons")[correct].pressed.emit()
+			if not _check(app.survey_solved.has(destination) and int(app.hero_state["jp"]) == jp_before + 8, "survey solved and JP awarded once " + destination):
+				return
+			final_annex._close_overlay()
+			final_annex._open_question()
+			if not _check(int(app.hero_state["jp"]) == jp_before + 8 and final_annex.get("overlay_mode") == "message", "survey replay gives no extra JP"):
+				return
+			final_annex._close_overlay()
+			if route == 0 and destination == "scifi.city":
+				final_annex.get("hero").position = Vector2(311, 258)
+				final_annex._open_save()
+				await _settle()
+				if not _check(current_scene.name == "SaveScreen", "annex opens manual save"):
+					return
+				var annex_save: String = app.write_manual_save(1)
+				app.begin_new_run()
+				if not _check(app.load_save(annex_save) and app.loaded_scene_path() == "res://scenes/survey_annex.tscn" and app.current_annex_room == 2, "annex save loads correct room"):
+					return
+				change_scene_to_file(app.loaded_scene_path())
+				await _settle()
+				if not _check(current_scene.get("hero").position == Vector2(311, 258) and app.survey_solved.has(destination) and app.survey_clues.size() == 6, "annex position and clues restored"):
+					return
+				final_annex = current_scene
+			final_annex._back_room()
+			await _settle()
+			current_scene._back_room()
+			await _settle()
+			if not _check(current_scene.name == "ScifiExplorationArea" and current_scene.get("hero").position == entrance, "survey returns to entrance"):
+				return
 		if not _check(app.can_submit_report(), "report available after flexible order"):
 			return
 		app.select_destination("scifi.city")

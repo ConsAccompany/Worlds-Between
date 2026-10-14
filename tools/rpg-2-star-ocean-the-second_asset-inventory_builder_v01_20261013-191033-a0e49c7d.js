@@ -74,6 +74,7 @@ const categories = [
       fixed('scene.mvp-city','MVP 科技城市片区','MVP',1,'production','M2 可玩原型；正式场景美术待制作','rpg-2-star-ocean-the-second_scifi-city_visual-proof_m2_20261013-201352-4940f7f5.png'),
       fixed('scene.mvp-outskirts','MVP 城外场景','MVP',1,'production','M2 可玩原型；正式场景美术待制作','rpg-2-star-ocean-the-second_scifi-outskirts_visual-proof_m2_20261013-201352-7e3fc6e6.png'),
       fixed('scene.mvp-ruin','MVP 遗址室内场景','MVP',1,'production','M2 可玩原型；正式场景美术待制作','rpg-2-star-ocean-the-second_scifi-ruins_visual-proof_m2_20261013-201352-0302dc4c.png'),
+      fixed('scene.mvp-surveys','MVP 三地各两处勘察空间','MVP',6,'production','M7 城市、城外、遗址各有外层与内层；目前为可玩几何场景，正式像素图块待制作','rpg-2-star-ocean-the-second_scifi-city_survey-outer-room_m7_20261013-212250-336fb175.png'),
       fixed('scene.cities','五板块大城市基础场景','Full',25),fixed('scene.communities','五板块小社区基础场景','Full',25),fixed('scene.wilderness','五板块野外基础场景','Full',25),
       fixed('scene.special','板块专属遗迹、传送门与地下社区扩展场景','Full',1,'planned','实际数量随地点设计增加'),
     ]),
@@ -102,8 +103,9 @@ const categories = [
       fixed('ui.menu','中英文主菜单与基础按钮','MVP',1,'approved'),
       fixed('ui.map','世界地图地点选择','MVP',1,'production','M2 已实现中英文可点击地点选择','rpg-2-star-ocean-the-second_scifi-map_visual-proof_m2_20261013-201352-8194746e.png'),
       fixed('ui.explore','探索提示、交互、对话与招募','MVP',1,'production','M4 三种招募入口、暂缓邀请、回访及双语对话已实现','rpg-2-star-ocean-the-second_scifi-liang-xu_recruitment-dialogue_m4_20261013-203138-d211470b.png'),
-      fixed('ui.field-log','MVP 实地日志与发现记录','MVP',1,'production','M7 可滚动中英文日志、目标状态和两份调查记录已接入','rpg-2-star-ocean-the-second_scifi-map_field-log-english_m7_20261013-211403-5fad8430.png'),
-      fixed('ui.demo-completion','MVP 试玩完成反馈','MVP',1,'production','M7 提交调查资料后显示总结并可继续探索','rpg-2-star-ocean-the-second_scifi-city_completion-report-chinese_m7_20261013-211403-4a5f1c59.png'),
+      fixed('ui.field-log','MVP 实地日志与发现记录','MVP',1,'production','M7 可滚动中英文日志、三地勘察状态、调查记录和试玩用时已接入','rpg-2-star-ocean-the-second_scifi-map_field-log-english_m7_20261013-212705-3687dd8f.png'),
+      fixed('ui.survey','MVP 线索阅读与研判界面','MVP',1,'production','M7 18 条双语线索、三处可重试判断、JP 奖励与存档恢复已接入','rpg-2-star-ocean-the-second_scifi-city_survey-question-english_m7_20261013-212250-e614975c.png'),
+      fixed('ui.demo-completion','MVP 试玩完成反馈','MVP',1,'production','M7 提交调查资料后显示总结、用时，并可继续探索','rpg-2-star-ocean-the-second_scifi-city_completion-report-chinese_m7_20261013-212705-9cef7d14.png'),
     ]),
     sub('battle-ui','战斗界面',[
       fixed('ui.battle-hud','五人队伍、HP/能量、角色切换','MVP',1,'production','M4 五人位、角色切换及全自动开关已实现；正式视觉待制作','rpg-2-star-ocean-the-second_scifi-party_battle-hud_m4_20261013-203138-11f66e25.png'),
@@ -126,7 +128,7 @@ const categories = [
   ]),
   cat('text-data','文本与数据',[
     sub('localization','中英文文本',[
-      fixed('text.ui','菜单与基础界面中英文键值','MVP',1,'approved'),fixed('text.mvp','MVP 三地点、三伙伴与线索文本','MVP',1,'production','M7 已接入中继、遗址、实地日志、完成反馈双语文本；正式剧情待后续设计','rpg-2-star-ocean-the-second_scifi-map_field-log-chinese_m7_20261013-211403-9f2949ca.png'),fixed('text.full','五板块任务、人物、物品、图鉴双语文本','Full'),
+      fixed('text.ui','菜单与基础界面中英文键值','MVP',1,'approved'),fixed('text.mvp','MVP 三地点、三伙伴与线索文本','MVP',1,'production','M7 已接入 18 条现场线索、三道研判题、中继与遗址记录、完成反馈双语文本；正式剧情待后续设计','rpg-2-star-ocean-the-second_scifi-city_survey-clue-chinese_m7_20261013-212250-ac53f069.png'),fixed('text.full','五板块任务、人物、物品、图鉴双语文本','Full'),
     ]),
     sub('game-data','可维护内容数据',[
       fixed('data.characters','50 同伴与主角职业/天分数据','Full',51),fixed('data.jobs','20 系列 × 5 阶职业定义','Full',100),fixed('data.items','装备、道具、合成与商会货物定义','Full'),fixed('data.enemies','固定地区敌人及可选终局难度数据','Full'),

@@ -8,6 +8,11 @@ const SPAWN := Vector2(82, 260)
 const RECORDS_POSITION := Vector2(320, 250)
 const RELAY_POSITION := Vector2(470, 128)
 const REPORT_POSITION := Vector2(470, 247)
+const SURVEY_ENTRANCES := {
+	"scifi.city": Vector2(558, 143),
+	"scifi.outskirts": Vector2(558, 277),
+	"scifi.ruins": Vector2(548, 142),
+}
 const AMBIENCE := {
 	"scifi.city": "res://assets/audio/rpg-2-star-ocean-the-second_scifi-city_ambient-loop_m7_20261013-211230-c8e1159a.wav",
 	"scifi.outskirts": "res://assets/audio/rpg-2-star-ocean-the-second_scifi-outskirts_ambient-loop_m7_20261013-211230-57ad4b20.wav",
@@ -39,6 +44,7 @@ var save_button: Button
 var npc_label: Label
 var records_label: Label
 var station_label: Label
+var survey_label: Label
 var dialogue_overlay: ColorRect
 var dialogue_title: Label
 var dialogue_text: Label
@@ -123,6 +129,9 @@ func _draw() -> void:
 	if destination_id == "scifi.city":
 		draw_rect(Rect2(REPORT_POSITION + Vector2(-23, -14), Vector2(46, 28)), Color("#213b49"))
 		draw_rect(Rect2(REPORT_POSITION + Vector2(-16, -8), Vector2(32, 15)), Color("#99d8c9"))
+	var entrance: Vector2 = SURVEY_ENTRANCES[destination_id]
+	draw_rect(Rect2(entrance + Vector2(-17, -21), Vector2(34, 42)), Color("#19313d"))
+	draw_rect(Rect2(entrance + Vector2(-11, -16), Vector2(22, 33)), Color("#80d0c4" if AppState.survey_solved.has(destination_id) else "#d8be7f"))
 
 
 func _draw_city() -> void:
@@ -269,6 +278,11 @@ func _build_ui() -> void:
 	station_label.add_theme_font_size_override("font_size", 11)
 	station_label.add_theme_color_override("font_color", Color("#f0dda8"))
 	canvas.add_child(station_label)
+	survey_label = Label.new()
+	survey_label.position = SURVEY_ENTRANCES[destination_id] + Vector2(-50, -42)
+	survey_label.add_theme_font_size_override("font_size", 11)
+	survey_label.add_theme_color_override("font_color", Color("#f0dda8"))
+	canvas.add_child(survey_label)
 	_build_dialogue(canvas)
 
 
@@ -320,6 +334,7 @@ func _refresh_text() -> void:
 	records_label.visible = destination_id == "scifi.ruins" and not AppState.ji_records_checked
 	station_label.visible = destination_id != "scifi.ruins"
 	station_label.text = AppState.text_for("relay_marker" if destination_id == "scifi.outskirts" else "report_marker")
+	survey_label.text = AppState.text_for("survey_marker")
 	dialogue_title.text = AppState.member_name(recruit_id)
 	dialogue_text.text = AppState.text_for("recruit_ji_locked" if recruit_id == "ji-cheng" and not AppState.ji_records_checked else "recruit_" + recruit_id.split("-")[0])
 	invite_button.text = AppState.text_for("recruit_invite")
@@ -384,7 +399,13 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event.is_action_pressed("interact"):
 		if dialogue_open:
 			return
-		if destination_id == "scifi.city" and hero.position.distance_to(REPORT_POSITION) < 50.0:
+		if hero.position.distance_to(SURVEY_ENTRANCES[destination_id]) < 43.0:
+			AppState.current_annex_room = 1
+			AppState.annex_surface_return_position = hero.position
+			AppState.resume_area_position = hero.position
+			AppState.resume_area_pending = true
+			get_tree().change_scene_to_file("res://scenes/survey_annex.tscn")
+		elif destination_id == "scifi.city" and hero.position.distance_to(REPORT_POSITION) < 50.0:
 			if AppState.can_submit_report():
 				AppState.demo_completed = true
 				AppState.resume_area_position = hero.position

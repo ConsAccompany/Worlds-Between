@@ -151,6 +151,8 @@ func _refresh_text() -> void:
 	field_status.text = AppState.field_log_text()
 	field_title.text = AppState.text_for("field_log")
 	var lines := [AppState.text_for("field_log_hint"), "", AppState.field_log_text()]
+	lines.append(AppState.survey_log_text())
+	lines.append(AppState.play_time_text())
 	if AppState.relay_checked:
 		lines.append(AppState.text_for("relay_record"))
 	if AppState.ji_records_checked:

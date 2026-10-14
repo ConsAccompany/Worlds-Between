@@ -58,6 +58,7 @@ func _refresh_text() -> void:
 	title_label.text = AppState.text_for("report_title")
 	summary_label.text = AppState.text_for("report_summary") % [AppState.member_name("hero"), AppState.recruited_members.size()]
 	note_label.text = AppState.text_for("report_note")
+	note_label.text += "\n" + AppState.play_time_text()
 	continue_button.text = AppState.text_for("report_continue")
 	map_button.text = AppState.text_for("report_map")
 

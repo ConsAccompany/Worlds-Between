@@ -137,4 +137,7 @@ func _back() -> void:
 	if AppState.save_screen_mode == "save" and AppState.save_return_scene.ends_with("scifi_exploration_area.tscn"):
 		AppState.resume_area_pending = true
 		AppState.resume_area_position = AppState.save_return_position
+	elif AppState.save_screen_mode == "save" and AppState.save_return_scene.ends_with("survey_annex.tscn"):
+		AppState.resume_annex_pending = true
+		AppState.resume_annex_position = AppState.save_return_position
 	get_tree().change_scene_to_file(AppState.save_return_scene)

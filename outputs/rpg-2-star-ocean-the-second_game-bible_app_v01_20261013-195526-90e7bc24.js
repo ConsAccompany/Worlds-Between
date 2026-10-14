@@ -126,14 +126,14 @@
       M4:['伙伴与 AI','实现五个队伍位置、三种招募路线、等级同步、切换角色与指令。','三位伙伴都能招募；四人队伍可获胜；AI 与临时指令生效。'],
       M5:['等级与职业','加入经验、JP、四项天分、四条职业系列和 10 级必选职业。','可留任、晋升、切换并保留原系列进度；候补获得 25% 收益。'],
       M6:['存档与恢复','加入战后自动存档、手动存档及队伍和职业状态加载。','重新启动后能读取关键状态；战败回菜单后可加载。'],
-      M7:['可玩内容','完成约 25–35 分钟的科技板块路线、一次发现和三位伙伴招募。','不用开发工具通关；两种探索和招募顺序可行；中英文显示完整。'],
+      M7:['可玩内容','科技板块三地探索、六处勘察空间、三位伙伴招募与回城汇报已连通。','不用开发工具通关；两种探索和招募顺序可行；中英文显示完整，并实测 25–35 分钟内容长度。'],
       M8:['验收与调整','完整试玩、记录转场时间和易用性问题，并修复阻碍。','两次新存档完整试玩无阻碍；存档和回访招募通过核验。'],
     };
     const pct=Math.round(100*done/p.steps.length);
     content.innerHTML=`${head('制作路线','MVP 阶段状态与尚待细化的完整游戏设计',badge(done+' / '+p.steps.length+' 阶段','accent'))}
       <div class="card"><div class="step-top"><strong>MVP 完成情况</strong><span>${pct}%</span></div><div class="meter" role="progressbar" aria-valuemin="0" aria-valuemax="${p.steps.length}" aria-valuenow="${done}"><span style="width:${pct}%"></span></div><p class="muted small">当前：${current?esc(current.id+' · '+copy[current.id][0]):'全部阶段已完成'}</p></div>
       <div class="section-label">分步实施</div>
-      <div class="stack">${p.steps.map(step=>`<details class="group"><summary>${esc(step.id+' · '+copy[step.id][0])} <span class="group-count">${esc(status[step.status]||step.status)}</span></summary><div class="card"><p>${esc(copy[step.id][1])}</p><strong>验收标准</strong><p>${esc(copy[step.id][2])}</p>${step.evidence?.length?'<strong>已有依据</strong><ul>'+step.evidence.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>':''}</div></details>`).join('')}</div>
+      <div class="stack">${p.steps.map(step=>`<details class="group"><summary>${esc(step.id+' · '+copy[step.id][0])} <span class="group-count">${esc(status[step.status]||step.status)}</span></summary><div class="card"><p>${esc(copy[step.id][1])}</p><strong>验收标准</strong><p>${esc(copy[step.id][2])}</p>${step.details?.length?'<strong>当前内容</strong><ul>'+step.details.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>':''}${step.remaining?.length?'<strong>尚需完成</strong><ul>'+step.remaining.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>':''}${step.evidence?.length?'<strong>已有依据</strong><ul>'+step.evidence.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>':''}</div></details>`).join('')}</div>
       <div class="section-label">仍待确定</div>
       <div class="stack">${state.bible.openQuestions.map(q=>`<div class="card"><h3>${esc(q.title)}</h3><p>${esc(q.detail)}</p></div>`).join('')}</div>
       <div class="section-label">设计稿中的实施顺序与待细化清单</div>
