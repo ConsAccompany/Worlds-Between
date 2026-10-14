@@ -7,6 +7,7 @@ const CITY_HERO_MALE := preload("res://assets/characters/rpg-2-star-ocean-the-se
 const CITY_HERO_FEMALE := preload("res://assets/characters/rpg-2-star-ocean-the-second_protagonist-female_exploration-cutout_m8-sample_20261013-233258-e2c0419a.png")
 const CITY_LIANG_XU := preload("res://assets/characters/rpg-2-star-ocean-the-second_liang-xu_exploration-cutout_m8-sample_20261013-231655-2f45a173.png")
 const BATTLE_SCENE := preload("res://scenes/battle_arena.tscn")
+const CityNavigation := preload("res://scripts/city_navigation.gd")
 const MOVE_SPEED := 140.0
 const SPAWN := Vector2(82, 260)
 const CITY_SPAWN := Vector2(340, 253)
@@ -198,27 +199,15 @@ func _draw_city_marker(at: Vector2, color: Color) -> void:
 
 
 func _city_safe_position(at: Vector2) -> Vector2:
-	var safe := Vector2(clampf(at.x, 24.0, 616.0), clampf(at.y, 160.0, 305.0))
-	if safe.x < 252.0 and safe.y > 208.0:
-		safe.y = 208.0
-	return safe
+	return CityNavigation.safe_position(at)
 
 
 func _city_slide_position(at: Vector2) -> Vector2:
-	var bounded := Vector2(clampf(at.x, 24.0, 616.0), clampf(at.y, 160.0, 305.0))
-	if _city_walkable(bounded):
-		return bounded
-	var horizontal := Vector2(bounded.x, hero.position.y)
-	if _city_walkable(horizontal):
-		return horizontal
-	var vertical := Vector2(hero.position.x, bounded.y)
-	if _city_walkable(vertical):
-		return vertical
-	return hero.position
+	return CityNavigation.slide_position(hero.position, at)
 
 
 func _city_walkable(at: Vector2) -> bool:
-	return at.x >= 24.0 and at.x <= 616.0 and at.y >= 160.0 and at.y <= 305.0 and not (at.x < 252.0 and at.y > 208.0)
+	return CityNavigation.walkable(at)
 
 
 func _draw_outskirts() -> void:

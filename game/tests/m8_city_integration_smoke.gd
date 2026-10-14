@@ -78,7 +78,7 @@ func _run() -> void:
 		for step in 60:
 			area._process(1.0 / 60.0)
 		Input.action_release("move_down")
-		if not _check(actor.position.y <= 208.0, "west plaza blocks movement"):
+		if not _check(actor.position.y < 204.0, "west plaza blocks movement"):
 			return
 		if not _check(_walk(area, Vector2(282, 180)), "walk to Liang Xu"):
 			return
@@ -106,7 +106,7 @@ func _run() -> void:
 			return
 		change_scene_to_file(app.loaded_scene_path())
 		await _settle()
-		if not _check(current_scene.get("hero").position == Vector2(82, 208), "old city spawn recovers onto west road"):
+		if not _check(current_scene.get("hero").position == Vector2(82, 203.5), "old city spawn recovers onto west road"):
 			return
 		current_scene.get("back_button").pressed.emit()
 		await _settle()
