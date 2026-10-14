@@ -51,13 +51,13 @@ const categories = [
     sub('portraits','21:9 人物设定图',portraits),
     sub('exploration-sprites','俯视探索精灵',[
       fixed('sprite.hero','主角男女探索精灵与方向动画','MVP',2,'concept','现有动作稿仅作参考；需要固定像素网格'),
-      fixed('sprite.mvp-companions','MVP 三位伙伴探索精灵：梁序、赵铃、纪澄','MVP',3),
+      fixed('sprite.mvp-companions','MVP 三位伙伴探索精灵：梁序、赵铃、纪澄','MVP',3,'production','M4 临时几何形与发型识别已接入；正式逐方向像素动画待制作','rpg-2-star-ocean-the-second_scifi-city_companion-exploration_m4_20261013-203138-5e777182.png'),
       fixed('sprite.other-companions','其余 47 位伙伴探索精灵','Full',47),
       fixed('sprite.job-outfits','职业外观细节变化与辨识度校验','Full',52,'planned','沿用角色个人发型和识别道具'),
     ]),
     sub('combat-sprites','横向战斗动画',[
       fixed('combat-sprite.hero','主角男女战斗动作组','MVP',2,'concept'),
-      fixed('combat-sprite.mvp-companions','MVP 三位伙伴战斗动作组','MVP',3),
+      fixed('combat-sprite.mvp-companions','MVP 三位伙伴战斗动作组','MVP',3,'production','M4 三人已可战斗，保留发型与配色差异；正式动作帧待制作','rpg-2-star-ocean-the-second_scifi-party_battle-hud_m4_20261013-203138-11f66e25.png'),
       fixed('combat-sprite.other-companions','其余 47 位伙伴战斗动作组','Full',47),
     ]),
     sub('character-ui','角色界面素材',[
@@ -101,14 +101,16 @@ const categories = [
     sub('navigation','导航与探索',[
       fixed('ui.menu','中英文主菜单与基础按钮','MVP',1,'approved'),
       fixed('ui.map','世界地图地点选择','MVP',1,'production','M2 已实现中英文可点击地点选择','rpg-2-star-ocean-the-second_scifi-map_visual-proof_m2_20261013-201352-8194746e.png'),
-      fixed('ui.explore','探索提示、交互、对话与招募','MVP',1,'production','M2 已实现移动提示和 NPC 对话；招募在 M4'),
+      fixed('ui.explore','探索提示、交互、对话与招募','MVP',1,'production','M4 三种招募入口、暂缓邀请、回访及双语对话已实现','rpg-2-star-ocean-the-second_scifi-liang-xu_recruitment-dialogue_m4_20261013-203138-d211470b.png'),
     ]),
     sub('battle-ui','战斗界面',[
-      fixed('ui.battle-hud','五人队伍、HP/能量、角色切换','MVP',1,'production','M3 已有主角与敌人状态；五人队伍和切换在 M4','rpg-2-star-ocean-the-second_scifi-patrol_battle-visual-proof_m3_20261013-201830-fa18b3d5.png'),
-      fixed('ui.skills','快捷技能与暂停指令菜单','MVP'),fixed('ui.results','战斗结算与收益','MVP',1,'production','M3 已有胜败与恢复结算；经验、JP 等收益在 M5','rpg-2-star-ocean-the-second_scifi-patrol_victory-visual-proof_m3_20261013-201830-4cdeebfa.png'),
+      fixed('ui.battle-hud','五人队伍、HP/能量、角色切换','MVP',1,'production','M4 五人位、角色切换及全自动开关已实现；正式视觉待制作','rpg-2-star-ocean-the-second_scifi-party_battle-hud_m4_20261013-203138-11f66e25.png'),
+      fixed('ui.skills','快捷技能与暂停指令菜单','MVP',1,'production','M4 Q 快捷技能、暂停技能与队友指令已实现；职业技能在 M5','rpg-2-star-ocean-the-second_scifi-party_pause-orders_m4_20261013-203138-e007d25b.png'),
+      fixed('ui.results','战斗结算与收益','MVP',1,'production','M3 已有胜败与恢复结算；经验、JP 等收益在 M5','rpg-2-star-ocean-the-second_scifi-patrol_victory-visual-proof_m3_20261013-201830-4cdeebfa.png'),
     ]),
     sub('management','角色与系统',[
-      fixed('ui.party','队伍与候补','MVP'),fixed('ui.jobs','天分、职业树、技能 JP','MVP'),fixed('ui.saves','自动/手动存档和加载','MVP'),fixed('ui.settings','语言、声音与输入设置','MVP'),
+      fixed('ui.party','队伍与候补','MVP',1,'production','M4 五人上场位已实现；候补管理在队伍扩容时补齐','rpg-2-star-ocean-the-second_scifi-party_battle-hud_m4_20261013-203138-11f66e25.png'),
+      fixed('ui.jobs','天分、职业树、技能 JP','MVP'),fixed('ui.saves','自动/手动存档和加载','MVP'),fixed('ui.settings','语言、声音与输入设置','MVP'),
       fixed('ui.guild','商会经营和周结算','Full'),fixed('ui.reputation','板块与全球名声','Full'),fixed('ui.relationship','关系与组合技','Full'),fixed('ui.codex','考古记录与发现图鉴','Full'),
     ]),
   ]),

@@ -9,6 +9,8 @@ Last updated: 2026-10-13
 - Four 640×360 M2 captures were inspected for readability and layout. The M2 encounter preview is now replaced by the M3 battle arena.
 - M3 combat core is complete: contact opens a fixed side-view arena with two fixed enemy types, horizontal movement, attack, dodge, guard, HP and energy, victory recovery, and defeat return to the menu.
 - Godot M1–M3 smoke checks pass; three M3 captures were inspected. The measured encounter transition stayed below the provisional one-second target on this development machine.
+- M4 companions and AI are complete: three distinct recruit routes with decline and return, level-matched party seeds, five active slots, switching, rule-based AI policies, temporary teammate orders, pause, quick skills, and full auto.
+- Godot M1–M4 smoke checks pass. A four-character AI party won a battle; four M4 captures were inspected. Formal sprite animation and job skill progression remain later work.
 - The right-side MVP widget reads the named JSON progress file in `outputs/`.
 
 ## Milestones Checklist
@@ -30,7 +32,7 @@ Last updated: 2026-10-13
 
 ### Phase M4 - Companions and AI
 
-- [ ] Implement the three recruit paths, switching, and AI.
+- [x] Implement the three recruit paths, switching, and AI.
 
 ### Phase M5 - Levels and jobs
 

@@ -4,15 +4,17 @@ const HERO_SPRITE := preload("res://assets/characters/rpg-2-star-ocean-the-secon
 const BATTLE_SCENE := preload("res://scenes/battle_arena.tscn")
 const MOVE_SPEED := 140.0
 const SPAWN := Vector2(82, 260)
+const RECORDS_POSITION := Vector2(320, 250)
 const AREA_CONFIG := {
-	"scifi.city": {"npc": Vector2(282, 180), "enemy": Vector2(-100, -100), "color": Color("#365463")},
-	"scifi.outskirts": {"npc": Vector2(190, 150), "enemy": Vector2(355, 238), "color": Color("#546b57")},
-	"scifi.ruins": {"npc": Vector2(200, 145), "enemy": Vector2(420, 225), "color": Color("#70644f")},
+	"scifi.city": {"npc": Vector2(282, 180), "recruit": "liang-xu", "enemy": Vector2(-100, -100), "color": Color("#365463")},
+	"scifi.outskirts": {"npc": Vector2(190, 150), "recruit": "zhao-ling", "enemy": Vector2(355, 238), "color": Color("#546b57")},
+	"scifi.ruins": {"npc": Vector2(200, 145), "recruit": "ji-cheng", "enemy": Vector2(420, 225), "color": Color("#70644f")},
 }
 
 var destination_id := ""
 var hero: Sprite2D
 var npc_position := Vector2.ZERO
+var recruit_id := ""
 var enemy_position := Vector2(-100, -100)
 var enemy_visible := false
 var encounter_count := 0
@@ -24,7 +26,16 @@ var help_label: Label
 var feedback_label: Label
 var enemy_label: Label
 var back_button: Button
+var npc_label: Label
+var records_label: Label
+var dialogue_overlay: ColorRect
+var dialogue_title: Label
+var dialogue_text: Label
+var invite_button: Button
+var later_button: Button
+var dialogue_open := false
 var feedback_key := "npc_prompt"
+var feedback_message := ""
 
 
 func _ready() -> void:
@@ -33,6 +44,7 @@ func _ready() -> void:
 		destination_id = "scifi.city"
 	var config: Dictionary = AREA_CONFIG[destination_id]
 	npc_position = config["npc"]
+	recruit_id = config["recruit"]
 	enemy_position = config["enemy"]
 	enemy_visible = destination_id != "scifi.city" and not AppState.enemy_cleared_for_return
 	_build_actors()
@@ -46,6 +58,8 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	if dialogue_open:
+		return
 	var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	if direction != Vector2.ZERO:
 		hero.position += direction * MOVE_SPEED * delta
@@ -79,7 +93,8 @@ func _draw() -> void:
 			_draw_outskirts()
 		"scifi.ruins":
 			_draw_ruins()
-	_draw_npc()
+	if not AppState.recruited_members.has(recruit_id):
+		_draw_npc()
 	if enemy_visible:
 		_draw_enemy()
 		draw_rect(Rect2(566, 88, 13, 34), Color("#a2ded1"))
@@ -118,9 +133,22 @@ func _draw_ruins() -> void:
 
 
 func _draw_npc() -> void:
+	var color: Color = AppState.MEMBER_DEFS[recruit_id]["color"]
 	draw_circle(npc_position + Vector2(0, 10), 15.0, Color("#1a333c"))
-	draw_rect(Rect2(npc_position + Vector2(-8, -15), Vector2(16, 28)), Color("#8ed2c3"))
+	draw_rect(Rect2(npc_position + Vector2(-8, -15), Vector2(16, 28)), color)
 	draw_circle(npc_position + Vector2(0, -17), 9.0, Color("#e1c49a"))
+	match recruit_id:
+		"liang-xu":
+			draw_rect(Rect2(npc_position + Vector2(-9, -27), Vector2(18, 5)), Color("#c6c5bf"))
+			draw_circle(npc_position + Vector2(10, -23), 5.0, Color("#b0b4b6"))
+			draw_rect(Rect2(npc_position + Vector2(5, -5), Vector2(7, 10)), Color("#ba9973"))
+		"zhao-ling":
+			draw_rect(Rect2(npc_position + Vector2(-9, -27), Vector2(18, 5)), Color("#263747"))
+			draw_circle(npc_position + Vector2(-9, -17), 4.0, Color("#66c7e1"))
+			draw_circle(npc_position + Vector2(9, -17), 4.0, Color("#66c7e1"))
+		"ji-cheng":
+			draw_rect(Rect2(npc_position + Vector2(-9, -27), Vector2(14, 6)), Color("#aeb8ba"))
+			draw_rect(Rect2(npc_position + Vector2(5, -24), Vector2(5, 14)), Color("#27363d"))
 
 
 func _draw_enemy() -> void:
@@ -183,6 +211,50 @@ func _build_ui() -> void:
 	enemy_label.add_theme_color_override("font_color", Color("#ffe0cd"))
 	enemy_label.visible = enemy_visible
 	canvas.add_child(enemy_label)
+	npc_label = Label.new()
+	npc_label.position = npc_position + Vector2(-38, -49)
+	npc_label.add_theme_font_size_override("font_size", 11)
+	npc_label.add_theme_color_override("font_color", Color("#f4e6b9"))
+	canvas.add_child(npc_label)
+	records_label = Label.new()
+	records_label.position = RECORDS_POSITION + Vector2(-25, -37)
+	records_label.add_theme_font_size_override("font_size", 11)
+	records_label.add_theme_color_override("font_color", Color("#e9dba8"))
+	canvas.add_child(records_label)
+	_build_dialogue(canvas)
+
+
+func _build_dialogue(canvas: CanvasLayer) -> void:
+	dialogue_overlay = ColorRect.new()
+	dialogue_overlay.color = Color(0.04, 0.08, 0.12, 0.82)
+	dialogue_overlay.size = Vector2(640, 360)
+	dialogue_overlay.visible = false
+	canvas.add_child(dialogue_overlay)
+	var panel := ColorRect.new()
+	panel.position = Vector2(87, 93)
+	panel.size = Vector2(466, 185)
+	panel.color = Color("#263e48")
+	dialogue_overlay.add_child(panel)
+	dialogue_title = Label.new()
+	dialogue_title.position = Vector2(110, 109)
+	dialogue_title.add_theme_font_size_override("font_size", 19)
+	dialogue_title.add_theme_color_override("font_color", Color("#f1e5c6"))
+	dialogue_overlay.add_child(dialogue_title)
+	dialogue_text = Label.new()
+	dialogue_text.position = Vector2(110, 143)
+	dialogue_text.size = Vector2(419, 74)
+	dialogue_text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	dialogue_overlay.add_child(dialogue_text)
+	invite_button = Button.new()
+	invite_button.position = Vector2(110, 228)
+	invite_button.size = Vector2(183, 35)
+	invite_button.pressed.connect(_invite_companion)
+	dialogue_overlay.add_child(invite_button)
+	later_button = Button.new()
+	later_button.position = Vector2(331, 228)
+	later_button.size = Vector2(198, 35)
+	later_button.pressed.connect(_close_dialogue)
+	dialogue_overlay.add_child(later_button)
 
 
 func _refresh_text() -> void:
@@ -190,9 +262,46 @@ func _refresh_text() -> void:
 	title_label.text = AppState.destination_name(destination_id)
 	hint_label.text = AppState.text_for("area_" + key + "_hint")
 	help_label.text = AppState.text_for("area_help")
-	feedback_label.text = AppState.text_for(feedback_key)
+	feedback_label.text = feedback_message if feedback_message != "" else AppState.text_for(feedback_key)
 	back_button.text = AppState.text_for("area_back")
 	enemy_label.text = AppState.text_for("enemy_label")
+	npc_label.text = AppState.member_name(recruit_id)
+	npc_label.visible = not AppState.recruited_members.has(recruit_id)
+	records_label.text = AppState.text_for("relic_marker")
+	records_label.visible = destination_id == "scifi.ruins" and not AppState.ji_records_checked
+	dialogue_title.text = AppState.member_name(recruit_id)
+	dialogue_text.text = AppState.text_for("recruit_ji_locked" if recruit_id == "ji-cheng" and not AppState.ji_records_checked else "recruit_" + recruit_id.split("-")[0])
+	invite_button.text = AppState.text_for("recruit_invite")
+	invite_button.disabled = recruit_id == "ji-cheng" and not AppState.ji_records_checked
+	later_button.text = AppState.text_for("recruit_later")
+
+
+func _open_dialogue() -> void:
+	dialogue_open = true
+	dialogue_overlay.visible = true
+	_refresh_text()
+	if invite_button.disabled:
+		later_button.grab_focus()
+	else:
+		invite_button.grab_focus()
+
+
+func _close_dialogue() -> void:
+	dialogue_open = false
+	dialogue_overlay.visible = false
+	back_button.grab_focus()
+
+
+func _invite_companion() -> void:
+	if AppState.recruit_member(recruit_id):
+		feedback_message = AppState.text_for("recruit_joined") % AppState.member_name(recruit_id)
+		_close_dialogue()
+		_refresh_text()
+		queue_redraw()
+	else:
+		feedback_message = AppState.text_for("recruit_full")
+		_close_dialogue()
+		_refresh_text()
 
 
 func _open_encounter() -> void:
@@ -208,8 +317,16 @@ func _return_to_map() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
-		_return_to_map()
+		if dialogue_open:
+			_close_dialogue()
+		else:
+			_return_to_map()
 	elif event.is_action_pressed("interact"):
-		if hero.position.distance_to(npc_position) < 50.0:
-			feedback_key = "npc_" + destination_id.trim_prefix("scifi.")
+		if dialogue_open:
+			return
+		if destination_id == "scifi.ruins" and not AppState.ji_records_checked and hero.position.distance_to(RECORDS_POSITION) < 43.0:
+			AppState.ji_records_checked = true
+			feedback_message = AppState.text_for("relic_done")
 			_refresh_text()
+		elif not AppState.recruited_members.has(recruit_id) and hero.position.distance_to(npc_position) < 50.0:
+			_open_dialogue()

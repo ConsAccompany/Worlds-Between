@@ -48,8 +48,9 @@ func _run_checks() -> void:
 		interact.action = "interact"
 		interact.pressed = true
 		area._unhandled_input(interact)
-		if not _check(area.get("feedback_label").text != app.text_for("npc_prompt"), "NPC interaction: " + id):
+		if not _check(area.get("dialogue_open"), "NPC interaction: " + id):
 			return
+		area.get("later_button").pressed.emit()
 		if id != "scifi.city":
 			if not _check(area.get("enemy_visible"), "enemy visible: " + id):
 				return

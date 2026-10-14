@@ -38,16 +38,16 @@ func _run_checks() -> void:
 		return
 	if not _check(not InputMap.has_action("battle_jump"), "no battle jump action"):
 		return
-	var before_x: float = battle.get("player_x")
+	var before_x: float = battle.get("fighters")[0]["x"]
 	Input.action_press("move_right")
 	await _settle()
 	Input.action_release("move_right")
-	if not _check(battle.get("player_x") > before_x, "horizontal movement"):
+	if not _check(battle.get("fighters")[0]["x"] > before_x, "horizontal movement"):
 		return
 	if not _check(not battle._try_attack() and battle.get("enemy_hp") == 64, "out-of-range attack misses"):
 		return
-	battle.set("attack_cooldown", 0.0)
-	battle.set("player_x", battle.get("enemy_x") - 45.0)
+	battle.get("fighters")[0]["attack_cooldown"] = 0.0
+	battle.get("fighters")[0]["x"] = battle.get("enemy_x") - 45.0
 	if not _check(battle._try_attack() and battle.get("enemy_hp") == 45, "melee attack damages enemy"):
 		return
 	var energy_before: int = app.hero_state["energy"]
@@ -58,7 +58,7 @@ func _run_checks() -> void:
 	battle._apply_enemy_hit()
 	if not _check(app.hero_state["hp"] == hp_before, "dodge avoids damage"):
 		return
-	battle.set("dodge_time", 0.0)
+	battle.get("fighters")[0]["dodge_time"] = 0.0
 	Input.action_press("battle_guard")
 	battle._apply_enemy_hit()
 	Input.action_release("battle_guard")
@@ -72,7 +72,7 @@ func _run_checks() -> void:
 	if not _check(app.hero_state["energy"] == energy_after, "energy does not recover naturally"):
 		return
 	battle.set("enemy_hp", 19)
-	battle.set("attack_cooldown", 0.0)
+	battle.get("fighters")[0]["attack_cooldown"] = 0.0
 	Input.action_press("battle_attack")
 	await process_frame
 	Input.action_release("battle_attack")
@@ -94,7 +94,7 @@ func _run_checks() -> void:
 	battle = current_scene
 	if not _check(battle.get("enemy_id") == "sentry" and battle.get("enemy_hp") == 96, "sentry has higher fixed difficulty"):
 		return
-	battle.set("player_x", battle.get("enemy_x") - 45.0)
+	battle.get("fighters")[0]["x"] = battle.get("enemy_x") - 45.0
 	app.hero_state["hp"] = 10
 	battle._apply_enemy_hit()
 	if not _check(battle.get("battle_finished") and not battle.get("battle_won"), "sentry can defeat the party"):

@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
   "planVersion": "v0.1",
-  "updatedAt": "2026-10-13T20:19:00-04:00",
-  "currentStep": "M4",
+  "updatedAt": "2026-10-13T20:32:13-04:00",
+  "currentStep": "M5",
   "steps": [
     {
       "id": "M1",
@@ -52,16 +52,22 @@
     {
       "id": "M4",
       "title": "Companions and AI",
-      "status": "ready",
+      "status": "done",
       "summary": "Five slots, three recruit routes, level matching, switching, AI, pause commands.",
       "acceptance": "All three remain recruitable; four-person team wins; AI and direct commands work.",
-      "evidence": [],
+      "evidence": [
+        "game/tests/m4_smoke.gd: M4_SMOKE_OK (three recruit paths, decline and revisit, level matching, five slots, switching, pause, quick skill, AI policy, temporary order, full-auto win, downed recovery)",
+        "outputs/rpg-2-star-ocean-the-second_scifi-city_companion-exploration_m4_20261013-203138-5e777182.png",
+        "outputs/rpg-2-star-ocean-the-second_scifi-liang-xu_recruitment-dialogue_m4_20261013-203138-d211470b.png",
+        "outputs/rpg-2-star-ocean-the-second_scifi-party_battle-hud_m4_20261013-203138-11f66e25.png",
+        "outputs/rpg-2-star-ocean-the-second_scifi-party_pause-orders_m4_20261013-203138-e007d25b.png"
+      ],
       "blocker": null
     },
     {
       "id": "M5",
       "title": "Levels and jobs",
-      "status": "todo",
+      "status": "ready",
       "summary": "XP, JP, aptitudes, four job series, mandatory choice at level 10.",
       "acceptance": "Stay, promote and switch jobs; return with prior progress; 25% reserve rewards.",
       "evidence": [],
