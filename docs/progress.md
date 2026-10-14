@@ -109,3 +109,10 @@ The M8 preview is a static visual-direction candidate. Its background has no sep
 - Fresh cloud Godot 4.7.2 import, M1–M7, M6 cold restart and the new M8 city integration check pass. The rendered check covers both appearances, movement, recruitment visibility and saved/legacy positions. Four separate Chinese/English playable-city viewport captures were inspected.
 - Review: [city integration review](../outputs/rpg-2-star-ocean-the-second_scifi-city_integration-review_m8-foot-anchors_20261014-051328-11830a39.md); [capture manifest](../outputs/rpg-2-star-ocean-the-second_scifi-city_in-engine-check_manifest_m8-foot-anchors_20261014-051328-11830a39.json).
 - This is candidate integration evidence. Asset acceptance flags and M7/M8/M9 statuses are unchanged. Directional walking, layered occlusion, detailed obstacle alignment, fullscreen review and two genuine human timed playthroughs remain outstanding.
+
+## 2026-10-14 - City navigation boundary candidate
+
+- Replaced the broad western rectangle with garden, lamp-base and planter polygons. Swept movement prevents crossing narrow obstacles on long frames; edge sliding and nearest-valid save recovery preserve access to the city route.
+- Godot 4.7.2 navigation checks pass headless and rendered; city integration, M2, M6 and both M7 automated routes pass. Four separate Chinese/English engine captures were inspected, including diagnostic boundary overlays.
+- Review: [city navigation review](../outputs/rpg-2-star-ocean-the-second_scifi-city_navigation-review_m8-boundaries_20261014-063728-a19da10f.md); [manifest](../outputs/rpg-2-star-ocean-the-second_scifi-city_navigation-manifest_m8-boundaries_20261014-063728-a19da10f.json).
+- This remains candidate integration. Static cutouts, foreground occlusion, detailed architecture alignment and genuine human playthroughs remain unfinished. Asset acceptance and M7/M8/M9 statuses are unchanged.
