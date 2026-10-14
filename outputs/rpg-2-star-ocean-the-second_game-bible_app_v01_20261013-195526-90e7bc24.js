@@ -6,7 +6,9 @@
     bible:null, inventory:null, progress:null, playtests:[], playtestStatus:{phase:'loading'}, view:'home', query:'',
     chapter:'chapter-3', character:'hero', board:'全部板块',
     group:'全部来源', assetScope:'all', openGroups:new Set(['characters']), feedbackOpen:false,
+    readiness:null, readinessRaw:'', readinessStatus:'idle', readinessFilter:'all',
   };
+  const assetStages={planned:'待制作',concept:'概念稿',approved:'已修订',production:'制作中',ready:'可验收'};
   const esc = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
   const inline = value => esc(value)
     .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
@@ -124,6 +126,92 @@
     document.getElementById('group-filter').addEventListener('change',e=>{state.group=e.target.value;render();});
     content.querySelectorAll('[data-character]').forEach(el=>el.addEventListener('click',()=>{state.character=el.dataset.character;render();}));
   }
+  // Character sprite readiness checklist: read-only facts from /character-readiness. Every label below is a lookup
+  // of the checklist's own value; unknown values are shown verbatim (escaped) rather than reinterpreted as approval.
+  const readinessKind='character_sprite_production_readiness_checklist';
+  const readinessValid=data=>data?.schema_version===1&&data.kind===readinessKind&&Array.isArray(data.variants)&&Array.isArray(data.hair_review?.candidate_confusion_groups)&&data.summary&&typeof data.summary==='object';
+  const readinessText={
+    approved:'已批准',concept:'概念稿',pending:'待定',out_of_mvp_scope:'非 MVP 范围',pending_pilot_values:'待试点数值',
+    pending_human_review:'待人工复核',undeclared:'未声明',user_only:'仅用户',not_run_no_production_frames:'未运行（无正式帧）',
+    not_started:'未开始',placeholder_32x48_rejected_baseline:'32×48 占位（已否定为画质基线）',unregistered_placeholder_manifest:'未登记的 32×48 占位清单',
+  };
+  const rt=value=>esc(value==null?'未记录':readinessText[value]??value);
+  const readinessRosters={all:'全部 52 个变体',protagonist:'主角',main:'主线伙伴',side:'支线伙伴',situational:'情境招募伙伴',review:'仅含发型复核提示'};
+  const portraitHref=file=>typeof file==='string'&&/^outputs\/[A-Za-z0-9._-]+\.png$/.test(file)?'/assets/'+encodeURIComponent(file.slice('outputs/'.length)):'';
+  const checkedText=value=>value===true?'已勾选':value===false?'未勾选':'未记录';
+  function readinessSection() {
+    const status=state.readinessStatus, data=state.readiness;
+    const intro='<div class="section-label">角色精灵就绪清单 · 逐变体</div>';
+    if(!data){
+      const message=status==='error'?'角色就绪清单暂时无法读取。请用当前 server v05 重新启动本地面板以启用 /character-readiness。':'正在读取角色就绪清单…';
+      return intro+`<section class="card" id="character-readiness"><p class="muted small" role="status">${esc(message)}</p></section>`;
+    }
+    const s=data.summary, ready=s.readiness_states||{}, source=s.source_portraits||{};
+    const groups=data.hair_review.candidate_confusion_groups;
+    const prompts=new Map();
+    for(const group of groups)for(const member of group.members||[]){if(!prompts.has(member.visual_id))prompts.set(member.visual_id,[]);prompts.get(member.visual_id).push(group);}
+    const filter=state.readinessFilter;
+    const visible=data.variants.filter(v=>filter==='all'||(filter==='review'?prompts.has(v.visual_id):v.roster===filter));
+    const open=key=>state.openGroups.has(key)?'open':'';
+    const gate=(label,value,detail)=>`<div class="gate-row"><span class="gate-name">${esc(label)}</span><span class="badge warn">${value}</span><span class="small muted">${detail}</span></div>`;
+    const variantRow=v=>{
+      const g=v.gates||{}, art=g.source_art||{}, facing=g.four_facing||{}, walk=g.exploration_animation||{}, combat=g.combat_animation||{}, scale=g.scale||{}, qa=g.qa||{}, accept=g.art_acceptance||{}, display=g.runtime_display||{};
+      const href=portraitHref(art.portrait?.path), mine=prompts.get(v.visual_id)||[];
+      const placeholderDirections=Object.keys(facing.placeholder_directions||{}).length;
+      const scaleOpen=['master','scale','cell_size','ground_pin'].filter(key=>scale[key]==null).length;
+      const key='readiness.'+v.visual_id;
+      return `<details class="readiness-row" data-readiness-open="${esc(key)}" ${open(key)}><summary><span class="readiness-num">${esc(String(v.ordinal).padStart(2,'0'))}</span><strong>${esc(v.display_name_zh)}</strong> <code>${esc(v.visual_id)}</code><span class="readiness-badges">${badge('立绘'+(readinessText[art.approval]??art.approval??'未记录'),art.approval==='approved'?'good':'warn')}${badge('美术验收 '+(readinessText[accept.status]??accept.status??'未记录'),'warn')}${mine.length?badge('复核提示 ×'+mine.length,'prompt'):''}</span></summary>
+        <div class="readiness-body small">
+          <p><strong>身份／发型锚点（注册表原文）：</strong>${v.anchor_has_hair===false?'<span class="muted">（锚点无发型，机器人头部外廓）</span>':''}「${esc(v.identity_and_hair_anchor)}」</p>
+          <p><strong>来源立绘：</strong>${rt(art.approval)} · <span class="receipt-name">${esc(art.portrait?.path||'未登记')}</span>${art.portrait?.exists===false?' · <span class="warn-text">文件缺失</span>':''}${href?` · <a href="${href}" target="_blank" rel="noopener">查看</a>`:''}</p>
+          <p><strong>就绪状态：</strong>${rt(v.readiness_state)} · 入库阶段 ${esc(v.intake_stage)}</p>
+          <div class="gate-list">
+            ${gate('G1 四方向',rt(facing.status),`正式 ${esc((facing.production_directions_done||[]).length)}/${esc((facing.required_directions||[]).length)}${placeholderDirections?` · 占位 ${esc(placeholderDirections)} 向`:''} · 西向绘制 ${rt(facing.west_authoring)}`)}
+            ${gate('G2 探索动画',rt(walk.status),`${walk.placeholder_idle_frames||walk.placeholder_walk_frames?`占位 待机 ${esc(walk.placeholder_idle_frames||0)} + 行走 ${esc(walk.placeholder_walk_frames||0)} · `:''}正式帧数${walk.frame_counts_user_approved===true?'已获用户批准':'未批准'}`)}
+            ${gate('G2c 战斗动画',rt(combat.status),combat.mvp_required?`MVP 必需 · 原型 ${esc(combat.prototype_actions??0)} 动作 ${esc(combat.prototype_frames??0)} 帧 · 资产清单${checkedText(combat.inventory_checked)}`:'资产清单为完整游戏范围')}
+            ${gate('G3 比例',rt(scale.status),`显示高度 ${esc(scale.target_display_height_logical_px??'未记录')} 逻辑像素 · ${scaleOpen?`${esc(scaleOpen)} 项数值未定`:'数值已登记'}`)}
+            ${gate('G4 QA',rt(qa.status),`自动检查 ${rt(qa.automated_metadata_checks)} · 实机回执${qa.in_engine_capture_receipt?'已登记':'无'} · 人工复核 ${rt(qa.human_identity_direction_review)}`)}
+            ${gate('G5 美术验收',rt(accept.status),`决定人 ${rt(accept.decided_by)} · 资产清单${checkedText(accept.inventory_checked)} · 回执${accept.receipt?'已登记':'无'}`)}
+            ${gate('显示图',rt(display.status),`${esc(assetStages[display.inventory_stage]||display.inventory_stage||'未记录')} · 资产清单${checkedText(display.inventory_checked)}`)}
+          </div>
+          ${mine.length?`<div class="review-prompt"><strong>复核提示（不是决定）：</strong><ul>${mine.map(group=>`<li><code>${esc(group.group)}</code> · ${esc(group.concern)}</li>`).join('')}</ul></div>`:''}
+        </div></details>`;
+    };
+    const groupCard=group=>`<div class="review-prompt"><div class="step-top"><span><span class="kicker">复核提示</span> <code>${esc(group.group)}</code></span>${badge(readinessText[group.decision]??group.decision??'未记录','prompt')}</div><ul>${(group.members||[]).map(m=>`<li><strong>${esc(m.display_name_zh)}</strong> <code>${esc(m.visual_id)}</code>：「${esc(m.anchor)}」</li>`).join('')}</ul><p class="muted">${esc(group.concern)}</p></div>`;
+    const notes=data.hair_review.anchor_notes||[], robots=data.hair_review.no_hair_robot_variants||[], paths=data.path_check||{};
+    return intro+`<section class="card" id="character-readiness">
+      <p class="muted small">事实清单，只读显示，不批准任何素材。下列数值均来自清单 JSON；美术验收只由用户决定。生成与校验见清单所附脚本。</p>
+      <div class="readiness-summary small">
+        <div><strong>来源立绘</strong>已批准 ${esc(source.approved??0)} · 概念稿 ${esc(source.concept??0)}</div>
+        <div><strong>就绪状态</strong>未开始 ${esc(ready.not_started??0)} · 32×48 占位（已否定）${esc(ready.placeholder_32x48_rejected_baseline??0)} · 未登记占位清单 ${esc(ready.unregistered_placeholder_manifest??0)}</div>
+        <div><strong>美术验收</strong>${esc(s.art_accepted??0)} / ${esc(data.variants.length)} · MVP 战斗 ${esc(s.combat_mvp_accepted??0)} / ${esc((data.scope?.combat_mvp_variants||[]).length)} · 显示图 ${esc(s.runtime_display_accepted??0)} / ${esc(data.variants.length)}</div>
+        <div><strong>入库阶段</strong>阶段 0：${esc(s.intake_stage_0??0)} · 正式帧数${s.any_manifest_declares_frame_counts?'已有清单声明':'均未声明'}</div>
+      </div>
+      <p class="muted small">四方向、探索动画、比例、QA 与美术验收闸门对全部变体均为待定；战斗动画只对 MVP 可玩五形象要求。</p>
+      <div class="filters"><label><span class="visually-hidden">筛选就绪清单</span><select id="readiness-filter">${Object.entries(readinessRosters).map(([value,label])=>`<option value="${value}" ${value===filter?'selected':''}>${label}</option>`).join('')}</select></label><span class="muted small">显示 ${esc(visible.length)} / ${esc(data.variants.length)}</span></div>
+      <div class="readiness-list">${visible.map(variantRow).join('')||'<div class="empty">当前筛选没有变体。</div>'}</div>
+      <details class="group" data-readiness-open="readiness.hair" ${open('readiness.hair')}><summary>发型潜在混淆 · ${esc(groups.length)} 组复核提示 <span class="group-count">待人工复核</span></summary><div class="card small">
+        <p class="muted">以下只是 48 px 精灵尺度下的潜在混淆提示，不改写角色设定、发型或已批准立绘；是否处理由用户决定。</p>
+        ${groups.map(groupCard).join('')}
+        ${notes.length?`<strong>锚点本身含糊</strong><ul>${notes.map(n=>`<li><code>${esc(n.visual_id)}</code>：${esc(n.note)}</li>`).join('')}</ul>`:''}
+        ${robots.length?`<p><strong>无发型的机器人变体（${esc(robots.length)}）：</strong>${robots.map(id=>`<code>${esc(id)}</code>`).join(' ')}；需确认以头部外廓代替发型锚点。</p>`:''}
+      </div></details>
+      <p class="muted small">路径核对：缺失 ${esc((paths.missing||[]).length)} · 已引用未跟踪 ${esc((paths.untracked_but_referenced||[]).length)} · 注册表差异 ${esc((paths.registry_discrepancies||[]).length)}（只记录，未修改注册表）。</p>
+    </section>`;
+  }
+  async function refreshReadiness(){
+    try {
+      const response=await fetch('/character-readiness',{cache:'no-store'});if(!response.ok)throw new Error('Readiness unavailable');
+      const text=await response.text();
+      if(text===state.readinessRaw&&state.readiness)return;
+      const data=JSON.parse(text);if(!readinessValid(data))throw new Error('Unexpected readiness format');
+      Object.assign(state,{readiness:data,readinessRaw:text,readinessStatus:'ready'});
+    } catch (_) {
+      if(state.readiness)return;
+      state.readinessStatus='error';
+    }
+    if(state.view==='production'&&!state.query)render();
+  }
   function renderProduction() {
     const p=state.progress, done=p.steps.filter(s=>s.status==='done').length;
     const current=p.steps.find(s=>s.id===p.currentStep)||p.steps.find(s=>s.status!=='done');
@@ -163,10 +251,21 @@
     const environmentReview=state.bible.environmentVisualReview||{};
     const checked=items=>items.filter(item=>item.checked).length;
     const pct=Math.round(100*done/p.steps.length);
+    // Female south idle refinement candidates (2026-10-14): static frames awaiting the user's review, not approved.
+    const idleRefineCapture=(area,variant)=>`/assets/rpg-2-star-ocean-the-second_${area}_protagonist-female-south-idle-refine-${variant}-candidate-h48_m8-v01_20261014-231811-850083fd.png`;
+    const idleRefineCandidates=[
+      ['inkline','描线版 inkline','全轮廓近黑描线，41 色；睫毛带外挑，2 像素嘴。','fb830d80'],
+      ['selout','选择性描线版 selout','轮廓按各材质取最深色，26 色；无外挑睫毛，带腮红像素。','4d141ad5'],
+    ];
+    const idleRefineCard=([variant,title,note,hash])=>`<section class="card" id="idle-refine-${variant}"><div class="step-top"><h3>女主南向静态待机 · ${esc(title)}</h3>${badge('待用户审阅 · 未批准','warn')}</div><p class="small">${esc(note)} 80×112 单帧，可见身体 43×96，按 48 逻辑像素显示。</p><figure class="visual-sample idle-refine"><a href="${idleRefineCapture('city',variant)}" target="_blank" rel="noopener"><img src="${idleRefineCapture('city',variant)}" alt="科技城 1280×720 Godot 实机画面：女主南向待机 ${esc(variant)} 候选与 32×48 占位并排" loading="lazy"></a><figcaption>科技城 1280×720 实机画面，左侧为旧 32×48 占位。点击打开原尺寸。</figcaption></figure><p class="small">其他 1280×720 实机画面：<a href="${idleRefineCapture('outskirts-bright',variant)}" target="_blank" rel="noopener">明亮城外</a> · <a href="${idleRefineCapture('prototype-room-dark',variant)}" target="_blank" rel="noopener">暗色原型室</a></p><p class="muted small">先定静态帧，行走帧暂停，尚未开始任何行走帧。未接入可玩角色。探索精灵验收仍为 0/52，场景画质仍为 0/11。自动 QA 只做测量，未经人工审阅。</p><p class="muted small receipt-name">源文件：game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-refine-${variant}-candidate_m8-v01_20261014-231100-${hash}.png</p></section>`;
     content.innerHTML=`${head('制作路线','新版 MVP：完整角色视觉身份与精致科技区场景',badge(done+' / '+p.steps.length+' 阶段','accent'))}
       <div class="card"><div class="step-top"><strong>已完成阶段</strong><span>${done} / ${p.steps.length}</span></div><div class="meter" role="progressbar" aria-valuemin="0" aria-valuemax="${p.steps.length}" aria-valuenow="${done}"><span style="width:${pct}%"></span></div><p class="muted small">当前重点：${current?esc(current.id+' · '+copy[current.id][0]):'全部阶段已完成'}。阶段数量不代表剩余工作量。</p></div>
       <div class="section-label">新版画面验收</div>
-      <section class="card"><h3>51 位角色 · 科技区完成画面</h3><p>目标是主角男女两版与 50 位伙伴都有游戏内展示图及四方向探索精灵；试玩仍只开放科技区角色。场景画质以《逸剑风云决》为参考，验收科技区自己的完成画面。</p><p class="small">来源设定图 ${checked(portraits)} / ${portraits.length} 已验收 · 游戏内展示图 ${checked(displays)} / ${displays.length} · 探索精灵 ${checked(sprites)} / ${sprites.length} · 场景画质 ${checked(scenes)} / ${scenes.length}</p><p class="small">功能占位：${characterReview.nativeWalkCharactersAuthored||0} 套旧 32×48 四向探索动作（画质基线已否定） · ${characterReview.nativeRecruitNpcDisplaysIntegrated||0} 位科技区伙伴已作为 NPC 显示 · ${characterReview.sideviewCombatSetsIntegrated||0} 套横向战斗原型已接入、均未获美术批准 · 地图 ${environmentReview.mapCandidatesIntegrated||0}、户外 ${environmentReview.outdoorCandidatesIntegrated||0}、勘察室 ${environmentReview.surveyRoomCandidatesIntegrated||0} 张背景候选已接入。</p><p class="muted small">用户已批准三人同城展示采用 48 逻辑像素比例；这只批准显示比例，探索精灵仍是 0/52 验收。男女主和梁序各有南／东／北三张高精度静态候选（共九张），均未接入可玩角色或获美术批准。梁序东向躯干、北向头部与低透明度边缘仍待修正；女主四相试循环出现围巾尾与护膝跳边，动画验收受阻。1280×720 画布点击与键盘交互回归已通过，英文地图说明与存档按钮重叠已修复。独立审查画廊可查看 ${characterReview.sourceGalleryImagesLoaded||0} 张来源设定图（9 张已批准、43 张概念稿）；画廊不计作游戏内展示图或精灵验收。M7 人工试玩仍待完成。</p>${citySample?.file?`<figure class="visual-sample"><a href="${esc(citySample.file)}" target="_blank" rel="noopener"><img src="${esc(citySample.file)}" alt="科技城市与主角、梁序的 Godot 实际画面样板" loading="lazy"></a><figcaption>Godot 可玩科技城候选画面；仍待视觉与操作验收。</figcaption></figure>`:''}<p class="muted small">候选图与动作原型不计为已验收完成画面。各项仍按资产清单单独验收。</p><button type="button" class="chip" id="open-visual-assets">查看视觉资产清单</button></section>
+      <section class="card"><h3>51 位角色 · 科技区完成画面</h3><p>目标是主角男女两版与 50 位伙伴都有游戏内展示图及四方向探索精灵；试玩仍只开放科技区角色。场景画质以《逸剑风云决》为参考，验收科技区自己的完成画面。</p><p class="small">来源设定图 ${checked(portraits)} / ${portraits.length} 已验收 · 游戏内展示图 ${checked(displays)} / ${displays.length} · 探索精灵 ${checked(sprites)} / ${sprites.length} · 场景画质 ${checked(scenes)} / ${scenes.length}</p><p class="small">功能占位：${characterReview.nativeWalkCharactersAuthored||0} 套旧 32×48 四向探索动作（画质基线已否定） · ${characterReview.nativeRecruitNpcDisplaysIntegrated||0} 位科技区伙伴已作为 NPC 显示 · ${characterReview.sideviewCombatSetsIntegrated||0} 套横向战斗原型已接入、均未获美术批准 · 地图 ${environmentReview.mapCandidatesIntegrated||0}、户外 ${environmentReview.outdoorCandidatesIntegrated||0}、勘察室 ${environmentReview.surveyRoomCandidatesIntegrated||0} 张背景候选已接入。</p><p class="muted small">用户已批准三人同城展示采用 48 逻辑像素比例；这只批准显示比例，探索精灵仍是 0/52 验收。男女主和梁序各有南／东／北三张高精度静态候选（共九张），均未接入可玩角色或获美术批准。梁序东向躯干、北向头部与低透明度边缘仍待修正；女主四相试循环出现围巾尾与护膝跳边，动画验收受阻。女主南向静态待机的 Box 与 Lanczos 两张量化候选均已被用户否定（打磨不足），基线选择为“两者都不用”；当前先继续精修静态待机帧，行走帧制作暂停，待新的静态待机获用户批准后再开始。1280×720 画布点击与键盘交互回归已通过，英文地图说明与存档按钮重叠已修复。独立审查画廊可查看 ${characterReview.sourceGalleryImagesLoaded||0} 张来源设定图（9 张已批准、43 张概念稿）；画廊不计作游戏内展示图或精灵验收。M7 人工试玩仍待完成。</p>${citySample?.file?`<figure class="visual-sample"><a href="${esc(citySample.file)}" target="_blank" rel="noopener"><img src="${esc(citySample.file)}" alt="科技城市与主角、梁序的 Godot 实际画面样板" loading="lazy"></a><figcaption>Godot 可玩科技城候选画面；仍待视觉与操作验收。</figcaption></figure>`:''}<p class="muted small">候选图与动作原型不计为已验收完成画面。各项仍按资产清单单独验收。</p><button type="button" class="chip" id="open-visual-assets">查看视觉资产清单</button></section>
+      <div class="section-label">女主南向静态待机 · 两张新候选待审阅</div>
+      <p class="muted small">此前 Box 与 Lanczos 两张量化候选已被用户否定。以下两张为新的静态候选，各自独立审阅；不代表批准。</p>
+      ${idleRefineCandidates.map(idleRefineCard).join('')}
+      ${readinessSection()}
       <div class="section-label">分步实施</div>
       <div class="stack">${p.steps.map(step=>`<details class="group"><summary>${esc(step.id+' · '+copy[step.id][0])} <span class="group-count">${esc(status[step.status]||step.status)}</span></summary><div class="card"><p>${esc(copy[step.id][1])}</p><strong>验收标准</strong><p>${esc(copy[step.id][2])}</p>${step.details?.length?'<strong>当前内容</strong><ul>'+step.details.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>':''}${step.remaining?.length?'<strong>尚需完成</strong><ul>'+step.remaining.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>':''}${step.evidence?.length?'<strong>已有依据</strong><ul>'+step.evidence.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>':''}</div></details>`).join('')}</div>
       <div class="section-label">M7 试玩记录</div>
@@ -179,9 +278,9 @@
       <div class="stack">${state.bible.chapters.filter(c=>[8,9].includes(c.number)).map(c=>`<details class="group" data-production-chapter="${c.id}"><summary>${esc(c.title)}</summary><div class="document">${markdown(c.body)}${sourceLine(c.source)}</div></details>`).join('')}</div>
       <div class="section-label">计划与完整实施顺序</div>
       <div class="card"><a href="/source/mvp" target="_blank" rel="noopener">打开 MVP 实施计划</a> · <a href="/source/brief" target="_blank" rel="noopener">打开完整设计稿</a></div>`;
-    const currentCityCaption=content.querySelector('.visual-sample figcaption');
+    const currentCityCaption=content.querySelector('.visual-sample:not(.idle-refine) figcaption');
     if(currentCityCaption)currentCityCaption.textContent='Godot 可玩科技城 · 当前旧 32×48 角色帧仅作功能占位，已被否定为完成画质基线。';
-    const visualCard=content.querySelector('.visual-sample')?.parentElement;
+    const visualCard=content.querySelector('.visual-sample:not(.idle-refine)')?.parentElement;
     if(visualCard){
       for(const sample of state.bible.characterVisualReview?.previews||[]){
         if(sample.file===citySample?.file)continue;
@@ -195,6 +294,9 @@
     content.querySelector('#refresh-playtests').addEventListener('click',()=>refreshPlaytests().catch(()=>{document.getElementById('footer-status').textContent='试玩记录暂时无法读取';}));
     content.querySelector('#open-visual-assets').addEventListener('click',()=>{state.assetScope='mvp';state.openGroups.add('characters');state.openGroups.add('world');state.openGroups.delete('characters.runtime-displays');state.openGroups.delete('world.scene-quality');navigate('assets');});
     content.querySelector('#start-playtest').addEventListener('click',startPlaytest);
+    content.querySelector('#readiness-filter')?.addEventListener('change',event=>{state.readinessFilter=event.target.value;render();});
+    content.querySelectorAll('[data-readiness-open]').forEach(el=>el.addEventListener('toggle',()=>el.open?state.openGroups.add(el.dataset.readinessOpen):state.openGroups.delete(el.dataset.readinessOpen)));
+    if(state.readinessStatus==='idle'){state.readinessStatus='loading';refreshReadiness();}
     content.querySelector('#open-job-proposal').addEventListener('click',()=>navigate('rules',{chapter:'chapter-4'}));
     content.querySelector('#playtest-feedback').addEventListener('toggle',event=>{state.feedbackOpen=event.target.open;});
     content.querySelectorAll('[data-feedback]').forEach(field=>field.addEventListener('input',()=>{
@@ -242,8 +344,7 @@
           });
           const body=document.createElement('div');const name=document.createElement('strong');name.textContent=item.name;body.append(name);
           const meta=document.createElement('div');meta.className='asset-meta';
-          const stages={planned:'待制作',concept:'概念稿',approved:'已修订',production:'制作中',ready:'可验收'};
-          meta.textContent=(item.scope==='MVP'?'MVP':'完整游戏')+' · '+(stages[item.stage]||item.stage)+(item.target>1?' · 目标 '+item.target+' 份':'')+(item.board?' · '+item.board:'');
+          meta.textContent=(item.scope==='MVP'?'MVP':'完整游戏')+' · '+(assetStages[item.stage]||item.stage)+(item.target>1?' · 目标 '+item.target+' 份':'')+(item.board?' · '+item.board:'');
           if(item.file){const link=document.createElement('a');link.href=item.file;link.target='_blank';link.rel='noopener';link.textContent='查看';meta.append(link);}
           body.append(meta);if(item.note){const note=document.createElement('div');note.className='asset-meta';note.textContent=item.note;body.append(note);}
           row.append(box,body);list.append(row);
@@ -319,7 +420,7 @@
   }
   nav.forEach(button=>button.addEventListener('click',()=>navigate(button.dataset.view)));
   search.addEventListener('input',()=>{state.query=search.value.trim();render();});
-  document.addEventListener('visibilitychange',()=>{if(!document.hidden){refreshInventory().catch(()=>{});refreshProgress().catch(()=>{});refreshPlaytests().catch(()=>{});refreshPlaytestStatus().catch(()=>{});}});
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden){refreshInventory().catch(()=>{});refreshProgress().catch(()=>{});refreshPlaytests().catch(()=>{});refreshPlaytestStatus().catch(()=>{});if(state.readinessStatus!=='idle')refreshReadiness();}});
   setInterval(()=>{if(!document.hidden){refreshProgress().catch(()=>{});refreshInventory().catch(()=>{});refreshPlaytests().catch(()=>{});refreshPlaytestStatus().catch(()=>{});}},10000);
   Promise.all([
     fetch('/bible',{cache:'no-store'}).then(r=>r.ok?r.json():Promise.reject()),

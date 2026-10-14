@@ -1,0 +1,5445 @@
+{
+  "schema_version": 1,
+  "kind": "character_sprite_production_readiness_checklist",
+  "scope": {
+    "visual_variants": 52,
+    "character_identities": 51,
+    "mvp": "all 51 characters need an in-game visual identity (52 variants); playable content is the science region",
+    "combat_mvp_variants": [
+      "protagonist-male",
+      "protagonist-female",
+      "liang-xu",
+      "ji-cheng",
+      "zhao-ling"
+    ]
+  },
+  "sources": {
+    "registry": {
+      "path": "game/data/character-visuals/rpg-2-star-ocean-the-second_character-visual-registry_m8-v01_20261014-134810-2a5d1b3c.json",
+      "sha256": "2f0fc50ebdbef237a9a2fc098a7e7496e57776c6751d920f9137ab58d3d5556a"
+    },
+    "inventory": {
+      "path": "outputs/rpg-2-star-ocean-the-second_asset-inventory_state_v01_20261013-191033-7d1e0a8b.json",
+      "sha256": "a190f5fec5adbfd05e5ff911c3d1a2d43d01b4adba218a5c37fba4e73c3330f1"
+    },
+    "visual_spec": "docs/character-visuals/rpg-2-star-ocean-the-second_character-visual-spec_topdown-v01_20261014-135700-17a0c9d4.md",
+    "intake_checklist": "docs/character-visuals/rpg-2-star-ocean-the-second_character-visuals_asset-intake-checklist_m8-design_20261014-162946-c4e7a19d.md",
+    "core_hairstyle_manifest": "outputs/rpg-2-star-ocean-the-second_core-cast_hairstyle-manifest_v02_20261013-161317-4f5a6c7d.md",
+    "remaining_companions_manifest": "outputs/rpg-2-star-ocean-the-second_remaining-companions_character-sheet-manifest_v01_20261013-194808-b6d7ee1d.md"
+  },
+  "policy": {
+    "art_acceptance": "only the user may accept art; each status mirrors the user-controlled inventory checked flag (runtime-sprite / playable-combat / display); this script does not locate or verify the intake-checklist receipt file",
+    "batch_gate": "no batch production until one variant passes intake stage 4 and the user approves production frame counts",
+    "frame_counts": "user approval of production frame counts is not machine-detectable here; 20 = existing placeholder layout, 48 = single-character pilot proposal"
+  },
+  "summary": {
+    "source_portraits": {
+      "approved": 9,
+      "concept": 43
+    },
+    "readiness_states": {
+      "not_started": 45,
+      "placeholder_32x48_rejected_baseline": 5,
+      "unregistered_placeholder_manifest": 2
+    },
+    "art_accepted": 0,
+    "art_pending": 52,
+    "combat_mvp_accepted": 0,
+    "runtime_display_accepted": 0,
+    "any_manifest_declares_frame_counts": false,
+    "frame_count_manifests": [],
+    "intake_stage_0": 52,
+    "missing_paths": 0,
+    "untracked_referenced_paths": 0,
+    "git_status_checked": true
+  },
+  "variants": [
+    {
+      "ordinal": 1,
+      "visual_id": "protagonist-male",
+      "identity_id": "protagonist",
+      "display_name_zh": "主角·男",
+      "roster": "protagonist",
+      "companion_number": null,
+      "region_board": "地下社区",
+      "identity_and_hair_anchor": "蓬松层次短发",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_core-cast_hairstyle-manifest_v02_20261013-161317-4f5a6c7d.md",
+      "anchor_has_hair": true,
+      "readiness_state": "placeholder_32x48_rejected_baseline",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "concept",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_protagonist_character-sheet_male_20261013-153316-5b7c19e2.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {
+            "south": "game/assets/characters/native-prototypes/rpg-2-star-ocean-the-second_protagonist-male_native-idle-south_m8-v01_20261014-135316-4438515e.png",
+            "west": "game/assets/characters/native-prototypes/rpg-2-star-ocean-the-second_protagonist-male_native-idle-west_m8-v01_20261014-135316-2d359882.png",
+            "north": "game/assets/characters/native-prototypes/rpg-2-star-ocean-the-second_protagonist-male_native-idle-north_m8-v01_20261014-135316-2fa1bb39.png",
+            "east": "game/assets/characters/native-prototypes/rpg-2-star-ocean-the-second_protagonist-male_native-idle-east_m8-v01_20261014-135316-a23d4672.png"
+          },
+          "registered_direction_sizes": {
+            "south": [
+              32,
+              48
+            ],
+            "west": [
+              32,
+              48
+            ],
+            "north": [
+              32,
+              48
+            ],
+            "east": [
+              32,
+              48
+            ]
+          },
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "four_direction_native_walk_integrated",
+          "registry_review_status": "pending_motion_and_art_approval",
+          "placeholder_idle_frames": 4,
+          "placeholder_walk_frames": 16,
+          "placeholder_manifest": {
+            "path": "game/assets/characters/native-animation/rpg-2-star-ocean-the-second_protagonist-male_native-animation-manifest_m8-v01_20261014-141005-29a4674f.json",
+            "exists": true,
+            "git_tracked": true
+          },
+          "unregistered_manifests": [
+            "game/assets/characters/native-prototypes/rpg-2-star-ocean-the-second_protagonist-male_native-idle-manifest_m8-v01_20261014-135316-9a83ccae.json"
+          ],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "MVP",
+          "mvp_required": true,
+          "registry_production_status": "sideview_8_action_prototype_integrated",
+          "registry_review_status": "pending_art_approval",
+          "prototype_actions": 8,
+          "prototype_frames": 20,
+          "prototype_manifest": {
+            "path": "game/assets/characters/combat-prototypes/rpg-2-star-ocean-the-second_protagonist-male_sideview-combat-manifest_m8-prototype_20261014-142325-8655f25a.json",
+            "exists": true,
+            "git_tracked": true
+          },
+          "inventory_item": "playable-combat.protagonist-male",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "production",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 39,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.protagonist-male",
+          "inventory_stage": "production",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 2,
+      "visual_id": "protagonist-female",
+      "identity_id": "protagonist",
+      "display_name_zh": "主角·女",
+      "roster": "protagonist",
+      "companion_number": null,
+      "region_board": "地下社区",
+      "identity_and_hair_anchor": "高束长马尾",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_core-cast_hairstyle-manifest_v02_20261013-161317-4f5a6c7d.md",
+      "anchor_has_hair": true,
+      "readiness_state": "placeholder_32x48_rejected_baseline",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "concept",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_protagonist_character-sheet_female_20261013-153316-8fa4d0c3.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {
+            "south": "game/assets/characters/native-prototypes/rpg-2-star-ocean-the-second_protagonist-female_native-idle-south_m8-prototype_20261014-135400-3bacea6e.png",
+            "west": "game/assets/characters/native-prototypes/rpg-2-star-ocean-the-second_protagonist-female_native-idle-west_m8-prototype_20261014-135400-b023f47c.png",
+            "north": "game/assets/characters/native-prototypes/rpg-2-star-ocean-the-second_protagonist-female_native-idle-north_m8-prototype_20261014-135400-daa6122c.png",
+            "east": "game/assets/characters/native-prototypes/rpg-2-star-ocean-the-second_protagonist-female_native-idle-east_m8-prototype_20261014-135400-39d3f522.png"
+          },
+          "registered_direction_sizes": {
+            "south": [
+              32,
+              48
+            ],
+            "west": [
+              32,
+              48
+            ],
+            "north": [
+              32,
+              48
+            ],
+            "east": [
+              32,
+              48
+            ]
+          },
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "four_direction_native_walk_integrated",
+          "registry_review_status": "pending_motion_and_art_approval",
+          "placeholder_idle_frames": 4,
+          "placeholder_walk_frames": 16,
+          "placeholder_manifest": {
+            "path": "game/assets/characters/native-animation/rpg-2-star-ocean-the-second_protagonist-female_native-animation-manifest_m8-prototype_20261014-140955-d7d64ca7.json",
+            "exists": true,
+            "git_tracked": true
+          },
+          "unregistered_manifests": [
+            "game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-pixelorama-pilot-manifest_m8-v01_20261014-211454-868681b7.json",
+            "game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-quantized-downscale-manifest_m8-v01_20261014-212322-aa446773.json",
+            "game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-refinement-candidates-manifest_m8-v01_20261014-231100-08c301fd.json"
+          ],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "MVP",
+          "mvp_required": true,
+          "registry_production_status": "sideview_8_action_prototype_integrated",
+          "registry_review_status": "pending_art_approval",
+          "prototype_actions": 8,
+          "prototype_frames": 20,
+          "prototype_manifest": {
+            "path": "game/assets/characters/combat-prototypes/rpg-2-star-ocean-the-second_protagonist-female_sideview-combat-manifest_m8-prototype_20261014-143059-e2500154.json",
+            "exists": true,
+            "git_tracked": true
+          },
+          "inventory_item": "playable-combat.protagonist-female",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 39,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.protagonist-female",
+          "inventory_stage": "production",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 3,
+      "visual_id": "liang-xu",
+      "identity_id": "liang-xu",
+      "display_name_zh": "梁序",
+      "roster": "main",
+      "companion_number": 1,
+      "region_board": "科技",
+      "identity_and_hair_anchor": "灰白挑染盘发",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_core-cast_hairstyle-manifest_v02_20261013-161317-4f5a6c7d.md",
+      "anchor_has_hair": true,
+      "readiness_state": "placeholder_32x48_rejected_baseline",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "concept",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_liang-xu_character-sheet_v01_20261013-153556-c7630671.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {
+            "south": "game/assets/characters/directional-prototypes/rpg-2-star-ocean-the-second_liang-xu_native-idle-south_m8-v03_20261014-175132-e17b4c09.png",
+            "west": "game/assets/characters/directional-prototypes/rpg-2-star-ocean-the-second_liang-xu_native-idle-west_m8-v03_20261014-175132-b52910e1.png",
+            "north": "game/assets/characters/directional-prototypes/rpg-2-star-ocean-the-second_liang-xu_native-idle-north_m8-v03_20261014-175132-c742d602.png",
+            "east": "game/assets/characters/directional-prototypes/rpg-2-star-ocean-the-second_liang-xu_native-idle-east_m8-v03_20261014-175132-d853a711.png"
+          },
+          "registered_direction_sizes": {
+            "south": [
+              32,
+              48
+            ],
+            "west": [
+              32,
+              48
+            ],
+            "north": [
+              32,
+              48
+            ],
+            "east": [
+              32,
+              48
+            ]
+          },
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "four_direction_native_walk_authored",
+          "registry_review_status": "pending_motion_and_art_approval",
+          "placeholder_idle_frames": 4,
+          "placeholder_walk_frames": 16,
+          "placeholder_manifest": {
+            "path": "game/assets/characters/native-animation/rpg-2-star-ocean-the-second_liang-xu_native-animation-manifest_m8-v01_20261014-181000-c09d742e.json",
+            "exists": true,
+            "git_tracked": true
+          },
+          "unregistered_manifests": [
+            "game/assets/characters/directional-prototypes/rpg-2-star-ocean-the-second_liang-xu_native-idle-manifest_m8-v03_20261014-180100-9d804f2a.json",
+            "game/assets/characters/high-fidelity-prototypes/rpg-2-star-ocean-the-second_liang-xu_exploration-direction-concepts-manifest_m8-v01_20261014-154500-fae9103a.json"
+          ],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "MVP",
+          "mvp_required": true,
+          "registry_production_status": "sideview_8_action_prototype_integrated",
+          "registry_review_status": "pending_art_approval",
+          "prototype_actions": 8,
+          "prototype_frames": 20,
+          "prototype_manifest": {
+            "path": "game/assets/characters/combat-prototypes/rpg-2-star-ocean-the-second_liang-xu_sideview-combat-manifest_m8-prototype_20261014-143736-ddc3e7f9.json",
+            "exists": true,
+            "git_tracked": true
+          },
+          "inventory_item": "playable-combat.liang-xu",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "runtime_display": {
+          "registry_production_status": "integrated_npc_prototype",
+          "registry_review_status": "pending_art_approval",
+          "inventory_stage": "production",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 39,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.liang-xu",
+          "inventory_stage": "production",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 4,
+      "visual_id": "jiang-lan",
+      "identity_id": "jiang-lan",
+      "display_name_zh": "蒋岚",
+      "roster": "main",
+      "companion_number": 2,
+      "region_board": "科技",
+      "identity_and_hair_anchor": "剃短两侧与后脑、上梳立体发束、橙色细挑染",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_core-cast_hairstyle-manifest_v02_20261013-161317-4f5a6c7d.md",
+      "anchor_has_hair": true,
+      "readiness_state": "unregistered_placeholder_manifest",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "approved",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_jiang-lan_character-sheet_hairstyle-v02_20261013-161317-c21bd255.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {},
+          "registered_direction_sizes": {},
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "placeholder_idle_frames": 0,
+          "placeholder_walk_frames": 0,
+          "placeholder_manifest": null,
+          "unregistered_manifests": [
+            "game/assets/characters/native-animation/rpg-2-star-ocean-the-second_jiang-lan_native-exploration-manifest_m8-prototype_20261014-144703-dbe4b4c6.json"
+          ],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "Full",
+          "mvp_required": false,
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "prototype_actions": 0,
+          "prototype_frames": 0,
+          "prototype_manifest": null,
+          "inventory_item": null,
+          "inventory_checked": false,
+          "status": "out_of_mvp_scope"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 20,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.jiang-lan",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 5,
+      "visual_id": "lin-que",
+      "identity_id": "lin-que",
+      "display_name_zh": "林阙",
+      "roster": "main",
+      "companion_number": 3,
+      "region_board": "科技",
+      "identity_and_hair_anchor": "深蓝色碎层短发",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_core-cast_hairstyle-manifest_v02_20261013-161317-4f5a6c7d.md",
+      "anchor_has_hair": true,
+      "readiness_state": "not_started",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "concept",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_lin-que_character-sheet_v01_20261013-153556-88b92720.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {},
+          "registered_direction_sizes": {},
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "placeholder_idle_frames": 0,
+          "placeholder_walk_frames": 0,
+          "placeholder_manifest": null,
+          "unregistered_manifests": [],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "Full",
+          "mvp_required": false,
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "prototype_actions": 0,
+          "prototype_frames": 0,
+          "prototype_manifest": null,
+          "inventory_item": null,
+          "inventory_checked": false,
+          "status": "out_of_mvp_scope"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 0,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.lin-que",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 6,
+      "visual_id": "milo",
+      "identity_id": "milo",
+      "display_name_zh": "米洛",
+      "roster": "main",
+      "companion_number": 4,
+      "region_board": "科技",
+      "identity_and_hair_anchor": "极短圆寸、鬓角银色发片",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_core-cast_hairstyle-manifest_v02_20261013-161317-4f5a6c7d.md",
+      "anchor_has_hair": true,
+      "readiness_state": "unregistered_placeholder_manifest",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "approved",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_milo_character-sheet_hairstyle-v02_20261013-161317-f1651dc0.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {},
+          "registered_direction_sizes": {},
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "placeholder_idle_frames": 0,
+          "placeholder_walk_frames": 0,
+          "placeholder_manifest": null,
+          "unregistered_manifests": [
+            "game/assets/characters/native-animation/rpg-2-star-ocean-the-second_milo_native-exploration-manifest_m8-v01_20261014-185020-1976baf4.json"
+          ],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "Full",
+          "mvp_required": false,
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "prototype_actions": 0,
+          "prototype_frames": 0,
+          "prototype_manifest": null,
+          "inventory_item": null,
+          "inventory_checked": false,
+          "status": "out_of_mvp_scope"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 20,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.milo",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 7,
+      "visual_id": "adi",
+      "identity_id": "adi",
+      "display_name_zh": "阿荻",
+      "roster": "main",
+      "companion_number": 5,
+      "region_board": "自然",
+      "identity_and_hair_anchor": "头顶环编、背后两条粗长辫",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_core-cast_hairstyle-manifest_v02_20261013-161317-4f5a6c7d.md",
+      "anchor_has_hair": true,
+      "readiness_state": "not_started",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "approved",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_adi_character-sheet_hairstyle-v02_20261013-161317-72861851.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {},
+          "registered_direction_sizes": {},
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "placeholder_idle_frames": 0,
+          "placeholder_walk_frames": 0,
+          "placeholder_manifest": null,
+          "unregistered_manifests": [],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "Full",
+          "mvp_required": false,
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "prototype_actions": 0,
+          "prototype_frames": 0,
+          "prototype_manifest": null,
+          "inventory_item": null,
+          "inventory_checked": false,
+          "status": "out_of_mvp_scope"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 0,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.adi",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 8,
+      "visual_id": "muxiu",
+      "identity_id": "muxiu",
+      "display_name_zh": "牧修",
+      "roster": "main",
+      "companion_number": 6,
+      "region_board": "自然",
+      "identity_and_hair_anchor": "单条及背长辫",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_core-cast_hairstyle-manifest_v02_20261013-161317-4f5a6c7d.md",
+      "anchor_has_hair": true,
+      "readiness_state": "not_started",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "concept",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_muxiu_character-sheet_v01_20261013-153818-25247999.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {},
+          "registered_direction_sizes": {},
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "placeholder_idle_frames": 0,
+          "placeholder_walk_frames": 0,
+          "placeholder_manifest": null,
+          "unregistered_manifests": [],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "Full",
+          "mvp_required": false,
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "prototype_actions": 0,
+          "prototype_frames": 0,
+          "prototype_manifest": null,
+          "inventory_item": null,
+          "inventory_checked": false,
+          "status": "out_of_mvp_scope"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 0,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.muxiu",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 9,
+      "visual_id": "yanke",
+      "identity_id": "yanke",
+      "display_name_zh": "岩柯",
+      "roster": "main",
+      "companion_number": 7,
+      "region_board": "自然",
+      "identity_and_hair_anchor": "短卷发与浓胡须",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_core-cast_hairstyle-manifest_v02_20261013-161317-4f5a6c7d.md",
+      "anchor_has_hair": true,
+      "readiness_state": "not_started",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "concept",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_yanke_character-sheet_v01_20261013-153818-244380f3.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {},
+          "registered_direction_sizes": {},
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "placeholder_idle_frames": 0,
+          "placeholder_walk_frames": 0,
+          "placeholder_manifest": null,
+          "unregistered_manifests": [],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "Full",
+          "mvp_required": false,
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "prototype_actions": 0,
+          "prototype_frames": 0,
+          "prototype_manifest": null,
+          "inventory_item": null,
+          "inventory_checked": false,
+          "status": "out_of_mvp_scope"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 0,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.yanke",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 10,
+      "visual_id": "sangguo",
+      "identity_id": "sangguo",
+      "display_name_zh": "桑果",
+      "roster": "main",
+      "companion_number": 8,
+      "region_board": "自然",
+      "identity_and_hair_anchor": "蓬松短发与野花发饰",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_core-cast_hairstyle-manifest_v02_20261013-161317-4f5a6c7d.md",
+      "anchor_has_hair": true,
+      "readiness_state": "not_started",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "concept",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_sangguo_character-sheet_v01_20261013-153818-40fbffff.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {},
+          "registered_direction_sizes": {},
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "placeholder_idle_frames": 0,
+          "placeholder_walk_frames": 0,
+          "placeholder_manifest": null,
+          "unregistered_manifests": [],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "Full",
+          "mvp_required": false,
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "prototype_actions": 0,
+          "prototype_frames": 0,
+          "prototype_manifest": null,
+          "inventory_item": null,
+          "inventory_checked": false,
+          "status": "out_of_mvp_scope"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 0,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.sangguo",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 11,
+      "visual_id": "nalia",
+      "identity_id": "nalia",
+      "display_name_zh": "娜丽娅",
+      "roster": "main",
+      "companion_number": 9,
+      "region_board": "奇幻",
+      "identity_and_hair_anchor": "齐颌不对称直发、单侧红金细辫",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_core-cast_hairstyle-manifest_v02_20261013-161317-4f5a6c7d.md",
+      "anchor_has_hair": true,
+      "readiness_state": "not_started",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "approved",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_nalia_character-sheet_hairstyle-v02_20261013-161317-1a57ee29.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {},
+          "registered_direction_sizes": {},
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "placeholder_idle_frames": 0,
+          "placeholder_walk_frames": 0,
+          "placeholder_manifest": null,
+          "unregistered_manifests": [],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "Full",
+          "mvp_required": false,
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "prototype_actions": 0,
+          "prototype_frames": 0,
+          "prototype_manifest": null,
+          "inventory_item": null,
+          "inventory_checked": false,
+          "status": "out_of_mvp_scope"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 0,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.nalia",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 12,
+      "visual_id": "isai",
+      "identity_id": "isai",
+      "display_name_zh": "伊赛",
+      "roster": "main",
+      "companion_number": 10,
+      "region_board": "奇幻",
+      "identity_and_hair_anchor": "及背直发、中分、两条饰珠细辫",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_core-cast_hairstyle-manifest_v02_20261013-161317-4f5a6c7d.md",
+      "anchor_has_hair": true,
+      "readiness_state": "not_started",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "approved",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_isai_character-sheet_hairstyle-v02_20261013-161317-b40ff401.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {},
+          "registered_direction_sizes": {},
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "placeholder_idle_frames": 0,
+          "placeholder_walk_frames": 0,
+          "placeholder_manifest": null,
+          "unregistered_manifests": [],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "Full",
+          "mvp_required": false,
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "prototype_actions": 0,
+          "prototype_frames": 0,
+          "prototype_manifest": null,
+          "inventory_item": null,
+          "inventory_checked": false,
+          "status": "out_of_mvp_scope"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 0,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.isai",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 13,
+      "visual_id": "sain",
+      "identity_id": "sain",
+      "display_name_zh": "赛恩",
+      "roster": "main",
+      "companion_number": 11,
+      "region_board": "奇幻",
+      "identity_and_hair_anchor": "银白色蓬松中短发",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_core-cast_hairstyle-manifest_v02_20261013-161317-4f5a6c7d.md",
+      "anchor_has_hair": true,
+      "readiness_state": "not_started",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "concept",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_sain_character-sheet_v01_20261013-154105-0ed8e534.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {},
+          "registered_direction_sizes": {},
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "placeholder_idle_frames": 0,
+          "placeholder_walk_frames": 0,
+          "placeholder_manifest": null,
+          "unregistered_manifests": [],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "Full",
+          "mvp_required": false,
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "prototype_actions": 0,
+          "prototype_frames": 0,
+          "prototype_manifest": null,
+          "inventory_item": null,
+          "inventory_checked": false,
+          "status": "out_of_mvp_scope"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 0,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.sain",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 14,
+      "visual_id": "daga",
+      "identity_id": "daga",
+      "display_name_zh": "达伽",
+      "roster": "main",
+      "companion_number": 12,
+      "region_board": "奇幻",
+      "identity_and_hair_anchor": "极短寸头与山纹侧边",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_core-cast_hairstyle-manifest_v02_20261013-161317-4f5a6c7d.md",
+      "anchor_has_hair": true,
+      "readiness_state": "not_started",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "approved",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_daga_character-sheet_hairstyle-v02_20261013-161317-9aafbee7.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {},
+          "registered_direction_sizes": {},
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "placeholder_idle_frames": 0,
+          "placeholder_walk_frames": 0,
+          "placeholder_manifest": null,
+          "unregistered_manifests": [],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "Full",
+          "mvp_required": false,
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "prototype_actions": 0,
+          "prototype_frames": 0,
+          "prototype_manifest": null,
+          "inventory_item": null,
+          "inventory_checked": false,
+          "status": "out_of_mvp_scope"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 0,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.daga",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 15,
+      "visual_id": "chenxian",
+      "identity_id": "chenxian",
+      "display_name_zh": "晨弦",
+      "roster": "main",
+      "companion_number": 13,
+      "region_board": "魔法",
+      "identity_and_hair_anchor": "整齐披肩发、后脑金扣",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_core-cast_hairstyle-manifest_v02_20261013-161317-4f5a6c7d.md",
+      "anchor_has_hair": true,
+      "readiness_state": "not_started",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "approved",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_chenxian_character-sheet_hairstyle-v02_20261013-161317-c0ab77ae.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {},
+          "registered_direction_sizes": {},
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "placeholder_idle_frames": 0,
+          "placeholder_walk_frames": 0,
+          "placeholder_manifest": null,
+          "unregistered_manifests": [],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "Full",
+          "mvp_required": false,
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "prototype_actions": 0,
+          "prototype_frames": 0,
+          "prototype_manifest": null,
+          "inventory_item": null,
+          "inventory_checked": false,
+          "status": "out_of_mvp_scope"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 0,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.chenxian",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 16,
+      "visual_id": "yelan",
+      "identity_id": "yelan",
+      "display_name_zh": "夜澜",
+      "roster": "main",
+      "companion_number": 14,
+      "region_board": "魔法",
+      "identity_and_hair_anchor": "齐颌几何直发与整齐平刘海",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_core-cast_hairstyle-manifest_v02_20261013-161317-4f5a6c7d.md",
+      "anchor_has_hair": true,
+      "readiness_state": "not_started",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "approved",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_yelan_character-sheet_hairstyle-v02_20261013-161317-2d69b5da.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {},
+          "registered_direction_sizes": {},
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "placeholder_idle_frames": 0,
+          "placeholder_walk_frames": 0,
+          "placeholder_manifest": null,
+          "unregistered_manifests": [],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "Full",
+          "mvp_required": false,
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "prototype_actions": 0,
+          "prototype_frames": 0,
+          "prototype_manifest": null,
+          "inventory_item": null,
+          "inventory_checked": false,
+          "status": "out_of_mvp_scope"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 0,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.yelan",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 17,
+      "visual_id": "luowen",
+      "identity_id": "luowen",
+      "display_name_zh": "洛纹",
+      "roster": "main",
+      "companion_number": 15,
+      "region_board": "魔法",
+      "identity_and_hair_anchor": "单侧剃短、另一侧斜长刘海的短发",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_core-cast_hairstyle-manifest_v02_20261013-161317-4f5a6c7d.md",
+      "anchor_has_hair": true,
+      "readiness_state": "not_started",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "approved",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_luowen_character-sheet_hairstyle-v02_20261013-161317-4182bff0.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {},
+          "registered_direction_sizes": {},
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "placeholder_idle_frames": 0,
+          "placeholder_walk_frames": 0,
+          "placeholder_manifest": null,
+          "unregistered_manifests": [],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "Full",
+          "mvp_required": false,
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "prototype_actions": 0,
+          "prototype_frames": 0,
+          "prototype_manifest": null,
+          "inventory_item": null,
+          "inventory_checked": false,
+          "status": "out_of_mvp_scope"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 0,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.luowen",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 18,
+      "visual_id": "ji-cheng",
+      "identity_id": "ji-cheng",
+      "display_name_zh": "纪澄",
+      "roster": "side",
+      "companion_number": 16,
+      "region_board": "科技",
+      "identity_and_hair_anchor": "沉静的旧资料修复师，乐于承认「无法判断」。耳后剃短、头顶齐肩银黑直发；墨绿夹克与折叠放大镜是识别点。",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_remaining-companions_character-sheet-manifest_v01_20261013-194808-b6d7ee1d.md",
+      "anchor_has_hair": true,
+      "readiness_state": "placeholder_32x48_rejected_baseline",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "concept",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_ji-cheng_character-sheet_v01_20261013-190436-dcea1a37.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {
+            "south": "game/assets/characters/native-animation/rpg-2-star-ocean-the-second_ji-cheng_native-idle-south-phase-00_m8-prototype_20261014-142157-13372e64.png",
+            "west": "game/assets/characters/native-animation/rpg-2-star-ocean-the-second_ji-cheng_native-idle-west-phase-00_m8-prototype_20261014-142157-27adab1c.png",
+            "north": "game/assets/characters/native-animation/rpg-2-star-ocean-the-second_ji-cheng_native-idle-north-phase-00_m8-prototype_20261014-142157-b0723fef.png",
+            "east": "game/assets/characters/native-animation/rpg-2-star-ocean-the-second_ji-cheng_native-idle-east-phase-00_m8-prototype_20261014-142157-2ee5fd5c.png"
+          },
+          "registered_direction_sizes": {
+            "south": [
+              32,
+              48
+            ],
+            "west": [
+              32,
+              48
+            ],
+            "north": [
+              32,
+              48
+            ],
+            "east": [
+              32,
+              48
+            ]
+          },
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "four_direction_native_walk_authored",
+          "registry_review_status": "pending_motion_and_art_approval",
+          "placeholder_idle_frames": 4,
+          "placeholder_walk_frames": 16,
+          "placeholder_manifest": {
+            "path": "game/assets/characters/native-animation/rpg-2-star-ocean-the-second_ji-cheng_native-exploration-manifest_m8-prototype_20261014-142157-a4836b01.json",
+            "exists": true,
+            "git_tracked": true
+          },
+          "unregistered_manifests": [],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "MVP",
+          "mvp_required": true,
+          "registry_production_status": "sideview_8_action_prototype_integrated",
+          "registry_review_status": "pending_art_approval",
+          "prototype_actions": 8,
+          "prototype_frames": 20,
+          "prototype_manifest": {
+            "path": "game/assets/characters/combat-prototypes/rpg-2-star-ocean-the-second_ji-cheng_sideview-combat-manifest_m8-prototype_20261014-144815-54f4a48b.json",
+            "exists": true,
+            "git_tracked": true
+          },
+          "inventory_item": "playable-combat.ji-cheng",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "runtime_display": {
+          "registry_production_status": "integrated_npc_prototype",
+          "registry_review_status": "pending_art_approval",
+          "inventory_stage": "production",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 40,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.ji-cheng",
+          "inventory_stage": "production",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 19,
+      "visual_id": "zhou-he",
+      "identity_id": "zhou-he",
+      "display_name_zh": "周赫",
+      "roster": "side",
+      "companion_number": 17,
+      "region_board": "科技",
+      "identity_and_hair_anchor": "精于合同与物流，讨厌用人情掩盖账目。光头、细框眼镜和折角铜色账簿构成独立轮廓。",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_remaining-companions_character-sheet-manifest_v01_20261013-194808-b6d7ee1d.md",
+      "anchor_has_hair": true,
+      "readiness_state": "not_started",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "concept",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_zhou-he_character-sheet_v01_20261013-190819-c2a519a0.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {},
+          "registered_direction_sizes": {},
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "placeholder_idle_frames": 0,
+          "placeholder_walk_frames": 0,
+          "placeholder_manifest": null,
+          "unregistered_manifests": [],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "Full",
+          "mvp_required": false,
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "prototype_actions": 0,
+          "prototype_frames": 0,
+          "prototype_manifest": null,
+          "inventory_item": null,
+          "inventory_checked": false,
+          "status": "out_of_mvp_scope"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 0,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.zhou-he",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 20,
+      "visual_id": "aiti",
+      "identity_id": "aiti",
+      "display_name_zh": "艾缇",
+      "roster": "side",
+      "companion_number": 18,
+      "region_board": "科技",
+      "identity_and_hair_anchor": "年轻的公共系统审查员，语言直接，尊重不愿被量化的人。浅金色紧贴头皮的短卷发、黄色袖章和透明信息片。",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_remaining-companions_character-sheet-manifest_v01_20261013-194808-b6d7ee1d.md",
+      "anchor_has_hair": true,
+      "readiness_state": "not_started",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "concept",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_aiti_character-sheet_v01_20261013-190819-3366d67b.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {},
+          "registered_direction_sizes": {},
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "placeholder_idle_frames": 0,
+          "placeholder_walk_frames": 0,
+          "placeholder_manifest": null,
+          "unregistered_manifests": [],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "Full",
+          "mvp_required": false,
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "prototype_actions": 0,
+          "prototype_frames": 0,
+          "prototype_manifest": null,
+          "inventory_item": null,
+          "inventory_checked": false,
+          "status": "out_of_mvp_scope"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 0,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.aiti",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 21,
+      "visual_id": "ye-qiao",
+      "identity_id": "ye-qiao",
+      "display_name_zh": "叶乔",
+      "roster": "side",
+      "companion_number": 19,
+      "region_board": "自然",
+      "identity_and_hair_anchor": "建屋匠，务实而幽默，修缮比更换更令她自豪。灰褐色短辫贴头盘绕，木尺挂在宽腰带。",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_remaining-companions_character-sheet-manifest_v01_20261013-194808-b6d7ee1d.md",
+      "anchor_has_hair": true,
+      "readiness_state": "not_started",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "concept",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_ye-qiao_character-sheet_v01_20261013-190819-ad98572d.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {},
+          "registered_direction_sizes": {},
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "placeholder_idle_frames": 0,
+          "placeholder_walk_frames": 0,
+          "placeholder_manifest": null,
+          "unregistered_manifests": [],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "Full",
+          "mvp_required": false,
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "prototype_actions": 0,
+          "prototype_frames": 0,
+          "prototype_manifest": null,
+          "inventory_item": null,
+          "inventory_checked": false,
+          "status": "out_of_mvp_scope"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 0,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.ye-qiao",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 22,
+      "visual_id": "mi-yi",
+      "identity_id": "mi-yi",
+      "display_name_zh": "米漪",
+      "roster": "side",
+      "companion_number": 20,
+      "region_board": "自然",
+      "identity_and_hair_anchor": "河道测绘人，话少但愿意分享自己走过的错误路线。浅褐色长直发编成低位鱼骨辫，蓝灰测绳横跨肩头。",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_remaining-companions_character-sheet-manifest_v01_20261013-194808-b6d7ee1d.md",
+      "anchor_has_hair": true,
+      "readiness_state": "not_started",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "concept",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_mi-yi_character-sheet_v01_20261013-190819-fe5c8d41.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {},
+          "registered_direction_sizes": {},
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "placeholder_idle_frames": 0,
+          "placeholder_walk_frames": 0,
+          "placeholder_manifest": null,
+          "unregistered_manifests": [],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "Full",
+          "mvp_required": false,
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "prototype_actions": 0,
+          "prototype_frames": 0,
+          "prototype_manifest": null,
+          "inventory_item": null,
+          "inventory_checked": false,
+          "status": "out_of_mvp_scope"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 0,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.mi-yi",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 23,
+      "visual_id": "luo-qi",
+      "identity_id": "luo-qi",
+      "display_name_zh": "罗栖",
+      "roster": "side",
+      "companion_number": 21,
+      "region_board": "自然",
+      "identity_and_hair_anchor": "野地食材与药剂的老手，温和却对配方真实性毫不妥协。浓密白眉、短白胡须、平顶草帽和多层布包。",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_remaining-companions_character-sheet-manifest_v01_20261013-194808-b6d7ee1d.md",
+      "anchor_has_hair": true,
+      "readiness_state": "not_started",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "concept",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_luo-qi_character-sheet_v01_20261013-192354-9e32de79.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {},
+          "registered_direction_sizes": {},
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "placeholder_idle_frames": 0,
+          "placeholder_walk_frames": 0,
+          "placeholder_manifest": null,
+          "unregistered_manifests": [],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "Full",
+          "mvp_required": false,
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "prototype_actions": 0,
+          "prototype_frames": 0,
+          "prototype_manifest": null,
+          "inventory_item": null,
+          "inventory_checked": false,
+          "status": "out_of_mvp_scope"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 0,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.luo-qi",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 24,
+      "visual_id": "avila",
+      "identity_id": "avila",
+      "display_name_zh": "阿维拉",
+      "roster": "side",
+      "companion_number": 22,
+      "region_board": "奇幻",
+      "identity_and_hair_anchor": "有潮汐血统的巡岸人，平时完全是人类外貌；擅长听见水流变化，态度爽朗。深青色齐耳卷发、长叉枪和海盐白披巾。",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_remaining-companions_character-sheet-manifest_v01_20261013-194808-b6d7ee1d.md",
+      "anchor_has_hair": true,
+      "readiness_state": "not_started",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "concept",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_avila_character-sheet_v01_20261013-192354-1326eefe.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {},
+          "registered_direction_sizes": {},
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "placeholder_idle_frames": 0,
+          "placeholder_walk_frames": 0,
+          "placeholder_manifest": null,
+          "unregistered_manifests": [],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "Full",
+          "mvp_required": false,
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "prototype_actions": 0,
+          "prototype_frames": 0,
+          "prototype_manifest": null,
+          "inventory_item": null,
+          "inventory_checked": false,
+          "status": "out_of_mvp_scope"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 0,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.avila",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 25,
+      "visual_id": "kern",
+      "identity_id": "kern",
+      "display_name_zh": "克恩",
+      "roster": "side",
+      "companion_number": 23,
+      "region_board": "奇幻",
+      "identity_and_hair_anchor": "骨纹血统的石雕师，看着强硬，做事却非常细。极短红棕发、无胡须、石灰色宽围裙和裂纹锤。",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_remaining-companions_character-sheet-manifest_v01_20261013-194808-b6d7ee1d.md",
+      "anchor_has_hair": true,
+      "readiness_state": "not_started",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "concept",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_kern_character-sheet_v01_20261013-192354-db79abc8.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {},
+          "registered_direction_sizes": {},
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "placeholder_idle_frames": 0,
+          "placeholder_walk_frames": 0,
+          "placeholder_manifest": null,
+          "unregistered_manifests": [],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "Full",
+          "mvp_required": false,
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "prototype_actions": 0,
+          "prototype_frames": 0,
+          "prototype_manifest": null,
+          "inventory_item": null,
+          "inventory_checked": false,
+          "status": "out_of_mvp_scope"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 0,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.kern",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 26,
+      "visual_id": "lairui",
+      "identity_id": "lairui",
+      "display_name_zh": "莱芮",
+      "roster": "side",
+      "companion_number": 24,
+      "region_board": "奇幻",
+      "identity_and_hair_anchor": "与夜鸟神话相关的远行信使，爱把旅途见闻讲成笑话。黑色双侧短羽形发夹、铜色眼睛和灰紫轻弓。",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_remaining-companions_character-sheet-manifest_v01_20261013-194808-b6d7ee1d.md",
+      "anchor_has_hair": true,
+      "readiness_state": "not_started",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "concept",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_lairui_character-sheet_v01_20261013-192354-3d9211d5.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {},
+          "registered_direction_sizes": {},
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "placeholder_idle_frames": 0,
+          "placeholder_walk_frames": 0,
+          "placeholder_manifest": null,
+          "unregistered_manifests": [],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "Full",
+          "mvp_required": false,
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "prototype_actions": 0,
+          "prototype_frames": 0,
+          "prototype_manifest": null,
+          "inventory_item": null,
+          "inventory_checked": false,
+          "status": "out_of_mvp_scope"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 0,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.lairui",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 27,
+      "visual_id": "mi-luo",
+      "identity_id": "mi-luo",
+      "display_name_zh": "弥罗",
+      "roster": "side",
+      "companion_number": 25,
+      "region_board": "魔法",
+      "identity_and_hair_anchor": "研究光暗两源的抄写员，擅长把争论拆成可检验的问题。半长黑发有一道白色中分，左右肩各一条不同色书带。",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_remaining-companions_character-sheet-manifest_v01_20261013-194808-b6d7ee1d.md",
+      "anchor_has_hair": true,
+      "readiness_state": "not_started",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "concept",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_mi-luo_character-sheet_v01_20261013-192811-8d27196f.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {},
+          "registered_direction_sizes": {},
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "placeholder_idle_frames": 0,
+          "placeholder_walk_frames": 0,
+          "placeholder_manifest": null,
+          "unregistered_manifests": [],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "Full",
+          "mvp_required": false,
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "prototype_actions": 0,
+          "prototype_frames": 0,
+          "prototype_manifest": null,
+          "inventory_item": null,
+          "inventory_checked": false,
+          "status": "out_of_mvp_scope"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 0,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.mi-luo",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 28,
+      "visual_id": "heya",
+      "identity_id": "heya",
+      "display_name_zh": "赫娅",
+      "roster": "side",
+      "companion_number": 26,
+      "region_board": "魔法",
+      "identity_and_hair_anchor": "诊疗师，重视病人对自身身体的决定权，笑容克制但有耐心。赤褐色盘辫低置颈后，灰白医巾与暗红急救袋。",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_remaining-companions_character-sheet-manifest_v01_20261013-194808-b6d7ee1d.md",
+      "anchor_has_hair": true,
+      "readiness_state": "not_started",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "concept",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_heya_character-sheet_v01_20261013-192811-6cbcb12e.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {},
+          "registered_direction_sizes": {},
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "placeholder_idle_frames": 0,
+          "placeholder_walk_frames": 0,
+          "placeholder_manifest": null,
+          "unregistered_manifests": [],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "Full",
+          "mvp_required": false,
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "prototype_actions": 0,
+          "prototype_frames": 0,
+          "prototype_manifest": null,
+          "inventory_item": null,
+          "inventory_checked": false,
+          "status": "out_of_mvp_scope"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 0,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.heya",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 29,
+      "visual_id": "wu-li",
+      "identity_id": "wu-li",
+      "display_name_zh": "乌礼",
+      "roster": "side",
+      "companion_number": 27,
+      "region_board": "魔法",
+      "identity_and_hair_anchor": "剧场音效师，喜欢模仿别人的口音却很认真地征求同意。紫黑色自然卷高蓬发、细铃和无面具的便装。",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_remaining-companions_character-sheet-manifest_v01_20261013-194808-b6d7ee1d.md",
+      "anchor_has_hair": true,
+      "readiness_state": "not_started",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "concept",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_wu-li_character-sheet_v01_20261013-192811-13444778.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {},
+          "registered_direction_sizes": {},
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "placeholder_idle_frames": 0,
+          "placeholder_walk_frames": 0,
+          "placeholder_manifest": null,
+          "unregistered_manifests": [],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "Full",
+          "mvp_required": false,
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "prototype_actions": 0,
+          "prototype_frames": 0,
+          "prototype_manifest": null,
+          "inventory_item": null,
+          "inventory_checked": false,
+          "status": "out_of_mvp_scope"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 0,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.wu-li",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 30,
+      "visual_id": "huan-7",
+      "identity_id": "huan-7",
+      "display_name_zh": "环七",
+      "roster": "side",
+      "companion_number": 28,
+      "region_board": "星外",
+      "identity_and_hair_anchor": "城市口述史保管机器人，面对人类「回忆会变」这件事既困惑又着迷。圆环形单眼头部、青铜躯壳和可展开的录音翼片。",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_remaining-companions_character-sheet-manifest_v01_20261013-194808-b6d7ee1d.md",
+      "anchor_has_hair": false,
+      "readiness_state": "not_started",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "concept",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_huan-7_character-sheet_v01_20261013-192811-58229613.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {},
+          "registered_direction_sizes": {},
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "placeholder_idle_frames": 0,
+          "placeholder_walk_frames": 0,
+          "placeholder_manifest": null,
+          "unregistered_manifests": [],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "Full",
+          "mvp_required": false,
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "prototype_actions": 0,
+          "prototype_frames": 0,
+          "prototype_manifest": null,
+          "inventory_item": null,
+          "inventory_checked": false,
+          "status": "out_of_mvp_scope"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 0,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.huan-7",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 31,
+      "visual_id": "suiya",
+      "identity_id": "suiya",
+      "display_name_zh": "穗芽",
+      "roster": "side",
+      "companion_number": 29,
+      "region_board": "星外",
+      "identity_and_hair_anchor": "维护人造植物景观与种子档案的机器人；星球上没有活体植株，它照料的是仿生材料与历史资料。透明叶片状头冠、奶白机身和绿色液囊。",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_remaining-companions_character-sheet-manifest_v01_20261013-194808-b6d7ee1d.md",
+      "anchor_has_hair": false,
+      "readiness_state": "not_started",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "concept",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_suiya_character-sheet_v01_20261013-193120-f4dbe48d.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {},
+          "registered_direction_sizes": {},
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "placeholder_idle_frames": 0,
+          "placeholder_walk_frames": 0,
+          "placeholder_manifest": null,
+          "unregistered_manifests": [],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "Full",
+          "mvp_required": false,
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "prototype_actions": 0,
+          "prototype_frames": 0,
+          "prototype_manifest": null,
+          "inventory_item": null,
+          "inventory_checked": false,
+          "status": "out_of_mvp_scope"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 0,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.suiya",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 32,
+      "visual_id": "zhongdu",
+      "identity_id": "zhongdu",
+      "display_name_zh": "钟渡",
+      "roster": "side",
+      "companion_number": 30,
+      "region_board": "星外",
+      "identity_and_hair_anchor": "公共交通调度机器人，说话以路线开头，逐渐学会人们也会为了陪伴绕路。方形站牌头、黄铜钟摆胸灯和蓝白短披布。",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_remaining-companions_character-sheet-manifest_v01_20261013-194808-b6d7ee1d.md",
+      "anchor_has_hair": false,
+      "readiness_state": "not_started",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "concept",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_zhongdu_character-sheet_v01_20261013-193120-12c4826e.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {},
+          "registered_direction_sizes": {},
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "placeholder_idle_frames": 0,
+          "placeholder_walk_frames": 0,
+          "placeholder_manifest": null,
+          "unregistered_manifests": [],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "Full",
+          "mvp_required": false,
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "prototype_actions": 0,
+          "prototype_frames": 0,
+          "prototype_manifest": null,
+          "inventory_item": null,
+          "inventory_checked": false,
+          "status": "out_of_mvp_scope"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 0,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.zhongdu",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 33,
+      "visual_id": "zhao-ling",
+      "identity_id": "zhao-ling",
+      "display_name_zh": "赵铃",
+      "roster": "situational",
+      "companion_number": 31,
+      "region_board": "科技",
+      "identity_and_hair_anchor": "城市无线电修理员，热衷把复杂信息讲清楚。湖蓝耳机、整齐的侧分短发和便携天线。",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_remaining-companions_character-sheet-manifest_v01_20261013-194808-b6d7ee1d.md",
+      "anchor_has_hair": true,
+      "readiness_state": "placeholder_32x48_rejected_baseline",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "concept",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_zhao-ling_character-sheet_v01_20261013-193120-54215370.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {
+            "south": "game/assets/characters/native-animation/rpg-2-star-ocean-the-second_zhao-ling_native-exploration-idle-south_m8-v01_20261014-142000-a9c9de72.png",
+            "west": "game/assets/characters/native-animation/rpg-2-star-ocean-the-second_zhao-ling_native-exploration-idle-west_m8-v01_20261014-142000-e3e2513c.png",
+            "north": "game/assets/characters/native-animation/rpg-2-star-ocean-the-second_zhao-ling_native-exploration-idle-north_m8-v01_20261014-142000-08ee8688.png",
+            "east": "game/assets/characters/native-animation/rpg-2-star-ocean-the-second_zhao-ling_native-exploration-idle-east_m8-v01_20261014-142000-e9ef7e6e.png"
+          },
+          "registered_direction_sizes": {
+            "south": [
+              32,
+              48
+            ],
+            "west": [
+              32,
+              48
+            ],
+            "north": [
+              32,
+              48
+            ],
+            "east": [
+              32,
+              48
+            ]
+          },
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "four_direction_native_walk_authored",
+          "registry_review_status": "pending_motion_and_art_approval",
+          "placeholder_idle_frames": 4,
+          "placeholder_walk_frames": 16,
+          "placeholder_manifest": {
+            "path": "game/assets/characters/native-animation/rpg-2-star-ocean-the-second_zhao-ling_native-exploration-manifest_m8-v01_20261014-142000-b123903c.json",
+            "exists": true,
+            "git_tracked": true
+          },
+          "unregistered_manifests": [],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "MVP",
+          "mvp_required": true,
+          "registry_production_status": "sideview_8_action_prototype_integrated",
+          "registry_review_status": "pending_art_approval",
+          "prototype_actions": 8,
+          "prototype_frames": 20,
+          "prototype_manifest": {
+            "path": "game/assets/characters/combat-prototypes/rpg-2-star-ocean-the-second_zhao-ling_sideview-combat-manifest_m8-prototype_20261014-144336-7d0dd6cc.json",
+            "exists": true,
+            "git_tracked": true
+          },
+          "inventory_item": "playable-combat.zhao-ling",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "runtime_display": {
+          "registry_production_status": "integrated_npc_prototype",
+          "registry_review_status": "pending_art_approval",
+          "inventory_stage": "production",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 40,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.zhao-ling",
+          "inventory_stage": "production",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 34,
+      "visual_id": "pei-zhi",
+      "identity_id": "pei-zhi",
+      "display_name_zh": "裴支",
+      "roster": "situational",
+      "companion_number": 32,
+      "region_board": "科技",
+      "identity_and_hair_anchor": "旧设备修理铺老板，修理时会耐心解释原理。红褐色平头、焊接面罩常挂在颈后、蓝色绝缘手套。",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_remaining-companions_character-sheet-manifest_v01_20261013-194808-b6d7ee1d.md",
+      "anchor_has_hair": true,
+      "readiness_state": "not_started",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "concept",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_pei-zhi_character-sheet_v01_20261013-193120-0397bc6c.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {},
+          "registered_direction_sizes": {},
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "placeholder_idle_frames": 0,
+          "placeholder_walk_frames": 0,
+          "placeholder_manifest": null,
+          "unregistered_manifests": [],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "Full",
+          "mvp_required": false,
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "prototype_actions": 0,
+          "prototype_frames": 0,
+          "prototype_manifest": null,
+          "inventory_item": null,
+          "inventory_checked": false,
+          "status": "out_of_mvp_scope"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 0,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.pei-zhi",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 35,
+      "visual_id": "an-suo",
+      "identity_id": "an-suo",
+      "display_name_zh": "安索",
+      "roster": "situational",
+      "companion_number": 33,
+      "region_board": "科技",
+      "identity_and_hair_anchor": "公共运输签约员，讲究准时也善于应对意外。灰色一字胡、无帽短发、带孔票夹。",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_remaining-companions_character-sheet-manifest_v01_20261013-194808-b6d7ee1d.md",
+      "anchor_has_hair": true,
+      "readiness_state": "not_started",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "concept",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_an-suo_character-sheet_v01_20261013-193428-86708847.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {},
+          "registered_direction_sizes": {},
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "placeholder_idle_frames": 0,
+          "placeholder_walk_frames": 0,
+          "placeholder_manifest": null,
+          "unregistered_manifests": [],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "Full",
+          "mvp_required": false,
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "prototype_actions": 0,
+          "prototype_frames": 0,
+          "prototype_manifest": null,
+          "inventory_item": null,
+          "inventory_checked": false,
+          "status": "out_of_mvp_scope"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 0,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.an-suo",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 36,
+      "visual_id": "su-yan",
+      "identity_id": "su-yan",
+      "display_name_zh": "苏砚",
+      "roster": "situational",
+      "companion_number": 34,
+      "region_board": "科技",
+      "identity_and_hair_anchor": "街区志愿救护员，性格急但手很稳。两侧剃短、上方紫灰色小卷、腕部红白灯带。",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_remaining-companions_character-sheet-manifest_v01_20261013-194808-b6d7ee1d.md",
+      "anchor_has_hair": true,
+      "readiness_state": "not_started",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "concept",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_su-yan_character-sheet_v01_20261013-193428-bc523491.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {},
+          "registered_direction_sizes": {},
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "placeholder_idle_frames": 0,
+          "placeholder_walk_frames": 0,
+          "placeholder_manifest": null,
+          "unregistered_manifests": [],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "Full",
+          "mvp_required": false,
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "prototype_actions": 0,
+          "prototype_frames": 0,
+          "prototype_manifest": null,
+          "inventory_item": null,
+          "inventory_checked": false,
+          "status": "out_of_mvp_scope"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 0,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.su-yan",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 37,
+      "visual_id": "tao-yu",
+      "identity_id": "tao-yu",
+      "display_name_zh": "陶榆",
+      "roster": "situational",
+      "companion_number": 35,
+      "region_board": "自然",
+      "identity_and_hair_anchor": "木桥匠，踏实、爱唱走调的工作歌。短而密的黑卷发，右肩木纹护片与可拆工具锤。",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_remaining-companions_character-sheet-manifest_v01_20261013-194808-b6d7ee1d.md",
+      "anchor_has_hair": true,
+      "readiness_state": "not_started",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "concept",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_tao-yu_character-sheet_v01_20261013-193428-61dd58a2.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {},
+          "registered_direction_sizes": {},
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "placeholder_idle_frames": 0,
+          "placeholder_walk_frames": 0,
+          "placeholder_manifest": null,
+          "unregistered_manifests": [],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "Full",
+          "mvp_required": false,
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "prototype_actions": 0,
+          "prototype_frames": 0,
+          "prototype_manifest": null,
+          "inventory_item": null,
+          "inventory_checked": false,
+          "status": "out_of_mvp_scope"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 0,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.tao-yu",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 38,
+      "visual_id": "ruan-tian",
+      "identity_id": "ruan-tian",
+      "display_name_zh": "阮田",
+      "roster": "situational",
+      "companion_number": 36,
+      "region_board": "自然",
+      "identity_and_hair_anchor": "照护驮兽的年轻人，和陌生人说话会先观察表情。两侧各一簇短辫、橘棕披肩、骨制小铃。",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_remaining-companions_character-sheet-manifest_v01_20261013-194808-b6d7ee1d.md",
+      "anchor_has_hair": true,
+      "readiness_state": "not_started",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "concept",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_ruan-tian_character-sheet_v01_20261013-193428-ce87ebee.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {},
+          "registered_direction_sizes": {},
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "placeholder_idle_frames": 0,
+          "placeholder_walk_frames": 0,
+          "placeholder_manifest": null,
+          "unregistered_manifests": [],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "Full",
+          "mvp_required": false,
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "prototype_actions": 0,
+          "prototype_frames": 0,
+          "prototype_manifest": null,
+          "inventory_item": null,
+          "inventory_checked": false,
+          "status": "out_of_mvp_scope"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 0,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.ruan-tian",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 39,
+      "visual_id": "bu-he",
+      "identity_id": "bu-he",
+      "display_name_zh": "布禾",
+      "roster": "situational",
+      "companion_number": 37,
+      "region_board": "自然",
+      "identity_and_hair_anchor": "社区炊事师，手快、记得每个人的口味。乌黑齐肩直发包在方布巾里，铜锅盖背在肩后。",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_remaining-companions_character-sheet-manifest_v01_20261013-194808-b6d7ee1d.md",
+      "anchor_has_hair": true,
+      "readiness_state": "not_started",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "concept",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_bu-he_character-sheet_v01_20261013-193838-3a285ca4.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {},
+          "registered_direction_sizes": {},
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "placeholder_idle_frames": 0,
+          "placeholder_walk_frames": 0,
+          "placeholder_manifest": null,
+          "unregistered_manifests": [],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "Full",
+          "mvp_required": false,
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "prototype_actions": 0,
+          "prototype_frames": 0,
+          "prototype_manifest": null,
+          "inventory_item": null,
+          "inventory_checked": false,
+          "status": "out_of_mvp_scope"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 0,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.bu-he",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 40,
+      "visual_id": "han-ze",
+      "identity_id": "han-ze",
+      "display_name_zh": "韩泽",
+      "roster": "situational",
+      "companion_number": 38,
+      "region_board": "自然",
+      "identity_and_hair_anchor": "沿路交换工具与粮食的经纪人，乐于让双方知道彼此的真实需求。深棕短莫霍克发、草绳卷轴、旧式秤砣。",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_remaining-companions_character-sheet-manifest_v01_20261013-194808-b6d7ee1d.md",
+      "anchor_has_hair": true,
+      "readiness_state": "not_started",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "concept",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_han-ze_character-sheet_v01_20261013-193838-dd9d7fbc.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {},
+          "registered_direction_sizes": {},
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "placeholder_idle_frames": 0,
+          "placeholder_walk_frames": 0,
+          "placeholder_manifest": null,
+          "unregistered_manifests": [],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "Full",
+          "mvp_required": false,
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "prototype_actions": 0,
+          "prototype_frames": 0,
+          "prototype_manifest": null,
+          "inventory_item": null,
+          "inventory_checked": false,
+          "status": "out_of_mvp_scope"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 0,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.han-ze",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 41,
+      "visual_id": "xida",
+      "identity_id": "xida",
+      "display_name_zh": "席妲",
+      "roster": "situational",
+      "companion_number": 39,
+      "region_board": "奇幻",
+      "identity_and_hair_anchor": "出自日轮传说血统的灯塔看守人，外貌平常，目光敏锐。麦金色极短发、浅色长耳坠、方形提灯。",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_remaining-companions_character-sheet-manifest_v01_20261013-194808-b6d7ee1d.md",
+      "anchor_has_hair": true,
+      "readiness_state": "not_started",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "concept",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_xida_character-sheet_v01_20261013-193838-dd1fdcbe.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {},
+          "registered_direction_sizes": {},
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "placeholder_idle_frames": 0,
+          "placeholder_walk_frames": 0,
+          "placeholder_manifest": null,
+          "unregistered_manifests": [],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "Full",
+          "mvp_required": false,
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "prototype_actions": 0,
+          "prototype_frames": 0,
+          "prototype_manifest": null,
+          "inventory_item": null,
+          "inventory_checked": false,
+          "status": "out_of_mvp_scope"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 0,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.xida",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 42,
+      "visual_id": "gu-lin",
+      "identity_id": "gu-lin",
+      "display_name_zh": "顾鳞",
+      "roster": "situational",
+      "companion_number": 40,
+      "region_board": "奇幻",
+      "identity_and_hair_anchor": "有蛇类神话血统的年轻练习者，努力摆脱别人对血统的固定期待。黑发齐耳并在左侧编一根细辫，绿色腕绳。",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_remaining-companions_character-sheet-manifest_v01_20261013-194808-b6d7ee1d.md",
+      "anchor_has_hair": true,
+      "readiness_state": "not_started",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "concept",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_gu-lin_character-sheet_v01_20261013-193838-16710012.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {},
+          "registered_direction_sizes": {},
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "placeholder_idle_frames": 0,
+          "placeholder_walk_frames": 0,
+          "placeholder_manifest": null,
+          "unregistered_manifests": [],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "Full",
+          "mvp_required": false,
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "prototype_actions": 0,
+          "prototype_frames": 0,
+          "prototype_manifest": null,
+          "inventory_item": null,
+          "inventory_checked": false,
+          "status": "out_of_mvp_scope"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 0,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.gu-lin",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 43,
+      "visual_id": "ruima",
+      "identity_id": "ruima",
+      "display_name_zh": "瑞玛",
+      "roster": "situational",
+      "companion_number": 41,
+      "region_board": "奇幻",
+      "identity_and_hair_anchor": "与狼传说有关的动物照护员，坦率但并不冲动。银灰色低束发、厚毛边短外套、双音呼哨。",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_remaining-companions_character-sheet-manifest_v01_20261013-194808-b6d7ee1d.md",
+      "anchor_has_hair": true,
+      "readiness_state": "not_started",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "concept",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_ruima_character-sheet_v01_20261013-194328-964e67e2.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {},
+          "registered_direction_sizes": {},
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "placeholder_idle_frames": 0,
+          "placeholder_walk_frames": 0,
+          "placeholder_manifest": null,
+          "unregistered_manifests": [],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "Full",
+          "mvp_required": false,
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "prototype_actions": 0,
+          "prototype_frames": 0,
+          "prototype_manifest": null,
+          "inventory_item": null,
+          "inventory_checked": false,
+          "status": "out_of_mvp_scope"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 0,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.ruima",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 44,
+      "visual_id": "tao-li",
+      "identity_id": "tao-li",
+      "display_name_zh": "陶粒",
+      "roster": "situational",
+      "companion_number": 42,
+      "region_board": "奇幻",
+      "identity_and_hair_anchor": "研究古老血统器物的收藏修复师，宁愿标明「来历不明」也不编造传奇。光亮额头、短白发圈和沉重的布纹箱。",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_remaining-companions_character-sheet-manifest_v01_20261013-194808-b6d7ee1d.md",
+      "anchor_has_hair": true,
+      "readiness_state": "not_started",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "concept",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_tao-li_character-sheet_v01_20261013-194328-081482e6.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {},
+          "registered_direction_sizes": {},
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "placeholder_idle_frames": 0,
+          "placeholder_walk_frames": 0,
+          "placeholder_manifest": null,
+          "unregistered_manifests": [],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "Full",
+          "mvp_required": false,
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "prototype_actions": 0,
+          "prototype_frames": 0,
+          "prototype_manifest": null,
+          "inventory_item": null,
+          "inventory_checked": false,
+          "status": "out_of_mvp_scope"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 0,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.tao-li",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 45,
+      "visual_id": "lin-yan",
+      "identity_id": "lin-yan",
+      "display_name_zh": "霖砚",
+      "roster": "situational",
+      "companion_number": 43,
+      "region_board": "魔法",
+      "identity_and_hair_anchor": "在光暗两种治疗方法之间做实证记录的医师，不把不同意见当成敌意。蓝黑色低马尾、两色药袋。",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_remaining-companions_character-sheet-manifest_v01_20261013-194808-b6d7ee1d.md",
+      "anchor_has_hair": true,
+      "readiness_state": "not_started",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "concept",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_lin-yan_character-sheet_v01_20261013-194328-ff31ae19.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {},
+          "registered_direction_sizes": {},
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "placeholder_idle_frames": 0,
+          "placeholder_walk_frames": 0,
+          "placeholder_manifest": null,
+          "unregistered_manifests": [],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "Full",
+          "mvp_required": false,
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "prototype_actions": 0,
+          "prototype_frames": 0,
+          "prototype_manifest": null,
+          "inventory_item": null,
+          "inventory_checked": false,
+          "status": "out_of_mvp_scope"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 0,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.lin-yan",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 46,
+      "visual_id": "he-huai",
+      "identity_id": "he-huai",
+      "display_name_zh": "何槐",
+      "roster": "situational",
+      "companion_number": 44,
+      "region_board": "魔法",
+      "identity_and_hair_anchor": "社区照明维护者，喜欢听年轻人质疑旧规矩。银白色齐颈波浪发、琥珀镜片和小圆灯。",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_remaining-companions_character-sheet-manifest_v01_20261013-194808-b6d7ee1d.md",
+      "anchor_has_hair": true,
+      "readiness_state": "not_started",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "concept",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_he-huai_character-sheet_v01_20261013-194328-4451b802.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {},
+          "registered_direction_sizes": {},
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "placeholder_idle_frames": 0,
+          "placeholder_walk_frames": 0,
+          "placeholder_manifest": null,
+          "unregistered_manifests": [],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "Full",
+          "mvp_required": false,
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "prototype_actions": 0,
+          "prototype_frames": 0,
+          "prototype_manifest": null,
+          "inventory_item": null,
+          "inventory_checked": false,
+          "status": "out_of_mvp_scope"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 0,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.he-huai",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 47,
+      "visual_id": "xuan-ya",
+      "identity_id": "xuan-ya",
+      "display_name_zh": "玄芽",
+      "roster": "situational",
+      "companion_number": 45,
+      "region_board": "魔法",
+      "identity_and_hair_anchor": "专门照看私人物件保存室的暗系术者，温和、守口如瓶。墨紫色双短髻、黑银钥匙扣。",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_remaining-companions_character-sheet-manifest_v01_20261013-194808-b6d7ee1d.md",
+      "anchor_has_hair": true,
+      "readiness_state": "not_started",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "concept",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_xuan-ya_character-sheet_v01_20261013-194543-be791613.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {},
+          "registered_direction_sizes": {},
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "placeholder_idle_frames": 0,
+          "placeholder_walk_frames": 0,
+          "placeholder_manifest": null,
+          "unregistered_manifests": [],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "Full",
+          "mvp_required": false,
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "prototype_actions": 0,
+          "prototype_frames": 0,
+          "prototype_manifest": null,
+          "inventory_item": null,
+          "inventory_checked": false,
+          "status": "out_of_mvp_scope"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 0,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.xuan-ya",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 48,
+      "visual_id": "que-zhi",
+      "identity_id": "que-zhi",
+      "display_name_zh": "雀枝",
+      "roster": "situational",
+      "companion_number": 46,
+      "region_board": "魔法",
+      "identity_and_hair_anchor": "魔法材料协议协调员，擅长让不同源系共同受益。深栗色圆弧刘海、左右不同色的袖套与双页合同。",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_remaining-companions_character-sheet-manifest_v01_20261013-194808-b6d7ee1d.md",
+      "anchor_has_hair": true,
+      "readiness_state": "not_started",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "concept",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_que-zhi_character-sheet_v01_20261013-194543-4ac30749.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {},
+          "registered_direction_sizes": {},
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "placeholder_idle_frames": 0,
+          "placeholder_walk_frames": 0,
+          "placeholder_manifest": null,
+          "unregistered_manifests": [],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "Full",
+          "mvp_required": false,
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "prototype_actions": 0,
+          "prototype_frames": 0,
+          "prototype_manifest": null,
+          "inventory_item": null,
+          "inventory_checked": false,
+          "status": "out_of_mvp_scope"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 0,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.que-zhi",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 49,
+      "visual_id": "menling",
+      "identity_id": "menling",
+      "display_name_zh": "门铃",
+      "roster": "situational",
+      "companion_number": 47,
+      "region_board": "星外",
+      "identity_and_hair_anchor": "公共建筑维修机器人，见面先确认门是否好开，随后才想到问访客感受。门拱形头盔、黄铜铰链手臂、白色工具箱。",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_remaining-companions_character-sheet-manifest_v01_20261013-194808-b6d7ee1d.md",
+      "anchor_has_hair": false,
+      "readiness_state": "not_started",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "concept",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_menling_character-sheet_v01_20261013-194543-6c4dc2bc.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {},
+          "registered_direction_sizes": {},
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "placeholder_idle_frames": 0,
+          "placeholder_walk_frames": 0,
+          "placeholder_manifest": null,
+          "unregistered_manifests": [],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "Full",
+          "mvp_required": false,
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "prototype_actions": 0,
+          "prototype_frames": 0,
+          "prototype_manifest": null,
+          "inventory_item": null,
+          "inventory_checked": false,
+          "status": "out_of_mvp_scope"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 0,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.menling",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 50,
+      "visual_id": "lingbing",
+      "identity_id": "lingbing",
+      "display_name_zh": "零饼",
+      "roster": "situational",
+      "companion_number": 48,
+      "region_board": "星外",
+      "identity_and_hair_anchor": "市场摊位机器人，把顾客的闲聊也当作有价值的交易体验。扁圆饼状显示头、可折叠小柜台、蓝色轮足。",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_remaining-companions_character-sheet-manifest_v01_20261013-194808-b6d7ee1d.md",
+      "anchor_has_hair": false,
+      "readiness_state": "not_started",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "concept",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_lingbing_character-sheet_v01_20261013-194543-e84188a0.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {},
+          "registered_direction_sizes": {},
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "placeholder_idle_frames": 0,
+          "placeholder_walk_frames": 0,
+          "placeholder_manifest": null,
+          "unregistered_manifests": [],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "Full",
+          "mvp_required": false,
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "prototype_actions": 0,
+          "prototype_frames": 0,
+          "prototype_manifest": null,
+          "inventory_item": null,
+          "inventory_checked": false,
+          "status": "out_of_mvp_scope"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 0,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.lingbing",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 51,
+      "visual_id": "lengjing",
+      "identity_id": "lengjing",
+      "display_name_zh": "棱镜",
+      "roster": "situational",
+      "companion_number": 49,
+      "region_board": "星外",
+      "identity_and_hair_anchor": "公共博物馆引导与安全机器人，坚持先疏散再处理故障；与敌对的献祭组织防卫机不同。多面棱柱头、乳白护板、细长指示臂。",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_remaining-companions_character-sheet-manifest_v01_20261013-194808-b6d7ee1d.md",
+      "anchor_has_hair": false,
+      "readiness_state": "not_started",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "concept",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_lengjing_character-sheet_v01_20261013-194650-4864f54c.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {},
+          "registered_direction_sizes": {},
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "placeholder_idle_frames": 0,
+          "placeholder_walk_frames": 0,
+          "placeholder_manifest": null,
+          "unregistered_manifests": [],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "Full",
+          "mvp_required": false,
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "prototype_actions": 0,
+          "prototype_frames": 0,
+          "prototype_manifest": null,
+          "inventory_item": null,
+          "inventory_checked": false,
+          "status": "out_of_mvp_scope"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 0,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.lengjing",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    },
+    {
+      "ordinal": 52,
+      "visual_id": "yuyin",
+      "identity_id": "yuyin",
+      "display_name_zh": "余音",
+      "roster": "situational",
+      "companion_number": 50,
+      "region_board": "星外",
+      "identity_and_hair_anchor": "剧场投影机器人，能重现舞台，却仍在学习为什么观众会为虚构人物流泪。半月形发光面罩、靛色幕布披肩、投影模块。",
+      "anchor_source": "outputs/rpg-2-star-ocean-the-second_remaining-companions_character-sheet-manifest_v01_20261013-194808-b6d7ee1d.md",
+      "anchor_has_hair": false,
+      "readiness_state": "not_started",
+      "intake_stage": 0,
+      "frame_count_manifests": [],
+      "gates": {
+        "source_art": {
+          "approval": "concept",
+          "portrait": {
+            "path": "outputs/rpg-2-star-ocean-the-second_yuyin_character-sheet_v01_20261013-194650-47abe995.png",
+            "exists": true,
+            "git_tracked": true
+          },
+          "note": "approval is the registry/inventory value; this checklist does not change it"
+        },
+        "four_facing": {
+          "required_directions": [
+            "south",
+            "west",
+            "north",
+            "east"
+          ],
+          "production_directions_done": [],
+          "placeholder_directions": {},
+          "registered_direction_sizes": {},
+          "west_authoring": "undeclared",
+          "status": "pending"
+        },
+        "exploration_animation": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "placeholder_idle_frames": 0,
+          "placeholder_walk_frames": 0,
+          "placeholder_manifest": null,
+          "unregistered_manifests": [],
+          "production_frame_counts": null,
+          "frame_counts_user_approved": false,
+          "status": "pending"
+        },
+        "combat_animation": {
+          "inventory_scope": "Full",
+          "mvp_required": false,
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "prototype_actions": 0,
+          "prototype_frames": 0,
+          "prototype_manifest": null,
+          "inventory_item": null,
+          "inventory_checked": false,
+          "status": "out_of_mvp_scope"
+        },
+        "runtime_display": {
+          "registry_production_status": "not_started",
+          "registry_review_status": "pending",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "status": "pending"
+        },
+        "scale": {
+          "target_display_height_logical_px": 48,
+          "review_viewport": "1280x720 canvas_items, science city",
+          "master": null,
+          "scale": null,
+          "cell_size": null,
+          "ground_pin": null,
+          "status": "pending_pilot_values"
+        },
+        "qa": {
+          "automated_metadata_checks": "not_run_no_production_frames",
+          "in_engine_capture_receipt": null,
+          "human_identity_direction_review": "pending",
+          "frame_paths_cross_checked": 0,
+          "status": "pending"
+        },
+        "art_acceptance": {
+          "status": "pending",
+          "decided_by": "user_only",
+          "inventory_item": "runtime-sprite.yuyin",
+          "inventory_stage": "planned",
+          "inventory_checked": false,
+          "receipt": null
+        }
+      }
+    }
+  ],
+  "hair_review": {
+    "exact_duplicate_anchors": {},
+    "candidate_confusion_groups": [
+      {
+        "group": "chin-length-straight",
+        "members": [
+          {
+            "visual_id": "nalia",
+            "display_name_zh": "娜丽娅",
+            "anchor": "齐颌不对称直发、单侧红金细辫"
+          },
+          {
+            "visual_id": "yelan",
+            "display_name_zh": "夜澜",
+            "anchor": "齐颌几何直发与整齐平刘海"
+          }
+        ],
+        "concern": "两者锚点都以「齐颌…直发」开头；区分依赖单侧细辫与平刘海，48 px 背面需确认仍可分。",
+        "decision": "pending_human_review"
+      },
+      {
+        "group": "single-thin-side-braid",
+        "members": [
+          {
+            "visual_id": "nalia",
+            "display_name_zh": "娜丽娅",
+            "anchor": "齐颌不对称直发、单侧红金细辫"
+          },
+          {
+            "visual_id": "gu-lin",
+            "display_name_zh": "顾鳞",
+            "anchor": "有蛇类神话血统的年轻练习者，努力摆脱别人对血统的固定期待。黑发齐耳并在左侧编一根细辫，绿色腕绳。"
+          }
+        ],
+        "concern": "两者都含单侧细辫，且发长均在齐颌／齐耳附近；区分依赖发色与细辫颜色。",
+        "decision": "pending_human_review"
+      },
+      {
+        "group": "single-long-braid",
+        "members": [
+          {
+            "visual_id": "muxiu",
+            "display_name_zh": "牧修",
+            "anchor": "单条及背长辫"
+          },
+          {
+            "visual_id": "mi-yi",
+            "display_name_zh": "米漪",
+            "anchor": "河道测绘人，话少但愿意分享自己走过的错误路线。浅褐色长直发编成低位鱼骨辫，蓝灰测绳横跨肩头。"
+          }
+        ],
+        "concern": "单条及背长辫 vs 低位鱼骨辫：背面同为单条下垂辫，需确认长度/编法在 48 px 可见。",
+        "decision": "pending_human_review"
+      },
+      {
+        "group": "twin-braids",
+        "members": [
+          {
+            "visual_id": "adi",
+            "display_name_zh": "阿荻",
+            "anchor": "头顶环编、背后两条粗长辫"
+          },
+          {
+            "visual_id": "isai",
+            "display_name_zh": "伊赛",
+            "anchor": "及背直发、中分、两条饰珠细辫"
+          },
+          {
+            "visual_id": "ruan-tian",
+            "display_name_zh": "阮田",
+            "anchor": "照护驮兽的年轻人，和陌生人说话会先观察表情。两侧各一簇短辫、橘棕披肩、骨制小铃。"
+          }
+        ],
+        "concern": "均为两条辫；粗长 / 饰珠细辫 / 两侧短辫簇的差异需在北向（背面）确认。",
+        "decision": "pending_human_review"
+      },
+      {
+        "group": "low-coiled-or-bun",
+        "members": [
+          {
+            "visual_id": "liang-xu",
+            "display_name_zh": "梁序",
+            "anchor": "灰白挑染盘发"
+          },
+          {
+            "visual_id": "heya",
+            "display_name_zh": "赫娅",
+            "anchor": "诊疗师，重视病人对自身身体的决定权，笑容克制但有耐心。赤褐色盘辫低置颈后，灰白医巾与暗红急救袋。"
+          },
+          {
+            "visual_id": "ye-qiao",
+            "display_name_zh": "叶乔",
+            "anchor": "建屋匠，务实而幽默，修缮比更换更令她自豪。灰褐色短辫贴头盘绕，木尺挂在宽腰带。"
+          },
+          {
+            "visual_id": "xuan-ya",
+            "display_name_zh": "玄芽",
+            "anchor": "专门照看私人物件保存室的暗系术者，温和、守口如瓶。墨紫色双短髻、黑银钥匙扣。"
+          }
+        ],
+        "concern": "盘发 / 颈后盘辫 / 贴头盘绕短辫 / 双短髻都是贴头团状轮廓，需核对位置与数量。",
+        "decision": "pending_human_review"
+      },
+      {
+        "group": "very-short-crop",
+        "members": [
+          {
+            "visual_id": "milo",
+            "display_name_zh": "米洛",
+            "anchor": "极短圆寸、鬓角银色发片"
+          },
+          {
+            "visual_id": "daga",
+            "display_name_zh": "达伽",
+            "anchor": "极短寸头与山纹侧边"
+          },
+          {
+            "visual_id": "xida",
+            "display_name_zh": "席妲",
+            "anchor": "出自日轮传说血统的灯塔看守人，外貌平常，目光敏锐。麦金色极短发、浅色长耳坠、方形提灯。"
+          },
+          {
+            "visual_id": "kern",
+            "display_name_zh": "克恩",
+            "anchor": "骨纹血统的石雕师，看着强硬，做事却非常细。极短红棕发、无胡须、石灰色宽围裙和裂纹锤。"
+          },
+          {
+            "visual_id": "pei-zhi",
+            "display_name_zh": "裴支",
+            "anchor": "旧设备修理铺老板，修理时会耐心解释原理。红褐色平头、焊接面罩常挂在颈后、蓝色绝缘手套。"
+          }
+        ],
+        "concern": "极短寸／圆寸／平头在 48 px 下轮廓接近；区分依赖鬓角发片、侧纹、发色。",
+        "decision": "pending_human_review"
+      },
+      {
+        "group": "shaved-sides",
+        "members": [
+          {
+            "visual_id": "jiang-lan",
+            "display_name_zh": "蒋岚",
+            "anchor": "剃短两侧与后脑、上梳立体发束、橙色细挑染"
+          },
+          {
+            "visual_id": "su-yan",
+            "display_name_zh": "苏砚",
+            "anchor": "街区志愿救护员，性格急但手很稳。两侧剃短、上方紫灰色小卷、腕部红白灯带。"
+          },
+          {
+            "visual_id": "luowen",
+            "display_name_zh": "洛纹",
+            "anchor": "单侧剃短、另一侧斜长刘海的短发"
+          },
+          {
+            "visual_id": "ji-cheng",
+            "display_name_zh": "纪澄",
+            "anchor": "沉静的旧资料修复师，乐于承认「无法判断」。耳后剃短、头顶齐肩银黑直发；墨绿夹克与折叠放大镜是识别点。"
+          },
+          {
+            "visual_id": "han-ze",
+            "display_name_zh": "韩泽",
+            "anchor": "沿路交换工具与粮食的经纪人，乐于让双方知道彼此的真实需求。深棕短莫霍克发、草绳卷轴、旧式秤砣。"
+          }
+        ],
+        "concern": "多种剃侧／剃短造型；上方发束、卷、斜刘海、齐肩直发、莫霍克需各自保留独特外廓。",
+        "decision": "pending_human_review"
+      },
+      {
+        "group": "fluffy-short",
+        "members": [
+          {
+            "visual_id": "protagonist-male",
+            "display_name_zh": "主角·男",
+            "anchor": "蓬松层次短发"
+          },
+          {
+            "visual_id": "sain",
+            "display_name_zh": "赛恩",
+            "anchor": "银白色蓬松中短发"
+          },
+          {
+            "visual_id": "sangguo",
+            "display_name_zh": "桑果",
+            "anchor": "蓬松短发与野花发饰"
+          },
+          {
+            "visual_id": "lin-que",
+            "display_name_zh": "林阙",
+            "anchor": "深蓝色碎层短发"
+          }
+        ],
+        "concern": "蓬松／层次／碎层短发相近；主角男为可玩角色，需确认与同屏伙伴不混淆。",
+        "decision": "pending_human_review"
+      },
+      {
+        "group": "short-curls",
+        "members": [
+          {
+            "visual_id": "yanke",
+            "display_name_zh": "岩柯",
+            "anchor": "短卷发与浓胡须"
+          },
+          {
+            "visual_id": "tao-yu",
+            "display_name_zh": "陶榆",
+            "anchor": "木桥匠，踏实、爱唱走调的工作歌。短而密的黑卷发，右肩木纹护片与可拆工具锤。"
+          },
+          {
+            "visual_id": "aiti",
+            "display_name_zh": "艾缇",
+            "anchor": "年轻的公共系统审查员，语言直接，尊重不愿被量化的人。浅金色紧贴头皮的短卷发、黄色袖章和透明信息片。"
+          },
+          {
+            "visual_id": "wu-li",
+            "display_name_zh": "乌礼",
+            "anchor": "剧场音效师，喜欢模仿别人的口音却很认真地征求同意。紫黑色自然卷高蓬发、细铃和无面具的便装。"
+          }
+        ],
+        "concern": "短卷发类；区分依赖胡须、发色、贴头程度与高蓬体量。",
+        "decision": "pending_human_review"
+      },
+      {
+        "group": "low-tied-back",
+        "members": [
+          {
+            "visual_id": "lin-yan",
+            "display_name_zh": "霖砚",
+            "anchor": "在光暗两种治疗方法之间做实证记录的医师，不把不同意见当成敌意。蓝黑色低马尾、两色药袋。"
+          },
+          {
+            "visual_id": "ruima",
+            "display_name_zh": "瑞玛",
+            "anchor": "与狼传说有关的动物照护员，坦率但并不冲动。银灰色低束发、厚毛边短外套、双音呼哨。"
+          }
+        ],
+        "concern": "低马尾 vs 低束发，文字描述几乎同义；区分只剩发色（蓝黑 / 银灰）。",
+        "decision": "pending_human_review"
+      },
+      {
+        "group": "silver-white-hair",
+        "members": [
+          {
+            "visual_id": "liang-xu",
+            "display_name_zh": "梁序",
+            "anchor": "灰白挑染盘发"
+          },
+          {
+            "visual_id": "sain",
+            "display_name_zh": "赛恩",
+            "anchor": "银白色蓬松中短发"
+          },
+          {
+            "visual_id": "he-huai",
+            "display_name_zh": "何槐",
+            "anchor": "社区照明维护者，喜欢听年轻人质疑旧规矩。银白色齐颈波浪发、琥珀镜片和小圆灯。"
+          },
+          {
+            "visual_id": "ruima",
+            "display_name_zh": "瑞玛",
+            "anchor": "与狼传说有关的动物照护员，坦率但并不冲动。银灰色低束发、厚毛边短外套、双音呼哨。"
+          },
+          {
+            "visual_id": "ji-cheng",
+            "display_name_zh": "纪澄",
+            "anchor": "沉静的旧资料修复师，乐于承认「无法判断」。耳后剃短、头顶齐肩银黑直发；墨绿夹克与折叠放大镜是识别点。"
+          },
+          {
+            "visual_id": "tao-li",
+            "display_name_zh": "陶粒",
+            "anchor": "研究古老血统器物的收藏修复师，宁愿标明「来历不明」也不编造传奇。光亮额头、短白发圈和沉重的布纹箱。"
+          }
+        ],
+        "concern": "银白／灰白发色集中；颜色不能作为唯一身份提示（视觉规格要求），需靠外廓区分。",
+        "decision": "pending_human_review"
+      },
+      {
+        "group": "shoulder-length-straight",
+        "members": [
+          {
+            "visual_id": "chenxian",
+            "display_name_zh": "晨弦",
+            "anchor": "整齐披肩发、后脑金扣"
+          },
+          {
+            "visual_id": "ji-cheng",
+            "display_name_zh": "纪澄",
+            "anchor": "沉静的旧资料修复师，乐于承认「无法判断」。耳后剃短、头顶齐肩银黑直发；墨绿夹克与折叠放大镜是识别点。"
+          },
+          {
+            "visual_id": "bu-he",
+            "display_name_zh": "布禾",
+            "anchor": "社区炊事师，手快、记得每个人的口味。乌黑齐肩直发包在方布巾里，铜锅盖背在肩后。"
+          }
+        ],
+        "concern": "披肩／齐肩直发；布禾包在布巾里、纪澄耳后剃短，需确认外廓不同。",
+        "decision": "pending_human_review"
+      },
+      {
+        "group": "bald-or-receding",
+        "members": [
+          {
+            "visual_id": "zhou-he",
+            "display_name_zh": "周赫",
+            "anchor": "精于合同与物流，讨厌用人情掩盖账目。光头、细框眼镜和折角铜色账簿构成独立轮廓。"
+          },
+          {
+            "visual_id": "tao-li",
+            "display_name_zh": "陶粒",
+            "anchor": "研究古老血统器物的收藏修复师，宁愿标明「来历不明」也不编造传奇。光亮额头、短白发圈和沉重的布纹箱。"
+          }
+        ],
+        "concern": "光头 vs 光亮额头＋短白发圈；侧/背面需确认可分。",
+        "decision": "pending_human_review"
+      }
+    ],
+    "anchor_notes": [
+      {
+        "visual_id": "lairui",
+        "anchor": "与夜鸟神话相关的远行信使，爱把旅途见闻讲成笑话。黑色双侧短羽形发夹、铜色眼睛和灰紫轻弓。",
+        "note": "锚点只描述发夹（「黑色双侧短羽形发夹」），未写发型本身。"
+      },
+      {
+        "visual_id": "an-suo",
+        "anchor": "公共运输签约员，讲究准时也善于应对意外。灰色一字胡、无帽短发、带孔票夹。",
+        "note": "锚点为「无帽短发」，发型描述泛化；主要识别点在一字胡与票夹。"
+      },
+      {
+        "visual_id": "luo-qi",
+        "anchor": "野地食材与药剂的老手，温和却对配方真实性毫不妥协。浓密白眉、短白胡须、平顶草帽和多层布包。",
+        "note": "锚点未描述发型，只有白眉、胡须与草帽；草帽是否常驻需确认。"
+      }
+    ],
+    "no_hair_robot_variants": [
+      "huan-7",
+      "suiya",
+      "zhongdu",
+      "menling",
+      "lingbing",
+      "lengjing",
+      "yuyin"
+    ],
+    "anchors_with_persona_prose": [
+      "ji-cheng",
+      "zhou-he",
+      "aiti",
+      "ye-qiao",
+      "mi-yi",
+      "luo-qi",
+      "avila",
+      "kern",
+      "lairui",
+      "mi-luo",
+      "heya",
+      "wu-li",
+      "huan-7",
+      "suiya",
+      "zhongdu",
+      "zhao-ling",
+      "pei-zhi",
+      "an-suo",
+      "su-yan",
+      "tao-yu",
+      "ruan-tian",
+      "bu-he",
+      "han-ze",
+      "xida",
+      "gu-lin",
+      "ruima",
+      "tao-li",
+      "lin-yan",
+      "he-huai",
+      "xuan-ya",
+      "que-zhi",
+      "menling",
+      "lingbing",
+      "lengjing",
+      "yuyin"
+    ]
+  },
+  "path_check": {
+    "missing": [],
+    "untracked_but_referenced": [],
+    "registry_discrepancies": [
+      "liang-xu: exploration manifest id is 'liang_xu', registry visual_id is 'liang-xu'",
+      "jiang-lan: registry exploration is not_started but unregistered manifest exists: game/assets/characters/native-animation/rpg-2-star-ocean-the-second_jiang-lan_native-exploration-manifest_m8-prototype_20261014-144703-dbe4b4c6.json",
+      "milo: registry exploration is not_started but unregistered manifest exists: game/assets/characters/native-animation/rpg-2-star-ocean-the-second_milo_native-exploration-manifest_m8-v01_20261014-185020-1976baf4.json"
+    ]
+  }
+}
