@@ -20,6 +20,7 @@ Last updated: 2026-10-13
 - M7 now includes two survey rooms in each of the three science-region destinations: 18 bilingual clues, three evidence questions with retry, one-time JP rewards, room/position save recovery, and an in-game run timer. Two freely ordered routes and an annex save/load check pass; new Chinese/English survey screenshots were reviewed. The planned 25–35 minute duration still needs a real timed playthrough.
 - M7 evidence review now requires three clue pairs per destination before its final judgment. There are nine bilingual pair explanations across the slice, and correct/incorrect pair attempts are retryable. Link progress saves and loads. A pacing audit found only about 31 seconds of minimum walking inside all six survey rooms at the current movement speed; this is a mechanical lower bound, not a playthrough duration. Content length remains unverified.
 - M7 adds six optional bilingual party conversations: three individual reflections and three two-person exchanges unlocked by recruitment and completed surveys. Topics remain available on return; first completion grants 3 prototype bond to each participant and autosaves, while replay grants no extra bond. The available-topic and dialogue screens were visually reviewed. This strengthens the recruitment loop but is not a substitute for a timed playthrough.
+- M7 now writes a local JSON playtest receipt at the first city report, including elapsed time, event order, recruits, surveys, conversations heard before report, and retry counts. A Windows launcher starts the game with the bundled Godot executable and copies the receipt into `outputs/` after the game closes. The M7 smoke test checks receipt contents for both route orders. No real timed playthrough has been recorded yet.
 
 ## Milestones Checklist
 
@@ -57,6 +58,7 @@ Last updated: 2026-10-13
 - [x] Add six survey rooms, 18 readable clues and three evidence decisions without blocking recruit order.
 - [x] Add nine evidence pair deductions, bilingual feedback and save recovery.
 - [x] Add six non-missable companion conversations with one-time bond and save recovery.
+- [x] Add a local playtest launcher and verify the report receipt for both route orders.
 - [ ] Time a fresh start-to-finish playthrough and fix any blockers or text overflow.
 
 ### Phase M8 - Acceptance and tuning

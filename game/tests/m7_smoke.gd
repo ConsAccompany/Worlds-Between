@@ -177,6 +177,16 @@ func _run() -> void:
 		await _settle()
 		if not _check(current_scene.name == "DemoReport" and app.demo_completed, "report endpoint appears"):
 			return
+		if not _check(app.playtest_receipt_path != "" and FileAccess.file_exists(app.playtest_receipt_path), "playtest receipt written"):
+			return
+		var receipt: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(app.playtest_receipt_path))
+		if not _check(int(receipt.get("schemaVersion", 0)) == 1 and bool(receipt.get("reportCompleted", false)), "playtest receipt schema and completion"):
+			return
+		if not _check(receipt.get("surveysCompleted", []).size() == 3 and int(receipt.get("wrongEvidencePairs", {}).get("scifi.city", 0)) == 1 and int(receipt.get("wrongJudgments", {}).get("scifi.city", 0)) == 1, "playtest receipt surveys and retry counts"):
+			return
+		var recorded_events: Array = receipt.get("events", [])
+		if not _check(recorded_events.size() >= 10 and recorded_events[0]["type"] == "run_start" and recorded_events[-1]["type"] == "report", "playtest receipt event order"):
+			return
 		var entries := SaveStore.list_entries()
 		if not _check(not entries.is_empty(), "completion autosaved"):
 			return

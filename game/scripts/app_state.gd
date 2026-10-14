@@ -156,6 +156,7 @@ const STRINGS := {
 		"report_summary": "%s 已走访三处地点、完成三处实地勘察、核对两份记录，并观察了自动机械。同行伙伴：%d/3。",
 		"report_continue": "继续自由探索", "report_map": "返回世界地图",
 		"report_note": "这份资料揭示了新的问题。完整故事将在后续章节展开。",
+		"report_receipt": "本地试玩记录已保存。",
 	},
 	"en": {
 		"title": "Worlds Between",
@@ -310,6 +311,7 @@ const STRINGS := {
 		"report_summary": "%s visited three places, completed three surveys, checked two records, and observed a machine. Companions: %d/3.",
 		"report_continue": "Continue exploring", "report_map": "World map",
 		"report_note": "The evidence raises further questions. The full story will develop in later chapters.",
+		"report_receipt": "Local playtest record saved.",
 	},
 }
 
@@ -329,6 +331,10 @@ var areas_visited: Dictionary = {}
 var machine_observed := false
 var demo_completed := false
 var play_time_seconds := 0.0
+var playtest_events: Array = []
+var wrong_pair_attempts: Dictionary = {}
+var wrong_judgment_attempts: Dictionary = {}
+var playtest_receipt_path := ""
 var run_active := false
 var survey_clues: Dictionary = {}
 var survey_links: Dictionary = {}
@@ -408,7 +414,12 @@ func begin_new_run() -> void:
 	machine_observed = false
 	demo_completed = false
 	play_time_seconds = 0.0
+	playtest_events.clear()
+	wrong_pair_attempts.clear()
+	wrong_judgment_attempts.clear()
+	playtest_receipt_path = ""
 	run_active = true
+	record_playtest_event("run_start")
 	survey_clues.clear()
 	survey_links.clear()
 	survey_solved.clear()
@@ -448,6 +459,51 @@ func play_time_text() -> String:
 	return text_for("run_time") % [total / 60, total % 60]
 
 
+func record_playtest_event(event_type: String, destination_id: String = "") -> void:
+	if run_active:
+		playtest_events.append({"type": event_type, "destination": destination_id, "atSeconds": snappedf(play_time_seconds, 0.1)})
+
+
+func record_playtest_mistake(kind: String, destination_id: String) -> void:
+	if not DESTINATIONS.has(destination_id):
+		return
+	var counts: Dictionary = wrong_pair_attempts if kind == "pair" else wrong_judgment_attempts
+	counts[destination_id] = int(counts.get(destination_id, 0)) + 1
+
+
+func write_playtest_receipt() -> String:
+	var directory := SaveStore.root_path.path_join("playtests")
+	if DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(directory)) != OK:
+		return ""
+	var stamp := Time.get_datetime_string_from_system().replace("-", "").replace(":", "").replace("T", "-")
+	var filename := "rpg-2-star-ocean-the-second_scifi-region_playtest-receipt_m7_%s-%08x.json" % [stamp, randi()]
+	var path := directory.path_join(filename)
+	var receipt := {
+		"schemaVersion": 1,
+		"project": "rpg-2-star-ocean-the-second",
+		"milestone": "M7",
+		"recordedAt": Time.get_datetime_string_from_system(),
+		"durationSeconds": snappedf(play_time_seconds, 0.1),
+		"language": language,
+		"events": playtest_events.duplicate(true),
+		"wrongEvidencePairs": wrong_pair_attempts.duplicate(true),
+		"wrongJudgments": wrong_judgment_attempts.duplicate(true),
+		"recruited": recruited_members.keys(),
+		"surveysCompleted": survey_solved.keys(),
+		"conversationsHeard": party_talk_seen.keys(),
+		"reportCompleted": demo_completed,
+	}
+	var file := FileAccess.open(path, FileAccess.WRITE)
+	if file == null:
+		return ""
+	file.store_string(JSON.stringify(receipt, "\t"))
+	file.flush()
+	file.close()
+	playtest_receipt_path = ProjectSettings.globalize_path(path)
+	print("PLAYTEST_RECEIPT " + playtest_receipt_path)
+	return playtest_receipt_path
+
+
 func can_submit_report() -> bool:
 	return areas_visited.size() == DESTINATIONS.size() and survey_solved.size() == DESTINATIONS.size() and relay_checked and ji_records_checked and machine_observed
 
@@ -478,6 +534,7 @@ func recruit_member(member_id: String) -> bool:
 		"aptitudes": definition["aptitudes"].duplicate(),
 	}
 	recruited_members[member_id] = true
+	record_playtest_event("recruit", member_id)
 	party_bonds[member_id] = int(party_bonds.get(member_id, 0))
 	active_party_ids.append(member_id)
 	return true
@@ -490,6 +547,7 @@ func record_party_talk(topic_id: String, participants: Array) -> bool:
 		if not recruited_members.has(member_id):
 			return false
 	party_talk_seen[topic_id] = true
+	record_playtest_event("conversation", topic_id)
 	for member_id in participants:
 		party_bonds[member_id] = mini(100, int(party_bonds.get(member_id, 0)) + 3)
 	write_auto_save("map", Vector2.ZERO, "party_talk")
@@ -607,6 +665,7 @@ func begin_battle(enemy_id: String, return_position: Vector2) -> bool:
 	if not ["patrol", "sentry"].has(enemy_id):
 		return false
 	battle_enemy_id = enemy_id
+	record_playtest_event("battle_start", current_destination_id)
 	battle_return_position = return_position
 	battle_transition_started_usec = Time.get_ticks_usec()
 	return true
@@ -632,6 +691,9 @@ func make_snapshot(scene_kind: String, position: Vector2, note: String) -> Dicti
 		"machineObserved": machine_observed,
 		"demoCompleted": demo_completed,
 		"playTimeSeconds": play_time_seconds,
+		"playtestEvents": playtest_events.duplicate(true),
+		"wrongPairAttempts": wrong_pair_attempts.duplicate(true),
+		"wrongJudgmentAttempts": wrong_judgment_attempts.duplicate(true),
 		"surveyClues": survey_clues.duplicate(true),
 		"surveyLinks": survey_links.duplicate(true),
 		"surveySolved": survey_solved.duplicate(true),
@@ -678,6 +740,10 @@ func load_save(id: String) -> bool:
 	machine_observed = bool(snapshot.get("machineObserved", false))
 	demo_completed = bool(snapshot.get("demoCompleted", false))
 	play_time_seconds = float(snapshot.get("playTimeSeconds", 0.0))
+	playtest_events = snapshot.get("playtestEvents", []).duplicate(true)
+	wrong_pair_attempts = snapshot.get("wrongPairAttempts", {}).duplicate(true)
+	wrong_judgment_attempts = snapshot.get("wrongJudgmentAttempts", {}).duplicate(true)
+	playtest_receipt_path = ""
 	run_active = true
 	survey_clues = snapshot.get("surveyClues", {}).duplicate(true)
 	survey_links = snapshot.get("surveyLinks", {}).duplicate(true)
@@ -743,6 +809,8 @@ func _valid_snapshot(snapshot: Dictionary) -> bool:
 	if typeof(snapshot.get("relayChecked", false)) != TYPE_BOOL or typeof(snapshot.get("areasVisited", {})) != TYPE_DICTIONARY or typeof(snapshot.get("machineObserved", false)) != TYPE_BOOL or typeof(snapshot.get("demoCompleted", false)) != TYPE_BOOL:
 		return false
 	if typeof(snapshot.get("playTimeSeconds", 0.0)) not in [TYPE_FLOAT, TYPE_INT] or float(snapshot.get("playTimeSeconds", 0.0)) < 0.0:
+		return false
+	if typeof(snapshot.get("playtestEvents", [])) != TYPE_ARRAY or typeof(snapshot.get("wrongPairAttempts", {})) != TYPE_DICTIONARY or typeof(snapshot.get("wrongJudgmentAttempts", {})) != TYPE_DICTIONARY:
 		return false
 	if typeof(snapshot.get("heroName", "")) != TYPE_STRING or snapshot.get("heroAppearance", "male") not in ["male", "female"]:
 		return false

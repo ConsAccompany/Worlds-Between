@@ -37,18 +37,18 @@ func _build_ui() -> void:
 	add_child(summary_label)
 	note_label = Label.new()
 	note_label.position = Vector2(91, 201)
-	note_label.size = Vector2(460, 42)
+	note_label.size = Vector2(460, 59)
 	note_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	note_label.add_theme_font_size_override("font_size", 11)
 	note_label.add_theme_color_override("font_color", Color("#aecac6"))
 	add_child(note_label)
 	continue_button = Button.new()
-	continue_button.position = Vector2(91, 265)
+	continue_button.position = Vector2(91, 279)
 	continue_button.size = Vector2(211, 40)
 	continue_button.pressed.connect(_return_to_city)
 	add_child(continue_button)
 	map_button = Button.new()
-	map_button.position = Vector2(314, 265)
+	map_button.position = Vector2(314, 279)
 	map_button.size = Vector2(211, 40)
 	map_button.pressed.connect(_return_to_map)
 	add_child(map_button)
@@ -59,6 +59,8 @@ func _refresh_text() -> void:
 	summary_label.text = AppState.text_for("report_summary") % [AppState.member_name("hero"), AppState.recruited_members.size()]
 	note_label.text = AppState.text_for("report_note")
 	note_label.text += "\n" + AppState.play_time_text()
+	if AppState.playtest_receipt_path != "":
+		note_label.text += "\n" + AppState.text_for("report_receipt")
 	continue_button.text = AppState.text_for("report_continue")
 	map_button.text = AppState.text_for("report_map")
 

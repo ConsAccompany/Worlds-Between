@@ -366,6 +366,7 @@ func _select_link_clue(index: int) -> void:
 			_refresh_overlay()
 			return
 	overlay_message = AppState.text_for("survey_link_wrong")
+	AppState.record_playtest_mistake("pair", destination_id)
 	_refresh_overlay()
 
 
@@ -382,10 +383,12 @@ func _choose_answer(index: int) -> void:
 	var data := _data()
 	if index != int(data["answer"]):
 		overlay_message = AppState.text_for("survey_retry")
+		AppState.record_playtest_mistake("judgment", destination_id)
 		_refresh_overlay()
 		return
 	if not AppState.survey_solved.has(destination_id):
 		AppState.survey_solved[destination_id] = true
+		AppState.record_playtest_event("survey_complete", destination_id)
 		AppState.award_survey_jp()
 		AppState.write_auto_save("annex", hero.position, "survey_note")
 		cue_player.play()

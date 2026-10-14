@@ -436,6 +436,7 @@ func _finish_battle(won: bool) -> void:
 	paused = false
 	pause_overlay.visible = false
 	battle_won = won
+	AppState.record_playtest_event("battle_win" if won else "battle_loss", AppState.current_destination_id)
 	if won:
 		AppState.machine_observed = true
 		for fighter in fighters:

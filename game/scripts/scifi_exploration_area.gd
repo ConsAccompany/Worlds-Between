@@ -73,6 +73,8 @@ func _ready() -> void:
 		hero.position = AppState.resume_area_position
 		AppState.resume_area_pending = false
 	safe_position = hero.position
+	if not AppState.areas_visited.has(destination_id):
+		AppState.record_playtest_event("visit", destination_id)
 	AppState.areas_visited[destination_id] = true
 	_build_ui()
 	_start_audio()
@@ -95,6 +97,8 @@ func _process(delta: float) -> void:
 				_open_encounter()
 	if enemy_visible and not bypass_reached and hero.position.x > 545.0 and hero.position.y < 205.0:
 		bypass_reached = true
+		if not AppState.machine_observed:
+			AppState.record_playtest_event("machine_bypass", destination_id)
 		AppState.machine_observed = true
 		feedback_key = "bypass_notice"
 		_refresh_text()
@@ -407,16 +411,23 @@ func _unhandled_input(event: InputEvent) -> void:
 			get_tree().change_scene_to_file("res://scenes/survey_annex.tscn")
 		elif destination_id == "scifi.city" and hero.position.distance_to(REPORT_POSITION) < 50.0:
 			if AppState.can_submit_report():
+				var first_report := not AppState.demo_completed
 				AppState.demo_completed = true
+				if first_report:
+					AppState.record_playtest_event("report", destination_id)
 				AppState.resume_area_position = hero.position
 				AppState.resume_area_pending = true
 				AppState.write_auto_save("area", hero.position, "manual_note")
+				if first_report:
+					AppState.write_playtest_receipt()
 				get_tree().change_scene_to_file("res://scenes/demo_report.tscn")
 			else:
 				feedback_key = "report_locked"
 				feedback_message = ""
 				_refresh_text()
 		elif destination_id == "scifi.outskirts" and hero.position.distance_to(RELAY_POSITION) < 46.0:
+			if not AppState.relay_checked:
+				AppState.record_playtest_event("relay_checked", destination_id)
 			AppState.relay_checked = true
 			cue_player.play()
 			feedback_key = "relay_done"
@@ -425,6 +436,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			queue_redraw()
 		elif destination_id == "scifi.ruins" and not AppState.ji_records_checked and hero.position.distance_to(RECORDS_POSITION) < 43.0:
 			AppState.ji_records_checked = true
+			AppState.record_playtest_event("ruin_record_checked", destination_id)
 			cue_player.play()
 			feedback_message = AppState.text_for("relic_done")
 			_refresh_text()
