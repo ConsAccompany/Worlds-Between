@@ -101,6 +101,13 @@ const STRINGS := {
 		"growth_upgrade": "升级技能 %s · %d JP",
 		"growth_skill": "职业技能：%s",
 		"growth_personal": "个人技能 %s Lv%d · 升级 %d JP",
+		"save_title": "存档与读取", "save_open": "存档", "save_load_open": "读取游戏",
+		"save_back": "返回", "save_manual_slot": "手动栏 %d", "save_write": "保存到此栏",
+		"save_load": "读取", "save_empty": "空栏位", "save_auto": "自动记录",
+		"save_before_battle": "开战前", "save_after_battle": "胜利后", "save_manual_note": "手动保存",
+		"save_summary": "%s · Lv%d · %d 人 · %s",
+		"save_ok": "已保存至 %s", "save_failed": "存档失败", "save_load_failed": "读取失败或存档不兼容",
+		"save_version_old": "旧版存档 · 无法读取", "save_no_records": "暂无自动记录",
 		"growth_rewards": "战斗奖励：%d XP / %d JP；候补获得 25%%",
 		"growth_locked": "天分未达到 60",
 		"growth_done": "职业选择已完成",
@@ -208,6 +215,13 @@ const STRINGS := {
 		"growth_upgrade": "Upgrade %s · %d JP",
 		"growth_skill": "Job skills: %s",
 		"growth_personal": "Personal %s Lv%d · upgrade %d JP",
+		"save_title": "Save & Load", "save_open": "Save", "save_load_open": "Load Game",
+		"save_back": "Back", "save_manual_slot": "Manual slot %d", "save_write": "Save here",
+		"save_load": "Load", "save_empty": "Empty slot", "save_auto": "Autosave",
+		"save_before_battle": "Before battle", "save_after_battle": "After victory", "save_manual_note": "Manual save",
+		"save_summary": "%s · Lv%d · %d party · %s",
+		"save_ok": "Saved to %s", "save_failed": "Save failed", "save_load_failed": "Load failed or incompatible save",
+		"save_version_old": "Old save · cannot load", "save_no_records": "No autosaves yet",
 		"growth_rewards": "Battle rewards: %d XP / %d JP; reserves earn 25%%",
 		"growth_locked": "Aptitude below 60",
 		"growth_done": "Job choice complete",
@@ -233,6 +247,12 @@ var returning_from_battle := false
 var battle_transition_started_usec := 0
 var last_battle_transition_ms := 0.0
 var growth_return_scene := "res://scenes/scifi_world_map.tscn"
+var save_screen_mode := "load"
+var save_return_scene := "res://scenes/scifi_world_map.tscn"
+var save_return_position := Vector2(82, 260)
+var resume_area_pending := false
+var resume_area_position := Vector2(82, 260)
+var loaded_scene_kind := "map"
 
 const DESTINATIONS := ["scifi.city", "scifi.outskirts", "scifi.ruins"]
 const DESTINATION_KEYS := {
@@ -281,6 +301,8 @@ func begin_new_run() -> void:
 	returning_from_battle = false
 	current_destination_id = "scifi.city"
 	growth_return_scene = "res://scenes/scifi_world_map.tscn"
+	resume_area_pending = false
+	loaded_scene_kind = "map"
 
 
 func member_name(member_id: String) -> String:
@@ -421,6 +443,89 @@ func begin_battle(enemy_id: String, return_position: Vector2) -> bool:
 	battle_enemy_id = enemy_id
 	battle_return_position = return_position
 	battle_transition_started_usec = Time.get_ticks_usec()
+	return true
+
+
+func make_snapshot(scene_kind: String, position: Vector2, note: String) -> Dictionary:
+	return {
+		"scene": scene_kind,
+		"position": [position.x, position.y],
+		"destination": current_destination_id,
+		"enemyCleared": enemy_cleared_for_return,
+		"hero": hero_state.duplicate(true),
+		"members": member_states.duplicate(true),
+		"activeParty": active_party_ids.duplicate(),
+		"recruited": recruited_members.duplicate(true),
+		"jiRecordsChecked": ji_records_checked,
+		"language": language,
+		"note": note,
+	}
+
+
+func write_manual_save(slot: int) -> String:
+	var kind := "area" if save_return_scene.ends_with("scifi_exploration_area.tscn") else "map"
+	return SaveStore.write_entry("manual", slot, make_snapshot(kind, save_return_position, "manual_note"))
+
+
+func write_auto_save(scene_kind: String, position: Vector2, note: String) -> String:
+	return SaveStore.write_entry("auto", 0, make_snapshot(scene_kind, position, note))
+
+
+func load_save(id: String) -> bool:
+	var entry := SaveStore.read_entry(id)
+	if entry.is_empty() or int(entry.get("schemaVersion", -1)) != SaveStore.SCHEMA_VERSION:
+		return false
+	var snapshot: Dictionary = entry["snapshot"]
+	if not _valid_snapshot(snapshot):
+		return false
+	var party: Array[String] = []
+	for member_id in snapshot["activeParty"]:
+		party.append(String(member_id))
+	hero_state = snapshot["hero"].duplicate(true)
+	member_states = snapshot["members"].duplicate(true)
+	active_party_ids = party
+	recruited_members = snapshot["recruited"].duplicate(true)
+	ji_records_checked = bool(snapshot["jiRecordsChecked"])
+	current_destination_id = String(snapshot["destination"])
+	language = String(snapshot["language"])
+	enemy_cleared_for_return = bool(snapshot["enemyCleared"])
+	loaded_scene_kind = String(snapshot["scene"])
+	resume_area_position = Vector2(float(snapshot["position"][0]), float(snapshot["position"][1]))
+	resume_area_pending = loaded_scene_kind == "area"
+	returning_from_battle = false
+	battle_enemy_id = ""
+	battle_return_position = resume_area_position
+	language_changed.emit()
+	return true
+
+
+func loaded_scene_path() -> String:
+	var path := "res://scenes/scifi_exploration_area.tscn" if loaded_scene_kind == "area" else "res://scenes/scifi_world_map.tscn"
+	if has_pending_job_choice():
+		growth_return_scene = path
+		return "res://scenes/growth_screen.tscn"
+	return path
+
+
+func _valid_snapshot(snapshot: Dictionary) -> bool:
+	if snapshot.get("scene", "") not in ["map", "area"] or not DESTINATIONS.has(snapshot.get("destination", "")):
+		return false
+	var position: Variant = snapshot.get("position")
+	if typeof(position) != TYPE_ARRAY or position.size() != 2:
+		return false
+	if typeof(snapshot.get("hero")) != TYPE_DICTIONARY or typeof(snapshot.get("members")) != TYPE_DICTIONARY or typeof(snapshot.get("activeParty")) != TYPE_ARRAY or typeof(snapshot.get("recruited")) != TYPE_DICTIONARY:
+		return false
+	var hero: Dictionary = snapshot["hero"]
+	if not hero.has("level") or not hero.has("job_records") or not GrowthRules.SERIES.has(hero.get("job_series", "")):
+		return false
+	var party: Array = snapshot["activeParty"]
+	if party.is_empty() or party.size() > PARTY_CAPACITY or party[0] != "hero":
+		return false
+	for member_id in party:
+		if not MEMBER_DEFS.has(member_id) or (member_id != "hero" and not snapshot["members"].has(member_id)):
+			return false
+	if snapshot.get("language", "") not in ["zh", "en"] or typeof(snapshot.get("jiRecordsChecked")) != TYPE_BOOL or typeof(snapshot.get("enemyCleared")) != TYPE_BOOL:
+		return false
 	return true
 
 

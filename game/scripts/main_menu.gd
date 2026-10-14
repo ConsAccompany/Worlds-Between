@@ -3,6 +3,7 @@ extends Control
 var title_label: Label
 var subtitle_label: Label
 var start_button: Button
+var load_button: Button
 var language_button: Button
 var quit_button: Button
 
@@ -29,7 +30,7 @@ func _build_ui() -> void:
 	var column := VBoxContainer.new()
 	column.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
 	column.position = Vector2(160, 64)
-	column.size = Vector2(320, 240)
+	column.size = Vector2(320, 275)
 	column.add_theme_constant_override("separation", 10)
 	add_child(column)
 
@@ -52,6 +53,10 @@ func _build_ui() -> void:
 	start_button.custom_minimum_size = Vector2(0, 36)
 	start_button.pressed.connect(_start_game)
 	column.add_child(start_button)
+	load_button = Button.new()
+	load_button.custom_minimum_size = Vector2(0, 36)
+	load_button.pressed.connect(_open_load)
+	column.add_child(load_button)
 
 	language_button = Button.new()
 	language_button.custom_minimum_size = Vector2(0, 36)
@@ -68,6 +73,7 @@ func _refresh_text() -> void:
 	title_label.text = AppState.text_for("title")
 	subtitle_label.text = AppState.text_for("subtitle")
 	start_button.text = AppState.text_for("start")
+	load_button.text = AppState.text_for("save_load_open")
 	language_button.text = AppState.text_for("language")
 	quit_button.text = AppState.text_for("quit")
 
@@ -75,4 +81,10 @@ func _refresh_text() -> void:
 func _start_game() -> void:
 	AppState.begin_new_run()
 	get_tree().change_scene_to_file("res://scenes/scifi_world_map.tscn")
+
+
+func _open_load() -> void:
+	AppState.save_screen_mode = "load"
+	AppState.save_return_scene = "res://scenes/main_menu.tscn"
+	get_tree().change_scene_to_file("res://scenes/save_screen.tscn")
 

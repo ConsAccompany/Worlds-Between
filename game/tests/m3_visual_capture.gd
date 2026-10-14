@@ -7,6 +7,7 @@ func _initialize() -> void:
 
 func _capture() -> void:
 	var app: Node = root.get_node("AppState")
+	SaveStore.root_path = "user://test-saves/m3-visual"
 	var stamp := Time.get_datetime_string_from_system().replace("-", "").replace(":", "").replace("T", "-")
 	for enemy_id in ["patrol", "sentry"]:
 		app.begin_new_run()

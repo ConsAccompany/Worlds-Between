@@ -7,6 +7,7 @@ func _initialize() -> void:
 
 func _capture() -> void:
 	var app: Node = root.get_node("AppState")
+	SaveStore.root_path = "user://test-saves/m4-visual"
 	var stamp := Time.get_datetime_string_from_system().replace("-", "").replace(":", "").replace("T", "-")
 	app.begin_new_run()
 	app.select_destination("scifi.city")

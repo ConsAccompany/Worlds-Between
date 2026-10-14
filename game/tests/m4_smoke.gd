@@ -7,6 +7,7 @@ func _initialize() -> void:
 
 func _run_checks() -> void:
 	var app: Node = root.get_node("AppState")
+	SaveStore.root_path = "user://test-saves/m4"
 	app.begin_new_run()
 	app.hero_state["level"] = 23
 	for entry in [

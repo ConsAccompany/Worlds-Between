@@ -13,7 +13,8 @@ Last updated: 2026-10-13
 - Godot M1–M4 smoke checks pass. A four-character AI party won a battle; four M4 captures were inspected. Formal sprite animation remains later work.
 - M5 levels and jobs are complete: independent XP/JP, level-up recovery, a mandatory choice at each ten-level threshold, four aptitude gates and job series with two stages each, preserved cross-series progress, JP ranks for job and personal skills, reserve quarter rewards, and a bilingual playable growth screen.
 - Godot M1–M5 smoke checks pass. M5 checks cover staying, promotion, switching away and back, skill ranks, aptitude discounts and gates, reserve rewards, combat skill use, and battle-to-growth routing. Five M5 captures were inspected. Final job art and effects remain later work.
-- The right-side MVP widget reads the named JSON progress file in `outputs/`.
+- M6 saves and recovery are complete: three manual slots, a rolling five-record autosave history, a safe prebattle checkpoint, victory autosave after rewards, versioned JSON, and main-menu load. Map/area position, party, recruitment, enemies, discovery, AI and job records restore.
+- Godot M6 scenario and separate-process restart checks pass. Four Chinese/English M6 captures were inspected. The right-side game bible reads the named JSON progress and asset inventory files in `outputs/`.
 
 ## Milestones Checklist
 
@@ -42,7 +43,7 @@ Last updated: 2026-10-13
 
 ### Phase M6 - Saves and recovery
 
-- [ ] Implement autosave, manual save, and loading.
+- [x] Implement autosave, manual save, and loading.
 
 ### Phase M7 - Playable content
 

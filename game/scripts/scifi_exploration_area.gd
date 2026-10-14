@@ -26,6 +26,7 @@ var help_label: Label
 var feedback_label: Label
 var enemy_label: Label
 var back_button: Button
+var save_button: Button
 var npc_label: Label
 var records_label: Label
 var dialogue_overlay: ColorRect
@@ -51,6 +52,9 @@ func _ready() -> void:
 	if AppState.returning_from_battle:
 		hero.position = AppState.battle_return_position
 		AppState.returning_from_battle = false
+	elif AppState.resume_area_pending:
+		hero.position = AppState.resume_area_position
+		AppState.resume_area_pending = false
 	safe_position = hero.position
 	_build_ui()
 	AppState.language_changed.connect(_refresh_text)
@@ -190,6 +194,11 @@ func _build_ui() -> void:
 	back_button.size = Vector2(98, 38)
 	back_button.pressed.connect(_return_to_map)
 	canvas.add_child(back_button)
+	save_button = Button.new()
+	save_button.position = Vector2(418, 12)
+	save_button.size = Vector2(98, 38)
+	save_button.pressed.connect(_open_save)
+	canvas.add_child(save_button)
 	var footer := ColorRect.new()
 	footer.color = Color("#0d1723")
 	footer.position = Vector2(0, 318)
@@ -264,6 +273,7 @@ func _refresh_text() -> void:
 	help_label.text = AppState.text_for("area_help")
 	feedback_label.text = feedback_message if feedback_message != "" else AppState.text_for(feedback_key)
 	back_button.text = AppState.text_for("area_back")
+	save_button.text = AppState.text_for("save_open")
 	enemy_label.text = AppState.text_for("enemy_label")
 	npc_label.text = AppState.member_name(recruit_id)
 	npc_label.visible = not AppState.recruited_members.has(recruit_id)
@@ -307,8 +317,16 @@ func _invite_companion() -> void:
 func _open_encounter() -> void:
 	encounter_count += 1
 	var enemy_id := "patrol" if destination_id == "scifi.outskirts" else "sentry"
+	AppState.write_auto_save("area", safe_position, "before_battle")
 	if AppState.begin_battle(enemy_id, safe_position):
 		get_tree().change_scene_to_packed(BATTLE_SCENE)
+
+
+func _open_save() -> void:
+	AppState.save_screen_mode = "save"
+	AppState.save_return_scene = "res://scenes/scifi_exploration_area.tscn"
+	AppState.save_return_position = hero.position
+	get_tree().change_scene_to_file("res://scenes/save_screen.tscn")
 
 
 func _return_to_map() -> void:

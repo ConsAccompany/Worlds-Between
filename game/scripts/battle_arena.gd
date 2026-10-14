@@ -440,6 +440,7 @@ func _finish_battle(won: bool) -> void:
 		AppState.returning_from_battle = true
 		var rewards := AppState.award_battle_rewards(enemy_id)
 		result_reward_text = AppState.text_for("growth_rewards") % [int(rewards["xp"]), int(rewards["jp"])]
+		AppState.write_auto_save("area", AppState.battle_return_position, "after_battle")
 	else:
 		AppState.enemy_cleared_for_return = false
 		AppState.returning_from_battle = false

@@ -11,6 +11,7 @@ var title_label: Label
 var help_label: Label
 var back_button: Button
 var growth_button: Button
+var save_button: Button
 var destination_buttons: Dictionary = {}
 
 
@@ -61,6 +62,11 @@ func _build_ui() -> void:
 	back_button.size = Vector2(94, 37)
 	back_button.pressed.connect(_return_to_menu)
 	canvas.add_child(back_button)
+	save_button = Button.new()
+	save_button.position = Vector2(295, 12)
+	save_button.size = Vector2(102, 37)
+	save_button.pressed.connect(_open_save)
+	canvas.add_child(save_button)
 	growth_button = Button.new()
 	growth_button.position = Vector2(404, 12)
 	growth_button.size = Vector2(117, 37)
@@ -83,6 +89,7 @@ func _refresh_text() -> void:
 	help_label.text = AppState.text_for("map_help")
 	back_button.text = AppState.text_for("map_back")
 	growth_button.text = AppState.text_for("growth_open")
+	save_button.text = AppState.text_for("save_open")
 	for id in destination_buttons:
 		destination_buttons[id].text = AppState.destination_name(id)
 
@@ -100,6 +107,13 @@ func _return_to_menu() -> void:
 func _open_growth() -> void:
 	AppState.growth_return_scene = "res://scenes/scifi_world_map.tscn"
 	get_tree().change_scene_to_file("res://scenes/growth_screen.tscn")
+
+
+func _open_save() -> void:
+	AppState.save_screen_mode = "save"
+	AppState.save_return_scene = "res://scenes/scifi_world_map.tscn"
+	AppState.save_return_position = Vector2.ZERO
+	get_tree().change_scene_to_file("res://scenes/save_screen.tscn")
 
 
 func _unhandled_input(event: InputEvent) -> void:

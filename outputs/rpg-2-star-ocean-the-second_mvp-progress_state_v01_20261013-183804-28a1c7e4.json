@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
   "planVersion": "v0.1",
-  "updatedAt": "2026-10-13T20:42:48-04:00",
-  "currentStep": "M6",
+  "updatedAt": "2026-10-13T20:48:44-04:00",
+  "currentStep": "M7",
   "steps": [
     {
       "id": "M1",
@@ -83,16 +83,23 @@
     {
       "id": "M6",
       "title": "Saves and recovery",
-      "status": "ready",
-      "summary": "Battle autosaves, manual saves, reload of party/world/job state.",
+      "status": "done",
+      "summary": "Three manual slots, five rolling autosaves, prebattle checkpoints, victory records, versioned disk saves and full game-state recovery.",
       "acceptance": "Restart and load key states; loss returns to menu with load available.",
-      "evidence": [],
+      "evidence": [
+        "game/tests/m6_smoke.gd: M6_SMOKE_OK (manual slots, area/map position, party, jobs, AI, recruitment, enemies, five autosaves, defeat checkpoint, victory save, pending job choice, old-version rejection)",
+        "game/tests/m6_restart_smoke.gd: M6_RESTART_OK (fresh Godot process reads disk save and restores scene)",
+        "outputs/rpg-2-star-ocean-the-second_main-menu_load-entry_m6_20261013-204655-61788285.png",
+        "outputs/rpg-2-star-ocean-the-second_save-screen_load-records_m6_20261013-204655-4c8f691d.png",
+        "outputs/rpg-2-star-ocean-the-second_save-screen_manual-and-auto_m6_20261013-204655-26f8e92b.png",
+        "outputs/rpg-2-star-ocean-the-second_save-screen_records-english_m6_20261013-204655-3854634f.png"
+      ],
       "blocker": null
     },
     {
       "id": "M7",
       "title": "Playable content",
-      "status": "todo",
+      "status": "ready",
       "summary": "25–35 minute tech-board route, one discovery, three recruits, bilingual text.",
       "acceptance": "Finish without developer tools; two exploration/recruit orders; both languages fit.",
       "evidence": [],

@@ -7,6 +7,7 @@ func _initialize() -> void:
 
 func _capture() -> void:
 	var app: Node = root.get_node("AppState")
+	SaveStore.root_path = "user://test-saves/m5-visual"
 	app.begin_new_run()
 	app._grant_growth(app.hero_state, 630, 0)
 	app.choose_job("hero", "promote")

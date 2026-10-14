@@ -7,6 +7,7 @@ func _initialize() -> void:
 
 func _run_checks() -> void:
 	var app: Node = root.get_node("AppState")
+	SaveStore.root_path = "user://test-saves/m5"
 	app.begin_new_run()
 	var hero: Dictionary = app.hero_state
 	if not _check(hero["level"] == 1 and hero["aptitudes"] == [60, 60, 60, 60], "hero begins at level 1 with four 60 aptitudes"):

@@ -7,6 +7,7 @@ func _initialize() -> void:
 
 func _run_checks() -> void:
 	var app: Node = root.get_node("AppState")
+	SaveStore.root_path = "user://test-saves/m3"
 	var survivor := BattleRules.recover_after_battle({"hp": 42, "max_hp": 105, "energy": 7, "max_energy": 55})
 	if not _check(survivor["hp"] == 63 and survivor["energy"] == 18, "survivor adds 20 percent of each maximum"):
 		return

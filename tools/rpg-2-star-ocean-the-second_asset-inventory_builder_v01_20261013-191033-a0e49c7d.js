@@ -110,7 +110,7 @@ const categories = [
     ]),
     sub('management','角色与系统',[
       fixed('ui.party','队伍与候补','MVP',1,'production','M4 五人上场位已实现；候补管理在队伍扩容时补齐','rpg-2-star-ocean-the-second_scifi-party_battle-hud_m4_20261013-203138-11f66e25.png'),
-      fixed('ui.jobs','天分、职业树、技能 JP','MVP',1,'production','M5 四项天分、四系列前两阶、十级必选、职业与个人技能 JP 升级已可操作；正式视觉待制作','rpg-2-star-ocean-the-second_hero_promoted-skill-growth_m5_20261013-204016-031a5f3d.png'),fixed('ui.saves','自动/手动存档和加载','MVP'),fixed('ui.settings','语言、声音与输入设置','MVP'),
+      fixed('ui.jobs','天分、职业树、技能 JP','MVP',1,'production','M5 四项天分、四系列前两阶、十级必选、职业与个人技能 JP 升级已可操作；正式视觉待制作','rpg-2-star-ocean-the-second_hero_promoted-skill-growth_m5_20261013-204016-031a5f3d.png'),fixed('ui.saves','自动/手动存档和加载','MVP',1,'production','M6 三个手动栏、五条自动记录、主菜单读取与中英界面已可操作；正式视觉待制作','rpg-2-star-ocean-the-second_save-screen_manual-and-auto_m6_20261013-204655-26f8e92b.png'),fixed('ui.settings','语言、声音与输入设置','MVP'),
       fixed('ui.guild','商会经营和周结算','Full'),fixed('ui.reputation','板块与全球名声','Full'),fixed('ui.relationship','关系与组合技','Full'),fixed('ui.codex','考古记录与发现图鉴','Full'),
     ]),
   ]),
