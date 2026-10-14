@@ -105,6 +105,7 @@ const categories = [
       fixed('ui.explore','探索提示、交互、对话与招募','MVP',1,'production','M4 三种招募入口、暂缓邀请、回访及双语对话已实现','rpg-2-star-ocean-the-second_scifi-liang-xu_recruitment-dialogue_m4_20261013-203138-d211470b.png'),
       fixed('ui.field-log','MVP 实地日志与发现记录','MVP',1,'production','M7 可滚动中英文日志、三地勘察状态、调查记录和试玩用时已接入','rpg-2-star-ocean-the-second_scifi-map_field-log-english_m7_20261013-212705-3687dd8f.png'),
       fixed('ui.survey','MVP 线索阅读、证据关联与研判界面','MVP',1,'production','M7 18 条双语线索、九组证据关联、三处可重试最终判断、JP 奖励与存档恢复已接入','rpg-2-star-ocean-the-second_scifi-city_evidence-links-english_m7_20261013-213526-8b13ff89.png'),
+      fixed('ui.party-talk','MVP 同行交流话题与对话界面','MVP',1,'production','M7 六段可回访的中英文同行交流；话题随招募和勘察进度解锁','rpg-2-star-ocean-the-second_scifi-party_talk-topics-english_m7_20261013-214301-e46f681b.png'),
       fixed('ui.demo-completion','MVP 试玩完成反馈','MVP',1,'production','M7 提交调查资料后显示总结、用时，并可继续探索','rpg-2-star-ocean-the-second_scifi-city_completion-report-chinese_m7_20261013-212705-9cef7d14.png'),
     ]),
     sub('battle-ui','战斗界面',[
@@ -128,7 +129,7 @@ const categories = [
   ]),
   cat('text-data','文本与数据',[
     sub('localization','中英文文本',[
-      fixed('text.ui','菜单与基础界面中英文键值','MVP',1,'approved'),fixed('text.mvp','MVP 三地点、三伙伴与线索文本','MVP',1,'production','M7 已接入 18 条现场线索、九组证据关联、三道研判题、中继与遗址记录、完成反馈双语文本；正式剧情待后续设计','rpg-2-star-ocean-the-second_scifi-city_evidence-links-chinese_m7_20261013-213526-d7bfb2bc.png'),fixed('text.full','五板块任务、人物、物品、图鉴双语文本','Full'),
+      fixed('text.ui','菜单与基础界面中英文键值','MVP',1,'approved'),fixed('text.mvp','MVP 三地点、三伙伴与线索文本','MVP',1,'production','M7 已接入 18 条现场线索、九组证据关联、三道研判题、六段同行交流、中继与遗址记录、完成反馈双语文本；正式剧情待后续设计','rpg-2-star-ocean-the-second_scifi-liang-xu_talk-dialogue-chinese_m7_20261013-214301-91f85663.png'),fixed('text.full','五板块任务、人物、物品、图鉴双语文本','Full'),
     ]),
     sub('game-data','可维护内容数据',[
       fixed('data.characters','50 同伴与主角职业/天分数据','Full',51),fixed('data.jobs','20 系列 × 5 阶职业定义','Full',100),fixed('data.items','装备、道具、合成与商会货物定义','Full'),fixed('data.enemies','固定地区敌人及可选终局难度数据','Full'),

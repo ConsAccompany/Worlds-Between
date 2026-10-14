@@ -1,6 +1,7 @@
 extends SceneTree
 
 const CONTENT := preload("res://scripts/survey_content.gd")
+const TALK := preload("res://scripts/party_talk_content.gd")
 
 
 func _initialize() -> void:
@@ -10,6 +11,12 @@ func _initialize() -> void:
 func _run() -> void:
 	SaveStore.root_path = "user://test-saves/m7"
 	var app: Node = root.get_node("AppState")
+	if not _check(TALK.TOPICS.size() == 6, "six companion conversation topics"):
+		return
+	for topic in TALK.TOPICS:
+		for locale in ["zh", "en"]:
+			if not _check(topic[locale]["lines"].size() >= 3 and String(topic[locale]["title"]) != "", "bilingual conversation " + String(topic["id"])):
+				return
 	for destination in app.DESTINATIONS:
 		for locale in ["zh", "en"]:
 			var content: Dictionary = CONTENT.DATA[destination][locale]
@@ -184,6 +191,35 @@ func _run() -> void:
 			return
 		current_scene._open_field_log()
 		if not _check(current_scene.get("field_body").text.find(app.text_for("archive_record")) >= 0, "discovery readable from map"):
+			return
+		current_scene._open_party_talk()
+		await _settle()
+		var talk: Control = current_scene
+		if not _check(talk.name == "PartyTalk" and talk.get("available_topics").size() == (6 if route == 0 else 1), "party talks follow recruited companions and surveys"):
+			return
+		if route == 0:
+			talk._open_topic(0)
+			talk._next_line()
+			talk._back()
+			if not _check(not app.party_talk_seen.has("city-liang") and int(app.party_bonds["liang-xu"]) == 0, "unfinished conversation grants nothing"):
+				return
+			talk._open_topic(0)
+			for line in 3:
+				talk._next_line()
+			if not _check(app.party_talk_seen.has("city-liang") and int(app.party_bonds["liang-xu"]) == 3, "first conversation grants bond once"):
+				return
+			talk._open_topic(0)
+			for line in 3:
+				talk._next_line()
+			if not _check(int(app.party_bonds["liang-xu"]) == 3, "conversation replay cannot farm bond"):
+				return
+			var talk_save: String = SaveStore.list_entries()[0]["id"]
+			app.begin_new_run()
+			if not _check(app.load_save(talk_save) and app.party_talk_seen.has("city-liang") and int(app.party_bonds["liang-xu"]) == 3, "conversation and bond survive load"):
+				return
+		talk._back()
+		await _settle()
+		if not _check(current_scene.name == "ScifiWorldMap", "party talk returns to map"):
 			return
 	change_scene_to_file("res://scenes/main_menu.tscn")
 	await _settle()

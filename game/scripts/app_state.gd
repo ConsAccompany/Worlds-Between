@@ -111,7 +111,7 @@ const STRINGS := {
 		"save_title": "存档与读取", "save_open": "存档", "save_load_open": "读取游戏",
 		"save_back": "返回", "save_manual_slot": "手动栏 %d", "save_write": "保存到此栏",
 		"save_load": "读取", "save_empty": "空栏位", "save_auto": "自动记录",
-		"save_before_battle": "开战前", "save_after_battle": "胜利后", "save_manual_note": "手动保存",
+		"save_before_battle": "开战前", "save_after_battle": "胜利后", "save_manual_note": "手动保存", "save_party_talk": "同行交流",
 		"save_summary": "%s · Lv%d · %d 人 · %s",
 		"save_ok": "已保存至 %s", "save_failed": "存档失败", "save_load_failed": "读取失败或存档不兼容",
 		"save_version_old": "旧版存档 · 无法读取", "save_no_records": "暂无自动记录",
@@ -139,6 +139,9 @@ const STRINGS := {
 		"survey_completed": "此处勘察已完成。资料仍可重新查看。",
 		"survey_close": "继续探索", "save_survey_note": "勘察记录",
 		"survey_reward": "勘察奖励：上场角色各获 8 JP，候补各获 2 JP。",
+		"talk_open": "同行交流", "talk_title": "旅途中的交流", "talk_help": "完成调查并邀请伙伴后，对话会逐步开放；随时可以回来重听。",
+		"talk_empty": "还没有可聊的话题。继续探索并邀请伙伴。", "talk_back": "返回地图",
+		"talk_next": "继续", "talk_finish": "结束交流", "talk_topics": "话题列表", "talk_seen": "已听过", "talk_bond": "默契 %d",
 		"run_time": "本次探索 %02d:%02d",
 		"field_yes": "完成", "field_no": "待办",
 		"relay_marker": "中继站", "relay_prompt": "靠近中继站按 E 调查",
@@ -262,7 +265,7 @@ const STRINGS := {
 		"save_title": "Save & Load", "save_open": "Save", "save_load_open": "Load Game",
 		"save_back": "Back", "save_manual_slot": "Manual slot %d", "save_write": "Save here",
 		"save_load": "Load", "save_empty": "Empty slot", "save_auto": "Autosave",
-		"save_before_battle": "Before battle", "save_after_battle": "After victory", "save_manual_note": "Manual save",
+		"save_before_battle": "Before battle", "save_after_battle": "After victory", "save_manual_note": "Manual save", "save_party_talk": "Party talk",
 		"save_summary": "%s · Lv%d · %d party · %s",
 		"save_ok": "Saved to %s", "save_failed": "Save failed", "save_load_failed": "Load failed or incompatible save",
 		"save_version_old": "Old save · cannot load", "save_no_records": "No autosaves yet",
@@ -290,6 +293,9 @@ const STRINGS := {
 		"survey_completed": "Survey complete. You can still review the evidence.",
 		"survey_close": "Keep exploring", "save_survey_note": "Survey record",
 		"survey_reward": "Survey reward: 8 JP for each active member, 2 JP for each reserve.",
+		"talk_open": "Party talk", "talk_title": "Conversations on the road", "talk_help": "Topics open as you investigate and invite companions. You can replay them anytime.",
+		"talk_empty": "No topics yet. Keep exploring and invite companions.", "talk_back": "World map",
+		"talk_next": "Continue", "talk_finish": "Finish talk", "talk_topics": "Topics", "talk_seen": "Heard", "talk_bond": "Bond %d",
 		"run_time": "Run time %02d:%02d",
 		"field_yes": "Done", "field_no": "Open",
 		"relay_marker": "Relay", "relay_prompt": "Approach the relay and press E",
@@ -315,6 +321,8 @@ var hero_state := {"hp": 100, "max_hp": 100, "energy": 60, "max_energy": 60}
 var member_states: Dictionary = {}
 var active_party_ids: Array[String] = ["hero"]
 var recruited_members: Dictionary = {}
+var party_talk_seen: Dictionary = {}
+var party_bonds: Dictionary = {}
 var ji_records_checked := false
 var relay_checked := false
 var areas_visited: Dictionary = {}
@@ -390,6 +398,8 @@ func begin_new_run() -> void:
 	member_states.clear()
 	active_party_ids = ["hero"]
 	recruited_members.clear()
+	party_talk_seen.clear()
+	party_bonds.clear()
 	ji_records_checked = false
 	hero_name = ""
 	hero_appearance = "male"
@@ -468,7 +478,21 @@ func recruit_member(member_id: String) -> bool:
 		"aptitudes": definition["aptitudes"].duplicate(),
 	}
 	recruited_members[member_id] = true
+	party_bonds[member_id] = int(party_bonds.get(member_id, 0))
 	active_party_ids.append(member_id)
+	return true
+
+
+func record_party_talk(topic_id: String, participants: Array) -> bool:
+	if party_talk_seen.has(topic_id):
+		return false
+	for member_id in participants:
+		if not recruited_members.has(member_id):
+			return false
+	party_talk_seen[topic_id] = true
+	for member_id in participants:
+		party_bonds[member_id] = mini(100, int(party_bonds.get(member_id, 0)) + 3)
+	write_auto_save("map", Vector2.ZERO, "party_talk")
 	return true
 
 
@@ -600,6 +624,8 @@ func make_snapshot(scene_kind: String, position: Vector2, note: String) -> Dicti
 		"members": member_states.duplicate(true),
 		"activeParty": active_party_ids.duplicate(),
 		"recruited": recruited_members.duplicate(true),
+		"partyTalkSeen": party_talk_seen.duplicate(true),
+		"partyBonds": party_bonds.duplicate(true),
 		"jiRecordsChecked": ji_records_checked,
 		"relayChecked": relay_checked,
 		"areasVisited": areas_visited.duplicate(true),
@@ -641,6 +667,11 @@ func load_save(id: String) -> bool:
 	member_states = snapshot["members"].duplicate(true)
 	active_party_ids = party
 	recruited_members = snapshot["recruited"].duplicate(true)
+	party_talk_seen = snapshot.get("partyTalkSeen", {}).duplicate(true)
+	party_bonds = snapshot.get("partyBonds", {}).duplicate(true)
+	for member_id in recruited_members:
+		if not party_bonds.has(member_id):
+			party_bonds[member_id] = 0
 	ji_records_checked = bool(snapshot["jiRecordsChecked"])
 	relay_checked = bool(snapshot.get("relayChecked", false))
 	areas_visited = snapshot.get("areasVisited", {}).duplicate(true)
@@ -690,6 +721,8 @@ func _valid_snapshot(snapshot: Dictionary) -> bool:
 		return false
 	if typeof(snapshot.get("hero")) != TYPE_DICTIONARY or typeof(snapshot.get("members")) != TYPE_DICTIONARY or typeof(snapshot.get("activeParty")) != TYPE_ARRAY or typeof(snapshot.get("recruited")) != TYPE_DICTIONARY:
 		return false
+	if typeof(snapshot.get("partyTalkSeen", {})) != TYPE_DICTIONARY or typeof(snapshot.get("partyBonds", {})) != TYPE_DICTIONARY:
+		return false
 	var hero: Dictionary = snapshot["hero"]
 	if not hero.has("level") or not hero.has("job_records") or not GrowthRules.SERIES.has(hero.get("job_series", "")):
 		return false
@@ -698,6 +731,12 @@ func _valid_snapshot(snapshot: Dictionary) -> bool:
 		return false
 	for member_id in party:
 		if not MEMBER_DEFS.has(member_id) or (member_id != "hero" and not snapshot["members"].has(member_id)):
+			return false
+	for member_id in snapshot.get("partyBonds", {}).keys():
+		if not MEMBER_DEFS.has(member_id) or member_id == "hero" or not snapshot["recruited"].has(member_id) or typeof(snapshot["partyBonds"][member_id]) not in [TYPE_INT, TYPE_FLOAT] or int(snapshot["partyBonds"][member_id]) < 0 or int(snapshot["partyBonds"][member_id]) > 100:
+			return false
+	for topic_id in snapshot.get("partyTalkSeen", {}).keys():
+		if typeof(topic_id) != TYPE_STRING or snapshot["partyTalkSeen"][topic_id] != true:
 			return false
 	if snapshot.get("language", "") not in ["zh", "en"] or typeof(snapshot.get("jiRecordsChecked")) != TYPE_BOOL or typeof(snapshot.get("enemyCleared")) != TYPE_BOOL:
 		return false

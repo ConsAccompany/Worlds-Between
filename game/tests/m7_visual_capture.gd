@@ -90,6 +90,19 @@ func _capture() -> void:
 	current_scene._open_field_log()
 	await _settle()
 	if not _save("scifi-map", "field-log-english", stamp): return
+	current_scene._close_field_log()
+	app.recruit_member("liang-xu")
+	app.recruit_member("zhao-ling")
+	app.recruit_member("ji-cheng")
+	current_scene._open_party_talk()
+	await _settle()
+	if not _save("scifi-party", "talk-topics-english", stamp): return
+	current_scene._open_topic(0)
+	await _settle()
+	if not _save("scifi-liang-xu", "talk-dialogue-english", stamp): return
+	app.toggle_language()
+	await _settle()
+	if not _save("scifi-liang-xu", "talk-dialogue-chinese", stamp): return
 	quit(0)
 
 

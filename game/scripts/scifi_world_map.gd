@@ -18,6 +18,7 @@ var field_overlay: ColorRect
 var field_title: Label
 var field_body: RichTextLabel
 var field_close: Button
+var talk_button: Button
 var destination_buttons: Dictionary = {}
 
 
@@ -132,6 +133,11 @@ func _build_field_log(canvas: CanvasLayer) -> void:
 	field_body.add_theme_font_size_override("normal_font_size", 12)
 	field_body.add_theme_color_override("font_color", Color("#e0eeeb"))
 	field_overlay.add_child(field_body)
+	talk_button = Button.new()
+	talk_button.position = Vector2(69, 274)
+	talk_button.size = Vector2(155, 34)
+	talk_button.pressed.connect(_open_party_talk)
+	field_overlay.add_child(talk_button)
 	field_close = Button.new()
 	field_close.position = Vector2(434, 274)
 	field_close.size = Vector2(135, 34)
@@ -163,6 +169,8 @@ func _refresh_text() -> void:
 		lines.append(AppState.text_for("report_ready"))
 	field_body.text = "\n".join(lines)
 	field_close.text = AppState.text_for("save_back")
+	talk_button.text = AppState.text_for("talk_open")
+	talk_button.disabled = AppState.recruited_members.is_empty()
 
 
 func _open_field_log() -> void:
@@ -174,6 +182,12 @@ func _open_field_log() -> void:
 func _close_field_log() -> void:
 	field_overlay.visible = false
 	field_button.grab_focus()
+
+
+func _open_party_talk() -> void:
+	if AppState.recruited_members.is_empty():
+		return
+	get_tree().change_scene_to_file("res://scenes/party_talk.tscn")
 
 
 func _enter_destination(destination_id: String) -> void:
