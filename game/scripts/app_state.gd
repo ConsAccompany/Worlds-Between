@@ -111,7 +111,7 @@ const STRINGS := {
 		"save_title": "存档与读取", "save_open": "存档", "save_load_open": "读取游戏",
 		"save_back": "返回", "save_manual_slot": "手动栏 %d", "save_write": "保存到此栏",
 		"save_load": "读取", "save_empty": "空栏位", "save_auto": "自动记录",
-		"save_before_battle": "开战前", "save_after_battle": "胜利后", "save_manual_note": "手动保存", "save_party_talk": "同行交流",
+		"save_before_battle": "开战前", "save_after_battle": "胜利后", "save_manual_note": "手动保存", "save_party_talk": "同行交流", "save_field_assist": "伙伴实地协助",
 		"save_summary": "%s · Lv%d · %d 人 · %s",
 		"save_ok": "已保存至 %s", "save_failed": "存档失败", "save_load_failed": "读取失败或存档不兼容",
 		"save_version_old": "旧版存档 · 无法读取", "save_no_records": "暂无自动记录",
@@ -126,6 +126,17 @@ const STRINGS := {
 		"field_log": "实地日志",
 		"field_log_hint": "任意顺序探索三处地点；完成各地实地勘察；调查中继站与遗址记录；观察或击退一台机械，最后回城汇报。",
 		"field_log_count": "地点 %d/3 · 勘察 %d/3 · 中继 %s · 记录 %s · 机械 %s",
+		"field_assist_log": "伙伴实地协助 %d/3（可选）",
+		"field_assist_marker_city": "配额总表", "field_assist_marker_outskirts": "回声节点", "field_assist_marker_ruins": "地层面板",
+		"field_assist_need": "需要 %s 同行才能解析。先邀请对方，之后随时可以回来。",
+		"field_assist_use": "运用个人专长", "field_assist_close": "关闭", "field_assist_recorded": "已记录",
+		"field_assist_ready_city": "梁序可以用战术校准，对照配额表里的重复编号。",
+		"field_assist_ready_outskirts": "赵铃可以用回声测距，判断哪条线路仍在工作。",
+		"field_assist_ready_ruins": "纪澄可以用断层回读，辨认面板经历过的修复顺序。",
+		"field_assist_result_city": "梁序发现同一编号被用于维修和储能；批准记录却缺失了。",
+		"field_assist_result_outskirts": "赵铃确认回声来自废弃导管，现行线路藏在其下方。",
+		"field_assist_result_ruins": "纪澄辨出三次不同时期的修补；最后一次使用了现行材料。",
+		"field_assist_reward": "%s 获得 4 JP，默契 +2。观察已收录在实地日志。",
 		"survey_marker": "实地勘察入口", "survey_prompt": "靠近勘察入口按 E 进入",
 		"survey_log": "实地勘察：城市 %s · 城外 %s · 遗址 %s",
 		"survey_progress": "线索 %d/6 · 本地勘察 %s",
@@ -267,7 +278,7 @@ const STRINGS := {
 		"save_title": "Save & Load", "save_open": "Save", "save_load_open": "Load Game",
 		"save_back": "Back", "save_manual_slot": "Manual slot %d", "save_write": "Save here",
 		"save_load": "Load", "save_empty": "Empty slot", "save_auto": "Autosave",
-		"save_before_battle": "Before battle", "save_after_battle": "After victory", "save_manual_note": "Manual save", "save_party_talk": "Party talk",
+		"save_before_battle": "Before battle", "save_after_battle": "After victory", "save_manual_note": "Manual save", "save_party_talk": "Party talk", "save_field_assist": "Companion fieldwork",
 		"save_summary": "%s · Lv%d · %d party · %s",
 		"save_ok": "Saved to %s", "save_failed": "Save failed", "save_load_failed": "Load failed or incompatible save",
 		"save_version_old": "Old save · cannot load", "save_no_records": "No autosaves yet",
@@ -282,6 +293,17 @@ const STRINGS := {
 		"field_log": "Field log",
 		"field_log_hint": "Explore all three places in any order. Complete each field survey, check the relay and ruin records, observe or defeat a machine, then report in the city.",
 		"field_log_count": "Places %d/3 · Surveys %d/3 · Relay %s · Records %s · Machine %s",
+		"field_assist_log": "Companion fieldwork %d/3 (optional)",
+		"field_assist_marker_city": "Allocation ledger", "field_assist_marker_outskirts": "Echo node", "field_assist_marker_ruins": "Strata panel",
+		"field_assist_need": "Bring %s to examine this. You can invite them and return anytime.",
+		"field_assist_use": "Use personal skill", "field_assist_close": "Close", "field_assist_recorded": "Recorded",
+		"field_assist_ready_city": "Liang Xu can use Tactical Calibration to compare duplicate ledger IDs.",
+		"field_assist_ready_outskirts": "Zhao Ling can use Echo Ranging to find the live conduit.",
+		"field_assist_ready_ruins": "Ji Cheng can use Fault-Line Recall to order the panel's repairs.",
+		"field_assist_result_city": "One ID serves repair and energy storage; its approval record is missing.",
+		"field_assist_result_outskirts": "The echo came from an old conduit. The live line lies beneath it.",
+		"field_assist_result_ruins": "Three repairs span different eras. The last used present-day material.",
+		"field_assist_reward": "%s gained 4 JP and 2 bond. This finding is in the field log.",
 		"survey_marker": "Field survey", "survey_prompt": "Approach the survey entrance and press E",
 		"survey_log": "Field surveys: City %s · Outskirts %s · Ruins %s",
 		"survey_progress": "Clues %d/6 · Survey %s",
@@ -327,6 +349,7 @@ var active_party_ids: Array[String] = ["hero"]
 var recruited_members: Dictionary = {}
 var party_talk_seen: Dictionary = {}
 var party_bonds: Dictionary = {}
+var field_insights: Dictionary = {}
 var ji_records_checked := false
 var relay_checked := false
 var areas_visited: Dictionary = {}
@@ -408,6 +431,7 @@ func begin_new_run() -> void:
 	recruited_members.clear()
 	party_talk_seen.clear()
 	party_bonds.clear()
+	field_insights.clear()
 	ji_records_checked = false
 	hero_name = ""
 	hero_appearance = "male"
@@ -448,6 +472,21 @@ func field_log_text() -> String:
 	var state := text_for("field_yes")
 	var open := text_for("field_no")
 	return text_for("field_log_count") % [areas_visited.size(), survey_solved.size(), state if relay_checked else open, state if ji_records_checked else open, state if machine_observed else open]
+
+
+func field_assist_log_text() -> String:
+	return text_for("field_assist_log") % field_insights.size()
+
+
+func complete_field_assist(destination_id: String, member_id: String) -> bool:
+	var assistants := {"scifi.city": "liang-xu", "scifi.outskirts": "zhao-ling", "scifi.ruins": "ji-cheng"}
+	if assistants.get(destination_id, "") != member_id or not recruited_members.has(member_id) or field_insights.has(destination_id):
+		return false
+	field_insights[destination_id] = true
+	member_state(member_id)["jp"] = int(member_state(member_id).get("jp", 0)) + 4
+	party_bonds[member_id] = mini(100, int(party_bonds.get(member_id, 0)) + 2)
+	record_playtest_event("field_assist", destination_id)
+	return true
 
 
 func survey_log_text() -> String:
@@ -493,6 +532,7 @@ func write_playtest_receipt() -> String:
 		"recruited": recruited_members.keys(),
 		"surveysCompleted": survey_solved.keys(),
 		"conversationsHeard": party_talk_seen.keys(),
+		"fieldAssists": field_insights.keys(),
 		"reportCompleted": demo_completed,
 	}
 	var file := FileAccess.open(path, FileAccess.WRITE)
@@ -687,6 +727,7 @@ func make_snapshot(scene_kind: String, position: Vector2, note: String) -> Dicti
 		"recruited": recruited_members.duplicate(true),
 		"partyTalkSeen": party_talk_seen.duplicate(true),
 		"partyBonds": party_bonds.duplicate(true),
+		"fieldInsights": field_insights.duplicate(true),
 		"jiRecordsChecked": ji_records_checked,
 		"relayChecked": relay_checked,
 		"areasVisited": areas_visited.duplicate(true),
@@ -733,6 +774,7 @@ func load_save(id: String) -> bool:
 	recruited_members = snapshot["recruited"].duplicate(true)
 	party_talk_seen = snapshot.get("partyTalkSeen", {}).duplicate(true)
 	party_bonds = snapshot.get("partyBonds", {}).duplicate(true)
+	field_insights = snapshot.get("fieldInsights", {}).duplicate(true)
 	for member_id in recruited_members:
 		if not party_bonds.has(member_id):
 			party_bonds[member_id] = 0
@@ -806,9 +848,12 @@ func _valid_snapshot(snapshot: Dictionary) -> bool:
 	for topic_id in snapshot.get("partyTalkSeen", {}).keys():
 		if typeof(topic_id) != TYPE_STRING or snapshot["partyTalkSeen"][topic_id] != true:
 			return false
+	for destination_id in snapshot.get("fieldInsights", {}).keys():
+		if not DESTINATIONS.has(destination_id) or snapshot["fieldInsights"][destination_id] != true:
+			return false
 	if snapshot.get("language", "") not in ["zh", "en"] or typeof(snapshot.get("jiRecordsChecked")) != TYPE_BOOL or typeof(snapshot.get("enemyCleared")) != TYPE_BOOL:
 		return false
-	if typeof(snapshot.get("relayChecked", false)) != TYPE_BOOL or typeof(snapshot.get("areasVisited", {})) != TYPE_DICTIONARY or typeof(snapshot.get("machineObserved", false)) != TYPE_BOOL or typeof(snapshot.get("demoCompleted", false)) != TYPE_BOOL:
+	if typeof(snapshot.get("relayChecked", false)) != TYPE_BOOL or typeof(snapshot.get("areasVisited", {})) != TYPE_DICTIONARY or typeof(snapshot.get("fieldInsights", {})) != TYPE_DICTIONARY or typeof(snapshot.get("machineObserved", false)) != TYPE_BOOL or typeof(snapshot.get("demoCompleted", false)) != TYPE_BOOL:
 		return false
 	if typeof(snapshot.get("playTimeSeconds", 0.0)) not in [TYPE_FLOAT, TYPE_INT] or float(snapshot.get("playTimeSeconds", 0.0)) < 0.0:
 		return false

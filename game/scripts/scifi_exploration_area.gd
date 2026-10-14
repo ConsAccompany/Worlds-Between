@@ -13,6 +13,11 @@ const SURVEY_ENTRANCES := {
 	"scifi.outskirts": Vector2(558, 277),
 	"scifi.ruins": Vector2(548, 142),
 }
+const FIELD_ASSISTS := {
+	"scifi.city": {"position": Vector2(120, 187), "member": "liang-xu"},
+	"scifi.outskirts": {"position": Vector2(505, 258), "member": "zhao-ling"},
+	"scifi.ruins": {"position": Vector2(505, 275), "member": "ji-cheng"},
+}
 const AMBIENCE := {
 	"scifi.city": "res://assets/audio/rpg-2-star-ocean-the-second_scifi-city_ambient-loop_m7_20261013-211230-c8e1159a.wav",
 	"scifi.outskirts": "res://assets/audio/rpg-2-star-ocean-the-second_scifi-outskirts_ambient-loop_m7_20261013-211230-57ad4b20.wav",
@@ -45,12 +50,14 @@ var npc_label: Label
 var records_label: Label
 var station_label: Label
 var survey_label: Label
+var assist_label: Label
 var dialogue_overlay: ColorRect
 var dialogue_title: Label
 var dialogue_text: Label
 var invite_button: Button
 var later_button: Button
 var dialogue_open := false
+var dialogue_mode := "recruit"
 var feedback_key := "npc_prompt"
 var feedback_message := ""
 var cue_player: AudioStreamPlayer
@@ -137,6 +144,9 @@ func _draw() -> void:
 	var entrance: Vector2 = SURVEY_ENTRANCES[destination_id]
 	draw_rect(Rect2(entrance + Vector2(-17, -21), Vector2(34, 42)), Color("#19313d"))
 	draw_rect(Rect2(entrance + Vector2(-11, -16), Vector2(22, 33)), Color("#80d0c4" if AppState.survey_solved.has(destination_id) else "#d8be7f"))
+	var assist_position: Vector2 = FIELD_ASSISTS[destination_id]["position"]
+	draw_rect(Rect2(assist_position + Vector2(-15, -12), Vector2(30, 24)), Color("#172d39"))
+	draw_rect(Rect2(assist_position + Vector2(-10, -7), Vector2(20, 14)), Color("#80d0c4" if AppState.field_insights.has(destination_id) else "#e3bf78"))
 
 
 func _draw_city() -> void:
@@ -288,6 +298,11 @@ func _build_ui() -> void:
 	survey_label.add_theme_font_size_override("font_size", 11)
 	survey_label.add_theme_color_override("font_color", Color("#f0dda8"))
 	canvas.add_child(survey_label)
+	assist_label = Label.new()
+	assist_label.position = FIELD_ASSISTS[destination_id]["position"] + Vector2(-46, -38)
+	assist_label.add_theme_font_size_override("font_size", 10)
+	assist_label.add_theme_color_override("font_color", Color("#f0dda8"))
+	canvas.add_child(assist_label)
 	_build_dialogue(canvas)
 
 
@@ -315,7 +330,7 @@ func _build_dialogue(canvas: CanvasLayer) -> void:
 	invite_button = Button.new()
 	invite_button.position = Vector2(110, 228)
 	invite_button.size = Vector2(183, 35)
-	invite_button.pressed.connect(_invite_companion)
+	invite_button.pressed.connect(_dialogue_primary)
 	dialogue_overlay.add_child(invite_button)
 	later_button = Button.new()
 	later_button.position = Vector2(331, 228)
@@ -329,7 +344,10 @@ func _refresh_text() -> void:
 	title_label.text = AppState.destination_name(destination_id)
 	hint_label.text = AppState.text_for("area_" + key + "_hint")
 	help_label.text = AppState.text_for("area_help")
-	feedback_label.text = feedback_message if feedback_message != "" else AppState.text_for(feedback_key)
+	var feedback_text := AppState.text_for(feedback_key)
+	if feedback_key == "field_assist_reward":
+		feedback_text = feedback_text % AppState.member_name(FIELD_ASSISTS[destination_id]["member"])
+	feedback_label.text = feedback_message if feedback_message != "" else feedback_text
 	back_button.text = AppState.text_for("area_back")
 	save_button.text = AppState.text_for("save_open")
 	enemy_label.text = AppState.text_for("enemy_label")
@@ -340,14 +358,29 @@ func _refresh_text() -> void:
 	station_label.visible = destination_id != "scifi.ruins"
 	station_label.text = AppState.text_for("relay_marker" if destination_id == "scifi.outskirts" else "report_marker")
 	survey_label.text = AppState.text_for("survey_marker")
-	dialogue_title.text = AppState.member_name(recruit_id)
-	dialogue_text.text = AppState.text_for("recruit_ji_locked" if recruit_id == "ji-cheng" and not AppState.ji_records_checked else "recruit_" + recruit_id.split("-")[0])
-	invite_button.text = AppState.text_for("recruit_invite")
-	invite_button.disabled = recruit_id == "ji-cheng" and not AppState.ji_records_checked
-	later_button.text = AppState.text_for("recruit_later")
+	assist_label.text = AppState.text_for("field_assist_marker_" + key)
+	if dialogue_mode == "assist":
+		var assistant_id: String = FIELD_ASSISTS[destination_id]["member"]
+		dialogue_title.text = assist_label.text + " · " + AppState.member_name(assistant_id)
+		if not AppState.recruited_members.has(assistant_id):
+			dialogue_text.text = AppState.text_for("field_assist_need") % AppState.member_name(assistant_id)
+		elif AppState.field_insights.has(destination_id):
+			dialogue_text.text = AppState.text_for("field_assist_result_" + key)
+		else:
+			dialogue_text.text = AppState.text_for("field_assist_ready_" + key)
+		invite_button.text = AppState.text_for("field_assist_recorded" if AppState.field_insights.has(destination_id) else "field_assist_use")
+		invite_button.disabled = not AppState.recruited_members.has(assistant_id) or AppState.field_insights.has(destination_id)
+		later_button.text = AppState.text_for("field_assist_close")
+	else:
+		dialogue_title.text = AppState.member_name(recruit_id)
+		dialogue_text.text = AppState.text_for("recruit_ji_locked" if recruit_id == "ji-cheng" and not AppState.ji_records_checked else "recruit_" + recruit_id.split("-")[0])
+		invite_button.text = AppState.text_for("recruit_invite")
+		invite_button.disabled = recruit_id == "ji-cheng" and not AppState.ji_records_checked
+		later_button.text = AppState.text_for("recruit_later")
 
 
 func _open_dialogue() -> void:
+	dialogue_mode = "recruit"
 	dialogue_open = true
 	dialogue_overlay.visible = true
 	_refresh_text()
@@ -355,6 +388,32 @@ func _open_dialogue() -> void:
 		later_button.grab_focus()
 	else:
 		invite_button.grab_focus()
+
+
+func _open_field_assist() -> void:
+	dialogue_mode = "assist"
+	dialogue_open = true
+	dialogue_overlay.visible = true
+	_refresh_text()
+	if invite_button.disabled:
+		later_button.grab_focus()
+	else:
+		invite_button.grab_focus()
+
+
+func _dialogue_primary() -> void:
+	if dialogue_mode == "assist":
+		var assistant_id: String = FIELD_ASSISTS[destination_id]["member"]
+		if AppState.complete_field_assist(destination_id, assistant_id):
+			cue_player.play()
+			feedback_key = "field_assist_reward"
+			feedback_message = ""
+			AppState.write_auto_save("area", hero.position, "field_assist")
+			_refresh_text()
+			queue_redraw()
+			later_button.grab_focus()
+	else:
+		_invite_companion()
 
 
 func _close_dialogue() -> void:
@@ -443,3 +502,5 @@ func _unhandled_input(event: InputEvent) -> void:
 			_refresh_text()
 		elif not AppState.recruited_members.has(recruit_id) and hero.position.distance_to(npc_position) < 50.0:
 			_open_dialogue()
+		elif hero.position.distance_to(FIELD_ASSISTS[destination_id]["position"]) < 40.0:
+			_open_field_assist()

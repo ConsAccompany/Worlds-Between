@@ -55,6 +55,8 @@ func _run() -> void:
 		app.begin_new_run()
 		app.language = "zh" if route == 0 else "en"
 		var order := ["scifi.city", "scifi.outskirts", "scifi.ruins"] if route == 0 else ["scifi.ruins", "scifi.outskirts", "scifi.city"]
+		var assist_positions := {"scifi.city": Vector2(120, 187), "scifi.outskirts": Vector2(505, 258), "scifi.ruins": Vector2(505, 275)}
+		var assistants := {"scifi.city": "liang-xu", "scifi.outskirts": "zhao-ling", "scifi.ruins": "ji-cheng"}
 		for destination in order:
 			app.select_destination(destination)
 			change_scene_to_file("res://scenes/scifi_exploration_area.tscn")
@@ -98,6 +100,24 @@ func _run() -> void:
 					area.get("invite_button").pressed.emit()
 					if not _check(app.recruited_members.has("ji-cheng"), "ruin companion invited"):
 						return
+			area.get("hero").position = assist_positions[destination]
+			area._unhandled_input(_interact())
+			if not _check(area.get("dialogue_open") and area.get("dialogue_mode") == "assist", "field station opens " + destination):
+				return
+			var assistant_id: String = assistants[destination]
+			if app.recruited_members.has(assistant_id):
+				var assistant_jp: int = app.member_state(assistant_id)["jp"]
+				var assistant_bond: int = int(app.party_bonds[assistant_id])
+				area.get("invite_button").pressed.emit()
+				if not _check(app.field_insights.has(destination) and int(app.member_state(assistant_id)["jp"]) == assistant_jp + 4 and int(app.party_bonds[assistant_id]) == assistant_bond + 2, "companion field skill grants one-time progress " + destination):
+					return
+				area.get("invite_button").pressed.emit()
+				if not _check(int(app.member_state(assistant_id)["jp"]) == assistant_jp + 4 and int(app.party_bonds[assistant_id]) == assistant_bond + 2, "field skill replay cannot farm rewards " + destination):
+					return
+			else:
+				if not _check(area.get("invite_button").disabled and not app.field_insights.has(destination), "field station waits for optional recruitment " + destination):
+					return
+			area.get("later_button").pressed.emit()
 			var entrance := Vector2(558, 143) if destination == "scifi.city" else (Vector2(558, 277) if destination == "scifi.outskirts" else Vector2(548, 142))
 			area.get("hero").position = entrance
 			area._unhandled_input(_interact())
@@ -175,7 +195,7 @@ func _run() -> void:
 					return
 				change_scene_to_file(app.loaded_scene_path())
 				await _settle()
-				if not _check(current_scene.get("hero").position == Vector2(311, 258) and app.survey_solved.has(destination) and app.survey_clues.size() == 6 and app.survey_links.size() == 3, "annex position, clues and links restored"):
+				if not _check(current_scene.get("hero").position == Vector2(311, 258) and app.survey_solved.has(destination) and app.survey_clues.size() == 6 and app.survey_links.size() == 3 and app.field_insights.has(destination), "annex position, clues, field assist and links restored"):
 					return
 				final_annex = current_scene
 			final_annex._back_room()
@@ -202,6 +222,8 @@ func _run() -> void:
 			return
 		if not _check(receipt.get("surveysCompleted", []).size() == 3 and int(receipt.get("wrongEvidencePairs", {}).get("scifi.city", 0)) == 1 and int(receipt.get("wrongJudgments", {}).get("scifi.city", 0)) == 1, "playtest receipt surveys and retry counts"):
 			return
+		if not _check(receipt.get("fieldAssists", []).size() == (3 if route == 0 else 1), "receipt records optional companion fieldwork"):
+			return
 		var recorded_events: Array = receipt.get("events", [])
 		if not _check(recorded_events.size() >= 10 and recorded_events[0]["type"] == "run_start" and recorded_events[-1]["type"] == "report", "playtest receipt event order"):
 			return
@@ -220,6 +242,8 @@ func _run() -> void:
 		current_scene._open_field_log()
 		if not _check(current_scene.get("field_body").text.find(app.text_for("archive_record")) >= 0, "discovery readable from map"):
 			return
+		if not _check(current_scene.get("field_body").text.find(app.text_for("field_assist_result_ruins")) >= 0 and current_scene.get("field_body").text.find(app.field_assist_log_text()) >= 0, "companion fieldwork readable from map"):
+			return
 		current_scene._open_party_talk()
 		await _settle()
 		var talk: Control = current_scene
@@ -229,21 +253,21 @@ func _run() -> void:
 			talk._open_topic(0)
 			talk._next_line()
 			talk._back()
-			if not _check(not app.party_talk_seen.has("city-liang") and int(app.party_bonds["liang-xu"]) == 0, "unfinished conversation grants nothing"):
+			if not _check(not app.party_talk_seen.has("city-liang") and int(app.party_bonds["liang-xu"]) == 2, "unfinished conversation grants nothing"):
 				return
 			talk._open_topic(0)
 			for line in 3:
 				talk._next_line()
-			if not _check(app.party_talk_seen.has("city-liang") and int(app.party_bonds["liang-xu"]) == 3, "first conversation grants bond once"):
+			if not _check(app.party_talk_seen.has("city-liang") and int(app.party_bonds["liang-xu"]) == 5, "first conversation grants bond once"):
 				return
 			talk._open_topic(0)
 			for line in 3:
 				talk._next_line()
-			if not _check(int(app.party_bonds["liang-xu"]) == 3, "conversation replay cannot farm bond"):
+			if not _check(int(app.party_bonds["liang-xu"]) == 5, "conversation replay cannot farm bond"):
 				return
 			var talk_save: String = SaveStore.list_entries()[0]["id"]
 			app.begin_new_run()
-			if not _check(app.load_save(talk_save) and app.party_talk_seen.has("city-liang") and int(app.party_bonds["liang-xu"]) == 3, "conversation and bond survive load"):
+			if not _check(app.load_save(talk_save) and app.party_talk_seen.has("city-liang") and int(app.party_bonds["liang-xu"]) == 5, "conversation and bond survive load"):
 				return
 		talk._back()
 		await _settle()
