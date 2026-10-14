@@ -1,6 +1,7 @@
 extends Node2D
 
 const HERO_SPRITE := preload("res://assets/characters/rpg-2-star-ocean-the-second_hero-temp_exploration-sprite_m1_20261013-185701-b7e41a93.svg")
+const BATTLE_SCENE := preload("res://scenes/battle_arena.tscn")
 const MOVE_SPEED := 140.0
 const SPAWN := Vector2(82, 260)
 const AREA_CONFIG := {
@@ -14,7 +15,6 @@ var hero: Sprite2D
 var npc_position := Vector2.ZERO
 var enemy_position := Vector2(-100, -100)
 var enemy_visible := false
-var encounter_open := false
 var encounter_count := 0
 var bypass_reached := false
 var safe_position := SPAWN
@@ -24,10 +24,6 @@ var help_label: Label
 var feedback_label: Label
 var enemy_label: Label
 var back_button: Button
-var encounter_overlay: ColorRect
-var encounter_title: Label
-var encounter_note: Label
-var continue_button: Button
 var feedback_key := "npc_prompt"
 
 
@@ -38,16 +34,18 @@ func _ready() -> void:
 	var config: Dictionary = AREA_CONFIG[destination_id]
 	npc_position = config["npc"]
 	enemy_position = config["enemy"]
-	enemy_visible = destination_id != "scifi.city"
+	enemy_visible = destination_id != "scifi.city" and not AppState.enemy_cleared_for_return
 	_build_actors()
+	if AppState.returning_from_battle:
+		hero.position = AppState.battle_return_position
+		AppState.returning_from_battle = false
+	safe_position = hero.position
 	_build_ui()
 	AppState.language_changed.connect(_refresh_text)
 	_refresh_text()
 
 
 func _process(delta: float) -> void:
-	if encounter_open:
-		return
 	var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	if direction != Vector2.ZERO:
 		hero.position += direction * MOVE_SPEED * delta
@@ -58,7 +56,7 @@ func _process(delta: float) -> void:
 				safe_position = hero.position
 			if hero.position.distance_to(enemy_position) < 23.0:
 				_open_encounter()
-	if enemy_visible and not bypass_reached and not encounter_open and hero.position.x > 545.0 and hero.position.y < 205.0:
+	if enemy_visible and not bypass_reached and hero.position.x > 545.0 and hero.position.y < 205.0:
 		bypass_reached = true
 		feedback_key = "bypass_notice"
 		_refresh_text()
@@ -185,35 +183,6 @@ func _build_ui() -> void:
 	enemy_label.add_theme_color_override("font_color", Color("#ffe0cd"))
 	enemy_label.visible = enemy_visible
 	canvas.add_child(enemy_label)
-	_build_encounter_overlay(canvas)
-
-
-func _build_encounter_overlay(canvas: CanvasLayer) -> void:
-	encounter_overlay = ColorRect.new()
-	encounter_overlay.color = Color(0.05, 0.09, 0.14, 0.82)
-	encounter_overlay.size = Vector2(640, 360)
-	encounter_overlay.visible = false
-	canvas.add_child(encounter_overlay)
-	var panel := ColorRect.new()
-	panel.color = Color("#253543")
-	panel.position = Vector2(113, 105)
-	panel.size = Vector2(414, 155)
-	encounter_overlay.add_child(panel)
-	encounter_title = Label.new()
-	encounter_title.position = Vector2(139, 125)
-	encounter_title.add_theme_font_size_override("font_size", 20)
-	encounter_title.add_theme_color_override("font_color", Color("#ffe0c2"))
-	encounter_overlay.add_child(encounter_title)
-	encounter_note = Label.new()
-	encounter_note.position = Vector2(139, 163)
-	encounter_note.size = Vector2(365, 50)
-	encounter_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	encounter_overlay.add_child(encounter_note)
-	continue_button = Button.new()
-	continue_button.position = Vector2(350, 216)
-	continue_button.size = Vector2(152, 32)
-	continue_button.pressed.connect(_close_encounter)
-	encounter_overlay.add_child(continue_button)
 
 
 func _refresh_text() -> void:
@@ -224,23 +193,13 @@ func _refresh_text() -> void:
 	feedback_label.text = AppState.text_for(feedback_key)
 	back_button.text = AppState.text_for("area_back")
 	enemy_label.text = AppState.text_for("enemy_label")
-	encounter_title.text = AppState.text_for("encounter_title")
-	encounter_note.text = AppState.text_for("encounter_note")
-	continue_button.text = AppState.text_for("encounter_continue")
 
 
 func _open_encounter() -> void:
 	encounter_count += 1
-	encounter_open = true
-	hero.position = safe_position
-	encounter_overlay.visible = true
-	continue_button.grab_focus()
-
-
-func _close_encounter() -> void:
-	encounter_open = false
-	encounter_overlay.visible = false
-	back_button.grab_focus()
+	var enemy_id := "patrol" if destination_id == "scifi.outskirts" else "sentry"
+	if AppState.begin_battle(enemy_id, safe_position):
+		get_tree().change_scene_to_packed(BATTLE_SCENE)
 
 
 func _return_to_map() -> void:
@@ -250,7 +209,7 @@ func _return_to_map() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		_return_to_map()
-	elif event.is_action_pressed("interact") and not encounter_open:
+	elif event.is_action_pressed("interact"):
 		if hero.position.distance_to(npc_position) < 50.0:
 			feedback_key = "npc_" + destination_id.trim_prefix("scifi.")
 			_refresh_text()

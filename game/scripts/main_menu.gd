@@ -50,7 +50,7 @@ func _build_ui() -> void:
 
 	start_button = Button.new()
 	start_button.custom_minimum_size = Vector2(0, 36)
-	start_button.pressed.connect(func(): get_tree().change_scene_to_file("res://scenes/scifi_world_map.tscn"))
+	start_button.pressed.connect(_start_game)
 	column.add_child(start_button)
 
 	language_button = Button.new()
@@ -70,4 +70,9 @@ func _refresh_text() -> void:
 	start_button.text = AppState.text_for("start")
 	language_button.text = AppState.text_for("language")
 	quit_button.text = AppState.text_for("quit")
+
+
+func _start_game() -> void:
+	AppState.begin_new_run()
+	get_tree().change_scene_to_file("res://scenes/scifi_world_map.tscn")
 

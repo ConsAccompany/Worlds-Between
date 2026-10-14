@@ -61,9 +61,15 @@ func _run_checks() -> void:
 			Input.action_press("move_right")
 			await process_frame
 			Input.action_release("move_right")
-			if not _check(area.get("encounter_count") == 1 and area.get("encounter_open"), "enemy contact: " + id):
+			await _settle()
+			if not _check(current_scene != null and current_scene.name == "BattleArena", "enemy contact opens battle: " + id):
 				return
-			area._close_encounter()
+			current_scene._finish_battle(true)
+			current_scene._return_after_result()
+			await _settle()
+			area = current_scene
+			if not _check(not area.get("enemy_visible"), "victory clears enemy until leaving: " + id):
+				return
 		area.get("back_button").pressed.emit()
 		await _settle()
 		if not _check(current_scene != null and current_scene.name == "ScifiWorldMap", "area returns to map: " + id):

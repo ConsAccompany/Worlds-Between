@@ -217,11 +217,18 @@
   }
   async function refreshInventory(){
     const response=await fetch('/inventory',{cache:'no-store'});if(!response.ok)throw new Error('Inventory unavailable');
-    state.inventory=await response.json();if(state.view==='assets'&&!state.query)render();
+    const inventory=await response.json();
+    if(state.inventory?.updatedAt!==inventory.updatedAt){state.inventory=inventory;if(state.view==='assets'&&!state.query)render();}
+  }
+  async function refreshProgress(){
+    const response=await fetch('/state',{cache:'no-store'});if(!response.ok)throw new Error('Progress unavailable');
+    const progress=await response.json();
+    if(state.progress?.updatedAt!==progress.updatedAt){state.progress=progress;render();}
   }
   nav.forEach(button=>button.addEventListener('click',()=>navigate(button.dataset.view)));
   search.addEventListener('input',()=>{state.query=search.value.trim();render();});
-  document.addEventListener('visibilitychange',()=>{if(!document.hidden)refreshInventory().catch(()=>{});});
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden){refreshInventory().catch(()=>{});refreshProgress().catch(()=>{});}});
+  setInterval(()=>{if(!document.hidden){refreshProgress().catch(()=>{});refreshInventory().catch(()=>{});}},10000);
   Promise.all([
     fetch('/bible',{cache:'no-store'}).then(r=>r.ok?r.json():Promise.reject()),
     fetch('/inventory',{cache:'no-store'}).then(r=>r.ok?r.json():Promise.reject()),

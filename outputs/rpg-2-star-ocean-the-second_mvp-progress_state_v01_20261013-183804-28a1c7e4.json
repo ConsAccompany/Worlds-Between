@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
   "planVersion": "v0.1",
-  "updatedAt": "2026-10-13T20:14:00-04:00",
-  "currentStep": "M3",
+  "updatedAt": "2026-10-13T20:19:00-04:00",
+  "currentStep": "M4",
   "steps": [
     {
       "id": "M1",
@@ -37,16 +37,22 @@
     {
       "id": "M3",
       "title": "Combat core",
-      "status": "ready",
+      "status": "done",
       "summary": "Flat side-view arena, actions, energy, enemy types, post-battle recovery.",
       "acceptance": "Win or lose a contact battle; no jump; verify 20%/10% recovery and repeat encounters.",
-      "evidence": [],
+      "evidence": [
+        "game/tests/m3_smoke.gd: M3_SMOKE_OK (two fixed enemy types, movement, attack, dodge, guard, energy, recovery, victory return, defeat menu)",
+        "Encounter transition measured 1–170 ms during automated checks on this development machine",
+        "outputs/rpg-2-star-ocean-the-second_scifi-patrol_battle-visual-proof_m3_20261013-201830-fa18b3d5.png",
+        "outputs/rpg-2-star-ocean-the-second_scifi-sentry_battle-visual-proof_m3_20261013-201830-6ee1e4e4.png",
+        "outputs/rpg-2-star-ocean-the-second_scifi-patrol_victory-visual-proof_m3_20261013-201830-4cdeebfa.png"
+      ],
       "blocker": null
     },
     {
       "id": "M4",
       "title": "Companions and AI",
-      "status": "todo",
+      "status": "ready",
       "summary": "Five slots, three recruit routes, level matching, switching, AI, pause commands.",
       "acceptance": "All three remain recruitable; four-person team wins; AI and direct commands work.",
       "evidence": [],

@@ -6,7 +6,9 @@ Last updated: 2026-10-13
 
 - M1 project foundation is complete. Godot 4.7.2 imports and launches the project; a scene smoke check passes Chinese/English menu labels, entry/return, movement, and temporary sprite loading.
 - M2 world-map exploration is complete: three destinations, top-down movement, NPC interaction, visible enemies, an avoidance path, and enemy reset on reentry.
-- Godot M1 and M2 smoke checks pass. Four 640×360 M2 captures were inspected for readability and layout. Contact currently opens an encounter preview; the battle arena begins in M3.
+- Four 640×360 M2 captures were inspected for readability and layout. The M2 encounter preview is now replaced by the M3 battle arena.
+- M3 combat core is complete: contact opens a fixed side-view arena with two fixed enemy types, horizontal movement, attack, dodge, guard, HP and energy, victory recovery, and defeat return to the menu.
+- Godot M1–M3 smoke checks pass; three M3 captures were inspected. The measured encounter transition stayed below the provisional one-second target on this development machine.
 - The right-side MVP widget reads the named JSON progress file in `outputs/`.
 
 ## Milestones Checklist
@@ -24,7 +26,7 @@ Last updated: 2026-10-13
 
 ### Phase M3 - Combat core
 
-- [ ] Implement the fixed arena and battle recovery rules.
+- [x] Implement the fixed arena and battle recovery rules.
 
 ### Phase M4 - Companions and AI
 

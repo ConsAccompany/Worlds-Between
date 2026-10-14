@@ -81,18 +81,20 @@ const categories = [
       fixed('tiles.board','五板块地表/建筑图块组','Full',5),fixed('props.interactive','可调查物、商店、营地与门的状态素材','Full'),fixed('props.archaeology','考古资料、器物和线索图像','Full'),
     ]),
     sub('battle-fields','战斗场地',[
-      fixed('arena.mvp','MVP 固定尺寸平地战斗场地','MVP'),fixed('arena.boards','五板块战斗背景与变体','Full',5),
+      fixed('arena.mvp','MVP 固定尺寸平地战斗场地','MVP',1,'production','M3 可玩原型；正式战场美术待制作','rpg-2-star-ocean-the-second_scifi-patrol_battle-visual-proof_m3_20261013-201830-fa18b3d5.png'),
+      fixed('arena.boards','五板块战斗背景与变体','Full',5),
     ]),
   ]),
   cat('combat','战斗视觉',[
     sub('enemies','敌人与首领',[
-      fixed('enemy.mvp','科技板块两类普通敌人动画','MVP',2),fixed('enemy.board','各板块普通敌人动画组','Full',5),fixed('enemy.boss','主要首领与组织机械设计','Full'),
+      fixed('enemy.mvp','科技板块两类普通敌人动画','MVP',2,'production','巡逻机与防卫机已可战斗；正式逐帧动画待制作','rpg-2-star-ocean-the-second_scifi-sentry_battle-visual-proof_m3_20261013-201830-6ee1e4e4.png'),
+      fixed('enemy.board','各板块普通敌人动画组','Full',5),fixed('enemy.boss','主要首领与组织机械设计','Full'),
     ]),
     sub('effects','动作与技能效果',[
       fixed('vfx.common','攻击、闪避、防御、受击、治疗通用效果','MVP',5),fixed('vfx.mvp-skills','MVP 个人与职业技能效果','MVP'),fixed('vfx.jobs','20 职业系列技能效果库','Full',20),fixed('vfx.personal','50 位同伴个人专属技能效果','Full',50),
     ]),
     sub('transitions','转场与反馈',[
-      fixed('vfx.encounter','接敌、胜利、战败及战后恢复反馈','MVP',4),
+      fixed('vfx.encounter','接敌、胜利、战败及战后恢复反馈','MVP',4,'production','M3 已有接敌、胜败与恢复文字反馈；正式特效待制作','rpg-2-star-ocean-the-second_scifi-patrol_victory-visual-proof_m3_20261013-201830-4cdeebfa.png'),
     ]),
   ]),
   cat('interface','界面',[
@@ -102,7 +104,8 @@ const categories = [
       fixed('ui.explore','探索提示、交互、对话与招募','MVP',1,'production','M2 已实现移动提示和 NPC 对话；招募在 M4'),
     ]),
     sub('battle-ui','战斗界面',[
-      fixed('ui.battle-hud','五人队伍、HP/能量、角色切换','MVP'),fixed('ui.skills','快捷技能与暂停指令菜单','MVP'),fixed('ui.results','战斗结算与收益','MVP'),
+      fixed('ui.battle-hud','五人队伍、HP/能量、角色切换','MVP',1,'production','M3 已有主角与敌人状态；五人队伍和切换在 M4','rpg-2-star-ocean-the-second_scifi-patrol_battle-visual-proof_m3_20261013-201830-fa18b3d5.png'),
+      fixed('ui.skills','快捷技能与暂停指令菜单','MVP'),fixed('ui.results','战斗结算与收益','MVP',1,'production','M3 已有胜败与恢复结算；经验、JP 等收益在 M5','rpg-2-star-ocean-the-second_scifi-patrol_victory-visual-proof_m3_20261013-201830-4cdeebfa.png'),
     ]),
     sub('management','角色与系统',[
       fixed('ui.party','队伍与候补','MVP'),fixed('ui.jobs','天分、职业树、技能 JP','MVP'),fixed('ui.saves','自动/手动存档和加载','MVP'),fixed('ui.settings','语言、声音与输入设置','MVP'),

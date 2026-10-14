@@ -28,9 +28,30 @@ const STRINGS := {
 		"npc_ruins": "勘察员：遗址记录需要仔细核对。",
 		"npc_prompt": "靠近人物按 E 交谈",
 		"enemy_label": "自动机械",
-		"encounter_title": "遭遇可见敌人",
-		"encounter_note": "战斗将在 M3 加入。此处先验证接敌与避战路线。",
-		"encounter_continue": "继续探索",
+		"battle_title": "即时战斗 · %s",
+		"battle_help": "A/D 或 ←/→ 移动 · J 攻击 · K 闪避 · 按住 L 防御",
+		"battle_attack": "攻击",
+		"battle_dodge": "闪避",
+		"battle_guard": "防御",
+		"battle_hp": "生命",
+		"battle_energy": "能量",
+		"battle_enemy_hp": "敌人生命",
+		"battle_telegraph": "敌人蓄力中！",
+		"battle_ready": "靠近敌人并攻击。闪避消耗 12 能量；防御受击消耗 6 能量。",
+		"battle_far": "距离过远",
+		"battle_hit": "命中敌人",
+		"battle_no_energy": "能量不足",
+		"battle_dodge_feedback": "闪避成功",
+		"battle_guard_feedback": "防御减伤",
+		"battle_hurt": "受到攻击",
+		"battle_win": "战斗胜利",
+		"battle_loss": "战斗失败",
+		"battle_win_note": "战后生命与能量各增加上限的 20%，最多回满。",
+		"battle_loss_note": "队伍倒下，返回主菜单。",
+		"battle_continue": "继续探索",
+		"battle_menu": "返回主菜单",
+		"enemy_patrol": "巡逻机械",
+		"enemy_sentry": "自动防卫机",
 		"bypass_notice": "已绕过敌人，抵达另一侧。",
 	},
 	"en": {
@@ -58,15 +79,43 @@ const STRINGS := {
 		"npc_ruins": "Surveyor: The ruin records need careful checking.",
 		"npc_prompt": "Approach someone and press E to talk",
 		"enemy_label": "Automated machine",
-		"encounter_title": "Visible enemy encounter",
-		"encounter_note": "Combat arrives in M3. This checks contact and the bypass route.",
-		"encounter_continue": "Keep exploring",
+		"battle_title": "Real-time battle · %s",
+		"battle_help": "A/D or ←/→ move · J attack · K dodge · Hold L to guard",
+		"battle_attack": "Attack",
+		"battle_dodge": "Dodge",
+		"battle_guard": "Guard",
+		"battle_hp": "HP",
+		"battle_energy": "Energy",
+		"battle_enemy_hp": "Enemy HP",
+		"battle_telegraph": "Enemy winding up!",
+		"battle_ready": "Close in and attack. Dodge costs 12 energy; guarding a hit costs 6.",
+		"battle_far": "Too far away",
+		"battle_hit": "Hit the enemy",
+		"battle_no_energy": "Not enough energy",
+		"battle_dodge_feedback": "Dodged the attack",
+		"battle_guard_feedback": "Guard reduced damage",
+		"battle_hurt": "Took a hit",
+		"battle_win": "Victory",
+		"battle_loss": "Defeat",
+		"battle_win_note": "After battle, HP and energy each gain 20% of their maximum, capped at full.",
+		"battle_loss_note": "Your party fell. Returning to the main menu.",
+		"battle_continue": "Keep exploring",
+		"battle_menu": "Main menu",
+		"enemy_patrol": "Patrol machine",
+		"enemy_sentry": "Defense machine",
 		"bypass_notice": "You bypassed the enemy and reached the far side.",
 	},
 }
 
 var language := "zh"
 var current_destination_id := "scifi.city"
+var hero_state := {"hp": 100, "max_hp": 100, "energy": 60, "max_energy": 60}
+var battle_enemy_id := ""
+var battle_return_position := Vector2(82, 260)
+var enemy_cleared_for_return := false
+var returning_from_battle := false
+var battle_transition_started_usec := 0
+var last_battle_transition_ms := 0.0
 
 const DESTINATIONS := ["scifi.city", "scifi.outskirts", "scifi.ruins"]
 const DESTINATION_KEYS := {
@@ -92,6 +141,25 @@ func select_destination(destination_id: String) -> bool:
 	if not DESTINATIONS.has(destination_id):
 		return false
 	current_destination_id = destination_id
+	enemy_cleared_for_return = false
+	returning_from_battle = false
+	return true
+
+
+func begin_new_run() -> void:
+	hero_state = {"hp": 100, "max_hp": 100, "energy": 60, "max_energy": 60}
+	battle_enemy_id = ""
+	enemy_cleared_for_return = false
+	returning_from_battle = false
+	current_destination_id = "scifi.city"
+
+
+func begin_battle(enemy_id: String, return_position: Vector2) -> bool:
+	if not ["patrol", "sentry"].has(enemy_id):
+		return false
+	battle_enemy_id = enemy_id
+	battle_return_position = return_position
+	battle_transition_started_usec = Time.get_ticks_usec()
 	return true
 
 
@@ -110,6 +178,9 @@ func _install_default_controls() -> void:
 	_add_key_action("move_down", KEY_S)
 	_add_key_action("move_down", KEY_DOWN)
 	_add_key_action("interact", KEY_E)
+	_add_key_action("battle_attack", KEY_J)
+	_add_key_action("battle_dodge", KEY_K)
+	_add_key_action("battle_guard", KEY_L)
 
 
 func _add_key_action(action: StringName, key: Key) -> void:
