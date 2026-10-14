@@ -3,6 +3,7 @@ extends SceneTree
 # Functional sample checks. Passing does not approve M8 art or human pacing.
 var captures: Array[String] = []
 const NativeIdle := preload("res://scripts/character_directional_idle.gd")
+const NativeMotion := preload("res://scripts/character_directional_motion.gd")
 
 
 func _initialize() -> void:
@@ -81,7 +82,25 @@ func _run() -> void:
 			area._set_city_facing(motion)
 			if not _check(actor.texture == NativeIdle.texture_for("protagonist-" + appearance, facing), "hero directional idle " + appearance + " " + facing):
 				return
+			for phase in range(1, 5):
+				var walk_frame: Texture2D = NativeMotion.texture_for("protagonist-" + appearance, "walk", facing, phase)
+				if not _check(walk_frame != null and walk_frame.get_size() == Vector2(32, 48), "native walk frame " + appearance + " " + facing + " " + str(phase)):
+					return
+			area._update_walk_animation(0.06)
+			if not _check(actor.texture == NativeMotion.texture_for("protagonist-" + appearance, "walk", facing, 1), "walk appears during motion " + appearance + " " + facing):
+				return
+			area._reset_walk_animation()
+			if not _check(actor.texture == NativeIdle.texture_for("protagonist-" + appearance, facing), "idle restores after motion " + appearance + " " + facing):
+				return
 			await _capture(appearance + "-" + facing + "-entry")
+		Input.action_press("move_down")
+		area._process(1.0 / 60.0)
+		Input.action_release("move_down")
+		if not _check(actor.texture == NativeMotion.texture_for("protagonist-" + appearance, "walk", "south", 1), "input drives walk animation " + appearance):
+			return
+		area._process(1.0 / 60.0)
+		if not _check(actor.texture == NativeIdle.texture_for("protagonist-" + appearance, "south"), "input release returns to idle " + appearance):
+			return
 		for target in [Vector2(285, 267), Vector2(378, 181), Vector2(120, 187), Vector2(282, 180), Vector2(558, 166), Vector2(470, 247)]:
 			if not _check(_walk(area, target), "movement reaches city hotspot " + str(target)):
 				return

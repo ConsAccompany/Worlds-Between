@@ -178,14 +178,14 @@
       <div class="section-label">计划与完整实施顺序</div>
       <div class="card"><a href="/source/mvp" target="_blank" rel="noopener">打开 MVP 实施计划</a> · <a href="/source/brief" target="_blank" rel="noopener">打开完整设计稿</a></div>`;
     const currentCityCaption=content.querySelector('.visual-sample figcaption');
-    if(currentCityCaption)currentCityCaption.textContent='Godot 可玩科技城 · 主角男版与梁序，原生像素待机样板；方向行走帧与画面验收仍待完成。';
+    if(currentCityCaption)currentCityCaption.textContent='Godot 可玩科技城 · 男主四方向行走帧；动作节奏与画面美术仍待人工验收。';
     const visualCard=content.querySelector('.visual-sample')?.parentElement;
     if(visualCard){
       for(const sample of state.bible.characterVisualReview?.previews||[]){
         if(sample.file===citySample?.file)continue;
         const figure=document.createElement('figure');figure.className='visual-sample';
         const link=document.createElement('a');link.href=sample.file;link.target='_blank';link.rel='noopener';
-        const img=document.createElement('img');img.src=sample.file;img.alt=sample.label+' 的游戏尺寸像素待机样板';img.loading='lazy';
+        const img=document.createElement('img');img.src=sample.file;img.alt=sample.label+' 的游戏尺寸像素动作样板';img.loading='lazy';
         const caption=document.createElement('figcaption');caption.textContent=sample.label+' · '+sample.caption;
         link.append(img);figure.append(link,caption);visualCard.append(figure);
       }

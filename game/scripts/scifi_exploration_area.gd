@@ -1,9 +1,8 @@
 extends Node2D
 
-const HERO_SPRITE_MALE := preload("res://assets/characters/rpg-2-star-ocean-the-second_protagonist_exploration-sprite-male_m7_20261013-211119-a51e0b63.svg")
-const HERO_SPRITE_FEMALE := preload("res://assets/characters/rpg-2-star-ocean-the-second_protagonist_exploration-sprite-female_m7_20261013-211119-8c2d9e47.svg")
 const CITY_BACKGROUND := preload("res://assets/environments/rpg-2-star-ocean-the-second_scifi-city_environment-background_m8-v02_20261013-232003-48d0ab67.png")
 const NativeIdle := preload("res://scripts/character_directional_idle.gd")
+const NativeMotion := preload("res://scripts/character_directional_motion.gd")
 const BATTLE_SCENE := preload("res://scenes/battle_arena.tscn")
 const CityNavigation := preload("res://scripts/city_navigation.gd")
 const MOVE_SPEED := 140.0
@@ -46,6 +45,8 @@ var city_canopy: Polygon2D
 var city_hero_silhouette: Sprite2D
 var city_occlusion_indicator: Label
 var city_facing := "south"
+var walk_time := 0.0
+var walk_phase := 0
 var npc_position := Vector2.ZERO
 var recruit_id := ""
 var enemy_position := Vector2(-100, -100)
@@ -116,12 +117,13 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if dialogue_open:
+		_reset_walk_animation()
 		return
 	var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	var was_in_bypass_zone := hero.position.x > 545.0 and hero.position.y < 205.0
 	if direction != Vector2.ZERO:
-		if destination_id == "scifi.city":
-			_set_city_facing(direction)
+		_set_city_facing(direction)
+		var previous_position := hero.position
 		var next_position := hero.position + direction * MOVE_SPEED * delta
 		if destination_id == "scifi.city":
 			next_position = _city_slide_position(next_position)
@@ -129,6 +131,10 @@ func _process(delta: float) -> void:
 			next_position.x = clampf(next_position.x, 24.0, 616.0)
 			next_position.y = clampf(next_position.y, 77.0, 306.0)
 		hero.position = next_position
+		if hero.position.distance_to(previous_position) > 0.05:
+			_update_walk_animation(delta)
+		else:
+			_reset_walk_animation()
 		if destination_id == "scifi.city":
 			hero.z_index = int(hero.position.y)
 		if enemy_visible:
@@ -136,6 +142,8 @@ func _process(delta: float) -> void:
 				safe_position = hero.position
 			if hero.position.distance_to(enemy_position) < 23.0:
 				_open_encounter()
+	else:
+		_reset_walk_animation()
 	if enemy_visible and not bypass_reached and direction != Vector2.ZERO and not was_in_bypass_zone and hero.position.x > 545.0 and hero.position.y < 205.0:
 		bypass_reached = true
 		if not AppState.machine_observed:
@@ -342,15 +350,34 @@ func _set_city_facing(direction: Vector2) -> void:
 	if next_facing == city_facing:
 		return
 	city_facing = next_facing
+	walk_time = 0.0
+	walk_phase = 0
+	hero.texture = NativeIdle.texture_for("protagonist-" + AppState.hero_appearance, city_facing)
+
+
+func _update_walk_animation(delta: float) -> void:
+	walk_time += delta
+	var next_phase := int(floor(walk_time / 0.12)) % 4 + 1
+	if next_phase == walk_phase:
+		return
+	walk_phase = next_phase
+	hero.texture = NativeMotion.texture_for("protagonist-" + AppState.hero_appearance, "walk", city_facing, walk_phase)
+
+
+func _reset_walk_animation() -> void:
+	if walk_phase == 0:
+		return
+	walk_time = 0.0
+	walk_phase = 0
 	hero.texture = NativeIdle.texture_for("protagonist-" + AppState.hero_appearance, city_facing)
 
 
 func _build_actors() -> void:
 	hero = Sprite2D.new()
+	hero.texture = NativeIdle.texture_for("protagonist-" + AppState.hero_appearance, "south")
+	hero.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	hero.offset = Vector2(0, -20)
 	if destination_id == "scifi.city":
-		hero.texture = NativeIdle.texture_for("protagonist-" + AppState.hero_appearance, "south")
-		hero.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-		hero.offset = Vector2(0, -20)
 		hero.position = CITY_SPAWN
 		hero.z_index = int(hero.position.y)
 		city_npc = Sprite2D.new()
@@ -362,9 +389,6 @@ func _build_actors() -> void:
 		city_npc.visible = not AppState.recruited_members.has(recruit_id)
 		add_child(city_npc)
 	else:
-		hero.texture = HERO_SPRITE_FEMALE if AppState.hero_appearance == "female" else HERO_SPRITE_MALE
-		hero.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-		hero.scale = Vector2(2, 2)
 		hero.position = SPAWN
 	add_child(hero)
 
