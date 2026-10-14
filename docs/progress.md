@@ -92,11 +92,12 @@ Last updated: 2026-10-13
 
 - [x] Revise MVP scope, asset inventory and side panel gates for 52 character variants and eleven science-region scene visuals.
 - [x] Generate two city background candidates and separate protagonist/Liang Xu cutouts; import the selected city and both characters into a 1280×720 Godot preview. Inspect the actual engine screenshot and show it in the game bible production view. The city reads as practical high-tech restoration; the characters remain distinguishable by hair and outfit.
+- [x] Integrate the city art as a playable candidate with foot anchors, walkable boundaries, foreground occlusion and clearer hotspots; review four actual engine captures. Keep art approval open.
 - [ ] Approve the character and city visual sample before batch production.
 - [ ] Integrate and review the 52 in-game displays and four-direction sprites.
 - [ ] Finish the playable team's battle art and the eleven scene visuals.
 
-The M8 preview is a static visual-direction candidate. Its background has no separate collision, occlusion or interaction layers, and the two character cutouts do not have directional animation. The playable science-region scene still uses the earlier functional artwork. The next art pass should resolve viewing angle and foot anchoring before using these assets in movement.
+The playable city now uses the static visual-direction candidate, manually traced walking and foreground layers, and static character cutouts. It still needs directional walking, architectural and stair alignment, a visual approval decision, and the other ten scene-quality gates.
 
 ### Phase M9 - Integrated acceptance
 
@@ -116,3 +117,9 @@ The M8 preview is a static visual-direction candidate. Its background has no sep
 - Godot 4.7.2 navigation checks pass headless and rendered; city integration, M2, M6 and both M7 automated routes pass. Four separate Chinese/English engine captures were inspected, including diagnostic boundary overlays.
 - Review: [city navigation review](../outputs/rpg-2-star-ocean-the-second_scifi-city_navigation-review_m8-boundaries_20261014-063728-a19da10f.md); [manifest](../outputs/rpg-2-star-ocean-the-second_scifi-city_navigation-manifest_m8-boundaries_20261014-063728-a19da10f.json).
 - This remains candidate integration. Static cutouts, foreground occlusion, detailed architecture alignment and genuine human playthroughs remain unfinished. Asset acceptance and M7/M8/M9 statuses are unchanged.
+
+## 2026-10-14 - Parallel city and QA integration
+
+- The playable city now layers the garden canopy and street furniture over characters by foot depth. Distinct hotspot icons and nearby text reduce labels covering the paving; a locator shows the protagonist behind dense foliage. Four separate Godot viewport captures document both protagonist appearances and Liang Xu before/after recruitment.
+- Combined Godot 4.7.2 checks pass: M8 navigation, M8 city integration, M8 city return/recruitment with bilingual proximity labels, and both automated M7 routes. The new QA test was updated after integration because some city labels intentionally appear only when approached. An occasional ObjectDB warning occurs on exit without a failing test.
+- [City runtime review](../outputs/rpg-2-star-ocean-the-second_scifi-city_runtime-review_m8-v05_20261014-133629-a4c139fb/rpg-2-star-ocean-the-second_scifi-city_runtime-review_m8-v05_20261014-133700-3d6148a7.md) and [QA playtest routes](qa/rpg-2-star-ocean-the-second_scifi-region_human-playtest-routes_m7-m8_20261014-133240-51d0c8a7.md) are ready. M7 remains awaiting two genuine 25–35 minute human runs; M8 visual acceptance and M9 remain open.
