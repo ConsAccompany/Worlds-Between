@@ -4,7 +4,7 @@
   "title": "世界之间",
   "englishTitle": "Worlds Between",
   "edition": "设计基线 v0.1",
-  "updatedAt": "2026-10-14T02:43:53.256Z",
+  "updatedAt": "2026-10-14T02:47:26.242Z",
   "note": "规则以玩家确认的设计稿为基线；人物姓名与外观是待审提案，具体剧情留待后续设计。",
   "pitch": "从地下社区走出的旅人，以好奇心探索多元文明，招募伙伴，并成为不同世界认知差异的桥梁。",
   "pillars": [
@@ -1150,6 +1150,408 @@
       }
     ]
   },
+  "skillTreeProposal": {
+    "schemaVersion": 1,
+    "project": "rpg-2-star-ocean-the-second",
+    "status": "设计提案，尚待玩家确认",
+    "scope": "四种天分各一条七节点职业技能树样板；其余十六条按此规则续写",
+    "progression": {
+      "tierMinimumCharacterLevels": [
+        1,
+        10,
+        20,
+        30,
+        40
+      ],
+      "rankMaximum": 3,
+      "rankOne": "角色达到节点等级且进入相应职业阶级时自动获得，不消耗 JP。",
+      "branchRule": "第 2、4 阶各有两个并列节点；二者均可学习，不做互斥选择。切换系列后保留已得等级，切回才可使用。",
+      "rankUpgradeJpBase": {
+        "2": 35,
+        "3": 55
+      },
+      "aptitudeDiscount": "对应天分 60 分时付基础 JP；61–100 分线性递减，在 100 分时付基础 JP 的 50%，每次向上取整。",
+      "rankEffects": "第 2、3 级各提高技能主要数值约 15%，实际伤害、治疗、持续时间与上限仍待战斗平衡确定。",
+      "energyRule": "主动技能消耗能量；被动技能不消耗能量。战斗中能量只可由道具或明确标注的技能触发恢复。",
+      "finalTierRule": "第 5 阶还须完成该系列一次性后期解锁任务；角色需在下一次十级选择时晋升。"
+    },
+    "trees": [
+      {
+        "seriesId": "guardian",
+        "name": "守护",
+        "nodes": [
+          {
+            "id": "guardian_line_guard",
+            "tier": 1,
+            "name": "护线",
+            "type": "主动",
+            "energy": 14,
+            "tags": [
+              "守护"
+            ],
+            "effect": "短时间将一名队友所受的部分伤害转由自己承担，并提高自身防御。"
+          },
+          {
+            "id": "guardian_shared_guard",
+            "tier": 2,
+            "branch": "援护",
+            "name": "同袍代受",
+            "type": "被动",
+            "energy": 0,
+            "tags": [
+              "守护",
+              "协同"
+            ],
+            "effect": "成功防御后，附近生命比例最低的队友获得一次小额伤害减免。"
+          },
+          {
+            "id": "guardian_anchor",
+            "tier": 2,
+            "branch": "坚守",
+            "name": "固守姿态",
+            "type": "主动",
+            "energy": 18,
+            "tags": [
+              "守护"
+            ],
+            "effect": "短时间减少自身受到的伤害与被打断概率；移动速度暂时降低。"
+          },
+          {
+            "id": "guardian_counter_window",
+            "tier": 3,
+            "name": "反击窗口",
+            "type": "主动",
+            "energy": 20,
+            "tags": [
+              "守护",
+              "反击"
+            ],
+            "effect": "下一次成功防御后立即获得强化反击；若未防御成功则不产生反击。"
+          },
+          {
+            "id": "guardian_group_shelter",
+            "tier": 4,
+            "branch": "援护",
+            "name": "阵线庇护",
+            "type": "主动",
+            "energy": 30,
+            "tags": [
+              "守护",
+              "范围"
+            ],
+            "effect": "让附近队友在短时间内分担部分所受伤害，分担后的总伤害不会低于原伤害下限。"
+          },
+          {
+            "id": "guardian_last_stand",
+            "tier": 4,
+            "branch": "坚守",
+            "name": "不屈界限",
+            "type": "被动",
+            "energy": 0,
+            "tags": [
+              "守护",
+              "生存"
+            ],
+            "effect": "每场战斗一次，受到致命伤害时保留少量生命并短暂提高防御。"
+          },
+          {
+            "id": "guardian_oath_dome",
+            "tier": 5,
+            "name": "守誓穹幕",
+            "type": "主动",
+            "energy": 45,
+            "tags": [
+              "守护",
+              "范围"
+            ],
+            "effect": "为最多五位上场角色提供短时护盾；护盾吸收量受施放者防御与技能等级影响。"
+          }
+        ]
+      },
+      {
+        "seriesId": "skirmish",
+        "name": "游击",
+        "nodes": [
+          {
+            "id": "skirmish_reposition_strike",
+            "tier": 1,
+            "name": "换位突袭",
+            "type": "主动",
+            "energy": 14,
+            "tags": [
+              "机动",
+              "攻击"
+            ],
+            "effect": "迅速穿过目标攻击范围并反身打击；不使角色隐身或脱离战斗。"
+          },
+          {
+            "id": "skirmish_bait_step",
+            "tier": 2,
+            "branch": "诱导",
+            "name": "诱导步",
+            "type": "主动",
+            "energy": 18,
+            "tags": [
+              "机动",
+              "诱敌"
+            ],
+            "effect": "短时提高自身被敌人选为目标的概率，下一次闪避成功后降低该敌人的行动速度。"
+          },
+          {
+            "id": "skirmish_focus_mark",
+            "tier": 2,
+            "branch": "转火",
+            "name": "转火标记",
+            "type": "主动",
+            "energy": 12,
+            "tags": [
+              "标记",
+              "协同"
+            ],
+            "effect": "标记一名敌人，未操纵伙伴的攻击 AI 优先考虑该目标，直到标记结束或收到更高优先级指令。"
+          },
+          {
+            "id": "skirmish_return_hit",
+            "tier": 3,
+            "name": "回身追击",
+            "type": "被动",
+            "energy": 0,
+            "tags": [
+              "机动",
+              "反击"
+            ],
+            "effect": "闪避敌方攻击后，下一次普通攻击获得短暂伤害加成。"
+          },
+          {
+            "id": "skirmish_feint_return",
+            "tier": 4,
+            "branch": "诱导",
+            "name": "折返双击",
+            "type": "主动",
+            "energy": 28,
+            "tags": [
+              "机动",
+              "攻击"
+            ],
+            "effect": "先打击目标再撤至安全距离；若目标追击，第二次攻击获得加成。"
+          },
+          {
+            "id": "skirmish_split_signal",
+            "tier": 4,
+            "branch": "转火",
+            "name": "拆队讯号",
+            "type": "主动",
+            "energy": 24,
+            "tags": [
+              "标记",
+              "协同"
+            ],
+            "effect": "同时标记两个不同敌人，允许队友按已有 AI 条件分别牵制与集火。"
+          },
+          {
+            "id": "skirmish_many_steps",
+            "tier": 5,
+            "name": "百步无迹",
+            "type": "主动",
+            "energy": 45,
+            "tags": [
+              "机动",
+              "范围"
+            ],
+            "effect": "在战场上多次高速换位并打击被标记目标；动作期间仍可被范围攻击命中。"
+          }
+        ]
+      },
+      {
+        "seriesId": "tactics",
+        "name": "战术",
+        "nodes": [
+          {
+            "id": "tactics_priority_target",
+            "tier": 1,
+            "name": "优先目标",
+            "type": "主动",
+            "energy": 10,
+            "tags": [
+              "标记",
+              "指令"
+            ],
+            "effect": "指定一名敌人，未操纵伙伴按现有 AI 规则优先攻击该目标。"
+          },
+          {
+            "id": "tactics_hold_line",
+            "tier": 2,
+            "branch": "防线",
+            "name": "稳阵指令",
+            "type": "主动",
+            "energy": 18,
+            "tags": [
+              "指令",
+              "守护"
+            ],
+            "effect": "短时间提高队友防御，并使指定伙伴优先保护生命比例最低者。"
+          },
+          {
+            "id": "tactics_focus_order",
+            "tier": 2,
+            "branch": "集火",
+            "name": "集火口令",
+            "type": "主动",
+            "energy": 18,
+            "tags": [
+              "指令",
+              "攻击"
+            ],
+            "effect": "让队友在短时间内提高对当前标记目标的攻击效率。"
+          },
+          {
+            "id": "tactics_opportunity_read",
+            "tier": 3,
+            "name": "机会评估",
+            "type": "被动",
+            "energy": 0,
+            "tags": [
+              "指令",
+              "能量"
+            ],
+            "effect": "由本系列指令引导的队友成功命中或防御后，施令者每隔一段时间返还少量能量。"
+          },
+          {
+            "id": "tactics_reserve_rotation",
+            "tier": 4,
+            "branch": "防线",
+            "name": "后备轮换",
+            "type": "主动",
+            "energy": 24,
+            "tags": [
+              "指令",
+              "切换"
+            ],
+            "effect": "下一次切换直接操纵角色时，为新操纵者提供短暂护盾和稳固。"
+          },
+          {
+            "id": "tactics_reverse_read",
+            "tier": 4,
+            "branch": "集火",
+            "name": "逆向预判",
+            "type": "主动",
+            "energy": 26,
+            "tags": [
+              "指令",
+              "预警"
+            ],
+            "effect": "揭示目标下一次蓄力攻击的提示，并降低队友承受的该次伤害。"
+          },
+          {
+            "id": "tactics_total_coordination",
+            "tier": 5,
+            "name": "万局同调",
+            "type": "主动",
+            "energy": 45,
+            "tags": [
+              "指令",
+              "协同"
+            ],
+            "effect": "短时间内同时强化现有队友指令的执行速度与能量效率；不绕过关系和技能要求生成组合技。"
+          }
+        ]
+      },
+      {
+        "seriesId": "runes",
+        "name": "符术",
+        "nodes": [
+          {
+            "id": "runes_trigger_mark",
+            "tier": 1,
+            "name": "触发符",
+            "type": "主动",
+            "energy": 14,
+            "tags": [
+              "符文",
+              "标记"
+            ],
+            "effect": "给敌人刻下短时符印，下一次由队友技能命中时附加一次小额伤害。"
+          },
+          {
+            "id": "runes_dual_source",
+            "tier": 2,
+            "branch": "连锁",
+            "name": "双源印",
+            "type": "主动",
+            "energy": 20,
+            "tags": [
+              "符文",
+              "组合"
+            ],
+            "effect": "刻下需由两种不同技能标签依次命中的符印，满足条件后触发额外效果。"
+          },
+          {
+            "id": "runes_boundary_mark",
+            "tier": 2,
+            "branch": "防护",
+            "name": "固界符",
+            "type": "主动",
+            "energy": 18,
+            "tags": [
+              "符文",
+              "守护"
+            ],
+            "effect": "为一名队友刻下短时防护符，抵消下一次攻击的一部分伤害。"
+          },
+          {
+            "id": "runes_chain_memory",
+            "tier": 3,
+            "name": "连锁记忆",
+            "type": "被动",
+            "energy": 0,
+            "tags": [
+              "符文",
+              "组合"
+            ],
+            "effect": "同一目标连续被不同技能标签命中时，延长其符印的有效窗口，但不无限叠加。"
+          },
+          {
+            "id": "runes_reclaim",
+            "tier": 4,
+            "branch": "连锁",
+            "name": "回收符",
+            "type": "主动",
+            "energy": 26,
+            "tags": [
+              "符文",
+              "攻击"
+            ],
+            "effect": "引爆目标身上现有符印；剩余持续时间越长，额外伤害越高。"
+          },
+          {
+            "id": "runes_transfer",
+            "tier": 4,
+            "branch": "防护",
+            "name": "流转符",
+            "type": "主动",
+            "energy": 24,
+            "tags": [
+              "符文",
+              "支援"
+            ],
+            "effect": "将一名队友身上尚未触发的防护符转移给另一名生命比例较低的队友。"
+          },
+          {
+            "id": "runes_all_mark",
+            "tier": 5,
+            "name": "万象铭阵",
+            "type": "主动",
+            "energy": 45,
+            "tags": [
+              "符文",
+              "范围"
+            ],
+            "effect": "为战场上的敌人施加同一组限时符印；三种不同技能标签命中后各自触发一次连锁，不依赖地形高度。"
+          }
+        ]
+      }
+    ]
+  },
   "openQuestions": [
     {
       "title": "10 位可恋爱伙伴",
@@ -1157,7 +1559,7 @@
     },
     {
       "title": "职业技能与数值",
-      "detail": "20 个系列的五阶名称及终阶任务已有待确认提案；各阶技能树、JP 成本、平衡数值仍需设计。"
+      "detail": "20 个系列的五阶名称及终阶任务已有待确认提案；四条系列已有七节点技能树样板，其余十六条与实际平衡数值仍需设计。"
     },
     {
       "title": "地点与任务内容",
