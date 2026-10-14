@@ -5,7 +5,7 @@
   const state = {
     bible:null, inventory:null, progress:null, playtests:[], playtestStatus:{phase:'loading'}, view:'home', query:'',
     chapter:'chapter-3', character:'hero', board:'全部板块',
-    group:'全部来源', assetScope:'all', openGroups:new Set(['characters']),
+    group:'全部来源', assetScope:'all', openGroups:new Set(['characters']), feedbackOpen:false,
   };
   const esc = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
   const inline = value => esc(value)
@@ -17,6 +17,8 @@
     return item ? `<div class="source-line">资料来源：<a href="${item.url}" target="_blank" rel="noopener">${esc(item.filename)}</a></div>` : '';
   };
   const badge = (label,kind='') => `<span class="badge ${kind}">${esc(label)}</span>`;
+  const feedbackKey = route => `worlds-between-m7-feedback-${route}`;
+  const readFeedback = route => { try { return localStorage.getItem(feedbackKey(route)) || ''; } catch (_) { return ''; } };
   function markdown(input) {
     const lines=String(input||'').split('\n');
     const out=[];
@@ -144,6 +146,7 @@
     const launchText={loading:'正在检查本地试玩入口…',idle:'可以从此处打开游戏。请从新档开始，完成城市汇报后关闭游戏，记录会自动显示在下方。',running:'游戏正在运行。完成城市汇报后关闭游戏，记录会自动回传。',completed:'上一轮试玩记录已回传，可以开始另一条路线。',no_report:'上一轮在完成城市汇报前结束，没有生成完成记录。可以重新开始。',error:'上一轮启动或运行失败，请检查本地游戏文件。',unavailable:'当前面板没有连接试玩入口。请打开最新版本地面板。'};
     const launchDisabled=!['idle','completed','no_report','error'].includes(launchPhase);
     const launchHint=launchPhase==='unavailable' ? '当前面板没有连接试玩入口。<a href="http://127.0.0.1:18727/">打开当前面板</a>。' : esc(launchText[launchPhase]||launchText.loading);
+    const feedbackFields=[['first','第一轮 · 城市 → 城外 → 遗址'],['second','第二轮 · 遗址 → 城外 → 城市']].map(([key,label])=>`<label class="feedback-field"><strong>${label}</strong><textarea data-feedback="${key}" rows="4" maxlength="4000" placeholder="记下迷路、操作不明、文字溢出、战斗难度，以及你想继续探索的原因。">${esc(readFeedback(key))}</textarea></label>`).join('');
     const pct=Math.round(100*done/p.steps.length);
     content.innerHTML=`${head('制作路线','MVP 阶段状态与尚待细化的完整游戏设计',badge(done+' / '+p.steps.length+' 阶段','accent'))}
       <div class="card"><div class="step-top"><strong>MVP 完成情况</strong><span>${pct}%</span></div><div class="meter" role="progressbar" aria-valuemin="0" aria-valuemax="${p.steps.length}" aria-valuenow="${done}"><span style="width:${pct}%"></span></div><p class="muted small">当前：${current?esc(current.id+' · '+copy[current.id][0]):'全部阶段已完成'}</p></div>
@@ -151,6 +154,7 @@
       <div class="stack">${p.steps.map(step=>`<details class="group"><summary>${esc(step.id+' · '+copy[step.id][0])} <span class="group-count">${esc(status[step.status]||step.status)}</span></summary><div class="card"><p>${esc(copy[step.id][1])}</p><strong>验收标准</strong><p>${esc(copy[step.id][2])}</p>${step.details?.length?'<strong>当前内容</strong><ul>'+step.details.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>':''}${step.remaining?.length?'<strong>尚需完成</strong><ul>'+step.remaining.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>':''}${step.evidence?.length?'<strong>已有依据</strong><ul>'+step.evidence.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>':''}</div></details>`).join('')}</div>
       <div class="section-label">M7 试玩记录</div>
       <section class="card"><div class="step-top"><h3>本地汇报记录</h3><button type="button" class="chip" id="refresh-playtests">刷新记录</button></div><div class="playtest-launch"><button type="button" class="chip" id="start-playtest" ${launchDisabled?'disabled':''}>${launchPhase==='running'?'试玩进行中':'开始新档试玩'}</button><span class="muted small" role="status">${launchHint}</span></div><p class="muted small">请分别用两个新档试玩。满足不同首访顺序、25–35 分钟、三处勘察和三位伙伴的路线：${Math.min(2,routeTrials.size)}/2。时间由游戏计时，是否有卡点和内容节奏还需玩家判断。</p><details class="group"><summary>两轮试玩指引</summary><div class="card small"><p><strong>第一轮：</strong>城市 → 城外 → 遗址。<strong>第二轮：</strong>遗址 → 城外 → 城市。每轮都从主菜单开始新游戏，三位伙伴可暂缓邀请，但在回城汇报前请招募齐。</p><ol><li>各地查看六条线索、完成三组证据关联与最终研判。</li><li>检查城外中继和遗址记录；绕过或击败一台机械。两处现场痕迹和伙伴协助是可选内容。</li><li>回城市提交汇报。出现完成画面后关闭游戏，等待记录回传。</li></ol><p>试玩时留意迷路、操作不明、文字溢出、战斗难度和想继续探索的动力；这些体验无法由自动记录判断。</p></div></details><div class="stack">${playtestRows||'<div class="empty">尚无正式试玩记录。M7 仍需两次不同顺序的实际计时试玩。</div>'}</div></section>
+      <details class="group" id="playtest-feedback" ${state.feedbackOpen?'open':''}><summary>试玩感受记录</summary><div class="card"><p class="muted small">试玩时随手记下观察；输入后自动保存在当前浏览器。完成后请把反馈发到聊天里，以便纳入项目验收。</p>${feedbackFields}<p class="muted small" role="status" id="feedback-status">等待输入</p></div></details>
       <div class="section-label">仍待确定</div>
       <div class="stack">${state.bible.openQuestions.map(q=>`<div class="card"><h3>${esc(q.title)}</h3><p>${esc(q.detail)}</p></div>`).join('')}</div>
       <div class="section-label">设计稿中的实施顺序与待细化清单</div>
@@ -159,6 +163,12 @@
       <div class="card"><a href="/source/mvp" target="_blank" rel="noopener">打开 MVP 实施计划</a> · <a href="/source/brief" target="_blank" rel="noopener">打开完整设计稿</a></div>`;
     content.querySelector('#refresh-playtests').addEventListener('click',()=>refreshPlaytests().catch(()=>{document.getElementById('footer-status').textContent='试玩记录暂时无法读取';}));
     content.querySelector('#start-playtest').addEventListener('click',startPlaytest);
+    content.querySelector('#playtest-feedback').addEventListener('toggle',event=>{state.feedbackOpen=event.target.open;});
+    content.querySelectorAll('[data-feedback]').forEach(field=>field.addEventListener('input',()=>{
+      const message=content.querySelector('#feedback-status');
+      try { localStorage.setItem(feedbackKey(field.dataset.feedback),field.value);message.textContent='已保存在当前浏览器'; }
+      catch (_) { message.textContent='此浏览器无法保存，请复制笔记到聊天'; }
+    }));
   }
   function renderAssets() {
     const inventory=state.inventory;
