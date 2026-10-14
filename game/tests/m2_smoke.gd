@@ -61,6 +61,16 @@ func _run_checks() -> void:
 				return
 			area.get("hero").position = Vector2(565, 170)
 			await process_frame
+			Input.action_press("move_right")
+			await process_frame
+			Input.action_release("move_right")
+			if not _check(not area.get("bypass_reached"), "scene placement does not count as bypass: " + id):
+				return
+			area.get("hero").position = Vector2(544, 170)
+			Input.action_press("move_right")
+			await process_frame
+			await process_frame
+			Input.action_release("move_right")
 			if not _check(area.get("bypass_reached") and area.get("encounter_count") == 0, "enemy bypass: " + id):
 				return
 			area.get("hero").position = area.get("enemy_position")

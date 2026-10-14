@@ -23,6 +23,7 @@ Last updated: 2026-10-13
 - M7 now writes a local JSON playtest receipt at the first city report, including elapsed time, event order, recruits, surveys, conversations heard before report, and retry counts. A Windows launcher starts the game with the bundled Godot executable and copies the receipt into `outputs/` after the game closes. The M7 smoke test checks receipt contents for both route orders. No real timed playthrough has been recorded yet.
 - The game bible's production view now reads local M7 playtest receipts and shows elapsed time, visit order, recruitment, surveys, conversations, battles, and retry counts. The panel remains empty until a completed local run is copied into `outputs/`; automated smoke receipts stay in isolated test storage.
 - M7 evidence review now has a bilingual collected-clue notebook inside the analysis overlay. Players can reread the full text of discovered clues while linking evidence or making the final judgment, then return without losing their current selection. Both route orders pass the revised M7 smoke check; Chinese and English 640×360 captures were inspected for clipping.
+- M7 machine-bypass tracking now requires the player to move into the bypass zone. Loading or returning from a survey inside that zone no longer records a bypass merely because the scene appears; M2 and M7 route checks cover the change. The human timed playthrough is still outstanding.
 
 ## Milestones Checklist
 
@@ -63,6 +64,7 @@ Last updated: 2026-10-13
 - [x] Add a local playtest launcher and verify the report receipt for both route orders.
 - [x] Show real local playtest receipts in the game bible production view.
 - [x] Let players reread collected clues during evidence links and final judgment.
+- [x] Prevent scene return inside the machine-bypass zone from creating a false observation.
 - [ ] Time a fresh start-to-finish playthrough and fix any blockers or text overflow.
 
 ### Phase M8 - Acceptance and tuning

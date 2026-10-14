@@ -86,6 +86,7 @@ func _process(delta: float) -> void:
 	if dialogue_open:
 		return
 	var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	var was_in_bypass_zone := hero.position.x > 545.0 and hero.position.y < 205.0
 	if direction != Vector2.ZERO:
 		hero.position += direction * MOVE_SPEED * delta
 		hero.position.x = clampf(hero.position.x, 24.0, 616.0)
@@ -95,7 +96,7 @@ func _process(delta: float) -> void:
 				safe_position = hero.position
 			if hero.position.distance_to(enemy_position) < 23.0:
 				_open_encounter()
-	if enemy_visible and not bypass_reached and hero.position.x > 545.0 and hero.position.y < 205.0:
+	if enemy_visible and not bypass_reached and direction != Vector2.ZERO and not was_in_bypass_zone and hero.position.x > 545.0 and hero.position.y < 205.0:
 		bypass_reached = true
 		if not AppState.machine_observed:
 			AppState.record_playtest_event("machine_bypass", destination_id)

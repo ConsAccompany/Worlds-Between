@@ -81,8 +81,11 @@ func _run() -> void:
 						area.get("invite_button").pressed.emit()
 						if not _check(app.recruited_members.has("zhao-ling"), "outskirts companion invited"):
 							return
-					area.get("hero").position = Vector2(550, 150)
-					area._process(0.0)
+					area.get("hero").position = Vector2(544, 150)
+					Input.action_press("move_right")
+					await process_frame
+					await process_frame
+					Input.action_release("move_right")
 					if not _check(app.machine_observed, "machine observation by bypass"):
 						return
 				"scifi.ruins":
