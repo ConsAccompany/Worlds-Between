@@ -68,7 +68,7 @@ func _run() -> void:
 		app.language = "zh" if route == 0 else "en"
 		var order := ["scifi.city", "scifi.outskirts", "scifi.ruins"] if route == 0 else ["scifi.ruins", "scifi.outskirts", "scifi.city"]
 		var assist_positions := {"scifi.city": Vector2(120, 187), "scifi.outskirts": Vector2(505, 258), "scifi.ruins": Vector2(505, 275)}
-		var trace_positions := {"scifi.city": [Vector2(240, 267), Vector2(378, 121)], "scifi.outskirts": [Vector2(125, 240), Vector2(408, 95)], "scifi.ruins": [Vector2(115, 245), Vector2(470, 115)]}
+		var trace_positions := {"scifi.city": [Vector2(285, 267), Vector2(378, 181)], "scifi.outskirts": [Vector2(125, 240), Vector2(408, 95)], "scifi.ruins": [Vector2(115, 245), Vector2(470, 115)]}
 		var assistants := {"scifi.city": "liang-xu", "scifi.outskirts": "zhao-ling", "scifi.ruins": "ji-cheng"}
 		for destination in order:
 			app.select_destination(destination)
@@ -147,7 +147,7 @@ func _run() -> void:
 				if not _check(area.get("invite_button").disabled and not app.field_insights.has(destination), "field station waits for optional recruitment " + destination):
 					return
 			area.get("later_button").pressed.emit()
-			var entrance := Vector2(558, 143) if destination == "scifi.city" else (Vector2(558, 277) if destination == "scifi.outskirts" else Vector2(548, 142))
+			var entrance := Vector2(558, 166) if destination == "scifi.city" else (Vector2(558, 277) if destination == "scifi.outskirts" else Vector2(548, 142))
 			area.get("hero").position = entrance
 			area._unhandled_input(_interact())
 			await _settle()

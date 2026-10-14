@@ -2,14 +2,19 @@ extends Node2D
 
 const HERO_SPRITE_MALE := preload("res://assets/characters/rpg-2-star-ocean-the-second_protagonist_exploration-sprite-male_m7_20261013-211119-a51e0b63.svg")
 const HERO_SPRITE_FEMALE := preload("res://assets/characters/rpg-2-star-ocean-the-second_protagonist_exploration-sprite-female_m7_20261013-211119-8c2d9e47.svg")
+const CITY_BACKGROUND := preload("res://assets/environments/rpg-2-star-ocean-the-second_scifi-city_environment-background_m8-v02_20261013-232003-48d0ab67.png")
+const CITY_HERO_MALE := preload("res://assets/characters/rpg-2-star-ocean-the-second_protagonist-male_exploration-cutout_m8-sample_20261013-231655-70b1e89d.png")
+const CITY_HERO_FEMALE := preload("res://assets/characters/rpg-2-star-ocean-the-second_protagonist-female_exploration-cutout_m8-sample_20261013-233258-e2c0419a.png")
+const CITY_LIANG_XU := preload("res://assets/characters/rpg-2-star-ocean-the-second_liang-xu_exploration-cutout_m8-sample_20261013-231655-2f45a173.png")
 const BATTLE_SCENE := preload("res://scenes/battle_arena.tscn")
 const MOVE_SPEED := 140.0
 const SPAWN := Vector2(82, 260)
+const CITY_SPAWN := Vector2(340, 253)
 const RECORDS_POSITION := Vector2(320, 250)
 const RELAY_POSITION := Vector2(470, 128)
 const REPORT_POSITION := Vector2(470, 247)
 const SURVEY_ENTRANCES := {
-	"scifi.city": Vector2(558, 143),
+	"scifi.city": Vector2(558, 166),
 	"scifi.outskirts": Vector2(558, 277),
 	"scifi.ruins": Vector2(548, 142),
 }
@@ -19,7 +24,7 @@ const FIELD_ASSISTS := {
 	"scifi.ruins": {"position": Vector2(505, 275), "member": "ji-cheng"},
 }
 const FIELD_TRACES := {
-	"scifi.city": [Vector2(240, 267), Vector2(378, 121)],
+	"scifi.city": [Vector2(285, 267), Vector2(378, 181)],
 	"scifi.outskirts": [Vector2(125, 240), Vector2(408, 95)],
 	"scifi.ruins": [Vector2(115, 245), Vector2(470, 115)],
 }
@@ -37,6 +42,7 @@ const AREA_CONFIG := {
 
 var destination_id := ""
 var hero: Sprite2D
+var city_npc: Sprite2D
 var npc_position := Vector2.ZERO
 var recruit_id := ""
 var enemy_position := Vector2(-100, -100)
@@ -80,6 +86,8 @@ func _ready() -> void:
 	recruit_id = config["recruit"]
 	enemy_position = config["enemy"]
 	enemy_visible = destination_id != "scifi.city" and not AppState.enemy_cleared_for_return
+	if destination_id == "scifi.city":
+		texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
 	_build_actors()
 	if AppState.returning_from_battle:
 		hero.position = AppState.battle_return_position
@@ -87,6 +95,9 @@ func _ready() -> void:
 	elif AppState.resume_area_pending:
 		hero.position = AppState.resume_area_position
 		AppState.resume_area_pending = false
+	if destination_id == "scifi.city":
+		hero.position = _city_safe_position(hero.position)
+		hero.z_index = int(hero.position.y)
 	safe_position = hero.position
 	if not AppState.areas_visited.has(destination_id):
 		AppState.record_playtest_event("visit", destination_id)
@@ -103,9 +114,15 @@ func _process(delta: float) -> void:
 	var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	var was_in_bypass_zone := hero.position.x > 545.0 and hero.position.y < 205.0
 	if direction != Vector2.ZERO:
-		hero.position += direction * MOVE_SPEED * delta
-		hero.position.x = clampf(hero.position.x, 24.0, 616.0)
-		hero.position.y = clampf(hero.position.y, 77.0, 306.0)
+		var next_position := hero.position + direction * MOVE_SPEED * delta
+		if destination_id == "scifi.city":
+			next_position = _city_slide_position(next_position)
+		else:
+			next_position.x = clampf(next_position.x, 24.0, 616.0)
+			next_position.y = clampf(next_position.y, 77.0, 306.0)
+		hero.position = next_position
+		if destination_id == "scifi.city":
+			hero.z_index = int(hero.position.y)
 		if enemy_visible:
 			if hero.position.distance_to(enemy_position) > 43.0:
 				safe_position = hero.position
@@ -123,6 +140,10 @@ func _process(delta: float) -> void:
 func _draw() -> void:
 	if not AREA_CONFIG.has(destination_id):
 		return
+	if destination_id == "scifi.city":
+		draw_texture_rect(CITY_BACKGROUND, Rect2(0, 0, 640, 360), false)
+		_draw_city_hotspots()
+		return
 	var color: Color = AREA_CONFIG[destination_id]["color"]
 	draw_rect(Rect2(0, 0, 640, 360), Color("#13232d"))
 	draw_rect(Rect2(16, 67, 608, 250), color)
@@ -131,8 +152,6 @@ func _draw() -> void:
 	for y in range(67, 318, 32):
 		draw_line(Vector2(16, y), Vector2(624, y), color.lightened(0.08), 1.0)
 	match destination_id:
-		"scifi.city":
-			_draw_city()
 		"scifi.outskirts":
 			_draw_outskirts()
 		"scifi.ruins":
@@ -163,15 +182,43 @@ func _draw() -> void:
 		draw_circle(trace_position, 2.0, Color("#17323d"))
 
 
-func _draw_city() -> void:
-	draw_rect(Rect2(65, 96, 152, 72), Color("#203b4a"))
-	draw_rect(Rect2(88, 110, 106, 42), Color("#719e9c"))
-	draw_rect(Rect2(405, 94, 160, 95), Color("#294958"))
-	draw_rect(Rect2(430, 110, 110, 62), Color("#749ea4"))
-	draw_rect(Rect2(30, 222, 580, 30), Color("#667e7a"))
-	draw_rect(Rect2(150, 255, 340, 22), Color("#7f9990"))
-	for x in range(80, 560, 70):
-		draw_rect(Rect2(x, 236, 30, 3), Color("#d9c691"))
+func _draw_city_hotspots() -> void:
+	_draw_city_marker(REPORT_POSITION, Color("#75d8ce"))
+	_draw_city_marker(SURVEY_ENTRANCES[destination_id], Color("#75d8ce" if AppState.survey_solved.has(destination_id) else "#f2cb81"))
+	_draw_city_marker(FIELD_ASSISTS[destination_id]["position"], Color("#75d8ce" if AppState.field_insights.has(destination_id) else "#f2cb81"))
+	for index in 2:
+		var recorded: bool = AppState.field_traces.has("%s:%d" % [destination_id, index])
+		_draw_city_marker(FIELD_TRACES[destination_id][index], Color("#75d8ce" if recorded else "#f2cb81"))
+
+
+func _draw_city_marker(at: Vector2, color: Color) -> void:
+	draw_circle(at, 9.0, Color(color.r, color.g, color.b, 0.30))
+	draw_arc(at, 8.0, 0.0, TAU, 24, Color(color.r, color.g, color.b, 0.85), 1.4)
+	draw_circle(at, 2.0, color)
+
+
+func _city_safe_position(at: Vector2) -> Vector2:
+	var safe := Vector2(clampf(at.x, 24.0, 616.0), clampf(at.y, 160.0, 305.0))
+	if safe.x < 252.0 and safe.y > 208.0:
+		safe.y = 208.0
+	return safe
+
+
+func _city_slide_position(at: Vector2) -> Vector2:
+	var bounded := Vector2(clampf(at.x, 24.0, 616.0), clampf(at.y, 160.0, 305.0))
+	if _city_walkable(bounded):
+		return bounded
+	var horizontal := Vector2(bounded.x, hero.position.y)
+	if _city_walkable(horizontal):
+		return horizontal
+	var vertical := Vector2(hero.position.x, bounded.y)
+	if _city_walkable(vertical):
+		return vertical
+	return hero.position
+
+
+func _city_walkable(at: Vector2) -> bool:
+	return at.x >= 24.0 and at.x <= 616.0 and at.y >= 160.0 and at.y <= 305.0 and not (at.x < 252.0 and at.y > 208.0)
 
 
 func _draw_outskirts() -> void:
@@ -223,10 +270,27 @@ func _draw_enemy() -> void:
 
 func _build_actors() -> void:
 	hero = Sprite2D.new()
-	hero.texture = HERO_SPRITE_FEMALE if AppState.hero_appearance == "female" else HERO_SPRITE_MALE
-	hero.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-	hero.scale = Vector2(2, 2)
-	hero.position = SPAWN
+	if destination_id == "scifi.city":
+		hero.texture = CITY_HERO_FEMALE if AppState.hero_appearance == "female" else CITY_HERO_MALE
+		hero.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
+		hero.scale = Vector2(0.054, 0.054)
+		hero.offset = Vector2(0, -704)
+		hero.position = CITY_SPAWN
+		hero.z_index = int(hero.position.y)
+		city_npc = Sprite2D.new()
+		city_npc.texture = CITY_LIANG_XU
+		city_npc.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
+		city_npc.scale = Vector2(0.054, 0.054)
+		city_npc.offset = Vector2(0, -704)
+		city_npc.position = npc_position
+		city_npc.z_index = int(npc_position.y)
+		city_npc.visible = not AppState.recruited_members.has(recruit_id)
+		add_child(city_npc)
+	else:
+		hero.texture = HERO_SPRITE_FEMALE if AppState.hero_appearance == "female" else HERO_SPRITE_MALE
+		hero.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+		hero.scale = Vector2(2, 2)
+		hero.position = SPAWN
 	add_child(hero)
 
 
@@ -374,6 +438,8 @@ func _refresh_text() -> void:
 	enemy_label.text = AppState.text_for("enemy_label")
 	npc_label.text = AppState.member_name(recruit_id)
 	npc_label.visible = not AppState.recruited_members.has(recruit_id)
+	if city_npc != null:
+		city_npc.visible = npc_label.visible
 	records_label.text = AppState.text_for("relic_marker")
 	records_label.visible = destination_id == "scifi.ruins" and not AppState.ji_records_checked
 	station_label.visible = destination_id != "scifi.ruins"
