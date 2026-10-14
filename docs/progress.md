@@ -26,6 +26,7 @@ Last updated: 2026-10-13
 - M7 machine-bypass tracking now requires the player to move into the bypass zone. Loading or returning from a survey inside that zone no longer records a bypass merely because the scene appears; M2 and M7 route checks cover the change. The human timed playthrough is still outstanding.
 - The game bible production view now has a local playtest launch control. It opens the visible Godot game through the existing launcher, prevents duplicate launches, reports running/completed/no-report status, and refreshes recorded runs when the game closes. The launcher scans only new validated receipts and copies them into `outputs/`. The launch button is available in the current local panel at port 18726; a real timed playthrough has not yet been performed.
 - M7 now has one optional, returnable field station per science-region location. Liang Xu, Zhao Ling and Ji Cheng each use a distinct personal field ability after recruitment; the first use gives that companion 4 JP and 2 bond, records a bilingual finding, writes an autosave, and appears in the playtest receipt. Locked, completed, replay and save/load paths pass in the two-route smoke check. Five separate 640×360 captures were reviewed. The 25–35 minute content target still needs actual playtesting.
+- The game bible's launch button was exercised from its live browser panel: it opened a visible Godot game window, showed `running`, and returned to `no_report` after that test window was closed before any report. No receipt was fabricated. Older panels now link directly to the current launch-capable panel. This validates launch and early-exit behavior, not the full playthrough or receipt-copy path.
 
 ## Milestones Checklist
 
@@ -69,6 +70,7 @@ Last updated: 2026-10-13
 - [x] Prevent scene return inside the machine-bypass zone from creating a false observation.
 - [x] Start a local timed playtest from the game bible and show its completion status.
 - [x] Add three optional companion field abilities that reward return exploration and persist across saves.
+- [x] Verify the browser's playtest launch, visible game window and no-report exit state.
 - [ ] Time a fresh start-to-finish playthrough and fix any blockers or text overflow.
 
 ### Phase M8 - Acceptance and tuning
