@@ -1,0 +1,85 @@
+{
+  "schema": "segmented-walk-pose-table/1",
+  "project": "rpg-2-star-ocean-the-second",
+  "character": "protagonist-female",
+  "direction": "south",
+  "status": "technical feasibility input only; not art; not approved; not runtime",
+  "memo": "docs/character-visuals/rpg-2-star-ocean-the-second_character-visuals_art-pipeline-decision-memo_m8-v01_20261014-165532-0cc81856.md",
+  "master": {
+    "path": "game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-lanczosquant-pilot_m8-v01_20261014-212322-b9fd58f7.png",
+    "sha256": "738c08c1f4ca967dee325dfeefe6155272366b5e1237f4822ad6a5a2daa643be",
+    "role": "PROVISIONAL technical input. The user has not chosen BOX vs LANCZOS vs neither; this experiment may be discarded."
+  },
+  "cell": [80, 112],
+  "ground_pin": [40, 104],
+  "sprite2d_scale": 0.5,
+  "conventions": {
+    "coordinates": "cell texels, x right, y down, rects are [x0, y0, x1, y1] inclusive",
+    "vl": "viewer-left (the character's right side; knee-guard leg, scarf tail, ponytail tuft)",
+    "vr": "viewer-right",
+    "bob": "whole-body integer y offset in texels, positive = down",
+    "foot_row": "lowest opaque row of that leg in the baked frame",
+    "shin_delta": "rows inserted (+, duplicated copies) or removed (-) inside the leg's shin band; derived as foot_row - idle_foot_row - bob and re-checked by the bake",
+    "swing_x": "integer x offset applied to leg rows from the shin-band midpoint downward (lifted foot tucks toward the centre line)"
+  },
+  "colour_classes": {
+    "teal": "G >= R + 10 and B >= R + 10",
+    "skin": "R >= 150 and R - B >= 60"
+  },
+  "layer_masks": {
+    "order_note": "Rules are applied in this order to opaque master texels; the first match owns the texel. Every opaque texel gets exactly one owner.",
+    "rules": [
+      {"part": "arm_vr", "rect": [49, 53, 56, 72], "colour_class": null},
+      {"part": "scarf_tail", "rect": [12, 50, 24, 72], "colour_class": "teal"},
+      {"part": "scarf_tail", "rect": [0, 73, 22, 111], "colour_class": null},
+      {"part": "leg_vl", "rect": [23, 73, 38, 111], "colour_class": null},
+      {"part": "leg_vr", "rect": [39, 73, 79, 111], "colour_class": null},
+      {"part": "bag", "rect": [45, 24, 59, 36], "colour_class": "teal"},
+      {"part": "arm_vl", "rect": [17, 44, 26, 53], "colour_class": "not_teal"},
+      {"part": "face_head", "rect": [26, 18, 45, 36], "colour_class": "skin_row_enclosed"},
+      {"part": "hair_ponytail", "rect": [0, 0, 46, 32], "colour_class": "not_teal"},
+      {"part": "hair_ponytail", "rect": [0, 33, 22, 49], "colour_class": "not_teal"},
+      {"part": "torso_coat", "rect": [0, 0, 79, 111], "colour_class": null}
+    ],
+    "skin_row_enclosed": "skin texels in the rect, plus any opaque texel lying between the leftmost and rightmost skin texel of the same row (eyes, brows, mouth)"
+  },
+  "ownership_keys": {
+    "knee_guard": {"owner_part": "leg_vl", "rect": [26, 75, 30, 81], "key_rgba": [255, 0, 0, 255], "declared_side": "viewer-left: centroid x < ground_pin x and all texels owned by leg_vl"},
+    "scarf_tail": {"owner_part": "scarf_tail", "rect": [0, 0, 79, 111], "key_rgba": [0, 255, 0, 255], "declared_side": "viewer-left: centroid x < ground_pin x"},
+    "ponytail": {"owner_part": "hair_ponytail", "rect": [0, 0, 79, 13], "key_rgba": [0, 0, 255, 255], "declared_side": "viewer-left of the head: centroid x < face_head centroid x"}
+  },
+  "z_order_back_to_front": ["occlusion_fill", "leg_vr", "leg_vl", "torso_coat", "bag", "hair_ponytail", "face_head", "scarf_tail", "arm_vl", "arm_vr"],
+  "occlusion_fill": {
+    "covers": "arm_vr idle footprint only",
+    "rule": "each arm_vr footprint texel takes the colour of the nearest torso_coat texel to its left in the same master row; placed with the body bob; visible only where arm_vr has moved away",
+    "classification": "synthesized fill (copied colour, displaced position); counted separately from hand edits"
+  },
+  "legs": {
+    "leg_vl": {"top_row": 73, "idle_foot_row": 100, "shin_band": [84, 94]},
+    "leg_vr": {"top_row": 73, "idle_foot_row": 103, "shin_band": [85, 96]}
+  },
+  "scarf_tail_sway": {"rows_from": 73, "note": "integer x offset for scarf_tail rows >= 73 (free-hanging tip only)"},
+  "pilot_motion": {
+    "speed_logical_px_per_s": 90,
+    "speed_note": "isolated experiment value only; NOT a game runtime decision (memo R2 still open)",
+    "step_length_logical_px": 20,
+    "cycle_length_logical_px": 40,
+    "phase_advance_logical_px": 5,
+    "frame_stepping": "distance-driven: phase = floor(distance / 5) mod 8",
+    "physics_hz": 60,
+    "screen_px_per_logical_px": 2
+  },
+  "phases": [
+    {"phase": 1, "name": "contact-vl", "stance": "leg_vl", "bob": 1, "leg_vl": {"foot_row": 104, "swing_x": 0}, "leg_vr": {"foot_row": 101, "swing_x": 0}, "arm_vr_dy": 1, "scarf_sway_x": 0},
+    {"phase": 2, "name": "down-vl", "stance": "leg_vl", "bob": 2, "leg_vl": {"foot_row": 103, "swing_x": 0}, "leg_vr": {"foot_row": 99, "swing_x": 0}, "arm_vr_dy": 1, "scarf_sway_x": 0},
+    {"phase": 3, "name": "passing-vl", "stance": "leg_vl", "bob": 1, "leg_vl": {"foot_row": 103, "swing_x": 0}, "leg_vr": {"foot_row": 98, "swing_x": -1}, "arm_vr_dy": 0, "scarf_sway_x": -1},
+    {"phase": 4, "name": "up-vl", "stance": "leg_vl", "bob": 0, "leg_vl": {"foot_row": 102, "swing_x": 0}, "leg_vr": {"foot_row": 100, "swing_x": 0}, "arm_vr_dy": -1, "scarf_sway_x": -1},
+    {"phase": 5, "name": "contact-vr", "stance": "leg_vr", "bob": 1, "leg_vl": {"foot_row": 101, "swing_x": 0}, "leg_vr": {"foot_row": 104, "swing_x": 0}, "arm_vr_dy": -1, "scarf_sway_x": 0},
+    {"phase": 6, "name": "down-vr", "stance": "leg_vr", "bob": 2, "leg_vl": {"foot_row": 99, "swing_x": 0}, "leg_vr": {"foot_row": 103, "swing_x": 0}, "arm_vr_dy": -1, "scarf_sway_x": 0},
+    {"phase": 7, "name": "passing-vr", "stance": "leg_vr", "bob": 1, "leg_vl": {"foot_row": 98, "swing_x": 1}, "leg_vr": {"foot_row": 103, "swing_x": 0}, "arm_vr_dy": 0, "scarf_sway_x": 1},
+    {"phase": 8, "name": "up-vr", "stance": "leg_vr", "bob": 0, "leg_vl": {"foot_row": 100, "swing_x": 0}, "leg_vr": {"foot_row": 102, "swing_x": 0}, "arm_vr_dy": 1, "scarf_sway_x": 1}
+  ],
+  "idle_phase": {"phase": 0, "name": "idle", "stance": "both", "bob": 0, "leg_vl": {"foot_row": 100, "swing_x": 0}, "leg_vr": {"foot_row": 103, "swing_x": 0}, "arm_vr_dy": 0, "scarf_sway_x": 0},
+  "arm_vl_note": "viewer-left hand grips the bag strap in the master; it moves only with the body bob (no swing)",
+  "ponytail_note": "rides rigidly with the head (bob only); no lag, so no hair junction is opened"
+}
