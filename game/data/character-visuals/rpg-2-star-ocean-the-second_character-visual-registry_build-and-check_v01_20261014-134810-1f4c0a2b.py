@@ -16,15 +16,22 @@ REMAINING = ROOT / "outputs/rpg-2-star-ocean-the-second_remaining-companions_cha
 
 SAMPLES = {
     "protagonist-male": {
-        "south": "game/assets/characters/directional-prototypes/rpg-2-star-ocean-the-second_protagonist-male_exploration-sprite-south_m8-draft_20261014-133644-a01be730.png",
-        "north": "game/assets/characters/directional-prototypes/rpg-2-star-ocean-the-second_protagonist-male_exploration-sprite-north_m8-draft_20261014-133644-d04e0b63.png",
+        "south": "game/assets/characters/native-prototypes/rpg-2-star-ocean-the-second_protagonist-male_native-idle-south_m8-v01_20261014-135316-4438515e.png",
+        "west": "game/assets/characters/native-prototypes/rpg-2-star-ocean-the-second_protagonist-male_native-idle-west_m8-v01_20261014-135316-2d359882.png",
+        "north": "game/assets/characters/native-prototypes/rpg-2-star-ocean-the-second_protagonist-male_native-idle-north_m8-v01_20261014-135316-2fa1bb39.png",
+        "east": "game/assets/characters/native-prototypes/rpg-2-star-ocean-the-second_protagonist-male_native-idle-east_m8-v01_20261014-135316-a23d4672.png",
     },
     "protagonist-female": {
-        "south": "game/assets/characters/directional-prototypes/rpg-2-star-ocean-the-second_protagonist-female_exploration-sprite-south_m8-draft_20261014-133644-b02ce841.png",
+        "south": "game/assets/characters/native-prototypes/rpg-2-star-ocean-the-second_protagonist-female_native-idle-south_m8-prototype_20261014-135400-3bacea6e.png",
+        "west": "game/assets/characters/native-prototypes/rpg-2-star-ocean-the-second_protagonist-female_native-idle-west_m8-prototype_20261014-135400-b023f47c.png",
+        "north": "game/assets/characters/native-prototypes/rpg-2-star-ocean-the-second_protagonist-female_native-idle-north_m8-prototype_20261014-135400-daa6122c.png",
+        "east": "game/assets/characters/native-prototypes/rpg-2-star-ocean-the-second_protagonist-female_native-idle-east_m8-prototype_20261014-135400-39d3f522.png",
     },
     "liang-xu": {
-        "south": "game/assets/characters/directional-prototypes/rpg-2-star-ocean-the-second_liang-xu_exploration-sprite-south_m8-draft_20261014-133644-c03dfa52.png",
-        "north": "game/assets/characters/directional-prototypes/rpg-2-star-ocean-the-second_liang-xu_exploration-sprite-north_m8-draft_20261014-133644-e05f1c74.png",
+        "south": "game/assets/characters/directional-prototypes/rpg-2-star-ocean-the-second_liang-xu_native-idle-south_m8-v03_20261014-175132-e17b4c09.png",
+        "west": "game/assets/characters/directional-prototypes/rpg-2-star-ocean-the-second_liang-xu_native-idle-west_m8-v03_20261014-175132-b52910e1.png",
+        "north": "game/assets/characters/directional-prototypes/rpg-2-star-ocean-the-second_liang-xu_native-idle-north_m8-v03_20261014-175132-c742d602.png",
+        "east": "game/assets/characters/directional-prototypes/rpg-2-star-ocean-the-second_liang-xu_native-idle-east_m8-v03_20261014-175132-d853a711.png",
     },
 }
 
@@ -78,9 +85,10 @@ def main() -> None:
                     "exists": (ROOT / source).is_file(),
                 },
                 "exploration": {
-                    "production_status": "directional_draft" if visual_id in SAMPLES else "not_started",
-                    "review_status": "rejected_for_runtime_sprite_use" if visual_id in SAMPLES else "pending",
+                    "production_status": "four_direction_native_idle_integrated" if visual_id in SAMPLES else "not_started",
+                    "review_status": "pending_walk_frames_and_art_approval" if visual_id in SAMPLES else "pending",
                     "directions": SAMPLES.get(visual_id, {}),
+                    **({"idle_frames": 4, "required_frames": 20} if visual_id in SAMPLES else {}),
                 },
                 "runtime_display": {"production_status": "not_started", "review_status": "pending"},
                 "combat": {"production_status": "not_started", "review_status": "pending"},
@@ -109,7 +117,7 @@ def main() -> None:
         for direction, asset in item["exploration"]["directions"].items():
             if direction not in result["direction_order"] or not (ROOT / asset).is_file():
                 failures.append(f"invalid direction sample {item['visual_id']} {direction}: {asset}")
-    print(f"visual variants={len(entries)} approved source={approval_counts['approved']} concept source={approval_counts['concept']} draft directions={sum(len(e['exploration']['directions']) for e in entries)}")
+    print(f"visual variants={len(entries)} approved source={approval_counts['approved']} concept source={approval_counts['concept']} native idle directions={sum(len(e['exploration']['directions']) for e in entries)}")
     if failures:
         raise SystemExit("\n".join(failures))
     print("registry source and sample files: PASS")

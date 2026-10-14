@@ -3,9 +3,7 @@ extends Node2D
 const HERO_SPRITE_MALE := preload("res://assets/characters/rpg-2-star-ocean-the-second_protagonist_exploration-sprite-male_m7_20261013-211119-a51e0b63.svg")
 const HERO_SPRITE_FEMALE := preload("res://assets/characters/rpg-2-star-ocean-the-second_protagonist_exploration-sprite-female_m7_20261013-211119-8c2d9e47.svg")
 const CITY_BACKGROUND := preload("res://assets/environments/rpg-2-star-ocean-the-second_scifi-city_environment-background_m8-v02_20261013-232003-48d0ab67.png")
-const CITY_HERO_MALE := preload("res://assets/characters/rpg-2-star-ocean-the-second_protagonist-male_exploration-cutout_m8-sample_20261013-231655-70b1e89d.png")
-const CITY_HERO_FEMALE := preload("res://assets/characters/rpg-2-star-ocean-the-second_protagonist-female_exploration-cutout_m8-sample_20261013-233258-e2c0419a.png")
-const CITY_LIANG_XU := preload("res://assets/characters/rpg-2-star-ocean-the-second_liang-xu_exploration-cutout_m8-sample_20261013-231655-2f45a173.png")
+const NativeIdle := preload("res://scripts/character_directional_idle.gd")
 const BATTLE_SCENE := preload("res://scenes/battle_arena.tscn")
 const CityNavigation := preload("res://scripts/city_navigation.gd")
 const MOVE_SPEED := 140.0
@@ -47,6 +45,7 @@ var city_npc: Sprite2D
 var city_canopy: Polygon2D
 var city_hero_silhouette: Sprite2D
 var city_occlusion_indicator: Label
+var city_facing := "south"
 var npc_position := Vector2.ZERO
 var recruit_id := ""
 var enemy_position := Vector2(-100, -100)
@@ -121,6 +120,8 @@ func _process(delta: float) -> void:
 	var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	var was_in_bypass_zone := hero.position.x > 545.0 and hero.position.y < 205.0
 	if direction != Vector2.ZERO:
+		if destination_id == "scifi.city":
+			_set_city_facing(direction)
 		var next_position := hero.position + direction * MOVE_SPEED * delta
 		if destination_id == "scifi.city":
 			next_position = _city_slide_position(next_position)
@@ -334,26 +335,28 @@ func _draw_enemy() -> void:
 	draw_rect(Rect2(enemy_position + Vector2(9, 11), Vector2(8, 7)), Color("#463942"))
 
 
-func _fit_city_actor(actor: Sprite2D) -> void:
-	# Anchor each cutout by its visible bounds, not shared transparent padding.
-	var bounds := actor.texture.get_image().get_used_rect()
-	var factor := 44.0 / maxf(float(bounds.size.y), 1.0)
-	actor.scale = Vector2(factor, factor)
-	actor.offset = actor.texture.get_size() * 0.5 - Vector2(bounds.position.x + bounds.size.x * 0.5, bounds.end.y)
+func _set_city_facing(direction: Vector2) -> void:
+	var next_facing := "east" if direction.x > 0.0 else "west"
+	if absf(direction.y) >= absf(direction.x):
+		next_facing = "south" if direction.y > 0.0 else "north"
+	if next_facing == city_facing:
+		return
+	city_facing = next_facing
+	hero.texture = NativeIdle.texture_for("protagonist-" + AppState.hero_appearance, city_facing)
 
 
 func _build_actors() -> void:
 	hero = Sprite2D.new()
 	if destination_id == "scifi.city":
-		hero.texture = CITY_HERO_FEMALE if AppState.hero_appearance == "female" else CITY_HERO_MALE
-		hero.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
-		_fit_city_actor(hero)
+		hero.texture = NativeIdle.texture_for("protagonist-" + AppState.hero_appearance, "south")
+		hero.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+		hero.offset = Vector2(0, -20)
 		hero.position = CITY_SPAWN
 		hero.z_index = int(hero.position.y)
 		city_npc = Sprite2D.new()
-		city_npc.texture = CITY_LIANG_XU
-		city_npc.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
-		_fit_city_actor(city_npc)
+		city_npc.texture = NativeIdle.texture_for("liang-xu", "south")
+		city_npc.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+		city_npc.offset = Vector2(0, -20)
 		city_npc.position = npc_position
 		city_npc.z_index = int(npc_position.y)
 		city_npc.visible = not AppState.recruited_members.has(recruit_id)

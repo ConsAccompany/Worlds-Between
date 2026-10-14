@@ -177,6 +177,19 @@
       <div class="stack">${state.bible.chapters.filter(c=>[8,9].includes(c.number)).map(c=>`<details class="group" data-production-chapter="${c.id}"><summary>${esc(c.title)}</summary><div class="document">${markdown(c.body)}${sourceLine(c.source)}</div></details>`).join('')}</div>
       <div class="section-label">计划与完整实施顺序</div>
       <div class="card"><a href="/source/mvp" target="_blank" rel="noopener">打开 MVP 实施计划</a> · <a href="/source/brief" target="_blank" rel="noopener">打开完整设计稿</a></div>`;
+    const currentCityCaption=content.querySelector('.visual-sample figcaption');
+    if(currentCityCaption)currentCityCaption.textContent='Godot 可玩科技城 · 主角男版与梁序，原生像素待机样板；方向行走帧与画面验收仍待完成。';
+    const visualCard=content.querySelector('.visual-sample')?.parentElement;
+    if(visualCard){
+      for(const sample of state.bible.characterVisualReview?.previews||[]){
+        if(sample.file===citySample?.file)continue;
+        const figure=document.createElement('figure');figure.className='visual-sample';
+        const link=document.createElement('a');link.href=sample.file;link.target='_blank';link.rel='noopener';
+        const img=document.createElement('img');img.src=sample.file;img.alt=sample.label+' 的游戏尺寸像素待机样板';img.loading='lazy';
+        const caption=document.createElement('figcaption');caption.textContent=sample.label+' · '+sample.caption;
+        link.append(img);figure.append(link,caption);visualCard.append(figure);
+      }
+    }
     content.querySelector('#refresh-playtests').addEventListener('click',()=>refreshPlaytests().catch(()=>{document.getElementById('footer-status').textContent='试玩记录暂时无法读取';}));
     content.querySelector('#open-visual-assets').addEventListener('click',()=>{state.assetScope='mvp';state.openGroups.add('characters');state.openGroups.add('world');state.openGroups.delete('characters.runtime-displays');state.openGroups.delete('world.scene-quality');navigate('assets');});
     content.querySelector('#start-playtest').addEventListener('click',startPlaytest);

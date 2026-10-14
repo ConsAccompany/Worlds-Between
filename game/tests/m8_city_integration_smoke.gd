@@ -2,6 +2,7 @@ extends SceneTree
 
 # Functional sample checks. Passing does not approve M8 art or human pacing.
 var captures: Array[String] = []
+const NativeIdle := preload("res://scripts/character_directional_idle.gd")
 
 
 func _initialize() -> void:
@@ -64,11 +65,23 @@ func _run() -> void:
 		var actor: Sprite2D = area.get("hero")
 		for sprite: Sprite2D in [actor, area.get("city_npc")]:
 			var bounds := sprite.texture.get_image().get_used_rect()
-			if not _check(absf(sprite.offset.y + bounds.end.y - sprite.texture.get_height() * 0.5) < 0.01, "visible foot anchoring " + appearance):
+			if not _check(sprite.texture.get_size() == Vector2(32, 48) and sprite.scale == Vector2.ONE and sprite.texture_filter == CanvasItem.TEXTURE_FILTER_NEAREST, "native pixel actor " + appearance):
 				return
-			if not _check(absf(bounds.size.y * sprite.scale.y - 44.0) < 0.01, "consistent provisional cutout height " + appearance):
+			if not _check(absf(sprite.offset.y + 44.0 - sprite.texture.get_height() * 0.5) < 0.01, "native foot anchoring " + appearance):
 				return
-		await _capture(appearance + "-entry")
+			if not _check(bounds.size.y >= 38 and bounds.size.y <= 44, "native visible height " + appearance):
+				return
+		for facing in ["south", "west", "north", "east"]:
+			var motion := Vector2.ZERO
+			match facing:
+				"west": motion = Vector2.LEFT
+				"north": motion = Vector2.UP
+				"east": motion = Vector2.RIGHT
+				_: motion = Vector2.DOWN
+			area._set_city_facing(motion)
+			if not _check(actor.texture == NativeIdle.texture_for("protagonist-" + appearance, facing), "hero directional idle " + appearance + " " + facing):
+				return
+			await _capture(appearance + "-" + facing + "-entry")
 		for target in [Vector2(285, 267), Vector2(378, 181), Vector2(120, 187), Vector2(282, 180), Vector2(558, 166), Vector2(470, 247)]:
 			if not _check(_walk(area, target), "movement reaches city hotspot " + str(target)):
 				return
@@ -115,7 +128,9 @@ func _run() -> void:
 	var directory := OS.get_environment("WB_CITY_EVIDENCE_DIR")
 	if not directory.is_empty() and not captures.is_empty():
 		var manifest := {"purpose": "Automated functional and viewport evidence", "artAccepted": false, "humanPlaytest": false, "canvas": [640, 360], "captures": captures}
-		var file := FileAccess.open(directory.path_join("city-check-manifest.json"), FileAccess.WRITE)
+		var stamp := Time.get_datetime_string_from_system(true).replace("-", "").replace(":", "").replace("T", "-")
+		var manifest_name := "rpg-2-star-ocean-the-second_scifi-city_native-idle-capture-manifest_m8-v01_%s-%08x.json" % [stamp, randi()]
+		var file := FileAccess.open(directory.path_join(manifest_name), FileAccess.WRITE)
 		file.store_string(JSON.stringify(manifest, "\t") + "\n")
 	print("M8_CITY_INTEGRATION_OK")
 	quit(0)
