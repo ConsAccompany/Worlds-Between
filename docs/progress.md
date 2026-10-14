@@ -91,9 +91,12 @@ Last updated: 2026-10-13
 ### Phase M8 - Character and environment art
 
 - [x] Revise MVP scope, asset inventory and side panel gates for 52 character variants and eleven science-region scene visuals.
+- [x] Generate two city background candidates and separate protagonist/Liang Xu cutouts; import the selected city and both characters into a 1280×720 Godot preview. Inspect the actual engine screenshot and show it in the game bible production view. The city reads as practical high-tech restoration; the characters remain distinguishable by hair and outfit.
 - [ ] Approve the character and city visual sample before batch production.
 - [ ] Integrate and review the 52 in-game displays and four-direction sprites.
 - [ ] Finish the playable team's battle art and the eleven scene visuals.
+
+The M8 preview is a static visual-direction candidate. Its background has no separate collision, occlusion or interaction layers, and the two character cutouts do not have directional animation. The playable science-region scene still uses the earlier functional artwork. The next art pass should resolve viewing angle and foot anchoring before using these assets in movement.
 
 ### Phase M9 - Integrated acceptance
 

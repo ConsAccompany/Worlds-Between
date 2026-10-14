@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/rpg-2-star-ocean-the-second_scifi-city_visual-preview_m8_20261013-231655-31c1e886.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/environments/rpg-2-star-ocean-the-second_scifi-city_environment-background_m8-v02_20261013-232003-48d0ab67.png" id="2_city"]
+[ext_resource type="Texture2D" path="res://assets/characters/rpg-2-star-ocean-the-second_protagonist-male_exploration-cutout_m8-sample_20261013-231655-70b1e89d.png" id="3_hero"]
+[ext_resource type="Texture2D" path="res://assets/characters/rpg-2-star-ocean-the-second_liang-xu_exploration-cutout_m8-sample_20261013-231655-2f45a173.png" id="4_liang"]
+
+[node name="ScifiCityVisualPreview" type="Node2D"]
+texture_filter = 2
+script = ExtResource("1_script")
+
+[node name="City" type="Sprite2D" parent="."]
+position = Vector2(640, 360)
+scale = Vector2(0.76555, 0.76514)
+texture = ExtResource("2_city")
+
+[node name="LiangXu" type="Sprite2D" parent="."]
+position = Vector2(812, 494)
+scale = Vector2(0.102, 0.102)
+texture = ExtResource("4_liang")
+
+[node name="Protagonist" type="Sprite2D" parent="."]
+position = Vector2(584, 546)
+scale = Vector2(0.108, 0.108)
+texture = ExtResource("3_hero")
