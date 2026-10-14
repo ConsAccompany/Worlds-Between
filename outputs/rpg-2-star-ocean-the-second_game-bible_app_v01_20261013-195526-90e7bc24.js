@@ -3,7 +3,7 @@
   const search = document.getElementById('search');
   const nav = [...document.querySelectorAll('.main-nav button')];
   const state = {
-    bible:null, inventory:null, progress:null, view:'home', query:'',
+    bible:null, inventory:null, progress:null, playtests:[], view:'home', query:'',
     chapter:'chapter-3', character:'hero', board:'全部板块',
     group:'全部来源', assetScope:'all', openGroups:new Set(['characters']),
   };
@@ -129,17 +129,27 @@
       M7:['可玩内容','科技板块三地探索、六处勘察空间、九组证据关联、六段伙伴交流、三位伙伴招募与回城汇报已连通。','不用开发工具通关；两种探索和招募顺序可行；中英文显示完整，并实测 25–35 分钟内容长度。'],
       M8:['验收与调整','完整试玩、记录转场时间和易用性问题，并修复阻碍。','两次新存档完整试玩无阻碍；存档和回访招募通过核验。'],
     };
+    const place={'scifi.city':'城市','scifi.outskirts':'城外','scifi.ruins':'遗址'};
+    const playtestRows=state.playtests.map(run=>{
+      const seconds=Math.round(run.durationSeconds);
+      const elapsed=`${Math.floor(seconds/60)} 分 ${String(seconds%60).padStart(2,'0')} 秒`;
+      const route=run.visits.map(id=>place[id]).filter(Boolean).join(' → ')||'未记录';
+      return `<div class="playtest-run"><strong>${esc(elapsed)}</strong><span class="muted small">${esc(run.recordedAt)} · ${run.language==='en'?'英文':'中文'}</span><div class="small">路线：${esc(route)}</div><div class="small muted">已招募 ${run.recruited.length}/3 · 完成调查 ${run.surveysCompleted}/3 · 同行交流 ${run.conversationsHeard}/6 · 战斗 ${run.battles} 场 · 错误证据关联 ${run.wrongEvidencePairs} 次 · 错误研判 ${run.wrongJudgments} 次</div><div class="small muted receipt-name">原始记录：outputs/${esc(run.id)}</div></div>`;
+    }).join('');
     const pct=Math.round(100*done/p.steps.length);
     content.innerHTML=`${head('制作路线','MVP 阶段状态与尚待细化的完整游戏设计',badge(done+' / '+p.steps.length+' 阶段','accent'))}
       <div class="card"><div class="step-top"><strong>MVP 完成情况</strong><span>${pct}%</span></div><div class="meter" role="progressbar" aria-valuemin="0" aria-valuemax="${p.steps.length}" aria-valuenow="${done}"><span style="width:${pct}%"></span></div><p class="muted small">当前：${current?esc(current.id+' · '+copy[current.id][0]):'全部阶段已完成'}</p></div>
       <div class="section-label">分步实施</div>
       <div class="stack">${p.steps.map(step=>`<details class="group"><summary>${esc(step.id+' · '+copy[step.id][0])} <span class="group-count">${esc(status[step.status]||step.status)}</span></summary><div class="card"><p>${esc(copy[step.id][1])}</p><strong>验收标准</strong><p>${esc(copy[step.id][2])}</p>${step.details?.length?'<strong>当前内容</strong><ul>'+step.details.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>':''}${step.remaining?.length?'<strong>尚需完成</strong><ul>'+step.remaining.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>':''}${step.evidence?.length?'<strong>已有依据</strong><ul>'+step.evidence.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>':''}</div></details>`).join('')}</div>
+      <div class="section-label">M7 试玩记录</div>
+      <section class="card"><div class="step-top"><h3>本地汇报记录</h3><button type="button" class="chip" id="refresh-playtests">刷新记录</button></div><p class="muted small">从新档完成城市汇报并退出游戏后，本地试玩入口会将记录带到这里。自动测试用时不计为真实试玩验收。</p><div class="stack">${playtestRows||'<div class="empty">尚无正式试玩记录。M7 仍需两次不同顺序的实际计时试玩。</div>'}</div></section>
       <div class="section-label">仍待确定</div>
       <div class="stack">${state.bible.openQuestions.map(q=>`<div class="card"><h3>${esc(q.title)}</h3><p>${esc(q.detail)}</p></div>`).join('')}</div>
       <div class="section-label">设计稿中的实施顺序与待细化清单</div>
       <div class="stack">${state.bible.chapters.filter(c=>[8,9].includes(c.number)).map(c=>`<details class="group" data-production-chapter="${c.id}"><summary>${esc(c.title)}</summary><div class="document">${markdown(c.body)}${sourceLine(c.source)}</div></details>`).join('')}</div>
       <div class="section-label">计划与完整实施顺序</div>
       <div class="card"><a href="/source/mvp" target="_blank" rel="noopener">打开 MVP 实施计划</a> · <a href="/source/brief" target="_blank" rel="noopener">打开完整设计稿</a></div>`;
+    content.querySelector('#refresh-playtests').addEventListener('click',()=>refreshPlaytests().catch(()=>{document.getElementById('footer-status').textContent='试玩记录暂时无法读取';}));
   }
   function renderAssets() {
     const inventory=state.inventory;
@@ -225,10 +235,16 @@
     const progress=await response.json();
     if(state.progress?.updatedAt!==progress.updatedAt){state.progress=progress;render();}
   }
+  async function refreshPlaytests(){
+    const response=await fetch('/playtests',{cache:'no-store'});if(!response.ok)throw new Error('Playtests unavailable');
+    const data=await response.json();
+    const runs=Array.isArray(data.runs)?data.runs:[];
+    if(JSON.stringify(state.playtests)!==JSON.stringify(runs)){state.playtests=runs;if(state.view==='production'&&!state.query)render();}
+  }
   nav.forEach(button=>button.addEventListener('click',()=>navigate(button.dataset.view)));
   search.addEventListener('input',()=>{state.query=search.value.trim();render();});
-  document.addEventListener('visibilitychange',()=>{if(!document.hidden){refreshInventory().catch(()=>{});refreshProgress().catch(()=>{});}});
-  setInterval(()=>{if(!document.hidden){refreshProgress().catch(()=>{});refreshInventory().catch(()=>{});}},10000);
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden){refreshInventory().catch(()=>{});refreshProgress().catch(()=>{});refreshPlaytests().catch(()=>{});}});
+  setInterval(()=>{if(!document.hidden){refreshProgress().catch(()=>{});refreshInventory().catch(()=>{});refreshPlaytests().catch(()=>{});}},10000);
   Promise.all([
     fetch('/bible',{cache:'no-store'}).then(r=>r.ok?r.json():Promise.reject()),
     fetch('/inventory',{cache:'no-store'}).then(r=>r.ok?r.json():Promise.reject()),
@@ -239,5 +255,6 @@
     document.getElementById('pitch').textContent=bible.pitch;
     document.getElementById('footer-status').textContent=bible.characters.length+' 份人物档案 · '+bible.chapters.length+' 个设计章节';
     render();
+    refreshPlaytests().catch(()=>{});
   }).catch(()=>{content.innerHTML='<div class="empty">游戏圣经暂时无法读取。请确认本地项目面板已启动。</div>';});
 })();

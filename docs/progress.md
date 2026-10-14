@@ -21,6 +21,7 @@ Last updated: 2026-10-13
 - M7 evidence review now requires three clue pairs per destination before its final judgment. There are nine bilingual pair explanations across the slice, and correct/incorrect pair attempts are retryable. Link progress saves and loads. A pacing audit found only about 31 seconds of minimum walking inside all six survey rooms at the current movement speed; this is a mechanical lower bound, not a playthrough duration. Content length remains unverified.
 - M7 adds six optional bilingual party conversations: three individual reflections and three two-person exchanges unlocked by recruitment and completed surveys. Topics remain available on return; first completion grants 3 prototype bond to each participant and autosaves, while replay grants no extra bond. The available-topic and dialogue screens were visually reviewed. This strengthens the recruitment loop but is not a substitute for a timed playthrough.
 - M7 now writes a local JSON playtest receipt at the first city report, including elapsed time, event order, recruits, surveys, conversations heard before report, and retry counts. A Windows launcher starts the game with the bundled Godot executable and copies the receipt into `outputs/` after the game closes. The M7 smoke test checks receipt contents for both route orders. No real timed playthrough has been recorded yet.
+- The game bible's production view now reads local M7 playtest receipts and shows elapsed time, visit order, recruitment, surveys, conversations, battles, and retry counts. The panel remains empty until a completed local run is copied into `outputs/`; automated smoke receipts stay in isolated test storage.
 
 ## Milestones Checklist
 
@@ -59,6 +60,7 @@ Last updated: 2026-10-13
 - [x] Add nine evidence pair deductions, bilingual feedback and save recovery.
 - [x] Add six non-missable companion conversations with one-time bond and save recovery.
 - [x] Add a local playtest launcher and verify the report receipt for both route orders.
+- [x] Show real local playtest receipts in the game bible production view.
 - [ ] Time a fresh start-to-finish playthrough and fix any blockers or text overflow.
 
 ### Phase M8 - Acceptance and tuning

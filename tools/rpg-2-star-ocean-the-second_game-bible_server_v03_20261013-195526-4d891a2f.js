@@ -3,8 +3,9 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const output = path.resolve(__dirname, '..', 'outputs');
-const port = 18724;
+const port = Number(process.env.WORLDS_BETWEEN_BIBLE_PORT || 18724);
 const inventoryName = 'rpg-2-star-ocean-the-second_asset-inventory_state_v01_20261013-191033-7d1e0a8b.json';
+const receiptPattern = /^rpg-2-star-ocean-the-second_scifi-region_playtest-receipt_m7_\d{8}-\d{6}-[0-9a-f]{8}\.json$/;
 const routes = {
   '/': ['rpg-2-star-ocean-the-second_game-bible_widget_v03_20261013-195526-8e5a1c43.html','text/html; charset=utf-8'],
   '/bible.css': ['rpg-2-star-ocean-the-second_game-bible_styles_v01_20261013-195526-6c13fa09.css','text/css; charset=utf-8'],
@@ -38,6 +39,23 @@ function saveCheck(request,response) {
     } catch(_) {respond(response,400,'Could not save check');}
   });
 }
+function playtestSummaries() {
+  const files = fs.readdirSync(output).filter(name => receiptPattern.test(name)).sort().reverse().slice(0,20);
+  const runs=[];
+  for (const name of files) {
+    try {
+      const file=path.join(output,name);
+      if (fs.statSync(file).size>65536) continue;
+      const receipt=JSON.parse(fs.readFileSync(file,'utf8'));
+      if (receipt.schemaVersion!==1 || receipt.project!=='rpg-2-star-ocean-the-second' || receipt.milestone!=='M7' || receipt.reportCompleted!==true || !Number.isFinite(receipt.durationSeconds) || receipt.durationSeconds<0 || !Array.isArray(receipt.events)) continue;
+      const visits=[];
+      for (const event of receipt.events) if (event?.type==='visit' && ['scifi.city','scifi.outskirts','scifi.ruins'].includes(event.destination) && !visits.includes(event.destination)) visits.push(event.destination);
+      const retryTotal=counts => counts && typeof counts==='object' ? Object.values(counts).reduce((sum,value)=>sum+(Number.isInteger(value)&&value>0?value:0),0) : 0;
+      runs.push({id:name,recordedAt:String(receipt.recordedAt||''),durationSeconds:receipt.durationSeconds,language:receipt.language==='en'?'en':'zh',visits,recruited:Array.isArray(receipt.recruited)?receipt.recruited.filter(id=>typeof id==='string').slice(0,3):[],surveysCompleted:Array.isArray(receipt.surveysCompleted)?receipt.surveysCompleted.length:0,conversationsHeard:Array.isArray(receipt.conversationsHeard)?receipt.conversationsHeard.length:0,wrongEvidencePairs:retryTotal(receipt.wrongEvidencePairs),wrongJudgments:retryTotal(receipt.wrongJudgments),battles:receipt.events.filter(event=>event?.type==='battle_start').length});
+    } catch (_) { /* A damaged receipt does not hide the other runs. */ }
+  }
+  return runs;
+}
 http.createServer((request,response)=>{
   let pathname;
   try {pathname=new URL(request.url,'http://127.0.0.1').pathname;}
@@ -45,6 +63,7 @@ http.createServer((request,response)=>{
   if(pathname==='/asset-check'&&request.method==='POST')return saveCheck(request,response);
   if(request.method!=='GET')return respond(response,405,'Method not allowed');
   if(pathname==='/health')return respond(response,200,'ok');
+  if(pathname==='/playtests')return respond(response,200,JSON.stringify({runs:playtestSummaries()}),'application/json; charset=utf-8');
   if(pathname.startsWith('/assets/')){
     let filename;
     try {filename=decodeURIComponent(pathname.slice('/assets/'.length));}
