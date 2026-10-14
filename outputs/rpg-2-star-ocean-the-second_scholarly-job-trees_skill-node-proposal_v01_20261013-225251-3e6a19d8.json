@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "project": "rpg-2-star-ocean-the-second",
+  "status": "设计提案，尚待玩家确认",
+  "scope": "工程、机偶、医疗、药剂四条研学系列的七节点职业技能树",
+  "rules": [
+    "工程装置和机偶是短时技能效果，不占五名上场角色的位置。",
+    "药剂职业在战斗中产生的临时配方不会进入背包，也不会替代商会或道具经济。",
+    "战斗结束时仍倒下者按上限 10% 复活；若已在战斗中被复苏，则作为存活者在剩余数值上加上限 20%。"
+  ],
+  "trees": [
+    {"seriesId":"engineering","name":"工程","nodes":[
+      {"id":"engineering_field_plate","tier":1,"name":"护板架设","type":"主动","energy":18,"tags":["工程","守护"],"effect":"为一名队友架设短时护板，吸收一次有限伤害；不形成战场障碍。"},
+      {"id":"engineering_maintenance","tier":2,"branch":"维保","name":"现场维保","type":"被动","energy":0,"tags":["工程","修复"],"effect":"工程装置首次承受攻击后自动修复少量耐久，每个装置只触发一次。"},
+      {"id":"engineering_weakpoint_disassembly","tier":2,"branch":"拆解","name":"弱点拆解","type":"主动","energy":22,"tags":["工程","破甲"],"effect":"分析并打击目标结构，短时降低护甲；对自动机械额外延长分析窗口。"},
+      {"id":"engineering_module_swap","tier":3,"name":"模块重组","type":"主动","energy":26,"tags":["工程","应变"],"effect":"把仍有效的护板改为一次短距脉冲；若护板已损坏，则先生成基础脉冲。"},
+      {"id":"engineering_energy_bypass","tier":4,"branch":"维保","name":"能源旁路","type":"主动","energy":28,"tags":["工程","能量"],"effect":"将未用完的工程装置回收，按剩余耐久返还少量能量；每次装置仅可回收一次。"},
+      {"id":"engineering_safe_override","tier":4,"branch":"拆解","name":"安全覆写","type":"被动","energy":0,"tags":["工程","控场"],"effect":"成功拆解敌人护甲后，下一次工程脉冲提高打断机会；对非机械敌人仍有效。"},
+      {"id":"engineering_horizon_frame","tier":5,"name":"超域构架","type":"主动","energy":48,"tags":["工程","范围"],"effect":"为最多五名上场角色分配独立短时护板，并在护板自然结束时产生一次微弱脉冲。"}
+    ]},
+    {"seriesId":"automata","name":"机偶","nodes":[
+      {"id":"automata_companion_unit","tier":1,"name":"随行机偶","type":"主动","energy":16,"tags":["机偶","协同"],"effect":"部署一台短时机偶攻击当前目标；机偶不占上场角色位，不能独立获得经验。"},
+      {"id":"automata_escort_mode","tier":2,"branch":"护航","name":"护航模式","type":"主动","energy":20,"tags":["机偶","守护"],"effect":"令现有机偶优先保护一名队友，并减轻其下一次受到的攻击。"},
+      {"id":"automata_pursuit_mode","tier":2,"branch":"追击","name":"追击模式","type":"主动","energy":20,"tags":["机偶","标记"],"effect":"令现有机偶优先追击被标记敌人；标记消失后恢复基础 AI。"},
+      {"id":"automata_sync_protocol","tier":3,"name":"同步协议","type":"被动","energy":0,"tags":["机偶","指令"],"effect":"同一机偶在护航与追击之间切换时，下一次模式指令少耗能量，短时间内只能触发一次。"},
+      {"id":"automata_three_unit_line","tier":4,"branch":"护航","name":"三机编队","type":"主动","energy":34,"tags":["机偶","范围"],"effect":"部署三台小型机偶分别护住三名队友；每台承受一次攻击后失效。"},
+      {"id":"automata_emergency_recall","tier":4,"branch":"追击","name":"紧急回收","type":"主动","energy":24,"tags":["机偶","能量"],"effect":"回收仍在场的机偶并按其剩余时间返还少量能量，同时结束其所有指令。"},
+      {"id":"automata_shared_mind","tier":5,"name":"共生机魂","type":"主动","energy":48,"tags":["机偶","协同"],"effect":"让一台主机偶短时执行护航与追击的组合响应；优先级仍服从玩家对队友下达的指令。"}
+    ]},
+    {"seriesId":"medicine","name":"医疗","nodes":[
+      {"id":"medicine_first_aid","tier":1,"name":"急救包扎","type":"主动","energy":18,"tags":["医疗","治疗"],"effect":"立即恢复一名队友的部分生命；对倒下者无效。"},
+      {"id":"medicine_vital_monitor","tier":2,"branch":"监测","name":"生命监测","type":"被动","energy":0,"tags":["医疗","预警"],"effect":"提示生命比例最低的队友下一次可能造成重伤的攻击，并强化对其施放的下一次急救。"},
+      {"id":"medicine_clean_wound","tier":2,"branch":"净创","name":"净创处理","type":"主动","energy":20,"tags":["医疗","净化"],"effect":"移除一名队友身上一种常见异常状态，并恢复少量生命。"},
+      {"id":"medicine_field_revival","tier":3,"name":"战地复苏","type":"主动","energy":32,"tags":["医疗","复苏"],"effect":"让一名倒下的队友在当前战斗中恢复少量生命并重新行动；有较长使用间隔。"},
+      {"id":"medicine_group_triage","tier":4,"branch":"监测","name":"群体分诊","type":"主动","energy":38,"tags":["医疗","范围"],"effect":"优先治疗两名生命比例最低的队友，并给其他上场成员少量恢复。"},
+      {"id":"medicine_stable_care","tier":4,"branch":"净创","name":"稳态照护","type":"被动","energy":0,"tags":["医疗","抗性"],"effect":"净创处理成功移除异常后，使目标短时间内对同类异常获得额外抗性。"},
+      {"id":"medicine_life_resonance","tier":5,"name":"生命共振","type":"主动","energy":50,"tags":["医疗","范围"],"effect":"恢复上场队友的生命并为仍存活者提供短时护盾；倒下者需要先被复苏。"}
+    ]},
+    {"seriesId":"alchemy","name":"药剂","nodes":[
+      {"id":"alchemy_reaction_vial","tier":1,"name":"反应瓶","type":"主动","energy":16,"tags":["药剂","攻击"],"effect":"掷出战斗中临时调制的反应瓶，造成小额伤害并施加短时反应标记；不会生成背包道具。"},
+      {"id":"alchemy_neutralizer","tier":2,"branch":"调和","name":"中和剂","type":"主动","energy":20,"tags":["药剂","净化"],"effect":"消除一名队友的一种常见异常状态，并降低其下一次同类异常持续时间。"},
+      {"id":"alchemy_catalyst","tier":2,"branch":"催化","name":"催化滴剂","type":"主动","energy":22,"tags":["药剂","支援"],"effect":"强化一名队友下一次带元素标签的技能效果；不改变技能所属源系。"},
+      {"id":"alchemy_batch_memory","tier":3,"name":"批次记忆","type":"被动","energy":0,"tags":["药剂","分析"],"effect":"同一场战斗连续使用两种不同药剂技能后，第三次药剂技能少耗少量能量。"},
+      {"id":"alchemy_compound_burst","tier":4,"branch":"催化","name":"复合反应","type":"主动","energy":32,"tags":["药剂","范围"],"effect":"引爆一名敌人的反应标记，并对附近敌人造成较弱的扩散伤害。"},
+      {"id":"alchemy_emergency_solvent","tier":4,"branch":"调和","name":"应急溶剂","type":"主动","energy":28,"tags":["药剂","拆解"],"effect":"削弱敌人身上一个可被清除的强化效果；若无可清除效果，改为短时降低其防御。"},
+      {"id":"alchemy_many_formulas","tier":5,"name":"万象配方","type":"主动","energy":48,"tags":["药剂","协同"],"effect":"为队友提供短时异常抗性，并让已被反应标记的敌人在下一次受击时额外承受一次反应伤害。"}
+    ]}
+  ]
+}
