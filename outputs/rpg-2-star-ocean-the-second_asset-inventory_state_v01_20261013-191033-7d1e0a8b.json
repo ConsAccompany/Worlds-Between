@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-14T17:47:16Z",
+  "updatedAt": "2026-10-14T20:00:22Z",
   "definition": "A check means that the specific asset has been accepted for its stated purpose. Source character sheets, in-game displays, exploration sprites, combat sprites and scene quality have separate acceptance gates.",
   "categories": [
     {
@@ -589,9 +589,9 @@
               "name": "主角男女战斗动作组",
               "scope": "MVP",
               "target": 2,
-              "stage": "concept",
+              "stage": "production",
               "checked": false,
-              "note": "",
+              "note": "男、女主角各有 20 张独立横向战斗原型帧，已在可玩战场按动作读取；两套均未获美术批准，动态质感与实际战斗节奏仍待人工验收。",
               "file": null
             },
             {
@@ -601,7 +601,7 @@
               "target": 3,
               "stage": "production",
               "checked": false,
-              "note": "M4 三人已可战斗，保留发型与配色差异；正式动作帧待制作",
+              "note": "梁序、赵铃、纪澄各有 20 张独立横向战斗原型帧，均已在可玩战场按动作读取；三套均未获美术批准，整体 0/3 验收。",
               "file": "/assets/rpg-2-star-ocean-the-second_scifi-party_battle-hud_m4_20261013-203138-11f66e25.png"
             },
             {
@@ -675,7 +675,7 @@
               "target": 1,
               "stage": "production",
               "checked": false,
-              "note": "已有身份一致的透明静态候选图并放入引擎画面；来源设定图尚未验收，正式游戏内展示待接入。",
+              "note": "梁序已通过独立原生探索精灵在科技区对应场景作为可招募 NPC 显示；这不等于正式角色展示图通过验收。来源画像和展示图仍需分别审查。",
               "file": "/assets/rpg-2-star-ocean-the-second_scifi-city_in-engine-visual-sample_m8-v02_20261013-232003-7881fcaa.png"
             },
             {
@@ -824,9 +824,9 @@
               "scope": "MVP",
               "board": "科技",
               "target": 1,
-              "stage": "planned",
+              "stage": "production",
               "checked": false,
-              "note": "以角色设定图为身份依据；实际游戏内查看，未验收概念稿先修订。"
+              "note": "纪澄已通过独立原生探索精灵在科技区对应场景作为可招募 NPC 显示；这不等于正式角色展示图通过验收。来源画像和展示图仍需分别审查。"
             },
             {
               "id": "display.zhou-he",
@@ -974,9 +974,9 @@
               "scope": "MVP",
               "board": "科技",
               "target": 1,
-              "stage": "planned",
+              "stage": "production",
               "checked": false,
-              "note": "以角色设定图为身份依据；实际游戏内查看，未验收概念稿先修订。"
+              "note": "赵铃已通过独立原生探索精灵在科技区对应场景作为可招募 NPC 显示；这不等于正式角色展示图通过验收。来源画像和展示图仍需分别审查。"
             },
             {
               "id": "display.pei-zhi",
@@ -1182,8 +1182,13 @@
               "target": 1,
               "stage": "production",
               "checked": false,
-              "note": "原生 32×48 四方向待机与行走已达 20/20 探索帧，并接入可玩科技区；运动辨识与美术验收待人工确认。攻击／受击仅为探索稿。",
-              "file": "/assets/rpg-2-star-ocean-the-second_protagonist-male_native-walk-in-engine-south-phase-02_m8-v01_20261014-181225-6361adc7.png"
+              "note": "旧 32×48 四方向 20 帧仍在可玩科技区作为功能占位，但已被否定为最终画质基线。高精度像素风南／东／北三张独立静态概念图均有 Godot 1280×720 canvas_items 城市画面 48 逻辑像素技术试摆。西向镜像仍在评估，三向图尚未接入可玩角色或制作正式动画，0/1 验收。",
+              "file": "/assets/rpg-2-star-ocean-the-second_scifi-city_protagonist-male-v2-character-quality-h48-canvas-items-with-liang_m8-v02_20261014-151710-7a499c3e.png",
+              "premiumSource": "game/assets/characters/high-fidelity-prototypes/rpg-2-star-ocean-the-second_protagonist-male_south-exploration-premium-pixel_m8-v02_20261014-190703-746cf39d.png",
+              "premiumEastSource": "game/assets/characters/high-fidelity-prototypes/rpg-2-star-ocean-the-second_protagonist-male_east-exploration-premium-pixel_m8-concept_20261014-151920-62113512.png",
+              "premiumNorthSource": "game/assets/characters/high-fidelity-prototypes/rpg-2-star-ocean-the-second_protagonist-male_north-exploration-premium-pixel_m8-concept_20261014-152100-3feba4fb.png",
+              "premiumEastCityCapture": "outputs/rpg-2-star-ocean-the-second_scifi-city_protagonist-male-east-character-quality-h48-canvas-items-with-liang_m8-v02_20261014-152544-bf0ba265.png",
+              "premiumNorthCityCapture": "outputs/rpg-2-star-ocean-the-second_scifi-city_protagonist-male-north-character-quality-h48-canvas-items-with-liang_m8-v02_20261014-152550-387385f9.png"
             },
             {
               "id": "runtime-sprite.protagonist-female",
@@ -1193,8 +1198,16 @@
               "target": 1,
               "stage": "production",
               "checked": false,
-              "note": "原生 32×48 四方向待机与行走已达 20/20 探索帧，并接入可玩科技区；高侧马尾动态与美术验收待人工确认。攻击／受击仅为探索稿。",
-              "file": "/assets/rpg-2-star-ocean-the-second_protagonist-female_native-walk-in-engine-south-phase-02_m8-v01_20261014-181226-db0f273f.png"
+              "note": "旧 32×48 四方向 20 帧仍在可玩科技区作为功能占位，但已被否定为最终画质基线。高精度像素风南／东／北三张独立静态概念图均有 48 逻辑像素城市试摆；另有一张朝南左腿前迈关键帧完成同等 Godot 1280×720 技术审查。已组装的四相南向可行性循环出现围巾尾与护膝跨帧跳边，动画验收受阻，定点修复进行中；不算正式循环。未接入可玩角色，西向镜像仍在评估，0/1 验收。",
+              "file": "/assets/rpg-2-star-ocean-the-second_scifi-city_protagonist-female-character-quality-h48-canvas-items-with-liang_m8-v02_20261014-151442-b75b310e.png",
+              "premiumSource": "game/assets/characters/high-fidelity-prototypes/rpg-2-star-ocean-the-second_protagonist-female_south-exploration-premium-pixel_m8-concept_20261014-145800-62c3a10f.png",
+              "premiumEastSource": "game/assets/characters/high-fidelity-prototypes/rpg-2-star-ocean-the-second_protagonist-female_east-exploration-premium-pixel_m8-concept_20261014-151550-dc168ba8.png",
+              "premiumNorthSource": "game/assets/characters/high-fidelity-prototypes/rpg-2-star-ocean-the-second_protagonist-female_north-exploration-premium-pixel_m8-concept_20261014-151700-f1331de2.png",
+              "premiumLeftStrideSource": "game/assets/characters/high-fidelity-prototypes/rpg-2-star-ocean-the-second_protagonist-female_south-walk-left-stride-premium-pixel_m8-concept_20261014-152600-3cf71b09.png",
+              "premiumLeftStrideCityCapture": "outputs/rpg-2-star-ocean-the-second_scifi-city_protagonist-female-south-walk-left-stride-character-quality-h48-canvas-items_m8-v02_20261014-152906-37f80376.png",
+              "premiumWalkCycleComplete": false,
+              "premiumWalkFeasibilityManifest": "outputs/rpg-2-star-ocean-the-second_protagonist-female_south-walk-cycle_city-visual-manifest_m8-concept_20261014-153928-4c3e28b8.json",
+              "premiumWalkAnimationBlocker": "Scarf tail and knee guard jump sides between independently generated frames; targeted repair in progress."
             },
             {
               "id": "runtime-sprite.liang-xu",
@@ -1204,8 +1217,15 @@
               "target": 1,
               "stage": "production",
               "checked": false,
-              "note": "原生 32×48 四方向待机与行走已绘制到 20/20 探索帧；Godot 城市尺寸已审查动作姿态，剧情 NPC 暂保持待机，尚需实际同行走与美术验收。攻击／受击仅为探索稿。",
-              "file": "/assets/rpg-2-star-ocean-the-second_liang-xu_native-walk-in-engine-south-phase-02_m8-v01_20261014-181226-70cbc90c.png"
+              "note": "旧 32×48 四方向 20 帧仍作科技区 NPC 功能占位，已被否定为最终画质基线。高精度像素风南／东／北三张独立静态概念均有 Godot 1280×720 城市画面 48 逻辑像素技术审查；朝南与男女主同场比较。东向躯干仍略偏三分之四角度、北向头部稍向左转，低透明度边缘及方向连续性待审。三向均未接入可玩场景或获得美术批准；西向及正式动画未完成，0/1 验收。",
+              "file": "/assets/rpg-2-star-ocean-the-second_scifi-city_liang-xu-character-quality-h48-canvas-items_m8-v02_20261014-153547-1ca1259c.png",
+              "premiumSouthSource": "game/assets/characters/high-fidelity-prototypes/rpg-2-star-ocean-the-second_liang-xu_south-exploration-premium-pixel_m8-concept_20261014-153531-4c6e2bcd.png",
+              "premiumEastSource": "game/assets/characters/high-fidelity-prototypes/rpg-2-star-ocean-the-second_liang-xu_east-exploration-premium-pixel_m8-concept_20261014-154119-4cb71aff.png",
+              "premiumNorthSource": "game/assets/characters/high-fidelity-prototypes/rpg-2-star-ocean-the-second_liang-xu_north-exploration-premium-pixel_m8-concept_20261014-154238-518189c4.png",
+              "premiumEastCityCapture": "outputs/rpg-2-star-ocean-the-second_scifi-city_liang-xu-east-character-quality-h48-canvas-items_m8-v02_20261014-154305-90539b0d.png",
+              "premiumNorthCityCapture": "outputs/rpg-2-star-ocean-the-second_scifi-city_liang-xu-north-character-quality-h48-canvas-items_m8-v02_20261014-154332-f6c12a84.png",
+              "premiumEastNorthReview": "docs/character-visuals/rpg-2-star-ocean-the-second_liang-xu_east-north-city-scale-review_m8-concept_20261014-154500-b403fa18.md",
+              "premiumThreeCharacterComparison": "outputs/rpg-2-star-ocean-the-second_scifi-city_liang-xu-male-female-south-scale-review_m8-concept_20261014-153644-9226ceab.png"
             },
             {
               "id": "runtime-sprite.jiang-lan",
@@ -1353,9 +1373,9 @@
               "scope": "MVP",
               "board": "科技",
               "target": 1,
-              "stage": "planned",
+              "stage": "production",
               "checked": false,
-              "note": "标准像素格、足底锚点、发型与服装辨识度逐人检查。"
+              "note": "旧 32×48 四方向 20 帧仍作科技区 NPC 功能占位，已被否定为最终画质基线；高精度角色样板及四方向动画尚未制作，0/1 验收。"
             },
             {
               "id": "runtime-sprite.zhou-he",
@@ -1503,9 +1523,9 @@
               "scope": "MVP",
               "board": "科技",
               "target": 1,
-              "stage": "planned",
+              "stage": "production",
               "checked": false,
-              "note": "标准像素格、足底锚点、发型与服装辨识度逐人检查。"
+              "note": "旧 32×48 四方向 20 帧仍作科技区 NPC 功能占位，已被否定为最终画质基线；高精度角色样板及四方向动画尚未制作，0/1 验收。"
             },
             {
               "id": "runtime-sprite.pei-zhi",
@@ -1709,9 +1729,10 @@
               "scope": "MVP",
               "board": "科技",
               "target": 1,
-              "stage": "planned",
+              "stage": "production",
               "checked": false,
-              "note": "待机、移动、攻击、防御、闪避、受击、倒下、个人技能与角色画像一致。"
+              "note": "男主角已有 20 张独立横向战斗原型帧，含待机、移动、攻击、防御、闪避、受击、倒下与技能动作，并已接入可玩战场；正式美术验收仍待人工确认。",
+              "sourceAsset": "game/assets/characters/combat-prototypes/rpg-2-star-ocean-the-second_protagonist-male_sideview-combat-manifest_m8-prototype_20261014-142325-8655f25a.json"
             },
             {
               "id": "playable-combat.protagonist-female",
@@ -1719,9 +1740,10 @@
               "scope": "MVP",
               "board": "科技",
               "target": 1,
-              "stage": "planned",
+              "stage": "production",
               "checked": false,
-              "note": "待机、移动、攻击、防御、闪避、受击、倒下、个人技能与角色画像一致。"
+              "note": "女主角已有 20 张独立横向战斗原型帧，含待机、移动、攻击、防御、闪避、受击、倒下与技能动作，并已接入可玩战场；正式美术验收仍待人工确认。",
+              "sourceAsset": "game/assets/characters/combat-prototypes/rpg-2-star-ocean-the-second_protagonist-female_sideview-combat-manifest_m8-prototype_20261014-143059-e2500154.json"
             },
             {
               "id": "playable-combat.liang-xu",
@@ -1729,9 +1751,10 @@
               "scope": "MVP",
               "board": "科技",
               "target": 1,
-              "stage": "planned",
+              "stage": "production",
               "checked": false,
-              "note": "待机、移动、攻击、防御、闪避、受击、倒下、个人技能与角色画像一致。"
+              "note": "梁序已有 20 张独立横向战斗原型帧，含待机、移动、攻击、防御、闪避、受击、倒下与技能动作，并已接入可玩战场；正式美术验收仍待人工确认。",
+              "sourceAsset": "game/assets/characters/combat-prototypes/rpg-2-star-ocean-the-second_liang-xu_sideview-combat-manifest_m8-prototype_20261014-143736-ddc3e7f9.json"
             },
             {
               "id": "playable-combat.zhao-ling",
@@ -1739,9 +1762,10 @@
               "scope": "MVP",
               "board": "科技",
               "target": 1,
-              "stage": "planned",
+              "stage": "production",
               "checked": false,
-              "note": "待机、移动、攻击、防御、闪避、受击、倒下、个人技能与角色画像一致。"
+              "note": "赵铃已有 20 张独立横向战斗原型帧并已接入可玩战场；实际游戏尺寸与动作节奏仍待审查，尚未获得美术批准。",
+              "sourceAsset": "game/assets/characters/combat-prototypes/rpg-2-star-ocean-the-second_zhao-ling_sideview-combat-manifest_m8-prototype_20261014-144336-7d0dd6cc.json"
             },
             {
               "id": "playable-combat.ji-cheng",
@@ -1749,9 +1773,10 @@
               "scope": "MVP",
               "board": "科技",
               "target": 1,
-              "stage": "planned",
+              "stage": "production",
               "checked": false,
-              "note": "待机、移动、攻击、防御、闪避、受击、倒下、个人技能与角色画像一致。"
+              "note": "纪澄已有 20 张独立横向战斗原型帧并已接入可玩战场；实际游戏尺寸与动作节奏仍待审查，尚未获得美术批准。",
+              "sourceAsset": "game/assets/characters/combat-prototypes/rpg-2-star-ocean-the-second_ji-cheng_sideview-combat-manifest_m8-prototype_20261014-144815-54f4a48b.json"
             }
           ]
         }
@@ -1772,8 +1797,9 @@
               "target": 1,
               "stage": "production",
               "checked": false,
-              "note": "M2 可玩原型；正式地图美术待制作",
-              "file": "/assets/rpg-2-star-ocean-the-second_scifi-map_visual-proof_m2_20261013-201352-8194746e.png"
+              "note": "科技区世界地图候选背景已接入可玩地图，三个目的地与道路标记保留；已有 640×360 引擎画面审查，正式美术验收待人工确认。",
+              "file": "/assets/rpg-2-star-ocean-the-second_scifi-map_visual-proof_m2_20261013-201352-8194746e.png",
+              "sourceAsset": "game/assets/environments/rpg-2-star-ocean-the-second_scifi-region_world-map-background_m8-concept_20261014-143410-5df78b23.png"
             },
             {
               "id": "world-map.full",
@@ -1798,7 +1824,7 @@
               "target": 1,
               "stage": "production",
               "checked": false,
-              "note": "可玩城市已接入静态候选美术；比例、足底与候选障碍轮廓已自动检查。正式方向动画、遮挡和场景画质仍待完成。",
+              "note": "科技城市候选背景已在可玩场景显示；主角男女四向行走、梁序原生 NPC 待机、遮挡与碰撞有自动检查。画面与实际操作仍待人工验收。",
               "file": "/assets/rpg-2-star-ocean-the-second_scifi-city_visual-proof_m2_20261013-201352-4940f7f5.png",
               "navigationReviewManifest": "outputs/rpg-2-star-ocean-the-second_scifi-city_navigation-manifest_m8-boundaries_20261014-063728-a19da10f.json"
             },
@@ -1809,8 +1835,9 @@
               "target": 1,
               "stage": "production",
               "checked": false,
-              "note": "M2 可玩原型；正式场景美术待制作",
-              "file": "/assets/rpg-2-star-ocean-the-second_scifi-outskirts_visual-proof_m2_20261013-201352-7e3fc6e6.png"
+              "note": "城外候选背景已接入可玩场景；赵铃原生 NPC 待机与地图交互仍需人工画面和动线验收。",
+              "file": "/assets/rpg-2-star-ocean-the-second_scifi-outskirts_visual-proof_m2_20261013-201352-7e3fc6e6.png",
+              "sourceAsset": "game/assets/environments/rpg-2-star-ocean-the-second_scifi-outskirts_environment-background_m8-candidate_20261014-142557-58f0c3a1.png"
             },
             {
               "id": "scene.mvp-ruin",
@@ -1819,8 +1846,9 @@
               "target": 1,
               "stage": "production",
               "checked": false,
-              "note": "M2 可玩原型；正式场景美术待制作",
-              "file": "/assets/rpg-2-star-ocean-the-second_scifi-ruins_visual-proof_m2_20261013-201352-0302dc4c.png"
+              "note": "遗址候选背景已接入可玩场景；纪澄原生 NPC 待机与地图交互仍需人工画面和动线验收。",
+              "file": "/assets/rpg-2-star-ocean-the-second_scifi-ruins_visual-proof_m2_20261013-201352-0302dc4c.png",
+              "sourceAsset": "game/assets/environments/rpg-2-star-ocean-the-second_scifi-ruins_environment-background_m8-candidate_20261014-142522-e254c01a.png"
             },
             {
               "id": "scene.mvp-surveys",
@@ -1829,7 +1857,7 @@
               "target": 6,
               "stage": "production",
               "checked": false,
-              "note": "M7 城市、城外、遗址各有外层与内层；目前为可玩几何场景，正式像素图块待制作",
+              "note": "城市、城外、遗址各两间勘察室共六张独立候选背景已接入可玩场景；线索、出口和终端仍须逐间人工审查。",
               "file": "/assets/rpg-2-star-ocean-the-second_scifi-city_survey-outer-room_m7_20261013-212250-336fb175.png"
             },
             {
@@ -1931,7 +1959,7 @@
               "target": 1,
               "stage": "production",
               "checked": false,
-              "note": "M3 可玩原型；正式战场美术待制作",
+              "note": "固定尺寸横向战斗场地可玩；有独立候选背景图，战场画质仍待接入与人工验收。",
               "file": "/assets/rpg-2-star-ocean-the-second_scifi-patrol_battle-visual-proof_m3_20261013-201830-fa18b3d5.png"
             },
             {
@@ -1967,12 +1995,15 @@
               "scope": "MVP",
               "board": "科技",
               "target": 1,
-              "stage": "production",
-              "checked": false,
-          "note": "主角男女与梁序的 40 像素实际场景尺度测试已完成；高分辨率方向草案在暖色铺地上轮廓不足，退回原生 32×48 像素重绘。来源画像 9 份已批准、43 份概念；本项和 52 套四方向精灵仍未验收。",
-          "file": "/assets/rpg-2-star-ocean-the-second_scifi-city_in-engine-visual-sample_m8-v02_20261013-232003-7881fcaa.png",
-          "characterReview": "docs/character-visuals/rpg-2-star-ocean-the-second_character-visual-review_first-directional-pass_20261014-140000-8de210f4.md",
-          "visualRegistry": "game/data/character-visuals/rpg-2-star-ocean-the-second_character-visual-registry_m8-v01_20261014-134810-2a5d1b3c.json"
+              "stage": "approved",
+              "checked": true,
+              "note": "仅显示比例已获用户批准：男女主与梁序三人同城展示采用 48 逻辑像素（640×360 画布在 1280×720 窗口呈现）。三人各有南／东／北三张高精度静态概念，共九张；角色图、方向一致性、透明边缘、动画与运行替换均未获批准。梁序东向躯干和北向头部仍有方向偏差；女主四相南向试循环存在围巾尾与护膝跳边。旧 32×48 帧被否定为完成画质基线。来源画像 9/52 已批准；正式探索精灵 0/52、场景画质 0/11 验收。",
+              "approvedDisplayLogicalHeight": 48,
+              "approvalScope": "three-character city display scale only; no sprite, animation, runtime or scene-art approval",
+              "file": "/assets/rpg-2-star-ocean-the-second_scifi-city_liang-xu-male-female-south-scale-review_m8-concept_20261014-153644-9226ceab.png",
+              "threeCharacterReview": "docs/character-visuals/rpg-2-star-ocean-the-second_liang-xu_south-premium-pixel-city-review_m8-concept_20261014-153800-53a69a2c.md",
+              "characterReview": "docs/character-visuals/rpg-2-star-ocean-the-second_character-visual-review_first-directional-pass_20261014-140000-8de210f4.md",
+              "visualRegistry": "game/data/character-visuals/rpg-2-star-ocean-the-second_character-visual-registry_m8-v01_20261014-134810-2a5d1b3c.json"
             },
             {
               "id": "art.scifi-city-sample",
@@ -1982,13 +2013,14 @@
               "target": 1,
               "stage": "production",
               "checked": false,
-          "note": "科技城市 v02 可玩场景已接入主角男女 32×48 四向行走；梁序 NPC 保持待机，行走姿态已在同一城市场景尺寸审查。自动路线通过；建筑细部、动作节奏及人工画面验收未完成。",
+              "note": "科技城市可玩场景已有候选背景和旧 32×48 主角行走及梁序 NPC 占位帧；碰撞和返回路线经自动检查。用户已批准新高精度三人 48 逻辑像素展示比例，但新图尚未替换运行画面，城市整体画质仍待人工验收。1280×720 canvas_items 窗口像素点击、D 移动、E 交互回归通过；英文地图说明与存档按钮重叠已修复。",
+              "canvasInputReview": "docs/qa/rpg-2-star-ocean-the-second_scifi-canvas_input-ui-regression_m8-v01_20261014-195518-4f27b39c.md",
               "file": "/assets/rpg-2-star-ocean-the-second_protagonist-male_native-walk-in-engine-south-phase-02_m8-v01_20261014-181225-6361adc7.png",
               "playableReviewManifest": "outputs/rpg-2-star-ocean-the-second_scifi-city_in-engine-check_manifest_m8-foot-anchors_20261014-051328-11830a39.json",
-          "navigationReviewManifest": "outputs/rpg-2-star-ocean-the-second_scifi-city_navigation-manifest_m8-boundaries_20261014-063728-a19da10f.json",
-          "runtimeReviewManifest": "outputs/rpg-2-star-ocean-the-second_scifi-city_runtime-review_m8-v05_20261014-133629-a4c139fb/rpg-2-star-ocean-the-second_scifi-city_engine-capture-manifest_m8-v01_20261014-173631-f7a6405a.json",
-          "nativeIdleReviewManifest": "outputs/rpg-2-star-ocean-the-second_scifi-city_native-idle-in-engine_m8-v02_20261014-135900-c51f78ab/rpg-2-star-ocean-the-second_scifi-city_native-idle-capture-manifest_m8-v01_20261014-175723-9797aa74.json",
-          "nativeMotionReviewManifest": "outputs/rpg-2-star-ocean-the-second_scifi-city_native-motion-in-engine_m8-v01_20261014-141222-62e97563/rpg-2-star-ocean-the-second_scifi-city_native-motion-capture-manifest_m8-v01_20261014-181226-6f8d6327.json"
+              "navigationReviewManifest": "outputs/rpg-2-star-ocean-the-second_scifi-city_navigation-manifest_m8-boundaries_20261014-063728-a19da10f.json",
+              "runtimeReviewManifest": "outputs/rpg-2-star-ocean-the-second_scifi-city_runtime-review_m8-v05_20261014-133629-a4c139fb/rpg-2-star-ocean-the-second_scifi-city_engine-capture-manifest_m8-v01_20261014-173631-f7a6405a.json",
+              "nativeIdleReviewManifest": "outputs/rpg-2-star-ocean-the-second_scifi-city_native-idle-in-engine_m8-v02_20261014-135900-c51f78ab/rpg-2-star-ocean-the-second_scifi-city_native-idle-capture-manifest_m8-v01_20261014-175723-9797aa74.json",
+              "nativeMotionReviewManifest": "outputs/rpg-2-star-ocean-the-second_scifi-city_native-motion-in-engine_m8-v01_20261014-141222-62e97563/rpg-2-star-ocean-the-second_scifi-city_native-motion-capture-manifest_m8-v01_20261014-181226-6f8d6327.json"
             }
           ]
         },
@@ -2002,9 +2034,10 @@
               "scope": "MVP",
               "board": "科技",
               "target": 1,
-              "stage": "planned",
+              "stage": "production",
               "checked": false,
-              "note": "实际引擎截图通过材质、层次、光影、辨识度、交互可读性与性能审查。"
+              "note": "独立候选背景已接入 Godot 可玩场景；互动标记、人物可见性、文字对比和画面质感仍待人工逐景验收。",
+              "sourceAsset": "game/assets/environments/rpg-2-star-ocean-the-second_scifi-region_world-map-background_m8-concept_20261014-143410-5df78b23.png"
             },
             {
               "id": "visual-scene.city",
@@ -2014,10 +2047,10 @@
               "target": 1,
               "stage": "production",
               "checked": false,
-          "note": "可玩城市静态候选已接入；花园、路灯基座与花盆使用候选脚底轮廓，前景遮挡与热点标记有实际运行截图，热点连通、返回招募与存档恢复通过自动检查。建筑／楼梯细部、方向动画和人工画面验收未完成。",
+              "note": "科技城市背景和前景候选已接入可玩场景；碰撞、热点、返回和存档有自动检查。城市画面细节与人工操作验收未完成。",
               "file": "/assets/rpg-2-star-ocean-the-second_scifi-city_in-engine-visual-sample_m8-v02_20261013-232003-7881fcaa.png",
-          "navigationReviewManifest": "outputs/rpg-2-star-ocean-the-second_scifi-city_navigation-manifest_m8-boundaries_20261014-063728-a19da10f.json",
-          "runtimeReviewManifest": "outputs/rpg-2-star-ocean-the-second_scifi-city_runtime-review_m8-v05_20261014-133629-a4c139fb/rpg-2-star-ocean-the-second_scifi-city_engine-capture-manifest_m8-v01_20261014-173631-f7a6405a.json"
+              "navigationReviewManifest": "outputs/rpg-2-star-ocean-the-second_scifi-city_navigation-manifest_m8-boundaries_20261014-063728-a19da10f.json",
+              "runtimeReviewManifest": "outputs/rpg-2-star-ocean-the-second_scifi-city_runtime-review_m8-v05_20261014-133629-a4c139fb/rpg-2-star-ocean-the-second_scifi-city_engine-capture-manifest_m8-v01_20261014-173631-f7a6405a.json"
             },
             {
               "id": "visual-scene.outskirts",
@@ -2025,9 +2058,10 @@
               "scope": "MVP",
               "board": "科技",
               "target": 1,
-              "stage": "planned",
+              "stage": "production",
               "checked": false,
-              "note": "实际引擎截图通过材质、层次、光影、辨识度、交互可读性与性能审查。"
+              "note": "独立候选背景已接入 Godot 可玩场景；互动标记、人物可见性、文字对比和画面质感仍待人工逐景验收。",
+              "sourceAsset": "game/assets/environments/rpg-2-star-ocean-the-second_scifi-outskirts_environment-background_m8-candidate_20261014-142557-58f0c3a1.png"
             },
             {
               "id": "visual-scene.ruins",
@@ -2035,9 +2069,10 @@
               "scope": "MVP",
               "board": "科技",
               "target": 1,
-              "stage": "planned",
+              "stage": "production",
               "checked": false,
-              "note": "实际引擎截图通过材质、层次、光影、辨识度、交互可读性与性能审查。"
+              "note": "独立候选背景已接入 Godot 可玩场景；互动标记、人物可见性、文字对比和画面质感仍待人工逐景验收。",
+              "sourceAsset": "game/assets/environments/rpg-2-star-ocean-the-second_scifi-ruins_environment-background_m8-candidate_20261014-142522-e254c01a.png"
             },
             {
               "id": "visual-scene.city-survey-outer",
@@ -2045,9 +2080,10 @@
               "scope": "MVP",
               "board": "科技",
               "target": 1,
-              "stage": "planned",
+              "stage": "production",
               "checked": false,
-              "note": "实际引擎截图通过材质、层次、光影、辨识度、交互可读性与性能审查。"
+              "note": "独立候选背景已接入 Godot 可玩场景；互动标记、人物可见性、文字对比和画面质感仍待人工逐景验收。",
+              "sourceAsset": "game/assets/environments/rpg-2-star-ocean-the-second_scifi-survey-annex-room-01_environment-background_m8-concept_20261014-142350-f2ab83d1.png"
             },
             {
               "id": "visual-scene.city-survey-inner",
@@ -2055,9 +2091,10 @@
               "scope": "MVP",
               "board": "科技",
               "target": 1,
-              "stage": "planned",
+              "stage": "production",
               "checked": false,
-              "note": "实际引擎截图通过材质、层次、光影、辨识度、交互可读性与性能审查。"
+              "note": "独立候选背景已接入 Godot 可玩场景；互动标记、人物可见性、文字对比和画面质感仍待人工逐景验收。",
+              "sourceAsset": "game/assets/environments/rpg-2-star-ocean-the-second_scifi-survey-annex-room-02_environment-background_m8-concept_20261014-142926-e2e661fc.png"
             },
             {
               "id": "visual-scene.outskirts-survey-outer",
@@ -2065,9 +2102,10 @@
               "scope": "MVP",
               "board": "科技",
               "target": 1,
-              "stage": "planned",
+              "stage": "production",
               "checked": false,
-              "note": "实际引擎截图通过材质、层次、光影、辨识度、交互可读性与性能审查。"
+              "note": "独立候选背景已接入 Godot 可玩场景；互动标记、人物可见性、文字对比和画面质感仍待人工逐景验收。",
+              "sourceAsset": "game/assets/environments/rpg-2-star-ocean-the-second_scifi-outskirts-survey-annex-room-01_environment-background_m8-concept_20261014-142650-1b4ca8d2.png"
             },
             {
               "id": "visual-scene.outskirts-survey-inner",
@@ -2075,9 +2113,10 @@
               "scope": "MVP",
               "board": "科技",
               "target": 1,
-              "stage": "planned",
+              "stage": "production",
               "checked": false,
-              "note": "实际引擎截图通过材质、层次、光影、辨识度、交互可读性与性能审查。"
+              "note": "独立候选背景已接入 Godot 可玩场景；互动标记、人物可见性、文字对比和画面质感仍待人工逐景验收。",
+              "sourceAsset": "game/assets/environments/rpg-2-star-ocean-the-second_scifi-outskirts-survey-annex-room-02_environment-background_m8-concept_20261014-143030-3784c1e2.png"
             },
             {
               "id": "visual-scene.ruins-survey-outer",
@@ -2085,9 +2124,10 @@
               "scope": "MVP",
               "board": "科技",
               "target": 1,
-              "stage": "planned",
+              "stage": "production",
               "checked": false,
-              "note": "实际引擎截图通过材质、层次、光影、辨识度、交互可读性与性能审查。"
+              "note": "独立候选背景已接入 Godot 可玩场景；互动标记、人物可见性、文字对比和画面质感仍待人工逐景验收。",
+              "sourceAsset": "game/assets/environments/rpg-2-star-ocean-the-second_scifi-ruins-survey-annex-room-01_environment-background_m8-concept_20261014-142840-0ce7a91b.png"
             },
             {
               "id": "visual-scene.ruins-survey-inner",
@@ -2095,9 +2135,10 @@
               "scope": "MVP",
               "board": "科技",
               "target": 1,
-              "stage": "planned",
+              "stage": "production",
               "checked": false,
-              "note": "实际引擎截图通过材质、层次、光影、辨识度、交互可读性与性能审查。"
+              "note": "独立候选背景已接入 Godot 可玩场景；互动标记、人物可见性、文字对比和画面质感仍待人工逐景验收。",
+              "sourceAsset": "game/assets/environments/rpg-2-star-ocean-the-second_scifi-ruins-survey-annex-room-02_environment-background_m8-concept_20261014-143300-042ae336.png"
             },
             {
               "id": "visual-scene.battle-arena",
@@ -2105,9 +2146,10 @@
               "scope": "MVP",
               "board": "科技",
               "target": 1,
-              "stage": "planned",
+              "stage": "concept",
               "checked": false,
-              "note": "实际引擎截图通过材质、层次、光影、辨识度、交互可读性与性能审查。"
+              "note": "科技区横向战场有独立背景候选图；尚未确认为可玩战场完成画面，仍需接入和人工验收。",
+              "sourceAsset": "game/assets/environments/rpg-2-star-ocean-the-second_scifi-battle-arena_environment-background_m8-candidate_20261014-142723-7442fd01.png"
             }
           ]
         }

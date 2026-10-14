@@ -159,12 +159,14 @@
     const countAssets=prefix=>assets.filter(item=>item.id.startsWith(prefix));
     const portraits=countAssets('portrait.'), displays=countAssets('display.'), sprites=countAssets('runtime-sprite.'), scenes=countAssets('visual-scene.');
     const citySample=assets.find(item=>item.id==='art.scifi-city-sample');
+    const characterReview=state.bible.characterVisualReview||{};
+    const environmentReview=state.bible.environmentVisualReview||{};
     const checked=items=>items.filter(item=>item.checked).length;
     const pct=Math.round(100*done/p.steps.length);
     content.innerHTML=`${head('制作路线','新版 MVP：完整角色视觉身份与精致科技区场景',badge(done+' / '+p.steps.length+' 阶段','accent'))}
       <div class="card"><div class="step-top"><strong>已完成阶段</strong><span>${done} / ${p.steps.length}</span></div><div class="meter" role="progressbar" aria-valuemin="0" aria-valuemax="${p.steps.length}" aria-valuenow="${done}"><span style="width:${pct}%"></span></div><p class="muted small">当前重点：${current?esc(current.id+' · '+copy[current.id][0]):'全部阶段已完成'}。阶段数量不代表剩余工作量。</p></div>
       <div class="section-label">新版画面验收</div>
-      <section class="card"><h3>51 位角色 · 科技区完成画面</h3><p>主角男女两版与 50 位伙伴均制作游戏内展示图及四方向探索精灵；试玩仍只开放科技区角色。场景画质以《逸剑风云决》为参考，验收科技区自己的完成画面。</p><p class="small">来源设定图 ${checked(portraits)} / ${portraits.length} 已验收 · 游戏内展示图 ${checked(displays)} / ${displays.length} · 探索精灵 ${checked(sprites)} / ${sprites.length} · 场景画质 ${checked(scenes)} / ${scenes.length}</p>${citySample?.file?`<figure class="visual-sample"><a href="${esc(citySample.file)}" target="_blank" rel="noopener"><img src="${esc(citySample.file)}" alt="科技城市与主角、梁序的 Godot 实际画面样板" loading="lazy"></a><figcaption>Godot 画面样板 · 主角男版与梁序。独立预览场景；等待视觉确认与可玩场景接入。</figcaption></figure>`:''}<p class="muted small">静态候选图不计为四方向精灵或已验收完成画面。各项仍按资产清单单独验收。</p><button type="button" class="chip" id="open-visual-assets">查看视觉资产清单</button></section>
+      <section class="card"><h3>51 位角色 · 科技区完成画面</h3><p>目标是主角男女两版与 50 位伙伴都有游戏内展示图及四方向探索精灵；试玩仍只开放科技区角色。场景画质以《逸剑风云决》为参考，验收科技区自己的完成画面。</p><p class="small">来源设定图 ${checked(portraits)} / ${portraits.length} 已验收 · 游戏内展示图 ${checked(displays)} / ${displays.length} · 探索精灵 ${checked(sprites)} / ${sprites.length} · 场景画质 ${checked(scenes)} / ${scenes.length}</p><p class="small">功能占位：${characterReview.nativeWalkCharactersAuthored||0} 套旧 32×48 四向探索动作（画质基线已否定） · ${characterReview.nativeRecruitNpcDisplaysIntegrated||0} 位科技区伙伴已作为 NPC 显示 · ${characterReview.sideviewCombatSetsIntegrated||0} 套横向战斗原型已接入、均未获美术批准 · 地图 ${environmentReview.mapCandidatesIntegrated||0}、户外 ${environmentReview.outdoorCandidatesIntegrated||0}、勘察室 ${environmentReview.surveyRoomCandidatesIntegrated||0} 张背景候选已接入。</p><p class="muted small">用户已批准三人同城展示采用 48 逻辑像素比例；这只批准显示比例，探索精灵仍是 0/52 验收。男女主和梁序各有南／东／北三张高精度静态候选（共九张），均未接入可玩角色或获美术批准。梁序东向躯干、北向头部与低透明度边缘仍待修正；女主四相试循环出现围巾尾与护膝跳边，动画验收受阻。1280×720 画布点击与键盘交互回归已通过，英文地图说明与存档按钮重叠已修复。独立审查画廊可查看 ${characterReview.sourceGalleryImagesLoaded||0} 张来源设定图（9 张已批准、43 张概念稿）；画廊不计作游戏内展示图或精灵验收。M7 人工试玩仍待完成。</p>${citySample?.file?`<figure class="visual-sample"><a href="${esc(citySample.file)}" target="_blank" rel="noopener"><img src="${esc(citySample.file)}" alt="科技城市与主角、梁序的 Godot 实际画面样板" loading="lazy"></a><figcaption>Godot 可玩科技城候选画面；仍待视觉与操作验收。</figcaption></figure>`:''}<p class="muted small">候选图与动作原型不计为已验收完成画面。各项仍按资产清单单独验收。</p><button type="button" class="chip" id="open-visual-assets">查看视觉资产清单</button></section>
       <div class="section-label">分步实施</div>
       <div class="stack">${p.steps.map(step=>`<details class="group"><summary>${esc(step.id+' · '+copy[step.id][0])} <span class="group-count">${esc(status[step.status]||step.status)}</span></summary><div class="card"><p>${esc(copy[step.id][1])}</p><strong>验收标准</strong><p>${esc(copy[step.id][2])}</p>${step.details?.length?'<strong>当前内容</strong><ul>'+step.details.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>':''}${step.remaining?.length?'<strong>尚需完成</strong><ul>'+step.remaining.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>':''}${step.evidence?.length?'<strong>已有依据</strong><ul>'+step.evidence.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>':''}</div></details>`).join('')}</div>
       <div class="section-label">M7 试玩记录</div>
@@ -178,14 +180,14 @@
       <div class="section-label">计划与完整实施顺序</div>
       <div class="card"><a href="/source/mvp" target="_blank" rel="noopener">打开 MVP 实施计划</a> · <a href="/source/brief" target="_blank" rel="noopener">打开完整设计稿</a></div>`;
     const currentCityCaption=content.querySelector('.visual-sample figcaption');
-    if(currentCityCaption)currentCityCaption.textContent='Godot 可玩科技城 · 男主四方向行走帧；动作节奏与画面美术仍待人工验收。';
+    if(currentCityCaption)currentCityCaption.textContent='Godot 可玩科技城 · 当前旧 32×48 角色帧仅作功能占位，已被否定为完成画质基线。';
     const visualCard=content.querySelector('.visual-sample')?.parentElement;
     if(visualCard){
       for(const sample of state.bible.characterVisualReview?.previews||[]){
         if(sample.file===citySample?.file)continue;
         const figure=document.createElement('figure');figure.className='visual-sample';
         const link=document.createElement('a');link.href=sample.file;link.target='_blank';link.rel='noopener';
-        const img=document.createElement('img');img.src=sample.file;img.alt=sample.label+' 的游戏尺寸像素动作样板';img.loading='lazy';
+        const img=document.createElement('img');img.src=sample.file;img.alt=sample.label+' 的角色画质审查样板';img.loading='lazy';
         const caption=document.createElement('figcaption');caption.textContent=sample.label+' · '+sample.caption;
         link.append(img);figure.append(link,caption);visualCard.append(figure);
       }

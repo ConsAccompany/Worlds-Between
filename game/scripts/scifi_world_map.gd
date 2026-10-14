@@ -1,6 +1,7 @@
 extends Node2D
 
 const AREA_SCENE := "res://scenes/scifi_exploration_area.tscn"
+const MAP_BACKGROUND := preload("res://assets/environments/rpg-2-star-ocean-the-second_scifi-region_world-map-background_m8-concept_20261014-143410-5df78b23.png")
 const MARKERS := {
 	"scifi.city": Vector2(136, 174),
 	"scifi.outskirts": Vector2(324, 230),
@@ -33,12 +34,7 @@ func _ready() -> void:
 
 
 func _draw() -> void:
-	draw_rect(Rect2(0, 0, 640, 360), Color("#132733"))
-	draw_rect(Rect2(17, 71, 606, 258), Color("#24444b"))
-	for x in range(17, 624, 24):
-		draw_line(Vector2(x, 71), Vector2(x, 329), Color("#2b4e54"), 1.0)
-	for y in range(71, 330, 24):
-		draw_line(Vector2(17, y), Vector2(623, y), Color("#2b4e54"), 1.0)
+	draw_texture_rect(MAP_BACKGROUND, Rect2(0, 0, 640, 360), false)
 	draw_line(MARKERS["scifi.city"], MARKERS["scifi.outskirts"], Color("#d0b982"), 7.0)
 	draw_line(MARKERS["scifi.outskirts"], MARKERS["scifi.ruins"], Color("#d0b982"), 7.0)
 	draw_line(MARKERS["scifi.city"], MARKERS["scifi.outskirts"], Color("#6e8b8b"), 2.0)
@@ -71,16 +67,19 @@ func _build_ui() -> void:
 	back_button = Button.new()
 	back_button.position = Vector2(528, 12)
 	back_button.size = Vector2(94, 37)
+	back_button.add_theme_font_size_override("font_size", 12)
 	back_button.pressed.connect(_return_to_menu)
 	canvas.add_child(back_button)
 	save_button = Button.new()
 	save_button.position = Vector2(295, 12)
 	save_button.size = Vector2(102, 37)
+	save_button.add_theme_font_size_override("font_size", 13)
 	save_button.pressed.connect(_open_save)
 	canvas.add_child(save_button)
 	growth_button = Button.new()
 	growth_button.position = Vector2(404, 12)
 	growth_button.size = Vector2(117, 37)
+	growth_button.add_theme_font_size_override("font_size", 11)
 	growth_button.pressed.connect(_open_growth)
 	canvas.add_child(growth_button)
 
@@ -90,6 +89,7 @@ func _build_ui() -> void:
 		button.name = id.replace(".", "_") + "_button"
 		button.position = MARKERS[id] + Vector2(-68, 29)
 		button.size = Vector2(136, 39)
+		button.add_theme_font_size_override("font_size", 11)
 		button.pressed.connect(_enter_destination.bind(id))
 		canvas.add_child(button)
 		destination_buttons[id] = button

@@ -20,6 +20,18 @@ const TEXTURES := {
 		"north": preload("res://assets/characters/directional-prototypes/rpg-2-star-ocean-the-second_liang-xu_native-idle-north_m8-v03_20261014-175132-c742d602.png"),
 		"east": preload("res://assets/characters/directional-prototypes/rpg-2-star-ocean-the-second_liang-xu_native-idle-east_m8-v03_20261014-175132-d853a711.png"),
 	},
+	"zhao-ling": {
+		"south": preload("res://assets/characters/native-animation/rpg-2-star-ocean-the-second_zhao-ling_native-exploration-idle-south_m8-v01_20261014-142000-a9c9de72.png"),
+		"west": preload("res://assets/characters/native-animation/rpg-2-star-ocean-the-second_zhao-ling_native-exploration-idle-west_m8-v01_20261014-142000-e3e2513c.png"),
+		"north": preload("res://assets/characters/native-animation/rpg-2-star-ocean-the-second_zhao-ling_native-exploration-idle-north_m8-v01_20261014-142000-08ee8688.png"),
+		"east": preload("res://assets/characters/native-animation/rpg-2-star-ocean-the-second_zhao-ling_native-exploration-idle-east_m8-v01_20261014-142000-e9ef7e6e.png"),
+	},
+	"ji-cheng": {
+		"south": preload("res://assets/characters/native-animation/rpg-2-star-ocean-the-second_ji-cheng_native-idle-south-phase-00_m8-prototype_20261014-142157-13372e64.png"),
+		"west": preload("res://assets/characters/native-animation/rpg-2-star-ocean-the-second_ji-cheng_native-idle-west-phase-00_m8-prototype_20261014-142157-27adab1c.png"),
+		"north": preload("res://assets/characters/native-animation/rpg-2-star-ocean-the-second_ji-cheng_native-idle-north-phase-00_m8-prototype_20261014-142157-b0723fef.png"),
+		"east": preload("res://assets/characters/native-animation/rpg-2-star-ocean-the-second_ji-cheng_native-idle-east-phase-00_m8-prototype_20261014-142157-2ee5fd5c.png"),
+	},
 }
 
 

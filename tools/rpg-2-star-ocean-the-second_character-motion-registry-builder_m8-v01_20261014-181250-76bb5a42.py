@@ -1,4 +1,4 @@
-"""Build the Godot preload registry from the three native animation manifests."""
+"""Build the Godot preload registry from native animation manifests."""
 
 from __future__ import annotations
 
@@ -11,6 +11,8 @@ MANIFESTS = {
     "protagonist-male": "rpg-2-star-ocean-the-second_protagonist-male_native-animation-manifest_m8-v01_20261014-141005-29a4674f.json",
     "protagonist-female": "rpg-2-star-ocean-the-second_protagonist-female_native-animation-manifest_m8-prototype_20261014-140955-d7d64ca7.json",
     "liang-xu": "rpg-2-star-ocean-the-second_liang-xu_native-animation-manifest_m8-v01_20261014-181000-c09d742e.json",
+    "zhao-ling": "rpg-2-star-ocean-the-second_zhao-ling_native-exploration-manifest_m8-v01_20261014-142000-b123903c.json",
+    "ji-cheng": "rpg-2-star-ocean-the-second_ji-cheng_native-exploration-manifest_m8-prototype_20261014-142157-a4836b01.json",
 }
 ANIMATION_DIR = ROOT / "game" / "assets" / "characters" / "native-animation"
 OUTPUT = ROOT / "game" / "scripts" / "character_directional_motion.gd"
@@ -27,11 +29,13 @@ def main() -> None:
     for character_id, manifest_name in MANIFESTS.items():
         manifest = json.loads((ANIMATION_DIR / manifest_name).read_text(encoding="utf-8"))
         frames = manifest["frames"]
-        assert len(frames) == 19, (character_id, len(frames))
+        expected_count = 19 if character_id in ("protagonist-male", "protagonist-female", "liang-xu") else 20
+        assert len(frames) == expected_count, (character_id, len(frames))
         indexed = {(f["action"], f["direction"], int(f["phase"])): f for f in frames}
         assert len(indexed) == len(frames), character_id
         lines.append(f'\t"{character_id}": {{')
-        for action in ("walk", "attack", "hit"):
+        actions = ("walk", "attack", "hit") if expected_count == 19 else ("walk",)
+        for action in actions:
             lines.append(f'\t\t"{action}": {{')
             for direction in DIRECTIONS if action == "walk" else ("south",):
                 phase_count = 4 if action == "walk" else (2 if action == "attack" else 1)
@@ -60,7 +64,7 @@ def main() -> None:
         "",
     ]
     OUTPUT.write_text("\n".join(lines), encoding="utf-8")
-    print(f"Wrote {OUTPUT} with 57 separate frame preloads")
+    print(f"Wrote {OUTPUT} with {sum(19 if character_id in ('protagonist-male', 'protagonist-female', 'liang-xu') else 16 for character_id in MANIFESTS)} separate frame preloads")
 
 
 if __name__ == "__main__":

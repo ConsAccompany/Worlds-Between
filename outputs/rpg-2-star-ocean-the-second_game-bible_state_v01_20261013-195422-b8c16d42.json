@@ -4,7 +4,7 @@
   "title": "世界之间",
   "englishTitle": "Worlds Between",
   "edition": "设计基线 v0.1",
-  "updatedAt": "2026-10-14T17:47:16Z",
+  "updatedAt": "2026-10-14T20:00:22Z",
   "note": "规则以玩家确认的设计稿为基线；人物姓名与外观是待审提案，具体剧情留待后续设计。",
   "pitch": "从地下社区走出的旅人，以好奇心探索多元文明，招募伙伴，并成为不同世界认知差异的桥梁。",
   "pillars": [
@@ -3954,7 +3954,7 @@
   ],
   "citySampleReview": {
     "recordedAt": "2026-10-14T05:13:28.520632+00:00",
-    "status": "Playable layered city with three native directional idle prototypes; art acceptance pending",
+    "status": "Playable science-region map, three outdoor areas and six survey rooms show background candidates; art acceptance pending.",
     "manifest": "outputs/rpg-2-star-ocean-the-second_scifi-city_in-engine-check_manifest_m8-foot-anchors_20261014-051328-11830a39.json",
     "report": "outputs/rpg-2-star-ocean-the-second_scifi-city_integration-review_m8-foot-anchors_20261014-051328-11830a39.md",
     "artAccepted": false,
@@ -3970,7 +3970,7 @@
     },
     "nativeIdleReview": {
       "recordedAt": "2026-10-14T17:57:23Z",
-      "status": "Male and female protagonist directional idle shown in the playable city; Liang Xu native idle present as recruitable NPC. Walking frames pending.",
+      "status": "Five native four-direction idle/walk sets exist; male/female heroes walk in playable science areas, while Liang, Zhao and Ji appear as recruitable NPCs. Art and human movement review pending.",
       "manifest": "outputs/rpg-2-star-ocean-the-second_scifi-city_native-idle-in-engine_m8-v02_20261014-135900-c51f78ab/rpg-2-star-ocean-the-second_scifi-city_native-idle-capture-manifest_m8-v01_20261014-175723-9797aa74.json",
       "artAccepted": false,
       "humanPlaytest": false
@@ -3985,7 +3985,7 @@
     }
   },
   "characterVisualReview": {
-    "status": "Three native 32x48 four-direction idle and walk prototypes authored; male and female walk loops run in playable science areas, Liang Xu walk frames have game-scale visual review; art approval pending",
+    "status": "The creator approved the 48-logical-pixel display scale for male/female protagonist and Liang Xu in the three-character Godot city comparison. This is scale approval only. Five native 32x48 exploration sets remain integrated as rejected-quality functional placeholders. The three characters each have south/east/north premium static direction concepts (nine total), technically captured at that scale. Liang east has a partly three-quarter torso and north a slightly turned head; cross-direction continuity and low-alpha edges remain open. One female south left-stride movement concept has a 48-pixel capture. An independently generated four-phase south walk feasibility loop has scarf-tail and knee-guard side jumps; animation acceptance is blocked pending repair. West and formal animation remain open. No premium concept is integrated or art-approved. Runtime exploration sprites accepted: 0/52.",
     "registry": "game/data/character-visuals/rpg-2-star-ocean-the-second_character-visual-registry_m8-v01_20261014-134810-2a5d1b3c.json",
     "spec": "docs/character-visuals/rpg-2-star-ocean-the-second_character-visual-spec_topdown-v01_20261014-135700-17a0c9d4.md",
     "review": "docs/character-visuals/rpg-2-star-ocean-the-second_native-walk-integration-review_m8-v01_20261014-181700-4d0ca611.md",
@@ -3995,30 +3995,116 @@
     "sourceApproved": 9,
     "sourceConcept": 43,
     "runtimeSpritesAccepted": 0,
-    "nativeIdlePrototypesIntegrated": 3,
-    "nativeIdleFrames": 12,
-    "nativeWalkFramesAuthored": 48,
+    "nativeIdlePrototypesIntegrated": 5,
+    "nativeIdleFrames": 20,
+    "nativeWalkFramesAuthored": 80,
     "nativeWalkCharactersPlayable": 2,
-    "nativeWalkCharactersReviewed": 3,
+    "nativeWalkCharactersReviewed": 5,
     "combatMotionStudyFrames": 9,
     "runtimeCaptureManifest": "outputs/rpg-2-star-ocean-the-second_scifi-city_native-motion-in-engine_m8-v01_20261014-141222-62e97563/rpg-2-star-ocean-the-second_scifi-city_native-motion-capture-manifest_m8-v01_20261014-181226-6f8d6327.json",
     "previews": [
       {
         "label": "主角·男",
-        "file": "/assets/rpg-2-star-ocean-the-second_protagonist-male_native-walk-in-engine-south-phase-02_m8-v01_20261014-181225-6361adc7.png",
-        "caption": "原生 32×48 四向待机与各四帧行走；已接入科技区可玩场景。仍待美术验收。"
+        "file": "/assets/rpg-2-star-ocean-the-second_scifi-city_protagonist-male-v2-character-quality-h48-canvas-items-with-liang_m8-v02_20261014-151710-7a499c3e.png",
+        "caption": "高精度像素风朝南单帧候选，实际 Godot 1280×720 城市画面；48 逻辑像素显示比例已获用户批准，单帧美术与游戏内精灵尚未验收。"
       },
       {
         "label": "主角·女",
-        "file": "/assets/rpg-2-star-ocean-the-second_protagonist-female_native-walk-in-engine-south-phase-02_m8-v01_20261014-181226-db0f273f.png",
-        "caption": "高侧马尾四向待机与各四帧行走；已接入科技区可玩场景。仍待美术验收。"
+        "file": "/assets/rpg-2-star-ocean-the-second_scifi-city_protagonist-female-character-quality-h48-canvas-items-with-liang_m8-v02_20261014-151442-b75b310e.png",
+        "caption": "高精度像素风朝南单帧候选，实际 Godot 1280×720 城市画面；48 逻辑像素显示比例已获用户批准，单帧美术与游戏内精灵尚未验收。"
       },
       {
         "label": "梁序",
-        "file": "/assets/rpg-2-star-ocean-the-second_liang-xu_native-walk-in-engine-south-phase-02_m8-v01_20261014-181226-70cbc90c.png",
-        "caption": "高盘发和银色侧发四向行走帧已绘制并在 Godot 城市尺寸审查；剧情 NPC 暂保持待机。"
+        "file": "/assets/rpg-2-star-ocean-the-second_scifi-city_liang-xu-character-quality-h48-canvas-items_m8-v02_20261014-153547-1ca1259c.png",
+        "caption": "高精度像素风朝南单帧概念，Godot 城市 48 逻辑像素显示比例已获用户批准；运行中仍是旧 32×48 NPC 占位，角色图未获美术验收。"
+      },
+      {
+        "label": "梁序·东向",
+        "file": "/assets/rpg-2-star-ocean-the-second_scifi-city_liang-xu-east-character-quality-h48-canvas-items_m8-v02_20261014-154305-90539b0d.png",
+        "caption": "东向独立静态概念的 Godot 48 逻辑像素试摆；躯干仍略偏三分之四角度，方向一致性待审，未接入运行。"
+      },
+      {
+        "label": "梁序·北向",
+        "file": "/assets/rpg-2-star-ocean-the-second_scifi-city_liang-xu-north-character-quality-h48-canvas-items_m8-v02_20261014-154332-f6c12a84.png",
+        "caption": "北向独立静态概念的 Godot 48 逻辑像素试摆；头部稍向左转，轮廓与透明边缘待审，未接入运行。"
+      },
+      {
+        "label": "三人比例",
+        "file": "/assets/rpg-2-star-ocean-the-second_scifi-city_liang-xu-male-female-south-scale-review_m8-concept_20261014-153644-9226ceab.png",
+        "caption": "男女主角与梁序三张高精度朝南静态概念同地面、同为 48 逻辑像素；用户已批准此显示比例，角色图、动画及运行替换仍未获验收。"
+      },
+      {
+        "label": "主角·女迈步",
+        "file": "/assets/rpg-2-star-ocean-the-second_scifi-city_protagonist-female-south-walk-left-stride-character-quality-h48-canvas-items_m8-v02_20261014-152906-37f80376.png",
+        "caption": "朝南左腿前迈的单张动作关键帧概念，48 逻辑像素技术审查；相反迈步和过渡仍在制作，尚不能循环。"
       }
     ],
-    "artAccepted": false
+    "artAccepted": false,
+    "nativeWalkCharactersAuthored": 5,
+    "nativeRecruitNpcDisplaysIntegrated": 3,
+    "native32x48QualityBaselineAccepted": false,
+    "premiumSouthConceptFramesAuthored": 3,
+    "premiumSouthConceptFramesApproved": 0,
+    "premiumDirectionalStaticConceptFramesAuthored": 9,
+    "premiumDirectionalStaticConceptFramesApproved": 0,
+    "premiumProtagonistStaticConceptFramesAuthored": 6,
+    "premiumCharacterStaticConceptFramesAuthored": 9,
+    "premiumLiangSouthConceptFramesAuthored": 1,
+    "premiumLiangDirectionalStaticConceptFramesAuthored": 3,
+    "premiumLiangSouthSource": "game/assets/characters/high-fidelity-prototypes/rpg-2-star-ocean-the-second_liang-xu_south-exploration-premium-pixel_m8-concept_20261014-153531-4c6e2bcd.png",
+    "premiumLiangSouthReview": "docs/character-visuals/rpg-2-star-ocean-the-second_liang-xu_south-premium-pixel-city-review_m8-concept_20261014-153800-53a69a2c.md",
+    "premiumThreeCharacterComparison": "outputs/rpg-2-star-ocean-the-second_scifi-city_liang-xu-male-female-south-scale-review_m8-concept_20261014-153644-9226ceab.png",
+    "premiumFemaleSouthLeftStrideConceptFramesAuthored": 1,
+    "premiumFemaleSouthLeftStrideSource": "game/assets/characters/high-fidelity-prototypes/rpg-2-star-ocean-the-second_protagonist-female_south-walk-left-stride-premium-pixel_m8-concept_20261014-152600-3cf71b09.png",
+    "premiumFemaleSouthLeftStrideReview": "docs/character-visuals/rpg-2-star-ocean-the-second_protagonist-female_south-walk-keyframe-feasibility_m8-concept_20261014-153100-418eb35c.md",
+    "premiumFemaleSouthWalkCycleComplete": false,
+    "premiumFemaleSouthWalkFeasibilityManifest": "outputs/rpg-2-star-ocean-the-second_protagonist-female_south-walk-cycle_city-visual-manifest_m8-concept_20261014-153928-4c3e28b8.json",
+    "premiumFemaleSouthWalkAnimationBlocker": "Scarf tail and knee guard jump sides between independently generated frames; targeted repair in progress. No runtime or art acceptance.",
+    "premiumLiangEastNorthStatus": "east and north authored and technically reviewed at 48 logical px; not integrated or art-approved; east torso, north head angle and alpha-edge continuity need review",
+    "premiumLiangEastSource": "game/assets/characters/high-fidelity-prototypes/rpg-2-star-ocean-the-second_liang-xu_east-exploration-premium-pixel_m8-concept_20261014-154119-4cb71aff.png",
+    "premiumLiangNorthSource": "game/assets/characters/high-fidelity-prototypes/rpg-2-star-ocean-the-second_liang-xu_north-exploration-premium-pixel_m8-concept_20261014-154238-518189c4.png",
+    "premiumLiangEastCityCapture": "outputs/rpg-2-star-ocean-the-second_scifi-city_liang-xu-east-character-quality-h48-canvas-items_m8-v02_20261014-154305-90539b0d.png",
+    "premiumLiangNorthCityCapture": "outputs/rpg-2-star-ocean-the-second_scifi-city_liang-xu-north-character-quality-h48-canvas-items_m8-v02_20261014-154332-f6c12a84.png",
+    "premiumLiangEastNorthReview": "docs/character-visuals/rpg-2-star-ocean-the-second_liang-xu_east-north-city-scale-review_m8-concept_20261014-154500-b403fa18.md",
+    "premiumAuthoredDirectionsPerProtagonist": ["south", "east", "north"],
+    "premiumWestMirrorStatus": "under evaluation; not authored, integrated or approved; asymmetric identity must be checked",
+    "premiumFemaleEastSource": "game/assets/characters/high-fidelity-prototypes/rpg-2-star-ocean-the-second_protagonist-female_east-exploration-premium-pixel_m8-concept_20261014-151550-dc168ba8.png",
+    "premiumFemaleNorthSource": "game/assets/characters/high-fidelity-prototypes/rpg-2-star-ocean-the-second_protagonist-female_north-exploration-premium-pixel_m8-concept_20261014-151700-f1331de2.png",
+    "premiumMaleEastSource": "game/assets/characters/high-fidelity-prototypes/rpg-2-star-ocean-the-second_protagonist-male_east-exploration-premium-pixel_m8-concept_20261014-151920-62113512.png",
+    "premiumMaleNorthSource": "game/assets/characters/high-fidelity-prototypes/rpg-2-star-ocean-the-second_protagonist-male_north-exploration-premium-pixel_m8-concept_20261014-152100-3feba4fb.png",
+    "premiumMaleEastCityCapture": "outputs/rpg-2-star-ocean-the-second_scifi-city_protagonist-male-east-character-quality-h48-canvas-items-with-liang_m8-v02_20261014-152544-bf0ba265.png",
+    "premiumMaleNorthCityCapture": "outputs/rpg-2-star-ocean-the-second_scifi-city_protagonist-male-north-character-quality-h48-canvas-items-with-liang_m8-v02_20261014-152550-387385f9.png",
+    "premiumFemaleEastNorthReview": "docs/character-visuals/rpg-2-star-ocean-the-second_protagonist-female_east-north-city-review_m8-concept_20261014-152400-29a6d879.md",
+    "premiumMaleEastNorthReview": "docs/character-visuals/rpg-2-star-ocean-the-second_protagonist-male_east-north-concept-qa_m8-v03_20261014-152815-4f21c9a0.md",
+    "premiumCityReviewCaptureSize": [1280, 720],
+    "premiumApprovedLogicalHeight": 48,
+    "premiumDisplayScaleApproved": true,
+    "premiumDisplayScaleApprovalScope": "Three-character male/female protagonist and Liang Xu city proportion at 48 logical px on a 640x360 canvas rendered to a 1280x720 window; no sprite, animation, runtime or scene-art approval",
+    "premiumScaleReviewStatus": "Creator approved 48 logical px for the three-character city display proportion; sprite identity, directional consistency, animation, runtime integration and scene art remain unapproved",
+    "premiumMaleReview": "docs/character-visuals/rpg-2-star-ocean-the-second_protagonist-male_premium-pixel-size-review_m8-v02_20261014-151317-8e7a4c62.md",
+    "premiumFemaleSource": "game/assets/characters/high-fidelity-prototypes/rpg-2-star-ocean-the-second_protagonist-female_south-exploration-premium-pixel_m8-concept_20261014-145800-62c3a10f.png",
+    "premiumMaleSource": "game/assets/characters/high-fidelity-prototypes/rpg-2-star-ocean-the-second_protagonist-male_south-exploration-premium-pixel_m8-v02_20261014-190703-746cf39d.png",
+    "sideviewCombatSetsIntegrated": 5,
+    "sideviewCombatFramesIntegrated": 100,
+    "sideviewCombatArtApproved": 0,
+    "sourceGallery": "game/scenes/rpg-2-star-ocean-the-second_character-source-gallery_m8-v01_20261014-144020-907ab4d1.tscn",
+    "sourceGalleryReview": "docs/character-visuals/rpg-2-star-ocean-the-second_character-source-gallery_review_m8-v01_20261014-144500-39a71d2c.md",
+    "sourceGalleryImagesLoaded": 52,
+    "sourceGalleryRuntimeSpritesAccepted": 0
+  },
+  "environmentVisualReview": {
+    "status": "Science map, city/outskirts/ruins outdoor candidates and six survey room candidates are referenced by playable Godot scenes; battle arena has a separate candidate. At 1280x720 canvas_items, a rendered pointer and UI regression passed after shortening the English map help text to clear the Save button. Scene visual acceptance remains pending.",
+    "canvasInputRegression": "docs/qa/rpg-2-star-ocean-the-second_scifi-canvas_input-ui-regression_m8-v01_20261014-195518-4f27b39c.md",
+    "canvasInputRegressionPassed": true,
+    "englishMapHelpOverlapFixed": true,
+    "mapCandidatesIntegrated": 1,
+    "outdoorCandidatesIntegrated": 3,
+    "surveyRoomCandidatesIntegrated": 6,
+    "battleArenaCandidatesAuthored": 1,
+    "battleArenaCandidatesIntegrated": 0,
+    "sceneQualityAccepted": 0,
+    "sceneQualityTarget": 11,
+    "artAccepted": false,
+    "humanReview": false
   }
 }

@@ -1,6 +1,8 @@
 extends Node2D
 
 const CITY_BACKGROUND := preload("res://assets/environments/rpg-2-star-ocean-the-second_scifi-city_environment-background_m8-v02_20261013-232003-48d0ab67.png")
+const OUTSKIRTS_BACKGROUND := preload("res://assets/environments/rpg-2-star-ocean-the-second_scifi-outskirts_environment-background_m8-candidate_20261014-142557-58f0c3a1.png")
+const RUINS_BACKGROUND := preload("res://assets/environments/rpg-2-star-ocean-the-second_scifi-ruins_environment-background_m8-candidate_20261014-142522-e254c01a.png")
 const NativeIdle := preload("res://scripts/character_directional_idle.gd")
 const NativeMotion := preload("res://scripts/character_directional_motion.gd")
 const BATTLE_SCENE := preload("res://scenes/battle_arena.tscn")
@@ -41,6 +43,7 @@ const AREA_CONFIG := {
 var destination_id := ""
 var hero: Sprite2D
 var city_npc: Sprite2D
+var field_npc: Sprite2D
 var city_canopy: Polygon2D
 var city_hero_silhouette: Sprite2D
 var city_occlusion_indicator: Label
@@ -90,8 +93,7 @@ func _ready() -> void:
 	recruit_id = config["recruit"]
 	enemy_position = config["enemy"]
 	enemy_visible = destination_id != "scifi.city" and not AppState.enemy_cleared_for_return
-	if destination_id == "scifi.city":
-		texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
+	texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
 	_build_actors()
 	if destination_id == "scifi.city":
 		_build_city_foreground()
@@ -161,42 +163,39 @@ func _draw() -> void:
 		draw_texture_rect(CITY_BACKGROUND, Rect2(0, 0, 640, 360), false)
 		_draw_city_hotspots()
 		return
-	var color: Color = AREA_CONFIG[destination_id]["color"]
-	draw_rect(Rect2(0, 0, 640, 360), Color("#13232d"))
-	draw_rect(Rect2(16, 67, 608, 250), color)
-	for x in range(16, 624, 32):
-		draw_line(Vector2(x, 67), Vector2(x, 317), color.lightened(0.08), 1.0)
-	for y in range(67, 318, 32):
-		draw_line(Vector2(16, y), Vector2(624, y), color.lightened(0.08), 1.0)
-	match destination_id:
-		"scifi.outskirts":
-			_draw_outskirts()
-		"scifi.ruins":
-			_draw_ruins()
-	if not AppState.recruited_members.has(recruit_id):
-		_draw_npc()
+	var background: Texture2D = OUTSKIRTS_BACKGROUND if destination_id == "scifi.outskirts" else RUINS_BACKGROUND
+	draw_texture_rect(background, Rect2(0, 0, 640, 360), false)
 	if enemy_visible:
 		_draw_enemy()
-		draw_rect(Rect2(566, 88, 13, 34), Color("#a2ded1"))
-		draw_rect(Rect2(579, 88, 4, 34), Color("#233c47"))
+		_draw_field_marker(Vector2(575, 105), Color("#8fd8cf"), "bypass")
 	if destination_id == "scifi.outskirts":
-		draw_rect(Rect2(RELAY_POSITION + Vector2(-18, -15), Vector2(36, 30)), Color("#1d3948"))
-		draw_rect(Rect2(RELAY_POSITION + Vector2(-12, -9), Vector2(24, 15)), Color("#8fdecf" if AppState.relay_checked else "#e5bb77"))
-	if destination_id == "scifi.city":
-		draw_rect(Rect2(REPORT_POSITION + Vector2(-23, -14), Vector2(46, 28)), Color("#213b49"))
-		draw_rect(Rect2(REPORT_POSITION + Vector2(-16, -8), Vector2(32, 15)), Color("#99d8c9"))
+		_draw_field_marker(RELAY_POSITION, Color("#8fdecf" if AppState.relay_checked else "#e5bb77"), "relay")
+	if destination_id == "scifi.ruins" and not AppState.ji_records_checked:
+		_draw_field_marker(RECORDS_POSITION, Color("#e5bb77"), "records")
 	var entrance: Vector2 = SURVEY_ENTRANCES[destination_id]
-	draw_rect(Rect2(entrance + Vector2(-17, -21), Vector2(34, 42)), Color("#19313d"))
-	draw_rect(Rect2(entrance + Vector2(-11, -16), Vector2(22, 33)), Color("#80d0c4" if AppState.survey_solved.has(destination_id) else "#d8be7f"))
+	_draw_field_marker(entrance, Color("#80d0c4" if AppState.survey_solved.has(destination_id) else "#d8be7f"), "survey")
 	var assist_position: Vector2 = FIELD_ASSISTS[destination_id]["position"]
-	draw_rect(Rect2(assist_position + Vector2(-15, -12), Vector2(30, 24)), Color("#172d39"))
-	draw_rect(Rect2(assist_position + Vector2(-10, -7), Vector2(20, 14)), Color("#80d0c4" if AppState.field_insights.has(destination_id) else "#e3bf78"))
+	_draw_field_marker(assist_position, Color("#80d0c4" if AppState.field_insights.has(destination_id) else "#e3bf78"), "assist")
 	for index in 2:
 		var trace_position: Vector2 = FIELD_TRACES[destination_id][index]
 		var recorded: bool = AppState.field_traces.has("%s:%d" % [destination_id, index])
-		draw_circle(trace_position, 12.0, Color("#19313d"))
-		draw_circle(trace_position, 7.0, Color("#80d0c4" if recorded else "#f4ca81"))
-		draw_circle(trace_position, 2.0, Color("#17323d"))
+		_draw_field_marker(trace_position, Color("#80d0c4" if recorded else "#f4ca81"), "trace")
+
+
+func _draw_field_marker(at: Vector2, color: Color, kind: String) -> void:
+	draw_circle(at, 14.0, Color(0.04, 0.12, 0.16, 0.82))
+	draw_arc(at, 12.0, 0.0, TAU, 26, color, 1.8)
+	match kind:
+		"trace":
+			draw_circle(at, 3.0, color)
+		"survey", "records":
+			draw_rect(Rect2(at + Vector2(-5, -5), Vector2(10, 10)), color, false, 1.5)
+			draw_line(at + Vector2(-2, -1), at + Vector2(2, -1), color, 1.4)
+		"assist":
+			draw_colored_polygon(PackedVector2Array([at + Vector2(0, -5), at + Vector2(5, 0), at + Vector2(0, 5), at + Vector2(-5, 0)]), color)
+		"relay", "bypass":
+			draw_arc(at, 5.0, PI * 0.15, PI * 1.85, 12, color, 1.5)
+			draw_circle(at, 2.0, color)
 
 
 func _draw_city_hotspots() -> void:
@@ -296,45 +295,6 @@ func _city_walkable(at: Vector2) -> bool:
 	return CityNavigation.walkable(at)
 
 
-func _draw_outskirts() -> void:
-	draw_rect(Rect2(45, 112, 550, 37), Color("#839381"))
-	draw_rect(Rect2(33, 176, 570, 28), Color("#718e80"))
-	draw_rect(Rect2(55, 266, 520, 20), Color("#6f8978"))
-	draw_line(Vector2(80, 115), Vector2(525, 100), Color("#98b2ad"), 3.0)
-	for x in range(90, 580, 75):
-		draw_rect(Rect2(x, 82, 6, 56), Color("#334c4c"))
-		draw_rect(Rect2(x + 20, 286, 24, 7), Color("#304a3d"))
-
-
-func _draw_ruins() -> void:
-	draw_rect(Rect2(43, 90, 554, 204), Color("#8c8066"))
-	draw_rect(Rect2(72, 108, 496, 170), Color("#5d665b"))
-	for x in [115, 280, 530]:
-		draw_rect(Rect2(x, 94, 22, 65), Color("#c2b18a"))
-		draw_rect(Rect2(x - 7, 91, 36, 8), Color("#dec397"))
-	draw_rect(Rect2(274, 265, 90, 18), Color("#b4a17d"))
-	draw_rect(Rect2(300, 246, 39, 19), Color("#2a4a53"))
-
-
-func _draw_npc() -> void:
-	var color: Color = AppState.MEMBER_DEFS[recruit_id]["color"]
-	draw_circle(npc_position + Vector2(0, 10), 15.0, Color("#1a333c"))
-	draw_rect(Rect2(npc_position + Vector2(-8, -15), Vector2(16, 28)), color)
-	draw_circle(npc_position + Vector2(0, -17), 9.0, Color("#e1c49a"))
-	match recruit_id:
-		"liang-xu":
-			draw_rect(Rect2(npc_position + Vector2(-9, -27), Vector2(18, 5)), Color("#c6c5bf"))
-			draw_circle(npc_position + Vector2(10, -23), 5.0, Color("#b0b4b6"))
-			draw_rect(Rect2(npc_position + Vector2(5, -5), Vector2(7, 10)), Color("#ba9973"))
-		"zhao-ling":
-			draw_rect(Rect2(npc_position + Vector2(-9, -27), Vector2(18, 5)), Color("#263747"))
-			draw_circle(npc_position + Vector2(-9, -17), 4.0, Color("#66c7e1"))
-			draw_circle(npc_position + Vector2(9, -17), 4.0, Color("#66c7e1"))
-		"ji-cheng":
-			draw_rect(Rect2(npc_position + Vector2(-9, -27), Vector2(14, 6)), Color("#aeb8ba"))
-			draw_rect(Rect2(npc_position + Vector2(5, -24), Vector2(5, 14)), Color("#27363d"))
-
-
 func _draw_enemy() -> void:
 	draw_circle(enemy_position, 24.0, Color(0.62, 0.20, 0.22, 0.32))
 	draw_rect(Rect2(enemy_position + Vector2(-13, -14), Vector2(26, 27)), Color("#8a3a42"))
@@ -390,6 +350,13 @@ func _build_actors() -> void:
 		add_child(city_npc)
 	else:
 		hero.position = SPAWN
+		field_npc = Sprite2D.new()
+		field_npc.texture = NativeIdle.texture_for(recruit_id, "south")
+		field_npc.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+		field_npc.offset = Vector2(0, -20)
+		field_npc.position = npc_position
+		field_npc.visible = not AppState.recruited_members.has(recruit_id)
+		add_child(field_npc)
 	add_child(hero)
 
 
@@ -551,6 +518,8 @@ func _refresh_text() -> void:
 	npc_label.visible = not AppState.recruited_members.has(recruit_id)
 	if city_npc != null:
 		city_npc.visible = npc_label.visible
+	if field_npc != null:
+		field_npc.visible = npc_label.visible
 	records_label.text = AppState.text_for("relic_marker")
 	records_label.visible = destination_id == "scifi.ruins" and not AppState.ji_records_checked
 	station_label.visible = destination_id != "scifi.ruins"

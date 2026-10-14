@@ -1,8 +1,18 @@
 extends Node2D
 
 const CONTENT := preload("res://scripts/survey_content.gd")
-const HERO_SPRITE_MALE := preload("res://assets/characters/rpg-2-star-ocean-the-second_protagonist_exploration-sprite-male_m7_20261013-211119-a51e0b63.svg")
-const HERO_SPRITE_FEMALE := preload("res://assets/characters/rpg-2-star-ocean-the-second_protagonist_exploration-sprite-female_m7_20261013-211119-8c2d9e47.svg")
+const NativeIdle := preload("res://scripts/character_directional_idle.gd")
+const NativeMotion := preload("res://scripts/character_directional_motion.gd")
+const ROOM_ONE_BACKGROUND := {
+	"scifi.city": preload("res://assets/environments/rpg-2-star-ocean-the-second_scifi-survey-annex-room-01_environment-background_m8-concept_20261014-142350-f2ab83d1.png"),
+	"scifi.outskirts": preload("res://assets/environments/rpg-2-star-ocean-the-second_scifi-outskirts-survey-annex-room-01_environment-background_m8-concept_20261014-142650-1b4ca8d2.png"),
+	"scifi.ruins": preload("res://assets/environments/rpg-2-star-ocean-the-second_scifi-ruins-survey-annex-room-01_environment-background_m8-concept_20261014-142840-0ce7a91b.png"),
+}
+const ROOM_TWO_BACKGROUND := {
+	"scifi.city": preload("res://assets/environments/rpg-2-star-ocean-the-second_scifi-survey-annex-room-02_environment-background_m8-concept_20261014-142926-e2e661fc.png"),
+	"scifi.outskirts": preload("res://assets/environments/rpg-2-star-ocean-the-second_scifi-outskirts-survey-annex-room-02_environment-background_m8-concept_20261014-143030-3784c1e2.png"),
+	"scifi.ruins": preload("res://assets/environments/rpg-2-star-ocean-the-second_scifi-ruins-survey-annex-room-02_environment-background_m8-concept_20261014-143300-042ae336.png"),
+}
 const DISCOVERY_CUE := preload("res://assets/audio/rpg-2-star-ocean-the-second_discovery_interaction-cue_m7_20261013-211230-ad781e52.wav")
 const CLUE_POSITIONS := [Vector2(163, 165), Vector2(320, 165), Vector2(477, 165)]
 const EXIT_POSITION := Vector2(57, 257)
@@ -23,6 +33,9 @@ const AMBIENCE := {
 var destination_id := "scifi.city"
 var room := 1
 var hero: Sprite2D
+var hero_facing := "south"
+var walk_time := 0.0
+var walk_phase := 0
 var title_label: Label
 var progress_label: Label
 var help_label: Label
@@ -51,6 +64,7 @@ var cue_player: AudioStreamPlayer
 
 
 func _ready() -> void:
+	texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
 	destination_id = AppState.current_destination_id
 	if not CONTENT.DATA.has(destination_id):
 		destination_id = "scifi.city"
@@ -103,12 +117,50 @@ func _linked_clue(index: int) -> bool:
 
 func _process(delta: float) -> void:
 	if overlay.visible:
+		_reset_walk_animation()
 		return
 	var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	if direction != Vector2.ZERO:
+		_set_hero_facing(direction)
+		var previous_position := hero.position
 		hero.position += direction * MOVE_SPEED * delta
 		hero.position.x = clampf(hero.position.x, 25.0, 615.0)
 		hero.position.y = clampf(hero.position.y, 78.0, 305.0)
+		if hero.position.distance_to(previous_position) > 0.05:
+			_update_walk_animation(delta)
+		else:
+			_reset_walk_animation()
+	else:
+		_reset_walk_animation()
+
+
+func _set_hero_facing(direction: Vector2) -> void:
+	var facing := "east" if direction.x > 0.0 else "west"
+	if absf(direction.y) >= absf(direction.x):
+		facing = "south" if direction.y > 0.0 else "north"
+	if facing == hero_facing:
+		return
+	hero_facing = facing
+	walk_time = 0.0
+	walk_phase = 0
+	hero.texture = NativeIdle.texture_for("protagonist-" + AppState.hero_appearance, hero_facing)
+
+
+func _update_walk_animation(delta: float) -> void:
+	walk_time += delta
+	var phase := int(floor(walk_time / 0.12)) % 4 + 1
+	if phase == walk_phase:
+		return
+	walk_phase = phase
+	hero.texture = NativeMotion.texture_for("protagonist-" + AppState.hero_appearance, "walk", hero_facing, walk_phase)
+
+
+func _reset_walk_animation() -> void:
+	if walk_phase == 0:
+		return
+	walk_time = 0.0
+	walk_phase = 0
+	hero.texture = NativeIdle.texture_for("protagonist-" + AppState.hero_appearance, hero_facing)
 
 
 func _draw() -> void:
@@ -144,27 +196,42 @@ func _draw() -> void:
 			if room == 2:
 				draw_circle(Vector2(320, 266), 59.0, Color("#87775a"))
 				draw_circle(Vector2(320, 266), 46.0, floor_color)
+	if room == 1 and ROOM_ONE_BACKGROUND.has(destination_id):
+		draw_texture_rect(ROOM_ONE_BACKGROUND[destination_id], Rect2(0, 0, 640, 360), false)
+	elif room == 2 and ROOM_TWO_BACKGROUND.has(destination_id):
+		draw_texture_rect(ROOM_TWO_BACKGROUND[destination_id], Rect2(0, 0, 640, 360), false)
 	for index in CLUE_POSITIONS.size():
 		var position: Vector2 = CLUE_POSITIONS[index]
 		var already := AppState.survey_clues.has(_clue_key((room - 1) * 3 + index))
-		draw_circle(position, 21.0, Color("#1b303a"))
-		draw_rect(Rect2(position + Vector2(-13, -12), Vector2(26, 25)), palette[1] if already else Color("#e2bb77"))
-		draw_rect(Rect2(position + Vector2(-8, -7), Vector2(16, 4)), Color("#223a44"))
-	draw_rect(Rect2(EXIT_POSITION + Vector2(-16, -24), Vector2(32, 47)), Color("#18313a"))
-	draw_rect(Rect2(EXIT_POSITION + Vector2(-11, -18), Vector2(22, 36)), Color("#7aa5a2"))
+		var clue_color: Color = palette[1] if already else Color("#e2bb77")
+		draw_circle(position, 16.0, Color(0.04, 0.12, 0.16, 0.82))
+		draw_arc(position, 14.0, 0.0, TAU, 28, clue_color, 2.0)
+		draw_rect(Rect2(position + Vector2(-6, -6), Vector2(12, 12)), clue_color, false, 1.7)
+		draw_line(position + Vector2(-3, -2), position + Vector2(3, -2), clue_color, 1.5)
+		draw_line(position + Vector2(-3, 2), position + Vector2(2, 2), clue_color, 1.5)
+	_draw_annex_marker(EXIT_POSITION, Color("#8bcfca"), false)
 	if room == 1:
-		draw_rect(Rect2(NEXT_POSITION + Vector2(-16, -24), Vector2(32, 47)), Color("#18313a"))
-		draw_rect(Rect2(NEXT_POSITION + Vector2(-11, -18), Vector2(22, 36)), Color("#d4b67a"))
+		_draw_annex_marker(NEXT_POSITION, Color("#e4c377"), false)
 	else:
-		draw_rect(Rect2(TERMINAL_POSITION + Vector2(-24, -14), Vector2(48, 28)), Color("#18313a"))
-		draw_rect(Rect2(TERMINAL_POSITION + Vector2(-17, -8), Vector2(34, 16)), palette[1] if AppState.survey_solved.has(destination_id) else Color("#d4b67a"))
+		_draw_annex_marker(TERMINAL_POSITION, palette[1] if AppState.survey_solved.has(destination_id) else Color("#e4c377"), true)
+
+
+func _draw_annex_marker(at: Vector2, color: Color, terminal: bool) -> void:
+	draw_circle(at, 16.0, Color(0.04, 0.12, 0.16, 0.82))
+	draw_arc(at, 14.0, 0.0, TAU, 28, color, 2.0)
+	if terminal:
+		draw_rect(Rect2(at + Vector2(-6, -5), Vector2(12, 9)), color, false, 1.5)
+		draw_line(at + Vector2(-3, 7), at + Vector2(3, 7), color, 1.5)
+	else:
+		draw_line(at + Vector2(-4, -5), at + Vector2(3, 0), color, 2.0)
+		draw_line(at + Vector2(3, 0), at + Vector2(-4, 5), color, 2.0)
 
 
 func _build_hero() -> void:
 	hero = Sprite2D.new()
-	hero.texture = HERO_SPRITE_FEMALE if AppState.hero_appearance == "female" else HERO_SPRITE_MALE
+	hero.texture = NativeIdle.texture_for("protagonist-" + AppState.hero_appearance, "south")
 	hero.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-	hero.scale = Vector2(2, 2)
+	hero.offset = Vector2(0, -20)
 	hero.position = Vector2(87, 261)
 	add_child(hero)
 
@@ -199,10 +266,15 @@ func _build_ui() -> void:
 		label.size = Vector2(96, 36)
 		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		label.add_theme_color_override("font_outline_color", Color("#0d1920"))
+		label.add_theme_constant_override("outline_size", 2)
 		clue_labels.append(label)
 	exit_label = _label(canvas, EXIT_POSITION + Vector2(-38, -52), 10, Color("#e0e5cf"))
 	next_label = _label(canvas, NEXT_POSITION + Vector2(-33, -52), 10, Color("#e0e5cf"))
 	terminal_label = _label(canvas, TERMINAL_POSITION + Vector2(-46, -48), 11, Color("#f1e0ac"))
+	for label in [exit_label, next_label, terminal_label]:
+		label.add_theme_color_override("font_outline_color", Color("#0d1920"))
+		label.add_theme_constant_override("outline_size", 2)
 	var footer := ColorRect.new()
 	footer.color = Color("#0d1723")
 	footer.position = Vector2(0, 318)

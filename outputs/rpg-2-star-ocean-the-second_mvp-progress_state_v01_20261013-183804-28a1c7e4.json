@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
   "planVersion": "v0.2",
-  "updatedAt": "2026-10-14T17:47:16Z",
+  "updatedAt": "2026-10-14T20:00:22Z",
   "currentStep": "M8",
   "steps": [
     {
@@ -162,7 +162,7 @@
       "id": "M8",
       "title": "Visual identity and environment quality",
       "status": "in_progress",
-      "summary": "Use all 52 existing character identities in-engine; make the science-region map, three locations, six survey rooms and battle arena reach the approved visual quality target.",
+      "summary": "The creator approved the 48-logical-pixel display scale in the three-character city comparison. This does not approve any sprite, animation, runtime replacement or scene art. Five native 32x48 exploration sets remain rejected-quality functional placeholders. Male/female protagonists and Liang each have south/east/north premium static concepts (nine total), with direction and alpha-edge caveats. A female four-phase south walk feasibility loop is blocked by scarf-tail and knee-guard side jumps. Rendered 1280x720 canvas pointer/UI regression passed after an English map-help overlap fix. Five side-view battle sets are integrated without art approval; 0/52 runtime sprites and 0/11 scenes are accepted.",
       "acceptance": "52 identity displays and four-direction sprites load by character ID; playable team uses individual art; all eleven scene-quality gates pass screenshot and in-game review.",
       "evidence": [
         "52 份角色设定图已在资产清单登记；9 份已验收，其余是概念稿。",
@@ -175,34 +175,45 @@
         "outputs/rpg-2-star-ocean-the-second_scifi-city_integration-review_m8-foot-anchors_20261014-051328-11830a39.md",
         "game/tests/m8_city_navigation_smoke.gd: M8_CITY_NAVIGATION_OK (headless + rendered; hotspot connectivity, swept collision, sliding and stable save recovery)",
         "outputs/rpg-2-star-ocean-the-second_scifi-city_navigation-review_m8-boundaries_20261014-063728-a19da10f.md",
-    "outputs/rpg-2-star-ocean-the-second_scifi-city_navigation-manifest_m8-boundaries_20261014-063728-a19da10f.json",
-    "outputs/rpg-2-star-ocean-the-second_scifi-city_runtime-review_m8-v05_20261014-133629-a4c139fb/rpg-2-star-ocean-the-second_scifi-city_runtime-review_m8-v05_20261014-133700-3d6148a7.md (four actual engine captures; candidate, not art approval)",
-    "game/tests/m8_city_integration_smoke.gd, m8_city_navigation_smoke.gd, m8_city_reentry_smoke.gd and m7_smoke.gd: all pass together after integration",
-    "game/data/character-visuals/rpg-2-star-ocean-the-second_character-visual-registry_m8-v01_20261014-134810-2a5d1b3c.json: 52 unique variants, all source files present, 9 approved/43 concept; five directional drafts are rejected for runtime use",
+        "outputs/rpg-2-star-ocean-the-second_scifi-city_navigation-manifest_m8-boundaries_20261014-063728-a19da10f.json",
+        "outputs/rpg-2-star-ocean-the-second_scifi-city_runtime-review_m8-v05_20261014-133629-a4c139fb/rpg-2-star-ocean-the-second_scifi-city_runtime-review_m8-v05_20261014-133700-3d6148a7.md (four actual engine captures; candidate, not art approval)",
+        "game/tests/m8_city_integration_smoke.gd, m8_city_navigation_smoke.gd, m8_city_reentry_smoke.gd and m7_smoke.gd: all pass together after integration",
+        "game/data/character-visuals/rpg-2-star-ocean-the-second_character-visual-registry_m8-v01_20261014-134810-2a5d1b3c.json: 52 unique variants, all source files present, 9 approved/43 concept; five directional drafts are rejected for runtime use",
         "docs/character-visuals/rpg-2-star-ocean-the-second_character-visual-review_first-directional-pass_20261014-140000-8de210f4.md: six separate 640x360 Godot scale captures; identity fails at 40 px",
         "outputs/rpg-2-star-ocean-the-second_scifi-city_native-idle-in-engine_m8-v02_20261014-135900-c51f78ab/rpg-2-star-ocean-the-second_scifi-city_native-idle-capture-manifest_m8-v01_20261014-175723-9797aa74.json: 12 native 32x48 idle frames across three identities; four directional male/female city captures each; static prototypes only",
         "game/tests/m8_city_integration_smoke.gd: M8_CITY_INTEGRATION_OK with native pixel size, foot anchors and four facings; M8 navigation, reentry and M7 smoke also pass",
         "Three native animation manifests: 48 unique 32x48 four-direction walk frames plus 9 south attack/hit motion studies; only protagonist walk loops run in playable science areas",
-        "outputs/rpg-2-star-ocean-the-second_scifi-city_native-motion-in-engine_m8-v01_20261014-141222-62e97563/rpg-2-star-ocean-the-second_scifi-city_native-motion-capture-manifest_m8-v01_20261014-181226-6f8d6327.json: 12 separate Godot 640x360 walk-phase captures; art remains unapproved"
+        "outputs/rpg-2-star-ocean-the-second_scifi-city_native-motion-in-engine_m8-v01_20261014-141222-62e97563/rpg-2-star-ocean-the-second_scifi-city_native-motion-capture-manifest_m8-v01_20261014-181226-6f8d6327.json: 12 separate Godot 640x360 walk-phase captures; art remains unapproved",
+        "game/scripts/character_directional_idle.gd and character_directional_motion.gd: five native exploration sets; game/scripts/scifi_exploration_area.gd: three science recruit NPCs.",
+        "game/scripts/battle_arena.gd: male/female/Liang/Zhao/Ji side-view combat frame providers integrated; each source manifest contains 20 independent frames, with 0/5 sets art approved.",
+        "game/scripts/scifi_world_map.gd, scifi_exploration_area.gd and survey_annex.gd: one map, three outdoor and six room background candidates referenced.",
+        "docs/character-visuals/rpg-2-star-ocean-the-second_character-source-gallery_review_m8-v01_20261014-144500-39a71d2c.md: 52 source portraits load in standalone review scene; 9 approved, 43 concepts; zero runtime sprite acceptance.",
+        "docs/character-visuals/rpg-2-star-ocean-the-second_protagonist-male_premium-pixel-size-review_m8-v02_20261014-151317-8e7a4c62.md: one male premium south-facing concept; actual 1280x720 Godot canvas_items captures at 48/56/60 logical pixels; 48 scale now creator-approved from later three-character comparison, source art unapproved.",
+        "outputs/rpg-2-star-ocean-the-second_scifi-city_protagonist-female-character-quality-h48-canvas-items-with-liang_m8-v02_20261014-151442-b75b310e.png: one female premium south-facing concept reviewed at 48 logical pixels beside Liang; not integrated.",
+        "docs/character-visuals/rpg-2-star-ocean-the-second_protagonist-female_east-north-city-review_m8-concept_20261014-152400-29a6d879.md: female east/north separate source concepts reviewed in actual 1280x720 Godot city at 48 logical px; neither is integrated or approved.",
+        "outputs/rpg-2-star-ocean-the-second_scifi-city_protagonist-male-east-character-quality-h48-canvas-items-with-liang_m8-v02_20261014-152544-bf0ba265.png: male east concept technically captured in Godot 1280x720 at 48 logical px beside Liang; art approval pending.",
+        "outputs/rpg-2-star-ocean-the-second_scifi-city_protagonist-male-north-character-quality-h48-canvas-items-with-liang_m8-v02_20261014-152550-387385f9.png: male north concept technically captured in Godot 1280x720 at 48 logical px beside Liang; art approval pending.",
+        "docs/character-visuals/rpg-2-star-ocean-the-second_protagonist-male_east-north-concept-qa_m8-v03_20261014-152815-4f21c9a0.md: east/north source and technical game-scale review; direction consistency and halo checks still open.",
+        "docs/character-visuals/rpg-2-star-ocean-the-second_liang-xu_south-premium-pixel-city-review_m8-concept_20261014-153800-53a69a2c.md: Liang south premium static concept technically reviewed at 48 logical px; not integrated or approved.",
+        "docs/character-visuals/rpg-2-star-ocean-the-second_liang-xu_east-north-city-scale-review_m8-concept_20261014-154500-b403fa18.md: separate Liang east/north source images and actual 48-pixel Godot city captures; east torso and north head-angle drift plus low-alpha edge QA remain open; neither integrated nor art-approved.",
+        "outputs/rpg-2-star-ocean-the-second_scifi-city_liang-xu-male-female-south-scale-review_m8-concept_20261014-153644-9226ceab.png: actual Godot 1280x720 three-character city comparison at 48 logical px on one ground line; creator approved this display scale only, not the sprites or animation.",
+        "docs/character-visuals/rpg-2-star-ocean-the-second_protagonist-female_south-walk-keyframe-feasibility_m8-concept_20261014-153100-418eb35c.md: one female south left-stride concept technically reviewed at 48 logical px; no approved walk loop.",
+        "outputs/rpg-2-star-ocean-the-second_protagonist-female_south-walk-cycle_city-visual-manifest_m8-concept_20261014-153928-4c3e28b8.json: four-phase visual feasibility only; scarf tail and knee guard jump sides between independently generated frames, blocking animation acceptance while targeted repair is underway.",
+        "docs/qa/rpg-2-star-ocean-the-second_scifi-canvas_input-ui-regression_m8-v01_20261014-195518-4f27b39c.md: rendered 1280x720 window-pixel clicks map to logical city buttons, D moves hero, E opens Liang hotspot; English map help shortened to clear Save button; four separate bilingual map/city captures and receipt."
       ],
       "blocker": null,
       "details": [
-        "主角男女两版与 50 位伙伴，共 52 份来源画像；只有 9 份设定图已在旧清单中标为验收，未验收的图仍须逐张修订或批准。",
-        "51 位角色均有游戏内展示图和四方向探索形象；试玩仍只开放科技区角色。",
-        "主角两版、梁序、赵铃、纪澄另有独立战斗动作；其他角色战斗动作留待其可玩阶段。",
-        "科技地图、三个主场景、六个勘察空间及战斗场地共 11 项独立画质验收。",
-        "科技城市背景两版、主角男版和梁序单人透明图已制作。v02 补强公共信息、安保与自动物流设施。",
-        "三张选用素材已导入独立 Godot 预览场景，并取得 1280×720 实际引擎截图；当前可玩城市已接入静态候选素材，正式方向动画与场景验收仍待完成。",
-        "本批素材仍是静态样板，不计入四方向探索精灵、已完成场景或已验收展示图。",
-        "城市主角男女版与梁序按透明图可见边界暂定统一 44 像素高度并锚定足底；交互标签增加深色描边。仅为可玩样板修正，未增加美术验收勾选。",
-    "城市花园、路灯基座与花盆使用候选脚底碰撞轮廓；长帧分段移动及旧存档恢复已检查。候选前景遮挡、邻近热点标签和辨识图标已接入可玩城市并取得四张真实引擎截图；方向动画尚未完成。",
-        "52 人视觉注册表已建立并验证来源；主角男女与梁序的五张独立方向草案在 40 像素实际场景测试中辨识不足，明确标记退回重绘，不计入正式精灵或游戏内展示验收。",
-        "主角男女两版与梁序各有 32×48 原生像素四方向待机加各方向四帧行走（每人 20 帧）；男、女主角行走循环已接入科技区三个可玩场景，梁序仍作静止剧情 NPC。另有每人 3 帧攻击／受击探索稿，不计正式战斗素材。Godot 640×360 截图与自动路线通过；画面未获人工批准，正式探索精灵仍 0/52。"
+        "52 张来源设定图已登记，9 张批准、43 张概念稿；独立 Godot 审查画廊可逐张显示全部 52 张，不代表游戏内展示图或精灵通过验收。",
+        "主角男女、梁序、赵铃、纪澄共五套旧 32×48 四向探索帧，每套 4 待机 + 16 行走，共 100 张独立 PNG，仍作为功能占位运行；画质基线已被否定。男女主与梁序各有南／东／北三张独立高精度像素风静态概念图，共九张，均有 48 逻辑像素 Godot 城市技术试摆。用户已批准三人同城展示比例为 48 逻辑像素；此批准不涵盖角色图、动画或场景画质。梁序东向躯干仍略偏三分之四角度，北向头部稍有偏转，低透明度边缘也待复查。女主四相南向试循环发现围巾尾与护膝跨帧跳边，修复前不能验收。所有高精度概念均未接入可玩角色或获美术批准。",
+        "1280×720 canvas_items 实机输入回归通过：窗口像素点击能命中科技地图与城市返回按钮，D 移动、E 与梁序交互正常；英文地图说明曾压到存档按钮，已缩短并在测试中检查间距。",
+        "男主角、女主角、梁序、赵铃、纪澄五套各 20 帧横向战斗原型已接入战斗场地；五套均未通过美术验收。",
+        "科技世界地图、城市、城外、遗址和三地各两间勘察室的背景候选已接入游戏；战场背景有独立候选图，但尚待接入。",
+        "正式验收仍为来源画像 9/52、探索精灵 0/52、场景画质 0/11；M7 两轮人工试玩尚未完成。"
       ],
       "remaining": [
-        "人工确认城市与两名角色的视觉方向和游戏画面比例；检查科技特征、轮廓、光源与交互可读性。",
-        "人工试玩检查四方向行走的节奏、脚底稳定、发型辨识，以及城市建筑／楼梯与遮挡；让梁序有真实随队行走机会后再验收并扩展其余角色。",
-        "审查其余人物设定图，完成 52 份展示、52 套探索精灵、科技区战斗动作和 11 项场景画质。"
+        "逐张审查 43 张来源概念图及 52 份正式游戏内展示图；按已批准的 48 逻辑像素比例检查男女主与梁序三向概念图的服装、方向和边缘一致性，修复女主四相南向循环中围巾尾和护膝跨帧跳边，决定西向是否可镜像或需单独创作，再制作正式四方向动作并扩展到 52 套。旧 32×48 帧仅用于功能占位。",
+        "在 640×360 可玩画面逐景审查地图、三处户外场景、六间勘察室和战场的可读性、质感与动线；完成 11 项场景画质验收。",
+        "人工试玩检查伙伴跟随、四向行走节奏、发型辨识、战斗动作和中英文界面；完成 M7 两轮真实试玩。"
       ]
     },
     {

@@ -1,0 +1,47 @@
+{
+  "project": "rpg-2-star-ocean-the-second",
+  "purpose": "Static alpha-edge QA for premium south exploration concepts on a dark in-game background",
+  "status": "technical review only; production visual acceptance pending",
+  "scene": "game/scenes/prototype_room.tscn",
+  "floor_color": "#28434a",
+  "grid_color": "#33545c",
+  "logical_canvas": [640, 360],
+  "actual_godot_capture": [1280, 720],
+  "figure_visible_height_logical_pixels": 48,
+  "ground_point_logical_pixels": [320, 270],
+  "renderer": "Godot 4.7.2 gl_compatibility with canvas_items content scaling; nearest figure filtering and separate soft shadow",
+  "capture_harness": "game/tests/rpg-2-star-ocean-the-second_prototype-room_dark-alpha-edge-review_m8-concept_20261014-155030-cfb311a9.gd",
+  "captures": [
+    {
+      "character": "protagonist-male",
+      "source": "game/assets/characters/high-fidelity-prototypes/rpg-2-star-ocean-the-second_protagonist-male_south-exploration-premium-pixel_m8-v02_20261014-190703-746cf39d.png",
+      "screenshot": "outputs/rpg-2-star-ocean-the-second_prototype-room_protagonist-male-south-dark-alpha-edge-h48_m8-concept_20261014-155247-c73346bd.png",
+      "receipt": "outputs/rpg-2-star-ocean-the-second_prototype-room_protagonist-male-south-dark-alpha-edge-h48_m8-concept_20261014-155247-c73346bd.json",
+      "source_low_alpha_1_to_63_count": 28417,
+      "source_nonzero_alpha_more_than_16_pixels_from_alpha_64_subject_count": 342,
+      "maximum_alpha_in_far_pixels": 1,
+      "visible_halo_in_capture": false
+    },
+    {
+      "character": "protagonist-female",
+      "source": "game/assets/characters/high-fidelity-prototypes/rpg-2-star-ocean-the-second_protagonist-female_south-exploration-premium-pixel_m8-concept_20261014-145800-62c3a10f.png",
+      "screenshot": "outputs/rpg-2-star-ocean-the-second_prototype-room_protagonist-female-south-dark-alpha-edge-h48_m8-concept_20261014-155331-3143c722.png",
+      "receipt": "outputs/rpg-2-star-ocean-the-second_prototype-room_protagonist-female-south-dark-alpha-edge-h48_m8-concept_20261014-155331-3143c722.json",
+      "source_low_alpha_1_to_63_count": 34395,
+      "source_nonzero_alpha_more_than_16_pixels_from_alpha_64_subject_count": 724,
+      "maximum_alpha_in_far_pixels": 1,
+      "visible_halo_in_capture": false
+    },
+    {
+      "character": "liang-xu",
+      "source": "game/assets/characters/high-fidelity-prototypes/rpg-2-star-ocean-the-second_liang-xu_south-exploration-premium-pixel_m8-concept_20261014-153531-4c6e2bcd.png",
+      "screenshot": "outputs/rpg-2-star-ocean-the-second_prototype-room_liang-xu-south-dark-alpha-edge-h48_m8-concept_20261014-155402-9a6e3c8a.png",
+      "receipt": "outputs/rpg-2-star-ocean-the-second_prototype-room_liang-xu-south-dark-alpha-edge-h48_m8-concept_20261014-155402-9a6e3c8a.json",
+      "source_low_alpha_1_to_63_count": 30325,
+      "source_nonzero_alpha_more_than_16_pixels_from_alpha_64_subject_count": 184,
+      "maximum_alpha_in_far_pixels": 1,
+      "visible_halo_in_capture": false
+    }
+  ],
+  "decision": "No visible dark or bright halo at this tested 48px static dark-scene scale. Before production, remove only isolated alpha=1 stray source pixels if a clean-alpha asset standard is required, then verify moving sprites on additional light/dark backgrounds. Preserve intentional near-edge antialiasing until visually checked."
+}

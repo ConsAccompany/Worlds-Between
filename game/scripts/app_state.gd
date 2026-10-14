@@ -197,7 +197,7 @@ const STRINGS := {
 		"room_help": "WASD / arrows to move · Esc for menu",
 		"back": "Back to menu",
 		"map_title": "World map · Science region",
-		"map_help": "Click a destination · Ordinary travel does not advance the calendar",
+		"map_help": "Choose a destination · Travel takes no days",
 		"map_back": "Main menu",
 		"area_city": "Science city district",
 		"area_outskirts": "Outer passage",

@@ -8,6 +8,13 @@ const MOVE_SPEED := 168.0
 const DODGE_COST := 12
 const GUARD_HIT_COST := 6
 const BATTLE_AMBIENCE := preload("res://assets/audio/rpg-2-star-ocean-the-second_scifi-battle_ambient-loop_m7_20261013-211230-37fcaa02.wav")
+const MaleCombatFrames := preload("res://scripts/rpg-2-star-ocean-the-second_protagonist-male_sideview-combat-frames_m8-prototype_20261014-142500-75b6d7ec.gd")
+const FemaleCombatFrames := preload("res://scripts/rpg-2-star-ocean-the-second_protagonist-female_sideview-combat-frames_m8-prototype_20261014-143330-d94057ea.gd")
+const LiangCombatFrames := preload("res://scripts/rpg-2-star-ocean-the-second_liang-xu_sideview-combat-frames_m8-prototype_20261014-144100-a41f6b9c.gd")
+const ZhaoCombatFrames := preload("res://scripts/rpg-2-star-ocean-the-second_zhao-ling_sideview-combat-frames_m8-prototype_20261014-144510-9d264ec4.gd")
+const JiCombatFrames := preload("res://scripts/rpg-2-star-ocean-the-second_ji-cheng_sideview-combat-frames_m8-prototype_20261014-144950-51da030d.gd")
+const HERO_COMBAT_ANCHOR := Vector2(30, 73)
+const HERO_COMBAT_ACTION_DURATION := {"attack": 0.39, "hit": 0.24, "skill": 0.45, "down": 0.30}
 
 var enemy_id := "patrol"
 var enemy: Dictionary
@@ -63,11 +70,12 @@ var result_button: Button
 
 
 func _ready() -> void:
+	texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	enemy_id = AppState.battle_enemy_id if ENEMIES.has(AppState.battle_enemy_id) else "patrol"
 	enemy = ENEMIES[enemy_id]
 	enemy_hp = int(enemy["max_hp"])
 	for index in AppState.active_party_ids.size():
-		fighters.append({"id": AppState.active_party_ids[index], "x": 135.0 + index * 36.0, "attack_cooldown": 0.0, "dodge_cooldown": 0.0, "dodge_time": 0.0, "dodge_direction": -1.0, "skill_cooldown": 0.0, "command": "default", "guard": false, "boost": 0})
+		fighters.append({"id": AppState.active_party_ids[index], "x": 135.0 + index * 36.0, "attack_cooldown": 0.0, "dodge_cooldown": 0.0, "dodge_time": 0.0, "dodge_direction": -1.0, "skill_cooldown": 0.0, "command": "default", "guard": false, "boost": 0, "visual_action": "", "visual_elapsed": 0.0, "visual_loop_kind": "idle", "visual_loop_clock": 0.0, "visual_moving": false})
 	_build_ui()
 	var audio_player := AudioStreamPlayer.new()
 	var ambient: AudioStreamWAV = BATTLE_AMBIENCE.duplicate()
@@ -83,8 +91,15 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	if battle_finished or paused:
+	if paused:
 		return
+	if battle_finished:
+		_advance_fighter_visuals(delta, [])
+		queue_redraw()
+		return
+	var initial_positions: Array[float] = []
+	for fighter in fighters:
+		initial_positions.append(float(fighter["x"]))
 	for fighter in fighters:
 		fighter["attack_cooldown"] = maxf(0.0, float(fighter["attack_cooldown"]) - delta)
 		fighter["dodge_cooldown"] = maxf(0.0, float(fighter["dodge_cooldown"]) - delta)
@@ -112,8 +127,88 @@ func _process(delta: float) -> void:
 			_update_ai(index, delta)
 	if not battle_finished:
 		_update_enemy(delta)
+	_advance_fighter_visuals(delta, initial_positions)
 	_update_hud()
 	queue_redraw()
+
+
+func _set_fighter_visual_action(fighter: Dictionary, action: String) -> void:
+	fighter["visual_action"] = action
+	fighter["visual_elapsed"] = 0.0
+
+
+func _advance_fighter_visuals(delta: float, initial_positions: Array[float]) -> void:
+	for index in fighters.size():
+		var fighter: Dictionary = fighters[index]
+		var action: String = fighter["visual_action"]
+		if action != "":
+			var elapsed: float = float(fighter["visual_elapsed"]) + delta
+			var duration: float = float(HERO_COMBAT_ACTION_DURATION.get(action, 0.0))
+			if action == "down":
+				fighter["visual_elapsed"] = minf(elapsed, duration)
+			elif duration == 0.0 or elapsed >= duration:
+				fighter["visual_action"] = ""
+				fighter["visual_elapsed"] = 0.0
+			else:
+				fighter["visual_elapsed"] = elapsed
+		if initial_positions.size() == fighters.size():
+			fighter["visual_moving"] = absf(float(fighter["x"]) - initial_positions[index]) > 0.01
+		var loop_kind := "guard" if bool(fighter["guard"]) else ("move" if bool(fighter["visual_moving"]) else "idle")
+		if String(fighter["visual_loop_kind"]) != loop_kind:
+			fighter["visual_loop_kind"] = loop_kind
+			fighter["visual_loop_clock"] = 0.0
+		else:
+			fighter["visual_loop_clock"] = float(fighter["visual_loop_clock"]) + delta
+
+
+func _male_combat_texture(fighter: Dictionary, index: int) -> Texture2D:
+	return _hero_combat_texture(fighter, index, false)
+
+
+func _female_combat_texture(fighter: Dictionary, index: int) -> Texture2D:
+	return _hero_combat_texture(fighter, index, true)
+
+
+func _liang_combat_texture(fighter: Dictionary, index: int) -> Texture2D:
+	return _hero_combat_texture(fighter, index, false, true)
+
+
+func _zhao_combat_texture(fighter: Dictionary, index: int) -> Texture2D:
+	return _hero_combat_texture(fighter, index, false, false, true)
+
+
+func _ji_combat_texture(fighter: Dictionary, index: int) -> Texture2D:
+	return _hero_combat_texture(fighter, index, false, false, false, true)
+
+
+func _hero_combat_texture(fighter: Dictionary, index: int, female: bool, liang: bool = false, zhao: bool = false, ji: bool = false) -> Texture2D:
+	var action := "idle"
+	var phase := 1
+	if not _is_alive(index):
+		action = "down"
+		phase = 1 if float(fighter["visual_elapsed"]) < 0.15 else 2
+	elif float(fighter["dodge_time"]) > 0.0:
+		action = "dodge"
+		phase = 1 if float(fighter["dodge_time"]) > 0.135 else 2
+	elif ["attack", "hit", "skill"].has(String(fighter["visual_action"])):
+		action = String(fighter["visual_action"])
+		var duration: float = float(HERO_COMBAT_ACTION_DURATION[action])
+		phase = mini(MaleCombatFrames.count(action), 1 + int(floor(float(fighter["visual_elapsed"]) * MaleCombatFrames.count(action) / duration)))
+	elif bool(fighter["guard"]):
+		action = "guard"
+		phase = 1 + int(floor(float(fighter["visual_loop_clock"]) / 0.18)) % MaleCombatFrames.count(action)
+	elif bool(fighter["visual_moving"]):
+		action = "move"
+		phase = 1 + int(floor(float(fighter["visual_loop_clock"]) / 0.11)) % MaleCombatFrames.count(action)
+	else:
+		phase = 1 + int(floor(float(fighter["visual_loop_clock"]) / 0.36)) % MaleCombatFrames.count(action)
+	if liang:
+		return LiangCombatFrames.frame(action, phase)
+	if zhao:
+		return ZhaoCombatFrames.frame(action, phase)
+	if ji:
+		return JiCombatFrames.frame(action, phase)
+	return FemaleCombatFrames.frame(action, phase) if female else MaleCombatFrames.frame(action, phase)
 
 
 func _is_alive(index: int) -> bool:
@@ -190,6 +285,7 @@ func _try_attack(index: int = -1) -> bool:
 	if float(fighter["attack_cooldown"]) > 0.0:
 		return false
 	fighter["attack_cooldown"] = 0.43
+	_set_fighter_visual_action(fighter, "attack")
 	player_attack_count += 1
 	var definition: Dictionary = AppState.MEMBER_DEFS[String(fighter["id"])]
 	if absf(enemy_x - float(fighter["x"])) > float(definition["attack_range"]):
@@ -224,6 +320,7 @@ func _try_dodge(index: int = -1) -> bool:
 	member["energy"] = int(member["energy"]) - DODGE_COST
 	fighter["dodge_cooldown"] = 0.75
 	fighter["dodge_time"] = 0.27
+	_set_fighter_visual_action(fighter, "dodge")
 	var axis := Input.get_axis("move_left", "move_right") if index == controlled_index and not auto_mode else 0.0
 	fighter["dodge_direction"] = axis if axis != 0.0 else signf(float(fighter["x"]) - enemy_x)
 	return true
@@ -248,6 +345,7 @@ func _use_skill(index: int = -1) -> bool:
 		return false
 	member["energy"] = int(member["energy"]) - cost
 	fighter["skill_cooldown"] = 2.2
+	_set_fighter_visual_action(fighter, "skill")
 	var rank := int(member.get("personal_skill_rank", 1))
 	match member_id:
 		"hero":
@@ -295,6 +393,7 @@ func _use_job_skill(index: int = -1, requested_skill_id: String = "") -> bool:
 		return false
 	member["energy"] = int(member["energy"]) - cost
 	fighter["skill_cooldown"] = 2.2
+	_set_fighter_visual_action(fighter, "skill")
 	match series_id:
 		"sword", "firearms":
 			enemy_hp = maxi(0, enemy_hp - (8 + rank * 4 + skill_stage * 3))
@@ -339,11 +438,14 @@ func _apply_enemy_hit() -> void:
 		feedback_key = "battle_hurt"
 	member["hp"] = maxi(0, int(member["hp"]) - damage)
 	if int(member["hp"]) == 0:
+		_set_fighter_visual_action(fighter, "down")
 		feedback_message = AppState.text_for("battle_member_down") % AppState.member_name(String(fighter["id"]))
 		if index == controlled_index:
 			_select_next_living()
 		if _nearest_living() < 0:
 			_finish_battle(false)
+	else:
+		_set_fighter_visual_action(fighter, "hit")
 
 
 func _select_next_living() -> void:
@@ -511,6 +613,21 @@ func _draw() -> void:
 func _draw_fighter(fighter: Dictionary, index: int) -> void:
 	var x: float = fighter["x"]
 	var member_id: String = fighter["id"]
+	if (member_id == "hero" and ["male", "female"].has(AppState.hero_appearance)) or ["liang-xu", "zhao-ling", "ji-cheng"].has(member_id):
+		if _is_alive(index) and index == controlled_index and not auto_mode:
+			draw_circle(Vector2(x, 272), 13.0, Color("#f5e1a6"))
+		var native_frame: Texture2D
+		if member_id == "liang-xu":
+			native_frame = _liang_combat_texture(fighter, index)
+		elif member_id == "zhao-ling":
+			native_frame = _zhao_combat_texture(fighter, index)
+		elif member_id == "ji-cheng":
+			native_frame = _ji_combat_texture(fighter, index)
+		else:
+			native_frame = _female_combat_texture(fighter, index) if AppState.hero_appearance == "female" else _male_combat_texture(fighter, index)
+		if native_frame != null:
+			draw_texture(native_frame, Vector2(roundf(x) - HERO_COMBAT_ANCHOR.x, 272.0 - HERO_COMBAT_ANCHOR.y))
+			return
 	var color: Color = AppState.MEMBER_DEFS[member_id]["color"]
 	if not _is_alive(index):
 		draw_rect(Rect2(x - 12, 263, 24, 5), Color("#56636d"))
