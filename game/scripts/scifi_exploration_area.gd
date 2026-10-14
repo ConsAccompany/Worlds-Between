@@ -18,6 +18,11 @@ const FIELD_ASSISTS := {
 	"scifi.outskirts": {"position": Vector2(505, 258), "member": "zhao-ling"},
 	"scifi.ruins": {"position": Vector2(505, 275), "member": "ji-cheng"},
 }
+const FIELD_TRACES := {
+	"scifi.city": [Vector2(240, 267), Vector2(378, 121)],
+	"scifi.outskirts": [Vector2(125, 240), Vector2(408, 95)],
+	"scifi.ruins": [Vector2(115, 245), Vector2(470, 115)],
+}
 const AMBIENCE := {
 	"scifi.city": "res://assets/audio/rpg-2-star-ocean-the-second_scifi-city_ambient-loop_m7_20261013-211230-c8e1159a.wav",
 	"scifi.outskirts": "res://assets/audio/rpg-2-star-ocean-the-second_scifi-outskirts_ambient-loop_m7_20261013-211230-57ad4b20.wav",
@@ -51,6 +56,7 @@ var records_label: Label
 var station_label: Label
 var survey_label: Label
 var assist_label: Label
+var trace_labels: Array[Label] = []
 var dialogue_overlay: ColorRect
 var dialogue_title: Label
 var dialogue_text: Label
@@ -58,6 +64,7 @@ var invite_button: Button
 var later_button: Button
 var dialogue_open := false
 var dialogue_mode := "recruit"
+var trace_index := -1
 var feedback_key := "npc_prompt"
 var feedback_message := ""
 var cue_player: AudioStreamPlayer
@@ -148,6 +155,12 @@ func _draw() -> void:
 	var assist_position: Vector2 = FIELD_ASSISTS[destination_id]["position"]
 	draw_rect(Rect2(assist_position + Vector2(-15, -12), Vector2(30, 24)), Color("#172d39"))
 	draw_rect(Rect2(assist_position + Vector2(-10, -7), Vector2(20, 14)), Color("#80d0c4" if AppState.field_insights.has(destination_id) else "#e3bf78"))
+	for index in 2:
+		var trace_position: Vector2 = FIELD_TRACES[destination_id][index]
+		var recorded: bool = AppState.field_traces.has("%s:%d" % [destination_id, index])
+		draw_circle(trace_position, 12.0, Color("#19313d"))
+		draw_circle(trace_position, 7.0, Color("#80d0c4" if recorded else "#f4ca81"))
+		draw_circle(trace_position, 2.0, Color("#17323d"))
 
 
 func _draw_city() -> void:
@@ -304,6 +317,13 @@ func _build_ui() -> void:
 	assist_label.add_theme_font_size_override("font_size", 10)
 	assist_label.add_theme_color_override("font_color", Color("#f0dda8"))
 	canvas.add_child(assist_label)
+	for index in 2:
+		var trace_label := Label.new()
+		trace_label.position = FIELD_TRACES[destination_id][index] + Vector2(-23, -34)
+		trace_label.add_theme_font_size_override("font_size", 10)
+		trace_label.add_theme_color_override("font_color", Color("#f0dda8"))
+		canvas.add_child(trace_label)
+		trace_labels.append(trace_label)
 	_build_dialogue(canvas)
 
 
@@ -360,19 +380,30 @@ func _refresh_text() -> void:
 	station_label.text = AppState.text_for("relay_marker" if destination_id == "scifi.outskirts" else "report_marker")
 	survey_label.text = AppState.text_for("survey_marker")
 	assist_label.text = AppState.text_for("field_assist_marker_" + key)
-	if dialogue_mode == "assist":
+	for index in 2:
+		trace_labels[index].text = AppState.text_for("field_trace_marker") + " %d" % (index + 1)
+	if dialogue_mode == "trace":
+		dialogue_title.text = AppState.text_for("field_trace_marker") + " %d/2" % (trace_index + 1)
+		dialogue_text.text = AppState.text_for("field_trace_" + key + "_%d" % trace_index)
+		invite_button.visible = false
+		later_button.text = AppState.text_for("field_assist_close")
+	elif dialogue_mode == "assist":
+		invite_button.visible = true
 		var assistant_id: String = FIELD_ASSISTS[destination_id]["member"]
 		dialogue_title.text = assist_label.text + " · " + AppState.member_name(assistant_id)
 		if not AppState.recruited_members.has(assistant_id):
 			dialogue_text.text = AppState.text_for("field_assist_need") % AppState.member_name(assistant_id)
 		elif AppState.field_insights.has(destination_id):
 			dialogue_text.text = AppState.text_for("field_assist_result_" + key)
+		elif AppState.field_trace_count(destination_id) < 2:
+			dialogue_text.text = AppState.text_for("field_trace_need") % AppState.member_name(assistant_id)
 		else:
 			dialogue_text.text = AppState.text_for("field_assist_ready_" + key)
 		invite_button.text = AppState.text_for("field_assist_recorded" if AppState.field_insights.has(destination_id) else "field_assist_use")
-		invite_button.disabled = not AppState.recruited_members.has(assistant_id) or AppState.field_insights.has(destination_id)
+		invite_button.disabled = not AppState.recruited_members.has(assistant_id) or AppState.field_insights.has(destination_id) or AppState.field_trace_count(destination_id) < 2
 		later_button.text = AppState.text_for("field_assist_close")
 	else:
+		invite_button.visible = true
 		dialogue_title.text = AppState.member_name(recruit_id)
 		dialogue_text.text = AppState.text_for("recruit_ji_locked" if recruit_id == "ji-cheng" and not AppState.ji_records_checked else "recruit_" + recruit_id.split("-")[0])
 		invite_button.text = AppState.text_for("recruit_invite")
@@ -400,6 +431,21 @@ func _open_field_assist() -> void:
 		later_button.grab_focus()
 	else:
 		invite_button.grab_focus()
+
+
+func _open_field_trace(index: int) -> void:
+	trace_index = index
+	dialogue_mode = "trace"
+	dialogue_open = true
+	dialogue_overlay.visible = true
+	if AppState.discover_field_trace(destination_id, index):
+		cue_player.play()
+		feedback_key = "field_trace_found"
+		feedback_message = ""
+		AppState.write_auto_save("area", hero.position, "field_assist")
+		queue_redraw()
+	_refresh_text()
+	later_button.grab_focus()
 
 
 func _dialogue_primary() -> void:
@@ -505,3 +551,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			_open_dialogue()
 		elif hero.position.distance_to(FIELD_ASSISTS[destination_id]["position"]) < 40.0:
 			_open_field_assist()
+		else:
+			for index in 2:
+				if hero.position.distance_to(FIELD_TRACES[destination_id][index]) < 34.0:
+					_open_field_trace(index)
+					return

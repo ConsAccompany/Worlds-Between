@@ -28,12 +28,12 @@ const STRINGS := {
 		"area_city_hint": "街道与公共设施 · 可与维修员交谈",
 		"area_outskirts_hint": "开阔路线 · 可绕过巡逻机械",
 		"area_ruins_hint": "前文明设施 · 小心自动防卫机",
-		"area_help": "WASD / 方向键移动 · E 交谈 · Esc 返回地图",
+		"area_help": "WASD 移动 · E 交互 · Esc 地图",
 		"area_back": "世界地图",
 		"npc_city": "维修员：这里的旧设备还能继续使用。",
 		"npc_outskirts": "巡路者：走北侧就能绕开巡逻机械。",
 		"npc_ruins": "勘察员：遗址记录需要仔细核对。",
-		"npc_prompt": "靠近人物按 E 交谈",
+		"npc_prompt": "靠近人物或标记按 E 交互",
 		"enemy_label": "自动机械",
 		"battle_title": "即时战斗 · %s",
 		"battle_help": "A/D 移动 · J 攻击 · K 闪避 · L 防御 · Q 个人技 · R 职业技 · Tab 换人 · P 暂停 · T 自动",
@@ -124,9 +124,19 @@ const STRINGS := {
 		"job_skill_relics_echo": "遗物共鸣", "job_skill_relics_delay": "时序迟滞",
 		"bypass_notice": "已绕过敌人，抵达另一侧。",
 		"field_log": "实地日志",
-		"field_log_hint": "任意顺序探索三处地点；完成各地实地勘察；调查中继站与遗址记录；观察或击退一台机械，最后回城汇报。",
+		"field_log_hint": "任意顺序探索三处地点；完成勘察、核对中继与遗址记录、观察机械，最后回城汇报。每地还有两处可选痕迹，可带当地伙伴回终端解读。",
 		"field_log_count": "地点 %d/3 · 勘察 %d/3 · 中继 %s · 记录 %s · 机械 %s",
 		"field_assist_log": "伙伴实地协助 %d/3（可选）",
+		"field_trace_log": "现场痕迹 %d/6（可选）",
+		"field_trace_marker": "痕迹",
+		"field_trace_found": "记录了现场痕迹。可带当地伙伴回终端解读。",
+		"field_trace_need": "需要先查看附近两处现场痕迹，再让 %s 解读。",
+		"field_trace_city_0": "城市痕迹：旧路牌保留了双重编号，标记落在维修线与储能线的交会处。",
+		"field_trace_city_1": "城市痕迹：清晨的巡检印章叠在前一日配额表上，时间栏未同步。",
+		"field_trace_outskirts_0": "城外痕迹：废弃导管表面有新的探测划痕，声音却从更深处传来。",
+		"field_trace_outskirts_1": "城外痕迹：地面维护标记偏离旧导管，指向尚在工作的地下线。",
+		"field_trace_ruins_0": "遗址痕迹：墙缝里有三种修补填料，磨损程度互不相同。",
+		"field_trace_ruins_1": "遗址痕迹：最外层固定件使用现行规格，不能与旧层归为同一年代。",
 		"field_assist_marker_city": "配额总表", "field_assist_marker_outskirts": "回声节点", "field_assist_marker_ruins": "地层面板",
 		"field_assist_need": "需要 %s 同行才能解析。先邀请对方，之后随时可以回来。",
 		"field_assist_use": "运用个人专长", "field_assist_close": "关闭", "field_assist_recorded": "已记录",
@@ -195,12 +205,12 @@ const STRINGS := {
 		"area_city_hint": "Streets and public works · Talk to a technician",
 		"area_outskirts_hint": "Open routes · Bypass a patrol machine",
 		"area_ruins_hint": "Pre-reset facility · Watch for automated defense",
-		"area_help": "WASD / arrows to move · E to talk · Esc for map",
+		"area_help": "WASD move · E interact · Esc map",
 		"area_back": "World map",
 		"npc_city": "Technician: These old devices still work well.",
 		"npc_outskirts": "Path watcher: Take the north route past the patrol.",
 		"npc_ruins": "Surveyor: The ruin records need careful checking.",
-		"npc_prompt": "Approach someone and press E to talk",
+		"npc_prompt": "Press E near a person or marker to interact",
 		"enemy_label": "Automated machine",
 		"battle_title": "Real-time battle · %s",
 		"battle_help": "A/D move · J attack · K dodge · L guard · Q personal · R job · Tab swap · P pause · T auto",
@@ -291,9 +301,19 @@ const STRINGS := {
 		"job_skill_relics_echo": "Relic Echo", "job_skill_relics_delay": "Time Delay",
 		"bypass_notice": "You bypassed the enemy and reached the far side.",
 		"field_log": "Field log",
-		"field_log_hint": "Explore all three places in any order. Complete each field survey, check the relay and ruin records, observe or defeat a machine, then report in the city.",
+		"field_log_hint": "Explore all three places in any order. Complete the surveys, check the relay and ruin records, observe a machine, then report in the city. Each place also has two optional traces to interpret with its local companion.",
 		"field_log_count": "Places %d/3 · Surveys %d/3 · Relay %s · Records %s · Machine %s",
 		"field_assist_log": "Companion fieldwork %d/3 (optional)",
+		"field_trace_log": "Field traces %d/6 (optional)",
+		"field_trace_marker": "Trace",
+		"field_trace_found": "A field trace was recorded. Return to the terminal with the local companion to interpret it.",
+		"field_trace_need": "Inspect both nearby traces before %s can interpret them.",
+		"field_trace_city_0": "City trace: an old sign keeps two numbers at the junction of a repair line and a storage line.",
+		"field_trace_city_1": "City trace: a dawn inspection stamp overlaps the previous day's quota sheet; its time field was not updated.",
+		"field_trace_outskirts_0": "Outskirts trace: a discarded conduit has fresh sensor scratches, but the echo comes from deeper below.",
+		"field_trace_outskirts_1": "Outskirts trace: a ground marker diverges from the old conduit toward a line still in use.",
+		"field_trace_ruins_0": "Ruin trace: three repair fillers in a wall seam show different degrees of wear.",
+		"field_trace_ruins_1": "Ruin trace: the outermost fastener uses a current specification and cannot date to the oldest layer.",
 		"field_assist_marker_city": "Allocation ledger", "field_assist_marker_outskirts": "Echo node", "field_assist_marker_ruins": "Strata panel",
 		"field_assist_need": "Bring %s to examine this. You can invite them and return anytime.",
 		"field_assist_use": "Use personal skill", "field_assist_close": "Close", "field_assist_recorded": "Recorded",
@@ -350,6 +370,7 @@ var recruited_members: Dictionary = {}
 var party_talk_seen: Dictionary = {}
 var party_bonds: Dictionary = {}
 var field_insights: Dictionary = {}
+var field_traces: Dictionary = {}
 var ji_records_checked := false
 var relay_checked := false
 var areas_visited: Dictionary = {}
@@ -432,6 +453,7 @@ func begin_new_run() -> void:
 	party_talk_seen.clear()
 	party_bonds.clear()
 	field_insights.clear()
+	field_traces.clear()
 	ji_records_checked = false
 	hero_name = ""
 	hero_appearance = "male"
@@ -478,9 +500,28 @@ func field_assist_log_text() -> String:
 	return text_for("field_assist_log") % field_insights.size()
 
 
+func field_trace_log_text() -> String:
+	return text_for("field_trace_log") % field_traces.size()
+
+
+func field_trace_count(destination_id: String) -> int:
+	return int(field_traces.has(destination_id + ":0")) + int(field_traces.has(destination_id + ":1"))
+
+
+func discover_field_trace(destination_id: String, index: int) -> bool:
+	if not DESTINATIONS.has(destination_id) or index not in [0, 1]:
+		return false
+	var key := "%s:%d" % [destination_id, index]
+	if field_traces.has(key):
+		return false
+	field_traces[key] = true
+	record_playtest_event("field_trace", destination_id)
+	return true
+
+
 func complete_field_assist(destination_id: String, member_id: String) -> bool:
 	var assistants := {"scifi.city": "liang-xu", "scifi.outskirts": "zhao-ling", "scifi.ruins": "ji-cheng"}
-	if assistants.get(destination_id, "") != member_id or not recruited_members.has(member_id) or field_insights.has(destination_id):
+	if assistants.get(destination_id, "") != member_id or not recruited_members.has(member_id) or field_insights.has(destination_id) or field_trace_count(destination_id) < 2:
 		return false
 	field_insights[destination_id] = true
 	member_state(member_id)["jp"] = int(member_state(member_id).get("jp", 0)) + 4
@@ -552,6 +593,7 @@ func write_playtest_receipt() -> String:
 		"surveysCompleted": survey_solved.keys(),
 		"conversationsHeard": party_talk_seen.keys(),
 		"fieldAssists": field_insights.keys(),
+		"fieldTraces": field_traces.keys(),
 		"reportCompleted": demo_completed,
 	}
 	var file := FileAccess.open(path, FileAccess.WRITE)
@@ -747,6 +789,7 @@ func make_snapshot(scene_kind: String, position: Vector2, note: String) -> Dicti
 		"partyTalkSeen": party_talk_seen.duplicate(true),
 		"partyBonds": party_bonds.duplicate(true),
 		"fieldInsights": field_insights.duplicate(true),
+		"fieldTraces": field_traces.duplicate(true),
 		"jiRecordsChecked": ji_records_checked,
 		"relayChecked": relay_checked,
 		"areasVisited": areas_visited.duplicate(true),
@@ -794,6 +837,7 @@ func load_save(id: String) -> bool:
 	party_talk_seen = snapshot.get("partyTalkSeen", {}).duplicate(true)
 	party_bonds = snapshot.get("partyBonds", {}).duplicate(true)
 	field_insights = snapshot.get("fieldInsights", {}).duplicate(true)
+	field_traces = snapshot.get("fieldTraces", {}).duplicate(true)
 	for member_id in recruited_members:
 		if not party_bonds.has(member_id):
 			party_bonds[member_id] = 0
@@ -869,6 +913,12 @@ func _valid_snapshot(snapshot: Dictionary) -> bool:
 			return false
 	for destination_id in snapshot.get("fieldInsights", {}).keys():
 		if not DESTINATIONS.has(destination_id) or snapshot["fieldInsights"][destination_id] != true:
+			return false
+	if typeof(snapshot.get("fieldTraces", {})) != TYPE_DICTIONARY:
+		return false
+	for trace_key in snapshot.get("fieldTraces", {}).keys():
+		var trace_parts: PackedStringArray = String(trace_key).split(":")
+		if trace_parts.size() != 2 or not DESTINATIONS.has(trace_parts[0]) or trace_parts[1] not in ["0", "1"] or snapshot["fieldTraces"][trace_key] != true:
 			return false
 	if snapshot.get("language", "") not in ["zh", "en"] or typeof(snapshot.get("jiRecordsChecked")) != TYPE_BOOL or typeof(snapshot.get("enemyCleared")) != TYPE_BOOL:
 		return false

@@ -28,6 +28,7 @@ Last updated: 2026-10-13
 - M7 now has one optional, returnable field station per science-region location. Liang Xu, Zhao Ling and Ji Cheng each use a distinct personal field ability after recruitment; the first use gives that companion 4 JP and 2 bond, records a bilingual finding, writes an autosave, and appears in the playtest receipt. Locked, completed, replay and save/load paths pass in the two-route smoke check. Five separate 640×360 captures were reviewed. The 25–35 minute content target still needs actual playtesting.
 - The game bible's launch button was exercised from its live browser panel: it opened a visible Godot game window, showed `running`, and returned to `no_report` after that test window was closed before any report. No receipt was fabricated. Older panels now link directly to the current launch-capable panel. This validates launch and early-exit behavior, not the full playthrough or receipt-copy path.
 - M7 playtest receipts now include cumulative time spent in each science destination and on the map or character setup. The game bible displays those splits alongside each survey's completion time, so actual playtests can identify pacing gaps without assuming that source length predicts play duration. A synthetic revisit timing check and both automated route receipts pass; no human duration has been inferred from them.
+- M7 adds two optional, visibly marked field traces in each of the three destinations. Finding both lets the local recruited companion interpret them at the existing field station; recruitment and the city report remain independent. Each trace has distinct bilingual text, survives save/load, is listed in the field log and playtest receipt, and has no repeat reward. Both route orders pass the updated smoke test. Nine separate 640×360 captures were reviewed for text and marker placement. This adds exploration with a return visit; a human timed run is still needed to judge pacing.
 
 ## Milestones Checklist
 
@@ -73,6 +74,7 @@ Last updated: 2026-10-13
 - [x] Add three optional companion field abilities that reward return exploration and persist across saves.
 - [x] Verify the browser's playtest launch, visible game window and no-report exit state.
 - [x] Record per-destination time and survey completion points for pacing review.
+- [x] Add six optional field traces that give each recruited local companion a concrete investigation to finish.
 - [ ] Time a fresh start-to-finish playthrough and fix any blockers or text overflow.
 
 ### Phase M8 - Acceptance and tuning

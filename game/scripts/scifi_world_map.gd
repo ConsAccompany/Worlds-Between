@@ -160,7 +160,12 @@ func _refresh_text() -> void:
 	var lines := [AppState.text_for("field_log_hint"), "", AppState.field_log_text()]
 	lines.append(AppState.survey_log_text())
 	lines.append(AppState.field_assist_log_text())
+	lines.append(AppState.field_trace_log_text())
 	lines.append(AppState.play_time_text())
+	for destination_id in AppState.DESTINATIONS:
+		for index in 2:
+			if AppState.field_traces.has("%s:%d" % [destination_id, index]):
+				lines.append(AppState.text_for("field_trace_" + destination_id.trim_prefix("scifi.") + "_%d" % index))
 	for destination_id in AppState.DESTINATIONS:
 		if AppState.field_insights.has(destination_id):
 			lines.append(AppState.text_for("field_assist_result_" + destination_id.trim_prefix("scifi.")))

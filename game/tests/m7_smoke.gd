@@ -68,6 +68,7 @@ func _run() -> void:
 		app.language = "zh" if route == 0 else "en"
 		var order := ["scifi.city", "scifi.outskirts", "scifi.ruins"] if route == 0 else ["scifi.ruins", "scifi.outskirts", "scifi.city"]
 		var assist_positions := {"scifi.city": Vector2(120, 187), "scifi.outskirts": Vector2(505, 258), "scifi.ruins": Vector2(505, 275)}
+		var trace_positions := {"scifi.city": [Vector2(240, 267), Vector2(378, 121)], "scifi.outskirts": [Vector2(125, 240), Vector2(408, 95)], "scifi.ruins": [Vector2(115, 245), Vector2(470, 115)]}
 		var assistants := {"scifi.city": "liang-xu", "scifi.outskirts": "zhao-ling", "scifi.ruins": "ji-cheng"}
 		for destination in order:
 			app.select_destination(destination)
@@ -117,6 +118,22 @@ func _run() -> void:
 			if not _check(area.get("dialogue_open") and area.get("dialogue_mode") == "assist", "field station opens " + destination):
 				return
 			var assistant_id: String = assistants[destination]
+			if not _check(area.get("invite_button").disabled and not app.field_insights.has(destination), "field station requires traces before interpretation " + destination):
+				return
+			area.get("later_button").pressed.emit()
+			for trace_index in 2:
+				area.get("hero").position = trace_positions[destination][trace_index]
+				area._unhandled_input(_interact())
+				var trace_key := "%s:%d" % [destination, trace_index]
+				if not _check(app.field_traces.has(trace_key) and area.get("dialogue_mode") == "trace" and area.get("dialogue_text").text == app.text_for("field_trace_" + destination.trim_prefix("scifi.") + "_%d" % trace_index), "bilingual trace discovery " + trace_key):
+					return
+				area.get("later_button").pressed.emit()
+				area._unhandled_input(_interact())
+				if not _check(app.field_trace_count(destination) == trace_index + 1, "trace replay does not duplicate progress " + trace_key):
+					return
+				area.get("later_button").pressed.emit()
+			area.get("hero").position = assist_positions[destination]
+			area._unhandled_input(_interact())
 			if app.recruited_members.has(assistant_id):
 				var assistant_jp: int = app.member_state(assistant_id)["jp"]
 				var assistant_bond: int = int(app.party_bonds[assistant_id])
@@ -207,7 +224,7 @@ func _run() -> void:
 					return
 				change_scene_to_file(app.loaded_scene_path())
 				await _settle()
-				if not _check(current_scene.get("hero").position == Vector2(311, 258) and app.survey_solved.has(destination) and app.survey_clues.size() == 6 and app.survey_links.size() == 3 and app.field_insights.has(destination), "annex position, clues, field assist and links restored"):
+				if not _check(current_scene.get("hero").position == Vector2(311, 258) and app.survey_solved.has(destination) and app.survey_clues.size() == 6 and app.survey_links.size() == 3 and app.field_insights.has(destination) and app.field_trace_count(destination) == 2, "annex position, clues, traces, field assist and links restored"):
 					return
 				final_annex = current_scene
 			final_annex._back_room()
@@ -241,6 +258,8 @@ func _run() -> void:
 		if not _check(receipt.get("surveysCompleted", []).size() == 3 and int(receipt.get("wrongEvidencePairs", {}).get("scifi.city", 0)) == 1 and int(receipt.get("wrongJudgments", {}).get("scifi.city", 0)) == 1, "playtest receipt surveys and retry counts"):
 			return
 		if not _check(receipt.get("fieldAssists", []).size() == (3 if route == 0 else 1), "receipt records optional companion fieldwork"):
+			return
+		if not _check(receipt.get("fieldTraces", []).size() == 6, "receipt records six optional field traces"):
 			return
 		var recorded_events: Array = receipt.get("events", [])
 		if not _check(recorded_events.size() >= 10 and recorded_events[0]["type"] == "run_start" and recorded_events[-1]["type"] == "report", "playtest receipt event order"):

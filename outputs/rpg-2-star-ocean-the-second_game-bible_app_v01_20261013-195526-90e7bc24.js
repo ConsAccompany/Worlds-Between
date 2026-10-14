@@ -126,7 +126,7 @@
       M4:['伙伴与 AI','实现五个队伍位置、三种招募路线、等级同步、切换角色与指令。','三位伙伴都能招募；四人队伍可获胜；AI 与临时指令生效。'],
       M5:['等级与职业','加入经验、JP、四项天分、四条职业系列和 10 级必选职业。','可留任、晋升、切换并保留原系列进度；候补获得 25% 收益。'],
       M6:['存档与恢复','加入战后自动存档、手动存档及队伍和职业状态加载。','重新启动后能读取关键状态；战败回菜单后可加载。'],
-      M7:['可玩内容','科技板块三地探索、六处勘察空间、九组证据关联、六段伙伴交流、三位伙伴招募与回城汇报已连通。','不用开发工具通关；两种探索和招募顺序可行；中英文显示完整，并实测 25–35 分钟内容长度。'],
+      M7:['可玩内容','科技板块三地探索、六处勘察空间、九组证据关联、六处现场痕迹、六段伙伴交流、三位伙伴招募与回城汇报已连通。','不用开发工具通关；两种探索和招募顺序可行；中英文显示完整，并实测 25–35 分钟内容长度。'],
       M8:['验收与调整','完整试玩、记录转场时间和易用性问题，并修复阻碍。','两次新存档完整试玩无阻碍；存档和回访招募通过核验。'],
     };
     const place={'scifi.city':'城市','scifi.outskirts':'城外','scifi.ruins':'遗址'};
@@ -137,7 +137,7 @@
       const route=run.visits.map(id=>place[id]).filter(Boolean).join(' → ')||'未记录';
       const placeTimes=Object.entries(run.timeByDestination||{}).filter(([id])=>place[id]).map(([id,seconds])=>`${place[id]} ${shortTime(seconds)}`).join(' · ');
       const surveyTimes=(run.surveyTimeline||[]).map(item=>`${place[item.destination]} ${shortTime(item.atSeconds)}`).join(' → ');
-      return `<div class="playtest-run"><strong>${esc(elapsed)}</strong><span class="muted small">${esc(run.recordedAt)} · ${run.language==='en'?'英文':'中文'}</span><div class="small">路线：${esc(route)}</div><div class="small muted">已招募 ${run.recruited.length}/3 · 完成调查 ${run.surveysCompleted}/3 · 同行交流 ${run.conversationsHeard}/6 · 战斗 ${run.battles} 场 · 错误证据关联 ${run.wrongEvidencePairs} 次 · 错误研判 ${run.wrongJudgments} 次</div>${placeTimes?`<div class="small">各地累计停留：${esc(placeTimes)}</div>`:''}${surveyTimes?`<div class="small muted">调查完成时点：${esc(surveyTimes)}</div>`:''}<div class="small muted receipt-name">原始记录：outputs/${esc(run.id)}</div></div>`;
+      return `<div class="playtest-run"><strong>${esc(elapsed)}</strong><span class="muted small">${esc(run.recordedAt)} · ${run.language==='en'?'英文':'中文'}</span><div class="small">路线：${esc(route)}</div><div class="small muted">已招募 ${run.recruited.length}/3 · 完成调查 ${run.surveysCompleted}/3 · 现场痕迹 ${run.fieldTraces||0}/6 · 同行交流 ${run.conversationsHeard}/6 · 战斗 ${run.battles} 场 · 错误证据关联 ${run.wrongEvidencePairs} 次 · 错误研判 ${run.wrongJudgments} 次</div>${placeTimes?`<div class="small">各地累计停留：${esc(placeTimes)}</div>`:''}${surveyTimes?`<div class="small muted">调查完成时点：${esc(surveyTimes)}</div>`:''}<div class="small muted receipt-name">原始记录：outputs/${esc(run.id)}</div></div>`;
     }).join('');
     const routeTrials=new Set(state.playtests.filter(run=>run.visits.length===3&&run.surveysCompleted===3&&run.recruited.length===3&&run.durationSeconds>=1500&&run.durationSeconds<=2100).map(run=>run.visits.join('>')));
     const launchPhase=state.playtestStatus.phase;
