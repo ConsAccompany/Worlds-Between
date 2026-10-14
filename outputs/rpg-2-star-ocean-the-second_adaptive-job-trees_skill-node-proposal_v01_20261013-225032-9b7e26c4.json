@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "project": "rpg-2-star-ocean-the-second",
+  "status": "设计提案，尚待玩家确认",
+  "scope": "弓猎、枪械、驯兽、行商四条应变系列的七节点职业技能树",
+  "trees": [
+    {"seriesId":"archery","name":"弓猎","nodes":[
+      {"id":"archery_aimed_shot","tier":1,"name":"瞄准射击","type":"主动","energy":14,"tags":["远程","精准"],"effect":"短暂瞄准后射击一名敌人，目标越久没有大幅移动，命中收益越高。"},
+      {"id":"archery_track_mark","tier":2,"branch":"追迹","name":"猎迹标记","type":"主动","energy":16,"tags":["标记","感知"],"effect":"标记目标，使其下一次闪避方向更容易被队友预判；不提供场外潜行能力。"},
+      {"id":"archery_cover_fire","tier":2,"branch":"掩护","name":"掩护箭","type":"主动","energy":20,"tags":["远程","守护"],"effect":"向正逼近队友的敌人射击，命中时降低该敌人的接近速度。"},
+      {"id":"archery_weakpoint_read","tier":3,"name":"弱点辨识","type":"被动","energy":0,"tags":["感知","精准"],"effect":"对已观察足够时间的敌人显示一次短暂弱点窗口，下一次弓技命中时获得加成。"},
+      {"id":"archery_long_trace","tier":4,"branch":"追迹","name":"长线追矢","type":"主动","energy":28,"tags":["远程","标记"],"effect":"追射已标记目标，目标改变移动方向时仍可修正一次箭路。"},
+      {"id":"archery_dual_guard","tier":4,"branch":"掩护","name":"双向警戒","type":"被动","energy":0,"tags":["感知","守护"],"effect":"附近两名队友受到远距攻击提示时，优先提示生命比例较低的一人并强化下一次掩护箭。"},
+      {"id":"archery_skyline_hunt","tier":5,"name":"天际追猎","type":"主动","energy":46,"tags":["远程","精准"],"effect":"连续锁定最多三名已观察或标记的敌人并逐个射击；没有足够目标时只发射实际锁定的箭。"}
+    ]},
+    {"seriesId":"firearms","name":"枪械","nodes":[
+      {"id":"firearms_stable_shot","tier":1,"name":"稳准点射","type":"主动","energy":14,"tags":["射击","精准"],"effect":"短起手点射单个目标，连续两次命中后提高下一次射击的稳定度。"},
+      {"id":"firearms_breaker_round","tier":2,"branch":"穿透","name":"破盾弹","type":"主动","energy":22,"tags":["射击","破甲"],"effect":"以较长装填时间换取护盾削减，未命中护盾目标时收益较低。"},
+      {"id":"firearms_mobile_reload","tier":2,"branch":"机动","name":"移动换匣","type":"被动","energy":0,"tags":["射击","机动"],"effect":"移动后进行下一次枪械技能时缩短起手；连续触发有短暂间隔。"},
+      {"id":"firearms_burst_line","tier":3,"name":"控制连射","type":"主动","energy":28,"tags":["射击","压制"],"effect":"在固定时间窗中发射三次，连续命中同一目标时伤害略增；偏离会重置加成。"},
+      {"id":"firearms_piercing_lane","tier":4,"branch":"穿透","name":"弹道贯穿","type":"主动","energy":32,"tags":["射击","范围"],"effect":"射击一条水平线上的敌人，后方目标承受递减伤害；不穿越场地障碍作额外计算。"},
+      {"id":"firearms_counter_window","tier":4,"branch":"机动","name":"反位火线","type":"主动","energy":26,"tags":["射击","反击"],"effect":"闪避后短时间内可快速向原追击者射击一次，错过窗口则按普通射击结算。"},
+      {"id":"firearms_extreme_ballistics","tier":5,"name":"极域弹道","type":"主动","energy":48,"tags":["射击","破甲"],"effect":"在三个短窗口中依次切换破盾、压制、精密模式，对同一目标完成三段射击。"}
+    ]},
+    {"seriesId":"beast","name":"驯兽","nodes":[
+      {"id":"beast_companion_call","tier":1,"name":"兽伴呼应","type":"主动","energy":16,"tags":["兽伴","协同"],"effect":"呼唤当前登记的兽伴进行一次短时支援；没有登记兽伴时由基础伙伴执行，不阻断技能。"},
+      {"id":"beast_protect_signal","tier":2,"branch":"守护","name":"护伴哨","type":"主动","energy":18,"tags":["兽伴","守护"],"effect":"令兽伴短暂守护生命比例最低的队友，并替其吸收少量伤害。"},
+      {"id":"beast_pursuit_signal","tier":2,"branch":"追击","name":"追迹哨","type":"主动","energy":18,"tags":["兽伴","标记"],"effect":"令兽伴追击被标记目标并降低其移动速度；不会强制控制野外生物。"},
+      {"id":"beast_trust_rhythm","tier":3,"name":"信任节奏","type":"被动","energy":0,"tags":["兽伴","协同"],"effect":"角色与兽伴在短时间内相继完成不同动作时，缩短下一次兽伴指令的等待。"},
+      {"id":"beast_shelter_circle","tier":4,"branch":"守护","name":"群生护圈","type":"主动","energy":28,"tags":["兽伴","范围"],"effect":"兽伴在队友附近短暂巡护，对靠近的敌人造成轻度阻拦；不形成地形障碍。"},
+      {"id":"beast_two_voice_call","tier":4,"branch":"追击","name":"双声协猎","type":"主动","energy":30,"tags":["兽伴","攻击"],"effect":"发出两次不同节奏的指令，让兽伴先牵制再攻击同一目标。"},
+      {"id":"beast_all_life_path","tier":5,"name":"万灵同路","type":"主动","energy":46,"tags":["兽伴","协同"],"effect":"短时间强化兽伴的守护与追击两种响应，并为全队提供一次小额状态恢复；不复制角色个人技能。"}
+    ]},
+    {"seriesId":"merchant","name":"行商","nodes":[
+      {"id":"merchant_supply_pact","tier":1,"name":"补给协议","type":"主动","energy":12,"tags":["贸易","支援"],"effect":"战斗中提高一名队友下一次常见消耗品的效果；在商会中显示当前供需差额。"},
+      {"id":"merchant_fair_quote","tier":2,"branch":"互惠","name":"公平报价","type":"被动","energy":0,"tags":["贸易","经营"],"effect":"驻守商会时提高供需互补协议的稳定收益；只在当前职业为行商时生效。"},
+      {"id":"merchant_risk_reserve","tier":2,"branch":"风控","name":"风险准备金","type":"被动","energy":0,"tags":["贸易","经营"],"effect":"驻守商会时减少一次普通强盗事件造成的当周收入损失；不取消剿灭任务。"},
+      {"id":"merchant_mutual_turnover","tier":3,"name":"互惠周转","type":"主动","energy":20,"tags":["贸易","能量"],"effect":"把自身一部分能量转给一名队友，转移量低于消耗量；驻守时提高普通委托的周结算稳定度。"},
+      {"id":"merchant_market_read","tier":4,"branch":"互惠","name":"需求洞察","type":"被动","energy":0,"tags":["贸易","经营"],"effect":"驻守商会时更早提示受考古发现或事件影响的长期价格变化，不消除价格变化。"},
+      {"id":"merchant_emergency_supply","tier":4,"branch":"风控","name":"应急调拨","type":"主动","energy":28,"tags":["贸易","支援"],"effect":"战斗中让一名队友下一次技能少耗能量；驻守时降低一次物流中断的收益损失。"},
+      {"id":"merchant_roads_accord","tier":5,"name":"万路协约","type":"主动","energy":45,"tags":["贸易","协同"],"effect":"战斗中短时降低上场队友的技能能量成本；驻守时为跨城协议增加一次周结算稳定度。"}
+    ]}
+  ]
+}
