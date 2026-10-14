@@ -14,6 +14,7 @@ const names = {
   adaptiveTrees: 'rpg-2-star-ocean-the-second_adaptive-job-trees_skill-node-proposal_v01_20261013-225032-9b7e26c4.json',
   scholarlyTrees: 'rpg-2-star-ocean-the-second_scholarly-job-trees_skill-node-proposal_v01_20261013-225251-3e6a19d8.json',
   spiritualTrees: 'rpg-2-star-ocean-the-second_spiritual-job-trees_skill-node-proposal_v01_20261013-225530-b2e8f4a1.json',
+  personalTrees: 'rpg-2-star-ocean-the-second_core-cast_personal-skill-trees-proposal_v01_20261013-230015-4ce1a8d2.json',
   inventory: 'rpg-2-star-ocean-the-second_asset-inventory_state_v01_20261013-191033-7d1e0a8b.json',
 };
 const dest = path.join(out, 'rpg-2-star-ocean-the-second_game-bible_state_v01_20261013-195422-b8c16d42.json');
@@ -28,6 +29,7 @@ const martialTrees = JSON.parse(read('martialTrees'));
 const adaptiveTrees = JSON.parse(read('adaptiveTrees'));
 const scholarlyTrees = JSON.parse(read('scholarlyTrees'));
 const spiritualTrees = JSON.parse(read('spiritualTrees'));
+const personalSkillTrees = JSON.parse(read('personalTrees'));
 const skillTreeProposal = {...skillTrees, designNotes:[...scholarlyTrees.rules, ...spiritualTrees.rules], trees:[...skillTrees.trees, ...martialTrees.trees, ...adaptiveTrees.trees, ...scholarlyTrees.trees, ...spiritualTrees.trees]};
 if (jobs.series?.length !== 20 || !['武艺','应变','研学','灵觉'].every(aptitude => jobs.series.filter(series => series.aptitude === aptitude).length === 5) || jobs.series.some(series => series.stages?.length !== 5 || !series.finalQuest)) {
   throw new Error('Job proposal must contain four aptitudes with five complete series each');
@@ -116,15 +118,28 @@ characters.sort((a,b)=>a.number-b.number);
 if (chapters.length!==9 || characters.length!==51 || characters.at(-1).number!==50) {
   throw new Error('Unexpected bible count: '+chapters.length+' chapters, '+characters.length+' characters');
 }
+const coreCharacters = characters.filter(character => character.group === '主角' || character.group === '主线伙伴');
+const personalNodes = personalSkillTrees.trees.flatMap(tree => tree.nodes);
+if (coreCharacters.length !== 16 || personalSkillTrees.trees.length !== 16 || new Set(personalSkillTrees.trees.map(tree => tree.characterId)).size !== 16 ||
+    personalNodes.length !== 80 || new Set(personalNodes.map(node => node.id)).size !== 80 ||
+    personalSkillTrees.trees.some(tree => {
+      const character = coreCharacters.find(entry => entry.id === tree.characterId);
+      return !character || !character.body.includes(tree.skill) || tree.nodes?.length !== 5 ||
+        [1,10,20,30,40].some((level,index) => tree.nodes[index]?.level !== level) ||
+        tree.nodes[0].name !== tree.skill || tree.nodes.some(node => !node.name || !node.effect ||
+          (node.level === 1 && !Array.isArray(node.tags)) || (node.mode === '主动' ? node.energy <= 0 : node.energy !== 0));
+    })) {
+  throw new Error('Personal skill proposal must match the hero and fifteen core companion profiles');
+}
 
 const openQuestions = [
   {title:'10 位可恋爱伙伴',detail:'人选与开放阶段尚未确定；不要从角色画像推断恋爱资格。'},
-  {title:'职业技能与数值',detail:'20 个系列的五阶名称及终阶任务已有待确认提案；十六条系列已有七节点技能树样板，其余四条与实际平衡数值仍需设计。'},
+  {title:'职业与个人技能数值',detail:'20 个职业系列的五阶名称、终阶任务和七节点技能树均有待确认提案；主角与 15 位主线伙伴另有五节点个人技能树提案。实际平衡数值及其余 35 位伙伴的个人树仍需设计。'},
   {title:'地点与任务内容',detail:'五个板块的城市、社区、野外地点和独立主线任务尚需逐项命名与编写。'},
   {title:'数值与经营平衡',detail:'JP 折扣、敌人数值、终局难度奖励、商会利润与日历结算需试玩后定稿。'},
   {title:'组合技与 AI 细则',detail:'关系及技能标签的组合规则、AI 条件冲突与自动战斗优先级需细化。'},
 ];
-const sources = Object.entries(names).filter(([key])=>!['inventory','jobs','skillTrees','martialTrees','adaptiveTrees','scholarlyTrees','spiritualTrees'].includes(key)).map(([id,filename])=>({id,filename,url:'/source/'+id}));
+const sources = Object.entries(names).filter(([key])=>!['inventory','jobs','skillTrees','martialTrees','adaptiveTrees','scholarlyTrees','spiritualTrees','personalTrees'].includes(key)).map(([id,filename])=>({id,filename,url:'/source/'+id}));
 const bible = {
   schemaVersion:1,
   project:'rpg-2-star-ocean-the-second',
@@ -142,7 +157,7 @@ const bible = {
     {label:'同伴',value:'50 位 · 最多 5 人上场'},
     {label:'职业',value:'20 系列 × 5 阶'},
   ],
-  chapters, characters, jobProposal:jobs, skillTreeProposal, openQuestions, sources,
+  chapters, characters, jobProposal:jobs, skillTreeProposal, personalSkillTrees, openQuestions, sources,
 };
 fs.writeFileSync(dest,JSON.stringify(bible,null,2)+'\n','utf8');
 console.log(JSON.stringify({file:path.relative(root,dest),chapters:chapters.length,characters:characters.length,sources:sources.length}));

@@ -4,7 +4,7 @@
   "title": "世界之间",
   "englishTitle": "Worlds Between",
   "edition": "设计基线 v0.1",
-  "updatedAt": "2026-10-14T02:57:14.454Z",
+  "updatedAt": "2026-10-14T03:03:14.055Z",
   "note": "规则以玩家确认的设计稿为基线；人物姓名与外观是待审提案，具体剧情留待后续设计。",
   "pitch": "从地下社区走出的旅人，以好奇心探索多元文明，招募伙伴，并成为不同世界认知差异的桥梁。",
   "pillars": [
@@ -3065,14 +3065,853 @@
       "四条系列均不依赖地形、高度差或障碍物造成战斗效果。"
     ]
   },
+  "personalSkillTrees": {
+    "schemaVersion": 1,
+    "project": "rpg-2-star-ocean-the-second",
+    "status": "设计提案，尚待玩家确认",
+    "scope": "主角与十五位主线伙伴的个人专属技能树",
+    "progression": {
+      "unlockLevels": [
+        1,
+        10,
+        20,
+        30,
+        40
+      ],
+      "rankMaximum": 3,
+      "rankOne": "达到角色等级时开放节点 1 级；新加入伙伴按同步后的等级开放已达到的节点。",
+      "rankUpgrade": "节点 2、3 级消耗 JP；具体成本及新伙伴的初始升级进度待试玩确定。",
+      "careerIndependence": "个人技能与所有已开放的强化节点不随转职消失，任何当前职业均可使用。",
+      "aptitude": "个人技能不设天分入门槛；其 JP 与四项职业天分之间的成本关系待数值阶段确定。",
+      "combos": "技能标签可参与最多三人的组合技；是否触发仍取决于角色关系与当前技能。"
+    },
+    "trees": [
+      {
+        "characterId": "hero",
+        "name": "主角",
+        "skill": "临场理解",
+        "nodes": [
+          {
+            "id": "hero_understanding",
+            "level": 1,
+            "name": "临场理解",
+            "mode": "主动",
+            "energy": 16,
+            "effect": "观察一名敌人的动作并标记一种弱点；队友首次利用该弱点时少消耗能量。",
+            "tags": [
+              "观察",
+              "协同"
+            ]
+          },
+          {
+            "id": "hero_fast_read",
+            "level": 10,
+            "name": "快速归纳",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "缩短临场理解所需的观察窗口；不揭示敌人尚未使用过的招式。"
+          },
+          {
+            "id": "hero_shared_note",
+            "level": 20,
+            "name": "共享笔记",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "标记出现后，让未操纵伙伴的 AI 适度提高利用该弱点的优先级。"
+          },
+          {
+            "id": "hero_open_mind",
+            "level": 30,
+            "name": "修正假设",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "若标记到期前未被利用，下一次观察同一敌人所需时间减少；不能无限叠加。"
+          },
+          {
+            "id": "hero_bridge_insight",
+            "level": 40,
+            "name": "交汇洞见",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "两名不同队友先后利用同一弱点时，第二次命中带来小额团队效能加成；每个标记仅触发一次。"
+          }
+        ]
+      },
+      {
+        "characterId": "character-01",
+        "name": "梁序",
+        "skill": "战术校准",
+        "nodes": [
+          {
+            "id": "liang_tactical_calibration",
+            "level": 1,
+            "name": "战术校准",
+            "mode": "主动",
+            "energy": 18,
+            "effect": "即时重排队友 AI 指令优先级，并略微强化下一次符合新规则的行动。",
+            "tags": [
+              "指挥",
+              "协同"
+            ]
+          },
+          {
+            "id": "liang_clear_orders",
+            "level": 10,
+            "name": "清晰口令",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "降低战术校准的施放延迟，使队友更快执行新优先级。"
+          },
+          {
+            "id": "liang_contingency",
+            "level": 20,
+            "name": "预备方案",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "若被指定目标倒下，队友自动选择同类威胁作为次级目标。"
+          },
+          {
+            "id": "liang_field_review",
+            "level": 30,
+            "name": "现场复盘",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "校准后第一位按新规则成功行动的队友获得短时防御加成。"
+          },
+          {
+            "id": "liang_shared_command",
+            "level": 40,
+            "name": "共同判断",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "校准后若两名不同队友依次完成指定行动，第二次行动获得额外小幅效能加成；每次校准仅触发一次。"
+          }
+        ]
+      },
+      {
+        "characterId": "character-02",
+        "name": "蒋岚",
+        "skill": "二次装配",
+        "nodes": [
+          {
+            "id": "jiang_second_assembly",
+            "level": 1,
+            "name": "二次装配",
+            "mode": "主动",
+            "energy": 20,
+            "effect": "释放一枚个人装置；装置结束时返还少量能量，并强化下一枚个人装置。",
+            "tags": [
+              "构造",
+              "循环"
+            ]
+          },
+          {
+            "id": "jiang_easy_service",
+            "level": 10,
+            "name": "易修结构",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "个人装置自然结束时增加一点能量返还；被提前破坏时不获得全部返还。"
+          },
+          {
+            "id": "jiang_modular_shell",
+            "level": 20,
+            "name": "模块外壳",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "个人装置首次受击时获得短时耐久保护；不形成地图障碍。"
+          },
+          {
+            "id": "jiang_spare_part",
+            "level": 30,
+            "name": "备用零件",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "强化的下一枚装置可额外支持一次队友行动，随后强化清空。"
+          },
+          {
+            "id": "jiang_reuse_loop",
+            "level": 40,
+            "name": "再用一轮",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "连续完成两次自然回收后，第三枚个人装置少耗少量能量；每场战斗仅触发一次。"
+          }
+        ]
+      },
+      {
+        "characterId": "character-03",
+        "name": "林阙",
+        "skill": "折线路径",
+        "nodes": [
+          {
+            "id": "lin_bent_trajectory",
+            "level": 1,
+            "name": "折线路径",
+            "mode": "主动",
+            "energy": 18,
+            "effect": "发射个人能量弹，命中后转向第二目标，优先寻找队友已标记的敌人。",
+            "tags": [
+              "弹道",
+              "追击"
+            ]
+          },
+          {
+            "id": "lin_trajectory_memory",
+            "level": 10,
+            "name": "轨迹记忆",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "第二次命中的伤害衰减略微减少。"
+          },
+          {
+            "id": "lin_tag_lock",
+            "level": 20,
+            "name": "标记锁定",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "第二目标有队友标记时，转向速度提高，并减少弹道落空机会。"
+          },
+          {
+            "id": "lin_clean_angle",
+            "level": 30,
+            "name": "净角射击",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "仅有一个敌人时，能量弹折返再击同一目标，但第二击伤害较低。"
+          },
+          {
+            "id": "lin_three_point_line",
+            "level": 40,
+            "name": "三点成线",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "前两次命中不同目标且第二目标带标记时，可再转向第三目标；每次施放最多三击。"
+          }
+        ]
+      },
+      {
+        "characterId": "character-04",
+        "name": "米洛",
+        "skill": "生命账本",
+        "nodes": [
+          {
+            "id": "milo_life_ledger",
+            "level": 1,
+            "name": "生命账本",
+            "mode": "主动",
+            "energy": 26,
+            "effect": "记录本场队友实际受到的伤害；达到阈值后可施放一次范围急救，并清空已用记录。",
+            "tags": [
+              "治疗",
+              "蓄积"
+            ]
+          },
+          {
+            "id": "milo_individual_record",
+            "level": 10,
+            "name": "个体记录",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "账本提示目前生命比例最低的队友，急救优先照顾该目标。"
+          },
+          {
+            "id": "milo_quick_triage",
+            "level": 20,
+            "name": "快速分诊",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "队友承受一次较大实际伤害时，账本额外获得少量进度；同一攻击只计算一次。"
+          },
+          {
+            "id": "milo_stable_aftercare",
+            "level": 30,
+            "name": "稳定照护",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "范围急救后，获得治疗的存活队友短时提高异常抗性。"
+          },
+          {
+            "id": "milo_every_name",
+            "level": 40,
+            "name": "每一个名字",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "急救人数越多，每人恢复量略有增加，但总治疗量有上限；倒下者仍需复苏技能。"
+          }
+        ]
+      },
+      {
+        "characterId": "character-05",
+        "name": "阿荻",
+        "skill": "借力护挡",
+        "nodes": [
+          {
+            "id": "adi_borrowed_guard",
+            "level": 1,
+            "name": "借力护挡",
+            "mode": "被动触发",
+            "energy": 0,
+            "effect": "成功防御后，替附近一名队友承担下一次攻击的一部分伤害，并获得短暂反击窗口。",
+            "tags": [
+              "守护",
+              "反击"
+            ]
+          },
+          {
+            "id": "adi_stable_footing",
+            "level": 10,
+            "name": "踏稳",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "借力护挡触发后的下一次受击，降低自身被打断概率。"
+          },
+          {
+            "id": "adi_working_together",
+            "level": 20,
+            "name": "合力",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "被援护的队友下一次普通攻击获得小额加成。"
+          },
+          {
+            "id": "adi_open_counter",
+            "level": 30,
+            "name": "开门反击",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "反击窗口中成功命中后，略微减少下一次借力护挡的触发间隔。"
+          },
+          {
+            "id": "adi_shared_shelter",
+            "level": 40,
+            "name": "并肩遮护",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "借力护挡可同时给第二名附近队友较弱的减伤；阿荻承担的总伤害仍有上限。"
+          }
+        ]
+      },
+      {
+        "characterId": "character-06",
+        "name": "牧修",
+        "skill": "双声呼哨",
+        "nodes": [
+          {
+            "id": "muxiu_twin_whistle",
+            "level": 1,
+            "name": "双声呼哨",
+            "mode": "主动",
+            "energy": 20,
+            "effect": "呼出固定的动物伙伴执行一次短时支援；兽伴不占上场角色位。",
+            "tags": [
+              "兽伴",
+              "协同"
+            ]
+          },
+          {
+            "id": "muxiu_care_signal",
+            "level": 10,
+            "name": "照护讯号",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "队友生命较低时，兽伴优先提供小额保护；其他情况执行原支援动作。"
+          },
+          {
+            "id": "muxiu_familiar_route",
+            "level": 20,
+            "name": "熟悉路径",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "兽伴支援后短时提高牧修及其目标的移动速度。"
+          },
+          {
+            "id": "muxiu_trusting_response",
+            "level": 30,
+            "name": "信任回应",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "与被支援队友的关系达到要求时，兽伴的支援效果略增；不改变招募或关系进度。"
+          },
+          {
+            "id": "muxiu_two_notes",
+            "level": 40,
+            "name": "两声同心",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "同一次呼哨可依次支援两名不同队友，第二次效果较弱；不召出第二只独立兽伴。"
+          }
+        ]
+      },
+      {
+        "characterId": "character-07",
+        "name": "岩柯",
+        "skill": "余震",
+        "nodes": [
+          {
+            "id": "yanke_aftershock",
+            "level": 1,
+            "name": "余震",
+            "mode": "被动触发",
+            "energy": 0,
+            "effect": "连续命中或成功防御后积累冲击，下一次个人攻击向附近敌人扩散较弱震波。",
+            "tags": [
+              "冲击",
+              "范围"
+            ]
+          },
+          {
+            "id": "yanke_steady_swing",
+            "level": 10,
+            "name": "稳手",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "成功防御提供的冲击积累略增；同一次攻击只计一次。"
+          },
+          {
+            "id": "yanke_wide_echo",
+            "level": 20,
+            "name": "宽波",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "余震扩散范围略增，但对每个额外目标的伤害仍递减。"
+          },
+          {
+            "id": "yanke_return_force",
+            "level": 30,
+            "name": "回力",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "余震命中两名以上敌人时，下一次普通攻击稍快；不叠加。"
+          },
+          {
+            "id": "yanke_resonant_finish",
+            "level": 40,
+            "name": "共振收尾",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "满额冲击触发的余震略微提高打断机会；对首领效果较弱。"
+          }
+        ]
+      },
+      {
+        "characterId": "character-08",
+        "name": "桑果",
+        "skill": "野地调剂",
+        "nodes": [
+          {
+            "id": "sangguo_field_blend",
+            "level": 1,
+            "name": "野地调剂",
+            "mode": "主动",
+            "energy": 20,
+            "effect": "按目标当前状态即时调出一次个人应急药，恢复生命或移除一种常见异常；不生成背包道具。",
+            "tags": [
+              "药剂",
+              "应变"
+            ]
+          },
+          {
+            "id": "sangguo_quick_mix",
+            "level": 10,
+            "name": "快手调和",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "目标处于异常状态时，野地调剂的施放速度略增。"
+          },
+          {
+            "id": "sangguo_leftover_extract",
+            "level": 20,
+            "name": "余料萃取",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "成功净化异常后，目标同时恢复少量生命；没有异常时仍按基础治疗。"
+          },
+          {
+            "id": "sangguo_safe_dose",
+            "level": 30,
+            "name": "谨慎剂量",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "生命很低的目标获得略强治疗；每次治疗有上限。"
+          },
+          {
+            "id": "sangguo_tested_recipe",
+            "level": 40,
+            "name": "亲试配方",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "连续对不同队友使用野地调剂时，第二次少耗少量能量；短时间只触发一次。"
+          }
+        ]
+      },
+      {
+        "characterId": "character-09",
+        "name": "娜丽娅",
+        "skill": "鳞纹",
+        "nodes": [
+          {
+            "id": "nalia_scale_mark",
+            "level": 1,
+            "name": "鳞纹",
+            "mode": "主动",
+            "energy": 20,
+            "effect": "短时提高自身防御，下一次近身攻击附加护身回响。",
+            "tags": [
+              "鳞",
+              "守护"
+            ]
+          },
+          {
+            "id": "nalia_fine_scales",
+            "level": 10,
+            "name": "细鳞",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "鳞纹持续期间降低第一次受到的伤害。"
+          },
+          {
+            "id": "nalia_practiced_edge",
+            "level": 20,
+            "name": "熟刃",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "近身攻击成功触发护身回响后，下一次防御更稳定。"
+          },
+          {
+            "id": "nalia_admit_strength",
+            "level": 30,
+            "name": "承认锋芒",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "队友先标记目标时，鳞纹的回响命中该目标可略微强化队友下一次近身攻击。"
+          },
+          {
+            "id": "nalia_guarded_flame",
+            "level": 40,
+            "name": "护身鳞光",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "回响命中后生成小额短时护盾；每次鳞纹仅生成一次。"
+          }
+        ]
+      },
+      {
+        "characterId": "character-10",
+        "name": "伊赛",
+        "skill": "远瞳",
+        "nodes": [
+          {
+            "id": "isai_far_sight",
+            "level": 1,
+            "name": "远瞳",
+            "mode": "主动",
+            "energy": 16,
+            "effect": "看穿一名敌人下一次移动倾向并标记弱点，帮助队友集中火力。",
+            "tags": [
+              "感知",
+              "标记"
+            ]
+          },
+          {
+            "id": "isai_clear_sign",
+            "level": 10,
+            "name": "明确手势",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "远瞳标记出现后，未操纵伙伴更快将该目标纳入攻击候选。"
+          },
+          {
+            "id": "isai_safe_line",
+            "level": 20,
+            "name": "安全线",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "向队友提示被观察目标下一次突进方向，短时提高闪避机会。"
+          },
+          {
+            "id": "isai_long_watch",
+            "level": 30,
+            "name": "长望",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "未被消耗的远瞳标记持续时间略增。"
+          },
+          {
+            "id": "isai_shared_horizon",
+            "level": 40,
+            "name": "共望",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "两名不同队友依次命中远瞳目标时，第二次命中附带小额协同伤害；每个标记仅触发一次。"
+          }
+        ]
+      },
+      {
+        "characterId": "character-11",
+        "name": "赛恩",
+        "skill": "镜身",
+        "nodes": [
+          {
+            "id": "sain_mirror_self",
+            "level": 1,
+            "name": "镜身",
+            "mode": "主动",
+            "energy": 28,
+            "effect": "生成短暂映像，低威力重复自己刚使用的一项可复制技能；不能连续复制镜身或个人专属技能。",
+            "tags": [
+              "镜像",
+              "复制"
+            ]
+          },
+          {
+            "id": "sain_stable_image",
+            "level": 10,
+            "name": "稳像",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "映像存在时间略增，但仍只执行一次复制动作。"
+          },
+          {
+            "id": "sain_limited_echo",
+            "level": 20,
+            "name": "有限回声",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "复制的攻击技能威力衰减略微减少；治疗及控制技能保留较低效率上限。"
+          },
+          {
+            "id": "sain_clear_boundary",
+            "level": 30,
+            "name": "清楚边界",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "若上一技能不可复制，镜身按钮给出原因并保留能量，不施放空映像。"
+          },
+          {
+            "id": "sain_shared_reflection",
+            "level": 40,
+            "name": "共映",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "映像命中队友已标记目标时，给该标记一次小额协同加成；不复制队友技能。"
+          }
+        ]
+      },
+      {
+        "characterId": "character-12",
+        "name": "达伽",
+        "skill": "山脉呼吸",
+        "nodes": [
+          {
+            "id": "daga_mountain_breath",
+            "level": 1,
+            "name": "山脉呼吸",
+            "mode": "被动触发",
+            "energy": 0,
+            "effect": "成功防御后短时提高抗打断能力，并缓慢恢复少量生命。",
+            "tags": [
+              "体魄",
+              "稳固"
+            ]
+          },
+          {
+            "id": "daga_even_breath",
+            "level": 10,
+            "name": "匀息",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "山脉呼吸的恢复持续时间略增；重复触发只刷新时间，不叠加强度。"
+          },
+          {
+            "id": "daga_patient_stance",
+            "level": 20,
+            "name": "耐心站姿",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "恢复期间再次防御成功时，获得一次小额伤害减免。"
+          },
+          {
+            "id": "daga_room_to_move",
+            "level": 30,
+            "name": "留有余地",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "山脉呼吸触发后附近一名生命较低的队友获得短时抗打断加成。"
+          },
+          {
+            "id": "daga_bearing_weight",
+            "level": 40,
+            "name": "担山",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "生命较低时，首次触发的山脉呼吸恢复量略增；每场战斗只触发一次。"
+          }
+        ]
+      },
+      {
+        "characterId": "character-13",
+        "name": "晨弦",
+        "skill": "余晖回流",
+        "nodes": [
+          {
+            "id": "chenxian_afterglow",
+            "level": 1,
+            "name": "余晖回流",
+            "mode": "被动触发",
+            "energy": 0,
+            "effect": "晨弦治疗一名队友后，该队友下一次消耗能量的技能返还少量能量。",
+            "tags": [
+              "光",
+              "支援"
+            ]
+          },
+          {
+            "id": "chenxian_warm_notice",
+            "level": 10,
+            "name": "暖光提示",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "回流可用时在目标状态栏显示，目标切换职业后仍保留至时限结束。"
+          },
+          {
+            "id": "chenxian_slow_fade",
+            "level": 20,
+            "name": "缓落余晖",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "回流的可触发时间略增；同一目标同时只能持有一次回流。"
+          },
+          {
+            "id": "chenxian_generous_spark",
+            "level": 30,
+            "name": "慷慨火花",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "目标使用支援技能时，返还量略增，但不超过该技能实际能量消耗的一部分。"
+          },
+          {
+            "id": "chenxian_circle_of_light",
+            "level": 40,
+            "name": "光的传递",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "目标触发回流后，另一名生命较低的队友获得小额护盾；每次治疗仅能传递一次。"
+          }
+        ]
+      },
+      {
+        "characterId": "character-14",
+        "name": "夜澜",
+        "skill": "影债",
+        "nodes": [
+          {
+            "id": "yelan_shadow_debt",
+            "level": 1,
+            "name": "影债",
+            "mode": "被动触发",
+            "energy": 0,
+            "effect": "记录自己刚承受的一部分实际伤害，限时强化下一次个人攻击，释放后清空。",
+            "tags": [
+              "暗",
+              "反击"
+            ]
+          },
+          {
+            "id": "yelan_measured_record",
+            "level": 10,
+            "name": "有度记录",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "影债保存时间略增，记录总量仍有上限。"
+          },
+          {
+            "id": "yelan_quiet_counter",
+            "level": 20,
+            "name": "静默回击",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "影债释放成功后短时提高自身防御；不返还刚承受的生命损失。"
+          },
+          {
+            "id": "yelan_protected_boundary",
+            "level": 30,
+            "name": "守住界限",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "替队友承担的实际伤害也可少量计入影债，但不会因同一次攻击重复计数。"
+          },
+          {
+            "id": "yelan_debt_settled",
+            "level": 40,
+            "name": "一笔勾销",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "在影债到期前主动攻击并释放满额记录时，额外生成小额护盾；每次影债只触发一次。"
+          }
+        ]
+      },
+      {
+        "characterId": "character-15",
+        "name": "洛纹",
+        "skill": "并行刻印",
+        "nodes": [
+          {
+            "id": "luowen_parallel_inscription",
+            "level": 1,
+            "name": "并行刻印",
+            "mode": "主动",
+            "energy": 22,
+            "effect": "给敌人放置短时印记；两名不同队友随后用不同技能标签命中时，触发额外协同效果。",
+            "tags": [
+              "符文",
+              "组合"
+            ]
+          },
+          {
+            "id": "luowen_legible_mark",
+            "level": 10,
+            "name": "清晰刻线",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "印记显示尚缺少的不同标签数量，方便队友选择技能。"
+          },
+          {
+            "id": "luowen_two_sources",
+            "level": 20,
+            "name": "双源对读",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "两次命中分别带光与暗标签时，协同效果略增；其他标签组合仍可正常触发。"
+          },
+          {
+            "id": "luowen_patient_inscription",
+            "level": 30,
+            "name": "耐心刻印",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "首个有效标签出现后，印记剩余时间小幅延长一次。"
+          },
+          {
+            "id": "luowen_shared_pattern",
+            "level": 40,
+            "name": "共写图式",
+            "mode": "强化",
+            "energy": 0,
+            "effect": "三名不同角色在同一印记上完成三个不同标签时，追加一次较弱的团队协同；同一印记仅触发一次。"
+          }
+        ]
+      }
+    ]
+  },
   "openQuestions": [
     {
       "title": "10 位可恋爱伙伴",
       "detail": "人选与开放阶段尚未确定；不要从角色画像推断恋爱资格。"
     },
     {
-      "title": "职业技能与数值",
-      "detail": "20 个系列的五阶名称及终阶任务已有待确认提案；十六条系列已有七节点技能树样板，其余四条与实际平衡数值仍需设计。"
+      "title": "职业与个人技能数值",
+      "detail": "20 个职业系列的五阶名称、终阶任务和七节点技能树均有待确认提案；主角与 15 位主线伙伴另有五节点个人技能树提案。实际平衡数值及其余 35 位伙伴的个人树仍需设计。"
     },
     {
       "title": "地点与任务内容",
