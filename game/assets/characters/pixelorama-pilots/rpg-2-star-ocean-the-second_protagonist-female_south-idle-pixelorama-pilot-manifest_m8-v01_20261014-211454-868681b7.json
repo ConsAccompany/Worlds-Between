@@ -1,0 +1,158 @@
+{
+  "project": "Worlds Between",
+  "milestone": "M8",
+  "purpose": "Technical Pixelorama pilot: female protagonist, south idle only, one frame. Tests whether an editor-based downscale plus logged hand edits is a workable route (art pipeline memo Method A fallback).",
+  "status": "technical pilot only; unapproved; not integrated; not a walk pilot",
+  "art_approved": false,
+  "runtime_integrated": false,
+  "walk_frames": 0,
+  "acceptance_counters_unchanged": {
+    "runtime_exploration_sprites_accepted": "0/52",
+    "scene_quality_gates_passed": "0/11"
+  },
+  "editor": {
+    "name": "Pixelorama",
+    "version": "v1.2.3",
+    "build_used": "web (browser), as reported by the user",
+    "pxo_metadata_pixelorama_version": "v1.2.3-stable",
+    "pxo_version": 7,
+    "note": "The Windows build staged under work/tooling/ is not evidenced as used. No paid service or AI generation was involved."
+  },
+  "source": {
+    "role": "read-only input, imported into the browser editor",
+    "file": "game/assets/characters/high-fidelity-prototypes/rpg-2-star-ocean-the-second_protagonist-female_south-exploration-premium-pixel_m8-concept_20261014-145800-62c3a10f.png",
+    "size": [1145, 1374],
+    "bytes": 920484,
+    "sha256": "28f9efacce914fa232f6dbc99b063e68e0bce25f4162c9f70eb62ffdfc2fb222",
+    "git_blob": "46c91ed19305f624b2b3a041507bec19defe9182",
+    "untouched_check": "No working-tree change against commit b1aff00 (git diff and git status are clean for this path)."
+  },
+  "assets": [
+    {
+      "step": 1,
+      "role": "editable downscale project",
+      "file": "rpg-2-star-ocean-the-second_protagonist-female_south-idle-editable-pilot_m8-v01_20261014-210343-7e2c9a1f.pxo",
+      "format": "Pixelorama .pxo (zip)",
+      "bytes": 30805,
+      "sha256": "f9a313a0d3e82032d7c8fb3668b236f934760539d5c75759d6f7973d0c0a43c9",
+      "canvas": [96, 115],
+      "frames": 1,
+      "layers": ["Layer 1"],
+      "derived_from": "source",
+      "relationship": "Nearest-neighbour downscale of the full 1145x1374 source canvas to 96x115 (one uniform scale, about 0.0838).",
+      "status": "technical pilot; unapproved"
+    },
+    {
+      "step": 1,
+      "role": "PNG export of the downscale",
+      "file": "rpg-2-star-ocean-the-second_protagonist-female_south-idle-downscale-pilot_m8-v01_20261014-210343-c45a80e2.png",
+      "format": "PNG RGBA",
+      "bytes": 12399,
+      "sha256": "d57764008a8404ed981fca918b1be107e0d7b0d397bdac7818f473364ecb05f2",
+      "size": [96, 115],
+      "derived_from": "rpg-2-star-ocean-the-second_protagonist-female_south-idle-editable-pilot_m8-v01_20261014-210343-7e2c9a1f.pxo",
+      "relationship": "Export of Layer 1. A Pillow nearest resize of the source matches 11019/11040 texels; the rest are +/-1 channel rounding on semi-transparent texels.",
+      "status": "technical pilot; unapproved"
+    },
+    {
+      "step": 2,
+      "role": "editable readability-paint project",
+      "file": "rpg-2-star-ocean-the-second_protagonist-female_south-idle-handpolish-pilot_m8-v01_20261014-210652-94e8b110.pxo",
+      "format": "Pixelorama .pxo (zip)",
+      "bytes": 31193,
+      "sha256": "bc3acc4401eeae4037d7cd97020c467faa6ff6adfa940259390649975f557b51",
+      "canvas": [96, 115],
+      "frames": 1,
+      "layers": ["Layer 1", "readability-paint"],
+      "derived_from": "rpg-2-star-ocean-the-second_protagonist-female_south-idle-editable-pilot_m8-v01_20261014-210343-7e2c9a1f.pxo",
+      "relationship": "Same Layer 1 bytes as the step-1 project (raw layer data identical). The separate readability-paint layer has exactly 4 non-transparent texels.",
+      "status": "technical pilot; unapproved"
+    },
+    {
+      "step": 2,
+      "role": "PNG export of the readability-paint project",
+      "file": "rpg-2-star-ocean-the-second_protagonist-female_south-idle-handpolish-pilot_m8-v01_20261014-210652-438e6fb3.png",
+      "format": "PNG RGBA",
+      "bytes": 12414,
+      "sha256": "93327c6e588f9a61311338e34631282e1ae65e08000de27b9484766d93b7c159",
+      "size": [96, 115],
+      "derived_from": "rpg-2-star-ocean-the-second_protagonist-female_south-idle-handpolish-pilot_m8-v01_20261014-210652-94e8b110.pxo",
+      "relationship": "Flattened export. Differs from the step-1 PNG at exactly the 4 painted texels.",
+      "status": "technical pilot; unapproved"
+    }
+  ],
+  "hand_edit_log": {
+    "layer": "readability-paint",
+    "purpose": "manually placed hair-highlight texels",
+    "count": 4,
+    "colour_rgba": [139, 96, 72, 255],
+    "texels": [
+      {"xy": [34, 11], "before_rgba": [31, 27, 27, 252]},
+      {"xy": [33, 13], "before_rgba": [71, 49, 44, 253]},
+      {"xy": [31, 16], "before_rgba": [33, 23, 26, 247]},
+      {"xy": [29, 19], "before_rgba": [0, 0, 0, 0]}
+    ],
+    "note": "Texel (29,19) was fully transparent before, so one highlight adds a new opaque texel at the hair edge. The memo's E6 budget (<=12 hand-edited texels) applies to walk frames; this is an idle frame and does not test E6."
+  },
+  "measured_against_memo_pilot_parameters": {
+    "reference": "docs/character-visuals/rpg-2-star-ocean-the-second_character-visuals_art-pipeline-decision-memo_m8-v01_20261014-165532-0cc81856.md",
+    "cell": {"target": [80, 112], "measured": [96, 115], "met": false},
+    "visible_body_height_E4": {"target": "96 +/-1 texels", "measured": 107, "met": false},
+    "partial_alpha_E5": {"target": 0, "measured_downscale": 3476, "measured_handpolish": 3473, "met": false, "note": "Only 5 (downscale) and 9 (handpolish) texels are fully opaque; 3017 sit at alpha 250-254, inherited from the source."},
+    "colours_E5": {"target": "<=48", "measured_rgba_downscale": 3070, "measured_rgba_handpolish": 3068, "met": false},
+    "border_texels": {"target": 0, "measured": 0, "met": true}
+  },
+  "qa_captures": {
+    "correction": "2026-10-14: an earlier version of this manifest said the handpolish PNG had no 48 px capture and that texel (29,19) is not sampled at this scale. Both statements were wrong. Variant-tagged captures of both steps exist, and all four painted texels are visible in the handpolish capture.",
+    "qa_scene": "game/tests/rpg-2-star-ocean-the-second_protagonist-female_pixelorama-south-pilot-city-visual-qa_m8-v01_20261014-213000-5b9e2f47.tscn",
+    "display": "48 logical px visible height (alpha >= 128 bounds, scale 0.4486, nearest filter), canvas_items 640x360 shown at 1280x720, beside the current 32x48 female placeholder in the science city.",
+    "captures": [
+      {
+        "pilot_variant": "downscale",
+        "pilot_source": "rpg-2-star-ocean-the-second_protagonist-female_south-idle-downscale-pilot_m8-v01_20261014-210343-c45a80e2.png",
+        "file": "outputs/rpg-2-star-ocean-the-second_scifi-city_protagonist-female-pixelorama-south-downscale-pilot-h48-beside-placeholder_m8-v01_20261014-211425-c01ae148.png",
+        "size": [1280, 720],
+        "format": "PNG RGBA, every pixel opaque",
+        "bytes": 1532741,
+        "sha256": "8708ba8d66d92013fa715447807e14870e564135693686e879af7ddfc6266d59",
+        "highlight_colour_pixels": 0,
+        "status": "technical screenshot QA only; not a human review; not art-approved"
+      },
+      {
+        "pilot_variant": "handpolish",
+        "pilot_source": "rpg-2-star-ocean-the-second_protagonist-female_south-idle-handpolish-pilot_m8-v01_20261014-210652-438e6fb3.png",
+        "file": "outputs/rpg-2-star-ocean-the-second_scifi-city_protagonist-female-pixelorama-south-handpolish-pilot-h48-beside-placeholder_m8-v01_20261014-211431-209c5b2d.png",
+        "size": [1280, 720],
+        "format": "PNG RGBA, every pixel opaque",
+        "bytes": 1532740,
+        "sha256": "8a3adfe5d9e6d652a03647c0b6fa960c4c05b882ae482cac02a74ac807f7df19",
+        "highlight_colour_pixels": 4,
+        "status": "technical screenshot QA only; not a human review; not art-approved"
+      }
+    ],
+    "untagged_duplicate": {
+      "file": "outputs/rpg-2-star-ocean-the-second_scifi-city_protagonist-female-pixelorama-south-pilot-h48-beside-placeholder_m8-v01_20261014-210813-c3f6fba6.png",
+      "sha256": "8708ba8d66d92013fa715447807e14870e564135693686e879af7ddfc6266d59",
+      "note": "Earlier run without a variant tag in its name. Byte-identical to the tagged downscale capture (same SHA-256; cmp finds no difference). Not a separate result."
+    },
+    "downscale_vs_handpolish_diff": {
+      "method": "Both captures decoded and compared per window pixel (RGB).",
+      "differing_window_pixels": 4,
+      "pixels": [
+        {"texel": [34, 11], "window_xy": [740, 418], "downscale_rgb": [32, 28, 27], "handpolish_rgb": [139, 96, 72]},
+        {"texel": [33, 13], "window_xy": [739, 420], "downscale_rgb": [71, 49, 44], "handpolish_rgb": [139, 96, 72]},
+        {"texel": [31, 16], "window_xy": [737, 423], "downscale_rgb": [36, 26, 28], "handpolish_rgb": [139, 96, 72]},
+        {"texel": [29, 19], "window_xy": [735, 425], "downscale_rgb": [146, 127, 101], "handpolish_rgb": [139, 96, 72], "note": "Paving behind the hair in the downscale capture; the highlight extends the hair silhouette by one pixel."}
+      ]
+    },
+    "four_texel_assessment": "Technical only, not a verdict. Each painted texel survives at 48 px as exactly one window pixel: a 4-pixel change out of 921,600, as four isolated pixels along the hair. It does not change the partial-alpha, palette or height results. Whether the highlight reads at play distance, or is worth the hand work, has not been judged; that is the user's E10 call. Neither capture is art-approved."
+  },
+  "remaining_gates": [
+    "E10 user review of both tagged 48 px captures against the approved 48 px screenshot (detail kept or lost; whether the four highlight pixels are worth it).",
+    "Resolve partial alpha, palette (<=48) and body-height (96 +/-1) or record an explicit user decision to change those pilot targets.",
+    "Walk speed decision R2, then walk frames; no walk frame exists in this pilot.",
+    "East, north and west directions; other characters (51 more variants).",
+    "Runtime integration, in-motion review and the 11 scene-quality gates.",
+    "Two genuine human M7/M9 timed playthroughs."
+  ]
+}

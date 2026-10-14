@@ -1,0 +1,335 @@
+{
+  "project": "Worlds Between",
+  "milestone": "M8",
+  "purpose": "Bounded technical experiment: can a deterministic crop + downsample + binary alpha + <=48 colour quantize improve the 96x115 Pixelorama downscale pilot at game size, without AI image editing.",
+  "status": "technical experiment only; unapproved; not integrated; idle frame only, no walk frames",
+  "art_approved": false,
+  "runtime_integrated": false,
+  "walk_frames": 0,
+  "acceptance_counters_unchanged": {
+    "runtime_exploration_sprites_accepted": "0/52",
+    "scene_quality_gates_passed": "0/11"
+  },
+  "source": {
+    "role": "read-only input",
+    "file": "game/assets/characters/high-fidelity-prototypes/rpg-2-star-ocean-the-second_protagonist-female_south-exploration-premium-pixel_m8-concept_20261014-145800-62c3a10f.png",
+    "size": [
+      1145,
+      1374
+    ],
+    "bytes": 920484,
+    "sha256": "28f9efacce914fa232f6dbc99b063e68e0bce25f4162c9f70eb62ffdfc2fb222"
+  },
+  "prior_pilot_for_comparison": {
+    "manifest": "rpg-2-star-ocean-the-second_protagonist-female_south-idle-pixelorama-pilot-manifest_m8-v01_20261014-211454-868681b7.json",
+    "downscale_png_measured": {
+      "size": [
+        96,
+        115
+      ],
+      "visible_body_height": 107,
+      "partial_alpha_texels": 3476,
+      "rgba_colours": 3070
+    },
+    "relationship": "Not used as input. These candidates start again from the source concept."
+  },
+  "generator": {
+    "script": "tools/rpg-2-star-ocean-the-second_protagonist-female_south-idle-quantized-downscale-author_m8-v01_20261014-212322-42a51d4b.py",
+    "script_sha256": "dcde8c828923fea1a60a446649b19960b694c8e4eee197d840ac12b97eb949f9",
+    "python": "3.12.14",
+    "pillow": "12.3.0",
+    "numpy": "2.3.5",
+    "run_flags": "-I (isolated)"
+  },
+  "method": {
+    "steps": [
+      "1. Verify source SHA-256, load as RGBA.",
+      "2. Crop box: strong-alpha (alpha >= 128) bounds; height mapped exactly to 96 texels; width widened symmetrically to a whole texel count at the same step.",
+      "3. Resize the crop box to the body block with Pillow Image.resize(resample, box=...). Pillow premultiplies alpha for BOX and LANCZOS.",
+      "4. Binary alpha: alpha >= 128 -> 255, else 0; transparent texels set to RGBA 0,0,0,0.",
+      "5. Palette: Pillow quantize(colors=48, method=MEDIANCUT, kmeans=3, dither=NONE) on that candidate's opaque texels only; map each opaque texel to its palette entry.",
+      "6. Place the block on an 80x112 transparent cell with integer offsets: lowest opaque row at y=103, feet-span midpoint at x=40.",
+      "7. Save PNG RGBA (optimize=False, compress_level=9). No cleanup edits were applied."
+    ],
+    "crop": {
+      "strong_alpha_threshold": 128,
+      "strong_alpha_bounds_xyxy_exclusive": [
+        269,
+        48,
+        860,
+        1329
+      ],
+      "strong_alpha_size": [
+        591,
+        1281
+      ],
+      "source_px_per_texel": 13.34375,
+      "resize_box_xyxy": [
+        264.265625,
+        48.0,
+        864.734375,
+        1329.0
+      ],
+      "resize_box_note": "Height is exactly the strong-alpha bounds; width is widened symmetrically to a whole number of texels at the same step (no trim, no aspect change)."
+    },
+    "cleanup_edits": "none (0 texels). Candidate pinholes/orphans found at the body-block level all sit inside the source's stray hair strands, so they were left as source detail.",
+    "tested_not_emitted": "NEAREST (centre sampling) was tried in a scratch folder outside the repo with the same crop, alpha and palette steps. It was visibly noisier (random dark outline samples through the coat and hair), so it was not emitted. Limit: two candidates."
+  },
+  "pilot_targets_from_memo": {
+    "reference": "docs/character-visuals/rpg-2-star-ocean-the-second_character-visuals_art-pipeline-decision-memo_m8-v01_20261014-165532-0cc81856.md",
+    "cell": [
+      80,
+      112
+    ],
+    "ground_pin": [
+      40,
+      104
+    ],
+    "visible_body_height": "96 +/- 1",
+    "partial_alpha_texels": 0,
+    "max_colours": 48,
+    "note": "Pilot parameters only; not an approved standard."
+  },
+  "candidates": [
+    {
+      "variant": "boxquant",
+      "file": "rpg-2-star-ocean-the-second_protagonist-female_south-idle-boxquant-pilot_m8-v01_20261014-212322-7c30d48c.png",
+      "format": "PNG RGBA (8-bit), single image, no metadata chunks",
+      "bytes": 7239,
+      "sha256": "b3a2098634e564a15cc580cb9807894a12e0e1dbf31a82811c8f0d376f9006d6",
+      "resample": "BOX",
+      "placement": {
+        "body_block_size": [
+          45,
+          96
+        ],
+        "body_block_offset_in_cell": [
+          13,
+          8
+        ],
+        "feet_rows_used": 6,
+        "feet_span_x_in_block": [
+          12,
+          42
+        ],
+        "rule": "Lowest opaque row sits at y = pin_y - 1 (ground line y = 104 under offset = -pin); x = 40 is the integer midpoint of the opaque span in the lowest 6 body rows."
+      },
+      "measured": {
+        "size": [
+          80,
+          112
+        ],
+        "alpha_values_present": [
+          0,
+          255
+        ],
+        "partial_alpha_texels": 0,
+        "opaque_texels": 2561,
+        "unique_opaque_rgb_colours": 48,
+        "palette_hex": [
+          "#112325",
+          "#130f11",
+          "#171416",
+          "#1d1514",
+          "#1d3637",
+          "#1f1a1b",
+          "#261a17",
+          "#2a2121",
+          "#2a4949",
+          "#2b1e1b",
+          "#2b2828",
+          "#332623",
+          "#34231b",
+          "#355d5c",
+          "#37302d",
+          "#382a26",
+          "#3c2d28",
+          "#3e706e",
+          "#402b21",
+          "#42312b",
+          "#443530",
+          "#493125",
+          "#493831",
+          "#4b736d",
+          "#4d362b",
+          "#4e3c34",
+          "#523627",
+          "#544036",
+          "#564c44",
+          "#593c2d",
+          "#59453a",
+          "#60473a",
+          "#624f44",
+          "#63422f",
+          "#694f3f",
+          "#6c4935",
+          "#6e5544",
+          "#715a4a",
+          "#7b5f49",
+          "#7c523a",
+          "#7f6c60",
+          "#9b8374",
+          "#a06547",
+          "#bfa591",
+          "#c4845d",
+          "#dfc4af",
+          "#e7a072",
+          "#f8b686"
+        ],
+        "alpha_bounds_inclusive_xyxy": [
+          13,
+          8,
+          57,
+          103
+        ],
+        "visible_body_height_texels": 96,
+        "visible_body_width_texels": 45,
+        "opaque_texels_on_cell_border": 0,
+        "ground_pin": [
+          40,
+          104
+        ],
+        "lowest_opaque_row": 103
+      },
+      "hand_edits": [],
+      "status": "technical experiment; unapproved; not runtime-integrated"
+    },
+    {
+      "variant": "lanczosquant",
+      "file": "rpg-2-star-ocean-the-second_protagonist-female_south-idle-lanczosquant-pilot_m8-v01_20261014-212322-b9fd58f7.png",
+      "format": "PNG RGBA (8-bit), single image, no metadata chunks",
+      "bytes": 7325,
+      "sha256": "738c08c1f4ca967dee325dfeefe6155272366b5e1237f4822ad6a5a2daa643be",
+      "resample": "LANCZOS",
+      "placement": {
+        "body_block_size": [
+          45,
+          96
+        ],
+        "body_block_offset_in_cell": [
+          13,
+          8
+        ],
+        "feet_rows_used": 6,
+        "feet_span_x_in_block": [
+          12,
+          42
+        ],
+        "rule": "Lowest opaque row sits at y = pin_y - 1 (ground line y = 104 under offset = -pin); x = 40 is the integer midpoint of the opaque span in the lowest 6 body rows."
+      },
+      "measured": {
+        "size": [
+          80,
+          112
+        ],
+        "alpha_values_present": [
+          0,
+          255
+        ],
+        "partial_alpha_texels": 0,
+        "opaque_texels": 2558,
+        "unique_opaque_rgb_colours": 48,
+        "palette_hex": [
+          "#0c1e21",
+          "#0e0c0f",
+          "#181213",
+          "#193234",
+          "#1f1615",
+          "#1f1a1b",
+          "#264444",
+          "#271a16",
+          "#271d1c",
+          "#272424",
+          "#2d2220",
+          "#2f1f18",
+          "#315655",
+          "#322420",
+          "#332826",
+          "#39251b",
+          "#392923",
+          "#3b2d29",
+          "#3b6664",
+          "#40302a",
+          "#412b21",
+          "#417673",
+          "#44352f",
+          "#472f24",
+          "#4a3e37",
+          "#4c3930",
+          "#4d3427",
+          "#543f35",
+          "#573a2a",
+          "#59463c",
+          "#5f4130",
+          "#61534b",
+          "#634b3e",
+          "#684532",
+          "#6a5243",
+          "#714d38",
+          "#735947",
+          "#7a604d",
+          "#81543b",
+          "#857164",
+          "#8e6044",
+          "#9f8676",
+          "#aa6b4b",
+          "#c0a592",
+          "#ca8961",
+          "#e6cbb6",
+          "#eba475",
+          "#fcba89"
+        ],
+        "alpha_bounds_inclusive_xyxy": [
+          13,
+          8,
+          57,
+          103
+        ],
+        "visible_body_height_texels": 96,
+        "visible_body_width_texels": 45,
+        "opaque_texels_on_cell_border": 0,
+        "ground_pin": [
+          40,
+          104
+        ],
+        "lowest_opaque_row": 103
+      },
+      "hand_edits": [],
+      "status": "technical experiment; unapproved; not runtime-integrated"
+    }
+  ],
+  "qa_captures": [
+    {
+      "variant": "boxquant",
+      "file": "outputs/rpg-2-star-ocean-the-second_scifi-city_protagonist-female-pixelorama-south-boxquant-pilot-h48-beside-placeholder_m8-v01_20261014-212445-f010e332.png",
+      "size": [
+        1280,
+        720
+      ],
+      "bytes": 1530852,
+      "sha256": "4ddb06e941b13a6b14f5f50717e8cda8ed37bb31af1b72baf7a04846c930389a"
+    },
+    {
+      "variant": "lanczosquant",
+      "file": "outputs/rpg-2-star-ocean-the-second_scifi-city_protagonist-female-pixelorama-south-lanczosquant-pilot-h48-beside-placeholder_m8-v01_20261014-212450-2b647e78.png",
+      "size": [
+        1280,
+        720
+      ],
+      "bytes": 1530965,
+      "sha256": "63a83542e419abdbcb5f56435eff3d0454b7da695a0c7f271325e5ff663f053e"
+    }
+  ],
+  "review": {
+    "e10_user_review": "not done",
+    "assessment": "Technical measurements only. Whether the 96-texel quantized idle keeps the approved detail (memo R1 / E10) is the user's call.",
+    "technical_observations_by_claude": [
+      "Both candidates stay source-recognisable at 48 logical px: ponytail, teal scarf and scarf tail, bedroll, long coat, boots, and a dark knee-guard patch on the viewer-left knee.",
+      "LANCZOS is slightly crisper (edges, knee guard, eyes) than BOX; BOX is smoother but muddier.",
+      "Lost or weakened at this density: eye/face detail (1-2 texel features), chest badge (1-2 teal texels), buckles and belt hardware, ponytail crown (thin, broken), knee-guard contrast.",
+      "No dark outline survives the area average, so the coat and trousers sit close to the beige/brown paving in value.",
+      "Stray hair texels on the viewer-left side are source detail (messy hair), but read as noise at this size.",
+      "QA scene anchors the sprite on its alpha-bounds centre (existing script behaviour, unchanged), not on the declared pin x=40; the 1:1 texel check is unaffected."
+    ]
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "project": "Worlds Between",
+  "milestone": "M8",
+  "purpose": "Read-only feasibility check of AI extraction of a pixel-exact limb layer from one high-detail female protagonist concept",
+  "source": "game/assets/characters/high-fidelity-prototypes/rpg-2-star-ocean-the-second_protagonist-female_south-exploration-premium-pixel_m8-concept_20261014-145800-62c3a10f.png",
+  "source_size": [1145, 1374],
+  "method": "Built-in image generation edit with transparent background; each output is a separate PNG",
+  "status": "technical experiment rejected; not usable as a locked production animation layer; no art approval",
+  "assets": [
+    {
+      "file": "outputs/rpg-2-star-ocean-the-second_protagonist-female_viewer-left-leg-layer-extraction_m8-feasibility-v01_20261014-164358-04be0edf.png",
+      "size": [1145, 1374],
+      "nonzero_alpha_bounds_exclusive": [92, 342, 835, 1298],
+      "pixels_alpha_at_least_128": 64989,
+      "same_canvas_position_exact_rgba_pixels": 189,
+      "partial_alpha_pixels": 70296,
+      "finding": "The requested leg is redrawn and repositioned relative to the source; pixel-exact extraction failed."
+    },
+    {
+      "file": "outputs/rpg-2-star-ocean-the-second_protagonist-female_viewer-left-leg-layer-extraction_m8-feasibility-v02_20261014-164439-af961841.png",
+      "size": [1145, 1374],
+      "nonzero_alpha_bounds_exclusive": [0, 0, 1062, 1301],
+      "pixels_alpha_at_least_128": 254523,
+      "same_canvas_position_exact_rgba_pixels": 13,
+      "partial_alpha_pixels": 263547,
+      "finding": "The leg is much larger and repositioned; alpha reaches the canvas edge. Pixel-exact extraction failed."
+    }
+  ],
+  "measurement": "Pillow/NumPy read-only comparison of each output against source at identical canvas coordinates; exact RGBA counts include only output pixels with alpha >= 128.",
+  "production_decision": "Do not use either output for the layered walk pilot. Use a pixel editor or source-file layers for exact masks; AI image edits remain pose references only."
+}

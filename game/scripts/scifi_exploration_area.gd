@@ -120,6 +120,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if dialogue_open:
 		_reset_walk_animation()
+		_update_city_labels()
 		return
 	var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	var was_in_bypass_zone := hero.position.x > 545.0 and hero.position.y < 205.0
@@ -246,7 +247,7 @@ func _build_city_foreground() -> void:
 	]), 213)
 	city_hero_silhouette = Sprite2D.new()
 	city_hero_silhouette.texture = hero.texture
-	city_hero_silhouette.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
+	city_hero_silhouette.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	city_hero_silhouette.offset = hero.offset
 	city_hero_silhouette.scale = hero.scale
 	city_hero_silhouette.modulate = Color(0.72, 0.93, 1.0, 0.55)
@@ -274,6 +275,11 @@ func _update_city_labels() -> void:
 		return
 	var position := hero.position
 	var hidden_by_canopy := Geometry2D.is_point_in_polygon(position, city_canopy.polygon)
+	# Mirror the hero's current walk/idle frame so the canopy outline never lags.
+	city_hero_silhouette.texture = hero.texture
+	city_hero_silhouette.offset = hero.offset
+	city_hero_silhouette.scale = hero.scale
+	city_hero_silhouette.flip_h = hero.flip_h
 	city_hero_silhouette.position = position
 	city_hero_silhouette.visible = hidden_by_canopy
 	city_occlusion_indicator.visible = hidden_by_canopy

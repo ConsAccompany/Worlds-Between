@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-14T20:00:22Z",
+  "updatedAt": "2026-10-14T21:40:00Z",
   "definition": "A check means that the specific asset has been accepted for its stated purpose. Source character sheets, in-game displays, exploration sprites, combat sprites and scene quality have separate acceptance gates.",
   "categories": [
     {
@@ -1198,7 +1198,7 @@
               "target": 1,
               "stage": "production",
               "checked": false,
-              "note": "旧 32×48 四方向 20 帧仍在可玩科技区作为功能占位，但已被否定为最终画质基线。高精度像素风南／东／北三张独立静态概念图均有 48 逻辑像素城市试摆；另有一张朝南左腿前迈关键帧完成同等 Godot 1280×720 技术审查。已组装的四相南向可行性循环出现围巾尾与护膝跨帧跳边，动画验收受阻，定点修复进行中；不算正式循环。未接入可玩角色，西向镜像仍在评估，0/1 验收。",
+              "note": "旧 32×48 四方向 20 帧仍在可玩科技区作为功能占位，但已被否定为最终画质基线。高精度像素风南／东／北三张独立静态概念图均有 48 逻辑像素城市试摆；另有一张朝南左腿前迈关键帧完成同等 Godot 1280×720 技术审查。已组装的四相南向可行性循环出现围巾尾与护膝跨帧跳边，动画验收受阻，定点修复进行中；不算正式循环。未接入可玩角色，西向镜像仍在评估，另有 Pixelorama v1.2.3 网页版南向待机单帧技术试点（缩放版与 4 像素发丝高光版各一份 .pxo 与 PNG），未达透明度、色数与身高试点参数；另由确定性脚本从来源图生成 BOX 与 LANCZOS 两张量化候选（80×112、二值透明、48 色、身高 96），数值参数达标但未经人工美术或动画审查。四个变体均有带标签的 48 逻辑像素城市截图；均未接入、未批准，不是行走试点。0/1 验收。",
               "file": "/assets/rpg-2-star-ocean-the-second_scifi-city_protagonist-female-character-quality-h48-canvas-items-with-liang_m8-v02_20261014-151442-b75b310e.png",
               "premiumSource": "game/assets/characters/high-fidelity-prototypes/rpg-2-star-ocean-the-second_protagonist-female_south-exploration-premium-pixel_m8-concept_20261014-145800-62c3a10f.png",
               "premiumEastSource": "game/assets/characters/high-fidelity-prototypes/rpg-2-star-ocean-the-second_protagonist-female_east-exploration-premium-pixel_m8-concept_20261014-151550-dc168ba8.png",
@@ -1207,7 +1207,16 @@
               "premiumLeftStrideCityCapture": "outputs/rpg-2-star-ocean-the-second_scifi-city_protagonist-female-south-walk-left-stride-character-quality-h48-canvas-items_m8-v02_20261014-152906-37f80376.png",
               "premiumWalkCycleComplete": false,
               "premiumWalkFeasibilityManifest": "outputs/rpg-2-star-ocean-the-second_protagonist-female_south-walk-cycle_city-visual-manifest_m8-concept_20261014-153928-4c3e28b8.json",
-              "premiumWalkAnimationBlocker": "Scarf tail and knee guard jump sides between independently generated frames; targeted repair in progress."
+              "premiumWalkAnimationBlocker": "Scarf tail and knee guard jump sides between independently generated frames; targeted repair in progress.",
+              "pixeloramaPilotManifest": "game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-pixelorama-pilot-manifest_m8-v01_20261014-211454-868681b7.json",
+              "pixeloramaPilotSetupNote": "docs/character-visuals/rpg-2-star-ocean-the-second_protagonist-female_pixelorama-south-pilot-setup_m8-v01_20261014-170109-dd62c262.md",
+              "pixeloramaPilotCityCapture": "outputs/rpg-2-star-ocean-the-second_scifi-city_protagonist-female-pixelorama-south-downscale-pilot-h48-beside-placeholder_m8-v01_20261014-211425-c01ae148.png",
+              "pixeloramaPilotHandpolishCityCapture": "outputs/rpg-2-star-ocean-the-second_scifi-city_protagonist-female-pixelorama-south-handpolish-pilot-h48-beside-placeholder_m8-v01_20261014-211431-209c5b2d.png",
+              "pixeloramaPilotUntaggedCaptureNote": "outputs/rpg-2-star-ocean-the-second_scifi-city_protagonist-female-pixelorama-south-pilot-h48-beside-placeholder_m8-v01_20261014-210813-c3f6fba6.png is byte-identical to the tagged downscale capture; not a separate result.",
+              "quantizedPilotManifest": "game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-quantized-downscale-manifest_m8-v01_20261014-212322-aa446773.json",
+              "quantizedPilotBoxquantCityCapture": "outputs/rpg-2-star-ocean-the-second_scifi-city_protagonist-female-pixelorama-south-boxquant-pilot-h48-beside-placeholder_m8-v01_20261014-212445-f010e332.png",
+              "quantizedPilotLanczosquantCityCapture": "outputs/rpg-2-star-ocean-the-second_scifi-city_protagonist-female-pixelorama-south-lanczosquant-pilot-h48-beside-placeholder_m8-v01_20261014-212450-2b647e78.png",
+              "pixeloramaPilotStatus": "Technical south-idle experiments only (one frame, no walk). Downscale and 4-texel paint pass (Pixelorama) miss the alpha, palette and height targets; boxquant and lanczosquant (deterministic script from the source) meet the numeric targets (80x112, 0 partial alpha, 48 colours, 96 height). All four have variant-tagged 48 px city captures. None is art- or animation-approved by a human or runtime-integrated; E10 user review, R2 walk speed and walk frames remain open."
             },
             {
               "id": "runtime-sprite.liang-xu",
