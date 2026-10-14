@@ -13,6 +13,10 @@ func _run_checks() -> void:
 	var menu: Node = current_scene
 	(menu.get("start_button") as Button).pressed.emit()
 	await _settle()
+	if not _check(current_scene != null and current_scene.name == "HeroSetup", "menu opens character setup"):
+		return
+	(current_scene.get("skip_button") as Button).pressed.emit()
+	await _settle()
 	if not _check(current_scene != null and current_scene.name == "ScifiWorldMap", "menu opens world map"):
 		return
 	var world_map: Node = current_scene

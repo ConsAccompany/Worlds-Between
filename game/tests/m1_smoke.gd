@@ -25,6 +25,12 @@ func _run_checks() -> void:
 	start_button.pressed.emit()
 	await process_frame
 	await process_frame
+	var setup: Control = current_scene
+	if not _check(setup.name == "HeroSetup", "menu enters character setup"):
+		return
+	setup.get("skip_button").pressed.emit()
+	await process_frame
+	await process_frame
 	var map: Node2D = current_scene
 	if not _check(map != null and map.name == "ScifiWorldMap", "menu enters world map"):
 		return

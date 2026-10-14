@@ -7,6 +7,7 @@ const ENEMIES := {
 const MOVE_SPEED := 168.0
 const DODGE_COST := 12
 const GUARD_HIT_COST := 6
+const BATTLE_AMBIENCE := preload("res://assets/audio/rpg-2-star-ocean-the-second_scifi-battle_ambient-loop_m7_20261013-211230-37fcaa02.wav")
 
 var enemy_id := "patrol"
 var enemy: Dictionary
@@ -68,6 +69,13 @@ func _ready() -> void:
 	for index in AppState.active_party_ids.size():
 		fighters.append({"id": AppState.active_party_ids[index], "x": 135.0 + index * 36.0, "attack_cooldown": 0.0, "dodge_cooldown": 0.0, "dodge_time": 0.0, "dodge_direction": -1.0, "skill_cooldown": 0.0, "command": "default", "guard": false, "boost": 0})
 	_build_ui()
+	var audio_player := AudioStreamPlayer.new()
+	var ambient: AudioStreamWAV = BATTLE_AMBIENCE.duplicate()
+	ambient.loop_mode = AudioStreamWAV.LOOP_FORWARD
+	audio_player.stream = ambient
+	audio_player.volume_db = -13.0
+	add_child(audio_player)
+	audio_player.play()
 	AppState.language_changed.connect(_refresh_text)
 	_refresh_text()
 	AppState.last_battle_transition_ms = float(Time.get_ticks_usec() - AppState.battle_transition_started_usec) / 1000.0
@@ -429,6 +437,7 @@ func _finish_battle(won: bool) -> void:
 	pause_overlay.visible = false
 	battle_won = won
 	if won:
+		AppState.machine_observed = true
 		for fighter in fighters:
 			var member_id: String = fighter["id"]
 			var recovered := BattleRules.recover_after_battle(AppState.member_state(member_id))
@@ -514,7 +523,11 @@ func _draw_fighter(fighter: Dictionary, index: int) -> void:
 	draw_circle(Vector2(x, 215), 10.0, Color("#e5c594"))
 	match member_id:
 		"hero":
-			draw_rect(Rect2(x - 9, 203, 18, 5), Color("#273f47"))
+			if AppState.hero_appearance == "female":
+				draw_rect(Rect2(x - 10, 201, 21, 7), Color("#453948"))
+				draw_rect(Rect2(x + 9, 205, 5, 32), Color("#453948"))
+			else:
+				draw_rect(Rect2(x - 10, 202, 18, 5), Color("#273f47"))
 		"liang-xu":
 			draw_rect(Rect2(x - 10, 202, 19, 5), Color("#c3c4c2"))
 			draw_circle(Vector2(x + 11, 207), 5.0, Color("#b3b9ba"))

@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
   "planVersion": "v0.1",
-  "updatedAt": "2026-10-13T20:48:44-04:00",
+  "updatedAt": "2026-10-13T21:15:02-04:00",
   "currentStep": "M7",
   "steps": [
     {
@@ -99,10 +99,17 @@
     {
       "id": "M7",
       "title": "Playable content",
-      "status": "ready",
-      "summary": "25–35 minute tech-board route, one discovery, three recruits, bilingual text.",
+      "status": "in_progress",
+      "summary": "Playable start-to-finish route now connects character setup, three destinations, relay and ruin findings, machine observation, recruit options, report and continue play. Target duration still needs content and timed validation.",
       "acceptance": "Finish without developer tools; two exploration/recruit orders; both languages fit.",
-      "evidence": [],
+      "evidence": [
+        "game/tests/m7_smoke.gd: M7_SMOKE_OK (character setup and save, two destination orders, three recruit entrances, discoveries, report endpoint and reload)",
+        "game/tests/m1_smoke.gd through m6_smoke.gd remain passing",
+        "outputs/rpg-2-star-ocean-the-second_protagonist_female-setup_m7_20261013-211621-3b112fff.png",
+        "outputs/rpg-2-star-ocean-the-second_scifi-map_field-log-chinese_m7_20261013-211403-9f2949ca.png",
+        "outputs/rpg-2-star-ocean-the-second_scifi-map_field-log-english_m7_20261013-211403-5fad8430.png",
+        "outputs/rpg-2-star-ocean-the-second_scifi-city_completion-report-chinese_m7_20261013-211403-4a5f1c59.png"
+      ],
       "blocker": null
     },
     {

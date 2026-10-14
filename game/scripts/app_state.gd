@@ -7,6 +7,13 @@ const STRINGS := {
 		"title": "界间行者",
 		"subtitle": "探索世界 · 结识伙伴",
 		"start": "开始探索",
+		"setup_title": "创建主角",
+		"setup_name": "姓名",
+		"setup_gender": "外观",
+		"setup_male": "男性外观", "setup_female": "女性外观",
+		"setup_help": "18 岁，结束一年训练，即将首次探索地表。可按自己的节奏招募伙伴。",
+		"setup_controls": "操作：地图选目的地；WASD 移动；E 交互；接触敌人进入战斗。",
+		"setup_skip": "跳过指引并出发", "setup_start": "开始探索", "setup_back": "返回菜单",
 		"language": "语言：中文",
 		"quit": "退出",
 		"room_title": "工程原型 · 地下社区",
@@ -116,11 +123,34 @@ const STRINGS := {
 		"job_skill_tactics_mark": "战术标记", "job_skill_tactics_rally": "全队整备",
 		"job_skill_relics_echo": "遗物共鸣", "job_skill_relics_delay": "时序迟滞",
 		"bypass_notice": "已绕过敌人，抵达另一侧。",
+		"field_log": "实地日志",
+		"field_log_hint": "任意顺序探索三处地点；调查中继站与遗址记录；观察或击退一台机械，最后回城汇报。",
+		"field_log_count": "地点 %d/3 · 中继 %s · 记录 %s · 机械 %s",
+		"field_yes": "完成", "field_no": "待办",
+		"relay_marker": "中继站", "relay_prompt": "靠近中继站按 E 调查",
+		"relay_done": "中继站的故障来自一段被重复改写的线路图。赵铃已记下异常。",
+		"relay_record": "中继站记录：维护图纸被多次改写；原始线路用途仍未确认。",
+		"archive_record": "遗址记录：前文明资料残缺，其中一条能源调度记录与现行网络的编号相同。",
+		"machine_record": "机械记录：已观察到自动机械的行动模式。",
+		"report_marker": "实地汇报", "report_prompt": "靠近汇报台按 E 查看进度",
+		"report_locked": "仍需完成实地日志中的调查项目。",
+		"report_ready": "资料已齐备。靠近汇报台按 E 提交。",
+		"report_title": "科技板块试玩完成",
+		"report_summary": "%s 已走访三处地点、核对两份记录，并观察了自动机械。同行伙伴：%d/3。",
+		"report_continue": "继续自由探索", "report_map": "返回世界地图",
+		"report_note": "这份资料揭示了新的问题。完整故事将在后续章节展开。",
 	},
 	"en": {
 		"title": "Worlds Between",
 		"subtitle": "Explore worlds · Meet companions",
 		"start": "Start exploring",
+		"setup_title": "Create your traveler",
+		"setup_name": "Name",
+		"setup_gender": "Appearance",
+		"setup_male": "Masculine", "setup_female": "Feminine",
+		"setup_help": "At 18, you have finished a year of training and are ready to explore the surface. Recruit companions at your own pace.",
+		"setup_controls": "Controls: choose a map destination; move with WASD; press E to interact; contact an enemy to fight.",
+		"setup_skip": "Skip guide and depart", "setup_start": "Start exploring", "setup_back": "Main menu",
 		"language": "Language: English",
 		"quit": "Quit",
 		"room_title": "Foundation prototype · Underground community",
@@ -230,16 +260,39 @@ const STRINGS := {
 		"job_skill_tactics_mark": "Tactical Mark", "job_skill_tactics_rally": "Team Rally",
 		"job_skill_relics_echo": "Relic Echo", "job_skill_relics_delay": "Time Delay",
 		"bypass_notice": "You bypassed the enemy and reached the far side.",
+		"field_log": "Field log",
+		"field_log_hint": "Explore all three locations in any order. Check the relay and ruins records, observe or defeat a machine, then report back in the city.",
+		"field_log_count": "Places %d/3 · Relay %s · Records %s · Machine %s",
+		"field_yes": "Done", "field_no": "Open",
+		"relay_marker": "Relay", "relay_prompt": "Approach the relay and press E",
+		"relay_done": "The relay fault points to a circuit plan rewritten several times. Zhao Ling notes the anomaly.",
+		"relay_record": "Relay record: the maintenance plan was repeatedly revised. Its original purpose is unknown.",
+		"archive_record": "Ruin record: a fragmented energy dispatch entry shares an identifier with the current network.",
+		"machine_record": "Machine record: an automated machine's behavior has been observed.",
+		"report_marker": "Field report", "report_prompt": "Approach the report desk and press E",
+		"report_locked": "The field log still has unfinished investigations.",
+		"report_ready": "The evidence is ready. Press E at the report desk to submit it.",
+		"report_title": "Science region demo complete",
+		"report_summary": "%s visited three places, checked two records, and observed a machine. Companions: %d/3.",
+		"report_continue": "Continue exploring", "report_map": "World map",
+		"report_note": "The evidence raises further questions. The full story will develop in later chapters.",
 	},
 }
 
 var language := "zh"
+var hero_name := ""
+var hero_appearance := "male"
 var current_destination_id := "scifi.city"
 var hero_state := {"hp": 100, "max_hp": 100, "energy": 60, "max_energy": 60}
 var member_states: Dictionary = {}
 var active_party_ids: Array[String] = ["hero"]
 var recruited_members: Dictionary = {}
 var ji_records_checked := false
+var relay_checked := false
+var areas_visited: Dictionary = {}
+var machine_observed := false
+var demo_completed := false
+var show_initial_guide := false
 var battle_enemy_id := ""
 var battle_return_position := Vector2(82, 260)
 var enemy_cleared_for_return := false
@@ -296,6 +349,13 @@ func begin_new_run() -> void:
 	active_party_ids = ["hero"]
 	recruited_members.clear()
 	ji_records_checked = false
+	hero_name = ""
+	hero_appearance = "male"
+	relay_checked = false
+	areas_visited.clear()
+	machine_observed = false
+	demo_completed = false
+	show_initial_guide = false
 	battle_enemy_id = ""
 	enemy_cleared_for_return = false
 	returning_from_battle = false
@@ -306,7 +366,19 @@ func begin_new_run() -> void:
 
 
 func member_name(member_id: String) -> String:
+	if member_id == "hero" and hero_name != "":
+		return hero_name
 	return text_for(String(MEMBER_DEFS.get(member_id, MEMBER_DEFS["hero"])["name_key"]))
+
+
+func field_log_text() -> String:
+	var state := text_for("field_yes")
+	var open := text_for("field_no")
+	return text_for("field_log_count") % [areas_visited.size(), state if relay_checked else open, state if ji_records_checked else open, state if machine_observed else open]
+
+
+func can_submit_report() -> bool:
+	return areas_visited.size() == DESTINATIONS.size() and relay_checked and ji_records_checked and machine_observed
 
 
 func member_state(member_id: String) -> Dictionary:
@@ -453,10 +525,16 @@ func make_snapshot(scene_kind: String, position: Vector2, note: String) -> Dicti
 		"destination": current_destination_id,
 		"enemyCleared": enemy_cleared_for_return,
 		"hero": hero_state.duplicate(true),
+		"heroName": hero_name,
+		"heroAppearance": hero_appearance,
 		"members": member_states.duplicate(true),
 		"activeParty": active_party_ids.duplicate(),
 		"recruited": recruited_members.duplicate(true),
 		"jiRecordsChecked": ji_records_checked,
+		"relayChecked": relay_checked,
+		"areasVisited": areas_visited.duplicate(true),
+		"machineObserved": machine_observed,
+		"demoCompleted": demo_completed,
 		"language": language,
 		"note": note,
 	}
@@ -482,10 +560,17 @@ func load_save(id: String) -> bool:
 	for member_id in snapshot["activeParty"]:
 		party.append(String(member_id))
 	hero_state = snapshot["hero"].duplicate(true)
+	hero_name = String(snapshot.get("heroName", ""))
+	hero_appearance = String(snapshot.get("heroAppearance", "male"))
 	member_states = snapshot["members"].duplicate(true)
 	active_party_ids = party
 	recruited_members = snapshot["recruited"].duplicate(true)
 	ji_records_checked = bool(snapshot["jiRecordsChecked"])
+	relay_checked = bool(snapshot.get("relayChecked", false))
+	areas_visited = snapshot.get("areasVisited", {}).duplicate(true)
+	machine_observed = bool(snapshot.get("machineObserved", false))
+	demo_completed = bool(snapshot.get("demoCompleted", false))
+	show_initial_guide = false
 	current_destination_id = String(snapshot["destination"])
 	language = String(snapshot["language"])
 	enemy_cleared_for_return = bool(snapshot["enemyCleared"])
@@ -526,6 +611,13 @@ func _valid_snapshot(snapshot: Dictionary) -> bool:
 			return false
 	if snapshot.get("language", "") not in ["zh", "en"] or typeof(snapshot.get("jiRecordsChecked")) != TYPE_BOOL or typeof(snapshot.get("enemyCleared")) != TYPE_BOOL:
 		return false
+	if typeof(snapshot.get("relayChecked", false)) != TYPE_BOOL or typeof(snapshot.get("areasVisited", {})) != TYPE_DICTIONARY or typeof(snapshot.get("machineObserved", false)) != TYPE_BOOL or typeof(snapshot.get("demoCompleted", false)) != TYPE_BOOL:
+		return false
+	if typeof(snapshot.get("heroName", "")) != TYPE_STRING or snapshot.get("heroAppearance", "male") not in ["male", "female"]:
+		return false
+	for destination_id in snapshot.get("areasVisited", {}).keys():
+		if not DESTINATIONS.has(destination_id) or snapshot["areasVisited"][destination_id] != true:
+			return false
 	return true
 
 

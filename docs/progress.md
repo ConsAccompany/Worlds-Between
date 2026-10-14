@@ -15,6 +15,8 @@ Last updated: 2026-10-13
 - Godot M1–M5 smoke checks pass. M5 checks cover staying, promotion, switching away and back, skill ranks, aptitude discounts and gates, reserve rewards, combat skill use, and battle-to-growth routing. Five M5 captures were inspected. Final job art and effects remain later work.
 - M6 saves and recovery are complete: three manual slots, a rolling five-record autosave history, a safe prebattle checkpoint, victory autosave after rewards, versioned JSON, and main-menu load. Map/area position, party, recruitment, enemies, discovery, AI and job records restore.
 - Godot M6 scenario and separate-process restart checks pass. Four Chinese/English M6 captures were inspected. The right-side game bible reads the named JSON progress and asset inventory files in `outputs/`.
+- M7 is in progress: character name and appearance choice, optional field guide, three-location objective log, relay and ruin findings, machine observation, city report and continued play are implemented. The route remains open to multiple location and recruit orders. Four location/battle ambient loops and one discovery cue are connected.
+- Godot M7 route checks pass and six Chinese/English captures were reviewed. A 25–35 minute content length has not yet been demonstrated; more meaningful exploration content and a timed playthrough are required before M7 can be marked complete.
 
 ## Milestones Checklist
 
@@ -47,7 +49,10 @@ Last updated: 2026-10-13
 
 ### Phase M7 - Playable content
 
-- [ ] Build the 25–35 minute bilingual route.
+- [x] Connect character setup, three locations, discoveries, companions, machine choice, field log and report endpoint.
+- [x] Save and reload route, name and appearance state; review Chinese/English screens.
+- [ ] Expand the route with substantial interactive exploration to support the 25–35 minute target.
+- [ ] Time a fresh start-to-finish playthrough and fix any blockers or text overflow.
 
 ### Phase M8 - Acceptance and tuning
 

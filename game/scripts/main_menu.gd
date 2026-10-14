@@ -80,7 +80,7 @@ func _refresh_text() -> void:
 
 func _start_game() -> void:
 	AppState.begin_new_run()
-	get_tree().change_scene_to_file("res://scenes/scifi_world_map.tscn")
+	get_tree().change_scene_to_file("res://scenes/hero_setup.tscn")
 
 
 func _open_load() -> void:

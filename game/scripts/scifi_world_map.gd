@@ -12,6 +12,12 @@ var help_label: Label
 var back_button: Button
 var growth_button: Button
 var save_button: Button
+var field_button: Button
+var field_status: Label
+var field_overlay: ColorRect
+var field_title: Label
+var field_body: RichTextLabel
+var field_close: Button
 var destination_buttons: Dictionary = {}
 
 
@@ -19,6 +25,9 @@ func _ready() -> void:
 	_build_ui()
 	AppState.language_changed.connect(_refresh_text)
 	_refresh_text()
+	if AppState.show_initial_guide:
+		AppState.show_initial_guide = false
+		call_deferred("_open_field_log")
 
 
 func _draw() -> void:
@@ -82,6 +91,52 @@ func _build_ui() -> void:
 		button.pressed.connect(_enter_destination.bind(id))
 		canvas.add_child(button)
 		destination_buttons[id] = button
+	var strip := ColorRect.new()
+	strip.color = Color("#0d1723")
+	strip.position = Vector2(0, 313)
+	strip.size = Vector2(640, 47)
+	canvas.add_child(strip)
+	field_status = Label.new()
+	field_status.position = Vector2(17, 319)
+	field_status.add_theme_font_size_override("font_size", 11)
+	field_status.add_theme_color_override("font_color", Color("#e9d9a8"))
+	canvas.add_child(field_status)
+	field_button = Button.new()
+	field_button.position = Vector2(521, 317)
+	field_button.size = Vector2(103, 37)
+	field_button.pressed.connect(_open_field_log)
+	canvas.add_child(field_button)
+	_build_field_log(canvas)
+
+
+func _build_field_log(canvas: CanvasLayer) -> void:
+	field_overlay = ColorRect.new()
+	field_overlay.color = Color(0.04, 0.08, 0.12, 0.93)
+	field_overlay.size = Vector2(640, 360)
+	field_overlay.visible = false
+	canvas.add_child(field_overlay)
+	var panel := ColorRect.new()
+	panel.position = Vector2(48, 39)
+	panel.size = Vector2(544, 285)
+	panel.color = Color("#25404b")
+	field_overlay.add_child(panel)
+	field_title = Label.new()
+	field_title.position = Vector2(69, 53)
+	field_title.add_theme_font_size_override("font_size", 20)
+	field_title.add_theme_color_override("font_color", Color("#f0e3c5"))
+	field_overlay.add_child(field_title)
+	field_body = RichTextLabel.new()
+	field_body.position = Vector2(69, 93)
+	field_body.size = Vector2(500, 165)
+	field_body.scroll_active = true
+	field_body.add_theme_font_size_override("normal_font_size", 12)
+	field_body.add_theme_color_override("font_color", Color("#e0eeeb"))
+	field_overlay.add_child(field_body)
+	field_close = Button.new()
+	field_close.position = Vector2(434, 274)
+	field_close.size = Vector2(135, 34)
+	field_close.pressed.connect(_close_field_log)
+	field_overlay.add_child(field_close)
 
 
 func _refresh_text() -> void:
@@ -92,6 +147,31 @@ func _refresh_text() -> void:
 	save_button.text = AppState.text_for("save_open")
 	for id in destination_buttons:
 		destination_buttons[id].text = AppState.destination_name(id)
+	field_button.text = AppState.text_for("field_log")
+	field_status.text = AppState.field_log_text()
+	field_title.text = AppState.text_for("field_log")
+	var lines := [AppState.text_for("field_log_hint"), "", AppState.field_log_text()]
+	if AppState.relay_checked:
+		lines.append(AppState.text_for("relay_record"))
+	if AppState.ji_records_checked:
+		lines.append(AppState.text_for("archive_record"))
+	if AppState.machine_observed:
+		lines.append(AppState.text_for("machine_record"))
+	if AppState.can_submit_report():
+		lines.append(AppState.text_for("report_ready"))
+	field_body.text = "\n".join(lines)
+	field_close.text = AppState.text_for("save_back")
+
+
+func _open_field_log() -> void:
+	_refresh_text()
+	field_overlay.visible = true
+	field_close.grab_focus()
+
+
+func _close_field_log() -> void:
+	field_overlay.visible = false
+	field_button.grab_focus()
 
 
 func _enter_destination(destination_id: String) -> void:
@@ -118,4 +198,7 @@ func _open_save() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
-		_return_to_menu()
+		if field_overlay.visible:
+			_close_field_log()
+		else:
+			_return_to_menu()

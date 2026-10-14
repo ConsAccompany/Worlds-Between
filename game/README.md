@@ -1,6 +1,8 @@
 # Worlds Between — MVP game project
 
-Open `game/project.godot` in Godot 4.7.2. Run the project, choose "开始探索" / "Start exploring", then click one of three destinations on the science-region map. Move with WASD or arrow keys, press E near an NPC, and use Esc to return to the map. The outskirts and ruins contain visible machines: walk around them or touch one to enter the battle arena. In battle, move with A/D or left/right arrows, press J to attack, K to dodge, and hold L to guard. Winning returns you to the same area with 20%-of-maximum HP and energy recovery; defeat returns to the main menu. Leaving and reentering a location resets its enemy.
+Open `game/project.godot` in Godot 4.7.2. Run the project, choose "开始探索" / "Start exploring", set the protagonist's name and appearance, and either open the brief field guide or skip it. On the science-region map, visit the three destinations in any order. Move with WASD or arrow keys, press E near people and consoles, and use Esc to return to the map. Check the relay in the outskirts and the records console in the ruins. Observe a machine by bypassing it, or touch one to enter combat. Return to the city's report desk after the field log is complete to reach the demo endpoint; you can continue exploring afterward. The **Field log** button shows objectives and discovered records in Chinese or English.
+
+In battle, move with A/D or left/right arrows, press J to attack, K to dodge, and hold L to guard. Winning returns you to the same area with 20%-of-maximum HP and energy recovery; defeat returns to the main menu. Leaving and reentering a location resets its enemy.
 
 Recruit Liang Xu in the city, Zhao Ling in the outskirts, and Ji Cheng in the ruins after examining the records console. Choosing “later” leaves each available on a return visit. Only the protagonist is shown while exploring. In battle, Tab switches controlled characters, Q uses their personal skill, R uses their current job skill, P pauses to choose any unlocked skill in the current job series or issue temporary teammate orders, and T toggles full auto. The pause panel also cycles each teammate's persistent balanced, attack, or cautious AI policy.
 
@@ -10,11 +12,11 @@ Use **Save** on the world map or in an exploration area to choose one of three m
 
 ## Project structure
 
-- `scenes/` — menu, world map, three configurable exploration locations, fixed battle arena, and temporary foundation room
+- `scenes/` — menu, protagonist setup, world map, three configurable exploration locations, fixed battle arena, report endpoint, and temporary foundation room
 - `scripts/` — app language and input state, menu, map, exploration, combat rules, battle arena, and room behavior
-- `assets/characters/` — uniquely named temporary game sprite
+- `assets/characters/` and `assets/audio/` — uniquely named prototype sprites, ambient loops and discovery cue
 
 Stable content IDs will use `board.area.object` (for example, `scifi.outskirts.recruit_zhaoling`). Save data and content registries begin in later MVP steps. The four aptitude IDs are `martial`, `adaptive`, `scholarly`, and `spiritual`; naming IDs in English keeps localization text separate from saved identifiers.
 
-Run `--headless --path game --script res://tests/m1_smoke.gd` through `res://tests/m6_smoke.gd` with Godot for milestone smoke checks. After M6, run `res://tests/m6_restart_smoke.gd` in a separate Godot process to verify a cold load. Test saves use isolated `user://test-saves` folders. Exploration and combat figures remain temporary geometric art; final visual assets belong to later steps.
+Run `--headless --path game --script res://tests/m1_smoke.gd` through `res://tests/m7_smoke.gd` with Godot for milestone smoke checks. After M6, run `res://tests/m6_restart_smoke.gd` in a separate Godot process to verify a cold load. Test saves use isolated `user://test-saves` folders. Exploration and combat figures remain temporary geometric art. M7's route works, but its 25–35 minute duration has not been met or timed yet.
 

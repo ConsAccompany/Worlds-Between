@@ -1,10 +1,19 @@
 extends Node2D
 
-const HERO_SPRITE := preload("res://assets/characters/rpg-2-star-ocean-the-second_hero-temp_exploration-sprite_m1_20261013-185701-b7e41a93.svg")
+const HERO_SPRITE_MALE := preload("res://assets/characters/rpg-2-star-ocean-the-second_protagonist_exploration-sprite-male_m7_20261013-211119-a51e0b63.svg")
+const HERO_SPRITE_FEMALE := preload("res://assets/characters/rpg-2-star-ocean-the-second_protagonist_exploration-sprite-female_m7_20261013-211119-8c2d9e47.svg")
 const BATTLE_SCENE := preload("res://scenes/battle_arena.tscn")
 const MOVE_SPEED := 140.0
 const SPAWN := Vector2(82, 260)
 const RECORDS_POSITION := Vector2(320, 250)
+const RELAY_POSITION := Vector2(470, 128)
+const REPORT_POSITION := Vector2(470, 247)
+const AMBIENCE := {
+	"scifi.city": "res://assets/audio/rpg-2-star-ocean-the-second_scifi-city_ambient-loop_m7_20261013-211230-c8e1159a.wav",
+	"scifi.outskirts": "res://assets/audio/rpg-2-star-ocean-the-second_scifi-outskirts_ambient-loop_m7_20261013-211230-57ad4b20.wav",
+	"scifi.ruins": "res://assets/audio/rpg-2-star-ocean-the-second_scifi-ruins_ambient-loop_m7_20261013-211230-6be0d93f.wav",
+}
+const DISCOVERY_CUE := preload("res://assets/audio/rpg-2-star-ocean-the-second_discovery_interaction-cue_m7_20261013-211230-ad781e52.wav")
 const AREA_CONFIG := {
 	"scifi.city": {"npc": Vector2(282, 180), "recruit": "liang-xu", "enemy": Vector2(-100, -100), "color": Color("#365463")},
 	"scifi.outskirts": {"npc": Vector2(190, 150), "recruit": "zhao-ling", "enemy": Vector2(355, 238), "color": Color("#546b57")},
@@ -29,6 +38,7 @@ var back_button: Button
 var save_button: Button
 var npc_label: Label
 var records_label: Label
+var station_label: Label
 var dialogue_overlay: ColorRect
 var dialogue_title: Label
 var dialogue_text: Label
@@ -37,6 +47,7 @@ var later_button: Button
 var dialogue_open := false
 var feedback_key := "npc_prompt"
 var feedback_message := ""
+var cue_player: AudioStreamPlayer
 
 
 func _ready() -> void:
@@ -56,7 +67,9 @@ func _ready() -> void:
 		hero.position = AppState.resume_area_position
 		AppState.resume_area_pending = false
 	safe_position = hero.position
+	AppState.areas_visited[destination_id] = true
 	_build_ui()
+	_start_audio()
 	AppState.language_changed.connect(_refresh_text)
 	_refresh_text()
 
@@ -76,6 +89,7 @@ func _process(delta: float) -> void:
 				_open_encounter()
 	if enemy_visible and not bypass_reached and hero.position.x > 545.0 and hero.position.y < 205.0:
 		bypass_reached = true
+		AppState.machine_observed = true
 		feedback_key = "bypass_notice"
 		_refresh_text()
 
@@ -103,6 +117,12 @@ func _draw() -> void:
 		_draw_enemy()
 		draw_rect(Rect2(566, 88, 13, 34), Color("#a2ded1"))
 		draw_rect(Rect2(579, 88, 4, 34), Color("#233c47"))
+	if destination_id == "scifi.outskirts":
+		draw_rect(Rect2(RELAY_POSITION + Vector2(-18, -15), Vector2(36, 30)), Color("#1d3948"))
+		draw_rect(Rect2(RELAY_POSITION + Vector2(-12, -9), Vector2(24, 15)), Color("#8fdecf" if AppState.relay_checked else "#e5bb77"))
+	if destination_id == "scifi.city":
+		draw_rect(Rect2(REPORT_POSITION + Vector2(-23, -14), Vector2(46, 28)), Color("#213b49"))
+		draw_rect(Rect2(REPORT_POSITION + Vector2(-16, -8), Vector2(32, 15)), Color("#99d8c9"))
 
 
 func _draw_city() -> void:
@@ -165,11 +185,25 @@ func _draw_enemy() -> void:
 
 func _build_actors() -> void:
 	hero = Sprite2D.new()
-	hero.texture = HERO_SPRITE
+	hero.texture = HERO_SPRITE_FEMALE if AppState.hero_appearance == "female" else HERO_SPRITE_MALE
 	hero.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	hero.scale = Vector2(2, 2)
 	hero.position = SPAWN
 	add_child(hero)
+
+
+func _start_audio() -> void:
+	var ambient_player := AudioStreamPlayer.new()
+	var ambient: AudioStreamWAV = load(AMBIENCE[destination_id]).duplicate()
+	ambient.loop_mode = AudioStreamWAV.LOOP_FORWARD
+	ambient_player.stream = ambient
+	ambient_player.volume_db = -11.0
+	add_child(ambient_player)
+	ambient_player.play()
+	cue_player = AudioStreamPlayer.new()
+	cue_player.stream = DISCOVERY_CUE
+	cue_player.volume_db = -7.0
+	add_child(cue_player)
 
 
 func _build_ui() -> void:
@@ -230,6 +264,11 @@ func _build_ui() -> void:
 	records_label.add_theme_font_size_override("font_size", 11)
 	records_label.add_theme_color_override("font_color", Color("#e9dba8"))
 	canvas.add_child(records_label)
+	station_label = Label.new()
+	station_label.position = (RELAY_POSITION if destination_id == "scifi.outskirts" else REPORT_POSITION) + Vector2(-40, -42)
+	station_label.add_theme_font_size_override("font_size", 11)
+	station_label.add_theme_color_override("font_color", Color("#f0dda8"))
+	canvas.add_child(station_label)
 	_build_dialogue(canvas)
 
 
@@ -279,6 +318,8 @@ func _refresh_text() -> void:
 	npc_label.visible = not AppState.recruited_members.has(recruit_id)
 	records_label.text = AppState.text_for("relic_marker")
 	records_label.visible = destination_id == "scifi.ruins" and not AppState.ji_records_checked
+	station_label.visible = destination_id != "scifi.ruins"
+	station_label.text = AppState.text_for("relay_marker" if destination_id == "scifi.outskirts" else "report_marker")
 	dialogue_title.text = AppState.member_name(recruit_id)
 	dialogue_text.text = AppState.text_for("recruit_ji_locked" if recruit_id == "ji-cheng" and not AppState.ji_records_checked else "recruit_" + recruit_id.split("-")[0])
 	invite_button.text = AppState.text_for("recruit_invite")
@@ -308,6 +349,7 @@ func _invite_companion() -> void:
 		_close_dialogue()
 		_refresh_text()
 		queue_redraw()
+		AppState.write_auto_save("area", hero.position, "manual_note")
 	else:
 		feedback_message = AppState.text_for("recruit_full")
 		_close_dialogue()
@@ -342,8 +384,27 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event.is_action_pressed("interact"):
 		if dialogue_open:
 			return
-		if destination_id == "scifi.ruins" and not AppState.ji_records_checked and hero.position.distance_to(RECORDS_POSITION) < 43.0:
+		if destination_id == "scifi.city" and hero.position.distance_to(REPORT_POSITION) < 50.0:
+			if AppState.can_submit_report():
+				AppState.demo_completed = true
+				AppState.resume_area_position = hero.position
+				AppState.resume_area_pending = true
+				AppState.write_auto_save("area", hero.position, "manual_note")
+				get_tree().change_scene_to_file("res://scenes/demo_report.tscn")
+			else:
+				feedback_key = "report_locked"
+				feedback_message = ""
+				_refresh_text()
+		elif destination_id == "scifi.outskirts" and hero.position.distance_to(RELAY_POSITION) < 46.0:
+			AppState.relay_checked = true
+			cue_player.play()
+			feedback_key = "relay_done"
+			feedback_message = ""
+			_refresh_text()
+			queue_redraw()
+		elif destination_id == "scifi.ruins" and not AppState.ji_records_checked and hero.position.distance_to(RECORDS_POSITION) < 43.0:
 			AppState.ji_records_checked = true
+			cue_player.play()
 			feedback_message = AppState.text_for("relic_done")
 			_refresh_text()
 		elif not AppState.recruited_members.has(recruit_id) and hero.position.distance_to(npc_position) < 50.0:
