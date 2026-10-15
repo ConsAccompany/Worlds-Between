@@ -1,0 +1,831 @@
+{
+ "project": "Worlds Between",
+ "milestone": "M8",
+ "variant": "m8-w02",
+ "purpose": "Female protagonist south locomotion v2: distance-keyed, root-locked run at the real 140 px/s and a planted walk alternative, from approved static selout v8.",
+ "status": "technical prototype for human review; unapproved; not runtime-integrated",
+ "art_approved": false,
+ "human_reviewed": false,
+ "runtime_integrated": false,
+ "gates_changed": "none",
+ "supersedes_for_review": "walk-pilots/ m8-w01 (left immutable)",
+ "source": {
+  "file": "game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v8-cloth-leather-candidate_m8-v08_20261015-021600-157a5ea0.png",
+  "sha256": "ccf9d2a293e7f1b9c706b4d2f1bf9c00b3c7714ec4e9b8bddf023e166f68b6fd",
+  "role": "read-only, source-locked; v8 approved as STATIC 48 px baseline only"
+ },
+ "builder": {
+  "script": "tools/rpg-2-star-ocean-the-second_protagonist-female_south-locomotion-v2-build_m8-w02_20261015-030458-5b1e7c20.py",
+  "python": "3.12.14",
+  "pillow": "12.3.0",
+  "numpy": "2.3.5"
+ },
+ "cell": [
+  80,
+  112
+ ],
+ "ground_pin_cell": [
+  40,
+  104
+ ],
+ "display": {
+  "logical_height_px": 48,
+  "scale": 0.5,
+  "texel_to_screen_px_at_1280x720": 1,
+  "filter": "nearest"
+ },
+ "runtime_grounding": {
+  "MOVE_SPEED_logical_px_s": 140.0,
+  "source": "game/scripts/scifi_exploration_area.gd and survey_annex.gd (const MOVE_SPEED := 140.0)",
+  "runtime_walk": "time-driven 4 phases x 0.12 s (step 33.6 px at 140 px/s); unchanged"
+ },
+ "locomotion_model": {
+  "frame_selection": "distance-keyed: s = distance travelled mod cycle; frame = cumulative hold_px table",
+  "root_lock": "draw_y = logical_y + r_start_px + slope * s_in_frame (logical px). slope -1 freezes the sprite while a foot is planted; at frame changes the sprite moves by the planted sole's climb/2; flight frames ramp r back.",
+  "sole": "lowest opaque cell row of each leg's boot as built (texels; 2 texels = 1 logical px)"
+ },
+ "alternatives": {
+  "run": {
+   "label": "A: run at the real game speed (MOVE_SPEED 140)",
+   "speed_logical_px_s": 140.0,
+   "cycle_logical_px": 70.0,
+   "steps_per_cycle": 2,
+   "steps_per_s": 4.0,
+   "mean_frame_rate_fps": 24.0,
+   "planted_distance_px_per_step": 9.333333333333334,
+   "loop": [
+    "run-f01-contact-vr",
+    "run-f02-load-vr",
+    "run-f03-mid-vr",
+    "run-f04-push-vr",
+    "run-f05-flight1-vr",
+    "run-f06-flight2-vr",
+    "run-f07-contact-vl",
+    "run-f08-load-vl",
+    "run-f09-mid-vl",
+    "run-f10-push-vl",
+    "run-f11-flight1-vl",
+    "run-f12-flight2-vl"
+   ],
+   "frames": [
+    {
+     "order": 1,
+     "key": "run-f01-contact-vr",
+     "intent": "vr heel lands far forward (sole 109); vl kicked up behind; fist forward",
+     "file": "rpg-2-star-ocean-the-second_protagonist-female_south-locomotion-v2-run-f01-contact-vr_m8-w02_20261015-030458-81866603.png",
+     "sha256": "266846e925808e7cf30aa9b31222fc034ad0d8b01b2d3716d67d1c1eb7e5ae2a",
+     "bytes": 3505,
+     "bob": 1,
+     "pose": {
+      "vr": "contact",
+      "vl": "kick",
+      "fist": [
+       1,
+       2
+      ],
+      "armr": [
+       0,
+       -2
+      ],
+      "cape": 0
+     },
+     "sole": {
+      "vl": 88,
+      "vr": 109
+     },
+     "planted": [
+      "vr"
+     ],
+     "hold_px": 2.3333333333333335,
+     "pinholes_closed": 0,
+     "root_lock": {
+      "r_start_px": 1.1667,
+      "slope": -1.0
+     }
+    },
+    {
+     "order": 2,
+     "key": "run-f02-load-vr",
+     "intent": "vr knee bends to take the weight (sole 104); vl folds under",
+     "file": "rpg-2-star-ocean-the-second_protagonist-female_south-locomotion-v2-run-f02-load-vr_m8-w02_20261015-030458-88ee836a.png",
+     "sha256": "d9441b304a279194b6baadc57e96dab697652b015f9ed493e23b48a485817684",
+     "bytes": 3507,
+     "bob": 2,
+     "pose": {
+      "vr": "load",
+      "vl": "pass",
+      "fist": [
+       1,
+       2
+      ],
+      "armr": [
+       0,
+       -1
+      ],
+      "cape": -1
+     },
+     "sole": {
+      "vl": 96,
+      "vr": 104
+     },
+     "planted": [
+      "vr"
+     ],
+     "hold_px": 2.3333333333333335,
+     "pinholes_closed": 2,
+     "root_lock": {
+      "r_start_px": 1.3333,
+      "slope": -1.0
+     }
+    },
+    {
+     "order": 3,
+     "key": "run-f03-mid-vr",
+     "intent": "body lowest over vr (sole 100); vl knee coming through",
+     "file": "rpg-2-star-ocean-the-second_protagonist-female_south-locomotion-v2-run-f03-mid-vr_m8-w02_20261015-030458-e38d812c.png",
+     "sha256": "6ad8bd86b3398405ba78807b5b7a5a22472c8fe456d8b5d46f116fbfd387dd69",
+     "bytes": 3421,
+     "bob": 2,
+     "pose": {
+      "vr": "mid",
+      "vl": "pass2",
+      "fist": [
+       1,
+       1
+      ],
+      "armr": [
+       0,
+       -1
+      ],
+      "cape": -1
+     },
+     "sole": {
+      "vl": 98,
+      "vr": 100
+     },
+     "planted": [
+      "vr"
+     ],
+     "hold_px": 2.3333333333333335,
+     "pinholes_closed": 0,
+     "root_lock": {
+      "r_start_px": 1.0,
+      "slope": -1.0
+     }
+    },
+    {
+     "order": 4,
+     "key": "run-f04-push-vr",
+     "intent": "vr toe-off behind (sole 95); vl knee driving forward, foot ahead (sole 100)",
+     "file": "rpg-2-star-ocean-the-second_protagonist-female_south-locomotion-v2-run-f04-push-vr_m8-w02_20261015-030458-70833eb4.png",
+     "sha256": "1560bd6db7486ab14d99df1668075477e64e92d7b35c3706d3c603a37342a1ac",
+     "bytes": 3407,
+     "bob": 1,
+     "pose": {
+      "vr": "push",
+      "vl": "kneeup",
+      "fist": [
+       0,
+       1
+      ],
+      "armr": [
+       0,
+       0
+      ],
+      "cape": -1
+     },
+     "sole": {
+      "vl": 100,
+      "vr": 95
+     },
+     "planted": [
+      "vr"
+     ],
+     "hold_px": 2.3333333333333335,
+     "pinholes_closed": 1,
+     "root_lock": {
+      "r_start_px": 1.1667,
+      "slope": -1.0
+     }
+    },
+    {
+     "order": 5,
+     "key": "run-f05-flight1-vr",
+     "intent": "airborne: vr kicks up behind, vl reaches; arms swap",
+     "file": "rpg-2-star-ocean-the-second_protagonist-female_south-locomotion-v2-run-f05-flight1-vr_m8-w02_20261015-030458-7d70eed4.png",
+     "sha256": "548892eaab64879e979d6c9801a05c54742984669a70944b11791d5be1c70805",
+     "bytes": 3398,
+     "bob": -1,
+     "pose": {
+      "vr": "trail1",
+      "vl": "reach1",
+      "fist": [
+       0,
+       -1
+      ],
+      "armr": [
+       -1,
+       1
+      ],
+      "cape": 0
+     },
+     "sole": {
+      "vl": 102,
+      "vr": 87
+     },
+     "planted": [],
+     "hold_px": 12.833333333333334,
+     "pinholes_closed": 3,
+     "root_lock": {
+      "r_start_px": -1.1667,
+      "slope": 0.090909
+     }
+    },
+    {
+     "order": 6,
+     "key": "run-f06-flight2-vr",
+     "intent": "airborne high point: vr tucked, vl extended to land",
+     "file": "rpg-2-star-ocean-the-second_protagonist-female_south-locomotion-v2-run-f06-flight2-vr_m8-w02_20261015-030458-7c01bbb6.png",
+     "sha256": "39ea859e69e3394841d09cfe28225022672eac554b1609f5d8ef6a44320971c8",
+     "bytes": 3475,
+     "bob": -2,
+     "pose": {
+      "vr": "trail2",
+      "vl": "reach2",
+      "fist": [
+       0,
+       -2
+      ],
+      "armr": [
+       -1,
+       2
+      ],
+      "cape": 0
+     },
+     "sole": {
+      "vl": 105,
+      "vr": 86
+     },
+     "planted": [],
+     "hold_px": 12.833333333333334,
+     "pinholes_closed": 2,
+     "root_lock": {
+      "r_start_px": 0.0,
+      "slope": 0.090909
+     }
+    },
+    {
+     "order": 7,
+     "key": "run-f07-contact-vl",
+     "intent": "vl heel lands far forward (sole 109); vr kicked up behind; forearm forward",
+     "file": "rpg-2-star-ocean-the-second_protagonist-female_south-locomotion-v2-run-f07-contact-vl_m8-w02_20261015-030458-dc725a75.png",
+     "sha256": "05caa013b0c9b19b277690b9debff75138bb3457f1f142ff9b1342fa7dc6e401",
+     "bytes": 3475,
+     "bob": 1,
+     "pose": {
+      "vr": "kick",
+      "vl": "contact",
+      "fist": [
+       0,
+       -2
+      ],
+      "armr": [
+       -1,
+       2
+      ],
+      "cape": 0
+     },
+     "sole": {
+      "vl": 109,
+      "vr": 88
+     },
+     "planted": [
+      "vl"
+     ],
+     "hold_px": 2.3333333333333335,
+     "pinholes_closed": 0,
+     "root_lock": {
+      "r_start_px": 1.1667,
+      "slope": -1.0
+     }
+    },
+    {
+     "order": 8,
+     "key": "run-f08-load-vl",
+     "intent": "vl knee bends to take the weight (sole 104); vr folds under",
+     "file": "rpg-2-star-ocean-the-second_protagonist-female_south-locomotion-v2-run-f08-load-vl_m8-w02_20261015-030458-a69398c0.png",
+     "sha256": "81b88d9da4dfe99ae78ddd68ed8690dc7e22fcc0e2d7ed75d5b6ee28303e6bf5",
+     "bytes": 3493,
+     "bob": 2,
+     "pose": {
+      "vr": "pass",
+      "vl": "load",
+      "fist": [
+       0,
+       -1
+      ],
+      "armr": [
+       -1,
+       2
+      ],
+      "cape": 1
+     },
+     "sole": {
+      "vl": 104,
+      "vr": 96
+     },
+     "planted": [
+      "vl"
+     ],
+     "hold_px": 2.3333333333333335,
+     "pinholes_closed": 1,
+     "root_lock": {
+      "r_start_px": 1.3333,
+      "slope": -1.0
+     }
+    },
+    {
+     "order": 9,
+     "key": "run-f09-mid-vl",
+     "intent": "body lowest over vl (sole 100); vr knee coming through",
+     "file": "rpg-2-star-ocean-the-second_protagonist-female_south-locomotion-v2-run-f09-mid-vl_m8-w02_20261015-030458-9baf009b.png",
+     "sha256": "30a7fc514358c64b80ed5a95388fcba090d68c1e5209d3114be089f5cc4213c9",
+     "bytes": 3457,
+     "bob": 2,
+     "pose": {
+      "vr": "pass2",
+      "vl": "mid",
+      "fist": [
+       0,
+       -1
+      ],
+      "armr": [
+       -1,
+       1
+      ],
+      "cape": 1
+     },
+     "sole": {
+      "vl": 100,
+      "vr": 98
+     },
+     "planted": [
+      "vl"
+     ],
+     "hold_px": 2.3333333333333335,
+     "pinholes_closed": 2,
+     "root_lock": {
+      "r_start_px": 1.0,
+      "slope": -1.0
+     }
+    },
+    {
+     "order": 10,
+     "key": "run-f10-push-vl",
+     "intent": "vl toe-off behind (sole 95); vr knee driving forward, foot ahead (sole 100)",
+     "file": "rpg-2-star-ocean-the-second_protagonist-female_south-locomotion-v2-run-f10-push-vl_m8-w02_20261015-030458-ecc68422.png",
+     "sha256": "5136123faec6b94cca2990fbc76d7d99983d88a4ec22c98bc9c11eb6e1dbcb66",
+     "bytes": 3439,
+     "bob": 1,
+     "pose": {
+      "vr": "kneeup",
+      "vl": "push",
+      "fist": [
+       0,
+       0
+      ],
+      "armr": [
+       0,
+       1
+      ],
+      "cape": 1
+     },
+     "sole": {
+      "vl": 95,
+      "vr": 100
+     },
+     "planted": [
+      "vl"
+     ],
+     "hold_px": 2.3333333333333335,
+     "pinholes_closed": 1,
+     "root_lock": {
+      "r_start_px": 1.1667,
+      "slope": -1.0
+     }
+    },
+    {
+     "order": 11,
+     "key": "run-f11-flight1-vl",
+     "intent": "airborne: vl kicks up behind, vr reaches; arms swap",
+     "file": "rpg-2-star-ocean-the-second_protagonist-female_south-locomotion-v2-run-f11-flight1-vl_m8-w02_20261015-030458-9831ce27.png",
+     "sha256": "4681abe6579ca98e8fa6b85be5b4f62e4ae04e3655e9cc964afe8adbe75e6db5",
+     "bytes": 3431,
+     "bob": -1,
+     "pose": {
+      "vr": "reach1",
+      "vl": "trail1",
+      "fist": [
+       1,
+       1
+      ],
+      "armr": [
+       0,
+       -1
+      ],
+      "cape": 0
+     },
+     "sole": {
+      "vl": 87,
+      "vr": 102
+     },
+     "planted": [],
+     "hold_px": 12.833333333333334,
+     "pinholes_closed": 0,
+     "root_lock": {
+      "r_start_px": -1.1667,
+      "slope": 0.090909
+     }
+    },
+    {
+     "order": 12,
+     "key": "run-f12-flight2-vl",
+     "intent": "airborne high point: vl tucked, vr extended to land",
+     "file": "rpg-2-star-ocean-the-second_protagonist-female_south-locomotion-v2-run-f12-flight2-vl_m8-w02_20261015-030458-cb78c22f.png",
+     "sha256": "936daa01b46dae78ccafb6b9e271f96c23ab67039edf2ab1dab59020b606996a",
+     "bytes": 3506,
+     "bob": -2,
+     "pose": {
+      "vr": "reach2",
+      "vl": "trail2",
+      "fist": [
+       1,
+       2
+      ],
+      "armr": [
+       0,
+       -2
+      ],
+      "cape": 0
+     },
+     "sole": {
+      "vl": 86,
+      "vr": 105
+     },
+     "planted": [],
+     "hold_px": 12.833333333333334,
+     "pinholes_closed": 0,
+     "root_lock": {
+      "r_start_px": 0.0,
+      "slope": 0.090909
+     }
+    }
+   ],
+   "editable": {
+    "file": "rpg-2-star-ocean-the-second_protagonist-female_south-locomotion-v2-run-editable_m8-w02_20261015-030458-63efaa2e.pxo",
+    "sha256": "422958ca2bf39ba507b006902c8481eb0f5fe87a1edc5b2de3f289178cf1591f",
+    "format": "Pixelorama pxo_version 7 (v1.2.3), 12 frames x 5 layers"
+   }
+  },
+  "walk": {
+   "label": "B: planted walk at its physically consistent speed",
+   "speed_logical_px_s": 16.0,
+   "cycle_logical_px": 16.0,
+   "steps_per_cycle": 2,
+   "steps_per_s": 2.0,
+   "mean_frame_rate_fps": 8.0,
+   "planted_distance_px_per_step": 8.0,
+   "loop": [
+    "walk-f01-contact-vr",
+    "walk-f02-down-vr",
+    "walk-f03-pass-vr",
+    "walk-f04-up-vr",
+    "walk-f05-contact-vl",
+    "walk-f06-down-vl",
+    "walk-f07-pass-vl",
+    "walk-f08-up-vl"
+   ],
+   "frames": [
+    {
+     "order": 1,
+     "key": "walk-f01-contact-vr",
+     "intent": "vr heel lands forward (sole 110); vl toe-off far behind (sole 94), both planted",
+     "file": "rpg-2-star-ocean-the-second_protagonist-female_south-locomotion-v2-walk-f01-contact-vr_m8-w02_20261015-030458-6a83d149.png",
+     "sha256": "c30c82dd2882e96fa84366b07dfa7fc04cb4b806a350c4b46232a6aea30cfbbe",
+     "bytes": 3579,
+     "bob": 1,
+     "pose": {
+      "vr": "contact",
+      "vl": "toeoff",
+      "fist": [
+       0,
+       1
+      ],
+      "armr": [
+       0,
+       -2
+      ],
+      "cape": 0
+     },
+     "sole": {
+      "vl": 94,
+      "vr": 110
+     },
+     "planted": [
+      "vr",
+      "vl"
+     ],
+     "hold_px": 2.0,
+     "pinholes_closed": 1,
+     "root_lock": {
+      "r_start_px": 1.0,
+      "slope": -1.0
+     }
+    },
+    {
+     "order": 2,
+     "key": "walk-f02-down-vr",
+     "intent": "weight onto vr; vl heel-up lifts",
+     "file": "rpg-2-star-ocean-the-second_protagonist-female_south-locomotion-v2-walk-f02-down-vr_m8-w02_20261015-030458-c9a24ae6.png",
+     "sha256": "9e5cd15dcdb0b732f37847f791261b7a5ae28e3057b18c69247025c19731f93b",
+     "bytes": 3537,
+     "bob": 1,
+     "pose": {
+      "vr": "down",
+      "vl": "swing1",
+      "fist": [
+       0,
+       1
+      ],
+      "armr": [
+       0,
+       -1
+      ],
+      "cape": -1
+     },
+     "sole": {
+      "vl": 96,
+      "vr": 106
+     },
+     "planted": [
+      "vr"
+     ],
+     "hold_px": 2.0,
+     "pinholes_closed": 1,
+     "root_lock": {
+      "r_start_px": 1.0,
+      "slope": -1.0
+     }
+    },
+    {
+     "order": 3,
+     "key": "walk-f03-pass-vr",
+     "intent": "vr under body; vl passes, knee forward",
+     "file": "rpg-2-star-ocean-the-second_protagonist-female_south-locomotion-v2-walk-f03-pass-vr_m8-w02_20261015-030458-3b234352.png",
+     "sha256": "74619c633df87eca35406144a48b963b53558adcb51ce40b100a4efdab65e998",
+     "bytes": 3468,
+     "bob": 0,
+     "pose": {
+      "vr": "pass",
+      "vl": "swing2",
+      "fist": [
+       0,
+       0
+      ],
+      "armr": [
+       0,
+       0
+      ],
+      "cape": -1
+     },
+     "sole": {
+      "vl": 100,
+      "vr": 102
+     },
+     "planted": [
+      "vr"
+     ],
+     "hold_px": 2.0,
+     "pinholes_closed": 1,
+     "root_lock": {
+      "r_start_px": 1.0,
+      "slope": -1.0
+     }
+    },
+    {
+     "order": 4,
+     "key": "walk-f04-up-vr",
+     "intent": "vr behind, rising; vl reaches forward",
+     "file": "rpg-2-star-ocean-the-second_protagonist-female_south-locomotion-v2-walk-f04-up-vr_m8-w02_20261015-030458-bb414928.png",
+     "sha256": "82704abfd9a010725caf61e79ee00dab9e0a84b2f8e5b5fa06c7b2aeb55ad6a8",
+     "bytes": 3530,
+     "bob": 0,
+     "pose": {
+      "vr": "up",
+      "vl": "swing3",
+      "fist": [
+       0,
+       -1
+      ],
+      "armr": [
+       -1,
+       1
+      ],
+      "cape": 0
+     },
+     "sole": {
+      "vl": 104,
+      "vr": 98
+     },
+     "planted": [
+      "vr"
+     ],
+     "hold_px": 2.0,
+     "pinholes_closed": 1,
+     "root_lock": {
+      "r_start_px": 1.0,
+      "slope": -1.0
+     }
+    },
+    {
+     "order": 5,
+     "key": "walk-f05-contact-vl",
+     "intent": "vl heel lands forward (sole 110); vr toe-off far behind (sole 94), both planted",
+     "file": "rpg-2-star-ocean-the-second_protagonist-female_south-locomotion-v2-walk-f05-contact-vl_m8-w02_20261015-030458-f9d1cb35.png",
+     "sha256": "e1b0dcffb90f4d51fb852afba6491afa380dda0c4be094f44fe3815e2b70d0b9",
+     "bytes": 3481,
+     "bob": 1,
+     "pose": {
+      "vr": "toeoff",
+      "vl": "contact",
+      "fist": [
+       0,
+       -1
+      ],
+      "armr": [
+       -1,
+       1
+      ],
+      "cape": 0
+     },
+     "sole": {
+      "vl": 110,
+      "vr": 94
+     },
+     "planted": [
+      "vl",
+      "vr"
+     ],
+     "hold_px": 2.0,
+     "pinholes_closed": 1,
+     "root_lock": {
+      "r_start_px": 1.0,
+      "slope": -1.0
+     }
+    },
+    {
+     "order": 6,
+     "key": "walk-f06-down-vl",
+     "intent": "weight onto vl; vr heel-up lifts",
+     "file": "rpg-2-star-ocean-the-second_protagonist-female_south-locomotion-v2-walk-f06-down-vl_m8-w02_20261015-030458-17b049c3.png",
+     "sha256": "29ffcba88eecc4f695f49af7f334735ad0f6956db8638229f1d2b7e6fd13ee52",
+     "bytes": 3471,
+     "bob": 1,
+     "pose": {
+      "vr": "swing1",
+      "vl": "down",
+      "fist": [
+       0,
+       -1
+      ],
+      "armr": [
+       -1,
+       1
+      ],
+      "cape": 1
+     },
+     "sole": {
+      "vl": 106,
+      "vr": 96
+     },
+     "planted": [
+      "vl"
+     ],
+     "hold_px": 2.0,
+     "pinholes_closed": 3,
+     "root_lock": {
+      "r_start_px": 1.0,
+      "slope": -1.0
+     }
+    },
+    {
+     "order": 7,
+     "key": "walk-f07-pass-vl",
+     "intent": "vl under body; vr passes, knee forward",
+     "file": "rpg-2-star-ocean-the-second_protagonist-female_south-locomotion-v2-walk-f07-pass-vl_m8-w02_20261015-030458-c9240f55.png",
+     "sha256": "3a0a3fef4b65b57a7e873b5a674cd5abc4880f2aaa03f53843314d25e117f5b7",
+     "bytes": 3485,
+     "bob": 0,
+     "pose": {
+      "vr": "swing2",
+      "vl": "pass",
+      "fist": [
+       0,
+       0
+      ],
+      "armr": [
+       0,
+       0
+      ],
+      "cape": 1
+     },
+     "sole": {
+      "vl": 102,
+      "vr": 100
+     },
+     "planted": [
+      "vl"
+     ],
+     "hold_px": 2.0,
+     "pinholes_closed": 0,
+     "root_lock": {
+      "r_start_px": 1.0,
+      "slope": -1.0
+     }
+    },
+    {
+     "order": 8,
+     "key": "walk-f08-up-vl",
+     "intent": "vl behind, rising; vr reaches forward",
+     "file": "rpg-2-star-ocean-the-second_protagonist-female_south-locomotion-v2-walk-f08-up-vl_m8-w02_20261015-030458-4f8fd9a9.png",
+     "sha256": "08e725cd3f36a1ecec761b67676bbf22c952fe92a3fc89bf8924426a4722d5cb",
+     "bytes": 3566,
+     "bob": 0,
+     "pose": {
+      "vr": "swing3",
+      "vl": "up",
+      "fist": [
+       0,
+       1
+      ],
+      "armr": [
+       0,
+       -1
+      ],
+      "cape": 0
+     },
+     "sole": {
+      "vl": 98,
+      "vr": 104
+     },
+     "planted": [
+      "vl"
+     ],
+     "hold_px": 2.0,
+     "pinholes_closed": 2,
+     "root_lock": {
+      "r_start_px": 1.0,
+      "slope": -1.0
+     }
+    }
+   ],
+   "editable": {
+    "file": "rpg-2-star-ocean-the-second_protagonist-female_south-locomotion-v2-walk-editable_m8-w02_20261015-030458-bf091d76.pxo",
+    "sha256": "b3f721805b8edeab82ea915219aeb44f80c9aceead585d19cc6e36cb6119f6ae",
+    "format": "Pixelorama pxo_version 7 (v1.2.3), 8 frames x 5 layers"
+   }
+  }
+ },
+ "layer_order_back_to_front": [
+  "leg-vl",
+  "leg-vr",
+  "torso",
+  "arm-right-forearm",
+  "arm-left-fist"
+ ],
+ "files_added": [
+  "rpg-2-star-ocean-the-second_protagonist-female_south-locomotion-v2-run-f01-contact-vr_m8-w02_20261015-030458-81866603.png",
+  "rpg-2-star-ocean-the-second_protagonist-female_south-locomotion-v2-run-f02-load-vr_m8-w02_20261015-030458-88ee836a.png",
+  "rpg-2-star-ocean-the-second_protagonist-female_south-locomotion-v2-run-f03-mid-vr_m8-w02_20261015-030458-e38d812c.png",
+  "rpg-2-star-ocean-the-second_protagonist-female_south-locomotion-v2-run-f04-push-vr_m8-w02_20261015-030458-70833eb4.png",
+  "rpg-2-star-ocean-the-second_protagonist-female_south-locomotion-v2-run-f05-flight1-vr_m8-w02_20261015-030458-7d70eed4.png",
+  "rpg-2-star-ocean-the-second_protagonist-female_south-locomotion-v2-run-f06-flight2-vr_m8-w02_20261015-030458-7c01bbb6.png",
+  "rpg-2-star-ocean-the-second_protagonist-female_south-locomotion-v2-run-f07-contact-vl_m8-w02_20261015-030458-dc725a75.png",
+  "rpg-2-star-ocean-the-second_protagonist-female_south-locomotion-v2-run-f08-load-vl_m8-w02_20261015-030458-a69398c0.png",
+  "rpg-2-star-ocean-the-second_protagonist-female_south-locomotion-v2-run-f09-mid-vl_m8-w02_20261015-030458-9baf009b.png",
+  "rpg-2-star-ocean-the-second_protagonist-female_south-locomotion-v2-run-f10-push-vl_m8-w02_20261015-030458-ecc68422.png",
+  "rpg-2-star-ocean-the-second_protagonist-female_south-locomotion-v2-run-f11-flight1-vl_m8-w02_20261015-030458-9831ce27.png",
+  "rpg-2-star-ocean-the-second_protagonist-female_south-locomotion-v2-run-f12-flight2-vl_m8-w02_20261015-030458-cb78c22f.png",
+  "rpg-2-star-ocean-the-second_protagonist-female_south-locomotion-v2-run-editable_m8-w02_20261015-030458-63efaa2e.pxo",
+  "rpg-2-star-ocean-the-second_protagonist-female_south-locomotion-v2-walk-f01-contact-vr_m8-w02_20261015-030458-6a83d149.png",
+  "rpg-2-star-ocean-the-second_protagonist-female_south-locomotion-v2-walk-f02-down-vr_m8-w02_20261015-030458-c9a24ae6.png",
+  "rpg-2-star-ocean-the-second_protagonist-female_south-locomotion-v2-walk-f03-pass-vr_m8-w02_20261015-030458-3b234352.png",
+  "rpg-2-star-ocean-the-second_protagonist-female_south-locomotion-v2-walk-f04-up-vr_m8-w02_20261015-030458-bb414928.png",
+  "rpg-2-star-ocean-the-second_protagonist-female_south-locomotion-v2-walk-f05-contact-vl_m8-w02_20261015-030458-f9d1cb35.png",
+  "rpg-2-star-ocean-the-second_protagonist-female_south-locomotion-v2-walk-f06-down-vl_m8-w02_20261015-030458-17b049c3.png",
+  "rpg-2-star-ocean-the-second_protagonist-female_south-locomotion-v2-walk-f07-pass-vl_m8-w02_20261015-030458-c9240f55.png",
+  "rpg-2-star-ocean-the-second_protagonist-female_south-locomotion-v2-walk-f08-up-vl_m8-w02_20261015-030458-4f8fd9a9.png",
+  "rpg-2-star-ocean-the-second_protagonist-female_south-locomotion-v2-walk-editable_m8-w02_20261015-030458-bf091d76.pxo",
+  "rpg-2-star-ocean-the-second_protagonist-female_south-locomotion-v2-manifest_m8-w02_20261015-030458-eb352ac8.json"
+ ]
+}
