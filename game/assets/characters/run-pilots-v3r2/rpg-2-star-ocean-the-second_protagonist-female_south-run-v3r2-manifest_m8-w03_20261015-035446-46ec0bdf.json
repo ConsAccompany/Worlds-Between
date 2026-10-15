@@ -1,0 +1,1006 @@
+{
+ "project": "Worlds Between",
+ "milestone": "M8",
+ "variant": "m8-w03",
+ "purpose": "Female protagonist south run v3 candidate r2: leg anatomy / occlusion / pose redraw plus a rigid opposing arm pump for the 140 px/s distance-keyed, root-locked run, from approved static selout v8.",
+ "status": "unapproved candidate; not art-approved; not human-reviewed; not runtime-integrated; not a production sprite",
+ "art_approved": false,
+ "human_reviewed": false,
+ "runtime_integrated": false,
+ "production_sprite": false,
+ "visual_review": "agent-only: Claude reviewed every frame at 1:1 texels and at 2x/4x/7x nearest; human / creator review not performed",
+ "supersedes_for_review": {
+  "build": "south-run-v3 (stamp 20261015-034327, run a3f7c901)",
+  "why": "Codex visual review rejected its legs-only art (tube legs, hidden swing leg, frozen arms)",
+  "previous_files_touched": false
+ },
+ "acceptance_gate": "only the creator can approve this animation; v8 is approved as a STATIC 48 px south idle only",
+ "gates_changed": "none",
+ "source": {
+  "file": "game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v8-cloth-leather-candidate_m8-v08_20261015-021600-157a5ea0.png",
+  "sha256": "ccf9d2a293e7f1b9c706b4d2f1bf9c00b3c7714ec4e9b8bddf023e166f68b6fd",
+  "hash_algorithm": "sha256-bytes",
+  "role": "read-only, source-locked (hash gate in every mode)"
+ },
+ "builder": {
+  "script": "tools/rpg-2-star-ocean-the-second_protagonist-female_south-run-v3-build_m8-w03_20261015-034327-4be0c7a2.py",
+  "python": "3.12.14",
+  "pillow": "12.3.0",
+  "numpy": "2.3.5"
+ },
+ "cell": [
+  80,
+  112
+ ],
+ "ground_pin_cell": [
+  40,
+  104
+ ],
+ "display": {
+  "logical_height_px": 48,
+  "scale": 0.5,
+  "texel_to_screen_px_at_1280x720": 1,
+  "filter": "nearest",
+  "flip_h": false,
+  "mirrored_frames": 0
+ },
+ "identity_lock": {
+  "v8_rows": [
+   0,
+   60
+  ],
+  "rule": "frame rows 0..60+bob equal v8 rows 0..60 translated down by bob, alpha included, outside the arm zones; inside them each arm core equals v8 translated by bob + arm_offset",
+  "arm_box_v8": {
+   "fist": [
+    18,
+    47,
+    25,
+    53
+   ],
+   "armr": [
+    46,
+    52,
+    53,
+    70
+   ]
+  },
+  "arm_core_v8": {
+   "fist": [
+    18,
+    47,
+    24,
+    53
+   ],
+   "armr": [
+    47,
+    54,
+    52,
+    67
+   ]
+  },
+  "arm_zone": "arm box at the home and at the pumped position, grown by 1 texel (seams)"
+ },
+ "runtime_grounding": {
+  "MOVE_SPEED_logical_px_s": 140.0,
+  "source": "game/scripts/scifi_exploration_area.gd and survey_annex.gd (const MOVE_SPEED := 140.0)"
+ },
+ "locomotion_model": {
+  "frame_selection": "distance-keyed: s = distance travelled mod cycle; frame = cumulative hold_px table",
+  "root_lock": "draw_y = logical_y + r_start_px + slope * s_in_frame (logical px). slope -1 freezes the sprite while a foot is planted; at frame changes the sprite moves by the planted sole's climb/2; flight frames ramp r back.",
+  "sole": "lowest opaque cell row of each leg's boot (texels; 2 texels = 1 logical px); every foot is visible in r2",
+  "toe_x": "mean cell x of that leg's texels on its sole row"
+ },
+ "cycle": {
+  "frames": 16,
+  "cycle_logical_px": 70.0,
+  "cycle_logical_px_exact": "70",
+  "steps_per_cycle": 2,
+  "step_logical_px": 35.0,
+  "steps_per_s": 4.0,
+  "mean_frame_rate_fps": 32.0,
+  "stance_hold_px_exact": "7/3",
+  "flight_hold_px_exact": "70/9",
+  "root_lock_max_abs_px": 1.3333333333333333,
+  "loop": [
+   "run-f01-contact-vr",
+   "run-f02-load-vr",
+   "run-f03-mid-vr",
+   "run-f04-push-vr",
+   "run-f05-toeoff-vr",
+   "run-f06-flight1-vr",
+   "run-f07-flight2-vr",
+   "run-f08-flight3-vr",
+   "run-f09-contact-vl",
+   "run-f10-load-vl",
+   "run-f11-mid-vl",
+   "run-f12-push-vl",
+   "run-f13-toeoff-vl",
+   "run-f14-flight1-vl",
+   "run-f15-flight2-vl",
+   "run-f16-flight3-vl"
+  ]
+ },
+ "transitions": {
+  "loop_seams": [
+   [
+    "run-f16-flight3-vl",
+    "run-f01-contact-vr"
+   ],
+   [
+    "run-f08-flight3-vr",
+    "run-f09-contact-vl"
+   ]
+  ],
+  "start_idle_to_run": null,
+  "stop_run_to_idle": null,
+  "note": "start/stop transitions are pending (see pending_visual_decisions)"
+ },
+ "pending_visual_decisions": [
+  {
+   "id": "arm-swing",
+   "planned": "arms bent ~90 deg with opposing swing, five positions per side",
+   "built": "partial: contralateral pump, fist and right forearm move as rigid v8 texel blocks by (dx, dy) in [-1, 1] x [-2, 0] (ARM_PUMP); no elbow bend, no forearm foreshortening",
+   "needs": "drawn forearm / fist poses if the pump reads as too weak; a person has to judge it"
+  },
+  {
+   "id": "torso-lean",
+   "planned": "upper body leans 2 texels forward over the hips",
+   "built": "none: upper body dx = 0 in every frame",
+   "needs": "decide what 'forward' means in a south view (down-screen shift vs foreshortening)"
+  },
+  {
+   "id": "cape-coat-lag",
+   "planned": "cape and coat hems lag the bob",
+   "built": "none: cape, skirt and upper body share one (0, bob) shift",
+   "needs": "a split that keeps v8 belt / coat-bottom rows 58-60 whole, then per-frame lag values"
+  },
+  {
+   "id": "start-stop-transitions",
+   "planned": "distance-keyed idle->run start and time-keyed run->idle stop, root-locked",
+   "built": "none: only the 16-frame loop exists",
+   "needs": "foot re-placement poses: v8 idle boots sit at x ~26-28 / ~49-53, the run's planted boot cuffs at x 31 / 45.5"
+  }
+ ],
+ "frames": [
+  {
+   "order": 1,
+   "key": "run-f01-contact-vr",
+   "file": "rpg-2-star-ocean-the-second_protagonist-female_south-run-v3r2-run-f01-contact-vr_m8-w03_20261015-035446-7050a78d.png",
+   "sha256": "08908347dd214826f004501d2eb148fef7127ed9539babd0a9093c0522f34b94",
+   "hash_algorithm": "sha256-bytes",
+   "bytes": 3279,
+   "bob": 1,
+   "legs": {
+    "vl": "tuck",
+    "vr": "contact"
+   },
+   "near_leg": "vr",
+   "planted": [
+    "vr"
+   ],
+   "sole": {
+    "vl": 87,
+    "vr": 110
+   },
+   "toe_x": {
+    "vl": 30.5,
+    "vr": 46.0
+   },
+   "boot_view": {
+    "vl": "sole",
+    "vr": "strike"
+   },
+   "arm_offset": {
+    "fist": [
+     1,
+     -2
+    ],
+    "armr": [
+     0,
+     -1
+    ]
+   },
+   "report_only": {
+    "pinholes_filled": 2,
+    "arm_seam_texels": 5
+   },
+   "hold_px": 2.3333333333333335,
+   "hold_px_exact": "7/3",
+   "root_lock": {
+    "r_start_px": 1.0,
+    "r_start_px_exact": "1",
+    "slope": -1.0,
+    "slope_exact": "-1"
+   }
+  },
+  {
+   "order": 2,
+   "key": "run-f02-load-vr",
+   "file": "rpg-2-star-ocean-the-second_protagonist-female_south-run-v3r2-run-f02-load-vr_m8-w03_20261015-035446-1a5f9c4b.png",
+   "sha256": "170b03503d506b7580302a3aee2dce768d56f98081a58e38516043448a8b9bc8",
+   "hash_algorithm": "sha256-bytes",
+   "bytes": 3332,
+   "bob": 2,
+   "legs": {
+    "vl": "tuckpass",
+    "vr": "load"
+   },
+   "near_leg": "vr",
+   "planted": [
+    "vr"
+   ],
+   "sole": {
+    "vl": 89,
+    "vr": 105
+   },
+   "toe_x": {
+    "vl": 30.5,
+    "vr": 46.0
+   },
+   "boot_view": {
+    "vl": "sole",
+    "vr": "flat"
+   },
+   "arm_offset": {
+    "fist": [
+     1,
+     -1
+    ],
+    "armr": [
+     0,
+     -1
+    ]
+   },
+   "report_only": {
+    "pinholes_filled": 2,
+    "arm_seam_texels": 4
+   },
+   "hold_px": 2.3333333333333335,
+   "hold_px_exact": "7/3",
+   "root_lock": {
+    "r_start_px": 1.1666666666666667,
+    "r_start_px_exact": "7/6",
+    "slope": -1.0,
+    "slope_exact": "-1"
+   }
+  },
+  {
+   "order": 3,
+   "key": "run-f03-mid-vr",
+   "file": "rpg-2-star-ocean-the-second_protagonist-female_south-run-v3r2-run-f03-mid-vr_m8-w03_20261015-035446-f3b484f4.png",
+   "sha256": "e178671d6c46e192eec8c8578cd46fd426a18f48db0e1ccd1ecd3e98bbcf3764",
+   "hash_algorithm": "sha256-bytes",
+   "bytes": 3364,
+   "bob": 3,
+   "legs": {
+    "vl": "pass",
+    "vr": "mid"
+   },
+   "near_leg": "vr",
+   "planted": [
+    "vr"
+   ],
+   "sole": {
+    "vl": 95,
+    "vr": 100
+   },
+   "toe_x": {
+    "vl": 30.5,
+    "vr": 46.0
+   },
+   "boot_view": {
+    "vl": "hang",
+    "vr": "flat"
+   },
+   "arm_offset": {
+    "fist": [
+     0,
+     -1
+    ],
+    "armr": [
+     0,
+     0
+    ]
+   },
+   "report_only": {
+    "pinholes_filled": 3,
+    "arm_seam_texels": 3
+   },
+   "hold_px": 2.3333333333333335,
+   "hold_px_exact": "7/3",
+   "root_lock": {
+    "r_start_px": 1.3333333333333333,
+    "r_start_px_exact": "4/3",
+    "slope": -1.0,
+    "slope_exact": "-1"
+   }
+  },
+  {
+   "order": 4,
+   "key": "run-f04-push-vr",
+   "file": "rpg-2-star-ocean-the-second_protagonist-female_south-run-v3r2-run-f04-push-vr_m8-w03_20261015-035446-56cb642f.png",
+   "sha256": "b5dbef668c304164b6f1186a534b241c38d1d78f8c9ac28a79ad90eb99cbf51c",
+   "hash_algorithm": "sha256-bytes",
+   "bytes": 3322,
+   "bob": 2,
+   "legs": {
+    "vl": "drive1",
+    "vr": "push"
+   },
+   "near_leg": "vl",
+   "planted": [
+    "vr"
+   ],
+   "sole": {
+    "vl": 97,
+    "vr": 96
+   },
+   "toe_x": {
+    "vl": 30.5,
+    "vr": 46.5
+   },
+   "boot_view": {
+    "vl": "hang",
+    "vr": "heelup"
+   },
+   "arm_offset": {
+    "fist": [
+     0,
+     -1
+    ],
+    "armr": [
+     0,
+     0
+    ]
+   },
+   "report_only": {
+    "pinholes_filled": 2,
+    "arm_seam_texels": 3
+   },
+   "hold_px": 2.3333333333333335,
+   "hold_px_exact": "7/3",
+   "root_lock": {
+    "r_start_px": 1.0,
+    "r_start_px_exact": "1",
+    "slope": -1.0,
+    "slope_exact": "-1"
+   }
+  },
+  {
+   "order": 5,
+   "key": "run-f05-toeoff-vr",
+   "file": "rpg-2-star-ocean-the-second_protagonist-female_south-run-v3r2-run-f05-toeoff-vr_m8-w03_20261015-035446-cb70cf15.png",
+   "sha256": "ed66d74d7018f08f2e51f536442ff869109c3604285480d63c27ee54565a4809",
+   "hash_algorithm": "sha256-bytes",
+   "bytes": 3302,
+   "bob": 1,
+   "legs": {
+    "vl": "drive2",
+    "vr": "toeoff"
+   },
+   "near_leg": "vl",
+   "planted": [
+    "vr"
+   ],
+   "sole": {
+    "vl": 99,
+    "vr": 91
+   },
+   "toe_x": {
+    "vl": 30.5,
+    "vr": 46.0
+   },
+   "boot_view": {
+    "vl": "hang",
+    "vr": "toe"
+   },
+   "arm_offset": {
+    "fist": [
+     0,
+     0
+    ],
+    "armr": [
+     -1,
+     -1
+    ]
+   },
+   "report_only": {
+    "pinholes_filled": 2,
+    "arm_seam_texels": 0
+   },
+   "hold_px": 2.3333333333333335,
+   "hold_px_exact": "7/3",
+   "root_lock": {
+    "r_start_px": 1.1666666666666667,
+    "r_start_px_exact": "7/6",
+    "slope": -1.0,
+    "slope_exact": "-1"
+   }
+  },
+  {
+   "order": 6,
+   "key": "run-f06-flight1-vr",
+   "file": "rpg-2-star-ocean-the-second_protagonist-female_south-run-v3r2-run-f06-flight1-vr_m8-w03_20261015-035446-27f752e0.png",
+   "sha256": "f9a25b3bed7d36bbb5ef2353919797dc78eea876d091fb9a2582e4718cdd9b48",
+   "hash_algorithm": "sha256-bytes",
+   "bytes": 3316,
+   "bob": 0,
+   "legs": {
+    "vl": "reach1",
+    "vr": "lift"
+   },
+   "near_leg": "vl",
+   "planted": [],
+   "sole": {
+    "vl": 103,
+    "vr": 90
+   },
+   "toe_x": {
+    "vl": 30.0,
+    "vr": 46.0
+   },
+   "boot_view": {
+    "vl": "reach",
+    "vr": "hang"
+   },
+   "arm_offset": {
+    "fist": [
+     0,
+     0
+    ],
+    "armr": [
+     -1,
+     -2
+    ]
+   },
+   "report_only": {
+    "pinholes_filled": 1,
+    "arm_seam_texels": 1
+   },
+   "hold_px": 7.777777777777778,
+   "hold_px_exact": "70/9",
+   "root_lock": {
+    "r_start_px": -1.1666666666666667,
+    "r_start_px_exact": "-7/6",
+    "slope": 0.09285714285714286,
+    "slope_exact": "13/140"
+   }
+  },
+  {
+   "order": 7,
+   "key": "run-f07-flight2-vr",
+   "file": "rpg-2-star-ocean-the-second_protagonist-female_south-run-v3r2-run-f07-flight2-vr_m8-w03_20261015-035446-81fdff77.png",
+   "sha256": "6811b4c6978ce1276fd07d7bc55cc202f27de3bda729c9cb8a5e82672d3736ac",
+   "hash_algorithm": "sha256-bytes",
+   "bytes": 3283,
+   "bob": -1,
+   "legs": {
+    "vl": "reach2",
+    "vr": "kick"
+   },
+   "near_leg": "vl",
+   "planted": [],
+   "sole": {
+    "vl": 106,
+    "vr": 83
+   },
+   "toe_x": {
+    "vl": 30.0,
+    "vr": 46.5
+   },
+   "boot_view": {
+    "vl": "reach",
+    "vr": "sole"
+   },
+   "arm_offset": {
+    "fist": [
+     0,
+     0
+    ],
+    "armr": [
+     -1,
+     -2
+    ]
+   },
+   "report_only": {
+    "pinholes_filled": 1,
+    "arm_seam_texels": 1
+   },
+   "hold_px": 7.777777777777778,
+   "hold_px_exact": "70/9",
+   "root_lock": {
+    "r_start_px": -0.4444444444444444,
+    "r_start_px_exact": "-4/9",
+    "slope": 0.09285714285714286,
+    "slope_exact": "13/140"
+   }
+  },
+  {
+   "order": 8,
+   "key": "run-f08-flight3-vr",
+   "file": "rpg-2-star-ocean-the-second_protagonist-female_south-run-v3r2-run-f08-flight3-vr_m8-w03_20261015-035446-50cc3cd3.png",
+   "sha256": "f5a3b2c9242c478fe2425b773e1b429d4025f855c26137b9d285979b46fa1b67",
+   "hash_algorithm": "sha256-bytes",
+   "bytes": 3283,
+   "bob": 0,
+   "legs": {
+    "vl": "descend",
+    "vr": "tuck"
+   },
+   "near_leg": "vl",
+   "planted": [],
+   "sole": {
+    "vl": 107,
+    "vr": 86
+   },
+   "toe_x": {
+    "vl": 30.0,
+    "vr": 45.5
+   },
+   "boot_view": {
+    "vl": "strike",
+    "vr": "sole"
+   },
+   "arm_offset": {
+    "fist": [
+     0,
+     0
+    ],
+    "armr": [
+     -1,
+     -2
+    ]
+   },
+   "report_only": {
+    "pinholes_filled": 2,
+    "arm_seam_texels": 1
+   },
+   "hold_px": 7.777777777777778,
+   "hold_px_exact": "70/9",
+   "root_lock": {
+    "r_start_px": 0.2777777777777778,
+    "r_start_px_exact": "5/18",
+    "slope": 0.09285714285714286,
+    "slope_exact": "13/140"
+   }
+  },
+  {
+   "order": 9,
+   "key": "run-f09-contact-vl",
+   "file": "rpg-2-star-ocean-the-second_protagonist-female_south-run-v3r2-run-f09-contact-vl_m8-w03_20261015-035446-64602d92.png",
+   "sha256": "1533d205c86041723750c33aa1dadff6371418c19857f7e5b6ba7c2e2013d30a",
+   "hash_algorithm": "sha256-bytes",
+   "bytes": 3312,
+   "bob": 1,
+   "legs": {
+    "vl": "contact",
+    "vr": "tuck"
+   },
+   "near_leg": "vl",
+   "planted": [
+    "vl"
+   ],
+   "sole": {
+    "vl": 110,
+    "vr": 87
+   },
+   "toe_x": {
+    "vl": 30.0,
+    "vr": 45.5
+   },
+   "boot_view": {
+    "vl": "strike",
+    "vr": "sole"
+   },
+   "arm_offset": {
+    "fist": [
+     0,
+     0
+    ],
+    "armr": [
+     -1,
+     -1
+    ]
+   },
+   "report_only": {
+    "pinholes_filled": 3,
+    "arm_seam_texels": 0
+   },
+   "hold_px": 2.3333333333333335,
+   "hold_px_exact": "7/3",
+   "root_lock": {
+    "r_start_px": 1.0,
+    "r_start_px_exact": "1",
+    "slope": -1.0,
+    "slope_exact": "-1"
+   }
+  },
+  {
+   "order": 10,
+   "key": "run-f10-load-vl",
+   "file": "rpg-2-star-ocean-the-second_protagonist-female_south-run-v3r2-run-f10-load-vl_m8-w03_20261015-035446-e42809d0.png",
+   "sha256": "fb2155d4874fb52126eef27a424d0f173643b9cc3f419f4cb8f9da0048644b59",
+   "hash_algorithm": "sha256-bytes",
+   "bytes": 3255,
+   "bob": 2,
+   "legs": {
+    "vl": "load",
+    "vr": "tuckpass"
+   },
+   "near_leg": "vl",
+   "planted": [
+    "vl"
+   ],
+   "sole": {
+    "vl": 105,
+    "vr": 89
+   },
+   "toe_x": {
+    "vl": 30.0,
+    "vr": 45.5
+   },
+   "boot_view": {
+    "vl": "flat",
+    "vr": "sole"
+   },
+   "arm_offset": {
+    "fist": [
+     0,
+     -1
+    ],
+    "armr": [
+     0,
+     0
+    ]
+   },
+   "report_only": {
+    "pinholes_filled": 3,
+    "arm_seam_texels": 3
+   },
+   "hold_px": 2.3333333333333335,
+   "hold_px_exact": "7/3",
+   "root_lock": {
+    "r_start_px": 1.1666666666666667,
+    "r_start_px_exact": "7/6",
+    "slope": -1.0,
+    "slope_exact": "-1"
+   }
+  },
+  {
+   "order": 11,
+   "key": "run-f11-mid-vl",
+   "file": "rpg-2-star-ocean-the-second_protagonist-female_south-run-v3r2-run-f11-mid-vl_m8-w03_20261015-035446-91c2e2f1.png",
+   "sha256": "6326409306185e7cdadd72f50bd603516feb989a31916db766993f620a71ddcf",
+   "hash_algorithm": "sha256-bytes",
+   "bytes": 3330,
+   "bob": 3,
+   "legs": {
+    "vl": "mid",
+    "vr": "pass"
+   },
+   "near_leg": "vl",
+   "planted": [
+    "vl"
+   ],
+   "sole": {
+    "vl": 100,
+    "vr": 95
+   },
+   "toe_x": {
+    "vl": 30.0,
+    "vr": 45.0
+   },
+   "boot_view": {
+    "vl": "flat",
+    "vr": "hang"
+   },
+   "arm_offset": {
+    "fist": [
+     0,
+     -1
+    ],
+    "armr": [
+     0,
+     0
+    ]
+   },
+   "report_only": {
+    "pinholes_filled": 3,
+    "arm_seam_texels": 3
+   },
+   "hold_px": 2.3333333333333335,
+   "hold_px_exact": "7/3",
+   "root_lock": {
+    "r_start_px": 1.3333333333333333,
+    "r_start_px_exact": "4/3",
+    "slope": -1.0,
+    "slope_exact": "-1"
+   }
+  },
+  {
+   "order": 12,
+   "key": "run-f12-push-vl",
+   "file": "rpg-2-star-ocean-the-second_protagonist-female_south-run-v3r2-run-f12-push-vl_m8-w03_20261015-035446-38997813.png",
+   "sha256": "fb1275fefaf2c1dafe0ebda85284317ef1c6835f88ce53cd7a0bc12b6d41a16a",
+   "hash_algorithm": "sha256-bytes",
+   "bytes": 3318,
+   "bob": 2,
+   "legs": {
+    "vl": "push",
+    "vr": "drive1"
+   },
+   "near_leg": "vr",
+   "planted": [
+    "vl"
+   ],
+   "sole": {
+    "vl": 96,
+    "vr": 97
+   },
+   "toe_x": {
+    "vl": 29.5,
+    "vr": 45.0
+   },
+   "boot_view": {
+    "vl": "heelup",
+    "vr": "hang"
+   },
+   "arm_offset": {
+    "fist": [
+     0,
+     -1
+    ],
+    "armr": [
+     0,
+     0
+    ]
+   },
+   "report_only": {
+    "pinholes_filled": 3,
+    "arm_seam_texels": 3
+   },
+   "hold_px": 2.3333333333333335,
+   "hold_px_exact": "7/3",
+   "root_lock": {
+    "r_start_px": 1.0,
+    "r_start_px_exact": "1",
+    "slope": -1.0,
+    "slope_exact": "-1"
+   }
+  },
+  {
+   "order": 13,
+   "key": "run-f13-toeoff-vl",
+   "file": "rpg-2-star-ocean-the-second_protagonist-female_south-run-v3r2-run-f13-toeoff-vl_m8-w03_20261015-035446-1d112953.png",
+   "sha256": "2875e80d1483d91f416325c6f92912cc3260c2bd6fed88abf89b5c4225547f6b",
+   "hash_algorithm": "sha256-bytes",
+   "bytes": 3294,
+   "bob": 1,
+   "legs": {
+    "vl": "toeoff",
+    "vr": "drive2"
+   },
+   "near_leg": "vr",
+   "planted": [
+    "vl"
+   ],
+   "sole": {
+    "vl": 91,
+    "vr": 99
+   },
+   "toe_x": {
+    "vl": 30.0,
+    "vr": 45.0
+   },
+   "boot_view": {
+    "vl": "toe",
+    "vr": "hang"
+   },
+   "arm_offset": {
+    "fist": [
+     1,
+     -1
+    ],
+    "armr": [
+     0,
+     -1
+    ]
+   },
+   "report_only": {
+    "pinholes_filled": 2,
+    "arm_seam_texels": 4
+   },
+   "hold_px": 2.3333333333333335,
+   "hold_px_exact": "7/3",
+   "root_lock": {
+    "r_start_px": 1.1666666666666667,
+    "r_start_px_exact": "7/6",
+    "slope": -1.0,
+    "slope_exact": "-1"
+   }
+  },
+  {
+   "order": 14,
+   "key": "run-f14-flight1-vl",
+   "file": "rpg-2-star-ocean-the-second_protagonist-female_south-run-v3r2-run-f14-flight1-vl_m8-w03_20261015-035446-a3e05d51.png",
+   "sha256": "b2c8426bd71730e2fe0eacdb1655bc94638c40106e6b8a0acd6dc81d9dd78ed7",
+   "hash_algorithm": "sha256-bytes",
+   "bytes": 3332,
+   "bob": 0,
+   "legs": {
+    "vl": "lift",
+    "vr": "reach1"
+   },
+   "near_leg": "vr",
+   "planted": [],
+   "sole": {
+    "vl": 90,
+    "vr": 103
+   },
+   "toe_x": {
+    "vl": 30.5,
+    "vr": 45.5
+   },
+   "boot_view": {
+    "vl": "hang",
+    "vr": "reach"
+   },
+   "arm_offset": {
+    "fist": [
+     1,
+     -2
+    ],
+    "armr": [
+     0,
+     -1
+    ]
+   },
+   "report_only": {
+    "pinholes_filled": 3,
+    "arm_seam_texels": 5
+   },
+   "hold_px": 7.777777777777778,
+   "hold_px_exact": "70/9",
+   "root_lock": {
+    "r_start_px": -1.1666666666666667,
+    "r_start_px_exact": "-7/6",
+    "slope": 0.09285714285714286,
+    "slope_exact": "13/140"
+   }
+  },
+  {
+   "order": 15,
+   "key": "run-f15-flight2-vl",
+   "file": "rpg-2-star-ocean-the-second_protagonist-female_south-run-v3r2-run-f15-flight2-vl_m8-w03_20261015-035446-579326d8.png",
+   "sha256": "3a9ac67692e0a4504966bdfb105b90dbd5b11614a8a0d92532329bc837aa11b8",
+   "hash_algorithm": "sha256-bytes",
+   "bytes": 3305,
+   "bob": -1,
+   "legs": {
+    "vl": "kick",
+    "vr": "reach2"
+   },
+   "near_leg": "vr",
+   "planted": [],
+   "sole": {
+    "vl": 83,
+    "vr": 106
+   },
+   "toe_x": {
+    "vl": 29.5,
+    "vr": 45.5
+   },
+   "boot_view": {
+    "vl": "sole",
+    "vr": "reach"
+   },
+   "arm_offset": {
+    "fist": [
+     1,
+     -2
+    ],
+    "armr": [
+     0,
+     -1
+    ]
+   },
+   "report_only": {
+    "pinholes_filled": 2,
+    "arm_seam_texels": 5
+   },
+   "hold_px": 7.777777777777778,
+   "hold_px_exact": "70/9",
+   "root_lock": {
+    "r_start_px": -0.4444444444444444,
+    "r_start_px_exact": "-4/9",
+    "slope": 0.09285714285714286,
+    "slope_exact": "13/140"
+   }
+  },
+  {
+   "order": 16,
+   "key": "run-f16-flight3-vl",
+   "file": "rpg-2-star-ocean-the-second_protagonist-female_south-run-v3r2-run-f16-flight3-vl_m8-w03_20261015-035446-3bef999a.png",
+   "sha256": "f401b0acb7d28d1dfc633581deb8ac5355eafd747dae0c333e2af6cfce48411e",
+   "hash_algorithm": "sha256-bytes",
+   "bytes": 3258,
+   "bob": 0,
+   "legs": {
+    "vl": "tuck",
+    "vr": "descend"
+   },
+   "near_leg": "vr",
+   "planted": [],
+   "sole": {
+    "vl": 86,
+    "vr": 107
+   },
+   "toe_x": {
+    "vl": 30.5,
+    "vr": 46.0
+   },
+   "boot_view": {
+    "vl": "sole",
+    "vr": "strike"
+   },
+   "arm_offset": {
+    "fist": [
+     1,
+     -2
+    ],
+    "armr": [
+     0,
+     -1
+    ]
+   },
+   "report_only": {
+    "pinholes_filled": 2,
+    "arm_seam_texels": 5
+   },
+   "hold_px": 7.777777777777778,
+   "hold_px_exact": "70/9",
+   "root_lock": {
+    "r_start_px": 0.2777777777777778,
+    "r_start_px_exact": "5/18",
+    "slope": 0.09285714285714286,
+    "slope_exact": "13/140"
+   }
+  }
+ ],
+ "layer_order_back_to_front": [
+  "cape",
+  "hips",
+  "leg-far",
+  "leg-near",
+  "coat-skirt",
+  "upper-body",
+  "arm-vl",
+  "arm-vr"
+ ],
+ "editable": {
+  "file": "rpg-2-star-ocean-the-second_protagonist-female_south-run-v3r2-editable_m8-w03_20261015-035446-6a02cc5c.pxo",
+  "sha256": "e41e6421ff5ae130c9730422d0f6eabc0b244a2b356a16b11838a0b4b41437da",
+  "hash_algorithm": "sha256-bytes",
+  "format": "Pixelorama pxo_version 7 (v1.2.3), 16 frames x 8 layers"
+ },
+ "files_added": [
+  "rpg-2-star-ocean-the-second_protagonist-female_south-run-v3r2-run-f01-contact-vr_m8-w03_20261015-035446-7050a78d.png",
+  "rpg-2-star-ocean-the-second_protagonist-female_south-run-v3r2-run-f02-load-vr_m8-w03_20261015-035446-1a5f9c4b.png",
+  "rpg-2-star-ocean-the-second_protagonist-female_south-run-v3r2-run-f03-mid-vr_m8-w03_20261015-035446-f3b484f4.png",
+  "rpg-2-star-ocean-the-second_protagonist-female_south-run-v3r2-run-f04-push-vr_m8-w03_20261015-035446-56cb642f.png",
+  "rpg-2-star-ocean-the-second_protagonist-female_south-run-v3r2-run-f05-toeoff-vr_m8-w03_20261015-035446-cb70cf15.png",
+  "rpg-2-star-ocean-the-second_protagonist-female_south-run-v3r2-run-f06-flight1-vr_m8-w03_20261015-035446-27f752e0.png",
+  "rpg-2-star-ocean-the-second_protagonist-female_south-run-v3r2-run-f07-flight2-vr_m8-w03_20261015-035446-81fdff77.png",
+  "rpg-2-star-ocean-the-second_protagonist-female_south-run-v3r2-run-f08-flight3-vr_m8-w03_20261015-035446-50cc3cd3.png",
+  "rpg-2-star-ocean-the-second_protagonist-female_south-run-v3r2-run-f09-contact-vl_m8-w03_20261015-035446-64602d92.png",
+  "rpg-2-star-ocean-the-second_protagonist-female_south-run-v3r2-run-f10-load-vl_m8-w03_20261015-035446-e42809d0.png",
+  "rpg-2-star-ocean-the-second_protagonist-female_south-run-v3r2-run-f11-mid-vl_m8-w03_20261015-035446-91c2e2f1.png",
+  "rpg-2-star-ocean-the-second_protagonist-female_south-run-v3r2-run-f12-push-vl_m8-w03_20261015-035446-38997813.png",
+  "rpg-2-star-ocean-the-second_protagonist-female_south-run-v3r2-run-f13-toeoff-vl_m8-w03_20261015-035446-1d112953.png",
+  "rpg-2-star-ocean-the-second_protagonist-female_south-run-v3r2-run-f14-flight1-vl_m8-w03_20261015-035446-a3e05d51.png",
+  "rpg-2-star-ocean-the-second_protagonist-female_south-run-v3r2-run-f15-flight2-vl_m8-w03_20261015-035446-579326d8.png",
+  "rpg-2-star-ocean-the-second_protagonist-female_south-run-v3r2-run-f16-flight3-vl_m8-w03_20261015-035446-3bef999a.png",
+  "rpg-2-star-ocean-the-second_protagonist-female_south-run-v3r2-editable_m8-w03_20261015-035446-6a02cc5c.pxo",
+  "rpg-2-star-ocean-the-second_protagonist-female_south-run-v3r2-manifest_m8-w03_20261015-035446-46ec0bdf.json"
+ ]
+}

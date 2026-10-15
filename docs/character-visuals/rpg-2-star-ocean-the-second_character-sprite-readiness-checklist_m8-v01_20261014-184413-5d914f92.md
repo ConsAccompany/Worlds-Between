@@ -75,6 +75,7 @@
   - 注册表未引用的相关清单：`game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v7-slate-coat-manifest_m8-v07_20261015-015010-ed510f85.json`
   - 注册表未引用的相关清单：`game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v8-cloth-leather-manifest_m8-v08_20261015-021600-2d6c5eff.json`
   - 注册表未引用的相关清单：`game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v8-editable-manifest_m8-v08_20261015-080907-270b2256.json`
+  - 注册表未引用的相关清单：`game/assets/characters/run-pilots-v3r2/rpg-2-star-ocean-the-second_protagonist-female_south-run-v3r2-manifest_m8-w03_20261015-035446-46ec0bdf.json`
   - 注册表未引用的相关清单：`game/assets/characters/walk-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-walk-pilot-manifest_m8-w01_20261015-024345-e80ccf73.json`
   - 注册表未引用的相关清单：`game/assets/characters/walk-pilots-v2/rpg-2-star-ocean-the-second_protagonist-female_south-locomotion-v2-manifest_m8-w02_20261015-030458-eb352ac8.json`
   - 用户批准的静态基准帧（2026-10-14，用户回复「够了，可作为静止帧基准」）：south idle 单帧 selout v8 cloth-leather，48 逻辑像素；只是静态视觉基准，本闸门仍为 pending。决定记录：`docs/character-visuals/rpg-2-star-ocean-the-second_protagonist-female_south-idle-static-baseline-decision_m8-v08_20261015-022700-07161696.md`
