@@ -225,6 +225,7 @@ def build(tracked: set[str] | None) -> dict:
 
     missing: list[dict] = []
     untracked: list[dict] = []
+    untracked_discovered: list[dict] = []
     discrepancies: list[str] = []
 
     def note_path(owner: str, role: str, record: dict | None) -> None:
@@ -271,7 +272,12 @@ def build(tracked: set[str] | None) -> dict:
 
         all_manifests = find_manifests(vid)
         frame_count_manifests = [p for p in all_manifests if "frame_counts" in (load_manifest(p) or {})]
+        # A manifest declaring frame_counts is not a production frame set unless it says art_approved=true.
+        unapproved_frame_count_manifests = [p for p in frame_count_manifests if (load_manifest(p) or {}).get("art_approved") is not True]
         unregistered = [p for p in all_manifests if p not in registered]
+        # Discovered manifests are outside note_path's registry-referenced scope; report untracked ones separately.
+        if tracked is not None:
+            untracked_discovered += [{"visual_id": vid, "path": p} for p in unregistered if p not in tracked]
         unregistered_exploration = [p for p in unregistered if "native-exploration" in p or "native-animation" in p]
         if unregistered_exploration and ex["production_status"] == "not_started":
             discrepancies.append(f"{vid}: registry exploration is not_started but unregistered manifest exists: {', '.join(unregistered_exploration)}")
@@ -314,6 +320,7 @@ def build(tracked: set[str] | None) -> dict:
             # anything further needs human review against the intake checklist.
             "intake_stage": None if frame_count_manifests else 0,
             "frame_count_manifests": frame_count_manifests,
+            "frame_count_manifests_unapproved": unapproved_frame_count_manifests,
             "gates": {
                 "source_art": {
                     "approval": e["source_portrait"]["approval"],
@@ -438,9 +445,11 @@ def build(tracked: set[str] | None) -> dict:
             "static_idle_baselines_user_approved": [v["visual_id"] for v in variants if v["gates"]["exploration_animation"]["static_idle_baseline"]],
             "any_manifest_declares_frame_counts": bool(frame_count_manifests),
             "frame_count_manifests": frame_count_manifests,
+            "frame_count_manifests_unapproved": [p for v in variants for p in v["frame_count_manifests_unapproved"]],
             "intake_stage_0": sum(v["intake_stage"] == 0 for v in variants),
             "missing_paths": len(missing),
             "untracked_referenced_paths": len(untracked),
+            "untracked_discovered_manifests": len(untracked_discovered),
             "git_status_checked": tracked is not None,
         },
         "variants": variants,
@@ -451,7 +460,8 @@ def build(tracked: set[str] | None) -> dict:
             "no_hair_robot_variants": [v["visual_id"] for v in variants if not v["anchor_has_hair"]],
             "anchors_with_persona_prose": [v["visual_id"] for v in variants if "。" in v["identity_and_hair_anchor"]],
         },
-        "path_check": {"missing": missing, "untracked_but_referenced": untracked, "registry_discrepancies": discrepancies},
+        "path_check": {"missing": missing, "untracked_but_referenced": untracked,
+                       "untracked_discovered_manifests": untracked_discovered, "registry_discrepancies": discrepancies},
     }
 
 
@@ -495,9 +505,11 @@ def render_md(data: dict) -> str:
     else:
         acceptance_line = "所有「美术验收」均为 **pending**"
     if s["frame_count_manifests"]:
-        frames_line = (f"- 正式生产帧：检测到 {len(s['frame_count_manifests'])} 份清单声明 `frame_counts`（"
+        unapproved = set(s["frame_count_manifests_unapproved"])
+        frames_line = (f"- 正式生产帧（经用户美术验收）：{s['art_accepted']}/{total}。另检测到 {len(s['frame_count_manifests'])} 份清单声明 `frame_counts`（"
                        + "、".join(f"`{p}`" for p in s["frame_count_manifests"])
-                       + f"）；相关变体入库阶段未自动推导，需按入库检查清单人工复核。其余 {s['intake_stage_0']}/{total} 个变体处于入库阶段 0。")
+                       + f"），其中 {len(unapproved)} 份未标 `art_approved=true`，只是待人工评审的试点帧，不是正式生产帧；"
+                       f"相关变体入库阶段未自动推导，需按入库检查清单人工复核。其余 {s['intake_stage_0']}/{total} 个变体处于入库阶段 0。")
     else:
         frames_line = f"- 正式生产帧：0/{total}。所有清单均未声明 `frame_counts`，因此所有变体处于入库阶段 0（未达阶段 1）。"
     L = [
@@ -554,9 +566,9 @@ def render_md(data: dict) -> str:
         ex, cb, rd, qa, art = g["exploration_animation"], g["combat_animation"], g["runtime_display"], g["qa"], g["art_acceptance"]
         ff = g["four_facing"]
         placeholder = "、".join(ff["placeholder_directions"]) or "无"
-        stage = v["intake_stage"] if v["intake_stage"] is not None else "未自动推导（有 `frame_counts` 清单，需人工复核）"
+        stage = v["intake_stage"] if v["intake_stage"] is not None else "未自动推导（有声明 `frame_counts` 的清单，需人工复核；不表示已越过阶段 0）"
         west = "未声明" if ff["west_authoring"] == "undeclared" else ff["west_authoring"]
-        auto_qa = "未运行（无正式帧）" if qa["automated_metadata_checks"] == "not_run_no_production_frames" else qa["automated_metadata_checks"]
+        auto_qa = {"not_run_no_production_frames": "未运行（无正式帧）", "not_run": "未运行"}.get(qa["automated_metadata_checks"], qa["automated_metadata_checks"])
         receipt = f"回执 `{art['receipt']}`" if art["receipt"] else ("资产清单已由用户勾选，本脚本未核对回执文件" if art["status"] == "art_accepted" else "无回执")
         L += [
             f"### {v['ordinal']:02d}. `{v['visual_id']}` · {v['display_name_zh']}（{v['roster']} · {num} · {v['region_board']}）",
@@ -569,7 +581,8 @@ def render_md(data: dict) -> str:
             f"- [ ] G2 探索动画（注册表 {ex['registry_production_status']} / {ex['registry_review_status']}；占位 待机 {ex['placeholder_idle_frames']} + 行走 {ex['placeholder_walk_frames']}；正式帧数{'已由用户批准' if ex['frame_counts_user_approved'] else '未批准'}）",
         ]
         for p in v["frame_count_manifests"]:
-            L.append(f"  - 声明 `frame_counts` 的清单：`{p}`")
+            L.append(f"  - 声明 `frame_counts` 的清单：`{p}`"
+                     + ("（未批准试点帧，非正式生产帧）" if p in v["frame_count_manifests_unapproved"] else ""))
         if ex["placeholder_manifest"]:
             L.append(f"  - 占位清单：{mark(ex['placeholder_manifest'])}")
         for p in ex["unregistered_manifests"]:
@@ -635,6 +648,10 @@ def render_md(data: dict) -> str:
         by_owner.setdefault(f"{u['visual_id']} {u['role']}", []).append(u["path"])
     for owner, paths in by_owner.items():
         L.append(f"  - `{owner}`：{len(paths)} 个，如 `{paths[0]}`")
+    L.append(f"- 注册表未引用、按文件名发现的清单中未纳入 git：{len(pc['untracked_discovered_manifests'])} 个"
+             "（不计入上一项；只检查清单文件本身，不检查其帧文件）。")
+    for u in pc["untracked_discovered_manifests"]:
+        L.append(f"  - `{u['visual_id']}`：`{u['path']}`")
     L.append(f"- 注册表差异：{len(pc['registry_discrepancies'])} 条（只记录，未修改注册表）。")
     for d in pc["registry_discrepancies"]:
         L.append(f"  - {d}")
@@ -736,7 +753,7 @@ def main() -> None:
     print(f"variants={data['scope']['visual_variants']} identities={data['scope']['character_identities']} "
           f"source approved={s['source_portraits']['approved']} concept={s['source_portraits']['concept']} "
           f"art_accepted={s['art_accepted']} pending={s['art_pending']} missing_paths={s['missing_paths']} "
-          f"untracked_referenced={s['untracked_referenced_paths']} discrepancies={len(data['path_check']['registry_discrepancies'])}")
+          f"untracked_referenced={s['untracked_referenced_paths']} untracked_discovered_manifests={s['untracked_discovered_manifests']} discrepancies={len(data['path_check']['registry_discrepancies'])}")
     if failures:
         raise SystemExit("FAIL\n" + "\n".join(failures))
     print("character sprite readiness checklist: PASS")

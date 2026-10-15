@@ -1,0 +1,77 @@
+{
+  "project": "Worlds Between",
+  "milestone": "M8",
+  "visual_id": "protagonist-female",
+  "purpose": "Lossless editable Pixelorama source for the user-approved female south idle static (selout v8). Container only: v8's decoded RGBA is stored unchanged; no art was changed.",
+  "status": "editable source for an approved static frame; pixel content identical to v8; not a new candidate; not runtime-integrated; no animation; no other direction",
+  "art_approved": false,
+  "art_approved_note": "Approval of the v8 static baseline lives only in the decision doc below. This file does not extend it to any sprite set, direction, animation or runtime use.",
+  "human_reviewed": false,
+  "runtime_integrated": false,
+  "permission_scope": "female protagonist, single direction (south), Pixelorama pilot",
+  "authorship": "Written by a deterministic Python tool authored and run by Claude (Claude Code).",
+  "derived_from": {
+    "file": "game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v8-cloth-leather-candidate_m8-v08_20261015-021600-157a5ea0.png",
+    "sha256": "ccf9d2a293e7f1b9c706b4d2f1bf9c00b3c7714ec4e9b8bddf023e166f68b6fd",
+    "hash_algorithm": "sha256-bytes",
+    "decision_doc": "docs/character-visuals/rpg-2-star-ocean-the-second_protagonist-female_south-idle-static-baseline-decision_m8-v08_20261015-022700-07161696.md",
+    "decision_doc_sha256": "f7ea59b73de35a9c71a7d6dc4968ebbd4b2ce28458fa926877222d85591d7c37",
+    "decision_doc_hash_algorithm": "sha256-text-lf-v1"
+  },
+  "cell": {
+    "w": 80,
+    "h": 112,
+    "pin": [
+      40,
+      104
+    ],
+    "display_scale": 0.5,
+    "filter": "nearest",
+    "alpha": "binary",
+    "opaque_texels": 2419,
+    "colours": 32,
+    "alpha_bounds_inclusive": [
+      13,
+      8,
+      55,
+      103
+    ]
+  },
+  "editable": {
+    "file": "game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v8-editable_m8-v08_20261015-080907-c8a1c140.pxo",
+    "sha256": "cafa4998b107ae4b884cc877b80bbc695df267f37e09fb6e69701567f08a849e",
+    "hash_algorithm": "sha256-bytes",
+    "format": "Pixelorama pxo_version 7 (v1.2.3-stable), color_mode 5 (RGBA8), 1 frame x 2 layers, zip entries with fixed timestamps",
+    "layers_bottom_to_top": [
+      {
+        "name": "v8-baseline",
+        "visible": true,
+        "locked": false,
+        "content": "all v8 texels, RGBA bytes identical to the decoded v8 PNG"
+      },
+      {
+        "name": "guides",
+        "visible": false,
+        "locked": true,
+        "content": "#ff00ff: cell border, ticks on rows 8 and 103, pin [40, 104]; every guide texel is on a v8-transparent texel"
+      }
+    ],
+    "preview_png": "the v8 PNG file bytes, unchanged",
+    "role_layer_split": "not made; the per-role split in the pipeline doc needs art sign-off"
+  },
+  "tool": {
+    "file": "tools/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v8-pxo-source-roundtrip_m8-v08_20261015-080907-05c22e55.py",
+    "sha256": "53d492fb9e4a7cbd9cdc8991a105140cd8a23aa507040d888993310323754f73",
+    "hash_algorithm": "sha256-text-lf-v1",
+    "python": "3.12.14",
+    "pillow": "12.3.0",
+    "numpy": "2.3.5",
+    "run_flags": "-I -B"
+  },
+  "roundtrip_check": {
+    "command": "python -I -B tools/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v8-pxo-source-roundtrip_m8-v08_20261015-080907-05c22e55.py check",
+    "cli": "work/tooling/pixelorama-1-2-3/Pixelorama-Windows-64bit/Pixelorama.exe --headless --quit -- --export -o <empty temp dir>/f.png <temp copy of the .pxo>",
+    "pass_condition": "each exported PNG decodes to RGBA bytes identical to the decoded v8 PNG; two runs give byte-identical PNGs; v8 PNG and .pxo hashes unchanged; config.ini restored byte-for-byte",
+    "result": "see the QA note; this manifest is written before the check runs"
+  }
+}
