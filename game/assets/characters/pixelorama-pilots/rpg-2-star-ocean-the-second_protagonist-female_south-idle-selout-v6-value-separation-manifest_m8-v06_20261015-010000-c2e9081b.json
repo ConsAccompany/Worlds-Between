@@ -1,0 +1,2881 @@
+{
+  "project": "Worlds Between",
+  "milestone": "M8",
+  "purpose": "Selout v6 value/separation pass of the female south idle for 48 logical px readability on bright ground: coat one value step darker in coat regions, dark silhouette contour on cloth edges. Static frame only.",
+  "status": "technical candidate; unapproved; not runtime-integrated; no animation",
+  "art_approved": false,
+  "human_reviewed": false,
+  "runtime_integrated": false,
+  "walk_frames": 0,
+  "authorship": "Operations authored by Claude with file edits only (no execution); the script is run by Codex in the workspace.",
+  "source": {
+    "role": "read-only input (selout v5), source-locked",
+    "file": "game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v5-lowerbody-hair-candidate_m8-v05_20261015-004000-8b3e5c07.png",
+    "sha256": "8ddac8acb4261cfc4e42ae9727b7cb5a4ff70791973909ab80cea33920ad7ace",
+    "also_preserved": {
+      "v4": {
+        "file": "game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v4-structural-candidate_m8-v04_20261015-001500-e5b81f36.png",
+        "sha256": "da8a1ce11db136f7061206a3d8f5038b7d995016e36af2fc011d0a6f0dbcf4d7"
+      },
+      "v3": {
+        "file": "game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v3-polish-candidate_m8-v03_20261014-234700-3c9a5d27.png",
+        "sha256": "21b148cc026a70cdb173200c46cf007f83e4963cd7b7a7c71a174a7cb343cbc3"
+      },
+      "v2": {
+        "file": "game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v2-polish-candidate_m8-v02_20261014-233300-d2eeefa2.png",
+        "sha256": "4c8a720adc93c2bdbf2039da929f96eb617d4829ab35da2333105ac7d870e6f5"
+      },
+      "v1": {
+        "file": "game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-refine-selout-candidate_m8-v01_20261014-231100-4d141ad5.png",
+        "sha256": "7cb9f7044ed728894ab613725f0c6bdd876c29527e505b7f061689112da37f88"
+      }
+    }
+  },
+  "editor": {
+    "script": "tools/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v6-value-separation-edit_m8-v06_20261015-010000-9e4b2c71.py",
+    "script_sha256": "ecdbf80a776b39a951e66765c06a49eaa23cc12cbb039650e80b6f940ab2276a",
+    "python": "3.12.14",
+    "pillow": "12.3.0",
+    "numpy": "2.3.5",
+    "run_flags": "-I (isolated)",
+    "method": "two region-scoped colour-role operations over v5 (coat_darken, contour_ink); recolour only; no resampling, quantizing, filtering or AI editing"
+  },
+  "operations": {
+    "coat_darken": {
+      "step": {
+        "w": "m",
+        "m": "n",
+        "n": "b"
+      },
+      "boxes": {
+        "upper_left_coat_and_sleeve": [
+          18,
+          34,
+          30,
+          54
+        ],
+        "upper_right_coat_and_sleeve": [
+          38,
+          34,
+          51,
+          54
+        ],
+        "lower_right_coat_below_arm": [
+          41,
+          57,
+          47,
+          61
+        ],
+        "left_skirt_y57_61": [
+          21,
+          57,
+          30,
+          62
+        ],
+        "left_skirt_y62_63": [
+          21,
+          62,
+          28,
+          64
+        ],
+        "left_skirt_y64_71": [
+          21,
+          64,
+          26,
+          72
+        ],
+        "right_skirt_y61_72": [
+          43,
+          61,
+          48,
+          73
+        ]
+      },
+      "excluded": {
+        "fist_x24_28_y42_46": [
+          24,
+          42,
+          29,
+          47
+        ],
+        "left_cuff_x18_24_y47_53": [
+          18,
+          47,
+          25,
+          54
+        ],
+        "right_forearm_glove_fingers_x47_52_y57_70": [
+          47,
+          57,
+          53,
+          71
+        ]
+      }
+    },
+    "contour_ink": {
+      "rows": [
+        34,
+        80
+      ],
+      "edge_rule": "opaque texel with a transparent 4-neighbour",
+      "roles": [
+        "C",
+        "L",
+        "b",
+        "c",
+        "l",
+        "m",
+        "n",
+        "r",
+        "w"
+      ],
+      "to": "K #0a0a0e"
+    }
+  },
+  "roles": {
+    "K": "#0a0a0e",
+    "k": "#201c20",
+    "O": "#23252b",
+    "T": "#0a323b",
+    "q": "#302526",
+    "G": "#30333a",
+    "b": "#41302b",
+    "t": "#11525b",
+    "n": "#533b32",
+    "y": "#4a4749",
+    "g": "#474b54",
+    "m": "#634739",
+    "L": "#714730",
+    "u": "#1a767b",
+    "l": "#845436",
+    "w": "#7e5f4a",
+    "z": "#626873",
+    "v": "#249b98",
+    "r": "#a16f4b",
+    "D": "#bb7c50",
+    "c": "#b09986",
+    "s": "#e39664",
+    "C": "#d7c0a8",
+    "B": "#cfc8bd",
+    "S": "#fbc38d",
+    "W": "#faead4",
+    "M": "#9a4634"
+  },
+  "new_colours": [],
+  "output": {
+    "file": "rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v6-value-separation-candidate_m8-v06_20261015-010000-5a7d3f18.png",
+    "format": "PNG RGBA 8-bit, single image, no metadata chunks",
+    "bytes": 3679,
+    "sha256": "f606afeb70e422b5f0c44373126a7112830e8ed47c22433b18255829fedd283b",
+    "measured": {
+      "size": [
+        80,
+        112
+      ],
+      "alpha_values_present": [
+        0,
+        255
+      ],
+      "partial_alpha_texels": 0,
+      "transparent_texels_with_nonzero_rgb": 0,
+      "opaque_texels": 2419,
+      "unique_opaque_rgb_colours": 27,
+      "palette_hex": [
+        "#0a0a0e",
+        "#0a323b",
+        "#11525b",
+        "#1a767b",
+        "#201c20",
+        "#23252b",
+        "#249b98",
+        "#302526",
+        "#30333a",
+        "#41302b",
+        "#474b54",
+        "#4a4749",
+        "#533b32",
+        "#626873",
+        "#634739",
+        "#714730",
+        "#7e5f4a",
+        "#845436",
+        "#9a4634",
+        "#a16f4b",
+        "#b09986",
+        "#bb7c50",
+        "#cfc8bd",
+        "#d7c0a8",
+        "#e39664",
+        "#faead4",
+        "#fbc38d"
+      ],
+      "alpha_bounds_inclusive_xyxy": [
+        13,
+        8,
+        55,
+        103
+      ],
+      "visible_body_height_texels": 96,
+      "visible_body_width_texels": 43,
+      "opaque_texels_on_cell_border": 0,
+      "foot_anchor_lowest_row_and_feet_mid_x": [
+        103,
+        40
+      ],
+      "foot_anchor_source": [
+        103,
+        40
+      ],
+      "isolated_opaque_texels_8n": [],
+      "transparent_pinholes_4n": []
+    }
+  },
+  "protected_invariants": {
+    "alpha_identical_everywhere": true,
+    "rows_8_33_hair_ponytail_face_identical": true,
+    "rows_80_and_below_boots_identical": true,
+    "teal_skin_metal_slate_texels_identical": true,
+    "changes_only_from_cloth_leather_cream_roles": true,
+    "no_new_colours": true
+  },
+  "value_metrics_v5_vs_v6": {
+    "v5": {
+      "coat_mean_luma": 76.55,
+      "shirt_mean_luma": 178.55,
+      "legs_mean_luma": 83.21,
+      "silhouette_edge_texels_y34_79": 132,
+      "silhouette_edge_share_luma_below_40": 0.7955
+    },
+    "v6": {
+      "coat_mean_luma": 63.7,
+      "shirt_mean_luma": 178.55,
+      "legs_mean_luma": 82.14,
+      "silhouette_edge_texels_y34_79": 132,
+      "silhouette_edge_share_luma_below_40": 0.9924
+    }
+  },
+  "pixel_changes": {
+    "total": 301,
+    "per_op": {
+      "coat_darken": 275,
+      "contour_ink": 26
+    },
+    "texels": [
+      {
+        "x": 26,
+        "y": 34,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 27,
+        "y": 34,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 28,
+        "y": 34,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 41,
+        "y": 34,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 42,
+        "y": 34,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 43,
+        "y": 34,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 46,
+        "y": 34,
+        "op": "coat_darken",
+        "role_before": "n",
+        "before": "#533b32",
+        "after": "#41302b"
+      },
+      {
+        "x": 25,
+        "y": 35,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 26,
+        "y": 35,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 28,
+        "y": 35,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 29,
+        "y": 35,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 41,
+        "y": 35,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 42,
+        "y": 35,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 44,
+        "y": 35,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 25,
+        "y": 36,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 26,
+        "y": 36,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 27,
+        "y": 36,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 29,
+        "y": 36,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 41,
+        "y": 36,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 43,
+        "y": 36,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 44,
+        "y": 36,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 24,
+        "y": 37,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 25,
+        "y": 37,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 26,
+        "y": 37,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 27,
+        "y": 37,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 29,
+        "y": 37,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 40,
+        "y": 37,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 42,
+        "y": 37,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 45,
+        "y": 37,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 46,
+        "y": 37,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 51,
+        "y": 37,
+        "op": "contour_ink",
+        "role_before": "b",
+        "before": "#41302b",
+        "after": "#0a0a0e"
+      },
+      {
+        "x": 24,
+        "y": 38,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 26,
+        "y": 38,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 27,
+        "y": 38,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 28,
+        "y": 38,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 40,
+        "y": 38,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 42,
+        "y": 38,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 45,
+        "y": 38,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 46,
+        "y": 38,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 47,
+        "y": 38,
+        "op": "coat_darken",
+        "role_before": "n",
+        "before": "#533b32",
+        "after": "#41302b"
+      },
+      {
+        "x": 51,
+        "y": 38,
+        "op": "contour_ink",
+        "role_before": "b",
+        "before": "#41302b",
+        "after": "#0a0a0e"
+      },
+      {
+        "x": 24,
+        "y": 39,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 27,
+        "y": 39,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 28,
+        "y": 39,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 41,
+        "y": 39,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 42,
+        "y": 39,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 45,
+        "y": 39,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 46,
+        "y": 39,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 47,
+        "y": 39,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 48,
+        "y": 39,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 23,
+        "y": 40,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 24,
+        "y": 40,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 27,
+        "y": 40,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 28,
+        "y": 40,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 39,
+        "y": 40,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 41,
+        "y": 40,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 42,
+        "y": 40,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 46,
+        "y": 40,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 47,
+        "y": 40,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 48,
+        "y": 40,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 23,
+        "y": 41,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 24,
+        "y": 41,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 27,
+        "y": 41,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 28,
+        "y": 41,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 40,
+        "y": 41,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 41,
+        "y": 41,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 42,
+        "y": 41,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 43,
+        "y": 41,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 44,
+        "y": 41,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 46,
+        "y": 41,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 47,
+        "y": 41,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 48,
+        "y": 41,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 49,
+        "y": 41,
+        "op": "coat_darken",
+        "role_before": "n",
+        "before": "#533b32",
+        "after": "#41302b"
+      },
+      {
+        "x": 50,
+        "y": 41,
+        "op": "coat_darken",
+        "role_before": "n",
+        "before": "#533b32",
+        "after": "#41302b"
+      },
+      {
+        "x": 22,
+        "y": 42,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 23,
+        "y": 42,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 29,
+        "y": 42,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 38,
+        "y": 42,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 39,
+        "y": 42,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 40,
+        "y": 42,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 41,
+        "y": 42,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 42,
+        "y": 42,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 43,
+        "y": 42,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 44,
+        "y": 42,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 46,
+        "y": 42,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 47,
+        "y": 42,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 48,
+        "y": 42,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 53,
+        "y": 42,
+        "op": "contour_ink",
+        "role_before": "L",
+        "before": "#714730",
+        "after": "#0a0a0e"
+      },
+      {
+        "x": 22,
+        "y": 43,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 23,
+        "y": 43,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 29,
+        "y": 43,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 38,
+        "y": 43,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 39,
+        "y": 43,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 42,
+        "y": 43,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 43,
+        "y": 43,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 44,
+        "y": 43,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 46,
+        "y": 43,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 47,
+        "y": 43,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 48,
+        "y": 43,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 53,
+        "y": 43,
+        "op": "contour_ink",
+        "role_before": "b",
+        "before": "#41302b",
+        "after": "#0a0a0e"
+      },
+      {
+        "x": 21,
+        "y": 44,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 22,
+        "y": 44,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 29,
+        "y": 44,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 38,
+        "y": 44,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 43,
+        "y": 44,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 46,
+        "y": 44,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 47,
+        "y": 44,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 48,
+        "y": 44,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 20,
+        "y": 45,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 21,
+        "y": 45,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 22,
+        "y": 45,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 29,
+        "y": 45,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 38,
+        "y": 45,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 43,
+        "y": 45,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 46,
+        "y": 45,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 47,
+        "y": 45,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 48,
+        "y": 45,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 19,
+        "y": 46,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 20,
+        "y": 46,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 21,
+        "y": 46,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 22,
+        "y": 46,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 29,
+        "y": 46,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 38,
+        "y": 46,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 39,
+        "y": 46,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 42,
+        "y": 46,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 43,
+        "y": 46,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 44,
+        "y": 46,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 46,
+        "y": 46,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 47,
+        "y": 46,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 48,
+        "y": 46,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 27,
+        "y": 47,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 28,
+        "y": 47,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 29,
+        "y": 47,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 38,
+        "y": 47,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 39,
+        "y": 47,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 40,
+        "y": 47,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 41,
+        "y": 47,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 42,
+        "y": 47,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 43,
+        "y": 47,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 44,
+        "y": 47,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 46,
+        "y": 47,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 47,
+        "y": 47,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 48,
+        "y": 47,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 49,
+        "y": 47,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 18,
+        "y": 48,
+        "op": "contour_ink",
+        "role_before": "c",
+        "before": "#b09986",
+        "after": "#0a0a0e"
+      },
+      {
+        "x": 27,
+        "y": 48,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 28,
+        "y": 48,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 29,
+        "y": 48,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 38,
+        "y": 48,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 39,
+        "y": 48,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 40,
+        "y": 48,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 46,
+        "y": 48,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 47,
+        "y": 48,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 48,
+        "y": 48,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 49,
+        "y": 48,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 18,
+        "y": 49,
+        "op": "contour_ink",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#0a0a0e"
+      },
+      {
+        "x": 27,
+        "y": 49,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 28,
+        "y": 49,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 29,
+        "y": 49,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 38,
+        "y": 49,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 39,
+        "y": 49,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 40,
+        "y": 49,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 46,
+        "y": 49,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 47,
+        "y": 49,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 48,
+        "y": 49,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 49,
+        "y": 49,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 27,
+        "y": 50,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 28,
+        "y": 50,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 29,
+        "y": 50,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 38,
+        "y": 50,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 39,
+        "y": 50,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 40,
+        "y": 50,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 41,
+        "y": 50,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 42,
+        "y": 50,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 43,
+        "y": 50,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 44,
+        "y": 50,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 46,
+        "y": 50,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 47,
+        "y": 50,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 48,
+        "y": 50,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 49,
+        "y": 50,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 28,
+        "y": 51,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 29,
+        "y": 51,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 38,
+        "y": 51,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 39,
+        "y": 51,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 40,
+        "y": 51,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 41,
+        "y": 51,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 42,
+        "y": 51,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 43,
+        "y": 51,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 44,
+        "y": 51,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 46,
+        "y": 51,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 47,
+        "y": 51,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 48,
+        "y": 51,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 49,
+        "y": 51,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 50,
+        "y": 51,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 28,
+        "y": 52,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 29,
+        "y": 52,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 38,
+        "y": 52,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 39,
+        "y": 52,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 42,
+        "y": 52,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 43,
+        "y": 52,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 44,
+        "y": 52,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 46,
+        "y": 52,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 47,
+        "y": 52,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 48,
+        "y": 52,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 49,
+        "y": 52,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 29,
+        "y": 53,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 38,
+        "y": 53,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 39,
+        "y": 53,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 40,
+        "y": 53,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 41,
+        "y": 53,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 42,
+        "y": 53,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 43,
+        "y": 53,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 54,
+        "y": 53,
+        "op": "contour_ink",
+        "role_before": "b",
+        "before": "#41302b",
+        "after": "#0a0a0e"
+      },
+      {
+        "x": 53,
+        "y": 55,
+        "op": "contour_ink",
+        "role_before": "b",
+        "before": "#41302b",
+        "after": "#0a0a0e"
+      },
+      {
+        "x": 53,
+        "y": 56,
+        "op": "contour_ink",
+        "role_before": "b",
+        "before": "#41302b",
+        "after": "#0a0a0e"
+      },
+      {
+        "x": 41,
+        "y": 57,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 42,
+        "y": 57,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 43,
+        "y": 57,
+        "op": "coat_darken",
+        "role_before": "n",
+        "before": "#533b32",
+        "after": "#41302b"
+      },
+      {
+        "x": 44,
+        "y": 57,
+        "op": "coat_darken",
+        "role_before": "n",
+        "before": "#533b32",
+        "after": "#41302b"
+      },
+      {
+        "x": 45,
+        "y": 57,
+        "op": "coat_darken",
+        "role_before": "n",
+        "before": "#533b32",
+        "after": "#41302b"
+      },
+      {
+        "x": 26,
+        "y": 58,
+        "op": "coat_darken",
+        "role_before": "n",
+        "before": "#533b32",
+        "after": "#41302b"
+      },
+      {
+        "x": 27,
+        "y": 58,
+        "op": "coat_darken",
+        "role_before": "n",
+        "before": "#533b32",
+        "after": "#41302b"
+      },
+      {
+        "x": 28,
+        "y": 58,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 29,
+        "y": 58,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 41,
+        "y": 58,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 42,
+        "y": 58,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 43,
+        "y": 58,
+        "op": "coat_darken",
+        "role_before": "n",
+        "before": "#533b32",
+        "after": "#41302b"
+      },
+      {
+        "x": 44,
+        "y": 58,
+        "op": "coat_darken",
+        "role_before": "n",
+        "before": "#533b32",
+        "after": "#41302b"
+      },
+      {
+        "x": 45,
+        "y": 58,
+        "op": "coat_darken",
+        "role_before": "n",
+        "before": "#533b32",
+        "after": "#41302b"
+      },
+      {
+        "x": 27,
+        "y": 59,
+        "op": "coat_darken",
+        "role_before": "n",
+        "before": "#533b32",
+        "after": "#41302b"
+      },
+      {
+        "x": 28,
+        "y": 59,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 29,
+        "y": 59,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 41,
+        "y": 59,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 42,
+        "y": 59,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 43,
+        "y": 59,
+        "op": "coat_darken",
+        "role_before": "n",
+        "before": "#533b32",
+        "after": "#41302b"
+      },
+      {
+        "x": 44,
+        "y": 59,
+        "op": "coat_darken",
+        "role_before": "n",
+        "before": "#533b32",
+        "after": "#41302b"
+      },
+      {
+        "x": 45,
+        "y": 59,
+        "op": "coat_darken",
+        "role_before": "n",
+        "before": "#533b32",
+        "after": "#41302b"
+      },
+      {
+        "x": 27,
+        "y": 60,
+        "op": "coat_darken",
+        "role_before": "n",
+        "before": "#533b32",
+        "after": "#41302b"
+      },
+      {
+        "x": 28,
+        "y": 60,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 29,
+        "y": 60,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 41,
+        "y": 60,
+        "op": "coat_darken",
+        "role_before": "w",
+        "before": "#7e5f4a",
+        "after": "#634739"
+      },
+      {
+        "x": 42,
+        "y": 60,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 43,
+        "y": 60,
+        "op": "coat_darken",
+        "role_before": "n",
+        "before": "#533b32",
+        "after": "#41302b"
+      },
+      {
+        "x": 44,
+        "y": 60,
+        "op": "coat_darken",
+        "role_before": "n",
+        "before": "#533b32",
+        "after": "#41302b"
+      },
+      {
+        "x": 45,
+        "y": 60,
+        "op": "coat_darken",
+        "role_before": "n",
+        "before": "#533b32",
+        "after": "#41302b"
+      },
+      {
+        "x": 27,
+        "y": 61,
+        "op": "coat_darken",
+        "role_before": "n",
+        "before": "#533b32",
+        "after": "#41302b"
+      },
+      {
+        "x": 28,
+        "y": 61,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 44,
+        "y": 61,
+        "op": "coat_darken",
+        "role_before": "n",
+        "before": "#533b32",
+        "after": "#41302b"
+      },
+      {
+        "x": 45,
+        "y": 61,
+        "op": "coat_darken",
+        "role_before": "n",
+        "before": "#533b32",
+        "after": "#41302b"
+      },
+      {
+        "x": 23,
+        "y": 62,
+        "op": "coat_darken",
+        "role_before": "n",
+        "before": "#533b32",
+        "after": "#41302b"
+      },
+      {
+        "x": 27,
+        "y": 62,
+        "op": "coat_darken",
+        "role_before": "n",
+        "before": "#533b32",
+        "after": "#41302b"
+      },
+      {
+        "x": 44,
+        "y": 62,
+        "op": "coat_darken",
+        "role_before": "n",
+        "before": "#533b32",
+        "after": "#41302b"
+      },
+      {
+        "x": 45,
+        "y": 62,
+        "op": "coat_darken",
+        "role_before": "n",
+        "before": "#533b32",
+        "after": "#41302b"
+      },
+      {
+        "x": 24,
+        "y": 63,
+        "op": "coat_darken",
+        "role_before": "n",
+        "before": "#533b32",
+        "after": "#41302b"
+      },
+      {
+        "x": 25,
+        "y": 63,
+        "op": "coat_darken",
+        "role_before": "n",
+        "before": "#533b32",
+        "after": "#41302b"
+      },
+      {
+        "x": 26,
+        "y": 63,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 44,
+        "y": 63,
+        "op": "coat_darken",
+        "role_before": "n",
+        "before": "#533b32",
+        "after": "#41302b"
+      },
+      {
+        "x": 45,
+        "y": 63,
+        "op": "coat_darken",
+        "role_before": "n",
+        "before": "#533b32",
+        "after": "#41302b"
+      },
+      {
+        "x": 24,
+        "y": 64,
+        "op": "coat_darken",
+        "role_before": "n",
+        "before": "#533b32",
+        "after": "#41302b"
+      },
+      {
+        "x": 25,
+        "y": 64,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 45,
+        "y": 64,
+        "op": "coat_darken",
+        "role_before": "n",
+        "before": "#533b32",
+        "after": "#41302b"
+      },
+      {
+        "x": 24,
+        "y": 65,
+        "op": "coat_darken",
+        "role_before": "n",
+        "before": "#533b32",
+        "after": "#41302b"
+      },
+      {
+        "x": 25,
+        "y": 65,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 45,
+        "y": 65,
+        "op": "coat_darken",
+        "role_before": "n",
+        "before": "#533b32",
+        "after": "#41302b"
+      },
+      {
+        "x": 23,
+        "y": 66,
+        "op": "coat_darken",
+        "role_before": "n",
+        "before": "#533b32",
+        "after": "#41302b"
+      },
+      {
+        "x": 24,
+        "y": 66,
+        "op": "coat_darken",
+        "role_before": "n",
+        "before": "#533b32",
+        "after": "#41302b"
+      },
+      {
+        "x": 25,
+        "y": 66,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 23,
+        "y": 67,
+        "op": "coat_darken",
+        "role_before": "n",
+        "before": "#533b32",
+        "after": "#41302b"
+      },
+      {
+        "x": 24,
+        "y": 67,
+        "op": "coat_darken",
+        "role_before": "n",
+        "before": "#533b32",
+        "after": "#41302b"
+      },
+      {
+        "x": 25,
+        "y": 67,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 45,
+        "y": 67,
+        "op": "coat_darken",
+        "role_before": "n",
+        "before": "#533b32",
+        "after": "#41302b"
+      },
+      {
+        "x": 23,
+        "y": 68,
+        "op": "coat_darken",
+        "role_before": "n",
+        "before": "#533b32",
+        "after": "#41302b"
+      },
+      {
+        "x": 24,
+        "y": 68,
+        "op": "coat_darken",
+        "role_before": "n",
+        "before": "#533b32",
+        "after": "#41302b"
+      },
+      {
+        "x": 25,
+        "y": 68,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 45,
+        "y": 68,
+        "op": "coat_darken",
+        "role_before": "n",
+        "before": "#533b32",
+        "after": "#41302b"
+      },
+      {
+        "x": 23,
+        "y": 69,
+        "op": "coat_darken",
+        "role_before": "n",
+        "before": "#533b32",
+        "after": "#41302b"
+      },
+      {
+        "x": 24,
+        "y": 69,
+        "op": "coat_darken",
+        "role_before": "n",
+        "before": "#533b32",
+        "after": "#41302b"
+      },
+      {
+        "x": 25,
+        "y": 69,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 43,
+        "y": 69,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 46,
+        "y": 69,
+        "op": "coat_darken",
+        "role_before": "n",
+        "before": "#533b32",
+        "after": "#41302b"
+      },
+      {
+        "x": 21,
+        "y": 70,
+        "op": "contour_ink",
+        "role_before": "b",
+        "before": "#41302b",
+        "after": "#0a0a0e"
+      },
+      {
+        "x": 46,
+        "y": 70,
+        "op": "coat_darken",
+        "role_before": "n",
+        "before": "#533b32",
+        "after": "#41302b"
+      },
+      {
+        "x": 23,
+        "y": 71,
+        "op": "contour_ink",
+        "role_before": "L",
+        "before": "#714730",
+        "after": "#0a0a0e"
+      },
+      {
+        "x": 26,
+        "y": 71,
+        "op": "contour_ink",
+        "role_before": "b",
+        "before": "#41302b",
+        "after": "#0a0a0e"
+      },
+      {
+        "x": 34,
+        "y": 71,
+        "op": "contour_ink",
+        "role_before": "b",
+        "before": "#41302b",
+        "after": "#0a0a0e"
+      },
+      {
+        "x": 43,
+        "y": 71,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 46,
+        "y": 71,
+        "op": "coat_darken",
+        "role_before": "n",
+        "before": "#533b32",
+        "after": "#41302b"
+      },
+      {
+        "x": 38,
+        "y": 72,
+        "op": "contour_ink",
+        "role_before": "b",
+        "before": "#41302b",
+        "after": "#0a0a0e"
+      },
+      {
+        "x": 43,
+        "y": 72,
+        "op": "coat_darken",
+        "role_before": "m",
+        "before": "#634739",
+        "after": "#533b32"
+      },
+      {
+        "x": 34,
+        "y": 73,
+        "op": "contour_ink",
+        "role_before": "b",
+        "before": "#41302b",
+        "after": "#0a0a0e"
+      },
+      {
+        "x": 39,
+        "y": 74,
+        "op": "contour_ink",
+        "role_before": "b",
+        "before": "#41302b",
+        "after": "#0a0a0e"
+      },
+      {
+        "x": 51,
+        "y": 74,
+        "op": "contour_ink",
+        "role_before": "L",
+        "before": "#714730",
+        "after": "#0a0a0e"
+      },
+      {
+        "x": 34,
+        "y": 75,
+        "op": "contour_ink",
+        "role_before": "b",
+        "before": "#41302b",
+        "after": "#0a0a0e"
+      },
+      {
+        "x": 48,
+        "y": 75,
+        "op": "contour_ink",
+        "role_before": "L",
+        "before": "#714730",
+        "after": "#0a0a0e"
+      },
+      {
+        "x": 49,
+        "y": 75,
+        "op": "contour_ink",
+        "role_before": "L",
+        "before": "#714730",
+        "after": "#0a0a0e"
+      },
+      {
+        "x": 50,
+        "y": 75,
+        "op": "contour_ink",
+        "role_before": "L",
+        "before": "#714730",
+        "after": "#0a0a0e"
+      },
+      {
+        "x": 34,
+        "y": 76,
+        "op": "contour_ink",
+        "role_before": "b",
+        "before": "#41302b",
+        "after": "#0a0a0e"
+      },
+      {
+        "x": 47,
+        "y": 76,
+        "op": "contour_ink",
+        "role_before": "b",
+        "before": "#41302b",
+        "after": "#0a0a0e"
+      },
+      {
+        "x": 34,
+        "y": 77,
+        "op": "contour_ink",
+        "role_before": "b",
+        "before": "#41302b",
+        "after": "#0a0a0e"
+      },
+      {
+        "x": 48,
+        "y": 78,
+        "op": "contour_ink",
+        "role_before": "b",
+        "before": "#41302b",
+        "after": "#0a0a0e"
+      },
+      {
+        "x": 48,
+        "y": 79,
+        "op": "contour_ink",
+        "role_before": "b",
+        "before": "#41302b",
+        "after": "#0a0a0e"
+      }
+    ]
+  },
+  "qa_captures": {
+    "report": "rpg-2-star-ocean-the-second_city-bright-dark_protagonist-female-south-idle-selout-v6-visual-qa-report_m8-v06_20261015-003321-9bfd5b9e.json",
+    "report_sha256": "4e1bfa3d074ba1b4be9c57e32c4d54a9d51e0a5f1c7eca73653bde9bc2c9c989",
+    "captures": [
+      {
+        "scene": "city",
+        "variant": "selout-v6",
+        "capture": "C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/game/../outputs/rpg-2-star-ocean-the-second_city_protagonist-female-south-idle-selout-v6-h48_m8-v06_20261015-003321-9bfd5b9e.png",
+        "capture_sha256": "a515a997a92bfcccae7833ad2606bcae5cbc93ca756d9a56769eeb1a2b406b6c",
+        "capture_size": [
+          1280,
+          720
+        ],
+        "pilot_visible_logical": [
+          21.5,
+          48.0
+        ],
+        "pilot_window_diff_bounds_measured": {
+          "h": 96,
+          "w": 43,
+          "x": 731,
+          "y": 412
+        },
+        "pilot_texel_fidelity": {
+          "exact_rgb_matches": 2419,
+          "opaque_texels": 2419
+        }
+      },
+      {
+        "scene": "city",
+        "variant": "selout-v5-reference",
+        "capture": "C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/game/../outputs/rpg-2-star-ocean-the-second_city_protagonist-female-south-idle-selout-v5-reference-h48_m8-v06_20261015-003321-9bfd5b9e.png",
+        "capture_sha256": "b84a59d55f5661a1bed8790cb9938cd1a2e7b0d6c1ce2089146253564727222a",
+        "capture_size": [
+          1280,
+          720
+        ],
+        "pilot_visible_logical": [
+          21.5,
+          48.0
+        ],
+        "pilot_window_diff_bounds_measured": {
+          "h": 96,
+          "w": 43,
+          "x": 731,
+          "y": 412
+        },
+        "pilot_texel_fidelity": {
+          "exact_rgb_matches": 2419,
+          "opaque_texels": 2419
+        }
+      },
+      {
+        "scene": "outskirts-bright",
+        "variant": "selout-v6",
+        "capture": "C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/game/../outputs/rpg-2-star-ocean-the-second_outskirts-bright_protagonist-female-south-idle-selout-v6-h48_m8-v06_20261015-003321-9bfd5b9e.png",
+        "capture_sha256": "b0655cd7a59d97ef20c0ce9b9b1685d9a990ca546010f173a5613cd57a87510b",
+        "capture_size": [
+          1280,
+          720
+        ],
+        "pilot_visible_logical": [
+          21.5,
+          48.0
+        ],
+        "pilot_window_diff_bounds_measured": {
+          "h": 96,
+          "w": 43,
+          "x": 71,
+          "y": 426
+        },
+        "pilot_texel_fidelity": {
+          "exact_rgb_matches": 2419,
+          "opaque_texels": 2419
+        }
+      },
+      {
+        "scene": "outskirts-bright",
+        "variant": "selout-v5-reference",
+        "capture": "C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/game/../outputs/rpg-2-star-ocean-the-second_outskirts-bright_protagonist-female-south-idle-selout-v5-reference-h48_m8-v06_20261015-003321-9bfd5b9e.png",
+        "capture_sha256": "1c87ae461ae0cb25c00c961a377517270a4cc3c2585256ba45d6329ba2f1d8fc",
+        "capture_size": [
+          1280,
+          720
+        ],
+        "pilot_visible_logical": [
+          21.5,
+          48.0
+        ],
+        "pilot_window_diff_bounds_measured": {
+          "h": 96,
+          "w": 43,
+          "x": 71,
+          "y": 426
+        },
+        "pilot_texel_fidelity": {
+          "exact_rgb_matches": 2419,
+          "opaque_texels": 2419
+        }
+      },
+      {
+        "scene": "survey-annex-room2-dark",
+        "variant": "selout-v6",
+        "capture": "C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/game/../outputs/rpg-2-star-ocean-the-second_survey-annex-room2-dark_protagonist-female-south-idle-selout-v6-h48_m8-v06_20261015-003321-9bfd5b9e.png",
+        "capture_sha256": "7d4f2cc9d96c6e2cae3fb7324ae320a4827ea6e75c93e2130565cd5bf871fb84",
+        "capture_size": [
+          1280,
+          720
+        ],
+        "pilot_visible_logical": [
+          21.5,
+          48.0
+        ],
+        "pilot_window_diff_bounds_measured": {
+          "h": 96,
+          "w": 43,
+          "x": 225,
+          "y": 428
+        },
+        "pilot_texel_fidelity": {
+          "exact_rgb_matches": 2419,
+          "opaque_texels": 2419
+        }
+      },
+      {
+        "scene": "survey-annex-room2-dark",
+        "variant": "selout-v5-reference",
+        "capture": "C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/game/../outputs/rpg-2-star-ocean-the-second_survey-annex-room2-dark_protagonist-female-south-idle-selout-v5-reference-h48_m8-v06_20261015-003321-9bfd5b9e.png",
+        "capture_sha256": "166e63563850fa7906aa4d124edd401f28a34d27dd2401d249663ba96088d00f",
+        "capture_size": [
+          1280,
+          720
+        ],
+        "pilot_visible_logical": [
+          21.5,
+          48.0
+        ],
+        "pilot_window_diff_bounds_measured": {
+          "h": 96,
+          "w": 43,
+          "x": 225,
+          "y": 428
+        },
+        "pilot_texel_fidelity": {
+          "exact_rgb_matches": 2419,
+          "opaque_texels": 2419
+        }
+      },
+      {
+        "scene": "prototype-room-dark",
+        "variant": "selout-v6",
+        "capture": "C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/game/../outputs/rpg-2-star-ocean-the-second_prototype-room-dark_protagonist-female-south-idle-selout-v6-h48_m8-v06_20261015-003321-9bfd5b9e.png",
+        "capture_sha256": "ab622d0377debfd8377496402eedf2217b475a735bd6e53aa753ac2bb00849fa",
+        "capture_size": [
+          1280,
+          720
+        ],
+        "pilot_visible_logical": [
+          21.5,
+          48.0
+        ],
+        "pilot_window_diff_bounds_measured": {
+          "h": 96,
+          "w": 43,
+          "x": 619,
+          "y": 444
+        },
+        "pilot_texel_fidelity": {
+          "exact_rgb_matches": 2419,
+          "opaque_texels": 2419
+        }
+      },
+      {
+        "scene": "prototype-room-dark",
+        "variant": "selout-v5-reference",
+        "capture": "C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/game/../outputs/rpg-2-star-ocean-the-second_prototype-room-dark_protagonist-female-south-idle-selout-v5-reference-h48_m8-v06_20261015-003321-9bfd5b9e.png",
+        "capture_sha256": "315746358708ac27f68108a8732abe5ce3e6520d298396fd79f74efa4ba94c86",
+        "capture_size": [
+          1280,
+          720
+        ],
+        "pilot_visible_logical": [
+          21.5,
+          48.0
+        ],
+        "pilot_window_diff_bounds_measured": {
+          "h": 96,
+          "w": 43,
+          "x": 619,
+          "y": 444
+        },
+        "pilot_texel_fidelity": {
+          "exact_rgb_matches": 2419,
+          "opaque_texels": 2419
+        }
+      }
+    ]
+  },
+  "limitations": [
+    "Static south idle only; no walk/turn frames; nothing wired into the runtime.",
+    "Operations were authored without Claude seeing the v6 result; a --preview read and Godot captures are needed before judging.",
+    "One-step darkening merges the coat's two darkest tones (n into b), so the coat has fewer internal shades than v5; fine fold detail in shadow is reduced on purpose.",
+    "A darker coat may sit closer to the hair darks at the shoulders and read heavier in the dark annex room; it is tuned for the bright city/outskirts.",
+    "The ink contour is a uniform K edge on cloth; it is not light-direction aware (no lighter rim on the lit side).",
+    "Shirt, legs, scarf, skin, hair and boots are unchanged, so any remaining issues there (e.g. ponytail size) carry over from v5.",
+    "Visual approval remains human."
+  ]
+}

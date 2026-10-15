@@ -15,6 +15,7 @@
 - 就绪状态：未开始 45；有 32×48 占位帧（已被否定为画质基线） 5；有未登记的 32×48 占位清单 2。
 - 美术验收（runtime-sprite）：已验收 0 / 待定 52；MVP 战斗动作已验收 0/5；显示图已验收 0/52。
 - 正式生产帧：0/52。所有清单均未声明 `frame_counts`，因此所有变体处于入库阶段 0（未达阶段 1）。
+- 用户批准的静态待机基准帧：1 个变体（`protagonist-female`）。只批准单张静态视觉基准，不算任何闸门通过，不计入上面的美术验收或探索精灵数。
 - 战斗动作 MVP 必需（资产清单 scope=MVP）：`protagonist-male`、`protagonist-female`、`liang-xu`、`ji-cheng`、`zhao-ling`；其余 47 名战斗组在资产清单中为 Full 范围，不属 MVP。
 - 路径核对：缺失 0 个；已引用但未纳入 git 0 个（详见末节）。
 
@@ -67,6 +68,15 @@
   - 注册表未引用的相关清单：`game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v2-polish-manifest_m8-v02_20261014-233300-d4a8a850.json`
   - 注册表未引用的相关清单：`game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v3-polish-manifest_m8-v03_20261014-234700-b47e2c10.json`
   - 注册表未引用的相关清单：`game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v4-structural-manifest_m8-v04_20261015-001500-0c9d3a74.json`
+  - 注册表未引用的相关清单：`game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v5-lowerbody-hair-manifest_m8-v05_20261015-004000-f41a7d92.json`
+  - 注册表未引用的相关清单：`game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v6-value-separation-manifest_m8-v06_20261015-010000-c2e9081b.json`
+  - 注册表未引用的相关清单：`game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v7-slate-coat-manifest_m8-v07_20261015-015010-ed510f85.json`
+  - 注册表未引用的相关清单：`game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v8-cloth-leather-manifest_m8-v08_20261015-021600-2d6c5eff.json`
+  - 用户批准的静态基准帧（2026-10-14，用户回复「够了，可作为静止帧基准」）：south idle 单帧 selout v8 cloth-leather，48 逻辑像素；只是静态视觉基准，本闸门仍为 pending。决定记录：`docs/character-visuals/rpg-2-star-ocean-the-second_protagonist-female_south-idle-static-baseline-decision_m8-v08_20261015-022700-07161696.md`
+    - 源图：`game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v8-cloth-leather-candidate_m8-v08_20261015-021600-157a5ea0.png`（sha256 `ccf9d2a293e7f1b9…`）；清单：`game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v8-cloth-leather-manifest_m8-v08_20261015-021600-2d6c5eff.json`
+    - 用户看过的 1280×720 实机截图：`outputs/rpg-2-star-ocean-the-second_city-bright_protagonist-female-south-idle-selout-v8-h48_m8-v08_20261015-022215-e2203167.png`、`outputs/rpg-2-star-ocean-the-second_outskirts-bright_protagonist-female-south-idle-selout-v8-h48_m8-v08_20261015-022215-e2203167.png`；同次暗场景：`outputs/rpg-2-star-ocean-the-second_survey-annex-room2-dark_protagonist-female-south-idle-selout-v8-h48_m8-v08_20261015-022215-e2203167.png`
+    - QA 报告：`outputs/rpg-2-star-ocean-the-second_city-bright-dark_protagonist-female-south-idle-selout-v8-visual-qa-report_m8-v08_20261015-022215-e2203167.json`；QA 说明：`docs/qa/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v8_visual-qa-note_m8-v08_20261015-021600-c1694107.md`
+    - 不批准：探索动画、其他朝向、替换运行时精灵、runtime-sprite 验收、场景画质闸门、人工试玩。
 - [ ] G2c 战斗动画（MVP 必需；注册表 sideview_8_action_prototype_integrated / pending_art_approval；原型 8 动作 20 帧；资产清单 `playable-combat.protagonist-female` checked=false）
   - 原型清单：`game/assets/characters/combat-prototypes/rpg-2-star-ocean-the-second_protagonist-female_sideview-combat-manifest_m8-prototype_20261014-143059-e2500154.json` · 存在
 - [ ] G3 比例 48 逻辑像素；master/scale/cell_size/ground_pin 未定

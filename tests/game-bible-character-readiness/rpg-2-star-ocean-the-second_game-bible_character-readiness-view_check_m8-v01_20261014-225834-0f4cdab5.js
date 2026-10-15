@@ -91,7 +91,13 @@ const jsonResponse = body => () => new Response(typeof body === 'string' ? body 
     assert.ok(checklist.hair_review.candidate_confusion_groups.every(g => g.decision === 'pending_human_review'));
     assert.ok(checklist.variants.every(v => v.gates.art_acceptance.status === 'pending'));
     assert.equal(checklist.summary.art_accepted, 0);
-    pass('checklist has 52 unique variants, 13 pending hair review groups, 0 art accepted');
+    // The one user-approved static still-frame baseline (female south idle, selout v8) is a separate record: it never
+    // passes G1/G2 or art acceptance.
+    const baselines = checklist.variants.filter(v => v.gates.exploration_animation.static_idle_baseline);
+    assert.deepEqual(baselines.map(v => v.visual_id), ['protagonist-female']);
+    assert.deepEqual(checklist.summary.static_idle_baselines_user_approved, ['protagonist-female']);
+    assert.ok(checklist.variants.every(v => v.gates.exploration_animation.status === 'pending' && v.gates.four_facing.production_directions_done.length === 0));
+    pass('checklist has 52 unique variants, 13 pending hair review groups, 0 art accepted; 1 static idle baseline (protagonist-female) with every G1/G2 still pending');
 
     // 3. Routing stays closed: no traversal into game/data through other routes.
     for (const probe of ['/character-readiness/x', '/assets/..%2F..%2Fgame%2Fdata%2Fcharacter-visuals%2Fx.png', '/game/data/character-visuals/' + path.basename(checklistPath)]) {
@@ -110,6 +116,8 @@ const jsonResponse = body => () => new Response(typeof body === 'string' ? body 
     assert.ok(!/美术验收 (已|accepted)/.test(section), 'no art acceptance is shown as granted');
     for (const href of section.match(/href="[^"]*"/g) || []) assert.match(href, /^href="\/assets\/[A-Za-z0-9._%-]+\.png"$/);
     for (const v of checklist.variants) assert.ok(section.includes(`<code>${v.visual_id}</code>`), v.visual_id);
+    assert.equal((section.match(/静态基准帧：/g) || []).length, 1, 'only the female row shows a static baseline');
+    assert.ok(section.includes('静态基准帧：south idle selout v8 cloth-leather') && section.includes('本闸门不因此通过'));
     pass('Production view lists 52 variants, 13 review-prompt groups, 9 approved source portraits, 52 pending art gates');
 
     const unavailable = await renderProduction(base, {'/character-readiness': () => new Response('gone', {status: 503})});

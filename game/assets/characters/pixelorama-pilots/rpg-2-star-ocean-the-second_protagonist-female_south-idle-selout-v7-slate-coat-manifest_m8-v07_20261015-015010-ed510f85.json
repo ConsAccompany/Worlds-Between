@@ -1,0 +1,3829 @@
+{
+  "project": "Worlds Between",
+  "milestone": "M8",
+  "purpose": "Selout v7 slate-coat pass of the female south idle, answering the user's v6 reply '明亮场景对比度仍不足': coat moved to a cool slate-taupe ramp, warm copper lapel trims, hand-placed edge clusters (shoulder-only lit rim, slate hem). Static frame only.",
+  "status": "technical candidate; unapproved; not runtime-integrated; no animation",
+  "art_approved": false,
+  "human_reviewed": false,
+  "runtime_integrated": false,
+  "walk_frames": 0,
+  "authorship": "Operations authored and run by Claude (Claude Code) in the workspace; results were previewed and checked in Godot before this manifest was written.",
+  "source": {
+    "role": "read-only input (selout v6), source-locked",
+    "file": "game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v6-value-separation-candidate_m8-v06_20261015-010000-5a7d3f18.png",
+    "sha256": "f606afeb70e422b5f0c44373126a7112830e8ed47c22433b18255829fedd283b",
+    "also_preserved": {
+      "v5": {
+        "file": "game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v5-lowerbody-hair-candidate_m8-v05_20261015-004000-8b3e5c07.png",
+        "sha256": "8ddac8acb4261cfc4e42ae9727b7cb5a4ff70791973909ab80cea33920ad7ace"
+      },
+      "v6_manifest": {
+        "file": "game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v6-value-separation-manifest_m8-v06_20261015-010000-c2e9081b.json",
+        "sha256": "10dd17857ce1bc9fca1cfd84abbf4a76cc5346a87a27136ce32e386038c26572"
+      }
+    }
+  },
+  "editor": {
+    "script": "tools/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v7-slate-coat-edit_m8-v07_20261015-015010-b6d45ce8.py",
+    "script_sha256": "14dc7c50dad2d64de34c9152aa8aca3c814ff47d7f3bca640e71b3175d45ceab",
+    "python": "3.12.14",
+    "pillow": "12.3.0",
+    "numpy": "2.3.5",
+    "run_flags": "-I (isolated)",
+    "method": "three texel-scoped recolour operations over v6 (coat_slate, trim_warm, edge_cluster); recolour only; no resampling, quantizing, filtering, dithering or AI editing",
+    "pixel_editor_compatibility": "single 80x112 RGBA PNG, binary alpha, <=32 colours; opens as-is in Pixelorama 1.2.3 (work/tooling/pixelorama-1-2-3) for manual texel edits"
+  },
+  "operations": {
+    "coat_slate": {
+      "map": {
+        "m": "1",
+        "n": "2",
+        "b": "3"
+      },
+      "boxes": {
+        "upper_left_coat_and_sleeve": [
+          18,
+          34,
+          30,
+          54
+        ],
+        "upper_right_coat_and_sleeve": [
+          38,
+          34,
+          51,
+          54
+        ],
+        "lower_right_coat_below_arm": [
+          41,
+          57,
+          47,
+          61
+        ],
+        "left_skirt_y57_61": [
+          21,
+          57,
+          30,
+          62
+        ],
+        "left_skirt_y62_63": [
+          21,
+          62,
+          28,
+          64
+        ],
+        "left_skirt_y64_71": [
+          21,
+          64,
+          26,
+          72
+        ],
+        "right_skirt_y61_72": [
+          43,
+          61,
+          48,
+          73
+        ]
+      },
+      "excluded": {
+        "fist_x24_28_y42_46": [
+          24,
+          42,
+          29,
+          47
+        ],
+        "left_cuff_x18_24_y47_53": [
+          18,
+          47,
+          25,
+          54
+        ],
+        "right_forearm_glove_fingers_x47_52_y57_70": [
+          47,
+          57,
+          53,
+          71
+        ]
+      }
+    },
+    "trim_warm": {
+      "from_roles": [
+        "r"
+      ],
+      "to": "4",
+      "boxes": {
+        "left_lapel_x26_30_y34_42": [
+          26,
+          34,
+          30,
+          42
+        ],
+        "right_lapel_x39_44_y34_42": [
+          39,
+          34,
+          44,
+          42
+        ]
+      }
+    },
+    "edge_cluster": {
+      "lower_left_sleeve_rim_to_base": [
+        {
+          "x": 22,
+          "y": 42,
+          "v6_role": "m",
+          "to": "2"
+        },
+        {
+          "x": 22,
+          "y": 43,
+          "v6_role": "m",
+          "to": "2"
+        },
+        {
+          "x": 21,
+          "y": 44,
+          "v6_role": "m",
+          "to": "2"
+        },
+        {
+          "x": 20,
+          "y": 45,
+          "v6_role": "m",
+          "to": "2"
+        },
+        {
+          "x": 19,
+          "y": 46,
+          "v6_role": "m",
+          "to": "2"
+        },
+        {
+          "x": 20,
+          "y": 46,
+          "v6_role": "m",
+          "to": "2"
+        }
+      ],
+      "right_skirt_hem_to_shadow": [
+        {
+          "x": 44,
+          "y": 73,
+          "v6_role": "b",
+          "to": "3"
+        },
+        {
+          "x": 45,
+          "y": 73,
+          "v6_role": "b",
+          "to": "3"
+        },
+        {
+          "x": 46,
+          "y": 73,
+          "v6_role": "b",
+          "to": "3"
+        }
+      ]
+    }
+  },
+  "roles": {
+    "K": "#0a0a0e",
+    "k": "#201c20",
+    "O": "#23252b",
+    "T": "#0a323b",
+    "q": "#302526",
+    "G": "#30333a",
+    "b": "#41302b",
+    "t": "#11525b",
+    "n": "#533b32",
+    "y": "#4a4749",
+    "g": "#474b54",
+    "m": "#634739",
+    "L": "#714730",
+    "u": "#1a767b",
+    "l": "#845436",
+    "w": "#7e5f4a",
+    "z": "#626873",
+    "v": "#249b98",
+    "r": "#a16f4b",
+    "D": "#bb7c50",
+    "c": "#b09986",
+    "s": "#e39664",
+    "C": "#d7c0a8",
+    "B": "#cfc8bd",
+    "S": "#fbc38d",
+    "W": "#faead4",
+    "M": "#9a4634"
+  },
+  "new_colours": {
+    "1": {
+      "hex": "#625c61",
+      "use": "P1 coat lit, cool slate-taupe"
+    },
+    "2": {
+      "hex": "#46424a",
+      "use": "P2 coat base, cool slate-taupe"
+    },
+    "3": {
+      "hex": "#2d2c34",
+      "use": "P3 coat shadow / edge cluster, cool slate"
+    },
+    "4": {
+      "hex": "#c07a40",
+      "use": "P4 warm copper trim"
+    }
+  },
+  "output": {
+    "file": "rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v7-slate-coat-candidate_m8-v07_20261015-015010-05615df5.png",
+    "format": "PNG RGBA 8-bit, single image, no metadata chunks",
+    "bytes": 3795,
+    "sha256": "4ada7df785a2a6fd19dea74b199f28d9d2101bfe75f306529412d17a4d5bb295",
+    "measured": {
+      "size": [
+        80,
+        112
+      ],
+      "alpha_values_present": [
+        0,
+        255
+      ],
+      "partial_alpha_texels": 0,
+      "transparent_texels_with_nonzero_rgb": 0,
+      "opaque_texels": 2419,
+      "unique_opaque_rgb_colours": 31,
+      "palette_hex": [
+        "#0a0a0e",
+        "#0a323b",
+        "#11525b",
+        "#1a767b",
+        "#201c20",
+        "#23252b",
+        "#249b98",
+        "#2d2c34",
+        "#302526",
+        "#30333a",
+        "#41302b",
+        "#46424a",
+        "#474b54",
+        "#4a4749",
+        "#533b32",
+        "#625c61",
+        "#626873",
+        "#634739",
+        "#714730",
+        "#7e5f4a",
+        "#845436",
+        "#9a4634",
+        "#a16f4b",
+        "#b09986",
+        "#bb7c50",
+        "#c07a40",
+        "#cfc8bd",
+        "#d7c0a8",
+        "#e39664",
+        "#faead4",
+        "#fbc38d"
+      ],
+      "alpha_bounds_inclusive_xyxy": [
+        13,
+        8,
+        55,
+        103
+      ],
+      "visible_body_height_texels": 96,
+      "visible_body_width_texels": 43,
+      "opaque_texels_on_cell_border": 0,
+      "foot_anchor_lowest_row_and_feet_mid_x": [
+        103,
+        40
+      ],
+      "foot_anchor_source": [
+        103,
+        40
+      ],
+      "isolated_opaque_texels_8n": [],
+      "transparent_pinholes_4n": []
+    }
+  },
+  "protected_invariants": {
+    "alpha_identical_everywhere": true,
+    "rows_8_33_hair_ponytail_face_identical": true,
+    "rows_80_and_below_boots_identical": true,
+    "texels_outside_coat_trim_boxes_and_edge_clusters_identical": true,
+    "ink_teal_skin_metal_cream_shirt_leather_texels_identical": true,
+    "changes_only_from_coat_m_n_b_and_trim_r": true,
+    "only_declared_new_colours": true
+  },
+  "coat_metrics_v6_vs_v7": {
+    "v6": {
+      "coat_texels": 352,
+      "coat_mean_luma": 63.85,
+      "coat_luma_steps": [
+        52.5,
+        65.1,
+        77.8
+      ],
+      "coat_mean_hsv_saturation": 0.383,
+      "coat_share_warm_paving_hue_family": 0.6449
+    },
+    "v7": {
+      "coat_texels": 352,
+      "coat_mean_luma": 66.17,
+      "coat_luma_steps": [
+        45.2,
+        68.1,
+        94.4
+      ],
+      "coat_mean_hsv_saturation": 0.113,
+      "coat_share_warm_paving_hue_family": 0.0
+    }
+  },
+  "pixel_changes": {
+    "total": 369,
+    "per_op": {
+      "coat_slate": 346,
+      "trim_warm": 14,
+      "edge_cluster": 9
+    },
+    "texels": [
+      {
+        "x": 26,
+        "y": 34,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 27,
+        "y": 34,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 28,
+        "y": 34,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 29,
+        "y": 34,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 41,
+        "y": 34,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 42,
+        "y": 34,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 43,
+        "y": 34,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 46,
+        "y": 34,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 25,
+        "y": 35,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 26,
+        "y": 35,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 27,
+        "y": 35,
+        "op": "trim_warm",
+        "role_before": "r",
+        "role_after": "4",
+        "before": "#a16f4b",
+        "after": "#c07a40"
+      },
+      {
+        "x": 28,
+        "y": 35,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 29,
+        "y": 35,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 41,
+        "y": 35,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 42,
+        "y": 35,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 43,
+        "y": 35,
+        "op": "trim_warm",
+        "role_before": "r",
+        "role_after": "4",
+        "before": "#a16f4b",
+        "after": "#c07a40"
+      },
+      {
+        "x": 44,
+        "y": 35,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 45,
+        "y": 35,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 46,
+        "y": 35,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 25,
+        "y": 36,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 26,
+        "y": 36,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 27,
+        "y": 36,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 28,
+        "y": 36,
+        "op": "trim_warm",
+        "role_before": "r",
+        "role_after": "4",
+        "before": "#a16f4b",
+        "after": "#c07a40"
+      },
+      {
+        "x": 29,
+        "y": 36,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 41,
+        "y": 36,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 42,
+        "y": 36,
+        "op": "trim_warm",
+        "role_before": "r",
+        "role_after": "4",
+        "before": "#a16f4b",
+        "after": "#c07a40"
+      },
+      {
+        "x": 43,
+        "y": 36,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 44,
+        "y": 36,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 24,
+        "y": 37,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 25,
+        "y": 37,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 26,
+        "y": 37,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 27,
+        "y": 37,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 28,
+        "y": 37,
+        "op": "trim_warm",
+        "role_before": "r",
+        "role_after": "4",
+        "before": "#a16f4b",
+        "after": "#c07a40"
+      },
+      {
+        "x": 29,
+        "y": 37,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 40,
+        "y": 37,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 41,
+        "y": 37,
+        "op": "trim_warm",
+        "role_before": "r",
+        "role_after": "4",
+        "before": "#a16f4b",
+        "after": "#c07a40"
+      },
+      {
+        "x": 42,
+        "y": 37,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 45,
+        "y": 37,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 46,
+        "y": 37,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 49,
+        "y": 37,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 50,
+        "y": 37,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 24,
+        "y": 38,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 26,
+        "y": 38,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 27,
+        "y": 38,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 28,
+        "y": 38,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 29,
+        "y": 38,
+        "op": "trim_warm",
+        "role_before": "r",
+        "role_after": "4",
+        "before": "#a16f4b",
+        "after": "#c07a40"
+      },
+      {
+        "x": 40,
+        "y": 38,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 41,
+        "y": 38,
+        "op": "trim_warm",
+        "role_before": "r",
+        "role_after": "4",
+        "before": "#a16f4b",
+        "after": "#c07a40"
+      },
+      {
+        "x": 42,
+        "y": 38,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 45,
+        "y": 38,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 46,
+        "y": 38,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 47,
+        "y": 38,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 24,
+        "y": 39,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 27,
+        "y": 39,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 28,
+        "y": 39,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 29,
+        "y": 39,
+        "op": "trim_warm",
+        "role_before": "r",
+        "role_after": "4",
+        "before": "#a16f4b",
+        "after": "#c07a40"
+      },
+      {
+        "x": 40,
+        "y": 39,
+        "op": "trim_warm",
+        "role_before": "r",
+        "role_after": "4",
+        "before": "#a16f4b",
+        "after": "#c07a40"
+      },
+      {
+        "x": 41,
+        "y": 39,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 42,
+        "y": 39,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 45,
+        "y": 39,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 46,
+        "y": 39,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 47,
+        "y": 39,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 48,
+        "y": 39,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 23,
+        "y": 40,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 24,
+        "y": 40,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 27,
+        "y": 40,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 28,
+        "y": 40,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 29,
+        "y": 40,
+        "op": "trim_warm",
+        "role_before": "r",
+        "role_after": "4",
+        "before": "#a16f4b",
+        "after": "#c07a40"
+      },
+      {
+        "x": 39,
+        "y": 40,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 40,
+        "y": 40,
+        "op": "trim_warm",
+        "role_before": "r",
+        "role_after": "4",
+        "before": "#a16f4b",
+        "after": "#c07a40"
+      },
+      {
+        "x": 41,
+        "y": 40,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 42,
+        "y": 40,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 45,
+        "y": 40,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 46,
+        "y": 40,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 47,
+        "y": 40,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 48,
+        "y": 40,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 49,
+        "y": 40,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 50,
+        "y": 40,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 23,
+        "y": 41,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 24,
+        "y": 41,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 27,
+        "y": 41,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 28,
+        "y": 41,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 29,
+        "y": 41,
+        "op": "trim_warm",
+        "role_before": "r",
+        "role_after": "4",
+        "before": "#a16f4b",
+        "after": "#c07a40"
+      },
+      {
+        "x": 39,
+        "y": 41,
+        "op": "trim_warm",
+        "role_before": "r",
+        "role_after": "4",
+        "before": "#a16f4b",
+        "after": "#c07a40"
+      },
+      {
+        "x": 40,
+        "y": 41,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 41,
+        "y": 41,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 42,
+        "y": 41,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 43,
+        "y": 41,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 44,
+        "y": 41,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 45,
+        "y": 41,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 46,
+        "y": 41,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 47,
+        "y": 41,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 48,
+        "y": 41,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 49,
+        "y": 41,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 50,
+        "y": 41,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 22,
+        "y": 42,
+        "op": "edge_cluster",
+        "role_before": "m",
+        "role_after": "2",
+        "before": "#634739",
+        "after": "#46424a"
+      },
+      {
+        "x": 23,
+        "y": 42,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 29,
+        "y": 42,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 38,
+        "y": 42,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 39,
+        "y": 42,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 40,
+        "y": 42,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 41,
+        "y": 42,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 42,
+        "y": 42,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 43,
+        "y": 42,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 44,
+        "y": 42,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 45,
+        "y": 42,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 46,
+        "y": 42,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 47,
+        "y": 42,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 48,
+        "y": 42,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 49,
+        "y": 42,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 50,
+        "y": 42,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 22,
+        "y": 43,
+        "op": "edge_cluster",
+        "role_before": "m",
+        "role_after": "2",
+        "before": "#634739",
+        "after": "#46424a"
+      },
+      {
+        "x": 23,
+        "y": 43,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 29,
+        "y": 43,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 38,
+        "y": 43,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 39,
+        "y": 43,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 42,
+        "y": 43,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 43,
+        "y": 43,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 44,
+        "y": 43,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 45,
+        "y": 43,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 46,
+        "y": 43,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 47,
+        "y": 43,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 48,
+        "y": 43,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 50,
+        "y": 43,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 21,
+        "y": 44,
+        "op": "edge_cluster",
+        "role_before": "m",
+        "role_after": "2",
+        "before": "#634739",
+        "after": "#46424a"
+      },
+      {
+        "x": 22,
+        "y": 44,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 23,
+        "y": 44,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 29,
+        "y": 44,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 38,
+        "y": 44,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 43,
+        "y": 44,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 44,
+        "y": 44,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 45,
+        "y": 44,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 46,
+        "y": 44,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 47,
+        "y": 44,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 48,
+        "y": 44,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 50,
+        "y": 44,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 20,
+        "y": 45,
+        "op": "edge_cluster",
+        "role_before": "m",
+        "role_after": "2",
+        "before": "#634739",
+        "after": "#46424a"
+      },
+      {
+        "x": 21,
+        "y": 45,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 22,
+        "y": 45,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 23,
+        "y": 45,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 29,
+        "y": 45,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 38,
+        "y": 45,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 43,
+        "y": 45,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 44,
+        "y": 45,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 45,
+        "y": 45,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 46,
+        "y": 45,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 47,
+        "y": 45,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 48,
+        "y": 45,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 50,
+        "y": 45,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 19,
+        "y": 46,
+        "op": "edge_cluster",
+        "role_before": "m",
+        "role_after": "2",
+        "before": "#634739",
+        "after": "#46424a"
+      },
+      {
+        "x": 20,
+        "y": 46,
+        "op": "edge_cluster",
+        "role_before": "m",
+        "role_after": "2",
+        "before": "#634739",
+        "after": "#46424a"
+      },
+      {
+        "x": 21,
+        "y": 46,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 22,
+        "y": 46,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 23,
+        "y": 46,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 29,
+        "y": 46,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 38,
+        "y": 46,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 39,
+        "y": 46,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 42,
+        "y": 46,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 43,
+        "y": 46,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 44,
+        "y": 46,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 45,
+        "y": 46,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 46,
+        "y": 46,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 47,
+        "y": 46,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 48,
+        "y": 46,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 49,
+        "y": 46,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 50,
+        "y": 46,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 25,
+        "y": 47,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 26,
+        "y": 47,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 27,
+        "y": 47,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 28,
+        "y": 47,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 29,
+        "y": 47,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 38,
+        "y": 47,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 39,
+        "y": 47,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 40,
+        "y": 47,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 41,
+        "y": 47,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 42,
+        "y": 47,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 43,
+        "y": 47,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 44,
+        "y": 47,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 45,
+        "y": 47,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 46,
+        "y": 47,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 47,
+        "y": 47,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 48,
+        "y": 47,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 49,
+        "y": 47,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 50,
+        "y": 47,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 26,
+        "y": 48,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 27,
+        "y": 48,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 28,
+        "y": 48,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 29,
+        "y": 48,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 38,
+        "y": 48,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 39,
+        "y": 48,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 40,
+        "y": 48,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 44,
+        "y": 48,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 45,
+        "y": 48,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 46,
+        "y": 48,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 47,
+        "y": 48,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 48,
+        "y": 48,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 49,
+        "y": 48,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 50,
+        "y": 48,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 26,
+        "y": 49,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 27,
+        "y": 49,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 28,
+        "y": 49,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 29,
+        "y": 49,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 38,
+        "y": 49,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 39,
+        "y": 49,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 40,
+        "y": 49,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 44,
+        "y": 49,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 45,
+        "y": 49,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 46,
+        "y": 49,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 47,
+        "y": 49,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 48,
+        "y": 49,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 49,
+        "y": 49,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 50,
+        "y": 49,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 26,
+        "y": 50,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 27,
+        "y": 50,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 28,
+        "y": 50,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 29,
+        "y": 50,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 38,
+        "y": 50,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 39,
+        "y": 50,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 40,
+        "y": 50,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 41,
+        "y": 50,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 42,
+        "y": 50,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 43,
+        "y": 50,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 44,
+        "y": 50,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 45,
+        "y": 50,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 46,
+        "y": 50,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 47,
+        "y": 50,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 48,
+        "y": 50,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 49,
+        "y": 50,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 50,
+        "y": 50,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 27,
+        "y": 51,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 28,
+        "y": 51,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 29,
+        "y": 51,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 38,
+        "y": 51,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 39,
+        "y": 51,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 40,
+        "y": 51,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 41,
+        "y": 51,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 42,
+        "y": 51,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 43,
+        "y": 51,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 44,
+        "y": 51,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 45,
+        "y": 51,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 46,
+        "y": 51,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 47,
+        "y": 51,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 48,
+        "y": 51,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 49,
+        "y": 51,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 50,
+        "y": 51,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 27,
+        "y": 52,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 28,
+        "y": 52,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 29,
+        "y": 52,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 38,
+        "y": 52,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 39,
+        "y": 52,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 40,
+        "y": 52,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 41,
+        "y": 52,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 42,
+        "y": 52,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 43,
+        "y": 52,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 44,
+        "y": 52,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 46,
+        "y": 52,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 47,
+        "y": 52,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 48,
+        "y": 52,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 49,
+        "y": 52,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 28,
+        "y": 53,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 29,
+        "y": 53,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 38,
+        "y": 53,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 39,
+        "y": 53,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 40,
+        "y": 53,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 41,
+        "y": 53,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 42,
+        "y": 53,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 43,
+        "y": 53,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 41,
+        "y": 57,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 42,
+        "y": 57,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 43,
+        "y": 57,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 44,
+        "y": 57,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 45,
+        "y": 57,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 46,
+        "y": 57,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 25,
+        "y": 58,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 26,
+        "y": 58,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 27,
+        "y": 58,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 28,
+        "y": 58,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 29,
+        "y": 58,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 41,
+        "y": 58,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 42,
+        "y": 58,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 43,
+        "y": 58,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 44,
+        "y": 58,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 45,
+        "y": 58,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 46,
+        "y": 58,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 27,
+        "y": 59,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 28,
+        "y": 59,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 29,
+        "y": 59,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 41,
+        "y": 59,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 42,
+        "y": 59,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 43,
+        "y": 59,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 44,
+        "y": 59,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 45,
+        "y": 59,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 46,
+        "y": 59,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 27,
+        "y": 60,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 28,
+        "y": 60,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 29,
+        "y": 60,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 41,
+        "y": 60,
+        "op": "coat_slate",
+        "role_before": "m",
+        "role_after": "1",
+        "before": "#634739",
+        "after": "#625c61"
+      },
+      {
+        "x": 42,
+        "y": 60,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 43,
+        "y": 60,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 44,
+        "y": 60,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 45,
+        "y": 60,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 46,
+        "y": 60,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 27,
+        "y": 61,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 28,
+        "y": 61,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 44,
+        "y": 61,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 45,
+        "y": 61,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 46,
+        "y": 61,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 23,
+        "y": 62,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 27,
+        "y": 62,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 44,
+        "y": 62,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 45,
+        "y": 62,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 46,
+        "y": 62,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 23,
+        "y": 63,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 24,
+        "y": 63,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 25,
+        "y": 63,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 26,
+        "y": 63,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 44,
+        "y": 63,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 45,
+        "y": 63,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 46,
+        "y": 63,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 23,
+        "y": 64,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 24,
+        "y": 64,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 25,
+        "y": 64,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 45,
+        "y": 64,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 46,
+        "y": 64,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 23,
+        "y": 65,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 24,
+        "y": 65,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 25,
+        "y": 65,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 45,
+        "y": 65,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 46,
+        "y": 65,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 22,
+        "y": 66,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 23,
+        "y": 66,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 24,
+        "y": 66,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 25,
+        "y": 66,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 43,
+        "y": 66,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 46,
+        "y": 66,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 21,
+        "y": 67,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 22,
+        "y": 67,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 23,
+        "y": 67,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 24,
+        "y": 67,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 25,
+        "y": 67,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 43,
+        "y": 67,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 45,
+        "y": 67,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 22,
+        "y": 68,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 23,
+        "y": 68,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 24,
+        "y": 68,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 25,
+        "y": 68,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 43,
+        "y": 68,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 45,
+        "y": 68,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 22,
+        "y": 69,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 23,
+        "y": 69,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 24,
+        "y": 69,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 25,
+        "y": 69,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 43,
+        "y": 69,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 44,
+        "y": 69,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 46,
+        "y": 69,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 22,
+        "y": 70,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 23,
+        "y": 70,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 43,
+        "y": 70,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 44,
+        "y": 70,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 46,
+        "y": 70,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 43,
+        "y": 71,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 44,
+        "y": 71,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 46,
+        "y": 71,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 43,
+        "y": 72,
+        "op": "coat_slate",
+        "role_before": "n",
+        "role_after": "2",
+        "before": "#533b32",
+        "after": "#46424a"
+      },
+      {
+        "x": 44,
+        "y": 72,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 46,
+        "y": 72,
+        "op": "coat_slate",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 44,
+        "y": 73,
+        "op": "edge_cluster",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 45,
+        "y": 73,
+        "op": "edge_cluster",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      },
+      {
+        "x": 46,
+        "y": 73,
+        "op": "edge_cluster",
+        "role_before": "b",
+        "role_after": "3",
+        "before": "#41302b",
+        "after": "#2d2c34"
+      }
+    ]
+  },
+  "qa_captures": {
+    "report": "rpg-2-star-ocean-the-second_city-bright-dark_protagonist-female-south-idle-selout-v7-visual-qa-report_m8-v07_20261015-015737-6abf6f01.json",
+    "report_sha256": "0700370afda4b160c328d540912f6f34d9d20c159596a5dea7c9964a7618efba",
+    "captures": [
+      {
+        "scene": "city-bright",
+        "variant": "selout-v7",
+        "capture": "C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/game/../outputs/rpg-2-star-ocean-the-second_city-bright_protagonist-female-south-idle-selout-v7-h48_m8-v07_20261015-015737-6abf6f01.png",
+        "capture_sha256": "f1dd087e31fb0bbdbeac5324eb85e194389236d054469f97dbef8f3db0c26923",
+        "capture_size": [
+          1280,
+          720
+        ],
+        "pilot_visible_logical": [
+          21.5,
+          48.0
+        ],
+        "pilot_window_diff_bounds_measured": {
+          "h": 96,
+          "w": 43,
+          "x": 731,
+          "y": 412
+        },
+        "pilot_texel_fidelity": {
+          "exact_rgb_matches": 2419,
+          "opaque_texels": 2419
+        }
+      },
+      {
+        "scene": "city-bright",
+        "variant": "selout-v6-reference",
+        "capture": "C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/game/../outputs/rpg-2-star-ocean-the-second_city-bright_protagonist-female-south-idle-selout-v6-reference-h48_m8-v07_20261015-015737-6abf6f01.png",
+        "capture_sha256": "a515a997a92bfcccae7833ad2606bcae5cbc93ca756d9a56769eeb1a2b406b6c",
+        "capture_size": [
+          1280,
+          720
+        ],
+        "pilot_visible_logical": [
+          21.5,
+          48.0
+        ],
+        "pilot_window_diff_bounds_measured": {
+          "h": 96,
+          "w": 43,
+          "x": 731,
+          "y": 412
+        },
+        "pilot_texel_fidelity": {
+          "exact_rgb_matches": 2419,
+          "opaque_texels": 2419
+        }
+      },
+      {
+        "scene": "outskirts-bright",
+        "variant": "selout-v7",
+        "capture": "C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/game/../outputs/rpg-2-star-ocean-the-second_outskirts-bright_protagonist-female-south-idle-selout-v7-h48_m8-v07_20261015-015737-6abf6f01.png",
+        "capture_sha256": "c5bc061dc44ccc6f74817b03ca8a7557e56b5740db9ec2c4c8f0dd1f6ceb1561",
+        "capture_size": [
+          1280,
+          720
+        ],
+        "pilot_visible_logical": [
+          21.5,
+          48.0
+        ],
+        "pilot_window_diff_bounds_measured": {
+          "h": 96,
+          "w": 43,
+          "x": 71,
+          "y": 426
+        },
+        "pilot_texel_fidelity": {
+          "exact_rgb_matches": 2419,
+          "opaque_texels": 2419
+        }
+      },
+      {
+        "scene": "outskirts-bright",
+        "variant": "selout-v6-reference",
+        "capture": "C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/game/../outputs/rpg-2-star-ocean-the-second_outskirts-bright_protagonist-female-south-idle-selout-v6-reference-h48_m8-v07_20261015-015737-6abf6f01.png",
+        "capture_sha256": "b0655cd7a59d97ef20c0ce9b9b1685d9a990ca546010f173a5613cd57a87510b",
+        "capture_size": [
+          1280,
+          720
+        ],
+        "pilot_visible_logical": [
+          21.5,
+          48.0
+        ],
+        "pilot_window_diff_bounds_measured": {
+          "h": 96,
+          "w": 43,
+          "x": 71,
+          "y": 426
+        },
+        "pilot_texel_fidelity": {
+          "exact_rgb_matches": 2419,
+          "opaque_texels": 2419
+        }
+      },
+      {
+        "scene": "survey-annex-room2-dark",
+        "variant": "selout-v7",
+        "capture": "C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/game/../outputs/rpg-2-star-ocean-the-second_survey-annex-room2-dark_protagonist-female-south-idle-selout-v7-h48_m8-v07_20261015-015737-6abf6f01.png",
+        "capture_sha256": "07b2c81d7e71dbc5cf8fc80939e0f80302d447a0856c5540cd6c92ec87b6ee28",
+        "capture_size": [
+          1280,
+          720
+        ],
+        "pilot_visible_logical": [
+          21.5,
+          48.0
+        ],
+        "pilot_window_diff_bounds_measured": {
+          "h": 96,
+          "w": 43,
+          "x": 225,
+          "y": 428
+        },
+        "pilot_texel_fidelity": {
+          "exact_rgb_matches": 2419,
+          "opaque_texels": 2419
+        }
+      },
+      {
+        "scene": "survey-annex-room2-dark",
+        "variant": "selout-v6-reference",
+        "capture": "C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/game/../outputs/rpg-2-star-ocean-the-second_survey-annex-room2-dark_protagonist-female-south-idle-selout-v6-reference-h48_m8-v07_20261015-015737-6abf6f01.png",
+        "capture_sha256": "7d4f2cc9d96c6e2cae3fb7324ae320a4827ea6e75c93e2130565cd5bf871fb84",
+        "capture_size": [
+          1280,
+          720
+        ],
+        "pilot_visible_logical": [
+          21.5,
+          48.0
+        ],
+        "pilot_window_diff_bounds_measured": {
+          "h": 96,
+          "w": 43,
+          "x": 225,
+          "y": 428
+        },
+        "pilot_texel_fidelity": {
+          "exact_rgb_matches": 2419,
+          "opaque_texels": 2419
+        }
+      }
+    ]
+  },
+  "limitations": [
+    "Static south idle only; no walk/turn frames; nothing wired into the runtime.",
+    "Only the coat changes hue; trousers, hair and boots keep v6's warm browns, so the lower legs still sit in the paving's hue family.",
+    "Only 9 texels are hand-placed edge clusters; the rest of the coat edge is v6's existing value structure recoloured, so the silhouette line itself is still v6's uniform K ink.",
+    "Four new colours (27 -> 31 of 32); the warm copper trim is a new hue, not taken from the concept palette.",
+    "Visual approval remains human."
+  ]
+}

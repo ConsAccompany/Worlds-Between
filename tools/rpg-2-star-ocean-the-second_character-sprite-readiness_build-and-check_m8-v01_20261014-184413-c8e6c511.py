@@ -3,6 +3,8 @@
 Read-only with respect to the visual registry, asset inventory, manifests and art.
 It never marks anything approved itself: every acceptance status mirrors a
 user-controlled inventory ``checked`` flag; all prose and counters are derived.
+The only hand-entered decisions are USER_STATIC_BASELINES (single static frames the
+user approved as a visual baseline), which are hash-locked and never pass a gate.
 
 Usage:
   python <this file> --write   # regenerate the JSON + Markdown checklist
@@ -36,6 +38,42 @@ EXPECTED_VARIANTS = 52
 EXPECTED_IDENTITIES = 51
 CITY_DISPLAY_HEIGHT_LOGICAL_PX = 48  # user-approved display height, per intake checklist
 PLACEHOLDER_SIZE = (32, 48)  # legacy placeholder cell rejected as the art baseline
+PILOTS = "game/assets/characters/pixelorama-pilots"
+V8_RUN = f"{SLUG}_{{scene}}_protagonist-female-south-idle-selout-v8-h48_m8-v08_20261015-022215-e2203167.png"
+# User-recorded static still-frame baselines. Each is a single static frame the user approved as the visual reference;
+# it is NOT a G1-G5 gate pass, does not check any inventory item and never changes a gate status or counter.
+# Check mode re-verifies every hash; any change to the files voids the record.
+USER_STATIC_BASELINES = {
+    "protagonist-female": {
+        "facing": "south",
+        "pose": "idle",
+        "frames": 1,
+        "display_height_logical_px": CITY_DISPLAY_HEIGHT_LOGICAL_PX,
+        "candidate": "selout v8 cloth-leather",
+        "decided_by": "user",
+        "decided_on": "2026-10-14",
+        "user_reply_zh": "够了，可作为静止帧基准",
+        "reviewed_captures": ["city-bright", "outskirts-bright"],
+        "decision_record": f"docs/character-visuals/{SLUG}_protagonist-female_south-idle-static-baseline-decision_m8-v08_20261015-022700-07161696.md",
+        "files": {
+            "png": (f"{PILOTS}/{SLUG}_protagonist-female_south-idle-selout-v8-cloth-leather-candidate_m8-v08_20261015-021600-157a5ea0.png",
+                    "ccf9d2a293e7f1b9c706b4d2f1bf9c00b3c7714ec4e9b8bddf023e166f68b6fd"),
+            "manifest": (f"{PILOTS}/{SLUG}_protagonist-female_south-idle-selout-v8-cloth-leather-manifest_m8-v08_20261015-021600-2d6c5eff.json",
+                         "0fa7937d3d4f68f209b30e611542ae1a130a82ee2327fb98b0ca19dc77fb5992"),
+            "qa_report": (f"outputs/{SLUG}_city-bright-dark_protagonist-female-south-idle-selout-v8-visual-qa-report_m8-v08_20261015-022215-e2203167.json",
+                          "513ab6595fd3bedee02d8477e9a2646c7d98b40f19de8791d147e746e3ea631a"),
+            "capture_city_bright": (f"outputs/{V8_RUN.format(scene='city-bright')}",
+                                    "0b8e67ac75539fdac46e7843687d660d0dfa98697f7bf229b0079437351d9e65"),
+            "capture_outskirts_bright": (f"outputs/{V8_RUN.format(scene='outskirts-bright')}",
+                                         "b4cedaddc7832850e2904e798e92c36ca479966e8c59453f1bb05e11d881c12f"),
+            "capture_annex_dark": (f"outputs/{V8_RUN.format(scene='survey-annex-room2-dark')}",
+                                   "da444d274b21a529859b306af612d46859087ef2785bc0d66f9e19f9682d5b0c"),
+            "qa_note": (f"docs/qa/{SLUG}_protagonist-female_south-idle-selout-v8_visual-qa-note_m8-v08_20261015-021600-c1694107.md", None),
+        },
+        "not_approved": ["exploration_animation", "other_facings", "runtime_replacement", "runtime_sprite_acceptance",
+                         "scene_quality_gates", "human_playtests"],
+    },
+}
 ROBOT_REGION = "星外"
 
 # Candidate confusions at sprite scale, for HUMAN review only. Each group quotes the
@@ -115,6 +153,22 @@ def load_manifest(path: str) -> dict | None:
     if not full.is_file():
         return None
     return json.loads(full.read_text(encoding="utf-8"))
+
+
+def static_baseline(visual_id: str) -> dict | None:
+    spec = USER_STATIC_BASELINES.get(visual_id)
+    if spec is None:
+        return None
+    files = {}
+    for role, (path, expected) in spec["files"].items():
+        full = ROOT / path
+        record = {"path": path, "exists": full.is_file()}
+        if expected:
+            record["sha256"] = expected
+            record["sha256_matches"] = record["exists"] and sha256(full) == expected
+        files[role] = record
+    return {**{k: v for k, v in spec.items() if k != "files"}, "decision_record_exists": (ROOT / spec["decision_record"]).is_file(), "files": files,
+            "scope_note": "single static frame approved as the visual baseline only; not a G1-G5 pass, not runtime-integrated, no counter changes"}
 
 
 def find_manifests(visual_id: str) -> list[str]:
@@ -246,6 +300,7 @@ def build(tracked: set[str] | None) -> dict:
                     "placeholder_walk_frames": ex.get("walk_frames", 0),
                     "placeholder_manifest": walk_manifest,
                     "unregistered_manifests": unregistered,
+                    "static_idle_baseline": static_baseline(vid),
                     "production_frame_counts": None,
                     "frame_counts_user_approved": False,
                     "status": "pending",
@@ -341,6 +396,7 @@ def build(tracked: set[str] | None) -> dict:
             "art_pending": sum(v["gates"]["art_acceptance"]["status"] == "pending" for v in variants),
             "combat_mvp_accepted": sum(v["gates"]["combat_animation"]["status"] == "art_accepted" for v in variants),
             "runtime_display_accepted": sum(v["gates"]["runtime_display"]["status"] == "art_accepted" for v in variants),
+            "static_idle_baselines_user_approved": [v["visual_id"] for v in variants if v["gates"]["exploration_animation"]["static_idle_baseline"]],
             "any_manifest_declares_frame_counts": bool(frame_count_manifests),
             "frame_count_manifests": frame_count_manifests,
             "intake_stage_0": sum(v["intake_stage"] == 0 for v in variants),
@@ -425,6 +481,9 @@ def render_md(data: dict) -> str:
         f"- 就绪状态：" + "；".join(f"{STATE_LABEL[k]} {n}" for k, n in s["readiness_states"].items()) + "。",
         f"- 美术验收（runtime-sprite）：已验收 {s['art_accepted']} / 待定 {s['art_pending']}；MVP 战斗动作已验收 {s['combat_mvp_accepted']}/{len(combat_mvp)}；显示图已验收 {s['runtime_display_accepted']}/{total}。",
         frames_line,
+        f"- 用户批准的静态待机基准帧：{len(s['static_idle_baselines_user_approved'])} 个变体（"
+        + ("、".join(f"`{i}`" for i in s["static_idle_baselines_user_approved"]) or "无")
+        + "）。只批准单张静态视觉基准，不算任何闸门通过，不计入上面的美术验收或探索精灵数。",
         f"- 战斗动作 MVP 必需（资产清单 scope=MVP）：" + "、".join(f"`{v}`" for v in data["scope"]["combat_mvp_variants"]) + f"；其余 {len(combat_other)} 名战斗组在资产清单中为 {other_scopes} 范围，不属 MVP。",
         f"- 路径核对：缺失 {s['missing_paths']} 个；已引用但未纳入 git {s['untracked_referenced_paths']} 个（详见末节）。",
         "",
@@ -474,6 +533,17 @@ def render_md(data: dict) -> str:
             L.append(f"  - 占位清单：{mark(ex['placeholder_manifest'])}")
         for p in ex["unregistered_manifests"]:
             L.append(f"  - 注册表未引用的相关清单：`{p}`")
+        sb = ex["static_idle_baseline"]
+        if sb:
+            f = sb["files"]
+            L += [
+                f"  - 用户批准的静态基准帧（{sb['decided_on']}，用户回复「{sb['user_reply_zh']}」）：{sb['facing']} {sb['pose']} 单帧 {sb['candidate']}，"
+                f"{sb['display_height_logical_px']} 逻辑像素；只是静态视觉基准，本闸门仍为 {ex['status']}。决定记录：`{sb['decision_record']}`",
+                f"    - 源图：`{f['png']['path']}`（sha256 `{f['png']['sha256'][:16]}…`）；清单：`{f['manifest']['path']}`",
+                f"    - 用户看过的 1280×720 实机截图：`{f['capture_city_bright']['path']}`、`{f['capture_outskirts_bright']['path']}`；同次暗场景：`{f['capture_annex_dark']['path']}`",
+                f"    - QA 报告：`{f['qa_report']['path']}`；QA 说明：`{f['qa_note']['path']}`",
+                "    - 不批准：探索动画、其他朝向、替换运行时精灵、runtime-sprite 验收、场景画质闸门、人工试玩。",
+            ]
         if cb["mvp_required"]:
             L.append(f"- {box(cb['status'])} G2c 战斗动画（MVP 必需；注册表 {cb['registry_production_status']} / {cb['registry_review_status']}；原型 {cb['prototype_actions']} 动作 {cb['prototype_frames']} 帧；"
                      f"资产清单 `{cb['inventory_item']}` checked={str(cb['inventory_checked']).lower()}）")
@@ -575,6 +645,16 @@ def check(data: dict) -> list[str]:
             failures.append(f"{v['visual_id']}: intake stage 0 claimed despite frame_counts manifest")
         if set(v["gates"]["four_facing"]["required_directions"]) != set(registry["direction_order"]):
             failures.append(f"{v['visual_id']}: direction set differs from registry direction_order")
+        sb = g["exploration_animation"]["static_idle_baseline"]
+        if sb:
+            if not sb["decision_record_exists"]:
+                failures.append(f"{v['visual_id']}: static baseline decision record missing: {sb['decision_record']}")
+            for role, record in sb["files"].items():
+                if not record["exists"] or record.get("sha256_matches") is False:
+                    failures.append(f"{v['visual_id']}: static baseline {role} missing or hash changed: {record['path']}")
+            # A static baseline must never read as a gate pass or acceptance.
+            if g["exploration_animation"]["status"] != "pending" or g["four_facing"]["production_directions_done"]:
+                failures.append(f"{v['visual_id']}: static baseline must leave G1/G2 pending")
     md = render_md(data)
     for v in data["variants"]:
         if f"「{v['identity_and_hair_anchor']}」" not in md:
