@@ -1,0 +1,1056 @@
+{
+  "project": "rpg-2-star-ocean-the-second",
+  "asset": "scifi sentry automaton battle animation pilot v2 (science-region ruins enemy)",
+  "revision": "m8-anim-v02",
+  "supersedes": {
+    "manifest": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/rpg-2-star-ocean-the-second_scifi-sentry-automaton_battle-animation-manifest_m8-anim-v01_20261014-223820-f181f893.json",
+    "strip": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/rpg-2-star-ocean-the-second_scifi-sentry-automaton_battle-animation-strip-left_m8-anim-v01_20261014-223820-f181f893.png",
+    "note": "v1 files are unchanged; the runtime entry now points at v2"
+  },
+  "status": "animation_pilot_unapproved",
+  "artAccepted": false,
+  "artAcceptanceCount": 0,
+  "humanReview": "pending - the creator viewed the real Godot v1 loop and answered '方向可以，继续修正遮挡与滑步' (direction OK, keep fixing occlusion and foot sliding); this is not animation acceptance",
+  "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/rpg-2-star-ocean-the-second_scifi-sentry-automaton_battle-animation-strip-left_m8-anim-v02_20261014-230329-ffefdc6f.png",
+  "sha256": "26d1fb1c0d13371f348ec04c27b35901bd8a06701694446374dae6f27c35e52e",
+  "sha256Algorithm": "sha256-bytes",
+  "stripSize": [
+    2352,
+    62
+  ],
+  "cellSize": [
+    112,
+    62
+  ],
+  "frameCount": 21,
+  "staticPlateOffsetInCell": [
+    16,
+    0
+  ],
+  "runtimeAnchor": [
+    46,
+    60
+  ],
+  "bodyCenterX": 64,
+  "runtimeAnchorNote": "draw the cell at (enemy_x - 46, 272 - 60); the static pilot draws its 96x62 image at (enemy_x - 48, 212). The animated sprite therefore sits 18 px further from the party (visual only), and the wind-up ring and contact shadow centre on cell x 64 (enemy_x + 18).",
+  "facing": "left (toward party)",
+  "states": {
+    "idle": {
+      "frames": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "frameTime": 0.22,
+      "mode": "loop"
+    },
+    "move": {
+      "frames": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "frameTime": null,
+      "mode": "distance",
+      "stepPx": 4
+    },
+    "windup": {
+      "frames": [
+        12,
+        13
+      ],
+      "frameTime": null,
+      "mode": "progress"
+    },
+    "strike": {
+      "frames": [
+        14,
+        15
+      ],
+      "frameTime": 0.15,
+      "mode": "once"
+    },
+    "hit": {
+      "frames": [
+        16,
+        17
+      ],
+      "frameTime": 0.12,
+      "mode": "once"
+    },
+    "defeat": {
+      "frames": [
+        18,
+        19,
+        20
+      ],
+      "frameTime": 0.16,
+      "mode": "hold-last"
+    }
+  },
+  "stateTimingNote": "move frames are chosen by distance travelled (one frame per 4 px step; the drawn sprite also moves in 4 px steps); windup frames by remaining wind-up (first half / second half); strike and hit play once; defeat holds its last frame",
+  "gaitLock": [
+    {
+      "leg": "nfl",
+      "step": 0,
+      "cellShiftPx": 4
+    },
+    {
+      "leg": "frl",
+      "step": 0,
+      "cellShiftPx": 4
+    },
+    {
+      "leg": "nfl",
+      "step": 1,
+      "cellShiftPx": 4
+    },
+    {
+      "leg": "frl",
+      "step": 1,
+      "cellShiftPx": 4
+    },
+    {
+      "leg": "nfl",
+      "step": 2,
+      "cellShiftPx": 4
+    },
+    {
+      "leg": "frl",
+      "step": 2,
+      "cellShiftPx": 4
+    },
+    {
+      "leg": "nrl",
+      "step": 4,
+      "cellShiftPx": 4
+    },
+    {
+      "leg": "ffl",
+      "step": 4,
+      "cellShiftPx": 4
+    },
+    {
+      "leg": "nrl",
+      "step": 5,
+      "cellShiftPx": 4
+    },
+    {
+      "leg": "ffl",
+      "step": 5,
+      "cellShiftPx": 4
+    },
+    {
+      "leg": "nrl",
+      "step": 6,
+      "cellShiftPx": 4
+    },
+    {
+      "leg": "ffl",
+      "step": 6,
+      "cellShiftPx": 4
+    }
+  ],
+  "frameReport": [
+    {
+      "index": 0,
+      "state": "idle",
+      "opaqueBBox": [
+        16,
+        1,
+        112,
+        61
+      ],
+      "colourCount": 17,
+      "opaquePixels": 3704,
+      "anchorRowRuns": [
+        [
+          17,
+          32
+        ],
+        [
+          95,
+          110
+        ]
+      ]
+    },
+    {
+      "index": 1,
+      "state": "idle",
+      "opaqueBBox": [
+        16,
+        2,
+        112,
+        61
+      ],
+      "colourCount": 17,
+      "opaquePixels": 3662,
+      "anchorRowRuns": [
+        [
+          17,
+          32
+        ],
+        [
+          95,
+          110
+        ]
+      ]
+    },
+    {
+      "index": 2,
+      "state": "idle",
+      "opaqueBBox": [
+        16,
+        2,
+        112,
+        61
+      ],
+      "colourCount": 17,
+      "opaquePixels": 3662,
+      "anchorRowRuns": [
+        [
+          17,
+          32
+        ],
+        [
+          95,
+          110
+        ]
+      ]
+    },
+    {
+      "index": 3,
+      "state": "idle",
+      "opaqueBBox": [
+        16,
+        1,
+        112,
+        61
+      ],
+      "colourCount": 17,
+      "opaquePixels": 3721,
+      "anchorRowRuns": [
+        [
+          17,
+          32
+        ],
+        [
+          95,
+          110
+        ]
+      ]
+    },
+    {
+      "index": 4,
+      "state": "move",
+      "opaqueBBox": [
+        16,
+        2,
+        110,
+        61
+      ],
+      "colourCount": 17,
+      "opaquePixels": 3663,
+      "anchorRowRuns": [
+        [
+          17,
+          32
+        ]
+      ]
+    },
+    {
+      "index": 5,
+      "state": "move",
+      "opaqueBBox": [
+        18,
+        1,
+        109,
+        61
+      ],
+      "colourCount": 17,
+      "opaquePixels": 3582,
+      "anchorRowRuns": [
+        [
+          21,
+          36
+        ]
+      ]
+    },
+    {
+      "index": 6,
+      "state": "move",
+      "opaqueBBox": [
+        18,
+        1,
+        109,
+        61
+      ],
+      "colourCount": 17,
+      "opaquePixels": 3442,
+      "anchorRowRuns": [
+        [
+          25,
+          40
+        ]
+      ]
+    },
+    {
+      "index": 7,
+      "state": "move",
+      "opaqueBBox": [
+        18,
+        1,
+        109,
+        61
+      ],
+      "colourCount": 17,
+      "opaquePixels": 3286,
+      "anchorRowRuns": [
+        [
+          29,
+          44
+        ]
+      ]
+    },
+    {
+      "index": 8,
+      "state": "move",
+      "opaqueBBox": [
+        18,
+        2,
+        109,
+        61
+      ],
+      "colourCount": 17,
+      "opaquePixels": 3241,
+      "anchorRowRuns": [
+        [
+          83,
+          98
+        ]
+      ]
+    },
+    {
+      "index": 9,
+      "state": "move",
+      "opaqueBBox": [
+        18,
+        1,
+        109,
+        61
+      ],
+      "colourCount": 17,
+      "opaquePixels": 3439,
+      "anchorRowRuns": [
+        [
+          87,
+          102
+        ]
+      ]
+    },
+    {
+      "index": 10,
+      "state": "move",
+      "opaqueBBox": [
+        18,
+        1,
+        109,
+        61
+      ],
+      "colourCount": 17,
+      "opaquePixels": 3587,
+      "anchorRowRuns": [
+        [
+          91,
+          106
+        ]
+      ]
+    },
+    {
+      "index": 11,
+      "state": "move",
+      "opaqueBBox": [
+        18,
+        1,
+        112,
+        61
+      ],
+      "colourCount": 17,
+      "opaquePixels": 3700,
+      "anchorRowRuns": [
+        [
+          95,
+          110
+        ]
+      ]
+    },
+    {
+      "index": 12,
+      "state": "windup",
+      "opaqueBBox": [
+        18,
+        1,
+        112,
+        61
+      ],
+      "colourCount": 16,
+      "opaquePixels": 3671,
+      "anchorRowRuns": [
+        [
+          95,
+          110
+        ]
+      ]
+    },
+    {
+      "index": 13,
+      "state": "windup",
+      "opaqueBBox": [
+        20,
+        0,
+        112,
+        61
+      ],
+      "colourCount": 16,
+      "opaquePixels": 3654,
+      "anchorRowRuns": [
+        [
+          95,
+          110
+        ]
+      ]
+    },
+    {
+      "index": 14,
+      "state": "strike",
+      "opaqueBBox": [
+        1,
+        2,
+        112,
+        61
+      ],
+      "colourCount": 16,
+      "opaquePixels": 3804,
+      "anchorRowRuns": [
+        [
+          1,
+          1
+        ],
+        [
+          4,
+          20
+        ],
+        [
+          95,
+          110
+        ]
+      ]
+    },
+    {
+      "index": 15,
+      "state": "strike",
+      "opaqueBBox": [
+        2,
+        2,
+        112,
+        61
+      ],
+      "colourCount": 16,
+      "opaquePixels": 3715,
+      "anchorRowRuns": [
+        [
+          95,
+          110
+        ]
+      ]
+    },
+    {
+      "index": 16,
+      "state": "hit",
+      "opaqueBBox": [
+        16,
+        1,
+        112,
+        61
+      ],
+      "colourCount": 17,
+      "opaquePixels": 3686,
+      "anchorRowRuns": [
+        [
+          17,
+          32
+        ],
+        [
+          95,
+          110
+        ]
+      ]
+    },
+    {
+      "index": 17,
+      "state": "hit",
+      "opaqueBBox": [
+        16,
+        1,
+        112,
+        61
+      ],
+      "colourCount": 17,
+      "opaquePixels": 3706,
+      "anchorRowRuns": [
+        [
+          17,
+          32
+        ],
+        [
+          95,
+          110
+        ]
+      ]
+    },
+    {
+      "index": 18,
+      "state": "defeat",
+      "opaqueBBox": [
+        16,
+        4,
+        112,
+        61
+      ],
+      "colourCount": 16,
+      "opaquePixels": 3584,
+      "anchorRowRuns": [
+        [
+          17,
+          32
+        ],
+        [
+          95,
+          110
+        ]
+      ]
+    },
+    {
+      "index": 19,
+      "state": "defeat",
+      "opaqueBBox": [
+        16,
+        8,
+        112,
+        61
+      ],
+      "colourCount": 15,
+      "opaquePixels": 3424,
+      "anchorRowRuns": [
+        [
+          17,
+          32
+        ],
+        [
+          95,
+          110
+        ]
+      ]
+    },
+    {
+      "index": 20,
+      "state": "defeat",
+      "opaqueBBox": [
+        16,
+        7,
+        112,
+        61
+      ],
+      "colourCount": 13,
+      "opaquePixels": 3337,
+      "anchorRowRuns": [
+        [
+          17,
+          32
+        ],
+        [
+          95,
+          110
+        ]
+      ]
+    }
+  ],
+  "frameFiles": [
+    {
+      "index": 0,
+      "state": "idle",
+      "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/frames_m8-anim-v02_ffefdc6f/rpg-2-star-ocean-the-second_sentry_anim-f00-idle0_m8-anim-v02_20261014-230329-ffefdc6f.png",
+      "sha256": "f2603ee500aad7f9f6052c403b5fa608ac50a64fb4b50dec5cdec5681d9bbd62",
+      "sha256Algorithm": "sha256-bytes"
+    },
+    {
+      "index": 1,
+      "state": "idle",
+      "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/frames_m8-anim-v02_ffefdc6f/rpg-2-star-ocean-the-second_sentry_anim-f01-idle1_m8-anim-v02_20261014-230329-ffefdc6f.png",
+      "sha256": "b468ab239048ed328c2a0a26132c51926cfad251830205414d8f191e3f05b408",
+      "sha256Algorithm": "sha256-bytes"
+    },
+    {
+      "index": 2,
+      "state": "idle",
+      "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/frames_m8-anim-v02_ffefdc6f/rpg-2-star-ocean-the-second_sentry_anim-f02-idle2_m8-anim-v02_20261014-230329-ffefdc6f.png",
+      "sha256": "642eb11aa4d3ca37b99bb969fa08301ea1f3097f192c90fc5fbb70e875eb815c",
+      "sha256Algorithm": "sha256-bytes"
+    },
+    {
+      "index": 3,
+      "state": "idle",
+      "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/frames_m8-anim-v02_ffefdc6f/rpg-2-star-ocean-the-second_sentry_anim-f03-idle3_m8-anim-v02_20261014-230329-ffefdc6f.png",
+      "sha256": "296533c2fdda853d7274d2cd8bbce141ab30c40ba383d5330ff77deff207800b",
+      "sha256Algorithm": "sha256-bytes"
+    },
+    {
+      "index": 4,
+      "state": "move",
+      "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/frames_m8-anim-v02_ffefdc6f/rpg-2-star-ocean-the-second_sentry_anim-f04-move0_m8-anim-v02_20261014-230329-ffefdc6f.png",
+      "sha256": "e369b30cd818ae18171e552eb4bf7cb777fe5d90ea6f289b23190aafa3087557",
+      "sha256Algorithm": "sha256-bytes"
+    },
+    {
+      "index": 5,
+      "state": "move",
+      "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/frames_m8-anim-v02_ffefdc6f/rpg-2-star-ocean-the-second_sentry_anim-f05-move1_m8-anim-v02_20261014-230329-ffefdc6f.png",
+      "sha256": "9c213fbe894fc8e89dc590db4b3f8e795da03e2d6f95a60706b76ab4f9e294e8",
+      "sha256Algorithm": "sha256-bytes"
+    },
+    {
+      "index": 6,
+      "state": "move",
+      "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/frames_m8-anim-v02_ffefdc6f/rpg-2-star-ocean-the-second_sentry_anim-f06-move2_m8-anim-v02_20261014-230329-ffefdc6f.png",
+      "sha256": "0cebfdafc0f00a12447b7b018a6e94c2295a955e9f309d7ce65d61d149dfe8fa",
+      "sha256Algorithm": "sha256-bytes"
+    },
+    {
+      "index": 7,
+      "state": "move",
+      "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/frames_m8-anim-v02_ffefdc6f/rpg-2-star-ocean-the-second_sentry_anim-f07-move3_m8-anim-v02_20261014-230329-ffefdc6f.png",
+      "sha256": "825d51c649b2a44da5ca886bd1e26df3b664ecadbf3a4c47cf8618fdae90ec0c",
+      "sha256Algorithm": "sha256-bytes"
+    },
+    {
+      "index": 8,
+      "state": "move",
+      "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/frames_m8-anim-v02_ffefdc6f/rpg-2-star-ocean-the-second_sentry_anim-f08-move4_m8-anim-v02_20261014-230329-ffefdc6f.png",
+      "sha256": "b379659c3a0009ba0a7421f82ad712c335dcfe14d58ded922350202668ad1e62",
+      "sha256Algorithm": "sha256-bytes"
+    },
+    {
+      "index": 9,
+      "state": "move",
+      "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/frames_m8-anim-v02_ffefdc6f/rpg-2-star-ocean-the-second_sentry_anim-f09-move5_m8-anim-v02_20261014-230329-ffefdc6f.png",
+      "sha256": "db56fb3aa4ca3822b1e6e4b26f7de91d04edbddac3b1f19be6836e1a4013e597",
+      "sha256Algorithm": "sha256-bytes"
+    },
+    {
+      "index": 10,
+      "state": "move",
+      "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/frames_m8-anim-v02_ffefdc6f/rpg-2-star-ocean-the-second_sentry_anim-f10-move6_m8-anim-v02_20261014-230329-ffefdc6f.png",
+      "sha256": "f323445888965c174822fb354465d4521f2c7e69f18d3912a31c89afbad6b321",
+      "sha256Algorithm": "sha256-bytes"
+    },
+    {
+      "index": 11,
+      "state": "move",
+      "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/frames_m8-anim-v02_ffefdc6f/rpg-2-star-ocean-the-second_sentry_anim-f11-move7_m8-anim-v02_20261014-230329-ffefdc6f.png",
+      "sha256": "73129af3861c30f1f844a1a36fde305dce53ddc5625c963222b8790bad935402",
+      "sha256Algorithm": "sha256-bytes"
+    },
+    {
+      "index": 12,
+      "state": "windup",
+      "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/frames_m8-anim-v02_ffefdc6f/rpg-2-star-ocean-the-second_sentry_anim-f12-windup0_m8-anim-v02_20261014-230329-ffefdc6f.png",
+      "sha256": "adba49d5535271aa95f62163c8d2fa8394b87de5f0bd08e23677c5ad1abbd6e1",
+      "sha256Algorithm": "sha256-bytes"
+    },
+    {
+      "index": 13,
+      "state": "windup",
+      "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/frames_m8-anim-v02_ffefdc6f/rpg-2-star-ocean-the-second_sentry_anim-f13-windup1_m8-anim-v02_20261014-230329-ffefdc6f.png",
+      "sha256": "00246511fac4a10abd50bafcf9dd797723bf85969e9da3451a65af5fc05f26e2",
+      "sha256Algorithm": "sha256-bytes"
+    },
+    {
+      "index": 14,
+      "state": "strike",
+      "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/frames_m8-anim-v02_ffefdc6f/rpg-2-star-ocean-the-second_sentry_anim-f14-strike0_m8-anim-v02_20261014-230329-ffefdc6f.png",
+      "sha256": "1592c21e70a0a0757183a5a1171c12913fc8a347c97493550f1fd2f3a65d4e78",
+      "sha256Algorithm": "sha256-bytes"
+    },
+    {
+      "index": 15,
+      "state": "strike",
+      "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/frames_m8-anim-v02_ffefdc6f/rpg-2-star-ocean-the-second_sentry_anim-f15-strike1_m8-anim-v02_20261014-230329-ffefdc6f.png",
+      "sha256": "7772b9fd8346871e5060ae5978784adbb4cce4dda88d75c0d532cf1713710260",
+      "sha256Algorithm": "sha256-bytes"
+    },
+    {
+      "index": 16,
+      "state": "hit",
+      "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/frames_m8-anim-v02_ffefdc6f/rpg-2-star-ocean-the-second_sentry_anim-f16-hit0_m8-anim-v02_20261014-230329-ffefdc6f.png",
+      "sha256": "018b185f8ee96080dbf93b38b8cc7b76d92b6d50c3320f6e0493574abc36321d",
+      "sha256Algorithm": "sha256-bytes"
+    },
+    {
+      "index": 17,
+      "state": "hit",
+      "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/frames_m8-anim-v02_ffefdc6f/rpg-2-star-ocean-the-second_sentry_anim-f17-hit1_m8-anim-v02_20261014-230329-ffefdc6f.png",
+      "sha256": "01a3cb3a16e6554383facefa297f019455dc71d17fdcdef4d96391b87d2768a7",
+      "sha256Algorithm": "sha256-bytes"
+    },
+    {
+      "index": 18,
+      "state": "defeat",
+      "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/frames_m8-anim-v02_ffefdc6f/rpg-2-star-ocean-the-second_sentry_anim-f18-defeat0_m8-anim-v02_20261014-230329-ffefdc6f.png",
+      "sha256": "500d220da3677ad090d15ee7e206ccb17b0546a73fce05175660bfe44034c4d5",
+      "sha256Algorithm": "sha256-bytes"
+    },
+    {
+      "index": 19,
+      "state": "defeat",
+      "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/frames_m8-anim-v02_ffefdc6f/rpg-2-star-ocean-the-second_sentry_anim-f19-defeat1_m8-anim-v02_20261014-230329-ffefdc6f.png",
+      "sha256": "ba8f04a2bf86352d419e615d1dbd688a091f76257711437850155cf157afa6d0",
+      "sha256Algorithm": "sha256-bytes"
+    },
+    {
+      "index": 20,
+      "state": "defeat",
+      "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/frames_m8-anim-v02_ffefdc6f/rpg-2-star-ocean-the-second_sentry_anim-f20-defeat2_m8-anim-v02_20261014-230329-ffefdc6f.png",
+      "sha256": "0d0e6ce240ae1b19936abb40d67243db54ffff19997817387817ac22814a9ace",
+      "sha256Algorithm": "sha256-bytes"
+    }
+  ],
+  "neutralFrameEqualsStaticPilot": true,
+  "reusedV1Poses": {
+    "0": 0,
+    "1": 1,
+    "2": 2,
+    "3": 3,
+    "12": 8,
+    "13": 9,
+    "16": 12,
+    "17": 13,
+    "18": 14,
+    "19": 15,
+    "20": 16
+  },
+  "staticPilot": {
+    "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/rpg-2-star-ocean-the-second_scifi-sentry-automaton_battle-idle-left_m8-pilot-v01_20261014-221901-e3ab87f9.png",
+    "sha256": "5ca76fe9fdedcdca549fb11597f3fc44a68b713382ffb11a8976f4282e652462",
+    "sha256Algorithm": "sha256-bytes"
+  },
+  "palette": {
+    "o": "#101217",
+    "1": "#1b1f26",
+    "2": "#282e37",
+    "3": "#384049",
+    "4": "#4c5562",
+    "5": "#67717e",
+    "6": "#8b95a1",
+    "a": "#36291b",
+    "b": "#5a462b",
+    "c": "#806439",
+    "d": "#a6864f",
+    "e": "#cbb077",
+    "r": "#4b3627",
+    "x": "#0c363c",
+    "y": "#188a92",
+    "z": "#4bd5d2",
+    "w": "#c6fff6"
+  },
+  "alphaValues": [
+    0,
+    255
+  ],
+  "method": "Re-posed native pixel plates: the static author's palette, Part class and compositor are imported unchanged (canvas size globals widened to the 112 px cell); every plate uses the static coordinates plus integer body/head/hip/knee/foot joint offsets and a 16 px cell margin. Lens/light states are explicit palette paints and a few effect pixels are placed explicitly. No image is read, traced, resampled, resized or generated by AI.",
+  "authorScript": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/rpg-2-star-ocean-the-second_scifi-sentry-automaton_battle-animation-pilot-author_m8-anim-v02_20261014-225908-7e2215bc.py",
+  "authorScriptSha256": "7ba2bb89c88f236f770914f35f37fd618ee51791e5030f1eddad9321782e34f2",
+  "authorScriptSha256Algorithm": "sha256-text-lf-v1",
+  "staticAuthorScript": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/rpg-2-star-ocean-the-second_scifi-sentry-automaton_battle-idle-pilot-author_m8-v01_20261014-221848-0b9664e2.py",
+  "staticAuthorScriptSha256": "a8dfa2041ed35d6fd6cfa699654947db33a45a196bd81cb35d8f391cf40bd6d0",
+  "staticAuthorScriptSha256Algorithm": "sha256-text-lf-v1",
+  "v1AuthorScript": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/rpg-2-star-ocean-the-second_scifi-sentry-automaton_battle-animation-pilot-author_m8-anim-v01_20261014-223554-0ae02683.py",
+  "previews": {
+    "frameSheet4x": {
+      "file": "outputs/rpg-2-star-ocean-the-second_scifi-sentry-automaton-animation-pilot_4x-frame-sheet_m8-anim-v02_20261014-230329-ffefdc6f.png",
+      "sha256": "a5cf92e600408b4c5248d2b87255c05fce04a02dc529047c92881fc56675386a",
+      "sha256Algorithm": "sha256-bytes",
+      "note": "nearest-neighbour enlargement for review only"
+    },
+    "loopGif3x": {
+      "file": "outputs/rpg-2-star-ocean-the-second_scifi-sentry-automaton-animation-pilot_3x-loop-preview_m8-anim-v02_20261014-230329-ffefdc6f.gif",
+      "sha256": "ec2ac8e43d101ebb1d680f95bee45d0a9d4a23564acbc0105e7717ad3c0c5221",
+      "sha256Algorithm": "sha256-bytes",
+      "sequence": [
+        [
+          "idle",
+          0,
+          220,
+          0
+        ],
+        [
+          "idle",
+          1,
+          220,
+          0
+        ],
+        [
+          "idle",
+          2,
+          220,
+          0
+        ],
+        [
+          "idle",
+          3,
+          220,
+          0
+        ],
+        [
+          "move",
+          4,
+          59,
+          0
+        ],
+        [
+          "move",
+          5,
+          59,
+          -4
+        ],
+        [
+          "move",
+          6,
+          59,
+          -8
+        ],
+        [
+          "move",
+          7,
+          59,
+          -12
+        ],
+        [
+          "move",
+          8,
+          59,
+          -16
+        ],
+        [
+          "move",
+          9,
+          59,
+          -20
+        ],
+        [
+          "move",
+          10,
+          59,
+          -24
+        ],
+        [
+          "move",
+          11,
+          59,
+          -28
+        ],
+        [
+          "move",
+          4,
+          59,
+          -32
+        ],
+        [
+          "move",
+          5,
+          59,
+          -36
+        ],
+        [
+          "move",
+          6,
+          59,
+          -40
+        ],
+        [
+          "move",
+          7,
+          59,
+          -44
+        ],
+        [
+          "move",
+          8,
+          59,
+          -48
+        ],
+        [
+          "move",
+          9,
+          59,
+          -52
+        ],
+        [
+          "move",
+          10,
+          59,
+          -56
+        ],
+        [
+          "move",
+          11,
+          59,
+          -60
+        ],
+        [
+          "windup",
+          12,
+          240,
+          -64
+        ],
+        [
+          "windup",
+          13,
+          240,
+          -64
+        ],
+        [
+          "strike",
+          14,
+          150,
+          -64
+        ],
+        [
+          "strike",
+          15,
+          150,
+          -64
+        ],
+        [
+          "idle",
+          0,
+          220,
+          -64
+        ],
+        [
+          "idle",
+          1,
+          220,
+          -64
+        ],
+        [
+          "idle",
+          2,
+          220,
+          -64
+        ],
+        [
+          "idle",
+          3,
+          220,
+          -64
+        ],
+        [
+          "hit",
+          16,
+          120,
+          -64
+        ],
+        [
+          "hit",
+          17,
+          120,
+          -64
+        ],
+        [
+          "idle",
+          0,
+          220,
+          -64
+        ],
+        [
+          "idle",
+          1,
+          220,
+          -64
+        ],
+        [
+          "idle",
+          2,
+          220,
+          -64
+        ],
+        [
+          "idle",
+          3,
+          220,
+          -64
+        ],
+        [
+          "defeat",
+          18,
+          160,
+          -64
+        ],
+        [
+          "defeat",
+          19,
+          160,
+          -64
+        ],
+        [
+          "defeat",
+          20,
+          160,
+          -64
+        ],
+        [
+          "defeat",
+          20,
+          900,
+          -64
+        ]
+      ],
+      "note": "nearest-neighbour enlargement for review only; the gait moves the cell in 4 px steps over a ticked floor so foot lock can be judged"
+    }
+  },
+  "scope": "sentry enemy only; drawn by battle_arena.gd behind ENEMY_SPRITE_PILOT_ENABLED and the nested ENEMY_SPRITE_ANIMATION_ENABLED switch",
+  "createdAt": "2026-10-14T23:03:29",
+  "hashLockRepair": {
+    "date": "2026-10-14",
+    "summary": "Hash-lock repair: labels added; both author-script locks moved from raw bytes to sha256-text-lf-v1. staticPilot.sha256 is the exact-byte hash of staticPilot.file (the static PNG) and still matches. The static manifest is not referenced here. The scripts reproduce the strip byte for byte (scratch --out run on 2026-10-14).",
+    "changedValues": [
+      {
+        "field": "authorScriptSha256",
+        "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/rpg-2-star-ocean-the-second_scifi-sentry-automaton_battle-animation-pilot-author_m8-anim-v02_20261014-225908-7e2215bc.py",
+        "before": "2dd31fedb55ea34dd0e969c95d264ccff608dd2dd248f233079aa08f2c7646be",
+        "beforeAlgorithm": "SHA-256 of the raw on-disk bytes, which here were a CRLF working copy (unlabeled at the time)",
+        "after": "7ba2bb89c88f236f770914f35f37fd618ee51791e5030f1eddad9321782e34f2",
+        "afterAlgorithm": "sha256-text-lf-v1",
+        "why": "the raw CRLF value cannot match an LF checkout of the same text; the sha256-text-lf-v1 value equals the raw SHA-256 of the LF form and matches both checkouts"
+      },
+      {
+        "field": "staticAuthorScriptSha256",
+        "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/rpg-2-star-ocean-the-second_scifi-sentry-automaton_battle-idle-pilot-author_m8-v01_20261014-221848-0b9664e2.py",
+        "before": "39fbd4182af1f8e375acefe871164c299d763810637faff1f08671447689226b",
+        "beforeAlgorithm": "SHA-256 of the raw on-disk bytes, which here were a CRLF working copy (unlabeled at the time)",
+        "after": "a8dfa2041ed35d6fd6cfa699654947db33a45a196bd81cb35d8f391cf40bd6d0",
+        "afterAlgorithm": "sha256-text-lf-v1",
+        "why": "the raw CRLF value cannot match an LF checkout of the same text; the sha256-text-lf-v1 value equals the raw SHA-256 of the LF form and matches both checkouts"
+      }
+    ],
+    "unchanged": "No PNG, GIF, author script, builder or other source file was modified. Every pre-existing sha256 value is unchanged except the ones listed in changedValues, and every pre-existing value still matched its file on the original Windows workspace when this repair ran. Status, approval and acceptance fields are unchanged.",
+    "validator": "tests/battle-visual-hash-locks/rpg-2-star-ocean-the-second_m8-battle-visuals_hash-lock-check_m8-v01_20261014-234133-bd28b055.js",
+    "qaNote": "docs/qa/rpg-2-star-ocean-the-second_m8-battle-visuals_hash-lock-repair_qa-note_m8-v01_20261014-234133-317f4482.md"
+  }
+}

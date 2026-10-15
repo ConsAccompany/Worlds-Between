@@ -1,0 +1,1241 @@
+{
+  "project": "rpg-2-star-ocean-the-second",
+  "asset": "scifi sentry automaton battle animation candidate v3 (science-region ruins enemy)",
+  "revision": "m8-anim-v03",
+  "basedOn": {
+    "manifest": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/rpg-2-star-ocean-the-second_scifi-sentry-automaton_battle-animation-manifest_m8-anim-v02_20261014-230329-ffefdc6f.json",
+    "strip": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/rpg-2-star-ocean-the-second_scifi-sentry-automaton_battle-animation-strip-left_m8-anim-v02_20261014-230329-ffefdc6f.png",
+    "stripSha256": "26d1fb1c0d13371f348ec04c27b35901bd8a06701694446374dae6f27c35e52e",
+    "note": "v2 files are unchanged and v2 stays the battle_arena.gd runtime default; v3 is an isolated candidate"
+  },
+  "status": "animation_candidate_unapproved",
+  "artAccepted": false,
+  "artAcceptanceCount": 0,
+  "humanReview": "pending - the creator approved the visual/animation direction and asked for occlusion and foot-slide fixes (v2); v2 and v3 both await Codex/human review; this is not animation acceptance",
+  "runtimeWiring": "not wired: battle_arena.gd still points ENEMY_SPRITE_ANIMATIONS['sentry'] at v2. The test-only helper applies the entry below to single battle instances.",
+  "runtimeEntry": {
+    "cell": [
+      132,
+      66
+    ],
+    "anchor": [
+      66,
+      60
+    ],
+    "body_center_x": 84,
+    "unchangedFromV2": [
+      "states",
+      "frame_time",
+      "gait_step_px",
+      "move_grace",
+      "front_states"
+    ]
+  },
+  "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/rpg-2-star-ocean-the-second_scifi-sentry-automaton_battle-animation-strip-left_m8-anim-v03_20261015-041706-53479e75.png",
+  "sha256": "47db0317f1beadd44ca3463a080c9cc81240497e4a4fd1c8790baba9d30369b2",
+  "sha256Algorithm": "sha256-bytes",
+  "stripSize": [
+    2772,
+    66
+  ],
+  "cellSize": [
+    132,
+    66
+  ],
+  "frameCount": 21,
+  "v2CellOffsetInCell": [
+    20,
+    0
+  ],
+  "staticPlateOffsetInCell": [
+    36,
+    0
+  ],
+  "runtimeAnchor": [
+    66,
+    60
+  ],
+  "bodyCenterX": 84,
+  "runtimeAnchorNote": "draw the cell at (enemy_x - 66, 272 - 60): the same screen placement as v2 (cell x 66 = v2 cell x 46). The ring and contact shadow centre on cell x 84 (enemy_x + 18), as in v2.",
+  "facing": "left (toward party)",
+  "states": {
+    "idle": {
+      "frames": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "frameTime": 0.22,
+      "mode": "loop"
+    },
+    "move": {
+      "frames": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "frameTime": null,
+      "mode": "distance",
+      "stepPx": 4
+    },
+    "windup": {
+      "frames": [
+        12,
+        13
+      ],
+      "frameTime": null,
+      "mode": "progress"
+    },
+    "strike": {
+      "frames": [
+        14,
+        15
+      ],
+      "frameTime": 0.15,
+      "mode": "once"
+    },
+    "hit": {
+      "frames": [
+        16,
+        17
+      ],
+      "frameTime": 0.12,
+      "mode": "once"
+    },
+    "defeat": {
+      "frames": [
+        18,
+        19,
+        20
+      ],
+      "frameTime": 0.16,
+      "mode": "hold-last"
+    }
+  },
+  "changesFromV2": {
+    "windupLens": "frames 12-13 repaint only the lens interior and a four-point flare inside the bezel (silhouette, outline and every other pixel unchanged)",
+    "strikeArc": "frame 14 adds a cyan claw-arc whose leading edge reaches enemy_x -62; frame 15 adds its broken remnant. Only transparent pixels are filled; the v2 lunge pose is unchanged",
+    "defeatShadow": "frames 18-20 add an ordered-dither shadow in palette colour 'o' (#101217) under the body, centred on the body centre and the floor line; it widens as the body settles. Only transparent pixels are filled",
+    "identicalToV2": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      16,
+      17
+    ]
+  },
+  "rowRule": "row 60 is the last opaque body row of every frame; only the defeat shadow uses rows 61-64",
+  "gaitLock": [
+    {
+      "leg": "nfl",
+      "step": 0,
+      "cellShiftPx": 4
+    },
+    {
+      "leg": "frl",
+      "step": 0,
+      "cellShiftPx": 4
+    },
+    {
+      "leg": "nfl",
+      "step": 1,
+      "cellShiftPx": 4
+    },
+    {
+      "leg": "frl",
+      "step": 1,
+      "cellShiftPx": 4
+    },
+    {
+      "leg": "nfl",
+      "step": 2,
+      "cellShiftPx": 4
+    },
+    {
+      "leg": "frl",
+      "step": 2,
+      "cellShiftPx": 4
+    },
+    {
+      "leg": "nrl",
+      "step": 4,
+      "cellShiftPx": 4
+    },
+    {
+      "leg": "ffl",
+      "step": 4,
+      "cellShiftPx": 4
+    },
+    {
+      "leg": "nrl",
+      "step": 5,
+      "cellShiftPx": 4
+    },
+    {
+      "leg": "ffl",
+      "step": 5,
+      "cellShiftPx": 4
+    },
+    {
+      "leg": "nrl",
+      "step": 6,
+      "cellShiftPx": 4
+    },
+    {
+      "leg": "ffl",
+      "step": 6,
+      "cellShiftPx": 4
+    }
+  ],
+  "arcLeadRelEnemyX": -62,
+  "arcPixels": {
+    "14": 111,
+    "15": 28
+  },
+  "lensUnderWindupTint": {
+    "tint": [
+      1.0,
+      0.7,
+      0.66
+    ],
+    "metric": "Rec.709 luma of sRGB values after the runtime multiply; housing = opaque eye-box pixels outside the bezel",
+    "v3_f12_tinted": {
+      "lensPx": 137,
+      "lensMeanLuma": 0.488,
+      "lensPeakLuma": 0.71,
+      "lensBrightShare": 0.431,
+      "housingMeanLuma": 0.138,
+      "lensMinusHousing": 0.35
+    },
+    "v2_f12_tinted": {
+      "lensPx": 137,
+      "lensMeanLuma": 0.457,
+      "lensPeakLuma": 0.71,
+      "lensBrightShare": 0.175,
+      "housingMeanLuma": 0.138,
+      "lensMinusHousing": 0.319
+    },
+    "v3_f13_tinted": {
+      "lensPx": 137,
+      "lensMeanLuma": 0.563,
+      "lensPeakLuma": 0.71,
+      "lensBrightShare": 0.591,
+      "housingMeanLuma": 0.138,
+      "lensMinusHousing": 0.425
+    },
+    "v2_f13_tinted": {
+      "lensPx": 137,
+      "lensMeanLuma": 0.492,
+      "lensPeakLuma": 0.71,
+      "lensBrightShare": 0.358,
+      "housingMeanLuma": 0.138,
+      "lensMinusHousing": 0.354
+    },
+    "idle_f0_untinted": {
+      "lensPx": 137,
+      "lensMeanLuma": 0.456,
+      "lensPeakLuma": 0.95,
+      "lensBrightShare": 0.343,
+      "housingMeanLuma": 0.183,
+      "lensMinusHousing": 0.273
+    }
+  },
+  "defeatShadow": {
+    "18": {
+      "addedPx": 107,
+      "belowFloorRowPx": 30,
+      "halfWidth": 30,
+      "halfHeight": 4.5,
+      "peakDensity": 0.375
+    },
+    "19": {
+      "addedPx": 191,
+      "belowFloorRowPx": 81,
+      "halfWidth": 40,
+      "halfHeight": 5.0,
+      "peakDensity": 0.5
+    },
+    "20": {
+      "addedPx": 203,
+      "belowFloorRowPx": 91,
+      "halfWidth": 46,
+      "halfHeight": 5.0,
+      "peakDensity": 0.5
+    }
+  },
+  "frameReport": [
+    {
+      "index": 0,
+      "state": "idle",
+      "opaqueBBox": [
+        36,
+        1,
+        132,
+        61
+      ],
+      "colourCount": 17,
+      "opaquePixels": 3704,
+      "pixelsDifferentFromV2": 0,
+      "anchorRowRuns": [
+        [
+          17,
+          32
+        ],
+        [
+          95,
+          110
+        ]
+      ]
+    },
+    {
+      "index": 1,
+      "state": "idle",
+      "opaqueBBox": [
+        36,
+        2,
+        132,
+        61
+      ],
+      "colourCount": 17,
+      "opaquePixels": 3662,
+      "pixelsDifferentFromV2": 0,
+      "anchorRowRuns": [
+        [
+          17,
+          32
+        ],
+        [
+          95,
+          110
+        ]
+      ]
+    },
+    {
+      "index": 2,
+      "state": "idle",
+      "opaqueBBox": [
+        36,
+        2,
+        132,
+        61
+      ],
+      "colourCount": 17,
+      "opaquePixels": 3662,
+      "pixelsDifferentFromV2": 0,
+      "anchorRowRuns": [
+        [
+          17,
+          32
+        ],
+        [
+          95,
+          110
+        ]
+      ]
+    },
+    {
+      "index": 3,
+      "state": "idle",
+      "opaqueBBox": [
+        36,
+        1,
+        132,
+        61
+      ],
+      "colourCount": 17,
+      "opaquePixels": 3721,
+      "pixelsDifferentFromV2": 0,
+      "anchorRowRuns": [
+        [
+          17,
+          32
+        ],
+        [
+          95,
+          110
+        ]
+      ]
+    },
+    {
+      "index": 4,
+      "state": "move",
+      "opaqueBBox": [
+        36,
+        2,
+        130,
+        61
+      ],
+      "colourCount": 17,
+      "opaquePixels": 3663,
+      "pixelsDifferentFromV2": 0,
+      "anchorRowRuns": [
+        [
+          17,
+          32
+        ]
+      ]
+    },
+    {
+      "index": 5,
+      "state": "move",
+      "opaqueBBox": [
+        38,
+        1,
+        129,
+        61
+      ],
+      "colourCount": 17,
+      "opaquePixels": 3582,
+      "pixelsDifferentFromV2": 0,
+      "anchorRowRuns": [
+        [
+          21,
+          36
+        ]
+      ]
+    },
+    {
+      "index": 6,
+      "state": "move",
+      "opaqueBBox": [
+        38,
+        1,
+        129,
+        61
+      ],
+      "colourCount": 17,
+      "opaquePixels": 3442,
+      "pixelsDifferentFromV2": 0,
+      "anchorRowRuns": [
+        [
+          25,
+          40
+        ]
+      ]
+    },
+    {
+      "index": 7,
+      "state": "move",
+      "opaqueBBox": [
+        38,
+        1,
+        129,
+        61
+      ],
+      "colourCount": 17,
+      "opaquePixels": 3286,
+      "pixelsDifferentFromV2": 0,
+      "anchorRowRuns": [
+        [
+          29,
+          44
+        ]
+      ]
+    },
+    {
+      "index": 8,
+      "state": "move",
+      "opaqueBBox": [
+        38,
+        2,
+        129,
+        61
+      ],
+      "colourCount": 17,
+      "opaquePixels": 3241,
+      "pixelsDifferentFromV2": 0,
+      "anchorRowRuns": [
+        [
+          83,
+          98
+        ]
+      ]
+    },
+    {
+      "index": 9,
+      "state": "move",
+      "opaqueBBox": [
+        38,
+        1,
+        129,
+        61
+      ],
+      "colourCount": 17,
+      "opaquePixels": 3439,
+      "pixelsDifferentFromV2": 0,
+      "anchorRowRuns": [
+        [
+          87,
+          102
+        ]
+      ]
+    },
+    {
+      "index": 10,
+      "state": "move",
+      "opaqueBBox": [
+        38,
+        1,
+        129,
+        61
+      ],
+      "colourCount": 17,
+      "opaquePixels": 3587,
+      "pixelsDifferentFromV2": 0,
+      "anchorRowRuns": [
+        [
+          91,
+          106
+        ]
+      ]
+    },
+    {
+      "index": 11,
+      "state": "move",
+      "opaqueBBox": [
+        38,
+        1,
+        132,
+        61
+      ],
+      "colourCount": 17,
+      "opaquePixels": 3700,
+      "pixelsDifferentFromV2": 0,
+      "anchorRowRuns": [
+        [
+          95,
+          110
+        ]
+      ]
+    },
+    {
+      "index": 12,
+      "state": "windup",
+      "opaqueBBox": [
+        38,
+        1,
+        132,
+        61
+      ],
+      "colourCount": 16,
+      "opaquePixels": 3671,
+      "pixelsDifferentFromV2": 88,
+      "anchorRowRuns": [
+        [
+          95,
+          110
+        ]
+      ]
+    },
+    {
+      "index": 13,
+      "state": "windup",
+      "opaqueBBox": [
+        40,
+        0,
+        132,
+        61
+      ],
+      "colourCount": 16,
+      "opaquePixels": 3654,
+      "pixelsDifferentFromV2": 78,
+      "anchorRowRuns": [
+        [
+          95,
+          110
+        ]
+      ]
+    },
+    {
+      "index": 14,
+      "state": "strike",
+      "opaqueBBox": [
+        4,
+        2,
+        132,
+        61
+      ],
+      "colourCount": 16,
+      "opaquePixels": 3915,
+      "pixelsDifferentFromV2": 111,
+      "anchorRowRuns": [
+        [
+          1,
+          1
+        ],
+        [
+          4,
+          20
+        ],
+        [
+          95,
+          110
+        ]
+      ]
+    },
+    {
+      "index": 15,
+      "state": "strike",
+      "opaqueBBox": [
+        3,
+        2,
+        132,
+        61
+      ],
+      "colourCount": 16,
+      "opaquePixels": 3743,
+      "pixelsDifferentFromV2": 28,
+      "anchorRowRuns": [
+        [
+          95,
+          110
+        ]
+      ]
+    },
+    {
+      "index": 16,
+      "state": "hit",
+      "opaqueBBox": [
+        36,
+        1,
+        132,
+        61
+      ],
+      "colourCount": 17,
+      "opaquePixels": 3686,
+      "pixelsDifferentFromV2": 0,
+      "anchorRowRuns": [
+        [
+          17,
+          32
+        ],
+        [
+          95,
+          110
+        ]
+      ]
+    },
+    {
+      "index": 17,
+      "state": "hit",
+      "opaqueBBox": [
+        36,
+        1,
+        132,
+        61
+      ],
+      "colourCount": 17,
+      "opaquePixels": 3706,
+      "pixelsDifferentFromV2": 0,
+      "anchorRowRuns": [
+        [
+          17,
+          32
+        ],
+        [
+          95,
+          110
+        ]
+      ]
+    },
+    {
+      "index": 18,
+      "state": "defeat",
+      "opaqueBBox": [
+        36,
+        4,
+        132,
+        63
+      ],
+      "colourCount": 16,
+      "opaquePixels": 3691,
+      "pixelsDifferentFromV2": 107,
+      "anchorRowRuns": [
+        [
+          17,
+          32
+        ],
+        [
+          36,
+          36
+        ],
+        [
+          38,
+          38
+        ],
+        [
+          40,
+          40
+        ],
+        [
+          42,
+          42
+        ],
+        [
+          44,
+          44
+        ],
+        [
+          46,
+          46
+        ],
+        [
+          48,
+          48
+        ],
+        [
+          50,
+          50
+        ],
+        [
+          52,
+          52
+        ],
+        [
+          54,
+          54
+        ],
+        [
+          56,
+          56
+        ],
+        [
+          58,
+          58
+        ],
+        [
+          60,
+          60
+        ],
+        [
+          62,
+          62
+        ],
+        [
+          64,
+          64
+        ],
+        [
+          66,
+          66
+        ],
+        [
+          68,
+          68
+        ],
+        [
+          70,
+          70
+        ],
+        [
+          72,
+          72
+        ],
+        [
+          74,
+          74
+        ],
+        [
+          76,
+          76
+        ],
+        [
+          78,
+          78
+        ],
+        [
+          80,
+          80
+        ],
+        [
+          82,
+          82
+        ],
+        [
+          84,
+          84
+        ],
+        [
+          86,
+          86
+        ],
+        [
+          88,
+          88
+        ],
+        [
+          90,
+          90
+        ],
+        [
+          92,
+          92
+        ],
+        [
+          95,
+          110
+        ]
+      ]
+    },
+    {
+      "index": 19,
+      "state": "defeat",
+      "opaqueBBox": [
+        36,
+        8,
+        132,
+        65
+      ],
+      "colourCount": 15,
+      "opaquePixels": 3615,
+      "pixelsDifferentFromV2": 191,
+      "anchorRowRuns": [
+        [
+          17,
+          32
+        ],
+        [
+          34,
+          34
+        ],
+        [
+          36,
+          36
+        ],
+        [
+          38,
+          38
+        ],
+        [
+          40,
+          40
+        ],
+        [
+          42,
+          42
+        ],
+        [
+          44,
+          44
+        ],
+        [
+          46,
+          46
+        ],
+        [
+          48,
+          48
+        ],
+        [
+          50,
+          50
+        ],
+        [
+          52,
+          52
+        ],
+        [
+          54,
+          54
+        ],
+        [
+          56,
+          56
+        ],
+        [
+          58,
+          58
+        ],
+        [
+          60,
+          60
+        ],
+        [
+          62,
+          62
+        ],
+        [
+          64,
+          64
+        ],
+        [
+          66,
+          66
+        ],
+        [
+          68,
+          68
+        ],
+        [
+          70,
+          70
+        ],
+        [
+          72,
+          72
+        ],
+        [
+          74,
+          74
+        ],
+        [
+          76,
+          76
+        ],
+        [
+          78,
+          78
+        ],
+        [
+          80,
+          80
+        ],
+        [
+          82,
+          82
+        ],
+        [
+          84,
+          84
+        ],
+        [
+          86,
+          86
+        ],
+        [
+          88,
+          88
+        ],
+        [
+          90,
+          90
+        ],
+        [
+          92,
+          92
+        ],
+        [
+          94,
+          110
+        ]
+      ]
+    },
+    {
+      "index": 20,
+      "state": "defeat",
+      "opaqueBBox": [
+        36,
+        7,
+        132,
+        65
+      ],
+      "colourCount": 13,
+      "opaquePixels": 3540,
+      "pixelsDifferentFromV2": 203,
+      "anchorRowRuns": [
+        [
+          17,
+          32
+        ],
+        [
+          34,
+          34
+        ],
+        [
+          36,
+          36
+        ],
+        [
+          38,
+          38
+        ],
+        [
+          40,
+          40
+        ],
+        [
+          42,
+          42
+        ],
+        [
+          44,
+          44
+        ],
+        [
+          46,
+          46
+        ],
+        [
+          48,
+          48
+        ],
+        [
+          50,
+          50
+        ],
+        [
+          52,
+          52
+        ],
+        [
+          54,
+          54
+        ],
+        [
+          56,
+          56
+        ],
+        [
+          58,
+          58
+        ],
+        [
+          60,
+          60
+        ],
+        [
+          62,
+          62
+        ],
+        [
+          64,
+          64
+        ],
+        [
+          66,
+          66
+        ],
+        [
+          68,
+          68
+        ],
+        [
+          70,
+          70
+        ],
+        [
+          72,
+          72
+        ],
+        [
+          74,
+          74
+        ],
+        [
+          76,
+          76
+        ],
+        [
+          78,
+          78
+        ],
+        [
+          80,
+          80
+        ],
+        [
+          82,
+          82
+        ],
+        [
+          84,
+          84
+        ],
+        [
+          86,
+          86
+        ],
+        [
+          88,
+          88
+        ],
+        [
+          90,
+          90
+        ],
+        [
+          92,
+          92
+        ],
+        [
+          94,
+          110
+        ]
+      ]
+    }
+  ],
+  "frameFiles": [
+    {
+      "index": 0,
+      "state": "idle",
+      "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/frames_m8-anim-v03_53479e75/rpg-2-star-ocean-the-second_sentry_anim-f00-idle0_m8-anim-v03_20261015-041706-53479e75.png",
+      "sha256": "89809d92d993f7bb40244a6c1ee2c5a28e969028c09af6f1cc9417bc8387f16f"
+    },
+    {
+      "index": 1,
+      "state": "idle",
+      "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/frames_m8-anim-v03_53479e75/rpg-2-star-ocean-the-second_sentry_anim-f01-idle1_m8-anim-v03_20261015-041706-53479e75.png",
+      "sha256": "63be671db0fa476878199c9a52b9492b8cf31fa7ef9119b0584a388cdf6ace03"
+    },
+    {
+      "index": 2,
+      "state": "idle",
+      "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/frames_m8-anim-v03_53479e75/rpg-2-star-ocean-the-second_sentry_anim-f02-idle2_m8-anim-v03_20261015-041706-53479e75.png",
+      "sha256": "72a241b234d996af67e590086e645899b4efb203909720ccfd98e8f3ab45458b"
+    },
+    {
+      "index": 3,
+      "state": "idle",
+      "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/frames_m8-anim-v03_53479e75/rpg-2-star-ocean-the-second_sentry_anim-f03-idle3_m8-anim-v03_20261015-041706-53479e75.png",
+      "sha256": "eeb4521433f950ed0e607cb24f6d68d2057071e8efa9cc6826d259f49aeac165"
+    },
+    {
+      "index": 4,
+      "state": "move",
+      "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/frames_m8-anim-v03_53479e75/rpg-2-star-ocean-the-second_sentry_anim-f04-move0_m8-anim-v03_20261015-041706-53479e75.png",
+      "sha256": "b7db274b1133300e069489edbc9da66d3e59a4cbdd200658977916a1b3785b8e"
+    },
+    {
+      "index": 5,
+      "state": "move",
+      "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/frames_m8-anim-v03_53479e75/rpg-2-star-ocean-the-second_sentry_anim-f05-move1_m8-anim-v03_20261015-041706-53479e75.png",
+      "sha256": "0fa56bacd098f4ff0e58e80f91e1f09baf39fbcebe360ea423d9856f09b244ca"
+    },
+    {
+      "index": 6,
+      "state": "move",
+      "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/frames_m8-anim-v03_53479e75/rpg-2-star-ocean-the-second_sentry_anim-f06-move2_m8-anim-v03_20261015-041706-53479e75.png",
+      "sha256": "6b2390b33f2a38abb23fca6e302ddfdde2ed274695995f06d7a12699c549df2b"
+    },
+    {
+      "index": 7,
+      "state": "move",
+      "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/frames_m8-anim-v03_53479e75/rpg-2-star-ocean-the-second_sentry_anim-f07-move3_m8-anim-v03_20261015-041706-53479e75.png",
+      "sha256": "b26e318a140b4c9111b1795e7b85caf5b719753802376c4b23bc0c1531c55df1"
+    },
+    {
+      "index": 8,
+      "state": "move",
+      "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/frames_m8-anim-v03_53479e75/rpg-2-star-ocean-the-second_sentry_anim-f08-move4_m8-anim-v03_20261015-041706-53479e75.png",
+      "sha256": "cb2996c5cc89dae4e56d66e6a37077f3c30258c5a2e87f40eace10aef0f1522b"
+    },
+    {
+      "index": 9,
+      "state": "move",
+      "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/frames_m8-anim-v03_53479e75/rpg-2-star-ocean-the-second_sentry_anim-f09-move5_m8-anim-v03_20261015-041706-53479e75.png",
+      "sha256": "8b40e5e5386a1a10f423fe86aaff1e3e9b9298034bf886836e1c0a01e45debc2"
+    },
+    {
+      "index": 10,
+      "state": "move",
+      "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/frames_m8-anim-v03_53479e75/rpg-2-star-ocean-the-second_sentry_anim-f10-move6_m8-anim-v03_20261015-041706-53479e75.png",
+      "sha256": "3a271756c1614eb54790e96e867eb60fba4473a72044dd186b06064c201e153c"
+    },
+    {
+      "index": 11,
+      "state": "move",
+      "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/frames_m8-anim-v03_53479e75/rpg-2-star-ocean-the-second_sentry_anim-f11-move7_m8-anim-v03_20261015-041706-53479e75.png",
+      "sha256": "ffb284cfd4dd9dbe5a022b810e3111219c59dc6eae22a1895d4fb0605be37412"
+    },
+    {
+      "index": 12,
+      "state": "windup",
+      "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/frames_m8-anim-v03_53479e75/rpg-2-star-ocean-the-second_sentry_anim-f12-windup0_m8-anim-v03_20261015-041706-53479e75.png",
+      "sha256": "6ffefb0912cd08efc205333e3f08af2d808a8c6d6064b577aeaa1b4f091c5c61"
+    },
+    {
+      "index": 13,
+      "state": "windup",
+      "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/frames_m8-anim-v03_53479e75/rpg-2-star-ocean-the-second_sentry_anim-f13-windup1_m8-anim-v03_20261015-041706-53479e75.png",
+      "sha256": "7798a747f8d4f9b0352d9e145dd2b35635ffc589788e7ed70364c04289819f4c"
+    },
+    {
+      "index": 14,
+      "state": "strike",
+      "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/frames_m8-anim-v03_53479e75/rpg-2-star-ocean-the-second_sentry_anim-f14-strike0_m8-anim-v03_20261015-041706-53479e75.png",
+      "sha256": "44844bd9d806eac1f096fa6f97fd5b400f5565de14a1186b6f997c2e31be9b9a"
+    },
+    {
+      "index": 15,
+      "state": "strike",
+      "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/frames_m8-anim-v03_53479e75/rpg-2-star-ocean-the-second_sentry_anim-f15-strike1_m8-anim-v03_20261015-041706-53479e75.png",
+      "sha256": "1e83b586cb0a5251d0073cd68774b33c30c743cd9f3b9e4ec5b65c662c773bc7"
+    },
+    {
+      "index": 16,
+      "state": "hit",
+      "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/frames_m8-anim-v03_53479e75/rpg-2-star-ocean-the-second_sentry_anim-f16-hit0_m8-anim-v03_20261015-041706-53479e75.png",
+      "sha256": "3968b2c5e348f67c46310fe7bae0139f910070500a54191265f7406453705d59"
+    },
+    {
+      "index": 17,
+      "state": "hit",
+      "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/frames_m8-anim-v03_53479e75/rpg-2-star-ocean-the-second_sentry_anim-f17-hit1_m8-anim-v03_20261015-041706-53479e75.png",
+      "sha256": "9b3c325dbc2282c613d88799f926df92db8ae71354cbf247ad5a03e6a7e07904"
+    },
+    {
+      "index": 18,
+      "state": "defeat",
+      "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/frames_m8-anim-v03_53479e75/rpg-2-star-ocean-the-second_sentry_anim-f18-defeat0_m8-anim-v03_20261015-041706-53479e75.png",
+      "sha256": "5deff16d4a6f2ed06b98936db047f1ecab1e0c60a72ac7ec59532f6402c02019"
+    },
+    {
+      "index": 19,
+      "state": "defeat",
+      "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/frames_m8-anim-v03_53479e75/rpg-2-star-ocean-the-second_sentry_anim-f19-defeat1_m8-anim-v03_20261015-041706-53479e75.png",
+      "sha256": "bbc9455400e8da06bf0514c7c4d58576984c7a49d9fc694ed2e078ffbc6beba9"
+    },
+    {
+      "index": 20,
+      "state": "defeat",
+      "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/frames_m8-anim-v03_53479e75/rpg-2-star-ocean-the-second_sentry_anim-f20-defeat2_m8-anim-v03_20261015-041706-53479e75.png",
+      "sha256": "93c342457548ea98aeb90091f0cb3d296c1c51cc8d68e50b8d4b1620c7bfa322"
+    }
+  ],
+  "palette": {
+    "o": "#101217",
+    "1": "#1b1f26",
+    "2": "#282e37",
+    "3": "#384049",
+    "4": "#4c5562",
+    "5": "#67717e",
+    "6": "#8b95a1",
+    "a": "#36291b",
+    "b": "#5a462b",
+    "c": "#806439",
+    "d": "#a6864f",
+    "e": "#cbb077",
+    "r": "#4b3627",
+    "x": "#0c363c",
+    "y": "#188a92",
+    "z": "#4bd5d2",
+    "w": "#c6fff6"
+  },
+  "alphaValues": [
+    0,
+    255
+  ],
+  "method": "The v2 author script is imported unchanged (rig, poses, palette, compositor). v3 swaps the wind-up lens paint (two new lens modes inside the bezel) and places the v2 cell 20 px from the left of a 132x66 cell, then fills transparent pixels with explicit claw-arc and shadow pixels. No image is read, traced, resampled, resized or generated by AI.",
+  "authorScript": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/rpg-2-star-ocean-the-second_scifi-sentry-automaton_battle-animation-pilot-author_m8-anim-v03_20261015-041413-21ec8744.py",
+  "authorScriptSha256": "4703de8f199f1ca545a12eece5414683ba9437f4826daba2ce40a922e0fffbef",
+  "v2AuthorScript": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/rpg-2-star-ocean-the-second_scifi-sentry-automaton_battle-animation-pilot-author_m8-anim-v02_20261014-225908-7e2215bc.py",
+  "v2AuthorScriptSha256": "2dd31fedb55ea34dd0e969c95d264ccff608dd2dd248f233079aa08f2c7646be",
+  "previews": "none: no contact sheet, collage or GIF; review uses separate real 1280x720 Godot captures",
+  "scope": "sentry enemy only; candidate asset, not referenced by battle_arena.gd",
+  "createdAt": "2026-10-15T04:17:06"
+}

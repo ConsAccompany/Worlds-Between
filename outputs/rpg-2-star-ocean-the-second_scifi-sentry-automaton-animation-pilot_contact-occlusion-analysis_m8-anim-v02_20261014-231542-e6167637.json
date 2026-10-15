@@ -1,0 +1,1435 @@
+{
+ "project": "rpg-2-star-ocean-the-second",
+ "purpose": "sentry eye/claw coverage by melee heroes at real AI spacing, v1 against v2 (review aid; not art acceptance)",
+ "method": [
+  "Composites the real native hero combat frames over the sentry strip cells in the battle's logical",
+  "640x360 space, the way battle_arena.gd draws them: hero cell at (hero_x - 30, 272 - 73), sentry",
+  "cell at (enemy_x - anchor_x, 272 - 60). Heroes stand at their real AI melee spacing: the sentry",
+  "stops 53 px from its target, the hero (range 61) closes to 53 px and Liang Xu (range 65) to 57 px.",
+  "",
+  "Expressive regions per sentry frame (opaque sentry pixels inside):",
+  "  eye  - the brass bezel box (static x 10..30, y 12..32) moved by the frame's head offset",
+  "  claw - the near-front foot and lower shin box (static x 1..19, y 45..59) moved by the foot offset",
+  "Covered = a hero pixel is drawn on top of it. In v2 the sentry draws over the fighters during its own",
+  "strike, so nothing covers its strike frames; the hero pixels it hides are reported instead.",
+  ""
+ ],
+ "enemyX": 353,
+ "spacing": {
+  "protagonist-male": 53,
+  "protagonist-female": 53,
+  "liang-xu": 57
+ },
+ "v1": {
+  "anchorX": 48,
+  "cell": [
+   96,
+   62
+  ],
+  "sentryOnTopStates": [],
+  "summary": {
+   "hit|attack|claw": {
+    "mean": 0.499,
+    "max": 0.624,
+    "n": 18
+   },
+   "hit|attack|eye": {
+    "mean": 0.17,
+    "max": 0.426,
+    "n": 18
+   },
+   "hit|skill|claw": {
+    "mean": 0.468,
+    "max": 0.545,
+    "n": 18
+   },
+   "hit|skill|eye": {
+    "mean": 0.359,
+    "max": 0.644,
+    "n": 18
+   },
+   "strike|guard|claw": {
+    "mean": 0.442,
+    "max": 0.502,
+    "n": 12
+   },
+   "strike|guard|eye": {
+    "mean": 0.264,
+    "max": 0.345,
+    "n": 12
+   },
+   "strike|hit|claw": {
+    "mean": 0.272,
+    "max": 0.311,
+    "n": 12
+   },
+   "strike|hit|eye": {
+    "mean": 0.215,
+    "max": 0.308,
+    "n": 12
+   },
+   "strike|idle|claw": {
+    "mean": 0.439,
+    "max": 0.458,
+    "n": 12
+   },
+   "strike|idle|eye": {
+    "mean": 0.208,
+    "max": 0.297,
+    "n": 12
+   },
+   "windup|attack|claw": {
+    "mean": 0.344,
+    "max": 0.592,
+    "n": 18
+   },
+   "windup|attack|eye": {
+    "mean": 0.154,
+    "max": 0.397,
+    "n": 18
+   },
+   "windup|guard|claw": {
+    "mean": 0.208,
+    "max": 0.316,
+    "n": 12
+   },
+   "windup|guard|eye": {
+    "mean": 0.068,
+    "max": 0.122,
+    "n": 12
+   },
+   "windup|idle|claw": {
+    "mean": 0.373,
+    "max": 0.417,
+    "n": 12
+   },
+   "windup|idle|eye": {
+    "mean": 0.029,
+    "max": 0.059,
+    "n": 12
+   }
+  },
+  "rows": {
+   "windup|f8|protagonist-male|idle|idle-right-phase-01": {
+    "eye": 0.059,
+    "claw": 0.417,
+    "heroPixelsHidden": 0
+   },
+   "windup|f8|protagonist-male|idle|idle-right-phase-02": {
+    "eye": 0.059,
+    "claw": 0.417,
+    "heroPixelsHidden": 0
+   },
+   "windup|f8|protagonist-male|attack|attack-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.345,
+    "heroPixelsHidden": 0
+   },
+   "windup|f8|protagonist-male|attack|attack-right-phase-02": {
+    "eye": 0.397,
+    "claw": 0.359,
+    "heroPixelsHidden": 0
+   },
+   "windup|f8|protagonist-male|attack|attack-right-phase-03": {
+    "eye": 0.175,
+    "claw": 0.442,
+    "heroPixelsHidden": 0
+   },
+   "windup|f8|protagonist-male|guard|guard-right-phase-01": {
+    "eye": 0.12,
+    "claw": 0.316,
+    "heroPixelsHidden": 0
+   },
+   "windup|f8|protagonist-male|guard|guard-right-phase-02": {
+    "eye": 0.122,
+    "claw": 0.316,
+    "heroPixelsHidden": 0
+   },
+   "windup|f8|protagonist-female|idle|idle-right-phase-01": {
+    "eye": 0.059,
+    "claw": 0.417,
+    "heroPixelsHidden": 0
+   },
+   "windup|f8|protagonist-female|idle|idle-right-phase-02": {
+    "eye": 0.059,
+    "claw": 0.417,
+    "heroPixelsHidden": 0
+   },
+   "windup|f8|protagonist-female|attack|attack-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.345,
+    "heroPixelsHidden": 0
+   },
+   "windup|f8|protagonist-female|attack|attack-right-phase-02": {
+    "eye": 0.397,
+    "claw": 0.359,
+    "heroPixelsHidden": 0
+   },
+   "windup|f8|protagonist-female|attack|attack-right-phase-03": {
+    "eye": 0.175,
+    "claw": 0.442,
+    "heroPixelsHidden": 0
+   },
+   "windup|f8|protagonist-female|guard|guard-right-phase-01": {
+    "eye": 0.12,
+    "claw": 0.316,
+    "heroPixelsHidden": 0
+   },
+   "windup|f8|protagonist-female|guard|guard-right-phase-02": {
+    "eye": 0.122,
+    "claw": 0.316,
+    "heroPixelsHidden": 0
+   },
+   "windup|f8|liang-xu|idle|idle-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.325,
+    "heroPixelsHidden": 0
+   },
+   "windup|f8|liang-xu|idle|idle-right-phase-02": {
+    "eye": 0.0,
+    "claw": 0.345,
+    "heroPixelsHidden": 0
+   },
+   "windup|f8|liang-xu|attack|attack-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.218,
+    "heroPixelsHidden": 0
+   },
+   "windup|f8|liang-xu|attack|attack-right-phase-02": {
+    "eye": 0.277,
+    "claw": 0.369,
+    "heroPixelsHidden": 0
+   },
+   "windup|f8|liang-xu|attack|attack-right-phase-03": {
+    "eye": 0.07,
+    "claw": 0.592,
+    "heroPixelsHidden": 0
+   },
+   "windup|f8|liang-xu|guard|guard-right-phase-01": {
+    "eye": 0.011,
+    "claw": 0.17,
+    "heroPixelsHidden": 0
+   },
+   "windup|f8|liang-xu|guard|guard-right-phase-02": {
+    "eye": 0.011,
+    "claw": 0.17,
+    "heroPixelsHidden": 0
+   },
+   "windup|f9|protagonist-male|idle|idle-right-phase-01": {
+    "eye": 0.027,
+    "claw": 0.385,
+    "heroPixelsHidden": 0
+   },
+   "windup|f9|protagonist-male|idle|idle-right-phase-02": {
+    "eye": 0.027,
+    "claw": 0.385,
+    "heroPixelsHidden": 0
+   },
+   "windup|f9|protagonist-male|attack|attack-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.22,
+    "heroPixelsHidden": 0
+   },
+   "windup|f9|protagonist-male|attack|attack-right-phase-02": {
+    "eye": 0.367,
+    "claw": 0.24,
+    "heroPixelsHidden": 0
+   },
+   "windup|f9|protagonist-male|attack|attack-right-phase-03": {
+    "eye": 0.125,
+    "claw": 0.455,
+    "heroPixelsHidden": 0
+   },
+   "windup|f9|protagonist-male|guard|guard-right-phase-01": {
+    "eye": 0.079,
+    "claw": 0.195,
+    "heroPixelsHidden": 0
+   },
+   "windup|f9|protagonist-male|guard|guard-right-phase-02": {
+    "eye": 0.079,
+    "claw": 0.195,
+    "heroPixelsHidden": 0
+   },
+   "windup|f9|protagonist-female|idle|idle-right-phase-01": {
+    "eye": 0.027,
+    "claw": 0.385,
+    "heroPixelsHidden": 0
+   },
+   "windup|f9|protagonist-female|idle|idle-right-phase-02": {
+    "eye": 0.027,
+    "claw": 0.385,
+    "heroPixelsHidden": 0
+   },
+   "windup|f9|protagonist-female|attack|attack-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.22,
+    "heroPixelsHidden": 0
+   },
+   "windup|f9|protagonist-female|attack|attack-right-phase-02": {
+    "eye": 0.367,
+    "claw": 0.24,
+    "heroPixelsHidden": 0
+   },
+   "windup|f9|protagonist-female|attack|attack-right-phase-03": {
+    "eye": 0.125,
+    "claw": 0.455,
+    "heroPixelsHidden": 0
+   },
+   "windup|f9|protagonist-female|guard|guard-right-phase-01": {
+    "eye": 0.079,
+    "claw": 0.195,
+    "heroPixelsHidden": 0
+   },
+   "windup|f9|protagonist-female|guard|guard-right-phase-02": {
+    "eye": 0.079,
+    "claw": 0.195,
+    "heroPixelsHidden": 0
+   },
+   "windup|f9|liang-xu|idle|idle-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.285,
+    "heroPixelsHidden": 0
+   },
+   "windup|f9|liang-xu|idle|idle-right-phase-02": {
+    "eye": 0.0,
+    "claw": 0.31,
+    "heroPixelsHidden": 0
+   },
+   "windup|f9|liang-xu|attack|attack-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.08,
+    "heroPixelsHidden": 0
+   },
+   "windup|f9|liang-xu|attack|attack-right-phase-02": {
+    "eye": 0.249,
+    "claw": 0.255,
+    "heroPixelsHidden": 0
+   },
+   "windup|f9|liang-xu|attack|attack-right-phase-03": {
+    "eye": 0.041,
+    "claw": 0.56,
+    "heroPixelsHidden": 0
+   },
+   "windup|f9|liang-xu|guard|guard-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.055,
+    "heroPixelsHidden": 0
+   },
+   "windup|f9|liang-xu|guard|guard-right-phase-02": {
+    "eye": 0.0,
+    "claw": 0.055,
+    "heroPixelsHidden": 0
+   },
+   "strike|f10|protagonist-male|hit|hit-right-phase-01": {
+    "eye": 0.308,
+    "claw": 0.308,
+    "heroPixelsHidden": 0
+   },
+   "strike|f10|protagonist-male|hit|hit-right-phase-02": {
+    "eye": 0.308,
+    "claw": 0.308,
+    "heroPixelsHidden": 0
+   },
+   "strike|f10|protagonist-male|guard|guard-right-phase-01": {
+    "eye": 0.345,
+    "claw": 0.502,
+    "heroPixelsHidden": 0
+   },
+   "strike|f10|protagonist-male|guard|guard-right-phase-02": {
+    "eye": 0.34,
+    "claw": 0.502,
+    "heroPixelsHidden": 0
+   },
+   "strike|f10|protagonist-male|idle|idle-right-phase-01": {
+    "eye": 0.295,
+    "claw": 0.458,
+    "heroPixelsHidden": 0
+   },
+   "strike|f10|protagonist-male|idle|idle-right-phase-02": {
+    "eye": 0.297,
+    "claw": 0.458,
+    "heroPixelsHidden": 0
+   },
+   "strike|f10|protagonist-female|hit|hit-right-phase-01": {
+    "eye": 0.308,
+    "claw": 0.308,
+    "heroPixelsHidden": 0
+   },
+   "strike|f10|protagonist-female|hit|hit-right-phase-02": {
+    "eye": 0.308,
+    "claw": 0.308,
+    "heroPixelsHidden": 0
+   },
+   "strike|f10|protagonist-female|guard|guard-right-phase-01": {
+    "eye": 0.345,
+    "claw": 0.502,
+    "heroPixelsHidden": 0
+   },
+   "strike|f10|protagonist-female|guard|guard-right-phase-02": {
+    "eye": 0.34,
+    "claw": 0.502,
+    "heroPixelsHidden": 0
+   },
+   "strike|f10|protagonist-female|idle|idle-right-phase-01": {
+    "eye": 0.295,
+    "claw": 0.458,
+    "heroPixelsHidden": 0
+   },
+   "strike|f10|protagonist-female|idle|idle-right-phase-02": {
+    "eye": 0.297,
+    "claw": 0.458,
+    "heroPixelsHidden": 0
+   },
+   "strike|f10|liang-xu|hit|hit-right-phase-01": {
+    "eye": 0.1,
+    "claw": 0.198,
+    "heroPixelsHidden": 0
+   },
+   "strike|f10|liang-xu|hit|hit-right-phase-02": {
+    "eye": 0.1,
+    "claw": 0.194,
+    "heroPixelsHidden": 0
+   },
+   "strike|f10|liang-xu|guard|guard-right-phase-01": {
+    "eye": 0.209,
+    "claw": 0.326,
+    "heroPixelsHidden": 0
+   },
+   "strike|f10|liang-xu|guard|guard-right-phase-02": {
+    "eye": 0.213,
+    "claw": 0.326,
+    "heroPixelsHidden": 0
+   },
+   "strike|f10|liang-xu|idle|idle-right-phase-01": {
+    "eye": 0.161,
+    "claw": 0.41,
+    "heroPixelsHidden": 0
+   },
+   "strike|f10|liang-xu|idle|idle-right-phase-02": {
+    "eye": 0.161,
+    "claw": 0.423,
+    "heroPixelsHidden": 0
+   },
+   "strike|f11|protagonist-male|hit|hit-right-phase-01": {
+    "eye": 0.261,
+    "claw": 0.311,
+    "heroPixelsHidden": 0
+   },
+   "strike|f11|protagonist-male|hit|hit-right-phase-02": {
+    "eye": 0.261,
+    "claw": 0.311,
+    "heroPixelsHidden": 0
+   },
+   "strike|f11|protagonist-male|guard|guard-right-phase-01": {
+    "eye": 0.281,
+    "claw": 0.498,
+    "heroPixelsHidden": 0
+   },
+   "strike|f11|protagonist-male|guard|guard-right-phase-02": {
+    "eye": 0.277,
+    "claw": 0.498,
+    "heroPixelsHidden": 0
+   },
+   "strike|f11|protagonist-male|idle|idle-right-phase-01": {
+    "eye": 0.209,
+    "claw": 0.447,
+    "heroPixelsHidden": 0
+   },
+   "strike|f11|protagonist-male|idle|idle-right-phase-02": {
+    "eye": 0.209,
+    "claw": 0.447,
+    "heroPixelsHidden": 0
+   },
+   "strike|f11|protagonist-female|hit|hit-right-phase-01": {
+    "eye": 0.261,
+    "claw": 0.311,
+    "heroPixelsHidden": 0
+   },
+   "strike|f11|protagonist-female|hit|hit-right-phase-02": {
+    "eye": 0.261,
+    "claw": 0.311,
+    "heroPixelsHidden": 0
+   },
+   "strike|f11|protagonist-female|guard|guard-right-phase-01": {
+    "eye": 0.281,
+    "claw": 0.498,
+    "heroPixelsHidden": 0
+   },
+   "strike|f11|protagonist-female|guard|guard-right-phase-02": {
+    "eye": 0.277,
+    "claw": 0.498,
+    "heroPixelsHidden": 0
+   },
+   "strike|f11|protagonist-female|idle|idle-right-phase-01": {
+    "eye": 0.209,
+    "claw": 0.447,
+    "heroPixelsHidden": 0
+   },
+   "strike|f11|protagonist-female|idle|idle-right-phase-02": {
+    "eye": 0.209,
+    "claw": 0.447,
+    "heroPixelsHidden": 0
+   },
+   "strike|f11|liang-xu|hit|hit-right-phase-01": {
+    "eye": 0.05,
+    "claw": 0.196,
+    "heroPixelsHidden": 0
+   },
+   "strike|f11|liang-xu|hit|hit-right-phase-02": {
+    "eye": 0.05,
+    "claw": 0.196,
+    "heroPixelsHidden": 0
+   },
+   "strike|f11|liang-xu|guard|guard-right-phase-01": {
+    "eye": 0.129,
+    "claw": 0.324,
+    "heroPixelsHidden": 0
+   },
+   "strike|f11|liang-xu|guard|guard-right-phase-02": {
+    "eye": 0.134,
+    "claw": 0.324,
+    "heroPixelsHidden": 0
+   },
+   "strike|f11|liang-xu|idle|idle-right-phase-01": {
+    "eye": 0.079,
+    "claw": 0.402,
+    "heroPixelsHidden": 0
+   },
+   "strike|f11|liang-xu|idle|idle-right-phase-02": {
+    "eye": 0.079,
+    "claw": 0.411,
+    "heroPixelsHidden": 0
+   },
+   "hit|f12|protagonist-male|attack|attack-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.481,
+    "heroPixelsHidden": 0
+   },
+   "hit|f12|protagonist-male|attack|attack-right-phase-02": {
+    "eye": 0.376,
+    "claw": 0.486,
+    "heroPixelsHidden": 0
+   },
+   "hit|f12|protagonist-male|attack|attack-right-phase-03": {
+    "eye": 0.145,
+    "claw": 0.481,
+    "heroPixelsHidden": 0
+   },
+   "hit|f12|protagonist-male|skill|skill-right-phase-01": {
+    "eye": 0.125,
+    "claw": 0.467,
+    "heroPixelsHidden": 0
+   },
+   "hit|f12|protagonist-male|skill|skill-right-phase-02": {
+    "eye": 0.338,
+    "claw": 0.467,
+    "heroPixelsHidden": 0
+   },
+   "hit|f12|protagonist-male|skill|skill-right-phase-03": {
+    "eye": 0.515,
+    "claw": 0.467,
+    "heroPixelsHidden": 0
+   },
+   "hit|f12|protagonist-female|attack|attack-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.481,
+    "heroPixelsHidden": 0
+   },
+   "hit|f12|protagonist-female|attack|attack-right-phase-02": {
+    "eye": 0.376,
+    "claw": 0.486,
+    "heroPixelsHidden": 0
+   },
+   "hit|f12|protagonist-female|attack|attack-right-phase-03": {
+    "eye": 0.145,
+    "claw": 0.481,
+    "heroPixelsHidden": 0
+   },
+   "hit|f12|protagonist-female|skill|skill-right-phase-01": {
+    "eye": 0.125,
+    "claw": 0.467,
+    "heroPixelsHidden": 0
+   },
+   "hit|f12|protagonist-female|skill|skill-right-phase-02": {
+    "eye": 0.338,
+    "claw": 0.467,
+    "heroPixelsHidden": 0
+   },
+   "hit|f12|protagonist-female|skill|skill-right-phase-03": {
+    "eye": 0.515,
+    "claw": 0.467,
+    "heroPixelsHidden": 0
+   },
+   "hit|f12|liang-xu|attack|attack-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.41,
+    "heroPixelsHidden": 0
+   },
+   "hit|f12|liang-xu|attack|attack-right-phase-02": {
+    "eye": 0.249,
+    "claw": 0.543,
+    "heroPixelsHidden": 0
+   },
+   "hit|f12|liang-xu|attack|attack-right-phase-03": {
+    "eye": 0.052,
+    "claw": 0.614,
+    "heroPixelsHidden": 0
+   },
+   "hit|f12|liang-xu|skill|skill-right-phase-01": {
+    "eye": 0.073,
+    "claw": 0.405,
+    "heroPixelsHidden": 0
+   },
+   "hit|f12|liang-xu|skill|skill-right-phase-02": {
+    "eye": 0.381,
+    "claw": 0.452,
+    "heroPixelsHidden": 0
+   },
+   "hit|f12|liang-xu|skill|skill-right-phase-03": {
+    "eye": 0.59,
+    "claw": 0.538,
+    "heroPixelsHidden": 0
+   },
+   "hit|f13|protagonist-male|attack|attack-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.488,
+    "heroPixelsHidden": 0
+   },
+   "hit|f13|protagonist-male|attack|attack-right-phase-02": {
+    "eye": 0.424,
+    "claw": 0.493,
+    "heroPixelsHidden": 0
+   },
+   "hit|f13|protagonist-male|attack|attack-right-phase-03": {
+    "eye": 0.231,
+    "claw": 0.488,
+    "heroPixelsHidden": 0
+   },
+   "hit|f13|protagonist-male|skill|skill-right-phase-01": {
+    "eye": 0.172,
+    "claw": 0.469,
+    "heroPixelsHidden": 0
+   },
+   "hit|f13|protagonist-male|skill|skill-right-phase-02": {
+    "eye": 0.39,
+    "claw": 0.469,
+    "heroPixelsHidden": 0
+   },
+   "hit|f13|protagonist-male|skill|skill-right-phase-03": {
+    "eye": 0.549,
+    "claw": 0.469,
+    "heroPixelsHidden": 0
+   },
+   "hit|f13|protagonist-female|attack|attack-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.488,
+    "heroPixelsHidden": 0
+   },
+   "hit|f13|protagonist-female|attack|attack-right-phase-02": {
+    "eye": 0.426,
+    "claw": 0.493,
+    "heroPixelsHidden": 0
+   },
+   "hit|f13|protagonist-female|attack|attack-right-phase-03": {
+    "eye": 0.231,
+    "claw": 0.488,
+    "heroPixelsHidden": 0
+   },
+   "hit|f13|protagonist-female|skill|skill-right-phase-01": {
+    "eye": 0.172,
+    "claw": 0.469,
+    "heroPixelsHidden": 0
+   },
+   "hit|f13|protagonist-female|skill|skill-right-phase-02": {
+    "eye": 0.39,
+    "claw": 0.469,
+    "heroPixelsHidden": 0
+   },
+   "hit|f13|protagonist-female|skill|skill-right-phase-03": {
+    "eye": 0.549,
+    "claw": 0.469,
+    "heroPixelsHidden": 0
+   },
+   "hit|f13|liang-xu|attack|attack-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.413,
+    "heroPixelsHidden": 0
+   },
+   "hit|f13|liang-xu|attack|attack-right-phase-02": {
+    "eye": 0.299,
+    "claw": 0.549,
+    "heroPixelsHidden": 0
+   },
+   "hit|f13|liang-xu|attack|attack-right-phase-03": {
+    "eye": 0.109,
+    "claw": 0.624,
+    "heroPixelsHidden": 0
+   },
+   "hit|f13|liang-xu|skill|skill-right-phase-01": {
+    "eye": 0.12,
+    "claw": 0.408,
+    "heroPixelsHidden": 0
+   },
+   "hit|f13|liang-xu|skill|skill-right-phase-02": {
+    "eye": 0.467,
+    "claw": 0.455,
+    "heroPixelsHidden": 0
+   },
+   "hit|f13|liang-xu|skill|skill-right-phase-03": {
+    "eye": 0.644,
+    "claw": 0.545,
+    "heroPixelsHidden": 0
+   }
+  }
+ },
+ "v2": {
+  "anchorX": 46,
+  "cell": [
+   112,
+   62
+  ],
+  "sentryOnTopStates": [
+   "strike"
+  ],
+  "summary": {
+   "hit|attack|claw": {
+    "mean": 0.042,
+    "max": 0.183,
+    "n": 18
+   },
+   "hit|attack|eye": {
+    "mean": 0.031,
+    "max": 0.134,
+    "n": 18
+   },
+   "hit|skill|claw": {
+    "mean": 0.003,
+    "max": 0.005,
+    "n": 18
+   },
+   "hit|skill|eye": {
+    "mean": 0.013,
+    "max": 0.079,
+    "n": 18
+   },
+   "strike|guard|claw": {
+    "mean": 0.0,
+    "max": 0.0,
+    "n": 12
+   },
+   "strike|guard|eye": {
+    "mean": 0.0,
+    "max": 0.0,
+    "n": 12
+   },
+   "strike|hit|claw": {
+    "mean": 0.0,
+    "max": 0.0,
+    "n": 12
+   },
+   "strike|hit|eye": {
+    "mean": 0.0,
+    "max": 0.0,
+    "n": 12
+   },
+   "strike|idle|claw": {
+    "mean": 0.0,
+    "max": 0.0,
+    "n": 12
+   },
+   "strike|idle|eye": {
+    "mean": 0.0,
+    "max": 0.0,
+    "n": 12
+   },
+   "windup|attack|claw": {
+    "mean": 0.048,
+    "max": 0.24,
+    "n": 18
+   },
+   "windup|attack|eye": {
+    "mean": 0.029,
+    "max": 0.122,
+    "n": 18
+   },
+   "windup|guard|claw": {
+    "mean": 0.0,
+    "max": 0.0,
+    "n": 12
+   },
+   "windup|guard|eye": {
+    "mean": 0.0,
+    "max": 0.0,
+    "n": 12
+   },
+   "windup|idle|claw": {
+    "mean": 0.105,
+    "max": 0.185,
+    "n": 12
+   },
+   "windup|idle|eye": {
+    "mean": 0.0,
+    "max": 0.0,
+    "n": 12
+   }
+  },
+  "rows": {
+   "windup|f12|protagonist-male|idle|idle-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.131,
+    "heroPixelsHidden": 0
+   },
+   "windup|f12|protagonist-male|idle|idle-right-phase-02": {
+    "eye": 0.0,
+    "claw": 0.131,
+    "heroPixelsHidden": 0
+   },
+   "windup|f12|protagonist-male|attack|attack-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 0
+   },
+   "windup|f12|protagonist-male|attack|attack-right-phase-02": {
+    "eye": 0.122,
+    "claw": 0.0,
+    "heroPixelsHidden": 0
+   },
+   "windup|f12|protagonist-male|attack|attack-right-phase-03": {
+    "eye": 0.0,
+    "claw": 0.194,
+    "heroPixelsHidden": 0
+   },
+   "windup|f12|protagonist-male|guard|guard-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 0
+   },
+   "windup|f12|protagonist-male|guard|guard-right-phase-02": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 0
+   },
+   "windup|f12|protagonist-female|idle|idle-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.131,
+    "heroPixelsHidden": 0
+   },
+   "windup|f12|protagonist-female|idle|idle-right-phase-02": {
+    "eye": 0.0,
+    "claw": 0.131,
+    "heroPixelsHidden": 0
+   },
+   "windup|f12|protagonist-female|attack|attack-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 0
+   },
+   "windup|f12|protagonist-female|attack|attack-right-phase-02": {
+    "eye": 0.122,
+    "claw": 0.0,
+    "heroPixelsHidden": 0
+   },
+   "windup|f12|protagonist-female|attack|attack-right-phase-03": {
+    "eye": 0.0,
+    "claw": 0.194,
+    "heroPixelsHidden": 0
+   },
+   "windup|f12|protagonist-female|guard|guard-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 0
+   },
+   "windup|f12|protagonist-female|guard|guard-right-phase-02": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 0
+   },
+   "windup|f12|liang-xu|idle|idle-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 0
+   },
+   "windup|f12|liang-xu|idle|idle-right-phase-02": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 0
+   },
+   "windup|f12|liang-xu|attack|attack-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 0
+   },
+   "windup|f12|liang-xu|attack|attack-right-phase-02": {
+    "eye": 0.034,
+    "claw": 0.0,
+    "heroPixelsHidden": 0
+   },
+   "windup|f12|liang-xu|attack|attack-right-phase-03": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 0
+   },
+   "windup|f12|liang-xu|guard|guard-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 0
+   },
+   "windup|f12|liang-xu|guard|guard-right-phase-02": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 0
+   },
+   "windup|f13|protagonist-male|idle|idle-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.185,
+    "heroPixelsHidden": 0
+   },
+   "windup|f13|protagonist-male|idle|idle-right-phase-02": {
+    "eye": 0.0,
+    "claw": 0.185,
+    "heroPixelsHidden": 0
+   },
+   "windup|f13|protagonist-male|attack|attack-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 0
+   },
+   "windup|f13|protagonist-male|attack|attack-right-phase-02": {
+    "eye": 0.111,
+    "claw": 0.0,
+    "heroPixelsHidden": 0
+   },
+   "windup|f13|protagonist-male|attack|attack-right-phase-03": {
+    "eye": 0.0,
+    "claw": 0.24,
+    "heroPixelsHidden": 0
+   },
+   "windup|f13|protagonist-male|guard|guard-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 0
+   },
+   "windup|f13|protagonist-male|guard|guard-right-phase-02": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 0
+   },
+   "windup|f13|protagonist-female|idle|idle-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.185,
+    "heroPixelsHidden": 0
+   },
+   "windup|f13|protagonist-female|idle|idle-right-phase-02": {
+    "eye": 0.0,
+    "claw": 0.185,
+    "heroPixelsHidden": 0
+   },
+   "windup|f13|protagonist-female|attack|attack-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 0
+   },
+   "windup|f13|protagonist-female|attack|attack-right-phase-02": {
+    "eye": 0.111,
+    "claw": 0.0,
+    "heroPixelsHidden": 0
+   },
+   "windup|f13|protagonist-female|attack|attack-right-phase-03": {
+    "eye": 0.0,
+    "claw": 0.24,
+    "heroPixelsHidden": 0
+   },
+   "windup|f13|protagonist-female|guard|guard-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 0
+   },
+   "windup|f13|protagonist-female|guard|guard-right-phase-02": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 0
+   },
+   "windup|f13|liang-xu|idle|idle-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 0
+   },
+   "windup|f13|liang-xu|idle|idle-right-phase-02": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 0
+   },
+   "windup|f13|liang-xu|attack|attack-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 0
+   },
+   "windup|f13|liang-xu|attack|attack-right-phase-02": {
+    "eye": 0.023,
+    "claw": 0.0,
+    "heroPixelsHidden": 0
+   },
+   "windup|f13|liang-xu|attack|attack-right-phase-03": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 0
+   },
+   "windup|f13|liang-xu|guard|guard-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 0
+   },
+   "windup|f13|liang-xu|guard|guard-right-phase-02": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 0
+   },
+   "strike|f14|protagonist-male|hit|hit-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 127
+   },
+   "strike|f14|protagonist-male|hit|hit-right-phase-02": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 127
+   },
+   "strike|f14|protagonist-male|guard|guard-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 120
+   },
+   "strike|f14|protagonist-male|guard|guard-right-phase-02": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 117
+   },
+   "strike|f14|protagonist-male|idle|idle-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 142
+   },
+   "strike|f14|protagonist-male|idle|idle-right-phase-02": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 142
+   },
+   "strike|f14|protagonist-female|hit|hit-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 127
+   },
+   "strike|f14|protagonist-female|hit|hit-right-phase-02": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 127
+   },
+   "strike|f14|protagonist-female|guard|guard-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 120
+   },
+   "strike|f14|protagonist-female|guard|guard-right-phase-02": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 117
+   },
+   "strike|f14|protagonist-female|idle|idle-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 142
+   },
+   "strike|f14|protagonist-female|idle|idle-right-phase-02": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 142
+   },
+   "strike|f14|liang-xu|hit|hit-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 22
+   },
+   "strike|f14|liang-xu|hit|hit-right-phase-02": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 26
+   },
+   "strike|f14|liang-xu|guard|guard-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 53
+   },
+   "strike|f14|liang-xu|guard|guard-right-phase-02": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 53
+   },
+   "strike|f14|liang-xu|idle|idle-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 41
+   },
+   "strike|f14|liang-xu|idle|idle-right-phase-02": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 41
+   },
+   "strike|f15|protagonist-male|hit|hit-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 26
+   },
+   "strike|f15|protagonist-male|hit|hit-right-phase-02": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 26
+   },
+   "strike|f15|protagonist-male|guard|guard-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 8
+   },
+   "strike|f15|protagonist-male|guard|guard-right-phase-02": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 8
+   },
+   "strike|f15|protagonist-male|idle|idle-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 50
+   },
+   "strike|f15|protagonist-male|idle|idle-right-phase-02": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 50
+   },
+   "strike|f15|protagonist-female|hit|hit-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 26
+   },
+   "strike|f15|protagonist-female|hit|hit-right-phase-02": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 26
+   },
+   "strike|f15|protagonist-female|guard|guard-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 8
+   },
+   "strike|f15|protagonist-female|guard|guard-right-phase-02": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 8
+   },
+   "strike|f15|protagonist-female|idle|idle-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 50
+   },
+   "strike|f15|protagonist-female|idle|idle-right-phase-02": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 50
+   },
+   "strike|f15|liang-xu|hit|hit-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 2
+   },
+   "strike|f15|liang-xu|hit|hit-right-phase-02": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 2
+   },
+   "strike|f15|liang-xu|guard|guard-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 2
+   },
+   "strike|f15|liang-xu|guard|guard-right-phase-02": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 2
+   },
+   "strike|f15|liang-xu|idle|idle-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 2
+   },
+   "strike|f15|liang-xu|idle|idle-right-phase-02": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 2
+   },
+   "hit|f16|protagonist-male|attack|attack-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.005,
+    "heroPixelsHidden": 0
+   },
+   "hit|f16|protagonist-male|attack|attack-right-phase-02": {
+    "eye": 0.111,
+    "claw": 0.005,
+    "heroPixelsHidden": 0
+   },
+   "hit|f16|protagonist-male|attack|attack-right-phase-03": {
+    "eye": 0.0,
+    "claw": 0.171,
+    "heroPixelsHidden": 0
+   },
+   "hit|f16|protagonist-male|skill|skill-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.005,
+    "heroPixelsHidden": 0
+   },
+   "hit|f16|protagonist-male|skill|skill-right-phase-02": {
+    "eye": 0.0,
+    "claw": 0.005,
+    "heroPixelsHidden": 0
+   },
+   "hit|f16|protagonist-male|skill|skill-right-phase-03": {
+    "eye": 0.036,
+    "claw": 0.005,
+    "heroPixelsHidden": 0
+   },
+   "hit|f16|protagonist-female|attack|attack-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.005,
+    "heroPixelsHidden": 0
+   },
+   "hit|f16|protagonist-female|attack|attack-right-phase-02": {
+    "eye": 0.111,
+    "claw": 0.005,
+    "heroPixelsHidden": 0
+   },
+   "hit|f16|protagonist-female|attack|attack-right-phase-03": {
+    "eye": 0.0,
+    "claw": 0.171,
+    "heroPixelsHidden": 0
+   },
+   "hit|f16|protagonist-female|skill|skill-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.005,
+    "heroPixelsHidden": 0
+   },
+   "hit|f16|protagonist-female|skill|skill-right-phase-02": {
+    "eye": 0.0,
+    "claw": 0.005,
+    "heroPixelsHidden": 0
+   },
+   "hit|f16|protagonist-female|skill|skill-right-phase-03": {
+    "eye": 0.036,
+    "claw": 0.005,
+    "heroPixelsHidden": 0
+   },
+   "hit|f16|liang-xu|attack|attack-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 0
+   },
+   "hit|f16|liang-xu|attack|attack-right-phase-02": {
+    "eye": 0.023,
+    "claw": 0.0,
+    "heroPixelsHidden": 0
+   },
+   "hit|f16|liang-xu|attack|attack-right-phase-03": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 0
+   },
+   "hit|f16|liang-xu|skill|skill-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 0
+   },
+   "hit|f16|liang-xu|skill|skill-right-phase-02": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 0
+   },
+   "hit|f16|liang-xu|skill|skill-right-phase-03": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 0
+   },
+   "hit|f17|protagonist-male|attack|attack-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.005,
+    "heroPixelsHidden": 0
+   },
+   "hit|f17|protagonist-male|attack|attack-right-phase-02": {
+    "eye": 0.134,
+    "claw": 0.005,
+    "heroPixelsHidden": 0
+   },
+   "hit|f17|protagonist-male|attack|attack-right-phase-03": {
+    "eye": 0.0,
+    "claw": 0.183,
+    "heroPixelsHidden": 0
+   },
+   "hit|f17|protagonist-male|skill|skill-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.005,
+    "heroPixelsHidden": 0
+   },
+   "hit|f17|protagonist-male|skill|skill-right-phase-02": {
+    "eye": 0.002,
+    "claw": 0.005,
+    "heroPixelsHidden": 0
+   },
+   "hit|f17|protagonist-male|skill|skill-right-phase-03": {
+    "eye": 0.079,
+    "claw": 0.005,
+    "heroPixelsHidden": 0
+   },
+   "hit|f17|protagonist-female|attack|attack-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.005,
+    "heroPixelsHidden": 0
+   },
+   "hit|f17|protagonist-female|attack|attack-right-phase-02": {
+    "eye": 0.134,
+    "claw": 0.005,
+    "heroPixelsHidden": 0
+   },
+   "hit|f17|protagonist-female|attack|attack-right-phase-03": {
+    "eye": 0.0,
+    "claw": 0.183,
+    "heroPixelsHidden": 0
+   },
+   "hit|f17|protagonist-female|skill|skill-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.005,
+    "heroPixelsHidden": 0
+   },
+   "hit|f17|protagonist-female|skill|skill-right-phase-02": {
+    "eye": 0.002,
+    "claw": 0.005,
+    "heroPixelsHidden": 0
+   },
+   "hit|f17|protagonist-female|skill|skill-right-phase-03": {
+    "eye": 0.079,
+    "claw": 0.005,
+    "heroPixelsHidden": 0
+   },
+   "hit|f17|liang-xu|attack|attack-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 0
+   },
+   "hit|f17|liang-xu|attack|attack-right-phase-02": {
+    "eye": 0.043,
+    "claw": 0.0,
+    "heroPixelsHidden": 0
+   },
+   "hit|f17|liang-xu|attack|attack-right-phase-03": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 0
+   },
+   "hit|f17|liang-xu|skill|skill-right-phase-01": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 0
+   },
+   "hit|f17|liang-xu|skill|skill-right-phase-02": {
+    "eye": 0.0,
+    "claw": 0.0,
+    "heroPixelsHidden": 0
+   },
+   "hit|f17|liang-xu|skill|skill-right-phase-03": {
+    "eye": 0.009,
+    "claw": 0.0,
+    "heroPixelsHidden": 0
+   }
+  }
+ },
+ "v2HeroesAlwaysOnTop": {
+  "note": "v2 frames and anchor without the strike draw-order rule",
+  "summary": {
+   "hit|attack|claw": {
+    "mean": 0.042,
+    "max": 0.183,
+    "n": 18
+   },
+   "hit|attack|eye": {
+    "mean": 0.031,
+    "max": 0.134,
+    "n": 18
+   },
+   "hit|skill|claw": {
+    "mean": 0.003,
+    "max": 0.005,
+    "n": 18
+   },
+   "hit|skill|eye": {
+    "mean": 0.013,
+    "max": 0.079,
+    "n": 18
+   },
+   "strike|guard|claw": {
+    "mean": 0.125,
+    "max": 0.295,
+    "n": 12
+   },
+   "strike|guard|eye": {
+    "mean": 0.0,
+    "max": 0.0,
+    "n": 12
+   },
+   "strike|hit|claw": {
+    "mean": 0.055,
+    "max": 0.145,
+    "n": 12
+   },
+   "strike|hit|eye": {
+    "mean": 0.035,
+    "max": 0.095,
+    "n": 12
+   },
+   "strike|idle|claw": {
+    "mean": 0.21,
+    "max": 0.335,
+    "n": 12
+   },
+   "strike|idle|eye": {
+    "mean": 0.0,
+    "max": 0.0,
+    "n": 12
+   },
+   "windup|attack|claw": {
+    "mean": 0.048,
+    "max": 0.24,
+    "n": 18
+   },
+   "windup|attack|eye": {
+    "mean": 0.029,
+    "max": 0.122,
+    "n": 18
+   },
+   "windup|guard|claw": {
+    "mean": 0.0,
+    "max": 0.0,
+    "n": 12
+   },
+   "windup|guard|eye": {
+    "mean": 0.0,
+    "max": 0.0,
+    "n": 12
+   },
+   "windup|idle|claw": {
+    "mean": 0.105,
+    "max": 0.185,
+    "n": 12
+   },
+   "windup|idle|eye": {
+    "mean": 0.0,
+    "max": 0.0,
+    "n": 12
+   }
+  }
+ },
+ "script": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/rpg-2-star-ocean-the-second_scifi-sentry-automaton_contact-occlusion-analysis_m8-anim-v02_20261014-230600-3c1f9a47.py"
+}

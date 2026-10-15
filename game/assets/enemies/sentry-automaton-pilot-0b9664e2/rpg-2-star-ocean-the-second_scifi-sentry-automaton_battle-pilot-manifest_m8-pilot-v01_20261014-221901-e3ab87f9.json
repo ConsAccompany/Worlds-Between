@@ -1,0 +1,92 @@
+{
+  "project": "rpg-2-star-ocean-the-second",
+  "asset": "scifi sentry automaton battle sprite pilot (science-region ruins enemy)",
+  "status": "pilot_unapproved",
+  "artAccepted": false,
+  "artAcceptanceCount": 0,
+  "runtimeIntegrated": true,
+  "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/rpg-2-star-ocean-the-second_scifi-sentry-automaton_battle-idle-left_m8-pilot-v01_20261014-221901-e3ab87f9.png",
+  "sha256": "5ca76fe9fdedcdca549fb11597f3fc44a68b713382ffb11a8976f4282e652462",
+  "sha256Algorithm": "sha256-bytes",
+  "size": [
+    96,
+    62
+  ],
+  "opaqueBBox": [
+    0,
+    1,
+    96,
+    61
+  ],
+  "groundAnchor": [
+    48,
+    60
+  ],
+  "groundAnchorNote": "anchor row = near-foot sole outline row; draw at (enemy_x - 48, 272 - 60) so that row lands on ARENA_FLOOR_Y 272. Far feet end 2 px higher for depth.",
+  "facing": "left (toward party)",
+  "frames": [
+    "idle (single static frame)"
+  ],
+  "displayScale": "1 native px = 1 logical px in the 640x360 view = 2x2 physical px at 1280x720",
+  "alphaValues": [
+    0,
+    255
+  ],
+  "colourCount": 17,
+  "palette": {
+    "o": "#101217",
+    "1": "#1b1f26",
+    "2": "#282e37",
+    "3": "#384049",
+    "4": "#4c5562",
+    "5": "#67717e",
+    "6": "#8b95a1",
+    "a": "#36291b",
+    "b": "#5a462b",
+    "c": "#806439",
+    "d": "#a6864f",
+    "e": "#cbb077",
+    "r": "#4b3627",
+    "x": "#0c363c",
+    "y": "#188a92",
+    "z": "#4bd5d2",
+    "w": "#c6fff6"
+  },
+  "paletteNote": "identical ramps to the patrol pilot palette for regional coherence",
+  "method": "Hand-authored in code: explicit plate polygons, joints, lens rings and grime pixels on the final native canvas, composited with per-part outline seams and a top/left selective outline. No concept image is read, traced, resampled or resized.",
+  "authorScript": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/rpg-2-star-ocean-the-second_scifi-sentry-automaton_battle-idle-pilot-author_m8-v01_20261014-221848-0b9664e2.py",
+  "authorScriptSha256": "a8dfa2041ed35d6fd6cfa699654947db33a45a196bd81cb35d8f391cf40bd6d0",
+  "authorScriptSha256Algorithm": "sha256-text-lf-v1",
+  "referenceConcepts": [
+    "outputs/rpg-2-star-ocean-the-second_scifi-sentry-automaton_character-sheet-unapproved_m8-v01_20261014-210321-64fc7295.png",
+    "outputs/rpg-2-star-ocean-the-second_scifi-sentry-automaton_single-sprite-style-concept-unapproved_m8-v02_20261014-211731-d544cc62.png"
+  ],
+  "referencePalette": "game/assets/enemies/patrol-automaton-pilot/rpg-2-star-ocean-the-second_scifi-patrol-automaton_battle-idle-left_m8-pilot-v01_20261014-220008-36512fae.png",
+  "scope": "sentry enemy only. Drawn in the real battle by game/scripts/battle_arena.gd behind ENEMY_SPRITE_PILOT_ENABLED (ruins and city encounters); with the nested ENEMY_SPRITE_ANIMATION_ENABLED on, it is the fallback cell and the re-posed animation strip draws instead. Art acceptance stays 0.",
+  "scopeAtCreation": "sentry enemy only; not wired into battle_arena.gd (another session owns it). In-game the sentry still draws the placeholder block.",
+  "createdAt": "2026-10-14T22:19:01",
+  "runtimeIntegration": {
+    "note": "runtimeIntegrated was false when this manifest was written (2026-10-14T22:19:01). Only these runtime fields were updated afterwards; the PNG, its sha256, the author script and its sha256 are unchanged (re-verified at update).",
+    "staticPilotQaNote": "docs/qa/rpg-2-star-ocean-the-second_scifi-sentry-automaton_battle-runtime-integration_qa-note_m8-v01_20261014-222407-784de5d8.md",
+    "animationPilotManifest": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/rpg-2-star-ocean-the-second_scifi-sentry-automaton_battle-animation-manifest_m8-anim-v01_20261014-223820-f181f893.json",
+    "manifestRuntimeFieldsUpdatedAt": "2026-10-14T22:47:00"
+  },
+  "hashLockRepair": {
+    "date": "2026-10-14",
+    "summary": "Hash-lock repair: labels added; the author-script lock moved from raw bytes to sha256-text-lf-v1. The script is the same file: its raw bytes still hashed to the old value when this repair ran, and re-running it in scratch mode (--out) on 2026-10-14 reproduced the PNG byte for byte.",
+    "changedValues": [
+      {
+        "field": "authorScriptSha256",
+        "file": "game/assets/enemies/sentry-automaton-pilot-0b9664e2/rpg-2-star-ocean-the-second_scifi-sentry-automaton_battle-idle-pilot-author_m8-v01_20261014-221848-0b9664e2.py",
+        "before": "39fbd4182af1f8e375acefe871164c299d763810637faff1f08671447689226b",
+        "beforeAlgorithm": "SHA-256 of the raw on-disk bytes, which here were a CRLF working copy (unlabeled at the time)",
+        "after": "a8dfa2041ed35d6fd6cfa699654947db33a45a196bd81cb35d8f391cf40bd6d0",
+        "afterAlgorithm": "sha256-text-lf-v1",
+        "why": "the raw CRLF value cannot match an LF checkout of the same text; the sha256-text-lf-v1 value equals the raw SHA-256 of the LF form and matches both checkouts"
+      }
+    ],
+    "unchanged": "No PNG, GIF, author script, builder or other source file was modified. Every pre-existing sha256 value is unchanged except the ones listed in changedValues, and every pre-existing value still matched its file on the original Windows workspace when this repair ran. Status, approval and acceptance fields are unchanged.",
+    "validator": "tests/battle-visual-hash-locks/rpg-2-star-ocean-the-second_m8-battle-visuals_hash-lock-check_m8-v01_20261014-234133-bd28b055.js",
+    "qaNote": "docs/qa/rpg-2-star-ocean-the-second_m8-battle-visuals_hash-lock-repair_qa-note_m8-v01_20261014-234133-317f4482.md"
+  }
+}
