@@ -1,7 +1,8 @@
 // Focused check for the Game Bible selout v2 review card and the files it points at.
 // Starts the real v05 panel server on a spare local port (the user's 18727 instance is left alone), then runs the
 // served bible.js in a VM with a minimal DOM stub. Also verifies the v2 sprite, the eight separate QA captures and the
-// ZIP structure of the editable selout v1 Pixelorama baseline. Read-only: no project file is written.
+// ZIP structure of the editable selout v1 Pixelorama baseline. Also covers the separate selout v4 technical-candidate
+// card and its eight same-run captures (v4 + v3 reference). Read-only: no project file is written.
 // Run from the repository root: node tests/game-bible-selout-v2/<this file>
 const assert = require('node:assert/strict');
 const crypto = require('node:crypto');
@@ -24,6 +25,16 @@ const reportPath = path.join(root, 'outputs', 'rpg-2-star-ocean-the-second_city-
 const inventoryPath = path.join(root, 'outputs', 'rpg-2-star-ocean-the-second_asset-inventory_state_v01_20261013-191033-7d1e0a8b.json');
 const progressPath = path.join(root, 'outputs', 'rpg-2-star-ocean-the-second_mvp-progress_state_v01_20261013-183804-28a1c7e4.json');
 const checklistPath = path.join(root, 'game', 'data', 'character-visuals', 'rpg-2-star-ocean-the-second_character-sprite-readiness-checklist_m8-v01_20261014-184413-53da3710.json');
+// Selout v4 structural technical candidate (separate card; unapproved, no user review).
+const v3Png = path.join(pilots, prefix + 'selout-v3-polish-candidate_m8-v03_20261014-234700-3c9a5d27.png');
+const v4Png = path.join(pilots, prefix + 'selout-v4-structural-candidate_m8-v04_20261015-001500-e5b81f36.png');
+const v4ManifestRel = 'game/assets/characters/pixelorama-pilots/' + prefix + 'selout-v4-structural-manifest_m8-v04_20261015-001500-0c9d3a74.json';
+const v4ReportPath = path.join(root, 'outputs', 'rpg-2-star-ocean-the-second_city-bright-dark_protagonist-female-south-idle-selout-v4-visual-qa-report_m8-v04_20261015-001305-7973118b.json');
+const v4Stem = 'm8-v04_20261015-001305-7973118b';
+// Historical experimental walk-frame prototypes (part of the rejected four-phase test loop). They exist as files; none is
+// approved. A manifest's walk_frames: 0 means that static candidate has no walk frames, not that the project has none.
+const historicalWalkPrototypes = ['01-44edae33', '02-8a297561', '03-ba73f592', '04-70d3f0b5'].map(s =>
+  path.join(root, 'game', 'assets', 'characters', 'native-animation', `rpg-2-star-ocean-the-second_protagonist-female_native-walk-south-phase-${s.slice(0, 2)}_m8-prototype_20261014-140955-${s.slice(3)}.png`));
 const sha256 = data => crypto.createHash('sha256').update(data).digest('hex');
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 const results = [];
@@ -100,7 +111,7 @@ async function renderProduction(base) {
   assert.deepEqual(pngSize(v2Bytes), [80, 112]);
   assert.equal(manifest.art_approved, false);
   assert.equal(manifest.runtime_integrated, false);
-  assert.equal(manifest.walk_frames, 0);
+  assert.equal(manifest.walk_frames, 0, 'the v2 static candidate itself contains no walk frames');
   assert.equal(report.art_approved, false);
   assert.equal(report.human_reviewed, false);
   assert.deepEqual(report.acceptance_counters_unchanged, {runtime_exploration_sprites_accepted: '0/52', scene_quality_gates_passed: '0/11'});
@@ -175,6 +186,47 @@ async function renderProduction(base) {
   assert.match(m8.summary, /48-logical-pixel display scale/);
   pass('inventory 0/52 sprites, 0/11 scenes; v2 + v1 .pxo fields resolve; checklist inventory hash current (52 variants, 51 identities, 0 accepted); M8 in progress');
 
+  // 4b. v4 sprite, manifest, report and its eight captures (v4 + same-run v3 reference); still unapproved.
+  const v4Manifest = JSON.parse(fs.readFileSync(path.join(root, v4ManifestRel), 'utf8'));
+  const v4Report = JSON.parse(fs.readFileSync(v4ReportPath, 'utf8'));
+  const v4Bytes = fs.readFileSync(v4Png);
+  assert.equal(sha256(v4Bytes), 'da8a1ce11db136f7061206a3d8f5038b7d995016e36af2fc011d0a6f0dbcf4d7');
+  assert.equal(sha256(v4Bytes), v4Manifest.output.sha256);
+  assert.equal(sha256(fs.readFileSync(v3Png)), v4Manifest.source.sha256);
+  assert.deepEqual(pngSize(v4Bytes), [80, 112]);
+  assert.equal(v4Manifest.output.measured.unique_opaque_rgb_colours, 27);
+  assert.deepEqual([v4Manifest.output.measured.visible_body_width_texels, v4Manifest.output.measured.visible_body_height_texels], [43, 96]);
+  assert.equal(v4Manifest.pixel_changes.total, 358);
+  assert.equal(sha256(fs.readFileSync(v4ReportPath)), v4Manifest.qa_captures.report_sha256, 'manifest records the v4 report hash');
+  for (const doc of [v4Manifest, v4Report]) { assert.equal(doc.art_approved, false); assert.equal(doc.human_reviewed, false); }
+  assert.equal(v4Manifest.walk_frames, 0, 'the v4 static candidate itself contains no walk frames');
+  assert.equal(v4Manifest.runtime_integrated, false);
+  for (const file of historicalWalkPrototypes) assert.ok(fs.existsSync(file), 'historical walk prototype still exists: ' + path.basename(file));
+  assert.deepEqual(v4Report.acceptance_counters_unchanged, {runtime_exploration_sprites_accepted: '0/52', scene_quality_gates_passed: '0/11'});
+  assert.equal(v4Report.captures.length, 8);
+  const v4CaptureFiles = [];
+  for (const scene of scenes) {
+    assert.equal(v4Report.v4_vs_v3_same_scene[scene].changed_window_pixels, 358, scene + ' changed window pixels');
+    for (const variant of ['selout-v4', 'selout-v3-reference']) {
+      const capture = v4Report.captures.find(c => c.scene === scene && c.variant === variant);
+      assert.ok(capture, `${scene}/${variant} capture recorded`);
+      const name = `rpg-2-star-ocean-the-second_${scene}_protagonist-female-south-idle-${variant}-h48_${v4Stem}.png`;
+      assert.equal(path.basename(capture.capture), name);
+      const bytes = fs.readFileSync(path.join(root, 'outputs', name));
+      assert.equal(sha256(bytes), capture.capture_sha256, name);
+      assert.deepEqual(pngSize(bytes), [1280, 720]);
+      assert.equal(capture.pilot_source_sha256, variant === 'selout-v4' ? v4Manifest.output.sha256 : v4Manifest.source.sha256);
+      assert.equal(capture.pilot_texel_fidelity.exact_rgb_matches, capture.pilot_texel_fidelity.opaque_texels);
+      if (variant === 'selout-v4') assert.equal(capture.pilot_texel_fidelity.opaque_texels, 2443);
+      assert.deepEqual([capture.pilot_window_diff_bounds_measured.w, capture.pilot_window_diff_bounds_measured.h], [43, 96]);
+      v4CaptureFiles.push({name, sha: capture.capture_sha256});
+    }
+  }
+  assert.equal(new Set(v4CaptureFiles.map(c => c.sha)).size, 8, 'eight distinct v4-run capture files');
+  const femaleVariant = checklist.variants.find(v => v.visual_id === 'protagonist-female');
+  assert.ok(femaleVariant.gates.exploration_animation.unregistered_manifests.includes(v4ManifestRel), 'checklist lists the v4 manifest');
+  pass('v4 sprite 80x112 27 colours 358 changed texels; report hash in manifest; 8 separate 1280x720 captures (v4 + same-run v3) match, 2443/2443 texels, 358 changed window pixels per scene; art_approved/human_reviewed false; v4 candidate adds no walk frames; historical walk prototypes still present (none approved)');
+
   // 5. Served Production view: separate v2 card with individual captures and clear unapproved status.
   const port = await freePort();
   const base = `http://127.0.0.1:${port}`;
@@ -190,6 +242,7 @@ async function renderProduction(base) {
     assert.ok(card.includes('仍未批准') && card.includes('状态：未批准'), 'unapproved badge and status line');
     assert.ok(!/已批准|已验收|approved/i.test(card.replace(/未批准/g, '')), 'no approval wording');
     assert.ok(card.includes('0/52') && card.includes('0/11') && card.includes('行走帧仍暂停'));
+    assert.ok(!card.includes('尚未开始任何行走帧') && card.includes('实验性行走帧原型'), 'historical walk prototypes acknowledged, not denied');
     assert.ok(card.includes('selout-pixelorama-baseline_m8-v01_20261014-233500-5e93c40a.pxo') && card.includes('内容为 v1，不是 v2'));
     const imgs = [...card.matchAll(/<img src="([^"]+)"/g)].map(m => m[1]);
     assert.deepEqual(imgs, ['city', 'outskirts-bright', 'survey-annex-room2-dark'].map(s => `/assets/rpg-2-star-ocean-the-second_${s}_protagonist-female-south-idle-selout-v2-h48_m8-v02_20261014-234215-2a1b6b58.png`));
@@ -204,6 +257,31 @@ async function renderProduction(base) {
     assert.equal(hrefs.size, 8, 'card links exactly the eight captures');
     assert.ok(html.includes(`探索精灵 0 / 52`) && html.includes(`场景画质 0 / 11`), 'page counters unchanged');
     pass('Production view: one separate v2 card after the v1 cards, 3 inline v2 captures (city/bright/dark), all 8 captures linked and served byte-identical, unapproved status, v1 .pxo labelled not v2, 0/52 and 0/11 unchanged');
+
+    // v4: its own card after the v2 card, inline v4 captures only, v3 comparisons as links.
+    const v4Start = html.indexOf('<section class="card" id="idle-selout-v4">');
+    const v4Card = html.slice(v4Start, html.indexOf('</section>', v4Start) + '</section>'.length);
+    assert.ok(v4Start > start && v4Card.length > 100, 'v4 card follows the v2 card');
+    assert.equal((html.match(/id="idle-selout-v4"/g) || []).length, 1, 'exactly one v4 card');
+    assert.ok(!card.includes('selout-v4'), 'v2 card does not mention v4 captures');
+    assert.ok(v4Card.includes('状态：未批准') && v4Card.includes('未经用户审阅') && v4Card.includes('human_reviewed: false'), 'unapproved, unreviewed status');
+    assert.ok(!/已批准|已验收|approved/i.test(v4Card.replace(/未批准|未获美术批准|没有任何行走动画获批准|未经用户审阅/g, '')), 'no approval wording');
+    assert.ok(v4Card.includes('0/52') && v4Card.includes('0/11') && v4Card.includes('行走帧仍暂停'));
+    assert.ok(v4Card.includes('358') && v4Card.includes('2443/2443') && v4Card.includes('已知局限'));
+    assert.ok(!v4Card.includes('未看过渲染结果') && v4Card.includes('第二张 8 倍预览'), 'records the two 8x preview rounds');
+    assert.ok(v4Card.includes('实验性行走帧原型') && v4Card.includes('动画验收为 0'), 'walk prototypes exist; animation acceptance 0');
+    const v4Imgs = [...v4Card.matchAll(/<img src="([^"]+)"/g)].map(m => m[1]);
+    assert.deepEqual(v4Imgs, ['city', 'outskirts-bright', 'survey-annex-room2-dark'].map(s => `/assets/rpg-2-star-ocean-the-second_${s}_protagonist-female-south-idle-selout-v4-h48_${v4Stem}.png`));
+    const v4Hrefs = new Set([...v4Card.matchAll(/href="([^"]+)"/g)].map(m => m[1]));
+    for (const c of v4CaptureFiles) {
+      const href = '/assets/' + c.name;
+      assert.ok(v4Hrefs.has(href), 'v4 card links ' + c.name);
+      const response = await fetch(base + href);
+      assert.equal(response.status, 200, href);
+      assert.equal(sha256(Buffer.from(await response.arrayBuffer())), c.sha, href + ' served bytes');
+    }
+    assert.equal(v4Hrefs.size, 8, 'v4 card links exactly its eight captures');
+    pass('Production view: one separate v4 card after the v2 card, 3 inline v4 captures (city/bright/dark), 4 v3 references + dark prototype room as links, all 8 served byte-identical, unapproved/unreviewed status, 0/52 and 0/11 unchanged');
   } finally {
     child.kill();
   }

@@ -65,6 +65,8 @@
   - 注册表未引用的相关清单：`game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-quantized-downscale-manifest_m8-v01_20261014-212322-aa446773.json`
   - 注册表未引用的相关清单：`game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-refinement-candidates-manifest_m8-v01_20261014-231100-08c301fd.json`
   - 注册表未引用的相关清单：`game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v2-polish-manifest_m8-v02_20261014-233300-d4a8a850.json`
+  - 注册表未引用的相关清单：`game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v3-polish-manifest_m8-v03_20261014-234700-b47e2c10.json`
+  - 注册表未引用的相关清单：`game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v4-structural-manifest_m8-v04_20261015-001500-0c9d3a74.json`
 - [ ] G2c 战斗动画（MVP 必需；注册表 sideview_8_action_prototype_integrated / pending_art_approval；原型 8 动作 20 帧；资产清单 `playable-combat.protagonist-female` checked=false）
   - 原型清单：`game/assets/characters/combat-prototypes/rpg-2-star-ocean-the-second_protagonist-female_sideview-combat-manifest_m8-prototype_20261014-143059-e2500154.json` · 存在
 - [ ] G3 比例 48 逻辑像素；master/scale/cell_size/ground_pin 未定

@@ -5,7 +5,7 @@ M8, 2026-10-14. Scope: the separate **selout v2** review card on the Game Bible 
 ## Decision being recorded
 
 - The user chose selout v1 (simplified/selective outline) as the closer of the two refinement candidates. v1 itself is not approved.
-- The user says selout v2 is closer still, but **v2 is not approved**. Static-frame polish continues, and walk-frame production stays paused. No walk frames exist.
+- The user says selout v2 is closer still, but **v2 is not approved**. Static-frame polish continues, and walk-frame production stays paused. Historical experimental walk-frame prototypes and a rejected four-phase test loop exist, but no new walk frames were made after the static-frame gate and no walk animation is approved.
 - Unchanged: exploration sprites 0/52, scene-quality gates 0/11, 48-logical-pixel display scale (the only approved scale decision), 51 identities / 52 variants, play limited to the science region.
 
 ## Changed files (this change only)
