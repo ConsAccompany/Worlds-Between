@@ -2,11 +2,15 @@ extends Node
 
 signal language_changed
 # Shared game timeline. Emitted after state is updated, so handlers see the new date and location.
+# Any weeks crossed are already settled in the commerce ledger, so a handler may autosave safely.
 signal calendar_advanced(previous_minutes: int, new_minutes: int, reason: String)
-# Hook for weekly settlement (no economy exists yet). Emitted once per advance that crosses at least
-# one Monday 00:00; weeks crossed = new_week_index - previous_week_index. Never emitted by loading.
+# Emitted after calendar_advanced, once per advance that crosses at least one Monday 00:00; weeks
+# crossed = new_week_index - previous_week_index. Never emitted by loading. Notification only:
+# advance_calendar settles commerce before emitting anything, and emitting this signal settles nothing.
 signal calendar_week_transition(previous_week_index: int, new_week_index: int)
 signal travel_completed(result: Dictionary)
+# After a week transition settled at least one week while a company exists (see CommerceLedger).
+signal commerce_weeks_settled(result: Dictionary)
 
 const STRINGS := {
 	"zh": {
@@ -436,6 +440,9 @@ var last_travel: Dictionary = {}
 var travel_preview: Dictionary = {}
 var travel_state_migrated := false
 var _travel_registry: WorldRouteRegistry = null
+# Provisional commerce ledger; its units are not currency. Settled only by advance_calendar.
+var commerce := CommerceLedger.new()
+var commerce_state_migrated := false
 
 const TRAVEL_SAVE_VERSION := 1
 const MONTH_ABBREVIATIONS_EN := ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
@@ -458,6 +465,7 @@ const MEMBER_DEFS := {
 func _ready() -> void:
 	_install_default_controls()
 	_reset_travel_state()
+	_reset_commerce_state()
 
 
 func _process(delta: float) -> void:
@@ -520,6 +528,7 @@ func begin_new_run() -> void:
 	resume_area_pending = false
 	loaded_scene_kind = "map"
 	_reset_travel_state()
+	_reset_commerce_state()
 
 
 func travel_registry() -> WorldRouteRegistry:
@@ -544,6 +553,9 @@ func _reset_travel_state() -> void:
 
 
 # Advances the shared timeline (travel, rest, tasks). Battles and walking inside scenes never call this.
+# Clock, week and commerce ledger are all updated before the first signal, so no handler (an autosave
+# on calendar_advanced included) can observe the new clock with crossed weeks still unsettled.
+# Signal order: calendar_advanced, calendar_week_transition, commerce_weeks_settled.
 func advance_calendar(minutes: int, reason: String) -> bool:
 	if minutes < 0:
 		return false
@@ -555,9 +567,19 @@ func advance_calendar(minutes: int, reason: String) -> bool:
 	var week := TravelCalendar.week_index(calendar_minutes)
 	if week > calendar_week_index:
 		calendar_week_index = week
-	calendar_advanced.emit(previous, calendar_minutes, reason)
-	if calendar_week_index > previous_week:
-		calendar_week_transition.emit(previous_week, calendar_week_index)
+	# Locals, so a handler that advances the calendar again cannot change what this call reports.
+	var new_minutes := calendar_minutes
+	var new_week := calendar_week_index
+	var settlement := {}
+	var report_settlement := false
+	if new_week > previous_week:
+		settlement = commerce.settle_to_week(previous_week, new_week, _commerce_companion_ids())
+		report_settlement = not settlement["settled_week_indices"].is_empty() and not commerce.companies.is_empty()
+	calendar_advanced.emit(previous, new_minutes, reason)
+	if new_week > previous_week:
+		calendar_week_transition.emit(previous_week, new_week)
+	if report_settlement:
+		commerce_weeks_settled.emit(settlement)
 	return true
 
 
@@ -789,6 +811,103 @@ func travel_preview_lines(preview: Dictionary) -> PackedStringArray:
 			if bool(preview.get("estimate", true)):
 				lines.append(text_for("travel_estimate_note"))
 	return lines
+
+
+func _reset_commerce_state() -> void:
+	commerce.reset(calendar_week_index)
+	commerce_state_migrated = false
+
+
+# Stationed members who still earn the full rate: recruited companions currently in the merchant job.
+func _commerce_companion_ids() -> Dictionary:
+	var result := {}
+	for member_id in recruited_members:
+		if String(member_states.get(member_id, {}).get("job_series", "")) == CommerceLedger.MERCHANT_SERIES_ID:
+			result[member_id] = true
+	return result
+
+
+# Company key for a place: its current location id, or the saved id when the place is no longer known.
+func _commerce_city_key(city_id: String) -> String:
+	var resolved := travel_registry().resolve_location_id(city_id)
+	return resolved if resolved != "" else city_id
+
+
+# "" when the member may be stationed now; otherwise a reason code.
+func commerce_manager_block_reason(member_id: String) -> String:
+	if member_id == "hero":
+		return "hero-cannot-station"
+	if not MEMBER_DEFS.has(member_id):
+		return "unknown-member"
+	if not recruited_members.has(member_id) or not member_states.has(member_id):
+		return "not-recruited"
+	if String(member_states[member_id].get("job_series", "")) != CommerceLedger.MERCHANT_SERIES_ID:
+		return "not-merchant"
+	if commerce.company_for_manager(member_id) != "":
+		return "already-stationed"
+	return ""
+
+
+# Discovered places of type "city" may each host one company. The data has no major/minor city split yet.
+func commerce_city_block_reason(city_id: String) -> String:
+	var resolved := travel_registry().resolve_location_id(city_id)
+	if resolved == "":
+		return "unknown-city"
+	if travel_registry().location(resolved).get("type", "") != "city":
+		return "not-a-city"
+	if not discovered_locations.has(resolved):
+		return "city-not-discovered"
+	return ""
+
+
+# Opens a company run by an eligible merchant companion, who leaves the active party.
+func open_commerce_company(city_id: String, member_id: String) -> Dictionary:
+	var reason := commerce_city_block_reason(city_id)
+	var key := _commerce_city_key(city_id)
+	if reason == "" and commerce.has_company(key):
+		reason = "company-exists"
+	if reason == "":
+		reason = commerce_manager_block_reason(member_id)
+	if reason == "" and not commerce.open_company(key, member_id, calendar_week_index):
+		reason = "rejected"
+	if reason != "":
+		return {"ok": false, "reason": reason}
+	active_party_ids.erase(member_id)
+	return {"ok": true, "reason": "", "city_id": key, "member_id": member_id}
+
+
+# Stations a merchant companion at an NPC-run company; the companion leaves the active party.
+func assign_commerce_manager(city_id: String, member_id: String) -> Dictionary:
+	var key := _commerce_city_key(city_id)
+	var reason := "" if commerce.has_company(key) else "no-company"
+	if reason == "" and String(commerce.companies[key]["managerId"]) != "":
+		reason = "manager-present"
+	if reason == "":
+		reason = commerce_manager_block_reason(member_id)
+	if reason == "" and not commerce.assign_manager(key, member_id, calendar_week_index):
+		reason = "rejected"
+	if reason != "":
+		return {"ok": false, "reason": reason}
+	active_party_ids.erase(member_id)
+	return {"ok": true, "reason": "", "city_id": key, "member_id": member_id}
+
+
+# Recalls the stationed companion; an ordinary NPC keeps the company running at reduced efficiency.
+# The companion rejoins the active party if there is room, otherwise stays recruited as a reserve.
+func recall_commerce_manager(city_id: String) -> Dictionary:
+	var key := _commerce_city_key(city_id)
+	var member_id := commerce.recall_manager(key, calendar_week_index)
+	if member_id == "":
+		return {"ok": false, "reason": "no-company" if not commerce.has_company(key) else "no-companion-manager"}
+	var rejoined := active_party_ids.size() < PARTY_CAPACITY and not active_party_ids.has(member_id)
+	if rejoined:
+		active_party_ids.append(member_id)
+	return {"ok": true, "reason": "", "city_id": key, "member_id": member_id, "rejoined_active_party": rejoined}
+
+
+# Read-only copy of the ledger in its save shape.
+func commerce_ledger_state() -> Dictionary:
+	return commerce.to_save()
 
 
 func member_name(member_id: String) -> String:
@@ -1122,6 +1241,7 @@ func make_snapshot(scene_kind: String, position: Vector2, note: String) -> Dicti
 			"discovered": discovered_locations.duplicate(true),
 			"lastTravel": last_travel.duplicate(true),
 		},
+		"commerce": commerce.to_save(),
 	}
 
 
@@ -1187,6 +1307,7 @@ func load_save(id: String) -> bool:
 	battle_enemy_id = ""
 	battle_return_position = resume_area_position
 	_restore_travel_state(snapshot)
+	_restore_commerce_state(snapshot)
 	language_changed.emit()
 	return true
 
@@ -1212,7 +1333,8 @@ func _restore_travel_state(snapshot: Dictionary) -> void:
 		return
 	var block: Dictionary = snapshot["travel"]
 	calendar_minutes = int(roundf(float(block["calendarMinutes"])))
-	calendar_week_index = int(block.get("calendarWeekIndex", TravelCalendar.week_index(calendar_minutes)))
+	# A saved calendarWeekIndex was checked to equal this; older saves without it get the same value.
+	calendar_week_index = TravelCalendar.week_index(calendar_minutes)
 	current_location_id = registry.resolve_location_id(String(block.get("locationId", "")))
 	if current_location_id == "":
 		current_location_id = scene_location
@@ -1228,6 +1350,25 @@ func _restore_travel_state(snapshot: Dictionary) -> void:
 	travel_state_migrated = false
 
 
+# Runs after _restore_travel_state. Settles and emits nothing. Saves without a commerce block start an
+# empty ledger whose cursor is the restored week, so no earlier weeks are ever paid out.
+func _restore_commerce_state(snapshot: Dictionary) -> void:
+	if not snapshot.has("commerce"):
+		_reset_commerce_state()
+		commerce_state_migrated = true
+		return
+	# _valid_snapshot required the saved cursor to equal the restored clock's week, so nothing is adjusted.
+	commerce.load_save(snapshot["commerce"], travel_registry().resolve_location_id)
+	commerce_state_migrated = false
+
+
+# The week _restore_travel_state will restore: from a valid travel block, else the migrated start date.
+func _saved_week_index(snapshot: Dictionary) -> int:
+	if not snapshot.has("travel"):
+		return TravelCalendar.week_index(travel_registry().calendar_start_minutes)
+	return TravelCalendar.week_index(int(roundf(float(snapshot["travel"]["calendarMinutes"]))))
+
+
 func _valid_travel_block(block: Variant) -> bool:
 	if typeof(block) != TYPE_DICTIONARY:
 		return false
@@ -1236,7 +1377,9 @@ func _valid_travel_block(block: Variant) -> bool:
 	var minutes: Variant = block.get("calendarMinutes")
 	if typeof(minutes) not in [TYPE_INT, TYPE_FLOAT] or not is_finite(float(minutes)) or float(minutes) != roundf(float(minutes)):
 		return false
-	if block.has("calendarWeekIndex") and (typeof(block["calendarWeekIndex"]) not in [TYPE_INT, TYPE_FLOAT] or float(block["calendarWeekIndex"]) != roundf(float(block["calendarWeekIndex"]))):
+	# The week index is derived data: when present it must be the week of the saved clock, so the
+	# commerce cursor checks below always compare against the clock that is actually restored.
+	if block.has("calendarWeekIndex") and (typeof(block["calendarWeekIndex"]) not in [TYPE_INT, TYPE_FLOAT] or float(block["calendarWeekIndex"]) != float(TravelCalendar.week_index(int(roundf(float(minutes)))))):
 		return false
 	if typeof(block.get("locationId", "")) != TYPE_STRING or typeof(block.get("discovered", {})) != TYPE_DICTIONARY or typeof(block.get("lastTravel", {})) != TYPE_DICTIONARY:
 		return false
@@ -1322,6 +1465,10 @@ func _valid_snapshot(snapshot: Dictionary) -> bool:
 		if not DESTINATIONS.has(destination_id) or snapshot["areasVisited"][destination_id] != true:
 			return false
 	if snapshot.has("travel") and not _valid_travel_block(snapshot["travel"]):
+		return false
+	# Checked against the week the load will restore: the cursor must equal it (never behind, so no
+	# ended week is silently skipped; never ahead) and no company may be newer than it.
+	if snapshot.has("commerce") and not CommerceLedger.is_valid_save_block(snapshot["commerce"], _saved_week_index(snapshot), snapshot["recruited"], snapshot["members"], party, travel_registry().resolve_location_id):
 		return false
 	return true
 

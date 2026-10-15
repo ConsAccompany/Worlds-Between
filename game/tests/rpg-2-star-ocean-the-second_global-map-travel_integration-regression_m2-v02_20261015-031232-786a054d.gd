@@ -267,6 +267,8 @@ func _legacy_save_on_map() -> void:
 	app.begin_new_run()
 	var legacy: Dictionary = app.make_snapshot("map", Vector2.ZERO, "manual_note")
 	legacy.erase("travel")
+	# A real pre-travel save is older than the commerce block too, so it has neither.
+	legacy.erase("commerce")
 	legacy["destination"] = "scifi.outskirts"
 	legacy["areasVisited"] = {"scifi.outskirts": true, "scifi.ruins": true}
 	legacy["playTimeSeconds"] = 90000.0
