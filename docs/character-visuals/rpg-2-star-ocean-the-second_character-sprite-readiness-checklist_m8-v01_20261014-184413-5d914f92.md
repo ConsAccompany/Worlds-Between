@@ -15,7 +15,7 @@
 - 来源立绘：approved 9 / concept 43（注册表现值，本文不改）。
 - 就绪状态：未开始 45；有 32×48 占位帧（已被否定为画质基线） 5；有未登记的 32×48 占位清单 2。
 - 美术验收（runtime-sprite）：已验收 0 / 待定 52；MVP 战斗动作已验收 0/5；显示图已验收 0/52。
-- 正式生产帧：0/52。所有清单均未声明 `frame_counts`，因此所有变体处于入库阶段 0（未达阶段 1）。
+- 正式生产帧（经用户美术验收）：0/52。另检测到 1 份清单声明 `frame_counts`（`game/assets/characters/walk-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-walk-pilot-manifest_m8-w01_20261015-024345-e80ccf73.json`），其中 1 份未标 `art_approved=true`，只是待人工评审的试点帧，不是正式生产帧；相关变体入库阶段未自动推导，需按入库检查清单人工复核。其余 51/52 个变体处于入库阶段 0。
 - 用户批准的静态待机基准帧：1 个变体（`protagonist-female`）。只批准单张静态视觉基准，不算任何闸门通过，不计入上面的美术验收或探索精灵数。
 - 战斗动作 MVP 必需（资产清单 scope=MVP）：`protagonist-male`、`protagonist-female`、`liang-xu`、`ji-cheng`、`zhao-ling`；其余 47 名战斗组在资产清单中为 Full 范围，不属 MVP。
 - 路径核对：缺失 0 个；已引用但未纳入 git 0 个（详见末节）。
@@ -58,10 +58,11 @@
 
 - 身份／发型锚点（注册表原文）：「高束长马尾」
 - 来源立绘：**concept** · `outputs/rpg-2-star-ocean-the-second_protagonist_character-sheet_female_20261013-153316-8fa4d0c3.png` · 存在
-- 就绪状态：有 32×48 占位帧（已被否定为画质基线） · 入库阶段 0
+- 就绪状态：有 32×48 占位帧（已被否定为画质基线） · 入库阶段 未自动推导（有声明 `frame_counts` 的清单，需人工复核；不表示已越过阶段 0）
 - 美术验收：**pending**（仅用户；资产清单 `runtime-sprite.protagonist-female` stage=production checked=false）
 - [ ] G1 四方向正式帧 0/4（占位方向：south、west、north、east；西向绘制方式：未声明）
 - [ ] G2 探索动画（注册表 four_direction_native_walk_integrated / pending_motion_and_art_approval；占位 待机 4 + 行走 16；正式帧数未批准）
+  - 声明 `frame_counts` 的清单：`game/assets/characters/walk-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-walk-pilot-manifest_m8-w01_20261015-024345-e80ccf73.json`（未批准试点帧，非正式生产帧）
   - 占位清单：`game/assets/characters/native-animation/rpg-2-star-ocean-the-second_protagonist-female_native-animation-manifest_m8-prototype_20261014-140955-d7d64ca7.json` · 存在
   - 注册表未引用的相关清单：`game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-pixelorama-pilot-manifest_m8-v01_20261014-211454-868681b7.json`
   - 注册表未引用的相关清单：`game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-quantized-downscale-manifest_m8-v01_20261014-212322-aa446773.json`
@@ -74,6 +75,7 @@
   - 注册表未引用的相关清单：`game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v7-slate-coat-manifest_m8-v07_20261015-015010-ed510f85.json`
   - 注册表未引用的相关清单：`game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v8-cloth-leather-manifest_m8-v08_20261015-021600-2d6c5eff.json`
   - 注册表未引用的相关清单：`game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v8-editable-manifest_m8-v08_20261015-080907-270b2256.json`
+  - 注册表未引用的相关清单：`game/assets/characters/walk-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-walk-pilot-manifest_m8-w01_20261015-024345-e80ccf73.json`
   - 用户批准的静态基准帧（2026-10-14，用户回复「够了，可作为静止帧基准」）：south idle 单帧 selout v8 cloth-leather，48 逻辑像素；只是静态视觉基准，本闸门仍为 pending。决定记录：`docs/character-visuals/rpg-2-star-ocean-the-second_protagonist-female_south-idle-static-baseline-decision_m8-v08_20261015-022700-07161696.md`
     - 源图：`game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v8-cloth-leather-candidate_m8-v08_20261015-021600-157a5ea0.png`（sha256-bytes `ccf9d2a293e7f1b9…`）；清单：`game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v8-cloth-leather-manifest_m8-v08_20261015-021600-2d6c5eff.json`（sha256-text-lf-v1 `3ba35811bf4d55b0…`）
     - 用户看过的 1280×720 实机截图：`outputs/rpg-2-star-ocean-the-second_city-bright_protagonist-female-south-idle-selout-v8-h48_m8-v08_20261015-022215-e2203167.png`、`outputs/rpg-2-star-ocean-the-second_outskirts-bright_protagonist-female-south-idle-selout-v8-h48_m8-v08_20261015-022215-e2203167.png`；同次暗场景：`outputs/rpg-2-star-ocean-the-second_survey-annex-room2-dark_protagonist-female-south-idle-selout-v8-h48_m8-v08_20261015-022215-e2203167.png`
@@ -82,7 +84,7 @@
 - [ ] G2c 战斗动画（MVP 必需；注册表 sideview_8_action_prototype_integrated / pending_art_approval；原型 8 动作 20 帧；资产清单 `playable-combat.protagonist-female` checked=false）
   - 原型清单：`game/assets/characters/combat-prototypes/rpg-2-star-ocean-the-second_protagonist-female_sideview-combat-manifest_m8-prototype_20261014-143059-e2500154.json` · 存在
 - [ ] G3 比例 48 逻辑像素；master/scale/cell_size/ground_pin 未定
-- [ ] G4 QA：自动检查未运行（无正式帧）；实机截图回执无；人工身份/方向复核 pending
+- [ ] G4 QA：自动检查未运行；实机截图回执无；人工身份/方向复核 pending
 - [ ] G5 用户美术验收：pending，无回执
 - [ ] 显示图：注册表 not_started / pending；资产清单 stage=planned checked=false
 
