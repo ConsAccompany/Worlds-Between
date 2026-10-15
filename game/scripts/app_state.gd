@@ -136,10 +136,13 @@ const STRINGS := {
 		"growth_placeholder_skill": "%s · 仅经营",
 		"growth_skill_placeholder": "职业技能：%s（经营用，暂无战斗效果）",
 		"growth_merchant_note": "行商可在城市派驻商会：世界地图 · 商会。",
+		"growth_fair_quote_note": "公平报价 Lv%d：驻守满周的商会收益 +%d%%。世界地图 · 商会。",
 		"commerce_open": "商会", "commerce_title": "商会 · %s",
 		"commerce_ledger": "商会账目累计 %d 点（暂定记账，不是货币，暂不能消费）",
 		"commerce_none_here": "此城尚无商会。派驻一名行商伙伴即可开设；驻守期间该伙伴离队。",
-		"commerce_company_companion": "%s：%s 驻守 · 收益 %d%% · 已结算 %d 周 · 累计 %d 点",
+		"commerce_company_companion": "%s：%s 驻守 · 满周收益 %d%% · 已结算 %d 周 · 累计 %d 点",
+		"commerce_week_partial": "　本周：派驻未满一周，按普通 NPC %d%% 结算；下周起按满周 %d%%。",
+		"commerce_week_opening": "　本周：开业当周不计收益；下周起按满周 %d%%。",
 		"commerce_company_npc": "%s：普通 NPC 经营 · 收益 %d%% · 已结算 %d 周 · 累计 %d 点",
 		"commerce_rule": "每周一结算上一周。开业当周不计收益；伙伴须驻守满一整周才按全效结算。",
 		"commerce_no_merchant": "暂无可派驻的行商伙伴。伙伴到十级关口时，可在「角色与职业」转入行商。",
@@ -339,10 +342,13 @@ const STRINGS := {
 		"growth_placeholder_skill": "%s · commerce",
 		"growth_skill_placeholder": "Job skills: %s (commerce only; no battle effect yet)",
 		"growth_merchant_note": "Merchants can run a city company: World map · Company.",
+		"growth_fair_quote_note": "Fair Quote Lv%d: +%d%% on fully stationed weeks. World map · Company.",
 		"commerce_open": "Company", "commerce_title": "Company · %s",
 		"commerce_ledger": "Company ledger: %d points in total (provisional record, not money; cannot be spent yet)",
 		"commerce_none_here": "No company in this city yet. Station a Merchant companion to open one; they leave the party while stationed.",
-		"commerce_company_companion": "%s: run by %s · %d%% rate · weeks settled: %d · %d points",
+		"commerce_company_companion": "%s: run by %s · full-week rate %d%% · weeks settled: %d · %d points",
+		"commerce_week_partial": "  This week: not stationed for the full week, so it settles at the NPC rate (%d%%); %d%% from next week.",
+		"commerce_week_opening": "  This week: opening week, earns nothing; %d%% from next week.",
 		"commerce_company_npc": "%s: run by a local NPC · %d%% rate · weeks settled: %d · %d points",
 		"commerce_rule": "Each Monday settles the week before. The opening week earns nothing; a companion must stay a full week to earn the full rate.",
 		"commerce_no_merchant": "No Merchant companion is available. At a level-10 threshold, a companion can switch to Merchant in Characters & Jobs.",
@@ -608,7 +614,7 @@ func advance_calendar(minutes: int, reason: String) -> bool:
 	var settlement := {}
 	var report_settlement := false
 	if new_week > previous_week:
-		settlement = commerce.settle_to_week(previous_week, new_week, _commerce_companion_ids())
+		settlement = commerce.settle_to_week(previous_week, new_week, _commerce_companion_ids(), _commerce_fair_quote_ranks())
 		report_settlement = not settlement["settled_week_indices"].is_empty() and not commerce.companies.is_empty()
 	calendar_advanced.emit(previous, new_minutes, reason)
 	if new_week > previous_week:
@@ -860,6 +866,25 @@ func _commerce_companion_ids() -> Dictionary:
 		if String(member_states.get(member_id, {}).get("job_series", "")) == CommerceLedger.MERCHANT_SERIES_ID:
 			result[member_id] = true
 	return result
+
+
+# Current Fair Quote rank of each recruited companion; read at settlement time only, never saved separately.
+func _commerce_fair_quote_ranks() -> Dictionary:
+	var result := {}
+	for member_id in recruited_members:
+		result[member_id] = GrowthRules.fair_quote_rank(member_states.get(member_id, {}))
+	return result
+
+
+# Rate a full week with this companion stationed would pay now: 100 % plus Fair Quote.
+func commerce_companion_rate_percent(member_id: String) -> int:
+	return CommerceLedger.companion_rate_percent(GrowthRules.fair_quote_rank(member_states.get(member_id, {})))
+
+
+# Rate the running week would settle at if it ended now: 0 in the opening week, the NPC rate in the
+# partial week after (re-)stationing, otherwise the full-week rate. The panel shows it when it differs.
+func commerce_current_week_rate_percent(city_id: String) -> int:
+	return commerce.week_rate_percent(_commerce_city_key(city_id), calendar_week_index, _commerce_companion_ids(), _commerce_fair_quote_ranks())
 
 
 # Company key for a place: its current location id, or the saved id when the place is no longer known.
@@ -1184,6 +1209,9 @@ func choose_job(member_id: String, action: String, target_series: String = "") -
 	var member := member_state(member_id)
 	if member.is_empty() or int(member.get("pending_job_choices", 0)) < 1:
 		return false
+	# A stationed manager's Fair Quote rank is frozen, so neither stage nor series may change mid-week.
+	if action in ["promote", "switch"] and commerce.company_for_manager(member_id) != "":
+		return false
 	var current: String = member["job_series"]
 	var records: Dictionary = member["job_records"]
 	match action:
@@ -1215,8 +1243,11 @@ func upgrade_job_skill(member_id: String, skill_id: String) -> bool:
 	if member.is_empty():
 		return false
 	var series_id: String = member["job_series"]
-	# Placeholder (Merchant) skills have no effect yet, so JP is never spent on them.
-	if not GrowthRules.job_skills_have_effect(series_id):
+	# Placeholder skills (Merchant Supply Pact) have no effect, so JP is never spent on them.
+	if not GrowthRules.job_skill_upgradable(series_id, skill_id):
+		return false
+	# A stationed manager's Fair Quote rank is frozen, so the week being earned is priced at one rank.
+	if skill_id == GrowthRules.FAIR_QUOTE_SKILL_ID and commerce.company_for_manager(member_id) != "":
 		return false
 	var skills: Array = GrowthRules.SERIES[series_id]["skills"]
 	if not skills.has(skill_id) or skills.find(skill_id) >= int(member["job_stage"]):

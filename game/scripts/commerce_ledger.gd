@@ -10,11 +10,18 @@ class_name CommerceLedger
 # into week N settles every ended week from the cursor up to N - 1, once each, then moves the cursor
 # to N. A company earns nothing for the partial week in which it opened; a week pays the companion
 # rate only if the same merchant companion was stationed for the whole week, otherwise the NPC rate.
+#
+# Fair Quote (公平报价, the stage-2 Merchant passive) adds FAIR_QUOTE_PERCENT_PER_RANK of the base per
+# rank, only to weeks paid at the companion rate: ranks 1/2/3 pay 105/110/115 % with the provisional
+# base of 100. NPC-rate weeks (after a recall, or the partial week after stationing) get no bonus. The
+# rank is read when the week is settled; it is never stored here, and settled weeks are never re-priced.
 
 const SAVE_VERSION := 1
 const LEDGER_UNIT_KIND := "provisional-ledger-unit"
 const PROVISIONAL_BASE_WEEKLY_INCOME := 100
 const NPC_EFFICIENCY_PERCENT := 80
+const FAIR_QUOTE_PERCENT_PER_RANK := 5
+const FAIR_QUOTE_MAX_RANK := 3
 const MERCHANT_SERIES_ID := "merchant"
 
 # Tests and later tuning may change this; it is not saved, so saves follow the current rule.
@@ -80,21 +87,33 @@ func recall_manager(city_id: String, week_index: int) -> String:
 	return member_id
 
 
+# Companion-rate percentage for a Fair Quote rank (clamped to 0..FAIR_QUOTE_MAX_RANK).
+static func companion_rate_percent(fair_quote_rank: int) -> int:
+	return 100 + FAIR_QUOTE_PERCENT_PER_RANK * clampi(fair_quote_rank, 0, FAIR_QUOTE_MAX_RANK)
+
+
 # companion_ids: members who may still earn the companion rate (recruited and currently merchants).
-func week_income(city_id: String, week: int, companion_ids: Dictionary) -> int:
+# fair_quote_ranks: member id -> current Fair Quote rank; missing members count as rank 0.
+# Percentage of the base a week pays: 0 in the opening week, the companion rate (with Fair Quote) for a
+# full stationed week, otherwise the NPC rate (including the partial week after stationing).
+func week_rate_percent(city_id: String, week: int, companion_ids: Dictionary, fair_quote_ranks: Dictionary = {}) -> int:
 	var company: Dictionary = companies.get(city_id, {})
 	if company.is_empty() or week <= int(company["openedWeekIndex"]):
 		return 0
 	var manager := String(company["managerId"])
 	if manager != "" and companion_ids.has(manager) and int(company["managerSinceWeekIndex"]) < week:
-		return base_weekly_income
-	return base_weekly_income * NPC_EFFICIENCY_PERCENT / 100
+		return companion_rate_percent(int(fair_quote_ranks.get(manager, 0)))
+	return NPC_EFFICIENCY_PERCENT
+
+
+func week_income(city_id: String, week: int, companion_ids: Dictionary, fair_quote_ranks: Dictionary = {}) -> int:
+	return base_weekly_income * week_rate_percent(city_id, week, companion_ids, fair_quote_ranks) / 100
 
 
 # Settles the weeks that ended between the cursor and new_week_index. The cursor makes repeats and
 # out-of-order calls no-ops; starting no earlier than previous_week_index means a clock moved without
 # a transition (set directly) never pays for the weeks it skipped.
-func settle_to_week(previous_week_index: int, new_week_index: int, companion_ids: Dictionary) -> Dictionary:
+func settle_to_week(previous_week_index: int, new_week_index: int, companion_ids: Dictionary, fair_quote_ranks: Dictionary = {}) -> Dictionary:
 	var first := maxi(settled_week_index, previous_week_index)
 	var result := {"settled_week_indices": [], "units": 0, "by_company": {}, "ledger_unit_kind": LEDGER_UNIT_KIND}
 	if new_week_index <= settled_week_index:
@@ -104,7 +123,7 @@ func settle_to_week(previous_week_index: int, new_week_index: int, companion_ids
 		for city_id in companies:
 			if week <= int(companies[city_id]["openedWeekIndex"]):
 				continue
-			var units := week_income(city_id, week, companion_ids)
+			var units := week_income(city_id, week, companion_ids, fair_quote_ranks)
 			companies[city_id]["weeksSettled"] = int(companies[city_id]["weeksSettled"]) + 1
 			companies[city_id]["unitsEarned"] = int(companies[city_id]["unitsEarned"]) + units
 			result["by_company"][city_id] = int(result["by_company"].get(city_id, 0)) + units

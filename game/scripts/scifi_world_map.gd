@@ -1062,7 +1062,14 @@ func _refresh_commerce() -> void:
 		var manager := String(company["managerId"])
 		var place := AppState.travel_location_name(String(company_city))
 		if manager != "":
-			lines.append(AppState.text_for("commerce_company_companion") % [place, AppState.member_name(manager), 100, int(company["weeksSettled"]), int(company["unitsEarned"])])
+			var full_rate := AppState.commerce_companion_rate_percent(manager)
+			lines.append(AppState.text_for("commerce_company_companion") % [place, AppState.member_name(manager), full_rate, int(company["weeksSettled"]), int(company["unitsEarned"])])
+			# The shown rate is for full weeks; say so when the running week settles differently.
+			var week_rate := AppState.commerce_current_week_rate_percent(String(company_city))
+			if week_rate == 0:
+				lines.append(AppState.text_for("commerce_week_opening") % full_rate)
+			elif week_rate != full_rate:
+				lines.append(AppState.text_for("commerce_week_partial") % [week_rate, full_rate])
 		else:
 			lines.append(AppState.text_for("commerce_company_npc") % [place, CommerceLedger.NPC_EFFICIENCY_PERCENT, int(company["weeksSettled"]), int(company["unitsEarned"])])
 	lines.append(AppState.text_for("commerce_rule"))

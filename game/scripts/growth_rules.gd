@@ -8,12 +8,15 @@ const SERIES := {
 	"tactics": {"aptitude": "scholarly", "stage_names": ["参谋", "战术师"], "stage_names_en": ["Strategist", "Tactician"], "skills": ["tactics_mark", "tactics_rally"]},
 	"relics": {"aptitude": "spiritual", "stage_names": ["遗物学徒", "遗物师"], "stage_names_en": ["Relic Adept", "Relic Keeper"], "skills": ["relics_echo", "relics_delay"]},
 	# Merchant (行商): only the first two of the proposal's five stages, like every MVP series. Its id must
-	# match CommerceLedger.MERCHANT_SERIES_ID. "placeholder_skills": its job skills have no effect yet (no
-	# battle effect, and the provisional ledger does not read their ranks), so they are never battle
-	# actions and take no JP. Personal skills are unaffected.
-	"merchant": {"aptitude": "adaptive", "stage_names": ["行商", "契约经理"], "stage_names_en": ["Merchant", "Contract Manager"], "skills": ["merchant_supply_pact", "merchant_fair_quote"], "placeholder_skills": true},
+	# match CommerceLedger.MERCHANT_SERIES_ID. "placeholder_skills": its job skills have no battle effect,
+	# so they are never battle actions. "commerce_passive_skills" lists the ones that are JP-upgradable
+	# commerce passives: stage-2 Fair Quote (公平报价), read by the provisional ledger at settlement. The
+	# rest (stage-1 Supply Pact) remain placeholders with no effect and take no JP. Personal skills are
+	# unaffected.
+	"merchant": {"aptitude": "adaptive", "stage_names": ["行商", "契约经理"], "stage_names_en": ["Merchant", "Contract Manager"], "skills": ["merchant_supply_pact", "merchant_fair_quote"], "placeholder_skills": true, "commerce_passive_skills": ["merchant_fair_quote"]},
 }
 const SKILL_JP_BASE := [20, 35, 55]
+const FAIR_QUOTE_SKILL_ID := "merchant_fair_quote"
 
 
 static func xp_to_next(level: int) -> int:
@@ -46,9 +49,25 @@ static func stage_name(series_id: String, stage: int, language: String) -> Strin
 	return String(names[clampi(stage, 1, names.size()) - 1])
 
 
-# False for unknown series and for series whose job skills are placeholders (Merchant).
+# Battle effect only. False for unknown series and for series whose job skills are placeholders in
+# battle (Merchant), so the battle never shows or runs them.
 static func job_skills_have_effect(series_id: String) -> bool:
 	return SERIES.has(series_id) and not bool(SERIES[series_id].get("placeholder_skills", false))
+
+
+# Whether JP may be spent on this skill: battle skills, plus listed commerce passives (Fair Quote).
+static func job_skill_upgradable(series_id: String, skill_id: String) -> bool:
+	if not SERIES.has(series_id) or not SERIES[series_id]["skills"].has(skill_id):
+		return false
+	return job_skills_have_effect(series_id) or SERIES[series_id].get("commerce_passive_skills", []).has(skill_id)
+
+
+# Fair Quote rank that counts for commerce: 0 unless the member is currently a stage-2 Merchant
+# (Contract Manager), clamped to the JP rank range so a tampered save cannot inflate it.
+static func fair_quote_rank(member: Dictionary) -> int:
+	if String(member.get("job_series", "")) != "merchant" or int(member.get("job_stage", 1)) < 2:
+		return 0
+	return clampi(skill_rank(member, FAIR_QUOTE_SKILL_ID), 0, SKILL_JP_BASE.size())
 
 
 static func current_skill_id(member: Dictionary) -> String:

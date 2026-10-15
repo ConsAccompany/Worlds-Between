@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
   "planVersion": "v0.2",
-  "updatedAt": "2026-10-15T17:08:52Z",
+  "updatedAt": "2026-10-15T18:35:00Z",
   "currentStep": "M8",
   "steps": [
     {
@@ -36,6 +36,7 @@
         "docs/design/rpg-2-star-ocean-the-second_shanghai-cross-city-air-route_research-packet_unapproved-v01_20261015-031235-9d63971b.md (air-route candidates; research only, nothing selected)",
         "docs/qa/rpg-2-star-ocean-the-second_commerce-weekly-settlement_calendar-hookup_qa-note_m2-v01_20261015-082014-bef9e5a4.md (commit 192c63b: provisional CommerceLedger settles at the calendar week rollover; COMMERCE_WEEKLY_SETTLEMENT_OK checks=149)",
         "docs/qa/rpg-2-star-ocean-the-second_merchant-career-city-commerce_playable-path_qa-note_m2-v01_20261015-091137-4f40adc4.md (engineering candidate, not accepted: Merchant job and modal city company panel; MERCHANT_CITY_COMMERCE_PATH_OK checks=109; commerce 149 and GLOBAL_MAP_TRAVEL_INTEGRATION_OK checks=104 still pass)",
+        "docs/qa/rpg-2-star-ocean-the-second_merchant-fair-quote_rank-passive-weekly-settlement_qa-note_m2-v01_20261015-132840-9c1dcc80.md (engineering candidate, not accepted: stage-2 Fair Quote as a JP-upgradable provisional commerce passive, +5 % of base per rank on companion-rate weeks; the company panel separates the full-week rate from the partial NPC 80 % week after (re-)stationing; old-save regression pays 105 at rank 1; MERCHANT_FAIR_QUOTE_OK checks=91; zh/en 1280x720 captures FAIR_QUOTE_CAPTURE_OK captures=6)",
         "Earlier slice (does not count for the new rule): old three-destination M2_SMOKE_OK and four 2026-10-13 visual proofs"
       ],
       "remaining": [
@@ -45,7 +46,7 @@
         "Add an actual air route to game data. The air-route packet lists three research candidates (SHA→PEK, SHA→CAN, SHA→HND); none is selected and no new playable city is chosen. Plane and plane+car formats are only checked with a test fixture.",
         "Produce and accept the map art (colours, label boxes, roads and markers are functional placeholders).",
         "Human map review and the two human timed playtests (0/2).",
-        "Commerce is provisional. Merchant is a 2-stage MVP (行商 → 契约经理); the full 20-series × 5-stage career canon is future work. Its job skills are placeholders, disabled in battle and for JP. Ledger points are not currency: there is no balance, spending, robber event or price effect."
+        "Commerce is provisional. Merchant is a 2-stage MVP (行商 → 契约经理); the full 20-series × 5-stage career canon is future work. Neither job skill works in battle. Stage-1 Supply Pact is a placeholder that takes no JP. Stage-2 Fair Quote is a provisional JP-upgradable commerce passive: +5 % of the base per rank, on weeks paid at the companion rate only. Ledger points are not currency: there is no balance, spending, robber event or price effect."
       ],
       "blocker": "First-city and underground-community anchors and the world start year await the user; Shanghai is provisional. Route minutes stay preliminary estimates until validated door-to-door figures exist; no air route is in the data.",
       "details": [
@@ -53,7 +54,7 @@
         "测试标记：GLOBAL_TRAVEL_CORE_OK；GLOBAL_EARTH_MAP_SMOKE_OK checks=201；GLOBAL_MAP_TRAVEL_INTEGRATION_OK checks=103；新版 M2_SMOKE_OK；CANVAS_POINTER_REGRESSION_OK。12 张 1280×720 实机截图（中英文各 6 张）只是运行证据，未验收。旧三点 M2_SMOKE_OK 不计入新规则。",
         "仍待用户决定（不是缺陷）：首城（上海暂定）、地下社区锚点、世界开始年份（日历起点 2026-04-01 08:00 为工程占位）。",
         "仍待制作或核实：路线为 Rome2Rio 地点到地点初步估算（上海→松江 34.8 km／26 分；上海→良渚 187.9 km／2 小时；松江→良渚经上海 146 分），门到门附加时间为 0；松江→良渚直达未核验；数据中没有航空路线，三条航线候选只是研究资料。地图美术未制作、未验收；未经人工审阅与试玩。",
-        "商会：暂定 CommerceLedger 已接入日历周结算（提交 192c63b，COMMERCE_WEEKLY_SETTLEMENT_OK checks=149）。工程候选（未验收）：伙伴可在 10 级职业选择时转为行商（只做 行商 → 契约经理 两阶 MVP，完整 20 系列 × 5 阶职业设定留待以后），并在已发现的城市从世界地图「商会」派驻经营（MERCHANT_CITY_COMMERCE_PATH_OK checks=109）。行商职业技能只是占位，战斗中不可用，也不能花 JP；账目点数不是货币，没有平衡、劫匪事件或价格影响。首城与开始年份仍是暂定。"
+        "商会：暂定 CommerceLedger 已接入日历周结算（提交 192c63b，COMMERCE_WEEKLY_SETTLEMENT_OK checks=149）。工程候选（未验收）：伙伴可在 10 级职业选择时转为行商（只做 行商 → 契约经理 两阶 MVP，完整 20 系列 × 5 阶职业设定留待以后），并在已发现的城市从世界地图「商会」派驻经营（MERCHANT_CITY_COMMERCE_PATH_OK checks=109）。行商职业技能在战斗中都不可用；一阶补给协议仍是占位，不能花 JP；二阶公平报价是暂定的经营被动，可花 JP 升级，每级为伙伴全效周加基础收益的 5 %（1/2/3 级 = 105/110/115 %），NPC 经营周不加成；商会面板标明满周收益，并在派驻或重新派驻后的未满一周注明按普通 NPC 80 % 结算；旧存档中已是 1 级的契约经理下次结算得 105（MERCHANT_FAIR_QUOTE_OK checks=91）；账目点数不是货币，没有平衡、劫匪事件或价格影响。首城与开始年份仍是暂定。"
       ]
     },
     {

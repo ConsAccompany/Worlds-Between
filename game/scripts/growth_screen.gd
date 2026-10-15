@@ -133,7 +133,7 @@ func _refresh() -> void:
 		var cost := GrowthRules.jp_cost(member, String(member["job_series"]), rank + 1)
 		button.text = AppState.text_for("growth_upgrade") % [skill_name, cost] if cost >= 0 else skill_name + " MAX"
 		button.disabled = cost < 0 or int(member.get("jp", 0)) < cost
-		if not skills_have_effect:
+		if not GrowthRules.job_skill_upgradable(String(member["job_series"]), skill_id):
 			button.text = AppState.text_for("growth_placeholder_skill") % skill_name
 			button.disabled = true
 	skill_label.text = AppState.text_for("growth_skill" if skills_have_effect else "growth_skill_placeholder") % " / ".join(unlocked)
@@ -144,7 +144,9 @@ func _refresh() -> void:
 	personal_upgrade_button.text = AppState.text_for("growth_personal") % [personal_name, personal_rank, personal_cost] if personal_cost >= 0 else personal_name + " MAX"
 	personal_upgrade_button.disabled = personal_cost < 0 or int(member.get("jp", 0)) < personal_cost
 	var pending := int(member.get("pending_job_choices", 0)) > 0
-	pending_label.text = AppState.text_for("growth_pending") if pending else (AppState.text_for("growth_merchant_note") if member["job_series"] == CommerceLedger.MERCHANT_SERIES_ID else "")
+	var fair_quote_rank := GrowthRules.fair_quote_rank(member)
+	var merchant_note := AppState.text_for("growth_fair_quote_note") % [fair_quote_rank, CommerceLedger.companion_rate_percent(fair_quote_rank) - 100] if fair_quote_rank > 0 else AppState.text_for("growth_merchant_note")
+	pending_label.text = AppState.text_for("growth_pending") if pending else (merchant_note if member["job_series"] == CommerceLedger.MERCHANT_SERIES_ID else "")
 	stay_button.text = AppState.text_for("growth_stay")
 	stay_button.disabled = not pending
 	promote_button.text = AppState.text_for("growth_promote")
