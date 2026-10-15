@@ -7,9 +7,10 @@
 // captures (v6 + v5 reference), and the separate selout v8 card (user-approved ONLY as the female south idle static
 // still-frame baseline), its six same-run captures (v8 + v7 reference), the decision record, the readiness checklist's
 // static_idle_baseline record and the docs/progress.md entry. Read-only: no project file is written.
+// Text files (JSON/Markdown) are compared with sha256-text-lf-v1 so the check passes in LF and CRLF checkouts alike;
+// PNG and other binary files keep exact-byte SHA-256.
 // Run from the repository root: node tests/game-bible-selout-v2/<this file>
 const assert = require('node:assert/strict');
-const crypto = require('node:crypto');
 const fs = require('node:fs');
 const net = require('node:net');
 const path = require('node:path');
@@ -61,7 +62,7 @@ const v8Decision = 'docs/character-visuals/rpg-2-star-ocean-the-second_protagoni
 // approved. A manifest's walk_frames: 0 means that static candidate has no walk frames, not that the project has none.
 const historicalWalkPrototypes = ['01-44edae33', '02-8a297561', '03-ba73f592', '04-70d3f0b5'].map(s =>
   path.join(root, 'game', 'assets', 'characters', 'native-animation', `rpg-2-star-ocean-the-second_protagonist-female_native-walk-south-phase-${s.slice(0, 2)}_m8-prototype_20261014-140955-${s.slice(3)}.png`));
-const sha256 = data => crypto.createHash('sha256').update(data).digest('hex');
+const {BYTES_HASH, TEXT_HASH, sha256, textSha256, contentHash} = require(path.join(root, 'tools', 'rpg-2-star-ocean-the-second_content-hash_text-lf-v1_m8-v01_20261014-224905-022124e7.js'));
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 const results = [];
 const pass = label => { results.push(label); console.log('PASS ' + label); };
@@ -202,7 +203,8 @@ async function renderProduction(base) {
   assert.match(female.seloutV2Status, /NOT approved/);
   assert.match(female.seloutV2Status, /editable selout v1 baseline, not v2/);
   const checklist = JSON.parse(fs.readFileSync(checklistPath, 'utf8'));
-  assert.equal(checklist.sources.inventory.sha256, sha256(fs.readFileSync(inventoryPath)), 'readiness checklist records the current inventory hash');
+  assert.equal(checklist.sources.inventory.sha256_algorithm, TEXT_HASH);
+  assert.equal(checklist.sources.inventory.sha256, textSha256(fs.readFileSync(inventoryPath)), 'readiness checklist records the current inventory hash');
   assert.equal(checklist.variants.length, 52);
   assert.equal(checklist.scope.character_identities, 51);
   assert.equal(checklist.summary.art_accepted, 0);
@@ -224,7 +226,7 @@ async function renderProduction(base) {
   assert.equal(v4Manifest.output.measured.unique_opaque_rgb_colours, 27);
   assert.deepEqual([v4Manifest.output.measured.visible_body_width_texels, v4Manifest.output.measured.visible_body_height_texels], [43, 96]);
   assert.equal(v4Manifest.pixel_changes.total, 358);
-  assert.equal(sha256(fs.readFileSync(v4ReportPath)), v4Manifest.qa_captures.report_sha256, 'manifest records the v4 report hash');
+  assert.equal(textSha256(fs.readFileSync(v4ReportPath)), v4Manifest.qa_captures.report_sha256, 'manifest records the v4 report hash');
   for (const doc of [v4Manifest, v4Report]) { assert.equal(doc.art_approved, false); assert.equal(doc.human_reviewed, false); }
   assert.equal(v4Manifest.walk_frames, 0, 'the v4 static candidate itself contains no walk frames');
   assert.equal(v4Manifest.runtime_integrated, false);
@@ -301,7 +303,7 @@ async function renderProduction(base) {
   // The manifest's embedded QA record must point at this exact report and these exact captures.
   assert.ok(v5Manifest.qa_captures && typeof v5Manifest.qa_captures === 'object', 'v5 manifest embeds qa_captures');
   assert.equal(v5Manifest.qa_captures.report, path.basename(v5ReportPath));
-  assert.equal(v5Manifest.qa_captures.report_sha256, sha256(fs.readFileSync(v5ReportPath)), 'manifest records the current report hash');
+  assert.equal(v5Manifest.qa_captures.report_sha256, textSha256(fs.readFileSync(v5ReportPath)), 'manifest records the current report hash');
   assert.equal(v5Manifest.qa_captures.captures.length, 8);
   for (const mc of v5Manifest.qa_captures.captures) {
     const rc = v5Report.captures.find(c => c.scene === mc.scene && c.variant === mc.variant);
@@ -358,7 +360,7 @@ async function renderProduction(base) {
   assert.equal(new Set(v6CaptureFiles.map(c => c.sha)).size, 8, 'eight distinct v6-run capture files');
   assert.ok(v6Manifest.qa_captures && typeof v6Manifest.qa_captures === 'object', 'v6 manifest embeds qa_captures');
   assert.equal(v6Manifest.qa_captures.report, path.basename(v6ReportPath));
-  assert.equal(v6Manifest.qa_captures.report_sha256, sha256(fs.readFileSync(v6ReportPath)), 'manifest records the current report hash');
+  assert.equal(v6Manifest.qa_captures.report_sha256, textSha256(fs.readFileSync(v6ReportPath)), 'manifest records the current report hash');
   assert.equal(v6Manifest.qa_captures.captures.length, 8);
   for (const mc of v6Manifest.qa_captures.captures) {
     const rc = v6Report.captures.find(c => c.scene === mc.scene && c.variant === mc.variant);
@@ -376,7 +378,8 @@ async function renderProduction(base) {
   const v8Bytes = fs.readFileSync(v8Png);
   assert.equal(sha256(v8Bytes), 'ccf9d2a293e7f1b9c706b4d2f1bf9c00b3c7714ec4e9b8bddf023e166f68b6fd');
   assert.equal(sha256(v8Bytes), v8Manifest.output.sha256);
-  assert.equal(sha256(fs.readFileSync(path.join(root, v8ManifestRel))), '0fa7937d3d4f68f209b30e611542ae1a130a82ee2327fb98b0ca19dc77fb5992');
+  // Was locked as 0fa7937d…5992, the raw hash of the CRLF Windows working copy; same content, line-ending independent:
+  assert.equal(textSha256(fs.readFileSync(path.join(root, v8ManifestRel))), '3ba35811bf4d55b061b7719c6451908bdbb1eb68425bdda2c2303cc669f310ed');
   assert.equal(sha256(fs.readFileSync(v7Png)), v8Manifest.source.sha256, 'v7 PNG still matches the v8 source lock');
   assert.equal(sha256(v6Bytes), v8Manifest.source.also_preserved.v6.sha256, 'v6 PNG unchanged');
   assert.deepEqual(pngSize(v8Bytes), [80, 112]);
@@ -391,7 +394,7 @@ async function renderProduction(base) {
   assert.deepEqual(v8Report.acceptance_counters_unchanged, {runtime_exploration_sprites_accepted: '0/52', scene_quality_gates_passed: '0/11'});
   assert.equal(v8Report.sources['selout-v8'].sha256, v8Manifest.output.sha256);
   assert.equal(v8Report.sources['selout-v7-reference'].sha256, v8Manifest.source.sha256);
-  assert.equal(sha256(fs.readFileSync(v8ReportPath)), v8Manifest.qa_captures.report_sha256, 'manifest records the v8 report hash');
+  assert.equal(textSha256(fs.readFileSync(v8ReportPath)), v8Manifest.qa_captures.report_sha256, 'manifest records the v8 report hash');
   assert.equal(v8Report.captures.length, 6);
   const v8Scenes = ['city-bright', 'outskirts-bright', 'survey-annex-room2-dark'];
   const v8CaptureFiles = [];
@@ -425,6 +428,12 @@ async function renderProduction(base) {
   assert.equal(baseline.decision_record, v8Decision);
   assert.equal(baseline.files.png.sha256, v8Manifest.output.sha256);
   assert.ok(Object.values(baseline.files).every(f => f.exists && f.sha256_matches !== false), 'all baseline files exist with matching hashes');
+  // Recompute every lock here rather than trusting the stored flag; PNGs must stay on exact bytes.
+  for (const [role, f] of Object.entries(baseline.files)) {
+    if (!f.sha256) continue;
+    assert.equal(f.sha256_algorithm, f.path.endsWith('.png') ? BYTES_HASH : TEXT_HASH, role + ' hash algorithm');
+    assert.equal(contentHash(fs.readFileSync(path.join(root, f.path)), f.sha256_algorithm), f.sha256, role + ' lock');
+  }
   assert.equal(femaleVariant.gates.exploration_animation.status, 'pending');
   assert.deepEqual(femaleVariant.gates.four_facing.production_directions_done, []);
   assert.equal(femaleVariant.gates.art_acceptance.status, 'pending');

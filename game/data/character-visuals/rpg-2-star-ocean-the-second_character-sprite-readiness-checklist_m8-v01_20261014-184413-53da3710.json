@@ -16,10 +16,12 @@
   "sources": {
     "registry": {
       "path": "game/data/character-visuals/rpg-2-star-ocean-the-second_character-visual-registry_m8-v01_20261014-134810-2a5d1b3c.json",
-      "sha256": "2f0fc50ebdbef237a9a2fc098a7e7496e57776c6751d920f9137ab58d3d5556a"
+      "sha256_algorithm": "sha256-text-lf-v1",
+      "sha256": "732753892b57d394427d5a2c0e02f218183f04d4334b167eb417288c2e61273d"
     },
     "inventory": {
       "path": "outputs/rpg-2-star-ocean-the-second_asset-inventory_state_v01_20261013-191033-7d1e0a8b.json",
+      "sha256_algorithm": "sha256-text-lf-v1",
       "sha256": "04a8379778f986759eb9f7428143e10fb412812b54940a93f22c4234809cdef2"
     },
     "visual_spec": "docs/character-visuals/rpg-2-star-ocean-the-second_character-visual-spec_topdown-v01_20261014-135700-17a0c9d4.md",
@@ -30,7 +32,11 @@
   "policy": {
     "art_acceptance": "only the user may accept art; each status mirrors the user-controlled inventory checked flag (runtime-sprite / playable-combat / display); this script does not locate or verify the intake-checklist receipt file",
     "batch_gate": "no batch production until one variant passes intake stage 4 and the user approves production frame counts",
-    "frame_counts": "user approval of production frame counts is not machine-detectable here; 20 = existing placeholder layout, 48 = single-character pilot proposal"
+    "frame_counts": "user approval of production frame counts is not machine-detectable here; 20 = existing placeholder layout, 48 = single-character pilot proposal",
+    "content_hashes": {
+      "sha256-bytes": "SHA-256 of the exact file bytes; used for binary files (PNG)",
+      "sha256-text-lf-v1": "SHA-256 of the file bytes after each CRLF pair is replaced by LF; used for text files (JSON, Markdown) so locks match in LF and CRLF checkouts; NUL bytes or invalid UTF-8 are refused, nothing else is normalized"
+    }
   },
   "summary": {
     "source_portraits": {
@@ -291,36 +297,42 @@
               "png": {
                 "path": "game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v8-cloth-leather-candidate_m8-v08_20261015-021600-157a5ea0.png",
                 "exists": true,
+                "sha256_algorithm": "sha256-bytes",
                 "sha256": "ccf9d2a293e7f1b9c706b4d2f1bf9c00b3c7714ec4e9b8bddf023e166f68b6fd",
                 "sha256_matches": true
               },
               "manifest": {
                 "path": "game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v8-cloth-leather-manifest_m8-v08_20261015-021600-2d6c5eff.json",
                 "exists": true,
-                "sha256": "0fa7937d3d4f68f209b30e611542ae1a130a82ee2327fb98b0ca19dc77fb5992",
+                "sha256_algorithm": "sha256-text-lf-v1",
+                "sha256": "3ba35811bf4d55b061b7719c6451908bdbb1eb68425bdda2c2303cc669f310ed",
                 "sha256_matches": true
               },
               "qa_report": {
                 "path": "outputs/rpg-2-star-ocean-the-second_city-bright-dark_protagonist-female-south-idle-selout-v8-visual-qa-report_m8-v08_20261015-022215-e2203167.json",
                 "exists": true,
+                "sha256_algorithm": "sha256-text-lf-v1",
                 "sha256": "513ab6595fd3bedee02d8477e9a2646c7d98b40f19de8791d147e746e3ea631a",
                 "sha256_matches": true
               },
               "capture_city_bright": {
                 "path": "outputs/rpg-2-star-ocean-the-second_city-bright_protagonist-female-south-idle-selout-v8-h48_m8-v08_20261015-022215-e2203167.png",
                 "exists": true,
+                "sha256_algorithm": "sha256-bytes",
                 "sha256": "0b8e67ac75539fdac46e7843687d660d0dfa98697f7bf229b0079437351d9e65",
                 "sha256_matches": true
               },
               "capture_outskirts_bright": {
                 "path": "outputs/rpg-2-star-ocean-the-second_outskirts-bright_protagonist-female-south-idle-selout-v8-h48_m8-v08_20261015-022215-e2203167.png",
                 "exists": true,
+                "sha256_algorithm": "sha256-bytes",
                 "sha256": "b4cedaddc7832850e2904e798e92c36ca479966e8c59453f1bb05e11d881c12f",
                 "sha256_matches": true
               },
               "capture_annex_dark": {
                 "path": "outputs/rpg-2-star-ocean-the-second_survey-annex-room2-dark_protagonist-female-south-idle-selout-v8-h48_m8-v08_20261015-022215-e2203167.png",
                 "exists": true,
+                "sha256_algorithm": "sha256-bytes",
                 "sha256": "da444d274b21a529859b306af612d46859087ef2785bc0d66f9e19f9682d5b0c",
                 "sha256_matches": true
               },

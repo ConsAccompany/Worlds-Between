@@ -6,6 +6,12 @@ user-controlled inventory ``checked`` flag; all prose and counters are derived.
 The only hand-entered decisions are USER_STATIC_BASELINES (single static frames the
 user approved as a visual baseline), which are hash-locked and never pass a gate.
 
+Content hashes name their algorithm. Binary files (PNG) use ``sha256-bytes``: SHA-256 of the
+exact file bytes. Text files (JSON/Markdown) use ``sha256-text-lf-v1``: SHA-256 of the file
+bytes after every CRLF pair is replaced by LF, so a lock gives the same value in an LF checkout
+and in a Windows ``core.autocrlf=true`` CRLF checkout. Nothing else is normalized, and input
+holding a NUL byte or invalid UTF-8 is refused rather than hashed as text.
+
 Usage:
   python <this file> --write   # regenerate the JSON + Markdown checklist
   python <this file>           # check mode: invariants + artifacts are up to date
@@ -43,6 +49,10 @@ V8_RUN = f"{SLUG}_{{scene}}_protagonist-female-south-idle-selout-v8-h48_m8-v08_2
 # User-recorded static still-frame baselines. Each is a single static frame the user approved as the visual reference;
 # it is NOT a G1-G5 gate pass, does not check any inventory item and never changes a gate status or counter.
 # Check mode re-verifies every hash; any change to the files voids the record.
+BYTES_HASH = "sha256-bytes"
+TEXT_HASH = "sha256-text-lf-v1"
+# The v8 manifest was first locked as 0fa7937d…5992, the raw SHA-256 of its CRLF Windows working copy. The same
+# content under sha256-text-lf-v1 is 3ba35811…10ed, which is also the raw SHA-256 of the LF blob in commit ff8acd8.
 USER_STATIC_BASELINES = {
     "protagonist-female": {
         "facing": "south",
@@ -57,18 +67,18 @@ USER_STATIC_BASELINES = {
         "decision_record": f"docs/character-visuals/{SLUG}_protagonist-female_south-idle-static-baseline-decision_m8-v08_20261015-022700-07161696.md",
         "files": {
             "png": (f"{PILOTS}/{SLUG}_protagonist-female_south-idle-selout-v8-cloth-leather-candidate_m8-v08_20261015-021600-157a5ea0.png",
-                    "ccf9d2a293e7f1b9c706b4d2f1bf9c00b3c7714ec4e9b8bddf023e166f68b6fd"),
+                    BYTES_HASH, "ccf9d2a293e7f1b9c706b4d2f1bf9c00b3c7714ec4e9b8bddf023e166f68b6fd"),
             "manifest": (f"{PILOTS}/{SLUG}_protagonist-female_south-idle-selout-v8-cloth-leather-manifest_m8-v08_20261015-021600-2d6c5eff.json",
-                         "0fa7937d3d4f68f209b30e611542ae1a130a82ee2327fb98b0ca19dc77fb5992"),
+                         TEXT_HASH, "3ba35811bf4d55b061b7719c6451908bdbb1eb68425bdda2c2303cc669f310ed"),
             "qa_report": (f"outputs/{SLUG}_city-bright-dark_protagonist-female-south-idle-selout-v8-visual-qa-report_m8-v08_20261015-022215-e2203167.json",
-                          "513ab6595fd3bedee02d8477e9a2646c7d98b40f19de8791d147e746e3ea631a"),
+                          TEXT_HASH, "513ab6595fd3bedee02d8477e9a2646c7d98b40f19de8791d147e746e3ea631a"),
             "capture_city_bright": (f"outputs/{V8_RUN.format(scene='city-bright')}",
-                                    "0b8e67ac75539fdac46e7843687d660d0dfa98697f7bf229b0079437351d9e65"),
+                                    BYTES_HASH, "0b8e67ac75539fdac46e7843687d660d0dfa98697f7bf229b0079437351d9e65"),
             "capture_outskirts_bright": (f"outputs/{V8_RUN.format(scene='outskirts-bright')}",
-                                         "b4cedaddc7832850e2904e798e92c36ca479966e8c59453f1bb05e11d881c12f"),
+                                         BYTES_HASH, "b4cedaddc7832850e2904e798e92c36ca479966e8c59453f1bb05e11d881c12f"),
             "capture_annex_dark": (f"outputs/{V8_RUN.format(scene='survey-annex-room2-dark')}",
-                                   "da444d274b21a529859b306af612d46859087ef2785bc0d66f9e19f9682d5b0c"),
-            "qa_note": (f"docs/qa/{SLUG}_protagonist-female_south-idle-selout-v8_visual-qa-note_m8-v08_20261015-021600-c1694107.md", None),
+                                   BYTES_HASH, "da444d274b21a529859b306af612d46859087ef2785bc0d66f9e19f9682d5b0c"),
+            "qa_note": (f"docs/qa/{SLUG}_protagonist-female_south-idle-selout-v8_visual-qa-note_m8-v08_20261015-021600-c1694107.md", None, None),
         },
         "not_approved": ["exploration_animation", "other_facings", "runtime_replacement", "runtime_sprite_acceptance",
                          "scene_quality_gates", "human_playtests"],
@@ -118,6 +128,26 @@ def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def text_lf_bytes(data: bytes) -> bytes:
+    """sha256-text-lf-v1 input: the bytes with each CRLF pair replaced by LF. Refuses non-text input."""
+    if b"\x00" in data:
+        raise ValueError("NUL byte: not a text file")
+    data.decode("utf-8")  # raises UnicodeDecodeError (a ValueError) on invalid UTF-8
+    return data.replace(b"\r\n", b"\n")
+
+
+def text_sha256(path: Path) -> str:
+    return hashlib.sha256(text_lf_bytes(path.read_bytes())).hexdigest()
+
+
+def content_hash(path: Path, algorithm: str) -> str:
+    if algorithm == BYTES_HASH:
+        return sha256(path)
+    if algorithm == TEXT_HASH:
+        return text_sha256(path)
+    raise ValueError(f"unknown hash algorithm {algorithm!r}")
+
+
 def rel(path: Path) -> str:
     return path.relative_to(ROOT).as_posix()
 
@@ -160,12 +190,17 @@ def static_baseline(visual_id: str) -> dict | None:
     if spec is None:
         return None
     files = {}
-    for role, (path, expected) in spec["files"].items():
+    for role, (path, algorithm, expected) in spec["files"].items():
         full = ROOT / path
         record = {"path": path, "exists": full.is_file()}
         if expected:
+            record["sha256_algorithm"] = algorithm
             record["sha256"] = expected
-            record["sha256_matches"] = record["exists"] and sha256(full) == expected
+            try:
+                record["sha256_matches"] = record["exists"] and content_hash(full, algorithm) == expected
+            except ValueError as error:
+                record["sha256_matches"] = False
+                record["sha256_error"] = str(error)
         files[role] = record
     return {**{k: v for k, v in spec.items() if k != "files"}, "decision_record_exists": (ROOT / spec["decision_record"]).is_file(), "files": files,
             "scope_note": "single static frame approved as the visual baseline only; not a G1-G5 pass, not runtime-integrated, no counter changes"}
@@ -377,8 +412,8 @@ def build(tracked: set[str] | None) -> dict:
             "combat_mvp_variants": [v["visual_id"] for v in variants if v["gates"]["combat_animation"]["mvp_required"]],
         },
         "sources": {
-            "registry": {"path": rel(REGISTRY), "sha256": sha256(REGISTRY)},
-            "inventory": {"path": rel(INVENTORY), "sha256": sha256(INVENTORY)},
+            "registry": {"path": rel(REGISTRY), "sha256_algorithm": TEXT_HASH, "sha256": text_sha256(REGISTRY)},
+            "inventory": {"path": rel(INVENTORY), "sha256_algorithm": TEXT_HASH, "sha256": text_sha256(INVENTORY)},
             "visual_spec": rel(SPEC),
             "intake_checklist": rel(INTAKE),
             "core_hairstyle_manifest": rel(CORE_HAIR),
@@ -388,6 +423,10 @@ def build(tracked: set[str] | None) -> dict:
             "art_acceptance": "only the user may accept art; each status mirrors the user-controlled inventory checked flag (runtime-sprite / playable-combat / display); this script does not locate or verify the intake-checklist receipt file",
             "batch_gate": "no batch production until one variant passes intake stage 4 and the user approves production frame counts",
             "frame_counts": "user approval of production frame counts is not machine-detectable here; 20 = existing placeholder layout, 48 = single-character pilot proposal",
+            "content_hashes": {
+                BYTES_HASH: "SHA-256 of the exact file bytes; used for binary files (PNG)",
+                TEXT_HASH: "SHA-256 of the file bytes after each CRLF pair is replaced by LF; used for text files (JSON, Markdown) so locks match in LF and CRLF checkouts; NUL bytes or invalid UTF-8 are refused, nothing else is normalized",
+            },
         },
         "summary": {
             "source_portraits": {k: sum(v["gates"]["source_art"]["approval"] == k for v in variants) for k in ("approved", "concept")},
@@ -469,8 +508,10 @@ def render_md(data: dict) -> str:
         "",
         f"- 机器可读版：`{rel(OUT_JSON)}`",
         f"- 生成／校验脚本：`{rel(Path(__file__))}`（`--write` 重新生成；无参数为校验模式）",
-        f"- 注册表：`{src['registry']['path']}`（sha256 `{src['registry']['sha256'][:16]}…`）",
-        f"- 资产清单：`{src['inventory']['path']}`（sha256 `{src['inventory']['sha256'][:16]}…`）",
+        f"- 注册表：`{src['registry']['path']}`（{src['registry']['sha256_algorithm']} `{src['registry']['sha256'][:16]}…`）",
+        f"- 资产清单：`{src['inventory']['path']}`（{src['inventory']['sha256_algorithm']} `{src['inventory']['sha256'][:16]}…`）",
+        f"- 哈希算法：二进制文件（PNG）用 `{BYTES_HASH}`（原始字节）；文本文件（JSON/Markdown）用 `{TEXT_HASH}`"
+        "（仅把 CRLF 换成 LF 后计算 SHA-256，LF 与 CRLF 检出结果相同；含 NUL 或非 UTF-8 的文件拒绝按文本处理）。",
         f"- 规格：[俯视视觉规格](" + Path(src["visual_spec"]).name + f")；发型锚点来源：核心 {anchor_split['core']} 个变体取自 `" + Path(src["core_hairstyle_manifest"]).name
         + f"`（用户批准的发型参考），其余 {anchor_split['remaining']} 名取自 `" + Path(src["remaining_companions_manifest"]).name + "`。",
         "",
@@ -539,7 +580,8 @@ def render_md(data: dict) -> str:
             L += [
                 f"  - 用户批准的静态基准帧（{sb['decided_on']}，用户回复「{sb['user_reply_zh']}」）：{sb['facing']} {sb['pose']} 单帧 {sb['candidate']}，"
                 f"{sb['display_height_logical_px']} 逻辑像素；只是静态视觉基准，本闸门仍为 {ex['status']}。决定记录：`{sb['decision_record']}`",
-                f"    - 源图：`{f['png']['path']}`（sha256 `{f['png']['sha256'][:16]}…`）；清单：`{f['manifest']['path']}`",
+                f"    - 源图：`{f['png']['path']}`（{f['png']['sha256_algorithm']} `{f['png']['sha256'][:16]}…`）；"
+                f"清单：`{f['manifest']['path']}`（{f['manifest']['sha256_algorithm']} `{f['manifest']['sha256'][:16]}…`）",
                 f"    - 用户看过的 1280×720 实机截图：`{f['capture_city_bright']['path']}`、`{f['capture_outskirts_bright']['path']}`；同次暗场景：`{f['capture_annex_dark']['path']}`",
                 f"    - QA 报告：`{f['qa_report']['path']}`；QA 说明：`{f['qa_note']['path']}`",
                 "    - 不批准：探索动画、其他朝向、替换运行时精灵、runtime-sprite 验收、场景画质闸门、人工试玩。",
@@ -651,7 +693,12 @@ def check(data: dict) -> list[str]:
                 failures.append(f"{v['visual_id']}: static baseline decision record missing: {sb['decision_record']}")
             for role, record in sb["files"].items():
                 if not record["exists"] or record.get("sha256_matches") is False:
-                    failures.append(f"{v['visual_id']}: static baseline {role} missing or hash changed: {record['path']}")
+                    failures.append(f"{v['visual_id']}: static baseline {role} missing or hash changed: {record['path']}"
+                                    + (f" ({record['sha256_error']})" if record.get("sha256_error") else ""))
+                # Binary art stays locked to its exact bytes; only text files may use the CRLF-normalized hash.
+                is_png = record["path"].lower().endswith(".png")
+                if "sha256" in record and record["sha256_algorithm"] != (BYTES_HASH if is_png else TEXT_HASH):
+                    failures.append(f"{v['visual_id']}: static baseline {role} uses {record['sha256_algorithm']} for {'binary' if is_png else 'text'} file")
             # A static baseline must never read as a gate pass or acceptance.
             if g["exploration_animation"]["status"] != "pending" or g["four_facing"]["production_directions_done"]:
                 failures.append(f"{v['visual_id']}: static baseline must leave G1/G2 pending")
@@ -677,11 +724,12 @@ def main() -> None:
         failures.append("registry changed during run")
 
     if args.write and not failures:
-        OUT_JSON.write_text(json_text, encoding="utf-8")
-        OUT_MD.write_text(md_text, encoding="utf-8")
+        # Always LF, whatever the platform; Git may still check them out as CRLF.
+        OUT_JSON.write_text(json_text, encoding="utf-8", newline="\n")
+        OUT_MD.write_text(md_text, encoding="utf-8", newline="\n")
     elif not args.write:
         for path, text in ((OUT_JSON, json_text), (OUT_MD, md_text)):
-            if not path.is_file() or path.read_text(encoding="utf-8") != text:
+            if not path.is_file() or text_lf_bytes(path.read_bytes()) != text.encode("utf-8"):
                 failures.append(f"stale or missing artifact: {rel(path)} (run with --write)")
 
     s = data["summary"]

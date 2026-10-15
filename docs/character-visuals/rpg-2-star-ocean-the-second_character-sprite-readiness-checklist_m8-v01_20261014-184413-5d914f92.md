@@ -4,8 +4,9 @@
 
 - 机器可读版：`game/data/character-visuals/rpg-2-star-ocean-the-second_character-sprite-readiness-checklist_m8-v01_20261014-184413-53da3710.json`
 - 生成／校验脚本：`tools/rpg-2-star-ocean-the-second_character-sprite-readiness_build-and-check_m8-v01_20261014-184413-c8e6c511.py`（`--write` 重新生成；无参数为校验模式）
-- 注册表：`game/data/character-visuals/rpg-2-star-ocean-the-second_character-visual-registry_m8-v01_20261014-134810-2a5d1b3c.json`（sha256 `2f0fc50ebdbef237…`）
-- 资产清单：`outputs/rpg-2-star-ocean-the-second_asset-inventory_state_v01_20261013-191033-7d1e0a8b.json`（sha256 `04a8379778f98675…`）
+- 注册表：`game/data/character-visuals/rpg-2-star-ocean-the-second_character-visual-registry_m8-v01_20261014-134810-2a5d1b3c.json`（sha256-text-lf-v1 `732753892b57d394…`）
+- 资产清单：`outputs/rpg-2-star-ocean-the-second_asset-inventory_state_v01_20261013-191033-7d1e0a8b.json`（sha256-text-lf-v1 `04a8379778f98675…`）
+- 哈希算法：二进制文件（PNG）用 `sha256-bytes`（原始字节）；文本文件（JSON/Markdown）用 `sha256-text-lf-v1`（仅把 CRLF 换成 LF 后计算 SHA-256，LF 与 CRLF 检出结果相同；含 NUL 或非 UTF-8 的文件拒绝按文本处理）。
 - 规格：[俯视视觉规格](rpg-2-star-ocean-the-second_character-visual-spec_topdown-v01_20261014-135700-17a0c9d4.md)；发型锚点来源：核心 17 个变体取自 `rpg-2-star-ocean-the-second_core-cast_hairstyle-manifest_v02_20261013-161317-4f5a6c7d.md`（用户批准的发型参考），其余 35 名取自 `rpg-2-star-ocean-the-second_remaining-companions_character-sheet-manifest_v01_20261013-194808-b6d7ee1d.md`。
 
 ## 范围与汇总
@@ -73,7 +74,7 @@
   - 注册表未引用的相关清单：`game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v7-slate-coat-manifest_m8-v07_20261015-015010-ed510f85.json`
   - 注册表未引用的相关清单：`game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v8-cloth-leather-manifest_m8-v08_20261015-021600-2d6c5eff.json`
   - 用户批准的静态基准帧（2026-10-14，用户回复「够了，可作为静止帧基准」）：south idle 单帧 selout v8 cloth-leather，48 逻辑像素；只是静态视觉基准，本闸门仍为 pending。决定记录：`docs/character-visuals/rpg-2-star-ocean-the-second_protagonist-female_south-idle-static-baseline-decision_m8-v08_20261015-022700-07161696.md`
-    - 源图：`game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v8-cloth-leather-candidate_m8-v08_20261015-021600-157a5ea0.png`（sha256 `ccf9d2a293e7f1b9…`）；清单：`game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v8-cloth-leather-manifest_m8-v08_20261015-021600-2d6c5eff.json`
+    - 源图：`game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v8-cloth-leather-candidate_m8-v08_20261015-021600-157a5ea0.png`（sha256-bytes `ccf9d2a293e7f1b9…`）；清单：`game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v8-cloth-leather-manifest_m8-v08_20261015-021600-2d6c5eff.json`（sha256-text-lf-v1 `3ba35811bf4d55b0…`）
     - 用户看过的 1280×720 实机截图：`outputs/rpg-2-star-ocean-the-second_city-bright_protagonist-female-south-idle-selout-v8-h48_m8-v08_20261015-022215-e2203167.png`、`outputs/rpg-2-star-ocean-the-second_outskirts-bright_protagonist-female-south-idle-selout-v8-h48_m8-v08_20261015-022215-e2203167.png`；同次暗场景：`outputs/rpg-2-star-ocean-the-second_survey-annex-room2-dark_protagonist-female-south-idle-selout-v8-h48_m8-v08_20261015-022215-e2203167.png`
     - QA 报告：`outputs/rpg-2-star-ocean-the-second_city-bright-dark_protagonist-female-south-idle-selout-v8-visual-qa-report_m8-v08_20261015-022215-e2203167.json`；QA 说明：`docs/qa/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v8_visual-qa-note_m8-v08_20261015-021600-c1694107.md`
     - 不批准：探索动画、其他朝向、替换运行时精灵、runtime-sprite 验收、场景画质闸门、人工试玩。

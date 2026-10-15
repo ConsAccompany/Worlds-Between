@@ -24,9 +24,18 @@ The user reviewed the two real Godot 1280×720 selout v8 captures, the bright sc
 ## Approved artifact
 
 - [selout v8 PNG](../../game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v8-cloth-leather-candidate_m8-v08_20261015-021600-157a5ea0.png): sha256 `ccf9d2a293e7f1b9c706b4d2f1bf9c00b3c7714ec4e9b8bddf023e166f68b6fd`. 80×112 cell, 43×96 visible body, 2,419 opaque texels, 32 colours.
-- [v8 manifest](../../game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v8-cloth-leather-manifest_m8-v08_20261015-021600-2d6c5eff.json): sha256 `0fa7937d3d4f68f209b30e611542ae1a130a82ee2327fb98b0ca19dc77fb5992`.
+- [v8 manifest](../../game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v8-cloth-leather-manifest_m8-v08_20261015-021600-2d6c5eff.json): sha256-text-lf-v1 `3ba35811bf4d55b061b7719c6451908bdbb1eb68425bdda2c2303cc669f310ed` (first recorded as raw sha256 `0fa7937d3d4f68f209b30e611542ae1a130a82ee2327fb98b0ca19dc77fb5992` of the CRLF Windows working copy; same content, see the amendment below).
 
-The decision applies to these exact bytes. If either hash changes, the decision does not carry over to the new file.
+The decision applies to this exact PNG and this exact manifest content. If either hash changes, the decision does not carry over to the new file.
+
+## Hash amendment (2026-10-14): line-ending independent text lock
+
+The original manifest lock was a raw SHA-256 of the Windows working copy, which had CRLF line endings. Git stores the file with LF (`core.autocrlf=true`), so a clean LF checkout failed the lock even though the content was identical. The manifest and QA report are text files, so they are now locked with `sha256-text-lf-v1`: SHA-256 after each CRLF pair is replaced by LF, with nothing else normalized. The [hash algorithm decision](../rpg-2-star-ocean-the-second_content-hash-algorithm-decision_text-lf-v1_m8-v01_20261014-224905-85c51d63.md) has the details.
+
+- The CRLF working copy that hashed to `0fa7937d…5992` at approval time still does. After CRLF→LF it is byte-identical to the blob committed in `ff8acd8` (Git object `dd24f1e231f5fa905f159a6553a4071be4cf3d6a`), whose SHA-256 is `3ba35811…10ed`. The new value locks the same content.
+- The QA report was already stored with LF, so its value `513ab659…631a` is unchanged under the new algorithm.
+- The PNG and the three capture hashes are binary, exact-byte locks and are unchanged.
+- The approval scope is unchanged. Counters stay **0/52**, **0/11** and **0/2**.
 
 ## Evidence the user reviewed
 
