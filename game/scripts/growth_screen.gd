@@ -1,6 +1,6 @@
 extends Control
 
-const SERIES_IDS := ["sword", "firearms", "tactics", "relics"]
+const SERIES_IDS := ["sword", "firearms", "tactics", "relics", "merchant"]
 
 var selected_id := "hero"
 var title_label: Label
@@ -44,7 +44,9 @@ func _build_ui() -> void:
 	stay_button = _button(Vector2(329, 225), Vector2(141, 31), _choose.bind("stay", ""))
 	promote_button = _button(Vector2(478, 225), Vector2(143, 31), _choose.bind("promote", ""))
 	for index in SERIES_IDS.size():
-		series_buttons.append(_button(Vector2(20 + index * 155, 279), Vector2(145, 39), _choose.bind("switch", SERIES_IDS[index])))
+		var series_button := _button(Vector2(20 + index * 122, 279), Vector2(116, 41), _choose.bind("switch", SERIES_IDS[index]))
+		series_button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		series_buttons.append(series_button)
 	personal_upgrade_button = _button(Vector2(20, 324), Vector2(300, 29), _upgrade_personal)
 
 
@@ -118,6 +120,7 @@ func _refresh() -> void:
 	aptitude_label.text = AppState.text_for("growth_aptitudes") % [int(aptitudes[0]), int(aptitudes[1]), int(aptitudes[2]), int(aptitudes[3])]
 	job_label.text = AppState.text_for("growth_job") % [GrowthRules.stage_name(String(member["job_series"]), int(member["job_stage"]), AppState.language), int(member["job_stage"])]
 	var unlocked: Array[String] = []
+	var skills_have_effect := GrowthRules.job_skills_have_effect(String(member["job_series"]))
 	for stage in upgrade_buttons.size():
 		var skill_id: String = GrowthRules.SERIES[String(member["job_series"])]["skills"][stage]
 		var button: Button = upgrade_buttons[stage]
@@ -130,7 +133,10 @@ func _refresh() -> void:
 		var cost := GrowthRules.jp_cost(member, String(member["job_series"]), rank + 1)
 		button.text = AppState.text_for("growth_upgrade") % [skill_name, cost] if cost >= 0 else skill_name + " MAX"
 		button.disabled = cost < 0 or int(member.get("jp", 0)) < cost
-	skill_label.text = AppState.text_for("growth_skill") % " / ".join(unlocked)
+		if not skills_have_effect:
+			button.text = AppState.text_for("growth_placeholder_skill") % skill_name
+			button.disabled = true
+	skill_label.text = AppState.text_for("growth_skill" if skills_have_effect else "growth_skill_placeholder") % " / ".join(unlocked)
 	var personal_rank := int(member.get("personal_skill_rank", 1))
 	var personal_series: String = AppState.MEMBER_DEFS[selected_id]["job_series"]
 	var personal_cost := GrowthRules.jp_cost(member, personal_series, personal_rank + 1)
@@ -138,7 +144,7 @@ func _refresh() -> void:
 	personal_upgrade_button.text = AppState.text_for("growth_personal") % [personal_name, personal_rank, personal_cost] if personal_cost >= 0 else personal_name + " MAX"
 	personal_upgrade_button.disabled = personal_cost < 0 or int(member.get("jp", 0)) < personal_cost
 	var pending := int(member.get("pending_job_choices", 0)) > 0
-	pending_label.text = AppState.text_for("growth_pending") if pending else ""
+	pending_label.text = AppState.text_for("growth_pending") if pending else (AppState.text_for("growth_merchant_note") if member["job_series"] == CommerceLedger.MERCHANT_SERIES_ID else "")
 	stay_button.text = AppState.text_for("growth_stay")
 	stay_button.disabled = not pending
 	promote_button.text = AppState.text_for("growth_promote")

@@ -132,6 +132,23 @@ const STRINGS := {
 		"job_skill_firearms_shot": "精准射击", "job_skill_firearms_burst": "连发压制",
 		"job_skill_tactics_mark": "战术标记", "job_skill_tactics_rally": "全队整备",
 		"job_skill_relics_echo": "遗物共鸣", "job_skill_relics_delay": "时序迟滞",
+		"job_skill_merchant_supply_pact": "补给协议", "job_skill_merchant_fair_quote": "公平报价",
+		"growth_placeholder_skill": "%s · 仅经营",
+		"growth_skill_placeholder": "职业技能：%s（经营用，暂无战斗效果）",
+		"growth_merchant_note": "行商可在城市派驻商会：世界地图 · 商会。",
+		"commerce_open": "商会", "commerce_title": "商会 · %s",
+		"commerce_ledger": "商会账目累计 %d 点（暂定记账，不是货币，暂不能消费）",
+		"commerce_none_here": "此城尚无商会。派驻一名行商伙伴即可开设；驻守期间该伙伴离队。",
+		"commerce_company_companion": "%s：%s 驻守 · 收益 %d%% · 已结算 %d 周 · 累计 %d 点",
+		"commerce_company_npc": "%s：普通 NPC 经营 · 收益 %d%% · 已结算 %d 周 · 累计 %d 点",
+		"commerce_rule": "每周一结算上一周。开业当周不计收益；伙伴须驻守满一整周才按全效结算。",
+		"commerce_no_merchant": "暂无可派驻的行商伙伴。伙伴到十级关口时，可在「角色与职业」转入行商。",
+		"commerce_rested": "休息 7 天：结算 %d 周，账目 +%d 点。",
+		"commerce_opened": "%s 开设了商会，留守此地。", "commerce_assigned": "%s 已派驻商会。",
+		"commerce_recalled": "%s 已归队；普通 NPC 接手经营。", "commerce_recalled_reserve": "%s 已召回，队伍已满，暂为候补；普通 NPC 接手经营。",
+		"commerce_failed": "操作未完成。",
+		"commerce_open_with": "由%s开设", "commerce_assign": "派驻%s", "commerce_recall": "召回%s",
+		"commerce_rest": "休息一周（+7 天）", "save_commerce_rest": "休息一周",
 		"bypass_notice": "已绕过敌人，抵达另一侧。",
 		"field_log": "实地日志",
 		"field_log_hint": "任意顺序探索三处地点；完成勘察、核对中继与遗址记录、观察机械，最后回城汇报。每地还有两处可选痕迹，可带当地伙伴回终端解读。",
@@ -318,6 +335,23 @@ const STRINGS := {
 		"job_skill_firearms_shot": "Precision Shot", "job_skill_firearms_burst": "Suppressive Burst",
 		"job_skill_tactics_mark": "Tactical Mark", "job_skill_tactics_rally": "Team Rally",
 		"job_skill_relics_echo": "Relic Echo", "job_skill_relics_delay": "Time Delay",
+		"job_skill_merchant_supply_pact": "Supply Pact", "job_skill_merchant_fair_quote": "Fair Quote",
+		"growth_placeholder_skill": "%s · commerce",
+		"growth_skill_placeholder": "Job skills: %s (commerce only; no battle effect yet)",
+		"growth_merchant_note": "Merchants can run a city company: World map · Company.",
+		"commerce_open": "Company", "commerce_title": "Company · %s",
+		"commerce_ledger": "Company ledger: %d points in total (provisional record, not money; cannot be spent yet)",
+		"commerce_none_here": "No company in this city yet. Station a Merchant companion to open one; they leave the party while stationed.",
+		"commerce_company_companion": "%s: run by %s · %d%% rate · weeks settled: %d · %d points",
+		"commerce_company_npc": "%s: run by a local NPC · %d%% rate · weeks settled: %d · %d points",
+		"commerce_rule": "Each Monday settles the week before. The opening week earns nothing; a companion must stay a full week to earn the full rate.",
+		"commerce_no_merchant": "No Merchant companion is available. At a level-10 threshold, a companion can switch to Merchant in Characters & Jobs.",
+		"commerce_rested": "Rested 7 days: %d week(s) settled, ledger +%d points.",
+		"commerce_opened": "%s opened the company and stays here.", "commerce_assigned": "%s is now stationed at the company.",
+		"commerce_recalled": "%s rejoined the party; a local NPC now runs the company.", "commerce_recalled_reserve": "%s was recalled as a reserve (party full); a local NPC now runs the company.",
+		"commerce_failed": "That action did not complete.",
+		"commerce_open_with": "Open with %s", "commerce_assign": "Station %s", "commerce_recall": "Recall %s",
+		"commerce_rest": "Rest one week (+7 days)", "save_commerce_rest": "Rested a week",
 		"bypass_notice": "You bypassed the enemy and reached the far side.",
 		"field_log": "Field log",
 		"field_log_hint": "Explore all three places in any order. Complete the surveys, check the relay and ruin records, observe a machine, then report in the city. Each place also has two optional traces to interpret with its local companion.",
@@ -445,6 +479,7 @@ var commerce := CommerceLedger.new()
 var commerce_state_migrated := false
 
 const TRAVEL_SAVE_VERSION := 1
+const REST_WEEK_MINUTES := 7 * 24 * 60
 const MONTH_ABBREVIATIONS_EN := ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
 const DESTINATIONS := ["scifi.city", "scifi.outskirts", "scifi.ruins"]
@@ -910,6 +945,23 @@ func commerce_ledger_state() -> Dictionary:
 	return commerce.to_save()
 
 
+# Recruited companions who could be stationed right now, in roster order.
+func commerce_station_candidates() -> Array[String]:
+	var result: Array[String] = []
+	for member_id in MEMBER_DEFS:
+		if member_id != "hero" and commerce_manager_block_reason(member_id) == "":
+			result.append(String(member_id))
+	return result
+
+
+# Rest advances the shared calendar by one week; advance_calendar settles any week crossed.
+func rest_one_week() -> Dictionary:
+	var week_before := calendar_week_index
+	var units_before := commerce.ledger_units
+	advance_calendar(REST_WEEK_MINUTES, "rest")
+	return {"minutes": REST_WEEK_MINUTES, "weeks_settled": calendar_week_index - week_before, "units": commerce.ledger_units - units_before}
+
+
 func member_name(member_id: String) -> String:
 	if member_id == "hero" and hero_name != "":
 		return hero_name
@@ -1163,6 +1215,9 @@ func upgrade_job_skill(member_id: String, skill_id: String) -> bool:
 	if member.is_empty():
 		return false
 	var series_id: String = member["job_series"]
+	# Placeholder (Merchant) skills have no effect yet, so JP is never spent on them.
+	if not GrowthRules.job_skills_have_effect(series_id):
+		return false
 	var skills: Array = GrowthRules.SERIES[series_id]["skills"]
 	if not skills.has(skill_id) or skills.find(skill_id) >= int(member["job_stage"]):
 		return false

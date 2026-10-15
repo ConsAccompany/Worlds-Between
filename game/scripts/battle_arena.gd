@@ -372,6 +372,9 @@ func _use_job_skill(index: int = -1, requested_skill_id: String = "") -> bool:
 	var fighter: Dictionary = fighters[index]
 	var member_id: String = fighter["id"]
 	var member: Dictionary = AppState.member_state(member_id)
+	# Merchant guard: its job skills are placeholders with no battle effect, so they never run or spend energy.
+	if not GrowthRules.job_skills_have_effect(String(member["job_series"])):
+		return false
 	var skill_id := requested_skill_id if requested_skill_id != "" else GrowthRules.current_skill_id(member)
 	var available: Array = GrowthRules.SERIES[String(member["job_series"])]["skills"]
 	if not available.has(skill_id) or available.find(skill_id) >= int(member["job_stage"]):
@@ -850,7 +853,7 @@ func _refresh_text() -> void:
 	for stage in pause_job_skill_buttons.size():
 		var button: Button = pause_job_skill_buttons[stage]
 		var id: String = skills[stage]
-		button.visible = stage < int(controlled_member["job_stage"])
+		button.visible = stage < int(controlled_member["job_stage"]) and GrowthRules.job_skills_have_effect(String(controlled_member["job_series"]))
 		button.text = AppState.text_for("job_skill_" + id) + (" ✓" if queued_job_skill_id == id else "")
 		for connection in button.pressed.get_connections():
 			button.pressed.disconnect(connection["callable"])

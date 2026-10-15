@@ -7,6 +7,11 @@ const SERIES := {
 	"firearms": {"aptitude": "adaptive", "stage_names": ["枪手", "精准射手"], "stage_names_en": ["Gunner", "Marksman"], "skills": ["firearms_shot", "firearms_burst"]},
 	"tactics": {"aptitude": "scholarly", "stage_names": ["参谋", "战术师"], "stage_names_en": ["Strategist", "Tactician"], "skills": ["tactics_mark", "tactics_rally"]},
 	"relics": {"aptitude": "spiritual", "stage_names": ["遗物学徒", "遗物师"], "stage_names_en": ["Relic Adept", "Relic Keeper"], "skills": ["relics_echo", "relics_delay"]},
+	# Merchant (行商): only the first two of the proposal's five stages, like every MVP series. Its id must
+	# match CommerceLedger.MERCHANT_SERIES_ID. "placeholder_skills": its job skills have no effect yet (no
+	# battle effect, and the provisional ledger does not read their ranks), so they are never battle
+	# actions and take no JP. Personal skills are unaffected.
+	"merchant": {"aptitude": "adaptive", "stage_names": ["行商", "契约经理"], "stage_names_en": ["Merchant", "Contract Manager"], "skills": ["merchant_supply_pact", "merchant_fair_quote"], "placeholder_skills": true},
 }
 const SKILL_JP_BASE := [20, 35, 55]
 
@@ -39,6 +44,11 @@ static func stage_name(series_id: String, stage: int, language: String) -> Strin
 		return series_id
 	var names: Array = SERIES[series_id]["stage_names_en" if language == "en" else "stage_names"]
 	return String(names[clampi(stage, 1, names.size()) - 1])
+
+
+# False for unknown series and for series whose job skills are placeholders (Merchant).
+static func job_skills_have_effect(series_id: String) -> bool:
+	return SERIES.has(series_id) and not bool(SERIES[series_id].get("placeholder_skills", false))
 
 
 static func current_skill_id(member: Dictionary) -> String:

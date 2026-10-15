@@ -55,6 +55,18 @@ var field_title: Label
 var field_body: RichTextLabel
 var field_close: Button
 var talk_button: Button
+# City company panel. Opens only while the party is at a discovered place of type "city".
+var commerce_button: Button
+var commerce_overlay: ColorRect
+var commerce_title: Label
+var commerce_body: RichTextLabel
+var commerce_member_buttons: Array[Button] = []
+var commerce_member_ids: Array[String] = []
+var commerce_recall_button: Button
+var commerce_rest_button: Button
+var commerce_close: Button
+# Last action message as [text key, format args], so a language switch re-renders it.
+var commerce_feedback: Array = []
 # Scene destination ID -> place Button. Kept under the old name for existing flows.
 var destination_buttons: Dictionary = {}
 var place_buttons: Dictionary = {}
@@ -155,8 +167,14 @@ func _build_ui() -> void:
 	strip.size = Vector2(640, 47)
 	canvas.add_child(strip)
 	field_status = _label(canvas, Vector2(17, 319), 11, Color("#e9d9a8"))
+	# Wraps instead of running under the company button on the right.
+	field_status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	field_status.size = Vector2(388, 0)
 	field_button = _button(canvas, Rect2(521, 317, 103, 37), 0, _open_field_log)
+	commerce_button = _button(canvas, Rect2(412, 317, 103, 37), 0, open_commerce)
+	commerce_button.name = "CommerceButton"
 	_build_field_log(canvas)
+	_build_commerce(canvas)
 
 
 func _build_map_frame(canvas: CanvasLayer) -> void:
@@ -356,9 +374,46 @@ func _build_field_log(canvas: CanvasLayer) -> void:
 	field_overlay.add_child(field_close)
 
 
+func _build_commerce(canvas: CanvasLayer) -> void:
+	commerce_overlay = ColorRect.new()
+	commerce_overlay.name = "CommerceOverlay"
+	commerce_overlay.color = Color(0.04, 0.08, 0.12, 0.93)
+	commerce_overlay.size = Vector2(640, 360)
+	commerce_overlay.visible = false
+	canvas.add_child(commerce_overlay)
+	var panel := ColorRect.new()
+	panel.position = Vector2(48, 39)
+	panel.size = Vector2(544, 285)
+	panel.color = Color("#25404b")
+	commerce_overlay.add_child(panel)
+	commerce_title = Label.new()
+	commerce_title.position = Vector2(69, 49)
+	commerce_title.add_theme_font_size_override("font_size", 18)
+	commerce_title.add_theme_color_override("font_color", Color("#f0e3c5"))
+	commerce_overlay.add_child(commerce_title)
+	commerce_body = RichTextLabel.new()
+	commerce_body.position = Vector2(69, 78)
+	commerce_body.size = Vector2(502, 144)
+	commerce_body.scroll_active = true
+	commerce_body.add_theme_font_size_override("normal_font_size", 11)
+	commerce_body.add_theme_color_override("default_color", Color("#e0eeeb"))
+	commerce_overlay.add_child(commerce_body)
+	# One button per recruitable companion; only merchants who can be stationed are shown.
+	for index in AppState.MEMBER_DEFS.size() - 1:
+		var button := _button(commerce_overlay, Rect2(69 + index * 169, 228, 163, 30), 11, _commerce_station.bind(index))
+		button.visible = false
+		commerce_member_buttons.append(button)
+	commerce_recall_button = _button(commerce_overlay, Rect2(69, 266, 150, 34), 11, _commerce_recall)
+	commerce_rest_button = _button(commerce_overlay, Rect2(227, 266, 200, 34), 11, _commerce_rest)
+	commerce_close = _button(commerce_overlay, Rect2(435, 266, 136, 34), 11, close_commerce)
+	commerce_overlay.visibility_changed.connect(_sync_commerce_focus)
+
+
 # --- View modes -------------------------------------------------------------
 
 func enter_global() -> void:
+	if _commerce_modal():
+		return
 	mode = "global"
 	last_mode = mode
 	view = global_view
@@ -370,7 +425,7 @@ func enter_global() -> void:
 
 
 func enter_region(region_id: String) -> void:
-	if MapData.geo_region(region_id).is_empty():
+	if _commerce_modal() or MapData.geo_region(region_id).is_empty():
 		return
 	active_region_id = region_id
 	mode = "region"
@@ -387,6 +442,8 @@ func _zoom_button(factor: float) -> void:
 
 # Zooming past the globe's limit over a region opens it; zooming out of a region returns.
 func zoom_view(local_point: Vector2, factor: float) -> void:
+	if _commerce_modal():
+		return
 	if mode == "global" and factor > 1.0 and view.scale * factor > view.max_scale + 0.001:
 		var geo := view.screen_to_geo(local_point)
 		for region in MapData.geo_regions():
@@ -409,6 +466,8 @@ func zoom_view(local_point: Vector2, factor: float) -> void:
 
 
 func _on_map_input(event: InputEvent) -> void:
+	if _commerce_modal():
+		return
 	if event is InputEventMouseButton:
 		var button := event as InputEventMouseButton
 		if button.pressed and button.button_index == MOUSE_BUTTON_WHEEL_UP:
@@ -679,7 +738,7 @@ func annotation_label_rects() -> Array:
 
 func select_place(place_id: String) -> void:
 	var place := find_place(place_id)
-	if place.is_empty():
+	if place.is_empty() or _commerce_modal():
 		return
 	if mode != "region" or active_region_id != place["geo_region_id"]:
 		enter_region(place["geo_region_id"])
@@ -715,7 +774,7 @@ func close_route_card() -> void:
 # place the party is already at (free). route_state is cleared first, so a second press is a no-op.
 func depart() -> void:
 	var place := find_place(selected_place_id)
-	if place.is_empty():
+	if place.is_empty() or _commerce_modal():
 		return
 	var status := String(route_state.get("status", ""))
 	match status:
@@ -735,6 +794,8 @@ func depart() -> void:
 
 
 func _choose_option(option_id: String) -> void:
+	if _commerce_modal():
+		return
 	route_state = route_adapter.preview(selected_place_id, option_id)
 	selected_option_id = route_state["selected"]
 	_refresh_route_card()
@@ -880,12 +941,15 @@ func _refresh_text() -> void:
 	field_close.text = AppState.text_for("save_back")
 	talk_button.text = AppState.text_for("talk_open")
 	talk_button.disabled = AppState.recruited_members.is_empty()
+	_refresh_commerce()
 	overlay.queue_redraw()
 
 
 # --- Existing flows -----------------------------------------------------------
 
 func _open_field_log() -> void:
+	if _commerce_modal():
+		return
 	_refresh_text()
 	field_overlay.visible = true
 	field_close.grab_focus()
@@ -896,8 +960,132 @@ func _close_field_log() -> void:
 	field_button.grab_focus()
 
 
+# --- City company -------------------------------------------------------------
+
+# The party's current place when it can host a company (a discovered city), otherwise "".
+func commerce_city_id() -> String:
+	var city_id := String(AppState.current_location_id)
+	return city_id if AppState.commerce_city_block_reason(city_id) == "" else ""
+
+
+func open_commerce() -> void:
+	# Never stacks over the field log; that overlay must be closed first.
+	if commerce_city_id() == "" or field_overlay.visible:
+		return
+	if route_card.visible:
+		close_route_card()
+	commerce_feedback = []
+	_refresh_commerce()
+	commerce_overlay.visible = true
+	commerce_close.grab_focus()
+
+
+func close_commerce() -> void:
+	commerce_overlay.visible = false
+	commerce_button.grab_focus()
+
+
+# The company panel is modal: while it is open the map, route card, header and bottom-strip actions do nothing.
+func _commerce_modal() -> bool:
+	return commerce_overlay != null and commerce_overlay.visible
+
+
+# Keeps keyboard focus (Tab and arrow keys) inside the open company panel; restored when it hides by any path.
+func _sync_commerce_focus() -> void:
+	var behavior := Control.FOCUS_BEHAVIOR_DISABLED if commerce_overlay.visible else Control.FOCUS_BEHAVIOR_INHERITED
+	for node in commerce_overlay.get_parent().get_children():
+		if node is Control and node != commerce_overlay:
+			(node as Control).focus_behavior_recursive = behavior
+
+
+# Opens the company with this companion, or stations them at an NPC-run one. Either way they leave the party.
+func _commerce_station(index: int) -> void:
+	var city_id := commerce_city_id()
+	if city_id == "" or index >= commerce_member_ids.size():
+		return
+	var member_id := commerce_member_ids[index]
+	var existing: bool = AppState.commerce_ledger_state()["companies"].has(city_id)
+	var result: Dictionary = AppState.assign_commerce_manager(city_id, member_id) if existing else AppState.open_commerce_company(city_id, member_id)
+	commerce_feedback = [("commerce_assigned" if existing else "commerce_opened"), [AppState.member_name(member_id)]] if result["ok"] else ["commerce_failed", []]
+	_refresh_commerce()
+	_keep_commerce_focus()
+
+
+func _commerce_recall() -> void:
+	var result: Dictionary = AppState.recall_commerce_manager(commerce_city_id())
+	if result["ok"]:
+		commerce_feedback = [("commerce_recalled" if result["rejoined_active_party"] else "commerce_recalled_reserve"), [AppState.member_name(String(result["member_id"]))]]
+	else:
+		commerce_feedback = ["commerce_failed", []]
+	_refresh_commerce()
+	_keep_commerce_focus()
+
+
+# Station and Recall hide the pressed button, which drops keyboard focus; move it to Back inside the panel.
+func _keep_commerce_focus() -> void:
+	if commerce_overlay.visible and get_viewport().gui_get_focus_owner() == null:
+		commerce_close.grab_focus()
+
+
+# Rest passes a week on the shared calendar; the ledger settles inside AppState.advance_calendar.
+func _commerce_rest() -> void:
+	var result: Dictionary = AppState.rest_one_week()
+	AppState.write_auto_save("map", Vector2.ZERO, "commerce_rest")
+	commerce_feedback = ["commerce_rested", [int(result["weeks_settled"]), int(result["units"])]]
+	_refresh_map_text()
+	_refresh_commerce()
+
+
+func _refresh_commerce() -> void:
+	var city_id := commerce_city_id()
+	commerce_button.visible = city_id != ""
+	commerce_button.text = AppState.text_for("commerce_open")
+	commerce_rest_button.text = AppState.text_for("commerce_rest")
+	commerce_close.text = AppState.text_for("save_back")
+	if city_id == "":
+		commerce_overlay.visible = false
+		return
+	commerce_title.text = AppState.text_for("commerce_title") % AppState.travel_location_name(city_id)
+	var ledger := AppState.commerce_ledger_state()
+	var companies: Dictionary = ledger["companies"]
+	var here: Dictionary = companies.get(city_id, {})
+	var lines: PackedStringArray = []
+	if not commerce_feedback.is_empty():
+		var args: Array = commerce_feedback[1]
+		lines.append(AppState.text_for(String(commerce_feedback[0])) % args if not args.is_empty() else AppState.text_for(String(commerce_feedback[0])))
+	lines.append(AppState.text_for("travel_date_line") % ("%s %s" % [AppState.calendar_date_text(), AppState.calendar_time_text_at(AppState.calendar_minutes)]))
+	lines.append(AppState.text_for("commerce_ledger") % int(ledger["ledgerUnits"]))
+	if here.is_empty():
+		lines.append(AppState.text_for("commerce_none_here"))
+	for company_city in companies:
+		var company: Dictionary = companies[company_city]
+		var manager := String(company["managerId"])
+		var place := AppState.travel_location_name(String(company_city))
+		if manager != "":
+			lines.append(AppState.text_for("commerce_company_companion") % [place, AppState.member_name(manager), 100, int(company["weeksSettled"]), int(company["unitsEarned"])])
+		else:
+			lines.append(AppState.text_for("commerce_company_npc") % [place, CommerceLedger.NPC_EFFICIENCY_PERCENT, int(company["weeksSettled"]), int(company["unitsEarned"])])
+	lines.append(AppState.text_for("commerce_rule"))
+	# One company per city: companions can be stationed only while this city's company has no companion.
+	var can_station := here.is_empty() or String(here["managerId"]) == ""
+	commerce_member_ids.clear()
+	if can_station:
+		commerce_member_ids.assign(AppState.commerce_station_candidates())
+	if can_station and commerce_member_ids.is_empty():
+		lines.append(AppState.text_for("commerce_no_merchant"))
+	commerce_body.text = "\n".join(lines)
+	for index in commerce_member_buttons.size():
+		var button := commerce_member_buttons[index]
+		button.visible = index < commerce_member_ids.size()
+		if button.visible:
+			button.text = AppState.text_for("commerce_open_with" if here.is_empty() else "commerce_assign") % AppState.member_name(commerce_member_ids[index])
+	var stationed := "" if here.is_empty() else String(here["managerId"])
+	commerce_recall_button.visible = stationed != ""
+	commerce_recall_button.text = AppState.text_for("commerce_recall") % AppState.member_name(stationed) if stationed != "" else ""
+
+
 func _open_party_talk() -> void:
-	if AppState.recruited_members.is_empty():
+	if AppState.recruited_members.is_empty() or _commerce_modal():
 		return
 	get_tree().change_scene_to_file("res://scenes/party_talk.tscn")
 
@@ -913,15 +1101,21 @@ func _enter_scene(destination_id: String) -> void:
 
 
 func _return_to_menu() -> void:
+	if _commerce_modal():
+		return
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
 
 func _open_growth() -> void:
+	if _commerce_modal():
+		return
 	AppState.growth_return_scene = "res://scenes/scifi_world_map.tscn"
 	get_tree().change_scene_to_file("res://scenes/growth_screen.tscn")
 
 
 func _open_save() -> void:
+	if _commerce_modal():
+		return
 	AppState.save_screen_mode = "save"
 	AppState.save_return_scene = "res://scenes/scifi_world_map.tscn"
 	AppState.save_return_position = Vector2.ZERO
@@ -935,7 +1129,9 @@ func _exit_tree() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
-		if field_overlay.visible:
+		if commerce_overlay.visible:
+			close_commerce()
+		elif field_overlay.visible:
 			_close_field_log()
 		elif route_card.visible:
 			close_route_card()
