@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
   "planVersion": "v0.2",
-  "updatedAt": "2026-10-14T23:50:00Z",
+  "updatedAt": "2026-10-15T07:24:33Z",
   "currentStep": "M8",
   "steps": [
     {
@@ -22,17 +22,35 @@
     {
       "id": "M2",
       "title": "World map and exploration",
-      "status": "done",
-      "summary": "Three destinations, top-down movement, NPCs, visible avoidable enemies.",
-      "acceptance": "Reach and leave all three locations without developer tools; bypass one normal fight.",
+      "status": "in_progress",
+      "summary": "The global Earth map with a Yangtze Delta regional layer, route preview/confirm/cancel, an integer-minute calendar and save migration are implemented and pass Godot automated tests. M2 is not complete: the first-city and underground anchors, the world start year, validated door-to-door route figures, an actual air route, all map art and human review remain open.",
+      "acceptance": "Reach and leave science-region scenes from a global map; use real bilingual place names and geographically plausible car/air routes; verify travel-time, date, save/load and weekly-settlement behavior.",
       "evidence": [
-        "game/tests/m2_smoke.gd: M2_SMOKE_OK (three destinations, map/area return, movement, NPC interaction, bypass, contact, enemy reset)",
-        "outputs/rpg-2-star-ocean-the-second_scifi-map_visual-proof_m2_20261013-201352-8194746e.png",
-        "outputs/rpg-2-star-ocean-the-second_scifi-city_visual-proof_m2_20261013-201352-4940f7f5.png",
-        "outputs/rpg-2-star-ocean-the-second_scifi-outskirts_visual-proof_m2_20261013-201352-7e3fc6e6.png",
-        "outputs/rpg-2-star-ocean-the-second_scifi-ruins_visual-proof_m2_20261013-201352-0302dc4c.png"
+        "Godot 4.7.2, 2026-10-15 (per the M2 QA notes): GLOBAL_TRAVEL_CORE_OK; GLOBAL_EARTH_MAP_SMOKE_OK checks=201; GLOBAL_MAP_TRAVEL_INTEGRATION_OK checks=103; revised M2_SMOKE_OK (pick place → route card → depart); M1–M8 smokes OK; CANVAS_POINTER_REGRESSION_OK at 1280×720",
+        "docs/qa/rpg-2-star-ocean-the-second_global-earth-map_runtime-implementation_qa-note_m2-v01_20261015-024300-15ce9195.md (global map runtime implementation)",
+        "docs/qa/rpg-2-star-ocean-the-second_global-map-travel_integration-fixes_qa-note_m2-v02_20261015-031824-35247192.md (map ↔ travel-core integration fixes, 103-check regression, save migration)",
+        "outputs/rpg-2-star-ocean-the-second_global-earth-map_*-runtime-capture_m2-v02_20261015-031426-9a107595.png (12 runtime captures, 6 zh + 6 en; unapproved, functional evidence only)",
+        "outputs/rpg-2-star-ocean-the-second_scifi-canvas_pointer-regression-receipt_m8-v01_20261015-071805-548c0f0f.json (real-pixel click: Shanghai marker → Enter scene)",
+        "docs/design/rpg-2-star-ocean-the-second_global-earth-map-real-place-travel_rules-v01_20261014-235354-2b5d4d98.md (user-decided rule)",
+        "docs/design/rpg-2-star-ocean-the-second_shanghai-liangzhu_geography-route-art-packet_provisional-v01_20261015-000319-a3e65b7c.md (provisional route research; source of the current preliminary figures)",
+        "docs/design/rpg-2-star-ocean-the-second_shanghai-cross-city-air-route_research-packet_unapproved-v01_20261015-031235-9d63971b.md (air-route candidates; research only, nothing selected)",
+        "Earlier slice (does not count for the new rule): old three-destination M2_SMOKE_OK and four 2026-10-13 visual proofs"
       ],
-      "blocker": null
+      "remaining": [
+        "Decide the first science city (Shanghai is provisional) and the underground-community geographic anchor (user decision, not a defect).",
+        "Decide the world start year; the calendar start 2026-04-01 08:00 is an engineering placeholder (user decision).",
+        "Replace the Rome2Rio point-to-point estimates with validated, sourced door-to-door figures (current door-to-door allowance is 0; reverse trips assume symmetry; Songjiang→Liangzhu direct is unverified and not selectable).",
+        "Add an actual air route to game data. The air-route packet lists three research candidates (SHA→PEK, SHA→CAN, SHA→HND); none is selected and no new playable city is chosen. Plane and plane+car formats are only checked with a test fixture.",
+        "Produce and accept the map art (colours, label boxes, roads and markers are functional placeholders).",
+        "Human map review and the two human timed playtests (0/2)."
+      ],
+      "blocker": "First-city and underground-community anchors and the world start year await the user; Shanghai is provisional. Route minutes stay preliminary estimates until validated door-to-door figures exist; no air route is in the data.",
+      "details": [
+        "已实现并通过 Godot 自动测试（2026-10-15 QA 记录）：真实地球全图与长江三角洲地区层（缩放、平移、点选、中英文地名）；路线卡预览、出发一次性结算、取消／Esc 不扣时间、所在地免费进入；整数分钟日历（跨日、跨年、闰年进位，同一时间轴上发出周交替信号）；存读档与旧档迁移（不凭空加天、不重复扣时）。",
+        "测试标记：GLOBAL_TRAVEL_CORE_OK；GLOBAL_EARTH_MAP_SMOKE_OK checks=201；GLOBAL_MAP_TRAVEL_INTEGRATION_OK checks=103；新版 M2_SMOKE_OK；CANVAS_POINTER_REGRESSION_OK。12 张 1280×720 实机截图（中英文各 6 张）只是运行证据，未验收。旧三点 M2_SMOKE_OK 不计入新规则。",
+        "仍待用户决定（不是缺陷）：首城（上海暂定）、地下社区锚点、世界开始年份（日历起点 2026-04-01 08:00 为工程占位）。",
+        "仍待制作或核实：路线为 Rome2Rio 地点到地点初步估算（上海→松江 34.8 km／26 分；上海→良渚 187.9 km／2 小时；松江→良渚经上海 146 分），门到门附加时间为 0；松江→良渚直达未核验；数据中没有航空路线，三条航线候选只是研究资料。地图美术未制作、未验收；未经人工审阅与试玩。"
+      ]
     },
     {
       "id": "M3",
@@ -162,7 +180,7 @@
       "id": "M8",
       "title": "Visual identity and environment quality",
       "status": "in_progress",
-      "summary": "The creator approved the 48-logical-pixel display scale in the three-character city comparison. This does not approve any sprite, animation, runtime replacement or scene art. Five native 32x48 exploration sets remain rejected-quality functional placeholders. Male/female protagonists and Liang each have south/east/north premium static concepts (nine total), with direction and alpha-edge caveats. A female four-phase south walk feasibility loop is blocked by scarf-tail and knee-guard side jumps. Rendered 1280x720 canvas pointer/UI regression passed after an English map-help overlap fix. Five side-view battle sets are integrated without art approval. A female south-idle Pixelorama v1.2.3 (web) technical pilot exists as four unapproved files (downscale and 4-texel hand-paint pass, each .pxo + PNG) that miss the memo alpha, palette and height targets; two deterministic quantized candidates (BOX, LANCZOS) meet those numeric targets but have no human art or animation approval. All are one idle frame, not a walk pilot, each with a variant-tagged 48 px city capture. 0/52 runtime sprites and 0/11 scenes are accepted. The two quantized idle candidates are also visible at 48 px in the outskirts and ruins areas (four 1280x720 Godot captures; report check passes); that is readability evidence only. A source-locked segmented south walk experiment (method C, LANCZOS idle used provisionally) passed E1-E7 and E9 but failed E8 foot contact (3 screen px/tick at an isolated 90 px/s test speed) and does not read as a natural walk; it stopped there. Baseline decision (2026-10-14): the user rejected both the Box and Lanczos static idles as insufficiently polished and chose neither; the static south idle is being refined first. Walk-frame production, including the hand-drawn Pixelorama method A pilot, is paused until the user approves a new static idle. The E8 measurements stay as historical evidence. No walk frames have been started. Of the two new static refinement candidates the user chose selout v1 as closer; a pixel-level selout v2 static polish (550 texels changed, 27 colours, 80x112, 96 tall) is closer still in the user's view but is NOT approved. v2 has separate 1280x720 Godot captures in the science city, bright outskirts, dark survey annex room 2 and dark prototype room, each with a same-run v1 reference (8 captures). An editable Pixelorama .pxo of selout v1 (not v2) is kept as a source artifact. Static-frame polish continues; walk frames stay paused.",
+      "summary": "The creator approved the 48-logical-pixel display scale in the three-character city comparison. This does not approve any sprite, animation, runtime replacement or scene art. Five native 32x48 exploration sets remain rejected-quality functional placeholders. Male/female protagonists and Liang each have south/east/north premium static concepts (nine total), with direction and alpha-edge caveats. A female four-phase south walk feasibility loop is blocked by scarf-tail and knee-guard side jumps. Rendered 1280x720 canvas pointer/UI regression passed after an English map-help overlap fix. Five side-view battle sets are integrated without art approval. A female south-idle Pixelorama v1.2.3 (web) technical pilot exists as four unapproved files (downscale and 4-texel hand-paint pass, each .pxo + PNG) that miss the memo alpha, palette and height targets; two deterministic quantized candidates (BOX, LANCZOS) meet those numeric targets but have no human art or animation approval. All are one idle frame, not a walk pilot, each with a variant-tagged 48 px city capture. 0/52 runtime sprites and 0/11 scenes are accepted. The two quantized idle candidates are also visible at 48 px in the outskirts and ruins areas (four 1280x720 Godot captures; report check passes); that is readability evidence only. A source-locked segmented south walk experiment (method C, LANCZOS idle used provisionally) passed E1-E7 and E9 but failed E8 foot contact (3 screen px/tick at an isolated 90 px/s test speed) and does not read as a natural walk; it stopped there. Baseline decision (2026-10-14): the user rejected both the Box and Lanczos static idles as insufficiently polished and chose neither; the static south idle is being refined first. Walk-frame production, including the hand-drawn Pixelorama method A pilot, is paused until the user approves a new static idle. The E8 measurements stay as historical evidence. No walk frames have been started. Of the two new static refinement candidates the user chose selout v1 as closer; a pixel-level selout v2 static polish (550 texels changed, 27 colours, 80x112, 96 tall) is closer still in the user's view but is NOT approved. v2 has separate 1280x720 Godot captures in the science city, bright outskirts, dark survey annex room 2 and dark prototype room, each with a same-run v1 reference (8 captures). An editable Pixelorama .pxo of selout v1 (not v2) is kept as a source artifact. Static-frame polish continues; walk frames stay paused. Update 2026-10-15: the user approved the female protagonist selout v8 south idle as a STATIC still-frame baseline only; walk pilot w01 and locomotion v2 (w02) are unapproved technical prototypes and the complete four-direction animated variant is not accepted. The user accepted the sentry automaton design/action direction (\"方向可以，继续修正遮挡与滑步\"); sentry animation v2 awaits review and art acceptance stays 0. The user accepted the Liangzhu earthen-terrace/waterway/wetland/survey-station terrain direction, but no high-precision pixel scene exists: v03 and v04 are unapproved concept studies, not editable pixel layers or Godot backgrounds. Counters unchanged: 0/52 runtime sprites, 0/11 scene visuals, 0/2 human playtests; 51 identities, 52 variants.",
       "acceptance": "52 identity displays and four-direction sprites load by character ID; playable team uses individual art; all eleven scene-quality gates pass screenshot and in-game review.",
       "evidence": [
         "52 份角色设定图已在资产清单登记；9 份已验收，其余是概念稿。",
@@ -206,7 +224,9 @@
         "game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-quantized-downscale-manifest_m8-v01_20261014-212322-aa446773.json: two deterministic candidates (boxquant, lanczosquant) from the source concept; no AI editing, no hand edits; both 80x112, 0 partial-alpha texels, 48 colours, 96-texel height (re-measured independently). Numeric targets met; art and animation not human-approved; not integrated; idle only.",
         "outputs/rpg-2-star-ocean-the-second_scifi-city_protagonist-female-pixelorama-south-boxquant-pilot-h48-beside-placeholder_m8-v01_20261014-212445-f010e332.png and outputs/rpg-2-star-ocean-the-second_scifi-city_protagonist-female-pixelorama-south-lanczosquant-pilot-h48-beside-placeholder_m8-v01_20261014-212450-2b647e78.png: variant-tagged 1280x720 Godot city captures of the two quantized candidates at 48 logical px; technical QA only, not a human review.",
         "outputs/rpg-2-star-ocean-the-second_scifi-outskirts-ruins_protagonist-female-quantized-south-pilot-visual-qa-report_m8-v01_20261014-214659-0743bcc0.json: four 1280x720 Godot captures (outputs/rpg-2-star-ocean-the-second_scifi-outskirts_protagonist-female-quantized-south-boxquant-pilot-h48-beside-placeholder_m8-v01_20261014-214659-0743bcc0.png, outputs/rpg-2-star-ocean-the-second_scifi-outskirts_protagonist-female-quantized-south-lanczosquant-pilot-h48-beside-placeholder_m8-v01_20261014-214659-0743bcc0.png, outputs/rpg-2-star-ocean-the-second_scifi-ruins_protagonist-female-quantized-south-boxquant-pilot-h48-beside-placeholder_m8-v01_20261014-214659-0743bcc0.png, outputs/rpg-2-star-ocean-the-second_scifi-ruins_protagonist-female-quantized-south-lanczosquant-pilot-h48-beside-placeholder_m8-v01_20261014-214659-0743bcc0.png) of the boxquant and lanczosquant south idles at 48 logical px beside the 32x48 placeholder in scifi.outskirts and scifi.ruins. game/tests/rpg-2-star-ocean-the-second_protagonist-female_quantized-south-idle-outskirts-ruins-report-check_m8-v01_20261014-220500-d41f7a2c.gd re-hashed all captures and sources, confirmed 1280x720 and a 96-px window height for each, and found 2,536 differing pixels between variants per area: RESULT PASS. Cross-area visibility only; human_reviewed=false, art_approved=false.",
-        "docs/character-visuals/rpg-2-star-ocean-the-second_protagonist-female_south-segmented-walk-feasibility-review_m8-e1e9-it1_20261014-215849-769085fe.md: source-locked segmented south walk (memo method C, 1 idle + 8 walk frames, bake iteration 1, 0 hand-edited texels) from the LANCZOS idle used as a provisional input. E1-E7 and E9 pass; E8 foot contact FAILS (max 3.0, mean 2.84 screen px/tick, 148/148 ticks over the 1 px limit, at 90 logical px/s, an isolated test value and not a runtime speed). Only the boots move, so it is not an acceptable natural walk. Stopped at memo stop condition 6. Files: tools/rpg-2-star-ocean-the-second_protagonist-female_south-segmented-walk-bake_m8-e1e9-v01_20261014-215052-c82448bd.py, game/tests/rpg-2-star-ocean-the-second_protagonist-female_segwalk-e8e9-test_m8-it1_20261014-215052-0151f713.gd (+ .tscn), outputs/rpg-2-star-ocean-the-second_segwalk-e1e9_m8_20261014-215052-5ab7af12/. Technical evidence only; not integrated or approved."
+        "docs/character-visuals/rpg-2-star-ocean-the-second_protagonist-female_south-segmented-walk-feasibility-review_m8-e1e9-it1_20261014-215849-769085fe.md: source-locked segmented south walk (memo method C, 1 idle + 8 walk frames, bake iteration 1, 0 hand-edited texels) from the LANCZOS idle used as a provisional input. E1-E7 and E9 pass; E8 foot contact FAILS (max 3.0, mean 2.84 screen px/tick, 148/148 ticks over the 1 px limit, at 90 logical px/s, an isolated test value and not a runtime speed). Only the boots move, so it is not an acceptable natural walk. Stopped at memo stop condition 6. Files: tools/rpg-2-star-ocean-the-second_protagonist-female_south-segmented-walk-bake_m8-e1e9-v01_20261014-215052-c82448bd.py, game/tests/rpg-2-star-ocean-the-second_protagonist-female_segwalk-e8e9-test_m8-it1_20261014-215052-0151f713.gd (+ .tscn), outputs/rpg-2-star-ocean-the-second_segwalk-e1e9_m8_20261014-215052-5ab7af12/. Technical evidence only; not integrated or approved.",
+        "docs/qa/rpg-2-star-ocean-the-second_geography-rule_visual-regression-review_unapproved-v01_20261015-003237-f8f604dd.md",
+        "docs/qa/rpg-2-star-ocean-the-second_liangzhu-ruins_pixel-art-transition-visual-review_unapproved-v01_20261015-015717-fd5d169d.md"
       ],
       "blocker": null,
       "details": [
@@ -217,14 +237,20 @@
         "科技世界地图、城市、城外、遗址和三地各两间勘察室的背景候选已接入游戏；战场背景有独立候选图，但尚待接入。",
         "女主南向待机已用 Pixelorama v1.2.3 网页版完成一次技术试点：来源图未改动，最近邻缩至 96×115 存为 .pxo 与 PNG；另建独立绘制图层手动放置 4 个发丝高光像素，另存第二份 .pxo 与 PNG。四个文件位于 game/assets/characters/pixelorama-pilots/，清单记录来源、哈希与派生关系。尚未达到备忘录试点参数（半透明像素约 3,476、颜色约 3,070、可见身高 107 而非 96±1）；缩放版与手绘版均有带标签的 48 逻辑像素城市截图（两图仅差 4 个像素）。另由确定性脚本从来源图生成 BOX 与 LANCZOS 两张量化候选（80×112、二值透明、48 色、身高 96），数值参数达标，也各有 48 逻辑像素截图，但未经人工美术或动画审查。这只是单帧待机技术试点，不是行走试点，未接入运行、未获美术批准，0/52 与 0/11 不变。",
         "正式验收仍为来源画像 9/52、探索精灵 0/52、场景画质 0/11；M7 两轮人工试玩尚未完成。",
-        "女主南向待机 BOX 与 LANCZOS 量化候选已在城外通道与旧文明遗址各做一次 48 逻辑像素 1280×720 Godot 截图（共四张，与 32×48 占位并排），独立报告校验通过（哈希、尺寸与 96 像素窗口高度一致）；仅证明跨场景可见，未经人工审查。另以 LANCZOS 待机为临时输入完成来源锁定分层行走实验（方法 C，南向 1 待机 + 8 行走帧）：E1–E7 与 E9 通过，E8 脚步贴地失败（隔离测试速度 90 逻辑像素/秒下每帧漂移 3 屏幕像素，148/148 帧超过 1 像素上限），且只有靴子移动，不构成自然行走；按备忘录停止条件 6 停止。90 像素/秒仅用于该隔离测试，不是游戏速度。"
+        "女主南向待机 BOX 与 LANCZOS 量化候选已在城外通道与旧文明遗址各做一次 48 逻辑像素 1280×720 Godot 截图（共四张，与 32×48 占位并排），独立报告校验通过（哈希、尺寸与 96 像素窗口高度一致）；仅证明跨场景可见，未经人工审查。另以 LANCZOS 待机为临时输入完成来源锁定分层行走实验（方法 C，南向 1 待机 + 8 行走帧）：E1–E7 与 E9 通过，E8 脚步贴地失败（隔离测试速度 90 逻辑像素/秒下每帧漂移 3 屏幕像素，148/148 帧超过 1 像素上限），且只有靴子移动，不构成自然行走；按备忘录停止条件 6 停止。90 像素/秒仅用于该隔离测试，不是游戏速度。",
+        "批准范围（2026-10-15）：用户批准 48 逻辑像素显示比例，以及女主 selout v8 南向待机静态基准帧（仅一张静态帧）。行走试点 w01、移动 v2（w02）均为未批准技术原型；完整四方向动画版本未被接受。",
+        "哨卫机械：用户接受设计／动作方向；动画 v2 等待用户审阅，美术验收仍为 0。巡逻机械只有静态试作。",
+        "良渚古城遗址：用户接受土台、河渠、湿地与调查站的地貌方向；高精度像素场景尚未制作。v03／v04 是未批准概念图（取样颜色约 8.6 万／8.1 万种），不是可编辑像素图层或 Godot 背景；俯视 v02 与横向战场 v01 也未审定。",
+        "真实地理规则使现有遗址石板广场与石柱战场成为待替换项；全球总览 v02 与长三角地区 v01 是静态视觉研究，不是可点击地图。"
       ],
       "remaining": [
         "逐张审查 43 张来源概念图及 52 份正式游戏内展示图；按已批准的 48 逻辑像素比例检查男女主与梁序三向概念图的服装、方向和边缘一致性，修复女主四相南向循环中围巾尾和护膝跨帧跳边，决定西向是否可镜像或需单独创作，再制作正式四方向动作并扩展到 52 套。旧 32×48 帧仅用于功能占位。",
         "在 640×360 可玩画面逐景审查地图、三处户外场景、六间勘察室和战场的可读性、质感与动线；完成 11 项场景画质验收。",
         "人工试玩检查伙伴跟随、四向行走节奏、发型辨识、战斗动作和中英文界面；完成 M7 两轮真实试玩。",
         "Pixelorama 女主南向待机试点：由用户对缩放版、手绘版及 BOX／LANCZOS 量化候选四张 48 逻辑像素截图进行 E10 审查（细节是否保留、发丝高光是否有用、量化后脸部与配件细节是否可接受）；行走速度（R2）、行走帧、其他方向与其余角色尚未开始。",
-        "下一步路线：由用户先选定美术基线（BOX、LANCZOS 或都不用；尚未答复），再用 Pixelorama 手绘南向行走姿势（方法 A）；目前不存在任何手绘行走帧。行走速度（R2）与 E10 人工审查仍待用户决定。"
+        "下一步路线：由用户先选定美术基线（BOX、LANCZOS 或都不用；尚未答复），再用 Pixelorama 手绘南向行走姿势（方法 A）；目前不存在任何手绘行走帧。行走速度（R2）与 E10 人工审查仍待用户决定。",
+        "Liangzhu: fix the in-engine pixel grid and ground pin, then author walkable ground, embankments, water, reeds, survey objects and foreground occlusion as separate editable pixel layers; review one section at native 1280x720 with the approved v8 static frame. The Pixelorama environment workflow awaits the creator.",
+        "User review of sentry animation v2 and of the female south locomotion prototypes (run at 140 px/s vs planted walk); no other direction starts before a south motion is approved."
       ]
     },
     {
@@ -241,6 +267,308 @@
       ],
       "evidence": [],
       "blocker": null
+    }
+  ],
+  "approvalLedger": {
+    "updatedAt": "2026-10-15T06:45:41Z",
+    "note": "Approval scope is recorded exactly as the user gave it. Direction acceptance is not asset acceptance; no counter below was incremented by these entries.",
+    "counters": {
+      "identities": 51,
+      "visualVariants": 52,
+      "runtimeSpritesAccepted": 0,
+      "runtimeSpritesTarget": 52,
+      "sceneVisualsAccepted": 0,
+      "sceneVisualsTarget": 11,
+      "humanPlaytests": 0,
+      "humanPlaytestsTarget": 2
+    },
+    "items": [
+      {
+        "id": "display-scale-48",
+        "status": "approved",
+        "zh": "48 逻辑像素显示比例",
+        "en": "48-logical-pixel display scale",
+        "scope": "仅显示比例；不批准任何角色图、动画、运行替换或场景画质。",
+        "evidence": [
+          "outputs/rpg-2-star-ocean-the-second_scifi-city_liang-xu-male-female-south-scale-review_m8-concept_20261014-153644-9226ceab.png"
+        ]
+      },
+      {
+        "id": "female-v8-south-idle-static",
+        "status": "approved",
+        "zh": "女主 selout v8 南向待机",
+        "en": "Female protagonist selout v8 south idle",
+        "scope": "仅一张南向静态基准帧；不含行走、其他方向或运行验收。",
+        "evidence": [
+          "docs/character-visuals/rpg-2-star-ocean-the-second_protagonist-female_south-idle-static-baseline-decision_m8-v08_20261015-022700-07161696.md"
+        ]
+      },
+      {
+        "id": "female-four-direction-animated",
+        "status": "not_accepted",
+        "zh": "女主四方向动画版本",
+        "en": "Female four-direction animated variant",
+        "scope": "行走试点 w01 与移动 v2（w02）均为未批准技术原型，未接入运行；v3 跑步构建脚本未通过运行前技术审计，未运行，没有产出；其他方向未开始。",
+        "evidence": [
+          "docs/qa/rpg-2-star-ocean-the-second_protagonist-female_south-walk-pilot_visual-qa-note_m8-w01_20261015-024345-cda90190.md",
+          "docs/qa/rpg-2-star-ocean-the-second_protagonist-female_south-locomotion-v2_visual-qa-note_m8-w02_20261015-030458-9d27f4b1.md",
+          "docs/qa/rpg-2-star-ocean-the-second_protagonist-female_south-run-v3-build_pre-run-technical-audit_qa-note_m8-w03_20261015-071053-86f9c79f.md"
+        ]
+      },
+      {
+        "id": "sentry-direction",
+        "status": "direction_accepted",
+        "zh": "哨卫机械设计方向",
+        "en": "Sentry automaton design direction",
+        "scope": "方向已接受；动画 v2 待审阅；美术验收 0。",
+        "evidence": [
+          "docs/qa/rpg-2-star-ocean-the-second_scifi-sentry-automaton_battle-animation-pilot_qa-note_m8-anim-v02_20261014-231549-748c6de8.md"
+        ]
+      },
+      {
+        "id": "liangzhu-terrain-direction",
+        "status": "direction_accepted",
+        "zh": "良渚土台／湿地地貌方向",
+        "en": "Liangzhu earthen-terrace / wetland direction",
+        "scope": "地貌方向已接受；高精度像素场景未制作；v03／v04 为未批准概念。",
+        "evidence": [
+          "docs/qa/rpg-2-star-ocean-the-second_liangzhu-ruins_pixel-art-transition-visual-review_unapproved-v01_20261015-015717-fd5d169d.md"
+        ]
+      },
+      {
+        "id": "geography-map-studies",
+        "status": "unapproved_concept",
+        "zh": "全球总览 v02 与长三角地区 v01",
+        "en": "Global atlas v02 and Yangtze Delta region v01",
+        "scope": "静态视觉研究，不是可点击地图，未审定。",
+        "evidence": [
+          "docs/qa/rpg-2-star-ocean-the-second_global-atlas_geography-grounded-visual-study_qa-note_unapproved-v02_20261015-001640-5b0c8af7.md",
+          "docs/qa/rpg-2-star-ocean-the-second_yangtze-delta_geography-grounded-region-visual-study_qa-note_unapproved-v01_20261015-002022-45806a1c.md"
+        ]
+      }
+    ]
+  },
+  "m2Expansion": {
+    "updatedAt": "2026-10-15T07:24:33Z",
+    "rule": "docs/design/rpg-2-star-ocean-the-second_global-earth-map-real-place-travel_rules-v01_20261014-235354-2b5d4d98.md",
+    "researchPacket": "docs/design/rpg-2-star-ocean-the-second_shanghai-liangzhu_geography-route-art-packet_provisional-v01_20261015-000319-a3e65b7c.md",
+    "anchor": {
+      "status": "provisional",
+      "zh": "上海（暂定，待用户决定）",
+      "en": "Shanghai (provisional, pending user decision)",
+      "note": "松江是上海市的一个区，不是独立城市；良渚古城遗址在杭州地区。"
+    },
+    "gates": [
+      {
+        "id": "map-ui",
+        "zh": "全球与地区地图",
+        "en": "Globe & regional map",
+        "owner": "地图界面",
+        "status": "implemented",
+        "detail": "游戏内为真实地球全图与长江三角洲地区层，可缩放、平移、点选地点，中英文地名。旧三点区域图已停用。地图美术另列，未验收。",
+        "evidence": [
+          "docs/qa/rpg-2-star-ocean-the-second_global-earth-map_runtime-implementation_qa-note_m2-v01_20261015-024300-15ce9195.md",
+          "docs/qa/rpg-2-star-ocean-the-second_global-map-travel_integration-fixes_qa-note_m2-v02_20261015-031824-35247192.md",
+          "outputs/rpg-2-star-ocean-the-second_global-earth-map_globe-zh-runtime-capture_m2-v02_20261015-031426-9a107595.png",
+          "outputs/rpg-2-star-ocean-the-second_global-earth-map_globe-en-runtime-capture_m2-v02_20261015-031426-9a107595.png",
+          "outputs/rpg-2-star-ocean-the-second_global-earth-map_yangtze-delta-zh-runtime-capture_m2-v02_20261015-031426-9a107595.png",
+          "outputs/rpg-2-star-ocean-the-second_global-earth-map_yangtze-delta-en-runtime-capture_m2-v02_20261015-031426-9a107595.png"
+        ]
+      },
+      {
+        "id": "place-registry",
+        "zh": "地点登记（暂定三处）",
+        "en": "Place registry (provisional set)",
+        "owner": "旅行核心",
+        "status": "implemented",
+        "detail": "上海、松江郊外、良渚古城遗址有稳定 ID、坐标、中英文名、行政名和场景入口；地图标记与核心坐标完全一致。三处仍是暂定组合，首城定后替换。",
+        "evidence": [
+          "docs/qa/rpg-2-star-ocean-the-second_global-map-travel_integration-fixes_qa-note_m2-v02_20261015-031824-35247192.md"
+        ]
+      },
+      {
+        "id": "route-preview",
+        "zh": "路线预览、出发与取消",
+        "en": "Route preview, depart & cancel",
+        "owner": "地图界面 + 旅行核心",
+        "status": "implemented",
+        "detail": "路线卡显示交通方式、里程、旅时、抵达日期和“估算”标记。连按出发只结算一次；取消、Esc 或改选都不扣时间；所在地免费进入；接口不符时不能出发，也不显示数字。",
+        "evidence": [
+          "docs/qa/rpg-2-star-ocean-the-second_global-map-travel_integration-fixes_qa-note_m2-v02_20261015-031824-35247192.md",
+          "outputs/rpg-2-star-ocean-the-second_global-earth-map_yangtze-delta-songjiang-card-zh-runtime-capture_m2-v02_20261015-031426-9a107595.png",
+          "outputs/rpg-2-star-ocean-the-second_global-earth-map_yangtze-delta-liangzhu-card-en-runtime-capture_m2-v02_20261015-031426-9a107595.png",
+          "outputs/rpg-2-star-ocean-the-second_global-earth-map_yangtze-delta-shanghai-here-card-en-runtime-capture_m2-v02_20261015-031426-9a107595.png",
+          "outputs/rpg-2-star-ocean-the-second_global-earth-map_yangtze-delta-liangzhu-no-route-api-card-zh-runtime-capture_m2-v02_20261015-031426-9a107595.png",
+          "outputs/rpg-2-star-ocean-the-second_scifi-canvas_pointer-regression-receipt_m8-v01_20261015-071805-548c0f0f.json"
+        ]
+      },
+      {
+        "id": "calendar",
+        "zh": "整数分钟日历",
+        "en": "Integer-minute calendar",
+        "owner": "旅行核心",
+        "status": "implemented",
+        "detail": "旅时按整数分钟累计，跨日、跨年和闰年都正确进位；出发时一次性结算；跨周时在同一条时间轴上发出周交替信号，供以后的商会周结算使用（商会结算本身不在此项内）。",
+        "evidence": [
+          "docs/qa/rpg-2-star-ocean-the-second_global-map-travel_integration-fixes_qa-note_m2-v02_20261015-031824-35247192.md"
+        ]
+      },
+      {
+        "id": "save-migration",
+        "zh": "存读档与旧档迁移",
+        "en": "Save/load & legacy migration",
+        "owner": "旅行核心",
+        "status": "implemented",
+        "detail": "存档保存地点、日期和分钟。读档不重复扣时，也不触发周结算。没有旅行数据的旧档从日历起点开始，不凭空加天，地点保留。",
+        "evidence": [
+          "docs/qa/rpg-2-star-ocean-the-second_global-map-travel_integration-fixes_qa-note_m2-v02_20261015-031824-35247192.md"
+        ]
+      },
+      {
+        "id": "acceptance-test",
+        "zh": "Godot 自动测试",
+        "en": "Godot automated tests",
+        "owner": "地图界面 + 旅行核心",
+        "status": "implemented",
+        "detail": "核心冒烟、地图冒烟 201 项、整合回归 103 项、新版 M2 冒烟、中英文画面文字检查和 1280×720 真实点击回归均通过（2026-10-15）。只证明功能可用，不代表首城、真实旅时或美术已验收。",
+        "evidence": [
+          "docs/qa/rpg-2-star-ocean-the-second_global-earth-map_runtime-implementation_qa-note_m2-v01_20261015-024300-15ce9195.md",
+          "docs/qa/rpg-2-star-ocean-the-second_global-map-travel_integration-fixes_qa-note_m2-v02_20261015-031824-35247192.md",
+          "outputs/rpg-2-star-ocean-the-second_scifi-canvas_pointer-regression-receipt_m8-v01_20261015-071805-548c0f0f.json"
+        ]
+      },
+      {
+        "id": "anchor",
+        "zh": "首城与地下社区锚点",
+        "en": "First city & community anchor",
+        "owner": "用户决定",
+        "status": "awaiting_decision",
+        "detail": "上海为暂定首城；地下社区的现实位置未定。这是待你决定的设计选择，不是程序缺陷。",
+        "evidence": [
+          "docs/design/rpg-2-star-ocean-the-second_shanghai-liangzhu_geography-route-art-packet_provisional-v01_20261015-000319-a3e65b7c.md"
+        ]
+      },
+      {
+        "id": "start-year",
+        "zh": "世界开始年份",
+        "en": "World start year",
+        "owner": "用户决定",
+        "status": "awaiting_decision",
+        "detail": "日历起点 2026-04-01 08:00 只是工程占位值，不是剧情设定。开始年份由你决定，改动只影响新游戏。",
+        "evidence": [
+          "docs/qa/rpg-2-star-ocean-the-second_global-map-travel_integration-fixes_qa-note_m2-v02_20261015-031824-35247192.md"
+        ]
+      },
+      {
+        "id": "route-data",
+        "zh": "门到门路线数值",
+        "en": "Door-to-door route figures",
+        "owner": "旅行核心",
+        "status": "estimate_only",
+        "detail": "现用数值是 Rome2Rio 地点到地点初步估算（非门到门）：上海→松江 34.8 km／26 分；上海→良渚 187.9 km／2 小时；松江→良渚经上海 146 分。门到门附加时间为 0，反向按对称假设；松江→良渚未核验直达路线，不可选。",
+        "evidence": [
+          "docs/design/rpg-2-star-ocean-the-second_shanghai-liangzhu_geography-route-art-packet_provisional-v01_20261015-000319-a3e65b7c.md",
+          "docs/qa/rpg-2-star-ocean-the-second_global-map-travel_integration-fixes_qa-note_m2-v02_20261015-031824-35247192.md"
+        ]
+      },
+      {
+        "id": "air-route",
+        "zh": "航空路线",
+        "en": "Air route",
+        "owner": "旅行核心",
+        "status": "research_only",
+        "detail": "游戏数据中没有航空路线；飞机与“飞机＋汽车”只用测试夹具检查过格式。研究资料列出三条候选：上海虹桥→北京首都、上海虹桥→广州白云、上海虹桥→东京羽田。都未选定，也没有新增可玩城市。",
+        "evidence": [
+          "docs/design/rpg-2-star-ocean-the-second_shanghai-cross-city-air-route_research-packet_unapproved-v01_20261015-031235-9d63971b.md"
+        ]
+      },
+      {
+        "id": "map-art",
+        "zh": "地图美术",
+        "en": "Map art",
+        "owner": "美术",
+        "status": "not_started",
+        "detail": "配色、标签框、道路和标记都是功能占位，还没有按本作像素美术制作。全球与地区样稿是未批准的静态研究。",
+        "evidence": [
+          "docs/qa/rpg-2-star-ocean-the-second_geography-rule_visual-regression-review_unapproved-v01_20261015-003237-f8f604dd.md"
+        ]
+      },
+      {
+        "id": "visual-review",
+        "zh": "人工审阅与试玩",
+        "en": "Human review & playtests",
+        "owner": "用户",
+        "status": "human_pending",
+        "detail": "地图未经真人审阅；人工计时试玩 0/2；场景画质 0/11。截图只是运行证据。",
+        "evidence": []
+      }
+    ],
+    "airRoutePacket": "docs/design/rpg-2-star-ocean-the-second_shanghai-cross-city-air-route_research-packet_unapproved-v01_20261015-031235-9d63971b.md"
+  },
+  "decisions": [
+    {
+      "id": "first-city",
+      "kind": "blocked",
+      "zh": "首个科技城市",
+      "en": "First science city",
+      "detail": "候选：上海（当前暂定）；规则文件另列东京、新加坡出发的遗迹候选，仅供参考。换首城只替换路线组，不改规则。这是设计决定，不是程序缺陷。",
+      "awaiting": "用户"
+    },
+    {
+      "id": "community-anchor",
+      "kind": "blocked",
+      "zh": "地下社区的现实地理锚点",
+      "en": "Underground-community geographic anchor",
+      "detail": "尚无候选；待首城确定后再定。",
+      "awaiting": "用户"
+    },
+    {
+      "id": "world-start-year",
+      "kind": "blocked",
+      "zh": "世界开始年份",
+      "en": "World start year",
+      "detail": "日历起点 2026-04-01 08:00 是工程占位值，不是剧情设定；开始年份待定。改动只影响新游戏，存档保留各自的绝对日期。",
+      "awaiting": "用户"
+    },
+    {
+      "id": "songjiang-label",
+      "kind": "candidate",
+      "zh": "城外场景标签",
+      "en": "Outskirts scene label",
+      "detail": "候选“松江郊外 / Songjiang Outskirts”：松江是上海的区，“郊外”是场景类型；具体入口点未定。",
+      "awaiting": "首城确定后"
+    },
+    {
+      "id": "air-route-pair",
+      "kind": "candidate",
+      "zh": "航空模式验收路线",
+      "en": "Air-mode validation route",
+      "detail": "研究资料（未批准）列出三条候选：上海虹桥→北京首都（两市政府页面证实航线存在，飞行时间只有非官方数据）；上海虹桥→广州白云（官方 2024 年时刻，飞行 145 分，资料建议只作测试夹具）；上海虹桥→东京羽田（跨国，需另定时区与出入境处理）。都只是研究，未选定，未写入游戏数据，也没有新增可玩城市。",
+      "awaiting": "用户（首城确定后）"
+    },
+    {
+      "id": "liangzhu-pixel-workflow",
+      "kind": "blocked",
+      "zh": "良渚像素场景制作流程",
+      "en": "Liangzhu pixel-scene workflow",
+      "detail": "方向已接受；QA 建议以 v01 地貌为场景简报、v04 路径层次为可选参考，分层制作可编辑像素图。Pixelorama 环境流程待创作者答复。",
+      "awaiting": "用户"
+    },
+    {
+      "id": "sentry-v2",
+      "kind": "candidate",
+      "zh": "哨卫动画 v2",
+      "en": "Sentry animation v2",
+      "detail": "修正遮挡与滑步的 21 帧候选，为当前运行默认，但未批准。",
+      "awaiting": "用户审阅"
+    },
+    {
+      "id": "female-south-locomotion",
+      "kind": "candidate",
+      "zh": "女主南向移动方式",
+      "en": "Female south locomotion",
+      "detail": "v2 研究结论：48 像素下 140 px/s 只适合跑步（方案 A）；贴地行走约 16 px/s（方案 B）。均未批准。v3 跑步构建脚本未通过运行前技术审计（只是部分草稿，未运行），没有可审阅的动画。",
+      "awaiting": "用户审阅"
     }
   ]
 }

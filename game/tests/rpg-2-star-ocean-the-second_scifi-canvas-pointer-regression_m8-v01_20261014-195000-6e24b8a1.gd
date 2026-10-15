@@ -6,6 +6,8 @@ const OUT_DIR := "res://../outputs"
 var evidence: Array[String] = []
 var run_stamp := ""
 var run_id := ""
+var city_physical := Vector2.ZERO
+var depart_physical := Vector2.ZERO
 
 
 func _initialize() -> void:
@@ -41,6 +43,25 @@ func _click_window_pixel(position: Vector2) -> void:
 	release.global_position = position
 	root.push_input(release, false)
 	await _settle()
+
+
+# Canvas-items stretch at 2x: logical canvas pixels map to window pixels by a factor of two.
+func _physical_center(control: Control) -> Vector2:
+	return control.get_global_rect().get_center() * 2.0
+
+
+func _enter_city_by_clicks() -> bool:
+	var map: Node = current_scene
+	await _click_window_pixel(_physical_center(map.get("destination_buttons")["scifi.city"]))
+	if not map.get("route_card").visible:
+		_fail("physical city-marker click did not open the route card")
+		return false
+	depart_physical = _physical_center(map.get("depart_button"))
+	await _click_window_pixel(depart_physical)
+	if current_scene.scene_file_path != "res://scenes/scifi_exploration_area.tscn" or root.get_node("AppState").current_destination_id != "scifi.city":
+		_fail("physical route-card click did not enter the city")
+		return false
+	return true
 
 
 func _key(keycode: Key, pressed: bool) -> void:
@@ -94,15 +115,21 @@ func _run() -> void:
 	if not _check_map_header():
 		return
 	await _capture("map-zh")
-	# The logical city button center is (136, 222.5). An unscaled click must miss.
-	await _click_window_pixel(Vector2(136, 222))
-	if current_scene.scene_file_path != "res://scenes/scifi_world_map.tscn":
-		_fail("unscaled physical coordinate unexpectedly hit city button")
+	# The global map places buttons from real coordinates, so positions are read from the
+	# scene: region marker -> Shanghai marker -> route card Depart/Enter, all as window pixels.
+	var region_button: Button = current_scene.get("region_buttons")["yangtze_delta"]
+	await _click_window_pixel(_physical_center(region_button))
+	if current_scene.get("mode") != "region":
+		_fail("physical region-marker click did not open the Yangtze Delta layer")
 		return
-	# This is the center in actual 1280x720 window pixels.
-	await _click_window_pixel(Vector2(272, 445))
-	if current_scene.scene_file_path != "res://scenes/scifi_exploration_area.tscn" or app.current_destination_id != "scifi.city":
-		_fail("physical city-button click did not map to logical button")
+	var city_button: Button = current_scene.get("destination_buttons")["scifi.city"]
+	city_physical = _physical_center(city_button)
+	# An unscaled click at the logical center must miss the marker.
+	await _click_window_pixel(city_button.get_global_rect().get_center())
+	if current_scene.scene_file_path != "res://scenes/scifi_world_map.tscn" or current_scene.get("route_card").visible:
+		_fail("unscaled physical coordinate unexpectedly hit city marker")
+		return
+	if not await _enter_city_by_clicks():
 		return
 	var area: Node2D = current_scene
 	await _capture("city-zh")
@@ -132,12 +159,11 @@ func _run() -> void:
 	if not _check_map_header():
 		return
 	await _capture("map-en")
-	await _click_window_pixel(Vector2(272, 445))
-	if current_scene.scene_file_path != "res://scenes/scifi_exploration_area.tscn":
-		_fail("English city-button click did not enter area")
+	if not await _enter_city_by_clicks():
+		_fail("English city-marker click did not enter area")
 		return
 	await _capture("city-en")
-	var receipt := {"mode": "canvas_items", "window": [1280, 720], "logical_canvas": [640, 360], "city_button_physical": [272, 445], "city_back_physical": [1148, 62], "wasd_start": [before.x, before.y], "wasd_end": [after.x, after.y], "npc_interact": true, "captures": evidence, "human_playtest": false, "art_accepted": false}
+	var receipt := {"mode": "canvas_items", "window": [1280, 720], "logical_canvas": [640, 360], "city_button_physical": [city_physical.x, city_physical.y], "depart_button_physical": [depart_physical.x, depart_physical.y], "city_back_physical": [1148, 62], "wasd_start": [before.x, before.y], "wasd_end": [after.x, after.y], "npc_interact": true, "captures": evidence, "human_playtest": false, "art_accepted": false}
 	var path: String = ProjectSettings.globalize_path(OUT_DIR).path_join("rpg-2-star-ocean-the-second_scifi-canvas_pointer-regression-receipt_m8-v01_%s-%s.json" % [run_stamp, run_id])
 	var file := FileAccess.open(path, FileAccess.WRITE)
 	if file == null:

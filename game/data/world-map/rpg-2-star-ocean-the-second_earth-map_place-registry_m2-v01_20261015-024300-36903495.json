@@ -1,0 +1,131 @@
+{
+  "schema": "worlds-between.world-map.place-registry.v2",
+  "status": "provisional_user_unconfirmed",
+  "verified_on": "2026-10-15",
+  "notes": [
+    "Display metadata only: label side, map region and display kind. Each place id must match a location id in the global travel data.",
+    "Coordinates, names, administrative names, scene destinations and discovery come only from the global travel data (game/data/world-travel/), through the AppState route API or, when that API is unavailable, read straight from the same file. This registry holds no coordinates, so the map and the travel core cannot drift apart.",
+    "Route distances, travel minutes and arrival dates come only from the AppState route API. This file has none.",
+    "reference_places are non-selectable orientation points that are not travel locations; they keep their own coordinates and sources."
+  ],
+  "design_sources": [
+    "docs/design/rpg-2-star-ocean-the-second_global-earth-map-real-place-travel_rules-v01_20261014-235354-2b5d4d98.md",
+    "docs/design/rpg-2-star-ocean-the-second_shanghai-liangzhu_geography-route-art-packet_provisional-v01_20261015-000319-a3e65b7c.md"
+  ],
+  "boards": [
+    {
+      "id": "science",
+      "name": {
+        "zh": "科技板块",
+        "en": "Science region"
+      },
+      "status": "playable_demo",
+      "geo_region_ids": [
+        "yangtze_delta"
+      ]
+    },
+    {
+      "id": "nature",
+      "name": {
+        "zh": "自然板块",
+        "en": "Nature region"
+      },
+      "status": "location_pending",
+      "geo_region_ids": []
+    },
+    {
+      "id": "fantasy",
+      "name": {
+        "zh": "奇幻板块",
+        "en": "Fantasy region"
+      },
+      "status": "location_pending",
+      "geo_region_ids": []
+    },
+    {
+      "id": "magic",
+      "name": {
+        "zh": "魔法板块",
+        "en": "Magic region"
+      },
+      "status": "location_pending",
+      "geo_region_ids": []
+    },
+    {
+      "id": "offworld",
+      "name": {
+        "zh": "星外板块",
+        "en": "Off-world region"
+      },
+      "status": "portal_only_not_on_earth_map",
+      "geo_region_ids": []
+    }
+  ],
+  "geo_regions": [
+    {
+      "id": "yangtze_delta",
+      "board_id": "science",
+      "name": {
+        "zh": "长江三角洲",
+        "en": "Yangtze River Delta"
+      },
+      "geodata_key": "yangtze_delta",
+      "standard_parallel": 30.8,
+      "central_meridian": 121.0,
+      "pan_bbox_wsen": [
+        116.5,
+        28.0,
+        125.5,
+        33.5
+      ],
+      "global_zoom_bbox_wsen": [
+        118.5,
+        29.5,
+        122.5,
+        32.0
+      ]
+    }
+  ],
+  "places": [
+    {
+      "id": "earth.cn.shanghai",
+      "kind": "city",
+      "board_id": "science",
+      "geo_region_id": "yangtze_delta",
+      "label_side": "right"
+    },
+    {
+      "id": "earth.cn.shanghai.songjiang-outskirts",
+      "kind": "outskirts",
+      "board_id": "science",
+      "geo_region_id": "yangtze_delta",
+      "label_side": "below"
+    },
+    {
+      "id": "earth.cn.liangzhu-ruins",
+      "kind": "heritage_ruins",
+      "board_id": "science",
+      "geo_region_id": "yangtze_delta",
+      "label_side": "left"
+    }
+  ],
+  "reference_places": [
+    {
+      "id": "earth.cn.hangzhou",
+      "kind": "reference_city",
+      "geo_region_id": "yangtze_delta",
+      "name": {
+        "zh": "杭州",
+        "en": "Hangzhou"
+      },
+      "lon": 120.168073,
+      "lat": 30.25192,
+      "selectable": false,
+      "coordinate_source": {
+        "label": "Natural Earth populated places, Hangzhou point",
+        "url": "https://github.com/nvkelso/natural-earth-vector/blob/master/geojson/ne_10m_populated_places_simple.geojson"
+      }
+    }
+  ],
+  "travel_data": "game/data/world-travel/rpg-2-star-ocean-the-second_global-earth-travel_locations-routes_m2-provisional-v01_20261015-024215-b876e53d.json"
+}

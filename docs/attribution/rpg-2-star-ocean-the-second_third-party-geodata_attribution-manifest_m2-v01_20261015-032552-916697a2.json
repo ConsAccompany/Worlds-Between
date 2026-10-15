@@ -1,0 +1,92 @@
+{
+  "schema": "worlds-between.third-party-geodata-attribution-manifest.v1",
+  "recordedOn": "2026-10-15",
+  "status": "pre-release-review-open",
+  "note": "Project record of every external coordinate, geodata and route-figure source used by the M2 world-travel and world-map data. It is not legal advice. Entries with licenseStatus 'needs-replacement-or-verification' block packaging until resolved. The same travel sources are mirrored in the travel data under attribution.sources; the validation test keeps both in step.",
+  "document": "docs/attribution/rpg-2-star-ocean-the-second_third-party-geodata_attribution_m2-v01_20261015-032552-efe7f67d.md",
+  "dataFiles": {
+    "travel": "game/data/world-travel/rpg-2-star-ocean-the-second_global-earth-travel_locations-routes_m2-provisional-v01_20261015-024215-b876e53d.json",
+    "mapGeodata": "game/data/world-map/rpg-2-star-ocean-the-second_earth-map_runtime-geodata_m2-v01_20261015-024300-2595ada6.json",
+    "mapPlaceRegistry": "game/data/world-map/rpg-2-star-ocean-the-second_earth-map_place-registry_m2-v01_20261015-024300-36903495.json"
+  },
+  "sources": [
+    {
+      "id": "geonames",
+      "name": "GeoNames geographical database",
+      "url": "https://www.geonames.org/",
+      "termsUrls": ["https://www.geonames.org/export/", "https://www.geonames.org/about.html"],
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "licenseStatus": "stated-by-publisher",
+      "attributionRequired": true,
+      "attributionText": "Contains data from GeoNames (https://www.geonames.org/), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).",
+      "retrievedOn": "2026-10-15",
+      "termsCheckedOn": "2026-10-15",
+      "items": [
+        {"file": "travel", "path": "locations[earth.cn.shanghai].coordinates", "recordUrl": "https://www.geonames.org/1796236", "value": "31.22222, 121.45806"}
+      ]
+    },
+    {
+      "id": "natural-earth",
+      "name": "Natural Earth vector data",
+      "url": "https://www.naturalearthdata.com/",
+      "termsUrls": ["https://www.naturalearthdata.com/about/terms-of-use/"],
+      "license": "public-domain",
+      "licenseStatus": "stated-by-publisher",
+      "attributionRequired": false,
+      "attributionText": "Made with Natural Earth. Free vector and raster map data @ naturalearthdata.com.",
+      "attributionNote": "Credit is not required by the publisher's terms; the project credits it anyway.",
+      "retrievedOn": "2026-10-15",
+      "termsCheckedOn": "2026-10-15",
+      "items": [
+        {"file": "mapGeodata", "path": "sources[ne_110m_land]", "upstreamUrl": "https://github.com/nvkelso/natural-earth-vector/blob/master/geojson/ne_110m_land.geojson", "localCopy": "assets/reference/geography/rpg-2-star-ocean-the-second_earth_natural-earth-110m-land-source_v01_20261015-000900-c6a2de83.geojson"},
+        {"file": "mapGeodata", "path": "sources[ne_50m_land]", "upstreamUrl": "https://github.com/nvkelso/natural-earth-vector/blob/master/geojson/ne_50m_land.geojson", "localCopy": "assets/reference/geography/rpg-2-star-ocean-the-second_earth_natural-earth-50m-land-source_v01_20261015-001400-4420ef51.geojson"},
+        {"file": "mapGeodata", "path": "sources[ne_10m_roads_yangtze_delta_subset]", "upstreamUrl": "https://github.com/nvkelso/natural-earth-vector/blob/master/geojson/ne_10m_roads.geojson", "localCopy": "assets/reference/geography/rpg-2-star-ocean-the-second_yangtze-delta_natural-earth-10m-road-subset-source_v01_20261015-001400-f70c8f29.geojson"},
+        {"file": "mapPlaceRegistry", "path": "reference_places[earth.cn.hangzhou].lon/lat", "upstreamUrl": "https://github.com/nvkelso/natural-earth-vector/blob/master/geojson/ne_10m_populated_places_simple.geojson", "value": "30.25192, 120.168073"}
+      ]
+    },
+    {
+      "id": "wikipedia-songjiang-district",
+      "name": "Wikipedia: Songjiang District",
+      "url": "https://en.wikipedia.org/wiki/Songjiang_District",
+      "license": null,
+      "licenseStatus": "needs-replacement-or-verification",
+      "licenseNote": "Wikipedia article text is published under CC BY-SA 4.0 (and GFDL), not CC BY 4.0. Which terms, if any, apply to a single coordinate pair copied from the page, and where Wikipedia took it from, is not established. Replace with a source of known terms (for example a GeoNames record) or verify before packaging.",
+      "attributionRequired": null,
+      "retrievedOn": "2026-10-15",
+      "items": [
+        {"file": "travel", "path": "locations[earth.cn.shanghai.songjiang-outskirts].coordinates", "value": "31.00583, 121.23333"}
+      ]
+    },
+    {
+      "id": "unesco-whc-1592",
+      "name": "UNESCO World Heritage Centre: Archaeological Ruins of Liangzhu City (ref. 1592), Maps component table",
+      "url": "https://whc.unesco.org/en/list/1592/maps/",
+      "termsUrls": ["https://whc.unesco.org/en/disclaimer/"],
+      "license": null,
+      "licenseStatus": "needs-replacement-or-verification",
+      "licenseNote": "Primary publisher of the component coordinates. UNESCO states no licence for this table. Its site disclaimer (checked 2026-10-15) says 'All photographs and other elements of the UNESCO World Heritage Centre website are protected by international treaties on intellectual property and other applicable laws' and 'may not be copied or retransmitted by any means without explicit authorisation from the World Heritage Centre or the copyright holders'; https://whc.unesco.org/en/terms-of-use/ returned HTTP 404. No reuse permission is asserted. Whether that reservation covers a single factual coordinate is not established. Obtain authorisation, replace with a source of known terms, or get a reviewed determination before packaging.",
+      "attributionRequired": null,
+      "retrievedOn": "2026-10-15",
+      "termsCheckedOn": "2026-10-15",
+      "supersedesSourceIds": ["wikipedia-liangzhu-unesco-1592"],
+      "items": [
+        {"file": "travel", "path": "locations[earth.cn.liangzhu-ruins].coordinates", "recordUrl": "https://whc.unesco.org/en/list/1592/maps/", "component": "1592-004 Area of City Site", "sourceValue": "N30 23 43.97 E119 59 26.97", "value": "30.39556, 119.99083"}
+      ]
+    },
+    {
+      "id": "rome2rio",
+      "name": "Rome2Rio route search",
+      "url": "https://www.rome2rio.com/",
+      "license": null,
+      "licenseStatus": "needs-replacement-or-verification",
+      "licenseNote": "Not a coordinate or geodata source: two driving distance/duration figures were read from public route pages. Rome2Rio's terms of use were not reviewed. The figures are already flagged as preliminary estimates and need independent verification before release.",
+      "attributionRequired": null,
+      "retrievedOn": "2026-10-15",
+      "items": [
+        {"file": "travel", "path": "segments[seg.car.shanghai__songjiang-outskirts]", "recordUrl": "https://www.rome2rio.com/s/Shanghai/Songjiang", "value": "34.8 km, 26 min"},
+        {"file": "travel", "path": "segments[seg.car.shanghai__liangzhu-ruins]", "recordUrl": "https://www.rome2rio.com/s/Shanghai/Archaeological-ruins-of-Liangzhu-City", "value": "187.9 km, 120 min"}
+      ]
+    }
+  ]
+}

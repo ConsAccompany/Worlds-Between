@@ -1,12 +1,47 @@
 extends Node2D
 
+# Global Earth map. Land and coast come from Natural Earth geodata, places from the
+# world-map registry, both projected from real lon/lat (world_geo_projection.gd).
+# Two layers share one interaction model: the whole-Earth view (plate carrée, 110m
+# land) and a regional view (equidistant cylindrical at the region's latitude, 50m
+# land plus approximate roads). The party never walks here; picking a place opens
+# a route card, and travel numbers come only from the AppState route API. Every marker
+# uses the travel data's coordinates (see world_map_route_adapter.gd). Leaving for another
+# place always goes through confirm_travel(); without the route API nobody can depart.
+
 const AREA_SCENE := "res://scenes/scifi_exploration_area.tscn"
-const MAP_BACKGROUND := preload("res://assets/environments/rpg-2-star-ocean-the-second_scifi-region_world-map-background_m8-concept_20261014-143410-5df78b23.png")
-const MARKERS := {
-	"scifi.city": Vector2(136, 174),
-	"scifi.outskirts": Vector2(324, 230),
-	"scifi.ruins": Vector2(510, 150),
-}
+const GeoProjection := preload("res://scripts/world_geo_projection.gd")
+const MapData := preload("res://scripts/world_map_data.gd")
+const MapText := preload("res://scripts/world_map_text.gd")
+const RouteAdapter := preload("res://scripts/world_map_route_adapter.gd")
+
+const MAP_RECT := Rect2(0, 44, 640, 268)
+const CARD_RECT := Rect2(424, 48, 210, 238)
+# Where a region's places are framed, in map-local pixels, clear of the route card.
+const REGION_FRAME := Rect2(150, 44, 230, 116)
+# Map-status line (open regions, or the region name) in the map's top-left corner.
+const STATUS_POS := Vector2(6, 4)
+const STATUS_MAX_TEXT_WIDTH := 264.0
+const GLOBAL_ZOOM_RANGE := 7.0
+const REGION_ZOOM_RANGE := 6.0
+const WHEEL_STEP := 1.25
+
+const COLOR_BACKDROP := Color("#0a121b")
+const COLOR_OCEAN := Color("#123544")
+const COLOR_LAND := Color("#566f58")
+const COLOR_COAST := Color("#a9c6a4")
+const COLOR_GRID := Color(0.16, 0.36, 0.43, 0.75)
+const COLOR_EQUATOR := Color(0.22, 0.47, 0.54, 0.9)
+const COLOR_ROAD := Color(0.89, 0.77, 0.5, 0.7)
+const COLOR_ROAD_MINOR := Color(0.75, 0.68, 0.5, 0.35)
+const COLOR_MARKER := Color("#79cfc0")
+const COLOR_MARKER_EDGE := Color("#0b1c24")
+const COLOR_HERE := Color("#f0d68a")
+const COLOR_LABEL_BG := Color(0.04, 0.08, 0.12, 0.88)
+const COLOR_TEXT := Color("#f2f7f2")
+const COLOR_SUBTEXT := Color("#a9c7c4")
+
+static var last_mode := "global"
 
 var title_label: Label
 var help_label: Label
@@ -20,95 +55,270 @@ var field_title: Label
 var field_body: RichTextLabel
 var field_close: Button
 var talk_button: Button
+# Scene destination ID -> place Button. Kept under the old name for existing flows.
 var destination_buttons: Dictionary = {}
+var place_buttons: Dictionary = {}
+var region_buttons: Dictionary = {}
+
+var mode := "global"
+var active_region_id := "yangtze_delta"
+var global_view: GeoProjection
+var region_view: GeoProjection
+var view: GeoProjection
+var route_adapter: RouteAdapter
+var route_state: Dictionary = {}
+# Places shown on the map, with coordinates, names and scene links from the travel data.
+var places: Array = []
+var selected_place_id := ""
+var selected_option_id := ""
+
+var map_frame: Control
+var underlay: Node2D
+var global_layer: Node2D
+var region_layer: Node2D
+var overlay: Node2D
+var zoom_in_button: Button
+var zoom_out_button: Button
+var globe_button: Button
+var region_button: Button
+var legend_label: Label
+var legend_backing: PanelContainer
+var calendar_label: Label
+var route_card: PanelContainer
+var card_title: Label
+var card_subtitle: Label
+var card_kind: Label
+var card_coords: Label
+var card_from: Label
+var card_route: Label
+var card_options: VBoxContainer
+var depart_button: Button
+var cancel_button: Button
+var dragging := false
+
+var _global_coast: Array = []
+var _region_coast: Array = []
+var _region_roads: Array = []
 
 
 func _ready() -> void:
 	AppState.record_playtest_event("location")
+	route_adapter = RouteAdapter.new(AppState)
+	var problems := route_adapter.api_problems()
+	if not problems.is_empty():
+		# Developer diagnostic only; players see a disabled Depart button with a short reason.
+		push_warning("World map: route API unavailable, departures disabled: " + "; ".join(problems))
+	places = route_adapter.places()
+	_build_views()
 	_build_ui()
 	AppState.language_changed.connect(_refresh_text)
+	if last_mode == "region":
+		enter_region(active_region_id)
+	else:
+		enter_global()
 	_refresh_text()
 	if AppState.show_initial_guide:
 		AppState.show_initial_guide = false
 		call_deferred("_open_field_log")
 
 
-func _draw() -> void:
-	draw_texture_rect(MAP_BACKGROUND, Rect2(0, 0, 640, 360), false)
-	draw_line(MARKERS["scifi.city"], MARKERS["scifi.outskirts"], Color("#d0b982"), 7.0)
-	draw_line(MARKERS["scifi.outskirts"], MARKERS["scifi.ruins"], Color("#d0b982"), 7.0)
-	draw_line(MARKERS["scifi.city"], MARKERS["scifi.outskirts"], Color("#6e8b8b"), 2.0)
-	draw_line(MARKERS["scifi.outskirts"], MARKERS["scifi.ruins"], Color("#6e8b8b"), 2.0)
-	for id in AppState.DESTINATIONS:
-		var position: Vector2 = MARKERS[id]
-		draw_circle(position, 27.0, Color("#112b34"))
-		draw_circle(position, 21.0, Color("#79cfc0"))
-		draw_circle(position, 15.0, Color("#263e49"))
+func _build_views() -> void:
+	var local_rect := Rect2(Vector2.ZERO, MAP_RECT.size)
+	global_view = GeoProjection.new(0.0, 0.0)
+	global_view.configure(local_rect, Rect2(-180, -90, 360, 180), false, GLOBAL_ZOOM_RANGE)
+	var region := MapData.geo_region(active_region_id)
+	region_view = GeoProjection.new(region["central_meridian"], region["standard_parallel"])
+	region_view.configure(local_rect, region_view.project_bbox(region["pan_bbox_wsen"]), true, REGION_ZOOM_RANGE)
+	view = global_view
 
 
 func _build_ui() -> void:
 	var canvas := CanvasLayer.new()
 	add_child(canvas)
+	_build_map_frame(canvas)
+
 	var header := ColorRect.new()
 	header.color = Color("#0d1723")
-	header.size = Vector2(640, 62)
+	header.size = Vector2(640, MAP_RECT.position.y)
 	canvas.add_child(header)
+	title_label = _label(canvas, Vector2(12, 3), 15, Color("#eef8f5"))
+	help_label = _label(canvas, Vector2(12, 25), 10, Color("#a4c1c3"))
+	save_button = _button(canvas, Rect2(296, 6, 100, 32), 12, _open_save)
+	growth_button = _button(canvas, Rect2(402, 6, 118, 32), 11, _open_growth)
+	back_button = _button(canvas, Rect2(526, 6, 102, 32), 12, _return_to_menu)
 
-	title_label = Label.new()
-	title_label.position = Vector2(18, 7)
-	title_label.add_theme_font_size_override("font_size", 19)
-	title_label.add_theme_color_override("font_color", Color("#eef8f5"))
-	canvas.add_child(title_label)
-	help_label = Label.new()
-	help_label.position = Vector2(18, 35)
-	help_label.add_theme_font_size_override("font_size", 11)
-	help_label.add_theme_color_override("font_color", Color("#a4c1c3"))
-	canvas.add_child(help_label)
-	back_button = Button.new()
-	back_button.position = Vector2(528, 12)
-	back_button.size = Vector2(94, 37)
-	back_button.add_theme_font_size_override("font_size", 12)
-	back_button.pressed.connect(_return_to_menu)
-	canvas.add_child(back_button)
-	save_button = Button.new()
-	save_button.position = Vector2(295, 12)
-	save_button.size = Vector2(102, 37)
-	save_button.add_theme_font_size_override("font_size", 13)
-	save_button.pressed.connect(_open_save)
-	canvas.add_child(save_button)
-	growth_button = Button.new()
-	growth_button.position = Vector2(404, 12)
-	growth_button.size = Vector2(117, 37)
-	growth_button.add_theme_font_size_override("font_size", 11)
-	growth_button.pressed.connect(_open_growth)
-	canvas.add_child(growth_button)
+	_build_route_card(canvas)
 
-	var ids := ["scifi.city", "scifi.outskirts", "scifi.ruins"]
-	for id in ids:
-		var button := Button.new()
-		button.name = id.replace(".", "_") + "_button"
-		button.position = MARKERS[id] + Vector2(-68, 29)
-		button.size = Vector2(136, 39)
-		button.add_theme_font_size_override("font_size", 11)
-		button.pressed.connect(_enter_destination.bind(id))
-		canvas.add_child(button)
-		destination_buttons[id] = button
 	var strip := ColorRect.new()
 	strip.color = Color("#0d1723")
 	strip.position = Vector2(0, 313)
 	strip.size = Vector2(640, 47)
 	canvas.add_child(strip)
-	field_status = Label.new()
-	field_status.position = Vector2(17, 319)
-	field_status.add_theme_font_size_override("font_size", 11)
-	field_status.add_theme_color_override("font_color", Color("#e9d9a8"))
-	canvas.add_child(field_status)
-	field_button = Button.new()
-	field_button.position = Vector2(521, 317)
-	field_button.size = Vector2(103, 37)
-	field_button.pressed.connect(_open_field_log)
-	canvas.add_child(field_button)
+	field_status = _label(canvas, Vector2(17, 319), 11, Color("#e9d9a8"))
+	field_button = _button(canvas, Rect2(521, 317, 103, 37), 0, _open_field_log)
 	_build_field_log(canvas)
+
+
+func _build_map_frame(canvas: CanvasLayer) -> void:
+	map_frame = Control.new()
+	map_frame.name = "MapFrame"
+	map_frame.position = MAP_RECT.position
+	map_frame.size = MAP_RECT.size
+	map_frame.clip_contents = true
+	map_frame.mouse_filter = Control.MOUSE_FILTER_STOP
+	map_frame.gui_input.connect(_on_map_input)
+	canvas.add_child(map_frame)
+
+	underlay = Node2D.new()
+	underlay.draw.connect(_draw_underlay)
+	map_frame.add_child(underlay)
+	global_layer = _land_layer(MapData.global_land_rings(), global_view)
+	region_layer = _land_layer(MapData.region_land_rings(active_region_id), region_view)
+	_global_coast = _unit_rings(MapData.global_land_rings(), global_view)
+	_region_coast = _unit_rings(MapData.region_land_rings(active_region_id), region_view)
+	for road in MapData.region_roads(active_region_id):
+		var points := PackedVector2Array()
+		for p in road["points"]:
+			points.append(region_view.project(p.x, p.y))
+		_region_roads.append({"major": road["major"], "points": points})
+	overlay = Node2D.new()
+	overlay.draw.connect(_draw_overlay)
+	map_frame.add_child(overlay)
+
+	for region in MapData.geo_regions():
+		var button := _marker_button(map_frame)
+		button.name = region["id"] + "_region_button"
+		button.pressed.connect(enter_region.bind(region["id"]))
+		region_buttons[region["id"]] = button
+	for place in places:
+		var button := _marker_button(map_frame)
+		button.name = String(place["scene_destination_id"]).replace(".", "_") + "_button"
+		button.pressed.connect(select_place.bind(place["id"]))
+		place_buttons[place["id"]] = button
+		destination_buttons[place["scene_destination_id"]] = button
+
+	_build_status_backing()
+	calendar_label = _label(map_frame, Vector2(392, 249), 10, COLOR_HERE)
+	calendar_label.size = Vector2(240, 16)
+	calendar_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	zoom_in_button = _button(map_frame, Rect2(8, 196, 26, 24), 14, _zoom_button.bind(WHEEL_STEP))
+	zoom_out_button = _button(map_frame, Rect2(8, 222, 26, 24), 14, _zoom_button.bind(1.0 / WHEEL_STEP))
+	zoom_in_button.text = "+"
+	zoom_out_button.text = "−"
+	globe_button = _button(map_frame, Rect2(38, 222, 54, 24), 10, enter_global)
+	region_button = _button(map_frame, Rect2(96, 222, 96, 24), 10, enter_region.bind(active_region_id))
+
+
+# The status line sits on its own dark panel so coastlines and grid lines never run
+# through the text. The panel hugs the text and wraps it only past STATUS_MAX_TEXT_WIDTH.
+func _build_status_backing() -> void:
+	legend_backing = PanelContainer.new()
+	legend_backing.name = "StatusBacking"
+	legend_backing.position = STATUS_POS
+	legend_backing.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var style := StyleBoxFlat.new()
+	style.bg_color = COLOR_LABEL_BG
+	style.border_color = Color("#25404b")
+	style.set_border_width_all(1)
+	style.set_content_margin_all(1)
+	style.content_margin_left = 5
+	style.content_margin_right = 5
+	legend_backing.add_theme_stylebox_override("panel", style)
+	map_frame.add_child(legend_backing)
+	legend_label = _label(legend_backing, Vector2.ZERO, 10, COLOR_SUBTEXT)
+
+
+func _fit_status_backing() -> void:
+	var font := legend_label.get_theme_font("font")
+	var width := font.get_string_size(legend_label.text, HORIZONTAL_ALIGNMENT_LEFT, -1, 10).x
+	var wraps := width > STATUS_MAX_TEXT_WIDTH
+	legend_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART if wraps else TextServer.AUTOWRAP_OFF
+	legend_label.custom_minimum_size.x = STATUS_MAX_TEXT_WIDTH if wraps else 0.0
+	legend_backing.reset_size()
+
+
+# The status panel's rectangle in map-local pixels.
+func status_rect() -> Rect2:
+	return Rect2(legend_backing.position, legend_backing.get_combined_minimum_size())
+
+
+func _land_layer(rings: Array, projection: GeoProjection) -> Node2D:
+	var layer := Node2D.new()
+	map_frame.add_child(layer)
+	for hole_pass in [false, true]:
+		for ring in rings:
+			if ring["hole"] != hole_pass:
+				continue
+			var polygon := Polygon2D.new()
+			polygon.polygon = _project_points(ring["points"], projection)
+			polygon.color = COLOR_OCEAN if hole_pass else COLOR_LAND
+			layer.add_child(polygon)
+	return layer
+
+
+func _unit_rings(rings: Array, projection: GeoProjection) -> Array:
+	var out := []
+	for ring in rings:
+		var points := _project_points(ring["points"], projection)
+		points.append(points[0])
+		out.append(points)
+	return out
+
+
+static func _project_points(points: PackedVector2Array, projection: GeoProjection) -> PackedVector2Array:
+	var out := PackedVector2Array()
+	out.resize(points.size())
+	for i in points.size():
+		out[i] = projection.project(points[i].x, points[i].y)
+	return out
+
+
+func _build_route_card(canvas: CanvasLayer) -> void:
+	route_card = PanelContainer.new()
+	route_card.name = "RouteCard"
+	route_card.position = CARD_RECT.position
+	route_card.custom_minimum_size = CARD_RECT.size
+	route_card.size = CARD_RECT.size
+	var style := StyleBoxFlat.new()
+	# Opaque, so grid lines and degree labels never show through the card text.
+	style.bg_color = Color(0.07, 0.13, 0.17, 1.0)
+	style.border_color = COLOR_MARKER
+	style.set_border_width_all(1)
+	style.set_content_margin_all(8)
+	route_card.add_theme_stylebox_override("panel", style)
+	route_card.visible = false
+	canvas.add_child(route_card)
+	var box := VBoxContainer.new()
+	box.add_theme_constant_override("separation", 3)
+	route_card.add_child(box)
+	card_title = _card_label(box, 14, COLOR_TEXT)
+	card_subtitle = _card_label(box, 10, COLOR_SUBTEXT)
+	card_kind = _card_label(box, 10, Color("#e9d9a8"))
+	card_coords = _card_label(box, 9, COLOR_SUBTEXT)
+	box.add_child(HSeparator.new())
+	card_from = _card_label(box, 10, COLOR_TEXT)
+	card_route = _card_label(box, 10, Color("#d8e6e2"))
+	card_options = VBoxContainer.new()
+	card_options.add_theme_constant_override("separation", 2)
+	box.add_child(card_options)
+	var spacer := Control.new()
+	spacer.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	box.add_child(spacer)
+	var row := HBoxContainer.new()
+	box.add_child(row)
+	depart_button = Button.new()
+	depart_button.name = "DepartButton"
+	depart_button.custom_minimum_size = Vector2(0, 28)
+	depart_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	depart_button.add_theme_font_size_override("font_size", 11)
+	depart_button.pressed.connect(depart)
+	row.add_child(depart_button)
+	cancel_button = Button.new()
+	cancel_button.name = "CancelButton"
+	cancel_button.custom_minimum_size = Vector2(56, 28)
+	cancel_button.add_theme_font_size_override("font_size", 11)
+	cancel_button.pressed.connect(close_route_card)
+	row.add_child(cancel_button)
 
 
 func _build_field_log(canvas: CanvasLayer) -> void:
@@ -146,14 +356,503 @@ func _build_field_log(canvas: CanvasLayer) -> void:
 	field_overlay.add_child(field_close)
 
 
+# --- View modes -------------------------------------------------------------
+
+func enter_global() -> void:
+	mode = "global"
+	last_mode = mode
+	view = global_view
+	view.scale = view.min_scale
+	view.center = view.bounds.get_center()
+	view.clamp_center()
+	close_route_card()
+	_view_changed()
+
+
+func enter_region(region_id: String) -> void:
+	if MapData.geo_region(region_id).is_empty():
+		return
+	active_region_id = region_id
+	mode = "region"
+	last_mode = mode
+	view = region_view
+	var box := MapData.region_places_bbox(region_id, places)
+	view.frame_geo_box(box, REGION_FRAME)
+	_view_changed()
+
+
+func _zoom_button(factor: float) -> void:
+	zoom_view(view.viewport.get_center(), factor)
+
+
+# Zooming past the globe's limit over a region opens it; zooming out of a region returns.
+func zoom_view(local_point: Vector2, factor: float) -> void:
+	if mode == "global" and factor > 1.0 and view.scale * factor > view.max_scale + 0.001:
+		var geo := view.screen_to_geo(local_point)
+		for region in MapData.geo_regions():
+			var bbox: Array = region["global_zoom_bbox_wsen"]
+			var near := Rect2(bbox[0] - 6.0, bbox[1] - 5.0, bbox[2] - bbox[0] + 12.0, bbox[3] - bbox[1] + 10.0)
+			if near.has_point(geo):
+				enter_region(region["id"])
+				return
+	if mode == "region" and factor < 1.0 and view.scale * factor < view.min_scale - 0.001:
+		var region := MapData.geo_region(active_region_id)
+		enter_global()
+		var bbox: Array = region["global_zoom_bbox_wsen"]
+		view.scale = view.max_scale
+		view.center = view.project((bbox[0] + bbox[2]) * 0.5, (bbox[1] + bbox[3]) * 0.5)
+		view.clamp_center()
+		_view_changed()
+		return
+	view.zoom_at(local_point, factor)
+	_view_changed()
+
+
+func _on_map_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		var button := event as InputEventMouseButton
+		if button.pressed and button.button_index == MOUSE_BUTTON_WHEEL_UP:
+			zoom_view(button.position, WHEEL_STEP)
+			map_frame.accept_event()
+		elif button.pressed and button.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			zoom_view(button.position, 1.0 / WHEEL_STEP)
+			map_frame.accept_event()
+		elif button.button_index == MOUSE_BUTTON_LEFT:
+			dragging = button.pressed
+	elif event is InputEventMouseMotion and dragging:
+		view.pan_pixels((event as InputEventMouseMotion).relative)
+		_view_changed()
+	elif event is InputEventMagnifyGesture:
+		zoom_view((event as InputEventMagnifyGesture).position, (event as InputEventMagnifyGesture).factor)
+	elif event is InputEventPanGesture:
+		view.pan_pixels(-(event as InputEventPanGesture).delta * 8.0)
+		_view_changed()
+
+
+func _view_changed() -> void:
+	var regional := mode == "region"
+	global_layer.visible = not regional
+	region_layer.visible = regional
+	var layer := region_layer if regional else global_layer
+	layer.transform = view.unit_transform()
+	_layout_markers()
+	_refresh_map_text()
+	underlay.queue_redraw()
+	overlay.queue_redraw()
+
+
+# --- Markers ----------------------------------------------------------------
+
+func _marker_button(parent: Control) -> Button:
+	var button := Button.new()
+	button.focus_mode = Control.FOCUS_ALL
+	button.add_theme_stylebox_override("normal", StyleBoxEmpty.new())
+	button.add_theme_stylebox_override("pressed", StyleBoxEmpty.new())
+	button.add_theme_stylebox_override("disabled", StyleBoxEmpty.new())
+	var highlight := StyleBoxFlat.new()
+	highlight.bg_color = Color(0, 0, 0, 0)
+	highlight.border_color = COLOR_HERE
+	highlight.set_border_width_all(1)
+	highlight.set_corner_radius_all(3)
+	button.add_theme_stylebox_override("hover", highlight)
+	button.add_theme_stylebox_override("focus", highlight)
+	var background := ColorRect.new()
+	background.name = "LabelBackground"
+	background.color = COLOR_LABEL_BG
+	background.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	button.add_child(background)
+	for line in ["Primary", "Secondary"]:
+		var label := Label.new()
+		label.name = line
+		label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		label.add_theme_font_size_override("font_size", 10 if line == "Primary" else 9)
+		label.add_theme_color_override("font_color", COLOR_TEXT if line == "Primary" else COLOR_SUBTEXT)
+		button.add_child(label)
+	parent.add_child(button)
+	return button
+
+
+func find_place(place_id: String) -> Dictionary:
+	for entry in places:
+		if entry["id"] == place_id:
+			return entry
+	return {}
+
+
+func marker_position(place_id: String) -> Vector2:
+	var place := find_place(place_id)
+	return view.geo_to_screen(place["lon"], place["lat"])
+
+
+func _region_anchor(region_id: String) -> Vector2:
+	var box := MapData.region_places_bbox(region_id, places)
+	return Vector2((box[0] + box[2]) * 0.5, (box[1] + box[3]) * 0.5)
+
+
+func _layout_markers() -> void:
+	var language: String = AppState.language
+	var other := MapText.other_language()
+	var bounds := Rect2(Vector2(2, 2), view.viewport.size - Vector2(4, 4))
+	for region in MapData.geo_regions():
+		var button: Button = region_buttons[region["id"]]
+		button.visible = mode == "global"
+		if not button.visible:
+			continue
+		var anchor := _region_anchor(region["id"])
+		var count := MapData.places_in_region(region["id"], places).size()
+		_set_marker_text(button, MapData.text(region, "name", language), MapText.t("region_sub") % count)
+		_place_marker_button(button, view.geo_to_screen(anchor.x, anchor.y), "right", bounds)
+	for place in places:
+		var button: Button = place_buttons[place["id"]]
+		button.visible = mode == "region" and place["geo_region_id"] == active_region_id
+		if not button.visible:
+			continue
+		_set_marker_text(button, MapData.text(place, "map_label", language), MapData.text(place, "map_label", other))
+		_place_marker_button(button, marker_position(place["id"]), String(place.get("label_side", "right")), bounds)
+
+
+func _set_marker_text(button: Button, primary: String, secondary: String) -> void:
+	(button.get_node("Primary") as Label).text = primary
+	(button.get_node("Secondary") as Label).text = secondary
+	button.tooltip_text = primary + " / " + secondary
+
+
+# The button covers the marker dot and its label; the label flips side if it would leave the frame.
+func _place_marker_button(button: Button, marker: Vector2, side: String, bounds: Rect2) -> void:
+	var primary: Label = button.get_node("Primary")
+	var secondary: Label = button.get_node("Secondary")
+	var p_size := primary.get_combined_minimum_size()
+	var s_size := secondary.get_combined_minimum_size()
+	var label_size := Vector2(maxf(p_size.x, s_size.x) + 8.0, p_size.y + s_size.y - 2.0)
+	var dot := Rect2(marker - Vector2(9, 9), Vector2(18, 18))
+	var label_rect := _label_rect(marker, side, label_size)
+	if not bounds.encloses(label_rect):
+		for fallback in ["right", "left", "below", "above"]:
+			var candidate := _label_rect(marker, fallback, label_size)
+			if bounds.encloses(candidate):
+				label_rect = candidate
+				break
+	var rect := dot.merge(label_rect)
+	button.position = rect.position
+	button.size = rect.size
+	var label_local := label_rect.position - rect.position
+	var background: ColorRect = button.get_node("LabelBackground")
+	background.position = label_local
+	background.size = label_size
+	primary.position = label_local + Vector2(4, -1)
+	secondary.position = label_local + Vector2(4, p_size.y - 3.0)
+
+
+static func _label_rect(marker: Vector2, side: String, label_size: Vector2) -> Rect2:
+	match side:
+		"left":
+			return Rect2(marker + Vector2(-10.0 - label_size.x, -label_size.y * 0.5), label_size)
+		"below":
+			return Rect2(marker + Vector2(-label_size.x * 0.5, 10.0), label_size)
+		"above":
+			return Rect2(marker + Vector2(-label_size.x * 0.5, -10.0 - label_size.y), label_size)
+	return Rect2(marker + Vector2(10.0, -label_size.y * 0.5), label_size)
+
+
+# --- Drawing ----------------------------------------------------------------
+
+func _draw_underlay() -> void:
+	underlay.draw_rect(Rect2(Vector2.ZERO, MAP_RECT.size), COLOR_BACKDROP)
+	var earth := view.unit_transform() * view.bounds
+	underlay.draw_rect(earth, COLOR_OCEAN)
+
+
+func _draw_overlay() -> void:
+	var px := 1.0 / view.scale
+	overlay.draw_set_transform_matrix(view.unit_transform())
+	if mode == "global":
+		for lon in range(-180, 181, 30):
+			overlay.draw_line(view.project(lon, -90), view.project(lon, 90), COLOR_GRID, px)
+		for lat in range(-60, 61, 30):
+			overlay.draw_line(view.project(-180, lat), view.project(180, lat), COLOR_EQUATOR if lat == 0 else COLOR_GRID, px)
+		for ring in _global_coast:
+			overlay.draw_polyline(ring, COLOR_COAST, px)
+		for region in MapData.geo_regions():
+			var box := view.project_bbox(region["global_zoom_bbox_wsen"])
+			overlay.draw_rect(box, COLOR_HERE, false, px * 1.5)
+	else:
+		var clip: Array = MapData.region_clip_bbox(active_region_id)
+		for lon in range(int(clip[0]), int(clip[2]) + 1):
+			overlay.draw_line(view.project(lon, clip[1]), view.project(lon, clip[3]), COLOR_GRID, px)
+		for lat in range(int(clip[1]), int(clip[3]) + 1):
+			overlay.draw_line(view.project(clip[0], lat), view.project(clip[2], lat), COLOR_GRID, px)
+		for ring in _region_coast:
+			overlay.draw_polyline(ring, COLOR_COAST, px)
+		for road in _region_roads:
+			if not road["major"]:
+				overlay.draw_polyline(road["points"], COLOR_ROAD_MINOR, px)
+		for road in _region_roads:
+			if road["major"]:
+				overlay.draw_polyline(road["points"], COLOR_ROAD, px)
+	overlay.draw_set_transform_matrix(Transform2D.IDENTITY)
+	if mode == "region":
+		_draw_region_annotations()
+		var here := route_adapter.current_place_id()
+		for place in places:
+			if place["geo_region_id"] == active_region_id:
+				_draw_marker(marker_position(place["id"]), place["id"] == here, place["id"] == selected_place_id)
+	else:
+		for region in MapData.geo_regions():
+			var anchor := _region_anchor(region["id"])
+			_draw_marker(view.geo_to_screen(anchor.x, anchor.y), find_place(route_adapter.current_place_id()).get("geo_region_id", "") == region["id"], false)
+
+
+func _draw_marker(at: Vector2, here: bool, selected: bool) -> void:
+	if here:
+		overlay.draw_arc(at, 8.5, 0.0, TAU, 24, COLOR_HERE, 2.0)
+	if selected:
+		overlay.draw_arc(at, 11.5, 0.0, TAU, 24, Color.WHITE, 1.5)
+	overlay.draw_circle(at, 5.5, COLOR_MARKER_EDGE)
+	overlay.draw_circle(at, 4.0, COLOR_MARKER)
+
+
+func _draw_region_annotations() -> void:
+	var font := ThemeDB.fallback_font
+	for reference in MapData.reference_places():
+		if reference["geo_region_id"] == active_region_id:
+			var at := view.geo_to_screen(reference["lon"], reference["lat"])
+			overlay.draw_rect(Rect2(at - Vector2(2, 2), Vector2(4, 4)), COLOR_SUBTEXT)
+	for entry in annotation_label_rects():
+		overlay.draw_string(font, entry["baseline"], entry["text"], HORIZONTAL_ALIGNMENT_LEFT, -1, 9, COLOR_SUBTEXT)
+	# Scale bar: valid along meridians and the standard parallel.
+	var km_per_px := view.km_per_pixel()
+	var length_km := 10.0
+	for candidate in [5.0, 10.0, 20.0, 25.0, 50.0, 100.0, 200.0]:
+		if candidate / km_per_px <= 90.0:
+			length_km = candidate
+	var length_px := length_km / km_per_px
+	var origin := Vector2(200, 240)
+	overlay.draw_line(origin, origin + Vector2(length_px, 0), COLOR_TEXT, 2.0)
+	overlay.draw_line(origin + Vector2(0, -4), origin + Vector2(0, 2), COLOR_TEXT, 1.0)
+	overlay.draw_line(origin + Vector2(length_px, -4), origin + Vector2(length_px, 2), COLOR_TEXT, 1.0)
+	overlay.draw_string(font, origin + Vector2(length_px + 4, 4), "%d km" % int(length_km), HORIZONTAL_ALIGNMENT_LEFT, -1, 9, COLOR_TEXT)
+
+
+# Degree and reference-place labels of the regional view, in map-local pixels. While the
+# route card is open, latitude labels move to the card's left edge and any label that
+# would touch the card is left out, so no text sits half under the card.
+func annotation_label_rects() -> Array:
+	var font := ThemeDB.fallback_font
+	var clip: Array = MapData.region_clip_bbox(active_region_id)
+	var visible := view.visible_geo_rect()
+	var card := Rect2()
+	if route_card != null and route_card.visible:
+		card = Rect2(CARD_RECT.position - MAP_RECT.position, CARD_RECT.size).grow(2)
+	var candidates := []
+	# Longitude labels run in one row just below the status panel; other labels under it are left out.
+	var status := status_rect().grow(1)
+	var lon_baseline := maxf(26.0, status.end.y + font.get_ascent(9))
+	for lon in range(int(clip[0]), int(clip[2]) + 1):
+		var x := view.geo_to_screen(lon, 0).x
+		if x > 24 and x < view.viewport.size.x - 24:
+			candidates.append(["%d°E" % lon, Vector2(x + 2, lon_baseline)])
+	for lat in range(int(clip[1]), int(clip[3]) + 1):
+		var y := view.geo_to_screen(visible.position.x, lat).y
+		if y > 30 and y < view.viewport.size.y - 50:
+			var text := "%d°N" % lat
+			var x := view.viewport.size.x - 34
+			if card.has_area():
+				x = card.position.x - font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, 9).x - 2
+			candidates.append([text, Vector2(x, y - 2)])
+	for reference in MapData.reference_places():
+		if reference["geo_region_id"] == active_region_id:
+			var at := view.geo_to_screen(reference["lon"], reference["lat"])
+			candidates.append(["%s %s" % [MapData.text(reference, "name", "zh"), MapData.text(reference, "name", "en")], at + Vector2(5, 11)])
+	var out := []
+	for candidate in candidates:
+		var size := font.get_string_size(candidate[0], HORIZONTAL_ALIGNMENT_LEFT, -1, 9)
+		var rect := Rect2(candidate[1] - Vector2(0, font.get_ascent(9)), size)
+		if rect.intersects(status):
+			continue
+		if card.has_area() and rect.intersects(card):
+			continue
+		out.append({"text": candidate[0], "baseline": candidate[1], "rect": rect})
+	return out
+
+
+# --- Route card -------------------------------------------------------------
+
+func select_place(place_id: String) -> void:
+	var place := find_place(place_id)
+	if place.is_empty():
+		return
+	if mode != "region" or active_region_id != place["geo_region_id"]:
+		enter_region(place["geo_region_id"])
+	selected_place_id = place_id
+	route_state = route_adapter.preview(place_id)
+	selected_option_id = route_state["selected"]
+	route_card.visible = true
+	_refresh_route_card()
+	overlay.queue_redraw()
+	if not depart_button.disabled:
+		depart_button.grab_focus()
+	else:
+		cancel_button.grab_focus()
+
+
+# Cancelling never charges time: the core only settles a trip in confirm_travel().
+func close_route_card() -> void:
+	var had_place := selected_place_id
+	if route_adapter != null and route_state.get("status", "") == "ready":
+		route_adapter.cancel()
+	selected_place_id = ""
+	selected_option_id = ""
+	route_state = {}
+	if route_card != null:
+		route_card.visible = false
+	if overlay != null:
+		overlay.queue_redraw()
+	if not had_place.is_empty() and place_buttons.has(had_place) and place_buttons[had_place].visible:
+		place_buttons[had_place].grab_focus()
+
+
+# The only ways into a scene from the map: a confirmed trip (charged once by the core) or the
+# place the party is already at (free). route_state is cleared first, so a second press is a no-op.
+func depart() -> void:
+	var place := find_place(selected_place_id)
+	if place.is_empty():
+		return
+	var status := String(route_state.get("status", ""))
+	match status:
+		"ready":
+			route_state = {}
+			var result := route_adapter.confirm(selected_place_id, selected_option_id)
+			if not result["ok"] or String(result["scene_destination_id"]).is_empty():
+				_show_departure_failed()
+				return
+			_enter_scene(result["scene_destination_id"])
+		"same_place":
+			route_state = {}
+			if not route_adapter.enter_here():
+				_show_departure_failed()
+				return
+			_enter_scene(place["scene_destination_id"])
+
+
+func _choose_option(option_id: String) -> void:
+	route_state = route_adapter.preview(selected_place_id, option_id)
+	selected_option_id = route_state["selected"]
+	_refresh_route_card()
+
+
+# Kept as its own status so a language switch redraws the same message; no time was charged.
+func _show_departure_failed() -> void:
+	route_state = {"status": "failed"}
+	_refresh_route_card()
+
+
+func _refresh_route_card() -> void:
+	var place := find_place(selected_place_id)
+	if place.is_empty():
+		return
+	var language: String = AppState.language
+	card_title.text = MapData.text(place, "map_label", language)
+	var official := MapData.text(place, "name", language)
+	card_subtitle.text = MapData.text(place, "map_label", MapText.other_language()) + ("" if official == card_title.text else "
+" + official)
+	card_kind.text = MapText.t("kind_" + String(place.get("kind", "")))
+	card_coords.text = GeoProjection.format_lat_lon(place["lon"], place["lat"])
+	var origin := find_place(route_adapter.current_place_id())
+	card_from.text = MapText.t("from") % (MapData.text(origin, "map_label", language) if not origin.is_empty() else "—")
+	for child in card_options.get_children():
+		card_options.remove_child(child)
+		child.queue_free()
+	card_options.visible = true
+	depart_button.disabled = false
+	var status: String = route_state.get("status", "pending_api")
+	match status:
+		"same_place":
+			card_from.text = MapText.t("here")
+			card_route.text = MapText.t("route_same")
+			depart_button.text = MapText.t("enter_here")
+		"ready":
+			card_route.text = MapText.t("route_unverified") if not route_state["unverified"].is_empty() else ""
+			card_route.visible = not card_route.text.is_empty()
+			for option in route_state["options"]:
+				var button := Button.new()
+				button.name = "Route_" + String(option["option_id"]).validate_node_name()
+				button.toggle_mode = true
+				button.button_pressed = option["option_id"] == selected_option_id
+				button.text = route_option_text(option)
+				button.alignment = HORIZONTAL_ALIGNMENT_LEFT
+				button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+				button.add_theme_font_size_override("font_size", 10)
+				button.pressed.connect(_choose_option.bind(option["option_id"]))
+				card_options.add_child(button)
+			depart_button.text = MapText.t("depart")
+		"no_route":
+			card_route.text = MapText.t("route_no_route")
+			depart_button.text = MapText.t("route_pending_button")
+			depart_button.disabled = true
+		"failed":
+			card_options.visible = false
+			card_route.text = MapText.t("travel_failed")
+			depart_button.text = MapText.t("route_pending_button")
+			depart_button.disabled = true
+		_:
+			# Route API missing or mismatched: never offer an untimed trip to another place.
+			card_route.text = MapText.t("route_pending_api")
+			depart_button.text = MapText.t("route_pending_button")
+			depart_button.disabled = true
+	if status != "ready":
+		card_route.visible = true
+	cancel_button.text = MapText.t("cancel")
+
+
+# Formats one available route option. Every number and date is text from the route core.
+static func route_option_text(option: Dictionary) -> String:
+	var parts := [MapText.t("mode_" + String(option["mode"]))]
+	if option["road_distance_km"] > 0.0:
+		parts.append(MapText.t("road_km") % _km_text(option["road_distance_km"]))
+	if option["air_distance_km"] > 0.0:
+		parts.append(MapText.t("air_km") % _km_text(option["air_distance_km"]))
+	parts.append(String(option["duration_text"]))
+	var line := " · ".join(parts)
+	if not String(option["arrival_text"]).is_empty():
+		line += "
+" + MapText.t("arrival_text") % option["arrival_text"]
+	var notes := []
+	if not option["via"].is_empty():
+		notes.append(MapText.t("via") % ", ".join(option["via"]))
+	if option["estimate"]:
+		notes.append(MapText.t("estimate"))
+	if not notes.is_empty():
+		line += "
+" + " · ".join(notes)
+	return line
+
+
+static func _km_text(km: float) -> String:
+	return "%.1f" % km
+
+
+# --- Text -------------------------------------------------------------------
+
+func _refresh_map_text() -> void:
+	help_label.text = MapText.t("help_region" if mode == "region" else "help_global")
+	legend_label.text = MapText.t("boards_legend") if mode == "global" else MapData.text(MapData.geo_region(active_region_id), "name", AppState.language) + " · " + MapData.text(MapData.geo_region(active_region_id), "name", MapText.other_language())
+	_fit_status_backing()
+	calendar_label.text = route_adapter.calendar_text()
+	globe_button.text = MapText.t("view_globe")
+	region_button.text = MapText.t("view_region")
+	globe_button.disabled = mode == "global" and is_equal_approx(view.scale, view.min_scale)
+	region_button.disabled = mode == "region"
+
+
 func _refresh_text() -> void:
-	title_label.text = AppState.text_for("map_title")
-	help_label.text = AppState.text_for("map_help")
+	title_label.text = MapText.t("title")
 	back_button.text = AppState.text_for("map_back")
 	growth_button.text = AppState.text_for("growth_open")
 	save_button.text = AppState.text_for("save_open")
-	for id in destination_buttons:
-		destination_buttons[id].text = AppState.destination_name(id)
+	_refresh_map_text()
+	_layout_markers()
+	if route_card.visible:
+		_refresh_route_card()
 	field_button.text = AppState.text_for("field_log")
 	field_status.text = AppState.field_log_text()
 	field_title.text = AppState.text_for("field_log")
@@ -181,7 +880,10 @@ func _refresh_text() -> void:
 	field_close.text = AppState.text_for("save_back")
 	talk_button.text = AppState.text_for("talk_open")
 	talk_button.disabled = AppState.recruited_members.is_empty()
+	overlay.queue_redraw()
 
+
+# --- Existing flows -----------------------------------------------------------
 
 func _open_field_log() -> void:
 	_refresh_text()
@@ -200,8 +902,12 @@ func _open_party_talk() -> void:
 	get_tree().change_scene_to_file("res://scenes/party_talk.tscn")
 
 
-func _enter_destination(destination_id: String) -> void:
-	if not AppState.select_destination(destination_id):
+# Loads the area scene the core has already selected. The map itself never selects a scene,
+# so it cannot move the party without travel settlement.
+func _enter_scene(destination_id: String) -> void:
+	if AppState.current_destination_id != destination_id:
+		push_error("World map: scene %s is not the party's current scene %s" % [destination_id, AppState.current_destination_id])
+		_show_departure_failed()
 		return
 	get_tree().change_scene_to_file(AREA_SCENE)
 
@@ -222,9 +928,46 @@ func _open_save() -> void:
 	get_tree().change_scene_to_file("res://scenes/save_screen.tscn")
 
 
+func _exit_tree() -> void:
+	if route_adapter != null and route_state.get("status", "") == "ready":
+		route_adapter.cancel()
+
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		if field_overlay.visible:
 			_close_field_log()
+		elif route_card.visible:
+			close_route_card()
 		else:
 			_return_to_menu()
+
+
+func _label(parent: Node, at: Vector2, font_size: int, color: Color) -> Label:
+	var label := Label.new()
+	label.position = at
+	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	label.add_theme_font_size_override("font_size", font_size)
+	label.add_theme_color_override("font_color", color)
+	label.add_theme_color_override("font_outline_color", COLOR_BACKDROP)
+	label.add_theme_constant_override("outline_size", 3)
+	parent.add_child(label)
+	return label
+
+
+func _card_label(parent: Node, font_size: int, color: Color) -> Label:
+	var label := _label(parent, Vector2.ZERO, font_size, color)
+	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	label.custom_minimum_size = Vector2(CARD_RECT.size.x - 16, 0)
+	return label
+
+
+func _button(parent: Node, rect: Rect2, font_size: int, callback: Callable) -> Button:
+	var button := Button.new()
+	button.position = rect.position
+	button.size = rect.size
+	if font_size > 0:
+		button.add_theme_font_size_override("font_size", font_size)
+	button.pressed.connect(callback)
+	parent.add_child(button)
+	return button

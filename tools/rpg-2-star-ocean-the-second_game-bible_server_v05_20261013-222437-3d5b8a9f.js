@@ -23,7 +23,28 @@ const routes = {
   '/source/core': ['rpg-2-star-ocean-the-second_core-cast_character-bible_v01_20261012-234158-cc7e91a4.md','text/markdown; charset=utf-8'],
   '/source/extra': ['rpg-2-star-ocean-the-second_remaining-companions_character-bible_v01_20261013-181920-6d2a4f8c.md','text/markdown; charset=utf-8'],
   '/source/mvp': ['rpg-2-star-ocean-the-second_mvp-implementation-plan_visual-first_v02_20261013-230524-29cf8a61.md','text/markdown; charset=utf-8'],
+  // Read-only design sources for the M2 global-travel gates (fixed paths outside outputs/).
+  '/source/earth-rules': [path.join('..','docs','design','rpg-2-star-ocean-the-second_global-earth-map-real-place-travel_rules-v01_20261014-235354-2b5d4d98.md'),'text/markdown; charset=utf-8'],
+  '/source/shanghai-liangzhu': [path.join('..','docs','design','rpg-2-star-ocean-the-second_shanghai-liangzhu_geography-route-art-packet_provisional-v01_20261015-000319-a3e65b7c.md'),'text/markdown; charset=utf-8'],
 };
+// Read-only evidence files cited by the M2 gates and approval ledger. Only exact repo-relative paths listed in the progress
+// state (re-read per request), under docs/ or outputs/, with a .md/.png/.json extension, are served; everything else is 404.
+const evidenceMime = {'.md':'text/markdown; charset=utf-8','.png':'image/png','.json':'application/json; charset=utf-8'};
+function citedEvidence() {
+  try {
+    const state=JSON.parse(fs.readFileSync(path.join(output,routes['/state'][0]),'utf8'));
+    const lists=[...(state.m2Expansion?.gates||[]),...(state.approvalLedger?.items||[])].map(entry=>entry?.evidence);
+    return new Set([state.m2Expansion?.rule,state.m2Expansion?.researchPacket,...lists.flatMap(list=>Array.isArray(list)?list:[])].filter(file=>typeof file==='string'));
+  } catch(_) {return new Set();}
+}
+function serveEvidence(file,response) {
+  const repo=path.resolve(output,'..');
+  const resolved=path.resolve(repo,file||'');
+  const mime=evidenceMime[path.extname(resolved).toLowerCase()];
+  const safe=typeof file==='string'&&/^(docs|outputs)\/[A-Za-z0-9._\/-]+$/.test(file)&&!file.includes('..')&&resolved.startsWith(repo+path.sep);
+  if(!safe||!mime||!citedEvidence().has(file))return respond(response,404,'Not found');
+  fs.readFile(resolved,(error,data)=>error?respond(response,404,'Not found'):respond(response,200,data,mime));
+}
 function respond(response, code, value, mime='text/plain; charset=utf-8') {
   response.writeHead(code,{'content-type':mime,'cache-control':'no-store','x-content-type-options':'nosniff'});
   response.end(value);
@@ -99,6 +120,7 @@ http.createServer((request,response)=>{
   if(pathname==='/asset-check'&&request.method==='POST')return saveCheck(request,response);
   if(pathname==='/start-playtest'&&request.method==='POST')return startPlaytest(request,response);
   if(request.method!=='GET')return respond(response,405,'Method not allowed');
+  if(pathname==='/evidence')return serveEvidence(new URL(request.url,'http://127.0.0.1').searchParams.get('path'),response);
   if(pathname==='/health')return respond(response,200,'ok');
   if(pathname==='/playtest-status')return respond(response,200,JSON.stringify(playtestStatus),'application/json; charset=utf-8');
   if(pathname==='/playtests')return respond(response,200,JSON.stringify({runs:playtestSummaries()}),'application/json; charset=utf-8');

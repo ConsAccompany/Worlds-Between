@@ -1,6 +1,12 @@
 extends Node
 
 signal language_changed
+# Shared game timeline. Emitted after state is updated, so handlers see the new date and location.
+signal calendar_advanced(previous_minutes: int, new_minutes: int, reason: String)
+# Hook for weekly settlement (no economy exists yet). Emitted once per advance that crosses at least
+# one Monday 00:00; weeks crossed = new_week_index - previous_week_index. Never emitted by loading.
+signal calendar_week_transition(previous_week_index: int, new_week_index: int)
+signal travel_completed(result: Dictionary)
 
 const STRINGS := {
 	"zh": {
@@ -20,7 +26,7 @@ const STRINGS := {
 		"room_help": "WASD / 方向键移动 · Esc 返回主菜单",
 		"back": "返回主菜单",
 		"map_title": "世界地图 · 科技板块",
-		"map_help": "点击目的地进入场景 · 普通旅行不推进日期",
+		"map_help": "点选地点查看路线与旅时",
 		"map_back": "主菜单",
 		"area_city": "科技城市片区",
 		"area_outskirts": "城外通道",
@@ -174,11 +180,20 @@ const STRINGS := {
 		"report_marker": "实地汇报", "report_prompt": "靠近汇报台按 E 查看进度",
 		"report_locked": "仍需完成实地日志中的调查项目。",
 		"report_ready": "资料已齐备。靠近汇报台按 E 提交。",
-		"report_title": "科技板块试玩完成",
+		"report_title": "科技板块实地汇报完成",
 		"report_summary": "%s 已走访三处地点、完成三处实地勘察、核对两份记录，并观察了自动机械。同行伙伴：%d/3。",
 		"report_continue": "继续自由探索", "report_map": "返回世界地图",
-		"report_note": "这份资料揭示了新的问题。完整故事将在后续章节展开。",
-		"report_receipt": "本地试玩记录已保存。",
+		"report_note": "这份资料揭示了新的问题。调查仍在继续。",
+		"report_receipt": "探索记录已保存至本地。",
+		"travel_date": "%d年%d月%d日", "travel_date_line": "日期：%s",
+		"travel_duration_hm": "%d小时%d分钟", "travel_duration_h": "%d小时", "travel_duration_m": "%d分钟",
+		"travel_mode_car": "汽车", "travel_mode_air": "飞机", "travel_mode_join": "＋",
+		"travel_route_line": "%s → %s · %s", "travel_via": "经%s",
+		"travel_distance_road": "公路参考里程 %.1f 公里", "travel_distance_air": "航程参考 %.1f 公里",
+		"travel_duration_line": "预计旅时 %s", "travel_arrival_line": "抵达：%s",
+		"travel_estimate_note": "里程与旅时为估算参考值，门到门旅时待核实。",
+		"travel_same_location": "队伍已在此地 · 不消耗时间",
+		"travel_unavailable": "路线待核实 · 暂不可出发",
 	},
 	"en": {
 		"title": "Worlds Between",
@@ -197,7 +212,7 @@ const STRINGS := {
 		"room_help": "WASD / arrows to move · Esc for menu",
 		"back": "Back to menu",
 		"map_title": "World map · Science region",
-		"map_help": "Choose a destination · Travel takes no days",
+		"map_help": "Pick a place to see its route and travel time",
 		"map_back": "Main menu",
 		"area_city": "Science city district",
 		"area_outskirts": "Outer passage",
@@ -351,11 +366,20 @@ const STRINGS := {
 		"report_marker": "Field report", "report_prompt": "Approach the report desk and press E",
 		"report_locked": "The field log still has unfinished investigations.",
 		"report_ready": "The evidence is ready. Press E at the report desk to submit it.",
-		"report_title": "Science region demo complete",
+		"report_title": "Science region field report complete",
 		"report_summary": "%s visited three places, completed three surveys, checked two records, and observed a machine. Companions: %d/3.",
 		"report_continue": "Continue exploring", "report_map": "World map",
-		"report_note": "The evidence raises further questions. The full story will develop in later chapters.",
-		"report_receipt": "Local playtest record saved.",
+		"report_note": "The evidence raises further questions. The investigation continues.",
+		"report_receipt": "Exploration record saved locally.",
+		"travel_date": "%s %d, %d", "travel_date_line": "Date: %s",
+		"travel_duration_hm": "%d h %d min", "travel_duration_h": "%d h", "travel_duration_m": "%d min",
+		"travel_mode_car": "Car", "travel_mode_air": "Air", "travel_mode_join": " + ",
+		"travel_route_line": "%s → %s · %s", "travel_via": "via %s",
+		"travel_distance_road": "Road reference distance %.1f km", "travel_distance_air": "Flight reference distance %.1f km",
+		"travel_duration_line": "Estimated travel time %s", "travel_arrival_line": "Arrival: %s",
+		"travel_estimate_note": "Distance and time are estimated references; door-to-door time is not yet verified.",
+		"travel_same_location": "Your party is already here · No time passes",
+		"travel_unavailable": "Route pending verification · Not yet available",
 	},
 }
 
@@ -403,6 +427,18 @@ var save_return_position := Vector2(82, 260)
 var resume_area_pending := false
 var resume_area_position := Vector2(82, 260)
 var loaded_scene_kind := "map"
+# Global travel state. calendar_minutes is the one integer game clock (see TravelCalendar).
+var calendar_minutes := 0
+var calendar_week_index := 0
+var current_location_id := ""
+var discovered_locations: Dictionary = {}
+var last_travel: Dictionary = {}
+var travel_preview: Dictionary = {}
+var travel_state_migrated := false
+var _travel_registry: WorldRouteRegistry = null
+
+const TRAVEL_SAVE_VERSION := 1
+const MONTH_ABBREVIATIONS_EN := ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
 const DESTINATIONS := ["scifi.city", "scifi.outskirts", "scifi.ruins"]
 const DESTINATION_KEYS := {
@@ -421,6 +457,7 @@ const MEMBER_DEFS := {
 
 func _ready() -> void:
 	_install_default_controls()
+	_reset_travel_state()
 
 
 func _process(delta: float) -> void:
@@ -482,6 +519,276 @@ func begin_new_run() -> void:
 	growth_return_scene = "res://scenes/scifi_world_map.tscn"
 	resume_area_pending = false
 	loaded_scene_kind = "map"
+	_reset_travel_state()
+
+
+func travel_registry() -> WorldRouteRegistry:
+	if _travel_registry == null:
+		_travel_registry = WorldRouteRegistry.load_default()
+		if not _travel_registry.is_valid():
+			push_error("Global travel data invalid: " + "; ".join(_travel_registry.errors))
+	return _travel_registry
+
+
+func _reset_travel_state() -> void:
+	var registry := travel_registry()
+	calendar_minutes = registry.calendar_start_minutes
+	calendar_week_index = TravelCalendar.week_index(calendar_minutes)
+	current_location_id = registry.start_location_id
+	discovered_locations.clear()
+	for location_id in registry.initial_location_ids():
+		discovered_locations[location_id] = true
+	last_travel = {}
+	travel_preview = {}
+	travel_state_migrated = false
+
+
+# Advances the shared timeline (travel, rest, tasks). Battles and walking inside scenes never call this.
+func advance_calendar(minutes: int, reason: String) -> bool:
+	if minutes < 0:
+		return false
+	if minutes == 0:
+		return true
+	var previous := calendar_minutes
+	var previous_week := calendar_week_index
+	calendar_minutes += minutes
+	var week := TravelCalendar.week_index(calendar_minutes)
+	if week > calendar_week_index:
+		calendar_week_index = week
+	calendar_advanced.emit(previous, calendar_minutes, reason)
+	if calendar_week_index > previous_week:
+		calendar_week_transition.emit(previous_week, calendar_week_index)
+	return true
+
+
+func calendar_datetime() -> Dictionary:
+	return TravelCalendar.from_minutes(calendar_minutes)
+
+
+func calendar_date_text_at(total_minutes: int) -> String:
+	var dt := TravelCalendar.from_minutes(total_minutes)
+	if language == "en":
+		return text_for("travel_date") % [MONTH_ABBREVIATIONS_EN[int(dt["month"]) - 1], dt["day"], dt["year"]]
+	return text_for("travel_date") % [dt["year"], dt["month"], dt["day"]]
+
+
+func calendar_date_text() -> String:
+	return calendar_date_text_at(calendar_minutes)
+
+
+func calendar_time_text_at(total_minutes: int) -> String:
+	var dt := TravelCalendar.from_minutes(total_minutes)
+	return "%02d:%02d" % [dt["hour"], dt["minute"]]
+
+
+func travel_duration_text(minutes: int) -> String:
+	var hours := maxi(0, minutes) / 60
+	var rest := maxi(0, minutes) % 60
+	if hours == 0:
+		return text_for("travel_duration_m") % rest
+	if rest == 0:
+		return text_for("travel_duration_h") % hours
+	return text_for("travel_duration_hm") % [hours, rest]
+
+
+func travel_location_ids(region_id: String = "") -> Array[String]:
+	var registry := travel_registry()
+	var result: Array[String] = []
+	for location_id in registry.location_order:
+		if discovered_locations.has(location_id) and (region_id == "" or registry.locations[location_id]["regionId"] == region_id):
+			result.append(location_id)
+	return result
+
+
+func travel_location(location_id: String) -> Dictionary:
+	return travel_registry().location(location_id).duplicate(true)
+
+
+func travel_location_name(location_id: String) -> String:
+	var names: Dictionary = travel_registry().location(location_id).get("names", {})
+	return String(names.get(language, location_id))
+
+
+# Map label carrying both the Chinese name and the English common name, identical in either language.
+func travel_location_dual_name(location_id: String) -> String:
+	var names: Dictionary = travel_registry().location(location_id).get("names", {})
+	if names.is_empty():
+		return location_id
+	return "%s / %s" % [names["zh"], names["en"]]
+
+
+func discover_travel_location(location_id: String) -> bool:
+	var resolved := travel_registry().resolve_location_id(location_id)
+	if resolved == "" or discovered_locations.has(resolved):
+		return false
+	discovered_locations[resolved] = true
+	return true
+
+
+# Map-facing route list. from_id/to_id accept location IDs or scene destination IDs ("scifi.city").
+# Each option (snake_case): option_id, available, unavailable_reason, mode ("car" | "air" | "air_car"),
+# modes, road_distance_km / air_distance_km (float or null), great_circle_km, total_minutes (-1 when
+# unavailable), verified, estimate, source, sources, via_location_ids, legs, from/to_location_id.
+func travel_route_options(from_id: String, to_id: String) -> Array[Dictionary]:
+	return travel_registry().routes_between(from_id, to_id)
+
+
+# Calendar date reached if the party left now and travelled total_minutes.
+func travel_arrival_preview(total_minutes: int) -> Dictionary:
+	var arrival := calendar_minutes + maxi(0, total_minutes)
+	var dt := TravelCalendar.from_minutes(arrival)
+	dt["minutes"] = arrival
+	dt["text"] = calendar_date_text_at(arrival)
+	dt["time_text"] = calendar_time_text_at(arrival)
+	return dt
+
+
+# Computes a trip from the current location. Changes nothing except the pending preview.
+# kind is "travel", "same_location", "unavailable" or "invalid". Pass option_id to choose one of several
+# available routes; otherwise the shortest available route is used.
+func preview_travel(destination_id: String, option_id: String = "") -> Dictionary:
+	travel_preview = {}
+	var registry := travel_registry()
+	var destination := registry.resolve_location_id(destination_id)
+	var preview := {
+		"ok": false, "kind": "invalid", "reason": "",
+		"from_location_id": current_location_id, "to_location_id": destination, "option_id": "",
+		"total_minutes": 0, "departure_minutes": calendar_minutes, "arrival_minutes": calendar_minutes,
+	}
+	if destination == "":
+		preview["reason"] = "unknown-destination"
+		return preview
+	if not discovered_locations.has(destination):
+		preview["reason"] = "destination-not-discovered"
+		return preview
+	if destination == current_location_id:
+		preview["ok"] = true
+		preview["kind"] = "same_location"
+		travel_preview = preview.duplicate(true)
+		return preview
+	var options := registry.routes_between(current_location_id, destination)
+	var chosen: Dictionary = {}
+	for option in options:
+		if option_id != "":
+			if option["option_id"] == option_id:
+				chosen = option
+		elif option["available"] and (chosen.is_empty() or int(option["total_minutes"]) < int(chosen["total_minutes"])):
+			chosen = option
+	if chosen.is_empty() or not chosen["available"]:
+		preview["kind"] = "unavailable"
+		if not chosen.is_empty():
+			preview["reason"] = String(chosen["unavailable_reason"])
+		elif option_id != "":
+			preview["reason"] = "unknown-route"
+		else:
+			preview["reason"] = String(options[0]["unavailable_reason"]) if not options.is_empty() else "no-route"
+		preview["option_id"] = String(chosen.get("option_id", ""))
+		preview["options"] = options
+		return preview
+	for key in chosen:
+		preview[key] = chosen[key]
+	preview["ok"] = true
+	preview["kind"] = "travel"
+	preview["arrival_minutes"] = calendar_minutes + int(chosen["total_minutes"])
+	preview["departure"] = TravelCalendar.from_minutes(calendar_minutes)
+	preview["arrival"] = TravelCalendar.from_minutes(int(preview["arrival_minutes"]))
+	preview["calendar_days_advanced"] = int(preview["arrival"]["day_index"]) - int(preview["departure"]["day_index"])
+	preview["weeks_crossed"] = int(preview["arrival"]["week_index"]) - TravelCalendar.week_index(calendar_minutes)
+	travel_preview = preview.duplicate(true)
+	return preview
+
+
+func cancel_travel_preview() -> void:
+	travel_preview = {}
+
+
+# Departs and returns true, or returns false with no time charged. With no arguments it settles the
+# pending preview; with a destination (and optional option_id) it settles that trip from the current
+# location and clock. settle_travel() returns the detailed result.
+func confirm_travel(destination_id: String = "", option_id: String = "") -> bool:
+	return bool(settle_travel(destination_id, option_id)["departed"])
+
+
+# Settles one trip: arrival location and scene, then the clock, then calendar/week/travel signals.
+# The preview is consumed, so a repeated call never charges twice. Without arguments, a preview made
+# before the location or clock changed is refused as "stale-preview".
+func settle_travel(destination_id: String = "", option_id: String = "") -> Dictionary:
+	var preview := travel_preview
+	travel_preview = {}
+	if destination_id != "":
+		var resolved := travel_registry().resolve_location_id(destination_id)
+		var matches: bool = not preview.is_empty() and preview["to_location_id"] == resolved and (option_id == "" or preview["option_id"] == option_id)
+		if not matches or _preview_is_stale(preview):
+			preview = preview_travel(destination_id, option_id)
+			travel_preview = {}
+	if preview.is_empty():
+		return {"departed": false, "reason": "no-preview", "minutes_charged": 0}
+	if not bool(preview.get("ok", false)):
+		return {"departed": false, "reason": preview.get("reason", ""), "kind": preview.get("kind", ""), "minutes_charged": 0}
+	if _preview_is_stale(preview):
+		return {"departed": false, "reason": "stale-preview", "minutes_charged": 0}
+	var result := preview.duplicate(true)
+	result["departed"] = false
+	result["minutes_charged"] = 0
+	if preview["kind"] == "same_location":
+		result["scene_destination_id"] = String(travel_registry().location(current_location_id).get("sceneDestinationId", ""))
+		return result
+	var destination := String(preview["to_location_id"])
+	var minutes := int(preview["total_minutes"])
+	current_location_id = destination
+	discovered_locations[destination] = true
+	var scene_id := String(travel_registry().location(destination).get("sceneDestinationId", ""))
+	if scene_id != "":
+		select_destination(scene_id)
+	last_travel = {
+		"optionId": preview["option_id"], "fromLocationId": preview["from_location_id"], "toLocationId": destination,
+		"departedAtMinutes": int(preview["departure_minutes"]), "arrivedAtMinutes": int(preview["departure_minutes"]) + minutes, "minutes": minutes,
+	}
+	advance_calendar(minutes, "travel")
+	result["departed"] = true
+	result["minutes_charged"] = minutes
+	result["scene_destination_id"] = scene_id
+	travel_completed.emit(result)
+	return result
+
+
+func _preview_is_stale(preview: Dictionary) -> bool:
+	return preview.get("from_location_id", "") != current_location_id or int(preview.get("departure_minutes", -1)) != calendar_minutes
+
+
+# Entering the local scene of the current place is free; walking inside scenes never charges time.
+func enter_current_location_scene() -> bool:
+	var scene_id := String(travel_registry().location(current_location_id).get("sceneDestinationId", ""))
+	return scene_id != "" and select_destination(scene_id)
+
+
+func travel_preview_lines(preview: Dictionary) -> PackedStringArray:
+	var lines: PackedStringArray = []
+	match String(preview.get("kind", "")):
+		"same_location":
+			lines.append(text_for("travel_same_location"))
+		"unavailable", "invalid":
+			lines.append(text_for("travel_unavailable"))
+		"travel":
+			var modes: PackedStringArray = []
+			for mode in preview.get("modes", []):
+				modes.append(text_for("travel_mode_" + String(mode)))
+			var route_line: String = text_for("travel_route_line") % [travel_location_dual_name(preview["from_location_id"]), travel_location_dual_name(preview["to_location_id"]), text_for("travel_mode_join").join(modes)]
+			var via: PackedStringArray = []
+			for location_id in preview.get("via_location_ids", []):
+				via.append(travel_location_name(location_id))
+			if not via.is_empty():
+				route_line += " · " + text_for("travel_via") % ("、" if language == "zh" else ", ").join(via)
+			lines.append(route_line)
+			if preview.get("road_distance_km") != null:
+				lines.append(text_for("travel_distance_road") % float(preview["road_distance_km"]))
+			if preview.get("air_distance_km") != null:
+				lines.append(text_for("travel_distance_air") % float(preview["air_distance_km"]))
+			lines.append(text_for("travel_duration_line") % travel_duration_text(int(preview["total_minutes"])))
+			lines.append(text_for("travel_arrival_line") % ("%s %s" % [calendar_date_text_at(int(preview["arrival_minutes"])), calendar_time_text_at(int(preview["arrival_minutes"]))]))
+			if bool(preview.get("estimate", true)):
+				lines.append(text_for("travel_estimate_note"))
+	return lines
 
 
 func member_name(member_id: String) -> String:
@@ -806,6 +1113,15 @@ func make_snapshot(scene_kind: String, position: Vector2, note: String) -> Dicti
 		"annexSurfaceReturnPosition": [annex_surface_return_position.x, annex_surface_return_position.y],
 		"language": language,
 		"note": note,
+		"travel": {
+			"version": TRAVEL_SAVE_VERSION,
+			"calendarMinutes": calendar_minutes,
+			"calendarWeekIndex": calendar_week_index,
+			"calendarText": TravelCalendar.iso_text(calendar_minutes),
+			"locationId": current_location_id,
+			"discovered": discovered_locations.duplicate(true),
+			"lastTravel": last_travel.duplicate(true),
+		},
 	}
 
 
@@ -870,7 +1186,63 @@ func load_save(id: String) -> bool:
 	returning_from_battle = false
 	battle_enemy_id = ""
 	battle_return_position = resume_area_position
+	_restore_travel_state(snapshot)
 	language_changed.emit()
+	return true
+
+
+# Restores the clock exactly as saved and emits no calendar or week signals, so loading never
+# re-charges travel or re-runs weekly settlement. Saves from before global travel ("travel" absent)
+# start at the calendar start date: no days are inferred from play time or visited places.
+func _restore_travel_state(snapshot: Dictionary) -> void:
+	var registry := travel_registry()
+	travel_preview = {}
+	var scene_location := registry.location_for_scene(current_destination_id)
+	if scene_location == "":
+		scene_location = registry.start_location_id
+	if not snapshot.has("travel"):
+		_reset_travel_state()
+		current_location_id = scene_location
+		for destination_id in areas_visited:
+			var visited := registry.location_for_scene(String(destination_id))
+			if visited != "":
+				discovered_locations[visited] = true
+		discovered_locations[current_location_id] = true
+		travel_state_migrated = true
+		return
+	var block: Dictionary = snapshot["travel"]
+	calendar_minutes = int(roundf(float(block["calendarMinutes"])))
+	calendar_week_index = int(block.get("calendarWeekIndex", TravelCalendar.week_index(calendar_minutes)))
+	current_location_id = registry.resolve_location_id(String(block.get("locationId", "")))
+	if current_location_id == "":
+		current_location_id = scene_location
+	discovered_locations.clear()
+	for location_id in block.get("discovered", {}):
+		var resolved := registry.resolve_location_id(String(location_id))
+		# Unknown IDs are kept as-is so a save never loses places that later data may restore.
+		discovered_locations[resolved if resolved != "" else String(location_id)] = true
+	for location_id in registry.initial_location_ids():
+		discovered_locations[location_id] = true
+	discovered_locations[current_location_id] = true
+	last_travel = block.get("lastTravel", {}).duplicate(true)
+	travel_state_migrated = false
+
+
+func _valid_travel_block(block: Variant) -> bool:
+	if typeof(block) != TYPE_DICTIONARY:
+		return false
+	if typeof(block.get("version")) not in [TYPE_INT, TYPE_FLOAT] or int(block["version"]) < 1 or int(block["version"]) > TRAVEL_SAVE_VERSION:
+		return false
+	var minutes: Variant = block.get("calendarMinutes")
+	if typeof(minutes) not in [TYPE_INT, TYPE_FLOAT] or not is_finite(float(minutes)) or float(minutes) != roundf(float(minutes)):
+		return false
+	if block.has("calendarWeekIndex") and (typeof(block["calendarWeekIndex"]) not in [TYPE_INT, TYPE_FLOAT] or float(block["calendarWeekIndex"]) != roundf(float(block["calendarWeekIndex"]))):
+		return false
+	if typeof(block.get("locationId", "")) != TYPE_STRING or typeof(block.get("discovered", {})) != TYPE_DICTIONARY or typeof(block.get("lastTravel", {})) != TYPE_DICTIONARY:
+		return false
+	for location_id in block.get("discovered", {}):
+		if typeof(location_id) != TYPE_STRING or block["discovered"][location_id] != true:
+			return false
 	return true
 
 
@@ -949,6 +1321,8 @@ func _valid_snapshot(snapshot: Dictionary) -> bool:
 	for destination_id in snapshot.get("areasVisited", {}).keys():
 		if not DESTINATIONS.has(destination_id) or snapshot["areasVisited"][destination_id] != true:
 			return false
+	if snapshot.has("travel") and not _valid_travel_block(snapshot["travel"]):
+		return false
 	return true
 
 

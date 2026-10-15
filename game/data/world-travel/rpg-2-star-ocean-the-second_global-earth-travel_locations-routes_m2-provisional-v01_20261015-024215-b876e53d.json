@@ -1,0 +1,210 @@
+{
+	"schemaVersion": 1,
+	"dataId": "global-earth-travel.m2-provisional-v01",
+	"status": "provisional",
+	"statusNote": "The first science city is pending the user's decision. Shanghai, Songjiang Outskirts and the Archaeological Ruins of Liangzhu City are a provisional anchor set. Replace or extend this set without renaming IDs; retired IDs must stay listed (or move to legacyIds) so old saves keep their location.",
+	"recordedOn": "2026-10-15",
+	"designRules": "docs/design/rpg-2-star-ocean-the-second_global-earth-map-real-place-travel_rules-v01_20261014-235354-2b5d4d98.md",
+	"researchPacket": "docs/design/rpg-2-star-ocean-the-second_shanghai-liangzhu_geography-route-art-packet_provisional-v01_20261015-000319-a3e65b7c.md",
+	"attribution": {
+		"note": "Provenance metadata only; the game runtime does not read it. Every coordinateSource and segment source names a sourceId listed here. licenseStatus 'needs-replacement-or-verification' means the reuse terms for that value are not established and it must be replaced or verified before packaging. This is a project record, not legal advice.",
+		"document": "docs/attribution/rpg-2-star-ocean-the-second_third-party-geodata_attribution_m2-v01_20261015-032552-efe7f67d.md",
+		"manifest": "docs/attribution/rpg-2-star-ocean-the-second_third-party-geodata_attribution-manifest_m2-v01_20261015-032552-916697a2.json",
+		"sources": [
+			{
+				"id": "geonames",
+				"name": "GeoNames geographical database",
+				"url": "https://www.geonames.org/",
+				"termsUrls": ["https://www.geonames.org/export/", "https://www.geonames.org/about.html"],
+				"license": "CC-BY-4.0",
+				"licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+				"licenseStatus": "stated-by-publisher",
+				"attributionRequired": true,
+				"attributionText": "Contains data from GeoNames (https://www.geonames.org/), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).",
+				"retrievedOn": "2026-10-15",
+				"termsCheckedOn": "2026-10-15",
+				"usedFor": ["earth.cn.shanghai coordinates"]
+			},
+			{
+				"id": "wikipedia-songjiang-district",
+				"name": "Wikipedia: Songjiang District",
+				"url": "https://en.wikipedia.org/wiki/Songjiang_District",
+				"license": null,
+				"licenseStatus": "needs-replacement-or-verification",
+				"licenseNote": "Wikipedia article text is published under CC BY-SA 4.0 (and GFDL), not CC BY 4.0. Which terms, if any, apply to a single coordinate pair copied from the page, and where Wikipedia took it from, is not established. Replace with a source of known terms (for example a GeoNames record) or verify before packaging.",
+				"attributionRequired": null,
+				"retrievedOn": "2026-10-15",
+				"usedFor": ["earth.cn.shanghai.songjiang-outskirts coordinates"]
+			},
+			{
+				"id": "unesco-whc-1592",
+				"name": "UNESCO World Heritage Centre: Archaeological Ruins of Liangzhu City (ref. 1592), Maps component table",
+				"url": "https://whc.unesco.org/en/list/1592/maps/",
+				"termsUrls": ["https://whc.unesco.org/en/disclaimer/"],
+				"license": null,
+				"licenseStatus": "needs-replacement-or-verification",
+				"licenseNote": "Primary publisher of the component coordinates. UNESCO states no licence for this table. Its site disclaimer (checked 2026-10-15) says 'All photographs and other elements of the UNESCO World Heritage Centre website are protected by international treaties on intellectual property and other applicable laws' and 'may not be copied or retransmitted by any means without explicit authorisation from the World Heritage Centre or the copyright holders'; https://whc.unesco.org/en/terms-of-use/ returned HTTP 404. No reuse permission is asserted. Whether that reservation covers a single factual coordinate is not established. Obtain authorisation, replace with a source of known terms, or get a reviewed determination before packaging.",
+				"attributionRequired": null,
+				"retrievedOn": "2026-10-15",
+				"termsCheckedOn": "2026-10-15",
+				"supersedesSourceIds": ["wikipedia-liangzhu-unesco-1592"],
+				"usedFor": ["earth.cn.liangzhu-ruins coordinates"]
+			},
+			{
+				"id": "rome2rio",
+				"name": "Rome2Rio route search",
+				"url": "https://www.rome2rio.com/",
+				"license": null,
+				"licenseStatus": "needs-replacement-or-verification",
+				"licenseNote": "Not a coordinate or geodata source: two driving distance/duration figures were read from public route pages. Rome2Rio's terms of use were not reviewed. The figures are already flagged as preliminary estimates and need independent verification before release.",
+				"attributionRequired": null,
+				"retrievedOn": "2026-10-15",
+				"usedFor": ["seg.car.shanghai__songjiang-outskirts figures", "seg.car.shanghai__liangzhu-ruins figures"]
+			}
+		]
+	},
+	"calendar": {
+		"startDate": "2026-04-01",
+		"startTime": "08:00",
+		"weekStartsOn": "monday",
+		"status": "engineering-placeholder",
+		"note": "Placeholder start date for the shared game timeline. It is not story canon; the user has not set a calendar year. Changing it affects new runs only; saved games keep their absolute date."
+	},
+	"regions": [
+		{"id": "science", "planet": "earth", "names": {"zh": "科技板块", "en": "Science region"}, "access": "car-air", "status": "active-mvp"},
+		{"id": "nature", "planet": "earth", "names": {"zh": "自然板块", "en": "Nature region"}, "access": "car-air", "status": "locations-pending"},
+		{"id": "fantasy", "planet": "earth", "names": {"zh": "奇幻板块", "en": "Fantasy region"}, "access": "car-air", "status": "locations-pending"},
+		{"id": "magic", "planet": "earth", "names": {"zh": "魔法板块", "en": "Magic region"}, "access": "car-air", "status": "locations-pending"},
+		{"id": "offworld", "planet": "exterritorial", "names": {"zh": "星外板块", "en": "Exterritorial region"}, "access": "portal", "status": "locations-pending", "note": "Reached through a portal, never by car or air. Local transport beyond the portal ends is decided when that region's places are designed."}
+	],
+	"startLocationId": "earth.cn.shanghai",
+	"locations": [
+		{
+			"id": "earth.cn.shanghai",
+			"names": {"zh": "上海", "en": "Shanghai"},
+			"nativeName": "上海",
+			"type": "city",
+			"regionId": "science",
+			"countryCode": "CN",
+			"coordinates": {"lat": 31.22222, "lon": 121.45806, "basis": "city reference point"},
+			"coordinateSource": {"name": "GeoNames 1796236 (Shanghai, PPLA)", "url": "https://www.geonames.org/1796236", "retrievedOn": "2026-10-15", "sourceId": "geonames", "license": "CC-BY-4.0", "licenseStatus": "stated-by-publisher"},
+			"placeVerification": {"status": "real-city-verified", "note": "Real city. Provisional first science city pending user decision."},
+			"discovery": {"initial": true},
+			"sceneDestinationId": "scifi.city",
+			"legacyIds": []
+		},
+		{
+			"id": "earth.cn.shanghai.songjiang-outskirts",
+			"names": {"zh": "松江郊外", "en": "Songjiang Outskirts"},
+			"nativeName": "松江",
+			"administrativeName": {"zh": "上海市松江区", "en": "Songjiang District, Shanghai"},
+			"type": "outskirts",
+			"regionId": "science",
+			"countryCode": "CN",
+			"coordinates": {"lat": 31.00583, "lon": 121.23333, "basis": "district reference point; scene entry point not yet registered"},
+			"coordinateSource": {"name": "Wikipedia: Songjiang District", "url": "https://en.wikipedia.org/wiki/Songjiang_District", "retrievedOn": "2026-10-15", "sourceId": "wikipedia-songjiang-district", "license": null, "licenseStatus": "needs-replacement-or-verification", "note": "The district government page (https://english.songjiang.gov.cn/facts/location/) gives 121°45'E, 31°N; that longitude lies east of central Shanghai and conflicts with its own 'southwestern Shanghai' description, so it is not used."},
+			"placeVerification": {"status": "real-district-verified", "note": "Songjiang is a district of Shanghai, not a separate city. 'Outskirts' (郊外) is the scene type."},
+			"discovery": {"initial": true},
+			"sceneDestinationId": "scifi.outskirts",
+			"legacyIds": []
+		},
+		{
+			"id": "earth.cn.liangzhu-ruins",
+			"names": {"zh": "良渚古城遗址", "en": "Archaeological Ruins of Liangzhu City"},
+			"nativeName": "良渚古城遗址",
+			"administrativeName": {"zh": "浙江省杭州市余杭区", "en": "Yuhang District, Hangzhou, Zhejiang"},
+			"type": "ruins",
+			"regionId": "science",
+			"countryCode": "CN",
+			"coordinates": {"lat": 30.39556, "lon": 119.99083, "basis": "UNESCO 1592 'City' component reference point"},
+			"coordinateSource": {"name": "UNESCO WHC 1592 component table: 1592-004 Area of City Site, N30 23 43.97 E119 59 26.97 (881.45 ha)", "url": "https://whc.unesco.org/en/list/1592/maps/", "retrievedOn": "2026-10-15", "sourceId": "unesco-whc-1592", "license": null, "licenseStatus": "needs-replacement-or-verification", "note": "The DMS value converts to 30.395547, 119.990825; the stored 5-decimal value is within 2 m. Cited directly instead of the Wikipedia copy of the same table; the value is unchanged. The page returned HTTP 403 to WebFetch and to curl's default user agent, and HTTP 200 to curl with a browser user agent, on 2026-10-15."},
+			"placeVerification": {"status": "real-world-heritage-site-verified", "source": "https://whc.unesco.org/en/list/1592/"},
+			"discovery": {"initial": true},
+			"sceneDestinationId": "scifi.ruins",
+			"legacyIds": []
+		}
+	],
+	"segments": [
+		{
+			"id": "seg.car.shanghai__songjiang-outskirts",
+			"mode": "car",
+			"fromLocationId": "earth.cn.shanghai",
+			"toLocationId": "earth.cn.shanghai.songjiang-outskirts",
+			"roadDistanceKm": 34.8,
+			"referenceDurationMinutes": 26,
+			"doorToDoorAllowanceMinutes": 0,
+			"bidirectional": true,
+			"reverseBasis": "assumed-symmetric-unverified",
+			"verification": {
+				"status": "preliminary-estimate",
+				"source": {"name": "Rome2Rio: Shanghai to Songjiang (drive)", "url": "https://www.rome2rio.com/s/Shanghai/Songjiang", "retrievedOn": "2026-10-15", "sourceId": "rome2rio", "recordedIn": "docs/design/rpg-2-star-ocean-the-second_shanghai-liangzhu_geography-route-art-packet_provisional-v01_20261015-000319-a3e65b7c.md"},
+				"note": "Third-party place-to-place driving estimate, not door to door. The doorToDoorAllowanceMinutes stays 0 until the city departure point and outskirts scene entry are registered."
+			}
+		},
+		{
+			"id": "seg.car.shanghai__liangzhu-ruins",
+			"mode": "car",
+			"fromLocationId": "earth.cn.shanghai",
+			"toLocationId": "earth.cn.liangzhu-ruins",
+			"roadDistanceKm": 187.9,
+			"referenceDurationMinutes": 120,
+			"doorToDoorAllowanceMinutes": 0,
+			"bidirectional": true,
+			"reverseBasis": "assumed-symmetric-unverified",
+			"verification": {
+				"status": "preliminary-estimate",
+				"source": {"name": "Rome2Rio: Shanghai to Archaeological ruins of Liangzhu City (drive)", "url": "https://www.rome2rio.com/s/Shanghai/Archaeological-ruins-of-Liangzhu-City", "retrievedOn": "2026-10-15", "sourceId": "rome2rio", "recordedIn": "docs/design/rpg-2-star-ocean-the-second_shanghai-liangzhu_geography-route-art-packet_provisional-v01_20261015-000319-a3e65b7c.md"},
+				"note": "Source states about 2 hours; recorded as 120 minutes. Initial calibration value only; city departure and site-entrance access are not yet added."
+			}
+		}
+	],
+	"routes": [
+		{
+			"id": "route.car.shanghai__songjiang-outskirts",
+			"fromLocationId": "earth.cn.shanghai",
+			"toLocationId": "earth.cn.shanghai.songjiang-outskirts",
+			"status": "available",
+			"bidirectional": true,
+			"legs": [{"segmentId": "seg.car.shanghai__songjiang-outskirts", "reverse": false}]
+		},
+		{
+			"id": "route.car.shanghai__liangzhu-ruins",
+			"fromLocationId": "earth.cn.shanghai",
+			"toLocationId": "earth.cn.liangzhu-ruins",
+			"status": "available",
+			"bidirectional": true,
+			"legs": [{"segmentId": "seg.car.shanghai__liangzhu-ruins", "reverse": false}]
+		},
+		{
+			"id": "route.car.songjiang-outskirts__liangzhu-ruins.direct",
+			"fromLocationId": "earth.cn.shanghai.songjiang-outskirts",
+			"toLocationId": "earth.cn.liangzhu-ruins",
+			"status": "unverified",
+			"unavailableReason": "direct-road-figures-not-verified",
+			"bidirectional": true,
+			"legs": [],
+			"note": "No verified direct road distance or drive time. Do not derive it by subtracting the two Shanghai routes."
+		},
+		{
+			"id": "route.car.songjiang-outskirts__liangzhu-ruins.via-shanghai",
+			"fromLocationId": "earth.cn.shanghai.songjiang-outskirts",
+			"toLocationId": "earth.cn.liangzhu-ruins",
+			"status": "available",
+			"bidirectional": true,
+			"viaLocationIds": ["earth.cn.shanghai"],
+			"legs": [
+				{"segmentId": "seg.car.shanghai__songjiang-outskirts", "reverse": true},
+				{"segmentId": "seg.car.shanghai__liangzhu-ruins", "reverse": false}
+			],
+			"note": "Explicit two-leg itinerary through Shanghai with additive time, as allowed by the research packet. It is a detour, not the direct road; each leg is a preliminary estimate."
+		}
+	],
+	"pendingRouteRequests": [
+		{
+			"id": "request.air.cross-city-validation-pair",
+			"mode": "air",
+			"status": "pending-place-pair",
+			"note": "The rules require one cross-city air route to validate air mode. No pair is chosen and no flight is recorded. Add an air segment with flightDistanceKm, airportAccessMinutes, checkInAndWaitMinutes, flightMinutes and airportEgressMinutes, each sourced, once a real city pair with scheduled service is selected and checked."
+		}
+	]
+}

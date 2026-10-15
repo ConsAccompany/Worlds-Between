@@ -246,6 +246,13 @@ func _run() -> void:
 			return
 		if not _check(app.playtest_receipt_path != "" and FileAccess.file_exists(app.playtest_receipt_path), "playtest receipt written"):
 			return
+		var report_copy: String = current_scene.get("title_label").text + "\n" + current_scene.get("note_label").text
+		var report_dev_word := ""
+		for word in ["试玩", "演示", "原型", "临时", "后续章节", "demo", "playtest", "prototype", "temporary", "placeholder", "later chapters"]:
+			if report_copy.to_lower().contains(word):
+				report_dev_word = word
+		if not _check(report_dev_word == "" and report_copy.contains(app.text_for("report_title")) and report_copy.contains(app.text_for("report_receipt")), "report copy is in-world (%s)" % app.language):
+			return
 		var receipt: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(app.playtest_receipt_path))
 		if not _check(int(receipt.get("schemaVersion", 0)) == 1 and bool(receipt.get("reportCompleted", false)), "playtest receipt schema and completion"):
 			return

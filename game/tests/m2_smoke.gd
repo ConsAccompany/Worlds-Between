@@ -31,9 +31,8 @@ func _run_checks() -> void:
 	app.toggle_language()
 	for id in app.DESTINATIONS:
 		world_map = current_scene
-		var button: Button = world_map.get("destination_buttons")[id]
-		button.pressed.emit()
-		await _settle()
+		if not await _enter_from_map(world_map, id):
+			return
 		var area: Node2D = current_scene
 		if not _check(area != null and area.name == "ScifiExplorationArea", "destination opens area: " + id):
 			return
@@ -91,14 +90,39 @@ func _run_checks() -> void:
 		if not _check(current_scene != null and current_scene.name == "ScifiWorldMap", "area returns to map: " + id):
 			return
 		if id != "scifi.city":
-			(current_scene.get("destination_buttons")[id] as Button).pressed.emit()
-			await _settle()
+			if not await _enter_from_map(current_scene, id):
+				return
 			if not _check(current_scene.get("encounter_count") == 0 and current_scene.get("enemy_visible"), "enemy resets on reentry: " + id):
 				return
 			current_scene.get("back_button").pressed.emit()
 			await _settle()
 	print("M2_SMOKE_OK")
 	quit(0)
+
+
+# The global map opens a route card for the picked place; Depart (or Enter for the current
+# place) settles any travel through AppState and loads the scene. A trip charges the selected
+# route's minutes exactly once; entering the place the party is already at charges nothing.
+func _enter_from_map(world_map: Node, id: String) -> bool:
+	var app: Node = root.get_node("AppState")
+	(world_map.get("destination_buttons")[id] as Button).pressed.emit()
+	await _settle()
+	var state: Dictionary = world_map.get("route_state")
+	var expected := 0
+	if state["status"] == "ready":
+		for option in state["options"]:
+			if option["option_id"] == state["selected"]:
+				expected = int(option["total_minutes"])
+		if not _check(expected > 0, "selected route has minutes: " + id):
+			return false
+	elif not _check(state["status"] == "same_place", "route card offers travel or free entry: " + id):
+		return false
+	var before: int = app.calendar_minutes
+	var depart: Button = world_map.get("depart_button")
+	depart.pressed.emit()
+	depart.pressed.emit()
+	await _settle()
+	return _check(app.calendar_minutes == before + expected, "map entry charged %d min once: %s" % [expected, id])
 
 
 func _settle() -> void:

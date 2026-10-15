@@ -1,11 +1,11 @@
 # Open World Pixel RPG Implementation Progress
 
-Last updated: 2026-10-14
+Last updated: 2026-10-15
 
 ## Summary
 
 - M1 project foundation is complete. Godot 4.7.2 imports and launches the project; a scene smoke check passes Chinese/English menu labels, entry/return, movement, and temporary sprite loading.
-- M2 world-map exploration is complete: three destinations, top-down movement, NPC interaction, visible enemies, an avoidance path, and enemy reset on reentry.
+- M2's original three-destination exploration slice passed: top-down movement, NPC interaction, visible enemies, an avoidance path, and enemy reset on reentry. **M2 is reopened** by the 2026-10-14 rule change: the map must cover Earth, cities and ruins must use real places, and car/air travel must advance a calendar. As of 2026-10-15 the global/regional map, route preview/confirm/cancel, integer-minute calendar and save migration are implemented and pass Godot automated tests. **M2 is still not complete.** The anchors and start year await the user. Route figures are preliminary, there is no air route, and the map art and human review are outstanding (see the 2026-10-15 status entry below).
 - Four 640×360 M2 captures were inspected for readability and layout. The M2 encounter preview is now replaced by the M3 battle arena.
 - M3 combat core is complete: contact opens a fixed side-view arena with two fixed enemy types, horizontal movement, attack, dodge, guard, HP and energy, victory recovery, and defeat return to the menu.
 - Godot M1–M3 smoke checks pass; three M3 captures were inspected. The measured encounter transition stayed below the provisional one-second target on this development machine.
@@ -53,6 +53,17 @@ Last updated: 2026-10-14
 ### Phase M2 - World map and exploration
 
 - [x] Implement the three MVP destinations and visible avoidable enemies.
+- [x] Replace the region-only map with a global Earth map plus a Yangtze Delta regional layer; the playable story stays in the science region. Implemented and passing automated tests; the map art is not accepted (see below).
+- [x] Register real places with stable IDs, coordinates, bilingual names and scene entries. Only the provisional set exists: Shanghai, Songjiang Outskirts, Archaeological Ruins of Liangzhu City.
+- [x] Route preview, one-time departure settlement, cancel at no cost, an integer-minute calendar (day, year and leap-year carry, week-transition signal), save/load and legacy-save migration. Implemented and passing automated tests.
+- [x] Godot automated tests: `GLOBAL_TRAVEL_CORE_OK`, `GLOBAL_EARTH_MAP_SMOKE_OK checks=201`, `GLOBAL_MAP_TRAVEL_INTEGRATION_OK checks=103`, the revised `M2_SMOKE_OK`, and the 1280×720 pointer regression. The old three-node `M2_SMOKE_OK` does not count.
+- [ ] Decide the first-city and underground-community anchors (user decision). Shanghai is provisional; Songjiang is a Shanghai district, not a separate city.
+- [ ] Decide the world start year (user decision). The calendar start 2026-04-01 08:00 is an engineering placeholder.
+- [ ] Replace the Rome2Rio point-to-point estimates with validated door-to-door route figures.
+- [ ] Add an actual air route to game data. Three candidates are research only and none is selected.
+- [ ] Connect the weekly business settlement to the week-transition signal.
+- [ ] Produce and accept the map art.
+- [ ] Human map review, then the two human timed playtests (0/2).
 
 ### Phase M3 - Combat core
 
@@ -244,3 +255,55 @@ The playable city now uses the static visual-direction candidate, manually trace
 - **Changed lock.** The v8 manifest lock changes from raw `0fa7937d…5992` (the CRLF working copy) to `3ba35811…10ed`, which is the same content and equals the committed LF blob. The [decision record](character-visuals/rpg-2-star-ocean-the-second_protagonist-female_south-idle-static-baseline-decision_m8-v08_20261015-022700-07161696.md) has an amendment. The v8 PNG and capture hashes are unchanged. The readiness builder writes LF.
 - **New test.** A [content-hash portability check](../tests/content-hash-portability/rpg-2-star-ocean-the-second_content-hash-portability_check_m8-v01_20261014-224905-72fc691e.js) covers it. Verified in fresh clones with `core.autocrlf=true` and `false`.
 - Approval scope is unchanged: v8 is still only the female south idle static still-frame baseline. Exploration sprites stay **0/52**, scene-quality gates **0/11** and human timed playtests **0/2**.
+
+## 2026-10-15 - Game bible and tracking: M2 global-travel gates, scoped approvals and pending decisions (no acceptance counter changed)
+
+> **Historical (early 2026-10-15).** The M2 gate count here (eight gates, 0/8 done) and the "no implementation or test evidence" statement are superseded by the next entry: 6 of 12 gates are implemented and pass automated tests, 6 are open, and M2 stays in progress. The rest of this entry is kept as written.
+
+- **Sources read.** [Global Earth travel rules](design/rpg-2-star-ocean-the-second_global-earth-map-real-place-travel_rules-v01_20261014-235354-2b5d4d98.md), the [Shanghai–Songjiang–Liangzhu research packet](design/rpg-2-star-ocean-the-second_shanghai-liangzhu_geography-route-art-packet_provisional-v01_20261015-000319-a3e65b7c.md), the [geography visual-regression review](qa/rpg-2-star-ocean-the-second_geography-rule_visual-regression-review_unapproved-v01_20261015-003237-f8f604dd.md) and the [Liangzhu pixel-transition review](qa/rpg-2-star-ocean-the-second_liangzhu-ruins_pixel-art-transition-visual-review_unapproved-v01_20261015-015717-fd5d169d.md).
+- **M2 stays reopened (in progress).** The progress state now has eight bilingual M2 gates: anchors, real-place registry, route data, calendar, save migration, global map UI, Godot acceptance test and human map review. **0/8 are done.** Route data and the place registry exist only as research: Rome2Rio gives Shanghai→Songjiang 34.8 km / about 26 min and Shanghai→Liangzhu 187.9 km / about 2 h. These are not door-to-door figures and are not final. Songjiang→Liangzhu is unverified, and no air route pair has been chosen. Two parallel sessions own the travel core and map UI. This repository has **no implementation or test evidence** for them yet, so their gates read "no evidence yet". The only runtime change so far is the map help text, which now says the global map is in development.
+- **Anchor.** Shanghai is a **provisional** anchor pending the user's decision. Songjiang is a district of Shanghai, not a separate city; "松江郊外 / Songjiang Outskirts" is a candidate scene label. The game bible has a matching open question.
+- **Scoped approvals (ledger).** Two items are approved, each only in its stated scope:
+  - the 48-logical-pixel display scale;
+  - the female selout v8 south idle, as a **static frame only**.
+
+  The complete four-direction animated variant is **not accepted**: walk pilot w01 and locomotion v2 (w02) are unapproved prototypes. Two items have only their direction accepted:
+  - the sentry automaton: animation v2 awaits review and art acceptance is 0;
+  - Liangzhu's earthen-terrace, waterway and wetland terrain: no high-precision pixel scene exists, and v03/v04 are unapproved concepts, not editable layers or Godot backgrounds.
+- **Decisions list.** Seven entries, labelled blocked or candidate:
+  - first city;
+  - community anchor;
+  - Songjiang label;
+  - air-route pair;
+  - Liangzhu pixel workflow (the Pixelorama environment workflow awaits the creator);
+  - sentry v2;
+  - female south locomotion (run at 140 px/s vs planted walk at about 16 px/s).
+- **Game bible.** The production view has three new cards under the global-travel rule card: M2 gates, the approval ledger with exact counters, and the candidate/blocked decisions. Labels are bilingual. The rule card and gates card link the two design documents, which the v05 server now serves read-only at `/source/earth-rules` and `/source/shanghai-liangzhu`. Gate status comes from the progress state. A gate can only show "done" once evidence exists.
+- **Test.** [M2 global-travel gates check](../tests/game-bible-m2-global-travel/rpg-2-star-ocean-the-second_game-bible_m2-global-travel-gates_check_m2-v01_20261015-064400-06efaa9b.js) runs against the real server. It checks the counters against the inventory and checklist and the approval scopes. It confirms no gate is marked done without evidence and that all 12 evidence paths exist. It checks card order and labels, byte-identical doc routes, traversal probes, hostile-input escaping and that the view renders without the new fields.
+- **Browser check.** A [headless Chrome capture](../outputs/rpg-2-star-ocean-the-second_game-bible_m2-global-travel-gates-production-view_m2-v01_20261015-064630-1ecaa3e3.png) of the live panel on a spare port shows the rule card, the gates table, the ledger and the decisions in order, with readable bilingual badges.
+- **Counters unchanged.** Exploration/runtime sprites **0/52**, science scene visuals **0/11**, human timed playtests **0/2**; 51 identities, 52 variants; source portraits 9/52.
+
+## 2026-10-15 - M2 status reconciled with the map and travel evidence (implemented and tested; M2 not complete; no counter changed)
+
+This entry supersedes the "no implementation or test evidence" statement in the previous entry.
+
+- **Sources read.** [Global map runtime QA note](qa/rpg-2-star-ocean-the-second_global-earth-map_runtime-implementation_qa-note_m2-v01_20261015-024300-15ce9195.md), [map ↔ travel integration QA note](qa/rpg-2-star-ocean-the-second_global-map-travel_integration-fixes_qa-note_m2-v02_20261015-031824-35247192.md), the [integration regression test](../game/tests/rpg-2-star-ocean-the-second_global-map-travel_integration-regression_m2-v02_20261015-031232-786a054d.gd), the [calendar/route core smoke](../game/tests/rpg-2-star-ocean-the-second_global-earth-travel_calendar-route-core-smoke_m2-v01_20261015-024215-a19d5ae7.gd), the [travel data](../game/data/world-travel/rpg-2-star-ocean-the-second_global-earth-travel_locations-routes_m2-provisional-v01_20261015-024215-b876e53d.json) and the [air-route research packet](design/rpg-2-star-ocean-the-second_shanghai-cross-city-air-route_research-packet_unapproved-v01_20261015-031235-9d63971b.md). I viewed all 12 latest runtime captures (`outputs/rpg-2-star-ocean-the-second_global-earth-map_*-runtime-capture_m2-v02_20261015-031426-9a107595.png`, 6 zh + 6 en). They match the QA note: real place names, road km, duration, arrival time, the "estimated" label, a greyed "Cannot depart" without the route API, and no production-status text. Known minor issue: grid labels show faintly behind the route card.
+- **Implemented, with automated tests passing (6 of 12 gates).** These are the Godot results recorded in the QA notes on 2026-10-15; this pass did not rerun Godot.
+  - global Earth map plus the Yangtze Delta regional layer;
+  - the provisional place registry;
+  - route preview, single-settlement departure and no-cost cancel;
+  - the integer-minute calendar (day, year and leap-year carry; a week-transition signal);
+  - save/load and legacy migration;
+  - tests: `GLOBAL_TRAVEL_CORE_OK`, `GLOBAL_EARTH_MAP_SMOKE_OK checks=201`, `GLOBAL_MAP_TRAVEL_INTEGRATION_OK checks=103`, revised `M2_SMOKE_OK`, bilingual on-screen text checks, and `CANVAS_POINTER_REGRESSION_OK` ([receipt](../outputs/rpg-2-star-ocean-the-second_scifi-canvas_pointer-regression-receipt_m8-v01_20261015-071805-548c0f0f.json)).
+- **Still open (6 of 12 gates). M2 stays in progress.**
+  - **Awaiting user decision (not defects):** the first city and underground-community anchor (Shanghai is provisional), and the world start year (2026-04-01 08:00 is an engineering placeholder).
+  - **Preliminary estimate:** the routes are Rome2Rio point-to-point figures, not door-to-door: Shanghai→Songjiang 34.8 km / 26 min, Shanghai→Liangzhu 187.9 km / 2 h, Songjiang→Liangzhu via Shanghai 146 min. The door-to-door allowance is 0, reverse trips assume symmetry, and the direct Songjiang→Liangzhu route is unverified and not selectable.
+  - **Research only:** there is no air route in game data. The packet lists SHA→PEK, SHA→CAN and SHA→HND as candidates. None is selected and no new playable city was chosen.
+  - **Not started:** all map art. Colours, label boxes, roads and markers are functional placeholders.
+  - **Awaiting a human:** map review, and timed playtests 0/2.
+  - The weekly business settlement is not yet connected to the week signal.
+- **Progress state.** In [mvp-progress](../outputs/rpg-2-star-ocean-the-second_mvp-progress_state_v01_20261013-183804-28a1c7e4.json), M2 is `in_progress` and `m2Expansion` now has 12 gates: 6 `implemented` (each cites a QA note) and 6 open (`awaiting_decision` ×2, `estimate_only`, `research_only`, `not_started`, `human_pending`). No gate is `done`. Decisions: added "world start year". "Air-route pair" is now a candidate with the three research options, all unselected. "Female south locomotion" and the ledger's four-direction animation item now cite the [run v3 pre-run audit](qa/rpg-2-star-ocean-the-second_protagonist-female_south-run-v3-build_pre-run-technical-audit_qa-note_m8-w03_20261015-071053-86f9c79f.md): NOT READY, never run, no animation accepted.
+- **Bible state.** In [bible state](../outputs/rpg-2-star-ocean-the-second_game-bible_state_v01_20261013-195422-b8c16d42.json), the anchor open question now names the three air candidates as unselected, and there is a new "world start year" question. `environmentVisualReview` records the runtime geography map as implemented and tested, with art not accepted and no human review. `mapCandidatesIntegrated` is now 0 because the old map background is no longer used. `currentMapSatisfiesGeographyRule` stays false, with a note saying why.
+- **Game Bible UI.** The Production view gates card now shows "6 / 12 已实现 · M2 未完成 / Not complete" and splits rows into "已实现 / Implemented" and "仍未完成 / Still open". User decisions use a neutral badge. The rule card and the M2 step summary no longer describe the old three-node map. Sources stay collapsed per row. Headless Chrome renders at 1280 px and 400 px showed no horizontal overflow.
+- **Tests (Node).** The [M2 gates check](../tests/game-bible-m2-global-travel/rpg-2-star-ocean-the-second_game-bible_m2-global-travel-gates_check_m2-v01_20261015-064400-06efaa9b.js) now also cross-checks the route figures read-only against the travel data: car only, door-to-door 0, air pending, exactly 3 places, placeholder start date. It also checks the gate grouping, the neutral decision badges and that nothing claims completion. Result: 5/5 PASS, 23 evidence files served byte-identical. Two mutations, a wrong km figure and the human-review gate set to `done`, each made it fail; the file was restored byte-identical. The other Game Bible checks (character readiness, enemy pilots, two environment-card checks, selout card) pass. Battle hash locks pass. Content-hash portability passes with `PYTHON` set to the real interpreter; without it, the Python parity step cannot find Python.
+- **Counters unchanged.** 51 identities / 52 variants; runtime sprites **0/52**; science scene visuals **0/11**; human playtests **0/2**. The female selout v8 south idle remains the only approved static frame. No human review was recorded or implied.
