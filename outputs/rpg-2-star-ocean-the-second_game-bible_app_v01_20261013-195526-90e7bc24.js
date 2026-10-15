@@ -276,7 +276,7 @@
       <p class="muted small">此前 Box 与 Lanczos 两张量化候选已被用户否定。以下两张为新的静态候选，各自独立审阅；不代表批准。</p>
       ${idleRefineCandidates.map(idleRefineCard).join('')}
       <div class="section-label">女主南向静态待机 · selout v2 精修待审阅</div>
-      <p class="muted small">用户在上面两张中选了 selout v1，认为它更接近目标；v1 本身未获批准。下面是在 v1 基础上的 v2 静态精修，单独审阅。</p>
+      <p class="muted small">用户在上面两张中选了 selout v1，认为它更接近目标；v1 本身未获批准。下面是在 v1 基础上的 v2 静态精修，单独审阅。之后的 v3（只改 91 个像素）经内部复核：技术上无误，但与 v2 几乎看不出差别，外套躯干仍显杂乱；v3 未批准，不作为审阅选项，正在做结构性更大的静态 v4。</p>
       ${seloutV2Card}
       ${readinessSection()}
       <div class="section-label">分步实施</div>
