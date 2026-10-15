@@ -9,6 +9,7 @@ extends Node2D
 # uses the travel data's coordinates (see world_map_route_adapter.gd). Leaving for another
 # place always goes through confirm_travel(); without the route API nobody can depart.
 
+# Default walkable scene; AppState.area_scene_path() names the scene for each destination.
 const AREA_SCENE := "res://scenes/scifi_exploration_area.tscn"
 const GeoProjection := preload("res://scripts/world_geo_projection.gd")
 const MapData := preload("res://scripts/world_map_data.gd")
@@ -22,6 +23,8 @@ const REGION_FRAME := Rect2(150, 44, 230, 116)
 # Map-status line (open regions, or the region name) in the map's top-left corner.
 const STATUS_POS := Vector2(6, 4)
 const STATUS_MAX_TEXT_WIDTH := 264.0
+# Scale bar in the regional view, below the lowest framed marker and right of the view buttons.
+const SCALE_BAR_ORIGIN := Vector2(200, 258)
 const GLOBAL_ZOOM_RANGE := 7.0
 const REGION_ZOOM_RANGE := 6.0
 const WHEEL_STEP := 1.25
@@ -73,9 +76,12 @@ var place_buttons: Dictionary = {}
 var region_buttons: Dictionary = {}
 
 var mode := "global"
-var active_region_id := "yangtze_delta"
+# Set in _ready from the party's current place (else the first display region).
+var active_region_id := ""
 var global_view: GeoProjection
+# The active region's projection and land layer; one of each per region in region_views/region_layers.
 var region_view: GeoProjection
+var region_views: Dictionary = {}
 var view: GeoProjection
 var route_adapter: RouteAdapter
 var route_state: Dictionary = {}
@@ -88,6 +94,7 @@ var map_frame: Control
 var underlay: Node2D
 var global_layer: Node2D
 var region_layer: Node2D
+var region_layers: Dictionary = {}
 var overlay: Node2D
 var zoom_in_button: Button
 var zoom_out_button: Button
@@ -109,8 +116,9 @@ var cancel_button: Button
 var dragging := false
 
 var _global_coast: Array = []
-var _region_coast: Array = []
-var _region_roads: Array = []
+# Region ID -> projected coast rings / road lines in that region's own projection.
+var _region_coasts: Dictionary = {}
+var _region_roads: Dictionary = {}
 
 
 func _ready() -> void:
@@ -121,6 +129,7 @@ func _ready() -> void:
 		# Developer diagnostic only; players see a disabled Depart button with a short reason.
 		push_warning("World map: route API unavailable, departures disabled: " + "; ".join(problems))
 	places = route_adapter.places()
+	active_region_id = _initial_region_id()
 	_build_views()
 	_build_ui()
 	AppState.language_changed.connect(_refresh_text)
@@ -134,13 +143,25 @@ func _ready() -> void:
 		call_deferred("_open_field_log")
 
 
+func _initial_region_id() -> String:
+	var here := find_place(route_adapter.current_place_id())
+	if not here.is_empty() and not MapData.geo_region(String(here["geo_region_id"])).is_empty():
+		return String(here["geo_region_id"])
+	if not MapData.geo_region(active_region_id).is_empty():
+		return active_region_id
+	var regions := MapData.geo_regions()
+	return String(regions[0]["id"]) if not regions.is_empty() else ""
+
+
 func _build_views() -> void:
 	var local_rect := Rect2(Vector2.ZERO, MAP_RECT.size)
 	global_view = GeoProjection.new(0.0, 0.0)
 	global_view.configure(local_rect, Rect2(-180, -90, 360, 180), false, GLOBAL_ZOOM_RANGE)
-	var region := MapData.geo_region(active_region_id)
-	region_view = GeoProjection.new(region["central_meridian"], region["standard_parallel"])
-	region_view.configure(local_rect, region_view.project_bbox(region["pan_bbox_wsen"]), true, REGION_ZOOM_RANGE)
+	for region in MapData.geo_regions():
+		var projection := GeoProjection.new(region["central_meridian"], region["standard_parallel"])
+		projection.configure(local_rect, projection.project_bbox(region["pan_bbox_wsen"]), true, REGION_ZOOM_RANGE)
+		region_views[region["id"]] = projection
+	region_view = region_views.get(active_region_id)
 	view = global_view
 
 
@@ -191,14 +212,21 @@ func _build_map_frame(canvas: CanvasLayer) -> void:
 	underlay.draw.connect(_draw_underlay)
 	map_frame.add_child(underlay)
 	global_layer = _land_layer(MapData.global_land_rings(), global_view)
-	region_layer = _land_layer(MapData.region_land_rings(active_region_id), region_view)
 	_global_coast = _unit_rings(MapData.global_land_rings(), global_view)
-	_region_coast = _unit_rings(MapData.region_land_rings(active_region_id), region_view)
-	for road in MapData.region_roads(active_region_id):
-		var points := PackedVector2Array()
-		for p in road["points"]:
-			points.append(region_view.project(p.x, p.y))
-		_region_roads.append({"major": road["major"], "points": points})
+	for region_id in region_views:
+		var projection: GeoProjection = region_views[region_id]
+		var key := MapData.geodata_key(region_id)
+		region_layers[region_id] = _land_layer(MapData.region_land_rings(key), projection)
+		region_layers[region_id].visible = false
+		_region_coasts[region_id] = _unit_rings(MapData.region_land_rings(key), projection)
+		var roads := []
+		for road in MapData.region_roads(key):
+			var points := PackedVector2Array()
+			for p in road["points"]:
+				points.append(projection.project(p.x, p.y))
+			roads.append({"major": road["major"], "points": points})
+		_region_roads[region_id] = roads
+	region_layer = region_layers.get(active_region_id)
 	overlay = Node2D.new()
 	overlay.draw.connect(_draw_overlay)
 	map_frame.add_child(overlay)
@@ -210,7 +238,7 @@ func _build_map_frame(canvas: CanvasLayer) -> void:
 		region_buttons[region["id"]] = button
 	for place in places:
 		var button := _marker_button(map_frame)
-		button.name = String(place["scene_destination_id"]).replace(".", "_") + "_button"
+		button.name = String(place["scene_destination_id"]).replace(".", "_").replace("-", "_") + "_button"
 		button.pressed.connect(select_place.bind(place["id"]))
 		place_buttons[place["id"]] = button
 		destination_buttons[place["scene_destination_id"]] = button
@@ -224,7 +252,7 @@ func _build_map_frame(canvas: CanvasLayer) -> void:
 	zoom_in_button.text = "+"
 	zoom_out_button.text = "−"
 	globe_button = _button(map_frame, Rect2(38, 222, 54, 24), 10, enter_global)
-	region_button = _button(map_frame, Rect2(96, 222, 96, 24), 10, enter_region.bind(active_region_id))
+	region_button = _button(map_frame, Rect2(96, 222, 96, 24), 10, _open_active_region)
 
 
 # The status line sits on its own dark panel so coastlines and grid lines never run
@@ -425,15 +453,31 @@ func enter_global() -> void:
 
 
 func enter_region(region_id: String) -> void:
-	if _commerce_modal() or MapData.geo_region(region_id).is_empty():
+	if _commerce_modal() or not region_views.has(region_id):
 		return
+	if region_id != active_region_id and route_card != null and route_card.visible:
+		close_route_card()
 	active_region_id = region_id
 	mode = "region"
 	last_mode = mode
+	region_view = region_views[region_id]
+	region_layer = region_layers[region_id]
 	view = region_view
-	var box := MapData.region_places_bbox(region_id, places)
-	view.frame_geo_box(box, REGION_FRAME)
+	var box := MapData.region_frame_bbox(region_id, places)
+	view.frame_geo_box(box, region_frame_rect(region_id))
 	_view_changed()
+
+
+# Map-local pixels a region's places are fitted into: the registry's frame_px, else REGION_FRAME.
+static func region_frame_rect(region_id: String) -> Rect2:
+	var px: Variant = MapData.geo_region(region_id).get("frame_px")
+	if typeof(px) == TYPE_ARRAY and px.size() == 4:
+		return Rect2(float(px[0]), float(px[1]), float(px[2]), float(px[3]))
+	return REGION_FRAME
+
+
+func _open_active_region() -> void:
+	enter_region(active_region_id)
 
 
 func _zoom_button(factor: float) -> void:
@@ -446,12 +490,19 @@ func zoom_view(local_point: Vector2, factor: float) -> void:
 		return
 	if mode == "global" and factor > 1.0 and view.scale * factor > view.max_scale + 0.001:
 		var geo := view.screen_to_geo(local_point)
+		# Neighbouring regions can share the margin; the one whose box centre is closest wins.
+		var best_id := ""
+		var best_distance := INF
 		for region in MapData.geo_regions():
 			var bbox: Array = region["global_zoom_bbox_wsen"]
 			var near := Rect2(bbox[0] - 6.0, bbox[1] - 5.0, bbox[2] - bbox[0] + 12.0, bbox[3] - bbox[1] + 10.0)
-			if near.has_point(geo):
-				enter_region(region["id"])
-				return
+			var distance := geo.distance_to(near.get_center())
+			if near.has_point(geo) and distance < best_distance:
+				best_id = String(region["id"])
+				best_distance = distance
+		if best_id != "":
+			enter_region(best_id)
+			return
 	if mode == "region" and factor < 1.0 and view.scale * factor < view.min_scale - 0.001:
 		var region := MapData.geo_region(active_region_id)
 		enter_global()
@@ -491,7 +542,8 @@ func _on_map_input(event: InputEvent) -> void:
 func _view_changed() -> void:
 	var regional := mode == "region"
 	global_layer.visible = not regional
-	region_layer.visible = regional
+	for region_id in region_layers:
+		region_layers[region_id].visible = regional and region_id == active_region_id
 	var layer := region_layer if regional else global_layer
 	layer.transform = view.unit_transform()
 	_layout_markers()
@@ -560,7 +612,7 @@ func _layout_markers() -> void:
 		var anchor := _region_anchor(region["id"])
 		var count := MapData.places_in_region(region["id"], places).size()
 		_set_marker_text(button, MapData.text(region, "name", language), MapText.t("region_sub") % count)
-		_place_marker_button(button, view.geo_to_screen(anchor.x, anchor.y), "right", bounds)
+		_place_marker_button(button, view.geo_to_screen(anchor.x, anchor.y), String(region.get("global_label_side", "right")), bounds)
 	for place in places:
 		var button: Button = place_buttons[place["id"]]
 		button.visible = mode == "region" and place["geo_region_id"] == active_region_id
@@ -635,17 +687,18 @@ func _draw_overlay() -> void:
 			var box := view.project_bbox(region["global_zoom_bbox_wsen"])
 			overlay.draw_rect(box, COLOR_HERE, false, px * 1.5)
 	else:
-		var clip: Array = MapData.region_clip_bbox(active_region_id)
-		for lon in range(int(clip[0]), int(clip[2]) + 1):
+		var clip: Array = MapData.region_clip_bbox(MapData.geodata_key(active_region_id))
+		for lon in range(ceili(clip[0]), floori(clip[2]) + 1):
 			overlay.draw_line(view.project(lon, clip[1]), view.project(lon, clip[3]), COLOR_GRID, px)
-		for lat in range(int(clip[1]), int(clip[3]) + 1):
+		for lat in range(ceili(clip[1]), floori(clip[3]) + 1):
 			overlay.draw_line(view.project(clip[0], lat), view.project(clip[2], lat), COLOR_GRID, px)
-		for ring in _region_coast:
+		for ring in _region_coasts.get(active_region_id, []):
 			overlay.draw_polyline(ring, COLOR_COAST, px)
-		for road in _region_roads:
+		var roads: Array = _region_roads.get(active_region_id, [])
+		for road in roads:
 			if not road["major"]:
 				overlay.draw_polyline(road["points"], COLOR_ROAD_MINOR, px)
-		for road in _region_roads:
+		for road in roads:
 			if road["major"]:
 				overlay.draw_polyline(road["points"], COLOR_ROAD, px)
 	overlay.draw_set_transform_matrix(Transform2D.IDENTITY)
@@ -685,7 +738,7 @@ func _draw_region_annotations() -> void:
 		if candidate / km_per_px <= 90.0:
 			length_km = candidate
 	var length_px := length_km / km_per_px
-	var origin := Vector2(200, 240)
+	var origin := SCALE_BAR_ORIGIN
 	overlay.draw_line(origin, origin + Vector2(length_px, 0), COLOR_TEXT, 2.0)
 	overlay.draw_line(origin + Vector2(0, -4), origin + Vector2(0, 2), COLOR_TEXT, 1.0)
 	overlay.draw_line(origin + Vector2(length_px, -4), origin + Vector2(length_px, 2), COLOR_TEXT, 1.0)
@@ -697,7 +750,7 @@ func _draw_region_annotations() -> void:
 # would touch the card is left out, so no text sits half under the card.
 func annotation_label_rects() -> Array:
 	var font := ThemeDB.fallback_font
-	var clip: Array = MapData.region_clip_bbox(active_region_id)
+	var clip: Array = MapData.region_clip_bbox(MapData.geodata_key(active_region_id))
 	var visible := view.visible_geo_rect()
 	var card := Rect2()
 	if route_card != null and route_card.visible:
@@ -706,14 +759,14 @@ func annotation_label_rects() -> Array:
 	# Longitude labels run in one row just below the status panel; other labels under it are left out.
 	var status := status_rect().grow(1)
 	var lon_baseline := maxf(26.0, status.end.y + font.get_ascent(9))
-	for lon in range(int(clip[0]), int(clip[2]) + 1):
+	for lon in range(ceili(clip[0]), floori(clip[2]) + 1):
 		var x := view.geo_to_screen(lon, 0).x
 		if x > 24 and x < view.viewport.size.x - 24:
-			candidates.append(["%d°E" % lon, Vector2(x + 2, lon_baseline)])
-	for lat in range(int(clip[1]), int(clip[3]) + 1):
+			candidates.append([degree_text(lon, "E", "W"), Vector2(x + 2, lon_baseline)])
+	for lat in range(ceili(clip[1]), floori(clip[3]) + 1):
 		var y := view.geo_to_screen(visible.position.x, lat).y
 		if y > 30 and y < view.viewport.size.y - 50:
-			var text := "%d°N" % lat
+			var text := degree_text(lat, "N", "S")
 			var x := view.viewport.size.x - 34
 			if card.has_area():
 				x = card.position.x - font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, 9).x - 2
@@ -732,6 +785,11 @@ func annotation_label_rects() -> Array:
 			continue
 		out.append({"text": candidate[0], "baseline": candidate[1], "rect": rect})
 	return out
+
+
+# Whole-degree grid label: 74°W, 41°N, 0°E.
+static func degree_text(value: int, positive: String, negative: String) -> String:
+	return "%d°%s" % [absi(value), negative if value < 0 else positive]
 
 
 # --- Route card -------------------------------------------------------------
@@ -814,8 +872,7 @@ func _refresh_route_card() -> void:
 	var language: String = AppState.language
 	card_title.text = MapData.text(place, "map_label", language)
 	var official := MapData.text(place, "name", language)
-	card_subtitle.text = MapData.text(place, "map_label", MapText.other_language()) + ("" if official == card_title.text else "
-" + official)
+	card_subtitle.text = MapData.text(place, "map_label", MapText.other_language()) + ("" if official == card_title.text else "\n" + official)
 	card_kind.text = MapText.t("kind_" + String(place.get("kind", "")))
 	card_coords.text = GeoProjection.format_lat_lon(place["lon"], place["lat"])
 	var origin := find_place(route_adapter.current_place_id())
@@ -875,16 +932,14 @@ static func route_option_text(option: Dictionary) -> String:
 	parts.append(String(option["duration_text"]))
 	var line := " · ".join(parts)
 	if not String(option["arrival_text"]).is_empty():
-		line += "
-" + MapText.t("arrival_text") % option["arrival_text"]
+		line += "\n" + MapText.t("arrival_text") % option["arrival_text"]
 	var notes := []
 	if not option["via"].is_empty():
 		notes.append(MapText.t("via") % ", ".join(option["via"]))
 	if option["estimate"]:
 		notes.append(MapText.t("estimate"))
 	if not notes.is_empty():
-		line += "
-" + " · ".join(notes)
+		line += "\n" + " · ".join(notes)
 	return line
 
 
@@ -900,7 +955,9 @@ func _refresh_map_text() -> void:
 	_fit_status_backing()
 	calendar_label.text = route_adapter.calendar_text()
 	globe_button.text = MapText.t("view_globe")
-	region_button.text = MapText.t("view_region")
+	# Names the region the button opens (the last one viewed, or where the party is).
+	var region_name := MapData.text(MapData.geo_region(active_region_id), "short_name", AppState.language)
+	region_button.text = region_name if region_name != "" else MapText.t("view_region")
 	globe_button.disabled = mode == "global" and is_equal_approx(view.scale, view.min_scale)
 	region_button.disabled = mode == "region"
 
@@ -1104,7 +1161,7 @@ func _enter_scene(destination_id: String) -> void:
 		push_error("World map: scene %s is not the party's current scene %s" % [destination_id, AppState.current_destination_id])
 		_show_departure_failed()
 		return
-	get_tree().change_scene_to_file(AREA_SCENE)
+	get_tree().change_scene_to_file(AppState.area_scene_path(destination_id))
 
 
 func _return_to_menu() -> void:

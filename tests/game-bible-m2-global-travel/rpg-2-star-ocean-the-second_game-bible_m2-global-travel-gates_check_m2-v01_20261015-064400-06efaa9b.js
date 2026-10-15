@@ -1,6 +1,10 @@
 // Focused check for the Game Bible M2 global-travel gates, the scoped approval ledger and the candidate/blocked decision list.
+// Reflects the creator decisions of 2026-10-15 (NYC science hub, Catskills community, start 2537-05-25, NYC-Chicago first air route,
+// five Earth spheres plus a portal final planet, Washington, D.C. Capitol Pixelorama pilot) and the US runtime migration that followed:
+// the anchor, start-year and air-route gates are implemented technical candidates, M2 stays in progress, and no art, route-figure or
+// human acceptance is claimed. The provisional v01 (Shanghai) travel file is checked as an unchanged record only.
 // Data audit first (counters, scopes, evidence paths, implemented vs open M2 gates, route figures cross-checked read-only against the
-// game travel data), then the real v05 panel server on a
+// active v02 game travel data), then the real v05 panel server on a
 // spare local port renders the Production view in a VM with a minimal DOM stub. A second render feeds hostile/missing progress
 // fields through an intercepted /state to check escaping and graceful omission. Read-only: no project file is written.
 // Run from the repository root: node tests/game-bible-m2-global-travel/<this file>
@@ -23,9 +27,16 @@ const rulesDoc = 'docs/design/rpg-2-star-ocean-the-second_global-earth-map-real-
 const packetDoc = 'docs/design/rpg-2-star-ocean-the-second_shanghai-liangzhu_geography-route-art-packet_provisional-v01_20261015-000319-a3e65b7c.md';
 const airPacketDoc = 'docs/design/rpg-2-star-ocean-the-second_shanghai-cross-city-air-route_research-packet_unapproved-v01_20261015-031235-9d63971b.md';
 const runV3Audit = 'docs/qa/rpg-2-star-ocean-the-second_protagonist-female_south-run-v3-build_pre-run-technical-audit_qa-note_m8-w03_20261015-071053-86f9c79f.md';
-const travelDataPath = path.join(root, 'game', 'data', 'world-travel', 'rpg-2-star-ocean-the-second_global-earth-travel_locations-routes_m2-provisional-v01_20261015-024215-b876e53d.json');
-const implementedGates = ['map-ui', 'place-registry', 'route-preview', 'calendar', 'save-migration', 'acceptance-test'];
-const openGates = {anchor: 'awaiting_decision', 'start-year': 'awaiting_decision', 'route-data': 'estimate_only', 'air-route': 'research_only', 'map-art': 'not_started', 'visual-review': 'human_pending'};
+const creatorNote = 'docs/design/rpg-2-star-ocean-the-second_creator-decisions-2026-10-15_world-skills-ai-endgame_reconciliation-note_v01_20261015-174559-39efc292.md';
+const usQaNote = 'docs/qa/rpg-2-star-ocean-the-second_us-science-sphere_runtime-migration_qa-note_m2-v02_20261015-175011-364131c8.md';
+const travelDataPath = path.join(root, 'game', 'data', 'world-travel', 'rpg-2-star-ocean-the-second_global-earth-travel_locations-routes_m2-us-science-v02_20261015-175011-c454007b.json');
+const provisionalTravelPath = path.join(root, 'game', 'data', 'world-travel', 'rpg-2-star-ocean-the-second_global-earth-travel_locations-routes_m2-provisional-v01_20261015-024215-b876e53d.json');
+const gateOrder = ['map-ui', 'place-registry', 'route-preview', 'calendar', 'save-migration', 'acceptance-test', 'anchor', 'start-year', 'route-data', 'air-route', 'map-art', 'visual-review'];
+const migratedGates = ['anchor', 'start-year', 'air-route'];
+const implementedGates = ['map-ui', 'place-registry', 'route-preview', 'calendar', 'save-migration', 'acceptance-test', ...migratedGates];
+const openGates = {'route-data': 'estimate_only', 'map-art': 'not_started', 'visual-review': 'human_pending'};
+const usPlaces = ['earth.us.ny.new-york-city', 'earth.us.ny.yonkers-outskirts', 'earth.us.dc.washington-ruins', 'earth.us.il.chicago'];
+const resolvedDecisionIds = ['first-city', 'world-start-year', 'air-route-pair', 'songjiang-label'];
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 const pass = label => console.log('PASS ' + label);
 
@@ -106,16 +117,26 @@ const cardById = (html, id) => {
   assert.equal(bible.environmentVisualReview.currentMapSatisfiesGeographyRule, false);
   pass('approval ledger: only the 48 px scale and v8 static frame approved; sentry and Liangzhu are direction-only; four-direction animation not accepted');
 
-  // 3. M2 stays in progress: six gates implemented with evidence, six still open; none is "done"; every referenced file exists.
+  // 3. M2 stays in progress: nine gates implemented with QA evidence (the anchor, start-year and air-route gates moved from
+  // decided_runtime_pending after the US runtime migration), three still open; none is "done"; every referenced file exists.
   const m2 = progress.steps.find(s => s.id === 'M2');
   assert.equal(m2.status, 'in_progress');
-  assert.ok(m2.blocker && m2.blocker.includes('Shanghai is provisional') && m2.blocker.includes('start year'));
+  for (const phrase of ['NYC', 'Yonkers', 'Washington, D.C.', 'NYC-Chicago', 'Chicago Loop', '2537-05-25', 'technical candidates', 'hidden save aliases', 'M2 stays in progress', '0/2']) {
+    assert.ok(m2.blocker && m2.blocker.includes(phrase), 'M2 blocker: ' + phrase);
+  }
+  assert.ok(!/runtime still|not migrated|尚未迁移/.test(m2.blocker + m2.summary), 'M2 no longer says the runtime is unmigrated');
   const x = progress.m2Expansion;
-  assert.equal(x.anchor.status, 'provisional');
-  assert.ok(x.anchor.zh.includes('上海') && x.anchor.note.includes('松江是上海市的一个区，不是独立城市'));
-  assert.deepEqual(x.gates.map(g => g.id), [...implementedGates, ...Object.keys(openGates)]);
+  // The anchor record now describes the migrated runtime: NYC, as a technical candidate with unaccepted art.
+  assert.equal(x.anchor.status, 'implemented_technical_candidate');
+  assert.ok(x.anchor.zh.includes('纽约') && x.anchor.zh.includes('市政厅公园') && x.anchor.zh.includes('技术候选') && x.anchor.zh.includes('美术未验收') && x.anchor.en.includes('New York City') && x.anchor.en.includes('art not accepted'));
+  assert.ok(x.anchor.note.includes('卡茨基尔山') && x.anchor.note.includes('尚无运行时地点') && x.anchor.note.includes('隐藏的旧档别名') && x.anchor.note.includes('不属于 MVP'));
+  const cd = x.creatorDecision;
+  assert.deepEqual([cd.scienceHub, cd.undergroundCommunity, cd.firstAirRoute, cd.adventureStart, cd.runtimeImplemented], ['纽约 / New York City', '卡茨基尔山附近 / near the Catskills', '纽约—芝加哥 / NYC-Chicago', '2537-05-25', true], 'progress creator decision recorded and implemented in the runtime');
+  assert.ok(cd.runtimeStatus.includes('technical candidate') && cd.runtimeEvidence === usQaNote);
+  assert.ok(cd.washingtonDC.includes('Pixelorama') && cd.note === creatorNote);
+  assert.deepEqual(x.gates.map(g => g.id), gateOrder);
   const allEvidence = [...x.gates, ...progress.approvalLedger.items].flatMap(g => g.evidence);
-  for (const file of [...allEvidence, x.rule, x.researchPacket, x.airRoutePacket]) assert.ok(fs.existsSync(path.join(root, file)), 'exists: ' + file);
+  for (const file of [...allEvidence, x.rule, x.researchPacket, x.airRoutePacket, cd.note, cd.runtimeEvidence]) assert.ok(fs.existsSync(path.join(root, file)), 'exists: ' + file);
   const gate = Object.fromEntries(x.gates.map(g => [g.id, g]));
   for (const g of x.gates) assert.ok(g.zh && g.en && g.owner && g.detail, g.id + ' bilingual label, owner and detail');
   for (const id of implementedGates) {
@@ -123,38 +144,77 @@ const cardById = (html, id) => {
     assert.ok(gate[id].evidence.some(file => file.startsWith('docs/qa/')), id + ' cites a QA note');
   }
   for (const [id, status] of Object.entries(openGates)) assert.equal(gate[id].status, status, id + ' stays open as ' + status);
-  assert.ok(!x.gates.some(g => g.status === 'done'), 'no M2 gate claims final acceptance');
-  assert.ok(gate['acceptance-test'].detail.includes('201') && gate['acceptance-test'].detail.includes('103') && gate['acceptance-test'].detail.includes('不代表'), 'test gate states counts and its limit');
-  for (const id of ['anchor', 'start-year']) assert.ok(gate[id].owner === '用户决定', id + ' owned by the user');
-  assert.ok(gate.anchor.detail.includes('不是程序缺陷'), 'user decision is not framed as a defect');
-  assert.ok(gate['air-route'].evidence.includes(airPacketDoc) && gate['air-route'].detail.includes('都未选定') && gate['air-route'].detail.includes('没有新增可玩城市'));
+  assert.ok(!x.gates.some(g => g.status === 'done' || g.status === 'decided_runtime_pending'), 'no M2 gate claims final acceptance or still waits for the migration');
+  assert.ok(['212', '105', '149', '32', '不代表'].every(t => gate['acceptance-test'].detail.includes(t)), 'test gate states the re-run counts and its limit');
+  for (const id of ['anchor', 'start-year']) assert.equal(gate[id].owner, '创作者决定 · 旅行核心实现', id + ' decided by the creator, implemented by the travel core');
+  for (const id of migratedGates) assert.ok(gate[id].detail.includes('已决定并已') && gate[id].evidence.includes(usQaNote) && !gate[id].detail.includes('尚未迁移'), id + ' decided and implemented, citing the migration QA note');
+  assert.ok(['纽约', '曼哈顿下城市政厅公园', '扬克斯', '华盛顿特区国会大厦废墟', '卡茨基尔山', '尚无运行时地点', '美术未制作'].every(t => gate.anchor.detail.includes(t)), 'anchor gate: NYC set implemented, Catskills place and art still open');
+  assert.ok(gate['air-route'].detail.includes('纽约—芝加哥') && gate['air-route'].detail.includes('初步估算') && gate['air-route'].detail.includes('卢普区'));
+  assert.ok(gate['route-data'].detail.includes('初步估算') && gate['route-data'].detail.includes('OSRM') && gate['route-data'].detail.includes('无路线'), 'route figures stay preliminary');
   assert.ok(gate['map-art'].detail.includes('功能占位') && gate['visual-review'].detail.includes('0/2') && gate['visual-review'].detail.includes('0/11'));
-  // Route figures shown in the Bible must equal the game travel data, which still has no air segment and no door-to-door allowance.
+  // Route figures shown in the Bible must equal the active v02 game travel data.
   const travel = readJson(travelDataPath);
   const seg = id => travel.segments.find(s => s.id === id);
-  const sj = seg('seg.car.shanghai__songjiang-outskirts'), lzSeg = seg('seg.car.shanghai__liangzhu-ruins');
   const route = gate['route-data'].detail;
-  assert.ok(route.includes(sj.roadDistanceKm + ' km／' + sj.referenceDurationMinutes + ' 分') && route.includes(lzSeg.roadDistanceKm + ' km／' + lzSeg.referenceDurationMinutes / 60 + ' 小时'), 'figures match game data');
-  assert.ok(route.includes('经上海 ' + (sj.referenceDurationMinutes + lzSeg.referenceDurationMinutes) + ' 分') && route.includes('非门到门') && route.includes('松江→良渚未核验'));
-  assert.ok(travel.segments.every(s => s.doorToDoorAllowanceMinutes === 0 && s.verification.status === 'preliminary-estimate' && s.mode === 'car'), 'data: car-only preliminary estimates, door-to-door 0');
-  assert.ok(travel.pendingRouteRequests.some(r => r.mode === 'air' && r.status === 'pending-place-pair'), 'data: air route still pending');
-  assert.deepEqual(travel.locations.map(l => l.id), ['earth.cn.shanghai', 'earth.cn.shanghai.songjiang-outskirts', 'earth.cn.liangzhu-ruins'], 'no new playable place');
-  assert.equal(travel.calendar.status, 'engineering-placeholder');
-  assert.ok(gate['start-year'].detail.includes(travel.calendar.startDate + ' ' + travel.calendar.startTime), 'start-year gate names the placeholder');
+  for (const id of ['seg.car.nyc__yonkers', 'seg.car.nyc__washington-ruins', 'seg.car.yonkers__washington-ruins']) {
+    const car = seg(id);
+    assert.ok(route.includes(car.roadDistanceKm.toFixed(1) + ' km／' + car.referenceDurationMinutes + ' 分'), 'car figure matches game data: ' + id);
+  }
+  const airMinutes = s => s.airportAccessMinutes + s.checkInAndWaitMinutes + s.flightMinutes + s.airportEgressMinutes;
+  const outbound = seg('seg.air.nyc-lga__chicago-ord'), inbound = seg('seg.air.chicago-ord__nyc-lga');
+  assert.ok(route.includes(airMinutes(outbound) + '／' + airMinutes(inbound) + ' 分') && gate['air-route'].detail.includes('去程 ' + airMinutes(outbound) + ' 分、回程 ' + airMinutes(inbound) + ' 分') && gate['air-route'].detail.includes(outbound.flightDistanceKm + ' km'), 'air figures match game data');
+  assert.ok(travel.segments.every(s => s.doorToDoorAllowanceMinutes === 0 && s.verification.status === 'preliminary-estimate'), 'data: every leg is a preliminary estimate, door-to-door 0');
+  assert.ok(travel.routes.filter(r => r.status === 'pending').length === 2, 'data: Yonkers/Washington to Chicago stay pending');
+  // implemented must stay true of the game data: if the runtime changes, these gates and this check change together.
+  assert.deepEqual(travel.locations.map(l => l.id), usPlaces, 'runtime is the US science set');
+  assert.ok(travel.locations.every(l => l.regionId === 'science' && ['US', 'CA'].includes(l.countryCode)), 'every active place is a science place in the US or Canada');
+  assert.deepEqual(travel.retiredLocations.map(l => l.id), ['earth.cn.shanghai', 'earth.cn.shanghai.songjiang-outskirts', 'earth.cn.liangzhu-ruins'], 'Shanghai set kept only as hidden save aliases');
+  const regions = Object.fromEntries(travel.regions.map(r => [r.id, r]));
+  assert.deepEqual(travel.regions.filter(r => r.planet === 'earth').map(r => r.id), ['science', 'magic', 'wuxia', 'nature', 'culture'], 'five Earth spheres');
+  assert.ok(regions.offworld.planet !== 'earth' && regions.offworld.access === 'portal', 'separate portal-only final planet');
+  assert.ok(!regions.fantasy && regions.culture.legacyIds.includes('fantasy') && regions.science.countryCodes.join() === 'US,CA', 'fantasy is only an alias of culture; science is US + Canada');
+  assert.equal(travel.calendar.startDate, '2537-05-25');
+  assert.ok(gate['start-year'].detail.includes(travel.calendar.startDate + ' ' + travel.calendar.startTime) && gate['start-year'].detail.includes('序章'), 'start-year gate names the implemented start');
+  const provisional = readJson(provisionalTravelPath);
+  assert.deepEqual(provisional.locations.map(l => l.id), ['earth.cn.shanghai', 'earth.cn.shanghai.songjiang-outskirts', 'earth.cn.liangzhu-ruins'], 'provisional v01 record kept on disk');
   const decisions = Object.fromEntries(progress.decisions.map(d => [d.id, d]));
-  assert.equal(decisions['first-city'].kind, 'blocked');
-  assert.equal(decisions['world-start-year'].kind, 'blocked');
-  assert.equal(decisions['air-route-pair'].kind, 'candidate');
-  assert.ok(decisions['air-route-pair'].detail.includes('未选定') && decisions['air-route-pair'].detail.includes('没有新增可玩城市'));
+  for (const id of resolvedDecisionIds) assert.ok(!decisions[id], 'decided item no longer listed as pending: ' + id);
+  assert.equal(decisions['prologue-start-date'].kind, 'blocked');
+  assert.ok(decisions['prologue-start-date'].detail.includes('2537-05-25') && decisions['prologue-start-date'].detail.includes('未给出'), 'the prologue date stays open');
+  assert.ok(decisions['old-save-dates'].kind === 'blocked' && decisions['old-save-dates'].detail.includes('2026') && decisions['old-save-dates'].awaiting === '用户', 'old-save date shift is an open creator decision');
+  assert.ok(decisions['skill-tree-redesign'].detail.includes('200 + 510'), '710 skill nodes stay open');
+  assert.ok(decisions['companion-sphere-mapping'].detail.includes('奇幻即文化') && !decisions['companion-sphere-mapping'].detail.includes('复核'), 'Culture is the former Fantasy, no review question left');
   assert.ok(decisions['female-south-locomotion'].detail.includes('v3') && decisions['female-south-locomotion'].detail.includes('未通过运行前技术审计'));
-  assert.ok(decisions['songjiang-label'].detail.includes('松江是上海的区'));
   for (const d of progress.decisions) assert.ok(['blocked', 'candidate'].includes(d.kind) && d.zh && d.en && d.awaiting, d.id);
-  const anchorQ = bible.openQuestions.find(q => q.title.includes('地理锚点'));
-  assert.ok(anchorQ && anchorQ.detail.includes('暂定') && anchorQ.detail.includes('不是另一座城市') && anchorQ.detail.includes('均未选定'), 'bible open question records the provisional anchor');
-  assert.ok(bible.openQuestions.some(q => q.title.includes('开始年份')), 'bible open question for the start year');
+  // Bible: the geography decisions are implemented runtime candidates; skills, AI, reputation and endgame are not.
+  const bcd = bible.creatorDecisions;
+  assert.equal(bcd.runtimeImplemented, 'partial');
+  assert.ok(bcd.status.includes('技术候选') && bcd.status.includes('尚未实现') && bcd.note === creatorNote && bcd.runtimeEvidence === usQaNote);
+  assert.deepEqual([bcd.geography.scienceHub, bcd.geography.adventureStart, bcd.geography.undergroundCommunity, bcd.geography.firstAirRoute], ['纽约（New York City）', '2537-05-25', '卡茨基尔山（Catskills）附近', '纽约—芝加哥（NYC–Chicago）']);
+  const science = bcd.spheres.find(s => s.id === 'science');
+  assert.deepEqual([science.region, science.hubs], ['美国 + 加拿大', ['纽约']], 'science sphere: US + Canada, hub NYC');
+  assert.deepEqual(bcd.spheres.map(s => s.id), ['science', 'magic', 'wuxia', 'nature', 'culture'], 'five Earth spheres in the Bible');
+  assert.ok(bcd.spheres.find(s => s.id === 'magic').hubs[0].startsWith('马瑙斯'), 'Manaus is 马瑙斯');
+  assert.deepEqual(bcd.reputation.dimensions.map(t => t.slice(0, 2)), ['求知', '果敢', '共情', '公正', '守诺'], 'exact reputation names');
+  assert.ok(bcd.endgame.repeatableScenes.includes('各 2 个') && bcd.endgame.repeatableScenes.includes('终局星球 2 个') && bcd.endgame.scope.includes('不属于 MVP'), 'endgame 2 per sphere + 2 final planet, full game not MVP');
+  assert.ok(['0/52', '0/11', '0/2', '未改变'].every(t => bcd.counters.includes(t)), 'creator decisions leave the counters unchanged');
+  const worldBody = bible.chapters[1].body;
+  assert.ok(worldBody.includes('没有固定顺序') && !worldBody.includes('待创作者确认') && !worldBody.includes('待复核'), 'mainline order and Culture = former Fantasy are not open questions');
+  assert.ok(!/游戏运行时仍使用已被取代/.test(worldBody) && worldBody.includes('技术候选'), 'world chapter describes the migrated runtime');
+  assert.ok(!bible.openQuestions.some(q => q.title.includes('地理锚点')), 'stale provisional-anchor question removed');
+  const migrationQ = bible.openQuestions.find(q => q.title.includes('运行时地理迁移'));
+  assert.ok(migrationQ && migrationQ.title.includes('已实现为技术候选') && migrationQ.title.includes('未验收') && ['纽约', '卡茨基尔山', '纽约—芝加哥', '上海'].every(t => migrationQ.detail.includes(t)), 'bible open question: runtime geography migration implemented as a candidate');
+  const dateQ = bible.openQuestions.find(q => q.title.includes('新游戏日期'));
+  assert.ok(dateQ && dateQ.title.includes('已实现') && dateQ.detail.includes(travel.calendar.startDate) && dateQ.detail.includes('旧档'), 'bible open question: new-game date implemented, prologue and old-save dates open');
+  assert.ok(bible.openQuestions.find(q => q.title.includes('组合技与 AI')).detail.includes('关系阶段名称与阈值'), 'relationship tuning stays open');
+  // Washington, D.C. is the Capitol Pixelorama pilot by decision only: nothing authored, integrated or accepted.
+  const dc = bible.environmentVisualReview.washingtonDC;
+  assert.ok(dc.role.includes('Pixelorama') && dc.role.includes('试点') && dc.setting.includes('国会大厦') && dc.note === creatorNote);
+  assert.deepEqual([dc.sceneBriefAuthored, dc.highPrecisionPixelSceneAuthored, dc.runtimeIntegrated, dc.artAccepted], [false, false, false, false], 'DC pilot not authored, integrated or accepted');
+  assert.equal(bible.environmentVisualReview.artAccepted, false);
   const geoMap = bible.environmentVisualReview.runtimeGeographyMap;
   assert.deepEqual([geoMap.implemented, geoMap.automatedTestsPass, geoMap.artAccepted, geoMap.humanReviewed], [true, true, false, false]);
-  pass(`M2 in progress with ${x.gates.length} gates (${implementedGates.length} implemented with QA evidence, ${Object.keys(openGates).length} open, 0 done), ${allEvidence.length} evidence paths exist, route figures match game data (car only, door-to-door 0, air pending, 3 places), ${progress.decisions.length} labelled decisions`);
+  pass(`M2 in progress with ${x.gates.length} gates (${implementedGates.length} implemented with QA evidence incl. ${migratedGates.length} migrated from decided/runtime-pending, ${Object.keys(openGates).length} open, 0 done), ${allEvidence.length} evidence paths exist, US runtime (NYC, Yonkers, Washington, Chicago, 2537-05-25) matches the v02 travel data, five Earth spheres + portal final planet with fantasy only an alias, route figures match (preliminary, door-to-door 0, 2 pending), v01 record kept, ${progress.decisions.length} labelled decisions, ${resolvedDecisionIds.length} resolved ones removed`);
 
   // 4. Served Production view.
   const port = await freePort();
@@ -169,13 +229,14 @@ const cardById = (html, id) => {
     const gates = cardById(html, 'm2-global-travel-gates');
     assert.equal([...gates.matchAll(/<li class="m2-gate" data-gate="/g)].length, 12, 'twelve gate rows');
     const [builtList, openList] = gates.split('<ol class="m2-gates"').slice(1);
-    assert.ok(builtList && openList && gates.indexOf('已实现 / Implemented（6）') < gates.indexOf('仍未完成 / Still open（6）'), 'implemented group before open group');
-    assert.deepEqual([...builtList.matchAll(/data-gate="([^"]+)"/g)].map(m => m[1]), implementedGates, 'implemented group holds exactly the six implemented gates');
-    assert.equal(gates.split('<span class="badge accent">待用户决定 / Awaiting user decision</span>').length - 1, 2, 'user decisions use the neutral badge');
+    assert.ok(builtList && openList && gates.indexOf('已实现 / Implemented（9）') < gates.indexOf('仍未完成 / Still open（3）'), 'implemented group before open group');
+    assert.deepEqual([...builtList.matchAll(/data-gate="([^"]+)"/g)].map(m => m[1]), implementedGates, 'implemented group holds exactly the nine implemented gates');
+    assert.ok(!gates.includes('已决定 · 运行时未迁移'), 'no gate still shows the runtime-pending badge');
+    assert.ok(!gates.includes('待用户决定 / Awaiting user decision</span>') && !gates.includes('仅研究资料 / Research only'), 'no stale awaiting/research-only badge');
     assert.ok(!/<table|<tr /.test(gates), 'gates are stacked rows, not a wide table');
-    assert.ok(gates.includes('6 / 12 已实现 · M2 未完成 / Not complete'), 'gate implementation count and M2 not complete');
+    assert.ok(gates.includes('9 / 12 已实现 · M2 未完成 / Not complete'), 'gate implementation count and M2 not complete');
     assert.ok(!/已完成 · Done|M2 已完成|M2 complete/.test(gates), 'no completion claim');
-    for (const label of ['负责 / Owner', '暂无来源 / No source yet', '查看来源 / View source（1）', '查看路线研究 / View route research', '已实现 · 自动测试通过 / Implemented, tests pass', '仅初步估算 / Preliminary estimate', '仅研究资料 / Research only', '未开始 / Not started', '待人工审阅 / Awaiting human review', '不是程序缺陷', '上海（暂定，待用户决定）', 'Shanghai (provisional, pending user decision)', '旧三点 M2_SMOKE_OK 不计入新规则']) {
+    for (const label of ['负责 / Owner', '暂无来源 / No source yet', '查看来源 / View source（1）', '查看路线研究 / View route research', '已实现 · 自动测试通过 / Implemented, tests pass', '仅初步估算 / Preliminary estimate', '未开始 / Not started', '待人工审阅 / Awaiting human review', '不是程序缺陷', x.anchor.zh, x.anchor.en, '纽约—芝加哥', '旧三点 M2_SMOKE_OK 不计入新规则']) {
       assert.ok(gates.includes(label), 'gates card shows: ' + label);
     }
     // Provenance is collapsed: raw docs/ paths appear only inside <details class="sources"> (never open by default) or a title attribute.
@@ -186,7 +247,8 @@ const cardById = (html, id) => {
     assert.ok(!/<details class="sources" open/.test(html), 'sources collapsed by default');
     assert.ok(html.includes('查看规则与验收 / View rules &amp; acceptance'), 'rule card link is labelled');
     const ruleCard = cardById(html, 'global-map-travel-rule');
-    assert.ok(ruleCard.includes('规则已定 · 地图与旅时核心已实现 · M2 未完成') && !ruleCard.includes('尚未完成本次修改') && ruleCard.includes('没有航空路线'), 'rule card reflects the implemented runtime and open gates');
+    assert.ok(ruleCard.includes('规则已定 · 地图与旅时核心已实现 · M2 未完成') && !ruleCard.includes('尚未完成本次修改') && ruleCard.includes('初步估算'), 'rule card reflects the implemented runtime and open gates');
+    assert.ok(['技术候选', '2537-05-25', '纽约—芝加哥', '卡茨基尔山附近', '卢普区', '美国东北部'].every(t => ruleCard.includes(t)) && !/尚未迁移|长江三角洲|没有航空路线/.test(ruleCard), 'rule card: US runtime implemented as a technical candidate');
     const ledger = cardById(html, 'approval-ledger');
     assert.equal(ledger.split('<details class="sources">').length - 1, progress.approvalLedger.items.length, 'one collapsed source list per ledger item');
     assert.ok(ledger.includes('查看来源 / View source（2）') && ledger.includes('QA 记录 / QA note') && ledger.includes('产出文件 / Output · 图片 / Image'), 'ledger source labels');
@@ -223,7 +285,7 @@ const cardById = (html, id) => {
     }
     const evidenceProbes = ['docs/progress.md', 'docs/qa/../progress.md', '../outputs/x.md', 'tools/rpg-2-star-ocean-the-second_game-bible_server_v05_20261013-222437-3d5b8a9f.js', 'game/scripts/app_state.gd', '/etc/passwd', 'C:/Windows/win.ini', ''];
     for (const probe of evidenceProbes) assert.equal((await fetch(base + '/evidence?path=' + encodeURIComponent(probe))).status, 404, 'evidence rejected: ' + probe);
-    pass(`Production view: gates, ledger and decisions cards in order after the rule card, bilingual labels, 6/12 gates implemented in their own group and M2 not complete, user decisions neutral, counters 0/52 0/11 0/2 and 51/52, two scoped approvals, no controls; raw paths only in collapsed sources; ${cited.length} evidence files served byte-identical, ${evidenceProbes.length} evidence probes 404; two design docs served byte-identical, 4 probes 404`);
+    pass(`Production view: gates, ledger and decisions cards in order after the rule card, bilingual labels, 9/12 gates implemented in their own group and M2 not complete, no runtime-pending badge left, counters 0/52 0/11 0/2 and 51/52, two scoped approvals, no controls; raw paths only in collapsed sources; ${cited.length} evidence files served byte-identical, ${evidenceProbes.length} evidence probes 404; two design docs served byte-identical, 4 probes 404`);
 
     // 5. Hostile values are escaped; missing sections are omitted without breaking the view.
     const hostile = JSON.parse(JSON.stringify(progress));

@@ -3,7 +3,9 @@ class_name WorldRouteRegistry
 
 # Loads and validates the global Earth location and route data. Road and flight distances are
 # kept apart from the great-circle distance, which is computed from coordinates for reference only.
-const DEFAULT_DATA_PATH := "res://data/world-travel/rpg-2-star-ocean-the-second_global-earth-travel_locations-routes_m2-provisional-v01_20261015-024215-b876e53d.json"
+# v02: creator-approved US science sphere (2026-10-15). The provisional v01 file (Shanghai set) stays as
+# a record; its location IDs live on in v02 as hidden retiredLocations so old saves still resolve.
+const DEFAULT_DATA_PATH := "res://data/world-travel/rpg-2-star-ocean-the-second_global-earth-travel_locations-routes_m2-us-science-v02_20261015-175011-c454007b.json"
 const SCHEMA_VERSION := 1
 const MODES := ["car", "air"]
 const LOCATION_TYPES := ["city", "outskirts", "ruins", "community", "wild", "facility", "portal"]
@@ -11,6 +13,9 @@ const ROUTE_STATUSES := ["available", "unverified", "pending"]
 const LEG_VERIFICATION_STATUSES := ["verified", "preliminary-estimate"]
 const AIR_MINUTE_FIELDS := ["airportAccessMinutes", "checkInAndWaitMinutes", "flightMinutes", "airportEgressMinutes"]
 const EARTH_MEAN_RADIUS_KM := 6371.0088
+# Creator decision 2026-10-15: five Earth spheres (science, magic, wuxia, nature, culture) plus a
+# separate portal-only final planet.
+const EARTH_REGION_COUNT := 5
 
 var errors: PackedStringArray = []
 var data: Dictionary = {}
@@ -21,6 +26,11 @@ var segments: Dictionary = {}
 var routes: Dictionary = {}
 var route_order: Array[String] = []
 var alias_to_location: Dictionary = {}
+# Old region ID -> active region ID (culture keeps "fantasy"). An alias is never an active region.
+var alias_to_region: Dictionary = {}
+# Retired location ID -> its record. Retired places are never listed, discovered or routed; their IDs
+# only resolve to the successor location so saves made before a place set changed still load.
+var retired_locations: Dictionary = {}
 var scene_to_location: Dictionary = {}
 var start_location_id := ""
 var calendar_start_minutes := 0
@@ -62,6 +72,12 @@ func resolve_location_id(location_id: String) -> String:
 	if alias_to_location.has(location_id):
 		return String(alias_to_location[location_id])
 	return String(scene_to_location.get(location_id, ""))
+
+
+func resolve_region_id(region_id: String) -> String:
+	if regions.has(region_id):
+		return region_id
+	return String(alias_to_region.get(region_id, ""))
 
 
 func location(location_id: String) -> Dictionary:
@@ -214,10 +230,16 @@ func _build(source: Dictionary) -> void:
 	var earth_regions := 0
 	for region_id in regions:
 		earth_regions += int(regions[region_id].get("planet", "") == "earth")
-	if earth_regions != 4:
-		errors.append("expected four Earth regions, found %d" % earth_regions)
+		for alias in regions[region_id].get("legacyIds", []):
+			if regions.has(alias) or alias_to_region.has(alias):
+				errors.append("legacy region id %s collides" % alias)
+			alias_to_region[String(alias)] = region_id
+	if earth_regions != EARTH_REGION_COUNT:
+		errors.append("expected %d Earth regions, found %d" % [EARTH_REGION_COUNT, earth_regions])
 	for entry in _array(source, "locations"):
 		_add_location(entry, seen_ids)
+	for entry in _array(source, "retiredLocations"):
+		_add_retired_location(entry, seen_ids)
 	start_location_id = String(source.get("startLocationId", ""))
 	if not locations.has(start_location_id):
 		errors.append("startLocationId is not a known location")
@@ -237,6 +259,10 @@ func _add_location(entry: Dictionary, seen_ids: Dictionary) -> void:
 		errors.append("location %s has invalid type" % location_id)
 	if not regions.has(entry.get("regionId", "")):
 		errors.append("location %s has unknown region" % location_id)
+	# A region may limit its places to some countries (the science sphere is the US and Canada only).
+	var allowed: Variant = regions.get(entry.get("regionId", ""), {}).get("countryCodes")
+	if typeof(allowed) == TYPE_ARRAY and not allowed.has(entry.get("countryCode", "")):
+		errors.append("location %s country %s is outside region %s" % [location_id, String(entry.get("countryCode", "")), String(entry.get("regionId", ""))])
 	var coordinates: Variant = entry.get("coordinates")
 	if typeof(coordinates) != TYPE_DICTIONARY or not _is_number(coordinates.get("lat")) or not _is_number(coordinates.get("lon")) or absf(float(coordinates["lat"])) > 90.0 or absf(float(coordinates["lon"])) > 180.0:
 		errors.append("location %s has invalid coordinates" % location_id)
@@ -254,6 +280,24 @@ func _add_location(entry: Dictionary, seen_ids: Dictionary) -> void:
 		alias_to_location[String(alias)] = location_id
 	locations[location_id] = entry
 	location_order.append(location_id)
+
+
+# Runs after every active location is known, so a retired ID can only point at a live place.
+func _add_retired_location(entry: Dictionary, seen_ids: Dictionary) -> void:
+	var retired_id := String(entry.get("id", ""))
+	if not _claim_id(seen_ids, retired_id, "retired location"):
+		return
+	if alias_to_location.has(retired_id):
+		errors.append("retired id %s is also a legacy id" % retired_id)
+		return
+	var successor := String(entry.get("migratesToLocationId", ""))
+	if not locations.has(successor):
+		errors.append("retired location %s must migrate to an active location" % retired_id)
+		return
+	if not _has_names(entry):
+		errors.append("retired location %s needs zh and en names" % retired_id)
+	alias_to_location[retired_id] = successor
+	retired_locations[retired_id] = entry
 
 
 func _add_segment(entry: Dictionary, seen_ids: Dictionary) -> void:

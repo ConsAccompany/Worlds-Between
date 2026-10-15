@@ -58,9 +58,9 @@ func _run() -> void:
 		await _check_view(map, "globe-%s" % language)
 		map.zoom_view(Vector2(500, 90), 2.0)
 		await _check_view(map, "globe-zoomed-%s" % language)
-		map.enter_region("yangtze_delta")
+		map.enter_region("us_northeast")
 		await _check_view(map, "region-%s" % language)
-		map.select_place("earth.cn.liangzhu-ruins")
+		map.select_place("earth.us.dc.washington-ruins")
 		await _check_view(map, "region-card-%s" % language)
 		map.close_route_card()
 		map.zoom_view(Vector2(320, 134), 2.5)
@@ -107,7 +107,7 @@ func _check_view(map: Node, label: String) -> void:
 		var lon_count := 0
 		for entry in map.annotation_label_rects():
 			_check(not entry["rect"].intersects(panel), "%s: label %s clear of the status panel" % [label, entry["text"]])
-			if entry["text"].ends_with("°E"):
+			if entry["text"].ends_with("°E") or entry["text"].ends_with("°W"):
 				lon_count += 1
 		_check(lon_count > 0, "%s: longitude labels still drawn (%d)" % [label, lon_count])
 	var with_map := await _grab()

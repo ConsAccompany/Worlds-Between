@@ -134,7 +134,7 @@ func _load(id: String) -> void:
 
 
 func _back() -> void:
-	if AppState.save_screen_mode == "save" and AppState.save_return_scene.ends_with("scifi_exploration_area.tscn"):
+	if AppState.save_screen_mode == "save" and AppState.is_area_scene(AppState.save_return_scene):
 		AppState.resume_area_pending = true
 		AppState.resume_area_position = AppState.save_return_position
 	elif AppState.save_screen_mode == "save" and AppState.save_return_scene.ends_with("survey_annex.tscn"):

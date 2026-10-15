@@ -6,9 +6,10 @@ extends SceneTree
 # not as economic balance. No game path puts a companion in the merchant job yet, so tests set
 # job_series = "merchant" directly to stand in for that future job change.
 # Run: Godot --headless --path game --script res://tests/<this file>
-const SHANGHAI := "earth.cn.shanghai"
-const SONGJIANG := "earth.cn.shanghai.songjiang-outskirts"
-const LIANGZHU := "earth.cn.liangzhu-ruins"
+# 2026-10-15: the science sphere moved to the US (New York City hub, Yonkers outskirts, Washington, D.C. ruins).
+const NEW_YORK := "earth.us.ny.new-york-city"
+const YONKERS := "earth.us.ny.yonkers-outskirts"
+const WASHINGTON := "earth.us.dc.washington-ruins"
 const OTHER_CITY := "earth.test.second-city"
 const SAVE_ROOT := "user://test-saves/m2-commerce-weekly-settlement"
 
@@ -91,48 +92,48 @@ func _test_manager_and_city_eligibility() -> void:
 	_fresh_run_at(2026, 10, 14, 10, 0)
 	app.recruit_member("liang-xu")
 	app.recruit_member("zhao-ling")
-	_check(app.open_commerce_company(SHANGHAI, "liang-xu")["reason"] == "not-merchant" and app.commerce_ledger_state()["companies"].is_empty() and app.active_party_ids.has("liang-xu"), "a recruited non-merchant cannot open or run a company and stays in the party")
-	_check(app.open_commerce_company(SHANGHAI, "hero")["reason"] == "hero-cannot-station", "the protagonist cannot be stationed")
-	_check(app.open_commerce_company(SHANGHAI, "ji-cheng")["reason"] == "not-recruited", "an unrecruited companion cannot be stationed")
-	_check(app.open_commerce_company(SHANGHAI, "nobody")["reason"] == "unknown-member", "an unknown member id is refused")
+	_check(app.open_commerce_company(NEW_YORK, "liang-xu")["reason"] == "not-merchant" and app.commerce_ledger_state()["companies"].is_empty() and app.active_party_ids.has("liang-xu"), "a recruited non-merchant cannot open or run a company and stays in the party")
+	_check(app.open_commerce_company(NEW_YORK, "hero")["reason"] == "hero-cannot-station", "the protagonist cannot be stationed")
+	_check(app.open_commerce_company(NEW_YORK, "ji-cheng")["reason"] == "not-recruited", "an unrecruited companion cannot be stationed")
+	_check(app.open_commerce_company(NEW_YORK, "nobody")["reason"] == "unknown-member", "an unknown member id is refused")
 	app.member_states["zhao-ling"]["job_series"] = "merchant"
-	_check(app.open_commerce_company(LIANGZHU, "zhao-ling")["reason"] == "not-a-city" and app.open_commerce_company(SONGJIANG, "zhao-ling")["reason"] == "not-a-city", "ruins and outskirts cannot host a company")
+	_check(app.open_commerce_company(WASHINGTON, "zhao-ling")["reason"] == "not-a-city" and app.open_commerce_company(YONKERS, "zhao-ling")["reason"] == "not-a-city", "ruins and outskirts cannot host a company")
 	_check(app.open_commerce_company("earth.xx.nowhere", "zhao-ling")["reason"] == "unknown-city", "an unknown place cannot host a company")
-	app.discovered_locations.erase(SHANGHAI)
-	_check(app.open_commerce_company(SHANGHAI, "zhao-ling")["reason"] == "city-not-discovered", "an undiscovered city cannot host a company")
-	app.discovered_locations[SHANGHAI] = true
+	app.discovered_locations.erase(NEW_YORK)
+	_check(app.open_commerce_company(NEW_YORK, "zhao-ling")["reason"] == "city-not-discovered", "an undiscovered city cannot host a company")
+	app.discovered_locations[NEW_YORK] = true
 	_check(app.active_party_ids.has("zhao-ling") and app.commerce_ledger_state()["companies"].is_empty(), "refused attempts change nothing")
-	var opened: Dictionary = app.open_commerce_company(SHANGHAI, "zhao-ling")
-	_check(opened["ok"] and opened["city_id"] == SHANGHAI, "a recruited merchant companion opens a company in a discovered city")
+	var opened: Dictionary = app.open_commerce_company(NEW_YORK, "zhao-ling")
+	_check(opened["ok"] and opened["city_id"] == NEW_YORK, "a recruited merchant companion opens a company in a discovered city")
 	_check(not app.active_party_ids.has("zhao-ling") and app.recruited_members.has("zhao-ling") and app.member_states.has("zhao-ling"), "the stationed companion leaves the active party but stays recruited")
 	app.member_states["liang-xu"]["job_series"] = "merchant"
-	_check(app.open_commerce_company(SHANGHAI, "liang-xu")["reason"] == "company-exists" and app.active_party_ids.has("liang-xu"), "one company per city")
-	_check(app.assign_commerce_manager(SHANGHAI, "liang-xu")["reason"] == "manager-present", "a company with a stationed companion takes no second one")
+	_check(app.open_commerce_company(NEW_YORK, "liang-xu")["reason"] == "company-exists" and app.active_party_ids.has("liang-xu"), "one company per city")
+	_check(app.assign_commerce_manager(NEW_YORK, "liang-xu")["reason"] == "manager-present", "a company with a stationed companion takes no second one")
 	_check(app.commerce_manager_block_reason("zhao-ling") == "already-stationed" and not app.commerce.open_company(OTHER_CITY, "zhao-ling", app.calendar_week_index) and not app.commerce.has_company(OTHER_CITY), "the same companion cannot run a second company")
-	_check(app.recall_commerce_manager(SONGJIANG)["reason"] == "no-company" and app.assign_commerce_manager(LIANGZHU, "liang-xu")["reason"] == "no-company", "recall/assign need an existing company")
+	_check(app.recall_commerce_manager(YONKERS)["reason"] == "no-company" and app.assign_commerce_manager(WASHINGTON, "liang-xu")["reason"] == "no-company", "recall/assign need an existing company")
 	var liang_jp := int(app.member_states["liang-xu"]["jp"])
 	var zhao_jp := int(app.member_states["zhao-ling"]["jp"])
 	var reward: Dictionary = app.award_battle_rewards("patrol")
 	_check(int(app.member_states["liang-xu"]["jp"]) - liang_jp == int(reward["jp"]) and int(app.member_states["zhao-ling"]["jp"]) - zhao_jp == ceili(float(reward["jp"]) * 0.25), "a stationed companion receives the 25% reserve share of battle JP")
-	var recall: Dictionary = app.recall_commerce_manager(SHANGHAI)
+	var recall: Dictionary = app.recall_commerce_manager(NEW_YORK)
 	_check(recall["ok"] and recall["member_id"] == "zhao-ling" and recall["rejoined_active_party"] and app.active_party_ids.has("zhao-ling"), "recall returns the companion to the party")
-	_check(app.commerce.has_company(SHANGHAI) and app.commerce_ledger_state()["companies"][SHANGHAI]["managerId"] == "", "after recall an ordinary NPC keeps the company")
-	_check(app.recall_commerce_manager(SHANGHAI)["reason"] == "no-companion-manager", "an NPC-run company has nobody to recall")
+	_check(app.commerce.has_company(NEW_YORK) and app.commerce_ledger_state()["companies"][NEW_YORK]["managerId"] == "", "after recall an ordinary NPC keeps the company")
+	_check(app.recall_commerce_manager(NEW_YORK)["reason"] == "no-companion-manager", "an NPC-run company has nobody to recall")
 	app.member_states["liang-xu"]["job_series"] = "tactics"
-	_check(app.assign_commerce_manager(SHANGHAI, "liang-xu")["reason"] == "not-merchant", "assigning also requires the merchant job")
-	_check(app.assign_commerce_manager(SHANGHAI, "zhao-ling")["ok"] and not app.active_party_ids.has("zhao-ling"), "a merchant can be stationed again at an NPC-run company")
+	_check(app.assign_commerce_manager(NEW_YORK, "liang-xu")["reason"] == "not-merchant", "assigning also requires the merchant job")
+	_check(app.assign_commerce_manager(NEW_YORK, "zhao-ling")["ok"] and not app.active_party_ids.has("zhao-ling"), "a merchant can be stationed again at an NPC-run company")
 
 
 func _test_sunday_to_monday_by_travel() -> void:
 	_fresh_run_at(2026, 10, 14, 10, 0)
 	_recruit_merchant("zhao-ling")
 	var opened_week: int = app.calendar_week_index
-	app.open_commerce_company(SHANGHAI, "zhao-ling")
+	app.open_commerce_company(NEW_YORK, "zhao-ling")
 	var monday := TravelCalendar.to_minutes(2026, 10, 19)
-	var leg := _leg_minutes(SHANGHAI, LIANGZHU)
+	var leg := _leg_minutes(NEW_YORK, WASHINGTON)
 	_advance_to(monday - leg + 30)
 	_check(TravelCalendar.from_minutes(app.calendar_minutes)["weekday"] == 7 and settled_events.is_empty() and _units() == 0, "resting to Sunday evening settles nothing")
-	var trip := _travel(LIANGZHU)
+	var trip := _travel(WASHINGTON)
 	_check(trip.get("departed", false) and app.calendar_week_index == opened_week + 1, "Sunday-evening trip arrives in the next week")
 	_check(settled_events.size() == 1 and settled_events[0]["settled_week_indices"] == [opened_week] and int(settled_events[0]["units"]) == 0, "the opening week settles once and pays nothing for a partial week")
 	var second_monday := monday + TravelCalendar.MINUTES_PER_WEEK
@@ -143,19 +144,19 @@ func _test_sunday_to_monday_by_travel() -> void:
 	app.advance_calendar(1, "rest")
 	_check(settled_events.size() == 2 and settled_events[1]["settled_week_indices"] == [opened_week + 1] and int(settled_events[1]["units"]) == 100 and _units() == 100, "the first full week pays the companion rate at Monday 00:00")
 	_check(int(app.commerce_ledger_state()["settledWeekIndex"]) == app.calendar_week_index, "cursor equals the current week after settling")
-	_travel(SHANGHAI)
+	_travel(NEW_YORK)
 	_check(settled_events.size() == 2 and _units() == 100, "a trip inside the week settles nothing more")
 
 
 func _test_multiweek_and_duplicate_delivery() -> void:
 	_fresh_run_at(2026, 10, 14, 10, 0)
 	_recruit_merchant("zhao-ling")
-	app.open_commerce_company(SHANGHAI, "zhao-ling")
+	app.open_commerce_company(NEW_YORK, "zhao-ling")
 	var week: int = app.calendar_week_index
 	app.advance_calendar(TravelCalendar.MINUTES_PER_WEEK * 4, "rest")
 	_check(week_events == [[week, week + 4]] and settled_events.size() == 1, "a four-week rest is one transition and one settlement")
 	_check(settled_events[0]["settled_week_indices"] == [week, week + 1, week + 2, week + 3] and _units() == 300, "each crossed week settles once: partial opening week 0 + three full weeks")
-	_check(int(app.commerce_ledger_state()["companies"][SHANGHAI]["weeksSettled"]) == 3, "the company counts three settled weeks")
+	_check(int(app.commerce_ledger_state()["companies"][NEW_YORK]["weeksSettled"]) == 3, "the company counts three settled weeks")
 	app.calendar_week_transition.emit(week, week + 4)
 	_check(_units() == 300 and settled_events.size() == 1, "an externally emitted transition signal is a notification only and pays nothing")
 	var companions: Dictionary = app._commerce_companion_ids()
@@ -172,17 +173,17 @@ func _test_multiweek_and_duplicate_delivery() -> void:
 func _test_npc_efficiency_and_full_week_rule() -> void:
 	_fresh_run_at(2026, 10, 14, 10, 0)
 	_recruit_merchant("zhao-ling")
-	app.open_commerce_company(SHANGHAI, "zhao-ling")
+	app.open_commerce_company(NEW_YORK, "zhao-ling")
 	var week: int = app.calendar_week_index
 	app.advance_calendar(TravelCalendar.MINUTES_PER_WEEK, "rest")
 	app.advance_calendar(TravelCalendar.MINUTES_PER_WEEK, "rest")
 	var before := _units()
-	app.recall_commerce_manager(SHANGHAI)
+	app.recall_commerce_manager(NEW_YORK)
 	app.advance_calendar(TravelCalendar.MINUTES_PER_WEEK, "rest")
 	_check(_units() - before == 80, "the week of a mid-week recall pays the NPC 80% rate")
 	app.advance_calendar(TravelCalendar.MINUTES_PER_WEEK, "rest")
 	_check(_units() - before == 160, "a full NPC week pays 80%")
-	app.assign_commerce_manager(SHANGHAI, "zhao-ling")
+	app.assign_commerce_manager(NEW_YORK, "zhao-ling")
 	app.advance_calendar(TravelCalendar.MINUTES_PER_WEEK, "rest")
 	_check(_units() - before == 240, "a companion stationed mid-week does not earn the full rate for that week")
 	app.advance_calendar(TravelCalendar.MINUTES_PER_WEEK, "rest")
@@ -192,29 +193,29 @@ func _test_npc_efficiency_and_full_week_rule() -> void:
 	_check(_units() - before == 420, "a stationed companion who left the merchant job earns only the NPC rate")
 	app.member_states["zhao-ling"]["job_series"] = "merchant"
 	app.commerce.base_weekly_income = 250
-	app.recall_commerce_manager(SHANGHAI)
+	app.recall_commerce_manager(NEW_YORK)
 	app.advance_calendar(TravelCalendar.MINUTES_PER_WEEK * 2, "rest")
 	_check(_units() - before == 420 + 200 + 200, "the provisional base is configurable and NPC weeks stay at 80% of it")
-	_check(app.calendar_week_index == week + 9 and int(app.commerce_ledger_state()["companies"][SHANGHAI]["weeksSettled"]) == 8, "eight full weeks settled after the opening week")
+	_check(app.calendar_week_index == week + 9 and int(app.commerce_ledger_state()["companies"][NEW_YORK]["weeksSettled"]) == 8, "eight full weeks settled after the opening week")
 
 
 func _test_cancel_and_free_actions_settle_nothing() -> void:
 	_fresh_run_at(2026, 10, 18, 22, 0)
 	_recruit_merchant("zhao-ling")
-	app.open_commerce_company(SHANGHAI, "zhao-ling")
+	app.open_commerce_company(NEW_YORK, "zhao-ling")
 	app.advance_calendar(TravelCalendar.MINUTES_PER_WEEK, "rest")
 	settled_events.clear()
 	var units := _units()
 	var minutes: int = app.calendar_minutes
-	var preview: Dictionary = app.preview_travel(LIANGZHU)
+	var preview: Dictionary = app.preview_travel(WASHINGTON)
 	_check(int(preview["weeks_crossed"]) == 1 and settled_events.is_empty(), "previewing a Monday-crossing trip settles nothing")
 	app.cancel_travel_preview()
 	_check(not app.confirm_travel() and app.calendar_minutes == minutes and settled_events.is_empty() and _units() == units, "cancelled trip charges no time and settles nothing")
-	app.preview_travel(LIANGZHU)
+	app.preview_travel(WASHINGTON)
 	app.advance_calendar(5, "rest")
 	settled_events.clear()
 	_check(not app.confirm_travel() and settled_events.is_empty(), "a stale preview cannot settle a week")
-	var same: Dictionary = app.settle_travel(SHANGHAI)
+	var same: Dictionary = app.settle_travel(NEW_YORK)
 	_check(not same["departed"] and settled_events.is_empty() and _units() == units, "travelling to the current place settles nothing")
 	app.enter_current_location_scene()
 	_check(settled_events.is_empty() and _units() == units, "entering the local scene settles nothing")
@@ -223,10 +224,10 @@ func _test_cancel_and_free_actions_settle_nothing() -> void:
 func _test_save_load_never_double_settles() -> void:
 	_fresh_run_at(2026, 10, 14, 10, 0)
 	_recruit_merchant("zhao-ling")
-	app.open_commerce_company(SHANGHAI, "zhao-ling")
+	app.open_commerce_company(NEW_YORK, "zhao-ling")
 	app.advance_calendar(TravelCalendar.MINUTES_PER_WEEK * 2, "rest")
 	var monday := TravelCalendar.to_minutes(2026, 11, 2)
-	_advance_to(monday - _leg_minutes(SHANGHAI, LIANGZHU) + 30)
+	_advance_to(monday - _leg_minutes(NEW_YORK, WASHINGTON) + 30)
 	var saved_units := _units()
 	var saved_week: int = app.calendar_week_index
 	app.save_return_scene = "res://scenes/scifi_world_map.tscn"
@@ -234,8 +235,8 @@ func _test_save_load_never_double_settles() -> void:
 	var entry := SaveStore.read_entry(id)
 	var block: Dictionary = entry["snapshot"].get("commerce", {})
 	_check(id != "" and int(entry["schemaVersion"]) == 1 and SaveStore.SCHEMA_VERSION == 1, "save keeps SaveStore schema version 1")
-	_check(block.get("ledgerUnitKind") == "provisional-ledger-unit" and int(block["ledgerUnits"]) == saved_units and int(block["settledWeekIndex"]) == saved_week and block["companies"][SHANGHAI]["managerId"] == "zhao-ling", "save carries the provisional ledger, cursor and company")
-	_travel(LIANGZHU)
+	_check(block.get("ledgerUnitKind") == "provisional-ledger-unit" and int(block["ledgerUnits"]) == saved_units and int(block["settledWeekIndex"]) == saved_week and block["companies"][NEW_YORK]["managerId"] == "zhao-ling", "save carries the provisional ledger, cursor and company")
+	_travel(WASHINGTON)
 	_check(_units() == saved_units + 100, "crossing Monday after saving pays one week")
 	app.advance_calendar(TravelCalendar.MINUTES_PER_WEEK * 2, "rest")
 	week_events.clear()
@@ -243,15 +244,15 @@ func _test_save_load_never_double_settles() -> void:
 	_check(app.load_save(id), "save loads")
 	_check(week_events.is_empty() and settled_events.is_empty(), "loading emits no week transition and no settlement")
 	_check(_units() == saved_units and int(app.commerce_ledger_state()["settledWeekIndex"]) == saved_week and app.calendar_week_index == saved_week, "loading restores the saved balance and cursor exactly")
-	_check(not app.active_party_ids.has("zhao-ling") and app.commerce.company_for_manager("zhao-ling") == SHANGHAI, "the stationed companion stays stationed and out of the party")
+	_check(not app.active_party_ids.has("zhao-ling") and app.commerce.company_for_manager("zhao-ling") == NEW_YORK, "the stationed companion stays stationed and out of the party")
 	app.load_save(id)
 	_check(_units() == saved_units and settled_events.is_empty(), "loading twice changes nothing")
-	_travel(LIANGZHU)
+	_travel(WASHINGTON)
 	_check(_units() == saved_units + 100 and settled_events.size() == 1, "replaying the same crossing after load pays that week once, not twice")
 	var resaved: String = app.write_manual_save(2)
 	settled_events.clear()
 	app.load_save(resaved)
-	_travel(SHANGHAI)
+	_travel(NEW_YORK)
 	_check(_units() == saved_units + 100 and settled_events.is_empty(), "a save made after settlement does not settle that week again")
 
 
@@ -260,13 +261,13 @@ func _test_save_load_never_double_settles() -> void:
 func _test_autosave_on_calendar_advanced_sees_settled_week() -> void:
 	_fresh_run_at(2026, 10, 14, 10, 0)
 	_recruit_merchant("zhao-ling")
-	app.open_commerce_company(SHANGHAI, "zhao-ling")
+	app.open_commerce_company(NEW_YORK, "zhao-ling")
 	app.advance_calendar(TravelCalendar.MINUTES_PER_WEEK, "rest")
 	var monday := TravelCalendar.to_minutes(2026, 10, 26)
-	_advance_to(monday - _leg_minutes(SHANGHAI, LIANGZHU) + 30)
+	_advance_to(monday - _leg_minutes(NEW_YORK, WASHINGTON) + 30)
 	var sunday_week: int = app.calendar_week_index
 	var units_before := _units()
-	var weeks_before := int(app.commerce_ledger_state()["companies"][SHANGHAI]["weeksSettled"])
+	var weeks_before := int(app.commerce_ledger_state()["companies"][NEW_YORK]["weeksSettled"])
 	_check(TravelCalendar.from_minutes(app.calendar_minutes)["weekday"] == 7 and int(app.commerce_ledger_state()["settledWeekIndex"]) == sunday_week, "setup: Sunday evening, cursor at the current week")
 	app.save_return_scene = "res://scenes/scifi_world_map.tscn"
 	var order: Array = []
@@ -281,7 +282,7 @@ func _test_autosave_on_calendar_advanced_sees_settled_week() -> void:
 	app.calendar_advanced.connect(autosave)
 	app.calendar_week_transition.connect(log_week)
 	app.commerce_weeks_settled.connect(log_settled)
-	var trip := _travel(LIANGZHU)
+	var trip := _travel(WASHINGTON)
 	app.calendar_advanced.disconnect(autosave)
 	app.calendar_week_transition.disconnect(log_week)
 	app.commerce_weeks_settled.disconnect(log_settled)
@@ -300,7 +301,7 @@ func _test_autosave_on_calendar_advanced_sees_settled_week() -> void:
 	settled_events.clear()
 	_check(app.load_save(String(seen["id"])) and week_events.is_empty() and settled_events.is_empty(), "the autosave loads and settles nothing on load")
 	_check(app.calendar_week_index == new_week and _units() == units_before + 100 and int(app.commerce_ledger_state()["settledWeekIndex"]) == new_week, "after load the ledger balance and cursor include the crossed week")
-	_check(int(app.commerce_ledger_state()["companies"][SHANGHAI]["weeksSettled"]) == weeks_before + 1, "the crossed week was settled exactly once")
+	_check(int(app.commerce_ledger_state()["companies"][NEW_YORK]["weeksSettled"]) == weeks_before + 1, "the crossed week was settled exactly once")
 	_advance_to(monday + TravelCalendar.MINUTES_PER_WEEK - 1)
 	_check(_units() == units_before + 100 and settled_events.is_empty(), "the rest of the loaded week pays nothing more")
 	app.advance_calendar(1, "rest")
@@ -313,7 +314,7 @@ func _test_legacy_migration_and_behind_cursor_rejected() -> void:
 	var no_commerce: Dictionary = app.make_snapshot("map", Vector2.ZERO, "manual_note")
 	no_commerce.erase("commerce")
 	var no_commerce_id := SaveStore.write_entry("manual", 2, no_commerce)
-	app.open_commerce_company(SHANGHAI, "zhao-ling")
+	app.open_commerce_company(NEW_YORK, "zhao-ling")
 	app.advance_calendar(TravelCalendar.MINUTES_PER_WEEK * 3, "rest")
 	settled_events.clear()
 	_check(app.load_save(no_commerce_id), "save with travel but no commerce block loads")
@@ -322,10 +323,10 @@ func _test_legacy_migration_and_behind_cursor_rejected() -> void:
 	var migrated_week: int = app.calendar_week_index
 	app.advance_calendar(TravelCalendar.MINUTES_PER_WEEK * 2, "rest")
 	_check(settled_events.is_empty() and _units() == 0 and int(app.commerce_ledger_state()["settledWeekIndex"]) == migrated_week + 2, "after migration, later Mondays pay nothing: the live company from before the load does not come back")
-	app.open_commerce_company(SHANGHAI, "zhao-ling")
+	app.open_commerce_company(NEW_YORK, "zhao-ling")
 	app.advance_calendar(TravelCalendar.MINUTES_PER_WEEK, "rest")
 	app.advance_calendar(TravelCalendar.MINUTES_PER_WEEK, "rest")
-	_check(_units() == 100 and int(app.commerce_ledger_state()["companies"][SHANGHAI]["weeksSettled"]) == 1, "a company opened after migration earns from its first full week only, once")
+	_check(_units() == 100 and int(app.commerce_ledger_state()["companies"][NEW_YORK]["weeksSettled"]) == 1, "a company opened after migration earns from its first full week only, once")
 	var legacy: Dictionary = no_commerce.duplicate(true)
 	legacy.erase("travel")
 	var legacy_id := SaveStore.write_entry("manual", 3, legacy)
@@ -341,7 +342,7 @@ func _test_legacy_migration_and_behind_cursor_rejected() -> void:
 	# can save, so this version never writes such a block: it is corrupt and the whole load is refused.
 	_fresh_run_at(2026, 10, 14, 10, 0)
 	_recruit_merchant("zhao-ling")
-	app.open_commerce_company(SHANGHAI, "zhao-ling")
+	app.open_commerce_company(NEW_YORK, "zhao-ling")
 	app.advance_calendar(TravelCalendar.MINUTES_PER_WEEK, "rest")
 	var base: Dictionary = app.make_snapshot("map", Vector2.ZERO, "manual_note")
 	var lagging_ten: Dictionary = base.duplicate(true)
@@ -374,7 +375,7 @@ func _test_malformed_commerce_blocks_rejected() -> void:
 	_fresh_run_at(2026, 10, 14, 10, 0)
 	_recruit_merchant("zhao-ling")
 	app.recruit_member("liang-xu")
-	app.open_commerce_company(SHANGHAI, "zhao-ling")
+	app.open_commerce_company(NEW_YORK, "zhao-ling")
 	app.advance_calendar(TravelCalendar.MINUTES_PER_WEEK * 2, "rest")
 	var good: Dictionary = app.make_snapshot("map", Vector2.ZERO, "manual_note")
 	var week := int(good["travel"]["calendarWeekIndex"])
@@ -389,14 +390,14 @@ func _test_malformed_commerce_blocks_rejected() -> void:
 		"negative balance": func(s: Dictionary) -> void: s["commerce"]["ledgerUnits"] = -5,
 		"text balance": func(s: Dictionary) -> void: s["commerce"]["ledgerUnits"] = "lots",
 		"companies not a dictionary": func(s: Dictionary) -> void: s["commerce"]["companies"] = [],
-		"company opened in the future": func(s: Dictionary) -> void: s["commerce"]["companies"][SHANGHAI]["openedWeekIndex"] = week + 3,
-		"manager since before opening": func(s: Dictionary) -> void: s["commerce"]["companies"][SHANGHAI]["managerSinceWeekIndex"] = week - 30,
-		"fractional weeks settled": func(s: Dictionary) -> void: s["commerce"]["companies"][SHANGHAI]["weeksSettled"] = 1.5,
-		"missing manager": func(s: Dictionary) -> void: s["commerce"]["companies"][SHANGHAI].erase("managerId"),
+		"company opened in the future": func(s: Dictionary) -> void: s["commerce"]["companies"][NEW_YORK]["openedWeekIndex"] = week + 3,
+		"manager since before opening": func(s: Dictionary) -> void: s["commerce"]["companies"][NEW_YORK]["managerSinceWeekIndex"] = week - 30,
+		"fractional weeks settled": func(s: Dictionary) -> void: s["commerce"]["companies"][NEW_YORK]["weeksSettled"] = 1.5,
+		"missing manager": func(s: Dictionary) -> void: s["commerce"]["companies"][NEW_YORK].erase("managerId"),
 		"manager in active party": func(s: Dictionary) -> void: s["activeParty"].append("zhao-ling"),
-		"manager not recruited": func(s: Dictionary) -> void: s["commerce"]["companies"][SHANGHAI]["managerId"] = "ji-cheng",
-		"protagonist as manager": func(s: Dictionary) -> void: s["commerce"]["companies"][SHANGHAI]["managerId"] = "hero",
-		"one companion at two companies": func(s: Dictionary) -> void: s["commerce"]["companies"][OTHER_CITY] = s["commerce"]["companies"][SHANGHAI].duplicate(),
+		"manager not recruited": func(s: Dictionary) -> void: s["commerce"]["companies"][NEW_YORK]["managerId"] = "ji-cheng",
+		"protagonist as manager": func(s: Dictionary) -> void: s["commerce"]["companies"][NEW_YORK]["managerId"] = "hero",
+		"one companion at two companies": func(s: Dictionary) -> void: s["commerce"]["companies"][OTHER_CITY] = s["commerce"]["companies"][NEW_YORK].duplicate(),
 		"commerce cursor not at a migrated pre-travel clock's week": func(s: Dictionary) -> void: s.erase("travel"),
 	}
 	var units_before := _units()
@@ -408,7 +409,7 @@ func _test_malformed_commerce_blocks_rejected() -> void:
 		var broken_id := SaveStore.write_entry("manual", 3, broken)
 		settled_events.clear()
 		_check(broken_id != "" and not app.load_save(broken_id), "malformed commerce rejected: " + label)
-		_check(_units() == units_before and app.calendar_minutes == minutes_before and int(app.commerce_ledger_state()["settledWeekIndex"]) == cursor_before and app.commerce.company_for_manager("zhao-ling") == SHANGHAI and settled_events.is_empty(), "rejected load leaves state unchanged: " + label)
+		_check(_units() == units_before and app.calendar_minutes == minutes_before and int(app.commerce_ledger_state()["settledWeekIndex"]) == cursor_before and app.commerce.company_for_manager("zhao-ling") == NEW_YORK and settled_events.is_empty(), "rejected load leaves state unchanged: " + label)
 	var good_id := SaveStore.write_entry("manual", 3, good)
 	_check(app.load_save(good_id), "the unmodified block still loads")
 
@@ -418,7 +419,7 @@ func _test_malformed_commerce_blocks_rejected() -> void:
 func _test_travel_week_index_must_match_clock() -> void:
 	_fresh_run_at(2026, 10, 14, 10, 0)
 	_recruit_merchant("zhao-ling")
-	app.open_commerce_company(SHANGHAI, "zhao-ling")
+	app.open_commerce_company(NEW_YORK, "zhao-ling")
 	app.advance_calendar(TravelCalendar.MINUTES_PER_WEEK * 2, "rest")
 	var good: Dictionary = app.make_snapshot("map", Vector2.ZERO, "manual_note")
 	var week := int(good["travel"]["calendarWeekIndex"])
@@ -458,10 +459,10 @@ func _test_travel_week_index_must_match_clock() -> void:
 func _test_retired_city_keeps_companion_recallable() -> void:
 	_fresh_run_at(2026, 10, 14, 10, 0)
 	_recruit_merchant("zhao-ling")
-	app.open_commerce_company(SHANGHAI, "zhao-ling")
+	app.open_commerce_company(NEW_YORK, "zhao-ling")
 	var snapshot: Dictionary = app.make_snapshot("map", Vector2.ZERO, "manual_note")
-	snapshot["commerce"]["companies"]["earth.xx.retired-city"] = snapshot["commerce"]["companies"][SHANGHAI]
-	snapshot["commerce"]["companies"].erase(SHANGHAI)
+	snapshot["commerce"]["companies"]["earth.xx.retired-city"] = snapshot["commerce"]["companies"][NEW_YORK]
+	snapshot["commerce"]["companies"].erase(NEW_YORK)
 	var id := SaveStore.write_entry("manual", 3, snapshot)
 	_check(app.load_save(id) and app.commerce.company_for_manager("zhao-ling") == "earth.xx.retired-city", "a company in a place later removed from data still loads")
 	var recall: Dictionary = app.recall_commerce_manager("earth.xx.retired-city")
@@ -471,7 +472,7 @@ func _test_retired_city_keeps_companion_recallable() -> void:
 func _test_new_run_clears_commerce() -> void:
 	_fresh_run_at(2026, 10, 14, 10, 0)
 	_recruit_merchant("zhao-ling")
-	app.open_commerce_company(SHANGHAI, "zhao-ling")
+	app.open_commerce_company(NEW_YORK, "zhao-ling")
 	app.advance_calendar(TravelCalendar.MINUTES_PER_WEEK * 3, "rest")
 	_check(_units() > 0, "setup earned some units")
 	app.begin_new_run()

@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
   "planVersion": "v0.2",
-  "updatedAt": "2026-10-15T18:35:00Z",
+  "updatedAt": "2026-10-15T22:45:00Z",
   "currentStep": "M8",
   "steps": [
     {
@@ -23,7 +23,7 @@
       "id": "M2",
       "title": "World map and exploration",
       "status": "in_progress",
-      "summary": "The global Earth map with a Yangtze Delta regional layer, route preview/confirm/cancel, an integer-minute calendar and save migration are implemented and pass Godot automated tests. A provisional weekly commerce ledger settles on that calendar, and an engineering-candidate Merchant path reaches it in play: a companion switches to Merchant at a level-10 job choice and runs a city company from the world map. M2 is not complete: the first-city and underground anchors, the world start year, validated door-to-door route figures, an actual air route, all map art and human review remain open.",
+      "summary": "The global Earth map, route preview/confirm/cancel, an integer-minute calendar and save migration are implemented and pass Godot automated tests. On 2026-10-15 the runtime was migrated to the creator-decided US science sphere as an implemented technical candidate: NYC (start, Lower Manhattan City Hall Park scene), Yonkers outskirts, abandoned Washington, D.C. ruins at the Capitol, the NYC-Chicago air route and a Chicago Loop technical placeholder district; new runs start 2537-05-25 (08:00 is a placeholder time of day). The travel registry now holds the five Earth spheres (science US + Canada, magic South America, wuxia Asia, nature Oceania, culture Europe + Africa, former fantasy kept as an alias only) plus the separate portal-only final planet; only science has places. A provisional weekly commerce ledger settles on the calendar and an engineering-candidate Merchant path reaches it in play. M2 is not complete: route figures are preliminary estimates, the City Hall Park, Capitol and Loop art does not exist, the map art is a functional placeholder, the Catskills community is not a runtime place, and no human has reviewed the map or played it.",
       "acceptance": "Reach and leave science-region scenes from a global map; use real bilingual place names and geographically plausible car/air routes; verify travel-time, date, save/load and weekly-settlement behavior.",
       "evidence": [
         "Godot 4.7.2, 2026-10-15 (per the M2 QA notes): GLOBAL_TRAVEL_CORE_OK; GLOBAL_EARTH_MAP_SMOKE_OK checks=201; GLOBAL_MAP_TRAVEL_INTEGRATION_OK checks=103; revised M2_SMOKE_OK (pick place → route card → depart); M1–M8 smokes OK; CANVAS_POINTER_REGRESSION_OK at 1280×720",
@@ -37,24 +37,26 @@
         "docs/qa/rpg-2-star-ocean-the-second_commerce-weekly-settlement_calendar-hookup_qa-note_m2-v01_20261015-082014-bef9e5a4.md (commit 192c63b: provisional CommerceLedger settles at the calendar week rollover; COMMERCE_WEEKLY_SETTLEMENT_OK checks=149)",
         "docs/qa/rpg-2-star-ocean-the-second_merchant-career-city-commerce_playable-path_qa-note_m2-v01_20261015-091137-4f40adc4.md (engineering candidate, not accepted: Merchant job and modal city company panel; MERCHANT_CITY_COMMERCE_PATH_OK checks=109; commerce 149 and GLOBAL_MAP_TRAVEL_INTEGRATION_OK checks=104 still pass)",
         "docs/qa/rpg-2-star-ocean-the-second_merchant-fair-quote_rank-passive-weekly-settlement_qa-note_m2-v01_20261015-132840-9c1dcc80.md (engineering candidate, not accepted: stage-2 Fair Quote as a JP-upgradable provisional commerce passive, +5 % of base per rank on companion-rate weeks; the company panel separates the full-week rate from the partial NPC 80 % week after (re-)stationing; old-save regression pays 105 at rank 1; MERCHANT_FAIR_QUOTE_OK checks=91; zh/en 1280x720 captures FAIR_QUOTE_CAPTURE_OK captures=6)",
-        "Earlier slice (does not count for the new rule): old three-destination M2_SMOKE_OK and four 2026-10-13 visual proofs"
+        "Earlier slice (does not count for the new rule): old three-destination M2_SMOKE_OK and four 2026-10-13 visual proofs",
+        "docs/qa/rpg-2-star-ocean-the-second_us-science-sphere_runtime-migration_qa-note_m2-v02_20261015-175011-364131c8.md (US science-sphere runtime migration: v02 travel data, US map regions, Chicago Loop placeholder, retired Shanghai aliases, 2537-05-25 start)",
+        "docs/qa/rpg-2-star-ocean-the-second_global-earth-map_great-lakes-chicago-capture_qa-note-unapproved-v01_20261015-182538-30506f07.md (Great Lakes / Chicago runtime captures; unapproved)",
+        "docs/qa/rpg-2-star-ocean-the-second_five-sphere-registry-and-us-runtime_integration-qa-note_m2-v02_20261015-184437-b3b84617.md (five-sphere region registry, one-Air route label, Loop header layout, Bible/progress reconciliation; re-run test results)"
       ],
       "remaining": [
-        "Decide the first science city (Shanghai is provisional) and the underground-community geographic anchor (user decision, not a defect).",
-        "Decide the world start year; the calendar start 2026-04-01 08:00 is an engineering placeholder (user decision).",
-        "Replace the Rome2Rio point-to-point estimates with validated, sourced door-to-door figures (current door-to-door allowance is 0; reverse trips assume symmetry; Songjiang→Liangzhu direct is unverified and not selectable).",
-        "Add an actual air route to game data. The air-route packet lists three research candidates (SHA→PEK, SHA→CAN, SHA→HND); none is selected and no new playable city is chosen. Plane and plane+car formats are only checked with a test fixture.",
-        "Produce and accept the map art (colours, label boxes, roads and markers are functional placeholders).",
+        "Route figures: the US car and airport-drive figures come from the OSRM demo server (non-commercial terms) and the NYC-Chicago flight minutes from BTS July 2026 medians plus a 120-minute check-in allowance. All are preliminary estimates; re-derive with a self-hosted OSRM on a dated OpenStreetMap extract and confirm the public-domain terms before release. Yonkers-Chicago and Washington-Chicago have no route.",
+        "Art for the implemented places: City Hall Park, a recognizable collapsed and overgrown U.S. Capitol (the Washington Pixelorama pilot) and the Chicago Loop. The scenes use the old generic plates or a code-drawn placeholder that is labelled unapproved on screen.",
+        "Produce and accept the map art (colours, label boxes, roads and markers are functional placeholders; there is no US road layer).",
         "Human map review and the two human timed playtests (0/2).",
+        "Creator decisions still open for M2: the training prologue start date, and whether saves made under the old 2026-04-01 placeholder should be shifted into 2537 (they currently keep their absolute 2026 date).",
         "Commerce is provisional. Merchant is a 2-stage MVP (行商 → 契约经理); the full 20-series × 5-stage career canon is future work. Neither job skill works in battle. Stage-1 Supply Pact is a placeholder that takes no JP. Stage-2 Fair Quote is a provisional JP-upgradable commerce passive: +5 % of the base per rank, on weeks paid at the companion rate only. Ledger points are not currency: there is no balance, spending, robber event or price effect."
       ],
-      "blocker": "First-city and underground-community anchors and the world start year await the user; Shanghai is provisional. Route minutes stay preliminary estimates until validated door-to-door figures exist; no air route is in the data.",
+      "blocker": "The creator-decided US science sphere (NYC / Lower Manhattan City Hall Park, Yonkers, Washington, D.C., NYC-Chicago, the Chicago Loop) and the 2537-05-25 start are implemented in the runtime as technical candidates; the superseded provisional Shanghai set survives only as hidden save aliases. M2 stays in progress: route figures are preliminary, the place and map art is missing or unaccepted, the Catskills community has no runtime place, and human review and the two timed playtests (0/2) are outstanding.",
       "details": [
-        "已实现并通过 Godot 自动测试（2026-10-15 QA 记录）：真实地球全图与长江三角洲地区层（缩放、平移、点选、中英文地名）；路线卡预览、出发一次性结算、取消／Esc 不扣时间、所在地免费进入；整数分钟日历（跨日、跨年、闰年进位，同一时间轴上发出周交替信号）；存读档与旧档迁移（不凭空加天、不重复扣时）。",
-        "测试标记：GLOBAL_TRAVEL_CORE_OK；GLOBAL_EARTH_MAP_SMOKE_OK checks=201；GLOBAL_MAP_TRAVEL_INTEGRATION_OK checks=103；新版 M2_SMOKE_OK；CANVAS_POINTER_REGRESSION_OK。12 张 1280×720 实机截图（中英文各 6 张）只是运行证据，未验收。旧三点 M2_SMOKE_OK 不计入新规则。",
-        "仍待用户决定（不是缺陷）：首城（上海暂定）、地下社区锚点、世界开始年份（日历起点 2026-04-01 08:00 为工程占位）。",
-        "仍待制作或核实：路线为 Rome2Rio 地点到地点初步估算（上海→松江 34.8 km／26 分；上海→良渚 187.9 km／2 小时；松江→良渚经上海 146 分），门到门附加时间为 0；松江→良渚直达未核验；数据中没有航空路线，三条航线候选只是研究资料。地图美术未制作、未验收；未经人工审阅与试玩。",
-        "商会：暂定 CommerceLedger 已接入日历周结算（提交 192c63b，COMMERCE_WEEKLY_SETTLEMENT_OK checks=149）。工程候选（未验收）：伙伴可在 10 级职业选择时转为行商（只做 行商 → 契约经理 两阶 MVP，完整 20 系列 × 5 阶职业设定留待以后），并在已发现的城市从世界地图「商会」派驻经营（MERCHANT_CITY_COMMERCE_PATH_OK checks=109）。行商职业技能在战斗中都不可用；一阶补给协议仍是占位，不能花 JP；二阶公平报价是暂定的经营被动，可花 JP 升级，每级为伙伴全效周加基础收益的 5 %（1/2/3 级 = 105/110/115 %），NPC 经营周不加成；商会面板标明满周收益，并在派驻或重新派驻后的未满一周注明按普通 NPC 80 % 结算；旧存档中已是 1 级的契约经理下次结算得 105（MERCHANT_FAIR_QUOTE_OK checks=91）；账目点数不是货币，没有平衡、劫匪事件或价格影响。首城与开始年份仍是暂定。"
+        "已实现并通过 Godot 自动测试：真实地球全图与美国东北部、五大湖两个地区层（缩放、平移、点选、中英文地名）；路线卡预览、出发一次性结算、取消／Esc 不扣时间、所在地免费进入；整数分钟日历（跨日、跨年、闰年进位，同一时间轴上发出周交替信号）；存读档与旧档迁移（不凭空加天、不重复扣时；旧上海组合 ID 作为隐藏别名解析到纽约、扬克斯、华盛顿）。",
+        "测试标记（2026-10-15 整合复跑）：GLOBAL_TRAVEL_CORE_OK；GLOBAL_EARTH_MAP_SMOKE_OK checks=212；GLOBAL_MAP_TRAVEL_INTEGRATION_OK checks=105；COMMERCE_WEEKLY_SETTLEMENT_OK checks=149；US_SCIENCE_MIGRATION_SMOKE_OK checks=32；新版 M2_SMOKE_OK。实机截图只是运行证据，未验收。旧三点 M2_SMOKE_OK 不计入新规则。",
+        "创作者决定（2026-10-15）已在运行时实现为技术候选：科技中心纽约（新游戏起点，曼哈顿下城市政厅公园场景），城外扬克斯，华盛顿特区国会大厦废墟（勘察站与巡逻自动机），首条航线纽约—芝加哥，芝加哥卢普区为明确标注“技术占位 · 美术未验收”的可步行街区；新游戏从 2537-05-25 开始（08:00 为占位时刻）。旅行数据登记五个地球文明圈（科技：美国＋加拿大；魔法：南美洲；武侠：亚洲；自然：大洋洲；文化：欧洲＋非洲，原奇幻只作别名）与独立的传送门终局星球；只有科技圈有地点。地下社区（卡茨基尔山附近）尚无运行时地点。",
+        "仍待制作或核实：汽车与机场接驳旅时来自 OSRM 演示服务器，纽约—芝加哥航班分钟来自 BTS 2026 年 7 月中位数，另加 120 分钟值机等候，均为初步估算；扬克斯—芝加哥、华盛顿—芝加哥无路线。市政厅公园、可辨认的国会大厦废墟与卢普区美术均未制作；地图美术未制作、未验收；未经人工审阅与试玩。",
+        "商会：暂定 CommerceLedger 已接入日历周结算（提交 192c63b，COMMERCE_WEEKLY_SETTLEMENT_OK checks=149）。工程候选（未验收）：伙伴可在 10 级职业选择时转为行商（只做 行商 → 契约经理 两阶 MVP，完整 20 系列 × 5 阶职业设定留待以后），并在已发现的城市从世界地图「商会」派驻经营（MERCHANT_CITY_COMMERCE_PATH_OK checks=109）。行商职业技能在战斗中都不可用；一阶补给协议仍是占位，不能花 JP；二阶公平报价是暂定的经营被动，可花 JP 升级，每级为伙伴全效周加基础收益的 5 %（1/2/3 级 = 105/110/115 %），NPC 经营周不加成；商会面板标明满周收益，并在派驻或重新派驻后的未满一周注明按普通 NPC 80 % 结算；旧存档中已是 1 级的契约经理下次结算得 105（MERCHANT_FAIR_QUOTE_OK checks=91）；账目点数不是货币，没有平衡、劫匪事件或价格影响。首城与开始日期已按创作者决定实现为技术候选。"
       ]
     },
     {
@@ -254,7 +256,7 @@
         "人工试玩检查伙伴跟随、四向行走节奏、发型辨识、战斗动作和中英文界面；完成 M7 两轮真实试玩。",
         "Pixelorama 女主南向待机试点：由用户对缩放版、手绘版及 BOX／LANCZOS 量化候选四张 48 逻辑像素截图进行 E10 审查（细节是否保留、发丝高光是否有用、量化后脸部与配件细节是否可接受）；行走速度（R2）、行走帧、其他方向与其余角色尚未开始。",
         "下一步路线：由用户先选定美术基线（BOX、LANCZOS 或都不用；尚未答复），再用 Pixelorama 手绘南向行走姿势（方法 A）；目前不存在任何手绘行走帧。行走速度（R2）与 E10 人工审查仍待用户决定。",
-        "Liangzhu: fix the in-engine pixel grid and ground pin, then author walkable ground, embankments, water, reeds, survey objects and foreground occlusion as separate editable pixel layers; review one section at native 1280x720 with the approved v8 static frame. The Pixelorama environment workflow awaits the creator.",
+        "Liangzhu: fix the in-engine pixel grid and ground pin, then author walkable ground, embankments, water, reeds, survey objects and foreground occlusion as separate editable pixel layers; review one section at native 1280x720 with the approved v8 static frame. On 2026-10-15 the creator approved Pixelorama for this Liangzhu outdoor high-precision pixel scene (workflow permission only; composition and art not accepted). Technical brief and test-only wireframe harness: docs/design/rpg-2-star-ocean-the-second_liangzhu-outdoor-slice_pixelorama-scene-production-brief_technical-v01_20261015-174959-0c10fc1a.md (LIANGZHU_SLICE_WIREFRAME_OK checks=44; flat debug geometry only, not scene art).",
         "User review of sentry animation v2 and of the female south locomotion prototypes (run at 140 px/s vs planted walk); no other direction starts before a south motion is approved."
       ]
     },
@@ -275,7 +277,7 @@
     }
   ],
   "approvalLedger": {
-    "updatedAt": "2026-10-15T06:45:41Z",
+    "updatedAt": "2026-10-15T21:45:59Z",
     "note": "Approval scope is recorded exactly as the user gave it. Direction acceptance is not asset acceptance; no counter below was incremented by these entries.",
     "counters": {
       "identities": 51,
@@ -337,9 +339,10 @@
         "status": "direction_accepted",
         "zh": "良渚土台／湿地地貌方向",
         "en": "Liangzhu earthen-terrace / wetland direction",
-        "scope": "地貌方向已接受；高精度像素场景未制作；v03／v04 为未批准概念。",
+        "scope": "地貌方向已接受；创作者已准许用 Pixelorama 制作良渚室外高精度像素场景（仅流程许可，不是构图或美术验收）；高精度像素场景未制作；v03／v04 为未批准概念。良渚现为未来亚洲／武侠场景，不属于 MVP（2026-10-15）。",
         "evidence": [
-          "docs/qa/rpg-2-star-ocean-the-second_liangzhu-ruins_pixel-art-transition-visual-review_unapproved-v01_20261015-015717-fd5d169d.md"
+          "docs/qa/rpg-2-star-ocean-the-second_liangzhu-ruins_pixel-art-transition-visual-review_unapproved-v01_20261015-015717-fd5d169d.md",
+          "docs/design/rpg-2-star-ocean-the-second_liangzhu-outdoor-slice_pixelorama-scene-production-brief_technical-v01_20261015-174959-0c10fc1a.md"
         ]
       },
       {
@@ -356,14 +359,14 @@
     ]
   },
   "m2Expansion": {
-    "updatedAt": "2026-10-15T17:08:52Z",
+    "updatedAt": "2026-10-15T22:45:00Z",
     "rule": "docs/design/rpg-2-star-ocean-the-second_global-earth-map-real-place-travel_rules-v01_20261014-235354-2b5d4d98.md",
     "researchPacket": "docs/design/rpg-2-star-ocean-the-second_shanghai-liangzhu_geography-route-art-packet_provisional-v01_20261015-000319-a3e65b7c.md",
     "anchor": {
-      "status": "provisional",
-      "zh": "上海（暂定，待用户决定）",
-      "en": "Shanghai (provisional, pending user decision)",
-      "note": "松江是上海市的一个区，不是独立城市；良渚古城遗址在杭州地区。"
+      "status": "implemented_technical_candidate",
+      "zh": "纽约（曼哈顿下城市政厅公园；运行时已实现为技术候选，美术未验收）",
+      "en": "New York City (Lower Manhattan City Hall Park; implemented in the runtime as a technical candidate, art not accepted)",
+      "note": "城外扬克斯、华盛顿特区国会大厦废墟与芝加哥卢普区技术占位街区均已接入运行时；地下社区在卡茨基尔山附近（设计已定，尚无运行时地点）。已被取代的上海暂定组合只保留为隐藏的旧档别名；良渚为未来亚洲／武侠场景，不属于 MVP。"
     },
     "gates": [
       {
@@ -372,25 +375,22 @@
         "en": "Globe & regional map",
         "owner": "地图界面",
         "status": "implemented",
-        "detail": "游戏内为真实地球全图与长江三角洲地区层，可缩放、平移、点选地点，中英文地名。旧三点区域图已停用。地图美术另列，未验收。",
+        "detail": "游戏内为真实地球全图与美国东北部、五大湖两个地区层，可缩放、平移、点选地点，中英文地名。长江三角洲地区层已停用（文件留档）。地图美术另列，未验收。",
         "evidence": [
-          "docs/qa/rpg-2-star-ocean-the-second_global-earth-map_runtime-implementation_qa-note_m2-v01_20261015-024300-15ce9195.md",
-          "docs/qa/rpg-2-star-ocean-the-second_global-map-travel_integration-fixes_qa-note_m2-v02_20261015-031824-35247192.md",
-          "outputs/rpg-2-star-ocean-the-second_global-earth-map_globe-zh-runtime-capture_m2-v02_20261015-031426-9a107595.png",
-          "outputs/rpg-2-star-ocean-the-second_global-earth-map_globe-en-runtime-capture_m2-v02_20261015-031426-9a107595.png",
-          "outputs/rpg-2-star-ocean-the-second_global-earth-map_yangtze-delta-zh-runtime-capture_m2-v02_20261015-031426-9a107595.png",
-          "outputs/rpg-2-star-ocean-the-second_global-earth-map_yangtze-delta-en-runtime-capture_m2-v02_20261015-031426-9a107595.png"
+          "docs/qa/rpg-2-star-ocean-the-second_us-science-sphere_runtime-migration_qa-note_m2-v02_20261015-175011-364131c8.md",
+          "docs/qa/rpg-2-star-ocean-the-second_global-earth-map_great-lakes-chicago-capture_qa-note-unapproved-v01_20261015-182538-30506f07.md"
         ]
       },
       {
         "id": "place-registry",
-        "zh": "地点登记（暂定三处）",
-        "en": "Place registry (provisional set)",
+        "zh": "地点登记（美国科技圈）",
+        "en": "Place registry (US science sphere)",
         "owner": "旅行核心",
         "status": "implemented",
-        "detail": "上海、松江郊外、良渚古城遗址有稳定 ID、坐标、中英文名、行政名和场景入口；地图标记与核心坐标完全一致。三处仍是暂定组合，首城定后替换。",
+        "detail": "纽约（市政厅公园）、扬克斯、华盛顿特区国会大厦废墟、芝加哥卢普区有稳定 ID、坐标、来源、中英文名和场景入口；地图标记与核心坐标一致。区域登记为五个地球文明圈加终局星球，科技圈限美国与加拿大并由校验器强制。旧上海组合 ID 为隐藏别名，不列出、不可发现。",
         "evidence": [
-          "docs/qa/rpg-2-star-ocean-the-second_global-map-travel_integration-fixes_qa-note_m2-v02_20261015-031824-35247192.md"
+          "docs/qa/rpg-2-star-ocean-the-second_us-science-sphere_runtime-migration_qa-note_m2-v02_20261015-175011-364131c8.md",
+          "docs/qa/rpg-2-star-ocean-the-second_five-sphere-registry-and-us-runtime_integration-qa-note_m2-v02_20261015-184437-b3b84617.md"
         ]
       },
       {
@@ -401,11 +401,7 @@
         "status": "implemented",
         "detail": "路线卡显示交通方式、里程、旅时、抵达日期和“估算”标记。连按出发只结算一次；取消、Esc 或改选都不扣时间；所在地免费进入；接口不符时不能出发，也不显示数字。",
         "evidence": [
-          "docs/qa/rpg-2-star-ocean-the-second_global-map-travel_integration-fixes_qa-note_m2-v02_20261015-031824-35247192.md",
-          "outputs/rpg-2-star-ocean-the-second_global-earth-map_yangtze-delta-songjiang-card-zh-runtime-capture_m2-v02_20261015-031426-9a107595.png",
-          "outputs/rpg-2-star-ocean-the-second_global-earth-map_yangtze-delta-liangzhu-card-en-runtime-capture_m2-v02_20261015-031426-9a107595.png",
-          "outputs/rpg-2-star-ocean-the-second_global-earth-map_yangtze-delta-shanghai-here-card-en-runtime-capture_m2-v02_20261015-031426-9a107595.png",
-          "outputs/rpg-2-star-ocean-the-second_global-earth-map_yangtze-delta-liangzhu-no-route-api-card-zh-runtime-capture_m2-v02_20261015-031426-9a107595.png",
+          "docs/qa/rpg-2-star-ocean-the-second_us-science-sphere_runtime-migration_qa-note_m2-v02_20261015-175011-364131c8.md",
           "outputs/rpg-2-star-ocean-the-second_scifi-canvas_pointer-regression-receipt_m8-v01_20261015-071805-548c0f0f.json"
         ]
       },
@@ -427,9 +423,10 @@
         "en": "Save/load & legacy migration",
         "owner": "旅行核心",
         "status": "implemented",
-        "detail": "存档保存地点、日期和分钟。读档不重复扣时，也不触发周结算。没有旅行数据的旧档从日历起点开始，不凭空加天，地点保留。",
+        "detail": "存档保存地点、日期和分钟。读档不重复扣时，也不触发周结算。没有旅行数据的旧档从日历起点开始，不凭空加天。旧上海组合 ID（地点、已发现列表、商会键）读档时解析为纽约、扬克斯、华盛顿，再存只写美国 ID；旧档保留原有的 2026 绝对日期（是否平移到 2537 待创作者决定）。",
         "evidence": [
-          "docs/qa/rpg-2-star-ocean-the-second_global-map-travel_integration-fixes_qa-note_m2-v02_20261015-031824-35247192.md"
+          "docs/qa/rpg-2-star-ocean-the-second_global-map-travel_integration-fixes_qa-note_m2-v02_20261015-031824-35247192.md",
+          "docs/qa/rpg-2-star-ocean-the-second_us-science-sphere_runtime-migration_qa-note_m2-v02_20261015-175011-364131c8.md"
         ]
       },
       {
@@ -438,10 +435,10 @@
         "en": "Godot automated tests",
         "owner": "地图界面 + 旅行核心",
         "status": "implemented",
-        "detail": "核心冒烟、地图冒烟 201 项、整合回归 103 项、新版 M2 冒烟、中英文画面文字检查和 1280×720 真实点击回归均通过（2026-10-15）。只证明功能可用，不代表首城、真实旅时或美术已验收。",
+        "detail": "2026-10-15 整合复跑：核心冒烟、地图冒烟 212 项、整合回归 105 项、商会周结算 149 项、美国科技圈迁移冒烟 32 项、新版 M2 冒烟与中英文窗口截图检查均通过（此前为 201／103 项）。只证明功能可用，不代表真实旅时、场景美术或地图美术已验收。",
         "evidence": [
-          "docs/qa/rpg-2-star-ocean-the-second_global-earth-map_runtime-implementation_qa-note_m2-v01_20261015-024300-15ce9195.md",
-          "docs/qa/rpg-2-star-ocean-the-second_global-map-travel_integration-fixes_qa-note_m2-v02_20261015-031824-35247192.md",
+          "docs/qa/rpg-2-star-ocean-the-second_us-science-sphere_runtime-migration_qa-note_m2-v02_20261015-175011-364131c8.md",
+          "docs/qa/rpg-2-star-ocean-the-second_five-sphere-registry-and-us-runtime_integration-qa-note_m2-v02_20261015-184437-b3b84617.md",
           "outputs/rpg-2-star-ocean-the-second_scifi-canvas_pointer-regression-receipt_m8-v01_20261015-071805-548c0f0f.json"
         ]
       },
@@ -449,22 +446,23 @@
         "id": "anchor",
         "zh": "首城与地下社区锚点",
         "en": "First city & community anchor",
-        "owner": "用户决定",
-        "status": "awaiting_decision",
-        "detail": "上海为暂定首城；地下社区的现实位置未定。这是待你决定的设计选择，不是程序缺陷。",
+        "owner": "创作者决定 · 旅行核心实现",
+        "status": "implemented",
+        "detail": "已决定并已在运行时实现为技术候选：新游戏从纽约开始，曼哈顿下城市政厅公园场景、城外扬克斯、华盛顿特区国会大厦废墟均可到达。场景仍用旧的通用科技区底图，市政厅公园与可辨认的国会大厦美术未制作。地下社区在卡茨基尔山附近（设计已定，尚无运行时地点）。",
         "evidence": [
-          "docs/design/rpg-2-star-ocean-the-second_shanghai-liangzhu_geography-route-art-packet_provisional-v01_20261015-000319-a3e65b7c.md"
+          "docs/qa/rpg-2-star-ocean-the-second_us-science-sphere_runtime-migration_qa-note_m2-v02_20261015-175011-364131c8.md",
+          "docs/qa/rpg-2-star-ocean-the-second_five-sphere-registry-and-us-runtime_integration-qa-note_m2-v02_20261015-184437-b3b84617.md"
         ]
       },
       {
         "id": "start-year",
         "zh": "世界开始年份",
         "en": "World start year",
-        "owner": "用户决定",
-        "status": "awaiting_decision",
-        "detail": "日历起点 2026-04-01 08:00 只是工程占位值，不是剧情设定。开始年份由你决定，改动只影响新游戏。",
+        "owner": "创作者决定 · 旅行核心实现",
+        "status": "implemented",
+        "detail": "已决定并已实现：新游戏日历从 2537-05-25 08:00 开始（08:00 为占位时刻）。旧档保留原 2026 日期（是否平移待创作者决定）；受训序章的起始日期未给出。",
         "evidence": [
-          "docs/qa/rpg-2-star-ocean-the-second_global-map-travel_integration-fixes_qa-note_m2-v02_20261015-031824-35247192.md"
+          "docs/qa/rpg-2-star-ocean-the-second_us-science-sphere_runtime-migration_qa-note_m2-v02_20261015-175011-364131c8.md"
         ]
       },
       {
@@ -473,10 +471,9 @@
         "en": "Door-to-door route figures",
         "owner": "旅行核心",
         "status": "estimate_only",
-        "detail": "现用数值是 Rome2Rio 地点到地点初步估算（非门到门）：上海→松江 34.8 km／26 分；上海→良渚 187.9 km／2 小时；松江→良渚经上海 146 分。门到门附加时间为 0，反向按对称假设；松江→良渚未核验直达路线，不可选。",
+        "detail": "美国科技圈数值均为初步估算（非核验）：纽约→扬克斯 28.2 km／35 分；纽约→华盛顿 363.2 km／289 分；扬克斯→华盛顿 388.0 km／306 分（OSRM 演示服务器，非商业条款）；纽约⇄芝加哥航线 365／338 分。门到门附加时间为 0；扬克斯—芝加哥、华盛顿—芝加哥无路线。旧上海组合的 Rome2Rio 数值已停用。",
         "evidence": [
-          "docs/design/rpg-2-star-ocean-the-second_shanghai-liangzhu_geography-route-art-packet_provisional-v01_20261015-000319-a3e65b7c.md",
-          "docs/qa/rpg-2-star-ocean-the-second_global-map-travel_integration-fixes_qa-note_m2-v02_20261015-031824-35247192.md"
+          "docs/qa/rpg-2-star-ocean-the-second_us-science-sphere_runtime-migration_qa-note_m2-v02_20261015-175011-364131c8.md"
         ]
       },
       {
@@ -484,10 +481,11 @@
         "zh": "航空路线",
         "en": "Air route",
         "owner": "旅行核心",
-        "status": "research_only",
-        "detail": "游戏数据中没有航空路线；飞机与“飞机＋汽车”只用测试夹具检查过格式。研究资料列出三条候选：上海虹桥→北京首都、上海虹桥→广州白云、上海虹桥→东京羽田。都未选定，也没有新增可玩城市。",
+        "status": "implemented",
+        "detail": "已决定并已实现：纽约—芝加哥航线在游戏数据中，去程 365 分、回程 338 分（含机场接驳、120 分钟值机等候与航班时间），航程 1177.1 km；到达后进入卢普区技术占位街区。数值为初步估算（BTS 2026 年 7 月航班中位数与 OSRM 演示服务器车程），未核验。",
         "evidence": [
-          "docs/design/rpg-2-star-ocean-the-second_shanghai-cross-city-air-route_research-packet_unapproved-v01_20261015-031235-9d63971b.md"
+          "docs/qa/rpg-2-star-ocean-the-second_us-science-sphere_runtime-migration_qa-note_m2-v02_20261015-175011-364131c8.md",
+          "docs/qa/rpg-2-star-ocean-the-second_global-earth-map_great-lakes-chicago-capture_qa-note-unapproved-v01_20261015-182538-30506f07.md"
         ]
       },
       {
@@ -496,7 +494,7 @@
         "en": "Map art",
         "owner": "美术",
         "status": "not_started",
-        "detail": "配色、标签框、道路和标记都是功能占位，还没有按本作像素美术制作。全球与地区样稿是未批准的静态研究。",
+        "detail": "配色、标签框、道路和标记都是功能占位，还没有按本作像素美术制作；美国地区层没有道路图层。全球与地区样稿是未批准的静态研究。卢普区为代码绘制的技术占位场景。",
         "evidence": [
           "docs/qa/rpg-2-star-ocean-the-second_geography-rule_visual-regression-review_unapproved-v01_20261015-003237-f8f604dd.md"
         ]
@@ -507,61 +505,28 @@
         "en": "Human review & playtests",
         "owner": "用户",
         "status": "human_pending",
-        "detail": "地图未经真人审阅；人工计时试玩 0/2；场景画质 0/11。截图只是运行证据。",
+        "detail": "地图与美国科技圈场景未经真人审阅；人工计时试玩 0/2；场景画质 0/11。截图只是运行证据。",
         "evidence": []
       }
     ],
-    "airRoutePacket": "docs/design/rpg-2-star-ocean-the-second_shanghai-cross-city-air-route_research-packet_unapproved-v01_20261015-031235-9d63971b.md"
+    "airRoutePacket": "docs/design/rpg-2-star-ocean-the-second_shanghai-cross-city-air-route_research-packet_unapproved-v01_20261015-031235-9d63971b.md",
+    "creatorDecision": {
+      "recordedAt": "2026-10-15T21:45:59Z",
+      "note": "docs/design/rpg-2-star-ocean-the-second_creator-decisions-2026-10-15_world-skills-ai-endgame_reconciliation-note_v01_20261015-174559-39efc292.md",
+      "scienceHub": "纽约 / New York City",
+      "firstPlayable": "曼哈顿下城 · 市政厅公园 / Lower Manhattan · City Hall Park",
+      "outskirts": "扬克斯 / Yonkers",
+      "undergroundCommunity": "卡茨基尔山附近 / near the Catskills",
+      "washingtonDC": "废城；高精度 Pixelorama 场景试点 / abandoned city; high-precision Pixelorama scene pilot",
+      "firstAirRoute": "纽约—芝加哥 / NYC-Chicago",
+      "mvpChicago": "卢普区 / the Loop",
+      "adventureStart": "2537-05-25",
+      "runtimeImplemented": true,
+      "runtimeStatus": "technical candidate (2026-10-15): NYC, Yonkers, Washington ruins, NYC-Chicago, Chicago Loop placeholder and the 2537-05-25 start are in the runtime and pass Godot tests; art, sourced route figures, the Catskills community place and human review are open",
+      "runtimeEvidence": "docs/qa/rpg-2-star-ocean-the-second_us-science-sphere_runtime-migration_qa-note_m2-v02_20261015-175011-364131c8.md"
+    }
   },
   "decisions": [
-    {
-      "id": "first-city",
-      "kind": "blocked",
-      "zh": "首个科技城市",
-      "en": "First science city",
-      "detail": "候选：上海（当前暂定）；规则文件另列东京、新加坡出发的遗迹候选，仅供参考。换首城只替换路线组，不改规则。这是设计决定，不是程序缺陷。",
-      "awaiting": "用户"
-    },
-    {
-      "id": "community-anchor",
-      "kind": "blocked",
-      "zh": "地下社区的现实地理锚点",
-      "en": "Underground-community geographic anchor",
-      "detail": "尚无候选；待首城确定后再定。",
-      "awaiting": "用户"
-    },
-    {
-      "id": "world-start-year",
-      "kind": "blocked",
-      "zh": "世界开始年份",
-      "en": "World start year",
-      "detail": "日历起点 2026-04-01 08:00 是工程占位值，不是剧情设定；开始年份待定。改动只影响新游戏，存档保留各自的绝对日期。",
-      "awaiting": "用户"
-    },
-    {
-      "id": "songjiang-label",
-      "kind": "candidate",
-      "zh": "城外场景标签",
-      "en": "Outskirts scene label",
-      "detail": "候选“松江郊外 / Songjiang Outskirts”：松江是上海的区，“郊外”是场景类型；具体入口点未定。",
-      "awaiting": "首城确定后"
-    },
-    {
-      "id": "air-route-pair",
-      "kind": "candidate",
-      "zh": "航空模式验收路线",
-      "en": "Air-mode validation route",
-      "detail": "研究资料（未批准）列出三条候选：上海虹桥→北京首都（两市政府页面证实航线存在，飞行时间只有非官方数据）；上海虹桥→广州白云（官方 2024 年时刻，飞行 145 分，资料建议只作测试夹具）；上海虹桥→东京羽田（跨国，需另定时区与出入境处理）。都只是研究，未选定，未写入游戏数据，也没有新增可玩城市。",
-      "awaiting": "用户（首城确定后）"
-    },
-    {
-      "id": "liangzhu-pixel-workflow",
-      "kind": "blocked",
-      "zh": "良渚像素场景制作流程",
-      "en": "Liangzhu pixel-scene workflow",
-      "detail": "方向已接受；QA 建议以 v01 地貌为场景简报、v04 路径层次为可选参考，分层制作可编辑像素图。Pixelorama 环境流程待创作者答复。",
-      "awaiting": "用户"
-    },
     {
       "id": "sentry-v2",
       "kind": "candidate",
@@ -577,6 +542,54 @@
       "en": "Female south locomotion",
       "detail": "v2 研究结论：48 像素下 140 px/s 只适合跑步（方案 A）；贴地行走约 16 px/s（方案 B）。均未批准。最初的 v3 跑步构建脚本未通过运行前技术审计（部分草稿）；修复基础设施后，v3r2 已构建并在 Godot 中做游戏比例预览，仍未批准、未接入运行，Codex 指出触地高度、停步跳变与腾空漂浮问题。",
       "awaiting": "用户审阅"
+    },
+    {
+      "id": "prologue-start-date",
+      "kind": "blocked",
+      "zh": "受训序章起始日期",
+      "en": "Training prologue start date",
+      "detail": "正式冒险从 2537-05-25 开始（已定）；序章受训一年，其起始日期未给出。",
+      "awaiting": "用户"
+    },
+    {
+      "id": "old-save-dates",
+      "kind": "blocked",
+      "zh": "旧档日期是否平移到 2537",
+      "en": "Shift old saves into 2537?",
+      "detail": "运行时已从 2537-05-25 开始新游戏；在 2026-04-01 占位日历下做的旧档读档后仍显示 2026 日期（按“存档保留绝对日期”规则）。若平移，还需按整周偏移以保持商会结算一致。",
+      "awaiting": "用户"
+    },
+    {
+      "id": "skill-tree-redesign",
+      "kind": "blocked",
+      "zh": "10 节点技能树重设计",
+      "en": "10-node skill-tree redesign",
+      "detail": "规则已定：每条系列 10 节点（5 阶各 2 个立即开放）、51 个角色各 10 个个人节点、技能最高 5 级。现有 7 节点／5 节点提案已被取代；200 + 510 个节点尚未编写，完成后需用户审阅。",
+      "awaiting": "设计，然后用户审阅"
+    },
+    {
+      "id": "companion-sphere-mapping",
+      "kind": "blocked",
+      "zh": "伙伴的文明圈归属",
+      "en": "Companion sphere assignment",
+      "detail": "旧板块标签可直接对应：奇幻即文化文明圈（同一文明圈更名），星外即终局星球；数据仍存旧标签，界面按新名显示。仍待设计：武侠文明圈暂无伙伴，50 位伙伴的分配需调整以覆盖武侠。",
+      "awaiting": "角色设计，然后用户审阅"
+    },
+    {
+      "id": "romance-10",
+      "kind": "blocked",
+      "zh": "10 位恋爱对象与阶段",
+      "en": "Romance: 10 identities and stages",
+      "detail": "暂缓；人选、阶段与质量验收均待定。",
+      "awaiting": "用户（暂缓）"
     }
-  ]
+  ],
+  "designDecisions": {
+    "recordedAt": "2026-10-15T21:45:59Z",
+    "note": "docs/design/rpg-2-star-ocean-the-second_creator-decisions-2026-10-15_world-skills-ai-endgame_reconciliation-note_v01_20261015-174559-39efc292.md",
+    "runtimeImplemented": "partial",
+    "zh": "创作者 2026-10-15 决定：全球真实地名地图；正式冒险 2537-05-25；地下社区在卡茨基尔山附近；科技中心纽约（美国 + 加拿大），首个可玩区域曼哈顿下城市政厅公园，城外扬克斯；华盛顿特区废城为高精度 Pixelorama 场景试点；首条航线纽约—芝加哥，MVP 芝加哥卢普区；良渚为未来亚洲／武侠场景，不属于 MVP；五个地球文明圈（科技／魔法／武侠／自然／文化）与传送门后的终局星球；20 系列五阶名称与终阶任务已批准；技能 10 节点新规则待重新设计；AI、组合技、名声、价格传播与后期场景规则见说明。后期可重复场景（五个地球文明圈各 2 个＋终局星球 2 个）属于完整游戏，不属于 MVP。2026-10-15 晚：美国科技圈地理、纽约—芝加哥航线、2537-05-25 开局与五文明圈区域登记已在运行时实现为技术候选；技能、AI、组合技、名声、价格传播与后期场景尚未实现。",
+    "en": "Creator decisions 2026-10-15: global real-place Earth map; adventure starts 2537-05-25; underground community near the Catskills; Science hub NYC (US + Canada), first playable Lower Manhattan City Hall Park, Yonkers outskirts; abandoned Washington, D.C. is the high-precision Pixelorama scene pilot; first air route NYC-Chicago, MVP Chicago the Loop; Liangzhu is a future Asia/Wuxia scene, not MVP; five Earth spheres (Science/Magic/Wuxia/Nature/Culture) plus a final planet via portal; 20 job series stage names and final quests approved; new 10-node skill rules pending redesign; AI, combo, reputation, price-propagation and endgame rules in the note. The endgame repeatable scenes (2 per Earth sphere plus 2 on the final planet) are full-game content, not MVP. Later on 2026-10-15 the US science-sphere geography, the NYC-Chicago air route, the 2537-05-25 start and the five-sphere region registry were implemented in the runtime as technical candidates; skills, AI, combos, reputation, price propagation and endgame scenes are not implemented.",
+    "runtimeImplementedScope": "US science-sphere geography, NYC-Chicago air route, 2537-05-25 start and the five-sphere region registry are runtime technical candidates (2026-10-15); skills, AI, combos, reputation, price propagation and endgame scenes are not implemented."
+  }
 }

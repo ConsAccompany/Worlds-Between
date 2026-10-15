@@ -11,7 +11,13 @@ const GeoProjection := preload("res://scripts/world_geo_projection.gd")
 const MapData := preload("res://scripts/world_map_data.gd")
 const RouteAdapter := preload("res://scripts/world_map_route_adapter.gd")
 const MAP_SCENE := "res://scenes/scifi_world_map.tscn"
-const PLACE_IDS := ["earth.cn.shanghai", "earth.cn.shanghai.songjiang-outskirts", "earth.cn.liangzhu-ruins"]
+# 2026-10-15: US science sphere. The first three share the US Northeast view; Chicago has its own.
+const PLACE_IDS := ["earth.us.ny.new-york-city", "earth.us.ny.yonkers-outskirts", "earth.us.dc.washington-ruins"]
+const CHICAGO := "earth.us.il.chicago"
+const NE := "us_northeast"
+const LAKES := "us_great_lakes"
+# Natural Earth 10m coastlines are generalised; a shoreline place may sit just off the polygon.
+const COAST_TOLERANCE_KM := 2.0
 
 var checks := 0
 # Loaded at run time: the map script references the AppState autoload, which a --script
@@ -29,7 +35,7 @@ class LegacyProvider:
 # has an air route. These numbers never reach the game.
 class FixtureProvider:
 	extends RefCounted
-	var current_location_id := "earth.cn.shanghai"
+	var current_location_id := "earth.us.ny.new-york-city"
 	var current_destination_id := "scifi.city"
 	var calendar_minutes := 0
 	var confirmed := []
@@ -87,27 +93,37 @@ func _projection_checks() -> bool:
 	var region := GeoProjection.new(121.0, 30.8)
 	if not _check(is_equal_approx(region.x_factor, cos(deg_to_rad(30.8))), "regional projection uses its standard parallel"):
 		return false
-	var shanghai := _core_coordinates("earth.cn.shanghai")
-	var songjiang := _core_coordinates("earth.cn.shanghai.songjiang-outskirts")
-	var liangzhu := _core_coordinates("earth.cn.liangzhu-ruins")
-	var sh_sj := GeoProjection.great_circle_km(shanghai.x, shanghai.y, songjiang.x, songjiang.y)
-	var sh_lz := GeoProjection.great_circle_km(shanghai.x, shanghai.y, liangzhu.x, liangzhu.y)
-	if not _check(sh_sj > 20.0 and sh_sj < 40.0 and sh_lz > 150.0 and sh_lz < 180.0, "travel-data places are real-distance plausible (%.1f km, %.1f km)" % [sh_sj, sh_lz]):
+	var nyc := _core_coordinates(PLACE_IDS[0])
+	var yonkers := _core_coordinates(PLACE_IDS[1])
+	var dc := _core_coordinates(PLACE_IDS[2])
+	var nyc_yk := GeoProjection.great_circle_km(nyc.x, nyc.y, yonkers.x, yonkers.y)
+	var nyc_dc := GeoProjection.great_circle_km(nyc.x, nyc.y, dc.x, dc.y)
+	if not _check(nyc_yk > 15.0 and nyc_yk < 35.0 and nyc_dc > 300.0 and nyc_dc < 350.0, "travel-data places are real-distance plausible (%.1f km, %.1f km)" % [nyc_yk, nyc_dc]):
 		return false
-	# The straight-line distance is never shown as a route; road 187.9 km > great circle.
-	return _check(GeoProjection.format_lat_lon(119.991, 30.396) == "30.396°N  119.991°E", "coordinate text")
+	if not _check(GeoProjection.format_lat_lon(-77.009, 38.890) == "38.890°N  77.009°W" and GeoProjection.format_lat_lon(119.991, 30.396) == "30.396°N  119.991°E", "coordinate text in both hemispheres"):
+		return false
+	return _check(MapScript.degree_text(-74, "E", "W") == "74°W" and MapScript.degree_text(41, "N", "S") == "41°N" and MapScript.degree_text(0, "E", "W") == "0°E", "grid labels name W longitudes")
 
 
 func _geodata_checks() -> bool:
 	var data := MapData.geodata()
 	var repo := ProjectSettings.globalize_path("res://").path_join("..").simplify_path()
 	for source in data["sources"]:
+		# Sources not kept in the repository are checked for upstream URL and hash below.
+		if source.get("path") == null:
+			continue
 		var bytes := FileAccess.get_file_as_bytes(repo.path_join(source["path"]))
 		if not _check(not bytes.is_empty() and _text_lf_sha256(bytes) == source["sha256"], "source hash matches " + String(source["id"])):
 			return false
 	var global_rings := MapData.global_land_rings()
-	var region_rings := MapData.region_land_rings("yangtze_delta")
-	if not _check(global_rings.size() >= 100 and region_rings.size() >= 5 and MapData.region_roads("yangtze_delta").size() >= 500, "land and road layers loaded"):
+	for source in data["sources"]:
+		if source.get("path") == null:
+			if not _check(String(source.get("upstream", "")).begins_with("https://") and String(source.get("sha256", "")).length() == 64 and source.get("retained_copy") == false, "unretained source names its upstream and hash: " + String(source["id"])):
+				return false
+	var region_rings := MapData.region_land_rings(MapData.geodata_key(NE))
+	if not _check(MapData.geodata_key(NE) == "us_east" and MapData.geodata_key(LAKES) == "us_east", "both US regions draw from the us_east layer"):
+		return false
+	if not _check(global_rings.size() >= 100 and region_rings.size() >= 5 and MapData.region_roads("us_east").is_empty(), "land layers loaded; the US layer has no road subset yet"):
 		return false
 	var west := 0.0
 	var east := 0.0
@@ -119,30 +135,32 @@ func _geodata_checks() -> bool:
 			return false
 	if not _check(west <= -179.9 and east >= 179.9, "global land spans the antimeridian"):
 		return false
-	for id in PLACE_IDS:
+	for id in PLACE_IDS + [CHICAGO]:
 		var at := _core_coordinates(id)
-		if not _check(MapData.is_on_land(at.x, at.y, region_rings), "on 50m land: " + id):
+		if not _check(MapData.is_on_land(at.x, at.y, region_rings) or _km_to_land(at, region_rings) < COAST_TOLERANCE_KM, "on or within %.0f km of 10m land: %s" % [COAST_TOLERANCE_KM, id]):
 			return false
-	if not _check(not MapData.is_on_land(123.5, 30.5, region_rings) and not MapData.is_on_land(-150.0, 0.0, global_rings) and MapData.is_on_land(20.0, 10.0, global_rings), "sea and land samples"):
+	if not _check(not MapData.is_on_land(-70.0, 39.0, region_rings) and not MapData.is_on_land(-87.0, 43.0, region_rings) and not MapData.is_on_land(-81.5, 42.2, region_rings) and MapData.is_on_land(-77.0, 38.9, region_rings), "Atlantic, Lake Michigan and Lake Erie are water; Washington is land"):
+		return false
+	if not _check(not MapData.is_on_land(-150.0, 0.0, global_rings) and MapData.is_on_land(20.0, 10.0, global_rings), "global sea and land samples"):
 		return false
 	return true
 
 
 func _adapter_checks() -> bool:
 	var legacy := RouteAdapter.new(LegacyProvider.new())
-	var pending := legacy.preview("earth.cn.liangzhu-ruins")
+	var pending := legacy.preview("earth.us.dc.washington-ruins")
 	if not _check(not legacy.api_available() and not legacy.api_problems().is_empty() and pending["status"] == "pending_api" and pending["options"].is_empty(), "no route core -> pending, no options"):
 		return false
-	if not _check(legacy.places().size() == 3 and legacy.current_place_id() == "earth.cn.shanghai" and legacy.calendar_text() == "", "fallback places and no calendar"):
+	if not _check(legacy.places().size() == 4 and legacy.current_place_id() == "earth.us.ny.new-york-city" and legacy.calendar_text() == "", "fallback places and no calendar"):
 		return false
 	for place in legacy.places():
 		if not _check(Vector2(place["lon"], place["lat"]) == _core_coordinates(place["id"]), "fallback marker uses travel-data coordinates: " + String(place["id"])):
 			return false
-	if not _check(not legacy.confirm("earth.cn.liangzhu-ruins", "")["ok"], "no route core -> confirm refuses to depart"):
+	if not _check(not legacy.confirm("earth.us.dc.washington-ruins", "")["ok"], "no route core -> confirm refuses to depart"):
 		return false
 	var fixture := FixtureProvider.new()
 	var adapter := RouteAdapter.new(fixture)
-	var ready := adapter.preview("earth.cn.liangzhu-ruins")
+	var ready := adapter.preview("earth.us.dc.washington-ruins")
 	if not _check(adapter.api_available() and ready["status"] == "ready" and ready["options"].size() == 1 and ready["unverified"].size() == 1, "fixture splits available and unverified"):
 		return false
 	var text: String = MapScript.route_option_text(ready["options"][0])
@@ -150,8 +168,8 @@ func _adapter_checks() -> bool:
 		return false
 	if not _check(not ready["unverified"][0].has("total_minutes"), "unverified option carries no minutes"):
 		return false
-	var confirm := adapter.confirm("earth.cn.liangzhu-ruins", "fixture.air")
-	return _check(confirm["ok"] and fixture.confirmed == [["earth.cn.liangzhu-ruins", "fixture.air"]], "confirm passes destination and option to the core")
+	var confirm := adapter.confirm("earth.us.dc.washington-ruins", "fixture.air")
+	return _check(confirm["ok"] and fixture.confirmed == [["earth.us.dc.washington-ruins", "fixture.air"]], "confirm passes destination and option to the core")
 
 
 func _ui_checks() -> bool:
@@ -166,7 +184,7 @@ func _ui_checks() -> bool:
 	var map: Node = current_scene
 	var core := RouteAdapter.new(app).api_available()
 	print("route core API available: ", core)
-	if not _check(map.mode == "global" and map.destination_buttons.size() == 3 and map.region_buttons["yangtze_delta"].visible, "map opens on the globe with a region marker"):
+	if not _check(map.mode == "global" and map.destination_buttons.size() == 4 and map.region_buttons[NE].visible and map.region_buttons[LAKES].visible, "map opens on the globe with a region marker"):
 		return false
 	for id in map.place_buttons:
 		if not _check(not map.place_buttons[id].visible, "place markers hidden at globe scale: " + id):
@@ -184,17 +202,21 @@ func _ui_checks() -> bool:
 			if not _check(place["lon"] == float(location["coordinates"]["lon"]) and place["lat"] == float(location["coordinates"]["lat"]) and place["scene_destination_id"] == location["sceneDestinationId"], "marker uses route-core coordinates exactly: " + String(place["id"])):
 				return false
 
-	# Wheel zoom over the delta until the regional layer opens.
-	var anchor: Vector2 = map.view.geo_to_screen(121.0, 31.0)
+	var ne_rect := Rect2(map.region_buttons[NE].position, map.region_buttons[NE].size)
+	var lakes_rect := Rect2(map.region_buttons[LAKES].position, map.region_buttons[LAKES].size)
+	if not _check(not ne_rect.intersects(lakes_rect), "the two US region markers do not overlap on the globe"):
+		return false
+	# Wheel zoom over New York until the regional layer opens.
+	var anchor: Vector2 = map.view.geo_to_screen(-74.5, 40.5)
 	for step in 12:
 		if map.mode == "region":
 			break
 		var wheel := InputEventMouseButton.new()
 		wheel.button_index = MOUSE_BUTTON_WHEEL_UP
 		wheel.pressed = true
-		wheel.position = map.view.geo_to_screen(121.0, 31.0)
+		wheel.position = map.view.geo_to_screen(-74.5, 40.5)
 		map._on_map_input(wheel)
-	if not _check(map.mode == "region" and map.region_layer.visible and not map.global_layer.visible, "wheel zoom reaches the Yangtze Delta layer"):
+	if not _check(map.mode == "region" and map.active_region_id == NE and map.region_layer.visible and not map.global_layer.visible and not map.region_layers[LAKES].visible, "wheel zoom reaches the US Northeast layer only"):
 		return false
 	var frame := Rect2(Vector2.ZERO, MapScript.MAP_RECT.size)
 	var rects := []
@@ -211,13 +233,14 @@ func _ui_checks() -> bool:
 		for j in range(i + 1, rects.size()):
 			if not _check(not rects[i].intersects(rects[j]), "labels do not overlap: %s / %s" % [PLACE_IDS[i], PLACE_IDS[j]]):
 				return false
-	var sh: Vector2 = map.marker_position(PLACE_IDS[0])
-	var sj: Vector2 = map.marker_position(PLACE_IDS[1])
-	var lz: Vector2 = map.marker_position(PLACE_IDS[2])
-	if not _check(sh.x > sj.x and sj.x > lz.x and sh.y < sj.y and sj.y < lz.y, "Songjiang SW of Shanghai, Liangzhu further SW"):
+	var ny: Vector2 = map.marker_position(PLACE_IDS[0])
+	var yk: Vector2 = map.marker_position(PLACE_IDS[1])
+	var dc: Vector2 = map.marker_position(PLACE_IDS[2])
+	if not _check(yk.y < ny.y and absf(yk.x - ny.x) < 12.0 and dc.x < ny.x and dc.y > ny.y, "Yonkers north of Lower Manhattan, Washington to the south-west"):
 		return false
-	var km_screen: float = sh.distance_to(lz) * map.view.km_per_pixel()
-	if not _check(absf(km_screen - GeoProjection.great_circle_km(map.find_place(PLACE_IDS[0])["lon"], map.find_place(PLACE_IDS[0])["lat"], map.find_place(PLACE_IDS[2])["lon"], map.find_place(PLACE_IDS[2])["lat"])) < 6.0, "screen distance matches ground distance at the region scale"):
+	var km_screen: float = ny.distance_to(dc) * map.view.km_per_pixel()
+	var km_ground := GeoProjection.great_circle_km(map.find_place(PLACE_IDS[0])["lon"], map.find_place(PLACE_IDS[0])["lat"], map.find_place(PLACE_IDS[2])["lon"], map.find_place(PLACE_IDS[2])["lat"])
+	if not _check(absf(km_screen - km_ground) < 0.02 * km_ground, "screen distance matches ground distance within 2%% at the region scale (%.1f vs %.1f km)" % [km_screen, km_ground]):
 		return false
 	var before_center: Vector2 = map.view.center
 	var drag := InputEventMouseButton.new()
@@ -231,14 +254,14 @@ func _ui_checks() -> bool:
 	map._on_map_input(drag)
 	if not _check(not map.view.center.is_equal_approx(before_center), "drag pans the map"):
 		return false
-	map.enter_region("yangtze_delta")
+	map.enter_region(NE)
 
 	# Route card: preview and cancel never change the clock or location.
 	var minutes_before: int = app.calendar_minutes if core else 0
 	var location_before: String = app.current_location_id if core else ""
 	map.destination_buttons["scifi.ruins"].pressed.emit()
 	await _settle()
-	if not _check(map.route_card.visible and map.card_title.text == "良渚古城遗址", "Liangzhu card opens with its real name"):
+	if not _check(map.route_card.visible and map.card_title.text == "华盛顿特区废墟", "Washington ruins card opens with its real name"):
 		return false
 	if core:
 		var option_text: String = map.card_options.get_child(0).text if map.card_options.get_child_count() > 0 else ""
@@ -259,7 +282,7 @@ func _ui_checks() -> bool:
 	# Fallback presentation with no core: departure disabled, no digits, nothing changes.
 	var real_adapter = map.route_adapter
 	map.route_adapter = RouteAdapter.new(LegacyProvider.new())
-	map.select_place("earth.cn.liangzhu-ruins")
+	map.select_place("earth.us.dc.washington-ruins")
 	if not _check(map.depart_button.disabled and map.depart_button.text == "无法出发" and not _has_digit(map.card_route.text) and map.card_options.get_child_count() == 0, "legacy provider disables departure without numbers"):
 		return false
 	var fallback_destination: String = app.current_destination_id
@@ -272,9 +295,9 @@ func _ui_checks() -> bool:
 	# English labels show both names.
 	app.toggle_language()
 	await _settle()
-	var primary: Label = map.place_buttons["earth.cn.liangzhu-ruins"].get_node("Primary")
-	var secondary: Label = map.place_buttons["earth.cn.liangzhu-ruins"].get_node("Secondary")
-	if not _check(map.title_label.text.contains("Science region") and primary.text == "Archaeological Ruins of Liangzhu City" and secondary.text == "良渚古城遗址", "English title and bilingual place label"):
+	var primary: Label = map.place_buttons["earth.us.dc.washington-ruins"].get_node("Primary")
+	var secondary: Label = map.place_buttons["earth.us.dc.washington-ruins"].get_node("Secondary")
+	if not _check(map.title_label.text.contains("Science region") and primary.text == "Washington, D.C. Ruins" and secondary.text == "华盛顿特区废墟", "English title and bilingual place label"):
 		return false
 	app.toggle_language()
 	await _settle()
@@ -310,7 +333,7 @@ func _ui_checks() -> bool:
 		return false
 	map.depart_button.pressed.emit()
 	await _settle()
-	if not _check(current_scene.name == "ScifiExplorationArea" and app.current_destination_id == "scifi.city", "enter Shanghai scene"):
+	if not _check(current_scene.name == "ScifiExplorationArea" and app.current_destination_id == "scifi.city", "enter the City Hall Park scene"):
 		return false
 	if core and not _check(app.calendar_minutes == minutes_before, "entering the current place is free"):
 		return false
@@ -325,15 +348,24 @@ func _ui_checks() -> bool:
 		expected_minutes = int(option["total_minutes"])
 	map.depart_button.pressed.emit()
 	await _settle()
-	if not _check(current_scene.name == "ScifiExplorationArea" and app.current_destination_id == "scifi.outskirts", "depart reaches Songjiang scene"):
+	if not _check(current_scene.name == "ScifiExplorationArea" and app.current_destination_id == "scifi.outskirts", "depart reaches the Yonkers scene"):
 		return false
-	if core and not _check(app.current_location_id == "earth.cn.shanghai.songjiang-outskirts" and app.calendar_minutes == minutes_before + expected_minutes, "travel charged the core's minutes once"):
+	if core and not _check(app.current_location_id == "earth.us.ny.yonkers-outskirts" and app.calendar_minutes == minutes_before + expected_minutes, "travel charged the core's minutes once"):
 		return false
 	current_scene.get("back_button").pressed.emit()
 	await _settle()
 	map = current_scene
-	if core and not _check(map.route_adapter.current_place_id() == "earth.cn.shanghai.songjiang-outskirts", "map origin follows the party"):
+	if core and not _check(map.route_adapter.current_place_id() == "earth.us.ny.yonkers-outskirts", "map origin follows the party"):
 		return false
+	map.select_place(CHICAGO)
+	await _settle()
+	var air_text: String = map.card_options.get_child(0).text if map.card_options.get_child_count() > 0 else ""
+	if not _check(map.active_region_id == LAKES and map.region_layers[LAKES].visible and not map.region_layers[NE].visible and map.place_buttons[CHICAGO].visible and not map.place_buttons[PLACE_IDS[0]].visible, "picking Chicago opens the Great Lakes view"):
+		return false
+	if core and not _check(map.route_state["status"] == "no_route" and map.depart_button.disabled, "no researched Yonkers-Chicago route: departure disabled, no time shown"):
+		return false
+	map.close_route_card()
+	map.enter_region(NE)
 	# Zooming out past the region minimum returns to the globe.
 	for step in 12:
 		if map.mode == "global":
@@ -348,6 +380,18 @@ func _ui_checks() -> bool:
 static func _core_coordinates(location_id: String) -> Vector2:
 	var coordinates: Dictionary = MapData.travel_data().location(location_id)["coordinates"]
 	return Vector2(float(coordinates["lon"]), float(coordinates["lat"]))
+
+
+# Shortest distance from a point to any land-ring vertex, in km (an upper bound on the true distance).
+static func _km_to_land(at: Vector2, rings: Array) -> float:
+	var best := INF
+	for ring in rings:
+		if ring["hole"]:
+			continue
+		for point in ring["points"]:
+			if absf(point.x - at.x) < 0.2 and absf(point.y - at.y) < 0.2:
+				best = minf(best, GeoProjection.great_circle_km(at.x, at.y, point.x, point.y))
+	return best
 
 
 static func _has_digit(text: String) -> bool:

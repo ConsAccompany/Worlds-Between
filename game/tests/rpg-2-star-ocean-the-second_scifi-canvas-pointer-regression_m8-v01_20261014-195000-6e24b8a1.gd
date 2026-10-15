@@ -116,11 +116,11 @@ func _run() -> void:
 		return
 	await _capture("map-zh")
 	# The global map places buttons from real coordinates, so positions are read from the
-	# scene: region marker -> Shanghai marker -> route card Depart/Enter, all as window pixels.
-	var region_button: Button = current_scene.get("region_buttons")["yangtze_delta"]
+	# scene: region marker -> New York City marker -> route card Depart/Enter, all as window pixels.
+	var region_button: Button = current_scene.get("region_buttons")["us_northeast"]
 	await _click_window_pixel(_physical_center(region_button))
 	if current_scene.get("mode") != "region":
-		_fail("physical region-marker click did not open the Yangtze Delta layer")
+		_fail("physical region-marker click did not open the US Northeast layer")
 		return
 	var city_button: Button = current_scene.get("destination_buttons")["scifi.city"]
 	city_physical = _physical_center(city_button)

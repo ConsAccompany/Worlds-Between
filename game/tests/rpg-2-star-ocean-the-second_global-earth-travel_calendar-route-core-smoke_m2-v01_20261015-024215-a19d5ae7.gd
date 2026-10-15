@@ -2,11 +2,14 @@ extends SceneTree
 
 # Core checks for the revised M2 global travel calendar and route data (no map UI).
 # Run: Godot --headless --path game --script res://tests/<this file>
-const SHANGHAI := "earth.cn.shanghai"
-const SONGJIANG := "earth.cn.shanghai.songjiang-outskirts"
-const LIANGZHU := "earth.cn.liangzhu-ruins"
-const DIRECT_SONGJIANG_LIANGZHU := "route.car.songjiang-outskirts__liangzhu-ruins.direct"
-const VIA_SHANGHAI := "route.car.songjiang-outskirts__liangzhu-ruins.via-shanghai"
+# 2026-10-15: creator-approved US science sphere. The Shanghai set is kept as hidden retired aliases.
+const NEW_YORK := "earth.us.ny.new-york-city"
+const YONKERS := "earth.us.ny.yonkers-outskirts"
+const WASHINGTON := "earth.us.dc.washington-ruins"
+const CHICAGO := "earth.us.il.chicago"
+const RETIRED := {"earth.cn.shanghai": NEW_YORK, "earth.cn.shanghai.songjiang-outskirts": YONKERS, "earth.cn.liangzhu-ruins": WASHINGTON}
+const AIR_NYC_CHICAGO := "route.air.nyc__chicago"
+const PENDING_YONKERS_CHICAGO := "route.pending.yonkers__chicago"
 const SAVE_ROOT := "user://test-saves/m2-global-travel"
 
 var app: Node
@@ -35,6 +38,8 @@ func _run() -> void:
 	_test_week_hook()
 	_test_save_load_without_recharge()
 	_test_legacy_and_unknown_id_migration()
+	_test_shanghai_era_save_migration()
+	_test_air_trip()
 	_test_bilingual_text()
 	_clear_saves()
 	if failures > 0:
@@ -77,6 +82,14 @@ func _test_calendar_facts() -> void:
 	for year in per_year:
 		leap_helper_agrees = leap_helper_agrees and TravelCalendar.is_leap_year(int(year)) == (int(per_year[year]) == 366) and TravelCalendar.days_in_month(int(year), 2) == int(per_year[year]) - 337
 	_check(leap_helper_agrees, "is_leap_year/days_in_month agree with counted year lengths 1900-2100")
+	# Far-future checks for the 2537 timeline: proleptic Gregorian, so 2600 is not a leap year.
+	_check(int(TravelCalendar.from_minutes(TravelCalendar.to_minutes(2537, 5, 25))["weekday"]) == 6, "2537-05-25 is a Saturday (proleptic Gregorian)")
+	var far_ok := true
+	for day in range(TravelCalendar.days_from_civil(2500, 1, 1), TravelCalendar.days_from_civil(2700, 12, 31) + 1):
+		var far := TravelCalendar.civil_from_days(day)
+		far_ok = far_ok and TravelCalendar.days_from_civil(int(far["year"]), int(far["month"]), int(far["day"])) == day
+	_check(far_ok and TravelCalendar.is_leap_year(2540) and not TravelCalendar.is_leap_year(2600) and TravelCalendar.is_leap_year(2800), "2500-2700 round-trips; 2540 leap, 2600 not")
+	_check(TravelCalendar.iso_text(TravelCalendar.to_minutes(2537, 5, 25, 8, 0)) == "2537-05-25 08:00", "far-future ISO text")
 	_check(not bool(TravelCalendar.parse_minutes("2027-02-29")["ok"]) and bool(TravelCalendar.parse_minutes("2028-02-29")["ok"]) and not bool(TravelCalendar.parse_minutes("2100-02-29")["ok"]) and bool(TravelCalendar.parse_minutes("2000-02-29")["ok"]), "Feb 29 only parses in Gregorian leap years")
 
 
@@ -86,56 +99,76 @@ func _test_route_data() -> void:
 	var earth := 0
 	for region_id in registry.regions:
 		earth += int(registry.regions[region_id]["planet"] == "earth")
-	_check(earth == 4 and registry.regions["offworld"]["access"] == "portal", "four Earth regions plus a portal-only offworld region")
-	_check(registry.location_for_scene("scifi.city") == SHANGHAI and registry.location_for_scene("scifi.outskirts") == SONGJIANG and registry.location_for_scene("scifi.ruins") == LIANGZHU, "existing scene IDs bind to real places")
-	# Geography sanity: Liangzhu (Hangzhou) lies south-west of Shanghai; Songjiang is south-west of central Shanghai.
-	var shanghai: Dictionary = registry.location(SHANGHAI)["coordinates"]
-	var liangzhu: Dictionary = registry.location(LIANGZHU)["coordinates"]
-	var songjiang: Dictionary = registry.location(SONGJIANG)["coordinates"]
-	_check(float(liangzhu["lat"]) < float(shanghai["lat"]) and float(liangzhu["lon"]) < float(shanghai["lon"]), "Liangzhu is south-west of Shanghai")
-	_check(float(songjiang["lat"]) < float(shanghai["lat"]) and float(songjiang["lon"]) < float(shanghai["lon"]), "Songjiang is south-west of central Shanghai")
+	_check(earth == 5 and registry.regions["offworld"]["access"] == "portal" and registry.regions["offworld"]["planet"] != "earth", "five Earth spheres plus a separate portal-only final planet")
+	var sphere_ids: Array = registry.regions.keys()
+	sphere_ids.sort()
+	_check(sphere_ids == ["culture", "magic", "nature", "offworld", "science", "wuxia"], "regions are science, magic, wuxia, nature, culture and the final planet: " + str(sphere_ids))
+	# Culture is the former Fantasy sphere: "fantasy" survives only as an explicit alias, never as an active region.
+	_check(not registry.regions.has("fantasy") and registry.resolve_region_id("fantasy") == "culture" and registry.resolve_region_id("nonexistent") == "", "fantasy is an alias of culture, not an active region")
+	for region_id in registry.regions:
+		if region_id != "science":
+			var has_place := false
+			for location_id in registry.location_order:
+				has_place = has_place or registry.locations[location_id]["regionId"] == region_id
+			_check(not has_place, "no places yet outside the science sphere: " + region_id)
+	_check(registry.regions["science"].get("countryCodes", []) == ["US", "CA"], "science sphere is the US and Canada only")
+	for location_id in registry.location_order:
+		var place: Dictionary = registry.locations[location_id]
+		if place["regionId"] == "science":
+			_check(place.get("countryCode", "") in ["US", "CA"], "science place is in the US or Canada: " + location_id)
+	_check(registry.calendar_start_minutes == TravelCalendar.to_minutes(2537, 5, 25, 8, 0), "new runs start 2537-05-25 (08:00 is an engineering placeholder time of day)")
+	_check(registry.start_location_id == NEW_YORK, "New York City is the science hub and start location")
+	_check(registry.location_for_scene("scifi.city") == NEW_YORK and registry.location_for_scene("scifi.outskirts") == YONKERS and registry.location_for_scene("scifi.ruins") == WASHINGTON and registry.location_for_scene("scifi.loop") == CHICAGO, "scene IDs bind to the US places")
+	# Retired Shanghai-set IDs resolve to their successors but are never listed or discoverable.
+	for retired_id in RETIRED:
+		_check(registry.resolve_location_id(retired_id) == RETIRED[retired_id] and not registry.location_order.has(retired_id) and registry.retired_locations.has(retired_id), "retired id resolves to its US successor and stays hidden: " + retired_id)
+	_check(not app.travel_location_ids().has("earth.cn.shanghai") and app.travel_location_ids().size() == 4, "only the four US places are listed")
+	# Geography sanity from the stored coordinates.
+	var nyc: Dictionary = registry.location(NEW_YORK)["coordinates"]
+	var yonkers: Dictionary = registry.location(YONKERS)["coordinates"]
+	var dc: Dictionary = registry.location(WASHINGTON)["coordinates"]
+	var chicago: Dictionary = registry.location(CHICAGO)["coordinates"]
+	_check(float(yonkers["lat"]) > float(nyc["lat"]) and absf(float(yonkers["lon"]) - float(nyc["lon"])) < 0.3, "Yonkers lies north of Lower Manhattan")
+	_check(float(dc["lat"]) < float(nyc["lat"]) and float(dc["lon"]) < float(nyc["lon"]), "Washington lies south-west of New York")
+	_check(float(chicago["lon"]) < -87.0 and float(chicago["lat"]) > 41.5, "Chicago lies far west on Lake Michigan")
+	var gc_yonkers := registry.great_circle_km(NEW_YORK, YONKERS)
+	var gc_dc := registry.great_circle_km(NEW_YORK, WASHINGTON)
+	var gc_chicago := registry.great_circle_km(NEW_YORK, CHICAGO)
+	_check(gc_yonkers > 15.0 and gc_yonkers < 35.0 and gc_dc > 300.0 and gc_dc < 350.0 and gc_chicago > 1100.0 and gc_chicago < 1200.0, "real-distance plausible (%.1f, %.1f, %.1f km)" % [gc_yonkers, gc_dc, gc_chicago])
 	var seen_air := false
 	for route_id in registry.route_order:
 		var stored: Dictionary = registry.routes[route_id]
 		for option in registry.routes_between(stored["fromLocationId"], stored["toLocationId"]):
 			if not option["available"]:
 				continue
-			seen_air = seen_air or option["modes"].has("air")
+			_check(not option["verified"] and option["estimate"], "every shipped figure is an estimate, never verified: " + String(option["option_id"]))
 			for leg in option["legs"]:
-				_check(String(leg["source"].get("url", "")) != "" and leg["verification_status"] != "", "leg has source and verification: " + String(leg["segment_id"]))
+				_check(String(leg["source"].get("url", "")) != "" and leg["verification_status"] == "preliminary-estimate", "leg has a source and is a preliminary estimate: " + String(leg["segment_id"]))
+				var straight: float = registry.great_circle_km(leg["from_location_id"], leg["to_location_id"])
 				if leg["mode"] == "car":
 					# A road can never be shorter than the straight line; average speed must be plausible.
-					var straight: float = registry.great_circle_km(leg["from_location_id"], leg["to_location_id"])
 					_check(float(leg["road_distance_km"]) >= straight, "road km >= great-circle km: " + String(leg["segment_id"]))
 					_check(float(leg["road_distance_km"]) / (float(leg["minutes"]) / 60.0) <= 130.0, "car average speed <= 130 km/h: " + String(leg["segment_id"]))
-	_check(not seen_air, "no air route is invented in the provisional data")
-	var air_request := false
-	for request in registry.data.get("pendingRouteRequests", []):
-		air_request = air_request or request.get("mode", "") == "air"
-	_check(air_request, "air validation pair is an explicit pending extension")
-	var options := registry.routes_between(SONGJIANG, LIANGZHU)
-	var direct: Dictionary = {}
-	var via: Dictionary = {}
-	for option in options:
-		if option["option_id"] == DIRECT_SONGJIANG_LIANGZHU:
-			direct = option
-		elif option["option_id"] == VIA_SHANGHAI:
-			via = option
-	_check(not direct.is_empty() and not direct["available"] and direct["unavailable_reason"] == "direct-road-figures-not-verified" and int(direct["total_minutes"]) < 0, "unverified direct Songjiang-Liangzhu route is unavailable and shows no time")
-	var leg_a: Dictionary = registry.routes_between(SONGJIANG, SHANGHAI)[0]
-	var leg_b: Dictionary = registry.routes_between(SHANGHAI, LIANGZHU)[0]
-	_check(not via.is_empty() and via["available"] and via["via_location_ids"] == [SHANGHAI], "via-Shanghai itinerary is available and names Shanghai")
-	_check(int(via.get("total_minutes", 0)) == int(leg_a["total_minutes"]) + int(leg_b["total_minutes"]) and is_equal_approx(float(via.get("road_distance_km", 0.0)), float(leg_a["road_distance_km"]) + float(leg_b["road_distance_km"])), "via-Shanghai time and road distance are additive")
-	var back: Array[Dictionary] = registry.routes_between(LIANGZHU, SONGJIANG)
-	var back_via: Dictionary = {}
-	for option in back:
-		if option["option_id"] == VIA_SHANGHAI:
-			back_via = option
-	_check(not back_via.is_empty() and back_via["legs"][0]["from_location_id"] == LIANGZHU and back_via["legs"][0]["to_location_id"] == SHANGHAI and back_via["legs"][1]["to_location_id"] == SONGJIANG, "reverse itinerary runs Liangzhu -> Shanghai -> Songjiang")
+				else:
+					seen_air = true
+					var segment: Dictionary = registry.segments[leg["segment_id"]]
+					var parts := 0
+					for field in WorldRouteRegistry.AIR_MINUTE_FIELDS:
+						parts += int(segment[field])
+					_check(int(leg["minutes"]) == parts + int(segment.get("doorToDoorAllowanceMinutes", 0)) and int(segment["checkInAndWaitMinutes"]) > 0 and int(segment["airportAccessMinutes"]) > 0 and int(segment["airportEgressMinutes"]) > 0, "air leg is door to door (access + check-in/wait + flight + egress): " + String(leg["segment_id"]))
+					_check(absf(float(leg["air_distance_km"]) - straight) < 0.1 * straight, "flight km near the city great circle: " + String(leg["segment_id"]))
+					_check(float(leg["air_distance_km"]) / (float(segment["flightMinutes"]) / 60.0) < 900.0, "flight speed below airliner cruise: " + String(leg["segment_id"]))
+	_check(seen_air, "the NYC-Chicago air route is present")
+	var air: Array[Dictionary] = registry.routes_between(NEW_YORK, CHICAGO)
+	_check(air.size() == 1 and air[0]["option_id"] == AIR_NYC_CHICAGO and air[0]["available"] and air[0]["mode"] == "air" and air[0]["road_distance_km"] == null and float(air[0]["air_distance_km"]) > 1000.0, "NYC to Chicago is one air option with a flight distance")
+	var back: Array[Dictionary] = registry.routes_between(CHICAGO, NEW_YORK)
+	_check(back.size() == 1 and back[0]["available"] and back[0]["legs"][0]["from_location_id"] == CHICAGO and int(back[0]["total_minutes"]) > 0, "Chicago to NYC has its own sourced return flight")
+	var pending: Array[Dictionary] = registry.routes_between(YONKERS, CHICAGO)
+	_check(pending.size() == 1 and pending[0]["option_id"] == PENDING_YONKERS_CHICAGO and not pending[0]["available"] and int(pending[0]["total_minutes"]) < 0, "Yonkers-Chicago has no researched route and shows no time")
 	app.begin_new_run()
 	_check(app.preview_travel("earth.xx.nowhere")["reason"] == "unknown-destination", "unknown destination rejected")
-	app.discovered_locations.erase(LIANGZHU)
-	_check(app.preview_travel(LIANGZHU)["reason"] == "destination-not-discovered", "undiscovered destination rejected")
+	app.discovered_locations.erase(WASHINGTON)
+	_check(app.preview_travel(WASHINGTON)["reason"] == "destination-not-discovered", "undiscovered destination rejected")
 	app.begin_new_run()
 
 
@@ -149,6 +182,7 @@ func _fixture() -> Dictionary:
 			{"id": "r.b", "planet": "earth", "names": {"zh": "乙", "en": "B"}, "access": "car-air"},
 			{"id": "r.c", "planet": "earth", "names": {"zh": "丙", "en": "C"}, "access": "car-air"},
 			{"id": "r.d", "planet": "earth", "names": {"zh": "丁", "en": "D"}, "access": "car-air"},
+			{"id": "r.e", "planet": "earth", "names": {"zh": "戊", "en": "E"}, "access": "car-air", "legacyIds": ["r.old"]},
 			{"id": "r.portal", "planet": "elsewhere", "names": {"zh": "外", "en": "Out"}, "access": "portal"},
 		],
 		"startLocationId": "loc.one",
@@ -184,7 +218,10 @@ func _test_validator_rules() -> void:
 		"legs that do not chain": func(d: Dictionary) -> void: d["routes"][0]["legs"].reverse(),
 		"via list not matching stops": func(d: Dictionary) -> void: d["routes"][0]["viaLocationIds"] = [],
 		"duplicate id": func(d: Dictionary) -> void: d["locations"][1]["id"] = "loc.one",
-		"only three Earth regions": func(d: Dictionary) -> void: d["regions"].remove_at(3),
+		"only four Earth regions": func(d: Dictionary) -> void: d["regions"].remove_at(3),
+		"legacy region id reused by an active region": func(d: Dictionary) -> void: d["regions"][4]["legacyIds"] = ["r.a"],
+		"location in an aliased region id": func(d: Dictionary) -> void: d["locations"][2]["regionId"] = "r.old",
+		"place outside its region's countries (fixture places have no US or CA code)": func(d: Dictionary) -> void: d["regions"][0]["countryCodes"] = ["US", "CA"],
 		"fractional minutes": func(d: Dictionary) -> void: d["segments"][1]["referenceDurationMinutes"] = 99.5,
 		"available route with no legs": func(d: Dictionary) -> void: d["routes"][0]["legs"] = [],
 	}
@@ -208,10 +245,10 @@ func _travel(destination: String, route_id: String = "") -> Dictionary:
 
 func _test_cumulative_short_trips() -> void:
 	app.begin_new_run()
-	_set_clock(2026, 4, 1, 22, 50)
+	_set_clock(2537, 5, 25, 22, 50)
 	var start: int = app.calendar_minutes
-	var leg := int(app.travel_registry().routes_between(SHANGHAI, SONGJIANG)[0]["total_minutes"])
-	var targets := [SONGJIANG, SHANGHAI, SONGJIANG, SHANGHAI, SONGJIANG]
+	var leg := int(app.travel_registry().routes_between(NEW_YORK, YONKERS)[0]["total_minutes"])
+	var targets := [YONKERS, NEW_YORK, YONKERS, NEW_YORK, YONKERS]
 	var charged_each_ok := true
 	for target in targets:
 		var before: int = app.calendar_minutes
@@ -221,60 +258,67 @@ func _test_cumulative_short_trips() -> void:
 	_check(app.calendar_minutes == start + leg * targets.size(), "short trips accumulate")
 	var expected_minute_of_day := (22 * 60 + 50 + leg * targets.size())
 	var dt: Dictionary = app.calendar_datetime()
-	_check(int(dt["day"]) == 1 + expected_minute_of_day / 1440 and int(dt["minute_of_day"]) == expected_minute_of_day % 1440 and int(dt["month"]) == 4, "carried-over minutes roll the date only past midnight")
-	_check(app.current_location_id == SONGJIANG and app.current_destination_id == "scifi.outskirts", "arrival sets location and its scene")
+	_check(int(dt["day"]) == 25 + expected_minute_of_day / 1440 and int(dt["minute_of_day"]) == expected_minute_of_day % 1440 and int(dt["month"]) == 5, "carried-over minutes roll the date only past midnight")
+	_check(app.current_location_id == YONKERS and app.current_destination_id == "scifi.outskirts", "arrival sets location and its scene")
 
 
 func _test_rollover_by_travel() -> void:
 	app.begin_new_run()
-	var leg := int(app.travel_registry().routes_between(SHANGHAI, LIANGZHU)[0]["total_minutes"])
-	_set_clock(2026, 12, 31, 23, 0)
+	var leg := int(app.travel_registry().routes_between(NEW_YORK, WASHINGTON)[0]["total_minutes"])
+	_set_clock(2537, 12, 31, 23, 0)
 	var before: int = app.calendar_minutes
-	var preview: Dictionary = app.preview_travel(LIANGZHU)
-	_check(app.calendar_minutes == before and preview["arrival"]["year"] == 2027, "preview shows next-year arrival without moving the clock")
+	var preview: Dictionary = app.preview_travel(WASHINGTON)
+	_check(app.calendar_minutes == before and preview["arrival"]["year"] == 2538, "preview shows next-year arrival without moving the clock")
 	app.confirm_travel()
 	var dt: Dictionary = app.calendar_datetime()
-	_check(int(dt["year"]) == 2027 and int(dt["month"]) == 1 and int(dt["day"]) == 1 and int(dt["minute_of_day"]) == 23 * 60 + leg - 1440, "travel across New Year's midnight")
+	_check(int(dt["year"]) == 2538 and int(dt["month"]) == 1 and int(dt["day"]) == 1 and int(dt["minute_of_day"]) == 23 * 60 + leg - 1440, "travel across New Year's midnight")
 	_check(int(dt["minute_of_day"]) == int(preview["arrival"]["minute_of_day"]) and int(preview["calendar_days_advanced"]) == 1, "confirmed arrival matches preview")
 	app.begin_new_run()
-	_set_clock(2028, 2, 28, 23, 30)
-	_travel(LIANGZHU)
-	_check(int(app.calendar_datetime()["month"]) == 2 and int(app.calendar_datetime()["day"]) == 29, "leap year 2028 arrives on Feb 29")
+	_set_clock(2540, 2, 28, 23, 30)
+	_travel(WASHINGTON)
+	_check(int(app.calendar_datetime()["month"]) == 2 and int(app.calendar_datetime()["day"]) == 29, "leap year 2540 arrives on Feb 29")
 	app.begin_new_run()
-	_set_clock(2027, 2, 28, 23, 30)
-	_travel(LIANGZHU)
-	_check(int(app.calendar_datetime()["month"]) == 3 and int(app.calendar_datetime()["day"]) == 1, "non-leap 2027 arrives on Mar 1")
+	_set_clock(2539, 2, 28, 23, 30)
+	_travel(WASHINGTON)
+	_check(int(app.calendar_datetime()["month"]) == 3 and int(app.calendar_datetime()["day"]) == 1, "non-leap 2539 arrives on Mar 1")
+	app.begin_new_run()
+	_set_clock(2600, 2, 28, 23, 30)
+	_travel(WASHINGTON)
+	_check(int(app.calendar_datetime()["month"]) == 3 and int(app.calendar_datetime()["day"]) == 1, "century year 2600 is not leap")
 
 
 func _test_cancel_stale_and_free_actions() -> void:
 	app.begin_new_run()
 	calendar_events.clear()
 	var start: int = app.calendar_minutes
-	var preview: Dictionary = app.preview_travel(LIANGZHU)
+	var preview: Dictionary = app.preview_travel(WASHINGTON)
 	_check(preview["kind"] == "travel" and int(preview["total_minutes"]) > 0 and app.calendar_minutes == start, "preview is free")
 	app.cancel_travel_preview()
 	var after_cancel: Dictionary = app.settle_travel()
-	_check(not after_cancel["departed"] and app.calendar_minutes == start and app.current_location_id == SHANGHAI and calendar_events.is_empty(), "cancel costs zero time and leaves nothing to confirm")
-	app.preview_travel(LIANGZHU)
+	_check(not after_cancel["departed"] and app.calendar_minutes == start and app.current_location_id == NEW_YORK and calendar_events.is_empty(), "cancel costs zero time and leaves nothing to confirm")
+	app.preview_travel(WASHINGTON)
 	app.advance_calendar(30, "rest")
 	var stale: Dictionary = app.settle_travel()
-	_check(not stale["departed"] and stale["reason"] == "stale-preview" and app.calendar_minutes == start + 30 and app.current_location_id == SHANGHAI, "preview made before the clock changed cannot be confirmed")
+	_check(not stale["departed"] and stale["reason"] == "stale-preview" and app.calendar_minutes == start + 30 and app.current_location_id == NEW_YORK, "preview made before the clock changed cannot be confirmed")
 	var before: int = app.calendar_minutes
-	var same: Dictionary = app.preview_travel(SHANGHAI)
+	var same: Dictionary = app.preview_travel(NEW_YORK)
 	var same_result: Dictionary = app.settle_travel()
 	_check(same["kind"] == "same_location" and not same_result["departed"] and int(same_result["minutes_charged"]) == 0 and app.calendar_minutes == before, "same-location choice charges nothing")
 	_check(app.enter_current_location_scene() and app.current_destination_id == "scifi.city" and app.calendar_minutes == before, "entering the local scene is free")
 	app.select_destination("scifi.city")
 	_check(app.calendar_minutes == before, "legacy scene entry does not touch the calendar")
-	var first: Dictionary = _travel(SONGJIANG)
+	var first: Dictionary = _travel(YONKERS)
 	var after_first: int = app.calendar_minutes
 	var again: Dictionary = app.settle_travel()
 	_check(first["departed"] and not again["departed"] and app.calendar_minutes == after_first, "a confirmed trip cannot be charged twice")
-	app.preview_travel(LIANGZHU, DIRECT_SONGJIANG_LIANGZHU)
+	app.preview_travel(CHICAGO, PENDING_YONKERS_CHICAGO)
 	var blocked: Dictionary = app.settle_travel()
-	_check(not blocked["departed"] and app.calendar_minutes == after_first and app.current_location_id == SONGJIANG, "unverified direct route cannot be travelled")
-	var via: Dictionary = app.preview_travel(LIANGZHU)
-	_check(via["kind"] == "travel" and via["option_id"] == VIA_SHANGHAI, "default choice falls back to the identified via-Shanghai itinerary")
+	_check(not blocked["departed"] and app.calendar_minutes == after_first and app.current_location_id == YONKERS, "a route with no researched figures cannot be travelled")
+	var none: Dictionary = app.preview_travel(CHICAGO)
+	_check(none["kind"] == "unavailable" and int(none["total_minutes"]) == 0 and app.calendar_minutes == after_first, "Yonkers to Chicago offers no invented time")
+	var direct: Dictionary = app.preview_travel(WASHINGTON)
+	_check(direct["kind"] == "travel" and direct["option_id"] == "route.car.yonkers__washington-ruins", "Yonkers to Washington uses its own sourced drive")
+	app.cancel_travel_preview()
 	_check(not app.advance_calendar(-5, "test") and app.calendar_minutes == after_first, "the clock never runs backwards")
 
 
@@ -283,31 +327,32 @@ func _test_cancel_stale_and_free_actions() -> void:
 func _test_map_adapter_contract() -> void:
 	app.begin_new_run()
 	var options: Array = app.travel_route_options("scifi.city", "scifi.outskirts")
-	_check(options.size() == 1, "scene-ID route query finds the Shanghai-Songjiang route")
+	_check(options.size() == 1, "scene-ID route query finds the New York-Yonkers route")
 	if options.is_empty():
 		return
 	var option: Dictionary = options[0]
-	_check(option.has_all(["option_id", "mode", "road_distance_km", "air_distance_km", "total_minutes", "verified", "source"]) and option["mode"] == "car" and option["air_distance_km"] == null and typeof(option["total_minutes"]) == TYPE_INT and String(option["source"]).contains("Rome2Rio"), "route option has the map adapter shape")
+	_check(option.has_all(["option_id", "mode", "road_distance_km", "air_distance_km", "total_minutes", "verified", "source"]) and option["mode"] == "car" and option["air_distance_km"] == null and typeof(option["total_minutes"]) == TYPE_INT and String(option["source"]).contains("OSRM"), "route option has the map adapter shape")
 	_check(not option["verified"] and option["estimate"], "preliminary third-party figures are flagged as estimates, never as verified")
 	var arrival: Dictionary = app.travel_arrival_preview(int(option["total_minutes"]))
 	_check(arrival.has_all(["year", "month", "day"]) and int(arrival["minutes"]) == app.calendar_minutes + int(option["total_minutes"]), "arrival preview is computed from the current clock")
 	var before: int = app.calendar_minutes
-	_check(app.confirm_travel("scifi.outskirts", String(option["option_id"])) and app.calendar_minutes == before + int(option["total_minutes"]) and app.current_location_id == SONGJIANG, "one-shot confirm with a scene ID and option departs")
+	_check(app.confirm_travel("scifi.outskirts", String(option["option_id"])) and app.calendar_minutes == before + int(option["total_minutes"]) and app.current_location_id == YONKERS, "one-shot confirm with a scene ID and option departs")
 	var after: int = app.calendar_minutes
-	_check(not app.confirm_travel("scifi.ruins", DIRECT_SONGJIANG_LIANGZHU) and app.calendar_minutes == after, "one-shot confirm of an unverified option does not depart")
+	_check(not app.confirm_travel("scifi.loop", PENDING_YONKERS_CHICAGO) and app.calendar_minutes == after, "one-shot confirm of an unavailable option does not depart")
 	_check(not app.confirm_travel("scifi.outskirts") and app.calendar_minutes == after, "one-shot confirm to the current place does not depart")
 
 
 func _test_week_hook() -> void:
 	app.begin_new_run()
-	_set_clock(2026, 10, 18, 22, 30)
+	# 2537-05-26 is a Sunday; the Washington drive runs past Monday 00:00.
+	_set_clock(2537, 5, 26, 22, 30)
 	week_events.clear()
 	var week: int = app.calendar_week_index
-	var preview: Dictionary = app.preview_travel(LIANGZHU)
+	var preview: Dictionary = app.preview_travel(WASHINGTON)
 	_check(week_events.is_empty() and int(preview["weeks_crossed"]) == 1, "preview reports the week change without emitting it")
 	app.confirm_travel()
 	_check(week_events == [[week, week + 1]], "Sunday-night trip into Monday emits one week transition")
-	_travel(SHANGHAI)
+	_travel(NEW_YORK)
 	_check(week_events.size() == 1, "trip within the week emits nothing")
 	app.advance_calendar(TravelCalendar.MINUTES_PER_WEEK * 3, "rest")
 	_check(week_events.size() == 2 and week_events[1] == [week + 1, week + 4], "multi-week advance reports all weeks crossed in one event")
@@ -315,19 +360,19 @@ func _test_week_hook() -> void:
 
 func _test_save_load_without_recharge() -> void:
 	app.begin_new_run()
-	_set_clock(2026, 10, 18, 23, 0)
-	_travel(LIANGZHU)
+	_set_clock(2537, 5, 26, 23, 0)
+	_travel(WASHINGTON)
 	var saved_minutes: int = app.calendar_minutes
 	var saved_week: int = app.calendar_week_index
 	app.save_return_scene = "res://scenes/scifi_world_map.tscn"
 	var id: String = app.write_manual_save(1)
 	_check(id != "", "manual save written after arrival")
-	_travel(SHANGHAI)
-	app.preview_travel(SONGJIANG)
+	_travel(NEW_YORK)
+	app.preview_travel(YONKERS)
 	week_events.clear()
 	calendar_events.clear()
 	_check(app.load_save(id), "save loads")
-	_check(app.calendar_minutes == saved_minutes and typeof(app.calendar_minutes) == TYPE_INT and app.calendar_week_index == saved_week and app.current_location_id == LIANGZHU, "load restores exact clock and location")
+	_check(app.calendar_minutes == saved_minutes and typeof(app.calendar_minutes) == TYPE_INT and app.calendar_week_index == saved_week and app.current_location_id == WASHINGTON, "load restores exact clock and location")
 	_check(week_events.is_empty() and calendar_events.is_empty(), "loading emits no calendar or week settlement events")
 	_check(not app.confirm_travel() and app.calendar_minutes == saved_minutes, "a preview from before loading cannot be confirmed")
 	app.load_save(id)
@@ -337,9 +382,9 @@ func _test_save_load_without_recharge() -> void:
 	var broken: Dictionary = entry["snapshot"].duplicate(true)
 	broken["travel"]["calendarMinutes"] = "tomorrow"
 	var broken_id := SaveStore.write_entry("manual", 3, broken)
-	_travel(SHANGHAI)
+	_travel(NEW_YORK)
 	var before_broken: int = app.calendar_minutes
-	_check(not app.load_save(broken_id) and app.calendar_minutes == before_broken and app.current_location_id == SHANGHAI, "malformed travel block is rejected without changing state")
+	_check(not app.load_save(broken_id) and app.calendar_minutes == before_broken and app.current_location_id == NEW_YORK, "malformed travel block is rejected without changing state")
 
 
 func _test_legacy_and_unknown_id_migration() -> void:
@@ -357,7 +402,7 @@ func _test_legacy_and_unknown_id_migration() -> void:
 	_check(app.load_save(legacy_id), "pre-travel save still loads")
 	var registry: WorldRouteRegistry = app.travel_registry()
 	_check(app.calendar_minutes == registry.calendar_start_minutes and app.travel_state_migrated, "legacy save starts at the calendar start, no phantom days from 10 h play time")
-	_check(app.current_location_id == SONGJIANG and app.discovered_locations.has(LIANGZHU) and app.discovered_locations.has(SHANGHAI), "legacy scene and visits map to real places")
+	_check(app.current_location_id == YONKERS and app.discovered_locations.has(WASHINGTON) and app.discovered_locations.has(NEW_YORK), "legacy scene and visits map to real places")
 	_check(week_events.is_empty(), "migration emits no week settlement")
 	app.save_return_scene = "res://scenes/scifi_world_map.tscn"
 	var resaved: String = app.write_manual_save(2)
@@ -369,23 +414,69 @@ func _test_legacy_and_unknown_id_migration() -> void:
 	future["destination"] = "scifi.ruins"
 	var future_id := SaveStore.write_entry("manual", 3, future)
 	_check(app.load_save(future_id), "save naming an unknown place still loads")
-	_check(app.current_location_id == LIANGZHU and app.discovered_locations.has("earth.xx.retired-place") and not app.travel_location_ids().has("earth.xx.retired-place"), "unknown location falls back to its scene place; unknown discovery is kept but hidden")
+	_check(app.current_location_id == WASHINGTON and app.discovered_locations.has("earth.xx.retired-place") and not app.travel_location_ids().has("earth.xx.retired-place"), "unknown location falls back to its scene place; unknown discovery is kept but hidden")
+
+
+# A save made with the v01 (Shanghai set) data: old location IDs, an old 2026 date and old
+# lastTravel IDs. It must load, keep its exact clock and land on the US successors.
+func _test_shanghai_era_save_migration() -> void:
+	app.begin_new_run()
+	_set_clock(2026, 4, 8, 15, 30)
+	# A real v01 save had its commerce cursor on its own clock's week.
+	app._reset_commerce_state()
+	var old: Dictionary = app.make_snapshot("map", Vector2.ZERO, "manual_note")
+	old["destination"] = "scifi.ruins"
+	old["travel"]["locationId"] = "earth.cn.liangzhu-ruins"
+	old["travel"]["discovered"] = {"earth.cn.shanghai": true, "earth.cn.shanghai.songjiang-outskirts": true, "earth.cn.liangzhu-ruins": true}
+	old["travel"]["lastTravel"] = {"optionId": "route.car.shanghai__liangzhu-ruins", "fromLocationId": "earth.cn.shanghai", "toLocationId": "earth.cn.liangzhu-ruins", "minutes": 120}
+	var old_minutes: int = app.calendar_minutes
+	var old_id := SaveStore.write_entry("manual", 2, old)
+	app.begin_new_run()
+	week_events.clear()
+	calendar_events.clear()
+	_check(app.load_save(old_id), "a Shanghai-era save still loads")
+	_check(app.calendar_minutes == old_minutes and TravelCalendar.iso_text(app.calendar_minutes) == "2026-04-08 15:30", "its saved date is kept exactly (no shift to 2537)")
+	_check(app.current_location_id == WASHINGTON and app.current_destination_id == "scifi.ruins", "Liangzhu ID resolves to the Washington ruins and the same scene")
+	_check(app.discovered_locations.has(NEW_YORK) and app.discovered_locations.has(YONKERS) and not app.discovered_locations.has("earth.cn.shanghai") and not app.travel_location_ids().has("earth.cn.liangzhu-ruins"), "old discoveries map to US places; retired IDs never show")
+	_check(week_events.is_empty() and calendar_events.is_empty(), "migration emits no calendar or week events")
+	var trip := _travel(NEW_YORK)
+	_check(trip.get("departed", false) and app.calendar_minutes == old_minutes + int(trip["minutes_charged"]), "after migration a trip charges only its own time")
+	app.save_return_scene = "res://scenes/scifi_world_map.tscn"
+	var resaved := SaveStore.read_entry(app.write_manual_save(2))
+	_check(resaved["snapshot"]["travel"]["locationId"] == NEW_YORK and not resaved["snapshot"]["travel"]["discovered"].has("earth.cn.shanghai"), "re-saving writes only US IDs")
+
+
+func _test_air_trip() -> void:
+	app.begin_new_run()
+	_set_clock(2537, 5, 25, 8, 0)
+	var start: int = app.calendar_minutes
+	var preview: Dictionary = app.preview_travel(CHICAGO)
+	_check(preview["kind"] == "travel" and preview["mode"] == "air" and preview["road_distance_km"] == null and float(preview["air_distance_km"]) > 1000.0 and app.calendar_minutes == start, "air preview shows flight distance and is free")
+	var expected := int(preview["total_minutes"])
+	_check(expected > 240 and expected < 600, "NYC-Chicago door to door is several hours, not minutes (%d min)" % expected)
+	var result := _travel(CHICAGO)
+	_check(result.get("departed", false) and app.calendar_minutes == start + expected and app.current_location_id == CHICAGO and app.current_destination_id == "scifi.loop", "the flight charges door-to-door time once and arrives at the Loop")
+	_check(app.area_scene_path("scifi.loop").ends_with("rpg-2-star-ocean-the-second_chicago-loop_district-placeholder-scene_m2-v02_20261015-185645-a7d62ba0.tscn") and app.area_scene_path("scifi.city").ends_with("scifi_exploration_area.tscn"), "each destination names its walkable scene")
+	_check(app.commerce_city_block_reason(CHICAGO) == "", "Chicago is a discovered city that can host a company")
+	_check(not app.DESTINATIONS.has("scifi.loop") and not app.areas_visited.has("scifi.loop"), "the placeholder Loop never joins the three-place demo goal")
+	var back := _travel(NEW_YORK)
+	_check(back.get("departed", false) and int(back["minutes_charged"]) > 0 and app.current_location_id == NEW_YORK, "the return flight charges its own time")
 
 
 func _test_bilingual_text() -> void:
 	app.begin_new_run()
-	_set_clock(2026, 12, 31, 23, 0)
+	_set_clock(2537, 12, 31, 23, 0)
 	app.language = "zh"
-	var zh_preview: Dictionary = app.preview_travel(LIANGZHU)
+	var zh_preview: Dictionary = app.preview_travel(WASHINGTON)
 	var zh_lines: String = "\n".join(app.travel_preview_lines(zh_preview))
-	var zh_label: String = app.travel_location_dual_name(LIANGZHU)
+	var zh_label: String = app.travel_location_dual_name(WASHINGTON)
 	app.language = "en"
-	var en_preview: Dictionary = app.preview_travel(LIANGZHU)
+	var en_preview: Dictionary = app.preview_travel(WASHINGTON)
 	var en_lines: String = "\n".join(app.travel_preview_lines(en_preview))
-	_check(zh_label == app.travel_location_dual_name(LIANGZHU) and zh_label.contains("良渚古城遗址") and zh_label.contains("Archaeological Ruins of Liangzhu City"), "map label carries both names in either language")
+	_check(zh_label == app.travel_location_dual_name(WASHINGTON) and zh_label.contains("华盛顿特区废墟") and zh_label.contains("Washington, D.C. Ruins"), "map label carries both names in either language")
 	_check(int(zh_preview["total_minutes"]) == int(en_preview["total_minutes"]) and is_equal_approx(float(zh_preview["road_distance_km"]), float(en_preview["road_distance_km"])), "same figures in Chinese and English")
-	_check(zh_lines.contains("2027年1月1日") and zh_lines.contains("汽车") and zh_lines.contains("估算"), "Chinese preview shows arrival date, mode and estimate note")
-	_check(en_lines.contains("Jan 1, 2027") and en_lines.contains("Car") and en_lines.contains("estimated"), "English preview shows arrival date, mode and estimate note")
+	_check(zh_lines.contains("2538年1月1日") and zh_lines.contains("汽车") and zh_lines.contains("估算"), "Chinese preview shows arrival date, mode and estimate note")
+	_check(en_lines.contains("Jan 1, 2538") and en_lines.contains("Car") and en_lines.contains("estimated"), "English preview shows arrival date, mode and estimate note")
 	_check(app.travel_duration_text(26) == "26 min" and app.travel_duration_text(120) == "2 h" and app.travel_duration_text(146) == "2 h 26 min", "English durations")
 	app.language = "zh"
 	_check(app.travel_duration_text(146) == "2小时26分钟" and app.calendar_date_text_at(TravelCalendar.to_minutes(2028, 2, 29)) == "2028年2月29日", "Chinese duration and date")

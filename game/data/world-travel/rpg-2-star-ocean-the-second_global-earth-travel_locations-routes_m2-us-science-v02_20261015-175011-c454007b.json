@@ -1,0 +1,1010 @@
+{
+	"schemaVersion": 1,
+	"dataId": "global-earth-travel.m2-us-science-v02",
+	"status": "creator-approved-place-set",
+	"statusNote": "On 2026-10-15 the creator approved the science sphere: New York City as the science hub (playable scene: City Hall Park, Lower Manhattan), Yonkers, New York as the outskirts, the whole of Washington, D.C. as abandoned ruins centred on the U.S. Capitol grounds, and a first air route New York City-Chicago with one playable Chicago Loop district. The science sphere covers the US and Canada only. The place set is approved; every route figure is still a preliminary estimate, and nothing here marks M2 accepted. The provisional v01 Shanghai set is kept as hidden retiredLocations so old saves still load; Liangzhu is later Asia work.",
+	"recordedOn": "2026-10-15",
+	"supersedes": "game/data/world-travel/rpg-2-star-ocean-the-second_global-earth-travel_locations-routes_m2-provisional-v01_20261015-024215-b876e53d.json",
+	"designRules": "docs/design/rpg-2-star-ocean-the-second_global-earth-map-real-place-travel_rules-v01_20261014-235354-2b5d4d98.md",
+	"migrationNote": "docs/qa/rpg-2-star-ocean-the-second_us-science-sphere_runtime-migration_qa-note_m2-v02_20261015-175011-364131c8.md",
+	"attribution": {
+		"note": "Provenance metadata only; the game runtime does not read it. Every coordinateSource and segment source names a sourceId listed here. licenseStatus 'needs-verification' means the reuse terms are believed open but were not confirmed from the publisher's own terms page. Check them before packaging. This is a project record, not legal advice.",
+		"sources": [
+			{
+				"id": "geonames",
+				"name": "GeoNames geographical database",
+				"url": "https://www.geonames.org/",
+				"termsUrls": [
+					"https://www.geonames.org/export/",
+					"https://www.geonames.org/about.html"
+				],
+				"license": "CC-BY-4.0",
+				"licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+				"licenseStatus": "stated-by-publisher",
+				"attributionRequired": true,
+				"attributionText": "Contains data from GeoNames (https://www.geonames.org/), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).",
+				"retrievedOn": "2026-10-15",
+				"licenseNote": "Each record fetched (sws.geonames.org/<id>/about.rdf) carries cc:license https://creativecommons.org/licenses/by/4.0/.",
+				"usedFor": [
+					"earth.us.ny.new-york-city",
+					"earth.us.ny.yonkers-outskirts",
+					"earth.us.dc.washington-ruins",
+					"earth.us.il.chicago coordinates"
+				]
+			},
+			{
+				"id": "usgs-gnis",
+				"name": "USGS Geographic Names Information System",
+				"url": "https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names",
+				"license": "US-federal-public-domain",
+				"licenseStatus": "needs-verification",
+				"licenseNote": "US federal data is generally public domain; the USGS terms page itself was not fetched. Used for cross-checks and as OSRM input points for Yonkers and the Loop.",
+				"retrievedOn": "2026-10-15",
+				"usedFor": [
+					"cross-check coordinates",
+					"OSRM input points"
+				]
+			},
+			{
+				"id": "osrm-demo-osm",
+				"name": "OSRM demo server (router.project-osrm.org), car profile, on OpenStreetMap data",
+				"url": "https://router.project-osrm.org/",
+				"termsUrls": [
+					"https://github.com/Project-OSRM/osrm-backend/wiki/Demo-server",
+					"https://www.openstreetmap.org/copyright"
+				],
+				"license": "ODbL-1.0 (OpenStreetMap data)",
+				"licenseStatus": "needs-verification",
+				"attributionRequired": true,
+				"attributionText": "Routing estimates computed with OSRM from OpenStreetMap data, (c) OpenStreetMap contributors, ODbL.",
+				"licenseNote": "Demo-server policy: 'restricted to reasonable, non-commercial use-cases ... no guarantees'. Whether a commercial game may ship figures read from it is not established; re-derive with a self-hosted OSRM on an OSM extract before release.",
+				"retrievedOn": "2026-10-15",
+				"usedFor": [
+					"all car segment distances and durations",
+					"airport access and egress minutes"
+				]
+			},
+			{
+				"id": "ourairports",
+				"name": "OurAirports open data",
+				"url": "https://ourairports.com/data/",
+				"license": "public-domain",
+				"licenseStatus": "stated-by-publisher",
+				"licenseNote": "'All data is released to the Public Domain'.",
+				"retrievedOn": "2026-10-15",
+				"usedFor": [
+					"LGA and ORD reference points",
+					"flight great-circle distance"
+				]
+			},
+			{
+				"id": "bts-ontime-2026-07",
+				"name": "US DOT Bureau of Transportation Statistics, Reporting Carrier On-Time Performance, July 2026",
+				"url": "https://www.transtats.bts.gov/",
+				"license": "US-federal-public-domain",
+				"licenseStatus": "needs-verification",
+				"licenseNote": "US federal statistical data; the BTS terms page was not fetched. July 2026 was the latest month available on 2026-10-15.",
+				"retrievedOn": "2026-10-15",
+				"usedFor": [
+					"scheduled block time LGA-ORD and ORD-LGA (median CRSElapsedTime)",
+					"confirmation of nonstop service in July 2026"
+				]
+			},
+			{
+				"id": "aa-arrival-guidance",
+				"name": "American Airlines: check-in and arrival",
+				"url": "https://www.aa.com/i18n/travel-info/check-in-and-arrival.jsp",
+				"license": null,
+				"licenseStatus": "needs-verification",
+				"licenseNote": "A single factual planning figure (arrive at least 2 hours before a US domestic flight) is used, not copied text. United and Delta pages could not be read.",
+				"retrievedOn": "2026-10-15",
+				"usedFor": [
+					"checkInAndWaitMinutes"
+				]
+			}
+		]
+	},
+	"calendar": {
+		"startDate": "2537-05-25",
+		"startTime": "08:00",
+		"weekStartsOn": "monday",
+		"status": "creator-approved-start-date",
+		"timeOfDayStatus": "engineering-placeholder",
+		"note": "The creator set the start date 2537-05-25 (a Saturday in the proleptic Gregorian calendar the game uses). 08:00 is an engineering placeholder for the time of day. New runs start here. Saves keep their absolute date, so a save made with the 2026-04-01 placeholder still shows its 2026 date after loading; nothing is shifted."
+	},
+	"regions": [
+		{
+			"id": "science",
+			"planet": "earth",
+			"names": {
+				"zh": "科技板块",
+				"en": "Science sphere"
+			},
+			"access": "car-air",
+			"status": "active-mvp",
+			"scope": {
+				"zh": "美国、加拿大；中心纽约。",
+				"en": "United States and Canada; hub New York City."
+			},
+			"countryCodes": [
+				"US",
+				"CA"
+			],
+			"note": "Science sphere: the United States and Canada only. Mexico, Central America and the Caribbean are mixed borderlands outside every sphere."
+		},
+		{
+			"id": "magic",
+			"planet": "earth",
+			"names": {
+				"zh": "魔法板块",
+				"en": "Magic sphere"
+			},
+			"access": "car-air",
+			"status": "locations-pending",
+			"scope": {
+				"zh": "南美洲；中心马瑙斯。",
+				"en": "South America; hub Manaus."
+			},
+			"note": "Hubs are creator-approved names only; no location, coordinate or route exists for any sphere except science."
+		},
+		{
+			"id": "wuxia",
+			"planet": "earth",
+			"names": {
+				"zh": "武侠板块",
+				"en": "Wuxia sphere"
+			},
+			"access": "car-air",
+			"status": "locations-pending",
+			"scope": {
+				"zh": "亚洲；中心重庆。",
+				"en": "Asia; hub Chongqing."
+			},
+			"note": "Hubs are creator-approved names only; no location, coordinate or route exists for any sphere except science."
+		},
+		{
+			"id": "nature",
+			"planet": "earth",
+			"names": {
+				"zh": "自然板块",
+				"en": "Nature sphere"
+			},
+			"access": "car-air",
+			"status": "locations-pending",
+			"scope": {
+				"zh": "大洋洲；中心布里斯班。",
+				"en": "Oceania; hub Brisbane."
+			},
+			"note": "Hubs are creator-approved names only; no location, coordinate or route exists for any sphere except science."
+		},
+		{
+			"id": "culture",
+			"planet": "earth",
+			"names": {
+				"zh": "文化板块",
+				"en": "Culture sphere"
+			},
+			"access": "car-air",
+			"status": "locations-pending",
+			"scope": {
+				"zh": "欧洲与非洲；双中心雅典与开罗。原“奇幻”板块。",
+				"en": "Europe and Africa; dual hubs Athens and Cairo. Formerly the Fantasy sphere."
+			},
+			"note": "Hubs are creator-approved names only; no location, coordinate or route exists for any sphere except science.",
+			"legacyIds": [
+				"fantasy"
+			]
+		},
+		{
+			"id": "offworld",
+			"planet": "exterritorial",
+			"names": {
+				"zh": "终局星球",
+				"en": "Final planet"
+			},
+			"access": "portal",
+			"status": "locations-pending",
+			"scope": {
+				"zh": "五个地球主线之后经传送门抵达的另一颗星球，不属于五大地球板块。",
+				"en": "Another planet reached by portal after all five Earth mainlines; not one of the five Earth spheres."
+			},
+			"note": "Reached through a portal, never by car or air. Formerly the fifth board 'Exterritorial'; the id is unchanged. Local transport beyond the portal ends is decided when that planet's places are designed."
+		}
+	],
+	"startLocationId": "earth.us.ny.new-york-city",
+	"locations": [
+		{
+			"id": "earth.us.ny.new-york-city",
+			"names": {
+				"zh": "纽约",
+				"en": "New York City"
+			},
+			"nativeName": "New York City",
+			"administrativeName": {
+				"zh": "美国纽约州纽约市",
+				"en": "New York City, New York, United States"
+			},
+			"type": "city",
+			"regionId": "science",
+			"countryCode": "US",
+			"role": "science-hub",
+			"coordinates": {
+				"lat": 40.71205,
+				"lon": -74.00708,
+				"basis": "playable scene point: City Hall Park, Lower Manhattan (park record)"
+			},
+			"coordinateSource": {
+				"name": "GeoNames 5112759 (City Hall Park, L.PRK)",
+				"url": "https://www.geonames.org/5112759",
+				"retrievedOn": "2026-10-15",
+				"sourceId": "geonames",
+				"license": "CC-BY-4.0",
+				"licenseStatus": "stated-by-publisher"
+			},
+			"cityReferencePoint": {
+				"lat": 40.71427,
+				"lon": -74.00597,
+				"source": {
+					"name": "GeoNames 5128581 (New York City, P.PPL)",
+					"url": "https://www.geonames.org/5128581",
+					"retrievedOn": "2026-10-15",
+					"sourceId": "geonames",
+					"license": "CC-BY-4.0",
+					"licenseStatus": "stated-by-publisher"
+				},
+				"crossCheck": {
+					"name": "USGS GNIS 975772 (New York, Populated Place: 40.7142691, -74.0059729)",
+					"url": "https://edits.nationalmap.gov/apps/gaz-domestic/public/summary/975772",
+					"retrievedOn": "2026-10-15",
+					"sourceId": "usgs-gnis",
+					"license": "US-federal-public-domain",
+					"licenseStatus": "needs-verification"
+				}
+			},
+			"scene": {
+				"names": {
+					"zh": "下曼哈顿 · 市政厅公园",
+					"en": "City Hall Park, Lower Manhattan"
+				},
+				"sceneDestinationId": "scifi.city",
+				"artStatus": "reuses the unaccepted generic science-city plate; no City Hall Park art yet",
+				"placeNote": "NYC Parks: 'City Hall Park, located in downtown Manhattan' (https://www.nycgovparks.org/parks/city-hall-park/history); bounded by Broadway, Park Row and Chambers St."
+			},
+			"placeVerification": {
+				"status": "real-place-verified",
+				"note": "Real city and real park."
+			},
+			"discovery": {
+				"initial": true
+			},
+			"sceneDestinationId": "scifi.city",
+			"legacyIds": []
+		},
+		{
+			"id": "earth.us.ny.yonkers-outskirts",
+			"names": {
+				"zh": "扬克斯郊外",
+				"en": "Yonkers Outskirts"
+			},
+			"nativeName": "Yonkers",
+			"administrativeName": {
+				"zh": "美国纽约州威彻斯特县扬克斯市",
+				"en": "Yonkers, Westchester County, New York, United States"
+			},
+			"type": "outskirts",
+			"regionId": "science",
+			"countryCode": "US",
+			"coordinates": {
+				"lat": 40.9304,
+				"lon": -73.89789,
+				"basis": "city reference point; the outskirts scene entry is not yet registered"
+			},
+			"coordinateSource": {
+				"name": "GeoNames 5145215 (Yonkers, P.PPL)",
+				"url": "https://www.geonames.org/5145215",
+				"retrievedOn": "2026-10-15",
+				"sourceId": "geonames",
+				"license": "CC-BY-4.0",
+				"licenseStatus": "stated-by-publisher"
+			},
+			"crossCheck": {
+				"name": "USGS GNIS 971828 (Yonkers, Populated Place: 40.9312099, -73.8987469 (OSRM input point))",
+				"url": "https://edits.nationalmap.gov/apps/gaz-domestic/public/summary/971828",
+				"retrievedOn": "2026-10-15",
+				"sourceId": "usgs-gnis",
+				"license": "US-federal-public-domain",
+				"licenseStatus": "needs-verification"
+			},
+			"placeVerification": {
+				"status": "real-city-verified",
+				"note": "Yonkers is a city in Westchester County directly north of the Bronx (Wikipedia, CC BY-SA, https://en.wikipedia.org/wiki/Yonkers,_New_York; no official-site quote was reachable). 'Outskirts' is the scene type."
+			},
+			"discovery": {
+				"initial": true
+			},
+			"sceneDestinationId": "scifi.outskirts",
+			"legacyIds": []
+		},
+		{
+			"id": "earth.us.dc.washington-ruins",
+			"names": {
+				"zh": "华盛顿特区废墟",
+				"en": "Washington, D.C. Ruins"
+			},
+			"nativeName": "Washington, D.C.",
+			"administrativeName": {
+				"zh": "美国哥伦比亚特区华盛顿",
+				"en": "Washington, District of Columbia, United States"
+			},
+			"type": "ruins",
+			"regionId": "science",
+			"countryCode": "US",
+			"coordinates": {
+				"lat": 38.88983,
+				"lon": -77.00887,
+				"basis": "ruins centre: the U.S. Capitol (building record)"
+			},
+			"coordinateSource": {
+				"name": "GeoNames 4140827 (The Capitol, S.ADMF)",
+				"url": "https://www.geonames.org/4140827",
+				"retrievedOn": "2026-10-15",
+				"sourceId": "geonames",
+				"license": "CC-BY-4.0",
+				"licenseStatus": "stated-by-publisher"
+			},
+			"cityReferencePoint": {
+				"lat": 38.89511,
+				"lon": -77.03637,
+				"source": {
+					"name": "GeoNames 4140963 (Washington, D.C., P.PPLC)",
+					"url": "https://www.geonames.org/4140963",
+					"retrievedOn": "2026-10-15",
+					"sourceId": "geonames",
+					"license": "CC-BY-4.0",
+					"licenseStatus": "stated-by-publisher"
+				},
+				"crossCheck": {
+					"name": "USGS GNIS 531871 (Washington, Populated Place: 38.8951118, -77.0363658)",
+					"url": "https://edits.nationalmap.gov/apps/gaz-domestic/public/summary/531871",
+					"retrievedOn": "2026-10-15",
+					"sourceId": "usgs-gnis",
+					"license": "US-federal-public-domain",
+					"licenseStatus": "needs-verification"
+				}
+			},
+			"crossCheck": {
+				"name": "USGS GNIS 531316 (Capitol Hill, Summit: 38.8897341, -77.0089892)",
+				"url": "https://edits.nationalmap.gov/apps/gaz-domestic/public/summary/531316",
+				"retrievedOn": "2026-10-15",
+				"sourceId": "usgs-gnis",
+				"license": "US-federal-public-domain",
+				"licenseStatus": "needs-verification"
+			},
+			"scene": {
+				"names": {
+					"zh": "国会大厦园区（部分坍塌、长满植被）",
+					"en": "U.S. Capitol grounds (partly collapsed, overgrown)"
+				},
+				"sceneDestinationId": "scifi.ruins",
+				"features": [
+					"survey post",
+					"patrol automata"
+				],
+				"artStatus": "reuses the unaccepted generic ruins plate; no recognizable Capitol art yet",
+				"placeNote": "Architect of the Capitol: the Capitol 'is located in Washington, D.C., at the eastern end of the National Mall' (https://www.aoc.gov/explore-capitol-campus/buildings-grounds/capitol-building)."
+			},
+			"fiction": "In the game the whole of Washington, D.C. is abandoned ruins. This is setting fiction; the coordinates are the real Capitol.",
+			"placeVerification": {
+				"status": "real-place-verified",
+				"note": "Real city and real building; their ruined state is fiction."
+			},
+			"discovery": {
+				"initial": true
+			},
+			"sceneDestinationId": "scifi.ruins",
+			"legacyIds": []
+		},
+		{
+			"id": "earth.us.il.chicago",
+			"names": {
+				"zh": "芝加哥",
+				"en": "Chicago"
+			},
+			"nativeName": "Chicago",
+			"administrativeName": {
+				"zh": "美国伊利诺伊州芝加哥市",
+				"en": "Chicago, Illinois, United States"
+			},
+			"type": "city",
+			"regionId": "science",
+			"countryCode": "US",
+			"coordinates": {
+				"lat": 41.88407,
+				"lon": -87.6333,
+				"basis": "playable district point: the Loop (community area record)"
+			},
+			"coordinateSource": {
+				"name": "GeoNames 8436065 (Loop, P.PPLX)",
+				"url": "https://www.geonames.org/8436065",
+				"retrievedOn": "2026-10-15",
+				"sourceId": "geonames",
+				"license": "CC-BY-4.0",
+				"licenseStatus": "stated-by-publisher"
+			},
+			"cityReferencePoint": {
+				"lat": 41.85003,
+				"lon": -87.65005,
+				"source": {
+					"name": "GeoNames 4887398 (Chicago, P.PPLA2)",
+					"url": "https://www.geonames.org/4887398",
+					"retrievedOn": "2026-10-15",
+					"sourceId": "geonames",
+					"license": "CC-BY-4.0",
+					"licenseStatus": "stated-by-publisher"
+				},
+				"crossCheck": {
+					"name": "USGS GNIS 423587 (Chicago, Populated Place: 41.850033, -87.6500523)",
+					"url": "https://edits.nationalmap.gov/apps/gaz-domestic/public/summary/423587",
+					"retrievedOn": "2026-10-15",
+					"sourceId": "usgs-gnis",
+					"license": "US-federal-public-domain",
+					"licenseStatus": "needs-verification"
+				}
+			},
+			"crossCheck": {
+				"name": "USGS GNIS 406045 (Chicago Loop, Populated Place: 41.881144, -87.6297746 (OSRM input point))",
+				"url": "https://edits.nationalmap.gov/apps/gaz-domestic/public/summary/406045",
+				"retrievedOn": "2026-10-15",
+				"sourceId": "usgs-gnis",
+				"license": "US-federal-public-domain",
+				"licenseStatus": "needs-verification"
+			},
+			"scene": {
+				"names": {
+					"zh": "卢普区",
+					"en": "The Loop"
+				},
+				"sceneDestinationId": "scifi.loop",
+				"artStatus": "explicit technical placeholder drawn in code; art not accepted",
+				"placeNote": "The Loop is bounded by the Union Loop 'L': Lake Street (north), Wells Street (west), Van Buren Street (south), Wabash Avenue (east) (Wikipedia, CC BY-SA, https://en.wikipedia.org/wiki/Chicago_Loop)."
+			},
+			"placeVerification": {
+				"status": "real-place-verified"
+			},
+			"discovery": {
+				"initial": true
+			},
+			"sceneDestinationId": "scifi.loop",
+			"legacyIds": []
+		}
+	],
+	"retiredLocations": [
+		{
+			"id": "earth.cn.shanghai",
+			"names": {
+				"zh": "上海",
+				"en": "Shanghai"
+			},
+			"status": "retired-hidden-legacy-alias",
+			"retiredOn": "2026-10-15",
+			"migratesToLocationId": "earth.us.ny.new-york-city",
+			"formerSceneDestinationId": "scifi.city",
+			"formerType": "city",
+			"formerCoordinates": {
+				"lat": 31.22222,
+				"lon": 121.45806,
+				"basis": "city reference point"
+			},
+			"formerCoordinateSource": {
+				"name": "GeoNames 1796236 (Shanghai, PPLA)",
+				"url": "https://www.geonames.org/1796236",
+				"retrievedOn": "2026-10-15",
+				"sourceId": "geonames",
+				"license": "CC-BY-4.0",
+				"licenseStatus": "stated-by-publisher"
+			},
+			"reason": "Provisional v01 science anchor; the creator approved the US science sphere instead.",
+			"laterWork": "May return with later Asia work. If this ID becomes active again, remove this record."
+		},
+		{
+			"id": "earth.cn.shanghai.songjiang-outskirts",
+			"names": {
+				"zh": "松江郊外",
+				"en": "Songjiang Outskirts"
+			},
+			"status": "retired-hidden-legacy-alias",
+			"retiredOn": "2026-10-15",
+			"migratesToLocationId": "earth.us.ny.yonkers-outskirts",
+			"formerSceneDestinationId": "scifi.outskirts",
+			"formerType": "outskirts",
+			"formerCoordinates": {
+				"lat": 31.00583,
+				"lon": 121.23333,
+				"basis": "district reference point; scene entry point not yet registered"
+			},
+			"formerCoordinateSource": {
+				"name": "Wikipedia: Songjiang District",
+				"url": "https://en.wikipedia.org/wiki/Songjiang_District",
+				"retrievedOn": "2026-10-15",
+				"sourceId": "wikipedia-songjiang-district",
+				"license": null,
+				"licenseStatus": "needs-replacement-or-verification",
+				"note": "The district government page (https://english.songjiang.gov.cn/facts/location/) gives 121°45'E, 31°N; that longitude lies east of central Shanghai and conflicts with its own 'southwestern Shanghai' description, so it is not used."
+			},
+			"reason": "Provisional v01 science anchor; the creator approved the US science sphere instead.",
+			"laterWork": "May return with later Asia work. If this ID becomes active again, remove this record."
+		},
+		{
+			"id": "earth.cn.liangzhu-ruins",
+			"names": {
+				"zh": "良渚古城遗址",
+				"en": "Archaeological Ruins of Liangzhu City"
+			},
+			"status": "retired-hidden-legacy-alias",
+			"retiredOn": "2026-10-15",
+			"migratesToLocationId": "earth.us.dc.washington-ruins",
+			"formerSceneDestinationId": "scifi.ruins",
+			"formerType": "ruins",
+			"formerCoordinates": {
+				"lat": 30.39556,
+				"lon": 119.99083,
+				"basis": "UNESCO 1592 'City' component reference point"
+			},
+			"formerCoordinateSource": {
+				"name": "UNESCO WHC 1592 component table: 1592-004 Area of City Site, N30 23 43.97 E119 59 26.97 (881.45 ha)",
+				"url": "https://whc.unesco.org/en/list/1592/maps/",
+				"retrievedOn": "2026-10-15",
+				"sourceId": "unesco-whc-1592",
+				"license": null,
+				"licenseStatus": "needs-replacement-or-verification",
+				"note": "The DMS value converts to 30.395547, 119.990825; the stored 5-decimal value is within 2 m. Cited directly instead of the Wikipedia copy of the same table; the value is unchanged. The page returned HTTP 403 to WebFetch and to curl's default user agent, and HTTP 200 to curl with a browser user agent, on 2026-10-15."
+			},
+			"reason": "Provisional v01 science anchor; the creator approved the US science sphere instead.",
+			"laterWork": "Later Asia work. The Liangzhu art and test artifacts are kept. If this ID becomes an active Asia location again, remove this record. Saves that loaded in between were re-saved with the US successor ID."
+		}
+	],
+	"segments": [
+		{
+			"id": "seg.car.nyc__yonkers",
+			"mode": "car",
+			"fromLocationId": "earth.us.ny.new-york-city",
+			"toLocationId": "earth.us.ny.yonkers-outskirts",
+			"roadDistanceKm": 28.2,
+			"referenceDurationMinutes": 35,
+			"doorToDoorAllowanceMinutes": 0,
+			"bidirectional": false,
+			"verification": {
+				"status": "preliminary-estimate",
+				"source": {
+					"name": "OSRM demo server, car profile (OpenStreetMap data)",
+					"url": "https://router.project-osrm.org/route/v1/driving/-74.00708,40.71205;-73.8987469,40.9312099?overview=false",
+					"retrievedOn": "2026-10-15",
+					"sourceId": "osrm-demo-osm",
+					"recordedIn": "docs/qa/rpg-2-star-ocean-the-second_us-science-sphere_runtime-migration_qa-note_m2-v02_20261015-175011-364131c8.md"
+				},
+				"note": "Free-flow routing-model time with no traffic, parking or loading. Rounded to the whole minute; not a measured or scheduled time. City Hall Park (snapped to Park Row) to Yonkers (snapped to South Broadway)."
+			}
+		},
+		{
+			"id": "seg.car.yonkers__nyc",
+			"mode": "car",
+			"fromLocationId": "earth.us.ny.yonkers-outskirts",
+			"toLocationId": "earth.us.ny.new-york-city",
+			"roadDistanceKm": 28.3,
+			"referenceDurationMinutes": 35,
+			"doorToDoorAllowanceMinutes": 0,
+			"bidirectional": false,
+			"verification": {
+				"status": "preliminary-estimate",
+				"source": {
+					"name": "OSRM demo server, car profile (OpenStreetMap data)",
+					"url": "https://router.project-osrm.org/route/v1/driving/-73.8987469,40.9312099;-74.00708,40.71205?overview=false",
+					"retrievedOn": "2026-10-15",
+					"sourceId": "osrm-demo-osm",
+					"recordedIn": "docs/qa/rpg-2-star-ocean-the-second_us-science-sphere_runtime-migration_qa-note_m2-v02_20261015-175011-364131c8.md"
+				},
+				"note": "Free-flow routing-model time with no traffic, parking or loading. Rounded to the whole minute; not a measured or scheduled time. Separate reverse query."
+			}
+		},
+		{
+			"id": "seg.car.nyc__washington-ruins",
+			"mode": "car",
+			"fromLocationId": "earth.us.ny.new-york-city",
+			"toLocationId": "earth.us.dc.washington-ruins",
+			"roadDistanceKm": 363.2,
+			"referenceDurationMinutes": 289,
+			"doorToDoorAllowanceMinutes": 0,
+			"bidirectional": false,
+			"verification": {
+				"status": "preliminary-estimate",
+				"source": {
+					"name": "OSRM demo server, car profile (OpenStreetMap data)",
+					"url": "https://router.project-osrm.org/route/v1/driving/-74.00708,40.71205;-77.00887,38.88983?overview=false",
+					"retrievedOn": "2026-10-15",
+					"sourceId": "osrm-demo-osm",
+					"recordedIn": "docs/qa/rpg-2-star-ocean-the-second_us-science-sphere_runtime-migration_qa-note_m2-v02_20261015-175011-364131c8.md"
+				},
+				"note": "Free-flow routing-model time with no traffic, parking or loading. Rounded to the whole minute; not a measured or scheduled time. City Hall Park to the Capitol (snapped to Independence Avenue SE, 249 m from the input point)."
+			}
+		},
+		{
+			"id": "seg.car.washington-ruins__nyc",
+			"mode": "car",
+			"fromLocationId": "earth.us.dc.washington-ruins",
+			"toLocationId": "earth.us.ny.new-york-city",
+			"roadDistanceKm": 361.4,
+			"referenceDurationMinutes": 286,
+			"doorToDoorAllowanceMinutes": 0,
+			"bidirectional": false,
+			"verification": {
+				"status": "preliminary-estimate",
+				"source": {
+					"name": "OSRM demo server, car profile (OpenStreetMap data)",
+					"url": "https://router.project-osrm.org/route/v1/driving/-77.00887,38.88983;-74.00708,40.71205?overview=false",
+					"retrievedOn": "2026-10-15",
+					"sourceId": "osrm-demo-osm",
+					"recordedIn": "docs/qa/rpg-2-star-ocean-the-second_us-science-sphere_runtime-migration_qa-note_m2-v02_20261015-175011-364131c8.md"
+				},
+				"note": "Free-flow routing-model time with no traffic, parking or loading. Rounded to the whole minute; not a measured or scheduled time. Separate reverse query."
+			}
+		},
+		{
+			"id": "seg.car.yonkers__washington-ruins",
+			"mode": "car",
+			"fromLocationId": "earth.us.ny.yonkers-outskirts",
+			"toLocationId": "earth.us.dc.washington-ruins",
+			"roadDistanceKm": 388,
+			"referenceDurationMinutes": 306,
+			"doorToDoorAllowanceMinutes": 0,
+			"bidirectional": false,
+			"verification": {
+				"status": "preliminary-estimate",
+				"source": {
+					"name": "OSRM demo server, car profile (OpenStreetMap data)",
+					"url": "https://router.project-osrm.org/route/v1/driving/-73.8987469,40.9312099;-77.00887,38.88983?overview=false",
+					"retrievedOn": "2026-10-15",
+					"sourceId": "osrm-demo-osm",
+					"recordedIn": "docs/qa/rpg-2-star-ocean-the-second_us-science-sphere_runtime-migration_qa-note_m2-v02_20261015-175011-364131c8.md"
+				},
+				"note": "Free-flow routing-model time with no traffic, parking or loading. Rounded to the whole minute; not a measured or scheduled time. Direct drive, not via Manhattan."
+			}
+		},
+		{
+			"id": "seg.car.washington-ruins__yonkers",
+			"mode": "car",
+			"fromLocationId": "earth.us.dc.washington-ruins",
+			"toLocationId": "earth.us.ny.yonkers-outskirts",
+			"roadDistanceKm": 383.4,
+			"referenceDurationMinutes": 303,
+			"doorToDoorAllowanceMinutes": 0,
+			"bidirectional": false,
+			"verification": {
+				"status": "preliminary-estimate",
+				"source": {
+					"name": "OSRM demo server, car profile (OpenStreetMap data)",
+					"url": "https://router.project-osrm.org/route/v1/driving/-77.00887,38.88983;-73.8987469,40.9312099?overview=false",
+					"retrievedOn": "2026-10-15",
+					"sourceId": "osrm-demo-osm",
+					"recordedIn": "docs/qa/rpg-2-star-ocean-the-second_us-science-sphere_runtime-migration_qa-note_m2-v02_20261015-175011-364131c8.md"
+				},
+				"note": "Free-flow routing-model time with no traffic, parking or loading. Rounded to the whole minute; not a measured or scheduled time. Separate reverse query."
+			}
+		},
+		{
+			"id": "seg.air.nyc-lga__chicago-ord",
+			"mode": "air",
+			"fromLocationId": "earth.us.ny.new-york-city",
+			"toLocationId": "earth.us.il.chicago",
+			"flightDistanceKm": 1177.1,
+			"airportAccessMinutes": 24,
+			"checkInAndWaitMinutes": 120,
+			"flightMinutes": 166,
+			"airportEgressMinutes": 55,
+			"doorToDoorAllowanceMinutes": 0,
+			"bidirectional": false,
+			"departureAirport": {
+				"iata": "LGA",
+				"name": "LaGuardia Airport",
+				"lat": 40.777199,
+				"lon": -73.872597
+			},
+			"arrivalAirport": {
+				"iata": "ORD",
+				"name": "Chicago O'Hare International Airport",
+				"lat": 41.9786,
+				"lon": -87.9048
+			},
+			"components": {
+				"flightDistanceKm": {
+					"value": 1177.1,
+					"basis": "Great-circle distance LGA-ORD from OurAirports reference points (haversine, R = 6371.0088 km). Not the flown track.",
+					"source": {
+						"name": "OurAirports airports.csv (KLGA id 3643, KORD id 3754)",
+						"url": "https://davidmegginson.github.io/ourairports-data/airports.csv",
+						"retrievedOn": "2026-10-15",
+						"sourceId": "ourairports"
+					}
+				},
+				"airportAccessMinutes": {
+					"value": 24,
+					"basis": "Free-flow drive City Hall Park -> LGA reference point (18.3 km).",
+					"source": {
+						"name": "OSRM demo server, car profile",
+						"url": "https://router.project-osrm.org/route/v1/driving/-74.00708,40.71205;-73.872597,40.777199?overview=false",
+						"retrievedOn": "2026-10-15",
+						"sourceId": "osrm-demo-osm"
+					}
+				},
+				"checkInAndWaitMinutes": {
+					"value": 120,
+					"basis": "Airline guidance, not a measured wait: American Airlines 'When to arrive at the airport: Within the U.S. - at least 2 hours'. TSA gives no fixed figure.",
+					"source": {
+						"name": "American Airlines check-in and arrival",
+						"url": "https://www.aa.com/i18n/travel-info/check-in-and-arrival.jsp",
+						"retrievedOn": "2026-10-15",
+						"sourceId": "aa-arrival-guidance"
+					}
+				},
+				"flightMinutes": {
+					"value": 166,
+					"basis": "Median scheduled block time of 997 LGA->ORD nonstop flights in July 2026 (p10 157, p90 188 min).",
+					"source": {
+						"name": "US DOT BTS On-Time Reporting, July 2026, CRSElapsedTime",
+						"url": "https://transtats.bts.gov/PREZIP/On_Time_Reporting_Carrier_On_Time_Performance_1987_present_2026_7.zip",
+						"retrievedOn": "2026-10-15",
+						"sourceId": "bts-ontime-2026-07"
+					}
+				},
+				"airportEgressMinutes": {
+					"value": 55,
+					"basis": "Free-flow drive ORD reference point -> the Loop (34.4 km).",
+					"source": {
+						"name": "OSRM demo server, car profile",
+						"url": "https://router.project-osrm.org/route/v1/driving/-87.9048,41.9786;-87.6297746,41.881144?overview=false",
+						"retrievedOn": "2026-10-15",
+						"sourceId": "osrm-demo-osm"
+					}
+				}
+			},
+			"verification": {
+				"status": "preliminary-estimate",
+				"source": {
+					"name": "US DOT BTS On-Time Reporting July 2026 (scheduled block time) + OSRM airport drives + airline arrival guidance",
+					"url": "https://www.transtats.bts.gov/",
+					"retrievedOn": "2026-10-15",
+					"sourceId": "bts-ontime-2026-07",
+					"recordedIn": "docs/qa/rpg-2-star-ocean-the-second_us-science-sphere_runtime-migration_qa-note_m2-v02_20261015-175011-364131c8.md"
+				},
+				"note": "Sum of separately sourced parts (see components). Airport points are OurAirports reference points, not terminals; deplaning, baggage and curb time are not counted. Scheduled service on LGA-ORD is confirmed only through July 2026. An estimate for game time, not a timetable."
+			}
+		},
+		{
+			"id": "seg.air.chicago-ord__nyc-lga",
+			"mode": "air",
+			"fromLocationId": "earth.us.il.chicago",
+			"toLocationId": "earth.us.ny.new-york-city",
+			"flightDistanceKm": 1177.1,
+			"airportAccessMinutes": 54,
+			"checkInAndWaitMinutes": 120,
+			"flightMinutes": 142,
+			"airportEgressMinutes": 22,
+			"doorToDoorAllowanceMinutes": 0,
+			"bidirectional": false,
+			"departureAirport": {
+				"iata": "ORD",
+				"name": "Chicago O'Hare International Airport",
+				"lat": 41.9786,
+				"lon": -87.9048
+			},
+			"arrivalAirport": {
+				"iata": "LGA",
+				"name": "LaGuardia Airport",
+				"lat": 40.777199,
+				"lon": -73.872597
+			},
+			"components": {
+				"flightDistanceKm": {
+					"value": 1177.1,
+					"basis": "Great-circle distance LGA-ORD from OurAirports reference points (haversine, R = 6371.0088 km). Not the flown track.",
+					"source": {
+						"name": "OurAirports airports.csv (KLGA id 3643, KORD id 3754)",
+						"url": "https://davidmegginson.github.io/ourairports-data/airports.csv",
+						"retrievedOn": "2026-10-15",
+						"sourceId": "ourairports"
+					}
+				},
+				"airportAccessMinutes": {
+					"value": 54,
+					"basis": "Free-flow drive the Loop -> ORD reference point (34.3 km).",
+					"source": {
+						"name": "OSRM demo server, car profile",
+						"url": "https://router.project-osrm.org/route/v1/driving/-87.6297746,41.881144;-87.9048,41.9786?overview=false",
+						"retrievedOn": "2026-10-15",
+						"sourceId": "osrm-demo-osm"
+					}
+				},
+				"checkInAndWaitMinutes": {
+					"value": 120,
+					"basis": "Airline guidance, not a measured wait: American Airlines 'When to arrive at the airport: Within the U.S. - at least 2 hours'. TSA gives no fixed figure.",
+					"source": {
+						"name": "American Airlines check-in and arrival",
+						"url": "https://www.aa.com/i18n/travel-info/check-in-and-arrival.jsp",
+						"retrievedOn": "2026-10-15",
+						"sourceId": "aa-arrival-guidance"
+					}
+				},
+				"flightMinutes": {
+					"value": 142,
+					"basis": "Median scheduled block time of 997 ORD->LGA nonstop flights in July 2026 (p10 136, p90 149 min).",
+					"source": {
+						"name": "US DOT BTS On-Time Reporting, July 2026, CRSElapsedTime",
+						"url": "https://transtats.bts.gov/PREZIP/On_Time_Reporting_Carrier_On_Time_Performance_1987_present_2026_7.zip",
+						"retrievedOn": "2026-10-15",
+						"sourceId": "bts-ontime-2026-07"
+					}
+				},
+				"airportEgressMinutes": {
+					"value": 22,
+					"basis": "Free-flow drive LGA reference point -> City Hall Park (16.5 km).",
+					"source": {
+						"name": "OSRM demo server, car profile",
+						"url": "https://router.project-osrm.org/route/v1/driving/-73.872597,40.777199;-74.00708,40.71205?overview=false",
+						"retrievedOn": "2026-10-15",
+						"sourceId": "osrm-demo-osm"
+					}
+				}
+			},
+			"verification": {
+				"status": "preliminary-estimate",
+				"source": {
+					"name": "US DOT BTS On-Time Reporting July 2026 (scheduled block time) + OSRM airport drives + airline arrival guidance",
+					"url": "https://www.transtats.bts.gov/",
+					"retrievedOn": "2026-10-15",
+					"sourceId": "bts-ontime-2026-07",
+					"recordedIn": "docs/qa/rpg-2-star-ocean-the-second_us-science-sphere_runtime-migration_qa-note_m2-v02_20261015-175011-364131c8.md"
+				},
+				"note": "Sum of separately sourced parts (see components). Airport points are OurAirports reference points, not terminals; deplaning, baggage and curb time are not counted. Scheduled service on LGA-ORD is confirmed only through July 2026. An estimate for game time, not a timetable."
+			}
+		}
+	],
+	"routes": [
+		{
+			"id": "route.car.nyc__yonkers",
+			"fromLocationId": "earth.us.ny.new-york-city",
+			"toLocationId": "earth.us.ny.yonkers-outskirts",
+			"status": "available",
+			"bidirectional": false,
+			"legs": [
+				{
+					"segmentId": "seg.car.nyc__yonkers",
+					"reverse": false
+				}
+			]
+		},
+		{
+			"id": "route.car.yonkers__nyc",
+			"fromLocationId": "earth.us.ny.yonkers-outskirts",
+			"toLocationId": "earth.us.ny.new-york-city",
+			"status": "available",
+			"bidirectional": false,
+			"legs": [
+				{
+					"segmentId": "seg.car.yonkers__nyc",
+					"reverse": false
+				}
+			]
+		},
+		{
+			"id": "route.car.nyc__washington-ruins",
+			"fromLocationId": "earth.us.ny.new-york-city",
+			"toLocationId": "earth.us.dc.washington-ruins",
+			"status": "available",
+			"bidirectional": false,
+			"legs": [
+				{
+					"segmentId": "seg.car.nyc__washington-ruins",
+					"reverse": false
+				}
+			]
+		},
+		{
+			"id": "route.car.washington-ruins__nyc",
+			"fromLocationId": "earth.us.dc.washington-ruins",
+			"toLocationId": "earth.us.ny.new-york-city",
+			"status": "available",
+			"bidirectional": false,
+			"legs": [
+				{
+					"segmentId": "seg.car.washington-ruins__nyc",
+					"reverse": false
+				}
+			]
+		},
+		{
+			"id": "route.car.yonkers__washington-ruins",
+			"fromLocationId": "earth.us.ny.yonkers-outskirts",
+			"toLocationId": "earth.us.dc.washington-ruins",
+			"status": "available",
+			"bidirectional": false,
+			"legs": [
+				{
+					"segmentId": "seg.car.yonkers__washington-ruins",
+					"reverse": false
+				}
+			]
+		},
+		{
+			"id": "route.car.washington-ruins__yonkers",
+			"fromLocationId": "earth.us.dc.washington-ruins",
+			"toLocationId": "earth.us.ny.yonkers-outskirts",
+			"status": "available",
+			"bidirectional": false,
+			"legs": [
+				{
+					"segmentId": "seg.car.washington-ruins__yonkers",
+					"reverse": false
+				}
+			]
+		},
+		{
+			"id": "route.air.nyc__chicago",
+			"fromLocationId": "earth.us.ny.new-york-city",
+			"toLocationId": "earth.us.il.chicago",
+			"status": "available",
+			"bidirectional": false,
+			"legs": [
+				{
+					"segmentId": "seg.air.nyc-lga__chicago-ord",
+					"reverse": false
+				}
+			]
+		},
+		{
+			"id": "route.air.chicago__nyc",
+			"fromLocationId": "earth.us.il.chicago",
+			"toLocationId": "earth.us.ny.new-york-city",
+			"status": "available",
+			"bidirectional": false,
+			"legs": [
+				{
+					"segmentId": "seg.air.chicago-ord__nyc-lga",
+					"reverse": false
+				}
+			]
+		},
+		{
+			"id": "route.pending.yonkers__chicago",
+			"fromLocationId": "earth.us.ny.yonkers-outskirts",
+			"toLocationId": "earth.us.il.chicago",
+			"status": "pending",
+			"unavailableReason": "no-researched-route",
+			"bidirectional": true,
+			"legs": [],
+			"note": "No Yonkers-Chicago trip has been researched. Players travel to New York City first, then fly. Do not derive a figure by adding legs."
+		},
+		{
+			"id": "route.pending.washington-ruins__chicago",
+			"fromLocationId": "earth.us.dc.washington-ruins",
+			"toLocationId": "earth.us.il.chicago",
+			"status": "pending",
+			"unavailableReason": "no-researched-route",
+			"bidirectional": true,
+			"legs": [],
+			"note": "No Washington-Chicago trip has been researched (in the fiction the capital is abandoned; whether any airport there operates is undecided)."
+		}
+	],
+	"pendingRouteRequests": [
+		{
+			"id": "request.air.release-grade-figures",
+			"mode": "air",
+			"status": "open",
+			"note": "Re-derive the air components before release: terminal-specific access and egress, a check-in figure with known terms, and a schedule month nearer the build date."
+		},
+		{
+			"id": "request.car.self-hosted-osrm",
+			"mode": "car",
+			"status": "open",
+			"note": "Replace the demo-server figures with a self-hosted OSRM run on a dated OpenStreetMap extract, or another source whose terms allow commercial use."
+		}
+	]
+}

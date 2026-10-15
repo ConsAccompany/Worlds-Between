@@ -55,21 +55,21 @@ func _run() -> void:
 		app.language = language
 		app.language_changed.emit()
 		await _settle()
-		map.enter_region("yangtze_delta")
-		for place in [["earth.cn.liangzhu-ruins", "liangzhu"], ["earth.cn.shanghai.songjiang-outskirts", "songjiang"], ["earth.cn.shanghai", "shanghai-here"]]:
+		map.enter_region("us_northeast")
+		for place in [["earth.us.dc.washington-ruins", "washington"], ["earth.us.ny.yonkers-outskirts", "yonkers"], ["earth.us.ny.new-york-city", "new-york-here"]]:
 			map.select_place(place[0])
 			await _check_card(map, "%s-%s" % [place[1], language])
 			map.close_route_card()
 		# Zoomed in, more degree lines cross the card.
 		map.zoom_view(Vector2(320, 134), 1.5)
-		map.select_place("earth.cn.liangzhu-ruins")
-		await _check_card(map, "liangzhu-zoomed-%s" % language)
+		map.select_place("earth.us.dc.washington-ruins")
+		await _check_card(map, "washington-zoomed-%s" % language)
 		map.close_route_card()
-		map.enter_region("yangtze_delta")
+		map.enter_region("us_northeast")
 		var real_adapter = map.route_adapter
 		map.route_adapter = RouteAdapter.new(NoRouteApiProvider.new())
-		map.select_place("earth.cn.liangzhu-ruins")
-		await _check_card(map, "liangzhu-no-route-api-%s" % language)
+		map.select_place("earth.us.dc.washington-ruins")
+		await _check_card(map, "washington-no-route-api-%s" % language)
 		map.close_route_card()
 		map.route_adapter = real_adapter
 		await _settle()

@@ -5,7 +5,7 @@ Last updated: 2026-10-15
 ## Summary
 
 - M1 project foundation is complete. Godot 4.7.2 imports and launches the project; a scene smoke check passes Chinese/English menu labels, entry/return, movement, and temporary sprite loading.
-- M2's original three-destination exploration slice passed: top-down movement, NPC interaction, visible enemies, an avoidance path, and enemy reset on reentry. **M2 is reopened** by the 2026-10-14 rule change: the map must cover Earth, cities and ruins must use real places, and car/air travel must advance a calendar. As of 2026-10-15 the global/regional map, route preview/confirm/cancel, integer-minute calendar and save migration are implemented and pass Godot automated tests. **M2 is still not complete.** The anchors and start year await the user. Route figures are preliminary, there is no air route, and the map art and human review are outstanding (see the 2026-10-15 status entry below).
+- M2's original three-destination exploration slice passed: top-down movement, NPC interaction, visible enemies, an avoidance path, and enemy reset on reentry. **M2 is reopened** by the 2026-10-14 rule change: the map must cover Earth, cities and ruins must use real places, and car/air travel must advance a calendar. As of 2026-10-15 the global/regional map, route preview/confirm/cancel, integer-minute calendar and save migration are implemented and pass Godot automated tests. **M2 is still not complete.** The creator decided the anchors, the adventure start date and the first air route on 2026-10-15, and the runtime now implements them as technical candidates: new runs start in NYC (Lower Manhattan City Hall Park) on 2537-05-25, Yonkers and the Washington, D.C. Capitol ruins are reachable by car, and the NYC–Chicago air route lands in a placeholder Chicago Loop district. The travel registry lists the five Earth spheres plus the portal-only final planet. Route figures are preliminary estimates, the place and map art is missing or unaccepted, the Catskills community has no runtime place, and no human has reviewed or played it (see the latest 2026-10-15 integration entry below).
 - Four 640×360 M2 captures were inspected for readability and layout. The M2 encounter preview is now replaced by the M3 battle arena.
 - M3 combat core is complete: contact opens a fixed side-view arena with two fixed enemy types, horizontal movement, attack, dodge, guard, HP and energy, victory recovery, and defeat return to the menu.
 - Godot M1–M3 smoke checks pass; three M3 captures were inspected. The measured encounter transition stayed below the provisional one-second target on this development machine.
@@ -53,15 +53,17 @@ Last updated: 2026-10-15
 ### Phase M2 - World map and exploration
 
 - [x] Implement the three MVP destinations and visible avoidable enemies.
-- [x] Replace the region-only map with a global Earth map plus a Yangtze Delta regional layer; the playable story stays in the science region. Implemented and passing automated tests; the map art is not accepted (see below).
-- [x] Register real places with stable IDs, coordinates, bilingual names and scene entries. Only the provisional set exists: Shanghai, Songjiang Outskirts, Archaeological Ruins of Liangzhu City.
+- [x] Replace the region-only map with a global Earth map plus regional layers (now US Northeast and US Great Lakes; the Yangtze Delta layer is retired but kept on disk); the playable story stays in the science sphere. Implemented and passing automated tests; the map art is not accepted (see below).
+- [x] Register real places with stable IDs, coordinates, bilingual names and scene entries: New York City (City Hall Park), Yonkers, Washington, D.C. ruins and Chicago (the Loop). The old Shanghai set survives only as hidden save aliases.
 - [x] Route preview, one-time departure settlement, cancel at no cost, an integer-minute calendar (day, year and leap-year carry, week-transition signal), save/load and legacy-save migration. Implemented and passing automated tests.
-- [x] Godot automated tests: `GLOBAL_TRAVEL_CORE_OK`, `GLOBAL_EARTH_MAP_SMOKE_OK checks=201`, `GLOBAL_MAP_TRAVEL_INTEGRATION_OK checks=103`, the revised `M2_SMOKE_OK`, and the 1280×720 pointer regression. The old three-node `M2_SMOKE_OK` does not count.
-- [ ] Decide the first-city and underground-community anchors (user decision). Shanghai is provisional; Songjiang is a Shanghai district, not a separate city.
-- [ ] Decide the world start year (user decision). The calendar start 2026-04-01 08:00 is an engineering placeholder.
-- [ ] Replace the Rome2Rio point-to-point estimates with validated door-to-door route figures.
-- [ ] Add an actual air route to game data. Three candidates are research only and none is selected.
-- [ ] Connect the weekly business settlement to the week-transition signal.
+- [x] Godot automated tests (re-run 2026-10-15 after the US migration): `GLOBAL_TRAVEL_CORE_OK`, `GLOBAL_EARTH_MAP_SMOKE_OK checks=212`, `GLOBAL_MAP_TRAVEL_INTEGRATION_OK checks=105`, `US_SCIENCE_MIGRATION_SMOKE_OK checks=32`, the revised `M2_SMOKE_OK`, and windowed 1280×720 readability checks and captures. The old three-node `M2_SMOKE_OK` does not count.
+- [x] Decide the first-city and underground-community anchors: creator decision 2026-10-15. The Science hub is NYC, the first playable area is Lower Manhattan City Hall Park, the outskirts are Yonkers, and the underground community is near the Catskills. Design record only.
+- [x] Migrate the runtime from the superseded provisional Shanghai / Songjiang Outskirts / Liangzhu set and the Yangtze Delta layer to the NYC set (plus abandoned Washington, D.C. and the Chicago Loop). Implemented as a technical candidate; the scene art is not made or accepted, and the Catskills community has no runtime place yet.
+- [x] Decide the world start: the adventure starts 2537-05-25 (creator decision 2026-10-15). The prologue start date is still open.
+- [x] Set the new-game calendar to the decided date: new runs start 2537-05-25 08:00 (08:00 is a placeholder time of day). Old saves keep their 2026 date; whether to shift them is an open creator decision.
+- [ ] Replace the preliminary route figures (OSRM demo server for car and airport drives, BTS July 2026 flight medians) with release-grade sourced door-to-door figures.
+- [x] Add the decided first air route NYC–Chicago to game data (365 min out, 338 min back, 1177.1 km; preliminary estimates). The three Shanghai research candidates are superseded.
+- [x] Connect the weekly business settlement to the week-transition signal (commit 192c63b, `COMMERCE_WEEKLY_SETTLEMENT_OK checks=149`).
 - [ ] Produce and accept the map art.
 - [ ] Human map review, then the two human timed playtests (0/2).
 
@@ -347,3 +349,60 @@ This entry supersedes the "no implementation or test evidence" statement in the 
   - **Results.** `MERCHANT_FAIR_QUOTE_OK checks=91`. Still passing: Merchant path 109, commerce 149, map–travel 104, Earth map 201, M2/M6/M6-restart. Real 1280×720 zh/en captures: `FAIR_QUOTE_CAPTURE_OK captures=6`, including the re-stationed partial-week panel. The latest clean set is `143253` (`outputs/…merchant-fair-quote_company-panel_restationed-partial-week-npc80-{zh,en}_20261015-143253-*.png`), with fully English en panels.
   - **QA note.** The note's false "no screenshots were taken" line is corrected, and it now lists three capture sets: `140030` (initial slice, old "收益" label), `142808` (after the caveat fix; superseded because its en partial-week shot had a stale zh name in a harness-only feedback line) and `143253` (current; harness fix only, no game code changed).
   - **Counters.** M2 stays `in_progress` at 6/12 implemented, none `done`. No counter changed.
+
+## 2026-10-15 - Creator decisions reconciled: global spheres, NYC start, skills, AI, reputation, endgame (design records only; runtime not implemented; no counter changed)
+
+- **Source.** Creator-approved decisions given in chat, recorded in the [reconciliation note](design/rpg-2-star-ocean-the-second_creator-decisions-2026-10-15_world-skills-ai-endgame_reconciliation-note_v01_20261015-174559-39efc292.md). They supersede the provisional Shanghai / Songjiang / Liangzhu science geography.
+- **World.**
+  - Global real-place Earth map. The adventure starts **2537-05-25**. The underground community is near the **Catskills**.
+  - The Science hub is **NYC** (US + Canada). The first playable area is **Lower Manhattan City Hall Park**, and the outskirts are **Yonkers**.
+  - **Washington, D.C.** is a wholly abandoned city. The U.S. Capitol grounds are recognizable, partially collapsed and overgrown, and an active science survey outpost and patrol automata operate there. Washington is the high-precision Pixelorama scene pilot.
+  - The first air route is **NYC–Chicago**. MVP Chicago is one playable district, **the Loop**.
+  - **Liangzhu** is a future Asia/Wuxia scene, not MVP.
+- **Five Earth spheres.**
+  - Science: US + Canada, hub NYC.
+  - Magic: South America, hub Manaus, with the light and dark leaders co-located.
+  - Wuxia: Asia, hub Chongqing.
+  - Nature: Oceania, hub Brisbane.
+  - Culture: the former Fantasy sphere, an alien-descendant culture of memory, knowledge and inheritance. Europe + Africa, dual hubs Athens and Cairo.
+  - Mexico, Central America and the Caribbean are mixed borderlands with side content, not a sixth mainline. Antarctica is DLC. The final planet is reached by portal after all five Earth mainlines and is separate from the spheres.
+- **Jobs and skills.**
+  - The 20-series roster is accepted. Every existing five-stage name and `finalQuest` text is approved unchanged; the `jobProposal.series` SHA-256 is identical before and after this pass.
+  - New rules: all branches are eventually learnable. Skills go up to rank 5 via JP. Each series has 10 nodes, exactly 2 unlocked immediately at each of the 5 tiers. Each of the 51 identities has 10 personal nodes, all reached by personal level 100, with at least one exclusive personal skill on joining; personal skills are always usable.
+  - The existing 7-node job trees and 5-node personal trees are marked **superseded drafts, pending redesign**. None of the 710 approved-structure nodes was written.
+- **AI and combos.** No consumable items by default; a per-character strategy can allow them. Heal/revive AI targets downed allies first, then urgent healing. Combo AI is off by default and can be enabled in auto battle. Every combo participant pays energy. Pairwise relationships are scored 0–100 with stages and can fall and recover. Combos unlock automatically when the conditions are met, and the menu describes the conditions.
+- **Reputation.** Five dimensions, with the canonical Chinese names: 求知 (inquiry), 果敢 (resolve), 共情 (empathy), 公正 (fairness), 守诺 (promise-keeping). They apply worldwide and per sphere with different weights. The actual behaviour record is kept separate from NPC perceived rumour, which evidence or action can correct.
+- **Commerce.** Discovery price effects start locally and propagate over established trade routes.
+- **Endgame.** 2 repeatable adjustable-difficulty scenes per Earth sphere plus 2 on the final planet. 5 fixed tiers, all selectable immediately; same reward types, with higher quantities and drop rates at higher tiers. No missed content.
+- **Romance.** The 10 romance identities and stages stay deferred; quality acceptance is pending.
+- **Files.**
+  - Bible state: new `creatorDecisions`; facts, open questions and chapters 1–9 reconciled; skill-tree drafts flagged `superseded` / `pendingRedesign` with `approvedRules`; `environmentVisualReview.liangzhu.mvpScope` and a new `washingtonDC` entry (nothing authored).
+  - mvp-progress: new `designDecisions`. M2 summary, remaining items, blocker and details updated. The `anchor`, `start-year` and `air-route` gates are now `decided_runtime_pending`. Five resolved or superseded pending decisions are removed (first city, community anchor, start year, Songjiang label, air-route pair) and four open ones added (prologue start date, 10-node skill redesign, companion sphere mapping, romance-10). The Liangzhu ledger scope notes that it is not MVP.
+  - Game Bible UI: labels that hard-coded the superseded wording now match the data. A new gate badge reads "已决定 · 运行时未迁移".
+- **Not changed.** Runtime (`game/`), tools, tests, art and character records. Companions keep their legacy board values: no Wuxia companion yet, and Culture still stored as 奇幻.
+- **Known stale test.** The M2 global-travel gate check still expects `anchor` / `start-year` = `awaiting_decision` and `air-route` = `research_only`, so it now fails on those expectations. Its owner needs to update it.
+- **Counters unchanged.** Runtime sprites **0/52**; science scene visuals **0/11**; human playtests **0/2**; 51 identities / 52 variants. **M2 stays in progress** until the runtime follows these decisions and humans have reviewed it.
+
+## 2026-10-15 - Five-sphere region registry, US runtime reconciled in tracking, two UI fixes (technical candidates; M2 not complete; no counter changed)
+
+- **Region registry.** The active v02 travel data and the map's display boards now list the five Earth spheres and the separate final planet:
+  - Science: US + Canada (the only sphere with places).
+  - Magic: South America.
+  - Wuxia: Asia.
+  - Nature: Oceania.
+  - Culture: Europe + Africa. This is the former Fantasy sphere; `fantasy` remains only as an explicit legacy alias of `culture`.
+  - Final planet (id `offworld`): portal only.
+
+  The validator now expects five Earth regions. It rejects a legacy region ID that collides with an active one, and it rejects places outside the science sphere's US/CA list. No city was added. The provisional v01 data files are byte-identical.
+- **Tracking.** The Game Bible state, the mvp-progress state and this file now describe the migrated runtime. NYC (City Hall Park), Yonkers, the Washington, D.C. Capitol ruins, NYC–Chicago with the Loop, and the 2537-05-25 start are implemented technical candidates. The M2 `anchor`, `start-year` and `air-route` gates moved from `decided_runtime_pending` to `implemented`, so 9 of 12 gates are implemented. Three gates stay open: route figures, map art and human review. None is `done`, and **M2 stays in progress**.
+- **Open decisions.** Two creator decisions stay listed for M2: the prologue start date (already open) and whether to shift old 2026-dated saves into 2537 (newly listed). The mainline order after Science Chapter 1 is free across the other four spheres, and Culture is the renamed Fantasy sphere. Neither is listed as an open question any more. Still open: the 710 skill nodes, relationship stage names and thresholds, Wuxia companions, and the per-sphere reputation weights.
+- **Endgame scope.** The endgame has 2 repeatable scenes per Earth sphere plus 2 on the final planet. This is recorded as full-game content, not MVP.
+- **UI fixes.**
+  - The English air route card read "Air · Air 1177.1 km". It now reads "Air · Flight 1177.1 km"; the Chinese card is unchanged.
+  - The Loop's "Technical placeholder · Art not accepted" badge and its subtitle ran under the Save button. The badge now sits after the title, and the subtitle no longer repeats it. The scene stays visibly unapproved.
+- **Test results.**
+  - Headless: `GLOBAL_TRAVEL_CORE_OK`, `GLOBAL_EARTH_MAP_SMOKE_OK checks=212`, `GLOBAL_MAP_TRAVEL_INTEGRATION_OK checks=105`, `COMMERCE_WEEKLY_SETTLEMENT_OK checks=149`, `US_SCIENCE_MIGRATION_SMOKE_OK checks=32`, `MERCHANT_CITY_COMMERCE_PATH_OK checks=109`, `MERCHANT_FAIR_QUOTE_OK checks=91`, `EXPORT_DATA_INCLUSION_SMOKE_OK`, `M2_SMOKE_OK`, `M6_SMOKE_OK`.
+  - Windowed: `ROUTE_CARD_READABILITY_OK 109 checks`, `STATUS_BACKING_READABILITY_OK 199 checks`, `GLOBAL_MAP_CAPTURE_OK 22`.
+  - The Game Bible M2 gate check passes. See the [integration QA note](qa/rpg-2-star-ocean-the-second_five-sphere-registry-and-us-runtime_integration-qa-note_m2-v02_20261015-184437-b3b84617.md).
+- **Sync preparation.** The Loop scene and script were renamed to `rpg-2-star-ocean-the-second_chicago-loop_district-placeholder-scene_m2-v02_20261015-185645-a7d62ba0.{tscn,gd}`. Three raw line breaks inside string literals in `scifi_world_map.gd` became `\n` escapes, because a CRLF checkout made the English route cards one line too tall. The sync stages no screenshots, so the 9 new map-capture PNG paths were dropped from the M2 gate evidence lists. Those gates still cite their QA notes. All checks were re-run on the exact staged tree (integration QA note, §7).
+- **Counters unchanged.** Runtime sprites **0/52**; science scene visuals **0/11**; human playtests **0/2**; 51 identities / 52 variants.

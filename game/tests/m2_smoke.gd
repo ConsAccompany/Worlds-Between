@@ -20,7 +20,8 @@ func _run_checks() -> void:
 	if not _check(current_scene != null and current_scene.name == "ScifiWorldMap", "menu opens world map"):
 		return
 	var world_map: Node = current_scene
-	if not _check(world_map.get("destination_buttons").size() == 3, "three selectable map destinations"):
+	# Four since 2026-10-15: the three demo scenes plus the Chicago Loop placeholder.
+	if not _check(world_map.get("destination_buttons").size() == 4, "four selectable map destinations"):
 		return
 	if not _check(world_map.get("title_label").text.contains("科技板块"), "Chinese map title"):
 		return

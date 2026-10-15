@@ -17,14 +17,14 @@ extends SceneTree
 const MapData := preload("res://scripts/world_map_data.gd")
 const RouteAdapter := preload("res://scripts/world_map_route_adapter.gd")
 const MAP_SCENE := "res://scenes/scifi_world_map.tscn"
-const SHANGHAI := "earth.cn.shanghai"
-const SONGJIANG := "earth.cn.shanghai.songjiang-outskirts"
-const LIANGZHU := "earth.cn.liangzhu-ruins"
+const NEW_YORK := "earth.us.ny.new-york-city"
+const YONKERS := "earth.us.ny.yonkers-outskirts"
+const WASHINGTON := "earth.us.dc.washington-ruins"
 const SAVE_ROOT := "user://test-saves/m2-map-travel-integration"
 # Production state, review state and data-source names belong in the Game Bible and QA notes.
 const FORBIDDEN_UI := [
 	"待用户确认", "未验收", "试玩", "待定", "暂定", "待制作", "未核实", "不计旅时", "参照",
-	"Natural Earth", "50m", "110m", "GeoNames", "Rome2Rio", "UNESCO",
+	"Natural Earth", "50m", "110m", "GeoNames", "Rome2Rio", "UNESCO", "OSRM", "OpenStreetMap", "GNIS", "OurAirports", "BTS",
 	"untimed", "awaiting", "not accepted", "demo", "provisional", "placeholder", "not verified", "pending",
 ]
 # The only scripts allowed to call select_destination(): the travel core itself, and the map
@@ -192,7 +192,7 @@ func _confirm_settles_once() -> void:
 	map.destination_buttons["scifi.ruins"].pressed.emit()
 	await _settle()
 	var minutes := _selected_minutes(map)
-	if not _check(map.route_state["status"] == "ready" and minutes > 0 and app.travel_preview.get("kind", "") == "travel", "Liangzhu card previews a timed trip"):
+	if not _check(map.route_state["status"] == "ready" and minutes > 0 and app.travel_preview.get("kind", "") == "travel", "Washington ruins card previews a timed trip"):
 		return
 	var start: int = app.calendar_minutes
 	_reset_counters()
@@ -201,7 +201,7 @@ func _confirm_settles_once() -> void:
 	map.depart()
 	await _settle()
 	_check(travel_events.size() == 1 and calendar_events.size() == 1 and calendar_events[0] == [start, start + minutes, "travel"], "triple Depart press settles one trip (%d travel, %d calendar events)" % [travel_events.size(), calendar_events.size()])
-	_check(app.calendar_minutes == start + minutes and app.current_location_id == LIANGZHU and app.last_travel.get("minutes", -1) == minutes, "clock advanced by the route minutes once and the party is at Liangzhu")
+	_check(app.calendar_minutes == start + minutes and app.current_location_id == WASHINGTON and app.last_travel.get("minutes", -1) == minutes, "clock advanced by the route minutes once and the party is at Washington ruins")
 	_check(area_loads == 1 and current_scene.name == "ScifiExplorationArea" and app.current_destination_id == "scifi.ruins", "exactly one area scene load, at the ruins (%d loads)" % area_loads)
 	_check(app.travel_preview.is_empty(), "preview consumed by departure")
 
@@ -224,7 +224,7 @@ func _cancel_and_free_entries() -> void:
 	map._unhandled_input(cancel)
 	await _settle()
 	_check(current_scene == map and not map.route_card.visible and app.travel_preview.is_empty(), "Cancel and Esc close the card and clear the preview")
-	_check(app.calendar_minutes == start and app.current_location_id == LIANGZHU and travel_events.is_empty() and calendar_events.is_empty(), "previewing and cancelling charge no time")
+	_check(app.calendar_minutes == start and app.current_location_id == WASHINGTON and travel_events.is_empty() and calendar_events.is_empty(), "previewing and cancelling charge no time")
 	# The current place: free entry, then leave and re-enter twice more.
 	for attempt in 3:
 		map.destination_buttons["scifi.ruins"].pressed.emit()
@@ -249,18 +249,18 @@ func _save_load_then_depart() -> void:
 	if not _check(id != "", "manual save after a trip"):
 		return
 	_reset_counters()
-	if not _check(app.load_save(id) and app.calendar_minutes == saved_minutes and app.current_location_id == LIANGZHU, "load restores clock and place"):
+	if not _check(app.load_save(id) and app.calendar_minutes == saved_minutes and app.current_location_id == WASHINGTON, "load restores clock and place"):
 		return
 	app.load_save(id)
 	map = await _open_map()
 	_check(calendar_events.is_empty() and week_events.is_empty() and travel_events.is_empty() and app.calendar_minutes == saved_minutes, "loading twice and reopening the map charge nothing")
-	_check(map.route_adapter.current_place_id() == LIANGZHU and map.calendar_label.text == "%s %s" % [app.calendar_date_text_at(saved_minutes), app.calendar_time_text_at(saved_minutes)], "map origin and date follow the loaded save")
+	_check(map.route_adapter.current_place_id() == WASHINGTON and map.calendar_label.text == "%s %s" % [app.calendar_date_text_at(saved_minutes), app.calendar_time_text_at(saved_minutes)], "map origin and date follow the loaded save")
 	map.destination_buttons["scifi.city"].pressed.emit()
 	await _settle()
 	var minutes := _selected_minutes(map)
 	map.depart_button.pressed.emit()
 	await _settle()
-	_check(minutes > 0 and travel_events.size() == 1 and app.calendar_minutes == saved_minutes + minutes and app.current_location_id == SHANGHAI and app.current_destination_id == "scifi.city", "after loading, only the new trip is charged")
+	_check(minutes > 0 and travel_events.size() == 1 and app.calendar_minutes == saved_minutes + minutes and app.current_location_id == NEW_YORK and app.current_destination_id == "scifi.city", "after loading, only the new trip is charged")
 
 
 func _legacy_save_on_map() -> void:
@@ -281,7 +281,7 @@ func _legacy_save_on_map() -> void:
 	var start: int = app.travel_registry().calendar_start_minutes
 	var map: Node = await _open_map()
 	_check(app.calendar_minutes == start and calendar_events.is_empty() and week_events.is_empty(), "migration starts at the calendar start, no phantom days from 25 h play time")
-	_check(map.route_adapter.current_place_id() == SONGJIANG, "map starts from the saved scene's place (Songjiang)")
+	_check(map.route_adapter.current_place_id() == YONKERS, "map starts from the saved scene's place (Yonkers)")
 	map.destination_buttons["scifi.outskirts"].pressed.emit()
 	await _settle()
 	if not _check(map.route_state["status"] == "same_place", "the migrated place is the current place"):
@@ -304,7 +304,7 @@ func _api_mismatch_blocks_departure() -> void:
 	_reset_counters()
 	for language in ["zh", "en"]:
 		app.language = language
-		map.select_place(LIANGZHU)
+		map.select_place(WASHINGTON)
 		await _settle()
 		_check(map.route_state["status"] == "pending_api" and map.depart_button.disabled and not map.card_route.text.is_empty() and map.card_options.get_child_count() == 0, "mismatched API: departure disabled with an explanation (%s)" % language)
 		_check(not _has_digit(map.card_route.text) and not map.depart_button.text.to_lower().contains("enter") and not map.depart_button.text.contains("进入"), "mismatched API: no numbers and no entry offer (%s)" % language)
@@ -334,7 +334,7 @@ func _refused_confirm_charges_nothing() -> void:
 	map.route_adapter = RouteAdapter.new(refusing)
 	map.places = map.route_adapter.places()
 	_reset_counters()
-	map.select_place(LIANGZHU)
+	map.select_place(WASHINGTON)
 	await _settle()
 	if not _check(map.route_state["status"] == "ready" and not map.depart_button.disabled, "refusing core still previews the trip"):
 		return
@@ -361,10 +361,10 @@ func _labels_and_coordinates() -> void:
 		map.enter_global()
 		await _settle()
 		_check(_forbidden_in(map) == "", "globe has no development labels (%s): %s" % [language, _forbidden_in(map)])
-		map.enter_region("yangtze_delta")
+		map.enter_region("us_northeast")
 		await _settle()
 		_check(_forbidden_in(map) == "", "region has no development labels (%s): %s" % [language, _forbidden_in(map)])
-		for place_id in [SHANGHAI, SONGJIANG, LIANGZHU]:
+		for place_id in [NEW_YORK, YONKERS, WASHINGTON]:
 			var location: Dictionary = app.travel_location(place_id)
 			var expected: Vector2 = map.region_view.geo_to_screen(float(location["coordinates"]["lon"]), float(location["coordinates"]["lat"]))
 			_check(map.marker_position(place_id) == expected, "marker drawn at route-core coordinates: " + place_id)

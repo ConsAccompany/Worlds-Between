@@ -5,8 +5,10 @@ extends RefCounted
 # from the global travel data (world_route_registry.gd), so map and route core share one
 # source. This script only parses files and never adds coordinates of its own.
 
-const REGISTRY_PATH := "res://data/world-map/rpg-2-star-ocean-the-second_earth-map_place-registry_m2-v01_20261015-024300-36903495.json"
-const GEODATA_PATH := "res://data/world-map/rpg-2-star-ocean-the-second_earth-map_runtime-geodata_m2-v01_20261015-024300-2595ada6.json"
+# v02 (2026-10-15): US science sphere. The v01 registry and geodata (Yangtze Delta) stay on disk
+# as records for later Asia work; nothing reads them at run time.
+const REGISTRY_PATH := "res://data/world-map/rpg-2-star-ocean-the-second_earth-map_place-registry_m2-us-science-v02_20261015-175011-eeaa6baa.json"
+const GEODATA_PATH := "res://data/world-map/rpg-2-star-ocean-the-second_earth-map_runtime-geodata_m2-us-science-v02_20261015-175011-944d9635.json"
 
 static var _registry: Dictionary = {}
 static var _geodata: Dictionary = {}
@@ -65,6 +67,19 @@ static func geo_region(region_id: String) -> Dictionary:
 	return {}
 
 
+# Geodata layer a display region draws from. Several regions may share one layer.
+static func geodata_key(region_id: String) -> String:
+	return String(geo_region(region_id).get("geodata_key", region_id))
+
+
+# Lon/lat box a region opens on: its explicit frame box, else the box of its places.
+static func region_frame_bbox(region_id: String, source: Array) -> Array:
+	var frame: Variant = geo_region(region_id).get("frame_bbox_wsen")
+	if typeof(frame) == TYPE_ARRAY and frame.size() == 4:
+		return frame
+	return region_places_bbox(region_id, source)
+
+
 # source: map places that already carry core coordinates (world_map_route_adapter.places()).
 static func places_in_region(region_id: String, source: Array) -> Array:
 	return source.filter(func(entry): return entry["geo_region_id"] == region_id)
@@ -83,6 +98,7 @@ static func global_land_rings() -> Array:
 	return _rings("global", geodata()["layers"]["global_land"]["rings"])
 
 
+# region_key is a geodata layer key (see geodata_key()). Lakes are stored as hole rings.
 static func region_land_rings(region_key: String) -> Array:
 	return _rings("region:" + region_key, geodata()["layers"]["regions"][region_key]["land"]["rings"])
 
@@ -91,7 +107,8 @@ static func region_roads(region_key: String) -> Array:
 	var cache_key := "roads:" + region_key
 	if not _ring_cache.has(cache_key):
 		var lines := []
-		for line in geodata()["layers"]["regions"][region_key]["roads"]["lines"]:
+		# A layer may have no road subset (the US layer has none yet).
+		for line in geodata()["layers"]["regions"][region_key].get("roads", {}).get("lines", []):
 			lines.append({"major": line["type"] == "Major Highway", "points": _points(line["points"])})
 		_ring_cache[cache_key] = lines
 	return _ring_cache[cache_key]

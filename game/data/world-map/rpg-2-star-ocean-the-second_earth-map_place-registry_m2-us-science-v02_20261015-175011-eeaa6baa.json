@@ -1,0 +1,180 @@
+{
+  "schema": "worlds-between.world-map.place-registry.v2",
+  "status": "creator_approved_place_set_display_unaccepted",
+  "verified_on": "2026-10-15",
+  "notes": [
+    "Display metadata only: label side, map region and display kind. Each place id must match a location id in the global travel data.",
+    "Coordinates, names, administrative names, scene destinations and discovery come only from the global travel data (game/data/world-travel/), through the AppState route API or, when that API is unavailable, read straight from the same file. This registry holds no coordinates, so the map and the travel core cannot drift apart.",
+    "Route distances, travel minutes and arrival dates come only from the AppState route API. This file has none.",
+    "v02 (2026-10-15): the creator approved a US science sphere (New York City hub, Yonkers outskirts, Washington, D.C. ruins, Chicago by air). The science board covers the US and Canada only. The v01 registry (Yangtze Delta, Shanghai set) stays on disk for later Asia work; its place ids are hidden retired aliases in the travel data and have no display entry here.",
+    "Boards (2026-10-15 creator decision): five Earth spheres, science (US + Canada), magic (South America), wuxia (Asia), nature (Oceania) and culture (Europe + Africa, formerly fantasy; legacy_ids keeps the old id as an alias only), plus the separate portal-only final planet (id offworld). Only science has places.",
+    "Geo regions may share one geodata layer (geodata_key). frame_bbox_wsen is the lon/lat box a region opens on; frame_px is the map-local pixel rectangle it is fitted into. Both are display choices, not geography. Region frames and label sides are engineering choices, not accepted map art."
+  ],
+  "design_sources": [
+    "docs/design/rpg-2-star-ocean-the-second_global-earth-map-real-place-travel_rules-v01_20261014-235354-2b5d4d98.md",
+    "docs/qa/rpg-2-star-ocean-the-second_us-science-sphere_runtime-migration_qa-note_m2-v02_20261015-175011-364131c8.md"
+  ],
+  "boards": [
+    {
+      "id": "science",
+      "name": {
+        "zh": "科技板块",
+        "en": "Science sphere"
+      },
+      "country_codes": ["US", "CA"],
+      "status": "playable_demo",
+      "geo_region_ids": [
+        "us_northeast",
+        "us_great_lakes"
+      ]
+    },
+    {
+      "id": "magic",
+      "name": {
+        "zh": "魔法板块",
+        "en": "Magic sphere"
+      },
+      "status": "location_pending",
+      "geo_region_ids": []
+    },
+    {
+      "id": "wuxia",
+      "name": {
+        "zh": "武侠板块",
+        "en": "Wuxia sphere"
+      },
+      "status": "location_pending",
+      "geo_region_ids": []
+    },
+    {
+      "id": "nature",
+      "name": {
+        "zh": "自然板块",
+        "en": "Nature sphere"
+      },
+      "status": "location_pending",
+      "geo_region_ids": []
+    },
+    {
+      "id": "culture",
+      "name": {
+        "zh": "文化板块",
+        "en": "Culture sphere"
+      },
+      "legacy_ids": ["fantasy"],
+      "status": "location_pending",
+      "geo_region_ids": []
+    },
+    {
+      "id": "offworld",
+      "name": {
+        "zh": "终局星球",
+        "en": "Final planet"
+      },
+      "status": "portal_only_not_on_earth_map",
+      "geo_region_ids": []
+    }
+  ],
+  "geo_regions": [
+    {
+      "id": "us_northeast",
+      "board_id": "science",
+      "name": {
+        "zh": "美国东北部",
+        "en": "US Northeast"
+      },
+      "short_name": {
+        "zh": "美国东北部",
+        "en": "US Northeast"
+      },
+      "geodata_key": "us_east",
+      "standard_parallel": 40.0,
+      "central_meridian": -75.5,
+      "pan_bbox_wsen": [
+        -80.5,
+        36.8,
+        -70.5,
+        44.0
+      ],
+      "global_zoom_bbox_wsen": [
+        -78.5,
+        38.0,
+        -72.5,
+        42.0
+      ],
+      "frame_px": [
+        204,
+        42,
+        214,
+        194
+      ],
+      "global_label_side": "right"
+    },
+    {
+      "id": "us_great_lakes",
+      "board_id": "science",
+      "name": {
+        "zh": "美国五大湖区",
+        "en": "US Great Lakes"
+      },
+      "short_name": {
+        "zh": "五大湖区",
+        "en": "Great Lakes"
+      },
+      "geodata_key": "us_east",
+      "standard_parallel": 42.0,
+      "central_meridian": -87.5,
+      "pan_bbox_wsen": [
+        -92.5,
+        38.5,
+        -82.5,
+        46.5
+      ],
+      "global_zoom_bbox_wsen": [
+        -89.5,
+        40.5,
+        -85.5,
+        43.5
+      ],
+      "frame_bbox_wsen": [
+        -89.2,
+        40.9,
+        -86.0,
+        42.9
+      ],
+      "global_label_side": "left"
+    }
+  ],
+  "places": [
+    {
+      "id": "earth.us.ny.new-york-city",
+      "kind": "city",
+      "board_id": "science",
+      "geo_region_id": "us_northeast",
+      "label_side": "below"
+    },
+    {
+      "id": "earth.us.ny.yonkers-outskirts",
+      "kind": "outskirts",
+      "board_id": "science",
+      "geo_region_id": "us_northeast",
+      "label_side": "above"
+    },
+    {
+      "id": "earth.us.dc.washington-ruins",
+      "kind": "capital_ruins",
+      "board_id": "science",
+      "geo_region_id": "us_northeast",
+      "label_side": "right"
+    },
+    {
+      "id": "earth.us.il.chicago",
+      "kind": "city",
+      "board_id": "science",
+      "geo_region_id": "us_great_lakes",
+      "label_side": "right"
+    }
+  ],
+  "reference_places": [],
+  "travel_data": "game/data/world-travel/rpg-2-star-ocean-the-second_global-earth-travel_locations-routes_m2-us-science-v02_20261015-175011-c454007b.json"
+}

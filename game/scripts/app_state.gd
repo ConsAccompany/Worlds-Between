@@ -32,12 +32,17 @@ const STRINGS := {
 		"map_title": "世界地图 · 科技板块",
 		"map_help": "点选地点查看路线与旅时",
 		"map_back": "主菜单",
-		"area_city": "科技城市片区",
-		"area_outskirts": "城外通道",
-		"area_ruins": "旧文明遗址",
-		"area_city_hint": "街道与公共设施 · 可与维修员交谈",
-		"area_outskirts_hint": "开阔路线 · 可绕过巡逻机械",
-		"area_ruins_hint": "前文明设施 · 小心自动防卫机",
+		"area_city": "下曼哈顿 · 市政厅公园",
+		"area_outskirts": "扬克斯郊外",
+		"area_ruins": "华盛顿特区废墟 · 国会大厦",
+		"area_loop": "芝加哥 · 卢普区",
+		"area_city_hint": "纽约科技枢纽 · 市政厅公园一带 · 可与维修员交谈",
+		"area_outskirts_hint": "纽约市北郊 · 开阔路线 · 可绕过巡逻机械",
+		"area_ruins_hint": "坍塌、长满植被的国会大厦园区 · 勘察站 · 小心巡逻自动机",
+		"area_loop_hint": "高架环线（L）内的街区 · 无勘察、招募或战斗",
+		"loop_placeholder_badge": "技术占位 · 美术未验收",
+		"loop_street_note": "街名与环线走向依据真实地理；建筑与街区比例为占位示意。",
+		"loop_walk_note": "场景内步行不消耗日历时间。",
 		"area_help": "WASD 移动 · E 交互 · Esc 地图",
 		"area_back": "世界地图",
 		"npc_city": "维修员：这里的旧设备还能继续使用。",
@@ -238,12 +243,17 @@ const STRINGS := {
 		"map_title": "World map · Science region",
 		"map_help": "Pick a place to see its route and travel time",
 		"map_back": "Main menu",
-		"area_city": "Science city district",
-		"area_outskirts": "Outer passage",
-		"area_ruins": "Old civilization ruins",
-		"area_city_hint": "Streets and public works · Talk to a technician",
-		"area_outskirts_hint": "Open routes · Bypass a patrol machine",
-		"area_ruins_hint": "Pre-reset facility · Watch for automated defense",
+		"area_city": "Lower Manhattan · City Hall Park",
+		"area_outskirts": "Yonkers outskirts",
+		"area_ruins": "Washington, D.C. ruins · U.S. Capitol",
+		"area_loop": "Chicago · The Loop",
+		"area_city_hint": "New York science hub · around City Hall Park · Talk to a technician",
+		"area_outskirts_hint": "North of New York City · Open routes · Bypass a patrol machine",
+		"area_ruins_hint": "Collapsed, overgrown Capitol grounds · Survey post · Watch for patrol automata",
+		"area_loop_hint": "Blocks inside the elevated L · No survey, recruit or battle",
+		"loop_placeholder_badge": "Technical placeholder · Art not accepted",
+		"loop_street_note": "Street names and the loop's course follow real geography; buildings and block scale are placeholders.",
+		"loop_walk_note": "Walking inside a scene uses no calendar time.",
 		"area_help": "WASD move · E interact · Esc map",
 		"area_back": "World map",
 		"npc_city": "Technician: These old devices still work well.",
@@ -488,11 +498,16 @@ const TRAVEL_SAVE_VERSION := 1
 const REST_WEEK_MINUTES := 7 * 24 * 60
 const MONTH_ABBREVIATIONS_EN := ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
+# The three demo scenes. The field-report goal counts these, so placeholder scenes stay out of this list.
 const DESTINATIONS := ["scifi.city", "scifi.outskirts", "scifi.ruins"]
+# Walkable scenes outside the demo goal (no survey, recruit, trace or battle). Never marked visited.
+const PLACEHOLDER_DESTINATIONS := ["scifi.loop"]
+const AREA_SCENES := {"scifi.loop": "res://scenes/rpg-2-star-ocean-the-second_chicago-loop_district-placeholder-scene_m2-v02_20261015-185645-a7d62ba0.tscn"}
 const DESTINATION_KEYS := {
 	"scifi.city": "area_city",
 	"scifi.outskirts": "area_outskirts",
 	"scifi.ruins": "area_ruins",
+	"scifi.loop": "area_loop",
 }
 const PARTY_CAPACITY := 5
 const MEMBER_DEFS := {
@@ -518,12 +533,26 @@ func text_for(key: String) -> String:
 	return STRINGS[language].get(key, key)
 
 
+# Walkable scene for a destination. The three demo scenes share the exploration area; Chicago's
+# Loop is a separate technical placeholder (art not accepted) with no survey, recruit or battle.
+func area_scene_path(destination_id: String) -> String:
+	return String(AREA_SCENES.get(destination_id, "res://scenes/scifi_exploration_area.tscn"))
+
+
+func is_area_scene(scene_path: String) -> bool:
+	return scene_path.ends_with("scifi_exploration_area.tscn") or AREA_SCENES.values().has(scene_path)
+
+
+func is_scene_destination(destination_id: String) -> bool:
+	return DESTINATIONS.has(destination_id) or PLACEHOLDER_DESTINATIONS.has(destination_id)
+
+
 func destination_name(destination_id: String) -> String:
 	return text_for(DESTINATION_KEYS.get(destination_id, "area_city"))
 
 
 func select_destination(destination_id: String) -> bool:
-	if not DESTINATIONS.has(destination_id):
+	if not is_scene_destination(destination_id):
 		return false
 	current_destination_id = destination_id
 	enemy_cleared_for_return = false
@@ -1332,7 +1361,7 @@ func make_snapshot(scene_kind: String, position: Vector2, note: String) -> Dicti
 
 
 func write_manual_save(slot: int) -> String:
-	var kind := "annex" if save_return_scene.ends_with("survey_annex.tscn") else ("area" if save_return_scene.ends_with("scifi_exploration_area.tscn") else "map")
+	var kind := "annex" if save_return_scene.ends_with("survey_annex.tscn") else ("area" if is_area_scene(save_return_scene) else "map")
 	return SaveStore.write_entry("manual", slot, make_snapshot(kind, save_return_position, "manual_note"))
 
 
@@ -1478,7 +1507,7 @@ func _valid_travel_block(block: Variant) -> bool:
 func loaded_scene_path() -> String:
 	var path := "res://scenes/scifi_world_map.tscn"
 	if loaded_scene_kind == "area":
-		path = "res://scenes/scifi_exploration_area.tscn"
+		path = area_scene_path(current_destination_id)
 	elif loaded_scene_kind == "annex":
 		path = "res://scenes/survey_annex.tscn"
 	if has_pending_job_choice():
@@ -1488,7 +1517,10 @@ func loaded_scene_path() -> String:
 
 
 func _valid_snapshot(snapshot: Dictionary) -> bool:
-	if snapshot.get("scene", "") not in ["map", "area", "annex"] or not DESTINATIONS.has(snapshot.get("destination", "")):
+	if snapshot.get("scene", "") not in ["map", "area", "annex"] or not is_scene_destination(String(snapshot.get("destination", ""))):
+		return false
+	# The placeholder Loop scene has no survey annex.
+	if snapshot.get("scene", "") == "annex" and not DESTINATIONS.has(snapshot.get("destination", "")):
 		return false
 	var position: Variant = snapshot.get("position")
 	if typeof(position) != TYPE_ARRAY or position.size() != 2:
