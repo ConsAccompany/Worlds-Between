@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
   "planVersion": "v0.2",
-  "updatedAt": "2026-10-16T03:05:00Z",
+  "updatedAt": "2026-10-16T03:38:56Z",
   "currentStep": "M8",
   "steps": [
     {
@@ -591,5 +591,417 @@
     "zh": "创作者 2026-10-15 决定：全球真实地名地图；正式冒险 2537-05-25；地下社区在卡茨基尔山附近；科技中心纽约（美国 + 加拿大），首个可玩区域曼哈顿下城市政厅公园，城外扬克斯；华盛顿特区废城为高精度 Pixelorama 场景试点；首条航线纽约—芝加哥，MVP 芝加哥卢普区；良渚为未来亚洲／武侠场景，不属于 MVP；五个地球文明圈（科技／魔法／武侠／自然／文化）与传送门后的终局星球；20 系列五阶名称与终阶任务已批准；技能 10 节点新规则待重新设计；AI、组合技、名声、价格传播与后期场景规则见说明。后期可重复场景（五个地球文明圈各 2 个＋终局星球 2 个）属于完整游戏，不属于 MVP。2026-10-15 晚：美国科技圈地理、纽约—芝加哥航线、2537-05-25 开局与五文明圈区域登记已在运行时实现为技术候选；技能、AI、组合技、名声、价格传播与后期场景尚未实现。",
     "en": "Creator decisions 2026-10-15: global real-place Earth map; adventure starts 2537-05-25; underground community near the Catskills; Science hub NYC (US + Canada), first playable Lower Manhattan City Hall Park, Yonkers outskirts; abandoned Washington, D.C. is the high-precision Pixelorama scene pilot; first air route NYC-Chicago, MVP Chicago the Loop; Liangzhu is a future Asia/Wuxia scene, not MVP; five Earth spheres (Science/Magic/Wuxia/Nature/Culture) plus a final planet via portal; 20 job series stage names and final quests approved; new 10-node skill rules pending redesign; AI, combo, reputation, price-propagation and endgame rules in the note. The endgame repeatable scenes (2 per Earth sphere plus 2 on the final planet) are full-game content, not MVP. Later on 2026-10-15 the US science-sphere geography, the NYC-Chicago air route, the 2537-05-25 start and the five-sphere region registry were implemented in the runtime as technical candidates; skills, AI, combos, reputation, price propagation and endgame scenes are not implemented.",
     "runtimeImplementedScope": "US science-sphere geography, NYC-Chicago air route, 2537-05-25 start and the five-sphere region registry are runtime technical candidates (2026-10-15); skills, AI, combos, reputation, price propagation and endgame scenes are not implemented."
+  },
+  "completionMeter": {
+    "id": "rpg-2-star-ocean-the-second_mvp-completion-meter_v01",
+    "schemaVersion": 1,
+    "kind": "weighted_delivery_estimate",
+    "zh": "MVP 加权交付估算（不是正式批准）",
+    "en": "MVP weighted delivery estimate (not formal approval)",
+    "updatedAt": "2026-10-16T03:38:56Z",
+    "percent": 35,
+    "percentLabel": "35.0%",
+    "weightedPoints": 35,
+    "weightTotal": 100,
+    "countingRules": [
+      {
+        "zh": "只计权威字段：steps 状态、m2Expansion 门状态、本表 M7 内容门，以及由已验收台账条目支撑的 approvalLedger 计数。",
+        "en": "Only authoritative fields count: steps status, m2Expansion gate status, this meter's M7 content gates, and approvalLedger counters backed by accepted ledger items."
+      },
+      {
+        "zh": "概念稿、未批准静态帧、方向认可、仅限范围的静态基准和冒烟／自动测试永远不算视觉验收。",
+        "en": "Concepts, unapproved static frames, direction approvals, scoped static baselines and smoke or automated tests never count as visual acceptance."
+      },
+      {
+        "zh": "美术完成后的真人试玩，须在角色与环境美术全部验收后才计入。",
+        "en": "Post-art human playtests count only after both art categories are complete."
+      },
+      {
+        "zh": "未改变任何门的任务只记零变化回执；百分比只能随已声明、有证据的门变化而变化。",
+        "en": "A task that changes no gate records a zero-change receipt; the percentage moves only with a claimed, evidenced gate change."
+      },
+      {
+        "zh": "权重与分母是固定基线；修改它们属于基线修订，不是任务进度。",
+        "en": "Weights and denominators are a fixed baseline; changing them is a baseline revision, not task progress."
+      }
+    ],
+    "formalApproval": {
+      "zh": "正式批准与加权估算分开：只有创作者记在 approvalLedger 的验收和 M9 两轮真人整合试玩才算批准。本百分比不批准任何素材、场景或里程碑。",
+      "en": "Formal approval is separate from this weighted estimate: only creator acceptance recorded in approvalLedger and the two M9 integrated human playtests count as approval. This percentage approves no asset, scene or milestone.",
+      "mvpFormallyAccepted": false,
+      "runtimeSpritesAccepted": "0/52",
+      "sceneVisualsAccepted": "0/11",
+      "humanPlaytests": "0/2",
+      "scopedApprovalsNotCountedAsAcceptance": [
+        {
+          "id": "display-scale-48",
+          "status": "approved"
+        },
+        {
+          "id": "female-v8-south-idle-static",
+          "status": "approved"
+        },
+        {
+          "id": "female-four-direction-animated",
+          "status": "not_accepted"
+        },
+        {
+          "id": "sentry-direction",
+          "status": "direction_accepted"
+        },
+        {
+          "id": "liangzhu-terrain-direction",
+          "status": "direction_accepted"
+        },
+        {
+          "id": "geography-map-studies",
+          "status": "unapproved_concept"
+        }
+      ],
+      "source": "outputs/rpg-2-star-ocean-the-second_mvp-progress_state_v01_20261013-183804-28a1c7e4.json#/approvalLedger/counters"
+    },
+    "categories": [
+      {
+        "id": "core-gameplay",
+        "zh": "核心玩法系统",
+        "en": "Core gameplay systems",
+        "weight": 20,
+        "numerator": 5,
+        "denominator": 5,
+        "ratio": "5/5",
+        "percent": 100,
+        "weightedPoints": 20,
+        "source": {
+          "path": "steps",
+          "rule": {
+            "zh": "按 steps 中 M1、M3、M4、M5、M6 的状态计数，仅 done 计入。",
+            "en": "Counts steps M1, M3, M4, M5 and M6; only status done counts."
+          }
+        },
+        "countedGateIds": [
+          "M1",
+          "M3",
+          "M4",
+          "M5",
+          "M6"
+        ],
+        "openGateIds": [],
+        "evidence": [
+          "game/tests/m1_smoke.gd",
+          "game/tests/m3_smoke.gd",
+          "game/tests/m4_smoke.gd",
+          "game/tests/m5_smoke.gd",
+          "game/tests/m6_smoke.gd"
+        ],
+        "nextGate": {
+          "zh": "本类已完成；保持 M1、M3–M6 冒烟测试通过，回退会扣分。",
+          "en": "Category complete; keep the M1 and M3–M6 smoke tests passing. A regression lowers it."
+        }
+      },
+      {
+        "id": "global-world-travel",
+        "zh": "全球世界与旅行",
+        "en": "Global world and travel",
+        "weight": 10,
+        "numerator": 9,
+        "denominator": 12,
+        "ratio": "9/12",
+        "percent": 75,
+        "weightedPoints": 7.5,
+        "source": {
+          "path": "m2Expansion.gates",
+          "rule": {
+            "zh": "按 m2Expansion.gates 的 12 道门计数，仅 implemented／done 计入。",
+            "en": "Counts the 12 m2Expansion.gates; only status implemented or done counts."
+          }
+        },
+        "countedGateIds": [
+          "map-ui",
+          "place-registry",
+          "route-preview",
+          "calendar",
+          "save-migration",
+          "acceptance-test",
+          "anchor",
+          "start-year",
+          "air-route"
+        ],
+        "openGateIds": [
+          "route-data",
+          "map-art",
+          "visual-review"
+        ],
+        "evidence": [
+          "docs/qa/rpg-2-star-ocean-the-second_us-science-sphere_runtime-migration_qa-note_m2-v02_20261015-175011-364131c8.md",
+          "docs/qa/rpg-2-star-ocean-the-second_global-earth-map_great-lakes-chicago-capture_qa-note-unapproved-v01_20261015-182538-30506f07.md",
+          "docs/qa/rpg-2-star-ocean-the-second_five-sphere-registry-and-us-runtime_integration-qa-note_m2-v02_20261015-184437-b3b84617.md",
+          "outputs/rpg-2-star-ocean-the-second_scifi-canvas_pointer-regression-receipt_m8-v01_20261015-071805-548c0f0f.json",
+          "docs/qa/rpg-2-star-ocean-the-second_global-map-travel_integration-fixes_qa-note_m2-v02_20261015-031824-35247192.md",
+          "docs/qa/rpg-2-star-ocean-the-second_commerce-weekly-settlement_calendar-hookup_qa-note_m2-v01_20261015-082014-bef9e5a4.md"
+        ],
+        "nextGate": {
+          "zh": "下一道门：门到门路线数值、地图美术、人工审阅与试玩",
+          "en": "Next gate: Door-to-door route figures; Map art; Human review & playtests"
+        }
+      },
+      {
+        "id": "science-playable-content",
+        "zh": "科技圈可玩内容",
+        "en": "Science-sphere playable content",
+        "weight": 10,
+        "numerator": 3,
+        "denominator": 4,
+        "ratio": "3/4",
+        "percent": 75,
+        "weightedPoints": 7.5,
+        "source": {
+          "path": "completionMeter.categories[science-playable-content].gates",
+          "rule": {
+            "zh": "按本表内 4 道 M7 内容门计数，仅 done 计入；真人计时节奏需真人试玩证据。",
+            "en": "Counts the four M7 content gates in this meter; only done counts. Pacing needs human playtest evidence."
+          }
+        },
+        "countedGateIds": [
+          "three-area-route",
+          "investigations-companions",
+          "report-endpoint"
+        ],
+        "openGateIds": [
+          "human-timed-pacing"
+        ],
+        "gates": [
+          {
+            "id": "three-area-route",
+            "status": "done",
+            "zh": "三处地点自由顺序路线",
+            "en": "Three-area free-order route",
+            "evidence": [
+              "game/tests/m7_smoke.gd",
+              "game/tests/m2_smoke.gd"
+            ]
+          },
+          {
+            "id": "investigations-companions",
+            "status": "done",
+            "zh": "勘察、证据关联与同行伙伴内容",
+            "en": "Investigations, evidence links and companion content",
+            "evidence": [
+              "game/tests/m7_smoke.gd",
+              "outputs/rpg-2-star-ocean-the-second_scifi-field-assists_visual-manifest_m7_20261013-221344-6c9a8f31.json",
+              "outputs/rpg-2-star-ocean-the-second_scifi-field-traces_visual-manifest_m7_20261013-223107-42db9171.json"
+            ]
+          },
+          {
+            "id": "report-endpoint",
+            "status": "done",
+            "zh": "城市报告终点与试玩回执",
+            "en": "City report endpoint and playtest receipt",
+            "evidence": [
+              "game/tests/m7_smoke.gd",
+              "tools/rpg-2-star-ocean-the-second_scifi-region_playtest-launcher_m7_20261013-214924-6c8e0d47.ps1"
+            ]
+          },
+          {
+            "id": "human-timed-pacing",
+            "status": "human_pending",
+            "zh": "真人计时 25–35 分钟节奏",
+            "en": "Human-verified 25–35 minute pacing",
+            "evidence": [],
+            "note": {
+              "zh": "步行下限审计只是机械下限，不是试玩时长。",
+              "en": "The walking lower-bound audit is a mechanical floor, not a playthrough duration."
+            },
+            "context": [
+              "outputs/rpg-2-star-ocean-the-second_scifi-surveys_pacing-audit_m7_20261013-213603-4c1e9a70.md"
+            ]
+          }
+        ],
+        "evidence": [
+          "game/tests/m7_smoke.gd",
+          "game/tests/m2_smoke.gd",
+          "outputs/rpg-2-star-ocean-the-second_scifi-field-assists_visual-manifest_m7_20261013-221344-6c9a8f31.json",
+          "outputs/rpg-2-star-ocean-the-second_scifi-field-traces_visual-manifest_m7_20261013-223107-42db9171.json",
+          "tools/rpg-2-star-ocean-the-second_scifi-region_playtest-launcher_m7_20261013-214924-6c8e0d47.ps1"
+        ],
+        "nextGate": {
+          "zh": "下一道门：真人计时 25–35 分钟节奏",
+          "en": "Next gate: Human-verified 25–35 minute pacing"
+        }
+      },
+      {
+        "id": "character-art",
+        "zh": "角色美术（已验收运行时精灵）",
+        "en": "Character art (accepted runtime sprites)",
+        "weight": 25,
+        "numerator": 0,
+        "denominator": 52,
+        "ratio": "0/52",
+        "percent": 0,
+        "weightedPoints": 0,
+        "source": {
+          "path": "approvalLedger",
+          "rule": {
+            "zh": "取 approvalLedger.counters.runtimeSpritesAccepted，且须有 status=accepted、acceptanceKind=runtime-sprite 的台账条目支撑；概念稿、未批准静态帧和冒烟测试不计。",
+            "en": "Uses approvalLedger.counters.runtimeSpritesAccepted, backed by ledger items with status accepted and acceptanceKind runtime-sprite. Concepts, unapproved static frames and smoke tests never count."
+          }
+        },
+        "counterField": "approvalLedger.counters.runtimeSpritesAccepted",
+        "acceptanceKind": "runtime-sprite",
+        "evidence": [
+          "outputs/rpg-2-star-ocean-the-second_mvp-progress_state_v01_20261013-183804-28a1c7e4.json#/approvalLedger/counters/runtimeSpritesAccepted"
+        ],
+        "nextGate": {
+          "zh": "下一道门：创作者在 approvalLedger 中验收第一套可运行的四方向精灵（含移动动画），并登记 acceptanceKind=runtime-sprite 条目。",
+          "en": "Next gate: the creator accepts the first runtime four-direction sprite set (with locomotion) in approvalLedger, recorded as an acceptanceKind runtime-sprite item."
+        }
+      },
+      {
+        "id": "science-environment-art",
+        "zh": "科技圈环境美术（已验收场景画质门）",
+        "en": "Science environment art (accepted scene-quality gates)",
+        "weight": 20,
+        "numerator": 0,
+        "denominator": 11,
+        "ratio": "0/11",
+        "percent": 0,
+        "weightedPoints": 0,
+        "source": {
+          "path": "approvalLedger",
+          "rule": {
+            "zh": "取 approvalLedger.counters.sceneVisualsAccepted，且须有 status=accepted、acceptanceKind=scene-visual 的台账条目支撑；概念图与方向认可不计。",
+            "en": "Uses approvalLedger.counters.sceneVisualsAccepted, backed by ledger items with status accepted and acceptanceKind scene-visual. Concepts and direction approvals never count."
+          }
+        },
+        "counterField": "approvalLedger.counters.sceneVisualsAccepted",
+        "acceptanceKind": "scene-visual",
+        "evidence": [
+          "outputs/rpg-2-star-ocean-the-second_mvp-progress_state_v01_20261013-183804-28a1c7e4.json#/approvalLedger/counters/sceneVisualsAccepted"
+        ],
+        "nextGate": {
+          "zh": "下一道门：创作者在 640×360 可玩画面中验收第一道科技圈场景画质门，并登记 acceptanceKind=scene-visual 条目。",
+          "en": "Next gate: the creator accepts the first science-sphere scene-quality gate in the playable 640×360 view, recorded as an acceptanceKind scene-visual item."
+        }
+      },
+      {
+        "id": "final-integrated-validation",
+        "zh": "最终整合验证（美术完成后的真人试玩）",
+        "en": "Final integrated validation (post-art human playtests)",
+        "weight": 15,
+        "numerator": 0,
+        "denominator": 2,
+        "ratio": "0/2",
+        "percent": 0,
+        "weightedPoints": 0,
+        "source": {
+          "path": "approvalLedger",
+          "rule": {
+            "zh": "只计角色与环境美术全部验收后、由 acceptanceKind=post-art-playtest 台账条目支撑的真人试玩。",
+            "en": "Counts only human playtests backed by acceptanceKind post-art-playtest ledger items, after both art categories are complete."
+          }
+        },
+        "counterField": "approvalLedger.counters.humanPlaytests",
+        "acceptanceKind": "post-art-playtest",
+        "evidence": [
+          "outputs/rpg-2-star-ocean-the-second_mvp-progress_state_v01_20261013-183804-28a1c7e4.json#/approvalLedger/counters/humanPlaytests"
+        ],
+        "nextGate": {
+          "zh": "下一道门：角色与环境美术全部验收后，完成第一轮全新存档的真人整合试玩（M9）。",
+          "en": "Next gate: after all character and environment art is accepted, complete the first fresh-save integrated human playtest (M9)."
+        }
+      }
+    ],
+    "updater": "tools/rpg-2-star-ocean-the-second_mvp-completion-meter_recompute-and-task-closeout-cli_v01_20261015-233032-d296a2cb.js",
+    "lastUpdated": {
+      "at": "2026-10-16T03:38:56Z",
+      "closeoutId": "closeout-20261016-033856-de1d7eed",
+      "percent": 35
+    },
+    "taskCloseouts": [
+      {
+        "id": "closeout-20261016-033310-4d4690ac",
+        "recordedAt": "2026-10-16T03:33:10Z",
+        "kind": "baseline",
+        "title": {
+          "zh": "建立 MVP 加权完成度基线",
+          "en": "Establish the MVP weighted completion baseline"
+        },
+        "impact": {
+          "changed": false,
+          "percentBefore": null,
+          "percentAfter": 35,
+          "deltaPoints": 0,
+          "gateChanges": [],
+          "categoryChanges": []
+        },
+        "evidence": [
+          "outputs/rpg-2-star-ocean-the-second_mvp-progress_state_v01_20261013-183804-28a1c7e4.json#/m2Expansion/gates",
+          "outputs/rpg-2-star-ocean-the-second_mvp-progress_state_v01_20261013-183804-28a1c7e4.json#/approvalLedger/counters",
+          "game/tests/m7_smoke.gd"
+        ]
+      },
+      {
+        "id": "closeout-20261016-033855-de1262d0",
+        "recordedAt": "2026-10-16T03:38:55Z",
+        "kind": "task",
+        "title": {
+          "zh": "核心角色个人技能 10 节点重设计提案（主角与角色 01–03，共 40 节点）；提案，未批准、未实现",
+          "en": "Core-cast personal skills: 40-node ten-node redesign proposal (hero, character-01..03); PROPOSAL, not approved, not runtime"
+        },
+        "impact": {
+          "changed": false,
+          "percentBefore": 35,
+          "percentAfter": 35,
+          "deltaPoints": 0,
+          "gateChanges": [],
+          "categoryChanges": []
+        },
+        "evidence": [
+          "outputs/rpg-2-star-ocean-the-second_core-cast_personal-skills-ten-node-proposal_hero-c01-c03-v01_20261015-232129-dfc60394.json",
+          "docs/design/rpg-2-star-ocean-the-second_core-cast_personal-skills-ten-node_design-qa-note-v01_20261015-232129-d087d0e1.md"
+        ]
+      },
+      {
+        "id": "closeout-20261016-033856-404adfd0",
+        "recordedAt": "2026-10-16T03:38:56Z",
+        "kind": "task",
+        "title": {
+          "zh": "研学五系列职业技能树 10 节点重设计提案（共 50 节点）；提案，未批准、未实现",
+          "en": "Research job trees: 50-node ten-node redesign proposal (engineering, automata, medicine, alchemy, tactics); PROPOSAL, not approved, not runtime"
+        },
+        "impact": {
+          "changed": false,
+          "percentBefore": 35,
+          "percentAfter": 35,
+          "deltaPoints": 0,
+          "gateChanges": [],
+          "categoryChanges": []
+        },
+        "evidence": [
+          "outputs/rpg-2-star-ocean-the-second_research-job-trees_ten-node-skill-proposal_unapproved-v01_20261015-232143-842e0540.json",
+          "docs/design/rpg-2-star-ocean-the-second_research-job-trees_ten-node-design-qa-note_unapproved-v01_20261015-232143-540056b9.md"
+        ]
+      },
+      {
+        "id": "closeout-20261016-033856-de1d7eed",
+        "recordedAt": "2026-10-16T03:38:56Z",
+        "kind": "task",
+        "title": {
+          "zh": "纽约—芝加哥实测汽车段 v05 候选（非运行时）；E1/E2 已解决，门到门路线数据门仍为 OPEN",
+          "en": "NYC-Chicago measured car legs v05 candidate (NONRUNTIME); E1/E2 resolved, route-figures gate stays OPEN"
+        },
+        "impact": {
+          "changed": false,
+          "percentBefore": 35,
+          "percentAfter": 35,
+          "deltaPoints": 0,
+          "gateChanges": [],
+          "categoryChanges": []
+        },
+        "evidence": [
+          "docs/qa/rpg-2-star-ocean-the-second_global-earth-travel_nyc-chicago-measured-car-legs_m2-us-science-v05-candidate-nonruntime_20261015-232832-cfba3fc5.json",
+          "docs/qa/rpg-2-star-ocean-the-second_m2-nyc-chicago-typical-door-to-door_measured-car-legs_qa-note_m2-v05_20261015-232832-cfba3fc5.md"
+        ]
+      }
+    ]
   }
 }

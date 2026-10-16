@@ -1,0 +1,1143 @@
+{
+  "schemaVersion": 1,
+  "project": "rpg-2-star-ocean-the-second",
+  "documentType": "personal-skill-ten-node-revision-proposal",
+  "documentId": "personal-skills-ten-node-hero-c01-c03-v01-dfc60394",
+  "status": "PROPOSAL — pending creator review",
+  "statusZh": "提案：待创作者审阅；未批准、未实现",
+  "createdAt": "2026-10-16T03:21:29Z",
+  "createdLocal": "2026-10-15 23:21:29",
+  "authoring": "Signed-in Claude Max first-party session (Claude Code). No API key, credits or paid fallback used.",
+  "designQaNote": "docs/design/rpg-2-star-ocean-the-second_core-cast_personal-skills-ten-node_design-qa-note-v01_20261015-232129-d087d0e1.md",
+  "scope": {
+    "characterIds": ["hero", "character-01", "character-02", "character-03"],
+    "nodesPerCharacter": 10,
+    "totalNodes": 40,
+    "notInScope": "其余 47 个角色身份（含 character-04 至 character-15 与 35 位非主线伙伴）的个人节点；职业系列节点；JP 与能量的最终数值平衡；运行时实现。"
+  },
+  "sources": {
+    "characterBible": "outputs/rpg-2-star-ocean-the-second_core-cast_character-bible_v01_20261012-234158-cc7e91a4.md",
+    "supersededFiveNodeDraft": "outputs/rpg-2-star-ocean-the-second_core-cast_personal-skill-trees-proposal_v01_20261013-230015-4ce1a8d2.json",
+    "creatorDecisions20261015": "docs/design/rpg-2-star-ocean-the-second_creator-decisions-2026-10-15_world-skills-ai-endgame_reconciliation-note_v01_20261015-174559-39efc292.md",
+    "battleRules": "outputs/rpg-2-star-ocean-the-second_game-design-brief_v01_20261012-233611-7c2e1f4a.md §3（横向平地战场、无跳跃；能量战斗中不自然恢复）",
+    "sourceFilesModified": false
+  },
+  "rules": {
+    "approvedRulesApplied": [
+      "每个角色身份恰好 10 个个人节点，全部在个人等级 100 以内开放（2026-10-15 创作者决定）。",
+      "加入时立即拥有专属个人技能：每棵树的第 1 节点为原有签名技能，开放等级 1。",
+      "每个节点最高 5 级；2–5 级用 JP 提升（2026-10-15 创作者决定）。",
+      "个人技能不受当前职业限制，任何职业下均可使用（2026-10-15 创作者决定）。",
+      "所有节点最终都可学会，没有互斥选择（2026-10-15 创作者决定）。"
+    ],
+    "unlockLevels": [1, 6, 14, 22, 32, 42, 54, 66, 80, 95],
+    "unlockLevelsNote": "提案：四棵树共用同一组门槛，便于新伙伴按同步等级一次性开放已达到的节点。前 4 个节点在 22 级前开放，最后一个在 95 级开放，比 100 级上限预留 5 级余量。",
+    "unlockMethod": "达到节点等级时自动以 1 级开放，不消耗 JP，也没有其他解锁条件。伙伴首次加入时按同步后的等级一次性开放所有已达到的节点。",
+    "jpUsage": "JP 只用于把已开放的节点从 1 级提升到 5 级；JP 不能提前解锁节点。",
+    "rankMaximum": 5,
+    "rankUpgradeJpBaseProposal": {"2": 40, "3": 70, "4": 110, "5": 160},
+    "rankUpgradeJpNote": "提案占位：单节点 1→5 级合计 380 JP，单棵树全满 3800 JP。2–3 级成本略高于职业草案的 35／55，以反映个人技能永不随转职失效。是否按职业天分打折待创作者决定（见 openQuestions）。",
+    "careerIndependence": "个人技能及其强化节点在任何当前职业下都可使用，转职不重置等级。",
+    "nodeTypes": {
+      "active": "主动：占用快捷栏或从暂停菜单选择，施放时支付 energyCost。",
+      "passive": "被动：常驻或满足条件时自动生效，energyCost 恒为 0。"
+    },
+    "energyRule": "主动节点在施放时支付 energyCost；除节点自身 rankScaling 明确列出外，能量消耗不随等级变化。战斗中能量不自然恢复，因此所有返还／转移都有单次与每场上限。",
+    "battlefieldConstraint": "战场为横向平地、无跳跃，地形与障碍不影响战斗。本提案不包含任何依赖地形、高低差、掩体或场景几何的效果；个人装置没有碰撞体积，不阻挡任何单位；弹道只在敌人之间转向。",
+    "globalLimits": [
+      "同一次行动从所有个人节点获得的效果加成按加法合计，上限 +30%。",
+      "个人节点带来的能量减免不能使一项技能的消耗低于其基础消耗的 50%（至少 1 点）。",
+      "能量返还与转移不能产生净增：单次返还不超过触发它的技能实际消耗；转移获得量始终小于施放者支付量。",
+      "打断类效果对首领只造成延迟或减半，不能使首领长时间无法行动。",
+      "所有战斗内状态、标记、计数与学习效果在战斗结束时清空；没有按击杀数、战斗场数或时间永久累积的成长。",
+      "等级 2–5 只提高 rankScaling 中列出的数值；没有随角色等级无限增长的隐藏加成（标准技能威力随属性成长除外）。",
+      "治疗／复活类 AI 规则先救倒下的队友、再处理急需治疗者的创作者决定优先于任何个人节点造成的 AI 偏好。",
+      "组合技仍要求每位参与者支付能量；本提案没有节点减免或替代组合技能量。"
+    ],
+    "skillPowerUnit": "“技能威力”指该角色当前标准技能伤害／治疗基准（随属性成长）。所有百分比数值都是提案占位，待战斗平衡阶段校准。"
+  },
+  "trees": [
+    {
+      "characterId": "hero",
+      "nameZh": "主角（玩家命名）",
+      "nameEn": "Protagonist",
+      "signatureSkill": "临场理解",
+      "identitySummary": "18 岁；来自卡茨基尔山附近的地下社区；对陌生事物有直接而强烈的好奇心，愿意学习，也愿意承认自己曾经误解别人；保有热情与基本正义感；四项天分均为 60，战斗定位不固定。",
+      "treeTheme": "观察→标记弱点→让同伴更容易利用；辅以地下社区式的资源分享与为他人站出来。",
+      "nodes": [
+        {
+          "id": "hero_pn01_field_understanding",
+          "order": 1,
+          "unlockLevel": 1,
+          "signature": true,
+          "availableOnJoin": true,
+          "nameZh": "临场理解",
+          "nameEn": "Field Understanding",
+          "status": "PROPOSAL",
+          "reviewState": "pending-creator-review",
+          "type": "active",
+          "energyCost": 16,
+          "usableInAnyJob": true,
+          "tags": ["观察", "协同"],
+          "effectZh": "选择一名敌人开始观察；观察期间主角可正常行动。观察窗口结束或目标做出任意动作后，标记它的一种弱点标签（若该敌人没有弱点标签，则标记“破绽”，任何技能标签都视为匹配）。标记期间，第一位以带匹配标签的技能命中该敌人的队友，该技能能量消耗降低。",
+          "summaryEn": "Observe an enemy, then mark one weakness tag; the first ally skill that exploits it costs less energy.",
+          "rankScaling": [
+            {"stat": "观察窗口", "unit": "秒", "values": [3.0, 2.6, 2.2, 1.8, 1.5]},
+            {"stat": "标记持续", "unit": "秒", "values": [12, 14, 16, 18, 20]},
+            {"stat": "利用者能量减免", "unit": "%", "values": [20, 25, 30, 35, 40]}
+          ],
+          "limits": [
+            "每名敌人同时只能有 1 个临场理解标记；全场同时最多 2 个。",
+            "标记在被第一次利用后消耗。",
+            "不揭示敌人在本场尚未使用过的招式。"
+          ],
+          "identityLink": "人物核心是对陌生事物直接而强烈的好奇心；技能先看懂对手，再把理解交给同伴。人物表原文：升级提高观察速度与标记持续时间。",
+          "lineage": "沿用 4ce1a8d2 / hero_understanding（名称原样保留），把“快速归纳”的观察提速并入等级成长。"
+        },
+        {
+          "id": "hero_pn02_shared_notes",
+          "order": 2,
+          "unlockLevel": 6,
+          "nameZh": "共享笔记",
+          "nameEn": "Shared Notes",
+          "status": "PROPOSAL",
+          "reviewState": "pending-creator-review",
+          "type": "passive",
+          "energyCost": 0,
+          "usableInAnyJob": true,
+          "modifies": ["hero_pn01_field_understanding"],
+          "tags": ["协同"],
+          "effectZh": "临场理解标记出现后，未操控的 AI 队友把“用匹配标签技能命中该目标”加入候选行动并提高其优先级；利用弱点的那次技能效果提高。",
+          "summaryEn": "AI allies favour exploiting the mark; the exploiting skill gains effect.",
+          "rankScaling": [
+            {"stat": "利用技能效果加成", "unit": "%", "values": [4, 6, 8, 10, 12]}
+          ],
+          "limits": [
+            "只在玩家配置的规则范围内调整优先级，不越过“先救倒下队友”等更高优先规则。",
+            "每个标记只加成一次（随标记消耗）。"
+          ],
+          "identityLink": "地下社区靠共享信息生存；主角把观察到的东西立刻告诉同伴。",
+          "lineage": "沿用 4ce1a8d2 / hero_shared_note 的 AI 偏好，新增可升级的效果加成。"
+        },
+        {
+          "id": "hero_pn03_revised_hypothesis",
+          "order": 3,
+          "unlockLevel": 14,
+          "nameZh": "修正假设",
+          "nameEn": "Revised Hypothesis",
+          "status": "PROPOSAL",
+          "reviewState": "pending-creator-review",
+          "type": "passive",
+          "energyCost": 0,
+          "usableInAnyJob": true,
+          "modifies": ["hero_pn01_field_understanding"],
+          "tags": ["观察"],
+          "effectZh": "若一个临场理解标记到期仍未被利用，10 秒内对同一敌人再次施放临场理解时，观察窗口为 0，且能量消耗降低。",
+          "summaryEn": "An unused, expired mark makes the next re-mark on that enemy instant and cheaper.",
+          "rankScaling": [
+            {"stat": "再次施放能量减免", "unit": "%", "values": [15, 20, 25, 30, 35]}
+          ],
+          "limits": [
+            "每个到期标记只触发一次，不叠加。",
+            "受全局 50% 能量减免下限约束。"
+          ],
+          "identityLink": "主角愿意承认自己曾经误解别人；判断落空后不固执，而是更快重新理解。",
+          "lineage": "沿用 4ce1a8d2 / hero_open_mind，改为明确的时限与数值。"
+        },
+        {
+          "id": "hero_pn04_shared_lamp",
+          "order": 4,
+          "unlockLevel": 22,
+          "nameZh": "分灯",
+          "nameEn": "Shared Lamp",
+          "status": "PROPOSAL",
+          "reviewState": "pending-creator-review",
+          "type": "active",
+          "energyCost": 12,
+          "usableInAnyJob": true,
+          "tags": ["协同", "支援"],
+          "effectZh": "把自己的能量分给一名在场队友：主角支付 12 点能量，目标获得少于支付量的能量。",
+          "summaryEn": "Transfer energy to an ally at a loss (pay 12, ally gains 7–11).",
+          "rankScaling": [
+            {"stat": "目标获得能量", "unit": "点", "values": [7, 8, 9, 10, 11]}
+          ],
+          "limits": [
+            "不能以自己为目标；目标能量不超过上限，溢出部分作废。",
+            "冷却 20 秒；每场战斗最多 3 次。",
+            "获得量始终小于支付量，不产生净能量。"
+          ],
+          "identityLink": "地下社区资源稀缺，邻里习惯把灯与补给分给最需要的人；对应胸前的社区识别物。",
+          "lineage": "新增。"
+        },
+        {
+          "id": "hero_pn05_face_it",
+          "order": 5,
+          "unlockLevel": 32,
+          "nameZh": "直面",
+          "nameEn": "Face It",
+          "status": "PROPOSAL",
+          "reviewState": "pending-creator-review",
+          "type": "active",
+          "energyCost": 20,
+          "usableInAnyJob": true,
+          "tags": ["守护", "协同"],
+          "effectZh": "吸引一名敌人的注意：在持续时间内该敌人优先攻击主角，主角受到该敌人的伤害降低。优先选择当前带有临场理解标记的敌人。",
+          "summaryEn": "Draw one enemy's attention for a few seconds and take reduced damage from it.",
+          "rankScaling": [
+            {"stat": "吸引持续", "unit": "秒", "values": [3.0, 3.5, 4.0, 4.5, 5.0]},
+            {"stat": "来自该敌人的伤害降低", "unit": "%", "values": [10, 12.5, 15, 17.5, 20]}
+          ],
+          "limits": [
+            "对首领持续时间减半。",
+            "冷却 25 秒；同一时间只能吸引一名敌人。"
+          ],
+          "identityLink": "基本正义感：主角会站出来替别人承担压力，而不是只在后方观察。",
+          "lineage": "新增。"
+        },
+        {
+          "id": "hero_pn06_crossing_insight",
+          "order": 6,
+          "unlockLevel": 42,
+          "nameZh": "交汇洞见",
+          "nameEn": "Crossing Insight",
+          "status": "PROPOSAL",
+          "reviewState": "pending-creator-review",
+          "type": "passive",
+          "energyCost": 0,
+          "usableInAnyJob": true,
+          "modifies": ["hero_pn01_field_understanding"],
+          "tags": ["协同"],
+          "effectZh": "临场理解标记被利用后在目标身上留下 4 秒“余痕”；若期间另一名不同的队友以技能命中该目标，全体在场队友技能效果短时提高 6 秒。",
+          "summaryEn": "If a second, different ally follows up on an exploited mark within 4 s, the party gains a short effect bonus.",
+          "rankScaling": [
+            {"stat": "全队技能效果加成", "unit": "%", "values": [4, 5, 6, 7, 8]}
+          ],
+          "limits": [
+            "每个标记只触发一次。",
+            "加成不叠加，重复触发只刷新持续时间。",
+            "计入全局 +30% 个人加成上限。"
+          ],
+          "identityLink": "理解不属于一个人；两个人从不同角度确认同一个发现，团队才真正学会。",
+          "lineage": "沿用 4ce1a8d2 / hero_bridge_insight，改为余痕窗口与明确数值。"
+        },
+        {
+          "id": "hero_pn07_another_angle",
+          "order": 7,
+          "unlockLevel": 54,
+          "nameZh": "换个角度",
+          "nameEn": "Another Angle",
+          "status": "PROPOSAL",
+          "reviewState": "pending-creator-review",
+          "type": "passive",
+          "energyCost": 0,
+          "usableInAnyJob": true,
+          "tags": ["观察", "应变"],
+          "effectZh": "主角的攻击或技能被敌人防御或抗性削弱时，3 秒内主角的下一次行动效果提高。",
+          "summaryEn": "When the hero's hit is guarded or resisted, the next action within 3 s gains effect.",
+          "rankScaling": [
+            {"stat": "下一次行动效果加成", "unit": "%", "values": [6, 8, 10, 12, 14]}
+          ],
+          "limits": [
+            "内部冷却 8 秒；不叠加。",
+            "只作用于主角自身。"
+          ],
+          "identityLink": "愿意承认误解并调整做法；碰壁之后换一种方式，而不是重复同样的错误。",
+          "lineage": "新增。"
+        },
+        {
+          "id": "hero_pn08_old_notebook",
+          "order": 8,
+          "unlockLevel": 66,
+          "nameZh": "旧笔记",
+          "nameEn": "Old Notebook",
+          "status": "PROPOSAL",
+          "reviewState": "pending-creator-review",
+          "type": "passive",
+          "energyCost": 0,
+          "usableInAnyJob": true,
+          "modifies": ["hero_pn01_field_understanding"],
+          "tags": ["观察"],
+          "effectZh": "战斗开始时，若本存档中队伍曾击败过场上某种敌人，自动对其中一名施加临场理解标记（无观察窗口，不消耗能量），持续时间按比例缩短。",
+          "summaryEn": "At battle start, auto-mark one enemy of a previously defeated kind at reduced duration.",
+          "rankScaling": [
+            {"stat": "自动标记持续（相对临场理解当前等级）", "unit": "%", "values": [50, 60, 70, 80, 90]}
+          ],
+          "limits": [
+            "每场战斗只触发一次，只标记一名敌人。",
+            "计入同时最多 2 个标记的上限。",
+            "知识记录只决定是否触发，不随击败次数增强。"
+          ],
+          "identityLink": "好奇心让主角把每一次遭遇都记下来；学过的东西下一次立刻用上。",
+          "lineage": "新增。"
+        },
+        {
+          "id": "hero_pn09_bridge_of_understanding",
+          "order": 9,
+          "unlockLevel": 80,
+          "nameZh": "理解之桥",
+          "nameEn": "Bridge of Understanding",
+          "status": "PROPOSAL",
+          "reviewState": "pending-creator-review",
+          "type": "active",
+          "energyCost": 36,
+          "usableInAnyJob": true,
+          "tags": ["观察", "协同"],
+          "effectZh": "立即对本场战斗中曾被主角标记过、仍存活的若干敌人重新施加临场理解标记（无观察窗口），每个标记的持续时间按比例计算；施放期间同时标记上限临时提高到本次目标数。",
+          "summaryEn": "Instantly re-mark several previously marked enemies; once per battle.",
+          "rankScaling": [
+            {"stat": "最多目标数", "unit": "名", "values": [2, 2, 3, 3, 3]},
+            {"stat": "标记持续（相对临场理解当前等级）", "unit": "%", "values": [60, 70, 80, 90, 100]}
+          ],
+          "limits": [
+            "每场战斗 1 次。",
+            "只能选择本场曾被主角标记过的敌人。",
+            "这些标记到期或消耗后，上限恢复为 2。"
+          ],
+          "identityLink": "主角在多个文明之间搭桥；学到的理解可以一次交给整个队伍。",
+          "lineage": "新增。"
+        },
+        {
+          "id": "hero_pn10_learning_together",
+          "order": 10,
+          "unlockLevel": 95,
+          "nameZh": "同行共学",
+          "nameEn": "Learning Together",
+          "status": "PROPOSAL",
+          "reviewState": "pending-creator-review",
+          "type": "passive",
+          "energyCost": 0,
+          "usableInAnyJob": true,
+          "modifies": ["hero_pn01_field_understanding"],
+          "tags": ["协同"],
+          "effectZh": "每个临场理解标记可被前两位不同的队友利用；第二位获得的能量减免为第一位的一定比例。",
+          "summaryEn": "Each mark can be exploited by two different allies; the second gets a fraction of the discount.",
+          "rankScaling": [
+            {"stat": "第二位减免比例（相对第一位）", "unit": "%", "values": [30, 35, 40, 45, 50]}
+          ],
+          "limits": [
+            "每个标记最多被利用 2 次，且须为两名不同队友。",
+            "交汇洞见仍每个标记只触发一次。"
+          ],
+          "identityLink": "主角的成长终点不是独自看懂一切，而是让同行的人一起学会。",
+          "lineage": "新增。"
+        }
+      ]
+    },
+    {
+      "characterId": "character-01",
+      "nameZh": "梁序",
+      "nameEn": "Liang Xu",
+      "signatureSkill": "战术校准",
+      "identitySummary": "46 岁导师；初始系列战术；天分 48／67／94／42；说话简洁、重证据，也会耐心听完与数据相悖的个人经历；擅长在紧张时稳定团队节奏；石墨灰长外套、铜色领扣、折叠式战术板。",
+      "treeTheme": "调整 AI 队友的规则优先级，让团队按同一判断行动；后期让队友把判断内化为自己的习惯。",
+      "nodes": [
+        {
+          "id": "liang_pn01_tactical_calibration",
+          "order": 1,
+          "unlockLevel": 1,
+          "signature": true,
+          "availableOnJoin": true,
+          "nameZh": "战术校准",
+          "nameEn": "Tactical Calibration",
+          "status": "PROPOSAL",
+          "reviewState": "pending-creator-review",
+          "type": "active",
+          "energyCost": 18,
+          "usableInAnyJob": true,
+          "tags": ["指挥", "协同"],
+          "effectZh": "从队伍现有的 AI 规则中选择一条（如集中攻击某目标、保护低生命队友、节省能量、破防），在持续时间内把它提到所有在场 AI 队友的最高执行优先级；每位队友下一次符合该规则的行动获得效果加成。",
+          "summaryEn": "Promote one existing AI rule to top priority for all AI allies; each ally's next matching action gains effect.",
+          "rankScaling": [
+            {"stat": "校准持续", "unit": "秒", "values": [8, 10, 12, 14, 16]},
+            {"stat": "首次符合行动效果加成", "unit": "%", "values": [5, 7, 9, 11, 13]}
+          ],
+          "limits": [
+            "不越过“先救倒下队友、再处理急需治疗者”的治疗／复活优先规则。",
+            "不改变玩家直接操控角色的操作；若玩家手动执行符合规则的行动，也获得加成。",
+            "冷却 20 秒；再次校准会替换上一条。"
+          ],
+          "identityLink": "导师手持折叠战术板，用简洁的口令重排团队节奏。人物表原文：立即重排队友 AI 指令优先级，并让下一次符合新规则的行动获得小幅效能加成。",
+          "lineage": "沿用 4ce1a8d2 / liang_tactical_calibration（名称原样保留）；“清晰口令”的提速并入持续时间成长。"
+        },
+        {
+          "id": "liang_pn02_steady_rhythm",
+          "order": 2,
+          "unlockLevel": 6,
+          "nameZh": "节奏稳定",
+          "nameEn": "Steady Rhythm",
+          "status": "PROPOSAL",
+          "reviewState": "pending-creator-review",
+          "type": "passive",
+          "energyCost": 0,
+          "usableInAnyJob": true,
+          "modifies": ["liang_pn01_tactical_calibration"],
+          "tags": ["指挥", "稳固"],
+          "effectZh": "战术校准生效期间，在场队友的抗打断能力提高。",
+          "summaryEn": "Allies resist interruption while a calibration is active.",
+          "rankScaling": [
+            {"stat": "抗打断提高", "unit": "%", "values": [6, 9, 12, 15, 18]}
+          ],
+          "limits": [
+            "仅在校准持续期间有效。",
+            "与其他抗打断来源加法合计。"
+          ],
+          "identityLink": "擅长在紧张时稳定团队节奏。",
+          "lineage": "新增。"
+        },
+        {
+          "id": "liang_pn03_contingency_plan",
+          "order": 3,
+          "unlockLevel": 14,
+          "nameZh": "预备方案",
+          "nameEn": "Contingency Plan",
+          "status": "PROPOSAL",
+          "reviewState": "pending-creator-review",
+          "type": "passive",
+          "energyCost": 0,
+          "usableInAnyJob": true,
+          "modifies": ["liang_pn01_tactical_calibration"],
+          "tags": ["指挥"],
+          "effectZh": "施放战术校准时可预设一条后备规则；若主规则失效（例如指定目标倒下），队友在剩余时间内自动改按后备规则执行，并保留部分加成。",
+          "summaryEn": "Pre-set a fallback rule that takes over if the calibrated rule becomes invalid.",
+          "rankScaling": [
+            {"stat": "后备规则保留的加成比例", "unit": "%", "values": [40, 50, 60, 70, 80]}
+          ],
+          "limits": [
+            "每次校准只切换一次。",
+            "不延长校准总时长。"
+          ],
+          "identityLink": "重证据的导师从不把计划押在单一假设上。",
+          "lineage": "沿用 4ce1a8d2 / liang_contingency，从自动选同类目标改为可预设后备规则。"
+        },
+        {
+          "id": "liang_pn04_field_review",
+          "order": 4,
+          "unlockLevel": 22,
+          "nameZh": "现场复盘",
+          "nameEn": "Field Review",
+          "status": "PROPOSAL",
+          "reviewState": "pending-creator-review",
+          "type": "passive",
+          "energyCost": 0,
+          "usableInAnyJob": true,
+          "modifies": ["liang_pn01_tactical_calibration"],
+          "tags": ["指挥", "守护"],
+          "effectZh": "每次校准后，第一位成功完成符合规则行动的队友在 4 秒内受到的伤害降低。",
+          "summaryEn": "The first ally to execute the calibrated rule takes reduced damage for 4 s.",
+          "rankScaling": [
+            {"stat": "受到伤害降低", "unit": "%", "values": [8, 10, 12, 14, 16]}
+          ],
+          "limits": [
+            "每次校准只触发一次。",
+            "不叠加，重复获得只刷新时间。"
+          ],
+          "identityLink": "导师在行动之后立即复盘，确认做对的人不会因此暴露在危险中。",
+          "lineage": "沿用 4ce1a8d2 / liang_field_review，防御加成改为明确的减伤数值。"
+        },
+        {
+          "id": "liang_pn05_heard_exception",
+          "order": 5,
+          "unlockLevel": 32,
+          "nameZh": "倾听例外",
+          "nameEn": "Heard Exception",
+          "status": "PROPOSAL",
+          "reviewState": "pending-creator-review",
+          "type": "passive",
+          "energyCost": 0,
+          "usableInAnyJob": true,
+          "modifies": ["liang_pn01_tactical_calibration"],
+          "tags": ["指挥", "协同"],
+          "effectZh": "校准期间，若某位队友因自身更高优先级的紧急规则（如救倒下队友、低生命防御）或玩家手动指令而偏离校准规则，那次偏离行动获得效果加成。",
+          "summaryEn": "An ally who breaks from the calibration for an emergency or player order gains effect on that action.",
+          "rankScaling": [
+            {"stat": "偏离行动效果加成", "unit": "%", "values": [4, 5, 6, 7, 8]}
+          ],
+          "limits": [
+            "每次校准每位队友只触发一次。",
+            "不改变 AI 规则顺序，只奖励合理的例外。"
+          ],
+          "identityLink": "重证据，也会耐心听完与数据相悖的个人经历；不把偏离计划的人一概视为犯错。",
+          "lineage": "新增。"
+        },
+        {
+          "id": "liang_pn06_hold_the_line",
+          "order": 6,
+          "unlockLevel": 42,
+          "nameZh": "稳住阵脚",
+          "nameEn": "Hold the Line",
+          "status": "PROPOSAL",
+          "reviewState": "pending-creator-review",
+          "type": "active",
+          "energyCost": 28,
+          "usableInAnyJob": true,
+          "tags": ["指挥", "稳固"],
+          "effectZh": "简短的一声口令：立即解除全体在场队友当前的硬直，并在 5 秒内降低他们受到的伤害。",
+          "summaryEn": "Clear current stagger on all allies and grant 5 s of damage reduction.",
+          "rankScaling": [
+            {"stat": "全队受到伤害降低", "unit": "%", "values": [6, 8, 10, 12, 14]}
+          ],
+          "limits": [
+            "不复活倒下的队友，不解除异常状态。",
+            "冷却 40 秒；每场战斗最多 3 次。"
+          ],
+          "identityLink": "说话简洁，擅长在紧张时稳定团队节奏。",
+          "lineage": "新增。"
+        },
+        {
+          "id": "liang_pn07_shared_judgement",
+          "order": 7,
+          "unlockLevel": 54,
+          "nameZh": "共同判断",
+          "nameEn": "Shared Judgement",
+          "status": "PROPOSAL",
+          "reviewState": "pending-creator-review",
+          "type": "passive",
+          "energyCost": 0,
+          "usableInAnyJob": true,
+          "modifies": ["liang_pn01_tactical_calibration"],
+          "tags": ["指挥", "协同"],
+          "effectZh": "校准后，若两名不同队友依次完成符合规则的行动，第二次行动获得额外效果加成。",
+          "summaryEn": "When two different allies follow the rule in sequence, the second action gains extra effect.",
+          "rankScaling": [
+            {"stat": "第二次行动额外加成", "unit": "%", "values": [6, 8, 10, 12, 14]}
+          ],
+          "limits": [
+            "每次校准只触发一次。",
+            "计入全局 +30% 个人加成上限。"
+          ],
+          "identityLink": "导师追求的是团队形成一致判断，而不是某个人单独表现。",
+          "lineage": "沿用 4ce1a8d2 / liang_shared_command，改为明确数值。"
+        },
+        {
+          "id": "liang_pn08_board_walkthrough",
+          "order": 8,
+          "unlockLevel": 66,
+          "nameZh": "板上推演",
+          "nameEn": "Board Walkthrough",
+          "status": "PROPOSAL",
+          "reviewState": "pending-creator-review",
+          "type": "active",
+          "energyCost": 24,
+          "usableInAnyJob": true,
+          "tags": ["指挥", "观察"],
+          "effectZh": "在战术板上推演一名敌人的下一次重攻击：该攻击的预警提前显示，AI 队友临时加入针对它的防御／闪避规则；成功防御或闪避该攻击的队友，5 秒内下一项技能效果提高。",
+          "summaryEn": "Predict one enemy's next heavy attack: earlier warning, AI guards it, successful guard/dodge empowers the next skill.",
+          "rankScaling": [
+            {"stat": "预警提前", "unit": "秒", "values": [0.5, 0.6, 0.7, 0.8, 1.0]},
+            {"stat": "成功防御／闪避后的技能效果加成", "unit": "%", "values": [8, 10, 12, 14, 16]}
+          ],
+          "limits": [
+            "同一时间只能推演一名敌人的一次攻击。",
+            "对首领的预警提前量减半。",
+            "冷却 30 秒。"
+          ],
+          "identityLink": "铜色领扣与折叠式战术板是他的标志；他相信证据和推演，而非临场赌运气。",
+          "lineage": "新增。"
+        },
+        {
+          "id": "liang_pn09_dual_track_orders",
+          "order": 9,
+          "unlockLevel": 80,
+          "nameZh": "双轨指令",
+          "nameEn": "Dual-Track Orders",
+          "status": "PROPOSAL",
+          "reviewState": "pending-creator-review",
+          "type": "passive",
+          "energyCost": 0,
+          "usableInAnyJob": true,
+          "modifies": ["liang_pn01_tactical_calibration", "liang_pn03_contingency_plan"],
+          "tags": ["指挥"],
+          "effectZh": "战术校准可同时提升两条规则；第二条规则的首次符合行动加成为主规则的一定比例。若其中一条失效，另一条继续生效，预备方案只替换失效的那一条。",
+          "summaryEn": "Calibration can promote two rules at once; the second rule grants a fraction of the bonus.",
+          "rankScaling": [
+            {"stat": "第二条规则加成比例（相对主规则）", "unit": "%", "values": [50, 55, 60, 65, 70]}
+          ],
+          "limits": [
+            "两条规则共用同一个持续时间。",
+            "同一行动同时符合两条规则时只按主规则计算一次。"
+          ],
+          "identityLink": "资深导师能同时照顾进攻与保护两条线，而不让团队混乱。",
+          "lineage": "新增。"
+        },
+        {
+          "id": "liang_pn10_independent_judgement",
+          "order": 10,
+          "unlockLevel": 95,
+          "nameZh": "自主判断",
+          "nameEn": "Independent Judgement",
+          "status": "PROPOSAL",
+          "reviewState": "pending-creator-review",
+          "type": "passive",
+          "energyCost": 0,
+          "usableInAnyJob": true,
+          "modifies": ["liang_pn01_tactical_calibration"],
+          "tags": ["指挥", "协同"],
+          "effectZh": "校准结束时，每位在校准期间至少完成过一次符合规则行动的队友“学会”这条规则：本场剩余时间内，其符合该规则的行动获得小幅效果加成。",
+          "summaryEn": "Allies who followed a calibration keep a small bonus for that rule until the battle ends.",
+          "rankScaling": [
+            {"stat": "已学规则的行动效果加成", "unit": "%", "values": [2, 3, 4, 5, 6]}
+          ],
+          "limits": [
+            "每位队友同时只保留一条已学规则，新学的替换旧的。",
+            "不改变 AI 规则顺序。",
+            "战斗结束清空，不带入下一场。"
+          ],
+          "identityLink": "导师的最终目标是让队员不再需要他下令，也能做出同样的判断。",
+          "lineage": "新增。"
+        }
+      ]
+    },
+    {
+      "characterId": "character-02",
+      "nameZh": "蒋岚",
+      "nameEn": "Jiang Lan",
+      "signatureSkill": "二次装配",
+      "identitySummary": "29 岁装置设计者；初始系列工程；天分 44／63／92／36；动作比解释快，喜欢把复杂工具做成普通人也能修的东西；热情，有时低估维护成本；不对称工具背心、亮橙色袖口、方形护目镜，腰间挂两枚不同形状的折叠装置。",
+      "treeTheme": "部署个人装置、自然回收返还能量并强化下一枚；后期掌握第二种形态并同时运行两枚装置，而维护成本被明确设为上限。",
+      "deviceRules": [
+        "个人装置是无碰撞体积的悬浮单位，跟随蒋岚或附着在一名队友身上，不阻挡任何单位移动。",
+        "装置耐久为蒋岚最大生命的 15%；敌人可以以较低优先级攻击它。",
+        "默认同一时间只能存在一枚个人装置（双件联动例外）。",
+        "装置在持续时间结束时视为“自然结束”；被打坏视为“提前破坏”。",
+        "每场战斗来自个人装置节点的能量返还合计不超过蒋岚最大能量的 20%（维护清单可提高）。"
+      ],
+      "nodes": [
+        {
+          "id": "jiang_pn01_second_assembly",
+          "order": 1,
+          "unlockLevel": 1,
+          "signature": true,
+          "availableOnJoin": true,
+          "nameZh": "二次装配",
+          "nameEn": "Second Assembly",
+          "status": "PROPOSAL",
+          "reviewState": "pending-creator-review",
+          "type": "active",
+          "energyCost": 20,
+          "usableInAnyJob": true,
+          "tags": ["构造", "循环"],
+          "effectZh": "释放一枚个人“工作装置”，每 2 秒对最近的敌人发出一次脉冲（技能威力 25%）。装置自然结束时返还能量，并使下一枚个人装置效果增强。",
+          "summaryEn": "Deploy a work device that pulses the nearest enemy; on natural end, refund energy and empower the next device.",
+          "rankScaling": [
+            {"stat": "装置持续", "unit": "秒", "values": [10, 11, 12, 13, 14]},
+            {"stat": "自然结束返还能量", "unit": "点", "values": [4, 5, 6, 7, 8]},
+            {"stat": "下一枚装置效果增强", "unit": "%", "values": [10, 15, 20, 25, 30]}
+          ],
+          "limits": [
+            "返还计入每场 20% 最大能量的装置返还上限。",
+            "增强效果只保留一层，不叠加。",
+            "提前破坏不返还、不增强（易修结构可部分改善）。"
+          ],
+          "identityLink": "腰间的折叠装置；人物表原文：装置结束时返还部分能量，并使下一枚个人装置效果增强，任何职业都可使用。",
+          "lineage": "沿用 4ce1a8d2 / jiang_second_assembly（名称原样保留）；“易修结构”的自然返还 +1 并入返还成长。"
+        },
+        {
+          "id": "jiang_pn02_easy_service",
+          "order": 2,
+          "unlockLevel": 6,
+          "nameZh": "易修结构",
+          "nameEn": "Easy Service",
+          "status": "PROPOSAL",
+          "reviewState": "pending-creator-review",
+          "type": "passive",
+          "energyCost": 0,
+          "usableInAnyJob": true,
+          "modifies": ["jiang_pn01_second_assembly"],
+          "tags": ["构造"],
+          "effectZh": "个人装置被提前破坏时，仍回收部分零件：按自然结束返还量的一定比例返还能量（不提供下一枚增强）。",
+          "summaryEn": "A destroyed device still salvages part of its normal refund.",
+          "rankScaling": [
+            {"stat": "提前破坏时的返还比例", "unit": "%", "values": [30, 40, 50, 60, 70]}
+          ],
+          "limits": [
+            "返还量向下取整，计入每场装置返还上限。",
+            "不触发下一枚装置增强。"
+          ],
+          "identityLink": "喜欢把复杂工具做成普通人也能修的东西；坏了的装置也能拆回零件。",
+          "lineage": "沿用 4ce1a8d2 / jiang_easy_service 的“提前破坏”分支，改为可升级的回收比例。"
+        },
+        {
+          "id": "jiang_pn03_modular_shell",
+          "order": 3,
+          "unlockLevel": 14,
+          "nameZh": "模块外壳",
+          "nameEn": "Modular Shell",
+          "status": "PROPOSAL",
+          "reviewState": "pending-creator-review",
+          "type": "passive",
+          "energyCost": 0,
+          "usableInAnyJob": true,
+          "tags": ["构造", "守护"],
+          "effectZh": "个人装置完全抵挡第一次受到的攻击，并提高装置耐久。",
+          "summaryEn": "Devices ignore their first hit and gain durability.",
+          "rankScaling": [
+            {"stat": "装置耐久提高", "unit": "%", "values": [10, 15, 20, 25, 30]}
+          ],
+          "limits": [
+            "每枚装置只抵挡一次。",
+            "不影响装置无碰撞体积的规则。"
+          ],
+          "identityLink": "模块化外壳便于更换，也让装置更耐用。",
+          "lineage": "沿用 4ce1a8d2 / jiang_modular_shell，新增耐久成长。"
+        },
+        {
+          "id": "jiang_pn04_support_device",
+          "order": 4,
+          "unlockLevel": 22,
+          "nameZh": "护持装置",
+          "nameEn": "Support Device",
+          "status": "PROPOSAL",
+          "reviewState": "pending-creator-review",
+          "type": "active",
+          "energyCost": 22,
+          "usableInAnyJob": true,
+          "tags": ["构造", "守护"],
+          "effectZh": "释放第二种形态的个人装置，附着在一名队友身上 10 秒，为其提供护盾。护盾未被完全击破而自然结束时，按二次装配当前等级返还能量并强化下一枚个人装置。",
+          "summaryEn": "Attach a shield device to an ally; if it expires naturally, it refunds and empowers like Second Assembly.",
+          "rankScaling": [
+            {"stat": "护盾量（目标最大生命）", "unit": "%", "values": [8, 10, 12, 14, 16]}
+          ],
+          "limits": [
+            "与工作装置共用“同一时间一枚”的限制（双件联动例外）。",
+            "护盾被完全击破视为提前破坏。",
+            "返还计入每场装置返还上限。"
+          ],
+          "identityLink": "腰间挂着两枚不同形状的折叠装置；第二枚用来护人。",
+          "lineage": "新增。"
+        },
+        {
+          "id": "jiang_pn05_spare_part",
+          "order": 5,
+          "unlockLevel": 32,
+          "nameZh": "备用零件",
+          "nameEn": "Spare Part",
+          "status": "PROPOSAL",
+          "reviewState": "pending-creator-review",
+          "type": "passive",
+          "energyCost": 0,
+          "usableInAnyJob": true,
+          "modifies": ["jiang_pn01_second_assembly", "jiang_pn04_support_device"],
+          "tags": ["构造", "循环"],
+          "effectZh": "带有“下一枚增强”的装置在结束时追加一次余件动作：工作装置追加一次脉冲；护持装置给当前目标追加一层较小护盾。余件动作强度为原效果的一定比例。",
+          "summaryEn": "An empowered device performs one extra parting action (pulse or small shield).",
+          "rankScaling": [
+            {"stat": "余件动作强度", "unit": "%", "values": [30, 35, 40, 45, 50]}
+          ],
+          "limits": [
+            "每枚增强装置只追加一次。",
+            "提前破坏时不追加。"
+          ],
+          "identityLink": "工具背心里永远多带一个零件。",
+          "lineage": "沿用 4ce1a8d2 / jiang_spare_part，改为装置结束时的余件动作。"
+        },
+        {
+          "id": "jiang_pn06_quick_refit",
+          "order": 6,
+          "unlockLevel": 42,
+          "nameZh": "改装切换",
+          "nameEn": "Quick Refit",
+          "status": "PROPOSAL",
+          "reviewState": "pending-creator-review",
+          "type": "active",
+          "energyCost": 8,
+          "usableInAnyJob": true,
+          "tags": ["构造", "应变"],
+          "effectZh": "把当前装置在工作形态与护持形态之间切换，保留剩余持续时间；切到护持形态时附着在生命比例最低的在场队友身上。",
+          "summaryEn": "Switch the current device between work and support form, keeping its remaining time.",
+          "rankScaling": [
+            {"stat": "能量消耗", "unit": "点", "values": [8, 7, 6, 5, 4]}
+          ],
+          "limits": [
+            "冷却 12 秒。",
+            "不重置持续时间，不产生第二枚装置。",
+            "护盾按护持装置当前等级、依剩余时间比例计算。"
+          ],
+          "identityLink": "动作比解释快；现场直接动手改装，而不是重新造一台。",
+          "lineage": "新增。"
+        },
+        {
+          "id": "jiang_pn07_maintenance_checklist",
+          "order": 7,
+          "unlockLevel": 54,
+          "nameZh": "维护清单",
+          "nameEn": "Maintenance Checklist",
+          "status": "PROPOSAL",
+          "reviewState": "pending-creator-review",
+          "type": "passive",
+          "energyCost": 0,
+          "usableInAnyJob": true,
+          "tags": ["构造", "循环"],
+          "effectZh": "提高每场战斗来自个人装置节点的能量返还上限。",
+          "summaryEn": "Raises the per-battle device refund cap.",
+          "rankScaling": [
+            {"stat": "每场装置返还上限（蒋岚最大能量）", "unit": "%", "values": [22, 24, 26, 28, 30]}
+          ],
+          "limits": [
+            "上限最高 30%，不会继续提高。",
+            "不改变单次返还量。"
+          ],
+          "identityLink": "她有时低估维护成本；这个节点代表她学会写清单、把维护算进成本。",
+          "lineage": "新增。"
+        },
+        {
+          "id": "jiang_pn08_shared_tools",
+          "order": 8,
+          "unlockLevel": 66,
+          "nameZh": "共享工具",
+          "nameEn": "Shared Tools",
+          "status": "PROPOSAL",
+          "reviewState": "pending-creator-review",
+          "type": "passive",
+          "energyCost": 0,
+          "usableInAnyJob": true,
+          "modifies": ["jiang_pn01_second_assembly", "jiang_pn04_support_device"],
+          "tags": ["构造", "协同"],
+          "effectZh": "装置自然结束时，可把返还的能量交给能量比例最低的在场队友（AI 默认如此；玩家可在策略中改为返还给自己），按一定比例转交。",
+          "summaryEn": "A device's natural-end refund can go to the ally with the lowest energy ratio.",
+          "rankScaling": [
+            {"stat": "转交比例", "unit": "%", "values": [70, 75, 80, 90, 100]}
+          ],
+          "limits": [
+            "转交量计入蒋岚的每场装置返还上限。",
+            "转交不超过目标能量上限，溢出作废。"
+          ],
+          "identityLink": "工具不是只给设计者自己用的；普通人也该能从中受益。",
+          "lineage": "新增。"
+        },
+        {
+          "id": "jiang_pn09_overclock_assembly",
+          "order": 9,
+          "unlockLevel": 80,
+          "nameZh": "超频装配",
+          "nameEn": "Overclock Assembly",
+          "status": "PROPOSAL",
+          "reviewState": "pending-creator-review",
+          "type": "active",
+          "energyCost": 34,
+          "usableInAnyJob": true,
+          "tags": ["构造", "冲击"],
+          "effectZh": "释放一枚超频的工作装置，持续 8 秒，每 1 秒发出一次脉冲且脉冲威力提高。结束时不返还能量，也不强化下一枚装置；施放时会用掉已有的“下一枚增强”。",
+          "summaryEn": "An 8 s overclocked work device with faster, stronger pulses; no refund and no empowerment afterwards.",
+          "rankScaling": [
+            {"stat": "脉冲威力提高", "unit": "%", "values": [20, 25, 30, 35, 40]}
+          ],
+          "limits": [
+            "冷却 45 秒。",
+            "计为工作形态，受“同一时间一枚”限制。",
+            "不返还能量、不触发备用零件。"
+          ],
+          "identityLink": "热情让她常把装置推到极限，而低估维护成本；超频的代价写在规则里。",
+          "lineage": "新增。"
+        },
+        {
+          "id": "jiang_pn10_twin_fold",
+          "order": 10,
+          "unlockLevel": 95,
+          "nameZh": "双件联动",
+          "nameEn": "Twin Fold",
+          "status": "PROPOSAL",
+          "reviewState": "pending-creator-review",
+          "type": "passive",
+          "energyCost": 0,
+          "usableInAnyJob": true,
+          "modifies": ["jiang_pn01_second_assembly", "jiang_pn04_support_device"],
+          "tags": ["构造", "协同"],
+          "effectZh": "可同时维持一枚工作形态与一枚护持形态的装置（必须不同形态）。两者同时存在时，工作装置每次脉冲为护持装置的护盾补充少量护盾值。",
+          "summaryEn": "Run one work device and one support device at once; pulses top up the shield.",
+          "rankScaling": [
+            {"stat": "每次脉冲补充护盾（目标最大生命）", "unit": "%", "values": [1, 1.5, 2, 2.5, 3]}
+          ],
+          "limits": [
+            "最多两枚，且形态必须不同。",
+            "补充后的护盾不超过该护持装置的初始护盾量。",
+            "两枚装置的返还都计入同一个每场上限。"
+          ],
+          "identityLink": "腰间两枚形状不同的折叠装置终于可以同时展开、互相配合。",
+          "lineage": "新增。"
+        }
+      ]
+    },
+    {
+      "characterId": "character-03",
+      "nameZh": "林阙",
+      "nameEn": "Lin Que",
+      "signatureSkill": "折线路径",
+      "identitySummary": "22 岁精确射手；初始系列枪械；天分 59／88／70／32；严谨守时，喜欢冷幽默；在复杂环境中先观察，再用极少的动作解决问题；深蓝短披肩、白色窄围巾、侧挂式护目镜，挺直的持械姿态。",
+      "treeTheme": "在敌人之间转向的个人能量弹；与队友的标记联动，强调先观察、少动作、精确收尾。",
+      "nodes": [
+        {
+          "id": "lin_pn01_bent_trajectory",
+          "order": 1,
+          "unlockLevel": 1,
+          "signature": true,
+          "availableOnJoin": true,
+          "nameZh": "折线路径",
+          "nameEn": "Bent Trajectory",
+          "status": "PROPOSAL",
+          "reviewState": "pending-creator-review",
+          "type": "active",
+          "energyCost": 18,
+          "usableInAnyJob": true,
+          "tags": ["弹道", "追击"],
+          "effectZh": "发射一枚个人能量弹（技能威力 100%）；命中后转向第二个敌人，优先选择已被队友标记的敌人，否则选择最近的另一个敌人。第二击威力按比例衰减。",
+          "summaryEn": "Fire a personal energy round that turns to a second enemy (marked ones first) at reduced power.",
+          "rankScaling": [
+            {"stat": "第二击威力", "unit": "%", "values": [55, 60, 65, 70, 75]}
+          ],
+          "limits": [
+            "只在敌人之间转向，不借助任何场景物体。",
+            "场上只有一个敌人时没有第二击（净角射击例外）。",
+            "同一次施放不重复命中同一敌人（净角射击例外）。"
+          ],
+          "identityLink": "精确射手；人物表原文：发射一枚可在命中后转向第二目标的个人能量弹，优先寻找已被队友标记的敌人。",
+          "lineage": "沿用 4ce1a8d2 / lin_bent_trajectory（名称原样保留）；“轨迹记忆”的衰减降低并入第二击威力成长。"
+        },
+        {
+          "id": "lin_pn02_look_first",
+          "order": 2,
+          "unlockLevel": 6,
+          "nameZh": "先看后动",
+          "nameEn": "Look First",
+          "status": "PROPOSAL",
+          "reviewState": "pending-creator-review",
+          "type": "passive",
+          "energyCost": 0,
+          "usableInAnyJob": true,
+          "tags": ["弹道", "观察"],
+          "effectZh": "若林阙已有 2 秒未使用攻击或技能，下一次折线路径或最少动作的伤害提高。",
+          "summaryEn": "After 2 s without attacking, the next personal shot deals more damage.",
+          "rankScaling": [
+            {"stat": "下一次个人射击伤害提高", "unit": "%", "values": [8, 10, 12, 14, 16]}
+          ],
+          "limits": [
+            "不叠加；等待超过 2 秒不再增加。",
+            "只作用于林阙的个人射击节点。"
+          ],
+          "identityLink": "在复杂环境中先观察，再出手。",
+          "lineage": "新增。"
+        },
+        {
+          "id": "lin_pn03_tag_lock",
+          "order": 3,
+          "unlockLevel": 14,
+          "nameZh": "标记锁定",
+          "nameEn": "Tag Lock",
+          "status": "PROPOSAL",
+          "reviewState": "pending-creator-review",
+          "type": "passive",
+          "energyCost": 0,
+          "usableInAnyJob": true,
+          "modifies": ["lin_pn01_bent_trajectory"],
+          "tags": ["弹道", "协同"],
+          "effectZh": "第二个目标带有任意队友标记（例如临场理解、侧镜标定或其他角色的标记）时，转向更快，第二击伤害额外提高。",
+          "summaryEn": "If the second target carries an ally mark, the turn is faster and the second hit deals extra damage.",
+          "rankScaling": [
+            {"stat": "第二击额外伤害", "unit": "%", "values": [10, 12.5, 15, 17.5, 20]}
+          ],
+          "limits": [
+            "只作用于第二击。",
+            "命中不会消耗该标记（标记仍按其自身规则消耗）。"
+          ],
+          "identityLink": "信任队友的判断，把精确度用在已确认的目标上。",
+          "lineage": "沿用 4ce1a8d2 / lin_tag_lock，改为明确数值。"
+        },
+        {
+          "id": "lin_pn04_clean_angle",
+          "order": 4,
+          "unlockLevel": 22,
+          "nameZh": "净角射击",
+          "nameEn": "Clean Angle",
+          "status": "PROPOSAL",
+          "reviewState": "pending-creator-review",
+          "type": "passive",
+          "energyCost": 0,
+          "usableInAnyJob": true,
+          "modifies": ["lin_pn01_bent_trajectory"],
+          "tags": ["弹道", "追击"],
+          "effectZh": "没有其他可转向的敌人时，能量弹折回再次命中同一目标，第二击威力按比例计算。",
+          "summaryEn": "With no other enemy available, the round turns back to hit the same target again.",
+          "rankScaling": [
+            {"stat": "折回第二击威力", "unit": "%", "values": [40, 45, 50, 55, 60]}
+          ],
+          "limits": [
+            "每次施放最多折回一次。",
+            "折回威力始终低于折线路径正常第二击。"
+          ],
+          "identityLink": "冷静的射手不浪费任何一发子弹。",
+          "lineage": "沿用 4ce1a8d2 / lin_clean_angle，改为明确数值。"
+        },
+        {
+          "id": "lin_pn05_mark_relay",
+          "order": 5,
+          "unlockLevel": 32,
+          "nameZh": "标记接力",
+          "nameEn": "Mark Relay",
+          "status": "PROPOSAL",
+          "reviewState": "pending-creator-review",
+          "type": "passive",
+          "energyCost": 0,
+          "usableInAnyJob": true,
+          "tags": ["弹道", "协同"],
+          "effectZh": "林阙的个人射击命中带有队友标记的敌人时，延长该标记的剩余时间。",
+          "summaryEn": "Lin's personal shots extend an ally mark on the target.",
+          "rankScaling": [
+            {"stat": "标记延长", "unit": "秒", "values": [2, 2.5, 3, 3.5, 4]}
+          ],
+          "limits": [
+            "每个标记只能被延长一次。",
+            "不改变标记的消耗规则。"
+          ],
+          "identityLink": "严谨守时：她确保队友的计划在时间窗口内完成。",
+          "lineage": "新增。"
+        },
+        {
+          "id": "lin_pn06_minimal_motion",
+          "order": 6,
+          "unlockLevel": 42,
+          "nameZh": "最少动作",
+          "nameEn": "Minimal Motion",
+          "status": "PROPOSAL",
+          "reviewState": "pending-creator-review",
+          "type": "active",
+          "energyCost": 14,
+          "usableInAnyJob": true,
+          "tags": ["弹道", "打断"],
+          "effectZh": "施放时间 0.2 秒的精确单发（技能威力 70%）。若目标正在蓄力攻击：普通敌人有一定几率被打断；首领不会被打断，但蓄力被延后。",
+          "summaryEn": "A 0.2 s precise shot; may interrupt a winding-up normal enemy, or delay a boss's wind-up.",
+          "rankScaling": [
+            {"stat": "普通敌人打断几率", "unit": "%", "values": [40, 50, 60, 70, 80]},
+            {"stat": "首领蓄力延后", "unit": "秒", "values": [0.3, 0.35, 0.4, 0.45, 0.5]}
+          ],
+          "limits": [
+            "冷却 10 秒。",
+            "同一首领的同一次蓄力只能被延后一次。"
+          ],
+          "identityLink": "用极少的动作解决问题。",
+          "lineage": "新增。"
+        },
+        {
+          "id": "lin_pn07_three_point_line",
+          "order": 7,
+          "unlockLevel": 54,
+          "nameZh": "三点成线",
+          "nameEn": "Three-Point Line",
+          "status": "PROPOSAL",
+          "reviewState": "pending-creator-review",
+          "type": "passive",
+          "energyCost": 0,
+          "usableInAnyJob": true,
+          "modifies": ["lin_pn01_bent_trajectory"],
+          "tags": ["弹道", "追击"],
+          "effectZh": "折线路径前两击命中不同敌人且第二个目标带有标记时，能量弹再转向第三个敌人，第三击威力按比例计算。",
+          "summaryEn": "If the first two hits land on different enemies and the second is marked, the round turns to a third enemy.",
+          "rankScaling": [
+            {"stat": "第三击威力", "unit": "%", "values": [35, 40, 45, 50, 55]}
+          ],
+          "limits": [
+            "折线路径每次施放最多三击。",
+            "第三击不触发标记锁定的额外伤害。"
+          ],
+          "identityLink": "射手的几何直觉：两点确认，第三点收尾。",
+          "lineage": "沿用 4ce1a8d2 / lin_three_point_line，改为明确数值。"
+        },
+        {
+          "id": "lin_pn08_side_lens_sighting",
+          "order": 8,
+          "unlockLevel": 66,
+          "nameZh": "侧镜标定",
+          "nameEn": "Side-Lens Sighting",
+          "status": "PROPOSAL",
+          "reviewState": "pending-creator-review",
+          "type": "active",
+          "energyCost": 12,
+          "usableInAnyJob": true,
+          "tags": ["弹道", "标记"],
+          "effectZh": "用侧挂护目镜给一名敌人放置“弹道标记”。它视为队友标记，可触发折线路径的优先转向、标记锁定与三点成线，也会让 AI 队友把该敌人列入集中攻击候选；它不是弱点标记，不提供能量减免。",
+          "summaryEn": "Place a trajectory mark that counts as an ally mark for Lin's nodes and AI focus, but gives no energy discount.",
+          "rankScaling": [
+            {"stat": "标记持续", "unit": "秒", "values": [8, 10, 12, 14, 16]}
+          ],
+          "limits": [
+            "同一时间只有一个弹道标记。",
+            "不可被标记接力延长。",
+            "冷却 15 秒。"
+          ],
+          "identityLink": "侧挂式护目镜是她的视觉锚点；即使队里没人标记，她也能自己先确认目标。",
+          "lineage": "新增。"
+        },
+        {
+          "id": "lin_pn09_upright_stance",
+          "order": 9,
+          "unlockLevel": 80,
+          "nameZh": "挺直站姿",
+          "nameEn": "Upright Stance",
+          "status": "PROPOSAL",
+          "reviewState": "pending-creator-review",
+          "type": "passive",
+          "energyCost": 0,
+          "usableInAnyJob": true,
+          "tags": ["弹道", "稳固"],
+          "effectZh": "林阙连续 1 秒未移动时进入站姿：个人射击伤害提高，抗打断能力提高。移动或闪避即解除。",
+          "summaryEn": "After standing still for 1 s, Lin's personal shots hit harder and she resists interruption.",
+          "rankScaling": [
+            {"stat": "个人射击伤害提高", "unit": "%", "values": [5, 6, 7, 8, 10]},
+            {"stat": "抗打断提高", "unit": "%", "values": [15, 20, 25, 30, 35]}
+          ],
+          "limits": [
+            "只看是否移动，与站立位置无关。",
+            "不叠加；计入全局 +30% 个人加成上限。"
+          ],
+          "identityLink": "战斗中以挺直的持械姿态与其他射手区分。",
+          "lineage": "新增。"
+        },
+        {
+          "id": "lin_pn10_single_thread",
+          "order": 10,
+          "unlockLevel": 95,
+          "nameZh": "一线贯通",
+          "nameEn": "Single Thread",
+          "status": "PROPOSAL",
+          "reviewState": "pending-creator-review",
+          "type": "active",
+          "energyCost": 40,
+          "usableInAnyJob": true,
+          "tags": ["弹道", "追击"],
+          "effectZh": "发射一枚长程能量弹，依次转向多个不同的敌人，优先选择带标记者。第一击威力按等级计算，之后每击依次为 80%、65%、50%、40%（相对第一击）。",
+          "summaryEn": "A long round that threads through several different enemies with decaying power; marked enemies first.",
+          "rankScaling": [
+            {"stat": "最多命中敌人数", "unit": "名", "values": [4, 4, 5, 5, 5]},
+            {"stat": "第一击威力（技能威力）", "unit": "%", "values": [110, 115, 120, 125, 130]}
+          ],
+          "limits": [
+            "每个敌人只被命中一次；衰减下限 40%。",
+            "冷却 60 秒；每场战斗最多 2 次。"
+          ],
+          "identityLink": "冷静、守时、精确的射手，终于能用一次出手解决整条战线；这是“先观察，再用极少动作解决问题”的极致。",
+          "lineage": "新增。"
+        }
+      ]
+    }
+  ],
+  "crossCharacterSynergy": [
+    "主角的临场理解标记与林阙的侧镜标定都算“队友标记”，可触发折线路径的优先转向、标记锁定与三点成线；只有临场理解提供能量减免。",
+    "梁序的战术校准可把“集中攻击带标记目标”提到最高优先级，与主角的共享笔记方向一致；两者的效果加成计入同一 +30% 上限。",
+    "蒋岚的共享工具与主角的分灯都转移能量，均不产生净能量。",
+    "这些联动不是组合技；组合技仍按关系与当前技能条件自动解锁，且每位参与者支付能量。"
+  ],
+  "openQuestions": [
+    "个人技能 2–5 级的 JP 成本是否按职业天分打折（职业技能草案在天分 100 时打 50%）。本提案默认不打折。",
+    "共用门槛 [1, 6, 14, 22, 32, 42, 54, 66, 80, 95] 是否适用于全部 51 个身份，还是允许每人不同。",
+    "“技能威力”“冷却”“硬直”“蓄力”“预警”等战斗术语的运行时定义尚未落地；本提案的数值全部是占位。",
+    "临场理解依赖敌人数据中的“弱点标签”字段；敌人数据尚无此字段。",
+    "旧笔记依赖“本存档已击败过的敌人种类”记录；需要确认存档是否保存该信息。"
+  ],
+  "validationExpectations": {
+    "characters": 4,
+    "nodesPerCharacter": 10,
+    "totalNodes": 40,
+    "signatureNamesVerbatim": {"hero": "临场理解", "character-01": "战术校准", "character-02": "二次装配", "character-03": "折线路径"},
+    "maxUnlockLevel": 100,
+    "rankValuesPerScaling": 5,
+    "everyNodeStatus": "PROPOSAL"
+  }
+}

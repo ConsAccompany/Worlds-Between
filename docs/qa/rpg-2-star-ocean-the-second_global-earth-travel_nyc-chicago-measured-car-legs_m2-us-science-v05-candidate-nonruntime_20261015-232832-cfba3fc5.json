@@ -1,0 +1,178 @@
+{
+ "schemaVersion": 1,
+ "dataId": "global-earth-travel.m2-us-science-v05-candidate.nyc-chicago-measured-car-legs",
+ "status": "nonruntime-proposed-candidate",
+ "statusNote": "Proposed v05 candidate. It replaces only the four free-flow car legs of the v03 candidate with measured 2025 trip-duration medians from official city trip-record datasets. The runtime does not read this file and v02 stays active. The arrival-side allowance is still unsourced, so the M2 door-to-door route-figures gate stays OPEN.",
+ "recordedOn": "2026-10-15",
+ "basedOn": "docs/qa/rpg-2-star-ocean-the-second_global-earth-travel_nyc-chicago-airport-curbs_m2-us-science-v03-candidate-nonruntime_20261015-200518-7c3e19a4.json",
+ "respondsTo": "docs/qa/rpg-2-star-ocean-the-second_m2-nyc-chicago-typical-door-to-door_resume-attempt-blocked_qa-note_m2-v04_20261015-224916-c4e1a7b2.md (section 3 items E1, E2, E3; section 4 plans P1, P2, P3)",
+ "qaNote": "docs/qa/rpg-2-star-ocean-the-second_m2-nyc-chicago-typical-door-to-door_measured-car-legs_qa-note_m2-v05_20261015-232832-cfba3fc5.md",
+ "scope": "Changes only accessMinutes and egressMinutes. Flight block medians (165 / 136) and checkInAndWaitMinutes (120) are carried unchanged from v03. doorToDoorAllowanceMinutes stays 0 and is NOT a claim that the arrival side takes no time.",
+ "assumptions": [
+  "Car legs are zone-to-zone measured trip durations, not point-to-point. NYC: TLC taxi zone 231 'TriBeCa/Civic Center' (contains City Hall Park point -74.00708, 40.71205) and zone 138 'LaGuardia Airport' (contains the v03 LGA B departures curb point). Chicago: community area 32 'LOOP' (contains -87.6297746, 41.881144) and 76 'OHARE' (contains both v03 ORD T1 curb points). All four memberships were checked by server-side point-in-polygon, not from memory.",
+  "Window is calendar year 2025 (2025-01-01 to 2025-12-31, local pickup/start time), the latest full year released in all three datasets on 2026-10-15.",
+  "NYC duration = yellow taxi (tpep_dropoff_datetime - tpep_pickup_datetime) pooled with HVFHV trip_time (pickup to dropoff). Matched shared HVFHV rides are excluded. Chicago duration = taxi trip_seconds. Rows with duration <= 0 or > 180 min are excluded and counted.",
+  "Durations are meter/app-trip time only. They exclude taxi-stand queue, app-ride wait, curb dwell, and the offset between zone interiors and the exact scene points or terminal curbs. Chicago taxi trips cover all O'Hare terminals; NYC rows cover all LGA terminals.",
+  "Chicago Transportation Network Providers (rideshare) trips were NOT included: the 2025 TNP query (6dvr-xwnh) timed out after 300 s on 2026-10-15. Chicago legs are taxi-only.",
+  "Primary candidate uses all-hours medians. weekday 07:00-19:00 medians are given as a sensitivity row. The time-of-day policy is a creator decision (v04 note E6).",
+  "Component minutes are rounded to whole minutes before summing, as the runtime sums integer fields. candidateTotalFromRawComponents shows the unrounded sum. Totals are 'sum of component medians', not the median of a door-to-door total.",
+  "No 2537 fiction modifier is applied."
+ ],
+ "sources": [
+  {
+   "id": "nyc-tlc-yellow-2025",
+   "name": "NYC TLC 2025 Yellow Taxi Trip Data (NYC Open Data)",
+   "datasetId": "irx2-vgm4",
+   "url": "https://data.cityofnewyork.us/resource/irx2-vgm4.csv",
+   "rowsUpdatedAt": "2026-10-01T16:57:47Z",
+   "retrievedOn": "2026-10-15",
+   "files": {
+    "pu231_do138": {"rows": 4180, "serverCount": 4180, "sha256": "c77c3fc17c68dc3d73d98d5c239ba887be763e5b11d907a0f26b42a61d9b0e22"},
+    "pu138_do231": {"rows": 14385, "serverCount": 14385, "sha256": "d85ad4500ee256a42b2676790efd1c8470f86ad9a71b22187cc7d35480e70565"}
+   }
+  },
+  {
+   "id": "nyc-tlc-hvfhv-2025",
+   "name": "NYC TLC 2025 High Volume FHV Trip Data (NYC Open Data)",
+   "datasetId": "nt46-nv3c",
+   "url": "https://data.cityofnewyork.us/resource/nt46-nv3c.csv",
+   "rowsUpdatedAt": "2026-10-08T17:47:04Z",
+   "retrievedOn": "2026-10-15",
+   "files": {
+    "pu231_do138": {"rows": 68012, "serverCount": 68012, "sha256": "8362cd34b243a6f69c1e48cc59c53b90acf6156407fb0d6352d4612789c0e2da"},
+    "pu138_do231": {"rows": 51351, "serverCount": 51351, "sha256": "c64df82063c3fc83b5b5455f6c773a4c5e1ffb5cbda010d2af0873f18925f74a"}
+   }
+  },
+  {
+   "id": "nyc-taxi-zones",
+   "name": "NYC Taxi Zones (NYC Open Data 8meu-9t5y) and TLC taxi_zone_lookup.csv",
+   "urls": ["https://data.cityofnewyork.us/resource/8meu-9t5y.json", "https://d37ci6vzurychx.cloudfront.net/misc/taxi_zone_lookup.csv"],
+   "lookupSha256": "1a99e105092230f8620f301edcca7f80d3080642ff404d28ed957d3fa222c8ed",
+   "verified": {"231": "Manhattan, TriBeCa/Civic Center, Yellow Zone", "138": "Queens, LaGuardia Airport, Airports"}
+  },
+  {
+   "id": "chicago-taxi-2025",
+   "name": "City of Chicago Taxi Trips - 2025",
+   "datasetId": "b8xg-w8bx",
+   "url": "https://data.cityofchicago.org/resource/b8xg-w8bx.csv",
+   "rowsUpdatedAt": "2026-10-08T21:19:59Z",
+   "retrievedOn": "2026-10-15",
+   "files": {
+    "pu32_do76": {"rows": 49443, "serverCount": 49443, "uniqueTripIds": 49443, "sha256": "52431535fe34c9670731a88db7e2c5ac11afad1fc7f09548e87b36c832757aa9"},
+    "pu76_do32": {"rows": 166188, "serverCount": 166188, "uniqueTripIds": 166188, "sha256": "fd50328aaa708c6b7722fdd408ac8be6392945089f814437a42605edbe740348"}
+   },
+   "monthlyServerCountsPu76Do32": [8811, 10683, 13984, 15274, 18785, 16868, 13956, 12977, 16368, 17729, 12698, 8055]
+  },
+  {
+   "id": "chicago-community-areas",
+   "name": "City of Chicago Boundaries - Community Areas",
+   "datasetId": "igwz-8jzy",
+   "url": "https://data.cityofchicago.org/resource/igwz-8jzy.json",
+   "verified": {"32": "LOOP", "76": "OHARE"}
+  },
+  {
+   "id": "cda-ohare-taxi-limo-tnp",
+   "name": "Chicago Department of Aviation, O'Hare 'Taxi, Limo, TNP' page",
+   "url": "https://www.flychicago.com/ohare/tofrom/taxi/pages/default.aspx",
+   "retrievedOn": "2026-10-15",
+   "responseSha256": "843bd5a1f38bb9150698ee48a28e6bcd57037e80b18eccdd4ef938cbf55d35fe",
+   "quotes": [
+    "There are Taxi Stands at the lower level curb front (outside of Baggage Claim) at each terminal.",
+    "can only meet passengers at designated areas on the the lower level center lane (lane 2). Depending on airport traffic, it can take between 5 and 20 minutes for the vehicle to get to the designated pickup location."
+   ],
+   "note": "The 5-20 min sentence is in the limousine / pre-arranged-ride section, not the taxi section. The page gives no taxi-queue time."
+  },
+  {
+   "id": "panynj-lga-taxi",
+   "name": "LaGuardia Airport (PANYNJ) Taxis page",
+   "url": "https://www.laguardiaairport.com/transportation/taxi-service",
+   "retrievedOn": "2026-10-15",
+   "responseSha256": "880bc8cc97f60d6dee099cd1999c4eb1131645c4885521e7bd6a8b9d3a466247",
+   "quotes": [
+    "Terminal B : Curbside in the arrivals area on Level 2.",
+    "No, just join the line at the official taxi stand outside your terminal, where a dispatcher will direct you to the next available cab."
+   ],
+   "note": "No taxi-queue time given."
+  },
+  {
+   "id": "panynj-lga-departures",
+   "name": "LaGuardia Airport (PANYNJ) Flight Departures Guide",
+   "url": "https://www.laguardiaairport.com/security-wait-times",
+   "retrievedOn": "2026-10-15",
+   "responseSha256": "12353fdc8ad25fda294d9ebe89f3e1f39d5091c1dccd95417e9ef39b6bffff1b",
+   "quotes": ["Airline check-in typically opens 3–4 hours before departure and closes 45–60 minutes before takeoff."]
+  },
+  {
+   "id": "panynj-lga-pickup",
+   "name": "LaGuardia Airport (PANYNJ) Pick-up and Drop-off Areas page",
+   "url": "https://www.laguardiaairport.com/to-from-airport/pickup-and-dropoff",
+   "retrievedOn": "2026-10-15",
+   "responseSha256": "c0cc297e7108cbe978bc8de0d262cc2fd4b2b2b336461b4a770dd2c382cda02e",
+   "quotes": ["No, parking or waiting is not allowed on airport roadways or terminal frontages; curbsides are for active loading and unloading only."]
+  }
+ ],
+ "measuredCarLegs": {
+  "nycAccess_cityHallZone231_to_lga138": {
+   "yellow": {"rowsExcluded": 28, "n": 4152, "median": 34.98, "p10": 22.68, "p90": 56.72},
+   "hvfhv": {"sharedMatchedExcluded": 150, "n": 67862, "median": 31.50, "p10": 22.30, "p90": 52.83},
+   "pooled": {"n": 72014, "median": 31.683, "p10": 22.305, "p90": 53.067, "weekday0719": {"n": 41917, "median": 38.067, "p10": 26.75, "p90": 58.55}},
+   "v03FreeFlowMinutes": 20.698
+  },
+  "nycEgress_lga138_to_cityHallZone231": {
+   "yellow": {"rowsExcluded": 188, "n": 14197, "median": 36.07, "p10": 23.80, "p90": 54.01},
+   "hvfhv": {"sharedMatchedExcluded": 15, "n": 51336, "median": 37.63, "p10": 25.65, "p90": 55.55},
+   "pooled": {"n": 65533, "median": 37.317, "p10": 25.233, "p90": 55.25, "weekday0719": {"n": 32438, "median": 44.517, "p10": 33.367, "p90": 60.783}},
+   "v03FreeFlowMinutes": 18.595
+  },
+  "chiAccess_loop32_to_ohare76": {
+   "taxi": {"rowsExcluded": 119, "n": 49324, "median": 40.525, "p10": 25.283, "p90": 64.0, "weekday0719": {"n": 32216, "median": 44.983, "p10": 29.583, "p90": 67.942}},
+   "v03FreeFlowMinutes": 23.824
+  },
+  "chiEgress_ohare76_to_loop32": {
+   "taxi": {"rowsExcluded": 51, "n": 166137, "median": 42.45, "p10": 25.0, "p90": 67.8, "weekday0719": {"n": 92990, "median": 49.183, "p10": 31.533, "p90": 73.967}},
+   "v03FreeFlowMinutes": 23.450
+  }
+ },
+ "measuredArrivalSidePartial": {
+  "lgaRideHailRequestToPickup_pu138_do231": {"source": "nyc-tlc-hvfhv-2025", "n": 51248, "outside0to60Excluded": 88, "median": 5.25, "p10": 1.87, "p90": 11.60},
+  "note": "Only the app-ride wait at LGA (request to pickup). It does not cover deplaning, the walk to the curb, baggage, the taxi-stand queue, or any ORD wait. Not added to any total."
+ },
+ "candidateSegments": [
+  {
+   "id": "nyc-to-chicago",
+   "accessMinutes": 32,
+   "checkInAndWaitMinutes": 120,
+   "flightMinutes": 165,
+   "egressMinutes": 42,
+   "doorToDoorAllowanceMinutes": 0,
+   "candidateTotalMinutes": 359,
+   "candidateTotalFromRawComponents": 359.133,
+   "v03TotalMinutes": 329
+  },
+  {
+   "id": "chicago-to-nyc",
+   "accessMinutes": 41,
+   "checkInAndWaitMinutes": 120,
+   "flightMinutes": 136,
+   "egressMinutes": 37,
+   "doorToDoorAllowanceMinutes": 0,
+   "candidateTotalMinutes": 334,
+   "candidateTotalFromRawComponents": 333.842,
+   "v03TotalMinutes": 299
+  }
+ ],
+ "sensitivity": [
+  {"id": "weekday-0700-1900", "nycToChicago": {"access": 38, "egress": 49, "total": 372}, "chicagoToNyc": {"access": 45, "egress": 45, "total": 346}},
+  {"id": "nyc-yellow-only", "nycToChicago": {"access": 35, "egress": 42, "total": 362}, "chicagoToNyc": {"access": 41, "egress": 36, "total": 333}}
+ ],
+ "notApplied": [
+  "No arrival-side allowance: deplane-to-curb, baggage and taxi-queue times have no primary typical source yet.",
+  "No conversion from zone-to-zone to point-to-point.",
+  "No Chicago TNP rows (query timed out)."
+ ],
+ "gate": {
+  "status": "OPEN",
+  "resolved": ["E1 car leg City Hall zone <-> LGA: measured median", "E2 car leg Loop <-> O'Hare: measured median (taxi only)", "E5 router provenance no longer affects the car legs in this candidate"],
+  "open": ["E3 arrival-side allowance (deplane, walk, bags, taxi queue / car wait) at ORD and LGA", "E6 creator time-of-day policy (all-hours vs weekday daytime)", "creator decision on checked bags", "creator approval and a separate runtime-promotion task"]
+ }
+}

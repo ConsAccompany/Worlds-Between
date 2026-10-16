@@ -1,0 +1,3237 @@
+{
+  "schemaVersion": 1,
+  "project": "rpg-2-star-ocean-the-second",
+  "title": "Worlds Between · 研学五系列 10 节点职业技能树（提案）",
+  "status": "PROPOSAL",
+  "reviewStatus": "pending balance and creator review",
+  "createdAt": "2026-10-15T23:21:43-04:00",
+  "authoring": "Claude Code 会话（已登录 Claude Max，firstParty）；未使用 API key、额度或付费回退。",
+  "scope": "工程、机偶、医疗、药剂、战术五条研学系列各 10 个节点（共 50 个），按 2026-10-15 创作者技能规则重新设计；取代 7 节点、3 级上限草案中的这五条树。系列名、五阶名称与终阶任务逐字沿用已批准原文。",
+  "notImplemented": "仅设计记录：未修改源 JSON、Game Bible、进度文档、运行时、应用或服务器，也未提交 Git。",
+  "sources": {
+    "approvedRoster": {
+      "path": "outputs/rpg-2-star-ocean-the-second_all-jobs_five-tier-proposal_v01_20261013-224236-6f2b9c11.json",
+      "hashAlgorithm": "sha256-text-lf-v1",
+      "sha256": "92f5bff5428c73e45e81a4becb93ec7a59ad31ed637474f0ffbb77cc036765d5"
+    },
+    "supersededScholarlyDraft": {
+      "path": "outputs/rpg-2-star-ocean-the-second_scholarly-job-trees_skill-node-proposal_v01_20261013-225251-3e6a19d8.json",
+      "hashAlgorithm": "sha256-text-lf-v1",
+      "sha256": "8b24893eb60ee73f2d06ec001323b980f8dac430540ed8000c8d58db5e4589c2",
+      "note": "工程、机偶、医疗、药剂 7 节点草案"
+    },
+    "supersededTacticsDraft": {
+      "path": "outputs/rpg-2-star-ocean-the-second_four-job-trees_skill-node-proposal_v01_20261013-224554-5a72d0be.json",
+      "hashAlgorithm": "sha256-text-lf-v1",
+      "sha256": "740a4659237b8cc2d16f924514c3b3252365be59ac6a472af5dbbb78d67e648a",
+      "note": "战术 7 节点草案（四天分样板文件）"
+    },
+    "creatorDecisionNote": {
+      "path": "docs/design/rpg-2-star-ocean-the-second_creator-decisions-2026-10-15_world-skills-ai-endgame_reconciliation-note_v01_20261015-174559-39efc292.md",
+      "hashAlgorithm": "sha256-text-lf-v1",
+      "sha256": "94a821911b569e6902e69c2b755772d779ca72a599b5ea5fe1209daee2819954"
+    },
+    "gameBibleBattleRules": {
+      "path": "outputs/rpg-2-star-ocean-the-second_game-bible_state_v01_20261013-195422-b8c16d42.json",
+      "hashAlgorithm": "sha256-text-lf-v1",
+      "sha256": "303942c975bf51391c6de3bcbaaf4d36807237459de85c591a3143e88b561074",
+      "note": "第 1、3、4 章：平地横向战场、能量不自然恢复、战后 20%/10%"
+    }
+  },
+  "rules": {
+    "unlock": "进入某阶时，该阶 2 个节点立即以第 1 级开放，不消耗 JP，也不另设等级门槛；第 5 阶仍须先完成该系列终阶任务（完成一次即对全体角色永久开放）。",
+    "jp": "JP 只用于把已开放的技能从第 1 级提升到第 2–5 级；任何节点都不能用 JP 解锁。",
+    "maxRank": 5,
+    "allBranchesLearnable": "10 个节点没有互斥选择；任何角色最终都能把全部 10 个节点练到第 5 级。",
+    "currentSeriesOnly": "职业技能（含科技区实用效果）只在角色当前职业为该系列时可用；离开系列后保留等级，切回即恢复。",
+    "noPartySlot": "工程装置与机偶是技能效果，不占五名上场角色的位置，不获得经验。",
+    "battlefield": "战场是横向、固定尺寸的平地；所有节点都不产生地形、高低差、障碍、掩体或跳跃相关效果，装置与机偶没有碰撞体积，不阻挡移动。范围只按横向像素距离计算。",
+    "noStealth": "科技区实用效果只提供信息、捷径或可选奖励，不引入已取消的潜入玩法。",
+    "noGating": "实用效果都是可选优势：没有任何主线、支线、伙伴或档案只能靠某个研学职业完成（没有永久错过的内容）。",
+    "alchemyEconomy": "药剂技能在战斗中临时调制的效果不进入背包，不替代商会或道具经济，也不影响市场价格。",
+    "ai": "治疗与复活技能的 AI 先处理倒下的队友，再处理急需治疗者；AI 默认不使用消耗道具；组合技 AI 默认关闭。",
+    "combos": "组合技每位参与者都支付能量；战术节点可降低消耗，但不绕过关系与当前技能条件。",
+    "energy": "主动技能消耗能量，被动技能不消耗。战斗中能量不自然恢复；返还能量的节点都有每场上限：按次返还的节点单次返还低于本系列任何主动技能的消耗，按比例返还的节点只退回已支付部署消耗的一部分（≤ 50%）。能量消耗不随技能等级变化。",
+    "rankCurve": "第 2–5 级每级按固定或递减的加法步长提升主要数值，不使用乘法复利；第 5 级主要数值不超过第 1 级的 2 倍。冷却、触发次数与能量消耗不随等级变化。",
+    "stacking": "同名效果不叠加，只刷新；同类护板/护层取较高者。全来源合计上限（提案）：敌方受到伤害增加 ≤ 25%，敌方防御降低 ≤ 30%，队友减伤 ≤ 50%，单人护层总量 ≤ 生命上限 30%，异常抗性 ≤ 60%。"
+  },
+  "jpProposal": {
+    "status": "PROPOSAL",
+    "reviewStatus": "pending balance and creator review",
+    "rankUpgradeBaseJp": {
+      "2": 30,
+      "3": 45,
+      "4": 60,
+      "5": 75
+    },
+    "unlockJp": 0,
+    "curve": "线性：每级比上一级多 15 JP；单项技能从第 1 级练到第 5 级共 210 基础 JP，每条系列 10 个节点共 2100 基础 JP。",
+    "aptitudeDiscount": "沿用现有草案规则：对应天分（研学）60 时付基础 JP；61–100 线性递减，100 时付基础 JP 的 50%，每次向上取整。最高与最低成本差距不超过 50%（Game Bible 第 4 章）。"
+  },
+  "roleVocabulary": {
+    "protection": "单体防护",
+    "armor_break": "破甲",
+    "upkeep": "维修维护",
+    "deploy": "部署",
+    "control": "打断控制",
+    "energy_economy": "能量循环",
+    "group_protection": "群体防护",
+    "burst": "爆发",
+    "capacity": "容量扩展",
+    "amplify": "装置增幅",
+    "aggro": "牵制吸引",
+    "tempo": "节奏协同",
+    "synergy": "多模式协同",
+    "resilience": "韧性重构",
+    "multi_mode": "复合模式",
+    "healing": "单体治疗",
+    "intel": "情报预警",
+    "cleanse": "状态清除",
+    "regen": "持续恢复",
+    "revival": "复苏",
+    "recovery": "战后恢复",
+    "group_healing": "群体治疗",
+    "lethal_save": "致命保护",
+    "group_sustain": "群体续航",
+    "damage": "施标伤害",
+    "buff": "单体强化",
+    "debuff": "削弱",
+    "buff_strip": "驱散强化",
+    "duration": "时效延长",
+    "status_prevention": "异常预防",
+    "area_debuff": "全场施标",
+    "mark": "目标标记",
+    "haste": "出手加速",
+    "formation": "编队收益",
+    "rescue": "救援轮换",
+    "counter_read": "预判反制",
+    "combo_support": "组合技支援",
+    "command": "双重指令",
+    "cooldown": "冷却统筹"
+  },
+  "validationParameters": {
+    "energyBandsByStage": {
+      "1": [
+        6,
+        16
+      ],
+      "2": [
+        6,
+        20
+      ],
+      "3": [
+        6,
+        30
+      ],
+      "4": [
+        6,
+        34
+      ],
+      "5": [
+        24,
+        50
+      ]
+    },
+    "rank5ToRank1MaxRatio": 2,
+    "crossSeriesRoleJaccardMax": 0.4,
+    "bannedTerms": [
+      "地形",
+      "高低",
+      "高地",
+      "地势",
+      "障碍",
+      "掩体",
+      "跳跃",
+      "潜入",
+      "隐身",
+      "潜行",
+      "terrain",
+      "elevation",
+      "obstacle",
+      "high ground",
+      "jump",
+      "stealth",
+      "cover"
+    ]
+  },
+  "series": [
+    {
+      "id": "engineering",
+      "aptitude": "研学",
+      "name": "工程",
+      "en": "Engineering",
+      "role": "装置维修与战场机关",
+      "stages": [
+        "修械员",
+        "现场工程师",
+        "系统改造师",
+        "超域工程师",
+        "创构大师"
+      ],
+      "finalQuest": "在一处后期设施中修复能源、传输与安全三套模块，再以修复后的系统完成防卫挑战。",
+      "identity": "固定位置的短时装置（护板、脉冲桩）与对机械目标的拆解；可维修任何队友部署的装置和机偶。装置不移动、无碰撞、不占上场位。",
+      "nodes": [
+        {
+          "id": "engineering_n01_field_plate",
+          "seriesId": "engineering",
+          "stage": 1,
+          "stageName": "修械员",
+          "slot": 1,
+          "name": "护板架设",
+          "nameEn": "Field Plate",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "protection",
+          "tacticalRoleZh": "单体防护",
+          "energyCost": 14,
+          "cooldownSec": 8,
+          "target": "一名队友（含自身）",
+          "rangePx": 160,
+          "baseEffect": "为目标架设一块随身护板，10 秒内吸收相当于目标生命上限 12% 的伤害。同一目标只保留一块工程护板，新护板覆盖旧护板。",
+          "scaling": [
+            {
+              "key": "absorb",
+              "label": "吸收量",
+              "unit": "% 目标生命上限",
+              "direction": "higher_is_better",
+              "values": [
+                12,
+                14,
+                16,
+                18,
+                20
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "吸收量 14% 目标生命上限（+2）",
+            "3": "吸收量 16% 目标生命上限（+2）",
+            "4": "吸收量 18% 目标生命上限（+2）",
+            "5": "吸收量 20% 目标生命上限（+2）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "engineering_field_plate",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "engineering_n02_weakpoint_disassembly",
+          "seriesId": "engineering",
+          "stage": 1,
+          "stageName": "修械员",
+          "slot": 2,
+          "name": "弱点拆解",
+          "nameEn": "Weakpoint Disassembly",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "armor_break",
+          "tacticalRoleZh": "破甲",
+          "energyCost": 14,
+          "cooldownSec": 10,
+          "target": "一名敌人",
+          "rangePx": 105,
+          "baseEffect": "造成攻击力 90% 的伤害，并使目标防御降低 10%，持续 8 秒；对机械类敌人（自动机械、无人机、巡逻机偶）持续时间另加 4 秒。",
+          "scaling": [
+            {
+              "key": "defDown",
+              "label": "防御降低",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                10,
+                12,
+                14,
+                16,
+                18
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "防御降低 12%（+2）",
+            "3": "防御降低 14%（+2）",
+            "4": "防御降低 16%（+2）",
+            "5": "防御降低 18%（+2）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "engineering_weakpoint_disassembly",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "engineering_n03_field_maintenance",
+          "seriesId": "engineering",
+          "stage": 2,
+          "stageName": "现场工程师",
+          "slot": 1,
+          "name": "现场维保",
+          "nameEn": "Field Maintenance",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "upkeep",
+          "tacticalRoleZh": "维修维护",
+          "energyCost": 10,
+          "cooldownSec": 6,
+          "target": "一个友方装置或机偶（任何队友部署的均可），或带工程护板的队友",
+          "rangePx": 160,
+          "baseEffect": "恢复目标耐久上限的 35%；对工程护板则恢复其原吸收量的 35%，不超过原值。",
+          "scaling": [
+            {
+              "key": "repair",
+              "label": "恢复量",
+              "unit": "% 耐久上限／原吸收量",
+              "direction": "higher_is_better",
+              "values": [
+                35,
+                40,
+                45,
+                50,
+                55
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "恢复量 40% 耐久上限／原吸收量（+5）",
+            "3": "恢复量 45% 耐久上限／原吸收量（+5）",
+            "4": "恢复量 50% 耐久上限／原吸收量（+5）",
+            "5": "恢复量 55% 耐久上限／原吸收量（+5）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": {
+            "name": "现场修复",
+            "effect": "在科技文明圈场景中修复标记的损坏公共设施（照明、终端、闸门、升降平台），开启可选捷径、补给箱或档案记录。这些设施从不是唯一通路；没有工程职业也能完成全部主线与支线。",
+            "mvpLocations": [
+              "纽约 · 曼哈顿下城市政厅公园",
+              "华盛顿特区 · 国会大厦遗址（科技勘察前哨）",
+              "芝加哥 · 卢普区"
+            ],
+            "gate": "optional-advantage-only",
+            "requiresCurrentSeries": true
+          },
+          "supersedesDraftNodeId": "engineering_maintenance",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "engineering_n04_pulse_stake",
+          "seriesId": "engineering",
+          "stage": 2,
+          "stageName": "现场工程师",
+          "slot": 2,
+          "name": "脉冲桩",
+          "nameEn": "Pulse Stake",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "deploy",
+          "tacticalRoleZh": "部署",
+          "energyCost": 18,
+          "cooldownSec": 12,
+          "target": "施放者当前横向位置",
+          "rangePx": null,
+          "baseEffect": "立起一根脉冲桩，持续 10 秒，每 2.5 秒对 80 像素内的敌人造成攻击力 35% 的伤害（共 4 次）。脉冲桩可被敌人攻击（耐久为施放者生命上限的 25%），无碰撞体积，不阻挡任何角色移动。",
+          "scaling": [
+            {
+              "key": "pulse",
+              "label": "每次脉冲伤害",
+              "unit": "% 攻击力",
+              "direction": "higher_is_better",
+              "values": [
+                35,
+                39,
+                43,
+                47,
+                51
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "每次脉冲伤害 39% 攻击力（+4）",
+            "3": "每次脉冲伤害 43% 攻击力（+4）",
+            "4": "每次脉冲伤害 47% 攻击力（+4）",
+            "5": "每次脉冲伤害 51% 攻击力（+4）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "engineering_n05_safety_override",
+          "seriesId": "engineering",
+          "stage": 3,
+          "stageName": "系统改造师",
+          "slot": 1,
+          "name": "安全覆写",
+          "nameEn": "Safety Override",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "control",
+          "tacticalRoleZh": "打断控制",
+          "energyCost": 20,
+          "cooldownSec": 18,
+          "target": "一名敌人",
+          "rangePx": 120,
+          "baseEffect": "打断目标正在进行的蓄力起手；对机械类敌人另使其下一次行动延后 1.5 秒。对首领只打断，不延后。",
+          "scaling": [
+            {
+              "key": "delay",
+              "label": "机械类敌人行动延后",
+              "unit": "秒",
+              "direction": "higher_is_better",
+              "values": [
+                1.5,
+                1.75,
+                2,
+                2.25,
+                2.5
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "机械类敌人行动延后 1.75秒（+0.25）",
+            "3": "机械类敌人行动延后 2秒（+0.25）",
+            "4": "机械类敌人行动延后 2.25秒（+0.25）",
+            "5": "机械类敌人行动延后 2.5秒（+0.25）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "engineering_safe_override",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "engineering_n06_energy_bypass",
+          "seriesId": "engineering",
+          "stage": 3,
+          "stageName": "系统改造师",
+          "slot": 2,
+          "name": "能源旁路",
+          "nameEn": "Energy Bypass",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "energy_economy",
+          "tacticalRoleZh": "能量循环",
+          "energyCost": null,
+          "cooldownSec": null,
+          "target": "自身",
+          "rangePx": null,
+          "baseEffect": "自己部署的工程装置（护板、联锁护板、脉冲桩）结束或被摧毁时返还 4 点能量；每场战斗最多触发 4 次。",
+          "scaling": [
+            {
+              "key": "refund",
+              "label": "每次返还能量",
+              "unit": "点",
+              "direction": "higher_is_better",
+              "values": [
+                4,
+                5,
+                6,
+                7,
+                8
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "每次返还能量 5点（+1）",
+            "3": "每次返还能量 6点（+1）",
+            "4": "每次返还能量 7点（+1）",
+            "5": "每次返还能量 8点（+1）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "engineering_energy_bypass",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review",
+          "energyReturn": {
+            "perTriggerKey": "refund",
+            "maxTriggersPerBattle": 4
+          }
+        },
+        {
+          "id": "engineering_n07_interlock_array",
+          "seriesId": "engineering",
+          "stage": 4,
+          "stageName": "超域工程师",
+          "slot": 1,
+          "name": "联锁护阵",
+          "nameEn": "Interlock Array",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "group_protection",
+          "tacticalRoleZh": "群体防护",
+          "energyCost": 30,
+          "cooldownSec": 30,
+          "target": "施放者 140 像素内全部队友（含自身）",
+          "rangePx": 140,
+          "baseEffect": "为范围内每名队友各架设一块联锁护板，8 秒内吸收相当于各自生命上限 8% 的伤害。与护板架设同属工程护板，不叠加，取吸收量较高者。",
+          "scaling": [
+            {
+              "key": "absorb",
+              "label": "吸收量",
+              "unit": "% 各自生命上限",
+              "direction": "higher_is_better",
+              "values": [
+                8,
+                9,
+                10,
+                11,
+                12
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "吸收量 9% 各自生命上限（+1）",
+            "3": "吸收量 10% 各自生命上限（+1）",
+            "4": "吸收量 11% 各自生命上限（+1）",
+            "5": "吸收量 12% 各自生命上限（+1）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "engineering_n08_overload_discharge",
+          "seriesId": "engineering",
+          "stage": 4,
+          "stageName": "超域工程师",
+          "slot": 2,
+          "name": "过载释放",
+          "nameEn": "Overload Discharge",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "burst",
+          "tacticalRoleZh": "爆发",
+          "energyCost": 22,
+          "cooldownSec": 14,
+          "target": "自己的一个工程装置（优先最早部署者）",
+          "rangePx": 100,
+          "baseEffect": "引爆装置，对其周围 100 像素内的敌人造成攻击力 110% 的伤害；装置每剩余 1 秒持续时间另加攻击力 8%，最多另加 40%。装置随即消失（会触发能源旁路）。场上没有自己的装置时无法使用。",
+          "scaling": [
+            {
+              "key": "blast",
+              "label": "基础伤害",
+              "unit": "% 攻击力",
+              "direction": "higher_is_better",
+              "values": [
+                110,
+                120,
+                130,
+                140,
+                150
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "基础伤害 120% 攻击力（+10）",
+            "3": "基础伤害 130% 攻击力（+10）",
+            "4": "基础伤害 140% 攻击力（+10）",
+            "5": "基础伤害 150% 攻击力（+10）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "engineering_n09_redundant_build",
+          "seriesId": "engineering",
+          "stage": 5,
+          "stageName": "创构大师",
+          "slot": 1,
+          "name": "构件冗余",
+          "nameEn": "Redundant Build",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "capacity",
+          "tacticalRoleZh": "容量扩展",
+          "energyCost": null,
+          "cooldownSec": null,
+          "target": "自身",
+          "rangePx": null,
+          "baseEffect": "同时在场的自有工程装置上限由 2 提高到 3；自有装置的耐久与护板吸收量 +10%。",
+          "scaling": [
+            {
+              "key": "bonus",
+              "label": "耐久／吸收加成",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                10,
+                12,
+                14,
+                16,
+                18
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "耐久／吸收加成 12%（+2）",
+            "3": "耐久／吸收加成 14%（+2）",
+            "4": "耐久／吸收加成 16%（+2）",
+            "5": "耐久／吸收加成 18%（+2）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": true
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "engineering_n10_genesis_lattice",
+          "seriesId": "engineering",
+          "stage": 5,
+          "stageName": "创构大师",
+          "slot": 2,
+          "name": "创构矩阵",
+          "nameEn": "Genesis Lattice",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "amplify",
+          "tacticalRoleZh": "装置增幅",
+          "energyCost": 44,
+          "cooldownSec": 60,
+          "target": "自身与自有装置",
+          "rangePx": 140,
+          "baseEffect": "展开 12 秒的创构矩阵：期间自有工程装置的伤害、吸收与修复效果 +15%；矩阵结束时为 140 像素内每名队友生成吸收生命上限 6% 伤害的护板（同属工程护板，取较高者）。",
+          "scaling": [
+            {
+              "key": "amp",
+              "label": "装置效果加成",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                15,
+                17,
+                19,
+                21,
+                23
+              ]
+            },
+            {
+              "key": "endPlate",
+              "label": "结束护板吸收量",
+              "unit": "% 生命上限",
+              "direction": "higher_is_better",
+              "values": [
+                6,
+                6.5,
+                7,
+                7.5,
+                8
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "装置效果加成 17%（+2）；结束护板吸收量 6.5% 生命上限（+0.5）",
+            "3": "装置效果加成 19%（+2）；结束护板吸收量 7% 生命上限（+0.5）",
+            "4": "装置效果加成 21%（+2）；结束护板吸收量 7.5% 生命上限（+0.5）",
+            "5": "装置效果加成 23%（+2）；结束护板吸收量 8% 生命上限（+0.5）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": true
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "engineering_horizon_frame",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        }
+      ]
+    },
+    {
+      "id": "automata",
+      "aptitude": "研学",
+      "name": "机偶",
+      "en": "Automata",
+      "role": "可部署机偶与多机协作",
+      "stages": [
+        "机偶技师",
+        "随行机师",
+        "多机协调者",
+        "自律编队师",
+        "共生机魂师"
+      ],
+      "finalQuest": "编排三台机偶分别执行护送、修复与牵制任务，保证全部目标完成。",
+      "identity": "会移动、有自身生命的机偶，按模式（攻击、护航、牵制、修复）自主行动；数量从 1 台扩展到 3 台。机偶不占上场位、无碰撞、不获得经验。",
+      "nodes": [
+        {
+          "id": "automata_n01_companion_unit",
+          "seriesId": "automata",
+          "stage": 1,
+          "stageName": "机偶技师",
+          "slot": 1,
+          "name": "随行机偶",
+          "nameEn": "Companion Unit",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "deploy",
+          "tacticalRoleZh": "部署",
+          "energyCost": 16,
+          "cooldownSec": 10,
+          "target": "施放者身边",
+          "rangePx": null,
+          "baseEffect": "部署一台随行机偶，持续 20 秒，生命为施放者生命上限的 30%；默认攻击模式，每 1.5 秒对施放者当前目标造成攻击力 30% 的伤害。超过同时在场上限（基础 1 台）时，最早部署的机偶退场。",
+          "scaling": [
+            {
+              "key": "hit",
+              "label": "攻击伤害",
+              "unit": "% 攻击力",
+              "direction": "higher_is_better",
+              "values": [
+                30,
+                34,
+                38,
+                42,
+                46
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "攻击伤害 34% 攻击力（+4）",
+            "3": "攻击伤害 38% 攻击力（+4）",
+            "4": "攻击伤害 42% 攻击力（+4）",
+            "5": "攻击伤害 46% 攻击力（+4）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": {
+            "name": "先行勘察",
+            "effect": "在科技文明圈野外与遗址场景中派出机偶先行，显示一定半径内的场景地图轮廓、可交互点和可见敌人的巡逻路线；在国会大厦遗址的科技勘察前哨可登记巡逻机械的编号与来历（档案条目）。只提供信息，不改变敌人行为或遭遇规则。",
+            "mvpLocations": [
+              "扬克斯郊外",
+              "华盛顿特区 · 国会大厦遗址（科技勘察前哨）",
+              "芝加哥 · 卢普区"
+            ],
+            "gate": "optional-advantage-only",
+            "requiresCurrentSeries": true
+          },
+          "supersedesDraftNodeId": "automata_companion_unit",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "automata_n02_escort_protocol",
+          "seriesId": "automata",
+          "stage": 1,
+          "stageName": "机偶技师",
+          "slot": 2,
+          "name": "护航模式",
+          "nameEn": "Escort Protocol",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "protection",
+          "tacticalRoleZh": "单体防护",
+          "energyCost": 8,
+          "cooldownSec": 4,
+          "target": "自己的一台机偶 + 一名队友",
+          "rangePx": 200,
+          "baseEffect": "机偶贴近该队友，每 4 秒最多拦截一次命中该队友的攻击，由机偶承受其中 50% 的伤害。",
+          "scaling": [
+            {
+              "key": "share",
+              "label": "机偶承受比例",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                50,
+                55,
+                60,
+                65,
+                70
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "机偶承受比例 55%（+5）",
+            "3": "机偶承受比例 60%（+5）",
+            "4": "机偶承受比例 65%（+5）",
+            "5": "机偶承受比例 70%（+5）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "automata_escort_mode",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "automata_n03_decoy_protocol",
+          "seriesId": "automata",
+          "stage": 2,
+          "stageName": "随行机师",
+          "slot": 1,
+          "name": "牵制模式",
+          "nameEn": "Decoy Protocol",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "aggro",
+          "tacticalRoleZh": "牵制吸引",
+          "energyCost": 10,
+          "cooldownSec": 8,
+          "target": "自己的一台机偶 + 一名敌人",
+          "rangePx": 200,
+          "baseEffect": "目标在 6 秒内优先攻击该机偶，期间机偶受到的伤害 -20%。对首领持续时间减半。",
+          "scaling": [
+            {
+              "key": "duration",
+              "label": "牵制时间",
+              "unit": "秒",
+              "direction": "higher_is_better",
+              "values": [
+                6,
+                7,
+                8,
+                9,
+                10
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "牵制时间 7秒（+1）",
+            "3": "牵制时间 8秒（+1）",
+            "4": "牵制时间 9秒（+1）",
+            "5": "牵制时间 10秒（+1）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "automata_pursuit_mode",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "automata_n04_repair_protocol",
+          "seriesId": "automata",
+          "stage": 2,
+          "stageName": "随行机师",
+          "slot": 2,
+          "name": "修复模式",
+          "nameEn": "Repair Protocol",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "upkeep",
+          "tacticalRoleZh": "维修维护",
+          "energyCost": 10,
+          "cooldownSec": 8,
+          "target": "自己的一台机偶",
+          "rangePx": 120,
+          "baseEffect": "机偶停止攻击，每 2 秒为 120 像素内的友方机偶与工程装置恢复耐久上限的 6%，并使同范围队友获得吸收生命上限 3% 伤害的维修护层（只刷新，不叠加）。持续到切换模式或机偶退场。",
+          "scaling": [
+            {
+              "key": "repair",
+              "label": "耐久恢复",
+              "unit": "% 耐久上限",
+              "direction": "higher_is_better",
+              "values": [
+                6,
+                7,
+                8,
+                9,
+                10
+              ]
+            },
+            {
+              "key": "layer",
+              "label": "维修护层",
+              "unit": "% 生命上限",
+              "direction": "higher_is_better",
+              "values": [
+                3,
+                3.5,
+                4,
+                4.5,
+                5
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "耐久恢复 7% 耐久上限（+1）；维修护层 3.5% 生命上限（+0.5）",
+            "3": "耐久恢复 8% 耐久上限（+1）；维修护层 4% 生命上限（+0.5）",
+            "4": "耐久恢复 9% 耐久上限（+1）；维修护层 4.5% 生命上限（+0.5）",
+            "5": "耐久恢复 10% 耐久上限（+1）；维修护层 5% 生命上限（+0.5）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "automata_n05_twin_deployment",
+          "seriesId": "automata",
+          "stage": 3,
+          "stageName": "多机协调者",
+          "slot": 1,
+          "name": "双机编组",
+          "nameEn": "Twin Deployment",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "capacity",
+          "tacticalRoleZh": "容量扩展",
+          "energyCost": null,
+          "cooldownSec": null,
+          "target": "自身",
+          "rangePx": null,
+          "baseEffect": "同时在场的自有机偶上限由 1 提高到 2；每台机偶生命 +10%。",
+          "scaling": [
+            {
+              "key": "hp",
+              "label": "机偶生命加成",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                10,
+                12,
+                14,
+                16,
+                18
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "机偶生命加成 12%（+2）",
+            "3": "机偶生命加成 14%（+2）",
+            "4": "机偶生命加成 16%（+2）",
+            "5": "机偶生命加成 18%（+2）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "automata_n06_sync_protocol",
+          "seriesId": "automata",
+          "stage": 3,
+          "stageName": "多机协调者",
+          "slot": 2,
+          "name": "同步协议",
+          "nameEn": "Sync Protocol",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "tempo",
+          "tacticalRoleZh": "节奏协同",
+          "energyCost": 14,
+          "cooldownSec": 16,
+          "target": "自己所有在场机偶",
+          "rangePx": null,
+          "baseEffect": "所有机偶立即执行一次当前模式的动作（攻击一次、拦截就绪、牵制刷新或修复一次），随后 6 秒内各模式效果 +15%。",
+          "scaling": [
+            {
+              "key": "amp",
+              "label": "模式效果加成",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                15,
+                18,
+                21,
+                24,
+                27
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "模式效果加成 18%（+3）",
+            "3": "模式效果加成 21%（+3）",
+            "4": "模式效果加成 24%（+3）",
+            "5": "模式效果加成 27%（+3）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "automata_sync_protocol",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "automata_n07_tri_formation",
+          "seriesId": "automata",
+          "stage": 4,
+          "stageName": "自律编队师",
+          "slot": 1,
+          "name": "三机编队",
+          "nameEn": "Tri-Formation",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "synergy",
+          "tacticalRoleZh": "多模式协同",
+          "energyCost": null,
+          "cooldownSec": null,
+          "target": "自身",
+          "rangePx": null,
+          "baseEffect": "同时在场的自有机偶上限提高到 3；在场机偶分别处于至少两种不同模式时，每台机偶的模式效果 +6%。",
+          "scaling": [
+            {
+              "key": "amp",
+              "label": "多模式效果加成",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                6,
+                7.5,
+                9,
+                10.5,
+                12
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "多模式效果加成 7.5%（+1.5）",
+            "3": "多模式效果加成 9%（+1.5）",
+            "4": "多模式效果加成 10.5%（+1.5）",
+            "5": "多模式效果加成 12%（+1.5）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "automata_three_unit_line",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "automata_n08_emergency_recall",
+          "seriesId": "automata",
+          "stage": 4,
+          "stageName": "自律编队师",
+          "slot": 2,
+          "name": "紧急回收",
+          "nameEn": "Emergency Recall",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "energy_economy",
+          "tacticalRoleZh": "能量循环",
+          "energyCost": 6,
+          "cooldownSec": 20,
+          "target": "自己所有在场机偶",
+          "rangePx": null,
+          "baseEffect": "回收所有机偶，按每台剩余持续时间比例返还其部署消耗的至多 30% 能量（每场战斗合计最多返还 24 点）；每台被回收的机偶为离它最近的队友提供吸收生命上限 4% 伤害的护层 6 秒（只刷新，不叠加）。",
+          "scaling": [
+            {
+              "key": "refundPct",
+              "label": "返还比例上限",
+              "unit": "% 部署消耗",
+              "direction": "higher_is_better",
+              "values": [
+                30,
+                35,
+                40,
+                45,
+                50
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "返还比例上限 35% 部署消耗（+5）",
+            "3": "返还比例上限 40% 部署消耗（+5）",
+            "4": "返还比例上限 45% 部署消耗（+5）",
+            "5": "返还比例上限 50% 部署消耗（+5）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "automata_emergency_recall",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review",
+          "energyReturn": {
+            "perBattleCap": 24
+          }
+        },
+        {
+          "id": "automata_n09_autonomous_rebuild",
+          "seriesId": "automata",
+          "stage": 5,
+          "stageName": "共生机魂师",
+          "slot": 1,
+          "name": "自律重构",
+          "nameEn": "Autonomous Rebuild",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "resilience",
+          "tacticalRoleZh": "韧性重构",
+          "energyCost": null,
+          "cooldownSec": null,
+          "target": "自有机偶",
+          "rangePx": null,
+          "baseEffect": "自有机偶被摧毁 3 秒后，在施放者身边以生命 40% 重新组装，保留剩余持续时间（至少 5 秒）；每场战斗 1 次。",
+          "scaling": [
+            {
+              "key": "hp",
+              "label": "重组生命",
+              "unit": "% 原生命",
+              "direction": "higher_is_better",
+              "values": [
+                40,
+                45,
+                50,
+                55,
+                60
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "重组生命 45% 原生命（+5）",
+            "3": "重组生命 50% 原生命（+5）",
+            "4": "重组生命 55% 原生命（+5）",
+            "5": "重组生命 60% 原生命（+5）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": true
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "automata_n10_symbiotic_core",
+          "seriesId": "automata",
+          "stage": 5,
+          "stageName": "共生机魂师",
+          "slot": 2,
+          "name": "共生机魂",
+          "nameEn": "Symbiotic Core",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "multi_mode",
+          "tacticalRoleZh": "复合模式",
+          "energyCost": 42,
+          "cooldownSec": 60,
+          "target": "自己的一台机偶（主机）",
+          "rangePx": null,
+          "baseEffect": "主机在 12 秒内同时执行护航、牵制与修复三种模式，各模式效果为原值的 60%；其余机偶在此期间模式效果 +10%。主机仍服从玩家对队友所下指令的优先级。",
+          "scaling": [
+            {
+              "key": "modePct",
+              "label": "三模式效果",
+              "unit": "% 原值",
+              "direction": "higher_is_better",
+              "values": [
+                60,
+                65,
+                70,
+                75,
+                80
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "三模式效果 65% 原值（+5）",
+            "3": "三模式效果 70% 原值（+5）",
+            "4": "三模式效果 75% 原值（+5）",
+            "5": "三模式效果 80% 原值（+5）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": true
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "automata_shared_mind",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        }
+      ]
+    },
+    {
+      "id": "medicine",
+      "aptitude": "研学",
+      "name": "医疗",
+      "en": "Medicine",
+      "role": "治疗、急救与异常状态处理",
+      "stages": [
+        "护理员",
+        "急救医师",
+        "战地医生",
+        "生命调律师",
+        "生命守护者"
+      ],
+      "finalQuest": "在资源有限的后期救援任务中完成多人分诊，让所有可救治对象稳定脱险。",
+      "identity": "生命值经济：单体与群体治疗、持续恢复、复苏、致命保护、战后护理；对已发生的异常作单体清除。",
+      "nodes": [
+        {
+          "id": "medicine_n01_first_aid",
+          "seriesId": "medicine",
+          "stage": 1,
+          "stageName": "护理员",
+          "slot": 1,
+          "name": "急救包扎",
+          "nameEn": "First Aid",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "healing",
+          "tacticalRoleZh": "单体治疗",
+          "energyCost": 14,
+          "cooldownSec": 4,
+          "target": "一名存活队友",
+          "rangePx": 160,
+          "baseEffect": "立即恢复目标生命上限 18% 的生命；对倒下者无效。AI 按创作者规则在没有倒下队友需要处理时，优先治疗急需治疗者。",
+          "scaling": [
+            {
+              "key": "heal",
+              "label": "治疗量",
+              "unit": "% 生命上限",
+              "direction": "higher_is_better",
+              "values": [
+                18,
+                20,
+                22,
+                24,
+                26
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "治疗量 20% 生命上限（+2）",
+            "3": "治疗量 22% 生命上限（+2）",
+            "4": "治疗量 24% 生命上限（+2）",
+            "5": "治疗量 26% 生命上限（+2）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": {
+            "name": "野外救护",
+            "effect": "在科技文明圈场景中为标记的受伤 NPC（例如扬克斯郊外的拾荒者、国会大厦遗址前哨的勘察员）处理伤势，得到可选对话与少量报酬，并记入“共情”实际行为记录。同一委托也可用道具或其他方式完成。",
+            "mvpLocations": [
+              "扬克斯郊外",
+              "华盛顿特区 · 国会大厦遗址（科技勘察前哨）",
+              "纽约 · 曼哈顿下城市政厅公园"
+            ],
+            "gate": "optional-advantage-only",
+            "requiresCurrentSeries": true
+          },
+          "supersedesDraftNodeId": "medicine_first_aid",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "medicine_n02_vital_monitor",
+          "seriesId": "medicine",
+          "stage": 1,
+          "stageName": "护理员",
+          "slot": 2,
+          "name": "生命监测",
+          "nameEn": "Vital Monitor",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "intel",
+          "tacticalRoleZh": "情报预警",
+          "energyCost": null,
+          "cooldownSec": null,
+          "target": "全队",
+          "rangePx": null,
+          "baseEffect": "敌人的蓄力起手指向生命低于 50% 的队友时，在该队友头顶显示预警；对被预警队友施放的下一次医疗治疗效果 +10%。",
+          "scaling": [
+            {
+              "key": "amp",
+              "label": "下一次治疗加成",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                10,
+                12.5,
+                15,
+                17.5,
+                20
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "下一次治疗加成 12.5%（+2.5）",
+            "3": "下一次治疗加成 15%（+2.5）",
+            "4": "下一次治疗加成 17.5%（+2.5）",
+            "5": "下一次治疗加成 20%（+2.5）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "medicine_vital_monitor",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "medicine_n03_wound_cleanse",
+          "seriesId": "medicine",
+          "stage": 2,
+          "stageName": "急救医师",
+          "slot": 1,
+          "name": "净创处理",
+          "nameEn": "Wound Cleanse",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "cleanse",
+          "tacticalRoleZh": "状态清除",
+          "energyCost": 12,
+          "cooldownSec": 6,
+          "target": "一名存活队友",
+          "rangePx": 160,
+          "baseEffect": "移除目标身上一个可移除的负面状态（中毒、灼烧、出血、迟缓等，优先最近施加者），并恢复其生命上限 6%。",
+          "scaling": [
+            {
+              "key": "heal",
+              "label": "附带治疗",
+              "unit": "% 生命上限",
+              "direction": "higher_is_better",
+              "values": [
+                6,
+                7,
+                8,
+                9,
+                10
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "附带治疗 7% 生命上限（+1）",
+            "3": "附带治疗 8% 生命上限（+1）",
+            "4": "附带治疗 9% 生命上限（+1）",
+            "5": "附带治疗 10% 生命上限（+1）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "medicine_clean_wound",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "medicine_n04_drip_infusion",
+          "seriesId": "medicine",
+          "stage": 2,
+          "stageName": "急救医师",
+          "slot": 2,
+          "name": "持续点滴",
+          "nameEn": "Drip Infusion",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "regen",
+          "tacticalRoleZh": "持续恢复",
+          "energyCost": 16,
+          "cooldownSec": 10,
+          "target": "一名存活队友",
+          "rangePx": 160,
+          "baseEffect": "目标在 10 秒内每 2 秒恢复生命上限 3%（共 15%）；同一目标只保留一个点滴效果。",
+          "scaling": [
+            {
+              "key": "total",
+              "label": "总恢复量",
+              "unit": "% 生命上限",
+              "direction": "higher_is_better",
+              "values": [
+                15,
+                17,
+                19,
+                21,
+                23
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "总恢复量 17% 生命上限（+2）",
+            "3": "总恢复量 19% 生命上限（+2）",
+            "4": "总恢复量 21% 生命上限（+2）",
+            "5": "总恢复量 23% 生命上限（+2）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "medicine_n05_field_revival",
+          "seriesId": "medicine",
+          "stage": 3,
+          "stageName": "战地医生",
+          "slot": 1,
+          "name": "战地复苏",
+          "nameEn": "Field Revival",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "revival",
+          "tacticalRoleZh": "复苏",
+          "energyCost": 28,
+          "cooldownSec": 45,
+          "target": "一名倒下的队友",
+          "rangePx": 120,
+          "baseEffect": "让目标在本场战斗中以生命上限 20% 起身并重新行动，起身后 2 秒内不会被打断。AI 按创作者规则优先处理倒下的队友。",
+          "scaling": [
+            {
+              "key": "hp",
+              "label": "起身生命",
+              "unit": "% 生命上限",
+              "direction": "higher_is_better",
+              "values": [
+                20,
+                23,
+                26,
+                29,
+                32
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "起身生命 23% 生命上限（+3）",
+            "3": "起身生命 26% 生命上限（+3）",
+            "4": "起身生命 29% 生命上限（+3）",
+            "5": "起身生命 32% 生命上限（+3）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "medicine_field_revival",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "medicine_n06_aftercare",
+          "seriesId": "medicine",
+          "stage": 3,
+          "stageName": "战地医生",
+          "slot": 2,
+          "name": "战后护理",
+          "nameEn": "Aftercare",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "recovery",
+          "tacticalRoleZh": "战后恢复",
+          "energyCost": null,
+          "cooldownSec": null,
+          "target": "全队（战斗胜利后）",
+          "rangePx": null,
+          "baseEffect": "战斗胜利后，存活队友的生命在基础 20% 恢复之外再恢复上限的 4%；倒下队友的复活生命由 10% 提高到 12%。不影响能量恢复。",
+          "scaling": [
+            {
+              "key": "alive",
+              "label": "存活者额外恢复",
+              "unit": "% 生命上限",
+              "direction": "higher_is_better",
+              "values": [
+                4,
+                5,
+                6,
+                7,
+                8
+              ]
+            },
+            {
+              "key": "downed",
+              "label": "倒下者复活生命",
+              "unit": "% 生命上限",
+              "direction": "higher_is_better",
+              "values": [
+                12,
+                13,
+                14,
+                15,
+                16
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "存活者额外恢复 5% 生命上限（+1）；倒下者复活生命 13% 生命上限（+1）",
+            "3": "存活者额外恢复 6% 生命上限（+1）；倒下者复活生命 14% 生命上限（+1）",
+            "4": "存活者额外恢复 7% 生命上限（+1）；倒下者复活生命 15% 生命上限（+1）",
+            "5": "存活者额外恢复 8% 生命上限（+1）；倒下者复活生命 16% 生命上限（+1）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": {
+            "name": "战后整备",
+            "effect": "在科技文明圈连续野外与遗址战斗之间减少回城或帐篷休息次数；只改变生命，不改变能量与日历推进规则。",
+            "mvpLocations": [
+              "扬克斯郊外",
+              "华盛顿特区 · 国会大厦遗址（科技勘察前哨）"
+            ],
+            "gate": "optional-advantage-only",
+            "requiresCurrentSeries": true
+          },
+          "supersedesDraftNodeId": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "medicine_n07_group_triage",
+          "seriesId": "medicine",
+          "stage": 4,
+          "stageName": "生命调律师",
+          "slot": 1,
+          "name": "群体分诊",
+          "nameEn": "Group Triage",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "group_healing",
+          "tacticalRoleZh": "群体治疗",
+          "energyCost": 32,
+          "cooldownSec": 20,
+          "target": "全部存活上场队友",
+          "rangePx": null,
+          "baseEffect": "恢复生命比例最低的两名存活队友各生命上限 14%，其余存活上场队友各 6%。",
+          "scaling": [
+            {
+              "key": "primary",
+              "label": "重点治疗量",
+              "unit": "% 生命上限",
+              "direction": "higher_is_better",
+              "values": [
+                14,
+                15.5,
+                17,
+                18.5,
+                20
+              ]
+            },
+            {
+              "key": "others",
+              "label": "其余队友治疗量",
+              "unit": "% 生命上限",
+              "direction": "higher_is_better",
+              "values": [
+                6,
+                6.5,
+                7,
+                7.5,
+                8
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "重点治疗量 15.5% 生命上限（+1.5）；其余队友治疗量 6.5% 生命上限（+0.5）",
+            "3": "重点治疗量 17% 生命上限（+1.5）；其余队友治疗量 7% 生命上限（+0.5）",
+            "4": "重点治疗量 18.5% 生命上限（+1.5）；其余队友治疗量 7.5% 生命上限（+0.5）",
+            "5": "重点治疗量 20% 生命上限（+1.5）；其余队友治疗量 8% 生命上限（+0.5）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "medicine_group_triage",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "medicine_n08_lifeline",
+          "seriesId": "medicine",
+          "stage": 4,
+          "stageName": "生命调律师",
+          "slot": 2,
+          "name": "生命线",
+          "nameEn": "Lifeline",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "lethal_save",
+          "tacticalRoleZh": "致命保护",
+          "energyCost": null,
+          "cooldownSec": null,
+          "target": "一名队友（每场战斗 1 次）",
+          "rangePx": null,
+          "baseEffect": "施放者存活时，一名队友受到致命伤害改为保留 1 点生命，并获得吸收生命上限 8% 伤害的护层 5 秒；每场战斗 1 次（次数不随等级增加）。",
+          "scaling": [
+            {
+              "key": "layer",
+              "label": "护层",
+              "unit": "% 生命上限",
+              "direction": "higher_is_better",
+              "values": [
+                8,
+                9,
+                10,
+                11,
+                12
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "护层 9% 生命上限（+1）",
+            "3": "护层 10% 生命上限（+1）",
+            "4": "护层 11% 生命上限（+1）",
+            "5": "护层 12% 生命上限（+1）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "medicine_n09_surplus_ward",
+          "seriesId": "medicine",
+          "stage": 5,
+          "stageName": "生命守护者",
+          "slot": 1,
+          "name": "余量转护",
+          "nameEn": "Surplus Ward",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "protection",
+          "tacticalRoleZh": "单体防护",
+          "energyCost": null,
+          "cooldownSec": null,
+          "target": "接受医疗治疗的队友",
+          "rangePx": null,
+          "baseEffect": "医疗治疗中超出目标生命上限的部分按 50% 转为护层，持续 8 秒；单个目标的此护层最多为其生命上限的 6%。",
+          "scaling": [
+            {
+              "key": "cap",
+              "label": "护层上限",
+              "unit": "% 生命上限",
+              "direction": "higher_is_better",
+              "values": [
+                6,
+                7,
+                8,
+                9,
+                10
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "护层上限 7% 生命上限（+1）",
+            "3": "护层上限 8% 生命上限（+1）",
+            "4": "护层上限 9% 生命上限（+1）",
+            "5": "护层上限 10% 生命上限（+1）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": true
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "medicine_n10_life_resonance",
+          "seriesId": "medicine",
+          "stage": 5,
+          "stageName": "生命守护者",
+          "slot": 2,
+          "name": "生命共振",
+          "nameEn": "Life Resonance",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "group_sustain",
+          "tacticalRoleZh": "群体续航",
+          "energyCost": 46,
+          "cooldownSec": 60,
+          "target": "全部存活上场队友",
+          "rangePx": null,
+          "baseEffect": "恢复所有存活上场队友生命上限 18%，并提供吸收生命上限 6% 伤害的护层 8 秒；倒下者需先被复苏。",
+          "scaling": [
+            {
+              "key": "heal",
+              "label": "治疗量",
+              "unit": "% 生命上限",
+              "direction": "higher_is_better",
+              "values": [
+                18,
+                20,
+                22,
+                24,
+                26
+              ]
+            },
+            {
+              "key": "layer",
+              "label": "护层",
+              "unit": "% 生命上限",
+              "direction": "higher_is_better",
+              "values": [
+                6,
+                7,
+                8,
+                9,
+                10
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "治疗量 20% 生命上限（+2）；护层 7% 生命上限（+1）",
+            "3": "治疗量 22% 生命上限（+2）；护层 8% 生命上限（+1）",
+            "4": "治疗量 24% 生命上限（+2）；护层 9% 生命上限（+1）",
+            "5": "治疗量 26% 生命上限（+2）；护层 10% 生命上限（+1）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": true
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "medicine_life_resonance",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        }
+      ]
+    },
+    {
+      "id": "alchemy",
+      "aptitude": "研学",
+      "name": "药剂",
+      "en": "Alchemy",
+      "role": "药物配制与临场状态应对",
+      "stages": [
+        "采配师",
+        "混剂师",
+        "反应药师",
+        "复合配方师",
+        "万象药宗"
+      ],
+      "finalQuest": "从三种地区样本推导配方，制出针对复合异常的药剂，并在实战中验证。",
+      "identity": "异常与反应经济：对敌施加反应标记并引爆、削弱与驱散；对友方作异常预防、整类清除与技能催化。战斗中临时调制的药剂不进入背包，不替代商会或道具经济。",
+      "nodes": [
+        {
+          "id": "alchemy_n01_reaction_vial",
+          "seriesId": "alchemy",
+          "stage": 1,
+          "stageName": "采配师",
+          "slot": 1,
+          "name": "反应瓶",
+          "nameEn": "Reaction Vial",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "damage",
+          "tacticalRoleZh": "施标伤害",
+          "energyCost": 12,
+          "cooldownSec": 5,
+          "target": "一名敌人",
+          "rangePx": 160,
+          "baseEffect": "掷出战斗中临时调制的反应瓶，造成攻击力 60% 的伤害并施加反应标记 10 秒（同一目标只有一层，重复施加刷新时间）。不生成背包道具。",
+          "scaling": [
+            {
+              "key": "hit",
+              "label": "伤害",
+              "unit": "% 攻击力",
+              "direction": "higher_is_better",
+              "values": [
+                60,
+                67,
+                74,
+                81,
+                88
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "伤害 67% 攻击力（+7）",
+            "3": "伤害 74% 攻击力（+7）",
+            "4": "伤害 81% 攻击力（+7）",
+            "5": "伤害 88% 攻击力（+7）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "alchemy_reaction_vial",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "alchemy_n02_sample_reading",
+          "seriesId": "alchemy",
+          "stage": 1,
+          "stageName": "采配师",
+          "slot": 2,
+          "name": "样本辨识",
+          "nameEn": "Sample Reading",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "intel",
+          "tacticalRoleZh": "情报预警",
+          "energyCost": null,
+          "cooldownSec": null,
+          "target": "全队",
+          "rangePx": null,
+          "baseEffect": "本场战斗中首次以药剂技能命中某种敌人时，向全队显示该敌人可施加的异常类型；全队对这些异常的抗性 +10%，持续到战斗结束。",
+          "scaling": [
+            {
+              "key": "resist",
+              "label": "对应异常抗性",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                10,
+                12,
+                14,
+                16,
+                18
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "对应异常抗性 12%（+2）",
+            "3": "对应异常抗性 14%（+2）",
+            "4": "对应异常抗性 16%（+2）",
+            "5": "对应异常抗性 18%（+2）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": {
+            "name": "区域样本分析",
+            "effect": "在科技文明圈采样点分析环境样本，写入档案的“地区配方笔记”（为终阶任务的三地样本推导留下线索），并在接战前提示该区域敌人常见的异常类型。不生成背包道具，不影响市场价格。",
+            "mvpLocations": [
+              "纽约 · 曼哈顿下城市政厅公园",
+              "扬克斯郊外",
+              "华盛顿特区 · 国会大厦遗址（科技勘察前哨）",
+              "芝加哥 · 卢普区"
+            ],
+            "gate": "optional-advantage-only",
+            "requiresCurrentSeries": true
+          },
+          "supersedesDraftNodeId": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "alchemy_n03_neutralizer",
+          "seriesId": "alchemy",
+          "stage": 2,
+          "stageName": "混剂师",
+          "slot": 1,
+          "name": "中和剂",
+          "nameEn": "Neutralizer",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "cleanse",
+          "tacticalRoleZh": "状态清除",
+          "energyCost": 18,
+          "cooldownSec": 14,
+          "target": "施放者 140 像素内全部队友",
+          "rangePx": 140,
+          "baseEffect": "选择一种负面状态，清除范围内所有队友身上的该状态，并使他们在 4 秒内免疫该状态。",
+          "scaling": [
+            {
+              "key": "immune",
+              "label": "免疫时间",
+              "unit": "秒",
+              "direction": "higher_is_better",
+              "values": [
+                4,
+                4.5,
+                5,
+                5.5,
+                6
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "免疫时间 4.5秒（+0.5）",
+            "3": "免疫时间 5秒（+0.5）",
+            "4": "免疫时间 5.5秒（+0.5）",
+            "5": "免疫时间 6秒（+0.5）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "alchemy_neutralizer",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "alchemy_n04_catalyst_drops",
+          "seriesId": "alchemy",
+          "stage": 2,
+          "stageName": "混剂师",
+          "slot": 2,
+          "name": "催化滴剂",
+          "nameEn": "Catalyst Drops",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "buff",
+          "tacticalRoleZh": "单体强化",
+          "energyCost": 14,
+          "cooldownSec": 10,
+          "target": "一名队友",
+          "rangePx": 160,
+          "baseEffect": "目标接下来 8 秒内施放的前 2 个技能的伤害、治疗或护层数值 +12%；不改变技能所属系别，不与另一份催化滴剂叠加。",
+          "scaling": [
+            {
+              "key": "amp",
+              "label": "技能效果加成",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                12,
+                14,
+                16,
+                18,
+                20
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "技能效果加成 14%（+2）",
+            "3": "技能效果加成 16%（+2）",
+            "4": "技能效果加成 18%（+2）",
+            "5": "技能效果加成 20%（+2）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "alchemy_catalyst",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "alchemy_n05_chain_reaction",
+          "seriesId": "alchemy",
+          "stage": 3,
+          "stageName": "反应药师",
+          "slot": 1,
+          "name": "连锁反应",
+          "nameEn": "Chain Reaction",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "burst",
+          "tacticalRoleZh": "爆发",
+          "energyCost": 22,
+          "cooldownSec": 12,
+          "target": "一名敌人",
+          "rangePx": 160,
+          "baseEffect": "引爆目标的反应标记：造成攻击力 110% 的伤害，并对目标 90 像素内的其他敌人造成该伤害的 40%。目标没有反应标记时只造成攻击力 50% 的伤害。",
+          "scaling": [
+            {
+              "key": "blast",
+              "label": "引爆伤害",
+              "unit": "% 攻击力",
+              "direction": "higher_is_better",
+              "values": [
+                110,
+                120,
+                130,
+                140,
+                150
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "引爆伤害 120% 攻击力（+10）",
+            "3": "引爆伤害 130% 攻击力（+10）",
+            "4": "引爆伤害 140% 攻击力（+10）",
+            "5": "引爆伤害 150% 攻击力（+10）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "alchemy_compound_burst",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "alchemy_n06_inhibitor",
+          "seriesId": "alchemy",
+          "stage": 3,
+          "stageName": "反应药师",
+          "slot": 2,
+          "name": "抑制剂",
+          "nameEn": "Inhibitor",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "debuff",
+          "tacticalRoleZh": "削弱",
+          "energyCost": null,
+          "cooldownSec": null,
+          "target": "带自己反应标记的敌人",
+          "rangePx": null,
+          "baseEffect": "带有自己反应标记的敌人造成的伤害 -6%。",
+          "scaling": [
+            {
+              "key": "dmgDown",
+              "label": "敌方伤害降低",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                6,
+                7,
+                8,
+                9,
+                10
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "敌方伤害降低 7%（+1）",
+            "3": "敌方伤害降低 8%（+1）",
+            "4": "敌方伤害降低 9%（+1）",
+            "5": "敌方伤害降低 10%（+1）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "alchemy_n07_emergency_solvent",
+          "seriesId": "alchemy",
+          "stage": 4,
+          "stageName": "复合配方师",
+          "slot": 1,
+          "name": "应急溶剂",
+          "nameEn": "Emergency Solvent",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "buff_strip",
+          "tacticalRoleZh": "驱散强化",
+          "energyCost": 24,
+          "cooldownSec": 20,
+          "target": "一名敌人",
+          "rangePx": 160,
+          "baseEffect": "移除目标身上一个可移除的强化效果；若目标没有可移除的强化效果，改为在 8 秒内阻止其获得新的强化效果。",
+          "scaling": [
+            {
+              "key": "block",
+              "label": "阻止强化时间",
+              "unit": "秒",
+              "direction": "higher_is_better",
+              "values": [
+                8,
+                9,
+                10,
+                11,
+                12
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "阻止强化时间 9秒（+1）",
+            "3": "阻止强化时间 10秒（+1）",
+            "4": "阻止强化时间 11秒（+1）",
+            "5": "阻止强化时间 12秒（+1）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "alchemy_emergency_solvent",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "alchemy_n08_slow_release",
+          "seriesId": "alchemy",
+          "stage": 4,
+          "stageName": "复合配方师",
+          "slot": 2,
+          "name": "缓释配方",
+          "nameEn": "Slow-Release Formula",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "duration",
+          "tacticalRoleZh": "时效延长",
+          "energyCost": null,
+          "cooldownSec": null,
+          "target": "自己施加的药剂效果",
+          "rangePx": null,
+          "baseEffect": "自己施加给队友的药剂效果（中和剂免疫、催化滴剂时限、复合抗剂）与施加给敌人的反应标记，持续时间 +10%。",
+          "scaling": [
+            {
+              "key": "ext",
+              "label": "持续时间加成",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                10,
+                12.5,
+                15,
+                17.5,
+                20
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "持续时间加成 12.5%（+2.5）",
+            "3": "持续时间加成 15%（+2.5）",
+            "4": "持续时间加成 17.5%（+2.5）",
+            "5": "持续时间加成 20%（+2.5）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "alchemy_n09_compound_antidote",
+          "seriesId": "alchemy",
+          "stage": 5,
+          "stageName": "万象药宗",
+          "slot": 1,
+          "name": "复合抗剂",
+          "nameEn": "Compound Antidote",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "status_prevention",
+          "tacticalRoleZh": "异常预防",
+          "energyCost": 34,
+          "cooldownSec": 30,
+          "target": "全部存活上场队友",
+          "rangePx": null,
+          "baseEffect": "12 秒内全队对所有异常的抗性 +20%，并使已有异常的剩余时间立即缩短 25%。",
+          "scaling": [
+            {
+              "key": "resist",
+              "label": "全异常抗性",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                20,
+                23,
+                26,
+                29,
+                32
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "全异常抗性 23%（+3）",
+            "3": "全异常抗性 26%（+3）",
+            "4": "全异常抗性 29%（+3）",
+            "5": "全异常抗性 32%（+3）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": true
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "alchemy_n10_myriad_formula",
+          "seriesId": "alchemy",
+          "stage": 5,
+          "stageName": "万象药宗",
+          "slot": 2,
+          "name": "万象配方",
+          "nameEn": "Myriad Formula",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "area_debuff",
+          "tacticalRoleZh": "全场施标",
+          "energyCost": 44,
+          "cooldownSec": 60,
+          "target": "战场上所有敌人",
+          "rangePx": null,
+          "baseEffect": "对所有敌人施加反应标记；10 秒内自己的下一次连锁反应同时引爆所有带标记的敌人，每个目标受到攻击力 70% 的伤害（此次不计 40% 扩散）。",
+          "scaling": [
+            {
+              "key": "blast",
+              "label": "全体引爆伤害",
+              "unit": "% 攻击力",
+              "direction": "higher_is_better",
+              "values": [
+                70,
+                76,
+                82,
+                88,
+                94
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "全体引爆伤害 76% 攻击力（+6）",
+            "3": "全体引爆伤害 82% 攻击力（+6）",
+            "4": "全体引爆伤害 88% 攻击力（+6）",
+            "5": "全体引爆伤害 94% 攻击力（+6）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": true
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "alchemy_many_formulas",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        }
+      ]
+    },
+    {
+      "id": "tactics",
+      "aptitude": "研学",
+      "name": "战术",
+      "en": "Tactics",
+      "role": "队友指令、目标标记与编队收益",
+      "stages": [
+        "分析员",
+        "小队策士",
+        "阵形指挥官",
+        "战场统筹者",
+        "万局统帅"
+      ],
+      "finalQuest": "指挥五人队伍应对三波不同敌方配置，在每波中完成指定的保护与集火目标。",
+      "identity": "指挥五人小队：目标标记、AI 指令、编队收益、预判与组合技支援；不直接造成伤害或治疗。",
+      "nodes": [
+        {
+          "id": "tactics_n01_priority_target",
+          "seriesId": "tactics",
+          "stage": 1,
+          "stageName": "分析员",
+          "slot": 1,
+          "name": "优先目标",
+          "nameEn": "Priority Target",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "mark",
+          "tacticalRoleZh": "目标标记",
+          "energyCost": 8,
+          "cooldownSec": 6,
+          "target": "一名敌人",
+          "rangePx": 260,
+          "baseEffect": "标记目标 12 秒：未被直接操控的队友按现有 AI 规则优先攻击它，全队对其造成的伤害 +6%。同一时间只有一个战术标记。",
+          "scaling": [
+            {
+              "key": "vuln",
+              "label": "受到伤害增加",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                6,
+                7,
+                8,
+                9,
+                10
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "受到伤害增加 7%（+1）",
+            "3": "受到伤害增加 8%（+1）",
+            "4": "受到伤害增加 9%（+1）",
+            "5": "受到伤害增加 10%（+1）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "tactics_priority_target",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "tactics_n02_threat_assessment",
+          "seriesId": "tactics",
+          "stage": 1,
+          "stageName": "分析员",
+          "slot": 2,
+          "name": "敌情研判",
+          "nameEn": "Threat Assessment",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "intel",
+          "tacticalRoleZh": "情报预警",
+          "energyCost": null,
+          "cooldownSec": null,
+          "target": "全队",
+          "rangePx": null,
+          "baseEffect": "敌人蓄力起手的预警提示对全队提前 0.3 秒出现。",
+          "scaling": [
+            {
+              "key": "lead",
+              "label": "预警提前量",
+              "unit": "秒",
+              "direction": "higher_is_better",
+              "values": [
+                0.3,
+                0.35,
+                0.4,
+                0.45,
+                0.5
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "预警提前量 0.35秒（+0.05）",
+            "3": "预警提前量 0.4秒（+0.05）",
+            "4": "预警提前量 0.45秒（+0.05）",
+            "5": "预警提前量 0.5秒（+0.05）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": {
+            "name": "遭遇前情报",
+            "effect": "在科技文明圈场景中靠近可见敌人时显示其编成、等级区间与弱点和常见异常提示；玩家据此选择接战或绕行（绕行原本即可）。",
+            "mvpLocations": [
+              "纽约 · 曼哈顿下城市政厅公园",
+              "扬克斯郊外",
+              "华盛顿特区 · 国会大厦遗址（科技勘察前哨）",
+              "芝加哥 · 卢普区"
+            ],
+            "gate": "optional-advantage-only",
+            "requiresCurrentSeries": true
+          },
+          "supersedesDraftNodeId": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "tactics_n03_hold_the_line",
+          "seriesId": "tactics",
+          "stage": 2,
+          "stageName": "小队策士",
+          "slot": 1,
+          "name": "稳阵指令",
+          "nameEn": "Hold the Line",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "group_protection",
+          "tacticalRoleZh": "群体防护",
+          "energyCost": 18,
+          "cooldownSec": 20,
+          "target": "施放者 160 像素内全部队友（含自身）",
+          "rangePx": 160,
+          "baseEffect": "范围内队友受到的伤害 -10%，持续 8 秒；期间未操控队友面对蓄力攻击时优先防御而不是闪避。",
+          "scaling": [
+            {
+              "key": "dr",
+              "label": "减伤",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                10,
+                12,
+                14,
+                16,
+                18
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "减伤 12%（+2）",
+            "3": "减伤 14%（+2）",
+            "4": "减伤 16%（+2）",
+            "5": "减伤 18%（+2）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "tactics_hold_line",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "tactics_n04_focus_call",
+          "seriesId": "tactics",
+          "stage": 2,
+          "stageName": "小队策士",
+          "slot": 2,
+          "name": "集火口令",
+          "nameEn": "Focus Call",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "haste",
+          "tacticalRoleZh": "出手加速",
+          "energyCost": 16,
+          "cooldownSec": 18,
+          "target": "攻击战术标记目标的队友",
+          "rangePx": null,
+          "baseEffect": "6 秒内，攻击当前战术标记目标的队友，普通攻击与技能的出手间隔缩短 12%；没有标记时自动标记施放者当前目标（不附带优先目标的伤害加成）。",
+          "scaling": [
+            {
+              "key": "haste",
+              "label": "出手间隔缩短",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                12,
+                14,
+                16,
+                18,
+                20
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "出手间隔缩短 14%（+2）",
+            "3": "出手间隔缩短 16%（+2）",
+            "4": "出手间隔缩短 18%（+2）",
+            "5": "出手间隔缩短 20%（+2）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "tactics_focus_order",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "tactics_n05_formation_doctrine",
+          "seriesId": "tactics",
+          "stage": 3,
+          "stageName": "阵形指挥官",
+          "slot": 1,
+          "name": "阵形学",
+          "nameEn": "Formation Doctrine",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "formation",
+          "tacticalRoleZh": "编队收益",
+          "energyCost": null,
+          "cooldownSec": null,
+          "target": "全队（战斗开始时）",
+          "rangePx": null,
+          "baseEffect": "战斗开始时，按上场队员当前职业所属的天分组（武艺、应变、研学、灵觉）计数；每有一组，全队伤害与减伤各 +1.5%（最多 4 组，即各 +6%）。",
+          "scaling": [
+            {
+              "key": "perGroup",
+              "label": "每组加成",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                1.5,
+                1.75,
+                2,
+                2.25,
+                2.5
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "每组加成 1.75%（+0.25）",
+            "3": "每组加成 2%（+0.25）",
+            "4": "每组加成 2.25%（+0.25）",
+            "5": "每组加成 2.5%（+0.25）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "tactics_n06_reserve_rotation",
+          "seriesId": "tactics",
+          "stage": 3,
+          "stageName": "阵形指挥官",
+          "slot": 2,
+          "name": "后备轮换",
+          "nameEn": "Reserve Rotation",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "rescue",
+          "tacticalRoleZh": "救援轮换",
+          "energyCost": 14,
+          "cooldownSec": 16,
+          "target": "一名存活队友",
+          "rangePx": 260,
+          "baseEffect": "立即解除目标的受击硬直，使其获得吸收生命上限 10% 伤害的护层 6 秒，并让其技能冷却剩余时间减少 1 秒。",
+          "scaling": [
+            {
+              "key": "layer",
+              "label": "护层",
+              "unit": "% 生命上限",
+              "direction": "higher_is_better",
+              "values": [
+                10,
+                12,
+                14,
+                16,
+                18
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "护层 12% 生命上限（+2）",
+            "3": "护层 14% 生命上限（+2）",
+            "4": "护层 16% 生命上限（+2）",
+            "5": "护层 18% 生命上限（+2）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "tactics_reserve_rotation",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "tactics_n07_counter_read",
+          "seriesId": "tactics",
+          "stage": 4,
+          "stageName": "战场统筹者",
+          "slot": 1,
+          "name": "逆向预判",
+          "nameEn": "Counter-Read",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "counter_read",
+          "tacticalRoleZh": "预判反制",
+          "energyCost": 22,
+          "cooldownSec": 20,
+          "target": "一名敌人",
+          "rangePx": 260,
+          "baseEffect": "10 秒内，目标的下一次蓄力攻击会提前显示攻击对象，且对队友造成的伤害 -20%；若有队友成功闪避或防御该次攻击，目标僵直 1 秒。",
+          "scaling": [
+            {
+              "key": "dmgDown",
+              "label": "该次伤害降低",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                20,
+                23,
+                26,
+                29,
+                32
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "该次伤害降低 23%（+3）",
+            "3": "该次伤害降低 26%（+3）",
+            "4": "该次伤害降低 29%（+3）",
+            "5": "该次伤害降低 32%（+3）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "tactics_reverse_read",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "tactics_n08_combo_coordination",
+          "seriesId": "tactics",
+          "stage": 4,
+          "stageName": "战场统筹者",
+          "slot": 2,
+          "name": "协同调度",
+          "nameEn": "Combo Coordination",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "combo_support",
+          "tacticalRoleZh": "组合技支援",
+          "energyCost": null,
+          "cooldownSec": null,
+          "target": "自己参与的组合技",
+          "rangePx": null,
+          "baseEffect": "每名参与者支付的组合技能量 -8%（向上取整后计算，不低于原消耗的 50%）。不改变组合技的关系与当前技能解锁条件，也不生成新组合技。",
+          "scaling": [
+            {
+              "key": "save",
+              "label": "组合技能量减少",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                8,
+                10,
+                12,
+                14,
+                16
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "组合技能量减少 10%（+2）",
+            "3": "组合技能量减少 12%（+2）",
+            "4": "组合技能量减少 14%（+2）",
+            "5": "组合技能量减少 16%（+2）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "tactics_n09_dual_directive",
+          "seriesId": "tactics",
+          "stage": 5,
+          "stageName": "万局统帅",
+          "slot": 1,
+          "name": "双重指令",
+          "nameEn": "Dual Directive",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "command",
+          "tacticalRoleZh": "双重指令",
+          "energyCost": 30,
+          "cooldownSec": 30,
+          "target": "一名敌人 + 一名队友",
+          "rangePx": 260,
+          "baseEffect": "同时下达集火与保护指令 10 秒：全队对指定敌人的伤害 +8%，指定队友受到的伤害 -12%；未操控队友优先攻击该敌人，并优先拦截攻向该队友的敌人。",
+          "scaling": [
+            {
+              "key": "focus",
+              "label": "集火伤害加成",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                8,
+                9,
+                10,
+                11,
+                12
+              ]
+            },
+            {
+              "key": "guard",
+              "label": "保护减伤",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                12,
+                14,
+                16,
+                18,
+                20
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "集火伤害加成 9%（+1）；保护减伤 14%（+2）",
+            "3": "集火伤害加成 10%（+1）；保护减伤 16%（+2）",
+            "4": "集火伤害加成 11%（+1）；保护减伤 18%（+2）",
+            "5": "集火伤害加成 12%（+1）；保护减伤 20%（+2）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": true
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "tactics_n10_grand_coordination",
+          "seriesId": "tactics",
+          "stage": 5,
+          "stageName": "万局统帅",
+          "slot": 2,
+          "name": "万局同调",
+          "nameEn": "Grand Coordination",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "cooldown",
+          "tacticalRoleZh": "冷却统筹",
+          "energyCost": 44,
+          "cooldownSec": 60,
+          "target": "全部上场队友",
+          "rangePx": null,
+          "baseEffect": "10 秒内全队技能冷却恢复速度 +20%，未操控队友对新指令的响应没有延迟；不绕过关系和技能要求生成组合技。",
+          "scaling": [
+            {
+              "key": "cdr",
+              "label": "冷却恢复速度",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                20,
+                23,
+                26,
+                29,
+                32
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "冷却恢复速度 23%（+3）",
+            "3": "冷却恢复速度 26%（+3）",
+            "4": "冷却恢复速度 29%（+3）",
+            "5": "冷却恢复速度 32%（+3）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": true
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "tactics_total_coordination",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        }
+      ]
+    }
+  ],
+  "schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "Worlds Between 研学 ten-node job tree proposal",
+    "type": "object",
+    "required": [
+      "schemaVersion",
+      "project",
+      "status",
+      "reviewStatus",
+      "scope",
+      "sources",
+      "rules",
+      "jpProposal",
+      "roleVocabulary",
+      "series",
+      "schema",
+      "validation"
+    ],
+    "properties": {
+      "series": {
+        "type": "array",
+        "minItems": 5,
+        "maxItems": 5,
+        "items": {
+          "type": "object",
+          "required": [
+            "id",
+            "aptitude",
+            "name",
+            "en",
+            "role",
+            "stages",
+            "finalQuest",
+            "identity",
+            "nodes"
+          ],
+          "properties": {
+            "nodes": {
+              "type": "array",
+              "minItems": 10,
+              "maxItems": 10,
+              "items": {
+                "$ref": "#/$defs/node"
+              }
+            }
+          }
+        }
+      }
+    },
+    "$defs": {
+      "node": {
+        "type": "object",
+        "required": [
+          "id",
+          "seriesId",
+          "stage",
+          "stageName",
+          "slot",
+          "name",
+          "nameEn",
+          "type",
+          "typeZh",
+          "tacticalRole",
+          "tacticalRoleZh",
+          "energyCost",
+          "cooldownSec",
+          "target",
+          "rangePx",
+          "baseEffect",
+          "scaling",
+          "rankProgression",
+          "maxRank",
+          "unlock",
+          "scienceMvpUtility",
+          "supersedesDraftNodeId",
+          "status",
+          "reviewStatus"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^(engineering|automata|medicine|alchemy|tactics)_n(0[1-9]|10)_[a-z_]+$"
+          },
+          "seriesId": {
+            "enum": [
+              "engineering",
+              "automata",
+              "medicine",
+              "alchemy",
+              "tactics"
+            ]
+          },
+          "stage": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5
+          },
+          "stageName": {
+            "type": "string",
+            "description": "必须与已批准五阶名称逐字一致"
+          },
+          "slot": {
+            "enum": [
+              1,
+              2
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "nameEn": {
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "active",
+              "passive"
+            ]
+          },
+          "typeZh": {
+            "enum": [
+              "主动",
+              "被动"
+            ]
+          },
+          "tacticalRole": {
+            "enum": [
+              "protection",
+              "armor_break",
+              "upkeep",
+              "deploy",
+              "control",
+              "energy_economy",
+              "group_protection",
+              "burst",
+              "capacity",
+              "amplify",
+              "aggro",
+              "tempo",
+              "synergy",
+              "resilience",
+              "multi_mode",
+              "healing",
+              "intel",
+              "cleanse",
+              "regen",
+              "revival",
+              "recovery",
+              "group_healing",
+              "lethal_save",
+              "group_sustain",
+              "damage",
+              "buff",
+              "debuff",
+              "buff_strip",
+              "duration",
+              "status_prevention",
+              "area_debuff",
+              "mark",
+              "haste",
+              "formation",
+              "rescue",
+              "counter_read",
+              "combo_support",
+              "command",
+              "cooldown"
+            ]
+          },
+          "tacticalRoleZh": {
+            "type": "string"
+          },
+          "energyCost": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "active: 整数且在所属阶的能量区间内；passive: null"
+          },
+          "cooldownSec": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "description": "active: > 0；passive: null"
+          },
+          "target": {
+            "type": "string"
+          },
+          "rangePx": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "baseEffect": {
+            "type": "string",
+            "description": "第 1 级效果"
+          },
+          "scaling": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": [
+                "key",
+                "label",
+                "unit",
+                "values",
+                "direction"
+              ],
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "unit": {
+                  "type": "string"
+                },
+                "direction": {
+                  "const": "higher_is_better"
+                },
+                "values": {
+                  "type": "array",
+                  "minItems": 5,
+                  "maxItems": 5,
+                  "items": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          },
+          "rankProgression": {
+            "type": "object",
+            "required": [
+              "2",
+              "3",
+              "4",
+              "5"
+            ],
+            "additionalProperties": false
+          },
+          "maxRank": {
+            "const": 5
+          },
+          "energyReturn": {
+            "type": "object",
+            "description": "可选；能量返还上限说明"
+          },
+          "unlock": {
+            "type": "object",
+            "required": [
+              "onStageEntry",
+              "jpCost",
+              "requiresFinalQuest"
+            ],
+            "properties": {
+              "onStageEntry": {
+                "const": true
+              },
+              "jpCost": {
+                "const": 0
+              },
+              "requiresFinalQuest": {
+                "type": "boolean"
+              }
+            }
+          },
+          "scienceMvpUtility": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "required": [
+              "name",
+              "effect",
+              "mvpLocations",
+              "gate"
+            ]
+          },
+          "supersedesDraftNodeId": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "status": {
+            "const": "PROPOSAL"
+          },
+          "reviewStatus": {
+            "const": "pending balance and creator review"
+          }
+        }
+      }
+    }
+  },
+  "validation": {
+    "validator": "gen.js（临时脚本，位于仓库外 %TEMP%\\wb-research-ten-node-842e0540；未提交）",
+    "ranAt": "2026-10-16T03:27:27.437Z",
+    "passed": 14,
+    "failed": 0,
+    "total": 14,
+    "checks": [
+      {
+        "id": "series-set",
+        "description": "恰好 5 条系列，且正是已批准名单中天分为研学的 5 条（顺序一致）",
+        "result": "pass",
+        "detail": "engineering, automata, medicine, alchemy, tactics"
+      },
+      {
+        "id": "approved-text-verbatim",
+        "description": "系列名、英文名、定位、五阶名称、终阶任务与已批准源 JSON 逐字一致；每个节点的 stageName 与其阶名称逐字一致",
+        "result": "pass",
+        "detail": "5 系列 × (5 阶 + 终阶任务) 逐字一致；50 个 stageName 一致"
+      },
+      {
+        "id": "ten-nodes-two-per-stage",
+        "description": "每系列恰好 10 个节点，5 阶各 2 个（slot 1、2）；合计 50 个",
+        "result": "pass",
+        "detail": "5 × 10 = 50；每阶 2 个"
+      },
+      {
+        "id": "node-schema",
+        "description": "每个节点符合内嵌 JSON Schema（$defs.node）的必填字段、类型、枚举、常量与 id 格式（脚本内自写校验器，未使用外部库）",
+        "result": "pass",
+        "detail": "50/50 节点通过"
+      },
+      {
+        "id": "distinct-nodes",
+        "description": "50 个节点的 id、中文名、英文名全局唯一",
+        "result": "pass",
+        "detail": "50 个 id / 50 个中文名 / 50 个英文名"
+      },
+      {
+        "id": "unlock-and-rank-rules",
+        "description": "每个节点进入该阶即开放（jpCost 0），第 5 阶节点另需终阶任务；最高 5 级，JP 只用于第 2–5 级",
+        "result": "pass",
+        "detail": "50/50；JP 表只含第 2–5 级"
+      },
+      {
+        "id": "active-passive-energy",
+        "description": "主动技能有整数能量消耗（按阶区间）与冷却；被动技能无消耗；每系列 ≥5 主动、≥2 被动，每阶至少 1 个主动",
+        "result": "pass",
+        "detail": "engineering 8A/2P; automata 7A/3P; medicine 6A/4P; alchemy 7A/3P; tactics 7A/3P"
+      },
+      {
+        "id": "non-exponential-ranks",
+        "description": "所有等级数值严格递增、步长固定或递减（无加速增长），第 5 级 / 第 1 级 ≤ 2；能量消耗与冷却为单一值，不随等级变化",
+        "result": "pass",
+        "detail": "全部线性；最大 r5/r1 = 2.00"
+      },
+      {
+        "id": "energy-return-capped",
+        "description": "返还能量的节点都有每场上限；按次返还者单次返还低于本系列最低主动消耗，按比例返还者比例 ≤ 50%",
+        "result": "pass",
+        "detail": "engineering_n06_energy_bypass, automata_n08_emergency_recall；工程最低主动消耗 10，能源旁路单次最多 8；紧急回收 ≤ 50% 且每场 ≤ 24"
+      },
+      {
+        "id": "no-terrain-elevation-stealth",
+        "description": "节点文本不含地形、高低差、障碍、掩体、跳跃或潜入相关词（规则说明本身不在扫描范围内）",
+        "result": "pass",
+        "detail": "17 个禁用词，50 个节点 0 命中"
+      },
+      {
+        "id": "distinct-roles",
+        "description": "每系列 10 个节点的战术定位互不相同；任意两系列定位集合的 Jaccard 相似度 ≤ 0.4",
+        "result": "pass",
+        "detail": "系列内 10/10 不同；最大跨系列 Jaccard 0.33（engineering/automata）"
+      },
+      {
+        "id": "science-mvp-utility",
+        "description": "每系列至少 1 个第 1–2 阶节点带科技区 MVP 实用效果，均为可选优势，地点限于已批准的 MVP 地点",
+        "result": "pass",
+        "detail": "engineering_n03_field_maintenance(现场修复), automata_n01_companion_unit(先行勘察), medicine_n01_first_aid(野外救护), medicine_n06_aftercare(战后整备), alchemy_n02_sample_reading(区域样本分析), tactics_n02_threat_assessment(遭遇前情报)"
+      },
+      {
+        "id": "proposal-marking",
+        "description": "50/50 节点与文件本身都标为 PROPOSAL，待数值平衡与创作者审核",
+        "result": "pass",
+        "detail": "50/50"
+      },
+      {
+        "id": "superseded-lineage",
+        "description": "节点 id 不与被取代草案的 id 冲突；supersedesDraftNodeId 只引用真实存在的草案节点且各用一次",
+        "result": "pass",
+        "detail": "31/35 个草案节点有继承关系；4 个草案节点被舍弃或改写"
+      }
+    ]
+  }
+}
