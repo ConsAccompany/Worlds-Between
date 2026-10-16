@@ -1,0 +1,496 @@
+{
+ "project": "rpg-2-star-ocean-the-second",
+ "purpose": "Provenance index for the four zero-change closeouts synced in bcd7f78 whose evidence files were left untracked",
+ "status": "evidence-index-only; UNAPPROVED / NONRUNTIME items stay unapproved; no art acceptance, gate or meter change",
+ "createdAt": "2026-10-16T20:33:42Z",
+ "author": "Claude Code Opus 5.5 (agent check, not a human review)",
+ "syncCommit": "bcd7f78db064496d29b3e9cdb5b305d839d56570",
+ "meterUnchanged": {
+  "percent": 35.8,
+  "runtimeSpritesAccepted": "0/52",
+  "sceneVisualsAccepted": "0/11",
+  "humanPlaytests": "0/2"
+ },
+ "hashKinds": {
+  "sha256-text-lf-v1": "sha256 of UTF-8 text with CRLF normalised to LF",
+  "sha256-bytes": "sha256 of raw file bytes"
+ },
+ "closeouts": [
+  {
+   "id": "closeout-20261016-191649-c5f11b08",
+   "subject": "female south compact walk v01 re-verification (UNAPPROVED / NONRUNTIME)",
+   "trackedEvidence": [
+    {
+     "path": "docs/qa/rpg-2-star-ocean-the-second_protagonist-female_south-walk-compact-v01_eight-frame-walk-three-frame-stop_qa-note_m8-w04_20261016-184552-0bbd5e75.md",
+     "hashKind": "sha256-text-lf-v1",
+     "sha256": "cb6e90af11c31cb5eefd9084ae6a26fc1b5b253ae60b106354805b4e4a904dfc",
+     "bytes": 21844
+    },
+    {
+     "path": "game/assets/characters/walk-pilots-compact-v01/rpg-2-star-ocean-the-second_protagonist-female_south-walk-compact-v01-manifest_m8-w04_20261016-184552-d49be940.json",
+     "hashKind": "sha256-text-lf-v1",
+     "sha256": "59b9eadae98f6fd5d7c8fe8c81b5081087c2a859a4eb72dfbddf7c735e3486f6",
+     "bytes": 40491
+    },
+    {
+     "path": "game/assets/characters/walk-pilots-compact-v01/.gdignore",
+     "hashKind": "sha256-bytes",
+     "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+     "bytes": 0,
+     "note": "empty; keeps Godot from importing the folder on a clean clone"
+    },
+    {
+     "path": "outputs/rpg-2-star-ocean-the-second_city-outskirts-annex_protagonist-female-south-walk-compact-v01-capture-receipt-h48_m8-w04_20261016-185704-6a0e6012.json",
+     "hashKind": "sha256-text-lf-v1",
+     "sha256": "ec60551fc573ee3d002bb23ccb9b7c0bf8b074d46d8181144a54bb9fe3322d18",
+     "bytes": 698299
+    }
+   ],
+   "evidenceCorrection": {
+    "removedFromCloseout": "tests/protagonist-female-south-walk-compact-v01/rpg-2-star-ocean-the-second_protagonist-female_south-walk-compact-v01_deterministic-check_m8-w04_20261016-184552-5b0e21c7.py",
+    "replacedBy": "this index",
+    "reason": "The check script needs the builder, 11 frame PNGs and 2 .pxo files, which are unapproved pilot art and stay local; tracked alone it would fail on a clean clone. Its hash and a fresh re-run are recorded here instead.",
+    "recheck": {
+     "command": "python -I -B tests/protagonist-female-south-walk-compact-v01/rpg-2-star-ocean-the-second_protagonist-female_south-walk-compact-v01_deterministic-check_m8-w04_20261016-184552-5b0e21c7.py --pixelorama",
+     "ranAt": "2026-10-16T20:33:42Z",
+     "result": "17/17 OK (exit 0), Pixelorama 1.2.3 headless with isolated APPDATA; git status unchanged by the run",
+     "scope": "deterministic PNG / manifest / rebuild check only; not a Godot re-capture, not a human or realtime review"
+    }
+   },
+   "localOnly": {
+    "reason": "unapproved pilot art, its tools and the 42-PNG + 69-GIF capture batch are not committed; pinned by hash here",
+    "checkScript": {
+     "path": "tests/protagonist-female-south-walk-compact-v01/rpg-2-star-ocean-the-second_protagonist-female_south-walk-compact-v01_deterministic-check_m8-w04_20261016-184552-5b0e21c7.py",
+     "hashKind": "sha256-text-lf-v1",
+     "sha256": "527f202efc0a065879466c876736f5144b0f43f9ba5a8632db9d35fd170c0c52",
+     "bytes": 11191
+    },
+    "tools": [
+     {
+      "path": "tools/rpg-2-star-ocean-the-second_protagonist-female_south-walk-compact-v01-build_m8-w04_20261016-184552-1c53af0d.py",
+      "hashKind": "sha256-text-lf-v1",
+      "sha256": "ac58c7318d33168e9acd78c8fe783d934174d9abf4bc50b27249a52168a06dad",
+      "bytes": 52237
+     },
+     {
+      "path": "tools/rpg-2-star-ocean-the-second_protagonist-female_south-walk-compact-v01-godot-capture_m8-w04_20261016-184552-7d3a90c4.gd",
+      "hashKind": "sha256-text-lf-v1",
+      "sha256": "53cdbf9b12e416411fd796136af507c6bc6f041c0683542d725548caf968fd1b",
+      "bytes": 28569
+     },
+     {
+      "path": "tools/rpg-2-star-ocean-the-second_protagonist-female_south-walk-compact-v01-preview-gif_m8-w04_20261016-184552-2f61c8b9.py",
+      "hashKind": "sha256-text-lf-v1",
+      "sha256": "ef93153f0b7510a7ba6639b7ee832591902bcf6f1440da9c50e21d2666e71d01",
+      "bytes": 6049
+     }
+    ],
+    "frameAssets": [
+     {
+      "path": "game/assets/characters/walk-pilots-compact-v01/rpg-2-star-ocean-the-second_protagonist-female_south-walk-compact-v01-f1-bend-vl_m8-w04_20261016-184552-b7c8ad5f.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "d17776529ebb8b8e78b6155579e37481767f93b8dd36f37e7ae5ee5e61144fa6",
+      "bytes": 3500
+     },
+     {
+      "path": "game/assets/characters/walk-pilots-compact-v01/rpg-2-star-ocean-the-second_protagonist-female_south-walk-compact-v01-f2-lift-vl_m8-w04_20261016-184552-4dfc0d81.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "9d2c6a3131350637845ff916eb22d8c8fb719e39b52905d7a51099a9566d5c3b",
+      "bytes": 3488
+     },
+     {
+      "path": "game/assets/characters/walk-pilots-compact-v01/rpg-2-star-ocean-the-second_protagonist-female_south-walk-compact-v01-f3-reach-vl_m8-w04_20261016-184552-d4f0ea6e.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "3f3d82ca40b08a1855ee3faa76ce926508df98d9424ee06381ca265e8d7974f5",
+      "bytes": 3520
+     },
+     {
+      "path": "game/assets/characters/walk-pilots-compact-v01/rpg-2-star-ocean-the-second_protagonist-female_south-walk-compact-v01-f4-contact-vl_m8-w04_20261016-184552-a73615ad.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "b6ca82475b4fdfcdcac9bcfea68243da621e2f7ce49a30028d77565af246d56b",
+      "bytes": 3495
+     },
+     {
+      "path": "game/assets/characters/walk-pilots-compact-v01/rpg-2-star-ocean-the-second_protagonist-female_south-walk-compact-v01-f5-bend-vr_m8-w04_20261016-184552-83bcdbff.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "148e6a7c3d005a88d3b079fd185736aa61ce79e729d7d06478206d5570de5fd4",
+      "bytes": 3550
+     },
+     {
+      "path": "game/assets/characters/walk-pilots-compact-v01/rpg-2-star-ocean-the-second_protagonist-female_south-walk-compact-v01-f6-lift-vr_m8-w04_20261016-184552-cad9a353.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "ea140c6bf927c3c5e857ef0a62f9d8cc95cb911ef25ef3011785a072a9ac36a8",
+      "bytes": 3496
+     },
+     {
+      "path": "game/assets/characters/walk-pilots-compact-v01/rpg-2-star-ocean-the-second_protagonist-female_south-walk-compact-v01-f7-reach-vr_m8-w04_20261016-184552-6c2d0e17.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "a39b58cb3295dd50699014463fa4c1926e97546de047011e8c49c61ff349ca97",
+      "bytes": 3501
+     },
+     {
+      "path": "game/assets/characters/walk-pilots-compact-v01/rpg-2-star-ocean-the-second_protagonist-female_south-walk-compact-v01-f8-contact-vr_m8-w04_20261016-184552-9882b255.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "02a872f57c3e63e927d51646f8db260b115d5fabb91729e04e0cbaf3793a22ef",
+      "bytes": 3488
+     },
+     {
+      "path": "game/assets/characters/walk-pilots-compact-v01/rpg-2-star-ocean-the-second_protagonist-female_south-walk-compact-v01-loop-editable_m8-w04_20261016-184552-93427d77.pxo",
+      "hashKind": "sha256-bytes",
+      "sha256": "a80964681eb5ba661ddc7b7c8a9562a0505b90c57783e6566276e0b259e8616b",
+      "bytes": 57061
+     },
+     {
+      "path": "game/assets/characters/walk-pilots-compact-v01/rpg-2-star-ocean-the-second_protagonist-female_south-walk-compact-v01-stop-bank-editable_m8-w04_20261016-184552-31bab315.pxo",
+      "hashKind": "sha256-bytes",
+      "sha256": "becdf9325847fa786170e3d582b17fe3be23ae6298e2c329d9406e00852f57bb",
+      "bytes": 24334
+     },
+     {
+      "path": "game/assets/characters/walk-pilots-compact-v01/rpg-2-star-ocean-the-second_protagonist-female_south-walk-compact-v01-stop-plant-vl_m8-w04_20261016-184552-e3b16016.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "55e2e5be8e3d48cde8b2ac48c36aeb788b84fa2964438830732018d94200e70e",
+      "bytes": 3504
+     },
+     {
+      "path": "game/assets/characters/walk-pilots-compact-v01/rpg-2-star-ocean-the-second_protagonist-female_south-walk-compact-v01-stop-plant-vr_m8-w04_20261016-184552-ddc78eec.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "292be75a5899e8bb76a65ed4df93f93290956942a5f4b12367bd25c1cd3a214a",
+      "bytes": 3546
+     },
+     {
+      "path": "game/assets/characters/walk-pilots-compact-v01/rpg-2-star-ocean-the-second_protagonist-female_south-walk-compact-v01-stop-settle_m8-w04_20261016-184552-8a28ebfc.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "44ade4155d31432c7e2a0487ae36ddafc211d1c409bfe9b99d41b340a87d67df",
+      "bytes": 3512
+     }
+    ],
+    "gifReceipt": {
+     "path": "outputs/rpg-2-star-ocean-the-second_city-outskirts-annex_protagonist-female-south-walk-compact-v01-preview-gif-receipt-h48_m8-w04_20261016-185704-6a0e6012.json",
+     "hashKind": "sha256-text-lf-v1",
+     "sha256": "59f40d91045818630e62b298fbba4e40704a1b8b25617c217cc8c32a4ad65cf3",
+     "bytes": 17130,
+     "gifCount": 69,
+     "note": "GIF hashes are inside this receipt"
+    },
+    "capturePngs": {
+     "count": 42,
+     "note": "names match the tracked capture receipt \"outputs\" list; first stored hashes for these PNGs (QA note correction 5)",
+     "files": [
+      {
+       "path": "outputs/rpg-2-star-ocean-the-second_annex-dark_protagonist-female-south-walk-compact-v01-still-loop-f2-lift-vl-h48_m8-w04_20261016-185704-6a0e6012.png",
+       "hashKind": "sha256-bytes",
+       "sha256": "247ac5bf0fbab47c2fa1e52b9c29422807e16d64df129258ed8c853126756259",
+       "bytes": 1141133
+      },
+      {
+       "path": "outputs/rpg-2-star-ocean-the-second_annex-dark_protagonist-female-south-walk-compact-v01-still-loop-f6-lift-vr-h48_m8-w04_20261016-185704-6a0e6012.png",
+       "hashKind": "sha256-bytes",
+       "sha256": "7519ca4cec646d087ca8ff74cfb68e2815ffd9799c3efdf9d0cceeb47976c238",
+       "bytes": 1141055
+      },
+      {
+       "path": "outputs/rpg-2-star-ocean-the-second_annex-dark_protagonist-female-south-walk-compact-v01-still-v8-idle-reference-h48_m8-w04_20261016-185704-6a0e6012.png",
+       "hashKind": "sha256-bytes",
+       "sha256": "6b769e9fc0be0b48971cae6f57700947c30cef25646787404117c9bedc9f391e",
+       "bytes": 1141112
+      },
+      {
+       "path": "outputs/rpg-2-star-ocean-the-second_annex-dark_protagonist-female-south-walk-compact-v01-stop-from-f2-lift-vl-1-last-walk-tick-009-h48_m8-w04_20261016-185704-6a0e6012.png",
+       "hashKind": "sha256-bytes",
+       "sha256": "77aa8f1376690926c51a1aafc9ddfc1669a8581bafe46adbec10fe0121784dbc",
+       "bytes": 1141539
+      },
+      {
+       "path": "outputs/rpg-2-star-ocean-the-second_annex-dark_protagonist-female-south-walk-compact-v01-stop-from-f2-lift-vl-2-stop-k1-tick-010-h48_m8-w04_20261016-185704-6a0e6012.png",
+       "hashKind": "sha256-bytes",
+       "sha256": "a5f7228c4051d925600c775b746a79011e1daf52c2cba72f27e696c8eddde988",
+       "bytes": 1141510
+      },
+      {
+       "path": "outputs/rpg-2-star-ocean-the-second_annex-dark_protagonist-female-south-walk-compact-v01-stop-from-f2-lift-vl-3-stop-k2-tick-014-h48_m8-w04_20261016-185704-6a0e6012.png",
+       "hashKind": "sha256-bytes",
+       "sha256": "a5f7228c4051d925600c775b746a79011e1daf52c2cba72f27e696c8eddde988",
+       "bytes": 1141510
+      },
+      {
+       "path": "outputs/rpg-2-star-ocean-the-second_annex-dark_protagonist-female-south-walk-compact-v01-stop-from-f2-lift-vl-4-v8-tick-018-h48_m8-w04_20261016-185704-6a0e6012.png",
+       "hashKind": "sha256-bytes",
+       "sha256": "99d3a5b277dc7cc6dab8e12ddf68e3b372404400bb3a025eb57e9aa779559b4c",
+       "bytes": 1141497
+      },
+      {
+       "path": "outputs/rpg-2-star-ocean-the-second_annex-dark_protagonist-female-south-walk-compact-v01-stop-from-f4-contact-vl-1-last-walk-tick-018-h48_m8-w04_20261016-185704-6a0e6012.png",
+       "hashKind": "sha256-bytes",
+       "sha256": "da8dad9ac9b7dd6b77ed50dd78b4c9c1cf6541d29063570522cf2d91542715a4",
+       "bytes": 1141943
+      },
+      {
+       "path": "outputs/rpg-2-star-ocean-the-second_annex-dark_protagonist-female-south-walk-compact-v01-stop-from-f4-contact-vl-2-stop-k1-tick-019-h48_m8-w04_20261016-185704-6a0e6012.png",
+       "hashKind": "sha256-bytes",
+       "sha256": "d79085fbdba0d17e0c427170d69c813bc00cd38d9271ba7bcb4ad9edb67aecbf",
+       "bytes": 1141807
+      },
+      {
+       "path": "outputs/rpg-2-star-ocean-the-second_annex-dark_protagonist-female-south-walk-compact-v01-stop-from-f4-contact-vl-3-stop-k2-tick-023-h48_m8-w04_20261016-185704-6a0e6012.png",
+       "hashKind": "sha256-bytes",
+       "sha256": "d79085fbdba0d17e0c427170d69c813bc00cd38d9271ba7bcb4ad9edb67aecbf",
+       "bytes": 1141807
+      },
+      {
+       "path": "outputs/rpg-2-star-ocean-the-second_annex-dark_protagonist-female-south-walk-compact-v01-stop-from-f4-contact-vl-4-v8-tick-027-h48_m8-w04_20261016-185704-6a0e6012.png",
+       "hashKind": "sha256-bytes",
+       "sha256": "769625dff284dd8e33568044d0b88f1807b6cdd3b6c75889549ed5fa047b966d",
+       "bytes": 1141884
+      },
+      {
+       "path": "outputs/rpg-2-star-ocean-the-second_annex-dark_protagonist-female-south-walk-compact-v01-stop-from-f7-reach-vr-1-last-walk-tick-032-h48_m8-w04_20261016-185704-6a0e6012.png",
+       "hashKind": "sha256-bytes",
+       "sha256": "e8c312d89a1dee3ba39b06912fd5a10482ff12e61b715446e1bf55e4814edad0",
+       "bytes": 1142087
+      },
+      {
+       "path": "outputs/rpg-2-star-ocean-the-second_annex-dark_protagonist-female-south-walk-compact-v01-stop-from-f7-reach-vr-2-stop-k1-tick-033-h48_m8-w04_20261016-185704-6a0e6012.png",
+       "hashKind": "sha256-bytes",
+       "sha256": "c9b49ac5deea7d817568ad5bcf8e5073ddeb8ce6104ac02628041ca3dd863d06",
+       "bytes": 1141866
+      },
+      {
+       "path": "outputs/rpg-2-star-ocean-the-second_annex-dark_protagonist-female-south-walk-compact-v01-stop-from-f7-reach-vr-3-stop-k2-tick-037-h48_m8-w04_20261016-185704-6a0e6012.png",
+       "hashKind": "sha256-bytes",
+       "sha256": "c9b49ac5deea7d817568ad5bcf8e5073ddeb8ce6104ac02628041ca3dd863d06",
+       "bytes": 1141866
+      },
+      {
+       "path": "outputs/rpg-2-star-ocean-the-second_annex-dark_protagonist-female-south-walk-compact-v01-stop-from-f7-reach-vr-4-v8-tick-041-h48_m8-w04_20261016-185704-6a0e6012.png",
+       "hashKind": "sha256-bytes",
+       "sha256": "b312ae2f0ef66368828e60f8b1d125030f14a9cdac2d3af83db570fdbe06f882",
+       "bytes": 1141784
+      },
+      {
+       "path": "outputs/rpg-2-star-ocean-the-second_city-bright_protagonist-female-south-walk-compact-v01-still-loop-f1-bend-vl-h48_m8-w04_20261016-185704-6a0e6012.png",
+       "hashKind": "sha256-bytes",
+       "sha256": "62e07494eba718fca9da6d16fb9f9db006f487f047ab62469a07218f38d6089c",
+       "bytes": 1357905
+      },
+      {
+       "path": "outputs/rpg-2-star-ocean-the-second_city-bright_protagonist-female-south-walk-compact-v01-still-loop-f2-lift-vl-h48_m8-w04_20261016-185704-6a0e6012.png",
+       "hashKind": "sha256-bytes",
+       "sha256": "4edc5d6d18d7e627f382dcf86825702e9f523d1460ce7041538a7f0e9767b333",
+       "bytes": 1357839
+      },
+      {
+       "path": "outputs/rpg-2-star-ocean-the-second_city-bright_protagonist-female-south-walk-compact-v01-still-loop-f3-reach-vl-h48_m8-w04_20261016-185704-6a0e6012.png",
+       "hashKind": "sha256-bytes",
+       "sha256": "8c3dcc55e27412b8a43ffd3e5a23f1a2c688daf7438b70857ed8544ff0843f60",
+       "bytes": 1357931
+      },
+      {
+       "path": "outputs/rpg-2-star-ocean-the-second_city-bright_protagonist-female-south-walk-compact-v01-still-loop-f4-contact-vl-h48_m8-w04_20261016-185704-6a0e6012.png",
+       "hashKind": "sha256-bytes",
+       "sha256": "5be5514871acecfb5b0d63dfe4c04a1b74034493ce6c798f1abe93aef4650909",
+       "bytes": 1357975
+      },
+      {
+       "path": "outputs/rpg-2-star-ocean-the-second_city-bright_protagonist-female-south-walk-compact-v01-still-loop-f5-bend-vr-h48_m8-w04_20261016-185704-6a0e6012.png",
+       "hashKind": "sha256-bytes",
+       "sha256": "23e9226dbb48bea3cee68aa780a81f52d4be15cc2df06240d674a37ae1645cad",
+       "bytes": 1358053
+      },
+      {
+       "path": "outputs/rpg-2-star-ocean-the-second_city-bright_protagonist-female-south-walk-compact-v01-still-loop-f6-lift-vr-h48_m8-w04_20261016-185704-6a0e6012.png",
+       "hashKind": "sha256-bytes",
+       "sha256": "7e1ebf6747a3d74a31f5af2e154c1f9d71987a962d7de571bc139643efd7443c",
+       "bytes": 1357807
+      },
+      {
+       "path": "outputs/rpg-2-star-ocean-the-second_city-bright_protagonist-female-south-walk-compact-v01-still-loop-f7-reach-vr-h48_m8-w04_20261016-185704-6a0e6012.png",
+       "hashKind": "sha256-bytes",
+       "sha256": "854f546c8d42296813bd1abde32b2786979f356c258d48957db7dc8ca3d5aed3",
+       "bytes": 1357943
+      },
+      {
+       "path": "outputs/rpg-2-star-ocean-the-second_city-bright_protagonist-female-south-walk-compact-v01-still-loop-f8-contact-vr-h48_m8-w04_20261016-185704-6a0e6012.png",
+       "hashKind": "sha256-bytes",
+       "sha256": "d3992cb169ff8084c426c073e01c78d9576c78f05dcc3f41b2519994df89227c",
+       "bytes": 1357927
+      },
+      {
+       "path": "outputs/rpg-2-star-ocean-the-second_city-bright_protagonist-female-south-walk-compact-v01-still-stop-plant-vl-h48_m8-w04_20261016-185704-6a0e6012.png",
+       "hashKind": "sha256-bytes",
+       "sha256": "d0689eb42a66c9402050cf6c8982cc64bb25c47b029e112dfa5cbebc4ad78164",
+       "bytes": 1357840
+      },
+      {
+       "path": "outputs/rpg-2-star-ocean-the-second_city-bright_protagonist-female-south-walk-compact-v01-still-stop-plant-vr-h48_m8-w04_20261016-185704-6a0e6012.png",
+       "hashKind": "sha256-bytes",
+       "sha256": "b4b9245fde2183bc04c2f88a6aa865ed5d144725013e9069f15d275d0ad7f1a5",
+       "bytes": 1357928
+      },
+      {
+       "path": "outputs/rpg-2-star-ocean-the-second_city-bright_protagonist-female-south-walk-compact-v01-still-stop-settle-h48_m8-w04_20261016-185704-6a0e6012.png",
+       "hashKind": "sha256-bytes",
+       "sha256": "46819ba6ac05081553599fb929a6265ded19627e676a720c1aa8ede3e9b652f5",
+       "bytes": 1357844
+      },
+      {
+       "path": "outputs/rpg-2-star-ocean-the-second_city-bright_protagonist-female-south-walk-compact-v01-still-v8-idle-reference-h48_m8-w04_20261016-185704-6a0e6012.png",
+       "hashKind": "sha256-bytes",
+       "sha256": "9f4f1283f36b2d1da37d2d0aa8291d40566b9c4fc8e152526b465c5b2f28300d",
+       "bytes": 1357840
+      },
+      {
+       "path": "outputs/rpg-2-star-ocean-the-second_city-bright_protagonist-female-south-walk-compact-v01-stop-from-f2-lift-vl-1-last-walk-tick-009-h48_m8-w04_20261016-185704-6a0e6012.png",
+       "hashKind": "sha256-bytes",
+       "sha256": "11860ccda06765178ca25cde9c5bab48c6a8eee3be9628143a801f90dd4299d2",
+       "bytes": 1357779
+      },
+      {
+       "path": "outputs/rpg-2-star-ocean-the-second_city-bright_protagonist-female-south-walk-compact-v01-stop-from-f2-lift-vl-2-stop-k1-tick-010-h48_m8-w04_20261016-185704-6a0e6012.png",
+       "hashKind": "sha256-bytes",
+       "sha256": "e456ba1b239fd4f9ebd98b2c3278c1644982943b381d9526e8e459c2e71aecd6",
+       "bytes": 1357755
+      },
+      {
+       "path": "outputs/rpg-2-star-ocean-the-second_city-bright_protagonist-female-south-walk-compact-v01-stop-from-f2-lift-vl-3-stop-k2-tick-014-h48_m8-w04_20261016-185704-6a0e6012.png",
+       "hashKind": "sha256-bytes",
+       "sha256": "e456ba1b239fd4f9ebd98b2c3278c1644982943b381d9526e8e459c2e71aecd6",
+       "bytes": 1357755
+      },
+      {
+       "path": "outputs/rpg-2-star-ocean-the-second_city-bright_protagonist-female-south-walk-compact-v01-stop-from-f2-lift-vl-4-v8-tick-018-h48_m8-w04_20261016-185704-6a0e6012.png",
+       "hashKind": "sha256-bytes",
+       "sha256": "7a3f2662c1a40a8b23d431e3e757c863221873d866680ca55db5612b0f06a632",
+       "bytes": 1357761
+      },
+      {
+       "path": "outputs/rpg-2-star-ocean-the-second_city-bright_protagonist-female-south-walk-compact-v01-stop-from-f4-contact-vl-1-last-walk-tick-018-h48_m8-w04_20261016-185704-6a0e6012.png",
+       "hashKind": "sha256-bytes",
+       "sha256": "b56f3fb9b2f5ef3a75b7a967f399cc9b8419366c54d5d808f72fd6e8d5ba2604",
+       "bytes": 1358489
+      },
+      {
+       "path": "outputs/rpg-2-star-ocean-the-second_city-bright_protagonist-female-south-walk-compact-v01-stop-from-f4-contact-vl-2-stop-k1-tick-019-h48_m8-w04_20261016-185704-6a0e6012.png",
+       "hashKind": "sha256-bytes",
+       "sha256": "a9d11096fec214fa913f166a44ce43d97873c221ceca67cd52a2228cd706f47f",
+       "bytes": 1358286
+      },
+      {
+       "path": "outputs/rpg-2-star-ocean-the-second_city-bright_protagonist-female-south-walk-compact-v01-stop-from-f4-contact-vl-3-stop-k2-tick-023-h48_m8-w04_20261016-185704-6a0e6012.png",
+       "hashKind": "sha256-bytes",
+       "sha256": "a9d11096fec214fa913f166a44ce43d97873c221ceca67cd52a2228cd706f47f",
+       "bytes": 1358286
+      },
+      {
+       "path": "outputs/rpg-2-star-ocean-the-second_city-bright_protagonist-female-south-walk-compact-v01-stop-from-f4-contact-vl-4-v8-tick-027-h48_m8-w04_20261016-185704-6a0e6012.png",
+       "hashKind": "sha256-bytes",
+       "sha256": "0a4d7750d45fcae11194f0a43320fc847a1f73ac0370a4a513b0ef656d234e83",
+       "bytes": 1358298
+      },
+      {
+       "path": "outputs/rpg-2-star-ocean-the-second_city-bright_protagonist-female-south-walk-compact-v01-stop-from-f7-reach-vr-1-last-walk-tick-032-h48_m8-w04_20261016-185704-6a0e6012.png",
+       "hashKind": "sha256-bytes",
+       "sha256": "ca08009dce4354264e1aaf3fa65ddc71d7ec67e1e4a395dc48f5f52de59c94b7",
+       "bytes": 1359315
+      },
+      {
+       "path": "outputs/rpg-2-star-ocean-the-second_city-bright_protagonist-female-south-walk-compact-v01-stop-from-f7-reach-vr-2-stop-k1-tick-033-h48_m8-w04_20261016-185704-6a0e6012.png",
+       "hashKind": "sha256-bytes",
+       "sha256": "146a4a5ea4d8416b86db69417daacade41bd1d670fc03adb0cddda3f09e4e085",
+       "bytes": 1359271
+      },
+      {
+       "path": "outputs/rpg-2-star-ocean-the-second_city-bright_protagonist-female-south-walk-compact-v01-stop-from-f7-reach-vr-3-stop-k2-tick-037-h48_m8-w04_20261016-185704-6a0e6012.png",
+       "hashKind": "sha256-bytes",
+       "sha256": "146a4a5ea4d8416b86db69417daacade41bd1d670fc03adb0cddda3f09e4e085",
+       "bytes": 1359271
+      },
+      {
+       "path": "outputs/rpg-2-star-ocean-the-second_city-bright_protagonist-female-south-walk-compact-v01-stop-from-f7-reach-vr-4-v8-tick-041-h48_m8-w04_20261016-185704-6a0e6012.png",
+       "hashKind": "sha256-bytes",
+       "sha256": "9434fe4d065ade90b9ec49f7244c5a90b67bf86127495af247b36212908ea551",
+       "bytes": 1359168
+      },
+      {
+       "path": "outputs/rpg-2-star-ocean-the-second_outskirts-bright_protagonist-female-south-walk-compact-v01-still-loop-f2-lift-vl-h48_m8-w04_20261016-185704-6a0e6012.png",
+       "hashKind": "sha256-bytes",
+       "sha256": "f0fba9288cff0dc55f41b8f29fd0ec348bd5b5e14ba9e60ca5b60b71dd9f70c7",
+       "bytes": 1542768
+      },
+      {
+       "path": "outputs/rpg-2-star-ocean-the-second_outskirts-bright_protagonist-female-south-walk-compact-v01-still-loop-f6-lift-vr-h48_m8-w04_20261016-185704-6a0e6012.png",
+       "hashKind": "sha256-bytes",
+       "sha256": "5dc8d5af3238da42390ee7fd613645949795ef8ea892d01e202896727ec1246c",
+       "bytes": 1542761
+      },
+      {
+       "path": "outputs/rpg-2-star-ocean-the-second_outskirts-bright_protagonist-female-south-walk-compact-v01-still-v8-idle-reference-h48_m8-w04_20261016-185704-6a0e6012.png",
+       "hashKind": "sha256-bytes",
+       "sha256": "534270aacd775eeb717ff4ef6d1bf0c9cdaf09f01a2d5716dc6905d99a279454",
+       "bytes": 1542671
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "closeout-20261016-200048-40a01ee6",
+   "subject": "Codex visual audit of dated Yonkers outskirts screenshot (direction unapproved)",
+   "trackedEvidence": [
+    {
+     "path": "docs/qa/rpg-2-star-ocean-the-second_yonkers-outskirts_dated-runtime-screenshot-visual-audit_unapproved-v01_20261016-160300-2f6c7b81.md",
+     "hashKind": "sha256-text-lf-v1",
+     "sha256": "5593c164938976d9e188abf1c36fc01f98a1daa7298b55f5bd0d7bde1d4c145e",
+     "bytes": 2191
+    }
+   ],
+   "localOnly": {
+    "reason": "audited source screenshot belongs to an untracked paving A/B batch (m8-v02, 025907-77e7b959) that also holds unapproved candidate paving art; left local, pinned here",
+    "auditedScreenshot": {
+     "path": "outputs/rpg-2-star-ocean-the-second_scifi-outskirts_paving-ab-current-runtime-background_protagonist-female-south-idle-selout-v8-approved-static-h48_m8-v02_20261015-025907-77e7b959.png",
+     "hashKind": "sha256-bytes",
+     "sha256": "7d533f68183a92c2e4743c7e29314102f1b24fb20727124c9486aadfc6ba57de",
+     "bytes": 1744141
+    }
+   }
+  },
+  {
+   "id": "closeout-20261016-200300-9997214d",
+   "subject": "Yonkers rail-and-river art-direction reference (unapproved nonruntime concept)",
+   "trackedEvidence": [
+    {
+     "path": "outputs/rpg-2-star-ocean-the-second_yonkers-outskirts_rail-river-art-direction-nonruntime-v01_20261016-160229-49c2d7ae.png",
+     "hashKind": "sha256-bytes",
+     "sha256": "76b1575e08191eb4354d66a89905f8b5c299242efaecce6bf2d3afc0d7699078",
+     "bytes": 3486424,
+     "manifestSha256Matches": true
+    },
+    {
+     "path": "outputs/rpg-2-star-ocean-the-second_yonkers-outskirts_rail-river-art-direction-manifest-nonruntime-v01_20261016-160229-7e95d601.json",
+     "hashKind": "sha256-text-lf-v1",
+     "sha256": "3a3caa6336eb3761e0cd054349fc0dfb16b9306a415fdf862cc9d4be15a60f89",
+     "bytes": 809
+    },
+    {
+     "path": "docs/qa/rpg-2-star-ocean-the-second_yonkers-outskirts_dated-runtime-screenshot-visual-audit_unapproved-v01_20261016-160300-2f6c7b81.md",
+     "hashKind": "sha256-text-lf-v1",
+     "sha256": "5593c164938976d9e188abf1c36fc01f98a1daa7298b55f5bd0d7bde1d4c145e",
+     "bytes": 2191
+    }
+   ]
+  },
+  {
+   "id": "closeout-20261016-202835-1dfc2eab",
+   "subject": "Game Bible Site private publication v10",
+   "trackedEvidence": [
+    {
+     "path": "docs/qa/rpg-2-star-ocean-the-second_game-bible-site_preview-gallery-fix-private-publication-v10_verification-receipt_qa-note_published-v01_20261016-202814-b8e41c07.md",
+     "hashKind": "sha256-text-lf-v1",
+     "sha256": "82f1d63f06cd6d6d744cf8d0e177695f8ee0238c24ee74725ceef9369a0e7506",
+     "bytes": 2219,
+     "alreadyTrackedIn": "bcd7f78"
+    }
+   ]
+  }
+ ]
+}
