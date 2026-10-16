@@ -290,13 +290,13 @@ function checkCanon(bible) {
   check(bible.openQuestions.some(question => question.title.includes('待按新规则重设计')) && !bible.openQuestions.some(question => /地理锚点|首城|开始年份/.test(question.title)), 'open questions: skill redesign open, resolved geography questions gone');
   check(bible.environmentVisualReview.sceneQualityAccepted === 0 && bible.environmentVisualReview.sceneQualityTarget === 11 && bible.environmentVisualReview.artAccepted === false, 'scene visuals 0/11, art not accepted');
   check(bible.characterVisualReview.runtimeSpritesAccepted === 0 && bible.characterVisualReview.artAccepted === false, 'runtime sprites accepted 0');
-  // Washington, D.C.: unapproved Pixelorama candidates exist (walkable v01-v04, separate cinematic v01-v02); none is wired or accepted.
+  // Washington, D.C.: unapproved Pixelorama candidates exist (walkable v01-v05, separate cinematic v01-v02); none is wired or accepted.
   const dc = bible.environmentVisualReview.washingtonDC;
   const dcCandidates = dc?.unapprovedCandidates;
   const artRoute = bible.openQuestions.find(question => question.title === 'MVP 美术技术路线')?.detail || '';
-  check(dcCandidates && same(dcCandidates.walkable, ['v01', 'v02', 'v03', 'v04']) && same(dcCandidates.cinematic, ['v01', 'v02']) &&
+  check(dcCandidates && same(dcCandidates.walkable, ['v01', 'v02', 'v03', 'v04', 'v05']) && same(dcCandidates.cinematic, ['v01', 'v02']) &&
     dcCandidates.runtimeIntegrated === false && dcCandidates.artAccepted === false && dc.runtimeIntegrated === false && dc.artAccepted === false &&
-    has(artRoute, ['未批准候选', 'v01–v04', 'v01–v02', '未接入运行时、未验收']) && !artRoute.includes('尚未制作'), 'Washington Pixelorama: unapproved walkable v01-v04 and cinematic v01-v02 candidates, none in the runtime or accepted');
+    has(artRoute, ['未批准候选', 'v01–v05', 'v01–v02', '未接入运行时、未验收']) && !artRoute.includes('尚未制作'), 'Washington Pixelorama: unapproved walkable v01-v05 and cinematic v01-v02 candidates, none in the runtime or accepted');
   return passed;
 }
 
