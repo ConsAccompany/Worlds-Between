@@ -1,0 +1,767 @@
+{
+  "run": "nyc-chp-v01_20261016-044931-92357bf2",
+  "gates": {
+    "canvas_640x360_all_layers": true,
+    "base_layer_opaque": true,
+    "binary_alpha_all_layers": true,
+    "art_layers_palette_only": true,
+    "flat_colours_subset_of_palette": true,
+    "flat_opaque": true,
+    "heroine_48_logical_px": true,
+    "every_walkable_foot_keeps_one_third_visible": true,
+    "depth_audit_zero_wrong_order_feet": true,
+    "walkable_never_in_backdrop": true,
+    "walkable_only_on_paving": true,
+    "walkable_never_in_fountain_basin": true,
+    "ysort_behind_front_correct": true,
+    "all_pins_reachable_from_spawn": true,
+    "pins_on_walkable_texels": true,
+    "heroine_route_fully_walkable": true,
+    "no_isolated_bright_flecks_in_walkable_park": true,
+    "pxo_layer_stack_is_18_named_layers": true,
+    "build_deterministic": true,
+    "pixelorama_isolation_held": true,
+    "pixelorama_pxo_flat_exact": true,
+    "pixelorama_pxo_flat_deterministic": true,
+    "pixelorama_pxo_split_layers_exact": true,
+    "pixelorama_pxo_split_composite_equals_flat": true,
+    "pixelorama_ora_flat_exact": true,
+    "pixelorama_ora_split_layers_exact": true,
+    "pixelorama_sources_unchanged": true,
+    "pixelorama_split_does_not_export_hidden_guides": true,
+    "godot_loads_layers_exact": true,
+    "godot_route_walkable_on_exported_mask": true,
+    "godot_route_stills_match_ysort_and_occlusion": true,
+    "godot_heroine_48_px": true,
+    "godot_render_1280x720": true,
+    "godot_render_equals_python_2x": true,
+    "godot_wrote_nothing_outside_temp": true
+  },
+  "static": {
+    "verdicts": {
+      "canvas_640x360_all_layers": true,
+      "base_layer_opaque": true,
+      "binary_alpha_all_layers": true,
+      "art_layers_palette_only": true,
+      "flat_colours_subset_of_palette": true,
+      "flat_opaque": true,
+      "heroine_48_logical_px": true,
+      "every_walkable_foot_keeps_one_third_visible": true,
+      "depth_audit_zero_wrong_order_feet": true,
+      "walkable_never_in_backdrop": true,
+      "walkable_only_on_paving": true,
+      "walkable_never_in_fountain_basin": true,
+      "ysort_behind_front_correct": true,
+      "all_pins_reachable_from_spawn": true,
+      "pins_on_walkable_texels": true,
+      "heroine_route_fully_walkable": true,
+      "no_isolated_bright_flecks_in_walkable_park": true
+    },
+    "visibility_worst": 0.75,
+    "visibility_worst_at": [
+      468,
+      260
+    ],
+    "visibility_fail_count": 0,
+    "visibility_fail_examples": [],
+    "depth_audit": {
+      "fence_0": {
+        "overlapping_walkable_feet": 1968,
+        "wrong_order_feet": 0,
+        "base_row": 253
+      },
+      "fence_1": {
+        "overlapping_walkable_feet": 1654,
+        "wrong_order_feet": 0,
+        "base_row": 253
+      },
+      "fence_2": {
+        "overlapping_walkable_feet": 82,
+        "wrong_order_feet": 0,
+        "base_row": 281
+      },
+      "fence_3": {
+        "overlapping_walkable_feet": 130,
+        "wrong_order_feet": 0,
+        "base_row": 281
+      },
+      "fence_4": {
+        "overlapping_walkable_feet": 1586,
+        "wrong_order_feet": 0,
+        "base_row": 336
+      },
+      "fence_5": {
+        "overlapping_walkable_feet": 1983,
+        "wrong_order_feet": 0,
+        "base_row": 336
+      },
+      "fence_6": {
+        "overlapping_walkable_feet": 4259,
+        "wrong_order_feet": 0,
+        "base_row": 336
+      },
+      "bench_0": {
+        "overlapping_walkable_feet": 725,
+        "wrong_order_feet": 0,
+        "base_row": 252
+      },
+      "bench_1": {
+        "overlapping_walkable_feet": 680,
+        "wrong_order_feet": 0,
+        "base_row": 336
+      },
+      "bench_2": {
+        "overlapping_walkable_feet": 680,
+        "wrong_order_feet": 0,
+        "base_row": 336
+      },
+      "bin_0": {
+        "overlapping_walkable_feet": 676,
+        "wrong_order_feet": 0,
+        "base_row": 256
+      },
+      "bin_1": {
+        "overlapping_walkable_feet": 421,
+        "wrong_order_feet": 0,
+        "base_row": 336
+      },
+      "bollard_0": {
+        "overlapping_walkable_feet": 0,
+        "wrong_order_feet": 0,
+        "base_row": 342
+      },
+      "bollard_1": {
+        "overlapping_walkable_feet": 0,
+        "wrong_order_feet": 0,
+        "base_row": 352
+      },
+      "info_pylon": {
+        "overlapping_walkable_feet": 454,
+        "wrong_order_feet": 0,
+        "base_row": 230
+      },
+      "broadway_pier_0": {
+        "overlapping_walkable_feet": 141,
+        "wrong_order_feet": 0,
+        "base_row": 257
+      },
+      "broadway_pier_1": {
+        "overlapping_walkable_feet": 0,
+        "wrong_order_feet": 0,
+        "base_row": 289
+      }
+    },
+    "ysort_cases": {
+      "fountain_behind": {
+        "layer": "fountain-ysort",
+        "behind": true,
+        "overlap_texels": 57,
+        "sprite_on_top_texels": 57,
+        "ok": true,
+        "walkable": true
+      },
+      "fountain_lamp_front": {
+        "layer": "fountain-ysort",
+        "behind": false,
+        "overlap_texels": 63,
+        "sprite_on_top_texels": 0,
+        "ok": true,
+        "walkable": true
+      },
+      "statue_behind": {
+        "layer": "statue-ysort",
+        "behind": true,
+        "overlap_texels": 64,
+        "sprite_on_top_texels": 64,
+        "ok": true,
+        "walkable": true
+      },
+      "statue_plaque": {
+        "layer": "statue-ysort",
+        "behind": false,
+        "overlap_texels": 338,
+        "sprite_on_top_texels": 0,
+        "ok": true,
+        "walkable": true
+      },
+      "tree_se_behind": {
+        "layer": "tree-se-ysort",
+        "behind": true,
+        "overlap_texels": 46,
+        "sprite_on_top_texels": 46,
+        "ok": true,
+        "walkable": true
+      },
+      "lamp_n_behind": {
+        "layer": "lamps-n-ysort",
+        "behind": true,
+        "overlap_texels": 65,
+        "sprite_on_top_texels": 65,
+        "ok": true,
+        "walkable": true
+      },
+      "lamp_n_front": {
+        "layer": "lamps-n-ysort",
+        "behind": false,
+        "overlap_texels": 61,
+        "sprite_on_top_texels": 0,
+        "ok": true,
+        "walkable": true
+      }
+    },
+    "pins_reachable": {
+      "spawn_south": true,
+      "city_hall_gate": true,
+      "axis_mid": true,
+      "fountain_south": true,
+      "fountain_behind": true,
+      "info_pylon": true,
+      "statue_plaque": true,
+      "statue_behind": true,
+      "tree_se_behind": true,
+      "lamp_n_behind": true,
+      "lamp_n_front": true,
+      "fountain_lamp_front": true,
+      "exit_broadway_gate": true,
+      "exit_park_row": true
+    },
+    "route_points": 1525,
+    "route_blocked_examples": [],
+    "isolated_bright_flecks": {
+      "park_rows_150_359": 0,
+      "examples": [],
+      "whole_frame": 23
+    },
+    "single_texel_colour_islands_share": {
+      "park_rows_150_359": 0.0463,
+      "backdrop_rows_0_149": 0.0235
+    },
+    "palette": {
+      "art_colours": 80,
+      "used_in_flat": 77
+    },
+    "despeckled_ground_texels": 20,
+    "walkable_texels": 36172,
+    "walkable_share_of_park_rows": 0.301
+  },
+  "pixelorama": {
+    "pixelorama": "C:/Users/hkzha/AppData/Local/Programs/Pixelorama-1.2.3/Pixelorama-Windows-64bit/Pixelorama.exe",
+    "pixelorama_sha256": "6412014e27f31e6ad7eed64c1f4e80551a40c6cfd815bb00dc74b10f34b92f10",
+    "isolation": "APPDATA redirected to a fresh temp dir per run; real %APPDATA%\\pixelorama polled every 10 ms with a kill-switch",
+    "steps": {
+      "pxo_flat_1": {
+        "args": [
+          "--export",
+          "-o",
+          "f.png",
+          "src.pxo"
+        ],
+        "exit_code": 0,
+        "seconds": 4.1,
+        "killed_by_guard": false,
+        "fake_user_dir_created": true,
+        "real_dir_changed_except_running": [],
+        "real_running_marker_present_after": true,
+        "output_tail": [
+          "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+          "Pixelorama v1.2.3-stable - Windows 11 (build 26300) - Single-window, 0 monitors - is not sandboxed - AMD Ryzen 7 5800X 8-Core Processor (16 threads) - 63.90 GiB memory - Dummy",
+          "Time Pixelorama took to open: 3772ms"
+        ],
+        "pngs": [
+          "rpg-2-star-ocean-the-second_nyc-city-hall-park_pixelorama-export_unapproved-v01_20261016-044931-92357bf2.png"
+        ],
+        "source_copy_unchanged": true,
+        "png_sha256": "35a9c95dac64f6690fc920ebd4e8bb2a1aa3539cf9fbff41ba2e0a12653842b7",
+        "flat_equals_expected": true,
+        "differing_texels": 0
+      },
+      "pxo_flat_2": {
+        "args": [
+          "--export",
+          "-o",
+          "f.png",
+          "src.pxo"
+        ],
+        "exit_code": 0,
+        "seconds": 4.1,
+        "killed_by_guard": false,
+        "fake_user_dir_created": true,
+        "real_dir_changed_except_running": [],
+        "real_running_marker_present_after": true,
+        "output_tail": [
+          "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+          "Pixelorama v1.2.3-stable - Windows 11 (build 26300) - Single-window, 0 monitors - is not sandboxed - AMD Ryzen 7 5800X 8-Core Processor (16 threads) - 63.90 GiB memory - Dummy",
+          "Time Pixelorama took to open: 3736ms"
+        ],
+        "pngs": [
+          "rpg-2-star-ocean-the-second_nyc-city-hall-park_pixelorama-export_unapproved-v01_20261016-044931-92357bf2.png"
+        ],
+        "source_copy_unchanged": true,
+        "png_sha256": "35a9c95dac64f6690fc920ebd4e8bb2a1aa3539cf9fbff41ba2e0a12653842b7",
+        "flat_equals_expected": true,
+        "differing_texels": 0
+      },
+      "pxo_split": {
+        "args": [
+          "--export",
+          "--split-layers",
+          "-o",
+          "f.png",
+          "src.pxo"
+        ],
+        "exit_code": 0,
+        "seconds": 4.2,
+        "killed_by_guard": false,
+        "fake_user_dir_created": true,
+        "real_dir_changed_except_running": [],
+        "real_running_marker_present_after": true,
+        "output_tail": [
+          "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+          "Pixelorama v1.2.3-stable - Windows 11 (build 26300) - Single-window, 0 monitors - is not sandboxed - AMD Ryzen 7 5800X 8-Core Processor (16 threads) - 63.90 GiB memory - Dummy",
+          "Time Pixelorama took to open: 3907ms"
+        ],
+        "pngs": [
+          "rpg-2-star-ocean-the-second_nyc-city-hall-park_pixelorama-export_unapproved-v01_20261016-044931-92357bf2(cast-shadows) _0001.png",
+          "rpg-2-star-ocean-the-second_nyc-city-hall-park_pixelorama-export_unapproved-v01_20261016-044931-92357bf2(city-hall) _0001.png",
+          "rpg-2-star-ocean-the-second_nyc-city-hall-park_pixelorama-export_unapproved-v01_20261016-044931-92357bf2(fg-occlusion) _0001.png",
+          "rpg-2-star-ocean-the-second_nyc-city-hall-park_pixelorama-export_unapproved-v01_20261016-044931-92357bf2(forecourt-flank) _0001.png",
+          "rpg-2-star-ocean-the-second_nyc-city-hall-park_pixelorama-export_unapproved-v01_20261016-044931-92357bf2(fountain-basin) _0001.png",
+          "rpg-2-star-ocean-the-second_nyc-city-hall-park_pixelorama-export_unapproved-v01_20261016-044931-92357bf2(fountain-ysort) _0001.png",
+          "rpg-2-star-ocean-the-second_nyc-city-hall-park_pixelorama-export_unapproved-v01_20261016-044931-92357bf2(ground-detail) _0001.png",
+          "rpg-2-star-ocean-the-second_nyc-city-hall-park_pixelorama-export_unapproved-v01_20261016-044931-92357bf2(lamps-n-ysort) _0001.png",
+          "rpg-2-star-ocean-the-second_nyc-city-hall-park_pixelorama-export_unapproved-v01_20261016-044931-92357bf2(lamps-s-ysort) _0001.png",
+          "rpg-2-star-ocean-the-second_nyc-city-hall-park_pixelorama-export_unapproved-v01_20261016-044931-92357bf2(north-groves) _0001.png",
+          "rpg-2-star-ocean-the-second_nyc-city-hall-park_pixelorama-export_unapproved-v01_20261016-044931-92357bf2(park-ground) _0001.png",
+          "rpg-2-star-ocean-the-second_nyc-city-hall-park_pixelorama-export_unapproved-v01_20261016-044931-92357bf2(props-low) _0001.png",
+          "rpg-2-star-ocean-the-second_nyc-city-hall-park_pixelorama-export_unapproved-v01_20261016-044931-92357bf2(statue-ysort) _0001.png",
+          "rpg-2-star-ocean-the-second_nyc-city-hall-park_pixelorama-export_unapproved-v01_20261016-044931-92357bf2(streets) _0001.png",
+          "rpg-2-star-ocean-the-second_nyc-city-hall-park_pixelorama-export_unapproved-v01_20261016-044931-92357bf2(tree-nw-ysort) _0001.png",
+          "rpg-2-star-ocean-the-second_nyc-city-hall-park_pixelorama-export_unapproved-v01_20261016-044931-92357bf2(tree-se-ysort) _0001.png",
+          "rpg-2-star-ocean-the-second_nyc-city-hall-park_pixelorama-export_unapproved-v01_20261016-044931-92357bf2(trees-ne-ysort) _0001.png"
+        ],
+        "source_copy_unchanged": true,
+        "split": [
+          {
+            "file": "rpg-2-star-ocean-the-second_nyc-city-hall-park_pixelorama-export_unapproved-v01_20261016-044931-92357bf2(cast-shadows) _0001.png",
+            "exact_layer_match": [
+              "cast-shadows"
+            ],
+            "semi_alpha": 0
+          },
+          {
+            "file": "rpg-2-star-ocean-the-second_nyc-city-hall-park_pixelorama-export_unapproved-v01_20261016-044931-92357bf2(city-hall) _0001.png",
+            "exact_layer_match": [
+              "city-hall"
+            ],
+            "semi_alpha": 0
+          },
+          {
+            "file": "rpg-2-star-ocean-the-second_nyc-city-hall-park_pixelorama-export_unapproved-v01_20261016-044931-92357bf2(fg-occlusion) _0001.png",
+            "exact_layer_match": [
+              "fg-occlusion"
+            ],
+            "semi_alpha": 0
+          },
+          {
+            "file": "rpg-2-star-ocean-the-second_nyc-city-hall-park_pixelorama-export_unapproved-v01_20261016-044931-92357bf2(forecourt-flank) _0001.png",
+            "exact_layer_match": [
+              "forecourt-flank"
+            ],
+            "semi_alpha": 0
+          },
+          {
+            "file": "rpg-2-star-ocean-the-second_nyc-city-hall-park_pixelorama-export_unapproved-v01_20261016-044931-92357bf2(fountain-basin) _0001.png",
+            "exact_layer_match": [
+              "fountain-basin"
+            ],
+            "semi_alpha": 0
+          },
+          {
+            "file": "rpg-2-star-ocean-the-second_nyc-city-hall-park_pixelorama-export_unapproved-v01_20261016-044931-92357bf2(fountain-ysort) _0001.png",
+            "exact_layer_match": [
+              "fountain-ysort"
+            ],
+            "semi_alpha": 0
+          },
+          {
+            "file": "rpg-2-star-ocean-the-second_nyc-city-hall-park_pixelorama-export_unapproved-v01_20261016-044931-92357bf2(ground-detail) _0001.png",
+            "exact_layer_match": [
+              "ground-detail"
+            ],
+            "semi_alpha": 0
+          },
+          {
+            "file": "rpg-2-star-ocean-the-second_nyc-city-hall-park_pixelorama-export_unapproved-v01_20261016-044931-92357bf2(lamps-n-ysort) _0001.png",
+            "exact_layer_match": [
+              "lamps-n-ysort"
+            ],
+            "semi_alpha": 0
+          },
+          {
+            "file": "rpg-2-star-ocean-the-second_nyc-city-hall-park_pixelorama-export_unapproved-v01_20261016-044931-92357bf2(lamps-s-ysort) _0001.png",
+            "exact_layer_match": [
+              "lamps-s-ysort"
+            ],
+            "semi_alpha": 0
+          },
+          {
+            "file": "rpg-2-star-ocean-the-second_nyc-city-hall-park_pixelorama-export_unapproved-v01_20261016-044931-92357bf2(north-groves) _0001.png",
+            "exact_layer_match": [
+              "north-groves"
+            ],
+            "semi_alpha": 0
+          },
+          {
+            "file": "rpg-2-star-ocean-the-second_nyc-city-hall-park_pixelorama-export_unapproved-v01_20261016-044931-92357bf2(park-ground) _0001.png",
+            "exact_layer_match": [
+              "park-ground"
+            ],
+            "semi_alpha": 0
+          },
+          {
+            "file": "rpg-2-star-ocean-the-second_nyc-city-hall-park_pixelorama-export_unapproved-v01_20261016-044931-92357bf2(props-low) _0001.png",
+            "exact_layer_match": [
+              "props-low"
+            ],
+            "semi_alpha": 0
+          },
+          {
+            "file": "rpg-2-star-ocean-the-second_nyc-city-hall-park_pixelorama-export_unapproved-v01_20261016-044931-92357bf2(statue-ysort) _0001.png",
+            "exact_layer_match": [
+              "statue-ysort"
+            ],
+            "semi_alpha": 0
+          },
+          {
+            "file": "rpg-2-star-ocean-the-second_nyc-city-hall-park_pixelorama-export_unapproved-v01_20261016-044931-92357bf2(streets) _0001.png",
+            "exact_layer_match": [
+              "streets"
+            ],
+            "semi_alpha": 0
+          },
+          {
+            "file": "rpg-2-star-ocean-the-second_nyc-city-hall-park_pixelorama-export_unapproved-v01_20261016-044931-92357bf2(tree-nw-ysort) _0001.png",
+            "exact_layer_match": [
+              "tree-nw-ysort"
+            ],
+            "semi_alpha": 0
+          },
+          {
+            "file": "rpg-2-star-ocean-the-second_nyc-city-hall-park_pixelorama-export_unapproved-v01_20261016-044931-92357bf2(tree-se-ysort) _0001.png",
+            "exact_layer_match": [
+              "tree-se-ysort"
+            ],
+            "semi_alpha": 0
+          },
+          {
+            "file": "rpg-2-star-ocean-the-second_nyc-city-hall-park_pixelorama-export_unapproved-v01_20261016-044931-92357bf2(trees-ne-ysort) _0001.png",
+            "exact_layer_match": [
+              "trees-ne-ysort"
+            ],
+            "semi_alpha": 0
+          }
+        ],
+        "art_layers_all_exact": true,
+        "guides_exported": false,
+        "split_composite_equals_flat": true
+      },
+      "ora_flat": {
+        "args": [
+          "--export",
+          "-o",
+          "f.png",
+          "src.ora"
+        ],
+        "exit_code": 0,
+        "seconds": 4.0,
+        "killed_by_guard": false,
+        "fake_user_dir_created": true,
+        "real_dir_changed_except_running": [],
+        "real_running_marker_present_after": true,
+        "output_tail": [
+          "   at: ensure_control_visible (scene/gui/scroll_container.cpp:366)",
+          "WARNING: 172 ObjectDB instances were leaked at exit (run with `--verbose` for details).",
+          "   at: cleanup (core/object/object.cpp:2536)",
+          "ERROR: 16 resources still in use at exit (run with --verbose for details).",
+          "   at: clear (core/io/resource.cpp:822)"
+        ],
+        "pngs": [
+          "src.png"
+        ],
+        "source_copy_unchanged": true,
+        "png_sha256": "35a9c95dac64f6690fc920ebd4e8bb2a1aa3539cf9fbff41ba2e0a12653842b7",
+        "flat_equals_expected": true,
+        "differing_texels": 0
+      },
+      "ora_split": {
+        "args": [
+          "--export",
+          "--split-layers",
+          "-o",
+          "f.png",
+          "src.ora"
+        ],
+        "exit_code": 0,
+        "seconds": 4.2,
+        "killed_by_guard": false,
+        "fake_user_dir_created": true,
+        "real_dir_changed_except_running": [],
+        "real_running_marker_present_after": true,
+        "output_tail": [
+          "   at: ensure_control_visible (scene/gui/scroll_container.cpp:366)",
+          "WARNING: 172 ObjectDB instances were leaked at exit (run with `--verbose` for details).",
+          "   at: cleanup (core/object/object.cpp:2536)",
+          "ERROR: 16 resources still in use at exit (run with --verbose for details).",
+          "   at: clear (core/io/resource.cpp:822)"
+        ],
+        "pngs": [
+          "src(cast-shadows) _0001.png",
+          "src(city-hall) _0001.png",
+          "src(fg-occlusion) _0001.png",
+          "src(forecourt-flank) _0001.png",
+          "src(fountain-basin) _0001.png",
+          "src(fountain-ysort) _0001.png",
+          "src(ground-detail) _0001.png",
+          "src(lamps-n-ysort) _0001.png",
+          "src(lamps-s-ysort) _0001.png",
+          "src(north-groves) _0001.png",
+          "src(park-ground) _0001.png",
+          "src(props-low) _0001.png",
+          "src(statue-ysort) _0001.png",
+          "src(streets) _0001.png",
+          "src(tree-nw-ysort) _0001.png",
+          "src(tree-se-ysort) _0001.png",
+          "src(trees-ne-ysort) _0001.png"
+        ],
+        "source_copy_unchanged": true,
+        "split": [
+          {
+            "file": "src(cast-shadows) _0001.png",
+            "exact_layer_match": [
+              "cast-shadows"
+            ],
+            "semi_alpha": 0
+          },
+          {
+            "file": "src(city-hall) _0001.png",
+            "exact_layer_match": [
+              "city-hall"
+            ],
+            "semi_alpha": 0
+          },
+          {
+            "file": "src(fg-occlusion) _0001.png",
+            "exact_layer_match": [
+              "fg-occlusion"
+            ],
+            "semi_alpha": 0
+          },
+          {
+            "file": "src(forecourt-flank) _0001.png",
+            "exact_layer_match": [
+              "forecourt-flank"
+            ],
+            "semi_alpha": 0
+          },
+          {
+            "file": "src(fountain-basin) _0001.png",
+            "exact_layer_match": [
+              "fountain-basin"
+            ],
+            "semi_alpha": 0
+          },
+          {
+            "file": "src(fountain-ysort) _0001.png",
+            "exact_layer_match": [
+              "fountain-ysort"
+            ],
+            "semi_alpha": 0
+          },
+          {
+            "file": "src(ground-detail) _0001.png",
+            "exact_layer_match": [
+              "ground-detail"
+            ],
+            "semi_alpha": 0
+          },
+          {
+            "file": "src(lamps-n-ysort) _0001.png",
+            "exact_layer_match": [
+              "lamps-n-ysort"
+            ],
+            "semi_alpha": 0
+          },
+          {
+            "file": "src(lamps-s-ysort) _0001.png",
+            "exact_layer_match": [
+              "lamps-s-ysort"
+            ],
+            "semi_alpha": 0
+          },
+          {
+            "file": "src(north-groves) _0001.png",
+            "exact_layer_match": [
+              "north-groves"
+            ],
+            "semi_alpha": 0
+          },
+          {
+            "file": "src(park-ground) _0001.png",
+            "exact_layer_match": [
+              "park-ground"
+            ],
+            "semi_alpha": 0
+          },
+          {
+            "file": "src(props-low) _0001.png",
+            "exact_layer_match": [
+              "props-low"
+            ],
+            "semi_alpha": 0
+          },
+          {
+            "file": "src(statue-ysort) _0001.png",
+            "exact_layer_match": [
+              "statue-ysort"
+            ],
+            "semi_alpha": 0
+          },
+          {
+            "file": "src(streets) _0001.png",
+            "exact_layer_match": [
+              "streets"
+            ],
+            "semi_alpha": 0
+          },
+          {
+            "file": "src(tree-nw-ysort) _0001.png",
+            "exact_layer_match": [
+              "tree-nw-ysort"
+            ],
+            "semi_alpha": 0
+          },
+          {
+            "file": "src(tree-se-ysort) _0001.png",
+            "exact_layer_match": [
+              "tree-se-ysort"
+            ],
+            "semi_alpha": 0
+          },
+          {
+            "file": "src(trees-ne-ysort) _0001.png",
+            "exact_layer_match": [
+              "trees-ne-ysort"
+            ],
+            "semi_alpha": 0
+          }
+        ],
+        "art_layers_all_exact": true,
+        "guides_exported": false,
+        "split_composite_equals_flat": true
+      }
+    },
+    "pxo_flat_runs_identical": true,
+    "verdicts": {
+      "pixelorama_isolation_held": true,
+      "pixelorama_pxo_flat_exact": true,
+      "pixelorama_pxo_flat_deterministic": true,
+      "pixelorama_pxo_split_layers_exact": true,
+      "pixelorama_pxo_split_composite_equals_flat": true,
+      "pixelorama_ora_flat_exact": true,
+      "pixelorama_ora_split_layers_exact": true,
+      "pixelorama_sources_unchanged": true,
+      "pixelorama_split_does_not_export_hidden_guides": true
+    }
+  },
+  "godot": {
+    "godot": "work/tooling/godot-4-7-2/Godot_v4.7.2-stable_win64_console.exe",
+    "godot_sha256": "c8f0a6bc45a19b33541501e57f6f7cd972ab18453743266339d495cbbe846643",
+    "texel_gate": {
+      "exit_code": 0,
+      "printed_done": true,
+      "layers_exact": {
+        "north-groves": true,
+        "streets": true,
+        "city-hall": true,
+        "forecourt-flank": true,
+        "park-ground": true,
+        "ground-detail": true,
+        "fountain-basin": true,
+        "cast-shadows": true,
+        "props-low": true,
+        "tree-nw-ysort": true,
+        "lamps-n-ysort": true,
+        "trees-ne-ysort": true,
+        "statue-ysort": true,
+        "fountain-ysort": true,
+        "lamps-s-ysort": true,
+        "tree-se-ysort": true,
+        "fg-occlusion": true
+      },
+      "stills_compared": 269,
+      "stills_mismatched": [],
+      "route_points": 1525,
+      "route_blocked_on_exported_mask": 0,
+      "route_jumps_over_1px": 0,
+      "heroine_h": 48
+    },
+    "render_gate": {
+      "exit_code": 0,
+      "printed_done": true,
+      "window_size": [
+        1280,
+        720
+      ],
+      "captures": {
+        "axis": {
+          "foot": [
+            320,
+            292
+          ],
+          "size": [
+            1280,
+            720
+          ],
+          "equals_python_2x_stack": true,
+          "differing_pixels": 0
+        },
+        "behind-fountain": {
+          "foot": [
+            172,
+            236
+          ],
+          "size": [
+            1280,
+            720
+          ],
+          "equals_python_2x_stack": true,
+          "differing_pixels": 0
+        },
+        "behind-tree": {
+          "foot": [
+            410,
+            274
+          ],
+          "size": [
+            1280,
+            720
+          ],
+          "equals_python_2x_stack": true,
+          "differing_pixels": 0
+        }
+      },
+      "godot_wrote_nothing_outside_temp": true
+    },
+    "verdicts": {
+      "godot_loads_layers_exact": true,
+      "godot_route_walkable_on_exported_mask": true,
+      "godot_route_stills_match_ysort_and_occlusion": true,
+      "godot_heroine_48_px": true,
+      "godot_render_1280x720": true,
+      "godot_render_equals_python_2x": true,
+      "godot_wrote_nothing_outside_temp": true
+    }
+  },
+  "result": "PASS",
+  "note": "Technical gates only. Passing them does not make the art accepted; acceptance is creator review."
+}
