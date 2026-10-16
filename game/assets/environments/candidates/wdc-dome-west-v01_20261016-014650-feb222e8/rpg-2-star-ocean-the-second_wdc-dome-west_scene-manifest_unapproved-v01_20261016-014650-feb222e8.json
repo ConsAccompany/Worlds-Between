@@ -1,0 +1,733 @@
+{
+  "project": "rpg-2-star-ocean-the-second",
+  "area": "washington-capitol-dome-west-establishing",
+  "run": "wdc-dome-west-v01_20261016-014650-feb222e8",
+  "version": "v01",
+  "status": "UNAPPROVED test-only establishing-composition candidate. Not accepted art, not runtime-integrated. Acceptance is creator review only; science scene art stays 0/11.",
+  "art_approved": false,
+  "runtime_integrated": false,
+  "counters_changed": false,
+  "relation_to_v04": "separate composition; v04 (wdc-capitol-west-v04_20261016-004457-a17af0a6) is read-only and re-hashed by `check`",
+  "authoring_route": {
+    "method": "deterministic Python tool with hand-written placement tables, authored and run by Claude (Claude Code, claude.ai Max subscription, firstParty; no API key, no image model); writes a native pxo_version 7 .pxo and an .ora with 15 named layers",
+    "pixelorama_gui_paint_pass": false,
+    "disclosure": "no desktop/computer-use access to the Pixelorama GUI in this session: hand-authored pixels -> .pxo/.ora -> Pixelorama 1.2.3 headless export, compared texel by texel",
+    "resumed_from": "partial tool written by the session held at the Claude Max limit (same run id); never built before; finished and fixed in the resumed session",
+    "no_reference_pixels_copied": true
+  },
+  "references": {
+    "aoc_pages_text_only": {
+      "dome": "https://www.aoc.gov/explore-capitol-campus/buildings-grounds/capitol-building/capitol-dome",
+      "olmsted_terrace": "https://www.aoc.gov/explore-capitol-campus/buildings-grounds/capitol-grounds/olmsted-terrace"
+    },
+    "v04_codex_audit": "docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west-v04-codex-visual-audit_unapproved-v01_20261016-013712-a9d83f26.md"
+  },
+  "canvas": {
+    "w": 1280,
+    "h": 720,
+    "camera": "top-down 3/4; top = east (Capitol), bottom = west",
+    "gameplay_camera": "640x360 logical viewport (window 1280x720, integer 2x)",
+    "scale_reference": {
+      "file": "game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v8-cloth-leather-candidate_m8-v08_20261015-021600-157a5ea0.png",
+      "logical_height_px": 48
+    },
+    "forced_perspective": "backdrop rows 0..213 at ~1.55 px/m (Capitol, terrace, lawn, drained pool); walkable foreground rows 218..719 at heroine scale"
+  },
+  "layers_bottom_to_top": [
+    {
+      "index": 1,
+      "name": "sky",
+      "visible": true,
+      "locked": false,
+      "runtime_export": "merged into base",
+      "opaque_texels": 921600
+    },
+    {
+      "index": 2,
+      "name": "dome",
+      "visible": true,
+      "locked": false,
+      "runtime_export": "merged into base",
+      "opaque_texels": 4080
+    },
+    {
+      "index": 3,
+      "name": "west-front",
+      "visible": true,
+      "locked": false,
+      "runtime_export": "merged into base",
+      "opaque_texels": 13729
+    },
+    {
+      "index": 4,
+      "name": "olmsted-terrace",
+      "visible": true,
+      "locked": false,
+      "runtime_export": "merged into base",
+      "opaque_texels": 8766
+    },
+    {
+      "index": 5,
+      "name": "arch-ruin-survey",
+      "visible": true,
+      "locked": false,
+      "runtime_export": "merged into base",
+      "opaque_texels": 1427
+    },
+    {
+      "index": 6,
+      "name": "far-lawn-basin",
+      "visible": true,
+      "locked": false,
+      "runtime_export": "merged into base",
+      "opaque_texels": 47486
+    },
+    {
+      "index": 7,
+      "name": "groves",
+      "visible": true,
+      "locked": false,
+      "runtime_export": "merged into base",
+      "opaque_texels": 45187
+    },
+    {
+      "index": 8,
+      "name": "plaza-ground",
+      "visible": true,
+      "locked": false,
+      "runtime_export": "merged into base",
+      "opaque_texels": 647680
+    },
+    {
+      "index": 9,
+      "name": "ground-detail",
+      "visible": true,
+      "locked": false,
+      "runtime_export": "merged into base",
+      "opaque_texels": 6933
+    },
+    {
+      "index": 10,
+      "name": "cast-shadows",
+      "visible": true,
+      "locked": false,
+      "runtime_export": "merged into base",
+      "opaque_texels": 14864
+    },
+    {
+      "index": 11,
+      "name": "props-low",
+      "visible": true,
+      "locked": false,
+      "runtime_export": "merged into base",
+      "opaque_texels": 32262
+    },
+    {
+      "index": 12,
+      "name": "survey-tripod-ysort",
+      "visible": true,
+      "locked": false,
+      "runtime_export": "separate Y-sorted sprite, pivot row 232",
+      "opaque_texels": 266
+    },
+    {
+      "index": 13,
+      "name": "survey-mast-ysort",
+      "visible": true,
+      "locked": false,
+      "runtime_export": "separate Y-sorted sprite, pivot row 248",
+      "opaque_texels": 357
+    },
+    {
+      "index": 14,
+      "name": "fg-occlusion",
+      "visible": true,
+      "locked": false,
+      "runtime_export": "overlay above actors",
+      "opaque_texels": 141246
+    },
+    {
+      "index": 15,
+      "name": "guides",
+      "visible": false,
+      "locked": true,
+      "runtime_export": "never exported",
+      "opaque_texels": 23999
+    }
+  ],
+  "palette": [
+    {
+      "name": "ink",
+      "hex": "#1a1c22"
+    },
+    {
+      "name": "g0",
+      "hex": "#1f3324"
+    },
+    {
+      "name": "g1",
+      "hex": "#2c4a2c"
+    },
+    {
+      "name": "g2",
+      "hex": "#3d6234"
+    },
+    {
+      "name": "g3",
+      "hex": "#557a3c"
+    },
+    {
+      "name": "g4",
+      "hex": "#6f9145"
+    },
+    {
+      "name": "g5",
+      "hex": "#93ad55"
+    },
+    {
+      "name": "g6",
+      "hex": "#b9c26c"
+    },
+    {
+      "name": "g7",
+      "hex": "#d3d98a"
+    },
+    {
+      "name": "d0",
+      "hex": "#7f7c45"
+    },
+    {
+      "name": "d1",
+      "hex": "#a99a5e"
+    },
+    {
+      "name": "f0",
+      "hex": "#16262a"
+    },
+    {
+      "name": "f1",
+      "hex": "#223d3a"
+    },
+    {
+      "name": "f2",
+      "hex": "#2f5644"
+    },
+    {
+      "name": "e2",
+      "hex": "#2a5a52"
+    },
+    {
+      "name": "e3",
+      "hex": "#40806c"
+    },
+    {
+      "name": "e4",
+      "hex": "#6aa58a"
+    },
+    {
+      "name": "s0",
+      "hex": "#3a2c22"
+    },
+    {
+      "name": "s1",
+      "hex": "#5a4430"
+    },
+    {
+      "name": "s2",
+      "hex": "#7d6345"
+    },
+    {
+      "name": "s3",
+      "hex": "#a08458"
+    },
+    {
+      "name": "s4",
+      "hex": "#c6aa76"
+    },
+    {
+      "name": "m0",
+      "hex": "#4a4c58"
+    },
+    {
+      "name": "m1",
+      "hex": "#6e6f78"
+    },
+    {
+      "name": "m2",
+      "hex": "#93918f"
+    },
+    {
+      "name": "m3",
+      "hex": "#b8b3a8"
+    },
+    {
+      "name": "m4",
+      "hex": "#d6d0c2"
+    },
+    {
+      "name": "m5",
+      "hex": "#ece6d6"
+    },
+    {
+      "name": "p0",
+      "hex": "#6b5f52"
+    },
+    {
+      "name": "p1",
+      "hex": "#8d7f6c"
+    },
+    {
+      "name": "p2",
+      "hex": "#ab9d86"
+    },
+    {
+      "name": "p3",
+      "hex": "#c6b99e"
+    },
+    {
+      "name": "k0",
+      "hex": "#232a36"
+    },
+    {
+      "name": "k1",
+      "hex": "#3a4656"
+    },
+    {
+      "name": "k2",
+      "hex": "#5a6a7c"
+    },
+    {
+      "name": "k3",
+      "hex": "#8d9cab"
+    },
+    {
+      "name": "c0",
+      "hex": "#1f6f78"
+    },
+    {
+      "name": "c1",
+      "hex": "#49c6cf"
+    },
+    {
+      "name": "c2",
+      "hex": "#b4f4f0"
+    },
+    {
+      "name": "o0",
+      "hex": "#a34a1e"
+    },
+    {
+      "name": "o1",
+      "hex": "#e07a2e"
+    },
+    {
+      "name": "o2",
+      "hex": "#f4b860"
+    },
+    {
+      "name": "fl",
+      "hex": "#c79ad0"
+    },
+    {
+      "name": "bl",
+      "hex": "#eda7b6"
+    },
+    {
+      "name": "y0",
+      "hex": "#e8cf58"
+    },
+    {
+      "name": "r0",
+      "hex": "#9a3b34"
+    },
+    {
+      "name": "n0",
+      "hex": "#2e3f66"
+    },
+    {
+      "name": "sk0",
+      "hex": "#6b8092"
+    },
+    {
+      "name": "sk1",
+      "hex": "#8b9fae"
+    },
+    {
+      "name": "sk2",
+      "hex": "#aab8c0"
+    },
+    {
+      "name": "sk3",
+      "hex": "#c9d0cd"
+    },
+    {
+      "name": "cl0",
+      "hex": "#e4e2d8"
+    },
+    {
+      "name": "cl1",
+      "hex": "#b9c1c2"
+    },
+    {
+      "name": "hz0",
+      "hex": "#5d6670"
+    },
+    {
+      "name": "hz1",
+      "hex": "#7d868e"
+    },
+    {
+      "name": "hz2",
+      "hex": "#9da3a5"
+    },
+    {
+      "name": "hz3",
+      "hex": "#bdbdb5"
+    },
+    {
+      "name": "vg0",
+      "hex": "#34493f"
+    },
+    {
+      "name": "vg1",
+      "hex": "#4b6151"
+    },
+    {
+      "name": "vg2",
+      "hex": "#677b63"
+    },
+    {
+      "name": "vg3",
+      "hex": "#879474"
+    },
+    {
+      "name": "vg4",
+      "hex": "#a7ad8a"
+    }
+  ],
+  "guide_palette": [
+    {
+      "name": "gd-walk",
+      "hex": "#3cdcff"
+    },
+    {
+      "name": "gd-block",
+      "hex": "#ff285a"
+    },
+    {
+      "name": "gd-pin",
+      "hex": "#ffe600"
+    },
+    {
+      "name": "gd-tick",
+      "hex": "#ffffff"
+    },
+    {
+      "name": "gd-route",
+      "hex": "#ff78ff"
+    }
+  ],
+  "pins": {
+    "spawn_entry_steps": [
+      640,
+      712
+    ],
+    "vista_axis_coping": [
+      640,
+      220
+    ],
+    "tripod_behind": [
+      548,
+      223
+    ],
+    "tripod_front": [
+      548,
+      244
+    ],
+    "mast_behind": [
+      906,
+      236
+    ],
+    "mast_front": [
+      906,
+      262
+    ],
+    "exit_north_pool_walk": [
+      318,
+      222
+    ],
+    "exit_south_pool_walk": [
+      961,
+      222
+    ],
+    "camp_tent": [
+      430,
+      512
+    ],
+    "meadow_sapling": [
+      880,
+      470
+    ],
+    "canopy_left_edge": [
+      206,
+      236
+    ]
+  },
+  "godot_views": {
+    "establishing_1280x720": "vista_axis_coping",
+    "cam640x360_vista-axis": "vista_axis_coping",
+    "cam640x360_tripod-behind": "tripod_behind"
+  },
+  "static_checks": {
+    "verdicts": {
+      "canvas_1280x720_all_layers": true,
+      "base_layer_opaque": true,
+      "binary_alpha_all_layers": true,
+      "art_layers_palette_only": true,
+      "flat_colours_subset_of_palette": true,
+      "flat_opaque": true,
+      "drained_pool_no_water_or_sky_texels": true,
+      "vista_view_whole_dome_with_8px_sky_margin": true,
+      "tripod_view_whole_dome_inside": true,
+      "dome_silhouette_symmetric": true,
+      "heroine_48_logical_px": true,
+      "every_walkable_foot_keeps_one_third_visible": true,
+      "depth_audit_zero_wrong_order_feet": true,
+      "walkable_never_in_backdrop": true,
+      "ysort_behind_front_correct": true,
+      "all_pins_reachable_from_entry": true,
+      "no_isolated_bright_flecks_in_walkable_foreground": true,
+      "pins_on_walkable_texels": true
+    },
+    "dome": {
+      "dome_bbox": [
+        605,
+        24,
+        674,
+        121
+      ],
+      "statue_tip_row": 24,
+      "silhouette_rows_asymmetric_over_1px": [],
+      "peristyle_width_px": 60,
+      "west_front_width_px": 354,
+      "dome_to_front_width_ratio": 0.169,
+      "dome_height_above_roof_px": 95
+    },
+    "views": {
+      "vista-axis": {
+        "foot": [
+          640,
+          220
+        ],
+        "camera_xy": [
+          320,
+          16
+        ],
+        "statue_tip_margin_rows": 8,
+        "dome_fully_inside": true
+      },
+      "tripod-behind": {
+        "foot": [
+          548,
+          223
+        ],
+        "camera_xy": [
+          228,
+          19
+        ],
+        "statue_tip_margin_rows": 5,
+        "dome_fully_inside": true
+      }
+    },
+    "visibility_worst": 0.599,
+    "visibility_fail_count": 0,
+    "depth_audit": {
+      "tent-a": {
+        "overlapping_walkable_feet": 4254,
+        "wrong_order_feet": 0,
+        "base_row": 496
+      },
+      "tent-b": {
+        "overlapping_walkable_feet": 3830,
+        "wrong_order_feet": 0,
+        "base_row": 430
+      },
+      "rover": {
+        "overlapping_walkable_feet": 4757,
+        "wrong_order_feet": 0,
+        "base_row": 600
+      },
+      "generator": {
+        "overlapping_walkable_feet": 2372,
+        "wrong_order_feet": 0,
+        "base_row": 452
+      },
+      "survey-table": {
+        "overlapping_walkable_feet": 1369,
+        "wrong_order_feet": 0,
+        "base_row": 520
+      },
+      "light-mast": {
+        "overlapping_walkable_feet": 981,
+        "wrong_order_feet": 0,
+        "base_row": 392
+      },
+      "crate-0": {
+        "overlapping_walkable_feet": 1736,
+        "wrong_order_feet": 0,
+        "base_row": 560
+      },
+      "crate-1": {
+        "overlapping_walkable_feet": 1844,
+        "wrong_order_feet": 0,
+        "base_row": 566
+      },
+      "crate-2": {
+        "overlapping_walkable_feet": 1121,
+        "wrong_order_feet": 0,
+        "base_row": 548
+      },
+      "crate-3": {
+        "overlapping_walkable_feet": 1844,
+        "wrong_order_feet": 0,
+        "base_row": 548
+      },
+      "lamp-0": {
+        "overlapping_walkable_feet": 1325,
+        "wrong_order_feet": 0,
+        "base_row": 430
+      },
+      "lamp-1": {
+        "overlapping_walkable_feet": 1324,
+        "wrong_order_feet": 0,
+        "base_row": 430
+      },
+      "lamp-2": {
+        "overlapping_walkable_feet": 1325,
+        "wrong_order_feet": 0,
+        "base_row": 650
+      },
+      "bench-broken": {
+        "overlapping_walkable_feet": 2610,
+        "wrong_order_feet": 0,
+        "base_row": 660
+      },
+      "young-tree-0": {
+        "overlapping_walkable_feet": 989,
+        "wrong_order_feet": 0,
+        "base_row": 440
+      },
+      "young-tree-1": {
+        "overlapping_walkable_feet": 989,
+        "wrong_order_feet": 0,
+        "base_row": 560
+      },
+      "young-tree-2": {
+        "overlapping_walkable_feet": 1095,
+        "wrong_order_feet": 0,
+        "base_row": 628
+      },
+      "young-tree-3": {
+        "overlapping_walkable_feet": 1025,
+        "wrong_order_feet": 0,
+        "base_row": 352
+      },
+      "tree-trunk-0": {
+        "overlapping_walkable_feet": 0,
+        "wrong_order_feet": 0,
+        "base_row": 452
+      },
+      "tree-trunk-1": {
+        "overlapping_walkable_feet": 0,
+        "wrong_order_feet": 0,
+        "base_row": 480
+      },
+      "snag-fg": {
+        "overlapping_walkable_feet": 745,
+        "wrong_order_feet": 0,
+        "base_row": 690
+      }
+    },
+    "ysort_cases": {
+      "tripod_behind": {
+        "overlap_texels": 185,
+        "sprite_on_top_texels": 185,
+        "ok": true,
+        "walkable": true
+      },
+      "tripod_front": {
+        "overlap_texels": 114,
+        "sprite_on_top_texels": 0,
+        "ok": true,
+        "walkable": true
+      },
+      "mast_behind": {
+        "overlap_texels": 138,
+        "sprite_on_top_texels": 138,
+        "ok": true,
+        "walkable": true
+      },
+      "mast_front": {
+        "overlap_texels": 146,
+        "sprite_on_top_texels": 0,
+        "ok": true,
+        "walkable": true
+      }
+    },
+    "pins_reachable": {
+      "spawn_entry_steps": true,
+      "vista_axis_coping": true,
+      "tripod_behind": true,
+      "tripod_front": true,
+      "mast_behind": true,
+      "mast_front": true,
+      "exit_north_pool_walk": true,
+      "exit_south_pool_walk": true,
+      "camp_tent": true,
+      "meadow_sapling": true,
+      "canopy_left_edge": true
+    },
+    "isolated_bright_flecks": {
+      "foreground_rows_214_719": 0,
+      "foreground_examples": [],
+      "backdrop_rows_0_213": 17
+    },
+    "palette": {
+      "art_colours": 62,
+      "new_colours": [
+        "sk0",
+        "sk1",
+        "sk2",
+        "sk3",
+        "cl0",
+        "cl1",
+        "hz0",
+        "hz1",
+        "hz2",
+        "hz3",
+        "vg0",
+        "vg1",
+        "vg2",
+        "vg3",
+        "vg4"
+      ],
+      "used_in_flat": 55
+    },
+    "walkable_texels": 400829,
+    "despeckled_ground_texels": 11
+  },
+  "files_sha256_bytes": {
+    "rpg-2-star-ocean-the-second_wdc-dome-west_scene-editable-15layer_unapproved-v01_20261016-014650-feb222e8.pxo": "6ab72bda203d0a684f694f0005164f3256f9c60df6a857103d52f5ae1ec5d048",
+    "rpg-2-star-ocean-the-second_wdc-dome-west_scene-editable-15layer_unapproved-v01_20261016-014650-feb222e8.ora": "bcd2d59582ee5a7ec91496b3d3b127367bf1d8522ce9890b3b54342403fa2c70",
+    "rpg-2-star-ocean-the-second_wdc-dome-west_scene-palette_unapproved-v01_20261016-014650-feb222e8.gpl": "2f41a9f24fa52daef5428309d8d1f3a93e5303126934463f747912441d6ddc6b",
+    "rpg-2-star-ocean-the-second_wdc-dome-west_scene-flat-art_unapproved-v01_20261016-014650-feb222e8.png": "819ff113f404d806441ff43bf5a95270c7f9f6acca153d5a03c8e10b94909902",
+    "rpg-2-star-ocean-the-second_wdc-dome-west_scene-walkability_unapproved-v01_20261016-014650-feb222e8.json": "78a37d9aaa1324df9224f845ce9887c76f4431dade1ce6b0781f624a67ad0933"
+  },
+  "tool": {
+    "file": "tools/rpg-2-star-ocean-the-second_wdc-capitol-dome-west_establishing-scene-candidate_pixelorama-build_unapproved-v01_20261016-014650-feb222e8.py",
+    "sha256_text_lf_v1": "9aef71e82486a9c062f1d8057a18fe7f4484e9ad5353d61efa09a307de692ce6",
+    "python": "3.12.14",
+    "pillow": "12.3.0",
+    "numpy": "2.3.5"
+  }
+}
