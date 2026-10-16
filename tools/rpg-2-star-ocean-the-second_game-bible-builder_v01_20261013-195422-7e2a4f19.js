@@ -290,13 +290,26 @@ function checkCanon(bible) {
   check(bible.openQuestions.some(question => question.title.includes('待按新规则重设计')) && !bible.openQuestions.some(question => /地理锚点|首城|开始年份/.test(question.title)), 'open questions: skill redesign open, resolved geography questions gone');
   check(bible.environmentVisualReview.sceneQualityAccepted === 0 && bible.environmentVisualReview.sceneQualityTarget === 11 && bible.environmentVisualReview.artAccepted === false, 'scene visuals 0/11, art not accepted');
   check(bible.characterVisualReview.runtimeSpritesAccepted === 0 && bible.characterVisualReview.artAccepted === false, 'runtime sprites accepted 0');
-  // Washington, D.C.: unapproved Pixelorama candidates exist (walkable v01-v05, separate cinematic v01-v02); none is wired or accepted.
+  // Washington, D.C.: unapproved Pixelorama candidates exist (walkable v01-v06, separate cinematic v01-v02); none is wired or accepted.
   const dc = bible.environmentVisualReview.washingtonDC;
   const dcCandidates = dc?.unapprovedCandidates;
   const artRoute = bible.openQuestions.find(question => question.title === 'MVP 美术技术路线')?.detail || '';
-  check(dcCandidates && same(dcCandidates.walkable, ['v01', 'v02', 'v03', 'v04', 'v05']) && same(dcCandidates.cinematic, ['v01', 'v02']) &&
+  check(dcCandidates && same(dcCandidates.walkable, ['v01', 'v02', 'v03', 'v04', 'v05', 'v06']) && same(dcCandidates.cinematic, ['v01', 'v02']) &&
     dcCandidates.runtimeIntegrated === false && dcCandidates.artAccepted === false && dc.runtimeIntegrated === false && dc.artAccepted === false &&
-    has(artRoute, ['未批准候选', 'v01–v05', 'v01–v02', '未接入运行时、未验收']) && !artRoute.includes('尚未制作'), 'Washington Pixelorama: unapproved walkable v01-v05 and cinematic v01-v02 candidates, none in the runtime or accepted');
+    dc.highPrecisionPixelSceneAuthored === false && has(dcCandidates.status, ['v01–v06', 'v01–v02']) && !dcCandidates.status.includes('v01–v05') &&
+    has(artRoute, ['未批准候选', 'v01–v06', 'v01–v02', '未接入运行时、未验收']) && !artRoute.includes('v01–v05') && !artRoute.includes('尚未制作'), 'Washington Pixelorama: unapproved walkable v01-v06 and cinematic v01-v02 candidates, none in the runtime or accepted');
+  // v06 (run 18b9cea3): technical 47/47 after the integration erratum (the QA note's 48/48 was a miscount); no scene approval.
+  const v06 = dcCandidates?.latestWalkable;
+  check(v06 && v06.version === 'v06' && v06.runId === '18b9cea3' && v06.status === 'UNAPPROVED / NONRUNTIME' && v06.technicalGates === '47/47' &&
+    v06.runtimeIntegrated === false && v06.artAccepted === false && v06.sceneApproved === false && has(v06.technicalGatesNote, ['47/47', '48/48', '不是画面验收']) &&
+    has(artRoute, ['v06', '47/47', '不是场景验收']) && [v06.qa, v06.codexVisualAudit].every(file => file && dcCandidates.evidence.includes(file) && fs.existsSync(path.join(root, file))) &&
+    /_walkable-scale-depth_qa-note_unapproved-v06_20261016-071733-18b9cea3\.md$/.test(v06.qa) && /_walkable-v06-codex-visual-audit_unapproved-v01_20261016-134646-35af3a0d\.md$/.test(v06.codexVisualAudit),
+    'Washington walkable v06: UNAPPROVED / NONRUNTIME, technical 47/47 after erratum, QA note and Codex audit linked, no scene approval');
+  // M2 door-to-door route figures: research draft (m2-v08) and audit supplement (m2-v08a) are cited only; nothing is implemented.
+  const routeEvidence = bible.environmentVisualReview.runtimeGeographyMap?.routeFigureEvidence;
+  check(routeEvidence && routeEvidence.status === 'research-only' && routeEvidence.doorToDoorImplemented === false && routeEvidence.evidence.length === 2 &&
+    routeEvidence.evidence.every(file => fs.existsSync(path.join(root, file))) && has(routeEvidence.zh, ['尚未写入运行时', '9/12']) && has(routeEvidence.en, ['nothing is implemented', '9/12']),
+    'M2 route-figure evidence cited as research only: door-to-door not implemented, M2 stays 9/12');
   return passed;
 }
 

@@ -4,7 +4,7 @@
   "title": "世界之间",
   "englishTitle": "Worlds Between",
   "edition": "设计基线 v0.2 · 2026-10-15 创作者决定",
-  "updatedAt": "2026-10-16T07:45:34.000Z",
+  "updatedAt": "2026-10-16T14:51:18.192Z",
   "note": "规则以玩家确认的设计稿为基线，并已并入 2026-10-15 创作者决定；人物姓名与外观是待审提案，具体剧情留待后续设计。",
   "pitch": "从地下社区走出的旅人，以好奇心探索多元文明，招募伙伴，并成为不同世界认知差异的桥梁。",
   "pillars": [
@@ -3937,7 +3937,7 @@
     },
     {
       "title": "MVP 美术技术路线",
-      "detail": "目标是完成画面的品质。先用 Godot 2D 分层完成科技城市场景样板，再根据实际游戏画面决定是否需要 2.5D 场景技术。 华盛顿特区已定为高精度 Pixelorama 场景试点：已有未批准候选（可步行西侧园区 v01–v05、独立的穹顶定场远景 v01–v02），均未接入运行时、未验收；良渚改为未来亚洲／武侠场景，不属于 MVP。"
+      "detail": "目标是完成画面的品质。先用 Godot 2D 分层完成科技城市场景样板，再根据实际游戏画面决定是否需要 2.5D 场景技术。 华盛顿特区已定为高精度 Pixelorama 场景试点：已有未批准候选（可步行西侧园区 v01–v06、独立的穹顶定场远景 v01–v02），均未接入运行时、未验收；最新的可步行 v06 为未批准、非运行时候选，技术检查 47/47 通过（勘误后），不是场景验收；良渚改为未来亚洲／武侠场景，不属于 MVP。"
     },
     {
       "title": "职业与个人技能树（待按新规则重设计）",
@@ -4206,7 +4206,17 @@
         "docs/qa/rpg-2-star-ocean-the-second_global-map-travel_integration-fixes_qa-note_m2-v02_20261015-031824-35247192.md",
         "docs/qa/rpg-2-star-ocean-the-second_us-science-sphere_runtime-migration_qa-note_m2-v02_20261015-175011-364131c8.md"
       ],
-      "note": "Functional placeholder styling (colours, label boxes, roads, markers). Implementation is not visual acceptance."
+      "note": "Functional placeholder styling (colours, label boxes, roads, markers). Implementation is not visual acceptance.",
+      "routeFigureEvidence": {
+        "status": "research-only",
+        "zh": "门到门路线时长：已有公开来源证据与拟议算法草稿（m2-v08）及独立核对补充（m2-v08a），但尚未写入运行时；运行时仍用 v02 旅行数据中的初步估算。M2 路线数据门仍为“仅初步估算”，M2 仍为 9/12。",
+        "en": "Door-to-door route times: a public-source evidence and proposed-calculation draft (m2-v08) and an independent audit supplement (m2-v08a) exist, but nothing is implemented in the runtime; the runtime still uses the preliminary estimates in the v02 travel data. The M2 route-data gate stays estimate-only and M2 stays 9/12.",
+        "doorToDoorImplemented": false,
+        "evidence": [
+          "docs/qa/rpg-2-star-ocean-the-second_m2-door-to-door-route-figures_public-source-evidence-proposed-calculations_qa-note_m2-v08_20261016-112319-834f6532.md",
+          "docs/qa/rpg-2-star-ocean-the-second_m2-door-to-door-route-figures_independent-source-audit_qa-supplement_m2-v08a_20261016-085803-b91a5a30.md"
+        ]
+      }
     },
     "currentMapSatisfiesGeographyRuleNote": "false = full rule acceptance not reached: the runtime geography map and the creator-decided US place set are implemented as technical candidates, but route figures are preliminary estimates, the place and map art are missing or unaccepted, and human review is outstanding.",
     "washingtonDC": {
@@ -4223,21 +4233,38 @@
           "v02",
           "v03",
           "v04",
-          "v05"
+          "v05",
+          "v06"
         ],
         "cinematic": [
           "v01",
           "v02"
         ],
-        "status": "未批准候选：可步行西侧园区 v01–v05 与独立的穹顶定场远景 v01–v02 已制作，均未接入运行时、未验收；highPrecisionPixelSceneAuthored 仍为 false，指尚无可接入或已验收的场景",
+        "status": "未批准候选：可步行西侧园区 v01–v06 与独立的穹顶定场远景 v01–v02 已制作，均未接入运行时、未验收；highPrecisionPixelSceneAuthored 仍为 false，指尚无可接入或已验收的场景",
         "runtimeIntegrated": false,
         "artAccepted": false,
         "evidence": [
           "docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west-v04-codex-visual-audit_unapproved-v01_20261016-013712-a9d83f26.md",
           "docs/qa/rpg-2-star-ocean-the-second_wdc-dome-west_establishing-composition_qa-note_unapproved-v01_20261016-014650-feb222e8.md",
           "docs/qa/rpg-2-star-ocean-the-second_wdc-dome-west_cinematic-vista_qa-note_unapproved-v02_20261016-044903-cdb4ebdb.md",
-          "docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_walkable-v05-codex-visual-audit_unapproved-v01_20261016-064427-00f04ea5.md"
-        ]
+          "docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_walkable-v05-codex-visual-audit_unapproved-v01_20261016-064427-00f04ea5.md",
+          "docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_walkable-scale-depth_qa-note_unapproved-v06_20261016-071733-18b9cea3.md",
+          "docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_walkable-v06-codex-visual-audit_unapproved-v01_20261016-134646-35af3a0d.md"
+        ],
+        "latestWalkable": {
+          "version": "v06",
+          "runId": "18b9cea3",
+          "status": "UNAPPROVED / NONRUNTIME",
+          "technicalGates": "47/47",
+          "technicalGatesNote": "技术检查 47/47 通过（整合复核勘误：原 QA 笔记中的 48/48 为误计，报告与重跑均为 47 项）；技术检查通过不是画面验收",
+          "runtimeIntegrated": false,
+          "artAccepted": false,
+          "sceneApproved": false,
+          "zh": "v06（尺度与纵深候选）：国会大厦与穹顶在 48 px 主角身后更大、更易辨认；Codex 视觉审计认为西草坪被压成窄条、立面与地面纹样重复、巡逻机械缺少落地感，尚未达到所要求的成品环境画质。.pxo 图层由表格生成，未在 Pixelorama 界面中打开保存，不能称为手绘完成的 Pixelorama 场景。",
+          "en": "v06 (scale-depth candidate): the Capitol and dome read larger and more recognizable behind the 48 px heroine; the Codex visual audit finds the West Lawn compressed into a narrow strip, repeated facade and ground patterns, and a patrol machine without ground contact, so it is not yet the requested finished environment quality. The .pxo layers were generated from tables and never opened or saved in the Pixelorama GUI; it is not a completed hand-painted Pixelorama scene.",
+          "qa": "docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_walkable-scale-depth_qa-note_unapproved-v06_20261016-071733-18b9cea3.md",
+          "codexVisualAudit": "docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_walkable-v06-codex-visual-audit_unapproved-v01_20261016-134646-35af3a0d.md"
+        }
       },
       "note": "docs/design/rpg-2-star-ocean-the-second_creator-decisions-2026-10-15_world-skills-ai-endgame_reconciliation-note_v01_20261015-174559-39efc292.md"
     }
