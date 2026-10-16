@@ -236,11 +236,10 @@ const STRINGS := {
 		"travel_duration_hm": "%d小时%d分钟", "travel_duration_h": "%d小时", "travel_duration_m": "%d分钟",
 		"travel_mode_car": "汽车", "travel_mode_air": "飞机", "travel_mode_join": "＋",
 		"travel_route_line": "%s → %s · %s", "travel_via": "经%s",
-		"travel_distance_road": "公路参考里程 %.1f 公里", "travel_distance_air": "航程参考 %.1f 公里",
-		"travel_duration_line": "预计旅时 %s", "travel_arrival_line": "抵达：%s",
-		"travel_estimate_note": "里程与旅时为估算参考值，门到门旅时待核实。",
+		"travel_distance_road": "公路约 %d 公里", "travel_distance_air": "航程约 %d 公里",
+		"travel_duration_line": "旅时 %s", "travel_arrival_line": "抵达：%s",
 		"travel_same_location": "队伍已在此地 · 不消耗时间",
-		"travel_unavailable": "路线待核实 · 暂不可出发",
+		"travel_unavailable": "暂无可用路线 · 不可出发",
 	},
 	"en": {
 		"title": "Worlds Between",
@@ -465,11 +464,10 @@ const STRINGS := {
 		"travel_duration_hm": "%d h %d min", "travel_duration_h": "%d h", "travel_duration_m": "%d min",
 		"travel_mode_car": "Car", "travel_mode_air": "Air", "travel_mode_join": " + ",
 		"travel_route_line": "%s → %s · %s", "travel_via": "via %s",
-		"travel_distance_road": "Road reference distance %.1f km", "travel_distance_air": "Flight reference distance %.1f km",
-		"travel_duration_line": "Estimated travel time %s", "travel_arrival_line": "Arrival: %s",
-		"travel_estimate_note": "Distance and time are estimated references; door-to-door time is not yet verified.",
+		"travel_distance_road": "Road about %d km", "travel_distance_air": "Flight about %d km",
+		"travel_duration_line": "Travel time %s", "travel_arrival_line": "Arrival: %s",
 		"travel_same_location": "Your party is already here · No time passes",
-		"travel_unavailable": "Route pending verification · Not yet available",
+		"travel_unavailable": "No route available yet · Cannot depart",
 	},
 }
 
@@ -712,6 +710,7 @@ func calendar_date_text() -> String:
 	return calendar_date_text_at(calendar_minutes)
 
 
+# Internal clock text (saves, tests, debugging). Player-facing text shows the date only.
 func calendar_time_text_at(total_minutes: int) -> String:
 	var dt := TravelCalendar.from_minutes(total_minutes)
 	return "%02d:%02d" % [dt["hour"], dt["minute"]]
@@ -916,14 +915,13 @@ func travel_preview_lines(preview: Dictionary) -> PackedStringArray:
 			if not via.is_empty():
 				route_line += " · " + text_for("travel_via") % ("、" if language == "zh" else ", ").join(via)
 			lines.append(route_line)
+			# Players see the mode, an approximate distance, the whole-hour trip time and the arrival date only.
 			if preview.get("road_distance_km") != null:
-				lines.append(text_for("travel_distance_road") % float(preview["road_distance_km"]))
+				lines.append(text_for("travel_distance_road") % WorldRouteRegistry.approximate_km(float(preview["road_distance_km"])))
 			if preview.get("air_distance_km") != null:
-				lines.append(text_for("travel_distance_air") % float(preview["air_distance_km"]))
+				lines.append(text_for("travel_distance_air") % WorldRouteRegistry.approximate_km(float(preview["air_distance_km"])))
 			lines.append(text_for("travel_duration_line") % travel_duration_text(int(preview["total_minutes"])))
-			lines.append(text_for("travel_arrival_line") % ("%s %s" % [calendar_date_text_at(int(preview["arrival_minutes"])), calendar_time_text_at(int(preview["arrival_minutes"]))]))
-			if bool(preview.get("estimate", true)):
-				lines.append(text_for("travel_estimate_note"))
+			lines.append(text_for("travel_arrival_line") % calendar_date_text_at(int(preview["arrival_minutes"])))
 	return lines
 
 

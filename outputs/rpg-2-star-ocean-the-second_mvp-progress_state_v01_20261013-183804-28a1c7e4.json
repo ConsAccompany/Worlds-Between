@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
   "planVersion": "v0.2",
-  "updatedAt": "2026-10-16T18:08:31Z",
+  "updatedAt": "2026-10-16T19:25:17Z",
   "currentStep": "M8",
   "steps": [
     {
@@ -23,7 +23,7 @@
       "id": "M2",
       "title": "World map and exploration",
       "status": "in_progress",
-      "summary": "The global Earth map, route preview/confirm/cancel, an integer-minute calendar and save migration are implemented and pass Godot automated tests. On 2026-10-15 the runtime was migrated to the creator-decided US science sphere as an implemented technical candidate: NYC (start, Lower Manhattan City Hall Park scene), Yonkers outskirts, abandoned Washington, D.C. ruins at the Capitol, the NYC-Chicago air route and a Chicago Loop technical placeholder district; new runs start 2537-05-25 (08:00 is a placeholder time of day). The travel registry now holds the five Earth spheres (science US + Canada, magic South America, wuxia Asia, nature Oceania, culture Europe + Africa, former fantasy kept as an alias only) plus the separate portal-only final planet; only science has places. A provisional weekly commerce ledger settles on the calendar and an engineering-candidate Merchant path reaches it in play. M2 is not complete: route figures are preliminary estimates, the City Hall Park, Capitol and Loop art does not exist, the map art is a functional placeholder, the Catskills community is not a runtime place, and no human has reviewed the map or played it.",
+      "summary": "The global Earth map, route preview/confirm/cancel, fixed whole-hour trip times on an internal integer-minute calendar that players see as a date only, and save migration are implemented and pass Godot automated tests. On 2026-10-15 the runtime was migrated to the creator-decided US science sphere as an implemented technical candidate: NYC (start, Lower Manhattan City Hall Park scene), Yonkers outskirts, abandoned Washington, D.C. ruins at the Capitol, the NYC-Chicago air route and a Chicago Loop technical placeholder district; new runs start 2537-05-25 (the internal clock starts at 08:00; players see only the date). The travel registry now holds the five Earth spheres (science US + Canada, magic South America, wuxia Asia, nature Oceania, culture Europe + Africa, former fantasy kept as an alias only) plus the separate portal-only final planet; only science has places. A provisional weekly commerce ledger settles on the calendar and an engineering-candidate Merchant path reaches it in play. M2 is not complete: the reference distances and minutes behind the whole-hour trip times are preliminary estimates, the City Hall Park, Capitol and Loop art does not exist, the map art is a functional placeholder, the Catskills community is not a runtime place, and no human has reviewed the map or played it.",
       "acceptance": "Reach and leave science-region scenes from a global map; use real bilingual place names and geographically plausible car/air routes; verify travel-time, date, save/load and weekly-settlement behavior.",
       "evidence": [
         "Godot 4.7.2, 2026-10-15 (per the M2 QA notes; earlier run, before the US migration — the integration re-run counts are 212 and 105, see details): GLOBAL_TRAVEL_CORE_OK; GLOBAL_EARTH_MAP_SMOKE_OK checks=201; GLOBAL_MAP_TRAVEL_INTEGRATION_OK checks=103; revised M2_SMOKE_OK (pick place → route card → depart); M1–M8 smokes OK; CANVAS_POINTER_REGRESSION_OK at 1280×720",
@@ -43,19 +43,19 @@
         "docs/qa/rpg-2-star-ocean-the-second_five-sphere-registry-and-us-runtime_integration-qa-note_m2-v02_20261015-184437-b3b84617.md (five-sphere region registry, one-Air route label, Loop header layout, Bible/progress reconciliation; re-run test results)"
       ],
       "remaining": [
-        "Route figures: the US car and airport-drive figures come from the OSRM demo server (non-commercial terms) and the NYC-Chicago flight minutes from BTS July 2026 medians plus a 120-minute check-in allowance. All are preliminary estimates; re-derive with a self-hosted OSRM on a dated OpenStreetMap extract and confirm the public-domain terms before release. Yonkers-Chicago and Washington-Chicago have no route.",
+        "Reference figures behind the whole-hour trip times: the US car distances and minutes come from the OSRM demo server (non-commercial terms) and the NYC-Chicago reference is an internal research sum (BTS 12-month block-time medians plus airport legs and a check-in allowance) that is never charged or shown. The charged hours (1 / 5 / 5 / 6 h) change only if a re-derived reference crosses a half hour. Re-derive with a self-hosted OSRM on a dated OpenStreetMap extract and confirm the terms before release. Yonkers-Chicago and Washington-Chicago have no route.",
         "Art for the implemented places: City Hall Park, a recognizable collapsed and overgrown U.S. Capitol (the Washington Pixelorama pilot) and the Chicago Loop. The scenes use the old generic plates or a code-drawn placeholder that is labelled unapproved on screen. Unapproved, non-runtime Capitol candidates exist (walkable west grounds v01-v06 and a separate dome cinematic vista v01-v02), plus unapproved City Hall Park walkable pilots v01-v02; none is accepted or wired into the runtime.",
         "Produce and accept the map art (colours, label boxes, roads and markers are functional placeholders; there is no US road layer).",
         "Human map review and the two human timed playtests (0/2).",
         "Creator decisions still open for M2: the training prologue start date, and whether saves made under the old 2026-04-01 placeholder should be shifted into 2537 (they currently keep their absolute 2026 date).",
         "Commerce is provisional. Merchant is a 2-stage MVP (行商 → 契约经理); the full 20-series × 5-stage career canon is future work. Neither job skill works in battle. Stage-1 Supply Pact is a placeholder that takes no JP. Stage-2 Fair Quote is a provisional JP-upgradable commerce passive: +5 % of the base per rank, on weeks paid at the companion rate only. Ledger points are not currency: there is no balance, spending, robber event or price effect."
       ],
-      "blocker": "The creator-decided US science sphere (NYC / Lower Manhattan City Hall Park, Yonkers, Washington, D.C., NYC-Chicago, the Chicago Loop) and the 2537-05-25 start are implemented in the runtime as technical candidates; the superseded provisional Shanghai set survives only as hidden save aliases. M2 stays in progress: route figures are preliminary, the place and map art is missing or unaccepted, the Catskills community has no runtime place, and human review and the two timed playtests (0/2) are outstanding.",
+      "blocker": "The creator-decided US science sphere (NYC / Lower Manhattan City Hall Park, Yonkers, Washington, D.C., NYC-Chicago, the Chicago Loop) and the 2537-05-25 start are implemented in the runtime as technical candidates; the superseded provisional Shanghai set survives only as hidden save aliases. M2 stays in progress: the reference figures behind the whole-hour trip times are preliminary, the place and map art is missing or unaccepted, the Catskills community has no runtime place, and human review and the two timed playtests (0/2) are outstanding.",
       "details": [
-        "已实现并通过 Godot 自动测试：真实地球全图与美国东北部、五大湖两个地区层（缩放、平移、点选、中英文地名）；路线卡预览、出发一次性结算、取消／Esc 不扣时间、所在地免费进入；整数分钟日历（跨日、跨年、闰年进位，同一时间轴上发出周交替信号）；存读档与旧档迁移（不凭空加天、不重复扣时；旧上海组合 ID 作为隐藏别名解析到纽约、扬克斯、华盛顿）。",
-        "测试标记（2026-10-15 整合复跑）：GLOBAL_TRAVEL_CORE_OK；GLOBAL_EARTH_MAP_SMOKE_OK checks=212；GLOBAL_MAP_TRAVEL_INTEGRATION_OK checks=105；COMMERCE_WEEKLY_SETTLEMENT_OK checks=149；US_SCIENCE_MIGRATION_SMOKE_OK checks=32；新版 M2_SMOKE_OK。实机截图只是运行证据，未验收。旧三点 M2_SMOKE_OK 不计入新规则。",
-        "创作者决定（2026-10-15）已在运行时实现为技术候选：科技中心纽约（新游戏起点，曼哈顿下城市政厅公园场景），城外扬克斯，华盛顿特区国会大厦废墟（勘察站与巡逻自动机），首条航线纽约—芝加哥，芝加哥卢普区为明确标注“技术占位 · 美术未验收”的可步行街区；新游戏从 2537-05-25 开始（08:00 为占位时刻）。旅行数据登记五个地球文明圈（科技：美国＋加拿大；魔法：南美洲；武侠：亚洲；自然：大洋洲；文化：欧洲＋非洲，原奇幻只作别名）与独立的传送门终局星球；只有科技圈有地点。地下社区（卡茨基尔山附近）尚无运行时地点。",
-        "仍待制作或核实：汽车与机场接驳旅时来自 OSRM 演示服务器，纽约—芝加哥航班分钟来自 BTS 2026 年 7 月中位数，另加 120 分钟值机等候，均为初步估算；扬克斯—芝加哥、华盛顿—芝加哥无路线。市政厅公园、可辨认的国会大厦废墟与卢普区均无接入运行时或已验收的美术（国会大厦已有未批准、未接入运行时的 Pixelorama 候选（可步行 v01–v06、独立定场远景 v01–v02），市政厅公园有未批准的可步行试作 v01–v02；均未验收）；地图美术未制作、未验收；未经人工审阅与试玩。",
+        "已实现并通过 Godot 自动测试：真实地球全图与美国东北部、五大湖两个地区层（缩放、平移、点选、中英文地名）；路线卡预览、出发一次性结算、取消／Esc 不扣时间、所在地免费进入；固定整点旅时与日历（2026-10-16 起每段按整小时结算；玩家只看到年月日，内部仍按整数分钟计，跨日、跨年、闰年进位，同一时间轴上发出周交替信号）；存读档与旧档迁移（不凭空加天、不重复扣时；旧上海组合 ID 作为隐藏别名解析到纽约、扬克斯、华盛顿）。",
+        "测试标记（2026-10-15 整合复跑）：GLOBAL_TRAVEL_CORE_OK；GLOBAL_EARTH_MAP_SMOKE_OK checks=212；GLOBAL_MAP_TRAVEL_INTEGRATION_OK checks=105；COMMERCE_WEEKLY_SETTLEMENT_OK checks=149；US_SCIENCE_MIGRATION_SMOKE_OK checks=32；新版 M2_SMOKE_OK。实机截图只是运行证据，未验收。旧三点 M2_SMOKE_OK 不计入新规则。 2026-10-16 整点旅时与仅显示日期复跑（m2-v10／v11）：M2_WHOLE_HOUR_TRAVEL_OK checks=246；GLOBAL_MAP_TRAVEL_INTEGRATION_OK checks=105；US_SCIENCE_MIGRATION_SMOKE_OK checks=32；MERCHANT_CITY_COMMERCE_PATH_OK checks=110。",
+        "创作者决定（2026-10-15）已在运行时实现为技术候选：科技中心纽约（新游戏起点，曼哈顿下城市政厅公园场景），城外扬克斯，华盛顿特区国会大厦废墟（勘察站与巡逻自动机），首条航线纽约—芝加哥，芝加哥卢普区为明确标注“技术占位 · 美术未验收”的可步行街区；新游戏从 2537-05-25 开始（内部时钟从 08:00 起算，界面只显示日期）。旅行数据登记五个地球文明圈（科技：美国＋加拿大；魔法：南美洲；武侠：亚洲；自然：大洋洲；文化：欧洲＋非洲，原奇幻只作别名）与独立的传送门终局星球；只有科技圈有地点。地下社区（卡茨基尔山附近）尚无运行时地点。",
+        "仍待制作或核实：整点旅时（1／5／5／6 小时）所依据的参考里程与分钟仍为初步估算：汽车来自 OSRM 演示服务器（非商业条款），纽约—芝加哥为内部研究合计（含 BTS 12 个月航班块时间中位数），只作取整依据，从不按分项结算或显示；扬克斯—芝加哥、华盛顿—芝加哥无路线。市政厅公园、可辨认的国会大厦废墟与卢普区均无接入运行时或已验收的美术（国会大厦已有未批准、未接入运行时的 Pixelorama 候选（可步行 v01–v06、独立定场远景 v01–v02），市政厅公园有未批准的可步行试作 v01–v02；均未验收）；地图美术未制作、未验收；未经人工审阅与试玩。",
         "商会：暂定 CommerceLedger 已接入日历周结算（提交 192c63b，COMMERCE_WEEKLY_SETTLEMENT_OK checks=149）。工程候选（未验收）：伙伴可在 10 级职业选择时转为行商（只做 行商 → 契约经理 两阶 MVP，完整 20 系列 × 5 阶职业设定留待以后），并在已发现的城市从世界地图「商会」派驻经营（MERCHANT_CITY_COMMERCE_PATH_OK checks=109）。行商职业技能在战斗中都不可用；一阶补给协议仍是占位，不能花 JP；二阶公平报价是暂定的经营被动，可花 JP 升级，每级为伙伴全效周加基础收益的 5 %（1/2/3 级 = 105/110/115 %），NPC 经营周不加成；商会面板标明满周收益，并在派驻或重新派驻后的未满一周注明按普通 NPC 80 % 结算；旧存档中已是 1 级的契约经理下次结算得 105（MERCHANT_FAIR_QUOTE_OK checks=91）；账目点数不是货币，没有平衡、劫匪事件或价格影响。首城与开始日期已按创作者决定实现为技术候选。"
       ]
     },
@@ -359,10 +359,10 @@
     ]
   },
   "m2Expansion": {
-    "updatedAt": "2026-10-15T22:45:00Z",
+    "updatedAt": "2026-10-16T19:22:07Z",
     "rule": "docs/design/rpg-2-star-ocean-the-second_global-earth-map-real-place-travel_rules-v01_20261014-235354-2b5d4d98.md",
     "researchPacket": "docs/qa/rpg-2-star-ocean-the-second_us-science-sphere_runtime-migration_qa-note_m2-v02_20261015-175011-364131c8.md",
-    "researchPacketNote": "当前美国东北部／纽约—芝加哥路线来源（OSRM 演示服务器与 BTS 2026 年 7 月中位数，均为初步估算）；运行时数据见 activeTravelData。 / Current US Northeast and NYC-Chicago route sources (preliminary estimates).",
+    "researchPacketNote": "当前美国东北部／纽约—芝加哥路线来源（OSRM 演示服务器与 BTS 12 个月航班块时间中位数，均为初步估算，只作整点旅时的取整依据）；运行时数据见 activeTravelData。 / Current US Northeast and NYC-Chicago route sources (preliminary estimates, used only as the basis for the rounded whole-hour trip times).",
     "activeTravelData": "game/data/world-travel/rpg-2-star-ocean-the-second_global-earth-travel_locations-routes_m2-us-science-v02_20261015-175011-c454007b.json",
     "anchor": {
       "status": "implemented_technical_candidate",
@@ -401,7 +401,7 @@
         "en": "Route preview, depart & cancel",
         "owner": "地图界面 + 旅行核心",
         "status": "implemented",
-        "detail": "路线卡显示交通方式、里程、旅时、抵达日期和“估算”标记。连按出发只结算一次；取消、Esc 或改选都不扣时间；所在地免费进入；接口不符时不能出发，也不显示数字。",
+        "detail": "路线卡只显示交通方式、大致里程、整点旅时和抵达日期（2026-10-16 起不显示“估算”标记、机场或分项）。连按出发只结算一次；取消、Esc 或改选都不扣时间；所在地免费进入；接口不符时不能出发，也不显示数字。",
         "evidence": [
           "docs/qa/rpg-2-star-ocean-the-second_us-science-sphere_runtime-migration_qa-note_m2-v02_20261015-175011-364131c8.md",
           "outputs/rpg-2-star-ocean-the-second_scifi-canvas_pointer-regression-receipt_m8-v01_20261015-071805-548c0f0f.json"
@@ -409,14 +409,15 @@
       },
       {
         "id": "calendar",
-        "zh": "整数分钟日历",
-        "en": "Integer-minute calendar",
+        "zh": "日历（整点旅时，只显示日期）",
+        "en": "Calendar (whole-hour trips, date-only display)",
         "owner": "旅行核心",
         "status": "implemented",
-        "detail": "旅时按整数分钟累计，跨日、跨年和闰年都正确进位；出发时一次性结算；跨周时在同一条时间轴上发出周交替信号。暂定商会账目已接入同一时间轴，在该信号之前按周结算；账目点数不是货币，没有平衡、劫匪事件或价格影响。",
+        "detail": "玩家可见的日历只显示年月日（2026-10-16，m2-v11），内部仍按整数分钟计（旧档兼容）；2026-10-16 起每段旅行按固定整点（60 分钟的倍数）结算并累计，跨日、跨年和闰年都正确进位；出发时一次性结算；跨周时在同一条时间轴上发出周交替信号。暂定商会账目已接入同一时间轴，在该信号之前按周结算；账目点数不是货币，没有平衡、劫匪事件或价格影响。",
         "evidence": [
           "docs/qa/rpg-2-star-ocean-the-second_global-map-travel_integration-fixes_qa-note_m2-v02_20261015-031824-35247192.md",
-          "docs/qa/rpg-2-star-ocean-the-second_commerce-weekly-settlement_calendar-hookup_qa-note_m2-v01_20261015-082014-bef9e5a4.md"
+          "docs/qa/rpg-2-star-ocean-the-second_commerce-weekly-settlement_calendar-hookup_qa-note_m2-v01_20261015-082014-bef9e5a4.md",
+          "docs/qa/rpg-2-star-ocean-the-second_m2-whole-hour-travel-rule_runtime-simplification_qa-note_m2-v10_20261016-145448-d4c46b62.md"
         ]
       },
       {
@@ -469,13 +470,15 @@
       },
       {
         "id": "route-data",
-        "zh": "门到门路线数值",
-        "en": "Door-to-door route figures",
+        "zh": "路线旅时（整点规则）",
+        "en": "Route times (whole-hour rule)",
         "owner": "旅行核心",
-        "status": "estimate_only",
-        "detail": "美国科技圈数值均为初步估算（非核验）：纽约→扬克斯 28.2 km／35 分；纽约→华盛顿 363.2 km／289 分；扬克斯→华盛顿 388.0 km／306 分（OSRM 演示服务器，非商业条款）；纽约⇄芝加哥航线 365／338 分。门到门附加时间为 0；扬克斯—芝加哥、华盛顿—芝加哥无路线。旧上海组合的 Rome2Rio 数值已停用。",
+        "status": "implemented",
+        "detail": "已实现（2026-10-16 创作者规则；代码、测试与 1280×720 中英截图已经检查）：每段按现实城市间典型旅时取整到小时结算，至少 1 小时，多段相加；运行时只结算 gameplayDurationMinutes，校验器拒绝非整点或与参考值取整不符的路段。纽约⇄扬克斯 1 小时（参考 28.2 km／35 分）；纽约⇄华盛顿 5 小时（参考 363.2 km／289 分）；扬克斯⇄华盛顿 5 小时（参考 388.0 km／306 分）；纽约⇄芝加哥往返各 6 小时（内部参考 364／332 分）。界面只显示交通方式、大致里程、整点旅时和抵达日期，不显示机场名、分项或钟点。参考里程与分钟仍为初步估算（OSRM 演示服务器，非商业条款；航空参考为内部研究合计），只作取整依据，复核后只有取整结果变化时才改旅时。扬克斯—芝加哥、华盛顿—芝加哥无路线。旧上海组合的 Rome2Rio 数值已停用。本门不代表地图美术或人工验收。",
         "evidence": [
-          "docs/qa/rpg-2-star-ocean-the-second_us-science-sphere_runtime-migration_qa-note_m2-v02_20261015-175011-364131c8.md"
+          "docs/qa/rpg-2-star-ocean-the-second_us-science-sphere_runtime-migration_qa-note_m2-v02_20261015-175011-364131c8.md",
+          "docs/qa/rpg-2-star-ocean-the-second_m2-whole-hour-travel-rule_runtime-simplification_qa-note_m2-v10_20261016-145448-d4c46b62.md",
+          "outputs/rpg-2-star-ocean-the-second_m2-date-only-cards_manifest_m2-v11_20261016-151511-c1ed4ab2.json"
         ]
       },
       {
@@ -484,7 +487,7 @@
         "en": "Air route",
         "owner": "旅行核心",
         "status": "implemented",
-        "detail": "已决定并已实现：纽约—芝加哥航线在游戏数据中，去程 365 分、回程 338 分（含机场接驳、120 分钟值机等候与航班时间），航程 1177.1 km；到达后进入卢普区技术占位街区。数值为初步估算（BTS 2026 年 7 月航班中位数与 OSRM 演示服务器车程），未核验。",
+        "detail": "已决定并已实现：纽约—芝加哥航线在游戏数据中，往返各按 6 小时结算（整点规则；内部参考 364／332 分），航程 1177.1 km；到达后进入卢普区技术占位街区。界面不显示机场名或值机等分项。参考数值为初步估算（BTS 12 个月航班块时间中位数与 OSRM 演示服务器车程），未核验。",
         "evidence": [
           "docs/qa/rpg-2-star-ocean-the-second_us-science-sphere_runtime-migration_qa-note_m2-v02_20261015-175011-364131c8.md",
           "docs/qa/rpg-2-star-ocean-the-second_global-earth-map_great-lakes-chicago-capture_qa-note-unapproved-v01_20261015-182538-30506f07.md"
@@ -612,10 +615,10 @@
     "kind": "weighted_delivery_estimate",
     "zh": "MVP 加权交付估算（不是正式批准）",
     "en": "MVP weighted delivery estimate (not formal approval)",
-    "updatedAt": "2026-10-16T18:08:31Z",
-    "percent": 35,
-    "percentLabel": "35.0%",
-    "weightedPoints": 35,
+    "updatedAt": "2026-10-16T19:25:17Z",
+    "percent": 35.8,
+    "percentLabel": "35.8%",
+    "weightedPoints": 35.83,
     "weightTotal": 100,
     "countingRules": [
       {
@@ -717,11 +720,11 @@
         "zh": "全球世界与旅行",
         "en": "Global world and travel",
         "weight": 10,
-        "numerator": 9,
+        "numerator": 10,
         "denominator": 12,
-        "ratio": "9/12",
-        "percent": 75,
-        "weightedPoints": 7.5,
+        "ratio": "10/12",
+        "percent": 83.3,
+        "weightedPoints": 8.33,
         "source": {
           "path": "m2Expansion.gates",
           "rule": {
@@ -738,10 +741,10 @@
           "acceptance-test",
           "anchor",
           "start-year",
+          "route-data",
           "air-route"
         ],
         "openGateIds": [
-          "route-data",
           "map-art",
           "visual-review"
         ],
@@ -751,11 +754,13 @@
           "docs/qa/rpg-2-star-ocean-the-second_five-sphere-registry-and-us-runtime_integration-qa-note_m2-v02_20261015-184437-b3b84617.md",
           "outputs/rpg-2-star-ocean-the-second_scifi-canvas_pointer-regression-receipt_m8-v01_20261015-071805-548c0f0f.json",
           "docs/qa/rpg-2-star-ocean-the-second_global-map-travel_integration-fixes_qa-note_m2-v02_20261015-031824-35247192.md",
-          "docs/qa/rpg-2-star-ocean-the-second_commerce-weekly-settlement_calendar-hookup_qa-note_m2-v01_20261015-082014-bef9e5a4.md"
+          "docs/qa/rpg-2-star-ocean-the-second_commerce-weekly-settlement_calendar-hookup_qa-note_m2-v01_20261015-082014-bef9e5a4.md",
+          "docs/qa/rpg-2-star-ocean-the-second_m2-whole-hour-travel-rule_runtime-simplification_qa-note_m2-v10_20261016-145448-d4c46b62.md",
+          "outputs/rpg-2-star-ocean-the-second_m2-date-only-cards_manifest_m2-v11_20261016-151511-c1ed4ab2.json"
         ],
         "nextGate": {
-          "zh": "下一道门：门到门路线数值、地图美术、人工审阅与试玩",
-          "en": "Next gate: Door-to-door route figures; Map art; Human review & playtests"
+          "zh": "下一道门：地图美术、人工审阅与试玩",
+          "en": "Next gate: Map art; Human review & playtests"
         }
       },
       {
@@ -926,9 +931,9 @@
     ],
     "updater": "tools/rpg-2-star-ocean-the-second_mvp-completion-meter_recompute-and-task-closeout-cli_v01_20261015-233032-d296a2cb.js",
     "lastUpdated": {
-      "at": "2026-10-16T18:08:31Z",
-      "closeoutId": "closeout-20261016-180831-3e5ab356",
-      "percent": 35
+      "at": "2026-10-16T19:25:17Z",
+      "closeoutId": "closeout-20261016-192517-a21f7e7f",
+      "percent": 35.8
     },
     "taskCloseouts": [
       {
@@ -1894,6 +1899,49 @@
           "game/assets/characters/combat-sideview-pilots/rpg-2-star-ocean-the-second_protagonist-female_sideview-idle-right-static-native0p65_manifest_unapproved-v09_20261016-135202-0bea0fc8.json",
           "outputs/rpg-2-star-ocean-the-second_protagonist-female_sideview-idle-right-static-native0p65_party-capture-ruins-manifest_unapproved-v09_20261016-135202-34b4c767.json",
           "outputs/rpg-2-star-ocean-the-second_protagonist-female_sideview-idle-right-static-native0p65_party-capture-outskirts-640-manifest_unapproved-v09_20261016-135202-31cc4115.json"
+        ]
+      },
+      {
+        "id": "closeout-20261016-192517-a21f7e7f",
+        "recordedAt": "2026-10-16T19:25:17Z",
+        "kind": "task",
+        "title": {
+          "zh": "M2 路线数据门改为“路线旅时（整点规则）”并标为已实现：m2-v10 固定整点旅时（纽约⇄扬克斯汽车 1 小时、纽约／扬克斯⇄华盛顿汽车 5 小时、纽约⇄芝加哥飞机 6 小时）与 m2-v11 只显示日期的日历，经代码、测试与 1280×720 中英截图检查（Codex 复跑 M2_WHOLE_HOUR_TRAVEL_OK checks=246、GLOBAL_MAP_TRAVEL_INTEGRATION_OK checks=105、US_SCIENCE_MIGRATION_SMOKE_OK checks=32）；M2 9/12 → 10/12；地图美术与人工审阅仍未完成，M2 未验收；精灵 0/52、场景 0/11、真人试玩 0/2 不变",
+          "en": "M2 route-data gate -> 'Route times (whole-hour rule)' implemented after code, test and 1280x720 zh/en capture inspection of the m2-v10 fixed whole-hour travel rule (NYC-Yonkers 1 h car, NYC/Yonkers-Washington 5 h car, NYC-Chicago 6 h air) and m2-v11 date-only calendar: M2_WHOLE_HOUR_TRAVEL_OK checks=246, GLOBAL_MAP_TRAVEL_INTEGRATION_OK checks=105, US_SCIENCE_MIGRATION_SMOKE_OK checks=32 (Codex rerun); M2 9/12 -> 10/12; map art and human review open, M2 not accepted; sprites 0/52, scenes 0/11, playtests 0/2 unchanged"
+        },
+        "impact": {
+          "changed": true,
+          "percentBefore": 35,
+          "percentAfter": 35.8,
+          "deltaPoints": 0.83,
+          "gateChanges": [
+            {
+              "key": "global-world-travel/route-data",
+              "category": "global-world-travel",
+              "gate": "route-data",
+              "from": "not_counted",
+              "to": "counted"
+            }
+          ],
+          "categoryChanges": [
+            {
+              "id": "global-world-travel",
+              "before": "9/12",
+              "after": "10/12",
+              "weightedPointsBefore": 7.5,
+              "weightedPointsAfter": 8.33
+            }
+          ]
+        },
+        "evidence": [
+          "docs/qa/rpg-2-star-ocean-the-second_m2-whole-hour-travel-rule_runtime-simplification_qa-note_m2-v10_20261016-145448-d4c46b62.md",
+          "game/tests/rpg-2-star-ocean-the-second_global-earth-travel_whole-hour-travel-rule-check_m2-v10_20261016-145448-8353eeac.gd",
+          "game/data/world-travel/rpg-2-star-ocean-the-second_global-earth-travel_locations-routes_m2-us-science-v02_20261015-175011-c454007b.json",
+          "outputs/rpg-2-star-ocean-the-second_m2-date-only-cards_manifest_m2-v11_20261016-151511-c1ed4ab2.json",
+          "outputs/rpg-2-star-ocean-the-second_m2-date-only-card_nyc-to-chicago-zh_m2-v11_20261016-151511-c1ed4ab2.png",
+          "outputs/rpg-2-star-ocean-the-second_m2-date-only-card_nyc-to-yonkers-en_m2-v11_20261016-151511-c1ed4ab2.png",
+          "tests/game-bible-m2-global-travel/rpg-2-star-ocean-the-second_game-bible_m2-global-travel-gates_check_m2-v01_20261015-064400-06efaa9b.js",
+          "outputs/rpg-2-star-ocean-the-second_mvp-progress_state_v01_20261013-183804-28a1c7e4.json#/m2Expansion/gates"
         ]
       }
     ]

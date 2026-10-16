@@ -5,13 +5,22 @@ class_name WorldRouteRegistry
 # kept apart from the great-circle distance, which is computed from coordinates for reference only.
 # v02: creator-approved US science sphere (2026-10-15). The provisional v01 file (Shanghai set) stays as
 # a record; its location IDs live on in v02 as hidden retiredLocations so old saves still resolve.
+# Travel time (creator rule, 2026-10-16): each car or air leg charges gameplayDurationMinutes, a fixed whole
+# number of hours (at least one) equal to its referenceDurationMinutes rounded to the nearest hour. Nothing
+# else is charged: no airport, check-in, waiting, traffic or departure-clock component. referenceEvidence is
+# provenance for the reference figure only and is never read to price a trip.
 const DEFAULT_DATA_PATH := "res://data/world-travel/rpg-2-star-ocean-the-second_global-earth-travel_locations-routes_m2-us-science-v02_20261015-175011-c454007b.json"
 const SCHEMA_VERSION := 1
 const MODES := ["car", "air"]
 const LOCATION_TYPES := ["city", "outskirts", "ruins", "community", "wild", "facility", "portal"]
 const ROUTE_STATUSES := ["available", "unverified", "pending"]
 const LEG_VERIFICATION_STATUSES := ["verified", "preliminary-estimate"]
-const AIR_MINUTE_FIELDS := ["airportAccessMinutes", "checkInAndWaitMinutes", "flightMinutes", "airportEgressMinutes"]
+const CHARGED_FIELD := "gameplayDurationMinutes"
+const REFERENCE_FIELD := "referenceDurationMinutes"
+const HOUR_MINUTES := 60
+# Timing fields of the superseded door-to-door model. A segment carrying any of them at its top level is
+# rejected, so no record can look as if it adds to the charge; the parts live in referenceEvidence.
+const RETIRED_TIMING_FIELDS := ["airportAccessMinutes", "checkInAndWaitMinutes", "flightMinutes", "airportEgressMinutes", "doorToDoorAllowanceMinutes"]
 const EARTH_MEAN_RADIUS_KM := 6371.0088
 # Creator decision 2026-10-15: five Earth spheres (science, magic, wuxia, nature, culture) plus a
 # separate portal-only final planet.
@@ -109,14 +118,21 @@ func great_circle_km(from_id: String, to_id: String) -> float:
 	return 2.0 * EARTH_MEAN_RADIUS_KM * asin(minf(1.0, sqrt(h)))
 
 
+# The only figure a trip charges for a leg. Same for every departure time.
 func segment_minutes(segment: Dictionary) -> int:
-	var minutes := int(segment.get("doorToDoorAllowanceMinutes", 0))
-	if segment.get("mode", "") == "air":
-		for field in AIR_MINUTE_FIELDS:
-			minutes += int(segment.get(field, 0))
-	else:
-		minutes += int(segment.get("referenceDurationMinutes", 0))
-	return minutes
+	return int(segment.get(CHARGED_FIELD, 0))
+
+
+# The whole-hour gameplay value for a reference estimate: nearest hour (half up), never under one hour.
+static func whole_hour_minutes(reference_minutes: int) -> int:
+	return maxi(1, int(floorf(float(reference_minutes) / HOUR_MINUTES + 0.5))) * HOUR_MINUTES
+
+
+# Player-facing distance: whole km under 100 km, else the nearest 10 km. Display only; never charged.
+static func approximate_km(km: float) -> int:
+	if km < 100.0:
+		return maxi(1, roundi(km))
+	return roundi(km / 10.0) * 10
 
 
 # Every route record between two places, in either stored direction, resolved into travel order.
@@ -217,6 +233,7 @@ func _build(source: Dictionary) -> void:
 		errors.append("calendar.startDate/startTime invalid")
 	else:
 		calendar_start_minutes = int(start["minutes"])
+	_check_time_rule(source.get("travelTimeRule"))
 	var seen_ids: Dictionary = {}
 	for region in _array(source, "regions"):
 		var region_id := String(region.get("id", ""))
@@ -318,42 +335,83 @@ func _add_segment(entry: Dictionary, seen_ids: Dictionary) -> void:
 			return
 	if entry["fromLocationId"] == entry["toLocationId"]:
 		errors.append("segment %s starts and ends at the same place" % segment_id)
-	if not _is_whole(entry.get("doorToDoorAllowanceMinutes", 0), 0):
-		errors.append("segment %s doorToDoorAllowanceMinutes must be a whole number >= 0" % segment_id)
 	if mode == "car":
 		if not _is_number(entry.get("roadDistanceKm")) or float(entry["roadDistanceKm"]) <= 0.0:
 			errors.append("car segment %s needs roadDistanceKm" % segment_id)
-		if not _is_whole(entry.get("referenceDurationMinutes"), 1):
-			errors.append("car segment %s needs referenceDurationMinutes" % segment_id)
-	else:
-		if not _is_number(entry.get("flightDistanceKm")) or float(entry["flightDistanceKm"]) <= 0.0:
-			errors.append("air segment %s needs flightDistanceKm" % segment_id)
-		for field in AIR_MINUTE_FIELDS:
-			if not _is_whole(entry.get(field), 1 if field == "flightMinutes" else 0):
-				errors.append("air segment %s needs %s for door-to-door time" % [segment_id, field])
+	elif not _is_number(entry.get("flightDistanceKm")) or float(entry["flightDistanceKm"]) <= 0.0:
+		errors.append("air segment %s needs flightDistanceKm" % segment_id)
+	_check_duration(entry, segment_id)
 	var verification: Variant = entry.get("verification")
 	if typeof(verification) != TYPE_DICTIONARY or verification.get("status", "") not in LEG_VERIFICATION_STATUSES or typeof(verification.get("source")) != TYPE_DICTIONARY or String(verification["source"].get("url", "")) == "":
 		errors.append("segment %s needs verification status and a source url" % segment_id)
-	_check_components(entry, segment_id)
+	_check_reference_evidence(entry, segment_id)
 	segments[segment_id] = entry
 
 
-# Documented components must agree with the fields the runtime sums, so a provenance record can never
-# describe a different number from the one charged. rawMedianMinutes must round (half up) to the field.
-func _check_components(entry: Dictionary, segment_id: String) -> void:
-	var components: Variant = entry.get("components", {})
+# The data must declare the same rule the code applies, so the file cannot describe another charge.
+func _check_time_rule(rule: Variant) -> void:
+	if typeof(rule) != TYPE_DICTIONARY:
+		errors.append("travelTimeRule must be an object")
+		return
+	var whole_hours: bool = _is_number(rule.get("stepMinutes")) and int(rule["stepMinutes"]) == HOUR_MINUTES and _is_number(rule.get("minimumMinutes")) and int(rule["minimumMinutes"]) == HOUR_MINUTES
+	if rule.get("chargedField", "") != CHARGED_FIELD or rule.get("referenceField", "") != REFERENCE_FIELD or not whole_hours or rule.get("rounding", "") != "nearest-hour-half-up":
+		errors.append("travelTimeRule must charge gameplayDurationMinutes in whole hours (step 60, minimum 60, nearest hour half up)")
+
+
+# A leg charges a whole number of hours, at least one, and that value is its reference rounded to the hour.
+func _check_duration(entry: Dictionary, segment_id: String) -> void:
+	for field in RETIRED_TIMING_FIELDS:
+		if entry.has(field):
+			errors.append("segment %s still has retired timing field %s (keep evidence in referenceEvidence)" % [segment_id, field])
+	var charged: Variant = entry.get(CHARGED_FIELD)
+	if not _is_whole(charged, HOUR_MINUTES) or int(charged) % HOUR_MINUTES != 0:
+		errors.append("segment %s %s must be a whole number of hours (a multiple of 60, at least 60)" % [segment_id, CHARGED_FIELD])
+		return
+	var reference: Variant = entry.get(REFERENCE_FIELD)
+	if not _is_whole(reference, 1):
+		errors.append("segment %s needs %s, the real-world estimate its hours are rounded from" % [segment_id, REFERENCE_FIELD])
+		return
+	if int(charged) != whole_hour_minutes(int(reference)):
+		errors.append("segment %s %s %d is not %s %d rounded to the hour (%d)" % [segment_id, CHARGED_FIELD, int(charged), REFERENCE_FIELD, int(reference), whole_hour_minutes(int(reference))])
+
+
+# Optional provenance. componentMinutes must add up to the reference, each documented component must match
+# the number it explains (a componentMinutes entry or a top-level field such as flightDistanceKm), and a
+# rawMedianMinutes must round (half up) to its component. None of it is charged.
+func _check_reference_evidence(entry: Dictionary, segment_id: String) -> void:
+	if not entry.has("referenceEvidence"):
+		return
+	var evidence: Variant = entry["referenceEvidence"]
+	if typeof(evidence) != TYPE_DICTIONARY or evidence.get("runtimeUse", "") != "none":
+		errors.append("segment %s referenceEvidence must be an object with runtimeUse none" % segment_id)
+		return
+	var parts: Variant = evidence.get("componentMinutes", {})
+	if typeof(parts) != TYPE_DICTIONARY:
+		errors.append("segment %s referenceEvidence.componentMinutes must be an object" % segment_id)
+		return
+	if not parts.is_empty():
+		var total := 0
+		for field in parts:
+			if not _is_whole(parts[field], 0):
+				errors.append("segment %s referenceEvidence.componentMinutes.%s must be whole minutes" % [segment_id, field])
+				return
+			total += int(parts[field])
+		if _is_number(entry.get(REFERENCE_FIELD)) and total != int(entry[REFERENCE_FIELD]):
+			errors.append("segment %s referenceEvidence.componentMinutes sum %d != %s %d" % [segment_id, total, REFERENCE_FIELD, int(entry[REFERENCE_FIELD])])
+	var components: Variant = evidence.get("components", {})
 	if typeof(components) != TYPE_DICTIONARY:
-		errors.append("segment %s components must be an object" % segment_id)
+		errors.append("segment %s referenceEvidence.components must be an object" % segment_id)
 		return
 	for field in components:
 		var component: Variant = components[field]
 		if typeof(component) != TYPE_DICTIONARY or not component.has("value"):
 			continue
-		if not entry.has(field) or not _is_number(component["value"]) or not _is_number(entry[field]) or float(component["value"]) != float(entry[field]):
-			errors.append("segment %s components.%s.value disagrees with %s" % [segment_id, field, field])
+		var explained: Variant = parts.get(field, entry.get(field))
+		if not _is_number(component["value"]) or not _is_number(explained) or float(component["value"]) != float(explained):
+			errors.append("segment %s referenceEvidence.components.%s.value disagrees with the figure it documents" % [segment_id, field])
 			continue
-		if component.has("rawMedianMinutes") and (not _is_number(component["rawMedianMinutes"]) or int(floorf(float(component["rawMedianMinutes"]) + 0.5)) != int(entry[field])):
-			errors.append("segment %s components.%s.rawMedianMinutes does not round to %s" % [segment_id, field, field])
+		if component.has("rawMedianMinutes") and (not _is_number(component["rawMedianMinutes"]) or int(floorf(float(component["rawMedianMinutes"]) + 0.5)) != int(explained)):
+			errors.append("segment %s referenceEvidence.components.%s.rawMedianMinutes does not round to its value" % [segment_id, field])
 
 
 func _add_route(entry: Dictionary, seen_ids: Dictionary) -> void:

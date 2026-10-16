@@ -17,6 +17,8 @@ extends RefCounted
 #   preview_travel(to_id, option_id) -> Dictionary  (ok, kind, option_id); picks the default route
 #   cancel_travel_preview(), confirm_travel(to_id, option_id) -> bool, enter_current_location_scene()
 #   calendar_date_text_at(minutes), calendar_time_text_at(minutes), travel_duration_text(minutes)
+# Players see calendar dates only (year/month/day). The core keeps an internal minute clock and
+# calendar_time_text_at stays in the contract, but the map never shows a clock time.
 
 const MapData := preload("res://scripts/world_map_data.gd")
 const REQUIRED_METHODS := {
@@ -100,8 +102,7 @@ func places() -> Array:
 func calendar_text() -> String:
 	if not api_available():
 		return ""
-	var minutes := int(provider.get("calendar_minutes"))
-	return "%s %s" % [provider.call("calendar_date_text_at", minutes), provider.call("calendar_time_text_at", minutes)]
+	return String(provider.call("calendar_date_text_at", int(provider.get("calendar_minutes"))))
 
 
 # status: "same_place" | "pending_api" | "no_route" | "ready".
@@ -132,7 +133,7 @@ func preview(to_id: String, route_id: String = "") -> Dictionary:
 	var selected := String(core_preview.get("option_id", ""))
 	for option in options:
 		var arrival: Dictionary = provider.call("travel_arrival_preview", option["total_minutes"])
-		option["arrival_text"] = ("%s %s" % [arrival.get("text", ""), arrival.get("time_text", "")]).strip_edges()
+		option["arrival_text"] = String(arrival.get("text", ""))
 	return {"status": "ready", "options": options, "unverified": unverified, "selected": selected}
 
 

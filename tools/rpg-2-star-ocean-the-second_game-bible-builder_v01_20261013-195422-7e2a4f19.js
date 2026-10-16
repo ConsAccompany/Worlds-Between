@@ -308,11 +308,33 @@ function checkCanon(bible, progress = readProgress()) {
     has(artRoute, ['v06', '47/47', '不是场景验收']) && [v06.qa, v06.codexVisualAudit].every(file => file && dcCandidates.evidence.includes(file) && fs.existsSync(path.join(root, file))) &&
     /_walkable-scale-depth_qa-note_unapproved-v06_20261016-071733-18b9cea3\.md$/.test(v06.qa) && /_walkable-v06-codex-visual-audit_unapproved-v01_20261016-134646-35af3a0d\.md$/.test(v06.codexVisualAudit),
     'Washington walkable v06: UNAPPROVED / NONRUNTIME, technical 47/47 after erratum, QA note and Codex audit linked, no scene approval');
-  // M2 door-to-door route figures: research draft (m2-v08) and audit supplement (m2-v08a) are cited only; nothing is implemented.
+  // M2 route times (creator rule 2026-10-16): every leg settles to fixed whole hours, its reference estimate rounded to the hour.
+  // The door-to-door research draft (m2-v08) and audit (m2-v08a) are cited as evidence only. The Bible's hours must equal the
+  // runtime travel data, which charges gameplayDurationMinutes and carries no top-level trip components.
   const routeEvidence = bible.environmentVisualReview.runtimeGeographyMap?.routeFigureEvidence;
-  check(routeEvidence && routeEvidence.status === 'research-only' && routeEvidence.doorToDoorImplemented === false && routeEvidence.evidence.length === 2 &&
-    routeEvidence.evidence.every(file => fs.existsSync(path.join(root, file))) && has(routeEvidence.zh, ['尚未写入运行时', '9/12']) && has(routeEvidence.en, ['nothing is implemented', '9/12']),
-    'M2 route-figure evidence cited as research only: door-to-door not implemented, M2 stays 9/12');
+  const travelData = JSON.parse(fs.readFileSync(path.join(root, 'game/data/world-travel/rpg-2-star-ocean-the-second_global-earth-travel_locations-routes_m2-us-science-v02_20261015-175011-c454007b.json'), 'utf8'));
+  const legHours = id => (travelData.segments.find(segment => segment.id === id)?.gameplayDurationMinutes ?? NaN) / 60;
+  const hoursBySegment = {nycYonkers: 'seg.car.nyc__yonkers', yonkersNyc: 'seg.car.yonkers__nyc', nycWashington: 'seg.car.nyc__washington-ruins',
+    washingtonNyc: 'seg.car.washington-ruins__nyc', yonkersWashington: 'seg.car.yonkers__washington-ruins', washingtonYonkers: 'seg.car.washington-ruins__yonkers',
+    nycChicago: 'seg.air.nyc-lga__chicago-ord', chicagoNyc: 'seg.air.chicago-ord__nyc-lga'};
+  const retiredTiming = ['airportAccessMinutes', 'checkInAndWaitMinutes', 'flightMinutes', 'airportEgressMinutes', 'doorToDoorAllowanceMinutes', 'departureAirport', 'arrivalAirport'];
+  const rule = routeEvidence?.wholeHourRule;
+  check(routeEvidence && routeEvidence.status === 'whole-hour-rule' && routeEvidence.doorToDoorImplemented === false && routeEvidence.evidence.length === 3 &&
+    routeEvidence.evidence.every(file => fs.existsSync(path.join(root, file))) && /_qa-note_m2-v10_20261016-145448-d4c46b62\.md$/.test(routeEvidence.evidence[2]) &&
+    has(routeEvidence.zh, ['整点', '1 小时', '5 小时', '6 小时', '不是游戏规则', '只显示年月日', '10/12', 'M2 未验收']) &&
+    has(routeEvidence.en, ['whole hours', '1 h', '5 h', '6 h', 'not game rules', 'date only', '10/12', 'M2 is not accepted']) && !/9\/12/.test(routeEvidence.zh + routeEvidence.en) &&
+    rule && rule.chargedField === 'gameplayDurationMinutes' && travelData.travelTimeRule?.chargedField === rule.chargedField && rule.airportsShownToPlayers === false &&
+    same(Object.keys(rule.legHours), Object.keys(hoursBySegment)) && Object.entries(hoursBySegment).every(([key, id]) => rule.legHours[key] === legHours(id)) &&
+    same([rule.legHours.nycYonkers, rule.legHours.nycWashington, rule.legHours.yonkersWashington, rule.legHours.nycChicago, rule.legHours.chicagoNyc], [1, 5, 5, 6, 6]) &&
+    travelData.segments.every(segment => retiredTiming.every(field => !(field in segment))),
+    'M2 route times: whole-hour rule in the runtime (1 / 5 / 5 / 6 h match the travel data; no top-level trip components); research cited as evidence only, M2 10/12 and not accepted');
+  // The progress state's route-data gate is the implemented whole-hour route-times gate; no current gate label keeps the
+  // superseded door-to-door or integer-minute wording, and map art / human review stay open.
+  const m2Gates = Object.fromEntries((progress.m2Expansion?.gates || []).map(gate => [gate.id, gate]));
+  check(m2Gates['route-data']?.status === 'implemented' && m2Gates['route-data'].zh === '路线旅时（整点规则）' && m2Gates['route-data'].en === 'Route times (whole-hour rule)' &&
+    m2Gates.calendar?.en === 'Calendar (whole-hour trips, date-only display)' && m2Gates['map-art']?.status === 'not_started' && m2Gates['visual-review']?.status === 'human_pending' &&
+    !(progress.m2Expansion?.gates || []).some(gate => /门到门|整数分钟|door-to-door|integer-minute/i.test(gate.zh + ' ' + gate.en)),
+    'M2 route-data gate: Route times (whole-hour rule) implemented; calendar label date-only; map art and human review still open');
   // The progress state's current M2 text (anchor gate, M2 details and remaining) must name the same walkable range as the Bible
   // (v01–v06), never the stale v01–v05. Dated closeout records are history and are not checked.
   const m2Step = progress.steps?.find(step => step.id === 'M2');

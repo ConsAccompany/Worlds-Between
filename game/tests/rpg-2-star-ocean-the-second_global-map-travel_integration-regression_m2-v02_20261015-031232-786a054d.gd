@@ -254,7 +254,7 @@ func _save_load_then_depart() -> void:
 	app.load_save(id)
 	map = await _open_map()
 	_check(calendar_events.is_empty() and week_events.is_empty() and travel_events.is_empty() and app.calendar_minutes == saved_minutes, "loading twice and reopening the map charge nothing")
-	_check(map.route_adapter.current_place_id() == WASHINGTON and map.calendar_label.text == "%s %s" % [app.calendar_date_text_at(saved_minutes), app.calendar_time_text_at(saved_minutes)], "map origin and date follow the loaded save")
+	_check(map.route_adapter.current_place_id() == WASHINGTON and map.calendar_label.text == app.calendar_date_text_at(saved_minutes) and not map.calendar_label.text.contains(":"), "map origin and date (no clock time) follow the loaded save")
 	map.destination_buttons["scifi.city"].pressed.emit()
 	await _settle()
 	var minutes := _selected_minutes(map)
@@ -375,7 +375,9 @@ func _labels_and_coordinates() -> void:
 			_check(map.card_title.text == String(location["names"][language]), "card title is the route-core name (%s): %s" % [language, place_id])
 			if map.route_state["status"] == "ready":
 				var option_text: String = map.card_options.get_child(0).text
-				_check(option_text.contains("估算" if language == "zh" else "estimated"), "travel figures stay marked as estimates (%s): %s" % [language, place_id])
+				# 2026-10-16 rule: approximate distance and a whole-hour trip time, no estimate note or minutes.
+				var hours_text: String = app.travel_duration_text(int(map.route_state["options"][0]["total_minutes"]))
+				_check(option_text.contains("约" if language == "zh" else "~") and option_text.contains(hours_text) and int(map.route_state["options"][0]["total_minutes"]) % 60 == 0 and not option_text.contains("估算") and not option_text.contains("estimated"), "route shows approximate distance and whole hours (%s): %s" % [language, place_id])
 			map.close_route_card()
 	app.language = "zh"
 

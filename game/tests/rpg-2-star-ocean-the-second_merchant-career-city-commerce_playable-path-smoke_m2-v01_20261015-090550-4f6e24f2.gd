@@ -179,6 +179,8 @@ func _test_playable_path() -> void:
 	map.get("commerce_rest_button").pressed.emit()
 	_check(int(app.calendar_minutes) == minutes + 7 * 24 * 60 and int(app.calendar_week_index) == week + 1, "resting advances the calendar by one week")
 	_check(_units() == 0 and String(map.get("commerce_body").text).contains(app.text_for("commerce_rested") % [1, 0]), "the opening week settles with nothing owed")
+	# The panel's calendar line is the date alone; the internal clock time is never shown.
+	_check(String(map.get("commerce_body").text).split("\n").has(app.text_for("travel_date_line") % app.calendar_date_text()), "the panel shows the new date without a clock time")
 	var autosaves := SaveStore.list_entries()
 	_check(not autosaves.is_empty() and autosaves[0]["kind"] == "auto" and autosaves[0]["snapshot"]["note"] == "commerce_rest", "resting writes an autosave")
 	map.get("commerce_rest_button").pressed.emit()

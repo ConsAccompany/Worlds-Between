@@ -151,13 +151,11 @@ func _test_route_data() -> void:
 					_check(float(leg["road_distance_km"]) / (float(leg["minutes"]) / 60.0) <= 130.0, "car average speed <= 130 km/h: " + String(leg["segment_id"]))
 				else:
 					seen_air = true
-					var segment: Dictionary = registry.segments[leg["segment_id"]]
-					var parts := 0
-					for field in WorldRouteRegistry.AIR_MINUTE_FIELDS:
-						parts += int(segment[field])
-					_check(int(leg["minutes"]) == parts + int(segment.get("doorToDoorAllowanceMinutes", 0)) and int(segment["checkInAndWaitMinutes"]) > 0 and int(segment["airportAccessMinutes"]) > 0 and int(segment["airportEgressMinutes"]) > 0, "air leg is door to door (access + check-in/wait + flight + egress): " + String(leg["segment_id"]))
 					_check(absf(float(leg["air_distance_km"]) - straight) < 0.1 * straight, "flight km near the city great circle: " + String(leg["segment_id"]))
-					_check(float(leg["air_distance_km"]) / (float(segment["flightMinutes"]) / 60.0) < 900.0, "flight speed below airliner cruise: " + String(leg["segment_id"]))
+					_check(float(leg["air_distance_km"]) / (float(leg["minutes"]) / 60.0) < 900.0, "trip speed below airliner cruise: " + String(leg["segment_id"]))
+				# 2026-10-16 rule: every leg charges whole hours, its reference estimate rounded to the hour.
+				var segment: Dictionary = registry.segments[leg["segment_id"]]
+				_check(int(leg["minutes"]) == int(segment["gameplayDurationMinutes"]) and int(leg["minutes"]) % 60 == 0 and int(leg["minutes"]) >= 60 and int(leg["minutes"]) == WorldRouteRegistry.whole_hour_minutes(int(segment["referenceDurationMinutes"])), "leg charges whole hours from its reference: " + String(leg["segment_id"]))
 	_check(seen_air, "the NYC-Chicago air route is present")
 	var air: Array[Dictionary] = registry.routes_between(NEW_YORK, CHICAGO)
 	_check(air.size() == 1 and air[0]["option_id"] == AIR_NYC_CHICAGO and air[0]["available"] and air[0]["mode"] == "air" and air[0]["road_distance_km"] == null and float(air[0]["air_distance_km"]) > 1000.0, "NYC to Chicago is one air option with a flight distance")
@@ -177,6 +175,7 @@ func _fixture() -> Dictionary:
 	return {
 		"schemaVersion": 1,
 		"calendar": {"startDate": "2026-01-01", "startTime": "00:00"},
+		"travelTimeRule": {"chargedField": "gameplayDurationMinutes", "referenceField": "referenceDurationMinutes", "stepMinutes": 60, "minimumMinutes": 60, "rounding": "nearest-hour-half-up"},
 		"regions": [
 			{"id": "r.a", "planet": "earth", "names": {"zh": "甲", "en": "A"}, "access": "car-air"},
 			{"id": "r.b", "planet": "earth", "names": {"zh": "乙", "en": "B"}, "access": "car-air"},
@@ -193,8 +192,8 @@ func _fixture() -> Dictionary:
 			{"id": "loc.gate", "names": {"zh": "门", "en": "Gate"}, "type": "portal", "regionId": "r.portal", "coordinates": {"lat": 0.0, "lon": 0.0}, "discovery": {"initial": false}},
 		],
 		"segments": [
-			{"id": "seg.air", "mode": "air", "fromLocationId": "loc.one", "toLocationId": "loc.two", "flightDistanceKm": 219.0, "airportAccessMinutes": 50, "checkInAndWaitMinutes": 90, "flightMinutes": 55, "airportEgressMinutes": 40, "bidirectional": true, "verification": {"status": "verified", "source": source}},
-			{"id": "seg.car", "mode": "car", "fromLocationId": "loc.two", "toLocationId": "loc.three", "roadDistanceKm": 140.0, "referenceDurationMinutes": 100, "doorToDoorAllowanceMinutes": 15, "bidirectional": true, "verification": {"status": "verified", "source": source}},
+			{"id": "seg.air", "mode": "air", "fromLocationId": "loc.one", "toLocationId": "loc.two", "flightDistanceKm": 219.0, "gameplayDurationMinutes": 240, "referenceDurationMinutes": 235, "bidirectional": true, "verification": {"status": "verified", "source": source}},
+			{"id": "seg.car", "mode": "car", "fromLocationId": "loc.two", "toLocationId": "loc.three", "roadDistanceKm": 140.0, "gameplayDurationMinutes": 120, "referenceDurationMinutes": 100, "bidirectional": true, "verification": {"status": "verified", "source": source}},
 		],
 		"routes": [
 			{"id": "route.mixed", "fromLocationId": "loc.one", "toLocationId": "loc.three", "status": "available", "bidirectional": true, "viaLocationIds": ["loc.two"], "legs": [{"segmentId": "seg.air"}, {"segmentId": "seg.car"}]},
@@ -206,11 +205,14 @@ func _test_validator_rules() -> void:
 	var good := WorldRouteRegistry.from_dictionary(_fixture())
 	_check(good.is_valid(), "fixture validates: " + "; ".join(good.errors))
 	var mixed: Dictionary = good.routes_between("loc.one", "loc.three")[0]
-	# Air legs count airport access, check-in/wait and egress, not just flight time.
-	_check(int(mixed["total_minutes"]) == (50 + 90 + 55 + 40) + (100 + 15) and mixed["modes"] == ["air", "car"], "air+car itinerary sums door-to-door minutes")
+	# Each leg charges its fixed whole hours; a route charges their sum (4 h + 2 h).
+	_check(int(mixed["total_minutes"]) == 240 + 120 and mixed["modes"] == ["air", "car"], "air+car itinerary sums its whole-hour legs")
 	_check(is_equal_approx(float(mixed["road_distance_km"]), 140.0) and is_equal_approx(float(mixed["air_distance_km"]), 219.0), "road and flight distances kept in separate fields")
 	var cases := {
-		"air leg without airport access": func(d: Dictionary) -> void: d["segments"][0].erase("airportAccessMinutes"),
+		"air leg without gameplay hours": func(d: Dictionary) -> void: d["segments"][0].erase("gameplayDurationMinutes"),
+		"air leg with a retired airport-access field": func(d: Dictionary) -> void: d["segments"][0]["airportAccessMinutes"] = 50,
+		"car leg not in whole hours": func(d: Dictionary) -> void: d["segments"][1]["gameplayDurationMinutes"] = 100,
+		"car leg hours not rounded from its reference": func(d: Dictionary) -> void: d["segments"][1]["gameplayDurationMinutes"] = 180,
 		"walking mode": func(d: Dictionary) -> void: d["segments"][1]["mode"] = "walk",
 		"car into portal region": func(d: Dictionary) -> void: d["segments"][1]["toLocationId"] = "loc.gate",
 		"leg without source url": func(d: Dictionary) -> void: d["segments"][1]["verification"]["source"].erase("url"),
@@ -254,7 +256,7 @@ func _test_cumulative_short_trips() -> void:
 		var before: int = app.calendar_minutes
 		var result := _travel(target)
 		charged_each_ok = charged_each_ok and result.get("departed", false) and int(result["minutes_charged"]) == leg and app.calendar_minutes - before == leg
-	_check(charged_each_ok, "each short trip charges exactly its minutes (no rounding to hours or days)")
+	_check(charged_each_ok and leg == 60, "each short trip charges exactly its fixed hour (no rounding to days)")
 	_check(app.calendar_minutes == start + leg * targets.size(), "short trips accumulate")
 	var expected_minute_of_day := (22 * 60 + 50 + leg * targets.size())
 	var dt: Dictionary = app.calendar_datetime()
@@ -453,9 +455,9 @@ func _test_air_trip() -> void:
 	var preview: Dictionary = app.preview_travel(CHICAGO)
 	_check(preview["kind"] == "travel" and preview["mode"] == "air" and preview["road_distance_km"] == null and float(preview["air_distance_km"]) > 1000.0 and app.calendar_minutes == start, "air preview shows flight distance and is free")
 	var expected := int(preview["total_minutes"])
-	_check(expected > 240 and expected < 600, "NYC-Chicago door to door is several hours, not minutes (%d min)" % expected)
+	_check(expected == 360, "NYC-Chicago is a fixed 6 h trip (%d min)" % expected)
 	var result := _travel(CHICAGO)
-	_check(result.get("departed", false) and app.calendar_minutes == start + expected and app.current_location_id == CHICAGO and app.current_destination_id == "scifi.loop", "the flight charges door-to-door time once and arrives at the Loop")
+	_check(result.get("departed", false) and app.calendar_minutes == start + expected and app.current_location_id == CHICAGO and app.current_destination_id == "scifi.loop", "the flight charges its 6 h once and arrives at the Loop")
 	_check(app.area_scene_path("scifi.loop").ends_with("rpg-2-star-ocean-the-second_chicago-loop_district-placeholder-scene_m2-v02_20261015-185645-a7d62ba0.tscn") and app.area_scene_path("scifi.city").ends_with("scifi_exploration_area.tscn"), "each destination names its walkable scene")
 	_check(app.commerce_city_block_reason(CHICAGO) == "", "Chicago is a discovered city that can host a company")
 	_check(not app.DESTINATIONS.has("scifi.loop") and not app.areas_visited.has("scifi.loop"), "the placeholder Loop never joins the three-place demo goal")
@@ -475,8 +477,8 @@ func _test_bilingual_text() -> void:
 	var en_lines: String = "\n".join(app.travel_preview_lines(en_preview))
 	_check(zh_label == app.travel_location_dual_name(WASHINGTON) and zh_label.contains("华盛顿特区废墟") and zh_label.contains("Washington, D.C. Ruins"), "map label carries both names in either language")
 	_check(int(zh_preview["total_minutes"]) == int(en_preview["total_minutes"]) and is_equal_approx(float(zh_preview["road_distance_km"]), float(en_preview["road_distance_km"])), "same figures in Chinese and English")
-	_check(zh_lines.contains("2538年1月1日") and zh_lines.contains("汽车") and zh_lines.contains("估算"), "Chinese preview shows arrival date, mode and estimate note")
-	_check(en_lines.contains("Jan 1, 2538") and en_lines.contains("Car") and en_lines.contains("estimated"), "English preview shows arrival date, mode and estimate note")
+	_check(zh_lines.contains("2538年1月1日") and zh_lines.contains("汽车") and zh_lines.contains("公路约 360 公里") and zh_lines.contains("旅时 5小时") and not zh_lines.contains("估算"), "Chinese preview shows arrival date, mode, approximate distance and whole hours")
+	_check(en_lines.contains("Jan 1, 2538") and en_lines.contains("Car") and en_lines.contains("Road about 360 km") and en_lines.contains("Travel time 5 h") and not en_lines.contains("estimat"), "English preview shows arrival date, mode, approximate distance and whole hours")
 	_check(app.travel_duration_text(26) == "26 min" and app.travel_duration_text(120) == "2 h" and app.travel_duration_text(146) == "2 h 26 min", "English durations")
 	app.language = "zh"
 	_check(app.travel_duration_text(146) == "2小时26分钟" and app.calendar_date_text_at(TravelCalendar.to_minutes(2028, 2, 29)) == "2028年2月29日", "Chinese duration and date")

@@ -2,7 +2,7 @@
 	"schemaVersion": 1,
 	"dataId": "global-earth-travel.m2-us-science-v02",
 	"status": "creator-approved-place-set",
-	"statusNote": "On 2026-10-15 the creator approved the science sphere: New York City as the science hub (playable scene: City Hall Park, Lower Manhattan), Yonkers, New York as the outskirts, the whole of Washington, D.C. as abandoned ruins centred on the U.S. Capitol grounds, and a first air route New York City-Chicago with one playable Chicago Loop district. The science sphere covers the US and Canada only. The place set is approved; every route figure is still a preliminary estimate, and nothing here marks M2 accepted. The provisional v01 Shanghai set is kept as hidden retiredLocations so old saves still load; Liangzhu is later Asia work.",
+	"statusNote": "On 2026-10-15 the creator approved the science sphere: New York City as the science hub (playable scene: City Hall Park, Lower Manhattan), Yonkers, New York as the outskirts, the whole of Washington, D.C. as abandoned ruins centred on the U.S. Capitol grounds, and a first air route New York City-Chicago with one playable Chicago Loop district. The science sphere covers the US and Canada only. The place set is approved; every reference distance and duration is still a preliminary estimate (since 2026-10-16 each leg charges a fixed whole number of hours, see travelTimeRule), and nothing here marks M2 accepted. The provisional v01 Shanghai set is kept as hidden retiredLocations so old saves still load; Liangzhu is later Asia work.",
 	"recordedOn": "2026-10-15",
 	"supersedes": "game/data/world-travel/rpg-2-star-ocean-the-second_global-earth-travel_locations-routes_m2-provisional-v01_20261015-024215-b876e53d.json",
 	"designRules": "docs/design/rpg-2-star-ocean-the-second_global-earth-map-real-place-travel_rules-v01_20261014-235354-2b5d4d98.md",
@@ -78,16 +78,16 @@
 				]
 			},
 			{
-				"id": "bts-ontime-2026-07",
-				"name": "US DOT Bureau of Transportation Statistics, Reporting Carrier On-Time Performance, July 2026",
+				"id": "bts-ontime-2025-08_2026-07",
+				"name": "US DOT Bureau of Transportation Statistics, Reporting Carrier On-Time Performance, August 2025 - July 2026 (12 monthly files)",
 				"url": "https://www.transtats.bts.gov/",
 				"license": "US-federal-public-domain",
 				"licenseStatus": "needs-verification",
-				"licenseNote": "US federal statistical data; the BTS terms page was not fetched. July 2026 was the latest month available on 2026-10-15.",
+				"licenseNote": "US federal statistical data; the BTS terms page was not fetched. July 2026 was the latest month available on 2026-10-15 (the August 2026 file returned HTTP 404). The 12 zip SHA-256 values are recorded in docs/qa/rpg-2-star-ocean-the-second_global-earth-travel_nyc-chicago-airport-curbs_m2-us-science-v03-candidate-nonruntime_20261015-200518-7c3e19a4.json (flightBlockTime.months). CRSElapsedTime is scheduled gate departure to gate arrival, per the official TranStats glossary (https://www.transtats.bts.gov/DatabaseInfo.asp?QO_VQ=EFD, read 2026-10-16, m2-v08a S12).",
 				"retrievedOn": "2026-10-15",
 				"usedFor": [
-					"scheduled block time LGA-ORD and ORD-LGA (median CRSElapsedTime)",
-					"confirmation of nonstop service in July 2026"
+					"scheduled block time LGA-ORD and ORD-LGA (12-month median CRSElapsedTime)",
+					"confirmation of nonstop service through July 2026"
 				]
 			},
 			{
@@ -96,7 +96,7 @@
 				"url": "https://www.aa.com/i18n/travel-info/check-in-and-arrival.jsp",
 				"license": null,
 				"licenseStatus": "needs-verification",
-				"licenseNote": "A single factual planning figure (arrive at least 2 hours before a US domestic flight) is used, not copied text. United and Delta pages could not be read.",
+				"licenseNote": "A single factual planning figure (arrive at least 2 hours before a US domestic flight) is used, not copied text. United and Delta pages could not be read on 2026-10-15. On 2026-10-16 this American Airlines page returned HTTP 403 to an automated fetch and United's page timed out, so neither was re-read; Delta's domestic check-in page independently gives 'at least 2 hours prior to departure' (m2-v08a S15). Airline guidance, not a measured wait.",
 				"retrievedOn": "2026-10-15",
 				"usedFor": [
 					"checkInAndWaitMinutes"
@@ -111,6 +111,19 @@
 		"status": "creator-approved-start-date",
 		"timeOfDayStatus": "engineering-placeholder",
 		"note": "The creator set the start date 2537-05-25 (a Saturday in the proleptic Gregorian calendar the game uses). 08:00 is an engineering placeholder for the time of day. New runs start here. Saves keep their absolute date, so a save made with the 2026-04-01 placeholder still shows its 2026 date after loading; nothing is shifted."
+	},
+	"travelTimeRule": {
+		"id": "whole-hour-fixed-v1",
+		"decidedOn": "2026-10-16",
+		"creatorDirection": "这不是一款模拟游戏，不用在时间上那么精细，把rules变简单化",
+		"chargedField": "gameplayDurationMinutes",
+		"referenceField": "referenceDurationMinutes",
+		"stepMinutes": 60,
+		"minimumMinutes": 60,
+		"rounding": "nearest-hour-half-up",
+		"rule": "Every available car or air leg charges its gameplayDurationMinutes: a fixed whole number of hours, at least one, equal to its referenceDurationMinutes (a representative real-world city-to-city estimate) rounded to the nearest hour. A route charges the sum of its legs. The departure clock, airports, check-in, waiting, traffic and timetables never change the charge.",
+		"playerFacing": "Transport mode, approximate distance, whole-hour trip time and arrival date. No airport names or trip components.",
+		"supersedes": "The door-to-door component sum charged from 2026-10-15 to 2026-10-16 and the open creator questions C1-C6 about it."
 	},
 	"regions": [
 		{
@@ -570,8 +583,8 @@
 			"fromLocationId": "earth.us.ny.new-york-city",
 			"toLocationId": "earth.us.ny.yonkers-outskirts",
 			"roadDistanceKm": 28.2,
+			"gameplayDurationMinutes": 60,
 			"referenceDurationMinutes": 35,
-			"doorToDoorAllowanceMinutes": 0,
 			"bidirectional": false,
 			"verification": {
 				"status": "preliminary-estimate",
@@ -591,8 +604,8 @@
 			"fromLocationId": "earth.us.ny.yonkers-outskirts",
 			"toLocationId": "earth.us.ny.new-york-city",
 			"roadDistanceKm": 28.3,
+			"gameplayDurationMinutes": 60,
 			"referenceDurationMinutes": 35,
-			"doorToDoorAllowanceMinutes": 0,
 			"bidirectional": false,
 			"verification": {
 				"status": "preliminary-estimate",
@@ -612,8 +625,8 @@
 			"fromLocationId": "earth.us.ny.new-york-city",
 			"toLocationId": "earth.us.dc.washington-ruins",
 			"roadDistanceKm": 363.2,
+			"gameplayDurationMinutes": 300,
 			"referenceDurationMinutes": 289,
-			"doorToDoorAllowanceMinutes": 0,
 			"bidirectional": false,
 			"verification": {
 				"status": "preliminary-estimate",
@@ -633,8 +646,8 @@
 			"fromLocationId": "earth.us.dc.washington-ruins",
 			"toLocationId": "earth.us.ny.new-york-city",
 			"roadDistanceKm": 361.4,
+			"gameplayDurationMinutes": 300,
 			"referenceDurationMinutes": 286,
-			"doorToDoorAllowanceMinutes": 0,
 			"bidirectional": false,
 			"verification": {
 				"status": "preliminary-estimate",
@@ -654,8 +667,8 @@
 			"fromLocationId": "earth.us.ny.yonkers-outskirts",
 			"toLocationId": "earth.us.dc.washington-ruins",
 			"roadDistanceKm": 388,
+			"gameplayDurationMinutes": 300,
 			"referenceDurationMinutes": 306,
-			"doorToDoorAllowanceMinutes": 0,
 			"bidirectional": false,
 			"verification": {
 				"status": "preliminary-estimate",
@@ -675,8 +688,8 @@
 			"fromLocationId": "earth.us.dc.washington-ruins",
 			"toLocationId": "earth.us.ny.yonkers-outskirts",
 			"roadDistanceKm": 383.4,
+			"gameplayDurationMinutes": 300,
 			"referenceDurationMinutes": 303,
-			"doorToDoorAllowanceMinutes": 0,
 			"bidirectional": false,
 			"verification": {
 				"status": "preliminary-estimate",
@@ -696,86 +709,95 @@
 			"fromLocationId": "earth.us.ny.new-york-city",
 			"toLocationId": "earth.us.il.chicago",
 			"flightDistanceKm": 1177.1,
-			"airportAccessMinutes": 24,
-			"checkInAndWaitMinutes": 120,
-			"flightMinutes": 166,
-			"airportEgressMinutes": 55,
-			"doorToDoorAllowanceMinutes": 0,
+			"gameplayDurationMinutes": 360,
+			"referenceDurationMinutes": 364,
 			"bidirectional": false,
-			"departureAirport": {
-				"iata": "LGA",
-				"name": "LaGuardia Airport",
-				"lat": 40.777199,
-				"lon": -73.872597
-			},
-			"arrivalAirport": {
-				"iata": "ORD",
-				"name": "Chicago O'Hare International Airport",
-				"lat": 41.9786,
-				"lon": -87.9048
-			},
-			"components": {
-				"flightDistanceKm": {
-					"value": 1177.1,
-					"basis": "Great-circle distance LGA-ORD from OurAirports reference points (haversine, R = 6371.0088 km). Not the flown track.",
-					"source": {
-						"name": "OurAirports airports.csv (KLGA id 3643, KORD id 3754)",
-						"url": "https://davidmegginson.github.io/ourairports-data/airports.csv",
-						"retrievedOn": "2026-10-15",
-						"sourceId": "ourairports"
-					}
-				},
-				"airportAccessMinutes": {
-					"value": 24,
-					"basis": "Routing-model estimate from the public OSRM demo server, with no live traffic, parking or loading; not measured free-flow. Drive City Hall Park -> LGA reference point (18.3 km).",
-					"source": {
-						"name": "OSRM demo server, car profile",
-						"url": "https://router.project-osrm.org/route/v1/driving/-74.00708,40.71205;-73.872597,40.777199?overview=false",
-						"retrievedOn": "2026-10-15",
-						"sourceId": "osrm-demo-osm"
-					}
-				},
-				"checkInAndWaitMinutes": {
-					"value": 120,
-					"basis": "Airline guidance, not a measured wait: American Airlines 'When to arrive at the airport: Within the U.S. - at least 2 hours'. TSA gives no fixed figure.",
-					"source": {
-						"name": "American Airlines check-in and arrival",
-						"url": "https://www.aa.com/i18n/travel-info/check-in-and-arrival.jsp",
-						"retrievedOn": "2026-10-15",
-						"sourceId": "aa-arrival-guidance"
-					}
-				},
-				"flightMinutes": {
-					"value": 166,
-					"basis": "Median scheduled block time of 997 LGA->ORD nonstop flights in July 2026 (p10 157, p90 188 min).",
-					"source": {
-						"name": "US DOT BTS On-Time Reporting, July 2026, CRSElapsedTime",
-						"url": "https://transtats.bts.gov/PREZIP/On_Time_Reporting_Carrier_On_Time_Performance_1987_present_2026_7.zip",
-						"retrievedOn": "2026-10-15",
-						"sourceId": "bts-ontime-2026-07"
-					}
-				},
-				"airportEgressMinutes": {
-					"value": 55,
-					"basis": "Routing-model estimate from the public OSRM demo server, with no live traffic, parking or loading; not measured free-flow. Drive ORD reference point -> the Loop (34.4 km).",
-					"source": {
-						"name": "OSRM demo server, car profile",
-						"url": "https://router.project-osrm.org/route/v1/driving/-87.9048,41.9786;-87.6297746,41.881144?overview=false",
-						"retrievedOn": "2026-10-15",
-						"sourceId": "osrm-demo-osm"
-					}
-				}
-			},
 			"verification": {
 				"status": "preliminary-estimate",
 				"source": {
-					"name": "US DOT BTS On-Time Reporting July 2026 (scheduled block time) + OSRM airport drives + airline arrival guidance",
+					"name": "US DOT BTS On-Time Reporting August 2025 - July 2026 (scheduled block time) + OSRM airport drives + airline arrival guidance",
 					"url": "https://www.transtats.bts.gov/",
 					"retrievedOn": "2026-10-15",
-					"sourceId": "bts-ontime-2026-07",
+					"sourceId": "bts-ontime-2025-08_2026-07",
 					"recordedIn": "docs/qa/rpg-2-star-ocean-the-second_us-science-sphere_runtime-migration_qa-note_m2-v02_20261015-175011-364131c8.md"
 				},
-				"note": "Sum of separately sourced parts (see components). Airport points are OurAirports reference points, not terminals; deplaning, baggage and curb time are not counted. Scheduled service on LGA-ORD is confirmed only through July 2026. An estimate for game time, not a timetable."
+				"note": "Representative real-world city-to-city estimate: referenceDurationMinutes is the sum of the separately sourced parts in referenceEvidence (airport access, airline arrival guidance, 12-month BTS scheduled block time, airport egress). Airport points are OurAirports reference points, not terminals. Evidence only, never charged and never shown to players: under the 2026-10-16 whole-hour rule the trip charges gameplayDurationMinutes, the reference rounded to the nearest hour. Scheduled service on LGA-ORD is confirmed only through July 2026."
+			},
+			"referenceEvidence": {
+				"runtimeUse": "none",
+				"note": "Internal provenance for referenceDurationMinutes. The runtime never reads this block: it does not choose airports, add check-in or waiting time, or depend on the departure clock. componentMinutes must sum to referenceDurationMinutes.",
+				"componentMinutes": {
+					"airportAccessMinutes": 24,
+					"checkInAndWaitMinutes": 120,
+					"flightMinutes": 165,
+					"airportEgressMinutes": 55
+				},
+				"components": {
+					"flightDistanceKm": {
+						"value": 1177.1,
+						"basis": "Great-circle distance LGA-ORD from OurAirports reference points (haversine, R = 6371.0088 km). Not the flown track.",
+						"source": {
+							"name": "OurAirports airports.csv (KLGA id 3643, KORD id 3754)",
+							"url": "https://davidmegginson.github.io/ourairports-data/airports.csv",
+							"retrievedOn": "2026-10-15",
+							"sourceId": "ourairports"
+						}
+					},
+					"airportAccessMinutes": {
+						"value": 24,
+						"basis": "Routing-model estimate from the public OSRM demo server, with no live traffic, parking or loading; not measured free-flow. Drive City Hall Park -> LGA reference point (18.3 km).",
+						"source": {
+							"name": "OSRM demo server, car profile",
+							"url": "https://router.project-osrm.org/route/v1/driving/-74.00708,40.71205;-73.872597,40.777199?overview=false",
+							"retrievedOn": "2026-10-15",
+							"sourceId": "osrm-demo-osm"
+						}
+					},
+					"checkInAndWaitMinutes": {
+						"value": 120,
+						"basis": "Airline guidance, not a measured wait: American Airlines 'When to arrive at the airport: Within the U.S. - at least 2 hours'. TSA gives no fixed figure.",
+						"source": {
+							"name": "American Airlines check-in and arrival",
+							"url": "https://www.aa.com/i18n/travel-info/check-in-and-arrival.jsp",
+							"retrievedOn": "2026-10-15",
+							"sourceId": "aa-arrival-guidance"
+						}
+					},
+					"flightMinutes": {
+						"value": 165,
+						"rawMedianMinutes": 165,
+						"basis": "Scheduled, not measured: median scheduled block time (CRSElapsedTime, gate to gate, taxi included) of 11,611 LGA->ORD nonstop flights, August 2025 - July 2026 (p10 157, p90 176 min). Replaces the July-2026-only median 166 (n 997). Reproduced independently three times (m2-v03 candidate, m2-v08a audit script, m2-v09 check, 2026-10-16). The measured median from scheduled departure to actual gate arrival is 163 min, so the typical flight is within 2 min of this value; delays and cancellations are not represented.",
+						"source": {
+							"name": "US DOT BTS On-Time Reporting, August 2025 - July 2026 (12 monthly files), CRSElapsedTime",
+							"url": "https://transtats.bts.gov/PREZIP/On_Time_Reporting_Carrier_On_Time_Performance_1987_present_<YYYY>_<M>.zip",
+							"retrievedOn": "2026-10-15",
+							"sourceId": "bts-ontime-2025-08_2026-07",
+							"recordedIn": "docs/qa/rpg-2-star-ocean-the-second_m2-door-to-door-route-figures_independent-source-audit_qa-supplement_m2-v08a_20261016-085803-b91a5a30.md"
+						}
+					},
+					"airportEgressMinutes": {
+						"value": 55,
+						"basis": "Routing-model estimate from the public OSRM demo server, with no live traffic, parking or loading; not measured free-flow. Drive ORD reference point -> the Loop (34.4 km). KNOWN ROUTING ERROR, not corrected: the ORD input point is the OurAirports aerodrome reference point, and the route starts on airside service roads instead of a public terminal curb (m2-v02 audit section 4.1, m2-v03 section 3, m2-v08a section 5 item 3). Evidence only: under the 2026-10-16 whole-hour rule this leg is never charged on its own.",
+						"source": {
+							"name": "OSRM demo server, car profile",
+							"url": "https://router.project-osrm.org/route/v1/driving/-87.9048,41.9786;-87.6297746,41.881144?overview=false",
+							"retrievedOn": "2026-10-15",
+							"sourceId": "osrm-demo-osm"
+						}
+					}
+				},
+				"departureAirport": {
+					"iata": "LGA",
+					"name": "LaGuardia Airport",
+					"lat": 40.777199,
+					"lon": -73.872597
+				},
+				"arrivalAirport": {
+					"iata": "ORD",
+					"name": "Chicago O'Hare International Airport",
+					"lat": 41.9786,
+					"lon": -87.9048
+				}
 			}
 		},
 		{
@@ -784,86 +806,95 @@
 			"fromLocationId": "earth.us.il.chicago",
 			"toLocationId": "earth.us.ny.new-york-city",
 			"flightDistanceKm": 1177.1,
-			"airportAccessMinutes": 54,
-			"checkInAndWaitMinutes": 120,
-			"flightMinutes": 142,
-			"airportEgressMinutes": 22,
-			"doorToDoorAllowanceMinutes": 0,
+			"gameplayDurationMinutes": 360,
+			"referenceDurationMinutes": 332,
 			"bidirectional": false,
-			"departureAirport": {
-				"iata": "ORD",
-				"name": "Chicago O'Hare International Airport",
-				"lat": 41.9786,
-				"lon": -87.9048
-			},
-			"arrivalAirport": {
-				"iata": "LGA",
-				"name": "LaGuardia Airport",
-				"lat": 40.777199,
-				"lon": -73.872597
-			},
-			"components": {
-				"flightDistanceKm": {
-					"value": 1177.1,
-					"basis": "Great-circle distance LGA-ORD from OurAirports reference points (haversine, R = 6371.0088 km). Not the flown track.",
-					"source": {
-						"name": "OurAirports airports.csv (KLGA id 3643, KORD id 3754)",
-						"url": "https://davidmegginson.github.io/ourairports-data/airports.csv",
-						"retrievedOn": "2026-10-15",
-						"sourceId": "ourairports"
-					}
-				},
-				"airportAccessMinutes": {
-					"value": 54,
-					"basis": "Routing-model estimate from the public OSRM demo server, with no live traffic, parking or loading; not measured free-flow. Drive the Loop -> ORD reference point (34.3 km).",
-					"source": {
-						"name": "OSRM demo server, car profile",
-						"url": "https://router.project-osrm.org/route/v1/driving/-87.6297746,41.881144;-87.9048,41.9786?overview=false",
-						"retrievedOn": "2026-10-15",
-						"sourceId": "osrm-demo-osm"
-					}
-				},
-				"checkInAndWaitMinutes": {
-					"value": 120,
-					"basis": "Airline guidance, not a measured wait: American Airlines 'When to arrive at the airport: Within the U.S. - at least 2 hours'. TSA gives no fixed figure.",
-					"source": {
-						"name": "American Airlines check-in and arrival",
-						"url": "https://www.aa.com/i18n/travel-info/check-in-and-arrival.jsp",
-						"retrievedOn": "2026-10-15",
-						"sourceId": "aa-arrival-guidance"
-					}
-				},
-				"flightMinutes": {
-					"value": 142,
-					"basis": "Median scheduled block time of 997 ORD->LGA nonstop flights in July 2026 (p10 136, p90 149 min).",
-					"source": {
-						"name": "US DOT BTS On-Time Reporting, July 2026, CRSElapsedTime",
-						"url": "https://transtats.bts.gov/PREZIP/On_Time_Reporting_Carrier_On_Time_Performance_1987_present_2026_7.zip",
-						"retrievedOn": "2026-10-15",
-						"sourceId": "bts-ontime-2026-07"
-					}
-				},
-				"airportEgressMinutes": {
-					"value": 22,
-					"basis": "Routing-model estimate from the public OSRM demo server, with no live traffic, parking or loading; not measured free-flow. Drive LGA reference point -> City Hall Park (16.5 km).",
-					"source": {
-						"name": "OSRM demo server, car profile",
-						"url": "https://router.project-osrm.org/route/v1/driving/-73.872597,40.777199;-74.00708,40.71205?overview=false",
-						"retrievedOn": "2026-10-15",
-						"sourceId": "osrm-demo-osm"
-					}
-				}
-			},
 			"verification": {
 				"status": "preliminary-estimate",
 				"source": {
-					"name": "US DOT BTS On-Time Reporting July 2026 (scheduled block time) + OSRM airport drives + airline arrival guidance",
+					"name": "US DOT BTS On-Time Reporting August 2025 - July 2026 (scheduled block time) + OSRM airport drives + airline arrival guidance",
 					"url": "https://www.transtats.bts.gov/",
 					"retrievedOn": "2026-10-15",
-					"sourceId": "bts-ontime-2026-07",
+					"sourceId": "bts-ontime-2025-08_2026-07",
 					"recordedIn": "docs/qa/rpg-2-star-ocean-the-second_us-science-sphere_runtime-migration_qa-note_m2-v02_20261015-175011-364131c8.md"
 				},
-				"note": "Sum of separately sourced parts (see components). Airport points are OurAirports reference points, not terminals; deplaning, baggage and curb time are not counted. Scheduled service on LGA-ORD is confirmed only through July 2026. An estimate for game time, not a timetable."
+				"note": "Representative real-world city-to-city estimate: referenceDurationMinutes is the sum of the separately sourced parts in referenceEvidence (airport access, airline arrival guidance, 12-month BTS scheduled block time, airport egress). Airport points are OurAirports reference points, not terminals. Evidence only, never charged and never shown to players: under the 2026-10-16 whole-hour rule the trip charges gameplayDurationMinutes, the reference rounded to the nearest hour. Scheduled service on LGA-ORD is confirmed only through July 2026."
+			},
+			"referenceEvidence": {
+				"runtimeUse": "none",
+				"note": "Internal provenance for referenceDurationMinutes. The runtime never reads this block: it does not choose airports, add check-in or waiting time, or depend on the departure clock. componentMinutes must sum to referenceDurationMinutes.",
+				"componentMinutes": {
+					"airportAccessMinutes": 54,
+					"checkInAndWaitMinutes": 120,
+					"flightMinutes": 136,
+					"airportEgressMinutes": 22
+				},
+				"components": {
+					"flightDistanceKm": {
+						"value": 1177.1,
+						"basis": "Great-circle distance LGA-ORD from OurAirports reference points (haversine, R = 6371.0088 km). Not the flown track.",
+						"source": {
+							"name": "OurAirports airports.csv (KLGA id 3643, KORD id 3754)",
+							"url": "https://davidmegginson.github.io/ourairports-data/airports.csv",
+							"retrievedOn": "2026-10-15",
+							"sourceId": "ourairports"
+						}
+					},
+					"airportAccessMinutes": {
+						"value": 54,
+						"basis": "Routing-model estimate from the public OSRM demo server, with no live traffic, parking or loading; not measured free-flow. Drive the Loop -> ORD reference point (34.3 km). KNOWN ROUTING ERROR, not corrected: the ORD input point is the OurAirports aerodrome reference point, and the route ends on airside service roads instead of a public terminal curb (m2-v02 audit section 4.1, m2-v03 section 3, m2-v08a section 5 item 3). Evidence only: under the 2026-10-16 whole-hour rule this leg is never charged on its own.",
+						"source": {
+							"name": "OSRM demo server, car profile",
+							"url": "https://router.project-osrm.org/route/v1/driving/-87.6297746,41.881144;-87.9048,41.9786?overview=false",
+							"retrievedOn": "2026-10-15",
+							"sourceId": "osrm-demo-osm"
+						}
+					},
+					"checkInAndWaitMinutes": {
+						"value": 120,
+						"basis": "Airline guidance, not a measured wait: American Airlines 'When to arrive at the airport: Within the U.S. - at least 2 hours'. TSA gives no fixed figure.",
+						"source": {
+							"name": "American Airlines check-in and arrival",
+							"url": "https://www.aa.com/i18n/travel-info/check-in-and-arrival.jsp",
+							"retrievedOn": "2026-10-15",
+							"sourceId": "aa-arrival-guidance"
+						}
+					},
+					"flightMinutes": {
+						"value": 136,
+						"rawMedianMinutes": 136,
+						"basis": "Scheduled, not measured: median scheduled block time (CRSElapsedTime, gate to gate, taxi included) of 11,611 ORD->LGA nonstop flights, August 2025 - July 2026 (p10 128, p90 144 min). Replaces the July-2026-only median 142 (n 997). Reproduced independently three times (m2-v03 candidate, m2-v08a audit script, m2-v09 check, 2026-10-16). The measured median from scheduled departure to actual gate arrival is 134 min, so the typical flight is within 2 min of this value; delays and cancellations are not represented.",
+						"source": {
+							"name": "US DOT BTS On-Time Reporting, August 2025 - July 2026 (12 monthly files), CRSElapsedTime",
+							"url": "https://transtats.bts.gov/PREZIP/On_Time_Reporting_Carrier_On_Time_Performance_1987_present_<YYYY>_<M>.zip",
+							"retrievedOn": "2026-10-15",
+							"sourceId": "bts-ontime-2025-08_2026-07",
+							"recordedIn": "docs/qa/rpg-2-star-ocean-the-second_m2-door-to-door-route-figures_independent-source-audit_qa-supplement_m2-v08a_20261016-085803-b91a5a30.md"
+						}
+					},
+					"airportEgressMinutes": {
+						"value": 22,
+						"basis": "Routing-model estimate from the public OSRM demo server, with no live traffic, parking or loading; not measured free-flow. Drive LGA reference point -> City Hall Park (16.5 km).",
+						"source": {
+							"name": "OSRM demo server, car profile",
+							"url": "https://router.project-osrm.org/route/v1/driving/-73.872597,40.777199;-74.00708,40.71205?overview=false",
+							"retrievedOn": "2026-10-15",
+							"sourceId": "osrm-demo-osm"
+						}
+					}
+				},
+				"departureAirport": {
+					"iata": "ORD",
+					"name": "Chicago O'Hare International Airport",
+					"lat": 41.9786,
+					"lon": -87.9048
+				},
+				"arrivalAirport": {
+					"iata": "LGA",
+					"name": "LaGuardia Airport",
+					"lat": 40.777199,
+					"lon": -73.872597
+				}
 			}
 		}
 	],
@@ -998,13 +1029,13 @@
 			"id": "request.air.release-grade-figures",
 			"mode": "air",
 			"status": "open",
-			"note": "Re-derive the air components before release: terminal-specific access and egress, a check-in figure with known terms, and a schedule month nearer the build date."
+			"note": "Before release, re-check that each air referenceDurationMinutes is still a plausible city-to-city figure. The gameplay hours change only if the rounded hour changes. Terminal-level components are not needed under the 2026-10-16 whole-hour rule."
 		},
 		{
 			"id": "request.car.self-hosted-osrm",
 			"mode": "car",
 			"status": "open",
-			"note": "Replace the demo-server figures with a self-hosted OSRM run on a dated OpenStreetMap extract, or another source whose terms allow commercial use."
+			"note": "Replace the demo-server figures with a self-hosted OSRM run on a dated OpenStreetMap extract, or another source whose terms allow commercial use. This concerns the reuse terms of the reference distances and minutes; the whole-hour gameplay values change only if a rounded hour changes."
 		}
 	]
 }

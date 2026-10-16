@@ -1,6 +1,6 @@
 // Focused check for the migrated Game Bible builder and the tracked Game Bible / MVP progress JSON after the creator decisions
-// of 2026-10-15 (five Earth civilization spheres plus a separate portal planet, NYC / Catskills / 2537-05-25, M2 9/12 technical
-// state, 10-node skill rules with 0 of 710 nodes written). The builder must reproduce the tracked state from its sources
+// of 2026-10-15 (five Earth civilization spheres plus a separate portal planet, NYC / Catskills / 2537-05-25, M2 technical
+// state (10/12 since the 2026-10-16 whole-hour route-times gate), 10-node skill rules with 0 of 710 nodes written). The builder must reproduce the tracked state from its sources
 // (51 characters, approved 20-series job roster, superseded 7-node / 5-node drafts) plus the canon carried from the tracked state,
 // and must refuse a base that lost that canon instead of regenerating the superseded v01 brief text.
 // Read-only: the builder is required as a module and only build() / checkCanon() run in memory; no project file is written.
@@ -76,7 +76,7 @@ for (const [label, mutate, pattern] of mutations) {
 }
 pass(`builder refuses a base without creatorDecisions or a curated review block and rejects the v01 brief world chapter; ${mutations.length} stale/overstated mutations rejected`);
 
-// 4. MVP progress JSON: M2 9/12 implemented technical state, none done; counters honest and consistent with the Bible.
+// 4. MVP progress JSON: M2 10/12 implemented technical state (route-data = whole-hour route times since 2026-10-16), none done; counters honest and consistent with the Bible.
 const m2 = progress.steps.find(step => step.id === 'M2');
 assert.equal(m2.status, 'in_progress');
 for (const phrase of ['five Earth spheres', 'portal-only final planet', 'Catskills', '2537-05-25', 'M2 is not complete']) assert.ok(m2.summary.includes(phrase), 'M2 summary: ' + phrase);
@@ -85,8 +85,9 @@ assert.ok(m2.evidence.filter(line => line.includes('shanghai')).every(line => li
 const gates = progress.m2Expansion.gates;
 const implemented = gates.filter(gate => gate.status === 'implemented').map(gate => gate.id);
 assert.equal(gates.length, 12);
-assert.equal(implemented.length, 9, '9 of 12 gates implemented');
-assert.deepEqual(gates.filter(gate => gate.status !== 'implemented').map(gate => [gate.id, gate.status]), [['route-data', 'estimate_only'], ['map-art', 'not_started'], ['visual-review', 'human_pending']]);
+assert.equal(implemented.length, 10, '10 of 12 gates implemented');
+assert.deepEqual(gates.filter(gate => gate.status !== 'implemented').map(gate => [gate.id, gate.status]), [['map-art', 'not_started'], ['visual-review', 'human_pending']]);
+assert.equal(gates.find(gate => gate.id === 'route-data').en, 'Route times (whole-hour rule)', 'route-data is the whole-hour route-times gate');
 assert.ok(!gates.some(gate => /done|accepted|approved/.test(gate.status)), 'no gate claims acceptance');
 const counters = progress.approvalLedger.counters;
 assert.deepEqual(counters, {identities: 51, visualVariants: 52, runtimeSpritesAccepted: 0, runtimeSpritesTarget: 52, sceneVisualsAccepted: 0, sceneVisualsTarget: 11, humanPlaytests: 0, humanPlaytestsTarget: 2});
@@ -95,7 +96,7 @@ assert.equal(bible.environmentVisualReview.sceneQualityTarget, counters.sceneVis
 assert.equal(bible.creatorDecisions.geography.adventureStart, progress.m2Expansion.creatorDecision.adventureStart);
 const redesign = progress.decisions.find(decision => decision.id === 'skill-tree-redesign');
 assert.ok(redesign && redesign.kind === 'blocked' && redesign.detail.includes('200 + 510') && bible.canonBasis.skillNodes.approvedRequired === 200 + 510, 'skill redesign stays blocked at 200 + 510 = 710');
-pass(`progress: M2 in progress, ${implemented.length}/${gates.length} gates implemented, 3 open, none accepted; counters sprites 0/52, scenes 0/11, playtests 0/2, 51 identities / 52 variants; start date and 710-node redesign consistent with the Bible`);
+pass(`progress: M2 in progress, ${implemented.length}/${gates.length} gates implemented, 2 open, none accepted; counters sprites 0/52, scenes 0/11, playtests 0/2, 51 identities / 52 variants; start date and 710-node redesign consistent with the Bible`);
 
 // 5. Nothing was written.
 assert.deepEqual({bible: digest(builder.dest), progress: digest(progressPath)}, before, 'tracked JSON untouched');

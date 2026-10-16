@@ -4,7 +4,7 @@ extends SceneTree
 #   - a new run starts 2537-05-25 08:00 in New York City; the City Hall Park scene loads with
 #     Chinese and English titles, and walking there charges no calendar time;
 #   - the map flies New York City -> Chicago through the route card, charging the core's
-#     door-to-door minutes once, and loads the Chicago Loop placeholder scene;
+#     fixed 6 h once (whole-hour rule, 2026-10-16), and loads the Chicago Loop placeholder scene;
 #   - walking in the Loop charges no time, streets block and slide, Esc returns to the map;
 #   - saving in the Loop and loading returns to the Loop at the saved clock;
 #   - the Washington ruins scene keeps its survey post and patrol automaton;
@@ -89,9 +89,9 @@ func _fly_to_chicago() -> bool:
 		return false
 	var option: Dictionary = map.route_state["options"][0]
 	var text: String = map.card_options.get_child(0).text
-	if not _check(option["mode"] == "air" and text.contains("飞机") and text.contains("航程") and text.contains("估算") and not text.contains("公路"), "air option shows flight distance and the estimate note: " + text.replace("\n", " | ")):
+	if not _check(option["mode"] == "air" and text.contains("飞机") and text.contains("航程约 1180 km") and text.contains("6小时") and not text.contains("公路") and not text.contains("估算"), "air option shows approximate flight distance and 6 hours: " + text.replace("\n", " | ")):
 		return false
-	# English shows the mode once: "Air · Flight 1177.1 km", never "Air · Air 1177.1 km".
+	# English shows the mode once: "Air · Flight ~1180 km", never "Air · Air ~1180 km".
 	app.language = "en"
 	var en_text: String = map.route_option_text(option)
 	app.language = "zh"
@@ -103,7 +103,7 @@ func _fly_to_chicago() -> bool:
 	var loop: Node = current_scene
 	if not _check(loop.scene_file_path == LOOP_SCENE and app.current_location_id == CHICAGO and app.current_destination_id == "scifi.loop", "departing flies to Chicago and loads the Loop scene"):
 		return false
-	return _check(app.calendar_minutes == start + expected and app.last_travel.get("minutes", -1) == expected, "the flight charged the core's door-to-door minutes once (%d)" % expected)
+	return _check(expected == 360 and app.calendar_minutes == start + expected and app.last_travel.get("minutes", -1) == expected, "the flight charged the core's fixed 6 h once (%d)" % expected)
 
 
 func _walk_and_save_in_loop() -> bool:

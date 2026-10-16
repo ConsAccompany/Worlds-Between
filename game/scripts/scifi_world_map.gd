@@ -922,7 +922,8 @@ func _refresh_route_card() -> void:
 	cancel_button.text = MapText.t("cancel")
 
 
-# Formats one available route option. Every number and date is text from the route core.
+# Formats one available route option: mode, approximate distance, whole-hour duration and arrival date.
+# Every number and date comes from the route core; distances are only rounded for display.
 static func route_option_text(option: Dictionary) -> String:
 	var parts := [MapText.t("mode_" + String(option["mode"]))]
 	if option["road_distance_km"] > 0.0:
@@ -933,18 +934,13 @@ static func route_option_text(option: Dictionary) -> String:
 	var line := " · ".join(parts)
 	if not String(option["arrival_text"]).is_empty():
 		line += "\n" + MapText.t("arrival_text") % option["arrival_text"]
-	var notes := []
 	if not option["via"].is_empty():
-		notes.append(MapText.t("via") % ", ".join(option["via"]))
-	if option["estimate"]:
-		notes.append(MapText.t("estimate"))
-	if not notes.is_empty():
-		line += "\n" + " · ".join(notes)
+		line += "\n" + MapText.t("via") % ", ".join(option["via"])
 	return line
 
 
 static func _km_text(km: float) -> String:
-	return "%.1f" % km
+	return str(WorldRouteRegistry.approximate_km(km))
 
 
 # --- Text -------------------------------------------------------------------
@@ -1110,7 +1106,7 @@ func _refresh_commerce() -> void:
 	if not commerce_feedback.is_empty():
 		var args: Array = commerce_feedback[1]
 		lines.append(AppState.text_for(String(commerce_feedback[0])) % args if not args.is_empty() else AppState.text_for(String(commerce_feedback[0])))
-	lines.append(AppState.text_for("travel_date_line") % ("%s %s" % [AppState.calendar_date_text(), AppState.calendar_time_text_at(AppState.calendar_minutes)]))
+	lines.append(AppState.text_for("travel_date_line") % AppState.calendar_date_text())
 	lines.append(AppState.text_for("commerce_ledger") % int(ledger["ledgerUnits"]))
 	if here.is_empty():
 		lines.append(AppState.text_for("commerce_none_here"))

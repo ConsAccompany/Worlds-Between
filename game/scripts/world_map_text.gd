@@ -2,7 +2,8 @@ extends RefCounted
 
 # Map-only bilingual strings. Shared labels (save, growth, field log) still come from AppState.
 # Player-facing only: production state (provisional picks, art review) and data sources stay in
-# the Game Bible and QA notes, never on screen. Travel figures keep their "estimate" marker.
+# the Game Bible and QA notes, never on screen. A route shows only its mode, an approximate distance,
+# the whole-hour trip time and the arrival; no airports, check-in, waiting or other trip components.
 
 const STRINGS := {
 	"zh": {
@@ -26,12 +27,11 @@ const STRINGS := {
 		"route_unverified": "另有路线暂不可用。",
 		"route_pending_button": "无法出发",
 		"via": "经 %s",
-		"estimate": "里程与旅时为估算",
 		"mode_car": "汽车",
 		"mode_air": "飞机",
 		"mode_air_car": "飞机＋汽车",
-		"road_km": "公路 %s km",
-		"air_km": "航程 %s km",
+		"road_km": "公路约 %s km",
+		"air_km": "航程约 %s km",
 		"arrival_text": "抵达 %s",
 		"depart": "出发",
 		"enter_here": "进入场景",
@@ -59,12 +59,11 @@ const STRINGS := {
 		"route_unverified": "Another route is not available yet.",
 		"route_pending_button": "Cannot depart",
 		"via": "via %s",
-		"estimate": "estimated distance and time",
 		"mode_car": "Car",
 		"mode_air": "Air",
 		"mode_air_car": "Air + car",
-		"road_km": "Road %s km",
-		"air_km": "Flight %s km",
+		"road_km": "Road ~%s km",
+		"air_km": "Flight ~%s km",
 		"arrival_text": "Arrive %s",
 		"depart": "Depart",
 		"enter_here": "Enter scene",

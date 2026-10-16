@@ -164,7 +164,9 @@ func _adapter_checks() -> bool:
 	if not _check(adapter.api_available() and ready["status"] == "ready" and ready["options"].size() == 1 and ready["unverified"].size() == 1, "fixture splits available and unverified"):
 		return false
 	var text: String = MapScript.route_option_text(ready["options"][0])
-	if not _check(text.contains("1000.0") and text.contains("12.5") and text.contains("250 min") and text.contains("FIXTURE-DATE"), "air+car option text uses provider numbers: " + text.replace("\n", " | ")):
+	# Distances are shown rounded (12.5 -> 13 km, 1000.0 -> 1000 km); duration and date are the provider's text.
+	# The arrival shows the provider's date only, never its clock text ("+250").
+	if not _check(text.contains("13 km") and text.contains("1000 km") and not text.contains("12.5") and text.contains("250 min") and text.contains("FIXTURE-DATE") and not text.contains("+250"), "air+car option text uses provider numbers: " + text.replace("\n", " | ")):
 		return false
 	if not _check(not ready["unverified"][0].has("total_minutes"), "unverified option carries no minutes"):
 		return false
