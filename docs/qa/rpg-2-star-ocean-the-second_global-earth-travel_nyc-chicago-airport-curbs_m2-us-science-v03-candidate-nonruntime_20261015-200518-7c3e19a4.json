@@ -1,0 +1,1519 @@
+{
+	"schemaVersion": 1,
+	"dataId": "global-earth-travel.m2-us-science-v03-candidate.nyc-chicago-airport-curbs",
+	"status": "nonruntime-proposed-candidate",
+	"statusNote": "Proposed v03 candidate for the NYC-Chicago air route endpoints only. The runtime does not read this file and v02 stays active. Every figure is still a preliminary 2026 real-world estimate. The M2 door-to-door route-figures gate stays OPEN.",
+	"recordedOn": "2026-10-15",
+	"basedOn": "game/data/world-travel/rpg-2-star-ocean-the-second_global-earth-travel_locations-routes_m2-us-science-v02_20261015-175011-c454007b.json",
+	"respondsTo": "docs/qa/rpg-2-star-ocean-the-second_m2-us-science-route-figures_real-world-travel-audit_qa-note_m2-v02_20261015-195053-10d2525c.md (section 4.1 airport points; section 7 items 2 and 4)",
+	"qaNote": "docs/qa/rpg-2-star-ocean-the-second_m2-nyc-chicago-airport-curb-endpoints_v03-candidate_qa-note_m2-v03_20261015-200518-7c3e19a4.md",
+	"scope": "Changes only LGA/ORD access and egress endpoints and the block-time window. Car segments, the 120-minute arrival allowance, the zero arrival-side allowance and every location record are unchanged from v02.",
+	"assumptions": [
+		"Primary carrier pair is United: LGA Terminal B <-> ORD Terminal 1. United is the largest reporting carrier on LGA-ORD over Aug 2025 - Jul 2026 (see carrierRowsLGAtoORD12m). American (LGA B <-> ORD T3) and Delta (LGA C <-> ORD T5) are given as sensitivity rows only.",
+		"Access legs end on the upper-level departures roadway; egress legs start on the arrivals roadway. This models a private car or taxi drop-off and pickup at the terminal curb. ORD rideshare pickup is at Terminal 2 departure level (O'Hare directory) and LGA app-ride pickup locations were not examined; neither is modelled.",
+		"A curb point is the midpoint of one named OSM roadway way (see curbPoints). The OSM way is the coordinate source; the airport authority pages are the terminal-assignment source. No airport authority publishes curb coordinates that were found.",
+		"Car times are free-flow routing-model times (Valhalla auto costing on the FOSSGIS public instance). No traffic factor, time-of-day profile, parking, loading or curb dwell is applied.",
+		"Scene points are unchanged from v02: City Hall Park (-74.00708, 40.71205) and the Loop (-87.6297746, 41.881144).",
+		"Block time is the pooled median of every scheduled row (cancelled rows included, same definition as v02) over the latest 12 released BTS months, Aug 2025 - Jul 2026. The Aug 2026 file returned HTTP 404 on 2026-10-15.",
+		"checkInAndWaitMinutes stays 120 (v02). doorToDoorAllowanceMinutes stays 0 and is NOT a claim that the arrival side takes no time.",
+		"Component minutes are rounded to whole minutes before summing, because the runtime sums the integer fields (world_route_registry.gd AIR_MINUTE_FIELDS). candidateTotalFromRawComponents shows the unrounded sum.",
+		"No 2537 fiction modifier is applied (all 1.0 by omission)."
+	],
+	"sources": [
+		{
+			"id": "osm-overpass",
+			"name": "OpenStreetMap via Overpass API (overpass-api.de)",
+			"url": "https://overpass-api.de/api/interpreter",
+			"snapshot": "2026-10-15T23:56:45Z",
+			"responseSha256": "606da1cff51ad66711c894a45ff352a664645aea70371987a56e3ca861354b5c",
+			"license": "ODbL-1.0",
+			"attributionText": "(c) OpenStreetMap contributors, ODbL",
+			"retrievedOn": "2026-10-15 (America/New_York; late queries fell on 2026-10-16 UTC)",
+			"usedFor": [
+				"curb roadway geometry, IDs and versions"
+			]
+		},
+		{
+			"id": "valhalla-fossgis",
+			"name": "Valhalla routing, FOSSGIS public instance",
+			"url": "https://valhalla1.openstreetmap.de/route",
+			"version": "3.9.1-8b51c03",
+			"tilesetLastModifiedUtc": "2026-10-15T15:24:30Z",
+			"license": "ODbL-1.0 (OSM data)",
+			"licenseStatus": "needs-verification",
+			"licenseNote": "The FOSSGIS usage-terms page returned a bot-protection block on 2026-10-15. Treat as non-commercial demo use until verified; re-derive on a self-hosted router before release.",
+			"retrievedOn": "2026-10-15 (America/New_York; late queries fell on 2026-10-16 UTC)",
+			"usedFor": [
+				"all candidate access/egress minutes"
+			]
+		},
+		{
+			"id": "osrm-demo-osm",
+			"name": "OSRM demo server (router.project-osrm.org), car profile",
+			"url": "https://router.project-osrm.org/",
+			"licenseStatus": "needs-verification",
+			"retrievedOn": "2026-10-15 (America/New_York; late queries fell on 2026-10-16 UTC)",
+			"usedFor": [
+				"cross-check only; cannot reach ORD T1/T3 curbs"
+			]
+		},
+		{
+			"id": "osrm-fossgis",
+			"name": "OSRM FOSSGIS public instance (routing.openstreetmap.de/routed-car)",
+			"url": "https://routing.openstreetmap.de/routed-car/",
+			"retrievedOn": "2026-10-15 (America/New_York; late queries fell on 2026-10-16 UTC)",
+			"usedFor": [
+				"second OSRM cross-check; same ORD snap failure (282-643 m)"
+			]
+		},
+		{
+			"id": "lga-terminals",
+			"name": "LaGuardia Airport: terminals page",
+			"url": "https://www.laguardiaairport.com/explore-lga/terminals",
+			"retrievedOn": "2026-10-15 (America/New_York; late queries fell on 2026-10-16 UTC)",
+			"quote": [
+				"Terminal B serves Air Canada, American Airlines, Frontier Airlines, JetBlue, Porter, Southwest, and United Airlines.",
+				"Terminal C is operated by Delta Airlines."
+			],
+			"pageSha256": "b7b9279abdea9c33e6e6f494aecb37d443811de36cc9c1f55a966995f4ef2add"
+		},
+		{
+			"id": "ord-directory",
+			"name": "Chicago Department of Aviation: O'Hare directory map, 'EFFECTIVE 11.15.2025'",
+			"url": "https://www.flychicago.com/SiteCollectionDocuments/O'Hare/ArchivedPDFs/Map/FullTerminal.pdf",
+			"httpLastModified": "Mon, 17 Nov 2025 14:08:54 GMT",
+			"pdfSha256": "f20e8226c65a3f672144420ca9dd624f1c27d9d3e41a29814186ecc3c9176e9e",
+			"retrievedOn": "2026-10-15 (America/New_York; late queries fell on 2026-10-16 UTC)",
+			"quote": [
+				"Terminal 1: United (domestic; international departures only)",
+				"Terminal 3: American (domestic; international departures only)",
+				"Terminal 5: Delta",
+				"Rideshare Pickup (at Terminal 2, Departure Level)"
+			],
+			"note": "Stored under an 'ArchivedPDFs' path; it is the newest directory found. The live airlines page loads its list by script and could not be read."
+		},
+		{
+			"id": "bts-ontime-12m",
+			"name": "US DOT BTS Reporting Carrier On-Time Performance, Aug 2025 - Jul 2026",
+			"url": "https://www.transtats.bts.gov/",
+			"license": "US-federal-public-domain",
+			"licenseStatus": "needs-verification",
+			"retrievedOn": "2026-10-15 (America/New_York; late queries fell on 2026-10-16 UTC)",
+			"usedFor": [
+				"flightMinutes",
+				"carrier shares"
+			]
+		}
+	],
+	"curbPoints": {
+		"LGA-B-departures": {
+			"role": "LGA Terminal B upper-level departures curb (United, American)",
+			"osmWayId": 818527303,
+			"osmWayVersion": 5,
+			"osmWayTimestamp": "2023-01-23T20:16:26Z",
+			"name": "Terminal B Departures",
+			"highway": "unclassified",
+			"layer": "2",
+			"oneway": "yes",
+			"wayLengthM": 304.2,
+			"midpointBetweenNodes": [
+				5972434849,
+				10577558496
+			],
+			"lon": -73.87126,
+			"lat": 40.7724664,
+			"pointRule": "Point at 50% of the way's haversine polyline length, between the two listed nodes.",
+			"osmUrl": "https://www.openstreetmap.org/way/818527303"
+		},
+		"LGA-B-arrivals": {
+			"role": "LGA Terminal B arrivals roadway (United, American)",
+			"osmWayId": 818527302,
+			"osmWayVersion": 5,
+			"osmWayTimestamp": "2024-08-07T17:50:22Z",
+			"name": "Terminal B Arrivals",
+			"highway": "unclassified",
+			"layer": "1",
+			"oneway": "yes",
+			"wayLengthM": 303.4,
+			"midpointBetweenNodes": [
+				10577558510,
+				6064029278
+			],
+			"lon": -73.8712715,
+			"lat": 40.7725048,
+			"pointRule": "Point at 50% of the way's haversine polyline length, between the two listed nodes.",
+			"osmUrl": "https://www.openstreetmap.org/way/818527302"
+		},
+		"LGA-C-departures": {
+			"role": "LGA Terminal C departures roadway (Delta)",
+			"osmWayId": 647439389,
+			"osmWayVersion": 15,
+			"osmWayTimestamp": "2023-01-24T03:18:35Z",
+			"name": "Terminal C Departures",
+			"highway": "unclassified",
+			"layer": "1",
+			"oneway": "yes",
+			"wayLengthM": 245.2,
+			"midpointBetweenNodes": [
+				10578059087,
+				4712203999
+			],
+			"lon": -73.8647702,
+			"lat": 40.7702882,
+			"pointRule": "Point at 50% of the way's haversine polyline length, between the two listed nodes.",
+			"osmUrl": "https://www.openstreetmap.org/way/647439389"
+		},
+		"LGA-C-arrivals": {
+			"role": "LGA Terminal C inner arrivals roadway (Delta)",
+			"osmWayId": 695816991,
+			"osmWayVersion": 7,
+			"osmWayTimestamp": "2024-08-29T12:58:21Z",
+			"name": "Terminal C Inner Arrivals",
+			"highway": "unclassified",
+			"layer": "0",
+			"oneway": "yes",
+			"wayLengthM": 207.3,
+			"midpointBetweenNodes": [
+				12144233701,
+				11710127261
+			],
+			"lon": -73.8651629,
+			"lat": 40.7706173,
+			"pointRule": "Point at 50% of the way's haversine polyline length, between the two listed nodes.",
+			"osmUrl": "https://www.openstreetmap.org/way/695816991"
+		},
+		"ORD-T1-departures": {
+			"role": "ORD Terminal 1 upper-level departures curb (United)",
+			"osmWayId": 28257344,
+			"osmWayVersion": 35,
+			"osmWayTimestamp": "2026-03-06T20:18:49Z",
+			"name": "Departures Terminal 1",
+			"highway": "unclassified",
+			"layer": "1",
+			"oneway": "yes",
+			"wayLengthM": 107.6,
+			"midpointBetweenNodes": [
+				310333172,
+				310333211
+			],
+			"lon": -87.9060245,
+			"lat": 41.978581,
+			"pointRule": "Point at 50% of the way's haversine polyline length, between the two listed nodes.",
+			"osmUrl": "https://www.openstreetmap.org/way/28257344"
+		},
+		"ORD-T1-arrivals": {
+			"role": "ORD Terminal 1 lower-level arrivals curb (United)",
+			"osmWayId": 474544200,
+			"osmWayVersion": 12,
+			"osmWayTimestamp": "2025-08-29T22:34:17Z",
+			"name": "O'Hare Arrivals Terminal 1",
+			"highway": "unclassified",
+			"layer": null,
+			"oneway": "yes",
+			"wayLengthM": 277.5,
+			"midpointBetweenNodes": [
+				6377500599,
+				13107849820
+			],
+			"lon": -87.9057288,
+			"lat": 41.9789941,
+			"pointRule": "Point at 50% of the way's haversine polyline length, between the two listed nodes.",
+			"osmUrl": "https://www.openstreetmap.org/way/474544200"
+		},
+		"ORD-T3-departures": {
+			"role": "ORD Terminal 3 upper-level departures curb (American)",
+			"osmWayId": 474544197,
+			"osmWayVersion": 11,
+			"osmWayTimestamp": "2025-09-13T07:42:10Z",
+			"name": "Departures Terminal 3",
+			"highway": "unclassified",
+			"layer": "1",
+			"oneway": "yes",
+			"wayLengthM": 69.5,
+			"midpointBetweenNodes": [
+				13140484790,
+				12793948426
+			],
+			"lon": -87.902883,
+			"lat": 41.9762385,
+			"pointRule": "Point at 50% of the way's haversine polyline length, between the two listed nodes.",
+			"osmUrl": "https://www.openstreetmap.org/way/474544197"
+		},
+		"ORD-T3-arrivals": {
+			"role": "ORD Terminal 3 lower-level arrivals curb (American)",
+			"osmWayId": 474544201,
+			"osmWayVersion": 14,
+			"osmWayTimestamp": "2025-08-29T22:34:17Z",
+			"name": "O'Hare Arrivals Terminal 3",
+			"highway": "unclassified",
+			"layer": null,
+			"oneway": "yes",
+			"wayLengthM": 329.7,
+			"midpointBetweenNodes": [
+				13096734373,
+				111024745
+			],
+			"lon": -87.9016078,
+			"lat": 41.9771646,
+			"pointRule": "Point at 50% of the way's haversine polyline length, between the two listed nodes.",
+			"osmUrl": "https://www.openstreetmap.org/way/474544201"
+		},
+		"ORD-T5-departures": {
+			"role": "ORD Terminal 5 departures roadway (Delta)",
+			"osmWayId": 1094128688,
+			"osmWayVersion": 4,
+			"osmWayTimestamp": "2024-01-08T22:09:14Z",
+			"name": "O'Hare International Terminal Departures",
+			"highway": "unclassified",
+			"layer": "2",
+			"oneway": "yes",
+			"wayLengthM": 86.9,
+			"midpointBetweenNodes": [
+				29785984,
+				5037315529
+			],
+			"lon": -87.891156,
+			"lat": 41.9761687,
+			"pointRule": "Point at 50% of the way's haversine polyline length, between the two listed nodes.",
+			"osmUrl": "https://www.openstreetmap.org/way/1094128688"
+		},
+		"ORD-T5-arrivals": {
+			"role": "ORD Terminal 5 arrivals roadway (Delta)",
+			"osmWayId": 1094128685,
+			"osmWayVersion": 7,
+			"osmWayTimestamp": "2026-06-10T02:54:56Z",
+			"name": "O'Hare International Terminal Arrivals",
+			"highway": "unclassified",
+			"layer": null,
+			"oneway": "yes",
+			"wayLengthM": 244.7,
+			"midpointBetweenNodes": [
+				13924622445,
+				9454257138
+			],
+			"lon": -87.8901693,
+			"lat": 41.9754307,
+			"pointRule": "Point at 50% of the way's haversine polyline length, between the two listed nodes.",
+			"osmUrl": "https://www.openstreetmap.org/way/1094128685"
+		}
+	},
+	"flightBlockTime": {
+		"window": "2025-08 .. 2026-07 (12 months)",
+		"pooled": {
+			"LGA>ORD": {
+				"n": 11611,
+				"median": 165.0,
+				"p10": 157.0,
+				"p90": 176.0
+			},
+			"ORD>LGA": {
+				"n": 11611,
+				"median": 136.0,
+				"p10": 128.0,
+				"p90": 144.0
+			}
+		},
+		"v02JulyOnly": {
+			"LGA>ORD": {
+				"n": 997,
+				"median": 166,
+				"p10": 157,
+				"p90": 188
+			},
+			"ORD>LGA": {
+				"n": 997,
+				"median": 142,
+				"p10": 136,
+				"p90": 149
+			}
+		},
+		"carrierRowsLGAtoORD12m": {
+			"AA": 2961,
+			"YX": 1288,
+			"NK": 299,
+			"UA": 4665,
+			"DL": 2306,
+			"OO": 92
+		},
+		"carrierNote": "Rows are by reporting (operating) carrier. YX (Republic) and OO (SkyWest) fly regional service for mainline brands; their marketing carrier, and so their terminal, is not in this file.",
+		"months": [
+			{
+				"month": "2025-08",
+				"url": "https://transtats.bts.gov/PREZIP/On_Time_Reporting_Carrier_On_Time_Performance_1987_present_2025_8.zip",
+				"zipSha256": "405668b8a807266236a635efbc1e9364abfb756db1a5c895e45abc9c7b7684f1",
+				"zipBytes": 30864245,
+				"csv": "On_Time_Reporting_Carrier_On_Time_Performance_(1987_present)_2025_8.csv",
+				"LGA>ORD": {
+					"n": 973,
+					"median": 159.0,
+					"cancelled": 33,
+					"carriers": {
+						"AA": 277,
+						"YX": 8,
+						"NK": 15,
+						"UA": 432,
+						"DL": 241
+					}
+				},
+				"ORD>LGA": {
+					"n": 973,
+					"median": 137.0,
+					"cancelled": 30,
+					"carriers": {
+						"AA": 277,
+						"YX": 8,
+						"NK": 15,
+						"UA": 432,
+						"DL": 241
+					}
+				}
+			},
+			{
+				"month": "2025-09",
+				"url": "https://transtats.bts.gov/PREZIP/On_Time_Reporting_Carrier_On_Time_Performance_1987_present_2025_9.zip",
+				"zipSha256": "adc722b1c14944451b20ddcdbeec69bbc092310ab8044f758b8f4b82fde8d017",
+				"zipBytes": 28151630,
+				"csv": "On_Time_Reporting_Carrier_On_Time_Performance_(1987_present)_2025_9.csv",
+				"LGA>ORD": {
+					"n": 972,
+					"median": 157.0,
+					"cancelled": 3,
+					"carriers": {
+						"UA": 426,
+						"DL": 241,
+						"NK": 31,
+						"YX": 8,
+						"AA": 266
+					}
+				},
+				"ORD>LGA": {
+					"n": 972,
+					"median": 136.0,
+					"cancelled": 3,
+					"carriers": {
+						"UA": 426,
+						"DL": 241,
+						"NK": 31,
+						"YX": 8,
+						"AA": 266
+					}
+				}
+			},
+			{
+				"month": "2025-10",
+				"url": "https://transtats.bts.gov/PREZIP/On_Time_Reporting_Carrier_On_Time_Performance_1987_present_2025_10.zip",
+				"zipSha256": "05d14d3fd67fa3e04b97c4d6bc7386f4a6c1cda13d2506cf0e9f0a6c620ed111",
+				"zipBytes": 30723803,
+				"csv": "On_Time_Reporting_Carrier_On_Time_Performance_(1987_present)_2025_10.csv",
+				"LGA>ORD": {
+					"n": 1025,
+					"median": 158.0,
+					"cancelled": 20,
+					"carriers": {
+						"AA": 286,
+						"DL": 251,
+						"UA": 441,
+						"YX": 9,
+						"NK": 38
+					}
+				},
+				"ORD>LGA": {
+					"n": 1025,
+					"median": 136.0,
+					"cancelled": 20,
+					"carriers": {
+						"AA": 286,
+						"DL": 251,
+						"UA": 441,
+						"YX": 9,
+						"NK": 38
+					}
+				}
+			},
+			{
+				"month": "2025-11",
+				"url": "https://transtats.bts.gov/PREZIP/On_Time_Reporting_Carrier_On_Time_Performance_1987_present_2025_11.zip",
+				"zipSha256": "6d5b68eea3ebb25f3cb2843e701a6c809b5455301b3bbd7802a20d522ed770c8",
+				"zipBytes": 28847755,
+				"csv": "On_Time_Reporting_Carrier_On_Time_Performance_(1987_present)_2025_11.csv",
+				"LGA>ORD": {
+					"n": 976,
+					"median": 162.0,
+					"cancelled": 43,
+					"carriers": {
+						"UA": 408,
+						"DL": 228,
+						"NK": 60,
+						"AA": 246,
+						"YX": 34
+					}
+				},
+				"ORD>LGA": {
+					"n": 977,
+					"median": 131.0,
+					"cancelled": 43,
+					"carriers": {
+						"UA": 408,
+						"DL": 229,
+						"NK": 59,
+						"AA": 247,
+						"YX": 34
+					}
+				}
+			},
+			{
+				"month": "2025-12",
+				"url": "https://transtats.bts.gov/PREZIP/On_Time_Reporting_Carrier_On_Time_Performance_1987_present_2025_12.zip",
+				"zipSha256": "a2af96d186bc9997fef47382b8589198281c9a722286d88f30032af8ee7dcd0f",
+				"zipBytes": 30337431,
+				"csv": "On_Time_Reporting_Carrier_On_Time_Performance_(1987_present)_2025_12.csv",
+				"LGA>ORD": {
+					"n": 910,
+					"median": 165.0,
+					"cancelled": 41,
+					"carriers": {
+						"DL": 155,
+						"YX": 154,
+						"NK": 36,
+						"AA": 176,
+						"UA": 389
+					}
+				},
+				"ORD>LGA": {
+					"n": 906,
+					"median": 133.0,
+					"cancelled": 41,
+					"carriers": {
+						"DL": 156,
+						"YX": 151,
+						"NK": 36,
+						"AA": 176,
+						"UA": 387
+					}
+				}
+			},
+			{
+				"month": "2026-01",
+				"url": "https://transtats.bts.gov/PREZIP/On_Time_Reporting_Carrier_On_Time_Performance_1987_present_2026_1.zip",
+				"zipSha256": "9ff58f560519dbc8fbd1b8b9fd2a172ca46d0a9e80f1df4fd48891efca41e89c",
+				"zipBytes": 27312195,
+				"csv": "On_Time_Reporting_Carrier_On_Time_Performance_(1987_present)_2026_1.csv",
+				"LGA>ORD": {
+					"n": 951,
+					"median": 171.0,
+					"cancelled": 77,
+					"carriers": {
+						"AA": 161,
+						"DL": 93,
+						"NK": 31,
+						"YX": 343,
+						"OO": 22,
+						"UA": 301
+					}
+				},
+				"ORD>LGA": {
+					"n": 955,
+					"median": 137.0,
+					"cancelled": 69,
+					"carriers": {
+						"AA": 162,
+						"DL": 92,
+						"NK": 32,
+						"YX": 345,
+						"OO": 22,
+						"UA": 302
+					}
+				}
+			},
+			{
+				"month": "2026-02",
+				"url": "https://transtats.bts.gov/PREZIP/On_Time_Reporting_Carrier_On_Time_Performance_1987_present_2026_2.zip",
+				"zipSha256": "a18b6de822a63bb881b55983ef039bf02a7cac046e9624e5c1b19b470a5e05cb",
+				"zipBytes": 25811524,
+				"csv": "On_Time_Reporting_Carrier_On_Time_Performance_(1987_present)_2026_2.csv",
+				"LGA>ORD": {
+					"n": 883,
+					"median": 171.0,
+					"cancelled": 66,
+					"carriers": {
+						"DL": 88,
+						"NK": 28,
+						"OO": 26,
+						"UA": 245,
+						"YX": 324,
+						"AA": 172
+					}
+				},
+				"ORD>LGA": {
+					"n": 884,
+					"median": 135.0,
+					"cancelled": 62,
+					"carriers": {
+						"DL": 88,
+						"NK": 28,
+						"OO": 26,
+						"UA": 244,
+						"YX": 326,
+						"AA": 172
+					}
+				}
+			},
+			{
+				"month": "2026-03",
+				"url": "https://transtats.bts.gov/PREZIP/On_Time_Reporting_Carrier_On_Time_Performance_1987_present_2026_3.zip",
+				"zipSha256": "c0864d5dabd522517976e29bb81f0c094d114e3e0e40cd51bc5a238ae4292b9d",
+				"zipBytes": 31150791,
+				"csv": "On_Time_Reporting_Carrier_On_Time_Performance_(1987_present)_2026_3.csv",
+				"LGA>ORD": {
+					"n": 996,
+					"median": 165.0,
+					"cancelled": 118,
+					"carriers": {
+						"DL": 110,
+						"NK": 31,
+						"OO": 44,
+						"UA": 301,
+						"YX": 309,
+						"AA": 201
+					}
+				},
+				"ORD>LGA": {
+					"n": 996,
+					"median": 133.0,
+					"cancelled": 119,
+					"carriers": {
+						"DL": 110,
+						"NK": 31,
+						"OO": 44,
+						"UA": 303,
+						"YX": 307,
+						"AA": 201
+					}
+				}
+			},
+			{
+				"month": "2026-04",
+				"url": "https://transtats.bts.gov/PREZIP/On_Time_Reporting_Carrier_On_Time_Performance_1987_present_2026_4.zip",
+				"zipSha256": "70e685ffa6042e6c851c4f1e821d774dfe7318d3eb212ac5bfc6a53ea23f3cfb",
+				"zipBytes": 30504623,
+				"csv": "On_Time_Reporting_Carrier_On_Time_Performance_(1987_present)_2026_4.csv",
+				"LGA>ORD": {
+					"n": 963,
+					"median": 167.0,
+					"cancelled": 33,
+					"carriers": {
+						"DL": 167,
+						"NK": 28,
+						"UA": 418,
+						"YX": 73,
+						"AA": 277
+					}
+				},
+				"ORD>LGA": {
+					"n": 962,
+					"median": 138.0,
+					"cancelled": 29,
+					"carriers": {
+						"DL": 166,
+						"NK": 28,
+						"UA": 418,
+						"YX": 74,
+						"AA": 276
+					}
+				}
+			},
+			{
+				"month": "2026-05",
+				"url": "https://transtats.bts.gov/PREZIP/On_Time_Reporting_Carrier_On_Time_Performance_1987_present_2026_5.zip",
+				"zipSha256": "4e7b96999440afec8c92dd23bfbc68a5852e14d9a56c3d0d366f884542ea80b3",
+				"zipBytes": 31716693,
+				"csv": "On_Time_Reporting_Carrier_On_Time_Performance_(1987_present)_2026_5.csv",
+				"LGA>ORD": {
+					"n": 997,
+					"median": 167.0,
+					"cancelled": 17,
+					"carriers": {
+						"UA": 438,
+						"AA": 306,
+						"DL": 244,
+						"NK": 1,
+						"YX": 8
+					}
+				},
+				"ORD>LGA": {
+					"n": 996,
+					"median": 138.0,
+					"cancelled": 16,
+					"carriers": {
+						"UA": 438,
+						"AA": 306,
+						"DL": 244,
+						"NK": 1,
+						"YX": 7
+					}
+				}
+			},
+			{
+				"month": "2026-06",
+				"url": "https://transtats.bts.gov/PREZIP/On_Time_Reporting_Carrier_On_Time_Performance_1987_present_2026_6.zip",
+				"zipSha256": "acd9d03e223e079e54b77065015f0ce9b6de92f1f46148048600cc9813a47a6e",
+				"zipBytes": 31606062,
+				"csv": "On_Time_Reporting_Carrier_On_Time_Performance_(1987_present)_2026_6.csv",
+				"LGA>ORD": {
+					"n": 968,
+					"median": 167.0,
+					"cancelled": 54,
+					"carriers": {
+						"DL": 241,
+						"UA": 426,
+						"YX": 11,
+						"AA": 290
+					}
+				},
+				"ORD>LGA": {
+					"n": 968,
+					"median": 141.0,
+					"cancelled": 54,
+					"carriers": {
+						"DL": 241,
+						"UA": 426,
+						"YX": 11,
+						"AA": 290
+					}
+				}
+			},
+			{
+				"month": "2026-07",
+				"url": "https://transtats.bts.gov/PREZIP/On_Time_Reporting_Carrier_On_Time_Performance_1987_present_2026_7.zip",
+				"zipSha256": "61d657eb17f5b6f800ed2f05262a2223c5edf66fe7d9cfb3598c6664a34ed0b6",
+				"zipBytes": 33075361,
+				"csv": "On_Time_Reporting_Carrier_On_Time_Performance_(1987_present)_2026_7.csv",
+				"LGA>ORD": {
+					"n": 997,
+					"median": 166.0,
+					"cancelled": 105,
+					"carriers": {
+						"DL": 247,
+						"UA": 440,
+						"YX": 7,
+						"AA": 303
+					}
+				},
+				"ORD>LGA": {
+					"n": 997,
+					"median": 142.0,
+					"cancelled": 102,
+					"carriers": {
+						"DL": 247,
+						"UA": 440,
+						"YX": 7,
+						"AA": 303
+					}
+				}
+			}
+		],
+		"rowDefinition": "12-month pooled scheduled block time LGA<->ORD from BTS On-Time Reporting PREZIP files.\n\nUsage: python -I bts_12m.py <dir with YYYY_M.zip> <out.json>\nSame row definition as the v02 July figure: every row Origin/Dest LGA/ORD with a CRSElapsedTime\n(cancelled flights included, because the schedule existed). Percentiles: linear interpolation."
+	},
+	"legs": {
+		"access.nyc->LGA-B": {
+			"from": "CITY",
+			"to": "LGA-B-departures",
+			"valhalla": {
+				"distanceKm": 19.3,
+				"timeSeconds": 1241.868,
+				"minutesRaw": 20.7,
+				"minutes": 21,
+				"snapFromM": 27.4,
+				"snapToM": 0.0,
+				"streetNames": [
+					"Park Row",
+					"(unnamed)",
+					"Park Row",
+					"(unnamed)",
+					"Brooklyn Bridge",
+					"Tillary Street",
+					"I 278 East",
+					"Brooklyn-Queens Expressway",
+					"I 278 East",
+					"Brooklyn-Queens Expressway",
+					"Brooklyn-Queens Expressway East",
+					"LaGuardia Road",
+					"(unnamed)",
+					"Terminal B Departures",
+					"(unnamed)"
+				],
+				"url": "https://valhalla1.openstreetmap.de/route?json=%7B%22locations%22%3A%5B%7B%22lat%22%3A40.71205%2C%22lon%22%3A-74.00708%7D%2C%7B%22lat%22%3A40.7724664%2C%22lon%22%3A-73.87126%7D%5D%2C%22costing%22%3A%22auto%22%2C%22units%22%3A%22kilometers%22%2C%22directions_type%22%3A%22maneuvers%22%7D",
+				"responseSha256": "beba56ffa6500636ce182cacea71663385d71f712f0c474843e45d38f8b9bdb2"
+			},
+			"osrmDemoCrossCheck": {
+				"distanceKm": 19.3,
+				"durationSeconds": 1439.2,
+				"minutesRaw": 23.99,
+				"snapFrom": {
+					"name": "Park Row",
+					"distanceM": 27.3
+				},
+				"snapTo": {
+					"name": "Terminal B Departures",
+					"distanceM": 0.1
+				},
+				"firstStreetNames": [
+					"Park Row",
+					"(unnamed)",
+					"Park Row",
+					"(unnamed)"
+				],
+				"lastStreetNames": [
+					"(unnamed)",
+					"LaGuardia Road",
+					"(unnamed)",
+					"Terminal B Departures"
+				],
+				"url": "https://router.project-osrm.org/route/v1/driving/-74.00708,40.71205;-73.87126,40.7724664?overview=false",
+				"urlWithSteps": "https://router.project-osrm.org/route/v1/driving/-74.00708,40.71205;-73.87126,40.7724664?overview=false&steps=true",
+				"responseSha256": "9a7e3752b25c027119785d5540c7877b48dd7bdfe9afe9469925780533a07fd8",
+				"reachesCurb": true
+			}
+		},
+		"egress.ORD-T1->loop": {
+			"from": "ORD-T1-arrivals",
+			"to": "LOOP",
+			"valhalla": {
+				"distanceKm": 30.5,
+				"timeSeconds": 1407.008,
+				"minutesRaw": 23.45,
+				"minutes": 23,
+				"snapFromM": 0.0,
+				"snapToM": 33.3,
+				"streetNames": [
+					"O'Hare Arrivals Terminal 1",
+					"O'Hare Arrivals",
+					"Kennedy Expressway",
+					"John F. Kennedy Expressway",
+					"I 90",
+					"I 94",
+					"Kennedy Expressway",
+					"John F. Kennedy Expressway",
+					"I 90",
+					"I 94",
+					"Kennedy Expressway",
+					"John F. Kennedy Expressway",
+					"I 90",
+					"I 94",
+					"Kennedy Expressway",
+					"John F. Kennedy Expressway",
+					"I 90",
+					"I 94",
+					"Kennedy Expressway",
+					"John F. Kennedy Expressway",
+					"Eisenhower Expressway",
+					"South Dearborn Street",
+					"(unnamed)"
+				],
+				"url": "https://valhalla1.openstreetmap.de/route?json=%7B%22locations%22%3A%5B%7B%22lat%22%3A41.9789941%2C%22lon%22%3A-87.9057288%7D%2C%7B%22lat%22%3A41.881144%2C%22lon%22%3A-87.6297746%7D%5D%2C%22costing%22%3A%22auto%22%2C%22units%22%3A%22kilometers%22%2C%22directions_type%22%3A%22maneuvers%22%7D",
+				"responseSha256": "f37499bbd43b6156fdf2c68e2b0ab32d53e816a490bed7dc63be2eadec432934"
+			},
+			"osrmDemoCrossCheck": {
+				"distanceKm": 34.4,
+				"durationSeconds": 3278.2,
+				"minutesRaw": 54.64,
+				"snapFrom": {
+					"name": "",
+					"distanceM": 282.3
+				},
+				"snapTo": {
+					"name": "South Dearborn Street",
+					"distanceM": 33.4
+				},
+				"firstStreetNames": [
+					"Baggage Road",
+					"Concourse Service Road",
+					"(unnamed)",
+					"Main Service Road"
+				],
+				"lastStreetNames": [
+					"Kennedy Expressway",
+					"(unnamed)",
+					"West Monroe Street",
+					"South Dearborn Street"
+				],
+				"url": "https://router.project-osrm.org/route/v1/driving/-87.9057288,41.9789941;-87.6297746,41.881144?overview=false",
+				"urlWithSteps": "https://router.project-osrm.org/route/v1/driving/-87.9057288,41.9789941;-87.6297746,41.881144?overview=false&steps=true",
+				"responseSha256": "3b0f8b797b001e249d51db0c64148cf8ee5564d2cf0fd5d63af4e046f234e4ba",
+				"reachesCurb": false
+			}
+		},
+		"access.loop->ORD-T1": {
+			"from": "LOOP",
+			"to": "ORD-T1-departures",
+			"valhalla": {
+				"distanceKm": 30.3,
+				"timeSeconds": 1429.42,
+				"minutesRaw": 23.82,
+				"minutes": 24,
+				"snapFromM": 33.3,
+				"snapToM": 0.0,
+				"streetNames": [
+					"South Dearborn Street",
+					"West Madison Street",
+					"South Clark Street",
+					"West Van Buren Street",
+					"South Wells Street",
+					"Eisenhower Expressway",
+					"I 90 West",
+					"I 94 West",
+					"Kennedy Expressway",
+					"John F. Kennedy Expressway",
+					"I 90 West",
+					"Kennedy Expressway",
+					"John F. Kennedy Expressway",
+					"I 190 West",
+					"Kennedy Expressway",
+					"John F. Kennedy Expressway",
+					"I 190 West",
+					"Kennedy Expressway",
+					"John F. Kennedy Expressway",
+					"I 190 West",
+					"Kennedy Expressway",
+					"John F. Kennedy Expressway",
+					"I 190 West",
+					"Kennedy Expressway",
+					"John F. Kennedy Expressway",
+					"(unnamed)",
+					"O'Hare Departures",
+					"(unnamed)"
+				],
+				"url": "https://valhalla1.openstreetmap.de/route?json=%7B%22locations%22%3A%5B%7B%22lat%22%3A41.881144%2C%22lon%22%3A-87.6297746%7D%2C%7B%22lat%22%3A41.978581%2C%22lon%22%3A-87.9060245%7D%5D%2C%22costing%22%3A%22auto%22%2C%22units%22%3A%22kilometers%22%2C%22directions_type%22%3A%22maneuvers%22%7D",
+				"responseSha256": "3cc5b795d919903c8f553be248c8c25e2941e07b79f1647c17fd0515c53800f0"
+			},
+			"osrmDemoCrossCheck": {
+				"distanceKm": 34.3,
+				"durationSeconds": 3244.5,
+				"minutesRaw": 54.08,
+				"snapFrom": {
+					"name": "South Dearborn Street",
+					"distanceM": 33.4
+				},
+				"snapTo": {
+					"name": "",
+					"distanceM": 326.6
+				},
+				"firstStreetNames": [
+					"South Dearborn Street",
+					"West Madison Street",
+					"(unnamed)",
+					"Kennedy Expressway"
+				],
+				"lastStreetNames": [
+					"(unnamed)",
+					"Concourse Service Road",
+					"Baggage Road",
+					"(unnamed)"
+				],
+				"url": "https://router.project-osrm.org/route/v1/driving/-87.6297746,41.881144;-87.9060245,41.978581?overview=false",
+				"urlWithSteps": "https://router.project-osrm.org/route/v1/driving/-87.6297746,41.881144;-87.9060245,41.978581?overview=false&steps=true",
+				"responseSha256": "5f347bc2f3c86555ae274b202604eca95a48356386748ad627f75cb3e907c94b",
+				"reachesCurb": false
+			}
+		},
+		"egress.LGA-B->nyc": {
+			"from": "LGA-B-arrivals",
+			"to": "CITY",
+			"valhalla": {
+				"distanceKm": 18.2,
+				"timeSeconds": 1115.726,
+				"minutesRaw": 18.6,
+				"minutes": 19,
+				"snapFromM": 0.0,
+				"snapToM": 27.4,
+				"streetNames": [
+					"Terminal B Arrivals",
+					"(unnamed)",
+					"GCP",
+					"Grand Central Parkway",
+					"Brooklyn-Queens Expressway East",
+					"I 278 West",
+					"Brooklyn-Queens Expressway",
+					"Tillary Street",
+					"Brooklyn Bridge Boulevard",
+					"(unnamed)",
+					"Park Row",
+					"(unnamed)"
+				],
+				"url": "https://valhalla1.openstreetmap.de/route?json=%7B%22locations%22%3A%5B%7B%22lat%22%3A40.7725048%2C%22lon%22%3A-73.8712715%7D%2C%7B%22lat%22%3A40.71205%2C%22lon%22%3A-74.00708%7D%5D%2C%22costing%22%3A%22auto%22%2C%22units%22%3A%22kilometers%22%2C%22directions_type%22%3A%22maneuvers%22%7D",
+				"responseSha256": "681b57f3645411a5332ae4c55a847bb880034e6528f4f6bdfc0ea89a5c56183e"
+			},
+			"osrmDemoCrossCheck": {
+				"distanceKm": 16.6,
+				"durationSeconds": 1308.5,
+				"minutesRaw": 21.81,
+				"snapFrom": {
+					"name": "Terminal B Arrivals",
+					"distanceM": 0
+				},
+				"snapTo": {
+					"name": "Park Row",
+					"distanceM": 27.3
+				},
+				"firstStreetNames": [
+					"Terminal B Arrivals",
+					"(unnamed)",
+					"Grand Central Parkway",
+					"Brooklyn-Queens Expressway East"
+				],
+				"lastStreetNames": [
+					"Lafayette Street",
+					"Centre Street",
+					"(unnamed)",
+					"Park Row"
+				],
+				"url": "https://router.project-osrm.org/route/v1/driving/-73.8712715,40.7725048;-74.00708,40.71205?overview=false",
+				"urlWithSteps": "https://router.project-osrm.org/route/v1/driving/-73.8712715,40.7725048;-74.00708,40.71205?overview=false&steps=true",
+				"responseSha256": "b52bfcb85e6a98358d053a0c105a2cf3cbf986e4ff95726d5f540789673f0d8f",
+				"reachesCurb": true
+			}
+		},
+		"sens.access.loop->ORD-T3": {
+			"from": "LOOP",
+			"to": "ORD-T3-departures",
+			"valhalla": {
+				"distanceKm": 30.7,
+				"timeSeconds": 1467.13,
+				"minutesRaw": 24.45,
+				"minutes": 24,
+				"snapFromM": 33.3,
+				"snapToM": 0.1,
+				"streetNames": [
+					"South Dearborn Street",
+					"West Madison Street",
+					"South Clark Street",
+					"West Van Buren Street",
+					"South Wells Street",
+					"Eisenhower Expressway",
+					"I 90 West",
+					"I 94 West",
+					"Kennedy Expressway",
+					"John F. Kennedy Expressway",
+					"I 90 West",
+					"Kennedy Expressway",
+					"John F. Kennedy Expressway",
+					"I 190 West",
+					"Kennedy Expressway",
+					"John F. Kennedy Expressway",
+					"I 190 West",
+					"Kennedy Expressway",
+					"John F. Kennedy Expressway",
+					"I 190 West",
+					"Kennedy Expressway",
+					"John F. Kennedy Expressway",
+					"I 190 West",
+					"Kennedy Expressway",
+					"John F. Kennedy Expressway",
+					"(unnamed)",
+					"O'Hare Departures",
+					"Departures Terminal 2",
+					"(unnamed)"
+				],
+				"url": "https://valhalla1.openstreetmap.de/route?json=%7B%22locations%22%3A%5B%7B%22lat%22%3A41.881144%2C%22lon%22%3A-87.6297746%7D%2C%7B%22lat%22%3A41.9762385%2C%22lon%22%3A-87.902883%7D%5D%2C%22costing%22%3A%22auto%22%2C%22units%22%3A%22kilometers%22%2C%22directions_type%22%3A%22maneuvers%22%7D",
+				"responseSha256": "54cfed1122784ecc053deff0ed382e6b24c89e087a522a76f082bb61793c2464"
+			},
+			"osrmDemoCrossCheck": {
+				"distanceKm": 34.3,
+				"durationSeconds": 3241.4,
+				"minutesRaw": 54.02,
+				"snapFrom": {
+					"name": "South Dearborn Street",
+					"distanceM": 33.4
+				},
+				"snapTo": {
+					"name": "",
+					"distanceM": 642.8
+				},
+				"firstStreetNames": [
+					"South Dearborn Street",
+					"West Madison Street",
+					"(unnamed)",
+					"Kennedy Expressway"
+				],
+				"lastStreetNames": [
+					"Main Service Road",
+					"(unnamed)",
+					"Concourse Service Road",
+					"Baggage Road"
+				],
+				"url": "https://router.project-osrm.org/route/v1/driving/-87.6297746,41.881144;-87.902883,41.9762385?overview=false",
+				"urlWithSteps": "https://router.project-osrm.org/route/v1/driving/-87.6297746,41.881144;-87.902883,41.9762385?overview=false&steps=true",
+				"responseSha256": "0394976d892eb8902ae531e0d3bac6e41b91928f8ab6f857976efa0aa58e976b",
+				"reachesCurb": false
+			}
+		},
+		"sens.egress.ORD-T3->loop": {
+			"from": "ORD-T3-arrivals",
+			"to": "LOOP",
+			"valhalla": {
+				"distanceKm": 29.9,
+				"timeSeconds": 1357.911,
+				"minutesRaw": 22.63,
+				"minutes": 23,
+				"snapFromM": 0.0,
+				"snapToM": 33.3,
+				"streetNames": [
+					"O'Hare Arrivals Terminal 3",
+					"O'Hare Arrivals",
+					"Kennedy Expressway",
+					"John F. Kennedy Expressway",
+					"I 90",
+					"I 94",
+					"Kennedy Expressway",
+					"John F. Kennedy Expressway",
+					"I 90",
+					"I 94",
+					"Kennedy Expressway",
+					"John F. Kennedy Expressway",
+					"I 90",
+					"I 94",
+					"Kennedy Expressway",
+					"John F. Kennedy Expressway",
+					"I 90",
+					"I 94",
+					"Kennedy Expressway",
+					"John F. Kennedy Expressway",
+					"Eisenhower Expressway",
+					"South Dearborn Street",
+					"(unnamed)"
+				],
+				"url": "https://valhalla1.openstreetmap.de/route?json=%7B%22locations%22%3A%5B%7B%22lat%22%3A41.9771646%2C%22lon%22%3A-87.9016078%7D%2C%7B%22lat%22%3A41.881144%2C%22lon%22%3A-87.6297746%7D%5D%2C%22costing%22%3A%22auto%22%2C%22units%22%3A%22kilometers%22%2C%22directions_type%22%3A%22maneuvers%22%7D",
+				"responseSha256": "744d7fd6ab09191a511c3a9dfb76240ef79fa3b2214a8aafba47a3a738e9686c"
+			},
+			"osrmDemoCrossCheck": {
+				"distanceKm": 34.4,
+				"durationSeconds": 3281.3,
+				"minutesRaw": 54.69,
+				"snapFrom": {
+					"name": "",
+					"distanceM": 605.9
+				},
+				"snapTo": {
+					"name": "South Dearborn Street",
+					"distanceM": 33.4
+				},
+				"firstStreetNames": [
+					"(unnamed)",
+					"Baggage Road",
+					"Concourse Service Road",
+					"(unnamed)"
+				],
+				"lastStreetNames": [
+					"Kennedy Expressway",
+					"(unnamed)",
+					"West Monroe Street",
+					"South Dearborn Street"
+				],
+				"url": "https://router.project-osrm.org/route/v1/driving/-87.9016078,41.9771646;-87.6297746,41.881144?overview=false",
+				"urlWithSteps": "https://router.project-osrm.org/route/v1/driving/-87.9016078,41.9771646;-87.6297746,41.881144?overview=false&steps=true",
+				"responseSha256": "49805674f4ead802195cf55a5e634205dea96a68f623531af6bf6050b75f1d0b",
+				"reachesCurb": false
+			}
+		},
+		"sens.access.nyc->LGA-C": {
+			"from": "CITY",
+			"to": "LGA-C-departures",
+			"valhalla": {
+				"distanceKm": 19.5,
+				"timeSeconds": 1260.85,
+				"minutesRaw": 21.01,
+				"minutes": 21,
+				"snapFromM": 27.4,
+				"snapToM": 0.0,
+				"streetNames": [
+					"Park Row",
+					"(unnamed)",
+					"Park Row",
+					"(unnamed)",
+					"Brooklyn Bridge",
+					"Tillary Street",
+					"I 278 East",
+					"Brooklyn-Queens Expressway",
+					"I 278 East",
+					"Brooklyn-Queens Expressway",
+					"Brooklyn-Queens Expressway East",
+					"LaGuardia Road",
+					"Terminal C Departures",
+					"Terminal C Inner Departures",
+					"(unnamed)"
+				],
+				"url": "https://valhalla1.openstreetmap.de/route?json=%7B%22locations%22%3A%5B%7B%22lat%22%3A40.71205%2C%22lon%22%3A-74.00708%7D%2C%7B%22lat%22%3A40.7702882%2C%22lon%22%3A-73.8647702%7D%5D%2C%22costing%22%3A%22auto%22%2C%22units%22%3A%22kilometers%22%2C%22directions_type%22%3A%22maneuvers%22%7D",
+				"responseSha256": "4a3cea8a6edf1248bcd1ea9e618e5d1ce831f038779f7d3843b425e75c8d3fdd"
+			},
+			"osrmDemoCrossCheck": {
+				"distanceKm": 19.5,
+				"durationSeconds": 1461.1,
+				"minutesRaw": 24.35,
+				"snapFrom": {
+					"name": "Park Row",
+					"distanceM": 27.3
+				},
+				"snapTo": {
+					"name": "Terminal C Departures",
+					"distanceM": 0
+				},
+				"firstStreetNames": [
+					"Park Row",
+					"(unnamed)",
+					"Park Row",
+					"(unnamed)"
+				],
+				"lastStreetNames": [
+					"Grand Central Parkway",
+					"(unnamed)",
+					"LaGuardia Road",
+					"Terminal C Departures"
+				],
+				"url": "https://router.project-osrm.org/route/v1/driving/-74.00708,40.71205;-73.8647702,40.7702882?overview=false",
+				"urlWithSteps": "https://router.project-osrm.org/route/v1/driving/-74.00708,40.71205;-73.8647702,40.7702882?overview=false&steps=true",
+				"responseSha256": "54239d8e28ffd67295b338a70603027814530e75c062d8fccbabef68853dc54f",
+				"reachesCurb": true
+			}
+		},
+		"sens.egress.LGA-C->nyc": {
+			"from": "LGA-C-arrivals",
+			"to": "CITY",
+			"valhalla": {
+				"distanceKm": 18.8,
+				"timeSeconds": 1146.279,
+				"minutesRaw": 19.1,
+				"minutes": 19,
+				"snapFromM": 0.0,
+				"snapToM": 27.4,
+				"streetNames": [
+					"Terminal C Inner Arrivals",
+					"LaGuardia Road",
+					"GCP",
+					"Grand Central Parkway",
+					"Brooklyn-Queens Expressway East",
+					"I 278 West",
+					"Brooklyn-Queens Expressway",
+					"Tillary Street",
+					"Brooklyn Bridge Boulevard",
+					"(unnamed)",
+					"Park Row",
+					"(unnamed)"
+				],
+				"url": "https://valhalla1.openstreetmap.de/route?json=%7B%22locations%22%3A%5B%7B%22lat%22%3A40.7706173%2C%22lon%22%3A-73.8651629%7D%2C%7B%22lat%22%3A40.71205%2C%22lon%22%3A-74.00708%7D%5D%2C%22costing%22%3A%22auto%22%2C%22units%22%3A%22kilometers%22%2C%22directions_type%22%3A%22maneuvers%22%7D",
+				"responseSha256": "1f363406766f369ca2c0464d5745099fdc40e88fe7392b231ddbd5a135cf2ec6"
+			},
+			"osrmDemoCrossCheck": {
+				"distanceKm": 17.2,
+				"durationSeconds": 1345.2,
+				"minutesRaw": 22.42,
+				"snapFrom": {
+					"name": "Terminal C Inner Arrivals",
+					"distanceM": 0
+				},
+				"snapTo": {
+					"name": "Park Row",
+					"distanceM": 27.3
+				},
+				"firstStreetNames": [
+					"Terminal C Inner Arrivals",
+					"LaGuardia Road",
+					"(unnamed)",
+					"Grand Central Parkway"
+				],
+				"lastStreetNames": [
+					"Lafayette Street",
+					"Centre Street",
+					"(unnamed)",
+					"Park Row"
+				],
+				"url": "https://router.project-osrm.org/route/v1/driving/-73.8651629,40.7706173;-74.00708,40.71205?overview=false",
+				"urlWithSteps": "https://router.project-osrm.org/route/v1/driving/-73.8651629,40.7706173;-74.00708,40.71205?overview=false&steps=true",
+				"responseSha256": "e2a886ac758316119691766065d0ef0207e45861160c48d8e4eef1f3c55ee43d",
+				"reachesCurb": true
+			}
+		},
+		"sens.access.loop->ORD-T5": {
+			"from": "LOOP",
+			"to": "ORD-T5-departures",
+			"valhalla": {
+				"distanceKm": 29.3,
+				"timeSeconds": 1486.246,
+				"minutesRaw": 24.77,
+				"minutes": 25,
+				"snapFromM": 33.3,
+				"snapToM": 0.0,
+				"streetNames": [
+					"South Dearborn Street",
+					"West Madison Street",
+					"South Clark Street",
+					"West Van Buren Street",
+					"South Wells Street",
+					"Eisenhower Expressway",
+					"I 90 West",
+					"I 94 West",
+					"Kennedy Expressway",
+					"John F. Kennedy Expressway",
+					"I 90 West",
+					"Kennedy Expressway",
+					"John F. Kennedy Expressway",
+					"I 190 West",
+					"Kennedy Expressway",
+					"John F. Kennedy Expressway",
+					"I 190 West",
+					"Kennedy Expressway",
+					"John F. Kennedy Expressway",
+					"I 190 West",
+					"Kennedy Expressway",
+					"John F. Kennedy Expressway",
+					"I 190 West",
+					"Kennedy Expressway",
+					"John F. Kennedy Expressway",
+					"(unnamed)",
+					"Bessie Coleman Drive",
+					"O'Hare International Terminal Departures",
+					"(unnamed)"
+				],
+				"url": "https://valhalla1.openstreetmap.de/route?json=%7B%22locations%22%3A%5B%7B%22lat%22%3A41.881144%2C%22lon%22%3A-87.6297746%7D%2C%7B%22lat%22%3A41.9761687%2C%22lon%22%3A-87.891156%7D%5D%2C%22costing%22%3A%22auto%22%2C%22units%22%3A%22kilometers%22%2C%22directions_type%22%3A%22maneuvers%22%7D",
+				"responseSha256": "25a472da9784f33a0c8b0fe185d162690233c5f79d5e4af728c9f670528875b4"
+			},
+			"osrmDemoCrossCheck": {
+				"distanceKm": 28.4,
+				"durationSeconds": 2042.7,
+				"minutesRaw": 34.05,
+				"snapFrom": {
+					"name": "South Dearborn Street",
+					"distanceM": 33.4
+				},
+				"snapTo": {
+					"name": "O'Hare International Terminal Departures",
+					"distanceM": 0
+				},
+				"firstStreetNames": [
+					"South Dearborn Street",
+					"West Madison Street",
+					"(unnamed)",
+					"Kennedy Expressway"
+				],
+				"lastStreetNames": [
+					"Scott Street",
+					"Balmoral Avenue",
+					"O'Hare International Terminal",
+					"O'Hare International Terminal Departures"
+				],
+				"url": "https://router.project-osrm.org/route/v1/driving/-87.6297746,41.881144;-87.891156,41.9761687?overview=false",
+				"urlWithSteps": "https://router.project-osrm.org/route/v1/driving/-87.6297746,41.881144;-87.891156,41.9761687?overview=false&steps=true",
+				"responseSha256": "d5bad42fd5892c071abb817b7422edcc1941a7395fca558e7ce82112dbfde6ca",
+				"reachesCurb": true
+			}
+		},
+		"sens.egress.ORD-T5->loop": {
+			"from": "ORD-T5-arrivals",
+			"to": "LOOP",
+			"valhalla": {
+				"distanceKm": 28.7,
+				"timeSeconds": 1330.176,
+				"minutesRaw": 22.17,
+				"minutes": 22,
+				"snapFromM": 0.0,
+				"snapToM": 33.3,
+				"streetNames": [
+					"O'Hare International Terminal Arrivals",
+					"O'Hare International Terminal",
+					"Kennedy Expressway",
+					"John F. Kennedy Expressway",
+					"I 90",
+					"I 94",
+					"Kennedy Expressway",
+					"John F. Kennedy Expressway",
+					"I 90",
+					"I 94",
+					"Kennedy Expressway",
+					"John F. Kennedy Expressway",
+					"I 90",
+					"I 94",
+					"Kennedy Expressway",
+					"John F. Kennedy Expressway",
+					"I 90",
+					"I 94",
+					"Kennedy Expressway",
+					"John F. Kennedy Expressway",
+					"Eisenhower Expressway",
+					"South Dearborn Street",
+					"(unnamed)"
+				],
+				"url": "https://valhalla1.openstreetmap.de/route?json=%7B%22locations%22%3A%5B%7B%22lat%22%3A41.9754307%2C%22lon%22%3A-87.8901693%7D%2C%7B%22lat%22%3A41.881144%2C%22lon%22%3A-87.6297746%7D%5D%2C%22costing%22%3A%22auto%22%2C%22units%22%3A%22kilometers%22%2C%22directions_type%22%3A%22maneuvers%22%7D",
+				"responseSha256": "a920318d273dcf4e0f202cdd4f73b856bd80fed242c0a98f172d284d7a9c7fdd"
+			},
+			"osrmDemoCrossCheck": {
+				"distanceKm": 28.5,
+				"durationSeconds": 2025.6,
+				"minutesRaw": 33.76,
+				"snapFrom": {
+					"name": "O'Hare International Terminal Arrivals",
+					"distanceM": 0
+				},
+				"snapTo": {
+					"name": "South Dearborn Street",
+					"distanceM": 33.4
+				},
+				"firstStreetNames": [
+					"O'Hare International Terminal Arrivals",
+					"Balmoral Avenue",
+					"(unnamed)",
+					"Mannheim Road"
+				],
+				"lastStreetNames": [
+					"Kennedy Expressway",
+					"(unnamed)",
+					"West Monroe Street",
+					"South Dearborn Street"
+				],
+				"url": "https://router.project-osrm.org/route/v1/driving/-87.8901693,41.9754307;-87.6297746,41.881144?overview=false",
+				"urlWithSteps": "https://router.project-osrm.org/route/v1/driving/-87.8901693,41.9754307;-87.6297746,41.881144?overview=false&steps=true",
+				"responseSha256": "ba3b45843165229ae50c64ab05deaaa222633fe9a345c985beaf60a802a0cdbb",
+				"reachesCurb": true
+			}
+		}
+	},
+	"candidateSegments": [
+		{
+			"id": "seg.air.nyc-lga__chicago-ord",
+			"mode": "air",
+			"fromLocationId": "earth.us.ny.new-york-city",
+			"toLocationId": "earth.us.il.chicago",
+			"airportAccessMinutes": 21,
+			"checkInAndWaitMinutes": 120,
+			"flightMinutes": 165,
+			"airportEgressMinutes": 23,
+			"doorToDoorAllowanceMinutes": 0,
+			"candidateTotalMinutes": 329,
+			"candidateTotalFromRawComponents": 329.1,
+			"v02TotalMinutes": 365,
+			"departureCurb": "LGA-B-departures",
+			"arrivalCurb": "ORD-T1-arrivals",
+			"components": {
+				"airportAccessMinutes": {
+					"value": 21,
+					"leg": "access.nyc->LGA-B",
+					"basis": "Valhalla auto costing, free-flow model time, scene point -> departures curb (19.3 km). No traffic, parking or drop-off time."
+				},
+				"checkInAndWaitMinutes": {
+					"value": 120,
+					"basis": "Unchanged from v02: airline 'arrive at least 2 hours' guidance (AA in v02; Delta re-read in the v02 audit). Not a measured wait."
+				},
+				"flightMinutes": {
+					"value": 165,
+					"basis": "Median CRSElapsedTime of 11611 scheduled LGA->ORD rows, BTS On-Time Reporting Aug 2025 - Jul 2026 (p10 157.0, p90 176.0)."
+				},
+				"airportEgressMinutes": {
+					"value": 23,
+					"leg": "egress.ORD-T1->loop",
+					"basis": "Valhalla auto costing, free-flow model time, arrivals curb -> scene point (30.5 km). Starts when the traveller is already at the curb in a vehicle."
+				},
+				"doorToDoorAllowanceMinutes": {
+					"value": 0,
+					"basis": "NOT COUNTED. Deplaning, walk to curb, baggage and vehicle wait have no sourced figure; left at 0 exactly as v02 and flagged, not estimated."
+				}
+			},
+			"verification": {
+				"status": "nonruntime-candidate",
+				"note": "Not loaded by the runtime. Endpoint fix only; all other v02 caveats remain."
+			}
+		},
+		{
+			"id": "seg.air.chicago-ord__nyc-lga",
+			"mode": "air",
+			"fromLocationId": "earth.us.il.chicago",
+			"toLocationId": "earth.us.ny.new-york-city",
+			"airportAccessMinutes": 24,
+			"checkInAndWaitMinutes": 120,
+			"flightMinutes": 136,
+			"airportEgressMinutes": 19,
+			"doorToDoorAllowanceMinutes": 0,
+			"candidateTotalMinutes": 299,
+			"candidateTotalFromRawComponents": 298.4,
+			"v02TotalMinutes": 338,
+			"departureCurb": "ORD-T1-departures",
+			"arrivalCurb": "LGA-B-arrivals",
+			"components": {
+				"airportAccessMinutes": {
+					"value": 24,
+					"leg": "access.loop->ORD-T1",
+					"basis": "Valhalla auto costing, free-flow model time, scene point -> departures curb (30.3 km). No traffic, parking or drop-off time."
+				},
+				"checkInAndWaitMinutes": {
+					"value": 120,
+					"basis": "Unchanged from v02: airline 'arrive at least 2 hours' guidance (AA in v02; Delta re-read in the v02 audit). Not a measured wait."
+				},
+				"flightMinutes": {
+					"value": 136,
+					"basis": "Median CRSElapsedTime of 11611 scheduled ORD->LGA rows, BTS On-Time Reporting Aug 2025 - Jul 2026 (p10 128.0, p90 144.0)."
+				},
+				"airportEgressMinutes": {
+					"value": 19,
+					"leg": "egress.LGA-B->nyc",
+					"basis": "Valhalla auto costing, free-flow model time, arrivals curb -> scene point (18.2 km). Starts when the traveller is already at the curb in a vehicle."
+				},
+				"doorToDoorAllowanceMinutes": {
+					"value": 0,
+					"basis": "NOT COUNTED. Deplaning, walk to curb, baggage and vehicle wait have no sourced figure; left at 0 exactly as v02 and flagged, not estimated."
+				}
+			},
+			"verification": {
+				"status": "nonruntime-candidate",
+				"note": "Not loaded by the runtime. Endpoint fix only; all other v02 caveats remain."
+			}
+		}
+	],
+	"sensitivity": {
+		"note": "Same method, other carrier terminals or router mix. Not proposed values.",
+		"american_LGA-B_ORD-T3": {
+			"nycToChicago": 329,
+			"chicagoToNyc": 299
+		},
+		"delta_LGA-C_ORD-T5": {
+			"nycToChicago": 328,
+			"chicagoToNyc": 300
+		},
+		"united_osrmForLGA_valhallaForORD": {
+			"nycToChicago": 332,
+			"chicagoToNyc": 302
+		},
+		"united_julyBlockTime": {
+			"nycToChicago": 330,
+			"chicagoToNyc": 305
+		}
+	},
+	"officialCrossChecks": [
+		{
+			"id": "cta-blue-line",
+			"url": "https://www.transitchicago.com/airports/",
+			"quote": "The normal travel time on the Blue Line from O'Hare to downtown, is 40-45 minutes.",
+			"comparison": "Candidate free-flow drive ORD T1 <-> Loop is 23-24 min, now faster than the scheduled train as expected. v02's 54-55 min (airside start) was slower than the train."
+		},
+		{
+			"id": "mta-q70",
+			"url": "https://www.mta.info/guides/airports/laguardia/lga-to-nyc",
+			"quote": "The trip takes about 15 minutes in typical traffic.",
+			"comparison": "Q70 LaGuardia Link to Jackson Heights only; the page gives no Manhattan total. Not directly comparable."
+		},
+		{
+			"id": "panynj-lga-mass-transit-2023",
+			"url": "https://www.panynj.gov/content/dam/port-authority/press-room/press-kits/lga-mass-transit/2023-03-13-Full-Report+Executive-Summary.pdf",
+			"pdfSha256": "9bf629eb47b1e536dcc6fb3009f552b7502c3313a14eb7ef0501b98e36f5e6ad",
+			"page": "PDF page 43, section 1.0",
+			"quote": "trips from Times Square to LGA between 2014 to 2019 showed ... The annual average travel time increased from approximately 31 to 35 minutes. The annual average daily maximum travel time increased from approximately 47 to 57 minutes.",
+			"comparison": "Candidate free-flow City Hall Park <-> LGA B is 19-21 min for a longer trip than Times Square. Typical vehicle time is clearly longer than free-flow. Not converted into a factor: different origin, 2019 data, and no City Hall figure."
+		}
+	],
+	"notApplied": [
+		"traffic or congestion factor",
+		"deplaning / baggage / curb-wait allowance",
+		"2537 fiction modifier",
+		"rideshare pickup locations"
+	],
+	"gate": {
+		"m2DoorToDoorRouteFigures": "OPEN",
+		"reason": "Endpoint defect fixed in candidate only. Car legs are still free-flow; the arrival-side allowance is still 0 and unsourced; the router is a public demo instance with unverified terms and an unpinned OSM snapshot; no creator decision on typical-time policy or 2537 modifiers."
+	}
+}
