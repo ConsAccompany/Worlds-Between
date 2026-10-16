@@ -1,0 +1,4438 @@
+{
+  "schemaVersion": 1,
+  "project": "rpg-2-star-ocean-the-second",
+  "title": "Worlds Between · 应变五系列 10 节点职业技能树（提案）",
+  "status": "PROPOSAL",
+  "reviewStatus": "pending balance and creator review",
+  "createdAt": "2026-10-16T11:21:14-04:00",
+  "authoring": "Claude Code 会话；按 2026-10-15 创作者技能规则设计，沿用研学 10 节点提案的结构与约束。",
+  "scope": "弓猎、枪械、游击、驯兽、行商五条应变系列各 10 个节点（共 50 个），按 2026-10-15 创作者技能规则重新设计；取代 7 节点、3 级上限草案中的这五条树。系列名、英文名、定位、五阶名称与终阶任务逐字沿用已批准原文。",
+  "notImplemented": "仅设计记录：未修改运行时、骨架目录、Game Bible、进度文档、完成度计量、旧草案或任何美术，也未暂存、提交或推送。",
+  "sources": {
+    "approvedRoster": {
+      "path": "outputs/rpg-2-star-ocean-the-second_all-jobs_five-tier-proposal_v01_20261013-224236-6f2b9c11.json",
+      "hashAlgorithm": "sha256-text-lf-v1",
+      "sha256": "92f5bff5428c73e45e81a4becb93ec7a59ad31ed637474f0ffbb77cc036765d5",
+      "lockEnforced": true,
+      "note": "已批准的 20 系列五阶名单（创作者决定 §2）"
+    },
+    "supersededAdaptiveDraft": {
+      "path": "outputs/rpg-2-star-ocean-the-second_adaptive-job-trees_skill-node-proposal_v01_20261013-225032-9b7e26c4.json",
+      "hashAlgorithm": "sha256-text-lf-v1",
+      "sha256": "603a86046b56131edbd1fe80ef4cfd04f05dff0a27e114106f269640bfed7694",
+      "lockEnforced": true,
+      "note": "弓猎、枪械、驯兽、行商 7 节点草案（仅作继承参考）"
+    },
+    "supersededSkirmishDraft": {
+      "path": "outputs/rpg-2-star-ocean-the-second_four-job-trees_skill-node-proposal_v01_20261013-224554-5a72d0be.json",
+      "hashAlgorithm": "sha256-text-lf-v1",
+      "sha256": "740a4659237b8cc2d16f924514c3b3252365be59ac6a472af5dbbb78d67e648a",
+      "lockEnforced": true,
+      "note": "游击 7 节点草案（四天分样板文件，仅作继承参考）"
+    },
+    "researchTenNodeProposal": {
+      "path": "outputs/rpg-2-star-ocean-the-second_research-job-trees_ten-node-skill-proposal_unapproved-v01_20261015-232143-842e0540.json",
+      "hashAlgorithm": "sha256-text-lf-v1",
+      "sha256": "d7f9b2917702d420afa3bc9d64b4ad8379ed244a1c227c5b38168ac142c67b50",
+      "lockEnforced": true,
+      "note": "研学 10 节点提案：结构、规则与约束模板"
+    },
+    "creatorDecisionNote": {
+      "path": "docs/design/rpg-2-star-ocean-the-second_creator-decisions-2026-10-15_world-skills-ai-endgame_reconciliation-note_v01_20261015-174559-39efc292.md",
+      "hashAlgorithm": "sha256-text-lf-v1",
+      "sha256": "94a821911b569e6902e69c2b755772d779ca72a599b5ea5fe1209daee2819954",
+      "lockEnforced": true
+    },
+    "runtimeSkeletonCatalog": {
+      "path": "game/data/growth/rpg-2-star-ocean-the-second_progression-ten-node_science-mvp-skeleton_v01_20261016-005300-e36e5d2c.json",
+      "hashAlgorithm": "sha256-text-lf-v1",
+      "sha256": "d0ed82e39977dda59083130b288f9a98d9ef154bd6c32f31ec58f578e70fdff7",
+      "lockEnforced": true,
+      "note": "运行时 10 节点骨架目录：节点 id 映射与现行 JP 表"
+    },
+    "gameBibleState": {
+      "path": "outputs/rpg-2-star-ocean-the-second_game-bible_state_v01_20261013-195422-b8c16d42.json",
+      "hashAlgorithm": "sha256-text-lf-v1",
+      "sha256": "ba077c1f0bd32a83739ff8cf8029229d287a63286fb4420b542db9da7fd894c0",
+      "lockEnforced": false,
+      "note": "第 1、3、4、6 章与角色：平地横向战场、无跳跃、能量不自然恢复、战后 20%/10%、贸易不随身运货、伙伴个人技能名与应变天分。该文件正被其他工作流编辑，故只记录不强制"
+    }
+  },
+  "rules": {
+    "unlock": "进入某阶时，该阶 2 个节点立即以第 1 级开放，不消耗 JP，也不另设等级门槛；第 5 阶仍须先完成该系列终阶任务（完成一次即对全体角色永久开放）。",
+    "jp": "JP 只用于把已开放的技能从第 1 级提升到第 2–5 级；任何节点都不能用 JP 解锁。",
+    "maxRank": 5,
+    "allBranchesLearnable": "10 个节点没有互斥选择；任何角色最终都能把全部 10 个节点练到第 5 级。",
+    "currentSeriesOnly": "职业技能（含科技区实用效果与经营效果）只在角色当前职业为该系列时可用；离开系列后保留等级，切回即恢复。",
+    "noPartySlot": "兽伴是技能效果，不占五名上场角色的位置，不获得经验。",
+    "battlefield": "战场是横向、固定尺寸的平地（x 28–612）；所有节点都不产生地形、高低差、障碍、掩体或跳跃相关效果。穿越、后撤与兽伴跟随都是地面横向移动，单位之间没有碰撞，不阻挡移动。范围只按横向像素距离计算。",
+    "noStealth": "游击、弓猎与驯兽的效果始终让角色可被看见、可被选中；闪避的无敌帧沿用通用规则，没有节点提供额外的不可选中或脱离战斗。科技区实用效果只提供信息、可选委托或节奏优势，不引入已取消的潜入玩法。",
+    "noGating": "实用效果都是可选优势：没有任何主线、支线、伙伴、档案或商会经营只能靠某个应变职业完成（没有永久错过的内容）。经营商会本身仍按 Game Bible 需要一名行商伙伴驻守，这是既有规则，不是本提案新增的门槛。",
+    "commerce": "行商节点不读取、不消耗、不生成任何物品，也不需要上场队伍运货；经营类节点只在驻守、上场或召回这三种写明的场合生效，数值依附于运行时暂定的周结算账目。",
+    "beastVsAutomata": "兽伴是有生命的伙伴（体力、信任、退场休整、哨音反应、护主本能），不能被工程或机偶技能维修、回收或换能；机偶与工程装置不能指定兽伴为目标。详见驯兽系列的 companionModel。",
+    "ai": "治疗技能的 AI 先处理倒下的队友，再处理急需治疗者；本系列唯一的群体恢复（万灵同路）不能复活，AI 遇到倒下队友时先等可复活的技能。AI 默认不使用消耗道具，本提案也没有任何节点需要道具。组合技 AI 默认关闭；与组合技相关的万路协约默认关闭。",
+    "combos": "组合技每位参与者都支付能量；万路协约可降低消耗，但不绕过关系与当前技能条件。",
+    "energy": "主动技能消耗能量，被动技能不消耗。战斗中能量不自然恢复；本提案没有凭空返还能量的节点。行商的调配节点让队友获得或节省的总量始终少于行商付出的能量。能量消耗不随技能等级变化。",
+    "rankCurve": "第 2–5 级每级按固定或递减的加法步长提升主要数值，不使用乘法复利；第 5 级主要数值不超过第 1 级的 2 倍。冷却、触发次数与能量消耗不随等级变化。",
+    "passives": "被动技能都有触发条件，并以每场次数上限、短窗口加内置冷却、用后清空的层数之一限制；非战斗（经营／交易）被动另计。没有常驻、无条件的战斗属性加成。",
+    "stacking": "同名效果不叠加，只刷新。全来源合计上限（提案）：敌方受到伤害增加 ≤ 25%，敌方防御降低 ≤ 30%，敌方移动减速 ≤ 40%，队友减伤 ≤ 50%，兽伴代为承受 ≤ 40%，队友换火首击加成 ≤ 30%。"
+  },
+  "jpProposal": {
+    "status": "PROPOSAL",
+    "reviewStatus": "pending balance and creator review",
+    "rankUpgradeBaseJp": {
+      "2": 30,
+      "3": 45,
+      "4": 60,
+      "5": 75
+    },
+    "unlockJp": 0,
+    "curve": "线性：每级比上一级多 15 JP；单项技能从第 1 级练到第 5 级共 210 基础 JP，每条系列 10 个节点共 2100 基础 JP。与研学提案使用同一张表，便于 200 个职业节点共用。",
+    "aptitudeDiscount": "沿用现有规则（GrowthRules.jp_cost）：对应天分（应变）60 时付基础 JP；61–100 线性递减，100 时付基础 JP 的 50%，每次向上取整。最高与最低成本差距不超过 50%（Game Bible 第 4 章）。",
+    "runtimeDifference": "运行时骨架目录现行 35/55/80/110（第 2–3 级沿用旧运行时，第 4–5 级为占位），总 280。两张表都不是指数增长；运行时表的增量逐级 +5，比本表陡。本提案未改运行时；采用哪张表待创作者决定。"
+  },
+  "economics": {
+    "status": "PROPOSAL",
+    "aptitudeScores": [
+      60,
+      70,
+      80,
+      83,
+      84,
+      85,
+      86,
+      88,
+      89,
+      90,
+      91,
+      94,
+      100
+    ],
+    "aptitudeExamples": {
+      "60": [
+        "主角（四项初始 60）"
+      ],
+      "83": [
+        "character-06（驯兽）"
+      ],
+      "84": [
+        "character-31（枪械）"
+      ],
+      "85": [
+        "character-46 雀枝（行商）"
+      ],
+      "86": [
+        "character-33 安索（行商）",
+        "character-36 阮田（驯兽）"
+      ],
+      "88": [
+        "character-03（枪械）",
+        "character-24（弓猎）",
+        "character-38 韩泽（行商）"
+      ],
+      "89": [
+        "character-20 米漪（弓猎）"
+      ],
+      "90": [
+        "character-41 瑞玛（驯兽）"
+      ],
+      "91": [
+        "character-10（弓猎）",
+        "character-17 周赫（行商）"
+      ],
+      "94": [
+        "character-48 零饼（行商）"
+      ]
+    },
+    "aptitudeExamplesNote": "天分来自 Game Bible 角色卡（应变为第 2 项）；没有初始系列为游击的伙伴。",
+    "runtimeJpRewards": {
+      "patrolWin": 12,
+      "sentryWin": 20,
+      "surveyActive": 8,
+      "fieldAssist": 4,
+      "reserveShare": 0.25,
+      "source": "game/scripts/app_state.gd（只读）"
+    },
+    "aptitudeTable": [
+      {
+        "aptitude": 60,
+        "perRank": {
+          "2": 30,
+          "3": 45,
+          "4": 60,
+          "5": 75
+        },
+        "perSkill": 210,
+        "perSeries": 2100
+      },
+      {
+        "aptitude": 70,
+        "perRank": {
+          "2": 27,
+          "3": 40,
+          "4": 53,
+          "5": 66
+        },
+        "perSkill": 186,
+        "perSeries": 1860
+      },
+      {
+        "aptitude": 80,
+        "perRank": {
+          "2": 23,
+          "3": 34,
+          "4": 45,
+          "5": 57
+        },
+        "perSkill": 159,
+        "perSeries": 1590
+      },
+      {
+        "aptitude": 83,
+        "perRank": {
+          "2": 22,
+          "3": 33,
+          "4": 43,
+          "5": 54
+        },
+        "perSkill": 152,
+        "perSeries": 1520
+      },
+      {
+        "aptitude": 84,
+        "perRank": {
+          "2": 21,
+          "3": 32,
+          "4": 42,
+          "5": 53
+        },
+        "perSkill": 148,
+        "perSeries": 1480
+      },
+      {
+        "aptitude": 85,
+        "perRank": {
+          "2": 21,
+          "3": 31,
+          "4": 42,
+          "5": 52
+        },
+        "perSkill": 146,
+        "perSeries": 1460
+      },
+      {
+        "aptitude": 86,
+        "perRank": {
+          "2": 21,
+          "3": 31,
+          "4": 41,
+          "5": 51
+        },
+        "perSkill": 144,
+        "perSeries": 1440
+      },
+      {
+        "aptitude": 88,
+        "perRank": {
+          "2": 20,
+          "3": 30,
+          "4": 39,
+          "5": 49
+        },
+        "perSkill": 138,
+        "perSeries": 1380
+      },
+      {
+        "aptitude": 89,
+        "perRank": {
+          "2": 20,
+          "3": 29,
+          "4": 39,
+          "5": 48
+        },
+        "perSkill": 136,
+        "perSeries": 1360
+      },
+      {
+        "aptitude": 90,
+        "perRank": {
+          "2": 19,
+          "3": 29,
+          "4": 38,
+          "5": 47
+        },
+        "perSkill": 133,
+        "perSeries": 1330
+      },
+      {
+        "aptitude": 91,
+        "perRank": {
+          "2": 19,
+          "3": 28,
+          "4": 37,
+          "5": 46
+        },
+        "perSkill": 130,
+        "perSeries": 1300
+      },
+      {
+        "aptitude": 94,
+        "perRank": {
+          "2": 18,
+          "3": 26,
+          "4": 35,
+          "5": 44
+        },
+        "perSkill": 123,
+        "perSeries": 1230
+      },
+      {
+        "aptitude": 100,
+        "perRank": {
+          "2": 15,
+          "3": 23,
+          "4": 30,
+          "5": 38
+        },
+        "perSkill": 106,
+        "perSeries": 1060
+      }
+    ],
+    "battleEstimates": [
+      {
+        "aptitude": 60,
+        "sentryWinsPerStage": 21,
+        "patrolWinsPerStage": 35,
+        "sentryWinsPerSeries": 105,
+        "patrolWinsPerSeries": 175
+      },
+      {
+        "aptitude": 100,
+        "sentryWinsPerStage": 11,
+        "patrolWinsPerStage": 18,
+        "sentryWinsPerSeries": 53,
+        "patrolWinsPerSeries": 89
+      }
+    ],
+    "proposedCurve": {
+      "values": [
+        30,
+        45,
+        60,
+        75
+      ],
+      "increments": [
+        15,
+        15,
+        15
+      ],
+      "successiveRatios": [
+        1.5,
+        1.333,
+        1.25
+      ],
+      "total": 210,
+      "rank5OverRank2": 2.5
+    },
+    "runtimeSkeletonCurve": {
+      "values": [
+        35,
+        55,
+        80,
+        110
+      ],
+      "increments": [
+        20,
+        25,
+        30
+      ],
+      "successiveRatios": [
+        1.571,
+        1.455,
+        1.375
+      ],
+      "total": 280,
+      "rank5OverRank2": 3.143
+    },
+    "notes": [
+      "每阶战斗场数 = 该阶 2 个节点从第 1 级练到第 5 级所需 JP ÷ 单场 JP，向上取整；只计上场角色的胜利奖励，不计勘察与实地协助。",
+      "每阶之间有 10 级的职业选择间隔；XP 曲线尚未定稿，所以这里不换算成等级。",
+      "天分折扣只影响 JP，不影响能量、冷却或效果数值；高天分伙伴练满一条系列约省一半 JP，但效果上限相同。"
+    ]
+  },
+  "roleVocabulary": {
+    "precision_damage": "精准伤害",
+    "mark": "目标标记",
+    "peel": "援护拦截",
+    "weakpoint": "弱点暴露",
+    "kiting": "拉开距离",
+    "tracking_shot": "追踪命中",
+    "reveal": "识破分身",
+    "warning": "预警援护",
+    "burst": "爆发",
+    "mark_persistence": "标记延续",
+    "range_band": "射程管理",
+    "suppression": "压制延迟",
+    "shield_break": "破盾",
+    "mode_switch": "弹种切换",
+    "tempo": "节奏加速",
+    "line_aoe": "直线贯穿",
+    "counter": "闪避反击",
+    "mode_synergy": "弹种协同",
+    "reposition": "换位",
+    "bait": "诱敌",
+    "target_switch": "转火",
+    "momentum": "积势",
+    "opening_punish": "破绽惩罚",
+    "feint": "佯退反打",
+    "split_focus": "拆分敌阵",
+    "multi_bait": "多敌牵引",
+    "cooldown": "冷却循环",
+    "companion_command": "兽伴指令",
+    "bond": "信任积累",
+    "protection": "单体防护",
+    "slow": "减速追缠",
+    "capacity": "容量扩展",
+    "combo_strike": "协同连击",
+    "group_protection": "群体防护",
+    "group_sustain": "群体续航",
+    "resilience": "韧性回归",
+    "energy_routing": "能量调配",
+    "trade_price": "交易议价",
+    "company_income": "商会收益",
+    "cooldown_routing": "冷却调配",
+    "market_intel": "市场情报",
+    "damage_pooling": "伤害分摊",
+    "group_discount": "群体减耗",
+    "handover": "交接续营",
+    "combo_support": "组合技支援",
+    "shortfall_cover": "缺额兜底"
+  },
+  "validationParameters": {
+    "energyBandsByStage": {
+      "1": [
+        6,
+        16
+      ],
+      "2": [
+        6,
+        20
+      ],
+      "3": [
+        6,
+        30
+      ],
+      "4": [
+        6,
+        34
+      ],
+      "5": [
+        24,
+        50
+      ]
+    },
+    "rank5ToRank1MaxRatio": 2,
+    "jpRank5OverRank2Max": 2.5,
+    "crossSeriesRoleJaccardMax": 0.4,
+    "passiveMaxTriggersPerBattle": 10,
+    "passiveMaxWindowSec": 10,
+    "battlefieldMaxSeparationPx": 584,
+    "stackingCapsPct": {
+      "enemyDamageTaken": 25,
+      "enemyDefenseDown": 30,
+      "enemyMoveSlow": 40,
+      "allyDamageReduction": 50,
+      "allyDamageRedirect": 40,
+      "allyNextHitBonus": 30
+    },
+    "scienceMvpLocations": [
+      "纽约 · 曼哈顿下城市政厅公园",
+      "扬克斯郊外",
+      "华盛顿特区 · 国会大厦遗址（科技勘察前哨）",
+      "芝加哥 · 卢普区"
+    ],
+    "bannedTerms": [
+      "地形",
+      "高低",
+      "高地",
+      "地势",
+      "障碍",
+      "掩体",
+      "跳跃",
+      "攀爬",
+      "落差",
+      "潜入",
+      "隐身",
+      "潜行",
+      "隐匿",
+      "terrain",
+      "elevation",
+      "obstacle",
+      "high ground",
+      "jump",
+      "climb",
+      "stealth",
+      "invisib",
+      "cover"
+    ],
+    "merchantBannedTerms": [
+      "货物",
+      "背包",
+      "携带",
+      "搬运",
+      "运货",
+      "货箱",
+      "道具",
+      "消耗品",
+      "inventory",
+      "cargo",
+      "goods",
+      "carry",
+      "item"
+    ],
+    "beastAutomataTerms": [
+      "机偶",
+      "机械",
+      "维修",
+      "修复",
+      "部署",
+      "模式",
+      "零件",
+      "程序",
+      "回收",
+      "充能",
+      "automat",
+      "repair",
+      "deploy",
+      "mode",
+      "robot"
+    ]
+  },
+  "lineage": {
+    "note": "35 个草案节点（弓猎、枪械、驯兽、行商 4 × 7，游击 7）中 33 个由新节点继承；部分草案节点换了阶（例如长线追矢从第 4 阶草案移到第 3 阶）或改写了触发方式（回身追击 → 破绽追击：由“自己闪避”改为“任何敌人攻击落空”）。",
+    "droppedDraftNodeIds": [
+      "merchant_mutual_turnover",
+      "merchant_risk_reserve"
+    ],
+    "droppedReasons": {
+      "merchant_risk_reserve": "与周赫的个人技能「履约储备」（驻守时累积风险准备金）重叠，为保留伙伴专属感而舍弃；强盗事件在运行时也尚未实现。",
+      "merchant_mutual_turnover": "直接转能与补给协议、应急调拨重复；改为调配冷却（调期协议）与分摊伤害（风险共担）两种不同资源。"
+    }
+  },
+  "series": [
+    {
+      "id": "archery",
+      "aptitude": "应变",
+      "name": "弓猎",
+      "en": "Archery and Tracking",
+      "role": "远距精准攻击与弱点追踪",
+      "stages": [
+        "猎手",
+        "寻迹射手",
+        "穿林游侠",
+        "千步猎宗",
+        "天际追猎者"
+      ],
+      "finalQuest": "追踪会在多个区域留下不同痕迹的目标，判断真身后在战斗中命中其暴露弱点。",
+      "identity": "观察 → 猎迹 → 精准：远距单体射击、敌方起手预警与弱点窗口，并能识破分身类目标。理想距离 200 px 以上；不依赖弹种，也不做直线贯穿（那是枪械）。",
+      "distinctFrom": "与枪械：弓猎靠拉弓、观察累计与猎迹给全队情报；枪械靠射程带、弹种切换与破盾。与战术：猎迹只提供起手预警与弓猎增伤，不改写队友 AI。",
+      "nodes": [
+        {
+          "id": "archery_n01_aimed_shot",
+          "seriesId": "archery",
+          "stage": 1,
+          "stageName": "猎手",
+          "slot": 1,
+          "name": "瞄准射击",
+          "nameEn": "Aimed Shot",
+          "summaryEn": "A 0.6 s draw, then one long shot; +20% if the target barely moved during the draw. Energy is spent on release.",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "precision_damage",
+          "tacticalRoleZh": "精准伤害",
+          "energyCost": 12,
+          "cooldownSec": 4,
+          "target": "一名敌人",
+          "rangePx": 420,
+          "baseEffect": "拉弓 0.6 秒后射出一箭，造成 110% 攻击力伤害；拉弓期间目标横向位移不足 40 px 时额外 +20%。拉弓期间受击会中断，能量在放箭时才扣除，中断不耗能量。",
+          "scaling": [
+            {
+              "key": "damage",
+              "label": "伤害",
+              "unit": "% 攻击力",
+              "direction": "higher_is_better",
+              "values": [
+                110,
+                120,
+                130,
+                140,
+                150
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "伤害 120% 攻击力（+10）",
+            "3": "伤害 130% 攻击力（+10）",
+            "4": "伤害 140% 攻击力（+10）",
+            "5": "伤害 150% 攻击力（+10）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "目标距离 ≥ 160 px，且本角色 80 px 内没有正在起手的敌人",
+            "avoid": "目标正在闪避，或本角色正处于防御"
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "archery_aimed_shot",
+          "runtimeCatalogNodeId": "archery_s1a",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "archery_n02_quarry_trail",
+          "seriesId": "archery",
+          "stage": 1,
+          "stageName": "猎手",
+          "slot": 2,
+          "name": "猎迹标记",
+          "nameEn": "Quarry Trail",
+          "summaryEn": "Marks a quarry for 12 s: the whole party sees its attack wind-ups earlier, and archery skills deal +8% to it.",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "mark",
+          "tacticalRoleZh": "目标标记",
+          "energyCost": 8,
+          "cooldownSec": 10,
+          "target": "一名敌人",
+          "rangePx": 480,
+          "baseEffect": "为目标留下猎迹 12 秒：它每次攻击起手时，全队提前 0.2 秒看到起手提示；弓猎技能对它的伤害 +8%。本角色同一时间只保有一个猎迹，再次施放会把猎迹转到新目标。",
+          "scaling": [
+            {
+              "key": "telegraphLead",
+              "label": "起手提示提前",
+              "unit": " 秒",
+              "direction": "higher_is_better",
+              "values": [
+                0.2,
+                0.25,
+                0.3,
+                0.35,
+                0.4
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "起手提示提前 0.25 秒（+0.05）",
+            "3": "起手提示提前 0.3 秒（+0.05）",
+            "4": "起手提示提前 0.35 秒（+0.05）",
+            "5": "起手提示提前 0.4 秒（+0.05）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "战斗开始后对正在锁定队友或生命最高的敌人施放；本角色的猎迹仍在时不重复施放",
+            "avoid": "目标将在 2 秒内被击倒"
+          },
+          "scienceMvpUtility": {
+            "name": "足迹判读",
+            "effect": "在科技文明圈野外场景中读取近期足迹，显示方向与大致距离，指向可选的拾荒者营地、受困动物或遗落补给；也会把判读记录存为终阶任务“追踪痕迹”的练习。只给方向提示，不隐藏队伍，不改变敌人巡逻；没有弓猎职业也能通过对话线索找到同样的地点。",
+            "mvpLocations": [
+              "扬克斯郊外",
+              "华盛顿特区 · 国会大厦遗址（科技勘察前哨）"
+            ],
+            "gate": "optional-advantage-only",
+            "requiresCurrentSeries": true
+          },
+          "supersedesDraftNodeId": "archery_track_mark",
+          "runtimeCatalogNodeId": "archery_s1b",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review",
+          "caps": [
+            {
+              "category": "enemyDamageTaken",
+              "rank5Value": 8
+            }
+          ]
+        },
+        {
+          "id": "archery_n03_escort_arrow",
+          "seriesId": "archery",
+          "stage": 2,
+          "stageName": "寻迹射手",
+          "slot": 1,
+          "name": "掩护箭",
+          "nameEn": "Escort Arrow",
+          "summaryEn": "Shoots an enemy that is winding up on an ally, stretching that wind-up so the ally can dodge or guard.",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "peel",
+          "tacticalRoleZh": "援护拦截",
+          "energyCost": 14,
+          "cooldownSec": 9,
+          "target": "正在对队友起手的敌人",
+          "rangePx": 420,
+          "baseEffect": "射击一名正在对队友起手的敌人，造成 80% 攻击力伤害，并使这次起手延长 0.25 秒（每次起手只会被延长一次）。没有敌人起手时射向离生命比例最低队友最近的敌人，只造成伤害。",
+          "scaling": [
+            {
+              "key": "windupDelay",
+              "label": "起手延长",
+              "unit": " 秒",
+              "direction": "higher_is_better",
+              "values": [
+                0.25,
+                0.3,
+                0.35,
+                0.4,
+                0.45
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "起手延长 0.3 秒（+0.05）",
+            "3": "起手延长 0.35 秒（+0.05）",
+            "4": "起手延长 0.4 秒（+0.05）",
+            "5": "起手延长 0.45 秒（+0.05）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "敌人对生命 < 50% 的队友起手时优先施放",
+            "avoid": "起手目标是本角色自己（改用闪避）"
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "archery_cover_fire",
+          "runtimeCatalogNodeId": "archery_s2a",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "archery_n04_weakpoint_read",
+          "seriesId": "archery",
+          "stage": 2,
+          "stageName": "寻迹射手",
+          "slot": 2,
+          "name": "弱点辨识",
+          "nameEn": "Weakpoint Read",
+          "summaryEn": "Holding 200–480 px from one enemy for 4 s opens a 3 s weak-point window for the next archery hit.",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "weakpoint",
+          "tacticalRoleZh": "弱点暴露",
+          "energyCost": null,
+          "cooldownSec": null,
+          "target": "自身",
+          "rangePx": null,
+          "baseEffect": "本角色与同一敌人保持 200–480 px 距离累计 4 秒后，该敌人露出 3 秒弱点窗口：本角色下一次弓猎技能命中它时伤害 +20%。每名敌人每 10 秒最多露出一次，每场最多 6 次。",
+          "scaling": [
+            {
+              "key": "bonus",
+              "label": "弱点加成",
+              "unit": "% 伤害",
+              "direction": "higher_is_better",
+              "values": [
+                20,
+                25,
+                30,
+                35,
+                40
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "弱点加成 25% 伤害（+5）",
+            "3": "弱点加成 30% 伤害（+5）",
+            "4": "弱点加成 35% 伤害（+5）",
+            "5": "弱点加成 40% 伤害（+5）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "被动，满足条件时自动生效；玩家操控与 AI 控制时相同；AI 在窗口内优先使用弓猎技能",
+            "avoid": "无"
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "archery_weakpoint_read",
+          "runtimeCatalogNodeId": "archery_s2b",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review",
+          "passiveBounds": {
+            "trigger": "与同一敌人保持 200–480 px 累计 4 秒",
+            "maxTriggersPerBattle": 6,
+            "effectDurationSec": 3,
+            "internalCooldownSec": 10,
+            "maxStacks": null,
+            "consumedOnUse": false,
+            "nonCombat": false
+          }
+        },
+        {
+          "id": "archery_n05_retreating_volley",
+          "seriesId": "archery",
+          "stage": 3,
+          "stageName": "穿林游侠",
+          "slot": 1,
+          "name": "退步连射",
+          "nameEn": "Retreating Volley",
+          "summaryEn": "Steps back 90 px on the ground, then looses two arrows at the nearest enemy. No invulnerability.",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "kiting",
+          "tacticalRoleZh": "拉开距离",
+          "energyCost": 18,
+          "cooldownSec": 8,
+          "target": "最近的敌人",
+          "rangePx": 360,
+          "baseEffect": "向远离最近敌人的方向快步后撤 90 px（在地面移动，不获得无敌），随后向最近的敌人连射两箭，每箭 60% 攻击力。后撤途中仍可被攻击命中。",
+          "scaling": [
+            {
+              "key": "damagePerArrow",
+              "label": "每箭伤害",
+              "unit": "% 攻击力",
+              "direction": "higher_is_better",
+              "values": [
+                60,
+                66,
+                72,
+                78,
+                84
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "每箭伤害 66% 攻击力（+6）",
+            "3": "每箭伤害 72% 攻击力（+6）",
+            "4": "每箭伤害 78% 攻击力（+6）",
+            "5": "每箭伤害 84% 攻击力（+6）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "最近的敌人进入 80 px 且本角色生命 ≥ 30%",
+            "avoid": "身后不足 90 px 活动空间（贴近场边），或敌人已在起手"
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": null,
+          "runtimeCatalogNodeId": "archery_s3a",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "archery_n06_long_trace",
+          "seriesId": "archery",
+          "stage": 3,
+          "stageName": "穿林游侠",
+          "slot": 2,
+          "name": "长线追矢",
+          "nameEn": "Long-trace Arrow",
+          "summaryEn": "A homing arrow that corrects course once against a marked quarry and refreshes the mark on hit.",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "tracking_shot",
+          "tacticalRoleZh": "追踪命中",
+          "energyCost": 22,
+          "cooldownSec": 12,
+          "target": "带猎迹的敌人",
+          "rangePx": 560,
+          "baseEffect": "向带猎迹的敌人射出追踪箭，造成 130% 攻击力伤害；目标在箭飞行途中闪避或改变方向时，箭路修正一次仍可命中，命中后猎迹时间刷新。目标没有猎迹时按普通直线箭结算，可被闪避。",
+          "scaling": [
+            {
+              "key": "damage",
+              "label": "伤害",
+              "unit": "% 攻击力",
+              "direction": "higher_is_better",
+              "values": [
+                130,
+                140,
+                150,
+                160,
+                170
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "伤害 140% 攻击力（+10）",
+            "3": "伤害 150% 攻击力（+10）",
+            "4": "伤害 160% 攻击力（+10）",
+            "5": "伤害 170% 攻击力（+10）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "只对带猎迹的目标使用；目标正在闪避或快速位移时优先",
+            "avoid": "目标没有猎迹"
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "archery_long_trace",
+          "runtimeCatalogNodeId": "archery_s3b",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "archery_n07_true_quarry",
+          "seriesId": "archery",
+          "stage": 4,
+          "stageName": "千步猎宗",
+          "slot": 1,
+          "name": "真身辨识",
+          "nameEn": "True Quarry",
+          "summaryEn": "Exposes enemy copies, projections and decoys for a few seconds; archery hits dispel copies. Otherwise acts as a short mark.",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "reveal",
+          "tacticalRoleZh": "识破分身",
+          "energyCost": 16,
+          "cooldownSec": 20,
+          "target": "全场敌人",
+          "rangePx": null,
+          "baseEffect": "6 秒内揭示全场带“分身／投影／诱饵”标签的敌方单位，并在真身上显示猎迹提示；本角色的弓猎技能命中分身类单位时直接使其消散（首领本体不会消散）。战场上没有此类单位时，只为当前目标附加 6 秒猎迹。",
+          "scaling": [
+            {
+              "key": "duration",
+              "label": "揭示时间",
+              "unit": " 秒",
+              "direction": "higher_is_better",
+              "values": [
+                6,
+                7,
+                8,
+                9,
+                10
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "揭示时间 7 秒（+1）",
+            "3": "揭示时间 8 秒（+1）",
+            "4": "揭示时间 9 秒（+1）",
+            "5": "揭示时间 10 秒（+1）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "敌方存在分身／投影／诱饵标签单位时立即使用",
+            "avoid": "没有此类单位且本角色的猎迹仍在"
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": null,
+          "runtimeCatalogNodeId": "archery_s4a",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "archery_n08_dual_watch",
+          "seriesId": "archery",
+          "stage": 4,
+          "stageName": "千步猎宗",
+          "slot": 2,
+          "name": "双向警戒",
+          "nameEn": "Dual Watch",
+          "summaryEn": "When a hurt ally nearby is targeted, warns them early, trims that hit and readies Escort Arrow.",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "warning",
+          "tacticalRoleZh": "预警援护",
+          "energyCost": null,
+          "cooldownSec": null,
+          "target": "左右各 240 px 内的队友",
+          "rangePx": 240,
+          "baseEffect": "本角色左右各 240 px 内、生命低于 50% 的队友被敌人起手锁定时，提示该队友提前 0.2 秒闪避，并使其这次受到的伤害降低 10%；本角色掩护箭的剩余冷却立即缩短 3 秒。每场最多 6 次。",
+          "scaling": [
+            {
+              "key": "damageReduction",
+              "label": "该次伤害降低",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                10,
+                12,
+                14,
+                16,
+                18
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "该次伤害降低 12%（+2）",
+            "3": "该次伤害降低 14%（+2）",
+            "4": "该次伤害降低 16%（+2）",
+            "5": "该次伤害降低 18%（+2）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "被动，满足条件时自动生效；玩家操控与 AI 控制时相同；AI 队友收到提示时按自身策略决定闪避或防御",
+            "avoid": "无"
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "archery_dual_guard",
+          "runtimeCatalogNodeId": "archery_s4b",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review",
+          "passiveBounds": {
+            "trigger": "240 px 内生命 < 50% 的队友被起手锁定",
+            "maxTriggersPerBattle": 6,
+            "effectDurationSec": null,
+            "internalCooldownSec": null,
+            "maxStacks": null,
+            "consumedOnUse": false,
+            "nonCombat": false
+          },
+          "caps": [
+            {
+              "category": "allyDamageReduction",
+              "rank5Value": 18,
+              "scalingKey": "damageReduction"
+            }
+          ]
+        },
+        {
+          "id": "archery_n09_skyline_hunt",
+          "seriesId": "archery",
+          "stage": 5,
+          "stageName": "天际追猎者",
+          "slot": 1,
+          "name": "天际追猎",
+          "nameEn": "Skyline Hunt",
+          "summaryEn": "Locks up to three marked or exposed enemies, then fires one heavy arrow at each. Spare arrows are not stacked on one target.",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "burst",
+          "tacticalRoleZh": "爆发",
+          "energyCost": 44,
+          "cooldownSec": 45,
+          "target": "最多 3 名带猎迹或弱点窗口的敌人",
+          "rangePx": 560,
+          "baseEffect": "用 1.2 秒依次锁定最多 3 名带猎迹或处于弱点窗口的敌人，再各射一箭，每箭 150% 攻击力；不足 3 名时只发射实际锁定的箭数，不会把多余的箭集中到同一目标。锁定期间受击会中断，能量在第一箭射出时扣除。",
+          "scaling": [
+            {
+              "key": "damagePerArrow",
+              "label": "每箭伤害",
+              "unit": "% 攻击力",
+              "direction": "higher_is_better",
+              "values": [
+                150,
+                165,
+                180,
+                195,
+                210
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "每箭伤害 165% 攻击力（+15）",
+            "3": "每箭伤害 180% 攻击力（+15）",
+            "4": "每箭伤害 195% 攻击力（+15）",
+            "5": "每箭伤害 210% 攻击力（+15）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": true
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "至少 2 名敌人带猎迹或弱点窗口；只有 1 名敌人时仅在其生命 > 40% 时使用",
+            "avoid": "本角色 80 px 内有敌人正在起手"
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "archery_skyline_hunt",
+          "runtimeCatalogNodeId": "archery_s5a",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "archery_n10_trail_handoff",
+          "seriesId": "archery",
+          "stage": 5,
+          "stageName": "天际追猎者",
+          "slot": 2,
+          "name": "承迹",
+          "nameEn": "Trail Handoff",
+          "summaryEn": "When a marked enemy falls, the mark passes to the nearest enemy with extra time.",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "mark_persistence",
+          "tacticalRoleZh": "标记延续",
+          "energyCost": null,
+          "cooldownSec": null,
+          "target": "自身的猎迹",
+          "rangePx": null,
+          "baseEffect": "带猎迹的敌人被击倒时，猎迹转移到离它最近的另一名敌人，剩余时间额外 +3 秒。每个猎迹只转移一次，每场最多 4 次。",
+          "scaling": [
+            {
+              "key": "extraDuration",
+              "label": "转移后追加",
+              "unit": " 秒",
+              "direction": "higher_is_better",
+              "values": [
+                3,
+                3.5,
+                4,
+                4.5,
+                5
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "转移后追加 3.5 秒（+0.5）",
+            "3": "转移后追加 4 秒（+0.5）",
+            "4": "转移后追加 4.5 秒（+0.5）",
+            "5": "转移后追加 5 秒（+0.5）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": true
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "被动，满足条件时自动生效；玩家操控与 AI 控制时相同",
+            "avoid": "无"
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": null,
+          "runtimeCatalogNodeId": "archery_s5b",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review",
+          "passiveBounds": {
+            "trigger": "带猎迹的敌人被击倒",
+            "maxTriggersPerBattle": 4,
+            "effectDurationSec": null,
+            "internalCooldownSec": null,
+            "maxStacks": null,
+            "consumedOnUse": false,
+            "nonCombat": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "firearms",
+      "aptitude": "应变",
+      "name": "枪械",
+      "en": "Firearms",
+      "role": "射程管理与弹道切换",
+      "stages": [
+        "枪手",
+        "精密射手",
+        "火线技师",
+        "弹道统御者",
+        "极域枪皇"
+      ],
+      "finalQuest": "校准三种射击模式，利用各模式对应的窗口击穿护盾目标。",
+      "identity": "射程带与弹种：近（≤ 120 px）、中（120–260 px）、远（> 260 px）三带各有最佳技能；精密、压制、破盾三种弹种可切换，并以破盾处理护盾目标。",
+      "distinctFrom": "与弓猎：不做标记与情报，不需要长时间观察；输出来自起手短、频率高的射击与模式窗口。",
+      "rangeBandsPx": {
+        "near": [
+          0,
+          120
+        ],
+        "mid": [
+          120,
+          260
+        ],
+        "far": [
+          260,
+          584
+        ]
+      },
+      "nodes": [
+        {
+          "id": "firearms_n01_precision_shot",
+          "seriesId": "firearms",
+          "stage": 1,
+          "stageName": "枪手",
+          "slot": 1,
+          "name": "精准射击",
+          "nameEn": "Precision Shot",
+          "summaryEn": "A quick single shot, best at mid range; two hits in a row shorten the next wind-up.",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "precision_damage",
+          "tacticalRoleZh": "精准伤害",
+          "energyCost": 13,
+          "cooldownSec": 3,
+          "target": "一名敌人",
+          "rangePx": 260,
+          "baseEffect": "0.3 秒起手的单发点射，造成 115% 攻击力伤害；目标在中距（120–260 px）时额外 +10%。连续两次精准射击命中同一目标后，下一次的起手缩短为 0.15 秒。",
+          "scaling": [
+            {
+              "key": "damage",
+              "label": "伤害",
+              "unit": "% 攻击力",
+              "direction": "higher_is_better",
+              "values": [
+                115,
+                125,
+                135,
+                145,
+                155
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "伤害 125% 攻击力（+10）",
+            "3": "伤害 135% 攻击力（+10）",
+            "4": "伤害 145% 攻击力（+10）",
+            "5": "伤害 155% 攻击力（+10）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "目标在 260 px 内且未在闪避；优先在中距使用",
+            "avoid": "目标在 120 px 内正在起手（先闪避）"
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "firearms_stable_shot",
+          "runtimeCatalogNodeId": "firearms_shot",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review",
+          "runtimeNote": "运行时现行版本（firearms_shot）：消耗 13，冷却 2.2 秒，射程 175 px，伤害 8 + 4 × 等级 + 3。提案数值未写入运行时。"
+        },
+        {
+          "id": "firearms_n02_range_calibration",
+          "seriesId": "firearms",
+          "stage": 1,
+          "stageName": "枪手",
+          "slot": 2,
+          "name": "射程校准",
+          "nameEn": "Range Calibration",
+          "summaryEn": "Holding the right range band for 1 s readies a calibrated next shot.",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "range_band",
+          "tacticalRoleZh": "射程管理",
+          "energyCost": null,
+          "cooldownSec": null,
+          "target": "自身",
+          "rangePx": null,
+          "baseEffect": "本角色在某项枪械技能的理想射程带内（界面显示）停留 1 秒后进入 4 秒“校准”：下一次枪械技能伤害 +10%。触发后 6 秒内不会再次校准。",
+          "scaling": [
+            {
+              "key": "bonus",
+              "label": "校准加成",
+              "unit": "% 伤害",
+              "direction": "higher_is_better",
+              "values": [
+                10,
+                12,
+                14,
+                16,
+                18
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "校准加成 12% 伤害（+2）",
+            "3": "校准加成 14% 伤害（+2）",
+            "4": "校准加成 16% 伤害（+2）",
+            "5": "校准加成 18% 伤害（+2）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "被动，满足条件时自动生效；玩家操控与 AI 控制时相同；AI 移动时优先停在下一项技能的理想射程带",
+            "avoid": "无"
+          },
+          "scienceMvpUtility": {
+            "name": "校准委托",
+            "effect": "在国会大厦遗址的科技勘察前哨与卢普区的安保点，可选择为驻地人员完成射程校准练习，获得少量报酬、档案中的枪械型号记录与“求知”行为记录。这些练习不是任何主线或支线的必经步骤，没有枪械职业也不会错过内容。",
+            "mvpLocations": [
+              "华盛顿特区 · 国会大厦遗址（科技勘察前哨）",
+              "芝加哥 · 卢普区"
+            ],
+            "gate": "optional-advantage-only",
+            "requiresCurrentSeries": true
+          },
+          "supersedesDraftNodeId": null,
+          "runtimeCatalogNodeId": "firearms_s1b",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review",
+          "passiveBounds": {
+            "trigger": "在理想射程带内停留 1 秒",
+            "maxTriggersPerBattle": null,
+            "effectDurationSec": 4,
+            "internalCooldownSec": 6,
+            "maxStacks": null,
+            "consumedOnUse": false,
+            "nonCombat": false
+          }
+        },
+        {
+          "id": "firearms_n03_suppressive_burst",
+          "seriesId": "firearms",
+          "stage": 2,
+          "stageName": "精密射手",
+          "slot": 1,
+          "name": "连发压制",
+          "nameEn": "Suppressive Burst",
+          "summaryEn": "A three-round burst; each hit pushes back the target's next attack.",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "suppression",
+          "tacticalRoleZh": "压制延迟",
+          "energyCost": 16,
+          "cooldownSec": 6,
+          "target": "一名敌人",
+          "rangePx": 240,
+          "baseEffect": "0.6 秒内连发 3 发，每发 45% 攻击力；每发命中使目标下一次攻击的冷却延长 0.15 秒（一次连发最多 0.45 秒，与其他压制不叠加，取较高者）。",
+          "scaling": [
+            {
+              "key": "damagePerRound",
+              "label": "每发伤害",
+              "unit": "% 攻击力",
+              "direction": "higher_is_better",
+              "values": [
+                45,
+                50,
+                55,
+                60,
+                65
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "每发伤害 50% 攻击力（+5）",
+            "3": "每发伤害 55% 攻击力（+5）",
+            "4": "每发伤害 60% 攻击力（+5）",
+            "5": "每发伤害 65% 攻击力（+5）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "目标刚结束一次攻击、进入冷却时使用",
+            "avoid": "目标在 240 px 外"
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "firearms_burst_line",
+          "runtimeCatalogNodeId": "firearms_burst",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review",
+          "runtimeNote": "运行时现行版本（firearms_burst）：消耗 16，冷却 2.2 秒，射程 175 px，伤害 8 + 4 × 等级 + 6，无压制效果。提案数值未写入运行时。"
+        },
+        {
+          "id": "firearms_n04_breaker_round",
+          "seriesId": "firearms",
+          "stage": 2,
+          "stageName": "精密射手",
+          "slot": 2,
+          "name": "破盾弹",
+          "nameEn": "Breaker Round",
+          "summaryEn": "A slow-loading round that tears shields and stops them regenerating briefly; weak against unshielded targets.",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "shield_break",
+          "tacticalRoleZh": "破盾",
+          "energyCost": 18,
+          "cooldownSec": 10,
+          "target": "一名敌人",
+          "rangePx": 200,
+          "baseEffect": "装填 0.8 秒后射出破盾弹：对护盾或护板值造成 200% 攻击力伤害，命中后护盾 3 秒内不能再生；没有护盾的目标只受 80% 攻击力伤害。",
+          "scaling": [
+            {
+              "key": "shieldDamage",
+              "label": "护盾伤害",
+              "unit": "% 攻击力",
+              "direction": "higher_is_better",
+              "values": [
+                200,
+                225,
+                250,
+                275,
+                300
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "护盾伤害 225% 攻击力（+25）",
+            "3": "护盾伤害 250% 攻击力（+25）",
+            "4": "护盾伤害 275% 攻击力（+25）",
+            "5": "护盾伤害 300% 攻击力（+25）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "只在目标带护盾或护板时使用",
+            "avoid": "目标没有护盾"
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "firearms_breaker_round",
+          "runtimeCatalogNodeId": "firearms_s2b",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "firearms_n05_round_selector",
+          "seriesId": "firearms",
+          "stage": 3,
+          "stageName": "火线技师",
+          "slot": 1,
+          "name": "弹种切换",
+          "nameEn": "Round Selector",
+          "summaryEn": "Switches basic fire between precision, suppression and breaker rounds; the choice lasts until the next switch.",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "mode_switch",
+          "tacticalRoleZh": "弹种切换",
+          "energyCost": 8,
+          "cooldownSec": 3,
+          "target": "自身",
+          "rangePx": null,
+          "baseEffect": "在精密、压制、破盾三种弹种间切换普通射击，效果持续到下次切换或战斗结束：精密——远距（> 260 px）普通射击伤害 +10%；压制——普通射击命中使目标移动速度降低 10%，持续 1.5 秒；破盾——普通射击对护盾伤害 +20%（为加成数值的 2 倍）。",
+          "scaling": [
+            {
+              "key": "modeBonus",
+              "label": "弹种加成",
+              "unit": "%（破盾按 2 倍）",
+              "direction": "higher_is_better",
+              "values": [
+                10,
+                12,
+                14,
+                16,
+                18
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "弹种加成 12%（破盾按 2 倍）（+2）",
+            "3": "弹种加成 14%（破盾按 2 倍）（+2）",
+            "4": "弹种加成 16%（破盾按 2 倍）（+2）",
+            "5": "弹种加成 18%（破盾按 2 倍）（+2）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "目标带护盾时切到破盾；目标距离 > 260 px 时切到精密；否则切到压制。每 10 秒最多切换一次",
+            "avoid": "当前弹种已符合条件"
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": null,
+          "runtimeCatalogNodeId": "firearms_s3a",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review",
+          "caps": [
+            {
+              "category": "enemyMoveSlow",
+              "rank5Value": 18,
+              "scalingKey": "modeBonus"
+            }
+          ]
+        },
+        {
+          "id": "firearms_n06_mobile_reload",
+          "seriesId": "firearms",
+          "stage": 3,
+          "stageName": "火线技师",
+          "slot": 2,
+          "name": "移动换匣",
+          "nameEn": "Mobile Reload",
+          "summaryEn": "Moving 80 px or dodging shortens the next firearms wind-up.",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "tempo",
+          "tacticalRoleZh": "节奏加速",
+          "energyCost": null,
+          "cooldownSec": null,
+          "target": "自身",
+          "rangePx": null,
+          "baseEffect": "本角色连续移动 80 px 或成功闪避后的 3 秒内，下一次枪械技能的起手缩短 20%。每 5 秒最多触发一次。",
+          "scaling": [
+            {
+              "key": "windupCut",
+              "label": "起手缩短",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                20,
+                24,
+                28,
+                32,
+                36
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "起手缩短 24%（+4）",
+            "3": "起手缩短 28%（+4）",
+            "4": "起手缩短 32%（+4）",
+            "5": "起手缩短 36%（+4）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "被动，满足条件时自动生效；玩家操控与 AI 控制时相同",
+            "avoid": "无"
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "firearms_mobile_reload",
+          "runtimeCatalogNodeId": "firearms_s3b",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review",
+          "passiveBounds": {
+            "trigger": "连续移动 80 px 或成功闪避",
+            "maxTriggersPerBattle": null,
+            "effectDurationSec": 3,
+            "internalCooldownSec": 5,
+            "maxStacks": null,
+            "consumedOnUse": false,
+            "nonCombat": false
+          }
+        },
+        {
+          "id": "firearms_n07_piercing_lane",
+          "seriesId": "firearms",
+          "stage": 4,
+          "stageName": "弹道统御者",
+          "slot": 1,
+          "name": "弹道贯穿",
+          "nameEn": "Piercing Lane",
+          "summaryEn": "One round through every enemy in the facing direction, losing power per target.",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "line_aoe",
+          "tacticalRoleZh": "直线贯穿",
+          "energyCost": 28,
+          "cooldownSec": 16,
+          "target": "面向方向的横向弹道",
+          "rangePx": 520,
+          "baseEffect": "朝面向射出一发贯穿弹，命中横向弹道 520 px 内的所有敌人：第一名 140% 攻击力，此后每名递减 20 个百分点，最低 60%。",
+          "scaling": [
+            {
+              "key": "firstTargetDamage",
+              "label": "首个目标伤害",
+              "unit": "% 攻击力",
+              "direction": "higher_is_better",
+              "values": [
+                140,
+                150,
+                160,
+                170,
+                180
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "首个目标伤害 150% 攻击力（+10）",
+            "3": "首个目标伤害 160% 攻击力（+10）",
+            "4": "首个目标伤害 170% 攻击力（+10）",
+            "5": "首个目标伤害 180% 攻击力（+10）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "面向方向 520 px 内至少有 2 名敌人",
+            "avoid": "只有 1 名敌人时降为低优先级单体技能"
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "firearms_piercing_lane",
+          "runtimeCatalogNodeId": "firearms_s4a",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "firearms_n08_counter_line",
+          "seriesId": "firearms",
+          "stage": 4,
+          "stageName": "弹道统御者",
+          "slot": 2,
+          "name": "反位火线",
+          "nameEn": "Counter Line",
+          "summaryEn": "After a successful dodge, a near-instant return shot at the attacker.",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "counter",
+          "tacticalRoleZh": "闪避反击",
+          "energyCost": 20,
+          "cooldownSec": 10,
+          "target": "刚才的攻击者",
+          "rangePx": 300,
+          "baseEffect": "本角色成功闪避后的 1.2 秒内才能发动：以 0.1 秒起手向刚才的攻击者开火，造成 150% 攻击力伤害。窗口外无法发动，也不扣能量。",
+          "scaling": [
+            {
+              "key": "damage",
+              "label": "伤害",
+              "unit": "% 攻击力",
+              "direction": "higher_is_better",
+              "values": [
+                150,
+                160,
+                170,
+                180,
+                190
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "伤害 160% 攻击力（+10）",
+            "3": "伤害 170% 攻击力（+10）",
+            "4": "伤害 180% 攻击力（+10）",
+            "5": "伤害 190% 攻击力（+10）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "本角色闪避成功后自动检查，攻击者在 300 px 内即发动",
+            "avoid": "能量低于再闪避一次所需（12）"
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "firearms_counter_window",
+          "runtimeCatalogNodeId": "firearms_s4b",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "firearms_n09_extreme_ballistics",
+          "seriesId": "firearms",
+          "stage": 5,
+          "stageName": "极域枪皇",
+          "slot": 1,
+          "name": "极域弹道",
+          "nameEn": "Extreme Ballistics",
+          "summaryEn": "Three chained segments — breaker, suppression, precision — on one target.",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "burst",
+          "tacticalRoleZh": "爆发",
+          "energyCost": 46,
+          "cooldownSec": 50,
+          "target": "一名敌人",
+          "rangePx": 300,
+          "baseEffect": "对同一目标依次打出破盾、压制、精密三段，每段 90% 攻击力：破盾段对护盾按 2 倍计算；压制段使其下一次攻击的冷却延长 0.4 秒；精密段在目标位于中远距时 +15%。段与段之间有 0.4 秒窗口，被打断时取消剩余段，已扣能量不返还。",
+          "scaling": [
+            {
+              "key": "damagePerSegment",
+              "label": "每段伤害",
+              "unit": "% 攻击力",
+              "direction": "higher_is_better",
+              "values": [
+                90,
+                100,
+                110,
+                120,
+                130
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "每段伤害 100% 攻击力（+10）",
+            "3": "每段伤害 110% 攻击力（+10）",
+            "4": "每段伤害 120% 攻击力（+10）",
+            "5": "每段伤害 130% 攻击力（+10）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": true
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "目标生命 > 35% 或带护盾",
+            "avoid": "本角色 80 px 内有敌人正在起手"
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "firearms_extreme_ballistics",
+          "runtimeCatalogNodeId": "firearms_s5a",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "firearms_n10_tri_mode_sync",
+          "seriesId": "firearms",
+          "stage": 5,
+          "stageName": "极域枪皇",
+          "slot": 2,
+          "name": "三模同调",
+          "nameEn": "Tri-mode Sync",
+          "summaryEn": "Using all three round types within 12 s grants a short damage window.",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "mode_synergy",
+          "tacticalRoleZh": "弹种协同",
+          "energyCost": null,
+          "cooldownSec": null,
+          "target": "自身",
+          "rangePx": null,
+          "baseEffect": "12 秒内先后打出过精密、压制、破盾三类效果后（弹种切换与对应技能都计入），进入 5 秒“同调”：枪械技能伤害 +10%。每场最多 3 次。",
+          "scaling": [
+            {
+              "key": "bonus",
+              "label": "同调加成",
+              "unit": "% 伤害",
+              "direction": "higher_is_better",
+              "values": [
+                10,
+                12,
+                14,
+                16,
+                18
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "同调加成 12% 伤害（+2）",
+            "3": "同调加成 14% 伤害（+2）",
+            "4": "同调加成 16% 伤害（+2）",
+            "5": "同调加成 18% 伤害（+2）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": true
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "被动，满足条件时自动生效；玩家操控与 AI 控制时相同；AI 只在目标带护盾时才为凑齐三类效果而切换弹种",
+            "avoid": "无"
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": null,
+          "runtimeCatalogNodeId": "firearms_s5b",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review",
+          "passiveBounds": {
+            "trigger": "12 秒内用过三类弹种效果",
+            "maxTriggersPerBattle": 3,
+            "effectDurationSec": 5,
+            "internalCooldownSec": null,
+            "maxStacks": null,
+            "consumedOnUse": false,
+            "nonCombat": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "skirmish",
+      "aptitude": "应变",
+      "name": "游击",
+      "en": "Skirmishing",
+      "role": "快速走位、诱敌与目标切换",
+      "stages": [
+        "游击手",
+        "转位者",
+        "破绽猎手",
+        "机动策士",
+        "无迹行者"
+      ],
+      "finalQuest": "在移动战场中引导追击者误入三处空档，随后在限定时间内完成转火。",
+      "identity": "走位、诱敌、转火：穿过目标换位（无碰撞）、主动拉仇恨后闪避、在敌人攻击落空的破绽里追击，并把队友 AI 的火力切到新目标。始终可被看见、被选中；不引入潜入。",
+      "distinctFrom": "与战术：游击讯号只在短时内引导转火，且“牵制”目标交给游击手自己周旋；战术负责长期的 AI 指令与编队。与枪械反位火线：游击的破绽追击由任何敌人攻击落空触发，是近身被动加成。",
+      "nodes": [
+        {
+          "id": "skirmish_n01_switchback_strike",
+          "seriesId": "skirmish",
+          "stage": 1,
+          "stageName": "游击手",
+          "slot": 1,
+          "name": "换位突袭",
+          "nameEn": "Switchback Strike",
+          "summaryEn": "Dashes through the target to its far side and strikes back; no invulnerability.",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "reposition",
+          "tacticalRoleZh": "换位",
+          "energyCost": 12,
+          "cooldownSec": 5,
+          "target": "120 px 内的一名敌人",
+          "rangePx": 120,
+          "baseEffect": "快速穿过 120 px 内的目标到它的另一侧并反身打击，造成 90% 攻击力伤害；若打在目标背向的一侧，额外 +15%。穿越时没有碰撞，也不获得无敌，仍会被范围攻击命中。",
+          "scaling": [
+            {
+              "key": "damage",
+              "label": "伤害",
+              "unit": "% 攻击力",
+              "direction": "higher_is_better",
+              "values": [
+                90,
+                100,
+                110,
+                120,
+                130
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "伤害 100% 攻击力（+10）",
+            "3": "伤害 110% 攻击力（+10）",
+            "4": "伤害 120% 攻击力（+10）",
+            "5": "伤害 130% 攻击力（+10）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "目标正对其他队友起手，或本角色贴近场边被逼近",
+            "avoid": "目标正对本角色起手且已不到 0.2 秒（先闪避）"
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "skirmish_reposition_strike",
+          "runtimeCatalogNodeId": "skirmish_s1a",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "skirmish_n02_bait_step",
+          "seriesId": "skirmish",
+          "stage": 1,
+          "stageName": "游击手",
+          "slot": 2,
+          "name": "诱导步",
+          "nameEn": "Bait Step",
+          "summaryEn": "Draws nearby enemies onto the skirmisher for 4 s; each dodged attack slows the attacker.",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "bait",
+          "tacticalRoleZh": "诱敌",
+          "energyCost": 10,
+          "cooldownSec": 12,
+          "target": "自身（影响 240 px 内敌人）",
+          "rangePx": 240,
+          "baseEffect": "4 秒内提高自身仇恨，240 px 内的敌人优先选择本角色为目标；这期间每成功闪避一次攻击，攻击者移动速度降低 20%，持续 2 秒。本角色始终可被看见和选中。",
+          "scaling": [
+            {
+              "key": "slow",
+              "label": "减速",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                20,
+                23,
+                26,
+                29,
+                32
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "减速 23%（+3）",
+            "3": "减速 26%（+3）",
+            "4": "减速 29%（+3）",
+            "5": "减速 32%（+3）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "生命 < 40% 的队友被锁定，且本角色生命 ≥ 50%、能量 ≥ 22（足够再闪避一次）",
+            "avoid": "本角色生命 < 50%"
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "skirmish_bait_step",
+          "runtimeCatalogNodeId": "skirmish_s1b",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review",
+          "caps": [
+            {
+              "category": "enemyMoveSlow",
+              "rank5Value": 32,
+              "scalingKey": "slow"
+            }
+          ]
+        },
+        {
+          "id": "skirmish_n03_switch_signal",
+          "seriesId": "skirmish",
+          "stage": 2,
+          "stageName": "转位者",
+          "slot": 1,
+          "name": "转火讯号",
+          "nameEn": "Switch Signal",
+          "summaryEn": "Calls a fresh target for 6 s; allies who switch to it quickly get a stronger first hit.",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "target_switch",
+          "tacticalRoleZh": "转火",
+          "energyCost": 10,
+          "cooldownSec": 14,
+          "target": "一名敌人",
+          "rangePx": 480,
+          "baseEffect": "指定一名新目标 6 秒：未被直接操控的队友 AI 优先攻击它（玩家更高优先级的指令除外）；3 秒内把目标换成它的队友，第一次命中伤害 +12%。",
+          "scaling": [
+            {
+              "key": "firstHitBonus",
+              "label": "换火首击加成",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                12,
+                14,
+                16,
+                18,
+                20
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "换火首击加成 14%（+2）",
+            "3": "换火首击加成 16%（+2）",
+            "4": "换火首击加成 18%（+2）",
+            "5": "换火首击加成 20%（+2）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "当前集火目标生命 > 70% 而另一名敌人生命 < 35%，或敌方出现治疗／护盾单位",
+            "avoid": "只有 1 名敌人"
+          },
+          "scienceMvpUtility": {
+            "name": "开战标记",
+            "effect": "在科技文明圈场景中，对一组可见敌人选定优先目标后再接触，战斗开始时该敌人自动带 6 秒转火讯号。这是开战时可选的节奏优势：不隐藏队伍、不让敌人失去察觉，也不改变遭遇是否发生；没有游击职业照样可以正常开战。",
+            "mvpLocations": [
+              "扬克斯郊外",
+              "华盛顿特区 · 国会大厦遗址（科技勘察前哨）",
+              "芝加哥 · 卢普区"
+            ],
+            "gate": "optional-advantage-only",
+            "requiresCurrentSeries": true
+          },
+          "supersedesDraftNodeId": "skirmish_focus_mark",
+          "runtimeCatalogNodeId": "skirmish_s2a",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review",
+          "caps": [
+            {
+              "category": "allyNextHitBonus",
+              "rank5Value": 20,
+              "scalingKey": "firstHitBonus"
+            }
+          ]
+        },
+        {
+          "id": "skirmish_n04_momentum",
+          "seriesId": "skirmish",
+          "stage": 2,
+          "stageName": "转位者",
+          "slot": 2,
+          "name": "积势",
+          "nameEn": "Momentum",
+          "summaryEn": "Movement builds up to three stacks that the next skirmish skill spends for extra damage.",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "momentum",
+          "tacticalRoleZh": "积势",
+          "energyCost": null,
+          "cooldownSec": null,
+          "target": "自身",
+          "rangePx": null,
+          "baseEffect": "本角色每移动 120 px（含技能位移，不含被击退）获得 1 层势，最多 3 层；下一次游击技能每层伤害 +4%，并清空全部势。停止移动 4 秒后势清零。",
+          "scaling": [
+            {
+              "key": "bonusPerStack",
+              "label": "每层加成",
+              "unit": "% 伤害",
+              "direction": "higher_is_better",
+              "values": [
+                4,
+                5,
+                6,
+                7,
+                8
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "每层加成 5% 伤害（+1）",
+            "3": "每层加成 6% 伤害（+1）",
+            "4": "每层加成 7% 伤害（+1）",
+            "5": "每层加成 8% 伤害（+1）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "被动，满足条件时自动生效；玩家操控与 AI 控制时相同",
+            "avoid": "无"
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": null,
+          "runtimeCatalogNodeId": "skirmish_s2b",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review",
+          "passiveBounds": {
+            "trigger": "每移动 120 px",
+            "maxTriggersPerBattle": null,
+            "effectDurationSec": 4,
+            "internalCooldownSec": null,
+            "maxStacks": 3,
+            "consumedOnUse": true,
+            "nonCombat": false
+          }
+        },
+        {
+          "id": "skirmish_n05_opening_chase",
+          "seriesId": "skirmish",
+          "stage": 3,
+          "stageName": "破绽猎手",
+          "slot": 1,
+          "name": "破绽追击",
+          "nameEn": "Opening Chase",
+          "summaryEn": "Any enemy attack that whiffs leaves a 1.5 s opening the skirmisher hits harder.",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "opening_punish",
+          "tacticalRoleZh": "破绽惩罚",
+          "energyCost": null,
+          "cooldownSec": null,
+          "target": "露出破绽的敌人",
+          "rangePx": null,
+          "baseEffect": "任何敌人的攻击完全落空（被闪避或没有命中任何人）时，它露出 1.5 秒破绽：本角色对它的伤害 +20%。同一敌人每 4 秒最多露出一次破绽。",
+          "scaling": [
+            {
+              "key": "bonus",
+              "label": "破绽加成",
+              "unit": "% 伤害",
+              "direction": "higher_is_better",
+              "values": [
+                20,
+                24,
+                28,
+                32,
+                36
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "破绽加成 24% 伤害（+4）",
+            "3": "破绽加成 28% 伤害（+4）",
+            "4": "破绽加成 32% 伤害（+4）",
+            "5": "破绽加成 36% 伤害（+4）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "被动，满足条件时自动生效；玩家操控与 AI 控制时相同；AI 在破绽内优先攻击该敌人",
+            "avoid": "无"
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "skirmish_return_hit",
+          "runtimeCatalogNodeId": "skirmish_s3a",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review",
+          "passiveBounds": {
+            "trigger": "敌人攻击完全落空",
+            "maxTriggersPerBattle": null,
+            "effectDurationSec": 1.5,
+            "internalCooldownSec": 4,
+            "maxStacks": null,
+            "consumedOnUse": false,
+            "nonCombat": false
+          }
+        },
+        {
+          "id": "skirmish_n06_feint_return",
+          "seriesId": "skirmish",
+          "stage": 3,
+          "stageName": "破绽猎手",
+          "slot": 2,
+          "name": "折返双击",
+          "nameEn": "Feint Return",
+          "summaryEn": "Hit, fall back, and punish the target if it follows.",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "feint",
+          "tacticalRoleZh": "佯退反打",
+          "energyCost": 20,
+          "cooldownSec": 10,
+          "target": "一名敌人",
+          "rangePx": 100,
+          "baseEffect": "打击目标（70% 攻击力）后立即后撤 100 px；若目标在 1.5 秒内朝本角色移动至少 40 px，本角色自动折返打出第二击，造成 120% 攻击力伤害。目标没有追来则不打第二击。",
+          "scaling": [
+            {
+              "key": "secondHit",
+              "label": "第二击伤害",
+              "unit": "% 攻击力",
+              "direction": "higher_is_better",
+              "values": [
+                120,
+                132,
+                144,
+                156,
+                168
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "第二击伤害 132% 攻击力（+12）",
+            "3": "第二击伤害 144% 攻击力（+12）",
+            "4": "第二击伤害 156% 攻击力（+12）",
+            "5": "第二击伤害 168% 攻击力（+12）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "目标为近战型且当前正锁定本角色",
+            "avoid": "目标为远程型"
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "skirmish_feint_return",
+          "runtimeCatalogNodeId": "skirmish_s3b",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "skirmish_n07_split_signal",
+          "seriesId": "skirmish",
+          "stage": 4,
+          "stageName": "机动策士",
+          "slot": 1,
+          "name": "拆队讯号",
+          "nameEn": "Split Signal",
+          "summaryEn": "Keeps the enemy chasing the skirmisher busy while the rest of the party focuses another target.",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "split_focus",
+          "tacticalRoleZh": "拆分敌阵",
+          "energyCost": 22,
+          "cooldownSec": 24,
+          "target": "两名敌人",
+          "rangePx": 480,
+          "baseEffect": "把正在锁定本角色的敌人设为“牵制”，另选一名敌人设为“集火”，持续 10 秒：未被操控的队友 AI 不再攻击牵制目标（交给本角色周旋），并优先攻击集火目标；集火目标受到的伤害 +6%。本角色倒下或离开牵制目标 300 px 以上时讯号提前结束。",
+          "scaling": [
+            {
+              "key": "focusDamage",
+              "label": "集火目标受伤增加",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                6,
+                7.5,
+                9,
+                10.5,
+                12
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "集火目标受伤增加 7.5%（+1.5）",
+            "3": "集火目标受伤增加 9%（+1.5）",
+            "4": "集火目标受伤增加 10.5%（+1.5）",
+            "5": "集火目标受伤增加 12%（+1.5）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "至少 2 名敌人存活，本角色正被其中一名锁定且生命 ≥ 50%",
+            "avoid": "只有 1 名敌人"
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "skirmish_split_signal",
+          "runtimeCatalogNodeId": "skirmish_s4a",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review",
+          "caps": [
+            {
+              "category": "enemyDamageTaken",
+              "rank5Value": 12,
+              "scalingKey": "focusDamage"
+            }
+          ]
+        },
+        {
+          "id": "skirmish_n08_lure_circuit",
+          "seriesId": "skirmish",
+          "stage": 4,
+          "stageName": "机动策士",
+          "slot": 2,
+          "name": "引敌回旋",
+          "nameEn": "Lure Circuit",
+          "summaryEn": "Leads up to two chasers around the field; each dodge softens the chaser's defence.",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "multi_bait",
+          "tacticalRoleZh": "多敌牵引",
+          "energyCost": 26,
+          "cooldownSec": 30,
+          "target": "自身（影响 200 px 内最多 2 名敌人）",
+          "rangePx": 200,
+          "baseEffect": "6 秒内本角色移动速度 +15%，200 px 内最多 2 名敌人优先追击本角色；这期间本角色每闪避一次某敌人的攻击，该敌人防御降低 5%，持续 4 秒，最多叠加 3 次（15%）。",
+          "scaling": [
+            {
+              "key": "moveSpeed",
+              "label": "移动速度",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                15,
+                18,
+                21,
+                24,
+                27
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "移动速度 18%（+3）",
+            "3": "移动速度 21%（+3）",
+            "4": "移动速度 24%（+3）",
+            "5": "移动速度 27%（+3）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "至少 2 名敌人存活、有生命 < 50% 的队友被锁定，且本角色能量 ≥ 50",
+            "avoid": "本角色生命 < 50%"
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": null,
+          "runtimeCatalogNodeId": "skirmish_s4b",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review",
+          "caps": [
+            {
+              "category": "enemyDefenseDown",
+              "rank5Value": 15
+            }
+          ]
+        },
+        {
+          "id": "skirmish_n09_hundred_steps",
+          "seriesId": "skirmish",
+          "stage": 5,
+          "stageName": "无迹行者",
+          "slot": 1,
+          "name": "百步无迹",
+          "nameEn": "Hundred Steps",
+          "summaryEn": "Four rapid pass-through strikes in 2.4 s; still visible, targetable and hittable by area attacks.",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "burst",
+          "tacticalRoleZh": "爆发",
+          "energyCost": 44,
+          "cooldownSec": 48,
+          "target": "讯号目标或最近的敌人",
+          "rangePx": 480,
+          "baseEffect": "2.4 秒内连续 4 次高速换位，每次穿过并打击一名目标（优先集火或转火讯号目标，其次最近敌人），每击 70% 攻击力。动作期间仍可被看见、被选中，也会被范围攻击命中；“无迹”指动作不留破绽。",
+          "scaling": [
+            {
+              "key": "damagePerHit",
+              "label": "每击伤害",
+              "unit": "% 攻击力",
+              "direction": "higher_is_better",
+              "values": [
+                70,
+                77,
+                84,
+                91,
+                98
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "每击伤害 77% 攻击力（+7）",
+            "3": "每击伤害 84% 攻击力（+7）",
+            "4": "每击伤害 91% 攻击力（+7）",
+            "5": "每击伤害 98% 攻击力（+7）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": true
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "带讯号的敌人存活且本角色生命 ≥ 40%",
+            "avoid": "敌方正在释放范围攻击"
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "skirmish_many_steps",
+          "runtimeCatalogNodeId": "skirmish_s5a",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "skirmish_n10_ceaseless_flow",
+          "seriesId": "skirmish",
+          "stage": 5,
+          "stageName": "无迹行者",
+          "slot": 2,
+          "name": "流转不息",
+          "nameEn": "Ceaseless Flow",
+          "summaryEn": "Hitting a different enemy than last time trims skirmish cooldowns.",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "cooldown",
+          "tacticalRoleZh": "冷却循环",
+          "energyCost": null,
+          "cooldownSec": null,
+          "target": "自身",
+          "rangePx": null,
+          "baseEffect": "本角色命中与上一次命中不同的敌人时，游击技能的剩余冷却各缩短 0.5 秒。每 3 秒最多触发一次，每场最多 10 次。",
+          "scaling": [
+            {
+              "key": "cooldownCut",
+              "label": "冷却缩短",
+              "unit": " 秒",
+              "direction": "higher_is_better",
+              "values": [
+                0.5,
+                0.6,
+                0.7,
+                0.8,
+                0.9
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "冷却缩短 0.6 秒（+0.1）",
+            "3": "冷却缩短 0.7 秒（+0.1）",
+            "4": "冷却缩短 0.8 秒（+0.1）",
+            "5": "冷却缩短 0.9 秒（+0.1）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": true
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "被动，满足条件时自动生效；玩家操控与 AI 控制时相同",
+            "avoid": "无"
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": null,
+          "runtimeCatalogNodeId": "skirmish_s5b",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review",
+          "passiveBounds": {
+            "trigger": "命中与上次不同的敌人",
+            "maxTriggersPerBattle": 10,
+            "effectDurationSec": null,
+            "internalCooldownSec": 3,
+            "maxStacks": null,
+            "consumedOnUse": false,
+            "nonCombat": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "beast",
+      "aptitude": "应变",
+      "name": "驯兽",
+      "en": "Beast Bonding",
+      "role": "兽伴支援与协同指令",
+      "stages": [
+        "兽伴训导员",
+        "野性联络者",
+        "兽群协律者",
+        "群生守望者",
+        "万灵同路者"
+      ],
+      "finalQuest": "与两种能力不同的兽伴协作，解除野地险情并救出受困目标；可重复尝试。",
+      "identity": "兽伴是有生命的动物伙伴：以体力承受伤害，体力耗尽时退场休整而不是被摧毁；靠哨音与手势下指令，有 0.3 秒反应；第 3 阶起可同时带两名性情不同的兽伴。",
+      "distinctFrom": "与机偶（研学）：见 companionModel.contrastWithAutomata。与召唤（灵觉）：兽伴不是短时造物，整场战斗都在，退场后靠唤回或本能归队。",
+      "companionModel": {
+        "nature": "兽伴是驯兽者登记的有生命的动物伙伴。只有驯兽者当前职业为驯兽时才随其入场；不占五名上场角色的位置，不获得经验，没有碰撞体积，只按横向位置计算距离。",
+        "stamina": "体力上限为驯兽者生命上限的 50%（第二名兽伴见兽群协律）；受到的伤害扣体力，不扣驯兽者生命。",
+        "withdraw": "体力耗尽时退到场边休整，本场不再行动，直到被兽伴呼应唤回或归队本能触发；不会死亡或被摧毁。战斗结束后休息即恢复满体力。",
+        "notRepairable": "兽伴不能被工程或机偶技能维修、强化、回收或换取能量；可以被以“有生命的队友”为对象的治疗与净化技能影响（具体由医疗、圣源等系列决定）。机偶与工程装置也不能指定兽伴为目标。",
+        "cueResponse": "指令以哨音和手势发出，兽伴在 0.3 秒反应后行动；没有可切换的程序化工作方式，每条指令都是一次具体动作。驯兽者生命低于 30% 且兽伴没有正在执行的指令时，兽伴本能地回到驯兽者身边。",
+        "temperaments": "性情分迅追（更快、伤害较高、体力较低）与坚守（体力较高、更擅长守护）两类；由剧情中已结识的兽伴决定，本提案不指定具体物种。",
+        "wildCreatures": "驯兽不能强制驯服或控制野外生物与敌人；安抚只对受惊或受伤的非敌对动物有效，对巡逻自动机无效。",
+        "contrastWithAutomata": "机偶：机械单位，有耐久、可切换模式、可被维修与紧急回收返还能量、整齐执行指令。兽伴：活体，有体力与本场信任，退场休整、只能唤回或本能归队，指令有反应延迟，有护主本能，不能维修。两者视觉上也应区分（毛皮／羽毛与动作起伏 vs 金属外壳与机械关节），属美术待办，本提案不涉及美术。"
+      },
+      "nodes": [
+        {
+          "id": "beast_n01_companion_call",
+          "seriesId": "beast",
+          "stage": 1,
+          "stageName": "兽伴训导员",
+          "slot": 1,
+          "name": "兽伴呼应",
+          "nameEn": "Companion Call",
+          "summaryEn": "Sends the beast companion at the current target, or calls a resting companion back with some stamina.",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "companion_command",
+          "tacticalRoleZh": "兽伴指令",
+          "energyCost": 12,
+          "cooldownSec": 8,
+          "target": "本角色的当前目标／退场的兽伴",
+          "rangePx": 300,
+          "baseEffect": "兽伴在场时：它在 0.3 秒反应后扑向本角色的当前目标，造成 80% 本角色攻击力伤害。兽伴退场休整时：改为把它唤回身边，恢复 40% 体力（每场最多唤回 2 次）。",
+          "scaling": [
+            {
+              "key": "biteDamage",
+              "label": "扑击伤害",
+              "unit": "% 本角色攻击力",
+              "direction": "higher_is_better",
+              "values": [
+                80,
+                90,
+                100,
+                110,
+                120
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "扑击伤害 90% 本角色攻击力（+10）",
+            "3": "扑击伤害 100% 本角色攻击力（+10）",
+            "4": "扑击伤害 110% 本角色攻击力（+10）",
+            "5": "扑击伤害 120% 本角色攻击力（+10）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "兽伴退场且还能唤回时优先唤回；否则在目标 300 px 内、兽伴体力 ≥ 30% 时下令扑击",
+            "avoid": "兽伴正在执行守护"
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "beast_companion_call",
+          "runtimeCatalogNodeId": "beast_s1a",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "beast_n02_trust_bond",
+          "seriesId": "beast",
+          "stage": 1,
+          "stageName": "兽伴训导员",
+          "slot": 2,
+          "name": "信任纽带",
+          "nameEn": "Trust Bond",
+          "summaryEn": "Hitting the same target as the beast companion builds trust for the battle, toughening the companion.",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "bond",
+          "tacticalRoleZh": "信任积累",
+          "energyCost": null,
+          "cooldownSec": null,
+          "target": "兽伴",
+          "rangePx": null,
+          "baseEffect": "本角色与兽伴在 2 秒内先后命中同一目标时，获得 1 层信任（每场最多 5 层）：每层使兽伴受到的伤害降低 2%。信任只在本场战斗内有效。",
+          "scaling": [
+            {
+              "key": "perStack",
+              "label": "每层减伤（兽伴）",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                2,
+                2.5,
+                3,
+                3.5,
+                4
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "每层减伤（兽伴） 2.5%（+0.5）",
+            "3": "每层减伤（兽伴） 3%（+0.5）",
+            "4": "每层减伤（兽伴） 3.5%（+0.5）",
+            "5": "每层减伤（兽伴） 4%（+0.5）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "被动，满足条件时自动生效；玩家操控与 AI 控制时相同；AI 指挥兽伴时优先与本角色打同一目标",
+            "avoid": "无"
+          },
+          "scienceMvpUtility": {
+            "name": "动物照护",
+            "effect": "在扬克斯郊外与市政厅公园，可安抚并照料受惊或受伤的流浪动物、帮 NPC 找回走失的家养动物，获得可选对话、少量报酬与“共情”行为记录；兽伴还能嗅出附近可选的遗落补给。不能强制驯服或控制野外生物，对巡逻自动机无效；没有驯兽职业也能用其他方式完成这些委托。",
+            "mvpLocations": [
+              "扬克斯郊外",
+              "纽约 · 曼哈顿下城市政厅公园"
+            ],
+            "gate": "optional-advantage-only",
+            "requiresCurrentSeries": true
+          },
+          "supersedesDraftNodeId": null,
+          "runtimeCatalogNodeId": "beast_s1b",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review",
+          "passiveBounds": {
+            "trigger": "本角色与兽伴 2 秒内先后命中同一目标",
+            "maxTriggersPerBattle": 5,
+            "effectDurationSec": null,
+            "internalCooldownSec": null,
+            "maxStacks": 5,
+            "consumedOnUse": false,
+            "nonCombat": false
+          }
+        },
+        {
+          "id": "beast_n03_guard_whistle",
+          "seriesId": "beast",
+          "stage": 2,
+          "stageName": "野性联络者",
+          "slot": 1,
+          "name": "护伴哨",
+          "nameEn": "Guard Whistle",
+          "summaryEn": "The beast companion stands by the most hurt ally and takes part of each hit on its own stamina.",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "protection",
+          "tacticalRoleZh": "单体防护",
+          "energyCost": 14,
+          "cooldownSec": 14,
+          "target": "300 px 内生命比例最低的队友",
+          "rangePx": 300,
+          "baseEffect": "兽伴跑到 300 px 内生命比例最低的队友身旁守护 5 秒，替其承受 20% 的伤害（扣兽伴体力）。兽伴体力不足时守护提前结束。",
+          "scaling": [
+            {
+              "key": "redirect",
+              "label": "代为承受",
+              "unit": "% 伤害",
+              "direction": "higher_is_better",
+              "values": [
+                20,
+                23,
+                26,
+                29,
+                32
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "代为承受 23% 伤害（+3）",
+            "3": "代为承受 26% 伤害（+3）",
+            "4": "代为承受 29% 伤害（+3）",
+            "5": "代为承受 32% 伤害（+3）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "有生命 < 45% 的队友正被锁定，且兽伴体力 ≥ 40%",
+            "avoid": "目标队友已倒下（本技能不能复活）"
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "beast_protect_signal",
+          "runtimeCatalogNodeId": "beast_s2a",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review",
+          "caps": [
+            {
+              "category": "allyDamageRedirect",
+              "rank5Value": 32,
+              "scalingKey": "redirect"
+            }
+          ]
+        },
+        {
+          "id": "beast_n04_pursuit_whistle",
+          "seriesId": "beast",
+          "stage": 2,
+          "stageName": "野性联络者",
+          "slot": 2,
+          "name": "追迹哨",
+          "nameEn": "Pursuit Whistle",
+          "summaryEn": "The beast companion dogs a target for 6 s, biting and slowing it.",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "slow",
+          "tacticalRoleZh": "减速追缠",
+          "energyCost": 14,
+          "cooldownSec": 12,
+          "target": "一名敌人",
+          "rangePx": 400,
+          "baseEffect": "兽伴紧随目标缠斗 6 秒，每 1.5 秒撕咬一次（每次 25% 本角色攻击力），并使目标移动速度降低 15%。目标移动时兽伴自动跟随；兽伴没有碰撞，不阻挡任何单位。",
+          "scaling": [
+            {
+              "key": "slow",
+              "label": "减速",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                15,
+                18,
+                21,
+                24,
+                27
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "减速 18%（+3）",
+            "3": "减速 21%（+3）",
+            "4": "减速 24%（+3）",
+            "5": "减速 27%（+3）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "目标正追击生命 < 50% 的队友，或正向后排移动",
+            "avoid": "兽伴体力 < 30%"
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "beast_pursuit_signal",
+          "runtimeCatalogNodeId": "beast_s2b",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review",
+          "caps": [
+            {
+              "category": "enemyMoveSlow",
+              "rank5Value": 27,
+              "scalingKey": "slow"
+            }
+          ]
+        },
+        {
+          "id": "beast_n05_pack_harmony",
+          "seriesId": "beast",
+          "stage": 3,
+          "stageName": "兽群协律者",
+          "slot": 1,
+          "name": "兽群协律",
+          "nameEn": "Pack Harmony",
+          "summaryEn": "Brings a second beast companion of the other temperament into each battle.",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "capacity",
+          "tacticalRoleZh": "容量扩展",
+          "energyCost": null,
+          "cooldownSec": null,
+          "target": "第二名兽伴",
+          "rangePx": null,
+          "baseEffect": "可同时带领第二名兽伴，其性情与第一名不同（迅追或坚守，取决于已结识的兽伴），体力为本角色生命上限的 30%。兽伴指令默认交给离目标最近的兽伴，暂停菜单中可指定。第二名兽伴每场只在开战时入场一次，退场后同样需要唤回。",
+          "scaling": [
+            {
+              "key": "secondStamina",
+              "label": "第二名兽伴体力",
+              "unit": "% 本角色生命上限",
+              "direction": "higher_is_better",
+              "values": [
+                30,
+                35,
+                40,
+                45,
+                50
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "第二名兽伴体力 35% 本角色生命上限（+5）",
+            "3": "第二名兽伴体力 40% 本角色生命上限（+5）",
+            "4": "第二名兽伴体力 45% 本角色生命上限（+5）",
+            "5": "第二名兽伴体力 50% 本角色生命上限（+5）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "被动，满足条件时自动生效；玩家操控与 AI 控制时相同；AI 按“离目标最近”分配兽伴指令",
+            "avoid": "无"
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": null,
+          "runtimeCatalogNodeId": "beast_s3a",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review",
+          "passiveBounds": {
+            "trigger": "开战时入场",
+            "maxTriggersPerBattle": 1,
+            "effectDurationSec": null,
+            "internalCooldownSec": null,
+            "maxStacks": null,
+            "consumedOnUse": false,
+            "nonCombat": false
+          }
+        },
+        {
+          "id": "beast_n06_two_voice_hunt",
+          "seriesId": "beast",
+          "stage": 3,
+          "stageName": "兽群协律者",
+          "slot": 2,
+          "name": "双声协猎",
+          "nameEn": "Two-voice Hunt",
+          "summaryEn": "Two whistle calls: one beast companion pins, the other strikes.",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "combo_strike",
+          "tacticalRoleZh": "协同连击",
+          "energyCost": 22,
+          "cooldownSec": 18,
+          "target": "一名敌人",
+          "rangePx": 360,
+          "baseEffect": "连续吹出两段节奏不同的哨音：第一名兽伴先缠住目标 1 秒（这段时间目标的起手延长 0.2 秒），第二名兽伴随即扑击，造成 140% 本角色攻击力伤害。只有一名兽伴在场时，由它先后完成两段，第二段伤害按一半计算。",
+          "scaling": [
+            {
+              "key": "strike",
+              "label": "扑击伤害",
+              "unit": "% 本角色攻击力",
+              "direction": "higher_is_better",
+              "values": [
+                140,
+                152,
+                164,
+                176,
+                188
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "扑击伤害 152% 本角色攻击力（+12）",
+            "3": "扑击伤害 164% 本角色攻击力（+12）",
+            "4": "扑击伤害 176% 本角色攻击力（+12）",
+            "5": "扑击伤害 188% 本角色攻击力（+12）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "两名兽伴都在场且目标不在闪避",
+            "avoid": "只有一名兽伴且其体力 < 40%"
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "beast_two_voice_call",
+          "runtimeCatalogNodeId": "beast_s3b",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "beast_n07_shelter_circle",
+          "seriesId": "beast",
+          "stage": 4,
+          "stageName": "群生守望者",
+          "slot": 1,
+          "name": "群生护圈",
+          "nameEn": "Shelter Circle",
+          "summaryEn": "Beast companions circle a hurt ally, reducing damage to nearby allies and breaking up to two wind-ups.",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "group_protection",
+          "tacticalRoleZh": "群体防护",
+          "energyCost": 26,
+          "cooldownSec": 28,
+          "target": "生命比例最低的队友及其 180 px 内队友",
+          "rangePx": 180,
+          "baseEffect": "兽伴绕生命比例最低的队友巡护 6 秒：该队友及其 180 px 内的队友受到的伤害降低 10%；在其 80 px 内起手的敌人会被兽伴咬断一次起手（每次护圈最多 2 次）。兽伴没有碰撞，不阻挡移动。",
+          "scaling": [
+            {
+              "key": "damageReduction",
+              "label": "减伤",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                10,
+                12,
+                14,
+                16,
+                18
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "减伤 12%（+2）",
+            "3": "减伤 14%（+2）",
+            "4": "减伤 16%（+2）",
+            "5": "减伤 18%（+2）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "至少 2 名队友位于 180 px 内，且其中一人生命 < 50%",
+            "avoid": "队友彼此相距较远"
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "beast_shelter_circle",
+          "runtimeCatalogNodeId": "beast_s4a",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review",
+          "caps": [
+            {
+              "category": "allyDamageReduction",
+              "rank5Value": 18,
+              "scalingKey": "damageReduction"
+            }
+          ]
+        },
+        {
+          "id": "beast_n08_trust_rhythm",
+          "seriesId": "beast",
+          "stage": 4,
+          "stageName": "群生守望者",
+          "slot": 2,
+          "name": "信任节奏",
+          "nameEn": "Trust Rhythm",
+          "summaryEn": "Varied, well-timed actions with the beast companion shorten the next command's cooldown.",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "cooldown",
+          "tacticalRoleZh": "冷却循环",
+          "energyCost": null,
+          "cooldownSec": null,
+          "target": "兽伴指令",
+          "rangePx": null,
+          "baseEffect": "本角色与兽伴在 1.5 秒内完成不同类型的动作（例如本角色防御、兽伴扑击）时，下一条兽伴指令的冷却缩短 1 秒。每 4 秒最多触发一次，每场最多 8 次。",
+          "scaling": [
+            {
+              "key": "cooldownCut",
+              "label": "指令冷却缩短",
+              "unit": " 秒",
+              "direction": "higher_is_better",
+              "values": [
+                1,
+                1.25,
+                1.5,
+                1.75,
+                2
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "指令冷却缩短 1.25 秒（+0.25）",
+            "3": "指令冷却缩短 1.5 秒（+0.25）",
+            "4": "指令冷却缩短 1.75 秒（+0.25）",
+            "5": "指令冷却缩短 2 秒（+0.25）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "被动，满足条件时自动生效；玩家操控与 AI 控制时相同",
+            "avoid": "无"
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "beast_trust_rhythm",
+          "runtimeCatalogNodeId": "beast_s4b",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review",
+          "passiveBounds": {
+            "trigger": "本角色与兽伴 1.5 秒内完成不同类型动作",
+            "maxTriggersPerBattle": 8,
+            "effectDurationSec": null,
+            "internalCooldownSec": 4,
+            "maxStacks": null,
+            "consumedOnUse": false,
+            "nonCombat": false
+          }
+        },
+        {
+          "id": "beast_n09_all_life_path",
+          "seriesId": "beast",
+          "stage": 5,
+          "stageName": "万灵同路者",
+          "slot": 1,
+          "name": "万灵同路",
+          "nameEn": "All Life Path",
+          "summaryEn": "A party-wide small heal and cleanse, then all beast companions guard and harry at once for 12 s. Does not revive.",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "group_sustain",
+          "tacticalRoleZh": "群体续航",
+          "energyCost": 46,
+          "cooldownSec": 60,
+          "target": "全队与全部兽伴",
+          "rangePx": null,
+          "baseEffect": "发动时全队存活成员恢复生命上限 8% 的 HP 并解除一种常见异常；之后 12 秒内所有兽伴同时保持守护与追缠两种反应：各自替最近的队友承受 8% 伤害，并缠住各自的目标（移动速度 −10%）。不复活倒下的队友，也不复制任何角色的个人技能。",
+          "scaling": [
+            {
+              "key": "heal",
+              "label": "恢复",
+              "unit": "% 生命上限",
+              "direction": "higher_is_better",
+              "values": [
+                8,
+                9.5,
+                11,
+                12.5,
+                14
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "恢复 9.5% 生命上限（+1.5）",
+            "3": "恢复 11% 生命上限（+1.5）",
+            "4": "恢复 12.5% 生命上限（+1.5）",
+            "5": "恢复 14% 生命上限（+1.5）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": true
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "至少 2 名存活队友生命 < 60%，或有兽伴退场",
+            "avoid": "有队友倒下时不把它当复活手段，先等可复活的技能处理倒下的队友"
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "beast_all_life_path",
+          "runtimeCatalogNodeId": "beast_s5a",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review",
+          "caps": [
+            {
+              "category": "allyDamageRedirect",
+              "rank5Value": 8
+            },
+            {
+              "category": "enemyMoveSlow",
+              "rank5Value": 10
+            }
+          ]
+        },
+        {
+          "id": "beast_n10_homing_instinct",
+          "seriesId": "beast",
+          "stage": 5,
+          "stageName": "万灵同路者",
+          "slot": 2,
+          "name": "归队本能",
+          "nameEn": "Homing Instinct",
+          "summaryEn": "A resting beast companion returns on its own once per battle.",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "resilience",
+          "tacticalRoleZh": "韧性回归",
+          "energyCost": null,
+          "cooldownSec": null,
+          "target": "退场的兽伴",
+          "rangePx": null,
+          "baseEffect": "退场休整的兽伴在 15 秒后自行回到本角色身边，恢复 30% 体力。每名兽伴每场最多一次，与兽伴呼应的唤回次数分开计算。",
+          "scaling": [
+            {
+              "key": "returnStamina",
+              "label": "归队体力",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                30,
+                35,
+                40,
+                45,
+                50
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "归队体力 35%（+5）",
+            "3": "归队体力 40%（+5）",
+            "4": "归队体力 45%（+5）",
+            "5": "归队体力 50%（+5）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": true
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "被动，满足条件时自动生效；玩家操控与 AI 控制时相同",
+            "avoid": "无"
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": null,
+          "runtimeCatalogNodeId": "beast_s5b",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review",
+          "passiveBounds": {
+            "trigger": "兽伴退场满 15 秒",
+            "maxTriggersPerBattle": 2,
+            "effectDurationSec": null,
+            "internalCooldownSec": null,
+            "maxStacks": null,
+            "consumedOnUse": false,
+            "nonCombat": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "merchant",
+      "aptitude": "应变",
+      "name": "行商",
+      "en": "Commerce",
+      "role": "战斗资源调配与商会经营",
+      "stages": [
+        "行商",
+        "契约经理",
+        "跨城经纪",
+        "供应总管",
+        "万路协调者"
+      ],
+      "finalQuest": "促成三座城市之间的公平供给协议，并让受托商会稳定完成一次周结算。",
+      "identity": "战斗中调配队伍内部的资源——能量、冷却、承受的伤害——而不花任何物品；经营上提高商会周结算、交易议价与价格情报。主角只谈协议，物流由专人负责，任何节点都不需要队伍随身运货。",
+      "distinctFrom": "与伙伴个人技能：周赫（风险准备金积累）、安索（物流中断损失）、韩泽（两地互补协议）、雀枝（光暗源材料波动）、零饼（普通委托效率）的个人经营效果不被任何行商节点重复；草案的“风险准备金”因与周赫重叠而舍弃。",
+      "commerceModel": {
+        "contexts": "stationed：本角色以行商身份驻守一处商会时生效（不在上场队伍中）。activeParty：本角色以行商身份在上场队伍中时，对主角的交易生效。stationedOrActiveParty：二者皆可。recall：从商会召回时留下效果。",
+        "noGoods": "主角通过协议促成交易，实际物流由专人处理，不随身运输货物（Game Bible 第 6 章）。行商节点不读取、不消耗、不生成背包中的任何物品，也不需要上场队伍运货。",
+        "ledger": "运行时周结算是暂定的独立账目（基础 100，NPC 80%，伙伴 100% + 公平报价）；利润与价格公式仍待创作者决定，以下经营数值都是占位。",
+        "frozenWhileStationed": "运行时规则：驻守期间公平报价不能升级（召回后才能升级）。本提案对所有驻守生效的节点沿用同一规则。"
+      },
+      "nodes": [
+        {
+          "id": "merchant_n01_supply_pact",
+          "seriesId": "merchant",
+          "stage": 1,
+          "stageName": "行商",
+          "slot": 1,
+          "name": "补给协议",
+          "nameEn": "Supply Pact",
+          "summaryEn": "Spends the merchant's spare energy to make one ally's next skill cheaper, always at a small net loss.",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "energy_routing",
+          "tacticalRoleZh": "能量调配",
+          "energyCost": 10,
+          "cooldownSec": 10,
+          "target": "一名队友（不含自身）",
+          "rangePx": 300,
+          "baseEffect": "与一名队友签下 10 秒补给协议：该队友下一次主动技能少消耗 4 点能量（不低于 1）。协议节省的能量总少于本技能的消耗，作用是把行商的富余能量调给更需要的人。",
+          "scaling": [
+            {
+              "key": "saving",
+              "label": "节省能量",
+              "unit": " 点",
+              "direction": "higher_is_better",
+              "values": [
+                4,
+                5,
+                6,
+                7,
+                8
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "节省能量 5 点（+1）",
+            "3": "节省能量 6 点（+1）",
+            "4": "节省能量 7 点（+1）",
+            "5": "节省能量 8 点（+1）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "队友能量 < 30% 且有就绪的主动技能，本角色能量 ≥ 40%",
+            "avoid": "不对自身使用"
+          },
+          "scienceMvpUtility": {
+            "name": "供需报价",
+            "effect": "在城市商会面板中显示该城当前主要货类的供需差额与短期趋势，帮助决定在哪里开商会、派谁驻守。只读信息，不改变价格；没有行商职业也能开商会、看结算，这是可选的辅助信息。",
+            "mvpLocations": [
+              "纽约 · 曼哈顿下城市政厅公园",
+              "芝加哥 · 卢普区"
+            ],
+            "gate": "optional-advantage-only",
+            "requiresCurrentSeries": true
+          },
+          "supersedesDraftNodeId": "merchant_supply_pact",
+          "runtimeCatalogNodeId": "merchant_supply_pact",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review",
+          "energyTransfer": {
+            "kind": "discount",
+            "casterCost": 10,
+            "maxAllyGainPerCast": 8
+          },
+          "runtimeNote": "运行时现行版本（merchant_supply_pact）：无效果占位节点，不消耗 JP，战斗中不出现。"
+        },
+        {
+          "id": "merchant_n02_fair_bargain",
+          "seriesId": "merchant",
+          "stage": 1,
+          "stageName": "行商",
+          "slot": 2,
+          "name": "公道议价",
+          "nameEn": "Fair Bargain",
+          "summaryEn": "While in the active party, slightly better buy and sell prices for the protagonist's deals; market baselines unchanged.",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "trade_price",
+          "tacticalRoleZh": "交易议价",
+          "energyCost": null,
+          "cooldownSec": null,
+          "target": "主角的买卖成交价",
+          "rangePx": null,
+          "baseEffect": "本角色以行商身份在上场队伍中时，主角在商店与交易点的买入价降低 2%、卖出价提高 2%。只改变本次成交价，不改变市场供需基准，也不触发或放大价格变化。",
+          "scaling": [
+            {
+              "key": "priceEdge",
+              "label": "买卖价改善",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                2,
+                2.5,
+                3,
+                3.5,
+                4
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "买卖价改善 2.5%（+0.5）",
+            "3": "买卖价改善 3%（+0.5）",
+            "4": "买卖价改善 3.5%（+0.5）",
+            "5": "买卖价改善 4%（+0.5）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "被动，满足条件时自动生效；玩家操控与 AI 控制时相同；非战斗效果",
+            "avoid": "无"
+          },
+          "scienceMvpUtility": {
+            "name": "城市议价",
+            "effect": "在市政厅公园与卢普区的商店、交易点生效。只是可选的价格优势：所有商品不靠议价也能买到，没有行商职业也不会卡住任何购买或任务。",
+            "mvpLocations": [
+              "纽约 · 曼哈顿下城市政厅公园",
+              "芝加哥 · 卢普区"
+            ],
+            "gate": "optional-advantage-only",
+            "requiresCurrentSeries": true
+          },
+          "supersedesDraftNodeId": null,
+          "runtimeCatalogNodeId": "merchant_s1b",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review",
+          "passiveBounds": {
+            "trigger": "在上场队伍中且当前职业为行商",
+            "maxTriggersPerBattle": null,
+            "effectDurationSec": null,
+            "internalCooldownSec": null,
+            "maxStacks": null,
+            "consumedOnUse": false,
+            "nonCombat": true
+          },
+          "commerceContext": "activeParty"
+        },
+        {
+          "id": "merchant_n03_fair_quote",
+          "seriesId": "merchant",
+          "stage": 2,
+          "stageName": "契约经理",
+          "slot": 1,
+          "name": "公平报价",
+          "nameEn": "Fair Quote",
+          "summaryEn": "A fully stationed week pays a small bonus on the base weekly income.",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "company_income",
+          "tacticalRoleZh": "商会收益",
+          "energyCost": null,
+          "cooldownSec": null,
+          "target": "驻守的商会",
+          "rangePx": null,
+          "baseEffect": "本角色以契约经理及以上阶级驻守商会满一整周时，该周按伙伴费率结算，并额外增加基础周收益的 8%。召回后的 NPC 接管周、派驻后不满一周与开业周都不生效。",
+          "scaling": [
+            {
+              "key": "bonus",
+              "label": "周收益加成",
+              "unit": "% 基础收益",
+              "direction": "higher_is_better",
+              "values": [
+                8,
+                10,
+                12,
+                14,
+                16
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "周收益加成 10% 基础收益（+2）",
+            "3": "周收益加成 12% 基础收益（+2）",
+            "4": "周收益加成 14% 基础收益（+2）",
+            "5": "周收益加成 16% 基础收益（+2）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "被动，满足条件时自动生效；玩家操控与 AI 控制时相同；非战斗效果；驻守期间不能升级（沿用运行时规则）",
+            "avoid": "无"
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "merchant_fair_quote",
+          "runtimeCatalogNodeId": "merchant_fair_quote",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review",
+          "passiveBounds": {
+            "trigger": "驻守满一整周",
+            "maxTriggersPerBattle": null,
+            "effectDurationSec": null,
+            "internalCooldownSec": null,
+            "maxStacks": null,
+            "consumedOnUse": false,
+            "nonCombat": true
+          },
+          "runtimeNote": "运行时现行版本（merchant_fair_quote）：每级 +5%（第 1–5 级合计 105–125%），只作用于伙伴费率周，驻守期间不能升级。本提案把加成改为 8/10/12/14/16%（第 5 级为第 1 级的 2 倍），降低第 5 级的常驻收益；是否采用待创作者决定，本次未改运行时。",
+          "commerceContext": "stationed"
+        },
+        {
+          "id": "merchant_n04_reschedule",
+          "seriesId": "merchant",
+          "stage": 2,
+          "stageName": "契约经理",
+          "slot": 2,
+          "name": "调期协议",
+          "nameEn": "Reschedule",
+          "summaryEn": "Trades the merchant's own tempo for an ally's: shortens the ally's cooldowns, locks the merchant's skills briefly.",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "cooldown_routing",
+          "tacticalRoleZh": "冷却调配",
+          "energyCost": 14,
+          "cooldownSec": 16,
+          "target": "一名队友（不含自身）",
+          "rangePx": 300,
+          "baseEffect": "把一名队友所有职业与个人技能的剩余冷却缩短 2 秒；作为代价，本角色的行商技能进入 4 秒公共冷却。不能对自身使用。",
+          "scaling": [
+            {
+              "key": "cooldownCut",
+              "label": "冷却缩短",
+              "unit": " 秒",
+              "direction": "higher_is_better",
+              "values": [
+                2,
+                2.5,
+                3,
+                3.5,
+                4
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "冷却缩短 2.5 秒（+0.5）",
+            "3": "冷却缩短 3 秒（+0.5）",
+            "4": "冷却缩短 3.5 秒（+0.5）",
+            "5": "冷却缩短 4 秒（+0.5）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "某名队友的高消耗技能剩余冷却 ≥ 4 秒，且其目标在射程内",
+            "avoid": "本角色的补给协议或风险共担即将需要使用"
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": null,
+          "runtimeCatalogNodeId": "merchant_s2b",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "merchant_n05_market_read",
+          "seriesId": "merchant",
+          "stage": 3,
+          "stageName": "跨城经纪",
+          "slot": 1,
+          "name": "需求洞察",
+          "nameEn": "Market Read",
+          "summaryEn": "Earlier notice of long-term price shifts and the trade routes they will travel along. Information only.",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "market_intel",
+          "tacticalRoleZh": "市场情报",
+          "energyCost": null,
+          "cooldownSec": null,
+          "target": "世界地图与商会面板",
+          "rangePx": null,
+          "baseEffect": "本角色为当前行商（在上场队伍中或驻守商会）时，考古发现或剧情事件引起的长期价格变化会提前 24 小时（游戏内时间）在世界地图与商会面板提示，并标出它先在当地出现、再沿已建立贸易路线传播的路径。只提示，不消除也不改变价格变化。",
+          "scaling": [
+            {
+              "key": "leadHours",
+              "label": "提前提示",
+              "unit": " 小时",
+              "direction": "higher_is_better",
+              "values": [
+                24,
+                30,
+                36,
+                42,
+                48
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "提前提示 30 小时（+6）",
+            "3": "提前提示 36 小时（+6）",
+            "4": "提前提示 42 小时（+6）",
+            "5": "提前提示 48 小时（+6）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "被动，满足条件时自动生效；玩家操控与 AI 控制时相同；非战斗效果",
+            "avoid": "无"
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "merchant_market_read",
+          "runtimeCatalogNodeId": "merchant_s3a",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review",
+          "passiveBounds": {
+            "trigger": "出现长期价格变化",
+            "maxTriggersPerBattle": null,
+            "effectDurationSec": null,
+            "internalCooldownSec": null,
+            "maxStacks": null,
+            "consumedOnUse": false,
+            "nonCombat": true
+          },
+          "commerceContext": "stationedOrActiveParty"
+        },
+        {
+          "id": "merchant_n06_risk_pooling",
+          "seriesId": "merchant",
+          "stage": 3,
+          "stageName": "跨城经纪",
+          "slot": 2,
+          "name": "风险共担",
+          "nameEn": "Risk Pooling",
+          "summaryEn": "Links two allies for 8 s so they split incoming damage evenly, slightly reduced.",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "damage_pooling",
+          "tacticalRoleZh": "伤害分摊",
+          "energyCost": 22,
+          "cooldownSec": 26,
+          "target": "两名队友",
+          "rangePx": 300,
+          "baseEffect": "为两名队友签订 8 秒共担协议：任一人受到的伤害由两人平分，平分后再降低 6%。任一人倒下或两人相距超过 300 px 时协议结束；伤害不会转给已倒下的队友。",
+          "scaling": [
+            {
+              "key": "pooledReduction",
+              "label": "平分后减伤",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                6,
+                7.5,
+                9,
+                10.5,
+                12
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "平分后减伤 7.5%（+1.5）",
+            "3": "平分后减伤 9%（+1.5）",
+            "4": "平分后减伤 10.5%（+1.5）",
+            "5": "平分后减伤 12%（+1.5）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "两名存活队友生命比例相差 ≥ 40 个百分点，且较低者正被锁定：把他与生命比例最高的队友连接",
+            "avoid": "两人相距 > 300 px"
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": null,
+          "runtimeCatalogNodeId": "merchant_s3b",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review",
+          "caps": [
+            {
+              "category": "allyDamageReduction",
+              "rank5Value": 12,
+              "scalingKey": "pooledReduction"
+            }
+          ]
+        },
+        {
+          "id": "merchant_n07_emergency_allocation",
+          "seriesId": "merchant",
+          "stage": 4,
+          "stageName": "供应总管",
+          "slot": 1,
+          "name": "应急调拨",
+          "nameEn": "Emergency Allocation",
+          "summaryEn": "Each ally's next skill in 8 s is cheaper; the total saved never exceeds what the merchant paid.",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "group_discount",
+          "tacticalRoleZh": "群体减耗",
+          "energyCost": 32,
+          "cooldownSec": 40,
+          "target": "全队（不含自身）",
+          "rangePx": null,
+          "baseEffect": "8 秒内每名存活队友（不含自身）的下一次主动技能少消耗 15% 能量，每人最多 6 点；每名队友只生效一次。全队合计最多节省 24 点，始终少于本技能的消耗。",
+          "scaling": [
+            {
+              "key": "saving",
+              "label": "节省比例",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                15,
+                18,
+                21,
+                24,
+                27
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "节省比例 18%（+3）",
+            "3": "节省比例 21%（+3）",
+            "4": "节省比例 24%（+3）",
+            "5": "节省比例 27%（+3）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "至少 3 名存活队友能量 < 50%",
+            "avoid": "本角色能量 < 50"
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "merchant_emergency_supply",
+          "runtimeCatalogNodeId": "merchant_s4a",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review",
+          "energyTransfer": {
+            "kind": "discount",
+            "casterCost": 32,
+            "maxAllyGainPerCast": 24
+          }
+        },
+        {
+          "id": "merchant_n08_handover_charter",
+          "seriesId": "merchant",
+          "stage": 4,
+          "stageName": "供应总管",
+          "slot": 2,
+          "name": "交接章程",
+          "nameEn": "Handover Charter",
+          "summaryEn": "After the merchant is recalled, the NPC stand-in runs the company a little better for two weeks.",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "handover",
+          "tacticalRoleZh": "交接续营",
+          "energyCost": null,
+          "cooldownSec": null,
+          "target": "被召回者原驻守的商会",
+          "rangePx": null,
+          "baseEffect": "本角色以供应总管及以上阶级从商会召回时留下交接章程：此后 2 周由 NPC 接管时，周结算效率从 80% 提高 3 个百分点。再派任何行商伙伴驻守该商会后章程失效。",
+          "scaling": [
+            {
+              "key": "npcBonus",
+              "label": "NPC 效率提高",
+              "unit": " 个百分点",
+              "direction": "higher_is_better",
+              "values": [
+                3,
+                3.5,
+                4,
+                4.5,
+                5
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "NPC 效率提高 3.5 个百分点（+0.5）",
+            "3": "NPC 效率提高 4 个百分点（+0.5）",
+            "4": "NPC 效率提高 4.5 个百分点（+0.5）",
+            "5": "NPC 效率提高 5 个百分点（+0.5）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "被动，满足条件时自动生效；玩家操控与 AI 控制时相同；非战斗效果",
+            "avoid": "无"
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": null,
+          "runtimeCatalogNodeId": "merchant_s4b",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review",
+          "passiveBounds": {
+            "trigger": "从商会召回",
+            "maxTriggersPerBattle": null,
+            "effectDurationSec": null,
+            "internalCooldownSec": null,
+            "maxStacks": null,
+            "consumedOnUse": false,
+            "nonCombat": true
+          },
+          "commerceContext": "recall"
+        },
+        {
+          "id": "merchant_n09_roads_accord",
+          "seriesId": "merchant",
+          "stage": 5,
+          "stageName": "万路协调者",
+          "slot": 1,
+          "name": "万路协约",
+          "nameEn": "Roads Accord",
+          "summaryEn": "A 10 s party-wide energy discount that also applies to combos; never bypasses combo conditions.",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "combo_support",
+          "tacticalRoleZh": "组合技支援",
+          "energyCost": 46,
+          "cooldownSec": 60,
+          "target": "全队",
+          "rangePx": null,
+          "baseEffect": "10 秒内全队存活成员的主动技能少消耗 8% 能量，每人在协约期间合计最多节省 6 点；协约期间发动的组合技，每位参与者的能量消耗同样降低 8%（计入同一上限），但不绕过关系与当前技能条件。",
+          "scaling": [
+            {
+              "key": "saving",
+              "label": "节省比例",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                8,
+                10,
+                12,
+                14,
+                16
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "节省比例 10%（+2）",
+            "3": "节省比例 12%（+2）",
+            "4": "节省比例 14%（+2）",
+            "5": "节省比例 16%（+2）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": true
+          },
+          "aiBehavior": {
+            "defaultEnabled": false,
+            "condition": "默认关闭（与组合技 AI 一样）；开启后：组合技 AI 开启且有组合技条件满足，或至少 3 名队友能量 < 50% 时使用",
+            "avoid": "本角色能量 < 60"
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "merchant_roads_accord",
+          "runtimeCatalogNodeId": "merchant_s5a",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review",
+          "energyTransfer": {
+            "kind": "discount",
+            "casterCost": 46,
+            "maxAllyGainPerCast": 30
+          }
+        },
+        {
+          "id": "merchant_n10_shortfall_guarantee",
+          "seriesId": "merchant",
+          "stage": 5,
+          "stageName": "万路协调者",
+          "slot": 2,
+          "name": "万路兜底",
+          "nameEn": "Shortfall Guarantee",
+          "summaryEn": "Pays an ally's small energy shortfall at a 1.5× premium so the skill still fires; four times per battle.",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "shortfall_cover",
+          "tacticalRoleZh": "缺额兜底",
+          "energyCost": null,
+          "cooldownSec": null,
+          "target": "能量差一点的队友",
+          "rangePx": null,
+          "baseEffect": "队友因能量缺少不超过 6 点而无法发动主动技能时，本角色自动按缺额的 1.5 倍（向上取整）代付，让技能照常发动；本角色能量不够代付时不触发。每 8 秒最多一次，每场最多 4 次。",
+          "scaling": [
+            {
+              "key": "maxShortfall",
+              "label": "可代付缺额",
+              "unit": " 点",
+              "direction": "higher_is_better",
+              "values": [
+                6,
+                7,
+                8,
+                9,
+                10
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "可代付缺额 7 点（+1）",
+            "3": "可代付缺额 8 点（+1）",
+            "4": "可代付缺额 9 点（+1）",
+            "5": "可代付缺额 10 点（+1）"
+          },
+          "maxRank": 5,
+          "unlock": {
+            "onStageEntry": true,
+            "jpCost": 0,
+            "requiresFinalQuest": true
+          },
+          "aiBehavior": {
+            "defaultEnabled": true,
+            "condition": "被动，满足条件时自动生效；玩家操控与 AI 控制时相同；可在每人策略中关闭",
+            "avoid": "无"
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": null,
+          "runtimeCatalogNodeId": "merchant_s5b",
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review",
+          "passiveBounds": {
+            "trigger": "队友能量缺少 ≤ 上限而技能发动失败",
+            "maxTriggersPerBattle": 4,
+            "effectDurationSec": null,
+            "internalCooldownSec": 8,
+            "maxStacks": null,
+            "consumedOnUse": false,
+            "nonCombat": false
+          },
+          "energyTransfer": {
+            "kind": "ratio-pay",
+            "casterPaysRatio": 1.5,
+            "maxAllyGainPerCast": 10,
+            "casterCost": 15
+          }
+        }
+      ]
+    }
+  ],
+  "schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "Worlds Between 应变 ten-node job tree proposal",
+    "type": "object",
+    "required": [
+      "schemaVersion",
+      "project",
+      "title",
+      "status",
+      "reviewStatus",
+      "createdAt",
+      "scope",
+      "notImplemented",
+      "sources",
+      "rules",
+      "jpProposal",
+      "economics",
+      "roleVocabulary",
+      "validationParameters",
+      "lineage",
+      "series",
+      "schema",
+      "validation"
+    ],
+    "properties": {
+      "status": {
+        "const": "PROPOSAL"
+      },
+      "series": {
+        "type": "array",
+        "minItems": 5,
+        "maxItems": 5,
+        "items": {
+          "type": "object",
+          "required": [
+            "id",
+            "aptitude",
+            "name",
+            "en",
+            "role",
+            "stages",
+            "finalQuest",
+            "identity",
+            "distinctFrom",
+            "nodes"
+          ],
+          "properties": {
+            "aptitude": {
+              "const": "应变"
+            },
+            "stages": {
+              "type": "array",
+              "minItems": 5,
+              "maxItems": 5,
+              "items": {
+                "type": "string"
+              }
+            },
+            "nodes": {
+              "type": "array",
+              "minItems": 10,
+              "maxItems": 10,
+              "items": {
+                "$ref": "#/$defs/node"
+              }
+            }
+          }
+        }
+      }
+    },
+    "$defs": {
+      "node": {
+        "type": "object",
+        "required": [
+          "id",
+          "seriesId",
+          "stage",
+          "stageName",
+          "slot",
+          "name",
+          "nameEn",
+          "summaryEn",
+          "type",
+          "typeZh",
+          "tacticalRole",
+          "tacticalRoleZh",
+          "energyCost",
+          "cooldownSec",
+          "target",
+          "rangePx",
+          "baseEffect",
+          "scaling",
+          "rankProgression",
+          "maxRank",
+          "unlock",
+          "aiBehavior",
+          "scienceMvpUtility",
+          "supersedesDraftNodeId",
+          "runtimeCatalogNodeId",
+          "status",
+          "reviewStatus"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^(archery|firearms|skirmish|beast|merchant)_n(0[1-9]|10)_[a-z_]+$"
+          },
+          "seriesId": {
+            "enum": [
+              "archery",
+              "firearms",
+              "skirmish",
+              "beast",
+              "merchant"
+            ]
+          },
+          "stage": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5
+          },
+          "stageName": {
+            "type": "string",
+            "description": "必须与已批准五阶名称逐字一致"
+          },
+          "slot": {
+            "enum": [
+              1,
+              2
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "nameEn": {
+            "type": "string"
+          },
+          "summaryEn": {
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "active",
+              "passive"
+            ]
+          },
+          "typeZh": {
+            "enum": [
+              "主动",
+              "被动"
+            ]
+          },
+          "tacticalRole": {
+            "enum": [
+              "precision_damage",
+              "mark",
+              "peel",
+              "weakpoint",
+              "kiting",
+              "tracking_shot",
+              "reveal",
+              "warning",
+              "burst",
+              "mark_persistence",
+              "range_band",
+              "suppression",
+              "shield_break",
+              "mode_switch",
+              "tempo",
+              "line_aoe",
+              "counter",
+              "mode_synergy",
+              "reposition",
+              "bait",
+              "target_switch",
+              "momentum",
+              "opening_punish",
+              "feint",
+              "split_focus",
+              "multi_bait",
+              "cooldown",
+              "companion_command",
+              "bond",
+              "protection",
+              "slow",
+              "capacity",
+              "combo_strike",
+              "group_protection",
+              "group_sustain",
+              "resilience",
+              "energy_routing",
+              "trade_price",
+              "company_income",
+              "cooldown_routing",
+              "market_intel",
+              "damage_pooling",
+              "group_discount",
+              "handover",
+              "combo_support",
+              "shortfall_cover"
+            ]
+          },
+          "tacticalRoleZh": {
+            "type": "string"
+          },
+          "energyCost": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "active: 整数且在所属阶的能量区间内；passive: null"
+          },
+          "cooldownSec": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "description": "active: > 0；passive: null"
+          },
+          "target": {
+            "type": "string"
+          },
+          "rangePx": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "description": "横向像素；null 为自身或全场"
+          },
+          "baseEffect": {
+            "type": "string",
+            "description": "第 1 级效果"
+          },
+          "scaling": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": [
+                "key",
+                "label",
+                "unit",
+                "direction",
+                "values"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "unit": {
+                  "type": "string"
+                },
+                "direction": {
+                  "const": "higher_is_better"
+                },
+                "values": {
+                  "type": "array",
+                  "minItems": 5,
+                  "maxItems": 5,
+                  "items": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          },
+          "rankProgression": {
+            "type": "object",
+            "required": [
+              "2",
+              "3",
+              "4",
+              "5"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "2": {
+                "type": "string"
+              },
+              "3": {
+                "type": "string"
+              },
+              "4": {
+                "type": "string"
+              },
+              "5": {
+                "type": "string"
+              }
+            }
+          },
+          "maxRank": {
+            "const": 5
+          },
+          "unlock": {
+            "type": "object",
+            "required": [
+              "onStageEntry",
+              "jpCost",
+              "requiresFinalQuest"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "onStageEntry": {
+                "const": true
+              },
+              "jpCost": {
+                "const": 0
+              },
+              "requiresFinalQuest": {
+                "type": "boolean"
+              }
+            }
+          },
+          "aiBehavior": {
+            "type": "object",
+            "required": [
+              "defaultEnabled",
+              "condition",
+              "avoid"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "defaultEnabled": {
+                "type": "boolean"
+              },
+              "condition": {
+                "type": "string"
+              },
+              "avoid": {
+                "type": "string"
+              }
+            }
+          },
+          "scienceMvpUtility": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "required": [
+              "name",
+              "effect",
+              "mvpLocations",
+              "gate",
+              "requiresCurrentSeries"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "effect": {
+                "type": "string"
+              },
+              "mvpLocations": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string"
+                }
+              },
+              "gate": {
+                "const": "optional-advantage-only"
+              },
+              "requiresCurrentSeries": {
+                "const": true
+              }
+            }
+          },
+          "supersedesDraftNodeId": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "runtimeCatalogNodeId": {
+            "type": "string",
+            "description": "运行时骨架目录中的对应节点 id"
+          },
+          "runtimeNote": {
+            "type": "string",
+            "description": "仅当骨架目录中该节点已有运行时行为时出现"
+          },
+          "passiveBounds": {
+            "type": "object",
+            "required": [
+              "trigger",
+              "maxTriggersPerBattle",
+              "effectDurationSec",
+              "internalCooldownSec",
+              "maxStacks",
+              "consumedOnUse",
+              "nonCombat"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "trigger": {
+                "type": "string"
+              },
+              "maxTriggersPerBattle": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "effectDurationSec": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "internalCooldownSec": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "maxStacks": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "consumedOnUse": {
+                "type": "boolean"
+              },
+              "nonCombat": {
+                "type": "boolean"
+              }
+            }
+          },
+          "caps": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "category",
+                "rank5Value"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "category": {
+                  "enum": [
+                    "enemyDamageTaken",
+                    "enemyDefenseDown",
+                    "allyDamageReduction",
+                    "allyDamageRedirect",
+                    "enemyMoveSlow",
+                    "allyNextHitBonus"
+                  ]
+                },
+                "rank5Value": {
+                  "type": "number"
+                },
+                "scalingKey": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "energyTransfer": {
+            "type": "object",
+            "required": [
+              "kind",
+              "casterCost",
+              "maxAllyGainPerCast"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "kind": {
+                "enum": [
+                  "discount",
+                  "ratio-pay"
+                ]
+              },
+              "casterCost": {
+                "type": "number"
+              },
+              "maxAllyGainPerCast": {
+                "type": "number"
+              },
+              "casterPaysRatio": {
+                "type": "number",
+                "exclusiveMinimum": 1
+              }
+            }
+          },
+          "commerceContext": {
+            "enum": [
+              "stationed",
+              "activeParty",
+              "stationedOrActiveParty",
+              "recall"
+            ]
+          },
+          "status": {
+            "const": "PROPOSAL"
+          },
+          "reviewStatus": {
+            "const": "pending balance and creator review"
+          }
+        }
+      }
+    }
+  },
+  "validation": {
+    "validator": "tools/rpg-2-star-ocean-the-second_adaptive-job-trees_ten-node-proposal-check_unapproved-v01_20261016-112114-e0ce1cbc.js",
+    "generator": "一次性生成脚本，位于仓库外 %TEMP%\\wbad\\gen.js；未提交。生成时调用上述检查脚本的 runChecks() 写入本块。",
+    "ranAt": "2026-10-16T15:28:39.512Z",
+    "passed": 23,
+    "failed": 0,
+    "total": 23,
+    "resultsDigest": "82c06355056fc6813e9a236ccc052824b44292e897c28afb7e76b1453757dd4d",
+    "checks": [
+      {
+        "id": "source-locks",
+        "description": "强制锁定的来源文件（已批准名单、被取代草案、研学提案、决定记录、运行时骨架目录）与记录的 sha256-text-lf-v1 一致；Game Bible 正被其他工作流编辑，只记录不强制",
+        "result": "pass",
+        "detail": "6 个强制锁定一致"
+      },
+      {
+        "id": "series-set",
+        "description": "恰好 5 条系列，且正是已批准名单中天分为应变的 5 条（顺序一致）",
+        "result": "pass",
+        "detail": "archery, firearms, skirmish, beast, merchant"
+      },
+      {
+        "id": "approved-text-verbatim",
+        "description": "系列名、英文名、定位、五阶名称、终阶任务与已批准名单逐字一致；每个节点的 stageName 与其阶名称逐字一致",
+        "result": "pass",
+        "detail": "5 系列 × (名称 + 英文名 + 定位 + 5 阶 + 终阶任务) 逐字一致；50 个 stageName 一致"
+      },
+      {
+        "id": "ten-nodes-two-per-stage",
+        "description": "每系列恰好 10 个节点，按 n01–n10 排列，5 阶各 2 个（slot 1、2）；合计 50 个",
+        "result": "pass",
+        "detail": "5 × 10 = 50；每阶 2 个"
+      },
+      {
+        "id": "node-schema",
+        "description": "整个文件符合内嵌 JSON Schema（含 $defs.node 的必填字段、类型、枚举、常量与 id 格式；本脚本自带子集校验器，不用外部库）",
+        "result": "pass",
+        "detail": "50/50 节点与文件结构通过"
+      },
+      {
+        "id": "distinct-nodes",
+        "description": "50 个节点的 id、中文名、英文名全局唯一；不与研学 50 节点重名，也不与 Game Bible 中任何角色个人技能重名",
+        "result": "pass",
+        "detail": "50 个 id / 中文名 / 英文名唯一；对照研学节点 50 个、个人技能名 51 个，0 重名"
+      },
+      {
+        "id": "unlock-and-rank-rules",
+        "description": "每个节点进入该阶即以第 1 级开放（jpCost 0），只有第 5 阶节点另需终阶任务；最高 5 级；JP 表只含第 2–5 级；没有任何分支或互斥字段",
+        "result": "pass",
+        "detail": "50/50；JP 表键 = 2,3,4,5；0 个分支字段"
+      },
+      {
+        "id": "active-passive-energy",
+        "description": "主动技能有按阶区间的整数能量消耗与冷却，被动技能二者皆为 null；每系列 ≥5 主动、≥2 被动，每阶至少 1 个主动",
+        "result": "pass",
+        "detail": "archery 7A/3P; firearms 7A/3P; skirmish 7A/3P; beast 6A/4P; merchant 5A/5P"
+      },
+      {
+        "id": "non-exponential-ranks",
+        "description": "所有等级数值严格递增，步长固定或递减（无加速增长），第 5 级 / 第 1 级 ≤ 2；rankProgression 文本由主数值逐级生成；baseEffect 写出第 1 级数值；能量与冷却为单一值",
+        "result": "pass",
+        "detail": "全部为固定或递减步长；最大 r5/r1 = 2.00（archery_n02_quarry_trail）"
+      },
+      {
+        "id": "passive-bounds",
+        "description": "每个被动都有触发条件，且属于下列之一：非战斗（经营／交易）、每场次数上限（≤ 10）、短窗口（≤ 10 秒且内置冷却 ≥ 窗口）、或用后清空的层数；没有常驻无条件战斗加成",
+        "result": "pass",
+        "detail": "18 个被动：非战斗 4、每场上限 10、短窗口 3、用后清空层数 1"
+      },
+      {
+        "id": "energy-transfer-capped",
+        "description": "没有凭空返还能量的节点；调配能量的节点每次让队友获得或节省的总量都少于施放者付出的能量（按比例代付者代付比例 > 1）",
+        "result": "pass",
+        "detail": "0 个返还节点；4 个调配节点均净亏：merchant_n01_supply_pact, merchant_n07_emergency_allocation, merchant_n09_roads_accord, merchant_n10_shortfall_guarantee"
+      },
+      {
+        "id": "stacking-caps",
+        "description": "带增减益的节点按类别登记第 5 级数值；单节点与同系列全部节点同时生效的最坏合计都不超过提案的全来源上限",
+        "result": "pass",
+        "detail": "archery.enemyDamageTaken=8/25, archery.allyDamageReduction=18/50, firearms.enemyMoveSlow=18/40, skirmish.enemyMoveSlow=32/40, skirmish.allyNextHitBonus=20/30, skirmish.enemyDamageTaken=12/25, skirmish.enemyDefenseDown=15/30, beast.allyDamageRedirect=40/40, beast.enemyMoveSlow=37/40, beast.allyDamageReduction=18/50, merchant.allyDamageReduction=12/50"
+      },
+      {
+        "id": "battlefield-range",
+        "description": "所有射程为横向像素且不超过固定战场的最大横向间距 584 px（x 28–612）；null 表示自身或全场",
+        "result": "pass",
+        "detail": "28 个有射程节点，最大 560 px"
+      },
+      {
+        "id": "no-terrain-elevation-jump-stealth",
+        "description": "节点文本（名称、效果、等级文本、AI、实用效果）不含地形、高低差、障碍、掩体、跳跃、潜入／隐身相关词（规则说明本身不在扫描范围内）",
+        "result": "pass",
+        "detail": "22 个禁用词，50 个节点 0 命中"
+      },
+      {
+        "id": "merchant-no-goods",
+        "description": "行商节点不出现随身货物、背包、道具或消耗品；经营类节点都写明生效场合（驻守／上场／召回）；系列带 commerceModel 说明",
+        "result": "pass",
+        "detail": "10 个行商节点 0 命中 13 个词；经营类 4 个、战斗调配类 6 个"
+      },
+      {
+        "id": "beast-living-companion",
+        "description": "驯兽 10 个节点都以“兽伴”为对象，不出现机偶／维修／部署／模式等机械词；系列带 companionModel（体力、退场休整、不可维修、哨音反应、性情、不强制控制野生动物、与机偶对照）",
+        "result": "pass",
+        "detail": "10/10 节点提到兽伴；15 个机械词 0 命中；companionModel 8 项齐全"
+      },
+      {
+        "id": "distinct-roles",
+        "description": "每系列 10 个节点的战术定位互不相同；本提案任意两系列、以及与研学五系列之间的定位集合 Jaccard 相似度 ≤ 0.4",
+        "result": "pass",
+        "detail": "系列内 10/10 不同；应变内最大 0.11（archery/firearms）；对研学最大 0.18（beast/engineering）"
+      },
+      {
+        "id": "ai-descriptions",
+        "description": "每个节点都有 AI 说明（默认是否启用、按横向距离／生命比例写出的使用条件与回避条件）；AI 不使用道具；带治疗的节点写明倒下队友规则；涉及组合技的节点只在组合技 AI 开启时使用",
+        "result": "pass",
+        "detail": "50/50；默认关闭 1 个（merchant_n09_roads_accord）"
+      },
+      {
+        "id": "science-mvp-utility",
+        "description": "每系列至少 1 个第 1–2 阶节点带科技区 MVP 实用效果；全部为可选优势（写明可选且不是必经），需当前系列，地点限于已决定的 4 个 MVP 地点",
+        "result": "pass",
+        "detail": "archery_n02_quarry_trail(足迹判读), firearms_n02_range_calibration(校准委托), skirmish_n03_switch_signal(开战标记), beast_n02_trust_bond(动物照护), merchant_n01_supply_pact(供需报价), merchant_n02_fair_bargain(城市议价)"
+      },
+      {
+        "id": "runtime-catalog-mapping",
+        "description": "每个节点对应运行时骨架目录中同系列、同阶、同槽位（slot 1↔a、2↔b）的唯一节点 id；目录中已有运行时行为的节点都附 runtimeNote 说明现行数值（本提案不改运行时）",
+        "result": "pass",
+        "detail": "50/50 映射唯一；带运行时行为的 4 个：firearms_n01_precision_shot→firearms_shot, firearms_n03_suppressive_burst→firearms_burst, merchant_n01_supply_pact→merchant_supply_pact, merchant_n03_fair_quote→merchant_fair_quote"
+      },
+      {
+        "id": "progression-economics",
+        "description": "提案 JP 表为线性（每级 +15，逐级比值递减，第 5 级 / 第 2 级 ≤ 2.5）；天分折扣表、每阶战斗场数估算与运行时骨架曲线均由公式重算一致；天分 100 的成本不低于天分 60 的 50%，且随天分单调不增",
+        "result": "pass",
+        "detail": "提案 30/45/60/75（总 210，比值 1.5/1.333/1.25）；运行时骨架 35/55/80/110（总 280，增量 20/25/30，比值 1.571/1.455/1.375，非指数）；单技能 210→106 JP（天分 60→100，50.5%）"
+      },
+      {
+        "id": "proposal-marking",
+        "description": "文件本身与 50/50 节点都标为 PROPOSAL、待数值平衡与创作者审核",
+        "result": "pass",
+        "detail": "50/50"
+      },
+      {
+        "id": "superseded-lineage",
+        "description": "节点 id 不与被取代草案冲突；supersedesDraftNodeId 只引用同系列真实草案节点且各用一次；未继承的草案节点与 lineage.droppedDraftNodeIds 一致",
+        "result": "pass",
+        "detail": "33/35 个草案节点有继承关系；舍弃 2 个：merchant_mutual_turnover, merchant_risk_reserve"
+      }
+    ]
+  }
+}

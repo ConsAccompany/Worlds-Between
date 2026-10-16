@@ -1,0 +1,5305 @@
+{
+  "schemaVersion": 1,
+  "project": "rpg-2-star-ocean-the-second",
+  "title": "Worlds Between · 武艺五系列 10 节点职业技能树（提案）",
+  "status": "PROPOSAL",
+  "reviewStatus": "pending balance and creator review",
+  "createdAt": "2026-10-16T11:20:44-04:00",
+  "authoring": "Claude Code 会话生成；生成脚本在仓库外 %TEMP%，校验脚本随文件一起放在 tools/。未提交 Git。",
+  "scope": "守护、剑术、重武、武道、长兵五条武艺系列各 10 个节点（共 50 个），按 2026-10-15 创作者技能规则重新设计；取代 7 节点、3 级上限草案中的这五条树。系列名、英文名、定位、五阶名称与终阶任务逐字沿用已批准原文。",
+  "notImplemented": "仅设计记录：未修改运行时、Game Bible、进度表与进度文档、其他职业树提案或美术，也未暂存、提交或推送 Git。",
+  "sources": {
+    "approvedRoster": {
+      "path": "outputs/rpg-2-star-ocean-the-second_all-jobs_five-tier-proposal_v01_20261013-224236-6f2b9c11.json",
+      "hashAlgorithm": "sha256-text-lf-v1",
+      "sha256": "92f5bff5428c73e45e81a4becb93ec7a59ad31ed637474f0ffbb77cc036765d5",
+      "note": "已批准 20 系列五阶名单（阶名与终阶任务原文）"
+    },
+    "creatorDecisionNote": {
+      "path": "docs/design/rpg-2-star-ocean-the-second_creator-decisions-2026-10-15_world-skills-ai-endgame_reconciliation-note_v01_20261015-174559-39efc292.md",
+      "hashAlgorithm": "sha256-text-lf-v1",
+      "sha256": "94a821911b569e6902e69c2b755772d779ca72a599b5ea5fe1209daee2819954",
+      "note": "技能、AI、组合技与 MVP 地点规则"
+    },
+    "gameBibleState": {
+      "path": "outputs/rpg-2-star-ocean-the-second_game-bible_state_v01_20261013-195422-b8c16d42.json",
+      "hashAlgorithm": "sha256-text-lf-v1",
+      "sha256": "ba077c1f0bd32a83739ff8cf8029229d287a63286fb4420b542db9da7fd894c0",
+      "note": "第 3、4 章（只读）：横向平地战场、能量不自然恢复、战后 20%/10%、无等级上限；jobProposal.series 用于逐字核对"
+    },
+    "researchTemplate": {
+      "path": "outputs/rpg-2-star-ocean-the-second_research-job-trees_ten-node-skill-proposal_unapproved-v01_20261015-232143-842e0540.json",
+      "hashAlgorithm": "sha256-text-lf-v1",
+      "sha256": "d7f9b2917702d420afa3bc9d64b4ad8379ed244a1c227c5b38168ac142c67b50",
+      "note": "研学 10 节点提案：结构、能量区间、步长与叠加规则的样板"
+    },
+    "researchQaNote": {
+      "path": "docs/design/rpg-2-star-ocean-the-second_research-job-trees_ten-node-design-qa-note_unapproved-v01_20261015-232143-540056b9.md",
+      "hashAlgorithm": "sha256-text-lf-v1",
+      "sha256": "68a64dadfa8ffdb7e1b0f1204be54c19be25025c99f7cc0dee68159727b328a1",
+      "note": "研学 QA 记录（样板）"
+    },
+    "supersededMartialDraft": {
+      "path": "outputs/rpg-2-star-ocean-the-second_martial-job-trees_skill-node-proposal_v01_20261013-224832-1c9e73ab.json",
+      "hashAlgorithm": "sha256-text-lf-v1",
+      "sha256": "06591f64fae087e6581c546aa919e28d3b4a1d86896b722995e3c5b7e5888f10",
+      "note": "剑术、重武、武道、长兵 7 节点草案，只用于继承关系"
+    },
+    "supersededGuardianDraft": {
+      "path": "outputs/rpg-2-star-ocean-the-second_four-job-trees_skill-node-proposal_v01_20261013-224554-5a72d0be.json",
+      "hashAlgorithm": "sha256-text-lf-v1",
+      "sha256": "740a4659237b8cc2d16f924514c3b3252365be59ac6a472af5dbbb78d67e648a",
+      "note": "四天分样板文件中的守护 7 节点草案，只用于继承关系"
+    },
+    "runtimeGrowthRules": {
+      "path": "game/scripts/growth_rules.gd",
+      "hashAlgorithm": "sha256-text-lf-v1",
+      "sha256": "05f2c0147f9cfc9f8a24398e5c1a6a59a589dda2de4606d268b0fab239c89b71",
+      "note": "只读：剑术现有 2 个 MVP 技能的顺序"
+    },
+    "runtimeAppState": {
+      "path": "game/scripts/app_state.gd",
+      "hashAlgorithm": "sha256-text-lf-v1",
+      "sha256": "2df470f5f40128f8a128e8a3efb331bfb9dff88e0ce38c0ec31311ae8db61cc1",
+      "note": "只读：剑术现有技能的中英文名"
+    },
+    "runtimeBattleArena": {
+      "path": "game/scripts/battle_arena.gd",
+      "hashAlgorithm": "sha256-text-lf-v1",
+      "sha256": "be8859a8398ecc7d6744c6755e59924cafce43b0cb0f20f375ac32a28592acae",
+      "note": "只读：防御把伤害降到 30% 且每次 6 点能量，闪避 12 点能量、无敌 0.27 秒，敌方起手 0.48–0.65 秒，近身命中距离 69 px，职业技能消耗 10 + 3 × 阶"
+    }
+  },
+  "rules": {
+    "unlock": "进入某阶时，该阶 2 个节点立即以第 1 级开放，不消耗 JP，也不另设等级门槛；第 5 阶仍须先完成该系列终阶任务（完成一次即对全体角色永久开放）。",
+    "jp": "JP 只用于把已开放的技能从第 1 级提升到第 2–5 级；任何节点都不能用 JP 解锁。",
+    "maxRank": 5,
+    "exclusiveBranches": false,
+    "allBranchesLearnable": "10 个节点没有互斥选择；任何角色最终都能把全部 10 个节点练到第 5 级。",
+    "currentSeriesOnly": "职业技能（含科技区实用效果）只在角色当前职业为该系列时可用；离开系列后保留等级，切回即恢复。",
+    "battlefield": "战场是横向、固定尺寸的平地。所有节点都不产生地形、高低差、障碍、掩体或跳跃相关效果；突进、后撤与击退只沿水平方向，到达战场边界即停止；区域效果只触发攻击，不阻挡任何单位移动；范围只按横向像素距离计算。",
+    "noStealth": "不引入已取消的潜入玩法；强制转向与拒止都是公开的战斗效果。",
+    "noGating": "科技区实用效果都是可选优势：没有任何主线、支线、伙伴或档案只能靠某个武艺职业完成（没有永久错过的内容）。",
+    "ai": "主动技能都写明 AI 施放与不施放条件；被动自动触发，会移动角色的被动（同袍代受、天衡步）可在角色策略中关闭。AI 默认不使用消耗道具，组合技 AI 默认关闭；AI 读取与玩家相同的起手提示，不提前获知。武道“稳息”只作用于自身，不进入全队治疗的 AI 排序（倒下的队友优先、再急需治疗者的规则不受影响）。",
+    "combos": "本提案不新增组合技；组合技仍由每位参与者支付能量。",
+    "energy": "主动技能消耗能量，被动技能不消耗。战斗中能量不自然恢复；返还能量的节点都有每场次数上限，单次返还低于本系列最低主动消耗，每场合计 ≤ 32 点。能量消耗不随技能等级变化。",
+    "rankCurve": "第 2–5 级每级按固定或递减的加法步长提升主要数值，不使用乘法复利；第 5 级主要数值不超过第 1 级的 2 倍。冷却、触发次数与能量消耗不随等级变化。",
+    "unlimitedLevel": "角色等级没有上限（Game Bible 第 4 章）。节点数值不随角色等级增长：伤害、治疗与护层按攻击力或生命上限的百分比计算，控制按秒，距离按 px，返还按点能量并有每场上限。能量池随等级线性增长（运行时 +2/级），所以高等级下限制输出的是冷却与每场触发次数，而不是能量；全来源上限（见 stackingCaps）不随等级或难度档位放宽。",
+    "stacking": "同名效果不叠加，只刷新；同类护层取较高者。全来源上限见 stackingCaps。同一次敌方攻击最多触发一个反击效果、最多被一名守护者代受一次。",
+    "stackingCaps": {
+      "enemy_damage_taken_up": {
+        "limit": 25,
+        "kind": "max",
+        "unit": "%",
+        "zh": "敌方受到伤害增加（全来源合计）"
+      },
+      "enemy_defense_down": {
+        "limit": 30,
+        "kind": "max",
+        "unit": "%",
+        "zh": "敌方防御降低与无视防御（全来源合计）"
+      },
+      "ally_damage_reduction": {
+        "limit": 50,
+        "kind": "max",
+        "unit": "%",
+        "zh": "技能减伤合计（不含防御本身把伤害降到 30% 的基础规则）"
+      },
+      "damage_floor": {
+        "limit": 10,
+        "kind": "min",
+        "unit": "% 原始伤害",
+        "zh": "单次受到伤害的下限：任何组合下不低于原始伤害的 10%"
+      },
+      "shield_total": {
+        "limit": 30,
+        "kind": "max",
+        "unit": "% 生命上限",
+        "zh": "单人护层总量"
+      },
+      "status_resistance": {
+        "limit": 60,
+        "kind": "max",
+        "unit": "%",
+        "zh": "异常抗性"
+      },
+      "self_damage_bonus": {
+        "limit": 40,
+        "kind": "max",
+        "unit": "%",
+        "zh": "武艺职业节点给自身的增伤合计"
+      },
+      "enemy_slow": {
+        "limit": 40,
+        "kind": "max",
+        "unit": "%",
+        "zh": "敌方移动／接近速度降低合计"
+      },
+      "damage_redirect": {
+        "limit": 50,
+        "kind": "max",
+        "unit": "% 单次伤害",
+        "zh": "同一次伤害被分担的比例合计"
+      },
+      "windup_delay": {
+        "limit": 0.6,
+        "kind": "max",
+        "unit": "秒",
+        "zh": "同一敌人同一攻击周期内的起手延后合计"
+      },
+      "control_diminishing": {
+        "limit": null,
+        "kind": "rule",
+        "unit": null,
+        "zh": "打断、硬直、击退的递减：同一敌人在 3 秒内第 2 次受同类控制时效果减半，第 3 次起免疫至窗口结束；首领不被打断、不硬直，击退距离减半，打断改为起手延后（计入 windup_delay）"
+      },
+      "forced_target": {
+        "limit": null,
+        "kind": "rule",
+        "unit": null,
+        "zh": "强制转向结束后，同一敌人 6 秒内（首领 10 秒）不能再被任何来源强制转向；同时只能被一名守护者强制"
+      },
+      "energy_return": {
+        "limit": 32,
+        "kind": "max",
+        "unit": "点能量／场",
+        "zh": "单个节点每场返还能量合计"
+      },
+      "self_heal_per_battle": {
+        "limit": 60,
+        "kind": "max",
+        "unit": "% 生命上限／场",
+        "zh": "武道自身恢复每场合计"
+      },
+      "reflect_cap": {
+        "limit": null,
+        "kind": "rule",
+        "unit": null,
+        "zh": "单次反震伤害不超过自身攻击力的 200%"
+      },
+      "charge_time_reduction": {
+        "limit": 60,
+        "kind": "max",
+        "unit": "%",
+        "zh": "蓄力每段时间缩短合计（每段不低于 0.24 秒）"
+      }
+    },
+    "controlDiminishing": "打断、硬直、击退的递减：同一敌人在 3 秒内第 2 次受同类控制时效果减半，第 3 次起免疫至窗口结束；首领不被打断、不硬直，击退距离减半，打断改为起手延后（计入 windup_delay）"
+  },
+  "sharedMechanics": {
+    "windupTypes": "敌方起手分三类（提案，需要敌人数据增加标签）：快起手（起手不超过 0.50 秒）、重起手（超过 0.50 秒且标记为重击）、虚起手（起手中途取消后重新起手）。运行时现有起手为 0.48 与 0.65 秒。",
+    "guardBaseline": "运行时基础规则：防御把伤害降到 30%，每次被命中消耗 6 点能量；闪避消耗 12 点能量、无敌 0.27 秒、冷却 0.75 秒。",
+    "edgeFlow": "剑势（剑术）：剑术攻击每命中同一目标一次 +1 层，最多 5 层；2 秒内没有命中或更换目标即清空。",
+    "armorCrack": "裂甲（重武）：每层防御降低 5%，最多 4 层，持续 8 秒。护甲值与防护板是带“装甲”标记敌人的独立耐久；破除后该敌人进入破防 6 秒（提案，需要敌人数据支持）。",
+    "charge": "蓄力（重武）：可蓄力技能按住最多 2 段，每段 0.6 秒；第 1 段倍率 +25%，第 2 段（满蓄）+50%，属于技能自身倍率，不计入自身增伤上限。蓄力期间可被打断，除非有霸体。",
+    "jin": "劲（武道）：防御成功、承接、闪避反击时获得，最多 5 层；6 秒内没有获得新劲即清空；由化劲掌、无形连环消耗。",
+    "reachBand": "枪尖区（长兵）：与目标水平距离 70–160 px；不足 70 px 为贴身，长兵突刺伤害降为七成。敌方近身攻击命中距离为 69 px。",
+    "protectedObjectives": "守护目标：信标、护送对象等可被敌人攻击的友方单位（提案，需要战斗支持此类单位）；不占五名上场角色的位置。"
+  },
+  "jpProposal": {
+    "status": "PROPOSAL",
+    "reviewStatus": "pending balance and creator review",
+    "rankUpgradeBaseJp": {
+      "2": 30,
+      "3": 45,
+      "4": 60,
+      "5": 75
+    },
+    "unlockJp": 0,
+    "curve": "线性：每级比上一级多 15 JP；单项技能从第 1 级练到第 5 级共 210 基础 JP，每条系列 10 个节点共 2100 基础 JP。沿用研学提案的临时表，以便各天分一致。",
+    "aptitudeDiscount": "沿用现有草案规则：对应天分（武艺）60 时付基础 JP；61–100 线性递减，100 时付基础 JP 的 50%，每次向上取整。",
+    "conflictNote": "运行时科技 MVP 骨架（game/data/growth/…_progression-ten-node_science-mvp-skeleton…json）另有临时值 35/55/80/110。两套 JP 表都未批准，需创作者统一。"
+  },
+  "roleVocabulary": {
+    "redirect": "伤害分担",
+    "aggro": "强制转向",
+    "stance": "固守架势",
+    "intercept": "代受",
+    "group_protection": "群体减伤",
+    "energy_economy": "能量循环",
+    "lethal_save": "致命保留",
+    "rally": "抗扰鼓舞",
+    "group_shield": "群体护层",
+    "capacity": "誓约扩展",
+    "windup_punish": "起手惩戒",
+    "combo_stack": "连段叠层",
+    "area_sweep": "回旋范围",
+    "counter_read": "抢先看破",
+    "heavy_windup_break": "破重起手",
+    "feint_read": "识破虚招",
+    "pursuit": "突进追斩",
+    "finisher": "终结",
+    "auto_preempt": "自动抢先",
+    "armor_break": "破甲",
+    "super_armor": "霸体",
+    "plate_break": "破除防护板",
+    "stagger": "硬直",
+    "area_impact": "圆形冲击",
+    "tempo": "蓄力节奏",
+    "vulnerability": "易伤连携",
+    "breach": "破防追击",
+    "empower": "蓄力强化",
+    "guard_prep": "攻守转换",
+    "guard_counter": "防御反击",
+    "parry_counter": "承接反打",
+    "self_heal": "自身调息",
+    "dodge_counter": "闪身反击",
+    "force_redirect": "化劲反震",
+    "status_resist": "异常抗性",
+    "auto_counter": "自动反击",
+    "reach_strike": "中距突刺",
+    "reach_bonus": "枪尖区增益",
+    "knockback": "击退",
+    "stop_thrust": "拒止迎击",
+    "lunge_pierce": "突进贯穿",
+    "approach_slow": "接近压制",
+    "area_push": "环身推离",
+    "reposition": "自动后撤",
+    "zone_denial": "拒止区域"
+  },
+  "mechanicTagVocabulary": {
+    "redirect": {
+      "zh": "伤害分担",
+      "signatureOf": "guardian"
+    },
+    "forced_target": {
+      "zh": "强制转向",
+      "signatureOf": "guardian"
+    },
+    "intercept": {
+      "zh": "代受",
+      "signatureOf": "guardian"
+    },
+    "objective_guard": {
+      "zh": "守护目标（信标、护送对象）",
+      "signatureOf": "guardian"
+    },
+    "windup_preempt": {
+      "zh": "起手中抢先出剑",
+      "signatureOf": "sword"
+    },
+    "edge_flow": {
+      "zh": "剑势层数",
+      "signatureOf": "sword"
+    },
+    "charge": {
+      "zh": "蓄力",
+      "signatureOf": "heavy"
+    },
+    "armor_break": {
+      "zh": "裂甲／护甲值／防护板",
+      "signatureOf": "heavy"
+    },
+    "radial_impact": {
+      "zh": "以点为心的圆形冲击",
+      "signatureOf": "heavy"
+    },
+    "super_armor": {
+      "zh": "霸体",
+      "signatureOf": "heavy"
+    },
+    "post_impact_counter": {
+      "zh": "受击或落空后反击",
+      "signatureOf": "martial"
+    },
+    "jin": {
+      "zh": "劲（层数）",
+      "signatureOf": "martial"
+    },
+    "breath": {
+      "zh": "调息",
+      "signatureOf": "martial"
+    },
+    "reach_band": {
+      "zh": "枪尖区距离",
+      "signatureOf": "polearm"
+    },
+    "knockback": {
+      "zh": "水平击退",
+      "signatureOf": "polearm"
+    },
+    "line_pierce": {
+      "zh": "横向直线贯穿",
+      "signatureOf": "polearm"
+    },
+    "approach_punish": {
+      "zh": "迎击接近者",
+      "signatureOf": "polearm"
+    },
+    "guard_efficiency": {
+      "zh": "防御能量效率",
+      "signatureOf": null
+    },
+    "party_support": {
+      "zh": "队友增益",
+      "signatureOf": null
+    },
+    "stagger": {
+      "zh": "原地硬直",
+      "signatureOf": null
+    },
+    "lethal_save": {
+      "zh": "致命保留",
+      "signatureOf": null
+    },
+    "energy_refund": {
+      "zh": "能量返还",
+      "signatureOf": null
+    },
+    "status_guard": {
+      "zh": "异常抗性",
+      "signatureOf": null
+    },
+    "dash": {
+      "zh": "水平突进",
+      "signatureOf": null
+    },
+    "self_buff": {
+      "zh": "自身强化",
+      "signatureOf": null
+    }
+  },
+  "validationParameters": {
+    "energyBandsByStage": {
+      "1": [
+        6,
+        16
+      ],
+      "2": [
+        6,
+        20
+      ],
+      "3": [
+        6,
+        30
+      ],
+      "4": [
+        6,
+        34
+      ],
+      "5": [
+        24,
+        50
+      ]
+    },
+    "minActiveCooldownSec": 5,
+    "minStage5CooldownSec": 40,
+    "rank5ToRank1MaxRatio": 2,
+    "maxStacksPerEffect": 5,
+    "maxEnergyReturnTriggersPerBattle": 4,
+    "crossSeriesRoleJaccardMax": 0.4,
+    "minSignatureNodesPerSeries": 6,
+    "allowedScalingUnits": [
+      "% 攻击力",
+      "% 生命上限",
+      "% 原始伤害",
+      "%",
+      "秒",
+      "px",
+      "点能量"
+    ],
+    "approvedMvpLocations": [
+      "纽约 · 曼哈顿下城市政厅公园",
+      "扬克斯郊外",
+      "华盛顿特区 · 国会大厦遗址（科技勘察前哨）",
+      "芝加哥 · 卢普区"
+    ],
+    "metricsBattleSeconds": 120,
+    "bannedTerms": [
+      "地形",
+      "高低",
+      "高地",
+      "地势",
+      "障碍",
+      "掩体",
+      "跳跃",
+      "潜入",
+      "隐身",
+      "潜行",
+      "伏击",
+      "偷袭",
+      "隐匿",
+      "浮空",
+      "击飞",
+      "空中",
+      "墙",
+      "坡",
+      "高处",
+      "地裂",
+      "裂地",
+      "坑",
+      "terrain",
+      "elevation",
+      "obstacle",
+      "high ground",
+      "jump",
+      "stealth",
+      "cover",
+      "sneak",
+      "ambush",
+      "airborne"
+    ]
+  },
+  "lineage": {
+    "note": "被取代的 7 节点草案只用于继承关系，不是数值依据。",
+    "droppedDraftNodes": [
+      {
+        "id": "guardian_counter_window",
+        "name": "反击窗口",
+        "reason": "防御后反击归武道；守护不以反击输出为主。"
+      },
+      {
+        "id": "sword_parry_focus",
+        "name": "听锋",
+        "reason": "“防御成功后下一剑增伤”属于受击后反击，归武道；剑术改为在起手中抢先（观锋）。"
+      },
+      {
+        "id": "polearm_shared_line",
+        "name": "枪线协防",
+        "reason": "依赖队友防御成功，与守护、武道重叠；改由枪线压制（接近减速）承担控距。"
+      }
+    ]
+  },
+  "series": [
+    {
+      "id": "guardian",
+      "aptitude": "武艺",
+      "name": "守护",
+      "en": "Guardian",
+      "role": "保护同伴与维持阵线",
+      "stages": [
+        "护卫",
+        "壁垒卫士",
+        "阵线守望者",
+        "不屈统领",
+        "万界守誓者"
+      ],
+      "finalQuest": "在后期试炼中保护三处不同方位的信标，连续击退三波敌人，且不让任何信标失守。",
+      "identity": "以自身承伤保护队友与守护目标（信标、护送对象）：分担伤害、强制敌人转向自己、代受重击、群体减伤与群体护层。",
+      "contrast": "守护不把敌人推开、不减慢敌人（那是长兵），不靠反击输出（那是武道），也不抢敌人的起手（那是剑术）；它的价值是“伤害落到谁身上”。",
+      "finalQuestFit": "信标与队友都能作为护线、阵线庇护与守誓穹幕的守护目标；挑衅号令把攻击信标的敌人拉到守护者身上；同袍代受可替信标挡下重击。",
+      "signatureMechanics": [
+        "redirect",
+        "forced_target",
+        "intercept",
+        "objective_guard"
+      ],
+      "nodes": [
+        {
+          "id": "guardian_n01_ward_line",
+          "seriesId": "guardian",
+          "stage": 1,
+          "stageName": "护卫",
+          "slot": 1,
+          "name": "护线",
+          "nameEn": "Ward Line",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "redirect",
+          "tacticalRoleZh": "伤害分担",
+          "mechanicTags": [
+            "redirect",
+            "objective_guard"
+          ],
+          "energyCost": 12,
+          "cooldownSec": 10,
+          "internalCooldownSec": null,
+          "maxTriggersPerBattle": null,
+          "target": "一名队友或一个守护目标（信标、护送对象）",
+          "rangePx": 200,
+          "chargeable": false,
+          "baseEffect": "与目标连起护线 12 秒：目标受到的每次伤害中 25% 改由守护者承受（这部分按守护者自身的防御状态结算）。守护者生命低于 25% 时护线自动断开。每名守护者同时只维持 1 条护线（「万界誓约」后为 2 条），同一目标只能连 1 条护线。",
+          "scaling": [
+            {
+              "key": "share",
+              "label": "分担比例",
+              "unit": "% 原始伤害",
+              "direction": "higher_is_better",
+              "values": [
+                25,
+                28,
+                31,
+                34,
+                37
+              ],
+              "capCategory": "damage_redirect"
+            }
+          ],
+          "rankProgression": {
+            "2": "分担比例 28% 原始伤害（+3）",
+            "3": "分担比例 31% 原始伤害（+3）",
+            "4": "分担比例 34% 原始伤害（+3）",
+            "5": "分担比例 37% 原始伤害（+3）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "single_instance",
+            "maxStacks": 1,
+            "capCategories": [
+              "damage_redirect"
+            ],
+            "fixedContributions": [],
+            "note": "同一目标只连 1 条护线，新施放覆盖旧护线；同一次伤害被分担的比例全来源合计 ≤ 50%。"
+          },
+          "ai": {
+            "mode": "active_condition",
+            "defaultEnabled": true,
+            "useWhen": "优先连接正被敌人锁定且生命比例最低的队友；有守护目标的战斗（信标、护送）优先连接守护目标；护线剩余 2 秒内续接。",
+            "avoidWhen": "自身生命低于 40% 时不施放。"
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "guardian_line_guard",
+          "runtimeLineage": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "guardian_n02_challenge_call",
+          "seriesId": "guardian",
+          "stage": 1,
+          "stageName": "护卫",
+          "slot": 2,
+          "name": "挑衅号令",
+          "nameEn": "Challenge Call",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "aggro",
+          "tacticalRoleZh": "强制转向",
+          "mechanicTags": [
+            "forced_target"
+          ],
+          "energyCost": 10,
+          "cooldownSec": 12,
+          "internalCooldownSec": null,
+          "maxTriggersPerBattle": null,
+          "target": "守护者周围 140 px 内的全部敌人",
+          "rangePx": 140,
+          "chargeable": false,
+          "baseEffect": "大喝挑衅：范围内每名敌人接下来的 2 次攻击必须以守护者为目标（首领为 1 次），守护者同时获得 10% 减伤，持续 6 秒。",
+          "scaling": [
+            {
+              "key": "dr",
+              "label": "减伤",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                10,
+                12,
+                14,
+                16,
+                18
+              ],
+              "capCategory": "ally_damage_reduction"
+            }
+          ],
+          "rankProgression": {
+            "2": "减伤 12%（+2）",
+            "3": "减伤 14%（+2）",
+            "4": "减伤 16%（+2）",
+            "5": "减伤 18%（+2）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "refresh",
+            "maxStacks": 1,
+            "capCategories": [
+              "ally_damage_reduction",
+              "forced_target"
+            ],
+            "fixedContributions": [],
+            "note": "再次施放只刷新；强制转向遵守全局冷却：结束后同一敌人 6 秒内（首领 10 秒）不能再被强制，且同时只能被一名守护者强制。"
+          },
+          "ai": {
+            "mode": "active_condition",
+            "defaultEnabled": true,
+            "useWhen": "有敌人在 140 px 内对非守护者队友或守护目标进入起手时施放。",
+            "avoidWhen": "自身生命低于 30% 时不施放。"
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": null,
+          "runtimeLineage": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "guardian_n03_bulwark_stance",
+          "seriesId": "guardian",
+          "stage": 2,
+          "stageName": "壁垒卫士",
+          "slot": 1,
+          "name": "壁垒架势",
+          "nameEn": "Bulwark Stance",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "stance",
+          "tacticalRoleZh": "固守架势",
+          "mechanicTags": [
+            "guard_efficiency",
+            "self_buff"
+          ],
+          "energyCost": 16,
+          "cooldownSec": 14,
+          "internalCooldownSec": null,
+          "maxTriggersPerBattle": null,
+          "target": "自身",
+          "rangePx": null,
+          "chargeable": false,
+          "baseEffect": "进入壁垒架势 8 秒：前 3 次成功防御不消耗能量（平时每次 6 点），防御时伤害再降低 10%；架势期间自身移动速度变为原来的 70%。",
+          "scaling": [
+            {
+              "key": "dr",
+              "label": "防御时额外减伤",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                10,
+                12,
+                14,
+                16,
+                18
+              ],
+              "capCategory": "ally_damage_reduction"
+            }
+          ],
+          "rankProgression": {
+            "2": "防御时额外减伤 12%（+2）",
+            "3": "防御时额外减伤 14%（+2）",
+            "4": "防御时额外减伤 16%（+2）",
+            "5": "防御时额外减伤 18%（+2）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "refresh",
+            "maxStacks": 1,
+            "capCategories": [
+              "ally_damage_reduction"
+            ],
+            "fixedContributions": [],
+            "note": "再次施放只刷新时长，免费防御次数重置为 3 次，不累加。"
+          },
+          "ai": {
+            "mode": "active_condition",
+            "defaultEnabled": true,
+            "useWhen": "已有护线或挑衅生效，且 100 px 内有敌人进入起手时施放。",
+            "avoidWhen": "没有敌人在 160 px 内时不施放。"
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "guardian_anchor",
+          "runtimeLineage": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "guardian_n04_shoulder_the_blow",
+          "seriesId": "guardian",
+          "stage": 2,
+          "stageName": "壁垒卫士",
+          "slot": 2,
+          "name": "同袍代受",
+          "nameEn": "Shoulder the Blow",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "intercept",
+          "tacticalRoleZh": "代受",
+          "mechanicTags": [
+            "intercept",
+            "dash"
+          ],
+          "energyCost": null,
+          "cooldownSec": null,
+          "internalCooldownSec": 12,
+          "maxTriggersPerBattle": null,
+          "target": "横向范围内的一名队友或一个守护目标",
+          "rangePx": 120,
+          "chargeable": false,
+          "baseEffect": "横向 120 px 内的队友或守护目标即将受到一次超过其生命上限 15% 的攻击时，守护者自动横移到其身前代受这次攻击（若守护者正在防御，按防御结算）。内置冷却 12 秒。",
+          "scaling": [
+            {
+              "key": "reach",
+              "label": "代受触及距离",
+              "unit": "px",
+              "direction": "higher_is_better",
+              "values": [
+                120,
+                130,
+                140,
+                150,
+                160
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "代受触及距离 130 px（+10）",
+            "3": "代受触及距离 140 px（+10）",
+            "4": "代受触及距离 150 px（+10）",
+            "5": "代受触及距离 160 px（+10）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "single_instance",
+            "maxStacks": 1,
+            "capCategories": [],
+            "fixedContributions": [],
+            "note": "同一次敌方攻击最多由一名守护者代受一次。"
+          },
+          "ai": {
+            "mode": "passive_auto_optout",
+            "defaultEnabled": true,
+            "useWhen": "自动触发（玩家直接操控时同样触发）；可在角色策略中关闭“自动代受”。",
+            "avoidWhen": null
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "guardian_shared_guard",
+          "runtimeLineage": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "guardian_n05_line_shelter",
+          "seriesId": "guardian",
+          "stage": 3,
+          "stageName": "阵线守望者",
+          "slot": 1,
+          "name": "阵线庇护",
+          "nameEn": "Line Shelter",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "group_protection",
+          "tacticalRoleZh": "群体减伤",
+          "mechanicTags": [
+            "objective_guard",
+            "party_support"
+          ],
+          "energyCost": 24,
+          "cooldownSec": 20,
+          "internalCooldownSec": null,
+          "maxTriggersPerBattle": null,
+          "target": "守护者 160 px 内的全部队友与守护目标（效果范围跟随守护者）",
+          "rangePx": 160,
+          "chargeable": false,
+          "baseEffect": "举盾立阵 10 秒：范围内队友与守护目标受到的伤害降低 12%。",
+          "scaling": [
+            {
+              "key": "dr",
+              "label": "减伤",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                12,
+                14,
+                16,
+                18,
+                20
+              ],
+              "capCategory": "ally_damage_reduction"
+            }
+          ],
+          "rankProgression": {
+            "2": "减伤 14%（+2）",
+            "3": "减伤 16%（+2）",
+            "4": "减伤 18%（+2）",
+            "5": "减伤 20%（+2）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "refresh",
+            "maxStacks": 1,
+            "capCategories": [
+              "ally_damage_reduction"
+            ],
+            "fixedContributions": [],
+            "note": "同名效果只刷新；与其他减伤相加，合计 ≤ 50%。"
+          },
+          "ai": {
+            "mode": "active_condition",
+            "defaultEnabled": true,
+            "useWhen": "160 px 内至少有 2 名队友（或 1 名队友加 1 个守护目标），且有敌人进入起手时施放。",
+            "avoidWhen": "范围内只有守护者自己时不施放。"
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "guardian_group_shelter",
+          "runtimeLineage": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "guardian_n06_guardians_echo",
+          "seriesId": "guardian",
+          "stage": 3,
+          "stageName": "阵线守望者",
+          "slot": 2,
+          "name": "守护回响",
+          "nameEn": "Guardian's Echo",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "energy_economy",
+          "tacticalRoleZh": "能量循环",
+          "mechanicTags": [
+            "redirect",
+            "energy_refund"
+          ],
+          "energyCost": null,
+          "cooldownSec": null,
+          "internalCooldownSec": null,
+          "maxTriggersPerBattle": 4,
+          "target": "自身",
+          "rangePx": null,
+          "chargeable": false,
+          "baseEffect": "守护者经护线承受伤害、代受一次攻击，或在挑衅号令生效期间成功防御一次攻击时，回复 4 点能量；每场战斗最多 4 次。",
+          "scaling": [
+            {
+              "key": "refund",
+              "label": "每次回复",
+              "unit": "点能量",
+              "direction": "higher_is_better",
+              "values": [
+                4,
+                5,
+                6,
+                7,
+                8
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "每次回复 5 点能量（+1）",
+            "3": "每次回复 6 点能量（+1）",
+            "4": "每次回复 7 点能量（+1）",
+            "5": "每次回复 8 点能量（+1）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "per_trigger",
+            "maxStacks": 1,
+            "capCategories": [
+              "energy_return"
+            ],
+            "fixedContributions": [],
+            "note": "每次只触发一次，不叠加；每场最多 4 次，合计 ≤ 32 点。"
+          },
+          "ai": {
+            "mode": "passive_auto",
+            "defaultEnabled": true,
+            "useWhen": "自动触发，无需 AI 决策。",
+            "avoidWhen": null
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": null,
+          "runtimeLineage": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review",
+          "energyReturn": {
+            "perTriggerKey": "refund",
+            "maxTriggersPerBattle": 4
+          }
+        },
+        {
+          "id": "guardian_n07_unbroken_limit",
+          "seriesId": "guardian",
+          "stage": 4,
+          "stageName": "不屈统领",
+          "slot": 1,
+          "name": "不屈界限",
+          "nameEn": "Unbroken Limit",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "lethal_save",
+          "tacticalRoleZh": "致命保留",
+          "mechanicTags": [
+            "lethal_save"
+          ],
+          "energyCost": null,
+          "cooldownSec": null,
+          "internalCooldownSec": null,
+          "maxTriggersPerBattle": 1,
+          "target": "自身",
+          "rangePx": null,
+          "chargeable": false,
+          "baseEffect": "每场战斗一次：守护者受到致命伤害时保留生命上限 10% 的生命，并在 3 秒内获得 30% 减伤。",
+          "scaling": [
+            {
+              "key": "keep",
+              "label": "保留生命",
+              "unit": "% 生命上限",
+              "direction": "higher_is_better",
+              "values": [
+                10,
+                12,
+                14,
+                16,
+                18
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "保留生命 12% 生命上限（+2）",
+            "3": "保留生命 14% 生命上限（+2）",
+            "4": "保留生命 16% 生命上限（+2）",
+            "5": "保留生命 18% 生命上限（+2）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "once_per_battle",
+            "maxStacks": 1,
+            "capCategories": [
+              "ally_damage_reduction"
+            ],
+            "fixedContributions": [
+              {
+                "category": "ally_damage_reduction",
+                "value": 30
+              }
+            ],
+            "note": "每场只触发一次；3 秒减伤与其他减伤相加，合计 ≤ 50%。"
+          },
+          "ai": {
+            "mode": "passive_auto",
+            "defaultEnabled": true,
+            "useWhen": "自动触发，无需 AI 决策。",
+            "avoidWhen": null
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "guardian_last_stand",
+          "runtimeLineage": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "guardian_n08_steadfast_rally",
+          "seriesId": "guardian",
+          "stage": 4,
+          "stageName": "不屈统领",
+          "slot": 2,
+          "name": "坚阵鼓舞",
+          "nameEn": "Steadfast Rally",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "rally",
+          "tacticalRoleZh": "抗扰鼓舞",
+          "mechanicTags": [
+            "party_support",
+            "status_guard"
+          ],
+          "energyCost": 26,
+          "cooldownSec": 24,
+          "internalCooldownSec": null,
+          "maxTriggersPerBattle": null,
+          "target": "守护者 180 px 内的全部队友",
+          "rangePx": 180,
+          "chargeable": false,
+          "baseEffect": "鼓舞范围内队友 10 秒：异常抗性提高 20%，且单次伤害不超过其生命上限 20% 的攻击不会中止其正在进行的动作或技能。",
+          "scaling": [
+            {
+              "key": "resist",
+              "label": "异常抗性",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                20,
+                23,
+                26,
+                29,
+                32
+              ],
+              "capCategory": "status_resistance"
+            }
+          ],
+          "rankProgression": {
+            "2": "异常抗性 23%（+3）",
+            "3": "异常抗性 26%（+3）",
+            "4": "异常抗性 29%（+3）",
+            "5": "异常抗性 32%（+3）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "refresh",
+            "maxStacks": 1,
+            "capCategories": [
+              "status_resistance"
+            ],
+            "fixedContributions": [],
+            "note": "同名效果只刷新；异常抗性全来源合计 ≤ 60%。"
+          },
+          "ai": {
+            "mode": "active_condition",
+            "defaultEnabled": true,
+            "useWhen": "范围内至少 2 名队友，且敌人即将施放带异常的攻击或连续攻击时；首领战中首次可用时也施放。",
+            "avoidWhen": "范围内只有守护者自己时不施放。"
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": null,
+          "runtimeLineage": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "guardian_n09_oathbound_dome",
+          "seriesId": "guardian",
+          "stage": 5,
+          "stageName": "万界守誓者",
+          "slot": 1,
+          "name": "守誓穹幕",
+          "nameEn": "Oathbound Dome",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "group_shield",
+          "tacticalRoleZh": "群体护层",
+          "mechanicTags": [
+            "objective_guard",
+            "party_support"
+          ],
+          "energyCost": 44,
+          "cooldownSec": 45,
+          "internalCooldownSec": null,
+          "maxTriggersPerBattle": null,
+          "target": "全部上场队友（最多 5 人）与战场上的守护目标",
+          "rangePx": null,
+          "chargeable": false,
+          "baseEffect": "为全部上场队友与每个守护目标各加一层护层，吸收量为各自生命上限的 10%，持续 8 秒。",
+          "scaling": [
+            {
+              "key": "shield",
+              "label": "护层吸收",
+              "unit": "% 生命上限",
+              "direction": "higher_is_better",
+              "values": [
+                10,
+                12,
+                14,
+                16,
+                18
+              ],
+              "capCategory": "shield_total"
+            }
+          ],
+          "rankProgression": {
+            "2": "护层吸收 12% 生命上限（+2）",
+            "3": "护层吸收 14% 生命上限（+2）",
+            "4": "护层吸收 16% 生命上限（+2）",
+            "5": "护层吸收 18% 生命上限（+2）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "refresh",
+            "maxStacks": 1,
+            "capCategories": [
+              "shield_total"
+            ],
+            "fixedContributions": [],
+            "note": "同类护层取较高者，不叠加；单人护层总量 ≤ 生命上限 30%。"
+          },
+          "ai": {
+            "mode": "active_condition",
+            "defaultEnabled": true,
+            "useWhen": "至少 3 名队友生命低于 70%，或首领的范围攻击进入起手时施放；首领战优先留给首领大招。",
+            "avoidWhen": "全队生命都高于 90% 时不施放。"
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": true
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "guardian_oath_dome",
+          "runtimeLineage": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "guardian_n10_worldsworn_vow",
+          "seriesId": "guardian",
+          "stage": 5,
+          "stageName": "万界守誓者",
+          "slot": 2,
+          "name": "万界誓约",
+          "nameEn": "Worldsworn Vow",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "capacity",
+          "tacticalRoleZh": "誓约扩展",
+          "mechanicTags": [
+            "redirect",
+            "objective_guard"
+          ],
+          "energyCost": null,
+          "cooldownSec": null,
+          "internalCooldownSec": null,
+          "maxTriggersPerBattle": null,
+          "target": "自身",
+          "rangePx": null,
+          "chargeable": false,
+          "baseEffect": "护线可同时连接 2 个目标；守护者经护线承受或代受的伤害降低 15%。",
+          "scaling": [
+            {
+              "key": "dr",
+              "label": "承受伤害降低",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                15,
+                18,
+                21,
+                24,
+                27
+              ],
+              "capCategory": "ally_damage_reduction"
+            }
+          ],
+          "rankProgression": {
+            "2": "承受伤害降低 18%（+3）",
+            "3": "承受伤害降低 21%（+3）",
+            "4": "承受伤害降低 24%（+3）",
+            "5": "承受伤害降低 27%（+3）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "single_instance",
+            "maxStacks": 1,
+            "capCategories": [
+              "ally_damage_reduction",
+              "damage_redirect"
+            ],
+            "fixedContributions": [],
+            "note": "固定为 2 条护线，不再增加；减伤与其他减伤相加，合计 ≤ 50%。"
+          },
+          "ai": {
+            "mode": "passive_auto",
+            "defaultEnabled": true,
+            "useWhen": "自动生效；AI 施放护线时把第 2 条连接给守护目标或生命第二低的队友。",
+            "avoidWhen": null
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": true
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": null,
+          "runtimeLineage": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        }
+      ]
+    },
+    {
+      "id": "sword",
+      "aptitude": "武艺",
+      "name": "剑术",
+      "en": "Swordcraft",
+      "role": "连续斩击与看破敌方起手",
+      "stages": [
+        "剑客",
+        "连刃士",
+        "破势剑师",
+        "无隙剑宗",
+        "界线剑圣"
+      ],
+      "finalQuest": "挑战会改变攻击节奏的镜像剑士，在一战内成功应对其三种起手并取胜。",
+      "identity": "主动看破敌方起手，抢在攻击落下之前出剑：非首领被打断，首领起手被延后；以剑势层数驱动连斩与终结。",
+      "contrast": "剑术在敌方攻击落下之前行动，不依赖防御或闪避成功（那是武道），不替队友承伤（守护），不推开敌人（长兵），不蓄力破甲（重武）。",
+      "finalQuestFit": "镜像剑士的三种起手各有对应：快起手→看破（第 2 阶），重起手→破势斩（第 3 阶），虚起手→无隙锋线（第 4 阶，被动）。",
+      "signatureMechanics": [
+        "windup_preempt",
+        "edge_flow"
+      ],
+      "nodes": [
+        {
+          "id": "sword_n01_edge_break",
+          "seriesId": "sword",
+          "stage": 1,
+          "stageName": "剑客",
+          "slot": 1,
+          "name": "破锋斩",
+          "nameEn": "Edge Break",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "windup_punish",
+          "tacticalRoleZh": "起手惩戒",
+          "mechanicTags": [
+            "windup_preempt",
+            "edge_flow"
+          ],
+          "energyCost": 13,
+          "cooldownSec": 5,
+          "internalCooldownSec": null,
+          "maxTriggersPerBattle": null,
+          "target": "一名敌人",
+          "rangePx": 105,
+          "chargeable": false,
+          "baseEffect": "向前斩击，造成攻击力 120% 的伤害。若命中时目标正在起手，额外获得 1 层剑势，并使该次攻击起手延后 0.25 秒。",
+          "scaling": [
+            {
+              "key": "dmg",
+              "label": "伤害",
+              "unit": "% 攻击力",
+              "direction": "higher_is_better",
+              "values": [
+                120,
+                130,
+                140,
+                150,
+                160
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "伤害 130% 攻击力（+10）",
+            "3": "伤害 140% 攻击力（+10）",
+            "4": "伤害 150% 攻击力（+10）",
+            "5": "伤害 160% 攻击力（+10）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "per_trigger",
+            "maxStacks": 1,
+            "capCategories": [
+              "windup_delay"
+            ],
+            "fixedContributions": [
+              {
+                "category": "windup_delay",
+                "value": 0.25
+              }
+            ],
+            "note": "起手延后计入同一攻击周期 0.6 秒上限。"
+          },
+          "ai": {
+            "mode": "active_condition",
+            "defaultEnabled": true,
+            "useWhen": "105 px 内的目标进入起手时优先使用；其他时候在冷却完毕且剑势 ≥ 2 层时作为连段使用。",
+            "avoidWhen": "目标不在 105 px 内时不使用。"
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": null,
+          "runtimeLineage": {
+            "skillId": "sword_slash",
+            "nameKey": "job_skill_sword_slash",
+            "note": "沿用运行时 MVP 技能的阶、名称与能量消耗（10 + 3 × 阶）；数值重新设计。"
+          },
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "sword_n02_twin_edge",
+          "seriesId": "sword",
+          "stage": 1,
+          "stageName": "剑客",
+          "slot": 2,
+          "name": "连刃",
+          "nameEn": "Twin Edge",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "combo_stack",
+          "tacticalRoleZh": "连段叠层",
+          "mechanicTags": [
+            "edge_flow"
+          ],
+          "energyCost": null,
+          "cooldownSec": null,
+          "internalCooldownSec": null,
+          "maxTriggersPerBattle": null,
+          "target": "自身",
+          "rangePx": null,
+          "chargeable": false,
+          "baseEffect": "剑术攻击（普通攻击与剑术技能）每命中同一目标一次获得 1 层剑势，最多 5 层；2 秒内没有命中或更换目标即清空。每层剑势使剑术攻击伤害提高 3%。",
+          "scaling": [
+            {
+              "key": "perStack",
+              "label": "每层增伤",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                3,
+                3.5,
+                4,
+                4.5,
+                5
+              ],
+              "capCategory": "self_damage_bonus",
+              "perStack": true
+            }
+          ],
+          "rankProgression": {
+            "2": "每层增伤 3.5%（+0.5）",
+            "3": "每层增伤 4%（+0.5）",
+            "4": "每层增伤 4.5%（+0.5）",
+            "5": "每层增伤 5%（+0.5）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "stacks",
+            "maxStacks": 5,
+            "capCategories": [
+              "self_damage_bonus"
+            ],
+            "fixedContributions": [],
+            "note": "剑势最多 5 层；自身增伤全来源合计 ≤ 40%。"
+          },
+          "ai": {
+            "mode": "passive_auto",
+            "defaultEnabled": true,
+            "useWhen": "自动生效；AI 尽量保持攻击同一目标以维持剑势。",
+            "avoidWhen": null
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "sword_double_cut",
+          "runtimeLineage": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review",
+          "lineageNote": "草案“连刃”为两段主动斩击；改为剑势叠层被动，作为全系列的连段核心。"
+        },
+        {
+          "id": "sword_n03_sword_arc",
+          "seriesId": "sword",
+          "stage": 2,
+          "stageName": "连刃士",
+          "slot": 1,
+          "name": "回旋剑势",
+          "nameEn": "Sword Arc",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "area_sweep",
+          "tacticalRoleZh": "回旋范围",
+          "mechanicTags": [
+            "edge_flow"
+          ],
+          "energyCost": 16,
+          "cooldownSec": 8,
+          "internalCooldownSec": null,
+          "maxTriggersPerBattle": null,
+          "target": "自身前后 90 px 内的全部敌人",
+          "rangePx": 90,
+          "chargeable": false,
+          "baseEffect": "回身一圈斩击，对前后 90 px 内全部敌人造成攻击力 100% 的伤害；消耗全部剑势，每层再加 6% 伤害。",
+          "scaling": [
+            {
+              "key": "dmg",
+              "label": "伤害",
+              "unit": "% 攻击力",
+              "direction": "higher_is_better",
+              "values": [
+                100,
+                110,
+                120,
+                130,
+                140
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "伤害 110% 攻击力（+10）",
+            "3": "伤害 120% 攻击力（+10）",
+            "4": "伤害 130% 攻击力（+10）",
+            "5": "伤害 140% 攻击力（+10）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "per_trigger",
+            "maxStacks": 1,
+            "capCategories": [
+              "self_damage_bonus"
+            ],
+            "fixedContributions": [
+              {
+                "category": "self_damage_bonus",
+                "value": 30
+              }
+            ],
+            "note": "剑势加成计入自身增伤上限 40%。"
+          },
+          "ai": {
+            "mode": "active_condition",
+            "defaultEnabled": true,
+            "useWhen": "剑势 ≥ 3 层，或 90 px 内有 2 名以上敌人时使用。",
+            "avoidWhen": "剑势为 0 且只有 1 名敌人时不使用。"
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": null,
+          "runtimeLineage": {
+            "skillId": "sword_arc",
+            "nameKey": "job_skill_sword_arc",
+            "note": "沿用运行时 MVP 技能的阶、名称与能量消耗；数值重新设计。"
+          },
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "sword_n04_read_the_opening",
+          "seriesId": "sword",
+          "stage": 2,
+          "stageName": "连刃士",
+          "slot": 2,
+          "name": "看破",
+          "nameEn": "Read the Opening",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "counter_read",
+          "tacticalRoleZh": "抢先看破",
+          "mechanicTags": [
+            "windup_preempt",
+            "dash"
+          ],
+          "energyCost": 14,
+          "cooldownSec": 9,
+          "internalCooldownSec": null,
+          "maxTriggersPerBattle": null,
+          "target": "架势期间 105 px 内开始起手的敌人",
+          "rangePx": 105,
+          "chargeable": false,
+          "baseEffect": "进入 1.2 秒看破架势：期间若 105 px 内有敌人开始起手，立即横向突进，抢在其命中前斩击，造成攻击力 130% 的伤害并打断该次攻击（首领改为起手延后 0.4 秒）。对快起手同样有效；架势内没有敌人起手则不触发。",
+          "scaling": [
+            {
+              "key": "dmg",
+              "label": "伤害",
+              "unit": "% 攻击力",
+              "direction": "higher_is_better",
+              "values": [
+                130,
+                140,
+                150,
+                160,
+                170
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "伤害 140% 攻击力（+10）",
+            "3": "伤害 150% 攻击力（+10）",
+            "4": "伤害 160% 攻击力（+10）",
+            "5": "伤害 170% 攻击力（+10）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "single_instance",
+            "maxStacks": 1,
+            "capCategories": [
+              "control_diminishing",
+              "windup_delay"
+            ],
+            "fixedContributions": [
+              {
+                "category": "windup_delay",
+                "value": 0.4
+              }
+            ],
+            "note": "一次架势只抢先 1 次；打断遵守控制递减，首领起手延后计入 0.6 秒上限。"
+          },
+          "ai": {
+            "mode": "active_condition",
+            "defaultEnabled": true,
+            "useWhen": "105 px 内敌人的起手计时开始时施放；AI 只读取与玩家相同的起手提示，不提前获知。",
+            "avoidWhen": "自身生命低于 25% 且没有队友在场时改为闪避。"
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "sword_riposte",
+          "runtimeLineage": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review",
+          "lineageNote": "草案“逆隙反斩”的“敌人出手时抢先斩击”保留为本节点；改名“看破”以对应系列定位“看破敌方起手”。"
+        },
+        {
+          "id": "sword_n05_stance_breaker",
+          "seriesId": "sword",
+          "stage": 3,
+          "stageName": "破势剑师",
+          "slot": 1,
+          "name": "破势斩",
+          "nameEn": "Stance Breaker",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "heavy_windup_break",
+          "tacticalRoleZh": "破重起手",
+          "mechanicTags": [
+            "windup_preempt"
+          ],
+          "energyCost": 22,
+          "cooldownSec": 12,
+          "internalCooldownSec": null,
+          "maxTriggersPerBattle": null,
+          "target": "一名敌人",
+          "rangePx": 105,
+          "chargeable": false,
+          "baseEffect": "沉肩重斩，造成攻击力 150% 的伤害。若目标正处于重起手，该次重击若仍落下，伤害降低 40%，且目标下一次起手延后 0.4 秒。",
+          "scaling": [
+            {
+              "key": "dmg",
+              "label": "伤害",
+              "unit": "% 攻击力",
+              "direction": "higher_is_better",
+              "values": [
+                150,
+                160,
+                170,
+                180,
+                190
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "伤害 160% 攻击力（+10）",
+            "3": "伤害 170% 攻击力（+10）",
+            "4": "伤害 180% 攻击力（+10）",
+            "5": "伤害 190% 攻击力（+10）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "per_trigger",
+            "maxStacks": 1,
+            "capCategories": [
+              "ally_damage_reduction",
+              "windup_delay"
+            ],
+            "fixedContributions": [
+              {
+                "category": "ally_damage_reduction",
+                "value": 40
+              },
+              {
+                "category": "windup_delay",
+                "value": 0.4
+              }
+            ],
+            "note": "同一次重击只能被削弱一次；起手延后计入 0.6 秒上限。"
+          },
+          "ai": {
+            "mode": "active_condition",
+            "defaultEnabled": true,
+            "useWhen": "105 px 内的目标进入重起手时优先使用。",
+            "avoidWhen": "目标不在重起手时不使用。"
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "sword_stance_break",
+          "runtimeLineage": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "sword_n06_edge_reading",
+          "seriesId": "sword",
+          "stage": 3,
+          "stageName": "破势剑师",
+          "slot": 2,
+          "name": "观锋",
+          "nameEn": "Edge Reading",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "energy_economy",
+          "tacticalRoleZh": "能量循环",
+          "mechanicTags": [
+            "windup_preempt",
+            "energy_refund"
+          ],
+          "energyCost": null,
+          "cooldownSec": null,
+          "internalCooldownSec": null,
+          "maxTriggersPerBattle": 3,
+          "target": "自身",
+          "rangePx": null,
+          "chargeable": false,
+          "baseEffect": "剑术技能在目标起手期间命中时回复 4 点能量；每场战斗最多 3 次。",
+          "scaling": [
+            {
+              "key": "refund",
+              "label": "每次回复",
+              "unit": "点能量",
+              "direction": "higher_is_better",
+              "values": [
+                4,
+                5,
+                6,
+                7,
+                8
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "每次回复 5 点能量（+1）",
+            "3": "每次回复 6 点能量（+1）",
+            "4": "每次回复 7 点能量（+1）",
+            "5": "每次回复 8 点能量（+1）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "per_trigger",
+            "maxStacks": 1,
+            "capCategories": [
+              "energy_return"
+            ],
+            "fixedContributions": [],
+            "note": "每次命中只触发一次；每场最多 3 次，合计 ≤ 24 点。"
+          },
+          "ai": {
+            "mode": "passive_auto",
+            "defaultEnabled": true,
+            "useWhen": "自动触发，无需 AI 决策。",
+            "avoidWhen": null
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": null,
+          "runtimeLineage": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review",
+          "energyReturn": {
+            "perTriggerKey": "refund",
+            "maxTriggersPerBattle": 3
+          }
+        },
+        {
+          "id": "sword_n07_seamless_edge",
+          "seriesId": "sword",
+          "stage": 4,
+          "stageName": "无隙剑宗",
+          "slot": 1,
+          "name": "无隙锋线",
+          "nameEn": "Seamless Edge",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "feint_read",
+          "tacticalRoleZh": "识破虚招",
+          "mechanicTags": [
+            "edge_flow",
+            "windup_preempt"
+          ],
+          "energyCost": null,
+          "cooldownSec": null,
+          "internalCooldownSec": null,
+          "maxTriggersPerBattle": null,
+          "target": "自身",
+          "rangePx": null,
+          "chargeable": false,
+          "baseEffect": "剑势 ≥ 3 层时，剑术技能无视目标 10% 防御。敌人的虚起手（起手中途取消）不会清空剑势，也不会结束看破架势；看破架势在虚起手后延长 0.6 秒。",
+          "scaling": [
+            {
+              "key": "ignore",
+              "label": "无视防御",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                10,
+                12,
+                14,
+                16,
+                18
+              ],
+              "capCategory": "enemy_defense_down"
+            }
+          ],
+          "rankProgression": {
+            "2": "无视防御 12%（+2）",
+            "3": "无视防御 14%（+2）",
+            "4": "无视防御 16%（+2）",
+            "5": "无视防御 18%（+2）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "single_instance",
+            "maxStacks": 1,
+            "capCategories": [
+              "enemy_defense_down"
+            ],
+            "fixedContributions": [],
+            "note": "无视防御计入敌方防御降低全来源上限 30%。"
+          },
+          "ai": {
+            "mode": "passive_auto",
+            "defaultEnabled": true,
+            "useWhen": "自动生效；AI 遇到虚起手后保持架势，不提前出招。",
+            "avoidWhen": null
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "sword_precise_edge",
+          "runtimeLineage": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "sword_n08_flowing_pursuit",
+          "seriesId": "sword",
+          "stage": 4,
+          "stageName": "无隙剑宗",
+          "slot": 2,
+          "name": "流刃追击",
+          "nameEn": "Flowing Pursuit",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "pursuit",
+          "tacticalRoleZh": "突进追斩",
+          "mechanicTags": [
+            "edge_flow",
+            "dash"
+          ],
+          "energyCost": 28,
+          "cooldownSec": 14,
+          "internalCooldownSec": null,
+          "maxTriggersPerBattle": null,
+          "target": "160 px 内的一名敌人",
+          "rangePx": 160,
+          "chargeable": false,
+          "baseEffect": "横向突进到目标身前并连斩 3 次，每次造成攻击力 60% 的伤害；若目标在 1.5 秒内曾被看破（任一剑术技能在其起手中命中），每次命中额外获得 1 层剑势。",
+          "scaling": [
+            {
+              "key": "dmg",
+              "label": "每次伤害",
+              "unit": "% 攻击力",
+              "direction": "higher_is_better",
+              "values": [
+                60,
+                65,
+                70,
+                75,
+                80
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "每次伤害 65% 攻击力（+5）",
+            "3": "每次伤害 70% 攻击力（+5）",
+            "4": "每次伤害 75% 攻击力（+5）",
+            "5": "每次伤害 80% 攻击力（+5）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "per_trigger",
+            "maxStacks": 1,
+            "capCategories": [],
+            "fixedContributions": [],
+            "note": "剑势仍受 5 层上限。"
+          },
+          "ai": {
+            "mode": "active_condition",
+            "defaultEnabled": true,
+            "useWhen": "看破或破势斩命中后 1.5 秒内使用；目标距离超过 105 px 时也用于接近。",
+            "avoidWhen": "目标正处于快起手且在 69 px 内时不使用。"
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "sword_flowing_blades",
+          "runtimeLineage": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "sword_n09_boundary_flash",
+          "seriesId": "sword",
+          "stage": 5,
+          "stageName": "界线剑圣",
+          "slot": 1,
+          "name": "界线一闪",
+          "nameEn": "Boundary Flash",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "finisher",
+          "tacticalRoleZh": "终结",
+          "mechanicTags": [
+            "edge_flow",
+            "dash"
+          ],
+          "energyCost": 46,
+          "cooldownSec": 40,
+          "internalCooldownSec": null,
+          "maxTriggersPerBattle": null,
+          "target": "前方 260 px 横向路径上的全部敌人",
+          "rangePx": 260,
+          "chargeable": false,
+          "baseEffect": "沿战场横向疾闪最多 260 px，穿过路径上的每名敌人各斩一次，造成攻击力 180% 的伤害；消耗全部剑势，每层再加 8% 伤害。路径上没有敌人时不产生额外攻击。",
+          "scaling": [
+            {
+              "key": "dmg",
+              "label": "伤害",
+              "unit": "% 攻击力",
+              "direction": "higher_is_better",
+              "values": [
+                180,
+                195,
+                210,
+                225,
+                240
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "伤害 195% 攻击力（+15）",
+            "3": "伤害 210% 攻击力（+15）",
+            "4": "伤害 225% 攻击力（+15）",
+            "5": "伤害 240% 攻击力（+15）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "per_trigger",
+            "maxStacks": 1,
+            "capCategories": [
+              "self_damage_bonus"
+            ],
+            "fixedContributions": [
+              {
+                "category": "self_damage_bonus",
+                "value": 40
+              }
+            ],
+            "note": "剑势加成计入自身增伤上限 40%。"
+          },
+          "ai": {
+            "mode": "active_condition",
+            "defaultEnabled": true,
+            "useWhen": "剑势 5 层且路径上至少 1 名敌人时；首领战中留到首领被看破或起手被延后之后。",
+            "avoidWhen": "路径上没有敌人时不使用。"
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": true
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "sword_boundary_slash",
+          "runtimeLineage": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "sword_n10_edge_domain",
+          "seriesId": "sword",
+          "stage": 5,
+          "stageName": "界线剑圣",
+          "slot": 2,
+          "name": "界域剑心",
+          "nameEn": "Edge Domain",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "auto_preempt",
+          "tacticalRoleZh": "自动抢先",
+          "mechanicTags": [
+            "windup_preempt"
+          ],
+          "energyCost": 40,
+          "cooldownSec": 50,
+          "internalCooldownSec": null,
+          "maxTriggersPerBattle": 6,
+          "target": "140 px 内的全部敌人",
+          "rangePx": 140,
+          "chargeable": false,
+          "baseEffect": "进入剑心状态 8 秒：140 px 内的敌人每次起手，自动抢先斩击一次，造成攻击力 90% 的伤害并打断该攻击（首领改为起手延后 0.3 秒）；每次起手最多触发 1 次，本状态最多触发 6 次。",
+          "scaling": [
+            {
+              "key": "dmg",
+              "label": "伤害",
+              "unit": "% 攻击力",
+              "direction": "higher_is_better",
+              "values": [
+                90,
+                100,
+                110,
+                120,
+                130
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "伤害 100% 攻击力（+10）",
+            "3": "伤害 110% 攻击力（+10）",
+            "4": "伤害 120% 攻击力（+10）",
+            "5": "伤害 130% 攻击力（+10）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "single_instance",
+            "maxStacks": 1,
+            "capCategories": [
+              "control_diminishing",
+              "windup_delay"
+            ],
+            "fixedContributions": [
+              {
+                "category": "windup_delay",
+                "value": 0.3
+              }
+            ],
+            "note": "状态不叠加；打断遵守控制递减，首领起手延后计入 0.6 秒上限。"
+          },
+          "ai": {
+            "mode": "active_condition",
+            "defaultEnabled": true,
+            "useWhen": "首领战，或 140 px 内有 2 名以上敌人时施放。",
+            "avoidWhen": "140 px 内没有敌人时不施放。"
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": true
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": null,
+          "runtimeLineage": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        }
+      ]
+    },
+    {
+      "id": "heavy",
+      "aptitude": "武艺",
+      "name": "重武",
+      "en": "Heavy Arms",
+      "role": "蓄力破甲与范围冲击",
+      "stages": [
+        "重兵手",
+        "破甲手",
+        "震岳战匠",
+        "裂阵巨匠",
+        "地脉撼者"
+      ],
+      "finalQuest": "在装甲构体试炼中依次击破三块不同防护板，再摧毁核心。",
+      "identity": "以蓄力换取破甲与圆形冲击：蓄力期间获得霸体（单次攻击不中止，仍正常受伤），叠加裂甲、破除护甲值与防护板，并以命中点为中心的冲击同时打击多名敌人。",
+      "contrast": "重武不替队友承伤（守护），不抢起手（剑术），不靠受击后反击（武道），不推开敌人或按直线贯穿（长兵）；它的控制只有原地硬直。",
+      "finalQuestFit": "三块防护板用破甲楔（第 2 阶）与裂甲重击处理；核心暴露后，裂隙追击（第 4 阶）延长破防并提高伤害。",
+      "signatureMechanics": [
+        "charge",
+        "armor_break",
+        "radial_impact",
+        "super_armor"
+      ],
+      "nodes": [
+        {
+          "id": "heavy_n01_armor_cracking_blow",
+          "seriesId": "heavy",
+          "stage": 1,
+          "stageName": "重兵手",
+          "slot": 1,
+          "name": "裂甲重击",
+          "nameEn": "Armor-Cracking Blow",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "armor_break",
+          "tacticalRoleZh": "破甲",
+          "mechanicTags": [
+            "charge",
+            "armor_break"
+          ],
+          "energyCost": 16,
+          "cooldownSec": 8,
+          "internalCooldownSec": null,
+          "maxTriggersPerBattle": null,
+          "target": "一名敌人",
+          "rangePx": 90,
+          "chargeable": true,
+          "baseEffect": "可蓄力的重击，造成攻击力 140% 的伤害并附加 1 层裂甲（每层防御降低 5%，最多 4 层，持续 8 秒，再次附加时刷新）；满蓄时附加 2 层。",
+          "scaling": [
+            {
+              "key": "dmg",
+              "label": "伤害",
+              "unit": "% 攻击力",
+              "direction": "higher_is_better",
+              "values": [
+                140,
+                155,
+                170,
+                185,
+                200
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "伤害 155% 攻击力（+15）",
+            "3": "伤害 170% 攻击力（+15）",
+            "4": "伤害 185% 攻击力（+15）",
+            "5": "伤害 200% 攻击力（+15）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "stacks",
+            "maxStacks": 4,
+            "capCategories": [
+              "enemy_defense_down"
+            ],
+            "fixedContributions": [
+              {
+                "category": "enemy_defense_down",
+                "value": 20
+              }
+            ],
+            "note": "裂甲最多 4 层（20%）；计入敌方防御降低全来源上限 30%。"
+          },
+          "ai": {
+            "mode": "active_condition",
+            "defaultEnabled": true,
+            "useWhen": "目标裂甲不足 4 层时使用；AI 默认蓄 1 段（可在策略中改为满蓄）。",
+            "avoidWhen": "目标快起手剩余不足 0.6 秒时不蓄力，直接出招或改为防御。"
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": {
+            "name": "强力开启",
+            "effect": "在科技文明圈场景中撬开标记为“卡死”的储物柜与补给箱，取得少量普通补给（同类补给在商店与战斗掉落中都能取得）。不含剧情物品或记录，不改变任何路线；卡死的柜子之后一直保留，任何角色切到重武后都能再来开启。",
+            "mvpLocations": [
+              "扬克斯郊外",
+              "华盛顿特区 · 国会大厦遗址（科技勘察前哨）",
+              "芝加哥 · 卢普区"
+            ],
+            "gate": "optional-advantage-only",
+            "requiresCurrentSeries": true,
+            "storyMandatory": false
+          },
+          "supersedesDraftNodeId": "heavy_armor_crack",
+          "runtimeLineage": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "heavy_n02_mountain_anchor",
+          "seriesId": "heavy",
+          "stage": 1,
+          "stageName": "重兵手",
+          "slot": 2,
+          "name": "山岳定锚",
+          "nameEn": "Mountain Anchor",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "super_armor",
+          "tacticalRoleZh": "霸体",
+          "mechanicTags": [
+            "super_armor",
+            "charge"
+          ],
+          "energyCost": null,
+          "cooldownSec": null,
+          "internalCooldownSec": null,
+          "maxTriggersPerBattle": null,
+          "target": "自身",
+          "rangePx": null,
+          "chargeable": false,
+          "baseEffect": "蓄力和重武技能出招期间获得霸体：单次攻击不会中止自身的蓄力与出招（1 秒内连续 2 次命中仍会中止），并获得 10% 减伤。",
+          "scaling": [
+            {
+              "key": "dr",
+              "label": "减伤",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                10,
+                12,
+                14,
+                16,
+                18
+              ],
+              "capCategory": "ally_damage_reduction"
+            }
+          ],
+          "rankProgression": {
+            "2": "减伤 12%（+2）",
+            "3": "减伤 14%（+2）",
+            "4": "减伤 16%（+2）",
+            "5": "减伤 18%（+2）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "single_instance",
+            "maxStacks": 1,
+            "capCategories": [
+              "ally_damage_reduction"
+            ],
+            "fixedContributions": [],
+            "note": "霸体不提供免伤；减伤与其他减伤相加，合计 ≤ 50%。"
+          },
+          "ai": {
+            "mode": "passive_auto",
+            "defaultEnabled": true,
+            "useWhen": "自动生效；AI 在霸体期间不因受击取消蓄力。",
+            "avoidWhen": null
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "heavy_unmoving_anchor",
+          "runtimeLineage": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "heavy_n03_plate_wedge",
+          "seriesId": "heavy",
+          "stage": 2,
+          "stageName": "破甲手",
+          "slot": 1,
+          "name": "破甲楔",
+          "nameEn": "Plate Wedge",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "plate_break",
+          "tacticalRoleZh": "破除防护板",
+          "mechanicTags": [
+            "armor_break"
+          ],
+          "energyCost": 18,
+          "cooldownSec": 10,
+          "internalCooldownSec": null,
+          "maxTriggersPerBattle": null,
+          "target": "一名敌人（有护甲值或防护板时优先打击该部位）",
+          "rangePx": 90,
+          "chargeable": false,
+          "baseEffect": "楔击造成攻击力 100% 的伤害，并对敌方护甲值或一块防护板造成攻击力 200% 的破坏；若目标裂甲 ≥ 3 层，消耗全部裂甲，每层追加攻击力 25% 的伤害。",
+          "scaling": [
+            {
+              "key": "plate",
+              "label": "对护甲值／防护板的破坏",
+              "unit": "% 攻击力",
+              "direction": "higher_is_better",
+              "values": [
+                200,
+                220,
+                240,
+                260,
+                280
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "对护甲值／防护板的破坏 220% 攻击力（+20）",
+            "3": "对护甲值／防护板的破坏 240% 攻击力（+20）",
+            "4": "对护甲值／防护板的破坏 260% 攻击力（+20）",
+            "5": "对护甲值／防护板的破坏 280% 攻击力（+20）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "per_trigger",
+            "maxStacks": 1,
+            "capCategories": [],
+            "fixedContributions": [],
+            "note": "只消耗裂甲，不新增叠层。"
+          },
+          "ai": {
+            "mode": "active_condition",
+            "defaultEnabled": true,
+            "useWhen": "目标有未破除的护甲值或防护板时优先使用；否则在裂甲 ≥ 3 层时使用。",
+            "avoidWhen": "目标没有护甲值、防护板且裂甲不足 3 层时不使用。"
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": null,
+          "runtimeLineage": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "heavy_n04_concussive_strike",
+          "seriesId": "heavy",
+          "stage": 2,
+          "stageName": "破甲手",
+          "slot": 2,
+          "name": "震击",
+          "nameEn": "Concussive Strike",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "stagger",
+          "tacticalRoleZh": "硬直",
+          "mechanicTags": [
+            "charge",
+            "stagger"
+          ],
+          "energyCost": 14,
+          "cooldownSec": 12,
+          "internalCooldownSec": null,
+          "maxTriggersPerBattle": null,
+          "target": "一名敌人",
+          "rangePx": 80,
+          "chargeable": true,
+          "baseEffect": "可蓄力的钝击，造成攻击力 90% 的伤害并使目标原地硬直 0.6 秒；满蓄时硬直再加 0.3 秒。首领不硬直，改为对其护甲值追加攻击力 60% 的破坏。",
+          "scaling": [
+            {
+              "key": "stagger",
+              "label": "硬直时间",
+              "unit": "秒",
+              "direction": "higher_is_better",
+              "values": [
+                0.6,
+                0.7,
+                0.8,
+                0.9,
+                1
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "硬直时间 0.7 秒（+0.1）",
+            "3": "硬直时间 0.8 秒（+0.1）",
+            "4": "硬直时间 0.9 秒（+0.1）",
+            "5": "硬直时间 1 秒（+0.1）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "single_instance",
+            "maxStacks": 1,
+            "capCategories": [
+              "control_diminishing"
+            ],
+            "fixedContributions": [],
+            "note": "硬直遵守控制递减。"
+          },
+          "ai": {
+            "mode": "active_condition",
+            "defaultEnabled": true,
+            "useWhen": "目标即将对队友出手（起手中）且在 80 px 内时使用。",
+            "avoidWhen": "目标处于控制递减免疫窗口时不使用。"
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "heavy_shock_push",
+          "runtimeLineage": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review",
+          "lineageNote": "草案“震退”的推开效果改为原地硬直；推开与控距只归长兵。"
+        },
+        {
+          "id": "heavy_n05_quake_slam",
+          "seriesId": "heavy",
+          "stage": 3,
+          "stageName": "震岳战匠",
+          "slot": 1,
+          "name": "震岳重砸",
+          "nameEn": "Quake Slam",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "area_impact",
+          "tacticalRoleZh": "圆形冲击",
+          "mechanicTags": [
+            "charge",
+            "radial_impact",
+            "armor_break"
+          ],
+          "energyCost": 26,
+          "cooldownSec": 16,
+          "internalCooldownSec": null,
+          "maxTriggersPerBattle": null,
+          "target": "以身前 40 px 处为中心、半径 110 px 内的全部敌人",
+          "rangePx": 110,
+          "chargeable": true,
+          "baseEffect": "可蓄力的下砸，命中以身前 40 px 处为中心、半径 110 px 内的全部敌人，造成攻击力 130% 的伤害（圈边缘降为 70%），各附加 1 层裂甲。冲击只在命中瞬间生效，不留下持续区域。",
+          "scaling": [
+            {
+              "key": "dmg",
+              "label": "中心伤害",
+              "unit": "% 攻击力",
+              "direction": "higher_is_better",
+              "values": [
+                130,
+                145,
+                160,
+                175,
+                190
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "中心伤害 145% 攻击力（+15）",
+            "3": "中心伤害 160% 攻击力（+15）",
+            "4": "中心伤害 175% 攻击力（+15）",
+            "5": "中心伤害 190% 攻击力（+15）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "per_trigger",
+            "maxStacks": 1,
+            "capCategories": [
+              "enemy_defense_down"
+            ],
+            "fixedContributions": [
+              {
+                "category": "enemy_defense_down",
+                "value": 20
+              }
+            ],
+            "note": "裂甲规则同裂甲重击（每层 5%，最多 4 层）。"
+          },
+          "ai": {
+            "mode": "active_condition",
+            "defaultEnabled": true,
+            "useWhen": "半径内有 2 名以上敌人，或单体目标裂甲不足 4 层且裂甲重击在冷却时使用。",
+            "avoidWhen": "半径内没有敌人时不使用。"
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "heavy_line_sweep",
+          "runtimeLineage": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review",
+          "lineageNote": "草案“破阵横扫”的前方横扫改为圆形冲击，直线范围只归长兵。"
+        },
+        {
+          "id": "heavy_n06_weighted_momentum",
+          "seriesId": "heavy",
+          "stage": 3,
+          "stageName": "震岳战匠",
+          "slot": 2,
+          "name": "持重蓄势",
+          "nameEn": "Weighted Momentum",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "tempo",
+          "tacticalRoleZh": "蓄力节奏",
+          "mechanicTags": [
+            "charge"
+          ],
+          "energyCost": null,
+          "cooldownSec": null,
+          "internalCooldownSec": null,
+          "maxTriggersPerBattle": null,
+          "target": "自身",
+          "rangePx": null,
+          "chargeable": false,
+          "baseEffect": "满蓄的重武技能命中后获得重势（8 秒内有效）：下一次可蓄力技能的每段蓄力时间缩短 15%。",
+          "scaling": [
+            {
+              "key": "faster",
+              "label": "蓄力时间缩短",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                15,
+                18,
+                21,
+                24,
+                27
+              ],
+              "capCategory": "charge_time_reduction"
+            }
+          ],
+          "rankProgression": {
+            "2": "蓄力时间缩短 18%（+3）",
+            "3": "蓄力时间缩短 21%（+3）",
+            "4": "蓄力时间缩短 24%（+3）",
+            "5": "蓄力时间缩短 27%（+3）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "single_instance",
+            "maxStacks": 1,
+            "capCategories": [
+              "charge_time_reduction"
+            ],
+            "fixedContributions": [],
+            "note": "重势不叠加，只刷新；蓄力缩短全来源合计 ≤ 60%，每段不低于 0.24 秒。"
+          },
+          "ai": {
+            "mode": "passive_auto",
+            "defaultEnabled": true,
+            "useWhen": "自动生效；AI 满蓄命中后优先接下一次可蓄力技能，以用上重势。",
+            "avoidWhen": null
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "heavy_guard_charge",
+          "runtimeLineage": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review",
+          "lineageNote": "草案“持重蓄势”由“防御成功积累冲击”改为“满蓄命中积累重势”，防御反击只归武道。"
+        },
+        {
+          "id": "heavy_n07_shatter_link",
+          "seriesId": "heavy",
+          "stage": 4,
+          "stageName": "裂阵巨匠",
+          "slot": 1,
+          "name": "崩甲连携",
+          "nameEn": "Shatter Link",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "vulnerability",
+          "tacticalRoleZh": "易伤连携",
+          "mechanicTags": [
+            "armor_break"
+          ],
+          "energyCost": 28,
+          "cooldownSec": 20,
+          "internalCooldownSec": null,
+          "maxTriggersPerBattle": null,
+          "target": "一名裂甲 ≥ 2 层的敌人",
+          "rangePx": 90,
+          "chargeable": false,
+          "baseEffect": "重击造成攻击力 120% 的伤害；若目标裂甲 ≥ 2 层，消耗全部裂甲，使其进入崩甲 6 秒：受到全队伤害提高 10%。裂甲不足 2 层时只造成伤害。",
+          "scaling": [
+            {
+              "key": "vuln",
+              "label": "受到全队伤害提高",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                10,
+                12,
+                14,
+                16,
+                18
+              ],
+              "capCategory": "enemy_damage_taken_up"
+            }
+          ],
+          "rankProgression": {
+            "2": "受到全队伤害提高 12%（+2）",
+            "3": "受到全队伤害提高 14%（+2）",
+            "4": "受到全队伤害提高 16%（+2）",
+            "5": "受到全队伤害提高 18%（+2）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "refresh",
+            "maxStacks": 1,
+            "capCategories": [
+              "enemy_damage_taken_up"
+            ],
+            "fixedContributions": [],
+            "note": "崩甲只刷新；计入敌方受到伤害增加全来源上限 25%。"
+          },
+          "ai": {
+            "mode": "active_condition",
+            "defaultEnabled": true,
+            "useWhen": "目标裂甲 ≥ 3 层，且至少 1 名队友在其 160 px 内时使用。",
+            "avoidWhen": "目标裂甲不足 2 层时不使用。"
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "heavy_plate_collapse",
+          "runtimeLineage": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "heavy_n08_breach_follow_through",
+          "seriesId": "heavy",
+          "stage": 4,
+          "stageName": "裂阵巨匠",
+          "slot": 2,
+          "name": "裂隙追击",
+          "nameEn": "Breach Follow-Through",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "breach",
+          "tacticalRoleZh": "破防追击",
+          "mechanicTags": [
+            "armor_break"
+          ],
+          "energyCost": null,
+          "cooldownSec": null,
+          "internalCooldownSec": null,
+          "maxTriggersPerBattle": null,
+          "target": "自身",
+          "rangePx": null,
+          "chargeable": false,
+          "baseEffect": "任一敌人的护甲值或一块防护板被任何队友破除时，其破防状态延长 1 秒；目标破防期间，重武技能伤害提高 20%。",
+          "scaling": [
+            {
+              "key": "dmg",
+              "label": "破防期间增伤",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                20,
+                24,
+                28,
+                32,
+                36
+              ],
+              "capCategory": "self_damage_bonus"
+            }
+          ],
+          "rankProgression": {
+            "2": "破防期间增伤 24%（+4）",
+            "3": "破防期间增伤 28%（+4）",
+            "4": "破防期间增伤 32%（+4）",
+            "5": "破防期间增伤 36%（+4）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "single_instance",
+            "maxStacks": 1,
+            "capCategories": [
+              "self_damage_bonus"
+            ],
+            "fixedContributions": [],
+            "note": "破防延长每次破除只加一次；增伤计入自身增伤上限 40%。"
+          },
+          "ai": {
+            "mode": "passive_auto",
+            "defaultEnabled": true,
+            "useWhen": "自动生效；AI 在目标破防时优先使用重武主动技能。",
+            "avoidWhen": null
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": null,
+          "runtimeLineage": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "heavy_n09_earthpulse_resonance",
+          "seriesId": "heavy",
+          "stage": 5,
+          "stageName": "地脉撼者",
+          "slot": 1,
+          "name": "地脉震响",
+          "nameEn": "Earthpulse Resonance",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "finisher",
+          "tacticalRoleZh": "终结",
+          "mechanicTags": [
+            "charge",
+            "radial_impact",
+            "armor_break"
+          ],
+          "energyCost": 48,
+          "cooldownSec": 45,
+          "internalCooldownSec": null,
+          "maxTriggersPerBattle": null,
+          "target": "以自身为中心、半径 180 px 内的全部敌人",
+          "rangePx": 180,
+          "chargeable": true,
+          "baseEffect": "可蓄力的震响，以自身为中心、半径 180 px 内的全部敌人受到攻击力 200% 的伤害，各附加 2 层裂甲；对护甲值与防护板的破坏为伤害的 1.5 倍。冲击只在命中瞬间生效。",
+          "scaling": [
+            {
+              "key": "dmg",
+              "label": "伤害",
+              "unit": "% 攻击力",
+              "direction": "higher_is_better",
+              "values": [
+                200,
+                215,
+                230,
+                245,
+                260
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "伤害 215% 攻击力（+15）",
+            "3": "伤害 230% 攻击力（+15）",
+            "4": "伤害 245% 攻击力（+15）",
+            "5": "伤害 260% 攻击力（+15）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "per_trigger",
+            "maxStacks": 1,
+            "capCategories": [
+              "enemy_defense_down"
+            ],
+            "fixedContributions": [
+              {
+                "category": "enemy_defense_down",
+                "value": 20
+              }
+            ],
+            "note": "裂甲最多 4 层（20%）。"
+          },
+          "ai": {
+            "mode": "active_condition",
+            "defaultEnabled": true,
+            "useWhen": "半径内有 3 名以上敌人，或首领处于破防时使用。",
+            "avoidWhen": "半径内没有敌人时不使用。"
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": true
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "heavy_earth_pulse",
+          "runtimeLineage": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "heavy_n10_mountain_shakers_surge",
+          "seriesId": "heavy",
+          "stage": 5,
+          "stageName": "地脉撼者",
+          "slot": 2,
+          "name": "撼岳之势",
+          "nameEn": "Mountain-Shaker's Surge",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "empower",
+          "tacticalRoleZh": "蓄力强化",
+          "mechanicTags": [
+            "charge",
+            "radial_impact"
+          ],
+          "energyCost": 34,
+          "cooldownSec": 50,
+          "internalCooldownSec": null,
+          "maxTriggersPerBattle": null,
+          "target": "自身",
+          "rangePx": 100,
+          "chargeable": false,
+          "baseEffect": "10 秒内重武技能每段蓄力时间缩短 50%；满蓄命中时在命中点追加一次半径 100 px 的余震，造成攻击力 40% 的伤害。",
+          "scaling": [
+            {
+              "key": "after",
+              "label": "余震伤害",
+              "unit": "% 攻击力",
+              "direction": "higher_is_better",
+              "values": [
+                40,
+                45,
+                50,
+                55,
+                60
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "余震伤害 45% 攻击力（+5）",
+            "3": "余震伤害 50% 攻击力（+5）",
+            "4": "余震伤害 55% 攻击力（+5）",
+            "5": "余震伤害 60% 攻击力（+5）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "single_instance",
+            "maxStacks": 1,
+            "capCategories": [
+              "charge_time_reduction"
+            ],
+            "fixedContributions": [
+              {
+                "category": "charge_time_reduction",
+                "value": 50
+              }
+            ],
+            "note": "状态不叠加；与持重蓄势合计的蓄力缩短 ≤ 60%。"
+          },
+          "ai": {
+            "mode": "active_condition",
+            "defaultEnabled": true,
+            "useWhen": "首领护甲值即将破除前，或 180 px 内有 3 名以上敌人时施放。",
+            "avoidWhen": "能量不足以再放 1 个重武技能时不施放。"
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": true
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": null,
+          "runtimeLineage": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        }
+      ]
+    },
+    {
+      "id": "martial",
+      "aptitude": "武艺",
+      "name": "武道",
+      "en": "Martial Arts",
+      "role": "格挡、反击与自身调息",
+      "stages": [
+        "练武者",
+        "劲路师",
+        "调息宗师",
+        "化劲武尊",
+        "无形拳圣"
+      ],
+      "finalQuest": "完成四段连续的攻防试炼，每段使用一次不同的防御或反击方式。",
+      "identity": "徒手近身，先承接再还击：在防御成功或闪避使攻击落空的瞬间反击，积累“劲”，并以调息维持自身生命与能量。",
+      "contrast": "武道只在攻击落下之后行动（剑术在落下之前），只保护自身（守护保护他人），反击带来原地硬直而不推开敌人（长兵），不蓄力破甲（重武）。",
+      "finalQuestFit": "四段攻防可分别用四种方式：沾衣反打（承接反打）、连环身法（闪身反击）、化劲掌（化劲反震）、借力回击（防御反击）；稳息用于段间调息。",
+      "signatureMechanics": [
+        "post_impact_counter",
+        "jin",
+        "breath"
+      ],
+      "nodes": [
+        {
+          "id": "martial_n01_breath_strike",
+          "seriesId": "martial",
+          "stage": 1,
+          "stageName": "练武者",
+          "slot": 1,
+          "name": "调息击",
+          "nameEn": "Breath Strike",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "guard_prep",
+          "tacticalRoleZh": "攻守转换",
+          "mechanicTags": [
+            "breath",
+            "guard_efficiency"
+          ],
+          "energyCost": 10,
+          "cooldownSec": 6,
+          "internalCooldownSec": null,
+          "maxTriggersPerBattle": null,
+          "target": "一名敌人",
+          "rangePx": 60,
+          "chargeable": false,
+          "baseEffect": "两段徒手短打，每段造成攻击力 55% 的伤害；命中后 3 秒内的下一次防御不消耗能量（平时 6 点）。",
+          "scaling": [
+            {
+              "key": "dmg",
+              "label": "每段伤害",
+              "unit": "% 攻击力",
+              "direction": "higher_is_better",
+              "values": [
+                55,
+                60,
+                65,
+                70,
+                75
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "每段伤害 60% 攻击力（+5）",
+            "3": "每段伤害 65% 攻击力（+5）",
+            "4": "每段伤害 70% 攻击力（+5）",
+            "5": "每段伤害 75% 攻击力（+5）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "single_instance",
+            "maxStacks": 1,
+            "capCategories": [],
+            "fixedContributions": [],
+            "note": "免费防御只保留 1 次，不累积。"
+          },
+          "ai": {
+            "mode": "active_condition",
+            "defaultEnabled": true,
+            "useWhen": "目标在 60 px 内且没有起手时使用，为下一次防御做准备。",
+            "avoidWhen": "目标起手剩余不足 0.4 秒时改为防御。"
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "martial_breath_strike",
+          "runtimeLineage": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "martial_n02_borrowed_force",
+          "seriesId": "martial",
+          "stage": 1,
+          "stageName": "练武者",
+          "slot": 2,
+          "name": "借力回击",
+          "nameEn": "Borrowed Force",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "guard_counter",
+          "tacticalRoleZh": "防御反击",
+          "mechanicTags": [
+            "post_impact_counter",
+            "jin"
+          ],
+          "energyCost": null,
+          "cooldownSec": null,
+          "internalCooldownSec": null,
+          "maxTriggersPerBattle": null,
+          "target": "自身",
+          "rangePx": null,
+          "chargeable": false,
+          "baseEffect": "成功防御近身攻击时获得 1 层劲（最多 5 层，6 秒内没有获得新劲即清空），且 2 秒内的下一次普通攻击附加攻击力 30% 的反击伤害。同一次敌方攻击最多触发一个反击效果。",
+          "scaling": [
+            {
+              "key": "counter",
+              "label": "反击伤害",
+              "unit": "% 攻击力",
+              "direction": "higher_is_better",
+              "values": [
+                30,
+                35,
+                40,
+                45,
+                50
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "反击伤害 35% 攻击力（+5）",
+            "3": "反击伤害 40% 攻击力（+5）",
+            "4": "反击伤害 45% 攻击力（+5）",
+            "5": "反击伤害 50% 攻击力（+5）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "stacks",
+            "maxStacks": 5,
+            "capCategories": [],
+            "fixedContributions": [],
+            "note": "劲最多 5 层；同一次敌方攻击只触发一个反击效果（取倍率最高者）。"
+          },
+          "ai": {
+            "mode": "passive_auto",
+            "defaultEnabled": true,
+            "useWhen": "自动触发；AI 防御成功后 2 秒内接普通攻击。",
+            "avoidWhen": null
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "martial_borrow_force",
+          "runtimeLineage": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "martial_n03_clinging_counter",
+          "seriesId": "martial",
+          "stage": 2,
+          "stageName": "劲路师",
+          "slot": 1,
+          "name": "沾衣反打",
+          "nameEn": "Clinging Counter",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "parry_counter",
+          "tacticalRoleZh": "承接反打",
+          "mechanicTags": [
+            "post_impact_counter",
+            "jin",
+            "stagger"
+          ],
+          "energyCost": 14,
+          "cooldownSec": 9,
+          "internalCooldownSec": null,
+          "maxTriggersPerBattle": null,
+          "target": "架势期间命中自身的近身攻击者",
+          "rangePx": 60,
+          "chargeable": false,
+          "baseEffect": "摆出 1.0 秒承接架势：期间被近身攻击命中时，只受到原始伤害的 20%（不消耗防御能量），随即反打造成攻击力 150% 的伤害，使攻击者原地硬直 0.4 秒（首领不硬直），并获得 2 层劲。架势内未被攻击则不触发；对远程攻击无效。",
+          "scaling": [
+            {
+              "key": "dmg",
+              "label": "反打伤害",
+              "unit": "% 攻击力",
+              "direction": "higher_is_better",
+              "values": [
+                150,
+                160,
+                170,
+                180,
+                190
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "反打伤害 160% 攻击力（+10）",
+            "3": "反打伤害 170% 攻击力（+10）",
+            "4": "反打伤害 180% 攻击力（+10）",
+            "5": "反打伤害 190% 攻击力（+10）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "single_instance",
+            "maxStacks": 1,
+            "capCategories": [
+              "damage_floor",
+              "control_diminishing"
+            ],
+            "fixedContributions": [
+              {
+                "category": "damage_floor",
+                "value": 20
+              }
+            ],
+            "note": "一次架势只承接 1 次；硬直遵守控制递减；受到伤害不低于原始伤害的 10%。"
+          },
+          "ai": {
+            "mode": "active_condition",
+            "defaultEnabled": true,
+            "useWhen": "60 px 内敌人的起手剩余不超过 0.5 秒时施放（AI 读取与玩家相同的起手提示）。",
+            "avoidWhen": "敌人为远程攻击时不施放。"
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": null,
+          "runtimeLineage": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "martial_n04_steady_breath",
+          "seriesId": "martial",
+          "stage": 2,
+          "stageName": "劲路师",
+          "slot": 2,
+          "name": "稳息",
+          "nameEn": "Steady Breath",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "self_heal",
+          "tacticalRoleZh": "自身调息",
+          "mechanicTags": [
+            "breath"
+          ],
+          "energyCost": 16,
+          "cooldownSec": 30,
+          "internalCooldownSec": null,
+          "maxTriggersPerBattle": 3,
+          "target": "自身（仅自身）",
+          "rangePx": null,
+          "chargeable": false,
+          "baseEffect": "调息 6 秒，逐秒恢复自身生命，共计生命上限的 12%；期间受到未防御的攻击会中断调息，已恢复的部分保留。每场战斗最多 3 次。",
+          "scaling": [
+            {
+              "key": "heal",
+              "label": "恢复总量",
+              "unit": "% 生命上限",
+              "direction": "higher_is_better",
+              "values": [
+                12,
+                14,
+                16,
+                18,
+                20
+              ],
+              "capCategory": "self_heal_per_battle"
+            }
+          ],
+          "rankProgression": {
+            "2": "恢复总量 14% 生命上限（+2）",
+            "3": "恢复总量 16% 生命上限（+2）",
+            "4": "恢复总量 18% 生命上限（+2）",
+            "5": "恢复总量 20% 生命上限（+2）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "single_instance",
+            "maxStacks": 1,
+            "capCategories": [
+              "self_heal_per_battle"
+            ],
+            "fixedContributions": [],
+            "note": "调息不叠加；武道自身恢复每场合计 ≤ 生命上限 60%。"
+          },
+          "ai": {
+            "mode": "active_condition",
+            "defaultEnabled": true,
+            "useWhen": "自身生命低于 50%，且 100 px 内没有敌人处于起手时施放；只作用于自身，不进入全队治疗的 AI 排序。",
+            "avoidWhen": "自身生命高于 80% 时不施放。"
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "martial_still_breath",
+          "runtimeLineage": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "martial_n05_chain_footwork",
+          "seriesId": "martial",
+          "stage": 3,
+          "stageName": "调息宗师",
+          "slot": 1,
+          "name": "连环身法",
+          "nameEn": "Chain Footwork",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "dodge_counter",
+          "tacticalRoleZh": "闪身反击",
+          "mechanicTags": [
+            "post_impact_counter",
+            "jin",
+            "dash"
+          ],
+          "energyCost": 20,
+          "cooldownSec": 10,
+          "internalCooldownSec": null,
+          "maxTriggersPerBattle": null,
+          "target": "自身；反击目标为攻击落空的敌人",
+          "rangePx": 60,
+          "chargeable": false,
+          "baseEffect": "执行一次闪避（无敌 0.27 秒，不另付闪避的 12 点能量）；闪避期间若有近身攻击落空，随即反击造成攻击力 120% 的伤害并获得 1 层劲。",
+          "scaling": [
+            {
+              "key": "dmg",
+              "label": "反击伤害",
+              "unit": "% 攻击力",
+              "direction": "higher_is_better",
+              "values": [
+                120,
+                130,
+                140,
+                150,
+                160
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "反击伤害 130% 攻击力（+10）",
+            "3": "反击伤害 140% 攻击力（+10）",
+            "4": "反击伤害 150% 攻击力（+10）",
+            "5": "反击伤害 160% 攻击力（+10）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "single_instance",
+            "maxStacks": 1,
+            "capCategories": [],
+            "fixedContributions": [],
+            "note": "一次闪避只反击 1 次；同一次敌方攻击只触发一个反击效果。"
+          },
+          "ai": {
+            "mode": "active_condition",
+            "defaultEnabled": true,
+            "useWhen": "近身攻击即将命中自身（起手剩余不超过 0.3 秒），且防御能量不足或自身生命低于 40% 时施放。",
+            "avoidWhen": "没有敌人在 100 px 内时不施放。"
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "martial_chain_step",
+          "runtimeLineage": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "martial_n06_breath_return",
+          "seriesId": "martial",
+          "stage": 3,
+          "stageName": "调息宗师",
+          "slot": 2,
+          "name": "吐纳归元",
+          "nameEn": "Breath Return",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "energy_economy",
+          "tacticalRoleZh": "能量循环",
+          "mechanicTags": [
+            "breath",
+            "energy_refund"
+          ],
+          "energyCost": null,
+          "cooldownSec": null,
+          "internalCooldownSec": null,
+          "maxTriggersPerBattle": 4,
+          "target": "自身",
+          "rangePx": null,
+          "chargeable": false,
+          "baseEffect": "武道的反击效果（借力回击、沾衣反打、连环身法、化劲掌、无相守意）命中时回复 4 点能量；每场战斗最多 4 次。",
+          "scaling": [
+            {
+              "key": "refund",
+              "label": "每次回复",
+              "unit": "点能量",
+              "direction": "higher_is_better",
+              "values": [
+                4,
+                5,
+                6,
+                7,
+                8
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "每次回复 5 点能量（+1）",
+            "3": "每次回复 6 点能量（+1）",
+            "4": "每次回复 7 点能量（+1）",
+            "5": "每次回复 8 点能量（+1）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "per_trigger",
+            "maxStacks": 1,
+            "capCategories": [
+              "energy_return"
+            ],
+            "fixedContributions": [],
+            "note": "每次反击只触发一次；每场最多 4 次，合计 ≤ 32 点。"
+          },
+          "ai": {
+            "mode": "passive_auto",
+            "defaultEnabled": true,
+            "useWhen": "自动触发，无需 AI 决策。",
+            "avoidWhen": null
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": null,
+          "runtimeLineage": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review",
+          "energyReturn": {
+            "perTriggerKey": "refund",
+            "maxTriggersPerBattle": 4
+          }
+        },
+        {
+          "id": "martial_n07_yielding_palm",
+          "seriesId": "martial",
+          "stage": 4,
+          "stageName": "化劲武尊",
+          "slot": 1,
+          "name": "化劲掌",
+          "nameEn": "Yielding Palm",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "force_redirect",
+          "tacticalRoleZh": "化劲反震",
+          "mechanicTags": [
+            "post_impact_counter",
+            "jin",
+            "stagger"
+          ],
+          "energyCost": 26,
+          "cooldownSec": 16,
+          "internalCooldownSec": null,
+          "maxTriggersPerBattle": null,
+          "target": "化劲窗口内命中自身的近身攻击者",
+          "rangePx": 60,
+          "chargeable": false,
+          "baseEffect": "0.8 秒化劲窗口：期间受到的下一次近身攻击只承受原始伤害的 15%，并把该次原始伤害的 60% 以掌劲反震给攻击者，使其原地硬直 0.5 秒（首领不硬直）。消耗全部劲，每层反震比例再加 5%。对远程攻击无效。",
+          "scaling": [
+            {
+              "key": "reflect",
+              "label": "反震比例",
+              "unit": "% 原始伤害",
+              "direction": "higher_is_better",
+              "values": [
+                60,
+                70,
+                80,
+                90,
+                100
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "反震比例 70% 原始伤害（+10）",
+            "3": "反震比例 80% 原始伤害（+10）",
+            "4": "反震比例 90% 原始伤害（+10）",
+            "5": "反震比例 100% 原始伤害（+10）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "single_instance",
+            "maxStacks": 1,
+            "capCategories": [
+              "reflect_cap",
+              "damage_floor",
+              "control_diminishing"
+            ],
+            "fixedContributions": [
+              {
+                "category": "damage_floor",
+                "value": 15
+              }
+            ],
+            "note": "单次反震不超过自身攻击力 200%；硬直遵守控制递减；受到伤害不低于原始伤害的 10%。"
+          },
+          "ai": {
+            "mode": "active_condition",
+            "defaultEnabled": true,
+            "useWhen": "首领攻击或重起手即将命中自身时优先施放；普通攻击改用沾衣反打。",
+            "avoidWhen": "敌人为远程攻击时不施放。"
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "martial_yielding_palm",
+          "runtimeLineage": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review",
+          "lineageNote": "草案“化劲掌”的推退目标改为原地硬直；推开只归长兵。"
+        },
+        {
+          "id": "martial_n08_calm_guard",
+          "seriesId": "martial",
+          "stage": 4,
+          "stageName": "化劲武尊",
+          "slot": 2,
+          "name": "静心守势",
+          "nameEn": "Calm Guard",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "status_resist",
+          "tacticalRoleZh": "异常抗性",
+          "mechanicTags": [
+            "jin",
+            "status_guard"
+          ],
+          "energyCost": null,
+          "cooldownSec": null,
+          "internalCooldownSec": null,
+          "maxTriggersPerBattle": null,
+          "target": "自身",
+          "rangePx": null,
+          "chargeable": false,
+          "baseEffect": "持有 3 层以上劲或正在防御时，自身异常抗性提高 15%。",
+          "scaling": [
+            {
+              "key": "resist",
+              "label": "异常抗性",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                15,
+                18,
+                21,
+                24,
+                27
+              ],
+              "capCategory": "status_resistance"
+            }
+          ],
+          "rankProgression": {
+            "2": "异常抗性 18%（+3）",
+            "3": "异常抗性 21%（+3）",
+            "4": "异常抗性 24%（+3）",
+            "5": "异常抗性 27%（+3）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "single_instance",
+            "maxStacks": 1,
+            "capCategories": [
+              "status_resistance"
+            ],
+            "fixedContributions": [],
+            "note": "异常抗性全来源合计 ≤ 60%。"
+          },
+          "ai": {
+            "mode": "passive_auto",
+            "defaultEnabled": true,
+            "useWhen": "自动生效；AI 持有 3 层以上劲时更倾向防御而不是闪避，以保持抗性。",
+            "avoidWhen": null
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "martial_clear_mind",
+          "runtimeLineage": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "martial_n09_formless_chain",
+          "seriesId": "martial",
+          "stage": 5,
+          "stageName": "无形拳圣",
+          "slot": 1,
+          "name": "无形连环",
+          "nameEn": "Formless Chain",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "finisher",
+          "tacticalRoleZh": "终结",
+          "mechanicTags": [
+            "jin"
+          ],
+          "energyCost": 40,
+          "cooldownSec": 40,
+          "internalCooldownSec": null,
+          "maxTriggersPerBattle": null,
+          "target": "一名敌人",
+          "rangePx": 60,
+          "chargeable": false,
+          "baseEffect": "消耗全部劲（至少 1 层），打出 2 + 劲层数段连击（最多 7 段），每段造成攻击力 45% 的伤害；若在防御、闪避或反击成功后 1 秒内使用，额外追加 1 段。",
+          "scaling": [
+            {
+              "key": "dmg",
+              "label": "每段伤害",
+              "unit": "% 攻击力",
+              "direction": "higher_is_better",
+              "values": [
+                45,
+                50,
+                55,
+                60,
+                65
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "每段伤害 50% 攻击力（+5）",
+            "3": "每段伤害 55% 攻击力（+5）",
+            "4": "每段伤害 60% 攻击力（+5）",
+            "5": "每段伤害 65% 攻击力（+5）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "per_trigger",
+            "maxStacks": 1,
+            "capCategories": [],
+            "fixedContributions": [],
+            "note": "最多 8 段（含追加段）。"
+          },
+          "ai": {
+            "mode": "active_condition",
+            "defaultEnabled": true,
+            "useWhen": "劲 ≥ 4 层且刚完成一次反击时使用。",
+            "avoidWhen": "劲为 0 时无法使用。"
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": true
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "martial_formless_chain",
+          "runtimeLineage": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review",
+          "lineageNote": "草案“按目标是否蓄力选择破势或追击”改为消耗劲的连击；读起手只归剑术。"
+        },
+        {
+          "id": "martial_n10_formless_intent",
+          "seriesId": "martial",
+          "stage": 5,
+          "stageName": "无形拳圣",
+          "slot": 2,
+          "name": "无相守意",
+          "nameEn": "Formless Intent",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "auto_counter",
+          "tacticalRoleZh": "自动反击",
+          "mechanicTags": [
+            "post_impact_counter",
+            "jin"
+          ],
+          "energyCost": 36,
+          "cooldownSec": 50,
+          "internalCooldownSec": null,
+          "maxTriggersPerBattle": 6,
+          "target": "自身；反击目标为攻击自身的近身敌人",
+          "rangePx": 60,
+          "chargeable": false,
+          "baseEffect": "进入无相状态 8 秒：每次成功防御或闪避近身攻击，自动反击造成攻击力 80% 的伤害并获得 1 层劲；防御时只受到原始伤害的 15%。本状态最多自动反击 6 次。",
+          "scaling": [
+            {
+              "key": "dmg",
+              "label": "自动反击伤害",
+              "unit": "% 攻击力",
+              "direction": "higher_is_better",
+              "values": [
+                80,
+                90,
+                100,
+                110,
+                120
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "自动反击伤害 90% 攻击力（+10）",
+            "3": "自动反击伤害 100% 攻击力（+10）",
+            "4": "自动反击伤害 110% 攻击力（+10）",
+            "5": "自动反击伤害 120% 攻击力（+10）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "single_instance",
+            "maxStacks": 1,
+            "capCategories": [
+              "damage_floor"
+            ],
+            "fixedContributions": [
+              {
+                "category": "damage_floor",
+                "value": 15
+              }
+            ],
+            "note": "状态不叠加；同一次敌方攻击只触发一个反击效果；受到伤害不低于原始伤害的 10%。"
+          },
+          "ai": {
+            "mode": "active_condition",
+            "defaultEnabled": true,
+            "useWhen": "首领战，或 100 px 内有 2 名以上敌人时施放。",
+            "avoidWhen": "没有敌人在 100 px 内时不施放。"
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": true
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": null,
+          "runtimeLineage": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        }
+      ]
+    },
+    {
+      "id": "polearm",
+      "aptitude": "武艺",
+      "name": "长兵",
+      "en": "Polearms",
+      "role": "中距离控场与突进贯穿",
+      "stages": [
+        "枪矛手",
+        "控距卫",
+        "贯阵将",
+        "天衡枪宗",
+        "星轨枪圣"
+      ],
+      "finalQuest": "在阵线试炼中守住标记区域，阻止快速敌人越线，并击败最后的突击首领。",
+      "identity": "中距离控距：在枪尖区（距目标 70–160 px）发挥全部威力，贴身时减弱；以突刺贯穿横向直线上的多名敌人，用水平击退与接近减速把敌人留在枪尖区，并迎击冲向队友或标记区域的快速敌人。",
+      "contrast": "长兵不替队友承伤（守护），不依赖防御成功（武道），不抢起手（剑术），不蓄力破甲（重武）；它控制的是“敌人离我多远”。所有区域只触发攻击，不阻挡移动。",
+      "finalQuestFit": "守住标记区域：驻枪拒止与拦截扫迎击快速敌人，枪线压制减慢越线速度，天枢枪阵覆盖整段区域；突击首领用贯阵与天衡步保持枪尖区距离。",
+      "signatureMechanics": [
+        "reach_band",
+        "knockback",
+        "line_pierce",
+        "approach_punish"
+      ],
+      "nodes": [
+        {
+          "id": "polearm_n01_line_thrust",
+          "seriesId": "polearm",
+          "stage": 1,
+          "stageName": "枪矛手",
+          "slot": 1,
+          "name": "直线突刺",
+          "nameEn": "Line Thrust",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "reach_strike",
+          "tacticalRoleZh": "中距突刺",
+          "mechanicTags": [
+            "reach_band",
+            "knockback"
+          ],
+          "energyCost": 12,
+          "cooldownSec": 6,
+          "internalCooldownSec": null,
+          "maxTriggersPerBattle": null,
+          "target": "身前 160 px 内的第一名敌人",
+          "rangePx": 160,
+          "chargeable": false,
+          "baseEffect": "向前突刺 160 px，命中第一名敌人：在枪尖区（70–160 px）造成攻击力 130% 的伤害，贴身（不足 70 px）时伤害降为七成；并把目标水平击退 30 px。",
+          "scaling": [
+            {
+              "key": "dmg",
+              "label": "枪尖区伤害",
+              "unit": "% 攻击力",
+              "direction": "higher_is_better",
+              "values": [
+                130,
+                140,
+                150,
+                160,
+                170
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "枪尖区伤害 140% 攻击力（+10）",
+            "3": "枪尖区伤害 150% 攻击力（+10）",
+            "4": "枪尖区伤害 160% 攻击力（+10）",
+            "5": "枪尖区伤害 170% 攻击力（+10）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "per_trigger",
+            "maxStacks": 1,
+            "capCategories": [
+              "control_diminishing"
+            ],
+            "fixedContributions": [],
+            "note": "击退遵守控制递减；首领击退距离减半。"
+          },
+          "ai": {
+            "mode": "active_condition",
+            "defaultEnabled": true,
+            "useWhen": "最近的敌人在 70–160 px 时优先使用。",
+            "avoidWhen": "敌人贴身（不足 70 px）时不使用，先拉开距离或普通攻击。"
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "polearm_line_thrust",
+          "runtimeLineage": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "polearm_n02_reach_instinct",
+          "seriesId": "polearm",
+          "stage": 1,
+          "stageName": "枪矛手",
+          "slot": 2,
+          "name": "枪距本能",
+          "nameEn": "Reach Instinct",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "reach_bonus",
+          "tacticalRoleZh": "枪尖区增益",
+          "mechanicTags": [
+            "reach_band"
+          ],
+          "energyCost": null,
+          "cooldownSec": null,
+          "internalCooldownSec": null,
+          "maxTriggersPerBattle": null,
+          "target": "自身",
+          "rangePx": null,
+          "chargeable": false,
+          "baseEffect": "最近的敌人位于枪尖区（70–160 px）时，普通攻击触及距离延长到 140 px，长兵攻击伤害提高 8%。",
+          "scaling": [
+            {
+              "key": "dmg",
+              "label": "枪尖区增伤",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                8,
+                10,
+                12,
+                14,
+                16
+              ],
+              "capCategory": "self_damage_bonus"
+            }
+          ],
+          "rankProgression": {
+            "2": "枪尖区增伤 10%（+2）",
+            "3": "枪尖区增伤 12%（+2）",
+            "4": "枪尖区增伤 14%（+2）",
+            "5": "枪尖区增伤 16%（+2）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "single_instance",
+            "maxStacks": 1,
+            "capCategories": [
+              "self_damage_bonus"
+            ],
+            "fixedContributions": [],
+            "note": "计入自身增伤上限 40%。"
+          },
+          "ai": {
+            "mode": "passive_auto",
+            "defaultEnabled": true,
+            "useWhen": "自动生效；AI 移动时尽量把最近敌人保持在 70–160 px。",
+            "avoidWhen": null
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": null,
+          "runtimeLineage": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "polearm_n03_intercept_sweep",
+          "seriesId": "polearm",
+          "stage": 2,
+          "stageName": "控距卫",
+          "slot": 1,
+          "name": "拦截扫",
+          "nameEn": "Intercept Sweep",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "knockback",
+          "tacticalRoleZh": "击退",
+          "mechanicTags": [
+            "knockback",
+            "reach_band"
+          ],
+          "energyCost": 16,
+          "cooldownSec": 10,
+          "internalCooldownSec": null,
+          "maxTriggersPerBattle": null,
+          "target": "身前 140 px 内的全部敌人",
+          "rangePx": 140,
+          "chargeable": false,
+          "baseEffect": "向前横扫 140 px 内的全部敌人，造成攻击力 100% 的伤害并水平击退 50 px，使其接近速度降低 20%，持续 4 秒；若目标正冲向某名队友或标记区域，击退距离再加 30 px。",
+          "scaling": [
+            {
+              "key": "push",
+              "label": "击退距离",
+              "unit": "px",
+              "direction": "higher_is_better",
+              "values": [
+                50,
+                56,
+                62,
+                68,
+                74
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "击退距离 56 px（+6）",
+            "3": "击退距离 62 px（+6）",
+            "4": "击退距离 68 px（+6）",
+            "5": "击退距离 74 px（+6）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "refresh",
+            "maxStacks": 1,
+            "capCategories": [
+              "control_diminishing",
+              "enemy_slow"
+            ],
+            "fixedContributions": [
+              {
+                "category": "enemy_slow",
+                "value": 20
+              }
+            ],
+            "note": "击退遵守控制递减；减速只刷新，计入减速上限 40%。"
+          },
+          "ai": {
+            "mode": "active_condition",
+            "defaultEnabled": true,
+            "useWhen": "有敌人在 140 px 内朝队友或标记区域移动时优先使用。",
+            "avoidWhen": "目标处于控制递减免疫窗口时不使用。"
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "polearm_intercept_sweep",
+          "runtimeLineage": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "polearm_n04_set_spear",
+          "seriesId": "polearm",
+          "stage": 2,
+          "stageName": "控距卫",
+          "slot": 2,
+          "name": "驻枪拒止",
+          "nameEn": "Set Spear",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "stop_thrust",
+          "tacticalRoleZh": "拒止迎击",
+          "mechanicTags": [
+            "approach_punish",
+            "knockback",
+            "reach_band"
+          ],
+          "energyCost": 14,
+          "cooldownSec": 12,
+          "internalCooldownSec": null,
+          "maxTriggersPerBattle": null,
+          "target": "驻枪期间第一名进入身前 130 px 的敌人",
+          "rangePx": 130,
+          "chargeable": false,
+          "baseEffect": "驻枪 4 秒：第一名进入身前 130 px 的敌人立即受到一次迎击突刺，造成攻击力 150% 的伤害并被水平击退 70 px；若该敌人正在快速接近（冲锋、突进），倍率再加攻击力 50% 并硬直 0.5 秒（首领不硬直，击退减半）。每次驻枪只迎击 1 次。",
+          "scaling": [
+            {
+              "key": "dmg",
+              "label": "迎击伤害",
+              "unit": "% 攻击力",
+              "direction": "higher_is_better",
+              "values": [
+                150,
+                160,
+                170,
+                180,
+                190
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "迎击伤害 160% 攻击力（+10）",
+            "3": "迎击伤害 170% 攻击力（+10）",
+            "4": "迎击伤害 180% 攻击力（+10）",
+            "5": "迎击伤害 190% 攻击力（+10）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "single_instance",
+            "maxStacks": 1,
+            "capCategories": [
+              "control_diminishing"
+            ],
+            "fixedContributions": [],
+            "note": "一次驻枪只迎击 1 次；击退与硬直遵守控制递减。"
+          },
+          "ai": {
+            "mode": "active_condition",
+            "defaultEnabled": true,
+            "useWhen": "有敌人从 160 px 外朝自身或队友接近时施放。",
+            "avoidWhen": "敌人已在 70 px 内时不施放。"
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "polearm_point_guard",
+          "runtimeLineage": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review",
+          "lineageNote": "草案“支点守势”（防御时扩大可拦截范围）改为主动的迎击架势；不依赖防御成功，以免与武道重叠。"
+        },
+        {
+          "id": "polearm_n05_formation_pierce",
+          "seriesId": "polearm",
+          "stage": 3,
+          "stageName": "贯阵将",
+          "slot": 1,
+          "name": "贯阵",
+          "nameEn": "Formation Pierce",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "lunge_pierce",
+          "tacticalRoleZh": "突进贯穿",
+          "mechanicTags": [
+            "line_pierce",
+            "reach_band",
+            "dash"
+          ],
+          "energyCost": 24,
+          "cooldownSec": 14,
+          "internalCooldownSec": null,
+          "maxTriggersPerBattle": null,
+          "target": "身前 200 px 横向直线上的全部敌人",
+          "rangePx": 200,
+          "chargeable": false,
+          "baseEffect": "向前突进最多 120 px 后贯刺，命中身前 200 px 横向直线上的全部敌人：第一名受到攻击力 140% 的伤害，之后每名递减 15 个百分点（最低 80%）。",
+          "scaling": [
+            {
+              "key": "dmg",
+              "label": "第一名伤害",
+              "unit": "% 攻击力",
+              "direction": "higher_is_better",
+              "values": [
+                140,
+                150,
+                160,
+                170,
+                180
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "第一名伤害 150% 攻击力（+10）",
+            "3": "第一名伤害 160% 攻击力（+10）",
+            "4": "第一名伤害 170% 攻击力（+10）",
+            "5": "第一名伤害 180% 攻击力（+10）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "per_trigger",
+            "maxStacks": 1,
+            "capCategories": [],
+            "fixedContributions": [],
+            "note": "每名敌人每次只命中一次。"
+          },
+          "ai": {
+            "mode": "active_condition",
+            "defaultEnabled": true,
+            "useWhen": "身前直线上有 2 名以上敌人，或需要追上拉开距离的目标时使用。",
+            "avoidWhen": "直线上没有敌人时不使用。"
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "polearm_pierce_line",
+          "runtimeLineage": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "polearm_n06_line_pressure",
+          "seriesId": "polearm",
+          "stage": 3,
+          "stageName": "贯阵将",
+          "slot": 2,
+          "name": "枪线压制",
+          "nameEn": "Line Pressure",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "approach_slow",
+          "tacticalRoleZh": "接近压制",
+          "mechanicTags": [
+            "reach_band"
+          ],
+          "energyCost": null,
+          "cooldownSec": null,
+          "internalCooldownSec": null,
+          "maxTriggersPerBattle": null,
+          "target": "身前枪尖区内的敌人",
+          "rangePx": 160,
+          "chargeable": false,
+          "baseEffect": "身前枪尖区（70–160 px）内的敌人朝自身或身后队友移动时，移动速度降低 15%；离开枪尖区即解除。",
+          "scaling": [
+            {
+              "key": "slow",
+              "label": "接近减速",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                15,
+                17,
+                19,
+                21,
+                23
+              ],
+              "capCategory": "enemy_slow"
+            }
+          ],
+          "rankProgression": {
+            "2": "接近减速 17%（+2）",
+            "3": "接近减速 19%（+2）",
+            "4": "接近减速 21%（+2）",
+            "5": "接近减速 23%（+2）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "single_instance",
+            "maxStacks": 1,
+            "capCategories": [
+              "enemy_slow"
+            ],
+            "fixedContributions": [],
+            "note": "只按区域判定，不叠层；计入减速上限 40%。"
+          },
+          "ai": {
+            "mode": "passive_auto",
+            "defaultEnabled": true,
+            "useWhen": "自动生效；AI 尽量站在敌人与后排队友之间的直线上。",
+            "avoidWhen": null
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": null,
+          "runtimeLineage": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "polearm_n07_holding_wheel",
+          "seriesId": "polearm",
+          "stage": 4,
+          "stageName": "天衡枪宗",
+          "slot": 1,
+          "name": "牵制旋",
+          "nameEn": "Holding Wheel",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "area_push",
+          "tacticalRoleZh": "环身推离",
+          "mechanicTags": [
+            "knockback"
+          ],
+          "energyCost": 30,
+          "cooldownSec": 20,
+          "internalCooldownSec": null,
+          "maxTriggersPerBattle": null,
+          "target": "自身前后 150 px 内的全部敌人",
+          "rangePx": 150,
+          "chargeable": false,
+          "baseEffect": "抡枪环扫自身前后 150 px，造成攻击力 110% 的伤害，把命中的敌人水平击退 60 px（远离自身），并使其接近速度降低 20%，持续 5 秒。",
+          "scaling": [
+            {
+              "key": "dmg",
+              "label": "伤害",
+              "unit": "% 攻击力",
+              "direction": "higher_is_better",
+              "values": [
+                110,
+                120,
+                130,
+                140,
+                150
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "伤害 120% 攻击力（+10）",
+            "3": "伤害 130% 攻击力（+10）",
+            "4": "伤害 140% 攻击力（+10）",
+            "5": "伤害 150% 攻击力（+10）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "refresh",
+            "maxStacks": 1,
+            "capCategories": [
+              "control_diminishing",
+              "enemy_slow"
+            ],
+            "fixedContributions": [
+              {
+                "category": "enemy_slow",
+                "value": 20
+              }
+            ],
+            "note": "击退遵守控制递减；减速只刷新，计入减速上限 40%。"
+          },
+          "ai": {
+            "mode": "active_condition",
+            "defaultEnabled": true,
+            "useWhen": "两侧都有敌人在 100 px 内，或有敌人贴近后排队友时使用。",
+            "avoidWhen": "150 px 内没有敌人时不使用。"
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "polearm_wheel_control",
+          "runtimeLineage": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "polearm_n08_balance_step",
+          "seriesId": "polearm",
+          "stage": 4,
+          "stageName": "天衡枪宗",
+          "slot": 2,
+          "name": "天衡步",
+          "nameEn": "Balance Step",
+          "type": "passive",
+          "typeZh": "被动",
+          "tacticalRole": "reposition",
+          "tacticalRoleZh": "自动后撤",
+          "mechanicTags": [
+            "reach_band"
+          ],
+          "energyCost": null,
+          "cooldownSec": null,
+          "internalCooldownSec": 6,
+          "maxTriggersPerBattle": null,
+          "target": "自身",
+          "rangePx": 60,
+          "chargeable": false,
+          "baseEffect": "敌人进入自身 60 px 内时，自动向远离该敌人的方向后撤 50 px（不提供无敌，到达战场边界即停止），下一次长兵技能伤害提高 15%。内置冷却 6 秒。",
+          "scaling": [
+            {
+              "key": "dmg",
+              "label": "后撤后增伤",
+              "unit": "%",
+              "direction": "higher_is_better",
+              "values": [
+                15,
+                18,
+                21,
+                24,
+                27
+              ],
+              "capCategory": "self_damage_bonus"
+            }
+          ],
+          "rankProgression": {
+            "2": "后撤后增伤 18%（+3）",
+            "3": "后撤后增伤 21%（+3）",
+            "4": "后撤后增伤 24%（+3）",
+            "5": "后撤后增伤 27%（+3）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "single_instance",
+            "maxStacks": 1,
+            "capCategories": [
+              "self_damage_bonus"
+            ],
+            "fixedContributions": [],
+            "note": "增伤只作用于下一次长兵技能，不叠加；计入自身增伤上限 40%。"
+          },
+          "ai": {
+            "mode": "passive_auto_optout",
+            "defaultEnabled": true,
+            "useWhen": "自动触发（玩家直接操控时同样触发）；可在角色策略中关闭“自动后撤”。",
+            "avoidWhen": null
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": false
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": null,
+          "runtimeLineage": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "polearm_n09_star_track_pierce",
+          "seriesId": "polearm",
+          "stage": 5,
+          "stageName": "星轨枪圣",
+          "slot": 1,
+          "name": "星轨贯穿",
+          "nameEn": "Star-Track Pierce",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "finisher",
+          "tacticalRoleZh": "终结",
+          "mechanicTags": [
+            "line_pierce",
+            "knockback"
+          ],
+          "energyCost": 46,
+          "cooldownSec": 40,
+          "internalCooldownSec": null,
+          "maxTriggersPerBattle": null,
+          "target": "身前 260 px 横向直线上的全部敌人",
+          "rangePx": 260,
+          "chargeable": false,
+          "baseEffect": "沿身前 260 px 直线连续三段突刺，每段对直线上全部敌人造成攻击力 90% 的伤害；对已被队友标记的目标追加第四段；最后一段把命中的敌人水平击退 80 px。",
+          "scaling": [
+            {
+              "key": "dmg",
+              "label": "每段伤害",
+              "unit": "% 攻击力",
+              "direction": "higher_is_better",
+              "values": [
+                90,
+                98,
+                106,
+                114,
+                122
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "每段伤害 98% 攻击力（+8）",
+            "3": "每段伤害 106% 攻击力（+8）",
+            "4": "每段伤害 114% 攻击力（+8）",
+            "5": "每段伤害 122% 攻击力（+8）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "per_trigger",
+            "maxStacks": 1,
+            "capCategories": [
+              "control_diminishing"
+            ],
+            "fixedContributions": [],
+            "note": "击退遵守控制递减；首领击退距离减半。"
+          },
+          "ai": {
+            "mode": "active_condition",
+            "defaultEnabled": true,
+            "useWhen": "直线上有 2 名以上敌人，或首领已被标记时使用。",
+            "avoidWhen": "直线上没有敌人时不使用。"
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": true
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": "polearm_star_pierce",
+          "runtimeLineage": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        },
+        {
+          "id": "polearm_n10_polaris_spear_field",
+          "seriesId": "polearm",
+          "stage": 5,
+          "stageName": "星轨枪圣",
+          "slot": 2,
+          "name": "天枢枪阵",
+          "nameEn": "Polaris Spear Field",
+          "type": "active",
+          "typeZh": "主动",
+          "tacticalRole": "zone_denial",
+          "tacticalRoleZh": "拒止区域",
+          "mechanicTags": [
+            "approach_punish",
+            "knockback",
+            "reach_band"
+          ],
+          "energyCost": 38,
+          "cooldownSec": 50,
+          "internalCooldownSec": null,
+          "maxTriggersPerBattle": 8,
+          "target": "身前 160 px 枪尖区",
+          "rangePx": 160,
+          "chargeable": false,
+          "baseEffect": "10 秒内，任何进入自身身前 160 px 的敌人都会自动受到一次突刺，造成攻击力 80% 的伤害并被水平击退 40 px（首领只受伤害）；同一敌人每 2 秒最多触发 1 次，共最多 8 次。只触发攻击，不阻挡任何单位移动。",
+          "scaling": [
+            {
+              "key": "dmg",
+              "label": "自动突刺伤害",
+              "unit": "% 攻击力",
+              "direction": "higher_is_better",
+              "values": [
+                80,
+                90,
+                100,
+                110,
+                120
+              ]
+            }
+          ],
+          "rankProgression": {
+            "2": "自动突刺伤害 90% 攻击力（+10）",
+            "3": "自动突刺伤害 100% 攻击力（+10）",
+            "4": "自动突刺伤害 110% 攻击力（+10）",
+            "5": "自动突刺伤害 120% 攻击力（+10）"
+          },
+          "maxRank": 5,
+          "stacking": {
+            "rule": "single_instance",
+            "maxStacks": 1,
+            "capCategories": [
+              "control_diminishing"
+            ],
+            "fixedContributions": [],
+            "note": "状态不叠加；击退遵守控制递减。"
+          },
+          "ai": {
+            "mode": "active_condition",
+            "defaultEnabled": true,
+            "useWhen": "需要守住标记区域或保护后排队友时，或场上有 2 名以上快速敌人时施放。",
+            "avoidWhen": "160 px 内外都没有接近中的敌人时不施放。"
+          },
+          "unlock": {
+            "onStageEntry": true,
+            "unlockedAtRank": 1,
+            "jpCost": 0,
+            "requiresFinalQuest": true
+          },
+          "scienceMvpUtility": null,
+          "supersedesDraftNodeId": null,
+          "runtimeLineage": null,
+          "status": "PROPOSAL",
+          "reviewStatus": "pending balance and creator review"
+        }
+      ]
+    }
+  ],
+  "openPoints": [
+    "全部数值是占位，按当前运行时校准：1 级能量 60–80、每级 +2；职业技能消耗 13–25；闪避 12；防御每次 6 点；敌方起手 0.48–0.65 秒。",
+    "依赖运行时还没有的系统或标签：起手类型（快／重／虚）、首领标记、护甲值与防护板、敌人“快速接近”状态、守护目标单位、强制转向、霸体与打断、异常与抗性、多敌人战斗（今天竞技场只有 1 名敌人，范围、直线、代受的价值偏低）、来自其他系列的“标记”。",
+    "JP 表是临时值，与运行时骨架的 35/55/80/110 不一致，需创作者统一（创作者决定 §8.2 仍开放）。",
+    "运行时已有的剑术技能“破锋斩”“回旋剑势”保留阶、名称与能量，但效果数值改为本提案；运行时未改动。",
+    "科技区实用效果只有 1 个（重武·强力开启）。其他武艺节点没有可信的非战斗用途，因此不硬加；请创作者确认是否需要。",
+    "没有设计：其余 10 条系列（100 个节点）与 510 个个人节点。"
+  ],
+  "schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "Worlds Between 武艺 ten-node job tree proposal",
+    "type": "object",
+    "required": [
+      "schemaVersion",
+      "project",
+      "title",
+      "status",
+      "reviewStatus",
+      "createdAt",
+      "scope",
+      "notImplemented",
+      "sources",
+      "rules",
+      "sharedMechanics",
+      "jpProposal",
+      "roleVocabulary",
+      "mechanicTagVocabulary",
+      "validationParameters",
+      "lineage",
+      "series",
+      "openPoints",
+      "schema",
+      "validation"
+    ],
+    "properties": {
+      "status": {
+        "const": "PROPOSAL"
+      },
+      "reviewStatus": {
+        "const": "pending balance and creator review"
+      },
+      "series": {
+        "type": "array",
+        "minItems": 5,
+        "maxItems": 5,
+        "items": {
+          "type": "object",
+          "required": [
+            "id",
+            "aptitude",
+            "name",
+            "en",
+            "role",
+            "stages",
+            "finalQuest",
+            "identity",
+            "contrast",
+            "finalQuestFit",
+            "signatureMechanics",
+            "nodes"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "enum": [
+                "guardian",
+                "sword",
+                "heavy",
+                "martial",
+                "polearm"
+              ]
+            },
+            "aptitude": {
+              "const": "武艺"
+            },
+            "name": {
+              "type": "string"
+            },
+            "en": {
+              "type": "string"
+            },
+            "role": {
+              "type": "string"
+            },
+            "stages": {
+              "type": "array",
+              "minItems": 5,
+              "maxItems": 5,
+              "items": {
+                "type": "string"
+              }
+            },
+            "finalQuest": {
+              "type": "string"
+            },
+            "identity": {
+              "type": "string"
+            },
+            "contrast": {
+              "type": "string"
+            },
+            "finalQuestFit": {
+              "type": "string"
+            },
+            "signatureMechanics": {
+              "type": "array",
+              "minItems": 2,
+              "items": {
+                "enum": [
+                  "redirect",
+                  "forced_target",
+                  "intercept",
+                  "objective_guard",
+                  "windup_preempt",
+                  "edge_flow",
+                  "charge",
+                  "armor_break",
+                  "radial_impact",
+                  "super_armor",
+                  "post_impact_counter",
+                  "jin",
+                  "breath",
+                  "reach_band",
+                  "knockback",
+                  "line_pierce",
+                  "approach_punish",
+                  "guard_efficiency",
+                  "party_support",
+                  "stagger",
+                  "lethal_save",
+                  "energy_refund",
+                  "status_guard",
+                  "dash",
+                  "self_buff"
+                ]
+              }
+            },
+            "nodes": {
+              "type": "array",
+              "minItems": 10,
+              "maxItems": 10,
+              "items": {
+                "$ref": "#/$defs/node"
+              }
+            }
+          }
+        }
+      }
+    },
+    "$defs": {
+      "scalingEntry": {
+        "type": "object",
+        "required": [
+          "key",
+          "label",
+          "unit",
+          "direction",
+          "values"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "unit": {
+            "enum": [
+              "% 攻击力",
+              "% 生命上限",
+              "% 原始伤害",
+              "%",
+              "秒",
+              "px",
+              "点能量"
+            ]
+          },
+          "direction": {
+            "const": "higher_is_better"
+          },
+          "values": {
+            "type": "array",
+            "minItems": 5,
+            "maxItems": 5,
+            "items": {
+              "type": "number"
+            }
+          },
+          "capCategory": {
+            "enum": [
+              "enemy_damage_taken_up",
+              "enemy_defense_down",
+              "ally_damage_reduction",
+              "damage_floor",
+              "shield_total",
+              "status_resistance",
+              "self_damage_bonus",
+              "enemy_slow",
+              "damage_redirect",
+              "windup_delay",
+              "control_diminishing",
+              "forced_target",
+              "energy_return",
+              "self_heal_per_battle",
+              "reflect_cap",
+              "charge_time_reduction"
+            ]
+          },
+          "perStack": {
+            "type": "boolean"
+          }
+        }
+      },
+      "stacking": {
+        "type": "object",
+        "required": [
+          "rule",
+          "maxStacks",
+          "capCategories",
+          "fixedContributions",
+          "note"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "rule": {
+            "enum": [
+              "refresh",
+              "single_instance",
+              "stacks",
+              "per_trigger",
+              "once_per_battle"
+            ]
+          },
+          "maxStacks": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5
+          },
+          "capCategories": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "enemy_damage_taken_up",
+                "enemy_defense_down",
+                "ally_damage_reduction",
+                "damage_floor",
+                "shield_total",
+                "status_resistance",
+                "self_damage_bonus",
+                "enemy_slow",
+                "damage_redirect",
+                "windup_delay",
+                "control_diminishing",
+                "forced_target",
+                "energy_return",
+                "self_heal_per_battle",
+                "reflect_cap",
+                "charge_time_reduction"
+              ]
+            }
+          },
+          "fixedContributions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "category",
+                "value"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "category": {
+                  "enum": [
+                    "enemy_damage_taken_up",
+                    "enemy_defense_down",
+                    "ally_damage_reduction",
+                    "damage_floor",
+                    "shield_total",
+                    "status_resistance",
+                    "self_damage_bonus",
+                    "enemy_slow",
+                    "damage_redirect",
+                    "windup_delay",
+                    "control_diminishing",
+                    "forced_target",
+                    "energy_return",
+                    "self_heal_per_battle",
+                    "reflect_cap",
+                    "charge_time_reduction"
+                  ]
+                },
+                "value": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "note": {
+            "type": "string",
+            "minLength": 4
+          }
+        }
+      },
+      "ai": {
+        "type": "object",
+        "required": [
+          "mode",
+          "defaultEnabled",
+          "useWhen",
+          "avoidWhen"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "mode": {
+            "enum": [
+              "active_condition",
+              "passive_auto",
+              "passive_auto_optout"
+            ]
+          },
+          "defaultEnabled": {
+            "type": "boolean"
+          },
+          "useWhen": {
+            "type": "string",
+            "minLength": 8
+          },
+          "avoidWhen": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "node": {
+        "type": "object",
+        "required": [
+          "id",
+          "seriesId",
+          "stage",
+          "stageName",
+          "slot",
+          "name",
+          "nameEn",
+          "type",
+          "typeZh",
+          "tacticalRole",
+          "tacticalRoleZh",
+          "mechanicTags",
+          "energyCost",
+          "cooldownSec",
+          "internalCooldownSec",
+          "maxTriggersPerBattle",
+          "target",
+          "rangePx",
+          "chargeable",
+          "baseEffect",
+          "scaling",
+          "rankProgression",
+          "maxRank",
+          "stacking",
+          "ai",
+          "unlock",
+          "scienceMvpUtility",
+          "supersedesDraftNodeId",
+          "runtimeLineage",
+          "status",
+          "reviewStatus"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^(guardian|sword|heavy|martial|polearm)_n(0[1-9]|10)_[a-z_]+$"
+          },
+          "seriesId": {
+            "enum": [
+              "guardian",
+              "sword",
+              "heavy",
+              "martial",
+              "polearm"
+            ]
+          },
+          "stage": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5
+          },
+          "stageName": {
+            "type": "string",
+            "description": "必须与已批准五阶名称逐字一致"
+          },
+          "slot": {
+            "enum": [
+              1,
+              2
+            ]
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "nameEn": {
+            "type": "string",
+            "minLength": 1
+          },
+          "type": {
+            "enum": [
+              "active",
+              "passive"
+            ]
+          },
+          "typeZh": {
+            "enum": [
+              "主动",
+              "被动"
+            ]
+          },
+          "tacticalRole": {
+            "enum": [
+              "redirect",
+              "aggro",
+              "stance",
+              "intercept",
+              "group_protection",
+              "energy_economy",
+              "lethal_save",
+              "rally",
+              "group_shield",
+              "capacity",
+              "windup_punish",
+              "combo_stack",
+              "area_sweep",
+              "counter_read",
+              "heavy_windup_break",
+              "feint_read",
+              "pursuit",
+              "finisher",
+              "auto_preempt",
+              "armor_break",
+              "super_armor",
+              "plate_break",
+              "stagger",
+              "area_impact",
+              "tempo",
+              "vulnerability",
+              "breach",
+              "empower",
+              "guard_prep",
+              "guard_counter",
+              "parry_counter",
+              "self_heal",
+              "dodge_counter",
+              "force_redirect",
+              "status_resist",
+              "auto_counter",
+              "reach_strike",
+              "reach_bonus",
+              "knockback",
+              "stop_thrust",
+              "lunge_pierce",
+              "approach_slow",
+              "area_push",
+              "reposition",
+              "zone_denial"
+            ]
+          },
+          "tacticalRoleZh": {
+            "type": "string"
+          },
+          "mechanicTags": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "enum": [
+                "redirect",
+                "forced_target",
+                "intercept",
+                "objective_guard",
+                "windup_preempt",
+                "edge_flow",
+                "charge",
+                "armor_break",
+                "radial_impact",
+                "super_armor",
+                "post_impact_counter",
+                "jin",
+                "breath",
+                "reach_band",
+                "knockback",
+                "line_pierce",
+                "approach_punish",
+                "guard_efficiency",
+                "party_support",
+                "stagger",
+                "lethal_save",
+                "energy_refund",
+                "status_guard",
+                "dash",
+                "self_buff"
+              ]
+            }
+          },
+          "energyCost": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "active: 整数且在所属阶能量区间内；passive: null"
+          },
+          "cooldownSec": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "description": "active: ≥ 5 秒，第 5 阶 ≥ 40 秒；passive: null"
+          },
+          "internalCooldownSec": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "maxTriggersPerBattle": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "target": {
+            "type": "string"
+          },
+          "rangePx": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "description": "水平像素距离"
+          },
+          "chargeable": {
+            "type": "boolean"
+          },
+          "baseEffect": {
+            "type": "string",
+            "minLength": 20,
+            "description": "第 1 级效果"
+          },
+          "scaling": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/$defs/scalingEntry"
+            }
+          },
+          "rankProgression": {
+            "type": "object",
+            "required": [
+              "2",
+              "3",
+              "4",
+              "5"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "2": {
+                "type": "string"
+              },
+              "3": {
+                "type": "string"
+              },
+              "4": {
+                "type": "string"
+              },
+              "5": {
+                "type": "string"
+              }
+            }
+          },
+          "maxRank": {
+            "const": 5
+          },
+          "stacking": {
+            "$ref": "#/$defs/stacking"
+          },
+          "ai": {
+            "$ref": "#/$defs/ai"
+          },
+          "unlock": {
+            "type": "object",
+            "required": [
+              "onStageEntry",
+              "unlockedAtRank",
+              "jpCost",
+              "requiresFinalQuest"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "onStageEntry": {
+                "const": true
+              },
+              "unlockedAtRank": {
+                "const": 1
+              },
+              "jpCost": {
+                "const": 0
+              },
+              "requiresFinalQuest": {
+                "type": "boolean"
+              }
+            }
+          },
+          "scienceMvpUtility": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "required": [
+              "name",
+              "effect",
+              "mvpLocations",
+              "gate",
+              "requiresCurrentSeries",
+              "storyMandatory"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "effect": {
+                "type": "string"
+              },
+              "mvpLocations": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "enum": [
+                    "纽约 · 曼哈顿下城市政厅公园",
+                    "扬克斯郊外",
+                    "华盛顿特区 · 国会大厦遗址（科技勘察前哨）",
+                    "芝加哥 · 卢普区"
+                  ]
+                }
+              },
+              "gate": {
+                "const": "optional-advantage-only"
+              },
+              "requiresCurrentSeries": {
+                "const": true
+              },
+              "storyMandatory": {
+                "const": false
+              }
+            }
+          },
+          "supersedesDraftNodeId": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "runtimeLineage": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "required": [
+              "skillId",
+              "nameKey",
+              "note"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "skillId": {
+                "type": "string"
+              },
+              "nameKey": {
+                "type": "string"
+              },
+              "note": {
+                "type": "string"
+              }
+            }
+          },
+          "lineageNote": {
+            "type": "string"
+          },
+          "energyReturn": {
+            "type": "object",
+            "required": [
+              "perTriggerKey",
+              "maxTriggersPerBattle"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "perTriggerKey": {
+                "type": "string"
+              },
+              "maxTriggersPerBattle": {
+                "type": "integer",
+                "minimum": 1
+              }
+            }
+          },
+          "status": {
+            "const": "PROPOSAL"
+          },
+          "reviewStatus": {
+            "const": "pending balance and creator review"
+          }
+        }
+      }
+    }
+  },
+  "validation": {
+    "validator": "tools/rpg-2-star-ocean-the-second_martial-job-trees_ten-node-validate_unapproved-v01_20261016-112044-706c17da.js（随附，确定性，只读）",
+    "ranAt": "2026-10-16T15:30:03.495Z",
+    "passed": 22,
+    "failed": 0,
+    "warned": 0,
+    "total": 22,
+    "checks": [
+      {
+        "id": "file-proposal-status",
+        "description": "文件本身标为 PROPOSAL，待数值平衡与创作者审核",
+        "result": "pass",
+        "detail": "PROPOSAL / pending balance and creator review"
+      },
+      {
+        "id": "series-set",
+        "description": "恰好 5 条系列，且正是已批准名单中天分为武艺的 5 条（顺序一致）",
+        "result": "pass",
+        "detail": "guardian, sword, heavy, martial, polearm"
+      },
+      {
+        "id": "approved-text-verbatim",
+        "description": "系列名、英文名、定位、五阶名称、终阶任务与已批准名单 JSON 及 Game Bible jobProposal 逐字一致；每个节点的 stageName 与其阶名称逐字一致",
+        "result": "pass",
+        "detail": "5 系列 × (名称/定位/5 阶/终阶任务) 与两处来源逐字一致；50 个 stageName 一致"
+      },
+      {
+        "id": "ten-nodes-two-per-stage",
+        "description": "每系列恰好 10 个节点，5 阶各 2 个（slot 1、2，按阶排序）；合计 50 个",
+        "result": "pass",
+        "detail": "5 × 10 = 50；每阶 2 个"
+      },
+      {
+        "id": "node-schema",
+        "description": "整份文件与每个节点都符合内嵌 JSON Schema（必填字段、类型、枚举、常量、id 格式、additionalProperties:false；脚本内自写校验器，未使用外部库）",
+        "result": "pass",
+        "detail": "文件通过；50/50 节点通过"
+      },
+      {
+        "id": "distinct-nodes",
+        "description": "50 个节点的 id、中文名、英文名全局唯一，且不与研学 10 节点提案的 50 个节点重名",
+        "result": "pass",
+        "detail": "50 个 id / 50 个中文名 / 50 个英文名；与研学提案重名 0 个"
+      },
+      {
+        "id": "unlock-and-rank-rules",
+        "description": "每个节点进入该阶即以第 1 级开放（jpCost 0）；第 5 阶节点另需终阶任务；最高 5 级；JP 表只含第 2–5 级；无互斥分支；rankProgression 与 scaling 数值一致",
+        "result": "pass",
+        "detail": "50/50；JP 表只含第 2–5 级；无互斥分支"
+      },
+      {
+        "id": "active-passive-energy",
+        "description": "主动技能有整数能量消耗（按阶区间）与冷却（≥ 下限，第 5 阶 ≥ 40 秒）；被动技能无消耗与冷却；每系列 ≥5 主动、≥2 被动，每阶至少 1 个主动",
+        "result": "pass",
+        "detail": "guardian 6A/4P; sword 7A/3P; heavy 7A/3P; martial 7A/3P; polearm 7A/3P"
+      },
+      {
+        "id": "non-exponential-ranks",
+        "description": "所有等级数值严格递增、步长固定或递减（无加速增长），第 5 级 / 第 1 级 ≤ 2；能量消耗、冷却、触发次数为单一值，不随等级变化",
+        "result": "pass",
+        "detail": "全部为固定或递减加法步长；最大 r5/r1 = 2.00"
+      },
+      {
+        "id": "unlimited-level-safe",
+        "description": "无等级上限下仍可用：没有数值随角色等级增长；伤害、治疗、护层只按攻击力或生命上限的百分比计算，其余只用秒、px、点能量（返还/上限）与百分比",
+        "result": "pass",
+        "detail": "50/50；单位限于 % 攻击力、% 生命上限、% 原始伤害、%、秒、px、点能量"
+      },
+      {
+        "id": "capped-stacking",
+        "description": "每个节点声明叠加规则（层数 ≤ 5）与所属全来源上限类别；第 5 级单节点贡献不超过上限（伤害下限类不低于下限）；文本出现减伤、防御降低、护层、抗性、减速、打断/硬直/击退、起手延后、能量回复、自愈、反震、蓄力缩短、强制目标、分担等效果时必须声明对应上限类别",
+        "result": "pass",
+        "detail": "50/50；各类别第 5 级单节点最大贡献：damage_redirect 37/≤50；ally_damage_reduction 40/≤50；energy_return 32/≤32；status_resistance 32/≤60；shield_total 18/≤30；windup_delay 0.4/≤0.6；self_damage_bonus 40/≤40；enemy_defense_down 20/≤30；charge_time_reduction 50/≤60；enemy_damage_taken_up 18/≤25；damage_floor 15/≥10；self_heal_per_battle 60/≤60；enemy_slow 23/≤40"
+      },
+      {
+        "id": "energy-return-capped",
+        "description": "返还能量的节点都有每场次数上限；单次返还低于本系列最低主动消耗；每场合计 ≤ 上限",
+        "result": "pass",
+        "detail": "guardian_n06_guardians_echo 单次 ≤8（本系列最低主动 10）× 4 次 = 32；sword_n06_edge_reading 单次 ≤8（本系列最低主动 13）× 3 次 = 24；martial_n06_breath_return 单次 ≤8（本系列最低主动 10）× 4 次 = 32"
+      },
+      {
+        "id": "no-terrain-elevation-obstacle-jump-stealth",
+        "description": "节点文本、系列定位说明与科技区实用效果都不含地形、高低差、障碍、掩体、跳跃、浮空或潜入/隐身相关词（英文按整词匹配；已批准的阶名与终阶任务不扫描）",
+        "result": "pass",
+        "detail": "32 个禁用词，50 个节点与 5 段系列说明 0 命中"
+      },
+      {
+        "id": "distinct-roles",
+        "description": "每系列 10 个节点的战术定位互不相同；任意两条武艺系列的定位集合 Jaccard 相似度 ≤ 0.4",
+        "result": "pass",
+        "detail": "系列内 10/10 不同；最大跨系列 Jaccard 0.11（sword/martial）"
+      },
+      {
+        "id": "series-signature-mechanics",
+        "description": "每条系列至少 6 个节点带本系列标志机制标签，且没有节点带其他系列的标志机制（守护：分担/强制转向/代受；剑术：起手抢先/剑势；重武：蓄力/破甲/圆形冲击/霸体；武道：受击后反击/劲/调息；长兵：枪尖区/击退/直线贯穿/迎击）",
+        "result": "pass",
+        "detail": "guardian 7/10; sword 10/10; heavy 10/10; martial 10/10; polearm 10/10"
+      },
+      {
+        "id": "exclusive-vocabulary",
+        "description": "各系列专属效果词只出现在本系列节点：击退/枪尖区（长兵）、分担/代受/护线（守护）、反击/反打/反震/劲（武道）、蓄力/裂甲/护甲值/防护板/霸体（重武）、剑势/看破（剑术）",
+        "result": "pass",
+        "detail": "50 个节点 0 越界"
+      },
+      {
+        "id": "ai-use",
+        "description": "每个节点写明 AI 使用条件（主动：何时施放/何时不施放；被动：自动触发方式与可否在策略中关闭）；AI 条件不涉及消耗道具或组合技（两者默认关闭）",
+        "result": "pass",
+        "detail": "50/50"
+      },
+      {
+        "id": "science-mvp-utility-optional",
+        "description": "科技区实用效果只出现在第 1–2 阶、只在当前系列可用、只用于已批准的 MVP 地点，只给可选普通补给，不开启路线、不给剧情物品或档案，永不为剧情必需（可以没有）",
+        "result": "pass",
+        "detail": "1 个：heavy_n01_armor_cracking_blow(强力开启)；其余 49 个节点为 null"
+      },
+      {
+        "id": "proposal-marking",
+        "description": "50/50 节点标为 PROPOSAL，待数值平衡与创作者审核",
+        "result": "pass",
+        "detail": "50/50"
+      },
+      {
+        "id": "superseded-lineage",
+        "description": "节点 id 不与被取代草案冲突；supersedesDraftNodeId 只引用同系列真实草案节点且各用一次；未继承的草案节点与文件中的舍弃清单一致",
+        "result": "pass",
+        "detail": "32/35 个草案节点有继承关系；舍弃 3 个：guardian_counter_window, polearm_shared_line, sword_parry_focus"
+      },
+      {
+        "id": "runtime-lineage",
+        "description": "运行时已有的 2 个剑术 MVP 技能（growth_rules.gd / app_state.gd，只读）保留其阶、名称与当前能量消耗（10 + 3 × 阶）",
+        "result": "pass",
+        "detail": "sword_n01_edge_break=sword_slash, sword_n03_sword_arc=sword_arc"
+      },
+      {
+        "id": "source-hashes",
+        "description": "记录的来源文件 sha256-text-lf-v1 与当前文件一致（不一致只记为 warn：来源已在本提案之后被他人修改）",
+        "result": "pass",
+        "detail": "10 个来源一致"
+      }
+    ],
+    "metrics": {
+      "battleSeconds": 120,
+      "energyPoolModel": "60 + 2 × (level − 1)（运行时下限 60–80，取 60）",
+      "perSeries": {
+        "guardian": {
+          "activeCount": 6,
+          "castsPerBattleIfOnCooldown": {
+            "guardian_n01_ward_line": 13,
+            "guardian_n02_challenge_call": 11,
+            "guardian_n03_bulwark_stance": 9,
+            "guardian_n05_line_shelter": 7,
+            "guardian_n08_steadfast_rally": 6,
+            "guardian_n09_oathbound_dome": 3
+          },
+          "energyToCastEverythingOnCooldown": 866,
+          "levelWhereLowPoolCoversIt": 404
+        },
+        "sword": {
+          "activeCount": 7,
+          "castsPerBattleIfOnCooldown": {
+            "sword_n01_edge_break": 25,
+            "sword_n03_sword_arc": 16,
+            "sword_n04_read_the_opening": 14,
+            "sword_n05_stance_breaker": 11,
+            "sword_n08_flowing_pursuit": 9,
+            "sword_n09_boundary_flash": 4,
+            "sword_n10_edge_domain": 3
+          },
+          "energyToCastEverythingOnCooldown": 1575,
+          "levelWhereLowPoolCoversIt": 759
+        },
+        "heavy": {
+          "activeCount": 7,
+          "castsPerBattleIfOnCooldown": {
+            "heavy_n01_armor_cracking_blow": 16,
+            "heavy_n03_plate_wedge": 13,
+            "heavy_n04_concussive_strike": 11,
+            "heavy_n05_quake_slam": 8,
+            "heavy_n07_shatter_link": 7,
+            "heavy_n09_earthpulse_resonance": 3,
+            "heavy_n10_mountain_shakers_surge": 3
+          },
+          "energyToCastEverythingOnCooldown": 1294,
+          "levelWhereLowPoolCoversIt": 618
+        },
+        "martial": {
+          "activeCount": 7,
+          "castsPerBattleIfOnCooldown": {
+            "martial_n01_breath_strike": 21,
+            "martial_n03_clinging_counter": 14,
+            "martial_n04_steady_breath": 5,
+            "martial_n05_chain_footwork": 13,
+            "martial_n07_yielding_palm": 8,
+            "martial_n09_formless_chain": 4,
+            "martial_n10_formless_intent": 3
+          },
+          "energyToCastEverythingOnCooldown": 1222,
+          "levelWhereLowPoolCoversIt": 582
+        },
+        "polearm": {
+          "activeCount": 7,
+          "castsPerBattleIfOnCooldown": {
+            "polearm_n01_line_thrust": 21,
+            "polearm_n03_intercept_sweep": 13,
+            "polearm_n04_set_spear": 11,
+            "polearm_n05_formation_pierce": 9,
+            "polearm_n07_holding_wheel": 7,
+            "polearm_n09_star_track_pierce": 4,
+            "polearm_n10_polaris_spear_field": 3
+          },
+          "energyToCastEverythingOnCooldown": 1338,
+          "levelWhereLowPoolCoversIt": 640
+        }
+      }
+    },
+    "note": "内嵌结果在写入前计算；随附校验脚本会重新计算并另加 1 项“embedded-results-match”比对。"
+  }
+}
