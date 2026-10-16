@@ -55,7 +55,7 @@ func _run_checks() -> void:
 		if not _check(app.recruited_members.has(member_id) and app.active_party_ids.has(member_id), "companion joins: " + member_id):
 			return
 		var member: Dictionary = app.member_state(member_id)
-		if not _check(member["level"] == 23 and member["job_stage"] == 2 and member["learned_skill_ids"].has("advanced"), "recruit level and job seed match hero: " + member_id):
+		if not _check(member["level"] == 23 and member["job_stage"] == 3 and member["learned_skill_ids"].has("advanced"), "recruit level and job seed match hero: " + member_id):
 			return
 		if not _check(not area.get("npc_label").visible, "recruited companion leaves exploration view: " + member_id):
 			return

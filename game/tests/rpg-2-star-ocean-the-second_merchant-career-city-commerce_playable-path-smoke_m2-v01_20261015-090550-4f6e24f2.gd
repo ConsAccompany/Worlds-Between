@@ -45,7 +45,7 @@ func _test_job_rules() -> void:
 	_check(series.get("aptitude", "") == "adaptive", "Merchant uses the Adaptive aptitude")
 	_check(GrowthRules.stage_name("merchant", 1, "zh") == "行商" and GrowthRules.stage_name("merchant", 2, "zh") == "契约经理", "canonical first two stage names")
 	_check(GrowthRules.stage_name("merchant", 1, "en") == "Merchant" and GrowthRules.stage_name("merchant", 2, "en") == "Contract Manager", "English stage names")
-	_check(series.get("stage_names", []).size() == 2 and GrowthRules.stage_name("merchant", 5, "zh") == "契约经理", "only the 2-stage MVP is implemented; later stages are not invented")
+	_check(GrowthRules.stage_count("merchant") == 5 and GrowthRules.stage_name("merchant", 5, "zh") == "万路协调者", "all five stage names come from the approved roster; none are invented")
 	_check(not GrowthRules.job_skills_have_effect("merchant") and GrowthRules.job_skills_have_effect("sword") and GrowthRules.job_skills_have_effect("tactics") and not GrowthRules.job_skills_have_effect("unknown"), "only Merchant job skills are placeholders")
 	for member_id in ["liang-xu", "zhao-ling"]:
 		_check(GrowthRules.can_enter(app.MEMBER_DEFS[member_id], "merchant"), "existing recruit qualifies for Merchant: " + member_id)

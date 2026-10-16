@@ -12,7 +12,7 @@ class_name CommerceLedger
 # rate only if the same merchant companion was stationed for the whole week, otherwise the NPC rate.
 #
 # Fair Quote (公平报价, the stage-2 Merchant passive) adds FAIR_QUOTE_PERCENT_PER_RANK of the base per
-# rank, only to weeks paid at the companion rate: ranks 1/2/3 pay 105/110/115 % with the provisional
+# rank, only to weeks paid at the companion rate: ranks 1-5 pay 105-125 % with the provisional
 # base of 100. NPC-rate weeks (after a recall, or the partial week after stationing) get no bonus. The
 # rank is read when the week is settled; it is never stored here, and settled weeks are never re-priced.
 
@@ -21,7 +21,7 @@ const LEDGER_UNIT_KIND := "provisional-ledger-unit"
 const PROVISIONAL_BASE_WEEKLY_INCOME := 100
 const NPC_EFFICIENCY_PERCENT := 80
 const FAIR_QUOTE_PERCENT_PER_RANK := 5
-const FAIR_QUOTE_MAX_RANK := 3
+const FAIR_QUOTE_MAX_RANK := 5  # the skill rank cap, GrowthRules.SKILL_RANK_CAP
 const MERCHANT_SERIES_ID := "merchant"
 
 # Tests and later tuning may change this; it is not saved, so saves follow the current rule.

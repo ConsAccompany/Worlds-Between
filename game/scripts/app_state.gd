@@ -140,8 +140,26 @@ const STRINGS := {
 		"job_skill_merchant_supply_pact": "补给协议", "job_skill_merchant_fair_quote": "公平报价",
 		"growth_placeholder_skill": "%s · 仅经营",
 		"growth_skill_placeholder": "职业技能：%s（经营用，暂无战斗效果）",
+		"growth_promote_final_quest": "第五阶需先完成系列后期任务",
+		"growth_nodes_open": "技能节点 ▸",
+		"growth_nodes_title": "%s · 技能节点",
+		"growth_nodes_close": "返回",
+		"growth_nodes_career": "职业 · %s（每阶 2 节点，入阶即得 Lv1；JP 只升 Lv2–5）",
+		"growth_nodes_personal": "个人（Lv100 内开放 10 节点；招募即得专属技能；任何职业可用）",
+		"growth_node_career_name": "%d阶 节点%s",
+		"growth_node_personal_name": "个人节点 %d",
+		"growth_node_stage_locked": "第 %d 阶开放",
+		"growth_node_level_locked": "Lv%d 开放",
+		"growth_node_skeleton": "Lv%d · 待设计",
+		"growth_node_upgrade": "Lv%d → %d JP",
+		"growth_node_max": "Lv%d MAX",
+		"growth_nodes_summary": "有运行效果的节点：职业 %d/10 · 个人 %d/10。其余为骨架节点：已开放、已记录，但尚无设计与效果，不消耗 JP。",
+		"growth_nodes_final_quest": "第五阶：需完成该系列后期任务（%s）",
+		"growth_final_quest_done": "已完成", "growth_final_quest_pending": "未完成；MVP 尚无该任务",
 		"growth_merchant_note": "行商可在城市派驻商会：世界地图 · 商会。",
 		"growth_fair_quote_note": "公平报价 Lv%d：驻守满周的商会收益 +%d%%。世界地图 · 商会。",
+		"growth_fair_quote_frozen": "驻守商会中：公平报价已冻结，召回后才能升级。",
+		"growth_fair_quote_frozen_button": "%s · 驻守冻结", "growth_node_frozen": "Lv%d · 驻守冻结",
 		"commerce_open": "商会", "commerce_title": "商会 · %s",
 		"commerce_ledger": "商会账目累计 %d 点（暂定记账，不是货币，暂不能消费）",
 		"commerce_none_here": "此城尚无商会。派驻一名行商伙伴即可开设；驻守期间该伙伴离队。",
@@ -351,8 +369,26 @@ const STRINGS := {
 		"job_skill_merchant_supply_pact": "Supply Pact", "job_skill_merchant_fair_quote": "Fair Quote",
 		"growth_placeholder_skill": "%s · commerce",
 		"growth_skill_placeholder": "Job skills: %s (commerce only; no battle effect yet)",
+		"growth_promote_final_quest": "Stage 5 needs the series final quest",
+		"growth_nodes_open": "Skill nodes ▸",
+		"growth_nodes_title": "%s · Skill nodes",
+		"growth_nodes_close": "Back",
+		"growth_nodes_career": "Job · %s (2 nodes per stage at Lv1 on entry; JP raises Lv2–5)",
+		"growth_nodes_personal": "Personal (10 nodes by Lv100; signature on joining; any job)",
+		"growth_node_career_name": "S%d node %s",
+		"growth_node_personal_name": "Personal %d",
+		"growth_node_stage_locked": "Opens at stage %d",
+		"growth_node_level_locked": "Opens at Lv%d",
+		"growth_node_skeleton": "Lv%d · pending design",
+		"growth_node_upgrade": "Lv%d → %d JP",
+		"growth_node_max": "Lv%d MAX",
+		"growth_nodes_summary": "Nodes with a runtime effect: job %d/10 · personal %d/10. The rest are skeleton nodes: open and saved, but not designed and without effect, so they take no JP.",
+		"growth_nodes_final_quest": "Stage 5: needs the series final quest (%s)",
+		"growth_final_quest_done": "done", "growth_final_quest_pending": "not done; no such quest in the MVP",
 		"growth_merchant_note": "Merchants can run a city company: World map · Company.",
 		"growth_fair_quote_note": "Fair Quote Lv%d: +%d%% on fully stationed weeks. World map · Company.",
+		"growth_fair_quote_frozen": "Stationed at a company: Fair Quote is frozen; recall to upgrade.",
+		"growth_fair_quote_frozen_button": "%s · stationed", "growth_node_frozen": "Lv%d · stationed",
 		"commerce_open": "Company", "commerce_title": "Company · %s",
 		"commerce_ledger": "Company ledger: %d points in total (provisional record, not money; cannot be spent yet)",
 		"commerce_none_here": "No company in this city yet. Station a Merchant companion to open one; they leave the party while stationed.",
@@ -493,6 +529,11 @@ var _travel_registry: WorldRouteRegistry = null
 # Provisional commerce ledger; its units are not currency. Settled only by advance_calendar.
 var commerce := CommerceLedger.new()
 var commerce_state_migrated := false
+# Series whose final quest is done: stage 5 of that series is open to the whole party (series id -> true).
+# No final quest exists in the MVP, so this stays empty in normal play.
+var cleared_final_quests: Dictionary = {}
+# True when the last load had to open ten-node career/personal nodes or clamp ranks for an older save.
+var growth_state_migrated := false
 
 const TRAVEL_SAVE_VERSION := 1
 const REST_WEEK_MINUTES := 7 * 24 * 60
@@ -561,7 +602,10 @@ func select_destination(destination_id: String) -> bool:
 
 
 func begin_new_run() -> void:
-	hero_state = {"hp": 100, "max_hp": 100, "energy": 60, "max_energy": 60, "level": 1, "xp": 0, "jp": 0, "pending_job_choices": 0, "job_series": "sword", "job_stage": 1, "job_records": {"sword": {"stage": 1, "skills": {"sword_slash": 1}}}, "personal_skill_rank": 1, "aptitudes": [60, 60, 60, 60], "ai_policy": "balanced"}
+	hero_state = {"hp": 100, "max_hp": 100, "energy": 60, "max_energy": 60, "level": 1, "xp": 0, "jp": 0, "pending_job_choices": 0, "job_series": "sword", "job_stage": 1, "job_records": {"sword": GrowthRules.new_job_record("sword", 1)}, "personal_skill_rank": 1, "personal_node_ranks": {}, "aptitudes": [60, 60, 60, 60], "ai_policy": "balanced"}
+	GrowthRules.unlock_personal_nodes(hero_state, "hero")
+	cleared_final_quests.clear()
+	growth_state_migrated = false
 	member_states.clear()
 	active_party_ids = ["hero"]
 	recruited_members.clear()
@@ -1156,18 +1200,21 @@ func recruit_member(member_id: String) -> bool:
 		return false
 	var definition: Dictionary = MEMBER_DEFS[member_id]
 	var level := maxi(1, int(hero_state.get("level", 1)))
-	var stage := mini(2, 1 + (level - 1) / 10)
+	var stage := GrowthRules.recruit_stage(level, String(definition["job_series"]), cleared_final_quests)
 	member_states[member_id] = {
 		"hp": int(definition["max_hp"]), "max_hp": int(definition["max_hp"]),
 		"energy": int(definition["max_energy"]), "max_energy": int(definition["max_energy"]),
 		"level": level, "xp": 0, "jp": 0, "pending_job_choices": 0,
 		"job_series": definition["job_series"], "job_stage": stage,
-		"job_records": {definition["job_series"]: {"stage": stage, "skills": {String(GrowthRules.SERIES[definition["job_series"]]["skills"][0]): 1, String(GrowthRules.SERIES[definition["job_series"]]["skills"][stage - 1]): 1}}},
+		"job_records": {definition["job_series"]: GrowthRules.new_job_record(definition["job_series"], stage)},
 		"personal_skill_rank": mini(3, 1 + (level - 1) / 20),
+		"personal_node_ranks": {},
 		"ai_policy": "balanced",
 		"learned_skill_ids": ["basic", "advanced"] if stage > 1 else ["basic"],
 		"aptitudes": definition["aptitudes"].duplicate(),
 	}
+	# The signature skill is open on joining; other personal nodes open up to the synced level at once.
+	GrowthRules.unlock_personal_nodes(member_states[member_id], member_id)
 	recruited_members[member_id] = true
 	record_playtest_event("recruit", member_id)
 	party_bonds[member_id] = int(party_bonds.get(member_id, 0))
@@ -1223,8 +1270,18 @@ func _process_levels(member: Dictionary) -> void:
 		member["max_energy"] = int(member["max_energy"]) + 2
 		member["hp"] = member["max_hp"]
 		member["energy"] = member["max_energy"]
+		GrowthRules.unlock_personal_nodes(member, _member_id_of(member))
 		if int(member["level"]) % 10 == 0:
 			member["pending_job_choices"] = 1
+
+
+func _member_id_of(member: Dictionary) -> String:
+	if is_same(member, hero_state):
+		return "hero"
+	for member_id in member_states:
+		if is_same(member_states[member_id], member):
+			return String(member_id)
+	return ""
 
 
 func has_pending_job_choice() -> bool:
@@ -1247,17 +1304,19 @@ func choose_job(member_id: String, action: String, target_series: String = "") -
 		"stay":
 			pass
 		"promote":
-			if int(member["job_stage"]) >= 2:
+			if not GrowthRules.can_promote(member, cleared_final_quests):
 				return false
 			member["job_stage"] = int(member["job_stage"]) + 1
 			var record: Dictionary = records[current]
 			record["stage"] = member["job_stage"]
-			record["skills"][GrowthRules.current_skill_id(member)] = 1
+			# Entering a stage opens both of its nodes at rank 1; JP is never spent to open them.
+			GrowthRules.grant_stage_nodes(record, current, int(member["job_stage"]))
 		"switch":
 			if target_series == current or not GrowthRules.can_enter(member, target_series):
 				return false
+			# Every series keeps its own record, so switching back restores its stage and ranks.
 			if not records.has(target_series):
-				records[target_series] = {"stage": 1, "skills": {String(GrowthRules.SERIES[target_series]["skills"][0]): 1}}
+				records[target_series] = GrowthRules.new_job_record(target_series, 1)
 			member["job_series"] = target_series
 			member["job_stage"] = int(records[target_series]["stage"])
 		_:
@@ -1272,14 +1331,13 @@ func upgrade_job_skill(member_id: String, skill_id: String) -> bool:
 	if member.is_empty():
 		return false
 	var series_id: String = member["job_series"]
-	# Placeholder skills (Merchant Supply Pact) have no effect, so JP is never spent on them.
+	# Nodes without an effect (skeleton nodes, Merchant Supply Pact) never take JP.
 	if not GrowthRules.job_skill_upgradable(series_id, skill_id):
 		return false
-	# A stationed manager's Fair Quote rank is frozen, so the week being earned is priced at one rank.
-	if skill_id == GrowthRules.FAIR_QUOTE_SKILL_ID and commerce.company_for_manager(member_id) != "":
+	if fair_quote_frozen(member_id, skill_id):
 		return false
-	var skills: Array = GrowthRules.SERIES[series_id]["skills"]
-	if not skills.has(skill_id) or skills.find(skill_id) >= int(member["job_stage"]):
+	# JP only raises nodes the current stage has already opened.
+	if not GrowthRules.job_node_open(member, series_id, skill_id):
 		return false
 	var record: Dictionary = member["job_records"][series_id]
 	var rank := int(record["skills"].get(skill_id, 0))
@@ -1289,6 +1347,12 @@ func upgrade_job_skill(member_id: String, skill_id: String) -> bool:
 	member["jp"] = int(member["jp"]) - cost
 	record["skills"][skill_id] = rank + 1
 	return true
+
+
+# A stationed manager's Fair Quote rank is frozen, so the week being earned is priced at one rank.
+# The growth screen reads this too, so the button is disabled exactly when the press is refused.
+func fair_quote_frozen(member_id: String, skill_id: String = GrowthRules.FAIR_QUOTE_SKILL_ID) -> bool:
+	return skill_id == GrowthRules.FAIR_QUOTE_SKILL_ID and commerce.company_for_manager(member_id) != ""
 
 
 func upgrade_personal_skill(member_id: String) -> bool:
@@ -1302,6 +1366,34 @@ func upgrade_personal_skill(member_id: String) -> bool:
 		return false
 	member["jp"] = int(member["jp"]) - cost
 	member["personal_skill_rank"] = rank + 1
+	return true
+
+
+# Raises any open personal node. The signature node is the personal skill above; other nodes take JP
+# only once they have an effect, and only after their level gate has opened them.
+func upgrade_personal_node(member_id: String, node_id: String) -> bool:
+	if node_id != "" and node_id == GrowthRules.signature_node_id(member_id):
+		return upgrade_personal_skill(member_id)
+	var member := member_state(member_id)
+	if member.is_empty() or not MEMBER_DEFS.has(member_id) or not GrowthRules.personal_node_upgradable(member_id, node_id):
+		return false
+	var rank := GrowthRules.personal_node_rank(member, member_id, node_id)
+	if rank < 1:
+		return false
+	var cost := GrowthRules.jp_cost(member, String(MEMBER_DEFS[member_id]["job_series"]), rank + 1)
+	if cost < 0 or int(member.get("jp", 0)) < cost:
+		return false
+	member["jp"] = int(member["jp"]) - cost
+	member["personal_node_ranks"][node_id] = rank + 1
+	return true
+
+
+# Records a series final quest as done for the whole party, opening promotion to stage 5 of that series.
+# The MVP has no final quest content; this is the rules hook and test entry point.
+func clear_series_final_quest(series_id: String) -> bool:
+	if GrowthRules.series_entry(series_id).is_empty() or cleared_final_quests.has(series_id):
+		return false
+	cleared_final_quests[series_id] = true
 	return true
 
 
@@ -1357,6 +1449,7 @@ func make_snapshot(scene_kind: String, position: Vector2, note: String) -> Dicti
 			"lastTravel": last_travel.duplicate(true),
 		},
 		"commerce": commerce.to_save(),
+		"growthFinalQuests": cleared_final_quests.duplicate(true),
 	}
 
 
@@ -1383,6 +1476,11 @@ func load_save(id: String) -> bool:
 	hero_name = String(snapshot.get("heroName", ""))
 	hero_appearance = String(snapshot.get("heroAppearance", "male"))
 	member_states = snapshot["members"].duplicate(true)
+	# Additive ten-node migration: older saves gain the nodes their stages and levels already earn.
+	cleared_final_quests = snapshot.get("growthFinalQuests", {}).duplicate(true)
+	growth_state_migrated = GrowthRules.normalize_member(hero_state, "hero")
+	for member_id in member_states:
+		growth_state_migrated = GrowthRules.normalize_member(member_states[member_id], String(member_id)) or growth_state_migrated
 	active_party_ids = party
 	recruited_members = snapshot["recruited"].duplicate(true)
 	party_talk_seen = snapshot.get("partyTalkSeen", {}).duplicate(true)
@@ -1532,6 +1630,17 @@ func _valid_snapshot(snapshot: Dictionary) -> bool:
 	var hero: Dictionary = snapshot["hero"]
 	if not hero.has("level") or not hero.has("job_records") or not GrowthRules.SERIES.has(hero.get("job_series", "")):
 		return false
+	if not _valid_growth_member(hero):
+		return false
+	for member_id in snapshot["members"]:
+		if typeof(snapshot["members"][member_id]) != TYPE_DICTIONARY or not _valid_growth_member(snapshot["members"][member_id]):
+			return false
+	var final_quests: Variant = snapshot.get("growthFinalQuests", {})
+	if typeof(final_quests) != TYPE_DICTIONARY:
+		return false
+	for series_id in final_quests:
+		if typeof(series_id) != TYPE_STRING or GrowthRules.series_entry(series_id).is_empty() or final_quests[series_id] != true:
+			return false
 	var party: Array = snapshot["activeParty"]
 	if party.is_empty() or party.size() > PARTY_CAPACITY or party[0] != "hero":
 		return false
@@ -1588,6 +1697,20 @@ func _valid_snapshot(snapshot: Dictionary) -> bool:
 	# ended week is silently skipped; never ahead) and no company may be newer than it.
 	if snapshot.has("commerce") and not CommerceLedger.is_valid_save_block(snapshot["commerce"], _saved_week_index(snapshot), snapshot["recruited"], snapshot["members"], party, travel_registry().resolve_location_id):
 		return false
+	return true
+
+
+# Shape checks only; out-of-range ranks are clamped by GrowthRules.normalize_member on load.
+func _valid_growth_member(member: Dictionary) -> bool:
+	if typeof(member.get("job_records", {})) != TYPE_DICTIONARY or typeof(member.get("personal_node_ranks", {})) != TYPE_DICTIONARY:
+		return false
+	var stage: Variant = member.get("job_stage", 1)
+	if typeof(stage) not in [TYPE_INT, TYPE_FLOAT] or int(stage) < 1 or int(stage) > GrowthRules.STAGE_COUNT:
+		return false
+	for series_id in member.get("job_records", {}):
+		var record: Variant = member["job_records"][series_id]
+		if typeof(record) != TYPE_DICTIONARY or typeof(record.get("skills", {})) != TYPE_DICTIONARY:
+			return false
 	return true
 
 

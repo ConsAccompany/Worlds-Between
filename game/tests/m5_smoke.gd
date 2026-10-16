@@ -52,7 +52,7 @@ func _run_checks() -> void:
 		return
 	var liang: Dictionary = app.member_state("liang-xu")
 	var zhao: Dictionary = app.member_state("zhao-ling")
-	if not _check(liang["level"] == 23 and liang["job_stage"] == 2 and GrowthRules.skill_rank(liang, "tactics_rally") == 1, "recruit has level-matched job progress"):
+	if not _check(liang["level"] == 23 and liang["job_stage"] == 3 and GrowthRules.skill_rank(liang, "tactics_rally") == 1 and GrowthRules.skill_rank(liang, "tactics_s3a") == 1, "recruit has level-matched job progress"):
 		return
 	if not _check(GrowthRules.jp_cost(liang, "tactics", 2) < GrowthRules.jp_cost(app.hero_state, "sword", 2), "high aptitude gives lower JP demand"):
 		return

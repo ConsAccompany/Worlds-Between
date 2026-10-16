@@ -50,7 +50,7 @@ func _run() -> void:
 func _test_rules() -> void:
 	_check(CommerceLedger.FAIR_QUOTE_PERCENT_PER_RANK == 5 and CommerceLedger.FAIR_QUOTE_MAX_RANK == GrowthRules.SKILL_JP_BASE.size(), "Fair Quote is +5 % of base per rank, up to the JP rank cap")
 	_check([0, 1, 2, 3].map(func(rank): return CommerceLedger.companion_rate_percent(rank)) == [100, 105, 110, 115], "companion rate by rank: 100/105/110/115 %")
-	_check(CommerceLedger.companion_rate_percent(99) == 115 and CommerceLedger.companion_rate_percent(-4) == 100, "out-of-range ranks are clamped")
+	_check(CommerceLedger.companion_rate_percent(5) == 125 and CommerceLedger.companion_rate_percent(99) == 125 and CommerceLedger.companion_rate_percent(-4) == 100, "out-of-range ranks are clamped to 0..5 (rank 5 pays 125 %)")
 	_check(not GrowthRules.job_skills_have_effect("merchant") and GrowthRules.job_skills_have_effect("sword"), "Merchant job skills still have no battle effect")
 	_check(GrowthRules.job_skill_upgradable("merchant", FAIR) and not GrowthRules.job_skill_upgradable("merchant", SUPPLY), "only Fair Quote is JP-upgradable; Supply Pact stays a placeholder")
 	_check(GrowthRules.job_skill_upgradable("sword", "sword_slash") and not GrowthRules.job_skill_upgradable("sword", FAIR) and not GrowthRules.job_skill_upgradable("unknown", FAIR), "other series keep their skills; Fair Quote belongs to Merchant only")
@@ -152,7 +152,7 @@ func _test_path() -> void:
 	_check(app.recall_commerce_manager(city_id)["ok"], "recall Liang Xu")
 	_check(app.rest_one_week()["units"] == NPC, "an NPC-run week pays %d with no Fair Quote bonus" % NPC)
 	_check(app.upgrade_job_skill("liang-xu", FAIR) and GrowthRules.fair_quote_rank(app.member_state("liang-xu")) == 3 and int(app.member_state("liang-xu")["jp"]) == 500 - cost_3, "back in the party, rank 3 costs %d JP" % cost_3)
-	_check(app.upgrade_job_skill("liang-xu", FAIR) == false, "rank 3 is the maximum")
+	_check(GrowthRules.jp_cost(app.member_state("liang-xu"), "merchant", 4) > 0 and GrowthRules.jp_cost(app.member_state("liang-xu"), "merchant", 6) < 0, "ranks 4-5 stay purchasable; rank 5 is the cap")
 	_check(app.assign_commerce_manager(city_id, "liang-xu")["ok"], "station Liang Xu again")
 	_check(app.commerce_companion_rate_percent("liang-xu") == 115 and app.commerce_current_week_rate_percent(city_id) == CommerceLedger.NPC_EFFICIENCY_PERCENT, "after re-stationing, the full-week rate is 115 % but the running week is at the NPC rate")
 	await _check_company_panel(city_id, 115, "commerce_week_partial", [CommerceLedger.NPC_EFFICIENCY_PERCENT, 115], "re-stationed partial week")
@@ -162,7 +162,7 @@ func _test_path() -> void:
 	# Guards: a tampered rank is clamped; leaving Merchant or stage 2 drops the bonus.
 	liang = app.member_state("liang-xu")
 	liang["job_records"]["merchant"]["skills"][FAIR] = 99
-	_check(app.rest_one_week()["units"] == 115, "a tampered rank 99 still pays only 115")
+	_check(app.rest_one_week()["units"] == 125, "a tampered rank 99 is clamped to rank 5 and pays only 125")
 	liang["job_records"]["merchant"]["skills"][FAIR] = 3
 	liang["job_stage"] = 1
 	_check(app.rest_one_week()["units"] == BASE, "a stage-1 record pays the plain companion rate")
@@ -204,7 +204,9 @@ func _test_legacy_save() -> void:
 	_check(app.choose_job("liang-xu", "switch", "merchant"), "old save: Liang Xu switches to Merchant")
 	app._grant_growth(liang, _xp_until_level(liang, 20), 0)
 	_check(app.choose_job("liang-xu", "promote"), "old save: Liang Xu is promoted to Contract Manager")
-	_check(liang["job_records"]["merchant"] == {"stage": 2, "skills": {SUPPLY: 1, FAIR: 1}}, "old save: the Merchant record has the da394c3 shape, Fair Quote rank 1 from promotion: %s" % [liang["job_records"]["merchant"]])
+	_check(GrowthRules.skill_rank(liang, FAIR) == 1, "old save: promotion opened Fair Quote at rank 1")
+	# This build also opens the other node of each entered stage, so write the da394c3 record shape directly.
+	liang["job_records"]["merchant"] = {"stage": 2, "skills": {SUPPLY: 1, FAIR: 1}}
 	_check(app.open_commerce_company(city_id, "liang-xu")["ok"], "old save: Liang Xu opens the company")
 	app.rest_one_week()
 	app.rest_one_week()
@@ -218,6 +220,7 @@ func _test_legacy_save() -> void:
 	app.begin_new_run()
 	_check(save_id != "" and app.load_save(save_id), "old save: the save loads")
 	liang = app.member_state("liang-xu")
+	_check(app.growth_state_migrated and GrowthRules.skill_rank(liang, "merchant_s1b") == 1 and GrowthRules.skill_rank(liang, "merchant_s2b") == 1 and GrowthRules.skill_rank(liang, SUPPLY) == 1, "old save: loading opens the stage nodes the old record lacked and keeps its ranks")
 	_check(GrowthRules.fair_quote_rank(liang) == 1 and _company(city_id).get("managerId", "") == "liang-xu" and _units() == BASE and int(_company(city_id)["unitsEarned"]) == BASE and int(_company(city_id)["weeksSettled"]) == 1, "old save: rank 1, the post and the 100 already paid are restored as saved")
 	_check(app.commerce_companion_rate_percent("liang-xu") == 105 and app.commerce_current_week_rate_percent(city_id) == 105, "old save: the running full week is at 105 %")
 	var result: Dictionary = app.rest_one_week()

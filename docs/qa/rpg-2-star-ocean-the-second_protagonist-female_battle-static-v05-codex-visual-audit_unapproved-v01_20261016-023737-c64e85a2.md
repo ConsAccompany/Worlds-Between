@@ -1,0 +1,8 @@
+# Female battle idle v05 — Codex visual audit
+
+- Status: unapproved static candidate. The creator accepted the battle display proportion at 0.65 only; complete character sprites remain 0/52.
+- Directly inspected the two 1280×720 Godot four-person captures: `outputs/rpg-2-star-ocean-the-second_protagonist-female_sideview-idle-right-static-native0p65_party-capture-ruins_unapproved-v05_20261016-054620-845c716a.png` and `outputs/rpg-2-star-ocean-the-second_protagonist-female_sideview-idle-right-static-native0p65_party-capture-outskirts_unapproved-v05_20261016-054620-cfa9cdf9.png`.
+- Compared with v04, the single pack and shorter sword make the silhouette less cluttered. There is now a visible gap between the heroine and Liang Xu. The v8 exploration palette gives the coat consistent color across views.
+- The trade-off is visible in both arenas: the slate coat is close to the paving value, and the figure reads mostly through its dark outline. Her face and glove have distinct pixels in the source but remain hard to read at normal play size. The stance is still stiff and the heroine looks narrow beside the companions. The arena background has much finer texture and shading than the party sprites.
+- Next pass should test a more readable pose and value grouping using the approved v8 palette, while keeping the 0.65 display proportion, foot baseline and new inter-character gap. Consider separating the body from the floor through local lighting or rim pixels before changing the canonical coat colors. Recheck at native 1280×720, not only in enlarged pixel views.
+- Claude reports layered Pixelorama round-trip and 19 technical checks. This note is Codex's visual judgment of the Godot captures; it is not creator acceptance and does not approve animation.

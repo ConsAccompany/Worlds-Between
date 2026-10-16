@@ -1,0 +1,6041 @@
+{
+	"schemaVersion": 1,
+	"kind": "growth-progression-catalog",
+	"status": "science-mvp-rules-slice; skeletal nodes; not a skill design",
+	"note": "Implements the 2026-10-15 creator rules for tree shape, unlocks, JP use and rank cap. Node ids are structural placeholders: no node name, number or effect beyond the existing MVP runtime skills is designed here. 200 + 510 approved node designs remain unauthored.",
+	"sources": [
+		{
+			"role": "creator rules",
+			"path": "docs/design/rpg-2-star-ocean-the-second_creator-decisions-2026-10-15_world-skills-ai-endgame_reconciliation-note_v01_20261015-174559-39efc292.md",
+			"sha256-text-lf-v1": "94a821911b569e6902e69c2b755772d779ca72a599b5ea5fe1209daee2819954"
+		},
+		{
+			"role": "approved 20-series roster and five-stage names",
+			"path": "outputs/rpg-2-star-ocean-the-second_all-jobs_five-tier-proposal_v01_20261013-224236-6f2b9c11.json",
+			"sha256-text-lf-v1": "92f5bff5428c73e45e81a4becb93ec7a59ad31ed637474f0ffbb77cc036765d5"
+		},
+		{
+			"role": "51 character identities",
+			"path": "outputs/rpg-2-star-ocean-the-second_game-bible_state_v01_20261013-195422-b8c16d42.json",
+			"sha256-text-lf-v1": "303942c975bf51391c6de3bcbaaf4d36807237459de85c591a3143e88b561074"
+		},
+		{
+			"role": "provisional personal unlock levels (proposal, pending creator review)",
+			"path": "docs/design/rpg-2-star-ocean-the-second_core-cast_personal-skills-ten-node_design-qa-note-v01_20261015-232129-d087d0e1.md",
+			"sha256-text-lf-v1": "a680c4a31ebcc4afe8d7ab2e2957598d759ea4a391e23559036213880aa6937d"
+		}
+	],
+	"rules": {
+		"careerStages": 5,
+		"careerNodesPerStage": 2,
+		"careerNodesPerSeries": 10,
+		"careerNodesGrantedOnStageEntry": true,
+		"stagesByLevelChoice": 4,
+		"stage5RequiresSeriesFinalQuest": true,
+		"seriesFinalQuestClearsForWholeParty": true,
+		"personalNodesPerIdentity": 10,
+		"personalUnlockLevels": [
+			1,
+			6,
+			14,
+			22,
+			32,
+			42,
+			54,
+			66,
+			80,
+			100
+		],
+		"personalUnlockLevelsStatus": "final gate Lv100 is the creator decision (all 10 personal nodes unlock at level 100 at the latest); gates 2-9 remain provisional (shared gates from the unapproved hero/c01-c03 proposal)",
+		"personalLevelCeiling": 100,
+		"signatureAvailableOnJoin": true,
+		"skillRankCap": 5,
+		"jpUnlocksNodes": false,
+		"jpUpgradesRanks": [
+			2,
+			3,
+			4,
+			5
+		],
+		"jpSpentOnNodesWithoutEffect": false,
+		"upgradeJpBase": {
+			"2": 35,
+			"3": 55,
+			"4": 80,
+			"5": 110
+		},
+		"upgradeJpBaseStatus": "provisional; ranks 2-3 keep the existing runtime costs, 4-5 are placeholders",
+		"changingSeriesPreservesRecords": true
+	},
+	"counts": {
+		"series": 20,
+		"careerNodes": 200,
+		"careerNodesWithRuntimeEffect": 9,
+		"identities": 51,
+		"personalNodes": 510,
+		"personalNodesWithRuntimeEffect": 4,
+		"approvedNodeDesignsAuthored": 0
+	},
+	"series": [
+		{
+			"id": "guardian",
+			"aptitude": "martial",
+			"nameZh": "守护",
+			"nameEn": "Guardian",
+			"stageNamesZh": [
+				"护卫",
+				"壁垒卫士",
+				"阵线守望者",
+				"不屈统领",
+				"万界守誓者"
+			],
+			"stageNamesEn": [
+				null,
+				null,
+				null,
+				null,
+				null
+			],
+			"runtimeEnterable": false,
+			"nodes": [
+				{
+					"id": "guardian_s1a",
+					"stage": 1,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "guardian_s1b",
+					"stage": 1,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "guardian_s2a",
+					"stage": 2,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "guardian_s2b",
+					"stage": 2,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "guardian_s3a",
+					"stage": 3,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "guardian_s3b",
+					"stage": 3,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "guardian_s4a",
+					"stage": 4,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "guardian_s4b",
+					"stage": 4,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "guardian_s5a",
+					"stage": 5,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "guardian_s5b",
+					"stage": 5,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "sword",
+			"aptitude": "martial",
+			"nameZh": "剑术",
+			"nameEn": "Swordcraft",
+			"stageNamesZh": [
+				"剑客",
+				"连刃士",
+				"破势剑师",
+				"无隙剑宗",
+				"界线剑圣"
+			],
+			"stageNamesEn": [
+				"Swordsman",
+				"Swordmaster",
+				null,
+				null,
+				null
+			],
+			"runtimeEnterable": true,
+			"nodes": [
+				{
+					"id": "sword_slash",
+					"stage": 1,
+					"slot": "a",
+					"effect": "battle",
+					"nameKey": "job_skill_sword_slash",
+					"status": "runtime-mvp-skill"
+				},
+				{
+					"id": "sword_s1b",
+					"stage": 1,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "sword_arc",
+					"stage": 2,
+					"slot": "a",
+					"effect": "battle",
+					"nameKey": "job_skill_sword_arc",
+					"status": "runtime-mvp-skill"
+				},
+				{
+					"id": "sword_s2b",
+					"stage": 2,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "sword_s3a",
+					"stage": 3,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "sword_s3b",
+					"stage": 3,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "sword_s4a",
+					"stage": 4,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "sword_s4b",
+					"stage": 4,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "sword_s5a",
+					"stage": 5,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "sword_s5b",
+					"stage": 5,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "heavy",
+			"aptitude": "martial",
+			"nameZh": "重武",
+			"nameEn": "Heavy Arms",
+			"stageNamesZh": [
+				"重兵手",
+				"破甲手",
+				"震岳战匠",
+				"裂阵巨匠",
+				"地脉撼者"
+			],
+			"stageNamesEn": [
+				null,
+				null,
+				null,
+				null,
+				null
+			],
+			"runtimeEnterable": false,
+			"nodes": [
+				{
+					"id": "heavy_s1a",
+					"stage": 1,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "heavy_s1b",
+					"stage": 1,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "heavy_s2a",
+					"stage": 2,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "heavy_s2b",
+					"stage": 2,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "heavy_s3a",
+					"stage": 3,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "heavy_s3b",
+					"stage": 3,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "heavy_s4a",
+					"stage": 4,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "heavy_s4b",
+					"stage": 4,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "heavy_s5a",
+					"stage": 5,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "heavy_s5b",
+					"stage": 5,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "martial",
+			"aptitude": "martial",
+			"nameZh": "武道",
+			"nameEn": "Martial Arts",
+			"stageNamesZh": [
+				"练武者",
+				"劲路师",
+				"调息宗师",
+				"化劲武尊",
+				"无形拳圣"
+			],
+			"stageNamesEn": [
+				null,
+				null,
+				null,
+				null,
+				null
+			],
+			"runtimeEnterable": false,
+			"nodes": [
+				{
+					"id": "martial_s1a",
+					"stage": 1,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "martial_s1b",
+					"stage": 1,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "martial_s2a",
+					"stage": 2,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "martial_s2b",
+					"stage": 2,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "martial_s3a",
+					"stage": 3,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "martial_s3b",
+					"stage": 3,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "martial_s4a",
+					"stage": 4,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "martial_s4b",
+					"stage": 4,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "martial_s5a",
+					"stage": 5,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "martial_s5b",
+					"stage": 5,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "polearm",
+			"aptitude": "martial",
+			"nameZh": "长兵",
+			"nameEn": "Polearms",
+			"stageNamesZh": [
+				"枪矛手",
+				"控距卫",
+				"贯阵将",
+				"天衡枪宗",
+				"星轨枪圣"
+			],
+			"stageNamesEn": [
+				null,
+				null,
+				null,
+				null,
+				null
+			],
+			"runtimeEnterable": false,
+			"nodes": [
+				{
+					"id": "polearm_s1a",
+					"stage": 1,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "polearm_s1b",
+					"stage": 1,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "polearm_s2a",
+					"stage": 2,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "polearm_s2b",
+					"stage": 2,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "polearm_s3a",
+					"stage": 3,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "polearm_s3b",
+					"stage": 3,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "polearm_s4a",
+					"stage": 4,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "polearm_s4b",
+					"stage": 4,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "polearm_s5a",
+					"stage": 5,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "polearm_s5b",
+					"stage": 5,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "archery",
+			"aptitude": "adaptive",
+			"nameZh": "弓猎",
+			"nameEn": "Archery and Tracking",
+			"stageNamesZh": [
+				"猎手",
+				"寻迹射手",
+				"穿林游侠",
+				"千步猎宗",
+				"天际追猎者"
+			],
+			"stageNamesEn": [
+				null,
+				null,
+				null,
+				null,
+				null
+			],
+			"runtimeEnterable": false,
+			"nodes": [
+				{
+					"id": "archery_s1a",
+					"stage": 1,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "archery_s1b",
+					"stage": 1,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "archery_s2a",
+					"stage": 2,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "archery_s2b",
+					"stage": 2,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "archery_s3a",
+					"stage": 3,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "archery_s3b",
+					"stage": 3,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "archery_s4a",
+					"stage": 4,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "archery_s4b",
+					"stage": 4,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "archery_s5a",
+					"stage": 5,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "archery_s5b",
+					"stage": 5,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "firearms",
+			"aptitude": "adaptive",
+			"nameZh": "枪械",
+			"nameEn": "Firearms",
+			"stageNamesZh": [
+				"枪手",
+				"精密射手",
+				"火线技师",
+				"弹道统御者",
+				"极域枪皇"
+			],
+			"stageNamesEn": [
+				"Gunner",
+				"Marksman",
+				null,
+				null,
+				null
+			],
+			"runtimeEnterable": true,
+			"nodes": [
+				{
+					"id": "firearms_shot",
+					"stage": 1,
+					"slot": "a",
+					"effect": "battle",
+					"nameKey": "job_skill_firearms_shot",
+					"status": "runtime-mvp-skill"
+				},
+				{
+					"id": "firearms_s1b",
+					"stage": 1,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "firearms_burst",
+					"stage": 2,
+					"slot": "a",
+					"effect": "battle",
+					"nameKey": "job_skill_firearms_burst",
+					"status": "runtime-mvp-skill"
+				},
+				{
+					"id": "firearms_s2b",
+					"stage": 2,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "firearms_s3a",
+					"stage": 3,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "firearms_s3b",
+					"stage": 3,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "firearms_s4a",
+					"stage": 4,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "firearms_s4b",
+					"stage": 4,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "firearms_s5a",
+					"stage": 5,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "firearms_s5b",
+					"stage": 5,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "skirmish",
+			"aptitude": "adaptive",
+			"nameZh": "游击",
+			"nameEn": "Skirmishing",
+			"stageNamesZh": [
+				"游击手",
+				"转位者",
+				"破绽猎手",
+				"机动策士",
+				"无迹行者"
+			],
+			"stageNamesEn": [
+				null,
+				null,
+				null,
+				null,
+				null
+			],
+			"runtimeEnterable": false,
+			"nodes": [
+				{
+					"id": "skirmish_s1a",
+					"stage": 1,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "skirmish_s1b",
+					"stage": 1,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "skirmish_s2a",
+					"stage": 2,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "skirmish_s2b",
+					"stage": 2,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "skirmish_s3a",
+					"stage": 3,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "skirmish_s3b",
+					"stage": 3,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "skirmish_s4a",
+					"stage": 4,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "skirmish_s4b",
+					"stage": 4,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "skirmish_s5a",
+					"stage": 5,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "skirmish_s5b",
+					"stage": 5,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "beast",
+			"aptitude": "adaptive",
+			"nameZh": "驯兽",
+			"nameEn": "Beast Bonding",
+			"stageNamesZh": [
+				"兽伴训导员",
+				"野性联络者",
+				"兽群协律者",
+				"群生守望者",
+				"万灵同路者"
+			],
+			"stageNamesEn": [
+				null,
+				null,
+				null,
+				null,
+				null
+			],
+			"runtimeEnterable": false,
+			"nodes": [
+				{
+					"id": "beast_s1a",
+					"stage": 1,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "beast_s1b",
+					"stage": 1,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "beast_s2a",
+					"stage": 2,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "beast_s2b",
+					"stage": 2,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "beast_s3a",
+					"stage": 3,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "beast_s3b",
+					"stage": 3,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "beast_s4a",
+					"stage": 4,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "beast_s4b",
+					"stage": 4,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "beast_s5a",
+					"stage": 5,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "beast_s5b",
+					"stage": 5,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "merchant",
+			"aptitude": "adaptive",
+			"nameZh": "行商",
+			"nameEn": "Commerce",
+			"stageNamesZh": [
+				"行商",
+				"契约经理",
+				"跨城经纪",
+				"供应总管",
+				"万路协调者"
+			],
+			"stageNamesEn": [
+				"Merchant",
+				"Contract Manager",
+				null,
+				null,
+				null
+			],
+			"runtimeEnterable": true,
+			"nodes": [
+				{
+					"id": "merchant_supply_pact",
+					"stage": 1,
+					"slot": "a",
+					"effect": "none",
+					"nameKey": "job_skill_merchant_supply_pact",
+					"status": "runtime-mvp-placeholder"
+				},
+				{
+					"id": "merchant_s1b",
+					"stage": 1,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "merchant_fair_quote",
+					"stage": 2,
+					"slot": "a",
+					"effect": "commerce",
+					"nameKey": "job_skill_merchant_fair_quote",
+					"status": "runtime-mvp-skill"
+				},
+				{
+					"id": "merchant_s2b",
+					"stage": 2,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "merchant_s3a",
+					"stage": 3,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "merchant_s3b",
+					"stage": 3,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "merchant_s4a",
+					"stage": 4,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "merchant_s4b",
+					"stage": 4,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "merchant_s5a",
+					"stage": 5,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "merchant_s5b",
+					"stage": 5,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "engineering",
+			"aptitude": "scholarly",
+			"nameZh": "工程",
+			"nameEn": "Engineering",
+			"stageNamesZh": [
+				"修械员",
+				"现场工程师",
+				"系统改造师",
+				"超域工程师",
+				"创构大师"
+			],
+			"stageNamesEn": [
+				null,
+				null,
+				null,
+				null,
+				null
+			],
+			"runtimeEnterable": false,
+			"nodes": [
+				{
+					"id": "engineering_s1a",
+					"stage": 1,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "engineering_s1b",
+					"stage": 1,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "engineering_s2a",
+					"stage": 2,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "engineering_s2b",
+					"stage": 2,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "engineering_s3a",
+					"stage": 3,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "engineering_s3b",
+					"stage": 3,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "engineering_s4a",
+					"stage": 4,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "engineering_s4b",
+					"stage": 4,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "engineering_s5a",
+					"stage": 5,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "engineering_s5b",
+					"stage": 5,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "automata",
+			"aptitude": "scholarly",
+			"nameZh": "机偶",
+			"nameEn": "Automata",
+			"stageNamesZh": [
+				"机偶技师",
+				"随行机师",
+				"多机协调者",
+				"自律编队师",
+				"共生机魂师"
+			],
+			"stageNamesEn": [
+				null,
+				null,
+				null,
+				null,
+				null
+			],
+			"runtimeEnterable": false,
+			"nodes": [
+				{
+					"id": "automata_s1a",
+					"stage": 1,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "automata_s1b",
+					"stage": 1,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "automata_s2a",
+					"stage": 2,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "automata_s2b",
+					"stage": 2,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "automata_s3a",
+					"stage": 3,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "automata_s3b",
+					"stage": 3,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "automata_s4a",
+					"stage": 4,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "automata_s4b",
+					"stage": 4,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "automata_s5a",
+					"stage": 5,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "automata_s5b",
+					"stage": 5,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "medicine",
+			"aptitude": "scholarly",
+			"nameZh": "医疗",
+			"nameEn": "Medicine",
+			"stageNamesZh": [
+				"护理员",
+				"急救医师",
+				"战地医生",
+				"生命调律师",
+				"生命守护者"
+			],
+			"stageNamesEn": [
+				null,
+				null,
+				null,
+				null,
+				null
+			],
+			"runtimeEnterable": false,
+			"nodes": [
+				{
+					"id": "medicine_s1a",
+					"stage": 1,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "medicine_s1b",
+					"stage": 1,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "medicine_s2a",
+					"stage": 2,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "medicine_s2b",
+					"stage": 2,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "medicine_s3a",
+					"stage": 3,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "medicine_s3b",
+					"stage": 3,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "medicine_s4a",
+					"stage": 4,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "medicine_s4b",
+					"stage": 4,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "medicine_s5a",
+					"stage": 5,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "medicine_s5b",
+					"stage": 5,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "alchemy",
+			"aptitude": "scholarly",
+			"nameZh": "药剂",
+			"nameEn": "Alchemy",
+			"stageNamesZh": [
+				"采配师",
+				"混剂师",
+				"反应药师",
+				"复合配方师",
+				"万象药宗"
+			],
+			"stageNamesEn": [
+				null,
+				null,
+				null,
+				null,
+				null
+			],
+			"runtimeEnterable": false,
+			"nodes": [
+				{
+					"id": "alchemy_s1a",
+					"stage": 1,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "alchemy_s1b",
+					"stage": 1,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "alchemy_s2a",
+					"stage": 2,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "alchemy_s2b",
+					"stage": 2,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "alchemy_s3a",
+					"stage": 3,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "alchemy_s3b",
+					"stage": 3,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "alchemy_s4a",
+					"stage": 4,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "alchemy_s4b",
+					"stage": 4,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "alchemy_s5a",
+					"stage": 5,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "alchemy_s5b",
+					"stage": 5,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "tactics",
+			"aptitude": "scholarly",
+			"nameZh": "战术",
+			"nameEn": "Tactics",
+			"stageNamesZh": [
+				"分析员",
+				"小队策士",
+				"阵形指挥官",
+				"战场统筹者",
+				"万局统帅"
+			],
+			"stageNamesEn": [
+				"Strategist",
+				"Tactician",
+				null,
+				null,
+				null
+			],
+			"runtimeEnterable": true,
+			"nodes": [
+				{
+					"id": "tactics_mark",
+					"stage": 1,
+					"slot": "a",
+					"effect": "battle",
+					"nameKey": "job_skill_tactics_mark",
+					"status": "runtime-mvp-skill"
+				},
+				{
+					"id": "tactics_s1b",
+					"stage": 1,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "tactics_rally",
+					"stage": 2,
+					"slot": "a",
+					"effect": "battle",
+					"nameKey": "job_skill_tactics_rally",
+					"status": "runtime-mvp-skill"
+				},
+				{
+					"id": "tactics_s2b",
+					"stage": 2,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "tactics_s3a",
+					"stage": 3,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "tactics_s3b",
+					"stage": 3,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "tactics_s4a",
+					"stage": 4,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "tactics_s4b",
+					"stage": 4,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "tactics_s5a",
+					"stage": 5,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "tactics_s5b",
+					"stage": 5,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "sacred",
+			"aptitude": "spiritual",
+			"nameZh": "圣源",
+			"nameEn": "Luminous Source",
+			"stageNamesZh": [
+				"光源使",
+				"祈光师",
+				"净辉司祭",
+				"晨星引导者",
+				"生命曙光使"
+			],
+			"stageNamesEn": [
+				null,
+				null,
+				null,
+				null,
+				null
+			],
+			"runtimeEnterable": false,
+			"nodes": [
+				{
+					"id": "sacred_s1a",
+					"stage": 1,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "sacred_s1b",
+					"stage": 1,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "sacred_s2a",
+					"stage": 2,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "sacred_s2b",
+					"stage": 2,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "sacred_s3a",
+					"stage": 3,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "sacred_s3b",
+					"stage": 3,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "sacred_s4a",
+					"stage": 4,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "sacred_s4b",
+					"stage": 4,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "sacred_s5a",
+					"stage": 5,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "sacred_s5b",
+					"stage": 5,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "dark",
+			"aptitude": "spiritual",
+			"nameZh": "魔源",
+			"nameEn": "Umbral Source",
+			"stageNamesZh": [
+				"暗源使",
+				"蚀影师",
+				"深渊调律师",
+				"夜幕执衡者",
+				"终夜守望者"
+			],
+			"stageNamesEn": [
+				null,
+				null,
+				null,
+				null,
+				null
+			],
+			"runtimeEnterable": false,
+			"nodes": [
+				{
+					"id": "dark_s1a",
+					"stage": 1,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "dark_s1b",
+					"stage": 1,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "dark_s2a",
+					"stage": 2,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "dark_s2b",
+					"stage": 2,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "dark_s3a",
+					"stage": 3,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "dark_s3b",
+					"stage": 3,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "dark_s4a",
+					"stage": 4,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "dark_s4b",
+					"stage": 4,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "dark_s5a",
+					"stage": 5,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "dark_s5b",
+					"stage": 5,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "runes",
+			"aptitude": "spiritual",
+			"nameZh": "符术",
+			"nameEn": "Runecraft",
+			"stageNamesZh": [
+				"刻符者",
+				"双式符师",
+				"连锁刻印师",
+				"多源符宗",
+				"万象铭文师"
+			],
+			"stageNamesEn": [
+				null,
+				null,
+				null,
+				null,
+				null
+			],
+			"runtimeEnterable": false,
+			"nodes": [
+				{
+					"id": "runes_s1a",
+					"stage": 1,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "runes_s1b",
+					"stage": 1,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "runes_s2a",
+					"stage": 2,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "runes_s2b",
+					"stage": 2,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "runes_s3a",
+					"stage": 3,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "runes_s3b",
+					"stage": 3,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "runes_s4a",
+					"stage": 4,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "runes_s4b",
+					"stage": 4,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "runes_s5a",
+					"stage": 5,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "runes_s5b",
+					"stage": 5,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "summoning",
+			"aptitude": "spiritual",
+			"nameZh": "召唤",
+			"nameEn": "Summoning",
+			"stageNamesZh": [
+				"唤影者",
+				"契像师",
+				"同调召者",
+				"群像调律师",
+				"创生召主"
+			],
+			"stageNamesEn": [
+				null,
+				null,
+				null,
+				null,
+				null
+			],
+			"runtimeEnterable": false,
+			"nodes": [
+				{
+					"id": "summoning_s1a",
+					"stage": 1,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "summoning_s1b",
+					"stage": 1,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "summoning_s2a",
+					"stage": 2,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "summoning_s2b",
+					"stage": 2,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "summoning_s3a",
+					"stage": 3,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "summoning_s3b",
+					"stage": 3,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "summoning_s4a",
+					"stage": 4,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "summoning_s4b",
+					"stage": 4,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "summoning_s5a",
+					"stage": 5,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "summoning_s5b",
+					"stage": 5,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "relics",
+			"aptitude": "spiritual",
+			"nameZh": "遗物",
+			"nameEn": "Relic Studies",
+			"stageNamesZh": [
+				"识物者",
+				"古构探员",
+				"遗迹解读师",
+				"源史编织者",
+				"文明记述者"
+			],
+			"stageNamesEn": [
+				"Relic Adept",
+				"Relic Keeper",
+				null,
+				null,
+				null
+			],
+			"runtimeEnterable": true,
+			"nodes": [
+				{
+					"id": "relics_echo",
+					"stage": 1,
+					"slot": "a",
+					"effect": "battle",
+					"nameKey": "job_skill_relics_echo",
+					"status": "runtime-mvp-skill"
+				},
+				{
+					"id": "relics_s1b",
+					"stage": 1,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "relics_delay",
+					"stage": 2,
+					"slot": "a",
+					"effect": "battle",
+					"nameKey": "job_skill_relics_delay",
+					"status": "runtime-mvp-skill"
+				},
+				{
+					"id": "relics_s2b",
+					"stage": 2,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "relics_s3a",
+					"stage": 3,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "relics_s3b",
+					"stage": 3,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "relics_s4a",
+					"stage": 4,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "relics_s4b",
+					"stage": 4,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "relics_s5a",
+					"stage": 5,
+					"slot": "a",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "relics_s5b",
+					"stage": 5,
+					"slot": "b",
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		}
+	],
+	"identities": [
+		{
+			"id": "hero",
+			"number": 0,
+			"nameZh": "主角（玩家命名）",
+			"nameEn": "Protagonist",
+			"nodes": [
+				{
+					"id": "hero.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "battle",
+					"status": "runtime-mvp-skill",
+					"signature": true,
+					"availableOnJoin": true,
+					"nameKey": "battle_skill_hero"
+				},
+				{
+					"id": "hero.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "hero.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "hero.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "hero.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "hero.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "hero.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "hero.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "hero.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "hero.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			],
+			"runtimeMemberId": "hero"
+		},
+		{
+			"id": "character-01",
+			"number": 1,
+			"nameZh": "梁序",
+			"nameEn": "Liang Xu",
+			"nodes": [
+				{
+					"id": "character-01.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "battle",
+					"status": "runtime-mvp-skill",
+					"signature": true,
+					"availableOnJoin": true,
+					"nameKey": "battle_skill_liang"
+				},
+				{
+					"id": "character-01.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-01.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-01.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-01.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-01.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-01.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-01.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-01.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-01.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			],
+			"runtimeMemberId": "liang-xu"
+		},
+		{
+			"id": "character-02",
+			"number": 2,
+			"nameZh": "蒋岚",
+			"nameEn": "Jiang Lan",
+			"nodes": [
+				{
+					"id": "character-02.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "none",
+					"status": "skeleton-pending-design",
+					"signature": true,
+					"availableOnJoin": true
+				},
+				{
+					"id": "character-02.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-02.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-02.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-02.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-02.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-02.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-02.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-02.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-02.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "character-03",
+			"number": 3,
+			"nameZh": "林阙",
+			"nameEn": "Lin Que",
+			"nodes": [
+				{
+					"id": "character-03.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "none",
+					"status": "skeleton-pending-design",
+					"signature": true,
+					"availableOnJoin": true
+				},
+				{
+					"id": "character-03.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-03.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-03.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-03.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-03.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-03.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-03.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-03.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-03.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "character-04",
+			"number": 4,
+			"nameZh": "米洛",
+			"nameEn": "Milo",
+			"nodes": [
+				{
+					"id": "character-04.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "none",
+					"status": "skeleton-pending-design",
+					"signature": true,
+					"availableOnJoin": true
+				},
+				{
+					"id": "character-04.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-04.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-04.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-04.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-04.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-04.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-04.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-04.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-04.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "character-05",
+			"number": 5,
+			"nameZh": "阿荻",
+			"nameEn": "Adi",
+			"nodes": [
+				{
+					"id": "character-05.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "none",
+					"status": "skeleton-pending-design",
+					"signature": true,
+					"availableOnJoin": true
+				},
+				{
+					"id": "character-05.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-05.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-05.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-05.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-05.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-05.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-05.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-05.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-05.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "character-06",
+			"number": 6,
+			"nameZh": "牧修",
+			"nameEn": "Muxiu",
+			"nodes": [
+				{
+					"id": "character-06.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "none",
+					"status": "skeleton-pending-design",
+					"signature": true,
+					"availableOnJoin": true
+				},
+				{
+					"id": "character-06.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-06.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-06.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-06.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-06.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-06.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-06.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-06.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-06.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "character-07",
+			"number": 7,
+			"nameZh": "岩柯",
+			"nameEn": "Yanke",
+			"nodes": [
+				{
+					"id": "character-07.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "none",
+					"status": "skeleton-pending-design",
+					"signature": true,
+					"availableOnJoin": true
+				},
+				{
+					"id": "character-07.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-07.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-07.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-07.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-07.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-07.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-07.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-07.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-07.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "character-08",
+			"number": 8,
+			"nameZh": "桑果",
+			"nameEn": "Sangguo",
+			"nodes": [
+				{
+					"id": "character-08.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "none",
+					"status": "skeleton-pending-design",
+					"signature": true,
+					"availableOnJoin": true
+				},
+				{
+					"id": "character-08.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-08.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-08.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-08.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-08.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-08.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-08.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-08.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-08.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "character-09",
+			"number": 9,
+			"nameZh": "娜丽娅",
+			"nameEn": "Nalia",
+			"nodes": [
+				{
+					"id": "character-09.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "none",
+					"status": "skeleton-pending-design",
+					"signature": true,
+					"availableOnJoin": true
+				},
+				{
+					"id": "character-09.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-09.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-09.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-09.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-09.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-09.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-09.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-09.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-09.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "character-10",
+			"number": 10,
+			"nameZh": "伊赛",
+			"nameEn": "Isai",
+			"nodes": [
+				{
+					"id": "character-10.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "none",
+					"status": "skeleton-pending-design",
+					"signature": true,
+					"availableOnJoin": true
+				},
+				{
+					"id": "character-10.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-10.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-10.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-10.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-10.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-10.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-10.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-10.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-10.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "character-11",
+			"number": 11,
+			"nameZh": "赛恩",
+			"nameEn": "Sain",
+			"nodes": [
+				{
+					"id": "character-11.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "none",
+					"status": "skeleton-pending-design",
+					"signature": true,
+					"availableOnJoin": true
+				},
+				{
+					"id": "character-11.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-11.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-11.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-11.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-11.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-11.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-11.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-11.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-11.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "character-12",
+			"number": 12,
+			"nameZh": "达伽",
+			"nameEn": "Daga",
+			"nodes": [
+				{
+					"id": "character-12.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "none",
+					"status": "skeleton-pending-design",
+					"signature": true,
+					"availableOnJoin": true
+				},
+				{
+					"id": "character-12.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-12.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-12.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-12.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-12.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-12.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-12.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-12.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-12.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "character-13",
+			"number": 13,
+			"nameZh": "晨弦",
+			"nameEn": "Chenxian",
+			"nodes": [
+				{
+					"id": "character-13.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "none",
+					"status": "skeleton-pending-design",
+					"signature": true,
+					"availableOnJoin": true
+				},
+				{
+					"id": "character-13.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-13.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-13.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-13.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-13.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-13.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-13.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-13.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-13.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "character-14",
+			"number": 14,
+			"nameZh": "夜澜",
+			"nameEn": "Yelan",
+			"nodes": [
+				{
+					"id": "character-14.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "none",
+					"status": "skeleton-pending-design",
+					"signature": true,
+					"availableOnJoin": true
+				},
+				{
+					"id": "character-14.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-14.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-14.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-14.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-14.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-14.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-14.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-14.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-14.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "character-15",
+			"number": 15,
+			"nameZh": "洛纹",
+			"nameEn": "Luowen",
+			"nodes": [
+				{
+					"id": "character-15.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "none",
+					"status": "skeleton-pending-design",
+					"signature": true,
+					"availableOnJoin": true
+				},
+				{
+					"id": "character-15.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-15.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-15.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-15.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-15.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-15.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-15.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-15.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-15.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "character-16",
+			"number": 16,
+			"nameZh": "纪澄",
+			"nameEn": "Ji Cheng",
+			"nodes": [
+				{
+					"id": "character-16.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "battle",
+					"status": "runtime-mvp-skill",
+					"signature": true,
+					"availableOnJoin": true,
+					"nameKey": "battle_skill_ji"
+				},
+				{
+					"id": "character-16.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-16.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-16.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-16.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-16.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-16.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-16.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-16.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-16.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			],
+			"runtimeMemberId": "ji-cheng"
+		},
+		{
+			"id": "character-17",
+			"number": 17,
+			"nameZh": "周赫",
+			"nameEn": "Zhou He",
+			"nodes": [
+				{
+					"id": "character-17.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "none",
+					"status": "skeleton-pending-design",
+					"signature": true,
+					"availableOnJoin": true
+				},
+				{
+					"id": "character-17.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-17.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-17.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-17.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-17.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-17.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-17.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-17.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-17.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "character-18",
+			"number": 18,
+			"nameZh": "艾缇",
+			"nameEn": "Aiti",
+			"nodes": [
+				{
+					"id": "character-18.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "none",
+					"status": "skeleton-pending-design",
+					"signature": true,
+					"availableOnJoin": true
+				},
+				{
+					"id": "character-18.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-18.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-18.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-18.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-18.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-18.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-18.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-18.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-18.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "character-19",
+			"number": 19,
+			"nameZh": "叶乔",
+			"nameEn": "Ye Qiao",
+			"nodes": [
+				{
+					"id": "character-19.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "none",
+					"status": "skeleton-pending-design",
+					"signature": true,
+					"availableOnJoin": true
+				},
+				{
+					"id": "character-19.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-19.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-19.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-19.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-19.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-19.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-19.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-19.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-19.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "character-20",
+			"number": 20,
+			"nameZh": "米漪",
+			"nameEn": "Mi Yi",
+			"nodes": [
+				{
+					"id": "character-20.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "none",
+					"status": "skeleton-pending-design",
+					"signature": true,
+					"availableOnJoin": true
+				},
+				{
+					"id": "character-20.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-20.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-20.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-20.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-20.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-20.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-20.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-20.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-20.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "character-21",
+			"number": 21,
+			"nameZh": "罗栖",
+			"nameEn": "Luo Qi",
+			"nodes": [
+				{
+					"id": "character-21.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "none",
+					"status": "skeleton-pending-design",
+					"signature": true,
+					"availableOnJoin": true
+				},
+				{
+					"id": "character-21.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-21.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-21.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-21.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-21.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-21.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-21.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-21.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-21.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "character-22",
+			"number": 22,
+			"nameZh": "阿维拉",
+			"nameEn": "Avila",
+			"nodes": [
+				{
+					"id": "character-22.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "none",
+					"status": "skeleton-pending-design",
+					"signature": true,
+					"availableOnJoin": true
+				},
+				{
+					"id": "character-22.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-22.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-22.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-22.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-22.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-22.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-22.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-22.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-22.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "character-23",
+			"number": 23,
+			"nameZh": "克恩",
+			"nameEn": "Kern",
+			"nodes": [
+				{
+					"id": "character-23.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "none",
+					"status": "skeleton-pending-design",
+					"signature": true,
+					"availableOnJoin": true
+				},
+				{
+					"id": "character-23.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-23.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-23.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-23.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-23.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-23.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-23.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-23.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-23.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "character-24",
+			"number": 24,
+			"nameZh": "莱芮",
+			"nameEn": "Lairui",
+			"nodes": [
+				{
+					"id": "character-24.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "none",
+					"status": "skeleton-pending-design",
+					"signature": true,
+					"availableOnJoin": true
+				},
+				{
+					"id": "character-24.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-24.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-24.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-24.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-24.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-24.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-24.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-24.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-24.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "character-25",
+			"number": 25,
+			"nameZh": "弥罗",
+			"nameEn": "Mi Luo",
+			"nodes": [
+				{
+					"id": "character-25.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "none",
+					"status": "skeleton-pending-design",
+					"signature": true,
+					"availableOnJoin": true
+				},
+				{
+					"id": "character-25.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-25.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-25.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-25.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-25.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-25.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-25.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-25.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-25.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "character-26",
+			"number": 26,
+			"nameZh": "赫娅",
+			"nameEn": "Heya",
+			"nodes": [
+				{
+					"id": "character-26.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "none",
+					"status": "skeleton-pending-design",
+					"signature": true,
+					"availableOnJoin": true
+				},
+				{
+					"id": "character-26.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-26.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-26.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-26.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-26.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-26.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-26.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-26.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-26.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "character-27",
+			"number": 27,
+			"nameZh": "乌礼",
+			"nameEn": "Wu Li",
+			"nodes": [
+				{
+					"id": "character-27.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "none",
+					"status": "skeleton-pending-design",
+					"signature": true,
+					"availableOnJoin": true
+				},
+				{
+					"id": "character-27.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-27.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-27.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-27.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-27.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-27.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-27.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-27.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-27.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "character-28",
+			"number": 28,
+			"nameZh": "环七",
+			"nameEn": "Huan-7",
+			"nodes": [
+				{
+					"id": "character-28.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "none",
+					"status": "skeleton-pending-design",
+					"signature": true,
+					"availableOnJoin": true
+				},
+				{
+					"id": "character-28.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-28.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-28.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-28.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-28.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-28.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-28.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-28.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-28.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "character-29",
+			"number": 29,
+			"nameZh": "穗芽",
+			"nameEn": "Suiya",
+			"nodes": [
+				{
+					"id": "character-29.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "none",
+					"status": "skeleton-pending-design",
+					"signature": true,
+					"availableOnJoin": true
+				},
+				{
+					"id": "character-29.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-29.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-29.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-29.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-29.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-29.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-29.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-29.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-29.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "character-30",
+			"number": 30,
+			"nameZh": "钟渡",
+			"nameEn": "Zhongdu",
+			"nodes": [
+				{
+					"id": "character-30.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "none",
+					"status": "skeleton-pending-design",
+					"signature": true,
+					"availableOnJoin": true
+				},
+				{
+					"id": "character-30.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-30.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-30.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-30.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-30.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-30.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-30.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-30.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-30.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "character-31",
+			"number": 31,
+			"nameZh": "赵铃",
+			"nameEn": "Zhao Ling",
+			"nodes": [
+				{
+					"id": "character-31.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "battle",
+					"status": "runtime-mvp-skill",
+					"signature": true,
+					"availableOnJoin": true,
+					"nameKey": "battle_skill_zhao"
+				},
+				{
+					"id": "character-31.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-31.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-31.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-31.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-31.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-31.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-31.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-31.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-31.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			],
+			"runtimeMemberId": "zhao-ling"
+		},
+		{
+			"id": "character-32",
+			"number": 32,
+			"nameZh": "裴支",
+			"nameEn": "Pei Zhi",
+			"nodes": [
+				{
+					"id": "character-32.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "none",
+					"status": "skeleton-pending-design",
+					"signature": true,
+					"availableOnJoin": true
+				},
+				{
+					"id": "character-32.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-32.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-32.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-32.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-32.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-32.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-32.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-32.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-32.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "character-33",
+			"number": 33,
+			"nameZh": "安索",
+			"nameEn": "An Suo",
+			"nodes": [
+				{
+					"id": "character-33.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "none",
+					"status": "skeleton-pending-design",
+					"signature": true,
+					"availableOnJoin": true
+				},
+				{
+					"id": "character-33.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-33.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-33.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-33.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-33.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-33.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-33.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-33.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-33.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "character-34",
+			"number": 34,
+			"nameZh": "苏砚",
+			"nameEn": "Su Yan",
+			"nodes": [
+				{
+					"id": "character-34.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "none",
+					"status": "skeleton-pending-design",
+					"signature": true,
+					"availableOnJoin": true
+				},
+				{
+					"id": "character-34.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-34.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-34.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-34.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-34.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-34.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-34.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-34.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-34.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "character-35",
+			"number": 35,
+			"nameZh": "陶榆",
+			"nameEn": "Tao Yu",
+			"nodes": [
+				{
+					"id": "character-35.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "none",
+					"status": "skeleton-pending-design",
+					"signature": true,
+					"availableOnJoin": true
+				},
+				{
+					"id": "character-35.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-35.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-35.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-35.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-35.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-35.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-35.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-35.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-35.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "character-36",
+			"number": 36,
+			"nameZh": "阮田",
+			"nameEn": "Ruan Tian",
+			"nodes": [
+				{
+					"id": "character-36.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "none",
+					"status": "skeleton-pending-design",
+					"signature": true,
+					"availableOnJoin": true
+				},
+				{
+					"id": "character-36.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-36.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-36.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-36.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-36.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-36.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-36.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-36.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-36.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "character-37",
+			"number": 37,
+			"nameZh": "布禾",
+			"nameEn": "Bu He",
+			"nodes": [
+				{
+					"id": "character-37.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "none",
+					"status": "skeleton-pending-design",
+					"signature": true,
+					"availableOnJoin": true
+				},
+				{
+					"id": "character-37.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-37.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-37.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-37.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-37.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-37.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-37.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-37.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-37.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "character-38",
+			"number": 38,
+			"nameZh": "韩泽",
+			"nameEn": "Han Ze",
+			"nodes": [
+				{
+					"id": "character-38.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "none",
+					"status": "skeleton-pending-design",
+					"signature": true,
+					"availableOnJoin": true
+				},
+				{
+					"id": "character-38.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-38.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-38.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-38.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-38.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-38.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-38.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-38.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-38.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "character-39",
+			"number": 39,
+			"nameZh": "席妲",
+			"nameEn": "Xida",
+			"nodes": [
+				{
+					"id": "character-39.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "none",
+					"status": "skeleton-pending-design",
+					"signature": true,
+					"availableOnJoin": true
+				},
+				{
+					"id": "character-39.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-39.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-39.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-39.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-39.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-39.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-39.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-39.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-39.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "character-40",
+			"number": 40,
+			"nameZh": "顾鳞",
+			"nameEn": "Gu Lin",
+			"nodes": [
+				{
+					"id": "character-40.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "none",
+					"status": "skeleton-pending-design",
+					"signature": true,
+					"availableOnJoin": true
+				},
+				{
+					"id": "character-40.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-40.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-40.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-40.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-40.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-40.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-40.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-40.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-40.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "character-41",
+			"number": 41,
+			"nameZh": "瑞玛",
+			"nameEn": "Ruima",
+			"nodes": [
+				{
+					"id": "character-41.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "none",
+					"status": "skeleton-pending-design",
+					"signature": true,
+					"availableOnJoin": true
+				},
+				{
+					"id": "character-41.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-41.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-41.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-41.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-41.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-41.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-41.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-41.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-41.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "character-42",
+			"number": 42,
+			"nameZh": "陶粒",
+			"nameEn": "Tao Li",
+			"nodes": [
+				{
+					"id": "character-42.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "none",
+					"status": "skeleton-pending-design",
+					"signature": true,
+					"availableOnJoin": true
+				},
+				{
+					"id": "character-42.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-42.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-42.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-42.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-42.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-42.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-42.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-42.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-42.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "character-43",
+			"number": 43,
+			"nameZh": "霖砚",
+			"nameEn": "Lin Yan",
+			"nodes": [
+				{
+					"id": "character-43.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "none",
+					"status": "skeleton-pending-design",
+					"signature": true,
+					"availableOnJoin": true
+				},
+				{
+					"id": "character-43.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-43.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-43.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-43.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-43.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-43.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-43.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-43.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-43.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "character-44",
+			"number": 44,
+			"nameZh": "何槐",
+			"nameEn": "He Huai",
+			"nodes": [
+				{
+					"id": "character-44.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "none",
+					"status": "skeleton-pending-design",
+					"signature": true,
+					"availableOnJoin": true
+				},
+				{
+					"id": "character-44.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-44.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-44.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-44.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-44.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-44.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-44.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-44.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-44.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "character-45",
+			"number": 45,
+			"nameZh": "玄芽",
+			"nameEn": "Xuan Ya",
+			"nodes": [
+				{
+					"id": "character-45.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "none",
+					"status": "skeleton-pending-design",
+					"signature": true,
+					"availableOnJoin": true
+				},
+				{
+					"id": "character-45.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-45.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-45.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-45.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-45.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-45.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-45.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-45.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-45.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "character-46",
+			"number": 46,
+			"nameZh": "雀枝",
+			"nameEn": "Que Zhi",
+			"nodes": [
+				{
+					"id": "character-46.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "none",
+					"status": "skeleton-pending-design",
+					"signature": true,
+					"availableOnJoin": true
+				},
+				{
+					"id": "character-46.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-46.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-46.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-46.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-46.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-46.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-46.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-46.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-46.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "character-47",
+			"number": 47,
+			"nameZh": "门铃",
+			"nameEn": "Menling",
+			"nodes": [
+				{
+					"id": "character-47.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "none",
+					"status": "skeleton-pending-design",
+					"signature": true,
+					"availableOnJoin": true
+				},
+				{
+					"id": "character-47.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-47.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-47.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-47.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-47.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-47.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-47.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-47.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-47.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "character-48",
+			"number": 48,
+			"nameZh": "零饼",
+			"nameEn": "Lingbing",
+			"nodes": [
+				{
+					"id": "character-48.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "none",
+					"status": "skeleton-pending-design",
+					"signature": true,
+					"availableOnJoin": true
+				},
+				{
+					"id": "character-48.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-48.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-48.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-48.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-48.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-48.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-48.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-48.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-48.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "character-49",
+			"number": 49,
+			"nameZh": "棱镜",
+			"nameEn": "Lengjing",
+			"nodes": [
+				{
+					"id": "character-49.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "none",
+					"status": "skeleton-pending-design",
+					"signature": true,
+					"availableOnJoin": true
+				},
+				{
+					"id": "character-49.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-49.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-49.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-49.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-49.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-49.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-49.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-49.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-49.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		},
+		{
+			"id": "character-50",
+			"number": 50,
+			"nameZh": "余音",
+			"nameEn": "Yuyin",
+			"nodes": [
+				{
+					"id": "character-50.p01",
+					"order": 1,
+					"unlockLevel": 1,
+					"effect": "none",
+					"status": "skeleton-pending-design",
+					"signature": true,
+					"availableOnJoin": true
+				},
+				{
+					"id": "character-50.p02",
+					"order": 2,
+					"unlockLevel": 6,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-50.p03",
+					"order": 3,
+					"unlockLevel": 14,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-50.p04",
+					"order": 4,
+					"unlockLevel": 22,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-50.p05",
+					"order": 5,
+					"unlockLevel": 32,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-50.p06",
+					"order": 6,
+					"unlockLevel": 42,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-50.p07",
+					"order": 7,
+					"unlockLevel": 54,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-50.p08",
+					"order": 8,
+					"unlockLevel": 66,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-50.p09",
+					"order": 9,
+					"unlockLevel": 80,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				},
+				{
+					"id": "character-50.p10",
+					"order": 10,
+					"unlockLevel": 100,
+					"effect": "none",
+					"status": "skeleton-pending-design"
+				}
+			]
+		}
+	]
+}
