@@ -8,7 +8,7 @@
   - an embedded JSON Schema
   - the embedded validation results and metrics
 
-  Its `sha256-text-lf-v1` is `8cf65b63c0d1ae376ca0ea3b796f2f9083cc7a26c0261bd87fa464bb347ebd3d`.
+  Its `sha256-text-lf-v1` is `dcc5c3308ecba627b329c5b929e091f1065f6ea66c492ef13796d6973a4350e2` after the 2026-10-16 14:03 clean-clone integrity repair (see the last section). It was `8cf65b63c0d1ae376ca0ea3b796f2f9083cc7a26c0261bd87fa464bb347ebd3d` as pushed in 462b17d.
 - Companion validator (deterministic, read-only, no dependencies): [`tools/rpg-2-star-ocean-the-second_martial-job-trees_ten-node-validate_unapproved-v01_20261016-112044-706c17da.js`](../../tools/rpg-2-star-ocean-the-second_martial-job-trees_ten-node-validate_unapproved-v01_20261016-112044-706c17da.js). Run it from the repo root with `node tools/…706c17da.js`.
 - Scope: the five 武艺 series (守护, 剑术, 重武, 武道, 长兵), with 10 nodes each, 50 in total. This is 50 of the 200 job nodes asked for in creator decision note §2 and §8.2.
 - Not touched: runtime, Game Bible, progress meter and progress docs, other job-tree proposals, and art. Nothing was staged, committed or pushed.
@@ -301,3 +301,14 @@ The earlier session hit its quota limit before an independent result. This pass 
   - Undeclared caps: a separate text scan for slow, DR, redirect, damage-taken and defence-down effects found nothing that isn't declared. 同袍代受 is an intercept of the whole hit, not a share; 守护回响 only triggers on redirects.
 - **Mutation test of the cross-check:** 24/24 injected defects across both files were caught, each by its target check. The harness is outside the repo in `%TEMP%\wb-jobtree-indep\`.
 - **Spot mutation of the companion validator:** 5/6 caught. It caught knockback on 守护, a rank-text mismatch, rank 6, 跳跃 and an edited final quest. It missed the cross-proposal name clash, as described above.
+
+## Clean-clone integrity repair (2026-10-16 14:03 EDT)
+
+As pushed in 462b17d, the proposal pinned `game/scripts/battle_arena.gd` at `be8859a8…a592acae`. That is another workstream's uncommitted local copy. On a fresh checkout of 462b17d, the companion validator gave **21/23 pass, 1 warn, 1 fail**: `source-hashes` drifted, and `embedded-results-match` failed because the embedded block said `pass`.
+
+The repair changes integrity metadata only. **Node data is unchanged; the proposal is still PROPOSAL and UNAPPROVED.**
+- `sources.runtimeBattleArena.sha256` now pins the committed file, `e9737c40…5f859f02`. It is unchanged from da394c3 through 462b17d. Every constant the proposal cites is in that committed file: guard 30%, 6 energy per guarded hit, dodge 12 / 0.27 s, windup 0.48–0.65 s, reach 69 px, and `10 + 3 × stage`.
+- The validator's `embedded-results-match` compares only the id of `source-hashes`, because that check depends on the local checkout. A drifted source stays a WARN and no longer turns into a FAIL. Every other check still compares id, result and detail.
+- `validation.ranAt` and `validation.note` are updated. The embedded check results are unchanged.
+
+Receipt: [`docs/qa/…martial-job-trees_validator-clean-clone-repair_qa-note_unapproved-v01_20261016-140336-6a34509b.md`](../qa/rpg-2-star-ocean-the-second_martial-job-trees_validator-clean-clone-repair_qa-note_unapproved-v01_20261016-140336-6a34509b.md).

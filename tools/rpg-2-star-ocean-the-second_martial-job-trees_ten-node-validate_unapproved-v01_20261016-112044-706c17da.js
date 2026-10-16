@@ -23,6 +23,8 @@ const SOURCE_PATHS = {
   growthRules: 'game/scripts/growth_rules.gd',
   appState: 'game/scripts/app_state.gd',
 };
+// Checks whose result depends on the local checkout rather than on the proposal (see embedded-results-match).
+const ENVIRONMENT_CHECKS = new Set(['source-hashes']);
 
 function textLf(buffer) {
   if (buffer.includes(0)) throw new Error('NUL byte: not a text file');
@@ -484,9 +486,11 @@ function runChecks(p, ctx, opts = {}) {
   }
 
   // 23 embedded results (CLI only)
+  // source-hashes depends on the local working tree (another workstream may have uncommitted edits to a
+  // source), so only its id is compared; its drift stays a warning instead of turning into a failure here.
   if (opts.compareEmbedded) {
     const emb = (p.validation && p.validation.checks) || [];
-    const key = c => `${c.id}|${c.result}|${c.detail}`;
+    const key = c => (ENVIRONMENT_CHECKS.has(c.id) ? c.id : `${c.id}|${c.result}|${c.detail}`);
     const a = checks.map(key), b = emb.map(key);
     const diff = a.filter(x => !b.includes(x)).concat(b.filter(x => !a.includes(x)));
     add('embedded-results-match', '文件内嵌的校验结果与本次重新计算的结果逐项一致（id、结果、细节）',
