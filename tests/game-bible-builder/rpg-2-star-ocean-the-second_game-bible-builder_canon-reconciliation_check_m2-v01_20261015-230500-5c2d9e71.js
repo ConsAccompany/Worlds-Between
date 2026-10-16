@@ -62,6 +62,12 @@ const mutations = [
   ['personal draft rank rule rewritten', b => { b.personalSkillTrees.approvedRules.rankMaximum = 3; }, /personal trees/],
   ['scene counter incremented', b => { b.environmentVisualReview.sceneQualityAccepted = 1; }, /scene visuals 0\/11/],
   ['wrong start date', b => { b.creatorDecisions.geography.adventureStart = '2026-04-01'; }, /geography/],
+  ['selout v8 baseline claimed as animated', b => { b.characterVisualReview.staticBaselinesAndPilots.femaleExplorationSouthBaseline.animation = true; }, /selout v8/],
+  ['battle v08 pilot claimed as approved', b => { b.characterVisualReview.staticBaselinesAndPilots.femaleBattleSideviewV08.status = 'APPROVED'; }, /battle side-view v08/],
+  ['battle v08 pilot claimed as wired', b => { b.characterVisualReview.staticBaselinesAndPilots.femaleBattleSideviewV08.runtimeIntegrated = true; }, /battle side-view v08/],
+  ['Liang pilot claimed as four-direction', b => { b.characterVisualReview.staticBaselinesAndPilots.liangXuSouthIdleV01.directions = ['south', 'east', 'north', 'west']; }, /Liang Xu south v01/],
+  ['Liang pilot gendered', b => { b.characterVisualReview.staticBaselinesAndPilots.liangXuSouthIdleV01.openIssues.push('his coat'); }, /Liang Xu south v01/],
+  ['static pilots claim a progress increase', b => { b.characterVisualReview.staticBaselinesAndPilots.counters.runtimeSpritesAccepted = '1/52'; }, /static pilots/],
 ];
 for (const [label, mutate, pattern] of mutations) {
   const copy = clone(bible);

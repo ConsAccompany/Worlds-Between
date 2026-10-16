@@ -4,7 +4,7 @@
   "title": "世界之间",
   "englishTitle": "Worlds Between",
   "edition": "设计基线 v0.2 · 2026-10-15 创作者决定",
-  "updatedAt": "2026-10-16T14:51:18.192Z",
+  "updatedAt": "2026-10-16T15:20:06.787Z",
   "note": "规则以玩家确认的设计稿为基线，并已并入 2026-10-15 创作者决定；人物姓名与外观是待审提案，具体剧情留待后续设计。",
   "pitch": "从地下社区走出的旅人，以好奇心探索多元文明，招募伙伴，并成为不同世界认知差异的桥梁。",
   "pillars": [
@@ -4094,6 +4094,16 @@
         "label": "主角·女迈步",
         "file": "/assets/rpg-2-star-ocean-the-second_scifi-city_protagonist-female-south-walk-left-stride-character-quality-h48-canvas-items_m8-v02_20261014-152906-37f80376.png",
         "caption": "朝南左腿前迈的单张动作关键帧概念，48 逻辑像素技术审查；相反迈步和过渡仍在制作，尚不能循环。"
+      },
+      {
+        "label": "主角·女 横向战斗 v08",
+        "file": "/assets/rpg-2-star-ocean-the-second_protagonist-female_sideview-idle-right-static-native0p65_party-capture-ruins_unapproved-v08_20261016-095054-a7962fdf.png",
+        "caption": "未批准、未接入运行时的朝右待机静态单帧试作（运行 326522f8），Godot 1280×720 遗址战场四人截图；仅 0.65 战斗显示比例获批准。无动画；远侧腿与地面、布卷与围巾仍需修正。"
+      },
+      {
+        "label": "梁序 朝南待机 v01",
+        "file": "/assets/rpg-2-star-ocean-the-second_city-bright_liang-xu-south-idle-static-pilot-h48_unapproved-v01_20261016-141751-bd083d0a.png",
+        "caption": "未批准、未接入运行时的朝南单帧静态试作（运行 baa30d44），Godot 城市 48 逻辑像素截图；只有一个方向，不是四方向精灵，无动画。发髻、银发、外套下摆与战术板仍需修正。"
       }
     ],
     "artAccepted": false,
@@ -4154,7 +4164,118 @@
     "sourceGallery": "game/scenes/rpg-2-star-ocean-the-second_character-source-gallery_m8-v01_20261014-144020-907ab4d1.tscn",
     "sourceGalleryReview": "docs/character-visuals/rpg-2-star-ocean-the-second_character-source-gallery_review_m8-v01_20261014-144500-39a71d2c.md",
     "sourceGalleryImagesLoaded": 52,
-    "sourceGalleryRuntimeSpritesAccepted": 0
+    "sourceGalleryRuntimeSpritesAccepted": 0,
+    "staticBaselinesAndPilots": {
+      "asOfCommit": "15c9b73",
+      "zh": "女主探索朝南待机 selout v8 是唯一获创作者批准的静态基准帧（仅朝南单帧、48 逻辑像素；无动画、未接入运行时、不计入精灵验收）。女主横向战斗 v08 静态试作与梁序朝南待机 v01 静态试作均为未批准、未接入运行时的单帧：没有动画，梁序只有一个方向，不是四方向精灵，也没有美术验收。探索精灵仍为 0/52，场景 0/11，人工试玩 0/2，完成度 35%。",
+      "en": "The female EXPLORATION south idle selout v8 is the only creator-approved static baseline (one south still at 48 logical px; no animation, not runtime-integrated, not a runtime-sprite acceptance). The female BATTLE side-view v08 static pilot and the Liang Xu south idle v01 static pilot are UNAPPROVED / NONRUNTIME single frames: no animation, Liang has one direction only (not a four-direction sprite), no artist acceptance. Sprites stay 0/52, scenes 0/11, playtests 0/2, meter 35%.",
+      "femaleExplorationSouthBaseline": {
+        "label": "女主 · 探索 · 朝南待机 selout v8",
+        "status": "CREATOR-APPROVED STATIC BASELINE",
+        "creatorApproved": true,
+        "approvalScope": "仅朝南待机静态单帧作为 48 逻辑像素视觉基准（调色、材质、明度结构、描边）；不含动画、北/东/西朝向、运行时替换或 0/52 精灵验收。",
+        "direction": "south",
+        "frames": 1,
+        "animation": false,
+        "runtimeIntegrated": false,
+        "runtimeSpriteAccepted": false,
+        "png": "game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v8-cloth-leather-candidate_m8-v08_20261015-021600-157a5ea0.png",
+        "pngSha256": "ccf9d2a293e7f1b9c706b4d2f1bf9c00b3c7714ec4e9b8bddf023e166f68b6fd",
+        "decision": "docs/character-visuals/rpg-2-star-ocean-the-second_protagonist-female_south-idle-static-baseline-decision_m8-v08_20261015-022700-07161696.md",
+        "qa": "docs/qa/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v8_visual-qa-note_m8-v08_20261015-021600-c1694107.md"
+      },
+      "femaleBattleSideviewV08": {
+        "label": "女主 · 横向战斗 · 朝右待机静态试作 v08",
+        "status": "UNAPPROVED / NONRUNTIME",
+        "version": "v08",
+        "runId": "326522f8",
+        "creatorApproved": false,
+        "artAccepted": false,
+        "runtimeIntegrated": false,
+        "animation": false,
+        "frames": 1,
+        "facing": "right (side view)",
+        "approvalNote": "仅 0.65 战斗显示比例获创作者批准；v08 画面本身未批准。cell 68×72，脚底到头顶 61 逻辑像素。",
+        "png": "game/assets/characters/combat-sideview-pilots/rpg-2-star-ocean-the-second_protagonist-female_sideview-idle-right-static-native0p65_unapproved-v08_20261016-095054-a06775a0.png",
+        "editables": [
+          "game/assets/characters/combat-sideview-pilots/rpg-2-star-ocean-the-second_protagonist-female_sideview-idle-right-static-native0p65_editable-layers_unapproved-v08_20261016-095054-2574ce1c.pxo",
+          "game/assets/characters/combat-sideview-pilots/rpg-2-star-ocean-the-second_protagonist-female_sideview-idle-right-static-native0p65_editable-layers_unapproved-v08_20261016-095054-314d939f.ora"
+        ],
+        "manifest": "game/assets/characters/combat-sideview-pilots/rpg-2-star-ocean-the-second_protagonist-female_sideview-idle-right-static-native0p65_manifest_unapproved-v08_20261016-095054-ab653c87.json",
+        "captures": [
+          "outputs/rpg-2-star-ocean-the-second_protagonist-female_sideview-idle-right-static-native0p65_party-capture-ruins_unapproved-v08_20261016-095054-a7962fdf.png",
+          "outputs/rpg-2-star-ocean-the-second_protagonist-female_sideview-idle-right-static-native0p65_party-capture-outskirts_unapproved-v08_20261016-095054-d9a8abaf.png"
+        ],
+        "qa": "docs/qa/rpg-2-star-ocean-the-second_protagonist-female_battle-static-v08-game-scale-defect-pass_qa-note_unapproved-v01_20261016-095054-68ec4f17.md",
+        "codexVisualAudit": "docs/qa/rpg-2-star-ocean-the-second_protagonist-female_battle-static-v08-codex-visual-audit_unapproved-v01_20261016-145125-5e1b7d6c.md",
+        "improved": "1× 下剑成一条连续斜线，拳与腰带分开，背包上改为布卷，站姿更宽。",
+        "openIssues": [
+          "青色布卷几乎与围巾连成一块，读作肩部方块而不是卷起的铺盖",
+          "深色远侧腿和靴子在遗址与城外地面上都发糊，遗址更明显",
+          "窄的臀部垂布不如探索 v8 的背部布料有辨识度",
+          "武器 1× 下仍偏小；同屏另外三名队友明显更粗糙"
+        ]
+      },
+      "liangXuSouthIdleV01": {
+        "label": "梁序 · 探索 · 朝南待机静态试作 v01",
+        "status": "UNAPPROVED / NONRUNTIME",
+        "version": "v01",
+        "runId": "baa30d44",
+        "creatorApproved": false,
+        "artAccepted": false,
+        "humanReviewed": false,
+        "runtimeIntegrated": false,
+        "animation": false,
+        "frames": 1,
+        "directions": [
+          "south"
+        ],
+        "fourDirectionSprite": false,
+        "approvalNote": "只有朝南一个方向的单帧，80×112 cell，48 逻辑像素；女主 selout v8 只用作画质与比例对照，未复制其像素。",
+        "pronounNote": "人物资料未给出梁序的人称代词，现有笔记互相矛盾；在创作者决定前一律使用中性称呼。",
+        "png": "game/assets/characters/liang-xu/south-idle-static-pilot-unapproved-v01/rpg-2-star-ocean-the-second_liang-xu_south-idle-static-pilot_unapproved-v01_20261016-140940-46a036ed.png",
+        "editable": "game/assets/characters/liang-xu/south-idle-static-pilot-unapproved-v01/rpg-2-star-ocean-the-second_liang-xu_south-idle-static-pilot-editable_unapproved-v01_20261016-140940-65edcfd2.pxo",
+        "manifest": "game/assets/characters/liang-xu/south-idle-static-pilot-unapproved-v01/rpg-2-star-ocean-the-second_liang-xu_south-idle-static-pilot-manifest_unapproved-v01_20261016-140940-74be7552.json",
+        "captures": [
+          "outputs/rpg-2-star-ocean-the-second_city-bright_liang-xu-south-idle-static-pilot-h48_unapproved-v01_20261016-141751-bd083d0a.png",
+          "outputs/rpg-2-star-ocean-the-second_survey-annex-room2-dark_liang-xu-south-idle-static-pilot-h48_unapproved-v01_20261016-141751-bd083d0a.png",
+          "outputs/rpg-2-star-ocean-the-second_city-bright_liang-xu-pilot-with-female-v8-benchmark-h48_unapproved-v01_20261016-141751-bd083d0a.png",
+          "outputs/rpg-2-star-ocean-the-second_survey-annex-room2-dark_liang-xu-pilot-with-female-v8-benchmark-h48_unapproved-v01_20261016-141751-bd083d0a.png"
+        ],
+        "captureReport": "outputs/rpg-2-star-ocean-the-second_city-bright-dark_liang-xu-south-idle-static-pilot-capture-report_unapproved-v01_20261016-141751-bd083d0a.json",
+        "qa": "docs/qa/rpg-2-star-ocean-the-second_liang-xu_south-idle-static-pilot_48px-identity-qa-note_unapproved-v01_20261016-140940-d01e679f.md",
+        "codexVisualAudit": "docs/qa/rpg-2-star-ocean-the-second_liang-xu_south-idle-static-pilot-codex-visual-audit_unapproved-v01_20261016-145125-76c4ab13.md",
+        "openIssues": [
+          "发髻是小圆结，不是设定图中松散盘起的编发",
+          "银发成了脸侧一大片白帘，而不是夹在深色头发中的一缕；明亮城市地面上易与石面混在一起",
+          "两片外套下摆之间的负空间过窄，读作裙或长袍",
+          "折叠战术板读作一块深色竖板，像手机或书",
+          "双腿笔直对称，站姿僵硬；面部比 46 岁导师显得年轻柔和",
+          "暗色档案室中深色外套、发髻与靴子对比不足"
+        ]
+      },
+      "technicalAudit": {
+        "qa": "docs/qa/rpg-2-star-ocean-the-second_static-pilots_female-battle-v08-liang-xu-south-v01_technical-audit-commit-closure_qa-note_unapproved-v01_20261016-150108-f2a96a98.md",
+        "closureCheck": "tools/rpg-2-star-ocean-the-second_static-pilots_female-battle-v08-liang-xu-south-v01-commit-closure-check_unapproved-v01_20261016-150108-0f79c1db.py",
+        "closureGates": "11/11",
+        "authorChecks": "v08 check 19/19 PASS；梁序 check PASS（autocrlf=true 克隆首轮因 Pixelorama GUI 自动保存失败，重跑 PASS）",
+        "reproducible": false,
+        "reproductionLimits": [
+          "F1：梁序 build 在 HEAD 不再幂等，清单锁定的是 4245dd2 之前的 Game Bible 状态哈希（本次同步再次改动该文件）；check 不受影响",
+          "F2：两个 build 在 autocrlf=true 的检出中都会拒绝写入，只能在 LF 检出中运行",
+          "F3：v08 带状背景截图需要另一工作流未提交的 game/scripts/battle_arena.gd；干净克隆回退为几何背景，精灵像素一致但截图不能逐字节重现",
+          "F4：区域测量所需的无精灵帧不在仓库中，需要重新生成",
+          "F5：打开的 Pixelorama GUI 自动保存会让真实 APPDATA 检查偶发失败",
+          "F6：combat-sideview-pilots 目录没有 .gdignore，Godot 导入会生成 .png.import，不应提交"
+        ]
+      },
+      "counters": {
+        "runtimeSpritesAccepted": "0/52",
+        "sceneVisuals": "0/11",
+        "humanPlaytests": "0/2",
+        "completionMeter": "35%"
+      }
+    }
   },
   "environmentVisualReview": {
     "status": "The playable map is now a real-geography global map with US Northeast and Great Lakes regional layers (US science sphere, implemented as a technical candidate, automated tests pass; art unreviewed; the Chicago Loop is a code-drawn placeholder). City/outskirts/ruins outdoor candidates and six survey room candidates are referenced by playable Godot scenes; battle arena candidates are separate. The old fictional three-node map background is no longer used. The stone-plaza ruins and the stone-column ruins arena remain regression items under the 2026-10-14 geography rule. Scene visual acceptance remains 0/11.",

@@ -322,6 +322,33 @@ function checkCanon(bible, progress = readProgress()) {
   check(lastWalkable === 'v06' && has(anchorDetail, ['可步行 v01–v06', '独立定场远景 v01–v02', '均未验收']) &&
     m2Text.includes('可步行 v01–v06') && m2Text.includes('walkable west grounds v01-v06') && !/v01[–-]v05/.test(m2Text),
     'M2 anchor / progress text: Washington walkable v01-v06 matches the Bible, no stale v01-v05');
+  // Character static frames synced in 15c9b73: the female exploration south selout v8 still is the only creator-approved static
+  // baseline; the female battle side-view v08 and Liang Xu south v01 pilots are UNAPPROVED / NONRUNTIME single frames. None is
+  // animated or wired, Liang has one direction, and no counter or meter moves.
+  const pilots = bible.characterVisualReview.staticBaselinesAndPilots;
+  const exists = file => typeof file === 'string' && fs.existsSync(path.join(root, file));
+  const baseline = pilots?.femaleExplorationSouthBaseline;
+  check(baseline && baseline.creatorApproved === true && baseline.status === 'CREATOR-APPROVED STATIC BASELINE' && baseline.direction === 'south' &&
+    baseline.frames === 1 && baseline.animation === false && baseline.runtimeIntegrated === false && baseline.runtimeSpriteAccepted === false &&
+    /_south-idle-selout-v8-cloth-leather-candidate_m8-v08_20261015-021600-157a5ea0\.png$/.test(baseline.png) &&
+    /_south-idle-static-baseline-decision_m8-v08_20261015-022700-07161696\.md$/.test(baseline.decision) && [baseline.png, baseline.decision, baseline.qa].every(exists),
+    'female exploration south selout v8: creator-approved static baseline only (one south still, no animation, not runtime, not a sprite acceptance)');
+  const unapprovedPilot = (entry, version, runId) => entry && entry.status === 'UNAPPROVED / NONRUNTIME' && entry.version === version && entry.runId === runId &&
+    entry.creatorApproved === false && entry.artAccepted === false && entry.runtimeIntegrated === false && entry.animation === false && entry.frames === 1 &&
+    entry.openIssues?.length >= 3 && entry.captures?.length >= 2 && [entry.png, entry.manifest, entry.qa, entry.codexVisualAudit, ...entry.captures].every(exists);
+  const battle = pilots?.femaleBattleSideviewV08;
+  check(unapprovedPilot(battle, 'v08', '326522f8') && /_battle-static-v08-codex-visual-audit_unapproved-v01_20261016-145125-5e1b7d6c\.md$/.test(battle.codexVisualAudit) &&
+    has(battle.approvalNote, ['0.65', '未批准']), 'female battle side-view v08: UNAPPROVED / NONRUNTIME static pilot, only the 0.65 proportion approved, open issues and evidence linked');
+  const liang = pilots?.liangXuSouthIdleV01;
+  const liangText = JSON.stringify(liang || {}) + (bible.characterVisualReview.previews.find(sample => sample.label.startsWith('梁序 朝南待机 v01'))?.caption || '');
+  check(unapprovedPilot(liang, 'v01', 'baa30d44') && liang.humanReviewed === false && same(liang.directions, ['south']) && liang.fourDirectionSprite === false &&
+    /_south-idle-static-pilot-codex-visual-audit_unapproved-v01_20261016-145125-76c4ab13\.md$/.test(liang.codexVisualAudit) &&
+    !/[他她]|\b(he|him|his|she|her|hers)\b/i.test(liangText), 'Liang Xu south v01: UNAPPROVED / NONRUNTIME, one direction, no four-direction claim, gender-neutral text');
+  const audit = pilots?.technicalAudit;
+  check(audit && audit.reproducible === false && audit.closureGates === '11/11' && audit.reproductionLimits?.length >= 3 && [audit.qa, audit.closureCheck].every(exists) &&
+    pilots.asOfCommit === '15c9b73' && same(pilots.counters, {runtimeSpritesAccepted: '0/52', sceneVisuals: '0/11', humanPlaytests: '0/2', completionMeter: '35%'}) &&
+    bible.characterVisualReview.runtimeSpritesAccepted === 0 && has(pilots.en, ['UNAPPROVED / NONRUNTIME', 'no animation', 'one direction only', '0/52', '35%']),
+    'static pilots: technical audit linked with reproduction limits; 15c9b73 snapshot records sprites 0/52, scenes 0/11, playtests 0/2, meter 35%');
   return passed;
 }
 
