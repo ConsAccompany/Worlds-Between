@@ -1,6 +1,6 @@
 # NYC → Chicago air-route inset — test-only visual candidate (QA note)
 
-- **Status:** TEST-ONLY visual candidate, **unapproved**. No runtime file was edited. M2 stays unaccepted. The MVP meter, stage and Game Bible state are unchanged. Nothing was staged or committed.
+- **Status:** TEST-ONLY visual candidate, **unapproved**. No runtime file was edited. M2 stays unaccepted. The MVP meter, stage and Game Bible state are unchanged. Committed at `8522451`: the tool, this note, the Codex v01r1 audit, the 4 v01r1 candidate PNGs, the 4 v01r1 baseline PNGs and the v01r1 checks JSON (108/108). The pre-revision v01 captures and v01 checks JSON were not committed.
 - **Answers:** [NYC–Chicago air corridor visual audit](rpg-2-star-ocean-the-second_global-map_nyc-chicago-air-corridor_visual-audit-unapproved-v01_20261016-064519-bb294d29.md). With Chicago selected, the Great Lakes view showed only Chicago. The card read "From: New York City · Air · Flight 1177.1 km", but nothing on the map showed the trip's direction or span.
 - **Worker:** Claude (signed-in Claude Max, `firstParty`). No API key, paid API, credits or generation service was used. Every image is a real Godot 4.7.2 render (Compatibility, NVIDIA RTX 3080), with no `--headless`.
 
@@ -31,17 +31,16 @@ Design:
 1. The bare endpoint labels sat on the coastline. At 640×360, "New York City" ran over the Long Island coast. v01r1 puts them on dark backing plates, the same `COLOR_LABEL_BG` style the map markers use.
 2. The main map's "100 km" bar sits 14 px below the inset, so it read as the inset's scale (the inset is about 7.6× smaller in scale). v01r1 adds the inset's own 250 km bar at the left of the caption row and right-aligns the caption.
 
-The rectangle, label sides and arc are unchanged. **v01r1 is the candidate.** v01 is kept for comparison.
+The rectangle, label sides and arc are unchanged. **v01r1 is the candidate.** The pre-revision v01 captures and checks were inspected locally only and were deliberately not committed, so they are not available from a clone.
 
 ## Captures (`outputs/`, all `…_test-only-v01_20261016-065443-adea3798.png`)
 
 | Variant | zh 1280×720 | en 1280×720 | zh 640×360 | en 640×360 |
 |---|---|---|---|---|
 | **v01r1 (candidate)** | `…air-inset_v01r1-zh-1280x720_…` | `…air-inset_v01r1-en-1280x720_…` | `…air-inset_v01r1-zh-640x360_…` | `…air-inset_v01r1-en-640x360_…` |
-| v01 (pre-revision) | `…air-inset_v01-zh-1280x720_…` | `…air-inset_v01-en-1280x720_…` | `…air-inset_v01-zh-640x360_…` | `…air-inset_v01-en-640x360_…` |
 | Baseline, inset hidden, same frame | `…v01r1-baseline-no-inset-zh-1280x720_…` | `…-en-1280x720_…` | `…-zh-640x360_…` | `…-en-640x360_…` |
 
-The full prefix is `rpg-2-star-ocean-the-second_global-map_nyc-chicago-air-inset_`. The check reports are `…air-inset_checks-v01r1_…json` (108/108) and `…air-inset_checks-v01_…json` (102/102). All 8 v01r1 PNGs and all 4 zh/en × 2-size candidate frames were opened and inspected. The zh 1280 and en 640 insets were also inspected as 2× crops.
+The full prefix is `rpg-2-star-ocean-the-second_global-map_nyc-chicago-air-inset_`. All 8 PNGs above and the check report `…air-inset_checks-v01r1_…json` (108/108) are committed. The pre-revision v01 run (4 candidate frames, 4 baselines and a 102/102 checks JSON) was opened and inspected locally but is not in Git; the two findings in the revision list above are its only committed record. All 8 v01r1 PNGs were opened and inspected. The zh 1280 and en 640 insets were also inspected as 2× crops.
 
 ## Checks (v01r1: `AIR_INSET_OK v01r1 108 checks, 8 captures`, exit 0)
 
