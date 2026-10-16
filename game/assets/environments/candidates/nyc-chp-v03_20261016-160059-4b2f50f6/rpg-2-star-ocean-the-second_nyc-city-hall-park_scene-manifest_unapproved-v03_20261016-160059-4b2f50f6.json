@@ -1,0 +1,1314 @@
+{
+  "project": "rpg-2-star-ocean-the-second",
+  "area": "nyc-city-hall-park",
+  "run": "nyc-chp-v03_20261016-160059-4b2f50f6",
+  "version": "v03",
+  "derived_from": {
+    "run": "nyc-chp-v02_20261016-055120-59848a60",
+    "tool": "tools/rpg-2-star-ocean-the-second_nyc-city-hall-park_walkable-pilot-640x360_pixelorama-build_unapproved-v02_20261016-055120-59848a60.py",
+    "note": "v02 files untouched; v03 is a new separate candidate forked from the v02 tool"
+  },
+  "status": "UNAPPROVED / NONRUNTIME test-only walkable pilot (one 640x360 camera composition). Not accepted art, not runtime-integrated. Acceptance is creator review only; science scene art stays 0/11.",
+  "art_approved": false,
+  "runtime_integrated": false,
+  "counters_changed": false,
+  "human_reviewed": false,
+  "v03_changes_vs_v02": [
+    "skyline: sky band, broken rooflines, three hazed planes in brick / limestone / terracotta / glass; Woolworth-like piers (left), Municipal-Building-like colonnade (right), water tanks, one faint 2537 garden tower",
+    "City Hall: per-window state table (blinds, curtains, lit, three reflection shapes), cornice shadow band, splash grime, 17 hand-placed rain streaks, deep-reveal shadows, Justice figure on the cupola, whole building and far stair hazed one aerial-perspective step; four door-scaled visitors on the stair",
+    "trees: hand-cut crown gaps showing limbs, asymmetric lobe lists, SE plane forks low (V) with a low east bough, elm in vase form, back groves mirrored per instance with a spill lobe and hazed north of row 80",
+    "lawns: new lawn-life layer (seated reader, picnic pair on a gingham blanket, bench reader, kneeling gardener, a small 2537 garden drone, three mounded shrub borders); seven mown patches break the tuft lattice",
+    "flower beds: granite edging, mulch line, solid bloom drifts with lit caps and bloom ticks (v02 dots read dark)",
+    "fountain: the tall 2-px jet is removed; two-tier centrepiece with a wide upper bowl, overflow veil (every 2nd column) and a low foam crown; the behind-fountain capture moves to stand directly behind it",
+    "behind-tree capture moved 5 px west: trunk covers her east side, far foot and contact shadow visible",
+    "gates: standing-on rule now counts a row against the heroine's own texels in that row (v02 counter could never exceed 0); contact-shadow gate accepts a behind capture whose front sprite covers >= 50 % of the footprint; native 640x360 windowed Godot render added beside 1280x720"
+  ],
+  "capture_pins_vs_v02": {
+    "axis": {
+      "v02": [
+        320,
+        292
+      ],
+      "v03": [
+        320,
+        292
+      ]
+    },
+    "behind-fountain": {
+      "v02": [
+        186,
+        226
+      ],
+      "v03": [
+        172,
+        240
+      ],
+      "why": "v02 overlap was 6 texels of a thin jet across her arm; v03 stands her directly behind the new veil so stone and falling water hide her from the hips down"
+    },
+    "behind-tree": {
+      "v02": [
+        403,
+        268
+      ],
+      "v03": [
+        398,
+        268
+      ],
+      "why": "5 px west so the trunk covers one side and her far foot and contact shadow stay visible; the west leader crosses her torso"
+    }
+  },
+  "authoring_route": {
+    "method": "deterministic Python tool with hand-written placement tables, authored and run by Claude (Claude Code, claude.ai Max subscription, firstParty; no API key, no image model, no paid fallback); writes a native pxo_version 7 .pxo and an .ora with 24 named layers",
+    "pixelorama_gui_paint_pass": false,
+    "disclosure": "no desktop/computer-use access to the Pixelorama GUI in this session",
+    "texture_policy": "hand-drawn motifs (leaf clumps, grass tufts, bed clumps) on fixed lattices with hand-written offset tables; wear marks, stains, cracks, litter, beds, trees and props are explicit table entries; no value-noise thresholds, no hashed pixel scatter (a hash only picks a granite slab / hex block tone from a short hand table)",
+    "reference_usage": "City Hall massing follows the published description (central pavilion, two projecting wings, columned entrance portico, domed tower); bay / column counts are an interpretation, not measured from LPC elevations; no reference pixel copied; Lower Manhattan context is generic hazed massing",
+    "reference_url": "https://www.nyc.gov/site/dcas/business/dcasmanagedbuildings/city-hall.page",
+    "audit_reference": "docs/qa/rpg-2-star-ocean-the-second_nyc-city-hall-park_walkable-v02-codex-visual-audit_unapproved-v01_20261016-064422-216b6bc3.md",
+    "density_idea_reference": {
+      "file": "outputs/rpg-2-star-ocean-the-second_nyc-city-hall-park_visual-direction-reference_nonruntime-v03_20261016-124945-33aa88e9.png",
+      "use": "looked at for density ideas only (canopy variation, planted borders, lawn occupation, warmer city blocks); no pixel or colour sampled; it is itself an UNAPPROVED generated concept"
+    }
+  },
+  "canvas": {
+    "w": 640,
+    "h": 360,
+    "camera": "top-down 3/4; top = north (City Hall), bottom = south",
+    "gameplay_camera": "exactly one 640x360 logical viewport (window 1280x720, integer 2x; also captured in a native 640x360 window)",
+    "scale_reference": {
+      "file": "game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v8-cloth-leather-candidate_m8-v08_20261015-021600-157a5ea0.png",
+      "logical_height_px": 48
+    },
+    "forced_perspective": "backdrop rows 0..171 (city beyond Chambers St, City Hall at reduced scale, forecourt) is not walkable; walkable park rows 172..359 at heroine scale; the walk ends at hero-scale gate piers and railings, the forecourt beyond them recedes (graded stair risers, thinning paving courses, smaller tufts and trees)"
+  },
+  "layers_bottom_to_top": [
+    {
+      "index": 1,
+      "name": "skyline",
+      "visible": true,
+      "locked": false,
+      "runtime_export": "merged into base",
+      "opaque_texels": 230400
+    },
+    {
+      "index": 2,
+      "name": "forecourt",
+      "visible": true,
+      "locked": false,
+      "runtime_export": "merged into base",
+      "opaque_texels": 71280
+    },
+    {
+      "index": 3,
+      "name": "back-groves",
+      "visible": true,
+      "locked": false,
+      "runtime_export": "merged into base",
+      "opaque_texels": 20608
+    },
+    {
+      "index": 4,
+      "name": "streets",
+      "visible": true,
+      "locked": false,
+      "runtime_export": "merged into base",
+      "opaque_texels": 35900
+    },
+    {
+      "index": 5,
+      "name": "city-hall",
+      "visible": true,
+      "locked": false,
+      "runtime_export": "merged into base",
+      "opaque_texels": 31824
+    },
+    {
+      "index": 6,
+      "name": "park-ground",
+      "visible": true,
+      "locked": false,
+      "runtime_export": "merged into base",
+      "opaque_texels": 99472
+    },
+    {
+      "index": 7,
+      "name": "ground-wear",
+      "visible": true,
+      "locked": false,
+      "runtime_export": "merged into base",
+      "opaque_texels": 1430
+    },
+    {
+      "index": 8,
+      "name": "ground-detail",
+      "visible": true,
+      "locked": false,
+      "runtime_export": "merged into base",
+      "opaque_texels": 1865
+    },
+    {
+      "index": 9,
+      "name": "fountain-basin",
+      "visible": true,
+      "locked": false,
+      "runtime_export": "merged into base",
+      "opaque_texels": 3592
+    },
+    {
+      "index": 10,
+      "name": "cast-shadows",
+      "visible": true,
+      "locked": false,
+      "runtime_export": "merged into base",
+      "opaque_texels": 6339
+    },
+    {
+      "index": 11,
+      "name": "props-low",
+      "visible": true,
+      "locked": false,
+      "runtime_export": "merged into base",
+      "opaque_texels": 2095
+    },
+    {
+      "index": 12,
+      "name": "lawn-life",
+      "visible": true,
+      "locked": false,
+      "runtime_export": "merged into base",
+      "opaque_texels": 2472
+    },
+    {
+      "index": 13,
+      "name": "forecourt-near",
+      "visible": true,
+      "locked": false,
+      "runtime_export": "merged into base",
+      "opaque_texels": 8041
+    },
+    {
+      "index": 14,
+      "name": "tree-nw-ysort",
+      "visible": true,
+      "locked": false,
+      "runtime_export": "Y-sorted sprite layer, pivot row 204",
+      "opaque_texels": 4580
+    },
+    {
+      "index": 15,
+      "name": "lamp-w-ysort",
+      "visible": true,
+      "locked": false,
+      "runtime_export": "Y-sorted sprite layer, pivot row 226",
+      "opaque_texels": 211
+    },
+    {
+      "index": 16,
+      "name": "trees-ne-ysort",
+      "visible": true,
+      "locked": false,
+      "runtime_export": "Y-sorted sprite layer, pivot row 240",
+      "opaque_texels": 4991
+    },
+    {
+      "index": 17,
+      "name": "statue-ysort",
+      "visible": true,
+      "locked": false,
+      "runtime_export": "Y-sorted sprite layer, pivot row 268",
+      "opaque_texels": 395
+    },
+    {
+      "index": 18,
+      "name": "fountain-ysort",
+      "visible": true,
+      "locked": false,
+      "runtime_export": "Y-sorted sprite layer, pivot row 272",
+      "opaque_texels": 1299
+    },
+    {
+      "index": 19,
+      "name": "lamp-e-ysort",
+      "visible": true,
+      "locked": false,
+      "runtime_export": "Y-sorted sprite layer, pivot row 292",
+      "opaque_texels": 211
+    },
+    {
+      "index": 20,
+      "name": "tree-se-ysort",
+      "visible": true,
+      "locked": false,
+      "runtime_export": "Y-sorted sprite layer, pivot row 300",
+      "opaque_texels": 3847
+    },
+    {
+      "index": 21,
+      "name": "tree-sw-ysort",
+      "visible": true,
+      "locked": false,
+      "runtime_export": "Y-sorted sprite layer, pivot row 330",
+      "opaque_texels": 994
+    },
+    {
+      "index": 22,
+      "name": "cart-ysort",
+      "visible": true,
+      "locked": false,
+      "runtime_export": "Y-sorted sprite layer, pivot row 344",
+      "opaque_texels": 996
+    },
+    {
+      "index": 23,
+      "name": "fg-occlusion",
+      "visible": true,
+      "locked": false,
+      "runtime_export": "overlay above actors",
+      "opaque_texels": 862
+    },
+    {
+      "index": 24,
+      "name": "guides",
+      "visible": false,
+      "locked": true,
+      "runtime_export": "never exported (hidden guides)",
+      "opaque_texels": 9067
+    }
+  ],
+  "palette": [
+    {
+      "name": "ink",
+      "hex": "#15171d"
+    },
+    {
+      "name": "m0",
+      "hex": "#3e3d45"
+    },
+    {
+      "name": "m1",
+      "hex": "#5f5c62"
+    },
+    {
+      "name": "m2",
+      "hex": "#857f7c"
+    },
+    {
+      "name": "m3",
+      "hex": "#a8a196"
+    },
+    {
+      "name": "m4",
+      "hex": "#c7bfb0"
+    },
+    {
+      "name": "m5",
+      "hex": "#dfd8c8"
+    },
+    {
+      "name": "m6",
+      "hex": "#f2ede0"
+    },
+    {
+      "name": "w0",
+      "hex": "#1f2a36"
+    },
+    {
+      "name": "w1",
+      "hex": "#334556"
+    },
+    {
+      "name": "w2",
+      "hex": "#587486"
+    },
+    {
+      "name": "wl",
+      "hex": "#e6be74"
+    },
+    {
+      "name": "wl2",
+      "hex": "#f6dfa6"
+    },
+    {
+      "name": "r0",
+      "hex": "#384446"
+    },
+    {
+      "name": "r1",
+      "hex": "#4d5c5d"
+    },
+    {
+      "name": "r2",
+      "hex": "#66787a"
+    },
+    {
+      "name": "au0",
+      "hex": "#7e5f27"
+    },
+    {
+      "name": "au1",
+      "hex": "#bd9238"
+    },
+    {
+      "name": "au2",
+      "hex": "#ecd07c"
+    },
+    {
+      "name": "f0",
+      "hex": "#14241c"
+    },
+    {
+      "name": "f1",
+      "hex": "#1f3a27"
+    },
+    {
+      "name": "f2",
+      "hex": "#2d5530"
+    },
+    {
+      "name": "f3",
+      "hex": "#437539"
+    },
+    {
+      "name": "f4",
+      "hex": "#5f9444"
+    },
+    {
+      "name": "f5",
+      "hex": "#86b558"
+    },
+    {
+      "name": "f6",
+      "hex": "#b0d27a"
+    },
+    {
+      "name": "g0",
+      "hex": "#2a4627"
+    },
+    {
+      "name": "g1",
+      "hex": "#375c2f"
+    },
+    {
+      "name": "g2",
+      "hex": "#477437"
+    },
+    {
+      "name": "g3",
+      "hex": "#5f8d41"
+    },
+    {
+      "name": "g4",
+      "hex": "#7da650"
+    },
+    {
+      "name": "b0",
+      "hex": "#2a201b"
+    },
+    {
+      "name": "b1",
+      "hex": "#463427"
+    },
+    {
+      "name": "b2",
+      "hex": "#67503d"
+    },
+    {
+      "name": "p0",
+      "hex": "#4d4a47"
+    },
+    {
+      "name": "p1",
+      "hex": "#6c675f"
+    },
+    {
+      "name": "p2",
+      "hex": "#8b847a"
+    },
+    {
+      "name": "p3",
+      "hex": "#aaa294"
+    },
+    {
+      "name": "p4",
+      "hex": "#c6beae"
+    },
+    {
+      "name": "p5",
+      "hex": "#dcd5c6"
+    },
+    {
+      "name": "x0",
+      "hex": "#3f4045"
+    },
+    {
+      "name": "x1",
+      "hex": "#55575c"
+    },
+    {
+      "name": "x2",
+      "hex": "#6c6e71"
+    },
+    {
+      "name": "x3",
+      "hex": "#848583"
+    },
+    {
+      "name": "a0",
+      "hex": "#25282d"
+    },
+    {
+      "name": "a1",
+      "hex": "#33373d"
+    },
+    {
+      "name": "a2",
+      "hex": "#434850"
+    },
+    {
+      "name": "a3",
+      "hex": "#596068"
+    },
+    {
+      "name": "lw",
+      "hex": "#d6d6cc"
+    },
+    {
+      "name": "k0",
+      "hex": "#1b2128"
+    },
+    {
+      "name": "k1",
+      "hex": "#2c3540"
+    },
+    {
+      "name": "k2",
+      "hex": "#435160"
+    },
+    {
+      "name": "k3",
+      "hex": "#66798a"
+    },
+    {
+      "name": "c0",
+      "hex": "#26566c"
+    },
+    {
+      "name": "c1",
+      "hex": "#377e98"
+    },
+    {
+      "name": "c2",
+      "hex": "#63adc2"
+    },
+    {
+      "name": "c3",
+      "hex": "#aee1e8"
+    },
+    {
+      "name": "t0",
+      "hex": "#186a70"
+    },
+    {
+      "name": "t1",
+      "hex": "#33b2ae"
+    },
+    {
+      "name": "t2",
+      "hex": "#8aeedd"
+    },
+    {
+      "name": "fl0",
+      "hex": "#b84a7c"
+    },
+    {
+      "name": "fl1",
+      "hex": "#e39ab4"
+    },
+    {
+      "name": "fl2",
+      "hex": "#e6c95a"
+    },
+    {
+      "name": "fl3",
+      "hex": "#efece0"
+    },
+    {
+      "name": "fl4",
+      "hex": "#7f66bd"
+    },
+    {
+      "name": "fl5",
+      "hex": "#d9663f"
+    },
+    {
+      "name": "br0",
+      "hex": "#553026"
+    },
+    {
+      "name": "br1",
+      "hex": "#774533"
+    },
+    {
+      "name": "wd0",
+      "hex": "#45301f"
+    },
+    {
+      "name": "wd1",
+      "hex": "#6b482c"
+    },
+    {
+      "name": "wd2",
+      "hex": "#916740"
+    },
+    {
+      "name": "s0",
+      "hex": "#3b2d23"
+    },
+    {
+      "name": "s1",
+      "hex": "#574131"
+    },
+    {
+      "name": "fr",
+      "hex": "#a33139"
+    },
+    {
+      "name": "fb",
+      "hex": "#2b3c6c"
+    },
+    {
+      "name": "fo",
+      "hex": "#d9782e"
+    },
+    {
+      "name": "bz0",
+      "hex": "#2b2a24"
+    },
+    {
+      "name": "bz1",
+      "hex": "#4a4a3a"
+    },
+    {
+      "name": "bz2",
+      "hex": "#5f7b66"
+    },
+    {
+      "name": "bz3",
+      "hex": "#8fb39a"
+    },
+    {
+      "name": "h0",
+      "hex": "#4f5866"
+    },
+    {
+      "name": "h1",
+      "hex": "#65707c"
+    },
+    {
+      "name": "h2",
+      "hex": "#7d8792"
+    },
+    {
+      "name": "h3",
+      "hex": "#98a0a8"
+    },
+    {
+      "name": "h4",
+      "hex": "#b3b8bb"
+    },
+    {
+      "name": "hw",
+      "hex": "#8a7d68"
+    },
+    {
+      "name": "e0",
+      "hex": "#4e4030"
+    },
+    {
+      "name": "e1",
+      "hex": "#6e5b43"
+    },
+    {
+      "name": "e2",
+      "hex": "#917b5c"
+    },
+    {
+      "name": "y0",
+      "hex": "#26361d"
+    },
+    {
+      "name": "y1",
+      "hex": "#3f5726"
+    },
+    {
+      "name": "y2",
+      "hex": "#5f7a2f"
+    },
+    {
+      "name": "y3",
+      "hex": "#86a03f"
+    },
+    {
+      "name": "y4",
+      "hex": "#b2c565"
+    },
+    {
+      "name": "pk0",
+      "hex": "#a85b7a"
+    },
+    {
+      "name": "pk1",
+      "hex": "#dc9db3"
+    },
+    {
+      "name": "pk2",
+      "hex": "#f3d7de"
+    },
+    {
+      "name": "bk0",
+      "hex": "#8a8670"
+    },
+    {
+      "name": "bk1",
+      "hex": "#b5b096"
+    },
+    {
+      "name": "bk2",
+      "hex": "#625e4f"
+    },
+    {
+      "name": "ub0",
+      "hex": "#2d5a92"
+    },
+    {
+      "name": "ub1",
+      "hex": "#e3c24e"
+    },
+    {
+      "name": "sy0",
+      "hex": "#a9c3cf"
+    },
+    {
+      "name": "sy1",
+      "hex": "#c4d6dc"
+    },
+    {
+      "name": "sy2",
+      "hex": "#dde6e2"
+    },
+    {
+      "name": "fa0",
+      "hex": "#8d9ea8"
+    },
+    {
+      "name": "fa1",
+      "hex": "#a3b2b9"
+    },
+    {
+      "name": "fa2",
+      "hex": "#b8c4c7"
+    },
+    {
+      "name": "hb0",
+      "hex": "#6f5f5e"
+    },
+    {
+      "name": "hb1",
+      "hex": "#8a7470"
+    },
+    {
+      "name": "hb2",
+      "hex": "#a48d84"
+    },
+    {
+      "name": "hl0",
+      "hex": "#8c8a85"
+    },
+    {
+      "name": "hl1",
+      "hex": "#a9a59b"
+    },
+    {
+      "name": "hl2",
+      "hex": "#c4beb0"
+    },
+    {
+      "name": "hl3",
+      "hex": "#d6d0c0"
+    },
+    {
+      "name": "tc0",
+      "hex": "#9a8c74"
+    },
+    {
+      "name": "tc1",
+      "hex": "#b8a888"
+    },
+    {
+      "name": "tc2",
+      "hex": "#d2c4a2"
+    },
+    {
+      "name": "hg0",
+      "hex": "#5d7584"
+    },
+    {
+      "name": "hg1",
+      "hex": "#7f97a3"
+    },
+    {
+      "name": "hg2",
+      "hex": "#a7bcc4"
+    },
+    {
+      "name": "cu0",
+      "hex": "#5e8a7e"
+    },
+    {
+      "name": "cu1",
+      "hex": "#86ae9e"
+    },
+    {
+      "name": "tq",
+      "hex": "#7fc6c0"
+    },
+    {
+      "name": "gr0",
+      "hex": "#6b8466"
+    },
+    {
+      "name": "gr1",
+      "hex": "#86a07a"
+    },
+    {
+      "name": "hm0",
+      "hex": "#54555c"
+    },
+    {
+      "name": "hm1",
+      "hex": "#6f6f74"
+    },
+    {
+      "name": "hm2",
+      "hex": "#8e8b8a"
+    },
+    {
+      "name": "hm3",
+      "hex": "#aba79f"
+    },
+    {
+      "name": "hm4",
+      "hex": "#c4c0b4"
+    },
+    {
+      "name": "hm5",
+      "hex": "#d8d4c8"
+    },
+    {
+      "name": "hm6",
+      "hex": "#e7e6db"
+    },
+    {
+      "name": "hr0",
+      "hex": "#4f5b5d"
+    },
+    {
+      "name": "hr1",
+      "hex": "#606f70"
+    },
+    {
+      "name": "hr2",
+      "hex": "#758688"
+    },
+    {
+      "name": "hw0",
+      "hex": "#3a4650"
+    },
+    {
+      "name": "hw1",
+      "hex": "#4b5c6a"
+    },
+    {
+      "name": "hw2",
+      "hex": "#698292"
+    },
+    {
+      "name": "hwl",
+      "hex": "#debf83"
+    },
+    {
+      "name": "hwl2",
+      "hex": "#ebdaac"
+    },
+    {
+      "name": "hcu",
+      "hex": "#b9a37c"
+    },
+    {
+      "name": "q0",
+      "hex": "#2f4a3a"
+    },
+    {
+      "name": "q1",
+      "hex": "#3f5e45"
+    },
+    {
+      "name": "q2",
+      "hex": "#537653"
+    },
+    {
+      "name": "q3",
+      "hex": "#6b8e62"
+    },
+    {
+      "name": "q4",
+      "hex": "#88a777"
+    },
+    {
+      "name": "hu0",
+      "hex": "#8d5a3f"
+    },
+    {
+      "name": "hu1",
+      "hex": "#c58b66"
+    },
+    {
+      "name": "hu2",
+      "hex": "#e6b58f"
+    },
+    {
+      "name": "fr0",
+      "hex": "#7d2530"
+    }
+  ],
+  "guide_palette": [
+    {
+      "name": "gd-walk",
+      "hex": "#3cdcff"
+    },
+    {
+      "name": "gd-block",
+      "hex": "#ff285a"
+    },
+    {
+      "name": "gd-pin",
+      "hex": "#ffe600"
+    },
+    {
+      "name": "gd-route",
+      "hex": "#ff00ff"
+    }
+  ],
+  "pins": {
+    "spawn_south": [
+      320,
+      350
+    ],
+    "city_hall_gate": [
+      320,
+      178
+    ],
+    "axis_mid": [
+      320,
+      292
+    ],
+    "fountain_south": [
+      172,
+      318
+    ],
+    "fountain_behind": [
+      172,
+      240
+    ],
+    "info_pylon": [
+      214,
+      244
+    ],
+    "statue_plaque": [
+      470,
+      284
+    ],
+    "statue_behind": [
+      470,
+      250
+    ],
+    "tree_se_behind": [
+      398,
+      268
+    ],
+    "lamp_w_behind": [
+      300,
+      216
+    ],
+    "lamp_w_front": [
+      300,
+      234
+    ],
+    "fountain_lamp_front": [
+      110,
+      284
+    ],
+    "exit_broadway_gate": [
+      70,
+      270
+    ],
+    "exit_park_row": [
+      596,
+      350
+    ]
+  },
+  "static_checks": {
+    "verdicts": {
+      "canvas_640x360_all_layers": true,
+      "base_layer_opaque": true,
+      "binary_alpha_all_layers": true,
+      "art_layers_palette_only": true,
+      "flat_colours_subset_of_palette": true,
+      "flat_opaque": true,
+      "heroine_48_logical_px": true,
+      "every_walkable_foot_keeps_one_third_visible": true,
+      "depth_audit_zero_wrong_order_feet": true,
+      "walkable_never_in_backdrop": true,
+      "walkable_only_on_paving": true,
+      "walkable_never_in_fountain_basin": true,
+      "no_standing_on_ambiguity_at_walkable_feet": true,
+      "ysort_behind_front_correct": true,
+      "contact_shadow_two_alpha_steps": true,
+      "contact_shadow_visible_or_occluded_by_front_sprite": true,
+      "all_pins_reachable_from_spawn": true,
+      "pins_on_walkable_texels": true,
+      "heroine_route_fully_walkable": true,
+      "no_isolated_bright_flecks_in_walkable_park": true
+    },
+    "visibility_worst": 0.538,
+    "visibility_worst_at": [
+      438,
+      258
+    ],
+    "visibility_fail_count": 0,
+    "visibility_fail_examples": [],
+    "depth_audit": {
+      "fence_0": {
+        "overlapping_walkable_feet": 663,
+        "wrong_order_feet": 0,
+        "base_row": 253
+      },
+      "fence_1": {
+        "overlapping_walkable_feet": 1119,
+        "wrong_order_feet": 0,
+        "base_row": 253
+      },
+      "fence_2": {
+        "overlapping_walkable_feet": 1654,
+        "wrong_order_feet": 0,
+        "base_row": 253
+      },
+      "fence_3": {
+        "overlapping_walkable_feet": 93,
+        "wrong_order_feet": 0,
+        "base_row": 281
+      },
+      "fence_4": {
+        "overlapping_walkable_feet": 130,
+        "wrong_order_feet": 0,
+        "base_row": 281
+      },
+      "fence_5": {
+        "overlapping_walkable_feet": 429,
+        "wrong_order_feet": 0,
+        "base_row": 336
+      },
+      "fence_6": {
+        "overlapping_walkable_feet": 1014,
+        "wrong_order_feet": 0,
+        "base_row": 336
+      },
+      "fence_7": {
+        "overlapping_walkable_feet": 1991,
+        "wrong_order_feet": 0,
+        "base_row": 336
+      },
+      "fence_8": {
+        "overlapping_walkable_feet": 1685,
+        "wrong_order_feet": 0,
+        "base_row": 336
+      },
+      "fence_9": {
+        "overlapping_walkable_feet": 1950,
+        "wrong_order_feet": 0,
+        "base_row": 336
+      },
+      "bench_0": {
+        "overlapping_walkable_feet": 725,
+        "wrong_order_feet": 0,
+        "base_row": 252
+      },
+      "bench_1": {
+        "overlapping_walkable_feet": 656,
+        "wrong_order_feet": 0,
+        "base_row": 336
+      },
+      "bench_2": {
+        "overlapping_walkable_feet": 680,
+        "wrong_order_feet": 0,
+        "base_row": 336
+      },
+      "bin_0": {
+        "overlapping_walkable_feet": 596,
+        "wrong_order_feet": 0,
+        "base_row": 256
+      },
+      "bin_1": {
+        "overlapping_walkable_feet": 271,
+        "wrong_order_feet": 0,
+        "base_row": 342
+      },
+      "bollard_0": {
+        "overlapping_walkable_feet": 0,
+        "wrong_order_feet": 0,
+        "base_row": 342
+      },
+      "bollard_1": {
+        "overlapping_walkable_feet": 0,
+        "wrong_order_feet": 0,
+        "base_row": 352
+      },
+      "info_pylon": {
+        "overlapping_walkable_feet": 582,
+        "wrong_order_feet": 0,
+        "base_row": 230
+      },
+      "broadway_pier_0": {
+        "overlapping_walkable_feet": 141,
+        "wrong_order_feet": 0,
+        "base_row": 257
+      },
+      "broadway_pier_1": {
+        "overlapping_walkable_feet": 0,
+        "wrong_order_feet": 0,
+        "base_row": 289
+      },
+      "shrub_border_146": {
+        "overlapping_walkable_feet": 1980,
+        "wrong_order_feet": 0,
+        "base_row": 208
+      },
+      "shrub_border_396": {
+        "overlapping_walkable_feet": 1091,
+        "wrong_order_feet": 0,
+        "base_row": 250
+      },
+      "shrub_border_66": {
+        "overlapping_walkable_feet": 396,
+        "wrong_order_feet": 0,
+        "base_row": 333
+      },
+      "picnic_blanket": {
+        "overlapping_walkable_feet": 983,
+        "wrong_order_feet": 0,
+        "base_row": 324
+      },
+      "occupant_reader_nw": {
+        "overlapping_walkable_feet": 810,
+        "wrong_order_feet": 0,
+        "base_row": 210
+      },
+      "occupant_picnic_a": {
+        "overlapping_walkable_feet": 585,
+        "wrong_order_feet": 0,
+        "base_row": 318
+      },
+      "occupant_picnic_b": {
+        "overlapping_walkable_feet": 503,
+        "wrong_order_feet": 0,
+        "base_row": 316
+      },
+      "occupant_bench_reader": {
+        "overlapping_walkable_feet": 553,
+        "wrong_order_feet": 0,
+        "base_row": 337
+      },
+      "occupant_gardener": {
+        "overlapping_walkable_feet": 593,
+        "wrong_order_feet": 0,
+        "base_row": 238
+      },
+      "garden_drone": {
+        "overlapping_walkable_feet": 355,
+        "wrong_order_feet": 0,
+        "base_row": 234
+      }
+    },
+    "ysort_cases": {
+      "fountain_behind": {
+        "layer": "fountain-ysort",
+        "behind": true,
+        "overlap_texels": 151,
+        "sprite_on_top_texels": 151,
+        "ok": true,
+        "walkable": true,
+        "occlusion": {
+          "hidden_share": 0.248,
+          "foot_band_hidden_share": 0.643,
+          "covered_rows_from_feet": 19
+        }
+      },
+      "fountain_lamp_front": {
+        "layer": "fountain-ysort",
+        "behind": false,
+        "overlap_texels": 66,
+        "sprite_on_top_texels": 0,
+        "ok": true,
+        "walkable": true,
+        "occlusion": {
+          "hidden_share": 0.0,
+          "foot_band_hidden_share": 0.0,
+          "covered_rows_from_feet": 0
+        }
+      },
+      "statue_behind": {
+        "layer": "statue-ysort",
+        "behind": true,
+        "overlap_texels": 64,
+        "sprite_on_top_texels": 64,
+        "ok": true,
+        "walkable": true,
+        "occlusion": {
+          "hidden_share": 0.105,
+          "foot_band_hidden_share": 0.143,
+          "covered_rows_from_feet": 0
+        }
+      },
+      "statue_plaque": {
+        "layer": "statue-ysort",
+        "behind": false,
+        "overlap_texels": 338,
+        "sprite_on_top_texels": 0,
+        "ok": true,
+        "walkable": true,
+        "occlusion": {
+          "hidden_share": 0.0,
+          "foot_band_hidden_share": 0.0,
+          "covered_rows_from_feet": 0
+        }
+      },
+      "tree_se_behind": {
+        "layer": "tree-se-ysort",
+        "behind": true,
+        "overlap_texels": 156,
+        "sprite_on_top_texels": 156,
+        "ok": true,
+        "walkable": true,
+        "occlusion": {
+          "hidden_share": 0.257,
+          "foot_band_hidden_share": 0.357,
+          "covered_rows_from_feet": 2
+        }
+      },
+      "lamp_w_behind": {
+        "layer": "lamp-w-ysort",
+        "behind": true,
+        "overlap_texels": 73,
+        "sprite_on_top_texels": 73,
+        "ok": true,
+        "walkable": true,
+        "occlusion": {
+          "hidden_share": 0.12,
+          "foot_band_hidden_share": 0.0,
+          "covered_rows_from_feet": 0
+        }
+      },
+      "lamp_w_front": {
+        "layer": "lamp-w-ysort",
+        "behind": false,
+        "overlap_texels": 61,
+        "sprite_on_top_texels": 0,
+        "ok": true,
+        "walkable": true,
+        "occlusion": {
+          "hidden_share": 0.0,
+          "foot_band_hidden_share": 0.0,
+          "covered_rows_from_feet": 0
+        }
+      }
+    },
+    "pins_reachable": {
+      "spawn_south": true,
+      "city_hall_gate": true,
+      "axis_mid": true,
+      "fountain_south": true,
+      "fountain_behind": true,
+      "info_pylon": true,
+      "statue_plaque": true,
+      "statue_behind": true,
+      "tree_se_behind": true,
+      "lamp_w_behind": true,
+      "lamp_w_front": true,
+      "fountain_lamp_front": true,
+      "exit_broadway_gate": true,
+      "exit_park_row": true
+    },
+    "route_points": 1529,
+    "route_blocked_examples": [],
+    "isolated_bright_flecks": {
+      "park_rows_150_359": 0,
+      "examples": [],
+      "whole_frame": 11
+    },
+    "single_texel_colour_islands_share": {
+      "park_rows_150_359": 0.0157,
+      "backdrop_rows_0_149": 0.0101
+    },
+    "palette": {
+      "art_colours": 151,
+      "used_in_flat": 144
+    },
+    "despeckled_ground_texels": 45,
+    "standing_on_blocked_feet": 273,
+    "contact_shadow_visible_texels_per_capture": {
+      "axis": 49,
+      "behind-fountain": 9,
+      "behind-tree": 49
+    },
+    "contact_shadow_footprint_share_under_front_sprites": {
+      "axis": 0.0,
+      "behind-fountain": 0.814,
+      "behind-tree": 0.0
+    },
+    "capture_occlusion": {
+      "axis": {
+        "hidden_share": 0.0,
+        "foot_band_hidden_share": 0.0,
+        "covered_rows_from_feet": 0
+      },
+      "behind-fountain": {
+        "hidden_share": 0.248,
+        "foot_band_hidden_share": 0.643,
+        "covered_rows_from_feet": 19
+      },
+      "behind-tree": {
+        "hidden_share": 0.257,
+        "foot_band_hidden_share": 0.357,
+        "covered_rows_from_feet": 2
+      }
+    },
+    "walkable_texels": 36957,
+    "walkable_share_of_park_rows": 0.307
+  },
+  "files_sha256_bytes": {
+    "rpg-2-star-ocean-the-second_nyc-city-hall-park_scene-24layer_unapproved-v03_20261016-160059-4b2f50f6.pxo": "86755d20f91cd6e22a57aa626c46e1aa193f392914cfe7c7b89981d70481f90a",
+    "rpg-2-star-ocean-the-second_nyc-city-hall-park_scene-24layer_unapproved-v03_20261016-160059-4b2f50f6.ora": "15207203bd0d71f3f69b4953cc309728b2b5dde1bb501040f6eed6b9daaea685",
+    "rpg-2-star-ocean-the-second_nyc-city-hall-park_scene-palette_unapproved-v03_20261016-160059-4b2f50f6.gpl": "84253801d0e9bf984986ea053626b4ae2ab646c88b6be1bd65fac54094583cca",
+    "rpg-2-star-ocean-the-second_nyc-city-hall-park_scene-flat-640x360_unapproved-v03_20261016-160059-4b2f50f6.png": "086734a6a71e6ed3a53591afec882205aa748a75dbc06aecd60c38fc4afa7f0e",
+    "rpg-2-star-ocean-the-second_nyc-city-hall-park_scene-walkmask_unapproved-v03_20261016-160059-4b2f50f6.png": "124ee2e476655b6a4006e3e43a3c758fe1b618ed7ae4b7b726f13128a4a2f65e",
+    "rpg-2-star-ocean-the-second_nyc-city-hall-park_contact-shadow_unapproved-v03_20261016-160059-4b2f50f6.png": "ddba14ee0a49be60c49e4e5aa25d83f6ca2aedf45f610710b1a5981fdcbd0e8d",
+    "rpg-2-star-ocean-the-second_nyc-city-hall-park_scene-walkability_unapproved-v03_20261016-160059-4b2f50f6.json": "14b9dc97460a5d4b09b3029d26a5ecd252ed6554dd2de7690c6beeab05bd4d80"
+  },
+  "tool": {
+    "file": "tools/rpg-2-star-ocean-the-second_nyc-city-hall-park_walkable-pilot-640x360_pixelorama-build_unapproved-v03_20261016-160059-4b2f50f6.py",
+    "sha256_text_lf_v1": "d8c40162a79bcfa4f4e0446b8ab237cc91b26e5d48efbcf1d4d36f7569cf879e",
+    "python": "3.12.14",
+    "pillow": "12.3.0",
+    "numpy": "2.3.5"
+  }
+}
