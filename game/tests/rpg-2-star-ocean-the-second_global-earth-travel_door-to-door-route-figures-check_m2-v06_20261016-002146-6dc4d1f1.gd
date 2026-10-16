@@ -36,6 +36,7 @@ func _initialize() -> void:
 		_test_status(registry)
 		_test_validator_guard(registry)
 		_test_route_options(registry)
+		_test_car_labels(registry)
 	if failures == 0:
 		print("M2_ROUTE_FIGURES_V06_OK checks=%d" % checks)
 		quit(0)
@@ -91,6 +92,31 @@ func _test_route_options(registry: WorldRouteRegistry) -> void:
 		var options := registry.routes_between(pair[0], pair[1])
 		var expected_total: int = EXPECTED_AIR[pair[2]][4]
 		_check(options.size() == 1 and options[0]["available"] and int(options[0]["total_minutes"]) == expected_total and options[0]["estimate"] and not options[0]["verified"], "%s -> %s offers one unverified estimate route of %d min" % [pair[0], pair[1], expected_total])
+
+
+# OSRM demo output is a routing-model estimate, not measured free-flow; only the negation may mention free-flow.
+func _test_car_labels(registry: WorldRouteRegistry) -> void:
+	var car_notes := 0
+	var ok := true
+	for segment_id in registry.segments:
+		var seg: Dictionary = registry.segments[segment_id]
+		if seg["mode"] != "car":
+			continue
+		car_notes += 1
+		var note: String = seg["verification"]["note"]
+		ok = ok and note.contains("no live traffic") and not note.replace("not measured free-flow", "").to_lower().contains("free-flow")
+	_check(car_notes == 6 and ok, "all 6 car notes are model estimates with no live traffic and none claims free-flow")
+	var airport_legs := 0
+	var air_ok := true
+	for segment_id in EXPECTED_AIR:
+		for field in ["airportAccessMinutes", "airportEgressMinutes"]:
+			var component: Dictionary = registry.segments[segment_id]["components"][field]
+			if component["source"]["sourceId"] != "osrm-demo-osm":
+				continue
+			airport_legs += 1
+			var basis: String = component["basis"]
+			air_ok = air_ok and basis.contains("no live traffic") and not basis.replace("not measured free-flow", "").to_lower().contains("free-flow")
+	_check(airport_legs == 4 and air_ok, "all 4 OSRM airport car legs are model estimates with no live traffic and none claims free-flow")
 
 
 func _check(condition: bool, label: String) -> bool:
