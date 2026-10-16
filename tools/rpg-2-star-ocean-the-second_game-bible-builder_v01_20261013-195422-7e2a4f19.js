@@ -29,6 +29,8 @@ const names = {
   inventory: 'rpg-2-star-ocean-the-second_asset-inventory_state_v01_20261013-191033-7d1e0a8b.json',
 };
 const dest = path.join(out, 'rpg-2-star-ocean-the-second_game-bible_state_v01_20261013-195422-b8c16d42.json');
+// MVP progress state (read only): its M2 text must agree with the Bible on the Washington candidate range.
+const progressDest = path.join(out, 'rpg-2-star-ocean-the-second_mvp-progress_state_v01_20261013-183804-28a1c7e4.json');
 const builderFile = 'tools/' + path.basename(__filename);
 const decisionNote = 'docs/design/rpg-2-star-ocean-the-second_creator-decisions-2026-10-15_world-skills-ai-endgame_reconciliation-note_v01_20261015-174559-39efc292.md';
 // Sections that cannot be derived from the proposal sources. They are carried from the tracked state; openQuestions keeps its
@@ -47,6 +49,7 @@ const need = (ok, message) => { if (!ok) throw new Error(message); };
 const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 const read = key => fs.readFileSync(path.join(out, names[key]), 'utf8').replace(/\r\n/g, '\n');
 const readState = () => JSON.parse(fs.readFileSync(dest, 'utf8'));
+const readProgress = () => JSON.parse(fs.readFileSync(progressDest, 'utf8'));
 const serialize = bible => JSON.stringify(bible, null, 2) + '\n';
 const slug = text => text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
@@ -244,7 +247,7 @@ function build({base = readState(), updatedAt = new Date().toISOString()} = {}) 
 }
 
 // Canon checks shared by the builder and its test. Returns the check labels; throws on the first failure.
-function checkCanon(bible) {
+function checkCanon(bible, progress = readProgress()) {
   const passed = [];
   const check = (ok, label) => { need(ok, 'Canon check failed: ' + label); passed.push(label); };
   const chapter = number => bible.chapters.find(entry => entry.number === number)?.body || '';
@@ -310,6 +313,15 @@ function checkCanon(bible) {
   check(routeEvidence && routeEvidence.status === 'research-only' && routeEvidence.doorToDoorImplemented === false && routeEvidence.evidence.length === 2 &&
     routeEvidence.evidence.every(file => fs.existsSync(path.join(root, file))) && has(routeEvidence.zh, ['尚未写入运行时', '9/12']) && has(routeEvidence.en, ['nothing is implemented', '9/12']),
     'M2 route-figure evidence cited as research only: door-to-door not implemented, M2 stays 9/12');
+  // The progress state's current M2 text (anchor gate, M2 details and remaining) must name the same walkable range as the Bible
+  // (v01–v06), never the stale v01–v05. Dated closeout records are history and are not checked.
+  const m2Step = progress.steps?.find(step => step.id === 'M2');
+  const anchorDetail = progress.m2Expansion?.gates?.find(gate => gate.id === 'anchor')?.detail || '';
+  const m2Text = [anchorDetail, ...(m2Step?.details || []), ...(m2Step?.remaining || [])].join('\n');
+  const lastWalkable = dcCandidates?.walkable?.at(-1);
+  check(lastWalkable === 'v06' && has(anchorDetail, ['可步行 v01–v06', '独立定场远景 v01–v02', '均未验收']) &&
+    m2Text.includes('可步行 v01–v06') && m2Text.includes('walkable west grounds v01-v06') && !/v01[–-]v05/.test(m2Text),
+    'M2 anchor / progress text: Washington walkable v01-v06 matches the Bible, no stale v01-v05');
   return passed;
 }
 
@@ -329,5 +341,5 @@ function main(argv) {
   console.log(JSON.stringify({file, chapters: bible.chapters.length, characters: bible.characters.length, sources: bible.sources.length, canonChecks: checkCanon(bible).length}));
 }
 
-module.exports = {build, checkCanon, serialize, readState, dest, names, decisionNote, careerRules, personalRules};
+module.exports = {build, checkCanon, serialize, readState, readProgress, dest, progressDest, names, decisionNote, careerRules, personalRules};
 if (require.main === module) main(process.argv.slice(2));
