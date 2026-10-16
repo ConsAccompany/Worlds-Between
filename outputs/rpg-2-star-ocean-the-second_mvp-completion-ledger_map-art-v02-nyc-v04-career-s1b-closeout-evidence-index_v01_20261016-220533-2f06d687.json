@@ -1,0 +1,703 @@
+{
+ "project": "rpg-2-star-ocean-the-second",
+ "purpose": "Provenance index for three zero-change closeouts: global map-art candidate v02 (ab9459d4), NYC City Hall Park walkable pilot v04 (eb092a52), and science-career stage-1 b passive candidates (19222a66)",
+ "status": "evidence-index-only; all three candidates stay UNAPPROVED (map art and NYC also NONRUNTIME; career effects OFF by default); no art acceptance, gate, counter or meter change",
+ "createdAt": "2026-10-16T22:08:00Z",
+ "author": "Claude Code Opus 5.5 (agent check, not a human or creator review)",
+ "meterUnchanged": {
+  "percent": 35.8,
+  "coreGates": "5/5",
+  "m2Gates": "10/12",
+  "m7Gates": "3/4",
+  "runtimeSpritesAccepted": "0/52",
+  "sceneVisualsAccepted": "0/11",
+  "humanPlaytests": "0/2"
+ },
+ "hashKinds": {
+  "sha256-text-lf-v1": "sha256 of file bytes with CRLF normalised to LF",
+  "sha256-bytes": "sha256 of raw file bytes"
+ },
+ "closeouts": [
+  {
+   "id": "closeout-20261016-220752-fb5b4a16",
+   "subject": "Global map-art candidate v02 ab9459d4: globe + US Northeast / Great Lakes pixel layers via a test-only runtime skin (UNAPPROVED / NONRUNTIME)",
+   "results": {
+    "godotChecks": "499/499 (outputs/...godot-checks_...ab9459d4.json: checks_total 499, failures []; real Godot 4.7.2 windowed, not re-run in this closeout)",
+    "deterministicChecks": "103/103 re-run 2026-10-16 (MAP_ART_DETERMINISTIC_OK, read-only, no --write-index)",
+    "captures": "40 one-image-per-file PNGs (1280x720 + 640x360, baseline + candidate, zh + en)"
+   },
+   "openNotes": [
+    "Codex viewed the globe and the NYC / Washington 640x360 captures. It judged the route thinner and the texture better than v01, but the labels still crowd.",
+    "The NYC / Yonkers label crowding and the rest of the QA note defect list (Great Lakes air stub, land dither, unassigned grey, generalisation trade-off, in-between zoom, chrome style, thin selected route, schematic car lines) remain open, with the sphere-membership questions.",
+    "The M2 map-art gate stays OPEN. Nothing is integrated into the runtime map; the skin is applied only inside the -s capture tool."
+   ],
+   "trackedEvidence": [
+    {
+     "path": "docs/qa/rpg-2-star-ocean-the-second_global-map-art_northeast-and-globe-candidate_qa-note_candidate-unapproved-v02_20261016-172153-ab9459d4.md",
+     "hashKind": "sha256-text-lf-v1",
+     "sha256": "fba59fc2498fd92668d96477f049bc4ccc69884d93c4fa4c1646b61edca7adc6",
+     "bytes": 18836
+    }
+   ],
+   "localOnly": {
+    "reason": "unapproved candidate art, editable sources, tools and captures stay on the authoring machine pending Codex / creator review; they are pinned here instead of transferred. Natural Earth sources live outside the repo; their SHA-256 is pinned in the builder.",
+    "summary": {
+     "assets/map-art/global-map-art-candidate-v02-ab9459d4": {
+      "files": 19,
+      "bytes": 6860080
+     },
+     "outputs": {
+      "files": 42,
+      "bytes": 4261686
+     },
+     "tools": {
+      "files": 4,
+      "bytes": 137224
+     }
+    },
+    "files": [
+     {
+      "path": "assets/map-art/global-map-art-candidate-v02-ab9459d4/rpg-2-star-ocean-the-second_global-map-art_globe-lv0-flat_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "4bf55bac2b5b6d0e9c5bd9bbd7e2cbbe64b7ceab60b0f0ecc934dffea48d7526",
+      "bytes": 25267
+     },
+     {
+      "path": "assets/map-art/global-map-art-candidate-v02-ab9459d4/rpg-2-star-ocean-the-second_global-map-art_globe-lv0-layered-source_candidate-unapproved-v02_20261016-172153-ab9459d4.ora",
+      "hashKind": "sha256-bytes",
+      "sha256": "777585c1c054cfbfdb309ca06b3b203a214e8c2affeed57e4ca4e398d7cf3c50",
+      "bytes": 70352
+     },
+     {
+      "path": "assets/map-art/global-map-art-candidate-v02-ab9459d4/rpg-2-star-ocean-the-second_global-map-art_globe-lv1-flat_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "d8b43c81b1eb2cb046f187122ad4bd2feb7c87e4bc3e99882d459493980c416b",
+      "bytes": 65670
+     },
+     {
+      "path": "assets/map-art/global-map-art-candidate-v02-ab9459d4/rpg-2-star-ocean-the-second_global-map-art_globe-lv2-flat_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "50b786fd91fb50d9a2e7226e12d58db96ab167b6f13da2287ccb4ff9fd0bced0",
+      "bytes": 183622
+     },
+     {
+      "path": "assets/map-art/global-map-art-candidate-v02-ab9459d4/rpg-2-star-ocean-the-second_global-map-art_globe-lv3-flat_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "276cb73f8fe3cec58b0947d41e44d9a0f7d959003a253af6a0a19cbed1199c74",
+      "bytes": 381756
+     },
+     {
+      "path": "assets/map-art/global-map-art-candidate-v02-ab9459d4/rpg-2-star-ocean-the-second_global-map-art_manifest_candidate-unapproved-v02_20261016-172153-ab9459d4.json",
+      "hashKind": "sha256-text-lf-v1",
+      "sha256": "ef98f58cbb71e13c7af3d5acee49347d791a90a4e7406816c19c8385a7e9a213",
+      "bytes": 15304
+     },
+     {
+      "path": "assets/map-art/global-map-art-candidate-v02-ab9459d4/rpg-2-star-ocean-the-second_global-map-art_ne-derived-subset_candidate-unapproved-v02_20261016-172153-ab9459d4.json",
+      "hashKind": "sha256-text-lf-v1",
+      "sha256": "40a32cf0668600870dfc74485197f8dd25a44eee1c34a5924c3f96d88b9ad8e8",
+      "bytes": 2416249
+     },
+     {
+      "path": "assets/map-art/global-map-art-candidate-v02-ab9459d4/rpg-2-star-ocean-the-second_global-map-art_runtime-meta_candidate-unapproved-v02_20261016-172153-ab9459d4.json",
+      "hashKind": "sha256-text-lf-v1",
+      "sha256": "44e0e7dd5f7f749dae401cc581127dd5033435a9cc3446d1a3a18d15a5397438",
+      "bytes": 9059
+     },
+     {
+      "path": "assets/map-art/global-map-art-candidate-v02-ab9459d4/rpg-2-star-ocean-the-second_global-map-art_us-great-lakes-default-layered-source_candidate-unapproved-v02_20261016-172153-ab9459d4.ora",
+      "hashKind": "sha256-bytes",
+      "sha256": "36b829a62335931cb611faf2bc16599c8b61b57caef03104960ecf11040a9489",
+      "bytes": 96591
+     },
+     {
+      "path": "assets/map-art/global-map-art-candidate-v02-ab9459d4/rpg-2-star-ocean-the-second_global-map-art_us-great-lakes-lv0-flat_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "91b74f8a0cd60dcc05755e7ee363da7a025cce81ae155441fde2c9898312bb68",
+      "bytes": 40979
+     },
+     {
+      "path": "assets/map-art/global-map-art-candidate-v02-ab9459d4/rpg-2-star-ocean-the-second_global-map-art_us-great-lakes-lv1-flat_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "a8ab552412a45cca208bd1cc7d7f4e4290cc508184f85b75b284e6d23e476323",
+      "bytes": 142331
+     },
+     {
+      "path": "assets/map-art/global-map-art-candidate-v02-ab9459d4/rpg-2-star-ocean-the-second_global-map-art_us-great-lakes-lv2-flat_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "0f8fd689488f166ed173c2318a728be0da76d95ce0a8322940c49df5af8cff8c",
+      "bytes": 539670
+     },
+     {
+      "path": "assets/map-art/global-map-art-candidate-v02-ab9459d4/rpg-2-star-ocean-the-second_global-map-art_us-great-lakes-lv3-flat_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "7ef1fbe6d6968e9d4fac4b671cd2653231524363fd0f8df898c3457b6009640b",
+      "bytes": 927627
+     },
+     {
+      "path": "assets/map-art/global-map-art-candidate-v02-ab9459d4/rpg-2-star-ocean-the-second_global-map-art_us-northeast-default-layered-source_candidate-unapproved-v02_20261016-172153-ab9459d4.ora",
+      "hashKind": "sha256-bytes",
+      "sha256": "b6f21666ce8275d219994c66dda495a18fd5268e4d9e4f48fb9197bf464b724d",
+      "bytes": 131023
+     },
+     {
+      "path": "assets/map-art/global-map-art-candidate-v02-ab9459d4/rpg-2-star-ocean-the-second_global-map-art_us-northeast-lv0-flat_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "ff71a675da717a0b300e2fabe4e34dc203ce2355d06b86625669c1e039dec5f0",
+      "bytes": 49363
+     },
+     {
+      "path": "assets/map-art/global-map-art-candidate-v02-ab9459d4/rpg-2-star-ocean-the-second_global-map-art_us-northeast-lv1-flat_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "b52cb824644025a1963fda933c966feefba3252d03ace08e0714d39e75259b21",
+      "bytes": 54378
+     },
+     {
+      "path": "assets/map-art/global-map-art-candidate-v02-ab9459d4/rpg-2-star-ocean-the-second_global-map-art_us-northeast-lv2-flat_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "858187960870668ebef3460ce287cf29e1b277c942f575e4d586b1fa43b45dfb",
+      "bytes": 180499
+     },
+     {
+      "path": "assets/map-art/global-map-art-candidate-v02-ab9459d4/rpg-2-star-ocean-the-second_global-map-art_us-northeast-lv3-flat_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "7a9f2d9eb9336681d86999f2e3900bcdebc7d487cfb500ae0bf861ded419ce0c",
+      "bytes": 612253
+     },
+     {
+      "path": "assets/map-art/global-map-art-candidate-v02-ab9459d4/rpg-2-star-ocean-the-second_global-map-art_us-northeast-lv4-flat_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "b5a7043d41d22bad6799f99c3fb4a91ae46f842c47f77ddac69e20adec38e599",
+      "bytes": 918087
+     },
+     {
+      "path": "outputs/rpg-2-star-ocean-the-second_global-map-art_capture-manifest_candidate-unapproved-v02_20261016-172153-ab9459d4.json",
+      "hashKind": "sha256-text-lf-v1",
+      "sha256": "8e940fbaefb97d22a0d8b7b2aa407f4112d8a58bdb6706212a7af1deba498f83",
+      "bytes": 18275
+     },
+     {
+      "path": "outputs/rpg-2-star-ocean-the-second_global-map-art_globe-en-1280x720-baseline_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "a159b8958824f29ba531094e401d9bd777f2a603547b95bf601d3ff0fc2f1397",
+      "bytes": 108158
+     },
+     {
+      "path": "outputs/rpg-2-star-ocean-the-second_global-map-art_globe-en-1280x720-candidate_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "a17dc81f896d53f7e3554feee66aa8570f925b387c71bdd10d52f12d111304d4",
+      "bytes": 140146
+     },
+     {
+      "path": "outputs/rpg-2-star-ocean-the-second_global-map-art_globe-en-640x360-baseline_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "ba3f85211580f4d2d1e1d3dfbb3fa76ef4b4d764adb082263835e1b40c2333c7",
+      "bytes": 48508
+     },
+     {
+      "path": "outputs/rpg-2-star-ocean-the-second_global-map-art_globe-en-640x360-candidate_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "0ee6ab80dd1132307c306aaff16a86d3bc7d4ed337c98e182547cb294be139ee",
+      "bytes": 74103
+     },
+     {
+      "path": "outputs/rpg-2-star-ocean-the-second_global-map-art_globe-zh-1280x720-baseline_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "4b5baefaf77c90e3b9563f94576e5e3975668ffb7be4c0d20821f83fb09892c3",
+      "bytes": 125574
+     },
+     {
+      "path": "outputs/rpg-2-star-ocean-the-second_global-map-art_globe-zh-1280x720-candidate_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "e86c39bc925482cb5f0b77d98fcddf7739c095cbf159683230d1ae5c5c9ea74f",
+      "bytes": 156827
+     },
+     {
+      "path": "outputs/rpg-2-star-ocean-the-second_global-map-art_globe-zh-640x360-baseline_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "6f9127fb6f41e558b4917f278e2fd159b907193f541605c746a5b1c25a018de9",
+      "bytes": 53163
+     },
+     {
+      "path": "outputs/rpg-2-star-ocean-the-second_global-map-art_globe-zh-640x360-candidate_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "1fe1babc42e37fafbb12644baf2bf84ed1c08a7a5209852d6a61d1e80a31dee5",
+      "bytes": 78275
+     },
+     {
+      "path": "outputs/rpg-2-star-ocean-the-second_global-map-art_globe-zoom2x-en-1280x720-baseline_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "e7439d2998d1b03a07c8dbc4e6939a8a06198fa3d529456075fb2cd45de25d36",
+      "bytes": 105382
+     },
+     {
+      "path": "outputs/rpg-2-star-ocean-the-second_global-map-art_globe-zoom2x-en-1280x720-candidate_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "8d6a1476e30a8b8733ab871e65c32776d0d91ccd2d3b98591e8dbc8015a4cba5",
+      "bytes": 128413
+     },
+     {
+      "path": "outputs/rpg-2-star-ocean-the-second_global-map-art_globe-zoom2x-en-640x360-baseline_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "afc667e2cd8bf66ec0a5c9c9f6898d5b2a535e7c6aad90ad4fefa71a15578869",
+      "bytes": 46539
+     },
+     {
+      "path": "outputs/rpg-2-star-ocean-the-second_global-map-art_globe-zoom2x-en-640x360-candidate_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "bfcbef0139fc8351f4ed25709f1265eb457f924d65d287e8e1e31f692bfc4853",
+      "bytes": 67765
+     },
+     {
+      "path": "outputs/rpg-2-star-ocean-the-second_global-map-art_globe-zoom2x-zh-1280x720-baseline_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "6ea94dc75d1f853f2bc7b2b32f1be522053b06a513d1c15617c1ea8ebacc6c78",
+      "bytes": 124771
+     },
+     {
+      "path": "outputs/rpg-2-star-ocean-the-second_global-map-art_globe-zoom2x-zh-1280x720-candidate_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "f1d11f346b6a900ae1efcbcd2fcd5c945e88cd338b4d29d4b692920096808046",
+      "bytes": 145499
+     },
+     {
+      "path": "outputs/rpg-2-star-ocean-the-second_global-map-art_globe-zoom2x-zh-640x360-baseline_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "bb16a47935b23eb8f81a10f8de1bc297c7923185da1565575a3b991223b7ab34",
+      "bytes": 51835
+     },
+     {
+      "path": "outputs/rpg-2-star-ocean-the-second_global-map-art_globe-zoom2x-zh-640x360-candidate_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "2f48fdbe75448cbeb25e1eb4e36e52fc81e475fb716db889446f42d549ede4bc",
+      "bytes": 71897
+     },
+     {
+      "path": "outputs/rpg-2-star-ocean-the-second_global-map-art_godot-checks_candidate-unapproved-v02_20261016-172153-ab9459d4.json",
+      "hashKind": "sha256-text-lf-v1",
+      "sha256": "f45b0b36a8d312f8bf9b2d1e651cf49aa5ff5f70bd629b1311b0a629901ff37b",
+      "bytes": 88415
+     },
+     {
+      "path": "outputs/rpg-2-star-ocean-the-second_global-map-art_us-great-lakes-card-chicago-air-en-1280x720-baseline_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "0cf7aeb2e8faf2a3df6bdb4cab8293c1192ba2dda98fac24063c6476eb920afa",
+      "bytes": 122128
+     },
+     {
+      "path": "outputs/rpg-2-star-ocean-the-second_global-map-art_us-great-lakes-card-chicago-air-en-1280x720-candidate_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "def578b1adb055b00c8f53b1b5927c03b6b49a6992356c6f983eed453227b1de",
+      "bytes": 149618
+     },
+     {
+      "path": "outputs/rpg-2-star-ocean-the-second_global-map-art_us-great-lakes-card-chicago-air-en-640x360-baseline_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "6bec016ac84c12daa512c44072733775eb048e2d03c6e5c99c9b8940bec0f697",
+      "bytes": 53100
+     },
+     {
+      "path": "outputs/rpg-2-star-ocean-the-second_global-map-art_us-great-lakes-card-chicago-air-en-640x360-candidate_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "88b334fa934475382d9c46852f5a0df40f79ba43fd957a9d5b868f6cedc13aa2",
+      "bytes": 71052
+     },
+     {
+      "path": "outputs/rpg-2-star-ocean-the-second_global-map-art_us-great-lakes-card-chicago-air-zh-1280x720-baseline_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "7f4e34762c90812ef7aed2fc9bd8cc445680ee958aef291caaf3d514d2fa6ec5",
+      "bytes": 133361
+     },
+     {
+      "path": "outputs/rpg-2-star-ocean-the-second_global-map-art_us-great-lakes-card-chicago-air-zh-1280x720-candidate_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "a63237633976079ab99c61d62b7ecfdf811242b54244bb007bddbebfc2027c17",
+      "bytes": 159546
+     },
+     {
+      "path": "outputs/rpg-2-star-ocean-the-second_global-map-art_us-great-lakes-card-chicago-air-zh-640x360-baseline_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "f501d90e22968a406a757df3c421970156288d4ea6e7d6e14b68113f2769895f",
+      "bytes": 55520
+     },
+     {
+      "path": "outputs/rpg-2-star-ocean-the-second_global-map-art_us-great-lakes-card-chicago-air-zh-640x360-candidate_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "0c9fb5d11186bed7f18ce65b78428c1ddbb63facf8773a5fe1b78b7f7ef96778",
+      "bytes": 73256
+     },
+     {
+      "path": "outputs/rpg-2-star-ocean-the-second_global-map-art_us-northeast-card-washington-car-en-1280x720-baseline_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "5be938295101f67f411e4980b6b1ab0288729bb5ed738d3a2bb612a31d71859f",
+      "bytes": 163219
+     },
+     {
+      "path": "outputs/rpg-2-star-ocean-the-second_global-map-art_us-northeast-card-washington-car-en-1280x720-candidate_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "7ec7d696021e611396ffaa5dd90368f349e6383f7dacb9c688e9ab043a6a1790",
+      "bytes": 194113
+     },
+     {
+      "path": "outputs/rpg-2-star-ocean-the-second_global-map-art_us-northeast-card-washington-car-en-640x360-baseline_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "ca28df9c28ecec7c132fcc4a3c2b72c0bbb4265de4013968798a947db841673a",
+      "bytes": 70440
+     },
+     {
+      "path": "outputs/rpg-2-star-ocean-the-second_global-map-art_us-northeast-card-washington-car-en-640x360-candidate_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "1b2c8c3df82dbbff834c25f5e98d062c024b2bab270e8f9739dc6ffc31ac9990",
+      "bytes": 91834
+     },
+     {
+      "path": "outputs/rpg-2-star-ocean-the-second_global-map-art_us-northeast-card-washington-car-zh-1280x720-baseline_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "1eb57eb94b75640b6c39e473e48e2173d946d41943f8be9b973432a4ec79e4e6",
+      "bytes": 168525
+     },
+     {
+      "path": "outputs/rpg-2-star-ocean-the-second_global-map-art_us-northeast-card-washington-car-zh-1280x720-candidate_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "720e6b15c9aa37adea8724a49ee5fc6be1ada57d674074b8d080462faa03a12a",
+      "bytes": 197497
+     },
+     {
+      "path": "outputs/rpg-2-star-ocean-the-second_global-map-art_us-northeast-card-washington-car-zh-640x360-baseline_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "6cf4cc58c84ffd755349068cfd02e29823c866e30e5e80a2f6a561d38a119005",
+      "bytes": 70506
+     },
+     {
+      "path": "outputs/rpg-2-star-ocean-the-second_global-map-art_us-northeast-card-washington-car-zh-640x360-candidate_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "60f495b0a08d1a1f9d3000f6b493146b52d79f036221319b86c4a62653e28ea0",
+      "bytes": 91805
+     },
+     {
+      "path": "outputs/rpg-2-star-ocean-the-second_global-map-art_us-northeast-en-1280x720-baseline_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "8f59d02291a705f87f7c2eb71ac9054fecfc274066b8385297611f6ab7072ffa",
+      "bytes": 111317
+     },
+     {
+      "path": "outputs/rpg-2-star-ocean-the-second_global-map-art_us-northeast-en-1280x720-candidate_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "7cafe53bc2ea7bd202be04b154673dd6d8710348b5aa377b2bdd977f2bc336e6",
+      "bytes": 141192
+     },
+     {
+      "path": "outputs/rpg-2-star-ocean-the-second_global-map-art_us-northeast-en-640x360-baseline_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "9bc3ac4b98abfca28bd70a88a76e6863ad81df16b43d3554a57c2e120416255e",
+      "bytes": 48509
+     },
+     {
+      "path": "outputs/rpg-2-star-ocean-the-second_global-map-art_us-northeast-en-640x360-candidate_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "cdd81eb717130be2d3e5fd503dc03d09b3d4d989b21688128251171b63eb27f1",
+      "bytes": 71028
+     },
+     {
+      "path": "outputs/rpg-2-star-ocean-the-second_global-map-art_us-northeast-zh-1280x720-baseline_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "acbb2ea244c8e0713eb98303513f64f59062d6de28af0f3adb1aa1f6b13b9475",
+      "bytes": 118704
+     },
+     {
+      "path": "outputs/rpg-2-star-ocean-the-second_global-map-art_us-northeast-zh-1280x720-candidate_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "26f8818076d59cc5d60d40eb4ea149be42980dec96ec0488845adb3478c93043",
+      "bytes": 148540
+     },
+     {
+      "path": "outputs/rpg-2-star-ocean-the-second_global-map-art_us-northeast-zh-640x360-baseline_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "531af7050d58b13f923e8dfd23c962266350565268b17ae8601cddc4e07bbbfa",
+      "bytes": 50354
+     },
+     {
+      "path": "outputs/rpg-2-star-ocean-the-second_global-map-art_us-northeast-zh-640x360-candidate_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "50e59f16614240dd7c6b91452dab0964b1dbcdcc94d36439b0e2b52075ec355f",
+      "bytes": 72977
+     },
+     {
+      "path": "tools/rpg-2-star-ocean-the-second_global-map-art_deterministic-checks_candidate-unapproved-v02_20261016-172153-ab9459d4.py",
+      "hashKind": "sha256-text-lf-v1",
+      "sha256": "43f70267715f6b22daaa0b6e78f77054cbd9c417e1b9097cf58ca4625e903482",
+      "bytes": 28892
+     },
+     {
+      "path": "tools/rpg-2-star-ocean-the-second_global-map-art_godot-capture-check_candidate-unapproved-v02_20261016-172153-ab9459d4.gd",
+      "hashKind": "sha256-text-lf-v1",
+      "sha256": "dabd4e88452fd5ed421c607162fc35bc1b2a0dd90acc9c251adf3290c338e6d5",
+      "bytes": 27333
+     },
+     {
+      "path": "tools/rpg-2-star-ocean-the-second_global-map-art_godot-runtime-skin_candidate-unapproved-v02_20261016-172153-ab9459d4.gd",
+      "hashKind": "sha256-text-lf-v1",
+      "sha256": "091c4bf3b0207a5bd4c2cd15560e7c2fb2fc03fbf3d290717889e124226f71e8",
+      "bytes": 31503
+     },
+     {
+      "path": "tools/rpg-2-star-ocean-the-second_global-map-art_pixel-layer-builder_candidate-unapproved-v02_20261016-172153-ab9459d4.py",
+      "hashKind": "sha256-text-lf-v1",
+      "sha256": "357948f9d639b4e45227815c2c00d54956dd4502a30eedcc5e9acc32d5980c1f",
+      "bytes": 49496
+     }
+    ]
+   }
+  },
+  {
+   "id": "closeout-20261016-220752-88bf58f9",
+   "subject": "NYC City Hall Park 640x360 walkable Pixelorama pilot v04 eb092a52 (UNAPPROVED / NONRUNTIME; test-only visitor overlay)",
+   "results": {
+    "technicalGates": "60/60 PASS (outputs/nyc-chp-v04_.../technical-check-report_...eb092a52.json: result PASS, 60 gates all pass; not re-run in this closeout)",
+    "captures": "9 real Godot 4.7.2 windowed captures (3 x 1280x720 test-npc, 3 x 640x360 test-npc, 3 x 640x360 art-only)"
+   },
+   "openNotes": [
+    "Codex viewed the 640x360 axis, fountain and tree captures. Stones, plantings and fountain improve against v03, but the overall scene is still under the creator environment-quality target, and the temporary test visitors need polish.",
+    "All QA note defects and creator decisions (people/NPCs, promenade material, fountain form, behind-fountain read, science cue strength, gate adoption) remain open.",
+    "Science scene visuals stay 0/11. Nothing is wired into the runtime."
+   ],
+   "trackedEvidence": [
+    {
+     "path": "docs/qa/rpg-2-star-ocean-the-second_nyc-city-hall-park_walkable-pilot-640x360_qa-note_unapproved-v04_20261016-172144-eb092a52.md",
+     "hashKind": "sha256-text-lf-v1",
+     "sha256": "d4eb81f82c3ae8e88d9d53759c70da8398f07f12a66803c06473433cf79d44aa",
+     "bytes": 21614
+    }
+   ],
+   "localOnly": {
+    "reason": "unapproved candidate art, Pixelorama/ORA sources, the build/check tool and captures stay local; the 22 hashes also match the QA note tables.",
+    "summary": {
+     "game/assets/environments/candidates/nyc-chp-v04_20261016-172144-eb092a52": {
+      "files": 11,
+      "bytes": 500452
+     },
+     "outputs/nyc-chp-v04_20261016-172144-eb092a52": {
+      "files": 10,
+      "bytes": 861491
+     },
+     "tools": {
+      "files": 1,
+      "bytes": 221086
+     }
+    },
+    "files": [
+     {
+      "path": "game/assets/environments/candidates/nyc-chp-v04_20261016-172144-eb092a52/rpg-2-star-ocean-the-second_nyc-city-hall-park_contact-shadow_unapproved-v04_20261016-172144-eb092a52.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "ddba14ee0a49be60c49e4e5aa25d83f6ca2aedf45f610710b1a5981fdcbd0e8d",
+      "bytes": 110
+     },
+     {
+      "path": "game/assets/environments/candidates/nyc-chp-v04_20261016-172144-eb092a52/rpg-2-star-ocean-the-second_nyc-city-hall-park_scene-24layer_unapproved-v04_20261016-172144-eb092a52.ora",
+      "hashKind": "sha256-bytes",
+      "sha256": "d6ffb72374bf30c939aa669a333798da62c82b2188eebacfe662fa741e6e4cb3",
+      "bytes": 195730
+     },
+     {
+      "path": "game/assets/environments/candidates/nyc-chp-v04_20261016-172144-eb092a52/rpg-2-star-ocean-the-second_nyc-city-hall-park_scene-24layer_unapproved-v04_20261016-172144-eb092a52.pxo",
+      "hashKind": "sha256-bytes",
+      "sha256": "5119170ee29be16520c9512ede6b1534ba771c597fff072464f2e987ad4ddb3d",
+      "bytes": 171215
+     },
+     {
+      "path": "game/assets/environments/candidates/nyc-chp-v04_20261016-172144-eb092a52/rpg-2-star-ocean-the-second_nyc-city-hall-park_scene-flat-640x360_unapproved-v04_20261016-172144-eb092a52.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "abd7a30f736b226b7bb5873989e671f5a2925b25cb9e7d98eeef96b46c10ea91",
+      "bytes": 74263
+     },
+     {
+      "path": "game/assets/environments/candidates/nyc-chp-v04_20261016-172144-eb092a52/rpg-2-star-ocean-the-second_nyc-city-hall-park_scene-manifest_unapproved-v04_20261016-172144-eb092a52.json",
+      "hashKind": "sha256-text-lf-v1",
+      "sha256": "bc9753b3625c24e3605d7f555fb01e2eb3571b24910000d1dabcf4d7e047529a",
+      "bytes": 38651
+     },
+     {
+      "path": "game/assets/environments/candidates/nyc-chp-v04_20261016-172144-eb092a52/rpg-2-star-ocean-the-second_nyc-city-hall-park_scene-palette_unapproved-v04_20261016-172144-eb092a52.gpl",
+      "hashKind": "sha256-text-lf-v1",
+      "sha256": "0086f5fe86cd10c465b90a110e2d5f234c96dc7fc2413299b24d7ad0295ce825",
+      "bytes": 2717
+     },
+     {
+      "path": "game/assets/environments/candidates/nyc-chp-v04_20261016-172144-eb092a52/rpg-2-star-ocean-the-second_nyc-city-hall-park_scene-walkability_unapproved-v04_20261016-172144-eb092a52.json",
+      "hashKind": "sha256-text-lf-v1",
+      "sha256": "937829ccfc7dcfc5dff4cafc7e88acb0df2a94129bd290ffcf4d60c3cabcd70f",
+      "bytes": 7550
+     },
+     {
+      "path": "game/assets/environments/candidates/nyc-chp-v04_20261016-172144-eb092a52/rpg-2-star-ocean-the-second_nyc-city-hall-park_scene-walkmask_unapproved-v04_20261016-172144-eb092a52.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "4eab4b742cfcd0eb9701867bf97742b43e7f3a42b1b4a3b86bceae93342ef2b8",
+      "bytes": 2269
+     },
+     {
+      "path": "game/assets/environments/candidates/nyc-chp-v04_20261016-172144-eb092a52/rpg-2-star-ocean-the-second_nyc-city-hall-park_test-npc-atlas_unapproved-v04_20261016-172144-eb092a52.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "5fef46b7d36d19dc857b5e9210d8b4a58a5ca2ee3bac81f4c326511e63019ded",
+      "bytes": 3220
+     },
+     {
+      "path": "game/assets/environments/candidates/nyc-chp-v04_20261016-172144-eb092a52/rpg-2-star-ocean-the-second_nyc-city-hall-park_test-npc-ground_unapproved-v04_20261016-172144-eb092a52.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "67e9c545303e5cca80300fd6ee994b6466971778334e7289c2266c3b27dda8a8",
+      "bytes": 1862
+     },
+     {
+      "path": "game/assets/environments/candidates/nyc-chp-v04_20261016-172144-eb092a52/rpg-2-star-ocean-the-second_nyc-city-hall-park_test-npc-overlay_unapproved-v04_20261016-172144-eb092a52.json",
+      "hashKind": "sha256-text-lf-v1",
+      "sha256": "06b55567f9790632bfdfc6e6812f4d246a832cbe550712948c6bbbd6d9259fa1",
+      "bytes": 2865
+     },
+     {
+      "path": "outputs/nyc-chp-v04_20261016-172144-eb092a52/rpg-2-star-ocean-the-second_nyc-city-hall-park_godot-render-1280x720-axis-test-npc_unapproved-v04_20261016-172144-eb092a52.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "c774d58e38b6a2e00d246911063c8b06baaceece4573c377e9a938683fd7f61c",
+      "bytes": 109349
+     },
+     {
+      "path": "outputs/nyc-chp-v04_20261016-172144-eb092a52/rpg-2-star-ocean-the-second_nyc-city-hall-park_godot-render-1280x720-fountain-test-npc_unapproved-v04_20261016-172144-eb092a52.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "8bbef791652422e843b8f1d1c0dccd5beeee8a8c0692b4fcb6bb45a3ccc60095",
+      "bytes": 109253
+     },
+     {
+      "path": "outputs/nyc-chp-v04_20261016-172144-eb092a52/rpg-2-star-ocean-the-second_nyc-city-hall-park_godot-render-1280x720-tree-test-npc_unapproved-v04_20261016-172144-eb092a52.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "0da8ce5005593f615aee30ab2a6cc2c1e4db0ffccad1b0b07dd8ec55f83a6004",
+      "bytes": 108905
+     },
+     {
+      "path": "outputs/nyc-chp-v04_20261016-172144-eb092a52/rpg-2-star-ocean-the-second_nyc-city-hall-park_godot-render-640x360-axis-art-only_unapproved-v04_20261016-172144-eb092a52.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "bc3e29f6ee0071911537376aa9e5b4e821cd27bd621104ab66a5ff38abdaccbe",
+      "bytes": 80359
+     },
+     {
+      "path": "outputs/nyc-chp-v04_20261016-172144-eb092a52/rpg-2-star-ocean-the-second_nyc-city-hall-park_godot-render-640x360-axis-test-npc_unapproved-v04_20261016-172144-eb092a52.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "9f61420cc4c40d214056f9a2b8a1dac38cc981f82971d6156237a7b16b43a42a",
+      "bytes": 84362
+     },
+     {
+      "path": "outputs/nyc-chp-v04_20261016-172144-eb092a52/rpg-2-star-ocean-the-second_nyc-city-hall-park_godot-render-640x360-fountain-art-only_unapproved-v04_20261016-172144-eb092a52.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "6b07e1f6fb0dce6548d378baa9b80d53a5da7868370e513c67f46c59187ee8ae",
+      "bytes": 80238
+     },
+     {
+      "path": "outputs/nyc-chp-v04_20261016-172144-eb092a52/rpg-2-star-ocean-the-second_nyc-city-hall-park_godot-render-640x360-fountain-test-npc_unapproved-v04_20261016-172144-eb092a52.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "9d0974fecbcdde91d67430e8b6d88570ea349fd81c0ab79942327707d6cff82f",
+      "bytes": 84239
+     },
+     {
+      "path": "outputs/nyc-chp-v04_20261016-172144-eb092a52/rpg-2-star-ocean-the-second_nyc-city-hall-park_godot-render-640x360-tree-art-only_unapproved-v04_20261016-172144-eb092a52.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "8cfc12caa01e0e820e5df05f78fbd9f72cc48b21a4fa01633418a549dc38fac1",
+      "bytes": 79940
+     },
+     {
+      "path": "outputs/nyc-chp-v04_20261016-172144-eb092a52/rpg-2-star-ocean-the-second_nyc-city-hall-park_godot-render-640x360-tree-test-npc_unapproved-v04_20261016-172144-eb092a52.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "951fa1691d9da58da1db6134192286262c329549994dd2e860edbd28e342b1dc",
+      "bytes": 83929
+     },
+     {
+      "path": "outputs/nyc-chp-v04_20261016-172144-eb092a52/rpg-2-star-ocean-the-second_nyc-city-hall-park_technical-check-report_unapproved-v04_20261016-172144-eb092a52.json",
+      "hashKind": "sha256-text-lf-v1",
+      "sha256": "36a9cd4ff741f6dc20d332ff8fb4d58ed0a2909458e85ec24188f431d4fc74e6",
+      "bytes": 40917
+     },
+     {
+      "path": "tools/rpg-2-star-ocean-the-second_nyc-city-hall-park_walkable-pilot-640x360_pixelorama-build_unapproved-v04_20261016-172144-eb092a52.py",
+      "hashKind": "sha256-text-lf-v1",
+      "sha256": "c7c53e350c386ff14a1fd07349940debcf62668978ddba1958b8db87372809fa",
+      "bytes": 221086
+     }
+    ]
+   }
+  },
+  {
+   "id": "closeout-20261016-220752-aae3b064",
+   "subject": "Science-career stage-1 b passive candidates 19222a66 (sword/firearms/tactics/relics s1b; UNAPPROVED, OFF by default via --career-candidates)",
+   "results": {
+    "switchOff": "existing suites pass with the switch off (progression ten-node 494, m3-m7 smokes, merchant 110 + 92, five sideview smokes); new candidates smoke 52/52 (recorded runs in the QA note section 5, not re-run in this closeout)",
+    "switchOn": "progression ten-node smoke FAILED 5/494 with --career-candidates: the old test assumes sword_s1b is an empty example node (QA note section 6); all other suites pass"
+   },
+   "openNotes": [
+    "The four effects, labels and numbers are unapproved; the switch stays off by default.",
+    "No playable gate increment: M7 stays 3/4. The creator decisions in QA note section 7 remain open.",
+    "game/scripts/battle_arena.gd is pinned as the current working-tree file, which also holds another workstream's uncommitted M8 art hunks; the growth_rules / growth_screen / battle_arena hashes match the QA note section 5 table."
+   ],
+   "trackedEvidence": [
+    {
+     "path": "docs/qa/rpg-2-star-ocean-the-second_science-career-series_mvp-audit-and-stage1-b-candidates_qa-note_unapproved-v01_20261016-175518-e665d1ad.md",
+     "hashKind": "sha256-text-lf-v1",
+     "sha256": "aefd6a0295dcfc84c2ce9c41b1be3280649533060227a989e7e670fdefae3fb2",
+     "bytes": 18922
+    }
+   ],
+   "localOnly": {
+    "reason": "candidate runtime hunks (in already-tracked scripts with other uncommitted work), candidate data, the new test and the overlay captures stay local; they are pinned here and not transferred.",
+    "summary": {
+     "game": {
+      "files": 5,
+      "bytes": 103412
+     },
+     "outputs": {
+      "files": 2,
+      "bytes": 266071
+     }
+    },
+    "files": [
+     {
+      "path": "game/data/growth/rpg-2-star-ocean-the-second_science-career-series_stage1-b-passive-candidates_unapproved-v01_20261016-174537-19222a66.json",
+      "hashKind": "sha256-text-lf-v1",
+      "sha256": "3c394db067568cb7e3a4a6b55cb4c03e20e8d35f9628db8b4bf53082725c6b73",
+      "bytes": 3608
+     },
+     {
+      "path": "game/tests/rpg-2-star-ocean-the-second_science-career-candidates_stage1-b-passive-smoke_unapproved-v01_20261016-174537-581a982e.gd",
+      "hashKind": "sha256-text-lf-v1",
+      "sha256": "d94cf6016ebe04a4fad289b2870a6565f753877f1a7ecb65b53a379a8d4c2da8",
+      "bytes": 15738
+     },
+     {
+      "path": "outputs/rpg-2-star-ocean-the-second_science-career-candidates_growth-overlay-en_unapproved-v01_20261016-174537-9248fecd.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "c9ccdfad0a5fcdd09947c89acd8d43197facb5fbedf17c6a9297a87731522458",
+      "bytes": 116544
+     },
+     {
+      "path": "outputs/rpg-2-star-ocean-the-second_science-career-candidates_growth-overlay-zh_unapproved-v01_20261016-174537-b5d8c65a.png",
+      "hashKind": "sha256-bytes",
+      "sha256": "de19d74283823ba55e72cf9378d25013c33aa7571747fd5bdce4c8d256438e0b",
+      "bytes": 149527
+     },
+     {
+      "path": "game/scripts/growth_rules.gd",
+      "hashKind": "sha256-text-lf-v1",
+      "sha256": "e4f45c3769d98a9aa03eaeb66e9e2caf341543d9453674ae581842c298546875",
+      "bytes": 18292
+     },
+     {
+      "path": "game/scripts/growth_screen.gd",
+      "hashKind": "sha256-text-lf-v1",
+      "sha256": "41d17e4519fea0c4428a0b01f3ca181c78e7b6c1625a432df2f7af1deb949fde",
+      "bytes": 15166
+     },
+     {
+      "path": "game/scripts/battle_arena.gd",
+      "hashKind": "sha256-text-lf-v1",
+      "sha256": "0c47a2742381192841a666be99510fbe9e8baafd124405e359fc2c79c6b37aa7",
+      "bytes": 50608
+     }
+    ]
+   }
+  }
+ ]
+}
