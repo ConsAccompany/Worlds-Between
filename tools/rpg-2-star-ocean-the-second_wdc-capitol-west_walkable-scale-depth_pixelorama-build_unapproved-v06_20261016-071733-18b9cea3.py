@@ -65,8 +65,10 @@ Modes
   build           write candidate files (never overwrites a different file)
   check           static gates + LOCK + Pixelorama headless round-trip (--no-pixelorama) + Godot gates in throwaway
                   temp projects (--no-godot); --write-report writes the JSON report and the Godot captures (1280x720
-                  and 640x360) into outputs/<RUN>/.
+                  and 640x360) into outputs/<RUN>/. PASS also needs the 16 stored own artifacts (OWN_ARTIFACTS);
+                  the untracked v04 LOCK entry is checked only when present (LOCK_OPTIONAL_IF_ABSENT).
 Run: python -I -B <this file> preview <tempdir> | build | check [--write-report] [--no-pixelorama] [--no-godot]
+     [--godot <exe>]
 """
 import argparse, hashlib, io, json, math, os, shutil, subprocess, sys, tempfile, time, zipfile
 import numpy as np
@@ -115,6 +117,34 @@ LOCK = {
         "b0b959f5054dd9ba5425091c6925619778dae2bf69cbd5e5ccd0596be0daf3c4",
     "game/assets/environments/candidates/wdc-dome-west-v02_20261016-044903-cdb4ebdb":
         "7cdf5545684608098da46d1cb34b2251daebec66cc01a9857247ac9a505ff25c",
+}
+# Clean-clone closure (Task K, 2026-10-16). The v04 dir is a historical sibling, not an input: this tool reads
+# nothing from it, and it is untracked (absent from a clean clone). Its entry is checked only when the directory
+# exists; then it must still match exactly. When absent, `check` reports it as "absent" and does not fail on it.
+# Every other LOCK entry is tracked and stays mandatory. LOCK itself is unchanged (the manifest embeds it).
+LOCK_OPTIONAL_IF_ABSENT = {
+    "game/assets/environments/candidates/wdc-capitol-west-v04_20261016-004457-a17af0a6",
+}
+# This run's own 16 stored artifacts (7 candidate + 9 outputs), pinned to the digests recorded in the v06 QA note
+# (text files CRLF->LF, others raw bytes). `check` requires all of them for PASS, so a clean clone proves the synced
+# files are the ones the gates were run on. Kept outside `gates` so the technical gate set stays the 47 reported.
+OWN_ARTIFACTS = {
+    "pxo": "b:40f2428f2273ae206558c6a71b89637c573e520bc816fd22fd1fa6f860c5325d",
+    "ora": "b:db499f96e6ae5dad168df93d0332e790641b73899550e153cb99e817d338be0c",
+    "flat": "b:53c9212a9ff1253e7e96a13356343999efd3fc1c71a06963f19b4c27637fda77",
+    "gpl": "t:4946e2992e8e22117e29bfcbcf8772fda3790bac7ca5150af541d4e620cd276e",
+    "walkmask": "b:b43cefe0e74d93d1adc1eb939d186c05d899d4b2c0cc3d3fe53878dc87f2f73a",
+    "walk": "t:540c54aa3640c356def84b9a0bfcb8a9fc9a2099e274d503940459313a3cc32f",
+    "manifest": "t:f4ad2bfa4490db3585a09d4112af86aee7b929890dd9bd75e60bf2e53ab111be",
+    "cap1280_entry": "b:78562a4aefcdc8c2177e3e09f4174428634e621da7b5251e0cd47775baaa7010",
+    "cap1280_vista": "b:2151f84ecfc4cf2b24295e053931d86596d320eb575a30f588f5880b7771357b",
+    "cap1280_interact": "b:df4ecf728f0650382788dbc0e863cc69f0093ad3605499b7c017dfe3525c302b",
+    "cap1280_occlusion": "b:44fa561aa27d79791d273a48badb531f384729ef9674a98bad70f25f52ccd6bf",
+    "cap640_entry": "b:608c557787330a388965034f9f660ca533938f8c6200de3fd7c8910ac386313e",
+    "cap640_vista": "b:edfa5e3b67a2ce6f098ecc80d206ccfc708fe4eb5e6dbddfc1d9c9f6d40733cb",
+    "cap640_interact": "b:a1f5b33c88bfd6ed34a406d7dd515a6e384ccac890f6ad2c72ae0a80d0718a5b",
+    "cap640_occlusion": "b:80152860bbb1d98b57223dc9d71df210cbf95395385b5ebb7a33637a9c412e09",
+    "report": "t:7c7ffd98f392b1a502eee33b216ba8d872f2df6797c69cc3aaea9c78a40848ab",
 }
 
 
@@ -3576,9 +3606,29 @@ def lock_digest(rel):
 
 
 def lock_check():
-    got = {rel: lock_digest(rel) for rel in LOCK}
-    return {"entries": {rel: {"expected": LOCK[rel], "actual": got[rel], "ok": got[rel] == LOCK[rel]} for rel in LOCK},
-            "all_ok": all(got[rel] == LOCK[rel] for rel in LOCK)}
+    ent = {}
+    for rel in LOCK:
+        present = os.path.exists(_fs(rp(rel)))
+        if not present and rel in LOCK_OPTIONAL_IF_ABSENT:
+            ent[rel] = {"expected": LOCK[rel], "actual": None, "present": False, "ok": True,
+                        "status": "absent: untracked historical sibling, not an input; checked only when present"}
+            continue
+        got = lock_digest(rel) if present else None
+        ent[rel] = {"expected": LOCK[rel], "actual": got, "present": present, "ok": got == LOCK[rel],
+                    "status": "match" if got == LOCK[rel] else ("MISSING" if not present else "MISMATCH")}
+    return {"entries": ent, "all_ok": all(e["ok"] for e in ent.values()),
+            "optional_absent": sorted(r for r, e in ent.items() if not e["present"] and e["ok"])}
+
+
+def own_artifacts_check():
+    nm = names()
+    ent = {}
+    for k, exp in OWN_ARTIFACTS.items():
+        rel = f"{OUT_REL if k == 'report' or k.startswith('cap') else CAND_REL}/{nm[k]}"
+        got = _file_digest(rp(rel)) if os.path.isfile(_fs(rp(rel))) else None
+        ent[rel] = {"expected": exp, "actual": got, "ok": got == exp}
+    return {"entries": ent, "count": len(ent), "matched": sum(e["ok"] for e in ent.values()),
+            "all_ok": all(e["ok"] for e in ent.values())}
 
 
 # ============================================================================ Pixelorama gate (isolated APPDATA)
@@ -4008,7 +4058,12 @@ def check(exe, write_report, use_pixelorama, godot=None):
     nm = names()
     cand = rp(CAND_REL)
     for k in ("pxo", "ora", "flat", "gpl", "walkmask"):
-        if read_bytes(os.path.join(cand, nm[k])) != files[k]:
+        b = read_bytes(os.path.join(cand, nm[k]))
+        if k == "gpl":                       # text: a Windows clone with core.autocrlf=true checks it out as CRLF
+            b, want = b.replace(b"\r\n", b"\n"), files[k].replace(b"\r\n", b"\n")
+        else:
+            want = files[k]
+        if b != want:
             raise SystemExit(f"{nm[k]} on disk differs from a fresh rebuild")
     st = static_checks(sc, rgba, flat)
     rep = {"run": RUN, "gates": dict(st["verdicts"]), "static": st}
@@ -4036,10 +4091,15 @@ def check(exe, write_report, use_pixelorama, godot=None):
     if godot:
         rep["godot"], caps = godot_gates(godot, files, rgba, sc)
         gates.update(rep["godot"]["verdicts"])
-    rep["result"] = "PASS" if all(gates.values()) else "FAIL"
+    rep["own_artifacts"] = own_artifacts_check()
+    rep["result"] = "PASS" if all(gates.values()) and rep["own_artifacts"]["all_ok"] else "FAIL"
     rep["note"] = "Technical gates only. Passing them does not make the art accepted; acceptance is creator review."
     text = json.dumps(rep, indent=2, default=str) + "\n"
-    print(json.dumps({"result": rep["result"], "gates": gates}, indent=1))
+    print(json.dumps({"result": rep["result"], "gates": gates, "gates_passed": f"{sum(gates.values())}/{len(gates)}",
+                      "lock_optional_absent": lk["optional_absent"],
+                      "own_artifacts": f"{rep['own_artifacts']['matched']}/{rep['own_artifacts']['count']}",
+                      "own_artifacts_failed": [r for r, e in rep["own_artifacts"]["entries"].items()
+                                               if not e["ok"]]}, indent=1))
     if write_report:
         out = rp(OUT_REL)
         os.makedirs(_fs(out), exist_ok=True)
@@ -4057,6 +4117,8 @@ def main():
     ap.add_argument("--no-pixelorama", action="store_true")
     ap.add_argument("--no-godot", action="store_true")
     ap.add_argument("--pixelorama", default=PIXELORAMA_DEFAULT)
+    ap.add_argument("--godot", default=None, help="Godot 4.7.2 console exe (default: the gitignored "
+                                                    "work/tooling copy, absent from a clean clone)")
     a = ap.parse_args()
     if a.mode == "preview":
         if not a.dir or os.path.abspath(a.dir).startswith(REPO):
@@ -4065,7 +4127,8 @@ def main():
     elif a.mode == "build":
         build()
     else:
-        sys.exit(check(a.pixelorama, a.write_report, not a.no_pixelorama, None if a.no_godot else rp(GODOT_REL)))
+        sys.exit(check(a.pixelorama, a.write_report, not a.no_pixelorama,
+                       None if a.no_godot else (a.godot or rp(GODOT_REL))))
 
 
 if __name__ == "__main__":
