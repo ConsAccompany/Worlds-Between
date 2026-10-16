@@ -334,7 +334,26 @@ func _add_segment(entry: Dictionary, seen_ids: Dictionary) -> void:
 	var verification: Variant = entry.get("verification")
 	if typeof(verification) != TYPE_DICTIONARY or verification.get("status", "") not in LEG_VERIFICATION_STATUSES or typeof(verification.get("source")) != TYPE_DICTIONARY or String(verification["source"].get("url", "")) == "":
 		errors.append("segment %s needs verification status and a source url" % segment_id)
+	_check_components(entry, segment_id)
 	segments[segment_id] = entry
+
+
+# Documented components must agree with the fields the runtime sums, so a provenance record can never
+# describe a different number from the one charged. rawMedianMinutes must round (half up) to the field.
+func _check_components(entry: Dictionary, segment_id: String) -> void:
+	var components: Variant = entry.get("components", {})
+	if typeof(components) != TYPE_DICTIONARY:
+		errors.append("segment %s components must be an object" % segment_id)
+		return
+	for field in components:
+		var component: Variant = components[field]
+		if typeof(component) != TYPE_DICTIONARY or not component.has("value"):
+			continue
+		if not entry.has(field) or not _is_number(component["value"]) or not _is_number(entry[field]) or float(component["value"]) != float(entry[field]):
+			errors.append("segment %s components.%s.value disagrees with %s" % [segment_id, field, field])
+			continue
+		if component.has("rawMedianMinutes") and (not _is_number(component["rawMedianMinutes"]) or int(floorf(float(component["rawMedianMinutes"]) + 0.5)) != int(entry[field])):
+			errors.append("segment %s components.%s.rawMedianMinutes does not round to %s" % [segment_id, field, field])
 
 
 func _add_route(entry: Dictionary, seen_ids: Dictionary) -> void:
