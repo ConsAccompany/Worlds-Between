@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
   "planVersion": "v0.2",
-  "updatedAt": "2026-10-15T22:45:00Z",
+  "updatedAt": "2026-10-16T03:05:00Z",
   "currentStep": "M8",
   "steps": [
     {
@@ -26,14 +26,14 @@
       "summary": "The global Earth map, route preview/confirm/cancel, an integer-minute calendar and save migration are implemented and pass Godot automated tests. On 2026-10-15 the runtime was migrated to the creator-decided US science sphere as an implemented technical candidate: NYC (start, Lower Manhattan City Hall Park scene), Yonkers outskirts, abandoned Washington, D.C. ruins at the Capitol, the NYC-Chicago air route and a Chicago Loop technical placeholder district; new runs start 2537-05-25 (08:00 is a placeholder time of day). The travel registry now holds the five Earth spheres (science US + Canada, magic South America, wuxia Asia, nature Oceania, culture Europe + Africa, former fantasy kept as an alias only) plus the separate portal-only final planet; only science has places. A provisional weekly commerce ledger settles on the calendar and an engineering-candidate Merchant path reaches it in play. M2 is not complete: route figures are preliminary estimates, the City Hall Park, Capitol and Loop art does not exist, the map art is a functional placeholder, the Catskills community is not a runtime place, and no human has reviewed the map or played it.",
       "acceptance": "Reach and leave science-region scenes from a global map; use real bilingual place names and geographically plausible car/air routes; verify travel-time, date, save/load and weekly-settlement behavior.",
       "evidence": [
-        "Godot 4.7.2, 2026-10-15 (per the M2 QA notes): GLOBAL_TRAVEL_CORE_OK; GLOBAL_EARTH_MAP_SMOKE_OK checks=201; GLOBAL_MAP_TRAVEL_INTEGRATION_OK checks=103; revised M2_SMOKE_OK (pick place → route card → depart); M1–M8 smokes OK; CANVAS_POINTER_REGRESSION_OK at 1280×720",
+        "Godot 4.7.2, 2026-10-15 (per the M2 QA notes; earlier run, before the US migration — the integration re-run counts are 212 and 105, see details): GLOBAL_TRAVEL_CORE_OK; GLOBAL_EARTH_MAP_SMOKE_OK checks=201; GLOBAL_MAP_TRAVEL_INTEGRATION_OK checks=103; revised M2_SMOKE_OK (pick place → route card → depart); M1–M8 smokes OK; CANVAS_POINTER_REGRESSION_OK at 1280×720",
         "docs/qa/rpg-2-star-ocean-the-second_global-earth-map_runtime-implementation_qa-note_m2-v01_20261015-024300-15ce9195.md (global map runtime implementation)",
         "docs/qa/rpg-2-star-ocean-the-second_global-map-travel_integration-fixes_qa-note_m2-v02_20261015-031824-35247192.md (map ↔ travel-core integration fixes, 103-check regression, save migration)",
         "outputs/rpg-2-star-ocean-the-second_global-earth-map_*-runtime-capture_m2-v02_20261015-031426-9a107595.png (12 runtime captures, 6 zh + 6 en; unapproved, functional evidence only)",
         "outputs/rpg-2-star-ocean-the-second_scifi-canvas_pointer-regression-receipt_m8-v01_20261015-071805-548c0f0f.json (real-pixel click: Shanghai marker → Enter scene)",
         "docs/design/rpg-2-star-ocean-the-second_global-earth-map-real-place-travel_rules-v01_20261014-235354-2b5d4d98.md (user-decided rule)",
-        "docs/design/rpg-2-star-ocean-the-second_shanghai-liangzhu_geography-route-art-packet_provisional-v01_20261015-000319-a3e65b7c.md (provisional route research; source of the current preliminary figures)",
-        "docs/design/rpg-2-star-ocean-the-second_shanghai-cross-city-air-route_research-packet_unapproved-v01_20261015-031235-9d63971b.md (air-route candidates; research only, nothing selected)",
+        "docs/design/rpg-2-star-ocean-the-second_shanghai-liangzhu_geography-route-art-packet_provisional-v01_20261015-000319-a3e65b7c.md (superseded provisional Shanghai route research; its Rome2Rio figures are retired; the current US figures are recorded in the US migration QA note)",
+        "docs/design/rpg-2-star-ocean-the-second_shanghai-cross-city-air-route_research-packet_unapproved-v01_20261015-031235-9d63971b.md (superseded Shanghai air-route research; the creator chose NYC-Chicago on 2026-10-15)",
         "docs/qa/rpg-2-star-ocean-the-second_commerce-weekly-settlement_calendar-hookup_qa-note_m2-v01_20261015-082014-bef9e5a4.md (commit 192c63b: provisional CommerceLedger settles at the calendar week rollover; COMMERCE_WEEKLY_SETTLEMENT_OK checks=149)",
         "docs/qa/rpg-2-star-ocean-the-second_merchant-career-city-commerce_playable-path_qa-note_m2-v01_20261015-091137-4f40adc4.md (engineering candidate, not accepted: Merchant job and modal city company panel; MERCHANT_CITY_COMMERCE_PATH_OK checks=109; commerce 149 and GLOBAL_MAP_TRAVEL_INTEGRATION_OK checks=104 still pass)",
         "docs/qa/rpg-2-star-ocean-the-second_merchant-fair-quote_rank-passive-weekly-settlement_qa-note_m2-v01_20261015-132840-9c1dcc80.md (engineering candidate, not accepted: stage-2 Fair Quote as a JP-upgradable provisional commerce passive, +5 % of base per rank on companion-rate weeks; the company panel separates the full-week rate from the partial NPC 80 % week after (re-)stationing; old-save regression pays 105 at rank 1; MERCHANT_FAIR_QUOTE_OK checks=91; zh/en 1280x720 captures FAIR_QUOTE_CAPTURE_OK captures=6)",
