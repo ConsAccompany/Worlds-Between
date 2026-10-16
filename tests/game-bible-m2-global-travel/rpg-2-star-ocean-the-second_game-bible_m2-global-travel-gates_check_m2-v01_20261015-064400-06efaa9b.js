@@ -29,7 +29,8 @@ const airPacketDoc = 'docs/design/rpg-2-star-ocean-the-second_shanghai-cross-cit
 const runV3Audit = 'docs/qa/rpg-2-star-ocean-the-second_protagonist-female_south-run-v3-build_pre-run-technical-audit_qa-note_m8-w03_20261015-071053-86f9c79f.md';
 const creatorNote = 'docs/design/rpg-2-star-ocean-the-second_creator-decisions-2026-10-15_world-skills-ai-endgame_reconciliation-note_v01_20261015-174559-39efc292.md';
 const usQaNote = 'docs/qa/rpg-2-star-ocean-the-second_us-science-sphere_runtime-migration_qa-note_m2-v02_20261015-175011-364131c8.md';
-const travelDataPath = path.join(root, 'game', 'data', 'world-travel', 'rpg-2-star-ocean-the-second_global-earth-travel_locations-routes_m2-us-science-v02_20261015-175011-c454007b.json');
+const usTravelData = 'game/data/world-travel/rpg-2-star-ocean-the-second_global-earth-travel_locations-routes_m2-us-science-v02_20261015-175011-c454007b.json';
+const travelDataPath = path.join(root, usTravelData);
 const provisionalTravelPath = path.join(root, 'game', 'data', 'world-travel', 'rpg-2-star-ocean-the-second_global-earth-travel_locations-routes_m2-provisional-v01_20261015-024215-b876e53d.json');
 const gateOrder = ['map-ui', 'place-registry', 'route-preview', 'calendar', 'save-migration', 'acceptance-test', 'anchor', 'start-year', 'route-data', 'air-route', 'map-art', 'visual-review'];
 const migratedGates = ['anchor', 'start-year', 'air-route'];
@@ -109,7 +110,7 @@ const cardById = (html, id) => {
   assert.equal(byId['female-four-direction-animated'].status, 'not_accepted');
   assert.ok(byId['female-four-direction-animated'].scope.includes('v3 跑步构建脚本未通过运行前技术审计') && byId['female-four-direction-animated'].evidence.includes(runV3Audit), 'run v3 failed its pre-run audit; animation still not accepted');
   assert.equal(byId['sentry-direction'].status, 'direction_accepted');
-  assert.ok(byId['sentry-direction'].scope.includes('动画 v2 待审阅') && byId['sentry-direction'].scope.includes('美术验收 0'));
+  assert.ok(byId['sentry-direction'].scope.includes('创作者已批准动画 v2 作为动作方向基准') && byId['sentry-direction'].scope.includes('不是完整精灵或美术验收') && byId['sentry-direction'].scope.includes('美术验收 0') && !byId['sentry-direction'].scope.includes('待审阅'), 'sentry v2: action-direction baseline only, art acceptance 0');
   assert.equal(byId['liangzhu-terrain-direction'].status, 'direction_accepted');
   assert.ok(byId['liangzhu-terrain-direction'].scope.includes('高精度像素场景未制作') && byId['liangzhu-terrain-direction'].scope.includes('v03／v04 为未批准概念'));
   const lz = bible.environmentVisualReview.liangzhu;
@@ -136,7 +137,11 @@ const cardById = (html, id) => {
   assert.ok(cd.washingtonDC.includes('Pixelorama') && cd.note === creatorNote);
   assert.deepEqual(x.gates.map(g => g.id), gateOrder);
   const allEvidence = [...x.gates, ...progress.approvalLedger.items].flatMap(g => g.evidence);
-  for (const file of [...allEvidence, x.rule, x.researchPacket, x.airRoutePacket, cd.note, cd.runtimeEvidence]) assert.ok(fs.existsSync(path.join(root, file)), 'exists: ' + file);
+  // Active route links are the current US sources; the superseded Shanghai packets survive only as labelled archive entries.
+  assert.deepEqual([x.researchPacket, x.airRoutePacket, x.activeTravelData], [usQaNote, usTravelData, usTravelData], 'active route links point at the US sources');
+  assert.deepEqual(x.archivedResearchPackets.map(a => [a.path, a.status]), [[packetDoc, 'archived_superseded'], [airPacketDoc, 'archived_superseded']], 'Shanghai packets archived, not active');
+  assert.ok(x.archivedResearchPackets.every(a => a.note.includes('归档') && a.note.includes('Archive')));
+  for (const file of [...allEvidence, ...x.archivedResearchPackets.map(a => a.path), x.rule, x.researchPacket, x.airRoutePacket, cd.note, cd.runtimeEvidence]) assert.ok(fs.existsSync(path.join(root, file)), 'exists: ' + file);
   const gate = Object.fromEntries(x.gates.map(g => [g.id, g]));
   for (const g of x.gates) assert.ok(g.zh && g.en && g.owner && g.detail, g.id + ' bilingual label, owner and detail');
   for (const id of implementedGates) {
@@ -207,10 +212,12 @@ const cardById = (html, id) => {
   const dateQ = bible.openQuestions.find(q => q.title.includes('新游戏日期'));
   assert.ok(dateQ && dateQ.title.includes('已实现') && dateQ.detail.includes(travel.calendar.startDate) && dateQ.detail.includes('旧档'), 'bible open question: new-game date implemented, prologue and old-save dates open');
   assert.ok(bible.openQuestions.find(q => q.title.includes('组合技与 AI')).detail.includes('关系阶段名称与阈值'), 'relationship tuning stays open');
-  // Washington, D.C. is the Capitol Pixelorama pilot by decision only: nothing authored, integrated or accepted.
+  // Washington, D.C. is the Capitol Pixelorama pilot: unapproved walkable v01-v04 and cinematic v01-v02 candidates exist; none is integrated or accepted.
   const dc = bible.environmentVisualReview.washingtonDC;
   assert.ok(dc.role.includes('Pixelorama') && dc.role.includes('试点') && dc.setting.includes('国会大厦') && dc.note === creatorNote);
-  assert.deepEqual([dc.sceneBriefAuthored, dc.highPrecisionPixelSceneAuthored, dc.runtimeIntegrated, dc.artAccepted], [false, false, false, false], 'DC pilot not authored, integrated or accepted');
+  assert.deepEqual([dc.sceneBriefAuthored, dc.highPrecisionPixelSceneAuthored, dc.runtimeIntegrated, dc.artAccepted], [false, false, false, false], 'DC pilot: no runtime-ready or accepted scene');
+  assert.ok(dc.unapprovedCandidates.status.includes('未批准候选') && dc.unapprovedCandidates.runtimeIntegrated === false && dc.unapprovedCandidates.artAccepted === false && dc.unapprovedCandidates.evidence.every(file => fs.existsSync(path.join(root, file))), 'DC unapproved candidates recorded with evidence');
+  assert.ok(!bible.openQuestions.some(q => q.detail.includes('尚未制作')), 'no open question says the Washington scene is not yet made');
   assert.equal(bible.environmentVisualReview.artAccepted, false);
   const geoMap = bible.environmentVisualReview.runtimeGeographyMap;
   assert.deepEqual([geoMap.implemented, geoMap.automatedTestsPass, geoMap.artAccepted, geoMap.humanReviewed], [true, true, false, false]);
@@ -236,7 +243,7 @@ const cardById = (html, id) => {
     assert.ok(!/<table|<tr /.test(gates), 'gates are stacked rows, not a wide table');
     assert.ok(gates.includes('9 / 12 已实现 · M2 未完成 / Not complete'), 'gate implementation count and M2 not complete');
     assert.ok(!/已完成 · Done|M2 已完成|M2 complete/.test(gates), 'no completion claim');
-    for (const label of ['负责 / Owner', '暂无来源 / No source yet', '查看来源 / View source（1）', '查看路线研究 / View route research', '已实现 · 自动测试通过 / Implemented, tests pass', '仅初步估算 / Preliminary estimate', '未开始 / Not started', '待人工审阅 / Awaiting human review', '不是程序缺陷', x.anchor.zh, x.anchor.en, '纽约—芝加哥', '旧三点 M2_SMOKE_OK 不计入新规则']) {
+    for (const label of ['负责 / Owner', '暂无来源 / No source yet', '查看来源 / View source（1）', '查看当前美国路线来源 / View current US route sources', '归档：已取代的上海／良渚路线研究 / Archive: superseded Shanghai-Liangzhu route research', '已实现 · 自动测试通过 / Implemented, tests pass', '仅初步估算 / Preliminary estimate', '未开始 / Not started', '待人工审阅 / Awaiting human review', '不是程序缺陷', x.anchor.zh, x.anchor.en, '纽约—芝加哥', '旧三点 M2_SMOKE_OK 不计入新规则']) {
       assert.ok(gates.includes(label), 'gates card shows: ' + label);
     }
     // Provenance is collapsed: raw docs/ paths appear only inside <details class="sources"> (never open by default) or a title attribute.
