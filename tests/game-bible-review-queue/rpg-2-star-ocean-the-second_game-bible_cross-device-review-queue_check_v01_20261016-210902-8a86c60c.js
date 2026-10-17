@@ -1,7 +1,7 @@
 // Focused check for the Game Bible cross-device visual review queue (environmentVisualReview.crossDeviceReviewQueue) and the
 // Chicago Loop scene-denominator review. Badges must follow the recorded approval flags, every queue image must be an actual
-// Godot capture served byte-identical (two live in run subdirectories), generated concepts must never render as images, the
-// sync state must match Git, and no counter or the 35.8% meter may move.
+// Godot capture served byte-identical (two live in run subdirectories), generated concepts must never render as images, all six
+// must be committed with the exact recorded blob at the recorded commit (none staged), and no counter or the 35.8% meter may move.
 // Starts the real v05 panel server on a spare local port, then runs the served bible.js in a VM with a minimal DOM stub.
 // Read-only: no project file is written. Run from the repository root: node tests/game-bible-review-queue/<this file>
 const assert = require('node:assert/strict');
@@ -87,35 +87,43 @@ async function renderProduction(base) {
   assert.match(queue.items[0].approvalScope, /static south still/);
   pass('queue: 6 actual Godot captures in order, QA notes on disk, only #1 (selout v8 still) creator-approved, all nonruntime and unaccepted');
 
-  // 2. Sync state matches Git: committed items are tracked with the recorded blob; staged items are in the index with the recorded
-  // blob and never claim a commit; local-only items are untracked and hash-pinned. Every present file matches its recorded sha256.
+  // 2. Sync state matches Git: all six are committed, none staged or local-only. Each recorded short SHA resolves to a commit in
+  // HEAD's history, and the blob at <sha>:<file> is exactly the recorded gitBlob; the working file has the recorded blob and sha256.
+  // The three former Git-proposal captures (#3, #5, #6) are committed at 15d153b and stay sha256-pinned in their evidence index.
   const staged = queue.items.filter(item => item.syncState === 'staged-not-pushed');
+  assert.equal(staged.length, 0, 'no queue image is still staged-not-pushed');
+  assert.equal(queue.items.filter(item => item.syncState === 'local-only').length, 0, 'no queue image is local-only');
   for (const item of queue.items) {
-    if (present(item)) assert.equal(sha256(fs.readFileSync(rel(item.file))), item.sha256, 'recorded sha256 matches the file: ' + item.order);
-    if (item.syncState === 'staged-not-pushed') {
-      assert.ok(tracked(item.file), 'staged item is in the Git index: ' + item.file);
-      assert.equal(git('ls-files', '-s', '--', item.file).stdout.trim().split(/\s+/)[1], item.gitBlob, 'index blob matches: ' + item.order);
-      if (present(item)) assert.equal(git('hash-object', '--', item.file).stdout.trim(), item.gitBlob, 'file blob matches: ' + item.order);
-      assert.match(item.file, /unapproved/, 'staged capture is labelled unapproved in its name: ' + item.order);
+    assert.match(item.syncState, /^committed-at-[0-9a-f]{7}$/, 'committed: ' + item.order);
+    assert.match(item.gitBlob, /^[0-9a-f]{40}$/, 'recorded blob: ' + item.order);
+    const commit = git('rev-parse', '--verify', '--quiet', item.syncState.slice('committed-at-'.length) + '^{commit}').stdout.trim();
+    assert.match(commit, /^[0-9a-f]{40}$/, 'recorded commit resolves: ' + item.order);
+    assert.equal(git('merge-base', '--is-ancestor', commit, 'HEAD').status, 0, 'recorded commit is in HEAD history: ' + item.order);
+    assert.equal(git('rev-parse', commit + ':' + item.file).stdout.trim(), item.gitBlob, 'exact blob at the recorded commit: ' + item.order);
+    assert.ok(tracked(item.file), 'committed item is tracked: ' + item.file);
+    assert.equal(git('hash-object', '--', item.file).stdout.trim(), item.gitBlob, 'working file blob matches: ' + item.order);
+    assert.equal(sha256(fs.readFileSync(rel(item.file))), item.sha256, 'recorded sha256 matches the file: ' + item.order);
+    if (item.hashPinnedIn) {
       const index = JSON.stringify(JSON.parse(fs.readFileSync(rel(item.hashPinnedIn), 'utf8')));
-      assert.ok(index.includes(item.sha256), 'staged item sha256 pinned in its evidence index: ' + item.order);
-    } else if (item.syncState === 'local-only') {
-      assert.equal(tracked(item.file), false, 'local-only item is untracked: ' + item.file);
-      const index = JSON.stringify(JSON.parse(fs.readFileSync(rel(item.hashPinnedIn), 'utf8')));
-      assert.ok(index.includes(path.posix.basename(item.file)), 'local-only item named in its evidence index: ' + item.order);
-      if (present(item)) assert.ok(index.includes(sha256(fs.readFileSync(rel(item.file)))), 'local-only item sha256 pinned in its evidence index: ' + item.order);
-    } else {
-      assert.match(item.syncState, /^committed-at-[0-9a-f]{7}$/);
-      assert.ok(tracked(item.file), 'committed item is tracked: ' + item.file);
-      assert.equal(git('hash-object', item.file).stdout.trim(), item.gitBlob, 'blob matches: ' + item.order);
-      assert.equal(git('cat-file', '-e', item.syncState.slice('committed-at-'.length) + ':' + item.file).status, 0, 'present at the recorded commit: ' + item.order);
+      assert.ok(index.includes(item.sha256), 'sha256 still pinned in its evidence index: ' + item.order);
     }
   }
-  assert.deepEqual(staged.map(item => item.order), queue.gitProposal.items, 'staged items are exactly the Git proposal');
-  assert.ok(fs.existsSync(rel(queue.gitProposal.qa)), 'Git proposal QA note exists');
-  assert.ok(/staged-not-pushed/.test(queue.siteRendering) && !/local-only/.test(queue.siteRendering), 'Site note names the staged items, not a stale local-only state');
-  const committed = queue.items.filter(item => /^committed-at-/.test(item.syncState)).length;
-  pass(`sync state: ${committed} committed items match their recorded blob at the recorded commit; ${staged.length} staged-not-pushed items (#${staged.map(i => i.order).join(', #')}) in the index with the recorded blob and sha256 pinned in the evidence index`);
+  const proposal = queue.gitProposal;
+  assert.deepEqual(proposal.items, [3, 5, 6]);
+  assert.equal(proposal.state, 'committed-at-15d153b');
+  for (const order of proposal.items) {
+    const item = queue.items[order - 1];
+    assert.equal(item.syncState, 'committed-at-15d153b', 'proposal item committed at 15d153b: ' + order);
+    assert.match(item.file, /unapproved/, 'proposal capture is labelled unapproved in its name: ' + order);
+    assert.ok(item.hashPinnedIn, 'proposal item keeps its evidence index: ' + order);
+  }
+  assert.ok(fs.existsSync(rel(proposal.qa)) && fs.existsSync(rel(proposal.syncQa)), 'Git proposal and sync QA notes exist');
+  assert.ok(!/stag/i.test(proposal.state + ' ' + proposal.note), 'Git proposal no longer claims a staged state');
+  assert.ok(/site version 11/.test(queue.siteRendering) && !/site version 10/.test(queue.siteRendering), 'Site note names deployed site version 11');
+  assert.ok(/six actual Godot captures are on GitHub/.test(queue.siteRendering), 'Site note says six captures are on GitHub');
+  assert.ok(!/staged|local-only|until the coordinator/.test(queue.siteRendering), 'Site note has no stale staged or local-only claim');
+  const committed = queue.items.length;
+  pass(`sync state: ${committed}/6 committed (#1, #2, #4 at a87ac16; #3, #5, #6 at 15d153b), each exact recorded blob at its recorded commit in HEAD history, 0 staged, 0 local-only; Site note says site version 11`);
 
   // 3. Generated concepts are a separate, gallery-ineligible list and never appear among queue items or Site previews.
   const concepts = queue.nonruntimeConcepts;
@@ -172,9 +180,11 @@ async function renderProduction(base) {
     assert.equal(figures.length, 6);
     assert.equal((card.match(/badge good">已批准静态基准 · 未接入运行时 · 未验收</g) || []).length, 1);
     assert.equal((card.match(/badge warn">未批准 · 未接入运行时 · 未验收</g) || []).length, 5);
-    assert.equal((card.match(/仅本机 · 尚未同步到 GitHub/g) || []).length, queue.items.filter(item => item.syncState === 'local-only').length);
-    assert.equal((card.match(/badge warn">已暂存为 Git 候选 · 尚未推送，其他设备不可见</g) || []).length, staged.length);
-    assert.equal((card.match(/已在 GitHub（[0-9a-f]{7}）/g) || []).length, committed);
+    assert.equal((card.match(/仅本机 · 尚未同步到 GitHub/g) || []).length, 0, 'no local-only badge');
+    assert.equal((card.match(/已暂存为 Git 候选/g) || []).length, 0, 'no staged badge');
+    assert.equal((card.match(/已在 GitHub（[0-9a-f]{7}）/g) || []).length, 6);
+    assert.equal((card.match(/已在 GitHub（a87ac16）/g) || []).length, 3);
+    assert.equal((card.match(/已在 GitHub（15d153b）/g) || []).length, 3);
     assert.ok(!/已验收|通过验收/.test(card.replace(/未验收/g, '')), 'no acceptance claim');
     assert.ok(!/<button|<input|type="checkbox"/.test(card), 'no approval controls');
     const imgs = [...card.matchAll(/<img src="([^"]+)"/g)].map(m => m[1]);
@@ -191,7 +201,7 @@ async function renderProduction(base) {
       '/assets/..%2Ftools%2Fx.png', '/assets/wdc-cw-v08_20261016-155827-6cf49486%2Frpg-2-star-ocean-the-second_wdc-capitol-west_godot-1280x720-entry_unapproved-v08_20261016-155827-6cf49486.png']) {
       assert.equal((await fetch(base + probe)).status, 404, 'non-allowlisted nested path 404: ' + probe);
     }
-    pass(`Production view: one queue card, 6 figures (1 approved-static, 5 unapproved, all nonruntime/unaccepted), ${committed} GitHub + ${staged.length} staged-not-pushed sync badges, 6 images served byte-identical, 5 concepts as text only, 4 nested/traversal probes 404`);
+    pass(`Production view: one queue card, 6 figures (1 approved-static, 5 unapproved, all nonruntime/unaccepted), ${committed} GitHub sync badges (3 a87ac16 + 3 15d153b, 0 staged, 0 local-only), 6 images served byte-identical, 5 concepts as text only, 4 nested/traversal probes 404`);
   } finally { child.kill(); }
 
   const after = [biblePath, progressPath, inventoryPath].map(file => sha256(fs.readFileSync(rel(file))));
