@@ -1,8 +1,9 @@
 // Focused check for the Game Bible cross-device visual review queue (environmentVisualReview.crossDeviceReviewQueue) and the
 // Chicago Loop scene-denominator review. Badges must follow the recorded approval flags, every queue image must be an actual
-// Godot capture served byte-identical (three live in run subdirectories), generated concepts must never render as images, all ten
+// Godot capture served byte-identical (four live in run subdirectories), generated concepts must never render as images, all eleven
 // must be committed with the exact recorded blob at the recorded commit (none staged), and no counter or the 40.8% meter may move.
 // #10 is the one runtime item: the global map v03 art the live map draws, unapproved, a technical candidate with an inherited failing check.
+// #11 is the Chicago State/Lake v03r1 zh arrival: opt-in only (off by default), partly generated underpainting, two directories deep.
 // Starts the real v05 panel server on a spare local port, then runs the served bible.js in a VM with a minimal DOM stub.
 // Read-only: no project file is written. Run from the repository root: node tests/game-bible-review-queue/<this file>
 const assert = require('node:assert/strict');
@@ -68,12 +69,12 @@ async function renderProduction(base) {
 
   // 1. Nine actual Godot captures, in order, each with its own QA note; badges follow the recorded flags.
   assert.ok(queue && Array.isArray(queue.items), 'queue present');
-  assert.deepEqual(queue.items.map(item => item.order), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+  assert.deepEqual(queue.items.map(item => item.order), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
   assert.ok(queue.items.every(item => item.kind === 'actual-godot-capture'), 'every queue item is an actual Godot capture');
   assert.ok(fs.existsSync(rel(queue.source)), 'queue source note exists');
   const v8Baseline = bible.characterVisualReview.staticBaselinesAndPilots.femaleExplorationSouthBaseline;
   for (const item of queue.items) {
-    assert.match(item.file, /^outputs\/([A-Za-z0-9][A-Za-z0-9._-]*\/)?[A-Za-z0-9][A-Za-z0-9._-]*\.png$/, 'queue file is a PNG under outputs/');
+    assert.match(item.file, /^outputs\/([A-Za-z0-9][A-Za-z0-9._-]*\/){0,2}[A-Za-z0-9][A-Za-z0-9._-]*\.png$/, 'queue file is a PNG under outputs/');
     assert.ok(item.syncState === 'local-only' || present(item), 'committed queue image exists: ' + item.file);
     assert.ok(item.qa && fs.existsSync(rel(item.qa)), 'queue QA note exists: ' + item.qa);
     assert.equal(item.runtimeIntegrated, item.order === 10, 'only #10 (live map art v03) is runtime: ' + item.order);
@@ -155,7 +156,35 @@ async function renderProduction(base) {
   assert.equal(map3Manifest.captures.find(c => c.file === path.posix.basename(map3.file))?.sha256, map3.sha256, 'capture manifest pins the queue sha256');
   assert.ok(fs.readFileSync(rel('game/scripts/world_map_data.gd'), 'utf8').includes('us-east-relief-layer_m2-map-art-native-v03_20261017-175314-e8b8f8af.json'), 'the live map reads the v03 relief');
   pass('#10: global map v03 Chicago flight card zh, technical candidate, runtime map art but unapproved/unaccepted, raw URL pinned to ec8b8f5, capture + manifest + QA + map scripts + v03 relief tracked at ec8b8f5, inherited background-visual-check failure stated');
-  pass('queue: 10 actual Godot captures in order, QA notes on disk, only #1 (selout v8 still) creator-approved, only #10 runtime, none accepted; #7/#8 v11 archive/outskirts with tracked .pxo/.ora/PNG/manifest at 53a912f, unreferenced by runtime');
+  // #11: Chicago State/Lake v03r1 zh arrival. Opt-in only (off by default: the Loop stays v02), about 20% of visible pixels from a
+  // generated-reference underpainting; capture, editable source, generated reference and the opt-in wiring are tracked at cdc5865.
+  const chi = queue.items[10];
+  const chiCommit = 'cdc58657a247cb5741e1afa59989e0d3b5bacc91';
+  assert.equal(chi.syncState, 'committed-at-cdc5865');
+  assert.match(chi.file, /^outputs\/chicago-loop-state-lake-v03r1\/godot-runtime\/rpg-2-star-ocean-the-second_chicago-loop_state-lake-godot-zh-entry-640x360_v03r1_20261017-184340-44bc6d7f\.png$/);
+  assert.equal(chi.rawUrl, 'https://raw.githubusercontent.com/ConsAccompany/Worlds-Between/' + chiCommit + '/' + chi.file, 'raw URL pinned to the full commit SHA');
+  assert.ok(/v03r1/.test(chi.label.en) && /v03r1/.test(chi.label.zh), 'v03r1 label');
+  assert.deepEqual([chi.optInOnly.flag, chi.optInOnly.defaultOff], ['-- --chicago-state-lake-v03r1', true]);
+  assert.ok(/opt-in, off by default/.test(chi.badge.en) && /默认关闭/.test(chi.badge.zh) && /partly generated/.test(chi.badge.en), 'badge says opt-in and partly generated');
+  assert.equal(chi.sourceProvenance.kind, 'partly-generated-underpainting');
+  assert.ok(chi.sourceProvenance.visiblePixelShareFromReference > 0.2 && chi.sourceProvenance.visiblePixelShareFromReference < 0.21, 'underpainted share recorded');
+  assert.equal(sha256(fs.readFileSync(rel(chi.sourceProvenance.generatedReference))), chi.sourceProvenance.generatedReferenceSha256, 'generated reference hash');
+  assert.ok(/^Unapproved actual Godot/.test(chi.caption.en) && /Off by default/.test(chi.caption.en) && /busy and muddy/.test(chi.caption.en) && /scenes stay 3\/12/.test(chi.caption.en), 'caption states opt-in, facade defect and unchanged count');
+  assert.ok(/^未批准/.test(chi.caption.zh) && /默认关闭/.test(chi.caption.zh) && /杂乱/.test(chi.caption.zh), 'zh caption states opt-in and facade defect');
+  assert.ok(fs.existsSync(rel(chi.reviewPacket)) && fs.existsSync(rel(chi.qa)), 'v03r1 sync closeout and QA note exist');
+  const loopScene = 'game/scenes/rpg-2-star-ocean-the-second_chicago-loop_district-placeholder-scene_m2-v02_20261015-185645-a7d62ba0.tscn';
+  const chiSelector = 'game/scripts/rpg-2-star-ocean-the-second_chicago-loop_state-lake-scene-opt-in-selector_unapproved-v03r1_20261017-183235-a00fabf3.gd';
+  for (const source of [chi.file, chi.qa, chi.reviewPacket, chi.sourceProvenance.generatedReference, ...Object.values(chi.editableSource), loopScene, chiSelector]) {
+    assert.ok(git('rev-parse', '--verify', '--quiet', chiCommit + ':' + source).status === 0 && tracked(source), 'v03r1 file tracked at cdc5865: ' + source);
+  }
+  assert.match(JSON.parse(fs.readFileSync(rel(chi.editableSource.manifest), 'utf8')).status, /^UNAPPROVED/, 'v03r1 layer manifest: unapproved');
+  const selector = fs.readFileSync(rel(chiSelector), 'utf8');
+  assert.ok(fs.readFileSync(rel(loopScene), 'utf8').includes(path.posix.basename(chiSelector)), 'the Loop scene runs the opt-in selector');
+  assert.ok(['extends "res://scripts/rpg-2-star-ocean-the-second_chicago-loop_state-lake-block-scene_unapproved-v02_20261017-160959-55667f46.gd"',
+    'static var v03r1_override := -1', 'OS.get_cmdline_user_args().has(V03R1_FLAG)', 'const V03R1_FLAG := "--chicago-state-lake-v03r1"', '\t\tsuper()'].every(text => selector.includes(text)),
+    'v03r1 is off unless the flag or a test override is set; otherwise the selector falls through to v02');
+  pass('#11: Chicago State/Lake v03r1 zh arrival, opt-in only/off by default (Loop stays v02), partly generated underpainting (~20%), raw URL pinned to cdc5865, capture + .pxo/.ora/preview/manifest + generated reference + Loop scene + selector tracked at cdc5865, manifest unapproved');
+  pass('queue: 11 actual Godot captures in order, QA notes on disk, only #1 (selout v8 still) creator-approved, only #10 runtime, none accepted; #7/#8 v11 archive/outskirts with tracked .pxo/.ora/PNG/manifest at 53a912f, unreferenced by runtime');
 
   // 2. Sync state matches Git: all eight are committed, none staged or local-only. Each recorded short SHA resolves to a commit in
   // HEAD's history, and the blob at <sha>:<file> is exactly the recorded gitBlob; the working file has the recorded blob and sha256.
@@ -190,10 +219,10 @@ async function renderProduction(base) {
   assert.ok(fs.existsSync(rel(proposal.qa)) && fs.existsSync(rel(proposal.syncQa)), 'Git proposal and sync QA notes exist');
   assert.ok(!/stag/i.test(proposal.state + ' ' + proposal.note), 'Git proposal no longer claims a staged state');
   assert.ok(/site version 11/.test(queue.siteRendering) && !/site version 10/.test(queue.siteRendering), 'Site note names deployed site version 11');
-  assert.ok(/ten actual Godot captures are on GitHub/.test(queue.siteRendering), 'Site note says ten captures are on GitHub');
+  assert.ok(/eleven actual Godot captures are on GitHub/.test(queue.siteRendering), 'Site note says eleven captures are on GitHub');
   assert.ok(!/staged|local-only|until the coordinator/.test(queue.siteRendering), 'Site note has no stale staged or local-only claim');
   const committed = queue.items.length;
-  pass(`sync state: ${committed}/10 committed (#1, #2, #4 at a87ac16; #3, #5, #6 at 15d153b; #7, #8 at 53a912f; #9 at 1548c9e; #10 at ec8b8f5), each exact recorded blob at its recorded commit in HEAD history, 0 staged, 0 local-only; Site note says site version 11`);
+  pass(`sync state: ${committed}/11 committed (#1, #2, #4 at a87ac16; #3, #5, #6 at 15d153b; #7, #8 at 53a912f; #9 at 1548c9e; #10 at ec8b8f5; #11 at cdc5865), each exact recorded blob at its recorded commit in HEAD history, 0 staged, 0 local-only; Site note says site version 11`);
 
   // 3. Generated concepts are a separate, gallery-ineligible list and never appear among queue items or Site previews.
   const concepts = queue.nonruntimeConcepts;
@@ -234,7 +263,7 @@ async function renderProduction(base) {
   assert.equal(progress.completionMeter.percent, 40.8);
   pass('counters 0/52 3/12 0/2; meter CLI CHECK OK 40.8%; Chicago gate 12 applied by a dated baseline-revision closeout (35.8% at the time); formula gives 40.8% for /12');
 
-  // 5. Rendered Production view: one card, ten figures with flag-derived badges, images served byte-identical, concepts as text only.
+  // 5. Rendered Production view: one card, eleven figures with flag-derived badges, images served byte-identical, concepts as text only.
   const port = await freePort();
   const child = spawn(process.execPath, [server], {cwd: root, env: {...process.env, WORLDS_BETWEEN_BIBLE_PORT: String(port)}, stdio: 'ignore'});
   const base = 'http://127.0.0.1:' + port;
@@ -246,14 +275,15 @@ async function renderProduction(base) {
     assert.equal(html.split('id="cross-device-review-queue"').length, 2, 'exactly one queue card');
     const card = html.slice(start, html.indexOf('</section>', start) + '</section>'.length);
     const figures = card.split('<figure class="visual-sample review-queue-item"').slice(1);
-    assert.equal(figures.length, 10);
+    assert.equal(figures.length, 11);
     assert.equal((card.match(/badge good">已批准静态基准 · 未接入运行时 · 未验收</g) || []).length, 1);
-    assert.equal((card.match(/badge warn">未批准 · 未接入运行时 · 未验收</g) || []).length, 8);
+    assert.equal((card.match(/badge warn">未批准 · 未接入运行时 · 未验收</g) || []).length, 9);
     assert.equal((card.match(/badge warn">未批准 · 已接入运行时 · 未验收</g) || []).length, 1, '#10 renders as unapproved runtime, unaccepted');
     assert.equal((card.match(/仅本机 · 尚未同步到 GitHub/g) || []).length, 0, 'no local-only badge');
     assert.equal((card.match(/已暂存为 Git 候选/g) || []).length, 0, 'no staged badge');
-    assert.equal((card.match(/已在 GitHub（[0-9a-f]{7}）/g) || []).length, 10);
+    assert.equal((card.match(/已在 GitHub（[0-9a-f]{7}）/g) || []).length, 11);
     assert.equal((card.match(/已在 GitHub（ec8b8f5）/g) || []).length, 1);
+    assert.equal((card.match(/已在 GitHub（cdc5865）/g) || []).length, 1);
     assert.equal((card.match(/已在 GitHub（1548c9e）/g) || []).length, 1);
     assert.equal((card.match(/已在 GitHub（a87ac16）/g) || []).length, 3);
     assert.equal((card.match(/已在 GitHub（15d153b）/g) || []).length, 3);
@@ -261,7 +291,7 @@ async function renderProduction(base) {
     assert.ok(!/已验收|通过验收/.test(card.replace(/未验收/g, '')), 'no acceptance claim');
     assert.ok(!/<button|<input|type="checkbox"/.test(card), 'no approval controls');
     const imgs = [...card.matchAll(/<img src="([^"]+)"/g)].map(m => m[1]);
-    assert.equal(imgs.length, 10);
+    assert.equal(imgs.length, 11);
     for (const [i, src] of imgs.entries()) {
       const response = await fetch(base + src);
       if (!present(queue.items[i])) { assert.equal(response.status, 404, 'absent local-only capture is not served: ' + src); continue; }
@@ -274,7 +304,7 @@ async function renderProduction(base) {
       '/assets/..%2Ftools%2Fx.png', '/assets/wdc-cw-v08_20261016-155827-6cf49486%2Frpg-2-star-ocean-the-second_wdc-capitol-west_godot-1280x720-entry_unapproved-v08_20261016-155827-6cf49486.png']) {
       assert.equal((await fetch(base + probe)).status, 404, 'non-allowlisted nested path 404: ' + probe);
     }
-    pass(`Production view: one queue card, 10 figures (1 approved-static, 8 unapproved nonruntime, 1 unapproved runtime, none accepted), ${committed} GitHub sync badges (3 a87ac16 + 3 15d153b + 2 53a912f + 1 1548c9e + 1 ec8b8f5, 0 staged, 0 local-only), 10 images served byte-identical, 5 concepts as text only, 4 nested/traversal probes 404`);
+    pass(`Production view: one queue card, 11 figures (1 approved-static, 9 unapproved nonruntime, 1 unapproved runtime, none accepted), ${committed} GitHub sync badges (3 a87ac16 + 3 15d153b + 2 53a912f + 1 1548c9e + 1 ec8b8f5 + 1 cdc5865, 0 staged, 0 local-only), 11 images served byte-identical, 5 concepts as text only, 4 nested/traversal probes 404`);
   } finally { child.kill(); }
 
   const after = [biblePath, progressPath, inventoryPath].map(file => sha256(fs.readFileSync(rel(file))));

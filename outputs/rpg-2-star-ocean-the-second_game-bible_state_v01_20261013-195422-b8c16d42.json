@@ -4294,9 +4294,9 @@
     "crossDeviceReviewQueue": {
       "asOf": "2026-10-17",
       "source": "docs/qa/rpg-2-star-ocean-the-second_game-bible_cross-device-visual-review-queue_unapproved-v01_20261016-184200-1b0da761.md",
-      "zh": "跨设备视觉审查队列：十张都是真实 Godot 截图，状态按记录逐项标注。列入队列不批准任何画面；完成度 40.8%、M2 10/12、精灵 0/52、场景 3/12、美术完成后试玩 0/2 均不因此改变。生成的概念图另列，不进入画廊。",
-      "en": "Cross-device visual review queue: all ten are actual Godot captures, each badged from its recorded status. Being in the queue approves nothing; meter 40.8%, M2 10/12, sprites 0/52, scenes 3/12 and post-art playtests 0/2 do not change because of it. Generated concepts are listed separately and never enter the gallery.",
-      "siteRendering": "The private Site review-queue client was reported deployed as site version 11 (custom access preserved) on 2026-10-16. All ten actual Godot captures are on GitHub: #1, #2 and #4 at a87ac16, #3, #5 and #6 at 15d153b, #7 and #8 (female battle v11) at 53a912f, #9 (City Hall Park v06 zh entry, generated source, opt-in only) at 1548c9e, and #10 (global map v03 Chicago flight card, zh, technical candidate) at ec8b8f5; each raw URL at the full commit SHA returned the exact recorded blob and sha256. The Site was not opened or redeployed when #7, #8, #9 and #10 were added, so whether it already shows them is not verified. Being on the Site or on GitHub approves nothing; the badges still follow the recorded flags.",
+      "zh": "跨设备视觉审查队列：十一张都是真实 Godot 截图，状态按记录逐项标注。列入队列不批准任何画面；完成度 40.8%、M2 10/12、精灵 0/52、场景 3/12、美术完成后试玩 0/2 均不因此改变。生成的概念图另列，不进入画廊。",
+      "en": "Cross-device visual review queue: all eleven are actual Godot captures, each badged from its recorded status. Being in the queue approves nothing; meter 40.8%, M2 10/12, sprites 0/52, scenes 3/12 and post-art playtests 0/2 do not change because of it. Generated concepts are listed separately and never enter the gallery.",
+      "siteRendering": "The private Site review-queue client was reported deployed as site version 11 (custom access preserved) on 2026-10-16. All eleven actual Godot captures are on GitHub: #1, #2 and #4 at a87ac16, #3, #5 and #6 at 15d153b, #7 and #8 (female battle v11) at 53a912f, #9 (City Hall Park v06 zh entry, generated source, opt-in only) at 1548c9e, #10 (global map v03 Chicago flight card, zh, technical candidate) at ec8b8f5, and #11 (Chicago State/Lake v03r1 zh arrival, opt-in only) at cdc5865; each raw URL at the full commit SHA returned the exact recorded blob and sha256. The Site was not opened or redeployed when #7 to #11 were added, so whether it already shows them is not verified. Being on the Site or on GitHub approves nothing; the badges still follow the recorded flags.",
       "items": [
         {
           "order": 1,
@@ -4600,6 +4600,56 @@
           "caption": {
             "zh": "未批准的技术候选：真实 Godot 640×360 截图，v03 已是游戏里实际显示的地图美术，但未验收。卡片内的路线条同时显示纽约与芝加哥两端，陆地、湖泊与海岸的明度层次比 v02 清楚。仍有缺陷：路线条小且无交通方式文字，卡片很满，放大后华盛顿卡的标签会重叠，较大的地名牌遮住更多地图。继承的 background-visual-check 仍失败（button geometry scifi.city），用 4b06aef 的地图脚本同样失败。",
             "en": "Unapproved technical candidate: actual Godot 640x360 capture; v03 is the map art the game now draws, but it is not accepted. The route strip inside the card shows both the New York and Chicago ends, and land, lake and coast values separate better than in v02. Open defects: the strip is small and names no mode, the card is tight, the zoomed Washington card has label overlaps, and the larger plates cover more map. The inherited background-visual-check still fails (button geometry scifi.city), identically with the 4b06aef map scripts."
+          }
+        },
+        {
+          "order": 11,
+          "label": {
+            "zh": "芝加哥 State/Lake v03r1 · 中文抵达",
+            "en": "Chicago State/Lake v03r1, zh arrival"
+          },
+          "kind": "actual-godot-capture",
+          "syncState": "committed-at-cdc5865",
+          "creatorApproved": false,
+          "runtimeIntegrated": false,
+          "optInOnly": {
+            "flag": "-- --chicago-state-lake-v03r1",
+            "defaultOff": true,
+            "note": "Off by default: without a flag the Chicago Loop plays the unchanged v02 scene (0 px different from the v02 captures). -- --chicago-state-lake-v03r1 opens this v03r1 correction; -- --chicago-state-lake-v03 still opens the untouched v03 scene."
+          },
+          "artAccepted": false,
+          "sourceProvenance": {
+            "kind": "partly-generated-underpainting",
+            "generatedReference": "outputs/rpg-2-star-ocean-the-second_chicago-state-lake_style-alignment-reference_nonruntime-v01_20261017-173900-4c6e2b91.png",
+            "generatedReferenceSha256": "7608a64f906bb93b326905b47cf51ed8e9645fe244541b393ffe4340d360fe5b",
+            "visiblePixelShareFromReference": 0.2016,
+            "visiblePixelShareNative": 0.7984,
+            "note": "About 20% of visible pixels (the two backdrop bands, including the upper facade strip) are a palette-reduced underpainting from a Codex-generated nonruntime reference; the deck, ground, paving and 26 y-sort props are authored in code. The reference itself is never shown in the game."
+          },
+          "badge": {
+            "zh": "未批准 · 未接入运行时（默认关闭）· 部分生成底稿",
+            "en": "Unapproved · nonruntime (opt-in, off by default) · partly generated underpainting",
+            "tone": "warn"
+          },
+          "qa": "docs/qa/rpg-2-star-ocean-the-second_chicago-loop_state-lake-arrival-block-native-scene_qa-note_unapproved-v03r1_20261017-184340-49dde4dd.md",
+          "reviewPacket": "docs/qa/rpg-2-star-ocean-the-second_chicago-loop_state-lake-v03-v03r1-selective-sync_closeout_unapproved-v01_20261017-190205-1fbb903b.md",
+          "editableSource": {
+            "pxo": "outputs/chicago-loop-state-lake-v03r1/rpg-2-star-ocean-the-second_chicago-loop_state-lake_layered-source_unapproved-v03r1_20261017-183235-a00fabf3.pxo",
+            "ora": "outputs/chicago-loop-state-lake-v03r1/rpg-2-star-ocean-the-second_chicago-loop_state-lake_layered-source_unapproved-v03r1_20261017-183235-a00fabf3.ora",
+            "png": "outputs/chicago-loop-state-lake-v03r1/rpg-2-star-ocean-the-second_chicago-loop_state-lake_merged-preview_unapproved-v03r1_20261017-183235-a00fabf3.png",
+            "manifest": "outputs/chicago-loop-state-lake-v03r1/rpg-2-star-ocean-the-second_chicago-loop_state-lake_layer-manifest_unapproved-v03r1_20261017-183235-a00fabf3.json"
+          },
+          "file": "outputs/chicago-loop-state-lake-v03r1/godot-runtime/rpg-2-star-ocean-the-second_chicago-loop_state-lake-godot-zh-entry-640x360_v03r1_20261017-184340-44bc6d7f.png",
+          "rawUrl": "https://raw.githubusercontent.com/ConsAccompany/Worlds-Between/cdc58657a247cb5741e1afa59989e0d3b5bacc91/outputs/chicago-loop-state-lake-v03r1/godot-runtime/rpg-2-star-ocean-the-second_chicago-loop_state-lake-godot-zh-entry-640x360_v03r1_20261017-184340-44bc6d7f.png",
+          "gitBlob": "f80c9c49956e3709c27ee788b206ce2a663b5b9b",
+          "sha256": "1174d75f83d23dd1197ad51d5875ef3ad2138b8c5ecfa1a0c5b4b33af09e26a5",
+          "checks": {
+            "godot": "CHICAGO_LOOP_V03R1_OK checks=74 (clean checkout at cdc5865); default v02 42/42; v03 flag 72/72",
+            "source": "v03r1 pixel/source 18/18; v03 baseline 14/15, failing only its art-only lit-stone gate C3 (25.43% < v02 28.95%), which v03r1 passes at 33.21%"
+          },
+          "caption": {
+            "zh": "未批准的真实 Godot 640×360 截图，只供环境审查：从世界地图飞抵芝加哥后的 State St 与 Lake St 路口。默认关闭，只能用开关开启；不带开关时环线仍是 v02。比 v03 明亮，广场是暖色低角度阳光下的石板，人物与高架线可读。仍有缺陷：上方楼面带仍然杂乱发浑（约 20% 画面来自生成参考图的底稿，需要手绘重画），石板填色偏平，楼梯、圆章与喷泉是虚构的，信息屏与码头偏小，提示文字未审。芝加哥场景质量仍为 0，场景 3/12 不变。",
+            "en": "Unapproved actual Godot 640x360 capture for environment review only: arrival at State St and Lake St after the world-map flight to Chicago. Off by default; opt-in flag only, and without it the Loop is still v02. Brighter than v03: the plaza reads as warm low-sun paving, and the heroine and the elevated L read. Open defects: the upper facade band is still busy and muddy (about 20% of the frame is underpainting from a generated reference and needs a hand redraw), slab fills are flat, the stair, medallion and fountain are invented, the kiosk and dock are small, and the note wording is unreviewed. Chicago scene quality stays 0 and scenes stay 3/12."
           }
         }
       ],
