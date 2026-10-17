@@ -93,7 +93,7 @@ Checks: `outputs/…native-art_checks_test-only-v01r1_20261017-022144-f9b0d28b.j
 4. Nature (olive) and culture (sand) are the closest pair. They sit on separate continents, so they are not confused at 1×.
 5. The credit plate is 9 px text, small but legible at 1×. The credits panel body is 10 px.
 6. The v01 defects (Great Lakes plain, relief cell aliasing, tight margins, lake shore line) are unchanged.
-7. The relief JSON's attribution string and the v01 note still list NED/3DEP. This r1 note corrects the record without changing those cited files.
+7. The relief JSON's attribution string and the v01 note still list NED/3DEP. This r1 note corrects the record without changing those cited files. (Since corrected in place, and the in-game USGS line no longer names 3DEP: see [native art pass v02](rpg-2-star-ocean-the-second_global-map_native-art-pass_qa-note_unapproved-v02_20261017-165006-dacc5102.md).)
 
 ## Reproduce
 

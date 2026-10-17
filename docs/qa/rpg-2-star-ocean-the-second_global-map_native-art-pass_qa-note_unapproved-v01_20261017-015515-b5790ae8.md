@@ -19,7 +19,7 @@ It is a runtime art pass over the live map script. No pre-rendered skin is used,
    - It is masked by the map's own Natural Earth land and lake rings, so relief never crosses a drawn coast.
    - The elevation is smoothed over 3 cells, and isolated shade pixels are dropped. Only coherent landforms remain: the Valley-and-Ridge arcs, the Allegheny Front, the Poconos, the Catskills, the Adirondacks, and the Lake Chicago plain and moraine steps.
    - It is drawn as one texture per regional land layer with nearest filtering, so the pixels stay crisp.
-   - The source is the Tilezen/Mapzen Terrarium z7 tiles (SRTM, USGS NED/3DEP, GMTED2010, ETOPO1). Attribution: <https://github.com/tilezen/joerd/blob/master/docs/attribution.md>. Each tile's sha256 is recorded in the layer JSON.
+   - The source is the Tilezen/Mapzen Terrarium z7 tiles; their headers list only SRTM, GMTED2010 and ETOPO1 files (corrected 2026-10-17, see the correction below). Attribution: <https://github.com/tilezen/joerd/blob/master/docs/attribution.md>. Each tile's sha256 is recorded in the layer JSON.
    - No terrain, borders, airports or roads were invented.
 3. **Quieter grid.**
    - Grid alpha went from 0.75 to 0.10, and the equator from 0.9 to 0.22.
@@ -127,3 +127,7 @@ From the repo root:
   work/tooling/godot-4-7-2/Godot_v4.7.2-stable_win64_console.exe --path game -s <abs path to tools/…native-art-pass_capture-check_…1f607c6e.gd>
   ```
   Delete this tag's outputs before re-capturing.
+
+## Correction (2026-10-17, map-art v02)
+
+This note first listed USGS NED/3DEP among the relief sources. No baked tile's `x-amz-meta-x-imagery-sources` header lists a 3DEP/NED (or CDEM) file; they list only SRTM, GMTED2010 and ETOPO1. The source line above, the relief JSON's `attribution` string and the bake tool's docstring and `attribution` string were corrected in place. Their sha256 values in the Files table are therefore the pre-correction values. The corrected values (first 16) are: relief JSON `62511f95bbf5231d`, bake tool `ed55dbd949e691bf`. The PNG layer and every other field are unchanged. The runtime no longer reads this layer; see [native art pass v02](rpg-2-star-ocean-the-second_global-map_native-art-pass_qa-note_unapproved-v02_20261017-165006-dacc5102.md).

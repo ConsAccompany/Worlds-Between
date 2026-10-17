@@ -10,12 +10,12 @@ extends RefCounted
 const REGISTRY_PATH := "res://data/world-map/rpg-2-star-ocean-the-second_earth-map_place-registry_m2-us-science-v02_20261015-175011-eeaa6baa.json"
 const GEODATA_PATH := "res://data/world-map/rpg-2-star-ocean-the-second_earth-map_runtime-geodata_m2-us-science-v02_20261015-175011-944d9635.json"
 
-# Relief and coastal-shelf layer per geodata key (unapproved map art, 2026-10-17): real elevation and depth
-# classes on a lon/lat grid, masked by the same land and lake rings. Baked by
-# tools/rpg-2-star-ocean-the-second_global-map_us-east-relief-bake_m2-map-art-native-v01_20261017-015515-aa01b973.py.
-const RELIEF_PATHS := {
-	"us_east": "res://data/world-map/rpg-2-star-ocean-the-second_earth-map_us-east-relief-layer_m2-map-art-native-v01_20261017-015515-7bf04753.json",
-}
+# Relief, coastal-shelf and shore layers (unapproved map art v03, 2026-10-17): real elevation and depth classes on lon/lat
+# grids masked by the same land and lake rings, one layer per regional view (and one for the route strip on the card),
+# each baked so one cell is one screen pixel at that view's default zoom. Baked by
+# tools/rpg-2-star-ocean-the-second_global-map_us-east-relief-bake_m2-map-art-native-v03_20261017-175314-e8b8f8af.py
+# (v01 7bf04753 and v02 dacc5102 stay on disk as the records it superseded; nothing reads them at run time).
+const RELIEF_PATH := "res://data/world-map/rpg-2-star-ocean-the-second_earth-map_us-east-relief-layer_m2-map-art-native-v03_20261017-175314-e8b8f8af.json"
 # Globe sphere tints (unapproved map art, 2026-10-17): one restrained land colour per Earth civilization sphere,
 # on a lon/lat grid, with each global land ring's sphere (or -1 when several share it). Baked from Natural Earth
 # countries by tools/rpg-2-star-ocean-the-second_global-map_globe-sphere-tint-bake_m2-map-art-native-v01r1_20261017-022144-f9b0d28b.py.
@@ -24,6 +24,7 @@ const GLOBE_TINT_PATH := "res://data/world-map/rpg-2-star-ocean-the-second_earth
 static var _registry: Dictionary = {}
 static var _geodata: Dictionary = {}
 static var _relief: Dictionary = {}
+static var _relief_data = null
 static var _globe_tint = null
 static var _ring_cache: Dictionary = {}
 static var _travel_data: WorldRouteRegistry = null
@@ -127,18 +128,21 @@ static func region_roads(region_key: String) -> Array:
 	return _ring_cache[cache_key]
 
 
-# {"texture": ImageTexture, "bbox_wsen": Array, "land_low_color": String} for a geodata layer, else {}.
-# The texture's rows run north to south and its columns west to east, one cell per lon/lat step.
-static func region_relief(region_key: String) -> Dictionary:
-	if not _relief.has(region_key):
+# {"texture": ImageTexture, "bbox_wsen": Array, "land_low_color": String} for a relief layer, else {}. layer_id is a
+# regional view's ID (us_northeast, us_great_lakes) or "route_inset" (the route strip on the card). The texture's rows run north to south and its
+# columns west to east, one cell per lon/lat step.
+static func region_relief(layer_id: String) -> Dictionary:
+	if not _relief.has(layer_id):
 		var entry := {}
-		if RELIEF_PATHS.has(region_key) and FileAccess.file_exists(RELIEF_PATHS[region_key]):
-			var data := _load_json(RELIEF_PATHS[region_key])
-			var image := Image.new()
-			if not data.is_empty() and image.load_png_from_buffer(Marshalls.base64_to_raw(String(data["png_base64"]))) == OK:
-				entry = {"texture": ImageTexture.create_from_image(image), "bbox_wsen": data["bbox_wsen"], "land_low_color": String(data["land_low_color"])}
-		_relief[region_key] = entry
-	return _relief[region_key]
+		if _relief_data == null:
+			_relief_data = _load_json(RELIEF_PATH) if FileAccess.file_exists(RELIEF_PATH) else {}
+		var layer: Dictionary = _relief_data.get("layers", {}).get(layer_id, {})
+		var image := Image.new()
+		if not layer.is_empty() and image.load_png_from_buffer(Marshalls.base64_to_raw(String(layer["png_base64"]))) == OK:
+			entry = {"texture": ImageTexture.create_from_image(image), "bbox_wsen": layer["bbox_wsen"], "grid": layer["grid"],
+				"land_low_color": String(_relief_data["land_low_color"])}
+		_relief[layer_id] = entry
+	return _relief[layer_id]
 
 
 # {"texture": ImageTexture, "bbox_wsen": Array, "ring_spheres": Array, "colors": Array[Color], "roles": Array}

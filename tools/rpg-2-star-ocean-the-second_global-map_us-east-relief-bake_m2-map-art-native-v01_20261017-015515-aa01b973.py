@@ -7,8 +7,9 @@ coast the map does not draw. Classes (no invented terrain):
   sea   = inner shelf (> -60 m), outer shelf (> -200 m); deeper water and every lake stay transparent.
 The map script draws the PNG over its land polygons with nearest filtering (one texture per region view).
 
-Elevation source: Tilezen/Mapzen "Terrarium" terrain tiles (AWS open data, zoom 7), which merge SRTM,
-USGS NED/3DEP, GMTED2010 and ETOPO1 for this area. Attribution:
+Elevation source: Tilezen/Mapzen "Terrarium" terrain tiles (AWS open data, zoom 7). For this area every tile's
+x-amz-meta-x-imagery-sources header lists only SRTM, GMTED2010 and ETOPO1 files (corrected 2026-10-17; an earlier
+version of this note also named USGS NED/3DEP, which no tile used). Attribution:
 https://github.com/tilezen/joerd/blob/master/docs/attribution.md
 
 Usage (repo root; the real Python is noted in the repo memory):
@@ -240,7 +241,7 @@ def main():
         "sources": [{
             "id": "tilezen_terrarium_z7",
             "url_template": TILE_URL,
-            "attribution": "https://github.com/tilezen/joerd/blob/master/docs/attribution.md (SRTM, USGS NED/3DEP, GMTED2010, ETOPO1)",
+            "attribution": "https://github.com/tilezen/joerd/blob/master/docs/attribution.md (observed tile sources: SRTM, GMTED2010, ETOPO1)",
             "retrieved_on": "2026-10-17",
             "tiles": tiles,
         }, {"id": "natural_earth_us_east_rings", "path": os.path.relpath(GEODATA, REPO).replace("\\", "/")}],
