@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
   "planVersion": "v0.2",
-  "updatedAt": "2026-10-17T02:01:49Z",
+  "updatedAt": "2026-10-17T05:09:12Z",
   "currentStep": "M8",
   "steps": [
     {
@@ -277,14 +277,14 @@
     }
   ],
   "approvalLedger": {
-    "updatedAt": "2026-10-15T21:45:59Z",
-    "note": "Approval scope is recorded exactly as the user gave it. Direction acceptance is not asset acceptance; no counter below was incremented by these entries.",
+    "updatedAt": "2026-10-17T05:09:12Z",
+    "note": "Approval scope is recorded exactly as the user gave it. Direction and scoped baseline approvals do not count as asset acceptance. NYC public facilities room 2 is the first creator-accepted scene-visual gate.",
     "counters": {
       "identities": 51,
       "visualVariants": 52,
       "runtimeSpritesAccepted": 0,
       "runtimeSpritesTarget": 52,
-      "sceneVisualsAccepted": 0,
+      "sceneVisualsAccepted": 1,
       "sceneVisualsTarget": 12,
       "humanPlaytests": 0,
       "humanPlaytestsTarget": 2
@@ -354,6 +354,19 @@
         "evidence": [
           "docs/qa/rpg-2-star-ocean-the-second_global-atlas_geography-grounded-visual-study_qa-note_unapproved-v02_20261015-001640-5b0c8af7.md",
           "docs/qa/rpg-2-star-ocean-the-second_yangtze-delta_geography-grounded-region-visual-study_qa-note_unapproved-v01_20261015-002022-45806a1c.md"
+        ]
+      },
+      {
+        "id": "nyc-public-facilities-room2-scene-visual-accepted",
+        "status": "accepted",
+        "acceptanceKind": "scene-visual",
+        "units": 1,
+        "zh": "纽约公共设施室内场景画质正式验收",
+        "en": "NYC public facilities room 2 scene visual accepted",
+        "scope": "创作者明确批准原生 640×360 Godot 实机画面的环境画质为科技区第 1/12 道场景门；不包含角色动作、完整角色精灵、其他场景或两轮真人试玩。",
+        "evidence": [
+          "docs/qa/rpg-2-star-ocean-the-second_nyc-public-facilities-room2_scene-visual-acceptance_v01_20261017-010900-8f4a2c6e.md",
+          "game/scripts/survey_annex.gd"
         ]
       }
     ]
@@ -615,10 +628,10 @@
     "kind": "weighted_delivery_estimate",
     "zh": "MVP 加权交付估算（不是正式批准）",
     "en": "MVP weighted delivery estimate (not formal approval)",
-    "updatedAt": "2026-10-17T02:01:49Z",
-    "percent": 35.8,
-    "percentLabel": "35.8%",
-    "weightedPoints": 35.83,
+    "updatedAt": "2026-10-17T05:09:12Z",
+    "percent": 37.5,
+    "percentLabel": "37.5%",
+    "weightedPoints": 37.5,
     "weightTotal": 100,
     "countingRules": [
       {
@@ -647,7 +660,7 @@
       "en": "Formal approval is separate from this weighted estimate: only creator acceptance recorded in approvalLedger and the two M9 integrated human playtests count as approval. This percentage approves no asset, scene or milestone.",
       "mvpFormallyAccepted": false,
       "runtimeSpritesAccepted": "0/52",
-      "sceneVisualsAccepted": "0/12",
+      "sceneVisualsAccepted": "1/12",
       "humanPlaytests": "0/2",
       "scopedApprovalsNotCountedAsAcceptance": [
         {
@@ -879,11 +892,11 @@
         "zh": "科技圈环境美术（已验收场景画质门）",
         "en": "Science environment art (accepted scene-quality gates)",
         "weight": 20,
-        "numerator": 0,
+        "numerator": 1,
         "denominator": 12,
-        "ratio": "0/12",
-        "percent": 0,
-        "weightedPoints": 0,
+        "ratio": "1/12",
+        "percent": 8.3,
+        "weightedPoints": 1.67,
         "source": {
           "path": "approvalLedger",
           "rule": {
@@ -894,11 +907,13 @@
         "counterField": "approvalLedger.counters.sceneVisualsAccepted",
         "acceptanceKind": "scene-visual",
         "evidence": [
-          "outputs/rpg-2-star-ocean-the-second_mvp-progress_state_v01_20261013-183804-28a1c7e4.json#/approvalLedger/counters/sceneVisualsAccepted"
+          "outputs/rpg-2-star-ocean-the-second_mvp-progress_state_v01_20261013-183804-28a1c7e4.json#/approvalLedger/counters/sceneVisualsAccepted",
+          "docs/qa/rpg-2-star-ocean-the-second_nyc-public-facilities-room2_scene-visual-acceptance_v01_20261017-010900-8f4a2c6e.md",
+          "game/scripts/survey_annex.gd"
         ],
         "nextGate": {
-          "zh": "下一道门：创作者在 640×360 可玩画面中验收第一道科技圈场景画质门，并登记 acceptanceKind=scene-visual 条目。",
-          "en": "Next gate: the creator accepts the first science-sphere scene-quality gate in the playable 640×360 view, recorded as an acceptanceKind scene-visual item."
+          "zh": "下一道门：创作者在 640×360 可玩画面中验收下一处科技圈场景画质，并登记 acceptanceKind=scene-visual 条目。",
+          "en": "Next gate: the creator accepts another science-sphere scene-quality gate in the playable 640×360 view, recorded as an acceptanceKind scene-visual item."
         }
       },
       {
@@ -931,9 +946,9 @@
     ],
     "updater": "tools/rpg-2-star-ocean-the-second_mvp-completion-meter_recompute-and-task-closeout-cli_v01_20261015-233032-d296a2cb.js",
     "lastUpdated": {
-      "at": "2026-10-17T02:01:49Z",
-      "closeoutId": "closeout-20261017-020149-8beeb99b",
-      "percent": 35.8
+      "at": "2026-10-17T05:09:12Z",
+      "closeoutId": "closeout-20261017-050912-7d6d311f",
+      "percent": 37.5
     },
     "taskCloseouts": [
       {
@@ -2972,6 +2987,43 @@
         "evidence": [
           "docs/qa/rpg-2-star-ocean-the-second_protagonist-female_south-run-v03_test-only-motion-pilot_qa-note_unapproved-nonruntime_20261017-015030-7c1d4e92.md",
           "docs/qa/rpg-2-star-ocean-the-second_mvp-completion-ledger_stream-c6-receipt-sync-audit_qa-note_unapproved-v01_20261016-220048-e9547388.md"
+        ]
+      },
+      {
+        "id": "closeout-20261017-050912-7d6d311f",
+        "recordedAt": "2026-10-17T05:09:12Z",
+        "kind": "task",
+        "title": {
+          "zh": "创作者正式验收纽约公共设施室内场景画质，记为 1/12",
+          "en": "Creator accepted NYC public facilities room 2 environment as scene 1 of 12"
+        },
+        "impact": {
+          "changed": true,
+          "percentBefore": 35.8,
+          "percentAfter": 37.5,
+          "deltaPoints": 1.67,
+          "gateChanges": [
+            {
+              "key": "science-environment-art",
+              "category": "science-environment-art",
+              "gate": null,
+              "from": "0/12",
+              "to": "1/12"
+            }
+          ],
+          "categoryChanges": [
+            {
+              "id": "science-environment-art",
+              "before": "0/12",
+              "after": "1/12",
+              "weightedPointsBefore": 0,
+              "weightedPointsAfter": 1.67
+            }
+          ]
+        },
+        "evidence": [
+          "docs/qa/rpg-2-star-ocean-the-second_nyc-public-facilities-room2_scene-visual-acceptance_v01_20261017-010900-8f4a2c6e.md",
+          "game/scripts/survey_annex.gd"
         ]
       }
     ]

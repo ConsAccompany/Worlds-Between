@@ -190,7 +190,7 @@ function nextFromOpen(open, doneText) {
 
 const NEXT_COUNTER = {
   'character-art': {zh: '下一道门：创作者在 approvalLedger 中验收第一套可运行的四方向精灵（含移动动画），并登记 acceptanceKind=runtime-sprite 条目。', en: 'Next gate: the creator accepts the first runtime four-direction sprite set (with locomotion) in approvalLedger, recorded as an acceptanceKind runtime-sprite item.'},
-  'science-environment-art': {zh: '下一道门：创作者在 640×360 可玩画面中验收第一道科技圈场景画质门，并登记 acceptanceKind=scene-visual 条目。', en: 'Next gate: the creator accepts the first science-sphere scene-quality gate in the playable 640×360 view, recorded as an acceptanceKind scene-visual item.'},
+  'science-environment-art': {zh: '下一道门：创作者在 640×360 可玩画面中验收下一处科技圈场景画质，并登记 acceptanceKind=scene-visual 条目。', en: 'Next gate: the creator accepts another science-sphere scene-quality gate in the playable 640×360 view, recorded as an acceptanceKind scene-visual item.'},
   'final-integrated-validation': {zh: '下一道门：角色与环境美术全部验收后，完成第一轮全新存档的真人整合试玩（M9）。', en: 'Next gate: after all character and environment art is accepted, complete the first fresh-save integrated human playtest (M9).'},
 };
 

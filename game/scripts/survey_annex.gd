@@ -13,6 +13,11 @@ const ROOM_TWO_BACKGROUND := {
 	"scifi.outskirts": preload("res://assets/environments/rpg-2-star-ocean-the-second_scifi-outskirts-survey-annex-room-02_environment-background_m8-concept_20261014-143030-3784c1e2.png"),
 	"scifi.ruins": preload("res://assets/environments/rpg-2-star-ocean-the-second_scifi-ruins-survey-annex-room-02_environment-background_m8-concept_20261014-143300-042ae336.png"),
 }
+const CITY_ROOM_TWO_FIXTURES := [
+	preload("res://assets/props/nyc-public-facilities-room2/rpg-2-star-ocean-the-second_nyc-public-facilities-room2_repair-manual-bench-pixel-fixture_unapproved-v01_20261017-010000-7d3c8a91.png"),
+	preload("res://assets/props/nyc-public-facilities-room2/rpg-2-star-ocean-the-second_nyc-public-facilities-room2_duty-log-lectern-pixel-fixture_unapproved-v01_20261017-010000-7d3c8a91.png"),
+	preload("res://assets/props/nyc-public-facilities-room2/rpg-2-star-ocean-the-second_nyc-public-facilities-room2_analog-load-meter-pixel-fixture_unapproved-v01_20261017-010000-7d3c8a91.png"),
+]
 const DISCOVERY_CUE := preload("res://assets/audio/rpg-2-star-ocean-the-second_discovery_interaction-cue_m7_20261013-211230-ad781e52.wav")
 const CLUE_POSITIONS := [Vector2(163, 165), Vector2(320, 165), Vector2(477, 165)]
 const EXIT_POSITION := Vector2(57, 257)
@@ -200,6 +205,10 @@ func _draw() -> void:
 		draw_texture_rect(ROOM_ONE_BACKGROUND[destination_id], Rect2(0, 0, 640, 360), false)
 	elif room == 2 and ROOM_TWO_BACKGROUND.has(destination_id):
 		draw_texture_rect(ROOM_TWO_BACKGROUND[destination_id], Rect2(0, 0, 640, 360), false)
+	if room == 2 and destination_id == "scifi.city":
+		for index in CITY_ROOM_TWO_FIXTURES.size():
+			var fixture_position: Vector2 = CLUE_POSITIONS[index] + Vector2(-32, 2)
+			draw_texture_rect(CITY_ROOM_TWO_FIXTURES[index], Rect2(fixture_position, Vector2(64, 64)), false)
 	for index in CLUE_POSITIONS.size():
 		var position: Vector2 = CLUE_POSITIONS[index]
 		var already := AppState.survey_clues.has(_clue_key((room - 1) * 3 + index))
@@ -337,6 +346,7 @@ func _button(parent: Node, position: Vector2, size: Vector2, callback: Callable)
 func _refresh_text() -> void:
 	var data := _data()
 	title_label.text = AppState.destination_name(destination_id) + " · " + String(data["rooms"][room - 1])
+	title_label.add_theme_font_size_override("font_size", 14 if AppState.language == "en" and destination_id == "scifi.city" and room == 2 else 18)
 	progress_label.text = AppState.text_for("survey_progress") % [_clue_count(), AppState.text_for("field_yes" if AppState.survey_solved.has(destination_id) else "field_no")]
 	help_label.text = AppState.text_for("survey_help")
 	back_button.text = AppState.text_for("survey_leave" if room == 1 else "survey_previous")
