@@ -32,17 +32,22 @@ const LABEL_GAP := 3.0
 # Label slots tried after the place's own label_side, in this order. Diagonal slots sit off the marker's corner.
 const LABEL_SLOTS := ["right", "left", "below", "above", "above_right", "below_right", "above_left", "below_left"]
 # Two-endpoint route inset, shown left of the route card when the trip's origin is outside the regional view.
-const INSET_SIZE := Vector2(190, 94)
+const INSET_SIZE := Vector2(196, 108)
 const GLOBAL_ZOOM_RANGE := 7.0
 const REGION_ZOOM_RANGE := 6.0
 const WHEEL_STEP := 1.25
 
 const COLOR_BACKDROP := Color("#0a121b")
-const COLOR_OCEAN := Color("#123544")
-const COLOR_LAND := Color("#566f58")
-const COLOR_COAST := Color("#a9c6a4")
-const COLOR_GRID := Color(0.16, 0.36, 0.43, 0.75)
-const COLOR_EQUATOR := Color(0.22, 0.47, 0.54, 0.9)
+# Three value families (unapproved map art, 2026-10-17): dark sea, mid lakes, light land. Coastal shelf
+# and land relief come from the baked relief layer (MapData.region_relief); COLOR_LAND is its flat lowland.
+const COLOR_OCEAN := Color("#102f3d")
+const COLOR_LAKE := Color("#2f6476")
+const COLOR_LAND := Color("#677a59")
+const COLOR_COAST := Color("#a3bc9c")
+const COLOR_GRID := Color(0.42, 0.66, 0.7, 0.1)
+const COLOR_EQUATOR := Color(0.42, 0.66, 0.7, 0.22)
+const COLOR_DEGREE := Color(0.62, 0.74, 0.74, 0.62)
+const COLOR_PLATE_EDGE := Color("#2b4d57")
 const COLOR_ROAD := Color(0.89, 0.77, 0.5, 0.7)
 const COLOR_ROAD_MINOR := Color(0.75, 0.68, 0.5, 0.35)
 const COLOR_MARKER := Color("#79cfc0")
@@ -53,8 +58,12 @@ const COLOR_TEXT := Color("#f2f7f2")
 const COLOR_SUBTEXT := Color("#a9c7c4")
 const COLOR_INSET_BG := Color(0.04, 0.08, 0.12, 0.94)
 const COLOR_INSET_RULE := Color(0.15, 0.25, 0.29)
-const COLOR_ROUTE_LINE := Color("#e8f6ff")
+const COLOR_INSET_HEADER := Color("#15333b")
+const COLOR_INSET_SHADOW := Color(0.0, 0.02, 0.04, 0.55)
+# The trip line is warm gold on a dark casing, so it reads against sea, lake and land alike.
+const COLOR_ROUTE_LINE := Color("#f2d27e")
 const COLOR_ROUTE_EDGE := Color(0.03, 0.07, 0.1, 0.9)
+const COLOR_PLANE := Color("#f6fbff")
 
 static var last_mode := "global"
 
@@ -126,6 +135,12 @@ var card_options: VBoxContainer
 var depart_button: Button
 var cancel_button: Button
 var route_inset: RouteInset
+# Credit plate for the relief data (shown on regional views that draw relief) and the credits panel it opens.
+var relief_credit_button: Button
+var credits_overlay: ColorRect
+var credits_title: Label
+var credits_body: RichTextLabel
+var credits_close: Button
 var dragging := false
 
 var _global_coast: Array = []
@@ -209,6 +224,7 @@ func _build_ui() -> void:
 	commerce_button.name = "CommerceButton"
 	_build_field_log(canvas)
 	_build_commerce(canvas)
+	_build_map_credits(canvas)
 
 
 func _build_map_frame(canvas: CanvasLayer) -> void:
@@ -224,12 +240,12 @@ func _build_map_frame(canvas: CanvasLayer) -> void:
 	underlay = Node2D.new()
 	underlay.draw.connect(_draw_underlay)
 	map_frame.add_child(underlay)
-	global_layer = _land_layer(MapData.global_land_rings(), global_view)
+	global_layer = _land_layer(MapData.global_land_rings(), global_view, {}, MapData.globe_sphere_tint())
 	_global_coast = _unit_rings(MapData.global_land_rings(), global_view)
 	for region_id in region_views:
 		var projection: GeoProjection = region_views[region_id]
 		var key := MapData.geodata_key(region_id)
-		region_layers[region_id] = _land_layer(MapData.region_land_rings(key), projection)
+		region_layers[region_id] = _land_layer(MapData.region_land_rings(key), projection, MapData.region_relief(key))
 		region_layers[region_id].visible = false
 		_region_coasts[region_id] = _unit_rings(MapData.region_land_rings(key), projection)
 		var roads := []
@@ -269,6 +285,41 @@ func _build_map_frame(canvas: CanvasLayer) -> void:
 	zoom_out_button.text = "−"
 	globe_button = _button(map_frame, Rect2(38, 222, 54, 24), 10, enter_global)
 	region_button = _button(map_frame, Rect2(96, 222, 96, 24), 10, _open_active_region)
+	_build_relief_credit()
+
+
+# The relief layer's data providers ask for credit where the relief is shown: a small plate on the bottom row,
+# between the scale bar and the date, which opens the full attribution.
+func _build_relief_credit() -> void:
+	relief_credit_button = _button(map_frame, Rect2(Vector2.ZERO, Vector2.ZERO), 9, open_map_credits)
+	relief_credit_button.name = "ReliefCredit"
+	relief_credit_button.add_theme_color_override("font_color", COLOR_SUBTEXT)
+	relief_credit_button.add_theme_color_override("font_hover_color", COLOR_TEXT)
+	relief_credit_button.add_theme_color_override("font_focus_color", COLOR_TEXT)
+	relief_credit_button.add_theme_color_override("font_pressed_color", COLOR_HERE)
+	for state in ["normal", "hover", "pressed", "focus"]:
+		var style := StyleBoxFlat.new()
+		style.bg_color = COLOR_LABEL_BG
+		style.draw_center = state != "focus"
+		style.border_color = COLOR_PLATE_EDGE if state == "normal" else COLOR_MARKER
+		style.set_border_width_all(1)
+		style.set_content_margin_all(0)
+		style.content_margin_left = 4
+		style.content_margin_right = 4
+		relief_credit_button.add_theme_stylebox_override(state, style)
+	relief_credit_button.visible = false
+
+
+# Right-aligned 8 px left of the date text and never over the scale bar; shown only on a regional view with relief.
+func _layout_relief_credit() -> void:
+	relief_credit_button.text = MapText.t("credit_relief")
+	relief_credit_button.visible = mode == "region" and not MapData.region_relief(MapData.geodata_key(active_region_id)).is_empty()
+	var font := calendar_label.get_theme_font("font")
+	var date_left := calendar_label.position.x + calendar_label.size.x - font.get_string_size(calendar_label.text, HORIZONTAL_ALIGNMENT_LEFT, -1, 10).x
+	relief_credit_button.size = Vector2.ZERO
+	var plate := relief_credit_button.get_combined_minimum_size()
+	relief_credit_button.size = plate
+	relief_credit_button.position = Vector2(maxf(SCALE_BAR_RECT.end.x + 6.0, date_left - 8.0 - plate.x), 254.0)
 
 
 # The status line sits on its own dark panel so coastlines and grid lines never run
@@ -304,18 +355,46 @@ func status_rect() -> Rect2:
 	return Rect2(legend_backing.position, legend_backing.get_combined_minimum_size())
 
 
-func _land_layer(rings: Array, projection: GeoProjection) -> Node2D:
+# Land polygons, then lake holes, then (regional layers) the relief and shelf texture on top. The texture is a
+# lon/lat grid, which this projection maps to an axis-aligned rectangle; nearest filtering keeps its pixels crisp.
+# On the globe (tint), each land ring takes its civilization sphere's colour; a ring several spheres share
+# (Afro-Eurasia, the Americas, New Guinea) clips the sphere texture to its own polygon, so no coast moves.
+func _land_layer(rings: Array, projection: GeoProjection, relief := {}, tint := {}) -> Node2D:
 	var layer := Node2D.new()
 	map_frame.add_child(layer)
 	for hole_pass in [false, true]:
-		for ring in rings:
+		for i in rings.size():
+			var ring: Dictionary = rings[i]
 			if ring["hole"] != hole_pass:
 				continue
 			var polygon := Polygon2D.new()
 			polygon.polygon = _project_points(ring["points"], projection)
-			polygon.color = COLOR_OCEAN if hole_pass else COLOR_LAND
+			polygon.color = COLOR_LAKE if hole_pass else COLOR_LAND
 			layer.add_child(polygon)
+			if hole_pass or tint.is_empty():
+				continue
+			var sphere: int = tint["ring_spheres"][i]
+			if sphere > 0:
+				polygon.color = tint["colors"][sphere]
+			elif sphere < 0:
+				polygon.name = "SphereClip%d" % i
+				polygon.clip_children = CanvasItem.CLIP_CHILDREN_AND_DRAW
+				polygon.add_child(_texture_sheet("SphereTint", tint, projection))
+	if not relief.is_empty():
+		layer.add_child(_texture_sheet("Relief", relief, projection))
 	return layer
+
+
+# A lon/lat texture ({"texture", "bbox_wsen"}) drawn over its box in this projection, nearest filtered.
+func _texture_sheet(sheet_name: String, source: Dictionary, projection: GeoProjection) -> Node2D:
+	var bbox: Array = source["bbox_wsen"]
+	var top_left := projection.project(bbox[0], bbox[3])
+	var rect := Rect2(top_left, projection.project(bbox[2], bbox[1]) - top_left)
+	var sheet := Node2D.new()
+	sheet.name = sheet_name
+	sheet.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	sheet.draw.connect(func(): sheet.draw_texture_rect(source["texture"], rect, false))
+	return sheet
 
 
 func _unit_rings(rings: Array, projection: GeoProjection) -> Array:
@@ -416,6 +495,49 @@ func _build_field_log(canvas: CanvasLayer) -> void:
 	field_close.size = Vector2(135, 34)
 	field_close.pressed.connect(_close_field_log)
 	field_overlay.add_child(field_close)
+
+
+# Map data credits: the relief providers' required attribution, opened from the relief credit plate.
+func _build_map_credits(canvas: CanvasLayer) -> void:
+	credits_overlay = ColorRect.new()
+	credits_overlay.name = "MapCreditsOverlay"
+	credits_overlay.color = Color(0.04, 0.08, 0.12, 0.93)
+	credits_overlay.size = Vector2(640, 360)
+	credits_overlay.visible = false
+	canvas.add_child(credits_overlay)
+	var panel := ColorRect.new()
+	panel.position = Vector2(72, 62)
+	panel.size = Vector2(496, 236)
+	panel.color = Color("#25404b")
+	credits_overlay.add_child(panel)
+	credits_title = Label.new()
+	credits_title.position = Vector2(90, 72)
+	credits_title.add_theme_font_size_override("font_size", 16)
+	credits_title.add_theme_color_override("font_color", Color("#f0e3c5"))
+	credits_overlay.add_child(credits_title)
+	credits_body = RichTextLabel.new()
+	credits_body.name = "MapCreditsBody"
+	credits_body.position = Vector2(90, 98)
+	credits_body.size = Vector2(462, 150)
+	credits_body.scroll_active = true
+	credits_body.add_theme_font_size_override("normal_font_size", 10)
+	credits_body.add_theme_color_override("default_color", Color("#e0eeeb"))
+	credits_overlay.add_child(credits_body)
+	credits_close = _button(credits_overlay, Rect2(432, 256, 120, 30), 11, close_map_credits)
+
+
+func open_map_credits() -> void:
+	if _commerce_modal():
+		return
+	_refresh_text()
+	credits_overlay.visible = true
+	credits_close.grab_focus()
+
+
+func close_map_credits() -> void:
+	credits_overlay.visible = false
+	if relief_credit_button.visible:
+		relief_credit_button.grab_focus()
 
 
 func _build_commerce(canvas: CanvasLayer) -> void:
@@ -589,6 +711,16 @@ func _marker_button(parent: Control) -> Button:
 	background.color = COLOR_LABEL_BG
 	background.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	button.add_child(background)
+	# 1 px plate edge in the status panel's style, so map labels read as the same UI family.
+	var edge := Panel.new()
+	edge.name = "LabelEdge"
+	var plate := StyleBoxFlat.new()
+	plate.draw_center = false
+	plate.border_color = COLOR_PLATE_EDGE
+	plate.set_border_width_all(1)
+	edge.add_theme_stylebox_override("panel", plate)
+	edge.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	button.add_child(edge)
 	for line in ["Primary", "Secondary"]:
 		var label := Label.new()
 		label.name = line
@@ -622,6 +754,7 @@ func _region_anchor(region_id: String) -> Vector2:
 # every other marker dot and the labels already placed, so neighbours such as New York City and
 # Yonkers keep visibly separate name plates in both languages.
 func _layout_markers() -> void:
+	_layout_relief_credit()
 	var language: String = AppState.language
 	var other := MapText.other_language()
 	var bounds := Rect2(Vector2(2, 2), view.viewport.size - Vector2(4, 4))
@@ -672,6 +805,8 @@ func fixed_ui_rects() -> Array:
 	out.append(Rect2(calendar_label.position + Vector2(calendar_label.size.x - width, 0), Vector2(width, calendar_label.size.y)))
 	if mode == "region":
 		out.append(SCALE_BAR_RECT)
+	if relief_credit_button != null and relief_credit_button.visible:
+		out.append(Rect2(relief_credit_button.position, relief_credit_button.size))
 	if route_card != null and route_card.visible:
 		out.append(_card_local_rect())
 	var grown := []
@@ -726,6 +861,9 @@ func _place_marker_button(button: Button, marker: Vector2, side: String, bounds:
 	var background: ColorRect = button.get_node("LabelBackground")
 	background.position = label_local
 	background.size = label_size
+	var edge: Control = button.get_node("LabelEdge")
+	edge.position = label_local
+	edge.size = label_size
 	primary.position = label_local + Vector2(4, -1)
 	secondary.position = label_local + Vector2(4, p_size.y - 3.0)
 	return label_rect
@@ -815,7 +953,7 @@ func _draw_region_annotations() -> void:
 			var at := view.geo_to_screen(reference["lon"], reference["lat"])
 			overlay.draw_rect(Rect2(at - Vector2(2, 2), Vector2(4, 4)), COLOR_SUBTEXT)
 	for entry in annotation_label_rects():
-		overlay.draw_string(font, entry["baseline"], entry["text"], HORIZONTAL_ALIGNMENT_LEFT, -1, 9, COLOR_SUBTEXT)
+		overlay.draw_string(font, entry["baseline"], entry["text"], HORIZONTAL_ALIGNMENT_LEFT, -1, 9, COLOR_DEGREE)
 	# Scale bar: valid along meridians and the standard parallel.
 	var km_per_px := view.km_per_pixel()
 	var length_km := 10.0
@@ -845,10 +983,6 @@ func annotation_label_rects() -> Array:
 	# Longitude labels run in one row just below the status panel; other labels under it are left out.
 	var status := status_rect().grow(1)
 	var lon_baseline := maxf(26.0, status.end.y + font.get_ascent(9))
-	for lon in range(ceili(clip[0]), floori(clip[2]) + 1):
-		var x := view.geo_to_screen(lon, 0).x
-		if x > 24 and x < view.viewport.size.x - 24:
-			candidates.append([degree_text(lon, "E", "W"), Vector2(x + 2, lon_baseline)])
 	for lat in range(ceili(clip[1]), floori(clip[3]) + 1):
 		var y := view.geo_to_screen(visible.position.x, lat).y
 		if y > 30 and y < view.viewport.size.y - 50:
@@ -857,6 +991,10 @@ func annotation_label_rects() -> Array:
 			if card.has_area():
 				x = card.position.x - font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, 9).x - 2
 			candidates.append([text, Vector2(x, y - 2)])
+	for lon in range(ceili(clip[0]), floori(clip[2]) + 1):
+		var x := view.geo_to_screen(lon, 0).x
+		if x > 24 and x < view.viewport.size.x - 24:
+			candidates.append([degree_text(lon, "E", "W"), Vector2(x + 2, lon_baseline)])
 	for reference in MapData.reference_places():
 		if reference["geo_region_id"] == active_region_id:
 			var at := view.geo_to_screen(reference["lon"], reference["lat"])
@@ -870,6 +1008,13 @@ func annotation_label_rects() -> Array:
 		if card.has_area() and rect.intersects(card):
 			continue
 		if inset.has_area() and rect.intersects(inset):
+			continue
+		# Latitude labels come first (the card keeps every one); a later label that would print over one already
+		# kept, such as a longitude label on a latitude line's row, is left out.
+		var overlaps := false
+		for kept in out:
+			overlaps = overlaps or rect.grow(1).intersects(kept["rect"])
+		if overlaps:
 			continue
 		out.append({"text": candidate[0], "baseline": candidate[1], "rect": rect})
 	return out
@@ -1103,7 +1248,8 @@ func _sync_route_inset() -> void:
 	if km > 0.0:
 		caption += " · " + MapText.t("air_km" if option["air_distance_km"] > 0.0 else "road_km") % _km_text(km)
 	route_inset.show_route(origin, destination, key, rings, clip, air,
-		MapData.text(origin, "map_label", language), MapData.text(destination, "map_label", language), caption)
+		MapData.text(origin, "map_label", language), MapData.text(destination, "map_label", language), caption,
+		MapText.t("inset_title_air" if air else "inset_title_car"))
 	route_inset.visible = true
 
 
@@ -1140,7 +1286,8 @@ class RouteInset:
 	extends Control
 
 	const CAPTION_HEIGHT := 14.0
-	const DASH := 4.0
+	const HEADER_HEIGHT := 13.0
+	const DASH := 6.0
 	const GAP := 3.0
 	const DOT := 1.0
 	const DOT_GAP := 3.0
@@ -1159,6 +1306,7 @@ class RouteInset:
 	var origin_label: Label
 	var dest_label: Label
 	var caption: Label
+	var header: Label
 	var scale_km := 0.0
 	var scale_px := 0.0
 	var route_key := ""
@@ -1167,7 +1315,7 @@ class RouteInset:
 		name = "RouteInset"
 		mouse_filter = Control.MOUSE_FILTER_IGNORE
 		size = INSET_SIZE
-		area = Rect2(Vector2(1, 1), Vector2(size.x - 2, size.y - CAPTION_HEIGHT - 2))
+		area = Rect2(Vector2(1, 1 + HEADER_HEIGHT), Vector2(size.x - 2, size.y - CAPTION_HEIGHT - HEADER_HEIGHT - 2))
 		var clip := Control.new()
 		clip.position = area.position
 		clip.size = area.size
@@ -1184,6 +1332,12 @@ class RouteInset:
 		caption = _plate_label(9, COLOR_SUBTEXT)
 		caption.remove_theme_stylebox_override("normal")
 		caption.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+		# Header strip: names the inset as the trip's path, so it never reads as part of the map underneath.
+		header = _plate_label(9, COLOR_HERE)
+		header.remove_theme_stylebox_override("normal")
+		header.position = Vector2(6, 0)
+		header.size = Vector2(size.x - 12.0, HEADER_HEIGHT)
+		header.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 
 	func _plate_label(font_size: int, color: Color) -> Label:
 		var label := Label.new()
@@ -1202,7 +1356,7 @@ class RouteInset:
 
 	# Rebuilds the geometry only when the trip changes; texts follow the language and the selected option.
 	func show_route(origin: Dictionary, destination: Dictionary, land_key: String, rings: Array, clip_bbox: Array, is_air: bool,
-			origin_text: String, dest_text: String, caption_text: String) -> void:
+			origin_text: String, dest_text: String, caption_text: String, title_text := "") -> void:
 		var key := "%s>%s:%s:%s" % [origin["id"], destination["id"], land_key, is_air]
 		if key != route_key:
 			route_key = key
@@ -1211,6 +1365,7 @@ class RouteInset:
 		origin_label.text = origin_text
 		dest_label.text = dest_text
 		caption.text = caption_text
+		header.text = title_text
 		for label in [origin_label, dest_label, caption]:
 			label.reset_size()
 		# The northern place is labelled above its dot, the southern one below, so neither name sits on the line.
@@ -1246,7 +1401,7 @@ class RouteInset:
 					points.append(projection.geo_to_screen(p.x, p.y))
 				var polygon := Polygon2D.new()
 				polygon.polygon = points
-				polygon.color = COLOR_OCEAN if hole_pass else COLOR_LAND
+				polygon.color = COLOR_LAKE if hole_pass else COLOR_LAND
 				land.add_child(polygon)
 				var closed := points.duplicate()
 				closed.append(points[0])
@@ -1273,8 +1428,12 @@ class RouteInset:
 		out.y = clampf(out.y, area.position.y, area.end.y - s.y)
 		return out.round()
 
+	# Drop shadow (2 px, outside the slot by less than LABEL_GAP), panel, header strip, teal border, caption rule.
 	func _draw() -> void:
+		draw_rect(Rect2(Vector2(2, 2), size), COLOR_INSET_SHADOW)
 		draw_rect(Rect2(Vector2.ZERO, size), COLOR_INSET_BG)
+		draw_rect(Rect2(Vector2(1, 1), Vector2(size.x - 2, HEADER_HEIGHT)), COLOR_INSET_HEADER)
+		draw_line(Vector2(1, area.position.y - 0.5), Vector2(size.x - 1, area.position.y - 0.5), COLOR_INSET_RULE, 1.0)
 		draw_rect(Rect2(Vector2(0.5, 0.5), size - Vector2.ONE), COLOR_MARKER, false, 1.0)
 		draw_line(Vector2(1, area.end.y + 0.5), Vector2(size.x - 1, area.end.y + 0.5), COLOR_INSET_RULE, 1.0)
 		if scale_px > 0.0:
@@ -1291,19 +1450,19 @@ class RouteInset:
 			lines.draw_polyline(ring, COLOR_COAST, 1.0)
 		var segments := dashes(arc, DASH, GAP) if air else dashes(arc, DOT, DOT_GAP)
 		for dash in segments:
-			lines.draw_line(dash[0], dash[1], COLOR_ROUTE_EDGE, 3.0)
+			lines.draw_line(dash[0], dash[1], COLOR_ROUTE_EDGE, 4.0)
 		for dash in segments:
-			lines.draw_line(dash[0], dash[1], COLOR_ROUTE_LINE, 1.5)
+			lines.draw_line(dash[0], dash[1], COLOR_ROUTE_LINE, 2.0)
 		if air:
 			# Generic aircraft wedge at mid-route, nose toward the destination.
-			var f := plane_dir * 5.0
+			var f := plane_dir * 6.5
 			var s := Vector2(-plane_dir.y, plane_dir.x)
-			var body := PackedVector2Array([plane_pt + f, plane_pt - f * 0.7 + s * 3.6, plane_pt - f * 0.35, plane_pt - f * 0.7 - s * 3.6])
+			var body := PackedVector2Array([plane_pt + f, plane_pt - f * 0.7 + s * 4.6, plane_pt - f * 0.35, plane_pt - f * 0.7 - s * 4.6])
 			lines.draw_colored_polygon(body, COLOR_ROUTE_EDGE)
 			var inner := PackedVector2Array()
 			for p in body:
-				inner.append(plane_pt + (p - plane_pt) * 0.72)
-			lines.draw_colored_polygon(inner, COLOR_ROUTE_LINE)
+				inner.append(plane_pt + (p - plane_pt) * 0.7)
+			lines.draw_colored_polygon(inner, COLOR_PLANE)
 		# Origin: the party-here ring; destination: the selection ring. Same marks as the map markers.
 		for at in [origin_pt, dest_pt]:
 			lines.draw_circle(at, 4.0, COLOR_MARKER_EDGE)
@@ -1399,6 +1558,9 @@ func _refresh_text() -> void:
 		lines.append(AppState.text_for("report_ready"))
 	field_body.text = "\n".join(lines)
 	field_close.text = AppState.text_for("save_back")
+	credits_title.text = MapText.t("credits_title")
+	credits_body.text = MapText.t("credits_body")
+	credits_close.text = MapText.t("credits_close")
 	talk_button.text = AppState.text_for("talk_open")
 	talk_button.disabled = AppState.recruited_members.is_empty()
 	_refresh_commerce()
@@ -1598,6 +1760,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		if commerce_overlay.visible:
 			close_commerce()
+		elif credits_overlay.visible:
+			close_map_credits()
 		elif field_overlay.visible:
 			_close_field_log()
 		elif route_card.visible:

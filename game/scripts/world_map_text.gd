@@ -2,7 +2,8 @@ extends RefCounted
 
 # Map-only bilingual strings. Shared labels (save, growth, field log) still come from AppState.
 # Player-facing only: production state (provisional picks, art review) and data sources stay in
-# the Game Bible and QA notes, never on screen. A route shows only its mode, an approximate distance,
+# the Game Bible and QA notes, never on screen. The one exception is the attribution that map data
+# providers require (credit_relief, credits_*). A route shows only its mode, an approximate distance,
 # the whole-hour trip time and the arrival; no airports, check-in, waiting or other trip components.
 
 const STRINGS := {
@@ -37,6 +38,12 @@ const STRINGS := {
 		"enter_here": "进入场景",
 		"cancel": "取消",
 		"travel_failed": "出发未完成，未扣除时间。",
+		"inset_title_air": "飞行路线",
+		"inset_title_car": "车行路线",
+		"credit_relief": "地形数据：Mapzen · USGS · NOAA",
+		"credits_title": "地图数据来源",
+		"credits_body": "美国东北部与五大湖区视图中的地形与近岸大陆架，取自 Tilezen / Mapzen Terrarium 地形瓦片（缩放级 7）。数据方要求的署名（原文）：\n• Mapzen\n• Global ETOPO1 terrain data U.S. National Oceanic and Atmospheric Administration\n• United States 3DEP (formerly NED) and global GMTED2010 and SRTM terrain data courtesy of the U.S. Geological Survey.\n（NOAA：美国国家海洋和大气管理局；USGS：美国地质调查局）\n来源：github.com/tilezen/joerd/blob/master/docs/attribution.md\n海岸线、湖泊、边界与全球板块配色基于 Natural Earth 公有领域数据。",
+		"credits_close": "返回",
 	},
 	"en": {
 		"title": "Global map · Science region",
@@ -69,6 +76,12 @@ const STRINGS := {
 		"enter_here": "Enter scene",
 		"cancel": "Cancel",
 		"travel_failed": "Departure did not complete. No time was spent.",
+		"inset_title_air": "Flight path",
+		"inset_title_car": "Drive route",
+		"credit_relief": "Relief data: Mapzen · USGS · NOAA",
+		"credits_title": "Map data credits",
+		"credits_body": "The relief and coastal shelf in the US Northeast and US Great Lakes views are baked from Tilezen / Mapzen Terrarium terrain tiles (zoom 7). Required attribution:\n• Mapzen\n• Global ETOPO1 terrain data U.S. National Oceanic and Atmospheric Administration\n• United States 3DEP (formerly NED) and global GMTED2010 and SRTM terrain data courtesy of the U.S. Geological Survey.\nSource: github.com/tilezen/joerd/blob/master/docs/attribution.md\nCoastlines, lakes, borders and the globe's sphere colours are based on Natural Earth public-domain data.",
+		"credits_close": "Back",
 	},
 }
 

@@ -10,8 +10,21 @@ extends RefCounted
 const REGISTRY_PATH := "res://data/world-map/rpg-2-star-ocean-the-second_earth-map_place-registry_m2-us-science-v02_20261015-175011-eeaa6baa.json"
 const GEODATA_PATH := "res://data/world-map/rpg-2-star-ocean-the-second_earth-map_runtime-geodata_m2-us-science-v02_20261015-175011-944d9635.json"
 
+# Relief and coastal-shelf layer per geodata key (unapproved map art, 2026-10-17): real elevation and depth
+# classes on a lon/lat grid, masked by the same land and lake rings. Baked by
+# tools/rpg-2-star-ocean-the-second_global-map_us-east-relief-bake_m2-map-art-native-v01_20261017-015515-aa01b973.py.
+const RELIEF_PATHS := {
+	"us_east": "res://data/world-map/rpg-2-star-ocean-the-second_earth-map_us-east-relief-layer_m2-map-art-native-v01_20261017-015515-7bf04753.json",
+}
+# Globe sphere tints (unapproved map art, 2026-10-17): one restrained land colour per Earth civilization sphere,
+# on a lon/lat grid, with each global land ring's sphere (or -1 when several share it). Baked from Natural Earth
+# countries by tools/rpg-2-star-ocean-the-second_global-map_globe-sphere-tint-bake_m2-map-art-native-v01r1_20261017-022144-f9b0d28b.py.
+const GLOBE_TINT_PATH := "res://data/world-map/rpg-2-star-ocean-the-second_earth-map_globe-sphere-tint-layer_m2-map-art-native-v01r1_20261017-022144-f9b0d28b.json"
+
 static var _registry: Dictionary = {}
 static var _geodata: Dictionary = {}
+static var _relief: Dictionary = {}
+static var _globe_tint = null
 static var _ring_cache: Dictionary = {}
 static var _travel_data: WorldRouteRegistry = null
 
@@ -112,6 +125,40 @@ static func region_roads(region_key: String) -> Array:
 			lines.append({"major": line["type"] == "Major Highway", "points": _points(line["points"])})
 		_ring_cache[cache_key] = lines
 	return _ring_cache[cache_key]
+
+
+# {"texture": ImageTexture, "bbox_wsen": Array, "land_low_color": String} for a geodata layer, else {}.
+# The texture's rows run north to south and its columns west to east, one cell per lon/lat step.
+static func region_relief(region_key: String) -> Dictionary:
+	if not _relief.has(region_key):
+		var entry := {}
+		if RELIEF_PATHS.has(region_key) and FileAccess.file_exists(RELIEF_PATHS[region_key]):
+			var data := _load_json(RELIEF_PATHS[region_key])
+			var image := Image.new()
+			if not data.is_empty() and image.load_png_from_buffer(Marshalls.base64_to_raw(String(data["png_base64"]))) == OK:
+				entry = {"texture": ImageTexture.create_from_image(image), "bbox_wsen": data["bbox_wsen"], "land_low_color": String(data["land_low_color"])}
+		_relief[region_key] = entry
+	return _relief[region_key]
+
+
+# {"texture": ImageTexture, "bbox_wsen": Array, "ring_spheres": Array, "colors": Array[Color], "roles": Array}
+# for the globe, else {} (missing file, or baked for a different global land layer). ring_spheres[i] is the
+# palette index of global land ring i's one sphere, -1 when several spheres share it, 0 for a hole.
+static func globe_sphere_tint() -> Dictionary:
+	if _globe_tint == null:
+		_globe_tint = {}
+		if FileAccess.file_exists(GLOBE_TINT_PATH):
+			var data := _load_json(GLOBE_TINT_PATH)
+			var image := Image.new()
+			if not data.is_empty() and int(data["global_ring_count"]) == global_land_rings().size() 					and image.load_png_from_buffer(Marshalls.base64_to_raw(String(data["png_base64"]))) == OK:
+				var colors := []
+				var roles := []
+				for entry in data["palette"]:
+					colors.append(Color(entry["color"]) if entry["color"] != null else Color(0, 0, 0, 0))
+					roles.append(String(entry["role"]))
+				_globe_tint = {"texture": ImageTexture.create_from_image(image), "bbox_wsen": data["bbox_wsen"],
+					"ring_spheres": data["ring_spheres"], "colors": colors, "roles": roles}
+	return _globe_tint
 
 
 static func region_clip_bbox(region_key: String) -> Array:

@@ -8,7 +8,8 @@
     "Route distances, travel minutes and arrival dates come only from the AppState route API. This file has none.",
     "v02 (2026-10-15): the creator approved a US science sphere (New York City hub, Yonkers outskirts, Washington, D.C. ruins, Chicago by air). The science board covers the US and Canada only. The v01 registry (Yangtze Delta, Shanghai set) stays on disk for later Asia work; its place ids are hidden retired aliases in the travel data and have no display entry here.",
     "Boards (2026-10-15 creator decision): five Earth spheres, science (US + Canada), magic (South America), wuxia (Asia), nature (Oceania) and culture (Europe + Africa, formerly fantasy; legacy_ids keeps the old id as an alias only), plus the separate portal-only final planet (id offworld). Only science has places.",
-    "Geo regions may share one geodata layer (geodata_key). frame_bbox_wsen is the lon/lat box a region opens on; frame_px is the map-local pixel rectangle it is fitted into. Both are display choices, not geography. Region frames and label sides are engineering choices, not accepted map art."
+    "Geo regions may share one geodata layer (geodata_key). frame_bbox_wsen is the lon/lat box a region opens on; frame_px is the map-local pixel rectangle it is fitted into. Both are display choices, not geography. Region frames and label sides are engineering choices, not accepted map art.",
+    "2026-10-17 (unapproved native map-art pass): New York City labels below-left and Yonkers above-right, so their plates sit diagonally apart instead of stacking and their buttons never overlap; the Northeast frame_px is [205, 38, 207, 178] and its pan box reaches 70.0 W (open Atlantic), so New York City and Yonkers stay clear of the open route card, Washington stays right of the view buttons and the two New York dots stay 19 px apart. Display only; coordinates are unchanged."
   ],
   "design_sources": [
     "docs/design/rpg-2-star-ocean-the-second_global-earth-map-real-place-travel_rules-v01_20261014-235354-2b5d4d98.md",
@@ -93,7 +94,7 @@
       "pan_bbox_wsen": [
         -80.5,
         36.8,
-        -70.5,
+        -70.0,
         44.0
       ],
       "global_zoom_bbox_wsen": [
@@ -103,10 +104,10 @@
         42.0
       ],
       "frame_px": [
-        204,
-        42,
-        214,
-        194
+        205,
+        38,
+        207,
+        178
       ],
       "global_label_side": "right"
     },
@@ -151,14 +152,14 @@
       "kind": "city",
       "board_id": "science",
       "geo_region_id": "us_northeast",
-      "label_side": "below"
+      "label_side": "below_left"
     },
     {
       "id": "earth.us.ny.yonkers-outskirts",
       "kind": "outskirts",
       "board_id": "science",
       "geo_region_id": "us_northeast",
-      "label_side": "above"
+      "label_side": "above_right"
     },
     {
       "id": "earth.us.dc.washington-ruins",
