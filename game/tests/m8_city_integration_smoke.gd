@@ -140,6 +140,8 @@ func _run() -> void:
 		await _settle()
 		if not _check(current_scene.get("hero").position == Vector2(82, 203.5), "old city spawn recovers onto west road"):
 			return
+		if not _check(current_scene._city_walkable(current_scene.get("hero").position), "recovered legacy position is standable in the active city layout"):
+			return
 		current_scene.get("back_button").pressed.emit()
 		await _settle()
 		if not _check(current_scene.name == "ScifiWorldMap", "city returns to world map"):

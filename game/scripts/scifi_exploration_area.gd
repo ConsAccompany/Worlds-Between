@@ -7,6 +7,7 @@ const NativeIdle := preload("res://scripts/character_directional_idle.gd")
 const NativeMotion := preload("res://scripts/character_directional_motion.gd")
 const BATTLE_SCENE := preload("res://scenes/battle_arena.tscn")
 const CityNavigation := preload("res://scripts/city_navigation.gd")
+const CityHallParkV06 := preload("res://scripts/city_hall_park_v06_scene.gd")
 const MOVE_SPEED := 140.0
 const SPAWN := Vector2(82, 260)
 const CITY_SPAWN := Vector2(340, 253)
@@ -47,6 +48,8 @@ var field_npc: Sprite2D
 var city_canopy: Polygon2D
 var city_hero_silhouette: Sprite2D
 var city_occlusion_indicator: Label
+# Opt-in UNAPPROVED City Hall Park v06 layers (null = existing city plate).
+var city_hall_park
 var city_facing := "south"
 var walk_time := 0.0
 var walk_phase := 0
@@ -94,6 +97,14 @@ func _ready() -> void:
 	enemy_position = config["enemy"]
 	enemy_visible = destination_id != "scifi.city" and not AppState.enemy_cleared_for_return
 	texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
+	if destination_id == "scifi.city" and CityHallParkV06.enabled():
+		city_hall_park = CityHallParkV06.new()
+	if city_hall_park != null:
+		if city_hall_park.load_scene():
+			texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+			city_hall_park.build_nodes(self)
+		else:
+			city_hall_park = null
 	_build_actors()
 	if destination_id == "scifi.city":
 		_build_city_foreground()
@@ -161,7 +172,8 @@ func _draw() -> void:
 	if not AREA_CONFIG.has(destination_id):
 		return
 	if destination_id == "scifi.city":
-		draw_texture_rect(CITY_BACKGROUND, Rect2(0, 0, 640, 360), false)
+		if city_hall_park == null:
+			draw_texture_rect(CITY_BACKGROUND, Rect2(0, 0, 640, 360), false)
 		_draw_city_hotspots()
 		return
 	var background: Texture2D = OUTSKIRTS_BACKGROUND if destination_id == "scifi.outskirts" else RUINS_BACKGROUND
@@ -226,6 +238,9 @@ func _draw_city_marker(at: Vector2, color: Color, kind: String) -> void:
 
 
 func _build_city_foreground() -> void:
+	if city_hall_park != null:
+		_build_city_silhouette(CityHallParkV06.SILHOUETTE_Z)
+		return
 	# Reuse exact pixels from the city plate. These polygons draw in front of
 	# actors whose feet are behind the garden canopy or street furniture.
 	# They are scene geometry, not a second edited copy of the illustration.
@@ -245,13 +260,17 @@ func _build_city_foreground() -> void:
 		Vector2(497, 157), Vector2(509, 154), Vector2(519, 167),
 		Vector2(524, 187), Vector2(518, 211), Vector2(504, 212), Vector2(498, 195)
 	]), 213)
+	_build_city_silhouette(306)
+
+
+func _build_city_silhouette(depth: int) -> void:
 	city_hero_silhouette = Sprite2D.new()
 	city_hero_silhouette.texture = hero.texture
 	city_hero_silhouette.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	city_hero_silhouette.offset = hero.offset
 	city_hero_silhouette.scale = hero.scale
 	city_hero_silhouette.modulate = Color(0.72, 0.93, 1.0, 0.55)
-	city_hero_silhouette.z_index = 306
+	city_hero_silhouette.z_index = depth
 	city_hero_silhouette.visible = false
 	add_child(city_hero_silhouette)
 
@@ -274,7 +293,8 @@ func _update_city_labels() -> void:
 	if destination_id != "scifi.city" or hero == null or not is_instance_valid(hero) or assist_label == null:
 		return
 	var position := hero.position
-	var hidden_by_canopy := Geometry2D.is_point_in_polygon(position, city_canopy.polygon)
+	var hidden_by_canopy: bool = city_hall_park.hidden_by_canopy(position) if city_hall_park != null \
+		else Geometry2D.is_point_in_polygon(position, city_canopy.polygon)
 	# Mirror the hero's current walk/idle frame so the canopy outline never lags.
 	city_hero_silhouette.texture = hero.texture
 	city_hero_silhouette.offset = hero.offset
@@ -290,14 +310,20 @@ func _update_city_labels() -> void:
 
 
 func _city_safe_position(at: Vector2) -> Vector2:
+	if city_hall_park != null:
+		return city_hall_park.safe_position(at)
 	return CityNavigation.safe_position(at)
 
 
 func _city_slide_position(at: Vector2) -> Vector2:
+	if city_hall_park != null:
+		return city_hall_park.slide_position(hero.position, at)
 	return CityNavigation.slide_position(hero.position, at)
 
 
 func _city_walkable(at: Vector2) -> bool:
+	if city_hall_park != null:
+		return city_hall_park.walkable(at)
 	return CityNavigation.walkable(at)
 
 
