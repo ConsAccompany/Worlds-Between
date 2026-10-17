@@ -25,6 +25,14 @@ const STATUS_POS := Vector2(6, 4)
 const STATUS_MAX_TEXT_WIDTH := 264.0
 # Scale bar in the regional view, below the lowest framed marker and right of the view buttons.
 const SCALE_BAR_ORIGIN := Vector2(200, 258)
+# Space the scale bar and its "100 km" text may take; labels and the route inset keep clear of it.
+const SCALE_BAR_RECT := Rect2(199, 250, 140, 14)
+# Clear pixels kept between a marker label and fixed controls, other labels or other markers.
+const LABEL_GAP := 3.0
+# Label slots tried after the place's own label_side, in this order. Diagonal slots sit off the marker's corner.
+const LABEL_SLOTS := ["right", "left", "below", "above", "above_right", "below_right", "above_left", "below_left"]
+# Two-endpoint route inset, shown left of the route card when the trip's origin is outside the regional view.
+const INSET_SIZE := Vector2(190, 94)
 const GLOBAL_ZOOM_RANGE := 7.0
 const REGION_ZOOM_RANGE := 6.0
 const WHEEL_STEP := 1.25
@@ -43,6 +51,10 @@ const COLOR_HERE := Color("#f0d68a")
 const COLOR_LABEL_BG := Color(0.04, 0.08, 0.12, 0.88)
 const COLOR_TEXT := Color("#f2f7f2")
 const COLOR_SUBTEXT := Color("#a9c7c4")
+const COLOR_INSET_BG := Color(0.04, 0.08, 0.12, 0.94)
+const COLOR_INSET_RULE := Color(0.15, 0.25, 0.29)
+const COLOR_ROUTE_LINE := Color("#e8f6ff")
+const COLOR_ROUTE_EDGE := Color(0.03, 0.07, 0.1, 0.9)
 
 static var last_mode := "global"
 
@@ -113,6 +125,7 @@ var card_route: Label
 var card_options: VBoxContainer
 var depart_button: Button
 var cancel_button: Button
+var route_inset: RouteInset
 var dragging := false
 
 var _global_coast: Array = []
@@ -242,6 +255,9 @@ func _build_map_frame(canvas: CanvasLayer) -> void:
 		button.pressed.connect(select_place.bind(place["id"]))
 		place_buttons[place["id"]] = button
 		destination_buttons[place["scene_destination_id"]] = button
+	route_inset = RouteInset.new()
+	route_inset.visible = false
+	map_frame.add_child(route_inset)
 
 	_build_status_backing()
 	calendar_label = _label(map_frame, Vector2(392, 249), 10, COLOR_HERE)
@@ -548,6 +564,7 @@ func _view_changed() -> void:
 	layer.transform = view.unit_transform()
 	_layout_markers()
 	_refresh_map_text()
+	_sync_route_inset()
 	underlay.queue_redraw()
 	overlay.queue_redraw()
 
@@ -600,10 +617,15 @@ func _region_anchor(region_id: String) -> Vector2:
 	return Vector2((box[0] + box[2]) * 0.5, (box[1] + box[3]) * 0.5)
 
 
+# Markers never move: each dot sits on its travel-data coordinates. Labels are laid out one by one
+# (cities first) into the first slot that stays clear of the fixed controls, the open route card,
+# every other marker dot and the labels already placed, so neighbours such as New York City and
+# Yonkers keep visibly separate name plates in both languages.
 func _layout_markers() -> void:
 	var language: String = AppState.language
 	var other := MapText.other_language()
 	var bounds := Rect2(Vector2(2, 2), view.viewport.size - Vector2(4, 4))
+	var entries := []
 	for region in MapData.geo_regions():
 		var button: Button = region_buttons[region["id"]]
 		button.visible = mode == "global"
@@ -612,14 +634,54 @@ func _layout_markers() -> void:
 		var anchor := _region_anchor(region["id"])
 		var count := MapData.places_in_region(region["id"], places).size()
 		_set_marker_text(button, MapData.text(region, "name", language), MapText.t("region_sub") % count)
-		_place_marker_button(button, view.geo_to_screen(anchor.x, anchor.y), String(region.get("global_label_side", "right")), bounds)
+		entries.append([button, view.geo_to_screen(anchor.x, anchor.y), String(region.get("global_label_side", "right")), 0])
 	for place in places:
 		var button: Button = place_buttons[place["id"]]
 		button.visible = mode == "region" and place["geo_region_id"] == active_region_id
 		if not button.visible:
 			continue
 		_set_marker_text(button, MapData.text(place, "map_label", language), MapData.text(place, "map_label", other))
-		_place_marker_button(button, marker_position(place["id"]), String(place.get("label_side", "right")), bounds)
+		entries.append([button, marker_position(place["id"]), String(place.get("label_side", "right")), _label_rank(place)])
+	entries.sort_custom(func(a, b): return a[3] < b[3] if a[3] != b[3] else String(a[0].name) < String(b[0].name))
+	var blocked := fixed_ui_rects()
+	for entry in entries:
+		blocked.append(_dot_rect(entry[1]))
+	for entry in entries:
+		var label_rect := _place_marker_button(entry[0], entry[1], entry[2], bounds, blocked, _dot_rect(entry[1]))
+		blocked.append(label_rect.grow(LABEL_GAP))
+
+
+# Cities claim their label slot first, then the other place kinds.
+static func _label_rank(place: Dictionary) -> int:
+	return 0 if String(place.get("kind", "")) == "city" else 1
+
+
+static func _dot_rect(marker: Vector2) -> Rect2:
+	return Rect2(marker - Vector2(9, 9), Vector2(18, 18))
+
+
+# Map-local rectangles of the fixed map controls that labels and the route inset must not cover: the
+# status panel, zoom and view buttons, the calendar date, the scale bar and, while open, the route card.
+func fixed_ui_rects() -> Array:
+	var out := [status_rect()]
+	for control in [zoom_in_button, zoom_out_button, globe_button, region_button]:
+		out.append(Rect2(control.position, control.size))
+	# The calendar is right-aligned in a wide box; only its text is in the way.
+	var font := calendar_label.get_theme_font("font")
+	var width := font.get_string_size(calendar_label.text, HORIZONTAL_ALIGNMENT_LEFT, -1, 10).x
+	out.append(Rect2(calendar_label.position + Vector2(calendar_label.size.x - width, 0), Vector2(width, calendar_label.size.y)))
+	if mode == "region":
+		out.append(SCALE_BAR_RECT)
+	if route_card != null and route_card.visible:
+		out.append(_card_local_rect())
+	var grown := []
+	for rect in out:
+		grown.append((rect as Rect2).grow(LABEL_GAP))
+	return grown
+
+
+func _card_local_rect() -> Rect2:
+	return Rect2(CARD_RECT.position - MAP_RECT.position, CARD_RECT.size)
 
 
 func _set_marker_text(button: Button, primary: String, secondary: String) -> void:
@@ -628,21 +690,35 @@ func _set_marker_text(button: Button, primary: String, secondary: String) -> voi
 	button.tooltip_text = primary + " / " + secondary
 
 
-# The button covers the marker dot and its label; the label flips side if it would leave the frame.
-func _place_marker_button(button: Button, marker: Vector2, side: String, bounds: Rect2) -> void:
+# The button covers the marker dot and its label. The label takes its own side if that slot stays in
+# the frame and clear of `blocked` (the marker's own dot excepted), else the first such slot in
+# LABEL_SLOTS, else the first slot inside the frame. Returns the label rectangle.
+func _place_marker_button(button: Button, marker: Vector2, side: String, bounds: Rect2, blocked: Array = [], own_dot := Rect2()) -> Rect2:
 	var primary: Label = button.get_node("Primary")
 	var secondary: Label = button.get_node("Secondary")
 	var p_size := primary.get_combined_minimum_size()
 	var s_size := secondary.get_combined_minimum_size()
 	var label_size := Vector2(maxf(p_size.x, s_size.x) + 8.0, p_size.y + s_size.y - 2.0)
-	var dot := Rect2(marker - Vector2(9, 9), Vector2(18, 18))
-	var label_rect := _label_rect(marker, side, label_size)
-	if not bounds.encloses(label_rect):
-		for fallback in ["right", "left", "below", "above"]:
-			var candidate := _label_rect(marker, fallback, label_size)
-			if bounds.encloses(candidate):
-				label_rect = candidate
+	var dot := _dot_rect(marker)
+	var label_rect := Rect2()
+	var in_frame := Rect2()
+	for slot in [side] + LABEL_SLOTS:
+		var candidate := _label_rect(marker, slot, label_size).abs()
+		candidate.position = candidate.position.round()
+		if not bounds.encloses(candidate):
+			continue
+		if not in_frame.has_area():
+			in_frame = candidate
+		var clear := true
+		for other in blocked:
+			if other != own_dot and candidate.intersects(other):
+				clear = false
 				break
+		if clear:
+			label_rect = candidate
+			break
+	if not label_rect.has_area():
+		label_rect = in_frame if in_frame.has_area() else _label_rect(marker, side, label_size)
 	var rect := dot.merge(label_rect)
 	button.position = rect.position
 	button.size = rect.size
@@ -652,6 +728,7 @@ func _place_marker_button(button: Button, marker: Vector2, side: String, bounds:
 	background.size = label_size
 	primary.position = label_local + Vector2(4, -1)
 	secondary.position = label_local + Vector2(4, p_size.y - 3.0)
+	return label_rect
 
 
 static func _label_rect(marker: Vector2, side: String, label_size: Vector2) -> Rect2:
@@ -662,6 +739,14 @@ static func _label_rect(marker: Vector2, side: String, label_size: Vector2) -> R
 			return Rect2(marker + Vector2(-label_size.x * 0.5, 10.0), label_size)
 		"above":
 			return Rect2(marker + Vector2(-label_size.x * 0.5, -10.0 - label_size.y), label_size)
+		"above_right":
+			return Rect2(marker + Vector2(9.0, -9.0 - label_size.y), label_size)
+		"below_right":
+			return Rect2(marker + Vector2(9.0, 9.0), label_size)
+		"above_left":
+			return Rect2(marker + Vector2(-9.0 - label_size.x, -9.0 - label_size.y), label_size)
+		"below_left":
+			return Rect2(marker + Vector2(-9.0 - label_size.x, 9.0), label_size)
 	return Rect2(marker + Vector2(10.0, -label_size.y * 0.5), label_size)
 
 
@@ -747,14 +832,15 @@ func _draw_region_annotations() -> void:
 
 # Degree and reference-place labels of the regional view, in map-local pixels. While the
 # route card is open, latitude labels move to the card's left edge and any label that
-# would touch the card is left out, so no text sits half under the card.
+# would touch the card or the route inset is left out, so no text sits half under either.
 func annotation_label_rects() -> Array:
 	var font := ThemeDB.fallback_font
 	var clip: Array = MapData.region_clip_bbox(MapData.geodata_key(active_region_id))
 	var visible := view.visible_geo_rect()
 	var card := Rect2()
 	if route_card != null and route_card.visible:
-		card = Rect2(CARD_RECT.position - MAP_RECT.position, CARD_RECT.size).grow(2)
+		card = _card_local_rect().grow(2)
+	var inset := route_inset_rect().grow(2)
 	var candidates := []
 	# Longitude labels run in one row just below the status panel; other labels under it are left out.
 	var status := status_rect().grow(1)
@@ -783,6 +869,8 @@ func annotation_label_rects() -> Array:
 			continue
 		if card.has_area() and rect.intersects(card):
 			continue
+		if inset.has_area() and rect.intersects(inset):
+			continue
 		out.append({"text": candidate[0], "baseline": candidate[1], "rect": rect})
 	return out
 
@@ -804,6 +892,8 @@ func select_place(place_id: String) -> void:
 	route_state = route_adapter.preview(place_id)
 	selected_option_id = route_state["selected"]
 	route_card.visible = true
+	# Labels that would sit under the card move to a free slot.
+	_layout_markers()
 	_refresh_route_card()
 	overlay.queue_redraw()
 	if not depart_button.disabled:
@@ -822,6 +912,9 @@ func close_route_card() -> void:
 	route_state = {}
 	if route_card != null:
 		route_card.visible = false
+	if route_inset != null:
+		_sync_route_inset()
+		_layout_markers()
 	if overlay != null:
 		overlay.queue_redraw()
 	if not had_place.is_empty() and place_buttons.has(had_place) and place_buttons[had_place].visible:
@@ -920,6 +1013,7 @@ func _refresh_route_card() -> void:
 	if status != "ready":
 		card_route.visible = true
 	cancel_button.text = MapText.t("cancel")
+	_sync_route_inset()
 
 
 # Formats one available route option: mode, approximate distance, whole-hour duration and arrival date.
@@ -941,6 +1035,319 @@ static func route_option_text(option: Dictionary) -> String:
 
 static func _km_text(km: float) -> String:
 	return str(WorldRouteRegistry.approximate_km(km))
+
+
+# --- Route inset ----------------------------------------------------------------
+
+func selected_route_option() -> Dictionary:
+	for option in route_state.get("options", []):
+		if option["option_id"] == selected_option_id:
+			return option
+	return {}
+
+
+# The inset is wanted while the card offers a trip whose origin (the party's place) is not shown on this
+# regional view: it sits in another region, or outside the part of the frame the card leaves free. The
+# far place is then never drawn as a local marker; the inset shows both ends at their own coordinates.
+func route_inset_wanted() -> bool:
+	if route_card == null or not route_card.visible or mode != "region":
+		return false
+	if String(route_state.get("status", "")) != "ready" or selected_route_option().is_empty():
+		return false
+	var origin := find_place(route_adapter.current_place_id())
+	if origin.is_empty() or origin["id"] == selected_place_id:
+		return false
+	if origin["geo_region_id"] != active_region_id:
+		return true
+	var free := Rect2(Vector2.ZERO, Vector2(_card_local_rect().position.x, MAP_RECT.size.y)).grow(-4)
+	return not free.has_point(marker_position(origin["id"]))
+
+
+# The inset's map-local rectangle while it is shown, else an empty Rect2.
+func route_inset_rect() -> Rect2:
+	if route_inset == null or not route_inset.visible:
+		return Rect2()
+	return Rect2(route_inset.position, route_inset.size)
+
+
+# Shows, refreshes or hides the inset. It takes the lowest, then rightmost, slot left of the card and above
+# the bottom row of controls that covers no marker, label or fixed control.
+func _sync_route_inset() -> void:
+	if route_inset == null:
+		return
+	if not route_inset_wanted():
+		route_inset.visible = false
+		return
+	var slot := _route_inset_slot()
+	if not slot.has_area():
+		route_inset.visible = false
+		return
+	route_inset.position = slot.position
+	var origin := find_place(route_adapter.current_place_id())
+	var destination := find_place(selected_place_id)
+	var option := selected_route_option()
+	# The region's own land data when it covers both places, else the globe's.
+	var key := MapData.geodata_key(active_region_id)
+	var clip: Array = MapData.region_clip_bbox(key)
+	var rings := MapData.region_land_rings(key)
+	for place in [origin, destination]:
+		if place["lon"] < clip[0] or place["lon"] > clip[2] or place["lat"] < clip[1] or place["lat"] > clip[3]:
+			key = "global"
+			rings = MapData.global_land_rings()
+			clip = [-180.0, -90.0, 180.0, 90.0]
+			break
+	var language: String = AppState.language
+	var air := String(option["mode"]) != "car"
+	var km: float = option["air_distance_km"] if option["air_distance_km"] > 0.0 else option["road_distance_km"]
+	var caption := MapText.t("mode_" + String(option["mode"]))
+	if km > 0.0:
+		caption += " · " + MapText.t("air_km" if option["air_distance_km"] > 0.0 else "road_km") % _km_text(km)
+	route_inset.show_route(origin, destination, key, rings, clip, air,
+		MapData.text(origin, "map_label", language), MapData.text(destination, "map_label", language), caption)
+	route_inset.visible = true
+
+
+func _route_inset_slot() -> Rect2:
+	var blocked := fixed_ui_rects()
+	for button in place_buttons.values():
+		if button.visible:
+			blocked.append(Rect2(button.position, button.size).grow(LABEL_GAP))
+	var top := status_rect().end.y + 14.0
+	var bottom := SCALE_BAR_RECT.position.y - LABEL_GAP - 1.0
+	var right := _card_local_rect().position.x - 4.0
+	var y := floorf(bottom - INSET_SIZE.y)
+	while y >= top:
+		var x := floorf(right - INSET_SIZE.x)
+		while x >= 4.0:
+			var candidate := Rect2(Vector2(x, y), INSET_SIZE)
+			var clear := true
+			for other in blocked:
+				if candidate.intersects(other):
+					clear = false
+					break
+			if clear:
+				return candidate
+			x -= 4.0
+		y -= 4.0
+	return Rect2()
+
+
+# A small locator map for one trip: both places at their own coordinates on the same land data the map
+# uses, the line between them (dashed great circle for a flight, dotted for a car trip, with no road
+# geometry invented), the origin's party ring, the destination's selection ring, the trip mode and
+# distance as on the card, and its own scale bar. Display only: it ignores the mouse.
+class RouteInset:
+	extends Control
+
+	const CAPTION_HEIGHT := 14.0
+	const DASH := 4.0
+	const GAP := 3.0
+	const DOT := 1.0
+	const DOT_GAP := 3.0
+
+	var area := Rect2()
+	var projection: GeoProjection
+	var land: Node2D
+	var lines: Node2D
+	var coasts: Array = []
+	var arc := PackedVector2Array()
+	var origin_pt := Vector2.ZERO
+	var dest_pt := Vector2.ZERO
+	var plane_pt := Vector2.ZERO
+	var plane_dir := Vector2.LEFT
+	var air := true
+	var origin_label: Label
+	var dest_label: Label
+	var caption: Label
+	var scale_km := 0.0
+	var scale_px := 0.0
+	var route_key := ""
+
+	func _init() -> void:
+		name = "RouteInset"
+		mouse_filter = Control.MOUSE_FILTER_IGNORE
+		size = INSET_SIZE
+		area = Rect2(Vector2(1, 1), Vector2(size.x - 2, size.y - CAPTION_HEIGHT - 2))
+		var clip := Control.new()
+		clip.position = area.position
+		clip.size = area.size
+		clip.clip_contents = true
+		clip.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		add_child(clip)
+		land = Node2D.new()
+		clip.add_child(land)
+		lines = Node2D.new()
+		lines.draw.connect(_draw_lines)
+		clip.add_child(lines)
+		origin_label = _plate_label(10, COLOR_TEXT)
+		dest_label = _plate_label(10, COLOR_TEXT)
+		caption = _plate_label(9, COLOR_SUBTEXT)
+		caption.remove_theme_stylebox_override("normal")
+		caption.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+
+	func _plate_label(font_size: int, color: Color) -> Label:
+		var label := Label.new()
+		label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		label.add_theme_font_size_override("font_size", font_size)
+		label.add_theme_color_override("font_color", color)
+		label.add_theme_color_override("font_outline_color", COLOR_BACKDROP)
+		label.add_theme_constant_override("outline_size", 3)
+		var plate := StyleBoxFlat.new()
+		plate.bg_color = COLOR_LABEL_BG
+		plate.content_margin_left = 3
+		plate.content_margin_right = 3
+		label.add_theme_stylebox_override("normal", plate)
+		add_child(label)
+		return label
+
+	# Rebuilds the geometry only when the trip changes; texts follow the language and the selected option.
+	func show_route(origin: Dictionary, destination: Dictionary, land_key: String, rings: Array, clip_bbox: Array, is_air: bool,
+			origin_text: String, dest_text: String, caption_text: String) -> void:
+		var key := "%s>%s:%s:%s" % [origin["id"], destination["id"], land_key, is_air]
+		if key != route_key:
+			route_key = key
+			air = is_air
+			_build(origin, destination, rings, clip_bbox)
+		origin_label.text = origin_text
+		dest_label.text = dest_text
+		caption.text = caption_text
+		for label in [origin_label, dest_label, caption]:
+			label.reset_size()
+		# The northern place is labelled above its dot, the southern one below, so neither name sits on the line.
+		var origin_north: bool = origin["lat"] >= destination["lat"]
+		origin_label.position = _label_pos(origin_pt, "above" if origin_north else "below", origin_label.size)
+		dest_label.position = _label_pos(dest_pt, "below" if origin_north else "above", dest_label.size)
+		caption.position = Vector2(0, size.y - CAPTION_HEIGHT - 2)
+		caption.size = Vector2(size.x - 6.0, CAPTION_HEIGHT)
+		queue_redraw()
+		lines.queue_redraw()
+
+	func _build(origin: Dictionary, destination: Dictionary, rings: Array, clip_bbox: Array) -> void:
+		for child in land.get_children():
+			land.remove_child(child)
+			child.queue_free()
+		coasts.clear()
+		projection = GeoProjection.new((origin["lon"] + destination["lon"]) * 0.5, (origin["lat"] + destination["lat"]) * 0.5)
+		var local := Rect2(Vector2.ZERO, area.size)
+		projection.configure(local, projection.project_bbox(clip_bbox), true, 60.0)
+		# Both places fitted with room for one label row above and below the line.
+		projection.frame_geo_box([minf(origin["lon"], destination["lon"]) - 1.7, minf(origin["lat"], destination["lat"]) - 1.3,
+			maxf(origin["lon"], destination["lon"]) + 1.7, maxf(origin["lat"], destination["lat"]) + 1.3], local)
+		var ocean := Polygon2D.new()
+		ocean.polygon = PackedVector2Array([Vector2.ZERO, Vector2(local.size.x, 0), local.size, Vector2(0, local.size.y)])
+		ocean.color = COLOR_OCEAN
+		land.add_child(ocean)
+		for hole_pass in [false, true]:
+			for ring in rings:
+				if ring["hole"] != hole_pass:
+					continue
+				var points := PackedVector2Array()
+				for p in ring["points"]:
+					points.append(projection.geo_to_screen(p.x, p.y))
+				var polygon := Polygon2D.new()
+				polygon.polygon = points
+				polygon.color = COLOR_OCEAN if hole_pass else COLOR_LAND
+				land.add_child(polygon)
+				var closed := points.duplicate()
+				closed.append(points[0])
+				coasts.append(closed)
+		origin_pt = projection.geo_to_screen(origin["lon"], origin["lat"])
+		dest_pt = projection.geo_to_screen(destination["lon"], destination["lat"])
+		arc = great_circle_points(origin["lon"], origin["lat"], destination["lon"], destination["lat"], 48, projection)
+		var half := arc.size() / 2
+		plane_pt = arc[half]
+		plane_dir = (arc[half + 1] - arc[half - 1]).normalized()
+		# Scale bar: the longest of these that fits in 48 px.
+		var km_per_px := projection.km_per_pixel()
+		scale_km = 0.0
+		for candidate in [50.0, 100.0, 200.0, 250.0, 500.0, 1000.0, 2000.0]:
+			if candidate / km_per_px <= 48.0:
+				scale_km = candidate
+		scale_px = scale_km / km_per_px
+
+	# A label beside its dot, kept inside the inset's map area (it slides along the edge, never flips).
+	func _label_pos(at: Vector2, side: String, s: Vector2) -> Vector2:
+		var p := area.position + at
+		var out := p + (Vector2(-s.x * 0.5, -6.0 - s.y) if side == "above" else Vector2(-s.x * 0.5, 4.0))
+		out.x = clampf(out.x, area.position.x + 1.0, area.end.x - s.x - 1.0)
+		out.y = clampf(out.y, area.position.y, area.end.y - s.y)
+		return out.round()
+
+	func _draw() -> void:
+		draw_rect(Rect2(Vector2.ZERO, size), COLOR_INSET_BG)
+		draw_rect(Rect2(Vector2(0.5, 0.5), size - Vector2.ONE), COLOR_MARKER, false, 1.0)
+		draw_line(Vector2(1, area.end.y + 0.5), Vector2(size.x - 1, area.end.y + 0.5), COLOR_INSET_RULE, 1.0)
+		if scale_px > 0.0:
+			var y := size.y - CAPTION_HEIGHT * 0.5 - 1.0
+			var x0 := 6.0
+			draw_line(Vector2(x0, y), Vector2(x0 + scale_px, y), COLOR_TEXT, 1.0)
+			draw_line(Vector2(x0, y - 3), Vector2(x0, y + 1), COLOR_TEXT, 1.0)
+			draw_line(Vector2(x0 + scale_px, y - 3), Vector2(x0 + scale_px, y + 1), COLOR_TEXT, 1.0)
+			var font := get_theme_default_font()
+			draw_string(font, Vector2(x0 + scale_px + 4.0, y + font.get_ascent(9) * 0.5 - 1.0), "%d km" % int(scale_km), HORIZONTAL_ALIGNMENT_LEFT, -1, 9, COLOR_SUBTEXT)
+
+	func _draw_lines() -> void:
+		for ring in coasts:
+			lines.draw_polyline(ring, COLOR_COAST, 1.0)
+		var segments := dashes(arc, DASH, GAP) if air else dashes(arc, DOT, DOT_GAP)
+		for dash in segments:
+			lines.draw_line(dash[0], dash[1], COLOR_ROUTE_EDGE, 3.0)
+		for dash in segments:
+			lines.draw_line(dash[0], dash[1], COLOR_ROUTE_LINE, 1.5)
+		if air:
+			# Generic aircraft wedge at mid-route, nose toward the destination.
+			var f := plane_dir * 5.0
+			var s := Vector2(-plane_dir.y, plane_dir.x)
+			var body := PackedVector2Array([plane_pt + f, plane_pt - f * 0.7 + s * 3.6, plane_pt - f * 0.35, plane_pt - f * 0.7 - s * 3.6])
+			lines.draw_colored_polygon(body, COLOR_ROUTE_EDGE)
+			var inner := PackedVector2Array()
+			for p in body:
+				inner.append(plane_pt + (p - plane_pt) * 0.72)
+			lines.draw_colored_polygon(inner, COLOR_ROUTE_LINE)
+		# Origin: the party-here ring; destination: the selection ring. Same marks as the map markers.
+		for at in [origin_pt, dest_pt]:
+			lines.draw_circle(at, 4.0, COLOR_MARKER_EDGE)
+			lines.draw_circle(at, 2.8, COLOR_MARKER)
+		lines.draw_arc(origin_pt, 5.6, 0.0, TAU, 20, COLOR_HERE, 1.5)
+		lines.draw_arc(dest_pt, 5.6, 0.0, TAU, 20, Color.WHITE, 1.2)
+
+	# Segments along a polyline, `on` pixels drawn then `off` skipped, measured along the path.
+	static func dashes(points: PackedVector2Array, on_px: float, off_px: float) -> Array:
+		var out := []
+		var on := true
+		var left := on_px
+		for i in points.size() - 1:
+			var a := points[i]
+			var b := points[i + 1]
+			var length := a.distance_to(b)
+			var t := 0.0
+			while t < length - 0.001:
+				var step := minf(left, length - t)
+				if on:
+					out.append([a.lerp(b, t / length), a.lerp(b, (t + step) / length)])
+				t += step
+				left -= step
+				if left <= 0.001:
+					on = not on
+					left = on_px if on else off_px
+		return out
+
+	# True great-circle path (slerp on the unit sphere), projected into the inset.
+	static func great_circle_points(lon_a: float, lat_a: float, lon_b: float, lat_b: float, n: int, proj: GeoProjection) -> PackedVector2Array:
+		var a := _unit(lon_a, lat_a)
+		var b := _unit(lon_b, lat_b)
+		var omega := acos(clampf(a.dot(b), -1.0, 1.0))
+		var out := PackedVector2Array()
+		for i in n + 1:
+			var t := float(i) / n
+			var v := a.lerp(b, t) if omega < 1e-6 else (a * sin((1.0 - t) * omega) + b * sin(t * omega)) / sin(omega)
+			out.append(proj.geo_to_screen(rad_to_deg(atan2(v.y, v.x)), rad_to_deg(asin(clampf(v.z, -1.0, 1.0)))))
+		return out
+
+	static func _unit(lon: float, lat: float) -> Vector3:
+		var p := deg_to_rad(lat)
+		var l := deg_to_rad(lon)
+		return Vector3(cos(p) * cos(l), cos(p) * sin(l), sin(p))
 
 
 # --- Text -------------------------------------------------------------------

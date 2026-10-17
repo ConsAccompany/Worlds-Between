@@ -1,8 +1,56 @@
 # Global map — runtime route inset and label slots (Stream A)
 
-**Status: UNAPPROVED. Code is in the working tree, uncommitted. Since 2026-10-16 ~21:10 ET it has been compiled and run in real Godot 4.7.2 and captured at native 640×360: 657/657 tool checks and 7 of 8 targeted regressions pass, and the one failure predates this change (see "Run results").** The map-art gate stays open. M2 stays at 10/12, the meter at 35.8%, scenes at 0/11. Nothing is committed or pushed, and the progress ledger, Game Bible and v02 skin files were not touched.
+**Status: UNAPPROVED. The route inset and label-slot code is integrated in the runtime map and committed by the Stream A2 selective sync (this note, the map script and the test tool only). The map art is still UNAPPROVED: this is not map-art acceptance, visual approval or runtime-default approval.** Final evidence:
 
-Answers: `docs/qa/rpg-2-star-ocean-the-second_global-map-v02_native-640-visual-hierarchy-review_unapproved-v01_20261016-193000-6c4b527e.md`, items 1, 2, 3 and 5. Item 4 (terrain finish) is not addressed.
+- **Clean checkout (Stream A2, 2026-10-16 ~22:15 ET):** 640/640 tool checks, 8 runtime captures, byte-identical to the first run; 7 of 8 targeted regressions pass. The one failure (`scifi-world-map_background-visual-check`) fails identically on the pre-change HEAD. This is **7/8, not 8/8.** See "Clean-checkout validation".
+- **First isolated run (~21:10 ET):** 657/657 checks and 16 captures. The extra 17 checks and 8 captures need the untracked v02 skin and `assets/map-art`. See "Run results".
+
+The map-art gate stays open. M2 stays at 10/12, overall at 35.8%, science scene visuals at 0/12; this change increments none of them. The progress ledger, Game Bible/Site, v02 skin files and `assets/map-art` were not touched or staged.
+
+Answers: `docs/qa/rpg-2-star-ocean-the-second_global-map-v02_native-640-visual-hierarchy-review_unapproved-v01_20261016-193000-6c4b527e.md`, items 1, 2, 3 and 5. Item 4 (terrain finish) is not addressed. Codex's review of the real 640×360 captures: `docs/qa/rpg-2-star-ocean-the-second_global-map_route-inset-native640-codex-visual-review_unapproved-v01_20261016-211350-bbe36248.md`. The inset and labels read clearly; the map art stays unapproved.
+
+## Clean-checkout validation (Stream A2, 2026-10-16 ~22:15 ET, final)
+
+**Environment:** Claude Max (`authMethod: claude.ai`, `apiProvider: firstParty`, `subscriptionType: max`), with no `ANTHROPIC_API_KEY`; Godot `4.7.2.stable.official.ed1daf0bf`.
+
+**Setup:**
+
+- `git clone -c core.longpaths=true` of HEAD `d4179b0` into `%TEMP%\a2c`.
+- Only two files added: `game/scripts/scifi_world_map.gd` (sha256 `767573972ff2`, the same input as the first run) and the tool (`e036e9472d4b`).
+- No `assets/map-art`, no v02 skin script, and no other stream's dirty files.
+
+| Step | Result |
+|---|---|
+| `--headless --path game --import` | exit 0, no errors |
+| Tool, windowed `-s` | `NOTE v02 skin or assets absent; runtime captures only`, then `ROUTE_INSET_RUNTIME_OK 640 checks, 8 captures`, 0 failures |
+| Runtime captures | All 8 sha256 values match the "runtime" column below exactly |
+| `global-map-travel_integration-regression_m2-v02` (headless) | `OK checks=105` |
+| `global-earth-travel_whole-hour-travel-rule-check_m2-v10` (headless) | `OK checks=246` |
+| `global-earth-map_smoke_m2-v01` (headless) | `OK checks=212` (the 110m source is tracked) |
+| `us-science-sphere_runtime-migration-smoke_m2-v02` (headless) | `OK checks=32` |
+| `merchant-career-city-commerce_playable-path-smoke_m2-v01` (headless) | `OK checks=110` |
+| `global-map-route-card_readability-check_m2-v01` (windowed, captures to temp) | `OK 109 checks` |
+| `global-map-status-backing_readability-check_m2-v01` (windowed, captures to temp) | `OK 199 checks` |
+| `scifi-world-map_background-visual-check_m8-v01` (windowed) | **FAIL** `button geometry scifi.city` |
+| Same test with `scifi_world_map.gd` restored to HEAD blob `3e24728`, re-imported | **FAIL** `button geometry scifi.city`, identical, so the failure predates this change |
+
+No log contains `SCRIPT ERROR`. The `.uid`/`.import` churn from the import stayed in the clone; the commit needs none of it (`scifi_world_map.gd.uid` is already tracked).
+
+**Code audit of the diff (+420/−13 lines, `scifi_world_map.gd` only):**
+
+- **Travel canon is unchanged.** The inset reads the card's selected option and draws no duration, clock time or airport name. Whole hours, Cancel at no cost and Depart are still the route adapter's. Marker coordinates never move.
+- **Locality:** new state is `route_inset` plus the new constants. `_place_marker_button` keeps its old 4-argument form through default arguments; no other script calls the new functions.
+- **Performance:**
+  - The inset rebuilds its land polygons only when the trip key (origin, destination, land data, mode) changes.
+  - On a pan or zoom with the card open, the slot search tests at most about 200 candidate rects against about 20 obstacles.
+  - Label layout is O(n²) over at most a dozen markers.
+- **Label safety:** labels avoid the fixed controls, the card, other dots and placed labels with a 3 px gap. Inset labels are clamped inside the inset. Degree labels under the inset are dropped. The tool measured all of this (see "Measured facts").
+- **Latent limits, not reachable with the current data:**
+  - An `air_car` trip would draw the air style, and its caption would give only the flight km. No route in the active US data mixes modes.
+  - A great-circle inset across the antimeridian would center wrongly. The current endpoints are NYC and Chicago.
+  - If two markers sat on the exact same pixel, they would ignore each other's dot.
+
+  None needed a fix for this sync.
 
 ## Run results (2026-10-16 ~21:10 ET, supervised Claude session)
 
@@ -77,7 +125,9 @@ The checks JSON hashes to `f4d0d0403550`. The inputs were `game/scripts/scifi_wo
 - The inset keeps the flat v01r1 look.
 - In the reverse skin view, the v02 skin draws no far stub or edge tag for Chicago (`edge_tags` is empty), so only the inset says where Chicago is.
 
-## Evidence boundary (original session, superseded by "Run results")
+## SUPERSEDED — preliminary evidence boundary (historical, NOT the result)
+
+> **Superseded.** This section records what the first session could not do, at ~20:53 ET, before any run. Godot has since compiled and run this code twice: see "Clean-checkout validation" (final) and "Run results". The statements below about "no captures", "no regression run" and "not compiled" are **no longer true**. They are kept only as history.
 
 The first Claude session (Stream A, 2026-10-16 ~20:53 ET) could not run Godot. Every attempt to start `work/tooling/godot-4-7-2/Godot_v4.7.2-stable_win64_console.exe` asked for a permission approval. A non-interactive session can't grant one, and a subagent got the same refusal. So:
 
@@ -141,7 +191,7 @@ What the tool checks:
 - **Travel:** a real Depart charges exactly the card's whole-hour option once; the reverse Chicago→NYC card then shows the inset. This travel happens in a test save root, `user://test-saves/m2-route-inset-runtime-test-only-5a17c3e9`.
 - **Pixels and skin:** rendered pixels show the inset border and the dashed line; skin tags are edge-pinned and say "off this map".
 
-Regressions to run once Godot can run:
+Regressions (all run; results in "Clean-checkout validation"):
 
 - **Headless:**
   - `global-map-travel_integration-regression_m2-v02`
@@ -155,14 +205,24 @@ Regressions to run once Godot can run:
 
 ## Known risks
 
-- **Not compiled.** The inner classes use the outer script's constants and preloads (`COLOR_*`, `INSET_SIZE`, `GeoProjection`, `MapData`, `OFF_MAP`). This relies on GDScript resolving outer-class constants. If a run reports otherwise, pass the values in instead.
-- **The generated skin subclass** uses `extends "<absolute path>"`. If it fails to compile, the tool records one failed check and still writes the runtime captures.
+Two pre-run risks are resolved:
+
+- **Compiling.** The inner classes use the outer script's constants and preloads, and this compiles and runs in Godot 4.7.2.
+- **The generated skin subclass.** It compiled in the first run. In a clean checkout without the skin, the tool skips it with a NOTE.
+
+Open:
 - **Labels move when the card opens.** With the Washington card open, NYC's label should move left and Yonkers' label above-left. That is clearer than labels hidden under the card, but the cluster is no longer one fixed layout. The creator may prefer fixed slots.
 - **Globe badges** now also avoid the fixed controls and each other's dots, so a globe region label may take a different side than before.
-- **The inset covers part of the regional map** while the card is open. Where it lands in the reverse Chicago→NYC Northeast view depends on Washington's and NYC's labels and hasn't been seen.
-- **Caption width:** the zh caption is estimated at about 93 px. The tool's width check can fail if the font is wider than estimated.
+- **The inset covers part of the regional map** while the card is open. In the reverse Chicago→NYC Northeast view it lands at `230,120` and hides most of Pennsylvania (seen in the captures and in Codex's review).
+- **Caption width:** the zh caption fits; the tool's width check passes in both languages.
 - **Inset style** keeps the flat v01r1 look. It is not finished pixel art.
 
 ## Gate
 
-The map-art gate stays **open**. This is not map-art acceptance, not visual approval and not runtime-default approval. Codex and the creator must review real captures first. No meter, ledger or Bible change.
+The map-art gate stays **open**, and the map art is **UNAPPROVED**. This is not map-art acceptance, not visual approval and not runtime-default approval. Codex has reviewed the real captures (`…bbe36248.md`), and the owner/creator review is still pending. M2 stays at 10/12, overall at 35.8% and science scene visuals at 0/12. No meter, ledger, Bible or Site change.
+
+Visual risks Codex raised for the gate:
+
+1. The selected marker sits tight against the card's left edge, especially in the Northeast.
+2. The inset masks much of Pennsylvania on the return view and is not yet distinct enough from the map panel. A small header or minimap border could help.
+3. Land, grid and inset are flat and functional, short of the environment finish target.
