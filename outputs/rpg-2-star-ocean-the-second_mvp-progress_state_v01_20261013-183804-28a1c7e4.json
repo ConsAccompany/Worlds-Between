@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
   "planVersion": "v0.2",
-  "updatedAt": "2026-10-17T05:32:04Z",
+  "updatedAt": "2026-10-17T05:35:31Z",
   "currentStep": "M8",
   "steps": [
     {
@@ -277,14 +277,14 @@
     }
   ],
   "approvalLedger": {
-    "updatedAt": "2026-10-17T05:32:04Z",
-    "note": "Approval scope is recorded exactly as the user gave it. Direction and scoped baseline approvals do not count as asset acceptance. NYC public facilities rooms 2 and 1 are the first two creator-accepted scene-visual gates.",
+    "updatedAt": "2026-10-17T05:35:31Z",
+    "note": "Approval scope is recorded exactly as the user gave it. Direction and scoped baseline approvals do not count as asset acceptance. NYC public facilities rooms 2 and 1, then the Yonkers signal maintenance room, are the first three creator-accepted scene-visual gates.",
     "counters": {
       "identities": 51,
       "visualVariants": 52,
       "runtimeSpritesAccepted": 0,
       "runtimeSpritesTarget": 52,
-      "sceneVisualsAccepted": 2,
+      "sceneVisualsAccepted": 3,
       "sceneVisualsTarget": 12,
       "humanPlaytests": 0,
       "humanPlaytestsTarget": 2
@@ -379,6 +379,19 @@
         "scope": "创作者先确认已通过本地截图链接看到原生 640×360 Godot 实机图，再明确批准第一间房的环境与三件调查道具为科技区第 2/12 道场景门；不包含角色动作、完整角色精灵、其他场景或两轮真人试玩。",
         "evidence": [
           "docs/qa/rpg-2-star-ocean-the-second_nyc-public-facilities-room1_scene-visual-acceptance_v01_20261017-013027-3e7d91c4.md",
+          "game/scripts/survey_annex.gd"
+        ]
+      },
+      {
+        "id": "yonkers-maintenance-room2-scene-visual-accepted",
+        "status": "accepted",
+        "acceptanceKind": "scene-visual",
+        "units": 1,
+        "zh": "扬克斯信号维修室的环境画质正式验收",
+        "en": "Yonkers signal maintenance room environment visual accepted",
+        "scope": "创作者先确认已通过本地截图链接看到原生 640×360 Godot 实机图，再明确批准房间环境与四件设备为科技区第 3/12 道场景门；不包含角色动作、完整角色精灵、其他场景或两轮真人试玩。",
+        "evidence": [
+          "docs/qa/rpg-2-star-ocean-the-second_yonkers-maintenance-room2_scene-visual-acceptance_v01_20261017-013504-6a0c92d1.md",
           "game/scripts/survey_annex.gd"
         ]
       }
@@ -641,10 +654,10 @@
     "kind": "weighted_delivery_estimate",
     "zh": "MVP 加权交付估算（不是正式批准）",
     "en": "MVP weighted delivery estimate (not formal approval)",
-    "updatedAt": "2026-10-17T05:32:04Z",
-    "percent": 39.2,
-    "percentLabel": "39.2%",
-    "weightedPoints": 39.17,
+    "updatedAt": "2026-10-17T05:35:31Z",
+    "percent": 40.8,
+    "percentLabel": "40.8%",
+    "weightedPoints": 40.83,
     "weightTotal": 100,
     "countingRules": [
       {
@@ -673,7 +686,7 @@
       "en": "Formal approval is separate from this weighted estimate: only creator acceptance recorded in approvalLedger and the two M9 integrated human playtests count as approval. This percentage approves no asset, scene or milestone.",
       "mvpFormallyAccepted": false,
       "runtimeSpritesAccepted": "0/52",
-      "sceneVisualsAccepted": "2/12",
+      "sceneVisualsAccepted": "3/12",
       "humanPlaytests": "0/2",
       "scopedApprovalsNotCountedAsAcceptance": [
         {
@@ -905,11 +918,11 @@
         "zh": "科技圈环境美术（已验收场景画质门）",
         "en": "Science environment art (accepted scene-quality gates)",
         "weight": 20,
-        "numerator": 2,
+        "numerator": 3,
         "denominator": 12,
-        "ratio": "2/12",
-        "percent": 16.7,
-        "weightedPoints": 3.33,
+        "ratio": "3/12",
+        "percent": 25,
+        "weightedPoints": 5,
         "source": {
           "path": "approvalLedger",
           "rule": {
@@ -923,7 +936,8 @@
           "outputs/rpg-2-star-ocean-the-second_mvp-progress_state_v01_20261013-183804-28a1c7e4.json#/approvalLedger/counters/sceneVisualsAccepted",
           "docs/qa/rpg-2-star-ocean-the-second_nyc-public-facilities-room2_scene-visual-acceptance_v01_20261017-010900-8f4a2c6e.md",
           "game/scripts/survey_annex.gd",
-          "docs/qa/rpg-2-star-ocean-the-second_nyc-public-facilities-room1_scene-visual-acceptance_v01_20261017-013027-3e7d91c4.md"
+          "docs/qa/rpg-2-star-ocean-the-second_nyc-public-facilities-room1_scene-visual-acceptance_v01_20261017-013027-3e7d91c4.md",
+          "docs/qa/rpg-2-star-ocean-the-second_yonkers-maintenance-room2_scene-visual-acceptance_v01_20261017-013504-6a0c92d1.md"
         ],
         "nextGate": {
           "zh": "下一道门：创作者在 640×360 可玩画面中验收下一处科技圈场景画质，并登记 acceptanceKind=scene-visual 条目。",
@@ -960,9 +974,9 @@
     ],
     "updater": "tools/rpg-2-star-ocean-the-second_mvp-completion-meter_recompute-and-task-closeout-cli_v01_20261015-233032-d296a2cb.js",
     "lastUpdated": {
-      "at": "2026-10-17T05:32:04Z",
-      "closeoutId": "closeout-20261017-053204-30a539f2",
-      "percent": 39.2
+      "at": "2026-10-17T05:35:31Z",
+      "closeoutId": "closeout-20261017-053531-8d529b60",
+      "percent": 40.8
     },
     "taskCloseouts": [
       {
@@ -3074,6 +3088,42 @@
         },
         "evidence": [
           "docs/qa/rpg-2-star-ocean-the-second_nyc-public-facilities-room1_scene-visual-acceptance_v01_20261017-013027-3e7d91c4.md"
+        ]
+      },
+      {
+        "id": "closeout-20261017-053531-8d529b60",
+        "recordedAt": "2026-10-17T05:35:31Z",
+        "kind": "task",
+        "title": {
+          "zh": "扬克斯信号维修室场景画质经创作者验收",
+          "en": "Yonkers signal maintenance room creator-accepted scene quality"
+        },
+        "impact": {
+          "changed": true,
+          "percentBefore": 39.2,
+          "percentAfter": 40.8,
+          "deltaPoints": 1.66,
+          "gateChanges": [
+            {
+              "key": "science-environment-art",
+              "category": "science-environment-art",
+              "gate": null,
+              "from": "2/12",
+              "to": "3/12"
+            }
+          ],
+          "categoryChanges": [
+            {
+              "id": "science-environment-art",
+              "before": "2/12",
+              "after": "3/12",
+              "weightedPointsBefore": 3.33,
+              "weightedPointsAfter": 5
+            }
+          ]
+        },
+        "evidence": [
+          "docs/qa/rpg-2-star-ocean-the-second_yonkers-maintenance-room2_scene-visual-acceptance_v01_20261017-013504-6a0c92d1.md"
         ]
       }
     ]

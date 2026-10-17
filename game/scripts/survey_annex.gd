@@ -23,6 +23,12 @@ const CITY_ROOM_TWO_FIXTURES := [
 	preload("res://assets/props/nyc-public-facilities-room2/rpg-2-star-ocean-the-second_nyc-public-facilities-room2_duty-log-lectern-pixel-fixture_unapproved-v01_20261017-010000-7d3c8a91.png"),
 	preload("res://assets/props/nyc-public-facilities-room2/rpg-2-star-ocean-the-second_nyc-public-facilities-room2_analog-load-meter-pixel-fixture_unapproved-v01_20261017-010000-7d3c8a91.png"),
 ]
+const YONKERS_ROOM_TWO_FIXTURES := [
+	preload("res://assets/props/yonkers-maintenance-room2/rpg-2-star-ocean-the-second_yonkers-maintenance-room2_line-checker-pixel-fixture_unapproved-v01_20261017-012500-a73e60b4.png"),
+	preload("res://assets/props/yonkers-maintenance-room2/rpg-2-star-ocean-the-second_yonkers-maintenance-room2_patrol-log-terminal-pixel-fixture_unapproved-v01_20261017-012500-a73e60b4.png"),
+	preload("res://assets/props/yonkers-maintenance-room2/rpg-2-star-ocean-the-second_yonkers-maintenance-room2_battery-log-rack-pixel-fixture_unapproved-v01_20261017-012500-a73e60b4.png"),
+]
+const YONKERS_ANALYSIS_CONSOLE := preload("res://assets/props/yonkers-maintenance-room2/rpg-2-star-ocean-the-second_yonkers-maintenance-room2_analysis-console-pixel-fixture_unapproved-v01_20261017-012500-a73e60b4.png")
 const DISCOVERY_CUE := preload("res://assets/audio/rpg-2-star-ocean-the-second_discovery_interaction-cue_m7_20261013-211230-ad781e52.wav")
 const CLUE_POSITIONS := [Vector2(163, 165), Vector2(320, 165), Vector2(477, 165)]
 const EXIT_POSITION := Vector2(57, 257)
@@ -218,6 +224,11 @@ func _draw() -> void:
 		for index in CITY_ROOM_TWO_FIXTURES.size():
 			var fixture_position: Vector2 = CLUE_POSITIONS[index] + Vector2(-32, 2)
 			draw_texture_rect(CITY_ROOM_TWO_FIXTURES[index], Rect2(fixture_position, Vector2(64, 64)), false)
+	if room == 2 and destination_id == "scifi.outskirts":
+		for index in YONKERS_ROOM_TWO_FIXTURES.size():
+			var fixture_position: Vector2 = CLUE_POSITIONS[index] + Vector2(-32, 2)
+			draw_texture_rect(YONKERS_ROOM_TWO_FIXTURES[index], Rect2(fixture_position, Vector2(64, 64)), false)
+		draw_texture_rect(YONKERS_ANALYSIS_CONSOLE, Rect2(TERMINAL_POSITION + Vector2(-32, -34), Vector2(64, 64)), false)
 	for index in CLUE_POSITIONS.size():
 		var position: Vector2 = CLUE_POSITIONS[index]
 		var already := AppState.survey_clues.has(_clue_key((room - 1) * 3 + index))
