@@ -6,7 +6,8 @@ const NativeMotion := preload("res://scripts/character_directional_motion.gd")
 const ROOM_ONE_BACKGROUND := {
 	"scifi.city": preload("res://assets/environments/rpg-2-star-ocean-the-second_scifi-survey-annex-room-01_environment-background_m8-concept_20261014-142350-f2ab83d1.png"),
 	"scifi.outskirts": preload("res://assets/environments/rpg-2-star-ocean-the-second_scifi-outskirts-survey-annex-room-01_environment-background_m8-concept_20261014-142650-1b4ca8d2.png"),
-	"scifi.ruins": preload("res://assets/environments/rpg-2-star-ocean-the-second_scifi-ruins-survey-annex-room-01_environment-background_m8-concept_20261014-142840-0ce7a91b.png"),
+	# UNAPPROVED v02 Capitol-annex candidate (palette-reduced underpainting + hand layers); replaces the rejected m8-concept plate for this room only.
+	"scifi.ruins": preload("res://assets/environments/wdc-survey-room1/rpg-2-star-ocean-the-second_wdc-annex-room1_capitol-interior-scene_unapproved-v02_20261017-160235-71300729.png"),
 }
 const CITY_ROOM_ONE_FIXTURES := [
 	preload("res://assets/props/nyc-public-facilities-room1/rpg-2-star-ocean-the-second_nyc-public-facilities-room1_usage-console-pixel-fixture_unapproved-v01_20261017-011700-b45e18a9.png"),
@@ -33,6 +34,19 @@ const YONKERS_ROOM_ONE_FIXTURES := [
 	preload("res://assets/props/yonkers-antenna-room1/rpg-2-star-ocean-the-second_yonkers-antenna-room1_b-steady-dish-pixel-fixture_unapproved-v01_20261017-024000-9b3e6f21.png"),
 	preload("res://assets/props/yonkers-antenna-room1/rpg-2-star-ocean-the-second_yonkers-antenna-room1_c-cold-mast-pixel-fixture_unapproved-v01_20261017-024000-9b3e6f21.png"),
 ]
+const WDC_ROOM_ONE_FIXTURES := [
+	preload("res://assets/props/wdc-annex-room1/rpg-2-star-ocean-the-second_wdc-annex-room1_layered-wall-pixel-fixture_unapproved-v02_20261017-160235-71300729.png"),
+	preload("res://assets/props/wdc-annex-room1/rpg-2-star-ocean-the-second_wdc-annex-room1_broken-index-pixel-fixture_unapproved-v02_20261017-160235-71300729.png"),
+	preload("res://assets/props/wdc-annex-room1/rpg-2-star-ocean-the-second_wdc-annex-room1_code-47-pixel-fixture_unapproved-v02_20261017-160235-71300729.png"),
+]
+# Corner stubs drawn above the heroine; feet blockers for the bench, rubble, stairwell, stubs and fixtures.
+const WDC_ROOM_ONE_FOREGROUND := preload("res://assets/environments/wdc-survey-room1/rpg-2-star-ocean-the-second_wdc-annex-room1_foreground-occluder_unapproved-v02_20261017-160235-71300729.png")
+const WDC_ROOM_ONE_BLOCKERS := [
+	Rect2(0, 0, 640, 156), Rect2(0, 0, 84, 178), Rect2(0, 178, 64, 24), Rect2(552, 0, 88, 182), Rect2(570, 182, 70, 26),
+	Rect2(584, 214, 56, 48), Rect2(0, 262, 62, 60), Rect2(578, 262, 62, 60), Rect2(550, 280, 30, 40),
+	Rect2(129, 212, 70, 16), Rect2(288, 213, 69, 15), Rect2(443, 210, 70, 18),
+]
+const WDC_FIXTURE_BASE_Y := 228.0
 const YONKERS_ANALYSIS_CONSOLE := preload("res://assets/props/yonkers-maintenance-room2/rpg-2-star-ocean-the-second_yonkers-maintenance-room2_analysis-console-pixel-fixture_unapproved-v01_20261017-012500-a73e60b4.png")
 const DISCOVERY_CUE := preload("res://assets/audio/rpg-2-star-ocean-the-second_discovery_interaction-cue_m7_20261013-211230-ad781e52.wav")
 const CLUE_POSITIONS := [Vector2(163, 165), Vector2(320, 165), Vector2(477, 165)]
@@ -82,6 +96,8 @@ var overlay_clue_index := -1
 var link_selected_index := -1
 var overlay_message := ""
 var cue_player: AudioStreamPlayer
+var wdc_front: Node2D
+var wdc_front_mask := 0
 
 
 func _ready() -> void:
@@ -94,6 +110,11 @@ func _ready() -> void:
 	if AppState.resume_annex_pending:
 		hero.position = AppState.resume_annex_position
 		AppState.resume_annex_pending = false
+	if room == 1 and destination_id == "scifi.ruins":
+		wdc_front = Node2D.new()
+		wdc_front.draw.connect(_draw_wdc_front)
+		add_child(wdc_front)
+		_wdc_update_front()
 	_build_ui()
 	_start_audio()
 	AppState.language_changed.connect(_refresh_text)
@@ -137,6 +158,8 @@ func _linked_clue(index: int) -> bool:
 
 
 func _process(delta: float) -> void:
+	if wdc_front != null:
+		_wdc_update_front()
 	if overlay.visible:
 		_reset_walk_animation()
 		return
@@ -147,6 +170,9 @@ func _process(delta: float) -> void:
 		hero.position += direction * MOVE_SPEED * delta
 		hero.position.x = clampf(hero.position.x, 25.0, 615.0)
 		hero.position.y = clampf(hero.position.y, 78.0, 305.0)
+		if wdc_front != null:
+			hero.position = _wdc_slide(previous_position, hero.position)
+			_wdc_update_front()
 		if hero.position.distance_to(previous_position) > 0.05:
 			_update_walk_animation(delta)
 		else:
@@ -238,20 +264,75 @@ func _draw() -> void:
 			var fixture_position: Vector2 = CLUE_POSITIONS[index] + Vector2(-32, 2)
 			draw_texture_rect(YONKERS_ROOM_TWO_FIXTURES[index], Rect2(fixture_position, Vector2(64, 64)), false)
 		draw_texture_rect(YONKERS_ANALYSIS_CONSOLE, Rect2(TERMINAL_POSITION + Vector2(-32, -34), Vector2(64, 64)), false)
+	if room == 1 and destination_id == "scifi.ruins":
+		for index in WDC_ROOM_ONE_FIXTURES.size():
+			if wdc_front_mask & (1 << index):
+				continue
+			var fixture_position: Vector2 = CLUE_POSITIONS[index] + Vector2(-32, 2)
+			draw_texture_rect(WDC_ROOM_ONE_FIXTURES[index], Rect2(fixture_position, Vector2(64, 64)), false)
 	for index in CLUE_POSITIONS.size():
-		var position: Vector2 = CLUE_POSITIONS[index]
-		var already := AppState.survey_clues.has(_clue_key((room - 1) * 3 + index))
-		var clue_color: Color = palette[1] if already else Color("#e2bb77")
-		draw_circle(position, 16.0, Color(0.04, 0.12, 0.16, 0.82))
-		draw_arc(position, 14.0, 0.0, TAU, 28, clue_color, 2.0)
-		draw_rect(Rect2(position + Vector2(-6, -6), Vector2(12, 12)), clue_color, false, 1.7)
-		draw_line(position + Vector2(-3, -2), position + Vector2(3, -2), clue_color, 1.5)
-		draw_line(position + Vector2(-3, 2), position + Vector2(2, 2), clue_color, 1.5)
+		_draw_clue_marker(self, index)
 	_draw_annex_marker(EXIT_POSITION, Color("#8bcfca"), false)
 	if room == 1:
 		_draw_annex_marker(NEXT_POSITION, Color("#e4c377"), false)
 	else:
 		_draw_annex_marker(TERMINAL_POSITION, palette[1] if AppState.survey_solved.has(destination_id) else Color("#e4c377"), true)
+
+
+func _draw_clue_marker(target: CanvasItem, index: int, strokes_only := false) -> void:
+	var palette: Array = PALETTES[destination_id]
+	var position: Vector2 = CLUE_POSITIONS[index]
+	var already := AppState.survey_clues.has(_clue_key((room - 1) * 3 + index))
+	var clue_color: Color = palette[1] if already else Color("#e2bb77")
+	if not strokes_only:
+		target.draw_circle(position, 16.0, Color(0.04, 0.12, 0.16, 0.82))
+	target.draw_arc(position, 14.0, 0.0, TAU, 28, clue_color, 2.0)
+	target.draw_rect(Rect2(position + Vector2(-6, -6), Vector2(12, 12)), clue_color, false, 1.7)
+	target.draw_line(position + Vector2(-3, -2), position + Vector2(3, -2), clue_color, 1.5)
+	target.draw_line(position + Vector2(-3, 2), position + Vector2(2, 2), clue_color, 1.5)
+
+
+# Washington room 1 only: fixtures the heroine stands behind move to this front node (the marker
+# disc stays under her, its ring is redrawn on top), which also draws the corner-stub foreground.
+func _draw_wdc_front() -> void:
+	for index in WDC_ROOM_ONE_FIXTURES.size():
+		if wdc_front_mask & (1 << index):
+			wdc_front.draw_texture_rect(WDC_ROOM_ONE_FIXTURES[index], Rect2(CLUE_POSITIONS[index] + Vector2(-32, 2), Vector2(64, 64)), false)
+			_draw_clue_marker(wdc_front, index, true)
+	wdc_front.draw_texture_rect(WDC_ROOM_ONE_FOREGROUND, Rect2(0, 0, 640, 360), false)
+
+
+func _wdc_update_front() -> void:
+	var mask := 0
+	for index in WDC_ROOM_ONE_FIXTURES.size():
+		if hero.position.y < WDC_FIXTURE_BASE_Y and absf(hero.position.x - CLUE_POSITIONS[index].x) < 48.0:
+			mask |= 1 << index
+	if mask != wdc_front_mask:
+		wdc_front_mask = mask
+		queue_redraw()
+		wdc_front.queue_redraw()
+
+
+func _wdc_blocked(at: Vector2) -> bool:
+	for rect in WDC_ROOM_ONE_BLOCKERS:
+		if rect.has_point(at):
+			return true
+	return false
+
+
+func _wdc_slide(from: Vector2, to: Vector2) -> Vector2:
+	# A start inside a blocker (e.g. an older save) may walk out freely.
+	if not _wdc_blocked(to) or _wdc_blocked(from):
+		return to
+	if not _wdc_blocked(Vector2(to.x, from.y)):
+		return Vector2(to.x, from.y)
+	if not _wdc_blocked(Vector2(from.x, to.y)):
+		return Vector2(from.x, to.y)
+	return from
+
+
+func _wdc_inspect_rect(index: int) -> Rect2:
+	return Rect2(CLUE_POSITIONS[index].x - 40.0, 150.0, 80.0, 100.0)
 
 
 func _draw_annex_marker(at: Vector2, color: Color, terminal: bool) -> void:
@@ -375,7 +456,7 @@ func _button(parent: Node, position: Vector2, size: Vector2, callback: Callable)
 func _refresh_text() -> void:
 	var data := _data()
 	title_label.text = AppState.destination_name(destination_id) + " · " + String(data["rooms"][room - 1])
-	title_label.add_theme_font_size_override("font_size", 14 if AppState.language == "en" and destination_id == "scifi.city" and room == 2 else 18)
+	title_label.add_theme_font_size_override("font_size", 14 if AppState.language == "en" and (destination_id == "scifi.city" and room == 2 or destination_id == "scifi.ruins" and room == 1) else 18)
 	progress_label.text = AppState.text_for("survey_progress") % [_clue_count(), AppState.text_for("field_yes" if AppState.survey_solved.has(destination_id) else "field_no")]
 	help_label.text = AppState.text_for("survey_help")
 	back_button.text = AppState.text_for("survey_leave" if room == 1 else "survey_previous")
@@ -607,7 +688,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if overlay.visible:
 			return
 		for index in CLUE_POSITIONS.size():
-			if hero.position.distance_to(CLUE_POSITIONS[index]) < 45.0:
+			if hero.position.distance_to(CLUE_POSITIONS[index]) < 45.0 or (wdc_front != null and _wdc_inspect_rect(index).has_point(hero.position)):
 				_inspect_clue((room - 1) * 3 + index)
 				return
 		if room == 2 and hero.position.distance_to(TERMINAL_POSITION) < 46.0:

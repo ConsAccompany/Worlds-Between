@@ -1,0 +1,366 @@
+{
+  "project": "Worlds Between",
+  "scene": "Chicago Loop arrival block: State St x Lake St under the Lake Street elevated (State/Lake)",
+  "status": "UNAPPROVED candidate v02 for Codex visual review; creator has not reviewed; counters unchanged (3/12 scenes, 0/52 sprites, 0/2 playtests, 40.8%)",
+  "canon": "The exact intersection, the pedestrianised Lake St plaza and the terrace are art-pilot choices, not creator-approved landmarks.",
+  "authorship": "Quantized underpainting of the nonruntime art-direction reference (box downscale, row recomposition, defect repair, kiosk move, unsharp, 128-colour median cut + k-means, isolated-pixel cleanup), split into editable layers, plus hand-placed bench, station plate and flag banner; built by Claude (Claude Code, signed-in Claude Max, firstParty).",
+  "reference": {
+    "file": "outputs/rpg-2-star-ocean-the-second_chicago-loop_elevated-rail-walkable-block-art-direction-nonruntime-v02_20261016-195030-8c456a73.png",
+    "sha256": "73b57deb1532fcd6be419b96ec7b33aea894458f39a7f3d42c8842f778761be4",
+    "git": "untracked at build time"
+  },
+  "toolchain": {
+    "pillow": "12.3.0",
+    "numpy": "2.3.5",
+    "note": "median-cut/k-means output can change with Pillow versions; the hash lock is for this toolchain"
+  },
+  "row_recomposition": {
+    "facade_rows": [
+      62,
+      94
+    ],
+    "deck_rows": [
+      95,
+      134
+    ],
+    "reference_box_rows_for_deck": "54-64, 74-84, 87-104",
+    "below_deck_shift": -30
+  },
+  "repairs": [
+    {
+      "box": [
+        0,
+        62,
+        58,
+        95
+      ],
+      "copied_from_offset": [
+        0,
+        78
+      ]
+    },
+    {
+      "box": [
+        92,
+        186,
+        122,
+        264
+      ],
+      "copied_from_offset": [
+        110,
+        0
+      ]
+    }
+  ],
+  "kiosk_move": {
+    "source_box": [
+      430,
+      170,
+      456,
+      253
+    ],
+    "rows_removed": [
+      199,
+      215
+    ],
+    "placed_at": [
+      419,
+      135
+    ]
+  },
+  "canvas": [
+    640,
+    360
+  ],
+  "visible_art_rows": [
+    62,
+    317
+  ],
+  "palette_colours": 146,
+  "layers_bottom_to_top": [
+    {
+      "name": "ground-plaza-street",
+      "ysort_pivot_row": null
+    },
+    {
+      "name": "facade-north",
+      "ysort_pivot_row": null
+    },
+    {
+      "name": "deck-l-girder",
+      "ysort_pivot_row": null
+    },
+    {
+      "name": "station-plate",
+      "ysort_pivot_row": null
+    },
+    {
+      "name": "ysort-curb-lamp",
+      "ysort_pivot_row": 180.5
+    },
+    {
+      "name": "ysort-kiosk-bench",
+      "ysort_pivot_row": 195.5
+    },
+    {
+      "name": "ysort-l-columns",
+      "ysort_pivot_row": 254.5
+    },
+    {
+      "name": "ysort-planters",
+      "ysort_pivot_row": 256.5
+    },
+    {
+      "name": "ysort-forecourt",
+      "ysort_pivot_row": 300.5
+    },
+    {
+      "name": "ysort-foreground-tree",
+      "ysort_pivot_row": 330.5
+    },
+    {
+      "name": "guides-walkmask",
+      "hidden": true,
+      "locked": true
+    }
+  ],
+  "runtime_layers": [
+    {
+      "name": "ground-far",
+      "ysort_pivot_row": null,
+      "from": [
+        "ground-plaza-street",
+        "facade-north",
+        "deck-l-girder",
+        "station-plate"
+      ]
+    },
+    {
+      "name": "ysort-curb-lamp",
+      "ysort_pivot_row": 180.5,
+      "from": [
+        "ysort-curb-lamp"
+      ]
+    },
+    {
+      "name": "ysort-kiosk-bench",
+      "ysort_pivot_row": 195.5,
+      "from": [
+        "ysort-kiosk-bench"
+      ]
+    },
+    {
+      "name": "ysort-l-columns",
+      "ysort_pivot_row": 254.5,
+      "from": [
+        "ysort-l-columns"
+      ]
+    },
+    {
+      "name": "ysort-planters",
+      "ysort_pivot_row": 256.5,
+      "from": [
+        "ysort-planters"
+      ]
+    },
+    {
+      "name": "ysort-forecourt",
+      "ysort_pivot_row": 300.5,
+      "from": [
+        "ysort-forecourt"
+      ]
+    },
+    {
+      "name": "ysort-foreground-tree",
+      "ysort_pivot_row": 330.5,
+      "from": [
+        "ysort-foreground-tree"
+      ]
+    }
+  ],
+  "geometry": {
+    "walk": [
+      8,
+      178,
+      624,
+      120
+    ],
+    "blocks": [
+      [
+        392,
+        188,
+        26,
+        12
+      ],
+      [
+        419,
+        189,
+        26,
+        12
+      ],
+      [
+        79,
+        178,
+        14,
+        5
+      ],
+      [
+        143,
+        246,
+        38,
+        17
+      ],
+      [
+        460,
+        246,
+        38,
+        18
+      ],
+      [
+        180,
+        250,
+        15,
+        8
+      ],
+      [
+        453,
+        250,
+        8,
+        8
+      ],
+      [
+        120,
+        250,
+        23,
+        13
+      ],
+      [
+        497,
+        250,
+        22,
+        14
+      ],
+      [
+        518,
+        178,
+        122,
+        20
+      ],
+      [
+        520,
+        288,
+        26,
+        10
+      ],
+      [
+        574,
+        218,
+        66,
+        80
+      ],
+      [
+        86,
+        276,
+        44,
+        22
+      ]
+    ],
+    "bench": [
+      392,
+      188,
+      26,
+      12
+    ],
+    "kiosk_box": [
+      419,
+      189,
+      26,
+      12
+    ],
+    "kiosk": [
+      432,
+      214
+    ],
+    "deck_rows": [
+      95,
+      134
+    ],
+    "station_plate": [
+      318,
+      120,
+      382,
+      132
+    ]
+  },
+  "pixelorama": "pxo_version 7, color_mode 5, 1 frame x 11 layers (guides-walkmask hidden + locked); ORA lists the same layers",
+  "files": {
+    "ground-far": {
+      "file": "game/assets/environments/chicago-loop-state-lake-v02/rpg-2-star-ocean-the-second_chicago-loop_state-lake_ground-far_unapproved-v02_20261017-160959-55667f46.png",
+      "sha256": "678a33c4cf44462111ae8d7b2c10a2072b909bf45cbe1a1d0d992a3d266054e6",
+      "hash_algorithm": "sha256-bytes",
+      "ysort_pivot_row": null
+    },
+    "ysort-curb-lamp": {
+      "file": "game/assets/environments/chicago-loop-state-lake-v02/rpg-2-star-ocean-the-second_chicago-loop_state-lake_ysort-curb-lamp_unapproved-v02_20261017-160959-55667f46.png",
+      "sha256": "af973e42cd0d9518583a7c5882fa1a50864b222ea411a9b6724a137d3f29237d",
+      "hash_algorithm": "sha256-bytes",
+      "ysort_pivot_row": 180.5
+    },
+    "ysort-kiosk-bench": {
+      "file": "game/assets/environments/chicago-loop-state-lake-v02/rpg-2-star-ocean-the-second_chicago-loop_state-lake_ysort-kiosk-bench_unapproved-v02_20261017-160959-55667f46.png",
+      "sha256": "7087c1cfd601792b31e4214d345c061ebc3d5ba1e63f0fbe3c045a2b56dc2a80",
+      "hash_algorithm": "sha256-bytes",
+      "ysort_pivot_row": 195.5
+    },
+    "ysort-l-columns": {
+      "file": "game/assets/environments/chicago-loop-state-lake-v02/rpg-2-star-ocean-the-second_chicago-loop_state-lake_ysort-l-columns_unapproved-v02_20261017-160959-55667f46.png",
+      "sha256": "b2fe07c7a5e2e57fc348bc8c1c233c382a8b118dddc847af815030c3f3df6f9e",
+      "hash_algorithm": "sha256-bytes",
+      "ysort_pivot_row": 254.5
+    },
+    "ysort-planters": {
+      "file": "game/assets/environments/chicago-loop-state-lake-v02/rpg-2-star-ocean-the-second_chicago-loop_state-lake_ysort-planters_unapproved-v02_20261017-160959-55667f46.png",
+      "sha256": "5edb17613059bbf3fdf0d582964822cd031d446fe338725788b3e648032ca848",
+      "hash_algorithm": "sha256-bytes",
+      "ysort_pivot_row": 256.5
+    },
+    "ysort-forecourt": {
+      "file": "game/assets/environments/chicago-loop-state-lake-v02/rpg-2-star-ocean-the-second_chicago-loop_state-lake_ysort-forecourt_unapproved-v02_20261017-160959-55667f46.png",
+      "sha256": "d87bf065b37b8e4298757488522aefc16cb3dea56e447e68e4fe09674fb9cd98",
+      "hash_algorithm": "sha256-bytes",
+      "ysort_pivot_row": 300.5
+    },
+    "ysort-foreground-tree": {
+      "file": "game/assets/environments/chicago-loop-state-lake-v02/rpg-2-star-ocean-the-second_chicago-loop_state-lake_ysort-foreground-tree_unapproved-v02_20261017-160959-55667f46.png",
+      "sha256": "6bd10f8ca70a8055d0bda96d048fe9f9a34ee860d98bb1affc0112c19437983c",
+      "hash_algorithm": "sha256-bytes",
+      "ysort_pivot_row": 330.5
+    },
+    "merged-preview": {
+      "file": "outputs/chicago-loop-state-lake-v02/rpg-2-star-ocean-the-second_chicago-loop_state-lake_merged-preview_unapproved-v02_20261017-160959-55667f46.png",
+      "sha256": "b74bec4a3aebbaabf419edc58e2a3b09a89c0f6acdf584f99ac38874a1fa1057",
+      "hash_algorithm": "sha256-bytes"
+    },
+    "walkmask-guide": {
+      "file": "outputs/chicago-loop-state-lake-v02/rpg-2-star-ocean-the-second_chicago-loop_state-lake_guides-walkmask_unapproved-v02_20261017-160959-55667f46.png",
+      "sha256": "7478a1a6c165ee70d74331e6a1e0a2f9074ca7f564340c62751a47dd6d0f2c46",
+      "hash_algorithm": "sha256-bytes"
+    },
+    "openraster": {
+      "file": "outputs/chicago-loop-state-lake-v02/rpg-2-star-ocean-the-second_chicago-loop_state-lake_layered-source_unapproved-v02_20261017-160959-55667f46.ora",
+      "sha256": "d5bb73e1eca187bf67db373834158475ba767d98658cd6cd495c396b30d10567",
+      "hash_algorithm": "sha256-bytes"
+    },
+    "pixelorama": {
+      "file": "outputs/chicago-loop-state-lake-v02/rpg-2-star-ocean-the-second_chicago-loop_state-lake_layered-source_unapproved-v02_20261017-160959-55667f46.pxo",
+      "sha256": "22d936743332490eb146e450bdeff2b46726c7b00a51936d3ef611d6b8457bff",
+      "hash_algorithm": "sha256-bytes"
+    },
+    "palette-gpl": {
+      "file": "outputs/chicago-loop-state-lake-v02/rpg-2-star-ocean-the-second_chicago-loop_state-lake_palette_unapproved-v02_20261017-160959-55667f46.gpl",
+      "sha256": "02ebb19760f6357124d2e91c142ac5b94b585e6215bf60ff99655f6047472cd8",
+      "hash_algorithm": "sha256-bytes (LF, written by this tool)"
+    }
+  },
+  "source": "tools/rpg-2-star-ocean-the-second_chicago-loop_state-lake-block-pixel-author_unapproved-v02_20261017-160959-55667f46.py"
+}

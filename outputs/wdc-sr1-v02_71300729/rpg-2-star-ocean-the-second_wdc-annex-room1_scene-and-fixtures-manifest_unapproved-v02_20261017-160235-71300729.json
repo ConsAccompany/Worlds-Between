@@ -1,0 +1,408 @@
+{
+  "project": "rpg-2-star-ocean-the-second",
+  "scene": "Washington, D.C. ruins survey annex room 1 (遗址外环 / Ruin Outer Ring), destination scifi.ruins",
+  "variant": "v02 quality pass; v01 (outputs/wdc-sr1-v01_65b9618f, 65b9618f) is kept unchanged as the baseline",
+  "status": "UNAPPROVED candidate; creator has not reviewed; counters unchanged (scenes 3/12, sprites 0/52, timed playtests 0/2, weighted 40.8%)",
+  "authorship": {
+    "scene": "Imported underpainting, then hand corrections. The background layers marked '-underpaint' are a box-filtered, graded, palette-reduced (median cut + k-means, no dither) and cluster-cleaned conversion of the Codex-generated nonruntime art-direction reference below; they are NOT hand painted. Layers marked 'hand-' are drawn pixel by pixel in this tool by Claude. The foreground layer is the underpainting plus hand pixels inside the corner-stub silhouettes.",
+    "fixtures": "Hand-drawn pixel by pixel in this tool by Claude; no underpainting, generation, resampling or filtering.",
+    "tool_author": "Claude (Claude Code, signed-in Claude Max, firstParty)"
+  },
+  "underpainting_source": {
+    "file": "outputs/rpg-2-star-ocean-the-second_wdc-annex-room1_capitol-civic-interior-art-direction-reference_nonruntime-v01_20261017-032700-a82fde43.png",
+    "sha256": "c3f627da731fff5830194641780aec23932f378c735f7139b466f4f3db5caff3",
+    "hash_algorithm": "sha256-bytes",
+    "origin": "Codex built-in image generation (edit of the old m8-concept room-1 plate); see the matching -prompt_ .md beside it. Nonruntime, unapproved art-direction reference.",
+    "recomposition": {
+      "wall_band": {
+        "ref_rows": [
+          0,
+          300
+        ],
+        "screen_rows": [
+          58,
+          152
+        ]
+      },
+      "floor_band": {
+        "ref_rows": [
+          300,
+          941
+        ],
+        "screen_rows": [
+          152,
+          360
+        ]
+      },
+      "x_scale": "640/1672",
+      "filter": "box"
+    },
+    "grade": "floor x(0.80 - 0.12 depth - 0.12 side^2), sun-shaft highlight compression, cool shadows / warm lights, floor saturation x0.88, bench band y 110-157 feathered down to x0.74, exterior kept at x0.96; floor UnsharpMask(3, 45, 2) for grout contrast, then UnsharpMask(1.0, 55, 3) everywhere",
+    "palette_reduction": "PIL median cut + 8 k-means iterations to 64 colours, no dither; isolated pixels folded into the nearest-coloured 4-neighbour cluster when the RGB step < 34 (2 passes)"
+  },
+  "scene_palette_hex": [
+    "#010304",
+    "#090b0d",
+    "#0e1214",
+    "#0e1413",
+    "#0f2a2b",
+    "#110e10",
+    "#161213",
+    "#161c18",
+    "#171b0a",
+    "#1b1513",
+    "#1b1612",
+    "#1b4847",
+    "#1e1817",
+    "#1f1e1b",
+    "#242220",
+    "#242813",
+    "#242e2f",
+    "#271c16",
+    "#2b2823",
+    "#2b6f6b",
+    "#2f221b",
+    "#2f2a25",
+    "#322b26",
+    "#32322e",
+    "#323e3e",
+    "#333619",
+    "#33501f",
+    "#39281d",
+    "#392f28",
+    "#3b342e",
+    "#413932",
+    "#454621",
+    "#463322",
+    "#475353",
+    "#47a197",
+    "#48423b",
+    "#4a3f32",
+    "#4a433b",
+    "#51463c",
+    "#52722b",
+    "#563e27",
+    "#574d43",
+    "#5f5246",
+    "#604c36",
+    "#605324",
+    "#61574e",
+    "#64777e",
+    "#675d51",
+    "#675f57",
+    "#685c51",
+    "#6a5743",
+    "#6e521d",
+    "#6e6358",
+    "#71675e",
+    "#73604a",
+    "#745f31",
+    "#776a5d",
+    "#786654",
+    "#7a6e63",
+    "#7c9a3c",
+    "#7fd4c6",
+    "#807367",
+    "#826f5b",
+    "#857a6a",
+    "#86796c",
+    "#8a8074",
+    "#8b7862",
+    "#8c763f",
+    "#91806c",
+    "#948778",
+    "#96a1ae",
+    "#989287",
+    "#9c7a2c",
+    "#a39782",
+    "#a69579",
+    "#aa994c",
+    "#b4bdc4",
+    "#b6aa8e",
+    "#c9a245",
+    "#d3c66f",
+    "#d4473a",
+    "#d4e8f2",
+    "#d4fff3",
+    "#ded4ba"
+  ],
+  "fixture_palette": {
+    "ink": "#1b1612",
+    "stone_0": "#2f2a25",
+    "stone_1": "#4a433b",
+    "stone_2": "#675d51",
+    "stone_3": "#857a6a",
+    "stone_4": "#a39782",
+    "stone_5": "#c2b59c",
+    "stone_6": "#ddd0b5",
+    "brick_0": "#4a2219",
+    "brick_1": "#6e3324",
+    "brick_2": "#8f4630",
+    "brick_3": "#b0633f",
+    "seal": "#2a2420",
+    "wood_0": "#2b1a11",
+    "wood_1": "#46291a",
+    "wood_2": "#643b23",
+    "wood_3": "#82512f",
+    "wood_4": "#a46d40",
+    "brass_0": "#3f2e12",
+    "brass_1": "#6e521d",
+    "brass_2": "#9c7a2c",
+    "brass_3": "#c9a245",
+    "brass_4": "#ecd07a",
+    "verd_0": "#2e5a4c",
+    "verd_1": "#4f8a72",
+    "steel_0": "#1f2629",
+    "steel_1": "#353f43",
+    "steel_2": "#525e62",
+    "steel_3": "#7a878a",
+    "steel_4": "#aab6b6",
+    "teal_0": "#0f2a2b",
+    "teal_1": "#1b4847",
+    "teal_2": "#2b6f6b",
+    "teal_3": "#47a197",
+    "teal_4": "#7fd4c6",
+    "glow": "#d4fff3",
+    "paper_0": "#9e9076",
+    "paper_1": "#cbbd9c",
+    "paper_2": "#ece0c3",
+    "red": "#d4473a",
+    "amber": "#e8a33a",
+    "leaf_0": "#1f3016",
+    "leaf_1": "#33501f",
+    "leaf_2": "#52722b",
+    "leaf_3": "#7c9a3c",
+    "void": "#0e1214"
+  },
+  "fixture_contact_shadow_rgba": [
+    16,
+    13,
+    10,
+    160
+  ],
+  "pixelorama": "pxo_version 7, color_mode 5, 1 frame; scene 8 layers, fixtures 4 layers, foreground 1 layer; ORA lists the same layers",
+  "scene_asset": {
+    "size": [
+      640,
+      360
+    ],
+    "layers_bottom_to_top": [
+      "exterior-sky-dome-foliage-underpaint",
+      "back-wall-columns-niches-underpaint",
+      "floor-marble-inlay-underpaint",
+      "rubble-ivy-midground-underpaint",
+      "hand-floor-and-bench-corrections",
+      "hand-east-stairwell-door",
+      "hand-survey-teal-accents",
+      "foreground-stubs-occluder"
+    ],
+    "files": {
+      "png": {
+        "file": "outputs/wdc-sr1-v02_71300729/rpg-2-star-ocean-the-second_wdc-annex-room1_capitol-interior-scene_unapproved-v02_20261017-160235-71300729.png",
+        "sha256": "228c29d00b74dbb712ea957361d62c183285f7661e6a27f8864d6978b82d0c2e",
+        "hash_algorithm": "sha256-bytes"
+      },
+      "ora": {
+        "file": "outputs/wdc-sr1-v02_71300729/rpg-2-star-ocean-the-second_wdc-annex-room1_capitol-interior-scene_unapproved-v02_20261017-160235-71300729.ora",
+        "sha256": "3ad63fed9d827c31ee62cdb30db99acf7815a4cd767c4e68444e66aca86b7bcd",
+        "hash_algorithm": "sha256-bytes"
+      },
+      "pxo": {
+        "file": "outputs/wdc-sr1-v02_71300729/rpg-2-star-ocean-the-second_wdc-annex-room1_capitol-interior-scene_unapproved-v02_20261017-160235-71300729.pxo",
+        "sha256": "925b46640c45e28b5da2e31eeced2daaeb9ad2d60e882ea93a7213e174675ba4",
+        "hash_algorithm": "sha256-bytes"
+      }
+    },
+    "runtime_png": {
+      "file": "game/assets/environments/wdc-survey-room1/rpg-2-star-ocean-the-second_wdc-annex-room1_capitol-interior-scene_unapproved-v02_20261017-160235-71300729.png",
+      "sha256": "228c29d00b74dbb712ea957361d62c183285f7661e6a27f8864d6978b82d0c2e",
+      "hash_algorithm": "sha256-bytes"
+    },
+    "purpose": "room background, drawn at Rect2(0, 0, 640, 360) for scifi.ruins room 1",
+    "provenance": {
+      "underpaint_colours": 64,
+      "isolated_pixel_fraction_before_cluster_pass": 0.3355,
+      "isolated_pixel_fraction_after_cluster_pass": 0.1474,
+      "pixels_folded_by_cluster_pass": 108442,
+      "visible_rows": "y 62-317 (between the UI header and footer)",
+      "visible_pixels": 163840,
+      "visible_pixels_from_hand_layers": 8151,
+      "visible_pixels_from_underpainting_layers": 155689,
+      "foreground_overlay_pixels": 8513,
+      "unique_colours_merged": 84
+    }
+  },
+  "foreground_asset": {
+    "size": [
+      640,
+      360
+    ],
+    "layers_bottom_to_top": [
+      "foreground-stubs-occluder"
+    ],
+    "files": {
+      "png": {
+        "file": "outputs/wdc-sr1-v02_71300729/rpg-2-star-ocean-the-second_wdc-annex-room1_foreground-occluder_unapproved-v02_20261017-160235-71300729.png",
+        "sha256": "c28b2f6f57d13b5ebc0e800188fb74eeb709c79c390d5c04941523838aca15f2",
+        "hash_algorithm": "sha256-bytes"
+      },
+      "ora": {
+        "file": "outputs/wdc-sr1-v02_71300729/rpg-2-star-ocean-the-second_wdc-annex-room1_foreground-occluder_unapproved-v02_20261017-160235-71300729.ora",
+        "sha256": "e23ce99fc9aae130b0d2d674fb354ecd4e25379d19620efdfd1d2c2fb1560c62",
+        "hash_algorithm": "sha256-bytes"
+      },
+      "pxo": {
+        "file": "outputs/wdc-sr1-v02_71300729/rpg-2-star-ocean-the-second_wdc-annex-room1_foreground-occluder_unapproved-v02_20261017-160235-71300729.pxo",
+        "sha256": "7a1f5bacc25603765d6c042e42608ad6e529b43f1a1503c3f6a569b794d7f94d",
+        "hash_algorithm": "sha256-bytes"
+      }
+    },
+    "runtime_png": {
+      "file": "game/assets/environments/wdc-survey-room1/rpg-2-star-ocean-the-second_wdc-annex-room1_foreground-occluder_unapproved-v02_20261017-160235-71300729.png",
+      "sha256": "c28b2f6f57d13b5ebc0e800188fb74eeb709c79c390d5c04941523838aca15f2",
+      "hash_algorithm": "sha256-bytes"
+    },
+    "purpose": "binary-alpha copy of the scene's top layer; the room draws it at Rect2(0, 0, 640, 360) above the heroine so the corner stubs and ivy pass in front of her"
+  },
+  "fixtures": [
+    {
+      "size": [
+        64,
+        64
+      ],
+      "layers_bottom_to_top": [
+        "contact-shadow",
+        "structure",
+        "lit-edges",
+        "clue-detail"
+      ],
+      "files": {
+        "png": {
+          "file": "outputs/wdc-sr1-v02_71300729/rpg-2-star-ocean-the-second_wdc-annex-room1_layered-wall-pixel-fixture_unapproved-v02_20261017-160235-71300729.png",
+          "sha256": "ad8623f5acc9527d8cc550b211e2a3e0ce592ba37305082a273475751497b18e",
+          "hash_algorithm": "sha256-bytes"
+        },
+        "ora": {
+          "file": "outputs/wdc-sr1-v02_71300729/rpg-2-star-ocean-the-second_wdc-annex-room1_layered-wall-pixel-fixture_unapproved-v02_20261017-160235-71300729.ora",
+          "sha256": "1f40dac9b5f284aed22765e5275a3e76049d0fe9ac3720cd50e7769b26e09f6a",
+          "hash_algorithm": "sha256-bytes"
+        },
+        "pxo": {
+          "file": "outputs/wdc-sr1-v02_71300729/rpg-2-star-ocean-the-second_wdc-annex-room1_layered-wall-pixel-fixture_unapproved-v02_20261017-160235-71300729.pxo",
+          "sha256": "786163c8ff23d5096d50afbb98dcc7d89f3c8ddd1a265b079fc494ec73e2aeb0",
+          "hash_algorithm": "sha256-bytes"
+        }
+      },
+      "runtime_png": {
+        "file": "game/assets/props/wdc-annex-room1/rpg-2-star-ocean-the-second_wdc-annex-room1_layered-wall-pixel-fixture_unapproved-v02_20261017-160235-71300729.png",
+        "sha256": "ad8623f5acc9527d8cc550b211e2a3e0ce592ba37305082a273475751497b18e",
+        "hash_algorithm": "sha256-bytes"
+      },
+      "purpose": "layered-wall",
+      "clue": "scifi.ruins:0",
+      "reads_as": "分层墙面 / Layered Wall: cut wall specimen on a pallet, dressed sandstone with a walkway moulding over a dark sealing course and older brick, the same teal age tag on both layers, a survey camera photographing the original face",
+      "screen_rect_640x360": "CLUE_POSITIONS[0] + (-32, 2), 64x64",
+      "footprint_rows_fixture_local": [
+        47,
+        58
+      ],
+      "footprint_rows_screen": [
+        214,
+        225
+      ]
+    },
+    {
+      "size": [
+        64,
+        64
+      ],
+      "layers_bottom_to_top": [
+        "contact-shadow",
+        "structure",
+        "lit-edges",
+        "clue-detail"
+      ],
+      "files": {
+        "png": {
+          "file": "outputs/wdc-sr1-v02_71300729/rpg-2-star-ocean-the-second_wdc-annex-room1_broken-index-pixel-fixture_unapproved-v02_20261017-160235-71300729.png",
+          "sha256": "d3945c003e962a07785e49eca4fe74ec3fef5df157d0cc96cbd27a2a5b5c4bc9",
+          "hash_algorithm": "sha256-bytes"
+        },
+        "ora": {
+          "file": "outputs/wdc-sr1-v02_71300729/rpg-2-star-ocean-the-second_wdc-annex-room1_broken-index-pixel-fixture_unapproved-v02_20261017-160235-71300729.ora",
+          "sha256": "2b0a7ace58bd76dd2d8fb3c45d0d8fc11a53094d6f6f8d5c7d9208ee1fe69021",
+          "hash_algorithm": "sha256-bytes"
+        },
+        "pxo": {
+          "file": "outputs/wdc-sr1-v02_71300729/rpg-2-star-ocean-the-second_wdc-annex-room1_broken-index-pixel-fixture_unapproved-v02_20261017-160235-71300729.pxo",
+          "sha256": "6f241a6f5c0eebdc075342f3c2f3cc83d83f61c2bda760409a4a9d020b80c4ce",
+          "hash_algorithm": "sha256-bytes"
+        }
+      },
+      "runtime_png": {
+        "file": "game/assets/props/wdc-annex-room1/rpg-2-star-ocean-the-second_wdc-annex-room1_broken-index-pixel-fixture_unapproved-v02_20261017-160235-71300729.png",
+        "sha256": "d3945c003e962a07785e49eca4fe74ec3fef5df157d0cc96cbd27a2a5b5c4bc9",
+        "hash_algorithm": "sha256-bytes"
+      },
+      "purpose": "broken-index",
+      "clue": "scifi.ruins:1",
+      "reads_as": "残缺索引 / Broken Index: oak card catalogue with brass card holders, one drawer slot empty and one drawer pulled out with gaps in its cards, cards on the floor, a survey reader listing identifiers with an amber missing run",
+      "screen_rect_640x360": "CLUE_POSITIONS[1] + (-32, 2), 64x64",
+      "footprint_rows_fixture_local": [
+        48,
+        58
+      ],
+      "footprint_rows_screen": [
+        215,
+        225
+      ]
+    },
+    {
+      "size": [
+        64,
+        64
+      ],
+      "layers_bottom_to_top": [
+        "contact-shadow",
+        "structure",
+        "lit-edges",
+        "clue-detail"
+      ],
+      "files": {
+        "png": {
+          "file": "outputs/wdc-sr1-v02_71300729/rpg-2-star-ocean-the-second_wdc-annex-room1_code-47-pixel-fixture_unapproved-v02_20261017-160235-71300729.png",
+          "sha256": "495a38a23fd4a9b5d13738b09496fbe52b902c3ee0da76de955d6ea71f40903e",
+          "hash_algorithm": "sha256-bytes"
+        },
+        "ora": {
+          "file": "outputs/wdc-sr1-v02_71300729/rpg-2-star-ocean-the-second_wdc-annex-room1_code-47-pixel-fixture_unapproved-v02_20261017-160235-71300729.ora",
+          "sha256": "49737881c94e65ed4baadcc32cebf9fb601a31cdec66e31be1d4a836e87d4ef6",
+          "hash_algorithm": "sha256-bytes"
+        },
+        "pxo": {
+          "file": "outputs/wdc-sr1-v02_71300729/rpg-2-star-ocean-the-second_wdc-annex-room1_code-47-pixel-fixture_unapproved-v02_20261017-160235-71300729.pxo",
+          "sha256": "71efb9eedc550f969b2aa153fe4ec6254d3de3b7ed689f00603f906d1f3c5075",
+          "hash_algorithm": "sha256-bytes"
+        }
+      },
+      "runtime_png": {
+        "file": "game/assets/props/wdc-annex-room1/rpg-2-star-ocean-the-second_wdc-annex-room1_code-47-pixel-fixture_unapproved-v02_20261017-160235-71300729.png",
+        "sha256": "495a38a23fd4a9b5d13738b09496fbe52b902c3ee0da76de955d6ea71f40903e",
+        "hash_algorithm": "sha256-bytes"
+      },
+      "purpose": "code-47",
+      "clue": "scifi.ruins:2",
+      "reads_as": "编号四七 / Code Forty-Seven: old bronze junction box with verdigris and a stamped 47 plate on a stone plinth, next to a modern relay node whose display also reads 47; the node's cable and plug lie unplugged below the old box's empty socket",
+      "screen_rect_640x360": "CLUE_POSITIONS[2] + (-32, 2), 64x64",
+      "footprint_rows_fixture_local": [
+        45,
+        60
+      ],
+      "footprint_rows_screen": [
+        212,
+        227
+      ]
+    }
+  ],
+  "source": "tools/rpg-2-star-ocean-the-second_wdc-annex-room1_capitol-interior-author_unapproved-v02_20261017-160235-71300729.py"
+}
