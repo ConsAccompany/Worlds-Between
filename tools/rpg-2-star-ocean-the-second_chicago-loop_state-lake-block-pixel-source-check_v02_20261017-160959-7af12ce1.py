@@ -71,6 +71,18 @@ def gd_geometry():
             "layer_files": layer_files, "ground": ground, "walk_top": scalar("WALK_TOP"), "deck_bottom": scalar("DECK_BOTTOM")}
 
 
+def runtime_script_chain():
+    """The Loop scene's script, then each `extends "res://..."` parent in turn (opt-in selectors sit above v02)."""
+    m = re.search(r'\[ext_resource type="Script" path="(res://[^"]+)"', RUNTIME_SCENE.read_text(encoding="utf-8"))
+    chain, res = [], m.group(1) if m else None
+    while res and res not in chain and len(chain) < 8:
+        chain.append(res)
+        path = ROOT / "game" / res.replace("res://", "")
+        e = re.match(r'extends "(res://[^"]+)"', path.read_text(encoding="utf-8")) if path.exists() else None
+        res = e.group(1) if e else None
+    return chain
+
+
 def repetition(rgb):
     """Share of distinct 16x16 blocks in the visible art rows (1.0 = no block repeats exactly)."""
     vis = rgb[64:320]
@@ -129,7 +141,13 @@ def source_checks(author, manifest):
     r["spawn_walkable"] = author.walkable(*gd["spawn"])
     r["head_clear_of_deck"] = gd["walk_top"] - 44 >= gd["deck_bottom"] and gd["deck_bottom"] == author.DECK_BOTTOM
     r["pivots_fractional"] = all(p % 1 == 0.5 for p in gd["pivots"])
-    r["runtime_scene_uses_v02_script"] = SCENE_SCRIPT.name in RUNTIME_SCENE.read_text(encoding="utf-8")
+    # The Loop scene runs this v02 script directly or through opt-in selectors that extend it; each
+    # selector must fall through to super() (v02) when its flag is off. Godot proves the default render.
+    chain = runtime_script_chain()
+    v02_res = "res://scripts/" + SCENE_SCRIPT.name
+    r["runtime_scene_script_chain"] = [c.rsplit("/", 1)[1] for c in chain]
+    r["runtime_scene_uses_v02_script"] = v02_res in chain and all(
+        "\t\tsuper()" in (ROOT / "game" / c.replace("res://", "")).read_text(encoding="utf-8") for c in chain[:chain.index(v02_res)])
     # OpenRaster: source layers top-first, guide hidden, every layer pixel-exact.
     ora = zipfile.ZipFile(ROOT / files["openraster"]["file"])
     r["ora_mimetype_first_stored"] = ora.infolist()[0].filename == "mimetype" and ora.infolist()[0].compress_type == zipfile.ZIP_STORED

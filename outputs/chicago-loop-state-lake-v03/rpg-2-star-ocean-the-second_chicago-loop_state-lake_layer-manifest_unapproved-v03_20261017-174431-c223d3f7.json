@@ -1,0 +1,748 @@
+{
+  "project": "Worlds Between",
+  "scene": "Chicago Loop arrival block: State St x Lake St under the Lake Street elevated (State/Lake)",
+  "status": "UNAPPROVED candidate v03, opt-in only (off by default) for Codex visual QA and creator review; counters unchanged (40.8%, M2 10/12, scenes 3/12, sprites 0/52, playtests 0/2)",
+  "canon": "The exact intersection, the pedestrian Lake St plaza, the medallion, the stair position and the terrace are art-pilot choices, not creator-approved landmarks.",
+  "authorship": "Backdrop bands (facade north of the L, deck girder, storefront glass under the deck) are a disclosed underpainting of the nonruntime style reference: numpy area average, row recomposition, nearest colour in the curated palette, small-component cluster merge, storefront repairs. Everything at plaza level, the L columns and braces, the stair and all props are authored in this tool as explicit pixel clusters. Built by Claude (Claude Code, signed-in Claude Max, firstParty).",
+  "reference": {
+    "file": "outputs/rpg-2-star-ocean-the-second_chicago-state-lake_style-alignment-reference_nonruntime-v01_20261017-173900-4c6e2b91.png",
+    "sha256": "7608a64f906bb93b326905b47cf51ed8e9645fe244541b393ffe4340d360fe5b",
+    "git": "untracked at build time",
+    "use": "composition, palette and material guidance; never pasted into runtime; not finished pixel art"
+  },
+  "toolchain": {
+    "pillow": "12.3.0",
+    "numpy": "2.3.5",
+    "note": "no median cut, k-means or RNG streams; Pillow only decodes/encodes PNG and rasterizes polygons"
+  },
+  "row_recomposition": {
+    "facade_rows": [
+      62,
+      94,
+      "reference rows 31..63"
+    ],
+    "deck_rows": [
+      95,
+      134,
+      "reference rows 64..108 minus [69, 70, 71, 72, 73]"
+    ],
+    "below_deck": "native row = reference row + 27"
+  },
+  "underpaint_repairs": [
+    {
+      "box": [
+        83,
+        135,
+        104,
+        166
+      ],
+      "copied_from_dx": 40
+    },
+    {
+      "box": [
+        104,
+        135,
+        180,
+        166
+      ],
+      "copied_from_dx": 76
+    },
+    {
+      "box": [
+        410,
+        135,
+        450,
+        166
+      ],
+      "copied_from_dx": -40
+    },
+    {
+      "box": [
+        438,
+        135,
+        512,
+        166
+      ],
+      "copied_from_dx": -74
+    }
+  ],
+  "provenance": {
+    "visible_rows": [
+      62,
+      317
+    ],
+    "visible_px": 163840,
+    "underpainted_visible_px": 33027,
+    "authored_visible_px": 130813,
+    "underpainted_share": 0.2016
+  },
+  "canvas": [
+    640,
+    360
+  ],
+  "visible_art_rows": [
+    62,
+    317
+  ],
+  "palette_colours": 79,
+  "layers_bottom_to_top": [
+    "ground-street-plaza",
+    "ground-shadow-light",
+    "backdrop-facade-north",
+    "backdrop-deck-l-girder",
+    "backdrop-underdeck-storefronts",
+    "station-plate",
+    "ysort-underdeck-props",
+    "ysort-l-columns",
+    "ysort-station-stair-east",
+    "ysort-plaza-props",
+    "ysort-foreground",
+    "guides-walkmask (hidden, locked)"
+  ],
+  "runtime_layers": [
+    {
+      "name": "ground-far",
+      "from": [
+        "ground-street-plaza",
+        "ground-shadow-light",
+        "backdrop-facade-north",
+        "backdrop-deck-l-girder",
+        "backdrop-underdeck-storefronts",
+        "station-plate"
+      ]
+    },
+    {
+      "name": "ysort-underdeck-props"
+    },
+    {
+      "name": "ysort-l-columns"
+    },
+    {
+      "name": "ysort-station-stair-east"
+    },
+    {
+      "name": "ysort-plaza-props"
+    },
+    {
+      "name": "ysort-foreground"
+    }
+  ],
+  "ysort_props": [
+    {
+      "layer": "ysort-underdeck-props",
+      "name": "chicago-lamp",
+      "region": [
+        80,
+        128,
+        19,
+        55
+      ],
+      "pivot": 182.5
+    },
+    {
+      "layer": "ysort-underdeck-props",
+      "name": "planter-stone-west",
+      "region": [
+        214,
+        153,
+        40,
+        33
+      ],
+      "pivot": 185.5
+    },
+    {
+      "layer": "ysort-underdeck-props",
+      "name": "bench",
+      "region": [
+        258,
+        172,
+        43,
+        16
+      ],
+      "pivot": 186.5
+    },
+    {
+      "layer": "ysort-underdeck-props",
+      "name": "planter-iron",
+      "region": [
+        304,
+        158,
+        14,
+        26
+      ],
+      "pivot": 184.5
+    },
+    {
+      "layer": "ysort-underdeck-props",
+      "name": "planter-stone-east",
+      "region": [
+        364,
+        156,
+        22,
+        29
+      ],
+      "pivot": 184.5
+    },
+    {
+      "layer": "ysort-underdeck-props",
+      "name": "litter-bin",
+      "region": [
+        397,
+        171,
+        16,
+        21
+      ],
+      "pivot": 190.5
+    },
+    {
+      "layer": "ysort-underdeck-props",
+      "name": "civic-kiosk",
+      "region": [
+        419,
+        147,
+        26,
+        54
+      ],
+      "pivot": 200.5
+    },
+    {
+      "layer": "ysort-underdeck-props",
+      "name": "conifer-planter",
+      "region": [
+        498,
+        140,
+        26,
+        48
+      ],
+      "pivot": 187.5
+    },
+    {
+      "layer": "ysort-l-columns",
+      "name": "l-column-west",
+      "region": [
+        102,
+        135,
+        77,
+        129
+      ],
+      "pivot": 263.5
+    },
+    {
+      "layer": "ysort-l-columns",
+      "name": "l-column-east",
+      "region": [
+        436,
+        135,
+        77,
+        129
+      ],
+      "pivot": 263.5
+    },
+    {
+      "layer": "ysort-station-stair-east",
+      "name": "station-stair",
+      "region": [
+        540,
+        130,
+        68,
+        77
+      ],
+      "pivot": 206.5
+    },
+    {
+      "layer": "ysort-station-stair-east",
+      "name": "east-terrace",
+      "region": [
+        608,
+        128,
+        32,
+        136
+      ],
+      "pivot": 263.5
+    },
+    {
+      "layer": "ysort-plaza-props",
+      "name": "fountain",
+      "region": [
+        566,
+        256,
+        74,
+        42
+      ],
+      "pivot": 297.5
+    },
+    {
+      "layer": "ysort-plaza-props",
+      "name": "planter-column-west",
+      "region": [
+        100,
+        235,
+        22,
+        26
+      ],
+      "pivot": 261.5
+    },
+    {
+      "layer": "ysort-plaza-props",
+      "name": "planter-column-east",
+      "region": [
+        488,
+        236,
+        22,
+        25
+      ],
+      "pivot": 261.5
+    },
+    {
+      "layer": "ysort-plaza-props",
+      "name": "bollard-213",
+      "region": [
+        89,
+        206,
+        3,
+        8
+      ],
+      "pivot": 213.5
+    },
+    {
+      "layer": "ysort-plaza-props",
+      "name": "bollard-225",
+      "region": [
+        89,
+        218,
+        3,
+        8
+      ],
+      "pivot": 225.5
+    },
+    {
+      "layer": "ysort-plaza-props",
+      "name": "bollard-253",
+      "region": [
+        89,
+        246,
+        3,
+        8
+      ],
+      "pivot": 253.5
+    },
+    {
+      "layer": "ysort-plaza-props",
+      "name": "bollard-265",
+      "region": [
+        89,
+        258,
+        3,
+        8
+      ],
+      "pivot": 265.5
+    },
+    {
+      "layer": "ysort-plaza-props",
+      "name": "wayfinding-pylon",
+      "region": [
+        235,
+        194,
+        10,
+        39
+      ],
+      "pivot": 232.5
+    },
+    {
+      "layer": "ysort-plaza-props",
+      "name": "granite-seat-west",
+      "region": [
+        232,
+        252,
+        30,
+        15
+      ],
+      "pivot": 265.5
+    },
+    {
+      "layer": "ysort-plaza-props",
+      "name": "granite-seat-east",
+      "region": [
+        372,
+        252,
+        30,
+        15
+      ],
+      "pivot": 265.5
+    },
+    {
+      "layer": "ysort-plaza-props",
+      "name": "honey-locust-west",
+      "region": [
+        171,
+        220,
+        54,
+        72
+      ],
+      "pivot": 293.5
+    },
+    {
+      "layer": "ysort-plaza-props",
+      "name": "honey-locust-east",
+      "region": [
+        406,
+        220,
+        53,
+        72
+      ],
+      "pivot": 293.5
+    },
+    {
+      "layer": "ysort-plaza-props",
+      "name": "bike-share-dock",
+      "region": [
+        324,
+        272,
+        80,
+        25
+      ],
+      "pivot": 297.5
+    },
+    {
+      "layer": "ysort-foreground",
+      "name": "south-parapet-fence",
+      "region": [
+        96,
+        252,
+        464,
+        70
+      ],
+      "pivot": 340.5
+    }
+  ],
+  "geometry": {
+    "walk": [
+      8,
+      178,
+      624,
+      120
+    ],
+    "blocks": [
+      [
+        258,
+        181,
+        42,
+        6
+      ],
+      [
+        419,
+        189,
+        26,
+        12
+      ],
+      [
+        397,
+        182,
+        14,
+        9
+      ],
+      [
+        83,
+        178,
+        11,
+        5
+      ],
+      [
+        214,
+        178,
+        40,
+        8
+      ],
+      [
+        304,
+        178,
+        14,
+        7
+      ],
+      [
+        364,
+        178,
+        22,
+        7
+      ],
+      [
+        498,
+        180,
+        26,
+        8
+      ],
+      [
+        126,
+        250,
+        28,
+        14
+      ],
+      [
+        460,
+        250,
+        28,
+        14
+      ],
+      [
+        100,
+        251,
+        22,
+        11
+      ],
+      [
+        488,
+        251,
+        22,
+        11
+      ],
+      [
+        236,
+        228,
+        8,
+        5
+      ],
+      [
+        232,
+        258,
+        28,
+        8
+      ],
+      [
+        372,
+        258,
+        28,
+        8
+      ],
+      [
+        191,
+        285,
+        15,
+        9
+      ],
+      [
+        425,
+        285,
+        15,
+        9
+      ],
+      [
+        324,
+        288,
+        80,
+        10
+      ],
+      [
+        89,
+        212,
+        3,
+        2
+      ],
+      [
+        89,
+        224,
+        3,
+        2
+      ],
+      [
+        89,
+        252,
+        3,
+        2
+      ],
+      [
+        89,
+        264,
+        3,
+        2
+      ],
+      [
+        540,
+        178,
+        68,
+        29
+      ],
+      [
+        608,
+        178,
+        32,
+        86
+      ],
+      [
+        566,
+        264,
+        74,
+        34
+      ]
+    ],
+    "spawn": [
+      320,
+      286
+    ],
+    "kiosk": [
+      432,
+      214
+    ],
+    "stair": [
+      574,
+      214
+    ],
+    "pylon": [
+      240,
+      240
+    ],
+    "interact_radius": 26,
+    "deck_rows": [
+      95,
+      134
+    ],
+    "station_plate": [
+      296,
+      112,
+      356,
+      123
+    ]
+  },
+  "hero_visibility": {
+    "walkable_positions": 64225,
+    "raw_min_visible_fraction": 0.105,
+    "raw_worst": [
+      [
+        434,
+        188,
+        0.105
+      ],
+      [
+        434,
+        187,
+        0.109
+      ],
+      [
+        433,
+        188,
+        0.109
+      ],
+      [
+        433,
+        187,
+        0.112
+      ],
+      [
+        432,
+        188,
+        0.113
+      ],
+      [
+        432,
+        187,
+        0.117
+      ]
+    ],
+    "reveal_positions": 2824,
+    "with_reveal_min_visible_fraction": 0.5018,
+    "with_reveal_worst": [
+      [
+        151,
+        180,
+        0.502
+      ],
+      [
+        485,
+        180,
+        0.502
+      ],
+      [
+        424,
+        178,
+        0.503
+      ],
+      [
+        444,
+        182,
+        0.504
+      ],
+      [
+        422,
+        188,
+        0.504
+      ],
+      [
+        131,
+        193,
+        0.504
+      ]
+    ],
+    "reveal_params": {
+      "radius": [
+        15.0,
+        26.0
+      ],
+      "lift": 21.0,
+      "max_hole": 0.8,
+      "threshold": 0.5
+    }
+  },
+  "pixelorama": "pxo_version 7, color_mode 5, 1 frame x 12 layers (guides-walkmask hidden + locked); ORA lists the same layers",
+  "files": {
+    "ground-far": {
+      "file": "game/assets/environments/chicago-loop-state-lake-v03/rpg-2-star-ocean-the-second_chicago-loop_state-lake_ground-far_unapproved-v03_20261017-174431-c223d3f7.png",
+      "sha256": "ed56969ddd4fd808c4e7538f085e34a1ce2ec117ba09bf85925fdd1e23202123",
+      "hash_algorithm": "sha256-bytes"
+    },
+    "ysort-underdeck-props": {
+      "file": "game/assets/environments/chicago-loop-state-lake-v03/rpg-2-star-ocean-the-second_chicago-loop_state-lake_ysort-underdeck-props_unapproved-v03_20261017-174431-c223d3f7.png",
+      "sha256": "fda8072631f655aabcb43cdb1375ce0baf9f7b52cb0dc6da31fad7e28c1feba3",
+      "hash_algorithm": "sha256-bytes"
+    },
+    "ysort-l-columns": {
+      "file": "game/assets/environments/chicago-loop-state-lake-v03/rpg-2-star-ocean-the-second_chicago-loop_state-lake_ysort-l-columns_unapproved-v03_20261017-174431-c223d3f7.png",
+      "sha256": "72c1f0a1b5242cd67404c9d74e500db41bb20a7fecee02a822e20fd45a06e199",
+      "hash_algorithm": "sha256-bytes"
+    },
+    "ysort-station-stair-east": {
+      "file": "game/assets/environments/chicago-loop-state-lake-v03/rpg-2-star-ocean-the-second_chicago-loop_state-lake_ysort-station-stair-east_unapproved-v03_20261017-174431-c223d3f7.png",
+      "sha256": "81a0db696c01c6c5a15a1a37f3388a8a18bb7de2b453b1e8abbfee4064a05f99",
+      "hash_algorithm": "sha256-bytes"
+    },
+    "ysort-plaza-props": {
+      "file": "game/assets/environments/chicago-loop-state-lake-v03/rpg-2-star-ocean-the-second_chicago-loop_state-lake_ysort-plaza-props_unapproved-v03_20261017-174431-c223d3f7.png",
+      "sha256": "443cb9a8b5f005b6e8f9241690131af2d97128bb2e7ee550d94dc6864f4d0ba2",
+      "hash_algorithm": "sha256-bytes"
+    },
+    "ysort-foreground": {
+      "file": "game/assets/environments/chicago-loop-state-lake-v03/rpg-2-star-ocean-the-second_chicago-loop_state-lake_ysort-foreground_unapproved-v03_20261017-174431-c223d3f7.png",
+      "sha256": "9b2b2196e502af031d5e4777022ba0ff74be80e9bcdc77e68ad993e5f16a1a05",
+      "hash_algorithm": "sha256-bytes"
+    },
+    "occlusion-reveal-mask": {
+      "file": "game/assets/environments/chicago-loop-state-lake-v03/rpg-2-star-ocean-the-second_chicago-loop_state-lake_occlusion-reveal-mask_unapproved-v03_20261017-174431-c223d3f7.png",
+      "sha256": "f812801e2eb4840c4290319345545015425e894f05b6d8c4a34b33cb3052bc28",
+      "hash_algorithm": "sha256-bytes"
+    },
+    "merged-preview": {
+      "file": "outputs/chicago-loop-state-lake-v03/rpg-2-star-ocean-the-second_chicago-loop_state-lake_merged-preview_unapproved-v03_20261017-174431-c223d3f7.png",
+      "sha256": "8eeaf5ae3faf16c4da3652ff96df4f33b4e8afab903f6ab211422939da04541f",
+      "hash_algorithm": "sha256-bytes"
+    },
+    "walkmask-guide": {
+      "file": "outputs/chicago-loop-state-lake-v03/rpg-2-star-ocean-the-second_chicago-loop_state-lake_guides-walkmask_unapproved-v03_20261017-174431-c223d3f7.png",
+      "sha256": "e1f98ed5b653037c7f1969b24a17cc7049df06eff6bb38ecf7a12b8eae259c36",
+      "hash_algorithm": "sha256-bytes"
+    },
+    "openraster": {
+      "file": "outputs/chicago-loop-state-lake-v03/rpg-2-star-ocean-the-second_chicago-loop_state-lake_layered-source_unapproved-v03_20261017-174431-c223d3f7.ora",
+      "sha256": "4e076149778558e80e192f8e9ade4410be743fe58c8082b8f28df4ebeb1bf0a1",
+      "hash_algorithm": "sha256-bytes"
+    },
+    "pixelorama": {
+      "file": "outputs/chicago-loop-state-lake-v03/rpg-2-star-ocean-the-second_chicago-loop_state-lake_layered-source_unapproved-v03_20261017-174431-c223d3f7.pxo",
+      "sha256": "b5bdc72bdbf925f08334eabf76ce971866f1b3c44d252b381bb3784115fb3cac",
+      "hash_algorithm": "sha256-bytes"
+    },
+    "palette-gpl": {
+      "file": "outputs/chicago-loop-state-lake-v03/rpg-2-star-ocean-the-second_chicago-loop_state-lake_palette_unapproved-v03_20261017-174431-c223d3f7.gpl",
+      "sha256": "92177e8dc4de2ff6bfd68ff401760ee5e0b614233dc40e8174f94284c4269ea0",
+      "hash_algorithm": "sha256-text-lf-v1"
+    }
+  },
+  "source": "tools/rpg-2-star-ocean-the-second_chicago-loop_state-lake-block-pixel-author_unapproved-v03_20261017-174431-c223d3f7.py"
+}
