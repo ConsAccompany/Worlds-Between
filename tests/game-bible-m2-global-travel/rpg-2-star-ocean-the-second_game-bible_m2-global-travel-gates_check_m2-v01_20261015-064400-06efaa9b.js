@@ -90,20 +90,30 @@ const cardById = (html, id) => {
   const progress = readJson(progressPath);
   const bible = readJson(biblePath);
 
-  // 1. Counters in the ledger equal the inventory and readiness checklist; none was incremented.
+  // 1. Counters in the ledger equal their sources: sprites the inventory, identities/variants the readiness checklist, scenes the
+  // creator's accepted scene-visual items in the ledger (2026-10-17: NYC public facilities rooms 1 and 2, Yonkers signal
+  // maintenance room 2). The inventory scene checkboxes are user-controlled in the Assets view and are still unticked for those
+  // three rooms; they may lag the ledger but never exceed it.
   const items = readJson(inventoryPath).categories.flatMap(c => c.subcategories.flatMap(s => s.items));
   const tally = p => { const list = items.filter(i => i.id.startsWith(p)); return [list.filter(i => i.checked).length, list.length]; };
   const checklist = readJson(checklistPath);
   const c = progress.approvalLedger.counters;
   assert.deepEqual(tally('runtime-sprite.'), [c.runtimeSpritesAccepted, c.runtimeSpritesTarget]);
-  assert.deepEqual(tally('visual-scene.'), [c.sceneVisualsAccepted, c.sceneVisualsTarget]);
-  assert.deepEqual([c.runtimeSpritesAccepted, c.runtimeSpritesTarget, c.sceneVisualsAccepted, c.sceneVisualsTarget, c.humanPlaytests, c.humanPlaytestsTarget], [0, 52, 0, 12, 0, 2]);
+  const sceneAcceptances = progress.approvalLedger.items.filter(i => i.status === 'accepted' && i.acceptanceKind === 'scene-visual');
+  assert.deepEqual(sceneAcceptances.map(i => i.id), ['nyc-public-facilities-room2-scene-visual-accepted', 'nyc-public-facilities-room1-scene-visual-accepted', 'yonkers-maintenance-room2-scene-visual-accepted']);
+  assert.equal(c.sceneVisualsAccepted, sceneAcceptances.reduce((sum, i) => sum + (i.units ?? 1), 0), 'scene counter equals the accepted scene-visual units');
+  assert.ok(sceneAcceptances.every(i => i.evidence.some(file => file.includes('_scene-visual-acceptance_v01_20261017-')) && i.scope.includes('不包含角色动作')), 'each acceptance cites its record and excludes character motion');
+  const [scenesTicked, sceneGates] = tally('visual-scene.');
+  assert.equal(sceneGates, c.sceneVisualsTarget, 'the inventory lists the 12 scene gates');
+  assert.ok(scenesTicked <= c.sceneVisualsAccepted, 'no inventory scene checkbox beyond the creator-accepted count');
+  for (const id of ['visual-scene.city-survey-outer', 'visual-scene.city-survey-inner', 'visual-scene.outskirts-survey-inner']) assert.ok(items.some(i => i.id === id), 'inventory row for an accepted room: ' + id);
+  assert.deepEqual([c.runtimeSpritesAccepted, c.runtimeSpritesTarget, c.sceneVisualsAccepted, c.sceneVisualsTarget, c.humanPlaytests, c.humanPlaytestsTarget], [0, 52, 3, 12, 0, 2]);
   assert.equal(checklist.scope.character_identities, c.identities);
   assert.equal(checklist.variants.length, c.visualVariants);
   assert.deepEqual([c.identities, c.visualVariants], [51, 52]);
-  assert.equal(bible.environmentVisualReview.sceneQualityAccepted, 0);
+  assert.equal(bible.environmentVisualReview.sceneQualityAccepted, c.sceneVisualsAccepted, 'Bible scene count equals the ledger');
   assert.equal(bible.environmentVisualReview.sceneQualityTarget, 12);
-  pass('counters: sprites 0/52 and scenes 0/12 match the inventory; 51 identities / 52 variants match the checklist; human playtests 0/2');
+  pass(`counters: sprites 0/52 match the inventory; scenes 3/12 equal the three creator-accepted scene-visual ledger items and the Bible (inventory checkboxes ${scenesTicked}/${sceneGates}, user-controlled); 51 identities / 52 variants match the checklist; human playtests 0/2`);
 
   // 2. Approval scopes exactly as given: two scoped approvals, two direction acceptances, the animated variant not accepted.
   const byId = Object.fromEntries(progress.approvalLedger.items.map(i => [i.id, i]));
@@ -156,7 +166,7 @@ const cardById = (html, id) => {
   assert.ok(['212', '105', '149', '32', '不代表'].every(t => gate['acceptance-test'].detail.includes(t)), 'test gate states the re-run counts and its limit');
   for (const id of ['anchor', 'start-year']) assert.equal(gate[id].owner, '创作者决定 · 旅行核心实现', id + ' decided by the creator, implemented by the travel core');
   for (const id of migratedGates) assert.ok(gate[id].detail.includes('已决定并已') && gate[id].evidence.includes(usQaNote) && !gate[id].detail.includes('尚未迁移'), id + ' decided and implemented, citing the migration QA note');
-  assert.ok(['纽约', '曼哈顿下城市政厅公园', '扬克斯', '华盛顿特区国会大厦废墟', '卡茨基尔山', '尚无运行时地点', '美术未制作'].every(t => gate.anchor.detail.includes(t)), 'anchor gate: NYC set implemented, Catskills place and art still open');
+  assert.ok(['纽约', '曼哈顿下城市政厅公园', '扬克斯', '华盛顿特区国会大厦废墟', '卡茨基尔山', '尚无运行时地点', '美术未验收', 'v05 测试候选', 'v06 另行制作'].every(t => gate.anchor.detail.includes(t)) && !gate.anchor.detail.includes('美术未制作'), 'anchor gate: NYC set implemented, Catskills place open, place art has unapproved candidates but none accepted');
   assert.ok(gate['air-route'].detail.includes('纽约—芝加哥') && gate['air-route'].detail.includes('初步估算') && gate['air-route'].detail.includes('卢普区'));
   assert.ok(gate['route-data'].detail.includes('初步估算') && gate['route-data'].detail.includes('OSRM') && gate['route-data'].detail.includes('无路线'), 'reference figures stay preliminary');
   assert.deepEqual([gate['route-data'].zh, gate['route-data'].en], ['路线旅时（整点规则）', 'Route times (whole-hour rule)'], 'route-data gate is the whole-hour route-times gate');
@@ -164,7 +174,11 @@ const cardById = (html, id) => {
   assert.ok(['已实现', '整点', '抵达日期', '不显示机场名、分项或钟点', '不代表地图美术或人工验收'].every(t => gate['route-data'].detail.includes(t)) && gate.calendar.detail.includes('只显示年月日'), 'route-data and calendar details state the current rule and its limit');
   assert.ok(!x.gates.some(g => /门到门|整数分钟|door-to-door|integer-minute/i.test(g.zh + ' ' + g.en)), 'no current gate label keeps the superseded door-to-door or integer-minute wording');
   assert.ok(['m2-v10_20261016-145448-d4c46b62.md', 'date-only-cards_manifest_m2-v11'].every(t => gate['route-data'].evidence.some(file => file.includes(t))), 'route-data cites the whole-hour QA note and the date-only capture manifest');
-  assert.ok(gate['map-art'].detail.includes('功能占位') && gate['visual-review'].detail.includes('0/2') && gate['visual-review'].detail.includes('0/12'));
+  assert.ok(gate['map-art'].detail.includes('功能占位') && gate['map-art'].detail.includes('未批准') && gate['visual-review'].detail.includes('0/2') && gate['visual-review'].detail.includes('3/12') && !gate['visual-review'].detail.includes('0/12'));
+  assert.ok(['纽约公共设施一号、二号室', '扬克斯信号维修二号室', '不含角色动作'].every(t => gate['visual-review'].detail.includes(t)), 'visual-review gate names the three accepted rooms and excludes character motion');
+  const m2Prose = [m2.summary, m2.blocker, ...m2.details, ...m2.remaining].join('\n');
+  assert.ok(!/art does not exist|美术未制作|场景画质 0\/1[12]|scene visuals (are )?0\/1[12]/.test(m2Prose + gate.anchor.detail + gate['map-art'].detail), 'no current M2 text says the place art is not made or scenes are 0/12');
+  assert.ok(['State/Lake v02', 'v05', 'v06', '3/12'].every(t => m2Prose.includes(t)), 'M2 text names the Loop v02 candidate, City Hall v05/v06 and 3/12');
   // Route figures shown in the Bible must equal the active v02 game travel data.
   const travel = readJson(travelDataPath);
   const seg = id => travel.segments.find(s => s.id === id);
@@ -275,7 +289,7 @@ const cardById = (html, id) => {
     const ledger = cardById(html, 'approval-ledger');
     assert.equal(ledger.split('<details class="sources">').length - 1, progress.approvalLedger.items.length, 'one collapsed source list per ledger item');
     assert.ok(ledger.includes('查看来源 / View source（2）') && ledger.includes('QA 记录 / QA note') && ledger.includes('产出文件 / Output · 图片 / Image'), 'ledger source labels');
-    for (const label of ['探索精灵 / Runtime sprites 0 / 52', '科技区场景画质 / Science scene visuals 0 / 12', '人工计时试玩 / Human playtests 0 / 2', '角色 51 位 / 52 个视觉版本', '验收数未增加 · No counter incremented', '方向已接受 / Direction accepted', '未接受 / Not accepted']) {
+    for (const label of ['探索精灵 / Runtime sprites 0 / 52', '科技区场景画质 / Science scene visuals 3 / 12', '人工计时试玩 / Human playtests 0 / 2', '角色 51 位 / 52 个视觉版本', '验收数未增加 · No counter incremented', '方向已接受 / Direction accepted', '未接受 / Not accepted']) {
       assert.ok(ledger.includes(label), 'ledger shows: ' + label);
     }
     assert.equal(ledger.split('已批准（限定范围）/ Approved, scoped').length - 1, 2, 'exactly two scoped approval badges');
@@ -283,7 +297,8 @@ const cardById = (html, id) => {
     assert.equal([...decisionsCard.matchAll(/<li data-decision="/g)].length, progress.decisions.length);
     assert.ok(decisionsCard.includes('受阻 · 待决定 / Blocked') && decisionsCard.includes('候选 · 待审 / Candidate'));
     for (const card of [gates, ledger, decisionsCard]) assert.ok(!/<button|<input|<textarea|<select|data-check|asset-check|checkbox/i.test(card), 'no acceptance controls');
-    assert.ok(html.includes('场景画质 0 / 12') && html.includes('探索精灵 0 / 52'), 'inventory summary unchanged');
+    // The asset summary counts the user-controlled inventory checkboxes, so it shows their tally, not the ledger.
+    assert.ok(html.includes(`场景画质 ${scenesTicked} / ${sceneGates}`) && html.includes('探索精灵 0 / 52'), 'inventory summary shows the inventory checkbox tally');
     // Existing approved v8 card is untouched.
     assert.ok(cardById(html, 'idle-selout-v8').includes('用户已批准 · 仅南向待机静态基准帧'));
 
@@ -298,8 +313,14 @@ const cardById = (html, id) => {
     for (const probe of ['/source/..%2Fdocs%2Fprogress.md', '/source/design', '/source/earth-rules/', '/docs/progress.md']) assert.equal((await fetch(base + probe)).status, 404, 'rejected: ' + probe);
     // Every evidence link resolves through /evidence to the exact cited file; uncited, traversal and non-allowlisted paths are 404.
     const links = [...html.matchAll(/href="(\/evidence\?path=[^"]+)"/g)].map(m => m[1]);
-    const cited = [...new Set(allEvidence)];
-    assert.equal(new Set(links).size, cited.length, 'one link target per cited evidence file');
+    // The server serves only docs/ or outputs/ .md/.png/.json evidence; the three scene acceptances also cite the runtime script
+    // game/scripts/survey_annex.gd, which exists but is shown without a link (and /evidence answers 404 for it).
+    const servable = file => /^(docs|outputs)\/[A-Za-z0-9._\/-]+$/.test(file) && /\.(md|png|json)$/i.test(file);
+    const citedAll = [...new Set(allEvidence)];
+    const cited = citedAll.filter(servable);
+    assert.deepEqual(citedAll.filter(file => !servable(file)), ['game/scripts/survey_annex.gd'], 'only the accepted rooms\' runtime script is cited outside docs/ and outputs/');
+    assert.equal((await fetch(base + '/evidence?path=' + encodeURIComponent('game/scripts/survey_annex.gd'))).status, 404, 'runtime script evidence is not served');
+    assert.equal(new Set(links).size, cited.length, 'one link target per servable cited evidence file');
     for (const href of new Set(links)) {
       const file = decodeURIComponent(href.slice('/evidence?path='.length));
       const response = await fetch(base + href);
@@ -308,7 +329,7 @@ const cardById = (html, id) => {
     }
     const evidenceProbes = ['docs/progress.md', 'docs/qa/../progress.md', '../outputs/x.md', 'tools/rpg-2-star-ocean-the-second_game-bible_server_v05_20261013-222437-3d5b8a9f.js', 'game/scripts/app_state.gd', '/etc/passwd', 'C:/Windows/win.ini', ''];
     for (const probe of evidenceProbes) assert.equal((await fetch(base + '/evidence?path=' + encodeURIComponent(probe))).status, 404, 'evidence rejected: ' + probe);
-    pass(`Production view: gates, ledger and decisions cards in order after the rule card, bilingual labels, 10/12 gates implemented in their own group and M2 not complete, no runtime-pending badge left, counters 0/52 0/11 0/2 and 51/52, two scoped approvals, no controls; raw paths only in collapsed sources; ${cited.length} evidence files served byte-identical, ${evidenceProbes.length} evidence probes 404; two design docs served byte-identical, 4 probes 404`);
+    pass(`Production view: gates, ledger and decisions cards in order after the rule card, bilingual labels, 10/12 gates implemented in their own group and M2 not complete, no runtime-pending badge left, ledger counters 0/52 3/12 0/2 and 51/52, two scoped approvals, no controls; raw paths only in collapsed sources; ${cited.length} evidence files served byte-identical, ${evidenceProbes.length} evidence probes 404; two design docs served byte-identical, 4 probes 404`);
 
     // 5. Hostile values are escaped; missing sections are omitted without breaking the view.
     const hostile = JSON.parse(JSON.stringify(progress));

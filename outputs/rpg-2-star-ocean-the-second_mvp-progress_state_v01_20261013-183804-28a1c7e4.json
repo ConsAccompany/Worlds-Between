@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
   "planVersion": "v0.2",
-  "updatedAt": "2026-10-17T20:47:12Z",
+  "updatedAt": "2026-10-17T21:12:00Z",
   "currentStep": "M8",
   "steps": [
     {
@@ -23,7 +23,7 @@
       "id": "M2",
       "title": "World map and exploration",
       "status": "in_progress",
-      "summary": "The global Earth map, route preview/confirm/cancel, fixed whole-hour trip times on an internal integer-minute calendar that players see as a date only, and save migration are implemented and pass Godot automated tests. On 2026-10-15 the runtime was migrated to the creator-decided US science sphere as an implemented technical candidate: NYC (start, Lower Manhattan City Hall Park scene), Yonkers outskirts, abandoned Washington, D.C. ruins at the Capitol, the NYC-Chicago air route and a Chicago Loop technical placeholder district; new runs start 2537-05-25 (the internal clock starts at 08:00; players see only the date). The travel registry now holds the five Earth spheres (science US + Canada, magic South America, wuxia Asia, nature Oceania, culture Europe + Africa, former fantasy kept as an alias only) plus the separate portal-only final planet; only science has places. A provisional weekly commerce ledger settles on the calendar and an engineering-candidate Merchant path reaches it in play. M2 is not complete: the reference distances and minutes behind the whole-hour trip times are preliminary estimates, the City Hall Park, Capitol and Loop art does not exist, the map art is a functional placeholder, the Catskills community is not a runtime place, and no human has reviewed the map or played it.",
+      "summary": "The global Earth map, route preview/confirm/cancel, fixed whole-hour trip times on an internal integer-minute calendar that players see as a date only, and save migration are implemented and pass Godot automated tests. On 2026-10-15 the runtime was migrated to the creator-decided US science sphere as an implemented technical candidate: NYC (start, Lower Manhattan City Hall Park scene), Yonkers outskirts, abandoned Washington, D.C. ruins at the Capitol, the NYC-Chicago air route and a Chicago Loop technical placeholder district; new runs start 2537-05-25 (the internal clock starts at 08:00; players see only the date). The travel registry now holds the five Earth spheres (science US + Canada, magic South America, wuxia Asia, nature Oceania, culture Europe + Africa, former fantasy kept as an alias only) plus the separate portal-only final planet; only science has places. A provisional weekly commerce ledger settles on the calendar and an engineering-candidate Merchant path reaches it in play. M2 is not complete: the reference distances and minutes behind the whole-hour trip times are preliminary estimates, City Hall Park, the Capitol exterior and the Chicago Loop have only unapproved art (the Loop State/Lake v02 is a runtime visual candidate; City Hall Park v05 is a test candidate and v06 is being built separately; the Capitol exterior candidates are not in the runtime), the map art is an unapproved candidate (native v01r1 in the runtime; v02 is being built separately), science scene visuals are 3/12 (environment quality of NYC public facilities rooms 1 and 2 and Yonkers signal maintenance room 2 only; no character motion, other scene or playtest), the Catskills community is not a runtime place, and no human has reviewed the map or played it.",
       "acceptance": "Reach and leave science-region scenes from a global map; use real bilingual place names and geographically plausible car/air routes; verify travel-time, date, save/load and weekly-settlement behavior.",
       "evidence": [
         "Godot 4.7.2, 2026-10-15 (per the M2 QA notes; earlier run, before the US migration — the integration re-run counts are 212 and 105, see details): GLOBAL_TRAVEL_CORE_OK; GLOBAL_EARTH_MAP_SMOKE_OK checks=201; GLOBAL_MAP_TRAVEL_INTEGRATION_OK checks=103; revised M2_SMOKE_OK (pick place → route card → depart); M1–M8 smokes OK; CANVAS_POINTER_REGRESSION_OK at 1280×720",
@@ -44,18 +44,18 @@
       ],
       "remaining": [
         "Reference figures behind the whole-hour trip times: the US car distances and minutes come from the OSRM demo server (non-commercial terms) and the NYC-Chicago reference is an internal research sum (BTS 12-month block-time medians plus airport legs and a check-in allowance) that is never charged or shown. The charged hours (1 / 5 / 5 / 6 h) change only if a re-derived reference crosses a half hour. Re-derive with a self-hosted OSRM on a dated OpenStreetMap extract and confirm the terms before release. Yonkers-Chicago and Washington-Chicago have no route.",
-        "Art for the implemented places: City Hall Park, a recognizable collapsed and overgrown U.S. Capitol (the Washington Pixelorama pilot) and the Chicago Loop. The scenes use the old generic plates or a code-drawn placeholder that is labelled unapproved on screen. Unapproved, non-runtime Capitol candidates exist (walkable west grounds v01-v08 and a separate dome cinematic vista v01-v02), plus unapproved City Hall Park walkable pilots v01-v04; none is accepted or wired into the runtime.",
-        "Produce and accept the map art (colours, label boxes, roads and markers are functional placeholders; there is no US road layer).",
+        "Art acceptance for the implemented places: City Hall Park, a recognizable collapsed and overgrown U.S. Capitol (the Washington Pixelorama pilot) and the Chicago Loop. Every candidate is unapproved. The Chicago Loop runs the State/Lake v02 runtime visual candidate (pushed 00199fc; still a technical arrival scene). City Hall Park has unapproved City Hall Park walkable pilots v01-v04, then a separate v05 test candidate; v06 is being built separately. The Capitol exterior has unapproved, non-runtime candidates (walkable west grounds v01-v08 and a separate dome cinematic vista v01-v02). The Washington survey annex room 1 v02 is a runtime visual candidate, also unapproved. None of these is accepted; science scene visuals are 3/12 (environment quality of NYC public facilities rooms 1 and 2 and Yonkers signal maintenance room 2 only; no character motion, other scene or playtest).",
+        "Accept the map art. The runtime map shows the unapproved native map-art candidate v01r1 (sphere colours, US relief, data credits); map art v02 is being built separately and is also unapproved. The runtime has no US road layer.",
         "Human map review and the two human timed playtests (0/2).",
         "Creator decisions still open for M2: the training prologue start date, and whether saves made under the old 2026-04-01 placeholder should be shifted into 2537 (they currently keep their absolute 2026 date).",
         "Commerce is provisional. Merchant is a 2-stage MVP (行商 → 契约经理); the full 20-series × 5-stage career canon is future work. Neither job skill works in battle. Stage-1 Supply Pact is a placeholder that takes no JP. Stage-2 Fair Quote is a provisional JP-upgradable commerce passive: +5 % of the base per rank, on weeks paid at the companion rate only. Ledger points are not currency: there is no balance, spending, robber event or price effect."
       ],
-      "blocker": "The creator-decided US science sphere (NYC / Lower Manhattan City Hall Park, Yonkers, Washington, D.C., NYC-Chicago, the Chicago Loop) and the 2537-05-25 start are implemented in the runtime as technical candidates; the superseded provisional Shanghai set survives only as hidden save aliases. M2 stays in progress: the reference figures behind the whole-hour trip times are preliminary, the place and map art is missing or unaccepted, the Catskills community has no runtime place, and human review and the two timed playtests (0/2) are outstanding.",
+      "blocker": "The creator-decided US science sphere (NYC / Lower Manhattan City Hall Park, Yonkers, Washington, D.C., NYC-Chicago, the Chicago Loop) and the 2537-05-25 start are implemented in the runtime as technical candidates; the superseded provisional Shanghai set survives only as hidden save aliases. M2 stays in progress: the reference figures behind the whole-hour trip times are preliminary, the place and map art is unaccepted (the 3/12 accepted science scene visuals are three interior rooms, not City Hall Park, the Capitol exterior or the Loop), the Catskills community has no runtime place, and human review and the two timed playtests (0/2) are outstanding.",
       "details": [
         "已实现并通过 Godot 自动测试：真实地球全图与美国东北部、五大湖两个地区层（缩放、平移、点选、中英文地名）；路线卡预览、出发一次性结算、取消／Esc 不扣时间、所在地免费进入；固定整点旅时与日历（2026-10-16 起每段按整小时结算；玩家只看到年月日，内部仍按整数分钟计，跨日、跨年、闰年进位，同一时间轴上发出周交替信号）；存读档与旧档迁移（不凭空加天、不重复扣时；旧上海组合 ID 作为隐藏别名解析到纽约、扬克斯、华盛顿）。",
         "测试标记（2026-10-15 整合复跑）：GLOBAL_TRAVEL_CORE_OK；GLOBAL_EARTH_MAP_SMOKE_OK checks=212；GLOBAL_MAP_TRAVEL_INTEGRATION_OK checks=105；COMMERCE_WEEKLY_SETTLEMENT_OK checks=149；US_SCIENCE_MIGRATION_SMOKE_OK checks=32；新版 M2_SMOKE_OK。实机截图只是运行证据，未验收。旧三点 M2_SMOKE_OK 不计入新规则。 2026-10-16 整点旅时与仅显示日期复跑（m2-v10／v11）：M2_WHOLE_HOUR_TRAVEL_OK checks=246；GLOBAL_MAP_TRAVEL_INTEGRATION_OK checks=105；US_SCIENCE_MIGRATION_SMOKE_OK checks=32；MERCHANT_CITY_COMMERCE_PATH_OK checks=110。",
         "创作者决定（2026-10-15）已在运行时实现为技术候选：科技中心纽约（新游戏起点，曼哈顿下城市政厅公园场景），城外扬克斯，华盛顿特区国会大厦废墟（勘察站与巡逻自动机），首条航线纽约—芝加哥，芝加哥卢普区为明确标注“技术占位 · 美术未验收”的可步行街区；新游戏从 2537-05-25 开始（内部时钟从 08:00 起算，界面只显示日期）。旅行数据登记五个地球文明圈（科技：美国＋加拿大；魔法：南美洲；武侠：亚洲；自然：大洋洲；文化：欧洲＋非洲，原奇幻只作别名）与独立的传送门终局星球；只有科技圈有地点。地下社区（卡茨基尔山附近）尚无运行时地点。",
-        "仍待制作或核实：整点旅时（1／5／5／6 小时）所依据的参考里程与分钟仍为初步估算：汽车来自 OSRM 演示服务器（非商业条款），纽约—芝加哥为内部研究合计（含 BTS 12 个月航班块时间中位数），只作取整依据，从不按分项结算或显示；扬克斯—芝加哥、华盛顿—芝加哥无路线。市政厅公园、可辨认的国会大厦废墟与卢普区均无接入运行时或已验收的美术（国会大厦已有未批准、未接入运行时的 Pixelorama 候选（可步行 v01–v08、独立定场远景 v01–v02），市政厅公园有未批准的可步行试作 v01–v04；均未验收）；地图美术未制作、未验收；未经人工审阅与试玩。",
+        "仍待制作或核实：整点旅时（1／5／5／6 小时）所依据的参考里程与分钟仍为初步估算：汽车来自 OSRM 演示服务器（非商业条款），纽约—芝加哥为内部研究合计（含 BTS 12 个月航班块时间中位数），只作取整依据，从不按分项结算或显示；扬克斯—芝加哥、华盛顿—芝加哥无路线。市政厅公园、可辨认的国会大厦废墟与卢普区都没有已验收的美术：卢普区 State/Lake v02 已作为运行时画面候选接入（未批准，仍是技术到达场景）；国会大厦外景只有未批准、未接入运行时的 Pixelorama 候选（可步行 v01–v08、独立定场远景 v01–v02）；市政厅公园有未批准的可步行试作 v01–v04，另有 v05 测试候选，v06 另行制作；均未验收。运行时地图为未批准的原生美术候选 v01r1，v02 另行制作，均未验收；科技区场景画质 3/12（创作者只验收了纽约公共设施一号、二号室与扬克斯信号维修二号室的环境画质，不含角色动作、其他场景或试玩）；未经人工审阅与试玩。",
         "商会：暂定 CommerceLedger 已接入日历周结算（提交 192c63b，COMMERCE_WEEKLY_SETTLEMENT_OK checks=149）。工程候选（未验收）：伙伴可在 10 级职业选择时转为行商（只做 行商 → 契约经理 两阶 MVP，完整 20 系列 × 5 阶职业设定留待以后），并在已发现的城市从世界地图「商会」派驻经营（MERCHANT_CITY_COMMERCE_PATH_OK checks=109）。行商职业技能在战斗中都不可用；一阶补给协议仍是占位，不能花 JP；二阶公平报价是暂定的经营被动，可花 JP 升级，每级为伙伴全效周加基础收益的 5 %（1/2/3 级 = 105/110/115 %），NPC 经营周不加成；商会面板标明满周收益，并在派驻或重新派驻后的未满一周注明按普通 NPC 80 % 结算；旧存档中已是 1 级的契约经理下次结算得 105（MERCHANT_FAIR_QUOTE_OK checks=91）；账目点数不是货币，没有平衡、劫匪事件或价格影响。首城与开始日期已按创作者决定实现为技术候选。"
       ]
     },
@@ -490,7 +490,7 @@
         "en": "First city & community anchor",
         "owner": "创作者决定 · 旅行核心实现",
         "status": "implemented",
-        "detail": "已决定并已在运行时实现为技术候选：新游戏从纽约开始，曼哈顿下城市政厅公园场景、城外扬克斯、华盛顿特区国会大厦废墟均可到达。场景仍用旧的通用科技区底图，市政厅公园与可辨认的国会大厦的运行时美术未制作；国会大厦已有未批准、未接入运行时的 Pixelorama 候选（可步行 v01–v08、独立定场远景 v01–v02），市政厅公园有未批准的可步行试作 v01–v04；均未验收。地下社区在卡茨基尔山附近（设计已定，尚无运行时地点）。",
+        "detail": "已决定并已在运行时实现为技术候选：新游戏从纽约开始，曼哈顿下城市政厅公园场景、城外扬克斯、华盛顿特区国会大厦废墟均可到达。市政厅公园与可辨认的国会大厦外景都没有已验收的运行时美术（美术未验收）：国会大厦已有未批准、未接入运行时的 Pixelorama 候选（可步行 v01–v08、独立定场远景 v01–v02），市政厅公园有未批准的可步行试作 v01–v04，另有 v05 测试候选，v06 另行制作；均未验收。地下社区在卡茨基尔山附近（设计已定，尚无运行时地点）。",
         "evidence": [
           "docs/qa/rpg-2-star-ocean-the-second_us-science-sphere_runtime-migration_qa-note_m2-v02_20261015-175011-364131c8.md",
           "docs/qa/rpg-2-star-ocean-the-second_five-sphere-registry-and-us-runtime_integration-qa-note_m2-v02_20261015-184437-b3b84617.md"
@@ -538,7 +538,7 @@
         "en": "Map art",
         "owner": "美术",
         "status": "not_started",
-        "detail": "配色、标签框、道路和标记都是功能占位，还没有按本作像素美术制作；美国地区层没有道路图层。全球与地区样稿是未批准的静态研究。卢普区为代码绘制的技术占位场景。",
+        "detail": "地图美术门未计入：运行时地图为未批准的原生美术候选 v01r1（五个文明圈配色、美国地形起伏与数据署名）；v02 另行制作，仍未批准。标签框与标记未作美术验收（功能占位），美国地区层没有道路图层。全球与地区样稿是未批准的静态研究。",
         "evidence": [
           "docs/qa/rpg-2-star-ocean-the-second_geography-rule_visual-regression-review_unapproved-v01_20261015-003237-f8f604dd.md"
         ]
@@ -549,7 +549,7 @@
         "en": "Human review & playtests",
         "owner": "用户",
         "status": "human_pending",
-        "detail": "地图与美国科技圈场景未经真人审阅；人工计时试玩 0/2；场景画质 0/12。截图只是运行证据。",
+        "detail": "地图与 M2 美国地点场景（市政厅公园、国会大厦外景、卢普区）均未验收；人工计时试玩 0/2；科技区场景画质 3/12（创作者只验收了纽约公共设施一号、二号室与扬克斯信号维修二号室的环境画质，不含角色动作、其他场景或试玩）。截图只是运行证据。",
         "evidence": []
       }
     ],
@@ -654,7 +654,7 @@
     "kind": "weighted_delivery_estimate",
     "zh": "MVP 加权交付估算（不是正式批准）",
     "en": "MVP weighted delivery estimate (not formal approval)",
-    "updatedAt": "2026-10-17T20:47:12Z",
+    "updatedAt": "2026-10-17T21:12:00Z",
     "percent": 40.8,
     "percentLabel": "40.8%",
     "weightedPoints": 40.83,
@@ -974,8 +974,8 @@
     ],
     "updater": "tools/rpg-2-star-ocean-the-second_mvp-completion-meter_recompute-and-task-closeout-cli_v01_20261015-233032-d296a2cb.js",
     "lastUpdated": {
-      "at": "2026-10-17T20:47:12Z",
-      "closeoutId": "closeout-20261017-204712-707d78de",
+      "at": "2026-10-17T21:12:00Z",
+      "closeoutId": "closeout-20261017-211200-2e483288",
       "percent": 40.8
     },
     "taskCloseouts": [
@@ -3211,6 +3211,29 @@
         "evidence": [
           "docs/qa/rpg-2-star-ocean-the-second_v02-candidates_v01-baseline-clean-clone-sync_qa-note_unapproved-v01_20261017-164712-1acb070d.md",
           "docs/qa/rpg-2-star-ocean-the-second_v02-candidates_selective-integration-closeout_unapproved-v01_20261017-163336-0121aa11.md"
+        ]
+      },
+      {
+        "id": "closeout-20261017-211200-2e483288",
+        "recordedAt": "2026-10-17T21:12:00Z",
+        "kind": "task",
+        "title": {
+          "zh": "按已记录的三处场景验收校正游戏圣经旧文案与测试（不新增验收）",
+          "en": "Reconcile Game Bible prose and tests with the three recorded scene acceptances (no new acceptance)"
+        },
+        "impact": {
+          "changed": false,
+          "percentBefore": 40.8,
+          "percentAfter": 40.8,
+          "deltaPoints": 0,
+          "gateChanges": [],
+          "categoryChanges": []
+        },
+        "evidence": [
+          "docs/qa/rpg-2-star-ocean-the-second_game-bible_three-scene-acceptance-stale-prose-and-test-reconciliation_qa-note_unapproved-v01_20261017-211048-1e6fcfd1.md",
+          "docs/qa/rpg-2-star-ocean-the-second_nyc-public-facilities-room2_scene-visual-acceptance_v01_20261017-010900-8f4a2c6e.md",
+          "docs/qa/rpg-2-star-ocean-the-second_nyc-public-facilities-room1_scene-visual-acceptance_v01_20261017-013027-3e7d91c4.md",
+          "docs/qa/rpg-2-star-ocean-the-second_yonkers-maintenance-room2_scene-visual-acceptance_v01_20261017-013504-6a0c92d1.md"
         ]
       }
     ]

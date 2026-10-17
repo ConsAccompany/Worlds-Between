@@ -26,7 +26,7 @@ const progress = readJson(progressPath);
 // 1. The tracked Game Bible passes every canon check.
 const labels = builder.checkCanon(bible);
 assert.ok(labels.length >= 20, 'canon check count');
-pass(`tracked Game Bible canon: ${labels.length} checks (five Earth spheres + portal planet, NYC/Catskills/2537-05-25, 51 identities with legacy board labels, superseded 7-node/5-node drafts, 0 of 710 approved nodes, scene 0/11, sprites 0)`);
+pass(`tracked Game Bible canon: ${labels.length} checks (five Earth spheres + portal planet, NYC/Catskills/2537-05-25, 51 identities with legacy board labels, superseded 7-node/5-node drafts, 0 of 710 approved nodes, scenes 3/12 equal to the creator-accepted ledger items, sprites 0)`);
 
 // 2. A rebuild from the sources reproduces the tracked state; the approved job names are the source text unchanged.
 const built = builder.build({base: clone(bible), updatedAt: bible.updatedAt});
@@ -60,7 +60,8 @@ const mutations = [
   ['final planet listed as an Earth sphere', b => { b.creatorDecisions.spheres.push({id: 'offworld', zh: '星外', region: '另一颗星球', hubs: []}); }, /five Earth spheres/],
   ['career draft no longer superseded', b => { b.skillTreeProposal.superseded = false; }, /career trees/],
   ['personal draft rank rule rewritten', b => { b.personalSkillTrees.approvedRules.rankMaximum = 3; }, /personal trees/],
-  ['scene counter incremented', b => { b.environmentVisualReview.sceneQualityAccepted = 1; }, /scene visuals 0\/12/],
+  ['scene counter drifts above the ledger', b => { b.environmentVisualReview.sceneQualityAccepted = 4; }, /scene visuals 3\/12 equal the creator-accepted ledger items/],
+  ['scene counter reset to the stale 0', b => { b.environmentVisualReview.sceneQualityAccepted = 0; }, /scene visuals 3\/12 equal the creator-accepted ledger items/],
   ['wrong start date', b => { b.creatorDecisions.geography.adventureStart = '2026-04-01'; }, /geography/],
   ['selout v8 baseline claimed as animated', b => { b.characterVisualReview.staticBaselinesAndPilots.femaleExplorationSouthBaseline.animation = true; }, /selout v8/],
   ['battle v08 pilot claimed as approved', b => { b.characterVisualReview.staticBaselinesAndPilots.femaleBattleSideviewV08.status = 'APPROVED'; }, /battle side-view v08/],
@@ -90,13 +91,22 @@ assert.deepEqual(gates.filter(gate => gate.status !== 'implemented').map(gate =>
 assert.equal(gates.find(gate => gate.id === 'route-data').en, 'Route times (whole-hour rule)', 'route-data is the whole-hour route-times gate');
 assert.ok(!gates.some(gate => /done|accepted|approved/.test(gate.status)), 'no gate claims acceptance');
 const counters = progress.approvalLedger.counters;
-assert.deepEqual(counters, {identities: 51, visualVariants: 52, runtimeSpritesAccepted: 0, runtimeSpritesTarget: 52, sceneVisualsAccepted: 0, sceneVisualsTarget: 12, humanPlaytests: 0, humanPlaytestsTarget: 2});
+assert.deepEqual(counters, {identities: 51, visualVariants: 52, runtimeSpritesAccepted: 0, runtimeSpritesTarget: 52, sceneVisualsAccepted: 3, sceneVisualsTarget: 12, humanPlaytests: 0, humanPlaytestsTarget: 2});
+// Scenes 3/12 are exactly the creator's three recorded environment acceptances of 2026-10-17 (one unit each, acceptance record cited).
+const sceneAcceptances = progress.approvalLedger.items.filter(item => item.status === 'accepted' && item.acceptanceKind === 'scene-visual');
+assert.deepEqual(sceneAcceptances.map(item => [item.id, item.units]), [['nyc-public-facilities-room2-scene-visual-accepted', 1], ['nyc-public-facilities-room1-scene-visual-accepted', 1], ['yonkers-maintenance-room2-scene-visual-accepted', 1]]);
+for (const item of sceneAcceptances) {
+  assert.ok(item.evidence.some(file => /_scene-visual-acceptance_v01_20261017-\d{6}-[0-9a-f]{8}\.md$/.test(file) && fs.existsSync(path.join(root, file))), item.id + ' cites its acceptance record');
+  assert.ok(item.scope.includes('不包含角色动作') && item.scope.includes('两轮真人试玩'), item.id + ' scope excludes character motion and playtests');
+}
+assert.equal(bible.environmentVisualReview.sceneQualityAccepted, counters.sceneVisualsAccepted, 'Bible scene count equals the ledger');
+assert.equal(bible.environmentVisualReview.artAccepted, false, 'three scene gates do not accept the art as a whole');
 assert.equal(bible.characters.length, counters.identities, 'Bible identities equal the ledger');
 assert.equal(bible.environmentVisualReview.sceneQualityTarget, counters.sceneVisualsTarget);
 assert.equal(bible.creatorDecisions.geography.adventureStart, progress.m2Expansion.creatorDecision.adventureStart);
 const redesign = progress.decisions.find(decision => decision.id === 'skill-tree-redesign');
 assert.ok(redesign && redesign.kind === 'blocked' && redesign.detail.includes('200 + 510') && bible.canonBasis.skillNodes.approvedRequired === 200 + 510, 'skill redesign stays blocked at 200 + 510 = 710');
-pass(`progress: M2 in progress, ${implemented.length}/${gates.length} gates implemented, 2 open, none accepted; counters sprites 0/52, scenes 0/12, playtests 0/2, 51 identities / 52 variants; start date and 710-node redesign consistent with the Bible`);
+pass(`progress: M2 in progress, ${implemented.length}/${gates.length} gates implemented, 2 open, none accepted; counters sprites 0/52, scenes 3/12 (three recorded environment acceptances, Bible equal), playtests 0/2, 51 identities / 52 variants; start date and 710-node redesign consistent with the Bible`);
 
 // 5. Nothing was written.
 assert.deepEqual({bible: digest(builder.dest), progress: digest(progressPath)}, before, 'tracked JSON untouched');

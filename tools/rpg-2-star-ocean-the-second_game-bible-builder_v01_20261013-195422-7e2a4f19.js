@@ -291,9 +291,15 @@ function checkCanon(bible, progress = readProgress()) {
   check(nodes && nodes.approvedRequired === 710 && nodes.approvedCareerRequired + nodes.approvedPersonalRequired === 710 && nodes.approvedAuthored === 0 && nodes.supersededDraftCareerNodes === 140 && nodes.supersededDraftPersonalNodes === 80, 'skill nodes: 0 of 710 approved nodes authored; 140 + 80 superseded draft nodes');
 
   check(bible.openQuestions.some(question => question.title.includes('待按新规则重设计')) && !bible.openQuestions.some(question => /地理锚点|首城|开始年份/.test(question.title)), 'open questions: skill redesign open, resolved geography questions gone');
-  // 12 since the 2026-10-16 baseline revision added the Chicago Loop gate; the ledger target must agree.
-  check(bible.environmentVisualReview.sceneQualityAccepted === 0 && bible.environmentVisualReview.sceneQualityTarget === 12 && progress.approvalLedger.counters.sceneVisualsTarget === 12 &&
-    bible.environmentVisualReview.sceneQualityDenominatorReview?.applied === true && bible.environmentVisualReview.artAccepted === false, 'scene visuals 0/12 (Chicago Loop gate 12 applied), art not accepted');
+  // 12 since the 2026-10-16 baseline revision added the Chicago Loop gate; the ledger target must agree. The accepted count is
+  // the creator's scene-visual acceptances in the progress approvalLedger (3 on 2026-10-17: NYC public facilities rooms 1 and 2,
+  // Yonkers signal maintenance room 2); the Bible and the ledger counter must both equal the units of those items.
+  const sceneUnits = (progress.approvalLedger.items || []).filter(item => item.status === 'accepted' && item.acceptanceKind === 'scene-visual')
+    .reduce((sum, item) => sum + (item.units ?? 1), 0);
+  check(bible.environmentVisualReview.sceneQualityAccepted === sceneUnits && progress.approvalLedger.counters.sceneVisualsAccepted === sceneUnits &&
+    bible.environmentVisualReview.sceneQualityTarget === 12 && progress.approvalLedger.counters.sceneVisualsTarget === 12 &&
+    bible.environmentVisualReview.sceneQualityDenominatorReview?.applied === true && bible.environmentVisualReview.artAccepted === false,
+    `scene visuals ${sceneUnits}/12 equal the creator-accepted ledger items (Chicago Loop gate 12 applied), overall art not accepted`);
   check(bible.characterVisualReview.runtimeSpritesAccepted === 0 && bible.characterVisualReview.artAccepted === false, 'runtime sprites accepted 0');
   // Washington, D.C.: unapproved Pixelorama candidates exist (walkable v01-v08, separate cinematic v01-v02); none is wired or accepted.
   const dc = bible.environmentVisualReview.washingtonDC;

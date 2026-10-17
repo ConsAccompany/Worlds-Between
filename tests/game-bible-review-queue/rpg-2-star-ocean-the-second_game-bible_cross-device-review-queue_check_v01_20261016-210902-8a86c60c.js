@@ -158,7 +158,7 @@ async function renderProduction(base) {
   // 4. Counters and meter as recorded (sprites 0/52, scenes 3/12, playtests 0/2, 40.8%); Chicago denominator proposal recorded but not applied, with the meter recomputed from the formula.
   const counters = progress.approvalLedger.counters;
   assert.deepEqual([counters.runtimeSpritesAccepted, counters.runtimeSpritesTarget, counters.sceneVisualsAccepted, counters.sceneVisualsTarget, counters.humanPlaytests, counters.humanPlaytestsTarget], [0, 52, 3, 12, 0, 2]);
-  assert.equal(env.sceneQualityAccepted, 0);
+  assert.equal(env.sceneQualityAccepted, counters.sceneVisualsAccepted, 'Bible scene count equals the ledger (three creator acceptances of 2026-10-17)');
   assert.equal(env.sceneQualityTarget, 12);
   const review = env.sceneQualityDenominatorReview;
   assert.equal(review.applied, true);
