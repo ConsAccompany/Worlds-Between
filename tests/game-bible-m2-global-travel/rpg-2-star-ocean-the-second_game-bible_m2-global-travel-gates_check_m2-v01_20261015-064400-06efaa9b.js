@@ -97,13 +97,13 @@ const cardById = (html, id) => {
   const c = progress.approvalLedger.counters;
   assert.deepEqual(tally('runtime-sprite.'), [c.runtimeSpritesAccepted, c.runtimeSpritesTarget]);
   assert.deepEqual(tally('visual-scene.'), [c.sceneVisualsAccepted, c.sceneVisualsTarget]);
-  assert.deepEqual([c.runtimeSpritesAccepted, c.runtimeSpritesTarget, c.sceneVisualsAccepted, c.sceneVisualsTarget, c.humanPlaytests, c.humanPlaytestsTarget], [0, 52, 0, 11, 0, 2]);
+  assert.deepEqual([c.runtimeSpritesAccepted, c.runtimeSpritesTarget, c.sceneVisualsAccepted, c.sceneVisualsTarget, c.humanPlaytests, c.humanPlaytestsTarget], [0, 52, 0, 12, 0, 2]);
   assert.equal(checklist.scope.character_identities, c.identities);
   assert.equal(checklist.variants.length, c.visualVariants);
   assert.deepEqual([c.identities, c.visualVariants], [51, 52]);
   assert.equal(bible.environmentVisualReview.sceneQualityAccepted, 0);
-  assert.equal(bible.environmentVisualReview.sceneQualityTarget, 11);
-  pass('counters: sprites 0/52 and scenes 0/11 match the inventory; 51 identities / 52 variants match the checklist; human playtests 0/2');
+  assert.equal(bible.environmentVisualReview.sceneQualityTarget, 12);
+  pass('counters: sprites 0/52 and scenes 0/12 match the inventory; 51 identities / 52 variants match the checklist; human playtests 0/2');
 
   // 2. Approval scopes exactly as given: two scoped approvals, two direction acceptances, the animated variant not accepted.
   const byId = Object.fromEntries(progress.approvalLedger.items.map(i => [i.id, i]));
@@ -164,7 +164,7 @@ const cardById = (html, id) => {
   assert.ok(['已实现', '整点', '抵达日期', '不显示机场名、分项或钟点', '不代表地图美术或人工验收'].every(t => gate['route-data'].detail.includes(t)) && gate.calendar.detail.includes('只显示年月日'), 'route-data and calendar details state the current rule and its limit');
   assert.ok(!x.gates.some(g => /门到门|整数分钟|door-to-door|integer-minute/i.test(g.zh + ' ' + g.en)), 'no current gate label keeps the superseded door-to-door or integer-minute wording');
   assert.ok(['m2-v10_20261016-145448-d4c46b62.md', 'date-only-cards_manifest_m2-v11'].every(t => gate['route-data'].evidence.some(file => file.includes(t))), 'route-data cites the whole-hour QA note and the date-only capture manifest');
-  assert.ok(gate['map-art'].detail.includes('功能占位') && gate['visual-review'].detail.includes('0/2') && gate['visual-review'].detail.includes('0/11'));
+  assert.ok(gate['map-art'].detail.includes('功能占位') && gate['visual-review'].detail.includes('0/2') && gate['visual-review'].detail.includes('0/12'));
   // Route figures shown in the Bible must equal the active v02 game travel data.
   const travel = readJson(travelDataPath);
   const seg = id => travel.segments.find(s => s.id === id);
@@ -275,7 +275,7 @@ const cardById = (html, id) => {
     const ledger = cardById(html, 'approval-ledger');
     assert.equal(ledger.split('<details class="sources">').length - 1, progress.approvalLedger.items.length, 'one collapsed source list per ledger item');
     assert.ok(ledger.includes('查看来源 / View source（2）') && ledger.includes('QA 记录 / QA note') && ledger.includes('产出文件 / Output · 图片 / Image'), 'ledger source labels');
-    for (const label of ['探索精灵 / Runtime sprites 0 / 52', '科技区场景画质 / Science scene visuals 0 / 11', '人工计时试玩 / Human playtests 0 / 2', '角色 51 位 / 52 个视觉版本', '验收数未增加 · No counter incremented', '方向已接受 / Direction accepted', '未接受 / Not accepted']) {
+    for (const label of ['探索精灵 / Runtime sprites 0 / 52', '科技区场景画质 / Science scene visuals 0 / 12', '人工计时试玩 / Human playtests 0 / 2', '角色 51 位 / 52 个视觉版本', '验收数未增加 · No counter incremented', '方向已接受 / Direction accepted', '未接受 / Not accepted']) {
       assert.ok(ledger.includes(label), 'ledger shows: ' + label);
     }
     assert.equal(ledger.split('已批准（限定范围）/ Approved, scoped').length - 1, 2, 'exactly two scoped approval badges');
@@ -283,7 +283,7 @@ const cardById = (html, id) => {
     assert.equal([...decisionsCard.matchAll(/<li data-decision="/g)].length, progress.decisions.length);
     assert.ok(decisionsCard.includes('受阻 · 待决定 / Blocked') && decisionsCard.includes('候选 · 待审 / Candidate'));
     for (const card of [gates, ledger, decisionsCard]) assert.ok(!/<button|<input|<textarea|<select|data-check|asset-check|checkbox/i.test(card), 'no acceptance controls');
-    assert.ok(html.includes('场景画质 0 / 11') && html.includes('探索精灵 0 / 52'), 'inventory summary unchanged');
+    assert.ok(html.includes('场景画质 0 / 12') && html.includes('探索精灵 0 / 52'), 'inventory summary unchanged');
     // Existing approved v8 card is untouched.
     assert.ok(cardById(html, 'idle-selout-v8').includes('用户已批准 · 仅南向待机静态基准帧'));
 

@@ -196,7 +196,7 @@ async function renderProduction(base) {
   const items = inventory.categories.flatMap(c => c.subcategories.flatMap(s => s.items));
   const tally = p => { const list = items.filter(i => i.id.startsWith(p)); return [list.filter(i => i.checked).length, list.length]; };
   assert.deepEqual(tally('runtime-sprite.'), [0, 52]);
-  assert.deepEqual(tally('visual-scene.'), [0, 11]);
+  assert.deepEqual(tally('visual-scene.'), [0, 12]);
   const female = items.find(i => i.seloutV2PolishCandidate);
   assert.ok(female && female.checked === false, 'female runtime sprite stays unchecked');
   for (const key of ['seloutV2PolishCandidate', 'seloutV2PolishManifest', 'seloutV2VisualQaReport', 'seloutV1PixeloramaBaselinePxo']) assert.ok(fs.existsSync(path.join(root, female[key])), key);
@@ -213,7 +213,7 @@ async function renderProduction(base) {
   assert.equal(m8.status, 'in_progress');
   assert.match(m8.summary, /NOT approved/);
   assert.match(m8.summary, /48-logical-pixel display scale/);
-  pass('inventory 0/52 sprites, 0/11 scenes; v2 + v1 .pxo fields resolve; checklist inventory hash current (52 variants, 51 identities, 0 accepted); M8 in progress');
+  pass('inventory 0/52 sprites, 0/12 scenes; v2 + v1 .pxo fields resolve; checklist inventory hash current (52 variants, 51 identities, 0 accepted); M8 in progress');
 
   // 4b. v4 sprite, manifest, report and its eight captures (v4 + same-run v3 reference); still unapproved.
   const v4Manifest = JSON.parse(fs.readFileSync(path.join(root, v4ManifestRel), 'utf8'));
@@ -475,7 +475,7 @@ async function renderProduction(base) {
       assert.equal(sha256(Buffer.from(await response.arrayBuffer())), c.sha, href + ' served bytes');
     }
     assert.equal(hrefs.size, 8, 'card links exactly the eight captures');
-    assert.ok(html.includes(`探索精灵 0 / 52`) && html.includes(`场景画质 0 / 11`), 'page counters unchanged');
+    assert.ok(html.includes(`探索精灵 0 / 52`) && html.includes(`场景画质 0 / 12`), 'page counters unchanged');
     pass('Production view: one separate v2 card after the v1 cards, 3 inline v2 captures (city/bright/dark), all 8 captures linked and served byte-identical, unapproved status, v1 .pxo labelled not v2, 0/52 and 0/11 unchanged');
 
     // v4: its own card after the v2 card, inline v4 captures only, v3 comparisons as links.
@@ -589,7 +589,7 @@ async function renderProduction(base) {
     }
     assert.equal(v8Hrefs.size, 6, 'v8 card links exactly its six captures');
     assert.ok(html.includes('用户已批准 selout v8 作为女主南向待机静态帧基准') && !html.includes('待新的静态待机获用户批准后再开始'), 'visual-acceptance summary updated');
-    assert.ok(html.includes('探索精灵 0 / 52') && html.includes('场景画质 0 / 11'), 'page counters unchanged');
+    assert.ok(html.includes('探索精灵 0 / 52') && html.includes('场景画质 0 / 12'), 'page counters unchanged');
     const readinessStart = html.indexOf('id="character-readiness"');
     const femaleRowStart = html.indexOf('data-readiness-open="readiness.protagonist-female"', readinessStart);
     const femaleRow = html.slice(femaleRowStart, html.indexOf('</details>', femaleRowStart));

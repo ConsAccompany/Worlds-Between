@@ -3937,7 +3937,7 @@
     },
     {
       "title": "MVP 美术技术路线",
-      "detail": "目标是完成画面的品质。先用 Godot 2D 分层完成科技城市场景样板，再根据实际游戏画面决定是否需要 2.5D 场景技术。 华盛顿特区已定为高精度 Pixelorama 场景试点：已有未批准候选（可步行西侧园区 v01–v06、独立的穹顶定场远景 v01–v02），均未接入运行时、未验收；最新的可步行 v06 为未批准、非运行时候选，技术检查 47/47 通过（勘误后），不是场景验收；良渚改为未来亚洲／武侠场景，不属于 MVP。"
+      "detail": "目标是完成画面的品质。先用 Godot 2D 分层完成科技城市场景样板，再根据实际游戏画面决定是否需要 2.5D 场景技术。 华盛顿特区已定为高精度 Pixelorama 场景试点：已有未批准候选（可步行西侧园区 v01–v08、独立的穹顶定场远景 v01–v02），均未接入运行时、未验收；最新的可步行 v08（废墟状态可读性）为未批准、非运行时候选，技术检查 67/67 通过，不是场景验收；v06 的 47/47（勘误后）与 v07 的 60/60 保留为历史记录；良渚改为未来亚洲／武侠场景，不属于 MVP。"
     },
     {
       "title": "职业与个人技能树（待按新规则重设计）",
@@ -4288,9 +4288,268 @@
     "battleArenaCandidatesAuthored": 1,
     "battleArenaCandidatesIntegrated": 0,
     "sceneQualityAccepted": 0,
-    "sceneQualityTarget": 11,
+    "sceneQualityTarget": 12,
     "artAccepted": false,
     "humanReview": false,
+    "crossDeviceReviewQueue": {
+      "asOf": "2026-10-16",
+      "source": "docs/qa/rpg-2-star-ocean-the-second_game-bible_cross-device-visual-review-queue_unapproved-v01_20261016-184200-1b0da761.md",
+      "zh": "跨设备视觉审查队列：六张都是真实 Godot 截图，状态按记录逐项标注。列入队列不批准任何画面；完成度 35.8%、精灵 0/52、场景 0/12、美术完成后试玩 0/2 均不变。生成的概念图另列，不进入画廊。",
+      "en": "Cross-device visual review queue: all six are actual Godot captures, each badged from its recorded status. Being in the queue approves nothing; meter 35.8%, sprites 0/52, scenes 0/12 and post-art playtests 0/2 are unchanged. Generated concepts are listed separately and never enter the gallery.",
+      "siteRendering": "The deployed private Site (site version 10, forked bible.js) renders only characterVisualReview.previews with flat outputs/*.png names. This queue appears there only after a Site client patch reviewed and deployed by Codex. Items marked staged-not-pushed (#3, #5, #6) have no GitHub raw URL until the coordinator commits and pushes them.",
+      "items": [
+        {
+          "order": 1,
+          "label": {
+            "zh": "探索女主 · 朝南待机 selout v8",
+            "en": "Exploration heroine, south idle selout v8"
+          },
+          "kind": "actual-godot-capture",
+          "file": "outputs/rpg-2-star-ocean-the-second_city-bright_protagonist-female-south-idle-selout-v8-h48_m8-v08_20261015-022215-e2203167.png",
+          "gitBlob": "bd3add4a9cb69ee162fa0aaaef900e320ad4c29a",
+          "syncState": "committed-at-a87ac16",
+          "creatorApproved": true,
+          "approvalScope": "static south still and 48-logical-pixel display scale only",
+          "runtimeIntegrated": false,
+          "artAccepted": false,
+          "badge": {
+            "zh": "已批准静态基准（仅朝南单帧）· 未接入运行时",
+            "en": "Approved static baseline (south still only) · nonruntime",
+            "tone": "good"
+          },
+          "caption": {
+            "zh": "只批准静态帧与显示比例；动作与四方向仍未完成。",
+            "en": "Only the static frame and display scale are approved; motion and the four-direction set remain open."
+          },
+          "qa": "docs/qa/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v8_visual-qa-note_m8-v08_20261015-021600-c1694107.md",
+          "sha256": "0b8e67ac75539fdac46e7843687d660d0dfa98697f7bf229b0079437351d9e65"
+        },
+        {
+          "order": 2,
+          "label": {
+            "zh": "战斗女主 · 朝右待机 v10",
+            "en": "Battle heroine, right idle v10"
+          },
+          "kind": "actual-godot-capture",
+          "file": "outputs/rpg-2-star-ocean-the-second_protagonist-female_sideview-idle-right-static-native0p65_party-capture-ruins-640_unapproved-v10_20261016-162819-de44e59a.png",
+          "gitBlob": "cd5598dc93937272b777e74b7917f1e77491ca49",
+          "syncState": "committed-at-a87ac16",
+          "creatorApproved": false,
+          "runtimeIntegrated": false,
+          "artAccepted": false,
+          "badge": {
+            "zh": "未批准 · 未接入运行时",
+            "en": "Unapproved · nonruntime",
+            "tone": "warn"
+          },
+          "caption": {
+            "zh": "未批准静态试作；只有 0.65 比例获批准，手臂、铺盖卷与外套分离仍需修正。",
+            "en": "Unapproved static pilot; only the 0.65 proportion is approved; arm, bedroll and coat separation still need refinement."
+          },
+          "qa": "docs/qa/rpg-2-star-ocean-the-second_protagonist-female_battle-static-v10-ready-stance-pass_qa-note_unapproved-v01_20261016-162819-789c8877.md",
+          "sha256": "50687caf05283c4f379a1ec36ff806819b5d47a06d684f58273b4e29f2df1d8c"
+        },
+        {
+          "order": 3,
+          "label": {
+            "zh": "纽约市政厅公园 v04",
+            "en": "NYC City Hall Park v04"
+          },
+          "kind": "actual-godot-capture",
+          "file": "outputs/nyc-chp-v04_20261016-172144-eb092a52/rpg-2-star-ocean-the-second_nyc-city-hall-park_godot-render-640x360-axis-test-npc_unapproved-v04_20261016-172144-eb092a52.png",
+          "syncState": "staged-not-pushed",
+          "hashPinnedIn": "outputs/rpg-2-star-ocean-the-second_mvp-completion-ledger_map-art-v02-nyc-v04-career-s1b-closeout-evidence-index_v01_20261016-220533-2f06d687.json",
+          "creatorApproved": false,
+          "runtimeIntegrated": false,
+          "artAccepted": false,
+          "badge": {
+            "zh": "未批准 · 未接入运行时",
+            "en": "Unapproved · nonruntime",
+            "tone": "warn"
+          },
+          "caption": {
+            "zh": "未批准的真实 Godot 场景；可通行，景深与材质层次仍在审查。行人只在测试叠加层中。",
+            "en": "Unapproved actual Godot scene; navigation works, visual depth and material hierarchy are still under review. Visitors appear only in a test-only overlay."
+          },
+          "qa": "docs/qa/rpg-2-star-ocean-the-second_nyc-city-hall-park_walkable-pilot-640x360_qa-note_unapproved-v04_20261016-172144-eb092a52.md",
+          "sha256": "9f61420cc4c40d214056f9a2b8a1dac38cc981f82971d6156237a7b16b43a42a",
+          "gitBlob": "9848c949d99361c2ea0aed33318283493ed1911e"
+        },
+        {
+          "order": 4,
+          "label": {
+            "zh": "华盛顿国会大厦西侧 v08",
+            "en": "Washington Capitol west grounds v08"
+          },
+          "kind": "actual-godot-capture",
+          "file": "outputs/wdc-cw-v08_20261016-155827-6cf49486/rpg-2-star-ocean-the-second_wdc-capitol-west_godot-640x360-entry_unapproved-v08_20261016-155827-6cf49486.png",
+          "gitBlob": "bb022ebebbe01193ffb40a8f05013dd747552841",
+          "syncState": "committed-at-a87ac16",
+          "creatorApproved": false,
+          "runtimeIntegrated": false,
+          "artAccepted": false,
+          "badge": {
+            "zh": "未批准 · 未接入运行时",
+            "en": "Unapproved · nonruntime",
+            "tone": "warn"
+          },
+          "caption": {
+            "zh": "未批准的真实 Godot 场景；穹顶可辨认，但立面对废城而言过于完整。",
+            "en": "Unapproved actual Godot scene; the dome is recognizable, but the facade is too intact for an abandoned ruin."
+          },
+          "qa": "docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_ruin-state-legibility_qa-note_unapproved-v08_20261016-155827-6cf49486.md",
+          "sha256": "b566a88a4c666c81d5f3b5cea33956685e966c2dbbd1ffa3ad4fa9b4f3c3deab"
+        },
+        {
+          "order": 5,
+          "label": {
+            "zh": "世界地图 v02 · 美国东北部",
+            "en": "World map v02, Northeast"
+          },
+          "kind": "actual-godot-capture",
+          "file": "outputs/rpg-2-star-ocean-the-second_global-map-art_us-northeast-zh-640x360-candidate_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+          "syncState": "staged-not-pushed",
+          "hashPinnedIn": "outputs/rpg-2-star-ocean-the-second_mvp-completion-ledger_map-art-v02-nyc-v04-career-s1b-closeout-evidence-index_v01_20261016-220533-2f06d687.json",
+          "creatorApproved": false,
+          "runtimeIntegrated": false,
+          "artAccepted": false,
+          "badge": {
+            "zh": "未批准 · 未接入运行时（测试皮肤）",
+            "en": "Unapproved · nonruntime (test-only skin)",
+            "tone": "warn"
+          },
+          "caption": {
+            "zh": "实时地图加未批准的测试皮肤；纽约与扬克斯标签需要拉开间距。",
+            "en": "Live map with the unapproved test-only skin; the NYC and Yonkers labels need spacing."
+          },
+          "qa": "docs/qa/rpg-2-star-ocean-the-second_global-map-art_northeast-and-globe-candidate_qa-note_candidate-unapproved-v02_20261016-172153-ab9459d4.md",
+          "sha256": "50e59f16614240dd7c6b91452dab0964b1dbcdcc94d36439b0e2b52075ec355f",
+          "gitBlob": "8e637f163ae049d1009883fba86ce9e9b5e9c367"
+        },
+        {
+          "order": 6,
+          "label": {
+            "zh": "芝加哥旅行卡 v02",
+            "en": "Chicago travel card v02"
+          },
+          "kind": "actual-godot-capture",
+          "file": "outputs/rpg-2-star-ocean-the-second_global-map-art_us-great-lakes-card-chicago-air-zh-640x360-candidate_candidate-unapproved-v02_20261016-172153-ab9459d4.png",
+          "syncState": "staged-not-pushed",
+          "hashPinnedIn": "outputs/rpg-2-star-ocean-the-second_mvp-completion-ledger_map-art-v02-nyc-v04-career-s1b-closeout-evidence-index_v01_20261016-220533-2f06d687.json",
+          "creatorApproved": false,
+          "runtimeIntegrated": false,
+          "artAccepted": false,
+          "badge": {
+            "zh": "未批准 · 未接入运行时（测试皮肤）",
+            "en": "Unapproved · nonruntime (test-only skin)",
+            "tone": "warn"
+          },
+          "caption": {
+            "zh": "实时地图加未批准的测试皮肤；目的地卡片遮住部分航线。",
+            "en": "Live map with the unapproved test-only skin; the destination card partly hides the route."
+          },
+          "qa": "docs/qa/rpg-2-star-ocean-the-second_global-map-art_northeast-and-globe-candidate_qa-note_candidate-unapproved-v02_20261016-172153-ab9459d4.md",
+          "sha256": "0c9fb5d11186bed7f18ce65b78428c1ddbb63facf8773a5fe1b78b7f7ef96778",
+          "gitBlob": "62a01a9b39ffe2db58dabd3599ae8b3dff5c22d0"
+        }
+      ],
+      "nonruntimeConcepts": {
+        "galleryEligible": false,
+        "zh": "以下是生成的概念图或身份参考，不是 Godot 截图，也不是可玩画面，不得作为运行时画廊图片显示。",
+        "en": "Generated concepts or identity references, not Godot captures and not playable art; never shown as runtime gallery images.",
+        "items": [
+          {
+            "label": "Washington structural-damage visual guide",
+            "kind": "generated-concept",
+            "file": "outputs/rpg-2-star-ocean-the-second_wdc-capitol-west_structural-damage-art-direction-nonruntime-v02_20261016-183256-3865fc0f.png",
+            "syncState": "local-only"
+          },
+          {
+            "label": "Chicago elevated-rail visual guide",
+            "kind": "generated-concept",
+            "file": "outputs/rpg-2-star-ocean-the-second_chicago-loop_car-arrival-l-viaduct-art-direction-nonruntime-v01_20261015-214006-6a56c565.png",
+            "syncState": "local-only"
+          },
+          {
+            "label": "Female 21:9 character sheet",
+            "kind": "identity-reference",
+            "file": "outputs/rpg-2-star-ocean-the-second_protagonist_character-sheet_female_20261013-153316-8fa4d0c3.png",
+            "syncState": "committed-at-a87ac16"
+          },
+          {
+            "label": "Washington side-view battle environment guide",
+            "kind": "generated-concept",
+            "file": "outputs/rpg-2-star-ocean-the-second_wdc-capitol-west_sideview-battle-arena-art-direction-nonruntime-v01_20261016-193018-f4d8246c.png",
+            "syncState": "local-only"
+          },
+          {
+            "label": "Yonkers side-view battle environment guide",
+            "kind": "generated-concept",
+            "file": "outputs/rpg-2-star-ocean-the-second_yonkers-outskirts_sideview-battle-arena-art-direction-nonruntime-v01_20261016-193255-76d9b413.png",
+            "syncState": "local-only"
+          }
+        ]
+      },
+      "syncStateRule": {
+        "en": "committed-at-<sha>: the blob is in that pushed commit (raw URL checked). staged-not-pushed: the exact blob is in the local Git index only; it is not committed or pushed and is not visible on any other device. local-only: untracked, hash-pinned in an evidence index. The coordinator changes staged-not-pushed to committed-at-<sha> only after the push and a raw-URL check.",
+        "zh": "committed-at-<sha>：该文件已在已推送的提交中（已核对 raw 链接）。staged-not-pushed：确切文件仅在本机 Git 暂存区，尚未提交或推送，其他设备看不到。local-only：未跟踪，哈希固定在证据索引中。只有推送并核对 raw 链接后，协调者才把 staged-not-pushed 改为 committed-at-<sha>。"
+      },
+      "gitProposal": {
+        "asOf": "2026-10-16",
+        "state": "staged-not-committed",
+        "items": [
+          3,
+          5,
+          6
+        ],
+        "qa": "docs/qa/rpg-2-star-ocean-the-second_game-bible_stream-c2-scene-gate-blocked-and-three-capture-git-proposal_qa-note_unapproved-v03_20261016-212130-8cf8add8.md",
+        "note": "Exactly three actual Godot PNGs were staged by explicit path, with no other file from their capture folders. They are labelled unapproved, and no art, scene or map is accepted."
+      }
+    },
+    "sceneQualityDenominatorReview": {
+      "asOf": "2026-10-16",
+      "question": "Does the freely explorable Chicago Loop block add a twelfth science scene-quality gate?",
+      "recommendation": "yes",
+      "applied": true,
+      "currentDenominator": 12,
+      "proposedGateId": "chicago-loop-outdoor",
+      "originalGates": [
+        "global-earth-map",
+        "nyc-city-hall-park-outdoor",
+        "yonkers-outskirts-outdoor",
+        "washington-capitol-west-outdoor",
+        "nyc-public-archive-room-1",
+        "nyc-public-facilities-room-2",
+        "yonkers-antenna-corridor",
+        "yonkers-signal-maintenance-room",
+        "washington-archive-outer-ring",
+        "washington-record-interior",
+        "science-battle-arena"
+      ],
+      "rationale": [
+        "The creator's 2026-10-15 decision puts the Chicago Loop inside the MVP (mvpChicago: the Loop).",
+        "The runtime Loop scene is reached by the only air route, can be walked freely along the real street grid, and can be saved and resumed; players see it in normal play.",
+        "The 11 gates were set on 2026-10-14 (map, three outdoor areas, six interiors, arena), before the US geography, and none of them covers the Loop.",
+        "Without a gate, environment art could reach 11/11 while a code-drawn placeholder ships in an MVP area.",
+        "Counter-point considered: the Loop scene has no survey, recruit, trace or battle and is never added to areas_visited, so it is outside the three-place demo goal. The gate measures what players see, not content, so it still applies; the Loop gate should be judged on scene finish and street-grid legibility only."
+      ],
+      "meterImpact": "Accepted scenes stay 0. science-environment-art is 20 × 0/11 = 0 points now and would be 20 × 0/12 = 0 points with the twelfth gate, so the total stays 20 + 8.33 + 7.5 + 0 + 0 + 0 = 35.83, i.e. 35.8%. The meter CLI check was run on 2026-10-16 (CHECK OK 35.8%), and the review-queue test recomputes both denominators from the stored categories.",
+      "notAppliedBecause": "A denominator change is a baseline revision, not task progress (meter counting rule). The meter CLI fixes science-environment-art at denominator 11 and validate rejects sceneVisualsTarget 12; approvalLedger.counters, the asset-inventory scene items, environmentVisualReview.sceneQualityTarget, builder canon check 0/11, six Game Bible tests and the meter test pin 11. These must change together in one reviewed revision with a recorded baseline closeout. Stream C proposes it for coordinator and creator decision rather than changing the creator-set target on its own.",
+      "qa": "docs/qa/rpg-2-star-ocean-the-second_game-bible_stream-c-review-queue-render-wdc-v08-sync-and-chicago-gate-decision_qa-note_unapproved-v02_20261016-210902-ba97998b.md",
+      "priorQa": "docs/qa/rpg-2-star-ocean-the-second_game-bible_stream-c-evidence-sync-and-scene-denominator-review_qa-note_unapproved-v01_20261016-235900-5d2c8a14.md",
+      "secondBatch": {
+        "asOf": "2026-10-16",
+        "outcome": "applied",
+        "blocker": null,
+        "creatorConflictFound": false,
+        "qa": "docs/qa/rpg-2-star-ocean-the-second_game-bible_stream-c2-scene-gate-blocked-and-three-capture-git-proposal_qa-note_unapproved-v03_20261016-212130-8cf8add8.md",
+        "checklistHashRefresh": "sources.inventory.sha256 in the readiness checklist JSON and its 16-character form in the .md twin only; explicitly allowed by the coordinator on 2026-10-16; the unrelated untracked_discovered_manifests edits were left unstaged"
+      },
+      "previousDenominator": 11,
+      "appliedAt": "2026-10-17T01:38:19Z",
+      "appliedCloseoutId": "closeout-20261017-013819-8beba0c8",
+      "applyQa": "docs/qa/rpg-2-star-ocean-the-second_game-bible_stream-c2-chicago-twelfth-scene-gate-applied-baseline-revision_qa-note_unapproved-v04_20261016-213500-ec0d49d5.md"
+    },
     "geographyRuleRegressionReview": "docs/qa/rpg-2-star-ocean-the-second_geography-rule_visual-regression-review_unapproved-v01_20261015-003237-f8f604dd.md",
     "currentMapSatisfiesGeographyRule": false,
     "geographyMapStudies": {
@@ -4371,13 +4630,15 @@
           "v03",
           "v04",
           "v05",
-          "v06"
+          "v06",
+          "v07",
+          "v08"
         ],
         "cinematic": [
           "v01",
           "v02"
         ],
-        "status": "未批准候选：可步行西侧园区 v01–v06 与独立的穹顶定场远景 v01–v02 已制作，均未接入运行时、未验收；highPrecisionPixelSceneAuthored 仍为 false，指尚无可接入或已验收的场景",
+        "status": "未批准候选：可步行西侧园区 v01–v08 与独立的穹顶定场远景 v01–v02 已制作，均未接入运行时、未验收；highPrecisionPixelSceneAuthored 仍为 false，指尚无可接入或已验收的场景",
         "runtimeIntegrated": false,
         "artAccepted": false,
         "evidence": [
@@ -4386,22 +4647,52 @@
           "docs/qa/rpg-2-star-ocean-the-second_wdc-dome-west_cinematic-vista_qa-note_unapproved-v02_20261016-044903-cdb4ebdb.md",
           "docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_walkable-v05-codex-visual-audit_unapproved-v01_20261016-064427-00f04ea5.md",
           "docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_walkable-scale-depth_qa-note_unapproved-v06_20261016-071733-18b9cea3.md",
-          "docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_walkable-v06-codex-visual-audit_unapproved-v01_20261016-134646-35af3a0d.md"
+          "docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_walkable-v06-codex-visual-audit_unapproved-v01_20261016-134646-35af3a0d.md",
+          "docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_vista-texture-merge_qa-note_unapproved-v07_20261016-145408-0f854fbc.md",
+          "docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_ruin-state-legibility_qa-note_unapproved-v08_20261016-155827-6cf49486.md"
         ],
         "latestWalkable": {
-          "version": "v06",
-          "runId": "18b9cea3",
+          "version": "v08",
+          "runId": "6cf49486",
           "status": "UNAPPROVED / NONRUNTIME",
-          "technicalGates": "47/47",
-          "technicalGatesNote": "技术检查 47/47 通过（整合复核勘误：原 QA 笔记中的 48/48 为误计，报告与重跑均为 47 项）；技术检查通过不是画面验收",
+          "technicalGates": "67/67",
+          "technicalGatesNote": "技术检查 67/67 通过（check --write-report）；技术检查通过不是画面验收",
           "runtimeIntegrated": false,
           "artAccepted": false,
           "sceneApproved": false,
-          "zh": "v06（尺度与纵深候选）：国会大厦与穹顶在 48 px 主角身后更大、更易辨认；Codex 视觉审计认为西草坪被压成窄条、立面与地面纹样重复、巡逻机械缺少落地感，尚未达到所要求的成品环境画质。.pxo 图层由表格生成，未在 Pixelorama 界面中打开保存，不能称为手绘完成的 Pixelorama 场景。",
-          "en": "v06 (scale-depth candidate): the Capitol and dome read larger and more recognizable behind the 48 px heroine; the Codex visual audit finds the West Lawn compressed into a narrow strip, repeated facade and ground patterns, and a patrol machine without ground contact, so it is not yet the requested finished environment quality. The .pxo layers were generated from tables and never opened or saved in the Pixelorama GUI; it is not a completed hand-painted Pixelorama scene.",
-          "qa": "docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_walkable-scale-depth_qa-note_unapproved-v06_20261016-071733-18b9cea3.md",
-          "codexVisualAudit": "docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_walkable-v06-codex-visual-audit_unapproved-v01_20261016-134646-35af3a0d.md"
-        }
+          "zh": "v08（废墟状态可读性）：沿用 v07 的构图、镜头、广场与可步行区域（walkmask 与 v07、v06 字节相同），只改国会大厦背景：南侧缺口 A 塌至主楼层并堆起新碎石锥，北端缺口 B 为长草的旧坍塌；穹顶与中央楼阁与 v07 完全相同。Codex 在 640×360 下仍认为平台与中央台阶几乎完整、碎石像放在完好平台上，立面对废城而言过于完整。.pxo 由表格生成并经 Pixelorama 无界面往返，未在 Pixelorama 界面中打开保存。",
+          "en": "v08 (ruin-state legibility): keeps v07's composition, camera, plaza and walkable area (walkmask byte-identical to v07 and v06) and changes only the Capitol backdrop: south breach A gutted to the principal floor with a fresh rubble cone, north breach B an old grassed-over collapse; dome and central pavilion identical to v07. At 640×360 Codex still reads the terrace and central stair as nearly continuous and the rubble as placed on a sound terrace; the facade is too intact for an abandoned city. The .pxo was generated from tables with a headless Pixelorama round-trip and never opened or saved in the Pixelorama GUI.",
+          "qa": "docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_ruin-state-legibility_qa-note_unapproved-v08_20261016-155827-6cf49486.md",
+          "parent": {
+            "version": "v07",
+            "runId": "0f854fbc",
+            "qa": "docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_vista-texture-merge_qa-note_unapproved-v07_20261016-145408-0f854fbc.md"
+          },
+          "syncedInCommit": "f1489aa",
+          "codexVisualCheck": "docs/qa/rpg-2-star-ocean-the-second_game-bible_cross-device-visual-review-queue_unapproved-v01_20261016-184200-1b0da761.md"
+        },
+        "walkableHistory": [
+          {
+            "version": "v06",
+            "runId": "18b9cea3",
+            "technicalGates": "47/47",
+            "technicalGatesNote": "技术检查 47/47 通过（整合复核勘误：原 QA 笔记中的 48/48 为误计，报告与重跑均为 47 项）；技术检查通过不是画面验收",
+            "status": "UNAPPROVED / NONRUNTIME",
+            "qa": "docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_walkable-scale-depth_qa-note_unapproved-v06_20261016-071733-18b9cea3.md",
+            "codexVisualAudit": "docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_walkable-v06-codex-visual-audit_unapproved-v01_20261016-134646-35af3a0d.md",
+            "zh": "v06（尺度与纵深候选）：国会大厦与穹顶在 48 px 主角身后更大、更易辨认；Codex 视觉审计认为西草坪被压成窄条、立面与地面纹样重复、巡逻机械缺少落地感，尚未达到所要求的成品环境画质。.pxo 图层由表格生成，未在 Pixelorama 界面中打开保存，不能称为手绘完成的 Pixelorama 场景。",
+            "en": "v06 (scale-depth candidate): the Capitol and dome read larger and more recognizable behind the 48 px heroine; the Codex visual audit finds the West Lawn compressed into a narrow strip, repeated facade and ground patterns, and a patrol machine without ground contact, so it is not yet the requested finished environment quality. The .pxo layers were generated from tables and never opened or saved in the Pixelorama GUI; it is not a completed hand-painted Pixelorama scene."
+          },
+          {
+            "version": "v07",
+            "runId": "0f854fbc",
+            "technicalGates": "60/60",
+            "status": "UNAPPROVED / NONRUNTIME",
+            "qa": "docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_vista-texture-merge_qa-note_unapproved-v07_20261016-145408-0f854fbc.md",
+            "zh": "v07（远景与材质合并）：保留 v06 的构图、穹顶图层与可步行区域，只引入 v05t 的立面、风化与下部地面材质；技术检查 60/60。",
+            "en": "v07 (vista + texture merge): keeps v06's composition, dome layer and walkable area, and transfers only v05t's facade, weathering and lower-ground materials; technical 60/60."
+          }
+        ]
       },
       "note": "docs/design/rpg-2-star-ocean-the-second_creator-decisions-2026-10-15_world-skills-ai-endgame_reconciliation-note_v01_20261015-174559-39efc292.md"
     }

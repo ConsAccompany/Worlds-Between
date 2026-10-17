@@ -60,7 +60,7 @@ const mutations = [
   ['final planet listed as an Earth sphere', b => { b.creatorDecisions.spheres.push({id: 'offworld', zh: '星外', region: '另一颗星球', hubs: []}); }, /five Earth spheres/],
   ['career draft no longer superseded', b => { b.skillTreeProposal.superseded = false; }, /career trees/],
   ['personal draft rank rule rewritten', b => { b.personalSkillTrees.approvedRules.rankMaximum = 3; }, /personal trees/],
-  ['scene counter incremented', b => { b.environmentVisualReview.sceneQualityAccepted = 1; }, /scene visuals 0\/11/],
+  ['scene counter incremented', b => { b.environmentVisualReview.sceneQualityAccepted = 1; }, /scene visuals 0\/12/],
   ['wrong start date', b => { b.creatorDecisions.geography.adventureStart = '2026-04-01'; }, /geography/],
   ['selout v8 baseline claimed as animated', b => { b.characterVisualReview.staticBaselinesAndPilots.femaleExplorationSouthBaseline.animation = true; }, /selout v8/],
   ['battle v08 pilot claimed as approved', b => { b.characterVisualReview.staticBaselinesAndPilots.femaleBattleSideviewV08.status = 'APPROVED'; }, /battle side-view v08/],
@@ -90,13 +90,13 @@ assert.deepEqual(gates.filter(gate => gate.status !== 'implemented').map(gate =>
 assert.equal(gates.find(gate => gate.id === 'route-data').en, 'Route times (whole-hour rule)', 'route-data is the whole-hour route-times gate');
 assert.ok(!gates.some(gate => /done|accepted|approved/.test(gate.status)), 'no gate claims acceptance');
 const counters = progress.approvalLedger.counters;
-assert.deepEqual(counters, {identities: 51, visualVariants: 52, runtimeSpritesAccepted: 0, runtimeSpritesTarget: 52, sceneVisualsAccepted: 0, sceneVisualsTarget: 11, humanPlaytests: 0, humanPlaytestsTarget: 2});
+assert.deepEqual(counters, {identities: 51, visualVariants: 52, runtimeSpritesAccepted: 0, runtimeSpritesTarget: 52, sceneVisualsAccepted: 0, sceneVisualsTarget: 12, humanPlaytests: 0, humanPlaytestsTarget: 2});
 assert.equal(bible.characters.length, counters.identities, 'Bible identities equal the ledger');
 assert.equal(bible.environmentVisualReview.sceneQualityTarget, counters.sceneVisualsTarget);
 assert.equal(bible.creatorDecisions.geography.adventureStart, progress.m2Expansion.creatorDecision.adventureStart);
 const redesign = progress.decisions.find(decision => decision.id === 'skill-tree-redesign');
 assert.ok(redesign && redesign.kind === 'blocked' && redesign.detail.includes('200 + 510') && bible.canonBasis.skillNodes.approvedRequired === 200 + 510, 'skill redesign stays blocked at 200 + 510 = 710');
-pass(`progress: M2 in progress, ${implemented.length}/${gates.length} gates implemented, 2 open, none accepted; counters sprites 0/52, scenes 0/11, playtests 0/2, 51 identities / 52 variants; start date and 710-node redesign consistent with the Bible`);
+pass(`progress: M2 in progress, ${implemented.length}/${gates.length} gates implemented, 2 open, none accepted; counters sprites 0/52, scenes 0/12, playtests 0/2, 51 identities / 52 variants; start date and 710-node redesign consistent with the Bible`);
 
 // 5. Nothing was written.
 assert.deepEqual({bible: digest(builder.dest), progress: digest(progressPath)}, before, 'tracked JSON untouched');

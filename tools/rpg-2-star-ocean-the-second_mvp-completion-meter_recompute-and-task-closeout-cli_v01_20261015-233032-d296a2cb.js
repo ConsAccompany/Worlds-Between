@@ -8,7 +8,8 @@
 //   node tools/<this file> check
 //   node tools/<this file> init        (once: adds completionMeter with a baseline closeout)
 //   node tools/<this file> record --title-en "..." [--title-zh "..."] [--gate <category>[/<gate>]]...
-//        [--set-gate science-playable-content/<gate>=<status>]... [--evidence <repo path>]... [--dry-run]
+//        [--set-gate science-playable-content/<gate>=<status>]... [--evidence <repo path>]... [--baseline-revision] [--dry-run]
+// --baseline-revision records a change to a fixed denominator (kind baseline-revision); it may not change any count.
 // Options for every command: --state <path> works on another copy (tests); --now <ISO time> fixes the timestamp.
 'use strict';
 const crypto = require('node:crypto');
@@ -41,7 +42,7 @@ const CATEGORIES = [
   {id: 'character-art', weight: 25, denominator: 52, kind: 'ledger-counter', counter: 'runtimeSpritesAccepted', target: 'runtimeSpritesTarget', acceptanceKind: 'runtime-sprite',
     zh: '角色美术（已验收运行时精灵）', en: 'Character art (accepted runtime sprites)',
     rule: {zh: '取 approvalLedger.counters.runtimeSpritesAccepted，且须有 status=accepted、acceptanceKind=runtime-sprite 的台账条目支撑；概念稿、未批准静态帧和冒烟测试不计。', en: 'Uses approvalLedger.counters.runtimeSpritesAccepted, backed by ledger items with status accepted and acceptanceKind runtime-sprite. Concepts, unapproved static frames and smoke tests never count.'}},
-  {id: 'science-environment-art', weight: 20, denominator: 11, kind: 'ledger-counter', counter: 'sceneVisualsAccepted', target: 'sceneVisualsTarget', acceptanceKind: 'scene-visual',
+  {id: 'science-environment-art', weight: 20, denominator: 12, kind: 'ledger-counter', counter: 'sceneVisualsAccepted', target: 'sceneVisualsTarget', acceptanceKind: 'scene-visual',
     zh: '科技圈环境美术（已验收场景画质门）', en: 'Science environment art (accepted scene-quality gates)',
     rule: {zh: '取 approvalLedger.counters.sceneVisualsAccepted，且须有 status=accepted、acceptanceKind=scene-visual 的台账条目支撑；概念图与方向认可不计。', en: 'Uses approvalLedger.counters.sceneVisualsAccepted, backed by ledger items with status accepted and acceptanceKind scene-visual. Concepts and direction approvals never count.'}},
   {id: 'final-integrated-validation', weight: 15, denominator: 2, kind: 'ledger-counter', counter: 'humanPlaytests', target: 'humanPlaytestsTarget', acceptanceKind: 'post-art-playtest', requiresArtComplete: true,
@@ -292,7 +293,7 @@ function gateChanges(meter, computed) {
       for (const id of c.countedGateIds.filter(id => !before.includes(id))) changes.push({key: c.id + '/' + id, category: c.id, gate: id, from: 'not_counted', to: 'counted'});
       for (const id of before.filter(id => !c.countedGateIds.includes(id))) changes.push({key: c.id + '/' + id, category: c.id, gate: id, from: 'counted', to: 'not_counted'});
     } else if (stored.numerator !== c.numerator) {
-      changes.push({key: c.id, category: c.id, gate: null, from: stored.numerator + '/' + c.denominator, to: ratio(c)});
+      changes.push({key: c.id, category: c.id, gate: null, from: stored.numerator + '/' + stored.denominator, to: ratio(c)});
     }
   }
   return changes;
@@ -380,6 +381,12 @@ function record(state, opts, ctx) {
 
   const computed = compute(state, working);
   const changes = gateChanges(meter, computed);
+  const baselineChanges = computed.categories.map(c => ({c, stored: meter.categories.find(x => x.id === c.id)}))
+    .filter(({c, stored}) => stored.denominator !== c.denominator)
+    .map(({c, stored}) => ({category: c.id, field: 'denominator', from: stored.denominator, to: c.denominator}));
+  if (baselineChanges.length && !opts.baselineRevision) throw new Error('fixed baseline denominator changed (' + baselineChanges.map(b => `${b.category} ${b.from} -> ${b.to}`).join(', ') + '); record it with --baseline-revision');
+  if (opts.baselineRevision && !baselineChanges.length) throw new Error('--baseline-revision given but no baseline denominator changed');
+  if (opts.baselineRevision && changes.length) throw new Error('a baseline revision may not change counts; record count changes in a separate closeout: ' + changes.map(c => c.key).join(', '));
   const changedKeys = changes.map(c => c.key);
   const unclaimed = changedKeys.filter(key => !claims.includes(key));
   const unchanged = claims.filter(key => !changedKeys.includes(key));
@@ -395,12 +402,13 @@ function record(state, opts, ctx) {
   const closeoutId = 'closeout-' + stamp(now) + '-' + crypto.randomBytes(4).toString('hex');
   const categoryChanges = computed.categories.map(c => ({c, stored: meter.categories.find(x => x.id === c.id)}))
     .filter(({c, stored}) => stored.numerator !== c.numerator)
-    .map(({c, stored}) => ({id: c.id, before: stored.numerator + '/' + c.denominator, after: ratio(c), weightedPointsBefore: stored.weightedPoints, weightedPointsAfter: c.weightedPoints}));
+    .map(({c, stored}) => ({id: c.id, before: stored.numerator + '/' + stored.denominator, after: ratio(c), weightedPointsBefore: stored.weightedPoints, weightedPointsAfter: c.weightedPoints}));
   const closeout = {
-    id: closeoutId, recordedAt: now, kind: 'task',
+    id: closeoutId, recordedAt: now, kind: opts.baselineRevision ? 'baseline-revision' : 'task',
     title: {zh: opts.titleZh || null, en: opts.titleEn || null},
     impact: {changed: categoryChanges.length > 0, percentBefore: meter.percent, percentAfter: computed.percent,
-      deltaPoints: round(computed.weightedPoints - meter.weightedPoints, 2), gateChanges: changes, categoryChanges},
+      deltaPoints: round(computed.weightedPoints - meter.weightedPoints, 2), gateChanges: changes, categoryChanges,
+      ...(opts.baselineRevision ? {baselineChanges} : {})},
     evidence: unique(opts.evidence || []),
   };
   if (computed.warnings.length) closeout.warnings = computed.warnings;
@@ -418,6 +426,7 @@ function parseArgs(argv) {
   for (let i = opts.command === argv[0] ? 1 : 0; i < argv.length; i++) {
     const arg = argv[i];
     if (arg === '--dry-run') opts.dryRun = true;
+    else if (arg === '--baseline-revision') opts.baselineRevision = true;
     else if (multi[arg] && i + 1 < argv.length) opts[multi[arg]].push(argv[++i]);
     else if (single[arg] && i + 1 < argv.length) opts[single[arg]] = argv[++i];
     else throw new Error('unknown or incomplete argument: ' + arg);

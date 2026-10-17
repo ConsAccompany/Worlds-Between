@@ -1,6 +1,7 @@
 // Focused check for the MVP completion meter and its closeout CLI.
-// 1. The real progress state carries a consistent meter: exactly 35.8% from 5/5, 10/12, 3/4, 0/52, 0/11 and 0/2 at fixed weights
-//    (M2 route-data became the implemented whole-hour route-times gate on 2026-10-16).
+// 1. The real progress state carries a consistent meter: exactly 35.8% from 5/5, 10/12, 3/4, 0/52, 0/12 and 0/2 at fixed weights
+//    (M2 route-data became the implemented whole-hour route-times gate on 2026-10-16; the Chicago Loop baseline revision made scenes x/12).
+// 6. A denominator change is refused unless recorded as a baseline revision, which may not change counts.
 // 2. A zero-change task writes a receipt with no increment; claiming an unchanged gate is refused and writes nothing.
 // 3. Real gate changes move the count only when claimed with evidence; unclaimed changes are refused.
 // 4. Visual counters never rise from unbacked counters, concept/unapproved/smoke evidence or pre-art playtests.
@@ -58,7 +59,7 @@ try {
   assert.equal(meter.weightTotal, 100);
   const expected = {
     'core-gameplay': [20, 5, 5, 20], 'global-world-travel': [10, 10, 12, 8.33], 'science-playable-content': [10, 3, 4, 7.5],
-    'character-art': [25, 0, 52, 0], 'science-environment-art': [20, 0, 11, 0], 'final-integrated-validation': [15, 0, 2, 0],
+    'character-art': [25, 0, 52, 0], 'science-environment-art': [20, 0, 12, 0], 'final-integrated-validation': [15, 0, 2, 0],
   };
   assert.deepEqual(meter.categories.map(c => c.id), Object.keys(expected));
   for (const c of meter.categories) {
@@ -70,7 +71,7 @@ try {
   assert.deepEqual(cat(meter, 'global-world-travel').openGateIds, ['map-art', 'visual-review']);
   assert.deepEqual(cat(meter, 'science-playable-content').openGateIds, ['human-timed-pacing']);
   assert.equal(meter.formalApproval.mvpFormallyAccepted, false);
-  assert.deepEqual([meter.formalApproval.runtimeSpritesAccepted, meter.formalApproval.sceneVisualsAccepted, meter.formalApproval.humanPlaytests], ['0/52', '0/11', '0/2']);
+  assert.deepEqual([meter.formalApproval.runtimeSpritesAccepted, meter.formalApproval.sceneVisualsAccepted, meter.formalApproval.humanPlaytests], ['0/52', '0/12', '0/2']);
   assert.ok(meter.formalApproval.scopedApprovalsNotCountedAsAcceptance.some(item => item.id === 'female-v8-south-idle-static' && item.status === 'approved'), 'scoped static approval listed as not counted');
   assert.equal(meter.lastUpdated.closeoutId, meter.taskCloseouts.at(-1).id);
   const check = cli.validate(state, meter);
@@ -79,7 +80,7 @@ try {
   const real = run(statePath, 'check');
   assert.equal(real.status, 0, real.out);
   assert.match(real.out, /CHECK OK 35\.8%/);
-  pass('real state: 35.8% = 20 + 8.33 + 7.5 + 0 + 0 + 0 from 5/5, 10/12, 3/4, 0/52, 0/11, 0/2; bilingual categories with evidence and next gate; formal approval false and separate; CLI check OK');
+  pass('real state: 35.8% = 20 + 8.33 + 7.5 + 0 + 0 + 0 from 5/5, 10/12, 3/4, 0/52, 0/12, 0/2; bilingual categories with evidence and next gate; formal approval false and separate; CLI check OK');
 
   // 2. Zero-change task receipt and claimed-but-unchanged refusal.
   const zero = copy();
@@ -194,7 +195,7 @@ try {
     [s => { s.m2Expansion.gates = s.m2Expansion.gates.filter(g => g.id !== 'map-art'); }, /missing m2Expansion gate map-art/],
     [s => { s.m2Expansion.gates.find(g => g.id === 'map-art').status = 'mostly_done'; }, /unknown status "mostly_done" on m2Expansion gate map-art/],
     [s => { s.steps.find(x => x.id === 'M3').status = 'complete'; }, /unknown status "complete" on step M3/],
-    [s => { s.approvalLedger.counters.sceneVisualsTarget = 12; }, /fixed baseline denominator is 11/],
+    [s => { s.approvalLedger.counters.sceneVisualsTarget = 11; }, /fixed baseline denominator is 12/],
     [s => { s.steps.find(x => x.id === 'M7').status = 'done'; }, /M7 is done but science-playable-content gates are not all done/],
     [s => { s.approvalLedger.items.push(accepted('odd', 'mood-board', [evidenceQa])); }, /unknown acceptanceKind "mood-board"/],
   ];
@@ -205,9 +206,34 @@ try {
   }
   pass('invalid input: unknown category, unknown or unnamed gate, gate on a counter, --set-gate on a derived category, unknown status, missing evidence file, added/missing/unknown-status M2 gates, unknown step status, changed denominator, M7 done with open gates and unknown acceptance kind are all refused without writing');
 
+  // 6. Baseline revision: an old /11 snapshot with the /12 ledger target is stale; plain records are refused; --baseline-revision records it.
+  const old11 = copy(s => {
+    const env = s.completionMeter.categories.find(c => c.id === 'science-environment-art');
+    Object.assign(env, {denominator: 11, ratio: '0/11'});
+    s.completionMeter.formalApproval.sceneVisualsAccepted = '0/11';
+  });
+  assert.equal(run(old11, 'check').status, 1, 'an /11 snapshot is stale under the /12 baseline');
+  refused(old11, /record it with --baseline-revision/, 'record', '--title-en', 'Quiet denominator change');
+  refused(plain, /no baseline denominator changed/, 'record', '--title-en', 'x', '--baseline-revision');
+  const r6 = run(old11, 'record', '--title-en', 'Chicago gate 12', '--baseline-revision', '--evidence', evidenceQa);
+  assert.equal(r6.status, 0, r6.out);
+  m = meterOf(old11);
+  last = m.taskCloseouts.at(-1);
+  assert.equal(last.kind, 'baseline-revision');
+  assert.deepEqual(last.impact, {changed: false, percentBefore: 35.8, percentAfter: 35.8, deltaPoints: 0, gateChanges: [], categoryChanges: [],
+    baselineChanges: [{category: 'science-environment-art', field: 'denominator', from: 11, to: 12}]});
+  assert.equal(cat(m, 'science-environment-art').ratio, '0/12');
+  assert.equal(run(old11, 'check').status, 0);
+  const mixed = copy(s => {
+    Object.assign(s.completionMeter.categories.find(c => c.id === 'science-environment-art'), {denominator: 11, ratio: '0/11'});
+    s.m2Expansion.gates.find(g => g.id === 'map-art').status = 'implemented';
+  });
+  refused(mixed, /may not change counts/, 'record', '--title-en', 'x', '--baseline-revision', '--gate', 'global-world-travel/map-art', '--evidence', evidenceQa);
+  pass('baseline revision: an /11 snapshot is stale; a plain record is refused; --baseline-revision with no denominator change or with a count change is refused; the revision closeout records 11 -> 12 with 35.8% -> 35.8% and zero count change');
+
   assert.equal(sha(statePath), realHash, 'tracked progress state unchanged');
   pass('read-only: tracked progress state hash unchanged');
-  console.log('RESULT PASS (6 checks)');
+  console.log('RESULT PASS (7 checks)');
 } finally {
   fs.rmSync(tmp, {recursive: true, force: true});
 }

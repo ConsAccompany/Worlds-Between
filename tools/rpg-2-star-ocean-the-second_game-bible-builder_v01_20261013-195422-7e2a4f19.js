@@ -291,23 +291,32 @@ function checkCanon(bible, progress = readProgress()) {
   check(nodes && nodes.approvedRequired === 710 && nodes.approvedCareerRequired + nodes.approvedPersonalRequired === 710 && nodes.approvedAuthored === 0 && nodes.supersededDraftCareerNodes === 140 && nodes.supersededDraftPersonalNodes === 80, 'skill nodes: 0 of 710 approved nodes authored; 140 + 80 superseded draft nodes');
 
   check(bible.openQuestions.some(question => question.title.includes('待按新规则重设计')) && !bible.openQuestions.some(question => /地理锚点|首城|开始年份/.test(question.title)), 'open questions: skill redesign open, resolved geography questions gone');
-  check(bible.environmentVisualReview.sceneQualityAccepted === 0 && bible.environmentVisualReview.sceneQualityTarget === 11 && bible.environmentVisualReview.artAccepted === false, 'scene visuals 0/11, art not accepted');
+  // 12 since the 2026-10-16 baseline revision added the Chicago Loop gate; the ledger target must agree.
+  check(bible.environmentVisualReview.sceneQualityAccepted === 0 && bible.environmentVisualReview.sceneQualityTarget === 12 && progress.approvalLedger.counters.sceneVisualsTarget === 12 &&
+    bible.environmentVisualReview.sceneQualityDenominatorReview?.applied === true && bible.environmentVisualReview.artAccepted === false, 'scene visuals 0/12 (Chicago Loop gate 12 applied), art not accepted');
   check(bible.characterVisualReview.runtimeSpritesAccepted === 0 && bible.characterVisualReview.artAccepted === false, 'runtime sprites accepted 0');
-  // Washington, D.C.: unapproved Pixelorama candidates exist (walkable v01-v06, separate cinematic v01-v02); none is wired or accepted.
+  // Washington, D.C.: unapproved Pixelorama candidates exist (walkable v01-v08, separate cinematic v01-v02); none is wired or accepted.
   const dc = bible.environmentVisualReview.washingtonDC;
   const dcCandidates = dc?.unapprovedCandidates;
   const artRoute = bible.openQuestions.find(question => question.title === 'MVP 美术技术路线')?.detail || '';
-  check(dcCandidates && same(dcCandidates.walkable, ['v01', 'v02', 'v03', 'v04', 'v05', 'v06']) && same(dcCandidates.cinematic, ['v01', 'v02']) &&
+  check(dcCandidates && same(dcCandidates.walkable, ['v01', 'v02', 'v03', 'v04', 'v05', 'v06', 'v07', 'v08']) && same(dcCandidates.cinematic, ['v01', 'v02']) &&
     dcCandidates.runtimeIntegrated === false && dcCandidates.artAccepted === false && dc.runtimeIntegrated === false && dc.artAccepted === false &&
-    dc.highPrecisionPixelSceneAuthored === false && has(dcCandidates.status, ['v01–v06', 'v01–v02']) && !dcCandidates.status.includes('v01–v05') &&
-    has(artRoute, ['未批准候选', 'v01–v06', 'v01–v02', '未接入运行时、未验收']) && !artRoute.includes('v01–v05') && !artRoute.includes('尚未制作'), 'Washington Pixelorama: unapproved walkable v01-v06 and cinematic v01-v02 candidates, none in the runtime or accepted');
-  // v06 (run 18b9cea3): technical 47/47 after the integration erratum (the QA note's 48/48 was a miscount); no scene approval.
-  const v06 = dcCandidates?.latestWalkable;
-  check(v06 && v06.version === 'v06' && v06.runId === '18b9cea3' && v06.status === 'UNAPPROVED / NONRUNTIME' && v06.technicalGates === '47/47' &&
-    v06.runtimeIntegrated === false && v06.artAccepted === false && v06.sceneApproved === false && has(v06.technicalGatesNote, ['47/47', '48/48', '不是画面验收']) &&
-    has(artRoute, ['v06', '47/47', '不是场景验收']) && [v06.qa, v06.codexVisualAudit].every(file => file && dcCandidates.evidence.includes(file) && fs.existsSync(path.join(root, file))) &&
-    /_walkable-scale-depth_qa-note_unapproved-v06_20261016-071733-18b9cea3\.md$/.test(v06.qa) && /_walkable-v06-codex-visual-audit_unapproved-v01_20261016-134646-35af3a0d\.md$/.test(v06.codexVisualAudit),
-    'Washington walkable v06: UNAPPROVED / NONRUNTIME, technical 47/47 after erratum, QA note and Codex audit linked, no scene approval');
+    dc.highPrecisionPixelSceneAuthored === false && has(dcCandidates.status, ['v01–v08', 'v01–v02']) && !/v01–v0[5-7]/.test(dcCandidates.status) &&
+    has(artRoute, ['未批准候选', 'v01–v08', 'v01–v02', '未接入运行时、未验收']) && !/v01–v0[5-7]/.test(artRoute) && !artRoute.includes('尚未制作'), 'Washington Pixelorama: unapproved walkable v01-v08 and cinematic v01-v02 candidates, none in the runtime or accepted');
+  // v08 (run 6cf49486, pushed f1489aa with its pinned v07 parent): technical 67/67; no scene approval. v06's 47/47 erratum and
+  // v07's 60/60 stay as history; each version keeps its own count.
+  const v08 = dcCandidates?.latestWalkable;
+  const dcHistory = Object.fromEntries((dcCandidates?.walkableHistory || []).map(entry => [entry.version, entry]));
+  const dcFiles = [v08?.qa, v08?.parent?.qa, dcHistory.v06?.qa, dcHistory.v06?.codexVisualAudit, dcHistory.v07?.qa];
+  check(v08 && v08.version === 'v08' && v08.runId === '6cf49486' && v08.status === 'UNAPPROVED / NONRUNTIME' && v08.technicalGates === '67/67' &&
+    v08.runtimeIntegrated === false && v08.artAccepted === false && v08.sceneApproved === false && has(v08.technicalGatesNote, ['67/67', '不是画面验收']) &&
+    v08.parent?.version === 'v07' && v08.parent.runId === '0f854fbc' && has(artRoute, ['v08', '67/67', '不是场景验收', '47/47', '60/60']) &&
+    dcHistory.v06?.runId === '18b9cea3' && dcHistory.v06.technicalGates === '47/47' && has(dcHistory.v06.technicalGatesNote, ['47/47', '48/48']) &&
+    dcHistory.v07?.runId === '0f854fbc' && dcHistory.v07.technicalGates === '60/60' &&
+    dcFiles.every(file => file && dcCandidates.evidence.includes(file) && fs.existsSync(path.join(root, file))) &&
+    /_ruin-state-legibility_qa-note_unapproved-v08_20261016-155827-6cf49486\.md$/.test(v08.qa) && /_vista-texture-merge_qa-note_unapproved-v07_20261016-145408-0f854fbc\.md$/.test(dcHistory.v07.qa) &&
+    /_walkable-scale-depth_qa-note_unapproved-v06_20261016-071733-18b9cea3\.md$/.test(dcHistory.v06.qa) && /_walkable-v06-codex-visual-audit_unapproved-v01_20261016-134646-35af3a0d\.md$/.test(dcHistory.v06.codexVisualAudit),
+    'Washington walkable v08: UNAPPROVED / NONRUNTIME, technical 67/67, v07 parent 60/60 and v06 47/47 erratum kept as history, QA notes linked, no scene approval');
   // M2 route times (creator rule 2026-10-16): every leg settles to fixed whole hours, its reference estimate rounded to the hour.
   // The door-to-door research draft (m2-v08) and audit (m2-v08a) are cited as evidence only. The Bible's hours must equal the
   // runtime travel data, which charges gameplayDurationMinutes and carries no top-level trip components.
@@ -336,14 +345,15 @@ function checkCanon(bible, progress = readProgress()) {
     !(progress.m2Expansion?.gates || []).some(gate => /门到门|整数分钟|door-to-door|integer-minute/i.test(gate.zh + ' ' + gate.en)),
     'M2 route-data gate: Route times (whole-hour rule) implemented; calendar label date-only; map art and human review still open');
   // The progress state's current M2 text (anchor gate, M2 details and remaining) must name the same walkable range as the Bible
-  // (v01–v06), never the stale v01–v05. Dated closeout records are history and are not checked.
+  // (v01–v08), never a stale v01–v05..v07; City Hall Park pilots read v01–v04. Dated closeout records are history and are not checked.
   const m2Step = progress.steps?.find(step => step.id === 'M2');
   const anchorDetail = progress.m2Expansion?.gates?.find(gate => gate.id === 'anchor')?.detail || '';
   const m2Text = [anchorDetail, ...(m2Step?.details || []), ...(m2Step?.remaining || [])].join('\n');
   const lastWalkable = dcCandidates?.walkable?.at(-1);
-  check(lastWalkable === 'v06' && has(anchorDetail, ['可步行 v01–v06', '独立定场远景 v01–v02', '均未验收']) &&
-    m2Text.includes('可步行 v01–v06') && m2Text.includes('walkable west grounds v01-v06') && !/v01[–-]v05/.test(m2Text),
-    'M2 anchor / progress text: Washington walkable v01-v06 matches the Bible, no stale v01-v05');
+  check(lastWalkable === 'v08' && has(anchorDetail, ['可步行 v01–v08', '独立定场远景 v01–v02', '均未验收', '可步行试作 v01–v04']) &&
+    m2Text.includes('可步行 v01–v08') && m2Text.includes('walkable west grounds v01-v08') && m2Text.includes('City Hall Park walkable pilots v01-v04') &&
+    !/v01[–-]v0[5-7]\b|试作 v01–v0[23]|pilots v01-v0[23]/.test(m2Text),
+    'M2 anchor / progress text: Washington walkable v01-v08 and City Hall Park pilots v01-v04 match the Bible, no stale range');
   // Character static frames synced in 15c9b73: the female exploration south selout v8 still is the only creator-approved static
   // baseline; the female battle side-view v08 and Liang Xu south v01 pilots are UNAPPROVED / NONRUNTIME single frames. None is
   // animated or wired, Liang has one direction, and no counter or meter moves.
