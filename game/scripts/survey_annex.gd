@@ -8,6 +8,11 @@ const ROOM_ONE_BACKGROUND := {
 	"scifi.outskirts": preload("res://assets/environments/rpg-2-star-ocean-the-second_scifi-outskirts-survey-annex-room-01_environment-background_m8-concept_20261014-142650-1b4ca8d2.png"),
 	"scifi.ruins": preload("res://assets/environments/rpg-2-star-ocean-the-second_scifi-ruins-survey-annex-room-01_environment-background_m8-concept_20261014-142840-0ce7a91b.png"),
 }
+const CITY_ROOM_ONE_FIXTURES := [
+	preload("res://assets/props/nyc-public-facilities-room1/rpg-2-star-ocean-the-second_nyc-public-facilities-room1_usage-console-pixel-fixture_unapproved-v01_20261017-011700-b45e18a9.png"),
+	preload("res://assets/props/nyc-public-facilities-room1/rpg-2-star-ocean-the-second_nyc-public-facilities-room1_old-conduit-pixel-fixture_unapproved-v01_20261017-011700-b45e18a9.png"),
+	preload("res://assets/props/nyc-public-facilities-room1/rpg-2-star-ocean-the-second_nyc-public-facilities-room1_resident-notes-board-pixel-fixture_unapproved-v01_20261017-011700-b45e18a9.png"),
+]
 const ROOM_TWO_BACKGROUND := {
 	"scifi.city": preload("res://assets/environments/rpg-2-star-ocean-the-second_scifi-survey-annex-room-02_environment-background_m8-concept_20261014-142926-e2e661fc.png"),
 	"scifi.outskirts": preload("res://assets/environments/rpg-2-star-ocean-the-second_scifi-outskirts-survey-annex-room-02_environment-background_m8-concept_20261014-143030-3784c1e2.png"),
@@ -205,6 +210,10 @@ func _draw() -> void:
 		draw_texture_rect(ROOM_ONE_BACKGROUND[destination_id], Rect2(0, 0, 640, 360), false)
 	elif room == 2 and ROOM_TWO_BACKGROUND.has(destination_id):
 		draw_texture_rect(ROOM_TWO_BACKGROUND[destination_id], Rect2(0, 0, 640, 360), false)
+	if room == 1 and destination_id == "scifi.city":
+		for index in CITY_ROOM_ONE_FIXTURES.size():
+			var fixture_position: Vector2 = CLUE_POSITIONS[index] + Vector2(-32, 2)
+			draw_texture_rect(CITY_ROOM_ONE_FIXTURES[index], Rect2(fixture_position, Vector2(64, 64)), false)
 	if room == 2 and destination_id == "scifi.city":
 		for index in CITY_ROOM_TWO_FIXTURES.size():
 			var fixture_position: Vector2 = CLUE_POSITIONS[index] + Vector2(-32, 2)
