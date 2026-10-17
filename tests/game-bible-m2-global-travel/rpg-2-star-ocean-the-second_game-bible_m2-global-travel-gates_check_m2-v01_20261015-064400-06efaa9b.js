@@ -105,7 +105,9 @@ const cardById = (html, id) => {
   assert.ok(sceneAcceptances.every(i => i.evidence.some(file => file.includes('_scene-visual-acceptance_v01_20261017-')) && i.scope.includes('不包含角色动作')), 'each acceptance cites its record and excludes character motion');
   const [scenesTicked, sceneGates] = tally('visual-scene.');
   assert.equal(sceneGates, c.sceneVisualsTarget, 'the inventory lists the 12 scene gates');
-  assert.ok(scenesTicked <= c.sceneVisualsAccepted, 'no inventory scene checkbox beyond the creator-accepted count');
+  assert.equal(scenesTicked, c.sceneVisualsAccepted, 'inventory scene checkboxes equal the creator-accepted count');
+  assert.deepEqual(items.filter(i => i.id.startsWith('visual-scene.') && i.checked).map(i => i.id).sort(), ['visual-scene.city-survey-inner', 'visual-scene.city-survey-outer', 'visual-scene.outskirts-survey-inner'], 'only the three accepted rooms are ticked');
+  assert.ok(sceneAcceptances.every(i => items.some(row => row.checked && row.sceneVisualAcceptance && i.evidence.includes(row.sceneVisualAcceptance))), 'each ticked row cites its ledger acceptance record');
   for (const id of ['visual-scene.city-survey-outer', 'visual-scene.city-survey-inner', 'visual-scene.outskirts-survey-inner']) assert.ok(items.some(i => i.id === id), 'inventory row for an accepted room: ' + id);
   assert.deepEqual([c.runtimeSpritesAccepted, c.runtimeSpritesTarget, c.sceneVisualsAccepted, c.sceneVisualsTarget, c.humanPlaytests, c.humanPlaytestsTarget], [0, 52, 3, 12, 0, 2]);
   assert.equal(checklist.scope.character_identities, c.identities);
@@ -289,9 +291,11 @@ const cardById = (html, id) => {
     const ledger = cardById(html, 'approval-ledger');
     assert.equal(ledger.split('<details class="sources">').length - 1, progress.approvalLedger.items.length, 'one collapsed source list per ledger item');
     assert.ok(ledger.includes('查看来源 / View source（2）') && ledger.includes('QA 记录 / QA note') && ledger.includes('产出文件 / Output · 图片 / Image'), 'ledger source labels');
-    for (const label of ['探索精灵 / Runtime sprites 0 / 52', '科技区场景画质 / Science scene visuals 3 / 12', '人工计时试玩 / Human playtests 0 / 2', '角色 51 位 / 52 个视觉版本', '验收数未增加 · No counter incremented', '方向已接受 / Direction accepted', '未接受 / Not accepted']) {
+    for (const label of ['探索精灵 / Runtime sprites 0 / 52', '科技区场景画质 / Science scene visuals 3 / 12', '人工计时试玩 / Human playtests 0 / 2', '角色 51 位 / 52 个视觉版本', '验收数只计已验收台账条目 · Counts only accepted ledger items', '方向已接受 / Direction accepted', '未接受 / Not accepted']) {
       assert.ok(ledger.includes(label), 'ledger shows: ' + label);
     }
+    assert.ok(!html.includes('No counter incremented') && !html.includes('验收数未增加'), 'no stale no-increment badge next to 3 / 12');
+    assert.ok(cardById(html, 'idle-selout-v8').includes('场景画质只由 2026-10-17 另行验收的三间室内环境计为 3/12') && !cardById(html, 'idle-selout-v8').includes('仍为 0/11'), 'v8 scope sentence states 3/12 and that v8 does not count');
     assert.equal(ledger.split('已批准（限定范围）/ Approved, scoped').length - 1, 2, 'exactly two scoped approval badges');
     const decisionsCard = cardById(html, 'pending-decisions');
     assert.equal([...decisionsCard.matchAll(/<li data-decision="/g)].length, progress.decisions.length);

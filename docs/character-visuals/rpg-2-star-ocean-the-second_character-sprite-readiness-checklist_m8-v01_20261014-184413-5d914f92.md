@@ -5,7 +5,7 @@
 - 机器可读版：`game/data/character-visuals/rpg-2-star-ocean-the-second_character-sprite-readiness-checklist_m8-v01_20261014-184413-53da3710.json`
 - 生成／校验脚本：`tools/rpg-2-star-ocean-the-second_character-sprite-readiness_build-and-check_m8-v01_20261014-184413-c8e6c511.py`（`--write` 重新生成；无参数为校验模式）
 - 注册表：`game/data/character-visuals/rpg-2-star-ocean-the-second_character-visual-registry_m8-v01_20261014-134810-2a5d1b3c.json`（sha256-text-lf-v1 `732753892b57d394…`）
-- 资产清单：`outputs/rpg-2-star-ocean-the-second_asset-inventory_state_v01_20261013-191033-7d1e0a8b.json`（sha256-text-lf-v1 `7507ec9f218f69fb…`）
+- 资产清单：`outputs/rpg-2-star-ocean-the-second_asset-inventory_state_v01_20261013-191033-7d1e0a8b.json`（sha256-text-lf-v1 `13c3652e994cd16d…`）
 - 哈希算法：二进制文件（PNG）用 `sha256-bytes`（原始字节）；文本文件（JSON/Markdown）用 `sha256-text-lf-v1`（仅把 CRLF 换成 LF 后计算 SHA-256，LF 与 CRLF 检出结果相同；含 NUL 或非 UTF-8 的文件拒绝按文本处理）。
 - 规格：[俯视视觉规格](rpg-2-star-ocean-the-second_character-visual-spec_topdown-v01_20261014-135700-17a0c9d4.md)；发型锚点来源：核心 17 个变体取自 `rpg-2-star-ocean-the-second_core-cast_hairstyle-manifest_v02_20261013-161317-4f5a6c7d.md`（用户批准的发型参考），其余 35 名取自 `rpg-2-star-ocean-the-second_remaining-companions_character-sheet-manifest_v01_20261013-194808-b6d7ee1d.md`。
 

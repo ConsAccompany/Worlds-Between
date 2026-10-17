@@ -196,7 +196,7 @@ async function renderProduction(base) {
   const items = inventory.categories.flatMap(c => c.subcategories.flatMap(s => s.items));
   const tally = p => { const list = items.filter(i => i.id.startsWith(p)); return [list.filter(i => i.checked).length, list.length]; };
   assert.deepEqual(tally('runtime-sprite.'), [0, 52]);
-  assert.deepEqual(tally('visual-scene.'), [0, 12]);
+  assert.deepEqual(tally('visual-scene.'), [3, 12], 'inventory ticks only the three creator-accepted rooms');
   const female = items.find(i => i.seloutV2PolishCandidate);
   assert.ok(female && female.checked === false, 'female runtime sprite stays unchecked');
   for (const key of ['seloutV2PolishCandidate', 'seloutV2PolishManifest', 'seloutV2VisualQaReport', 'seloutV1PixeloramaBaselinePxo']) assert.ok(fs.existsSync(path.join(root, female[key])), key);
@@ -475,7 +475,7 @@ async function renderProduction(base) {
       assert.equal(sha256(Buffer.from(await response.arrayBuffer())), c.sha, href + ' served bytes');
     }
     assert.equal(hrefs.size, 8, 'card links exactly the eight captures');
-    assert.ok(html.includes(`探索精灵 0 / 52`) && html.includes(`场景画质 0 / 12`), 'page counters unchanged');
+    assert.ok(html.includes(`探索精灵 0 / 52`) && html.includes(`场景画质 3 / 12`), 'page counters unchanged');
     pass('Production view: one separate v2 card after the v1 cards, 3 inline v2 captures (city/bright/dark), all 8 captures linked and served byte-identical, unapproved status, v1 .pxo labelled not v2, 0/52 and 0/11 unchanged');
 
     // v4: its own card after the v2 card, inline v4 captures only, v3 comparisons as links.
@@ -570,8 +570,9 @@ async function renderProduction(base) {
     assert.ok(v6Card.includes('状态：未批准') && v6Card.includes('明亮场景对比度仍不足'), 'v6 keeps its earlier unapproved status');
     assert.ok(v8Card.includes('用户已批准 · 仅南向待机静态基准帧') && v8Card.includes('够了，可作为静止帧基准'), 'approval badge and verbatim user reply');
     assert.ok(v8Card.includes('48 逻辑像素') && v8Card.includes('南向待机这一张静态帧'), 'scope: south idle static frame at 48 px');
-    for (const excluded of ['探索动画', '北／东／西其他朝向', '替换游戏内运行时精灵', '0/52', '0/11', '0/2', '动画验收为 0', 'v6 仍是“明亮场景对比度仍不足”、未批准', 'v7', '未批准'])
+    for (const excluded of ['探索动画', '北／东／西其他朝向', '替换游戏内运行时精灵', '0/52', 'v8 不计入场景画质', '计为 3/12', '0/2', '动画验收为 0', 'v6 仍是“明亮场景对比度仍不足”、未批准', 'v7', '未批准'])
       assert.ok(v8Card.includes(excluded), 'v8 card states: ' + excluded);
+    assert.ok(!v8Card.includes('仍为 0/11'), 'v8 card no longer claims scenes are still 0/11');
     assert.ok(!/已验收|art_approved: true/.test(v8Card), 'no acceptance wording');
     assert.ok(!/<button|<input|<select|<textarea/.test(v8Card), 'no acceptance controls on the v8 card');
     assert.ok(v8Card.includes('human_reviewed: false') && v8Card.includes('早于用户回复'), 'generation-time flags explained');
@@ -589,7 +590,7 @@ async function renderProduction(base) {
     }
     assert.equal(v8Hrefs.size, 6, 'v8 card links exactly its six captures');
     assert.ok(html.includes('用户已批准 selout v8 作为女主南向待机静态帧基准') && !html.includes('待新的静态待机获用户批准后再开始'), 'visual-acceptance summary updated');
-    assert.ok(html.includes('探索精灵 0 / 52') && html.includes('场景画质 0 / 12'), 'page counters unchanged');
+    assert.ok(html.includes('探索精灵 0 / 52') && html.includes('场景画质 3 / 12'), 'page counters unchanged');
     const readinessStart = html.indexOf('id="character-readiness"');
     const femaleRowStart = html.indexOf('data-readiness-open="readiness.protagonist-female"', readinessStart);
     const femaleRow = html.slice(femaleRowStart, html.indexOf('</details>', femaleRowStart));
