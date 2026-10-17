@@ -14,6 +14,7 @@ const readinessFile = path.join('..','game','data','character-visuals','rpg-2-st
 const nestedPngAllowlist = new Set([
   'nyc-chp-v04_20261016-172144-eb092a52/rpg-2-star-ocean-the-second_nyc-city-hall-park_godot-render-640x360-axis-test-npc_unapproved-v04_20261016-172144-eb092a52.png',
   'wdc-cw-v08_20261016-155827-6cf49486/rpg-2-star-ocean-the-second_wdc-capitol-west_godot-640x360-entry_unapproved-v08_20261016-155827-6cf49486.png',
+  'nyc-chp-v06_20261017-165253-4519dffe/rpg-2-star-ocean-the-second_nyc-city-hall-park_godot-zh-entry-640x360_unapproved-v06_20261017-165253-4519dffe.png',
 ]);
 const receiptPattern = /^rpg-2-star-ocean-the-second_scifi-region_playtest-receipt_m7_\d{8}-\d{6}-[0-9a-f]{8}\.json$/;
 const routes = {
