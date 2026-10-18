@@ -16,6 +16,7 @@ const nestedPngAllowlist = new Set([
   'wdc-cw-v08_20261016-155827-6cf49486/rpg-2-star-ocean-the-second_wdc-capitol-west_godot-640x360-entry_unapproved-v08_20261016-155827-6cf49486.png',
   'nyc-chp-v06_20261017-165253-4519dffe/rpg-2-star-ocean-the-second_nyc-city-hall-park_godot-zh-entry-640x360_unapproved-v06_20261017-165253-4519dffe.png',
   'chicago-loop-state-lake-v03r1/godot-runtime/rpg-2-star-ocean-the-second_chicago-loop_state-lake-godot-zh-entry-640x360_v03r1_20261017-184340-44bc6d7f.png',
+  'yonkers-room1-v03_15709be4/captures/rpg-2-star-ocean-the-second_yonkers-antenna-room1_v03-godot-zh-entry-640x360_20261017-224447-15709be4.png',
 ]);
 const receiptPattern = /^rpg-2-star-ocean-the-second_scifi-region_playtest-receipt_m7_\d{8}-\d{6}-[0-9a-f]{8}\.json$/;
 const routes = {

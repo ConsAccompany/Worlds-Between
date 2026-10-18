@@ -6,6 +6,8 @@
 // #11 is the Chicago State/Lake v03r1 zh arrival: opt-in only (off by default), partly generated underpainting, two directories deep.
 // 2026-10-17 stale-text correction: #3 City Hall Park v04 is a creator-rejected historical comparison, #7/#8 v11 was reviewed and
 // rejected for more static polish, #1 names run v04 as the latest creator-reviewed locomotion; no item removed, pinned fields unchanged.
+// 2026-10-18 current-candidates-first view: currentCandidates lists the committed v03r2 map, Yonkers v03 and battle v12 captures
+// (c20118d) first, UNAPPROVED within limited scopes; #1 stays a scoped reference and #2-#11 render in a collapsed history section.
 // Starts the real v05 panel server on a spare local port, then runs the served bible.js in a VM with a minimal DOM stub.
 // Read-only: no project file is written. Run from the repository root: node tests/game-bible-review-queue/<this file>
 const assert = require('node:assert/strict');
@@ -259,6 +261,39 @@ async function renderProduction(base) {
   const committed = queue.items.length;
   pass(`sync state: ${committed}/11 committed (#1, #2, #4 at a87ac16; #3, #5, #6 at 15d153b; #7, #8 at 53a912f; #9 at 1548c9e; #10 at ec8b8f5; #11 root copy at 6795926), each exact recorded blob at its recorded commit in HEAD history, 0 staged, 0 local-only; Site note says site version 11`);
 
+  // 2b. Current candidates first: three committed UNAPPROVED captures pinned in their evidence index, each with a limited scope.
+  const current = queue.currentCandidates;
+  assert.ok(current && current.historyCollapsed === true, 'current-candidates view with collapsed history');
+  assert.deepEqual(current.scopedReferenceOrders, [1], '#1 selout v8 is the scoped reference');
+  assert.equal(queue.items[0].creatorApproved, true, 'scoped reference keeps its approval');
+  assert.equal(queue.items[0].approvalScope, 'static south still and 48-logical-pixel display scale only', 'scoped reference keeps its limited scope');
+  assert.deepEqual(current.items.map(item => [item.rank, item.id]), [[1, 'current-global-map-v03r2'], [2, 'current-yonkers-antenna-room1-v03'], [3, 'current-battle-heroine-static-v12']]);
+  for (const item of current.items) {
+    assert.equal(item.kind, 'actual-godot-capture');
+    assert.equal(item.creatorApproved, false, 'current candidate unapproved: ' + item.id);
+    assert.equal(item.artAccepted, false, 'current candidate not accepted: ' + item.id);
+    assert.match(item.badge.en, /^Unapproved/, 'stored badge says unapproved: ' + item.id);
+    assert.ok(item.scope && item.scope.zh && item.scope.en, 'limited scope recorded: ' + item.id);
+    assert.equal(item.syncState, 'committed-at-c20118d', 'committed at c20118d: ' + item.id);
+    assert.equal(git('rev-parse', 'c20118d:' + item.file).stdout.trim(), item.gitBlob, 'exact blob at c20118d: ' + item.id);
+    if (tracked(item.file)) assert.equal(git('hash-object', '--', item.file).stdout.trim(), item.gitBlob, 'working blob matches: ' + item.id);
+    assert.equal(sha256(fs.readFileSync(rel(item.file))), item.sha256, 'sha256 matches: ' + item.id);
+    assert.ok(fs.readFileSync(rel(item.hashPinnedIn), 'utf8').includes(item.sha256), 'sha256 pinned in the evidence index: ' + item.id);
+    assert.ok(fs.existsSync(rel(item.qa)), 'QA note exists: ' + item.id);
+    assert.ok(progress.completionMeter.taskCloseouts.some(c => c.id === item.closeoutId), 'closeout recorded: ' + item.id);
+    assert.ok(!queue.items.some(old => old.file === item.file), 'not a duplicate of a history item: ' + item.id);
+    for (const order of item.supersedesQueueOrders) assert.ok(queue.items[order - 1], 'superseded history item still present: ' + order);
+  }
+  const [mapItem, yonkersItem, battleItem] = current.items;
+  assert.ok(mapItem.runtimeIntegrated === true && mapItem.technicalCandidate === true && /M2 stays 10\/12/.test(mapItem.scope.en), 'map v03r2: runtime technical candidate, M2 10/12');
+  assert.deepEqual(mapItem.supersedesQueueOrders, [10]);
+  assert.ok(yonkersItem.runtimeIntegrated === true && /room 1 outskirts only/.test(yonkersItem.scope.en) && /scenes 3\/12/.test(yonkersItem.scope.en), 'Yonkers v03: runtime in room 1 outskirts only');
+  assert.ok(fs.readFileSync(rel('game/scripts/survey_annex.gd'), 'utf8').includes('corridor-plate_unapproved-v03_20261017-224447-15709be4.png'), 'survey_annex.gd wires the v03 plate');
+  assert.ok(battleItem.runtimeIntegrated === false && battleItem.approvedScopeOnly === '0.65 battle display proportion' && /sprites stay 0\/52/.test(battleItem.scope.en), 'battle v12: nonruntime, only 0.65 approved');
+  assert.deepEqual(battleItem.supersedesQueueOrders, [7, 8]);
+  assert.ok(!/v13|Chicago v05|Washington v12/i.test(JSON.stringify(current)), 'no unsynced local pass listed');
+  pass('current candidates: map v03r2, Yonkers v03, battle v12 at c20118d, unapproved within limited scopes, blobs and sha256 pinned; #1 scoped reference; history kept');
+
   // 3. Generated concepts are a separate, gallery-ineligible list and never appear among queue items or Site previews.
   const concepts = queue.nonruntimeConcepts;
   assert.equal(concepts.galleryEligible, false);
@@ -309,14 +344,24 @@ async function renderProduction(base) {
     assert.ok(start > 0);
     assert.equal(html.split('id="cross-device-review-queue"').length, 2, 'exactly one queue card');
     const card = html.slice(start, html.indexOf('</section>', start) + '</section>'.length);
-    const figures = card.split('<figure class="visual-sample review-queue-item"').slice(1);
-    assert.equal(figures.length, 11);
+    const figures = card.split('<figure class="visual-sample review-queue-item').slice(1);
+    assert.equal(figures.length, 14);
+    // Order: three current candidates, then the scoped reference #1, then #2-#11 inside the collapsed history <details>.
+    const currentAt = card.indexOf('id="review-queue-current"'), historyAt = card.indexOf('<details class="group" id="review-queue-history">');
+    assert.ok(currentAt > 0 && historyAt > currentAt, 'current section precedes the history section');
+    assert.ok(!/<details[^>]*\sopen/.test(card.slice(historyAt, historyAt + 80)), 'history starts collapsed');
+    assert.deepEqual([...card.matchAll(/data-current-id="([^"]+)"/g)].map(m => m[1]), current.items.map(item => item.id));
+    assert.ok(card.lastIndexOf('data-current-id=') < card.indexOf('data-queue-order="1"'), 'current candidates render before the scoped reference');
+    assert.ok(card.indexOf('data-queue-order="1"') < historyAt, 'scoped reference sits outside the history');
+    const historyHtml = card.slice(historyAt, card.indexOf('</details>', historyAt));
+    assert.deepEqual([...historyHtml.matchAll(/data-queue-order="(\d+)"/g)].map(m => Number(m[1])), [2, 3, 4, 5, 6, 7, 8, 9, 10, 11], 'history keeps #2-#11 in order');
     assert.equal((card.match(/badge good">已批准静态基准 · 未接入运行时 · 未验收</g) || []).length, 1);
-    assert.equal((card.match(/badge warn">未批准 · 未接入运行时 · 未验收</g) || []).length, 9);
-    assert.equal((card.match(/badge warn">未批准 · 已接入运行时 · 未验收</g) || []).length, 1, '#10 renders as unapproved runtime, unaccepted');
+    assert.equal((card.match(/badge warn">未批准 · 未接入运行时 · 未验收</g) || []).length, 10, '9 history + battle v12');
+    assert.equal((card.match(/badge warn">未批准 · 已接入运行时 · 未验收</g) || []).length, 3, '#10, map v03r2 and Yonkers v03 render as unapproved runtime, unaccepted');
     assert.equal((card.match(/仅本机 · 尚未同步到 GitHub/g) || []).length, 0, 'no local-only badge');
     assert.equal((card.match(/已暂存为 Git 候选/g) || []).length, 0, 'no staged badge');
-    assert.equal((card.match(/已在 GitHub（[0-9a-f]{7}）/g) || []).length, 11);
+    assert.equal((card.match(/已在 GitHub（[0-9a-f]{7}）/g) || []).length, 14);
+    assert.equal((card.match(/已在 GitHub（c20118d）/g) || []).length, 3);
     assert.equal((card.match(/已在 GitHub（ec8b8f5）/g) || []).length, 1);
     assert.equal((card.match(/已在 GitHub（6795926）/g) || []).length, 1);
     assert.equal((card.match(/已在 GitHub（1548c9e）/g) || []).length, 1);
@@ -326,24 +371,26 @@ async function renderProduction(base) {
     assert.ok(!/已验收|通过验收/.test(card.replace(/未验收/g, '')), 'no acceptance claim');
     assert.ok(!/<button|<input|type="checkbox"/.test(card), 'no approval controls');
     const imgs = [...card.matchAll(/<img src="([^"]+)"/g)].map(m => m[1]);
-    assert.equal(imgs.length, 11);
+    assert.equal(imgs.length, 14);
+    const shown = [...current.items, queue.items[0], ...queue.items.slice(1)];
     for (const [i, src] of imgs.entries()) {
+      assert.equal(src, '/assets/' + shown[i].file.slice('outputs/'.length), 'image order: ' + src);
       const response = await fetch(base + src);
-      if (!present(queue.items[i])) { assert.equal(response.status, 404, 'absent local-only capture is not served: ' + src); continue; }
+      if (!present(shown[i])) { assert.equal(response.status, 404, 'absent local-only capture is not served: ' + src); continue; }
       assert.equal(response.status, 200, src);
       assert.equal(response.headers.get('content-type'), 'image/png');
-      assert.equal(sha256(Buffer.from(await response.arrayBuffer())), sha256(fs.readFileSync(rel(queue.items[i].file))), 'served byte-identical: ' + src);
+      assert.equal(sha256(Buffer.from(await response.arrayBuffer())), sha256(fs.readFileSync(rel(shown[i].file))), 'served byte-identical: ' + src);
     }
     for (const c of concepts.items) assert.ok(!imgs.some(src => src.includes(path.posix.basename(c.file))) && card.includes(c.file), 'concept listed as text only');
     for (const probe of ['/assets/wdc-cw-v08_20261016-155827-6cf49486/technical-check-report.png', '/assets/nyc-chp-v04_20261016-172144-eb092a52/..%2F..%2Fpackage.png',
       '/assets/..%2Ftools%2Fx.png', '/assets/wdc-cw-v08_20261016-155827-6cf49486%2Frpg-2-star-ocean-the-second_wdc-capitol-west_godot-1280x720-entry_unapproved-v08_20261016-155827-6cf49486.png']) {
       assert.equal((await fetch(base + probe)).status, 404, 'non-allowlisted nested path 404: ' + probe);
     }
-    pass(`Production view: one queue card, 11 figures (1 approved-static, 9 unapproved nonruntime, 1 unapproved runtime, none accepted), ${committed} GitHub sync badges (3 a87ac16 + 3 15d153b + 2 53a912f + 1 1548c9e + 1 ec8b8f5 + 1 6795926, 0 staged, 0 local-only), 11 images served byte-identical, 5 concepts as text only, 4 nested/traversal probes 404`);
+    pass(`Production view: one queue card, 14 figures (3 current candidates first, #1 scoped reference, #2-#11 in collapsed history; 1 approved-static, 10 unapproved nonruntime, 3 unapproved runtime, none accepted), ${committed + current.items.length} GitHub sync badges (3 c20118d + 3 a87ac16 + 3 15d153b + 2 53a912f + 1 1548c9e + 1 ec8b8f5 + 1 6795926, 0 staged, 0 local-only), 14 images served byte-identical, 5 concepts as text only, 4 nested/traversal probes 404`);
   } finally { child.kill(); }
 
   const after = [biblePath, progressPath, inventoryPath].map(file => sha256(fs.readFileSync(rel(file))));
   assert.deepEqual(after, before);
   pass('read-only: Game Bible, progress and inventory hashes unchanged');
-  console.log('RESULT PASS (7 checks)');
+  console.log('RESULT PASS (8 checks)');
 })().catch(error => { console.error('FAIL ' + (error.stack || error.message)); process.exit(1); });
