@@ -2,7 +2,7 @@
   "id": "rpg-2-star-ocean-the-second_production-completion_v01",
   "schemaVersion": 2,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-18T18:54:14Z",
+  "updatedAt": "2026-10-18T19:01:15Z",
   "zh": "制作完成度任务台账：衡量已完成的工作量（编码 40% + 内容 60%）；检查／审查与创作者批准分开计量，均不改变制作分；免除的审查不算已执行的工作；运营任务列出负责方但不计百分比。",
   "en": "Production-completion task ledger: measures work done (coding 40% + content 60%); inspection/review and creator approval are separate meters and never change production credit; waived reviews are not performed work; operations tasks list owners but carry no percentage.",
   "brief": "docs/rpg-2-star-ocean-the-second_production-completion_bilingual-brief_v01_20261018-140533-3ea2a621.md",
@@ -202,16 +202,16 @@
     "production": {
       "zh": "制作完成度",
       "en": "Production completion",
-      "percent": 43.5,
-      "percentLabel": "43.5%",
+      "percent": 44.2,
+      "percentLabel": "44.2%",
       "formula": "round1(40 * codingDonePoints/codingTotalPoints + 60 * contentDonePoints/contentTotalPoints)",
       "coding": {
-        "done": 91,
+        "done": 93,
         "total": 111,
-        "percent": 82,
+        "percent": 83.8,
         "weight": 40,
         "tasks": 23,
-        "tasksDone": 17
+        "tasksDone": 18
       },
       "content": {
         "done": 334,
@@ -275,11 +275,11 @@
     },
     "stageTotals": {
       "coding": {
-        "done": 91,
+        "done": 93,
         "total": 111,
-        "percent": 82,
+        "percent": 83.8,
         "tasks": 23,
-        "tasksDone": 17,
+        "tasksDone": 18,
         "waivedTasks": 0,
         "waivedPoints": 0
       },
@@ -343,10 +343,10 @@
         "tasks": 757,
         "operationsTasks": 0,
         "points": 2009,
-        "pointsDone": 387,
+        "pointsDone": 389,
         "byStatus": {
-          "done": 86,
-          "todo": 671
+          "done": 87,
+          "todo": 670
         },
         "readyInQueue": 0,
         "revisionsBlockingApproval": 3
@@ -418,7 +418,7 @@
       },
       "runtime": {
         "coding": {
-          "done": 3,
+          "done": 5,
           "total": 20
         }
       },
@@ -1061,7 +1061,7 @@
     {"id":"code.runtime.enemy-sprite-pipeline","type":"pipeline-code","title":{"zh":"敌人精灵运行时（载入、状态、绘制顺序）","en":"Enemy sprite runtime (loaders, states, draw order)"},"area":"runtime","stage":"coding","owner":"claude","status":"done","points":3,"doneCriterion":{"zh":"运行时可载入敌人动画条并有自动检查","en":"The runtime loads an enemy animation strip with automated checks"},"dependsOn":[],"evidence":["docs/qa/rpg-2-star-ocean-the-second_scifi-sentry-automaton_v2-optin-portability_qa-note_unapproved-v01_20261018-103500-7d2e91b4.md","game/scripts/battle_arena.gd"],"subject":{"kind":"feature","id":"battle.enemy-sprites"}},
     {"id":"code.runtime.character-sprite-pipeline","type":"pipeline-code","title":{"zh":"高密度四方向角色精灵运行时","en":"High-density four-direction character sprite runtime"},"area":"runtime","stage":"coding","owner":"claude","status":"todo","points":6,"doneCriterion":{"zh":"运行时具备载入高密度四方向待机与行走精灵组的正常能力：在正常运行时经可选开关或测试夹具验证，并有针对性测试；是否默认采用属于内容与批准任务","en":"Normal runtime capability to load a high-density four-direction idle+walk set, verified in the normal runtime through an opt-in flag or test fixture with targeted tests; adopting a set for the shipped game belongs to the content and approval tasks"},"dependsOn":[],"evidence":[],"subject":{"kind":"feature","id":"exploration.character-sprites"}},
     {"id":"code.runtime.combat-sprite-pipeline","type":"pipeline-code","title":{"zh":"高密度横向战斗精灵运行时","en":"High-density side-view combat sprite runtime"},"area":"runtime","stage":"coding","owner":"claude","status":"todo","points":4,"doneCriterion":{"zh":"运行时具备载入高密度横向战斗动作组的正常能力：在正常运行时经可选开关或测试夹具验证，并有针对性测试；是否默认采用属于内容与批准任务","en":"Normal runtime capability to load a high-density side-view combat action set, verified in the normal runtime through an opt-in flag or test fixture with targeted tests; adopting a set for the shipped game belongs to the content and approval tasks"},"dependsOn":[],"evidence":[],"subject":{"kind":"feature","id":"battle.character-sprites"}},
-    {"id":"code.runtime.battle-arena-backdrop","type":"pipeline-code","title":{"zh":"战场背景载入","en":"Battle arena backdrop loader"},"area":"runtime","stage":"coding","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"战斗具备绘制美术背景的正常运行时能力：经可选开关或测试夹具验证，并有针对性测试；采用哪张背景属于场景内容与批准任务","en":"Normal runtime capability for battles to draw an art backdrop, verified through an opt-in flag or test fixture with targeted tests; adopting a backdrop belongs to the scene content and approval tasks"},"dependsOn":[],"evidence":[],"subject":{"kind":"feature","id":"battle.arena-backdrop"}},
+    {"id":"code.runtime.battle-arena-backdrop","type":"pipeline-code","title":{"zh":"战场背景载入","en":"Battle arena backdrop loader"},"area":"runtime","stage":"coding","owner":"claude","status":"done","points":2,"doneCriterion":{"zh":"战斗具备绘制美术背景的正常运行时能力：经可选开关或测试夹具验证，并有针对性测试；采用哪张背景属于场景内容与批准任务","en":"Normal runtime capability for battles to draw an art backdrop, verified through an opt-in flag or test fixture with targeted tests; adopting a backdrop belongs to the scene content and approval tasks"},"dependsOn":[],"evidence":["docs/qa/rpg-2-star-ocean-the-second_battle-backdrop-pilot_loader-capability_qa-note_unapproved-v01_20261018-144653-faa6ec0f.md","game/scripts/battle_arena.gd","outputs/battle-backdrop-v01_20261018-144653-faa6ec0f/rpg-2-star-ocean-the-second_battle-backdrop-pilot_archive-loaded-sentry-windup-en-640_20261018-144653-faa6ec0f.png","outputs/battle-backdrop-v01_20261018-144653-faa6ec0f/rpg-2-star-ocean-the-second_battle-backdrop-pilot_outskirts-loaded-patrol-windup-zh-640_20261018-144653-faa6ec0f.png","outputs/battle-backdrop-v01_20261018-144653-faa6ec0f/rpg-2-star-ocean-the-second_battle-backdrop-pilot_capture-manifest-default_20261018-144653-faa6ec0f.json"],"subject":{"kind":"feature","id":"battle.arena-backdrop"},"statusAt":"2026-10-18T19:01:15Z","note":{"zh":"根审查接受的编码能力：代码 71377d6（battle_arena.gd +80/-8），经 567c430 进入 main。可选开关 --battle-backdrop-pilot，默认关闭；默认 64 张截图 0 像素差异，哨兵组合与 600 步轨迹不变，针对性检查 79/79/89/66，缺失／无效回退，2 条已跟踪背景带。所有背景带均未批准；不计默认采用或美术批准。","en":"Root-accepted coding capability: code 71377d6 (battle_arena.gd +80/-8), on main via 567c430. Opt-in --battle-backdrop-pilot, OFF by default; default 64 captures 0 px, Sentry combo + 600-step traces unchanged, focused 79/79/89/66, missing/invalid fallback, 2 tracked bands. Every band UNAPPROVED; no default adoption or art approval credited."}},
     {"id":"code.runtime.vfx-system","type":"pipeline-code","title":{"zh":"战斗特效系统","en":"Combat VFX system"},"area":"runtime","stage":"coding","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"攻击、闪避、防御、受击、治疗可触发特效并有测试","en":"Attack, dodge, guard, hit and heal can trigger effects, with tests"},"dependsOn":[],"evidence":[],"subject":{"kind":"asset","id":"vfx.common"}},
     {"id":"code.runtime.audio-cues","type":"pipeline-code","title":{"zh":"界面与战斗音效触发","en":"UI and combat sound cues"},"area":"runtime","stage":"coding","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"界面与战斗事件触发音效并有测试","en":"UI and combat events trigger sounds, with tests"},"dependsOn":[],"evidence":[],"subject":{"kind":"asset","id":"sfx.combat"}},
     {"id":"content.char.protagonist-male.portrait","type":"concept-generation","title":{"zh":"主角·男 · 人物设定图（图像生成）","en":"Male protagonist · source portrait (image generation)"},"area":"characters","stage":"content","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"设定图文件已入库","en":"The source portrait file is committed"},"dependsOn":[],"evidence":["outputs/rpg-2-star-ocean-the-second_protagonist_character-sheet_male_20261013-153316-5b7c19e2.png"],"subject":{"kind":"character-variant","id":"protagonist-male"}},
