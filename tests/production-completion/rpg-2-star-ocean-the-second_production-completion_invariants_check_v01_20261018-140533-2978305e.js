@@ -176,7 +176,37 @@ const before = [LEDGER, PROGRESS].map(sha);
   for (const id of ['code.runtime.character-sprite-pipeline', 'code.runtime.combat-sprite-pipeline', 'code.runtime.battle-arena-backdrop']) {
     const x = task(l, id);
     assert.ok(/Normal runtime capability/.test(x.doneCriterion.en) && /opt-in flag or test fixture with targeted tests/.test(x.doneCriterion.en), 'capability criterion: ' + id);
-    assert.equal(x.status, 'todo', 'no implementation evidence yet: ' + id);
+    // Status is mutable: todo, or done with code evidence (a capability closeout never implies default adoption or approval).
+    assert.ok(x.status === 'todo' || (x.status === 'done' && x.evidence.some(e => /^game\/scripts\//.test(e)) && x.evidence.some(e => /^docs\/qa\//.test(e))), 'todo or done with code + QA evidence: ' + id);
+  }
+  // The backdrop capability and the battle-arena art tasks are independent (temp fixture, not the tracked statuses): any
+  // status of the default-adoption and approval tasks leaves the backdrop status and the coding meter alone, and flipping
+  // the backdrop leaves those tasks as they were. Either side may complete later without touching the other.
+  const BACKDROP = 'code.runtime.battle-arena-backdrop', ART = ['content.scene.battle-arena.native-default', 'creator.scene.battle-arena.accept'];
+  const fixture = (backdropStatus, artStatuses) => {
+    const f = fresh();
+    task(f, BACKDROP).status = backdropStatus;
+    ART.forEach((id, i) => { task(f, id).status = artStatuses[i]; });
+    return cli.refresh(f, ROOT);
+  };
+  const codingWith = {todo: fixture('todo', ['todo', 'todo']).computed.production.coding.done, done: fixture('done', ['todo', 'todo']).computed.production.coding.done};
+  assert.equal(codingWith.done, codingWith.todo + task(l, BACKDROP).points);
+  for (const b of ['todo', 'done']) for (const a0 of ['todo', 'in_progress', 'done']) for (const a1 of ['todo', 'done']) {
+    const f = fixture(b, [a0, a1]), label = `${BACKDROP}=${b}, ${ART[0]}=${a0}, ${ART[1]}=${a1}`;
+    assert.equal(task(f, BACKDROP).status, b, 'backdrop status independent of art tasks: ' + label);
+    assert.deepEqual(ART.map(id => task(f, id).status), [a0, a1], 'art task statuses independent of backdrop: ' + label);
+    assert.equal(f.computed.production.coding.done, codingWith[b], 'coding meter independent of art tasks: ' + label);
+    assert.ok(!cli.validate(f, ROOT).some(e => e.includes(BACKDROP)), 'no backdrop validation error from art statuses: ' + label);
+  }
+  // A legitimate coding status change moves the meter by the frozen formula alone; no numeric fixture needs editing.
+  const flip = fresh(), open = flip.tasks.find(x => x.stage === 'coding' && x.status === 'todo' && x.dependsOn.length === 0);
+  if (open) {
+    const hash = cli.taskSetHash(flip.tasks), was = flip.computed.production.coding.done;
+    set(flip, open.id, 'done', {evidence: [CLI_REL]});
+    assert.equal(cli.taskSetHash(flip.tasks), hash, 'status change keeps the frozen task set');
+    assert.equal(flip.computed.production.coding.done, was + open.points);
+    const c = flip.computed.production;
+    assert.equal(c.percent, Math.round(10 * (40 * c.coding.done / c.coding.total + 60 * c.content.done / c.content.total)) / 10);
   }
   const dep = fresh(); task(dep, 'code.runtime.battle-arena-backdrop').dependsOn = ['creator.scene.battle-arena.accept'];
   assert.ok(cli.validate(dep, ROOT).some(e => /may not depend on approval or default art adoption/.test(e)));
@@ -190,7 +220,7 @@ const before = [LEDGER, PROGRESS].map(sha);
   assert.ok(cli.validate(deps, ROOT).some(e => /frozen baseline/.test(e)), 'dropping a dependency fails the freeze');
   const mutable = fresh(); Object.assign(task(mutable, 'review.scene.map'), {status: 'in_progress', note: {zh: 'x', en: 'y'}});
   assert.deepEqual(cli.validate(mutable, ROOT), [], 'status and notes stay mutable');
-  pass('coding = normal runtime capability via opt-in/fixtures (no approval or default-adoption dependency); 3 pipeline tasks still todo; freeze covers criteria and dependencies, status stays mutable');
+  pass('coding = normal runtime capability via opt-in/fixtures (no approval or default-adoption dependency); pipeline tasks todo or done with code evidence; a coding closeout recomputes by formula; freeze covers criteria and dependencies, status stays mutable');
 }
 
 // 9. No evidence, missing evidence, unmet dependencies or the rejected 32x48 baseline cannot complete a task.
