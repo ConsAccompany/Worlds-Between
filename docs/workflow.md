@@ -25,6 +25,12 @@ The registry is an operating queue, not a second progress system. The dashboard 
 
 The coordinator records producer/technical-check transfers with the existing ledger CLI: `reassign --task <id> --owner codex|claude --reason-en "<reason>"`. It audits the hash chain, moves any existing revision bucket with its parent, and preserves every score/status/evidence field. Never hand-edit owners or reassign creator approvals, creative reviews or operations. The operating registry mirrors the actual assignment after the ledger transition.
 
+### Command and snapshot gates
+
+For dependent native commands in PowerShell, stop on each nonzero `$LASTEXITCODE` before running the next build, commit or push. A final process exit can otherwise conceal an earlier Python assertion or failed validation. Do not combine validation with publication unless the intermediate result is explicitly checked; inspect diagnostic markers and required predicates in addition to exit status.
+
+For raw-hash evidence, compare every frozen file with its staged Git blob before publishing. Working-file hashes alone miss checkout/filter conversion. Use scoped attributes for the exact source/report snapshots, preserve historical CRLF when that is what was tested, and state any normalization. Recognizing CRLF as a line ending must retain other whitespace checks. A failed hash gate requires correction and disclosure, not a silently rewritten report.
+
 ## Completion and handoff contract
 
 For every completed task, retain: task ID and owner; base/tested/integrated revisions; outputs and editable sources; hashes (with explicit LF normalization when applicable); actual commands/results and failed checks; inspection verdict; limitations; remaining creator decision if any. Use the existing ledger evidence paths and QA notes rather than inventing a second receipt platform.
