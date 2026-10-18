@@ -19,6 +19,28 @@
     return item ? `<div class="source-line">资料来源：<a href="${item.url}" target="_blank" rel="noopener">${esc(item.filename)}</a></div>` : '';
   };
   const badge = (label,kind='') => `<span class="badge ${kind}">${esc(label)}</span>`;
+  // Production-completion side panel. Every number comes from the ledger's derived `computed` block (one CLI computes
+  // it); the panel never recomputes a percentage. The legacy acceptance estimate stays collapsed and labelled as legacy.
+  function productionPanel(ledger) {
+    const c=ledger?.computed;
+    if(!c?.production)return '';
+    const p=c.production, owners={claude:'Claude',codex:'Codex',creator:'创作者 / Creator'};
+    const stageName=s=>({coding:'编码',content:'内容','technical-inspection':'技术检查','visual-review':'视觉审查','creator-approval':'创作者批准'}[s]||s);
+    const row=(label,v,extra='')=>`<div class="step-top"><span>${label}</span><span>${esc(v.done)} / ${esc(v.total)} · ${esc(v.percent)}%${extra}</span></div>`;
+    const ownerRows=Object.entries(c.byOwner||{}).map(([o,v])=>`<tr><td>${esc(owners[o]||o)}</td><td>${esc(v.tasks)}</td><td>${esc(v.pointsDone)} / ${esc(v.points)}</td><td>${esc(v.readyInQueue)}</td><td class="small">${Object.entries(v.byStatus||{}).map(([s,n])=>esc(s)+' '+esc(n)).join(' · ')}</td></tr>`).join('');
+    const queue=(c.queue?.items||[]).map(q=>`<li><span class="muted small">${esc(owners[q.owner]||q.owner)} · ${esc(stageName(q.stage))}</span> <code>${esc(q.id)}</code></li>`).join('');
+    const lg=c.legacy||{};
+    return `<section class="card" id="production-completion"><div class="step-top"><h3>制作完成度 / Production completion</h3>${badge(p.percentLabel,'accent')}</div>
+      <div class="meter" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${esc(p.percent)}"><span style="width:${Math.max(0,Math.min(100,Number(p.percent)||0))}%"></span></div>
+      <p class="muted small">衡量已完成的工作量：编码 ${esc(p.coding.weight)}% + 内容 ${esc(p.content.weight)}%（冻结基线任务分值）。检查与批准另计，不增减制作分。与旧版验收估算是不同指标，不是“增长”。</p>
+      ${row('编码 / Coding',p.coding,' × '+esc(p.coding.weight)+'%')}${row('内容 / Content',p.content,' × '+esc(p.content.weight)+'%')}
+      ${row('检查与审查 / Inspection',c.inspection)}${row('创作者批准 / Creator approval',c.approval)}
+      <div class="step-top"><span>正式验收 / Final accepted</span><span>${c.release?.finalAccepted?'是':'否 / false'}</span></div>
+      <details class="group"><summary>负责方 / Owners</summary><table class="small"><thead><tr><th>负责方</th><th>任务</th><th>分值</th><th>待处理</th><th>状态</th></tr></thead><tbody>${ownerRows}</tbody></table></details>
+      <details class="group"><summary>待检查／审查／批准队列（${esc(c.queue?.count||0)}）</summary><ul class="small">${queue}</ul></details>
+      <details class="group"><summary>旧版验收加权估算（不同指标）· ${esc(lg.percentLabel||'')}</summary><p class="small">${esc(lg.note?.zh||'')} ${esc(lg.note?.en||'')}</p></details>
+      <p class="muted small receipt-name">任务台账：${esc(ledger.updater||'')} · ${esc(ledger.tasks?.length||0)} 项任务</p></section>`;
+  }
   const feedbackKey = route => `worlds-between-m7-feedback-${route}`;
   const readFeedback = route => { try { return localStorage.getItem(feedbackKey(route)) || ''; } catch (_) { return ''; } };
   function markdown(input) {
@@ -349,6 +371,7 @@
     const approvalCard=ledger?`<section class="card" id="approval-ledger"><div class="step-top"><h3>批准范围与验收数 / Approval scope & counters</h3>${badge('验收数只计已验收台账条目 · Counts only accepted ledger items','warn')}</div><p class="small"><strong>探索精灵 / Runtime sprites ${ledgerCounts.runtimeSpritesAccepted} / ${ledgerCounts.runtimeSpritesTarget}</strong> · <strong>科技区场景画质 / Science scene visuals ${ledgerCounts.sceneVisualsAccepted} / ${ledgerCounts.sceneVisualsTarget}</strong> · <strong>人工计时试玩 / Human playtests ${ledgerCounts.humanPlaytests} / ${ledgerCounts.humanPlaytestsTarget}</strong> · 角色 ${ledgerCounts.identities} 位 / ${ledgerCounts.visualVariants} 个视觉版本 (identities / variants)</p><p class="muted small">方向被接受不等于资产验收；下列每项只在注明的范围内有效。Direction acceptance is not asset acceptance.</p><ul>${ledger.items.map(item=>{const [label,kind]=approvalStatus[item.status]||[item.status,'warn'];return `<li data-approval="${esc(item.id)}">${badge(label,kind)} <strong>${esc(item.zh)}</strong> <span class="muted small">${esc(item.en)}</span><div class="small">${esc(item.scope)}</div>${evidenceLine(item.evidence)}</li>`;}).join('')}</ul></section>`:'';
     const decisionsCard=p.decisions?.length?`<section class="card" id="pending-decisions"><div class="step-top"><h3>候选与受阻决定 / Candidate & blocked decisions</h3>${badge(p.decisions.length+' 项待决定 · pending','warn')}</div><ul>${p.decisions.map(d=>{const [label,kind]=decisionKind[d.kind]||[d.kind,'warn'];return `<li data-decision="${esc(d.id)}">${badge(label,kind)} <strong>${esc(d.zh)}</strong> <span class="muted small">${esc(d.en)}</span><div class="small">${esc(d.detail)}</div><div class="muted small">等待 / Awaiting：${esc(d.awaiting)}</div></li>`;}).join('')}</ul></section>`:'';
     content.innerHTML=`${head('制作路线','新版 MVP：完整角色视觉身份与精致科技区场景',badge(done+' / '+p.steps.length+' 阶段','accent'))}
+      ${productionPanel(state.production)}
       <div class="card"><div class="step-top"><strong>已完成阶段</strong><span>${done} / ${p.steps.length}</span></div><div class="meter" role="progressbar" aria-valuemin="0" aria-valuemax="${p.steps.length}" aria-valuenow="${done}"><span style="width:${pct}%"></span></div><p class="muted small">当前重点：${current?esc(current.id+' · '+copy[current.id][0]):'全部阶段已完成'}。阶段数量不代表剩余工作量。</p></div>
       <div class="section-label">全球地图与旅行 · 新规则</div>
       <section class="card" id="global-map-travel-rule"><div class="step-top"><h3>真实地名与汽车／飞机旅行</h3>${badge('规则已定 · 地图与旅时核心已实现 · M2 未完成','warn')}</div><p>地球地图覆盖全球；城市使用现实城市名称，遗迹使用现实存在的著名遗址或景点名称。队伍在地图上乘汽车或飞机，每段按固定整点旅时结算（现实城市间典型旅时取整到小时，至少 1 小时），不按出发时刻、机场或值机分项计算；进入场景后主角步行。终局星球仍经传送门抵达。</p><p class="small">旅时推进日历，玩家只看到年月日、不显示钟点；连续不足一天的行程会累计；每周商会结算共用同一时间轴：暂定商会账目已接入日历并通过 Godot 自动测试；工程候选（未验收）中，伙伴可在 10 级职业选择时转为行商（只做两阶 MVP，完整 20 系列 × 5 阶职业设定留待以后），并在已发现的城市从世界地图「商会」派驻经营。行商职业技能在战斗中都不可用；一阶补给协议仍是占位，不能花 JP；二阶公平报价是暂定的经营被动，可花 JP 升级，每级为伙伴驻守满周的收益加基础收益的 5 %，NPC 经营周不加成（派驻或重新派驻后的未满一周按普通 NPC 80 % 结算，商会面板会单独注明）；账目点数不是货币，没有平衡、劫匪事件或价格影响。游戏内已换成真实地球全图与美国东北部、五大湖地区图，出发按路线的整点旅时推进日历（纽约⇄扬克斯 1 小时，纽约／扬克斯⇄华盛顿 5 小时，纽约⇄芝加哥 6 小时），并通过 Godot 自动测试。创作者 2026-10-15 的决定已在运行时实现为技术候选：新游戏从纽约（曼哈顿下城市政厅公园）开始，日期 2537-05-25，可到扬克斯城外与华盛顿国会大厦废墟，纽约—芝加哥航线到达卢普区技术占位街区；卡茨基尔山附近的地下社区尚无运行时地点。整点旅时已实现；其参考里程与分钟仍是初步估算，只作取整依据；场景与地图美术未制作或未验收，人工审阅未完成。场景与角色美术验收数不因此变化。</p><p class="muted small"><a href="/source/earth-rules" target="_blank" rel="noopener" title="docs/design/rpg-2-star-ocean-the-second_global-earth-map-real-place-travel_rules-v01_20261014-235354-2b5d4d98.md">查看规则与验收 / View rules &amp; acceptance</a></p></section>
@@ -499,6 +522,11 @@
     const progress=await response.json();
     if(state.progress?.updatedAt!==progress.updatedAt){state.progress=progress;render();}
   }
+  async function refreshProduction(){
+    const response=await fetch('/production',{cache:'no-store'});if(!response.ok)throw new Error('Production ledger unavailable');
+    const ledger=await response.json();
+    if(state.production?.updatedAt!==ledger.updatedAt||JSON.stringify(state.production?.computed)!==JSON.stringify(ledger.computed)){state.production=ledger;if(state.view==='production'&&!state.query)render();}
+  }
   async function refreshPlaytests(){
     const response=await fetch('/playtests',{cache:'no-store'});if(!response.ok)throw new Error('Playtests unavailable');
     const data=await response.json();
@@ -532,7 +560,7 @@
   nav.forEach(button=>button.addEventListener('click',()=>navigate(button.dataset.view)));
   search.addEventListener('input',()=>{state.query=search.value.trim();render();});
   document.addEventListener('visibilitychange',()=>{if(!document.hidden){refreshInventory().catch(()=>{});refreshProgress().catch(()=>{});refreshPlaytests().catch(()=>{});refreshPlaytestStatus().catch(()=>{});if(state.readinessStatus!=='idle')refreshReadiness();}});
-  setInterval(()=>{if(!document.hidden){refreshProgress().catch(()=>{});refreshInventory().catch(()=>{});refreshPlaytests().catch(()=>{});refreshPlaytestStatus().catch(()=>{});}},10000);
+  setInterval(()=>{if(!document.hidden){refreshProgress().catch(()=>{});refreshProduction().catch(()=>{});refreshInventory().catch(()=>{});refreshPlaytests().catch(()=>{});refreshPlaytestStatus().catch(()=>{});}},10000);
   Promise.all([
     fetch('/bible',{cache:'no-store'}).then(r=>r.ok?r.json():Promise.reject()),
     fetch('/inventory',{cache:'no-store'}).then(r=>r.ok?r.json():Promise.reject()),
@@ -543,6 +571,7 @@
     document.getElementById('pitch').textContent=bible.pitch;
     document.getElementById('footer-status').textContent=bible.characters.length+' 份人物档案 · '+bible.chapters.length+' 个设计章节';
     render();
+    refreshProduction().catch(()=>{});
     refreshPlaytests().catch(()=>{});
     refreshPlaytestStatus().catch(()=>{});
   }).catch(()=>{content.innerHTML='<div class="empty">游戏圣经暂时无法读取。请确认本地项目面板已启动。</div>';});

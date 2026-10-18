@@ -59,6 +59,8 @@ const routes = {
   '/bible': ['rpg-2-star-ocean-the-second_game-bible_state_v01_20261013-195422-b8c16d42.json','application/json; charset=utf-8'],
   '/inventory': [inventoryName,'application/json; charset=utf-8'],
   '/state': ['rpg-2-star-ocean-the-second_mvp-progress_state_v01_20261013-183804-28a1c7e4.json','application/json; charset=utf-8'],
+  // Production-completion task ledger (work done; inspection and approval are separate meters). Written only by its CLI.
+  '/production': ['rpg-2-star-ocean-the-second_production-completion_task-ledger_v01_20261018-140533-3de52073.json','application/json; charset=utf-8'],
   '/character-readiness': [readinessFile,'application/json; charset=utf-8'],
   '/source/brief': ['rpg-2-star-ocean-the-second_game-design-brief_v01_20261012-233611-7c2e1f4a.md','text/markdown; charset=utf-8'],
   '/source/core': ['rpg-2-star-ocean-the-second_core-cast_character-bible_v01_20261012-234158-cc7e91a4.md','text/markdown; charset=utf-8'],
