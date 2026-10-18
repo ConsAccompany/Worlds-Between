@@ -1,0 +1,5358 @@
+{
+ "project": "Worlds Between",
+ "milestone": "M8",
+ "character": "protagonist-female",
+ "direction": "south",
+ "motion_state": "run at MOVE_SPEED 140",
+ "part": "female-south-run-v10r1",
+ "workstream": "m8-w14",
+ "stamp": "20261018-142136",
+ "run_id": "249dbf66",
+ "status": "UNAPPROVED / NONRUNTIME test-only single-direction motion candidate: bounded r1 amendment of v10 (shorter leading reach +8 / -36 over the same 44 px stance, re-authored swing curve, staggered-touchdown landing rule); Root / creator review pending; not a production sprite, not wired into the runtime",
+ "art_approved": false,
+ "human_reviewed": false,
+ "runtime_integrated": false,
+ "walk_animation_approved": false,
+ "run_animation_approved": false,
+ "stop_animation_approved": false,
+ "counts_toward_art_acceptance": false,
+ "approved_scope_unchanged": "selout v8 SOUTH IDLE static frame and the 48 logical px display scale only",
+ "exploration_sprites_counter_unchanged": "0/52",
+ "parent": {
+  "version": "v10",
+  "v10_builder": "tools/rpg-2-star-ocean-the-second_female-south-run-v10_authored-gait-pushoff-build_m8-w13_20261018-143213-ed496e32.py",
+  "v10_builder_sha256_text_lf_v1": "1516f7f2ca8fa36ab5c354b625f1b2a5b41e0a1241bc3e995bc5d73126e8b859",
+  "v10_manifest": "game/assets/characters/run-v10-unapproved/rpg-2-star-ocean-the-second_female-south-run-v10_gait-pose-manifest_unapproved_20261018-143213-63dec7d3.json",
+  "v10_manifest_sha256_text_lf_v1": "de1789e376c34340e8a4a61289b0998c917b954c9b48bd6bff6d46a999062cbd",
+  "v10_status": "preserved unchanged (assets, tools, receipts, MP4s, PNGs); r1 writes only its own folder",
+  "changed": [
+   "land_offset 12 -> 8, liftoff_offset -32 -> -36 (same stance / stride)",
+   "stance_knee_kin returns to 0 at q 8",
+   "swing_keys re-authored",
+   "stop: staggered-touchdown landing rule"
+  ],
+  "unchanged": [
+   "art parts (v10 push-boot parts, v09 kick / knee parts, v06 parts)",
+   "leg rule",
+   "coat rule",
+   "seam and island rules",
+   "stance roll / bob / torso-shift q tables",
+   "arms / hair / cape timing",
+   "stop durations",
+   "re-press rule + rise lock"
+  ]
+ },
+ "based_on": {
+  "v09_builder": "tools/rpg-2-star-ocean-the-second_female-south-run-v09_authored-gait-build_m8-w12_20261018-133700-4d620536.py",
+  "v09_builder_sha256_text_lf_v1": "dc9c2705f44c87eaa3ad3a6bc2a2aa7a5eef017b780390bdcf79756c8554a494",
+  "v09_manifest": "game/assets/characters/run-v09-unapproved/rpg-2-star-ocean-the-second_female-south-run-v09_pose-gait-manifest_unapproved_20261018-133700-39dc1e43.json",
+  "v09_manifest_sha256_text_lf_v1": "c67a1d871bbc927d72036135a999faa306670330aa990c2cd1511129be2b6df8",
+  "v09_parts_used_read_only": [
+   "rpg-2-star-ocean-the-second_female-south-run-v09_part-boot-vl-kick_unapproved_20261018-133700-d40d71b7.png",
+   "rpg-2-star-ocean-the-second_female-south-run-v09_part-boot-vr-kick_unapproved_20261018-133700-bcd96be9.png",
+   "rpg-2-star-ocean-the-second_female-south-run-v09_part-knee-vl-fwd_unapproved_20261018-133700-4fdb2dcf.png",
+   "rpg-2-star-ocean-the-second_female-south-run-v09_part-knee-vr-fwd_unapproved_20261018-133700-78d48a0b.png"
+  ],
+  "v06_manifest_sha256_text_lf_v1": "f59b04fa672250c7525dda79d7cc3771830fa80a03fec339ff21fa19298e6b17",
+  "v09_status": "preserved unchanged as a partial (drawing-only) fork; v10 does not overwrite any v09 file"
+ },
+ "builder": "tools/rpg-2-star-ocean-the-second_female-south-run-v10r1_reach-landing-amendment-build_m8-w14_20261018-142136-249dbf66.py",
+ "units": "window px = source texels: the 80x120 cell is drawn at sprite scale 0.5 into the 640x360 canvas, which the 1280x720 window shows at 2x; MOVE_SPEED 140 logical px/s = 280 window px/s",
+ "gait": {
+  "stride_px": 128,
+  "stance_px": 44,
+  "land_offset": 8,
+  "liftoff_offset": -36,
+  "phase_offset_px": {
+   "vl": 0,
+   "vr": 64
+  },
+  "stance_roll": [
+   [
+    0,
+    "strike"
+   ],
+   [
+    4,
+    "v8"
+   ],
+   [
+    26,
+    "heelup"
+   ],
+   [
+    34,
+    "toe"
+   ]
+  ],
+  "stance_knee_kin": [
+   [
+    0,
+    1
+   ],
+   [
+    8,
+    0
+   ]
+  ],
+  "bob_levels": [
+   [
+    0,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    12,
+    2
+   ],
+   [
+    24,
+    1
+   ],
+   [
+    34,
+    0
+   ]
+  ],
+  "bob_stance_q": [
+   2,
+   34
+  ],
+  "torso_shift_stance_q": [
+   4,
+   32
+  ],
+  "arm_peak_px": {
+   "L": 14,
+   "R": 85
+  },
+  "arm_pose_bands_px": [
+   11,
+   24,
+   40,
+   53
+  ],
+  "hair_lag_px": 10,
+  "cape_shift_lag_px": 10,
+  "swing_keys": [
+   [
+    0,
+    -36,
+    1,
+    "toe",
+    0
+   ],
+   [
+    100,
+    -34,
+    3,
+    "kick",
+    1
+   ],
+   [
+    250,
+    -29,
+    4,
+    "kick",
+    1
+   ],
+   [
+    380,
+    -22,
+    4,
+    "hang",
+    1
+   ],
+   [
+    520,
+    -14,
+    4,
+    "hang",
+    1
+   ],
+   [
+    650,
+    -7,
+    3,
+    "hang",
+    1
+   ],
+   [
+    740,
+    -2,
+    3,
+    "reach",
+    1
+   ],
+   [
+    860,
+    4,
+    2,
+    "reach",
+    1
+   ],
+   [
+    940,
+    7,
+    1,
+    "strike",
+    1
+   ],
+   [
+    1000,
+    8,
+    1,
+    "strike",
+    1
+   ]
+  ],
+  "speed_window_px_s": 280,
+  "cycle_ms_at_140": 457.143,
+  "steps_per_s": 4.375,
+  "stance_ms_at_140": 157.143,
+  "flight_ms_per_step_at_140": 71.429,
+  "ground_contact_share_of_cycle": 0.6875,
+  "airborne_share_of_cycle": 0.3125,
+  "floor_gap_rows_max": 17,
+  "floor_gap_rows_mean": 5.438,
+  "v07_reference": {
+   "stride_px": 84,
+   "steps_per_s": 6.667,
+   "stance_px": 21,
+   "ground_contact_share": 0.5
+  },
+  "v10_reference": {
+   "land_offset": 12,
+   "liftoff_offset": -32,
+   "stride_px": 128,
+   "stance_px": 44,
+   "steps_per_s": 4.375,
+   "ground_contact_share": 0.6875
+  }
+ },
+ "stop": {
+  "rule": "on the release tick the hero stops (runtime unchanged).  1) every boot in the air flies to its v8 spot and lands (lift <= 2, lift >= 1 until touchdown); 2) then each planted boot that is not on its v8 spot does one low shuffle step (lift 1 for an offset <= 3 rows, else 2) to it, rearmost first; a planted boot never moves while planted; at most one boot changes its view or touches down per tick (the other holds one tick); 3) weight shift: while one boot moves, the torso shifts 1 texel toward the boot that carries the weight; after the last touchdown the body stays 1 row low (dip); the torso shift returns first (one texel per change, while dipped), then the arms step toward N, then - at least settle_ms after the touchdown - the dip returns, then the hair follows; hair / cape move at most one row / texel per tick; 4) the tick after the composite equals v8 (neutral state), the v8 PNG itself is shown.  v06 TIME-BASED CLOCK (v05 counted ticks): every touchdown and every settle change has an event time in ms. A touchdown happens at start + duration, but never before the previous frame (a boot that is still drawn in the air on a frame cannot have landed before it).  The second boot's shuffle starts at the first boot's touchdown time.  A boot held by the one-boot-change-per-tick rule shifts its clock by min(frame time, hold_shift_ms) (v05: a whole frame).  A moving boot never jumps from its start pose to touchdown in one frame: it shows its mid key on that frame first (only at frame times > land / shuffle half durations).  After the last touchdown the settle changes run in v05's order on the event clock: the hair catch-up at the dip time + stop_hair_lag_ms; each torso step, arm step and the dip release at least settle_gap_ms after the previous change (arm steps also arm_step_ms apart, the dip release also settle_ms after the touchdown); the hair follows the dip release by stop_hair_lag_ms.  Each frame draws the state at its own time: at <= 1 frame per settle_gap_ms (60 fps and above) that is at most one change per tick, as in v05; at 30 fps two changes can share a frame (a 16 ms hair lag is shorter than one 33 ms frame, so the hair moves with the body).",
+  "land_ms_base": 34,
+  "land_ms_per_px": 1,
+  "land_ms_per_lift": 4,
+  "land_ms_max": 60,
+  "shuffle_ms_base": 34,
+  "shuffle_ms_per_px": 1,
+  "shuffle_ms_max": 56,
+  "shuffle_lift_max": 2,
+  "arm_step_ms": 25,
+  "hair_lag_ms": 34,
+  "settle_ms": 25,
+  "stop_hair_lag_ms": 16,
+  "stop_cape_lag_ms": 0,
+  "settle_order": [
+   "hair_catch_up",
+   "torso_shift_to_0",
+   "arm_step_toward_N",
+   "dip_release",
+   "hair_follow"
+  ],
+  "settle_clock": "event-time-ms (v06; v05: one change per frame)",
+  "settle_gap_ms": 16.667,
+  "hold_shift_ms": 16.667,
+  "no_pose_skip": true,
+  "settle_one_body_change_per_tick": "at frame times <= settle_gap_ms (60 fps and above); at 30 fps up to 2",
+  "land_keys": "[[0, o0, l0, view0, kin0], [500, rdiv(o0, 2), max(1, min(2, l0)), reach, 0], [1000, 0, 1, strike, 0]]; at u >= 1000 the boot is in contact on its spot (stance view for q = land_offset)",
+  "shuffle_keys": "[[0, o0, 1, toe if the planted view v0 is toe else heelup, 0], [500, rdiv(o0, 2), min(2, 1 + |o0| // 4), hang, 1], [1000, 0, 1, strike, 0]] (v04: the toe start is new)",
+  "v10_note": "v06 event-clock stop rule unchanged; ONE duration re-tuned: land_ms_max 70 -> 60, so a boot released high in the swing (o -22, lift 4) lands in two 30 fps frames, not three (with 70 ms three 30 fps stops released in early stance took 266.7 ms; Root relaxed exact v07 timing parity: settle <= 250 ms at 30 / 60 fps, <= 300 ms mixed frame times, raised boot <= 100 ms)",
+  "v10r1_landing_rule": "after a release, landing boots move on their own event clock: a landing boot's view change (start key -> mid key) is not held back by the other boot's change; only touchdowns are staggered - two boots never touch down on the same frame: the boot whose touchdown is due first (tie: the earlier move start, then vl) lands, the other keeps its last in-air key (u 999) and lands on the next frame.  v06's no-pose-skip (a boot shows its mid key before touching down), the shuffle (one boot at a time, after every landing) and the body settle are unchanged.  (v06 / v10: at most one boot changed its view per frame; the held boot's clock moved by <= hold_shift_ms, so a stop released with both boots in the air could hold the second boot raised 105.6 ms with mixed frame times.)"
+ },
+ "restart": {
+  "rule": "on a re-press the planted boot (if two: the one that landed LAST) stays in stance and keeps its window row; the gait phase is re-derived from its offset (q = land_offset - o); the other boot (if planted: lifted now; if in the air: kept where it is) gets a re-planned swing from its current offset / lift to land_offset at its next scheduled landing (the stride sync of 48 px is kept).  The leg that landed last is never the one that lifts first, so the next touchdown is always the other boot.  With both boots in the air the frozen phase resumes.  Arms ease to the gait pose one arm and one pose step per tick until they match it.",
+  "replan_keys": "[[0, o0, max(1, l0), toe if view0 is a stance view else view0, kin0], [500, rdiv(o0 + land_offset, 2), max(l0, hs), hang, 1], [800, land_offset - 1, max(1, rdiv(hs, 2)), reach, 0], [1000, land_offset, 1, strike, 0]]; hs = clamp(rdiv(3 * remaining_px, stride_px - stance_px), replan_lift_min, replan_lift_max)",
+  "replan_lift_max": 4,
+  "replan_lift_min": 2,
+  "v07_rise_lock": true
+ },
+ "leg_rule": {
+  "n_fold_rows": 8,
+  "hips_bottom_row": 66,
+  "tuck_views": [
+   "kick",
+   "hang"
+  ],
+  "rule": "n = boot top - (hip 61 + bob).  long (n >= 24): thigh = pick(v8 thigh, 10|15 + rdiv(e * T, T + S)), v8 knee band 1:1, shin = pick(v8 shin, S + rest), the shin slopes onto the cuff (v04 end rule); medium (8 <= n < 24) and folded (n < 8, planned at 8 rows): v06 proportional foreshortening (knee >= 5 rows); a folded leg (and every kick / hang leg) is drawn OVER its boot, every other boot over its leg; boot texels on rows <= 66 + bob are not drawn; kick / hang use the v09 forward knee rows, a shaded shin and v09's knee-over-cuff lean when the shin has < 4 rows; a medium non-tuck shin returns to v8's x (v06)"
+ },
+ "coat_rule": "coat-skirt rows < 66 at (sx, bob); rows >= 66 at (csx, bob + hdy); with hdy = +1 the hem's top row is also drawn at (csx, 66 + bob) so no gap row opens; csx == sx and hdy == 0 on the neutral state",
+ "seam_rule": "v09: transparent texels at rows >= 41 closed left, right, above and below -> ink",
+ "island_rule": "v10, after the seam fill: an 8-connected component of the stacked frame that is not the largest, has <= 12 texels and lies wholly on leg-far / leg-near texels (a tucked thigh peeking past the coat edge across a transparent gap) is removed from every layer",
+ "island_max_texels": 12,
+ "parts_new": [
+  {
+   "role": "boot-vl-toe",
+   "file": "rpg-2-star-ocean-the-second_female-south-run-v10_part-boot-vl-toe-push_unapproved_20261018-143213-678c4cf7.png",
+   "sha256": "109f50c34dbe230c196101b3ae6308906591f42948c0d66a8de8b868fb3658e2",
+   "opaque_texels": 84,
+   "note": "push-off boot; replaces the v06 toe view in v10 (v06 file untouched)",
+   "file_dir": "game/assets/characters/run-v10-unapproved"
+  },
+  {
+   "role": "boot-vr-toe",
+   "file": "rpg-2-star-ocean-the-second_female-south-run-v10_part-boot-vr-toe-push_unapproved_20261018-143213-a7636b4d.png",
+   "sha256": "1e5ce1844fc2e07e0e33b99d408852ac86f2a86793b586939e9983e84d096a02",
+   "opaque_texels": 89,
+   "note": "push-off boot; replaces the v06 toe view in v10 (v06 file untouched)",
+   "file_dir": "game/assets/characters/run-v10-unapproved"
+  }
+ ],
+ "parts_new_note": "v10's push-boot part PNGs, used read-only from the v10 folder (no new part PNGs in r1)",
+ "parts_from_v09": [
+  {
+   "role": "boot-vl-kick",
+   "file": "rpg-2-star-ocean-the-second_female-south-run-v09_part-boot-vl-kick_unapproved_20261018-133700-d40d71b7.png",
+   "sha256": "ce4153dd61fd141f6500faefe346f420c904d5db6402b3b31dfbd5a8e5ae6e89",
+   "opaque_texels": 40
+  },
+  {
+   "role": "boot-vr-kick",
+   "file": "rpg-2-star-ocean-the-second_female-south-run-v09_part-boot-vr-kick_unapproved_20261018-133700-bcd96be9.png",
+   "sha256": "a796258798eb9a279d76f990795a3853838be6505bbf83ce4ebff78287f0c7d1",
+   "opaque_texels": 40
+  },
+  {
+   "role": "knee-vl-fwd",
+   "file": "rpg-2-star-ocean-the-second_female-south-run-v09_part-knee-vl-fwd_unapproved_20261018-133700-4fdb2dcf.png",
+   "sha256": "1a89b77a91eeab6dc99544c12449af594eb5149083eaf3afc79389dac2d887f9",
+   "opaque_texels": 77
+  },
+  {
+   "role": "knee-vr-fwd",
+   "file": "rpg-2-star-ocean-the-second_female-south-run-v09_part-knee-vr-fwd_unapproved_20261018-133700-78d48a0b.png",
+   "sha256": "a618cb7c6e1c5c0f14a4de77a3a8e5e96ac725ee451f903f23f917eb93e42ed1",
+   "opaque_texels": 46
+  }
+ ],
+ "keyframes": [
+  {
+   "key": "k000",
+   "phase_px": 0,
+   "pose": "vl heel strike 8 rows in front; vr toe-off behind the knee",
+   "file": "rpg-2-star-ocean-the-second_female-south-run-v10r1_keyframe-000px_unapproved_20261018-142136-72aaeee8.png",
+   "sha256": "70bf7814aea8a521e059aedab9037b45f40ec28f69df558193ef292b17e21c99",
+   "shadow_file": "rpg-2-star-ocean-the-second_female-south-run-v10r1_keyframe-000px-shadow_unapproved_20261018-142136-f61b64ab.png",
+   "shadow_sha256": "2f0546762593b1e076cd38376c801e29449bd88c8734b55c73997eecd5ff75ee",
+   "state": {
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "B1",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": 8,
+      "lift": 0,
+      "view": "strike",
+      "kin": 1
+     },
+     "vr": {
+      "o": -29,
+      "lift": 4,
+      "view": "kick",
+      "kin": 1
+     }
+    }
+   },
+   "near_leg": "vr",
+   "legs": {
+    "vl": {
+     "hip_to_sole_rows": 48,
+     "trouser_rows": 35,
+     "cuff_jog_texels": 1.0
+    },
+    "vr": {
+     "hip_to_sole_rows": 10,
+     "trouser_rows": 6,
+     "cuff_jog_texels": 2.5
+    }
+   },
+   "leg_modes": {
+    "vl": {
+     "mode": "long",
+     "n": 35
+    },
+    "vr": {
+     "mode": "folded",
+     "n": 6
+    }
+   }
+  },
+  {
+   "key": "k008",
+   "phase_px": 8,
+   "pose": "vl at its v8 spot, loading (body 1 row down); vr heel kick",
+   "file": "rpg-2-star-ocean-the-second_female-south-run-v10r1_keyframe-008px_unapproved_20261018-142136-5b5e2fcf.png",
+   "sha256": "cdaf1f9345337161c9658b49a3371e27c7d1fed4ea6b23fd795e86b4b5cd47e8",
+   "shadow_file": "rpg-2-star-ocean-the-second_female-south-run-v10r1_keyframe-008px-shadow_unapproved_20261018-142136-cff67831.png",
+   "shadow_sha256": "37e4ea4767cfdf2d4eef43bba5dddaf92b6b012c4f0b36580ef82abe47e120e4",
+   "state": {
+    "bob": 1,
+    "hdy": -1,
+    "sx": -1,
+    "csx": 0,
+    "arms": {
+     "R": "B1",
+     "L": "F2"
+    },
+    "feet": {
+     "vl": {
+      "o": 0,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0
+     },
+     "vr": {
+      "o": -25,
+      "lift": 4,
+      "view": "kick",
+      "kin": 1
+     }
+    }
+   },
+   "near_leg": "vr",
+   "legs": {
+    "vl": {
+     "hip_to_sole_rows": 39,
+     "trouser_rows": 23,
+     "cuff_jog_texels": 0.0
+    },
+    "vr": {
+     "hip_to_sole_rows": 13,
+     "trouser_rows": 9,
+     "cuff_jog_texels": 1.5
+    }
+   },
+   "leg_modes": {
+    "vl": {
+     "mode": "medium",
+     "n": 23
+    },
+    "vr": {
+     "mode": "medium",
+     "n": 9
+    }
+   }
+  },
+  {
+   "key": "k016",
+   "phase_px": 16,
+   "pose": "vl mid-stance (2 rows down); vr kick, sole under the knee",
+   "file": "rpg-2-star-ocean-the-second_female-south-run-v10r1_keyframe-016px_unapproved_20261018-142136-3e0e37e9.png",
+   "sha256": "61c35c459749b9d524ee6f6af9e20796cc9d620f83e1109f600e79cfebad0fe4",
+   "shadow_file": "rpg-2-star-ocean-the-second_female-south-run-v10r1_keyframe-016px-shadow_unapproved_20261018-142136-d2cad702.png",
+   "shadow_sha256": "fee02697deb98d4a186c69352c89ae5d6ce9a5bb5a74ba7f7152020d031c67fd",
+   "state": {
+    "bob": 2,
+    "hdy": -1,
+    "sx": -1,
+    "csx": -1,
+    "arms": {
+     "R": "B2",
+     "L": "F2"
+    },
+    "feet": {
+     "vl": {
+      "o": -8,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0
+     },
+     "vr": {
+      "o": -19,
+      "lift": 4,
+      "view": "hang",
+      "kin": 1
+     }
+    }
+   },
+   "near_leg": "vr",
+   "legs": {
+    "vl": {
+     "hip_to_sole_rows": 30,
+     "trouser_rows": 14,
+     "cuff_jog_texels": 0.0
+    },
+    "vr": {
+     "hip_to_sole_rows": 18,
+     "trouser_rows": 6,
+     "cuff_jog_texels": 2.5
+    }
+   },
+   "leg_modes": {
+    "vl": {
+     "mode": "medium",
+     "n": 14
+    },
+    "vr": {
+     "mode": "folded",
+     "n": 6
+    }
+   }
+  },
+  {
+   "key": "k024",
+   "phase_px": 24,
+   "pose": "vl mid-stance; vr tucked knee passing",
+   "file": "rpg-2-star-ocean-the-second_female-south-run-v10r1_keyframe-024px_unapproved_20261018-142136-002044fe.png",
+   "sha256": "a1ce7c23407e046f95c7f1472188c86376d34b922594318eb50688ef24b74fca",
+   "shadow_file": "rpg-2-star-ocean-the-second_female-south-run-v10r1_keyframe-024px-shadow_unapproved_20261018-142136-3b949cc6.png",
+   "shadow_sha256": "8b75efa43f38e0ccb36137457aa15dd271c522a706f56c8a8493f837dfd146ce",
+   "state": {
+    "bob": 1,
+    "hdy": 1,
+    "sx": -1,
+    "csx": -1,
+    "arms": {
+     "R": "B2",
+     "L": "F2"
+    },
+    "feet": {
+     "vl": {
+      "o": -16,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0
+     },
+     "vr": {
+      "o": -14,
+      "lift": 4,
+      "view": "hang",
+      "kin": 1
+     }
+    }
+   },
+   "near_leg": "vr",
+   "legs": {
+    "vl": {
+     "hip_to_sole_rows": 23,
+     "trouser_rows": 7,
+     "cuff_jog_texels": 1.0
+    },
+    "vr": {
+     "hip_to_sole_rows": 24,
+     "trouser_rows": 12,
+     "cuff_jog_texels": 1.5
+    }
+   },
+   "leg_modes": {
+    "vl": {
+     "mode": "folded",
+     "n": 7
+    },
+    "vr": {
+     "mode": "medium",
+     "n": 12
+    }
+   }
+  },
+  {
+   "key": "k032",
+   "phase_px": 32,
+   "pose": "vl heel-up push (1 row down); vr foot hanging under the knee",
+   "file": "rpg-2-star-ocean-the-second_female-south-run-v10r1_keyframe-032px_unapproved_20261018-142136-8f804efc.png",
+   "sha256": "c32b7e5f041bc2bab82dabc73c95a91bc69e01c0962c3982bc77fa8aee9f6ccd",
+   "shadow_file": "rpg-2-star-ocean-the-second_female-south-run-v10r1_keyframe-032px-shadow_unapproved_20261018-142136-ea6d3d7b.png",
+   "shadow_sha256": "65d048b48f75c46eaeed7e8853907006cec928125c26f86ac3487cd6908da382",
+   "state": {
+    "bob": 1,
+    "hdy": 1,
+    "sx": 0,
+    "csx": -1,
+    "arms": {
+     "R": "B2",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": -24,
+      "lift": 0,
+      "view": "heelup",
+      "kin": 0
+     },
+     "vr": {
+      "o": -9,
+      "lift": 3,
+      "view": "hang",
+      "kin": 1
+     }
+    }
+   },
+   "near_leg": "vr",
+   "legs": {
+    "vl": {
+     "hip_to_sole_rows": 15,
+     "trouser_rows": 1,
+     "cuff_jog_texels": 4.5
+    },
+    "vr": {
+     "hip_to_sole_rows": 30,
+     "trouser_rows": 18,
+     "cuff_jog_texels": 3.5
+    }
+   },
+   "leg_modes": {
+    "vl": {
+     "mode": "folded",
+     "n": 1
+    },
+    "vr": {
+     "mode": "medium",
+     "n": 18
+    }
+   }
+  },
+  {
+   "key": "k040",
+   "phase_px": 40,
+   "pose": "vl push-off, boot behind the knee; vr knee still tucked forward",
+   "file": "rpg-2-star-ocean-the-second_female-south-run-v10r1_keyframe-040px_unapproved_20261018-142136-3c930d0b.png",
+   "sha256": "b233eb477704a5df5b2a54a419c44814bcacddaab218fd86e3fa814e3156de80",
+   "shadow_file": "rpg-2-star-ocean-the-second_female-south-run-v10r1_keyframe-040px-shadow_unapproved_20261018-142136-acd3b82a.png",
+   "shadow_sha256": "45d695fe89a0be0e0f43b8587b98797335f26d807c2672be49ac3118785cb54e",
+   "state": {
+    "bob": 0,
+    "hdy": 1,
+    "sx": 0,
+    "csx": -1,
+    "arms": {
+     "R": "B1",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": -32,
+      "lift": 0,
+      "view": "toe",
+      "kin": 0
+     },
+     "vr": {
+      "o": -3,
+      "lift": 3,
+      "view": "hang",
+      "kin": 1
+     }
+    }
+   },
+   "near_leg": "vr",
+   "legs": {
+    "vl": {
+     "hip_to_sole_rows": 8,
+     "trouser_rows": -6,
+     "cuff_jog_texels": null
+    },
+    "vr": {
+     "hip_to_sole_rows": 37,
+     "trouser_rows": 25,
+     "cuff_jog_texels": 4.0
+    }
+   },
+   "leg_modes": {
+    "vl": {
+     "mode": "folded",
+     "n": -6
+    },
+    "vr": {
+     "mode": "long",
+     "n": 25
+    }
+   }
+  },
+  {
+   "key": "k048",
+   "phase_px": 48,
+   "pose": "flight: vl toe-off; vr leg opening late",
+   "file": "rpg-2-star-ocean-the-second_female-south-run-v10r1_keyframe-048px_unapproved_20261018-142136-ad0e7922.png",
+   "sha256": "b9cab07226f633c8b9e6215c84b3ce3153ba89ccc73f8c13055a8d63e0b922ca",
+   "shadow_file": "rpg-2-star-ocean-the-second_female-south-run-v10r1_keyframe-048px-shadow_unapproved_20261018-142136-1eb223bb.png",
+   "shadow_sha256": "42c5225343ae523a0c6e40671bb54371e56fe9acc069ab30e428eddaa4d6e206",
+   "state": {
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": -35,
+      "lift": 2,
+      "view": "toe",
+      "kin": 0
+     },
+     "vr": {
+      "o": 2,
+      "lift": 2,
+      "view": "reach",
+      "kin": 1
+     }
+    }
+   },
+   "near_leg": "vr",
+   "legs": {
+    "vl": {
+     "hip_to_sole_rows": 3,
+     "trouser_rows": -11,
+     "cuff_jog_texels": null
+    },
+    "vr": {
+     "hip_to_sole_rows": 43,
+     "trouser_rows": 30,
+     "cuff_jog_texels": 1.0
+    }
+   },
+   "leg_modes": {
+    "vl": {
+     "mode": "folded",
+     "n": -11
+    },
+    "vr": {
+     "mode": "long",
+     "n": 30
+    }
+   }
+  },
+  {
+   "key": "k056",
+   "phase_px": 56,
+   "pose": "flight: vl kick; vr short reach, about to strike",
+   "file": "rpg-2-star-ocean-the-second_female-south-run-v10r1_keyframe-056px_unapproved_20261018-142136-795b97a5.png",
+   "sha256": "bff26de28bc82c73a464e2397a511d46f20f336412d5c3ba75f8e91d2864b413",
+   "shadow_file": "rpg-2-star-ocean-the-second_female-south-run-v10r1_keyframe-056px-shadow_unapproved_20261018-142136-826df97f.png",
+   "shadow_sha256": "c8c31178419db5c9aad9d9d46543397180e39dc883552bce64373b24575cb03c",
+   "state": {
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": -33,
+      "lift": 3,
+      "view": "kick",
+      "kin": 1
+     },
+     "vr": {
+      "o": 6,
+      "lift": 1,
+      "view": "reach",
+      "kin": 1
+     }
+    }
+   },
+   "near_leg": "vr",
+   "legs": {
+    "vl": {
+     "hip_to_sole_rows": 4,
+     "trouser_rows": 0,
+     "cuff_jog_texels": null
+    },
+    "vr": {
+     "hip_to_sole_rows": 48,
+     "trouser_rows": 35,
+     "cuff_jog_texels": 1.0
+    }
+   },
+   "leg_modes": {
+    "vl": {
+     "mode": "folded",
+     "n": 0
+    },
+    "vr": {
+     "mode": "long",
+     "n": 35
+    }
+   }
+  },
+  {
+   "key": "k064",
+   "phase_px": 64,
+   "pose": "vr heel strike 8 rows in front; vl toe-off behind the knee",
+   "file": "rpg-2-star-ocean-the-second_female-south-run-v10r1_keyframe-064px_unapproved_20261018-142136-c3661cb6.png",
+   "sha256": "98b50df00142a8d647c7fe566bf7695fa3e1020260d23cb2810a47e39cf3c93c",
+   "shadow_file": "rpg-2-star-ocean-the-second_female-south-run-v10r1_keyframe-064px-shadow_unapproved_20261018-142136-a87e9af7.png",
+   "shadow_sha256": "fc9f7233cfdc4b67458b7ba6232b76d3b276106f12d23be1b5b682eb92a49d1d",
+   "state": {
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "F1",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": -29,
+      "lift": 4,
+      "view": "kick",
+      "kin": 1
+     },
+     "vr": {
+      "o": 8,
+      "lift": 0,
+      "view": "strike",
+      "kin": 1
+     }
+    }
+   },
+   "near_leg": "vl",
+   "legs": {
+    "vl": {
+     "hip_to_sole_rows": 7,
+     "trouser_rows": 3,
+     "cuff_jog_texels": 0.5
+    },
+    "vr": {
+     "hip_to_sole_rows": 51,
+     "trouser_rows": 37,
+     "cuff_jog_texels": 1.0
+    }
+   },
+   "leg_modes": {
+    "vl": {
+     "mode": "folded",
+     "n": 3
+    },
+    "vr": {
+     "mode": "long",
+     "n": 37
+    }
+   }
+  },
+  {
+   "key": "k072",
+   "phase_px": 72,
+   "pose": "vr at its v8 spot, loading (body 1 row down); vl heel kick",
+   "file": "rpg-2-star-ocean-the-second_female-south-run-v10r1_keyframe-072px_unapproved_20261018-142136-60220fc5.png",
+   "sha256": "759a6e60240fb9b82fc31c5b6ff99c533d037f4bc9ae49e94c9dff830a4f65a6",
+   "shadow_file": "rpg-2-star-ocean-the-second_female-south-run-v10r1_keyframe-072px-shadow_unapproved_20261018-142136-e4fd5a7f.png",
+   "shadow_sha256": "1027c91552d656a99ecf9af0256ec08c2c754498005d8752ea37e9eaf66ae730",
+   "state": {
+    "bob": 1,
+    "hdy": -1,
+    "sx": 1,
+    "csx": 0,
+    "arms": {
+     "R": "F1",
+     "L": "B2"
+    },
+    "feet": {
+     "vl": {
+      "o": -25,
+      "lift": 4,
+      "view": "kick",
+      "kin": 1
+     },
+     "vr": {
+      "o": 0,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0
+     }
+    }
+   },
+   "near_leg": "vl",
+   "legs": {
+    "vl": {
+     "hip_to_sole_rows": 10,
+     "trouser_rows": 6,
+     "cuff_jog_texels": 0.5
+    },
+    "vr": {
+     "hip_to_sole_rows": 42,
+     "trouser_rows": 23,
+     "cuff_jog_texels": 1.0
+    }
+   },
+   "leg_modes": {
+    "vl": {
+     "mode": "folded",
+     "n": 6
+    },
+    "vr": {
+     "mode": "medium",
+     "n": 23
+    }
+   }
+  },
+  {
+   "key": "k080",
+   "phase_px": 80,
+   "pose": "vr mid-stance (2 rows down); vl kick, sole under the knee",
+   "file": "rpg-2-star-ocean-the-second_female-south-run-v10r1_keyframe-080px_unapproved_20261018-142136-32a60ac9.png",
+   "sha256": "d8db9a694cb5c975f5059087f9ffcff674aecf4a805e7875c719a9587b27db35",
+   "shadow_file": "rpg-2-star-ocean-the-second_female-south-run-v10r1_keyframe-080px-shadow_unapproved_20261018-142136-5a2d0326.png",
+   "shadow_sha256": "d7904ddbc1b36f9eb9045ac851ac0fefdf28bfca419125da2651fb633f7dc6e6",
+   "state": {
+    "bob": 2,
+    "hdy": -1,
+    "sx": 1,
+    "csx": 1,
+    "arms": {
+     "R": "F2",
+     "L": "B2"
+    },
+    "feet": {
+     "vl": {
+      "o": -19,
+      "lift": 4,
+      "view": "hang",
+      "kin": 1
+     },
+     "vr": {
+      "o": -8,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0
+     }
+    }
+   },
+   "near_leg": "vl",
+   "legs": {
+    "vl": {
+     "hip_to_sole_rows": 15,
+     "trouser_rows": 3,
+     "cuff_jog_texels": 1.0
+    },
+    "vr": {
+     "hip_to_sole_rows": 33,
+     "trouser_rows": 14,
+     "cuff_jog_texels": 1.5
+    }
+   },
+   "leg_modes": {
+    "vl": {
+     "mode": "folded",
+     "n": 3
+    },
+    "vr": {
+     "mode": "medium",
+     "n": 14
+    }
+   }
+  },
+  {
+   "key": "k088",
+   "phase_px": 88,
+   "pose": "vr mid-stance; vl tucked knee passing",
+   "file": "rpg-2-star-ocean-the-second_female-south-run-v10r1_keyframe-088px_unapproved_20261018-142136-321db61b.png",
+   "sha256": "7444c0a670fb3d52dd5e1ba0158488d49f2468d770f2aa6dcea22bc027a5941c",
+   "shadow_file": "rpg-2-star-ocean-the-second_female-south-run-v10r1_keyframe-088px-shadow_unapproved_20261018-142136-d7f12472.png",
+   "shadow_sha256": "e0418e844d8624050febabfe11d2c5379a8dd231c4101c3afc5783c84419cad7",
+   "state": {
+    "bob": 1,
+    "hdy": 1,
+    "sx": 1,
+    "csx": 1,
+    "arms": {
+     "R": "F2",
+     "L": "B2"
+    },
+    "feet": {
+     "vl": {
+      "o": -14,
+      "lift": 4,
+      "view": "hang",
+      "kin": 1
+     },
+     "vr": {
+      "o": -16,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0
+     }
+    }
+   },
+   "near_leg": "vl",
+   "legs": {
+    "vl": {
+     "hip_to_sole_rows": 21,
+     "trouser_rows": 9,
+     "cuff_jog_texels": 2.0
+    },
+    "vr": {
+     "hip_to_sole_rows": 26,
+     "trouser_rows": 7,
+     "cuff_jog_texels": 1.5
+    }
+   },
+   "leg_modes": {
+    "vl": {
+     "mode": "medium",
+     "n": 9
+    },
+    "vr": {
+     "mode": "folded",
+     "n": 7
+    }
+   }
+  },
+  {
+   "key": "k096",
+   "phase_px": 96,
+   "pose": "vr heel-up push (1 row down); vl foot hanging under the knee",
+   "file": "rpg-2-star-ocean-the-second_female-south-run-v10r1_keyframe-096px_unapproved_20261018-142136-5fafc8e3.png",
+   "sha256": "f65a055d974e5c5e5404ad3c205341bf2339971a35e1a5af1d75d1142d4b636f",
+   "shadow_file": "rpg-2-star-ocean-the-second_female-south-run-v10r1_keyframe-096px-shadow_unapproved_20261018-142136-703a08a7.png",
+   "shadow_sha256": "f2dd652fb1eb56c1eafb82d644dda123d2210864f5a3f5d3bce185fa5be71604",
+   "state": {
+    "bob": 1,
+    "hdy": 1,
+    "sx": 0,
+    "csx": 1,
+    "arms": {
+     "R": "F2",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": -9,
+      "lift": 3,
+      "view": "hang",
+      "kin": 1
+     },
+     "vr": {
+      "o": -24,
+      "lift": 0,
+      "view": "heelup",
+      "kin": 0
+     }
+    }
+   },
+   "near_leg": "vl",
+   "legs": {
+    "vl": {
+     "hip_to_sole_rows": 27,
+     "trouser_rows": 15,
+     "cuff_jog_texels": 2.0
+    },
+    "vr": {
+     "hip_to_sole_rows": 18,
+     "trouser_rows": 4,
+     "cuff_jog_texels": 7.0
+    }
+   },
+   "leg_modes": {
+    "vl": {
+     "mode": "medium",
+     "n": 15
+    },
+    "vr": {
+     "mode": "folded",
+     "n": 4
+    }
+   }
+  },
+  {
+   "key": "k104",
+   "phase_px": 104,
+   "pose": "vr push-off, boot behind the knee; vl knee still tucked forward",
+   "file": "rpg-2-star-ocean-the-second_female-south-run-v10r1_keyframe-104px_unapproved_20261018-142136-def1ae98.png",
+   "sha256": "b57e5f6b22460ee2d4883d04c5ec439ca3a78c13b82de195ac0db8ce65c44055",
+   "shadow_file": "rpg-2-star-ocean-the-second_female-south-run-v10r1_keyframe-104px-shadow_unapproved_20261018-142136-a7343cdc.png",
+   "shadow_sha256": "af99b7b55e1e521f302811d931fd663af7bcc56385cd8bcf0273cd7b75338f96",
+   "state": {
+    "bob": 0,
+    "hdy": 1,
+    "sx": 0,
+    "csx": 1,
+    "arms": {
+     "R": "F1",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": -3,
+      "lift": 3,
+      "view": "hang",
+      "kin": 1
+     },
+     "vr": {
+      "o": -32,
+      "lift": 0,
+      "view": "toe",
+      "kin": 0
+     }
+    }
+   },
+   "near_leg": "vl",
+   "legs": {
+    "vl": {
+     "hip_to_sole_rows": 34,
+     "trouser_rows": 22,
+     "cuff_jog_texels": 2.0
+    },
+    "vr": {
+     "hip_to_sole_rows": 11,
+     "trouser_rows": -3,
+     "cuff_jog_texels": null
+    }
+   },
+   "leg_modes": {
+    "vl": {
+     "mode": "medium",
+     "n": 22
+    },
+    "vr": {
+     "mode": "folded",
+     "n": -3
+    }
+   }
+  },
+  {
+   "key": "k112",
+   "phase_px": 112,
+   "pose": "flight: vr toe-off; vl leg opening late",
+   "file": "rpg-2-star-ocean-the-second_female-south-run-v10r1_keyframe-112px_unapproved_20261018-142136-34ed3ecd.png",
+   "sha256": "472614e7c1359779d9c3561a4c758e4830092233f6e2b34bfc44cf998fb8ffc8",
+   "shadow_file": "rpg-2-star-ocean-the-second_female-south-run-v10r1_keyframe-112px-shadow_unapproved_20261018-142136-fe79ffdb.png",
+   "shadow_sha256": "176503b8387bc91cd3515c9200c2334567840650e8dac660d3e4d8555df62782",
+   "state": {
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": 2,
+      "lift": 2,
+      "view": "reach",
+      "kin": 1
+     },
+     "vr": {
+      "o": -35,
+      "lift": 2,
+      "view": "toe",
+      "kin": 0
+     }
+    }
+   },
+   "near_leg": "vl",
+   "legs": {
+    "vl": {
+     "hip_to_sole_rows": 40,
+     "trouser_rows": 27,
+     "cuff_jog_texels": 1.0
+    },
+    "vr": {
+     "hip_to_sole_rows": 6,
+     "trouser_rows": -8,
+     "cuff_jog_texels": null
+    }
+   },
+   "leg_modes": {
+    "vl": {
+     "mode": "long",
+     "n": 27
+    },
+    "vr": {
+     "mode": "folded",
+     "n": -8
+    }
+   }
+  },
+  {
+   "key": "k120",
+   "phase_px": 120,
+   "pose": "flight: vr kick; vl short reach, about to strike",
+   "file": "rpg-2-star-ocean-the-second_female-south-run-v10r1_keyframe-120px_unapproved_20261018-142136-9040e5da.png",
+   "sha256": "12e396286e0be60c8793206b5110503eb18ae6a7668529257c6892d37b14bbfa",
+   "shadow_file": "rpg-2-star-ocean-the-second_female-south-run-v10r1_keyframe-120px-shadow_unapproved_20261018-142136-faf43164.png",
+   "shadow_sha256": "08770b80ddda462cbe80c5536bd6dcde47bb3f22d36efe0a25d81393589983a3",
+   "state": {
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": 6,
+      "lift": 1,
+      "view": "reach",
+      "kin": 1
+     },
+     "vr": {
+      "o": -33,
+      "lift": 3,
+      "view": "kick",
+      "kin": 1
+     }
+    }
+   },
+   "near_leg": "vl",
+   "legs": {
+    "vl": {
+     "hip_to_sole_rows": 45,
+     "trouser_rows": 32,
+     "cuff_jog_texels": 1.0
+    },
+    "vr": {
+     "hip_to_sole_rows": 7,
+     "trouser_rows": 3,
+     "cuff_jog_texels": 3.5
+    }
+   },
+   "leg_modes": {
+    "vl": {
+     "mode": "long",
+     "n": 32
+    },
+    "vr": {
+     "mode": "folded",
+     "n": 3
+    }
+   }
+  }
+ ],
+ "editable_sources": {
+  "keyframes_pxo": "rpg-2-star-ocean-the-second_female-south-run-v10r1_keyframes-editable_unapproved_20261018-142136-00074ff6.pxo",
+  "keyframes_pxo_sha256": "f52c09fc2d65537da252ddd6b8001d15edaf2f4579041729488a55f23337df0a",
+  "keyframes_pxo_layers": [
+   "shadow",
+   "cape",
+   "arm-vl-back",
+   "arm-vr-back",
+   "hips",
+   "leg-far",
+   "leg-near",
+   "coat-skirt",
+   "torso",
+   "head",
+   "hair-lock",
+   "arm-vl",
+   "arm-vr"
+  ],
+  "new_parts_ora": "game/assets/characters/run-v10-unapproved/rpg-2-star-ocean-the-second_female-south-run-v10_new-parts-editable_unapproved_20261018-143213-13296d6f.ora",
+  "new_parts_ora_sha256": "c06a1541e7f40c3fa4a90b1b9253054a46f0d0641df7e6dfe51d6a416b2f8f2a"
+ },
+ "metrics": {
+  "reachable_foot_states": 949,
+  "reachable_leg_modes_x_sides_x_bob": {
+   "medium": 2694,
+   "long": 1844,
+   "folded": 1156
+  },
+  "nominal_per_px": [
+   {
+    "phase_px": 0,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "B1",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": 8,
+      "lift": 0,
+      "view": "strike",
+      "kin": 1,
+      "contact": true,
+      "leg_mode": "long"
+     },
+     "vr": {
+      "o": -29,
+      "lift": 4,
+      "view": "kick",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "14c1ced7c47e2dc14fe78c2f8408269a1c219aa409adf6a20970944809a07bf8",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 1,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "B1",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": 7,
+      "lift": 0,
+      "view": "strike",
+      "kin": 1,
+      "contact": true,
+      "leg_mode": "long"
+     },
+     "vr": {
+      "o": -29,
+      "lift": 4,
+      "view": "kick",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "a1ea5adad17e6bd8ab43f8dfea0c960f26256af6f2c6c2c7b78ef9aa8e29e98b",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 2,
+    "bob": 1,
+    "hdy": -1,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "B1",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": 6,
+      "lift": 0,
+      "view": "strike",
+      "kin": 1,
+      "contact": true,
+      "leg_mode": "long"
+     },
+     "vr": {
+      "o": -28,
+      "lift": 4,
+      "view": "kick",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "76771b2f965a734e5dbe92b927fa79a8390cb93d978eb845ea2bfbbd3e5f6cc4",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 3,
+    "bob": 1,
+    "hdy": -1,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "B1",
+     "L": "F2"
+    },
+    "feet": {
+     "vl": {
+      "o": 5,
+      "lift": 0,
+      "view": "strike",
+      "kin": 1,
+      "contact": true,
+      "leg_mode": "long"
+     },
+     "vr": {
+      "o": -28,
+      "lift": 4,
+      "view": "kick",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "de85ecf672147b6291d9fce8660162b384d3ad7b7dd36d77097059832974a2cb",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 4,
+    "bob": 1,
+    "hdy": -1,
+    "sx": -1,
+    "csx": 0,
+    "arms": {
+     "R": "B1",
+     "L": "F2"
+    },
+    "feet": {
+     "vl": {
+      "o": 4,
+      "lift": 0,
+      "view": "v8",
+      "kin": 1,
+      "contact": true,
+      "leg_mode": "long"
+     },
+     "vr": {
+      "o": -27,
+      "lift": 4,
+      "view": "kick",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "db4100052862895051e0e632e5f161058f6a8f03f17a7a865b4763a49c515b9d",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 5,
+    "bob": 1,
+    "hdy": -1,
+    "sx": -1,
+    "csx": 0,
+    "arms": {
+     "R": "B1",
+     "L": "F2"
+    },
+    "feet": {
+     "vl": {
+      "o": 3,
+      "lift": 0,
+      "view": "v8",
+      "kin": 1,
+      "contact": true,
+      "leg_mode": "long"
+     },
+     "vr": {
+      "o": -26,
+      "lift": 4,
+      "view": "kick",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     }
+    },
+    "composite_sha256": "a0c4a94384ddac3569e732a514275e9f4a148de35139545013bffc0bc98dff35",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 6,
+    "bob": 1,
+    "hdy": -1,
+    "sx": -1,
+    "csx": 0,
+    "arms": {
+     "R": "B1",
+     "L": "F2"
+    },
+    "feet": {
+     "vl": {
+      "o": 2,
+      "lift": 0,
+      "view": "v8",
+      "kin": 1,
+      "contact": true,
+      "leg_mode": "long"
+     },
+     "vr": {
+      "o": -26,
+      "lift": 4,
+      "view": "kick",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     }
+    },
+    "composite_sha256": "a28bac41e3496ee6e4ab56ec48e137217e3fbb0d7555f0be572ad7ebecd1c3d9",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 7,
+    "bob": 1,
+    "hdy": -1,
+    "sx": -1,
+    "csx": 0,
+    "arms": {
+     "R": "B1",
+     "L": "F2"
+    },
+    "feet": {
+     "vl": {
+      "o": 1,
+      "lift": 0,
+      "view": "v8",
+      "kin": 1,
+      "contact": true,
+      "leg_mode": "long"
+     },
+     "vr": {
+      "o": -25,
+      "lift": 4,
+      "view": "kick",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     }
+    },
+    "composite_sha256": "22ed0b026a0f78bc2ce26b652c3b9c68e9cacc5aa55e0ef392310d42a4dd4085",
+    "silhouettes": 1,
+    "leg_islands_dropped": 3
+   },
+   {
+    "phase_px": 8,
+    "bob": 1,
+    "hdy": -1,
+    "sx": -1,
+    "csx": 0,
+    "arms": {
+     "R": "B1",
+     "L": "F2"
+    },
+    "feet": {
+     "vl": {
+      "o": 0,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "medium"
+     },
+     "vr": {
+      "o": -25,
+      "lift": 4,
+      "view": "kick",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     }
+    },
+    "composite_sha256": "03cc1b775df254c0a560e82de2c072904a0c8932519af6424c143b3f40b62343",
+    "silhouettes": 1,
+    "leg_islands_dropped": 3
+   },
+   {
+    "phase_px": 9,
+    "bob": 1,
+    "hdy": -1,
+    "sx": -1,
+    "csx": 0,
+    "arms": {
+     "R": "B1",
+     "L": "F2"
+    },
+    "feet": {
+     "vl": {
+      "o": -1,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "medium"
+     },
+     "vr": {
+      "o": -24,
+      "lift": 4,
+      "view": "kick",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     }
+    },
+    "composite_sha256": "57f34242c9f9c2ebd6b6ae6f2fd5ed8e75e5e8b3ccdefac8a3b50f0d4f09fcb6",
+    "silhouettes": 1,
+    "leg_islands_dropped": 4
+   },
+   {
+    "phase_px": 10,
+    "bob": 1,
+    "hdy": -1,
+    "sx": -1,
+    "csx": 0,
+    "arms": {
+     "R": "B2",
+     "L": "F2"
+    },
+    "feet": {
+     "vl": {
+      "o": -2,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "medium"
+     },
+     "vr": {
+      "o": -23,
+      "lift": 4,
+      "view": "kick",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     }
+    },
+    "composite_sha256": "f4abf5167669939dd6262724c0e4f89f46c60819c4d468b0366f64043fecd949",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 11,
+    "bob": 1,
+    "hdy": -1,
+    "sx": -1,
+    "csx": 0,
+    "arms": {
+     "R": "B2",
+     "L": "F2"
+    },
+    "feet": {
+     "vl": {
+      "o": -3,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "medium"
+     },
+     "vr": {
+      "o": -23,
+      "lift": 4,
+      "view": "kick",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     }
+    },
+    "composite_sha256": "a97debc70813d5344469852e7ed2ad665a68a8c1c8b72c906a2cd7a98f665152",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 12,
+    "bob": 2,
+    "hdy": -1,
+    "sx": -1,
+    "csx": 0,
+    "arms": {
+     "R": "B2",
+     "L": "F2"
+    },
+    "feet": {
+     "vl": {
+      "o": -4,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "medium"
+     },
+     "vr": {
+      "o": -22,
+      "lift": 4,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "2567db8573d29205f3a1ed0871641d7b4f305417e269c9a576c83b3f0d855efb",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 13,
+    "bob": 2,
+    "hdy": -1,
+    "sx": -1,
+    "csx": 0,
+    "arms": {
+     "R": "B2",
+     "L": "F2"
+    },
+    "feet": {
+     "vl": {
+      "o": -5,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "medium"
+     },
+     "vr": {
+      "o": -21,
+      "lift": 4,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "00a4170b4a876aba79f9565ac1d9dde49bb78d8a0f19ea392638afaedf32f2cf",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 14,
+    "bob": 2,
+    "hdy": -1,
+    "sx": -1,
+    "csx": -1,
+    "arms": {
+     "R": "B2",
+     "L": "F2"
+    },
+    "feet": {
+     "vl": {
+      "o": -6,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "medium"
+     },
+     "vr": {
+      "o": -21,
+      "lift": 4,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "b445bbbc5286afd51bf457542c44e71169509244a8256e4002b7bfca8540a4cb",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 15,
+    "bob": 2,
+    "hdy": -1,
+    "sx": -1,
+    "csx": -1,
+    "arms": {
+     "R": "B2",
+     "L": "F2"
+    },
+    "feet": {
+     "vl": {
+      "o": -7,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "medium"
+     },
+     "vr": {
+      "o": -20,
+      "lift": 4,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "16eec4bd10dcb0ee4c875367c5280f5eb0e4082e0c8b76de2ea09488ec065404",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 16,
+    "bob": 2,
+    "hdy": -1,
+    "sx": -1,
+    "csx": -1,
+    "arms": {
+     "R": "B2",
+     "L": "F2"
+    },
+    "feet": {
+     "vl": {
+      "o": -8,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "medium"
+     },
+     "vr": {
+      "o": -19,
+      "lift": 4,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "67153e99c9558bf38508ad02609ad85df7b95b424aa306aa6e030c19e1934fdf",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 17,
+    "bob": 2,
+    "hdy": -1,
+    "sx": -1,
+    "csx": -1,
+    "arms": {
+     "R": "B2",
+     "L": "F2"
+    },
+    "feet": {
+     "vl": {
+      "o": -9,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "medium"
+     },
+     "vr": {
+      "o": -19,
+      "lift": 4,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "369b8715cd238e59fa5ba8a9d18da606677257b560702607f9cd0d89db87bcc3",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 18,
+    "bob": 2,
+    "hdy": -1,
+    "sx": -1,
+    "csx": -1,
+    "arms": {
+     "R": "B2",
+     "L": "F2"
+    },
+    "feet": {
+     "vl": {
+      "o": -10,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "medium"
+     },
+     "vr": {
+      "o": -18,
+      "lift": 4,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "9ac4f18fe3b39daa350f4100c340602b3649951be11d4d313adb9381e05037ac",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 19,
+    "bob": 2,
+    "hdy": -1,
+    "sx": -1,
+    "csx": -1,
+    "arms": {
+     "R": "B2",
+     "L": "F2"
+    },
+    "feet": {
+     "vl": {
+      "o": -11,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "medium"
+     },
+     "vr": {
+      "o": -17,
+      "lift": 4,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     }
+    },
+    "composite_sha256": "cdd08336073200bec3f4269e872252767c58ed23076ab23e135f0237aabcafb3",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 20,
+    "bob": 2,
+    "hdy": -1,
+    "sx": -1,
+    "csx": -1,
+    "arms": {
+     "R": "B2",
+     "L": "F2"
+    },
+    "feet": {
+     "vl": {
+      "o": -12,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "medium"
+     },
+     "vr": {
+      "o": -17,
+      "lift": 4,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     }
+    },
+    "composite_sha256": "1c88a0fbb20ce4b33f0eb05d674c064cc24a44aa5201c4917c1224e77dd563b0",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 21,
+    "bob": 2,
+    "hdy": -1,
+    "sx": -1,
+    "csx": -1,
+    "arms": {
+     "R": "B2",
+     "L": "F2"
+    },
+    "feet": {
+     "vl": {
+      "o": -13,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "medium"
+     },
+     "vr": {
+      "o": -16,
+      "lift": 4,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     }
+    },
+    "composite_sha256": "a1c2b9472d486f7173bd81c6a7ebcbe07c0a982a278bb73acbbc596b4a9c9fe1",
+    "silhouettes": 1,
+    "leg_islands_dropped": 3
+   },
+   {
+    "phase_px": 22,
+    "bob": 2,
+    "hdy": 0,
+    "sx": -1,
+    "csx": -1,
+    "arms": {
+     "R": "B2",
+     "L": "F2"
+    },
+    "feet": {
+     "vl": {
+      "o": -14,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "medium"
+     },
+     "vr": {
+      "o": -15,
+      "lift": 4,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     }
+    },
+    "composite_sha256": "c3912218ba20625c79d3c8974210e6e665f7c57a8a336c7ea9d7283c4748c889",
+    "silhouettes": 1,
+    "leg_islands_dropped": 5
+   },
+   {
+    "phase_px": 23,
+    "bob": 2,
+    "hdy": 0,
+    "sx": -1,
+    "csx": -1,
+    "arms": {
+     "R": "B2",
+     "L": "F2"
+    },
+    "feet": {
+     "vl": {
+      "o": -15,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": -14,
+      "lift": 4,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     }
+    },
+    "composite_sha256": "79813af4450e729ff282b09e3d3673a8b5449378d3d9a756ecdbbc2cc0587135",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 24,
+    "bob": 1,
+    "hdy": 1,
+    "sx": -1,
+    "csx": -1,
+    "arms": {
+     "R": "B2",
+     "L": "F2"
+    },
+    "feet": {
+     "vl": {
+      "o": -16,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": -14,
+      "lift": 4,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     }
+    },
+    "composite_sha256": "b04701ed457d2d05b7d8eaf6289a10293a67ef560356a7789f9f701db4341fc7",
+    "silhouettes": 1,
+    "leg_islands_dropped": 8
+   },
+   {
+    "phase_px": 25,
+    "bob": 1,
+    "hdy": 1,
+    "sx": -1,
+    "csx": -1,
+    "arms": {
+     "R": "B2",
+     "L": "F2"
+    },
+    "feet": {
+     "vl": {
+      "o": -17,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": -13,
+      "lift": 4,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     }
+    },
+    "composite_sha256": "bdc4fbacf2dbb9b08858d4b63394ca940037dcb2fdba3e59658101b7599fc186",
+    "silhouettes": 1,
+    "leg_islands_dropped": 7
+   },
+   {
+    "phase_px": 26,
+    "bob": 1,
+    "hdy": 1,
+    "sx": -1,
+    "csx": -1,
+    "arms": {
+     "R": "B2",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": -18,
+      "lift": 0,
+      "view": "heelup",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": -12,
+      "lift": 4,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     }
+    },
+    "composite_sha256": "2af5a7b01041ba6b9b0f90187afba603587dac2624676462e4ab940aad3298f5",
+    "silhouettes": 1,
+    "leg_islands_dropped": 8
+   },
+   {
+    "phase_px": 27,
+    "bob": 1,
+    "hdy": 1,
+    "sx": -1,
+    "csx": -1,
+    "arms": {
+     "R": "B2",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": -19,
+      "lift": 0,
+      "view": "heelup",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": -12,
+      "lift": 4,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     }
+    },
+    "composite_sha256": "c0c94c17bc6869162ca7edb7945ed42c3167059e3a8c9be61bd706b01e377d01",
+    "silhouettes": 1,
+    "leg_islands_dropped": 8
+   },
+   {
+    "phase_px": 28,
+    "bob": 1,
+    "hdy": 1,
+    "sx": -1,
+    "csx": -1,
+    "arms": {
+     "R": "B2",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": -20,
+      "lift": 0,
+      "view": "heelup",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": -11,
+      "lift": 4,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     }
+    },
+    "composite_sha256": "cca1926953e0240f537580e449f49899bfbd05a9efaac6a4340fb2dfb1816062",
+    "silhouettes": 1,
+    "leg_islands_dropped": 6
+   },
+   {
+    "phase_px": 29,
+    "bob": 1,
+    "hdy": 1,
+    "sx": -1,
+    "csx": -1,
+    "arms": {
+     "R": "B2",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": -21,
+      "lift": 0,
+      "view": "heelup",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": -11,
+      "lift": 4,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     }
+    },
+    "composite_sha256": "71b30db23f11609ce9e90369d33bcfe739c3e2246fad4e5d69bf3a6a92d11046",
+    "silhouettes": 1,
+    "leg_islands_dropped": 6
+   },
+   {
+    "phase_px": 30,
+    "bob": 1,
+    "hdy": 1,
+    "sx": -1,
+    "csx": -1,
+    "arms": {
+     "R": "B2",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": -22,
+      "lift": 0,
+      "view": "heelup",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": -10,
+      "lift": 3,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     }
+    },
+    "composite_sha256": "1e6e6d786dda110e165ba83390980c5b0d4c99c82f6b368f47cf0c6869e931db",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 31,
+    "bob": 1,
+    "hdy": 1,
+    "sx": -1,
+    "csx": -1,
+    "arms": {
+     "R": "B2",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": -23,
+      "lift": 0,
+      "view": "heelup",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": -9,
+      "lift": 3,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     }
+    },
+    "composite_sha256": "b618ee6a2321275942f2c8e408d3a47963560d1fe2540017828fb02a6ac06cbb",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 32,
+    "bob": 1,
+    "hdy": 1,
+    "sx": 0,
+    "csx": -1,
+    "arms": {
+     "R": "B2",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": -24,
+      "lift": 0,
+      "view": "heelup",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": -9,
+      "lift": 3,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     }
+    },
+    "composite_sha256": "24b623e36436989b0f3cf91331cd77f066012686176e9adb82d9e695c33b7c7d",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 33,
+    "bob": 1,
+    "hdy": 1,
+    "sx": 0,
+    "csx": -1,
+    "arms": {
+     "R": "B1",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": -25,
+      "lift": 0,
+      "view": "heelup",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": -8,
+      "lift": 3,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     }
+    },
+    "composite_sha256": "d8e668ee1ecb0daffe9ac024de1ce273252fdc842197ed111cfdde1663bcf72e",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 34,
+    "bob": 0,
+    "hdy": 1,
+    "sx": 0,
+    "csx": -1,
+    "arms": {
+     "R": "B1",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": -26,
+      "lift": 0,
+      "view": "toe",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": -7,
+      "lift": 3,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     }
+    },
+    "composite_sha256": "167094d3059d13c42576e416844001039c2028e2987298423385da3a86e6354e",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 35,
+    "bob": 0,
+    "hdy": 1,
+    "sx": 0,
+    "csx": -1,
+    "arms": {
+     "R": "B1",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": -27,
+      "lift": 0,
+      "view": "toe",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": -7,
+      "lift": 3,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     }
+    },
+    "composite_sha256": "632a5729eef948fa04d1380320e358050aabc40b20f9bb9568623f80830a20ea",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 36,
+    "bob": 0,
+    "hdy": 1,
+    "sx": 0,
+    "csx": -1,
+    "arms": {
+     "R": "B1",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": -28,
+      "lift": 0,
+      "view": "toe",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": -6,
+      "lift": 3,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     }
+    },
+    "composite_sha256": "bb197536d8fadbff531cceda896b6afc876f08156f0589f27f20d2315edaa706",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 37,
+    "bob": 0,
+    "hdy": 1,
+    "sx": 0,
+    "csx": -1,
+    "arms": {
+     "R": "B1",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": -29,
+      "lift": 0,
+      "view": "toe",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": -5,
+      "lift": 3,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     }
+    },
+    "composite_sha256": "cd7689e80c36fec7fc434cd8cd8dde6e0b14b7242206ba856c1792089ac94fea",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 38,
+    "bob": 0,
+    "hdy": 1,
+    "sx": 0,
+    "csx": -1,
+    "arms": {
+     "R": "B1",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": -30,
+      "lift": 0,
+      "view": "toe",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": -5,
+      "lift": 3,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     }
+    },
+    "composite_sha256": "e3fbdf4a39aaaa286f29d3f45a359d3d482b51299926f05b54eb63f10d8e7f12",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 39,
+    "bob": 0,
+    "hdy": 1,
+    "sx": 0,
+    "csx": -1,
+    "arms": {
+     "R": "B1",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": -31,
+      "lift": 0,
+      "view": "toe",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": -4,
+      "lift": 3,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "long"
+     }
+    },
+    "composite_sha256": "ba3fe4845a0a5e76b856c98de66854ba473f9f782546f118a1616698fb1e8c50",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 40,
+    "bob": 0,
+    "hdy": 1,
+    "sx": 0,
+    "csx": -1,
+    "arms": {
+     "R": "B1",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": -32,
+      "lift": 0,
+      "view": "toe",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": -3,
+      "lift": 3,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "long"
+     }
+    },
+    "composite_sha256": "30af0b29ffb5b4dacb8137deb61c11887bf7cccf9636ddd495ed734d2f2bbbeb",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 41,
+    "bob": 0,
+    "hdy": 1,
+    "sx": 0,
+    "csx": -1,
+    "arms": {
+     "R": "B1",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": -33,
+      "lift": 0,
+      "view": "toe",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": -3,
+      "lift": 3,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "long"
+     }
+    },
+    "composite_sha256": "08cc920ad93be3c2cda131321ef1e2945467ca27255be3417ea9d6481ab0f11c",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 42,
+    "bob": 0,
+    "hdy": 1,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "B1",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": -34,
+      "lift": 0,
+      "view": "toe",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": -2,
+      "lift": 3,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "long"
+     }
+    },
+    "composite_sha256": "1fb9b17437fde3dbbddac1bfef63b84cf2ff3c941d08b2b79aa277c429cf04f0",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 43,
+    "bob": 0,
+    "hdy": 1,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "B1",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": -35,
+      "lift": 0,
+      "view": "toe",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": -1,
+      "lift": 3,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "long"
+     }
+    },
+    "composite_sha256": "fd4a042bc84adb77be0c8070557fbbc4ae913fd78c11e3542c5220abf5045d06",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 44,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "B1",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": -36,
+      "lift": 1,
+      "view": "toe",
+      "kin": 0,
+      "contact": false,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": -1,
+      "lift": 3,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "long"
+     }
+    },
+    "composite_sha256": "a794e65e222cdae5b116b2cdaf2cc0a9c65d2ff88376f9bd45277835806762ce",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 45,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "B1",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": -36,
+      "lift": 1,
+      "view": "toe",
+      "kin": 0,
+      "contact": false,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": 0,
+      "lift": 3,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "long"
+     }
+    },
+    "composite_sha256": "a8e337f8680e8ed466c3e9267d75ce7d8c8d6ba7c4c4c6942d7ceddb8a801e6f",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 46,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": -36,
+      "lift": 1,
+      "view": "toe",
+      "kin": 0,
+      "contact": false,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": 0,
+      "lift": 3,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "long"
+     }
+    },
+    "composite_sha256": "6d2cfb68f0b2a1a1ec392cd5a1aefcc9d85817e379683c919926cd2648722657",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 47,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": -35,
+      "lift": 2,
+      "view": "toe",
+      "kin": 0,
+      "contact": false,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": 1,
+      "lift": 3,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "long"
+     }
+    },
+    "composite_sha256": "7614ed1f55b99d7ba9eed1aafa63225a79113714ea8f4eec42fce354526fa745",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 48,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": -35,
+      "lift": 2,
+      "view": "toe",
+      "kin": 0,
+      "contact": false,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": 2,
+      "lift": 2,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "long"
+     }
+    },
+    "composite_sha256": "32116ea2ec77d6c42ff77f483d7f0fc2abe570e7ccaf59e368ee3b913277053f",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 49,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": -35,
+      "lift": 2,
+      "view": "toe",
+      "kin": 0,
+      "contact": false,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": 2,
+      "lift": 2,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "long"
+     }
+    },
+    "composite_sha256": "32116ea2ec77d6c42ff77f483d7f0fc2abe570e7ccaf59e368ee3b913277053f",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 50,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": -35,
+      "lift": 2,
+      "view": "toe",
+      "kin": 0,
+      "contact": false,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": 3,
+      "lift": 2,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "long"
+     }
+    },
+    "composite_sha256": "3b2a08692578da3e59c09445bcf4608c06fe9c59e9e771a9915db8381982ce0c",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 51,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": -34,
+      "lift": 3,
+      "view": "toe",
+      "kin": 0,
+      "contact": false,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": 3,
+      "lift": 2,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "long"
+     }
+    },
+    "composite_sha256": "2599a84251881d86bfd72d7b0ed7470ab28783dae3d62bdf86071f36db0ff3eb",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 52,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": -34,
+      "lift": 3,
+      "view": "toe",
+      "kin": 0,
+      "contact": false,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": 4,
+      "lift": 2,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "long"
+     }
+    },
+    "composite_sha256": "305a89409f4909cf433866b897736d0fd24c7224f4fe5397160b545f161bc122",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 53,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": -34,
+      "lift": 3,
+      "view": "kick",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": 4,
+      "lift": 2,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "long"
+     }
+    },
+    "composite_sha256": "3510a2d9f2795728c2d188960f7cca48af079d2c2cc4c07e76cab9a9930a4e4a",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 54,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": -33,
+      "lift": 3,
+      "view": "kick",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": 5,
+      "lift": 2,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "long"
+     }
+    },
+    "composite_sha256": "a7adc7ffb1fbb4d4672af4a7fa3b552b3118b90c4f80abd3baf1b9d141da1600",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 55,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": -33,
+      "lift": 3,
+      "view": "kick",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": 5,
+      "lift": 2,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "long"
+     }
+    },
+    "composite_sha256": "a7adc7ffb1fbb4d4672af4a7fa3b552b3118b90c4f80abd3baf1b9d141da1600",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 56,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": -33,
+      "lift": 3,
+      "view": "kick",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": 6,
+      "lift": 1,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "long"
+     }
+    },
+    "composite_sha256": "06c13b94369c3c1df42233a9c11c3d9026ff8002ba0914fe33841a8d8375a84c",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 57,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": -32,
+      "lift": 3,
+      "view": "kick",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": 6,
+      "lift": 1,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "long"
+     }
+    },
+    "composite_sha256": "92d717f56d2283795e7b6cd5141a76dff5412453e602df669c8778bbfb85d49d",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 58,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": -32,
+      "lift": 3,
+      "view": "kick",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": 7,
+      "lift": 1,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "long"
+     }
+    },
+    "composite_sha256": "bd1d5982f15ca87e422672214265f30a2e466d626597dae875996d56fc204da2",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 59,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": -31,
+      "lift": 4,
+      "view": "kick",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": 7,
+      "lift": 1,
+      "view": "strike",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "long"
+     }
+    },
+    "composite_sha256": "6b390dc1515bf593daa2b1742ca9085c0e3837d93e5ed0bb0186eaf5d5f769ee",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 60,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": -31,
+      "lift": 4,
+      "view": "kick",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": 7,
+      "lift": 1,
+      "view": "strike",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "long"
+     }
+    },
+    "composite_sha256": "6b390dc1515bf593daa2b1742ca9085c0e3837d93e5ed0bb0186eaf5d5f769ee",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 61,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "F1",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": -31,
+      "lift": 4,
+      "view": "kick",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": 7,
+      "lift": 1,
+      "view": "strike",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "long"
+     }
+    },
+    "composite_sha256": "c3aede1c99915bbb69060cab483d9e4dd254481288f0fbbaa3f500e107f9d531",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 62,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "F1",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": -30,
+      "lift": 4,
+      "view": "kick",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": 8,
+      "lift": 1,
+      "view": "strike",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "long"
+     }
+    },
+    "composite_sha256": "1fd286fec24fc84c0760106bdaf82dad2195bbd7741071eea111895b2750f354",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 63,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "F1",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": -30,
+      "lift": 4,
+      "view": "kick",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": 8,
+      "lift": 1,
+      "view": "strike",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "long"
+     }
+    },
+    "composite_sha256": "1fd286fec24fc84c0760106bdaf82dad2195bbd7741071eea111895b2750f354",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 64,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "F1",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": -29,
+      "lift": 4,
+      "view": "kick",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": 8,
+      "lift": 0,
+      "view": "strike",
+      "kin": 1,
+      "contact": true,
+      "leg_mode": "long"
+     }
+    },
+    "composite_sha256": "3be5e9fd0204b29ae4562fce684d25618acaeeda109ebcdadfc8588cd7af6dac",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 65,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "F1",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": -29,
+      "lift": 4,
+      "view": "kick",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": 7,
+      "lift": 0,
+      "view": "strike",
+      "kin": 1,
+      "contact": true,
+      "leg_mode": "long"
+     }
+    },
+    "composite_sha256": "64721000283c6fec55b278d89c6373571346f2a1232f1fb0cd35bdec8c608591",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 66,
+    "bob": 1,
+    "hdy": -1,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "F1",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": -28,
+      "lift": 4,
+      "view": "kick",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": 6,
+      "lift": 0,
+      "view": "strike",
+      "kin": 1,
+      "contact": true,
+      "leg_mode": "long"
+     }
+    },
+    "composite_sha256": "cd0cf025f9e3e6c612ad16e0a78e747f4b63e76677fe131b03324c1b368a57da",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 67,
+    "bob": 1,
+    "hdy": -1,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "F1",
+     "L": "B2"
+    },
+    "feet": {
+     "vl": {
+      "o": -28,
+      "lift": 4,
+      "view": "kick",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": 5,
+      "lift": 0,
+      "view": "strike",
+      "kin": 1,
+      "contact": true,
+      "leg_mode": "long"
+     }
+    },
+    "composite_sha256": "d93befc3f1add5bfb1daf83f779372bc2eaccf7a00e0d511c92f22590264707f",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 68,
+    "bob": 1,
+    "hdy": -1,
+    "sx": 1,
+    "csx": 0,
+    "arms": {
+     "R": "F1",
+     "L": "B2"
+    },
+    "feet": {
+     "vl": {
+      "o": -27,
+      "lift": 4,
+      "view": "kick",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": 4,
+      "lift": 0,
+      "view": "v8",
+      "kin": 1,
+      "contact": true,
+      "leg_mode": "long"
+     }
+    },
+    "composite_sha256": "598f271fc2b318701ffd3cd5a61555b76119a8dc5de0c2ce9e491394aa269b7f",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 69,
+    "bob": 1,
+    "hdy": -1,
+    "sx": 1,
+    "csx": 0,
+    "arms": {
+     "R": "F1",
+     "L": "B2"
+    },
+    "feet": {
+     "vl": {
+      "o": -26,
+      "lift": 4,
+      "view": "kick",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": 3,
+      "lift": 0,
+      "view": "v8",
+      "kin": 1,
+      "contact": true,
+      "leg_mode": "long"
+     }
+    },
+    "composite_sha256": "5328fb7150da6b075d2fdbf03b224b8844c0d719d87a2ebaeb73e3c7121307be",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 70,
+    "bob": 1,
+    "hdy": -1,
+    "sx": 1,
+    "csx": 0,
+    "arms": {
+     "R": "F1",
+     "L": "B2"
+    },
+    "feet": {
+     "vl": {
+      "o": -26,
+      "lift": 4,
+      "view": "kick",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": 2,
+      "lift": 0,
+      "view": "v8",
+      "kin": 1,
+      "contact": true,
+      "leg_mode": "long"
+     }
+    },
+    "composite_sha256": "3038fe7df6ec20b881df14bf3a4841ca1c15b78965af2fa74be5d52e02315e9b",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 71,
+    "bob": 1,
+    "hdy": -1,
+    "sx": 1,
+    "csx": 0,
+    "arms": {
+     "R": "F1",
+     "L": "B2"
+    },
+    "feet": {
+     "vl": {
+      "o": -25,
+      "lift": 4,
+      "view": "kick",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": 1,
+      "lift": 0,
+      "view": "v8",
+      "kin": 1,
+      "contact": true,
+      "leg_mode": "long"
+     }
+    },
+    "composite_sha256": "113364168ee6bc452b3672e11e65c370d662e11490c999c73d3b14af3745bfd1",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 72,
+    "bob": 1,
+    "hdy": -1,
+    "sx": 1,
+    "csx": 0,
+    "arms": {
+     "R": "F1",
+     "L": "B2"
+    },
+    "feet": {
+     "vl": {
+      "o": -25,
+      "lift": 4,
+      "view": "kick",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": 0,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "medium"
+     }
+    },
+    "composite_sha256": "84897f1c361f38783051949fbb92e9fa8a340e82fa1676aec5009ff2dffa5a8f",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 73,
+    "bob": 1,
+    "hdy": -1,
+    "sx": 1,
+    "csx": 0,
+    "arms": {
+     "R": "F1",
+     "L": "B2"
+    },
+    "feet": {
+     "vl": {
+      "o": -24,
+      "lift": 4,
+      "view": "kick",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": -1,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "medium"
+     }
+    },
+    "composite_sha256": "f0ada59108f42914088f77d7ce79605b74da3462c47ca4b9c2c5929b0803212b",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 74,
+    "bob": 1,
+    "hdy": -1,
+    "sx": 1,
+    "csx": 0,
+    "arms": {
+     "R": "F2",
+     "L": "B2"
+    },
+    "feet": {
+     "vl": {
+      "o": -23,
+      "lift": 4,
+      "view": "kick",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     },
+     "vr": {
+      "o": -2,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "medium"
+     }
+    },
+    "composite_sha256": "3b45dd375c016f994e1ef5e29f445f3432f17a0131b33c2db3a50c05ec6a5108",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 75,
+    "bob": 1,
+    "hdy": -1,
+    "sx": 1,
+    "csx": 0,
+    "arms": {
+     "R": "F2",
+     "L": "B2"
+    },
+    "feet": {
+     "vl": {
+      "o": -23,
+      "lift": 4,
+      "view": "kick",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     },
+     "vr": {
+      "o": -3,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "medium"
+     }
+    },
+    "composite_sha256": "d904b28c7b0cb40d6c8dbc8ad82fb5b633561ca12f3caf80e0e77a450c310903",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 76,
+    "bob": 2,
+    "hdy": -1,
+    "sx": 1,
+    "csx": 0,
+    "arms": {
+     "R": "F2",
+     "L": "B2"
+    },
+    "feet": {
+     "vl": {
+      "o": -22,
+      "lift": 4,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": -4,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "medium"
+     }
+    },
+    "composite_sha256": "1fcfc510dbd6086fcc613ef9455c5e31ee2cb4334f308402baa26cee3cb7b71c",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 77,
+    "bob": 2,
+    "hdy": -1,
+    "sx": 1,
+    "csx": 0,
+    "arms": {
+     "R": "F2",
+     "L": "B2"
+    },
+    "feet": {
+     "vl": {
+      "o": -21,
+      "lift": 4,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": -5,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "medium"
+     }
+    },
+    "composite_sha256": "73bab78b628374aed9b70470b9a6abef467eae1e5f586838cf00d7352fc84e3f",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 78,
+    "bob": 2,
+    "hdy": -1,
+    "sx": 1,
+    "csx": 1,
+    "arms": {
+     "R": "F2",
+     "L": "B2"
+    },
+    "feet": {
+     "vl": {
+      "o": -21,
+      "lift": 4,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": -6,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "medium"
+     }
+    },
+    "composite_sha256": "f30cd6584c2398e7e5c2da116d71a8c3661da50c097567edbe929526d9d03016",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 79,
+    "bob": 2,
+    "hdy": -1,
+    "sx": 1,
+    "csx": 1,
+    "arms": {
+     "R": "F2",
+     "L": "B2"
+    },
+    "feet": {
+     "vl": {
+      "o": -20,
+      "lift": 4,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": -7,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "medium"
+     }
+    },
+    "composite_sha256": "dc26196046f5850c83e21062289ef703406e587266cbddaeddc4dcb5507e0575",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 80,
+    "bob": 2,
+    "hdy": -1,
+    "sx": 1,
+    "csx": 1,
+    "arms": {
+     "R": "F2",
+     "L": "B2"
+    },
+    "feet": {
+     "vl": {
+      "o": -19,
+      "lift": 4,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": -8,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "medium"
+     }
+    },
+    "composite_sha256": "be8e642099531d22bddf75365d0a45f397889887a777bb1a036c0c3c7825e278",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 81,
+    "bob": 2,
+    "hdy": -1,
+    "sx": 1,
+    "csx": 1,
+    "arms": {
+     "R": "F2",
+     "L": "B2"
+    },
+    "feet": {
+     "vl": {
+      "o": -19,
+      "lift": 4,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": -9,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "medium"
+     }
+    },
+    "composite_sha256": "d8d93a27a41c492d2e837ea294bfddec9ed0632bfd326cb3e5f7508ba9897b05",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 82,
+    "bob": 2,
+    "hdy": -1,
+    "sx": 1,
+    "csx": 1,
+    "arms": {
+     "R": "F2",
+     "L": "B2"
+    },
+    "feet": {
+     "vl": {
+      "o": -18,
+      "lift": 4,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": -10,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "medium"
+     }
+    },
+    "composite_sha256": "f06b09d05fcecb1bb3514ada5f0784bdceb990062b7705ec80486fe3329033d4",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 83,
+    "bob": 2,
+    "hdy": -1,
+    "sx": 1,
+    "csx": 1,
+    "arms": {
+     "R": "F2",
+     "L": "B2"
+    },
+    "feet": {
+     "vl": {
+      "o": -17,
+      "lift": 4,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": -11,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "medium"
+     }
+    },
+    "composite_sha256": "2239095044769bd30d3dbcce1bc15039d2178ae817fbeea9963d152cd775e77d",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 84,
+    "bob": 2,
+    "hdy": -1,
+    "sx": 1,
+    "csx": 1,
+    "arms": {
+     "R": "F2",
+     "L": "B2"
+    },
+    "feet": {
+     "vl": {
+      "o": -17,
+      "lift": 4,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": -12,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "medium"
+     }
+    },
+    "composite_sha256": "f75679c9512b21fe02b76ff10f26cf8a3803ed3538e64dc5444c560ae2bf5355",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 85,
+    "bob": 2,
+    "hdy": -1,
+    "sx": 1,
+    "csx": 1,
+    "arms": {
+     "R": "F2",
+     "L": "B2"
+    },
+    "feet": {
+     "vl": {
+      "o": -16,
+      "lift": 4,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": -13,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "medium"
+     }
+    },
+    "composite_sha256": "c5d347c73f02327f266c0d9f3445efe8e2bc792f02946e342731db97871a9a4d",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 86,
+    "bob": 2,
+    "hdy": 0,
+    "sx": 1,
+    "csx": 1,
+    "arms": {
+     "R": "F2",
+     "L": "B2"
+    },
+    "feet": {
+     "vl": {
+      "o": -15,
+      "lift": 4,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     },
+     "vr": {
+      "o": -14,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "medium"
+     }
+    },
+    "composite_sha256": "e8c37ca8d5205712d6775ed6561fd50ffb48920abe38e0087618cd515ccbc619",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 87,
+    "bob": 2,
+    "hdy": 0,
+    "sx": 1,
+    "csx": 1,
+    "arms": {
+     "R": "F2",
+     "L": "B2"
+    },
+    "feet": {
+     "vl": {
+      "o": -14,
+      "lift": 4,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     },
+     "vr": {
+      "o": -15,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "0965f3802fd3d405f734b8825a2faaaef2bbc1ffa9f13cbc18a69ee61c77f380",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 88,
+    "bob": 1,
+    "hdy": 1,
+    "sx": 1,
+    "csx": 1,
+    "arms": {
+     "R": "F2",
+     "L": "B2"
+    },
+    "feet": {
+     "vl": {
+      "o": -14,
+      "lift": 4,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     },
+     "vr": {
+      "o": -16,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "52d0914debe8b1879b25388b68ed2af576a924426b928750859ef5f1802c710e",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 89,
+    "bob": 1,
+    "hdy": 1,
+    "sx": 1,
+    "csx": 1,
+    "arms": {
+     "R": "F2",
+     "L": "B2"
+    },
+    "feet": {
+     "vl": {
+      "o": -13,
+      "lift": 4,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     },
+     "vr": {
+      "o": -17,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "7b30e5a330ca8ba65af20cbf5eddfba4709f9585263d1c0a54cf989f3f923d25",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 90,
+    "bob": 1,
+    "hdy": 1,
+    "sx": 1,
+    "csx": 1,
+    "arms": {
+     "R": "F2",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": -12,
+      "lift": 4,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     },
+     "vr": {
+      "o": -18,
+      "lift": 0,
+      "view": "heelup",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "medium"
+     }
+    },
+    "composite_sha256": "e09b44f9075cb72addebe2db4495215d2796bc84f73fe6acdfdb696fcc49c698",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 91,
+    "bob": 1,
+    "hdy": 1,
+    "sx": 1,
+    "csx": 1,
+    "arms": {
+     "R": "F2",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": -12,
+      "lift": 4,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     },
+     "vr": {
+      "o": -19,
+      "lift": 0,
+      "view": "heelup",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "medium"
+     }
+    },
+    "composite_sha256": "311bdea9d4bfc0adbbc4f46ecef34ff8284aa9cd3d35af51b30a057b034e0071",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 92,
+    "bob": 1,
+    "hdy": 1,
+    "sx": 1,
+    "csx": 1,
+    "arms": {
+     "R": "F2",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": -11,
+      "lift": 4,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     },
+     "vr": {
+      "o": -20,
+      "lift": 0,
+      "view": "heelup",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "medium"
+     }
+    },
+    "composite_sha256": "ef13655bfde6a1612cbc5a1de607c94208659b2ff56ac7962507c092722f824b",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 93,
+    "bob": 1,
+    "hdy": 1,
+    "sx": 1,
+    "csx": 1,
+    "arms": {
+     "R": "F2",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": -11,
+      "lift": 4,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     },
+     "vr": {
+      "o": -21,
+      "lift": 0,
+      "view": "heelup",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "8b851fc61eada103fdf4741e058013edf8e6bb34c89d92782a1a5cb61c62891a",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 94,
+    "bob": 1,
+    "hdy": 1,
+    "sx": 1,
+    "csx": 1,
+    "arms": {
+     "R": "F2",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": -10,
+      "lift": 3,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     },
+     "vr": {
+      "o": -22,
+      "lift": 0,
+      "view": "heelup",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "21040b0799e555a4ebdf2a9930c93b52955823653604013ada641e13428aae3c",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 95,
+    "bob": 1,
+    "hdy": 1,
+    "sx": 1,
+    "csx": 1,
+    "arms": {
+     "R": "F2",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": -9,
+      "lift": 3,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     },
+     "vr": {
+      "o": -23,
+      "lift": 0,
+      "view": "heelup",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "ac5abb909dcbf19b593ddcb508a834de79fbd0f48c89198af60c0d68e2be084c",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 96,
+    "bob": 1,
+    "hdy": 1,
+    "sx": 0,
+    "csx": 1,
+    "arms": {
+     "R": "F2",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": -9,
+      "lift": 3,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     },
+     "vr": {
+      "o": -24,
+      "lift": 0,
+      "view": "heelup",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "4789a8479f81de57c66bb6fd96c86319df3890b35728f0e78e014080f185542d",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 97,
+    "bob": 1,
+    "hdy": 1,
+    "sx": 0,
+    "csx": 1,
+    "arms": {
+     "R": "F1",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": -8,
+      "lift": 3,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     },
+     "vr": {
+      "o": -25,
+      "lift": 0,
+      "view": "heelup",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "d2bd96216825f0848df34ae9732acc86a480ff2b283c3a8206f57cf3fbcd021a",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 98,
+    "bob": 0,
+    "hdy": 1,
+    "sx": 0,
+    "csx": 1,
+    "arms": {
+     "R": "F1",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": -7,
+      "lift": 3,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     },
+     "vr": {
+      "o": -26,
+      "lift": 0,
+      "view": "toe",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "62ee7af7284ab6e76a7438e1f8fe09e8cda7ec7cf570be5d604ea5c5a6e21177",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 99,
+    "bob": 0,
+    "hdy": 1,
+    "sx": 0,
+    "csx": 1,
+    "arms": {
+     "R": "F1",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": -7,
+      "lift": 3,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     },
+     "vr": {
+      "o": -27,
+      "lift": 0,
+      "view": "toe",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "721f0780b40b13a6830bf405ae21d5b7d53893a12edd80c3d117626b63c1fb68",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 100,
+    "bob": 0,
+    "hdy": 1,
+    "sx": 0,
+    "csx": 1,
+    "arms": {
+     "R": "F1",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": -6,
+      "lift": 3,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     },
+     "vr": {
+      "o": -28,
+      "lift": 0,
+      "view": "toe",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "4eed4cd780afa09161e81c18ebb1d525a72cc2b3cab98a21a7eb3ef6cdc8efee",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 101,
+    "bob": 0,
+    "hdy": 1,
+    "sx": 0,
+    "csx": 1,
+    "arms": {
+     "R": "F1",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": -5,
+      "lift": 3,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     },
+     "vr": {
+      "o": -29,
+      "lift": 0,
+      "view": "toe",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "a846fe09d5cadeacec9db4c3261bb5ccbe8581cb308dfda842b7642b0ce48fb0",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 102,
+    "bob": 0,
+    "hdy": 1,
+    "sx": 0,
+    "csx": 1,
+    "arms": {
+     "R": "F1",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": -5,
+      "lift": 3,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     },
+     "vr": {
+      "o": -30,
+      "lift": 0,
+      "view": "toe",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "4ea62824b65523761f0615c79a3f4fd5956a3faf56243f046514992d960a18f1",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 103,
+    "bob": 0,
+    "hdy": 1,
+    "sx": 0,
+    "csx": 1,
+    "arms": {
+     "R": "F1",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": -4,
+      "lift": 3,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     },
+     "vr": {
+      "o": -31,
+      "lift": 0,
+      "view": "toe",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "080f23a229605cac802ff30155bbe02a9629645b7413bd8891bd9f75c3b48699",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 104,
+    "bob": 0,
+    "hdy": 1,
+    "sx": 0,
+    "csx": 1,
+    "arms": {
+     "R": "F1",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": -3,
+      "lift": 3,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     },
+     "vr": {
+      "o": -32,
+      "lift": 0,
+      "view": "toe",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "ed76e7fe0f15dff25269b7dc3ea9b4ae90cd8bbfdd1594976df6d9ec1033db35",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 105,
+    "bob": 0,
+    "hdy": 1,
+    "sx": 0,
+    "csx": 1,
+    "arms": {
+     "R": "F1",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": -3,
+      "lift": 3,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     },
+     "vr": {
+      "o": -33,
+      "lift": 0,
+      "view": "toe",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "72fd5cac2483b4de033b387c653c7f840b5b0d22f753de49348bccfeec8be02b",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 106,
+    "bob": 0,
+    "hdy": 1,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "F1",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": -2,
+      "lift": 3,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     },
+     "vr": {
+      "o": -34,
+      "lift": 0,
+      "view": "toe",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "1a5da3b62c8767de54d98d6623f8f7cc93c0d2d5d50b262457589e08b15bff8b",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 107,
+    "bob": 0,
+    "hdy": 1,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "F1",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": -1,
+      "lift": 3,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     },
+     "vr": {
+      "o": -35,
+      "lift": 0,
+      "view": "toe",
+      "kin": 0,
+      "contact": true,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "a9844394567d1ca9dea864ef6ea8654cafa0831ee4fa4cc216391d5b4375c4bf",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 108,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "F1",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": -1,
+      "lift": 3,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "medium"
+     },
+     "vr": {
+      "o": -36,
+      "lift": 1,
+      "view": "toe",
+      "kin": 0,
+      "contact": false,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "983eebec0d1e5588349d02117552d8cab420ded8fd34b943073bb15473aab09c",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 109,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "F1",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": 0,
+      "lift": 3,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "long"
+     },
+     "vr": {
+      "o": -36,
+      "lift": 1,
+      "view": "toe",
+      "kin": 0,
+      "contact": false,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "96e39260af7893a5357f6e0523dc396b41764f97e44e940daceaa4bb34383f19",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 110,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": 0,
+      "lift": 3,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "long"
+     },
+     "vr": {
+      "o": -36,
+      "lift": 1,
+      "view": "toe",
+      "kin": 0,
+      "contact": false,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "c8cad9ecd8a4de17c4c43e5d19eb0f85b969b465042ee9dc0447c0b53e6b0836",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 111,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": 1,
+      "lift": 3,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "long"
+     },
+     "vr": {
+      "o": -35,
+      "lift": 2,
+      "view": "toe",
+      "kin": 0,
+      "contact": false,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "fffbf7408ac61a9c72daa85322950f967aa6a635c823d1933c7bf9731467178b",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 112,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": 2,
+      "lift": 2,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "long"
+     },
+     "vr": {
+      "o": -35,
+      "lift": 2,
+      "view": "toe",
+      "kin": 0,
+      "contact": false,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "9564e01946f63cbc2052ab60861a688d1b3a8a08ee9cf91ae8e0319a431b017b",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 113,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": 2,
+      "lift": 2,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "long"
+     },
+     "vr": {
+      "o": -35,
+      "lift": 2,
+      "view": "toe",
+      "kin": 0,
+      "contact": false,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "9564e01946f63cbc2052ab60861a688d1b3a8a08ee9cf91ae8e0319a431b017b",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 114,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": 3,
+      "lift": 2,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "long"
+     },
+     "vr": {
+      "o": -35,
+      "lift": 2,
+      "view": "toe",
+      "kin": 0,
+      "contact": false,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "54aecdf8b8c1d245eea9ed24c1ebf8cb78dd27c9f6faf81ed19fbe45bfd66ba5",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 115,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": 3,
+      "lift": 2,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "long"
+     },
+     "vr": {
+      "o": -34,
+      "lift": 3,
+      "view": "toe",
+      "kin": 0,
+      "contact": false,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "1d6236e9cecce112ebfbb3a154ef189bd614e3770bd922d1e6d08092eb01a46e",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 116,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": 4,
+      "lift": 2,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "long"
+     },
+     "vr": {
+      "o": -34,
+      "lift": 3,
+      "view": "toe",
+      "kin": 0,
+      "contact": false,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "836ee29a207f1fe41e61a54ab8ec3fb5c8b9c450abfb7546b441bcb33580c692",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 117,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": 4,
+      "lift": 2,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "long"
+     },
+     "vr": {
+      "o": -34,
+      "lift": 3,
+      "view": "kick",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "6c9b7acf642337a0aa51976fee6d66e173f640c2ae2277e98b4e87bf2476bac7",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 118,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": 5,
+      "lift": 2,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "long"
+     },
+     "vr": {
+      "o": -33,
+      "lift": 3,
+      "view": "kick",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "98e5860b5b1a9b561abc9719ad0c5580475d34f22c4f8996af63087c2563e893",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 119,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": 5,
+      "lift": 2,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "long"
+     },
+     "vr": {
+      "o": -33,
+      "lift": 3,
+      "view": "kick",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "98e5860b5b1a9b561abc9719ad0c5580475d34f22c4f8996af63087c2563e893",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 120,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": 6,
+      "lift": 1,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "long"
+     },
+     "vr": {
+      "o": -33,
+      "lift": 3,
+      "view": "kick",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "fa9e2c741e210781b7ca63197e772e2956e1917af9890e5b9dcfdfb2a7c90f1e",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 121,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": 6,
+      "lift": 1,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "long"
+     },
+     "vr": {
+      "o": -32,
+      "lift": 3,
+      "view": "kick",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "95caea2a97be54f116c2e2efc8044c488a1f71d0315aa63bc3e6b57eb86f2911",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 122,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": 7,
+      "lift": 1,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "long"
+     },
+     "vr": {
+      "o": -32,
+      "lift": 3,
+      "view": "kick",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "0f75c855d2ed7f172dfefa6a77ce45cd08fcac3a0e6f0981fb3a816cde5fc165",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 123,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": 7,
+      "lift": 1,
+      "view": "strike",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "long"
+     },
+     "vr": {
+      "o": -31,
+      "lift": 4,
+      "view": "kick",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "7363dd9b6f020cd596ff9a05116591660ebb05ceed8274e0552d5863375f1a89",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 124,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": 7,
+      "lift": 1,
+      "view": "strike",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "long"
+     },
+     "vr": {
+      "o": -31,
+      "lift": 4,
+      "view": "kick",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "7363dd9b6f020cd596ff9a05116591660ebb05ceed8274e0552d5863375f1a89",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 125,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "B1",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": 7,
+      "lift": 1,
+      "view": "strike",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "long"
+     },
+     "vr": {
+      "o": -31,
+      "lift": 4,
+      "view": "kick",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "f7e70d56902f453041018eaf8cc57b4c0cf1e83588a0ba1cbfac7d584b1a1300",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 126,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "B1",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": 8,
+      "lift": 1,
+      "view": "strike",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "long"
+     },
+     "vr": {
+      "o": -30,
+      "lift": 4,
+      "view": "kick",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "5b58cf3c962fb974752d7882b3b09765fd5915a765eb6df2f8b684ede66a8a52",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   },
+   {
+    "phase_px": 127,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "B1",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": 8,
+      "lift": 1,
+      "view": "strike",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "long"
+     },
+     "vr": {
+      "o": -30,
+      "lift": 4,
+      "view": "kick",
+      "kin": 1,
+      "contact": false,
+      "leg_mode": "folded"
+     }
+    },
+    "composite_sha256": "5b58cf3c962fb974752d7882b3b09765fd5915a765eb6df2f8b684ede66a8a52",
+    "silhouettes": 1,
+    "leg_islands_dropped": 0
+   }
+  ]
+ }
+}
