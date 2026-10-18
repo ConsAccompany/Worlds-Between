@@ -61,11 +61,13 @@ const before = [LEDGER, PROGRESS].map(sha);
 
 // 4. A pending or changes-requested review never changes production credit.
 {
+  // Any still-pending visual review: real verdicts close specific ones over time (review.scene.city closed 2026-10-18).
   const l = fresh(), prod = prodSnap(l), insp = l.computed.inspection.done;
-  assert.ok(l.computed.queue.items.some(q => q.id === 'review.scene.city'));
-  set(l, 'review.scene.city', 'done', {outcome: 'changes_requested', evidence: [QA('nyc-city-hall-park_v06-cross-device-review-packet_unapproved-v01_20261017-174208-fe6b9f9d.md')]});
+  const pending = l.tasks.find(x => x.stage === 'visual-review' && x.status === 'todo');
+  assert.ok(pending, 'a pending visual review exists');
+  set(l, pending.id, 'done', {outcome: 'changes_requested', evidence: [QA('nyc-city-hall-park_v06-cross-device-review-packet_unapproved-v01_20261017-174208-fe6b9f9d.md')]});
   assert.equal(prodSnap(l), prod);
-  assert.equal(l.computed.inspection.done, insp + 1);
+  assert.equal(l.computed.inspection.done, insp + pending.points);
   pass('review done (even changes_requested) moves only the inspection meter');
 }
 
@@ -218,7 +220,7 @@ const before = [LEDGER, PROGRESS].map(sha);
   assert.ok(cli.validate(strong, ROOT).some(e => /may not require default art adoption/.test(e)));
   const deps = fresh(); task(deps, 'content.char.milo.static-west').dependsOn = [];
   assert.ok(cli.validate(deps, ROOT).some(e => /frozen baseline/.test(e)), 'dropping a dependency fails the freeze');
-  const mutable = fresh(); Object.assign(task(mutable, 'review.scene.map'), {status: 'in_progress', note: {zh: 'x', en: 'y'}});
+  const mutable = fresh(); Object.assign(mutable.tasks.find(x => x.stage === 'visual-review' && x.status === 'todo'), {status: 'in_progress', note: {zh: 'x', en: 'y'}});
   assert.deepEqual(cli.validate(mutable, ROOT), [], 'status and notes stay mutable');
   pass('coding = normal runtime capability via opt-in/fixtures (no approval or default-adoption dependency); pipeline tasks todo or done with code evidence; a coding closeout recomputes by formula; freeze covers criteria and dependencies, status stays mutable');
 }
