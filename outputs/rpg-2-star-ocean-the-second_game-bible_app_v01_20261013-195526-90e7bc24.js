@@ -262,15 +262,15 @@
     // Current candidates first (2026-10-18): the latest committed UNAPPROVED candidates lead, each with its limited scope; the
     // scoped reference (#1) follows, and every older entry stays in a collapsed history section. Flags still drive the badges.
     const currentView=reviewQueue?.currentCandidates;
-    // Typed media (2026-10-18): a PNG card (no mediaType, or image/png) keeps the flat image path; a video/mp4 card must be an
-    // actual-godot-capture-video with an outputs/ root .mp4 and a sha256 pin, and plays only through the server's pinned /media/
-    // route with native controls, no autoplay or loop, at the default 1x rate. Any other type or path renders as text only.
-    const currentKinds=['actual-godot-capture','actual-godot-capture-video'];
-    const currentItems=Array.isArray(currentView?.items)?currentView.items.filter(item=>item&&currentKinds.includes(item.kind)):[];
+    // Typed media (2026-10-18): every card keeps kind actual-godot-capture (the contract the private Site v15 also enforces) and
+    // mediaType alone picks image or video. No mediaType, or image/png, keeps the flat PNG path; video/mp4 needs an outputs/ root
+    // .mp4 and a sha256 pin, and plays only through the server's pinned /media/ route with native controls, no autoplay or loop,
+    // at the default 1x rate. Any other type, path or pin renders as text only; any other kind is not rendered.
+    const currentItems=Array.isArray(currentView?.items)?currentView.items.filter(item=>item&&item.kind==='actual-godot-capture'):[];
     const supersededCurrent=Array.isArray(currentView?.supersededCurrent)?currentView.supersededCurrent.filter(item=>item&&item.kind==='actual-godot-capture'):[];
     const queueMedia=item=>{
-      if(item.mediaType===undefined||item.mediaType==='image/png'){const src=item.kind==='actual-godot-capture'?queueSrc(item.file):'';return src?`<a href="${esc(src)}" target="_blank" rel="noopener"><img src="${esc(src)}" alt="${esc((item.label?.zh||'')+' · Godot 实机截图')}" loading="lazy"></a>`:'<div class="empty small">图片路径无法解析，未显示</div>';}
-      if(item.mediaType==='video/mp4'){const ok=item.kind==='actual-godot-capture-video'&&typeof item.file==='string'&&/^outputs\/[A-Za-z0-9][A-Za-z0-9._-]*\.mp4$/.test(item.file)&&/^[0-9a-f]{64}$/.test(String(item.sha256));
+      if(item.mediaType===undefined||item.mediaType==='image/png'){const src=queueSrc(item.file);return src?`<a href="${esc(src)}" target="_blank" rel="noopener"><img src="${esc(src)}" alt="${esc((item.label?.zh||'')+' · Godot 实机截图')}" loading="lazy"></a>`:'<div class="empty small">图片路径无法解析，未显示</div>';}
+      if(item.mediaType==='video/mp4'){const ok=typeof item.file==='string'&&/^outputs\/[A-Za-z0-9][A-Za-z0-9._-]*\.mp4$/.test(item.file)&&/^[0-9a-f]{64}$/.test(String(item.sha256));
         return ok?`<video class="review-queue-video" controls preload="metadata" playsinline src="${esc('/media/'+encodeURIComponent(item.file.slice('outputs/'.length)))}" data-sha256="${esc(item.sha256)}" aria-label="${esc((item.label?.zh||'')+' · Godot 实机录像，正常 1× 播放')}"></video>`:'<div class="empty small">视频路径或固定哈希无效，未显示</div>';}
       return '<div class="empty small">不支持的媒体类型，未显示</div>';};
     const motionText=item=>{const m=item.motionView;if(!m)return '';return `<span class="small">画面：${esc(m.canvas||'')} · 女主 ${esc(m.heroineHeightLogicalPx)} 逻辑像素 · ${esc(m.playback||'')}</span> <span class="small">${esc(m.inspection?.zh||'')}</span><ul class="small">${(m.limits?.zh||[]).map(l=>`<li>${esc(l)}</li>`).join('')}</ul><span class="small">${esc(m.approvalNote?.zh||'')}</span>`;};

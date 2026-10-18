@@ -39,7 +39,7 @@ Every card is pinned to the commit that first added its exact file (`git log --d
 
 - **App (`outputs/…game-bible_app_v01…js`):**
   - A card with no `mediaType`, or `image/png`, keeps the PNG path.
-  - `video/mp4` renders only when the card is `kind: actual-godot-capture-video` with a root `outputs/*.mp4` and a 64-hex sha256. It then shows `<video controls preload="metadata" playsinline>` with no autoplay, loop or rate attribute, so the default 1x applies.
+  - `video/mp4` renders only when the card has a root `outputs/*.mp4` and a 64-hex sha256. (Corrected after Codex review: every card keeps `kind: actual-godot-capture`, the contract the deployed private Site v15 enforces, and `mediaType` alone selects image or video; any other kind is not rendered.) It then shows `<video controls preload="metadata" playsinline>` with no autoplay, loop or rate attribute, so the default 1x applies.
   - Any other type, path, kind or pin renders as text. Without `currentCandidates`, the old flat PNG layout is used.
 - **Server v05:**
   - Four exact nested PNG entries were added to the allowlist.
@@ -85,3 +85,15 @@ Notes on the two failing or partial rows:
 - **M2 global travel test:** it fails on the progress `map-art` gate wording (line 179). Progress text is outside this task, so it is reported, not changed.
 
 One stale queue-test assertion was corrected without weakening it. It required the live Chicago Loop scene to name the v03r1 selector, but since 7553581 it names the v04 selector. It now checks the v03r1 selector at cdc5865, and that the live v04 selector extends v02 and falls through to it without its flag.
+
+## Correction after Codex review (same branch)
+
+- **MP4 kind:** the two MP4 cards now use `kind: actual-godot-capture`, with `mediaType: video/mp4` as the only image/video discriminator. A card of any other kind is not rendered. Bad types, paths and pins still render as text. The queue test covers 10 bad-media cases plus 2 unknown kinds.
+- **M2 global travel test:** it failed on unmodified main because line 179 required the superseded map-art wording `功能占位` (functional placeholder, from the v01r1 era), which 7553581 replaced with the current v03r2 record. The assertion now requires:
+  - the current documented text: runtime map is the unapproved native candidate v03r2, committed c20118d, with v01r1/v02/v03/v03r1 superseded and never approved;
+  - no acceptance claim;
+  - the gate still `not_started`;
+  - `world_map_data.gd` loading the v03r2 relief;
+  - exactly 10 of 12 M2 gates implemented.
+
+  It rejects the old v01r1 text, an added acceptance claim and a missing v03r2. No progress data changed.

@@ -176,7 +176,15 @@ const cardById = (html, id) => {
   assert.ok(['已实现', '整点', '抵达日期', '不显示机场名、分项或钟点', '不代表地图美术或人工验收'].every(t => gate['route-data'].detail.includes(t)) && gate.calendar.detail.includes('只显示年月日'), 'route-data and calendar details state the current rule and its limit');
   assert.ok(!x.gates.some(g => /门到门|整数分钟|door-to-door|integer-minute/i.test(g.zh + ' ' + g.en)), 'no current gate label keeps the superseded door-to-door or integer-minute wording');
   assert.ok(['m2-v10_20261016-145448-d4c46b62.md', 'date-only-cards_manifest_m2-v11'].every(t => gate['route-data'].evidence.some(file => file.includes(t))), 'route-data cites the whole-hour QA note and the date-only capture manifest');
-  assert.ok(gate['map-art'].detail.includes('功能占位') && gate['map-art'].detail.includes('未批准') && gate['visual-review'].detail.includes('0/2') && gate['visual-review'].detail.includes('3/12') && !gate['visual-review'].detail.includes('0/12'));
+  // Map art (corrected 2026-10-18): 7553581 replaced the v01r1 "functional placeholder" (功能占位) wording with the current record:
+  // the live map draws the UNAPPROVED native candidate v03r2 (committed c20118d), earlier passes are superseded and never approved,
+  // and the gate stays not_started, so M2 stays 10/12. The live map script must load the v03r2 relief the gate names.
+  const mapArt = gate['map-art'].detail;
+  assert.ok(gate['map-art'].status === 'not_started' && ['运行时地图为未批准的原生美术候选 v03r2', '提交 c20118d', 'v01r1、v02、v03、v03r1 均已被取代，从未批准', '未作美术验收'].every(t => mapArt.includes(t))
+    && !/已验收|已批准的|approved map art|map art accepted/i.test(mapArt.replace(/未作美术验收|从未批准|未批准/g, '')), 'map-art gate: v03r2 runtime candidate, unapproved, superseded passes named, gate not started');
+  assert.ok(fs.readFileSync(path.join(root, 'game', 'scripts', 'world_map_data.gd'), 'utf8').includes('_m2-map-art-native-v03r2_20261017-224631-9875b9e2.json'), 'the live map loads the v03r2 relief named by the gate');
+  assert.equal(x.gates.filter(g => ['implemented', 'done'].includes(g.status)).length, 10, 'M2 stays 10/12');
+  assert.ok(gate['visual-review'].detail.includes('0/2') && gate['visual-review'].detail.includes('3/12') && !gate['visual-review'].detail.includes('0/12'));
   assert.ok(['纽约公共设施一号、二号室', '扬克斯信号维修二号室', '不含角色动作'].every(t => gate['visual-review'].detail.includes(t)), 'visual-review gate names the three accepted rooms and excludes character motion');
   const m2Prose = [m2.summary, m2.blocker, ...m2.details, ...m2.remaining].join('\n');
   assert.ok(!/art does not exist|美术未制作|场景画质 0\/1[12]|scene visuals (are )?0\/1[12]/.test(m2Prose + gate.anchor.detail + gate['map-art'].detail), 'no current M2 text says the place art is not made or scenes are 0/12');

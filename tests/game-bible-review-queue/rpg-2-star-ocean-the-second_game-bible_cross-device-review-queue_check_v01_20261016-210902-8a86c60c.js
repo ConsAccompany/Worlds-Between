@@ -296,7 +296,7 @@ async function renderProduction(base, mutateBible) {
   const mp4Size = file => { const d = fs.readFileSync(rel(file)); const i = d.indexOf('tkhd'); const o = i + 8 + (d[i + 4] === 1 ? 84 : 72); return [d.readUInt32BE(o) >>> 16, d.readUInt32BE(o + 4) >>> 16]; };
   const pngSize = file => { const d = fs.readFileSync(rel(file)); return [d.readUInt32BE(16), d.readUInt32BE(20)]; };
   for (const item of current.items) {
-    assert.ok(['actual-godot-capture', 'actual-godot-capture-video'].includes(item.kind), 'kind: ' + item.id);
+    assert.equal(item.kind, 'actual-godot-capture', 'one kind for every card (Site v15 contract); mediaType picks image or video: ' + item.id);
     assert.equal(item.creatorApproved, false, 'current candidate unapproved: ' + item.id);
     assert.equal(item.artAccepted, false, 'current candidate not accepted: ' + item.id);
     assert.match(item.badge.en, /^Unapproved/, 'stored badge says unapproved: ' + item.id);
@@ -311,7 +311,7 @@ async function renderProduction(base, mutateBible) {
     assert.ok(fs.existsSync(rel(item.qa)), 'QA note exists: ' + item.id);
     assert.ok(!queue.items.some(old => old.file === item.file), 'not a duplicate of a history item: ' + item.id);
     if (item.mediaType === 'video/mp4') {
-      assert.ok(item.kind === 'actual-godot-capture-video' && /^outputs\/[^/]+\.mp4$/.test(item.file) && item.bytes === fs.statSync(rel(item.file)).size && item.bytes <= 16 * 1024 * 1024, 'mp4 card: root outputs file, size pinned, <= 16 MiB: ' + item.id);
+      assert.ok(/^outputs\/[^/]+\.mp4$/.test(item.file) && item.bytes === fs.statSync(rel(item.file)).size && item.bytes <= 16 * 1024 * 1024, 'mp4 card: root outputs file, size pinned, <= 16 MiB: ' + item.id);
       assert.deepEqual(mp4Size(item.file), [1280, 720], 'mp4 is the 1280x720 actual window: ' + item.id);
       const m = item.motionView;
       assert.ok(m && /1280x720 actual Godot window/.test(m.canvas) && /640x360 LOGICAL viewport/.test(m.canvas) && m.heroineHeightLogicalPx === 48 && m.playback === 'normal speed 1x' && m.autoplay === false, 'motion view wording: ' + item.id);
@@ -320,7 +320,6 @@ async function renderProduction(base, mutateBible) {
       assert.ok(/arm-easing/.test(m.limits.en[0]) && /270\.8 ms/.test(m.limits.en[1]) && /placeholder north/.test(m.limits.en[2]), 'motion limits retained: ' + item.id);
       assert.ok(/Neither the gait nor a full sprite is approved/.test(m.approvalNote.en), 'gait / full sprite not approved: ' + item.id);
     } else {
-      assert.equal(item.kind, 'actual-godot-capture');
       assert.ok(item.mediaType === undefined && /\.png$/.test(item.file), 'png card: ' + item.id);
     }
   }
@@ -493,8 +492,9 @@ async function renderProduction(base, mutateBible) {
       ['png as video', i => { i.file = current.items[1].file; }, '视频路径或固定哈希无效，未显示'],
       ['missing pin', i => { delete i.sha256; }, '视频路径或固定哈希无效，未显示'],
       ['short pin', i => { i.sha256 = 'abc'; }, '视频路径或固定哈希无效，未显示'],
-      ['still kind with mp4 type', i => { i.kind = 'actual-godot-capture'; }, '视频路径或固定哈希无效，未显示'],
-      ['video kind as png', i => { delete i.mediaType; }, '图片路径无法解析，未显示'],
+      ['mp4 without mediaType', i => { delete i.mediaType; }, '图片路径无法解析，未显示'],
+      ['mp4 typed as image/png', i => { i.mediaType = 'image/png'; }, '图片路径无法解析，未显示'],
+      ['wrong pin length', i => { i.sha256 = i.sha256 + '0'; }, '视频路径或固定哈希无效，未显示'],
     ];
     for (const [label, mutate, expected] of badCases) {
       const html = await renderProduction(base, b => mutate(b.environmentVisualReview.crossDeviceReviewQueue.currentCandidates.items[6]));
@@ -503,7 +503,12 @@ async function renderProduction(base, mutateBible) {
       assert.ok(one.includes(expected) && !/<video|<img/.test(one), 'bad media rendered as text only: ' + label);
       assert.equal((html.match(/<video /g) || []).length, 1, 'the other video card is unaffected: ' + label);
     }
-    pass(`renderer fallbacks: flat PNG layout without currentCandidates (11 images, no video); ${badCases.length} bad type/path/kind/pin cases render as text only`);
+    // A kind other than actual-godot-capture is not rendered at all (the Site v15 contract has no video kind).
+    for (const kind of ['actual-godot-capture-video', 'generated-concept']) {
+      const html = await renderProduction(base, b => { b.environmentVisualReview.crossDeviceReviewQueue.currentCandidates.items[6].kind = kind; });
+      assert.ok(!html.includes('data-current-id="current-heroine-south-run-v07-bright-30fps"') && (html.match(/<video /g) || []).length === 1, 'unknown kind not rendered: ' + kind);
+    }
+    pass(`renderer fallbacks: flat PNG layout without currentCandidates (11 images, no video); ${badCases.length} bad type/path/pin cases render as text only; 2 unknown kinds not rendered`);
   } finally { child.kill(); }
 
   // 7. Server media guard (pure function, temp copies): a tampered or oversized pinned file is refused; the allowlist is exact.
