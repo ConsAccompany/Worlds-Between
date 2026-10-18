@@ -25,20 +25,24 @@
     const c=ledger?.computed;
     if(!c?.production)return '';
     const p=c.production, owners={claude:'Claude',codex:'Codex',creator:'创作者 / Creator'};
-    const stageName=s=>({coding:'编码',content:'内容','technical-inspection':'技术检查','visual-review':'视觉审查','creator-approval':'创作者批准'}[s]||s);
-    const row=(label,v,extra='')=>`<div class="step-top"><span>${label}</span><span>${esc(v.done)} / ${esc(v.total)} · ${esc(v.percent)}%${extra}</span></div>`;
-    const ownerRows=Object.entries(c.byOwner||{}).map(([o,v])=>`<tr><td>${esc(owners[o]||o)}</td><td>${esc(v.tasks)}</td><td>${esc(v.pointsDone)} / ${esc(v.points)}</td><td>${esc(v.readyInQueue)}</td><td class="small">${Object.entries(v.byStatus||{}).map(([s,n])=>esc(s)+' '+esc(n)).join(' · ')}</td></tr>`).join('');
+    const stageName=s=>({coding:'编码',content:'内容','technical-inspection':'技术检查','visual-review':'视觉审查','content-qa':'内容／音频质量检查','creator-approval':'创作者批准',operations:'运营'}[s]||s);
+    const bar=v=>`<div class="meter" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${esc(v)}"><span style="width:${Math.max(0,Math.min(100,Number(v)||0))}%"></span></div>`;
+    // Each meter: its percentage, a bar, then weighted points and (separately) task counts.
+    const meterRow=(label,v)=>`<div class="production-meter"><div class="step-top"><span>${label}</span><strong>${esc(v.percent)}%</strong></div>${bar(v.percent)}<p class="muted small">${esc(v.done)} / ${esc(v.total)} 分 points${v.tasks!=null?` · ${esc(v.tasksDone)} / ${esc(v.tasks)} 项任务 tasks`:''}</p></div>`;
+    const ownerRows=Object.entries(c.byOwner||{}).map(([o,v])=>`<tr><td>${esc(owners[o]||o)}</td><td>${esc(v.tasks)}${v.operationsTasks?` (运营 ${esc(v.operationsTasks)})`:''}</td><td>${esc(v.pointsDone)} / ${esc(v.points)}</td><td>${esc(v.readyInQueue)}</td><td class="small">${Object.entries(v.byStatus||{}).map(([s,n])=>esc(s)+' '+esc(n)).join(' · ')}</td></tr>`).join('');
     const queue=(c.queue?.items||[]).map(q=>`<li><span class="muted small">${esc(owners[q.owner]||q.owner)} · ${esc(stageName(q.stage))}</span> <code>${esc(q.id)}</code></li>`).join('');
-    const lg=c.legacy||{};
+    const blocked=(c.queue?.needsRevision?.items||[]).map(q=>`<li><code>${esc(q.id)}</code> <span class="muted small">← ${esc(q.review)} · 需要 Claude 修订 / needs Claude revision (${esc(q.revision||'—')}: ${esc(q.revisionStatus)})</span></li>`).join('');
+    const lg=c.legacy||{}, w=c.inspection?.waived||{};
     return `<section class="card" id="production-completion"><div class="step-top"><h3>制作完成度 / Production completion</h3>${badge(p.percentLabel,'accent')}</div>
-      <div class="meter" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${esc(p.percent)}"><span style="width:${Math.max(0,Math.min(100,Number(p.percent)||0))}%"></span></div>
-      <p class="muted small">衡量已完成的工作量：编码 ${esc(p.coding.weight)}% + 内容 ${esc(p.content.weight)}%（冻结基线任务分值）。检查与批准另计，不增减制作分。与旧版验收估算是不同指标，不是“增长”。</p>
-      ${row('编码 / Coding',p.coding,' × '+esc(p.coding.weight)+'%')}${row('内容 / Content',p.content,' × '+esc(p.content.weight)+'%')}
-      ${row('检查与审查 / Inspection',c.inspection)}${row('创作者批准 / Creator approval',c.approval)}
+      ${bar(p.percent)}
+      <p class="muted small">衡量已完成的工作量（冻结基线任务分值）。检查与批准另计，不增减制作分。与旧版估算是不同指标，不是“增长”。</p>
+      ${meterRow('编码 / Coding',p.coding)}${meterRow('内容 / Content',p.content)}${meterRow('检查与审查（已执行）/ Inspection performed',c.inspection)}${meterRow('创作者批准 / Creator approval',c.approval)}
       <div class="step-top"><span>正式验收 / Final accepted</span><span>${c.release?.finalAccepted?'是':'否 / false'}</span></div>
-      <details class="group"><summary>负责方 / Owners</summary><table class="small"><thead><tr><th>负责方</th><th>任务</th><th>分值</th><th>待处理</th><th>状态</th></tr></thead><tbody>${ownerRows}</tbody></table></details>
-      <details class="group"><summary>待检查／审查／批准队列（${esc(c.queue?.count||0)}）</summary><ul class="small">${queue}</ul></details>
-      <details class="group"><summary>旧版验收加权估算（不同指标）· ${esc(lg.percentLabel||'')}</summary><p class="small">${esc(lg.note?.zh||'')} ${esc(lg.note?.en||'')}</p></details>
+      <details class="group"><summary>公式与分值 / Formula and points</summary><p class="small"><code>${esc(p.formula)}</code></p><p class="small">编码 ${esc(p.coding.done)}/${esc(p.coding.total)} 分 × ${esc(p.coding.weight)}% + 内容 ${esc(p.content.done)}/${esc(p.content.total)} 分 × ${esc(p.content.weight)}% = ${esc(p.percentLabel)}。分值是冻结的工作量权重，不是任务数；任务数另列。免除的审查 ${esc(w.tasks||0)} 项（${esc(w.points||0)} 分）不计入检查的分子与分母。运营任务 ${esc(c.operations?.tasksDone||0)}/${esc(c.operations?.tasks||0)} 不计百分比。</p></details>
+      <details class="group"><summary>负责方 / Owners</summary><table class="small"><thead><tr><th>负责方</th><th>任务</th><th>分值（不含运营与免除）</th><th>待处理</th><th>状态</th></tr></thead><tbody>${ownerRows}</tbody></table></details>
+      <details class="group"><summary>待处理队列 / Ready（${esc(c.queue?.count||0)}）</summary><ul class="small">${queue}</ul></details>
+      <details class="group"><summary>须先修订 / Needs Claude revision（${esc(c.queue?.needsRevision?.count||0)}）</summary><ul class="small">${blocked}</ul></details>
+      <details class="group"><summary>旧版混合交付／验收估算（不是正式验收）/ Legacy mixed delivery/acceptance estimate (not formal acceptance) · ${esc(lg.percentLabel||'')}</summary><p class="small">${esc(lg.note?.zh||'')} ${esc(lg.note?.en||'')}</p></details>
       <p class="muted small receipt-name">任务台账：${esc(ledger.updater||'')} · ${esc(ledger.tasks?.length||0)} 项任务</p></section>`;
   }
   const feedbackKey = route => `worlds-between-m7-feedback-${route}`;

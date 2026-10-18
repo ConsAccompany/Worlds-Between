@@ -1,89 +1,106 @@
-# 制作完成度 / Production completion — brief (v01, owner-authorized baseline 2026-10-18T18:10:59Z)
+# 制作完成度 / Production completion — brief (v01, owner-authorized baseline 2026-10-18T18:32:27Z)
 
 - Ledger (data + derived numbers): `outputs/rpg-2-star-ocean-the-second_production-completion_task-ledger_v01_20261018-140533-3de52073.json`
 - The one updater and checker: `tools/rpg-2-star-ocean-the-second_production-completion_ledger-cli_v01_20261018-140533-3b436630.js`
 - Invariant tests: `tests/production-completion/rpg-2-star-ocean-the-second_production-completion_invariants_check_v01_20261018-140533-2978305e.js`
 - Local Game Bible: server v05 serves `/production`; the production view shows a compact panel that only displays the ledger's `computed` block.
+- The baseline was corrected before publication after root review (movement credit, owners by task type, waivers, one revision bucket per deliverable, review reconciliation). Baseline task-set hash `99d9b154cb3f547d…`.
 
 ## 1. 这是什么 / What it measures
 
-**中文：** 新的主指标「制作完成度」衡量**已完成的工作量**，不是验收。它与旧的 40.8%（验收加权估算）是**不同指标**，不能相减，也不能说成“从 40.8% 增长”。旧的 40.8% 原样保留为历史与验收视图（在界面中折叠并标为旧版），此前全部 139 条收尾记录、批准值和正典不变。正式验收（final accepted）仍为 false，直到 approvalLedger 与 M9 两轮试玩等现有门全部通过。
+**中文：** 新的主指标「制作完成度」衡量**已完成的工作量**，不是验收。旧的 40.8% 是**混合了交付与验收的旧版估算**，不表示 40.8% 已被正式验收；它原样保留（界面中折叠并标为旧版）。两者是不同指标，不能相减，也不能说成“增长”。此前 139 条收尾记录、批准值和正典不变；正式验收仍为 false。
 
-**English:** The new primary label "Production completion / 制作完成度" measures **work done**, not acceptance. It is a **different metric** from the legacy 40.8% acceptance-weighted estimate; the two are never subtracted or presented as a gain. The 40.8% meter is kept unchanged as the legacy / acceptance view (collapsed and labelled legacy in the UI); all 139 earlier closeouts, approval values and canon are untouched. Final acceptance stays false until the existing gates (approvalLedger, the two M9 playthroughs) pass.
+**English:** The new primary label "Production completion / 制作完成度" measures **work done**, not acceptance. The old 40.8% is a **legacy mixed delivery/acceptance estimate**; it does not mean 40.8% is formally accepted. It stays unchanged, collapsed and labelled legacy in the UI. The two are different metrics, never subtracted or presented as a gain. The 139 earlier closeouts, approval values and canon are untouched; final acceptance stays false.
 
 ## 2. 公式 / Formulas (one derivation, rounded once)
 
 ```
-production  = round1( 40 × codingDone/codingTotal + 60 × contentDone/contentTotal )
-coding%     = round1( 100 × codingDone/codingTotal )          (shown separately)
-content%    = round1( 100 × contentDone/contentTotal )        (shown separately)
-inspection  = (technical-inspection + visual-review points credited) / their total     separate meter
-approval    = creator-approval points done / total                                      separate meter
+production  = round1( 40 × codingDonePoints/codingTotalPoints + 60 × contentDonePoints/contentTotalPoints )
+inspection  = performed (done) points / active points of technical-inspection + visual-review + content-qa
+              (waived reviews are excluded from BOTH numerator and denominator)
+approval    = creator-approval done points / total
+operations  = Codex dashboard inspection and publication: listed with owners, in no percentage
 ```
 
-Credited statuses are `done`, and `not_required` for a review that a done creator approval made unnecessary (`waivedBy`). Review and approval tasks never carry production points, so a pending review, a requested change, or an approval toggle cannot add or remove production credit (tests 3–4).
+Points are frozen effort weights; task counts are shown separately and are a different number. Review, approval and operations tasks never carry production points, so a pending review, a requested change, a waiver or an approval toggle cannot change production (tests 4–5).
 
-## 3. 阶段与负责方 / Stages and owners (one owner per task)
+## 3. 负责方按任务类型 / Owners by task type
 
-| Stage | Owner | Meter |
+| Task type | Stage | Owner |
 | --- | --- | --- |
-| `coding` | `claude` | production (40%) |
-| `content` (native pixel content, scene passes, integration) | `claude` | production (60%) |
-| `technical-inspection` (automated Godot checks) | `claude` | inspection |
-| `visual-review` (in-game visual / browser review) | `codex` | inspection |
-| `creator-approval` (art acceptance, canon choices, the 2 human playthroughs) | `creator` | approval |
+| `feature-code`, `pipeline-code` | coding | claude |
+| `native-pixel` (Pixelorama statics, walks, scenes, VFX, UI visuals), `integration`, `content-writing`, `audio-production` | content | claude |
+| `concept-generation` (the 52 image-generated source portraits) | content | **codex** |
+| `revision` (one per deliverable) | same as the deliverable | same as the deliverable |
+| `technical-check` | technical-inspection | claude |
+| `visual-review` | visual-review | codex |
+| `audio-qa` (content / audio QA, not "visual review") | content-qa | codex |
+| `creator-acceptance`, `canon-choice`, `playtest` | creator-approval | creator |
+| `ops-inspection`, `ops-publication` (new dashboard browser check, Site publication) | operations (no %) | codex |
 
-Work that needs two parties is two tasks (e.g. `content.scene.city.native-pass` → `review.scene.city` → `creator.scene.city.accept`). Cloud/Site publication is Codex's and is not an MVP game task.
+Work needing two parties is two tasks (deliverable → review → acceptance).
 
 ## 4. 冻结的任务点 / Frozen milestone points
 
-| Deliverable (count) | Production milestones (points) | Inspection / approval tasks (1 point each unless noted) |
-| --- | --- | --- |
-| Character variant (52, registry) | portrait 1, static-south 3, static-west/north/east 2 each, idle-anim 2, walk-south/west/north/east 3 each, display 2, runtime-integration 2 = **28** | runtime-set check, static-south review, runtime-set review, approve portrait, approve south static, accept runtime sprite, accept display |
-| Combat set (5 playable) | combat-static 3, combat-actions 8, combat-integration 2 = **13** | set check, static review, set review, accept set |
-| Enemy (sentry, patrol) | static 2, battle-animation 6, runtime-default 2 = **10** | check, review, accept art (+ sentry direction approval) |
-| Science scene gate (12, inventory scene-quality) | plate 4, wiring 3, native-pass 12, native-default 2 = **21** | check, review, scene-quality acceptance |
-| Fixed revision milestone (changes requested before baseline: map, City Hall Park, Yonkers room 1, female battle static) | scene 6, combat 3 | — |
-| Coding (23 tasks, 111 points) | M1 8, M3 12, M4 10, M5 10, M6 8; M2 travel 31; M7 route 6 + endpoint 3; settings 3; runtime pipelines 20 | M2 acceptance tests 3 |
-| Other content | M7 investigations/companions 10; VFX 12; audio 15; UI final visuals 13 | review + creator acceptance per group |
-| Validation | — | pre-playtest regression 3; playthrough 1 and 2 (3 each); final MVP acceptance 2; canon choices 1 each |
+| Deliverable (count) | Production milestones (points) |
+| --- | --- |
+| Character variant (52) | portrait 1 (Codex), static-south 3, static-west/north/east 2 each, idle-anim 2, walk/run south/west/north/east 3 each, display 2, runtime-integration 2 = **28** |
+| Combat set (5 playable) | combat-static 3, combat-actions 8, combat-integration 2 = **13** |
+| Enemy (sentry, patrol) | static 2, battle-animation 6, runtime-default 2 = **10** |
+| Science scene gate (12) | plate 4, wiring 3, native-pass 12, native-default 2 = **21** |
+| Coding (23 tasks, 111 points) | M1 8, M3 12, M4 10, M5 10, M6 8; M2 travel 31; M7 route 6 + endpoint 3; settings 3; runtime pipelines 20 |
+| Other content | M7 investigations/companions 10; VFX 12; audio 15; UI final visuals 13 |
+| **Revision bucket** | exactly one per deliverable, fixed at ceil(points / 2) |
 
-Totals: 1176 tasks; coding 111, content 1864, technical inspection 77, visual review 131, creator approval 244 points. Baseline task-set hash `1a04b791a658266b…`. New versions (v01–v14), receipts or test-assertion counts are never tasks; adding one fails the baseline check (test 8). Only `add-rework` (a fixed revision milestone, 1–8 points, adds to the denominator only) or an owner-authorized baseline revision can change the task set, and each leaves a `baseline.revisions` record.
+Each review / acceptance / check is 1 point; playthroughs 3 each; final MVP acceptance 2; pre-playtest regression 3. Totals: 1181 tasks; coding 111, content 1873, technical inspection 77, visual review 130 (4 waived), content QA 1, creator approval 244, operations 2 (no %).
 
-## 5. 证据对账规则 / Evidence reconciliation
+**No version farming:** `revise --for <deliverable>` creates that deliverable's one bucket the first time (recorded in `baseline.revisions`, denominator only); every later candidate version reopens the same bucket with no new task or points. A second bucket, a re-pointed bucket or a version-as-task fails the frozen-baseline check (tests 6, 10). When a bucket is delivered, the review that asked for the change reopens for a new verdict (history kept).
 
-- A task is done only with **git-tracked** evidence that exists (QA note, manifest, test, acceptance record). Unknown or uncommitted work = not done; no guessed partial percent.
-- **Credited even though unapproved:** delivered static frames (female south v8 approved; female north; male v8pair, Liang Xu, Ji Cheng, Zhao Ling south), female battle static v14 + its revision, sentry static + v2 21-frame strip, scene plates in the runtime, committed native scene passes (opt-in counts for `native-pass`, not for `native-default`), map v03r2 (runtime), the four ambient loops and the discovery cue, all M1–M7 coding gates.
-- **Not credited:** the rejected 32×48 placeholders (the checker refuses their paths for production tasks), generated concept images (battle arena), uncommitted work (Yonkers outskirts clue fixtures, City Hall Park v07, Chicago v04/v05 beyond test-harness opt-in, WDC room 2 as default), all movement (female south run v07 is `in_progress`: the creator asked for more run/stop polish), every other direction, idle animations, displays, combat action sets, runtime-default integrations, VFX, themed music, UI/combat SFX, settings UI.
-- **Reviews:** Codex/root verdicts recorded in tracked notes or closeouts count as done reviews with an `outcome` (`technical-pass` for root's technical-only acceptances, `changes_requested` for the Liang Xu audit). The three creator-accepted rooms and the approved female south still have `not_required` reviews (waived by that approval; withdrawing the approval reopens the review).
+## 5. 证据对账 / Evidence reconciliation
+
+- Done only with **git-tracked** evidence. Unknown or uncommitted = not done; no guessed partial percent.
+- **Initial work keeps its credit; requested changes are a separate bucket:**
+  - female south walk/run: v07 delivered (1942e31, closeout 20587ab6) = **done**; run/stop polish = revision bucket **in progress** (v10r1, another worker; its files untouched). Other directions not started.
+  - map (v03r2 after Codex's v03r1 judgment), City Hall Park (v06 after the v04 rejection), Yonkers room 1 (v03–v06 after the v02 rejection), female battle static (v12–v14 after v11 feedback), WDC Capitol west (v13 after root's v12r2 critique): buckets **done**.
+  - Liang Xu south static: Codex audit asked for changes → bucket **todo**.
+- **Reviews recorded as performed:** Yonkers room 1 v06 root verdict (closeout 5597d7f5) = changes_requested; WDC v13 root verdict (QA 075675cf: dome clear, localized collapse improves; ground grainy, foliage blocky; art unapproved) = changes_requested; Liang audit = changes_requested; male, Ji Cheng, female battle v14 and sentry = technical-pass.
+- **WDC v13 proven only as far as it goes:** revision delivered (QA 075675cf, opt-in flag 9071882); native-default **todo** (off by default); technical check **in progress** (root's combined run 18/21 with harness F13 variance under repair by another worker — no combined PASS claimed).
+- **Waived, not performed:** 4 reviews made unnecessary by direct creator approvals (3 accepted rooms, female south still) are listed separately and excluded from the inspection meter. Withdrawing such an approval reopens its review.
+- **Approval queue:** an acceptance whose latest review asked for changes, with no revision delivered after that verdict, is listed under "needs Claude revision", never as ready (Yonkers room 1, WDC exterior, Liang Xu). No approval completes automatically.
+- **Not credited:** rejected 32×48 placeholders (refused by the checker), concept-only art (battle arena), uncommitted work, other directions, idle animations, displays, combat action sets, default integrations, VFX, themed music, UI/combat SFX, settings UI. Existing runtime-sprite acceptance stays 0/52.
 
 ## 6. 当前数字 / Current numbers (baseline)
 
-| Meter | Numerator / denominator | Percent |
+| Meter | Numerator / denominator (points) | Percent |
 | --- | --- | --- |
-| **Production completion / 制作完成度** | 40 × 91/111 + 60 × 324/1864 | **43.2%** |
-| Coding / 编码 | 91 / 111 | 82.0% |
-| Content / 内容 | 324 / 1864 | 17.4% |
-| Inspection / 检查与审查 | 23 / 208 (technical 14/77, visual 9/131) | 11.1% |
+| **Production completion / 制作完成度** | 40 × 91/111 + 60 × 332/1873 | **43.4%** |
+| Coding / 编码 | 91 / 111 (17 / 23 tasks) | 82.0% |
+| Content / 内容 | 332 / 1873 | 17.7% |
+| Inspection performed / 已执行的检查 | 20 / 204 (technical 13/77, visual 7/126, content QA 0/1; 4 waived excluded) | 9.8% |
 | Creator approval / 创作者批准 | 17 / 244 | 7.0% |
-| Final accepted / 正式验收 | — | false |
-| Legacy acceptance estimate (different metric) | unchanged | 40.8% |
+| Operations (no %) | 0 / 2 tasks | — |
+| Final accepted | — | false |
+| Legacy mixed delivery/acceptance estimate | unchanged | 40.8% |
 
-By area (content): characters 69/1456, combat 6/68, enemies 8/20, scenes 227/270, VFX 0/12, audio 4/15, UI visuals 0/13, M7 content 10/10. Scenes are high because nine native passes are delivered; most await review, and only 3/12 are accepted.
+Content by area: characters 72/1460, combat 5/67, enemies 8/20, scenes 233/276, VFX 0/12, audio 4/15, UI visuals 0/13, M7 content 10/10. Scenes are high because the native passes are delivered; only 3/12 are accepted.
 
-By owner: Claude 806 tasks, 429/2052 points (135 done, 1 in progress, 670 todo). Codex 131 tasks, 9/131 (5 done, 4 not required, 122 todo; **8 ready**). Creator 239 tasks, 17/244 (17 done, 222 todo; **56 ready**: 43 concept portraits, 4 south statics, 7 scene acceptances, 2 canon choices).
+By owner (tasks; points exclude operations and waivers):
+- Claude 757 tasks, 384/2009 points (84 done, 2 in progress, 671 todo); 1 ready (WDC exterior check), plus 3 revisions blocking acceptances.
+- Codex 185 tasks incl. 2 operations, 59/179 points (59 done — 52 portraits + 7 performed reviews; 4 waived; 122 todo); 7 ready (6 reviews + dashboard browser inspection).
+- Creator 239 tasks, 17/244 points (17 done, 222 todo); 53 ready (43 concept portraits, 3 south statics, 5 scenes, 2 canon choices).
 
 ## 7. 更新方法 / How to update
 
 ```
 node tools/<cli> set --task review.scene.city --status done --outcome changes_requested --evidence docs/qa/<note>.md
-node tools/<cli> add-rework --for creator.scene.city.accept --points 6 --title-en ".." --title-zh ".." --reason-en ".."
-node tools/<cli> check        # schema, owners, evidence, dependencies, frozen baseline, byte-identical recompute
+node tools/<cli> revise --for content.scene.city.native-pass --reason-en ".."     # one bucket; later calls reopen it
+node tools/<cli> check        # owners by type, evidence, dependencies, one-bucket rule, frozen baseline, byte-identical recompute
 node tools/<cli> queue | summary | list --owner codex --stage visual-review --status todo
 ```
 
 ## 8. 仍未知 / Open unknowns
 
-- Whether the old in-game display images and the 32×48-era combat pipeline can carry high-density sets (the runtime pipeline tasks are `todo` until proven).
-- Whether Codex reviewed the current WDC room 1 v02, Yonkers room 1 v06, Chicago v03r1/v05 and map v03r2 (no tracked verdict found → `todo`, listed in the ready queue).
-- Point weights are a frozen owner-authorized judgment of relative effort; they are not measured hours.
+- Whether the old in-game display images and the 32×48-era combat pipeline can carry high-density sets (pipeline tasks `todo`).
+- No tracked Codex verdict yet for WDC room 1 v02, City Hall Park v06, Chicago v03r1/v05, map v03r2 or Zhao Ling (ready in the Codex queue).
+- Who generated the m8 scene plates is not recorded; plate/wiring tasks stay Claude-owned integration work.
+- Point weights are a frozen owner-authorized judgment of relative effort, not measured hours.

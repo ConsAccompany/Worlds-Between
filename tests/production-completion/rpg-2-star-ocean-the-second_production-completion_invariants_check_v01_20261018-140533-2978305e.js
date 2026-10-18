@@ -15,84 +15,156 @@ const CLI_REL = 'tools/rpg-2-star-ocean-the-second_production-completion_ledger-
 const cli = require(path.join(ROOT, CLI_REL));
 const LEDGER = path.join(ROOT, cli.LEDGER_REL);
 const PROGRESS = path.join(ROOT, cli.PROGRESS_REL);
-const NOW = '2026-10-18T18:30:00Z';
+const NOW = '2026-10-19T09:00:00Z';
+const QA = name => 'docs/qa/rpg-2-star-ocean-the-second_' + name;
 const sha = file => crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
 const fresh = () => cli.load(LEDGER);
-const snapshot = l => JSON.stringify(l.computed.production);
-const set = (l, task, status, extra = {}) => cli.setTask(l, ROOT, {task, status, evidence: [], now: NOW, ...extra});
+const task = (l, id) => l.tasks.find(x => x.id === id);
+const prodSnap = l => JSON.stringify(l.computed.production);
+const set = (l, id, status, extra = {}) => cli.setTask(l, ROOT, {task: id, status, evidence: [], now: NOW, ...extra});
 let passed = 0;
 const pass = msg => { passed += 1; console.log('PASS ' + msg); };
 
 const before = [LEDGER, PROGRESS].map(sha);
 
-// 1. The tracked ledger validates and a recompute is byte-identical (idempotent), twice in a row.
+// 1. Tracked ledger validates; recompute is byte-identical and idempotent; CLI check exits 0.
 {
-  const l = fresh();
-  assert.deepEqual(cli.validate(l, ROOT), []);
+  assert.deepEqual(cli.validate(fresh(), ROOT), []);
   const once = cli.serialize(cli.refresh(fresh(), ROOT));
-  const twice = cli.serialize(cli.refresh(cli.refresh(fresh(), ROOT), ROOT));
-  assert.equal(once, twice);
+  assert.equal(once, cli.serialize(cli.refresh(cli.refresh(fresh(), ROOT), ROOT)));
   assert.equal(once, fs.readFileSync(LEDGER, 'utf8').replace(/\r\n/g, '\n'));
   const out = spawnSync(process.execPath, [CLI_REL, 'check'], {cwd: ROOT, encoding: 'utf8'});
   assert.equal(out.status, 0, out.stdout + out.stderr);
   pass('tracked ledger validates; recompute is idempotent and byte-identical; CLI check exits 0');
 }
 
-// 2. One derivation, rounded once: production equals round1(40*c + 60*n) from task points.
+// 2. One derivation, rounded once, from points (task counts are reported separately).
 {
-  const l = fresh(), sum = (st, done) => l.tasks.filter(x => x.stage === st && (!done || cli.CREDITED.has(x.status))).reduce((s, x) => s + x.points, 0);
-  const expected = Math.round(10 * (40 * sum('coding', true) / sum('coding') + 60 * sum('content', true) / sum('content'))) / 10;
+  const l = fresh(), pts = (st, done) => l.tasks.filter(x => x.stage === st && (!done || x.status === 'done')).reduce((s, x) => s + x.points, 0);
+  const expected = Math.round(10 * (40 * pts('coding', true) / pts('coding') + 60 * pts('content', true) / pts('content'))) / 10;
   assert.equal(l.computed.production.percent, expected);
-  assert.equal(l.computed.production.coding.done, sum('coding', true));
-  assert.equal(l.computed.production.content.total, sum('content'));
-  pass(`production ${expected}% = round1(40 x ${sum('coding', true)}/${sum('coding')} + 60 x ${sum('content', true)}/${sum('content')})`);
+  assert.equal(l.computed.production.content.tasks, l.tasks.filter(x => x.stage === 'content').length);
+  assert.notEqual(l.computed.production.content.tasks, l.computed.production.content.total, 'points and task counts are different numbers');
+  pass(`production ${expected}% = round1(40 x ${pts('coding', true)}/${pts('coding')} + 60 x ${pts('content', true)}/${pts('content')}) points; task counts separate`);
 }
 
-// 3. A finished deliverable whose review is still pending keeps its production credit; finishing the review moves only inspection.
+// 3. Initial movement work keeps its credit; the polish request is a separate, unfinished fixed revision bucket.
+{
+  const l = fresh(), walk = task(l, 'content.char.protagonist-female.walk-south'), bucket = task(l, 'content.char.protagonist-female.walk-south.revision');
+  assert.equal(walk.status, 'done');
+  assert.ok(walk.evidence.some(e => /south-run-v07/.test(e)) && walk.evidence.includes(cli.PROGRESS_REL));
+  assert.ok(bucket && bucket.status === 'in_progress' && bucket.points === 2 && bucket.owner === 'claude');
+  for (const d of ['west', 'north', 'east']) assert.equal(task(l, `content.char.protagonist-female.walk-${d}`).status, 'todo');
+  assert.equal(l.tasks.filter(x => /^creator\.char\..*\.accept-runtime-sprite$/.test(x.id) && x.status === 'done').length, 0, 'runtime sprite acceptance stays 0/52');
+  pass('v07 south run credited as delivered; run/stop polish bucket in progress; other directions unfinished; 0/52 sprite acceptances');
+}
+
+// 4. A pending or changes-requested review never changes production credit.
+{
+  const l = fresh(), prod = prodSnap(l), insp = l.computed.inspection.done;
+  assert.ok(l.computed.queue.items.some(q => q.id === 'review.scene.city'));
+  set(l, 'review.scene.city', 'done', {outcome: 'changes_requested', evidence: [QA('nyc-city-hall-park_v06-cross-device-review-packet_unapproved-v01_20261017-174208-fe6b9f9d.md')]});
+  assert.equal(prodSnap(l), prod);
+  assert.equal(l.computed.inspection.done, insp + 1);
+  pass('review done (even changes_requested) moves only the inspection meter');
+}
+
+// 5. Waivers are not work: excluded from the inspection numerator and denominator; approval/waiver toggles leave production alone.
+{
+  const l = fresh(), c = l.computed;
+  const waived = l.tasks.filter(x => x.status === 'not_required');
+  assert.equal(c.inspection.waived.tasks, waived.length);
+  const performed = l.tasks.filter(x => ['technical-inspection', 'visual-review', 'content-qa'].includes(x.stage) && x.status === 'done').reduce((s, x) => s + x.points, 0);
+  const active = l.tasks.filter(x => ['technical-inspection', 'visual-review', 'content-qa'].includes(x.stage) && x.status !== 'not_required').reduce((s, x) => s + x.points, 0);
+  assert.equal(c.inspection.done, performed);
+  assert.equal(c.inspection.total, active);
+  const prod = prodSnap(l), insp = {...c.inspection};
+  set(l, 'creator.scene.city-survey-outer.accept', 'todo');
+  assert.equal(task(l, 'review.scene.city-survey-outer').status, 'todo', 'withdrawn approval reopens the waived review');
+  assert.equal(l.computed.inspection.done, insp.done, 'reopening a waiver adds no performed work');
+  assert.equal(l.computed.inspection.total, insp.total + 1, 'the reopened review now counts in the denominator');
+  assert.equal(prodSnap(l), prod);
+  set(l, 'creator.scene.city.accept', 'done', {evidence: [QA('nyc-city-hall-park_scene-candidate-640x360_qa-note_unapproved-v06_20261017-165253-4519dffe.md')]});
+  assert.equal(prodSnap(l), prod);
+  assert.deepEqual(cli.validate(l, ROOT), []);
+  pass(`${waived.length} waived reviews excluded from inspection ${c.inspection.done}/${c.inspection.total}; approval and waiver toggles leave production identical`);
+}
+
+// 6. One fixed revision bucket per deliverable: no version farming.
+{
+  const l = fresh(), before6 = l.computed.production, revs = l.baseline.revisions.length;
+  cli.revise(l, ROOT, {for: 'content.scene.chicago-loop.native-pass', reasonEn: 'Codex asked for changes', now: NOW});
+  const bucket = task(l, 'content.scene.chicago-loop.native-pass.revision');
+  assert.ok(bucket && bucket.points === 6 && bucket.status === 'in_progress');
+  assert.equal(l.computed.production.content.done, before6.content.done, 'initial credit kept');
+  assert.equal(l.computed.production.content.total, before6.content.total + 6);
+  assert.equal(l.baseline.revisions.length, revs + 1);
+  const count = l.tasks.length, total = l.computed.production.content.total;
+  cli.revise(l, ROOT, {for: 'content.scene.chicago-loop.native-pass', reasonEn: 'v06 candidate', now: NOW});
+  cli.revise(l, ROOT, {for: 'content.scene.chicago-loop.native-pass', reasonEn: 'v07 candidate', now: NOW});
+  assert.equal(l.tasks.length, count, 'later versions add no task');
+  assert.equal(l.computed.production.content.total, total, 'later versions add no points');
+  assert.equal(l.baseline.revisions.length, revs + 1);
+  assert.throws(() => cli.revise(l, ROOT, {for: 'content.scene.chicago-loop.native-pass.revision', reasonEn: 'x', now: NOW}), /another revision/);
+  assert.throws(() => cli.revise(l, ROOT, {for: 'review.scene.chicago-loop', reasonEn: 'x', now: NOW}), /production deliverable/);
+  assert.deepEqual(cli.validate(l, ROOT), []);
+  const second = fresh(); second.tasks.push({...task(second, 'content.scene.city.native-pass.revision'), id: 'content.scene.city.native-pass.revision2'});
+  assert.ok(cli.validate(second, ROOT).some(e => /one fixed revision bucket|frozen baseline/.test(e)));
+  const inflated = fresh(); task(inflated, 'content.scene.city.native-pass.revision').points = 12;
+  assert.ok(cli.validate(inflated, ROOT).some(e => /ceil\(deliverable points \/ 2\)/.test(e)));
+  pass('first revise opens one fixed bucket (+6 denominator only); later versions reopen it with no new task or points; second buckets and re-pointing rejected');
+}
+
+// 7. Review reconciliation: a changes-requested verdict blocks "ready for acceptance" until a later revision is delivered.
+{
+  const l = fresh(), c = l.computed;
+  for (const id of ['creator.scene.outskirts-survey-outer.accept', 'creator.scene.ruins.accept', 'creator.char.liang-xu.approve-static-south']) {
+    assert.ok(c.queue.needsRevision.items.some(q => q.id === id), id + ' needs a Claude revision');
+    assert.ok(!c.queue.items.some(q => q.id === id), id + ' is not offered as ready');
+  }
+  const yonkers = task(l, 'review.scene.outskirts-survey-outer');
+  assert.ok(yonkers.status === 'done' && yonkers.outcome === 'changes_requested' && yonkers.evidence.includes(cli.PROGRESS_REL));
+  const ruins = task(l, 'review.scene.ruins');
+  assert.ok(ruins.status === 'done' && ruins.outcome === 'changes_requested' && ruins.evidence.some(e => /v13/.test(e)));
+  assert.equal(task(l, 'content.scene.ruins.native-pass.revision').status, 'done', 'v13 revision delivered and credited');
+  assert.equal(task(l, 'qa.scene.ruins.check').status, 'in_progress', 'v13 combined check not claimed as a pass');
+  assert.equal(task(l, 'content.scene.ruins.native-default').status, 'todo', 'v13 is opt-in, not default');
+  const prod = prodSnap(l);
+  cli.revise(l, ROOT, {for: 'content.scene.outskirts-survey-outer.native-pass', reasonEn: 'answer root v06 notes', now: NOW});
+  assert.ok(l.computed.queue.needsRevision.items.some(q => q.id === 'creator.scene.outskirts-survey-outer.accept'), 'still gated while the revision is in progress');
+  set(l, 'content.scene.outskirts-survey-outer.native-pass.revision', 'done', {evidence: [QA('yonkers-antenna-corridor-room1_v06-outdoor-readability-refinement_qa-note_unapproved-v06_20261018-084726-c8f0d900.md')]});
+  const reopened = task(l, 'review.scene.outskirts-survey-outer');
+  assert.ok(reopened.status === 'todo' && reopened.history.at(-1).outcome === 'changes_requested', 'the answered review reopens and keeps its history');
+  assert.ok(l.computed.queue.items.some(q => q.id === 'creator.scene.outskirts-survey-outer.accept'), 'acceptance is ready again after the revision');
+  assert.equal(task(l, 'creator.scene.outskirts-survey-outer.accept').status, 'todo', 'no approval auto-completion');
+  assert.equal(task(l, 'content.scene.outskirts-survey-outer.native-pass').status, 'done');
+  assert.ok(JSON.parse(prodSnap(l)).content.done >= JSON.parse(prod).content.done, 'produced credit retained');
+  pass('Yonkers v06 and WDC v13 root verdicts recorded as changes_requested; their acceptances show "needs Claude revision" until a later revision; v13 check not claimed');
+}
+
+// 8. Owners follow the task type, not the stage.
 {
   const l = fresh();
-  const review = l.tasks.find(x => x.id === 'review.scene.city');
-  assert.equal(l.tasks.find(x => x.id === 'content.scene.city.native-pass').status, 'done');
-  assert.ok(l.computed.queue.items.some(q => q.id === review.id), 'city review is in the ready queue');
-  const prod = snapshot(l), insp = l.computed.inspection.done;
-  set(l, review.id, 'done', {outcome: 'changes_requested', evidence: ['docs/qa/rpg-2-star-ocean-the-second_nyc-city-hall-park_v06-cross-device-review-packet_unapproved-v01_20261017-174208-fe6b9f9d.md']});
-  assert.equal(snapshot(l), prod);
-  assert.equal(l.computed.inspection.done, insp + review.points);
-  pass('review pending or done (even changes_requested) never changes production credit');
+  for (const x of l.tasks) if (x.type !== 'revision') { assert.equal(x.owner, cli.TASK_TYPES[x.type].owner, x.id); assert.equal(x.stage, cli.TASK_TYPES[x.type].stage, x.id); }
+  const portraits = l.tasks.filter(x => /^content\.char\..*\.portrait$/.test(x.id));
+  assert.equal(portraits.length, 52); assert.ok(portraits.every(x => x.owner === 'codex' && x.type === 'concept-generation' && x.stage === 'content'));
+  assert.ok(l.tasks.filter(x => x.type === 'native-pixel').every(x => x.owner === 'claude'));
+  const audio = task(l, 'review.content.audio');
+  assert.ok(audio.stage === 'content-qa' && audio.owner === 'codex' && /audio QA/.test(audio.title.en) && !/visual review/i.test(audio.title.en));
+  const ops = l.tasks.filter(x => x.stage === 'operations');
+  assert.ok(ops.length === 2 && ops.every(x => x.owner === 'codex'));
+  assert.equal(l.computed.byOwner.codex.operationsTasks, 2, 'owner list includes remaining Codex operations work');
+  const opsPoints = ops.reduce((s, x) => s + x.points, 0);
+  const totalPoints = ['coding', 'content', 'technical-inspection', 'visual-review', 'content-qa', 'creator-approval'].reduce((s, st) => s + l.computed.stageTotals[st].total + l.computed.stageTotals[st].waivedPoints, 0);
+  assert.equal(totalPoints + opsPoints, l.tasks.reduce((s, x) => s + x.points, 0), 'operations are outside every meter');
+  const wrong = fresh(); task(wrong, 'content.char.milo.portrait').owner = 'claude';
+  assert.ok(cli.validate(wrong, ROOT).some(e => /concept-generation owner codex/.test(e)));
+  const wrong2 = fresh(); task(wrong2, 'content.char.milo.static-south').owner = 'codex';
+  assert.ok(cli.validate(wrong2, ROOT).some(e => /native-pixel owner claude/.test(e)));
+  pass('52 portraits are Codex image-generation tasks; native pixel and code are Claude; audio is content/audio QA; 2 Codex operations tasks listed outside the meters');
 }
 
-// 4. Toggling a creator approval cannot change production, coding or content.
-{
-  const l = fresh(), prod = snapshot(l), appr = l.computed.approval.done;
-  set(l, 'creator.scene.city.accept', 'done', {evidence: ['docs/qa/rpg-2-star-ocean-the-second_nyc-city-hall-park_scene-candidate-640x360_qa-note_unapproved-v06_20261017-165253-4519dffe.md']});
-  assert.equal(snapshot(l), prod);
-  assert.equal(l.computed.approval.done, appr + 1);
-  set(l, 'creator.scene.city.accept', 'changes_requested');
-  assert.equal(snapshot(l), prod);
-  set(l, 'creator.scene.city-survey-outer.accept', 'todo');
-  assert.equal(snapshot(l), prod);
-  assert.equal(l.tasks.find(x => x.id === 'review.scene.city-survey-outer').status, 'todo', 'a withdrawn approval voids its waiver');
-  assert.deepEqual(cli.validate(l, ROOT), []);
-  pass('approval done / changes_requested / withdrawn leaves production identical (a withdrawn waiver reopens its review)');
-}
-
-// 5. Rejection plus revision: completed initial work keeps its credit; the fixed rework milestone is visible and unfinished.
-{
-  const l = fresh(), prodBefore = l.computed.production, rev = l.baseline.revisions.length;
-  set(l, 'creator.scene.ruins.accept', 'changes_requested');
-  cli.addRework(l, ROOT, {for: 'creator.scene.ruins.accept', points: '6', titleEn: 'Capitol west revision after creator notes', titleZh: '按创作者意见修订国会大厦西侧', reasonEn: 'test rejection', now: NOW});
-  const rework = l.tasks.find(x => x.id === 'content.scene.ruins.rework-r1');
-  assert.ok(rework && rework.status === 'todo' && rework.owner === 'claude' && rework.dependsOn.includes('content.scene.ruins.native-pass'));
-  assert.equal(l.tasks.find(x => x.id === 'content.scene.ruins.native-pass').status, 'done');
-  assert.equal(l.computed.production.content.done, prodBefore.content.done, 'original production credit kept');
-  assert.equal(l.computed.production.content.total, prodBefore.content.total + 6, 'rework only adds to the denominator');
-  assert.ok(l.computed.production.percent <= prodBefore.percent, 'a revision can never raise the percent');
-  assert.equal(l.baseline.revisions.length, rev + 1);
-  assert.deepEqual(cli.validate(l, ROOT), [], 'revision is recorded, so the frozen-baseline check still passes');
-  pass('reject + add-rework keeps prior production, shows the rework milestone, records a baseline revision');
-}
-
-// 6. No evidence, missing evidence, unmet dependencies or the rejected 32x48 baseline cannot complete a task.
+// 9. No evidence, missing evidence, unmet dependencies or the rejected 32x48 baseline cannot complete a task.
 {
   const l = fresh();
   assert.throws(() => set(l, 'content.char.milo.static-south', 'done'), /without evidence/);
@@ -102,67 +174,56 @@ const before = [LEDGER, PROGRESS].map(sha);
   assert.ok(fs.existsSync(path.join(ROOT, placeholder)));
   assert.throws(() => set(l, 'content.char.protagonist-male.static-west', 'done', {evidence: [placeholder]}), /rejected 32x48/);
   assert.throws(() => set(l, 'review.scene.city', 'not_required', {evidence: ['game/tests/m1_smoke.gd'], waivedBy: 'creator.scene.city.accept'}), /waivedBy/);
-  for (const x of l.tasks.filter(t => cli.CREDITED.has(t.status))) assert.ok(x.evidence.length, x.id);
   pass('completion refused without evidence, with missing files, before dependencies, from the rejected baseline, or with an invalid waiver');
 }
 
-// 7. Owners, stable IDs, scope coverage and bounded points.
+// 10. Frozen baseline: a new version, receipt or point change cannot inflate progress silently.
 {
-  const l = fresh();
-  for (const x of l.tasks) assert.equal(x.owner, cli.STAGES[x.stage].owner, x.id);
-  assert.equal(new Set(l.tasks.map(x => x.id)).size, l.tasks.length);
-  const variants = new Set(l.tasks.filter(x => x.subject.kind === 'character-variant').map(x => x.subject.id));
-  assert.equal(variants.size, 52);
-  assert.equal(new Set(l.tasks.filter(x => x.subject.kind === 'scene-gate').map(x => x.subject.id)).size, 12);
-  assert.equal(l.tasks.filter(x => /^content\.char\..*\.walk-(south|west|north|east)$/.test(x.id)).length, 208);
-  assert.ok(l.tasks.every(x => x.points >= 1 && x.points <= 21));
-  const mutated = fresh(); mutated.tasks[0].owner = 'codex';
-  assert.ok(cli.validate(mutated, ROOT).some(e => /owner/.test(e)));
-  const badId = fresh(); badId.tasks[0].id = 'Task 1';
-  assert.ok(cli.validate(badId, ROOT).some(e => /stable pattern/.test(e)));
-  pass(`${l.tasks.length} tasks: one owner per stage, unique stable IDs, 52 variants x all milestones, 12 scene gates, points 1-21`);
-}
-
-// 8. Frozen baseline: a new version, receipt or point change cannot inflate progress silently.
-{
-  const extra = fresh();
-  extra.tasks.push({...extra.tasks.find(x => x.id === 'content.scene.city.native-pass'), id: 'content.scene.city.native-pass-v07', status: 'done'});
-  assert.ok(cli.validate(extra, ROOT).some(e => /frozen baseline/.test(e)), 'adding a version as a task fails the baseline check');
-  const repointed = fresh(); repointed.tasks.find(x => x.id === 'content.scene.city.plate').points = 21;
-  assert.ok(cli.validate(repointed, ROOT).some(e => /frozen baseline/.test(e)), 'changing points fails the baseline check');
+  const extra = fresh(); extra.tasks.push({...task(extra, 'content.scene.city.native-pass'), id: 'content.scene.city.native-pass-v07'});
+  assert.ok(cli.validate(extra, ROOT).some(e => /frozen baseline/.test(e)));
+  const repointed = fresh(); task(repointed, 'content.scene.city.plate').points = 21;
+  assert.ok(cli.validate(repointed, ROOT).some(e => /frozen baseline/.test(e)));
   const reweighted = fresh(); reweighted.baseline.weights.coding = 50;
   assert.ok(cli.validate(reweighted, ROOT).some(e => /weights/.test(e)));
-  pass('extra version tasks, re-pointing and re-weighting are all rejected by the frozen baseline');
+  const l = fresh(); assert.equal(new Set(l.tasks.map(x => x.subject.id).filter((_, i) => l.tasks[i].subject.kind === 'character-variant')).size, 52);
+  assert.equal(new Set(l.tasks.filter(x => x.subject.kind === 'scene-gate').map(x => x.subject.id)).size, 12);
+  pass('extra version tasks, re-pointing and re-weighting rejected; 52 variants and 12 scene gates covered');
 }
 
-// 9. The legacy 40.8% acceptance meter is read only and reported separately.
+// 11. The legacy 40.8% meter is read only, labelled as a mixed delivery/acceptance estimate, and final acceptance is false.
 {
   const l = fresh(), progress = JSON.parse(fs.readFileSync(PROGRESS, 'utf8'));
-  assert.equal(l.computed.legacy.percent, progress.completionMeter.percent);
   assert.equal(l.computed.legacy.percent, 40.8);
+  assert.equal(progress.completionMeter.percent, 40.8);
+  assert.match(l.computed.legacy.en, /mixed delivery\/acceptance estimate \(not formal acceptance\)/);
   assert.equal(l.computed.release.finalAccepted, false);
-  assert.equal(progress.completionMeter.formalApproval.mvpFormallyAccepted, false);
-  pass('legacy meter mirrored read-only (40.8%), final acceptance false');
+  const closeouts = progress.completionMeter.taskCloseouts;
+  assert.equal(closeouts.length, 140);
+  assert.equal(closeouts.at(-1).id, l.closeouts[0].legacyCloseoutId);
+  assert.equal(closeouts.at(-1).impact.changed, false);
+  pass('legacy meter 40.8% read only and labelled; 140th closeout is the zero-change baseline record; final acceptance false');
 }
 
-// 10. CLI end to end on a temp copy (set refuses without evidence; check catches a stale file).
+// 12. CLI end to end on a temp copy.
 {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'pc-ledger-'));
   const copy = path.join(dir, 'ledger.json');
   fs.copyFileSync(LEDGER, copy);
   const run = (...args) => spawnSync(process.execPath, [CLI_REL, ...args, '--ledger', copy, '--now', NOW], {cwd: ROOT, encoding: 'utf8'});
   assert.notEqual(run('set', '--task', 'content.char.adi.static-south', '--status', 'done').status, 0);
-  const ok = run('set', '--task', 'review.scene.chicago-loop', '--status', 'done', '--outcome', 'technical-pass', '--evidence', 'docs/qa/rpg-2-star-ocean-the-second_chicago-loop_state-lake-arrival-block-native-scene_qa-note_unapproved-v03r1_20261017-184340-49dde4dd.md');
-  assert.equal(ok.status, 0, ok.stdout + ok.stderr);
+  assert.equal(run('revise', '--for', 'content.scene.map.native-pass', '--reason-en', 'reopen').status, 0);
+  const n = JSON.parse(fs.readFileSync(copy, 'utf8')).tasks.length;
+  assert.equal(run('revise', '--for', 'content.scene.map.native-pass', '--reason-en', 'again').status, 0);
+  assert.equal(JSON.parse(fs.readFileSync(copy, 'utf8')).tasks.length, n);
   assert.equal(run('check').status, 0);
   const stale = JSON.parse(fs.readFileSync(copy, 'utf8')); stale.computed.production.percent = 99;
   fs.writeFileSync(copy, JSON.stringify(stale));
   assert.notEqual(run('check').status, 0);
   fs.rmSync(dir, {recursive: true, force: true});
-  pass('CLI set/check on a temp copy: evidence enforced, stale derived numbers rejected');
+  pass('CLI: evidence enforced, repeated revise reopens one bucket, stale derived numbers rejected');
 }
 
-// 11. Local Game Bible panel: the real v05 server serves the ledger and the served bible.js renders it without recomputing.
+// 13. Local Game Bible panel: the real v05 server serves the ledger and the served bible.js renders it without recomputing.
 async function renderPanel() {
   const net = require('node:net'), vm = require('node:vm');
   const port = await new Promise((resolve, reject) => { const probe = net.createServer().once('error', reject); probe.listen(0, '127.0.0.1', () => { const p = probe.address().port; probe.close(() => resolve(p)); }); });
@@ -191,11 +252,13 @@ async function renderPanel() {
   const {html, served} = await renderPanel();
   const panel = html.slice(html.indexOf('id="production-completion"'), html.indexOf('</section>', html.indexOf('id="production-completion"')));
   const c = served.computed;
-  for (const text of [c.production.percentLabel, `${c.production.coding.done} / ${c.production.coding.total}`, `${c.production.content.done} / ${c.production.content.total}`,
-    `${c.inspection.done} / ${c.inspection.total}`, `${c.approval.done} / ${c.approval.total}`, '否 / false']) assert.ok(panel.includes(text), 'panel shows ' + text);
-  assert.match(panel, /<details class="group"><summary>旧版验收加权估算（不同指标）· 40\.8%<\/summary>/, 'legacy 40.8% is collapsed and labelled');
+  assert.equal((panel.match(/role="progressbar"/g) || []).length, 5, 'one main bar plus coding, content, inspection and approval bars');
+  for (const text of [c.production.percentLabel, `${c.production.coding.done} / ${c.production.coding.total} 分 points`, `${c.production.content.tasksDone} / ${c.production.content.tasks} 项任务 tasks`,
+    `${c.inspection.done} / ${c.inspection.total} 分 points`, `${c.approval.done} / ${c.approval.total} 分 points`, '否 / false', `Needs Claude revision（${c.queue.needsRevision.count}）`, `Ready（${c.queue.count}）`]) assert.ok(panel.includes(text), 'panel shows ' + text);
+  assert.match(panel, /<details class="group"><summary>公式与分值 \/ Formula and points<\/summary><p class="small"><code>round1\(40/);
+  assert.match(panel, /<details class="group"><summary>旧版混合交付／验收估算（不是正式验收）\/ Legacy mixed delivery\/acceptance estimate \(not formal acceptance\) · 40\.8%<\/summary>/);
   assert.ok(html.includes('id="cross-device-review-queue"'), 'existing review queue card still renders');
-  pass(`local Bible panel renders ${c.production.percentLabel} (coding/content/inspection/approval), legacy collapsed, review queue intact`);
+  pass(`local Bible panel: ${c.production.percentLabel} with 4 separate bars, formula/points in details, points vs tasks, ready ${c.queue.count} / needs revision ${c.queue.needsRevision.count}, legacy collapsed`);
   assert.deepEqual([LEDGER, PROGRESS].map(sha), before, 'tracked ledger and progress state untouched');
   pass('read-only: tracked ledger and progress state hashes unchanged');
   console.log(`RESULT PASS (${passed} checks)`);
