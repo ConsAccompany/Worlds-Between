@@ -8,12 +8,12 @@ Last updated: 2026-10-18
 
 Current status as of 2026-10-18 (source of truth: the production-completion task ledger, `outputs/rpg-2-star-ocean-the-second_production-completion_task-ledger_v01_20261018-140533-3de52073.json`, updated only through its ledger CLI).
 
-- Production completion is 50.9% (coding 40% + content 60%, from frozen task points): coding 100%, content 18.1%. Inspection performed is 13.2% and creator approval is 7%; both are separate meters that never change production credit. The older 40.8% figure in the MVP progress state is a different, legacy mixed delivery/acceptance metric and is not compared with or subtracted from 50.9%.
+- Production completion is 51.0% (coding 40% + content 60%, from frozen task points): coding 100% (23/23 defined runtime capability tasks), content 18.4% (113/714 tasks). Inspection performed is 13.2% and creator approval is 7%; both are separate meters that never change production credit. The older 40.8% figure is a different historical mixed delivery/acceptance metric, not a previous value of production completion. Coding100% does not imply finished art, default adoption, human sound review or no future defects.
 - Scope: 51 character identities with 52 visual variants (male and female protagonist). Accepted so far: scenes 3/12, full runtime sprite sets 0/52, human post-art playthroughs 0/2. M2 global world and travel is technically 10/12 and not accepted. Final MVP acceptance is false.
 - Current canon: new runs start in NYC on 2537-05-25; the underground community is near the Catskills; travel uses the simple fixed whole-hour rule, which supersedes the earlier precise route-figure work (including the route-figure item in the M2 checklist below).
 - Recent technical work: the settings screen (language, master volume, movement preset) is functional; its UI art is unapproved. The Sentry v2 enemy, the battle backdrop loader and the Washington, D.C. annex pilots are technical capabilities that stay off by default. None of these is approved art.
-- Six Codex visual-review verdicts were recorded in the latest review pass: five are ready for creator review (no creator approval yet), and the Chicago Loop needs a native polish pass.
-- Remaining coding tasks: 4. The character sprite runtime and combat sprite runtime are being built (in progress, no credit); the VFX system and audio cues are still to do.
+- Recent content: Chicago v06 revision, female west/east statics and four-direction idle loops are produced with source-bound actual gameplay evidence. These remain art-unapproved. Yonkersv07 is a completed bounded technical revision whose visual verdict still requests changes. Native pixel export equality is separate from unresolved Pixelorama application diagnostics and GUI reliability.
+- The four previously remaining capability tasks (exploration sprite loader, combat sprite loader, transient VFX and audio event cues) are integrated and production-credited. Codex completed them during the Claude quota gap. Real character/scene production and inspection continue; female west run/stop remains in progress until its exact transition and native evidence checks pass.
 
 ### Historical summary notes (written through 2026-10-15; kept as recorded, superseded where they conflict with the current status above)
 
@@ -71,13 +71,14 @@ Current status as of 2026-10-18 (source of truth: the production-completion task
 - [x] Route preview, one-time departure settlement, cancel at no cost, an integer-minute calendar (day, year and leap-year carry, week-transition signal), save/load and legacy-save migration. Implemented and passing automated tests.
 - [x] Godot automated tests (re-run 2026-10-15 after the US migration): `GLOBAL_TRAVEL_CORE_OK`, `GLOBAL_EARTH_MAP_SMOKE_OK checks=212`, `GLOBAL_MAP_TRAVEL_INTEGRATION_OK checks=105`, `US_SCIENCE_MIGRATION_SMOKE_OK checks=32`, the revised `M2_SMOKE_OK`, and windowed 1280×720 readability checks and captures. The old three-node `M2_SMOKE_OK` does not count.
 - [x] Decide the first-city and underground-community anchors: creator decision 2026-10-15. The Science hub is NYC, the first playable area is Lower Manhattan City Hall Park, the outskirts are Yonkers, and the underground community is near the Catskills. Design record only.
-- [x] Migrate the runtime from the superseded provisional Shanghai / Songjiang Outskirts / Liangzhu set and the Yangtze Delta layer to the NYC set (plus abandoned Washington, D.C. and the Chicago Loop). Implemented as a technical candidate; the scene art is not made or accepted, and the Catskills community has no runtime place yet.
+- [x] Migrate the runtime from the superseded provisional Shanghai / Songjiang Outskirts / Liangzhu set and the Yangtze Delta layer to the NYC set (plus abandoned Washington, D.C. and the Chicago Loop). Implemented as technical candidates; current scene production and approval are tracked separately in the ledger. The Catskills community has no runtime place yet.
 - [x] Decide the world start: the adventure starts 2537-05-25 (creator decision 2026-10-15). The prologue start date is still open.
 - [x] Set the new-game calendar to the decided date: new runs start 2537-05-25 08:00 (08:00 is a placeholder time of day). Old saves keep their 2026 date; whether to shift them is an open creator decision.
-- [ ] Replace the preliminary route figures (OSRM demo server for car and airport drives, BTS July 2026 flight medians) with release-grade sourced door-to-door figures.
-- [x] Add the decided first air route NYC–Chicago to game data (365 min out, 338 min back, 1177.1 km; preliminary estimates). The three Shanghai research candidates are superseded.
+- [x] Apply the creator's simple fixed whole-hour travel rule: show transport, approximate distance, total whole-hour duration and arrival date. The older task to refine airport/door-to-door components is superseded; internal reference figures are not player-facing simulation rules.
+- [x] Add the decided first air route NYC–Chicago: six gameplay hours each way, approximate1177.1km. Generic flight information only. Older365/338-minute estimates and the Shanghai research candidates are historical, superseded references.
 - [x] Connect the weekly business settlement to the week-transition signal (commit 192c63b, `COMMERCE_WEEKLY_SETTLEMENT_OK checks=149`).
-- [ ] Produce and accept the map art.
+- [x] Produce the native map-art candidate and its integration (v03r2, unapproved); production credit is recorded independently.
+- [ ] Creator acceptance of map art; production does not supply this approval.
 - [ ] Human map review, then the two human timed playtests (0/2).
 
 ### Phase M3 - Combat core
