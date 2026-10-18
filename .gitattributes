@@ -4,12 +4,60 @@ game/assets/environments/candidates/nyc-chp-v03_20261016-160059-4b2f50f6/rpg-2-s
 outputs/chicago-loop-state-lake-v02/rpg-2-star-ocean-the-second_chicago-loop_state-lake_palette_unapproved-v02_20261017-160959-55667f46.gpl text eol=lf
 # Yonkers room 1 v05 source check (G4) byte-hashes this LF palette against its manifest; keep it LF on every checkout.
 outputs/yonkers-room1-v05_4b9d66f1/rpg-2-star-ocean-the-second_yonkers-antenna-room1_native-palette_unapproved-v05_20261018-043851-4b9d66f1.gpl text eol=lf
+# Yonkers room 1 v06 source check (G4) byte-hashes this LF palette against its manifest; keep it LF on every checkout.
+outputs/yonkers-room1-v06_c8f0d900/rpg-2-star-ocean-the-second_yonkers-antenna-room1_native-palette_unapproved-v06_20261018-084726-c8f0d900.gpl text eol=lf
 # Female south run v03-v07 and the compact locomotion v02 pilots: the v07 focused check reads the amendment manifest as raw
 # bytes (check 03 requires no CR) and receipts/manifests are pinned by sha256 of their LF bytes; keep these JSON files LF on
 # every checkout (autocrlf=true included). Scoped to these paths only; no global line-ending change.
 game/assets/characters/locomotion-pilots-compact-v02/*.json text eol=lf
 game/assets/characters/run-v0[3-7]-unapproved/*.json text eol=lf
 outputs/*south-run-v0[67]*receipt*.json text eol=lf
+# Male south idle v8pair static pilot v01: the QA note pins these candidate JSON files by sha256 of their LF bytes;
+# keep them LF on every checkout (autocrlf=true included). Exact paths only.
+game/assets/characters/protagonist-male-v8pair/rpg-2-star-ocean-the-second_protagonist-male_south-idle-v8pair-manifest_unapproved-v01_20261018-130225-da428624.json text eol=lf
+game/assets/characters/protagonist-male-v8pair/rpg-2-star-ocean-the-second_protagonist-male_south-idle-v8pair-palette_unapproved-v01_20261018-130225-c1cfbc02.json text eol=lf
+outputs/rpg-2-star-ocean-the-second_protagonist-male_south-idle-v8pair-godot-capture-report_unapproved-v01_20261018-131126-1bae8044.json text eol=lf
+# Same pilot: the QA note also pins its build/check and Godot capture tools by sha256 of their LF bytes.
+tools/rpg-2-star-ocean-the-second_protagonist-male_south-idle-v8pair-static-pilot-build-and-check_unapproved-v01_20261018-130225-f28bd26d.py text eol=lf
+tools/rpg-2-star-ocean-the-second_protagonist-male_south-idle-v8pair-static-pilot-godot-capture_unapproved-v01_20261018-130225-098354f7.gd text eol=lf
+# Washington Capitol west v13 ruin-material collapse (UNAPPROVED, test-only): the manifest and QA note pin these files by
+# sha256 of their LF bytes, and the check's S00 byte-compares the candidate files with a rebuild; keep them LF on every
+# checkout (autocrlf=true included). Exact paths only.
+game/assets/environments/candidates/wdc-cw-v13_20261018-100938-075675cf/rpg-2-star-ocean-the-second_wdc-capitol-west_scene-palette_unapproved-v13_20261018-100938-075675cf.gpl text eol=lf
+game/assets/environments/candidates/wdc-cw-v13_20261018-100938-075675cf/rpg-2-star-ocean-the-second_wdc-capitol-west_rt-override-contract_unapproved-v13_20261018-100938-075675cf.json text eol=lf
+game/assets/environments/candidates/wdc-cw-v13_20261018-100938-075675cf/rpg-2-star-ocean-the-second_wdc-capitol-west_scene-manifest_unapproved-v13_20261018-100938-075675cf.json text eol=lf
+outputs/wdc-cw-v13_20261018-100938-075675cf/rpg-2-star-ocean-the-second_wdc-capitol-west_static-pixelorama-check-report_unapproved-v13_20261018-100938-075675cf.json text eol=lf
+outputs/wdc-cw-v13_20261018-100938-075675cf/rpg-2-star-ocean-the-second_wdc-capitol-west_godot-runtime-check-report_unapproved-v13_20261018-100938-075675cf.json text eol=lf
+outputs/wdc-cw-v13_20261018-100938-075675cf/rpg-2-star-ocean-the-second_wdc-capitol-west_godot-harness-report-test-only-v13_unapproved-v13_20261018-100938-075675cf.json text eol=lf
+outputs/wdc-cw-v13_20261018-100938-075675cf/rpg-2-star-ocean-the-second_wdc-capitol-west_godot-harness-report-test-only-v12ref_unapproved-v13_20261018-100938-075675cf.json text eol=lf
+outputs/wdc-cw-v13_20261018-100938-075675cf/rpg-2-star-ocean-the-second_wdc-capitol-west_accepted-rooms-replay-log-under-override_unapproved-v13_20261018-100938-075675cf.txt text eol=lf
+# Washington Capitol west v13 opt-in flag integration (UNAPPROVED, off by default): the flag-integration manifest and QA
+# note pin these evidence files by sha256 of their LF bytes; keep them LF on every checkout. Exact paths only.
+outputs/wdc-cw-v13flag_20261018-135539-63201688/rpg-2-star-ocean-the-second_wdc-capitol-west_flag-integration-manifest_unapproved-v13_20261018-135539-63201688.json text eol=lf
+outputs/wdc-cw-v13flag_20261018-135539-63201688/rpg-2-star-ocean-the-second_wdc-capitol-west_flag-integration-check-report_unapproved-v13_20261018-135539-63201688.json text eol=lf
+outputs/wdc-cw-v13flag_20261018-135539-63201688/rpg-2-star-ocean-the-second_wdc-capitol-west_godot-flag-harness-report-v13flag_unapproved-v13_20261018-135539-63201688.json text eol=lf
+outputs/wdc-cw-v13flag_20261018-135539-63201688/rpg-2-star-ocean-the-second_wdc-capitol-west_godot-flag-harness-report-v12r2flag_unapproved-v13_20261018-135539-63201688.json text eol=lf
+outputs/wdc-cw-v13flag_20261018-135539-63201688/rpg-2-star-ocean-the-second_wdc-capitol-west_accepted-rooms-replay-log-with-v13-flag_unapproved-v13_20261018-135539-63201688.txt text eol=lf
+# Ji Cheng south idle static pilot v01: the QA note pins these LF text files by sha256 of their exact bytes;
+# keep them LF on every checkout (autocrlf=true included). Exact paths only.
+tools/rpg-2-star-ocean-the-second_ji-cheng_south-idle-static-pilot-build-and-check_unapproved-v01_20261018-132812-0d31a6f9.py text eol=lf
+tools/rpg-2-star-ocean-the-second_ji-cheng_south-idle-static-pilot-godot-capture_unapproved-v01_20261018-132812-81f87641.gd text eol=lf
+outputs/rpg-2-star-ocean-the-second_ji-cheng_south-idle-static-godot-capture-report_unapproved-v01_20261018-133420-cab29676.json text eol=lf
+# Same pilot: the Pixelorama check report is pinned by sha256 of its CRLF bytes; store and check it out byte-exact.
+outputs/rpg-2-star-ocean-the-second_ji-cheng_south-idle-static-pixelorama-check-report_unapproved-v01_20261018-132812-87d370be.json -text
+# Washington Capitol west v13 flag deterministic check + failure receipt (technical only): the receipt and manifest pin these
+# text evidence files by sha256 of their LF bytes; keep them LF on every checkout. Exact paths only.
+outputs/wdc-cw-v13flagdet_20261018-141558-22d034ba/rpg-2-star-ocean-the-second_wdc-capitol-west_deterministic-check-attempt1-stdout_unapproved-v13_20261018-141558-22d034ba.txt text eol=lf
+outputs/wdc-cw-v13flagdet_20261018-141558-22d034ba/rpg-2-star-ocean-the-second_wdc-capitol-west_deterministic-check-attempt2-stdout_unapproved-v13_20261018-141558-22d034ba.txt text eol=lf
+outputs/wdc-cw-v13flagdet_20261018-141558-22d034ba/rpg-2-star-ocean-the-second_wdc-capitol-west_deterministic-check-manifest_unapproved-v13_20261018-141558-22d034ba.json text eol=lf
+outputs/wdc-cw-v13flagdet_20261018-141558-22d034ba/rpg-2-star-ocean-the-second_wdc-capitol-west_deterministic-check-report_unapproved-v13_20261018-141558-22d034ba.json text eol=lf
+outputs/wdc-cw-v13flagdet_20261018-141558-22d034ba/rpg-2-star-ocean-the-second_wdc-capitol-west_failure-receipt-published-checker-rerun-harness-report-v12r2flag_unapproved-v13_20261018-141558-22d034ba.json text eol=lf
+outputs/wdc-cw-v13flagdet_20261018-141558-22d034ba/rpg-2-star-ocean-the-second_wdc-capitol-west_failure-receipt-published-checker-rerun-harness-report-v13flag_unapproved-v13_20261018-141558-22d034ba.json text eol=lf
+outputs/wdc-cw-v13flagdet_20261018-141558-22d034ba/rpg-2-star-ocean-the-second_wdc-capitol-west_failure-receipt-published-checker-rerun-log_unapproved-v13_20261018-141558-22d034ba.txt text eol=lf
+outputs/wdc-cw-v13flagdet_20261018-141558-22d034ba/rpg-2-star-ocean-the-second_wdc-capitol-west_failure-receipt_unapproved-v13_20261018-141558-22d034ba.json text eol=lf
+outputs/wdc-cw-v13flagdet_20261018-141558-22d034ba/rpg-2-star-ocean-the-second_wdc-capitol-west_fixedfps-accepted-rooms-replay-log_unapproved-v13_20261018-141558-22d034ba.txt text eol=lf
+outputs/wdc-cw-v13flagdet_20261018-141558-22d034ba/rpg-2-star-ocean-the-second_wdc-capitol-west_fixedfps-harness-report-v12r2flag_unapproved-v13_20261018-141558-22d034ba.json text eol=lf
+outputs/wdc-cw-v13flagdet_20261018-141558-22d034ba/rpg-2-star-ocean-the-second_wdc-capitol-west_fixedfps-harness-report-v13flag_unapproved-v13_20261018-141558-22d034ba.json text eol=lf
 # Female south run v09 / v10 / v10r1: each builder's focused check rebuilds its folder and byte-compares the LF manifest;
 # keep these manifests LF on every checkout (autocrlf=true included). Scoped to these folders only.
 game/assets/characters/run-v09-unapproved/*.json text eol=lf

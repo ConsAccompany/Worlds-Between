@@ -18,6 +18,7 @@ const nestedPngAllowlist = new Set([
   'chicago-loop-state-lake-v03r1/godot-runtime/rpg-2-star-ocean-the-second_chicago-loop_state-lake-godot-zh-entry-640x360_v03r1_20261017-184340-44bc6d7f.png',
   'yonkers-room1-v03_15709be4/captures/rpg-2-star-ocean-the-second_yonkers-antenna-room1_v03-godot-zh-entry-640x360_20261017-224447-15709be4.png',
   'yonkers-room1-v05_4b9d66f1/cap/rpg-2-star-ocean-the-second_yonkers-antenna-room1_v05-test-only-godot-zh-entry-640x360_20261018-043851-4b9d66f1.png',
+  'yonkers-room1-v06_c8f0d900/cap/rpg-2-star-ocean-the-second_yonkers-antenna-room1_v06-test-only-godot-zh-entry-640x360_20261018-084726-c8f0d900.png',
   'wdc-cw-v12r2_20261018-042200-7c1e5b39/rpg-2-star-ocean-the-second_wdc-capitol-west_rt640-zh-entry-v8ref_unapproved-v12r2_20261018-042200-7c1e5b39.png',
   'wdc-rc2-v01i_3a34d132/cap/rpg-2-star-ocean-the-second_wdc-annex-room2_v01-godot-zh-entry-640x360_20261018-035908-3a34d132.png',
   'chicago-loop-state-lake-v05/godot-runtime/rpg-2-star-ocean-the-second_chicago-loop_state-lake-godot-zh-entry-640x360_v05_20261018-000240-1d1b9337.png',

@@ -1,0 +1,210 @@
+{
+ "project": "rpg-2-star-ocean-the-second",
+ "area": "wdc-capitol-west",
+ "receipt": "failure receipt for the published v13 flag checker (tools/...v13-flag-integration-check...63201688.py)",
+ "written_local": "2026-10-18 14:24 EDT",
+ "result_reported_to_root_after_merge": {
+  "when_local": "2026-10-18 about 14:10:51-14:12:15 EDT, merged HEAD 54a5894",
+  "result": "V13FLAG CHECK 18/21 (FAIL)",
+  "failed": [
+   "F01_tree_is_head_plus_exactly_this_runs_game_changes",
+   "F02_scene_change_is_one_script_path_line",
+   "F13_traversal_and_battle_return_exact_or_within_1_scroll_row_and_3px"
+  ],
+  "f13_failing_shot": {
+   "mode": "v12r2flag (unchanged v12r2 path)",
+   "shot": "zh traversal_end",
+   "scroll": 12,
+   "committed_scroll": 14,
+   "hero_distance_px": 2.37
+  },
+  "evidence_status": "NOT RECOVERABLE as raw files: the console log and temp tree of that run were deleted during cleanup at about 14:13 EDT. The values above are transcribed from that run's console output as read in the session; no log is reconstructed or invented."
+ },
+ "rerun_of_the_unchanged_published_checker": {
+  "when_local": "2026-10-18 14:16:09-14:17:35 EDT, clean HEAD 54a5894",
+  "result": "V13FLAG CHECK 19/21 (FAIL): F01 and F02 failed; F13 passed this time",
+  "moving_shot_states_vs_committed_real_time_frames": {
+   "v13flag:zh:traversal": {
+    "scroll": 1,
+    "committed_scroll": 1,
+    "hero": [
+     279.075622558594,
+     241.505920410156
+    ],
+    "committed_hero": [
+     278.102355957031,
+     241.699523925781
+    ],
+    "hero_distance_px": 0.992
+   },
+   "v13flag:zh:traversal_end": {
+    "scroll": 13,
+    "committed_scroll": 14,
+    "hero": [
+     150.181610107422,
+     251.405181884766
+    ],
+    "committed_hero": [
+     150.857604980469,
+     252.282043457031
+    ],
+    "hero_distance_px": 1.107
+   },
+   "v13flag:zh:battle_return": {
+    "scroll": 77,
+    "committed_scroll": 78,
+    "hero": [
+     536.0,
+     289.0
+    ],
+    "committed_hero": [
+     536.0,
+     290.0
+    ],
+    "hero_distance_px": 1.0
+   },
+   "v13flag:en:traversal": {
+    "scroll": 1,
+    "committed_scroll": 1,
+    "hero": [
+     278.103698730469,
+     241.699981689453
+    ],
+    "committed_hero": [
+     278.103881835938,
+     241.700073242188
+    ],
+    "hero_distance_px": 0.0
+   },
+   "v13flag:en:traversal_end": {
+    "scroll": 14,
+    "committed_scroll": 14,
+    "hero": [
+     150.859436035156,
+     252.282470703125
+    ],
+    "committed_hero": [
+     150.858825683594,
+     252.282531738281
+    ],
+    "hero_distance_px": 0.001
+   },
+   "v13flag:en:battle_return": {
+    "scroll": 78,
+    "committed_scroll": 78,
+    "hero": [
+     533.0,
+     290.0
+    ],
+    "committed_hero": [
+     533.0,
+     290.0
+    ],
+    "hero_distance_px": 0.0
+   },
+   "v12r2flag:zh:traversal": {
+    "scroll": 1,
+    "committed_scroll": 1,
+    "hero": [
+     278.100158691406,
+     241.699432373047
+    ],
+    "committed_hero": [
+     278.102661132813,
+     241.700256347656
+    ],
+    "hero_distance_px": 0.003
+   },
+   "v12r2flag:zh:traversal_end": {
+    "scroll": 14,
+    "committed_scroll": 14,
+    "hero": [
+     150.831237792969,
+     252.282257080078
+    ],
+    "committed_hero": [
+     150.858154296875,
+     252.282501220703
+    ],
+    "hero_distance_px": 0.027
+   },
+   "v12r2flag:zh:battle_return": {
+    "scroll": 78,
+    "committed_scroll": 78,
+    "hero": [
+     536.0,
+     290.0
+    ],
+    "committed_hero": [
+     536.0,
+     290.0
+    ],
+    "hero_distance_px": 0.0
+   },
+   "v12r2flag:en:traversal": {
+    "scroll": 1,
+    "committed_scroll": 1,
+    "hero": [
+     278.116760253906,
+     241.712432861328
+    ],
+    "committed_hero": [
+     278.103881835938,
+     241.700073242188
+    ],
+    "hero_distance_px": 0.018
+   },
+   "v12r2flag:en:traversal_end": {
+    "scroll": 14,
+    "committed_scroll": 14,
+    "hero": [
+     150.872650146484,
+     252.294769287109
+    ],
+    "committed_hero": [
+     150.858825683594,
+     252.282531738281
+    ],
+    "hero_distance_px": 0.018
+   },
+   "v12r2flag:en:battle_return": {
+    "scroll": 78,
+    "committed_scroll": 78,
+    "hero": [
+     536.0,
+     290.0
+    ],
+    "committed_hero": [
+     533.0,
+     290.0
+    ],
+    "hero_distance_px": 3.0
+   }
+  },
+  "files_sha256_bytes": {
+   "rpg-2-star-ocean-the-second_wdc-capitol-west_failure-receipt-published-checker-rerun-harness-report-v12r2flag_unapproved-v13_20261018-141558-22d034ba.json": "70aa4ba0f9ea8be6e96115279fbbccc4081e1231e650d2800b8c4eb507a6b586",
+   "rpg-2-star-ocean-the-second_wdc-capitol-west_failure-receipt-published-checker-rerun-harness-report-v13flag_unapproved-v13_20261018-141558-22d034ba.json": "d0308f736289d07b0c9b77ded91cfaabf0fc9835b6a64f00149207ffaa94c781",
+   "rpg-2-star-ocean-the-second_wdc-capitol-west_failure-receipt-published-checker-rerun-log_unapproved-v13_20261018-141558-22d034ba.txt": "0324d545d14ffb94e18150b58dcaa12af3e06d70ee5179945bf08cac45a65f81"
+  }
+ },
+ "root_causes": {
+  "F01_F02": "design fault: both compare the worktree's uncommitted game/ delta with HEAD, so a clean committed checkout can never pass them",
+  "F13": "nondeterminism: the hero moves MOVE_SPEED * delta per frame (v12 selector _process) and the harness ran with wall-clock deltas, so where real-time walks stop varies by a frame step between runs; with the v12r2 camera rate 1.7 a 1.4 px feet difference becomes 2 scroll rows. The same unchanged checker failed F13 at 14:12 and passed it at 14:16."
+ },
+ "earlier_runs_of_the_published_checker_not_recoverable": [
+  "13:58-14:00 EDT 18/21 (F09, F10, F13) and 14:01-14:02 EDT 20/21 (F12): their outputs were deleted before the re-runs that reused the same file names; only the values quoted in the 63201688 QA note remain."
+ ],
+ "fix": "tools/...v13-flag-deterministic-check_unapproved-v13_20261018-141558-22d034ba.py (run with Godot --fixed-fps 60; HEAD validated against predecessor 6406bb8)",
+ "fix_attempts": {
+  "attempt1": "2026-10-18 14:20:44-14:21:52 EDT, 20/22 FAIL: D03 and D04 were bugs in the new gates (the v13 harness did not exist at 6406bb8; game/ mentions tool names in a manifest field and a comment but never loads them). Stdout kept; no other evidence was written by that attempt.",
+  "attempt2": "2026-10-18 14:22:22-14:23:30 EDT, 22/22 PASS, evidence written"
+ },
+ "files_sha256_bytes": {
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_deterministic-check-attempt1-stdout_unapproved-v13_20261018-141558-22d034ba.txt": "c6c0d7a9322669f199e155ac797d3b97fc40a3391d38f3ca0d258c3a693fdee7",
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_deterministic-check-attempt2-stdout_unapproved-v13_20261018-141558-22d034ba.txt": "65d7b7f316e781c25a1e183ce6d45ac4f4ddc5dd9be26821956ba544286b6307",
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_failure-receipt-published-checker-rerun-harness-report-v12r2flag_unapproved-v13_20261018-141558-22d034ba.json": "70aa4ba0f9ea8be6e96115279fbbccc4081e1231e650d2800b8c4eb507a6b586",
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_failure-receipt-published-checker-rerun-harness-report-v13flag_unapproved-v13_20261018-141558-22d034ba.json": "d0308f736289d07b0c9b77ded91cfaabf0fc9835b6a64f00149207ffaa94c781",
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_failure-receipt-published-checker-rerun-log_unapproved-v13_20261018-141558-22d034ba.txt": "0324d545d14ffb94e18150b58dcaa12af3e06d70ee5179945bf08cac45a65f81"
+ },
+ "stdout_logs_note": "the two attempt stdout logs are console output with CRLF normalized to LF before hashing"
+}

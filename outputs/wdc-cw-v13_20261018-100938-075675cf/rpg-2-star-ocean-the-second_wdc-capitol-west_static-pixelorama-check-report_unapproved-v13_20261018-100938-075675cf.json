@@ -1,0 +1,141 @@
+{
+ "run": "wdc-cw-v13_20261018-100938-075675cf",
+ "mode": "check",
+ "gates": {
+  "S01_v12_source_files_match_v12_manifest": true,
+  "S02_unedited_v12_layers_identical": true,
+  "S03_edited_layers_only_lose_texels_inside_the_break": true,
+  "S04_new_layers_inside_edit_box": true,
+  "S05_interior_layer_clipped_to_the_break": true,
+  "S06_flat_and_new_layers_in_v12_palette": true,
+  "S07_binary_alpha_all_layers": true,
+  "S08_flat_changes_inside_edit_box": true,
+  "S09_dome_and_portico_untouched": true,
+  "S10_rt_base_changes_equal_flat_changes": true,
+  "S11_runtime_layers_above_base_identical": true,
+  "S12_no_changed_texel_on_walkable_feet": true,
+  "S13_changes_at_least_30_rows_north_of_walk_band": true,
+  "S14_localized_break_under_8pct_of_west_front": true,
+  "S15_roofline_broken_at_least_24_rows": true,
+  "S16_cavity_reads_darker_than_facade_ratio_under_0_6": true,
+  "S17_talus_toe_sits_on_lawn_with_contact_shadow": true,
+  "S18_tree_rooted_in_the_break": true,
+  "S00_build_is_reproducible_files_on_disk_equal_rebuild": true,
+  "P01_pixelorama_pxo_flat_exact": true,
+  "P02_pixelorama_ora_flat_exact": true,
+  "P03_pixelorama_pxo_split_art_layers_exact": true,
+  "P04_pixelorama_ora_split_art_layers_exact": true,
+  "P05_pixelorama_hidden_guides_not_exported": true,
+  "P06_rt_base_rebuilt_from_pixelorama_split_exact": true,
+  "P07_pixelorama_sources_unchanged": true,
+  "P08_pixelorama_isolation_held": true
+ },
+ "passed": 27,
+ "total": 27,
+ "info": {
+  "unedited_v12_layers": 24,
+  "texels_removed": {
+   "capitol-west-front": 1066,
+   "facade-weathering": 8,
+   "capitol-ruin": 307,
+   "olmsted-terrace": 68
+  },
+  "flat_changed_texels": 2145,
+  "flat_changed_share": 0.00931,
+  "min_rows_between_change_and_walk_band": 39,
+  "changed_texels_an_actor_canvas_can_overlap": 136,
+  "west_front_texels_removed_share": 0.0357,
+  "roofline_drop_rows_max": 33,
+  "break_width_px": 60,
+  "break_view_mean_luma_incl_slab_pier_crest_sky_windows": 0.425,
+  "break_view_to_facade_ratio": 0.646,
+  "cavity_mean_luma": 0.373,
+  "cavity_texels": 541,
+  "facade_mean_luma_same_block": 0.658,
+  "cavity_to_facade_ratio": 0.567,
+  "rubble_texels": 906,
+  "overgrowth_texels": 239,
+  "interior_texels": 791,
+  "edges_texels": 414,
+  "hash_jitter_used_for": "gravel speckle inside the hand-drawn pour/talus/toe outlines and leaf gaps only"
+ },
+ "disk_equal": {
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_scene-32layer_unapproved-v13_20261018-100938-075675cf.pxo": true,
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_scene-32layer_unapproved-v13_20261018-100938-075675cf.ora": true,
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_scene-flat-640x360_unapproved-v13_20261018-100938-075675cf.png": true,
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_scene-palette_unapproved-v13_20261018-100938-075675cf.gpl": true,
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_rt-base_unapproved-v13_20261018-100938-075675cf.png": true,
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_rt-override-contract_unapproved-v13_20261018-100938-075675cf.json": true,
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_scene-manifest_unapproved-v13_20261018-100938-075675cf.json": true,
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_zoom6x-breach_unapproved-v13_20261018-100938-075675cf.png": true,
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_zoom6x-breach-v12ref_unapproved-v13_20261018-100938-075675cf.png": true,
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_zoom3x-west-front_unapproved-v13_20261018-100938-075675cf.png": true,
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_zoom3x-west-front-v12ref_unapproved-v13_20261018-100938-075675cf.png": true,
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_native640-vista-rows0-255_unapproved-v13_20261018-100938-075675cf.png": true,
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_native640-vista-rows0-255-v12ref_unapproved-v13_20261018-100938-075675cf.png": true,
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_changed-texels-vs-v12-mask_unapproved-v13_20261018-100938-075675cf.png": true
+ },
+ "pixelorama": {
+  "exe": "C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\tooling\\pixelorama-1-2-3\\Pixelorama-Windows-64bit\\Pixelorama.exe",
+  "exe_sha256": "6412014e27f31e6ad7eed64c1f4e80551a40c6cfd815bb00dc74b10f34b92f10",
+  "runs": {
+   "pxo_flat": {
+    "exit": 0,
+    "seconds": 4.2,
+    "pngs": 1,
+    "source_unchanged": true,
+    "fake_appdata_entries": 5,
+    "flat_exact": true
+   },
+   "pxo_split": {
+    "exit": 0,
+    "seconds": 4.3,
+    "pngs": 31,
+    "source_unchanged": true,
+    "fake_appdata_entries": 5,
+    "art_layers_exact": true,
+    "new_v13_layers_exact": true,
+    "guides_exported": false
+   },
+   "ora_flat": {
+    "exit": 0,
+    "seconds": 4.0,
+    "pngs": 1,
+    "source_unchanged": true,
+    "fake_appdata_entries": 5,
+    "flat_exact": true
+   },
+   "ora_split": {
+    "exit": 0,
+    "seconds": 4.3,
+    "pngs": 31,
+    "source_unchanged": true,
+    "fake_appdata_entries": 5,
+    "art_layers_exact": true,
+    "new_v13_layers_exact": true,
+    "guides_exported": false
+   }
+  },
+  "rt_base_from_pixelorama_split_exact": true,
+  "real_appdata_pixelorama_changes": [
+   ".running"
+  ],
+  "real_appdata_changes_other_than_gui_heartbeat_or_backups": []
+ },
+ "files_sha256": {
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_scene-32layer_unapproved-v13_20261018-100938-075675cf.pxo": "c3af41088212f1dc14a24e166d05ba34ab92229e9f909149bfa4e46b0f95ff4a",
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_scene-32layer_unapproved-v13_20261018-100938-075675cf.ora": "eaffb98e017168a55ba0ef674809b12fe2d8c3bb63347e83a8b356f14d17bc2b",
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_scene-flat-640x360_unapproved-v13_20261018-100938-075675cf.png": "d6c01aba39fcd6d59d929c6c7a6823a9689c6666863d3ed417947dbbc2e36eac",
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_scene-palette_unapproved-v13_20261018-100938-075675cf.gpl": "53229429853887058e5c5c20a13c8bcc332363eb2f1a75d57c2902ff5dfbc0e1",
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_rt-base_unapproved-v13_20261018-100938-075675cf.png": "cf1768928c964b306c2106573241b66eb86937f5bfcb88bd9bbca887974719d9",
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_rt-override-contract_unapproved-v13_20261018-100938-075675cf.json": "9e2191ce70d9db9953a1b28b4383e733e4afe042a1c312e72d88d01e0af51d25",
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_scene-manifest_unapproved-v13_20261018-100938-075675cf.json": "e2e3b3618c3dfef58baf3d022869dcc57688a7ca31dce8274b8f1c3566a16f91",
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_zoom6x-breach_unapproved-v13_20261018-100938-075675cf.png": "88217cf2a3c2316fea211567c1983bce2bd332680346ff8e3dc5f4156304b681",
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_zoom6x-breach-v12ref_unapproved-v13_20261018-100938-075675cf.png": "cbdb538efe7da7b614330b483080f0c5a2a62bb9c91fc7439d63e8ab2c33d436",
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_zoom3x-west-front_unapproved-v13_20261018-100938-075675cf.png": "708cddf81fdd8d6c784fe869acdac3f4c3c447b0c7bc5aed34c5c17328a78898",
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_zoom3x-west-front-v12ref_unapproved-v13_20261018-100938-075675cf.png": "46d6f1c52383679099a1c7d8fec4a8858ca8725789761243134f97d368a4a70c",
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_native640-vista-rows0-255_unapproved-v13_20261018-100938-075675cf.png": "c6bd1a2359daad5d10cde8c436c0e9adbb810cf125275090278543b5141acb3c",
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_native640-vista-rows0-255-v12ref_unapproved-v13_20261018-100938-075675cf.png": "68e3915de944227fceb017876b349e1e07061fa85294d51c32443439e2f0edf0",
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_changed-texels-vs-v12-mask_unapproved-v13_20261018-100938-075675cf.png": "86aeb1d94027f42c6ba3161c65af1d6196807c47b3bfc6e92ddc55a87590ddbe"
+ }
+}

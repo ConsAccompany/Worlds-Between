@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
   "planVersion": "v0.2",
-  "updatedAt": "2026-10-18T10:59:52Z",
+  "updatedAt": "2026-10-18T17:55:49Z",
   "currentStep": "M8",
   "steps": [
     {
@@ -588,7 +588,7 @@
       "kind": "candidate",
       "zh": "哨卫动画 v2",
       "en": "Sentry animation v2",
-      "detail": "修正遮挡与滑步的 21 帧候选，为当前运行默认。创作者已批准 v2 作为动作方向基准（仅动作方向）；完整精灵与美术均未验收，美术验收 0；v3–v5 候选未接入运行。",
+      "detail": "修正遮挡与滑步的 21 帧候选。已验证的 main 运行默认仍为占位方块；v2 仅可选启用（`-- --sentry-v2-pilot`，技术代码移植 3a0a97d），默认关闭。创作者已批准 v2 作为动作方向基准（仅动作方向）；完整精灵与美术均未验收，美术验收 0；v3–v5 候选未接入运行。",
       "awaiting": "用户美术验收"
     },
     {
@@ -654,7 +654,7 @@
     "kind": "weighted_delivery_estimate",
     "zh": "MVP 加权交付估算（不是正式批准）",
     "en": "MVP weighted delivery estimate (not formal approval)",
-    "updatedAt": "2026-10-18T10:59:52Z",
+    "updatedAt": "2026-10-18T17:55:49Z",
     "percent": 40.8,
     "percentLabel": "40.8%",
     "weightedPoints": 40.83,
@@ -974,8 +974,8 @@
     ],
     "updater": "tools/rpg-2-star-ocean-the-second_mvp-completion-meter_recompute-and-task-closeout-cli_v01_20261015-233032-d296a2cb.js",
     "lastUpdated": {
-      "at": "2026-10-18T10:59:52Z",
-      "closeoutId": "closeout-20261018-105952-06539c97",
+      "at": "2026-10-18T17:55:49Z",
+      "closeoutId": "closeout-20261018-175549-fa4c8600",
       "percent": 40.8
     },
     "taskCloseouts": [
@@ -3854,6 +3854,145 @@
         "evidence": [
           "outputs/rpg-2-star-ocean-the-second_cloud-tracker_v16-hosted-motion-playback-proof_20261018-064330-4a068f92.png",
           "outputs/rpg-2-star-ocean-the-second_cloud-tracker_v16-current-gallery-proof_20261018-064400-5b7c491e.png"
+        ]
+      },
+      {
+        "id": "closeout-20261018-131200-5597d7f5",
+        "recordedAt": "2026-10-18T13:12:00Z",
+        "kind": "task",
+        "title": {
+          "zh": "扬克斯天线走廊 1 号房 v06 户外可读性（101e9e0）：root 仅接受为技术候选、用于选择性同步；美术仍未批准（墙面更安静、设施更清楚，但大片墙面偏平、底座偏浅、三处平台布局仍呆板）。仅测试、未接入运行时：survey_annex.gd 仍载入 v03。源检查 12/12（官方 Pixelorama 精确），Godot ALL_OK（6 条线索／3 处转场／14 例碰撞），30 张截图像素检查 5/5，已验收房间 8/8 零像素差",
+          "en": "Yonkers antenna corridor room 1 v06 outdoor readability (101e9e0): root accepted the TECHNICAL candidate for selected synchronization only; ART remains UNAPPROVED (wall calmer and fixtures clearer, but large flat wall areas, pale bases and a rigid three-pad schematic layout). Test-only, nonruntime: survey_annex.gd still loads v03. Source 12/12 (official Pixelorama exact), Godot ALL_OK with 6 clues / 3 transitions / 14 collision cases, 30-capture pixel check 5/5, accepted rooms 8/8 at 0 px"
+        },
+        "impact": {
+          "changed": false,
+          "percentBefore": 40.8,
+          "percentAfter": 40.8,
+          "deltaPoints": 0,
+          "gateChanges": [],
+          "categoryChanges": []
+        },
+        "evidence": [
+          "docs/qa/rpg-2-star-ocean-the-second_yonkers-antenna-corridor-room1_v06-outdoor-readability-refinement_qa-note_unapproved-v06_20261018-084726-c8f0d900.md",
+          "outputs/yonkers-room1-v06_c8f0d900/rpg-2-star-ocean-the-second_yonkers-antenna-room1_readability-source-check-report_unapproved-v06_20261018-084726-c8f0d900.json",
+          "outputs/yonkers-room1-v06_c8f0d900/rpg-2-star-ocean-the-second_yonkers-antenna-room1_godot-v06-capture-replay-pixel-check-report_test-only_20261018-084726-c8f0d900.json",
+          "outputs/yonkers-room1-v06_c8f0d900/cap/rpg-2-star-ocean-the-second_yonkers-antenna-room1_v06-test-only-godot-zh-entry-640x360_20261018-084726-c8f0d900.png"
+        ]
+      },
+      {
+        "id": "closeout-20261018-131201-6f53f729",
+        "recordedAt": "2026-10-18T13:12:01Z",
+        "kind": "task",
+        "title": {
+          "zh": "私有 Site v18 正典角色标签（root 发布；源 1296f66b04a9a51aa71d7c4a29340e1f34310dfe，部署 appgdep_6ad4c068d41881919a4bf34ed075a21f 成功）：root 于约 08:50 核验生产界面——文化筛选 11、传送门星球 7、重置 51；正典搜索“文化”可用；资产说明映射已检查（文化 33／传送门星球 21）；标签与原始值映射及全部底层数据不变；私有 Site 受众不变",
+          "en": "Private Site v18 canon character labels (root-published; source 1296f66b04a9a51aa71d7c4a29340e1f34310dfe, deployment appgdep_6ad4c068d41881919a4bf34ed075a21f SUCCEEDED): root verified the production UI at about 08:50 - Culture filter 11, portal planet 7, reset 51; canon search 'Culture' works; inventory captions checked (33 Culture / 21 portal planet); label-to-raw-value mapping and all underlying data unchanged; private Site audience unchanged"
+        },
+        "impact": {
+          "changed": false,
+          "percentBefore": 40.8,
+          "percentAfter": 40.8,
+          "deltaPoints": 0,
+          "gateChanges": [],
+          "categoryChanges": []
+        },
+        "evidence": [
+          "docs/qa/rpg-2-star-ocean-the-second_private-site-v18_canon-character-labels-publication_operational-qa_v01_20261018-091121-196d4d3b.md",
+          "outputs/rpg-2-star-ocean-the-second_cloud-tracker_canon-character-labels-complete-live-proof_v18_20261018-085430-d1a493f8.jpg"
+        ]
+      },
+      {
+        "id": "closeout-20261018-134000-e7fe3594",
+        "recordedAt": "2026-10-18T13:40:00Z",
+        "kind": "task",
+        "title": {
+          "zh": "战斗女主 待机静止帧 v14（8e57dd3，自 d43615f 拣选）：root 仅接受为技术静止候选——衣料更饱满、细靴与膝间更自然，但暗地面上外套与双脚仍融在一起，背部细节偏碎。不是美术批准，不是动作，也不是完整精灵；只有 0.65 战斗比例已批准；精灵仍为 0/52。证据：工作树检查 63/63（无 Pixelorama 为 61/61，8e57dd3 的 CRLF 转换检出亦通过），6 张中英 Godot 探针截图，1590/1590 精灵像素一致",
+          "en": "Female battle idle STATIC v14 (8e57dd3, cherry-picked from d43615f): root accepted a TECHNICAL static candidate only - fuller cloth and more natural slim boots / knee gap, but on the dark floor the coat and feet still blend and the back details are busy. Not art approval, not motion, not a full sprite; only the 0.65 battle proportion is approved; sprites stay 0/52. Evidence: check 63/63 in the worker tree (61/61 without Pixelorama, also from a CRLF-converted checkout of 8e57dd3), 6 zh/en Godot probe captures with 1590/1590 sprite texels exact"
+        },
+        "impact": {
+          "changed": false,
+          "percentBefore": 40.8,
+          "percentAfter": 40.8,
+          "deltaPoints": 0,
+          "gateChanges": [],
+          "categoryChanges": []
+        },
+        "evidence": [
+          "docs/qa/rpg-2-star-ocean-the-second_protagonist-female_battle-static-v14-cloth-volume-leg-anatomy_qa-note_unapproved-v01_20261018-084553-dda2c05f.md",
+          "outputs/rpg-2-star-ocean-the-second_protagonist-female_battle-static-v14_isolated-160b823-check-and-measure-report_unapproved-v14_20261018-084553-36497cfe.json",
+          "outputs/rpg-2-star-ocean-the-second_protagonist-female_sideview-idle-right-static-native0p65_party-capture-archive-640-probe-zh_unapproved-v14_20261018-084553-5a0ec9d0.png",
+          "outputs/rpg-2-star-ocean-the-second_protagonist-female_sideview-idle-right-static-native0p65_party-capture-outskirts-640-probe-zh_unapproved-v14_20261018-084553-f1b7abb6.png"
+        ]
+      },
+      {
+        "id": "closeout-20261018-140500-39e41863",
+        "recordedAt": "2026-10-18T14:05:00Z",
+        "kind": "task",
+        "title": {
+          "zh": "男主朝南待机 v8pair 静止帧试点 v01（2b60d2e，自 5693ab6 拣选）：root 仅接受为技术静止候选——自身的发型、围巾、棕色外套与铺盖卷辨识清楚，也比旧 v02 更少噪点；但衬衫是一大块亮色，头发过于整齐，外套与裤子在暗色附楼中融在一起，细节少于 v8。美术未批准；无动画、无其他朝向、不是完整精灵；精灵仍为 0/52。证据：缩放 0.5 下 48 逻辑像素，在明亮城市与暗色附楼的实际 1280×720 Godot 窗口（640×360 逻辑视口）中 2488/2488 像素一致，中英界面，单人及与已批准女主 v8 并列",
+          "en": "Male protagonist south idle v8pair STATIC pilot v01 (2b60d2e, cherry-picked from 5693ab6): root accepted a TECHNICAL static candidate only - own hair, scarf, brown coat and bedroll identity read clearly and less noisy than the old v02, but the shirt is a bright block, the hair is too tidy, the coat and trousers blend into the dark annex and it carries less detail than v8. ART UNAPPROVED; no animation, no other direction, not a full sprite; sprites stay 0/52. Evidence: 48 logical px at scale 0.5, 2488/2488 texels exact in actual 1280x720 Godot windows (640x360 logical) in the bright city and dark annex, zh/en, solo and beside the approved female v8"
+        },
+        "impact": {
+          "changed": false,
+          "percentBefore": 40.8,
+          "percentAfter": 40.8,
+          "deltaPoints": 0,
+          "gateChanges": [],
+          "categoryChanges": []
+        },
+        "evidence": [
+          "docs/qa/rpg-2-star-ocean-the-second_protagonist-male_south-idle-v8pair-static-pilot_qa-note_unapproved-v01_20261018-130225-3fad02c7.md",
+          "outputs/rpg-2-star-ocean-the-second_protagonist-male_south-idle-v8pair-godot-capture-report_unapproved-v01_20261018-131126-1bae8044.json",
+          "outputs/rpg-2-star-ocean-the-second_protagonist-male_south-idle-v8pair-city-bright-en-with-female-v8-1x_unapproved-v01_20261018-131126-1bae8044.png",
+          "outputs/rpg-2-star-ocean-the-second_protagonist-male_south-idle-v8pair-annex-room2-dark-en-with-female-v8-1x_unapproved-v01_20261018-131126-1bae8044.png"
+        ]
+      },
+      {
+        "id": "closeout-20261018-144500-c6755462",
+        "recordedAt": "2026-10-18T14:45:00Z",
+        "kind": "task",
+        "title": {
+          "zh": "纪澄朝南待机静止帧试点 v01（31705c4，自 7a011d8 拣选）：root 仅接受为技术静止候选——绿色长外套、举起的放大镜、书与后掠发型比旧形象更好，但姿势正面僵硬、靴子厚重、发梢含糊、米色布料对比偏弱。美术未批准；其来源立绘仍为概念稿（未批准，也不是正典新设计）；无动画、无其他朝向、不是完整精灵、未接入；精灵仍为 0/52。证据：含 Pixelorama 1.2.3 的检查 PASS，48 逻辑像素（在显示 640×360 逻辑视口的实际 1280×720 Godot 窗口中 2820/2820 像素一致），另有原生 640×360 截图，明亮城市与暗色附楼，中英界面，单人及与女主 v8 并列",
+          "en": "Ji Cheng south idle STATIC pilot v01 (31705c4, cherry-picked from 7a011d8): root accepted a TECHNICAL static candidate only - the green long coat, raised loupe, book and swept hair improve on the old identity, but the pose is frontal and stiff, the boots are heavy, the hair tips are ambiguous and the cream cloth contrast is weak. ART UNAPPROVED; her source portrait remains a concept (not approved, not a canonical new design); no animation, no other direction, not a full sprite, not integrated; sprites stay 0/52. Evidence: check PASS with Pixelorama 1.2.3, 48 logical px (2820/2820 texels exact in actual 1280x720 Godot windows showing the 640x360 logical viewport) plus native 640x360 captures, bright city and dark annex, zh/en, solo and beside female v8"
+        },
+        "impact": {
+          "changed": false,
+          "percentBefore": 40.8,
+          "percentAfter": 40.8,
+          "deltaPoints": 0,
+          "gateChanges": [],
+          "categoryChanges": []
+        },
+        "evidence": [
+          "docs/qa/rpg-2-star-ocean-the-second_ji-cheng_south-idle-static-pilot_qa-note_unapproved-v01_20261018-132812-23499262.md",
+          "outputs/rpg-2-star-ocean-the-second_ji-cheng_south-idle-static-godot-capture-report_unapproved-v01_20261018-133420-cab29676.json",
+          "outputs/rpg-2-star-ocean-the-second_ji-cheng_south-idle-static-pixelorama-check-report_unapproved-v01_20261018-132812-87d370be.json",
+          "outputs/rpg-2-star-ocean-the-second_ji-cheng_south-idle-static-annex-room2-dark-en-with-female-v8-1280-1x_unapproved-v01_20261018-133420-cab29676.png",
+          "outputs/rpg-2-star-ocean-the-second_ji-cheng_south-idle-static-city-bright-en-native-640-1x_unapproved-v01_20261018-133420-cab29676.png"
+        ]
+      },
+      {
+        "id": "closeout-20261018-175549-fa4c8600",
+        "recordedAt": "2026-10-18T17:55:49Z",
+        "kind": "task",
+        "title": {
+          "zh": "哨卫 v2 可选启用试点技术移植（3a0a97d）：root 仅接受技术代码移植——battle_arena.gd +218/−3，默认关闭；`-- --sentry-v2-pilot`（静态 sentry_v2_override −1/0/1）才启用仅限哨卫的 v2 载入、视觉辅助与绘制顺序；巡逻机不变。已验证的 main 默认仍绘制占位方块；进度状态中 sentry-v2 决策不再声称 v2 为当前运行默认。创作者批准仍仅为动作方向；完整精灵与美术未验收，美术验收 0；命中帧 17 眼部被主角部分遮挡、几何占位背景仍在；不存在 PXO/ORA。证据：默认关闭像素一致 32/32 截图 0 像素差异（对比 eb70de1；开启时巡逻机 16/16 不变、哨卫 16/16 不同），无头 281 项、窗口 789 项／21 帧检查，600 步战斗一致；一致性截图已改为带时间戳与 ID 的文件名（96 张 PNG 字节不变，重新截图完全一致）",
+          "en": "Sentry v2 opt-in pilot technical port (3a0a97d): root accepted the TECHNICAL code port only - battle_arena.gd +218/-3, OFF by default; `-- --sentry-v2-pilot` (static sentry_v2_override -1/0/1) enables the sentry-only v2 loaders, visual helpers and draw order; patrol untouched. Verified main still draws the placeholder block by default; the progress-state sentry-v2 decision no longer claims v2 is the current runtime default. Creator approval stays action direction only; full sprite and art not accepted, art acceptance 0; eye partly occluded by the hero in hit frame 17 and the geometric placeholder backdrop remain; no PXO/ORA exists. Evidence: default-off parity 32/32 captures 0 px vs eb70de1 (flag on: patrol 16/16 unchanged, sentry 16/16 differ), headless 281 checks, windowed 789 checks / 21 frames, 600-step combat parity; parity files renamed to stamped names (96 PNGs byte-identical, fresh recapture identical)"
+        },
+        "impact": {
+          "changed": false,
+          "percentBefore": 40.8,
+          "percentAfter": 40.8,
+          "deltaPoints": 0,
+          "gateChanges": [],
+          "categoryChanges": []
+        },
+        "evidence": [
+          "docs/qa/rpg-2-star-ocean-the-second_scifi-sentry-automaton_v2-optin-portability_qa-note_unapproved-v01_20261018-103500-7d2e91b4.md",
+          "outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_capture-manifest_20261018-102755-e4b20e2e.json",
+          "outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/parity/rpg-2-star-ocean-the-second_sentry-v2-parity_compare-report_20261018-102755-e4b20e2e.json",
+          "outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_parity-rename-receipt_20261018-135103-7a97ecda.json",
+          "outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_default-off-placeholder-windup-en-640_20261018-102755-e4b20e2e.png",
+          "outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_hit-recover-sword-thrust-f17-zh-640_20261018-102755-e4b20e2e.png"
         ]
       }
     ]
