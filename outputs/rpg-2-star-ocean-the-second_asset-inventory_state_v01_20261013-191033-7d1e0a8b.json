@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-18T22:08:10.716934+00:00",
+  "updatedAt": "2026-10-18T23:02:55.454523+00:00",
   "definition": "A check means that the specific asset has been accepted for its stated purpose. Source character sheets, in-game displays, exploration sprites, combat sprites and scene quality have separate acceptance gates.",
   "categories": [
     {
@@ -1250,12 +1250,21 @@
                 "idleTask": "content.char.protagonist-female.idle-anim",
                 "idleStatus": "done",
                 "runtimeFullSetAccepted": false,
-                "nativeFormatLimitation": "Existing ORA native exports match pixels but can emit inherited Pixelorama UI/shutdown diagnostics; GUI SaveAs not verified. Animated PXO/source checks recorded separately.",
+                "nativeFormatLimitation": "Idle ORA exact exports retain inherited UI/shutdown diagnostics. WEST128-frame PXO browser GUI SaveAs and fresh reopen independently observed; desktop GUI reliability remains unverified.",
                 "idleEvidence": "outputs/female-idle-four-v01/rpg-2-star-ocean-the-second_female-idle-four_evidence-manifest_v01_20261018-175418-34294d7d.json",
                 "westRunTask": "content.char.protagonist-female.walk-west",
                 "westRunStatus": "done",
                 "westRunEvidence": "outputs/female-west-run-stop-v01/rpg-2-star-ocean-the-second_female-west-run-stop_evidence-manifest_v01_20261018-183043-c704ea98.json",
-                "westRunScope": "One WEST run/phase-responsive stop produced;25260 exact-boundary and2150 portable checks. Sampled actual640x360 playback/poses, no fluidity/art/fullset approval; EAST reversal static placeholder;46-49logical moving extent vs48static baseline."
+                "westRunScope": "One WEST run/phase-responsive stop produced;25260 exact-boundary and2150 portable checks. Sampled actual640x360 playback/poses, no fluidity/art/fullset approval; EAST reversal static placeholder;46-49logical moving extent vs48static baseline.",
+                "westRunWebGuiSaveReopen": {
+                  "status": "verified-browser-only",
+                  "frames": 128,
+                  "layers": 13,
+                  "exactRawCells": 1664,
+                  "evidence": "docs/qa/rpg-2-star-ocean-the-second_female-west-run_browser-gui-saveas-fresh-reopen_v01_20261018-190520-0e195fd8.md",
+                  "artApproval": false,
+                  "desktopGuiReliability": "unverified"
+                }
               }
             },
             {
