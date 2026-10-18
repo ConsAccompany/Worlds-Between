@@ -1,0 +1,828 @@
+{
+ "purpose": "normal-speed review MP4s and separate critical-frame PNGs of the female SOUTH RUN v10r1 (real Godot, native 1280x720 window of the 640x360 logical canvas, gameplay 48 logical px); UNAPPROVED / NONRUNTIME",
+ "art_approved": false,
+ "human_reviewed": false,
+ "runtime_integrated": false,
+ "same_input_as": "v07 / v09 / v10 reels (REEL_SEGS of the v09 capture tool, inherited unchanged); compare with outputs/*female-south-run-v10-showreel-1x-* (20261018-143213) and v0[79] (20261018-133700)",
+ "encode": "ffmpeg libx264 -preset slow -crf 12 -pix_fmt yuv420p from lossless 1280x720 PNG window captures; every MP4 frame count == captured ticks (ffprobe -count_frames); critical PNGs are byte copies",
+ "segments_note": "segments: [name, first tick, ticks] at 60 fps units x fps/60: idle, start + sustained run, quick release (3 @60) + re-press, reversal to north (runtime placeholder sprite, not pilot art), south again, stop to v8, short run, stop to v8",
+ "capture_receipt": "rpg-2-star-ocean-the-second_city-annex_female-south-run-v10r1-capture-receipt-h48_unapproved_20261018-182800-9ee66cb8.json",
+ "mp4": {
+  "rpg-2-star-ocean-the-second_city-bright_female-south-run-v10r1-showreel-1x-win1280-of-640-30fps-h48_unapproved_20261018-142136-68e7ba6b.mp4": {
+   "scene": "city-bright",
+   "fps": 30,
+   "kind": "showreel-1x-normal-speed",
+   "frames": 94,
+   "width": 1280,
+   "height": 720,
+   "native_window": [
+    1280,
+    720
+   ],
+   "logical_canvas": [
+    640,
+    360
+   ],
+   "sha256_bytes": "34f49343bbce9761619abdb7bb31bbbc43b07aec8fb70056e167fb424fca8ba8",
+   "capture_tag": "v10r1_city-bright_showreel-30fps",
+   "segments": [
+    [
+     "idle",
+     0,
+     9
+    ],
+    [
+     "down",
+     9,
+     18
+    ],
+    [
+     "idle",
+     27,
+     2
+    ],
+    [
+     "down",
+     29,
+     6
+    ],
+    [
+     "up",
+     35,
+     12
+    ],
+    [
+     "down",
+     47,
+     12
+    ],
+    [
+     "idle",
+     59,
+     15
+    ],
+    [
+     "down",
+     74,
+     5
+    ],
+    [
+     "idle",
+     79,
+     15
+    ]
+   ],
+   "releases": [
+    {
+     "interrupted_by_input_before_v8": true,
+     "release_tick": 27,
+     "released_at_phase_px": 112,
+     "v8_after_ms": -1.0,
+     "v8_at_tick": -1
+    },
+    {
+     "interrupted_by_input_before_v8": false,
+     "release_tick": 59,
+     "released_at_phase_px": 47,
+     "v8_after_ms": 200.0,
+     "v8_at_tick": 64
+    },
+    {
+     "interrupted_by_input_before_v8": false,
+     "release_tick": 79,
+     "released_at_phase_px": 55,
+     "v8_after_ms": 200.0,
+     "v8_at_tick": 84
+    }
+   ]
+  },
+  "rpg-2-star-ocean-the-second_annex-dark_female-south-run-v10r1-showreel-1x-win1280-of-640-60fps-h48_unapproved_20261018-142136-ec71ab8a.mp4": {
+   "scene": "annex-dark",
+   "fps": 60,
+   "kind": "showreel-1x-normal-speed",
+   "frames": 187,
+   "width": 1280,
+   "height": 720,
+   "native_window": [
+    1280,
+    720
+   ],
+   "logical_canvas": [
+    640,
+    360
+   ],
+   "sha256_bytes": "ac7e1efe10c2ab8bb1f04b5737ea71a9f4aba0cdd365599ca281b6620943494f",
+   "capture_tag": "v10r1_annex-dark_showreel-60fps",
+   "segments": [
+    [
+     "idle",
+     0,
+     18
+    ],
+    [
+     "down",
+     18,
+     36
+    ],
+    [
+     "idle",
+     54,
+     3
+    ],
+    [
+     "down",
+     57,
+     12
+    ],
+    [
+     "up",
+     69,
+     24
+    ],
+    [
+     "down",
+     93,
+     24
+    ],
+    [
+     "idle",
+     117,
+     30
+    ],
+    [
+     "down",
+     147,
+     10
+    ],
+    [
+     "idle",
+     157,
+     30
+    ]
+   ],
+   "releases": [
+    {
+     "interrupted_by_input_before_v8": true,
+     "release_tick": 54,
+     "released_at_phase_px": 112,
+     "v8_after_ms": -1.0,
+     "v8_at_tick": -1
+    },
+    {
+     "interrupted_by_input_before_v8": false,
+     "release_tick": 117,
+     "released_at_phase_px": 51,
+     "v8_after_ms": 150.0,
+     "v8_at_tick": 125
+    },
+    {
+     "interrupted_by_input_before_v8": false,
+     "release_tick": 157,
+     "released_at_phase_px": 55,
+     "v8_after_ms": 150.0,
+     "v8_at_tick": 165
+    }
+   ]
+  }
+ },
+ "critical_frames": {
+  "rpg-2-star-ocean-the-second_city-bright_female-south-run-v10r1-strike-t021-win1280-of-640-30fps-h48_unapproved_20261018-142136-ce6e4042.png": {
+   "scene": "city-bright",
+   "fps": 30,
+   "label": "strike",
+   "tick": 21,
+   "ms_since_reel_start": 700.0,
+   "native_window": [
+    1280,
+    720
+   ],
+   "logical_canvas": [
+    640,
+    360
+   ],
+   "sha256_bytes": "faa6fcad98394c12cd4fa22d0740646ccca49d201e5385550f28415ad6faa949",
+   "input": true,
+   "show_v8": false,
+   "modes": {
+    "vl": "swing",
+    "vr": "contact"
+   },
+   "state": {
+    "arms": {
+     "L": "B1",
+     "R": "F1"
+    },
+    "bob": 0,
+    "csx": 0,
+    "feet": {
+     "vl": {
+      "kin": 1,
+      "lift": 4,
+      "o": -29,
+      "view": "kick"
+     },
+     "vr": {
+      "kin": 1,
+      "lift": 0,
+      "o": 7,
+      "view": "strike"
+     }
+    },
+    "hdy": 0,
+    "sx": 0
+   },
+   "events": [
+    [
+     "land",
+     "vr",
+     7
+    ]
+   ]
+  },
+  "rpg-2-star-ocean-the-second_city-bright_female-south-run-v10r1-flight-t026-win1280-of-640-30fps-h48_unapproved_20261018-142136-762d5cba.png": {
+   "scene": "city-bright",
+   "fps": 30,
+   "label": "flight",
+   "tick": 26,
+   "ms_since_reel_start": 866.7,
+   "native_window": [
+    1280,
+    720
+   ],
+   "logical_canvas": [
+    640,
+    360
+   ],
+   "sha256_bytes": "f6d058095ba9b80f5b4b0310e74c6e3716211efa89b2aac483dc4b8c19ad2437",
+   "input": true,
+   "show_v8": false,
+   "modes": {
+    "vl": "swing",
+    "vr": "swing"
+   },
+   "state": {
+    "arms": {
+     "L": "N",
+     "R": "N"
+    },
+    "bob": 0,
+    "csx": 1,
+    "feet": {
+     "vl": {
+      "kin": 1,
+      "lift": 2,
+      "o": 2,
+      "view": "reach"
+     },
+     "vr": {
+      "kin": 0,
+      "lift": 2,
+      "o": -35,
+      "view": "toe"
+     }
+    },
+    "hdy": 1,
+    "sx": 0
+   },
+   "events": [
+    [
+     "lift",
+     "vr"
+    ]
+   ]
+  },
+  "rpg-2-star-ocean-the-second_city-bright_female-south-run-v10r1-repress-land-t034-win1280-of-640-30fps-h48_unapproved_20261018-142136-842d0f90.png": {
+   "scene": "city-bright",
+   "fps": 30,
+   "label": "repress-land",
+   "tick": 34,
+   "ms_since_reel_start": 1133.3,
+   "native_window": [
+    1280,
+    720
+   ],
+   "logical_canvas": [
+    640,
+    360
+   ],
+   "sha256_bytes": "847152e1b05525b7f62fef21ab8096464eb7a8b20c01dd1365a0af9ec87a64e3",
+   "input": true,
+   "show_v8": false,
+   "modes": {
+    "vl": "swing",
+    "vr": "contact"
+   },
+   "state": {
+    "arms": {
+     "L": "N",
+     "R": "N"
+    },
+    "bob": 0,
+    "csx": 0,
+    "feet": {
+     "vl": {
+      "kin": 1,
+      "lift": 4,
+      "o": -29,
+      "view": "kick"
+     },
+     "vr": {
+      "kin": 1,
+      "lift": 0,
+      "o": 8,
+      "view": "strike"
+     }
+    },
+    "hdy": 0,
+    "sx": 0
+   },
+   "events": [
+    [
+     "land",
+     "vr",
+     8
+    ]
+   ]
+  },
+  "rpg-2-star-ocean-the-second_city-bright_female-south-run-v10r1-stop-release-t059-win1280-of-640-30fps-h48_unapproved_20261018-142136-6ad0000b.png": {
+   "scene": "city-bright",
+   "fps": 30,
+   "label": "stop-release",
+   "tick": 59,
+   "ms_since_reel_start": 1966.7,
+   "native_window": [
+    1280,
+    720
+   ],
+   "logical_canvas": [
+    640,
+    360
+   ],
+   "sha256_bytes": "d0cfd37e74278be9dd0c3f8962fa6db3c5db74ae469395a290e5dbb33c42226b",
+   "input": false,
+   "show_v8": false,
+   "modes": {
+    "vl": "land",
+    "vr": "land"
+   },
+   "state": {
+    "arms": {
+     "L": "N",
+     "R": "N"
+    },
+    "bob": 0,
+    "csx": 0,
+    "feet": {
+     "vl": {
+      "kin": 0,
+      "lift": 2,
+      "o": -15,
+      "view": "reach"
+     },
+     "vr": {
+      "kin": 0,
+      "lift": 2,
+      "o": 1,
+      "view": "reach"
+     }
+    },
+    "hdy": 0,
+    "sx": 0
+   },
+   "events": [
+    [
+     "land-move-start",
+     "vl",
+     -35
+    ],
+    [
+     "land-move-start",
+     "vr",
+     1
+    ],
+    [
+     "release"
+    ]
+   ]
+  },
+  "rpg-2-star-ocean-the-second_city-bright_female-south-run-v10r1-stop-land-t061-win1280-of-640-30fps-h48_unapproved_20261018-142136-944b3588.png": {
+   "scene": "city-bright",
+   "fps": 30,
+   "label": "stop-land",
+   "tick": 61,
+   "ms_since_reel_start": 2033.3,
+   "native_window": [
+    1280,
+    720
+   ],
+   "logical_canvas": [
+    640,
+    360
+   ],
+   "sha256_bytes": "9a2c0585b493b48a8ac60cdea2af9f4cfff9de2c6edc93fc3373aadd4fd7d7a7",
+   "input": false,
+   "show_v8": false,
+   "modes": {
+    "vl": "contact",
+    "vr": "contact"
+   },
+   "state": {
+    "arms": {
+     "L": "N",
+     "R": "N"
+    },
+    "bob": 1,
+    "csx": 1,
+    "feet": {
+     "vl": {
+      "kin": 0,
+      "lift": 0,
+      "o": 0,
+      "view": "v8"
+     },
+     "vr": {
+      "kin": 0,
+      "lift": 0,
+      "o": 0,
+      "view": "v8"
+     }
+    },
+    "hdy": -1,
+    "sx": 1
+   },
+   "events": [
+    [
+     "land",
+     "vl",
+     0
+    ]
+   ]
+  },
+  "rpg-2-star-ocean-the-second_city-bright_female-south-run-v10r1-stop-v8-t064-win1280-of-640-30fps-h48_unapproved_20261018-142136-c393c9fd.png": {
+   "scene": "city-bright",
+   "fps": 30,
+   "label": "stop-v8",
+   "tick": 64,
+   "ms_since_reel_start": 2133.3,
+   "native_window": [
+    1280,
+    720
+   ],
+   "logical_canvas": [
+    640,
+    360
+   ],
+   "sha256_bytes": "55fda82b1b2d9e8b8d6b3309b1abe3409495998524e8edf3bb7d15d30f127369",
+   "input": false,
+   "show_v8": true,
+   "modes": {
+    "vl": "contact",
+    "vr": "contact"
+   },
+   "state": {
+    "arms": {
+     "L": "N",
+     "R": "N"
+    },
+    "bob": 0,
+    "csx": 0,
+    "feet": {
+     "vl": {
+      "kin": 0,
+      "lift": 0,
+      "o": 0,
+      "view": "v8"
+     },
+     "vr": {
+      "kin": 0,
+      "lift": 0,
+      "o": 0,
+      "view": "v8"
+     }
+    },
+    "hdy": 0,
+    "sx": 0
+   },
+   "events": []
+  },
+  "rpg-2-star-ocean-the-second_annex-dark_female-south-run-v10r1-strike-t043-win1280-of-640-60fps-h48_unapproved_20261018-142136-17b6fa1f.png": {
+   "scene": "annex-dark",
+   "fps": 60,
+   "label": "strike",
+   "tick": 43,
+   "ms_since_reel_start": 716.7,
+   "native_window": [
+    1280,
+    720
+   ],
+   "logical_canvas": [
+    640,
+    360
+   ],
+   "sha256_bytes": "2bd58aefe13fbf47f86d192e8998686e4179ea89deef88ba2777c3718274df28",
+   "input": true,
+   "show_v8": false,
+   "modes": {
+    "vl": "swing",
+    "vr": "contact"
+   },
+   "state": {
+    "arms": {
+     "L": "B1",
+     "R": "F1"
+    },
+    "bob": 0,
+    "csx": 0,
+    "feet": {
+     "vl": {
+      "kin": 1,
+      "lift": 4,
+      "o": -29,
+      "view": "kick"
+     },
+     "vr": {
+      "kin": 1,
+      "lift": 0,
+      "o": 7,
+      "view": "strike"
+     }
+    },
+    "hdy": 0,
+    "sx": 0
+   },
+   "events": [
+    [
+     "land",
+     "vr",
+     7
+    ]
+   ]
+  },
+  "rpg-2-star-ocean-the-second_annex-dark_female-south-run-v10r1-flight-t053-win1280-of-640-60fps-h48_unapproved_20261018-142136-738025d9.png": {
+   "scene": "annex-dark",
+   "fps": 60,
+   "label": "flight",
+   "tick": 53,
+   "ms_since_reel_start": 883.3,
+   "native_window": [
+    1280,
+    720
+   ],
+   "logical_canvas": [
+    640,
+    360
+   ],
+   "sha256_bytes": "00bf55158a02e97d48f9d82727d92800eff877f958141be65cc9ce785f8a02c6",
+   "input": true,
+   "show_v8": false,
+   "modes": {
+    "vl": "swing",
+    "vr": "swing"
+   },
+   "state": {
+    "arms": {
+     "L": "N",
+     "R": "N"
+    },
+    "bob": 0,
+    "csx": 0,
+    "feet": {
+     "vl": {
+      "kin": 1,
+      "lift": 2,
+      "o": 2,
+      "view": "reach"
+     },
+     "vr": {
+      "kin": 0,
+      "lift": 2,
+      "o": -35,
+      "view": "toe"
+     }
+    },
+    "hdy": 0,
+    "sx": 0
+   },
+   "events": [
+    [
+     "lift",
+     "vr"
+    ]
+   ]
+  },
+  "rpg-2-star-ocean-the-second_annex-dark_female-south-run-v10r1-repress-land-t068-win1280-of-640-60fps-h48_unapproved_20261018-142136-6971d8bf.png": {
+   "scene": "annex-dark",
+   "fps": 60,
+   "label": "repress-land",
+   "tick": 68,
+   "ms_since_reel_start": 1133.3,
+   "native_window": [
+    1280,
+    720
+   ],
+   "logical_canvas": [
+    640,
+    360
+   ],
+   "sha256_bytes": "5fcdfa12e8b13b60dfb16cfe7fbee076b9a7564a4bea2728545bd7165f50e995",
+   "input": true,
+   "show_v8": false,
+   "modes": {
+    "vl": "swing",
+    "vr": "contact"
+   },
+   "state": {
+    "arms": {
+     "L": "B1",
+     "R": "F1"
+    },
+    "bob": 0,
+    "csx": 0,
+    "feet": {
+     "vl": {
+      "kin": 1,
+      "lift": 4,
+      "o": -29,
+      "view": "kick"
+     },
+     "vr": {
+      "kin": 1,
+      "lift": 0,
+      "o": 8,
+      "view": "strike"
+     }
+    },
+    "hdy": 0,
+    "sx": 0
+   },
+   "events": [
+    [
+     "land",
+     "vr",
+     8
+    ]
+   ]
+  },
+  "rpg-2-star-ocean-the-second_annex-dark_female-south-run-v10r1-stop-release-t117-win1280-of-640-60fps-h48_unapproved_20261018-142136-2563769d.png": {
+   "scene": "annex-dark",
+   "fps": 60,
+   "label": "stop-release",
+   "tick": 117,
+   "ms_since_reel_start": 1950.0,
+   "native_window": [
+    1280,
+    720
+   ],
+   "logical_canvas": [
+    640,
+    360
+   ],
+   "sha256_bytes": "9c327508e1537f001e08f0fbc0b7602b8e2c62d082326505cd9b56ee4d3238d2",
+   "input": false,
+   "show_v8": false,
+   "modes": {
+    "vl": "land",
+    "vr": "land"
+   },
+   "state": {
+    "arms": {
+     "L": "N",
+     "R": "N"
+    },
+    "bob": 0,
+    "csx": 0,
+    "feet": {
+     "vl": {
+      "kin": 0,
+      "lift": 2,
+      "o": -25,
+      "view": "toe"
+     },
+     "vr": {
+      "kin": 1,
+      "lift": 2,
+      "o": 2,
+      "view": "reach"
+     }
+    },
+    "hdy": 0,
+    "sx": 0
+   },
+   "events": [
+    [
+     "land-move-start",
+     "vl",
+     -34
+    ],
+    [
+     "land-move-start",
+     "vr",
+     3
+    ],
+    [
+     "release"
+    ]
+   ]
+  },
+  "rpg-2-star-ocean-the-second_annex-dark_female-south-run-v10r1-stop-land-t120-win1280-of-640-60fps-h48_unapproved_20261018-142136-577b4b4c.png": {
+   "scene": "annex-dark",
+   "fps": 60,
+   "label": "stop-land",
+   "tick": 120,
+   "ms_since_reel_start": 2000.0,
+   "native_window": [
+    1280,
+    720
+   ],
+   "logical_canvas": [
+    640,
+    360
+   ],
+   "sha256_bytes": "401f7f70a5ae02a8f03310051f86abc695ebf4173d83b409e26aec2003ebda0a",
+   "input": false,
+   "show_v8": false,
+   "modes": {
+    "vl": "contact",
+    "vr": "contact"
+   },
+   "state": {
+    "arms": {
+     "L": "N",
+     "R": "N"
+    },
+    "bob": 1,
+    "csx": 1,
+    "feet": {
+     "vl": {
+      "kin": 0,
+      "lift": 0,
+      "o": 0,
+      "view": "v8"
+     },
+     "vr": {
+      "kin": 0,
+      "lift": 0,
+      "o": 0,
+      "view": "v8"
+     }
+    },
+    "hdy": -1,
+    "sx": 1
+   },
+   "events": [
+    [
+     "land",
+     "vl",
+     0
+    ]
+   ]
+  },
+  "rpg-2-star-ocean-the-second_annex-dark_female-south-run-v10r1-stop-v8-t125-win1280-of-640-60fps-h48_unapproved_20261018-142136-46db5c0d.png": {
+   "scene": "annex-dark",
+   "fps": 60,
+   "label": "stop-v8",
+   "tick": 125,
+   "ms_since_reel_start": 2083.3,
+   "native_window": [
+    1280,
+    720
+   ],
+   "logical_canvas": [
+    640,
+    360
+   ],
+   "sha256_bytes": "4a0a59c38112a9df1da72aea0883e848628308f725e0942c15f006252681ce45",
+   "input": false,
+   "show_v8": true,
+   "modes": {
+    "vl": "contact",
+    "vr": "contact"
+   },
+   "state": {
+    "arms": {
+     "L": "N",
+     "R": "N"
+    },
+    "bob": 0,
+    "csx": 0,
+    "feet": {
+     "vl": {
+      "kin": 0,
+      "lift": 0,
+      "o": 0,
+      "view": "v8"
+     },
+     "vr": {
+      "kin": 0,
+      "lift": 0,
+      "o": 0,
+      "view": "v8"
+     }
+    },
+    "hdy": 0,
+    "sx": 0
+   },
+   "events": []
+  }
+ }
+}
