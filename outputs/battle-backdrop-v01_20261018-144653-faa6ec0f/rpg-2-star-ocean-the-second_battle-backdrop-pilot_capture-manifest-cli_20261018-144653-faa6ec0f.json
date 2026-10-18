@@ -1,0 +1,404 @@
+{
+  "artApproved": false,
+  "battleScriptSha256Bytes": "5b69823ff3acca2f1ab6241c4de9c3f2be2c0c94b78d366249f51fe3955173d2",
+  "captures": [],
+  "checks": [
+    {
+      "label": "BATTLE_BACKDROP_ART_APPROVED is false (no band is approved)",
+      "pass": true
+    },
+    {
+      "label": "static override untouched (-1); the loader is on exactly as the CLI flag says",
+      "pass": true
+    },
+    {
+      "label": "scifi.outskirts encounter opens the battle through the exploration area's change_scene",
+      "pass": true
+    },
+    {
+      "label": "scifi.outskirts encounter (patrol): status loaded arena 'outskirts' (expected loaded 'outskirts')",
+      "pass": true
+    },
+    {
+      "label": "scifi.outskirts encounter: band texture present only when loaded",
+      "pass": true
+    },
+    {
+      "label": "scifi.outskirts encounter: sentry v2 sprite only with its own flag on the sentry",
+      "pass": true
+    },
+    {
+      "label": "scifi.ruins encounter opens the battle through the exploration area's change_scene",
+      "pass": true
+    },
+    {
+      "label": "scifi.ruins encounter (sentry): status no_band arena 'ruins' (expected no_band 'ruins')",
+      "pass": true
+    },
+    {
+      "label": "scifi.ruins encounter: band texture present only when loaded",
+      "pass": true
+    },
+    {
+      "label": "scifi.ruins encounter: sentry v2 sprite only with its own flag on the sentry",
+      "pass": true
+    },
+    {
+      "label": "selection scifi.outskirts + arena override '' -> arena 'outskirts' status loaded (got 'outskirts' loaded)",
+      "pass": true
+    },
+    {
+      "label": "outskirts band is the tracked file (sha256-bytes feea6297...)",
+      "pass": true
+    },
+    {
+      "label": "outskirts band: source 1280x424 drawn as a 640x212 logical texture",
+      "pass": true
+    },
+    {
+      "label": "outskirts band: all 135680 logical pixels equal source texel (2x+1, 2y+1), nearest with no blending",
+      "pass": true
+    },
+    {
+      "label": "selection scifi.ruins + arena override '' -> arena 'ruins' status no_band (got 'ruins' no_band)",
+      "pass": true
+    },
+    {
+      "label": "selection scifi.city + arena override '' -> arena 'city-terrace' status no_band (got 'city-terrace' no_band)",
+      "pass": true
+    },
+    {
+      "label": "selection scifi.loop + arena override '' -> arena '' status no_band (got '' no_band)",
+      "pass": true
+    },
+    {
+      "label": "selection scifi.ruins + arena override 'archive' -> arena 'archive' status loaded (got 'archive' loaded)",
+      "pass": true
+    },
+    {
+      "label": "archive band is the tracked file (sha256-bytes c840e071...)",
+      "pass": true
+    },
+    {
+      "label": "archive band: source 1280x424 drawn as a 640x212 logical texture",
+      "pass": true
+    },
+    {
+      "label": "archive band: all 135680 logical pixels equal source texel (2x+1, 2y+1), nearest with no blending",
+      "pass": true
+    },
+    {
+      "label": "selection scifi.ruins + arena override 'outskirts' -> arena 'outskirts' status loaded (got 'outskirts' loaded)",
+      "pass": true
+    },
+    {
+      "label": "outskirts band is the tracked file (sha256-bytes feea6297...)",
+      "pass": true
+    },
+    {
+      "label": "outskirts band: source 1280x424 drawn as a 640x212 logical texture",
+      "pass": true
+    },
+    {
+      "label": "outskirts band: all 135680 logical pixels equal source texel (2x+1, 2y+1), nearest with no blending",
+      "pass": true
+    },
+    {
+      "label": "selection scifi.outskirts + arena override 'ruins' -> arena 'ruins' status no_band (got 'ruins' no_band)",
+      "pass": true
+    },
+    {
+      "label": "selection scifi.outskirts + arena override 'nope' -> arena 'nope' status no_band (got 'nope' no_band)",
+      "pass": true
+    },
+    {
+      "label": "selection scifi.outskirts + arena override '../outskirts' -> arena '../outskirts' status no_band (got '../outskirts' no_band)",
+      "pass": true
+    },
+    {
+      "label": "override 0 wins over an arena pick: geometric, status off",
+      "pass": true
+    },
+    {
+      "label": "fallback missing file -> status missing, no band (got missing)",
+      "pass": true
+    },
+    {
+      "label": "fallback missing file renders the geometric backdrop pixel for pixel",
+      "pass": true
+    },
+    {
+      "label": "fallback 1672x941 image (not a multiple of 640x212) -> status unsupported, no band (got unsupported)",
+      "pass": true
+    },
+    {
+      "label": "fallback 1672x941 image (not a multiple of 640x212) renders the geometric backdrop pixel for pixel",
+      "pass": true
+    },
+    {
+      "label": "fallback non-texture resource -> status unsupported, no band (got unsupported)",
+      "pass": true
+    },
+    {
+      "label": "fallback non-texture resource renders the geometric backdrop pixel for pixel",
+      "pass": true
+    },
+    {
+      "label": "arena 'ruins' (no tracked band / invalid key) renders the geometric backdrop pixel for pixel",
+      "pass": true
+    },
+    {
+      "label": "arena 'city-terrace' (no tracked band / invalid key) renders the geometric backdrop pixel for pixel",
+      "pass": true
+    },
+    {
+      "label": "arena 'nope' (no tracked band / invalid key) renders the geometric backdrop pixel for pixel",
+      "pass": true
+    },
+    {
+      "label": "zh 640: band shown nearest at the 640 logical scale (empty columns equal the band texels in 1x1 blocks)",
+      "pass": true
+    },
+    {
+      "label": "zh 640: header rows 0-89 and footer rows 302-359 identical to the default (HUD above the band, nothing covered)",
+      "pass": true
+    },
+    {
+      "label": "zh 640: the play band itself changed (band visible)",
+      "pass": true
+    },
+    {
+      "label": "zh 640: fighters (199-285) and enemy sit inside the 90-302 play band and the 640 width []",
+      "pass": true
+    },
+    {
+      "label": "zh 640: footer console (feedback, help) and header labels inside 640x360, console inside the footer []",
+      "pass": true
+    },
+    {
+      "label": "zh 640: every fighter and the enemy are still drawn over the band (their pixels differ from the bare band)",
+      "pass": true
+    },
+    {
+      "label": "en 640: band shown nearest at the 640 logical scale (empty columns equal the band texels in 1x1 blocks)",
+      "pass": true
+    },
+    {
+      "label": "en 640: header rows 0-89 and footer rows 302-359 identical to the default (HUD above the band, nothing covered)",
+      "pass": true
+    },
+    {
+      "label": "en 640: the play band itself changed (band visible)",
+      "pass": true
+    },
+    {
+      "label": "en 640: fighters (199-285) and enemy sit inside the 90-302 play band and the 640 width []",
+      "pass": true
+    },
+    {
+      "label": "en 640: footer console (feedback, help) and header labels inside 640x360, console inside the footer []",
+      "pass": true
+    },
+    {
+      "label": "en 640: every fighter and the enemy are still drawn over the band (their pixels differ from the bare band)",
+      "pass": true
+    },
+    {
+      "label": "zh 1280: band shown nearest at the 640 logical scale (empty columns equal the band texels in 2x2 blocks)",
+      "pass": true
+    },
+    {
+      "label": "zh 1280: header rows 0-89 and footer rows 302-359 identical to the default (HUD above the band, nothing covered)",
+      "pass": true
+    },
+    {
+      "label": "zh 1280: the play band itself changed (band visible)",
+      "pass": true
+    },
+    {
+      "label": "zh 1280: fighters (199-285) and enemy sit inside the 90-302 play band and the 640 width []",
+      "pass": true
+    },
+    {
+      "label": "zh 1280: footer console (feedback, help) and header labels inside 640x360, console inside the footer []",
+      "pass": true
+    },
+    {
+      "label": "zh 1280: every fighter and the enemy are still drawn over the band (their pixels differ from the bare band)",
+      "pass": true
+    },
+    {
+      "label": "en 1280: band shown nearest at the 640 logical scale (empty columns equal the band texels in 2x2 blocks)",
+      "pass": true
+    },
+    {
+      "label": "en 1280: header rows 0-89 and footer rows 302-359 identical to the default (HUD above the band, nothing covered)",
+      "pass": true
+    },
+    {
+      "label": "en 1280: the play band itself changed (band visible)",
+      "pass": true
+    },
+    {
+      "label": "en 1280: fighters (199-285) and enemy sit inside the 90-302 play band and the 640 width []",
+      "pass": true
+    },
+    {
+      "label": "en 1280: footer console (feedback, help) and header labels inside 640x360, console inside the footer []",
+      "pass": true
+    },
+    {
+      "label": "en 1280: every fighter and the enemy are still drawn over the band (their pixels differ from the bare band)",
+      "pass": true
+    },
+    {
+      "label": "patrol backdrop=0 sentry=0: band loaded only with the backdrop on",
+      "pass": true
+    },
+    {
+      "label": "patrol backdrop=1 sentry=0: band loaded only with the backdrop on",
+      "pass": true
+    },
+    {
+      "label": "patrol backdrop=1 sentry=0: 600-step gameplay trace identical to backdrop=0 sentry=0 (111930cccb48...)",
+      "pass": true
+    },
+    {
+      "label": "patrol backdrop=0 sentry=1: band loaded only with the backdrop on",
+      "pass": true
+    },
+    {
+      "label": "patrol backdrop=0 sentry=1: 600-step gameplay trace identical to backdrop=0 sentry=0 (111930cccb48...)",
+      "pass": true
+    },
+    {
+      "label": "patrol backdrop=1 sentry=1: band loaded only with the backdrop on",
+      "pass": true
+    },
+    {
+      "label": "patrol backdrop=1 sentry=1: 600-step gameplay trace identical to backdrop=0 sentry=0 (111930cccb48...)",
+      "pass": true
+    },
+    {
+      "label": "patrol trace has real exchanges (both sides attacked)",
+      "pass": true
+    },
+    {
+      "label": "sentry backdrop=0 sentry=0: band loaded only with the backdrop on",
+      "pass": true
+    },
+    {
+      "label": "sentry backdrop=1 sentry=0: band loaded only with the backdrop on",
+      "pass": true
+    },
+    {
+      "label": "sentry backdrop=1 sentry=0: 600-step gameplay trace identical to backdrop=0 sentry=0 (8e5307e31701...)",
+      "pass": true
+    },
+    {
+      "label": "sentry backdrop=0 sentry=1: band loaded only with the backdrop on",
+      "pass": true
+    },
+    {
+      "label": "sentry backdrop=0 sentry=1: 600-step gameplay trace identical to backdrop=0 sentry=0 (8e5307e31701...)",
+      "pass": true
+    },
+    {
+      "label": "sentry backdrop=1 sentry=1: band loaded only with the backdrop on",
+      "pass": true
+    },
+    {
+      "label": "sentry backdrop=1 sentry=1: 600-step gameplay trace identical to backdrop=0 sentry=0 (8e5307e31701...)",
+      "pass": true
+    },
+    {
+      "label": "sentry trace has real exchanges (both sides attacked)",
+      "pass": true
+    },
+    {
+      "label": "--stamp=YYYYMMDD-HHMMSS-<8 hex> given for captures",
+      "pass": true
+    }
+  ],
+  "cliArena": "",
+  "cliBackdropFlag": true,
+  "cliSentryFlag": false,
+  "cmdlineUserArgs": [
+    "--battle-backdrop-pilot",
+    "--capture-dir=C:\\Users\\hkzha\\AppData\\Local\\Temp\\bbp\\final\\evidence",
+    "--stamp=20261018-144653-faa6ec0f"
+  ],
+  "defaultAdoption": false,
+  "gameplayTraces": {
+    "patrol backdrop=0 sentry=0": {
+      "bandLoaded": false,
+      "enemyAttacks": 3,
+      "enemyHpEnd": 0,
+      "finished": true,
+      "playerAttacks": 41,
+      "sha256": "111930cccb48c0607289ccc486d9a2f9c7ee7762c319424fbe20f9e7c5351239"
+    },
+    "patrol backdrop=0 sentry=1": {
+      "bandLoaded": false,
+      "enemyAttacks": 3,
+      "enemyHpEnd": 0,
+      "finished": true,
+      "playerAttacks": 41,
+      "sha256": "111930cccb48c0607289ccc486d9a2f9c7ee7762c319424fbe20f9e7c5351239"
+    },
+    "patrol backdrop=1 sentry=0": {
+      "bandLoaded": true,
+      "enemyAttacks": 3,
+      "enemyHpEnd": 0,
+      "finished": true,
+      "playerAttacks": 41,
+      "sha256": "111930cccb48c0607289ccc486d9a2f9c7ee7762c319424fbe20f9e7c5351239"
+    },
+    "patrol backdrop=1 sentry=1": {
+      "bandLoaded": true,
+      "enemyAttacks": 3,
+      "enemyHpEnd": 0,
+      "finished": true,
+      "playerAttacks": 41,
+      "sha256": "111930cccb48c0607289ccc486d9a2f9c7ee7762c319424fbe20f9e7c5351239"
+    },
+    "sentry backdrop=0 sentry=0": {
+      "bandLoaded": false,
+      "enemyAttacks": 4,
+      "enemyHpEnd": 0,
+      "finished": true,
+      "playerAttacks": 41,
+      "sha256": "8e5307e31701b4902cab2dab4f2366415c64a71db0ab67d03751e45b1345abfd"
+    },
+    "sentry backdrop=0 sentry=1": {
+      "bandLoaded": false,
+      "enemyAttacks": 4,
+      "enemyHpEnd": 0,
+      "finished": true,
+      "playerAttacks": 41,
+      "sha256": "8e5307e31701b4902cab2dab4f2366415c64a71db0ab67d03751e45b1345abfd"
+    },
+    "sentry backdrop=1 sentry=0": {
+      "bandLoaded": true,
+      "enemyAttacks": 4,
+      "enemyHpEnd": 0,
+      "finished": true,
+      "playerAttacks": 41,
+      "sha256": "8e5307e31701b4902cab2dab4f2366415c64a71db0ab67d03751e45b1345abfd"
+    },
+    "sentry backdrop=1 sentry=1": {
+      "bandLoaded": true,
+      "enemyAttacks": 4,
+      "enemyHpEnd": 0,
+      "finished": true,
+      "playerAttacks": 41,
+      "sha256": "8e5307e31701b4902cab2dab4f2366415c64a71db0ab67d03751e45b1345abfd"
+    }
+  },
+  "godot": "4.7.2-stable (official)",
+  "nearestSourceOffset": 1,
+  "project": "rpg-2-star-ocean-the-second",
+  "status": "TECHNICAL capability evidence only; every band UNAPPROVED candidate art, acceptance 0, not default",
+  "subject": "battle backdrop loader pilot (opt-in --battle-backdrop-pilot)",
+  "summary": "BATTLE_BACKDROP_CHECK OK passed=79 failed=0 mode=cli nearest_offset=1 captures=0"
+}
