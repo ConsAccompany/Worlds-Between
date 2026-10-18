@@ -456,7 +456,7 @@ async function renderPanel() {
   const c = served.computed;
   assert.equal((panel.match(/role="progressbar"/g) || []).length, 5, 'one main bar plus coding, content, inspection and approval bars');
   for (const text of [c.production.percentLabel, `${c.production.coding.done} / ${c.production.coding.total} 分 points`, `${c.production.content.tasksDone} / ${c.production.content.tasks} 项任务 tasks`,
-    `${c.inspection.done} / ${c.inspection.total} 分 points`, `${c.approval.done} / ${c.approval.total} 分 points`, '否 / false', `Needs Claude revision（${c.queue.needsRevision.count}）`, `Ready（${c.queue.count}）`]) assert.ok(panel.includes(text), 'panel shows ' + text);
+    `${c.inspection.done} / ${c.inspection.total} 分 points`, `${c.approval.done} / ${c.approval.total} 分 points`, '否 / false', `Needs revision（${c.queue.needsRevision.count}）`, `Ready（${c.queue.count}）`]) assert.ok(panel.includes(text), 'panel shows ' + text);
   assert.match(panel, /<details class="group"><summary>公式与分值 \/ Formula and points<\/summary><p class="small"><code>round1\(40/);
   assert.match(panel, /<details class="group"><summary>旧版混合交付／验收估算（不是正式验收）\/ Legacy mixed delivery\/acceptance estimate \(not formal acceptance\) · 40\.8%<\/summary>/);
   assert.ok(html.includes('id="cross-device-review-queue"'), 'existing review queue card still renders');

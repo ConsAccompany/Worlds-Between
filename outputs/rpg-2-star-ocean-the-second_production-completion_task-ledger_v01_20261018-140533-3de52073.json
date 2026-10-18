@@ -2,7 +2,7 @@
   "id": "rpg-2-star-ocean-the-second_production-completion_v01",
   "schemaVersion": 2,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-18T21:30:42Z",
+  "updatedAt": "2026-10-18T21:33:30Z",
   "zh": "制作完成度任务台账：衡量已完成的工作量（编码 40% + 内容 60%）；检查／审查与创作者批准分开计量，均不改变制作分；免除的审查不算已执行的工作；运营任务列出负责方但不计百分比。",
   "en": "Production-completion task ledger: measures work done (coding 40% + content 60%); inspection/review and creator approval are separate meters and never change production credit; waived reviews are not performed work; operations tasks list owners but carry no percentage.",
   "brief": "docs/rpg-2-star-ocean-the-second_production-completion_bilingual-brief_v01_20261018-140533-3ea2a621.md",
@@ -235,6 +235,39 @@
         },
         "previousTaskSetSha256": "c6bd550f07bfb5311cfd4ac39c61fcf7444acf50307f232d2c797377670c6422",
         "taskSetSha256": "772ef9aca9c05ac9dacac305d7a83f88b8c2da9faad548bbb0cb56feba38061a"
+      },
+      {
+        "at": "2026-10-18T21:33:30Z",
+        "kind": "owner-assignment",
+        "taskId": "content.scene.chicago-loop.native-pass",
+        "fromOwner": "claude",
+        "toOwner": "codex",
+        "changedTaskIds": [
+          "content.scene.chicago-loop.native-pass"
+        ],
+        "reason": {
+          "zh": "",
+          "en": "Codex assumes responsibility for the bounded Chicago material revision during Max depletion; original Claude production evidence and completion are retained."
+        },
+        "previousTaskSetSha256": "772ef9aca9c05ac9dacac305d7a83f88b8c2da9faad548bbb0cb56feba38061a",
+        "taskSetSha256": "3dabbf026afabe9551ea0e9efedb0e2c6a225dc7b948a4ef8c4e2c320203d2b9"
+      },
+      {
+        "at": "2026-10-18T21:33:30Z",
+        "kind": "revision-bucket",
+        "addedTaskIds": [
+          "content.scene.chicago-loop.native-pass.revision"
+        ],
+        "reason": {
+          "zh": "",
+          "en": "Codex visual review of v05 requested improved native steel, paving and foliage depth. One fixed revision bucket covers the bounded v06 pass; later versions add no points."
+        },
+        "effect": {
+          "zh": "只增加分母；已完成的原始制作保持计分；本交付物之后的版本只重开此桶。",
+          "en": "Adds to the denominator only; the finished original keeps its credit; later versions of this deliverable only reopen this bucket."
+        },
+        "previousTaskSetSha256": "3dabbf026afabe9551ea0e9efedb0e2c6a225dc7b948a4ef8c4e2c320203d2b9",
+        "taskSetSha256": "ed26284d9b3fa190a48e6228809df3902f95369d3b3c488da370ec1557b62349"
       }
     ],
     "pointsByStage": {
@@ -280,10 +313,10 @@
       },
       "content": {
         "done": 334,
-        "total": 1873,
+        "total": 1879,
         "percent": 17.8,
         "weight": 60,
-        "tasks": 713,
+        "tasks": 714,
         "tasksDone": 109
       }
     },
@@ -350,9 +383,9 @@
       },
       "content": {
         "done": 334,
-        "total": 1873,
+        "total": 1879,
         "percent": 17.8,
-        "tasks": 713,
+        "tasks": 714,
         "tasksDone": 109,
         "waivedTasks": 0,
         "waivedPoints": 0
@@ -405,29 +438,30 @@
     },
     "byOwner": {
       "claude": {
-        "tasks": 753,
+        "tasks": 752,
         "operationsTasks": 0,
-        "points": 1994,
-        "pointsDone": 392,
+        "points": 1982,
+        "pointsDone": 380,
         "byStatus": {
-          "done": 88,
+          "done": 87,
           "todo": 665
         },
         "readyInQueue": 0,
-        "revisionsBlockingApproval": 4
+        "revisionsBlockingApproval": 3
       },
       "codex": {
-        "tasks": 189,
+        "tasks": 191,
         "operationsTasks": 2,
-        "points": 194,
-        "pointsDone": 80,
+        "points": 212,
+        "pointsDone": 92,
         "byStatus": {
-          "done": 71,
+          "done": 72,
           "todo": 114,
-          "not_required": 4
+          "not_required": 4,
+          "in_progress": 1
         },
         "readyInQueue": 0,
-        "revisionsBlockingApproval": 0
+        "revisionsBlockingApproval": 1
       },
       "creator": {
         "tasks": 239,
@@ -544,7 +578,7 @@
       "scenes": {
         "content": {
           "done": 233,
-          "total": 276
+          "total": 282
         },
         "technical-inspection": {
           "done": 10,
@@ -989,8 +1023,8 @@
         }
       ],
       "needsRevision": {
-        "zh": "需要 Claude 修订后才能验收（最近一次审查要求修改）",
-        "en": "Needs a Claude revision before acceptance (the latest review asked for changes)",
+        "zh": "需要修订后才能验收（负责方见任务；最近一次审查要求修改）",
+        "en": "Needs revision before acceptance (see assigned owner; the latest review asked for changes)",
         "count": 4,
         "items": [
           {
@@ -1025,9 +1059,9 @@
             "owner": "creator",
             "stage": "creator-approval",
             "review": "review.scene.chicago-loop",
-            "revision": null,
-            "revisionStatus": "missing",
-            "nextOwner": "claude"
+            "revision": "content.scene.chicago-loop.native-pass.revision",
+            "revisionStatus": "in_progress",
+            "nextOwner": "codex"
           }
         ]
       }
@@ -2197,7 +2231,7 @@
     {"id":"creator.scene.battle-arena.accept","type":"creator-acceptance","title":{"zh":"科技区横向战场 · 场景画质验收","en":"Science side-view battle arena · scene-quality acceptance"},"area":"scenes","stage":"creator-approval","owner":"creator","status":"todo","points":1,"doneCriterion":{"zh":"approvalLedger 记有 acceptanceKind scene-visual 的验收条目","en":"approvalLedger records an acceptanceKind scene-visual item"},"dependsOn":["content.scene.battle-arena.native-pass"],"evidence":[],"subject":{"kind":"scene-gate","id":"visual-scene.battle-arena"},"target":"content.scene.battle-arena.native-pass"},
     {"id":"content.scene.chicago-loop.plate","type":"integration","title":{"zh":"芝加哥卢普区街区 · 场景底板","en":"Chicago Loop block · scene plate"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":4,"doneCriterion":{"zh":"可玩场景底板已提交并在运行时可进入（概念图不算）","en":"A playable scene plate is committed and enterable in the runtime (a concept image does not count)"},"dependsOn":[],"evidence":["docs/qa/rpg-2-star-ocean-the-second_chicago-loop_state-lake-arrival-block-native-scene_qa-note_unapproved-v02_20261017-160959-6bcff07f.md"],"subject":{"kind":"scene-gate","id":"visual-scene.chicago-loop-outdoor"}},
     {"id":"content.scene.chicago-loop.wiring","type":"integration","title":{"zh":"芝加哥卢普区街区 · 碰撞、热点与出入口","en":"Chicago Loop block · collision, hotspots and exits"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":3,"doneCriterion":{"zh":"碰撞、热点、出入口与存档有自动检查","en":"Collision, hotspots, exits and saves have automated checks"},"dependsOn":["content.scene.chicago-loop.plate"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_chicago-loop_state-lake-arrival-block-native-scene_qa-note_unapproved-v02_20261017-160959-6bcff07f.md"],"subject":{"kind":"scene-gate","id":"visual-scene.chicago-loop-outdoor"}},
-    {"id":"content.scene.chicago-loop.native-pass","type":"native-pixel","title":{"zh":"芝加哥卢普区街区 · 原生像素画质版","en":"Chicago Loop block · native pixel quality pass"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":12,"doneCriterion":{"zh":"原生像素画质版（道具／分层）已提交并有 QA，可为可选启用","en":"A native pixel quality pass (fixtures / layers) is committed with QA; opt-in is allowed"},"dependsOn":["content.scene.chicago-loop.plate"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_chicago-loop_state-lake-arrival-block-native-scene_qa-note_unapproved-v03r1_20261017-184340-49dde4dd.md"],"subject":{"kind":"scene-gate","id":"visual-scene.chicago-loop-outdoor"}},
+    {"id":"content.scene.chicago-loop.native-pass","type":"native-pixel","title":{"zh":"芝加哥卢普区街区 · 原生像素画质版","en":"Chicago Loop block · native pixel quality pass"},"area":"scenes","stage":"content","owner":"codex","status":"done","points":12,"doneCriterion":{"zh":"原生像素画质版（道具／分层）已提交并有 QA，可为可选启用","en":"A native pixel quality pass (fixtures / layers) is committed with QA; opt-in is allowed"},"dependsOn":["content.scene.chicago-loop.plate"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_chicago-loop_state-lake-arrival-block-native-scene_qa-note_unapproved-v03r1_20261017-184340-49dde4dd.md"],"subject":{"kind":"scene-gate","id":"visual-scene.chicago-loop-outdoor"}},
     {"id":"content.scene.chicago-loop.native-default","type":"integration","title":{"zh":"芝加哥卢普区街区 · 画质版默认接入","en":"Chicago Loop block · quality pass on by default"},"area":"scenes","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"画质版默认在游戏中使用","en":"The quality pass is used in the game by default"},"dependsOn":["content.scene.chicago-loop.native-pass","content.scene.chicago-loop.wiring"],"evidence":[],"subject":{"kind":"scene-gate","id":"visual-scene.chicago-loop-outdoor"}},
     {"id":"qa.scene.chicago-loop.check","type":"technical-check","title":{"zh":"芝加哥卢普区街区 · 技术检查","en":"Chicago Loop block · technical check"},"area":"scenes","stage":"technical-inspection","owner":"claude","status":"done","points":1,"doneCriterion":{"zh":"当前画质版的 Godot 检查全部通过","en":"Godot checks of the current quality pass all pass"},"dependsOn":["content.scene.chicago-loop.native-pass"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_chicago-loop_state-lake-arrival-block-native-scene_qa-note_unapproved-v03r1_20261017-184340-49dde4dd.md"],"subject":{"kind":"scene-gate","id":"visual-scene.chicago-loop-outdoor"},"target":"content.scene.chicago-loop.native-pass","outcome":"passed"},
     {"id":"review.scene.chicago-loop","type":"visual-review","title":{"zh":"芝加哥卢普区街区 · 视觉审查","en":"Chicago Loop block · visual review"},"area":"scenes","stage":"visual-review","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"Codex 审查 640×360 实机画面并记录结论","en":"Codex reviews actual 640x360 captures and records a verdict"},"dependsOn":["qa.scene.chicago-loop.check"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_codex-visual-review_six-verdicts_qa-receipt_v01_20261018-153526-67e353de.md","outputs/chicago-loop-state-lake-v05/godot-runtime/rpg-2-star-ocean-the-second_chicago-loop_state-lake-godot-en-entry-640x360_v05_20261018-000240-1d1b9337.png"],"subject":{"kind":"scene-gate","id":"visual-scene.chicago-loop-outdoor"},"target":"content.scene.chicago-loop.native-pass","statusAt":"2026-10-18T19:35:26Z","outcome":"changes_requested","note":{"zh":"root（Codex）查看了 v05 英文入口实机画面：地点方向清楚（高架、State/Lake 站牌、路口），但上部立面与钢梁是大面积重复平矩形，树木／花坛重复、铺地单一，深度与材质不足。需要专门的原生材质／深度修整；不改布局或碰撞。制作计分不变；未开修订桶。","en":"Root (Codex) viewed the actual v05 EN entry capture: clear place direction (L structure, State/Lake sign, crossing), but flat repeated facade/steel rectangles, repeated trees/planters and uniform paving lack depth and material craft. Needs a focused native materials/depth pass; no layout/collision redesign. Production credit unchanged; no revision bucket opened."}},
@@ -2235,6 +2269,7 @@
     {"id":"content.scene.ruins.native-pass.revision","type":"revision","title":{"zh":"华盛顿国会大厦西侧废墟 · 原生像素画质版 · root 对 v12r2 外观意见后的修订（v13 局部坍塌，可选启用）","en":"Washington Capitol west ruins · native pixel quality pass · Revision after root's v12r2 critique (v13 localized collapse, opt-in flag)"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":6,"doneCriterion":{"zh":"针对最近一次审查／创作者意见的修订版已提交并有 QA；后续版本只更新本条，不新增分值","en":"A revision answering the latest review / creator request is committed with QA; later versions update this bucket and add no points"},"dependsOn":["content.scene.ruins.native-pass"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_ruin-material-collapse_qa-note_unapproved-v13_20261018-100938-075675cf.md","docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_v13-flag-integration_qa-note_unapproved-v13_20261018-135539-63201688.md"],"subject":{"kind":"scene-gate","id":"visual-scene.ruins"},"target":"content.scene.ruins.native-pass","statusAt":"2026-10-18T18:06:24Z"},
     {"id":"content.combat.protagonist-female.combat-static.revision","type":"revision","title":{"zh":"主角·女 · 横向战斗静止帧 · 按创作者对 v11 的意见修订（v12–v14）","en":"Female protagonist · side-view combat static · Revision after the creator feedback on v11 (v12-v14)"},"area":"combat","stage":"content","owner":"claude","status":"done","points":2,"doneCriterion":{"zh":"针对最近一次审查／创作者意见的修订版已提交并有 QA；后续版本只更新本条，不新增分值","en":"A revision answering the latest review / creator request is committed with QA; later versions update this bucket and add no points"},"dependsOn":["content.combat.protagonist-female.combat-static"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_protagonist-female_battle-static-v11-creator-feedback-and-v12-visual-target_unapproved-v01_20261017-193755-c7a93e12.md","docs/qa/rpg-2-star-ocean-the-second_protagonist-female_battle-static-v14-cloth-volume-leg-anatomy_qa-note_unapproved-v01_20261018-084553-dda2c05f.md"],"subject":{"kind":"character-variant","id":"protagonist-female"},"target":"content.combat.protagonist-female.combat-static","statusAt":"2026-10-18T12:45:53Z"},
     {"id":"content.char.protagonist-female.walk-south.revision","type":"revision","title":{"zh":"主角·女 · 南向行走／跑动 · 跑动／停步打磨（v10 + r1，已制作的技术修订；步态与流畅度未批准）","en":"Female protagonist · south walk/run · Run/stop polish (v10 + r1, produced technical revision; gait and fluidity unapproved)"},"area":"characters","stage":"content","owner":"claude","status":"done","points":2,"doneCriterion":{"zh":"针对最近一次审查／创作者意见的修订版已提交并有 QA；后续版本只更新本条，不新增分值","en":"A revision answering the latest review / creator request is committed with QA; later versions update this bucket and add no points"},"dependsOn":["content.char.protagonist-female.walk-south"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_female-south-run-v10r1_reach-landing-amendment_qa-note_unapproved-nonruntime_20261018-142136-249dbf66.md","outputs/rpg-2-star-ocean-the-second_city-annex_female-south-run-v10r1-capture-receipt-h48_unapproved_20261018-182800-9ee66cb8.json"],"subject":{"kind":"character-variant","id":"protagonist-female"},"target":"content.char.protagonist-female.walk-south","statusAt":"2026-10-18T18:36:18Z"},
-    {"id":"content.char.liang-xu.static-south.revision","type":"revision","title":{"zh":"梁序 · 南向高密度静止帧 · 按 Codex 视觉审查意见修订南向静止帧","en":"Liang Xu · south high-density static · South static revision after the Codex visual audit"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"针对最近一次审查／创作者意见的修订版已提交并有 QA；后续版本只更新本条，不新增分值","en":"A revision answering the latest review / creator request is committed with QA; later versions update this bucket and add no points"},"dependsOn":["content.char.liang-xu.static-south"],"evidence":[],"subject":{"kind":"character-variant","id":"liang-xu"},"target":"content.char.liang-xu.static-south"}
+    {"id":"content.char.liang-xu.static-south.revision","type":"revision","title":{"zh":"梁序 · 南向高密度静止帧 · 按 Codex 视觉审查意见修订南向静止帧","en":"Liang Xu · south high-density static · South static revision after the Codex visual audit"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"针对最近一次审查／创作者意见的修订版已提交并有 QA；后续版本只更新本条，不新增分值","en":"A revision answering the latest review / creator request is committed with QA; later versions update this bucket and add no points"},"dependsOn":["content.char.liang-xu.static-south"],"evidence":[],"subject":{"kind":"character-variant","id":"liang-xu"},"target":"content.char.liang-xu.static-south"},
+    {"id":"content.scene.chicago-loop.native-pass.revision","type":"revision","title":{"zh":"芝加哥卢普区街区 · 原生像素画质版 · 修订","en":"Chicago Loop block · native pixel quality pass · revision"},"area":"scenes","stage":"content","owner":"codex","status":"in_progress","points":6,"doneCriterion":{"zh":"针对最近一次审查／创作者意见的修订版已提交并有 QA；后续版本只更新本条，不新增分值","en":"A revision answering the latest review / creator request is committed with QA; later versions update this bucket and add no points"},"dependsOn":["content.scene.chicago-loop.native-pass"],"evidence":[],"subject":{"kind":"scene-gate","id":"visual-scene.chicago-loop-outdoor"},"target":"content.scene.chicago-loop.native-pass","statusAt":"2026-10-18T21:33:30Z","note":{"zh":"","en":"Codex visual review of v05 requested improved native steel, paving and foliage depth. One fixed revision bucket covers the bounded v06 pass; later versions add no points."}}
   ]
 }

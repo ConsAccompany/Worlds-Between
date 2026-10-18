@@ -31,7 +31,7 @@
     const meterRow=(label,v)=>`<div class="production-meter"><div class="step-top"><span>${label}</span><strong>${esc(v.percent)}%</strong></div>${bar(v.percent)}<p class="muted small">${esc(v.done)} / ${esc(v.total)} 分 points${v.tasks!=null?` · ${esc(v.tasksDone)} / ${esc(v.tasks)} 项任务 tasks`:''}</p></div>`;
     const ownerRows=Object.entries(c.byOwner||{}).map(([o,v])=>`<tr><td>${esc(owners[o]||o)}</td><td>${esc(v.tasks)}${v.operationsTasks?` (运营 ${esc(v.operationsTasks)})`:''}</td><td>${esc(v.pointsDone)} / ${esc(v.points)}</td><td>${esc(v.readyInQueue)}</td><td class="small">${Object.entries(v.byStatus||{}).map(([s,n])=>esc(s)+' '+esc(n)).join(' · ')}</td></tr>`).join('');
     const queue=(c.queue?.items||[]).map(q=>`<li><span class="muted small">${esc(owners[q.owner]||q.owner)} · ${esc(stageName(q.stage))}</span> <code>${esc(q.id)}</code></li>`).join('');
-    const blocked=(c.queue?.needsRevision?.items||[]).map(q=>`<li><code>${esc(q.id)}</code> <span class="muted small">← ${esc(q.review)} · 需要 Claude 修订 / needs Claude revision (${esc(q.revision||'—')}: ${esc(q.revisionStatus)})</span></li>`).join('');
+    const blocked=(c.queue?.needsRevision?.items||[]).map(q=>`<li><code>${esc(q.id)}</code> <span class="muted small">← ${esc(q.review)} · 需要修订 / needs revision · Owner: ${esc(q.nextOwner||q.owner)} (${esc(q.revision||'—')}: ${esc(q.revisionStatus)})</span></li>`).join('');
     const lg=c.legacy||{}, w=c.inspection?.waived||{};
     return `<section class="card" id="production-completion"><div class="step-top"><h3>制作完成度 / Production completion</h3>${badge(p.percentLabel,'accent')}</div>
       ${bar(p.percent)}
@@ -41,7 +41,7 @@
       <details class="group"><summary>公式与分值 / Formula and points</summary><p class="small"><code>${esc(p.formula)}</code></p><p class="small">编码 ${esc(p.coding.done)}/${esc(p.coding.total)} 分 × ${esc(p.coding.weight)}% + 内容 ${esc(p.content.done)}/${esc(p.content.total)} 分 × ${esc(p.content.weight)}% = ${esc(p.percentLabel)}。分值是冻结的工作量权重，不是任务数；任务数另列。免除的审查 ${esc(w.tasks||0)} 项（${esc(w.points||0)} 分）不计入检查的分子与分母。运营任务 ${esc(c.operations?.tasksDone||0)}/${esc(c.operations?.tasks||0)} 不计百分比。</p></details>
       <details class="group"><summary>负责方 / Owners</summary><table class="small"><thead><tr><th>负责方</th><th>任务</th><th>分值（不含运营与免除）</th><th>待处理</th><th>状态</th></tr></thead><tbody>${ownerRows}</tbody></table></details>
       <details class="group"><summary>待处理队列 / Ready（${esc(c.queue?.count||0)}）</summary><ul class="small">${queue}</ul></details>
-      <details class="group"><summary>须先修订 / Needs Claude revision（${esc(c.queue?.needsRevision?.count||0)}）</summary><ul class="small">${blocked}</ul></details>
+      <details class="group"><summary>须先修订 / Needs revision（${esc(c.queue?.needsRevision?.count||0)}）</summary><ul class="small">${blocked}</ul></details>
       <details class="group"><summary>旧版混合交付／验收估算（不是正式验收）/ Legacy mixed delivery/acceptance estimate (not formal acceptance) · ${esc(lg.percentLabel||'')}</summary><p class="small">${esc(lg.note?.zh||'')} ${esc(lg.note?.en||'')}</p></details>
       <p class="muted small receipt-name">任务台账：${esc(ledger.updater||'')} · ${esc(ledger.tasks?.length||0)} 项任务</p></section>`;
   }

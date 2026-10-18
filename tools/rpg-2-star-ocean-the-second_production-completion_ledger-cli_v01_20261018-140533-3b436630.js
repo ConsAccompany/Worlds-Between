@@ -561,7 +561,7 @@ function compute(ledger, root) {
     release: {finalAccepted: meter.formalApproval?.mvpFormallyAccepted === true, source: PROGRESS_REL + '#/completionMeter/formalApproval/mvpFormallyAccepted', rule: {zh: '正式验收仍为 false，直到 approvalLedger 与 M9 两轮试玩等现有门全部通过；本表不能改变它。', en: 'Final acceptance stays false until the existing gates (approvalLedger, the two M9 playthroughs) pass; this ledger cannot change it.'}},
     stageTotals, byOwner, areas,
     queue: {zh: '待处理（依赖已完成）', en: 'Ready (dependencies done)', count: queue.length, items: queue,
-      needsRevision: {zh: '需要 Claude 修订后才能验收（最近一次审查要求修改）', en: 'Needs a Claude revision before acceptance (the latest review asked for changes)', count: needsRevision.length, items: needsRevision}},
+      needsRevision: {zh: '需要修订后才能验收（负责方见任务；最近一次审查要求修改）', en: 'Needs revision before acceptance (see assigned owner; the latest review asked for changes)', count: needsRevision.length, items: needsRevision}},
     legacy: {zh: '旧版混合交付／验收估算（不是正式验收）', en: 'Legacy mixed delivery/acceptance estimate (not formal acceptance)', percent: meter.percent, percentLabel: meter.percentLabel,
       counters: progress.approvalLedger.counters, source: PROGRESS_REL + '#/completionMeter',
       note: {zh: '旧指标混合了交付与验收，不表示 40.8% 已被正式验收；与制作完成度是不同指标，两者不能相减或比较为“增长”。', en: 'The old meter mixes delivery and acceptance; it does not mean 40.8% is formally accepted. A different metric from production completion; the two are never subtracted or presented as a gain.'}},
