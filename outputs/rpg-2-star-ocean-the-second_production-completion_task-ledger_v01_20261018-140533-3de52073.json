@@ -2,7 +2,7 @@
   "id": "rpg-2-star-ocean-the-second_production-completion_v01",
   "schemaVersion": 2,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-18T21:41:38.803668+00:00",
+  "updatedAt": "2026-10-18T21:46:44Z",
   "zh": "制作完成度任务台账：衡量已完成的工作量（编码 40% + 内容 60%）；检查／审查与创作者批准分开计量，均不改变制作分；免除的审查不算已执行的工作；运营任务列出负责方但不计百分比。",
   "en": "Production-completion task ledger: measures work done (coding 40% + content 60%); inspection/review and creator approval are separate meters and never change production credit; waived reviews are not performed work; operations tasks list owners but carry no percentage.",
   "brief": "docs/rpg-2-star-ocean-the-second_production-completion_bilingual-brief_v01_20261018-140533-3ea2a621.md",
@@ -268,6 +268,38 @@
         },
         "previousTaskSetSha256": "3dabbf026afabe9551ea0e9efedb0e2c6a225dc7b948a4ef8c4e2c320203d2b9",
         "taskSetSha256": "ed26284d9b3fa190a48e6228809df3902f95369d3b3c488da370ec1557b62349"
+      },
+      {
+        "at": "2026-10-18T21:45:55Z",
+        "kind": "owner-assignment",
+        "taskId": "content.char.protagonist-female.static-west",
+        "fromOwner": "claude",
+        "toOwner": "codex",
+        "changedTaskIds": [
+          "content.char.protagonist-female.static-west"
+        ],
+        "reason": {
+          "zh": "",
+          "en": "Creator-authorized Codex native-asset production during Claude quota depletion; finish one representative heroine set."
+        },
+        "previousTaskSetSha256": "ed26284d9b3fa190a48e6228809df3902f95369d3b3c488da370ec1557b62349",
+        "taskSetSha256": "184e7ac51e6f94451f99569dc78ed28908722aaaf94c0509e8403d4a9dde81dd"
+      },
+      {
+        "at": "2026-10-18T21:46:44Z",
+        "kind": "owner-assignment",
+        "taskId": "qa.scene.chicago-loop.check",
+        "fromOwner": "claude",
+        "toOwner": "codex",
+        "changedTaskIds": [
+          "qa.scene.chicago-loop.check"
+        ],
+        "reason": {
+          "zh": "",
+          "en": "Codex executed and inspected the integrated v06 technical evidence during Max quota gap."
+        },
+        "previousTaskSetSha256": "184e7ac51e6f94451f99569dc78ed28908722aaaf94c0509e8403d4a9dde81dd",
+        "taskSetSha256": "8b419af234d73fe7596eaf50abb1e160d072db384cf03998e92d92029c4a6d97"
       }
     ],
     "pointsByStage": {
@@ -438,25 +470,26 @@
     },
     "byOwner": {
       "claude": {
-        "tasks": 752,
+        "tasks": 750,
         "operationsTasks": 0,
-        "points": 1982,
-        "pointsDone": 380,
+        "points": 1979,
+        "pointsDone": 379,
         "byStatus": {
-          "done": 87,
-          "todo": 665
+          "done": 86,
+          "todo": 664
         },
         "readyInQueue": 0,
         "revisionsBlockingApproval": 3
       },
       "codex": {
-        "tasks": 191,
+        "tasks": 193,
         "operationsTasks": 2,
-        "points": 212,
-        "pointsDone": 98,
+        "points": 215,
+        "pointsDone": 99,
         "byStatus": {
-          "done": 73,
+          "done": 74,
           "todo": 114,
+          "in_progress": 1,
           "not_required": 4
         },
         "readyInQueue": 0,
@@ -1134,7 +1167,7 @@
     {"id":"creator.char.protagonist-male.accept-display","type":"creator-acceptance","title":{"zh":"主角·男 · 验收展示图","en":"Male protagonist · accept display image"},"area":"characters","stage":"creator-approval","owner":"creator","status":"todo","points":1,"doneCriterion":{"zh":"清单 display 项被创作者勾选","en":"The creator checks the inventory display item"},"dependsOn":["content.char.protagonist-male.display"],"evidence":[],"subject":{"kind":"character-variant","id":"protagonist-male"},"target":"content.char.protagonist-male.display"},
     {"id":"content.char.protagonist-female.portrait","type":"concept-generation","title":{"zh":"主角·女 · 人物设定图（图像生成）","en":"Female protagonist · source portrait (image generation)"},"area":"characters","stage":"content","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"设定图文件已入库","en":"The source portrait file is committed"},"dependsOn":[],"evidence":["outputs/rpg-2-star-ocean-the-second_protagonist_character-sheet_female_20261013-153316-8fa4d0c3.png"],"subject":{"kind":"character-variant","id":"protagonist-female"}},
     {"id":"content.char.protagonist-female.static-south","type":"native-pixel","title":{"zh":"主角·女 · 南向高密度静止帧","en":"Female protagonist · south high-density static"},"area":"characters","stage":"content","owner":"claude","status":"done","points":3,"doneCriterion":{"zh":"南向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"south native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":[],"evidence":["docs/character-visuals/rpg-2-star-ocean-the-second_protagonist-female_south-idle-static-baseline-decision_m8-v08_20261015-022700-07161696.md","docs/qa/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v8_visual-qa-note_m8-v08_20261015-021600-c1694107.md"],"subject":{"kind":"character-variant","id":"protagonist-female"}},
-    {"id":"content.char.protagonist-female.static-west","type":"native-pixel","title":{"zh":"主角·女 · 西向高密度静止帧","en":"Female protagonist · west high-density static"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"西向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"west native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":["content.char.protagonist-female.static-south"],"evidence":[],"subject":{"kind":"character-variant","id":"protagonist-female"}},
+    {"id":"content.char.protagonist-female.static-west","type":"native-pixel","title":{"zh":"主角·女 · 西向高密度静止帧","en":"Female protagonist · west high-density static"},"area":"characters","stage":"content","owner":"codex","status":"in_progress","points":2,"doneCriterion":{"zh":"西向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"west native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":["content.char.protagonist-female.static-south"],"evidence":[],"subject":{"kind":"character-variant","id":"protagonist-female"},"statusAt":"2026-10-18T21:45:55Z","note":{"zh":"正在制作真实西向侧面、可编辑原生源文件及明暗场景实机图；不含动画或默认接入。","en":"Authoring a true west profile, editable native source and actual bright/dark captures; no animation or default adoption."}},
     {"id":"content.char.protagonist-female.static-north","type":"native-pixel","title":{"zh":"主角·女 · 北向高密度静止帧","en":"Female protagonist · north high-density static"},"area":"characters","stage":"content","owner":"claude","status":"done","points":2,"doneCriterion":{"zh":"北向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"north native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":["content.char.protagonist-female.static-south"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_protagonist-female_north-idle-static-pilot_qa-note_unapproved-nonruntime-v01_20261018-090713-4bcb9cdb.md"],"subject":{"kind":"character-variant","id":"protagonist-female"}},
     {"id":"content.char.protagonist-female.static-east","type":"native-pixel","title":{"zh":"主角·女 · 东向高密度静止帧","en":"Female protagonist · east high-density static"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"东向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"east native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":["content.char.protagonist-female.static-south"],"evidence":[],"subject":{"kind":"character-variant","id":"protagonist-female"}},
     {"id":"content.char.protagonist-female.idle-anim","type":"native-pixel","title":{"zh":"主角·女 · 四方向待机动画","en":"Female protagonist · four-direction idle animation"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"四个方向的待机循环已提交并有 QA","en":"Idle loops for all four directions committed with QA"},"dependsOn":["content.char.protagonist-female.static-south","content.char.protagonist-female.static-west","content.char.protagonist-female.static-north","content.char.protagonist-female.static-east"],"evidence":[],"subject":{"kind":"character-variant","id":"protagonist-female"}},
@@ -2230,8 +2263,8 @@
     {"id":"content.scene.chicago-loop.wiring","type":"integration","title":{"zh":"芝加哥卢普区街区 · 碰撞、热点与出入口","en":"Chicago Loop block · collision, hotspots and exits"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":3,"doneCriterion":{"zh":"碰撞、热点、出入口与存档有自动检查","en":"Collision, hotspots, exits and saves have automated checks"},"dependsOn":["content.scene.chicago-loop.plate"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_chicago-loop_state-lake-arrival-block-native-scene_qa-note_unapproved-v02_20261017-160959-6bcff07f.md"],"subject":{"kind":"scene-gate","id":"visual-scene.chicago-loop-outdoor"}},
     {"id":"content.scene.chicago-loop.native-pass","type":"native-pixel","title":{"zh":"芝加哥卢普区街区 · 原生像素画质版","en":"Chicago Loop block · native pixel quality pass"},"area":"scenes","stage":"content","owner":"codex","status":"done","points":12,"doneCriterion":{"zh":"原生像素画质版（道具／分层）已提交并有 QA，可为可选启用","en":"A native pixel quality pass (fixtures / layers) is committed with QA; opt-in is allowed"},"dependsOn":["content.scene.chicago-loop.plate"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_chicago-loop_state-lake-arrival-block-native-scene_qa-note_unapproved-v03r1_20261017-184340-49dde4dd.md"],"subject":{"kind":"scene-gate","id":"visual-scene.chicago-loop-outdoor"}},
     {"id":"content.scene.chicago-loop.native-default","type":"integration","title":{"zh":"芝加哥卢普区街区 · 画质版默认接入","en":"Chicago Loop block · quality pass on by default"},"area":"scenes","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"画质版默认在游戏中使用","en":"The quality pass is used in the game by default"},"dependsOn":["content.scene.chicago-loop.native-pass","content.scene.chicago-loop.wiring"],"evidence":[],"subject":{"kind":"scene-gate","id":"visual-scene.chicago-loop-outdoor"}},
-    {"id":"qa.scene.chicago-loop.check","type":"technical-check","title":{"zh":"芝加哥卢普区街区 · 技术检查","en":"Chicago Loop block · technical check"},"area":"scenes","stage":"technical-inspection","owner":"claude","status":"done","points":1,"doneCriterion":{"zh":"当前画质版的 Godot 检查全部通过","en":"Godot checks of the current quality pass all pass"},"dependsOn":["content.scene.chicago-loop.native-pass"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_chicago-loop_material-depth-v06-completed-revision_unapproved-v01_20261018-173531-058a4701.md","docs/qa/rpg-2-star-ocean-the-second_chicago-loop_v06-codex-visual-verdict_unapproved-v01_20261018-174138-428dc70b.md"],"subject":{"kind":"scene-gate","id":"visual-scene.chicago-loop-outdoor"},"target":"content.scene.chicago-loop.native-pass","statusAt":"2026-10-18T21:41:38.803668+00:00","outcome":"passed","note":{"zh":"","en":"Codex finished and inspected v06 native material revision; actual test-injected gameplay evidence, no default adoption or creator art approval."},"history":[{"outcome":"passed","statusAt":null,"evidence":["docs/qa/rpg-2-star-ocean-the-second_chicago-loop_state-lake-arrival-block-native-scene_qa-note_unapproved-v03r1_20261017-184340-49dde4dd.md"]}]},
-    {"id":"review.scene.chicago-loop","type":"visual-review","title":{"zh":"芝加哥卢普区街区 · 视觉审查","en":"Chicago Loop block · visual review"},"area":"scenes","stage":"visual-review","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"Codex 审查 640×360 实机画面并记录结论","en":"Codex reviews actual 640x360 captures and records a verdict"},"dependsOn":["qa.scene.chicago-loop.check"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_chicago-loop_v06-codex-visual-verdict_unapproved-v01_20261018-174138-428dc70b.md","outputs/chicago-loop-state-lake-v06/godot-runtime/rpg-2-star-ocean-the-second_chicago-loop_state-lake-godot-en-entry-heroine-ref48-640x360_v06_20261018-173306-719a3bc2.png","outputs/chicago-loop-state-lake-v06/godot-runtime/rpg-2-star-ocean-the-second_chicago-loop_state-lake-godot-zh-occlusion-west-column-reveal-heroine-ref48-640x360_v06_20261018-173306-719a3bc2.png"],"subject":{"kind":"scene-gate","id":"visual-scene.chicago-loop-outdoor"},"target":"content.scene.chicago-loop.native-pass","statusAt":"2026-10-18T21:41:38.803668+00:00","note":{"zh":"root（Codex）查看了 v05 英文入口实机画面：地点方向清楚（高架、State/Lake 站牌、路口），但上部立面与钢梁是大面积重复平矩形，树木／花坛重复、铺地单一，深度与材质不足。需要专门的原生材质／深度修整；不改布局或碰撞。制作计分不变；未开修订桶。","en":"Codex finished and inspected v06 native material revision; actual test-injected gameplay evidence, no default adoption or creator art approval."},"history":[{"outcome":"changes_requested","statusAt":"2026-10-18T19:35:26Z","evidence":["docs/qa/rpg-2-star-ocean-the-second_codex-visual-review_six-verdicts_qa-receipt_v01_20261018-153526-67e353de.md","outputs/chicago-loop-state-lake-v05/godot-runtime/rpg-2-star-ocean-the-second_chicago-loop_state-lake-godot-en-entry-640x360_v05_20261018-000240-1d1b9337.png"]}],"outcome":"passed"},
+    {"id":"qa.scene.chicago-loop.check","type":"technical-check","title":{"zh":"芝加哥卢普区街区 · 技术检查","en":"Chicago Loop block · technical check"},"area":"scenes","stage":"technical-inspection","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"当前画质版的 Godot 检查全部通过","en":"Godot checks of the current quality pass all pass"},"dependsOn":["content.scene.chicago-loop.native-pass"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_chicago-loop_material-depth-v06-completed-revision_unapproved-v01_20261018-173531-058a4701.md","docs/qa/rpg-2-star-ocean-the-second_chicago-loop_v06-codex-visual-verdict_unapproved-v01_20261018-174138-428dc70b.md"],"subject":{"kind":"scene-gate","id":"visual-scene.chicago-loop-outdoor"},"target":"content.scene.chicago-loop.native-pass","statusAt":"2026-10-18T21:41:38.803668+00:00","outcome":"passed","note":{"zh":"","en":"Codex finished and inspected v06 native material revision; actual test-injected gameplay evidence, no default adoption or creator art approval."},"history":[{"outcome":"passed","statusAt":null,"evidence":["docs/qa/rpg-2-star-ocean-the-second_chicago-loop_state-lake-arrival-block-native-scene_qa-note_unapproved-v03r1_20261017-184340-49dde4dd.md"]}]},
+    {"id":"review.scene.chicago-loop","type":"visual-review","title":{"zh":"芝加哥卢普区街区 · 视觉审查","en":"Chicago Loop block · visual review"},"area":"scenes","stage":"visual-review","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"Codex 审查 640×360 实机画面并记录结论","en":"Codex reviews actual 640x360 captures and records a verdict"},"dependsOn":["qa.scene.chicago-loop.check"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_chicago-loop_v06-codex-visual-verdict_unapproved-v01_20261018-174138-428dc70b.md","outputs/chicago-loop-state-lake-v06/godot-runtime/rpg-2-star-ocean-the-second_chicago-loop_state-lake-godot-en-entry-heroine-ref48-640x360_v06_20261018-173306-719a3bc2.png","outputs/chicago-loop-state-lake-v06/godot-runtime/rpg-2-star-ocean-the-second_chicago-loop_state-lake-godot-zh-occlusion-west-column-reveal-heroine-ref48-640x360_v06_20261018-173306-719a3bc2.png"],"subject":{"kind":"scene-gate","id":"visual-scene.chicago-loop-outdoor"},"target":"content.scene.chicago-loop.native-pass","statusAt":"2026-10-18T21:46:43Z","note":{"zh":"Codex 已完成并查看 v06 材质修订的真实实机截图：钢梁深度、铺地和受光树丛改善，可交创作者审查。仍为测试注入候选；不代表默认接入或美术验收。","en":"Codex finished and inspected v06 native material revision; actual test-injected gameplay evidence, no default adoption or creator art approval."},"history":[{"outcome":"changes_requested","statusAt":"2026-10-18T19:35:26Z","evidence":["docs/qa/rpg-2-star-ocean-the-second_codex-visual-review_six-verdicts_qa-receipt_v01_20261018-153526-67e353de.md","outputs/chicago-loop-state-lake-v05/godot-runtime/rpg-2-star-ocean-the-second_chicago-loop_state-lake-godot-en-entry-640x360_v05_20261018-000240-1d1b9337.png"]},{"outcome":"passed","statusAt":"2026-10-18T21:41:38.803668+00:00","evidence":["docs/qa/rpg-2-star-ocean-the-second_chicago-loop_v06-codex-visual-verdict_unapproved-v01_20261018-174138-428dc70b.md","outputs/chicago-loop-state-lake-v06/godot-runtime/rpg-2-star-ocean-the-second_chicago-loop_state-lake-godot-en-entry-heroine-ref48-640x360_v06_20261018-173306-719a3bc2.png","outputs/chicago-loop-state-lake-v06/godot-runtime/rpg-2-star-ocean-the-second_chicago-loop_state-lake-godot-zh-occlusion-west-column-reveal-heroine-ref48-640x360_v06_20261018-173306-719a3bc2.png"]}],"outcome":"passed"},
     {"id":"creator.scene.chicago-loop.accept","type":"creator-acceptance","title":{"zh":"芝加哥卢普区街区 · 场景画质验收","en":"Chicago Loop block · scene-quality acceptance"},"area":"scenes","stage":"creator-approval","owner":"creator","status":"todo","points":1,"doneCriterion":{"zh":"approvalLedger 记有 acceptanceKind scene-visual 的验收条目","en":"approvalLedger records an acceptanceKind scene-visual item"},"dependsOn":["content.scene.chicago-loop.native-pass"],"evidence":[],"subject":{"kind":"scene-gate","id":"visual-scene.chicago-loop-outdoor"},"target":"content.scene.chicago-loop.native-pass"},
     {"id":"content.vfx.common","type":"native-pixel","title":{"zh":"通用战斗特效（攻击、闪避、防御、受击、治疗）","en":"Common combat effects (attack, dodge, guard, hit, heal)"},"area":"vfx","stage":"content","owner":"claude","status":"todo","points":5,"doneCriterion":{"zh":"五类特效已提交并接入","en":"Five effect sets committed and wired"},"dependsOn":["code.runtime.vfx-system"],"evidence":[],"subject":{"kind":"asset","id":"vfx.common"}},
     {"id":"content.vfx.mvp-skills","type":"native-pixel","title":{"zh":"MVP 个人与职业技能特效","en":"MVP personal and job skill effects"},"area":"vfx","stage":"content","owner":"claude","status":"todo","points":4,"doneCriterion":{"zh":"MVP 技能特效已提交并接入","en":"MVP skill effects committed and wired"},"dependsOn":["code.runtime.vfx-system"],"evidence":[],"subject":{"kind":"asset","id":"vfx.mvp-skills"}},

@@ -124,27 +124,40 @@ const before = [LEDGER, PROGRESS].map(sha);
 
 // 6. One fixed revision bucket per deliverable: no version farming.
 {
+  // Use a delivered scene without a revision for the first-bucket case; Chicago now has a completed bucket.
   const l = fresh(), before6 = l.computed.production, revs = l.baseline.revisions.length;
-  cli.revise(l, ROOT, {for: 'content.scene.chicago-loop.native-pass', reasonEn: 'Codex asked for changes', now: NOW});
-  const bucket = task(l, 'content.scene.chicago-loop.native-pass.revision');
+  assert.ok(!l.tasks.some(x => x.id === 'content.scene.ruins-survey-inner.native-pass.revision'));
+  cli.revise(l, ROOT, {for: 'content.scene.ruins-survey-inner.native-pass', reasonEn: 'Codex asked for changes', now: NOW});
+  const bucket = task(l, 'content.scene.ruins-survey-inner.native-pass.revision');
   assert.ok(bucket && bucket.points === 6 && bucket.status === 'in_progress');
   assert.equal(l.computed.production.content.done, before6.content.done, 'initial credit kept');
   assert.equal(l.computed.production.content.total, before6.content.total + 6);
   assert.equal(l.baseline.revisions.length, revs + 1);
   const count = l.tasks.length, total = l.computed.production.content.total;
-  cli.revise(l, ROOT, {for: 'content.scene.chicago-loop.native-pass', reasonEn: 'v06 candidate', now: NOW});
-  cli.revise(l, ROOT, {for: 'content.scene.chicago-loop.native-pass', reasonEn: 'v07 candidate', now: NOW});
+  cli.revise(l, ROOT, {for: 'content.scene.ruins-survey-inner.native-pass', reasonEn: 'v06 candidate', now: NOW});
+  cli.revise(l, ROOT, {for: 'content.scene.ruins-survey-inner.native-pass', reasonEn: 'v07 candidate', now: NOW});
   assert.equal(l.tasks.length, count, 'later versions add no task');
   assert.equal(l.computed.production.content.total, total, 'later versions add no points');
   assert.equal(l.baseline.revisions.length, revs + 1);
-  assert.throws(() => cli.revise(l, ROOT, {for: 'content.scene.chicago-loop.native-pass.revision', reasonEn: 'x', now: NOW}), /another revision/);
+  assert.throws(() => cli.revise(l, ROOT, {for: 'content.scene.ruins-survey-inner.native-pass.revision', reasonEn: 'x', now: NOW}), /another revision/);
   assert.throws(() => cli.revise(l, ROOT, {for: 'review.scene.chicago-loop', reasonEn: 'x', now: NOW}), /production deliverable/);
   assert.deepEqual(cli.validate(l, ROOT), []);
   const second = fresh(); second.tasks.push({...task(second, 'content.scene.city.native-pass.revision'), id: 'content.scene.city.native-pass.revision2'});
   assert.ok(cli.validate(second, ROOT).some(e => /one fixed revision bucket|frozen baseline/.test(e)));
   const inflated = fresh(); task(inflated, 'content.scene.city.native-pass.revision').points = 12;
   assert.ok(cli.validate(inflated, ROOT).some(e => /ceil\(deliverable points \/ 2\)/.test(e)));
-  pass('first revise opens one fixed bucket (+6 denominator only); later versions reopen it with no new task or points; second buckets and re-pointing rejected');
+  // Reopening Chicago's existing completed bucket removes only its revision credit; the initial pass stays done.
+  const completed = fresh(), current = task(completed, 'content.scene.chicago-loop.native-pass.revision');
+  assert.equal(current.status, 'done');
+  const before = completed.computed.production.content, beforeTasks = completed.tasks.length, beforeRevisions = completed.baseline.revisions.length;
+  cli.revise(completed, ROOT, {for: 'content.scene.chicago-loop.native-pass', reasonEn: 'Another bounded revision requested', now: NOW});
+  assert.equal(task(completed, 'content.scene.chicago-loop.native-pass').status, 'done');
+  assert.equal(completed.computed.production.content.done, before.done - current.points);
+  assert.equal(completed.computed.production.content.total, before.total);
+  assert.equal(completed.tasks.length, beforeTasks);
+  assert.equal(completed.baseline.revisions.length, beforeRevisions);
+  assert.deepEqual(cli.validate(completed, ROOT), []);
+  pass('first revision adds one fixed denominator bucket; completed revision reopens without removing initial credit or adding tasks/points; second buckets and re-pointing rejected');
 }
 
 // 7. Review reconciliation: a changes-requested verdict blocks "ready for acceptance" until a later revision is delivered.
@@ -247,13 +260,15 @@ const tasksExceptOwners = l => JSON.stringify(l.tasks.map(({owner, ...rest}) => 
   assert.equal(cli.taskSetHash(l.tasks), cli.taskSetHash(fresh().tasks), 'reverse transfer restores original definitions');
   assert.deepEqual(cli.validate(l, ROOT), []);
   // No bucket yet: missing-revision routing follows the parent, then the newly created bucket inherits Codex.
-  const n = fresh(), chicago = 'content.scene.chicago-loop.native-pass';
-  assign(n, chicago, 'codex');
-  assert.equal(n.computed.queue.needsRevision.items.find(x => x.id === 'creator.scene.chicago-loop.accept').nextOwner, 'codex');
-  cli.revise(n, ROOT, {for: chicago, reasonEn: 'bounded material pass', now: NOW});
-  assert.equal(task(n, chicago + '.revision').owner, 'codex');
-  assign(n, chicago, 'claude');
-  assign(n, chicago, 'codex');
+  const n = fresh(), newScene = 'content.scene.ruins-survey-inner.native-pass';
+  assert.ok(!task(n, newScene + '.revision'));
+  set(n, 'review.scene.ruins-survey-inner', 'done', {outcome: 'changes_requested', evidence: [QA('nyc-city-hall-park_v06-cross-device-review-packet_unapproved-v01_20261017-174208-fe6b9f9d.md')]});
+  assign(n, newScene, 'codex');
+  assert.equal(n.computed.queue.needsRevision.items.find(x => x.id === 'creator.scene.ruins-survey-inner.accept').nextOwner, 'codex');
+  cli.revise(n, ROOT, {for: newScene, reasonEn: 'bounded material pass', now: NOW});
+  assert.equal(task(n, newScene + '.revision').owner, 'codex');
+  assign(n, newScene, 'claude');
+  assign(n, newScene, 'codex');
   assert.deepEqual(cli.validate(n, ROOT), [], 'assignment/bucket/assignment chain fully replayable');
   pass('existing/new revision buckets follow producer transfers; missing/existing revision routing and per-owner counts are dynamic; retries idempotent and reverse/mixed chains valid');
 }

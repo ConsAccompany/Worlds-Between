@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-18T21:41:38.803668+00:00",
+  "updatedAt": "2026-10-18T21:46:03.989519+00:00",
   "purpose": "Operating queue and worktree ownership; no progress points or account details",
   "workflow": "docs/workflow.md",
   "canonicalLedger": "outputs/rpg-2-star-ocean-the-second_production-completion_task-ledger_v01_20261018-140533-3de52073.json",
@@ -52,6 +52,13 @@
       "role": "preserved-partial-producer",
       "owner": "codex",
       "writePolicy": "Chicago v06 native assets, author tool and evidence only; no shared exploration script edits"
+    },
+    {
+      "id": "heroine-producer",
+      "pathFromPrimary": "work/max0840-male",
+      "role": "producer",
+      "owner": "codex",
+      "writePolicy": "Female west static source, native authoring and actual gameplay capture only; no shared ledger/index or defaults"
     }
   ],
   "tasks": [
@@ -202,6 +209,60 @@
       "blockedBy": [],
       "startedAt": "2026-10-18T21:22:32.242360+00:00",
       "finishedAt": "2026-10-18T21:30:42.467248+00:00"
+    },
+    {
+      "id": "content.char.protagonist-female.static-west",
+      "owner": "codex",
+      "ownerReason": "Creator-authorized Codex work during Max quota gap",
+      "status": "in_progress",
+      "lane": "primary",
+      "worktree": "heroine-producer",
+      "dependsOn": [
+        "content.char.protagonist-female.static-south"
+      ],
+      "output": "True authored west heroine profile with layered native source and bright/dark actual gameplay evidence",
+      "writeScope": [
+        "outputs/",
+        "tools/*female*west*",
+        "game/tests/*female*west*",
+        "docs/qa/"
+      ],
+      "completion": [
+        "Approved v8 identity/palette subset and48logical body",
+        "Editable native layered PXO/ORA and reopen/export equality",
+        "Binary alpha, stable floor pivot, actual bright/dark captures",
+        "Independent visual inspection before production credit; no final art approval"
+      ],
+      "nextAction": "Finish this single direction before broader animation or character batches",
+      "blockedBy": [],
+      "startedAt": "2026-10-18T21:46:03.989519+00:00",
+      "finishedAt": null,
+      "evidence": []
+    },
+    {
+      "id": "ops.bible-offline-bootstrap",
+      "owner": "codex",
+      "status": "in_progress",
+      "lane": "supporting",
+      "worktree": "site-source",
+      "dependsOn": [],
+      "output": "Private Bible renders verified project immediately when API reads fail/hang",
+      "writeScope": [
+        "Site public and snapshot build files",
+        "Site targeted tests",
+        "Site bundled verified game data"
+      ],
+      "completion": [
+        "Immediate snapshot with explicit non-live provenance",
+        "Bounded/coalesced refresh and preserved search/view",
+        "No account/auth changes",
+        "Private publication plus actual live verification"
+      ],
+      "nextAction": "Update exact86e0c54snapshot, test, publish privately and inspect live",
+      "blockedBy": [],
+      "startedAt": "2026-10-18T21:46:03.989519+00:00",
+      "finishedAt": null,
+      "evidence": []
     }
   ],
   "nextProductionMilestones": [
