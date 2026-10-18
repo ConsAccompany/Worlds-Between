@@ -26,6 +26,17 @@ const STRINGS := {
 		"setup_skip": "跳过指引并出发", "setup_start": "开始探索", "setup_back": "返回菜单",
 		"language": "语言：中文",
 		"quit": "退出",
+		"setup_controls_arrows": "操作：地图选目的地；方向键移动；E 交互；接触敌人进入战斗。",
+		"room_help_arrows": "方向键移动 · Esc 返回主菜单",
+		"area_help_arrows": "方向键移动 · E 交互 · Esc 地图",
+		"battle_help_arrows": "←/→ 移动 · J 攻击 · K 闪避 · L 防御 · Q 个人技 · R 职业技 · Tab 换人 · P 暂停 · T 自动",
+		"survey_help_arrows": "方向键移动 · E 查看线索/门/终端 · Esc 返回",
+		"settings_open": "设置", "settings_title": "设置", "settings_status": "游戏已暂停 · F10 / Esc 关闭",
+		"settings_language": "语言", "settings_volume": "主音量", "settings_movement": "移动按键",
+		"settings_preset_default": "默认操作（WASD / 方向键）", "settings_preset_arrows": "仅方向键移动",
+		"settings_preset_note": "只改变上下左右四个移动按键；攻击、交互等其他按键不变。",
+		"settings_current_help": "当前探索提示：%s",
+		"settings_reset": "恢复默认操作与音量", "settings_close": "关闭（F10）",
 		"room_title": "工程原型 · 地下社区",
 		"room_help": "WASD / 方向键移动 · Esc 返回主菜单",
 		"back": "返回主菜单",
@@ -254,6 +265,17 @@ const STRINGS := {
 		"setup_skip": "Skip guide and depart", "setup_start": "Start exploring", "setup_back": "Main menu",
 		"language": "Language: English",
 		"quit": "Quit",
+		"setup_controls_arrows": "Controls: choose a map destination; move with the arrow keys; press E to interact; contact an enemy to fight.",
+		"room_help_arrows": "Arrow keys to move · Esc for menu",
+		"area_help_arrows": "Arrows move · E interact · Esc map",
+		"battle_help_arrows": "←/→ move · J attack · K dodge · L guard · Q personal · R job · Tab swap · P pause · T auto",
+		"survey_help_arrows": "Arrows move · E inspect clues, doors and console · Esc back",
+		"settings_open": "Settings", "settings_title": "Settings", "settings_status": "Game paused · F10 / Esc to close",
+		"settings_language": "Language", "settings_volume": "Master volume", "settings_movement": "Movement keys",
+		"settings_preset_default": "Default (WASD / arrows)", "settings_preset_arrows": "Arrow keys only",
+		"settings_preset_note": "Changes only the four movement keys; attack, interact and all other keys stay the same.",
+		"settings_current_help": "Current exploration hint: %s",
+		"settings_reset": "Reset controls & volume", "settings_close": "Close (F10)",
 		"room_title": "Foundation prototype · Underground community",
 		"room_help": "WASD / arrows to move · Esc for menu",
 		"back": "Back to menu",
@@ -524,6 +546,8 @@ var last_travel: Dictionary = {}
 var travel_preview: Dictionary = {}
 var travel_state_migrated := false
 var _travel_registry: WorldRouteRegistry = null
+# Player preferences and the F10 settings overlay (own config file, never part of a save).
+var settings: GameSettings = null
 # Provisional commerce ledger; its units are not currency. Settled only by advance_calendar.
 var commerce := CommerceLedger.new()
 var commerce_state_migrated := false
@@ -559,6 +583,11 @@ const MEMBER_DEFS := {
 
 func _ready() -> void:
 	_install_default_controls()
+	settings = GameSettings.new()
+	settings.app = self
+	add_child(settings)
+	settings.capture_default_controls()
+	settings.load_preferences()
 	_reset_travel_state()
 	_reset_commerce_state()
 
@@ -568,7 +597,10 @@ func _process(delta: float) -> void:
 		play_time_seconds += delta
 
 
+# Under the arrow-key movement preset, help lines that name movement keys use their "_arrows" variant.
 func text_for(key: String) -> String:
+	if settings != null and settings.movement_preset == GameSettings.PRESET_ARROWS and STRINGS[language].has(key + "_arrows"):
+		return STRINGS[language][key + "_arrows"]
 	return STRINGS[language].get(key, key)
 
 

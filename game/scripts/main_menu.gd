@@ -5,6 +5,7 @@ var subtitle_label: Label
 var start_button: Button
 var load_button: Button
 var language_button: Button
+var settings_button: Button
 var quit_button: Button
 
 
@@ -63,10 +64,21 @@ func _build_ui() -> void:
 	language_button.pressed.connect(AppState.toggle_language)
 	column.add_child(language_button)
 
+	# Settings shares the last row with Quit so the column keeps its height inside 360 px.
+	var last_row := HBoxContainer.new()
+	last_row.add_theme_constant_override("separation", 10)
+	column.add_child(last_row)
+	settings_button = Button.new()
+	settings_button.custom_minimum_size = Vector2(0, 36)
+	settings_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	settings_button.pressed.connect(func(): AppState.settings.open())
+	last_row.add_child(settings_button)
+
 	quit_button = Button.new()
 	quit_button.custom_minimum_size = Vector2(0, 36)
+	quit_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	quit_button.pressed.connect(func(): get_tree().quit())
-	column.add_child(quit_button)
+	last_row.add_child(quit_button)
 
 
 func _refresh_text() -> void:
@@ -75,6 +87,7 @@ func _refresh_text() -> void:
 	start_button.text = AppState.text_for("start")
 	load_button.text = AppState.text_for("save_load_open")
 	language_button.text = AppState.text_for("language")
+	settings_button.text = AppState.text_for("settings_open")
 	quit_button.text = AppState.text_for("quit")
 
 

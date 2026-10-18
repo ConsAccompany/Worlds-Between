@@ -1,0 +1,247 @@
+{
+  "task": "code.ui.settings (Language, sound, input settings) - MVP coding capability",
+  "status": "TECHNICAL candidate; functional native UI; final UI art UNAPPROVED; not pushed, awaiting root review",
+  "stamp": "20261018-150534-67d7cb3c",
+  "baseCommit": "7e5f74c (origin/main at branch creation)",
+  "godot": "Godot_v4.7.2-stable_win64 (official), APPDATA isolated to %LOCALAPPDATA%\\Temp\\mvp-settings-1510\\appdata",
+  "preferencesFile": "user://settings.cfg, section [settings]: version, language, master_volume, movement_preset",
+  "checks": {
+    "settingsPhases": {
+      "fresh": {
+        "checks": 65,
+        "result": "PASS"
+      },
+      "restart": {
+        "checks": 4,
+        "result": "PASS"
+      },
+      "corrupt": {
+        "checks": 6,
+        "result": "PASS"
+      },
+      "invalid": {
+        "checks": 10,
+        "result": "PASS"
+      }
+    },
+    "settingsChecksTotal": 85,
+    "defaultInputAudioDumpIdenticalToOriginMain": true,
+    "acceptedRoomsReplay": {
+      "tool": "tools/rpg-2-star-ocean-the-second_wdc-annex-room1_v02-review-gate-accepted-rooms-replay_check-v01_20261017-172907-03286bf3.gd",
+      "identical": 8,
+      "total": 8,
+      "rows": [
+        {
+          "capture": "rpg-2-star-ocean-the-second_nyc-public-facilities-room1_existing-scene-godot-en-640x360-review-v01",
+          "originMainSha256": "33252893fc44ddf5394fe6ba0a89bbd8c35d5c6695a6f9ba7e299ace6bc1b1a4",
+          "candidateSha256": "33252893fc44ddf5394fe6ba0a89bbd8c35d5c6695a6f9ba7e299ace6bc1b1a4",
+          "byteIdentical": true
+        },
+        {
+          "capture": "rpg-2-star-ocean-the-second_nyc-public-facilities-room1_existing-scene-godot-zh-640x360-review-v01",
+          "originMainSha256": "60de4236d455021a5e9c811d341ff32a2e8abe7dccdf120233cc2825d8584f4c",
+          "candidateSha256": "60de4236d455021a5e9c811d341ff32a2e8abe7dccdf120233cc2825d8584f4c",
+          "byteIdentical": true
+        },
+        {
+          "capture": "rpg-2-star-ocean-the-second_nyc-public-facilities-room2_repair-manual-approach-godot-zh-640x360_unapproved-v01",
+          "originMainSha256": "937683c3011cb93eb0784a4d47c3c121b2f0b7b22e871eebcba986c3b6c9f7c1",
+          "candidateSha256": "937683c3011cb93eb0784a4d47c3c121b2f0b7b22e871eebcba986c3b6c9f7c1",
+          "byteIdentical": true
+        },
+        {
+          "capture": "rpg-2-star-ocean-the-second_nyc-public-facilities-room2_repair-manual-interaction-godot-zh-640x360_unapproved-v01",
+          "originMainSha256": "a6e2a46d1bb1a57012f62c3ead07ea7453652cd790684da2444578fdc54da72c",
+          "candidateSha256": "a6e2a46d1bb1a57012f62c3ead07ea7453652cd790684da2444578fdc54da72c",
+          "byteIdentical": true
+        },
+        {
+          "capture": "rpg-2-star-ocean-the-second_nyc-public-facilities-room2_three-pixel-fixtures-godot-en-640x360_unapproved-v01",
+          "originMainSha256": "b5683e30f07edb1a268c6fabd0b99bb8aa7546df5e92564c5b870f40262673c1",
+          "candidateSha256": "b5683e30f07edb1a268c6fabd0b99bb8aa7546df5e92564c5b870f40262673c1",
+          "byteIdentical": true
+        },
+        {
+          "capture": "rpg-2-star-ocean-the-second_nyc-public-facilities-room2_three-pixel-fixtures-godot-zh-640x360_unapproved-v01",
+          "originMainSha256": "42559b655535aa50d3267b940a26b608970adfcd6e4be8feb3d30a56b6ce945e",
+          "candidateSha256": "42559b655535aa50d3267b940a26b608970adfcd6e4be8feb3d30a56b6ce945e",
+          "byteIdentical": true
+        },
+        {
+          "capture": "rpg-2-star-ocean-the-second_yonkers-maintenance-room2_four-pixel-fixtures-godot-en-640x360-review-v01",
+          "originMainSha256": "589ab2e0150288557b12f2ea48c9a5c1e95c33ac649224bf17187e0fe88418b4",
+          "candidateSha256": "589ab2e0150288557b12f2ea48c9a5c1e95c33ac649224bf17187e0fe88418b4",
+          "byteIdentical": true
+        },
+        {
+          "capture": "rpg-2-star-ocean-the-second_yonkers-maintenance-room2_four-pixel-fixtures-godot-zh-640x360-review-v01",
+          "originMainSha256": "90527f054db5f79c0d5eec477087153a8d3d357079d5067227e39e5e7aee502d",
+          "candidateSha256": "90527f054db5f79c0d5eec477087153a8d3d357079d5067227e39e5e7aee502d",
+          "byteIdentical": true
+        }
+      ]
+    },
+    "smokes": {
+      "m1_smoke": "M1_SMOKE_OK",
+      "m3_smoke": "M3_SMOKE_OK",
+      "m6_smoke": "M6_SMOKE_OK",
+      "m6_restart_smoke": "M6_RESTART_OK"
+    },
+    "notRun": "full regression sweep (not requested); M2/M4/M5/M7/M8 smokes"
+  },
+  "capturesCommitted": "six of the eight 640x360 captures listed in the fresh index (title-en and battle-settings-en kept local, sha-pinned there)",
+  "sources": [
+    {
+      "path": "game/scripts/game_settings.gd",
+      "sha256": "ff24f194266ff68c4f3a807b0b268f0f2ef74a29ddfbe1cffdf92122ae200376",
+      "algorithm": "sha256-text-lf-v1"
+    },
+    {
+      "path": "game/scripts/game_settings.gd.uid",
+      "sha256": "844e55d611a1b3744aa005043c278e097aa8427a065413dd10bbd4fc10e05d3f",
+      "algorithm": "sha256-text-lf-v1"
+    },
+    {
+      "path": "game/scripts/settings_overlay.gd",
+      "sha256": "5efa49ffb2eb220ad50af17ce4a776d496a29313b838de6260542cad202bf609",
+      "algorithm": "sha256-text-lf-v1"
+    },
+    {
+      "path": "game/scripts/settings_overlay.gd.uid",
+      "sha256": "73847d31378ab48dbb5eb853342f63ab90dce8f5152d7a506885e6775235e4cc",
+      "algorithm": "sha256-text-lf-v1"
+    },
+    {
+      "path": "game/scripts/app_state.gd",
+      "sha256": "8e656b933db4e77f95e3f466841caf4167d8b5f63a77b0275abae45e8fa1e402",
+      "algorithm": "sha256-text-lf-v1"
+    },
+    {
+      "path": "game/scripts/main_menu.gd",
+      "sha256": "76de8119e8564ee85258d31c1a430cc462a4a41c38f6b1cda873712de1c34481",
+      "algorithm": "sha256-text-lf-v1"
+    },
+    {
+      "path": "game/tests/rpg-2-star-ocean-the-second_mvp-settings_overlay-check_v01_20261018-150534-67d7cb3c.gd",
+      "sha256": "0322144525fe8e9a452a7210227886fd712154adedd4be951ab9e0a28b953301",
+      "algorithm": "sha256-text-lf-v1"
+    },
+    {
+      "path": "game/tests/rpg-2-star-ocean-the-second_mvp-settings_overlay-check_v01_20261018-150534-67d7cb3c.gd.uid",
+      "sha256": "7fc05e001782e6d3fcdd345a37cfc3e8993bf69536a954a6cc1e35412b4a8ff1",
+      "algorithm": "sha256-text-lf-v1"
+    },
+    {
+      "path": "tools/rpg-2-star-ocean-the-second_mvp-settings_input-audio-baseline-dump_check-v01_20261018-150534-201f58ff.gd",
+      "sha256": "88fb861cd01492f6cd3c69f3bdd95fb61ed50f0bb67a53ecec5d186042e4a3f0",
+      "algorithm": "sha256-text-lf-v1"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "outputs/mvp-settings-v01_20261018-150534-67d7cb3c/rpg-2-star-ocean-the-second_mvp-settings_battle-settings-zh-640_20261018-150534-67d7cb3c.png",
+      "sha256": "391559e0247e4dd4f58f2c274d5f5cb40ea87373df047d918ef346837c82d925",
+      "algorithm": "sha256-bytes"
+    },
+    {
+      "path": "outputs/mvp-settings-v01_20261018-150534-67d7cb3c/rpg-2-star-ocean-the-second_mvp-settings_check-corrupt-index_20261018-150534-67d7cb3c.json",
+      "sha256": "dd3ac0867206783257b840d4eb12f1b12d3ce0845812543d0bc6f26fc1c49941",
+      "algorithm": "sha256-text-lf-v1"
+    },
+    {
+      "path": "outputs/mvp-settings-v01_20261018-150534-67d7cb3c/rpg-2-star-ocean-the-second_mvp-settings_check-fresh-index_20261018-150534-67d7cb3c.json",
+      "sha256": "4fb2cac36d27e832a63f1222260625d199febe6543acc13376e496e0f56273c9",
+      "algorithm": "sha256-text-lf-v1"
+    },
+    {
+      "path": "outputs/mvp-settings-v01_20261018-150534-67d7cb3c/rpg-2-star-ocean-the-second_mvp-settings_check-invalid-index_20261018-150534-67d7cb3c.json",
+      "sha256": "473caeee9097bd32cd17a0d2e3ac8c79468dfac781ab385da67b5a9d42ffb594",
+      "algorithm": "sha256-text-lf-v1"
+    },
+    {
+      "path": "outputs/mvp-settings-v01_20261018-150534-67d7cb3c/rpg-2-star-ocean-the-second_mvp-settings_check-restart-index_20261018-150534-67d7cb3c.json",
+      "sha256": "fad814f7af3eb74c302a1b50f427c6493a8fd9375853020811f1ffe984f29522",
+      "algorithm": "sha256-text-lf-v1"
+    },
+    {
+      "path": "outputs/mvp-settings-v01_20261018-150534-67d7cb3c/rpg-2-star-ocean-the-second_mvp-settings_exploration-arrows-hint-en-640_20261018-150534-67d7cb3c.png",
+      "sha256": "b40a6bc2d606a4af4f2a75f53d5fd3c644a5285e4ec20b987dbece35d8dbd148",
+      "algorithm": "sha256-bytes"
+    },
+    {
+      "path": "outputs/mvp-settings-v01_20261018-150534-67d7cb3c/rpg-2-star-ocean-the-second_mvp-settings_exploration-settings-en-640_20261018-150534-67d7cb3c.png",
+      "sha256": "0e7be6da1361c66860b6f91057045a381965afa918c23b1638a9b2c4f05c9da1",
+      "algorithm": "sha256-bytes"
+    },
+    {
+      "path": "outputs/mvp-settings-v01_20261018-150534-67d7cb3c/rpg-2-star-ocean-the-second_mvp-settings_input-audio-baseline-candidate_20261018-150534-67d7cb3c.json",
+      "sha256": "6de82a1ad0fb3b23cd0ea0ae3128fb98b551a8c404a4b8a9d93201dd11549588",
+      "algorithm": "sha256-text-lf-v1"
+    },
+    {
+      "path": "outputs/mvp-settings-v01_20261018-150534-67d7cb3c/rpg-2-star-ocean-the-second_mvp-settings_input-audio-baseline-origin-main_20261018-150534-67d7cb3c.json",
+      "sha256": "6de82a1ad0fb3b23cd0ea0ae3128fb98b551a8c404a4b8a9d93201dd11549588",
+      "algorithm": "sha256-text-lf-v1"
+    },
+    {
+      "path": "outputs/mvp-settings-v01_20261018-150534-67d7cb3c/rpg-2-star-ocean-the-second_mvp-settings_title-settings-en-640_20261018-150534-67d7cb3c.png",
+      "sha256": "dfcfaa196919414a8f01a677ebde2717dbcf13acbdfb88cb0cdae26e30c0b8f3",
+      "algorithm": "sha256-bytes"
+    },
+    {
+      "path": "outputs/mvp-settings-v01_20261018-150534-67d7cb3c/rpg-2-star-ocean-the-second_mvp-settings_title-settings-zh-640_20261018-150534-67d7cb3c.png",
+      "sha256": "554ee2b9930ff4d277f6864a95c2c7d91f3efc00ea930af8926711848d503763",
+      "algorithm": "sha256-bytes"
+    },
+    {
+      "path": "outputs/mvp-settings-v01_20261018-150534-67d7cb3c/rpg-2-star-ocean-the-second_mvp-settings_title-zh-640_20261018-150534-67d7cb3c.png",
+      "sha256": "940a19ebbe4b7223b804ac030446309017a7acb46bb10464c0d8d8fb9d6d9e90",
+      "algorithm": "sha256-bytes"
+    },
+    {
+      "path": "outputs/mvp-settings-v01_20261018-150534-67d7cb3c/logs/rpg-2-star-ocean-the-second_mvp-settings_log-accepted-rooms-candidate_20261018-150534-67d7cb3c.log",
+      "sha256": "75c81746d5c80960863ee06f37543eebaa263ad19981d8b999e3cc26affb0e56",
+      "algorithm": "sha256-text-lf-v1"
+    },
+    {
+      "path": "outputs/mvp-settings-v01_20261018-150534-67d7cb3c/logs/rpg-2-star-ocean-the-second_mvp-settings_log-check-corrupt_20261018-150534-67d7cb3c.log",
+      "sha256": "5ccc0c3cbe0b1cf350bb8438f4e1571dcea0db5a4030edbb6228ae0f4c7f7e05",
+      "algorithm": "sha256-text-lf-v1"
+    },
+    {
+      "path": "outputs/mvp-settings-v01_20261018-150534-67d7cb3c/logs/rpg-2-star-ocean-the-second_mvp-settings_log-check-fresh_20261018-150534-67d7cb3c.log",
+      "sha256": "87fe9f6267c3e2ba7ba72621f432c5eee62d693004045c886a7192ccd41fb407",
+      "algorithm": "sha256-text-lf-v1"
+    },
+    {
+      "path": "outputs/mvp-settings-v01_20261018-150534-67d7cb3c/logs/rpg-2-star-ocean-the-second_mvp-settings_log-check-invalid_20261018-150534-67d7cb3c.log",
+      "sha256": "fea49efe7cba5f62ae6f5d647a63c4bf709de6462b2373410f4ecf8236658e36",
+      "algorithm": "sha256-text-lf-v1"
+    },
+    {
+      "path": "outputs/mvp-settings-v01_20261018-150534-67d7cb3c/logs/rpg-2-star-ocean-the-second_mvp-settings_log-check-restart_20261018-150534-67d7cb3c.log",
+      "sha256": "06926a2d2eb76f5dc05cfa3e774f503e933e2ef9ad658c5408835f6541078461",
+      "algorithm": "sha256-text-lf-v1"
+    },
+    {
+      "path": "outputs/mvp-settings-v01_20261018-150534-67d7cb3c/logs/rpg-2-star-ocean-the-second_mvp-settings_log-m1-smoke_20261018-150534-67d7cb3c.log",
+      "sha256": "1ce5a5eafc274e8665e7907f704767f27f54afa38263ee8f9db7fcec09dc04a9",
+      "algorithm": "sha256-text-lf-v1"
+    },
+    {
+      "path": "outputs/mvp-settings-v01_20261018-150534-67d7cb3c/logs/rpg-2-star-ocean-the-second_mvp-settings_log-m3-smoke_20261018-150534-67d7cb3c.log",
+      "sha256": "c87ef167f8109351beafef8220f7390a610b3ef5e71833418e9cb983917b7b34",
+      "algorithm": "sha256-text-lf-v1"
+    },
+    {
+      "path": "outputs/mvp-settings-v01_20261018-150534-67d7cb3c/logs/rpg-2-star-ocean-the-second_mvp-settings_log-m6-restart-smoke_20261018-150534-67d7cb3c.log",
+      "sha256": "3016a9e9286f0695a7dcb2b374cbb2cb2689dcf58be30b07aa65b924c0e13b53",
+      "algorithm": "sha256-text-lf-v1"
+    },
+    {
+      "path": "outputs/mvp-settings-v01_20261018-150534-67d7cb3c/logs/rpg-2-star-ocean-the-second_mvp-settings_log-m6-smoke_20261018-150534-67d7cb3c.log",
+      "sha256": "ef86ded77e96b65d49f68c7640e7e61a2422608744251ca15cd6c5310d1c9880",
+      "algorithm": "sha256-text-lf-v1"
+    }
+  ]
+}
