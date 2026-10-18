@@ -1,0 +1,39 @@
+{
+ "project": "Worlds Between",
+ "milestone": "M8",
+ "character": "protagonist-female",
+ "direction": "south",
+ "motion_state": "run (NOT a walk) - v07 re-press control amendment of the v06 test-only run pilot",
+ "variant": "unapproved-nonruntime",
+ "workstream": "m8-w10",
+ "stamp_utc": "20261018-082500",
+ "run_id": "a07441de",
+ "status": "UNAPPROVED / NONRUNTIME: test-only motion candidate, not a production sprite, not wired into the runtime, not accepted",
+ "art_approved": false,
+ "human_reviewed": false,
+ "runtime_integrated": false,
+ "walk_animation_approved": false,
+ "run_animation_approved": false,
+ "stop_animation_approved": false,
+ "counts_toward_art_acceptance": false,
+ "approved_scope_unchanged": "selout v8 SOUTH IDLE static frame and the 48 logical px display scale only",
+ "exploration_sprites_counter_unchanged": "0/52",
+ "amends": {
+  "manifest": "game/assets/characters/run-v06-unapproved/rpg-2-star-ocean-the-second_protagonist-female_south-run-v06-manifest_unapproved-nonruntime_20261017-211600-c619ea83.json",
+  "manifest_sha256_text_lf_v1": "f59b04fa672250c7525dda79d7cc3771830fa80a03fec339ff21fa19298e6b17",
+  "capture_tool": "tools/rpg-2-star-ocean-the-second_protagonist-female_south-run-v06-godot-capture_m8-w09_20261017-211600-ff47ce98.gd",
+  "capture_tool_sha256_text_lf_v1": "51f389a8b1a119dfc55f7b4848b3045d4c8fb50328de3204985c4393a884df7b",
+  "builder": "tools/rpg-2-star-ocean-the-second_protagonist-female_south-run-v06-build_m8-w09_20261017-211600-f8e736cc.py",
+  "builder_sha256_text_lf_v1": "2b83a2216438384c0eff9829d44a3f2f11f5ec3854507bff40b704e8d57c7a8a",
+  "v06_listing_pin": {"files": 258, "digest": "b7920bbf927a0bb788c03cc650fd8366f928e85d2ea7e189b795515c8d53875f", "pinned_utc": "20261018-082239"}
+ },
+ "art_source": "read-only from the v06 asset folder (res://assets/characters/run-v06-unapproved/): 62 parts, 12 keyframes, 12 keyframe shadows, the keyframes .pxo (12 frames x 13 layers) and the part-library .ora (62 layers) - no pixel, part, keyframe or editable source is added or changed",
+ "defect_answered": "v06 QA defect 5: at 30 fps a re-press 1 frame after a late-stance release lifted BOTH boots on one frame (city-bright, release frame 6: cell silhouette change 484 px vs 473 for the run).  Cause: the restart re-plans the airborne / other boot into a fresh swing whose lift rises to its peak (replan_lift_min 2) at mid-swing, while the planted boot - re-derived as the stance boot - passes its lift-off point (stance q 21) within one 9.3 px 30 fps step.  So on the frame the stance boot leaves the floor the re-planned boot is still rising (here a boot that was coming down to its v8 spot at lift 1 went back up to 2).  The same mechanism shows one frame after a 30 fps start from idle and after re-presses from both-planted states (the stance boot lifts before the re-planned swing peaks).  In the steady run this never happens: when one boot rises the other is planted or coming down.",
+ "restart_amendment": {
+  "rise_lock": true,
+  "rule": "v07 rise lock (re-press / start / re-entry only).  A boot on a RE-PLANNED swing never rises while the other boot is off the floor: on every moving frame on which the other boot is not in contact, the re-planned boot's lift is at most the lift it was drawn with on the previous frame (non-increasing until its touchdown).  So on the frame the stance boot pushes off, the re-planned boot reaches for the floor instead of rising, as the leading boot does in the steady run.  Only the drawn lift (and the lift a later release starts its landing from) changes: the re-planned boot's offset, view, knee lean, scheduled touchdown distance and therefore the gait phase, stride sync, alternation, the planted boot's world position and every timing are v06's.  A boot that leaves contact on this frame is never clamped (its lift-off stays as planned).",
+  "applies_to": "boots whose swing was re-planned by the restart rule (manifest restart.rule): after a re-press, the start from the v8 idle, and the re-entry after a reversal.  Ordinary gait swings (stance lift-off) and the stop (land / shuffle moves) are untouched.",
+  "lift_floor": "a re-planned boot in the air keeps lift >= 1 (its first re-planned frame is drawn at max(1, lift)), so the clamp never puts an airborne boot on the floor"
+ },
+ "unchanged": "art (every part / keyframe / keyframe-shadow PNG and both editable sources are v06's files), gait (stride 84 px, stance 21 px, 6.67 steps/s at MOVE_SPEED 140, land +2, swing lift <= 2), compositor, zero-slip planted boot, stance roll, the re-press stance choice and re-plan schedule (keys, remaining px, stride sync), the v06 event-clock stop (settle order, settle_gap_ms, hold_shift_ms, no_pose_skip, land / shuffle keys and durations), the raised-boot limit (100 ms), the v8 PNG stop destination, the contact shadow, 48 logical px display"
+}
