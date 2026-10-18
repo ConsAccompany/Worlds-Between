@@ -1,0 +1,232 @@
+{
+  "schemaVersion": 1,
+  "project": "rpg-2-star-ocean-the-second",
+  "updatedAt": "2026-10-18T21:18:50.312303+00:00",
+  "purpose": "Operating queue and worktree ownership; no progress points or account details",
+  "workflow": "docs/workflow.md",
+  "canonicalLedger": "outputs/rpg-2-star-ocean-the-second_production-completion_task-ledger_v01_20261018-140533-3de52073.json",
+  "concurrency": {
+    "primaryLimit": 1,
+    "supportingLimit": 2,
+    "sharedIntegrationOwner": "codex",
+    "finishExistingFirst": true
+  },
+  "schedules": {
+    "state": "canceled",
+    "recreationRequiresFreshAuthorization": true
+  },
+  "worktrees": [
+    {
+      "id": "integration",
+      "pathFromPrimary": "work/max0840-sentry-sync",
+      "role": "canonical-integration",
+      "owner": "codex",
+      "baseAtRegistration": "c1a6ab3e40f679d28a6bac45f5ac7f25d0d210c2",
+      "writePolicy": "Coordinator only; explicit verified paths and serialized ledger/index updates"
+    },
+    {
+      "id": "primary-protected",
+      "pathFromPrimary": ".",
+      "role": "protected-dirty-checkout",
+      "owner": "codex",
+      "baseAtRegistration": "c20118d35e89e5bd7fd9509b9aa727e49070a0d3",
+      "writePolicy": "Preserve unrelated dirty work; no reset, blanket stage, or integration here"
+    },
+    {
+      "id": "exploration-producer",
+      "pathFromPrimary": "work/max0840-yonkers",
+      "role": "producer",
+      "owner": "codex",
+      "writePolicy": "Exploration loader and its fixtures/checks only; no shared ledger/index"
+    },
+    {
+      "id": "combat-producer",
+      "pathFromPrimary": "work/max0840-wdc-ruin",
+      "role": "producer",
+      "owner": "codex",
+      "writePolicy": "Combat loader and its fixtures/checks only; no shared ledger/index"
+    },
+    {
+      "id": "chicago-producer",
+      "pathFromPrimary": "work/max0840-battle",
+      "role": "preserved-partial-producer",
+      "owner": "codex",
+      "writePolicy": "Chicago v06 native assets, author tool and evidence only; no shared exploration script edits"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "code.runtime.character-sprite-pipeline",
+      "owner": "codex",
+      "ownerReason": "Creator-authorized takeover during Claude quota depletion",
+      "status": "in_progress",
+      "lane": "primary",
+      "worktree": "exploration-producer",
+      "dependsOn": [],
+      "output": "Normal exploration runtime can load validated optional sprite sets and fall back safely",
+      "writeScope": [
+        "game/scripts/exploration_sprite_set_pilot.gd",
+        "game/scripts/scifi_exploration_area.gd",
+        "game/scripts/survey_annex.gd",
+        "game/scripts/*chicago-loop*55667f46.gd",
+        "game/data/exploration-sprite-sets/",
+        "game/tests/fixtures/",
+        "tools/*exploration-sprite-set*",
+        "outputs/",
+        "docs/qa/"
+      ],
+      "completion": [
+        "Independent shared-time 30/60 fps expectations at 400/800/2400 ms including action/facing resets",
+        "Graceful invalid-set fallback and no SCRIPT_ERROR",
+        "Actual normal-scene evidence and unchanged default/accepted-room checks",
+        "Source/hash-bound QA and selected integration"
+      ],
+      "nextAction": "Fix per-delta rounding drift with accumulated elapsed/fractional carry; retain exact boundary checks",
+      "blockedBy": [],
+      "startedAt": null,
+      "finishedAt": null
+    },
+    {
+      "id": "code.runtime.combat-sprite-pipeline",
+      "owner": "codex",
+      "ownerReason": "Creator-authorized takeover during Claude quota depletion",
+      "status": "in_progress",
+      "lane": "supporting",
+      "worktree": "combat-producer",
+      "dependsOn": [],
+      "output": "Normal battle runtime can load validated optional action sets without altering simulation",
+      "writeScope": [
+        "game/scripts/battle_arena.gd",
+        "game/scripts/*combat-sprite-set*",
+        "game/tests/fixtures/",
+        "tools/*combat-sprite-set*",
+        "outputs/",
+        "docs/qa/"
+      ],
+      "completion": [
+        "Malformed field types fall back without runtime errors",
+        "Valid female and male identity loads plus mismatched-appearance fallback",
+        "Default-off visual parity, timing checks and simulation parity",
+        "Actual bilingual party capture and source/hash-bound QA",
+        "Selected integration after exploration task"
+      ],
+      "nextAction": "Reproduce and fix typed manifest failures; add valid female fixture and reject runtime errors regardless of exit code",
+      "blockedBy": [],
+      "startedAt": null,
+      "finishedAt": null
+    },
+    {
+      "id": "ops.workflow-adoption",
+      "owner": "codex",
+      "status": "done",
+      "lane": "closed",
+      "worktree": "integration",
+      "dependsOn": [],
+      "output": "Durable project rules, small operating queue and explicit integration ownership",
+      "writeScope": [
+        "AGENTS.md",
+        "docs/workflow.md",
+        "docs/coordination/*workflow-operating*"
+      ],
+      "completion": [
+        "Rules and registry agree on work limits and Codex takeover",
+        "Canonical ledger and selected worktree paths resolve",
+        "No account secrets, score changes, or schedule recreation",
+        "Coordinator integrates explicit documentation files"
+      ],
+      "nextAction": "Rules adopted; integration coordinator owns registry updates.",
+      "blockedBy": [],
+      "startedAt": "2026-10-18T21:16:17Z",
+      "finishedAt": "2026-10-18T21:18:50.312303+00:00"
+    },
+    {
+      "id": "content.scene.chicago-loop.material-revision",
+      "owner": "codex",
+      "status": "queued",
+      "lane": "queued",
+      "worktree": "chicago-producer",
+      "dependsOn": [],
+      "output": "One bounded native material/depth revision with editable source and normal gameplay evidence",
+      "completion": [
+        "Preserve geometry, labels, interactions and display scale",
+        "Improve observable steel, masonry, foliage and contact-shadow defects",
+        "Native layered PXO/ORA exact-export evidence and actual bilingual captures",
+        "Codex visual verdict before creator presentation"
+      ],
+      "nextAction": "Inspect preserved v06 source/export completeness after loaders finish; use the existing revision mechanism only",
+      "blockedBy": [
+        "Finish current active loader work first"
+      ],
+      "startedAt": null,
+      "finishedAt": null
+    },
+    {
+      "id": "code.runtime.vfx-system",
+      "owner": "codex",
+      "status": "queued",
+      "lane": "queued",
+      "worktree": "integration",
+      "dependsOn": [
+        "code.runtime.combat-sprite-pipeline"
+      ],
+      "output": "Attack/dodge/guard/hit/heal effects in normal combat",
+      "completion": [
+        "Existing ledger criterion, targeted event checks and actual gameplay inspection"
+      ],
+      "nextAction": "Read current effect hooks and choose the smallest useful normal-runtime completion after loader integration",
+      "blockedBy": [],
+      "startedAt": null,
+      "finishedAt": null
+    },
+    {
+      "id": "code.runtime.audio-cues",
+      "owner": "codex",
+      "status": "queued",
+      "lane": "queued",
+      "worktree": "integration",
+      "dependsOn": [
+        "code.runtime.combat-sprite-pipeline"
+      ],
+      "output": "UI/combat sound event hooks respecting settings",
+      "completion": [
+        "Existing ledger criterion, mute/volume checks and audible review"
+      ],
+      "nextAction": "Reuse current audio infrastructure after primary loader deliverables close",
+      "blockedBy": [],
+      "startedAt": null,
+      "finishedAt": null
+    }
+  ],
+  "nextProductionMilestones": [
+    {
+      "id": "representative-character",
+      "owner": "codex",
+      "status": "queued",
+      "subject": "protagonist-female",
+      "goal": "One complete required exploration and combat set with pivots, editable exports and normal-runtime evidence before roster expansion",
+      "approvalOwner": "creator",
+      "productionCanContinueBeforeApproval": true
+    },
+    {
+      "id": "representative-scene",
+      "owner": "codex",
+      "status": "queued",
+      "subject": "NYC public facilities room 2",
+      "goal": "Use the already accepted room as the reusable style/source/integration reference; confirm its existing evidence before creating any new work",
+      "approvalOwner": "creator",
+      "existingApprovalPreserved": true
+    }
+  ],
+  "measurement": {
+    "noScoringChanges": true,
+    "track": [
+      "completed integrated deliverables",
+      "active task age",
+      "active task count",
+      "revisions before passing inspection",
+      "account-blocked periods"
+    ],
+    "historicalDurationEstimates": "unknown unless evidenced",
+    "note": "Null timestamps mean not reliably recorded; status is an operational snapshot and must be refreshed by the integration coordinator at transitions. No invented throughput totals."
+  }
+}
