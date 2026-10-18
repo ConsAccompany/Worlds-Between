@@ -179,8 +179,25 @@ const before = [LEDGER, PROGRESS].map(sha);
     // Status is mutable: todo, or done with code evidence (a capability closeout never implies default adoption or approval).
     assert.ok(x.status === 'todo' || (x.status === 'done' && x.evidence.some(e => /^game\/scripts\//.test(e)) && x.evidence.some(e => /^docs\/qa\//.test(e))), 'todo or done with code + QA evidence: ' + id);
   }
-  const backdrop = task(l, 'code.runtime.battle-arena-backdrop');
-  if (backdrop.status === 'done') for (const id of ['content.scene.battle-arena.native-default', 'creator.scene.battle-arena.accept']) assert.equal(task(l, id).status, 'todo', 'backdrop capability does not credit ' + id);
+  // The backdrop capability and the battle-arena art tasks are independent (temp fixture, not the tracked statuses): any
+  // status of the default-adoption and approval tasks leaves the backdrop status and the coding meter alone, and flipping
+  // the backdrop leaves those tasks as they were. Either side may complete later without touching the other.
+  const BACKDROP = 'code.runtime.battle-arena-backdrop', ART = ['content.scene.battle-arena.native-default', 'creator.scene.battle-arena.accept'];
+  const fixture = (backdropStatus, artStatuses) => {
+    const f = fresh();
+    task(f, BACKDROP).status = backdropStatus;
+    ART.forEach((id, i) => { task(f, id).status = artStatuses[i]; });
+    return cli.refresh(f, ROOT);
+  };
+  const codingWith = {todo: fixture('todo', ['todo', 'todo']).computed.production.coding.done, done: fixture('done', ['todo', 'todo']).computed.production.coding.done};
+  assert.equal(codingWith.done, codingWith.todo + task(l, BACKDROP).points);
+  for (const b of ['todo', 'done']) for (const a0 of ['todo', 'in_progress', 'done']) for (const a1 of ['todo', 'done']) {
+    const f = fixture(b, [a0, a1]), label = `${BACKDROP}=${b}, ${ART[0]}=${a0}, ${ART[1]}=${a1}`;
+    assert.equal(task(f, BACKDROP).status, b, 'backdrop status independent of art tasks: ' + label);
+    assert.deepEqual(ART.map(id => task(f, id).status), [a0, a1], 'art task statuses independent of backdrop: ' + label);
+    assert.equal(f.computed.production.coding.done, codingWith[b], 'coding meter independent of art tasks: ' + label);
+    assert.ok(!cli.validate(f, ROOT).some(e => e.includes(BACKDROP)), 'no backdrop validation error from art statuses: ' + label);
+  }
   // A legitimate coding status change moves the meter by the frozen formula alone; no numeric fixture needs editing.
   const flip = fresh(), open = flip.tasks.find(x => x.stage === 'coding' && x.status === 'todo' && x.dependsOn.length === 0);
   if (open) {
