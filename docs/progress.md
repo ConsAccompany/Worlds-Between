@@ -4,11 +4,11 @@ Last updated: 2026-10-18
 
 ## Summary
 
-- Workflow now permits Codex coding/testing/integration during Max gaps. Both sprite runtimes and the VFX/audio event capabilities are integrated and credited; Chicago native materials are the next bounded content task. See [workflow](workflow.md).
+- Workflow now permits Codex coding/testing/integration during Max gaps. Both sprite runtimes and the VFX/audio event capabilities are integrated and credited; Chicago v06 material revision is produced, technically checked and ready for creator environment review; acceptance remains3/12. See [workflow](workflow.md).
 
 Current status as of 2026-10-18 (source of truth: the production-completion task ledger, `outputs/rpg-2-star-ocean-the-second_production-completion_task-ledger_v01_20261018-140533-3de52073.json`, updated only through its ledger CLI).
 
-- Production completion is 50.7% (coding 40% + content 60%, from frozen task points): coding 100%, content 17.8%. Inspection performed is 13.2% and creator approval is 7%; both are separate meters that never change production credit. The older 40.8% figure in the MVP progress state is a different, legacy mixed delivery/acceptance metric and is not compared with or subtracted from 50.7%.
+- Production completion is 50.9% (coding 40% + content 60%, from frozen task points): coding 100%, content 18.1%. Inspection performed is 13.2% and creator approval is 7%; both are separate meters that never change production credit. The older 40.8% figure in the MVP progress state is a different, legacy mixed delivery/acceptance metric and is not compared with or subtracted from 50.9%.
 - Scope: 51 character identities with 52 visual variants (male and female protagonist). Accepted so far: scenes 3/12, full runtime sprite sets 0/52, human post-art playthroughs 0/2. M2 global world and travel is technically 10/12 and not accepted. Final MVP acceptance is false.
 - Current canon: new runs start in NYC on 2537-05-25; the underground community is near the Catskills; travel uses the simple fixed whole-hour rule, which supersedes the earlier precise route-figure work (including the route-figure item in the M2 checklist below).
 - Recent technical work: the settings screen (language, master volume, movement preset) is functional; its UI art is unapproved. The Sentry v2 enemy, the battle backdrop loader and the Washington, D.C. annex pilots are technical capabilities that stay off by default. None of these is approved art.
