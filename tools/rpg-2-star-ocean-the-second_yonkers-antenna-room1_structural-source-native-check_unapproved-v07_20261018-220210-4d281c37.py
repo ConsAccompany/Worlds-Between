@@ -59,7 +59,21 @@ def main():
   x,y,w,h=item['crop_from_layer_xywh']
   checks[f'antenna_{index}_export_exact']=np.array_equal(np.array(Image.open(ROOT/item['runtime_png']['file']).convert('RGBA')),layers[index+9].a[y:y+h,x:x+w])
  C=module('existing_native_export_check',ROOT/'tools/rpg-2-star-ocean-the-second_yonkers-antenna-room1_pixel-source-pixelorama-check_unapproved-v03_20261017-224447-15709be4.py')
+ # Keep native diagnostics separate from byte-exact export checks: exit zero alone is not a clean log.
+ native_runs=[]
+ original_run=C.run_pixelorama
+ def logged_run(exe,argv,appdata):
+  result=original_run(exe,argv,appdata)
+  label=('split' if '--split-layers' in argv else 'flat')+'-'+Path(argv[-1]).suffix.lstrip('.')
+  text='STDOUT\n'+result.stdout+'\nSTDERR\n'+result.stderr
+  log=OUT/f'{PREFIX}_pixelorama-{label}-diagnostic-log_unapproved-v07_{STAMP}.txt'
+  log.write_text(text,encoding='utf-8')
+  problems=[line for line in text.splitlines() if any(token in line.lower() for token in ['error:', 'script error', 'get_child', 'ancestor', 'ancestry', 'orphan', 'leaked', 'still in use'])]
+  native_runs.append({'mode':label,'exit':result.returncode,'log':log.relative_to(ROOT).as_posix(),'diagnostic_lines':problems})
+  return result
+ C.run_pixelorama=logged_run
  native=C.pixelorama_checks(args.pixelorama,A,layers,manifest)
+ native['diagnostics']={'status':'errors_present' if any(run['diagnostic_lines'] for run in native_runs) else 'no_error_patterns_found','runs':native_runs}
  for ext in ['pxo','ora']:
   check=native[ext]
   checks[ext+'_pixelorama_exact']=check['split']['exit']==0 and check['split']['pngs']==13 and all(check['split']['layers_exact'].values()) and check['flat']['exit']==0 and check['flat']['exact'] and check['flat']['differing_texels']==0 and check['source_unchanged_by_cli']

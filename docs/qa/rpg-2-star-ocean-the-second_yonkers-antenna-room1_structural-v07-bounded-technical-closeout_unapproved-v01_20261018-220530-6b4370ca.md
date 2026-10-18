@@ -32,16 +32,18 @@ The material manifest binds assets and author/kit code hashes; the runtime repor
 
 | Check | Result |
 | --- | --- |
-| Source/native package | **18/18**: final asset/source hashes, 13 native layers, declared palette, binary alpha, exact flat/exports, PXO layer bytes, protected masks/anchors, real Pixelorama export |
+| Source/native package | **18/18 source/export checks only**: final asset/source hashes, 13 native layers, declared palette, binary alpha, exact flat/exports, PXO layer bytes, protected masks/anchors, real Pixelorama export |
 | Protected layers | Sky, wall kit/ivy, walkway/grating/trench, doors/sidewalls, front parapet and foreground remain byte-identical to v06 |
 | Protected alpha/anchors | All three antenna alpha masks and foreground alpha remain exact; antenna anchors `(163,210)`, `(320,210)`, `(477,210)` and crops `[x−64,58,128,152]` unchanged |
 | Pixelorama 1.2.3 official CLI | Both PXO and ORA opened and exported: 13/13 split layers exact for each, flat exports 0 differing texels, sources unchanged. Isolated temporary APPDATA; zero real preference changes and zero GUI autosave exclusions in the final run |
 | Actual Godot candidate and v06 control | Both exit 0 under fixed 60fps. Candidate injects only its five final textures into the normal survey scene in memory; no game file is replaced |
 | Targeted runtime evidence | **7/7**: final injection, clean logs, required interaction/transition checks, 14 collision cases, fresh control parity, 30 native captures and exact bilingual entry pixels |
 | Fresh-control behavior | **42 lines identical**, including positions, anchors, HUD/captions, collision stops, lane movement, slide/escape, reachability, six clues and three transitions |
-| Entry pixel proof | zh: 150,477 non-UI pixels compared, 0 differ; en: 149,065 compared, 0 differ. Each includes 11,753 antenna texels, 0 differ |
+| Entry pixel proof | Protected non-UI comparison masks against the final v07 native composition: zh 150,477 pixels and en 149,065 pixels, 0 differ. Each mask includes 11,753 antenna texels, 0 differ. This is not a whole-scene v06/v07 zero-difference claim |
 
 The collision runner is inherited from the committed v06 harness instead of copying its large implementation. Its `YK1_V06_*` lines name the **check protocol**, not the candidate art version. The new `YK1_V07_INJECTED` marker, manifest, native pixels and `YK1_V07_CAPTURE` paths bind the actual v07 assets. The inherited dish depth probe reports the existing `behind_hidden_px=-1` sentinel; no positive dish-hidden-pixel measurement is claimed. A/C and front visibility checks remain as in the control.
+
+The original inherited Pixelorama helper recorded export parity and exit codes but discarded native stdout/stderr. A final bounded diagnostic rerun saved all four logs. **Native diagnostic status is `errors_present`, not clean**: PXO split/flat logs contain shader `custom_samplers` errors; ORA split/flat also contain `get_child`, `is_ancestor_of`/control ancestry errors and shutdown object/resource leaks. All four commands exited 0 and still exported exact pixels. These errors are neither whitelisted nor treated as passed diagnostics. The 18/18 figure covers only the named source/export checks; native application reliability and native GUI Save As/reopen remain unresolved. Godot gameplay logs are separate and clean. The final source/native report lists every detected diagnostic line and links the four raw stdout/stderr logs.
 
 The first short capture attempt incorrectly looked for `SaveStore` as a root autoload and produced a script error. That attempt was stopped. The harness was corrected to the existing static `SaveStore.root_path` API; subsequent first captures and final candidate/control runs completed cleanly. The failed attempt is not counted as a passed check.
 
