@@ -65,10 +65,24 @@ const BATTLE_BACKDROP_BANDS := {
 	"archive": "res://assets/environments/rpg-2-star-ocean-the-second_scifi-archive-battle-arena_runtime-band_m8-candidate_20261014-213622-14315e18.png",
 	"outskirts": "res://assets/environments/rpg-2-star-ocean-the-second_scifi-outskirts-battle-arena_runtime-band_m8-candidate_20261014-213622-14315e18.png",
 }
+# Combat sprite set pilot: a TECHNICAL capability that loads data-driven high-density side-view action sets for the party
+# (contract in the helper below). No set is approved art (acceptance 0) and none is the default. Opt-in only: launch with
+# `-- --combat-sprite-set-pilot`, or set combat_sprite_set_override = 1 before the battle scene loads. Off by default, so every
+# fighter keeps its existing frames and the helper is never created. The index defaults to the SYNTHETIC DIAGNOSTIC test
+# fixtures (not art); `-- --combat-sprite-set-index=<res path>` or combat_sprite_set_index_override picks another index.
+# A fighter without a valid set (missing, invalid, unknown or partial) keeps its existing frames. Visual only: stats, reach,
+# AI, input, hit timing, positions, party order and saves are the same with the pilot on or off.
+const CombatSpriteSets := preload("res://scripts/rpg-2-star-ocean-the-second_combat-sprite-set_loader-playback_pilot-v01_20261018-153656-43a19158.gd")
+const COMBAT_SPRITE_SET_CLI_FLAG := "--combat-sprite-set-pilot"
+const COMBAT_SPRITE_SET_INDEX_ARG := "--combat-sprite-set-index="
+const COMBAT_SPRITE_SET_ART_APPROVED := false
+const COMBAT_SPRITE_SET_INDEX := "res://tests/fixtures/csp-fixture-v01_03f4172a/rpg-2-star-ocean-the-second_combat-set_fixture-index_not-art-v01_20261018-153656-03f4172a.json"
 
 static var sentry_v2_override := -1
 static var battle_backdrop_override := -1
 static var battle_backdrop_arena_override := ""
+static var combat_sprite_set_override := -1
+static var combat_sprite_set_index_override := ""
 
 var enemy_id := "patrol"
 var enemy: Dictionary
@@ -117,6 +131,8 @@ var battle_backdrop_path_override := ""
 var battle_backdrop_arena_id := ""
 var battle_backdrop_status := "off"
 var battle_backdrop_texture: Texture2D
+# Null unless the combat sprite set pilot is on.
+var combat_sprite_sets: RefCounted = null
 
 var title_label: Label
 var help_label: Label
@@ -168,6 +184,21 @@ static func battle_backdrop_arena(destination_id: String) -> String:
 	return arena_id if arena_id != "" else BATTLE_ARENA_BY_DESTINATION.get(destination_id, "")
 
 
+static func combat_sprite_set_enabled() -> bool:
+	if combat_sprite_set_override >= 0:
+		return combat_sprite_set_override == 1
+	return OS.get_cmdline_user_args().has(COMBAT_SPRITE_SET_CLI_FLAG)
+
+
+static func combat_sprite_set_index() -> String:
+	if combat_sprite_set_index_override != "":
+		return combat_sprite_set_index_override
+	for argument in OS.get_cmdline_user_args():
+		if argument.begins_with(COMBAT_SPRITE_SET_INDEX_ARG):
+			return argument.trim_prefix(COMBAT_SPRITE_SET_INDEX_ARG)
+	return COMBAT_SPRITE_SET_INDEX
+
+
 func _ready() -> void:
 	texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	enemy_id = AppState.battle_enemy_id if ENEMIES.has(AppState.battle_enemy_id) else "patrol"
@@ -177,6 +208,7 @@ func _ready() -> void:
 		fighters.append({"id": AppState.active_party_ids[index], "x": 135.0 + index * 36.0, "attack_cooldown": 0.0, "dodge_cooldown": 0.0, "dodge_time": 0.0, "dodge_direction": -1.0, "skill_cooldown": 0.0, "command": "default", "guard": false, "boost": 0, "visual_action": "", "visual_elapsed": 0.0, "visual_loop_kind": "idle", "visual_loop_clock": 0.0, "visual_moving": false})
 	_load_enemy_sprite_pilot()
 	_load_battle_backdrop()
+	_load_combat_sprite_sets()
 	_build_ui()
 	var audio_player := AudioStreamPlayer.new()
 	var ambient: AudioStreamWAV = BATTLE_AMBIENCE.duplicate()
@@ -196,6 +228,7 @@ func _process(delta: float) -> void:
 		return
 	if battle_finished:
 		_advance_fighter_visuals(delta, [])
+		_advance_combat_sprite_sets(delta)
 		_advance_enemy_visual(delta, false)
 		queue_redraw()
 		return
@@ -231,6 +264,7 @@ func _process(delta: float) -> void:
 	if not battle_finished:
 		_update_enemy(delta)
 	_advance_fighter_visuals(delta, initial_positions)
+	_advance_combat_sprite_sets(delta)
 	_advance_enemy_visual(delta, absf(enemy_x - enemy_start_x) > 0.01)
 	_update_hud()
 	queue_redraw()
@@ -263,6 +297,14 @@ func _advance_fighter_visuals(delta: float, initial_positions: Array[float]) -> 
 			fighter["visual_loop_clock"] = 0.0
 		else:
 			fighter["visual_loop_clock"] = float(fighter["visual_loop_clock"]) + delta
+
+
+func _advance_combat_sprite_sets(delta: float) -> void:
+	# Reads combat state only; it never changes stats, timers or positions.
+	if combat_sprite_sets == null:
+		return
+	for index in fighters.size():
+		combat_sprite_sets.advance(index, fighters[index], _is_alive(index), enemy_x, delta)
 
 
 func _advance_enemy_visual(delta: float, moved: bool) -> void:
@@ -859,6 +901,19 @@ func _load_battle_backdrop() -> void:
 	battle_backdrop_status = "loaded"
 
 
+func _load_combat_sprite_sets() -> void:
+	combat_sprite_sets = null
+	if not combat_sprite_set_enabled():
+		return
+	var keys: Array[String] = []
+	for fighter in fighters:
+		keys.append(CombatSpriteSets.set_key(String(fighter["id"]), AppState.hero_appearance))
+	combat_sprite_sets = CombatSpriteSets.new()
+	combat_sprite_sets.configure(combat_sprite_set_index(), keys)
+	# The first frame shows each fighter's current state even before a combat step runs.
+	_advance_combat_sprite_sets(0.0)
+
+
 func _draw() -> void:
 	draw_rect(Rect2(0, 0, 640, 360), Color("#101a27"))
 	if battle_backdrop_texture != null:
@@ -887,6 +942,11 @@ func _draw() -> void:
 func _draw_fighter(fighter: Dictionary, index: int) -> void:
 	var x: float = fighter["x"]
 	var member_id: String = fighter["id"]
+	if combat_sprite_sets != null and combat_sprite_sets.has_set(index):
+		if _is_alive(index) and index == controlled_index and not auto_mode:
+			draw_circle(Vector2(x, 272), 13.0, Color("#f5e1a6"))
+		combat_sprite_sets.draw_fighter(self, index, x, ARENA_FLOOR_Y)
+		return
 	if (member_id == "hero" and ["male", "female"].has(AppState.hero_appearance)) or ["liang-xu", "zhao-ling", "ji-cheng"].has(member_id):
 		if _is_alive(index) and index == controlled_index and not auto_mode:
 			draw_circle(Vector2(x, 272), 13.0, Color("#f5e1a6"))
