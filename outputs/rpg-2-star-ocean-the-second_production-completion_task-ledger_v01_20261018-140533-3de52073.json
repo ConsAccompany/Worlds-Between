@@ -2,7 +2,7 @@
   "id": "rpg-2-star-ocean-the-second_production-completion_v01",
   "schemaVersion": 2,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-18T21:56:00Z",
+  "updatedAt": "2026-10-18T22:14:34Z",
   "zh": "制作完成度任务台账：衡量已完成的工作量（编码 40% + 内容 60%）；检查／审查与创作者批准分开计量，均不改变制作分；免除的审查不算已执行的工作；运营任务列出负责方但不计百分比。",
   "en": "Production-completion task ledger: measures work done (coding 40% + content 60%); inspection/review and creator approval are separate meters and never change production credit; waived reviews are not performed work; operations tasks list owners but carry no percentage.",
   "brief": "docs/rpg-2-star-ocean-the-second_production-completion_bilingual-brief_v01_20261018-140533-3ea2a621.md",
@@ -349,6 +349,38 @@
         },
         "previousTaskSetSha256": "34c2152f52a2c75ddd149f1ce515866b9b2071a800333c2585407a3a7c3137cd",
         "taskSetSha256": "598303cc48078fb00e961e59c66c6cf507b820bc401359950edec74d0b2bf1bf"
+      },
+      {
+        "at": "2026-10-18T22:08:10Z",
+        "kind": "owner-assignment",
+        "taskId": "content.char.protagonist-female.walk-west",
+        "fromOwner": "claude",
+        "toOwner": "codex",
+        "changedTaskIds": [
+          "content.char.protagonist-female.walk-west"
+        ],
+        "reason": {
+          "zh": "",
+          "en": "Continue one representative heroine set with bounded authored west locomotion during Max gap."
+        },
+        "previousTaskSetSha256": "598303cc48078fb00e961e59c66c6cf507b820bc401359950edec74d0b2bf1bf",
+        "taskSetSha256": "1733c14868dbf59a9208a3252395882ecfdf4a4b0a5be43c61266b31cb6177d8"
+      },
+      {
+        "at": "2026-10-18T22:14:33Z",
+        "kind": "owner-assignment",
+        "taskId": "qa.scene.outskirts-survey-outer.check",
+        "fromOwner": "claude",
+        "toOwner": "codex",
+        "changedTaskIds": [
+          "qa.scene.outskirts-survey-outer.check"
+        ],
+        "reason": {
+          "zh": "",
+          "en": "Codex produced and independently inspected the v07 source/runtime evidence during Max gap."
+        },
+        "previousTaskSetSha256": "1733c14868dbf59a9208a3252395882ecfdf4a4b0a5be43c61266b31cb6177d8",
+        "taskSetSha256": "aa07795bfbbb50ef43b025d87f0672c95fba6ea58d590b5bb052905b56911557"
       }
     ],
     "pointsByStage": {
@@ -393,12 +425,12 @@
         "tasksDone": 23
       },
       "content": {
-        "done": 344,
+        "done": 346,
         "total": 1879,
-        "percent": 18.3,
+        "percent": 18.4,
         "weight": 60,
         "tasks": 714,
-        "tasksDone": 112
+        "tasksDone": 113
       }
     },
     "inspection": {
@@ -463,11 +495,11 @@
         "waivedPoints": 0
       },
       "content": {
-        "done": 344,
+        "done": 346,
         "total": 1879,
-        "percent": 18.3,
+        "percent": 18.4,
         "tasks": 714,
-        "tasksDone": 112,
+        "tasksDone": 113,
         "waivedTasks": 0,
         "waivedPoints": 0
       },
@@ -519,24 +551,24 @@
     },
     "byOwner": {
       "claude": {
-        "tasks": 746,
+        "tasks": 744,
         "operationsTasks": 0,
-        "points": 1957,
-        "pointsDone": 361,
+        "points": 1953,
+        "pointsDone": 360,
         "byStatus": {
-          "done": 84,
-          "todo": 662
+          "done": 83,
+          "todo": 661
         },
         "readyInQueue": 0,
         "revisionsBlockingApproval": 2
       },
       "codex": {
-        "tasks": 197,
+        "tasks": 199,
         "operationsTasks": 2,
-        "points": 237,
-        "pointsDone": 121,
+        "points": 241,
+        "pointsDone": 124,
         "byStatus": {
-          "done": 78,
+          "done": 80,
           "todo": 114,
           "in_progress": 1,
           "not_required": 4
@@ -604,7 +636,7 @@
       },
       "characters": {
         "content": {
-          "done": 78,
+          "done": 80,
           "total": 1460
         },
         "technical-inspection": {
@@ -1219,9 +1251,9 @@
     {"id":"content.char.protagonist-female.static-west","type":"native-pixel","title":{"zh":"主角·女 · 西向高密度静止帧","en":"Female protagonist · west high-density static"},"area":"characters","stage":"content","owner":"codex","status":"done","points":2,"doneCriterion":{"zh":"西向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"west native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":["content.char.protagonist-female.static-south"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_protagonist-female_west-static-produced-candidate_unapproved-v01_20261018-174858-e21f1813.md","outputs/female-west-static-v01/rpg-2-star-ocean-the-second_protagonist-female_west-static-evidence-manifest_v01_20261018-174753-9b21bd7f.json"],"subject":{"kind":"character-variant","id":"protagonist-female"},"statusAt":"2026-10-18T21:50:56Z","note":{"zh":"Codex已制作真实西向静止帧，并独立核对源文件与实机证据；仅静态、未接入、未批准。","en":"Codex-authored true west static produced and source/gameplay evidence independently verified; static-only, nonruntime, unapproved."}},
     {"id":"content.char.protagonist-female.static-north","type":"native-pixel","title":{"zh":"主角·女 · 北向高密度静止帧","en":"Female protagonist · north high-density static"},"area":"characters","stage":"content","owner":"claude","status":"done","points":2,"doneCriterion":{"zh":"北向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"north native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":["content.char.protagonist-female.static-south"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_protagonist-female_north-idle-static-pilot_qa-note_unapproved-nonruntime-v01_20261018-090713-4bcb9cdb.md"],"subject":{"kind":"character-variant","id":"protagonist-female"}},
     {"id":"content.char.protagonist-female.static-east","type":"native-pixel","title":{"zh":"主角·女 · 东向高密度静止帧","en":"Female protagonist · east high-density static"},"area":"characters","stage":"content","owner":"codex","status":"done","points":2,"doneCriterion":{"zh":"东向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"east native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":["content.char.protagonist-female.static-south"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_protagonist-female_east-static-produced-candidate_unapproved-v01_20261018-175227-be96490e.md","outputs/female-east-static-v01/rpg-2-star-ocean-the-second_protagonist-female_east-static-evidence-manifest_v01_20261018-175207-452cc5f9.json"],"subject":{"kind":"character-variant","id":"protagonist-female"},"statusAt":"2026-10-18T21:53:43Z","note":{"zh":"Codex已制作东向侧面并查看明暗实机图，独立源文件与原生/截图哈希检查通过；仅静态、未接入、未批准。","en":"Codex-authored east profile inspected in bright/dark actual gameplay; independent source/native/capture hash check passed. Static-only, nonruntime, unapproved."}},
-    {"id":"content.char.protagonist-female.idle-anim","type":"native-pixel","title":{"zh":"主角·女 · 四方向待机动画","en":"Female protagonist · four-direction idle animation"},"area":"characters","stage":"content","owner":"codex","status":"in_progress","points":2,"doneCriterion":{"zh":"四个方向的待机循环已提交并有 QA","en":"Idle loops for all four directions committed with QA"},"dependsOn":["content.char.protagonist-female.static-south","content.char.protagonist-female.static-west","content.char.protagonist-female.static-north","content.char.protagonist-female.static-east"],"evidence":[],"subject":{"kind":"character-variant","id":"protagonist-female"},"statusAt":"2026-10-18T21:53:43Z","note":{"zh":"","en":"Authoring four-direction planted-foot idle loops with actual normal-speed playback evidence; no locomotion, combat or default adoption."}},
+    {"id":"content.char.protagonist-female.idle-anim","type":"native-pixel","title":{"zh":"主角·女 · 四方向待机动画","en":"Female protagonist · four-direction idle animation"},"area":"characters","stage":"content","owner":"codex","status":"done","points":2,"doneCriterion":{"zh":"四个方向的待机循环已提交并有 QA","en":"Idle loops for all four directions committed with QA"},"dependsOn":["content.char.protagonist-female.static-south","content.char.protagonist-female.static-west","content.char.protagonist-female.static-north","content.char.protagonist-female.static-east"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_female-idle-four_produced-loops-unapproved-v01_20261018-180355-13615bb6.md","outputs/female-idle-four-v01/rpg-2-star-ocean-the-second_female-idle-four_evidence-manifest_v01_20261018-175418-34294d7d.json"],"subject":{"kind":"character-variant","id":"protagonist-female"},"statusAt":"2026-10-18T22:08:09Z","note":{"zh":"四方向待机循环已制作，具原生PXO/源文件证据和真实正常1×录屏；补充ORA诊断失败如实保留，不代表美术、流畅度或完整精灵验收。","en":"Four idle loops produced with primary nativePXO/source proof and actual1x movies; supplementalORA diagnostic failures retained. Not art/fluidity/fullset approved."}},
     {"id":"content.char.protagonist-female.walk-south","type":"native-pixel","title":{"zh":"主角·女 · 南向行走／跑动","en":"Female protagonist · south walk/run"},"area":"characters","stage":"content","owner":"claude","status":"done","points":3,"doneCriterion":{"zh":"南向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"south walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.protagonist-female.static-south"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_protagonist-female_south-run-v07_repress-rise-lock-control-correction_qa-note_unapproved-nonruntime_20261018-085800-a589f0f3.md","outputs/rpg-2-star-ocean-the-second_mvp-progress_state_v01_20261013-183804-28a1c7e4.json"],"subject":{"kind":"character-variant","id":"protagonist-female"},"note":{"zh":"v07 南向跑动已提交（1942e31，closeout 20587ab6），单一方向、未接入、未批准。","en":"v07 south run committed (1942e31, closeout 20587ab6): single direction, nonruntime, unapproved."},"statusAt":"2026-10-18T10:00:57Z"},
-    {"id":"content.char.protagonist-female.walk-west","type":"native-pixel","title":{"zh":"主角·女 · 西向行走／跑动","en":"Female protagonist · west walk/run"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"西向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"west walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.protagonist-female.static-west"],"evidence":[],"subject":{"kind":"character-variant","id":"protagonist-female"}},
+    {"id":"content.char.protagonist-female.walk-west","type":"native-pixel","title":{"zh":"主角·女 · 西向行走／跑动","en":"Female protagonist · west walk/run"},"area":"characters","stage":"content","owner":"codex","status":"in_progress","points":3,"doneCriterion":{"zh":"西向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"west walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.protagonist-female.static-west"],"evidence":[],"subject":{"kind":"character-variant","id":"protagonist-female"},"statusAt":"2026-10-18T22:08:10Z","note":{"zh":"","en":"One authored west run/stop pilot; cadence/contact/settle must be judged through actual normal1x gameplay. No other direction/default adoption."}},
     {"id":"content.char.protagonist-female.walk-north","type":"native-pixel","title":{"zh":"主角·女 · 北向行走／跑动","en":"Female protagonist · north walk/run"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"北向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"north walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.protagonist-female.static-north"],"evidence":[],"subject":{"kind":"character-variant","id":"protagonist-female"}},
     {"id":"content.char.protagonist-female.walk-east","type":"native-pixel","title":{"zh":"主角·女 · 东向行走／跑动","en":"Female protagonist · east walk/run"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"东向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"east walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.protagonist-female.static-east"],"evidence":[],"subject":{"kind":"character-variant","id":"protagonist-female"}},
     {"id":"content.char.protagonist-female.display","type":"native-pixel","title":{"zh":"主角·女 · 游戏内展示图","en":"Female protagonist · in-game display image"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"游戏内展示图已提交并在界面中显示","en":"The in-game display image is committed and shown in the UI"},"dependsOn":["content.char.protagonist-female.static-south"],"evidence":[],"subject":{"kind":"character-variant","id":"protagonist-female"}},
@@ -2277,8 +2309,8 @@
     {"id":"content.scene.outskirts-survey-outer.wiring","type":"integration","title":{"zh":"扬克斯天线走廊 1 号房 · 碰撞、热点与出入口","en":"Yonkers antenna corridor room 1 · collision, hotspots and exits"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":3,"doneCriterion":{"zh":"碰撞、热点、出入口与存档有自动检查","en":"Collision, hotspots, exits and saves have automated checks"},"dependsOn":["content.scene.outskirts-survey-outer.plate"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_scifi-region-eleven-scene_visual-gate-audit_m8-v01_20261014-201003-6b73e7a4.md","game/tests/m7_smoke.gd"],"subject":{"kind":"scene-gate","id":"visual-scene.outskirts-survey-outer"}},
     {"id":"content.scene.outskirts-survey-outer.native-pass","type":"native-pixel","title":{"zh":"扬克斯天线走廊 1 号房 · 原生像素画质版","en":"Yonkers antenna corridor room 1 · native pixel quality pass"},"area":"scenes","stage":"content","owner":"codex","status":"done","points":12,"doneCriterion":{"zh":"原生像素画质版（道具／分层）已提交并有 QA，可为可选启用","en":"A native pixel quality pass (fixtures / layers) is committed with QA; opt-in is allowed"},"dependsOn":["content.scene.outskirts-survey-outer.plate"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_yonkers-antenna-corridor-room1_three-antenna-fixture-native-scene-visual-qa_unapproved-v01_20261017-025000-8e41c7b2.md"],"subject":{"kind":"scene-gate","id":"visual-scene.outskirts-survey-outer"}},
     {"id":"content.scene.outskirts-survey-outer.native-default","type":"integration","title":{"zh":"扬克斯天线走廊 1 号房 · 画质版默认接入","en":"Yonkers antenna corridor room 1 · quality pass on by default"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":2,"doneCriterion":{"zh":"画质版默认在游戏中使用","en":"The quality pass is used in the game by default"},"dependsOn":["content.scene.outskirts-survey-outer.native-pass","content.scene.outskirts-survey-outer.wiring"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_yonkers-antenna-corridor-room1_v03-outdoor-refinement-candidate_qa-note_unapproved-v03_20261017-224447-15709be4.md","game/scripts/survey_annex.gd"],"subject":{"kind":"scene-gate","id":"visual-scene.outskirts-survey-outer"}},
-    {"id":"qa.scene.outskirts-survey-outer.check","type":"technical-check","title":{"zh":"扬克斯天线走廊 1 号房 · 技术检查","en":"Yonkers antenna corridor room 1 · technical check"},"area":"scenes","stage":"technical-inspection","owner":"claude","status":"done","points":1,"doneCriterion":{"zh":"当前画质版的 Godot 检查全部通过","en":"Godot checks of the current quality pass all pass"},"dependsOn":["content.scene.outskirts-survey-outer.native-pass"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_yonkers-antenna-corridor-room1_v06-outdoor-readability-refinement_qa-note_unapproved-v06_20261018-084726-c8f0d900.md"],"subject":{"kind":"scene-gate","id":"visual-scene.outskirts-survey-outer"},"target":"content.scene.outskirts-survey-outer.native-pass","outcome":"passed"},
-    {"id":"review.scene.outskirts-survey-outer","type":"visual-review","title":{"zh":"扬克斯天线走廊 1 号房 · 视觉审查","en":"Yonkers antenna corridor room 1 · visual review"},"area":"scenes","stage":"visual-review","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"Codex 审查 640×360 实机画面并记录结论","en":"Codex reviews actual 640x360 captures and records a verdict"},"dependsOn":["qa.scene.outskirts-survey-outer.check"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_yonkers-antenna-corridor-room1_v06-outdoor-readability-refinement_qa-note_unapproved-v06_20261018-084726-c8f0d900.md","outputs/rpg-2-star-ocean-the-second_mvp-progress_state_v01_20261013-183804-28a1c7e4.json"],"subject":{"kind":"scene-gate","id":"visual-scene.outskirts-survey-outer"},"target":"content.scene.outskirts-survey-outer.native-pass","outcome":"changes_requested","note":{"zh":"root 对 v06 的视觉判断（closeout 5597d7f5）：墙面更平静、设备更清楚，但大面积平墙、底座发白、三块平台布局呆板；美术未批准。","en":"Root visual judgment of v06 (closeout 5597d7f5): calmer wall and clearer fixtures, but large flat wall areas, pale bases and a rigid three-pad layout; art unapproved."},"statusAt":"2026-10-18T13:12:00Z"},
+    {"id":"qa.scene.outskirts-survey-outer.check","type":"technical-check","title":{"zh":"扬克斯天线走廊 1 号房 · 技术检查","en":"Yonkers antenna corridor room 1 · technical check"},"area":"scenes","stage":"technical-inspection","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"当前画质版的 Godot 检查全部通过","en":"Godot checks of the current quality pass all pass"},"dependsOn":["content.scene.outskirts-survey-outer.native-pass"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_yonkers-antenna-room1_structural-v07-bounded-technical-closeout_unapproved-v01_20261018-220530-6b4370ca.md","outputs/yk1-v07_7a10f835/rpg-2-star-ocean-the-second_yonkers-antenna-room1_structural-evidence-package_unapproved-v07_20261018-220210-4d281c37.json"],"subject":{"kind":"scene-gate","id":"visual-scene.outskirts-survey-outer"},"target":"content.scene.outskirts-survey-outer.native-pass","statusAt":"2026-10-18T22:14:33Z","outcome":"passed","note":{"zh":"","en":"Current Godot runtime7/7,42controlbehaviorlines and58file binding verified in canonical path; source/export18/18 only. Native app diagnostics errors_present, no GUI reliability or art acceptance."},"history":[{"outcome":"passed","statusAt":null,"evidence":["docs/qa/rpg-2-star-ocean-the-second_yonkers-antenna-corridor-room1_v06-outdoor-readability-refinement_qa-note_unapproved-v06_20261018-084726-c8f0d900.md"]}]},
+    {"id":"review.scene.outskirts-survey-outer","type":"visual-review","title":{"zh":"扬克斯天线走廊 1 号房 · 视觉审查","en":"Yonkers antenna corridor room 1 · visual review"},"area":"scenes","stage":"visual-review","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"Codex 审查 640×360 实机画面并记录结论","en":"Codex reviews actual 640x360 captures and records a verdict"},"dependsOn":["qa.scene.outskirts-survey-outer.check"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_yonkers-antenna-room1_structural-v07-bounded-technical-closeout_unapproved-v01_20261018-220530-6b4370ca.md","outputs/yk1-v07_7a10f835/cap/rpg-2-star-ocean-the-second_yonkers-antenna-room1_structural-godot-en-entry-ref48_unapproved-v07_20261018-220210-4d281c37.png"],"subject":{"kind":"scene-gate","id":"visual-scene.outskirts-survey-outer"},"target":"content.scene.outskirts-survey-outer.native-pass","note":{"zh":"v07门楣/侧壁深度和设备落地感改善，但大面积混凝土与重复设备/格栅仍偏示意，尚不适合最终美术验收。","en":"v07 has clearer header/jamb depth and grounded bases, but broad concrete and repeated station/grating rhythm remain schematic against acceptedroomfinish. Not ready for final art acceptance."},"statusAt":"2026-10-18T22:14:34Z","history":[{"outcome":"changes_requested","statusAt":"2026-10-18T13:12:00Z","evidence":["docs/qa/rpg-2-star-ocean-the-second_yonkers-antenna-corridor-room1_v06-outdoor-readability-refinement_qa-note_unapproved-v06_20261018-084726-c8f0d900.md","outputs/rpg-2-star-ocean-the-second_mvp-progress_state_v01_20261013-183804-28a1c7e4.json"]}],"outcome":"changes_requested"},
     {"id":"creator.scene.outskirts-survey-outer.accept","type":"creator-acceptance","title":{"zh":"扬克斯天线走廊 1 号房 · 场景画质验收","en":"Yonkers antenna corridor room 1 · scene-quality acceptance"},"area":"scenes","stage":"creator-approval","owner":"creator","status":"todo","points":1,"doneCriterion":{"zh":"approvalLedger 记有 acceptanceKind scene-visual 的验收条目","en":"approvalLedger records an acceptanceKind scene-visual item"},"dependsOn":["content.scene.outskirts-survey-outer.native-pass"],"evidence":[],"subject":{"kind":"scene-gate","id":"visual-scene.outskirts-survey-outer"},"target":"content.scene.outskirts-survey-outer.native-pass"},
     {"id":"content.scene.outskirts-survey-inner.plate","type":"integration","title":{"zh":"扬克斯信号维修 2 号房 · 场景底板","en":"Yonkers signal maintenance room 2 · scene plate"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":4,"doneCriterion":{"zh":"可玩场景底板已提交并在运行时可进入（概念图不算）","en":"A playable scene plate is committed and enterable in the runtime (a concept image does not count)"},"dependsOn":[],"evidence":["docs/qa/rpg-2-star-ocean-the-second_scifi-region-eleven-scene_visual-gate-audit_m8-v01_20261014-201003-6b73e7a4.md"],"subject":{"kind":"scene-gate","id":"visual-scene.outskirts-survey-inner"}},
     {"id":"content.scene.outskirts-survey-inner.wiring","type":"integration","title":{"zh":"扬克斯信号维修 2 号房 · 碰撞、热点与出入口","en":"Yonkers signal maintenance room 2 · collision, hotspots and exits"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":3,"doneCriterion":{"zh":"碰撞、热点、出入口与存档有自动检查","en":"Collision, hotspots, exits and saves have automated checks"},"dependsOn":["content.scene.outskirts-survey-inner.plate"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_scifi-region-eleven-scene_visual-gate-audit_m8-v01_20261014-201003-6b73e7a4.md","game/tests/m7_smoke.gd"],"subject":{"kind":"scene-gate","id":"visual-scene.outskirts-survey-inner"}},
@@ -2344,7 +2376,7 @@
     {"id":"ops.codex.site-publication","type":"ops-publication","title":{"zh":"新制作完成度看板 · Site 正式发布","en":"New production dashboard · official Site publication"},"area":"operations","stage":"operations","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"root 审查后，Codex 发布准备好的 Site 源码并核对线上数字","en":"After root review, Codex publishes the prepared Site source and verifies the live numbers"},"dependsOn":["ops.codex.dashboard-browser-inspection"],"evidence":["outputs/rpg-2-star-ocean-the-second_cloud-tracker_production-dashboard-live_v21_20261018-151928-31d75ac4.jpg","docs/qa/rpg-2-star-ocean-the-second_production-dashboard_browser-inspection-and-site-v21-publication_qa-receipt_v01_20261018-152029-df71b8c3.md","docs/qa/rpg-2-star-ocean-the-second_cloud-tracker_offline-bootstrap-live-verification_v25_20261018-175501-c284332e.md","outputs/rpg-2-star-ocean-the-second_cloud-tracker_workflow-live-production_v25_20261018-175405-94e389d3.jpg"],"subject":{"kind":"feature","id":"dashboard.production-completion"},"statusAt":"2026-10-18T21:55:01Z","note":{"zh":"线上 Site v21 已私有部署：源 1bd4ae98，部署 appgdep_6ad51b5cbdd08191a3b007f9c628b09d；线上显示 GitHub 6519f85、四个指标、折叠的旧 40.8%，组合搜索返回 1 个任务。","en":"PrivateSitev25 offline bootstrap published and actuallive986b27b51.0% observed; operations have no production points."}},
     {"id":"content.scene.map.native-pass.revision","type":"revision","title":{"zh":"科技区世界地图 · 原生像素画质版 · Codex 对 v03r1 视觉判断后的修订（v03r2）","en":"Science-sphere world map · native pixel quality pass · Revision after the Codex v03r1 visual judgment (v03r2)"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":6,"doneCriterion":{"zh":"针对最近一次审查／创作者意见的修订版已提交并有 QA；后续版本只更新本条，不新增分值","en":"A revision answering the latest review / creator request is committed with QA; later versions update this bucket and add no points"},"dependsOn":["content.scene.map.native-pass"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_global-map_v03r1-codex-native-visual-judgment_unapproved-v01_20261017-194711-66d8a7b4.md","docs/qa/rpg-2-star-ocean-the-second_global-map_v03r2-bounded-visual-gate_qa-note_unapproved-v03r2_20261017-224631-9875b9e2.md"],"subject":{"kind":"scene-gate","id":"visual-scene.map"},"target":"content.scene.map.native-pass","statusAt":"2026-10-18T02:46:31Z"},
     {"id":"content.scene.city.native-pass.revision","type":"revision","title":{"zh":"纽约市政厅公园（城市） · 原生像素画质版 · 创作者否决 v04 后的修订（v06）","en":"NYC City Hall Park (city) · native pixel quality pass · Revision after the creator rejected v04 (v06)"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":6,"doneCriterion":{"zh":"针对最近一次审查／创作者意见的修订版已提交并有 QA；后续版本只更新本条，不新增分值","en":"A revision answering the latest review / creator request is committed with QA; later versions update this bucket and add no points"},"dependsOn":["content.scene.city.native-pass"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_nyc-city-hall-park_style-alignment-visual-direction_unapproved-v01_20261016-225800-2a4e7c91.md","docs/qa/rpg-2-star-ocean-the-second_nyc-city-hall-park_scene-candidate-640x360_qa-note_unapproved-v06_20261017-165253-4519dffe.md"],"subject":{"kind":"scene-gate","id":"visual-scene.city"},"target":"content.scene.city.native-pass","statusAt":"2026-10-17T20:52:53Z"},
-    {"id":"content.scene.outskirts-survey-outer.native-pass.revision","type":"revision","title":{"zh":"扬克斯天线走廊 1 号房 · 原生像素画质版 · 创作者否决 v02 室外观感后的修订（v03 起，最新 v06）","en":"Yonkers antenna corridor room 1 · native pixel quality pass · Revision after the creator rejected the v02 outdoor look (v03 onward, latest v06)"},"area":"scenes","stage":"content","owner":"codex","status":"done","points":6,"doneCriterion":{"zh":"针对最近一次审查／创作者意见的修订版已提交并有 QA；后续版本只更新本条，不新增分值","en":"A revision answering the latest review / creator request is committed with QA; later versions update this bucket and add no points"},"dependsOn":["content.scene.outskirts-survey-outer.native-pass"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_yonkers-antenna-corridor-room1_v03-outdoor-refinement-candidate_qa-note_unapproved-v03_20261017-224447-15709be4.md","docs/qa/rpg-2-star-ocean-the-second_yonkers-antenna-corridor-room1_v06-outdoor-readability-refinement_qa-note_unapproved-v06_20261018-084726-c8f0d900.md"],"subject":{"kind":"scene-gate","id":"visual-scene.outskirts-survey-outer"},"target":"content.scene.outskirts-survey-outer.native-pass","statusAt":"2026-10-18T12:47:26Z"},
+    {"id":"content.scene.outskirts-survey-outer.native-pass.revision","type":"revision","title":{"zh":"扬克斯天线走廊 1 号房 · 原生像素画质版 · 创作者否决 v02 室外观感后的修订（v03 起，最新 v06）","en":"Yonkers antenna corridor room 1 · native pixel quality pass · Revision after the creator rejected the v02 outdoor look (v03 onward, latest v06)"},"area":"scenes","stage":"content","owner":"codex","status":"done","points":6,"doneCriterion":{"zh":"针对最近一次审查／创作者意见的修订版已提交并有 QA；后续版本只更新本条，不新增分值","en":"A revision answering the latest review / creator request is committed with QA; later versions update this bucket and add no points"},"dependsOn":["content.scene.outskirts-survey-outer.native-pass"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_yonkers-antenna-room1_structural-v07-bounded-technical-closeout_unapproved-v01_20261018-220530-6b4370ca.md","outputs/yk1-v07_7a10f835/rpg-2-star-ocean-the-second_yonkers-antenna-room1_structural-evidence-package_unapproved-v07_20261018-220210-4d281c37.json"],"subject":{"kind":"scene-gate","id":"visual-scene.outskirts-survey-outer"},"target":"content.scene.outskirts-survey-outer.native-pass","statusAt":"2026-10-18T22:14:33Z","note":{"zh":"v07结构/材质修订已制作，不按新版本增加分值。原生导出像素一致，但软件诊断仍有错误；美术仍需打磨。","en":"v07 bounded structural/material revision produced; no new version points. Native exports exact but application diagnostics unresolved; art changes_requested."}},
     {"id":"content.scene.ruins.native-pass.revision","type":"revision","title":{"zh":"华盛顿国会大厦西侧废墟 · 原生像素画质版 · root 对 v12r2 外观意见后的修订（v13 局部坍塌，可选启用）","en":"Washington Capitol west ruins · native pixel quality pass · Revision after root's v12r2 critique (v13 localized collapse, opt-in flag)"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":6,"doneCriterion":{"zh":"针对最近一次审查／创作者意见的修订版已提交并有 QA；后续版本只更新本条，不新增分值","en":"A revision answering the latest review / creator request is committed with QA; later versions update this bucket and add no points"},"dependsOn":["content.scene.ruins.native-pass"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_ruin-material-collapse_qa-note_unapproved-v13_20261018-100938-075675cf.md","docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_v13-flag-integration_qa-note_unapproved-v13_20261018-135539-63201688.md"],"subject":{"kind":"scene-gate","id":"visual-scene.ruins"},"target":"content.scene.ruins.native-pass","statusAt":"2026-10-18T18:06:24Z"},
     {"id":"content.combat.protagonist-female.combat-static.revision","type":"revision","title":{"zh":"主角·女 · 横向战斗静止帧 · 按创作者对 v11 的意见修订（v12–v14）","en":"Female protagonist · side-view combat static · Revision after the creator feedback on v11 (v12-v14)"},"area":"combat","stage":"content","owner":"claude","status":"done","points":2,"doneCriterion":{"zh":"针对最近一次审查／创作者意见的修订版已提交并有 QA；后续版本只更新本条，不新增分值","en":"A revision answering the latest review / creator request is committed with QA; later versions update this bucket and add no points"},"dependsOn":["content.combat.protagonist-female.combat-static"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_protagonist-female_battle-static-v11-creator-feedback-and-v12-visual-target_unapproved-v01_20261017-193755-c7a93e12.md","docs/qa/rpg-2-star-ocean-the-second_protagonist-female_battle-static-v14-cloth-volume-leg-anatomy_qa-note_unapproved-v01_20261018-084553-dda2c05f.md"],"subject":{"kind":"character-variant","id":"protagonist-female"},"target":"content.combat.protagonist-female.combat-static","statusAt":"2026-10-18T12:45:53Z"},
     {"id":"content.char.protagonist-female.walk-south.revision","type":"revision","title":{"zh":"主角·女 · 南向行走／跑动 · 跑动／停步打磨（v10 + r1，已制作的技术修订；步态与流畅度未批准）","en":"Female protagonist · south walk/run · Run/stop polish (v10 + r1, produced technical revision; gait and fluidity unapproved)"},"area":"characters","stage":"content","owner":"claude","status":"done","points":2,"doneCriterion":{"zh":"针对最近一次审查／创作者意见的修订版已提交并有 QA；后续版本只更新本条，不新增分值","en":"A revision answering the latest review / creator request is committed with QA; later versions update this bucket and add no points"},"dependsOn":["content.char.protagonist-female.walk-south"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_female-south-run-v10r1_reach-landing-amendment_qa-note_unapproved-nonruntime_20261018-142136-249dbf66.md","outputs/rpg-2-star-ocean-the-second_city-annex_female-south-run-v10r1-capture-receipt-h48_unapproved_20261018-182800-9ee66cb8.json"],"subject":{"kind":"character-variant","id":"protagonist-female"},"target":"content.char.protagonist-female.walk-south","statusAt":"2026-10-18T18:36:18Z"},

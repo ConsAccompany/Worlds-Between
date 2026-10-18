@@ -72,15 +72,19 @@ const before = [LEDGER, PROGRESS].map(sha);
   pass(`production ${expected}% = round1(40 x ${pts('coding', true)}/${pts('coding')} + 60 x ${pts('content', true)}/${pts('content')}) points; task counts separate`);
 }
 
-// 3. Initial movement work keeps its credit; the polish request is a separate, unfinished fixed revision bucket.
+// 3. Delivered movement keeps its credit; later directions may progress only with native QA evidence.
 {
   const l = fresh(), walk = task(l, 'content.char.protagonist-female.walk-south'), bucket = task(l, 'content.char.protagonist-female.walk-south.revision');
   assert.equal(walk.status, 'done');
   assert.ok(walk.evidence.some(e => /south-run-v07/.test(e)) && walk.evidence.includes(cli.PROGRESS_REL));
   assert.ok(bucket && bucket.status === 'done' && bucket.points === 2 && bucket.owner === walk.owner && bucket.evidence.some(e => /v10r1/.test(e)), 'run/stop polish revision produced (v10r1)');
-  for (const d of ['west', 'north', 'east']) assert.equal(task(l, `content.char.protagonist-female.walk-${d}`).status, 'todo');
+  for (const d of ['west', 'north', 'east']) {
+    const direction = task(l, `content.char.protagonist-female.walk-${d}`);
+    assert.ok(['todo', 'in_progress', 'blocked', 'done'].includes(direction.status));
+    if (direction.status === 'done') assert.ok(direction.evidence.some(e => e.startsWith('docs/qa/')) && direction.evidence.every(e => !/32x48|m8-prototype/.test(e)), d + ' production needs native QA, not rejected placeholder evidence');
+  }
   assert.equal(l.tasks.filter(x => /^creator\.char\..*\.accept-runtime-sprite$/.test(x.id) && x.status === 'done').length, 0, 'runtime sprite acceptance stays 0/52');
-  pass('v07 south run credited as delivered; v10r1 run/stop polish credited as its one produced revision; other directions unfinished; 0/52 sprite acceptances');
+  pass('v07 south run credited as delivered; v10r1 run/stop polish credited as its one produced revision; other direction states follow actual native production; 0/52 sprite acceptances');
 }
 
 // 4. A pending or changes-requested review never changes production credit.
@@ -164,11 +168,11 @@ const before = [LEDGER, PROGRESS].map(sha);
 {
   const l = fresh(), c = l.computed;
   for (const id of ['creator.scene.outskirts-survey-outer.accept', 'creator.scene.ruins.accept', 'creator.char.liang-xu.approve-static-south']) {
-    assert.ok(c.queue.needsRevision.items.some(q => q.id === id), id + ' needs a Claude revision');
+    assert.ok(c.queue.needsRevision.items.some(q => q.id === id), id + ' needs a revision');
     assert.ok(!c.queue.items.some(q => q.id === id), id + ' is not offered as ready');
   }
   const yonkers = task(l, 'review.scene.outskirts-survey-outer');
-  assert.ok(yonkers.status === 'done' && yonkers.outcome === 'changes_requested' && yonkers.evidence.includes(cli.PROGRESS_REL));
+  assert.ok(yonkers.status === 'done' && yonkers.outcome === 'changes_requested' && yonkers.evidence.some(e => e.startsWith('docs/qa/') && /v0[67]/.test(e)));
   const ruins = task(l, 'review.scene.ruins');
   assert.ok(ruins.status === 'done' && ruins.outcome === 'changes_requested' && ruins.evidence.some(e => /v13/.test(e)));
   assert.equal(task(l, 'content.scene.ruins.native-pass.revision').status, 'done', 'v13 revision delivered and credited');
@@ -186,7 +190,7 @@ const before = [LEDGER, PROGRESS].map(sha);
   assert.equal(task(l, 'creator.scene.outskirts-survey-outer.accept').status, 'todo', 'no approval auto-completion');
   assert.equal(task(l, 'content.scene.outskirts-survey-outer.native-pass').status, 'done');
   assert.ok(JSON.parse(prodSnap(l)).content.done >= JSON.parse(prod).content.done, 'produced credit retained');
-  pass('Yonkers v06 and WDC v13 root verdicts recorded as changes_requested; their acceptances show "needs Claude revision" until a later revision; WDC deterministic check credited as technical inspection only');
+  pass('Current Yonkers and WDC root verdicts recorded as changes_requested; their acceptances show a revision requirement until a later revision; WDC deterministic check credited as technical inspection only');
 }
 
 // 8. Baseline owners follow the task type; transfers require their own audited reassign command below.
@@ -242,19 +246,21 @@ const tasksExceptOwners = l => JSON.stringify(l.tasks.map(({owner, ...rest}) => 
 {
   const l = fresh(), parent = 'content.scene.outskirts-survey-outer.native-pass', bucket = parent + '.revision';
   const score = scoreSnap(l), beforeTasks = tasksExceptOwners(l);
-  assign(l, parent, 'codex');
+  const original = task(l, parent).owner, recipient = original === 'codex' ? 'claude' : 'codex';
+  const beforeCounts = structuredClone(l.computed.byOwner);
+  assign(l, parent, recipient);
   const record = l.baseline.revisions.at(-1);
   assert.deepEqual(record.changedTaskIds, [parent, bucket].sort());
-  assert.equal(task(l, bucket).owner, 'codex');
+  assert.equal(task(l, bucket).owner, recipient);
   const q = l.computed.queue.needsRevision.items.find(x => x.id === 'creator.scene.outskirts-survey-outer.accept');
-  assert.equal(q.nextOwner, 'codex', 'revision queue routes to its actual producer');
-  assert.equal(l.computed.byOwner.codex.revisionsBlockingApproval, 1);
-  assert.equal(l.computed.byOwner.claude.revisionsBlockingApproval, fresh().computed.byOwner.claude.revisionsBlockingApproval - 1);
+  assert.equal(q.nextOwner, recipient, 'revision queue routes to its actual producer');
+  assert.equal(l.computed.byOwner[recipient].revisionsBlockingApproval, beforeCounts[recipient].revisionsBlockingApproval + 1);
+  assert.equal(l.computed.byOwner[original].revisionsBlockingApproval, beforeCounts[original].revisionsBlockingApproval - 1);
   const same = cli.serialize(l);
-  assign(l, parent, 'codex');
+  assign(l, parent, recipient);
   assert.equal(cli.serialize(l), same, 'same-owner retry adds no audit entry or timestamp churn');
-  assign(l, parent, 'claude');
-  assert.equal(task(l, bucket).owner, 'claude');
+  assign(l, parent, original);
+  assert.equal(task(l, bucket).owner, original);
   assert.equal(tasksExceptOwners(l), beforeTasks);
   assert.equal(scoreSnap(l), score);
   assert.equal(cli.taskSetHash(l.tasks), cli.taskSetHash(fresh().tasks), 'reverse transfer restores original definitions');
