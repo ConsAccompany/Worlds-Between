@@ -2,7 +2,7 @@
   "id": "rpg-2-star-ocean-the-second_production-completion_v01",
   "schemaVersion": 2,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-18T19:19:28Z",
+  "updatedAt": "2026-10-18T19:23:57Z",
   "zh": "制作完成度任务台账：衡量已完成的工作量（编码 40% + 内容 60%）；检查／审查与创作者批准分开计量，均不改变制作分；免除的审查不算已执行的工作；运营任务列出负责方但不计百分比。",
   "en": "Production-completion task ledger: measures work done (coding 40% + content 60%); inspection/review and creator approval are separate meters and never change production credit; waived reviews are not performed work; operations tasks list owners but carry no percentage.",
   "brief": "docs/rpg-2-star-ocean-the-second_production-completion_bilingual-brief_v01_20261018-140533-3ea2a621.md",
@@ -202,16 +202,16 @@
     "production": {
       "zh": "制作完成度",
       "en": "Production completion",
-      "percent": 44.2,
-      "percentLabel": "44.2%",
+      "percent": 45.3,
+      "percentLabel": "45.3%",
       "formula": "round1(40 * codingDonePoints/codingTotalPoints + 60 * contentDonePoints/contentTotalPoints)",
       "coding": {
-        "done": 93,
+        "done": 96,
         "total": 111,
-        "percent": 83.8,
+        "percent": 86.5,
         "weight": 40,
         "tasks": 23,
-        "tasksDone": 18
+        "tasksDone": 19
       },
       "content": {
         "done": 334,
@@ -275,11 +275,11 @@
     },
     "stageTotals": {
       "coding": {
-        "done": 93,
+        "done": 96,
         "total": 111,
-        "percent": 83.8,
+        "percent": 86.5,
         "tasks": 23,
-        "tasksDone": 18,
+        "tasksDone": 19,
         "waivedTasks": 0,
         "waivedPoints": 0
       },
@@ -343,10 +343,10 @@
         "tasks": 757,
         "operationsTasks": 0,
         "points": 2009,
-        "pointsDone": 389,
+        "pointsDone": 392,
         "byStatus": {
-          "done": 87,
-          "todo": 670
+          "done": 88,
+          "todo": 669
         },
         "readyInQueue": 0,
         "revisionsBlockingApproval": 3
@@ -412,7 +412,7 @@
       },
       "ui": {
         "coding": {
-          "done": 0,
+          "done": 3,
           "total": 3
         }
       },
@@ -1050,7 +1050,7 @@
     {"id":"code.m7.free-order-route","type":"feature-code","title":{"zh":"三处地点自由顺序路线","en":"Three-area free-order route"},"area":"science-content","stage":"coding","owner":"claude","status":"done","points":6,"doneCriterion":{"zh":"M7 内容门 three-area-route 为 done 且有测试或清单证据","en":"M7 content gate three-area-route is done with test or manifest evidence"},"dependsOn":[],"evidence":["game/tests/m7_smoke.gd","game/tests/m2_smoke.gd"],"subject":{"kind":"feature","id":"m7.three-area-route"}},
     {"id":"content.m7.investigations-companions","type":"content-writing","title":{"zh":"勘察、证据关联与同行伙伴内容","en":"Investigations, evidence links and companion content"},"area":"science-content","stage":"content","owner":"claude","status":"done","points":10,"doneCriterion":{"zh":"M7 内容门 investigations-companions 为 done 且有测试或清单证据","en":"M7 content gate investigations-companions is done with test or manifest evidence"},"dependsOn":[],"evidence":["game/tests/m7_smoke.gd","outputs/rpg-2-star-ocean-the-second_scifi-field-assists_visual-manifest_m7_20261013-221344-6c9a8f31.json","outputs/rpg-2-star-ocean-the-second_scifi-field-traces_visual-manifest_m7_20261013-223107-42db9171.json"],"subject":{"kind":"feature","id":"m7.investigations-companions"}},
     {"id":"code.m7.report-endpoint","type":"feature-code","title":{"zh":"城市报告终点与试玩回执","en":"City report endpoint and playtest receipt"},"area":"science-content","stage":"coding","owner":"claude","status":"done","points":3,"doneCriterion":{"zh":"M7 内容门 report-endpoint 为 done 且有测试或清单证据","en":"M7 content gate report-endpoint is done with test or manifest evidence"},"dependsOn":[],"evidence":["game/tests/m7_smoke.gd","tools/rpg-2-star-ocean-the-second_scifi-region_playtest-launcher_m7_20261013-214924-6c8e0d47.ps1"],"subject":{"kind":"feature","id":"m7.report-endpoint"}},
-    {"id":"code.ui.settings","type":"feature-code","title":{"zh":"语言、声音与输入设置界面","en":"Language, sound and input settings"},"area":"ui","stage":"coding","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"设置界面可用并有中英文自动测试","en":"Settings screen works with zh/en automated tests"},"dependsOn":[],"evidence":[],"subject":{"kind":"asset","id":"ui.settings"}},
+    {"id":"code.ui.settings","type":"feature-code","title":{"zh":"语言、声音与输入设置界面","en":"Language, sound and input settings"},"area":"ui","stage":"coding","owner":"claude","status":"done","points":3,"doneCriterion":{"zh":"设置界面可用并有中英文自动测试","en":"Settings screen works with zh/en automated tests"},"dependsOn":[],"evidence":["game/scripts/game_settings.gd","game/scripts/settings_overlay.gd","game/scripts/app_state.gd","game/scripts/main_menu.gd","game/tests/rpg-2-star-ocean-the-second_mvp-settings_overlay-check_v01_20261018-150534-67d7cb3c.gd","docs/qa/rpg-2-star-ocean-the-second_mvp-settings_language-sound-input_qa-note_v01_20261018-150534-67d7cb3c.md","outputs/mvp-settings-v01_20261018-150534-67d7cb3c/rpg-2-star-ocean-the-second_mvp-settings_manifest_20261018-150534-67d7cb3c.json","outputs/mvp-settings-v01_20261018-150534-67d7cb3c/rpg-2-star-ocean-the-second_mvp-settings_title-settings-en-640_20261018-150534-67d7cb3c.png","outputs/mvp-settings-v01_20261018-150534-67d7cb3c/rpg-2-star-ocean-the-second_mvp-settings_battle-settings-zh-640_20261018-150534-67d7cb3c.png"],"subject":{"kind":"asset","id":"ui.settings"},"statusAt":"2026-10-18T19:23:57Z","note":{"zh":"主控已验收的技术编码能力（设置检查 85/85，已验收房间 8/8 字节一致，默认输入／音频转储一致，M1/M3/M6 冒烟通过）；最终界面美术未批准。","en":"Root-accepted TECHNICAL coding capability (85/85 settings checks, 8/8 accepted rooms byte-identical, default input/audio dump identical, M1/M3/M6 smokes); final UI art UNAPPROVED."}},
     {"id":"code.runtime.enemy-sprite-pipeline","type":"pipeline-code","title":{"zh":"敌人精灵运行时（载入、状态、绘制顺序）","en":"Enemy sprite runtime (loaders, states, draw order)"},"area":"runtime","stage":"coding","owner":"claude","status":"done","points":3,"doneCriterion":{"zh":"运行时可载入敌人动画条并有自动检查","en":"The runtime loads an enemy animation strip with automated checks"},"dependsOn":[],"evidence":["docs/qa/rpg-2-star-ocean-the-second_scifi-sentry-automaton_v2-optin-portability_qa-note_unapproved-v01_20261018-103500-7d2e91b4.md","game/scripts/battle_arena.gd"],"subject":{"kind":"feature","id":"battle.enemy-sprites"}},
     {"id":"code.runtime.character-sprite-pipeline","type":"pipeline-code","title":{"zh":"高密度四方向角色精灵运行时","en":"High-density four-direction character sprite runtime"},"area":"runtime","stage":"coding","owner":"claude","status":"todo","points":6,"doneCriterion":{"zh":"运行时具备载入高密度四方向待机与行走精灵组的正常能力：在正常运行时经可选开关或测试夹具验证，并有针对性测试；是否默认采用属于内容与批准任务","en":"Normal runtime capability to load a high-density four-direction idle+walk set, verified in the normal runtime through an opt-in flag or test fixture with targeted tests; adopting a set for the shipped game belongs to the content and approval tasks"},"dependsOn":[],"evidence":[],"subject":{"kind":"feature","id":"exploration.character-sprites"}},
     {"id":"code.runtime.combat-sprite-pipeline","type":"pipeline-code","title":{"zh":"高密度横向战斗精灵运行时","en":"High-density side-view combat sprite runtime"},"area":"runtime","stage":"coding","owner":"claude","status":"todo","points":4,"doneCriterion":{"zh":"运行时具备载入高密度横向战斗动作组的正常能力：在正常运行时经可选开关或测试夹具验证，并有针对性测试；是否默认采用属于内容与批准任务","en":"Normal runtime capability to load a high-density side-view combat action set, verified in the normal runtime through an opt-in flag or test fixture with targeted tests; adopting a set for the shipped game belongs to the content and approval tasks"},"dependsOn":[],"evidence":[],"subject":{"kind":"feature","id":"battle.character-sprites"}},
