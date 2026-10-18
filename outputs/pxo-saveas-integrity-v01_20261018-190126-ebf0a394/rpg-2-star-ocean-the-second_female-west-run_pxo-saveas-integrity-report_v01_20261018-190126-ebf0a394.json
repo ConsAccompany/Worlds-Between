@@ -1,0 +1,79 @@
+{
+  "tool": "rpg-2-star-ocean-the-second_pxo-saveas-integrity-checker",
+  "version": "v01",
+  "result": "PASS",
+  "exit_code": 0,
+  "source": {
+    "sha256": "3a16204285aa5dacd5cbd19fe00a886c4cc9dea6b8fd16b6e6f6202978618c18",
+    "bytes": 924231,
+    "zip_entries": 3459,
+    "zip_directory_entries": 128,
+    "zip_payload_entries": 3331,
+    "data_json_sha256": "3ba0a99a6a099e401b789848e3d8159b184e746bf608a6f7adc1ea23b6a86a8e",
+    "preview_png_sha256": "c03302081da34e98e4b9d23ea5de1dba7fc3d6eeee08a9c3396c296277d89ead",
+    "preview_png_size": {
+      "width": 80,
+      "height": 112
+    }
+  },
+  "saved": {
+    "sha256": "b4bff32ecbbe495346e2b31223ad144d36e9129c92d59f7457fed2a9973a6a1a",
+    "bytes": 925064,
+    "zip_entries": 3459,
+    "zip_directory_entries": 128,
+    "zip_payload_entries": 3331,
+    "data_json_sha256": "e759e86feb304368f69828345f7dc73011e902f18d03a3d1cadb01671ed6579d",
+    "preview_png_sha256": "c60801454ff3a4a4ff3cef3ce33ebf961fcf547393f74cd891f06fe41d657018",
+    "preview_png_size": {
+      "width": 182,
+      "height": 256
+    }
+  },
+  "derived_shape": {
+    "frames": 128,
+    "layers": 13,
+    "width": 80,
+    "height": 112,
+    "fps": 70.0,
+    "frame_duration_histogram": {
+      "0.25": 128
+    },
+    "hidden_layers": 1,
+    "locked_layers": 1,
+    "tags": 1
+  },
+  "comparison": {
+    "raw_cels_compared": 1664,
+    "raw_cels_byte_equal": 1664,
+    "index_payloads_compared": 1664,
+    "index_payloads_byte_equal": 1664,
+    "other_payloads_compared": 1,
+    "other_payloads_byte_equal": 1,
+    "zip_path_sets_equal": true,
+    "data_json_semantic_differences": 0,
+    "allowed_differences_observed": [
+      "export_profile.directory_path",
+      "export_profile.file_name"
+    ],
+    "normalizations_applied": [
+      "tags[0].color: opaque RGB6 hex == RGBA8 hex with ff alpha"
+    ],
+    "preview_png_bytes_equal": false
+  },
+  "differences_total": 0,
+  "differences": [],
+  "proof_scope": [
+    "every raw image_data/frames/<f>/layer_<l> payload byte-compared for all derived frames x layers",
+    "every indices_layer payload, mimetype and the full ZIP path set (incl. directories) compared exactly",
+    "all data.json fields compared type-strictly (layer visible/locked/props, frame durations, cel metadata, fps, size, tags, author/license/user_data, export profile, version, palettes, guides, metadata)",
+    "allowed only: current_frame, current_layer, export_profile.directory_path, export_profile.file_name, tag colour RGB6->RGBA8 'ff'",
+    "author/license/user_data fields compared silently; values never output"
+  ],
+  "excluded_from_proof": [
+    "preview.png thumbnail content (UI-derived; structurally validated as PNG only)",
+    "ZIP container bytes, compression and entry order (payloads are compared instead)"
+  ],
+  "non_claims": [
+    "file-integrity check only: no claim about GUI behaviour, clean app state, rendering or art approval"
+  ]
+}
