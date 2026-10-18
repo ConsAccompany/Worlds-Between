@@ -19,3 +19,7 @@ Source model SHA256 (raw LF bytes): e783de5d8ab6b1e3f678299eb8cffde11109d1aab06c
 The3native v02 key poses, settling endpoints and actual640x360 normal1x dark clip were sampled before this correction; the material seam improved. Matching v03 captures are still required. A supporting Codex agent hit its account usage limit after producing the optimized checker; root inspected its files and independently completed validation. No credits were purchased, no paid fallback enabled, and no schedule recreated.
 
 Manifest: `outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east_body-root-proof-manifest_unapproved-v03_20261018-234731-a5b9d7f0.json`.
+
+## Integration correction
+
+Commit9a75e22 initially normalized the historical optimized-checker v01 CRLF snapshot to LF, which broke its archived raw-byte hash. An integration command incorrectly continued after that assertion failed. Root detected it and corrected the exact-file attributes and index in a follow-up, preserving the original CRLF bytes. The v03 model and its successful canonical test were unaffected. Every frozen proof file was then independently compared with its staged Git bytes and passed; whitespace checks remain active, with CR-at-EOL recognized only for that historical source. No score, gate threshold or runtime default changed.

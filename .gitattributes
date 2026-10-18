@@ -44,7 +44,7 @@ tools/rpg-2-star-ocean-the-second_ji-cheng_south-idle-static-pilot-build-and-che
 tools/rpg-2-star-ocean-the-second_ji-cheng_south-idle-static-pilot-godot-capture_unapproved-v01_20261018-132812-81f87641.gd text eol=lf
 outputs/rpg-2-star-ocean-the-second_ji-cheng_south-idle-static-godot-capture-report_unapproved-v01_20261018-133420-cab29676.json text eol=lf
 # Same pilot: the Pixelorama check report is pinned by sha256 of its CRLF bytes; store and check it out byte-exact.
-outputs/rpg-2-star-ocean-the-second_ji-cheng_south-idle-static-pixelorama-check-report_unapproved-v01_20261018-132812-87d370be.json -text
+outputs/rpg-2-star-ocean-the-second_ji-cheng_south-idle-static-pixelorama-check-report_unapproved-v01_20261018-132812-87d370be.json -text -eol
 # Washington Capitol west v13 flag deterministic check + failure receipt (technical only): the receipt and manifest pin these
 # text evidence files by sha256 of their LF bytes; keep them LF on every checkout. Exact paths only.
 outputs/wdc-cw-v13flagdet_20261018-141558-22d034ba/rpg-2-star-ocean-the-second_wdc-capitol-west_deterministic-check-attempt1-stdout_unapproved-v13_20261018-141558-22d034ba.txt text eol=lf
@@ -102,15 +102,18 @@ outputs/east-body-projection_20261018-192348-3f1c9fd3/*.json text eol=lf
 outputs/east-body-projection_20261018-192348-3f1c9fd3/*.log text eol=lf
 
 # Frozen EAST proof snapshots preserve exact authored bytes (including historical CRLF); no checkout conversion.
-docs/qa/rpg-2-star-ocean-the-second_female-east_body-continuity_codex-closeout_unapproved-v03_20261018-234731-a5b9d7f0.md -text
-tools/rpg-2-star-ocean-the-second_female-east_run-stop-source_unapproved-v01_20261018-184444-8aa2a7e3.gd -text
-tools/rpg-2-star-ocean-the-second_female-east_run-stop-source_unapproved-v02_20261018-190542-52b0e405.gd -text
-tools/rpg-2-star-ocean-the-second_female-east_run-stop-source_unapproved-v03_20261018-193030-48da69c1.gd -text
-tools/rpg-2-star-ocean-the-second_female-east_run-repress-body-trajectory-check_test-only-v02_20261018-190542-52b0e405.gd -text
-tools/rpg-2-star-ocean-the-second_female-east_rendered-coat-projection-trajectory-check_test-only-v01_20261018-192348-3f1c9fd3.gd -text
-tools/rpg-2-star-ocean-the-second_female-east_rendered-coat-projection-trajectory-check_test-only-v02_20261018-193030-5ce91065.gd -text
-outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east_body-continuity-report_v03_20261018-193030-6d8bd4ef.json -text
-outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east_root-integrated-body-check_v03_20261018-194630-9051617e.json -text
-outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east_traj_v01_slow-failure-evidence_v01_20261018-193030-113d603b.json.gz -text
-outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east_traj_v02b_slow-failure-evidence_v01_20261018-193030-113d603b.json.gz -text
-outputs/east-body-projection_20261018-192348-3f1c9fd3/rpg-2-star-ocean-the-second_female-east_rendered-coat-projection-trajectory-report_test-only-v01_20261018-192348-3f1c9fd3.json -text
+docs/qa/rpg-2-star-ocean-the-second_female-east_body-continuity_codex-closeout_unapproved-v03_20261018-234731-a5b9d7f0.md -text -eol
+tools/rpg-2-star-ocean-the-second_female-east_run-stop-source_unapproved-v01_20261018-184444-8aa2a7e3.gd -text -eol
+tools/rpg-2-star-ocean-the-second_female-east_run-stop-source_unapproved-v02_20261018-190542-52b0e405.gd -text -eol
+tools/rpg-2-star-ocean-the-second_female-east_run-stop-source_unapproved-v03_20261018-193030-48da69c1.gd -text -eol
+tools/rpg-2-star-ocean-the-second_female-east_run-repress-body-trajectory-check_test-only-v02_20261018-190542-52b0e405.gd -text -eol
+tools/rpg-2-star-ocean-the-second_female-east_rendered-coat-projection-trajectory-check_test-only-v01_20261018-192348-3f1c9fd3.gd -text -eol
+tools/rpg-2-star-ocean-the-second_female-east_rendered-coat-projection-trajectory-check_test-only-v02_20261018-193030-5ce91065.gd -text -eol
+outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east_body-continuity-report_v03_20261018-193030-6d8bd4ef.json -text -eol
+outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east_root-integrated-body-check_v03_20261018-194630-9051617e.json -text -eol
+outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east_traj_v01_slow-failure-evidence_v01_20261018-193030-113d603b.json.gz -text -eol
+outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east_traj_v02b_slow-failure-evidence_v01_20261018-193030-113d603b.json.gz -text -eol
+outputs/east-body-projection_20261018-192348-3f1c9fd3/rpg-2-star-ocean-the-second_female-east_rendered-coat-projection-trajectory-report_test-only-v01_20261018-192348-3f1c9fd3.json -text -eol
+
+# This frozen historical checker was authored with CRLF; retain normal whitespace checks while recognizing its line endings.
+tools/rpg-2-star-ocean-the-second_female-east_rendered-coat-projection-trajectory-check_test-only-v01_20261018-192348-3f1c9fd3.gd whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
