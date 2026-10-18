@@ -3,6 +3,7 @@ extends Node2D
 const CONTENT := preload("res://scripts/survey_content.gd")
 const NativeIdle := preload("res://scripts/character_directional_idle.gd")
 const NativeMotion := preload("res://scripts/character_directional_motion.gd")
+const SpriteSetPilot := preload("res://scripts/exploration_sprite_set_pilot.gd")
 const ROOM_ONE_BACKGROUND := {
 	"scifi.city": preload("res://assets/environments/rpg-2-star-ocean-the-second_scifi-survey-annex-room-01_environment-background_m8-concept_20261014-142350-f2ab83d1.png"),
 	# UNAPPROVED v03 antenna-corridor candidate (native pixel plate from a layered Pixelorama source; v03 art pass over v02); this room only.
@@ -108,6 +109,8 @@ var destination_id := "scifi.city"
 var room := 1
 var hero: Sprite2D
 var hero_facing := "south"
+# Opt-in high-density sprite set driver (`--exploration-sprite-set-pilot`); null = legacy 32x48 textures.
+var sprite_pilot
 var walk_time := 0.0
 var walk_phase := 0
 var title_label: Label
@@ -242,10 +245,16 @@ func _set_hero_facing(direction: Vector2) -> void:
 	hero_facing = facing
 	walk_time = 0.0
 	walk_phase = 0
+	if sprite_pilot != null:
+		sprite_pilot.face(hero_facing)
+		return
 	hero.texture = NativeIdle.texture_for("protagonist-" + AppState.hero_appearance, hero_facing)
 
 
 func _update_walk_animation(delta: float) -> void:
+	if sprite_pilot != null:
+		sprite_pilot.walk()
+		return
 	walk_time += delta
 	var phase := int(floor(walk_time / 0.12)) % 4 + 1
 	if phase == walk_phase:
@@ -255,6 +264,9 @@ func _update_walk_animation(delta: float) -> void:
 
 
 func _reset_walk_animation() -> void:
+	if sprite_pilot != null:
+		sprite_pilot.idle()
+		return
 	if walk_phase == 0:
 		return
 	walk_time = 0.0
@@ -483,6 +495,7 @@ func _build_hero() -> void:
 	hero.texture = NativeIdle.texture_for("protagonist-" + AppState.hero_appearance, "south")
 	hero.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	hero.offset = Vector2(0, -20)
+	sprite_pilot = SpriteSetPilot.attach(hero, "protagonist-" + AppState.hero_appearance, "south")
 	hero.position = Vector2(87, 261)
 	add_child(hero)
 

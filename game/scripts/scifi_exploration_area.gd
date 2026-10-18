@@ -5,6 +5,7 @@ const OUTSKIRTS_BACKGROUND := preload("res://assets/environments/rpg-2-star-ocea
 const RUINS_BACKGROUND := preload("res://assets/environments/rpg-2-star-ocean-the-second_scifi-ruins_environment-background_m8-candidate_20261014-142522-e254c01a.png")
 const NativeIdle := preload("res://scripts/character_directional_idle.gd")
 const NativeMotion := preload("res://scripts/character_directional_motion.gd")
+const SpriteSetPilot := preload("res://scripts/exploration_sprite_set_pilot.gd")
 const BATTLE_SCENE := preload("res://scenes/battle_arena.tscn")
 const CityNavigation := preload("res://scripts/city_navigation.gd")
 const CityHallParkV06 := preload("res://scripts/city_hall_park_v06_scene.gd")
@@ -51,6 +52,8 @@ var city_occlusion_indicator: Label
 # Opt-in UNAPPROVED City Hall Park v06 layers (null = existing city plate).
 var city_hall_park
 var city_facing := "south"
+# Opt-in high-density sprite set driver (`--exploration-sprite-set-pilot`); null = legacy 32x48 textures.
+var sprite_pilot
 var walk_time := 0.0
 var walk_phase := 0
 var npc_position := Vector2.ZERO
@@ -344,10 +347,16 @@ func _set_city_facing(direction: Vector2) -> void:
 	city_facing = next_facing
 	walk_time = 0.0
 	walk_phase = 0
+	if sprite_pilot != null:
+		sprite_pilot.face(city_facing)
+		return
 	hero.texture = NativeIdle.texture_for("protagonist-" + AppState.hero_appearance, city_facing)
 
 
 func _update_walk_animation(delta: float) -> void:
+	if sprite_pilot != null:
+		sprite_pilot.walk()
+		return
 	walk_time += delta
 	var next_phase := int(floor(walk_time / 0.12)) % 4 + 1
 	if next_phase == walk_phase:
@@ -357,6 +366,9 @@ func _update_walk_animation(delta: float) -> void:
 
 
 func _reset_walk_animation() -> void:
+	if sprite_pilot != null:
+		sprite_pilot.idle()
+		return
 	if walk_phase == 0:
 		return
 	walk_time = 0.0
@@ -369,6 +381,7 @@ func _build_actors() -> void:
 	hero.texture = NativeIdle.texture_for("protagonist-" + AppState.hero_appearance, "south")
 	hero.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	hero.offset = Vector2(0, -20)
+	sprite_pilot = SpriteSetPilot.attach(hero, "protagonist-" + AppState.hero_appearance, "south")
 	if destination_id == "scifi.city":
 		hero.position = CITY_SPAWN
 		hero.z_index = int(hero.position.y)

@@ -13,6 +13,7 @@ extends Node2D
 
 const NativeIdle := preload("res://scripts/character_directional_idle.gd")
 const NativeMotion := preload("res://scripts/character_directional_motion.gd")
+const SpriteSetPilot := preload("res://scripts/exploration_sprite_set_pilot.gd")
 const MAP_SCENE := "res://scenes/scifi_world_map.tscn"
 const MOVE_SPEED := 140.0
 const GROUND := preload("res://assets/environments/chicago-loop-state-lake-v02/rpg-2-star-ocean-the-second_chicago-loop_state-lake_ground-far_unapproved-v02_20261017-160959-55667f46.png")
@@ -55,6 +56,8 @@ const KIOSK_TEXT := {
 
 var hero: Sprite2D
 var facing := "south"
+# Opt-in high-density sprite set driver (`--exploration-sprite-set-pilot`); null = legacy 32x48 textures.
+var sprite_pilot
 var walk_time := 0.0
 var walk_phase := 0
 var title_label: Label
@@ -91,6 +94,7 @@ func _ready() -> void:
 	hero.texture = NativeIdle.texture_for("protagonist-" + AppState.hero_appearance, facing)
 	hero.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	hero.offset = Vector2(0, -20)
+	sprite_pilot = SpriteSetPilot.attach(hero, "protagonist-" + AppState.hero_appearance, facing)
 	hero.position = SPAWN
 	if AppState.resume_area_pending:
 		hero.position = safe_position(AppState.resume_area_position)
@@ -159,10 +163,16 @@ func _set_facing(direction: Vector2) -> void:
 	facing = next
 	walk_time = 0.0
 	walk_phase = 0
+	if sprite_pilot != null:
+		sprite_pilot.face(facing)
+		return
 	hero.texture = NativeIdle.texture_for("protagonist-" + AppState.hero_appearance, facing)
 
 
 func _update_walk_animation(delta: float) -> void:
+	if sprite_pilot != null:
+		sprite_pilot.walk()
+		return
 	walk_time += delta
 	var next_phase := int(floor(walk_time / 0.12)) % 4 + 1
 	if next_phase == walk_phase:
@@ -172,6 +182,9 @@ func _update_walk_animation(delta: float) -> void:
 
 
 func _reset_walk_animation() -> void:
+	if sprite_pilot != null:
+		sprite_pilot.idle()
+		return
 	if walk_phase == 0:
 		return
 	walk_time = 0.0

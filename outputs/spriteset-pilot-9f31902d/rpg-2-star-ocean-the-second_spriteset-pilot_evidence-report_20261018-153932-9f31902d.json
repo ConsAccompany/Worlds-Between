@@ -1,0 +1,1606 @@
+{
+  "task": "code.runtime.character-sprite-pipeline",
+  "status": "capability evidence only; fixtures are TEST-ONLY diagnostics (not art, not approved, never default); no smooth-motion or design claim",
+  "base_commit": "3e040a9ae3bd410d8fab4b0921bcb63e8bb3c9b7",
+  "head": "3e040a9ae3bd410d8fab4b0921bcb63e8bb3c9b7",
+  "godot": "Godot_v4.7.2-stable_win64_console.exe",
+  "gates": {
+    "G01_fixtures_rebuild_byte_identical": true,
+    "G02_logic_checks_all_pass": true,
+    "G03_fps60_every_rendered_frame_verified_48_states": true,
+    "G03_fps30_every_rendered_frame_verified_48_states": true,
+    "G04_cadence_is_time_based_at_30_and_60_fps": true,
+    "G05_bilingual_captures_12_verified": true,
+    "G05_density_captures_2_verified": true,
+    "G06_motion_frames_30_verified": true,
+    "G07_default_render_pixel_identical_to_base": true,
+    "G08_parity_walks_really_moved_the_hero": true,
+    "G09_eight_accepted_rooms_byte_identical": true,
+    "G10_no_tracked_game_file_written_by_the_runs": true,
+    "G11_no_script_errors": true
+  },
+  "passed": 13,
+  "total": 13,
+  "notes": {
+    "fixture_files": 55,
+    "logic": [
+      {
+        "check": "L00 run without the pilot flag on the command line",
+        "ok": true
+      },
+      {
+        "check": "L01 flag off: attach returns null, sprite untouched, zero manifest reads and texture loads",
+        "ok": true
+      },
+      {
+        "check": "L02 flag on, default registry: valid, empty, no actor attaches, sprite untouched",
+        "ok": true
+      },
+      {
+        "check": "L03 actor ids select their own set; unknown/unlisted ids attach nothing",
+        "ok": true
+      },
+      {
+        "check": "L04 48 logical display: scale 1/density, pin floor line 1 logical px under the node (offset (0,-46))",
+        "ok": true
+      },
+      {
+        "check": "L05 cache: 24 texture loads per set, none on re-attach or during 600 frames of play",
+        "ok": true
+      },
+      {
+        "check": "L06 21 malformed/missing cases each reject the set; the unmutated manifest passes",
+        "ok": true
+      },
+      {
+        "check": "L07 partial set (23/24 valid frames) is rejected whole; sprite keeps legacy texture/offset/scale; other actor still loads",
+        "ok": true
+      },
+      {
+        "check": "L08 missing/invalid/unknown registry or set path -> no attach (legacy)",
+        "ok": true
+      },
+      {
+        "check": "L09 time-based cadence: every sample including exact boundaries at 30/60/144 fps; independent expected frames and elapsed clock; hitch",
+        "ok": true
+      },
+      {
+        "check": "L11 shared elapsed 400/800/2400ms and 10s boundaries, no tolerance or skipped boundary samples",
+        "ok": true
+      },
+      {
+        "check": "L10 transitions: idle cycles; turn or start/stop restarts at frame 0; unknown facing ignored; texture follows state",
+        "ok": true
+      }
+    ],
+    "fps60_scenes": [
+      {
+        "scene": "city",
+        "actor": "protagonist-female",
+        "ticks": 360,
+        "verified": 360,
+        "script": "rpg-2-star-ocean-the-second_wdc-capitol-west_exploration-opt-in-selector_unapproved-v13_20261018-135539-63201688.gd",
+        "hero_scale": [
+          0.5,
+          0.5
+        ],
+        "hero_offset": [
+          0.0,
+          -46.0
+        ]
+      },
+      {
+        "scene": "outskirts",
+        "actor": "protagonist-male",
+        "ticks": 360,
+        "verified": 360,
+        "script": "rpg-2-star-ocean-the-second_wdc-capitol-west_exploration-opt-in-selector_unapproved-v13_20261018-135539-63201688.gd",
+        "hero_scale": [
+          0.5,
+          0.5
+        ],
+        "hero_offset": [
+          0.0,
+          -46.0
+        ]
+      },
+      {
+        "scene": "ruins",
+        "actor": "protagonist-female",
+        "ticks": 360,
+        "verified": 360,
+        "script": "rpg-2-star-ocean-the-second_wdc-capitol-west_exploration-opt-in-selector_unapproved-v13_20261018-135539-63201688.gd",
+        "hero_scale": [
+          0.5,
+          0.5
+        ],
+        "hero_offset": [
+          0.0,
+          -46.0
+        ]
+      },
+      {
+        "scene": "annex-city-r1",
+        "actor": "protagonist-male",
+        "ticks": 384,
+        "verified": 384,
+        "script": "survey_annex.gd",
+        "hero_scale": [
+          0.5,
+          0.5
+        ],
+        "hero_offset": [
+          0.0,
+          -46.0
+        ]
+      },
+      {
+        "scene": "annex-ruins-r2",
+        "actor": "protagonist-female",
+        "ticks": 360,
+        "verified": 360,
+        "script": "survey_annex.gd",
+        "hero_scale": [
+          0.5,
+          0.5
+        ],
+        "hero_offset": [
+          0.0,
+          -46.0
+        ]
+      },
+      {
+        "scene": "chicago-loop",
+        "actor": "protagonist-female",
+        "ticks": 336,
+        "verified": 336,
+        "script": "rpg-2-star-ocean-the-second_chicago-loop_state-lake-scene-opt-in-selector_unapproved-v04_20261017-230650-c0d4b7f0.gd",
+        "hero_scale": [
+          0.5,
+          0.5
+        ],
+        "hero_offset": [
+          0.0,
+          -46.0
+        ]
+      }
+    ],
+    "fps60_texture_loads_manifest_reads": [
+      48,
+      3
+    ],
+    "fps60_host_scripts": [
+      "rpg-2-star-ocean-the-second_chicago-loop_state-lake-scene-opt-in-selector_unapproved-v04_20261017-230650-c0d4b7f0.gd",
+      "rpg-2-star-ocean-the-second_wdc-capitol-west_exploration-opt-in-selector_unapproved-v13_20261018-135539-63201688.gd",
+      "survey_annex.gd"
+    ],
+    "fps30_scenes": [
+      {
+        "scene": "city",
+        "actor": "protagonist-female",
+        "ticks": 180,
+        "verified": 180,
+        "script": "rpg-2-star-ocean-the-second_wdc-capitol-west_exploration-opt-in-selector_unapproved-v13_20261018-135539-63201688.gd",
+        "hero_scale": [
+          0.5,
+          0.5
+        ],
+        "hero_offset": [
+          0.0,
+          -46.0
+        ]
+      },
+      {
+        "scene": "outskirts",
+        "actor": "protagonist-male",
+        "ticks": 180,
+        "verified": 180,
+        "script": "rpg-2-star-ocean-the-second_wdc-capitol-west_exploration-opt-in-selector_unapproved-v13_20261018-135539-63201688.gd",
+        "hero_scale": [
+          0.5,
+          0.5
+        ],
+        "hero_offset": [
+          0.0,
+          -46.0
+        ]
+      },
+      {
+        "scene": "ruins",
+        "actor": "protagonist-female",
+        "ticks": 180,
+        "verified": 180,
+        "script": "rpg-2-star-ocean-the-second_wdc-capitol-west_exploration-opt-in-selector_unapproved-v13_20261018-135539-63201688.gd",
+        "hero_scale": [
+          0.5,
+          0.5
+        ],
+        "hero_offset": [
+          0.0,
+          -46.0
+        ]
+      },
+      {
+        "scene": "annex-city-r1",
+        "actor": "protagonist-male",
+        "ticks": 192,
+        "verified": 192,
+        "script": "survey_annex.gd",
+        "hero_scale": [
+          0.5,
+          0.5
+        ],
+        "hero_offset": [
+          0.0,
+          -46.0
+        ]
+      },
+      {
+        "scene": "annex-ruins-r2",
+        "actor": "protagonist-female",
+        "ticks": 180,
+        "verified": 180,
+        "script": "survey_annex.gd",
+        "hero_scale": [
+          0.5,
+          0.5
+        ],
+        "hero_offset": [
+          0.0,
+          -46.0
+        ]
+      },
+      {
+        "scene": "chicago-loop",
+        "actor": "protagonist-female",
+        "ticks": 168,
+        "verified": 168,
+        "script": "rpg-2-star-ocean-the-second_chicago-loop_state-lake-scene-opt-in-selector_unapproved-v04_20261017-230650-c0d4b7f0.gd",
+        "hero_scale": [
+          0.5,
+          0.5
+        ],
+        "hero_offset": [
+          0.0,
+          -46.0
+        ]
+      }
+    ],
+    "fps30_texture_loads_manifest_reads": [
+      48,
+      3
+    ],
+    "fps30_host_scripts": [
+      "rpg-2-star-ocean-the-second_chicago-loop_state-lake-scene-opt-in-selector_unapproved-v04_20261017-230650-c0d4b7f0.gd",
+      "rpg-2-star-ocean-the-second_wdc-capitol-west_exploration-opt-in-selector_unapproved-v13_20261018-135539-63201688.gd",
+      "survey_annex.gd"
+    ],
+    "fps_timeline_compare": {
+      "city": {
+        "ticks_60": 360,
+        "ticks_30": 180,
+        "analytic_mismatch_60": 0,
+        "analytic_mismatch_30": 0,
+        "equal_clock_compared": 163,
+        "boundary_samples_skipped": 0,
+        "equal_clock_mismatched": 0,
+        "max_leg_end_position_diff_px": 0.002
+      },
+      "outskirts": {
+        "ticks_60": 360,
+        "ticks_30": 180,
+        "analytic_mismatch_60": 0,
+        "analytic_mismatch_30": 0,
+        "equal_clock_compared": 180,
+        "boundary_samples_skipped": 0,
+        "equal_clock_mismatched": 0,
+        "max_leg_end_position_diff_px": 0.0002
+      },
+      "ruins": {
+        "ticks_60": 360,
+        "ticks_30": 180,
+        "analytic_mismatch_60": 0,
+        "analytic_mismatch_30": 0,
+        "equal_clock_compared": 180,
+        "boundary_samples_skipped": 0,
+        "equal_clock_mismatched": 0,
+        "max_leg_end_position_diff_px": 0.0005
+      },
+      "annex-city-r1": {
+        "ticks_60": 384,
+        "ticks_30": 192,
+        "analytic_mismatch_60": 0,
+        "analytic_mismatch_30": 0,
+        "equal_clock_compared": 192,
+        "boundary_samples_skipped": 0,
+        "equal_clock_mismatched": 0,
+        "max_leg_end_position_diff_px": 0.0001
+      },
+      "annex-ruins-r2": {
+        "ticks_60": 360,
+        "ticks_30": 180,
+        "analytic_mismatch_60": 0,
+        "analytic_mismatch_30": 0,
+        "equal_clock_compared": 180,
+        "boundary_samples_skipped": 0,
+        "equal_clock_mismatched": 0,
+        "max_leg_end_position_diff_px": 0.0005
+      },
+      "chicago-loop": {
+        "ticks_60": 336,
+        "ticks_30": 168,
+        "analytic_mismatch_60": 0,
+        "analytic_mismatch_30": 0,
+        "equal_clock_compared": 168,
+        "boundary_samples_skipped": 0,
+        "equal_clock_mismatched": 0,
+        "max_leg_end_position_diff_px": 0.0003
+      }
+    },
+    "parity": {
+      "base-repeat": {
+        "files": 45,
+        "differing": {}
+      },
+      "branch-flag-off": {
+        "files": 45,
+        "differing": {}
+      },
+      "branch-flag-default-registry": {
+        "files": 45,
+        "differing": {}
+      }
+    },
+    "parity_entry_vs_walk_changed_pixels": {
+      "annex-city-room1": 1622,
+      "annex-city-room2": 1622,
+      "annex-outskirts-room1": 1565,
+      "annex-ruins-room1": 1565,
+      "annex-ruins-room2": 1565,
+      "area-city": 1889,
+      "area-outskirts": 1565,
+      "area-ruins": 1563,
+      "chicago-loop": 1622
+    },
+    "accepted_rooms": {
+      "flag-off": {
+        "exit": 0,
+        "all_ok_marker": true,
+        "differing_pixels": {
+          "nyc-public-facilities-room1_existing-scene-godot-zh-640x360-review-v01": 0,
+          "nyc-public-facilities-room1_existing-scene-godot-en-640x360-review-v01": 0,
+          "nyc-public-facilities-room2_three-pixel-fixtures-godot-zh-640x360_unapproved-v01": 0,
+          "nyc-public-facilities-room2_three-pixel-fixtures-godot-en-640x360_unapproved-v01": 0,
+          "nyc-public-facilities-room2_repair-manual-approach-godot-zh-640x360_unapproved-v01": 0,
+          "nyc-public-facilities-room2_repair-manual-interaction-godot-zh-640x360_unapproved-v01": 0,
+          "yonkers-maintenance-room2_four-pixel-fixtures-godot-zh-640x360-review-v01": 0,
+          "yonkers-maintenance-room2_four-pixel-fixtures-godot-en-640x360-review-v01": 0
+        }
+      },
+      "flag-default-registry": {
+        "exit": 0,
+        "all_ok_marker": true,
+        "differing_pixels": {
+          "nyc-public-facilities-room1_existing-scene-godot-zh-640x360-review-v01": 0,
+          "nyc-public-facilities-room1_existing-scene-godot-en-640x360-review-v01": 0,
+          "nyc-public-facilities-room2_three-pixel-fixtures-godot-zh-640x360_unapproved-v01": 0,
+          "nyc-public-facilities-room2_three-pixel-fixtures-godot-en-640x360_unapproved-v01": 0,
+          "nyc-public-facilities-room2_repair-manual-approach-godot-zh-640x360_unapproved-v01": 0,
+          "nyc-public-facilities-room2_repair-manual-interaction-godot-zh-640x360_unapproved-v01": 0,
+          "yonkers-maintenance-room2_four-pixel-fixtures-godot-zh-640x360-review-v01": 0,
+          "yonkers-maintenance-room2_four-pixel-fixtures-godot-en-640x360-review-v01": 0
+        }
+      },
+      "flag-fixture-registry": {
+        "exit": 0,
+        "all_ok_marker": true,
+        "differing_pixels": {
+          "nyc-public-facilities-room1_existing-scene-godot-zh-640x360-review-v01": 0,
+          "nyc-public-facilities-room1_existing-scene-godot-en-640x360-review-v01": 0,
+          "nyc-public-facilities-room2_three-pixel-fixtures-godot-zh-640x360_unapproved-v01": 0,
+          "nyc-public-facilities-room2_three-pixel-fixtures-godot-en-640x360_unapproved-v01": 0,
+          "nyc-public-facilities-room2_repair-manual-approach-godot-zh-640x360_unapproved-v01": 0,
+          "nyc-public-facilities-room2_repair-manual-interaction-godot-zh-640x360_unapproved-v01": 0,
+          "yonkers-maintenance-room2_four-pixel-fixtures-godot-zh-640x360-review-v01": 0,
+          "yonkers-maintenance-room2_four-pixel-fixtures-godot-en-640x360-review-v01": 0
+        }
+      }
+    }
+  },
+  "runs": {
+    "import-branch": {
+      "exit": 0,
+      "args": [
+        "--headless",
+        "--import"
+      ],
+      "script_errors": 0
+    },
+    "import-base": {
+      "exit": 0,
+      "args": [
+        "--headless",
+        "--import"
+      ],
+      "script_errors": 0
+    },
+    "logic": {
+      "exit": 0,
+      "args": [
+        "-s",
+        "--"
+      ],
+      "script_errors": 0
+    },
+    "play-fps60": {
+      "exit": 0,
+      "args": [
+        "--fixed-fps",
+        "60",
+        "-s",
+        "--",
+        "fps60",
+        "640",
+        "none",
+        "60",
+        "--exploration-sprite-set-pilot",
+        "--exploration-sprite-set-registry=res://tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_fixture-registry_20261018-153932-9f31902d.json"
+      ],
+      "script_errors": 0
+    },
+    "play-fps30": {
+      "exit": 0,
+      "args": [
+        "--fixed-fps",
+        "30",
+        "-s",
+        "--",
+        "fps30",
+        "640",
+        "none",
+        "30",
+        "--exploration-sprite-set-pilot",
+        "--exploration-sprite-set-registry=res://tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_fixture-registry_20261018-153932-9f31902d.json"
+      ],
+      "script_errors": 0
+    },
+    "play-bilingual": {
+      "exit": 0,
+      "args": [
+        "--fixed-fps",
+        "60",
+        "-s",
+        "--",
+        "bilingual",
+        "640",
+        "bilingual",
+        "60",
+        "--exploration-sprite-set-pilot",
+        "--exploration-sprite-set-registry=res://tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_fixture-registry_20261018-153932-9f31902d.json"
+      ],
+      "script_errors": 0
+    },
+    "play-density": {
+      "exit": 0,
+      "args": [
+        "--fixed-fps",
+        "60",
+        "-s",
+        "--",
+        "density",
+        "1280",
+        "density",
+        "60",
+        "--exploration-sprite-set-pilot",
+        "--exploration-sprite-set-registry=res://tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_fixture-registry_20261018-153932-9f31902d.json"
+      ],
+      "script_errors": 0
+    },
+    "play-motion": {
+      "exit": 0,
+      "args": [
+        "--fixed-fps",
+        "30",
+        "-s",
+        "--",
+        "motion",
+        "1280",
+        "motion",
+        "30",
+        "--exploration-sprite-set-pilot",
+        "--exploration-sprite-set-registry=res://tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_fixture-registry_20261018-153932-9f31902d.json"
+      ],
+      "script_errors": 0
+    },
+    "parity-base": {
+      "exit": 0,
+      "args": [
+        "--fixed-fps",
+        "60",
+        "-s",
+        "--"
+      ],
+      "script_errors": 0
+    },
+    "parity-base-repeat": {
+      "exit": 0,
+      "args": [
+        "--fixed-fps",
+        "60",
+        "-s",
+        "--"
+      ],
+      "script_errors": 0
+    },
+    "parity-branch-flag-off": {
+      "exit": 0,
+      "args": [
+        "--fixed-fps",
+        "60",
+        "-s",
+        "--"
+      ],
+      "script_errors": 0
+    },
+    "parity-branch-flag-default-registry": {
+      "exit": 0,
+      "args": [
+        "--fixed-fps",
+        "60",
+        "-s",
+        "--",
+        "--exploration-sprite-set-pilot"
+      ],
+      "script_errors": 0
+    },
+    "accepted-flag-off": {
+      "exit": 0,
+      "args": [
+        "-s",
+        "--",
+        "ssp-flag-off"
+      ],
+      "script_errors": 0
+    },
+    "accepted-flag-default-registry": {
+      "exit": 0,
+      "args": [
+        "-s",
+        "--",
+        "ssp-flag-default-registry",
+        "--exploration-sprite-set-pilot"
+      ],
+      "script_errors": 0
+    },
+    "accepted-flag-fixture-registry": {
+      "exit": 0,
+      "args": [
+        "-s",
+        "--",
+        "ssp-flag-fixture-registry",
+        "--exploration-sprite-set-pilot",
+        "--exploration-sprite-set-registry=res://tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_fixture-registry_20261018-153932-9f31902d.json"
+      ],
+      "script_errors": 0
+    }
+  },
+  "evidence": [
+    {
+      "file": "outputs/spriteset-pilot-9f31902d/rpg-2-star-ocean-the-second_spriteset-pilot_city_female-walk-east-f3_zh_test-only_20261018-153932-9f31902d.png",
+      "sha256": "c2272c98f022e86030049b518f4641281f7924d2d194477a5e6ceba0ddc494b1",
+      "scene": "city",
+      "language": "zh",
+      "drawn_state": {
+        "actor_id": "protagonist-female",
+        "action": "walk",
+        "facing": "east",
+        "frame": 2
+      },
+      "hero_feet": [
+        354.334106445313,
+        212.0
+      ],
+      "verified_on_screen": true
+    },
+    {
+      "file": "outputs/spriteset-pilot-9f31902d/rpg-2-star-ocean-the-second_spriteset-pilot_city_female-walk-east-f3_en_test-only_20261018-153932-9f31902d.png",
+      "sha256": "5d35215dae6fbbb4e77c44a1e2832bf20db543afb246bd049c1fd4d6c455489a",
+      "scene": "city",
+      "language": "en",
+      "drawn_state": {
+        "actor_id": "protagonist-female",
+        "action": "walk",
+        "facing": "east",
+        "frame": 2
+      },
+      "hero_feet": [
+        356.66748046875,
+        212.0
+      ],
+      "verified_on_screen": true
+    },
+    {
+      "file": "outputs/spriteset-pilot-9f31902d/rpg-2-star-ocean-the-second_spriteset-pilot_outskirts_male-walk-south-f4_zh_test-only_20261018-153932-9f31902d.png",
+      "sha256": "1f09ead53fcf0c3bc58371b19ff5f8819fcc5c721110157af55d2b3192cf3b12",
+      "scene": "outskirts",
+      "language": "zh",
+      "drawn_state": {
+        "actor_id": "protagonist-male",
+        "action": "walk",
+        "facing": "south",
+        "frame": 3
+      },
+      "hero_feet": [
+        304.000122070313,
+        180.333236694336
+      ],
+      "verified_on_screen": true
+    },
+    {
+      "file": "outputs/spriteset-pilot-9f31902d/rpg-2-star-ocean-the-second_spriteset-pilot_outskirts_male-walk-south-f4_en_test-only_20261018-153932-9f31902d.png",
+      "sha256": "620e5b813ccbb63f67c7258f101ab40d60ec928cb0416def717a73068c697eb7",
+      "scene": "outskirts",
+      "language": "en",
+      "drawn_state": {
+        "actor_id": "protagonist-male",
+        "action": "walk",
+        "facing": "south",
+        "frame": 3
+      },
+      "hero_feet": [
+        304.000122070313,
+        182.666564941406
+      ],
+      "verified_on_screen": true
+    },
+    {
+      "file": "outputs/spriteset-pilot-9f31902d/rpg-2-star-ocean-the-second_spriteset-pilot_ruins_female-walk-west-f3_zh_test-only_20261018-153932-9f31902d.png",
+      "sha256": "1daf3ff6bd992af4e4d5b55a1792ac31296903e6e5f353b00bba886ea11de984",
+      "scene": "ruins",
+      "language": "zh",
+      "drawn_state": {
+        "actor_id": "protagonist-female",
+        "action": "walk",
+        "facing": "west",
+        "frame": 2
+      },
+      "hero_feet": [
+        289.666809082031,
+        203.999847412109
+      ],
+      "verified_on_screen": true
+    },
+    {
+      "file": "outputs/spriteset-pilot-9f31902d/rpg-2-star-ocean-the-second_spriteset-pilot_ruins_female-walk-west-f3_en_test-only_20261018-153932-9f31902d.png",
+      "sha256": "94f91272596c466684b1e4905047eae620b22f98961efa1ab454c3e4577476a7",
+      "scene": "ruins",
+      "language": "en",
+      "drawn_state": {
+        "actor_id": "protagonist-female",
+        "action": "walk",
+        "facing": "west",
+        "frame": 2
+      },
+      "hero_feet": [
+        287.333465576172,
+        203.999847412109
+      ],
+      "verified_on_screen": true
+    },
+    {
+      "file": "outputs/spriteset-pilot-9f31902d/rpg-2-star-ocean-the-second_spriteset-pilot_annex-city-r1_male-walk-north-f2_zh_test-only_20261018-153932-9f31902d.png",
+      "sha256": "4e1428dcb055ae32711448f8e8afeba6260789d59f0cbebe29d6e8be31126967",
+      "scene": "annex-city-r1",
+      "language": "zh",
+      "drawn_state": {
+        "actor_id": "protagonist-male",
+        "action": "walk",
+        "facing": "north",
+        "frame": 1
+      },
+      "hero_feet": [
+        200.000015258789,
+        267.666595458984
+      ],
+      "verified_on_screen": true
+    },
+    {
+      "file": "outputs/spriteset-pilot-9f31902d/rpg-2-star-ocean-the-second_spriteset-pilot_annex-city-r1_male-walk-north-f2_en_test-only_20261018-153932-9f31902d.png",
+      "sha256": "07960cd2f84ac14a63519c2538479b263ba191ea3d80597e2c414fae89516fd8",
+      "scene": "annex-city-r1",
+      "language": "en",
+      "drawn_state": {
+        "actor_id": "protagonist-male",
+        "action": "walk",
+        "facing": "north",
+        "frame": 1
+      },
+      "hero_feet": [
+        200.000015258789,
+        265.333251953125
+      ],
+      "verified_on_screen": true
+    },
+    {
+      "file": "outputs/spriteset-pilot-9f31902d/rpg-2-star-ocean-the-second_spriteset-pilot_annex-ruins-r2_female-idle-south-f2_zh_test-only_20261018-153932-9f31902d.png",
+      "sha256": "c0877e10a1889cdfa9b2f09cc14dce38d3804e0d6a8dfa5a0a409ffe39d4e99c",
+      "scene": "annex-ruins-r2",
+      "language": "zh",
+      "drawn_state": {
+        "actor_id": "protagonist-female",
+        "action": "idle",
+        "facing": "south",
+        "frame": 1
+      },
+      "hero_feet": [
+        464.000366210938,
+        299.000091552734
+      ],
+      "verified_on_screen": true
+    },
+    {
+      "file": "outputs/spriteset-pilot-9f31902d/rpg-2-star-ocean-the-second_spriteset-pilot_annex-ruins-r2_female-idle-south-f2_en_test-only_20261018-153932-9f31902d.png",
+      "sha256": "b9a835fa845e492396a89068c220686616ce6a07c5f1110be46edecee073d5ab",
+      "scene": "annex-ruins-r2",
+      "language": "en",
+      "drawn_state": {
+        "actor_id": "protagonist-female",
+        "action": "idle",
+        "facing": "south",
+        "frame": 1
+      },
+      "hero_feet": [
+        464.000366210938,
+        299.000091552734
+      ],
+      "verified_on_screen": true
+    },
+    {
+      "file": "outputs/spriteset-pilot-9f31902d/rpg-2-star-ocean-the-second_spriteset-pilot_chicago-loop_female-idle-east-f1_zh_test-only_20261018-153932-9f31902d.png",
+      "sha256": "f99586d27fa865515a2e66cdb406ba936be292ac760eaa62de1d657c36d25045",
+      "scene": "chicago-loop",
+      "language": "zh",
+      "drawn_state": {
+        "actor_id": "protagonist-female",
+        "action": "idle",
+        "facing": "east",
+        "frame": 0
+      },
+      "hero_feet": [
+        310.000213623047,
+        190.0
+      ],
+      "verified_on_screen": true
+    },
+    {
+      "file": "outputs/spriteset-pilot-9f31902d/rpg-2-star-ocean-the-second_spriteset-pilot_chicago-loop_female-idle-east-f1_en_test-only_20261018-153932-9f31902d.png",
+      "sha256": "21358d42d3c60ffc8e7c43bb18e8f19adf5c2629d17fd18a6b15bceaf7013a26",
+      "scene": "chicago-loop",
+      "language": "en",
+      "drawn_state": {
+        "actor_id": "protagonist-female",
+        "action": "idle",
+        "facing": "east",
+        "frame": 0
+      },
+      "hero_feet": [
+        310.000213623047,
+        190.0
+      ],
+      "verified_on_screen": true
+    },
+    {
+      "file": "outputs/spriteset-pilot-9f31902d/rpg-2-star-ocean-the-second_spriteset-pilot_city_female-walk-east-f3_zh-1280x720_test-only_20261018-153932-9f31902d.png",
+      "sha256": "5620c395366d79b5447e5cfd802a3b0103e71f679c37119fbf51fb9fce2a54c9",
+      "scene": "city",
+      "language": "zh",
+      "drawn_state": {
+        "actor_id": "protagonist-female",
+        "action": "walk",
+        "facing": "east",
+        "frame": 2
+      },
+      "hero_feet": [
+        354.334106445313,
+        212.0
+      ],
+      "verified_on_screen": true
+    },
+    {
+      "file": "outputs/spriteset-pilot-9f31902d/rpg-2-star-ocean-the-second_spriteset-pilot_city_female-idle-east-f2_zh-1280x720_test-only_20261018-153932-9f31902d.png",
+      "sha256": "887d46c8ade915a7af05e7f7dd48f056f1e62dbf5ac33d51770ea46355cfdb37",
+      "scene": "city",
+      "language": "zh",
+      "drawn_state": {
+        "actor_id": "protagonist-female",
+        "action": "idle",
+        "facing": "east",
+        "frame": 1
+      },
+      "hero_feet": [
+        394.00146484375,
+        212.0
+      ],
+      "verified_on_screen": true
+    },
+    {
+      "file": "outputs/spriteset-pilot-9f31902d/rpg-2-star-ocean-the-second_spriteset-pilot_city_walk-stop-motion-30fps-1280x720_test-only_20261018-153932-9f31902d.png",
+      "sha256": "fd8f4ad027c691a409a2a0f2573ada7797c314d51f0633b8d22c1c374e76a8c1",
+      "kind": "animated PNG (APNG), 30 real rendered frames (1.0 s) at --fixed-fps 30, 1280x720 window, 1:1; the encoder stores 19 frames because identical consecutive frames are merged with their durations summed",
+      "states": [
+        {
+          "action": "walk",
+          "facing": "east",
+          "frame": 0,
+          "tick": 1
+        },
+        {
+          "action": "walk",
+          "facing": "east",
+          "frame": 0,
+          "tick": 2
+        },
+        {
+          "action": "walk",
+          "facing": "east",
+          "frame": 0,
+          "tick": 3
+        },
+        {
+          "action": "walk",
+          "facing": "east",
+          "frame": 0,
+          "tick": 4
+        },
+        {
+          "action": "walk",
+          "facing": "east",
+          "frame": 0,
+          "tick": 5
+        },
+        {
+          "action": "walk",
+          "facing": "east",
+          "frame": 1,
+          "tick": 6
+        },
+        {
+          "action": "walk",
+          "facing": "east",
+          "frame": 1,
+          "tick": 7
+        },
+        {
+          "action": "walk",
+          "facing": "east",
+          "frame": 1,
+          "tick": 8
+        },
+        {
+          "action": "walk",
+          "facing": "east",
+          "frame": 1,
+          "tick": 9
+        },
+        {
+          "action": "walk",
+          "facing": "east",
+          "frame": 2,
+          "tick": 10
+        },
+        {
+          "action": "walk",
+          "facing": "east",
+          "frame": 2,
+          "tick": 11
+        },
+        {
+          "action": "walk",
+          "facing": "east",
+          "frame": 2,
+          "tick": 12
+        },
+        {
+          "action": "walk",
+          "facing": "east",
+          "frame": 3,
+          "tick": 13
+        },
+        {
+          "action": "walk",
+          "facing": "east",
+          "frame": 3,
+          "tick": 14
+        },
+        {
+          "action": "walk",
+          "facing": "east",
+          "frame": 3,
+          "tick": 15
+        },
+        {
+          "action": "walk",
+          "facing": "east",
+          "frame": 3,
+          "tick": 16
+        },
+        {
+          "action": "walk",
+          "facing": "east",
+          "frame": 0,
+          "tick": 17
+        },
+        {
+          "action": "walk",
+          "facing": "east",
+          "frame": 0,
+          "tick": 18
+        },
+        {
+          "action": "idle",
+          "facing": "east",
+          "frame": 0,
+          "tick": 19
+        },
+        {
+          "action": "idle",
+          "facing": "east",
+          "frame": 0,
+          "tick": 20
+        },
+        {
+          "action": "idle",
+          "facing": "east",
+          "frame": 0,
+          "tick": 21
+        },
+        {
+          "action": "idle",
+          "facing": "east",
+          "frame": 0,
+          "tick": 22
+        },
+        {
+          "action": "idle",
+          "facing": "east",
+          "frame": 0,
+          "tick": 23
+        },
+        {
+          "action": "idle",
+          "facing": "east",
+          "frame": 0,
+          "tick": 24
+        },
+        {
+          "action": "idle",
+          "facing": "east",
+          "frame": 0,
+          "tick": 25
+        },
+        {
+          "action": "idle",
+          "facing": "east",
+          "frame": 0,
+          "tick": 26
+        },
+        {
+          "action": "idle",
+          "facing": "east",
+          "frame": 0,
+          "tick": 27
+        },
+        {
+          "action": "idle",
+          "facing": "east",
+          "frame": 0,
+          "tick": 28
+        },
+        {
+          "action": "idle",
+          "facing": "east",
+          "frame": 0,
+          "tick": 29
+        },
+        {
+          "action": "idle",
+          "facing": "east",
+          "frame": 0,
+          "tick": 30
+        }
+      ]
+    }
+  ],
+  "files": [
+    {
+      "file": "game/scripts/exploration_sprite_set_pilot.gd",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "7cc8d6039213929ce0e51304558d7e9c7df3103ca010b909ad63d5ea9f699434"
+    },
+    {
+      "file": "game/scripts/exploration_sprite_set_pilot.gd.uid",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "049bb3b6df3f65ebddbb53e736c6fac7a1ac7377769cd78f883bdf5c03020ce6"
+    },
+    {
+      "file": "game/scripts/scifi_exploration_area.gd",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "6fe049f1778016ebfda1af330becf1012b4f6ed2b7e8a87353fed1544bee0b60"
+    },
+    {
+      "file": "game/scripts/survey_annex.gd",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "521f5335e01723267c1a5bcc4d1720f7394b5ab1bb72742e7bdac309d0ad8078"
+    },
+    {
+      "file": "game/scripts/rpg-2-star-ocean-the-second_chicago-loop_state-lake-block-scene_unapproved-v02_20261017-160959-55667f46.gd",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "f48d6fd22a0bcecd959483b25b124b73d23acf67a6a9b6208ee7c4494760b110"
+    },
+    {
+      "file": "game/data/exploration-sprite-sets/rpg-2-star-ocean-the-second_exploration-sprite-set-registry_no-approved-sets-v01_20261018-153932-9f31902d.json",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "5c05d7bc4b866e9baa3b3fcc91ad470eaaa178737ce3a85dc837cb695e9eb47f"
+    },
+    {
+      "file": "tools/rpg-2-star-ocean-the-second_exploration-sprite-set-pilot_diagnostic-fixture-build_test-only-v01_20261018-153932-9f31902d.py",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "85106f2f2f15b9d27704f2cdec7682d84382c0a2c4f443e4af1c675e26b84958"
+    },
+    {
+      "file": "tools/rpg-2-star-ocean-the-second_exploration-sprite-set-pilot_godot-logic-check_v01_20261018-153932-9f31902d.gd",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "06acb64275f7f1f44069588c4ac3b441228c4276da9e3e79d41120e8b079a9ea"
+    },
+    {
+      "file": "tools/rpg-2-star-ocean-the-second_exploration-sprite-set-pilot_godot-gameplay-check_v01_20261018-153932-9f31902d.gd",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "3ce6c10ec2fd77983cc4174bb067372b234343f2c08c0a7b49d029ccfd7dfb26"
+    },
+    {
+      "file": "tools/rpg-2-star-ocean-the-second_exploration-sprite-set-pilot_default-parity-capture_v01_20261018-153932-9f31902d.gd",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "a834f31c06032451d26fde0e2012f8d792679d477dd547820074f36608399b65"
+    },
+    {
+      "file": "tools/rpg-2-star-ocean-the-second_exploration-sprite-set-pilot_evidence-check_v01_20261018-153932-9f31902d.py",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "f377534ccd0ce1dec775e24ba66d6feb388ee40f6fab60a3e2e1cb5a5b15a7a8"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-idle-east-f1_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "9699af57709c24e2ec48deb888a9d4ef89955bb8317c926ebd43a3adb58183b6"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-idle-east-f2_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "26608807b5e919c2de5f70215e45fcabc321f6bc243411d5070579a15ed5d040"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-idle-north-f1_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "e62f7585a2e9743fe5d05413d1db1550c17f994613bc302f22573a424a78b7c5"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-idle-north-f2_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "6e358c8463a3dad0f0257e07764ca82b58f1f42c986f30c0a06f6ac9c08fe361"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-idle-south-f1_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "7753ba5cfe79a46c9688609d18b0c3ac72f5fdc32c3745a3ddae98019787e969"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-idle-south-f2_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "e97238e12c95f97cfa5023e712d3d76a98457babdb3ef3b72c816d63903468ea"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-idle-west-f1_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "c047414058915b87510b6ccb47a0daf35fe520b4c7afd779d775bf8f325e5791"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-idle-west-f2_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "9f5669451244e64d3c3f8925adb2032ba649ea5514fb477dc9c7877942006f54"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-set-manifest_20261018-153932-9f31902d.json",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "bbd9b2693007ec33949fc872c14f780cfb5808551ab5e2bc30217d29ce96b9c0"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-walk-east-f1_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "feb61489a7c8be2a4f2edde264c56a8c43bf1a3ba4518b34a42f0e29a84df7a2"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-walk-east-f2_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "33e169cd7900614684397876242035f3ebb7ab2ae0661416f6d5aac3def77a81"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-walk-east-f3_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "66f127492639e85c1851edbce9fecb485e24ce8ae6f269870c164dbc6d4dd104"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-walk-east-f4_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "652a73fc23b845303533b2cd2df74ff222ed03a3131e634d308c5d8175abf81b"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-walk-north-f1_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "6a5c1080eb281b0159396b31ef6dd7ecf060b45da3e45c2fd86630b26cf12425"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-walk-north-f2_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "733170d871099eeac45bc96eca1d89f6dd202f86632db9109dbae282e7e75166"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-walk-north-f3_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "bef00b1580c648d1c1d9400a932a3e09713665d6154c8873afd5fad81987fdaa"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-walk-north-f4_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "7c9eea13a6b67bcb872fd1cef61298318be94098d591aaa2061df59fc60cdaf7"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-walk-south-f1_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "0619a222ad038f15a81841f0447fb8b98a1a8c0e6c48a9631dcb48b604b6f192"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-walk-south-f2_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "48af6eb27a7b46abca4dfb84fec10900503200f09566d51dc4098ca7750352ad"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-walk-south-f3_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "ba7d73d5d718e9cbf2f29e297ef8369f455d071de25078135e813ea24e60a9ad"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-walk-south-f4_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "d0036f905b1c73e78ab25cfdad7c9442d39853e1e97b2572a5a1851e2f6e9f97"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-walk-west-f1_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "42758c5feb9b9cce40fa0cd077a3d269ab075499b6ac4239f10c0d3638b4d9ac"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-walk-west-f2_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "1e3e7fd3bb996ec165aec32cc4bbdd025d952fd062502a6339bae6c7f78f0cda"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-walk-west-f3_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "e91040524bcbc1417b27dab7dc75c5fbecdc679f5bed8952d2b3175240584d91"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-walk-west-f4_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "f44b79dbd4a90d08c3bac8d29e1a3a708c24e47e9e02b97168e7bddb930f11b5"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_fixture-registry_20261018-153932-9f31902d.json",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "6aed85e31e72126f64fe8d95c38ae1ef3d4cc826b548ae1819a66f664fc982fe"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_invalid-floating-idle_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "b3c8ed881dd91eda0b44f814e024f03e527b5210b88401ea45a1942cc88a9b27"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_invalid-opaque-border_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "f83bad8ba439b990bd105b52603d08c7a3b61a60ee02eee09f3067055b14e2ac"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_invalid-partial-alpha_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "95c24de3f3d4a353d6f6b99f75f68ed34a34cae93d34f221a61e5cd53a2f1552"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_invalid-wrong-size_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "5e4ca8883cbde5a0f539f7783ace8f97623daa04d5f2169407ad0c006ccb4550"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-idle-east-f1_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "eac726bc2cca2a2e7643d263c2b72efd6a4b9b2b71fe4105bb91ba6937481093"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-idle-east-f2_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "6a2e039dc95e031944c41c7de06ad62529e63a20a6e1bc45e175077713190ddd"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-idle-north-f1_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "7ce2fd7218e389e9cd6aba3c717bc8a3823a448b1e648d69294374265dfbbb51"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-idle-north-f2_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "e1e0a08d65085e869689865b48edf48ff3c699db55989ca0e95ae9b242b0b659"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-idle-south-f1_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "502541caba8f7a956c04521bb183e0aaa3c016579f36a9d28057910055ce2f92"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-idle-south-f2_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "68f25953d518d60d3019377581470bb01215b7c0cc9b1a46a986a5942ae87938"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-idle-west-f1_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "96c479253b15ee5b42aad454790ceda16bce9bbf5cb15d7d83ce6a070a74167c"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-idle-west-f2_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "3d0ba2e57c9e40cf91c0c787162c194edeb2c12cec498d2412d0452ee6ff084f"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-set-manifest_20261018-153932-9f31902d.json",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "fb4a71e4302a4fab96d8bac4a053c03d81ba9cee0807da49306a2c18d64c83e4"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-walk-east-f1_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "0c484fc2cd96debc37448d2c5c50de48c3a0212244c34328cda03c9896f3c672"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-walk-east-f2_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "94e206ae0f47079a6f8581c2c6c1460028e1315c84c6928968ce229e07887522"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-walk-east-f3_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "f64ed59097f838a6c626396421d1f6664398f1d6266510f7b0016b661da73ff1"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-walk-east-f4_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "67c311573c7787cc9a06c0d5b9243174b58b8fdc0b579a580191a7f4e4543bee"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-walk-north-f1_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "2adf1770b8fbf549340f1a20603445cb51dc6dddd1e6a22ac42da8934b3d0ad2"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-walk-north-f2_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "c0ba871418b8393ec521432ad1eb5799a60ce20bd11c08e3fd42d9416afa8b71"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-walk-north-f3_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "b6e04ecb2202fce45e2eaefe9f1343af86b18c5413cd54ac626fb14ce00bcacf"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-walk-north-f4_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "8849edd9a866e267aa29c16ccaa8779e0cd372718fda80334aef0ce07d57bb80"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-walk-south-f1_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "0b7777c040eb00e155042cff29c305be3e8e17730d056423d304c7d830f83d6e"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-walk-south-f2_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "9ecf8445710c8c77a46adae75887de040b8be89183cab13a2478fcf41fc7630a"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-walk-south-f3_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "205982ad32aa622d126df6892a685c65aef4f19015e77c565f9caecc74e74beb"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-walk-south-f4_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "b52e55a591e85e825de75c0e5c289257055b6b75b9f186ed7b51b6735f50fdfc"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-walk-west-f1_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "6c3032ec8c9b24f6c36a917787eff9a729960afae1fcc143c788a8312cfeef29"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-walk-west-f2_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "4e8f6aec82802d8ebe0a71e16009c626a5b0d04f2289955d9c31680a9d333d05"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-walk-west-f3_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "1630412b0108ac069a2b4cb4c4afd48eb35946bd81b3048c64c3201b18442b6e"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-walk-west-f4_20261018-153932-9f31902d.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "1c3c878ab9c8b48d525cf728e7864e3d5ba6add05e0b75195896648acd91a09b"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-idle-east-f1_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "33554e2e4fa634be19135ae3b44cc89c68be98bc02aebeb68951242ec41e6eba"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-idle-east-f2_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "6fcb5841d1f40f96aa19e25938266eb0d1691d76178b7a760cf8f30c6692eb52"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-idle-north-f1_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "638e36d9d022f09430e722cbbbd9bd8be0c53d4e4a64bd5a3bf47d060d32c5b8"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-idle-north-f2_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "526ea41b85bb426ddb4842d57c66d88e45e284507226936068e605dfc7d0ded3"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-idle-south-f1_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "85da58f7faaafbc115a5b686c84e5fac8840f505a37615776c41fca7c76209f4"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-idle-south-f2_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "f71df94ad8e74303cb9df94374f1218f10b0ace3fd8bb34087be5f90dc78f3aa"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-idle-west-f1_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "691c84764466ab38bdfe300df77f87a6c50586bb3a117f86772147e2a22f6971"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-idle-west-f2_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "6e4eaedd8898ecf1079ba6040c5becbd42bc5b5a0e84fe7b008ebf9b978d63f1"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-walk-east-f1_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "3a4f6a14d9cdcbd8853f5edb2931ef735632587f5c33dbb9815f99cf287dd6f8"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-walk-east-f2_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "3ac3571f041c8d960b8f1cbf359cd97521d76bb19f24843fb08d2492cddef040"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-walk-east-f3_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "6df9b6f57cd239e3570b1689080f1aa24bf105f5da922d9a59f129cfdcd2eac7"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-walk-east-f4_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "c16136c2b388bf11152ff6bfdce9ee91b88c167ad29f2d26835ac69f4e0ef7e3"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-walk-north-f1_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "1cae87315cb656401e3c8e3ad6d21737269e3ec6da43329b95892b4dee863e82"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-walk-north-f2_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "a359daa6cc8123c04057360d99b7c4bdd20452fdb506df8f0cc5d380b92c469e"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-walk-north-f3_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "753228627033ac357064a47fda146f8dc552aff58dac67fc844419a85e4c554e"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-walk-north-f4_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "a1b024094d5597632701ed9c9b4aadc5218b859cd7469e59f342085fb4adfccc"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-walk-south-f1_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "c41c064c16f86c7486fb16bf142cf66d152f0e7ec67c6b61110ec969c018314f"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-walk-south-f2_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "1e12046c3099593490e9db29bc261501d5a54e303b8c9ad45a055a7b9667928d"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-walk-south-f3_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "fc517d3e09823e4c707a0704a34c0060c4a3fe1654e2fcfc079cd78be2ec4a24"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-walk-south-f4_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "49074f510fc736e80c07994f5ab6f43bdcab9f8163cc3dd3d31f6c6e1610e1f3"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-walk-west-f1_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "4f08c02bdbe0fd087fe60aae8926d5a092e5e06d91370ef8315068e07037cede"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-walk-west-f2_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "b0bc589de3cb210a6d42b9e447140d735fcac56d905837088973fa92043d7d6b"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-walk-west-f3_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "7a0bb493da8864d0ed302f6cb0d31ee9459ee5ad88bc30e00ae98ffe72d6a85c"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-walk-west-f4_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "aea04c8dc39487318a40cf657f904da7e7fe80c619a470c085a2deaff900ec4d"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_invalid-floating-idle_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "9e61de4956f8185be9c1d2fd63bdcd3543c268825ba49d7b4e3cd4c35d278ba1"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_invalid-opaque-border_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "55a1686a1db5091d6f0250604458b38bcfbac59527a9b465ae1b74b470f900fb"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_invalid-partial-alpha_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "b7b7a12fcd12d6571cdd1a2174d4a66f792f194498e3f662e1f126c29166ece9"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_invalid-wrong-size_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "8b87d4ac92be5c32fc38f0550678fcae4e93673fbe08c7acb4b893734f261adb"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-idle-east-f1_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "3ab9b55f493867785d414ee8659b314caaf053d02f52b44cf9623ea13c8cb0a2"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-idle-east-f2_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "2fd51c8f09fbf7f4321031e12e42822625046b83407e7adb4b7c1804e58dd9ee"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-idle-north-f1_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "bda91dd0a00997d4aaa081bb629bb813b284efed48d3e1713a15071f6d517040"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-idle-north-f2_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "673e5f46b19b6779cf1e36980c184566ec4039e35240d142af961b5e84c8b713"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-idle-south-f1_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "5cf13e8f3a80bc3a9d8dc79e629176775e1bd7ea5fc3c6b9218b0f39434c29e6"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-idle-south-f2_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "8082f3eb46d14b3ab0677ffc262735190d1a10e665eae29640720b619344fe4f"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-idle-west-f1_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "703e1c94a2a8d57d70f17d1e10bec3ed619268dcaa702cc3edbcf548e0d8a854"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-idle-west-f2_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "ff2f2121154234af4ee1e9e394e8d6a88d5b7a402a1fd7411370c42360a205af"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-walk-east-f1_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "864ac9dfcbe09dd90cfb0227c32e0388e088fcf07082166a10a0c827dce73455"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-walk-east-f2_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "909f10e545ac9caf8261f2fc6f25685a1f97671dd7bc1e04aff15ec77a061610"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-walk-east-f3_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "bb307e7cb6618562153a46d277934d13c9d85d9bf56a6c6b9c1d32dce027e99b"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-walk-east-f4_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "730081720de344070d86e2cb5255bab9b0b0e3d2d7f9143017628375b067d890"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-walk-north-f1_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "1713c897924827430bdff2759f4c6a2150963a10d1e5a4069044e6ab12297584"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-walk-north-f2_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "0d97bdf1924c859ba71627e8c2c6416434aa86bae9deac374201a0f92479f8e3"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-walk-north-f3_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "36d9762134f3d96a2e61c97c851133cbebd1a645be70e1e4edbb6bc337b5bdc5"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-walk-north-f4_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "4f1e6fe6f691e3b4fc25458c2da386277fff2e2058bdad3b24942091d73081b5"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-walk-south-f1_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "7013cdb069ac61efa064b160b06b52f9d0d2472258e5fbda650a0b14983ad509"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-walk-south-f2_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "f2838b2b1b0cd062a0d2fcec14a626905966e2d7f352eb3e455afb2e9e61b83f"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-walk-south-f3_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "e5c3ba339a9309a133387daab243b4a0b12b0eb6e5180633957f08b04f1b375c"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-walk-south-f4_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "acb1ba26d6900788c96ef4ec1a06da2a5b27fd01d832ac9ca9171454ac688524"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-walk-west-f1_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "38f06200512c335c6182647919e6b745da99bdf08e539d5fe50e67c66c549b2b"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-walk-west-f2_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "a87e3cc00a3d447f13e1a8127130444ecea7e6dbedcf56b960f65d7b2425e91c"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-walk-west-f3_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "a79e525f0e7c0089020cf619c0af17acab15bad28e23e7ba45550461c3fb2c68"
+    },
+    {
+      "file": "game/tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-walk-west-f4_20261018-153932-9f31902d.png.import",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "794eb253f47e9acc6720df20b88cac4acc02ba87ccbe4e66eb122dc4f935b07b"
+    }
+  ]
+}
