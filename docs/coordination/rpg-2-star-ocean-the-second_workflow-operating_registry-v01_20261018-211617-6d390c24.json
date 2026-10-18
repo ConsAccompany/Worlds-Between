@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-18T21:50:56.820820+00:00",
+  "updatedAt": "2026-10-18T21:53:43.899011+00:00",
   "purpose": "Operating queue and worktree ownership; no progress points or account details",
   "workflow": "docs/workflow.md",
   "canonicalLedger": "outputs/rpg-2-star-ocean-the-second_production-completion_task-ledger_v01_20261018-140533-3de52073.json",
@@ -271,8 +271,8 @@
       "id": "content.char.protagonist-female.static-east",
       "owner": "codex",
       "ownerReason": "Creator-authorized Codex work during Max quota gap",
-      "status": "in_progress",
-      "lane": "primary",
+      "status": "done",
+      "lane": "closed",
       "worktree": "heroine-producer",
       "dependsOn": [
         "content.char.protagonist-female.static-south"
@@ -290,9 +290,44 @@
         "Binary alpha, stable floor pivot, actual bright/dark captures",
         "Independent visual inspection before production credit; no final art approval"
       ],
-      "nextAction": "Finish east static in same heroine pipeline; no broader character batches",
+      "nextAction": "Selected source integrated, independently checked and production credited; no art approval.",
       "blockedBy": [],
       "startedAt": "2026-10-18T21:50:56.820820+00:00",
+      "finishedAt": "2026-10-18T21:53:43.899011+00:00",
+      "evidence": [
+        "docs/qa/rpg-2-star-ocean-the-second_protagonist-female_east-static-produced-candidate_unapproved-v01_20261018-175227-be96490e.md",
+        "outputs/female-east-static-v01/rpg-2-star-ocean-the-second_protagonist-female_east-static-evidence-manifest_v01_20261018-175207-452cc5f9.json"
+      ]
+    },
+    {
+      "id": "content.char.protagonist-female.idle-anim",
+      "owner": "codex",
+      "ownerReason": "Creator-authorized Codex work during Max quota gap",
+      "status": "in_progress",
+      "lane": "primary",
+      "worktree": "heroine-producer",
+      "dependsOn": [
+        "content.char.protagonist-female.static-south",
+        "content.char.protagonist-female.static-north",
+        "content.char.protagonist-female.static-west",
+        "content.char.protagonist-female.static-east"
+      ],
+      "output": "Four-direction native editable idle loops with planted feet and actual normal1x bright/dark evidence",
+      "writeScope": [
+        "outputs/",
+        "tools/*female*west*",
+        "game/tests/*female*west*",
+        "docs/qa/"
+      ],
+      "completion": [
+        "Stable floor and approved-scale identity, no whole-sprite bob",
+        "Native multiframe/layered source roundtrip and source-bound proof",
+        "Actual30/60fps normal-speed all-direction playback for Codex judgment",
+        "No creator/fullset/motion approval supplied by automation"
+      ],
+      "nextAction": "Finish four-direction idle loops; maintain one representative character production path",
+      "blockedBy": [],
+      "startedAt": "2026-10-18T21:53:43.899011+00:00",
       "finishedAt": null,
       "evidence": []
     }
