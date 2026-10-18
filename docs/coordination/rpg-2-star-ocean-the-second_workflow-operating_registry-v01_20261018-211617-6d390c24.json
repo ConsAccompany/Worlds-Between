@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-18T21:46:03.989519+00:00",
+  "updatedAt": "2026-10-18T21:50:56.820820+00:00",
   "purpose": "Operating queue and worktree ownership; no progress points or account details",
   "workflow": "docs/workflow.md",
   "canonicalLedger": "outputs/rpg-2-star-ocean-the-second_production-completion_task-ledger_v01_20261018-140533-3de52073.json",
@@ -214,8 +214,8 @@
       "id": "content.char.protagonist-female.static-west",
       "owner": "codex",
       "ownerReason": "Creator-authorized Codex work during Max quota gap",
-      "status": "in_progress",
-      "lane": "primary",
+      "status": "done",
+      "lane": "closed",
       "worktree": "heroine-producer",
       "dependsOn": [
         "content.char.protagonist-female.static-south"
@@ -233,11 +233,14 @@
         "Binary alpha, stable floor pivot, actual bright/dark captures",
         "Independent visual inspection before production credit; no final art approval"
       ],
-      "nextAction": "Finish this single direction before broader animation or character batches",
+      "nextAction": "Integrated source/evidence verified; no creator or runtime-set approval.",
       "blockedBy": [],
       "startedAt": "2026-10-18T21:46:03.989519+00:00",
-      "finishedAt": null,
-      "evidence": []
+      "finishedAt": "2026-10-18T21:50:56.820820+00:00",
+      "evidence": [
+        "docs/qa/rpg-2-star-ocean-the-second_protagonist-female_west-static-produced-candidate_unapproved-v01_20261018-174858-e21f1813.md",
+        "outputs/female-west-static-v01/rpg-2-star-ocean-the-second_protagonist-female_west-static-evidence-manifest_v01_20261018-174753-9b21bd7f.json"
+      ]
     },
     {
       "id": "ops.bible-offline-bootstrap",
@@ -261,6 +264,35 @@
       "nextAction": "Update exact86e0c54snapshot, test, publish privately and inspect live",
       "blockedBy": [],
       "startedAt": "2026-10-18T21:46:03.989519+00:00",
+      "finishedAt": null,
+      "evidence": []
+    },
+    {
+      "id": "content.char.protagonist-female.static-east",
+      "owner": "codex",
+      "ownerReason": "Creator-authorized Codex work during Max quota gap",
+      "status": "in_progress",
+      "lane": "primary",
+      "worktree": "heroine-producer",
+      "dependsOn": [
+        "content.char.protagonist-female.static-south"
+      ],
+      "output": "True authored right profile with deliberately asymmetric gear and layered native/gameplay evidence",
+      "writeScope": [
+        "outputs/",
+        "tools/*female*west*",
+        "game/tests/*female*west*",
+        "docs/qa/"
+      ],
+      "completion": [
+        "Approved v8 identity/palette subset and48logical body",
+        "Editable native layered PXO/ORA and reopen/export equality",
+        "Binary alpha, stable floor pivot, actual bright/dark captures",
+        "Independent visual inspection before production credit; no final art approval"
+      ],
+      "nextAction": "Finish east static in same heroine pipeline; no broader character batches",
+      "blockedBy": [],
+      "startedAt": "2026-10-18T21:50:56.820820+00:00",
       "finishedAt": null,
       "evidence": []
     }
