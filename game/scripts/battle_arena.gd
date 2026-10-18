@@ -73,6 +73,10 @@ const BATTLE_BACKDROP_BANDS := {
 # A fighter without a valid set (missing, invalid, unknown or partial) keeps its existing frames. Visual only: stats, reach,
 # AI, input, hit timing, positions, party order and saves are the same with the pilot on or off.
 const CombatSpriteSets := preload("res://scripts/rpg-2-star-ocean-the-second_combat-sprite-set_loader-playback_pilot-v01_20261018-153656-43a19158.gd")
+const BattleVfx := preload("res://scripts/rpg-2-star-ocean-the-second_battle-vfx_transient-event-layer_pilot-v01_20261018-172229-71d0d38e.gd")
+const BATTLE_VFX_CLI_FLAG := "--battle-vfx-pilot"
+static var battle_vfx_override := -1
+
 const COMBAT_SPRITE_SET_CLI_FLAG := "--combat-sprite-set-pilot"
 const COMBAT_SPRITE_SET_INDEX_ARG := "--combat-sprite-set-index="
 const COMBAT_SPRITE_SET_ART_APPROVED := false
@@ -133,6 +137,8 @@ var battle_backdrop_status := "off"
 var battle_backdrop_texture: Texture2D
 # Null unless the combat sprite set pilot is on.
 var combat_sprite_sets: RefCounted = null
+# Opt-in provisional presentation only; disabled renderer and simulation stay unchanged.
+var battle_vfx: RefCounted = null
 
 var title_label: Label
 var help_label: Label
@@ -209,6 +215,8 @@ func _ready() -> void:
 	_load_enemy_sprite_pilot()
 	_load_battle_backdrop()
 	_load_combat_sprite_sets()
+	if battle_vfx_override == 1 or (battle_vfx_override < 0 and OS.get_cmdline_user_args().has(BATTLE_VFX_CLI_FLAG)):
+		battle_vfx = BattleVfx.new()
 	_build_ui()
 	var audio_player := AudioStreamPlayer.new()
 	var ambient: AudioStreamWAV = BATTLE_AMBIENCE.duplicate()
@@ -226,6 +234,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if paused:
 		return
+	if battle_vfx != null:
+		battle_vfx.advance(delta)
 	if battle_finished:
 		_advance_fighter_visuals(delta, [])
 		_advance_combat_sprite_sets(delta)
@@ -273,6 +283,8 @@ func _process(delta: float) -> void:
 func _set_fighter_visual_action(fighter: Dictionary, action: String) -> void:
 	fighter["visual_action"] = action
 	fighter["visual_elapsed"] = 0.0
+	if action == "skill":
+		_emit_battle_cue("skill")
 
 
 func _advance_fighter_visuals(delta: float, initial_positions: Array[float]) -> void:
@@ -523,6 +535,7 @@ func _try_attack(index: int = -1) -> bool:
 	fighter["boost"] = 0
 	next_attack_bonus = 0
 	enemy_hp = maxi(0, enemy_hp - damage)
+	_emit_battle_vfx("attack", Vector2(enemy_x, ARENA_FLOOR_Y - 28.0), signf(enemy_x - float(fighter["x"])))
 	feedback_message = ""
 	feedback_key = "battle_hit"
 	if enemy_hp == 0:
@@ -549,6 +562,7 @@ func _try_dodge(index: int = -1) -> bool:
 	_set_fighter_visual_action(fighter, "dodge")
 	var axis := Input.get_axis("move_left", "move_right") if index == controlled_index and not auto_mode else 0.0
 	fighter["dodge_direction"] = axis if axis != 0.0 else signf(float(fighter["x"]) - enemy_x)
+	_emit_battle_vfx("dodge", Vector2(float(fighter["x"]), ARENA_FLOOR_Y - 3.0), fighter["dodge_direction"])
 	return true
 
 
@@ -655,17 +669,20 @@ func _apply_enemy_hit() -> void:
 		return
 	var member: Dictionary = AppState.member_state(String(fighter["id"]))
 	var damage: int = int(enemy["damage"])
+	var guarded := false
 	feedback_message = ""
 	if bool(fighter["guard"]) or (index == controlled_index and not auto_mode and Input.is_action_pressed("battle_guard")):
 		if int(member["energy"]) >= GUARD_HIT_COST:
 			member["energy"] = int(member["energy"]) - GUARD_HIT_COST
 			damage = maxi(1, ceili(float(damage) * 0.30))
+			guarded = true
 			feedback_key = "battle_guard_feedback"
 		else:
 			feedback_key = "battle_hurt"
 	else:
 		feedback_key = "battle_hurt"
 	member["hp"] = maxi(0, int(member["hp"]) - damage)
+	_emit_battle_vfx("guard" if guarded else "hit", Vector2(float(fighter["x"]), ARENA_FLOOR_Y - 26.0), signf(enemy_x - float(fighter["x"])))
 	if int(member["hp"]) == 0:
 		_set_fighter_visual_action(fighter, "down")
 		feedback_message = AppState.text_for("battle_member_down") % AppState.member_name(String(fighter["id"]))
@@ -767,6 +784,7 @@ func _finish_battle(won: bool) -> void:
 	paused = false
 	pause_overlay.visible = false
 	battle_won = won
+	_emit_battle_cue("victory" if won else "defeat")
 	AppState.record_playtest_event("battle_win" if won else "battle_loss", AppState.current_destination_id)
 	if won:
 		AppState.machine_observed = true
@@ -937,6 +955,29 @@ func _draw() -> void:
 		_draw_fighter(fighters[index], index)
 	if enemy_shown and not enemy_behind:
 		_draw_enemy()
+
+	if battle_vfx != null:
+		battle_vfx.draw(self)
+
+
+func _emit_battle_cue(event: String) -> void:
+	# Service is optional until the disjoint audio workstream is integrated; no dependency on its source here.
+	var service: Variant = AppState.get("audio_cues")
+	if service is Object and service.has_method("play_cue"):
+		service.call("play_cue", event)
+
+
+func _emit_battle_vfx(kind: String, origin: Vector2, facing: float = 1.0) -> bool:
+	_emit_battle_cue(kind)
+	return battle_vfx.emit(kind, origin, facing) if battle_vfx != null else false
+
+
+# Presentation API for a future successful healing action; current combat has no healing mechanic.
+# Calling this never restores HP, spends energy or changes combat state.
+func show_heal_vfx(index: int) -> bool:
+	if not _is_alive(index):
+		return false
+	return _emit_battle_vfx("heal", Vector2(float(fighters[index]["x"]), ARENA_FLOOR_Y - 26.0))
 
 
 func _draw_fighter(fighter: Dictionary, index: int) -> void:

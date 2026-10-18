@@ -1,0 +1,76 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 610.88 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 3080
+
+PASS isolated fresh profile
+PASS invalid events reject without mutation
+PASS attack event accepted
+PASS dodge event accepted
+PASS guard event accepted
+PASS hit event accepted
+PASS heal event accepted
+PASS negative delta ignored
+PASS all five event lifetimes clean up by 600ms
+PASS 24-event cap drops oldest; no unbounded queue
+PASS attack advances by elapsed time at 30/60fps; stable pixel origin
+PASS dodge advances by elapsed time at 30/60fps; stable pixel origin
+PASS guard advances by elapsed time at 30/60fps; stable pixel origin
+PASS hit advances by elapsed time at 30/60fps; stable pixel origin
+PASS heal advances by elapsed time at 30/60fps; stable pixel origin
+PASS test launches without VFX opt-in flag
+BATTLE_TRANSITION_MS 9.29
+PASS no VFX helper with default selection
+BATTLE_TRANSITION_MS 5.71
+PASS missed out-of-range attack emits no contact effect
+PASS successful normal attack contact emits once
+PASS cooldown-rejected attack does not emit
+PASS successful normal dodge emits once
+PASS cooldown-rejected dodge does not emit
+PASS enemy contact evaded during real dodge emits no hit or guard
+PASS actual energy-funded blocked contact emits guard
+PASS actual damage contact emits hit
+PASS guard with insufficient energy emits damage hit, not blocked-contact cue
+PASS heal presentation API emits without inventing healing or energy changes
+PASS invalid heal target rejected
+PASS pause freezes VFX elapsed time and lifetime
+PASS one second of normal updates clears events without per-frame emission spam
+BATTLE_TRANSITION_MS 4.26
+BATTLE_TRANSITION_MS 4.91
+PASS patrol sentry0/backdrop0: 600-step simulation/save parity with effects emitted only on
+BATTLE_TRANSITION_MS 4.31
+BATTLE_TRANSITION_MS 4.47
+PASS sentry sentry0/backdrop0: 600-step simulation/save parity with effects emitted only on
+BATTLE_TRANSITION_MS 25.24
+BATTLE_TRANSITION_MS 24.94
+PASS sentry sentry1/backdrop1: 600-step simulation/save parity with effects emitted only on
+BATTLE_TRANSITION_MS 4.40
+PASS attack/zh capture has exactly its tested event
+PASS attack/zh local thin accents: 16 changed pixels, none outside battle body/feet strip
+BATTLE_TRANSITION_MS 4.74
+PASS attack/en capture has exactly its tested event
+PASS attack/en local thin accents: 16 changed pixels, none outside battle body/feet strip
+BATTLE_TRANSITION_MS 4.69
+PASS dodge/zh capture has exactly its tested event
+PASS dodge/zh local thin accents: 24 changed pixels, none outside battle body/feet strip
+BATTLE_TRANSITION_MS 4.50
+PASS dodge/en capture has exactly its tested event
+PASS dodge/en local thin accents: 24 changed pixels, none outside battle body/feet strip
+BATTLE_TRANSITION_MS 4.53
+PASS guard/zh capture has exactly its tested event
+PASS guard/zh local thin accents: 28 changed pixels, none outside battle body/feet strip
+BATTLE_TRANSITION_MS 4.73
+PASS guard/en capture has exactly its tested event
+PASS guard/en local thin accents: 28 changed pixels, none outside battle body/feet strip
+BATTLE_TRANSITION_MS 4.65
+PASS hit/zh capture has exactly its tested event
+PASS hit/zh local thin accents: 16 changed pixels, none outside battle body/feet strip
+BATTLE_TRANSITION_MS 4.90
+PASS hit/en capture has exactly its tested event
+PASS hit/en local thin accents: 16 changed pixels, none outside battle body/feet strip
+BATTLE_TRANSITION_MS 5.16
+PASS heal/zh capture has exactly its tested event
+PASS heal/zh local thin accents: 14 changed pixels, none outside battle body/feet strip
+BATTLE_TRANSITION_MS 4.62
+PASS heal/en capture has exactly its tested event
+PASS heal/en local thin accents: 14 changed pixels, none outside battle body/feet strip
+REPORT C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-wdc-ruin/game/../outputs/vfx-capability_20261018-172526-e9e7344f/rpg-2-star-ocean-the-second_battle-vfx_capability-report_v01_20261018-172526-e9e7344f.json
+BATTLE_VFX PASS checks=53 captures=10
