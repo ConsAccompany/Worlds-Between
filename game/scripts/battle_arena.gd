@@ -48,8 +48,27 @@ const ENEMY_WINDUP_MODULATE := Color(1.0, 0.70, 0.66)
 const ENEMY_TELEGRAPH_CENTER_Y := 240.0
 const ENEMY_TELEGRAPH_RADIUS := 30.0
 const ENEMY_TELEGRAPH_COLOR := Color(1.0, 0.23, 0.20, 0.28)
+# Battle backdrop loader pilot: a TECHNICAL capability. Every band below is UNAPPROVED candidate art (acceptance 0), and none is
+# the default. Opt-in only: launch with `-- --battle-backdrop-pilot`, or set battle_backdrop_override = 1 before the battle scene
+# loads. Off by default, so every battle keeps the geometric backdrop. The arena comes from the battle's destination;
+# `-- --battle-backdrop-arena=<id>` or battle_backdrop_arena_override picks one directly (no battle starts in the archive yet).
+# An arena without a band, a missing file or a band that is not an integer multiple of the play band falls back to the geometric
+# backdrop. Visual only: stats, AI, input, timers and positions are the same with the pilot on or off.
+const BATTLE_BACKDROP_CLI_FLAG := "--battle-backdrop-pilot"
+const BATTLE_BACKDROP_ARENA_ARG := "--battle-backdrop-arena="
+const BATTLE_BACKDROP_ART_APPROVED := false
+# The logical play band between the opaque header (0-90) and footer (302-360).
+const BATTLE_BACKDROP_RECT := Rect2i(0, 90, 640, 212)
+const BATTLE_ARENA_BY_DESTINATION := {"scifi.city": "city-terrace", "scifi.outskirts": "outskirts", "scifi.ruins": "ruins"}
+# Tracked 1280x424 bands only (2x the play band). city-terrace and ruins have no tracked band, so they keep the geometric backdrop.
+const BATTLE_BACKDROP_BANDS := {
+	"archive": "res://assets/environments/rpg-2-star-ocean-the-second_scifi-archive-battle-arena_runtime-band_m8-candidate_20261014-213622-14315e18.png",
+	"outskirts": "res://assets/environments/rpg-2-star-ocean-the-second_scifi-outskirts-battle-arena_runtime-band_m8-candidate_20261014-213622-14315e18.png",
+}
 
 static var sentry_v2_override := -1
+static var battle_backdrop_override := -1
+static var battle_backdrop_arena_override := ""
 
 var enemy_id := "patrol"
 var enemy: Dictionary
@@ -93,6 +112,11 @@ var enemy_visual_last_hp := 0
 var enemy_visual_last_attack_count := 0
 var enemy_visual_still_time := 0.0
 var enemy_visual_gait_origin_x := 0.0
+# Like the sentry switches, the path override only swaps the band file of the opt-in pilot; it never enables the pilot.
+var battle_backdrop_path_override := ""
+var battle_backdrop_arena_id := ""
+var battle_backdrop_status := "off"
+var battle_backdrop_texture: Texture2D
 
 var title_label: Label
 var help_label: Label
@@ -129,6 +153,21 @@ static func sentry_v2_enabled() -> bool:
 	return OS.get_cmdline_user_args().has(SENTRY_V2_CLI_FLAG)
 
 
+static func battle_backdrop_enabled() -> bool:
+	if battle_backdrop_override >= 0:
+		return battle_backdrop_override == 1
+	return OS.get_cmdline_user_args().has(BATTLE_BACKDROP_CLI_FLAG)
+
+
+static func battle_backdrop_arena(destination_id: String) -> String:
+	var arena_id := battle_backdrop_arena_override
+	if arena_id == "":
+		for argument in OS.get_cmdline_user_args():
+			if argument.begins_with(BATTLE_BACKDROP_ARENA_ARG):
+				arena_id = argument.trim_prefix(BATTLE_BACKDROP_ARENA_ARG)
+	return arena_id if arena_id != "" else BATTLE_ARENA_BY_DESTINATION.get(destination_id, "")
+
+
 func _ready() -> void:
 	texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	enemy_id = AppState.battle_enemy_id if ENEMIES.has(AppState.battle_enemy_id) else "patrol"
@@ -137,6 +176,7 @@ func _ready() -> void:
 	for index in AppState.active_party_ids.size():
 		fighters.append({"id": AppState.active_party_ids[index], "x": 135.0 + index * 36.0, "attack_cooldown": 0.0, "dodge_cooldown": 0.0, "dodge_time": 0.0, "dodge_direction": -1.0, "skill_cooldown": 0.0, "command": "default", "guard": false, "boost": 0, "visual_action": "", "visual_elapsed": 0.0, "visual_loop_kind": "idle", "visual_loop_clock": 0.0, "visual_moving": false})
 	_load_enemy_sprite_pilot()
+	_load_battle_backdrop()
 	_build_ui()
 	var audio_player := AudioStreamPlayer.new()
 	var ambient: AudioStreamWAV = BATTLE_AMBIENCE.duplicate()
@@ -790,16 +830,48 @@ func _load_enemy_animation() -> void:
 	enemy_animation_anchor = animation.get("anchor", enemy_anchor)
 
 
+func _load_battle_backdrop() -> void:
+	battle_backdrop_texture = null
+	battle_backdrop_arena_id = ""
+	battle_backdrop_status = "off"
+	if not battle_backdrop_enabled():
+		return
+	battle_backdrop_arena_id = battle_backdrop_arena(AppState.current_destination_id)
+	if not BATTLE_BACKDROP_BANDS.has(battle_backdrop_arena_id):
+		battle_backdrop_status = "no_band"
+		return
+	var path: String = battle_backdrop_path_override if battle_backdrop_path_override != "" else BATTLE_BACKDROP_BANDS[battle_backdrop_arena_id]
+	if not ResourceLoader.exists(path):
+		battle_backdrop_status = "missing"
+		return
+	var band := load(path) as Texture2D
+	var image: Image = null
+	if band != null:
+		var factor := roundi(band.get_size().x / BATTLE_BACKDROP_RECT.size.x)
+		if factor >= 1 and Vector2i(band.get_size()) == BATTLE_BACKDROP_RECT.size * factor:
+			image = band.get_image()
+	if image == null:
+		battle_backdrop_status = "unsupported"
+		return
+	# Nearest-neighbour down to the 640x212 logical band, so the band shares the sprites' pixel grid at every window size.
+	image.resize(BATTLE_BACKDROP_RECT.size.x, BATTLE_BACKDROP_RECT.size.y, Image.INTERPOLATE_NEAREST)
+	battle_backdrop_texture = ImageTexture.create_from_image(image)
+	battle_backdrop_status = "loaded"
+
+
 func _draw() -> void:
-	var backdrop := Color("#2b4050") if enemy_id == "patrol" else Color("#463b4a")
 	draw_rect(Rect2(0, 0, 640, 360), Color("#101a27"))
-	draw_rect(Rect2(0, 89, 640, 213), backdrop)
-	for x in range(0, 640, 40):
-		draw_rect(Rect2(x, 248, 22, 3), Color("#8ca5a4"))
-	draw_rect(Rect2(0, 268, 640, 34), Color("#718883"))
-	draw_rect(Rect2(0, 296, 640, 6), Color("#394f55"))
-	for x in range(35, 640, 120 if enemy_id == "patrol" else 150):
-		draw_rect(Rect2(x, 101, 12 if enemy_id == "patrol" else 25, 145), Color("#334f5d") if enemy_id == "patrol" else Color("#766b63"))
+	if battle_backdrop_texture != null:
+		draw_texture(battle_backdrop_texture, Vector2(BATTLE_BACKDROP_RECT.position))
+	else:
+		var backdrop := Color("#2b4050") if enemy_id == "patrol" else Color("#463b4a")
+		draw_rect(Rect2(0, 89, 640, 213), backdrop)
+		for x in range(0, 640, 40):
+			draw_rect(Rect2(x, 248, 22, 3), Color("#8ca5a4"))
+		draw_rect(Rect2(0, 268, 640, 34), Color("#718883"))
+		draw_rect(Rect2(0, 296, 640, 6), Color("#394f55"))
+		for x in range(35, 640, 120 if enemy_id == "patrol" else 150):
+			draw_rect(Rect2(x, 101, 12 if enemy_id == "patrol" else 25, 145), Color("#334f5d") if enemy_id == "patrol" else Color("#766b63"))
 	# The sprite pilot is wider than the block, so it draws behind fighters to keep their attack frames on top, except in its own front states (strike).
 	var enemy_behind := enemy_texture != null and not _enemy_visual_in_front()
 	# An animated pilot stays on the field in its defeat pose; the static pilot and block vanish as before.

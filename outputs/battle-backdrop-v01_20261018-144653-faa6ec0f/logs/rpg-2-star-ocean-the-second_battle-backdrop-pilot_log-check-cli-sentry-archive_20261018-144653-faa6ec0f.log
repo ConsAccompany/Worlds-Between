@@ -1,0 +1,97 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 610.88 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 3080
+
+PASS BATTLE_BACKDROP_ART_APPROVED is false (no band is approved)
+PASS static override untouched (-1); the loader is on exactly as the CLI flag says
+BATTLE_TRANSITION_MS 19.96
+PASS scifi.outskirts encounter opens the battle through the exploration area's change_scene
+PASS scifi.outskirts encounter (patrol): status loaded arena 'archive' (expected loaded 'archive')
+PASS scifi.outskirts encounter: band texture present only when loaded
+PASS scifi.outskirts encounter: sentry v2 sprite only with its own flag on the sentry
+PASS scifi.outskirts battle with both flags played to the result screen: won=true after 87 steps (1.5 s)
+BATTLE_TRANSITION_MS 29.53
+PASS scifi.ruins encounter opens the battle through the exploration area's change_scene
+PASS scifi.ruins encounter (sentry): status loaded arena 'archive' (expected loaded 'archive')
+PASS scifi.ruins encounter: band texture present only when loaded
+PASS scifi.ruins encounter: sentry v2 sprite only with its own flag on the sentry
+PASS scifi.ruins battle with both flags played to the result screen: won=true after 116 steps (1.9 s)
+BATTLE_TRANSITION_MS 2.82
+BATTLE_TRANSITION_MS 3.32
+PASS fallback missing file -> status missing, no band (got missing)
+PASS fallback missing file renders the geometric backdrop pixel for pixel
+BATTLE_TRANSITION_MS 29.65
+PASS fallback 1672x941 image (not a multiple of 640x212) -> status unsupported, no band (got unsupported)
+PASS fallback 1672x941 image (not a multiple of 640x212) renders the geometric backdrop pixel for pixel
+BATTLE_TRANSITION_MS 3.39
+PASS fallback non-texture resource -> status unsupported, no band (got unsupported)
+PASS fallback non-texture resource renders the geometric backdrop pixel for pixel
+BATTLE_TRANSITION_MS 3.49
+PASS arena 'ruins' (no tracked band / invalid key) renders the geometric backdrop pixel for pixel
+BATTLE_TRANSITION_MS 3.23
+PASS arena 'city-terrace' (no tracked band / invalid key) renders the geometric backdrop pixel for pixel
+BATTLE_TRANSITION_MS 2.89
+PASS arena 'nope' (no tracked band / invalid key) renders the geometric backdrop pixel for pixel
+BATTLE_TRANSITION_MS 3.19
+BATTLE_TRANSITION_MS 17.38
+PASS zh 640: band shown nearest at the 640 logical scale (empty columns equal the band texels in 1x1 blocks)
+PASS zh 640: header rows 0-89 and footer rows 302-359 identical to the default (HUD above the band, nothing covered)
+PASS zh 640: the play band itself changed (band visible)
+PASS zh 640: fighters (199-285) and enemy sit inside the 90-302 play band and the 640 width []
+PASS zh 640: footer console (feedback, help) and header labels inside 640x360, console inside the footer []
+PASS zh 640: every fighter and the enemy are still drawn over the band (their pixels differ from the bare band)
+BATTLE_TRANSITION_MS 2.82
+BATTLE_TRANSITION_MS 19.74
+PASS en 640: band shown nearest at the 640 logical scale (empty columns equal the band texels in 1x1 blocks)
+PASS en 640: header rows 0-89 and footer rows 302-359 identical to the default (HUD above the band, nothing covered)
+PASS en 640: the play band itself changed (band visible)
+PASS en 640: fighters (199-285) and enemy sit inside the 90-302 play band and the 640 width []
+PASS en 640: footer console (feedback, help) and header labels inside 640x360, console inside the footer []
+PASS en 640: every fighter and the enemy are still drawn over the band (their pixels differ from the bare band)
+BATTLE_TRANSITION_MS 2.92
+BATTLE_TRANSITION_MS 18.11
+PASS zh 1280: band shown nearest at the 640 logical scale (empty columns equal the band texels in 2x2 blocks)
+PASS zh 1280: header rows 0-89 and footer rows 302-359 identical to the default (HUD above the band, nothing covered)
+PASS zh 1280: the play band itself changed (band visible)
+PASS zh 1280: fighters (199-285) and enemy sit inside the 90-302 play band and the 640 width []
+PASS zh 1280: footer console (feedback, help) and header labels inside 640x360, console inside the footer []
+PASS zh 1280: every fighter and the enemy are still drawn over the band (their pixels differ from the bare band)
+BATTLE_TRANSITION_MS 3.15
+BATTLE_TRANSITION_MS 18.11
+PASS en 1280: band shown nearest at the 640 logical scale (empty columns equal the band texels in 2x2 blocks)
+PASS en 1280: header rows 0-89 and footer rows 302-359 identical to the default (HUD above the band, nothing covered)
+PASS en 1280: the play band itself changed (band visible)
+PASS en 1280: fighters (199-285) and enemy sit inside the 90-302 play band and the 640 width []
+PASS en 1280: footer console (feedback, help) and header labels inside 640x360, console inside the footer []
+PASS en 1280: every fighter and the enemy are still drawn over the band (their pixels differ from the bare band)
+BATTLE_TRANSITION_MS 2.68
+PASS patrol backdrop=0 sentry=0: band loaded only with the backdrop on
+BATTLE_TRANSITION_MS 16.87
+PASS patrol backdrop=1 sentry=0: band loaded only with the backdrop on
+PASS patrol backdrop=1 sentry=0: 600-step gameplay trace identical to backdrop=0 sentry=0 (111930cccb48...)
+BATTLE_TRANSITION_MS 2.72
+PASS patrol backdrop=0 sentry=1: band loaded only with the backdrop on
+PASS patrol backdrop=0 sentry=1: 600-step gameplay trace identical to backdrop=0 sentry=0 (111930cccb48...)
+BATTLE_TRANSITION_MS 18.16
+PASS patrol backdrop=1 sentry=1: band loaded only with the backdrop on
+PASS patrol backdrop=1 sentry=1: 600-step gameplay trace identical to backdrop=0 sentry=0 (111930cccb48...)
+PASS patrol trace has real exchanges (both sides attacked)
+BATTLE_TRANSITION_MS 2.93
+PASS sentry backdrop=0 sentry=0: band loaded only with the backdrop on
+BATTLE_TRANSITION_MS 17.24
+PASS sentry backdrop=1 sentry=0: band loaded only with the backdrop on
+PASS sentry backdrop=1 sentry=0: 600-step gameplay trace identical to backdrop=0 sentry=0 (8e5307e31701...)
+BATTLE_TRANSITION_MS 11.25
+PASS sentry backdrop=0 sentry=1: band loaded only with the backdrop on
+PASS sentry backdrop=0 sentry=1: 600-step gameplay trace identical to backdrop=0 sentry=0 (8e5307e31701...)
+BATTLE_TRANSITION_MS 23.38
+PASS sentry backdrop=1 sentry=1: band loaded only with the backdrop on
+PASS sentry backdrop=1 sentry=1: 600-step gameplay trace identical to backdrop=0 sentry=0 (8e5307e31701...)
+PASS sentry trace has real exchanges (both sides attacked)
+PASS --stamp=YYYYMMDD-HHMMSS-<8 hex> given for captures
+BATTLE_TRANSITION_MS 23.43
+PASS capture ruins:sentry zh: real sentry encounter
+PASS capture rpg-2-star-ocean-the-second_battle-backdrop-pilot_archive-loaded-sentry-windup-zh-640_20261018-144653-faa6ec0f.png saved at 640x360
+BATTLE_TRANSITION_MS 27.62
+PASS capture ruins:sentry en: real sentry encounter
+PASS capture rpg-2-star-ocean-the-second_battle-backdrop-pilot_archive-loaded-sentry-windup-en-640_20261018-144653-faa6ec0f.png saved at 640x360
+BATTLE_BACKDROP_CHECK OK passed=66 failed=0 mode=cli nearest_offset=-1 captures=2
