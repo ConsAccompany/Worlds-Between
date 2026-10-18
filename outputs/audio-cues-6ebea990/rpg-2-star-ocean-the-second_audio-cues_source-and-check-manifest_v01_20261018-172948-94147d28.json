@@ -1,0 +1,71 @@
+{
+  "task": "code.runtime.audio-cues",
+  "testedAt": "2026-10-18T21:29:48.583543+00:00",
+  "base": "08a0d04",
+  "artApproved": false,
+  "sourceHashAlgorithm": "sha256-text-lf-v1",
+  "sources": [
+    {
+      "file": "game/scripts/game_audio_cues.gd",
+      "sha256": "bced21d1311a9d0d2237b96661dd09c0e4ac266fbb25400e325cb003b6d1cfff"
+    },
+    {
+      "file": "game/scripts/app_state.gd",
+      "sha256": "60f3622f1dfcaa554861391b552442636a7870c7d250de4c4122da9245c4f2ee"
+    },
+    {
+      "file": "game/scripts/battle_arena.gd",
+      "sha256": "4602e8caa1d57f41e7fadaabc58c5d05d570fa0bf7266d4e195b12e6b20a41a3"
+    },
+    {
+      "file": "game/tests/rpg-2-star-ocean-the-second_audio-cues_runtime-check_v01_20261018-173100-6ebea990.gd",
+      "sha256": "eff102bc42dd4627d2325c8455b2157898bef47a83dc840172245bdb9f4093f9"
+    }
+  ],
+  "checks": {
+    "rpg-2-star-ocean-the-second_audio-cues_headless-check_v01_20261018-172820-6ebea990.json": {
+      "passed": 42,
+      "total": 42
+    },
+    "rpg-2-star-ocean-the-second_audio-cues_windowed-check_v01_20261018-172822-6ebea990.json": {
+      "passed": 43,
+      "total": 43
+    }
+  },
+  "limitations": [
+    "Procedural cue sound design is provisional; no human audible/artistic QA claimed.",
+    "Headless service dispatches/cache-checks without actual playback; windowed check asserts real AudioStreamPlayer playback.",
+    "Heal is presentation API only; there is no healing combat mechanic.",
+    "Feature default OFF; opt-in --audio-cues-pilot."
+  ],
+  "evidence": [
+    {
+      "file": "outputs/audio-cues-6ebea990/rpg-2-star-ocean-the-second_audio-cues_combat-parity-log_v01_20261018-172827-6ebea990.txt",
+      "sha256": "06c13b4abfcfb88165b6403b94868c93d71f26a3d9f1572841edd7c222d77698"
+    },
+    {
+      "file": "outputs/audio-cues-6ebea990/rpg-2-star-ocean-the-second_audio-cues_headless-check_v01_20261018-172820-6ebea990.json",
+      "sha256": "25e43fe952d6c5ae7ad74ed0a95b878cd855e589536d09999041c8beaf260a3f"
+    },
+    {
+      "file": "outputs/audio-cues-6ebea990/rpg-2-star-ocean-the-second_audio-cues_headless-log_v01_20261018-172820-6ebea990.txt",
+      "sha256": "a480f19839b8463e322da2eb89b92d946a964ba008efdd4d8d719c6ed7133ac3"
+    },
+    {
+      "file": "outputs/audio-cues-6ebea990/rpg-2-star-ocean-the-second_audio-cues_windowed-check_v01_20261018-172822-6ebea990.json",
+      "sha256": "eb79dfc4d85ce210da16bebe102509788609d4094b573f270c23364e8e1c26a4"
+    },
+    {
+      "file": "outputs/audio-cues-6ebea990/rpg-2-star-ocean-the-second_audio-cues_windowed-log_v01_20261018-172823-6ebea990.txt",
+      "sha256": "4c9937af481b9807b368d3750c9b396c68d3e3e35df55cc8ef1ef50ba9123d8b"
+    }
+  ],
+  "independentReview": {
+    "by": "codex",
+    "verdict": "passed",
+    "limitations": [
+      "Dense round-robin playback can truncate an older cue.",
+      "No human audition or final sound-design approval."
+    ]
+  }
+}

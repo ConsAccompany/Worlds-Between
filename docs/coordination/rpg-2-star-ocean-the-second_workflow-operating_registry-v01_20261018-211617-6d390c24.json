@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-18T21:22:32.242360+00:00",
+  "updatedAt": "2026-10-18T21:30:42.467248+00:00",
   "purpose": "Operating queue and worktree ownership; no progress points or account details",
   "workflow": "docs/workflow.md",
   "canonicalLedger": "outputs/rpg-2-star-ocean-the-second_production-completion_task-ledger_v01_20261018-140533-3de52073.json",
@@ -148,8 +148,8 @@
     {
       "id": "content.scene.chicago-loop.material-revision",
       "owner": "codex",
-      "status": "queued",
-      "lane": "queued",
+      "status": "in_progress",
+      "lane": "primary",
       "worktree": "chicago-producer",
       "dependsOn": [],
       "output": "One bounded native material/depth revision with editable source and normal gameplay evidence",
@@ -159,18 +159,16 @@
         "Native layered PXO/ORA exact-export evidence and actual bilingual captures",
         "Codex visual verdict before creator presentation"
       ],
-      "nextAction": "Inspect preserved v06 source/export completeness after loaders finish; use the existing revision mechanism only",
-      "blockedBy": [
-        "Finish current active loader work first"
-      ],
-      "startedAt": null,
+      "nextAction": "Finish bounded native material pass, exact export and normal gameplay evidence.",
+      "blockedBy": [],
+      "startedAt": "2026-10-18T21:30:42.467248+00:00",
       "finishedAt": null
     },
     {
       "id": "code.runtime.vfx-system",
       "owner": "codex",
-      "status": "in_progress",
-      "lane": "primary",
+      "status": "done",
+      "lane": "closed",
       "worktree": "combat-producer",
       "dependsOn": [
         "code.runtime.combat-sprite-pipeline"
@@ -179,16 +177,16 @@
       "completion": [
         "Existing ledger criterion, targeted event checks and actual gameplay inspection"
       ],
-      "nextAction": "Finish bounded opt-in battle presentation effects; no healing mechanics added.",
+      "nextAction": "Production capability integrated; final artistry remains separate.",
       "blockedBy": [],
       "startedAt": "2026-10-18T21:22:32.242360+00:00",
-      "finishedAt": null
+      "finishedAt": "2026-10-18T21:30:42.467248+00:00"
     },
     {
       "id": "code.runtime.audio-cues",
       "owner": "codex",
-      "status": "in_progress",
-      "lane": "supporting",
+      "status": "done",
+      "lane": "closed",
       "worktree": "integration",
       "dependsOn": [
         "code.runtime.combat-sprite-pipeline"
@@ -197,10 +195,10 @@
       "completion": [
         "Existing ledger criterion, mute/volume checks and audible review"
       ],
-      "nextAction": "Build reusable audio cues and UI hooks; serialize battle-arena hook integration after VFX commit.",
+      "nextAction": "Production capability integrated; final artistry remains separate.",
       "blockedBy": [],
       "startedAt": "2026-10-18T21:22:32.242360+00:00",
-      "finishedAt": null
+      "finishedAt": "2026-10-18T21:30:42.467248+00:00"
     }
   ],
   "nextProductionMilestones": [

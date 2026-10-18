@@ -23,3 +23,7 @@ Read [the operating workflow](docs/workflow.md) before starting a batch. Its lin
 - All schedules are canceled. Do not recreate schedules without fresh user authorization. Coalesce any authorized wakeup with active work; never duplicate or interrupt workers.
 - Save each requested generated image separately. Generated assets, captures, exports and manifests use lowercase `[project-slug]_[subject]_[purpose]_[variant]_[YYYYMMDD-HHMMSS]-[unique-id].[ext]`; keep directories short for Windows. Preserve editable native sources and provenance.
 - Canon remains the science US/Canada MVP, NYC/Catskills, 2537-05-25 start, 51 identities/52 variants, no persistent companion followers and simple whole-hour travel. Consult the Bible for full canon; do not revive superseded precision travel rules.
+
+## Windows execution
+
+Use explicit UTF-8 for file/subprocess text and extended-length paths when needed. Keep directory names short; preserve descriptive asset filenames. Check each command result before dependent work.

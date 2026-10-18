@@ -548,6 +548,7 @@ var travel_state_migrated := false
 var _travel_registry: WorldRouteRegistry = null
 # Player preferences and the F10 settings overlay (own config file, never part of a save).
 var settings: GameSettings = null
+var audio_cues: Node = null
 # Provisional commerce ledger; its units are not currency. Settled only by advance_calendar.
 var commerce := CommerceLedger.new()
 var commerce_state_migrated := false
@@ -588,6 +589,8 @@ func _ready() -> void:
 	add_child(settings)
 	settings.capture_default_controls()
 	settings.load_preferences()
+	audio_cues = preload("res://scripts/game_audio_cues.gd").new()
+	add_child(audio_cues)
 	_reset_travel_state()
 	_reset_commerce_state()
 
