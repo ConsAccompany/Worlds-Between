@@ -64,7 +64,7 @@ const TASK_TYPES = {
 };
 const DEFAULT_TYPE = {coding: 'feature-code', content: 'native-pixel', 'technical-inspection': 'technical-check', 'visual-review': 'visual-review', 'creator-approval': 'creator-acceptance'};
 const OWNERS = {claude: {zh: 'Claude（原生 Pixelorama 内容、编码、测试、技术文档、整合）', en: 'Claude (native Pixelorama content, coding, tests, technical writing, integration)'},
-  codex: {zh: 'Codex（图像生成的设定图、视觉／浏览器检查、内容质量检查、云端发布）', en: 'Codex (image-generated source portraits, visual / browser inspection, content QA, cloud publication)'},
+  codex: {zh: 'Codex（协调、独立检查与云端发布；Claude 配额不足时接手编码、原生内容、测试和整合）', en: 'Codex (coordination, independent inspection and cloud publication; takes over coding, native content, tests and integration during Claude quota gaps)'},
   creator: {zh: '创作者（美术验收、正典选择、两轮真人试玩）', en: 'Creator (art acceptance, canon choices, the two human playthroughs)'}};
 const STATUSES = {
   production: ['todo', 'in_progress', 'done', 'blocked'],
@@ -693,7 +693,7 @@ function serialize(ledger) {
 }
 function load(file) { return JSON.parse(fs.readFileSync(file, 'utf8')); }
 function save(file, ledger) { fs.writeFileSync(file, serialize(ledger)); }
-function refresh(ledger, root) { ledger.computed = compute(ledger, root); return ledger; }
+function refresh(ledger, root) { ledger.owners = OWNERS; ledger.computed = compute(ledger, root); return ledger; }
 
 function init(root, now) {
   const tasks = buildTasks(root, now);
