@@ -120,6 +120,30 @@ All runs used a short-path mirror, `%TEMP%\iv755`, built by `git apply --index` 
 - WDC table web Save As;
 - Yonkers v05.
 
+## Post-commit verification (HEAD `ffa165c6`, fresh mirror; reports in `outputs/postcommit-ffa165c6_dfca7151/`)
+
+All checks ran in a fresh worktree checked out at the batch commit, where HEAD already carries the v12r2 hook and the candidate `survey_annex.gd`.
+
+| Check | Result |
+|---|---|
+| Room 2 opt-in | `WDC_R2_V01_ALL_OK` |
+| Room 2 default-off parity r1, pinned baseline (`git show 7370739:…survey_annex.gd`) | OK: room 1 zh 0, room 2 zh 0, room 1 en 1377, room 2 en 4965 px, all in the header |
+| Same parity run given HEAD's own `survey_annex.gd` | **fails as intended**: "baseline copy is not the pinned pre-candidate survey_annex.gd" |
+| Accepted rooms replay | `ACCEPTED_REPLAY_ALL_OK`, 8/8 at 0 px |
+| Room 2 Python gates | 16/16 |
+| Default fix (pinned baseline) | default `ALL_OK`, opt-in `ALL_OK`, evidence 12/12 |
+| v12r2 checker `all` | **PASS 30/30**. The clean tree was exported from `ffa165c6` (1,312 HEAD blobs re-verified, 0 mismatches); `scene_with_hook` normalised the committed v12r2 hook |
+| v12r1 checker `all` | **PASS 50/50** |
+| Yonkers v05 source check | 10/10, after the `.gitattributes` fix below. It gave 9/10 first: G4 byte-hashes the `.gpl`, which an `autocrlf=true` checkout turned into CRLF. |
+| Yonkers v05 Godot override check | `YK1_V05_ALL_OK`, `YK1_V05_TEXTURES_IN_USE` |
+| Yonkers v05 accepted-rooms replay under override | `ACCEPTED_REPLAY_ALL_OK` |
+| Yonkers v05 capture/replay pixel check | `V05_CAPTURE_REPLAY_PIXEL_CHECK PASS`. All 30 captures and 8 replays are byte-identical to the committed ones, with the Washington `survey_annex.gd` in place. |
+| Meter | `CHECK OK 40.8%` |
+
+**Exterior captures after commit.** All deterministic PNGs are byte-identical to the committed ones. The two real-time battle-return frames (v12r1 zh, v12r2 zh v8ref) differ by sub-pixel return position, which both QA notes compare by state, not bytes; their gates pass. They happened to be byte-identical in the pre-commit run.
+
+**Follow-up fix.** `.gitattributes` gains one path-scoped `text eol=lf` rule for the Yonkers v05 palette, in the repo's existing pattern. It keeps G4 reproducible on every checkout.
+
 ## Honest dates
 
 - **v12r1 end time.** The v12r1 QA note's header says the run ended "05:10 EDT". The actual end was about **04:13 EDT**. The v12r2 note records this correction, and the v12r1 note is kept unedited as history.
