@@ -26,4 +26,12 @@ Ctrl+O did not perform the required application import; the File menu route did.
 - Integrity report: `outputs/pixelorama-gui-west-v01/rpg-2-star-ocean-the-second_female-west-run_web-gui-saveas-integrity_v01_20261018-184756-df07c82b.json`.
 - Fresh-reopen screenshot: `outputs/pixelorama-gui-west-v01/rpg-2-star-ocean-the-second_female-west-run_web-gui-fresh-reopen-frame128_v01_20261018-185456-3ea1c254.jpg`.
 
-Idle ORA diagnostic failures and unverified desktop operations remain separate open limitations. A reusable comparison tool is being validated independently; its result will supplement this actual GUI evidence.
+Idle ORA diagnostic failures and unverified desktop operations remain separate open limitations.
+
+## Integrated reusable checker closeout
+
+Selected producer commit `d682c6961e493c841d2941633d76193bee6fc167` was integrated as `14639cd`. Root independently reran the actual pair in the canonical checkout: PASS, all1,664 raw cells and1,664 index payloads equal, no unexpected semantic differences. Root also independently ran the final54-case suite:54passed/0failed, including the386-character Windows path and private-key/truncated-PNG/illegal-filter regressions. The temporary fixtures were removed by the test runner.
+
+The initial checker missed two independently reproduced defects; they were corrected before acceptance, and a further illegal-PNG-filter guard was added. Intermediate50/50 and53/53 results are retained in the package QA and are not the final proof. No production or approval points were added for this supporting operation.
+
+Package: `outputs/pxo-saveas-integrity-v01_20261018-190126-ebf0a394/`. Its reusable command, supported PXO7/RGBA8 pixel-layer scope, report and limitations are in `rpg-2-star-ocean-the-second_pxo-saveas-integrity-qa_v01_20261018-190126-ebf0a394.md`. This file check complements the actual GUI operation; it does not replace it.
