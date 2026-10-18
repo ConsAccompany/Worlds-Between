@@ -1,10 +1,13 @@
 """Portable integrity/native/source check for the one-direction west run pilot."""
 from pathlib import Path
-import gzip,hashlib,io,json,subprocess,zipfile
+import gzip,hashlib,io,json,os,subprocess,zipfile
 from PIL import Image
 ROOT=Path(__file__).resolve().parents[1]
 MANIFEST='outputs/female-west-run-stop-v01/rpg-2-star-ocean-the-second_female-west-run-stop_evidence-manifest_v01_20261018-183043-c704ea98.json'
-def read(p):return Path(p).read_bytes()
+def long(p):
+ s=str(Path(p).resolve());prefix=chr(92)*2+'?'+chr(92)
+ return prefix+s if os.name=='nt' and not s.startswith(prefix) else s
+def read(p):return Path(long(p)).read_bytes()
 def sha(b):return hashlib.sha256(b).hexdigest()
 def textsha(b):return sha(b.replace(b'\r\n',b'\n'))
 def main():

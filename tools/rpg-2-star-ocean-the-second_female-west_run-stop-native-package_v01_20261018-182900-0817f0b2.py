@@ -10,8 +10,11 @@ CORE='tools/rpg-2-star-ocean-the-second_female-west_run-stop-source_unapproved-v
 WRITER='tools/rpg-2-star-ocean-the-second_protagonist-female_south-run-v06-build_m8-w09_20261017-211600-f8e736cc.py'
 NORTH='tools/rpg-2-star-ocean-the-second_protagonist-female_north-idle-static-pilot-build-and-check_unapproved-v01_20261018-090713-9af15df7.py'
 WEST='outputs/female-west-static-v01/rpg-2-star-ocean-the-second_protagonist-female_west-layered-source_unapproved-v01_20261018-174421-618816ac.pxo'
-SOUTH='game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v8-cloth-leather-candidate_m8-v08_20261015-021600-157a5ea0.png'
-def read(p):return Path(p).read_bytes()
+SOUTH='outputs/female-idle-four-v01/rpg-2-star-ocean-the-second_female-south_idle-phase-00_unapproved-v01_20261018-175418-34294d7d.png'
+def long(p):
+ s=str(Path(p).resolve());prefix=chr(92)*2+'?'+chr(92)
+ return prefix+s if os.name=='nt' and not s.startswith(prefix) else s
+def read(p):return Path(long(p)).read_bytes()
 def sha(b):return hashlib.sha256(b).hexdigest()
 def rgba(b):return np.array(Image.open(io.BytesIO(b)).convert('RGBA'))
 def mod(p,n):
@@ -22,13 +25,13 @@ def main():
  OUT.mkdir(parents=True,exist_ok=True)
  old_manifest_path=OUT/f'{SLUG}_female-west-run-stop_native-source-manifest_unapproved-v01_{STAMP}-{ID}.json'
  old_report_path=OUT/f'{SLUG}_female-west-run-stop_native-report_v01_{STAMP}-{ID}.json'
- cached_manifest=json.loads(read(old_manifest_path)) if '--reuse-native-exact' in sys.argv and old_manifest_path.exists() else None
+ cached_manifest=json.loads(read(old_manifest_path)) if '--reuse-native-exact' in sys.argv and Path(long(old_manifest_path)).exists() else None
  cached_report=json.loads(read(old_report_path)) if cached_manifest else None
  writer=mod(WRITER,'west_run_pxo_writer');native=mod(NORTH,'west_run_guides')
  writer.W,writer.H=80,112;writer.to_rgba=lambda a:np.ascontiguousarray(a,np.uint8)
  west=zipfile.ZipFile(io.BytesIO(read(ROOT/WEST)));roles=[x['name'] for x in json.loads(west.read('data.json'))['layers'] if x['name']!='guides'];roles+=['guides']
  palette={tuple(x) for x in rgba(read(ROOT/SOUTH)).reshape(-1,4) if x[3]}
- manifest={'task':'content.char.protagonist-female.walk-west','artApproved':False,'motionApproved':False,'runtimeIntegrated':False,'cell':[80,112],'pivot':[40,104],'scale':.5,'cadenceStepsPerSecond':4.375,'strideSourcePixels':128,'contactSourcePixels':38,'flightSeconds':26/280,'sourceHashEncoding':'UTF-8 code hashes normalize CRLF to LF; binary assets exact bytes','sources':{p:sha(read(ROOT/p).replace(b'\r\n',b'\n') if p.endswith(('.py','.gd')) else read(ROOT/p)) for p in [CORE,WRITER,NORTH,WEST,SOUTH]},'layers':roles,'sets':{},'scope':'One west run. East reversal uses existing produced EAST STATIC placeholder; no east locomotion is claimed. Live test presenter rasterizes source phases from the same controller; native128-phase run and representative25ms settle sequence are editable primary sources.'}
+ manifest={'task':'content.char.protagonist-female.walk-west','artApproved':False,'motionApproved':False,'runtimeIntegrated':False,'cell':[80,112],'pivot':[40,104],'scale':.5,'cadenceStepsPerSecond':4.375,'strideSourcePixels':128,'contactSourcePixels':38,'flightSeconds':26/280,'approvedPaletteProvenance':{'originalPath':'game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v8-cloth-leather-candidate_m8-v08_20261015-021600-157a5ea0.png','originalSourceAnchor':'ff8acd8caa7406b8300ba53891dd75a275ac1303','originalCanonicalVerifiedAt':'098fcd1e3183f7163e61af305947195a677dd289','portabilityFinding':'Original tracked canonical input full path263 characters; ordinary Python FileNotFoundError, extended-length read exact. Short committed idle-rest path avoids MAX_PATH.','portableCanonicalAnchor':'7ef4f39','portablePath':SOUTH,'exactPngSha256':'ccf9d2a293e7f1b9c706b4d2f1bf9c00b3c7714ec4e9b8bddf023e166f68b6fd','scope':'Approved SOUTH v8 static bytes; idle rest0 is byte-identical. No idle/motion approval inferred.'},'sourceHashEncoding':'UTF-8 code hashes normalize CRLF to LF; binary assets exact bytes','sources':{p:sha(read(ROOT/p).replace(b'\r\n',b'\n') if p.endswith(('.py','.gd')) else read(ROOT/p)) for p in [CORE,WRITER,NORTH,WEST,SOUTH]},'layers':roles,'sets':{},'scope':'One west run. East reversal uses existing produced EAST STATIC placeholder; no east locomotion is claimed. Live test presenter rasterizes source phases from the same controller; native128-phase run and representative25ms settle sequence are editable primary sources.'}
  gates={}
  jobs=[]
  for kind in ['run','stop']:
@@ -44,7 +47,7 @@ def main():
    assert {tuple(x) for x in image.reshape(-1,4) if x[3]}<=palette
    assert not np.any(image[[0,-1],:,3]) and not np.any(image[:,[0,-1],3])
    parts['guides']=native.v8t.guides_rgba(image);frames.append(parts)
-   data=read(folder/row['full']['file']);target=OUT/row['full']['file'];target.write_bytes(data)
+   data=read(folder/row['full']['file']);target=OUT/row['full']['file'];Path(long(target)).write_bytes(data)
    records.append({'alphaBoundsExclusive':list(Image.fromarray(image).getbbox()),'index':row['index'],'state':row['state'],'file':target.relative_to(ROOT).as_posix(),'sha256':sha(data),'rolesSha256':{r:sha(parts[r].tobytes()) for r in roles}})
   fps=70. if kind=='run' else 40.;durations=[.25 if kind=='run' else 1.]*len(frames)
   export_name=f'{SLUG}_female-west-{kind}_native-export_v01_{STAMP}-{ID}'
@@ -56,7 +59,7 @@ def main():
     if info.filename=='data.json':
      d=json.loads(data);d['layers'][-1]['visible']=False;d['layers'][-1]['locked']=True;d['tags']=[{'name':'west-'+kind,'from':1,'to':len(frames),'color':'1a9999'}];d['user_data']='Unapproved source-authored west gait/settle, binary alpha,80x112,pivot40/104,scale0.5. No runtime adoption.';data=json.dumps(d,separators=(',',':')).encode()
     z.writestr(info,data)
-  path=OUT/f'{SLUG}_female-west-{kind}_animated-source_unapproved-v01_{STAMP}-{ID}.pxo';path.write_bytes(out.getvalue())
+  path=OUT/f'{SLUG}_female-west-{kind}_animated-source_unapproved-v01_{STAMP}-{ID}.pxo';Path(long(path)).write_bytes(out.getvalue())
   manifest['sets'][kind]={'pxo':{'file':path.relative_to(ROOT).as_posix(),'sha256':sha(out.getvalue())},'fps':fps,'durations':durations,'frames':records,'seconds':sum(durations)/fps}
   # Reuse an independent export only for an identical rebuilt PXO byte stream.
   if cached_manifest and cached_report and cached_manifest['sets'][kind]['pxo']['sha256']==sha(out.getvalue()):
@@ -80,8 +83,8 @@ def main():
  gates['final_west_static_exact']=np.array_equal(rgba(read(ROOT/manifest['sets']['stop']['frames'][-1]['file'])),rgba(west.read('preview.png')))
  manifest['staticDisplayBaselineLogicalPixels']=48
  manifest['visibleExtentSourceHeightRange']=[min(r['alphaBoundsExclusive'][3]-r['alphaBoundsExclusive'][1] for e in manifest['sets'].values() for r in e['frames']),max(r['alphaBoundsExclusive'][3]-r['alphaBoundsExclusive'][1] for e in manifest['sets'].values() for r in e['frames'])]
- manifest_path=OUT/f'{SLUG}_female-west-run-stop_native-source-manifest_unapproved-v01_{STAMP}-{ID}.json';manifest_path.write_text(json.dumps(manifest,indent=2)+'\n',newline='\n')
+ manifest_path=OUT/f'{SLUG}_female-west-run-stop_native-source-manifest_unapproved-v01_{STAMP}-{ID}.json';Path(long(manifest_path)).write_text(json.dumps(manifest,indent=2)+'\n',newline='\n')
  report={'passed':sum(gates.values()),'total':len(gates),'gates':gates,'native':jobs,'manifestSha256':sha(read(manifest_path)),'artApproved':False,'motionApproved':False,'nativeGuiSaveAsVerified':False,'knownBackendDiagnostics':'Four inherited headless shader-compiler diagnostics retained verbatim per process. No source/parser/ancestry errors permitted.'}
- path=OUT/f'{SLUG}_female-west-run-stop_native-report_v01_{STAMP}-{ID}.json';path.write_text(json.dumps(report,indent=2)+'\n',newline='\n');print(path);print(gates)
+ path=OUT/f'{SLUG}_female-west-run-stop_native-report_v01_{STAMP}-{ID}.json';Path(long(path)).write_text(json.dumps(report,indent=2)+'\n',newline='\n');print(path);print(gates)
  if not all(gates.values()):raise SystemExit(1)
 if __name__=='__main__':main()

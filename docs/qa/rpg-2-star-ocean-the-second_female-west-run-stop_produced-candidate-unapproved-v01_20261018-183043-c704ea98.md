@@ -40,3 +40,9 @@ Run the transition checker in isolated APPDATA/LOCALAPPDATA with Godot4.7.2. Nat
 
 Final manifest: `outputs/female-west-run-stop-v01/rpg-2-star-ocean-the-second_female-west-run-stop_evidence-manifest_v01_20261018-183043-c704ea98.json`.
 Checker: `tools/rpg-2-star-ocean-the-second_female-west_run-stop-evidence-check_v01_20261018-183043-c704ea98.py`.
+
+## Windows long-path correction
+
+Root's first canonical integrity run failed on the original palette-source input with Python `FileNotFoundError(2, 'No such file or directory')`. Investigation confirmed the original file **is tracked and present** in canonical098fcd1, introduced atff8acd8caa7406b8300ba53891dd75a275ac1303. Its canonical full path is263characters: ordinary Python read fails, extended-length read succeeds. This is Windows MAX_PATH, not an untracked/missing dependency. The initial producer-only attribution was incorrect and is corrected here.
+
+Original PNG SHA256 `ccf9d2a293e7f1b9c706b4d2f1bf9c00b3c7714ec4e9b8bddf023e166f68b6fd` (3816bytes) matches both canonical Git blob098fcd1 and the already canonical idle SOUTH phase00 PNG at7ef4f39 byte-for-byte, also matching its native PXO preview. Palette binding now uses the shorter committed rest PNG. Extended-length read helpers cover checker, native author and evidence-packaging inputs/outputs. Both anchors/paths, exact hash and cause are recorded without dropping the palette gate, copying dirty assets, changing pixels or implying idle-motion approval. Recomputed manifests bind identical PXOs to their retained independent export evidence.
