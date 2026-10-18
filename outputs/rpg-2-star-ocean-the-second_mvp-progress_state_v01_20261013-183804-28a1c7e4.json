@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
   "planVersion": "v0.2",
-  "updatedAt": "2026-10-18T08:27:30Z",
+  "updatedAt": "2026-10-18T09:05:34Z",
   "currentStep": "M8",
   "steps": [
     {
@@ -654,7 +654,7 @@
     "kind": "weighted_delivery_estimate",
     "zh": "MVP 加权交付估算（不是正式批准）",
     "en": "MVP weighted delivery estimate (not formal approval)",
-    "updatedAt": "2026-10-18T08:27:30Z",
+    "updatedAt": "2026-10-18T09:05:34Z",
     "percent": 40.8,
     "percentLabel": "40.8%",
     "weightedPoints": 40.83,
@@ -974,8 +974,8 @@
     ],
     "updater": "tools/rpg-2-star-ocean-the-second_mvp-completion-meter_recompute-and-task-closeout-cli_v01_20261015-233032-d296a2cb.js",
     "lastUpdated": {
-      "at": "2026-10-18T08:27:30Z",
-      "closeoutId": "closeout-20261018-082730-4366994d",
+      "at": "2026-10-18T09:05:34Z",
+      "closeoutId": "closeout-20261018-090534-1ec8c67e",
       "percent": 40.8
     },
     "taskCloseouts": [
@@ -3627,6 +3627,103 @@
         "evidence": [
           "docs/qa/rpg-2-star-ocean-the-second_private-site-v14_current-first-board-publication_operational-qa_v01_20261018-042452-79386bb4.md",
           "outputs/rpg-2-star-ocean-the-second_cloud-tracker_current-first-v14-live-proof_v01_20261018-041100-695c8b0e.png"
+        ]
+      },
+      {
+        "id": "closeout-20261018-090533-ecdd73b6",
+        "recordedAt": "2026-10-18T09:05:33Z",
+        "kind": "task",
+        "title": {
+          "zh": "华盛顿调查附属建筑 1–2 号房：2 号房记录内室 v01 像素陈设（测试开关 --wdc-records-chamber-v01）与默认布局/碰撞修复（英文标题适配、2 号房墙体默认阻挡、返回按钮字号适配）；在 7553581 隔离树中复验：2 号房检查 WDC_R2_V01_ALL_OK 与 16/16（原生 Pixelorama 命令行），默认关闭对照 r1（对固定基线）中文 0 像素/英文仅标题栏，默认修复默认与开关模式 ALL_OK 及 12/12，已验收的纽约/扬克斯房间 8/8 为 0 像素；美术未批准（与柔化底图的风格缝隙），场景仍为 3/12",
+          "en": "Washington survey annex rooms 1-2: room 2 records-chamber v01 fixtures (opt-in --wdc-records-chamber-v01) plus the default layout/collision fix (English header fits, room-2 wall blockers by default, Back font-fit): verified from isolated 7553581 - room-2 check WDC_R2_V01_ALL_OK and 16/16 gates (native Pixelorama CLI), default-off parity r1 zh 0 px / en header-only against the pinned pre-candidate baseline, default fix default+opt-in ALL_OK and 12/12, accepted NYC/Yonkers rooms 8/8 at 0 px; UNAPPROVED art (style seam with the soft plate), scenes stay 3/12"
+        },
+        "impact": {
+          "changed": false,
+          "percentBefore": 40.8,
+          "percentAfter": 40.8,
+          "deltaPoints": 0,
+          "gateChanges": [],
+          "categoryChanges": []
+        },
+        "evidence": [
+          "docs/qa/rpg-2-star-ocean-the-second_wdc-annex-room2_records-chamber-playable-integration_qa-note_unapproved-v01_20261018-035908-3a34d132.md",
+          "docs/qa/rpg-2-star-ocean-the-second_wdc-annex-rooms_default-layout-collision-fix_qa-note_unapproved-v01_20261018-041322-c3ff819c.md",
+          "outputs/wdc-integration-755_01c3ac83/rpg-2-star-ocean-the-second_wdc-annex-room2_v01-integration-check-report_isolated-7553581_20261018-044639-01c3ac83.json",
+          "outputs/wdc-integration-755_01c3ac83/rpg-2-star-ocean-the-second_wdc-annex-rooms_fix-check-report_isolated-7553581_20261018-044639-01c3ac83.json",
+          "docs/qa/rpg-2-star-ocean-the-second_washington-rooms-exterior_isolated-7553581-integration-verification_qa-note_unapproved-v01_20261018-044639-01c3ac83.md",
+          "outputs/rpg-2-star-ocean-the-second_washington-rooms-exterior_integration-selection-manifest_unapproved-v01_20261018-044639-01c3ac83.json"
+        ]
+      },
+      {
+        "id": "closeout-20261018-090534-e41b7ce9",
+        "recordedAt": "2026-10-18T09:05:34Z",
+        "kind": "task",
+        "title": {
+          "zh": "华盛顿国会大厦西侧外景 v12 → v12r1 → v12r2 测试开关视口整合（场景挂钩为 v12r2 选择器；全部关闭即基础脚本）：缓动镜头、固定标记、标签布局、真实战斗返回、遭遇时哨兵脚部位于游玩区内；在 7553581 隔离树中复验：v12r2 30/30、v12r1 50/50、41/41 张截图逐字节一致；回放在挂钩提交后亦可运行（固定挂钩行与基线）；v12r1 实际约 04:13 结束（其说明写 05:10）；红色方块哨兵占位与英文机械标签偏左仍在；美术未批准，计数不变",
+          "en": "Washington Capitol west exterior v12 -> v12r1 -> v12r2 opt-in viewport integration (scene hook = v12r2 selector; all flags off = base script): eased camera, pinned glyphs, label solver, real battle return, sentry feet in the play band at the encounter; verified from isolated 7553581 - v12r2 30/30, v12r1 50/50, 41/41 captures byte-identical; replays now also run after the hook is committed (pinned hook lines + baseline); v12r1 run actually ended about 04:13 EDT (its note says 05:10); red-block sentry placeholder and displaced English machine label remain; UNAPPROVED art, no counter change"
+        },
+        "impact": {
+          "changed": false,
+          "percentBefore": 40.8,
+          "percentAfter": 40.8,
+          "deltaPoints": 0,
+          "gateChanges": [],
+          "categoryChanges": []
+        },
+        "evidence": [
+          "docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_integration-fixes_qa-note_unapproved-v12r1_20261018-034933-23596520.md",
+          "docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_sentry-encounter-viewport_qa-note_unapproved-v12r2_20261018-042200-7c1e5b39.md",
+          "outputs/wdc-integration-755_01c3ac83/rpg-2-star-ocean-the-second_wdc-capitol-west_v12r1-technical-check-report_isolated-7553581_20261018-044639-01c3ac83.json",
+          "outputs/wdc-integration-755_01c3ac83/rpg-2-star-ocean-the-second_wdc-capitol-west_v12r2-technical-check-report_isolated-7553581_20261018-044639-01c3ac83.json",
+          "docs/qa/rpg-2-star-ocean-the-second_washington-rooms-exterior_isolated-7553581-integration-verification_qa-note_unapproved-v01_20261018-044639-01c3ac83.md",
+          "outputs/rpg-2-star-ocean-the-second_washington-rooms-exterior_integration-selection-manifest_unapproved-v01_20261018-044639-01c3ac83.json"
+        ]
+      },
+      {
+        "id": "closeout-20261018-090534-6131c07c",
+        "recordedAt": "2026-10-18T09:05:34Z",
+        "kind": "task",
+        "title": {
+          "zh": "华盛顿 2 号房分析灯桌：官方 Pixelorama 网页版 1.2.3 另存为、刷新页面后“文件 > 打开”重开已验证（身份截图：保存文件名、96×40、五个图层）；完整性检查 10/10（5/5 原始图层逐字节一致、原生命令行分层/合成精确、运行时 PNG 等于合成图）；期间真实 Pixelorama 用户目录中一个既有的桌面版 untitled 备份文件发生变化（config.ini 与其他文件未变；推测为打开中的桌面版自动保存，未证实）；桌面版未验证；美术未批准，进度不变",
+          "en": "Washington room-2 analysis light table: official Pixelorama WEB v1.2.3 Save As + fresh reload + explicit File > Open verified (identity screenshot: saved file name, 96x40, five table layers); integrity checker 10/10 (5/5 raw layers byte-equal, native CLI split/flat exact, runtime PNG equals composite); one pre-existing desktop untitled-backup file in the real Pixelorama APPDATA changed during the window (config.ini and all other files unchanged; open desktop autosave likely, not proven); DESKTOP GUI unverified; art UNAPPROVED, zero meter change"
+        },
+        "impact": {
+          "changed": false,
+          "percentBefore": 40.8,
+          "percentAfter": 40.8,
+          "deltaPoints": 0,
+          "gateChanges": [],
+          "categoryChanges": []
+        },
+        "evidence": [
+          "docs/qa/rpg-2-star-ocean-the-second_wdc-table_pixelorama-web-saveas-integrity_qa-note_unapproved-v01_20261018-043134-d4864693.md",
+          "outputs/wdc-table-web-saveas_d4864693/rpg-2-star-ocean-the-second_wdc-table_web-saveas-integrity-report_unapproved-v01_20261018-043134-d4864693.json",
+          "outputs/wdc-table-web-saveas_d4864693/rpg-2-star-ocean-the-second_wdc-annex-room2_analysis-light-table_pixelorama-web-v1.2.3-saveas-copy_unapproved-v01_20261018-043134-d4864693.pxo",
+          "outputs/rpg-2-star-ocean-the-second_wdc-table_pixelorama-web-saveas-reopened-identity-v01_20261018-043200-51cb3e69.png",
+          "tools/rpg-2-star-ocean-the-second_pixelorama-web-saveas-pxo-integrity-check_v01_20261018-043134-d4864693.py"
+        ]
+      },
+      {
+        "id": "closeout-20261018-090534-1ec8c67e",
+        "recordedAt": "2026-10-18T09:05:34Z",
+        "kind": "task",
+        "title": {
+          "zh": "扬克斯天线 1 号房 v05 场景质量精修（仅测试，未接入运行时，默认关闭；survey_annex.gd 仍载入 v03）：在同样 13 个图层上重新绘制石砌层、铺石与格栅；源检查 10/10（含官方 Pixelorama 1.2.3 命令行），Godot YK1_V05_ALL_OK，截图/回放像素检查 5/5，已验收纽约/扬克斯房间 8/8 为 0 像素；root 1× 观察：石块与铺板有变化、碟形天线可读、天线不压 HUD，但仍偏几何、墙面偏碎、板状机器仍在；未批准，场景仍为 3/12",
+          "en": "Yonkers antenna room 1 v05 scene-quality refinement (test-only, nonruntime, off by default; survey_annex.gd still loads v03): re-authored masonry courses, flagstones and bar grating over the same 13 layers; source 10/10 incl. official Pixelorama v1.2.3 CLI, Godot YK1_V05_ALL_OK, capture/replay pixel check 5/5, accepted NYC/Yonkers rooms 8/8 at 0 px; root at 1x: stone and slabs varied, dish readable, antennas HUD-safe, still geometric, busy wall and slab machines remain; UNAPPROVED, scenes stay 3/12"
+        },
+        "impact": {
+          "changed": false,
+          "percentBefore": 40.8,
+          "percentAfter": 40.8,
+          "deltaPoints": 0,
+          "gateChanges": [],
+          "categoryChanges": []
+        },
+        "evidence": [
+          "docs/qa/rpg-2-star-ocean-the-second_yonkers-antenna-corridor-room1_v05-scene-quality-refinement_qa-note_unapproved-v05_20261018-043851-4b9d66f1.md",
+          "outputs/yonkers-room1-v05_4b9d66f1/rpg-2-star-ocean-the-second_yonkers-antenna-room1_scene-quality-source-check-report_unapproved-v05_20261018-043851-4b9d66f1.json",
+          "outputs/yonkers-room1-v05_4b9d66f1/rpg-2-star-ocean-the-second_yonkers-antenna-room1_godot-v05-capture-replay-pixel-check-report_test-only_20261018-043851-4b9d66f1.json",
+          "outputs/yonkers-room1-v05_4b9d66f1/cap/rpg-2-star-ocean-the-second_yonkers-antenna-room1_v05-test-only-godot-en-entry-runtime-heroine-640x360_20261018-043851-4b9d66f1.png"
         ]
       }
     ]

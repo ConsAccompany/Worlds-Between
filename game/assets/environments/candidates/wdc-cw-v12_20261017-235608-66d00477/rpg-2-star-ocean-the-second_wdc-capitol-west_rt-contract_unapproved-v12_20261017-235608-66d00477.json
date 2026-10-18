@@ -1,0 +1,756 @@
+{
+ "candidate": "wdc-cw-v12_20261017-235608-66d00477",
+ "status": "UNAPPROVED technical integration candidate; art not accepted; opt-in only",
+ "runtime": {
+  "scene": "res://scenes/scifi_exploration_area.tscn",
+  "script": "res://scripts/rpg-2-star-ocean-the-second_wdc-capitol-west_exploration-opt-in-selector_unapproved-v12_20261017-235608-66d00477.gd",
+  "extends": "res://scripts/scifi_exploration_area.gd",
+  "flag": "--wdc-capitol-west-v12",
+  "destination": "scifi.ruins",
+  "default": "flag absent -> every override calls the unchanged base script"
+ },
+ "viewport": {
+  "logical": [
+   640,
+   360
+  ],
+  "play_rows": [
+   62,
+   317
+  ],
+  "header_rows": [
+   0,
+   61
+  ],
+  "footer_rows": [
+   318,
+   359
+  ],
+  "scroll_max": 104,
+  "camera": "Camera2D fixed top-left; world row `scroll` at screen row 62; scroll = clamp(max(2 * (feet_row - 250), feet_row + 3 - 255), 0, 104)",
+  "actor_canvas": "32x48 at offset (0,-20): rows feet-44..feet+3, columns x-16..x+15",
+  "safe_feet": {
+   "x": [
+    16,
+    623
+   ],
+   "y_max": 356
+  },
+  "dome_safe_feet_row_max": 251
+ },
+ "dome": {
+  "top": 3,
+  "bottom": 110,
+  "left": 330,
+  "right": 412
+ },
+ "anchors": {
+  "spawn": [
+   372,
+   246
+  ],
+  "survey_entrance": [
+   372,
+   192
+  ],
+  "records": [
+   302,
+   214
+  ],
+  "npc_ji_cheng": [
+   268,
+   243
+  ],
+  "strata_panel_assist": [
+   548,
+   264
+  ],
+  "trace0_wall_seam": [
+   150,
+   232
+  ],
+  "trace1_lantern_fastener": [
+   464,
+   240
+  ],
+  "enemy": [
+   566,
+   320
+  ],
+  "bypass_rect": [
+   606,
+   278,
+   18,
+   63
+  ],
+  "bypass_marker": [
+   614,
+   286
+  ]
+ },
+ "radii_inherited": {
+  "survey": 43,
+  "records": 43,
+  "npc": 50,
+  "assist": 40,
+  "trace": 34,
+  "encounter": 23,
+  "safe_from_enemy": 43
+ },
+ "ysort": {
+  "survey-mast-ysort": {
+   "png": "rpg-2-star-ocean-the-second_wdc-capitol-west_rt-ys-mast_unapproved-v12_20261017-235608-66d00477.png",
+   "pivot": 256
+  },
+  "survey-tripod-ysort": {
+   "png": "rpg-2-star-ocean-the-second_wdc-capitol-west_rt-ys-tripod_unapproved-v12_20261017-235608-66d00477.png",
+   "pivot": 276
+  },
+  "beacon-ysort": {
+   "png": "rpg-2-star-ocean-the-second_wdc-capitol-west_rt-ys-beacon_unapproved-v12_20261017-235608-66d00477.png",
+   "pivot": 306
+  },
+  "elm-ysort": {
+   "png": "rpg-2-star-ocean-the-second_wdc-capitol-west_rt-ys-elm_unapproved-v12_20261017-235608-66d00477.png",
+   "pivot": 282
+  }
+ },
+ "draw_order": "rt-base z-1 -> runtime markers (root _draw, z0) -> {Y-sort layers z=2*pivot, actors z=2*feet+1} -> rt-fg z2000 -> world labels z4000 -> HUD CanvasLayer",
+ "review_poses": {
+  "entry": {
+   "at": [
+    372,
+    246
+   ],
+   "face": "south"
+  },
+  "vista": {
+   "at": [
+    408,
+    240
+   ],
+   "face": "north"
+  },
+  "interaction": {
+   "at": [
+    334,
+    238
+   ],
+   "face": "west"
+  },
+  "occlusion": {
+   "at": [
+    196,
+    246
+   ],
+   "face": "north"
+  },
+  "patrol_extra": {
+   "at": [
+    510,
+    316
+   ],
+   "face": "east"
+  }
+ },
+ "flow_targets": {
+  "records": [
+   334,
+   238
+  ],
+  "npc": [
+   296,
+   242
+  ],
+  "trace0": [
+   150,
+   252
+  ],
+  "trace1": [
+   466,
+   262
+  ],
+  "assist": [
+   546,
+   290
+  ],
+  "bypass": [
+   616,
+   300
+  ],
+  "exit_east": [
+   623,
+   306
+  ],
+  "exit_south": [
+   372,
+   356
+  ],
+  "exit_west": [
+   16,
+   316
+  ],
+  "survey": [
+   372,
+   214
+  ],
+  "sentry": [
+   566,
+   300
+  ]
+ },
+ "routes": {
+  "records": [
+   [
+    372,
+    246
+   ],
+   [
+    342,
+    246
+   ],
+   [
+    334,
+    238
+   ]
+  ],
+  "npc": [
+   [
+    334,
+    238
+   ],
+   [
+    300,
+    238
+   ],
+   [
+    296,
+    242
+   ]
+  ],
+  "trace0": [
+   [
+    296,
+    242
+   ],
+   [
+    160,
+    242
+   ],
+   [
+    150,
+    252
+   ]
+  ],
+  "trace1": [
+   [
+    150,
+    252
+   ],
+   [
+    181,
+    252
+   ],
+   [
+    184,
+    249
+   ],
+   [
+    445,
+    249
+   ],
+   [
+    446,
+    250
+   ],
+   [
+    448,
+    250
+   ],
+   [
+    452,
+    254
+   ],
+   [
+    459,
+    254
+   ],
+   [
+    466,
+    261
+   ],
+   [
+    466,
+    262
+   ]
+  ],
+  "assist": [
+   [
+    466,
+    262
+   ],
+   [
+    466,
+    261
+   ],
+   [
+    457,
+    261
+   ],
+   [
+    456,
+    262
+   ],
+   [
+    456,
+    270
+   ],
+   [
+    469,
+    283
+   ],
+   [
+    507,
+    283
+   ],
+   [
+    513,
+    289
+   ],
+   [
+    545,
+    289
+   ],
+   [
+    546,
+    290
+   ]
+  ],
+  "bypass": [
+   [
+    546,
+    290
+   ],
+   [
+    564,
+    290
+   ],
+   [
+    565,
+    289
+   ],
+   [
+    588,
+    289
+   ],
+   [
+    589,
+    290
+   ],
+   [
+    591,
+    290
+   ],
+   [
+    595,
+    294
+   ],
+   [
+    610,
+    294
+   ],
+   [
+    616,
+    300
+   ]
+  ],
+  "exit_east": [
+   [
+    616,
+    300
+   ],
+   [
+    616,
+    301
+   ],
+   [
+    621,
+    306
+   ],
+   [
+    623,
+    306
+   ]
+  ],
+  "exit_south": [
+   [
+    623,
+    306
+   ],
+   [
+    621,
+    306
+   ],
+   [
+    596,
+    306
+   ],
+   [
+    585,
+    295
+   ],
+   [
+    584,
+    295
+   ],
+   [
+    583,
+    294
+   ],
+   [
+    582,
+    294
+   ],
+   [
+    580,
+    292
+   ],
+   [
+    578,
+    292
+   ],
+   [
+    577,
+    291
+   ],
+   [
+    575,
+    291
+   ],
+   [
+    574,
+    290
+   ],
+   [
+    568,
+    290
+   ],
+   [
+    567,
+    289
+   ],
+   [
+    437,
+    289
+   ],
+   [
+    372,
+    354
+   ],
+   [
+    372,
+    356
+   ]
+  ],
+  "exit_west": [
+   [
+    372,
+    356
+   ],
+   [
+    372,
+    354
+   ],
+   [
+    174,
+    354
+   ],
+   [
+    157,
+    337
+   ],
+   [
+    153,
+    337
+   ],
+   [
+    152,
+    336
+   ],
+   [
+    148,
+    336
+   ],
+   [
+    144,
+    332
+   ],
+   [
+    134,
+    332
+   ],
+   [
+    132,
+    330
+   ],
+   [
+    129,
+    330
+   ],
+   [
+    127,
+    328
+   ],
+   [
+    121,
+    328
+   ],
+   [
+    120,
+    327
+   ],
+   [
+    114,
+    327
+   ],
+   [
+    113,
+    326
+   ],
+   [
+    109,
+    326
+   ],
+   [
+    108,
+    325
+   ],
+   [
+    102,
+    325
+   ],
+   [
+    101,
+    324
+   ],
+   [
+    26,
+    324
+   ],
+   [
+    18,
+    316
+   ],
+   [
+    16,
+    316
+   ]
+  ],
+  "survey": [
+   [
+    16,
+    316
+   ],
+   [
+    18,
+    316
+   ],
+   [
+    270,
+    316
+   ],
+   [
+    372,
+    214
+   ]
+  ],
+  "sentry": [
+   [
+    372,
+    214
+   ],
+   [
+    400,
+    214
+   ],
+   [
+    469,
+    283
+   ],
+   [
+    507,
+    283
+   ],
+   [
+    513,
+    289
+   ],
+   [
+    555,
+    289
+   ],
+   [
+    566,
+    300
+   ]
+  ]
+ },
+ "exits": {
+  "exit_north_steps": {
+   "to": "survey annex (runtime survey entrance on the north steps)",
+   "runtime": true
+  },
+  "exit_west": {
+   "rect": [
+    16,
+    306,
+    24,
+    326
+   ],
+   "to": "First Street walk (v11 contract; no runtime scene)",
+   "runtime": false
+  },
+  "exit_east": {
+   "rect": [
+    615,
+    300,
+    623,
+    322
+   ],
+   "to": "Maryland Avenue walk (v11 contract; no runtime scene; the patrol bypass zone covers it)",
+   "runtime": false
+  },
+  "exit_south": {
+   "rect": [
+    344,
+    350,
+    400,
+    356
+   ],
+   "to": "Union Square (v11 contract; no runtime scene)",
+   "runtime": false
+  }
+ },
+ "sweeps": [
+  {
+   "name": "steps-into-terrace",
+   "from": [
+    372,
+    210
+   ],
+   "hold": [
+    "move_up"
+   ],
+   "frames": 60
+  },
+  {
+   "name": "seat-wall-west",
+   "from": [
+    300,
+    240
+   ],
+   "hold": [
+    "move_up",
+    "move_left"
+   ],
+   "frames": 60
+  },
+  {
+   "name": "into-near-pile",
+   "from": [
+    520,
+    292
+   ],
+   "hold": [
+    "move_up"
+   ],
+   "frames": 60
+  },
+  {
+   "name": "into-elm",
+   "from": [
+    80,
+    300
+   ],
+   "hold": [
+    "move_left"
+   ],
+   "frames": 60
+  },
+  {
+   "name": "into-survey-kit",
+   "from": [
+    164,
+    300
+   ],
+   "hold": [
+    "move_up"
+   ],
+   "frames": 45
+  },
+  {
+   "name": "east-edge",
+   "from": [
+    600,
+    310
+   ],
+   "hold": [
+    "move_right"
+   ],
+   "frames": 60
+  },
+  {
+   "name": "west-edge",
+   "from": [
+    40,
+    316
+   ],
+   "hold": [
+    "move_left"
+   ],
+   "frames": 60
+  },
+  {
+   "name": "south-edge",
+   "from": [
+    372,
+    340
+   ],
+   "hold": [
+    "move_down"
+   ],
+   "frames": 60
+  },
+  {
+   "name": "tripod-feet",
+   "from": [
+    238,
+    296
+   ],
+   "hold": [
+    "move_up"
+   ],
+   "frames": 45
+  },
+  {
+   "name": "beacon-foot",
+   "from": [
+    528,
+    326
+   ],
+   "hold": [
+    "move_up"
+   ],
+   "frames": 45
+  }
+ ],
+ "files": {
+  "rt-base": "rpg-2-star-ocean-the-second_wdc-capitol-west_rt-base_unapproved-v12_20261017-235608-66d00477.png",
+  "rt-fg": "rpg-2-star-ocean-the-second_wdc-capitol-west_rt-fg_unapproved-v12_20261017-235608-66d00477.png",
+  "rt-walk": "rpg-2-star-ocean-the-second_wdc-capitol-west_rt-walk_unapproved-v12_20261017-235608-66d00477.png",
+  "rt-ys-mast": "rpg-2-star-ocean-the-second_wdc-capitol-west_rt-ys-mast_unapproved-v12_20261017-235608-66d00477.png",
+  "rt-ys-tripod": "rpg-2-star-ocean-the-second_wdc-capitol-west_rt-ys-tripod_unapproved-v12_20261017-235608-66d00477.png",
+  "rt-ys-beacon": "rpg-2-star-ocean-the-second_wdc-capitol-west_rt-ys-beacon_unapproved-v12_20261017-235608-66d00477.png",
+  "rt-ys-elm": "rpg-2-star-ocean-the-second_wdc-capitol-west_rt-ys-elm_unapproved-v12_20261017-235608-66d00477.png"
+ }
+}

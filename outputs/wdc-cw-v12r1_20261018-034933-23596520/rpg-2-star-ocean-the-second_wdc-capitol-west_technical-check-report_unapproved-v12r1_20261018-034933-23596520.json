@@ -1,0 +1,779 @@
+{
+ "candidate": "wdc-cw-v12r1_20261018-034933-23596520",
+ "status": "UNAPPROVED technical integration fixes; art not accepted; opt-in only",
+ "generated": "2026-10-18 04:11:05",
+ "passed": 50,
+ "total": 50,
+ "verdict": "PASS",
+ "gates": {
+  "clean_export_every_head_blob_exact": true,
+  "clean_head_smokes_pass": true,
+  "clean_overlay_smokes_pass": true,
+  "overlay_matches_worktree_candidate_files": true,
+  "overlay_only_enumerated_files": true,
+  "harness_runs_exit_0": true,
+  "harness_no_errors": true,
+  "v12_reproduces_byte_identical_from_clean_head": true,
+  "default_runtime_flags_off_equals_base": true,
+  "v12_flag_only_equals_unamended_v12": true,
+  "cmdline_flag_enables_r1": true,
+  "camera_curve_godot_equals_tool": true,
+  "camera_curve_monotonic_no_overshoot": true,
+  "camera_peak_rate_at_most_1_5": true,
+  "camera_rate_eases_no_instant_kink": true,
+  "camera_every_walkable_row_keeps_canvas_in_play_band": true,
+  "camera_real_walk_smooth": true,
+  "layout_no_label_overlaps_anywhere": true,
+  "layout_no_label_over_glyph_anywhere": true,
+  "layout_labels_inside_play_band_anywhere": true,
+  "layout_glyphs_whole_inside_play_band_anywhere": true,
+  "captures_all_640x360": true,
+  "captures_hero_canvas_in_play_band": true,
+  "captures_no_label_overlap": true,
+  "captures_no_label_over_glyph": true,
+  "captures_no_label_over_hero": true,
+  "captures_labels_and_glyphs_in_band": true,
+  "captures_hint_left_of_save": true,
+  "entry_dome_pixel_exact_zh_en": true,
+  "patrol_bypass_view_scrolled_enemy_label_and_bypass_glyph_clear": true,
+  "records_prompt_glyph_and_label_shown": true,
+  "v8_reference_pair_exactly_48_logical_rows": true,
+  "v8_reference_bottom_row_level_with_runtime_feet": true,
+  "v8_reference_png_is_approved_hash": true,
+  "flow_enter_via_world_map_r1_active": true,
+  "flow_objectives_by_real_input": true,
+  "flow_survey_annex_round_trip": true,
+  "battle_real_handoff": true,
+  "battle_won_through_battle_outcome_path": true,
+  "battle_return_via_result_button_restores_position_and_camera": true,
+  "battle_return_layout_clean": true,
+  "world_map_exit": true,
+  "flow_and_sweeps_walkable_and_in_band": true,
+  "sweeps_end_walkable": true,
+  "mask_runtime_equals_png": true,
+  "spawn_r1_scroll_0": true,
+  "real_user_saves_unchanged": true,
+  "main_worktree_run_ok": true,
+  "main_worktree_run_left_no_game_side_effects": true,
+  "clean_and_main_captures_byte_identical": true
+ },
+ "info": {
+  "v12_reproduction": {
+   "captures": 12,
+   "byte_identical_to_v12_outputs": 12,
+   "differs": []
+  },
+  "camera": {
+   "r1_max_raw_slope": 1.5,
+   "r1_max_slope_change_per_half_row": 0.0375,
+   "v12_max_slope": 2,
+   "v12_slope_jump_at_250": 2,
+   "r1_scroll_at": {
+    "238": 0,
+    "246": 2,
+    "250": 5,
+    "258": 15,
+    "270": 33,
+    "290": 63,
+    "298": 75,
+    "310": 93,
+    "320": 102,
+    "330": 104,
+    "356": 104
+   },
+   "v12_scroll_at": {
+    "238": 0,
+    "246": 0,
+    "250": 0,
+    "258": 16,
+    "270": 40,
+    "290": 80,
+    "298": 96,
+    "310": 104,
+    "320": 104,
+    "330": 104,
+    "356": 104
+   },
+   "r1_rounded_slope_values": [
+    0,
+    1,
+    2
+   ],
+   "real_walk_south": {
+    "frames": 53,
+    "max_abs_scroll_step": 4,
+    "max_abs_feet_step": 2.333,
+    "direction_reversals": 0,
+    "hero_screen_feet_min": 278.7,
+    "hero_screen_feet_max": 311.7,
+    "scroll_first_last": [
+     0,
+     104
+    ]
+   },
+   "real_walk_north": {
+    "frames": 53,
+    "max_abs_scroll_step": 4,
+    "max_abs_feet_step": 2.333,
+    "direction_reversals": 0,
+    "hero_screen_feet_min": 278.7,
+    "hero_screen_feet_max": 309.3,
+    "scroll_first_last": [
+     104,
+     0
+    ]
+   }
+  },
+  "layout_sweep": {
+   "positions": 2570,
+   "label_hero_overlap_positions": 0,
+   "pinned_glyph_counts": {
+    "assist": 604,
+    "bypass": 892
+   }
+  },
+  "captures": {
+   "zh:entry": {
+    "size_640x360": true,
+    "hero_canvas_in_play_band": true,
+    "no_label_overlap": true,
+    "no_label_over_glyph": true,
+    "no_label_over_hero": true,
+    "labels_in_band": true,
+    "glyphs_whole_in_band": true,
+    "hint_left_of_save": true,
+    "scroll": 0,
+    "dome_pixel_exact": true
+   },
+   "zh:interaction": {
+    "size_640x360": true,
+    "hero_canvas_in_play_band": true,
+    "no_label_overlap": true,
+    "no_label_over_glyph": true,
+    "no_label_over_hero": true,
+    "labels_in_band": true,
+    "glyphs_whole_in_band": true,
+    "hint_left_of_save": true,
+    "scroll": 0
+   },
+   "zh:interaction_prompt": {
+    "size_640x360": true,
+    "hero_canvas_in_play_band": true,
+    "no_label_overlap": true,
+    "no_label_over_glyph": true,
+    "no_label_over_hero": true,
+    "labels_in_band": true,
+    "glyphs_whole_in_band": true,
+    "hint_left_of_save": true,
+    "scroll": 0
+   },
+   "zh:occlusion": {
+    "size_640x360": true,
+    "hero_canvas_in_play_band": true,
+    "no_label_overlap": true,
+    "no_label_over_glyph": true,
+    "no_label_over_hero": true,
+    "labels_in_band": true,
+    "glyphs_whole_in_band": true,
+    "hint_left_of_save": true,
+    "scroll": 2
+   },
+   "zh:patrol_bypass": {
+    "size_640x360": true,
+    "hero_canvas_in_play_band": true,
+    "no_label_overlap": true,
+    "no_label_over_glyph": true,
+    "no_label_over_hero": true,
+    "labels_in_band": true,
+    "glyphs_whole_in_band": true,
+    "hint_left_of_save": true,
+    "scroll": 99
+   },
+   "zh:strata_near": {
+    "size_640x360": true,
+    "hero_canvas_in_play_band": true,
+    "no_label_overlap": true,
+    "no_label_over_glyph": true,
+    "no_label_over_hero": true,
+    "labels_in_band": true,
+    "glyphs_whole_in_band": true,
+    "hint_left_of_save": true,
+    "scroll": 42
+   },
+   "en:entry": {
+    "size_640x360": true,
+    "hero_canvas_in_play_band": true,
+    "no_label_overlap": true,
+    "no_label_over_glyph": true,
+    "no_label_over_hero": true,
+    "labels_in_band": true,
+    "glyphs_whole_in_band": true,
+    "hint_left_of_save": true,
+    "scroll": 0,
+    "dome_pixel_exact": true
+   },
+   "en:interaction": {
+    "size_640x360": true,
+    "hero_canvas_in_play_band": true,
+    "no_label_overlap": true,
+    "no_label_over_glyph": true,
+    "no_label_over_hero": true,
+    "labels_in_band": true,
+    "glyphs_whole_in_band": true,
+    "hint_left_of_save": true,
+    "scroll": 0
+   },
+   "en:interaction_prompt": {
+    "size_640x360": true,
+    "hero_canvas_in_play_band": true,
+    "no_label_overlap": true,
+    "no_label_over_glyph": true,
+    "no_label_over_hero": true,
+    "labels_in_band": true,
+    "glyphs_whole_in_band": true,
+    "hint_left_of_save": true,
+    "scroll": 0
+   },
+   "en:occlusion": {
+    "size_640x360": true,
+    "hero_canvas_in_play_band": true,
+    "no_label_overlap": true,
+    "no_label_over_glyph": true,
+    "no_label_over_hero": true,
+    "labels_in_band": true,
+    "glyphs_whole_in_band": true,
+    "hint_left_of_save": true,
+    "scroll": 2
+   },
+   "en:patrol_bypass": {
+    "size_640x360": true,
+    "hero_canvas_in_play_band": true,
+    "no_label_overlap": true,
+    "no_label_over_glyph": true,
+    "no_label_over_hero": true,
+    "labels_in_band": true,
+    "glyphs_whole_in_band": true,
+    "hint_left_of_save": true,
+    "scroll": 99
+   },
+   "en:strata_near": {
+    "size_640x360": true,
+    "hero_canvas_in_play_band": true,
+    "no_label_overlap": true,
+    "no_label_over_glyph": true,
+    "no_label_over_hero": true,
+    "labels_in_band": true,
+    "glyphs_whole_in_band": true,
+    "hint_left_of_save": true,
+    "scroll": 42
+   }
+  },
+  "patrol_bypass_labels": {
+   "zh": {
+    "npc": [
+     228.0,
+     178.0,
+     22.0,
+     16.0
+    ],
+    "survey": [
+     322.0,
+     113.0,
+     66.0,
+     16.0
+    ],
+    "assist": [
+     502.0,
+     189.0,
+     40.0,
+     14.0
+    ],
+    "enemy": [
+     546.0,
+     243.0,
+     40.0,
+     14.0
+    ],
+    "trace0": [
+     127.0,
+     161.0,
+     29.0,
+     14.0
+    ],
+    "trace1": [
+     441.0,
+     169.0,
+     29.0,
+     14.0
+    ]
+   },
+   "en": {
+    "npc": [
+     247.0,
+     144.0,
+     43.0,
+     16.0
+    ],
+    "survey": [
+     322.0,
+     113.0,
+     64.0,
+     16.0
+    ],
+    "assist": [
+     502.0,
+     189.0,
+     59.0,
+     14.0
+    ],
+    "enemy": [
+     389.0,
+     243.0,
+     99.0,
+     14.0
+    ],
+    "trace0": [
+     127.0,
+     161.0,
+     35.0,
+     14.0
+    ],
+    "trace1": [
+     441.0,
+     169.0,
+     35.0,
+     14.0
+    ]
+   }
+  },
+  "patrol_bypass_glyphs": {
+   "zh": {
+    "bypass": [
+     599.0,
+     234.0,
+     30.0,
+     30.0
+    ],
+    "survey": [
+     357.0,
+     140.0,
+     30.0,
+     30.0
+    ],
+    "assist": [
+     533.0,
+     212.0,
+     30.0,
+     30.0
+    ],
+    "trace0": [
+     135.0,
+     180.0,
+     30.0,
+     30.0
+    ],
+    "trace1": [
+     449.0,
+     188.0,
+     30.0,
+     30.0
+    ]
+   },
+   "en": {
+    "bypass": [
+     599.0,
+     234.0,
+     30.0,
+     30.0
+    ],
+    "survey": [
+     357.0,
+     140.0,
+     30.0,
+     30.0
+    ],
+    "assist": [
+     533.0,
+     212.0,
+     30.0,
+     30.0
+    ],
+    "trace0": [
+     135.0,
+     180.0,
+     30.0,
+     30.0
+    ],
+    "trace1": [
+     449.0,
+     188.0,
+     30.0,
+     30.0
+    ]
+   }
+  },
+  "v8_reference": {
+   "rt640:zh": {
+    "size": [
+     640,
+     360
+    ],
+    "diff_pixels": 605,
+    "bbox_rows": [
+     253,
+     300
+    ],
+    "bbox_cols": [
+     403,
+     423
+    ],
+    "opaque_height_px": 48,
+    "logical_height": 48.0,
+    "hero_feet": [
+     372.0,
+     238.0
+    ],
+    "scroll": 0
+   },
+   "rt640:en": {
+    "size": [
+     640,
+     360
+    ],
+    "diff_pixels": 605,
+    "bbox_rows": [
+     253,
+     300
+    ],
+    "bbox_cols": [
+     403,
+     423
+    ],
+    "opaque_height_px": 48,
+    "logical_height": 48.0,
+    "hero_feet": [
+     372.0,
+     238.0
+    ],
+    "scroll": 0
+   },
+   "rt1280:zh": {
+    "size": [
+     1280,
+     720
+    ],
+    "diff_pixels": 2419,
+    "bbox_rows": [
+     506,
+     601
+    ],
+    "bbox_cols": [
+     805,
+     847
+    ],
+    "opaque_height_px": 96,
+    "logical_height": 48.0,
+    "hero_feet": [
+     372.0,
+     238.0
+    ],
+    "scroll": 0
+   },
+   "rt1280:en": {
+    "size": [
+     1280,
+     720
+    ],
+    "diff_pixels": 2419,
+    "bbox_rows": [
+     506,
+     601
+    ],
+    "bbox_cols": [
+     805,
+     847
+    ],
+    "opaque_height_px": 96,
+    "logical_height": 48.0,
+    "hero_feet": [
+     372.0,
+     238.0
+    ],
+    "scroll": 0
+   }
+  },
+  "monitors": {
+   "flow": {
+    "frames": 879,
+    "max_canvas_bottom_screen": 317,
+    "max_canvas_right": 637,
+    "max_scroll_step": 4,
+    "min_canvas_left": 0,
+    "min_canvas_top_screen": 233
+   },
+   "sweep": {
+    "frames": 555,
+    "max_canvas_bottom_screen": 317,
+    "max_canvas_right": 638,
+    "max_scroll_step": 4,
+    "min_canvas_left": 0,
+    "min_canvas_top_screen": 221
+   }
+  },
+  "clean_vs_main_capture_equal": {
+   "compared": 16,
+   "equal": 16,
+   "differs": []
+  }
+ },
+ "clean_export": {
+  "head": "c20118d35e89e5bd7fd9509b9aa727e49070a0d3",
+  "game_tree": "a7c2a093fd3d13e01b3b4f28ba3a17ae0e2e1c37",
+  "blobs": 1251,
+  "longest_path": 239
+ },
+ "overlay_manifest": [
+  {
+   "path": "game/scenes/scifi_exploration_area.tscn",
+   "role": "modified tracked file: one script path line (HEAD base -> v12r1 selector)",
+   "tracked_at_head": true,
+   "pin": "sha256-text-lf-v1:244596c64d02910e4ae4f58d2238885cd2838727c529ed6f54d12436c1aead83",
+   "bytes": 295,
+   "equals_worktree_lf": true
+  },
+  {
+   "path": "game/scripts/rpg-2-star-ocean-the-second_wdc-capitol-west_exploration-opt-in-selector_unapproved-v12_20261017-235608-66d00477.gd",
+   "role": "pre-existing v12 candidate hook (untracked); v12r1 extends it",
+   "tracked_at_head": false,
+   "pin": "sha256-text-lf-v1:34e017bfd281de4b6dc5be735824b4620a10fefda166b147cc2038dbe1dc0415",
+   "bytes": 12901,
+   "equals_worktree_lf": true
+  },
+  {
+   "path": "game/scripts/rpg-2-star-ocean-the-second_wdc-capitol-west_exploration-opt-in-selector_unapproved-v12r1_20261018-034933-23596520.gd",
+   "role": "v12r1 selector (new)",
+   "tracked_at_head": false,
+   "pin": "sha256-text-lf-v1:4f64abb5a50531ae6a47a01b201164e2f84d80f0acbdf76041a7920d9847587f",
+   "bytes": 12080,
+   "equals_worktree_lf": true
+  },
+  {
+   "path": "game/assets/environments/candidates/wdc-cw-v12_20261017-235608-66d00477/rpg-2-star-ocean-the-second_wdc-capitol-west_rt-base_unapproved-v12_20261017-235608-66d00477.png",
+   "role": "v12 runtime layer PNG (untracked, loaded by the v12 selector)",
+   "tracked_at_head": false,
+   "pin": "sha256-bytes:60474fcec7ad22e5492f8f79373791872cfbcdd237342ef85acf576237aa1a22",
+   "bytes": 107471,
+   "equals_worktree_lf": true
+  },
+  {
+   "path": "game/assets/environments/candidates/wdc-cw-v12_20261017-235608-66d00477/rpg-2-star-ocean-the-second_wdc-capitol-west_rt-base_unapproved-v12_20261017-235608-66d00477.png.import",
+   "role": "Godot import sidecar of that PNG (untracked; repo convention tracks sidecars)",
+   "tracked_at_head": false,
+   "pin": "sha256-text-lf-v1:db409d7854619acb202556630b4ec52048c6a461f32b6ae0255e22b8ccf0c0d7",
+   "bytes": 1247,
+   "equals_worktree_lf": true
+  },
+  {
+   "path": "game/assets/environments/candidates/wdc-cw-v12_20261017-235608-66d00477/rpg-2-star-ocean-the-second_wdc-capitol-west_rt-fg_unapproved-v12_20261017-235608-66d00477.png",
+   "role": "v12 runtime layer PNG (untracked, loaded by the v12 selector)",
+   "tracked_at_head": false,
+   "pin": "sha256-bytes:74cf02cd48ce328679ccd262486707ae8b5db106a954c58eb91974975087893c",
+   "bytes": 3487,
+   "equals_worktree_lf": true
+  },
+  {
+   "path": "game/assets/environments/candidates/wdc-cw-v12_20261017-235608-66d00477/rpg-2-star-ocean-the-second_wdc-capitol-west_rt-fg_unapproved-v12_20261017-235608-66d00477.png.import",
+   "role": "Godot import sidecar of that PNG (untracked; repo convention tracks sidecars)",
+   "tracked_at_head": false,
+   "pin": "sha256-text-lf-v1:4f5880ba60d477069d54dd52b5049fe83293d9a1ff687ed8052d65f15934b062",
+   "bytes": 1241,
+   "equals_worktree_lf": true
+  },
+  {
+   "path": "game/assets/environments/candidates/wdc-cw-v12_20261017-235608-66d00477/rpg-2-star-ocean-the-second_wdc-capitol-west_rt-walk_unapproved-v12_20261017-235608-66d00477.png",
+   "role": "v12 runtime layer PNG (untracked, loaded by the v12 selector)",
+   "tracked_at_head": false,
+   "pin": "sha256-bytes:40feec7301d62b16db63afd25e44b71f3e7ebe4d32805847451e3a533ee3c0d9",
+   "bytes": 1957,
+   "equals_worktree_lf": true
+  },
+  {
+   "path": "game/assets/environments/candidates/wdc-cw-v12_20261017-235608-66d00477/rpg-2-star-ocean-the-second_wdc-capitol-west_rt-walk_unapproved-v12_20261017-235608-66d00477.png.import",
+   "role": "Godot import sidecar of that PNG (untracked; repo convention tracks sidecars)",
+   "tracked_at_head": false,
+   "pin": "sha256-text-lf-v1:c4c23cc20871b61e80342a3e26b53bcbf8eae7fd58cf23d8130c2d1da437c503",
+   "bytes": 1247,
+   "equals_worktree_lf": true
+  },
+  {
+   "path": "game/assets/environments/candidates/wdc-cw-v12_20261017-235608-66d00477/rpg-2-star-ocean-the-second_wdc-capitol-west_rt-ys-mast_unapproved-v12_20261017-235608-66d00477.png",
+   "role": "v12 runtime layer PNG (untracked, loaded by the v12 selector)",
+   "tracked_at_head": false,
+   "pin": "sha256-bytes:fb784e18de7167042059356f46ff71bb1f528057e4f8dfbae1f0a041e345a42b",
+   "bytes": 1559,
+   "equals_worktree_lf": true
+  },
+  {
+   "path": "game/assets/environments/candidates/wdc-cw-v12_20261017-235608-66d00477/rpg-2-star-ocean-the-second_wdc-capitol-west_rt-ys-mast_unapproved-v12_20261017-235608-66d00477.png.import",
+   "role": "Godot import sidecar of that PNG (untracked; repo convention tracks sidecars)",
+   "tracked_at_head": false,
+   "pin": "sha256-text-lf-v1:2be6d2721dd4f271fe9e9c6466dcf2402e9348ef9ba38b8a5965f56ccc68a615",
+   "bytes": 1256,
+   "equals_worktree_lf": true
+  },
+  {
+   "path": "game/assets/environments/candidates/wdc-cw-v12_20261017-235608-66d00477/rpg-2-star-ocean-the-second_wdc-capitol-west_rt-ys-tripod_unapproved-v12_20261017-235608-66d00477.png",
+   "role": "v12 runtime layer PNG (untracked, loaded by the v12 selector)",
+   "tracked_at_head": false,
+   "pin": "sha256-bytes:b341224c9691b184b7ee7c89d14bfc4f3801d6d051527d998f24a18aafe6f6b0",
+   "bytes": 1387,
+   "equals_worktree_lf": true
+  },
+  {
+   "path": "game/assets/environments/candidates/wdc-cw-v12_20261017-235608-66d00477/rpg-2-star-ocean-the-second_wdc-capitol-west_rt-ys-tripod_unapproved-v12_20261017-235608-66d00477.png.import",
+   "role": "Godot import sidecar of that PNG (untracked; repo convention tracks sidecars)",
+   "tracked_at_head": false,
+   "pin": "sha256-text-lf-v1:1db4c69862eb32f4a22a677cc678fb8713a6dc7f6ac92e3649ac02da4e269c9c",
+   "bytes": 1262,
+   "equals_worktree_lf": true
+  },
+  {
+   "path": "game/assets/environments/candidates/wdc-cw-v12_20261017-235608-66d00477/rpg-2-star-ocean-the-second_wdc-capitol-west_rt-ys-beacon_unapproved-v12_20261017-235608-66d00477.png",
+   "role": "v12 runtime layer PNG (untracked, loaded by the v12 selector)",
+   "tracked_at_head": false,
+   "pin": "sha256-bytes:a2d054d05b5c98bde80afc5e40e2fdaa430b0bed61521c6aece7f089d6d28bbb",
+   "bytes": 1262,
+   "equals_worktree_lf": true
+  },
+  {
+   "path": "game/assets/environments/candidates/wdc-cw-v12_20261017-235608-66d00477/rpg-2-star-ocean-the-second_wdc-capitol-west_rt-ys-beacon_unapproved-v12_20261017-235608-66d00477.png.import",
+   "role": "Godot import sidecar of that PNG (untracked; repo convention tracks sidecars)",
+   "tracked_at_head": false,
+   "pin": "sha256-text-lf-v1:89e8af8a8c7f8e4b713556bb6f4fdefa7b5d19a391730d3b33f1b0e078b5d534",
+   "bytes": 1262,
+   "equals_worktree_lf": true
+  },
+  {
+   "path": "game/assets/environments/candidates/wdc-cw-v12_20261017-235608-66d00477/rpg-2-star-ocean-the-second_wdc-capitol-west_rt-ys-elm_unapproved-v12_20261017-235608-66d00477.png",
+   "role": "v12 runtime layer PNG (untracked, loaded by the v12 selector)",
+   "tracked_at_head": false,
+   "pin": "sha256-bytes:139cb25883f4f249cdf327f51aa46f4e5bcbf3d38327bc314929da65e328e398",
+   "bytes": 13911,
+   "equals_worktree_lf": true
+  },
+  {
+   "path": "game/assets/environments/candidates/wdc-cw-v12_20261017-235608-66d00477/rpg-2-star-ocean-the-second_wdc-capitol-west_rt-ys-elm_unapproved-v12_20261017-235608-66d00477.png.import",
+   "role": "Godot import sidecar of that PNG (untracked; repo convention tracks sidecars)",
+   "tracked_at_head": false,
+   "pin": "sha256-text-lf-v1:c8a038dfff9637d33385b44f9fae415a2cf02bbe73d4ad7a1d3d5d1ae995c6bf",
+   "bytes": 1253,
+   "equals_worktree_lf": true
+  },
+  {
+   "path": "tools/rpg-2-star-ocean-the-second_wdc-capitol-west_real-scene-probe-harness_unapproved-v12r1_20261018-034933-23596520.gd",
+   "role": "v12r1 test-only harness (-s, outside game/)",
+   "tracked_at_head": false,
+   "pin": "sha256-text-lf-v1:4f42090e7c44140ec970d659050c2ad1bbc95a9388807fca95885c76451c0e0f",
+   "bytes": 30702,
+   "equals_worktree_lf": true
+  },
+  {
+   "path": "tools/rpg-2-star-ocean-the-second_wdc-capitol-west_real-scene-capture-probe-harness_unapproved-v12_20261017-235608-66d00477.gd",
+   "role": "v12 test-only harness, unchanged, used for the v12 reproduction run",
+   "tracked_at_head": false,
+   "pin": "sha256-text-lf-v1:d0cab89b922ee737bb390af028549d60bf7ee884a2f625356880b22f81e2e72a",
+   "bytes": 20051,
+   "equals_worktree_lf": true
+  }
+ ],
+ "capture_sha256": {
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_rt1280-en-v8ref-off_unapproved-v12r1_20261018-034933-23596520.png": "c3a6ffdfcfd5fe63691ba789a95cdfba2de17c2aec143a7777793273db78c06a",
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_rt1280-en-v8ref_unapproved-v12r1_20261018-034933-23596520.png": "a063fbd4aaa446125da594095b063fe889619d8d4ec82396a2377b85b01ae282",
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_rt1280-zh-v8ref-off_unapproved-v12r1_20261018-034933-23596520.png": "c8bb3d5d2f1ca3cf907f80e6d42776fadc25b94cf5f6da58e0ac10198cef184b",
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_rt1280-zh-v8ref_unapproved-v12r1_20261018-034933-23596520.png": "f51cd7aca94d9f3e009a46aa1bdddb543dc54510d7a04155fb6fdf6e9bc940e3",
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_rt640-en-entry_unapproved-v12r1_20261018-034933-23596520.png": "cfe0445409144cfc89eb3b8db15aa14f7957d70f073aab3f9086d136cd5cf9e9",
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_rt640-en-occlusion_unapproved-v12r1_20261018-034933-23596520.png": "4811b8c46b4ca8e242c7daa89065a420b44056723258418a9ae08fadc7741c1c",
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_rt640-en-patrol-bypass_unapproved-v12r1_20261018-034933-23596520.png": "be4d66912620c94a800098806419f7ab95a29ab34b2113c830159545e0ba2c15",
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_rt640-en-records-checked_unapproved-v12r1_20261018-034933-23596520.png": "2e992ca4c72dae93ec115934fc33d4134353a0c57224494911b74e7e19b83ab2",
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_rt640-en-records-prompt_unapproved-v12r1_20261018-034933-23596520.png": "454061b9bb375d3220578c7b55f12d19b0f88e5b26a63d0a230765ed0ea7d044",
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_rt640-en-strata-near_unapproved-v12r1_20261018-034933-23596520.png": "343eafb8a048b8edc1816f1d5fa798d12b73fab85854d79c1113b14e6448ddec",
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_rt640-en-v8ref-off_unapproved-v12r1_20261018-034933-23596520.png": "cfe0445409144cfc89eb3b8db15aa14f7957d70f073aab3f9086d136cd5cf9e9",
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_rt640-en-v8ref_unapproved-v12r1_20261018-034933-23596520.png": "6d3ff72273b9180cb3070a6fa94e8af06644e0b61face9bc8b9fd01ad7b9ff64",
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_rt640-zh-battle-return_unapproved-v12r1_20261018-034933-23596520.png": "ea4057751f1aaf970daffda2067f4e531030e59ad56043842305d1fc3660d91f",
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_rt640-zh-entry_unapproved-v12r1_20261018-034933-23596520.png": "3644185a4dac918a95807cede08fb8d04cbb596b32241414a94e52adcfbc82a9",
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_rt640-zh-occlusion_unapproved-v12r1_20261018-034933-23596520.png": "260c546f6f14bb0e44baf984e59c9e57a06236dc2f277b2587ed140f46a99a4f",
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_rt640-zh-patrol-bypass_unapproved-v12r1_20261018-034933-23596520.png": "110b968d7a6edec285a33f3bd43d4a01f06ac0f78598f7f5f0a53a6816b8f9f9",
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_rt640-zh-records-checked_unapproved-v12r1_20261018-034933-23596520.png": "7525a8910bad9541dae485c01d3c42cc4320d9ff9abad8d32e26b355b99e884a",
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_rt640-zh-records-prompt_unapproved-v12r1_20261018-034933-23596520.png": "8010daf821015a9cae429004162f4bd6bf4816ae295fddccaf11849e57c06a94",
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_rt640-zh-strata-near_unapproved-v12r1_20261018-034933-23596520.png": "32131c5b021a29cee1bafe7b517966d24d4427c6189942b77fa4796d01ec378b",
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_rt640-zh-v8ref-off_unapproved-v12r1_20261018-034933-23596520.png": "3644185a4dac918a95807cede08fb8d04cbb596b32241414a94e52adcfbc82a9",
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_rt640-zh-v8ref_unapproved-v12r1_20261018-034933-23596520.png": "167c11cf079d0e6bdc3d32e6319af59cfb906a59ebe10012e753922fe90cb6f8"
+ },
+ "v12_reproduction_capture_sha256": {
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_rt640-en-entry_unapproved-v12_20261017-235608-66d00477.png": "528e40979b65dc0a1305263f74877e026527850f6b257dd1246b059235376bc3",
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_rt640-en-interact-prompt_unapproved-v12_20261017-235608-66d00477.png": "fe452209d4b331b9bb68c8773c8fed109624e0eef82cd3fb97f139251d012938",
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_rt640-en-interact_unapproved-v12_20261017-235608-66d00477.png": "bfa2411c578d6f139d87c09bc902235344d797b4e83b0a2270765b2effd099a5",
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_rt640-en-occlusion_unapproved-v12_20261017-235608-66d00477.png": "7b75e4ac7775075364bb4796093ed60385e0e3f1396be4130fa68f99eb1afa26",
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_rt640-en-patrol-scrolled_unapproved-v12_20261017-235608-66d00477.png": "0fad13299c03f768b54d5896a5d657e0bcc6710555ec08b7d8c1b37c7ec949e0",
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_rt640-en-vista_unapproved-v12_20261017-235608-66d00477.png": "5c3d4b013cf0732f5d611ee0438691ee4807e1e6d8966448bae53a757b67c297",
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_rt640-zh-entry_unapproved-v12_20261017-235608-66d00477.png": "40c11036972f80e08fcba5b9d8d0f1e48d25000337ac690ac0dc04d018303627",
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_rt640-zh-interact-prompt_unapproved-v12_20261017-235608-66d00477.png": "9e5646907070a9860b18c53efb4368d6e261edf7a219bef0ce3b4bac6ec16f0b",
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_rt640-zh-interact_unapproved-v12_20261017-235608-66d00477.png": "be5ac590f885db68ba549838390bdbe5b32a5fdc33a914895c58cb0dc0edbd2a",
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_rt640-zh-occlusion_unapproved-v12_20261017-235608-66d00477.png": "f6a1093fd10de76f8620e7a6b7896a4e5d36473806ca688e882aaf921d75fdb2",
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_rt640-zh-patrol-scrolled_unapproved-v12_20261017-235608-66d00477.png": "0e5364252f8d70f66b04857b52fa6142b6d299c9293e10c7dcdc2958644a6615",
+  "rpg-2-star-ocean-the-second_wdc-capitol-west_rt640-zh-vista_unapproved-v12_20261017-235608-66d00477.png": "43ad1f84e497505196ac829bef316c4cc131736a89e8c346f0d544fe3a9fea8c"
+ },
+ "smokes": {
+  "head": {
+   "m4_smoke": {
+    "exit": 0,
+    "seconds": 3.0,
+    "fail_lines": []
+   },
+   "m6_smoke": {
+    "exit": 0,
+    "seconds": 2.9,
+    "fail_lines": []
+   },
+   "m7_smoke": {
+    "exit": 0,
+    "seconds": 7.6,
+    "fail_lines": []
+   },
+   "m8_city_reentry_smoke": {
+    "exit": 0,
+    "seconds": 3.0,
+    "fail_lines": []
+   }
+  },
+  "overlay": {
+   "m4_smoke": {
+    "exit": 0,
+    "seconds": 3.2,
+    "fail_lines": []
+   },
+   "m6_smoke": {
+    "exit": 0,
+    "seconds": 3.7,
+    "fail_lines": []
+   },
+   "m7_smoke": {
+    "exit": 0,
+    "seconds": 8.3,
+    "fail_lines": []
+   },
+   "m8_city_reentry_smoke": {
+    "exit": 0,
+    "seconds": 3.3,
+    "fail_lines": []
+   }
+  }
+ },
+ "counters_unchanged": {
+  "meter": "40.8%",
+  "m2": "10/12",
+  "scenes": "3/12",
+  "sprites": "0/52",
+  "playtests": "0/2"
+ }
+}

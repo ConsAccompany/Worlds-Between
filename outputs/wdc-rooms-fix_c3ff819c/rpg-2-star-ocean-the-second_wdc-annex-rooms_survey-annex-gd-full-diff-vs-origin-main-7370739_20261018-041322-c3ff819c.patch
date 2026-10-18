@@ -1,0 +1,222 @@
+diff --git a/game/scripts/survey_annex.gd b/game/scripts/survey_annex.gd
+index eecdcca..831e1ae 100644
+--- a/game/scripts/survey_annex.gd
++++ b/game/scripts/survey_annex.gd
+@@ -58,6 +58,31 @@ const WDC_ROOM_ONE_BLOCKERS := [
+ 	Rect2(129, 212, 70, 16), Rect2(288, 213, 69, 15), Rect2(443, 210, 70, 18),
+ ]
+ const WDC_FIXTURE_BASE_Y := 228.0
++# Washington room 2: UNAPPROVED v01 records-chamber fixtures, test-only opt-in `-- --wdc-records-chamber-v01`
++# (off by default; without the flag room 2 draws and plays exactly as before). Clue fixtures are y-sorted with
++# the heroine and carry their clue marker; the terminal table sorts first and its blocker keeps her clear of it.
++const WDC_ROOM_TWO_FLAG := "--wdc-records-chamber-v01"
++const WDC_ROOM_TWO_FIXTURES := [
++	preload("res://assets/props/wdc-annex-room2/rpg-2-star-ocean-the-second_wdc-annex-room2_machine-translation-pixel-fixture_unapproved-v01_20261018-001157-151fb8d0.png"),
++	preload("res://assets/props/wdc-annex-room2/rpg-2-star-ocean-the-second_wdc-annex-room2_parallel-inscription-pixel-fixture_unapproved-v01_20261018-001157-151fb8d0.png"),
++	preload("res://assets/props/wdc-annex-room2/rpg-2-star-ocean-the-second_wdc-annex-room2_erased-heading-pixel-fixture_unapproved-v01_20261018-001157-151fb8d0.png"),
++]
++const WDC_ROOM_TWO_TERMINAL := preload("res://assets/props/wdc-annex-room2/rpg-2-star-ocean-the-second_wdc-annex-room2_analysis-light-table-pixel-fixture_unapproved-v01_20261018-001157-151fb8d0.png")
++const WDC_ROOM_TWO_FIXTURE_TOP := 164.0
++const WDC_ROOM_TWO_SORT_Y := 218.0
++const WDC_ROOM_TWO_TERMINAL_ORIGIN := Vector2(272, 278)
++# Feet blockers: back wall, the three fixture bases and the terminal table (from the author manifest), then the
++# plate's stepped back corners, side walls and near-corner rubble (exit and lane stay clear). The plate is the same
++# with or without the flag, so its walls (every entry outside WDC_ROOM_TWO_FIXTURE_BLOCKERS) always block in room 2.
++const WDC_ROOM_TWO_FIXTURE_BLOCKERS := [1, 2, 3, 4]
++const WDC_ROOM_TWO_BLOCKERS := [
++	Rect2(0, 0, 640, 114), Rect2(116, 212, 99, 14), Rect2(279, 212, 83, 14), Rect2(440, 212, 88, 14), Rect2(258, 272, 113, 34),
++	Rect2(0, 114, 96, 14), Rect2(0, 128, 74, 16), Rect2(0, 144, 56, 18), Rect2(0, 162, 40, 20), Rect2(0, 182, 32, 80), Rect2(0, 266, 48, 54),
++	Rect2(528, 114, 112, 14), Rect2(548, 128, 92, 16), Rect2(568, 144, 72, 18), Rect2(588, 162, 52, 20), Rect2(600, 182, 40, 70), Rect2(604, 252, 36, 70),
++]
++# Clue discs are drawn this far above the logical clue site so they float over the fixture tops instead of covering
++# the inscriptions; inspection still uses CLUE_POSITIONS and the inspect rects.
++const WDC_ROOM_TWO_MARKER_LIFT := Vector2(0, -19)
+ const YONKERS_ANALYSIS_CONSOLE := preload("res://assets/props/yonkers-maintenance-room2/rpg-2-star-ocean-the-second_yonkers-maintenance-room2_analysis-console-pixel-fixture_unapproved-v01_20261017-012500-a73e60b4.png")
+ const DISCOVERY_CUE := preload("res://assets/audio/rpg-2-star-ocean-the-second_discovery_interaction-cue_m7_20261013-211230-ad781e52.wav")
+ const CLUE_POSITIONS := [Vector2(163, 165), Vector2(320, 165), Vector2(477, 165)]
+@@ -110,6 +135,9 @@ var cue_player: AudioStreamPlayer
+ var wdc_front: Node2D
+ var wdc_front_mask := 0
+ var yonkers_room_one := false
++var wdc_room_two := false
++var wdc_room_two_walls := false
++var wdc_room_two_markers: Array[Node2D] = []
+ 
+ 
+ func _ready() -> void:
+@@ -129,6 +157,9 @@ func _ready() -> void:
+ 		_wdc_update_front()
+ 	if room == 1 and destination_id == "scifi.outskirts":
+ 		_build_yonkers_room_one()
++	wdc_room_two_walls = room == 2 and destination_id == "scifi.ruins"
++	if wdc_room_two_walls and OS.get_cmdline_user_args().has(WDC_ROOM_TWO_FLAG):
++		_build_wdc_room_two()
+ 	_build_ui()
+ 	_start_audio()
+ 	AppState.language_changed.connect(_refresh_text)
+@@ -189,6 +220,8 @@ func _process(delta: float) -> void:
+ 			_wdc_update_front()
+ 		elif yonkers_room_one:
+ 			hero.position = _slide(previous_position, hero.position, _yonkers_blocked)
++		elif wdc_room_two_walls:
++			hero.position = _slide(previous_position, hero.position, _wdc_room_two_blocked)
+ 		if hero.position.distance_to(previous_position) > 0.05:
+ 			_update_walk_animation(delta)
+ 		else:
+@@ -282,12 +315,13 @@ func _draw() -> void:
+ 				continue
+ 			var fixture_position: Vector2 = CLUE_POSITIONS[index] + Vector2(-32, 2)
+ 			draw_texture_rect(WDC_ROOM_ONE_FIXTURES[index], Rect2(fixture_position, Vector2(64, 64)), false)
+-	for index in CLUE_POSITIONS.size():
+-		_draw_clue_marker(self, index)
++	if not wdc_room_two:
++		for index in CLUE_POSITIONS.size():
++			_draw_clue_marker(self, index)
+ 	_draw_annex_marker(EXIT_POSITION, Color("#8bcfca"), false)
+ 	if room == 1:
+ 		_draw_annex_marker(NEXT_POSITION, Color("#e4c377"), false)
+-	else:
++	elif not wdc_room_two:
+ 		_draw_annex_marker(TERMINAL_POSITION, palette[1] if AppState.survey_solved.has(destination_id) else Color("#e4c377"), true)
+ 
+ 
+@@ -375,15 +409,70 @@ func _yonkers_blocked(at: Vector2) -> bool:
+ 	return false
+ 
+ 
+-func _draw_annex_marker(at: Vector2, color: Color, terminal: bool) -> void:
+-	draw_circle(at, 16.0, Color(0.04, 0.12, 0.16, 0.82))
+-	draw_arc(at, 14.0, 0.0, TAU, 28, color, 2.0)
++func _build_wdc_room_two() -> void:
++	wdc_room_two = true
++	y_sort_enabled = true
++	var terminal := Sprite2D.new()
++	terminal.name = "WdcRecordsTerminal"
++	terminal.texture = WDC_ROOM_TWO_TERMINAL
++	terminal.centered = false
++	terminal.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
++	terminal.position = Vector2(WDC_ROOM_TWO_TERMINAL_ORIGIN.x, 0)
++	terminal.offset = Vector2(0, WDC_ROOM_TWO_TERMINAL_ORIGIN.y)
++	terminal.add_child(_wdc_room_two_marker(-1, terminal.position))
++	add_child(terminal)
++	for index in WDC_ROOM_TWO_FIXTURES.size():
++		var fixture := Sprite2D.new()
++		fixture.name = "WdcRecordsFixture%d" % index
++		fixture.texture = WDC_ROOM_TWO_FIXTURES[index]
++		fixture.centered = false
++		fixture.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
++		fixture.position = Vector2(CLUE_POSITIONS[index].x - 48.0, WDC_ROOM_TWO_SORT_Y)
++		fixture.offset = Vector2(0, WDC_ROOM_TWO_FIXTURE_TOP - WDC_ROOM_TWO_SORT_Y)
++		fixture.add_child(_wdc_room_two_marker(index, fixture.position))
++		add_child(fixture)
++
++
++# A marker drawn in room coordinates as a child of its fixture, so it stays above that fixture.
++func _wdc_room_two_marker(index: int, parent_position: Vector2) -> Node2D:
++	var marker := Node2D.new()
++	marker.position = -parent_position + (WDC_ROOM_TWO_MARKER_LIFT if index >= 0 else Vector2.ZERO)
++	marker.draw.connect(_draw_wdc_room_two_marker.bind(marker, index))
++	wdc_room_two_markers.append(marker)
++	return marker
++
++
++func _draw_wdc_room_two_marker(marker: Node2D, index: int) -> void:
++	if index >= 0:
++		_draw_clue_marker(marker, index)
++	else:
++		var palette: Array = PALETTES[destination_id]
++		_draw_annex_marker(TERMINAL_POSITION, palette[1] if AppState.survey_solved.has(destination_id) else Color("#e4c377"), true, marker)
++
++
++func _wdc_room_two_blocked(at: Vector2) -> bool:
++	for index in WDC_ROOM_TWO_BLOCKERS.size():
++		if not wdc_room_two and WDC_ROOM_TWO_FIXTURE_BLOCKERS.has(index):
++			continue
++		if WDC_ROOM_TWO_BLOCKERS[index].has_point(at):
++			return true
++	return false
++
++
++func _wdc_room_two_inspect_rect(index: int) -> Rect2:
++	return Rect2(CLUE_POSITIONS[index].x - 54.0, 150.0, 108.0, 87.0)
++
++
++func _draw_annex_marker(at: Vector2, color: Color, terminal: bool, target: CanvasItem = null) -> void:
++	var canvas: CanvasItem = self if target == null else target
++	canvas.draw_circle(at, 16.0, Color(0.04, 0.12, 0.16, 0.82))
++	canvas.draw_arc(at, 14.0, 0.0, TAU, 28, color, 2.0)
+ 	if terminal:
+-		draw_rect(Rect2(at + Vector2(-6, -5), Vector2(12, 9)), color, false, 1.5)
+-		draw_line(at + Vector2(-3, 7), at + Vector2(3, 7), color, 1.5)
++		canvas.draw_rect(Rect2(at + Vector2(-6, -5), Vector2(12, 9)), color, false, 1.5)
++		canvas.draw_line(at + Vector2(-3, 7), at + Vector2(3, 7), color, 1.5)
+ 	else:
+-		draw_line(at + Vector2(-4, -5), at + Vector2(3, 0), color, 2.0)
+-		draw_line(at + Vector2(3, 0), at + Vector2(-4, 5), color, 2.0)
++		canvas.draw_line(at + Vector2(-4, -5), at + Vector2(3, 0), color, 2.0)
++		canvas.draw_line(at + Vector2(3, 0), at + Vector2(-4, 5), color, 2.0)
+ 
+ 
+ func _build_hero() -> void:
+@@ -433,10 +522,16 @@ func _build_ui() -> void:
+ 			label.size = Vector2(80, 18)
+ 			label.autowrap_mode = TextServer.AUTOWRAP_OFF
+ 			label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
++		elif wdc_room_two:
++			# One line above the lifted disc, so a wrapped English name never covers the marker.
++			label.position = CLUE_POSITIONS[index] + WDC_ROOM_TWO_MARKER_LIFT + Vector2(-70, -42)
++			label.size = Vector2(140, 18)
++			label.autowrap_mode = TextServer.AUTOWRAP_OFF
+ 		clue_labels.append(label)
+ 	exit_label = _label(canvas, EXIT_POSITION + Vector2(-38, -52), 10, Color("#e0e5cf"))
+ 	next_label = _label(canvas, NEXT_POSITION + Vector2(-33, -52), 10, Color("#e0e5cf"))
+-	terminal_label = _label(canvas, TERMINAL_POSITION + Vector2(-46, -48), 11, Color("#f1e0ac"))
++	# Room 2 records chamber: beside the terminal disc instead of on the parallel-inscription plinth.
++	terminal_label = _label(canvas, TERMINAL_POSITION + (Vector2(20, -8) if wdc_room_two else Vector2(-46, -48)), 11, Color("#f1e0ac"))
+ 	for label in [exit_label, next_label, terminal_label]:
+ 		label.add_theme_color_override("font_outline_color", Color("#0d1920"))
+ 		label.add_theme_constant_override("outline_size", 2)
+@@ -502,7 +597,7 @@ func _button(parent: Node, position: Vector2, size: Vector2, callback: Callable)
+ func _refresh_text() -> void:
+ 	var data := _data()
+ 	title_label.text = AppState.destination_name(destination_id) + " · " + String(data["rooms"][room - 1])
+-	title_label.add_theme_font_size_override("font_size", 14 if AppState.language == "en" and (destination_id == "scifi.city" and room == 2 or destination_id == "scifi.ruins" and room == 1) else 18)
++	title_label.add_theme_font_size_override("font_size", 14 if AppState.language == "en" and (destination_id == "scifi.city" and room == 2 or destination_id == "scifi.ruins") else 18)
+ 	progress_label.text = AppState.text_for("survey_progress") % [_clue_count(), AppState.text_for("field_yes" if AppState.survey_solved.has(destination_id) else "field_no")]
+ 	help_label.text = AppState.text_for("survey_help")
+ 	back_button.text = AppState.text_for("survey_leave" if room == 1 else "survey_previous")
+@@ -513,6 +608,15 @@ func _refresh_text() -> void:
+ 		save_button.position.x = 398.0 if wide else 418.0
+ 		back_button.position.x = 503.0 if wide else 525.0
+ 		back_button.size.x = 125.0 if wide else 98.0
++	elif destination_id == "scifi.ruins":
++		# Washington rooms: a label too long for the 98 px button ("Return outside", "Outer room") steps its font
++		# down until it fits; labels that already fit keep the default size.
++		back_button.remove_theme_font_size_override("font_size")
++		var font_size := back_button.get_theme_font_size("font_size")
++		while font_size > 11 and back_button.get_minimum_size().x > 98.0:
++			font_size -= 1
++			back_button.add_theme_font_size_override("font_size", font_size)
++		back_button.size = Vector2(98, 38)
+ 	for index in CLUE_POSITIONS.size():
+ 		clue_labels[index].text = String(data["clues"][(room - 1) * 3 + index]["name"])
+ 	exit_label.text = AppState.text_for("survey_leave" if room == 1 else "survey_previous")
+@@ -523,6 +627,8 @@ func _refresh_text() -> void:
+ 	if overlay.visible:
+ 		_refresh_overlay()
+ 	queue_redraw()
++	for marker in wdc_room_two_markers:
++		marker.queue_redraw()
+ 
+ 
+ func _refresh_overlay() -> void:
+@@ -741,7 +847,8 @@ func _unhandled_input(event: InputEvent) -> void:
+ 			return
+ 		for index in CLUE_POSITIONS.size():
+ 			if hero.position.distance_to(CLUE_POSITIONS[index]) < 45.0 or (wdc_front != null and _wdc_inspect_rect(index).has_point(hero.position)) \
+-					or (yonkers_room_one and hero.position.distance_to(YONKERS_ROOM_ONE_MARKERS[index]) < 42.0):
++					or (yonkers_room_one and hero.position.distance_to(YONKERS_ROOM_ONE_MARKERS[index]) < 42.0) \
++					or (wdc_room_two and _wdc_room_two_inspect_rect(index).has_point(hero.position)):
+ 				_inspect_clue((room - 1) * 3 + index)
+ 				return
+ 		if room == 2 and hero.position.distance_to(TERMINAL_POSITION) < 46.0:
