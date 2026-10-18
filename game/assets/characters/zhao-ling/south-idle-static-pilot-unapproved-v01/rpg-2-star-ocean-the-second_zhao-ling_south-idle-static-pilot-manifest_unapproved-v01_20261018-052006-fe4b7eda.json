@@ -1,0 +1,500 @@
+{
+  "project": "Worlds Between",
+  "milestone": "M8",
+  "visual_id": "zhao-ling",
+  "identity": "Zhao Ling 赵铃, science-district companion (bible entry 31: female, 26, firearms job series, city radio repair technician)",
+  "purpose": "First south-facing exploration idle STATIC identity pilot for Zhao Ling at the approved 48 logical px, hand-placed in the female selout v8 format, before any animation or other direction.",
+  "status": "UNAPPROVED, NONRUNTIME pilot; technical gates only; not runtime-integrated; no animation; south only",
+  "art_approved": false,
+  "human_reviewed": false,
+  "runtime_integrated": false,
+  "variant": "unapproved-v01",
+  "run_id": "7027d25c",
+  "acceptance_counters_unchanged": {
+    "runtime_sprites_accepted": "0/52"
+  },
+  "authorship": "Colour and role grids placed by Claude (Claude Code, signed-in Claude Max). Masses seeded by a scratch primitive script (not shipped); head, hair locks, blue tips, earcup, chin/collar rows and body details hand-typed; judged on x3/x6 previews over city / annex floor colours. The literal grids in the tool are the only source. No image generation, resampling, filtering, quantization or dithering. The 2026-10-14 32x48 runtime body and the premium concept were not reused.",
+  "benchmark": {
+    "female_selout_v8": "density / proportion / value-separation benchmark only (same 80x112 cell, pin, 96-texel body, 0.5 scale, 1-texel outer ink); no v8 texel, palette entry or design element is copied."
+  },
+  "source_identity_references": {
+    "sheet": "outputs/rpg-2-star-ocean-the-second_zhao-ling_character-sheet_v01_20261013-193120-54215370.png (1916x821)",
+    "front_full_body_view": "sheet x~30-400: asymmetric bob, earcup + antenna on her left ear (viewer-right), oversized near-black jacket with light-grey collar and rolled cuffs, white tee, crossbody straps, hip radio on viewer-right hip with coiled cable, tablet in her right hand (viewer-left), fingerless gloves, baggy charcoal trousers with rolled grey cuffs and hanging blue straps, black lace-up boots with blue-grey soles",
+    "head_close_ups": "sheet x~870-1580, y~0-370: side part, long fringe over her right eye (viewer-left), blue inner tips at the jaw, grey-blue eyes, steel-rimmed teal-blue earcups, black antenna with brass tip; hand raised to the earcup",
+    "chibi_turnarounds": "sheet x~1380-1916, y~480-740: front view shows one visible earcup (viewer-right) with the antenna rising from it; back view shows a radio pack",
+    "radio_prop_detail": "sheet x~830-1350, y~340-800: black/brass radio with waveform screen, knob, antenna, tool tray, strap",
+    "bible": "outputs/...remaining-companions_character-bible...md entry 31: 湖蓝耳机、整齐的侧分短发和便携天线; city radio repair technician; personal skill 回声测距 (Echo Ranging)"
+  },
+  "identity_cues_kept": [
+    "asymmetric chin-length blue-black bob: side part, long fringe swept over the viewer-left eye, wider fringe side, tucked side behind the earcup",
+    "lake-blue inner tips at the jaw on the fringe side (three strands)",
+    "one visible lake-blue earcup with steel rim on the viewer-right ear, headband over the crown",
+    "narrow vertical black antenna with brass collar and tip rising from the earcup above the crown",
+    "oversized near-black jacket with popped light-grey collar/lapels and rolled light-grey cuffs over a white tee",
+    "dark crossbody strap with brass buckle from the viewer-left shoulder to a hip radio on the viewer-right hip",
+    "hip radio with brass corners, lake-blue waveform screen and knob; coiled lake-blue cable",
+    "tablet held in the viewer-left fingerless-gloved hand",
+    "baggy charcoal trousers with rolled light-grey cuffs, a lake-blue strap hanging on the viewer-left thigh, cargo pocket",
+    "black lace-up combat boots with lake-blue sole edge"
+  ],
+  "proposed_pixel_simplifications_vs_source": [
+    "Pose: the sheet's hand-to-earcup gesture is replaced by a neutral idle (viewer-right arm hanging above the radio, viewer-left hand holding the tablet at the hip) so the earcup and antenna stay unoccluded and the frame can seed walk cycles.",
+    "Tablet: shown as a steel-framed slate with a lake-blue echo waveform facing the viewer (the sheet shows its dark back); the waveform echoes the radio screen and Echo Ranging so it does not read as Liang Xu's copper board.",
+    "Accent colour: the sheet's muted steel-teal is pushed to a brighter lake blue (湖蓝, bible wording) for 1 texel/px legibility and to separate it from v8's green-teal scarf.",
+    "Jacket is lifted from near-black to a dark cool charcoal with lit planes so it separates from the blue-black hair and dark floors; trousers are one step lighter than the jacket.",
+    "Gear reduced: multiple crossbody straps -> one leather strap; the viewer-left hip tool pouch with vials, the thigh holster pouches and the second hanging strap are omitted; one cargo pocket remains.",
+    "Hip radio reduced to a 11x10 box (no tool tray, no prop antenna); cable shown as one 2-texel coil.",
+    "Viewer-left earcup is hidden by the fringe, as in the sheet's front and chibi front views (one visible earcup).",
+    "Face: 2-texel eyes, 1-texel nose shadow and 2-texel mouth; the sheet's eye shape and lashes are not representable at 48 px."
+  ],
+  "name_note": "Canonical name is 赵铃 / Zhao Ling (character bible, Game Bible state, asset inventory, app strings). 赵羚 in the dispatch brief was a coordinator typo; it is not a creator question.",
+  "decided_for_this_south_static": [
+    "Weapon: the sheet shows no firearm, so none is drawn (the firearms job series does not require one in this exploration idle)."
+  ],
+  "pending_for_later_directions_only": [
+    "Back radio pack vs hip radio construction (the sheet's back view shows a pack with its own antenna); needed for north/side facings, not for this south static."
+  ],
+  "cell": {
+    "w": 80,
+    "h": 112,
+    "pin": [
+      40,
+      104
+    ],
+    "body_rows": [
+      8,
+      103
+    ],
+    "display_scale": 0.5,
+    "display_logical_height": 48,
+    "filter": "nearest",
+    "alpha": "binary",
+    "grid_offset": [
+      12,
+      8
+    ],
+    "height_rule": "visible height 96 texels includes the antenna tip (row 8); hair crown at row 11, close to v8's crown"
+  },
+  "files": {
+    "png": {
+      "file": "game/assets/characters/zhao-ling/south-idle-static-pilot-unapproved-v01/rpg-2-star-ocean-the-second_zhao-ling_south-idle-static-pilot_unapproved-v01_20261018-052006-73f1d603.png",
+      "sha256": "069acee4ba3c25c55cd381e19ab3a7453bb9ddd7fe27ff69eca7068c038859f7",
+      "hash_algorithm": "sha256-bytes",
+      "role": "transparent static PNG candidate (not wired into the game)"
+    },
+    "pxo": {
+      "file": "game/assets/characters/zhao-ling/south-idle-static-pilot-unapproved-v01/rpg-2-star-ocean-the-second_zhao-ling_south-idle-static-pilot-editable_unapproved-v01_20261018-052006-9c80d0fc.pxo",
+      "sha256": "78ad93cfa83c4be62549fd996f8ec7d566e5138af892fa89e1122892a1527a2e",
+      "hash_algorithm": "sha256-bytes",
+      "format": "Pixelorama pxo_version 7 (v1.2.3-stable), color_mode 5, 1 frame x 12 layers, fixed zip timestamps"
+    },
+    "ora": {
+      "file": "game/assets/characters/zhao-ling/south-idle-static-pilot-unapproved-v01/rpg-2-star-ocean-the-second_zhao-ling_south-idle-static-pilot-editable-layers_unapproved-v01_20261018-052006-2e77e99e.ora",
+      "sha256": "180f86a94456a5a13f92288b5c7d286530af953e20c9a9b31e84c3bfa14c6fb4",
+      "hash_algorithm": "sha256-bytes",
+      "format": "OpenRaster 0.0.3, same layers as the .pxo (guides hidden), mergedimage = the PNG"
+    },
+    "palette": {
+      "file": "game/assets/characters/zhao-ling/south-idle-static-pilot-unapproved-v01/rpg-2-star-ocean-the-second_zhao-ling_south-idle-static-pilot-palette_unapproved-v01_20261018-052006-1622a443.json",
+      "sha256": "2d1394cf6c5e6389dcff1e07353709d22541c9f9750bbb845e778dbfd318765b",
+      "hash_algorithm": "sha256-text-lf-v1"
+    },
+    "gdignore": "game/assets/characters/zhao-ling/south-idle-static-pilot-unapproved-v01/.gdignore"
+  },
+  "layers_bottom_to_top": [
+    {
+      "pixelorama_layer": 1,
+      "name": "hair-back",
+      "visible": true,
+      "locked": false,
+      "texels": 6,
+      "note": "short strand tucked behind the earcup (viewer-right side of the bob)"
+    },
+    {
+      "pixelorama_layer": 2,
+      "name": "boots",
+      "visible": true,
+      "locked": false,
+      "texels": 314,
+      "note": "black lace-up combat boots, lace zigzag, toe caps, lake-blue sole edge"
+    },
+    {
+      "pixelorama_layer": 3,
+      "name": "legs",
+      "visible": true,
+      "locked": false,
+      "texels": 606,
+      "note": "baggy charcoal trousers, knee and ankle folds, cargo pocket with brass snap, rolled light-grey cuffs"
+    },
+    {
+      "pixelorama_layer": 4,
+      "name": "torso-jacket",
+      "visible": true,
+      "locked": false,
+      "texels": 394,
+      "note": "oversized near-black jacket, popped light-grey collar and lapels, white tee, belt, uneven open hem, sleeve patch, snaps"
+    },
+    {
+      "pixelorama_layer": 5,
+      "name": "straps-belt",
+      "visible": true,
+      "locked": false,
+      "texels": 93,
+      "note": "dark leather crossbody strap with brass buckle (viewer-left shoulder to radio), lake-blue strap hanging on the viewer-left thigh"
+    },
+    {
+      "pixelorama_layer": 6,
+      "name": "radio-kit",
+      "visible": true,
+      "locked": false,
+      "texels": 160,
+      "note": "hip radio on the viewer-right hip: dark body, brass corners, lake-blue waveform screen, knob, grille; coiled lake-blue cable"
+    },
+    {
+      "pixelorama_layer": 7,
+      "name": "arm-tablet",
+      "visible": true,
+      "locked": false,
+      "texels": 289,
+      "note": "viewer-left sleeve, rolled cuff, fingerless glove holding a steel-framed tablet with an echo waveform"
+    },
+    {
+      "pixelorama_layer": 8,
+      "name": "arm-near-radio",
+      "visible": true,
+      "locked": false,
+      "texels": 150,
+      "note": "viewer-right sleeve hanging clear of the waist, rolled cuff, fingerless glove above the radio"
+    },
+    {
+      "pixelorama_layer": 9,
+      "name": "head-face",
+      "visible": true,
+      "locked": false,
+      "texels": 103,
+      "note": "face, grey-blue eyes, brow, neck"
+    },
+    {
+      "pixelorama_layer": 10,
+      "name": "hair-front",
+      "visible": true,
+      "locked": false,
+      "texels": 290,
+      "note": "blue-black asymmetric bob: side part, halo sheen, long fringe sweeping over the viewer-left eye, lake-blue under-tips"
+    },
+    {
+      "pixelorama_layer": 11,
+      "name": "headset-antenna",
+      "visible": true,
+      "locked": false,
+      "texels": 86,
+      "note": "lake-blue headband, one visible steel-rimmed lake-blue earcup (viewer-right), black antenna with brass collar and tip"
+    },
+    {
+      "pixelorama_layer": 12,
+      "name": "guides",
+      "visible": false,
+      "locked": true,
+      "note": "hidden + locked: 1-texel cell border, body rows 8/103 ticks, foot pin (40,104)"
+    }
+  ],
+  "references": {
+    "identity_sheet_zhao_ling": {
+      "file": "outputs/rpg-2-star-ocean-the-second_zhao-ling_character-sheet_v01_20261013-193120-54215370.png",
+      "sha256": "5fe7b5e8f41878e0a96883164afb7069300663e03e4e9815f2cb17dc9500d780",
+      "hash_algorithm": "sha256-bytes"
+    },
+    "character_bible_entry_31": {
+      "file": "outputs/rpg-2-star-ocean-the-second_remaining-companions_character-bible_v01_20261013-181920-6d2a4f8c.md",
+      "sha256": "c6a05a53eda10f0d5ad55bd9b7a07e3aed4e21da7225d3775b92c3e023485545",
+      "hash_algorithm": "sha256-text-lf-v1"
+    },
+    "codex_identity_transfer_audit_48px": {
+      "file": "docs/qa/rpg-2-star-ocean-the-second_science-companions_48px-identity-transfer-codex-audit_unapproved-v01_20261016-114641-a9e6c2d1.md",
+      "sha256": "db53ec2bbc6524cb597f622921fd3652d772fb548ff29b0384dcc053484cca75",
+      "hash_algorithm": "sha256-text-lf-v1"
+    },
+    "codex_cast_hairstyle_identity_audit_48px": {
+      "file": "docs/qa/rpg-2-star-ocean-the-second_science-cast_hairstyle-and-identity-at-48px_unapproved-v01_20261016-183000-9234b6e1.md",
+      "sha256": "e18854b338a9424f13b4ce1efea6b0922e2cee8778f7f91b6a4fef7591e243f7",
+      "hash_algorithm": "sha256-text-lf-v1"
+    },
+    "prior_native_32x48_review": {
+      "file": "docs/character-visuals/rpg-2-star-ocean-the-second_zhao-ling_native-exploration-review_m8-v01_20261014-142600-582df7a1.md",
+      "sha256": "525ce1cde5f2107c0b12438cd9ce59cf9d01a7374aa9cbc64b93a63f9cde03bf",
+      "hash_algorithm": "sha256-text-lf-v1"
+    },
+    "prior_native_32x48_south_idle_not_reused": {
+      "file": "game/assets/characters/native-animation/rpg-2-star-ocean-the-second_zhao-ling_native-exploration-idle-south_m8-v01_20261014-142000-a9c9de72.png",
+      "sha256": "4756d330f68e263e4f0a1784bf8c30e38050b424dbc99cce3e0f0b26a8a01130",
+      "hash_algorithm": "sha256-bytes"
+    },
+    "prior_premium_concept_not_reused": {
+      "file": "game/assets/characters/high-fidelity-prototypes/rpg-2-star-ocean-the-second_zhao-ling_south-exploration-premium-pixel_m8-concept_20261014-160624-fe822f60.png",
+      "sha256": "7ff0ce6f24fb958bace59def0e93ac6036ac39cf7198bd4c51d1f36c1f9c3584",
+      "hash_algorithm": "sha256-bytes"
+    },
+    "benchmark_female_selout_v8_png": {
+      "file": "game/assets/characters/pixelorama-pilots/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v8-cloth-leather-candidate_m8-v08_20261015-021600-157a5ea0.png",
+      "sha256": "ccf9d2a293e7f1b9c706b4d2f1bf9c00b3c7714ec4e9b8bddf023e166f68b6fd",
+      "hash_algorithm": "sha256-bytes"
+    },
+    "benchmark_female_selout_v8_decision": {
+      "file": "docs/character-visuals/rpg-2-star-ocean-the-second_protagonist-female_south-idle-static-baseline-decision_m8-v08_20261015-022700-07161696.md",
+      "sha256": "f7ea59b73de35a9c71a7d6dc4968ebbd4b2ce28458fa926877222d85591d7c37",
+      "hash_algorithm": "sha256-text-lf-v1"
+    },
+    "confusion_pair_liang_xu_static_pilot_png": {
+      "file": "game/assets/characters/liang-xu/south-idle-static-pilot-unapproved-v01/rpg-2-star-ocean-the-second_liang-xu_south-idle-static-pilot_unapproved-v01_20261016-140940-46a036ed.png",
+      "sha256": "9fee901809d33128839779cc1e926fc314f4d92fd11baa3b857d4cffebfe38ab",
+      "hash_algorithm": "sha256-bytes"
+    }
+  },
+  "gates": {
+    "P1_binary_alpha": true,
+    "P1_no_opaque_on_border": true,
+    "P2_colour_count": 33,
+    "P2_cap": 48,
+    "P2_pass": true,
+    "P3_all_colours_declared": true,
+    "P3_declared_unused": [],
+    "P3_no_declared_unused": true,
+    "P4_ramp_adjacent_Lstar_steps": {
+      "skin": [
+        12.93,
+        17.05
+      ],
+      "hair": [
+        17.15,
+        13.71
+      ],
+      "lake_blue": [
+        19.56,
+        20.78
+      ],
+      "steel": [
+        24.93,
+        24.09
+      ],
+      "brass": [
+        20.82,
+        24.2
+      ],
+      "jacket": [
+        15.47,
+        12.76
+      ],
+      "lining_grey": [
+        18.06,
+        19.35
+      ],
+      "leather": [
+        16.25
+      ],
+      "trousers": [
+        13.06
+      ],
+      "boots": [
+        21.5
+      ]
+    },
+    "P4_exempt": [
+      "ink",
+      "eye",
+      "mouth"
+    ],
+    "P4_min_step": 12.76,
+    "P4_v8_reference_min_step": 11.87,
+    "P4_pass_report_only": true,
+    "S1_body_height": 96,
+    "S1_pass": true,
+    "S1_alpha_bounds_inclusive": [
+      13,
+      8,
+      58,
+      103
+    ],
+    "S1_sole_row": 103,
+    "S1_pin": [
+      40,
+      104
+    ],
+    "S1_sole_span_x": [
+      26,
+      52
+    ],
+    "S1_pin_inside_feet_span": true,
+    "opaque_texels": 2491,
+    "visible_size": [
+      46,
+      96
+    ],
+    "isolated_single_texels": 53,
+    "benchmark_v8": {
+      "v8_visible_size": [
+        43,
+        96
+      ],
+      "v8_opaque_texels": 2419,
+      "v8_colours": 32,
+      "v8_isolated_single_texels": 145
+    }
+  },
+  "legibility_metrics_report_only": {
+    "note": "cell coordinates; 1 texel = 1 window px at 1280x720 (0.5 scale on the 640x360 canvas)",
+    "asymmetric_bob": {
+      "face_x": [
+        36,
+        44
+      ],
+      "crown_row": 12,
+      "hair_extends_left_of_face_px": 10,
+      "hair_extends_right_of_face_px": 1,
+      "lowest_hair_row_fringe_side": 34,
+      "lowest_hair_row_tucked_side": 30,
+      "fringe_covers_face_columns_at_eye_row": "cells 26-35 hair, eyes at cells 37-38 and 41-42 (row 24-25)"
+    },
+    "blue_tips": {
+      "texels": 29,
+      "rows": [
+        28,
+        34
+      ],
+      "dE76_tip_blue_vs_hair": 44.9
+    },
+    "earcup": {
+      "x": [
+        44,
+        48
+      ],
+      "y": [
+        20,
+        28
+      ],
+      "w": 5,
+      "h": 9,
+      "texels": 42,
+      "lake_blue_texels": 15,
+      "dE76_cup_blue_vs_hair": 44.9
+    },
+    "headband_texels_above_cup": 17,
+    "antenna": {
+      "column": 48,
+      "rows": [
+        8,
+        20
+      ],
+      "rise_above_crown_px": 4,
+      "brass_texels": 3
+    },
+    "hip_radio": {
+      "x": [
+        47,
+        57
+      ],
+      "y": [
+        57,
+        66
+      ],
+      "w": 11,
+      "h": 10,
+      "texels": 106,
+      "protrudes_past_trousers_px": 10,
+      "screen_texels": 12
+    },
+    "coiled_cable": {
+      "x": [
+        52,
+        54
+      ],
+      "y": [
+        67,
+        76
+      ],
+      "w": 3,
+      "h": 10,
+      "texels": 20
+    },
+    "tablet": {
+      "x": [
+        14,
+        23
+      ],
+      "y": [
+        47,
+        58
+      ],
+      "w": 10,
+      "h": 12,
+      "texels": 109,
+      "protrudes_past_sleeve_px": 10,
+      "waveform_texels": 10
+    },
+    "crossbody_strap": {
+      "x": [
+        35,
+        48
+      ],
+      "y": [
+        35,
+        56
+      ],
+      "w": 14,
+      "h": 22,
+      "texels": 41
+    },
+    "thigh_strap_lake_blue": {
+      "x": [
+        33,
+        34
+      ],
+      "y": [
+        56,
+        75
+      ],
+      "w": 2,
+      "h": 20,
+      "texels": 40
+    },
+    "boot_sole_lake_blue_texels": 23,
+    "viewer_right_arm_gap_rows": [
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52
+    ],
+    "leg_gap_rows": [
+      75,
+      103
+    ],
+    "accent_family": {
+      "dE76_lake_blue_b_vs_v8_teal_249b98": 24.9,
+      "dE76_lake_blue_b_vs_v8_teal_1a767b": 23.8
+    },
+    "value_separation": {
+      "dE76_hair_h_vs_jacket_j": 8.5,
+      "dE76_jacket_j_vs_trousers_p": 8.9
+    },
+    "head_rows_8_35_iou_report_only": {
+      "vs_female_v8": 0.474,
+      "vs_liang_xu_pilot": 0.603
+    }
+  },
+  "tool": {
+    "file": "tools/rpg-2-star-ocean-the-second_zhao-ling_south-idle-static-pilot-build-and-check_unapproved-v01_20261018-052006-36f0253c.py",
+    "sha256": "11baed2cf3799ef3939fb1dab6e671cc7f7558a851f87bcbe23ca752078d35b1",
+    "hash_algorithm": "sha256-text-lf-v1",
+    "python": "3.12.14",
+    "pillow": "12.3.0",
+    "numpy": "2.3.5",
+    "run_flags": "-I -B"
+  },
+  "shared_format_module": {
+    "file": "tools/rpg-2-star-ocean-the-second_static-pilot-v8-format_shared-utils_unapproved-v01_20261018-052006-fcae68d3.py",
+    "sha256": "7c8f3c0fd42751a1dd0233bbff32bd6ad5970473bdf35d929c5c27c94e778425",
+    "hash_algorithm": "sha256-text-lf-v1"
+  }
+}
