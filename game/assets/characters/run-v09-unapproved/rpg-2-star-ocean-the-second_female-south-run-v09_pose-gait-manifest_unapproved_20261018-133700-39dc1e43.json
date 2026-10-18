@@ -1,0 +1,3285 @@
+{
+ "project": "Worlds Between",
+ "milestone": "M8",
+ "character": "protagonist-female",
+ "direction": "south",
+ "motion_state": "run at MOVE_SPEED 140",
+ "part": "female-south-run-v09",
+ "workstream": "m8-w12",
+ "stamp_utc": "20261018-133700",
+ "run_id": "4d620536",
+ "status": "UNAPPROVED / NONRUNTIME test-only single-direction motion candidate (authored pose / gait revision over v07); Codex / creator review pending; not a production sprite, not wired into the runtime",
+ "art_approved": false,
+ "human_reviewed": false,
+ "runtime_integrated": false,
+ "walk_animation_approved": false,
+ "run_animation_approved": false,
+ "stop_animation_approved": false,
+ "counts_toward_art_acceptance": false,
+ "approved_scope_unchanged": "selout v8 SOUTH IDLE static frame and the 48 logical px display scale only",
+ "exploration_sprites_counter_unchanged": "0/52",
+ "amends": {
+  "v06_manifest": "game/assets/characters/run-v06-unapproved/rpg-2-star-ocean-the-second_protagonist-female_south-run-v06-manifest_unapproved-nonruntime_20261017-211600-c619ea83.json",
+  "v06_manifest_sha256_text_lf_v1": "f59b04fa672250c7525dda79d7cc3771830fa80a03fec339ff21fa19298e6b17",
+  "v06_builder": "tools/rpg-2-star-ocean-the-second_protagonist-female_south-run-v06-build_m8-w09_20261017-211600-f8e736cc.py",
+  "v06_builder_sha256_text_lf_v1": "2b83a2216438384c0eff9829d44a3f2f11f5ec3854507bff40b704e8d57c7a8a",
+  "v07_control": "rise lock (v07 restart amendment) kept on; v07 gait driver class used unchanged",
+  "reads_v06_art_read_only": "every v06 part PNG (boots of the v06 views, legs, arms, cape, hair, torso, head, hips, coat, shadows) is used unchanged from game/assets/characters/run-v06-unapproved/"
+ },
+ "builder": "tools/rpg-2-star-ocean-the-second_female-south-run-v09_authored-gait-build_m8-w12_20261018-133700-4d620536.py",
+ "gait": {
+  "unchanged_from_v07": true,
+  "swing_keys": [
+   [
+    0,
+    -19,
+    1,
+    "toe",
+    0
+   ],
+   [
+    110,
+    -17,
+    2,
+    "toe",
+    1
+   ],
+   [
+    270,
+    -11,
+    2,
+    "hang",
+    1
+   ],
+   [
+    460,
+    -3,
+    2,
+    "hang",
+    1
+   ],
+   [
+    640,
+    0,
+    2,
+    "reach",
+    1
+   ],
+   [
+    840,
+    1,
+    1,
+    "reach",
+    1
+   ],
+   [
+    930,
+    2,
+    1,
+    "strike",
+    1
+   ],
+   [
+    1000,
+    2,
+    1,
+    "strike",
+    1
+   ]
+  ],
+  "note": "the gait-driver state is v07's for every input (stride 84 px, stance 21 px, land +2, lift-off -19, swing keys incl. views, stance roll, bob / torso / arm / hair / cape timing, stop clock, re-press, rise lock); v09 changes only what is drawn for a state",
+  "rejected_drafts": [
+   "boot path moved back for a deeper heel kick: 60 fps stop 200 -> 216.7 ms (state-level sim)",
+   "v07 path with a changed view column (hang until u 840): a 48 fps stop held a boot raised 104 ms (> 100) because the stop allows one boot view change per tick"
+  ],
+  "swing_px_by_drawn_pose_v09": {
+   "v06:toe-l1": 4,
+   "kick": 13,
+   "tuck": 30,
+   "v06:reach-l1": 12,
+   "v06:strike-l1": 4
+  },
+  "swing_px_by_view_v07": {
+   "toe-l1": 4,
+   "toe-l2": 13,
+   "hang-l2": 24,
+   "reach-l2": 6,
+   "reach-l1": 12,
+   "strike-l1": 4
+  }
+ },
+ "art_amendment": {
+  "draw_rule": "toe at lift >= 2 -> kick (boot-<side>-kick + tucked leg); hang, or reach at lift >= 2 -> tucked leg with the state's own boot view; every other state -> the v06 leg",
+  "kick_drop_rows": 2,
+  "shin_shade": {
+   "5": "6"
+  },
+  "shin_shade_rgb": {
+   "#4a625c": "#324542"
+  },
+  "kick_boot_rows": {
+   "vl": [
+    [
+     1,
+     "KbLLbK"
+    ],
+    [
+     0,
+     "KnlllLqK"
+    ],
+    [
+     0,
+     "KlrllLbK"
+    ],
+    [
+     0,
+     "KqbbbbqK"
+    ],
+    [
+     1,
+     "KqqqqK"
+    ],
+    [
+     2,
+     "KKKK"
+    ]
+   ],
+   "vr": [
+    [
+     1,
+     "KbLLbK"
+    ],
+    [
+     0,
+     "KqLlllnK"
+    ],
+    [
+     0,
+     "KbLllrlK"
+    ],
+    [
+     0,
+     "KqbbbbqK"
+    ],
+    [
+     1,
+     "KqqqqK"
+    ],
+    [
+     2,
+     "KKKK"
+    ]
+   ]
+  },
+  "knee_fwd": {
+   "vl": {
+    "71": [
+     26,
+     "K655cB63K"
+    ],
+    "72": [
+     27,
+     "KLLcKLLk"
+    ],
+    "73": [
+     27,
+     "OOOOO63K"
+    ],
+    "74": [
+     26,
+     "OGzzzGO3K"
+    ],
+    "75": [
+     26,
+     "OGzvvgO3K"
+    ],
+    "76": [
+     26,
+     "OGgvvGOqK"
+    ],
+    "77": [
+     26,
+     "OGggBBOkK"
+    ],
+    "78": [
+     27,
+     "OGGGO63K"
+    ],
+    "79": [
+     27,
+     "KOOOK63K"
+    ]
+   },
+   "vr": {
+    "76": [
+     39,
+     "K6655666K"
+    ],
+    "77": [
+     39,
+     "K655556663K"
+    ],
+    "78": [
+     40,
+     "K5555666K"
+    ],
+    "79": [
+     40,
+     "K6556663K"
+    ],
+    "80": [
+     41,
+     "K333333K"
+    ]
+   }
+  },
+  "coat_hem_row": 66,
+  "seam_row0": 41,
+  "seam_rule": "after v06's pinhole / neck-seam fills: every transparent texel at row >= seam_row0 closed left, right, above and below by opaque texels -> ink (#0a0a0e), all found first then filled; v8 has none",
+  "leg_rule_tucked": "kick / tuck: rows hip(61+bob).. = v8 thigh rows 1:1 (lean t^2 toward kd), the authored forward knee band 1:1 at kd, then shin rows = pick(v8 shin rows, max(0, boot top - hip - thigh - knee)) shaded one ramp step darker, sloping to the cuff; kd = kin * inward + rdiv(align * max(0, 4 - shin rows), 4), align = rdiv(cuff top-row x0 + x1 - knee bottom-row x0 - x1, 2); the boot is drawn first and the leg over it (the knee in front)",
+  "leg_rule_other_views": "v06 compose_leg unchanged (contact views, toe at lift <= 1, reach at lift 1, strike)",
+  "coat_rule": "coat-skirt rows < 66 at (sx, bob) as v06; rows >= 66 at (csx, bob) - the hem trails the torso shift by the cape lag (csx == sx on the neutral state, so the stop still ends on v8 exactly)"
+ },
+ "parts_new": [
+  {
+   "role": "boot-vl-kick",
+   "file": "rpg-2-star-ocean-the-second_female-south-run-v09_part-boot-vl-kick_unapproved_20261018-133700-d40d71b7.png",
+   "sha256": "ce4153dd61fd141f6500faefe346f420c904d5db6402b3b31dfbd5a8e5ae6e89",
+   "opaque_texels": 40
+  },
+  {
+   "role": "boot-vr-kick",
+   "file": "rpg-2-star-ocean-the-second_female-south-run-v09_part-boot-vr-kick_unapproved_20261018-133700-bcd96be9.png",
+   "sha256": "a796258798eb9a279d76f990795a3853838be6505bbf83ce4ebff78287f0c7d1",
+   "opaque_texels": 40
+  },
+  {
+   "role": "knee-vl-fwd",
+   "file": "rpg-2-star-ocean-the-second_female-south-run-v09_part-knee-vl-fwd_unapproved_20261018-133700-4fdb2dcf.png",
+   "sha256": "1a89b77a91eeab6dc99544c12449af594eb5149083eaf3afc79389dac2d887f9",
+   "opaque_texels": 77
+  },
+  {
+   "role": "knee-vr-fwd",
+   "file": "rpg-2-star-ocean-the-second_female-south-run-v09_part-knee-vr-fwd_unapproved_20261018-133700-78d48a0b.png",
+   "sha256": "a618cb7c6e1c5c0f14a4de77a3a8e5e96ac725ee451f903f23f917eb93e42ed1",
+   "opaque_texels": 46
+  }
+ ],
+ "keyframes": [
+  {
+   "key": "k00",
+   "phase_px": 0,
+   "pose": "vl contact (strike, knee lean); vr knee forward, shin tucked, passing behind",
+   "file": "rpg-2-star-ocean-the-second_female-south-run-v09_keyframe-00px_unapproved_20261018-133700-c7dbe5e5.png",
+   "sha256": "a3470e746c970d0baee634cccea98239edd8ade21030c848064814d76db8271f",
+   "shadow_file": "rpg-2-star-ocean-the-second_female-south-run-v09_keyframe-00px-shadow_unapproved_20261018-133700-9c244169.png",
+   "shadow_sha256": "dd29f28e7c86d39c1c6b857cd9a2037fe6e84297354f74cae0fd420fc8121a7e",
+   "state": {
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "B1",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": 2,
+      "lift": 0,
+      "view": "strike",
+      "kin": 1
+     },
+     "vr": {
+      "o": -8,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1
+     }
+    }
+   },
+   "near_leg": "vr",
+   "legs": {
+    "vl": {
+     "hip_to_sole_rows": 42,
+     "trouser_rows": 29,
+     "cuff_jog_texels": 0.0
+    },
+    "vr": {
+     "hip_to_sole_rows": 33,
+     "trouser_rows": 21,
+     "cuff_jog_texels": 0.5
+    }
+   }
+  },
+  {
+   "key": "k07",
+   "phase_px": 7,
+   "pose": "vl down / compression (body 1 row low); vr tucked knee passing the planted boot",
+   "file": "rpg-2-star-ocean-the-second_female-south-run-v09_keyframe-07px_unapproved_20261018-133700-983d3023.png",
+   "sha256": "ce16d133cb153061d890275e564d89aa47de93eb6abcb2795ea385c14d9af4cd",
+   "shadow_file": "rpg-2-star-ocean-the-second_female-south-run-v09_keyframe-07px-shadow_unapproved_20261018-133700-520b38ab.png",
+   "shadow_sha256": "82eb65b908632e0ccd993d00501d8c25d96420161ff3d582784b5f04c22fe793",
+   "state": {
+    "bob": 1,
+    "hdy": -1,
+    "sx": -1,
+    "csx": 0,
+    "arms": {
+     "R": "B2",
+     "L": "F2"
+    },
+    "feet": {
+     "vl": {
+      "o": -5,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0
+     },
+     "vr": {
+      "o": -4,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1
+     }
+    }
+   },
+   "near_leg": "vr",
+   "legs": {
+    "vl": {
+     "hip_to_sole_rows": 34,
+     "trouser_rows": 18,
+     "cuff_jog_texels": 0.0
+    },
+    "vr": {
+     "hip_to_sole_rows": 36,
+     "trouser_rows": 24,
+     "cuff_jog_texels": 1.0
+    }
+   }
+  },
+  {
+   "key": "k14",
+   "phase_px": 14,
+   "pose": "vl heel-up push; vr tucked knee in front",
+   "file": "rpg-2-star-ocean-the-second_female-south-run-v09_keyframe-14px_unapproved_20261018-133700-de02092c.png",
+   "sha256": "015ca2e76b79225041811e80855689b91f1d12a863a61711c30d7a01e4c80c3a",
+   "shadow_file": "rpg-2-star-ocean-the-second_female-south-run-v09_keyframe-14px-shadow_unapproved_20261018-133700-89ea19df.png",
+   "shadow_sha256": "4f1526e0dad5e02647daf633f1d47dcd16920ac99302594204916e57521c952f",
+   "state": {
+    "bob": 0,
+    "hdy": 1,
+    "sx": -1,
+    "csx": -1,
+    "arms": {
+     "R": "B2",
+     "L": "F2"
+    },
+    "feet": {
+     "vl": {
+      "o": -12,
+      "lift": 0,
+      "view": "heelup",
+      "kin": 0
+     },
+     "vr": {
+      "o": -1,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1
+     }
+    }
+   },
+   "near_leg": "vr",
+   "legs": {
+    "vl": {
+     "hip_to_sole_rows": 28,
+     "trouser_rows": 14,
+     "cuff_jog_texels": 2.0
+    },
+    "vr": {
+     "hip_to_sole_rows": 40,
+     "trouser_rows": 28,
+     "cuff_jog_texels": 0.0
+    }
+   }
+  },
+  {
+   "key": "k21",
+   "phase_px": 21,
+   "pose": "vl toe-off; vr tucked knee at the front",
+   "file": "rpg-2-star-ocean-the-second_female-south-run-v09_keyframe-21px_unapproved_20261018-133700-f6742c7b.png",
+   "sha256": "09becde1c91db76b61e14d585c0f3fca124f074662dd0f526b9bfd91b07014aa",
+   "shadow_file": "rpg-2-star-ocean-the-second_female-south-run-v09_keyframe-21px-shadow_unapproved_20261018-133700-ad2ebc94.png",
+   "shadow_sha256": "95ab5cde25e0367bdfc7ed4a6608f599ecafdd08b81ebcedd7630b96239d86ae",
+   "state": {
+    "bob": 0,
+    "hdy": 1,
+    "sx": 0,
+    "csx": -1,
+    "arms": {
+     "R": "B2",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": -19,
+      "lift": 1,
+      "view": "toe",
+      "kin": 0
+     },
+     "vr": {
+      "o": 0,
+      "lift": 2,
+      "view": "reach",
+      "kin": 1
+     }
+    }
+   },
+   "near_leg": "vr",
+   "legs": {
+    "vl": {
+     "hip_to_sole_rows": 20,
+     "trouser_rows": 8,
+     "cuff_jog_texels": 3.0
+    },
+    "vr": {
+     "hip_to_sole_rows": 41,
+     "trouser_rows": 28,
+     "cuff_jog_texels": 1.0
+    }
+   }
+  },
+  {
+   "key": "k28",
+   "phase_px": 28,
+   "pose": "flight: vl heel kick (sole under the knee); vr leg opens low toward the floor",
+   "file": "rpg-2-star-ocean-the-second_female-south-run-v09_keyframe-28px_unapproved_20261018-133700-2efdb950.png",
+   "sha256": "9db2032041f2dd9e12f1623a91dde42da7e5ec2479ff55feaaeae72240f07a89",
+   "shadow_file": "rpg-2-star-ocean-the-second_female-south-run-v09_keyframe-28px-shadow_unapproved_20261018-133700-3e915678.png",
+   "shadow_sha256": "cf75fc56d0798266492003d10356ca280425e06af915496d9dff8982b22689c4",
+   "state": {
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "B1",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": -17,
+      "lift": 2,
+      "view": "toe",
+      "kin": 1
+     },
+     "vr": {
+      "o": 1,
+      "lift": 1,
+      "view": "reach",
+      "kin": 1
+     }
+    }
+   },
+   "near_leg": "vr",
+   "legs": {
+    "vl": {
+     "hip_to_sole_rows": 21,
+     "trouser_rows": 17,
+     "cuff_jog_texels": 0.5
+    },
+    "vr": {
+     "hip_to_sole_rows": 43,
+     "trouser_rows": 30,
+     "cuff_jog_texels": 1.0
+    }
+   }
+  },
+  {
+   "key": "k35",
+   "phase_px": 35,
+   "pose": "flight: vl heel kick; vr open leg about to land",
+   "file": "rpg-2-star-ocean-the-second_female-south-run-v09_keyframe-35px_unapproved_20261018-133700-70e80eb3.png",
+   "sha256": "0b4b1e016713d661574a38ad49e36b1a05b58216f9b22bc9c7210ccac25cea7b",
+   "shadow_file": "rpg-2-star-ocean-the-second_female-south-run-v09_keyframe-35px-shadow_unapproved_20261018-133700-ab8c70ea.png",
+   "shadow_sha256": "e6c61ad572c23d38e8d44588d9c5446ccdc2545226979271f2e44cb466506124",
+   "state": {
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": -13,
+      "lift": 2,
+      "view": "toe",
+      "kin": 1
+     },
+     "vr": {
+      "o": 2,
+      "lift": 1,
+      "view": "reach",
+      "kin": 1
+     }
+    }
+   },
+   "near_leg": "vr",
+   "legs": {
+    "vl": {
+     "hip_to_sole_rows": 25,
+     "trouser_rows": 21,
+     "cuff_jog_texels": 1.5
+    },
+    "vr": {
+     "hip_to_sole_rows": 44,
+     "trouser_rows": 31,
+     "cuff_jog_texels": 1.0
+    }
+   }
+  },
+  {
+   "key": "k42",
+   "phase_px": 42,
+   "pose": "vr contact (strike); vl knee forward, shin tucked, passing behind",
+   "file": "rpg-2-star-ocean-the-second_female-south-run-v09_keyframe-42px_unapproved_20261018-133700-66319aaf.png",
+   "sha256": "b407b8941238ed1234d12c1c1fabc013e2fb3e18101fa147bf5b890d9ceeed21",
+   "shadow_file": "rpg-2-star-ocean-the-second_female-south-run-v09_keyframe-42px-shadow_unapproved_20261018-133700-cf413153.png",
+   "shadow_sha256": "c095a27191fa0def09e24b69c6902ce37a1253d81e91dfbb7af825096dd5d1e1",
+   "state": {
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "F1",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": -8,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1
+     },
+     "vr": {
+      "o": 2,
+      "lift": 0,
+      "view": "strike",
+      "kin": 1
+     }
+    }
+   },
+   "near_leg": "vl",
+   "legs": {
+    "vl": {
+     "hip_to_sole_rows": 30,
+     "trouser_rows": 18,
+     "cuff_jog_texels": 1.5
+    },
+    "vr": {
+     "hip_to_sole_rows": 45,
+     "trouser_rows": 31,
+     "cuff_jog_texels": 1.0
+    }
+   }
+  },
+  {
+   "key": "k49",
+   "phase_px": 49,
+   "pose": "vr down / compression; vl tucked knee passing the planted boot",
+   "file": "rpg-2-star-ocean-the-second_female-south-run-v09_keyframe-49px_unapproved_20261018-133700-a73e621f.png",
+   "sha256": "44584c45f81dd0585f07ad9646d56f0dee68b65c5bb7b46cda6bfad25ce485fb",
+   "shadow_file": "rpg-2-star-ocean-the-second_female-south-run-v09_keyframe-49px-shadow_unapproved_20261018-133700-13d0b50d.png",
+   "shadow_sha256": "1bc165cdfc54304453f384126e5df73e0c53afde62690c4260d253e8ca55b98f",
+   "state": {
+    "bob": 1,
+    "hdy": -1,
+    "sx": 1,
+    "csx": 0,
+    "arms": {
+     "R": "F2",
+     "L": "B2"
+    },
+    "feet": {
+     "vl": {
+      "o": -4,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1
+     },
+     "vr": {
+      "o": -5,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0
+     }
+    }
+   },
+   "near_leg": "vl",
+   "legs": {
+    "vl": {
+     "hip_to_sole_rows": 33,
+     "trouser_rows": 21,
+     "cuff_jog_texels": 1.0
+    },
+    "vr": {
+     "hip_to_sole_rows": 37,
+     "trouser_rows": 18,
+     "cuff_jog_texels": 1.5
+    }
+   }
+  },
+  {
+   "key": "k56",
+   "phase_px": 56,
+   "pose": "vr heel-up push; vl tucked knee in front",
+   "file": "rpg-2-star-ocean-the-second_female-south-run-v09_keyframe-56px_unapproved_20261018-133700-6cda9ab4.png",
+   "sha256": "befa26c544afc132c9b34062363e1c3c11c2e3c9f4f210a1c8278c862a8614a6",
+   "shadow_file": "rpg-2-star-ocean-the-second_female-south-run-v09_keyframe-56px-shadow_unapproved_20261018-133700-5c3192b9.png",
+   "shadow_sha256": "3b97620bc2222889f311961ae439522e77b814f4ee2fbf7411e06837318fefbf",
+   "state": {
+    "bob": 0,
+    "hdy": 1,
+    "sx": 1,
+    "csx": 1,
+    "arms": {
+     "R": "F2",
+     "L": "B2"
+    },
+    "feet": {
+     "vl": {
+      "o": -1,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1
+     },
+     "vr": {
+      "o": -12,
+      "lift": 0,
+      "view": "heelup",
+      "kin": 0
+     }
+    }
+   },
+   "near_leg": "vl",
+   "legs": {
+    "vl": {
+     "hip_to_sole_rows": 37,
+     "trouser_rows": 25,
+     "cuff_jog_texels": 0.0
+    },
+    "vr": {
+     "hip_to_sole_rows": 31,
+     "trouser_rows": 17,
+     "cuff_jog_texels": 5.5
+    }
+   }
+  },
+  {
+   "key": "k63",
+   "phase_px": 63,
+   "pose": "vr toe-off; vl tucked knee at the front",
+   "file": "rpg-2-star-ocean-the-second_female-south-run-v09_keyframe-63px_unapproved_20261018-133700-be889874.png",
+   "sha256": "5eeef4ab3d453a23d0ca8974b39dadbe01cc4eedb102f3912c2adf4801a06a67",
+   "shadow_file": "rpg-2-star-ocean-the-second_female-south-run-v09_keyframe-63px-shadow_unapproved_20261018-133700-f220c2ce.png",
+   "shadow_sha256": "3c2f128e48f64759dc95f99cd9d99dc393986444b867fac548b884f02d108806",
+   "state": {
+    "bob": 0,
+    "hdy": 1,
+    "sx": 0,
+    "csx": 1,
+    "arms": {
+     "R": "F2",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": 0,
+      "lift": 2,
+      "view": "reach",
+      "kin": 1
+     },
+     "vr": {
+      "o": -19,
+      "lift": 1,
+      "view": "toe",
+      "kin": 0
+     }
+    }
+   },
+   "near_leg": "vl",
+   "legs": {
+    "vl": {
+     "hip_to_sole_rows": 38,
+     "trouser_rows": 25,
+     "cuff_jog_texels": 1.0
+    },
+    "vr": {
+     "hip_to_sole_rows": 23,
+     "trouser_rows": 11,
+     "cuff_jog_texels": 5.5
+    }
+   }
+  },
+  {
+   "key": "k70",
+   "phase_px": 70,
+   "pose": "flight: vr heel kick (sole under the knee); vl leg opens low toward the floor",
+   "file": "rpg-2-star-ocean-the-second_female-south-run-v09_keyframe-70px_unapproved_20261018-133700-d6b55ad1.png",
+   "sha256": "b9a2115dd83705996c3ddce1b39067714b3e8e180ffb15084aef0dca5025b872",
+   "shadow_file": "rpg-2-star-ocean-the-second_female-south-run-v09_keyframe-70px-shadow_unapproved_20261018-133700-a02b7914.png",
+   "shadow_sha256": "17d51863dde12585c98037e7058e9842529726f4d797c7ee1d99722d3c1d836b",
+   "state": {
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "F1",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": 1,
+      "lift": 1,
+      "view": "reach",
+      "kin": 1
+     },
+     "vr": {
+      "o": -17,
+      "lift": 2,
+      "view": "toe",
+      "kin": 1
+     }
+    }
+   },
+   "near_leg": "vl",
+   "legs": {
+    "vl": {
+     "hip_to_sole_rows": 40,
+     "trouser_rows": 27,
+     "cuff_jog_texels": 1.0
+    },
+    "vr": {
+     "hip_to_sole_rows": 24,
+     "trouser_rows": 20,
+     "cuff_jog_texels": 1.0
+    }
+   }
+  },
+  {
+   "key": "k77",
+   "phase_px": 77,
+   "pose": "flight: vr heel kick; vl open leg about to land",
+   "file": "rpg-2-star-ocean-the-second_female-south-run-v09_keyframe-77px_unapproved_20261018-133700-8f386949.png",
+   "sha256": "b7ad8e4d87dee70d6cce3f3cb1a421e1abb6ff584981cb34cc1faf0ca57301f6",
+   "shadow_file": "rpg-2-star-ocean-the-second_female-south-run-v09_keyframe-77px-shadow_unapproved_20261018-133700-deee6481.png",
+   "shadow_sha256": "7da2d32b7d40a4e355ed61259415b0b6e7d765f3216d33274d911c0be61670ea",
+   "state": {
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": 2,
+      "lift": 1,
+      "view": "reach",
+      "kin": 1
+     },
+     "vr": {
+      "o": -13,
+      "lift": 2,
+      "view": "toe",
+      "kin": 1
+     }
+    }
+   },
+   "near_leg": "vl",
+   "legs": {
+    "vl": {
+     "hip_to_sole_rows": 41,
+     "trouser_rows": 28,
+     "cuff_jog_texels": 1.0
+    },
+    "vr": {
+     "hip_to_sole_rows": 28,
+     "trouser_rows": 24,
+     "cuff_jog_texels": 1.0
+    }
+   }
+  }
+ ],
+ "editable_sources": {
+  "keyframes_pxo": "rpg-2-star-ocean-the-second_female-south-run-v09_keyframes-editable_unapproved_20261018-133700-4b97fb6c.pxo",
+  "keyframes_pxo_sha256": "3bb4ac8b0b8d2723d71640d912da0f2c175349173fd3b306e7131ad34e2c5ace",
+  "keyframes_pxo_layers": [
+   "shadow",
+   "cape",
+   "arm-vl-back",
+   "arm-vr-back",
+   "hips",
+   "leg-far",
+   "leg-near",
+   "coat-skirt",
+   "torso",
+   "head",
+   "hair-lock",
+   "arm-vl",
+   "arm-vr"
+  ],
+  "new_parts_ora": "rpg-2-star-ocean-the-second_female-south-run-v09_new-parts-editable_unapproved_20261018-133700-03db04a6.ora",
+  "new_parts_ora_sha256": "1209af06e8c383df48ced53e8b88d74f7057da26ff877750668c23bf7256bb66"
+ },
+ "metrics": {
+  "reachable_foot_states": 454,
+  "nominal_per_px": [
+   {
+    "phase_px": 0,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "B1",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": 2,
+      "lift": 0,
+      "view": "strike",
+      "kin": 1,
+      "contact": true,
+      "draw": "contact"
+     },
+     "vr": {
+      "o": -8,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     }
+    }
+   },
+   {
+    "phase_px": 1,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "B1",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": 1,
+      "lift": 0,
+      "view": "strike",
+      "kin": 1,
+      "contact": true,
+      "draw": "contact"
+     },
+     "vr": {
+      "o": -8,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     }
+    }
+   },
+   {
+    "phase_px": 2,
+    "bob": 1,
+    "hdy": -1,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "B1",
+     "L": "F2"
+    },
+    "feet": {
+     "vl": {
+      "o": 0,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "draw": "contact"
+     },
+     "vr": {
+      "o": -7,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     }
+    }
+   },
+   {
+    "phase_px": 3,
+    "bob": 1,
+    "hdy": -1,
+    "sx": -1,
+    "csx": 0,
+    "arms": {
+     "R": "B1",
+     "L": "F2"
+    },
+    "feet": {
+     "vl": {
+      "o": -1,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "draw": "contact"
+     },
+     "vr": {
+      "o": -6,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     }
+    }
+   },
+   {
+    "phase_px": 4,
+    "bob": 1,
+    "hdy": -1,
+    "sx": -1,
+    "csx": 0,
+    "arms": {
+     "R": "B1",
+     "L": "F2"
+    },
+    "feet": {
+     "vl": {
+      "o": -2,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "draw": "contact"
+     },
+     "vr": {
+      "o": -6,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     }
+    }
+   },
+   {
+    "phase_px": 5,
+    "bob": 1,
+    "hdy": -1,
+    "sx": -1,
+    "csx": 0,
+    "arms": {
+     "R": "B1",
+     "L": "F2"
+    },
+    "feet": {
+     "vl": {
+      "o": -3,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "draw": "contact"
+     },
+     "vr": {
+      "o": -5,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     }
+    }
+   },
+   {
+    "phase_px": 6,
+    "bob": 1,
+    "hdy": -1,
+    "sx": -1,
+    "csx": 0,
+    "arms": {
+     "R": "B1",
+     "L": "F2"
+    },
+    "feet": {
+     "vl": {
+      "o": -4,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "draw": "contact"
+     },
+     "vr": {
+      "o": -4,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     }
+    }
+   },
+   {
+    "phase_px": 7,
+    "bob": 1,
+    "hdy": -1,
+    "sx": -1,
+    "csx": 0,
+    "arms": {
+     "R": "B2",
+     "L": "F2"
+    },
+    "feet": {
+     "vl": {
+      "o": -5,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "draw": "contact"
+     },
+     "vr": {
+      "o": -4,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     }
+    }
+   },
+   {
+    "phase_px": 8,
+    "bob": 1,
+    "hdy": -1,
+    "sx": -1,
+    "csx": 0,
+    "arms": {
+     "R": "B2",
+     "L": "F2"
+    },
+    "feet": {
+     "vl": {
+      "o": -6,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "draw": "contact"
+     },
+     "vr": {
+      "o": -3,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     }
+    }
+   },
+   {
+    "phase_px": 9,
+    "bob": 1,
+    "hdy": -1,
+    "sx": -1,
+    "csx": 0,
+    "arms": {
+     "R": "B2",
+     "L": "F2"
+    },
+    "feet": {
+     "vl": {
+      "o": -7,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "draw": "contact"
+     },
+     "vr": {
+      "o": -3,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     }
+    }
+   },
+   {
+    "phase_px": 10,
+    "bob": 1,
+    "hdy": -1,
+    "sx": -1,
+    "csx": 0,
+    "arms": {
+     "R": "B2",
+     "L": "F2"
+    },
+    "feet": {
+     "vl": {
+      "o": -8,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "draw": "contact"
+     },
+     "vr": {
+      "o": -2,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     }
+    }
+   },
+   {
+    "phase_px": 11,
+    "bob": 1,
+    "hdy": 0,
+    "sx": -1,
+    "csx": 0,
+    "arms": {
+     "R": "B2",
+     "L": "F2"
+    },
+    "feet": {
+     "vl": {
+      "o": -9,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "draw": "contact"
+     },
+     "vr": {
+      "o": -2,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     }
+    }
+   },
+   {
+    "phase_px": 12,
+    "bob": 1,
+    "hdy": 0,
+    "sx": -1,
+    "csx": -1,
+    "arms": {
+     "R": "B2",
+     "L": "F2"
+    },
+    "feet": {
+     "vl": {
+      "o": -10,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "draw": "contact"
+     },
+     "vr": {
+      "o": -2,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     }
+    }
+   },
+   {
+    "phase_px": 13,
+    "bob": 1,
+    "hdy": 0,
+    "sx": -1,
+    "csx": -1,
+    "arms": {
+     "R": "B2",
+     "L": "F2"
+    },
+    "feet": {
+     "vl": {
+      "o": -11,
+      "lift": 0,
+      "view": "heelup",
+      "kin": 0,
+      "contact": true,
+      "draw": "contact"
+     },
+     "vr": {
+      "o": -2,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     }
+    }
+   },
+   {
+    "phase_px": 14,
+    "bob": 0,
+    "hdy": 1,
+    "sx": -1,
+    "csx": -1,
+    "arms": {
+     "R": "B2",
+     "L": "F2"
+    },
+    "feet": {
+     "vl": {
+      "o": -12,
+      "lift": 0,
+      "view": "heelup",
+      "kin": 0,
+      "contact": true,
+      "draw": "contact"
+     },
+     "vr": {
+      "o": -1,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     }
+    }
+   },
+   {
+    "phase_px": 15,
+    "bob": 0,
+    "hdy": 1,
+    "sx": -1,
+    "csx": -1,
+    "arms": {
+     "R": "B2",
+     "L": "F2"
+    },
+    "feet": {
+     "vl": {
+      "o": -13,
+      "lift": 0,
+      "view": "heelup",
+      "kin": 0,
+      "contact": true,
+      "draw": "contact"
+     },
+     "vr": {
+      "o": -1,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     }
+    }
+   },
+   {
+    "phase_px": 16,
+    "bob": 0,
+    "hdy": 1,
+    "sx": -1,
+    "csx": -1,
+    "arms": {
+     "R": "B2",
+     "L": "F2"
+    },
+    "feet": {
+     "vl": {
+      "o": -14,
+      "lift": 0,
+      "view": "heelup",
+      "kin": 0,
+      "contact": true,
+      "draw": "contact"
+     },
+     "vr": {
+      "o": -1,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     }
+    }
+   },
+   {
+    "phase_px": 17,
+    "bob": 0,
+    "hdy": 1,
+    "sx": 0,
+    "csx": -1,
+    "arms": {
+     "R": "B2",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": -15,
+      "lift": 0,
+      "view": "heelup",
+      "kin": 0,
+      "contact": true,
+      "draw": "contact"
+     },
+     "vr": {
+      "o": -1,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     }
+    }
+   },
+   {
+    "phase_px": 18,
+    "bob": 0,
+    "hdy": 1,
+    "sx": 0,
+    "csx": -1,
+    "arms": {
+     "R": "B2",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": -16,
+      "lift": 0,
+      "view": "toe",
+      "kin": 0,
+      "contact": true,
+      "draw": "contact"
+     },
+     "vr": {
+      "o": 0,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     }
+    }
+   },
+   {
+    "phase_px": 19,
+    "bob": 0,
+    "hdy": 1,
+    "sx": 0,
+    "csx": -1,
+    "arms": {
+     "R": "B2",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": -17,
+      "lift": 0,
+      "view": "toe",
+      "kin": 0,
+      "contact": true,
+      "draw": "contact"
+     },
+     "vr": {
+      "o": 0,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     }
+    }
+   },
+   {
+    "phase_px": 20,
+    "bob": 0,
+    "hdy": 1,
+    "sx": 0,
+    "csx": -1,
+    "arms": {
+     "R": "B2",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": -18,
+      "lift": 0,
+      "view": "toe",
+      "kin": 0,
+      "contact": true,
+      "draw": "contact"
+     },
+     "vr": {
+      "o": 0,
+      "lift": 2,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     }
+    }
+   },
+   {
+    "phase_px": 21,
+    "bob": 0,
+    "hdy": 1,
+    "sx": 0,
+    "csx": -1,
+    "arms": {
+     "R": "B2",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": -19,
+      "lift": 1,
+      "view": "toe",
+      "kin": 0,
+      "contact": false,
+      "draw": "v06-leg"
+     },
+     "vr": {
+      "o": 0,
+      "lift": 2,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     }
+    }
+   },
+   {
+    "phase_px": 22,
+    "bob": 0,
+    "hdy": 1,
+    "sx": 0,
+    "csx": -1,
+    "arms": {
+     "R": "B1",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": -19,
+      "lift": 1,
+      "view": "toe",
+      "kin": 0,
+      "contact": false,
+      "draw": "v06-leg"
+     },
+     "vr": {
+      "o": 0,
+      "lift": 2,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     }
+    }
+   },
+   {
+    "phase_px": 23,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": -1,
+    "arms": {
+     "R": "B1",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": -18,
+      "lift": 1,
+      "view": "toe",
+      "kin": 0,
+      "contact": false,
+      "draw": "v06-leg"
+     },
+     "vr": {
+      "o": 0,
+      "lift": 2,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     }
+    }
+   },
+   {
+    "phase_px": 24,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": -1,
+    "arms": {
+     "R": "B1",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": -18,
+      "lift": 1,
+      "view": "toe",
+      "kin": 0,
+      "contact": false,
+      "draw": "v06-leg"
+     },
+     "vr": {
+      "o": 0,
+      "lift": 2,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     }
+    }
+   },
+   {
+    "phase_px": 25,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": -1,
+    "arms": {
+     "R": "B1",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": -18,
+      "lift": 2,
+      "view": "toe",
+      "kin": 0,
+      "contact": false,
+      "draw": "kick"
+     },
+     "vr": {
+      "o": 0,
+      "lift": 2,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     }
+    }
+   },
+   {
+    "phase_px": 26,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "B1",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": -18,
+      "lift": 2,
+      "view": "toe",
+      "kin": 0,
+      "contact": false,
+      "draw": "kick"
+     },
+     "vr": {
+      "o": 1,
+      "lift": 1,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "draw": "v06-leg"
+     }
+    }
+   },
+   {
+    "phase_px": 27,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "B1",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": -17,
+      "lift": 2,
+      "view": "toe",
+      "kin": 0,
+      "contact": false,
+      "draw": "kick"
+     },
+     "vr": {
+      "o": 1,
+      "lift": 1,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "draw": "v06-leg"
+     }
+    }
+   },
+   {
+    "phase_px": 28,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "B1",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": -17,
+      "lift": 2,
+      "view": "toe",
+      "kin": 1,
+      "contact": false,
+      "draw": "kick"
+     },
+     "vr": {
+      "o": 1,
+      "lift": 1,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "draw": "v06-leg"
+     }
+    }
+   },
+   {
+    "phase_px": 29,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "B1",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": -16,
+      "lift": 2,
+      "view": "toe",
+      "kin": 1,
+      "contact": false,
+      "draw": "kick"
+     },
+     "vr": {
+      "o": 1,
+      "lift": 1,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "draw": "v06-leg"
+     }
+    }
+   },
+   {
+    "phase_px": 30,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "B1",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": -16,
+      "lift": 2,
+      "view": "toe",
+      "kin": 1,
+      "contact": false,
+      "draw": "kick"
+     },
+     "vr": {
+      "o": 1,
+      "lift": 1,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "draw": "v06-leg"
+     }
+    }
+   },
+   {
+    "phase_px": 31,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": -15,
+      "lift": 2,
+      "view": "toe",
+      "kin": 1,
+      "contact": false,
+      "draw": "kick"
+     },
+     "vr": {
+      "o": 1,
+      "lift": 1,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "draw": "v06-leg"
+     }
+    }
+   },
+   {
+    "phase_px": 32,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": -15,
+      "lift": 2,
+      "view": "toe",
+      "kin": 1,
+      "contact": false,
+      "draw": "kick"
+     },
+     "vr": {
+      "o": 1,
+      "lift": 1,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "draw": "v06-leg"
+     }
+    }
+   },
+   {
+    "phase_px": 33,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": -14,
+      "lift": 2,
+      "view": "toe",
+      "kin": 1,
+      "contact": false,
+      "draw": "kick"
+     },
+     "vr": {
+      "o": 1,
+      "lift": 1,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "draw": "v06-leg"
+     }
+    }
+   },
+   {
+    "phase_px": 34,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": -13,
+      "lift": 2,
+      "view": "toe",
+      "kin": 1,
+      "contact": false,
+      "draw": "kick"
+     },
+     "vr": {
+      "o": 1,
+      "lift": 1,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "draw": "v06-leg"
+     }
+    }
+   },
+   {
+    "phase_px": 35,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": -13,
+      "lift": 2,
+      "view": "toe",
+      "kin": 1,
+      "contact": false,
+      "draw": "kick"
+     },
+     "vr": {
+      "o": 2,
+      "lift": 1,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "draw": "v06-leg"
+     }
+    }
+   },
+   {
+    "phase_px": 36,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": -12,
+      "lift": 2,
+      "view": "toe",
+      "kin": 1,
+      "contact": false,
+      "draw": "kick"
+     },
+     "vr": {
+      "o": 2,
+      "lift": 1,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "draw": "v06-leg"
+     }
+    }
+   },
+   {
+    "phase_px": 37,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": -12,
+      "lift": 2,
+      "view": "toe",
+      "kin": 1,
+      "contact": false,
+      "draw": "kick"
+     },
+     "vr": {
+      "o": 2,
+      "lift": 1,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "draw": "v06-leg"
+     }
+    }
+   },
+   {
+    "phase_px": 38,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": -11,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     },
+     "vr": {
+      "o": 2,
+      "lift": 1,
+      "view": "strike",
+      "kin": 1,
+      "contact": false,
+      "draw": "v06-leg"
+     }
+    }
+   },
+   {
+    "phase_px": 39,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": -10,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     },
+     "vr": {
+      "o": 2,
+      "lift": 1,
+      "view": "strike",
+      "kin": 1,
+      "contact": false,
+      "draw": "v06-leg"
+     }
+    }
+   },
+   {
+    "phase_px": 40,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "F1",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": -10,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     },
+     "vr": {
+      "o": 2,
+      "lift": 1,
+      "view": "strike",
+      "kin": 1,
+      "contact": false,
+      "draw": "v06-leg"
+     }
+    }
+   },
+   {
+    "phase_px": 41,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "F1",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": -9,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     },
+     "vr": {
+      "o": 2,
+      "lift": 1,
+      "view": "strike",
+      "kin": 1,
+      "contact": false,
+      "draw": "v06-leg"
+     }
+    }
+   },
+   {
+    "phase_px": 42,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "F1",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": -8,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     },
+     "vr": {
+      "o": 2,
+      "lift": 0,
+      "view": "strike",
+      "kin": 1,
+      "contact": true,
+      "draw": "contact"
+     }
+    }
+   },
+   {
+    "phase_px": 43,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "F1",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": -8,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     },
+     "vr": {
+      "o": 1,
+      "lift": 0,
+      "view": "strike",
+      "kin": 1,
+      "contact": true,
+      "draw": "contact"
+     }
+    }
+   },
+   {
+    "phase_px": 44,
+    "bob": 1,
+    "hdy": -1,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "F1",
+     "L": "B2"
+    },
+    "feet": {
+     "vl": {
+      "o": -7,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     },
+     "vr": {
+      "o": 0,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "draw": "contact"
+     }
+    }
+   },
+   {
+    "phase_px": 45,
+    "bob": 1,
+    "hdy": -1,
+    "sx": 1,
+    "csx": 0,
+    "arms": {
+     "R": "F1",
+     "L": "B2"
+    },
+    "feet": {
+     "vl": {
+      "o": -6,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     },
+     "vr": {
+      "o": -1,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "draw": "contact"
+     }
+    }
+   },
+   {
+    "phase_px": 46,
+    "bob": 1,
+    "hdy": -1,
+    "sx": 1,
+    "csx": 0,
+    "arms": {
+     "R": "F1",
+     "L": "B2"
+    },
+    "feet": {
+     "vl": {
+      "o": -6,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     },
+     "vr": {
+      "o": -2,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "draw": "contact"
+     }
+    }
+   },
+   {
+    "phase_px": 47,
+    "bob": 1,
+    "hdy": -1,
+    "sx": 1,
+    "csx": 0,
+    "arms": {
+     "R": "F1",
+     "L": "B2"
+    },
+    "feet": {
+     "vl": {
+      "o": -5,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     },
+     "vr": {
+      "o": -3,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "draw": "contact"
+     }
+    }
+   },
+   {
+    "phase_px": 48,
+    "bob": 1,
+    "hdy": -1,
+    "sx": 1,
+    "csx": 0,
+    "arms": {
+     "R": "F1",
+     "L": "B2"
+    },
+    "feet": {
+     "vl": {
+      "o": -4,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     },
+     "vr": {
+      "o": -4,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "draw": "contact"
+     }
+    }
+   },
+   {
+    "phase_px": 49,
+    "bob": 1,
+    "hdy": -1,
+    "sx": 1,
+    "csx": 0,
+    "arms": {
+     "R": "F2",
+     "L": "B2"
+    },
+    "feet": {
+     "vl": {
+      "o": -4,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     },
+     "vr": {
+      "o": -5,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "draw": "contact"
+     }
+    }
+   },
+   {
+    "phase_px": 50,
+    "bob": 1,
+    "hdy": -1,
+    "sx": 1,
+    "csx": 0,
+    "arms": {
+     "R": "F2",
+     "L": "B2"
+    },
+    "feet": {
+     "vl": {
+      "o": -3,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     },
+     "vr": {
+      "o": -6,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "draw": "contact"
+     }
+    }
+   },
+   {
+    "phase_px": 51,
+    "bob": 1,
+    "hdy": -1,
+    "sx": 1,
+    "csx": 0,
+    "arms": {
+     "R": "F2",
+     "L": "B2"
+    },
+    "feet": {
+     "vl": {
+      "o": -3,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     },
+     "vr": {
+      "o": -7,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "draw": "contact"
+     }
+    }
+   },
+   {
+    "phase_px": 52,
+    "bob": 1,
+    "hdy": -1,
+    "sx": 1,
+    "csx": 0,
+    "arms": {
+     "R": "F2",
+     "L": "B2"
+    },
+    "feet": {
+     "vl": {
+      "o": -2,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     },
+     "vr": {
+      "o": -8,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "draw": "contact"
+     }
+    }
+   },
+   {
+    "phase_px": 53,
+    "bob": 1,
+    "hdy": 0,
+    "sx": 1,
+    "csx": 0,
+    "arms": {
+     "R": "F2",
+     "L": "B2"
+    },
+    "feet": {
+     "vl": {
+      "o": -2,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     },
+     "vr": {
+      "o": -9,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "draw": "contact"
+     }
+    }
+   },
+   {
+    "phase_px": 54,
+    "bob": 1,
+    "hdy": 0,
+    "sx": 1,
+    "csx": 1,
+    "arms": {
+     "R": "F2",
+     "L": "B2"
+    },
+    "feet": {
+     "vl": {
+      "o": -2,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     },
+     "vr": {
+      "o": -10,
+      "lift": 0,
+      "view": "v8",
+      "kin": 0,
+      "contact": true,
+      "draw": "contact"
+     }
+    }
+   },
+   {
+    "phase_px": 55,
+    "bob": 1,
+    "hdy": 0,
+    "sx": 1,
+    "csx": 1,
+    "arms": {
+     "R": "F2",
+     "L": "B2"
+    },
+    "feet": {
+     "vl": {
+      "o": -2,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     },
+     "vr": {
+      "o": -11,
+      "lift": 0,
+      "view": "heelup",
+      "kin": 0,
+      "contact": true,
+      "draw": "contact"
+     }
+    }
+   },
+   {
+    "phase_px": 56,
+    "bob": 0,
+    "hdy": 1,
+    "sx": 1,
+    "csx": 1,
+    "arms": {
+     "R": "F2",
+     "L": "B2"
+    },
+    "feet": {
+     "vl": {
+      "o": -1,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     },
+     "vr": {
+      "o": -12,
+      "lift": 0,
+      "view": "heelup",
+      "kin": 0,
+      "contact": true,
+      "draw": "contact"
+     }
+    }
+   },
+   {
+    "phase_px": 57,
+    "bob": 0,
+    "hdy": 1,
+    "sx": 1,
+    "csx": 1,
+    "arms": {
+     "R": "F2",
+     "L": "B2"
+    },
+    "feet": {
+     "vl": {
+      "o": -1,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     },
+     "vr": {
+      "o": -13,
+      "lift": 0,
+      "view": "heelup",
+      "kin": 0,
+      "contact": true,
+      "draw": "contact"
+     }
+    }
+   },
+   {
+    "phase_px": 58,
+    "bob": 0,
+    "hdy": 1,
+    "sx": 1,
+    "csx": 1,
+    "arms": {
+     "R": "F2",
+     "L": "B2"
+    },
+    "feet": {
+     "vl": {
+      "o": -1,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     },
+     "vr": {
+      "o": -14,
+      "lift": 0,
+      "view": "heelup",
+      "kin": 0,
+      "contact": true,
+      "draw": "contact"
+     }
+    }
+   },
+   {
+    "phase_px": 59,
+    "bob": 0,
+    "hdy": 1,
+    "sx": 0,
+    "csx": 1,
+    "arms": {
+     "R": "F2",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": -1,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     },
+     "vr": {
+      "o": -15,
+      "lift": 0,
+      "view": "heelup",
+      "kin": 0,
+      "contact": true,
+      "draw": "contact"
+     }
+    }
+   },
+   {
+    "phase_px": 60,
+    "bob": 0,
+    "hdy": 1,
+    "sx": 0,
+    "csx": 1,
+    "arms": {
+     "R": "F2",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": 0,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     },
+     "vr": {
+      "o": -16,
+      "lift": 0,
+      "view": "toe",
+      "kin": 0,
+      "contact": true,
+      "draw": "contact"
+     }
+    }
+   },
+   {
+    "phase_px": 61,
+    "bob": 0,
+    "hdy": 1,
+    "sx": 0,
+    "csx": 1,
+    "arms": {
+     "R": "F2",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": 0,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     },
+     "vr": {
+      "o": -17,
+      "lift": 0,
+      "view": "toe",
+      "kin": 0,
+      "contact": true,
+      "draw": "contact"
+     }
+    }
+   },
+   {
+    "phase_px": 62,
+    "bob": 0,
+    "hdy": 1,
+    "sx": 0,
+    "csx": 1,
+    "arms": {
+     "R": "F2",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": 0,
+      "lift": 2,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     },
+     "vr": {
+      "o": -18,
+      "lift": 0,
+      "view": "toe",
+      "kin": 0,
+      "contact": true,
+      "draw": "contact"
+     }
+    }
+   },
+   {
+    "phase_px": 63,
+    "bob": 0,
+    "hdy": 1,
+    "sx": 0,
+    "csx": 1,
+    "arms": {
+     "R": "F2",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": 0,
+      "lift": 2,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     },
+     "vr": {
+      "o": -19,
+      "lift": 1,
+      "view": "toe",
+      "kin": 0,
+      "contact": false,
+      "draw": "v06-leg"
+     }
+    }
+   },
+   {
+    "phase_px": 64,
+    "bob": 0,
+    "hdy": 1,
+    "sx": 0,
+    "csx": 1,
+    "arms": {
+     "R": "F1",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": 0,
+      "lift": 2,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     },
+     "vr": {
+      "o": -19,
+      "lift": 1,
+      "view": "toe",
+      "kin": 0,
+      "contact": false,
+      "draw": "v06-leg"
+     }
+    }
+   },
+   {
+    "phase_px": 65,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 1,
+    "arms": {
+     "R": "F1",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": 0,
+      "lift": 2,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     },
+     "vr": {
+      "o": -18,
+      "lift": 1,
+      "view": "toe",
+      "kin": 0,
+      "contact": false,
+      "draw": "v06-leg"
+     }
+    }
+   },
+   {
+    "phase_px": 66,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 1,
+    "arms": {
+     "R": "F1",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": 0,
+      "lift": 2,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     },
+     "vr": {
+      "o": -18,
+      "lift": 1,
+      "view": "toe",
+      "kin": 0,
+      "contact": false,
+      "draw": "v06-leg"
+     }
+    }
+   },
+   {
+    "phase_px": 67,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 1,
+    "arms": {
+     "R": "F1",
+     "L": "B1"
+    },
+    "feet": {
+     "vl": {
+      "o": 0,
+      "lift": 2,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     },
+     "vr": {
+      "o": -18,
+      "lift": 2,
+      "view": "toe",
+      "kin": 0,
+      "contact": false,
+      "draw": "kick"
+     }
+    }
+   },
+   {
+    "phase_px": 68,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "F1",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": 1,
+      "lift": 1,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "draw": "v06-leg"
+     },
+     "vr": {
+      "o": -18,
+      "lift": 2,
+      "view": "toe",
+      "kin": 0,
+      "contact": false,
+      "draw": "kick"
+     }
+    }
+   },
+   {
+    "phase_px": 69,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "F1",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": 1,
+      "lift": 1,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "draw": "v06-leg"
+     },
+     "vr": {
+      "o": -17,
+      "lift": 2,
+      "view": "toe",
+      "kin": 0,
+      "contact": false,
+      "draw": "kick"
+     }
+    }
+   },
+   {
+    "phase_px": 70,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "F1",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": 1,
+      "lift": 1,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "draw": "v06-leg"
+     },
+     "vr": {
+      "o": -17,
+      "lift": 2,
+      "view": "toe",
+      "kin": 1,
+      "contact": false,
+      "draw": "kick"
+     }
+    }
+   },
+   {
+    "phase_px": 71,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "F1",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": 1,
+      "lift": 1,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "draw": "v06-leg"
+     },
+     "vr": {
+      "o": -16,
+      "lift": 2,
+      "view": "toe",
+      "kin": 1,
+      "contact": false,
+      "draw": "kick"
+     }
+    }
+   },
+   {
+    "phase_px": 72,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "F1",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": 1,
+      "lift": 1,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "draw": "v06-leg"
+     },
+     "vr": {
+      "o": -16,
+      "lift": 2,
+      "view": "toe",
+      "kin": 1,
+      "contact": false,
+      "draw": "kick"
+     }
+    }
+   },
+   {
+    "phase_px": 73,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": 1,
+      "lift": 1,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "draw": "v06-leg"
+     },
+     "vr": {
+      "o": -15,
+      "lift": 2,
+      "view": "toe",
+      "kin": 1,
+      "contact": false,
+      "draw": "kick"
+     }
+    }
+   },
+   {
+    "phase_px": 74,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": 1,
+      "lift": 1,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "draw": "v06-leg"
+     },
+     "vr": {
+      "o": -15,
+      "lift": 2,
+      "view": "toe",
+      "kin": 1,
+      "contact": false,
+      "draw": "kick"
+     }
+    }
+   },
+   {
+    "phase_px": 75,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": 1,
+      "lift": 1,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "draw": "v06-leg"
+     },
+     "vr": {
+      "o": -14,
+      "lift": 2,
+      "view": "toe",
+      "kin": 1,
+      "contact": false,
+      "draw": "kick"
+     }
+    }
+   },
+   {
+    "phase_px": 76,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "N"
+    },
+    "feet": {
+     "vl": {
+      "o": 1,
+      "lift": 1,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "draw": "v06-leg"
+     },
+     "vr": {
+      "o": -13,
+      "lift": 2,
+      "view": "toe",
+      "kin": 1,
+      "contact": false,
+      "draw": "kick"
+     }
+    }
+   },
+   {
+    "phase_px": 77,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": 2,
+      "lift": 1,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "draw": "v06-leg"
+     },
+     "vr": {
+      "o": -13,
+      "lift": 2,
+      "view": "toe",
+      "kin": 1,
+      "contact": false,
+      "draw": "kick"
+     }
+    }
+   },
+   {
+    "phase_px": 78,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": 2,
+      "lift": 1,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "draw": "v06-leg"
+     },
+     "vr": {
+      "o": -12,
+      "lift": 2,
+      "view": "toe",
+      "kin": 1,
+      "contact": false,
+      "draw": "kick"
+     }
+    }
+   },
+   {
+    "phase_px": 79,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": 2,
+      "lift": 1,
+      "view": "reach",
+      "kin": 1,
+      "contact": false,
+      "draw": "v06-leg"
+     },
+     "vr": {
+      "o": -12,
+      "lift": 2,
+      "view": "toe",
+      "kin": 1,
+      "contact": false,
+      "draw": "kick"
+     }
+    }
+   },
+   {
+    "phase_px": 80,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": 2,
+      "lift": 1,
+      "view": "strike",
+      "kin": 1,
+      "contact": false,
+      "draw": "v06-leg"
+     },
+     "vr": {
+      "o": -11,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     }
+    }
+   },
+   {
+    "phase_px": 81,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "N",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": 2,
+      "lift": 1,
+      "view": "strike",
+      "kin": 1,
+      "contact": false,
+      "draw": "v06-leg"
+     },
+     "vr": {
+      "o": -10,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     }
+    }
+   },
+   {
+    "phase_px": 82,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "B1",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": 2,
+      "lift": 1,
+      "view": "strike",
+      "kin": 1,
+      "contact": false,
+      "draw": "v06-leg"
+     },
+     "vr": {
+      "o": -10,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     }
+    }
+   },
+   {
+    "phase_px": 83,
+    "bob": 0,
+    "hdy": 0,
+    "sx": 0,
+    "csx": 0,
+    "arms": {
+     "R": "B1",
+     "L": "F1"
+    },
+    "feet": {
+     "vl": {
+      "o": 2,
+      "lift": 1,
+      "view": "strike",
+      "kin": 1,
+      "contact": false,
+      "draw": "v06-leg"
+     },
+     "vr": {
+      "o": -9,
+      "lift": 2,
+      "view": "hang",
+      "kin": 1,
+      "contact": false,
+      "draw": "tuck"
+     }
+    }
+   }
+  ]
+ }
+}
