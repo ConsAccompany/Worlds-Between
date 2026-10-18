@@ -4,6 +4,8 @@
 // must be committed with the exact recorded blob at the recorded commit (none staged), and no counter or the 40.8% meter may move.
 // #10 is the one runtime item: the global map v03 art the live map draws, unapproved, a technical candidate with an inherited failing check.
 // #11 is the Chicago State/Lake v03r1 zh arrival: opt-in only (off by default), partly generated underpainting, two directories deep.
+// 2026-10-17 stale-text correction: #3 City Hall Park v04 is a creator-rejected historical comparison, #7/#8 v11 was reviewed and
+// rejected for more static polish, #1 names run v04 as the latest creator-reviewed locomotion; no item removed, pinned fields unchanged.
 // Starts the real v05 panel server on a spare local port, then runs the served bible.js in a VM with a minimal DOM stub.
 // Read-only: no project file is written. Run from the repository root: node tests/game-bible-review-queue/<this file>
 const assert = require('node:assert/strict');
@@ -108,6 +110,26 @@ async function renderProduction(base) {
   }
   assert.ok(/^Unapproved static pilot/.test(v11[0].caption.en) && /only the 0.65 proportion is approved/.test(v11[0].caption.en) && /Not a complete character sprite; no animation/.test(v11[0].caption.en), 'v11 caption states its limits');
   assert.equal(git('grep', '-l', 'unapproved-v11_20261017-023937-873fe1e6', 'HEAD', '--', 'game/scripts', 'game/scenes').stdout.trim(), '', 'no runtime script or scene references the v11 sprite');
+  for (const item of v11) {
+    assert.deepEqual([item.creatorReview.date, item.creatorReview.outcome, item.creatorReview.creatorAnswer], ['2026-10-17', 'rejected-more-static-polish', '继续精修静止帧'], 'v11 creator review recorded: ' + item.order);
+    assert.ok(fs.existsSync(rel(item.creatorReview.evidence)) && /rejected for more static polish/.test(item.badge.en) && /继续精修静止帧/.test(item.badge.zh), 'v11 review evidence and badge: ' + item.order);
+    assert.ok(/继续精修静止帧/.test(item.caption.zh) && /more static polish/.test(item.caption.en) && !/for creator feedback only/.test(item.caption.en), 'v11 caption no longer says it awaits feedback: ' + item.order);
+  }
+  // Stale-text correction of 2026-10-17: #3 City Hall Park v04 rejected (historical comparison), #1 names the latest reviewed run.
+  const chp4 = queue.items[2];
+  assert.equal(chp4.syncState, 'committed-at-15d153b');
+  assert.deepEqual([chp4.creatorReview.date, chp4.creatorReview.outcome, chp4.creatorReview.useNow], ['2026-10-16', 'rejected', 'historical-comparison-only']);
+  assert.ok(tracked(chp4.creatorReview.evidence) && /Withdraw v04 from final scene-quality review/.test(fs.readFileSync(rel(chp4.creatorReview.evidence), 'utf8')), 'v04 rejection evidence is the tracked style-alignment note');
+  assert.ok(/v04/.test(chp4.label.en) && /rejected, historical comparison/.test(chp4.label.en) && /已否决/.test(chp4.label.zh), 'v04 label says rejected');
+  assert.ok(/^Rejected historical comparison/.test(chp4.caption.en) && /^已否决的历史对照/.test(chp4.caption.zh) && !/still under review/.test(chp4.caption.en), 'v04 caption no longer says under review');
+  const motion = queue.items[0].motionStatus;
+  assert.deepEqual([motion.creatorChoice, motion.outcome], ['继续打磨跑动或停步', 'revision-requested']);
+  assert.ok(/south run v04/.test(motion.latestCreatorReviewed) && fs.existsSync(rel(motion.evidence)) && fs.readFileSync(rel(motion.evidence), 'utf8').includes('继续打磨跑动或停步'), 'run v04 creator choice evidence');
+  assert.ok(/south run v04/.test(queue.items[0].caption.en) && /smoother run and stop/.test(queue.items[0].caption.en) && /跑步 v04/.test(queue.items[0].caption.zh), '#1 caption names the latest reviewed run');
+  const correction = (queue.corrections || []).find(c => c.date === '2026-10-17');
+  assert.ok(correction && fs.existsSync(rel(correction.qa)) && /No item was removed/.test(correction.en), 'correction record with QA note');
+  assert.deepEqual(correction.items, [1, 3, 7, 8, 10]);
+  pass('stale-text correction: #3 v04 rejected historical comparison (tracked evidence), #7/#8 v11 reviewed and rejected for more static polish, #1 names run v04 (smoother run/stop requested), correction record and QA note present');
   // #9: City Hall Park v06 zh entry. Generated source (about 80% of visible pixels from an AI-generated reference), opt-in only
   // and off by default; the capture, editable source and generated reference are tracked at 1548c9e and still say unapproved.
   const chp6 = queue.items[8];
@@ -154,7 +176,12 @@ async function renderProduction(base) {
   }
   const map3Manifest = JSON.parse(fs.readFileSync(rel(map3.captureManifest), 'utf8'));
   assert.equal(map3Manifest.captures.find(c => c.file === path.posix.basename(map3.file))?.sha256, map3.sha256, 'capture manifest pins the queue sha256');
-  assert.ok(fs.readFileSync(rel('game/scripts/world_map_data.gd'), 'utf8').includes('us-east-relief-layer_m2-map-art-native-v03_20261017-175314-e8b8f8af.json'), 'the live map reads the v03 relief');
+  // The live map reads the v03 relief at ec8b8f5, or the later UNAPPROVED v03r2 relief once that pass is synced (laterLocalPasses).
+  const mapData = fs.readFileSync(rel('game/scripts/world_map_data.gd'), 'utf8');
+  const v03r2Relief = 'game/data/world-map/rpg-2-star-ocean-the-second_earth-map_us-east-relief-layer_m2-map-art-native-v03r2_20261017-224631-9875b9e2.json';
+  assert.ok(mapData.includes('us-east-relief-layer_m2-map-art-native-v03_20261017-175314-e8b8f8af.json')
+    || (mapData.includes(path.posix.basename(v03r2Relief)) && fs.existsSync(rel(v03r2Relief))), 'the live map reads the v03 relief or the v03r2 relief that supersedes it');
+  assert.ok(map3.laterLocalPasses.qa.every(file => fs.existsSync(rel(file))) && /Neither pass is accepted/.test(map3.laterLocalPasses.note), 'later v03r1/v03r2 passes noted, unaccepted');
   pass('#10: global map v03 Chicago flight card zh, technical candidate, runtime map art but unapproved/unaccepted, raw URL pinned to ec8b8f5, capture + manifest + QA + map scripts + v03 relief tracked at ec8b8f5, inherited background-visual-check failure stated');
   // #11: Chicago State/Lake v03r1 zh arrival. Opt-in only (off by default: the Loop stays v02), about 20% of visible pixels from a
   // generated-reference underpainting; capture, editable source, generated reference and the opt-in wiring are tracked at cdc5865.

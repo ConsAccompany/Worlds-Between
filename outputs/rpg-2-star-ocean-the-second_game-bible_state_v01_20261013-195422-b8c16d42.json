@@ -4,7 +4,7 @@
   "title": "世界之间",
   "englishTitle": "Worlds Between",
   "edition": "设计基线 v0.2 · 2026-10-15 创作者决定",
-  "updatedAt": "2026-10-17T21:10:48Z",
+  "updatedAt": "2026-10-18T03:16:12Z",
   "note": "规则以玩家确认的设计稿为基线，并已并入 2026-10-15 创作者决定；人物姓名与外观是待审提案，具体剧情留待后续设计。",
   "pitch": "从地下社区走出的旅人，以好奇心探索多元文明，招募伙伴，并成为不同世界认知差异的桥梁。",
   "pillars": [
@@ -4318,11 +4318,19 @@
             "tone": "good"
           },
           "caption": {
-            "zh": "只批准静态帧与显示比例；动作与四方向仍未完成。",
-            "en": "Only the static frame and display scale are approved; motion and the four-direction set remain open."
+            "zh": "只批准静态帧与显示比例；动作与四方向仍未完成。最近一次经创作者审看的移动动作是朝南跑步 v04：创作者选择“继续打磨跑动或停步”，要求跑动与停步更顺滑，v04 未采用；之后本机的 v05/v06 测试候选尚未经创作者审看。",
+            "en": "Only the static frame and display scale are approved; motion and the four-direction set remain open. The latest creator-reviewed locomotion is the south run v04: the creator chose \"继续打磨跑动或停步\" (keep polishing the run or the stop), so it needs a smoother run and stop and is not adopted; the later local v05/v06 test-only candidates have not been creator-reviewed."
           },
           "qa": "docs/qa/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v8_visual-qa-note_m8-v08_20261015-021600-c1694107.md",
-          "sha256": "0b8e67ac75539fdac46e7843687d660d0dfa98697f7bf229b0079437351d9e65"
+          "sha256": "0b8e67ac75539fdac46e7843687d660d0dfa98697f7bf229b0079437351d9e65",
+          "motionStatus": {
+            "latestCreatorReviewed": "female south run v04 (test-only, nonruntime)",
+            "creatorChoice": "继续打磨跑动或停步",
+            "outcome": "revision-requested",
+            "meaning": "Smoother run and stop needed: shorter forward reach, less airborne-looking interval, boot lands before the body settles. v04 is not accepted and is not propagated.",
+            "laterCandidates": "v05 (2cef959d) and v06 (c233b100) are local test-only candidates; neither has been creator-reviewed.",
+            "evidence": "docs/qa/rpg-2-star-ocean-the-second_protagonist-female_south-run-v04-native-godot-stills-codex-visual-review_unapproved-v01_20261016-222301-2a46573f.md"
+          }
         },
         {
           "order": 2,
@@ -4352,8 +4360,8 @@
         {
           "order": 3,
           "label": {
-            "zh": "纽约市政厅公园 v04",
-            "en": "NYC City Hall Park v04"
+            "zh": "纽约市政厅公园 v04 · 已否决（历史对照）",
+            "en": "NYC City Hall Park v04 (rejected, historical comparison)"
           },
           "kind": "actual-godot-capture",
           "file": "outputs/nyc-chp-v04_20261016-172144-eb092a52/rpg-2-star-ocean-the-second_nyc-city-hall-park_godot-render-640x360-axis-test-npc_unapproved-v04_20261016-172144-eb092a52.png",
@@ -4363,17 +4371,24 @@
           "runtimeIntegrated": false,
           "artAccepted": false,
           "badge": {
-            "zh": "未批准 · 未接入运行时",
-            "en": "Unapproved · nonruntime",
+            "zh": "未批准 · 未接入运行时 · 已否决（历史对照）",
+            "en": "Unapproved · nonruntime · rejected (historical comparison)",
             "tone": "warn"
           },
           "caption": {
-            "zh": "未批准的真实 Godot 场景；可通行，景深与材质层次仍在审查。行人只在测试叠加层中。",
-            "en": "Unapproved actual Godot scene; navigation works, visual depth and material hierarchy are still under review. Visitors appear only in a test-only overlay."
+            "zh": "已否决的历史对照：2026-10-16 创作者认为 v04 与其他科技区场景的视觉语言不一致，已撤出场景质量审查。保留这张真实 Godot 截图只为对比，文件与哈希不变；当时可通行，行人只在测试叠加层中。之后的市政厅公园候选（v06 即 #9，默认关闭）另行审查，均未批准。",
+            "en": "Rejected historical comparison: on 2026-10-16 the creator found v04 unlike the other science-region scenes, and it was withdrawn from scene-quality review. This actual Godot capture is kept only for comparison, with its file and hash unchanged; navigation worked, and visitors appeared only in a test-only overlay. Later City Hall Park candidates (v06 is #9, off by default) are reviewed separately and are all unapproved."
           },
           "qa": "docs/qa/rpg-2-star-ocean-the-second_nyc-city-hall-park_walkable-pilot-640x360_qa-note_unapproved-v04_20261016-172144-eb092a52.md",
           "sha256": "9f61420cc4c40d214056f9a2b8a1dac38cc981f82971d6156237a7b16b43a42a",
-          "gitBlob": "9848c949d99361c2ea0aed33318283493ed1911e"
+          "gitBlob": "9848c949d99361c2ea0aed33318283493ed1911e",
+          "creatorReview": {
+            "date": "2026-10-16",
+            "outcome": "rejected",
+            "useNow": "historical-comparison-only",
+            "reason": "Creator feedback: v04 looks unlike the other science-region scenes; withdrawn from final scene-quality review.",
+            "evidence": "docs/qa/rpg-2-star-ocean-the-second_nyc-city-hall-park_style-alignment-visual-direction_unapproved-v01_20261016-225800-2a4e7c91.md"
+          }
         },
         {
           "order": 4,
@@ -4465,8 +4480,8 @@
           "runtimeIntegrated": false,
           "artAccepted": false,
           "badge": {
-            "zh": "未批准 · 未接入运行时",
-            "en": "Unapproved · nonruntime",
+            "zh": "未批准 · 未接入运行时 · 已审看，要求继续精修静止帧",
+            "en": "Unapproved · nonruntime · reviewed, rejected for more static polish",
             "tone": "warn"
           },
           "qa": "docs/qa/rpg-2-star-ocean-the-second_protagonist-female_battle-static-v11-identity-density-pass_qa-note_unapproved-v01_20261017-023937-6f0c3b18.md",
@@ -4482,8 +4497,15 @@
           "gitBlob": "a3ae3e403eacca20263fbfe80047282281a176ea",
           "sha256": "c9e529a9b0eff29f1887530852e7d7e2f8820bd41f7066021b425acc7c9d0357",
           "caption": {
-            "zh": "未批准静态试作，仅供创作者反馈；只有 0.65 比例获批准。下半身已去掉橙色，脸、手和头发更细，但 1× 下仍比三名队友显得瘦小；不是完整角色精灵，不开始动画。",
-            "en": "Unapproved static pilot shown for creator feedback only; only the 0.65 proportion is approved. Orange is gone from the lower body and the face, hand and hair are denser, but at 1x she still reads slimmer than the three companions. Not a complete character sprite; no animation starts from this."
+            "zh": "未批准静态试作；只有 0.65 比例获批准。创作者已于 2026-10-17 审看，回答“继续精修静止帧”，v11 未采用，现作对照记录。下半身已去掉橙色，脸、手和头发更细，但 1× 下仍比三名队友显得瘦小；后续 v12 为本机另一候选，同样未批准。不是完整角色精灵，不开始动画。",
+            "en": "Unapproved static pilot; only the 0.65 proportion is approved. The creator reviewed it on 2026-10-17 and answered \"继续精修静止帧\" (polish the still further), so v11 was rejected for more static polish and is now a comparison record. Orange is gone from the lower body and the face, hand and hair are denser, but at 1x she still reads slimmer than the three companions; the follow-up v12 is a separate local candidate, also unapproved. Not a complete character sprite; no animation starts from this."
+          },
+          "creatorReview": {
+            "date": "2026-10-17",
+            "outcome": "rejected-more-static-polish",
+            "creatorAnswer": "继续精修静止帧",
+            "meaning": "Reviewed on the bright archive and darker outskirts captures and not adopted as the right-facing battle idle baseline; another static revision was requested. The 0.65 battle display proportion stays approved. The follow-up v12 is a separate local candidate, also unapproved and nonruntime.",
+            "evidence": "docs/qa/rpg-2-star-ocean-the-second_protagonist-female_battle-static-v11-creator-feedback-and-v12-visual-target_unapproved-v01_20261017-193755-c7a93e12.md"
           }
         },
         {
@@ -4499,8 +4521,8 @@
           "runtimeIntegrated": false,
           "artAccepted": false,
           "badge": {
-            "zh": "未批准 · 未接入运行时",
-            "en": "Unapproved · nonruntime",
+            "zh": "未批准 · 未接入运行时 · 已审看，要求继续精修静止帧",
+            "en": "Unapproved · nonruntime · reviewed, rejected for more static polish",
             "tone": "warn"
           },
           "qa": "docs/qa/rpg-2-star-ocean-the-second_protagonist-female_battle-static-v11-identity-density-pass_qa-note_unapproved-v01_20261017-023937-6f0c3b18.md",
@@ -4516,8 +4538,15 @@
           "gitBlob": "054353fff57c8738cff40255ec6495c484c20971",
           "sha256": "6e4a5f4227774c289f752f0490cd4ab6b9b1d1fc887c1c86bee877b3a8b65d9a",
           "caption": {
-            "zh": "同一 v11 在最暗的城外地面上（仍是中等明度，不是夜景）。靴底在接触阴影里有三分之一像素与地面明度接近；游戏本身没有使用 v11。",
-            "en": "The same v11 on the darkest arena floor, outskirts (still mid-value, not a night scene). A third of the boot pixels sit within 20 L of the ground in the contact shadow; the game itself does not use v11."
+            "zh": "同一 v11 在最暗的城外地面上（仍是中等明度，不是夜景）。靴底在接触阴影里有三分之一像素与地面明度接近；创作者审看后要求继续精修静止帧，v11 未采用；游戏本身没有使用 v11。",
+            "en": "The same v11 on the darkest arena floor, outskirts (still mid-value, not a night scene). A third of the boot pixels sit within 20 L of the ground in the contact shadow; the creator reviewed it and asked for more static polish, so v11 is not adopted; the game itself does not use v11."
+          },
+          "creatorReview": {
+            "date": "2026-10-17",
+            "outcome": "rejected-more-static-polish",
+            "creatorAnswer": "继续精修静止帧",
+            "meaning": "Reviewed on the bright archive and darker outskirts captures and not adopted as the right-facing battle idle baseline; another static revision was requested. The 0.65 battle display proportion stays approved. The follow-up v12 is a separate local candidate, also unapproved and nonruntime.",
+            "evidence": "docs/qa/rpg-2-star-ocean-the-second_protagonist-female_battle-static-v11-creator-feedback-and-v12-visual-target_unapproved-v01_20261017-193755-c7a93e12.md"
           }
         },
         {
@@ -4600,6 +4629,13 @@
           "caption": {
             "zh": "未批准的技术候选：真实 Godot 640×360 截图，v03 已是游戏里实际显示的地图美术，但未验收。卡片内的路线条同时显示纽约与芝加哥两端，陆地、湖泊与海岸的明度层次比 v02 清楚。仍有缺陷：路线条小且无交通方式文字，卡片很满，放大后华盛顿卡的标签会重叠，较大的地名牌遮住更多地图。继承的 background-visual-check 仍失败（button geometry scifi.city），用 4b06aef 的地图脚本同样失败。",
             "en": "Unapproved technical candidate: actual Godot 640x360 capture; v03 is the map art the game now draws, but it is not accepted. The route strip inside the card shows both the New York and Chicago ends, and land, lake and coast values separate better than in v02. Open defects: the strip is small and names no mode, the card is tight, the zoomed Washington card has label overlaps, and the larger plates cover more map. The inherited background-visual-check still fails (button geometry scifi.city), identically with the 4b06aef map scripts."
+          },
+          "laterLocalPasses": {
+            "note": "The working tree carries two later UNAPPROVED passes over v03: v03r1 (5ef3676e, zoom label clamp) and v03r2 (9875b9e2, bounded visual gate; world_map_data.gd reads the v03r2 relief). Until they are committed, ec8b8f5 draws v03. If they are committed, the live map draws v03r2 art and this capture stays the committed v03 record. Neither pass is accepted; M2 stays 10/12.",
+            "qa": [
+              "docs/qa/rpg-2-star-ocean-the-second_global-map_zoom-label-clamp_qa-note_unapproved-v03r1_20261017-184737-5ef3676e.md",
+              "docs/qa/rpg-2-star-ocean-the-second_global-map_v03r2-bounded-visual-gate_qa-note_unapproved-v03r2_20261017-224631-9875b9e2.md"
+            ]
           }
         },
         {
@@ -4711,7 +4747,22 @@
         "qa": "docs/qa/rpg-2-star-ocean-the-second_game-bible_stream-c2-scene-gate-blocked-and-three-capture-git-proposal_qa-note_unapproved-v03_20261016-212130-8cf8add8.md",
         "note": "Exactly three actual Godot PNGs were added by explicit path, with no other file from their capture folders, and are in pushed commit 15d153b (raw URL at the full SHA checked). They are labelled unapproved, and no art, scene or map is accepted.",
         "syncQa": "docs/qa/rpg-2-star-ocean-the-second_game-bible_stream-c5-review-queue-sync-metadata-committed-at-15d153b_qa-note_unapproved-v01_20261016-221500-c5a1e7d3.md"
-      }
+      },
+      "corrections": [
+        {
+          "date": "2026-10-17",
+          "qa": "docs/qa/rpg-2-star-ocean-the-second_game-bible_three-candidate-closeouts-and-review-queue-stale-text-correction_qa-note_unapproved-v01_20261017-231612-098ce0ff.md",
+          "items": [
+            1,
+            3,
+            7,
+            8,
+            10
+          ],
+          "zh": "旧文案校正：#3 市政厅公园 v04 已被创作者否决，只作历史对照；#7/#8 战斗女主 v11 已审看，创作者要求继续精修静止帧；#1 写明最近经审看的跑步 v04 需更顺滑的跑动与停步；#10 注明本机的 v03r1/v03r2 后续版本。没有删除任何条目，文件路径、git blob、sha256 与同步状态不变，不批准任何画面。",
+          "en": "Stale-text correction: #3 City Hall Park v04 is a creator-rejected historical comparison; #7/#8 battle heroine v11 was reviewed and rejected for more static polish; #1 names the latest creator-reviewed run v04, which needs a smoother run and stop; #10 notes the later local v03r1/v03r2 passes. No item was removed; file paths, git blobs, sha256 and sync states are unchanged, and nothing is approved."
+        }
+      ]
     },
     "sceneQualityDenominatorReview": {
       "asOf": "2026-10-16",

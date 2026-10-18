@@ -10,12 +10,12 @@ extends RefCounted
 const REGISTRY_PATH := "res://data/world-map/rpg-2-star-ocean-the-second_earth-map_place-registry_m2-us-science-v02_20261015-175011-eeaa6baa.json"
 const GEODATA_PATH := "res://data/world-map/rpg-2-star-ocean-the-second_earth-map_runtime-geodata_m2-us-science-v02_20261015-175011-944d9635.json"
 
-# Relief, coastal-shelf and shore layers (unapproved map art v03, 2026-10-17): real elevation and depth classes on lon/lat
+# Relief, coastal-shelf and shore layers (unapproved map art v03r2, 2026-10-17): real elevation and depth classes on lon/lat
 # grids masked by the same land and lake rings, one layer per regional view (and one for the route strip on the card),
 # each baked so one cell is one screen pixel at that view's default zoom. Baked by
-# tools/rpg-2-star-ocean-the-second_global-map_us-east-relief-bake_m2-map-art-native-v03_20261017-175314-e8b8f8af.py
-# (v01 7bf04753 and v02 dacc5102 stay on disk as the records it superseded; nothing reads them at run time).
-const RELIEF_PATH := "res://data/world-map/rpg-2-star-ocean-the-second_earth-map_us-east-relief-layer_m2-map-art-native-v03_20261017-175314-e8b8f8af.json"
+# tools/rpg-2-star-ocean-the-second_global-map_us-east-relief-bake_m2-map-art-native-v03r2_20261017-224631-9875b9e2.py
+# (v01 7bf04753, v02 dacc5102 and v03 e8b8f8af stay on disk as the records it superseded; nothing reads them at run time).
+const RELIEF_PATH := "res://data/world-map/rpg-2-star-ocean-the-second_earth-map_us-east-relief-layer_m2-map-art-native-v03r2_20261017-224631-9875b9e2.json"
 # Globe sphere tints (unapproved map art, 2026-10-17): one restrained land colour per Earth civilization sphere,
 # on a lon/lat grid, with each global land ring's sphere (or -1 when several share it). Baked from Natural Earth
 # countries by tools/rpg-2-star-ocean-the-second_global-map_globe-sphere-tint-bake_m2-map-art-native-v01r1_20261017-022144-f9b0d28b.py.

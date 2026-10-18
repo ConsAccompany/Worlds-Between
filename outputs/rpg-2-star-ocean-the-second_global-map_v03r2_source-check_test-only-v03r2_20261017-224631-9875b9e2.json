@@ -1,0 +1,294 @@
+{
+ "tag": "v03r2_20261017-224631-9875b9e2",
+ "status": "UNAPPROVED test-only source check; map-art gate open; no counter changed",
+ "checks_total": 40,
+ "failures": [],
+ "checks": [
+  {
+   "ok": true,
+   "check": "v03r2 relief JSON: schema v2, unapproved candidate"
+  },
+  {
+   "ok": true,
+   "check": "v03r2 relief JSON supersedes the v03 layer"
+  },
+  {
+   "ok": true,
+   "check": "palette keeps v03's 41 roles in the same order"
+  },
+  {
+   "ok": true,
+   "check": "38 roles re-valued, all land bands or sea shelf steps (shore rims and lake unchanged)"
+  },
+  {
+   "ok": true,
+   "check": "flat land #7a8e65 equals scifi_world_map.gd COLOR_LAND #7a8e65"
+  },
+  {
+   "ok": true,
+   "check": "flat lake #225873 equals scifi_world_map.gd COLOR_LAKE #225873"
+  },
+  {
+   "ok": true,
+   "check": "flat ocean #0d2632 equals scifi_world_map.gd COLOR_OCEAN #0d2632"
+  },
+  {
+   "ok": true,
+   "check": "land_low_color equals COLOR_LAND"
+  },
+  {
+   "ok": true,
+   "check": "us_northeast PNG matches its recorded sha256 cde83d04c62a05bc"
+  },
+  {
+   "ok": true,
+   "check": "us_northeast PNG is a 706x635 palette image"
+  },
+  {
+   "ok": true,
+   "check": "us_northeast PNG uses only palette indices 0..40"
+  },
+  {
+   "ok": true,
+   "check": "us_northeast: one cell is one screen pixel at its default zoom [0.9999999999999999, 1.0]"
+  },
+  {
+   "ok": true,
+   "check": "us_great_lakes PNG matches its recorded sha256 c9d416f1c0c74f30"
+  },
+  {
+   "ok": true,
+   "check": "us_great_lakes PNG is a 647x698 palette image"
+  },
+  {
+   "ok": true,
+   "check": "us_great_lakes PNG uses only palette indices 0..40"
+  },
+  {
+   "ok": true,
+   "check": "us_great_lakes: one cell is one screen pixel at its default zoom [1.0, 1.0]"
+  },
+  {
+   "ok": true,
+   "check": "route_inset PNG matches its recorded sha256 b5da6620d2ff9018"
+  },
+  {
+   "ok": true,
+   "check": "route_inset PNG is a 297x168 palette image"
+  },
+  {
+   "ok": true,
+   "check": "route_inset PNG uses only palette indices 0..40"
+  },
+  {
+   "ok": true,
+   "check": "route_inset: one cell is one screen pixel at its default zoom [1.0, 1.0]"
+  },
+  {
+   "ok": true,
+   "check": "us_northeast keeps v03's grid, lon/lat box and view fit"
+  },
+  {
+   "ok": true,
+   "check": "us_northeast: land / water / coast-band cells identical to v03"
+  },
+  {
+   "ok": true,
+   "check": "us_great_lakes keeps v03's grid, lon/lat box and view fit"
+  },
+  {
+   "ok": true,
+   "check": "us_great_lakes: land / water / coast-band cells identical to v03"
+  },
+  {
+   "ok": true,
+   "check": "route_inset keeps v03's grid, lon/lat box and view fit"
+  },
+  {
+   "ok": true,
+   "check": "route_inset: land / water / coast-band cells identical to v03"
+  },
+  {
+   "ok": true,
+   "check": "bake INSET_AREA (192.0, 58.0) = map INSET_SIZE - 2 border (192.0, 58.0)"
+  },
+  {
+   "ok": true,
+   "check": "bake INSET_MARGIN_DEG (1.5, 1.4) = RouteInset MARGIN_DEG (1.5, 1.4)"
+  },
+  {
+   "ok": true,
+   "check": "77 z7 tiles, as v01 / v02 / v03"
+  },
+  {
+   "ok": true,
+   "check": "every tile sha256 equals the v03 record (v01 pin, v02 record)"
+  },
+  {
+   "ok": true,
+   "check": "observed source families ['etopo1', 'gmted', 'srtm'] only SRTM / GMTED2010 / ETOPO1"
+  },
+  {
+   "ok": true,
+   "check": "attribution lines unchanged from v03"
+  },
+  {
+   "ok": true,
+   "check": "us_northeast: relief speckle 0.3970 -> 0.3255 of land cells (class change to a land neighbour)"
+  },
+  {
+   "ok": true,
+   "check": "us_great_lakes: relief speckle 0.3706 -> 0.2551 of land cells (class change to a land neighbour)"
+  },
+  {
+   "ok": true,
+   "check": "rebake from the pinned tile cache is identical to the v03r2 JSON, sha256-text-lf-v1 (RELIEF_BAKE_OK layers=3 families=['etopo1', 'gmted', 'srtm'] json=180196 bytes)"
+  },
+  {
+   "ok": true,
+   "check": "MapData.RELIEF_PATH reads the v03r2 JSON"
+  },
+  {
+   "ok": true,
+   "check": "map text names no airport, terminal or trip component ([])"
+  },
+  {
+   "ok": true,
+   "check": "route core, travel data and map text equal git HEAD (game/data/world-travel, game/scripts/app_state.gd, game/scripts/travel_calendar.gd, game/scripts/world_route_registry.gd, game/scripts/world_map_route_adapter.gd, game/scripts/world_map_text.gd)"
+  },
+  {
+   "ok": true,
+   "check": "roads are pale stone (s 0.13, a 0.34), the trip line alone is gold (s 0.48)"
+  },
+  {
+   "ok": true,
+   "check": "capture manifest lists 10 captures, each matching its file bytes"
+  }
+ ],
+ "facts": {
+  "palette_roles_changed_from_v03": [
+   "land_b0",
+   "land_b0_shadow",
+   "land_b0_deep_shadow",
+   "land_b0_lit",
+   "land_b0_high_lit",
+   "land_b1",
+   "land_b1_shadow",
+   "land_b1_deep_shadow",
+   "land_b1_lit",
+   "land_b1_high_lit",
+   "land_b2",
+   "land_b2_shadow",
+   "land_b2_deep_shadow",
+   "land_b2_lit",
+   "land_b2_high_lit",
+   "land_b3",
+   "land_b3_shadow",
+   "land_b3_deep_shadow",
+   "land_b3_lit",
+   "land_b3_high_lit",
+   "land_b4",
+   "land_b4_shadow",
+   "land_b4_deep_shadow",
+   "land_b4_lit",
+   "land_b4_high_lit",
+   "land_b5",
+   "land_b5_shadow",
+   "land_b5_deep_shadow",
+   "land_b5_lit",
+   "land_b5_high_lit",
+   "land_b6",
+   "land_b6_shadow",
+   "land_b6_deep_shadow",
+   "land_b6_lit",
+   "land_b6_high_lit",
+   "sea_shelf_outer",
+   "sea_shelf_inner",
+   "sea_shallow"
+  ],
+  "layer us_northeast": {
+   "grid": [
+    706,
+    635
+   ],
+   "png_sha256": "cde83d04c62a05bce9e4d4f4f676adfd5f53fd882f4907f13ee379ab2f4bfc55"
+  },
+  "layer us_great_lakes": {
+   "grid": [
+    647,
+    698
+   ],
+   "png_sha256": "c9d416f1c0c74f30f97c383a84a4a0e1c92a05e5ff7d20c230779d06752d03ca"
+  },
+  "layer route_inset": {
+   "grid": [
+    297,
+    168
+   ],
+   "png_sha256": "b5da6620d2ff9018b2bebba24827b7cabfe707b60c10fc779e54026bd0a5090b"
+  },
+  "speckle us_northeast": {
+   "v03": 0.397,
+   "v03r2": 0.3255,
+   "change": -0.18
+  },
+  "speckle us_great_lakes": {
+   "v03": 0.3706,
+   "v03r2": 0.2551,
+   "change": -0.312
+  }
+ },
+ "hashes": {
+  "game/scripts/scifi_world_map.gd": {
+   "sha256-text-lf-v1": "87489682dd3df4230b7b65e544301dd9ec934568cd831c0911c9053f86884f7b"
+  },
+  "game/scripts/world_map_data.gd": {
+   "sha256-text-lf-v1": "7e06250b9ba6e846aa937de13a381ee2f3acd890260edc762b0557696bbcdd9d"
+  },
+  "game/scripts/world_map_text.gd": {
+   "sha256-text-lf-v1": "68400bef1ac324962f8b8cdbd4cb9c9fe018296b77847d6d997ab07b568e4c1a"
+  },
+  "game/data/world-map/rpg-2-star-ocean-the-second_earth-map_us-east-relief-layer_m2-map-art-native-v03r2_20261017-224631-9875b9e2.json": {
+   "sha256-text-lf-v1": "565d38e19ce9a1ec8fece5eddb3e818e1e64886ae9654500ac0187e900300c6f"
+  },
+  "tools/rpg-2-star-ocean-the-second_global-map_us-east-relief-bake_m2-map-art-native-v03r2_20261017-224631-9875b9e2.py": {
+   "sha256-text-lf-v1": "41107c71411741d1122e216d0ada494e38aae55b73e9daee91d05dcb0eaf9559"
+  },
+  "tools/rpg-2-star-ocean-the-second_global-map_v03r2-visual-gate_capture-check_test-only-v03r2_20261017-224631-9875b9e2.gd": {
+   "sha256-text-lf-v1": "426c951292b5d46e1311de517d68bcc1dfe67e532527f40e5c08f2f7660ee194"
+  },
+  "tools/rpg-2-star-ocean-the-second_global-map_v03r2-visual-gate_source-check_test-only-v03r2_20261017-224631-9875b9e2.py": {
+   "sha256-text-lf-v1": "e6ba0a6786ef7e9ce7b709e4288200b26323343363fadbd5e44d6d5d9b6332d7"
+  },
+  "outputs/rpg-2-star-ocean-the-second_global-map_v03r2_globe-zh-640x360_test-only-v03r2_20261017-224631-9875b9e2.png": {
+   "sha256-bytes": "1cd32de87f71d0cf143d6013a5eb0371dcf061cf8076848c2ccf904d841ec2ea"
+  },
+  "outputs/rpg-2-star-ocean-the-second_global-map_v03r2_us-northeast-zh-640x360_test-only-v03r2_20261017-224631-9875b9e2.png": {
+   "sha256-bytes": "6126c875053866ef2bb39d561bf33da5e96578f5a11082e6a7302e2ca8846127"
+  },
+  "outputs/rpg-2-star-ocean-the-second_global-map_v03r2_us-northeast-card-washington-car-zh-640x360_test-only-v03r2_20261017-224631-9875b9e2.png": {
+   "sha256-bytes": "61d4435a751e77a3a963665b91e47ea32232c94ec8ad4af4f889ce6e22a9e74a"
+  },
+  "outputs/rpg-2-star-ocean-the-second_global-map_v03r2_us-northeast-zoom-card-washington-car-zh-640x360_test-only-v03r2_20261017-224631-9875b9e2.png": {
+   "sha256-bytes": "e4c1a0702b1e2dda9a3d07b320f7ddafbdf7be1e18345355c6348abc23fb527b"
+  },
+  "outputs/rpg-2-star-ocean-the-second_global-map_v03r2_us-great-lakes-card-chicago-air-zh-640x360_test-only-v03r2_20261017-224631-9875b9e2.png": {
+   "sha256-bytes": "db6c3d8583c68442209a6862c8d352916781a4d700e20ecbc09fcf7d569c264e"
+  },
+  "outputs/rpg-2-star-ocean-the-second_global-map_v03r2_globe-en-640x360_test-only-v03r2_20261017-224631-9875b9e2.png": {
+   "sha256-bytes": "b59bffb6bcd56be2b349773f17555df495f4d12903b3ebb89feb488b047611e3"
+  },
+  "outputs/rpg-2-star-ocean-the-second_global-map_v03r2_us-northeast-en-640x360_test-only-v03r2_20261017-224631-9875b9e2.png": {
+   "sha256-bytes": "35edcb3eb111159e2b1a259e9df84ceca706242462d251f281874356d9aa5011"
+  },
+  "outputs/rpg-2-star-ocean-the-second_global-map_v03r2_us-northeast-card-washington-car-en-640x360_test-only-v03r2_20261017-224631-9875b9e2.png": {
+   "sha256-bytes": "1caed57033b53b8f125e5bbd4ced909c45864afc41f3c5e13ea62bf02f88794e"
+  },
+  "outputs/rpg-2-star-ocean-the-second_global-map_v03r2_us-northeast-zoom-card-washington-car-en-640x360_test-only-v03r2_20261017-224631-9875b9e2.png": {
+   "sha256-bytes": "a337f4e326df50c14b4913c0c53845ec37b515a03e83f09e8e0680d218cd2028"
+  },
+  "outputs/rpg-2-star-ocean-the-second_global-map_v03r2_us-great-lakes-card-chicago-air-en-640x360_test-only-v03r2_20261017-224631-9875b9e2.png": {
+   "sha256-bytes": "bdc8093f859ed46717b8c220acc69eae3ea5c1f03717ace42c6068610c021808"
+  }
+ }
+}

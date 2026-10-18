@@ -31,6 +31,8 @@ const SCALE_BAR_RECT := Rect2(199, 250, 140, 14)
 const LABEL_GAP := 3.0
 # Label slots tried after the place's own label_side, in this order. Diagonal slots sit off the marker's corner.
 const LABEL_SLOTS := ["right", "left", "below", "above", "above_right", "below_right", "above_left", "below_left"]
+# Farthest a label may slide from its marker (nearest plate point) when no slot above is clear; a leader joins them.
+const CLAMP_REACH := 64.0
 # Two-endpoint route strip, shown inside the route card (between the origin line and the trip options) when the
 # trip's origin is outside the regional view, so the card never hides either end of the route.
 const INSET_SIZE := Vector2(194, 60)
@@ -42,26 +44,28 @@ const REGION_ZOOM_RANGE := 6.0
 const WHEEL_STEP := 1.25
 
 const COLOR_BACKDROP := Color("#0a121b")
-# Three value families (unapproved map art v03, 2026-10-17): dark sea, mid-dark blue lakes, light land. Shelf depth,
+# Three value families (unapproved map art v03r2, 2026-10-17): dark sea, mid-dark blue lakes, light land. Shelf depth,
 # shore bands and land relief come from the baked relief layers (MapData.region_relief); these flat colours show only
-# where a layer leaves a cell clear (deep sea, lake centres, the one-cell coast band) and on the globe. v03 lifts the
-# land and darkens the lakes (v02 #627856 / #2c6375) so land and lake no longer sit one value step apart.
-const COLOR_OCEAN := Color("#0f2b38")
+# where a layer leaves a cell clear (deep sea, lake centres, the one-cell coast band) and on the globe. v03r2 lifts the
+# land toward parchment and darkens the sea one step (v03 #6d855c / #0f2b38); COLOR_LAND must equal the bake's
+# land_low_color.
+const COLOR_OCEAN := Color("#0d2632")
 const COLOR_LAKE := Color("#225873")
-const COLOR_LAND := Color("#6d855c")
+const COLOR_LAND := Color("#7a8e65")
 # Coast and lake shore: a pale sand line, so every edge reads as a beach against the shore band (v02 #c4c194).
 const COLOR_COAST := Color("#dcd3a0")
 # On the globe a sand line speckles at 110m detail; continents take a dark outline instead.
 const COLOR_COAST_GLOBE := Color(0.03, 0.08, 0.1, 0.6)
 # Graticule: 1 px dots every DOT_STEP px, so it reads as a faint survey grid under the places and routes.
-const COLOR_GRID := Color(0.5, 0.74, 0.76, 0.16)
+const COLOR_GRID := Color(0.5, 0.74, 0.76, 0.12)
 const COLOR_EQUATOR := Color(0.5, 0.74, 0.76, 0.3)
 const GRID_DOT_STEP := 4
 const COLOR_DEGREE := Color(0.6, 0.72, 0.72, 0.5)
 const COLOR_PLATE_EDGE := Color("#2b4d57")
 const COLOR_LEADER := Color("#4f8486")
-const COLOR_ROAD := Color(0.89, 0.77, 0.5, 0.7)
-const COLOR_ROAD_MINOR := Color(0.75, 0.68, 0.5, 0.35)
+# Roads are quiet pale stone (v03 gold 0.7 / 0.35), so the selected trip is the only gold line on the map.
+const COLOR_ROAD := Color(0.92, 0.9, 0.8, 0.34)
+const COLOR_ROAD_MINOR := Color(0.9, 0.88, 0.8, 0.13)
 const COLOR_MARKER := Color("#79cfc0")
 const COLOR_MARKER_SHINE := Color("#d8f4ec")
 const COLOR_MARKER_EDGE := Color("#0b1c24")
@@ -86,6 +90,24 @@ const COLOR_INSET_BORDER := Color("#d4b062")
 const COLOR_ROUTE_LINE := Color("#f2d27e")
 const COLOR_ROUTE_EDGE := Color(0.03, 0.07, 0.1, 0.9)
 const COLOR_PLANE := Color("#f6fbff")
+# Science UI trim (v03r2), as on the exploration scenes' clue badges: navy plates, teal edges, brass rims.
+const COLOR_BRASS := Color("#d4b062")
+const COLOR_BRASS_TEXT := Color("#f4e4b4")
+const COLOR_TEAL_EDGE := Color("#2f6266")
+const COLOR_UI_FILL := Color("#0d1e26")
+const COLOR_UI_ACTIVE := Color("#12323b")
+# Stepped edge shade over a regional view (v03r2): four nested bands of this alpha, so the corners settle and the
+# framed places, the trip line and the open card carry the eye.
+const COLOR_VIGNETTE := Color(0.02, 0.05, 0.08, 0.035)
+const VIGNETTE_BANDS := [3.0, 6.0, 10.0, 14.0, 19.0, 24.0, 30.0, 36.0]
+# Half the box around a selected marker's ring and its halo: plates keep clear of it.
+const SELECTED_HALF := 13.0
+# Opening a card pans the view just enough that the reticle's outer edge (12.5 px) keeps this far (1.5 px clear) from a
+# fixed control, the card and the frame edge.
+const RETICLE_REACH := 14.0
+# Longest focal path (the destination's end of a trip whose origin the card's strip shows): it stops at the card's edge,
+# the frame or this length, so it points the way without running across the whole view.
+const FOCAL_REACH := 140.0
 
 static var last_mode := "global"
 
@@ -307,6 +329,8 @@ func _build_map_frame(canvas: CanvasLayer) -> void:
 	zoom_out_button.text = "−"
 	globe_button = _button(map_frame, Rect2(38, 222, 54, 24), 10, enter_global)
 	region_button = _button(map_frame, Rect2(96, 222, 96, 24), 10, _open_active_region)
+	for control in [zoom_in_button, zoom_out_button, globe_button, region_button]:
+		_style_science_button(control, "control")
 	_build_relief_credit()
 
 
@@ -445,7 +469,7 @@ func _build_route_card(canvas: CanvasLayer) -> void:
 	var style := StyleBoxFlat.new()
 	# Opaque, so grid lines and degree labels never show through the card text.
 	style.bg_color = COLOR_CARD_BG
-	style.border_color = COLOR_MARKER
+	style.border_color = COLOR_BRASS
 	style.set_border_width_all(1)
 	style.set_content_margin_all(8)
 	style.content_margin_top = 7
@@ -492,28 +516,39 @@ func _build_route_card(canvas: CanvasLayer) -> void:
 	depart_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	depart_button.add_theme_font_size_override("font_size", 11)
 	depart_button.pressed.connect(depart)
+	_style_science_button(depart_button, "primary")
 	row.add_child(depart_button)
 	cancel_button = Button.new()
 	cancel_button.name = "CancelButton"
 	cancel_button.custom_minimum_size = Vector2(56, 28)
 	cancel_button.add_theme_font_size_override("font_size", 11)
 	cancel_button.pressed.connect(close_route_card)
+	_style_science_button(cancel_button, "secondary")
 	row.add_child(cancel_button)
 
 
-# Card dressing, drawn over its panel and under its text: a header band behind the place names, a 1 px rule above the
-# trip section, an inner bevel line and a 2 px drop shadow outside the card's own rectangle (the card stays opaque
-# and CARD_RECT-sized).
+# Card dressing, drawn over its panel and under its text, in the science UI's teal and brass (v03r2): a header band
+# behind the place names with a teal rule and a short brass tab, a 1 px rule above the trip section, an inner teal
+# bevel inside the brass rim, brass corner brackets, and a 2 px drop shadow outside the card's own rectangle (the
+# card stays opaque and CARD_RECT-sized).
 func _draw_route_card() -> void:
 	var size := route_card.size
 	route_card.draw_rect(Rect2(size.x, 2, 2, size.y), COLOR_CARD_SHADOW)
 	route_card.draw_rect(Rect2(2, size.y, size.x - 2, 2), COLOR_CARD_SHADOW)
 	var band_bottom := card_subtitle.get_global_rect().end.y - route_card.global_position.y + 2.0
 	route_card.draw_rect(Rect2(1, 1, size.x - 2, band_bottom - 1), COLOR_CARD_HEADER)
-	route_card.draw_rect(Rect2(1, band_bottom, size.x - 2, 1), COLOR_LEADER)
-	var trip_top := card_from.get_global_rect().position.y - route_card.global_position.y - 1.0
+	route_card.draw_rect(Rect2(1, band_bottom, size.x - 2, 1), COLOR_TEAL_EDGE)
+	route_card.draw_rect(Rect2(1, band_bottom - 1, 24, 2), COLOR_BRASS)
+	var trip_top := (card_from if card_from.visible else route_inset).get_global_rect().position.y - route_card.global_position.y - 1.0
 	route_card.draw_rect(Rect2(8, trip_top, size.x - 16, 1), COLOR_CARD_BEVEL)
 	route_card.draw_rect(Rect2(1.5, 1.5, size.x - 3, size.y - 3), COLOR_CARD_BEVEL, false, 1.0)
+	# Brass corner brackets, 8 px arms, 2 px thick, over the rim.
+	for corner in [Vector2(0, 0), Vector2(1, 0), Vector2(0, 1), Vector2(1, 1)]:
+		var at := Vector2(corner.x * (size.x - 2.0), corner.y * (size.y - 2.0))
+		var arm_x := 0.0 if corner.x == 0 else -6.0
+		var arm_y := 0.0 if corner.y == 0 else -6.0
+		route_card.draw_rect(Rect2(at + Vector2(arm_x, 0), Vector2(8, 2)), COLOR_BRASS)
+		route_card.draw_rect(Rect2(at + Vector2(0, arm_y), Vector2(2, 8)), COLOR_BRASS)
 
 
 func _build_field_log(canvas: CanvasLayer) -> void:
@@ -836,13 +871,23 @@ func _layout_markers() -> void:
 		_set_marker_text(button, MapData.text(place, "map_label", language), MapData.text(place, "map_label", other))
 		entries.append([button, marker_position(place["id"]), String(place.get("label_side", "right")), _label_rank(place)])
 	entries.sort_custom(func(a, b): return a[3] < b[3] if a[3] != b[3] else String(a[0].name) < String(b[0].name))
-	var blocked := fixed_ui_rects()
-	for entry in entries:
-		blocked.append(_dot_rect(entry[1]))
-	for entry in entries:
-		var label_rect := _place_marker_button(entry[0], entry[1], entry[2], bounds, blocked, _dot_rect(entry[1]))
-		blocked.append(label_rect.grow(LABEL_GAP))
 	var card_open := route_card != null and route_card.visible
+	# The selected place's reticle is wider than a dot: every plate keeps clear of its SELECTED_HALF box, and its own
+	# plate's slots start that much farther out (v03r2; v03 let Chicago's right-slot plate cut 2 px into its ring).
+	var selected_button: Button = place_buttons.get(selected_place_id) if card_open else null
+	var blocked := fixed_ui_rects()
+	# The trip line on the map is kept clear too, so no plate sits on the route between the reticle and the card. The
+	# origin's own plate is exempt: its line leaves from under it.
+	var route_rects := _route_line_rects()
+	var origin_button: Button = place_buttons.get(route_adapter.current_place_id())
+	for entry in entries:
+		blocked.append(_selected_rect(entry[1]) if entry[0] == selected_button else _dot_rect(entry[1]))
+	for entry in entries:
+		var own := _selected_rect(entry[1]) if entry[0] == selected_button else _dot_rect(entry[1])
+		var pad := SELECTED_HALF - 9.0 if entry[0] == selected_button else 0.0
+		var keep_clear := blocked if entry[0] == origin_button else blocked + route_rects
+		var label_rect := _place_marker_button(entry[0], entry[1], entry[2], bounds, keep_clear, own, pad)
+		blocked.append(label_rect.grow(LABEL_GAP))
 	for region in MapData.geo_regions():
 		_style_marker_plate(region_buttons[region["id"]], true, false, false)
 	for place in places:
@@ -866,6 +911,40 @@ static func _label_rank(place: Dictionary) -> int:
 
 static func _dot_rect(marker: Vector2) -> Rect2:
 	return Rect2(marker - Vector2(9, 9), Vector2(18, 18))
+
+
+# The drawn trip line (route_path_points) as boxes over 12 px runs, grown 3 px, leaving out the part within 22 px of
+# either end's marker (a plate may sit where its own line leaves its dot); empty while no trip line is drawn.
+func _route_line_rects() -> Array:
+	var out := []
+	if route_card == null or not route_card.visible or mode != "region":
+		return out
+	var option := selected_route_option()
+	var origin := find_place(route_adapter.current_place_id())
+	var destination := find_place(selected_place_id)
+	if option.is_empty() or origin.is_empty() or destination.is_empty() or origin["id"] == selected_place_id:
+		return out
+	if not route_inset_wanted() and origin["geo_region_id"] != active_region_id:
+		return out
+	var ends := [view.geo_to_screen(origin["lon"], origin["lat"]), view.geo_to_screen(destination["lon"], destination["lat"])]
+	var path := PackedVector2Array()
+	for p in route_path_points(origin, destination, String(option["mode"]) != "car"):
+		if p.distance_to(ends[0]) >= 22.0 and p.distance_to(ends[1]) >= 22.0:
+			path.append(p)
+	var i := 0
+	while i < path.size() - 1:
+		var box := Rect2(path[i], Vector2.ZERO)
+		var run := 0.0
+		while i < path.size() - 1 and run < 12.0:
+			run += path[i].distance_to(path[i + 1])
+			i += 1
+			box = box.expand(path[i])
+		out.append(box.grow(3.0))
+	return out
+
+
+static func _selected_rect(marker: Vector2) -> Rect2:
+	return Rect2(marker - Vector2(SELECTED_HALF, SELECTED_HALF), Vector2(SELECTED_HALF, SELECTED_HALF) * 2.0)
 
 
 # Map-local rectangles of the fixed map controls that labels and the route inset must not cover: the
@@ -902,8 +981,9 @@ func _set_marker_text(button: Button, primary: String, secondary: String) -> voi
 
 # The button covers the marker dot and its label. The label takes its own side if that slot stays in
 # the frame and clear of `blocked` (the marker's own dot excepted), else the first such slot in
-# LABEL_SLOTS, else the first slot inside the frame. Returns the label rectangle.
-func _place_marker_button(button: Button, marker: Vector2, side: String, bounds: Rect2, blocked: Array = [], own_dot := Rect2()) -> Rect2:
+# LABEL_SLOTS, else the first slot inside the frame. `pad` moves every slot that much farther from the marker (the
+# selected place's reticle). Returns the label rectangle.
+func _place_marker_button(button: Button, marker: Vector2, side: String, bounds: Rect2, blocked: Array = [], own_dot := Rect2(), pad := 0.0) -> Rect2:
 	var primary: Label = button.get_node("Primary")
 	var secondary: Label = button.get_node("Secondary")
 	var p_size := primary.get_combined_minimum_size()
@@ -915,7 +995,7 @@ func _place_marker_button(button: Button, marker: Vector2, side: String, bounds:
 	var label_rect := Rect2()
 	var in_frame := Rect2()
 	for slot in [side] + LABEL_SLOTS:
-		var candidate := _label_rect(marker, slot, label_size).abs()
+		var candidate := _label_rect(marker, slot, label_size, pad).abs()
 		candidate.position = candidate.position.round()
 		if not bounds.encloses(candidate):
 			continue
@@ -929,8 +1009,12 @@ func _place_marker_button(button: Button, marker: Vector2, side: String, bounds:
 		if clear:
 			label_rect = candidate
 			break
+	# v03r2: a marker just outside the frame (within CLAMP_REACH) also takes the clamped fallback, so its plate becomes a
+	# whole edge tab with a leader toward the dot instead of a half-clipped plate at the frame edge.
+	if not label_rect.has_area() and bounds.grow(CLAMP_REACH).has_point(marker):
+		label_rect = _clamped_label_rect(marker, label_size, bounds, blocked, own_dot)
 	if not label_rect.has_area():
-		label_rect = in_frame if in_frame.has_area() else _label_rect(marker, side, label_size)
+		label_rect = in_frame if in_frame.has_area() else _label_rect(marker, side, label_size, pad)
 	var rect := dot.merge(label_rect)
 	button.position = rect.position
 	button.size = rect.size
@@ -949,23 +1033,94 @@ func _place_marker_button(button: Button, marker: Vector2, side: String, bounds:
 	return label_rect
 
 
-static func _label_rect(marker: Vector2, side: String, label_size: Vector2) -> Rect2:
+# Fallback when no LABEL_SLOTS slot is clear (v03r1; e.g. the zoomed-in Washington card, where Washington sits
+# between the view buttons and the scale bar and New York's dot is under the card). The plate slides to the
+# nearest frame position within CLAMP_REACH px of its marker that clears `blocked` and its own dot, and whose
+# leader does not cross a control, another dot or another plate. A rect the marker itself is under (the card)
+# does not reject the leader, so a covered place keeps its name and click target just outside the card's edge.
+# Candidates are the slot positions plus positions flush with each blocked rect and the frame. Returns an empty
+# Rect2 when nothing qualifies. The marker never moves.
+static func _clamped_label_rect(marker: Vector2, label_size: Vector2, bounds: Rect2, blocked: Array, own_dot: Rect2) -> Rect2:
+	var xs := [bounds.position.x, bounds.end.x - label_size.x]
+	var ys := [bounds.position.y, bounds.end.y - label_size.y]
+	for slot in LABEL_SLOTS:
+		var r := _label_rect(marker, slot, label_size)
+		xs.append(r.position.x)
+		ys.append(r.position.y)
+	for other in blocked + [own_dot]:
+		var r: Rect2 = other
+		xs.append_array([ceilf(r.end.x), floorf(r.position.x - label_size.x)])
+		ys.append_array([ceilf(r.end.y), floorf(r.position.y - label_size.y)])
+	var best := Rect2()
+	var best_score := INF
+	for x in xs:
+		for y in ys:
+			var candidate := Rect2(Vector2(x, y).round(), label_size)
+			if not bounds.encloses(candidate) or candidate.intersects(own_dot):
+				continue
+			var near := Vector2(clampf(marker.x, candidate.position.x, candidate.end.x), clampf(marker.y, candidate.position.y, candidate.end.y))
+			var score := marker.distance_to(near)
+			# Ties go to the upper, then the left position, so the layout is deterministic.
+			score += (candidate.position.y * 640.0 + candidate.position.x) * 1e-9
+			if score > CLAMP_REACH or score >= best_score:
+				continue
+			var clear := true
+			for other in blocked:
+				var r: Rect2 = other
+				if r == own_dot:
+					continue
+				if candidate.intersects(r):
+					clear = false
+					break
+				var core := r.grow(-LABEL_GAP)
+				if not core.has_point(marker) and _segment_hits_rect(marker, near, core):
+					clear = false
+					break
+			if clear:
+				best = candidate
+				best_score = score
+	return best
+
+
+static func _segment_hits_rect(a: Vector2, b: Vector2, r: Rect2) -> bool:
+	if not r.has_area():
+		return false
+	var t0 := 0.0
+	var t1 := 1.0
+	var d := b - a
+	for axis in 2:
+		if absf(d[axis]) < 1e-6:
+			if a[axis] <= r.position[axis] or a[axis] >= r.end[axis]:
+				return false
+			continue
+		var ta := (r.position[axis] - a[axis]) / d[axis]
+		var tb := (r.end[axis] - a[axis]) / d[axis]
+		t0 = maxf(t0, minf(ta, tb))
+		t1 = minf(t1, maxf(ta, tb))
+		if t0 >= t1:
+			return false
+	return true
+
+
+static func _label_rect(marker: Vector2, side: String, label_size: Vector2, pad := 0.0) -> Rect2:
+	var n := 10.0 + pad
+	var d := 9.0 + pad
 	match side:
 		"left":
-			return Rect2(marker + Vector2(-10.0 - label_size.x, -label_size.y * 0.5), label_size)
+			return Rect2(marker + Vector2(-n - label_size.x, -label_size.y * 0.5), label_size)
 		"below":
-			return Rect2(marker + Vector2(-label_size.x * 0.5, 10.0), label_size)
+			return Rect2(marker + Vector2(-label_size.x * 0.5, n), label_size)
 		"above":
-			return Rect2(marker + Vector2(-label_size.x * 0.5, -10.0 - label_size.y), label_size)
+			return Rect2(marker + Vector2(-label_size.x * 0.5, -n - label_size.y), label_size)
 		"above_right":
-			return Rect2(marker + Vector2(9.0, -9.0 - label_size.y), label_size)
+			return Rect2(marker + Vector2(d, -d - label_size.y), label_size)
 		"below_right":
-			return Rect2(marker + Vector2(9.0, 9.0), label_size)
+			return Rect2(marker + Vector2(d, d), label_size)
 		"above_left":
-			return Rect2(marker + Vector2(-9.0 - label_size.x, -9.0 - label_size.y), label_size)
+			return Rect2(marker + Vector2(-d - label_size.x, -d - label_size.y), label_size)
 		"below_left":
-			return Rect2(marker + Vector2(-9.0 - label_size.x, 9.0), label_size)
-	return Rect2(marker + Vector2(10.0, -label_size.y * 0.5), label_size)
+			return Rect2(marker + Vector2(-d - label_size.x, d), label_size)
+	return Rect2(marker + Vector2(n, -label_size.y * 0.5), label_size)
 
 
 # --- Drawing ----------------------------------------------------------------
@@ -990,6 +1145,7 @@ func _draw_overlay() -> void:
 			var box := view.project_bbox(region["global_zoom_bbox_wsen"])
 			overlay.draw_rect(box, COLOR_HERE, false, px * 1.5)
 	else:
+		_draw_vignette()
 		var clip: Array = MapData.region_clip_bbox(MapData.geodata_key(active_region_id))
 		var north := view.geo_to_screen(clip[0], clip[3]).y
 		var south := view.geo_to_screen(clip[0], clip[1]).y
@@ -1026,6 +1182,17 @@ func _draw_overlay() -> void:
 			_draw_marker(at, find_place(route_adapter.current_place_id()).get("geo_region_id", "") == region["id"], false, true)
 
 
+# Regional view only: nested edge bands (VIGNETTE_BANDS px deep) of COLOR_VIGNETTE over land and sea, under the grid,
+# coast, roads, routes and markers. Whole pixels, so the shade steps like the relief rather than blurring.
+func _draw_vignette() -> void:
+	var size := MAP_RECT.size
+	for depth in VIGNETTE_BANDS:
+		overlay.draw_rect(Rect2(0, 0, size.x, depth), COLOR_VIGNETTE)
+		overlay.draw_rect(Rect2(0, size.y - depth, size.x, depth), COLOR_VIGNETTE)
+		overlay.draw_rect(Rect2(0, depth, depth, size.y - depth * 2.0), COLOR_VIGNETTE)
+		overlay.draw_rect(Rect2(size.x - depth, depth, depth, size.y - depth * 2.0), COLOR_VIGNETTE)
+
+
 # Whole-pixel graticule dots, one every GRID_DOT_STEP px, clipped to the map frame.
 func _dotted_meridian(x: float, top: float, bottom: float, color: Color) -> void:
 	var column := floorf(x)
@@ -1055,41 +1222,134 @@ func _draw_leader(button: Button, marker: Vector2) -> void:
 	var plate := Rect2(button.position + plate_node.position, plate_node.size)
 	var target := Vector2(clampf(marker.x, plate.position.x, plate.end.x - 1.0), clampf(marker.y, plate.position.y, plate.end.y - 1.0))
 	var span := target - marker
+	if route_card != null and route_card.visible and _card_local_rect().has_point(marker):
+		# The dot is under the open card (v03r2): instead of a leader stub, a brass pointer in the gap between the plate
+		# and the card, aimed at the hidden dot, so the plate reads as "this place is behind the card".
+		var tip_x := plate.end.x + 3.0 if marker.x >= plate.end.x else plate.position.x - 3.0
+		var base_x := plate.end.x if marker.x >= plate.end.x else plate.position.x
+		var y := clampf(marker.y, plate.position.y + 4.0, plate.end.y - 4.0)
+		overlay.draw_colored_polygon(PackedVector2Array([Vector2(base_x, y - 4.0), Vector2(tip_x, y), Vector2(base_x, y + 4.0)]), COLOR_BRASS)
+		return
 	if span.length() <= 7.0:
 		return
-	overlay.draw_line((marker + span.normalized() * 6.5).floor() + Vector2(0.5, 0.5), target.floor() + Vector2(0.5, 0.5), COLOR_LEADER, 1.0)
+	# A dot just outside the frame (edge tab, v03r2): the leader is brass, so the stub at the frame edge reads as a pointer.
+	var off_frame := not Rect2(Vector2.ZERO, MAP_RECT.size).has_point(marker)
+	overlay.draw_line((marker + span.normalized() * 6.5).floor() + Vector2(0.5, 0.5), target.floor() + Vector2(0.5, 0.5), COLOR_BRASS if off_frame else COLOR_LEADER, 1.0)
 
 
-# The selected trip on the main map when both ends are on this view: the party's place to the destination, dashed
-# for a flight, dotted for a car trip, as in the route inset; a straight line, no road geometry invented. A trip
-# whose origin is off the view is drawn only in the inset.
+# The selected trip on the main map: dashed for a flight (true great circle), dotted for a car trip (a straight line,
+# no road geometry invented), as in the route strip, with a gold chevron toward the destination. When both ends are on
+# this view the line runs marker to marker. When the origin is off the view or under the card (the strip on the card
+# then shows both ends), v03r2 draws the destination's end of the same line as a focal path: from the selected marker
+# toward the origin until it reaches the card's left edge or the frame, ending in a chevron that leads into the card.
 func _draw_route_connector() -> void:
-	if route_card == null or not route_card.visible or route_inset_wanted():
+	if route_card == null or not route_card.visible or mode != "region":
 		return
 	var option := selected_route_option()
 	var origin := find_place(route_adapter.current_place_id())
-	if option.is_empty() or origin.is_empty() or origin["id"] == selected_place_id or origin["geo_region_id"] != active_region_id:
+	var destination := find_place(selected_place_id)
+	if option.is_empty() or origin.is_empty() or destination.is_empty() or origin["id"] == selected_place_id:
 		return
-	var a := marker_position(origin["id"])
-	var b := marker_position(selected_place_id)
-	var direction := (b - a).normalized()
-	var path := PackedVector2Array([a + direction * 11.0, b - direction * 13.5])
+	if not route_inset_wanted() and origin["geo_region_id"] != active_region_id:
+		return
 	var air := String(option["mode"]) != "car"
-	var segments := RouteInset.dashes(path, 6.0 if air else 2.0, 3.0)
+	var path := route_path_points(origin, destination, air)
+	if path.size() < 2:
+		return
+	var segments := RouteInset.dashes(path, 6.0 if air else 3.0, 3.0)
 	for dash in segments:
-		overlay.draw_line(dash[0], dash[1], COLOR_ROUTE_EDGE, 4.0)
+		overlay.draw_line(dash[0], dash[1], COLOR_ROUTE_EDGE, 5.0)
 	for dash in segments:
-		overlay.draw_line(dash[0], dash[1], COLOR_ROUTE_LINE, 2.0)
+		overlay.draw_line(dash[0], dash[1], COLOR_ROUTE_LINE, 3.0)
+	if route_inset_wanted():
+		# The focal path's last point leads into the card: chevron at the end, pointing on.
+		_draw_chevron(path[path.size() - 1], (path[path.size() - 1] - path[path.size() - 2]).normalized())
+	else:
+		var half := _point_along(path, 0.5)
+		_draw_chevron(half[0], half[1])
+
+
+# The trip line in map-local pixels, trimmed clear of both markers' rings, origin side first. With the origin off the
+# view or under the card (route_inset_wanted), only the destination's end is kept: the part from the destination's ring
+# back toward the origin that stays inside route_focus_rect(), destination side first, at most FOCAL_REACH px long (it
+# ends where it meets the card, the frame or that length).
+func route_path_points(origin: Dictionary, destination: Dictionary, air: bool) -> PackedVector2Array:
+	var line := PackedVector2Array()
+	if air:
+		line = RouteInset.great_circle_points(origin["lon"], origin["lat"], destination["lon"], destination["lat"], 96, view)
+	else:
+		line = PackedVector2Array([view.geo_to_screen(origin["lon"], origin["lat"]), view.geo_to_screen(destination["lon"], destination["lat"])])
+	var focus := route_inset_wanted()
+	# Walk from the destination back toward the origin.
+	line.reverse()
+	var out := PackedVector2Array()
+	var dest := line[0]
+	var free := route_focus_rect()
+	var start_gap := SELECTED_HALF - 1.0
+	var end_gap := 11.0
+	var origin_pt := line[line.size() - 1]
+	for i in line.size() - 1:
+		var a := line[i]
+		var b := line[i + 1]
+		var length := a.distance_to(b)
+		var steps := maxi(1, ceili(length))
+		for s in steps:
+			var p := a.lerp(b, float(s) / steps)
+			if p.distance_to(dest) < start_gap:
+				continue
+			if not focus and p.distance_to(origin_pt) < end_gap:
+				break
+			if focus and (not free.has_point(p) or (not out.is_empty() and out[0].distance_to(p) > FOCAL_REACH)):
+				return out
+			out.append(p)
+	if not focus:
+		out.reverse()
+	return out
+
+
+# Where a focal path may run while the strip shows the origin: the map frame left of the card, inset 4 px.
+func route_focus_rect() -> Rect2:
+	var right := _card_local_rect().position.x if route_card != null and route_card.visible else MAP_RECT.size.x
+	return Rect2(Vector2(4, 4), Vector2(right - 10.0, MAP_RECT.size.y - 8.0))
+
+
+# [point, unit direction] at `t` (0..1) of a polyline's length.
+static func _point_along(points: PackedVector2Array, t: float) -> Array:
+	var total := 0.0
+	for i in points.size() - 1:
+		total += points[i].distance_to(points[i + 1])
+	var goal := total * t
+	for i in points.size() - 1:
+		var step := points[i].distance_to(points[i + 1])
+		if goal <= step or i == points.size() - 2:
+			return [points[i].lerp(points[i + 1], clampf(goal / maxf(step, 0.001), 0.0, 1.0)), (points[i + 1] - points[i]).normalized()]
+		goal -= step
+	return [points[0], Vector2.RIGHT]
+
+
+# A 7 px gold chevron on a dark casing, pointing along `direction`.
+func _draw_chevron(at: Vector2, direction: Vector2) -> void:
+	var side := Vector2(-direction.y, direction.x)
+	var tip := at + direction * 4.0
+	var wings := [at - direction * 2.0 + side * 4.5, at - direction * 2.0 - side * 4.5]
+	for wing in wings:
+		overlay.draw_line(wing, tip, COLOR_ROUTE_EDGE, 5.0)
+	for wing in wings:
+		overlay.draw_line(wing, tip, COLOR_ROUTE_LINE, 2.0)
 
 
 # Markers in the exploration scenes' badge style: a navy disc with a teal core and a 1 px shine; cities are a
-# size larger. Party here: gold ring. Selected: white ring with four gold ticks (all inside 11.5 px).
+# size larger. Party here: gold ring. Selected (v03r2): a brass reticle like the clue badges' rims, a 1 px brass ring
+# on a dark 3 px halo so it holds on light land and dark water, with four brass ticks (all inside SELECTED_HALF).
 func _draw_marker(at: Vector2, here: bool, selected: bool, city := true) -> void:
+	if selected:
+		overlay.draw_arc(at, 11.0, 0.0, TAU, 32, COLOR_ROUTE_EDGE, 3.0)
 	if here:
 		overlay.draw_arc(at, 8.5, 0.0, TAU, 24, COLOR_HERE, 2.0)
 	if selected:
-		overlay.draw_arc(at, 11.0, 0.0, TAU, 28, Color.WHITE, 1.0)
+		overlay.draw_arc(at, 11.0, 0.0, TAU, 32, COLOR_BRASS, 1.0)
 		for d in [Vector2.UP, Vector2.DOWN, Vector2.LEFT, Vector2.RIGHT]:
+			overlay.draw_line(at + d * 7.5, at + d * 12.0, COLOR_ROUTE_EDGE, 4.0)
 			overlay.draw_line(at + d * 8.0, at + d * 11.5, COLOR_HERE, 2.0)
 	var radius := 5.5 if city else 4.5
 	overlay.draw_circle(at, radius, COLOR_MARKER_EDGE)
@@ -1188,6 +1448,7 @@ func select_place(place_id: String) -> void:
 	route_state = route_adapter.preview(place_id)
 	selected_option_id = route_state["selected"]
 	route_card.visible = true
+	_keep_selected_clear()
 	# Labels that would sit under the card move to a free slot.
 	_layout_markers()
 	_refresh_route_card()
@@ -1196,6 +1457,59 @@ func select_place(place_id: String) -> void:
 		depart_button.grab_focus()
 	else:
 		cancel_button.grab_focus()
+
+
+# Opening a card never leaves the selected reticle boxed in (v03r2): if its ring would come within RETICLE_REACH of a
+# fixed map control, the card or the frame edge, the view pans by the shortest whole-pixel step that clears it, within
+# the view's pan limits. Display only: the marker stays on its coordinates and nothing is selected or charged. At
+# default zoom every framed place is already clear, so this acts only when the player has zoomed or panned a place into
+# a corner (e.g. Washington at 1.5x, between the view buttons and the frame bottom).
+func _keep_selected_clear() -> void:
+	if mode != "region" or selected_place_id.is_empty():
+		return
+	var reach := RETICLE_REACH
+	var marker := marker_position(selected_place_id)
+	var blockers := _selected_blockers()
+	var frame := Rect2(Vector2.ZERO, MAP_RECT.size).grow(-reach)
+	if _reticle_clear(marker, reach, blockers, frame):
+		return
+	# Candidate steps: back inside the frame on each axis, and flush past each blocker on each side; pairs combine them.
+	var steps := [Vector2.ZERO,
+		Vector2(maxf(0.0, frame.position.x - marker.x) + minf(0.0, frame.end.x - marker.x), 0.0),
+		Vector2(0.0, maxf(0.0, frame.position.y - marker.y) + minf(0.0, frame.end.y - marker.y))]
+	for rect in blockers:
+		var r := (rect as Rect2).grow(reach + 1.0)
+		steps.append_array([Vector2(r.position.x - marker.x, 0), Vector2(r.end.x - marker.x, 0), Vector2(0, r.position.y - marker.y), Vector2(0, r.end.y - marker.y)])
+	var best := Vector2.INF
+	for a in steps:
+		for b in steps:
+			var step: Vector2 = (a + b).round()
+			if step.length() < best.length() and _reticle_clear(marker + step, reach, blockers, frame):
+				best = step
+	if best == Vector2.INF or best == Vector2.ZERO:
+		return
+	view.pan_pixels(best)
+	_view_changed()
+
+
+# Map-local rects the selected reticle keeps clear of: the zoom, Globe and region buttons, the status panel, the scale
+# bar, the date, the relief credit and the open card.
+func _selected_blockers() -> Array:
+	var out := []
+	for rect in fixed_ui_rects():
+		out.append((rect as Rect2).grow(-LABEL_GAP))
+	return out
+
+
+static func _reticle_clear(at: Vector2, reach: float, blockers: Array, frame: Rect2) -> bool:
+	if not frame.has_point(at):
+		return false
+	for rect in blockers:
+		var r: Rect2 = rect
+		var near := Vector2(clampf(at.x, r.position.x, r.end.x), clampf(at.y, r.position.y, r.end.y))
+		if near.distance_to(at) < reach:
+			return false
+	return true
 
 
 # Cancelling never charges time: the core only settles a trip in confirm_travel().
@@ -1291,6 +1605,7 @@ func _refresh_route_card() -> void:
 				button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 				button.add_theme_font_size_override("font_size", 11)
 				button.add_theme_constant_override("line_spacing", -3)
+				_style_science_button(button, "option")
 				button.pressed.connect(_choose_option.bind(option["option_id"]))
 				card_options.add_child(button)
 			depart_button.text = MapText.t("depart")
@@ -2009,3 +2324,57 @@ func _button(parent: Node, rect: Rect2, font_size: int, callback: Callable) -> B
 	button.pressed.connect(callback)
 	parent.add_child(button)
 	return button
+
+
+# Science UI buttons (v03r2) in place of the stock theme: square navy plates with a 1 px edge and no rounding.
+#   "control": map view and zoom buttons. Teal edge; a disabled one is the view already shown, so it reads as the
+#              active tab (lifted fill, brass text) rather than greyed out.
+#   "primary": Depart. Brass rim and brass text on a dark brass-tinted plate; disabled goes slate.
+#   "secondary": Cancel. Teal edge and teal text.
+#   "option": a trip line. Teal edge; the chosen one (pressed) takes a lifted fill and a 3 px brass bar on its left.
+# Focus is a brass (primary: teal) ring 1 px outside the plate, so keyboard focus stays visible on every kind.
+func _style_science_button(button: Button, kind: String) -> void:
+	var edge := COLOR_BRASS if kind == "primary" else COLOR_TEAL_EDGE
+	var fill := Color("#231f12") if kind == "primary" else COLOR_UI_FILL
+	var styles := {
+		"normal": _ui_box(fill, edge),
+		"hover": _ui_box(fill.lightened(0.08), COLOR_HERE if kind == "primary" else COLOR_MARKER),
+		"pressed": _ui_box(COLOR_UI_ACTIVE if kind == "option" else fill.darkened(0.3), COLOR_HERE if kind == "primary" else COLOR_MARKER),
+		"disabled": _ui_box(COLOR_UI_ACTIVE, COLOR_TEAL_EDGE) if kind == "control" else _ui_box(Color("#141c20"), Color("#3b4a4f")),
+		"focus": _ui_box(Color(0, 0, 0, 0), COLOR_MARKER if kind == "primary" else COLOR_BRASS),
+	}
+	(styles["focus"] as StyleBoxFlat).draw_center = false
+	(styles["focus"] as StyleBoxFlat).set_expand_margin_all(1)
+	if kind == "control":
+		# The view and zoom buttons keep their 24 px rows (4 px vertical margins would grow "+" into "−").
+		for state in styles:
+			(styles[state] as StyleBoxFlat).content_margin_top = 1
+			(styles[state] as StyleBoxFlat).content_margin_bottom = 1
+	if kind == "option":
+		for state in ["pressed", "hover_pressed"]:
+			var chosen := _ui_box(COLOR_UI_ACTIVE, COLOR_BRASS)
+			chosen.border_width_left = 3
+			styles[state] = chosen
+		for state in styles:
+			(styles[state] as StyleBoxFlat).content_margin_left = 7
+			(styles[state] as StyleBoxFlat).content_margin_right = 4
+			(styles[state] as StyleBoxFlat).content_margin_top = 2
+			(styles[state] as StyleBoxFlat).content_margin_bottom = 2
+	for state in styles:
+		button.add_theme_stylebox_override(state, styles[state])
+	var text := COLOR_BRASS_TEXT if kind == "primary" else (Color("#a9e0d6") if kind == "secondary" else Color("#dcece8"))
+	button.add_theme_color_override("font_color", text)
+	button.add_theme_color_override("font_focus_color", text)
+	button.add_theme_color_override("font_hover_color", COLOR_TEXT)
+	button.add_theme_color_override("font_pressed_color", COLOR_BRASS_TEXT if kind != "secondary" else COLOR_TEXT)
+	button.add_theme_color_override("font_hover_pressed_color", COLOR_BRASS_TEXT)
+	button.add_theme_color_override("font_disabled_color", Color("#e9d9a8") if kind == "control" else Color("#7d8d90"))
+
+
+func _ui_box(fill: Color, edge: Color) -> StyleBoxFlat:
+	var box := StyleBoxFlat.new()
+	box.bg_color = fill
+	box.border_color = edge
+	box.set_border_width_all(1)
+	box.set_content_margin_all(4)
+	return box

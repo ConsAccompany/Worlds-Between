@@ -1,0 +1,49 @@
+# v03r2 targeted regressions, Godot 4.7.2, 2026-10-17 23:07 local, final tree (UNAPPROVED map art; no counter changed)
+## bg-visual-check-headless.log
+WORLD_MAP_VISUAL_CHECK_OK captures=0 buttons=3
+## bg-visual-check.log
+WORLD_MAP_VISUAL_CHECK_OK captures=2 buttons=3
+## commerce-weekly-settlement_calendar-hookup-smoke_m2-v01_20261015-082014-a9d18fda.log
+COMMERCE_WEEKLY_SETTLEMENT_OK checks=149
+## global-earth-map-calendar_export-data-inclusion-smoke_m2-v01_20261015-033441-6e5c07b5.log
+EXPORT_DATA_INCLUSION_SMOKE_OK mode=source checks=24
+## global-earth-map_smoke_m2-v01_20261015-024300-7b4550d6.log
+GLOBAL_EARTH_MAP_SMOKE_OK checks=212
+## global-earth-travel_calendar-route-core-smoke_m2-v01_20261015-024215-a19d5ae7.log
+GLOBAL_TRAVEL_CORE_OK
+## global-earth-travel_whole-hour-travel-rule-check_m2-v10_20261016-145448-8353eeac.log
+M2_WHOLE_HOUR_TRAVEL_OK checks=246
+## global-map-travel_integration-regression_m2-v02_20261015-031232-786a054d.log
+GLOBAL_MAP_TRAVEL_INTEGRATION_OK checks=114
+## m2_smoke.log
+M2_SMOKE_OK
+## m6_restart_smoke.log
+M6_RESTART_OK
+## m6_smoke.log
+M6_SMOKE_OK
+## pointer-regression-tempcopy.log
+CANVAS_POINTER_REGRESSION_OK
+## route-card-readability.log
+ROUTE_CARD_READABILITY_OK 119 checks
+## status-backing-readability.log
+STATUS_BACKING_READABILITY_OK 203 checks
+## us-science-sphere_runtime-migration-smoke_m2-v02_20261015-175011-5ffdb1e9.log
+US_SCIENCE_MIGRATION_SMOKE_OK checks=32
+## v03-capture-tool-tempcopy.log
+PASS Depart arrives in Chicago (earth.us.il.chicago)
+PASS Depart charged 360 min = the card's whole-hour option
+PASS exactly one travel_completed (1)
+NATIVE_MAP_ART_FAIL 5/1873 failed
+  FAIL relief JSON's flat colours equal the map's COLOR_LAND / COLOR_OCEAN / COLOR_LAKE
+  FAIL zh Chicago card: no route line on the map beside or under the card (211 gold px outside the card and marker)
+  FAIL en Chicago card: no route line on the map beside or under the card (211 gold px outside the card and marker)
+  FAIL zh reverse card: no route line on the map beside or under the card (231 gold px outside the card and marker)
+  FAIL en reverse card: no route line on the map beside or under the card (231 gold px outside the card and marker)
+## v03r1-zoom-tool-tempcopy.log
+MAP_V03R1_ZOOM_LABEL_OK 449 checks, 6 captures
+## v03r2 capture tool (outputs/, two runs)
+final-run1.log:MAP_V03R2_VISUAL_GATE_OK 896 checks, 10 captures
+final-run2.log:MAP_V03R2_VISUAL_GATE_OK 896 checks, 10 captures
+second run: all 10 captures byte-identical to the first
+## v03r2 source check
+SOURCE_CHECK_OK 40 checks (rebake identical, sha256-text-lf-v1)

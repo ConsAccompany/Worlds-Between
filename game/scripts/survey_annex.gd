@@ -5,7 +5,8 @@ const NativeIdle := preload("res://scripts/character_directional_idle.gd")
 const NativeMotion := preload("res://scripts/character_directional_motion.gd")
 const ROOM_ONE_BACKGROUND := {
 	"scifi.city": preload("res://assets/environments/rpg-2-star-ocean-the-second_scifi-survey-annex-room-01_environment-background_m8-concept_20261014-142350-f2ab83d1.png"),
-	"scifi.outskirts": preload("res://assets/environments/rpg-2-star-ocean-the-second_scifi-outskirts-survey-annex-room-01_environment-background_m8-concept_20261014-142650-1b4ca8d2.png"),
+	# UNAPPROVED v03 antenna-corridor candidate (native pixel plate from a layered Pixelorama source; v03 art pass over v02); this room only.
+	"scifi.outskirts": preload("res://assets/environments/yonkers-antenna-room1/rpg-2-star-ocean-the-second_yonkers-antenna-room1_corridor-plate_unapproved-v03_20261017-224447-15709be4.png"),
 	# UNAPPROVED v02 Capitol-annex candidate (palette-reduced underpainting + hand layers); replaces the rejected m8-concept plate for this room only.
 	"scifi.ruins": preload("res://assets/environments/wdc-survey-room1/rpg-2-star-ocean-the-second_wdc-annex-room1_capitol-interior-scene_unapproved-v02_20261017-160235-71300729.png"),
 }
@@ -29,10 +30,20 @@ const YONKERS_ROOM_TWO_FIXTURES := [
 	preload("res://assets/props/yonkers-maintenance-room2/rpg-2-star-ocean-the-second_yonkers-maintenance-room2_patrol-log-terminal-pixel-fixture_unapproved-v01_20261017-012500-a73e60b4.png"),
 	preload("res://assets/props/yonkers-maintenance-room2/rpg-2-star-ocean-the-second_yonkers-maintenance-room2_battery-log-rack-pixel-fixture_unapproved-v01_20261017-012500-a73e60b4.png"),
 ]
-const YONKERS_ROOM_ONE_FIXTURES := [
-	preload("res://assets/props/yonkers-antenna-room1/rpg-2-star-ocean-the-second_yonkers-antenna-room1_a-jitter-mast-pixel-fixture_unapproved-v01_20261017-024000-9b3e6f21.png"),
-	preload("res://assets/props/yonkers-antenna-room1/rpg-2-star-ocean-the-second_yonkers-antenna-room1_b-steady-dish-pixel-fixture_unapproved-v01_20261017-024000-9b3e6f21.png"),
-	preload("res://assets/props/yonkers-antenna-room1/rpg-2-star-ocean-the-second_yonkers-antenna-room1_c-cold-mast-pixel-fixture_unapproved-v01_20261017-024000-9b3e6f21.png"),
+# Yonkers room 1: three tall antennas y-sorted with the heroine (anchor = plinth front at y 210), feet
+# blockers, floor clue markers in front of each plinth and a foreground shrub layer.
+const YONKERS_ROOM_ONE_ANTENNAS := [
+	preload("res://assets/props/yonkers-antenna-room1/rpg-2-star-ocean-the-second_yonkers-antenna-room1_antenna-a-lattice-yagi_unapproved-v03_20261017-224447-15709be4.png"),
+	preload("res://assets/props/yonkers-antenna-room1/rpg-2-star-ocean-the-second_yonkers-antenna-room1_antenna-b-dish_unapproved-v03_20261017-224447-15709be4.png"),
+	preload("res://assets/props/yonkers-antenna-room1/rpg-2-star-ocean-the-second_yonkers-antenna-room1_antenna-c-guyed-whip_unapproved-v03_20261017-224447-15709be4.png"),
+]
+const YONKERS_ROOM_ONE_FOREGROUND := preload("res://assets/environments/yonkers-antenna-room1/rpg-2-star-ocean-the-second_yonkers-antenna-room1_foreground-occluder_unapproved-v03_20261017-224447-15709be4.png")
+const YONKERS_ANTENNA_BASE_Y := 210.0
+const YONKERS_ROOM_ONE_MARKERS := [Vector2(163, 228), Vector2(320, 228), Vector2(477, 228)]
+const YONKERS_ROOM_ONE_BLOCKERS := [
+	Rect2(0, 0, 640, 166), Rect2(0, 166, 38, 70), Rect2(602, 166, 38, 70), Rect2(0, 281, 640, 79),
+	Rect2(42, 160, 58, 26), Rect2(124, 186, 68, 26), Rect2(290, 166, 72, 46), Rect2(443, 186, 80, 26),
+	Rect2(428, 199, 14, 12), Rect2(524, 199, 14, 12), Rect2(494, 166, 14, 8), Rect2(224, 166, 34, 20), Rect2(380, 166, 34, 16),
 ]
 const WDC_ROOM_ONE_FIXTURES := [
 	preload("res://assets/props/wdc-annex-room1/rpg-2-star-ocean-the-second_wdc-annex-room1_layered-wall-pixel-fixture_unapproved-v02_20261017-160235-71300729.png"),
@@ -98,6 +109,7 @@ var overlay_message := ""
 var cue_player: AudioStreamPlayer
 var wdc_front: Node2D
 var wdc_front_mask := 0
+var yonkers_room_one := false
 
 
 func _ready() -> void:
@@ -115,6 +127,8 @@ func _ready() -> void:
 		wdc_front.draw.connect(_draw_wdc_front)
 		add_child(wdc_front)
 		_wdc_update_front()
+	if room == 1 and destination_id == "scifi.outskirts":
+		_build_yonkers_room_one()
 	_build_ui()
 	_start_audio()
 	AppState.language_changed.connect(_refresh_text)
@@ -171,8 +185,10 @@ func _process(delta: float) -> void:
 		hero.position.x = clampf(hero.position.x, 25.0, 615.0)
 		hero.position.y = clampf(hero.position.y, 78.0, 305.0)
 		if wdc_front != null:
-			hero.position = _wdc_slide(previous_position, hero.position)
+			hero.position = _slide(previous_position, hero.position, _wdc_blocked)
 			_wdc_update_front()
+		elif yonkers_room_one:
+			hero.position = _slide(previous_position, hero.position, _yonkers_blocked)
 		if hero.position.distance_to(previous_position) > 0.05:
 			_update_walk_animation(delta)
 		else:
@@ -255,10 +271,6 @@ func _draw() -> void:
 		for index in CITY_ROOM_TWO_FIXTURES.size():
 			var fixture_position: Vector2 = CLUE_POSITIONS[index] + Vector2(-32, 2)
 			draw_texture_rect(CITY_ROOM_TWO_FIXTURES[index], Rect2(fixture_position, Vector2(64, 64)), false)
-	if room == 1 and destination_id == "scifi.outskirts":
-		for index in YONKERS_ROOM_ONE_FIXTURES.size():
-			var fixture_position: Vector2 = CLUE_POSITIONS[index] + Vector2(-32, 2)
-			draw_texture_rect(YONKERS_ROOM_ONE_FIXTURES[index], Rect2(fixture_position, Vector2(64, 64)), false)
 	if room == 2 and destination_id == "scifi.outskirts":
 		for index in YONKERS_ROOM_TWO_FIXTURES.size():
 			var fixture_position: Vector2 = CLUE_POSITIONS[index] + Vector2(-32, 2)
@@ -281,7 +293,7 @@ func _draw() -> void:
 
 func _draw_clue_marker(target: CanvasItem, index: int, strokes_only := false) -> void:
 	var palette: Array = PALETTES[destination_id]
-	var position: Vector2 = CLUE_POSITIONS[index]
+	var position: Vector2 = YONKERS_ROOM_ONE_MARKERS[index] if yonkers_room_one else CLUE_POSITIONS[index]
 	var already := AppState.survey_clues.has(_clue_key((room - 1) * 3 + index))
 	var clue_color: Color = palette[1] if already else Color("#e2bb77")
 	if not strokes_only:
@@ -320,19 +332,47 @@ func _wdc_blocked(at: Vector2) -> bool:
 	return false
 
 
-func _wdc_slide(from: Vector2, to: Vector2) -> Vector2:
+func _slide(from: Vector2, to: Vector2, blocked: Callable) -> Vector2:
 	# A start inside a blocker (e.g. an older save) may walk out freely.
-	if not _wdc_blocked(to) or _wdc_blocked(from):
+	if not blocked.call(to) or blocked.call(from):
 		return to
-	if not _wdc_blocked(Vector2(to.x, from.y)):
+	if not blocked.call(Vector2(to.x, from.y)):
 		return Vector2(to.x, from.y)
-	if not _wdc_blocked(Vector2(from.x, to.y)):
+	if not blocked.call(Vector2(from.x, to.y)):
 		return Vector2(from.x, to.y)
 	return from
 
 
 func _wdc_inspect_rect(index: int) -> Rect2:
 	return Rect2(CLUE_POSITIONS[index].x - 40.0, 150.0, 80.0, 100.0)
+
+
+func _build_yonkers_room_one() -> void:
+	yonkers_room_one = true
+	# Native pixel plate and sprites: keep texels crisp at the 2x integer window scale.
+	texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	y_sort_enabled = true
+	for index in YONKERS_ROOM_ONE_ANTENNAS.size():
+		var antenna := Sprite2D.new()
+		antenna.name = "YonkersAntenna%d" % index
+		antenna.texture = YONKERS_ROOM_ONE_ANTENNAS[index]
+		antenna.centered = false
+		antenna.position = Vector2(CLUE_POSITIONS[index].x, YONKERS_ANTENNA_BASE_Y)
+		antenna.offset = Vector2(-64, -YONKERS_ANTENNA_BASE_Y + 58)
+		add_child(antenna)
+	var foreground := Sprite2D.new()
+	foreground.name = "YonkersForeground"
+	foreground.texture = YONKERS_ROOM_ONE_FOREGROUND
+	foreground.centered = false
+	foreground.z_index = 1
+	add_child(foreground)
+
+
+func _yonkers_blocked(at: Vector2) -> bool:
+	for rect in YONKERS_ROOM_ONE_BLOCKERS:
+		if rect.has_point(at):
+			return true
+	return false
 
 
 func _draw_annex_marker(at: Vector2, color: Color, terminal: bool) -> void:
@@ -387,6 +427,12 @@ func _build_ui() -> void:
 		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		label.add_theme_color_override("font_outline_color", Color("#0d1920"))
 		label.add_theme_constant_override("outline_size", 2)
+		if yonkers_room_one:
+			# Caption beside the floor marker so it never covers an antenna.
+			label.position = YONKERS_ROOM_ONE_MARKERS[index] + Vector2(18, -9)
+			label.size = Vector2(80, 18)
+			label.autowrap_mode = TextServer.AUTOWRAP_OFF
+			label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 		clue_labels.append(label)
 	exit_label = _label(canvas, EXIT_POSITION + Vector2(-38, -52), 10, Color("#e0e5cf"))
 	next_label = _label(canvas, NEXT_POSITION + Vector2(-33, -52), 10, Color("#e0e5cf"))
@@ -461,6 +507,12 @@ func _refresh_text() -> void:
 	help_label.text = AppState.text_for("survey_help")
 	back_button.text = AppState.text_for("survey_leave" if room == 1 else "survey_previous")
 	save_button.text = AppState.text_for("save_open")
+	if yonkers_room_one:
+		# "Return outside" overflows a 98 px button in English: widen it and shift Save left (this room only).
+		var wide := AppState.language == "en"
+		save_button.position.x = 398.0 if wide else 418.0
+		back_button.position.x = 503.0 if wide else 525.0
+		back_button.size.x = 125.0 if wide else 98.0
 	for index in CLUE_POSITIONS.size():
 		clue_labels[index].text = String(data["clues"][(room - 1) * 3 + index]["name"])
 	exit_label.text = AppState.text_for("survey_leave" if room == 1 else "survey_previous")
@@ -688,7 +740,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		if overlay.visible:
 			return
 		for index in CLUE_POSITIONS.size():
-			if hero.position.distance_to(CLUE_POSITIONS[index]) < 45.0 or (wdc_front != null and _wdc_inspect_rect(index).has_point(hero.position)):
+			if hero.position.distance_to(CLUE_POSITIONS[index]) < 45.0 or (wdc_front != null and _wdc_inspect_rect(index).has_point(hero.position)) \
+					or (yonkers_room_one and hero.position.distance_to(YONKERS_ROOM_ONE_MARKERS[index]) < 42.0):
 				_inspect_clue((room - 1) * 3 + index)
 				return
 		if room == 2 and hero.position.distance_to(TERMINAL_POSITION) < 46.0:
