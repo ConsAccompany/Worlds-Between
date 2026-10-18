@@ -1,8 +1,19 @@
 # Open World Pixel RPG Implementation Progress
 
-Last updated: 2026-10-15
+Last updated: 2026-10-18
 
 ## Summary
+
+Current status as of 2026-10-18 (source of truth: the production-completion task ledger, `outputs/rpg-2-star-ocean-the-second_production-completion_task-ledger_v01_20261018-140533-3de52073.json`, updated only through its ledger CLI).
+
+- Production completion is 45.3% (coding 40% + content 60%, from frozen task points): coding 86.5%, content 17.8%. Inspection performed is 13.2% and creator approval is 7%; both are separate meters that never change production credit. The older 40.8% figure in the MVP progress state is a different, legacy mixed delivery/acceptance metric and is not compared with or subtracted from 45.3%.
+- Scope: 51 character identities with 52 visual variants (male and female protagonist). Accepted so far: scenes 3/12, full runtime sprite sets 0/52, human post-art playthroughs 0/2. M2 global world and travel is technically 10/12 and not accepted. Final MVP acceptance is false.
+- Current canon: new runs start in NYC on 2537-05-25; the underground community is near the Catskills; travel uses the simple fixed whole-hour rule, which supersedes the earlier precise route-figure work (including the route-figure item in the M2 checklist below).
+- Recent technical work: the settings screen (language, master volume, movement preset) is functional; its UI art is unapproved. The Sentry v2 enemy, the battle backdrop loader and the Washington, D.C. annex pilots are technical capabilities that stay off by default. None of these is approved art.
+- Six Codex visual-review verdicts were recorded in the latest review pass: five are ready for creator review (no creator approval yet), and the Chicago Loop needs a native polish pass.
+- Remaining coding tasks: 4. The character sprite runtime and combat sprite runtime are being built (in progress, no credit); the VFX system and audio cues are still to do.
+
+### Historical summary notes (written through 2026-10-15; kept as recorded, superseded where they conflict with the current status above)
 
 - M1 project foundation is complete. Godot 4.7.2 imports and launches the project; a scene smoke check passes Chinese/English menu labels, entry/return, movement, and temporary sprite loading.
 - M2's original three-destination exploration slice passed: top-down movement, NPC interaction, visible enemies, an avoidance path, and enemy reset on reentry. **M2 is reopened** by the 2026-10-14 rule change: the map must cover Earth, cities and ruins must use real places, and car/air travel must advance a calendar. As of 2026-10-15 the global/regional map, route preview/confirm/cancel, integer-minute calendar and save migration are implemented and pass Godot automated tests. **M2 is still not complete.** The creator decided the anchors, the adventure start date and the first air route on 2026-10-15, and the runtime now implements them as technical candidates: new runs start in NYC (Lower Manhattan City Hall Park) on 2537-05-25, Yonkers and the Washington, D.C. Capitol ruins are reachable by car, and the NYC–Chicago air route lands in a placeholder Chicago Loop district. The travel registry lists the five Earth spheres plus the portal-only final planet. Route figures are preliminary estimates, the place and map art is missing or unaccepted, the Catskills community has no runtime place, and no human has reviewed or played it (see the latest 2026-10-15 integration entry below).

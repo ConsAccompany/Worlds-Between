@@ -24,6 +24,30 @@ const prodSnap = l => JSON.stringify(l.computed.production);
 const set = (l, id, status, extra = {}) => cli.setTask(l, ROOT, {task: id, status, evidence: [], now: NOW, ...extra});
 let passed = 0;
 const pass = msg => { passed += 1; console.log('PASS ' + msg); };
+// Review invariants never depend on a real review still being todo: an existing non-waived visual review is reopened in a
+// temporary in-memory copy only (real verdicts are never touched) and the copy's meters are recomputed as its baseline.
+const reopenVisualReview = l => {
+  for (const x of l.tasks.filter(t => t.stage === 'visual-review' && t.status !== 'not_required')) {
+    const copy = structuredClone(l), y = task(copy, x.id);
+    Object.assign(y, {status: 'todo', evidence: []}); delete y.outcome;
+    if (!cli.validate(copy, ROOT).length) return {l: cli.refresh(copy, ROOT), id: x.id};
+  }
+  assert.fail('no non-waived visual review can be reopened in a temporary copy');
+};
+// A review verdict (even changes_requested) moves only the inspection meter.
+const checkReviewMovesInspectionOnly = base => {
+  const {l, id} = reopenVisualReview(base), prod = prodSnap(l), insp = l.computed.inspection.done;
+  set(l, id, 'done', {outcome: 'changes_requested', evidence: [QA('nyc-city-hall-park_v06-cross-device-review-packet_unapproved-v01_20261017-174208-fe6b9f9d.md')]});
+  assert.equal(prodSnap(l), prod);
+  assert.equal(l.computed.inspection.done, insp + task(l, id).points);
+};
+// Status and notes stay mutable while the frozen task-definition hash is unchanged.
+const checkStatusMutableHashFrozen = base => {
+  const {l, id} = reopenVisualReview(base), hash = cli.taskSetHash(l.tasks);
+  Object.assign(task(l, id), {status: 'in_progress', note: {zh: 'x', en: 'y'}});
+  assert.deepEqual(cli.validate(l, ROOT), [], 'status and notes stay mutable');
+  assert.equal(cli.taskSetHash(l.tasks), hash, 'task-definition hash unchanged by status/note edits');
+};
 
 const before = [LEDGER, PROGRESS].map(sha);
 
@@ -61,14 +85,20 @@ const before = [LEDGER, PROGRESS].map(sha);
 
 // 4. A pending or changes-requested review never changes production credit.
 {
-  // Any still-pending visual review: real verdicts close specific ones over time (review.scene.city closed 2026-10-18).
-  const l = fresh(), prod = prodSnap(l), insp = l.computed.inspection.done;
-  const pending = l.tasks.find(x => x.stage === 'visual-review' && x.status === 'todo');
-  assert.ok(pending, 'a pending visual review exists');
-  set(l, pending.id, 'done', {outcome: 'changes_requested', evidence: [QA('nyc-city-hall-park_v06-cross-device-review-packet_unapproved-v01_20261017-174208-fe6b9f9d.md')]});
-  assert.equal(prodSnap(l), prod);
-  assert.equal(l.computed.inspection.done, insp + pending.points);
+  checkReviewMovesInspectionOnly(fresh());
   pass('review done (even changes_requested) moves only the inspection meter');
+}
+
+// 4b. Regression: the review invariants hold even when every real non-waived visual review is finished.
+{
+  const all = fresh();
+  for (const x of all.tasks.filter(t => t.stage === 'visual-review' && t.status !== 'not_required')) Object.assign(x, {status: 'done', outcome: x.outcome || 'passed', evidence: x.evidence.length ? x.evidence : [cli.PROGRESS_REL], statusAt: x.statusAt || NOW});
+  cli.refresh(all, ROOT);
+  assert.equal(all.tasks.filter(x => x.stage === 'visual-review' && x.status === 'todo').length, 0);
+  assert.deepEqual(cli.validate(all, ROOT), []);
+  checkReviewMovesInspectionOnly(all);
+  checkStatusMutableHashFrozen(all);
+  pass('review invariants need no real todo visual review (all-finished temporary copy)');
 }
 
 // 5. Waivers are not work: excluded from the inspection numerator and denominator; approval/waiver toggles leave production alone.
@@ -178,8 +208,8 @@ const before = [LEDGER, PROGRESS].map(sha);
   for (const id of ['code.runtime.character-sprite-pipeline', 'code.runtime.combat-sprite-pipeline', 'code.runtime.battle-arena-backdrop']) {
     const x = task(l, id);
     assert.ok(/Normal runtime capability/.test(x.doneCriterion.en) && /opt-in flag or test fixture with targeted tests/.test(x.doneCriterion.en), 'capability criterion: ' + id);
-    // Status is mutable: todo, or done with code evidence (a capability closeout never implies default adoption or approval).
-    assert.ok(x.status === 'todo' || (x.status === 'done' && x.evidence.some(e => /^game\/scripts\//.test(e)) && x.evidence.some(e => /^docs\/qa\//.test(e))), 'todo or done with code + QA evidence: ' + id);
+    // Status is mutable: todo, in_progress (no credit), or done with code evidence (a capability closeout never implies default adoption or approval).
+    assert.ok(['todo', 'in_progress'].includes(x.status) || (x.status === 'done' && x.evidence.some(e => /^game\/scripts\//.test(e)) && x.evidence.some(e => /^docs\/qa\//.test(e))), 'todo/in_progress or done with code + QA evidence: ' + id);
   }
   // The backdrop capability and the battle-arena art tasks are independent (temp fixture, not the tracked statuses): any
   // status of the default-adoption and approval tasks leaves the backdrop status and the coding meter alone, and flipping
@@ -220,9 +250,8 @@ const before = [LEDGER, PROGRESS].map(sha);
   assert.ok(cli.validate(strong, ROOT).some(e => /may not require default art adoption/.test(e)));
   const deps = fresh(); task(deps, 'content.char.milo.static-west').dependsOn = [];
   assert.ok(cli.validate(deps, ROOT).some(e => /frozen baseline/.test(e)), 'dropping a dependency fails the freeze');
-  const mutable = fresh(); Object.assign(mutable.tasks.find(x => x.stage === 'visual-review' && x.status === 'todo'), {status: 'in_progress', note: {zh: 'x', en: 'y'}});
-  assert.deepEqual(cli.validate(mutable, ROOT), [], 'status and notes stay mutable');
-  pass('coding = normal runtime capability via opt-in/fixtures (no approval or default-adoption dependency); pipeline tasks todo or done with code evidence; a coding closeout recomputes by formula; freeze covers criteria and dependencies, status stays mutable');
+  checkStatusMutableHashFrozen(fresh());
+  pass('coding = normal runtime capability via opt-in/fixtures (no approval or default-adoption dependency); pipeline tasks todo, in_progress or done with code evidence; a coding closeout recomputes by formula; freeze covers criteria and dependencies, status stays mutable');
 }
 
 // 9. No evidence, missing evidence, unmet dependencies or the rejected 32x48 baseline cannot complete a task.
