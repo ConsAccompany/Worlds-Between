@@ -18,11 +18,11 @@ Date: 2026-10-18. This is an operational record only. It accepts no art and chan
 
 ## Public-safe proof
 
-`outputs/rpg-2-star-ocean-the-second_cloud-tracker_canon-character-labels-complete-live-proof_v18_20261018-085430-d1a493f8.png`
+`outputs/rpg-2-star-ocean-the-second_cloud-tracker_canon-character-labels-complete-live-proof_v18_20261018-085430-d1a493f8.jpg`
 - byte-exact copy of root's screenshot;
 - sha256 `61e9c9c851b4e173df190ea86d6b1a9e6d7f8f1fe6625933d17c391f3e48e93e`, 187,874 bytes.
 
-Note: the file content is a JPEG (2104×1244) despite its `.png` name. It is kept byte-exact as delivered.
+Note: the file content is a JPEG (2104×1244). Root delivered it with a wrong `.png` extension, and 43ba56f first committed it under that name. It has since been renamed to `.jpg` with the same bytes; the image itself was not edited.
 
 Claude inspected the image. It shows the production 角色 (Characters) tab:
 - the sync bar reads "GitHub 已同步 · 160b823 · 8:54:11 AM";
