@@ -4,3 +4,9 @@ game/assets/environments/candidates/nyc-chp-v03_20261016-160059-4b2f50f6/rpg-2-s
 outputs/chicago-loop-state-lake-v02/rpg-2-star-ocean-the-second_chicago-loop_state-lake_palette_unapproved-v02_20261017-160959-55667f46.gpl text eol=lf
 # Yonkers room 1 v05 source check (G4) byte-hashes this LF palette against its manifest; keep it LF on every checkout.
 outputs/yonkers-room1-v05_4b9d66f1/rpg-2-star-ocean-the-second_yonkers-antenna-room1_native-palette_unapproved-v05_20261018-043851-4b9d66f1.gpl text eol=lf
+# Female south run v03-v07 and the compact locomotion v02 pilots: the v07 focused check reads the amendment manifest as raw
+# bytes (check 03 requires no CR) and receipts/manifests are pinned by sha256 of their LF bytes; keep these JSON files LF on
+# every checkout (autocrlf=true included). Scoped to these paths only; no global line-ending change.
+game/assets/characters/locomotion-pilots-compact-v02/*.json text eol=lf
+game/assets/characters/run-v0[3-7]-unapproved/*.json text eol=lf
+outputs/*south-run-v0[67]*receipt*.json text eol=lf

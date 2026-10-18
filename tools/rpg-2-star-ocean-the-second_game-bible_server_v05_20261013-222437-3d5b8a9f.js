@@ -17,7 +17,39 @@ const nestedPngAllowlist = new Set([
   'nyc-chp-v06_20261017-165253-4519dffe/rpg-2-star-ocean-the-second_nyc-city-hall-park_godot-zh-entry-640x360_unapproved-v06_20261017-165253-4519dffe.png',
   'chicago-loop-state-lake-v03r1/godot-runtime/rpg-2-star-ocean-the-second_chicago-loop_state-lake-godot-zh-entry-640x360_v03r1_20261017-184340-44bc6d7f.png',
   'yonkers-room1-v03_15709be4/captures/rpg-2-star-ocean-the-second_yonkers-antenna-room1_v03-godot-zh-entry-640x360_20261017-224447-15709be4.png',
+  'yonkers-room1-v05_4b9d66f1/cap/rpg-2-star-ocean-the-second_yonkers-antenna-room1_v05-test-only-godot-zh-entry-640x360_20261018-043851-4b9d66f1.png',
+  'wdc-cw-v12r2_20261018-042200-7c1e5b39/rpg-2-star-ocean-the-second_wdc-capitol-west_rt640-zh-entry-v8ref_unapproved-v12r2_20261018-042200-7c1e5b39.png',
+  'wdc-rc2-v01i_3a34d132/cap/rpg-2-star-ocean-the-second_wdc-annex-room2_v01-godot-zh-entry-640x360_20261018-035908-3a34d132.png',
+  'chicago-loop-state-lake-v05/godot-runtime/rpg-2-star-ocean-the-second_chicago-loop_state-lake-godot-zh-entry-640x360_v05_20261018-000240-1d1b9337.png',
 ]);
+// The only videos served (/media/<exact file name in outputs/>): review-queue MP4s, each pinned by sha256-bytes and at most
+// 16 MiB. A file whose bytes no longer match its pin is refused (409); byte ranges are honoured for the native player.
+const mediaMaxBytes = 16 * 1024 * 1024;
+const mediaAllowlist = new Map([
+  ['rpg-2-star-ocean-the-second_city-bright_protagonist-female-south-run-v07-preview-showreel-1x-30fps-h48_unapproved-nonruntime_20261018-083355-72933ba3.mp4', 'c3df9f474fd4ef9cefa3e2d3c955b906bc3b59fbe95367701fa618e594a38882'],
+  ['rpg-2-star-ocean-the-second_annex-dark_protagonist-female-south-run-v07-preview-showreel-1x-60fps-h48_unapproved-nonruntime_20261018-083355-72933ba3.mp4', 'a68ecf7c231fd429d562743fe4e4e130c52f82477745c3adf364ae1ba80af73a'],
+]);
+// Pure: {status, headers, body} for GET /media/<name>; root defaults to outputs/ (tests pass a temp dir with tampered copies).
+function mediaResponse(name, rangeHeader, root = output, allowlist = mediaAllowlist) {
+  const text = (status, message) => ({status, headers: {'Content-Type': 'text/plain; charset=utf-8'}, body: Buffer.from(message)});
+  if (typeof name !== 'string' || !allowlist.has(name) || path.basename(name) !== name) return text(404, 'Not found');
+  let data;
+  try {
+    const stat = fs.statSync(path.join(root, name));
+    if (!stat.isFile() || stat.size > mediaMaxBytes) return text(413, 'Media too large');
+    data = fs.readFileSync(path.join(root, name));
+  } catch (_) { return text(404, 'Not found'); }
+  if (require('node:crypto').createHash('sha256').update(data).digest('hex') !== allowlist.get(name)) return text(409, 'Media does not match its pin');
+  const headers = {'Content-Type': 'video/mp4', 'Accept-Ranges': 'bytes', 'Cache-Control': 'no-store'};
+  if (rangeHeader === undefined || rangeHeader === null || rangeHeader === '') return {status: 200, headers: {...headers, 'Content-Length': String(data.length)}, body: data};
+  const match = /^bytes=(\d*)-(\d*)$/.exec(String(rangeHeader).trim());
+  let start, end;
+  if (match && match[1] !== '') { start = Number(match[1]); end = match[2] === '' ? data.length - 1 : Math.min(Number(match[2]), data.length - 1); }
+  else if (match && match[2] !== '') { start = Math.max(data.length - Number(match[2]), 0); end = data.length - 1; }
+  if (start === undefined || !Number.isSafeInteger(start) || start > end || start >= data.length)
+    return {status: 416, headers: {'Content-Range': 'bytes */' + data.length, 'Content-Type': 'text/plain; charset=utf-8'}, body: Buffer.from('Range not satisfiable')};
+  return {status: 206, headers: {...headers, 'Content-Range': `bytes ${start}-${end}/${data.length}`, 'Content-Length': String(end - start + 1)}, body: data.subarray(start, end + 1)};
+}
 const receiptPattern = /^rpg-2-star-ocean-the-second_scifi-region_playtest-receipt_m7_\d{8}-\d{6}-[0-9a-f]{8}\.json$/;
 const routes = {
   '/': ['rpg-2-star-ocean-the-second_game-bible_widget_v03_20261013-195526-8e5a1c43.html','text/html; charset=utf-8'],
@@ -121,7 +153,7 @@ function startPlaytest(request,response) {
   });
   respond(response,202,JSON.stringify(playtestStatus),'application/json; charset=utf-8');
 }
-http.createServer((request,response)=>{
+const server=http.createServer((request,response)=>{
   let pathname;
   try {pathname=new URL(request.url,'http://127.0.0.1').pathname;}
   catch(_) {return respond(response,400,'Invalid URL');}
@@ -132,6 +164,14 @@ http.createServer((request,response)=>{
   if(pathname==='/health')return respond(response,200,'ok');
   if(pathname==='/playtest-status')return respond(response,200,JSON.stringify(playtestStatus),'application/json; charset=utf-8');
   if(pathname==='/playtests')return respond(response,200,JSON.stringify({runs:playtestSummaries()}),'application/json; charset=utf-8');
+  if(pathname.startsWith('/media/')){
+    let name;
+    try {name=decodeURIComponent(pathname.slice('/media/'.length));}
+    catch(_) {return respond(response,400,'Invalid media path');}
+    const result=mediaResponse(name,request.headers.range);
+    response.writeHead(result.status,result.headers);
+    return response.end(result.body);
+  }
   if(pathname.startsWith('/assets/')){
     let filename;
     try {filename=decodeURIComponent(pathname.slice('/assets/'.length));}
@@ -144,5 +184,7 @@ http.createServer((request,response)=>{
   if(!Object.hasOwn(routes,pathname))return respond(response,404,'Not found');
   const [filename,mime]=routes[pathname];
   fs.readFile(path.join(output,filename),(error,data)=>error?respond(response,503,'File unavailable'):respond(response,200,data,mime));
-}).listen(port,'127.0.0.1');
+});
+if(require.main===module)server.listen(port,'127.0.0.1');
+module.exports={mediaResponse,mediaAllowlist,mediaMaxBytes};
 

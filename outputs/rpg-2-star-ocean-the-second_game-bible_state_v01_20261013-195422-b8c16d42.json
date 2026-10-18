@@ -3937,7 +3937,7 @@
     },
     {
       "title": "MVP 美术技术路线",
-      "detail": "目标是完成画面的品质。先用 Godot 2D 分层完成科技城市场景样板，再根据实际游戏画面决定是否需要 2.5D 场景技术。 华盛顿特区已定为高精度 Pixelorama 场景试点：已有未批准候选（可步行西侧园区 v01–v08、独立的穹顶定场远景 v01–v02），均未接入运行时、未验收；最新的可步行 v08（废墟状态可读性）为未批准、非运行时候选，技术检查 67/67 通过，不是场景验收；v06 的 47/47（勘误后）与 v07 的 60/60 保留为历史记录；良渚改为未来亚洲／武侠场景，不属于 MVP。"
+      "detail": "目标是完成画面的品质。先用 Godot 2D 分层完成科技城市场景样板，再根据实际游戏画面决定是否需要 2.5D 场景技术。 华盛顿特区已定为高精度 Pixelorama 场景试点：已有未批准候选（可步行西侧园区 v01–v08、独立的穹顶定场远景 v01–v02），均未接入运行时、未验收；此后已提交两个技术选择性候选：国会西侧外景 v12r2（--wdc-capitol-west-v12r2）与附楼 2 号房记录室 v01（--wdc-records-chamber-v01），均默认关闭，画面未验收；最新的可步行 v08（废墟状态可读性）为未批准、非运行时候选，技术检查 67/67 通过，不是场景验收；v06 的 47/47（勘误后）与 v07 的 60/60 保留为历史记录；良渚改为未来亚洲／武侠场景，不属于 MVP。"
     },
     {
       "title": "职业与个人技能树（待按新规则重设计）",
@@ -4278,7 +4278,7 @@
     }
   },
   "environmentVisualReview": {
-    "status": "The playable map is now a real-geography global map with US Northeast and Great Lakes regional layers (US science sphere, implemented as a technical candidate, automated tests pass; the runtime map shows the unapproved native map-art candidate v01r1, and map art v02 is being built separately and remains unapproved). The Chicago Loop runs the unapproved State/Lake v02 runtime visual candidate (pushed 00199fc), still a technical arrival scene. City/outskirts/ruins outdoor candidates and six survey room candidates are referenced by playable Godot scenes; the Washington survey annex room 1 runs the unapproved v02 runtime visual candidate (pushed 00199fc); battle arena candidates are separate. City Hall Park walkable pilots v01-v04 are unapproved, v05 is a test candidate and v06 is being built separately; the Capitol exterior candidates (walkable v01-v08, dome vista v01-v02) are unapproved and not in the runtime. The old fictional three-node map background is no longer used. The stone-plaza ruins and the stone-column ruins arena remain regression items under the 2026-10-14 geography rule. Scene visual acceptance is 3/12: on 2026-10-17 the creator accepted the environment quality of NYC public facilities rooms 1 and 2 and the Yonkers signal maintenance room 2 only (approvalLedger). That accepts no character motion, runtime sprite, other scene, human playtest or the science chapter as a whole; overall art acceptance stays false.",
+    "status": "The playable map is now a real-geography global map with US Northeast and Great Lakes regional layers (US science sphere, implemented as a technical candidate, automated tests pass; the runtime map shows the unapproved native map-art candidate v01r1, and map art v02 is being built separately and remains unapproved). The Chicago Loop runs the unapproved State/Lake v02 runtime visual candidate (pushed 00199fc), still a technical arrival scene. City/outskirts/ruins outdoor candidates and six survey room candidates are referenced by playable Godot scenes; the Washington survey annex room 1 runs the unapproved v02 runtime visual candidate (pushed 00199fc); battle arena candidates are separate. City Hall Park walkable pilots v01-v04 are unapproved, v05 is a test candidate and v06 is being built separately; the Capitol exterior candidates (walkable v01-v08, dome vista v01-v02) are unapproved and not in the runtime; since ffa165c the Capitol west exterior v12r2 (--wdc-capitol-west-v12r2) and the annex records room 2 v01 (--wdc-records-chamber-v01) are committed technical opt-ins, off by default, art not accepted. The old fictional three-node map background is no longer used. The stone-plaza ruins and the stone-column ruins arena remain regression items under the 2026-10-14 geography rule. Scene visual acceptance is 3/12: on 2026-10-17 the creator accepted the environment quality of NYC public facilities rooms 1 and 2 and the Yonkers signal maintenance room 2 only (approvalLedger). That accepts no character motion, runtime sprite, other scene, human playtest or the science chapter as a whole; overall art acceptance stays false.",
     "canvasInputRegression": "docs/qa/rpg-2-star-ocean-the-second_scifi-canvas_input-ui-regression_m8-v01_20261014-195518-4f27b39c.md",
     "canvasInputRegressionPassed": true,
     "englishMapHelpOverlapFixed": true,
@@ -4765,8 +4765,8 @@
       ],
       "currentCandidates": {
         "asOf": "2026-10-18",
-        "zh": "当前候选优先：以下三项是 GitHub 上（c20118d）最新的未批准候选，只按各自限定范围标注。#1 已批准的探索女主朝南静止帧 v8 仅作限定范围参考。较早的对照条目保留在下方折叠的历史区，路径、哈希与批准标记均不变。未同步到 GitHub 的本机后续版本不在此列出。不批准任何画面；40.8%、M2 10/12、场景 3/12、精灵 0/52、试玩 0/2 不变。",
-        "en": "Current candidates first: these three are the latest UNAPPROVED candidates on GitHub (c20118d), each badged only within its limited scope. #1, the approved exploration heroine south still v8, stays a scoped reference. Older comparison entries remain below in a collapsed history section with paths, hashes and approval flags unchanged. Later local passes not synced to GitHub are not listed. Nothing is approved; 40.8%, M2 10/12, scenes 3/12, sprites 0/52 and playtests 0/2 do not change.",
+        "zh": "当前候选优先：以下九项都是已提交到 GitHub 的未批准候选，各自只在限定范围内标注（固定到引入它的提交、git blob 与 sha256）。地图 v03r2 保留；扬克斯 v03 由 v05（仅测试）取代，战斗静止帧 v12 由 v13 取代，被取代的条目保留在历史区。v07 跑步动作是两张独立的 MP4 卡片（原生控件、不自动播放、正常 1×）。#1 已批准的 v8 朝南静止帧仅作限定范围参考。不批准任何画面、步态或完整精灵；40.8%、M2 10/12、场景 3/12、精灵 0/52、试玩 0/2 不变。",
+        "en": "Current candidates first: these nine are UNAPPROVED candidates committed to GitHub, each badged only within its limited scope and pinned to its introducing commit, git blob and sha256. Map v03r2 stays; Yonkers v03 is replaced by v05 (test-only) and battle static v12 by v13, and the replaced entries stay in history. The v07 run motion is two separate MP4 cards (native controls, no autoplay, normal 1x). #1, the approved v8 south still, stays a scoped reference. Nothing approves any art, gait or full sprite; 40.8%, M2 10/12, scenes 3/12, sprites 0/52 and playtests 0/2 do not change.",
         "scopedReferenceOrders": [
           1
         ],
@@ -4813,6 +4813,335 @@
             "sha256": "db6c3d8583c68442209a6862c8d352916781a4d700e20ecbc09fcf7d569c264e"
           },
           {
+            "kind": "actual-godot-capture",
+            "creatorApproved": false,
+            "artAccepted": false,
+            "id": "current-yonkers-antenna-room1-v05",
+            "rank": 2,
+            "label": {
+              "zh": "扬克斯天线走廊 1 号房 v05 · 中文入口（仅测试）",
+              "en": "Yonkers antenna corridor room 1 v05, zh entry (test-only)"
+            },
+            "file": "outputs/yonkers-room1-v05_4b9d66f1/cap/rpg-2-star-ocean-the-second_yonkers-antenna-room1_v05-test-only-godot-zh-entry-640x360_20261018-043851-4b9d66f1.png",
+            "runtimeIntegrated": false,
+            "testOnly": true,
+            "scope": {
+              "zh": "仅测试、未接入运行时、默认关闭：survey_annex.gd 仍载入 v03；不计入场景 3/12。",
+              "en": "Test-only, nonruntime, off by default: survey_annex.gd still loads v03; not counted in scenes 3/12."
+            },
+            "supersedesCurrentIds": [
+              "current-yonkers-antenna-room1-v03"
+            ],
+            "badge": {
+              "zh": "未批准 · 未接入运行时 · 未验收",
+              "en": "Unapproved · nonruntime · not accepted",
+              "tone": "warn"
+            },
+            "caption": {
+              "zh": "石块与铺板有变化、碟形天线可读、天线不压 HUD，但仍偏几何、墙面偏碎。未批准。",
+              "en": "Stone and slabs vary, the dish reads and the antennas clear the HUD, but it is still geometric with a busy wall. Unapproved."
+            },
+            "qa": "docs/qa/rpg-2-star-ocean-the-second_yonkers-antenna-corridor-room1_v05-scene-quality-refinement_qa-note_unapproved-v05_20261018-043851-4b9d66f1.md",
+            "syncState": "committed-at-ffa165c",
+            "gitBlob": "9f7a419e59fac54129334634c075dea9d0439522",
+            "sha256": "3e2f523eeb78bae12fde2f8d8315feac84ad7d9a381960c100ade1958f1c4a96"
+          },
+          {
+            "kind": "actual-godot-capture",
+            "creatorApproved": false,
+            "artAccepted": false,
+            "id": "current-battle-heroine-static-v13",
+            "rank": 3,
+            "label": {
+              "zh": "战斗女主 朝右待机静止帧 v13 · 档案馆探针",
+              "en": "Battle heroine, right idle static v13, archive probe"
+            },
+            "file": "outputs/rpg-2-star-ocean-the-second_protagonist-female_sideview-idle-right-static-native0p65_party-capture-archive-640-probe_unapproved-v13_20261017-235615-0cc9f010.png",
+            "runtimeIntegrated": false,
+            "approvedScopeOnly": "0.65 battle display proportion",
+            "scope": {
+              "zh": "仅为测试用静止帧，未接入运行时；只有 0.65 比例已批准；不是完整角色精灵，没有动画；精灵仍为 0/52。",
+              "en": "Test-only static frame, nonruntime; only the 0.65 proportion is approved; not a complete character sprite, no animation; sprites stay 0/52."
+            },
+            "supersedesCurrentIds": [
+              "current-battle-heroine-static-v12"
+            ],
+            "badge": {
+              "zh": "未批准 · 未接入运行时 · 未验收",
+              "en": "Unapproved · nonruntime · not accepted",
+              "tone": "warn"
+            },
+            "caption": {
+              "zh": "材质与形体修整，靴子按真实运行时接触阴影重新调整。未批准。",
+              "en": "Material and form pass; boots re-keyed to the real runtime contact shadow. Unapproved."
+            },
+            "qa": "docs/qa/rpg-2-star-ocean-the-second_protagonist-female_battle-static-v13-material-form-real-shadow_qa-note_unapproved-v01_20261017-235615-7406d6eb.md",
+            "syncState": "committed-at-7553581",
+            "gitBlob": "b95b27ab8ef0cbd0165336754242d4dd6a024fc4",
+            "sha256": "5be556014d1e682a3a3f72adace8ddfc0d6a8e96a2354fea0130b00679e559e1"
+          },
+          {
+            "kind": "actual-godot-capture",
+            "creatorApproved": false,
+            "artAccepted": false,
+            "id": "current-wdc-capitol-west-exterior-v12r2",
+            "rank": 4,
+            "label": {
+              "zh": "华盛顿国会西侧外景 v12r2 · 中文入口（选择性开启）",
+              "en": "Washington Capitol west exterior v12r2, zh entry (opt-in)"
+            },
+            "file": "outputs/wdc-cw-v12r2_20261018-042200-7c1e5b39/rpg-2-star-ocean-the-second_wdc-capitol-west_rt640-zh-entry-v8ref_unapproved-v12r2_20261018-042200-7c1e5b39.png",
+            "runtimeIntegrated": false,
+            "optInOnly": true,
+            "optInFlag": "--wdc-capitol-west-v12r2",
+            "scope": {
+              "zh": "已提交的技术选择性候选：仅在 --wdc-capitol-west-v12r2 下可达，默认关闭；画面中的女主是仅供测试的已批准 v8 朝南静止帧；画面未验收。",
+              "en": "Committed technical opt-in: reachable only with --wdc-capitol-west-v12r2, off by default; the heroine shown is the test-only approved v8 south still; art not accepted."
+            },
+            "badge": {
+              "zh": "未批准 · 仅选择性开启（默认关闭）· 未验收",
+              "en": "Unapproved · opt-in only (off by default) · not accepted",
+              "tone": "warn"
+            },
+            "caption": {
+              "zh": "哨兵遭遇视口修正版。未批准，不计入验收。",
+              "en": "Sentry-encounter viewport fix. Unapproved; counts toward nothing."
+            },
+            "qa": "docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_sentry-encounter-viewport_qa-note_unapproved-v12r2_20261018-042200-7c1e5b39.md",
+            "integrationEvidence": "docs/qa/rpg-2-star-ocean-the-second_washington-rooms-exterior_isolated-7553581-integration-verification_qa-note_unapproved-v01_20261018-044639-01c3ac83.md",
+            "syncState": "committed-at-ffa165c",
+            "gitBlob": "4879aa4697106f937fabd727a04ad4828ff0b77c",
+            "sha256": "4e69f5168ef1dacff5a4d83beb9487108450cfa4d83657b2dc7bf9ff54b11935"
+          },
+          {
+            "kind": "actual-godot-capture",
+            "creatorApproved": false,
+            "artAccepted": false,
+            "id": "current-wdc-annex-records-room2-v01",
+            "rank": 5,
+            "label": {
+              "zh": "华盛顿勘察附楼 2 号房 记录室 v01 · 中文入口（选择性开启）",
+              "en": "Washington annex room 2 records chamber v01, zh entry (opt-in)"
+            },
+            "file": "outputs/wdc-rc2-v01i_3a34d132/cap/rpg-2-star-ocean-the-second_wdc-annex-room2_v01-godot-zh-entry-640x360_20261018-035908-3a34d132.png",
+            "runtimeIntegrated": false,
+            "optInOnly": true,
+            "optInFlag": "--wdc-records-chamber-v01",
+            "scope": {
+              "zh": "已提交的技术选择性候选：仅在 --wdc-records-chamber-v01 下启用，默认关闭时 1、2 号房与之前一致；画面未验收。",
+              "en": "Committed technical opt-in: active only with --wdc-records-chamber-v01; with the flag off rooms 1 and 2 match the previous default; art not accepted."
+            },
+            "badge": {
+              "zh": "未批准 · 仅选择性开启（默认关闭）· 未验收",
+              "en": "Unapproved · opt-in only (off by default) · not accepted",
+              "tone": "warn"
+            },
+            "caption": {
+              "zh": "四个原生像素陈设可游玩。未批准，不计入验收。",
+              "en": "Playable with four native pixel fixtures. Unapproved; counts toward nothing."
+            },
+            "qa": "docs/qa/rpg-2-star-ocean-the-second_wdc-annex-room2_records-chamber-playable-integration_qa-note_unapproved-v01_20261018-035908-3a34d132.md",
+            "integrationEvidence": "docs/qa/rpg-2-star-ocean-the-second_washington-rooms-exterior_isolated-7553581-integration-verification_qa-note_unapproved-v01_20261018-044639-01c3ac83.md",
+            "syncState": "committed-at-ffa165c",
+            "gitBlob": "476d0d0106d4322f397ef74a7e62196c0c437343",
+            "sha256": "5acfb6a997dee96e78fdc703e2ea1915a3c4f64f624a5d8a55fd1e9e5657fa31"
+          },
+          {
+            "kind": "actual-godot-capture",
+            "creatorApproved": false,
+            "artAccepted": false,
+            "id": "current-chicago-state-lake-v05",
+            "rank": 6,
+            "label": {
+              "zh": "芝加哥 State/Lake v05 · 中文入口（仅测试）",
+              "en": "Chicago State/Lake v05, zh entry (test-only)"
+            },
+            "file": "outputs/chicago-loop-state-lake-v05/godot-runtime/rpg-2-star-ocean-the-second_chicago-loop_state-lake-godot-zh-entry-640x360_v05_20261018-000240-1d1b9337.png",
+            "runtimeIntegrated": false,
+            "testOnly": true,
+            "optInOnly": true,
+            "scope": {
+              "zh": "仅测试工具中的选择性开启；共享的 Loop .tscn 仍为 v02；画面未验收。",
+              "en": "Test-harness opt-in only; the shared Loop .tscn still plays v02; art not accepted."
+            },
+            "badge": {
+              "zh": "未批准 · 未接入运行时 · 未验收",
+              "en": "Unapproved · nonruntime · not accepted",
+              "tone": "warn"
+            },
+            "caption": {
+              "zh": "在 v04 基础上的一次有限美术修整，立面比 v04 更繁密。未批准。",
+              "en": "One bounded art pass over v04; the facade is busier than v04. Unapproved."
+            },
+            "qa": "docs/qa/rpg-2-star-ocean-the-second_chicago-loop_state-lake-arrival-block-native-scene_qa-note_unapproved-v05_20261018-000443-1aef6e46.md",
+            "syncState": "committed-at-7553581",
+            "gitBlob": "2e2d11bbc40ad13f06d0a302481f4d4ba2dfab05",
+            "sha256": "bca59a3531f4590537abfadea7d19bc0a9156eb3a3ec03c94e4b53c2e22b529c"
+          },
+          {
+            "kind": "actual-godot-capture-video",
+            "creatorApproved": false,
+            "artAccepted": false,
+            "mediaType": "video/mp4",
+            "id": "current-heroine-south-run-v07-bright-30fps",
+            "rank": 7,
+            "label": {
+              "zh": "女主朝南跑步 v07 · 明亮城市 30 fps 1× 展示片",
+              "en": "Heroine south run v07, city-bright 30 fps 1x showreel"
+            },
+            "file": "outputs/rpg-2-star-ocean-the-second_city-bright_protagonist-female-south-run-v07-preview-showreel-1x-30fps-h48_unapproved-nonruntime_20261018-083355-72933ba3.mp4",
+            "runtimeIntegrated": false,
+            "testOnly": true,
+            "motionView": {
+              "canvas": "1280x720 actual Godot window showing the 640x360 LOGICAL viewport (2x integer scale)",
+              "heroineHeightLogicalPx": 48,
+              "playback": "normal speed 1x",
+              "autoplay": false,
+              "inspection": {
+                "zh": "root 只检查了诊断帧，以及浏览器按 1× 速率播放的开头与结尾；这不是连续流畅度认证。",
+                "en": "Root inspected diagnostic frames and the browser rate-1 start and end only; this is not a continuous-fluidity certification."
+              },
+              "limits": {
+                "zh": [
+                  "手臂缓动在 30 fps 落地后仍有姿态突变（477–484 px，5/156 例）",
+                  "混合帧时间下最坏停步 270.8 ms（v06 停步时钟上限，未改）",
+                  "反向时硬切到运行时占位的朝北行走，不是试作美术"
+                ],
+                "en": [
+                  "arm-easing pose spikes after the next touchdown at 30 fps (477-484 px, 5 of 156 cases)",
+                  "mixed frame times: worst stop 270.8 ms (the v06 stop clock limit, unchanged)",
+                  "reversal hard-cuts to the runtime placeholder north walk, not pilot art"
+                ]
+              },
+              "approvalNote": {
+                "zh": "不批准步态，也不批准完整角色精灵；精灵仍为 0/52。",
+                "en": "Neither the gait nor a full sprite is approved; sprites stay 0/52."
+              }
+            },
+            "scope": {
+              "zh": "单方向、仅测试的动作候选，未接入运行时；1280×720 实际窗口显示 640×360 逻辑视口，女主 48 逻辑像素，正常 1× 播放。",
+              "en": "Single-direction test-only motion candidate, nonruntime; a 1280x720 actual window showing the 640x360 logical viewport, heroine 48 logical px, normal 1x playback."
+            },
+            "badge": {
+              "zh": "未批准 · 未接入运行时 · 未验收",
+              "en": "Unapproved · nonruntime · not accepted",
+              "tone": "warn"
+            },
+            "caption": {
+              "zh": "起步、持续跑动、快速松开与重按、反向（占位朝北）、再朝南，以及两次松开回到 v8 停步。未批准。",
+              "en": "Start, sustained run, quick release and re-press, reversal (placeholder north), south again, and two releases to the v8 stop. Unapproved."
+            },
+            "qa": "docs/qa/rpg-2-star-ocean-the-second_protagonist-female_south-run-v07_repress-rise-lock-control-correction_qa-note_unapproved-nonruntime_20261018-085800-a589f0f3.md",
+            "syncState": "committed-at-1942e31",
+            "gitBlob": "aebb5421b1392a5ceef3503f98f6c0631c4972fe",
+            "sha256": "c3df9f474fd4ef9cefa3e2d3c955b906bc3b59fbe95367701fa618e594a38882",
+            "bytes": 715104
+          },
+          {
+            "kind": "actual-godot-capture-video",
+            "creatorApproved": false,
+            "artAccepted": false,
+            "mediaType": "video/mp4",
+            "id": "current-heroine-south-run-v07-dark-60fps",
+            "rank": 8,
+            "label": {
+              "zh": "女主朝南跑步 v07 · 昏暗附楼 60 fps 1× 展示片",
+              "en": "Heroine south run v07, annex-dark 60 fps 1x showreel"
+            },
+            "file": "outputs/rpg-2-star-ocean-the-second_annex-dark_protagonist-female-south-run-v07-preview-showreel-1x-60fps-h48_unapproved-nonruntime_20261018-083355-72933ba3.mp4",
+            "runtimeIntegrated": false,
+            "testOnly": true,
+            "motionView": {
+              "canvas": "1280x720 actual Godot window showing the 640x360 LOGICAL viewport (2x integer scale)",
+              "heroineHeightLogicalPx": 48,
+              "playback": "normal speed 1x",
+              "autoplay": false,
+              "inspection": {
+                "zh": "root 只检查了诊断帧，以及浏览器按 1× 速率播放的开头与结尾；这不是连续流畅度认证。",
+                "en": "Root inspected diagnostic frames and the browser rate-1 start and end only; this is not a continuous-fluidity certification."
+              },
+              "limits": {
+                "zh": [
+                  "手臂缓动在 30 fps 落地后仍有姿态突变（477–484 px，5/156 例）",
+                  "混合帧时间下最坏停步 270.8 ms（v06 停步时钟上限，未改）",
+                  "反向时硬切到运行时占位的朝北行走，不是试作美术"
+                ],
+                "en": [
+                  "arm-easing pose spikes after the next touchdown at 30 fps (477-484 px, 5 of 156 cases)",
+                  "mixed frame times: worst stop 270.8 ms (the v06 stop clock limit, unchanged)",
+                  "reversal hard-cuts to the runtime placeholder north walk, not pilot art"
+                ]
+              },
+              "approvalNote": {
+                "zh": "不批准步态，也不批准完整角色精灵；精灵仍为 0/52。",
+                "en": "Neither the gait nor a full sprite is approved; sprites stay 0/52."
+              }
+            },
+            "scope": {
+              "zh": "单方向、仅测试的动作候选，未接入运行时；1280×720 实际窗口显示 640×360 逻辑视口，女主 48 逻辑像素，正常 1× 播放。",
+              "en": "Single-direction test-only motion candidate, nonruntime; a 1280x720 actual window showing the 640x360 logical viewport, heroine 48 logical px, normal 1x playback."
+            },
+            "badge": {
+              "zh": "未批准 · 未接入运行时 · 未验收",
+              "en": "Unapproved · nonruntime · not accepted",
+              "tone": "warn"
+            },
+            "caption": {
+              "zh": "与明亮城市片相同的动作序列，昏暗场景下 60 fps。未批准。",
+              "en": "The same sequence as the city-bright reel, in the dark scene at 60 fps. Unapproved."
+            },
+            "qa": "docs/qa/rpg-2-star-ocean-the-second_protagonist-female_south-run-v07_repress-rise-lock-control-correction_qa-note_unapproved-nonruntime_20261018-085800-a589f0f3.md",
+            "syncState": "committed-at-1942e31",
+            "gitBlob": "9594b2770a7765de297e49dabef366f36f5e41f0",
+            "sha256": "a68ecf7c231fd429d562743fe4e4e130c52f82477745c3adf364ae1ba80af73a",
+            "bytes": 596285
+          },
+          {
+            "kind": "actual-godot-capture",
+            "creatorApproved": false,
+            "artAccepted": false,
+            "id": "current-heroine-north-idle-static-v01",
+            "rank": 9,
+            "label": {
+              "zh": "女主朝北待机静止帧 v01 · 明亮城市（设计候选）",
+              "en": "Heroine north idle static v01, city-bright (design candidate)"
+            },
+            "file": "outputs/rpg-2-star-ocean-the-second_protagonist-female_north-idle-pilot-city-bright-zh-h48_unapproved-v01_20261018-091242-c971ea02.png",
+            "runtimeIntegrated": false,
+            "designCandidateOnly": true,
+            "scope": {
+              "zh": "仅为设计候选，未接入运行时；1280×720 实际窗口显示 640×360 逻辑视口，女主 48 逻辑像素；不是新正典；精灵仍为 0/52。",
+              "en": "Design candidate only, nonruntime; a 1280x720 actual window showing the 640x360 logical viewport, heroine 48 logical px; not new canon; sprites stay 0/52."
+            },
+            "unresolvedChoices": {
+              "zh": [
+                "背包仍显块状",
+                "罐子保留在已批准 v8 的角色左侧，与设定图背面视图（右侧）冲突",
+                "放松下垂的手臂与 v8 的叉腰、以及石板色衣领，都只是提议，不是新正典"
+              ],
+              "en": [
+                "the pack still reads boxy",
+                "the canister stays on the character's left as in approved v8, which conflicts with the sheet's back view (right)",
+                "relaxed arms versus v8's hand-on-hip, and the slate collar, are proposed choices, not new canon"
+              ]
+            },
+            "badge": {
+              "zh": "未批准 · 未接入运行时 · 未验收",
+              "en": "Unapproved · nonruntime · not accepted",
+              "tone": "warn"
+            },
+            "caption": {
+              "zh": "与已批准的 v8 朝南静止帧配对的朝北单帧。未批准。",
+              "en": "One north frame matched to the approved v8 south still. Unapproved."
+            },
+            "qa": "docs/qa/rpg-2-star-ocean-the-second_protagonist-female_north-idle-static-pilot_qa-note_unapproved-nonruntime-v01_20261018-090713-4bcb9cdb.md",
+            "syncState": "committed-at-1942e31",
+            "gitBlob": "b4e441afdc67c1af8b8453047ecf636be4b95e8f",
+            "sha256": "822ca50a41984c9cca572e3dc8ab868051f2816d2a21f8ab9d21b5cc19b92629"
+          }
+        ],
+        "supersededCurrent": [
+          {
             "id": "current-yonkers-antenna-room1-v03",
             "rank": 2,
             "kind": "actual-godot-capture",
@@ -4843,7 +5172,9 @@
             "qa": "docs/qa/rpg-2-star-ocean-the-second_yonkers-antenna-corridor-room1_v03-outdoor-refinement-candidate_qa-note_unapproved-v03_20261017-224447-15709be4.md",
             "closeoutId": "closeout-20261018-032000-48f99554",
             "gitBlob": "83575138f92b108ed84442a257b96213b3de53fa",
-            "sha256": "0e5b6b290d9f99e4bc907fb6016ca6da9d4335303f670795c90d4ec388be193c"
+            "sha256": "0e5b6b290d9f99e4bc907fb6016ca6da9d4335303f670795c90d4ec388be193c",
+            "supersededBy": "current-yonkers-antenna-room1-v05",
+            "supersededAt": "2026-10-18"
           },
           {
             "id": "current-battle-heroine-static-v12",
@@ -4880,9 +5211,12 @@
             "qa": "docs/qa/rpg-2-star-ocean-the-second_protagonist-female_battle-static-v12-mass-identity-pass_qa-note_unapproved-v01_20261017-224530-f4f688f6.md",
             "closeoutId": "closeout-20261018-032001-569dd838",
             "gitBlob": "18d7427e786f6524255a843ee9a79e863a20231a",
-            "sha256": "828ed1465c4bd041f701b2a220c60e1d2c28f8f312864fba3f1a3a737f6ab8c2"
+            "sha256": "828ed1465c4bd041f701b2a220c60e1d2c28f8f312864fba3f1a3a737f6ab8c2",
+            "supersededBy": "current-battle-heroine-static-v13",
+            "supersededAt": "2026-10-18"
           }
-        ]
+        ],
+        "syncStateRule": "committed-at-<7-hex> names the commit that first added the exact file; gitBlob is that file at that commit and sha256 is its bytes."
       }
     },
     "sceneQualityDenominatorReview": {
@@ -5017,7 +5351,7 @@
           "v01",
           "v02"
         ],
-        "status": "未批准候选：可步行西侧园区 v01–v08 与独立的穹顶定场远景 v01–v02 已制作，均未接入运行时、未验收；highPrecisionPixelSceneAuthored 仍为 false，指尚无可接入或已验收的场景",
+        "status": "未批准候选：可步行西侧园区 v01–v08 与独立的穹顶定场远景 v01–v02 已制作，均未接入运行时、未验收；highPrecisionPixelSceneAuthored 仍为 false，指尚无可接入或已验收的场景；此后已提交两个技术选择性候选：国会西侧外景 v12r2（--wdc-capitol-west-v12r2）与附楼 2 号房记录室 v01（--wdc-records-chamber-v01），均默认关闭，画面未验收",
         "runtimeIntegrated": false,
         "artAccepted": false,
         "evidence": [
@@ -5070,6 +5404,26 @@
             "qa": "docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_vista-texture-merge_qa-note_unapproved-v07_20261016-145408-0f854fbc.md",
             "zh": "v07（远景与材质合并）：保留 v06 的构图、穹顶图层与可步行区域，只引入 v05t 的立面、风化与下部地面材质；技术检查 60/60。",
             "en": "v07 (vista + texture merge): keeps v06's composition, dome layer and walkable area, and transfers only v05t's facade, weathering and lower-ground materials; technical 60/60."
+          }
+        ],
+        "laterCommittedOptIns": [
+          {
+            "id": "wdc-capitol-west-exterior-v12r2",
+            "optInFlag": "--wdc-capitol-west-v12r2",
+            "syncState": "committed-at-ffa165c",
+            "runtimeIntegrated": false,
+            "optInOnly": true,
+            "artAccepted": false,
+            "qa": "docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_sentry-encounter-viewport_qa-note_unapproved-v12r2_20261018-042200-7c1e5b39.md"
+          },
+          {
+            "id": "wdc-annex-records-room2-v01",
+            "optInFlag": "--wdc-records-chamber-v01",
+            "syncState": "committed-at-ffa165c",
+            "runtimeIntegrated": false,
+            "optInOnly": true,
+            "artAccepted": false,
+            "qa": "docs/qa/rpg-2-star-ocean-the-second_wdc-annex-room2_records-chamber-playable-integration_qa-note_unapproved-v01_20261018-035908-3a34d132.md"
           }
         ]
       },
