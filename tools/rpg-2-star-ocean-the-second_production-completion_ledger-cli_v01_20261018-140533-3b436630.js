@@ -110,6 +110,10 @@ const EV = {
   wdcV12r2: QA('wdc-capitol-west_sentry-encounter-viewport_qa-note_unapproved-v12r2_20261018-042200-7c1e5b39.md'),
   wdcV13: QA('wdc-capitol-west_ruin-material-collapse_qa-note_unapproved-v13_20261018-100938-075675cf.md'),
   wdcV13Flag: QA('wdc-capitol-west_v13-flag-integration_qa-note_unapproved-v13_20261018-135539-63201688.md'),
+  femaleRunV10r1: QA('female-south-run-v10r1_reach-landing-amendment_qa-note_unapproved-nonruntime_20261018-142136-249dbf66.md'),
+  femaleRunV10r1Receipt: 'outputs/rpg-2-star-ocean-the-second_city-annex_female-south-run-v10r1-capture-receipt-h48_unapproved_20261018-182800-9ee66cb8.json',
+  wdcV13Det: QA('wdc-capitol-west_v13-flag-deterministic-check_qa-note_unapproved-v13_20261018-141558-22d034ba.md'),
+  wdcV13DetReport: 'outputs/wdc-cw-v13flagdet_20261018-141558-22d034ba/rpg-2-star-ocean-the-second_wdc-capitol-west_deterministic-check-report_unapproved-v13_20261018-141558-22d034ba.json',
   nycR1: QA('nyc-public-facilities-room1_three-fixture-native-scene-visual-qa_unapproved-v01_20261017-011800-43d5b92f.md'),
   nycR1Accept: QA('nyc-public-facilities-room1_scene-visual-acceptance_v01_20261017-013027-3e7d91c4.md'),
   nycR2: QA('nyc-public-facilities-room2_three-fixture-native-scene-visual-qa_unapproved-v01_20261017-010600-4a81e9d2.md'),
@@ -179,10 +183,10 @@ const CREDITS = {
   'content.scene.ruins.plate': {status: 'done', evidence: [EV.sceneAudit]},
   'content.scene.ruins.wiring': {status: 'done', evidence: [EV.sceneAudit, EV.m7Smoke]},
   'content.scene.ruins.native-pass': {status: 'done', evidence: [EV.wdcV12, EV.wdcV12r2]},
-  // v12r2 passed 30/30, but the current candidate is v13 and its combined check is not a proven pass (root: 18/21, harness
-  // F13 variance being fixed by another worker), so the current technical check stays open.
-  'qa.scene.ruins.check': {status: 'in_progress', evidence: [],
-    note: {zh: 'v12r2 曾 30/30 通过；当前候选 v13 的合并检查未证明通过（root：18/21，F13 测试工具差异，另一工作者修复中）。', en: 'v12r2 passed 30/30; the current v13 candidate has no proven combined pass (root: 18/21, harness F13 variance, another worker is fixing it).'}},
+  // The published v13 flag checker was red (18/21, variable-fps F13); 0636b40 replaced it with a deterministic fixed-60fps
+  // check that root accepted at 22/22. Technical inspection only; the art stays unapproved.
+  'qa.scene.ruins.check': {status: 'done', outcome: 'passed', at: '2026-10-18T18:25:12Z', evidence: [EV.wdcV13Det, EV.wdcV13DetReport],
+    note: {zh: 'root 接受 v13 开关的确定性检查 22/22（固定 60 fps，20 个固定帧，8 个已验收房间 0 像素差异；0636b40）；仅技术检查，美术未批准。', en: 'Root accepted the deterministic v13 flag check at 22/22 (fixed 60 fps, 20 fixed frames, 8 accepted rooms 0 px; 0636b40); technical inspection only, art unapproved.'}},
   'review.scene.ruins': {status: 'done', outcome: 'changes_requested', at: 'INIT', evidence: [EV.wdcV13, EV.wdcV13Flag],
     note: {zh: 'root 看过 v13 开关的实机入口与战后返回画面：穹顶清楚、局部坍塌改善了废墟观感；地面颗粒感重、植被块状。美术未批准。', en: 'Root viewed the actual v13 flag entry and battle-return frames: the dome stays clear and the localized collapse improves the ruin read; the ground is grainy and the foliage blocky. Art unapproved.'}},
   'content.scene.city-survey-outer.plate': {status: 'done', evidence: [EV.sceneAudit]},
@@ -233,7 +237,9 @@ const BASELINE_REVISIONS = {
   'content.scene.outskirts-survey-outer.native-pass': {status: 'done', at: '2026-10-18T12:47:26Z', evidence: [EV.yR1V03, EV.yR1V06], zh: '创作者否决 v02 室外观感后的修订（v03 起，最新 v06）', en: 'Revision after the creator rejected the v02 outdoor look (v03 onward, latest v06)'},
   'content.scene.ruins.native-pass': {status: 'done', at: '2026-10-18T18:06:24Z', evidence: [EV.wdcV13, EV.wdcV13Flag], zh: 'root 对 v12r2 外观意见后的修订（v13 局部坍塌，可选启用）', en: 'Revision after root\'s v12r2 critique (v13 localized collapse, opt-in flag)'},
   'content.combat.protagonist-female.combat-static': {status: 'done', at: '2026-10-18T12:45:53Z', evidence: [EV.femaleBattleV11Feedback, EV.femaleBattleV14], zh: '按创作者对 v11 的意见修订（v12–v14）', en: 'Revision after the creator feedback on v11 (v12-v14)'},
-  'content.char.protagonist-female.walk-south': {status: 'in_progress', evidence: [], zh: '跑动／停步打磨（v10r1，另一工作者进行中）', en: 'Run/stop polish (v10r1, active with another worker)'},
+  // v10 + r1 (364d47a): root accepted the PRODUCED technical revision only (slower cadence clear; leading leg still diagonal, minor
+  // improvement); focused check 16/16, mixed-frame boot down <= 88.9 ms, release-to-stop <= 272.2 ms. Gait and fluidity unapproved.
+  'content.char.protagonist-female.walk-south': {status: 'done', at: '2026-10-18T18:36:18Z', evidence: [EV.femaleRunV10r1, EV.femaleRunV10r1Receipt], zh: '跑动／停步打磨（v10 + r1，已制作的技术修订；步态与流畅度未批准）', en: 'Run/stop polish (v10 + r1, produced technical revision; gait and fluidity unapproved)'},
   'content.char.liang-xu.static-south': {status: 'todo', evidence: [], zh: '按 Codex 视觉审查意见修订南向静止帧', en: 'South static revision after the Codex visual audit'},
 };
 
@@ -344,9 +350,9 @@ function buildTasks(root, now) {
   const P = {type: 'pipeline-code', area: 'runtime'};
   t('code.ui.settings', 'coding', 3, C('语言、声音与输入设置界面', 'Language, sound and input settings'), C('设置界面可用并有中英文自动测试', 'Settings screen works with zh/en automated tests'), {area: 'ui', subject: {kind: 'asset', id: 'ui.settings'}});
   t('code.runtime.enemy-sprite-pipeline', 'coding', 3, C('敌人精灵运行时（载入、状态、绘制顺序）', 'Enemy sprite runtime (loaders, states, draw order)'), C('运行时可载入敌人动画条并有自动检查', 'The runtime loads an enemy animation strip with automated checks'), {...P, subject: {kind: 'feature', id: 'battle.enemy-sprites'}});
-  t('code.runtime.character-sprite-pipeline', 'coding', 6, C('高密度四方向角色精灵运行时', 'High-density four-direction character sprite runtime'), C('运行时默认载入一套高密度四方向待机与行走并有自动检查', 'The runtime loads one high-density four-direction idle+walk set by default, with automated checks'), {...P, subject: {kind: 'feature', id: 'exploration.character-sprites'}});
-  t('code.runtime.combat-sprite-pipeline', 'coding', 4, C('高密度横向战斗精灵运行时', 'High-density side-view combat sprite runtime'), C('运行时默认载入一套高密度战斗动作并有自动检查', 'The runtime loads one high-density combat action set by default, with automated checks'), {...P, subject: {kind: 'feature', id: 'battle.character-sprites'}});
-  t('code.runtime.battle-arena-backdrop', 'coding', 2, C('战场背景载入', 'Battle arena backdrop loader'), C('战斗默认绘制美术背景而非几何占位', 'Battles draw an art backdrop by default instead of the geometric placeholder'), {...P, subject: {kind: 'feature', id: 'battle.arena-backdrop'}});
+  t('code.runtime.character-sprite-pipeline', 'coding', 6, C('高密度四方向角色精灵运行时', 'High-density four-direction character sprite runtime'), C('运行时具备载入高密度四方向待机与行走精灵组的正常能力：在正常运行时经可选开关或测试夹具验证，并有针对性测试；是否默认采用属于内容与批准任务', 'Normal runtime capability to load a high-density four-direction idle+walk set, verified in the normal runtime through an opt-in flag or test fixture with targeted tests; adopting a set for the shipped game belongs to the content and approval tasks'), {...P, subject: {kind: 'feature', id: 'exploration.character-sprites'}});
+  t('code.runtime.combat-sprite-pipeline', 'coding', 4, C('高密度横向战斗精灵运行时', 'High-density side-view combat sprite runtime'), C('运行时具备载入高密度横向战斗动作组的正常能力：在正常运行时经可选开关或测试夹具验证，并有针对性测试；是否默认采用属于内容与批准任务', 'Normal runtime capability to load a high-density side-view combat action set, verified in the normal runtime through an opt-in flag or test fixture with targeted tests; adopting a set for the shipped game belongs to the content and approval tasks'), {...P, subject: {kind: 'feature', id: 'battle.character-sprites'}});
+  t('code.runtime.battle-arena-backdrop', 'coding', 2, C('战场背景载入', 'Battle arena backdrop loader'), C('战斗具备绘制美术背景的正常运行时能力：经可选开关或测试夹具验证，并有针对性测试；采用哪张背景属于场景内容与批准任务', 'Normal runtime capability for battles to draw an art backdrop, verified through an opt-in flag or test fixture with targeted tests; adopting a backdrop belongs to the scene content and approval tasks'), {...P, subject: {kind: 'feature', id: 'battle.arena-backdrop'}});
   t('code.runtime.vfx-system', 'coding', 3, C('战斗特效系统', 'Combat VFX system'), C('攻击、闪避、防御、受击、治疗可触发特效并有测试', 'Attack, dodge, guard, hit and heal can trigger effects, with tests'), {...P, subject: {kind: 'asset', id: 'vfx.common'}});
   t('code.runtime.audio-cues', 'coding', 2, C('界面与战斗音效触发', 'UI and combat sound cues'), C('界面与战斗事件触发音效并有测试', 'UI and combat events trigger sounds, with tests'), {...P, subject: {kind: 'asset', id: 'sfx.combat'}});
 
@@ -481,7 +487,8 @@ function buildTasks(root, now) {
 
 // ---------- derived values ----------
 function taskSetHash(tasks) {
-  const rows = tasks.map(x => [x.id, x.type, x.stage, x.owner, x.points, x.subject.kind, x.subject.id]).sort((a, b) => a[0] < b[0] ? -1 : 1);
+  // Frozen: what a task is and what finishing it means. Status, evidence, outcome, notes and timestamps stay mutable.
+  const rows = tasks.map(x => [x.id, x.type, x.stage, x.owner, x.points, x.subject, x.target || null, [...x.dependsOn].sort(), x.doneCriterion]).sort((a, b) => a[0] < b[0] ? -1 : 1);
   return sha256(JSON.stringify(rows));
 }
 const pct = (num, den) => den ? Math.round(1000 * num / den) / 10 : 0;
@@ -594,6 +601,11 @@ function validate(ledger, root, {checkBaseline = true} = {}) {
     else if (x.subject.kind === 'character-variant' && !variants.has(x.subject.id)) errors.push(where + 'unknown character variant ' + x.subject.id);
     else if ((x.subject.kind === 'scene-gate' || x.subject.kind === 'asset') && !invIds.has(x.subject.id)) errors.push(where + 'unknown inventory item ' + x.subject.id);
     if (x.target !== undefined && !byId.has(x.target)) errors.push(where + 'unknown target ' + x.target);
+    // Coding measures runtime capability; it may never wait on creator approval or on adopting art as the default.
+    if (x.stage === 'coding') {
+      for (const d of x.dependsOn) { const dep = byId.get(d); if (dep && (dep.stage === 'creator-approval' || dep.type === 'integration' || /(native|runtime)-default$/.test(dep.id))) errors.push(where + 'a coding task may not depend on approval or default art adoption: ' + d); }
+      if (/\bby default\b|默认(载入|绘制|使用)/.test(x.doneCriterion?.en + ' ' + x.doneCriterion?.zh)) errors.push(where + 'a coding criterion may not require default art adoption');
+    }
     for (const d of x.dependsOn) if (!byId.has(d)) errors.push(where + 'unknown dependency ' + d);
     if (x.status === 'done' || x.status === 'not_required') {
       if (!x.evidence.length) errors.push(where + x.status + ' without evidence');
@@ -620,7 +632,7 @@ function validate(ledger, root, {checkBaseline = true} = {}) {
   if (checkBaseline) {
     const revisions = ledger.baseline.revisions;
     const expected = revisions.length ? revisions[revisions.length - 1].taskSetSha256 : ledger.baseline.taskSetSha256;
-    if (taskSetHash(ledger.tasks) !== expected) errors.push('task set (ids, types, stages, owners, points, subjects) differs from the frozen baseline; only revise (one fixed bucket per deliverable) or an owner-authorized baseline revision may change it');
+    if (taskSetHash(ledger.tasks) !== expected) errors.push('task set (ids, types, stages, owners, points, subjects, targets, dependencies, done criteria) differs from the frozen baseline; only revise (one fixed bucket per deliverable) or an owner-authorized baseline revision may change it');
     if (ledger.baseline.weights.coding !== WEIGHTS.coding || ledger.baseline.weights.content !== WEIGHTS.content) errors.push('baseline weights changed');
   }
   return errors;

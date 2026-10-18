@@ -20,6 +20,7 @@ const nestedPngAllowlist = new Set([
   'yonkers-room1-v05_4b9d66f1/cap/rpg-2-star-ocean-the-second_yonkers-antenna-room1_v05-test-only-godot-zh-entry-640x360_20261018-043851-4b9d66f1.png',
   'yonkers-room1-v06_c8f0d900/cap/rpg-2-star-ocean-the-second_yonkers-antenna-room1_v06-test-only-godot-zh-entry-640x360_20261018-084726-c8f0d900.png',
   'wdc-cw-v12r2_20261018-042200-7c1e5b39/rpg-2-star-ocean-the-second_wdc-capitol-west_rt640-zh-entry-v8ref_unapproved-v12r2_20261018-042200-7c1e5b39.png',
+  'wdc-cw-v13flag_20261018-135539-63201688/rpg-2-star-ocean-the-second_wdc-capitol-west_rt640-zh-entry_flag-v13_20261018-135539-63201688.png',
   'wdc-rc2-v01i_3a34d132/cap/rpg-2-star-ocean-the-second_wdc-annex-room2_v01-godot-zh-entry-640x360_20261018-035908-3a34d132.png',
   'chicago-loop-state-lake-v05/godot-runtime/rpg-2-star-ocean-the-second_chicago-loop_state-lake-godot-zh-entry-640x360_v05_20261018-000240-1d1b9337.png',
 ]);
@@ -27,6 +28,8 @@ const nestedPngAllowlist = new Set([
 // 16 MiB. A file whose bytes no longer match its pin is refused (409); byte ranges are honoured for the native player.
 const mediaMaxBytes = 16 * 1024 * 1024;
 const mediaAllowlist = new Map([
+  ['rpg-2-star-ocean-the-second_city-bright_female-south-run-v10r1-showreel-1x-win1280-of-640-30fps-h48_unapproved_20261018-142136-68e7ba6b.mp4', '34f49343bbce9761619abdb7bb31bbbc43b07aec8fb70056e167fb424fca8ba8'],
+  ['rpg-2-star-ocean-the-second_annex-dark_female-south-run-v10r1-showreel-1x-win1280-of-640-60fps-h48_unapproved_20261018-142136-ec71ab8a.mp4', 'ac7e1efe10c2ab8bb1f04b5737ea71a9f4aba0cdd365599ca281b6620943494f'],
   ['rpg-2-star-ocean-the-second_city-bright_protagonist-female-south-run-v07-preview-showreel-1x-30fps-h48_unapproved-nonruntime_20261018-083355-72933ba3.mp4', 'c3df9f474fd4ef9cefa3e2d3c955b906bc3b59fbe95367701fa618e594a38882'],
   ['rpg-2-star-ocean-the-second_annex-dark_protagonist-female-south-run-v07-preview-showreel-1x-60fps-h48_unapproved-nonruntime_20261018-083355-72933ba3.mp4', 'a68ecf7c231fd429d562743fe4e4e130c52f82477745c3adf364ae1ba80af73a'],
 ]);

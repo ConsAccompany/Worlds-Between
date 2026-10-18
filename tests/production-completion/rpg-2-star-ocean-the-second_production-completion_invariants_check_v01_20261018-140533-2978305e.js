@@ -53,10 +53,10 @@ const before = [LEDGER, PROGRESS].map(sha);
   const l = fresh(), walk = task(l, 'content.char.protagonist-female.walk-south'), bucket = task(l, 'content.char.protagonist-female.walk-south.revision');
   assert.equal(walk.status, 'done');
   assert.ok(walk.evidence.some(e => /south-run-v07/.test(e)) && walk.evidence.includes(cli.PROGRESS_REL));
-  assert.ok(bucket && bucket.status === 'in_progress' && bucket.points === 2 && bucket.owner === 'claude');
+  assert.ok(bucket && bucket.status === 'done' && bucket.points === 2 && bucket.owner === 'claude' && bucket.evidence.some(e => /v10r1/.test(e)), 'run/stop polish revision produced (v10r1)');
   for (const d of ['west', 'north', 'east']) assert.equal(task(l, `content.char.protagonist-female.walk-${d}`).status, 'todo');
   assert.equal(l.tasks.filter(x => /^creator\.char\..*\.accept-runtime-sprite$/.test(x.id) && x.status === 'done').length, 0, 'runtime sprite acceptance stays 0/52');
-  pass('v07 south run credited as delivered; run/stop polish bucket in progress; other directions unfinished; 0/52 sprite acceptances');
+  pass('v07 south run credited as delivered; v10r1 run/stop polish credited as its one produced revision; other directions unfinished; 0/52 sprite acceptances');
 }
 
 // 4. A pending or changes-requested review never changes production credit.
@@ -127,7 +127,9 @@ const before = [LEDGER, PROGRESS].map(sha);
   const ruins = task(l, 'review.scene.ruins');
   assert.ok(ruins.status === 'done' && ruins.outcome === 'changes_requested' && ruins.evidence.some(e => /v13/.test(e)));
   assert.equal(task(l, 'content.scene.ruins.native-pass.revision').status, 'done', 'v13 revision delivered and credited');
-  assert.equal(task(l, 'qa.scene.ruins.check').status, 'in_progress', 'v13 combined check not claimed as a pass');
+  const det = task(l, 'qa.scene.ruins.check');
+  assert.ok(det.status === 'done' && det.outcome === 'passed' && det.evidence.some(e => /deterministic-check/.test(e)), 'WDC technical inspection done from the root-accepted deterministic 22/22 check');
+  assert.equal(task(l, 'creator.scene.ruins.accept').status, 'todo', 'technical inspection is not art acceptance');
   assert.equal(task(l, 'content.scene.ruins.native-default').status, 'todo', 'v13 is opt-in, not default');
   const prod = prodSnap(l);
   cli.revise(l, ROOT, {for: 'content.scene.outskirts-survey-outer.native-pass', reasonEn: 'answer root v06 notes', now: NOW});
@@ -139,7 +141,7 @@ const before = [LEDGER, PROGRESS].map(sha);
   assert.equal(task(l, 'creator.scene.outskirts-survey-outer.accept').status, 'todo', 'no approval auto-completion');
   assert.equal(task(l, 'content.scene.outskirts-survey-outer.native-pass').status, 'done');
   assert.ok(JSON.parse(prodSnap(l)).content.done >= JSON.parse(prod).content.done, 'produced credit retained');
-  pass('Yonkers v06 and WDC v13 root verdicts recorded as changes_requested; their acceptances show "needs Claude revision" until a later revision; v13 check not claimed');
+  pass('Yonkers v06 and WDC v13 root verdicts recorded as changes_requested; their acceptances show "needs Claude revision" until a later revision; WDC deterministic check credited as technical inspection only');
 }
 
 // 8. Owners follow the task type, not the stage.
@@ -162,6 +164,33 @@ const before = [LEDGER, PROGRESS].map(sha);
   const wrong2 = fresh(); task(wrong2, 'content.char.milo.static-south').owner = 'codex';
   assert.ok(cli.validate(wrong2, ROOT).some(e => /native-pixel owner claude/.test(e)));
   pass('52 portraits are Codex image-generation tasks; native pixel and code are Claude; audio is content/audio QA; 2 Codex operations tasks listed outside the meters');
+}
+
+// 8b. Coding measures normal runtime capability: no dependency on approval or default art adoption; criteria and dependencies are frozen.
+{
+  const l = fresh();
+  for (const x of l.tasks.filter(x => x.stage === 'coding')) {
+    assert.ok(!/\bby default\b/.test(x.doneCriterion.en), 'coding criterion without default adoption: ' + x.id);
+    for (const d of x.dependsOn) assert.ok(task(l, d).stage !== 'creator-approval' && task(l, d).type !== 'integration', 'coding dependency: ' + x.id);
+  }
+  for (const id of ['code.runtime.character-sprite-pipeline', 'code.runtime.combat-sprite-pipeline', 'code.runtime.battle-arena-backdrop']) {
+    const x = task(l, id);
+    assert.ok(/Normal runtime capability/.test(x.doneCriterion.en) && /opt-in flag or test fixture with targeted tests/.test(x.doneCriterion.en), 'capability criterion: ' + id);
+    assert.equal(x.status, 'todo', 'no implementation evidence yet: ' + id);
+  }
+  const dep = fresh(); task(dep, 'code.runtime.battle-arena-backdrop').dependsOn = ['creator.scene.battle-arena.accept'];
+  assert.ok(cli.validate(dep, ROOT).some(e => /may not depend on approval or default art adoption/.test(e)));
+  const adopt = fresh(); task(adopt, 'code.runtime.battle-arena-backdrop').dependsOn = ['content.scene.battle-arena.native-default'];
+  assert.ok(cli.validate(adopt, ROOT).some(e => /may not depend on approval or default art adoption/.test(e)));
+  const weak = fresh(); task(weak, 'code.runtime.character-sprite-pipeline').doneCriterion = {zh: '载入', en: 'loads something'};
+  assert.ok(cli.validate(weak, ROOT).some(e => /frozen baseline/.test(e)), 'weakening a done criterion fails the freeze');
+  const strong = fresh(); task(strong, 'code.runtime.character-sprite-pipeline').doneCriterion = {zh: 'x', en: 'Runtime loads the set by default'};
+  assert.ok(cli.validate(strong, ROOT).some(e => /may not require default art adoption/.test(e)));
+  const deps = fresh(); task(deps, 'content.char.milo.static-west').dependsOn = [];
+  assert.ok(cli.validate(deps, ROOT).some(e => /frozen baseline/.test(e)), 'dropping a dependency fails the freeze');
+  const mutable = fresh(); Object.assign(task(mutable, 'review.scene.map'), {status: 'in_progress', note: {zh: 'x', en: 'y'}});
+  assert.deepEqual(cli.validate(mutable, ROOT), [], 'status and notes stay mutable');
+  pass('coding = normal runtime capability via opt-in/fixtures (no approval or default-adoption dependency); 3 pipeline tasks still todo; freeze covers criteria and dependencies, status stays mutable');
 }
 
 // 9. No evidence, missing evidence, unmet dependencies or the rejected 32x48 baseline cannot complete a task.

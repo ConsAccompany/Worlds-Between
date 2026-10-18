@@ -2,7 +2,7 @@
   "id": "rpg-2-star-ocean-the-second_production-completion_v01",
   "schemaVersion": 2,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-18T18:32:27Z",
+  "updatedAt": "2026-10-18T18:54:14Z",
   "zh": "制作完成度任务台账：衡量已完成的工作量（编码 40% + 内容 60%）；检查／审查与创作者批准分开计量，均不改变制作分；免除的审查不算已执行的工作；运营任务列出负责方但不计百分比。",
   "en": "Production-completion task ledger: measures work done (coding 40% + content 60%); inspection/review and creator approval are separate meters and never change production credit; waived reviews are not performed work; operations tasks list owners but carry no percentage.",
   "brief": "docs/rpg-2-star-ocean-the-second_production-completion_bilingual-brief_v01_20261018-140533-3ea2a621.md",
@@ -158,7 +158,7 @@
     ]
   },
   "baseline": {
-    "frozenAt": "2026-10-18T18:32:27Z",
+    "frozenAt": "2026-10-18T18:54:14Z",
     "authorizedBy": "owner",
     "kind": "owner-authorized-baseline-revision",
     "weights": {
@@ -170,7 +170,7 @@
       "en": "Tasks, types, stages, owners and points are frozen; new versions, receipts or test counts never add tasks. Each deliverable has at most one fixed revision bucket (points fixed at ceil(points/2)); later versions only update or reopen that bucket and add no points. Any other task-set change needs an owner-authorized baseline revision and leaves a record."
     },
     "taskCount": 1181,
-    "taskSetSha256": "99d9b154cb3f547d26066d056303241eadc7075f1cf8a019dfc7b34fb1d110a4",
+    "taskSetSha256": "06164cec291688795fd06dac4a1ceb4d87d889bf111dc3e77e18d18c59994292",
     "revisions": [],
     "pointsByStage": {
       "coding": 111,
@@ -184,15 +184,15 @@
   },
   "closeouts": [
     {
-      "id": "production-baseline-20261018-183227-54884846",
-      "recordedAt": "2026-10-18T18:32:27Z",
+      "id": "production-baseline-20261018-185414-2aab70be",
+      "recordedAt": "2026-10-18T18:54:14Z",
       "kind": "baseline",
       "title": {
         "zh": "所有者授权的制作完成度基线（不是新完成的工作）",
         "en": "Owner-authorized production-completion baseline (not newly finished work)"
       },
-      "production": 43.4,
-      "inspection": 9.8,
+      "production": 43.5,
+      "inspection": 10.3,
       "approval": 7,
       "legacyPercentUnchanged": 40.8,
       "legacyCloseoutId": "closeout-20261018-181452-d30cac4c"
@@ -202,8 +202,8 @@
     "production": {
       "zh": "制作完成度",
       "en": "Production completion",
-      "percent": 43.4,
-      "percentLabel": "43.4%",
+      "percent": 43.5,
+      "percentLabel": "43.5%",
       "formula": "round1(40 * codingDonePoints/codingTotalPoints + 60 * contentDonePoints/contentTotalPoints)",
       "coding": {
         "done": 91,
@@ -214,24 +214,24 @@
         "tasksDone": 17
       },
       "content": {
-        "done": 332,
+        "done": 334,
         "total": 1873,
-        "percent": 17.7,
+        "percent": 17.8,
         "weight": 60,
         "tasks": 713,
-        "tasksDone": 108
+        "tasksDone": 109
       }
     },
     "inspection": {
       "zh": "检查与审查（已执行的）",
       "en": "Inspection and review (performed)",
-      "done": 20,
+      "done": 21,
       "total": 204,
-      "percent": 9.8,
+      "percent": 10.3,
       "technical": {
-        "done": 13,
+        "done": 14,
         "total": 77,
-        "percent": 16.9
+        "percent": 18.2
       },
       "visual": {
         "done": 7,
@@ -284,20 +284,20 @@
         "waivedPoints": 0
       },
       "content": {
-        "done": 332,
+        "done": 334,
         "total": 1873,
-        "percent": 17.7,
+        "percent": 17.8,
         "tasks": 713,
-        "tasksDone": 108,
+        "tasksDone": 109,
         "waivedTasks": 0,
         "waivedPoints": 0
       },
       "technical-inspection": {
-        "done": 13,
+        "done": 14,
         "total": 77,
-        "percent": 16.9,
+        "percent": 18.2,
         "tasks": 73,
-        "tasksDone": 11,
+        "tasksDone": 12,
         "waivedTasks": 0,
         "waivedPoints": 0
       },
@@ -343,13 +343,12 @@
         "tasks": 757,
         "operationsTasks": 0,
         "points": 2009,
-        "pointsDone": 384,
+        "pointsDone": 387,
         "byStatus": {
-          "done": 84,
-          "todo": 671,
-          "in_progress": 2
+          "done": 86,
+          "todo": 671
         },
-        "readyInQueue": 1,
+        "readyInQueue": 0,
         "revisionsBlockingApproval": 3
       },
       "codex": {
@@ -425,7 +424,7 @@
       },
       "characters": {
         "content": {
-          "done": 72,
+          "done": 74,
           "total": 1460
         },
         "technical-inspection": {
@@ -483,7 +482,7 @@
           "total": 276
         },
         "technical-inspection": {
-          "done": 9,
+          "done": 10,
           "total": 12
         },
         "visual-review": {
@@ -557,7 +556,7 @@
     "queue": {
       "zh": "待处理（依赖已完成）",
       "en": "Ready (dependencies done)",
-      "count": 61,
+      "count": 60,
       "items": [
         {
           "id": "creator.char.protagonist-male.approve-portrait",
@@ -917,13 +916,6 @@
           "points": 1
         },
         {
-          "id": "qa.scene.ruins.check",
-          "stage": "technical-inspection",
-          "owner": "claude",
-          "status": "in_progress",
-          "points": 1
-        },
-        {
           "id": "review.scene.ruins-survey-outer",
           "stage": "visual-review",
           "owner": "codex",
@@ -1067,9 +1059,9 @@
     {"id":"code.m7.report-endpoint","type":"feature-code","title":{"zh":"城市报告终点与试玩回执","en":"City report endpoint and playtest receipt"},"area":"science-content","stage":"coding","owner":"claude","status":"done","points":3,"doneCriterion":{"zh":"M7 内容门 report-endpoint 为 done 且有测试或清单证据","en":"M7 content gate report-endpoint is done with test or manifest evidence"},"dependsOn":[],"evidence":["game/tests/m7_smoke.gd","tools/rpg-2-star-ocean-the-second_scifi-region_playtest-launcher_m7_20261013-214924-6c8e0d47.ps1"],"subject":{"kind":"feature","id":"m7.report-endpoint"}},
     {"id":"code.ui.settings","type":"feature-code","title":{"zh":"语言、声音与输入设置界面","en":"Language, sound and input settings"},"area":"ui","stage":"coding","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"设置界面可用并有中英文自动测试","en":"Settings screen works with zh/en automated tests"},"dependsOn":[],"evidence":[],"subject":{"kind":"asset","id":"ui.settings"}},
     {"id":"code.runtime.enemy-sprite-pipeline","type":"pipeline-code","title":{"zh":"敌人精灵运行时（载入、状态、绘制顺序）","en":"Enemy sprite runtime (loaders, states, draw order)"},"area":"runtime","stage":"coding","owner":"claude","status":"done","points":3,"doneCriterion":{"zh":"运行时可载入敌人动画条并有自动检查","en":"The runtime loads an enemy animation strip with automated checks"},"dependsOn":[],"evidence":["docs/qa/rpg-2-star-ocean-the-second_scifi-sentry-automaton_v2-optin-portability_qa-note_unapproved-v01_20261018-103500-7d2e91b4.md","game/scripts/battle_arena.gd"],"subject":{"kind":"feature","id":"battle.enemy-sprites"}},
-    {"id":"code.runtime.character-sprite-pipeline","type":"pipeline-code","title":{"zh":"高密度四方向角色精灵运行时","en":"High-density four-direction character sprite runtime"},"area":"runtime","stage":"coding","owner":"claude","status":"todo","points":6,"doneCriterion":{"zh":"运行时默认载入一套高密度四方向待机与行走并有自动检查","en":"The runtime loads one high-density four-direction idle+walk set by default, with automated checks"},"dependsOn":[],"evidence":[],"subject":{"kind":"feature","id":"exploration.character-sprites"}},
-    {"id":"code.runtime.combat-sprite-pipeline","type":"pipeline-code","title":{"zh":"高密度横向战斗精灵运行时","en":"High-density side-view combat sprite runtime"},"area":"runtime","stage":"coding","owner":"claude","status":"todo","points":4,"doneCriterion":{"zh":"运行时默认载入一套高密度战斗动作并有自动检查","en":"The runtime loads one high-density combat action set by default, with automated checks"},"dependsOn":[],"evidence":[],"subject":{"kind":"feature","id":"battle.character-sprites"}},
-    {"id":"code.runtime.battle-arena-backdrop","type":"pipeline-code","title":{"zh":"战场背景载入","en":"Battle arena backdrop loader"},"area":"runtime","stage":"coding","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"战斗默认绘制美术背景而非几何占位","en":"Battles draw an art backdrop by default instead of the geometric placeholder"},"dependsOn":[],"evidence":[],"subject":{"kind":"feature","id":"battle.arena-backdrop"}},
+    {"id":"code.runtime.character-sprite-pipeline","type":"pipeline-code","title":{"zh":"高密度四方向角色精灵运行时","en":"High-density four-direction character sprite runtime"},"area":"runtime","stage":"coding","owner":"claude","status":"todo","points":6,"doneCriterion":{"zh":"运行时具备载入高密度四方向待机与行走精灵组的正常能力：在正常运行时经可选开关或测试夹具验证，并有针对性测试；是否默认采用属于内容与批准任务","en":"Normal runtime capability to load a high-density four-direction idle+walk set, verified in the normal runtime through an opt-in flag or test fixture with targeted tests; adopting a set for the shipped game belongs to the content and approval tasks"},"dependsOn":[],"evidence":[],"subject":{"kind":"feature","id":"exploration.character-sprites"}},
+    {"id":"code.runtime.combat-sprite-pipeline","type":"pipeline-code","title":{"zh":"高密度横向战斗精灵运行时","en":"High-density side-view combat sprite runtime"},"area":"runtime","stage":"coding","owner":"claude","status":"todo","points":4,"doneCriterion":{"zh":"运行时具备载入高密度横向战斗动作组的正常能力：在正常运行时经可选开关或测试夹具验证，并有针对性测试；是否默认采用属于内容与批准任务","en":"Normal runtime capability to load a high-density side-view combat action set, verified in the normal runtime through an opt-in flag or test fixture with targeted tests; adopting a set for the shipped game belongs to the content and approval tasks"},"dependsOn":[],"evidence":[],"subject":{"kind":"feature","id":"battle.character-sprites"}},
+    {"id":"code.runtime.battle-arena-backdrop","type":"pipeline-code","title":{"zh":"战场背景载入","en":"Battle arena backdrop loader"},"area":"runtime","stage":"coding","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"战斗具备绘制美术背景的正常运行时能力：经可选开关或测试夹具验证，并有针对性测试；采用哪张背景属于场景内容与批准任务","en":"Normal runtime capability for battles to draw an art backdrop, verified through an opt-in flag or test fixture with targeted tests; adopting a backdrop belongs to the scene content and approval tasks"},"dependsOn":[],"evidence":[],"subject":{"kind":"feature","id":"battle.arena-backdrop"}},
     {"id":"code.runtime.vfx-system","type":"pipeline-code","title":{"zh":"战斗特效系统","en":"Combat VFX system"},"area":"runtime","stage":"coding","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"攻击、闪避、防御、受击、治疗可触发特效并有测试","en":"Attack, dodge, guard, hit and heal can trigger effects, with tests"},"dependsOn":[],"evidence":[],"subject":{"kind":"asset","id":"vfx.common"}},
     {"id":"code.runtime.audio-cues","type":"pipeline-code","title":{"zh":"界面与战斗音效触发","en":"UI and combat sound cues"},"area":"runtime","stage":"coding","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"界面与战斗事件触发音效并有测试","en":"UI and combat events trigger sounds, with tests"},"dependsOn":[],"evidence":[],"subject":{"kind":"asset","id":"sfx.combat"}},
     {"id":"content.char.protagonist-male.portrait","type":"concept-generation","title":{"zh":"主角·男 · 人物设定图（图像生成）","en":"Male protagonist · source portrait (image generation)"},"area":"characters","stage":"content","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"设定图文件已入库","en":"The source portrait file is committed"},"dependsOn":[],"evidence":["outputs/rpg-2-star-ocean-the-second_protagonist_character-sheet_male_20261013-153316-5b7c19e2.png"],"subject":{"kind":"character-variant","id":"protagonist-male"}},
@@ -2133,8 +2125,8 @@
     {"id":"content.scene.ruins.wiring","type":"integration","title":{"zh":"华盛顿国会大厦西侧废墟 · 碰撞、热点与出入口","en":"Washington Capitol west ruins · collision, hotspots and exits"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":3,"doneCriterion":{"zh":"碰撞、热点、出入口与存档有自动检查","en":"Collision, hotspots, exits and saves have automated checks"},"dependsOn":["content.scene.ruins.plate"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_scifi-region-eleven-scene_visual-gate-audit_m8-v01_20261014-201003-6b73e7a4.md","game/tests/m7_smoke.gd"],"subject":{"kind":"scene-gate","id":"visual-scene.ruins"}},
     {"id":"content.scene.ruins.native-pass","type":"native-pixel","title":{"zh":"华盛顿国会大厦西侧废墟 · 原生像素画质版","en":"Washington Capitol west ruins · native pixel quality pass"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":12,"doneCriterion":{"zh":"原生像素画质版（道具／分层）已提交并有 QA，可为可选启用","en":"A native pixel quality pass (fixtures / layers) is committed with QA; opt-in is allowed"},"dependsOn":["content.scene.ruins.plate"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_actual-viewport-integration_qa-note_unapproved-v12_20261017-235608-66d00477.md","docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_sentry-encounter-viewport_qa-note_unapproved-v12r2_20261018-042200-7c1e5b39.md"],"subject":{"kind":"scene-gate","id":"visual-scene.ruins"}},
     {"id":"content.scene.ruins.native-default","type":"integration","title":{"zh":"华盛顿国会大厦西侧废墟 · 画质版默认接入","en":"Washington Capitol west ruins · quality pass on by default"},"area":"scenes","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"画质版默认在游戏中使用","en":"The quality pass is used in the game by default"},"dependsOn":["content.scene.ruins.native-pass","content.scene.ruins.wiring"],"evidence":[],"subject":{"kind":"scene-gate","id":"visual-scene.ruins"}},
-    {"id":"qa.scene.ruins.check","type":"technical-check","title":{"zh":"华盛顿国会大厦西侧废墟 · 技术检查","en":"Washington Capitol west ruins · technical check"},"area":"scenes","stage":"technical-inspection","owner":"claude","status":"in_progress","points":1,"doneCriterion":{"zh":"当前画质版的 Godot 检查全部通过","en":"Godot checks of the current quality pass all pass"},"dependsOn":["content.scene.ruins.native-pass"],"evidence":[],"subject":{"kind":"scene-gate","id":"visual-scene.ruins"},"target":"content.scene.ruins.native-pass","note":{"zh":"v12r2 曾 30/30 通过；当前候选 v13 的合并检查未证明通过（root：18/21，F13 测试工具差异，另一工作者修复中）。","en":"v12r2 passed 30/30; the current v13 candidate has no proven combined pass (root: 18/21, harness F13 variance, another worker is fixing it)."}},
-    {"id":"review.scene.ruins","type":"visual-review","title":{"zh":"华盛顿国会大厦西侧废墟 · 视觉审查","en":"Washington Capitol west ruins · visual review"},"area":"scenes","stage":"visual-review","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"Codex 审查 640×360 实机画面并记录结论","en":"Codex reviews actual 640x360 captures and records a verdict"},"dependsOn":["qa.scene.ruins.check"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_ruin-material-collapse_qa-note_unapproved-v13_20261018-100938-075675cf.md","docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_v13-flag-integration_qa-note_unapproved-v13_20261018-135539-63201688.md"],"subject":{"kind":"scene-gate","id":"visual-scene.ruins"},"target":"content.scene.ruins.native-pass","outcome":"changes_requested","note":{"zh":"root 看过 v13 开关的实机入口与战后返回画面：穹顶清楚、局部坍塌改善了废墟观感；地面颗粒感重、植被块状。美术未批准。","en":"Root viewed the actual v13 flag entry and battle-return frames: the dome stays clear and the localized collapse improves the ruin read; the ground is grainy and the foliage blocky. Art unapproved."},"statusAt":"2026-10-18T18:32:27Z"},
+    {"id":"qa.scene.ruins.check","type":"technical-check","title":{"zh":"华盛顿国会大厦西侧废墟 · 技术检查","en":"Washington Capitol west ruins · technical check"},"area":"scenes","stage":"technical-inspection","owner":"claude","status":"done","points":1,"doneCriterion":{"zh":"当前画质版的 Godot 检查全部通过","en":"Godot checks of the current quality pass all pass"},"dependsOn":["content.scene.ruins.native-pass"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_v13-flag-deterministic-check_qa-note_unapproved-v13_20261018-141558-22d034ba.md","outputs/wdc-cw-v13flagdet_20261018-141558-22d034ba/rpg-2-star-ocean-the-second_wdc-capitol-west_deterministic-check-report_unapproved-v13_20261018-141558-22d034ba.json"],"subject":{"kind":"scene-gate","id":"visual-scene.ruins"},"target":"content.scene.ruins.native-pass","outcome":"passed","note":{"zh":"root 接受 v13 开关的确定性检查 22/22（固定 60 fps，20 个固定帧，8 个已验收房间 0 像素差异；0636b40）；仅技术检查，美术未批准。","en":"Root accepted the deterministic v13 flag check at 22/22 (fixed 60 fps, 20 fixed frames, 8 accepted rooms 0 px; 0636b40); technical inspection only, art unapproved."},"statusAt":"2026-10-18T18:25:12Z"},
+    {"id":"review.scene.ruins","type":"visual-review","title":{"zh":"华盛顿国会大厦西侧废墟 · 视觉审查","en":"Washington Capitol west ruins · visual review"},"area":"scenes","stage":"visual-review","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"Codex 审查 640×360 实机画面并记录结论","en":"Codex reviews actual 640x360 captures and records a verdict"},"dependsOn":["qa.scene.ruins.check"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_ruin-material-collapse_qa-note_unapproved-v13_20261018-100938-075675cf.md","docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_v13-flag-integration_qa-note_unapproved-v13_20261018-135539-63201688.md"],"subject":{"kind":"scene-gate","id":"visual-scene.ruins"},"target":"content.scene.ruins.native-pass","outcome":"changes_requested","note":{"zh":"root 看过 v13 开关的实机入口与战后返回画面：穹顶清楚、局部坍塌改善了废墟观感；地面颗粒感重、植被块状。美术未批准。","en":"Root viewed the actual v13 flag entry and battle-return frames: the dome stays clear and the localized collapse improves the ruin read; the ground is grainy and the foliage blocky. Art unapproved."},"statusAt":"2026-10-18T18:54:14Z"},
     {"id":"creator.scene.ruins.accept","type":"creator-acceptance","title":{"zh":"华盛顿国会大厦西侧废墟 · 场景画质验收","en":"Washington Capitol west ruins · scene-quality acceptance"},"area":"scenes","stage":"creator-approval","owner":"creator","status":"todo","points":1,"doneCriterion":{"zh":"approvalLedger 记有 acceptanceKind scene-visual 的验收条目","en":"approvalLedger records an acceptanceKind scene-visual item"},"dependsOn":["content.scene.ruins.native-pass"],"evidence":[],"subject":{"kind":"scene-gate","id":"visual-scene.ruins"},"target":"content.scene.ruins.native-pass"},
     {"id":"content.scene.city-survey-outer.plate","type":"integration","title":{"zh":"纽约公共设施 1 号房 · 场景底板","en":"NYC public facilities room 1 · scene plate"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":4,"doneCriterion":{"zh":"可玩场景底板已提交并在运行时可进入（概念图不算）","en":"A playable scene plate is committed and enterable in the runtime (a concept image does not count)"},"dependsOn":[],"evidence":["docs/qa/rpg-2-star-ocean-the-second_scifi-region-eleven-scene_visual-gate-audit_m8-v01_20261014-201003-6b73e7a4.md"],"subject":{"kind":"scene-gate","id":"visual-scene.city-survey-outer"}},
     {"id":"content.scene.city-survey-outer.wiring","type":"integration","title":{"zh":"纽约公共设施 1 号房 · 碰撞、热点与出入口","en":"NYC public facilities room 1 · collision, hotspots and exits"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":3,"doneCriterion":{"zh":"碰撞、热点、出入口与存档有自动检查","en":"Collision, hotspots, exits and saves have automated checks"},"dependsOn":["content.scene.city-survey-outer.plate"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_scifi-region-eleven-scene_visual-gate-audit_m8-v01_20261014-201003-6b73e7a4.md","game/tests/m7_smoke.gd"],"subject":{"kind":"scene-gate","id":"visual-scene.city-survey-outer"}},
@@ -2224,7 +2216,7 @@
     {"id":"content.scene.outskirts-survey-outer.native-pass.revision","type":"revision","title":{"zh":"扬克斯天线走廊 1 号房 · 原生像素画质版 · 创作者否决 v02 室外观感后的修订（v03 起，最新 v06）","en":"Yonkers antenna corridor room 1 · native pixel quality pass · Revision after the creator rejected the v02 outdoor look (v03 onward, latest v06)"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":6,"doneCriterion":{"zh":"针对最近一次审查／创作者意见的修订版已提交并有 QA；后续版本只更新本条，不新增分值","en":"A revision answering the latest review / creator request is committed with QA; later versions update this bucket and add no points"},"dependsOn":["content.scene.outskirts-survey-outer.native-pass"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_yonkers-antenna-corridor-room1_v03-outdoor-refinement-candidate_qa-note_unapproved-v03_20261017-224447-15709be4.md","docs/qa/rpg-2-star-ocean-the-second_yonkers-antenna-corridor-room1_v06-outdoor-readability-refinement_qa-note_unapproved-v06_20261018-084726-c8f0d900.md"],"subject":{"kind":"scene-gate","id":"visual-scene.outskirts-survey-outer"},"target":"content.scene.outskirts-survey-outer.native-pass","statusAt":"2026-10-18T12:47:26Z"},
     {"id":"content.scene.ruins.native-pass.revision","type":"revision","title":{"zh":"华盛顿国会大厦西侧废墟 · 原生像素画质版 · root 对 v12r2 外观意见后的修订（v13 局部坍塌，可选启用）","en":"Washington Capitol west ruins · native pixel quality pass · Revision after root's v12r2 critique (v13 localized collapse, opt-in flag)"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":6,"doneCriterion":{"zh":"针对最近一次审查／创作者意见的修订版已提交并有 QA；后续版本只更新本条，不新增分值","en":"A revision answering the latest review / creator request is committed with QA; later versions update this bucket and add no points"},"dependsOn":["content.scene.ruins.native-pass"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_ruin-material-collapse_qa-note_unapproved-v13_20261018-100938-075675cf.md","docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_v13-flag-integration_qa-note_unapproved-v13_20261018-135539-63201688.md"],"subject":{"kind":"scene-gate","id":"visual-scene.ruins"},"target":"content.scene.ruins.native-pass","statusAt":"2026-10-18T18:06:24Z"},
     {"id":"content.combat.protagonist-female.combat-static.revision","type":"revision","title":{"zh":"主角·女 · 横向战斗静止帧 · 按创作者对 v11 的意见修订（v12–v14）","en":"Female protagonist · side-view combat static · Revision after the creator feedback on v11 (v12-v14)"},"area":"combat","stage":"content","owner":"claude","status":"done","points":2,"doneCriterion":{"zh":"针对最近一次审查／创作者意见的修订版已提交并有 QA；后续版本只更新本条，不新增分值","en":"A revision answering the latest review / creator request is committed with QA; later versions update this bucket and add no points"},"dependsOn":["content.combat.protagonist-female.combat-static"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_protagonist-female_battle-static-v11-creator-feedback-and-v12-visual-target_unapproved-v01_20261017-193755-c7a93e12.md","docs/qa/rpg-2-star-ocean-the-second_protagonist-female_battle-static-v14-cloth-volume-leg-anatomy_qa-note_unapproved-v01_20261018-084553-dda2c05f.md"],"subject":{"kind":"character-variant","id":"protagonist-female"},"target":"content.combat.protagonist-female.combat-static","statusAt":"2026-10-18T12:45:53Z"},
-    {"id":"content.char.protagonist-female.walk-south.revision","type":"revision","title":{"zh":"主角·女 · 南向行走／跑动 · 跑动／停步打磨（v10r1，另一工作者进行中）","en":"Female protagonist · south walk/run · Run/stop polish (v10r1, active with another worker)"},"area":"characters","stage":"content","owner":"claude","status":"in_progress","points":2,"doneCriterion":{"zh":"针对最近一次审查／创作者意见的修订版已提交并有 QA；后续版本只更新本条，不新增分值","en":"A revision answering the latest review / creator request is committed with QA; later versions update this bucket and add no points"},"dependsOn":["content.char.protagonist-female.walk-south"],"evidence":[],"subject":{"kind":"character-variant","id":"protagonist-female"},"target":"content.char.protagonist-female.walk-south"},
+    {"id":"content.char.protagonist-female.walk-south.revision","type":"revision","title":{"zh":"主角·女 · 南向行走／跑动 · 跑动／停步打磨（v10 + r1，已制作的技术修订；步态与流畅度未批准）","en":"Female protagonist · south walk/run · Run/stop polish (v10 + r1, produced technical revision; gait and fluidity unapproved)"},"area":"characters","stage":"content","owner":"claude","status":"done","points":2,"doneCriterion":{"zh":"针对最近一次审查／创作者意见的修订版已提交并有 QA；后续版本只更新本条，不新增分值","en":"A revision answering the latest review / creator request is committed with QA; later versions update this bucket and add no points"},"dependsOn":["content.char.protagonist-female.walk-south"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_female-south-run-v10r1_reach-landing-amendment_qa-note_unapproved-nonruntime_20261018-142136-249dbf66.md","outputs/rpg-2-star-ocean-the-second_city-annex_female-south-run-v10r1-capture-receipt-h48_unapproved_20261018-182800-9ee66cb8.json"],"subject":{"kind":"character-variant","id":"protagonist-female"},"target":"content.char.protagonist-female.walk-south","statusAt":"2026-10-18T18:36:18Z"},
     {"id":"content.char.liang-xu.static-south.revision","type":"revision","title":{"zh":"梁序 · 南向高密度静止帧 · 按 Codex 视觉审查意见修订南向静止帧","en":"Liang Xu · south high-density static · South static revision after the Codex visual audit"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"针对最近一次审查／创作者意见的修订版已提交并有 QA；后续版本只更新本条，不新增分值","en":"A revision answering the latest review / creator request is committed with QA; later versions update this bucket and add no points"},"dependsOn":["content.char.liang-xu.static-south"],"evidence":[],"subject":{"kind":"character-variant","id":"liang-xu"},"target":"content.char.liang-xu.static-south"}
   ]
 }
