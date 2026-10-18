@@ -1,0 +1,336 @@
+{
+ "checks": [
+  {
+   "check": "L00 run without the pilot flag on the command line",
+   "ok": true,
+   "detail": null
+  },
+  {
+   "check": "L01 flag off: attach returns null, sprite untouched, zero manifest reads and texture loads",
+   "ok": true,
+   "detail": null
+  },
+  {
+   "check": "L02 flag on, default registry: valid, empty, no actor attaches, sprite untouched",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "check": "L03 actor ids select their own set; unknown/unlisted ids attach nothing",
+   "ok": true,
+   "detail": [
+    {
+     "actor_id": "protagonist-female",
+     "set_id": "spriteset-diag-female-hd2-test-only-v01",
+     "action": "idle",
+     "facing": "south",
+     "frame": 0,
+     "clock_us": 0,
+     "path": "res://tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-idle-south-f1_20261018-153932-9f31902d.png"
+    },
+    {
+     "actor_id": "protagonist-male",
+     "set_id": "spriteset-diag-male-hd2-test-only-v01",
+     "action": "idle",
+     "facing": "north",
+     "frame": 0,
+     "clock_us": 0,
+     "path": "res://tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_male-idle-north-f1_20261018-153932-9f31902d.png"
+    }
+   ]
+  },
+  {
+   "check": "L04 48 logical display: scale 1/density, pin floor line 1 logical px under the node (offset (0,-46))",
+   "ok": true,
+   "detail": [
+    "(0.5, 0.5)",
+    "(0.0, -46.0)"
+   ]
+  },
+  {
+   "check": "L05 cache: 24 texture loads per set, none on re-attach or during 600 frames of play",
+   "ok": true,
+   "detail": {
+    "after_female": 24,
+    "after_male": 48,
+    "after_play": 48,
+    "manifest_reads": 4
+   }
+  },
+  {
+   "check": "L06 21 malformed/missing cases each reject the set; the unmutated manifest passes",
+   "ok": true,
+   "detail": {
+    "missing frame file": {
+     "ok": false,
+     "first_error": "walk/east frame 3: res://tests/fixtures/spriteset-diag-test-only-9f31902d/does-not-exist.png is not an imported res:// texture"
+    },
+    "wrong frame size": {
+     "ok": false,
+     "first_error": "walk/east frame 3: res://tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_invalid-wrong-size_20261018-153932-9f31902d.png is (64, 96), not (80, 112)"
+    },
+    "partial alpha": {
+     "ok": false,
+     "first_error": "idle/south frame 1: 1 partial-alpha texels (alpha must be 0 or 255)"
+    },
+    "opaque cell border": {
+     "ok": false,
+     "first_error": "walk/north frame 2: 1 opaque texels on the cell border"
+    },
+    "idle not on the floor line": {
+     "ok": false,
+     "first_error": "idle/west frame 2: idle soles end on row 99, not on the floor line row 103"
+    },
+    "non-texture resource": {
+     "ok": false,
+     "first_error": "walk/south frame 1: res://tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-set-manifest_20261018-153932-9f31902d.json is not an imported res:// texture"
+    },
+    "missing direction": {
+     "ok": false,
+     "first_error": "walk must list exactly south, west, north and east"
+    },
+    "unknown direction": {
+     "ok": false,
+     "first_error": "idle must list exactly south, west, north and east"
+    },
+    "extra action": {
+     "ok": false,
+     "first_error": "actions must be exactly idle and walk"
+    },
+    "missing action": {
+     "ok": false,
+     "first_error": "actions must be exactly idle and walk"
+    },
+    "one-frame walk": {
+     "ok": false,
+     "first_error": "walk/west needs 2..16 frames"
+    },
+    "zero duration": {
+     "ok": false,
+     "first_error": "walk/west frame 2 duration_ms must be an integer 40..2000"
+    },
+    "fractional duration": {
+     "ok": false,
+     "first_error": "idle/east frame 1 duration_ms must be an integer 40..2000"
+    },
+    "string duration": {
+     "ok": false,
+     "first_error": "idle/east frame 1 duration_ms must be an integer 40..2000"
+    },
+    "density 1": {
+     "ok": false,
+     "first_error": "density must be an integer 2..4"
+    },
+    "density 5": {
+     "ok": false,
+     "first_error": "density must be an integer 2..4"
+    },
+    "pivot outside frame": {
+     "ok": false,
+     "first_error": "pivot must be [x, y] inside the frame (0 <= x < w, 1 <= y <= h)"
+    },
+    "pivot off the soles": {
+     "ok": false,
+     "first_error": "idle/south frame 1: opaque texels below the floor line (row 103 > pivot 99)"
+    },
+    "declared size differs": {
+     "ok": false,
+     "first_error": "idle/south frame 1: res://tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_female-idle-south-f1_20261018-153932-9f31902d.png is (80, 112), not (80, 120)"
+    },
+    "actor id mismatch": {
+     "ok": false,
+     "first_error": "set actor_id protagonist-male is not protagonist-female"
+    },
+    "wrong schema": {
+     "ok": false,
+     "first_error": "set schema is not worlds-between.exploration-sprite-set.v1"
+    }
+   }
+  },
+  {
+   "check": "L07 partial set (23/24 valid frames) is rejected whole; sprite keeps legacy texture/offset/scale; other actor still loads",
+   "ok": true,
+   "detail": [
+    "walk/east frame 4: res://tests/fixtures/spriteset-diag-test-only-9f31902d/rpg-2-star-ocean-the-second_spriteset-diag_invalid-wrong-size_20261018-153932-9f31902d.png is (64, 96), not (80, 112)"
+   ]
+  },
+  {
+   "check": "L08 missing/invalid/unknown registry or set path -> no attach (legacy)",
+   "ok": true,
+   "detail": {
+    "missing file": true,
+    "invalid json": true,
+    "wrong schema": true,
+    "non-string entry": true,
+    "absolute os path": true,
+    "set file missing": true
+   }
+  },
+  {
+   "check": "L09 time-based cadence: every sample including exact boundaries at 30/60/144 fps; independent expected frames and elapsed clock; hitch",
+   "ok": true,
+   "detail": {
+    "walk/east@30": {
+     "mismatches": 0,
+     "boundary_samples_skipped": 0,
+     "frames_seen": 4
+    },
+    "walk/east@60": {
+     "mismatches": 0,
+     "boundary_samples_skipped": 0,
+     "frames_seen": 4
+    },
+    "walk/east@144": {
+     "mismatches": 0,
+     "boundary_samples_skipped": 0,
+     "frames_seen": 4
+    },
+    "idle/south@30": {
+     "mismatches": 0,
+     "boundary_samples_skipped": 0,
+     "frames_seen": 2
+    },
+    "idle/south@60": {
+     "mismatches": 0,
+     "boundary_samples_skipped": 0,
+     "frames_seen": 2
+    },
+    "idle/south@144": {
+     "mismatches": 0,
+     "boundary_samples_skipped": 0,
+     "frames_seen": 2
+    },
+    "hitch_0.75s": {
+     "frame": 1,
+     "want": 1
+    }
+   }
+  },
+  {
+   "check": "L11 shared elapsed 400/800/2400ms and 10s boundaries, no tolerance or skipped boundary samples",
+   "ok": true,
+   "detail": [
+    {
+     "fps": 30,
+     "milliseconds": 400,
+     "clock_us": 400000,
+     "frame": 0,
+     "expected_frame": 0
+    },
+    {
+     "fps": 30,
+     "milliseconds": 800,
+     "clock_us": 800000,
+     "frame": 0,
+     "expected_frame": 0
+    },
+    {
+     "fps": 30,
+     "milliseconds": 2400,
+     "clock_us": 2400000,
+     "frame": 0,
+     "expected_frame": 0
+    },
+    {
+     "fps": 30,
+     "milliseconds": 10000,
+     "clock_us": 10000000,
+     "frame": 0,
+     "expected_frame": 0
+    },
+    {
+     "fps": 60,
+     "milliseconds": 400,
+     "clock_us": 400000,
+     "frame": 0,
+     "expected_frame": 0
+    },
+    {
+     "fps": 60,
+     "milliseconds": 800,
+     "clock_us": 800000,
+     "frame": 0,
+     "expected_frame": 0
+    },
+    {
+     "fps": 60,
+     "milliseconds": 2400,
+     "clock_us": 2400000,
+     "frame": 0,
+     "expected_frame": 0
+    },
+    {
+     "fps": 60,
+     "milliseconds": 10000,
+     "clock_us": 10000000,
+     "frame": 0,
+     "expected_frame": 0
+    },
+    {
+     "fps": 144,
+     "milliseconds": 10000,
+     "clock_us": 10000000,
+     "frame": 0,
+     "expected_frame": 0
+    }
+   ]
+  },
+  {
+   "check": "L10 transitions: idle cycles; turn or start/stop restarts at frame 0; unknown facing ignored; texture follows state",
+   "ok": true,
+   "detail": [
+    [
+     "start idle",
+     "idle",
+     "south",
+     0,
+     0
+    ],
+    [
+     "idle 0.5 s",
+     "idle",
+     "south",
+     1,
+     500000
+    ],
+    [
+     "turn east + walk",
+     "walk",
+     "east",
+     0,
+     0
+    ],
+    [
+     "walk 0.27 s",
+     "walk",
+     "east",
+     2,
+     270000
+    ],
+    [
+     "turn north while walking",
+     "walk",
+     "north",
+     0,
+     0
+    ],
+    [
+     "stop",
+     "idle",
+     "north",
+     0,
+     0
+    ],
+    [
+     "unknown facing ignored",
+     "idle",
+     "north",
+     0,
+     0
+    ]
+   ]
+  }
+ ],
+ "passed": 12,
+ "total": 12
+}

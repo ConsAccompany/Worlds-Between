@@ -14,6 +14,8 @@
 //        [--note-en ".."] [--note-zh ".."] [--now <ISO>]
 //   node tools/<this file> revise --for <production task id> --reason-en ".." [--reason-zh ".."] [--now <ISO>]
 //        opens (or reopens) the ONE fixed revision bucket of a deliverable; points are fixed, never chosen
+//   node tools/<this file> reassign --task <producer-or-technical-check id> --owner codex|claude --reason-en ".."
+//        audited ownership transfer only; an existing revision bucket follows its parent; no scoring/status changes
 //   node tools/<this file> summary | queue | list [--owner o] [--stage s] [--status s] [--area a]
 // Options for every command: --ledger <path> (tests work on a copy), --dry-run.
 'use strict';
@@ -40,8 +42,8 @@ const STAGES = {
   'creator-approval': {kind: 'approval', zh: '创作者批准', en: 'Creator approval'},
   'operations': {kind: 'operations', zh: '运营（看板检查与发布，不计入百分比）', en: 'Operations (dashboard inspection and publication; no percentage)'},
 };
-// Owners follow the task type, not the stage: Codex generated the source portraits with image generation, Claude authors
-// native Pixelorama content and code, Codex reviews in the browser and publishes, the creator accepts and decides canon.
+// Default owners follow the task type. Producer/technical-check ownership can transfer between Codex and Claude through
+// an audited reassign; creative review, creator approval and operations ownership remain fixed.
 const TASK_TYPES = {
   'feature-code': {stage: 'coding', owner: 'claude'},
   'pipeline-code': {stage: 'coding', owner: 'claude'},
@@ -79,6 +81,9 @@ const revisionPoints = points => Math.ceil(points / 2);
 const REJECTED_BASELINE_PATTERN = /\/(native-prototypes|native-animation|combat-prototypes)\/|_m8-prototype_|native-idle-(south|west|north|east)_m8-v01_/;
 const isProduction = t => STAGES[t.stage]?.kind === 'production';
 const isInspection = t => STAGES[t.stage]?.kind === 'inspection';
+const canReassign = t => t.type !== 'revision' && (isProduction(t) || t.type === 'technical-check');
+const workerOwner = owner => owner === 'codex' || owner === 'claude';
+const validAuditTime = at => typeof at === 'string' && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/.test(at) && Number.isFinite(Date.parse(at));
 
 const QA = name => 'docs/qa/rpg-2-star-ocean-the-second_' + name;
 const EV = {
@@ -521,7 +526,7 @@ function compute(ledger, root) {
   const queue = [], needsRevision = [];
   for (const x of open) {
     const gate = revisionGate(x, byId);
-    if (gate) needsRevision.push({id: x.id, owner: x.owner, stage: x.stage, review: gate.review, revision: gate.revision, revisionStatus: gate.revisionStatus, nextOwner: 'claude'});
+    if (gate) needsRevision.push({id: x.id, owner: x.owner, stage: x.stage, review: gate.review, revision: gate.revision, revisionStatus: gate.revisionStatus, nextOwner: byId.get(gate.revision || x.target)?.owner});
     else queue.push({id: x.id, stage: x.stage, owner: x.owner, status: x.status, points: x.points});
   }
   const byOwner = {};
@@ -531,7 +536,7 @@ function compute(ledger, root) {
     for (const x of mine) counts[x.status] = (counts[x.status] || 0) + 1;
     const counted = mine.filter(x => x.stage !== 'operations' && x.status !== 'not_required');
     byOwner[owner] = {tasks: mine.length, operationsTasks: mine.filter(x => x.stage === 'operations').length, points: sumPts(counted), pointsDone: sumPts(counted.filter(x => x.status === 'done')), byStatus: counts,
-      readyInQueue: queue.filter(q => q.owner === owner).length, revisionsBlockingApproval: owner === 'claude' ? needsRevision.length : 0};
+      readyInQueue: queue.filter(q => q.owner === owner).length, revisionsBlockingApproval: needsRevision.filter(q => q.nextOwner === owner).length};
   }
   const areas = {};
   for (const x of tasks) {
@@ -564,8 +569,49 @@ function compute(ledger, root) {
 }
 
 // ---------- validation ----------
+// Replay task-definition changes backwards from the current tasks to the frozen baseline. A last-hash match alone is
+// insufficient: every assignment must undo ONLY its declared owner transfer, and every bucket must undo ONLY its one
+// added revision task. This binds the whole chain and rejects attempts to disguise points/criteria edits as assignments.
+function assignmentAudit(ledger) {
+  const errors = [], owners = new Map(), baseline = ledger.baseline;
+  if (!baseline || !Array.isArray(baseline.revisions)) return {errors: ['invalid baseline revision chain'], owners};
+  const tasks = ledger.tasks.map(t => ({...t}));
+  for (let i = baseline.revisions.length - 1; i >= 0; i -= 1) {
+    const r = baseline.revisions[i], where = 'baseline revision ' + i + ': ';
+    if (!r || typeof r !== 'object') { errors.push(where + 'invalid audit record'); continue; }
+    if (taskSetHash(tasks) !== r.taskSetSha256) errors.push(where + 'task-set hash chain does not match audited result');
+    if (r.kind === 'owner-assignment') {
+      const target = tasks.find(t => t.id === r.taskId), bucket = tasks.find(t => t.id === r.taskId + '.revision');
+      const affected = target ? [target, ...(bucket ? [bucket] : [])] : [];
+      if (!target || !canReassign(target)) errors.push(where + 'owner assignment must target a producer or technical-check (reassign the parent of a revision)');
+      if (!workerOwner(r.fromOwner) || !workerOwner(r.toOwner) || r.fromOwner === r.toOwner) errors.push(where + 'owner assignment must transfer Codex <-> Claude');
+      if (!validAuditTime(r.at) || typeof r.reason?.en !== 'string' || !r.reason.en.trim()) errors.push(where + 'owner assignment needs an ISO timestamp and reason-en');
+      const ids = affected.map(t => t.id).sort();
+      if (!Array.isArray(r.changedTaskIds) || JSON.stringify([...r.changedTaskIds].sort()) !== JSON.stringify(ids)) errors.push(where + 'owner assignment must include its exact parent/revision task ids');
+      for (const t of affected) {
+        if (t.owner !== r.toOwner) errors.push(where + 'audited result owner mismatch for ' + t.id);
+        if (!owners.has(t.id)) owners.set(t.id, r.toOwner);
+        t.owner = r.fromOwner;
+      }
+      if (typeof r.previousTaskSetSha256 !== 'string' || taskSetHash(tasks) !== r.previousTaskSetSha256) errors.push(where + 'owner assignment previous hash mismatch (only owners may change)');
+    } else if (r.kind === 'revision-bucket') {
+      const added = Array.isArray(r.addedTaskIds) ? r.addedTaskIds : [];
+      const bucket = added.length === 1 ? tasks.find(t => t.id === added[0]) : null;
+      const target = bucket ? tasks.find(t => t.id === bucket.target) : null;
+      if (!bucket || bucket.type !== 'revision' || !target || !isProduction(target) || target.type === 'revision' || bucket.id !== target.id + '.revision' || bucket.owner !== target.owner || bucket.stage !== target.stage || bucket.points !== revisionPoints(target.points)) {
+        errors.push(where + 'revision-bucket audit must add one fixed revision task');
+      } else tasks.splice(tasks.indexOf(bucket), 1);
+      // Older bucket records have only the resulting hash; keep them readable while new records link both sides.
+      if (r.previousTaskSetSha256 !== undefined && taskSetHash(tasks) !== r.previousTaskSetSha256) errors.push(where + 'revision-bucket previous hash mismatch');
+    } else errors.push(where + 'unsupported audit kind ' + r.kind);
+  }
+  if (taskSetHash(tasks) !== baseline.taskSetSha256) errors.push('task set differs from the frozen baseline after reversing the audit chain');
+  for (const t of tasks) if (t.type !== 'revision' && t.owner !== TASK_TYPES[t.type]?.owner) errors.push('frozen baseline contains an unsupported owner for ' + t.id);
+  return {errors, owners};
+}
 function validate(ledger, root, {checkBaseline = true} = {}) {
   const errors = [];
+  const audit = assignmentAudit(ledger);
   const ids = new Set();
   const registry = readJson(root, REGISTRY_REL), inventory = readJson(root, INVENTORY_REL);
   const variants = new Set(registry.entries.map(e => e.visual_id));
@@ -588,7 +634,7 @@ function validate(ledger, root, {checkBaseline = true} = {}) {
         if (x.points !== revisionPoints(target.points)) errors.push(where + 'revision points are fixed at ceil(deliverable points / 2)');
       }
     } else {
-      if (x.owner !== rule.owner) errors.push(where + `owner ${x.owner} is not the ${x.type} owner ${rule.owner}`);
+      if (x.owner !== rule.owner && !(canReassign(x) && workerOwner(x.owner) && audit.owners.get(x.id) === x.owner)) errors.push(where + `owner ${x.owner} is not the ${x.type} owner ${rule.owner} (use audited reassign for producer/technical-check transfers)`);
       if (x.stage !== rule.stage) errors.push(where + `stage ${x.stage} is not the ${x.type} stage ${rule.stage}`);
       if (/\.revision/.test(x.id)) errors.push(where + 'revision ids are reserved for revision buckets');
     }
@@ -630,6 +676,7 @@ function validate(ledger, root, {checkBaseline = true} = {}) {
   if (variants.size !== 52) errors.push('registry must hold 52 variants, found ' + variants.size);
   for (const [key, invId] of SCENES) if (!byId.has(`content.scene.${key}.native-pass`) || byId.get(`content.scene.${key}.native-pass`).subject.id !== invId) errors.push('scene gate not covered: ' + invId);
   if (checkBaseline) {
+    errors.push(...audit.errors);
     const revisions = ledger.baseline.revisions;
     const expected = revisions.length ? revisions[revisions.length - 1].taskSetSha256 : ledger.baseline.taskSetSha256;
     if (taskSetHash(ledger.tasks) !== expected) errors.push('task set (ids, types, stages, owners, points, subjects, targets, dependencies, done criteria) differs from the frozen baseline; only revise (one fixed bucket per deliverable) or an owner-authorized baseline revision may change it');
@@ -714,11 +761,36 @@ function revise(ledger, root, opts) {
   if (existing) {
     ledger.tasks = ledger.tasks.map(x => x === existing ? {...x, status: 'in_progress', statusAt: opts.now, note: {zh: opts.reasonZh || '', en: opts.reasonEn}} : x);
   } else {
+    const previousTaskSetSha256 = taskSetHash(ledger.tasks);
     ledger.tasks = [...ledger.tasks, revisionTask(target, {status: 'in_progress', statusAt: opts.now, note: {zh: opts.reasonZh || '', en: opts.reasonEn}})];
     ledger.baseline.revisions.push({at: opts.now, kind: 'revision-bucket', addedTaskIds: [id], reason: {zh: opts.reasonZh || '', en: opts.reasonEn},
-      effect: {zh: '只增加分母；已完成的原始制作保持计分；本交付物之后的版本只重开此桶。', en: 'Adds to the denominator only; the finished original keeps its credit; later versions of this deliverable only reopen this bucket.'}, taskSetSha256: taskSetHash(ledger.tasks)});
+      effect: {zh: '只增加分母；已完成的原始制作保持计分；本交付物之后的版本只重开此桶。', en: 'Adds to the denominator only; the finished original keeps its credit; later versions of this deliverable only reopen this bucket.'}, previousTaskSetSha256, taskSetSha256: taskSetHash(ledger.tasks)});
   }
   ledger.updatedAt = opts.now;
+  return refresh(ledger, root);
+}
+
+// Ownership transfers are explicitly audited but never count as newly completed work. Use a trial copy so invalid
+// parameters or a forged existing audit cannot partially mutate the ledger. Same-owner requests are idempotent.
+function reassign(ledger, root, opts) {
+  const existingErrors = validate(ledger, root);
+  if (existingErrors.length) throw new Error('refused invalid ledger before reassign:\n  ' + existingErrors.join('\n  '));
+  const target = ledger.tasks.find(x => x.id === opts.task);
+  if (!target) throw new Error('unknown task ' + opts.task);
+  if (!canReassign(target)) throw new Error('reassign targets only a producer or technical-check; reassign the parent of a revision (review/approval/operations owners remain fixed)');
+  if (!workerOwner(opts.owner)) throw new Error('reassign needs --owner codex|claude');
+  if (typeof opts.reasonEn !== 'string' || !opts.reasonEn.trim()) throw new Error('reassign needs --reason-en');
+  if (!validAuditTime(opts.now)) throw new Error('reassign needs a valid ISO --now timestamp');
+  if (target.owner === opts.owner) return refresh(ledger, root);
+  const affected = ledger.tasks.filter(x => x === target || (x.type === 'revision' && x.target === target.id));
+  const changedTaskIds = affected.map(x => x.id).sort(), changed = new Set(changedTaskIds);
+  const tasks = ledger.tasks.map(x => changed.has(x.id) ? {...x, owner: opts.owner} : x);
+  const record = {at: opts.now, kind: 'owner-assignment', taskId: target.id, fromOwner: target.owner, toOwner: opts.owner, changedTaskIds,
+    reason: {zh: opts.reasonZh || '', en: opts.reasonEn.trim()}, previousTaskSetSha256: taskSetHash(ledger.tasks), taskSetSha256: taskSetHash(tasks)};
+  const trial = {...ledger, updatedAt: opts.now, tasks, baseline: {...ledger.baseline, revisions: [...ledger.baseline.revisions, record]}};
+  const errors = validate(trial, root);
+  if (errors.length) throw new Error('refused reassignment:\n  ' + errors.join('\n  '));
+  Object.assign(ledger, trial);
   return refresh(ledger, root);
 }
 
@@ -743,7 +815,7 @@ function printSummary(c) {
   console.log(`Inspection performed: ${c.inspection.done}/${c.inspection.total} pts = ${c.inspection.percent}%  (technical ${c.inspection.technical.done}/${c.inspection.technical.total}, visual ${c.inspection.visual.done}/${c.inspection.visual.total}, content QA ${c.inspection.contentQa.done}/${c.inspection.contentQa.total}; waived ${c.inspection.waived.tasks} excluded)`);
   console.log(`Creator approval: ${c.approval.done}/${c.approval.total} pts = ${c.approval.percent}%   operations ${c.operations.tasksDone}/${c.operations.tasks} tasks (no %)   release finalAccepted=${c.release.finalAccepted}`);
   for (const [o, v] of Object.entries(c.byOwner)) console.log(`  ${o.padEnd(8)} tasks ${v.tasks} (ops ${v.operationsTasks}) points ${v.pointsDone}/${v.points} ready ${v.readyInQueue} ${JSON.stringify(v.byStatus)}`);
-  console.log(`Ready queue: ${c.queue.count}; needs Claude revision before acceptance: ${c.queue.needsRevision.count}   Legacy mixed estimate (separate metric): ${c.legacy.percentLabel}`);
+  console.log(`Ready queue: ${c.queue.count}; needs revision before acceptance: ${c.queue.needsRevision.count}   Legacy mixed estimate (separate metric): ${c.legacy.percentLabel}`);
 }
 
 function main() {
@@ -772,10 +844,11 @@ function main() {
   if (opts.command === 'recompute') { refresh(ledger, root); if (!opts.dryRun) save(file, ledger); printSummary(ledger.computed); return; }
   if (opts.command === 'set') { setTask(ledger, root, opts); if (!opts.dryRun) save(file, ledger); printSummary(ledger.computed); return; }
   if (opts.command === 'revise') { revise(ledger, root, opts); if (!opts.dryRun) save(file, ledger); printSummary(ledger.computed); return; }
+  if (opts.command === 'reassign') { reassign(ledger, root, opts); if (!opts.dryRun) save(file, ledger); printSummary(ledger.computed); return; }
   if (opts.command === 'summary') { printSummary(ledger.computed); return; }
   if (opts.command === 'queue') {
     for (const q of ledger.computed.queue.items) console.log(`READY ${q.owner.padEnd(8)} ${q.stage.padEnd(21)} ${q.status.padEnd(12)} ${q.id}`);
-    for (const q of ledger.computed.queue.needsRevision.items) console.log(`NEEDS-REVISION ${q.id} <- ${q.review} (revision ${q.revision || 'missing'}: ${q.revisionStatus})`);
+    for (const q of ledger.computed.queue.needsRevision.items) console.log(`NEEDS-REVISION ${q.nextOwner} ${q.id} <- ${q.review} (revision ${q.revision || 'missing'}: ${q.revisionStatus})`);
     console.log('READY ' + ledger.computed.queue.count + ' NEEDS-REVISION ' + ledger.computed.queue.needsRevision.count); return;
   }
   if (opts.command === 'list') {
@@ -786,7 +859,7 @@ function main() {
   throw new Error('unknown command ' + opts.command);
 }
 
-module.exports = {LEDGER_REL, PROGRESS_REL, STAGES, TASK_TYPES, WEIGHTS, compute, validate, serialize, setTask, revise, taskSetHash, refresh, load, init, buildTasks, revisionGate};
+module.exports = {LEDGER_REL, PROGRESS_REL, STAGES, TASK_TYPES, WEIGHTS, compute, validate, serialize, setTask, revise, reassign, taskSetHash, refresh, load, init, buildTasks, revisionGate};
 if (require.main === module) {
   try { main(); } catch (error) { console.error('ERROR ' + error.message); process.exit(1); }
 }

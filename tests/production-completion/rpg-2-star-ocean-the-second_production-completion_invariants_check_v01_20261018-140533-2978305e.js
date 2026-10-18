@@ -77,7 +77,7 @@ const before = [LEDGER, PROGRESS].map(sha);
   const l = fresh(), walk = task(l, 'content.char.protagonist-female.walk-south'), bucket = task(l, 'content.char.protagonist-female.walk-south.revision');
   assert.equal(walk.status, 'done');
   assert.ok(walk.evidence.some(e => /south-run-v07/.test(e)) && walk.evidence.includes(cli.PROGRESS_REL));
-  assert.ok(bucket && bucket.status === 'done' && bucket.points === 2 && bucket.owner === 'claude' && bucket.evidence.some(e => /v10r1/.test(e)), 'run/stop polish revision produced (v10r1)');
+  assert.ok(bucket && bucket.status === 'done' && bucket.points === 2 && bucket.owner === walk.owner && bucket.evidence.some(e => /v10r1/.test(e)), 'run/stop polish revision produced (v10r1)');
   for (const d of ['west', 'north', 'east']) assert.equal(task(l, `content.char.protagonist-female.walk-${d}`).status, 'todo');
   assert.equal(l.tasks.filter(x => /^creator\.char\..*\.accept-runtime-sprite$/.test(x.id) && x.status === 'done').length, 0, 'runtime sprite acceptance stays 0/52');
   pass('v07 south run credited as delivered; v10r1 run/stop polish credited as its one produced revision; other directions unfinished; 0/52 sprite acceptances');
@@ -176,13 +176,17 @@ const before = [LEDGER, PROGRESS].map(sha);
   pass('Yonkers v06 and WDC v13 root verdicts recorded as changes_requested; their acceptances show "needs Claude revision" until a later revision; WDC deterministic check credited as technical inspection only');
 }
 
-// 8. Owners follow the task type, not the stage.
+// 8. Baseline owners follow the task type; transfers require their own audited reassign command below.
 {
   const l = fresh();
-  for (const x of l.tasks) if (x.type !== 'revision') { assert.equal(x.owner, cli.TASK_TYPES[x.type].owner, x.id); assert.equal(x.stage, cli.TASK_TYPES[x.type].stage, x.id); }
+  for (const x of l.tasks) if (x.type !== 'revision') {
+    assert.equal(x.stage, cli.TASK_TYPES[x.type].stage, x.id);
+    const lastAssignment = l.baseline.revisions.filter(r => r.kind === 'owner-assignment' && r.taskId === x.id).at(-1);
+    assert.equal(x.owner, lastAssignment ? lastAssignment.toOwner : cli.TASK_TYPES[x.type].owner, x.id);
+  }
   const portraits = l.tasks.filter(x => /^content\.char\..*\.portrait$/.test(x.id));
-  assert.equal(portraits.length, 52); assert.ok(portraits.every(x => x.owner === 'codex' && x.type === 'concept-generation' && x.stage === 'content'));
-  assert.ok(l.tasks.filter(x => x.type === 'native-pixel').every(x => x.owner === 'claude'));
+  assert.equal(portraits.length, 52); assert.ok(portraits.every(x => x.type === 'concept-generation' && x.stage === 'content'));
+  assert.ok(l.tasks.filter(x => x.type === 'native-pixel').every(x => ['codex', 'claude'].includes(x.owner)));
   const audio = task(l, 'review.content.audio');
   assert.ok(audio.stage === 'content-qa' && audio.owner === 'codex' && /audio QA/.test(audio.title.en) && !/visual review/i.test(audio.title.en));
   const ops = l.tasks.filter(x => x.stage === 'operations');
@@ -191,11 +195,107 @@ const before = [LEDGER, PROGRESS].map(sha);
   const opsPoints = ops.reduce((s, x) => s + x.points, 0);
   const totalPoints = ['coding', 'content', 'technical-inspection', 'visual-review', 'content-qa', 'creator-approval'].reduce((s, st) => s + l.computed.stageTotals[st].total + l.computed.stageTotals[st].waivedPoints, 0);
   assert.equal(totalPoints + opsPoints, l.tasks.reduce((s, x) => s + x.points, 0), 'operations are outside every meter');
-  const wrong = fresh(); task(wrong, 'content.char.milo.portrait').owner = 'claude';
-  assert.ok(cli.validate(wrong, ROOT).some(e => /concept-generation owner codex/.test(e)));
-  const wrong2 = fresh(); task(wrong2, 'content.char.milo.static-south').owner = 'codex';
-  assert.ok(cli.validate(wrong2, ROOT).some(e => /native-pixel owner claude/.test(e)));
-  pass('52 portraits are Codex image-generation tasks; native pixel and code are Claude; audio is content/audio QA; 2 Codex operations tasks listed outside the meters');
+  const wrong = fresh(), p = task(wrong, 'content.char.milo.portrait'); p.owner = p.owner === 'codex' ? 'claude' : 'codex';
+  assert.ok(cli.validate(wrong, ROOT).some(e => /audited reassign|hash chain|frozen baseline/.test(e)));
+  const wrong2 = fresh(), n = task(wrong2, 'content.char.milo.static-south'); n.owner = n.owner === 'codex' ? 'claude' : 'codex';
+  assert.ok(cli.validate(wrong2, ROOT).some(e => /audited reassign|hash chain|frozen baseline/.test(e)));
+  pass('owners follow type defaults or their audited transfers; 52 image-generation portraits, fixed content/audio QA and 2 operations tasks outside meters');
+}
+
+// 8a. Ownership is operational: moving responsibility never changes delivered work, denominators or creator approval.
+const assign = (l, id, owner, extra = {}) => cli.reassign(l, ROOT, {task: id, owner, reasonEn: 'Creator-authorized Codex takeover during Claude quota gap', now: NOW, ...extra});
+const scoreSnap = l => JSON.stringify({production: l.computed.production, inspection: l.computed.inspection, approval: l.computed.approval,
+  operations: l.computed.operations, release: l.computed.release, stageTotals: l.computed.stageTotals, legacy: l.computed.legacy, weights: l.baseline.weights});
+const tasksExceptOwners = l => JSON.stringify(l.tasks.map(({owner, ...rest}) => rest));
+{
+  const l = fresh(), score = scoreSnap(l), unchanged = tasksExceptOwners(l), count = l.tasks.length;
+  const baseRevisions = l.baseline.revisions.length, baseHash = cli.taskSetHash(l.tasks);
+  const moved = ['code.runtime.character-sprite-pipeline', 'code.runtime.combat-sprite-pipeline', 'code.runtime.vfx-system', 'code.runtime.audio-cues', 'qa.scene.map.check'];
+  const nextOwners = new Map(moved.map(id => [id, task(l, id).owner === 'codex' ? 'claude' : 'codex']));
+  const movedPoints = moved.reduce((n, id) => n + (nextOwners.get(id) === 'codex' ? 1 : -1) * task(l, id).points, 0), codexPoints = l.computed.byOwner.codex.points;
+  for (const id of moved) assign(l, id, nextOwners.get(id));
+  assert.equal(l.tasks.length, count);
+  assert.equal(tasksExceptOwners(l), unchanged, 'reassign preserves every task property other than owner (including status/evidence/statusAt)');
+  assert.equal(scoreSnap(l), score, 'all scored numerators/denominators and release/approval states identical');
+  assert.equal(l.baseline.revisions.length, baseRevisions + moved.length);
+  assert.equal(l.baseline.revisions[baseRevisions].previousTaskSetSha256, baseHash);
+  assert.equal(l.computed.byOwner.codex.points, codexPoints + movedPoints);
+  for (const id of moved) assert.equal(task(l, id).owner, nextOwners.get(id));
+  assert.deepEqual(cli.validate(l, ROOT), []);
+  pass('audited producer/technical-check takeover moves owner workload only; every status, evidence, task count, score/denominator and approval remains unchanged');
+}
+
+// Revision ownership follows the parent, regardless of whether the revision is created before or after transfer.
+{
+  const l = fresh(), parent = 'content.scene.outskirts-survey-outer.native-pass', bucket = parent + '.revision';
+  const score = scoreSnap(l), beforeTasks = tasksExceptOwners(l);
+  assign(l, parent, 'codex');
+  const record = l.baseline.revisions.at(-1);
+  assert.deepEqual(record.changedTaskIds, [parent, bucket].sort());
+  assert.equal(task(l, bucket).owner, 'codex');
+  const q = l.computed.queue.needsRevision.items.find(x => x.id === 'creator.scene.outskirts-survey-outer.accept');
+  assert.equal(q.nextOwner, 'codex', 'revision queue routes to its actual producer');
+  assert.equal(l.computed.byOwner.codex.revisionsBlockingApproval, 1);
+  assert.equal(l.computed.byOwner.claude.revisionsBlockingApproval, fresh().computed.byOwner.claude.revisionsBlockingApproval - 1);
+  const same = cli.serialize(l);
+  assign(l, parent, 'codex');
+  assert.equal(cli.serialize(l), same, 'same-owner retry adds no audit entry or timestamp churn');
+  assign(l, parent, 'claude');
+  assert.equal(task(l, bucket).owner, 'claude');
+  assert.equal(tasksExceptOwners(l), beforeTasks);
+  assert.equal(scoreSnap(l), score);
+  assert.equal(cli.taskSetHash(l.tasks), cli.taskSetHash(fresh().tasks), 'reverse transfer restores original definitions');
+  assert.deepEqual(cli.validate(l, ROOT), []);
+  // No bucket yet: missing-revision routing follows the parent, then the newly created bucket inherits Codex.
+  const n = fresh(), chicago = 'content.scene.chicago-loop.native-pass';
+  assign(n, chicago, 'codex');
+  assert.equal(n.computed.queue.needsRevision.items.find(x => x.id === 'creator.scene.chicago-loop.accept').nextOwner, 'codex');
+  cli.revise(n, ROOT, {for: chicago, reasonEn: 'bounded material pass', now: NOW});
+  assert.equal(task(n, chicago + '.revision').owner, 'codex');
+  assign(n, chicago, 'claude');
+  assign(n, chicago, 'codex');
+  assert.deepEqual(cli.validate(n, ROOT), [], 'assignment/bucket/assignment chain fully replayable');
+  pass('existing/new revision buckets follow producer transfers; missing/existing revision routing and per-owner counts are dynamic; retries idempotent and reverse/mixed chains valid');
+}
+
+// Reject unaudited transfers and forged records even if someone replaces the last result hash with their modified hash.
+{
+  const id = 'code.runtime.audio-cues';
+  for (const [target, owner, extra] of [
+    ['creator.scene.city.accept', 'codex', {}], ['review.scene.city', 'claude', {}], ['review.content.audio', 'claude', {}],
+    ['ops.codex.site-publication', 'claude', {}], ['content.scene.city.native-pass.revision', 'codex', {}],
+    [id, 'creator', {}], [id, 'codex', {reasonEn: ' '}], [id, 'codex', {now: 'not-a-time'}], ['code.missing', 'codex', {}]
+  ]) {
+    const l = fresh(), before = cli.serialize(l);
+    assert.throws(() => assign(l, target, owner, extra));
+    assert.equal(cli.serialize(l), before, 'refused assignment is atomic: ' + target);
+  }
+  const direct = fresh(); task(direct, id).owner = task(direct, id).owner === 'codex' ? 'claude' : 'codex';
+  assert.ok(cli.validate(direct, ROOT).some(e => /audited reassign|frozen baseline/.test(e)));
+  const valid = fresh(); assign(valid, 'content.scene.city.native-pass', 'codex');
+  const mutate = fn => { const x = structuredClone(valid); fn(x, x.baseline.revisions.at(-1)); assert.ok(cli.validate(x, ROOT).length, 'forged chain must fail'); };
+  mutate((x, r) => { r.kind = 'unsupported-owner-override'; });
+  mutate((x, r) => { r.fromOwner = 'creator'; });
+  mutate((x, r) => { r.reason.en = ''; });
+  mutate((x, r) => { delete r.previousTaskSetSha256; });
+  mutate((x, r) => { r.changedTaskIds = [r.taskId]; });
+  mutate((x, r) => { task(x, 'content.scene.city.native-pass.revision').owner = 'claude'; r.taskSetSha256 = cli.taskSetHash(x.tasks); });
+  mutate((x, r) => { task(x, 'content.scene.city.plate').points += 1; r.taskSetSha256 = cli.taskSetHash(x.tasks); });
+  mutate((x, r) => { task(x, r.taskId).doneCriterion.en = 'weakened'; r.taskSetSha256 = cli.taskSetHash(x.tasks); });
+  mutate((x, r) => { r.previousTaskSetSha256 = r.taskSetSha256; });
+  mutate((x, r) => { x.baseline.revisions = []; });
+  const forgedReview = fresh(), review = task(forgedReview, 'review.scene.city'), reviewBefore = cli.taskSetHash(forgedReview.tasks);
+  review.owner = 'claude';
+  forgedReview.baseline.revisions.push({at: NOW, kind: 'owner-assignment', taskId: review.id, fromOwner: 'codex', toOwner: 'claude', changedTaskIds: [review.id], reason: {en: 'forged review reassignment'}, previousTaskSetSha256: reviewBefore, taskSetSha256: cli.taskSetHash(forgedReview.tasks)});
+  assert.ok(cli.validate(forgedReview, ROOT).some(e => /producer or technical-check/.test(e)), 'a hash-consistent audit cannot reassign fixed review ownership');
+  const dropped = fresh(), firstOwner = task(dropped, id).owner, otherOwner = firstOwner === 'codex' ? 'claude' : 'codex';
+  assign(dropped, id, otherOwner); assign(dropped, id, firstOwner);
+  dropped.baseline.revisions.splice(0, 1);
+  assert.ok(cli.validate(dropped, ROOT).length, 'an intermediate audit may not be dropped even after reverse transfer');
+  const bad = fresh(); task(bad, id).owner = task(bad, id).owner === 'codex' ? 'claude' : 'codex'; const badBefore = cli.serialize(bad);
+  assert.throws(() => assign(bad, id, 'claude'), /invalid ledger/);
+  assert.equal(cli.serialize(bad), badBefore, 'reassign cannot launder a preexisting unaudited owner edit');
+  pass('creator/review/operations owners fixed; direct edits, malformed requests, forged hashes/records, score/criterion changes and omitted audit history rejected atomically');
 }
 
 // 8b. Coding measures normal runtime capability: no dependency on approval or default art adoption; criteria and dependencies are frozen.
@@ -306,11 +406,23 @@ const before = [LEDGER, PROGRESS].map(sha);
   assert.equal(run('revise', '--for', 'content.scene.map.native-pass', '--reason-en', 'again').status, 0);
   assert.equal(JSON.parse(fs.readFileSync(copy, 'utf8')).tasks.length, n);
   assert.equal(run('check').status, 0);
+  const snapshot = fs.readFileSync(copy, 'utf8');
+  assert.equal(run('reassign', '--task', 'code.runtime.audio-cues', '--owner', 'codex', '--reason-en', 'Quota takeover', '--dry-run').status, 0);
+  assert.equal(fs.readFileSync(copy, 'utf8'), snapshot, 'dry-run assignment never writes');
+  assert.equal(run('reassign', '--task', 'code.runtime.audio-cues', '--owner', 'codex', '--reason-en', 'Quota takeover').status, 0);
+  assert.equal(JSON.parse(fs.readFileSync(copy, 'utf8')).tasks.find(x => x.id === 'code.runtime.audio-cues').owner, 'codex');
+  const assigned = fs.readFileSync(copy, 'utf8');
+  assert.notEqual(run('reassign', '--task', 'creator.scene.city.accept', '--owner', 'claude', '--reason-en', 'unsupported').status, 0);
+  assert.equal(fs.readFileSync(copy, 'utf8'), assigned, 'failed CLI transfer does not write');
+  assert.equal(run('reassign', '--task', 'code.runtime.audio-cues', '--owner', 'codex', '--reason-en', 'retry').status, 0);
+  assert.equal(fs.readFileSync(copy, 'utf8'), assigned, 'same-owner CLI retry idempotent');
+  assert.equal(run('reassign', '--task', 'code.runtime.audio-cues', '--owner', 'claude', '--reason-en', 'Return after reset').status, 0);
+  assert.equal(run('check').status, 0, 'CLI audit chain validates after reversing transfer');
   const stale = JSON.parse(fs.readFileSync(copy, 'utf8')); stale.computed.production.percent = 99;
   fs.writeFileSync(copy, JSON.stringify(stale));
   assert.notEqual(run('check').status, 0);
   fs.rmSync(dir, {recursive: true, force: true});
-  pass('CLI: evidence enforced, repeated revise reopens one bucket, stale derived numbers rejected');
+  pass('CLI: evidence enforced, repeated revise reopens one bucket, audited assignment/dry-run/retry/reverse supported, fixed-owner transfer and stale numbers rejected');
 }
 
 // 13. Local Game Bible panel: the real v05 server serves the ledger and the served bible.js renders it without recomputing.

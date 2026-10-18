@@ -23,6 +23,8 @@ The registry is an operating queue, not a second progress system. The dashboard 
 6. **Integrate serially:** the coordinator reviews explicit diffs, merges selected verified work into the designated integration checkout, runs the relevant combined checks and updates the ledger through its CLI. Reconcile stale producer bases without resetting their partial work.
 7. **Publish and close:** refresh the Bible/fallback from verified commits, check live, then report completed/integrated/revised/blocked/next. No filler closeouts for unchanged polling or repeated audits.
 
+The coordinator records producer/technical-check transfers with the existing ledger CLI: `reassign --task <id> --owner codex|claude --reason-en "<reason>"`. It audits the hash chain, moves any existing revision bucket with its parent, and preserves every score/status/evidence field. Never hand-edit owners or reassign creator approvals, creative reviews or operations. The operating registry mirrors the actual assignment after the ledger transition.
+
 ## Completion and handoff contract
 
 For every completed task, retain: task ID and owner; base/tested/integrated revisions; outputs and editable sources; hashes (with explicit LF normalization when applicable); actual commands/results and failed checks; inspection verdict; limitations; remaining creator decision if any. Use the existing ledger evidence paths and QA notes rather than inventing a second receipt platform.

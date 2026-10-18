@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-18T21:18:50.312303+00:00",
+  "updatedAt": "2026-10-18T21:22:32.242360+00:00",
   "purpose": "Operating queue and worktree ownership; no progress points or account details",
   "workflow": "docs/workflow.md",
   "canonicalLedger": "outputs/rpg-2-star-ocean-the-second_production-completion_task-ledger_v01_20261018-140533-3de52073.json",
@@ -59,8 +59,8 @@
       "id": "code.runtime.character-sprite-pipeline",
       "owner": "codex",
       "ownerReason": "Creator-authorized takeover during Claude quota depletion",
-      "status": "in_progress",
-      "lane": "primary",
+      "status": "done",
+      "lane": "closed",
       "worktree": "exploration-producer",
       "dependsOn": [],
       "output": "Normal exploration runtime can load validated optional sprite sets and fall back safely",
@@ -81,17 +81,20 @@
         "Actual normal-scene evidence and unchanged default/accepted-room checks",
         "Source/hash-bound QA and selected integration"
       ],
-      "nextAction": "Fix per-delta rounding drift with accumulated elapsed/fractional carry; retain exact boundary checks",
+      "nextAction": "Integrated and production-credited; real art remains separate.",
       "blockedBy": [],
       "startedAt": null,
-      "finishedAt": null
+      "finishedAt": "2026-10-18T21:22:32.242360+00:00",
+      "evidence": [
+        "docs/qa/rpg-2-star-ocean-the-second_loader-integration_codex-takeover-closeout_v01_20261018-172232-8630b9d2.md"
+      ]
     },
     {
       "id": "code.runtime.combat-sprite-pipeline",
       "owner": "codex",
       "ownerReason": "Creator-authorized takeover during Claude quota depletion",
-      "status": "in_progress",
-      "lane": "supporting",
+      "status": "done",
+      "lane": "closed",
       "worktree": "combat-producer",
       "dependsOn": [],
       "output": "Normal battle runtime can load validated optional action sets without altering simulation",
@@ -110,10 +113,13 @@
         "Actual bilingual party capture and source/hash-bound QA",
         "Selected integration after exploration task"
       ],
-      "nextAction": "Reproduce and fix typed manifest failures; add valid female fixture and reject runtime errors regardless of exit code",
+      "nextAction": "Integrated and production-credited; real art remains separate.",
       "blockedBy": [],
       "startedAt": null,
-      "finishedAt": null
+      "finishedAt": "2026-10-18T21:22:32.242360+00:00",
+      "evidence": [
+        "docs/qa/rpg-2-star-ocean-the-second_loader-integration_codex-takeover-closeout_v01_20261018-172232-8630b9d2.md"
+      ]
     },
     {
       "id": "ops.workflow-adoption",
@@ -163,9 +169,9 @@
     {
       "id": "code.runtime.vfx-system",
       "owner": "codex",
-      "status": "queued",
-      "lane": "queued",
-      "worktree": "integration",
+      "status": "in_progress",
+      "lane": "primary",
+      "worktree": "combat-producer",
       "dependsOn": [
         "code.runtime.combat-sprite-pipeline"
       ],
@@ -173,16 +179,16 @@
       "completion": [
         "Existing ledger criterion, targeted event checks and actual gameplay inspection"
       ],
-      "nextAction": "Read current effect hooks and choose the smallest useful normal-runtime completion after loader integration",
+      "nextAction": "Finish bounded opt-in battle presentation effects; no healing mechanics added.",
       "blockedBy": [],
-      "startedAt": null,
+      "startedAt": "2026-10-18T21:22:32.242360+00:00",
       "finishedAt": null
     },
     {
       "id": "code.runtime.audio-cues",
       "owner": "codex",
-      "status": "queued",
-      "lane": "queued",
+      "status": "in_progress",
+      "lane": "supporting",
       "worktree": "integration",
       "dependsOn": [
         "code.runtime.combat-sprite-pipeline"
@@ -191,9 +197,9 @@
       "completion": [
         "Existing ledger criterion, mute/volume checks and audible review"
       ],
-      "nextAction": "Reuse current audio infrastructure after primary loader deliverables close",
+      "nextAction": "Build reusable audio cues and UI hooks; serialize battle-arena hook integration after VFX commit.",
       "blockedBy": [],
-      "startedAt": null,
+      "startedAt": "2026-10-18T21:22:32.242360+00:00",
       "finishedAt": null
     }
   ],
