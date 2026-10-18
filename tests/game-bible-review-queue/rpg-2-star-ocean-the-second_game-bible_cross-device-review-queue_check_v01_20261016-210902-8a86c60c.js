@@ -317,7 +317,7 @@ async function renderProduction(base, mutateBible) {
       assert.ok(m && /1280x720 actual Godot window/.test(m.canvas) && /640x360 LOGICAL viewport/.test(m.canvas) && m.heroineHeightLogicalPx === 48 && m.playback === 'normal speed 1x' && m.autoplay === false, 'motion view wording: ' + item.id);
       assert.ok(!/native\s*640/i.test(JSON.stringify(item)), 'video never called native 640: ' + item.id);
       assert.ok(/diagnostic frames/.test(m.inspection.en) && /rate-1 start and end only/.test(m.inspection.en) && /not a continuous-fluidity certification/.test(m.inspection.en), 'inspection scope: ' + item.id);
-      assert.ok(/arm-easing/.test(m.limits.en[0]) && /270\.8 ms/.test(m.limits.en[1]) && /placeholder north/.test(m.limits.en[2]), 'motion limits retained: ' + item.id);
+      assert.ok(/not arm easing/.test(m.limits.en[0]) && /2d1e1a2/.test(m.limits.en[0]) && /513\/528/.test(m.limits.en[0]) && /under-sampled/.test(m.limits.en[0]) && /不是手臂缓动/.test(m.limits.zh[0]) && /270\.8 ms/.test(m.limits.en[1]) && /placeholder north/.test(m.limits.en[2]), 'motion limits: spike cites the diagnosis, stop 270.8 ms and placeholder north retained: ' + item.id);
       assert.ok(/Neither the gait nor a full sprite is approved/.test(m.approvalNote.en), 'gait / full sprite not approved: ' + item.id);
     } else {
       assert.ok(item.mediaType === undefined && /\.png$/.test(item.file), 'png card: ' + item.id);

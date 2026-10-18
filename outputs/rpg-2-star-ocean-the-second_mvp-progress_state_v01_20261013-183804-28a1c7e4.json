@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
   "planVersion": "v0.2",
-  "updatedAt": "2026-10-18T10:17:58Z",
+  "updatedAt": "2026-10-18T10:59:52Z",
   "currentStep": "M8",
   "steps": [
     {
@@ -654,7 +654,7 @@
     "kind": "weighted_delivery_estimate",
     "zh": "MVP 加权交付估算（不是正式批准）",
     "en": "MVP weighted delivery estimate (not formal approval)",
-    "updatedAt": "2026-10-18T10:17:58Z",
+    "updatedAt": "2026-10-18T10:59:52Z",
     "percent": 40.8,
     "percentLabel": "40.8%",
     "weightedPoints": 40.83,
@@ -974,8 +974,8 @@
     ],
     "updater": "tools/rpg-2-star-ocean-the-second_mvp-completion-meter_recompute-and-task-closeout-cli_v01_20261015-233032-d296a2cb.js",
     "lastUpdated": {
-      "at": "2026-10-18T10:17:58Z",
-      "closeoutId": "closeout-20261018-101758-05717ab4",
+      "at": "2026-10-18T10:59:52Z",
+      "closeoutId": "closeout-20261018-105952-06539c97",
       "percent": 40.8
     },
     "taskCloseouts": [
@@ -3811,6 +3811,49 @@
           "docs/qa/rpg-2-star-ocean-the-second_zhao-ling_south-idle-static-pilot_48px-identity-qa-note_unapproved-v01_20261018-052006-27b43b74.md",
           "outputs/rpg-2-star-ocean-the-second_zhao-ling_south-idle-static-pilot-capture-report_unapproved-v01r1_20261018-053525-2baef17e.json",
           "game/assets/characters/zhao-ling/south-idle-static-pilot-unapproved-v01/rpg-2-star-ocean-the-second_zhao-ling_south-idle-static-pilot-manifest_unapproved-v01_20261018-052006-fe4b7eda.json"
+        ]
+      },
+      {
+        "id": "closeout-20261018-105952-71434114",
+        "recordedAt": "2026-10-18T10:59:52Z",
+        "kind": "task",
+        "title": {
+          "zh": "女主朝南跑步动作：诊断（尖峰来自 30 fps 步态采样，不是手臂缓动）与被否决的 v08 外观重定时研究；无有效 v08，v07 仍为最新未批准动作",
+          "en": "Female south run motion: reviewed diagnosis (2d1e1a2: the v07 post-re-press spike is 30 fps sampling of the v06 per-px gait, not arm easing; all-phase envelope 513/528 at 9/10 px; v07 144 fps baseline under-sampled) plus a bounded v08 cosmetic-retiming study REJECTED (candidates changed release->v8 timing in 2-5 stops and left the 30 fps spike cases at 477-484; no validated v08, no new showreel); v07 remains the latest UNAPPROVED motion; the two v07 card limits now cite the diagnosis"
+        },
+        "impact": {
+          "changed": false,
+          "percentBefore": 40.8,
+          "percentAfter": 40.8,
+          "deltaPoints": 0,
+          "gateChanges": [],
+          "categoryChanges": []
+        },
+        "evidence": [
+          "docs/qa/rpg-2-star-ocean-the-second_protagonist-female_south-run-v07_post-repress-spike-diagnosis-no-arm-easing-fix_qa-note_unapproved-nonruntime_20261018-104023-cd3a7231.md",
+          "outputs/rpg-2-star-ocean-the-second_gait-driver_protagonist-female-south-run-v07-post-repress-spike-diagnosis-receipt_unapproved-nonruntime_20261018-104023-df69d961.json",
+          "docs/qa/rpg-2-star-ocean-the-second_protagonist-female_south-run-v08_rejected-cosmetic-retiming-study_addendum_unapproved-nonruntime_20261018-105935-b4e8125a.md"
+        ]
+      },
+      {
+        "id": "closeout-20261018-105952-06539c97",
+        "recordedAt": "2026-10-18T10:59:52Z",
+        "kind": "task",
+        "title": {
+          "zh": "私有 Site v16 修复与发布（root 发布并在生产环境核验；仅 Chrome／应用内浏览器，未做 Safari 或流畅度认证）",
+          "en": "Private Site v16 repair and publication (root-published; source 9365e60b302db8879eef6f2df7cca47eea0da9e1, deployment appgdep_6ad4a25e9c988191b1dbbff83c9724aa succeeded): root verified production at f7571a1 - 9 current cards, all 7 current PNGs loaded, both 1280x720 MP4s played to the end at rate 1 with no error and no autoplay, 12 collapsed history entries incl. 2 superseded; Chrome / in-app browser only, no Safari or full-fluidity certification"
+        },
+        "impact": {
+          "changed": false,
+          "percentBefore": 40.8,
+          "percentAfter": 40.8,
+          "deltaPoints": 0,
+          "gateChanges": [],
+          "categoryChanges": []
+        },
+        "evidence": [
+          "outputs/rpg-2-star-ocean-the-second_cloud-tracker_v16-hosted-motion-playback-proof_20261018-064330-4a068f92.png",
+          "outputs/rpg-2-star-ocean-the-second_cloud-tracker_v16-current-gallery-proof_20261018-064400-5b7c491e.png"
         ]
       }
     ]
