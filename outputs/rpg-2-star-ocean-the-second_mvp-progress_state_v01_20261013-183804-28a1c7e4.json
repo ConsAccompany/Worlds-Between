@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
   "planVersion": "v0.2",
-  "updatedAt": "2026-10-18T05:40:31Z",
+  "updatedAt": "2026-10-18T08:27:30Z",
   "currentStep": "M8",
   "steps": [
     {
@@ -45,7 +45,7 @@
       "remaining": [
         "Reference figures behind the whole-hour trip times: the US car distances and minutes come from the OSRM demo server (non-commercial terms) and the NYC-Chicago reference is an internal research sum (BTS 12-month block-time medians plus airport legs and a check-in allowance) that is never charged or shown. The charged hours (1 / 5 / 5 / 6 h) change only if a re-derived reference crosses a half hour. Re-derive with a self-hosted OSRM on a dated OpenStreetMap extract and confirm the terms before release. Yonkers-Chicago and Washington-Chicago have no route.",
         "Art acceptance for the implemented places: City Hall Park, a recognizable collapsed and overgrown U.S. Capitol (the Washington Pixelorama pilot) and the Chicago Loop. Every candidate is unapproved. The Chicago Loop runs the State/Lake v02 runtime visual candidate (pushed 00199fc; still a technical arrival scene). City Hall Park has unapproved City Hall Park walkable pilots v01-v04, then a separate v05 test candidate; v06 is being built separately. The Capitol exterior has unapproved, non-runtime candidates (walkable west grounds v01-v08 and a separate dome cinematic vista v01-v02). The Washington survey annex room 1 v02 is a runtime visual candidate, also unapproved. None of these is accepted; science scene visuals are 3/12 (environment quality of NYC public facilities rooms 1 and 2 and Yonkers signal maintenance room 2 only; no character motion, other scene or playtest).",
-        "Accept the map art. The runtime map shows the unapproved native map-art candidate v01r1 (sphere colours, US relief, data credits); map art v02 is being built separately and is also unapproved. The runtime has no US road layer.",
+        "Accept the map art. The runtime map shows the unapproved native map-art candidate v03r2 (committed c20118d: sphere colours, a lighter US relief rebake, data credits, the route card's focal path and teal/brass plates); the earlier v01r1, v02, v03 and v03r1 passes are superseded and were never approved. The runtime has no US road layer.",
         "Human map review and the two human timed playtests (0/2).",
         "Creator decisions still open for M2: the training prologue start date, and whether saves made under the old 2026-04-01 placeholder should be shifted into 2537 (they currently keep their absolute 2026 date).",
         "Commerce is provisional. Merchant is a 2-stage MVP (行商 → 契约经理); the full 20-series × 5-stage career canon is future work. Neither job skill works in battle. Stage-1 Supply Pact is a placeholder that takes no JP. Stage-2 Fair Quote is a provisional JP-upgradable commerce passive: +5 % of the base per rank, on weeks paid at the companion rate only. Ledger points are not currency: there is no balance, spending, robber event or price effect."
@@ -538,7 +538,7 @@
         "en": "Map art",
         "owner": "美术",
         "status": "not_started",
-        "detail": "地图美术门未计入：运行时地图为未批准的原生美术候选 v01r1（五个文明圈配色、美国地形起伏与数据署名）；v02 另行制作，仍未批准。标签框与标记未作美术验收（功能占位），美国地区层没有道路图层。全球与地区样稿是未批准的静态研究。",
+        "detail": "地图美术门未计入：运行时地图为未批准的原生美术候选 v03r2（提交 c20118d：五个文明圈配色、调亮的美国地形起伏、数据署名、航线卡焦点路径与青铜配色界面）；此前的 v01r1、v02、v03、v03r1 均已被取代，从未批准。标签框与标记仍未作美术验收，美国地区层没有道路图层。全球与地区样稿是未批准的静态研究。",
         "evidence": [
           "docs/qa/rpg-2-star-ocean-the-second_geography-rule_visual-regression-review_unapproved-v01_20261015-003237-f8f604dd.md"
         ]
@@ -654,7 +654,7 @@
     "kind": "weighted_delivery_estimate",
     "zh": "MVP 加权交付估算（不是正式批准）",
     "en": "MVP weighted delivery estimate (not formal approval)",
-    "updatedAt": "2026-10-18T05:40:31Z",
+    "updatedAt": "2026-10-18T08:27:30Z",
     "percent": 40.8,
     "percentLabel": "40.8%",
     "weightedPoints": 40.83,
@@ -974,8 +974,8 @@
     ],
     "updater": "tools/rpg-2-star-ocean-the-second_mvp-completion-meter_recompute-and-task-closeout-cli_v01_20261015-233032-d296a2cb.js",
     "lastUpdated": {
-      "at": "2026-10-18T05:40:31Z",
-      "closeoutId": "closeout-20261018-054031-4741f73c",
+      "at": "2026-10-18T08:27:30Z",
+      "closeoutId": "closeout-20261018-082730-4366994d",
       "percent": 40.8
     },
     "taskCloseouts": [
@@ -3534,6 +3534,99 @@
         "evidence": [
           "docs/qa/rpg-2-star-ocean-the-second_yonkers-antenna-corridor-room1_v04-source-check-path-fix-rerun_qa-note_unapproved-v04_20261018-054000-b71e3c58.md",
           "outputs/yonkers-room1-v04_523bba3b/rpg-2-star-ocean-the-second_yonkers-antenna-room1_material-depth-source-and-pixelorama-check-report_official-v1.2.3-path-fix_20261018-054000-b71e3c58.json"
+        ]
+      },
+      {
+        "id": "closeout-20261018-082600-02b6d8f7",
+        "recordedAt": "2026-10-18T08:26:00Z",
+        "kind": "task",
+        "title": {
+          "zh": "芝加哥 State/Lake v05 材质纵深与其精确 v04 依赖同步（仅测试开关，未接入，默认仍为 v02；v04 仅作依赖、不声明其独立检查完整）：7370739 隔离复验 Godot 79/79、19 张截图逐字节一致、源检查 25/25（含官方 Pixelorama 1.2.3 与不依赖 HEAD 的 G3 r1，变异测试 11/11）、可达性 4/4；Codex 只接受技术证据；未批准，不计美术验收",
+          "en": "Chicago State/Lake v05 material-depth pass (opt-in only, not wired; default stays v02) synced with its exact v04 dependency (v04 opt-in only, standalone v04 checker completeness not claimed): verified from isolated 7370739 - Godot 79/79 with 19/19 captures byte-identical, source 25/25 incl. official Pixelorama v1.2.3 and G3 r1 (exact v04 hook, HEAD-independent; mutation test 11/11), reachability 4/4; Codex accepts technical evidence only; UNAPPROVED, no art acceptance"
+        },
+        "impact": {
+          "changed": false,
+          "percentBefore": 40.8,
+          "percentAfter": 40.8,
+          "deltaPoints": 0,
+          "gateChanges": [],
+          "categoryChanges": []
+        },
+        "evidence": [
+          "docs/qa/rpg-2-star-ocean-the-second_chicago-loop_state-lake-arrival-block-native-scene_qa-note_unapproved-v05_20261018-000443-1aef6e46.md",
+          "outputs/chicago-loop-state-lake-v05/rpg-2-star-ocean-the-second_chicago-loop_state-lake_pixel-source-check-report_v05-isolated-7370739_20261018-041551-8bfab6cf.json",
+          "outputs/chicago-loop-state-lake-v05/rpg-2-star-ocean-the-second_chicago-loop_state-lake_walk-reachability-report_v05_20261018-000240-1d1b9337.json",
+          "docs/qa/rpg-2-star-ocean-the-second_chicago-v05-battle-v13_isolated-7370739-integration-verification_qa-note_unapproved-v01_20261018-041551-66d3cb79.md",
+          "outputs/rpg-2-star-ocean-the-second_chicago-v05-battle-v13_integration-selection-manifest_unapproved-v01_20261018-041551-66d3cb79.json"
+        ]
+      },
+      {
+        "id": "closeout-20261018-082630-bb9a8f15",
+        "recordedAt": "2026-10-18T08:26:30Z",
+        "kind": "task",
+        "title": {
+          "zh": "女主角侧视战斗待机静帧 v13（材质形体、真实半径 18 接地阴影）：在 7370739 隔离树中复验，battle_arena.gd 未改：检查 55/55（含官方 Pixelorama 1.2.3）；亮（档案馆）、暗（城郊）与 HEAD 几何三张探针截图逐字节一致，地面取自树内两张锁定哈希的地面带图；Codex 只接受技术证据；未批准，未接入运行时，角色 0/52",
+          "en": "Female battle idle STATIC v13 (material form, real radius-18 contact shadow): verified from isolated 7370739 with no battle_arena.gd change - check 55/55 incl. official Pixelorama v1.2.3; bright archive, dark outskirts and head-geometric probe captures byte-identical, floors from the two sha-pinned band PNGs in the tree; Codex accepts technical evidence only; UNAPPROVED, NONRUNTIME, sprites 0/52"
+        },
+        "impact": {
+          "changed": false,
+          "percentBefore": 40.8,
+          "percentAfter": 40.8,
+          "deltaPoints": 0,
+          "gateChanges": [],
+          "categoryChanges": []
+        },
+        "evidence": [
+          "docs/qa/rpg-2-star-ocean-the-second_protagonist-female_battle-static-v13-material-form-real-shadow_qa-note_unapproved-v01_20261017-235615-7406d6eb.md",
+          "outputs/rpg-2-star-ocean-the-second_protagonist-female_battle-static-v13_isolated-7370739-check-report_unapproved-v13_20261018-041551-d3789b8b.json",
+          "outputs/rpg-2-star-ocean-the-second_protagonist-female_sideview-idle-right-static-native0p65_party-capture-archive-640-probe_unapproved-v13_20261017-235615-0cc9f010.png",
+          "outputs/rpg-2-star-ocean-the-second_protagonist-female_sideview-idle-right-static-native0p65_party-capture-outskirts-640-probe_unapproved-v13_20261017-235615-66527b60.png",
+          "docs/qa/rpg-2-star-ocean-the-second_chicago-v05-battle-v13_isolated-7370739-integration-verification_qa-note_unapproved-v01_20261018-041551-66d3cb79.md",
+          "outputs/rpg-2-star-ocean-the-second_chicago-v05-battle-v13_integration-selection-manifest_unapproved-v01_20261018-041551-66d3cb79.json"
+        ]
+      },
+      {
+        "id": "closeout-20261018-082700-8e515100",
+        "recordedAt": "2026-10-18T08:27:00Z",
+        "kind": "task",
+        "title": {
+          "zh": "扬克斯 v04 官方 Pixelorama 网页版 1.2.3 另存为与全新页面重开已验证：保存的 .pxo 无损（13/13 层逐字节一致，原生命令行合成图像素一致），全新页面“文件 > 打开”成功载入（身份截图：文件名、640×360、画面、顶部图层）；早先空白画布截图仅作被取代的历史记录；桌面版界面另存/重开仍未验证；v04 未批准，不计美术验收",
+          "en": "Yonkers v04 official Pixelorama WEB v1.2.3 Save As + fresh reopen VERIFIED: saved .pxo lossless (13/13 layers byte-equal, native CLI flat pixel-equal) and a fresh page File > Open loaded it (identity screenshot: file name, 640x360, artwork, top layers); the earlier blank-canvas screenshot is superseded history; DESKTOP GUI Save As/reopen still unverified; v04 UNAPPROVED, no art acceptance"
+        },
+        "impact": {
+          "changed": false,
+          "percentBefore": 40.8,
+          "percentAfter": 40.8,
+          "deltaPoints": 0,
+          "gateChanges": [],
+          "categoryChanges": []
+        },
+        "evidence": [
+          "docs/qa/rpg-2-star-ocean-the-second_yonkers-v04_pixelorama-web-saveas-evidence-receipt_unapproved-v04_20261018-040958-0a415eb0.md",
+          "docs/qa/rpg-2-star-ocean-the-second_yonkers-v04_pixelorama-web-saveas-data-validation_qa-check_unapproved-v04_20261018-035956-add606a0.md",
+          "outputs/yonkers-room1-v04_523bba3b/rpg-2-star-ocean-the-second_yonkers-antenna-room1_pixelorama-web-saveas-output-lossless_official-web-v1.2.3_20261018-035200-a8d73e65.pxo",
+          "outputs/rpg-2-star-ocean-the-second_yonkers_pixelorama-web-saveas-reopened-640-source-identity-v04_20261018-040600-78d5e6a1.png"
+        ]
+      },
+      {
+        "id": "closeout-20261018-082730-4366994d",
+        "recordedAt": "2026-10-18T08:27:30Z",
+        "kind": "task",
+        "title": {
+          "zh": "私有站点 v14 发布（运维）：源码 a7e04d00 部署 appgdep_6ad47ea356f48191813a55d06ba4616c 成功；root 检查线上界面：当前候选板块位于折叠的九个历史预览之前，3/3 张当前图片载入，40.8% 与场景 3/12 不变；不计美术验收",
+          "en": "Private Site v14 publication (operational): source a7e04d00 deployment appgdep_6ad47ea356f48191813a55d06ba4616c succeeded; root inspected the live UI - current-candidates board before the collapsed nine historical previews, 3/3 current images loaded, 40.8% and scenes 3/12 unchanged; no art acceptance"
+        },
+        "impact": {
+          "changed": false,
+          "percentBefore": 40.8,
+          "percentAfter": 40.8,
+          "deltaPoints": 0,
+          "gateChanges": [],
+          "categoryChanges": []
+        },
+        "evidence": [
+          "docs/qa/rpg-2-star-ocean-the-second_private-site-v14_current-first-board-publication_operational-qa_v01_20261018-042452-79386bb4.md",
+          "outputs/rpg-2-star-ocean-the-second_cloud-tracker_current-first-v14-live-proof_v01_20261018-041100-695c8b0e.png"
         ]
       }
     ]

@@ -1,0 +1,9 @@
+# Chicago State/Lake v05: bounded material-depth gate
+
+Use Claude Opus 5.5 through the signed-in Claude Max firstParty subscription only. Work in the current repo. Read the latest AGENTS instructions, v04 QA, visual grammar, official place anchors, and actual v04 640×360 zh/en captures first.
+
+Goal: produce one native, editable Pixelorama Chicago Loop arrival scene candidate that looks less diagrammatic than v04 at actual game size. Keep the approved 0.65 heroine reference and current gameplay scale, route, clues, collision, camera, UI, and day/night behavior. Chicago State/Lake remains recognizably a real elevated-train intersection. Preserve warm masonry, foliage and restrained teal technology lighting as the science-sphere visual grammar. Improve facade and storefront material depth, broad value clusters, credible shadow planes and atmospheric hierarchy without random pixel noise or changing the station focal point.
+
+Keep this pass bounded. Modify or derive the v04 author files rather than writing a giant new generator. Separate new files with the global unique naming pattern. Do not overwrite v04, do not change shared Game Bible, progress state, Git index or any Washington/Yonkers/battle/map files. If runtime selector needs a v05 opt-in, keep default v02 exactly unchanged and avoid editing the shared .tscn while another session is active; prove v05 through an explicit test harness instead.
+
+Deliver: v05 layered Pixelorama source and flat art; one real bilingual 640×360 Godot entry pair plus representative clue/occlusion captures; targeted author/source/Pxo round-trip/Godot/reachability checks; short candid QA note comparing actual v04 and v05 at 1×, listing remaining visual flaws. Mark unapproved. Stop after one substantive candidate. Do not commit or push; report exact paths and test results. If subscription quota blocks work, stop immediately without another Claude call or any API/credits fallback.
