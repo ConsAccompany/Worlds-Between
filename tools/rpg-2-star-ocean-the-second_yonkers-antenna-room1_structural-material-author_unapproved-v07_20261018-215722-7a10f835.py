@@ -5,13 +5,18 @@ No game/default/ledger writes. Reuses the native ORA/PXO packers, not the prior 
 import importlib.util
 import io
 import json
+import os
 import zipfile
 from pathlib import Path
 import xml.etree.ElementTree as ET
 import numpy as np
 from PIL import Image
 
+# Asset paths exceed MAX_PATH in canonical worktrees. Keep the Win32 extended
+# root on every descendant Path (Pillow, zipfile and pathlib all receive it).
 ROOT=Path(__file__).resolve().parents[1]
+if os.name == 'nt' and not str(ROOT).startswith('\\\\?\\'):
+ ROOT=Path('\\\\?\\UNC\\'+str(ROOT)[2:] if str(ROOT).startswith('\\\\') else '\\\\?\\'+str(ROOT))
 STAMP='20261018-220210-4d281c37'
 OUT=ROOT/'outputs/yk1-v07_7a10f835'
 PREFIX='rpg-2-star-ocean-the-second_yonkers-antenna-room1'
@@ -25,6 +30,7 @@ def load(name,path):
 
 
 A=load('yonkers_native_formats',ROOT/'tools/rpg-2-star-ocean-the-second_yonkers-antenna-room1_corridor-scene-author_unapproved-v03_20261017-224447-15709be4.py')
+A.ROOT=ROOT
 KIT_PATH=ROOT/'tools/rpg-2-star-ocean-the-second_science-utility_native-material-kit_v01_20261018-215722-7a10f835.py'
 K=load('science_utility_material_kit',KIT_PATH)
 M=json.loads(BASE_MANIFEST.read_text(encoding='utf-8'))

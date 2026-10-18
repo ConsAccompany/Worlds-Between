@@ -1,11 +1,16 @@
 """Compare corrected v07 actual Godot evidence against its native source and a fresh, fixed-60fps v06 control."""
 import json
+import os
 from pathlib import Path
 import importlib.util
 import numpy as np
 from PIL import Image
 
+# Asset paths exceed MAX_PATH in canonical worktrees. Keep the Win32 extended
+# root on every descendant Path (Pillow, zipfile and pathlib all receive it).
 ROOT=Path(__file__).resolve().parents[1]
+if os.name == 'nt' and not str(ROOT).startswith('\\\\?\\'):
+ ROOT=Path('\\\\?\\UNC\\'+str(ROOT)[2:] if str(ROOT).startswith('\\\\') else '\\\\?\\'+str(ROOT))
 OUT=ROOT/'outputs/yk1-v07_7a10f835'
 STAMP='20261018-220210-4d281c37'
 P='rpg-2-star-ocean-the-second_yonkers-antenna-room1'
@@ -25,6 +30,7 @@ def main():
  log=(OUT/f'{P}_structural-runtime-check-log_unapproved-v07_{STAMP}.txt').read_text(encoding='utf-8')
  control=(OUT/f'{P}_v06-control-runtime-check-log_test-only_{STAMP}.txt').read_text(encoding='utf-8')
  C=load('existing_pixel_check',ROOT/f'tools/{P}_pixel-source-pixelorama-check_unapproved-v03_20261017-224447-15709be4.py')
+ C.V01_EN=ROOT/C.V01_EN.relative_to(C.ROOT);C.ROOT=ROOT
  C.CAP=OUT/'cap-final';C.cap=lambda lang,label:C.CAP/f'{P}_v07-test-only-godot-{lang}-{label}-640x360_{STAMP}.png'
  pixels=C.capture_checks(A,layers,log.replace('YK1_V06_','YK1_V03_'))
  prefixes=('HUD_CLEAR','HEADER_','CAPTION_','DEPTH','ROOM1_INTERACTIONS_OK','REACHABILITY_OK','ALL_SIX_CLUES_OK','TRANSITION_',

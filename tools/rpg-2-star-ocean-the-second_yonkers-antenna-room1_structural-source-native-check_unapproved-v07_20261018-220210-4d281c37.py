@@ -2,6 +2,7 @@
 import argparse
 import io
 import json
+import os
 import zipfile
 import xml.etree.ElementTree as ET
 from pathlib import Path
@@ -9,7 +10,11 @@ import numpy as np
 from PIL import Image
 import importlib.util
 
+# Asset paths exceed MAX_PATH in canonical worktrees. Keep the Win32 extended
+# root on every descendant Path (Pillow, zipfile and pathlib all receive it).
 ROOT=Path(__file__).resolve().parents[1]
+if os.name == 'nt' and not str(ROOT).startswith('\\\\?\\'):
+ ROOT=Path('\\\\?\\UNC\\'+str(ROOT)[2:] if str(ROOT).startswith('\\\\') else '\\\\?\\'+str(ROOT))
 OUT=ROOT/'outputs/yk1-v07_7a10f835'
 STAMP='20261018-220210-4d281c37'
 PREFIX='rpg-2-star-ocean-the-second_yonkers-antenna-room1'
@@ -59,6 +64,7 @@ def main():
   x,y,w,h=item['crop_from_layer_xywh']
   checks[f'antenna_{index}_export_exact']=np.array_equal(np.array(Image.open(ROOT/item['runtime_png']['file']).convert('RGBA')),layers[index+9].a[y:y+h,x:x+w])
  C=module('existing_native_export_check',ROOT/'tools/rpg-2-star-ocean-the-second_yonkers-antenna-room1_pixel-source-pixelorama-check_unapproved-v03_20261017-224447-15709be4.py')
+ C.ROOT=ROOT
  # Keep native diagnostics separate from byte-exact export checks: exit zero alone is not a clean log.
  native_runs=[]
  original_run=C.run_pixelorama
