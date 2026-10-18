@@ -15,6 +15,41 @@ const ZhaoCombatFrames := preload("res://scripts/rpg-2-star-ocean-the-second_zha
 const JiCombatFrames := preload("res://scripts/rpg-2-star-ocean-the-second_ji-cheng_sideview-combat-frames_m8-prototype_20261014-144950-51da030d.gd")
 const HERO_COMBAT_ANCHOR := Vector2(30, 73)
 const HERO_COMBAT_ACTION_DURATION := {"attack": 0.39, "hit": 0.24, "skill": 0.45, "down": 0.30}
+const ARENA_FLOOR_Y := 272.0
+# M8 sentry automaton sprite + animation v2 pilot (UNAPPROVED; art acceptance 0). The creator approved v2 as the action
+# direction baseline only, not the sprite or its art. Opt-in only: launch with `-- --sentry-v2-pilot`, or set
+# sentry_v2_override = 1 before the battle scene loads. Off by default, so the sentry keeps the placeholder block.
+# Visual only: stats, reach, AI, timers and positions are the same with the pilot on or off.
+const SENTRY_V2_CLI_FLAG := "--sentry-v2-pilot"
+const SENTRY_V2_ART_APPROVED := false
+const SENTRY_V2_SPRITE_ACCEPTED := false
+const ENEMY_SPRITE_PILOTS := {
+	# It is low and 96 px wide, so its wind-up ring is a wider ellipse that clears the silhouette.
+	"sentry": {"path": "res://assets/enemies/sentry-automaton-pilot-0b9664e2/rpg-2-star-ocean-the-second_scifi-sentry-automaton_battle-idle-left_m8-pilot-v01_20261014-221901-e3ab87f9.png", "anchor": Vector2(48, 60), "telegraph_center_y": 241.0, "telegraph_scale": Vector2(2.0, 1.2)},
+}
+# One strip of equal cells. Without "cell" / "anchor" the cells match the static pilot and share its anchor. Strike and hit play once; defeat holds its last frame.
+# v2 (visual only): 112 px cells anchored at static x 30, so the sprite sits 18 px further from the party and the heroes no longer cover its eye and claw.
+# The ring follows "body_center_x". "gait_step_px" picks gait frames by distance and moves the drawn sprite in those steps, so planted feet stay put.
+# "front_states" draw over the fighters (its own strike).
+const ENEMY_SPRITE_ANIMATIONS := {
+	"sentry": {
+		"path": "res://assets/enemies/sentry-automaton-pilot-0b9664e2/rpg-2-star-ocean-the-second_scifi-sentry-automaton_battle-animation-strip-left_m8-anim-v02_20261014-230329-ffefdc6f.png",
+		"cell": Vector2(112, 62),
+		"anchor": Vector2(46, 60),
+		"body_center_x": 64.0,
+		"states": {"idle": [0, 1, 2, 3], "move": [4, 5, 6, 7, 8, 9, 10, 11], "windup": [12, 13], "strike": [14, 15], "hit": [16, 17], "defeat": [18, 19, 20]},
+		"frame_time": {"idle": 0.22, "strike": 0.15, "hit": 0.12, "defeat": 0.16},
+		"gait_step_px": 4.0,
+		"move_grace": 0.08,
+		"front_states": ["strike"],
+	},
+}
+const ENEMY_WINDUP_MODULATE := Color(1.0, 0.70, 0.66)
+const ENEMY_TELEGRAPH_CENTER_Y := 240.0
+const ENEMY_TELEGRAPH_RADIUS := 30.0
+const ENEMY_TELEGRAPH_COLOR := Color(1.0, 0.23, 0.20, 0.28)
+
+static var sentry_v2_override := -1
 
 var enemy_id := "patrol"
 var enemy: Dictionary
@@ -39,6 +74,25 @@ var battle_won := false
 var feedback_key := "battle_ready"
 var feedback_message := ""
 var result_reward_text := ""
+# Per-instance switches only narrow the opt-in pilot (static only, or none); they never enable it without the flag.
+var enemy_sprite_pilot_enabled := true
+var enemy_sprite_override := ""
+var enemy_texture: Texture2D
+var enemy_anchor := Vector2.ZERO
+var enemy_telegraph_center_y := ENEMY_TELEGRAPH_CENTER_Y
+var enemy_telegraph_scale := Vector2.ONE
+var enemy_sprite_animation_enabled := true
+var enemy_animation_override := ""
+var enemy_animation_texture: Texture2D
+var enemy_animation: Dictionary = {}
+var enemy_animation_cell := Vector2.ZERO
+var enemy_animation_anchor := Vector2.ZERO
+var enemy_visual_state := "idle"
+var enemy_visual_clock := 0.0
+var enemy_visual_last_hp := 0
+var enemy_visual_last_attack_count := 0
+var enemy_visual_still_time := 0.0
+var enemy_visual_gait_origin_x := 0.0
 
 var title_label: Label
 var help_label: Label
@@ -69,6 +123,12 @@ var result_note: Label
 var result_button: Button
 
 
+static func sentry_v2_enabled() -> bool:
+	if sentry_v2_override >= 0:
+		return sentry_v2_override == 1
+	return OS.get_cmdline_user_args().has(SENTRY_V2_CLI_FLAG)
+
+
 func _ready() -> void:
 	texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	enemy_id = AppState.battle_enemy_id if ENEMIES.has(AppState.battle_enemy_id) else "patrol"
@@ -76,6 +136,7 @@ func _ready() -> void:
 	enemy_hp = int(enemy["max_hp"])
 	for index in AppState.active_party_ids.size():
 		fighters.append({"id": AppState.active_party_ids[index], "x": 135.0 + index * 36.0, "attack_cooldown": 0.0, "dodge_cooldown": 0.0, "dodge_time": 0.0, "dodge_direction": -1.0, "skill_cooldown": 0.0, "command": "default", "guard": false, "boost": 0, "visual_action": "", "visual_elapsed": 0.0, "visual_loop_kind": "idle", "visual_loop_clock": 0.0, "visual_moving": false})
+	_load_enemy_sprite_pilot()
 	_build_ui()
 	var audio_player := AudioStreamPlayer.new()
 	var ambient: AudioStreamWAV = BATTLE_AMBIENCE.duplicate()
@@ -95,6 +156,7 @@ func _process(delta: float) -> void:
 		return
 	if battle_finished:
 		_advance_fighter_visuals(delta, [])
+		_advance_enemy_visual(delta, false)
 		queue_redraw()
 		return
 	var initial_positions: Array[float] = []
@@ -125,9 +187,11 @@ func _process(delta: float) -> void:
 			break
 		if auto_mode or index != controlled_index:
 			_update_ai(index, delta)
+	var enemy_start_x := enemy_x
 	if not battle_finished:
 		_update_enemy(delta)
 	_advance_fighter_visuals(delta, initial_positions)
+	_advance_enemy_visual(delta, absf(enemy_x - enemy_start_x) > 0.01)
 	_update_hud()
 	queue_redraw()
 
@@ -159,6 +223,86 @@ func _advance_fighter_visuals(delta: float, initial_positions: Array[float]) -> 
 			fighter["visual_loop_clock"] = 0.0
 		else:
 			fighter["visual_loop_clock"] = float(fighter["visual_loop_clock"]) + delta
+
+
+func _advance_enemy_visual(delta: float, moved: bool) -> void:
+	# Reads combat state only; it never changes stats, timers or positions.
+	if enemy_animation_texture == null:
+		return
+	var restart := false
+	enemy_visual_still_time = 0.0 if moved else enemy_visual_still_time + delta
+	# A brief grace keeps the gait through a one-frame stop, so it does not flicker to idle; the distance gait holds its pose meanwhile.
+	var walking := moved or (enemy_visual_state == "move" and enemy_visual_still_time < float(enemy_animation.get("move_grace", 0.0)))
+	var next := "move" if walking else "idle"
+	if (enemy_visual_state == "strike" or enemy_visual_state == "hit") and enemy_visual_clock + delta < _enemy_visual_duration(enemy_visual_state):
+		next = enemy_visual_state
+	# A hit restarts the flinch only once the previous one has played out, so a party combo does not pin it on one frame.
+	if enemy_hp < enemy_visual_last_hp and next != "strike" and next != "hit":
+		next = "hit"
+		restart = true
+	if enemy_attack_count != enemy_visual_last_attack_count:
+		next = "strike"
+		restart = true
+	# The wind-up pose is the telegraph, so it wins over a hit reaction.
+	if enemy_windup > 0.0:
+		next = "windup"
+	if enemy_hp <= 0:
+		next = "defeat"
+	enemy_visual_last_hp = enemy_hp
+	enemy_visual_last_attack_count = enemy_attack_count
+	if restart or next != enemy_visual_state:
+		if next == "move":
+			enemy_visual_gait_origin_x = roundf(enemy_x)
+		enemy_visual_state = next
+		enemy_visual_clock = 0.0
+	else:
+		enemy_visual_clock += delta
+
+
+func _enemy_visual_duration(state: String) -> float:
+	return float(enemy_animation["frame_time"].get(state, 0.0)) * Array(enemy_animation["states"][state]).size()
+
+
+func _enemy_gait_step() -> int:
+	# Whole gait steps travelled toward the party since the gait began (negative when backing away, which plays the gait in reverse).
+	return roundi((enemy_visual_gait_origin_x - enemy_x) / float(enemy_animation["gait_step_px"]))
+
+
+func _enemy_distance_gait() -> bool:
+	return enemy_visual_state == "move" and float(enemy_animation.get("gait_step_px", 0.0)) > 0.0
+
+
+func _enemy_draw_x() -> float:
+	# The distance gait draws the sprite in whole steps (at most half a step from enemy_x), so each stance foot stays on one floor pixel.
+	if enemy_animation_texture != null and _enemy_distance_gait():
+		return enemy_visual_gait_origin_x - _enemy_gait_step() * float(enemy_animation["gait_step_px"])
+	return roundf(enemy_x)
+
+
+func _enemy_body_offset_x() -> float:
+	# Where the drawn body centre sits relative to enemy_x, for the wind-up ring (0 for the static pilot and block).
+	if enemy_animation_texture == null:
+		return 0.0
+	return float(enemy_animation.get("body_center_x", enemy_animation_anchor.x)) - enemy_animation_anchor.x
+
+
+func _enemy_visual_in_front() -> bool:
+	return enemy_animation_texture != null and Array(enemy_animation.get("front_states", [])).has(enemy_visual_state)
+
+
+func _enemy_visual_frame() -> int:
+	var frames: Array = enemy_animation["states"][enemy_visual_state]
+	var frame_time: float = enemy_animation["frame_time"].get(enemy_visual_state, 0.0)
+	var index := 0
+	if enemy_visual_state == "windup":
+		index = 0 if enemy_windup > float(enemy["windup"]) * 0.5 else 1
+	elif _enemy_distance_gait():
+		index = posmod(_enemy_gait_step(), frames.size())
+	elif enemy_visual_state == "idle" or enemy_visual_state == "move":
+		index = int(enemy_visual_clock / frame_time) % frames.size()
+	else:
+		index = mini(int(enemy_visual_clock / frame_time), frames.size() - 1)
+	return int(frames[index])
 
 
 func _male_combat_texture(fighter: Dictionary, index: int) -> Texture2D:
@@ -597,6 +741,55 @@ func _input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 
 
+func _load_enemy_sprite_pilot() -> void:
+	enemy_texture = null
+	enemy_telegraph_center_y = ENEMY_TELEGRAPH_CENTER_Y
+	enemy_telegraph_scale = Vector2.ONE
+	if not sentry_v2_enabled() or not enemy_sprite_pilot_enabled or not ENEMY_SPRITE_PILOTS.has(enemy_id):
+		return
+	var pilot: Dictionary = ENEMY_SPRITE_PILOTS[enemy_id]
+	var path: String = enemy_sprite_override if enemy_sprite_override != "" else pilot["path"]
+	if not ResourceLoader.exists(path):
+		return
+	enemy_texture = load(path)
+	if enemy_texture == null:
+		return
+	enemy_anchor = pilot["anchor"]
+	enemy_telegraph_center_y = pilot.get("telegraph_center_y", ENEMY_TELEGRAPH_CENTER_Y)
+	enemy_telegraph_scale = pilot.get("telegraph_scale", Vector2.ONE)
+	_load_enemy_animation()
+
+
+func _load_enemy_animation() -> void:
+	enemy_animation_texture = null
+	enemy_animation = {}
+	enemy_visual_state = "idle"
+	enemy_visual_clock = 0.0
+	enemy_visual_last_hp = enemy_hp
+	enemy_visual_last_attack_count = enemy_attack_count
+	enemy_visual_still_time = 0.0
+	enemy_visual_gait_origin_x = roundf(enemy_x)
+	if not sentry_v2_enabled() or enemy_texture == null or not enemy_sprite_animation_enabled or not ENEMY_SPRITE_ANIMATIONS.has(enemy_id):
+		return
+	var animation: Dictionary = ENEMY_SPRITE_ANIMATIONS[enemy_id]
+	var path: String = enemy_animation_override if enemy_animation_override != "" else animation["path"]
+	if not ResourceLoader.exists(path):
+		return
+	var strip: Texture2D = load(path)
+	var frame_count := 0
+	for frames in animation["states"].values():
+		for frame in frames:
+			frame_count = maxi(frame_count, int(frame) + 1)
+	var cell: Vector2 = animation.get("cell", enemy_texture.get_size())
+	# The strip must hold every frame in cells of the declared size (the static pilot's by default), or the static pilot stays.
+	if strip == null or strip.get_height() != int(cell.y) or strip.get_width() != int(cell.x) * frame_count:
+		return
+	enemy_animation_texture = strip
+	enemy_animation = animation
+	enemy_animation_cell = cell
+	enemy_animation_anchor = animation.get("anchor", enemy_anchor)
+
+
 func _draw() -> void:
 	var backdrop := Color("#2b4050") if enemy_id == "patrol" else Color("#463b4a")
 	draw_rect(Rect2(0, 0, 640, 360), Color("#101a27"))
@@ -607,9 +800,15 @@ func _draw() -> void:
 	draw_rect(Rect2(0, 296, 640, 6), Color("#394f55"))
 	for x in range(35, 640, 120 if enemy_id == "patrol" else 150):
 		draw_rect(Rect2(x, 101, 12 if enemy_id == "patrol" else 25, 145), Color("#334f5d") if enemy_id == "patrol" else Color("#766b63"))
+	# The sprite pilot is wider than the block, so it draws behind fighters to keep their attack frames on top, except in its own front states (strike).
+	var enemy_behind := enemy_texture != null and not _enemy_visual_in_front()
+	# An animated pilot stays on the field in its defeat pose; the static pilot and block vanish as before.
+	var enemy_shown := enemy_hp > 0 or enemy_animation_texture != null
+	if enemy_shown and enemy_behind:
+		_draw_enemy()
 	for index in fighters.size():
 		_draw_fighter(fighters[index], index)
-	if enemy_hp > 0:
+	if enemy_shown and not enemy_behind:
 		_draw_enemy()
 
 
@@ -670,8 +869,24 @@ func _draw_fighter(fighter: Dictionary, index: int) -> void:
 
 func _draw_enemy() -> void:
 	var color: Color = enemy["color"]
-	if enemy_windup > 0.0:
-		draw_circle(Vector2(enemy_x, 240), 30.0, Color(1.0, 0.23, 0.20, 0.28))
+	var winding_up := enemy_windup > 0.0 and enemy_hp > 0
+	if winding_up:
+		var ring_x := enemy_x + _enemy_body_offset_x()
+		if enemy_telegraph_scale == Vector2.ONE:
+			draw_circle(Vector2(ring_x, enemy_telegraph_center_y), ENEMY_TELEGRAPH_RADIUS, ENEMY_TELEGRAPH_COLOR)
+		else:
+			draw_set_transform(Vector2(ring_x, enemy_telegraph_center_y), 0.0, enemy_telegraph_scale)
+			draw_circle(Vector2.ZERO, ENEMY_TELEGRAPH_RADIUS, ENEMY_TELEGRAPH_COLOR)
+			draw_set_transform(Vector2.ZERO)
+	if enemy_texture != null:
+		var tint := ENEMY_WINDUP_MODULATE if winding_up else Color.WHITE
+		if enemy_animation_texture != null:
+			var cell := enemy_animation_cell
+			var cell_origin := Vector2(_enemy_draw_x() - enemy_animation_anchor.x, ARENA_FLOOR_Y - enemy_animation_anchor.y)
+			draw_texture_rect_region(enemy_animation_texture, Rect2(cell_origin, cell), Rect2(Vector2(_enemy_visual_frame() * cell.x, 0.0), cell), tint)
+		else:
+			draw_texture(enemy_texture, Vector2(roundf(enemy_x) - enemy_anchor.x, ARENA_FLOOR_Y - enemy_anchor.y), tint)
+		return
 	draw_circle(Vector2(enemy_x, 241), 20.0, Color(0.14, 0.14, 0.21, 0.55))
 	draw_rect(Rect2(enemy_x - 17, 217, 34, 41), color)
 	draw_rect(Rect2(enemy_x - 11, 227, 22, 9), Color("#f4b293"))

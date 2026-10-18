@@ -15,6 +15,7 @@
 // 2026-10-18 Yonkers v06 (101e9e0, technical candidate, art unapproved) replaces the v05 card; v05 stays in history with its ffa165c pin.
 // 2026-10-18 battle static v14 (8e57dd3, cherry-picked d43615f; technical static candidate, art unapproved) replaces v13; v13 keeps its 7553581 pin.
 // 2026-10-18 a tenth card: male south idle v8pair static v01 (2b60d2e, cherry-picked 5693ab6), a 1280x720 actual window PNG.
+// 2026-10-18 an eleventh card: Ji Cheng south idle static v01 (31705c4, cherry-picked 7a011d8), 1280x720 window; source portrait still a concept.
 // Starts the real v05 panel server on a spare local port, then runs the served bible.js in a VM with a minimal DOM stub.
 // Read-only: no project file is written. Run from the repository root: node tests/game-bible-review-queue/<this file>
 const assert = require('node:assert/strict');
@@ -291,11 +292,11 @@ async function renderProduction(base, mutateBible) {
   assert.equal(queue.items[0].approvalScope, 'static south still and 48-logical-pixel display scale only', 'scoped reference keeps its limited scope');
   const ids = ['current-global-map-v03r2', 'current-yonkers-antenna-room1-v06', 'current-battle-heroine-static-v14', 'current-wdc-capitol-west-exterior-v12r2',
     'current-wdc-annex-records-room2-v01', 'current-chicago-state-lake-v05', 'current-heroine-south-run-v07-bright-30fps', 'current-heroine-south-run-v07-dark-60fps',
-    'current-heroine-north-idle-static-v01', 'current-male-south-idle-static-v8pair-v01'];
+    'current-heroine-north-idle-static-v01', 'current-male-south-idle-static-v8pair-v01', 'current-ji-cheng-south-idle-static-v01'];
   assert.deepEqual(current.items.map(item => [item.rank, item.id]), ids.map((id, i) => [i + 1, id]));
   const intro = {'current-global-map-v03r2': 'c20118d', 'current-yonkers-antenna-room1-v06': '101e9e0', 'current-battle-heroine-static-v14': '8e57dd3',
     'current-wdc-capitol-west-exterior-v12r2': 'ffa165c', 'current-wdc-annex-records-room2-v01': 'ffa165c', 'current-chicago-state-lake-v05': '7553581',
-    'current-heroine-south-run-v07-bright-30fps': '1942e31', 'current-heroine-south-run-v07-dark-60fps': '1942e31', 'current-heroine-north-idle-static-v01': '1942e31', 'current-male-south-idle-static-v8pair-v01': '2b60d2e'};
+    'current-heroine-south-run-v07-bright-30fps': '1942e31', 'current-heroine-south-run-v07-dark-60fps': '1942e31', 'current-heroine-north-idle-static-v01': '1942e31', 'current-male-south-idle-static-v8pair-v01': '2b60d2e', 'current-ji-cheng-south-idle-static-v01': '31705c4'};
   const mp4Size = file => { const d = fs.readFileSync(rel(file)); const i = d.indexOf('tkhd'); const o = i + 8 + (d[i + 4] === 1 ? 84 : 72); return [d.readUInt32BE(o) >>> 16, d.readUInt32BE(o + 4) >>> 16]; };
   const pngSize = file => { const d = fs.readFileSync(rel(file)); return [d.readUInt32BE(16), d.readUInt32BE(20)]; };
   for (const item of current.items) {
@@ -328,7 +329,8 @@ async function renderProduction(base, mutateBible) {
   }
   assert.deepEqual(current.items.filter(item => item.mediaType === 'video/mp4').map(item => item.id), ['current-heroine-south-run-v07-bright-30fps', 'current-heroine-south-run-v07-dark-60fps'], 'two separate motion cards');
   assert.ok(/city-bright.*showreel-1x-30fps/.test(current.items[6].file) && /annex-dark.*showreel-1x-60fps/.test(current.items[7].file), 'bright 30 fps and dark 60 fps showreels');
-  const [mapItem, yk5, b13, cw, rc2, chi5, , , north, male] = current.items;
+  const [mapItem, yk5, b13, cw, rc2, chi5, , , north, male, ji] = current.items;
+  assert.ok(ji.technicalCandidate === true && ji.runtimeIntegrated === false && /1280x720 actual window/.test(ji.scope.en) && /640x360 logical viewport/.test(ji.scope.en) && /48 logical px tall/.test(ji.scope.en) && /source portrait remains a concept/.test(ji.scope.en) && !/native\s*640/i.test(JSON.stringify(ji)) && pngSize(ji.file).join('x') === '1280x720', 'Ji Cheng: technical static, 1280x720 window PNG, 48 logical px, concept source');
   assert.ok(male.technicalCandidate === true && male.runtimeIntegrated === false && /1280x720 actual window/.test(male.scope.en) && /640x360 logical viewport/.test(male.scope.en) && /male 48 logical px/.test(male.scope.en) && !/native\s*640/i.test(JSON.stringify(male)) && pngSize(male.file).join('x') === '1280x720', 'male v8pair: technical static, 1280x720 window PNG, 48 logical px');
   assert.ok(mapItem.runtimeIntegrated === true && mapItem.technicalCandidate === true && /M2 stays 10\/12/.test(mapItem.scope.en), 'map v03r2 kept: runtime technical candidate, M2 10/12');
   assert.ok(yk5.runtimeIntegrated === false && yk5.testOnly === true && /survey_annex\.gd still loads v03/.test(yk5.scope.en) && yk5.technicalCandidate === true, 'Yonkers v06: test-only, nonruntime technical candidate');
@@ -349,7 +351,7 @@ async function renderProduction(base, mutateBible) {
   }
   const dcText = JSON.stringify(env.washingtonDC.unapprovedCandidates) + env.status;
   assert.ok(/v12r2/.test(dcText) && /--wdc-records-chamber-v01/.test(dcText) && /art not accepted/.test(env.status) && env.washingtonDC.unapprovedCandidates.laterCommittedOptIns.every(o => o.artAccepted === false && o.runtimeIntegrated === false && o.optInOnly === true), 'Washington summaries name the v12r2 and room 2 opt-ins, art unaccepted');
-  pass('current candidates: 10 cards (8 PNG + 2 typed MP4) pinned to their introducing commits (blob + sha256), all unapproved within limited scopes; motion wording 1280x720 window / 640x360 logical / 48 px / 1x with limits; north choices explicit; replaced Yonkers v03/v05 and battle v12/v13 kept as history; Washington summaries corrected');
+  pass('current candidates: 11 cards (9 PNG + 2 typed MP4) pinned to their introducing commits (blob + sha256), all unapproved within limited scopes; motion wording 1280x720 window / 640x360 logical / 48 px / 1x with limits; north choices explicit; replaced Yonkers v03/v05 and battle v12/v13 kept as history; Washington summaries corrected');
 
   // 3. Generated concepts are a separate, gallery-ineligible list and never appear among queue items or Site previews.
   const concepts = queue.nonruntimeConcepts;
@@ -402,8 +404,8 @@ async function renderProduction(base, mutateBible) {
     assert.equal(html.split('id="cross-device-review-queue"').length, 2, 'exactly one queue card');
     const card = html.slice(start, html.indexOf('</section>', start) + '</section>'.length);
     const figures = card.split('<figure class="visual-sample review-queue-item').slice(1);
-    assert.equal(figures.length, 25);
-    // Order: ten current candidates, then the scoped reference #1, then the four replaced current entries and #2-#11 inside the collapsed history <details>.
+    assert.equal(figures.length, 26);
+    // Order: eleven current candidates, then the scoped reference #1, then the four replaced current entries and #2-#11 inside the collapsed history <details>.
     const currentAt = card.indexOf('id="review-queue-current"'), historyAt = card.indexOf('<details class="group" id="review-queue-history">');
     assert.ok(currentAt > 0 && historyAt > currentAt, 'current section precedes the history section');
     assert.ok(!/<details[^>]*\sopen/.test(card.slice(historyAt, historyAt + 80)), 'history starts collapsed');
@@ -414,7 +416,7 @@ async function renderProduction(base, mutateBible) {
     assert.deepEqual([...historyHtml.matchAll(/data-queue-order="(\d+)"/g)].map(m => Number(m[1])), [2, 3, 4, 5, 6, 7, 8, 9, 10, 11], 'history keeps #2-#11 in order');
     assert.deepEqual([...historyHtml.matchAll(/data-superseded-id="([^"]+)"/g)].map(m => m[1]), old.map(item => item.id), 'replaced current entries sit in the history');
     assert.equal((card.match(/badge good">已批准静态基准 · 未接入运行时 · 未验收</g) || []).length, 1);
-    assert.equal((card.match(/badge warn">未批准 · 未接入运行时 · 未验收</g) || []).length, 21, '9 history + battle v12/v13 and Yonkers v05 (superseded) + 9 current nonruntime/opt-in/test-only');
+    assert.equal((card.match(/badge warn">未批准 · 未接入运行时 · 未验收</g) || []).length, 22, '9 history + battle v12/v13 and Yonkers v05 (superseded) + 10 current nonruntime/opt-in/test-only');
     assert.equal((card.match(/badge warn">未批准 · 已接入运行时 · 未验收</g) || []).length, 3, '#10, map v03r2 and Yonkers v03 (superseded) render as unapproved runtime, unaccepted');
     assert.equal((card.match(/badge warn">仅选择性开启 · 默认关闭</g) || []).length, 3, 'WDC exterior, records room 2 and Chicago v05 are opt-in');
     // Typed MP4 cards: native controls, preload metadata, no autoplay / loop / muted autoplay, served only from the pinned /media/ route.
@@ -451,13 +453,14 @@ async function renderProduction(base, mutateBible) {
     }
     assert.equal((card.match(/仅本机 · 尚未同步到 GitHub/g) || []).length, 0, 'no local-only badge');
     assert.equal((card.match(/已暂存为 Git 候选/g) || []).length, 0, 'no staged badge');
-    assert.equal((card.match(/已在 GitHub（[0-9a-f]{7}）/g) || []).length, 25);
+    assert.equal((card.match(/已在 GitHub（[0-9a-f]{7}）/g) || []).length, 26);
     assert.equal((card.match(/已在 GitHub（c20118d）/g) || []).length, 3, 'map v03r2 + superseded Yonkers v03 and battle v12');
     assert.equal((card.match(/已在 GitHub（ffa165c）/g) || []).length, 3, 'WDC exterior v12r2, records room 2 and superseded Yonkers v05');
     assert.equal((card.match(/已在 GitHub（101e9e0）/g) || []).length, 1, 'current Yonkers v06');
     assert.equal((card.match(/已在 GitHub（7553581）/g) || []).length, 2, 'Chicago v05 and superseded battle v13');
     assert.equal((card.match(/已在 GitHub（8e57dd3）/g) || []).length, 1, 'current battle v14');
     assert.equal((card.match(/已在 GitHub（2b60d2e）/g) || []).length, 1, 'current male v8pair');
+    assert.equal((card.match(/已在 GitHub（31705c4）/g) || []).length, 1, 'current Ji Cheng');
     assert.equal((card.match(/已在 GitHub（1942e31）/g) || []).length, 3);
     assert.equal((card.match(/已在 GitHub（ec8b8f5）/g) || []).length, 1);
     assert.equal((card.match(/已在 GitHub（6795926）/g) || []).length, 1);
@@ -468,7 +471,7 @@ async function renderProduction(base, mutateBible) {
     assert.ok(!/已验收|通过验收/.test(card.replace(/未验收/g, '')), 'no acceptance claim');
     assert.ok(!/<button|<input|type="checkbox"/.test(card), 'no approval controls');
     const imgs = [...card.matchAll(/<img src="([^"]+)"/g)].map(m => m[1]);
-    assert.equal(imgs.length, 23);
+    assert.equal(imgs.length, 24);
     const shown = [...current.items.filter(item => item.mediaType !== 'video/mp4'), queue.items[0], ...old, ...queue.items.slice(1)];
     for (const [i, src] of imgs.entries()) {
       assert.equal(src, '/assets/' + shown[i].file.slice('outputs/'.length), 'image order: ' + src);
@@ -483,7 +486,7 @@ async function renderProduction(base, mutateBible) {
       '/assets/..%2Ftools%2Fx.png', '/assets/wdc-cw-v08_20261016-155827-6cf49486%2Frpg-2-star-ocean-the-second_wdc-capitol-west_godot-1280x720-entry_unapproved-v08_20261016-155827-6cf49486.png']) {
       assert.equal((await fetch(base + probe)).status, 404, 'non-allowlisted nested path 404: ' + probe);
     }
-    pass(`Production view: one queue card, 25 figures (10 current first incl. 2 typed MP4 cards, #1 scoped reference, 4 replaced + #2-#11 in collapsed history; 1 approved-static, 21 unapproved nonruntime, 3 unapproved runtime, none accepted), 25 GitHub sync badges, 23 images and 2 MP4s served byte-identical (MP4 200/206/416 ranges, video/mp4), 5 concepts as text only, 4 nested + 5 media probes 404`);
+    pass(`Production view: one queue card, 26 figures (11 current first incl. 2 typed MP4 cards, #1 scoped reference, 4 replaced + #2-#11 in collapsed history; 1 approved-static, 22 unapproved nonruntime, 3 unapproved runtime, none accepted), 26 GitHub sync badges, 24 images and 2 MP4s served byte-identical (MP4 200/206/416 ranges, video/mp4), 5 concepts as text only, 4 nested + 5 media probes 404`);
 
     // 6. Renderer fallbacks with a mutated copy of the Bible (in memory only): a queue without currentCandidates keeps the old
     // flat PNG layout; bad media types, MP4 paths, kinds and pins render as text, never as <img> or <video>.

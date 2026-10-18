@@ -1,0 +1,997 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 610.88 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 3080
+
+PASS full check runs without --sentry-v2-pilot (it sets sentry_v2_override itself)
+PASS pilot off by default (override -1, no --sentry-v2-pilot)
+PASS native bools: SENTRY_V2_ART_APPROVED = false, SENTRY_V2_SPRITE_ACCEPTED = false
+PASS pilot tables hold the sentry only
+BATTLE_TRANSITION_MS 10.97
+PASS sentry default: no pilot texture loaded
+PASS sentry default: r30 ring at y 240, centred on enemy_x
+PASS sentry default: draw x is round(enemy_x), drawn after the fighters
+PASS sentry default: visual state machine is inert
+BATTLE_TRANSITION_MS 5.54
+PASS patrol default: no pilot texture loaded
+PASS patrol default: r30 ring at y 240, centred on enemy_x
+PASS patrol default: draw x is round(enemy_x), drawn after the fighters
+PASS patrol default: visual state machine is inert
+BATTLE_TRANSITION_MS 5.71
+PASS per-instance switches cannot enable the pilot without the flag
+PASS tracked static PNG and v2 strip match their manifest SHA-256 (sha256-bytes)
+BATTLE_TRANSITION_MS 14.10
+PASS sentry battle opens through change_scene_to_file
+PASS first transition with the v2 strip under one second (14.10 ms)
+PASS static pilot stays loaded as the fallback (96x62, anchor 48,60)
+PASS v2 strip loaded ((2352, 62))
+PASS v2 cell 112x62, anchor (46, 60), body offset +18
+PASS sentry ring is the wider 2.0 x 1.2 ellipse at y 241
+PASS battle opens on the first move frame
+PASS idle frame 0 holds the static pilot pixel for pixel at the 16 px margin
+PASS idle frame 0 margin is empty
+PASS state table matches the v2 asset manifest
+PASS frame 0 (idle) last opaque row is the anchor row 60
+PASS frame 0 stays inside its 112x62 cell
+PASS frame 0 (idle) leaves the lunge margin empty
+PASS frame 0 (idle) near feet planted at the static soles
+PASS frame 0 (idle) body centroid drift 0.00 px within 4 px
+PASS frame 1 (idle) last opaque row is the anchor row 60
+PASS frame 1 stays inside its 112x62 cell
+PASS frame 1 (idle) leaves the lunge margin empty
+PASS frame 1 (idle) near feet planted at the static soles
+PASS frame 1 (idle) body centroid drift -0.01 px within 4 px
+PASS frame 2 (idle) last opaque row is the anchor row 60
+PASS frame 2 stays inside its 112x62 cell
+PASS frame 2 (idle) leaves the lunge margin empty
+PASS frame 2 (idle) near feet planted at the static soles
+PASS frame 2 (idle) body centroid drift -0.01 px within 4 px
+PASS frame 3 (idle) last opaque row is the anchor row 60
+PASS frame 3 stays inside its 112x62 cell
+PASS frame 3 (idle) leaves the lunge margin empty
+PASS frame 3 (idle) near feet planted at the static soles
+PASS frame 3 (idle) body centroid drift -0.15 px within 4 px
+PASS frame 4 (move) last opaque row is the anchor row 60
+PASS frame 4 stays inside its 112x62 cell
+PASS frame 4 (move) leaves the lunge margin empty
+PASS frame 4 (move) keeps a near foot on the anchor row
+PASS frame 4 (move) body centroid drift -0.36 px within 4 px
+PASS frame 5 (move) last opaque row is the anchor row 60
+PASS frame 5 stays inside its 112x62 cell
+PASS frame 5 (move) leaves the lunge margin empty
+PASS frame 5 (move) keeps a near foot on the anchor row
+PASS frame 5 (move) body centroid drift -0.38 px within 4 px
+PASS frame 6 (move) last opaque row is the anchor row 60
+PASS frame 6 stays inside its 112x62 cell
+PASS frame 6 (move) leaves the lunge margin empty
+PASS frame 6 (move) keeps a near foot on the anchor row
+PASS frame 6 (move) body centroid drift -0.31 px within 4 px
+PASS frame 7 (move) last opaque row is the anchor row 60
+PASS frame 7 stays inside its 112x62 cell
+PASS frame 7 (move) leaves the lunge margin empty
+PASS frame 7 (move) keeps a near foot on the anchor row
+PASS frame 7 (move) body centroid drift -0.49 px within 4 px
+PASS frame 8 (move) last opaque row is the anchor row 60
+PASS frame 8 stays inside its 112x62 cell
+PASS frame 8 (move) leaves the lunge margin empty
+PASS frame 8 (move) keeps a near foot on the anchor row
+PASS frame 8 (move) body centroid drift -0.43 px within 4 px
+PASS frame 9 (move) last opaque row is the anchor row 60
+PASS frame 9 stays inside its 112x62 cell
+PASS frame 9 (move) leaves the lunge margin empty
+PASS frame 9 (move) keeps a near foot on the anchor row
+PASS frame 9 (move) body centroid drift -0.31 px within 4 px
+PASS frame 10 (move) last opaque row is the anchor row 60
+PASS frame 10 stays inside its 112x62 cell
+PASS frame 10 (move) leaves the lunge margin empty
+PASS frame 10 (move) keeps a near foot on the anchor row
+PASS frame 10 (move) body centroid drift 0.27 px within 4 px
+PASS frame 11 (move) last opaque row is the anchor row 60
+PASS frame 11 stays inside its 112x62 cell
+PASS frame 11 (move) leaves the lunge margin empty
+PASS frame 11 (move) keeps a near foot on the anchor row
+PASS frame 11 (move) body centroid drift 0.43 px within 4 px
+PASS frame 12 (windup) last opaque row is the anchor row 60
+PASS frame 12 stays inside its 112x62 cell
+PASS frame 12 (windup) leaves the lunge margin empty
+PASS frame 12 (windup) rear sole planted while the claw is raised
+PASS frame 12 (windup) body centroid drift 1.90 px within 4 px
+PASS frame 13 (windup) last opaque row is the anchor row 60
+PASS frame 13 stays inside its 112x62 cell
+PASS frame 13 (windup) leaves the lunge margin empty
+PASS frame 13 (windup) rear sole planted while the claw is raised
+PASS frame 13 (windup) body centroid drift 2.76 px within 4 px
+PASS frame 14 (strike) last opaque row is the anchor row 60
+PASS frame 14 stays inside its 112x62 cell
+PASS frame 14 (strike) rear sole planted, claw stamped 13 px ahead
+PASS frame 14 (strike) body centroid drift -7.49 px within 9 px
+PASS frame 15 (strike) last opaque row is the anchor row 60
+PASS frame 15 stays inside its 112x62 cell
+PASS frame 15 (strike) rear sole planted
+PASS frame 15 (strike) body centroid drift -3.21 px within 9 px
+PASS frame 16 (hit) last opaque row is the anchor row 60
+PASS frame 16 stays inside its 112x62 cell
+PASS frame 16 (hit) leaves the lunge margin empty
+PASS frame 16 (hit) near feet planted at the static soles
+PASS frame 16 (hit) body centroid drift 1.68 px within 4 px
+PASS frame 17 (hit) last opaque row is the anchor row 60
+PASS frame 17 stays inside its 112x62 cell
+PASS frame 17 (hit) leaves the lunge margin empty
+PASS frame 17 (hit) near feet planted at the static soles
+PASS frame 17 (hit) body centroid drift 0.80 px within 4 px
+PASS frame 18 (defeat) last opaque row is the anchor row 60
+PASS frame 18 stays inside its 112x62 cell
+PASS frame 18 (defeat) leaves the lunge margin empty
+PASS frame 18 (defeat) near feet planted at the static soles
+PASS frame 18 (defeat) body centroid drift 0.22 px within 4 px
+PASS frame 19 (defeat) last opaque row is the anchor row 60
+PASS frame 19 stays inside its 112x62 cell
+PASS frame 19 (defeat) leaves the lunge margin empty
+PASS frame 19 (defeat) near feet planted at the static soles
+PASS frame 19 (defeat) body centroid drift 0.37 px within 4 px
+PASS frame 20 (defeat) last opaque row is the anchor row 60
+PASS frame 20 stays inside its 112x62 cell
+PASS frame 20 (defeat) leaves the lunge margin empty
+PASS frame 20 (defeat) near feet planted at the static soles
+PASS frame 20 (defeat) body centroid drift 0.89 px within 4 px
+PASS gait 4 -> 5 front foot moves back exactly 4 px in the cell ((17, 32) -> (21, 36))
+PASS gait 5 -> 6 front foot moves back exactly 4 px in the cell ((21, 36) -> (25, 40))
+PASS gait 6 -> 7 front foot moves back exactly 4 px in the cell ((25, 40) -> (29, 44))
+PASS gait 8 -> 9 rear foot moves back exactly 4 px in the cell ((83, 98) -> (87, 102))
+PASS gait 9 -> 10 rear foot moves back exactly 4 px in the cell ((87, 102) -> (91, 106))
+PASS gait 10 -> 11 rear foot moves back exactly 4 px in the cell ((91, 106) -> (95, 110))
+PASS six grounded near-foot step pairs per gait cycle (6)
+PASS idle frame 1 differs from frame 0
+PASS idle frame 2 differs from frame 1
+PASS idle frame 3 differs from frame 2
+PASS move frame 5 differs from frame 4
+PASS move frame 6 differs from frame 5
+PASS move frame 7 differs from frame 6
+PASS move frame 8 differs from frame 7
+PASS move frame 9 differs from frame 8
+PASS move frame 10 differs from frame 9
+PASS move frame 11 differs from frame 10
+PASS windup frame 13 differs from frame 12
+PASS strike frame 15 differs from frame 14
+PASS hit frame 17 differs from frame 16
+PASS defeat frame 19 differs from frame 18
+PASS defeat frame 20 differs from frame 19
+PASS v2 frame 0 equals v1 frame 0
+PASS v2 frame 1 equals v1 frame 1
+PASS v2 frame 2 equals v1 frame 2
+PASS v2 frame 3 equals v1 frame 3
+PASS v2 frame 12 equals v1 frame 8
+PASS v2 frame 13 equals v1 frame 9
+PASS v2 frame 16 equals v1 frame 12
+PASS v2 frame 17 equals v1 frame 13
+PASS v2 frame 18 equals v1 frame 14
+PASS v2 frame 19 equals v1 frame 15
+PASS v2 frame 20 equals v1 frame 16
+FRAME_AUDIT [{"anchorRowRuns":[[17,32],[95,110]],"centroidDriftPx":0.0,"frame":0,"nearFrontPlanted":true,"nearRearPlanted":true,"state":"idle","usedRect":[16,1,96,60]},{"anchorRowRuns":[[17,32],[95,110]],"centroidDriftPx":-0.01,"frame":1,"nearFrontPlanted":true,"nearRearPlanted":true,"state":"idle","usedRect":[16,2,96,59]},{"anchorRowRuns":[[17,32],[95,110]],"centroidDriftPx":-0.01,"frame":2,"nearFrontPlanted":true,"nearRearPlanted":true,"state":"idle","usedRect":[16,2,96,59]},{"anchorRowRuns":[[17,32],[95,110]],"centroidDriftPx":-0.15,"frame":3,"nearFrontPlanted":true,"nearRearPlanted":true,"state":"idle","usedRect":[16,1,96,60]},{"anchorRowRuns":[[17,32]],"centroidDriftPx":-0.36,"frame":4,"nearFrontPlanted":true,"nearRearPlanted":false,"state":"move","usedRect":[16,2,94,59]},{"anchorRowRuns":[[21,36]],"centroidDriftPx":-0.38,"frame":5,"nearFrontPlanted":false,"nearRearPlanted":false,"state":"move","usedRect":[18,1,91,60]},{"anchorRowRuns":[[25,40]],"centroidDriftPx":-0.31,"frame":6,"nearFrontPlanted":false,"nearRearPlanted":false,"state":"move","usedRect":[18,1,91,60]},{"anchorRowRuns":[[29,44]],"centroidDriftPx":-0.49,"frame":7,"nearFrontPlanted":false,"nearRearPlanted":false,"state":"move","usedRect":[18,1,91,60]},{"anchorRowRuns":[[83,98]],"centroidDriftPx":-0.43,"frame":8,"nearFrontPlanted":false,"nearRearPlanted":false,"state":"move","usedRect":[18,2,91,59]},{"anchorRowRuns":[[87,102]],"centroidDriftPx":-0.31,"frame":9,"nearFrontPlanted":false,"nearRearPlanted":false,"state":"move","usedRect":[18,1,91,60]},{"anchorRowRuns":[[91,106]],"centroidDriftPx":0.27,"frame":10,"nearFrontPlanted":false,"nearRearPlanted":false,"state":"move","usedRect":[18,1,91,60]},{"anchorRowRuns":[[95,110]],"centroidDriftPx":0.43,"frame":11,"nearFrontPlanted":false,"nearRearPlanted":true,"state":"move","usedRect":[18,1,94,60]},{"anchorRowRuns":[[95,110]],"centroidDriftPx":1.9,"frame":12,"nearFrontPlanted":false,"nearRearPlanted":true,"state":"windup","usedRect":[18,1,94,60]},{"anchorRowRuns":[[95,110]],"centroidDriftPx":2.76,"frame":13,"nearFrontPlanted":false,"nearRearPlanted":true,"state":"windup","usedRect":[20,0,92,61]},{"anchorRowRuns":[[1,1],[4,20],[95,110]],"centroidDriftPx":-7.49,"frame":14,"nearFrontPlanted":false,"nearRearPlanted":true,"state":"strike","usedRect":[1,2,111,59]},{"anchorRowRuns":[[95,110]],"centroidDriftPx":-3.21,"frame":15,"nearFrontPlanted":false,"nearRearPlanted":true,"state":"strike","usedRect":[2,2,110,59]},{"anchorRowRuns":[[17,32],[95,110]],"centroidDriftPx":1.68,"frame":16,"nearFrontPlanted":true,"nearRearPlanted":true,"state":"hit","usedRect":[16,1,96,60]},{"anchorRowRuns":[[17,32],[95,110]],"centroidDriftPx":0.8,"frame":17,"nearFrontPlanted":true,"nearRearPlanted":true,"state":"hit","usedRect":[16,1,96,60]},{"anchorRowRuns":[[17,32],[95,110]],"centroidDriftPx":0.22,"frame":18,"nearFrontPlanted":true,"nearRearPlanted":true,"state":"defeat","usedRect":[16,4,96,57]},{"anchorRowRuns":[[17,32],[95,110]],"centroidDriftPx":0.37,"frame":19,"nearFrontPlanted":true,"nearRearPlanted":true,"state":"defeat","usedRect":[16,8,96,53]},{"anchorRowRuns":[[17,32],[95,110]],"centroidDriftPx":0.89,"frame":20,"nearFrontPlanted":true,"nearRearPlanted":true,"state":"defeat","usedRect":[16,7,96,54]}]
+BATTLE_TRANSITION_MS 12.54
+PASS sentry stats unchanged (96 / 18 / 68 / 0.48 / 1.10)
+PASS approach step unchanged (480.85 -> 474.05)
+PASS wind-up starts at the 53 px stop distance with 0.48 s
+PASS melee attack deals 19
+PASS dodge consumes 12 energy
+PASS guarded hit 60 -> 54
+PASS unguarded hit 60 -> 42
+PASS strike reach still 69 px (fighter at 70 px untouched)
+PASS hero melee range still 61 px from enemy_x
+BATTLE_TRANSITION_MS 14.52
+BATTLE_TRANSITION_MS 5.23
+PASS simulation runs compare the pilot on against the default (off)
+PARITY {"battleFinished":true,"comparedAgainst":"sentry_v2_override = 0 (default placeholder)","enemyAttacks":4,"enemyHpEnd":0,"firstDifferentStep":-1,"steps":600,"visualStateSteps":{"defeat":147,"hit":148,"idle":34,"move":83,"strike":72,"windup":116}}
+PASS auto-battle simulation identical with the pilot flag on and off (600 steps)
+PASS real auto combat drives move, wind-up, strike and hit states ({"defeat":147,"hit":148,"idle":34,"move":83,"strike":72,"windup":116})
+BATTLE_TRANSITION_MS 11.67
+PASS idle loops frames 0-3 ([0, 1, 2, 3, 0])
+PASS step 0 draws at the step position (430.0)
+PASS step 1 draws at the step position (426.0)
+PASS step 2 draws at the step position (422.0)
+PASS step 3 draws at the step position (418.0)
+PASS step 4 draws at the step position (414.0)
+PASS step 5 draws at the step position (410.0)
+PASS step 6 draws at the step position (406.0)
+PASS step 7 draws at the step position (402.0)
+PASS step 8 draws at the step position (398.0)
+PASS walking selects gait frames 4-11 by distance ([4, 5, 6, 7, 8, 9, 10, 11, 4])
+PASS drawn sprite stays within 2 px of enemy_x while walking (2.00)
+PASS backing away plays the gait in reverse ([4, 11, 10, 9])
+PASS a 0.05 s stop holds the gait frame
+PASS stopping returns to idle at enemy_x
+PASS wind-up selects 12 then 13 (12, 13)
+PASS the wind-up draws behind the fighters
+PASS a hit during the wind-up keeps the wind-up pose
+PASS wind-up expiry plays strike frame 14 in front and the hit lands for 18
+PASS strike continues to frame 15 through a hit
+PASS strike returns to idle behind the fighters after 0.30 s
+PASS hit reaction plays 16, 17 behind the attacker, then idle, unrestarted by a second blow
+PASS pause freezes the animation
+PASS killing blow finishes the battle
+PASS defeat plays 18-20 and holds the last frame ([-1, 18, 19, 20, 20])
+BATTLE_TRANSITION_MS 11.24
+BATTLE_TRANSITION_MS 11.30
+WALK {"v1Replay":{"groundedSteps":124,"maxDrawOffsetFromEnemyXPx":0.47,"moveSteps":124,"plantedFootPairs":172,"plantedFootSlipPx":187.0,"stopSnapPx":0.0,"travelPx":140.53,"worstSlipPerFramePx":2.0,"woundUp":true},"v2":{"groundedSteps":124,"maxDrawOffsetFromEnemyXPx":2.0,"moveSteps":124,"plantedFootPairs":115,"plantedFootSlipPx":0.0,"stopSnapPx":0.0,"travelPx":140.53,"worstSlipPerFramePx":0.0,"woundUp":true}}
+PASS real approach walks 140.5 px and winds up at the stop distance
+PASS a near foot is grounded on every walking frame (124 / 124)
+PASS v2 planted feet never slide on the floor (0.00 px over 115 frame pairs)
+PASS drawn sprite within 2 px of enemy_x and the stop snap is 0 px
+PASS the v1 replay through the same code does slide (187.00 px), so the measure is sensitive
+BATTLE_TRANSITION_MS 8.35
+PASS animation switch off keeps the static pilot at its own anchor
+BATTLE_TRANSITION_MS 9.36
+PASS missing strip keeps the static pilot
+BATTLE_TRANSITION_MS 10.31
+PASS wrong-shaped strip (a single 96x62 cell) keeps the static pilot
+BATTLE_TRANSITION_MS 13.73
+PASS the v1 strip under the v2 entry (wrong cell width) keeps the static pilot
+BATTLE_TRANSITION_MS 4.83
+PASS pilot switch off restores the placeholder block and r30 ring
+BATTLE_TRANSITION_MS 4.51
+PASS flag is sentry only: patrol keeps its placeholder block with the flag on
+BATTLE_TRANSITION_MS 8.42
+PASS static fallback ignores visual states on defeat
+BATTLE_TRANSITION_MS 11.49
+PASS idle-breathe-f0-zh-1280 selects frame 0 (got 0)
+PASS idle-breathe-f0-zh-1280 telegraph label visibility
+PASS idle-breathe-f0-zh-1280 capture is (1280, 720)
+PASS idle-breathe-f0-zh-1280 on-screen sentry matches strip frame 0 at the anchor (1.000)
+PASS idle-breathe-f0-zh-1280 file name 90 chars (<= 121)
+PASS idle-breathe-f0-zh-1280 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_idle-breathe-f0-zh-1280_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 13.22
+PASS idle-breathe-f0-en-1280 selects frame 0 (got 0)
+PASS idle-breathe-f0-en-1280 telegraph label visibility
+PASS idle-breathe-f0-en-1280 capture is (1280, 720)
+PASS idle-breathe-f0-en-1280 on-screen sentry matches strip frame 0 at the anchor (1.000)
+PASS idle-breathe-f0-en-1280 file name 90 chars (<= 121)
+PASS idle-breathe-f0-en-1280 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_idle-breathe-f0-en-1280_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 11.74
+PASS move-gait-f4-zh-1280 selects frame 4 (got 4)
+PASS move-gait-f4-zh-1280 telegraph label visibility
+PASS move-gait-f4-zh-1280 capture is (1280, 720)
+PASS move-gait-f4-zh-1280 on-screen sentry matches strip frame 4 at the anchor (1.000)
+PASS move-gait-f4-zh-1280 file name 87 chars (<= 121)
+PASS move-gait-f4-zh-1280 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_move-gait-f4-zh-1280_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 11.53
+PASS move-gait-f4-en-1280 selects frame 4 (got 4)
+PASS move-gait-f4-en-1280 telegraph label visibility
+PASS move-gait-f4-en-1280 capture is (1280, 720)
+PASS move-gait-f4-en-1280 on-screen sentry matches strip frame 4 at the anchor (1.000)
+PASS move-gait-f4-en-1280 file name 87 chars (<= 121)
+PASS move-gait-f4-en-1280 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_move-gait-f4-en-1280_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 11.56
+PASS move-gait-f8-zh-1280 selects frame 8 (got 8)
+PASS move-gait-f8-zh-1280 telegraph label visibility
+PASS move-gait-f8-zh-1280 capture is (1280, 720)
+PASS move-gait-f8-zh-1280 on-screen sentry matches strip frame 8 at the anchor (1.000)
+PASS move-gait-f8-zh-1280 file name 87 chars (<= 121)
+PASS move-gait-f8-zh-1280 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_move-gait-f8-zh-1280_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 13.44
+PASS move-gait-f8-en-1280 selects frame 8 (got 8)
+PASS move-gait-f8-en-1280 telegraph label visibility
+PASS move-gait-f8-en-1280 capture is (1280, 720)
+PASS move-gait-f8-en-1280 on-screen sentry matches strip frame 8 at the anchor (1.000)
+PASS move-gait-f8-en-1280 file name 87 chars (<= 121)
+PASS move-gait-f8-en-1280 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_move-gait-f8-en-1280_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 13.32
+PASS windup-coil-f12-zh-1280 selects frame 12 (got 12)
+PASS windup-coil-f12-zh-1280 telegraph label visibility
+PASS windup-coil-f12-zh-1280 telegraph label bottom 204 clears the coiled sentry top 213
+PASS windup-coil-f12-zh-1280 ring stays visible around the coiled pose (3213 px)
+PASS windup-coil-f12-zh-1280 capture is (1280, 720)
+PASS windup-coil-f12-zh-1280 on-screen sentry matches strip frame 12 at the anchor (0.993)
+PASS windup-coil-f12-zh-1280 eye 1.000 and claw 0.869 visible at the 53 px melee spacing
+PASS windup-coil-f12-zh-1280 file name 90 chars (<= 121)
+PASS windup-coil-f12-zh-1280 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_windup-coil-f12-zh-1280_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 11.65
+PASS windup-coil-f12-en-1280 selects frame 12 (got 12)
+PASS windup-coil-f12-en-1280 telegraph label visibility
+PASS windup-coil-f12-en-1280 telegraph label bottom 204 clears the coiled sentry top 213
+PASS windup-coil-f12-en-1280 ring stays visible around the coiled pose (3213 px)
+PASS windup-coil-f12-en-1280 capture is (1280, 720)
+PASS windup-coil-f12-en-1280 on-screen sentry matches strip frame 12 at the anchor (0.993)
+PASS windup-coil-f12-en-1280 eye 1.000 and claw 0.869 visible at the 53 px melee spacing
+PASS windup-coil-f12-en-1280 file name 90 chars (<= 121)
+PASS windup-coil-f12-en-1280 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_windup-coil-f12-en-1280_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 13.40
+PASS windup-full-f13-zh-1280 selects frame 13 (got 13)
+PASS windup-full-f13-zh-1280 telegraph label visibility
+PASS windup-full-f13-zh-1280 telegraph label bottom 204 clears the coiled sentry top 212
+PASS windup-full-f13-zh-1280 ring stays visible around the coiled pose (3212 px)
+PASS windup-full-f13-zh-1280 capture is (1280, 720)
+PASS windup-full-f13-zh-1280 on-screen sentry matches strip frame 13 at the anchor (0.989)
+PASS windup-full-f13-zh-1280 eye 1.000 and claw 0.815 visible at the 53 px melee spacing
+PASS windup-full-f13-zh-1280 file name 90 chars (<= 121)
+PASS windup-full-f13-zh-1280 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_windup-full-f13-zh-1280_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 11.67
+PASS windup-full-f13-en-1280 selects frame 13 (got 13)
+PASS windup-full-f13-en-1280 telegraph label visibility
+PASS windup-full-f13-en-1280 telegraph label bottom 204 clears the coiled sentry top 212
+PASS windup-full-f13-en-1280 ring stays visible around the coiled pose (3212 px)
+PASS windup-full-f13-en-1280 capture is (1280, 720)
+PASS windup-full-f13-en-1280 on-screen sentry matches strip frame 13 at the anchor (0.989)
+PASS windup-full-f13-en-1280 eye 1.000 and claw 0.815 visible at the 53 px melee spacing
+PASS windup-full-f13-en-1280 file name 90 chars (<= 121)
+PASS windup-full-f13-en-1280 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_windup-full-f13-en-1280_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 11.22
+PASS strike-lunge-f14-zh-1280 selects frame 14 (got 14)
+PASS strike-lunge-f14-zh-1280 hit lands for 18 (60 -> 42)
+PASS strike-lunge-f14-zh-1280 telegraph label visibility
+PASS strike-lunge-f14-zh-1280 capture is (1280, 720)
+PASS strike-lunge-f14-zh-1280 on-screen sentry matches strip frame 14 at the anchor (1.000)
+PASS strike-lunge-f14-zh-1280 eye 1.000 and claw 1.000 visible at the 53 px melee spacing
+PASS strike-lunge-f14-zh-1280 sentry on top where they overlap ({"heroOpaquePx":2045,"heroShown":0,"overlap":127,"sentryShown":127})
+PASS strike-lunge-f14-zh-1280 file name 91 chars (<= 121)
+PASS strike-lunge-f14-zh-1280 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_strike-lunge-f14-zh-1280_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 11.21
+PASS strike-lunge-f14-en-1280 selects frame 14 (got 14)
+PASS strike-lunge-f14-en-1280 hit lands for 18 (60 -> 42)
+PASS strike-lunge-f14-en-1280 telegraph label visibility
+PASS strike-lunge-f14-en-1280 capture is (1280, 720)
+PASS strike-lunge-f14-en-1280 on-screen sentry matches strip frame 14 at the anchor (1.000)
+PASS strike-lunge-f14-en-1280 eye 1.000 and claw 1.000 visible at the 53 px melee spacing
+PASS strike-lunge-f14-en-1280 sentry on top where they overlap ({"heroOpaquePx":2045,"heroShown":0,"overlap":127,"sentryShown":127})
+PASS strike-lunge-f14-en-1280 file name 91 chars (<= 121)
+PASS strike-lunge-f14-en-1280 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_strike-lunge-f14-en-1280_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 13.43
+PASS strike-recoil-f15-zh-1280 selects frame 15 (got 15)
+PASS strike-recoil-f15-zh-1280 hit lands for 18 (60 -> 42)
+PASS strike-recoil-f15-zh-1280 telegraph label visibility
+PASS strike-recoil-f15-zh-1280 capture is (1280, 720)
+PASS strike-recoil-f15-zh-1280 on-screen sentry matches strip frame 15 at the anchor (1.000)
+PASS strike-recoil-f15-zh-1280 eye 1.000 and claw 1.000 visible at the 53 px melee spacing
+PASS strike-recoil-f15-zh-1280 sentry on top where they overlap ({"heroOpaquePx":2045,"heroShown":0,"overlap":26,"sentryShown":26})
+PASS strike-recoil-f15-zh-1280 file name 92 chars (<= 121)
+PASS strike-recoil-f15-zh-1280 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_strike-recoil-f15-zh-1280_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 11.54
+PASS strike-recoil-f15-en-1280 selects frame 15 (got 15)
+PASS strike-recoil-f15-en-1280 hit lands for 18 (60 -> 42)
+PASS strike-recoil-f15-en-1280 telegraph label visibility
+PASS strike-recoil-f15-en-1280 capture is (1280, 720)
+PASS strike-recoil-f15-en-1280 on-screen sentry matches strip frame 15 at the anchor (1.000)
+PASS strike-recoil-f15-en-1280 eye 1.000 and claw 1.000 visible at the 53 px melee spacing
+PASS strike-recoil-f15-en-1280 sentry on top where they overlap ({"heroOpaquePx":2045,"heroShown":0,"overlap":26,"sentryShown":26})
+PASS strike-recoil-f15-en-1280 file name 92 chars (<= 121)
+PASS strike-recoil-f15-en-1280 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_strike-recoil-f15-en-1280_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 11.97
+PASS hit-shutter-f16-zh-1280 selects frame 16 (got 16)
+PASS hit-shutter-f16-zh-1280 telegraph label visibility
+PASS hit-shutter-f16-zh-1280 capture is (1280, 720)
+PASS hit-shutter-f16-zh-1280 on-screen sentry matches strip frame 16 at the anchor (0.999)
+PASS hit-shutter-f16-zh-1280 eye 1.000 and claw 0.995 visible at the 53 px melee spacing
+PASS hit-shutter-f16-zh-1280 hero on top where they overlap ({"heroOpaquePx":1964,"heroShown":5,"overlap":5,"sentryShown":0})
+PASS hit-shutter-f16-zh-1280 file name 90 chars (<= 121)
+PASS hit-shutter-f16-zh-1280 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_hit-shutter-f16-zh-1280_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 12.74
+PASS hit-shutter-f16-en-1280 selects frame 16 (got 16)
+PASS hit-shutter-f16-en-1280 telegraph label visibility
+PASS hit-shutter-f16-en-1280 capture is (1280, 720)
+PASS hit-shutter-f16-en-1280 on-screen sentry matches strip frame 16 at the anchor (0.999)
+PASS hit-shutter-f16-en-1280 eye 1.000 and claw 0.995 visible at the 53 px melee spacing
+PASS hit-shutter-f16-en-1280 hero on top where they overlap ({"heroOpaquePx":1964,"heroShown":5,"overlap":5,"sentryShown":0})
+PASS hit-shutter-f16-en-1280 file name 90 chars (<= 121)
+PASS hit-shutter-f16-en-1280 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_hit-shutter-f16-en-1280_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 11.72
+PASS hit-recover-sword-thrust-f17-zh-1280 selects frame 17 (got 17)
+PASS hit-recover-sword-thrust-f17-zh-1280 telegraph label visibility
+PASS hit-recover-sword-thrust-f17-zh-1280 capture is (1280, 720)
+PASS hit-recover-sword-thrust-f17-zh-1280 on-screen sentry matches strip frame 17 at the anchor (0.979)
+PASS hit-recover-sword-thrust-f17-zh-1280 eye 0.866 and claw 0.995 visible at the 53 px melee spacing
+PASS hit-recover-sword-thrust-f17-zh-1280 hero on top where they overlap ({"heroOpaquePx":2240,"heroShown":79,"overlap":79,"sentryShown":0})
+PASS hit-recover-sword-thrust-f17-zh-1280 file name 103 chars (<= 121)
+PASS hit-recover-sword-thrust-f17-zh-1280 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_hit-recover-sword-thrust-f17-zh-1280_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 11.43
+PASS hit-recover-sword-thrust-f17-en-1280 selects frame 17 (got 17)
+PASS hit-recover-sword-thrust-f17-en-1280 telegraph label visibility
+PASS hit-recover-sword-thrust-f17-en-1280 capture is (1280, 720)
+PASS hit-recover-sword-thrust-f17-en-1280 on-screen sentry matches strip frame 17 at the anchor (0.979)
+PASS hit-recover-sword-thrust-f17-en-1280 eye 0.866 and claw 0.995 visible at the 53 px melee spacing
+PASS hit-recover-sword-thrust-f17-en-1280 hero on top where they overlap ({"heroOpaquePx":2240,"heroShown":79,"overlap":79,"sentryShown":0})
+PASS hit-recover-sword-thrust-f17-en-1280 file name 103 chars (<= 121)
+PASS hit-recover-sword-thrust-f17-en-1280 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_hit-recover-sword-thrust-f17-en-1280_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 11.16
+PASS defeat-hold-f20-inspect-zh-1280 selects frame 20 (got 20)
+PASS defeat-hold-f20-inspect-zh-1280 telegraph label visibility
+PASS defeat-hold-f20-inspect-zh-1280 capture is (1280, 720)
+PASS defeat-hold-f20-inspect-zh-1280 on-screen sentry matches strip frame 20 at the anchor (1.000)
+PASS defeat-hold-f20-inspect-zh-1280 file name 98 chars (<= 121)
+PASS defeat-hold-f20-inspect-zh-1280 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_defeat-hold-f20-inspect-zh-1280_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 13.10
+PASS defeat-hold-f20-inspect-en-1280 selects frame 20 (got 20)
+PASS defeat-hold-f20-inspect-en-1280 telegraph label visibility
+PASS defeat-hold-f20-inspect-en-1280 capture is (1280, 720)
+PASS defeat-hold-f20-inspect-en-1280 on-screen sentry matches strip frame 20 at the anchor (1.000)
+PASS defeat-hold-f20-inspect-en-1280 file name 98 chars (<= 121)
+PASS defeat-hold-f20-inspect-en-1280 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_defeat-hold-f20-inspect-en-1280_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 13.32
+PASS defeat-hold-f20-result-zh-1280 selects frame 20 (got 20)
+PASS defeat-hold-f20-result-zh-1280 telegraph label visibility
+PASS defeat-hold-f20-result-zh-1280 capture is (1280, 720)
+PASS defeat-hold-f20-result-zh-1280 file name 97 chars (<= 121)
+PASS defeat-hold-f20-result-zh-1280 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_defeat-hold-f20-result-zh-1280_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 11.19
+PASS defeat-hold-f20-result-en-1280 selects frame 20 (got 20)
+PASS defeat-hold-f20-result-en-1280 telegraph label visibility
+PASS defeat-hold-f20-result-en-1280 capture is (1280, 720)
+PASS defeat-hold-f20-result-en-1280 file name 97 chars (<= 121)
+PASS defeat-hold-f20-result-en-1280 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_defeat-hold-f20-result-en-1280_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 15.40
+PASS v1-replay-windup-full-zh-1280 selects frame 9 (got 9)
+PASS v1-replay-windup-full-zh-1280 telegraph label visibility
+PASS v1-replay-windup-full-zh-1280 capture is (1280, 720)
+PASS v1-replay-windup-full-zh-1280 on-screen sentry matches strip frame 9 at the anchor (0.950)
+PASS v1-replay-windup-full-zh-1280 file name 96 chars (<= 121)
+PASS v1-replay-windup-full-zh-1280 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_v1-replay-windup-full-zh-1280_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 11.06
+PASS v1-replay-windup-full-en-1280 selects frame 9 (got 9)
+PASS v1-replay-windup-full-en-1280 telegraph label visibility
+PASS v1-replay-windup-full-en-1280 capture is (1280, 720)
+PASS v1-replay-windup-full-en-1280 on-screen sentry matches strip frame 9 at the anchor (0.950)
+PASS v1-replay-windup-full-en-1280 file name 96 chars (<= 121)
+PASS v1-replay-windup-full-en-1280 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_v1-replay-windup-full-en-1280_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 11.31
+PASS v1-replay-hit-recover-sword-thrust-zh-1280 selects frame 13 (got 13)
+PASS v1-replay-hit-recover-sword-thrust-zh-1280 telegraph label visibility
+PASS v1-replay-hit-recover-sword-thrust-zh-1280 capture is (1280, 720)
+PASS v1-replay-hit-recover-sword-thrust-zh-1280 on-screen sentry matches strip frame 13 at the anchor (0.857)
+PASS v1-replay-hit-recover-sword-thrust-zh-1280 hero on top where they overlap ({"heroOpaquePx":2240,"heroShown":493,"overlap":493,"sentryShown":0})
+PASS v1-replay-hit-recover-sword-thrust-zh-1280 file name 109 chars (<= 121)
+PASS v1-replay-hit-recover-sword-thrust-zh-1280 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_v1-replay-hit-recover-sword-thrust-zh-1280_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 11.13
+PASS v1-replay-hit-recover-sword-thrust-en-1280 selects frame 13 (got 13)
+PASS v1-replay-hit-recover-sword-thrust-en-1280 telegraph label visibility
+PASS v1-replay-hit-recover-sword-thrust-en-1280 capture is (1280, 720)
+PASS v1-replay-hit-recover-sword-thrust-en-1280 on-screen sentry matches strip frame 13 at the anchor (0.857)
+PASS v1-replay-hit-recover-sword-thrust-en-1280 hero on top where they overlap ({"heroOpaquePx":2240,"heroShown":493,"overlap":493,"sentryShown":0})
+PASS v1-replay-hit-recover-sword-thrust-en-1280 file name 109 chars (<= 121)
+PASS v1-replay-hit-recover-sword-thrust-en-1280 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_v1-replay-hit-recover-sword-thrust-en-1280_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 8.57
+PASS static-fallback-windup-zh-1280 selects frame -1 (got -1)
+PASS static-fallback-windup-zh-1280 telegraph label visibility
+PASS static-fallback-windup-zh-1280 capture is (1280, 720)
+PASS static-fallback-windup-zh-1280 file name 97 chars (<= 121)
+PASS static-fallback-windup-zh-1280 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_static-fallback-windup-zh-1280_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 8.12
+PASS static-fallback-windup-en-1280 selects frame -1 (got -1)
+PASS static-fallback-windup-en-1280 telegraph label visibility
+PASS static-fallback-windup-en-1280 capture is (1280, 720)
+PASS static-fallback-windup-en-1280 file name 97 chars (<= 121)
+PASS static-fallback-windup-en-1280 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_static-fallback-windup-en-1280_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 4.54
+PASS default-off-placeholder-windup-zh-1280 selects frame -2 (got -2)
+PASS default-off-placeholder-windup-zh-1280 telegraph label visibility
+PASS default-off-placeholder-windup-zh-1280 capture is (1280, 720)
+PASS default-off-placeholder-windup-zh-1280 file name 105 chars (<= 121)
+PASS default-off-placeholder-windup-zh-1280 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_default-off-placeholder-windup-zh-1280_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 4.96
+PASS default-off-placeholder-windup-en-1280 selects frame -2 (got -2)
+PASS default-off-placeholder-windup-en-1280 telegraph label visibility
+PASS default-off-placeholder-windup-en-1280 capture is (1280, 720)
+PASS default-off-placeholder-windup-en-1280 file name 105 chars (<= 121)
+PASS default-off-placeholder-windup-en-1280 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_default-off-placeholder-windup-en-1280_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 11.17
+PASS walk-1280 crop 0 saved (84-char name)
+PASS walk-1280 crop 1 saved (84-char name)
+PASS walk-1280 crop 2 saved (84-char name)
+PASS walk-1280 crop 3 saved (84-char name)
+PASS walk-1280 crop 4 saved (84-char name)
+PASS walk-1280 crop 5 saved (84-char name)
+PASS walk-1280 crop 6 saved (84-char name)
+PASS walk-1280 crop 7 saved (84-char name)
+PASS walk-1280 crop 8 saved (84-char name)
+PASS walk-1280 crop 9 saved (84-char name)
+PASS walk-1280 crop 10 saved (84-char name)
+PASS walk-1280 crop 11 saved (84-char name)
+PASS walk-1280 crop 12 saved (84-char name)
+PASS walk-1280 crop 13 saved (84-char name)
+PASS walk-1280 crop 14 saved (84-char name)
+PASS walk-1280 crop 15 saved (84-char name)
+PASS walk sequence captured 16 real gait steps
+BATTLE_TRANSITION_MS 11.28
+PASS contact-v2-1280 crop 0 saved (90-char name)
+BATTLE_TRANSITION_MS 11.83
+PASS contact-v2-1280 crop 1 saved (90-char name)
+BATTLE_TRANSITION_MS 11.83
+PASS contact-v2-1280 crop 2 saved (90-char name)
+BATTLE_TRANSITION_MS 15.15
+PASS contact-v2-1280 crop 3 saved (90-char name)
+BATTLE_TRANSITION_MS 14.44
+PASS contact-v2-1280 crop 4 saved (90-char name)
+BATTLE_TRANSITION_MS 13.78
+PASS contact-v2-1280 crop 5 saved (90-char name)
+BATTLE_TRANSITION_MS 13.07
+PASS contact-v2-1280 crop 6 saved (90-char name)
+BATTLE_TRANSITION_MS 17.55
+PASS contact-v2-1280 crop 7 saved (90-char name)
+BATTLE_TRANSITION_MS 14.62
+PASS contact-v2-1280 crop 8 saved (90-char name)
+BATTLE_TRANSITION_MS 13.85
+PASS contact-v2-1280 crop 9 saved (90-char name)
+BATTLE_TRANSITION_MS 13.07
+PASS contact-v1-replay-1280 crop 0 saved (97-char name)
+BATTLE_TRANSITION_MS 11.44
+PASS contact-v1-replay-1280 crop 1 saved (97-char name)
+BATTLE_TRANSITION_MS 11.60
+PASS contact-v1-replay-1280 crop 2 saved (97-char name)
+BATTLE_TRANSITION_MS 12.23
+PASS contact-v1-replay-1280 crop 3 saved (97-char name)
+BATTLE_TRANSITION_MS 11.12
+PASS contact-v1-replay-1280 crop 4 saved (97-char name)
+BATTLE_TRANSITION_MS 11.53
+PASS contact-v1-replay-1280 crop 5 saved (97-char name)
+BATTLE_TRANSITION_MS 12.75
+PASS contact-v1-replay-1280 crop 6 saved (97-char name)
+BATTLE_TRANSITION_MS 11.43
+PASS contact-v1-replay-1280 crop 7 saved (97-char name)
+BATTLE_TRANSITION_MS 11.78
+PASS contact-v1-replay-1280 crop 8 saved (97-char name)
+BATTLE_TRANSITION_MS 11.18
+PASS contact-v1-replay-1280 crop 9 saved (97-char name)
+BATTLE_TRANSITION_MS 11.52
+PASS solo crop (1280) selects frame 0 (idle)
+PASS solo crop (1280) frame 0 (idle) renders the strip cell on screen (1.000)
+PASS solo-1280-f00-idle crop 0 saved (93-char name)
+BATTLE_TRANSITION_MS 12.25
+PASS solo crop (1280) selects frame 1 (idle)
+PASS solo crop (1280) frame 1 (idle) renders the strip cell on screen (1.000)
+PASS solo-1280-f01-idle crop 0 saved (93-char name)
+BATTLE_TRANSITION_MS 13.50
+PASS solo crop (1280) selects frame 2 (idle)
+PASS solo crop (1280) frame 2 (idle) renders the strip cell on screen (1.000)
+PASS solo-1280-f02-idle crop 0 saved (93-char name)
+BATTLE_TRANSITION_MS 11.16
+PASS solo crop (1280) selects frame 3 (idle)
+PASS solo crop (1280) frame 3 (idle) renders the strip cell on screen (1.000)
+PASS solo-1280-f03-idle crop 0 saved (93-char name)
+BATTLE_TRANSITION_MS 11.30
+PASS solo crop (1280) selects frame 4 (move)
+PASS solo crop (1280) frame 4 (move) renders the strip cell on screen (1.000)
+PASS solo-1280-f04-move crop 0 saved (93-char name)
+BATTLE_TRANSITION_MS 11.24
+PASS solo crop (1280) selects frame 5 (move)
+PASS solo crop (1280) frame 5 (move) renders the strip cell on screen (1.000)
+PASS solo-1280-f05-move crop 0 saved (93-char name)
+BATTLE_TRANSITION_MS 11.20
+PASS solo crop (1280) selects frame 6 (move)
+PASS solo crop (1280) frame 6 (move) renders the strip cell on screen (1.000)
+PASS solo-1280-f06-move crop 0 saved (93-char name)
+BATTLE_TRANSITION_MS 11.76
+PASS solo crop (1280) selects frame 7 (move)
+PASS solo crop (1280) frame 7 (move) renders the strip cell on screen (1.000)
+PASS solo-1280-f07-move crop 0 saved (93-char name)
+BATTLE_TRANSITION_MS 11.73
+PASS solo crop (1280) selects frame 8 (move)
+PASS solo crop (1280) frame 8 (move) renders the strip cell on screen (1.000)
+PASS solo-1280-f08-move crop 0 saved (93-char name)
+BATTLE_TRANSITION_MS 11.33
+PASS solo crop (1280) selects frame 9 (move)
+PASS solo crop (1280) frame 9 (move) renders the strip cell on screen (1.000)
+PASS solo-1280-f09-move crop 0 saved (93-char name)
+BATTLE_TRANSITION_MS 11.27
+PASS solo crop (1280) selects frame 10 (move)
+PASS solo crop (1280) frame 10 (move) renders the strip cell on screen (1.000)
+PASS solo-1280-f10-move crop 0 saved (93-char name)
+BATTLE_TRANSITION_MS 11.53
+PASS solo crop (1280) selects frame 11 (move)
+PASS solo crop (1280) frame 11 (move) renders the strip cell on screen (1.000)
+PASS solo-1280-f11-move crop 0 saved (93-char name)
+BATTLE_TRANSITION_MS 12.33
+PASS solo crop (1280) selects frame 12 (windup)
+PASS solo crop (1280) frame 12 (windup) renders the strip cell on screen (1.000)
+PASS solo-1280-f12-windup crop 0 saved (95-char name)
+BATTLE_TRANSITION_MS 11.48
+PASS solo crop (1280) selects frame 13 (windup)
+PASS solo crop (1280) frame 13 (windup) renders the strip cell on screen (1.000)
+PASS solo-1280-f13-windup crop 0 saved (95-char name)
+BATTLE_TRANSITION_MS 12.52
+PASS solo crop (1280) selects frame 14 (strike)
+PASS solo crop (1280) frame 14 (strike) renders the strip cell on screen (1.000)
+PASS solo-1280-f14-strike crop 0 saved (95-char name)
+BATTLE_TRANSITION_MS 11.28
+PASS solo crop (1280) selects frame 15 (strike)
+PASS solo crop (1280) frame 15 (strike) renders the strip cell on screen (1.000)
+PASS solo-1280-f15-strike crop 0 saved (95-char name)
+BATTLE_TRANSITION_MS 11.92
+PASS solo crop (1280) selects frame 16 (hit)
+PASS solo crop (1280) frame 16 (hit) renders the strip cell on screen (1.000)
+PASS solo-1280-f16-hit crop 0 saved (92-char name)
+BATTLE_TRANSITION_MS 11.98
+PASS solo crop (1280) selects frame 17 (hit)
+PASS solo crop (1280) frame 17 (hit) renders the strip cell on screen (1.000)
+PASS solo-1280-f17-hit crop 0 saved (92-char name)
+BATTLE_TRANSITION_MS 11.99
+PASS solo crop (1280) selects frame 18 (defeat)
+PASS solo crop (1280) frame 18 (defeat) renders the strip cell on screen (1.000)
+PASS solo-1280-f18-defeat crop 0 saved (95-char name)
+BATTLE_TRANSITION_MS 11.76
+PASS solo crop (1280) selects frame 19 (defeat)
+PASS solo crop (1280) frame 19 (defeat) renders the strip cell on screen (1.000)
+PASS solo-1280-f19-defeat crop 0 saved (95-char name)
+BATTLE_TRANSITION_MS 11.96
+PASS solo crop (1280) selects frame 20 (defeat)
+PASS solo crop (1280) frame 20 (defeat) renders the strip cell on screen (1.000)
+PASS solo-1280-f20-defeat crop 0 saved (95-char name)
+BATTLE_TRANSITION_MS 12.88
+PASS idle-breathe-f0-zh-640 selects frame 0 (got 0)
+PASS idle-breathe-f0-zh-640 telegraph label visibility
+PASS idle-breathe-f0-zh-640 capture is (640, 360)
+PASS idle-breathe-f0-zh-640 on-screen sentry matches strip frame 0 at the anchor (1.000)
+PASS idle-breathe-f0-zh-640 file name 89 chars (<= 121)
+PASS idle-breathe-f0-zh-640 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_idle-breathe-f0-zh-640_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 11.35
+PASS idle-breathe-f0-en-640 selects frame 0 (got 0)
+PASS idle-breathe-f0-en-640 telegraph label visibility
+PASS idle-breathe-f0-en-640 capture is (640, 360)
+PASS idle-breathe-f0-en-640 on-screen sentry matches strip frame 0 at the anchor (1.000)
+PASS idle-breathe-f0-en-640 file name 89 chars (<= 121)
+PASS idle-breathe-f0-en-640 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_idle-breathe-f0-en-640_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 11.69
+PASS move-gait-f4-zh-640 selects frame 4 (got 4)
+PASS move-gait-f4-zh-640 telegraph label visibility
+PASS move-gait-f4-zh-640 capture is (640, 360)
+PASS move-gait-f4-zh-640 on-screen sentry matches strip frame 4 at the anchor (1.000)
+PASS move-gait-f4-zh-640 file name 86 chars (<= 121)
+PASS move-gait-f4-zh-640 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_move-gait-f4-zh-640_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 11.54
+PASS move-gait-f4-en-640 selects frame 4 (got 4)
+PASS move-gait-f4-en-640 telegraph label visibility
+PASS move-gait-f4-en-640 capture is (640, 360)
+PASS move-gait-f4-en-640 on-screen sentry matches strip frame 4 at the anchor (1.000)
+PASS move-gait-f4-en-640 file name 86 chars (<= 121)
+PASS move-gait-f4-en-640 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_move-gait-f4-en-640_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 11.68
+PASS move-gait-f8-zh-640 selects frame 8 (got 8)
+PASS move-gait-f8-zh-640 telegraph label visibility
+PASS move-gait-f8-zh-640 capture is (640, 360)
+PASS move-gait-f8-zh-640 on-screen sentry matches strip frame 8 at the anchor (1.000)
+PASS move-gait-f8-zh-640 file name 86 chars (<= 121)
+PASS move-gait-f8-zh-640 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_move-gait-f8-zh-640_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 11.05
+PASS move-gait-f8-en-640 selects frame 8 (got 8)
+PASS move-gait-f8-en-640 telegraph label visibility
+PASS move-gait-f8-en-640 capture is (640, 360)
+PASS move-gait-f8-en-640 on-screen sentry matches strip frame 8 at the anchor (1.000)
+PASS move-gait-f8-en-640 file name 86 chars (<= 121)
+PASS move-gait-f8-en-640 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_move-gait-f8-en-640_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 11.65
+PASS windup-coil-f12-zh-640 selects frame 12 (got 12)
+PASS windup-coil-f12-zh-640 telegraph label visibility
+PASS windup-coil-f12-zh-640 telegraph label bottom 204 clears the coiled sentry top 213
+PASS windup-coil-f12-zh-640 ring stays visible around the coiled pose (3213 px)
+PASS windup-coil-f12-zh-640 capture is (640, 360)
+PASS windup-coil-f12-zh-640 on-screen sentry matches strip frame 12 at the anchor (0.993)
+PASS windup-coil-f12-zh-640 eye 1.000 and claw 0.869 visible at the 53 px melee spacing
+PASS windup-coil-f12-zh-640 file name 89 chars (<= 121)
+PASS windup-coil-f12-zh-640 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_windup-coil-f12-zh-640_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 11.44
+PASS windup-coil-f12-en-640 selects frame 12 (got 12)
+PASS windup-coil-f12-en-640 telegraph label visibility
+PASS windup-coil-f12-en-640 telegraph label bottom 204 clears the coiled sentry top 213
+PASS windup-coil-f12-en-640 ring stays visible around the coiled pose (3213 px)
+PASS windup-coil-f12-en-640 capture is (640, 360)
+PASS windup-coil-f12-en-640 on-screen sentry matches strip frame 12 at the anchor (0.993)
+PASS windup-coil-f12-en-640 eye 1.000 and claw 0.869 visible at the 53 px melee spacing
+PASS windup-coil-f12-en-640 file name 89 chars (<= 121)
+PASS windup-coil-f12-en-640 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_windup-coil-f12-en-640_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 11.56
+PASS windup-full-f13-zh-640 selects frame 13 (got 13)
+PASS windup-full-f13-zh-640 telegraph label visibility
+PASS windup-full-f13-zh-640 telegraph label bottom 204 clears the coiled sentry top 212
+PASS windup-full-f13-zh-640 ring stays visible around the coiled pose (3212 px)
+PASS windup-full-f13-zh-640 capture is (640, 360)
+PASS windup-full-f13-zh-640 on-screen sentry matches strip frame 13 at the anchor (0.989)
+PASS windup-full-f13-zh-640 eye 1.000 and claw 0.815 visible at the 53 px melee spacing
+PASS windup-full-f13-zh-640 file name 89 chars (<= 121)
+PASS windup-full-f13-zh-640 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_windup-full-f13-zh-640_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 11.28
+PASS windup-full-f13-en-640 selects frame 13 (got 13)
+PASS windup-full-f13-en-640 telegraph label visibility
+PASS windup-full-f13-en-640 telegraph label bottom 204 clears the coiled sentry top 212
+PASS windup-full-f13-en-640 ring stays visible around the coiled pose (3212 px)
+PASS windup-full-f13-en-640 capture is (640, 360)
+PASS windup-full-f13-en-640 on-screen sentry matches strip frame 13 at the anchor (0.989)
+PASS windup-full-f13-en-640 eye 1.000 and claw 0.815 visible at the 53 px melee spacing
+PASS windup-full-f13-en-640 file name 89 chars (<= 121)
+PASS windup-full-f13-en-640 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_windup-full-f13-en-640_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 12.37
+PASS strike-lunge-f14-zh-640 selects frame 14 (got 14)
+PASS strike-lunge-f14-zh-640 hit lands for 18 (60 -> 42)
+PASS strike-lunge-f14-zh-640 telegraph label visibility
+PASS strike-lunge-f14-zh-640 capture is (640, 360)
+PASS strike-lunge-f14-zh-640 on-screen sentry matches strip frame 14 at the anchor (1.000)
+PASS strike-lunge-f14-zh-640 eye 1.000 and claw 1.000 visible at the 53 px melee spacing
+PASS strike-lunge-f14-zh-640 sentry on top where they overlap ({"heroOpaquePx":2045,"heroShown":0,"overlap":127,"sentryShown":127})
+PASS strike-lunge-f14-zh-640 file name 90 chars (<= 121)
+PASS strike-lunge-f14-zh-640 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_strike-lunge-f14-zh-640_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 11.37
+PASS strike-lunge-f14-en-640 selects frame 14 (got 14)
+PASS strike-lunge-f14-en-640 hit lands for 18 (60 -> 42)
+PASS strike-lunge-f14-en-640 telegraph label visibility
+PASS strike-lunge-f14-en-640 capture is (640, 360)
+PASS strike-lunge-f14-en-640 on-screen sentry matches strip frame 14 at the anchor (1.000)
+PASS strike-lunge-f14-en-640 eye 1.000 and claw 1.000 visible at the 53 px melee spacing
+PASS strike-lunge-f14-en-640 sentry on top where they overlap ({"heroOpaquePx":2045,"heroShown":0,"overlap":127,"sentryShown":127})
+PASS strike-lunge-f14-en-640 file name 90 chars (<= 121)
+PASS strike-lunge-f14-en-640 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_strike-lunge-f14-en-640_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 11.72
+PASS strike-recoil-f15-zh-640 selects frame 15 (got 15)
+PASS strike-recoil-f15-zh-640 hit lands for 18 (60 -> 42)
+PASS strike-recoil-f15-zh-640 telegraph label visibility
+PASS strike-recoil-f15-zh-640 capture is (640, 360)
+PASS strike-recoil-f15-zh-640 on-screen sentry matches strip frame 15 at the anchor (1.000)
+PASS strike-recoil-f15-zh-640 eye 1.000 and claw 1.000 visible at the 53 px melee spacing
+PASS strike-recoil-f15-zh-640 sentry on top where they overlap ({"heroOpaquePx":2045,"heroShown":0,"overlap":26,"sentryShown":26})
+PASS strike-recoil-f15-zh-640 file name 91 chars (<= 121)
+PASS strike-recoil-f15-zh-640 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_strike-recoil-f15-zh-640_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 11.56
+PASS strike-recoil-f15-en-640 selects frame 15 (got 15)
+PASS strike-recoil-f15-en-640 hit lands for 18 (60 -> 42)
+PASS strike-recoil-f15-en-640 telegraph label visibility
+PASS strike-recoil-f15-en-640 capture is (640, 360)
+PASS strike-recoil-f15-en-640 on-screen sentry matches strip frame 15 at the anchor (1.000)
+PASS strike-recoil-f15-en-640 eye 1.000 and claw 1.000 visible at the 53 px melee spacing
+PASS strike-recoil-f15-en-640 sentry on top where they overlap ({"heroOpaquePx":2045,"heroShown":0,"overlap":26,"sentryShown":26})
+PASS strike-recoil-f15-en-640 file name 91 chars (<= 121)
+PASS strike-recoil-f15-en-640 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_strike-recoil-f15-en-640_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 11.73
+PASS hit-shutter-f16-zh-640 selects frame 16 (got 16)
+PASS hit-shutter-f16-zh-640 telegraph label visibility
+PASS hit-shutter-f16-zh-640 capture is (640, 360)
+PASS hit-shutter-f16-zh-640 on-screen sentry matches strip frame 16 at the anchor (0.999)
+PASS hit-shutter-f16-zh-640 eye 1.000 and claw 0.995 visible at the 53 px melee spacing
+PASS hit-shutter-f16-zh-640 hero on top where they overlap ({"heroOpaquePx":1964,"heroShown":5,"overlap":5,"sentryShown":0})
+PASS hit-shutter-f16-zh-640 file name 89 chars (<= 121)
+PASS hit-shutter-f16-zh-640 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_hit-shutter-f16-zh-640_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 11.12
+PASS hit-shutter-f16-en-640 selects frame 16 (got 16)
+PASS hit-shutter-f16-en-640 telegraph label visibility
+PASS hit-shutter-f16-en-640 capture is (640, 360)
+PASS hit-shutter-f16-en-640 on-screen sentry matches strip frame 16 at the anchor (0.999)
+PASS hit-shutter-f16-en-640 eye 1.000 and claw 0.995 visible at the 53 px melee spacing
+PASS hit-shutter-f16-en-640 hero on top where they overlap ({"heroOpaquePx":1964,"heroShown":5,"overlap":5,"sentryShown":0})
+PASS hit-shutter-f16-en-640 file name 89 chars (<= 121)
+PASS hit-shutter-f16-en-640 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_hit-shutter-f16-en-640_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 11.21
+PASS hit-recover-sword-thrust-f17-zh-640 selects frame 17 (got 17)
+PASS hit-recover-sword-thrust-f17-zh-640 telegraph label visibility
+PASS hit-recover-sword-thrust-f17-zh-640 capture is (640, 360)
+PASS hit-recover-sword-thrust-f17-zh-640 on-screen sentry matches strip frame 17 at the anchor (0.979)
+PASS hit-recover-sword-thrust-f17-zh-640 eye 0.866 and claw 0.995 visible at the 53 px melee spacing
+PASS hit-recover-sword-thrust-f17-zh-640 hero on top where they overlap ({"heroOpaquePx":2240,"heroShown":79,"overlap":79,"sentryShown":0})
+PASS hit-recover-sword-thrust-f17-zh-640 file name 102 chars (<= 121)
+PASS hit-recover-sword-thrust-f17-zh-640 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_hit-recover-sword-thrust-f17-zh-640_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 11.50
+PASS hit-recover-sword-thrust-f17-en-640 selects frame 17 (got 17)
+PASS hit-recover-sword-thrust-f17-en-640 telegraph label visibility
+PASS hit-recover-sword-thrust-f17-en-640 capture is (640, 360)
+PASS hit-recover-sword-thrust-f17-en-640 on-screen sentry matches strip frame 17 at the anchor (0.979)
+PASS hit-recover-sword-thrust-f17-en-640 eye 0.866 and claw 0.995 visible at the 53 px melee spacing
+PASS hit-recover-sword-thrust-f17-en-640 hero on top where they overlap ({"heroOpaquePx":2240,"heroShown":79,"overlap":79,"sentryShown":0})
+PASS hit-recover-sword-thrust-f17-en-640 file name 102 chars (<= 121)
+PASS hit-recover-sword-thrust-f17-en-640 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_hit-recover-sword-thrust-f17-en-640_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 12.26
+PASS defeat-hold-f20-inspect-zh-640 selects frame 20 (got 20)
+PASS defeat-hold-f20-inspect-zh-640 telegraph label visibility
+PASS defeat-hold-f20-inspect-zh-640 capture is (640, 360)
+PASS defeat-hold-f20-inspect-zh-640 on-screen sentry matches strip frame 20 at the anchor (1.000)
+PASS defeat-hold-f20-inspect-zh-640 file name 97 chars (<= 121)
+PASS defeat-hold-f20-inspect-zh-640 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_defeat-hold-f20-inspect-zh-640_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 10.86
+PASS defeat-hold-f20-inspect-en-640 selects frame 20 (got 20)
+PASS defeat-hold-f20-inspect-en-640 telegraph label visibility
+PASS defeat-hold-f20-inspect-en-640 capture is (640, 360)
+PASS defeat-hold-f20-inspect-en-640 on-screen sentry matches strip frame 20 at the anchor (1.000)
+PASS defeat-hold-f20-inspect-en-640 file name 97 chars (<= 121)
+PASS defeat-hold-f20-inspect-en-640 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_defeat-hold-f20-inspect-en-640_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 11.14
+PASS defeat-hold-f20-result-zh-640 selects frame 20 (got 20)
+PASS defeat-hold-f20-result-zh-640 telegraph label visibility
+PASS defeat-hold-f20-result-zh-640 capture is (640, 360)
+PASS defeat-hold-f20-result-zh-640 file name 96 chars (<= 121)
+PASS defeat-hold-f20-result-zh-640 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_defeat-hold-f20-result-zh-640_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 11.18
+PASS defeat-hold-f20-result-en-640 selects frame 20 (got 20)
+PASS defeat-hold-f20-result-en-640 telegraph label visibility
+PASS defeat-hold-f20-result-en-640 capture is (640, 360)
+PASS defeat-hold-f20-result-en-640 file name 96 chars (<= 121)
+PASS defeat-hold-f20-result-en-640 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_defeat-hold-f20-result-en-640_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 11.43
+PASS v1-replay-windup-full-zh-640 selects frame 9 (got 9)
+PASS v1-replay-windup-full-zh-640 telegraph label visibility
+PASS v1-replay-windup-full-zh-640 capture is (640, 360)
+PASS v1-replay-windup-full-zh-640 on-screen sentry matches strip frame 9 at the anchor (0.950)
+PASS v1-replay-windup-full-zh-640 file name 95 chars (<= 121)
+PASS v1-replay-windup-full-zh-640 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_v1-replay-windup-full-zh-640_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 11.55
+PASS v1-replay-windup-full-en-640 selects frame 9 (got 9)
+PASS v1-replay-windup-full-en-640 telegraph label visibility
+PASS v1-replay-windup-full-en-640 capture is (640, 360)
+PASS v1-replay-windup-full-en-640 on-screen sentry matches strip frame 9 at the anchor (0.950)
+PASS v1-replay-windup-full-en-640 file name 95 chars (<= 121)
+PASS v1-replay-windup-full-en-640 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_v1-replay-windup-full-en-640_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 12.48
+PASS v1-replay-hit-recover-sword-thrust-zh-640 selects frame 13 (got 13)
+PASS v1-replay-hit-recover-sword-thrust-zh-640 telegraph label visibility
+PASS v1-replay-hit-recover-sword-thrust-zh-640 capture is (640, 360)
+PASS v1-replay-hit-recover-sword-thrust-zh-640 on-screen sentry matches strip frame 13 at the anchor (0.857)
+PASS v1-replay-hit-recover-sword-thrust-zh-640 hero on top where they overlap ({"heroOpaquePx":2240,"heroShown":493,"overlap":493,"sentryShown":0})
+PASS v1-replay-hit-recover-sword-thrust-zh-640 file name 108 chars (<= 121)
+PASS v1-replay-hit-recover-sword-thrust-zh-640 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_v1-replay-hit-recover-sword-thrust-zh-640_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 11.54
+PASS v1-replay-hit-recover-sword-thrust-en-640 selects frame 13 (got 13)
+PASS v1-replay-hit-recover-sword-thrust-en-640 telegraph label visibility
+PASS v1-replay-hit-recover-sword-thrust-en-640 capture is (640, 360)
+PASS v1-replay-hit-recover-sword-thrust-en-640 on-screen sentry matches strip frame 13 at the anchor (0.857)
+PASS v1-replay-hit-recover-sword-thrust-en-640 hero on top where they overlap ({"heroOpaquePx":2240,"heroShown":493,"overlap":493,"sentryShown":0})
+PASS v1-replay-hit-recover-sword-thrust-en-640 file name 108 chars (<= 121)
+PASS v1-replay-hit-recover-sword-thrust-en-640 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_v1-replay-hit-recover-sword-thrust-en-640_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 8.03
+PASS static-fallback-windup-zh-640 selects frame -1 (got -1)
+PASS static-fallback-windup-zh-640 telegraph label visibility
+PASS static-fallback-windup-zh-640 capture is (640, 360)
+PASS static-fallback-windup-zh-640 file name 96 chars (<= 121)
+PASS static-fallback-windup-zh-640 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_static-fallback-windup-zh-640_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 7.96
+PASS static-fallback-windup-en-640 selects frame -1 (got -1)
+PASS static-fallback-windup-en-640 telegraph label visibility
+PASS static-fallback-windup-en-640 capture is (640, 360)
+PASS static-fallback-windup-en-640 file name 96 chars (<= 121)
+PASS static-fallback-windup-en-640 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_static-fallback-windup-en-640_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 5.41
+PASS default-off-placeholder-windup-zh-640 selects frame -2 (got -2)
+PASS default-off-placeholder-windup-zh-640 telegraph label visibility
+PASS default-off-placeholder-windup-zh-640 capture is (640, 360)
+PASS default-off-placeholder-windup-zh-640 file name 104 chars (<= 121)
+PASS default-off-placeholder-windup-zh-640 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_default-off-placeholder-windup-zh-640_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 4.91
+PASS default-off-placeholder-windup-en-640 selects frame -2 (got -2)
+PASS default-off-placeholder-windup-en-640 telegraph label visibility
+PASS default-off-placeholder-windup-en-640 capture is (640, 360)
+PASS default-off-placeholder-windup-en-640 file name 104 chars (<= 121)
+PASS default-off-placeholder-windup-en-640 capture saved
+CAPTURED C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_default-off-placeholder-windup-en-640_20261018-102755-e4b20e2e.png
+BATTLE_TRANSITION_MS 13.29
+PASS solo crop (640) selects frame 0 (idle)
+PASS solo crop (640) frame 0 (idle) renders the strip cell on screen (1.000)
+PASS solo-640-f00-idle crop 0 saved (92-char name)
+BATTLE_TRANSITION_MS 11.87
+PASS solo crop (640) selects frame 1 (idle)
+PASS solo crop (640) frame 1 (idle) renders the strip cell on screen (1.000)
+PASS solo-640-f01-idle crop 0 saved (92-char name)
+BATTLE_TRANSITION_MS 11.89
+PASS solo crop (640) selects frame 2 (idle)
+PASS solo crop (640) frame 2 (idle) renders the strip cell on screen (1.000)
+PASS solo-640-f02-idle crop 0 saved (92-char name)
+BATTLE_TRANSITION_MS 11.95
+PASS solo crop (640) selects frame 3 (idle)
+PASS solo crop (640) frame 3 (idle) renders the strip cell on screen (1.000)
+PASS solo-640-f03-idle crop 0 saved (92-char name)
+BATTLE_TRANSITION_MS 11.48
+PASS solo crop (640) selects frame 4 (move)
+PASS solo crop (640) frame 4 (move) renders the strip cell on screen (1.000)
+PASS solo-640-f04-move crop 0 saved (92-char name)
+BATTLE_TRANSITION_MS 13.03
+PASS solo crop (640) selects frame 5 (move)
+PASS solo crop (640) frame 5 (move) renders the strip cell on screen (1.000)
+PASS solo-640-f05-move crop 0 saved (92-char name)
+BATTLE_TRANSITION_MS 12.54
+PASS solo crop (640) selects frame 6 (move)
+PASS solo crop (640) frame 6 (move) renders the strip cell on screen (1.000)
+PASS solo-640-f06-move crop 0 saved (92-char name)
+BATTLE_TRANSITION_MS 13.79
+PASS solo crop (640) selects frame 7 (move)
+PASS solo crop (640) frame 7 (move) renders the strip cell on screen (1.000)
+PASS solo-640-f07-move crop 0 saved (92-char name)
+BATTLE_TRANSITION_MS 14.96
+PASS solo crop (640) selects frame 8 (move)
+PASS solo crop (640) frame 8 (move) renders the strip cell on screen (1.000)
+PASS solo-640-f08-move crop 0 saved (92-char name)
+BATTLE_TRANSITION_MS 12.73
+PASS solo crop (640) selects frame 9 (move)
+PASS solo crop (640) frame 9 (move) renders the strip cell on screen (1.000)
+PASS solo-640-f09-move crop 0 saved (92-char name)
+BATTLE_TRANSITION_MS 25.82
+PASS solo crop (640) selects frame 10 (move)
+PASS solo crop (640) frame 10 (move) renders the strip cell on screen (1.000)
+PASS solo-640-f10-move crop 0 saved (92-char name)
+BATTLE_TRANSITION_MS 13.30
+PASS solo crop (640) selects frame 11 (move)
+PASS solo crop (640) frame 11 (move) renders the strip cell on screen (1.000)
+PASS solo-640-f11-move crop 0 saved (92-char name)
+BATTLE_TRANSITION_MS 12.45
+PASS solo crop (640) selects frame 12 (windup)
+PASS solo crop (640) frame 12 (windup) renders the strip cell on screen (1.000)
+PASS solo-640-f12-windup crop 0 saved (94-char name)
+BATTLE_TRANSITION_MS 11.47
+PASS solo crop (640) selects frame 13 (windup)
+PASS solo crop (640) frame 13 (windup) renders the strip cell on screen (1.000)
+PASS solo-640-f13-windup crop 0 saved (94-char name)
+BATTLE_TRANSITION_MS 11.71
+PASS solo crop (640) selects frame 14 (strike)
+PASS solo crop (640) frame 14 (strike) renders the strip cell on screen (1.000)
+PASS solo-640-f14-strike crop 0 saved (94-char name)
+BATTLE_TRANSITION_MS 12.77
+PASS solo crop (640) selects frame 15 (strike)
+PASS solo crop (640) frame 15 (strike) renders the strip cell on screen (1.000)
+PASS solo-640-f15-strike crop 0 saved (94-char name)
+BATTLE_TRANSITION_MS 11.71
+PASS solo crop (640) selects frame 16 (hit)
+PASS solo crop (640) frame 16 (hit) renders the strip cell on screen (1.000)
+PASS solo-640-f16-hit crop 0 saved (91-char name)
+BATTLE_TRANSITION_MS 13.11
+PASS solo crop (640) selects frame 17 (hit)
+PASS solo crop (640) frame 17 (hit) renders the strip cell on screen (1.000)
+PASS solo-640-f17-hit crop 0 saved (91-char name)
+BATTLE_TRANSITION_MS 12.23
+PASS solo crop (640) selects frame 18 (defeat)
+PASS solo crop (640) frame 18 (defeat) renders the strip cell on screen (1.000)
+PASS solo-640-f18-defeat crop 0 saved (94-char name)
+BATTLE_TRANSITION_MS 13.40
+PASS solo crop (640) selects frame 19 (defeat)
+PASS solo crop (640) frame 19 (defeat) renders the strip cell on screen (1.000)
+PASS solo-640-f19-defeat crop 0 saved (94-char name)
+BATTLE_TRANSITION_MS 12.08
+PASS solo crop (640) selects frame 20 (defeat)
+PASS solo crop (640) frame 20 (defeat) renders the strip cell on screen (1.000)
+PASS solo-640-f20-defeat crop 0 saved (94-char name)
+PASS manifest written
+MANIFEST C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/game/../outputs/sentry-v2-optin-unapproved-v01_20261018-102755-e4b20e2e/rpg-2-star-ocean-the-second_sentry-v2_capture-manifest_20261018-102755-e4b20e2e.json
+SENTRY_V2_OPTIN PASS checks=789 frames=21 captures=60 crops=78
