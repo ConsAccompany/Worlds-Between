@@ -96,15 +96,16 @@ def main():
     }
     pending = {"P_pixelorama_cli_round_trip": "skipped (no binary here); pending locally" if p.get("skipped") else
                all(p[e]["split"]["exit"] == 0 and all(p[e]["split"]["layers_exact"].values()) and p[e]["flat"]["exact"] for e in ("pxo", "ora")),
-               "G_godot_capture": "not run: no Godot binary here; pending locally"}
+               "G_godot_capture": "Godot is not run by this source checker; see separate v04 Godot test-only evidence"}
     rep["gates"], rep["pending"] = gates, pending
     rep["gates_passed"] = f"{sum(gates.values())}/{len(gates)}"
-    Path(a.report).write_text(json.dumps(rep, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    report = Path(a.report).resolve()
+    report.write_text(json.dumps(rep, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     for k, v in gates.items():
         print(("PASS " if v else "FAIL ") + k)
     for k, v in pending.items():
         print("PENDING " + k + ": " + str(v))
-    print("GATES", rep["gates_passed"], Path(a.report).relative_to(ROOT))
+    print("GATES", rep["gates_passed"], report.relative_to(ROOT) if report.is_relative_to(ROOT) else report)
 
 
 if __name__ == "__main__":
