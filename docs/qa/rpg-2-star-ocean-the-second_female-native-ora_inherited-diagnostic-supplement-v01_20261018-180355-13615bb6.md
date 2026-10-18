@@ -1,0 +1,7 @@
+# Supplemental finding: native ORA export correctness is separate from diagnostic-clean opening
+
+During the four-direction idle task, independent Pixelorama1.2.3 ORA exports were pixel-exact and exited0 but emitted three get_child index errors, rp_node/ancestor/ensure_control_visible diagnostics and exit cleanup warnings. Hidden windowed rendering and grace-exit variants reproduced the behavior. The primary animated PXOs did not emit those parser/ancestry diagnostics (headless shader backend messages remain verbatim in the report).
+
+A fresh isolated process opened the **unchanged committed WEST static ORA** and exported all12 visible roles. It reproduced the same UI/cleanup diagnostics. The control's source remains unchanged, and its verbatim output is preserved in the idle package. This finding qualifies earlier WEST/EAST native-source QA: their pixel-exact native ORA exports are valid evidence of exported role content, but do not prove clean GUI opening or native Save As/reopen. EAST is not asserted to have been separately rerun in this control.
+
+For idle production, the four multiframe native PXOs are primary editable source. Per-phase ORAs remain supplemental interchange archives with the disclosed native CLI diagnostic limitation. Strict diagnostic results remain failed; no log filtering is used to promote ORA status. No art, motion or creator approval is supplied by this format choice. Native GUI Save As remains a separate pending check.
