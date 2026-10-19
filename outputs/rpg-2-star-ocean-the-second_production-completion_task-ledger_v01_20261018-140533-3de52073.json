@@ -2,7 +2,7 @@
   "id": "rpg-2-star-ocean-the-second_production-completion_v01",
   "schemaVersion": 2,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-19T22:04:56Z",
+  "updatedAt": "2026-10-19T22:09:45Z",
   "zh": "制作完成度任务台账：衡量已完成的工作量（编码 40% + 内容 60%）；检查／审查与创作者批准分开计量，均不改变制作分；免除的审查不算已执行的工作；运营任务列出负责方但不计百分比。",
   "en": "Production-completion task ledger: measures work done (coding 40% + content 60%); inspection/review and creator approval are separate meters and never change production credit; waived reviews are not performed work; operations tasks list owners but carry no percentage.",
   "brief": "docs/rpg-2-star-ocean-the-second_production-completion_bilingual-brief_v01_20261018-140533-3ea2a621.md",
@@ -532,6 +532,22 @@
         },
         "previousTaskSetSha256": "38644dbd8cddaf89caf88c6f71157639c81b1c047db0282d3fe3215c41355ab2",
         "taskSetSha256": "5e60144bcca367fec043bc1bc9709d2ca1c4067e17c0502ee23b1a978389a69a"
+      },
+      {
+        "at": "2026-10-19T22:09:45Z",
+        "kind": "owner-assignment",
+        "taskId": "content.char.protagonist-female.display",
+        "fromOwner": "claude",
+        "toOwner": "deepseek",
+        "changedTaskIds": [
+          "content.char.protagonist-female.display"
+        ],
+        "reason": {
+          "zh": "",
+          "en": "Creator-authorized dual-provider assignment: bounded existing-source female display crop/helper; Codex independently checks actual UI before production closeout."
+        },
+        "previousTaskSetSha256": "5e60144bcca367fec043bc1bc9709d2ca1c4067e17c0502ee23b1a978389a69a",
+        "taskSetSha256": "271902a4e49cbd02715d93f11cc37b9bf95eb9a5ed27c1fd1bdbfb0313f52d1e"
       }
     ],
     "pointsByStage": {
@@ -702,23 +718,24 @@
     },
     "byOwner": {
       "claude": {
-        "tasks": 738,
+        "tasks": 737,
         "operationsTasks": 0,
-        "points": 1929,
+        "points": 1927,
         "pointsDone": 377,
         "byStatus": {
           "done": 89,
-          "todo": 649
+          "todo": 648
         },
         "readyInQueue": 0,
         "revisionsBlockingApproval": 2
       },
       "deepseek": {
-        "tasks": 4,
+        "tasks": 5,
         "operationsTasks": 0,
-        "points": 18,
+        "points": 20,
         "pointsDone": 18,
         "byStatus": {
+          "todo": 1,
           "done": 4
         },
         "readyInQueue": 0,
@@ -1438,7 +1455,7 @@
     {"id":"content.char.protagonist-female.walk-west","type":"native-pixel","title":{"zh":"主角·女 · 西向行走／跑动","en":"Female protagonist · west walk/run"},"area":"characters","stage":"content","owner":"codex","status":"done","points":3,"doneCriterion":{"zh":"西向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"west walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.protagonist-female.static-west"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_female-west-run_codex-integration-verdict_unapproved-v01_20261018-183919-c631a052.md","outputs/female-west-run-stop-v01/rpg-2-star-ocean-the-second_female-west-run-stop_evidence-manifest_v01_20261018-183043-c704ea98.json"],"subject":{"kind":"character-variant","id":"protagonist-female"},"statusAt":"2026-10-18T22:39:20Z","note":{"zh":"","en":"One authored west cycle and phase-responsive stop committed; canonical25260 exact-boundary and2150 source/native evidence checks pass; sampled gameplay inspected. Motion/art/fullset approval remains separate."}},
     {"id":"content.char.protagonist-female.walk-north","type":"native-pixel","title":{"zh":"主角·女 · 北向行走／跑动","en":"Female protagonist · north walk/run"},"area":"characters","stage":"content","owner":"claude","status":"done","points":3,"doneCriterion":{"zh":"北向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"north walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.protagonist-female.static-north"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_female-north_root-production-closeout_v06_20261019-005555-a983112d.md","docs/qa/rpg-2-star-ocean-the-second_female-north-run-stop_mechanical-fix-unapproved-v06_20261019-001844-7759f49b.md"],"subject":{"kind":"character-variant","id":"protagonist-female"},"statusAt":"2026-10-19T04:56:14Z","note":{"zh":"","en":"Frozen v06 stop/repress fix, full78636/0 matrix, actual EN30/ZH60 captures and normal1x movies, exact editable native run/stop package and independently reconstructed2201/0 archive checks. Production only; steady gait appearance/default adoption/creator approval remain separate."}},
     {"id":"content.char.protagonist-female.walk-east","type":"native-pixel","title":{"zh":"主角·女 · 东向行走／跑动","en":"Female protagonist · east walk/run"},"area":"characters","stage":"content","owner":"codex","status":"done","points":3,"doneCriterion":{"zh":"东向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"east walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.protagonist-female.static-east"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_female-east-run-stop_codex-integration-closeout_unapproved-v03_20261018-201500-c4829d7e.md","outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run-stop_evidence-manifest_v03_20261018-194932-3a1839f6.json"],"subject":{"kind":"character-variant","id":"protagonist-female"},"statusAt":"2026-10-19T00:16:00Z","note":{"zh":"东向跑动与停步原生源文件及证据已提交；制作完成，画质、流畅度与完整实装验收另计。","en":"Committed e115c70: authored EAST cycle and stop, editable 128/15-frame native sources; independent 15744 body and25381 contact checks plus239 portable gates. Production complete; test presenter only, art/fluidity approval and full runtime adoption separate."}},
-    {"id":"content.char.protagonist-female.display","type":"native-pixel","title":{"zh":"主角·女 · 游戏内展示图","en":"Female protagonist · in-game display image"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"游戏内展示图已提交并在界面中显示","en":"The in-game display image is committed and shown in the UI"},"dependsOn":["content.char.protagonist-female.static-south"],"evidence":[],"subject":{"kind":"character-variant","id":"protagonist-female"}},
+    {"id":"content.char.protagonist-female.display","type":"native-pixel","title":{"zh":"主角·女 · 游戏内展示图","en":"Female protagonist · in-game display image"},"area":"characters","stage":"content","owner":"deepseek","status":"todo","points":2,"doneCriterion":{"zh":"游戏内展示图已提交并在界面中显示","en":"The in-game display image is committed and shown in the UI"},"dependsOn":["content.char.protagonist-female.static-south"],"evidence":[],"subject":{"kind":"character-variant","id":"protagonist-female"}},
     {"id":"content.char.protagonist-female.runtime-integration","type":"integration","title":{"zh":"主角·女 · 运行时默认接入","en":"Female protagonist · runtime default integration"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"整套四方向待机与行走默认在游戏中使用","en":"The full four-direction idle+walk set is used in the game by default"},"dependsOn":["content.char.protagonist-female.idle-anim","content.char.protagonist-female.walk-south","content.char.protagonist-female.walk-west","content.char.protagonist-female.walk-north","content.char.protagonist-female.walk-east","code.runtime.character-sprite-pipeline"],"evidence":[],"subject":{"kind":"character-variant","id":"protagonist-female"}},
     {"id":"qa.char.protagonist-female.runtime-set-check","type":"technical-check","title":{"zh":"主角·女 · 运行时整套技术检查","en":"Female protagonist · runtime set technical check"},"area":"characters","stage":"technical-inspection","owner":"claude","status":"todo","points":1,"doneCriterion":{"zh":"Godot 实机检查（帧、锚点、方向、滑步）全部通过","en":"Godot checks (frames, anchors, directions, slip) all pass"},"dependsOn":["content.char.protagonist-female.runtime-integration"],"evidence":[],"subject":{"kind":"character-variant","id":"protagonist-female"},"target":"content.char.protagonist-female.runtime-integration"},
     {"id":"review.char.protagonist-female.static-south","type":"visual-review","title":{"zh":"主角·女 · 南向静止帧视觉审查","en":"Female protagonist · south static visual review"},"area":"characters","stage":"visual-review","owner":"codex","status":"not_required","points":1,"doneCriterion":{"zh":"Codex 在 640×360 实机画面中审查并记录结论","en":"Codex reviews it in actual 640x360 captures and records a verdict"},"dependsOn":["content.char.protagonist-female.static-south"],"evidence":["docs/character-visuals/rpg-2-star-ocean-the-second_protagonist-female_south-idle-static-baseline-decision_m8-v08_20261015-022700-07161696.md"],"subject":{"kind":"character-variant","id":"protagonist-female"},"target":"content.char.protagonist-female.static-south","waivedBy":"creator.char.protagonist-female.approve-static-south"},
