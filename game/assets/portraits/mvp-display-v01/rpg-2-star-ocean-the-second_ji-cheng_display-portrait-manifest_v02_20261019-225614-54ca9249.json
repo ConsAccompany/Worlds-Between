@@ -1,0 +1,137 @@
+{
+  "schema": "ds-portrait/display-image-manifest/v1",
+  "content_id": "content.char.ji-cheng.display",
+  "package_id": "rpg-2-star-ocean-the-second_ji-cheng_display-portrait-crop_v02_20261019-225614-54ca9249",
+  "run": {
+    "timestamp_utc": "2026-10-19T22:56:14Z",
+    "timestamp_compact_utc": "20261019-225614",
+    "unique_id": "54ca9249",
+    "id": "20261019-225614-54ca9249"
+  },
+  "project": "rpg-2-star-ocean-the-second",
+  "subject": "ji-cheng",
+  "purpose": "display-portrait-crop",
+  "variant": "v02",
+  "source": {
+    "path": "outputs/rpg-2-star-ocean-the-second_ji-cheng_character-sheet_v01_20261013-190436-dcea1a37.png",
+    "sha256": "4165c47e28329e2d4fd2dd160886118a70cb06fd160172b90ba45f00584cc546",
+    "bytes": 2250336,
+    "width": 1916,
+    "height": 821,
+    "bit_depth": 8,
+    "color_type": 2,
+    "role": "unapproved-concept-sheet"
+  },
+  "crop": {
+    "left": 830,
+    "top": 10,
+    "right": 1190,
+    "bottom": 420,
+    "width": 360,
+    "height": 410,
+    "coordinate_space": "source pixels, top-left origin, right/bottom exclusive",
+    "method": "exact-pixel-rectangle-slice",
+    "resampled": false,
+    "repainted": false,
+    "ai_generated": false,
+    "background_removed": false,
+    "invented_pixels": false,
+    "pixel_count": 147600,
+    "ai_generated_field_scope": "No new generative processing; exact revised crop excludes neighboring portrait."
+  },
+  "image": {
+    "path": "rpg-2-star-ocean-the-second_ji-cheng_display-portrait-crop_v02_20261019-225614-54ca9249.png",
+    "sha256": "764f7615d5eb6b2ed49eac7f8fe05bfb32645e3dcaa4bd8a2f6186946143b761",
+    "bytes": 279927,
+    "width": 360,
+    "height": 410,
+    "format": "PNG",
+    "color": "RGBA8"
+  },
+  "layer": {
+    "name": "original-illustration-crop-830-10-1190-420",
+    "role": "original illustration crop preserved as one editable layer",
+    "width": 360,
+    "height": 410,
+    "sha256": "764f7615d5eb6b2ed49eac7f8fe05bfb32645e3dcaa4bd8a2f6186946143b761",
+    "native_png_equality": true
+  },
+  "outputs": [
+    {
+      "kind": "crop-png",
+      "path": "rpg-2-star-ocean-the-second_ji-cheng_display-portrait-crop_v02_20261019-225614-54ca9249.png",
+      "sha256": "764f7615d5eb6b2ed49eac7f8fe05bfb32645e3dcaa4bd8a2f6186946143b761",
+      "bytes": 279927,
+      "width": 360,
+      "height": 410
+    },
+    {
+      "kind": "editable-openraster-ora",
+      "path": "rpg-2-star-ocean-the-second_ji-cheng_display-portrait-editable_v02_20261019-225614-54ca9249.ora",
+      "sha256": "4adf8e515ee1d4e364f8b91d427198405f726887700087180c41d9dc3892aaed",
+      "bytes": 840622,
+      "openraster_version": "0.0.3",
+      "layers": 1,
+      "layer_sha256": "764f7615d5eb6b2ed49eac7f8fe05bfb32645e3dcaa4bd8a2f6186946143b761",
+      "layer_native_png_equality": true
+    }
+  ],
+  "display": {
+    "helper": "rpg-2-star-ocean-the-second_mvp-display_portrait-helper_v01_20261019-185434-7c95e421.gd",
+    "variant_key": "ji-cheng",
+    "content_id": "content.char.ji-cheng.display",
+    "image_path": "rpg-2-star-ocean-the-second_ji-cheng_display-portrait-crop_v02_20261019-225614-54ca9249.png",
+    "image_sha256": "764f7615d5eb6b2ed49eac7f8fe05bfb32645e3dcaa4bd8a2f6186946143b761",
+    "image_width": 360,
+    "image_height": 410,
+    "rect": {
+      "x": 522,
+      "y": 88,
+      "width": 96,
+      "height": 124
+    },
+    "stretch_mode": "KEEP_ASPECT_CENTERED",
+    "appearance_required": "any",
+    "member_id_required": "ji-cheng",
+    "selection_rule": "selected_id-whitelist",
+    "panel_condition": "node_panel_hidden",
+    "pilot_flag": "--mvp-display-portraits-pilot",
+    "draw_order": "above-background-below-node-overlay"
+  },
+  "provenance": {
+    "source_status": "unapproved-concept-source",
+    "original_source_ai_generated": true,
+    "new_generative_processing": false,
+    "unapproved": true,
+    "accepted_character_canon": false,
+    "approved_static": false,
+    "full_sprite_approved": false,
+    "human_artist": false,
+    "approval": "none",
+    "approval_note": "Root requested narrower exact source crop to remove neighbor fringe; AI-generated unapproved concept source, no new generative processing and no art/canon approval.",
+    "new_identity_created": false,
+    "semantic_anatomy_claims": false,
+    "handpainted_claims": false
+  },
+  "verification": {
+    "builder": "tools/rpg-2-star-ocean-the-second_mvp-display_portrait-builder_v01_20261019-185434-7c95e421.py",
+    "python": "3.12.14",
+    "stdlib_only": true,
+    "checks": {
+      "source_sha256": true,
+      "source_dimensions": true,
+      "crop_dimensions": true,
+      "crop_rgba_pixels_equal_source_roi": true,
+      "crop_pixel_count": 147600,
+      "crop_png_redecoded_rgba": true,
+      "ora_single_layer": true,
+      "ora_layer_png_byte_equal_crop_png": true,
+      "ora_layer_native_dimensions": true,
+      "ora_layer_pixels_equal_crop": true,
+      "no_resample": true,
+      "no_repaint_or_ai": true,
+      "background_not_removed": true
+    },
+    "compression_note": "Ji v02 is rebuilt from exact revised ROI. Original too-wide producer Ji v01 retained as prior evidence. Other three original PNG/ORA compressed bytes are preserved."
+  }
+}

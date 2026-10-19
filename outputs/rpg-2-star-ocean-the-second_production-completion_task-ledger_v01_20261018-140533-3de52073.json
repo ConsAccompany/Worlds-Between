@@ -2,7 +2,7 @@
   "id": "rpg-2-star-ocean-the-second_production-completion_v01",
   "schemaVersion": 2,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-19T22:46:16Z",
+  "updatedAt": "2026-10-19T23:02:52Z",
   "zh": "制作完成度任务台账：衡量已完成的工作量（编码 40% + 内容 60%）；检查／审查与创作者批准分开计量，均不改变制作分；免除的审查不算已执行的工作；运营任务列出负责方但不计百分比。",
   "en": "Production-completion task ledger: measures work done (coding 40% + content 60%); inspection/review and creator approval are separate meters and never change production credit; waived reviews are not performed work; operations tasks list owners but carry no percentage.",
   "brief": "docs/rpg-2-star-ocean-the-second_production-completion_bilingual-brief_v01_20261018-140533-3ea2a621.md",
@@ -644,8 +644,8 @@
     "production": {
       "zh": "制作完成度",
       "en": "Production completion",
-      "percent": 52.7,
-      "percentLabel": "52.7%",
+      "percent": 53,
+      "percentLabel": "53.0%",
       "formula": "round1(40 * codingDonePoints/codingTotalPoints + 60 * contentDonePoints/contentTotalPoints)",
       "coding": {
         "done": 111,
@@ -656,12 +656,12 @@
         "tasksDone": 23
       },
       "content": {
-        "done": 398,
+        "done": 406,
         "total": 1881,
-        "percent": 21.2,
+        "percent": 21.6,
         "weight": 60,
         "tasks": 715,
-        "tasksDone": 129
+        "tasksDone": 133
       }
     },
     "inspection": {
@@ -726,11 +726,11 @@
         "waivedPoints": 0
       },
       "content": {
-        "done": 398,
+        "done": 406,
         "total": 1881,
-        "percent": 21.2,
+        "percent": 21.6,
         "tasks": 715,
-        "tasksDone": 129,
+        "tasksDone": 133,
         "waivedTasks": 0,
         "waivedPoints": 0
       },
@@ -797,10 +797,9 @@
         "tasks": 9,
         "operationsTasks": 0,
         "points": 28,
-        "pointsDone": 20,
+        "pointsDone": 28,
         "byStatus": {
-          "in_progress": 4,
-          "done": 5
+          "done": 9
         },
         "readyInQueue": 0,
         "revisionsBlockingApproval": 0
@@ -827,7 +826,7 @@
           "done": 17,
           "todo": 222
         },
-        "readyInQueue": 56,
+        "readyInQueue": 60,
         "revisionsBlockingApproval": 0
       }
     },
@@ -878,7 +877,7 @@
       },
       "characters": {
         "content": {
-          "done": 91,
+          "done": 99,
           "total": 1460
         },
         "technical-inspection": {
@@ -1010,7 +1009,7 @@
     "queue": {
       "zh": "待处理（依赖已完成）",
       "en": "Ready (dependencies done)",
-      "count": 57,
+      "count": 61,
       "items": [
         {
           "id": "creator.char.protagonist-male.approve-portrait",
@@ -1021,6 +1020,13 @@
         },
         {
           "id": "creator.char.protagonist-male.approve-static-south",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.protagonist-male.accept-display",
           "stage": "creator-approval",
           "owner": "creator",
           "status": "todo",
@@ -1042,6 +1048,13 @@
         },
         {
           "id": "creator.char.liang-xu.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.liang-xu.accept-display",
           "stage": "creator-approval",
           "owner": "creator",
           "status": "todo",
@@ -1091,6 +1104,13 @@
         },
         {
           "id": "creator.char.ji-cheng.approve-static-south",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.ji-cheng.accept-display",
           "stage": "creator-approval",
           "owner": "creator",
           "status": "todo",
@@ -1203,6 +1223,13 @@
         },
         {
           "id": "creator.char.zhao-ling.approve-static-south",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.zhao-ling.accept-display",
           "stage": "creator-approval",
           "owner": "creator",
           "status": "todo",
@@ -1507,7 +1534,7 @@
     {"id":"content.char.protagonist-male.walk-west","type":"native-pixel","title":{"zh":"主角·男 · 西向行走／跑动","en":"Male protagonist · west walk/run"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"西向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"west walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.protagonist-male.static-west"],"evidence":[],"subject":{"kind":"character-variant","id":"protagonist-male"}},
     {"id":"content.char.protagonist-male.walk-north","type":"native-pixel","title":{"zh":"主角·男 · 北向行走／跑动","en":"Male protagonist · north walk/run"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"北向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"north walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.protagonist-male.static-north"],"evidence":[],"subject":{"kind":"character-variant","id":"protagonist-male"}},
     {"id":"content.char.protagonist-male.walk-east","type":"native-pixel","title":{"zh":"主角·男 · 东向行走／跑动","en":"Male protagonist · east walk/run"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"东向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"east walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.protagonist-male.static-east"],"evidence":[],"subject":{"kind":"character-variant","id":"protagonist-male"}},
-    {"id":"content.char.protagonist-male.display","type":"native-pixel","title":{"zh":"主角·男 · 游戏内展示图","en":"Male protagonist · in-game display image"},"area":"characters","stage":"content","owner":"deepseek","status":"in_progress","points":2,"doneCriterion":{"zh":"游戏内展示图已提交并在界面中显示","en":"The in-game display image is committed and shown in the UI"},"dependsOn":["content.char.protagonist-male.static-south"],"evidence":[],"subject":{"kind":"character-variant","id":"protagonist-male"},"statusAt":"2026-10-19T22:45:47Z","note":{"zh":"","en":"Bounded DeepSeek package production active; no production credit until committed actual UI evidence is independently inspected."}},
+    {"id":"content.char.protagonist-male.display","type":"native-pixel","title":{"zh":"主角·男 · 游戏内展示图","en":"Male protagonist · in-game display image"},"area":"characters","stage":"content","owner":"deepseek","status":"done","points":2,"doneCriterion":{"zh":"游戏内展示图已提交并在界面中显示","en":"The in-game display image is committed and shown in the UI"},"dependsOn":["content.char.protagonist-male.static-south"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_mvp-display_four-crops-normal-integration_v01_20261019-185434-7c95e421.md","outputs/mvp-portraits-v01/rpg-2-star-ocean-the-second_mvp-display_source-bound-proof_v01_20261019-185434-7c95e421.json"],"subject":{"kind":"character-variant","id":"protagonist-male"},"statusAt":"2026-10-19T23:02:51Z","note":{"zh":"","en":"DeepSeek existing-concept exact crop, Codex package corrections and normal UI wiring;62package and121actualchecks. Creator approval/fullsprite/wholeUIportraitkit unchanged."}},
     {"id":"content.char.protagonist-male.runtime-integration","type":"integration","title":{"zh":"主角·男 · 运行时默认接入","en":"Male protagonist · runtime default integration"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"整套四方向待机与行走默认在游戏中使用","en":"The full four-direction idle+walk set is used in the game by default"},"dependsOn":["content.char.protagonist-male.idle-anim","content.char.protagonist-male.walk-south","content.char.protagonist-male.walk-west","content.char.protagonist-male.walk-north","content.char.protagonist-male.walk-east","code.runtime.character-sprite-pipeline"],"evidence":[],"subject":{"kind":"character-variant","id":"protagonist-male"}},
     {"id":"qa.char.protagonist-male.runtime-set-check","type":"technical-check","title":{"zh":"主角·男 · 运行时整套技术检查","en":"Male protagonist · runtime set technical check"},"area":"characters","stage":"technical-inspection","owner":"claude","status":"todo","points":1,"doneCriterion":{"zh":"Godot 实机检查（帧、锚点、方向、滑步）全部通过","en":"Godot checks (frames, anchors, directions, slip) all pass"},"dependsOn":["content.char.protagonist-male.runtime-integration"],"evidence":[],"subject":{"kind":"character-variant","id":"protagonist-male"},"target":"content.char.protagonist-male.runtime-integration"},
     {"id":"review.char.protagonist-male.static-south","type":"visual-review","title":{"zh":"主角·男 · 南向静止帧视觉审查","en":"Male protagonist · south static visual review"},"area":"characters","stage":"visual-review","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"Codex 在 640×360 实机画面中审查并记录结论","en":"Codex reviews it in actual 640x360 captures and records a verdict"},"dependsOn":["content.char.protagonist-male.static-south"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_protagonist-male_south-idle-v8pair-static-pilot_qa-note_unapproved-v01_20261018-130225-3fad02c7.md","outputs/rpg-2-star-ocean-the-second_mvp-progress_state_v01_20261013-183804-28a1c7e4.json"],"subject":{"kind":"character-variant","id":"protagonist-male"},"target":"content.char.protagonist-male.static-south","outcome":"technical-pass","note":{"zh":"root 仅接受为技术静止候选（closeout 6406bb8 记录的视觉判断）；美术未批准。","en":"Root accepted a technical static candidate only (visual findings in the 6406bb8 closeout); art unapproved."},"statusAt":"2026-10-18T13:02:25Z"},
@@ -1545,7 +1572,7 @@
     {"id":"content.char.liang-xu.walk-west","type":"native-pixel","title":{"zh":"梁序 · 西向行走／跑动","en":"Liang Xu · west walk/run"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"西向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"west walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.liang-xu.static-west"],"evidence":[],"subject":{"kind":"character-variant","id":"liang-xu"}},
     {"id":"content.char.liang-xu.walk-north","type":"native-pixel","title":{"zh":"梁序 · 北向行走／跑动","en":"Liang Xu · north walk/run"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"北向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"north walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.liang-xu.static-north"],"evidence":[],"subject":{"kind":"character-variant","id":"liang-xu"}},
     {"id":"content.char.liang-xu.walk-east","type":"native-pixel","title":{"zh":"梁序 · 东向行走／跑动","en":"Liang Xu · east walk/run"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"东向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"east walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.liang-xu.static-east"],"evidence":[],"subject":{"kind":"character-variant","id":"liang-xu"}},
-    {"id":"content.char.liang-xu.display","type":"native-pixel","title":{"zh":"梁序 · 游戏内展示图","en":"Liang Xu · in-game display image"},"area":"characters","stage":"content","owner":"deepseek","status":"in_progress","points":2,"doneCriterion":{"zh":"游戏内展示图已提交并在界面中显示","en":"The in-game display image is committed and shown in the UI"},"dependsOn":["content.char.liang-xu.static-south"],"evidence":[],"subject":{"kind":"character-variant","id":"liang-xu"},"statusAt":"2026-10-19T22:46:16Z","note":{"zh":"","en":"Bounded DeepSeek package production active; no production credit until committed actual UI evidence is independently inspected."}},
+    {"id":"content.char.liang-xu.display","type":"native-pixel","title":{"zh":"梁序 · 游戏内展示图","en":"Liang Xu · in-game display image"},"area":"characters","stage":"content","owner":"deepseek","status":"done","points":2,"doneCriterion":{"zh":"游戏内展示图已提交并在界面中显示","en":"The in-game display image is committed and shown in the UI"},"dependsOn":["content.char.liang-xu.static-south"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_mvp-display_four-crops-normal-integration_v01_20261019-185434-7c95e421.md","outputs/mvp-portraits-v01/rpg-2-star-ocean-the-second_mvp-display_source-bound-proof_v01_20261019-185434-7c95e421.json"],"subject":{"kind":"character-variant","id":"liang-xu"},"statusAt":"2026-10-19T23:02:51Z","note":{"zh":"","en":"DeepSeek existing-concept exact crop, Codex package corrections and normal UI wiring;62package and121actualchecks. Creator approval/fullsprite/wholeUIportraitkit unchanged."}},
     {"id":"content.char.liang-xu.runtime-integration","type":"integration","title":{"zh":"梁序 · 运行时默认接入","en":"Liang Xu · runtime default integration"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"整套四方向待机与行走默认在游戏中使用","en":"The full four-direction idle+walk set is used in the game by default"},"dependsOn":["content.char.liang-xu.idle-anim","content.char.liang-xu.walk-south","content.char.liang-xu.walk-west","content.char.liang-xu.walk-north","content.char.liang-xu.walk-east","code.runtime.character-sprite-pipeline"],"evidence":[],"subject":{"kind":"character-variant","id":"liang-xu"}},
     {"id":"qa.char.liang-xu.runtime-set-check","type":"technical-check","title":{"zh":"梁序 · 运行时整套技术检查","en":"Liang Xu · runtime set technical check"},"area":"characters","stage":"technical-inspection","owner":"claude","status":"todo","points":1,"doneCriterion":{"zh":"Godot 实机检查（帧、锚点、方向、滑步）全部通过","en":"Godot checks (frames, anchors, directions, slip) all pass"},"dependsOn":["content.char.liang-xu.runtime-integration"],"evidence":[],"subject":{"kind":"character-variant","id":"liang-xu"},"target":"content.char.liang-xu.runtime-integration"},
     {"id":"review.char.liang-xu.static-south","type":"visual-review","title":{"zh":"梁序 · 南向静止帧视觉审查","en":"Liang Xu · south static visual review"},"area":"characters","stage":"visual-review","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"Codex 在 640×360 实机画面中审查并记录结论","en":"Codex reviews it in actual 640x360 captures and records a verdict"},"dependsOn":["content.char.liang-xu.static-south"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_liang-xu_south-idle-static-pilot-codex-visual-audit_unapproved-v01_20261016-145125-76c4ab13.md"],"subject":{"kind":"character-variant","id":"liang-xu"},"target":"content.char.liang-xu.static-south","outcome":"changes_requested","statusAt":"2026-10-16T14:51:25Z"},
@@ -1830,7 +1857,7 @@
     {"id":"content.char.ji-cheng.walk-west","type":"native-pixel","title":{"zh":"纪澄 · 西向行走／跑动","en":"Ji Cheng · west walk/run"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"西向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"west walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.ji-cheng.static-west"],"evidence":[],"subject":{"kind":"character-variant","id":"ji-cheng"}},
     {"id":"content.char.ji-cheng.walk-north","type":"native-pixel","title":{"zh":"纪澄 · 北向行走／跑动","en":"Ji Cheng · north walk/run"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"北向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"north walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.ji-cheng.static-north"],"evidence":[],"subject":{"kind":"character-variant","id":"ji-cheng"}},
     {"id":"content.char.ji-cheng.walk-east","type":"native-pixel","title":{"zh":"纪澄 · 东向行走／跑动","en":"Ji Cheng · east walk/run"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"东向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"east walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.ji-cheng.static-east"],"evidence":[],"subject":{"kind":"character-variant","id":"ji-cheng"}},
-    {"id":"content.char.ji-cheng.display","type":"native-pixel","title":{"zh":"纪澄 · 游戏内展示图","en":"Ji Cheng · in-game display image"},"area":"characters","stage":"content","owner":"deepseek","status":"in_progress","points":2,"doneCriterion":{"zh":"游戏内展示图已提交并在界面中显示","en":"The in-game display image is committed and shown in the UI"},"dependsOn":["content.char.ji-cheng.static-south"],"evidence":[],"subject":{"kind":"character-variant","id":"ji-cheng"},"statusAt":"2026-10-19T22:46:16Z","note":{"zh":"","en":"Bounded DeepSeek package production active; no production credit until committed actual UI evidence is independently inspected."}},
+    {"id":"content.char.ji-cheng.display","type":"native-pixel","title":{"zh":"纪澄 · 游戏内展示图","en":"Ji Cheng · in-game display image"},"area":"characters","stage":"content","owner":"deepseek","status":"done","points":2,"doneCriterion":{"zh":"游戏内展示图已提交并在界面中显示","en":"The in-game display image is committed and shown in the UI"},"dependsOn":["content.char.ji-cheng.static-south"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_mvp-display_four-crops-normal-integration_v01_20261019-185434-7c95e421.md","outputs/mvp-portraits-v01/rpg-2-star-ocean-the-second_mvp-display_source-bound-proof_v01_20261019-185434-7c95e421.json"],"subject":{"kind":"character-variant","id":"ji-cheng"},"statusAt":"2026-10-19T23:02:52Z","note":{"zh":"","en":"DeepSeek existing-concept exact crop, Codex package corrections and normal UI wiring;62package and121actualchecks. Creator approval/fullsprite/wholeUIportraitkit unchanged."}},
     {"id":"content.char.ji-cheng.runtime-integration","type":"integration","title":{"zh":"纪澄 · 运行时默认接入","en":"Ji Cheng · runtime default integration"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"整套四方向待机与行走默认在游戏中使用","en":"The full four-direction idle+walk set is used in the game by default"},"dependsOn":["content.char.ji-cheng.idle-anim","content.char.ji-cheng.walk-south","content.char.ji-cheng.walk-west","content.char.ji-cheng.walk-north","content.char.ji-cheng.walk-east","code.runtime.character-sprite-pipeline"],"evidence":[],"subject":{"kind":"character-variant","id":"ji-cheng"}},
     {"id":"qa.char.ji-cheng.runtime-set-check","type":"technical-check","title":{"zh":"纪澄 · 运行时整套技术检查","en":"Ji Cheng · runtime set technical check"},"area":"characters","stage":"technical-inspection","owner":"claude","status":"todo","points":1,"doneCriterion":{"zh":"Godot 实机检查（帧、锚点、方向、滑步）全部通过","en":"Godot checks (frames, anchors, directions, slip) all pass"},"dependsOn":["content.char.ji-cheng.runtime-integration"],"evidence":[],"subject":{"kind":"character-variant","id":"ji-cheng"},"target":"content.char.ji-cheng.runtime-integration"},
     {"id":"review.char.ji-cheng.static-south","type":"visual-review","title":{"zh":"纪澄 · 南向静止帧视觉审查","en":"Ji Cheng · south static visual review"},"area":"characters","stage":"visual-review","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"Codex 在 640×360 实机画面中审查并记录结论","en":"Codex reviews it in actual 640x360 captures and records a verdict"},"dependsOn":["content.char.ji-cheng.static-south"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_ji-cheng_south-idle-static-pilot_qa-note_unapproved-v01_20261018-132812-23499262.md","outputs/rpg-2-star-ocean-the-second_mvp-progress_state_v01_20261013-183804-28a1c7e4.json"],"subject":{"kind":"character-variant","id":"ji-cheng"},"target":"content.char.ji-cheng.static-south","outcome":"technical-pass","note":{"zh":"root 仅接受为技术静止候选：姿势正面僵硬、靴子厚重、发梢含糊、米色对比弱（closeout c6755462）。","en":"Root accepted a technical static candidate only: stiff frontal pose, heavy boots, ambiguous hair tips, weak cream contrast (closeout c6755462)."},"statusAt":"2026-10-18T14:45:00Z"},
@@ -2115,7 +2142,7 @@
     {"id":"content.char.zhao-ling.walk-west","type":"native-pixel","title":{"zh":"赵铃 · 西向行走／跑动","en":"Zhao Ling · west walk/run"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"西向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"west walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.zhao-ling.static-west"],"evidence":[],"subject":{"kind":"character-variant","id":"zhao-ling"}},
     {"id":"content.char.zhao-ling.walk-north","type":"native-pixel","title":{"zh":"赵铃 · 北向行走／跑动","en":"Zhao Ling · north walk/run"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"北向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"north walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.zhao-ling.static-north"],"evidence":[],"subject":{"kind":"character-variant","id":"zhao-ling"}},
     {"id":"content.char.zhao-ling.walk-east","type":"native-pixel","title":{"zh":"赵铃 · 东向行走／跑动","en":"Zhao Ling · east walk/run"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"东向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"east walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.zhao-ling.static-east"],"evidence":[],"subject":{"kind":"character-variant","id":"zhao-ling"}},
-    {"id":"content.char.zhao-ling.display","type":"native-pixel","title":{"zh":"赵铃 · 游戏内展示图","en":"Zhao Ling · in-game display image"},"area":"characters","stage":"content","owner":"deepseek","status":"in_progress","points":2,"doneCriterion":{"zh":"游戏内展示图已提交并在界面中显示","en":"The in-game display image is committed and shown in the UI"},"dependsOn":["content.char.zhao-ling.static-south"],"evidence":[],"subject":{"kind":"character-variant","id":"zhao-ling"},"statusAt":"2026-10-19T22:46:16Z","note":{"zh":"","en":"Bounded DeepSeek package production active; no production credit until committed actual UI evidence is independently inspected."}},
+    {"id":"content.char.zhao-ling.display","type":"native-pixel","title":{"zh":"赵铃 · 游戏内展示图","en":"Zhao Ling · in-game display image"},"area":"characters","stage":"content","owner":"deepseek","status":"done","points":2,"doneCriterion":{"zh":"游戏内展示图已提交并在界面中显示","en":"The in-game display image is committed and shown in the UI"},"dependsOn":["content.char.zhao-ling.static-south"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_mvp-display_four-crops-normal-integration_v01_20261019-185434-7c95e421.md","outputs/mvp-portraits-v01/rpg-2-star-ocean-the-second_mvp-display_source-bound-proof_v01_20261019-185434-7c95e421.json"],"subject":{"kind":"character-variant","id":"zhao-ling"},"statusAt":"2026-10-19T23:02:52Z","note":{"zh":"","en":"DeepSeek existing-concept exact crop, Codex package corrections and normal UI wiring;62package and121actualchecks. Creator approval/fullsprite/wholeUIportraitkit unchanged."}},
     {"id":"content.char.zhao-ling.runtime-integration","type":"integration","title":{"zh":"赵铃 · 运行时默认接入","en":"Zhao Ling · runtime default integration"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"整套四方向待机与行走默认在游戏中使用","en":"The full four-direction idle+walk set is used in the game by default"},"dependsOn":["content.char.zhao-ling.idle-anim","content.char.zhao-ling.walk-south","content.char.zhao-ling.walk-west","content.char.zhao-ling.walk-north","content.char.zhao-ling.walk-east","code.runtime.character-sprite-pipeline"],"evidence":[],"subject":{"kind":"character-variant","id":"zhao-ling"}},
     {"id":"qa.char.zhao-ling.runtime-set-check","type":"technical-check","title":{"zh":"赵铃 · 运行时整套技术检查","en":"Zhao Ling · runtime set technical check"},"area":"characters","stage":"technical-inspection","owner":"claude","status":"todo","points":1,"doneCriterion":{"zh":"Godot 实机检查（帧、锚点、方向、滑步）全部通过","en":"Godot checks (frames, anchors, directions, slip) all pass"},"dependsOn":["content.char.zhao-ling.runtime-integration"],"evidence":[],"subject":{"kind":"character-variant","id":"zhao-ling"},"target":"content.char.zhao-ling.runtime-integration"},
     {"id":"review.char.zhao-ling.static-south","type":"visual-review","title":{"zh":"赵铃 · 南向静止帧视觉审查","en":"Zhao Ling · south static visual review"},"area":"characters","stage":"visual-review","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"Codex 在 640×360 实机画面中审查并记录结论","en":"Codex reviews it in actual 640x360 captures and records a verdict"},"dependsOn":["content.char.zhao-ling.static-south"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_codex-visual-review_six-verdicts_qa-receipt_v01_20261018-153526-67e353de.md","outputs/rpg-2-star-ocean-the-second_zhao-ling_south-idle-static-pilot-city-bright-h48_unapproved-v01r1_20261018-053525-2baef17e.png","outputs/rpg-2-star-ocean-the-second_zhao-ling_south-idle-static-pilot-annex-room2-dark-h48_unapproved-v01r1_20261018-053525-2baef17e.png"],"subject":{"kind":"character-variant","id":"zhao-ling"},"target":"content.char.zhao-ling.static-south","statusAt":"2026-10-18T19:35:26Z","outcome":"passed","note":{"zh":"root（Codex）查看了显示 640×360 逻辑视口的 1280×720 窗口截图（明亮城市 + 昏暗附楼）、x4 预览与设定图 54215370：仅静止帧提案，可交创作者审查。设定图仍为概念稿；未批准正典、动作或其他朝向。","en":"Root (Codex) viewed 1280x720 windows of the 640x360 logical viewport (bright city + dark annex), x4 preview and source sheet 54215370: static-only proposal ready for creator review. Source portrait stays CONCEPT; no canon, motion or other directions approved."}},

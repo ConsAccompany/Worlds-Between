@@ -1,0 +1,137 @@
+{
+  "schema": "ds-portrait/display-image-manifest/v1",
+  "content_id": "content.char.protagonist-male.display",
+  "package_id": "rpg-2-star-ocean-the-second_protagonist-male_display-portrait-crop_v01_20261019-224538-744e4841",
+  "run": {
+    "timestamp_utc": "2026-10-19T22:45:38Z",
+    "timestamp_compact_utc": "20261019-224538",
+    "unique_id": "744e4841",
+    "id": "20261019-224538-744e4841"
+  },
+  "project": "rpg-2-star-ocean-the-second",
+  "subject": "protagonist-male",
+  "purpose": "display-portrait-crop",
+  "variant": "v01",
+  "source": {
+    "path": "outputs/rpg-2-star-ocean-the-second_protagonist_character-sheet_male_20261013-153316-5b7c19e2.png",
+    "sha256": "d92a3c4442f71394bb118a5034c57d52a3e3e7b2142bcb2b0b69d964e3dc4765",
+    "bytes": 1947545,
+    "width": 1916,
+    "height": 821,
+    "bit_depth": 8,
+    "color_type": 2,
+    "role": "unapproved-concept-sheet"
+  },
+  "crop": {
+    "left": 948,
+    "top": 54,
+    "right": 1187,
+    "bottom": 365,
+    "width": 239,
+    "height": 311,
+    "coordinate_space": "source pixels, top-left origin, right/bottom exclusive",
+    "method": "exact-pixel-rectangle-slice",
+    "resampled": false,
+    "repainted": false,
+    "ai_generated": false,
+    "background_removed": false,
+    "invented_pixels": false,
+    "pixel_count": 74329,
+    "ai_generated_field_scope": "No new generative processing in exact crop; original sheet is AI-generated."
+  },
+  "image": {
+    "path": "rpg-2-star-ocean-the-second_protagonist-male_display-portrait-crop_v01_20261019-224538-744e4841.png",
+    "sha256": "8b47f7a8d4f7aa7e205573de6c62ff24190e638a61cbba6e4a67ffa6e65bdefe",
+    "bytes": 148943,
+    "width": 239,
+    "height": 311,
+    "format": "PNG",
+    "color": "RGBA8"
+  },
+  "layer": {
+    "name": "original-illustration-crop-948-54-1187-365",
+    "role": "original illustration crop preserved as one editable layer",
+    "width": 239,
+    "height": 311,
+    "sha256": "8b47f7a8d4f7aa7e205573de6c62ff24190e638a61cbba6e4a67ffa6e65bdefe",
+    "native_png_equality": true
+  },
+  "outputs": [
+    {
+      "kind": "crop-png",
+      "path": "rpg-2-star-ocean-the-second_protagonist-male_display-portrait-crop_v01_20261019-224538-744e4841.png",
+      "sha256": "8b47f7a8d4f7aa7e205573de6c62ff24190e638a61cbba6e4a67ffa6e65bdefe",
+      "bytes": 148943,
+      "width": 239,
+      "height": 311
+    },
+    {
+      "kind": "editable-openraster-ora",
+      "path": "rpg-2-star-ocean-the-second_protagonist-male_display-portrait-editable_v01_20261019-224538-744e4841.ora",
+      "sha256": "356efed4c5acecbbfb6894f052a1eb5890ce51ddad41048ab6ea836ce2b266ab",
+      "bytes": 447670,
+      "openraster_version": "0.0.3",
+      "layers": 1,
+      "layer_sha256": "8b47f7a8d4f7aa7e205573de6c62ff24190e638a61cbba6e4a67ffa6e65bdefe",
+      "layer_native_png_equality": true
+    }
+  ],
+  "display": {
+    "helper": "rpg-2-star-ocean-the-second_mvp-display_portrait-helper_v01_20261019-185434-7c95e421.gd",
+    "variant_key": "protagonist-male",
+    "content_id": "content.char.protagonist-male.display",
+    "image_path": "rpg-2-star-ocean-the-second_protagonist-male_display-portrait-crop_v01_20261019-224538-744e4841.png",
+    "image_sha256": "8b47f7a8d4f7aa7e205573de6c62ff24190e638a61cbba6e4a67ffa6e65bdefe",
+    "image_width": 239,
+    "image_height": 311,
+    "rect": {
+      "x": 522,
+      "y": 88,
+      "width": 96,
+      "height": 124
+    },
+    "stretch_mode": "KEEP_ASPECT_CENTERED",
+    "appearance_required": "male",
+    "member_id_required": "hero",
+    "selection_rule": "selected_id-whitelist",
+    "panel_condition": "node_panel_hidden",
+    "pilot_flag": "--mvp-display-portraits-pilot",
+    "draw_order": "above-background-below-node-overlay"
+  },
+  "provenance": {
+    "source_status": "unapproved-concept-source",
+    "unapproved": true,
+    "accepted_character_canon": false,
+    "approved_static": false,
+    "full_sprite_approved": false,
+    "human_artist": false,
+    "approval": "none",
+    "approval_note": "Original source is AI-generated unapproved concept art. Exact crop adds no new generative pixels; no human artist, character canon, static or full-sprite approval.",
+    "new_identity_created": false,
+    "semantic_anatomy_claims": false,
+    "handpainted_claims": false,
+    "original_source_ai_generated": true,
+    "new_generative_processing": false
+  },
+  "verification": {
+    "builder": "tools/rpg-2-star-ocean-the-second_mvp-display_portrait-builder_v01_20261019-185434-7c95e421.py",
+    "python": "3.12.14",
+    "stdlib_only": true,
+    "checks": {
+      "source_sha256": true,
+      "source_dimensions": true,
+      "crop_dimensions": true,
+      "crop_rgba_pixels_equal_source_roi": true,
+      "crop_pixel_count": 74329,
+      "crop_png_redecoded_rgba": true,
+      "ora_single_layer": true,
+      "ora_layer_png_byte_equal_crop_png": true,
+      "ora_layer_native_dimensions": true,
+      "ora_layer_pixels_equal_crop": true,
+      "no_resample": true,
+      "no_repaint_or_ai": true,
+      "background_not_removed": true
+    },
+    "compression_note": "Producer PNG/ORA compressed bytes are preserved. Local rebuild is pixel-exact and same-runtime deterministic; cross-runtime PNG compression bytes may differ."
+  }
+}

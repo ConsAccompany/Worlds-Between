@@ -1,0 +1,137 @@
+{
+  "schema": "ds-portrait/display-image-manifest/v1",
+  "content_id": "content.char.liang-xu.display",
+  "package_id": "rpg-2-star-ocean-the-second_liang-xu_display-portrait-crop_v01_20261019-224538-dc29d7d2",
+  "run": {
+    "timestamp_utc": "2026-10-19T22:45:38Z",
+    "timestamp_compact_utc": "20261019-224538",
+    "unique_id": "dc29d7d2",
+    "id": "20261019-224538-dc29d7d2"
+  },
+  "project": "rpg-2-star-ocean-the-second",
+  "subject": "liang-xu",
+  "purpose": "display-portrait-crop",
+  "variant": "v01",
+  "source": {
+    "path": "outputs/rpg-2-star-ocean-the-second_liang-xu_character-sheet_v01_20261013-153556-c7630671.png",
+    "sha256": "af2da3de75c8eea1779688b16396860721f7e2d9156fd90c28df13d0e2ffd56f",
+    "bytes": 2144427,
+    "width": 1916,
+    "height": 821,
+    "bit_depth": 8,
+    "color_type": 2,
+    "role": "unapproved-concept-sheet"
+  },
+  "crop": {
+    "left": 930,
+    "top": 35,
+    "right": 1235,
+    "bottom": 403,
+    "width": 305,
+    "height": 368,
+    "coordinate_space": "source pixels, top-left origin, right/bottom exclusive",
+    "method": "exact-pixel-rectangle-slice",
+    "resampled": false,
+    "repainted": false,
+    "ai_generated": false,
+    "background_removed": false,
+    "invented_pixels": false,
+    "pixel_count": 112240,
+    "ai_generated_field_scope": "No new generative processing in exact crop; original sheet is AI-generated."
+  },
+  "image": {
+    "path": "rpg-2-star-ocean-the-second_liang-xu_display-portrait-crop_v01_20261019-224538-dc29d7d2.png",
+    "sha256": "9872b534d040c05f1721a8fe385ff75f13cdb943537b16773a686a41a1ac5ab9",
+    "bytes": 239770,
+    "width": 305,
+    "height": 368,
+    "format": "PNG",
+    "color": "RGBA8"
+  },
+  "layer": {
+    "name": "original-illustration-crop-930-35-1235-403",
+    "role": "original illustration crop preserved as one editable layer",
+    "width": 305,
+    "height": 368,
+    "sha256": "9872b534d040c05f1721a8fe385ff75f13cdb943537b16773a686a41a1ac5ab9",
+    "native_png_equality": true
+  },
+  "outputs": [
+    {
+      "kind": "crop-png",
+      "path": "rpg-2-star-ocean-the-second_liang-xu_display-portrait-crop_v01_20261019-224538-dc29d7d2.png",
+      "sha256": "9872b534d040c05f1721a8fe385ff75f13cdb943537b16773a686a41a1ac5ab9",
+      "bytes": 239770,
+      "width": 305,
+      "height": 368
+    },
+    {
+      "kind": "editable-openraster-ora",
+      "path": "rpg-2-star-ocean-the-second_liang-xu_display-portrait-editable_v01_20261019-224538-dc29d7d2.ora",
+      "sha256": "9a270b1de1dbb60afa30eadfc137662579eeba9893c3e529c57e08fca4b72a65",
+      "bytes": 720151,
+      "openraster_version": "0.0.3",
+      "layers": 1,
+      "layer_sha256": "9872b534d040c05f1721a8fe385ff75f13cdb943537b16773a686a41a1ac5ab9",
+      "layer_native_png_equality": true
+    }
+  ],
+  "display": {
+    "helper": "rpg-2-star-ocean-the-second_mvp-display_portrait-helper_v01_20261019-185434-7c95e421.gd",
+    "variant_key": "liang-xu",
+    "content_id": "content.char.liang-xu.display",
+    "image_path": "rpg-2-star-ocean-the-second_liang-xu_display-portrait-crop_v01_20261019-224538-dc29d7d2.png",
+    "image_sha256": "9872b534d040c05f1721a8fe385ff75f13cdb943537b16773a686a41a1ac5ab9",
+    "image_width": 305,
+    "image_height": 368,
+    "rect": {
+      "x": 522,
+      "y": 88,
+      "width": 96,
+      "height": 124
+    },
+    "stretch_mode": "KEEP_ASPECT_CENTERED",
+    "appearance_required": "any",
+    "member_id_required": "liang-xu",
+    "selection_rule": "selected_id-whitelist",
+    "panel_condition": "node_panel_hidden",
+    "pilot_flag": "--mvp-display-portraits-pilot",
+    "draw_order": "above-background-below-node-overlay"
+  },
+  "provenance": {
+    "source_status": "unapproved-concept-source",
+    "unapproved": true,
+    "accepted_character_canon": false,
+    "approved_static": false,
+    "full_sprite_approved": false,
+    "human_artist": false,
+    "approval": "none",
+    "approval_note": "Original source is AI-generated unapproved concept art. Exact crop adds no new generative pixels; no human artist, character canon, static or full-sprite approval.",
+    "new_identity_created": false,
+    "semantic_anatomy_claims": false,
+    "handpainted_claims": false,
+    "original_source_ai_generated": true,
+    "new_generative_processing": false
+  },
+  "verification": {
+    "builder": "tools/rpg-2-star-ocean-the-second_mvp-display_portrait-builder_v01_20261019-185434-7c95e421.py",
+    "python": "3.12.14",
+    "stdlib_only": true,
+    "checks": {
+      "source_sha256": true,
+      "source_dimensions": true,
+      "crop_dimensions": true,
+      "crop_rgba_pixels_equal_source_roi": true,
+      "crop_pixel_count": 112240,
+      "crop_png_redecoded_rgba": true,
+      "ora_single_layer": true,
+      "ora_layer_png_byte_equal_crop_png": true,
+      "ora_layer_native_dimensions": true,
+      "ora_layer_pixels_equal_crop": true,
+      "no_resample": true,
+      "no_repaint_or_ai": true,
+      "background_not_removed": true
+    },
+    "compression_note": "Producer PNG/ORA compressed bytes are preserved. Local rebuild is pixel-exact and same-runtime deterministic; cross-runtime PNG compression bytes may differ."
+  }
+}

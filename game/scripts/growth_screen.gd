@@ -10,6 +10,10 @@ static var female_display_portrait_override := -1
 static var female_display_portrait_manifest := "res://assets/portraits/female-display-v01/rpg-2-star-ocean-the-second_protagonist-female_display-portrait-manifest_v01_20261019-221307-97f0236e.json"
 var female_display_portrait: Control = null
 
+const MvpDisplayPortraits := preload("res://scripts/rpg-2-star-ocean-the-second_mvp-display_portrait-helper_v01_20261019-185434-7c95e421.gd")
+static var mvp_display_portraits_override := -1
+var mvp_display_portraits: Control = null
+
 const SERIES_IDS := ["sword", "firearms", "tactics", "relics", "merchant"]
 
 var selected_id := "hero"
@@ -47,7 +51,11 @@ func _ready() -> void:
 	if management_ui_skin_override == 1 or (management_ui_skin_override < 0 and OS.get_cmdline_user_args().has("--management-ui-skin-pilot")):
 		management_ui_skin = ManagementUiSkin.new("res://assets/ui/battle-skin-v01")
 		management_ui_skin_status = "applied" if management_ui_skin.apply(self) else "fallback"
-	if female_display_portrait_override == 1 or (female_display_portrait_override < 0 and FemalePortraitPilot.pilot_requested(OS.get_cmdline_user_args())):
+	if mvp_display_portraits_override == 1 or (mvp_display_portraits_override < 0 and MvpDisplayPortraits.pilot_requested(OS.get_cmdline_user_args())):
+		mvp_display_portraits = MvpDisplayPortraits.new()
+		mvp_display_portraits.install(self, node_panel)
+		call_deferred("_refresh_display_portrait")
+	elif female_display_portrait_override == 1 or (female_display_portrait_override < 0 and FemalePortraitPilot.pilot_requested(OS.get_cmdline_user_args())):
 		female_display_portrait = FemalePortraitPilot.new()
 		female_display_portrait.install(self, node_panel)
 		call_deferred("_refresh_display_portrait")
@@ -242,7 +250,7 @@ func _refresh() -> void:
 	nodes_button.text = AppState.text_for("growth_nodes_open")
 	if node_panel.visible:
 		_refresh_nodes(member)
-	if female_display_portrait != null:
+	if female_display_portrait != null or mvp_display_portraits != null:
 		call_deferred("_refresh_display_portrait")
 
 
@@ -313,11 +321,15 @@ func _node_state_text(opened: bool, has_effect: bool, rank: int, cost: int, lock
 
 
 func _refresh_display_portrait() -> void:
-	if female_display_portrait != null:
+	if mvp_display_portraits != null:
+		mvp_display_portraits.update(AppState.hero_appearance, selected_id, not node_panel.visible)
+	elif female_display_portrait != null:
 		female_display_portrait.apply_appstate(female_display_portrait_manifest, AppState, "hero", selected_id, not node_panel.visible, true)
 
 
 func _exit_tree() -> void:
+	if mvp_display_portraits != null:
+		mvp_display_portraits.revert()
 	if female_display_portrait != null:
 		female_display_portrait.revert()
 	if management_ui_skin != null:
