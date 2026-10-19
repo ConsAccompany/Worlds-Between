@@ -84,6 +84,10 @@ const BATTLE_BACKDROP_BANDS := {
 const CombatSpriteSets := preload("res://scripts/rpg-2-star-ocean-the-second_combat-sprite-set_loader-playback_pilot-v01_20261018-153656-43a19158.gd")
 const BattleVfx := preload("res://scripts/rpg-2-star-ocean-the-second_common-vfx_native-layer_root-v02_20261019-164412-1f3bff80.gd")
 const COMMON_VFX_ASSET_DIR := "res://assets/vfx/common-v01"
+const SkillVfx := preload("res://scripts/rpg-2-star-ocean-the-second_mvp-skill-vfx_native-layer_v01_20261019-170721-90a8737c.gd")
+const SKILL_VFX_ASSET_DIR := "res://assets/vfx/skills-v01"
+const SKILL_VFX_CLI_FLAG := "--mvp-skill-vfx-pilot"
+static var skill_vfx_override := -1
 const BATTLE_VFX_CLI_FLAG := "--battle-vfx-pilot"
 static var battle_vfx_override := -1
 # Optional four-effect encounter pilot (presentation only, UNAPPROVED). Opt-in only: launch with
@@ -156,6 +160,7 @@ var battle_backdrop_texture: Texture2D
 var combat_sprite_sets: RefCounted = null
 # Opt-in provisional presentation only; disabled renderer and simulation stay unchanged.
 var battle_vfx: RefCounted = null
+var skill_vfx: RefCounted = null
 # Null unless the encounter feedback pilot is on; its module and assets load only in that case.
 var encounter_feedback: RefCounted = null
 # Foreground result surface, created with the module and hidden until a finished battle has effects.
@@ -239,6 +244,8 @@ func _ready() -> void:
 	_load_combat_sprite_sets()
 	if battle_vfx_override == 1 or (battle_vfx_override < 0 and OS.get_cmdline_user_args().has(BATTLE_VFX_CLI_FLAG)):
 		battle_vfx = BattleVfx.new(COMMON_VFX_ASSET_DIR)
+	if skill_vfx_override == 1 or (skill_vfx_override < 0 and OS.get_cmdline_user_args().has(SKILL_VFX_CLI_FLAG)):
+		skill_vfx = SkillVfx.new(SKILL_VFX_ASSET_DIR)
 	if encounter_feedback_override == 1 or (encounter_feedback_override < 0 and OS.get_cmdline_user_args().has(ENCOUNTER_FEEDBACK_CLI_FLAG)):
 		encounter_feedback = EncounterFeedback.new(ENCOUNTER_FEEDBACK_ASSET_DIR)
 		_build_encounter_result_surface()
@@ -262,6 +269,8 @@ func _process(delta: float) -> void:
 		return
 	if battle_vfx != null:
 		battle_vfx.advance(delta)
+	if skill_vfx != null:
+		skill_vfx.advance(delta)
 	if encounter_feedback != null:
 		encounter_feedback.advance(delta)
 	if battle_finished:
@@ -629,6 +638,7 @@ func _use_skill(index: int = -1) -> bool:
 		"ji-cheng":
 			enemy_windup += 0.65 * rank if enemy_windup > 0.0 else 0.0
 			enemy_cooldown += 0.65 * rank
+	_emit_skill_vfx("personal-" + member_id, Vector2(float(fighter["x"]), ARENA_FLOOR_Y - 34.0), signf(enemy_x - float(fighter["x"])))
 	feedback_message = AppState.text_for("battle_skill_used") % [AppState.member_name(member_id), AppState.text_for(String(AppState.MEMBER_DEFS[member_id]["skill_key"]))]
 	return true
 
@@ -677,6 +687,8 @@ func _use_job_skill(index: int = -1, requested_skill_id: String = "") -> bool:
 			enemy_cooldown += 0.25 + 0.2 * rank + 0.2 * (skill_stage - 1)
 			if enemy_windup > 0.0:
 				enemy_windup += 0.25 + 0.2 * rank + 0.2 * (skill_stage - 1)
+	var skill_origin_x := enemy_x if ["sword", "firearms"].has(series_id) else float(fighter["x"])
+	_emit_skill_vfx("job-" + series_id, Vector2(skill_origin_x, ARENA_FLOOR_Y - 28.0), signf(enemy_x - float(fighter["x"])))
 	feedback_message = AppState.text_for("battle_skill_used") % [AppState.member_name(member_id), AppState.text_for("job_skill_" + skill_id)]
 	if enemy_hp == 0:
 		_finish_battle(true)
@@ -994,6 +1006,8 @@ func _draw() -> void:
 
 	if battle_vfx != null:
 		battle_vfx.draw(self)
+	if skill_vfx != null:
+		skill_vfx.draw(self)
 	if encounter_feedback != null and not _encounter_result_surface_draws():
 		encounter_feedback.draw(self)
 
@@ -1003,6 +1017,10 @@ func _emit_battle_cue(event: String) -> void:
 	var service: Variant = AppState.get("audio_cues")
 	if service is Object and service.has_method("play_cue"):
 		service.call("play_cue", event)
+
+
+func _emit_skill_vfx(kind: String, origin: Vector2, facing: float = 1.0) -> bool:
+	return skill_vfx.emit(kind, origin, facing) if skill_vfx != null else false
 
 
 func _emit_battle_vfx(kind: String, origin: Vector2, facing: float = 1.0) -> bool:

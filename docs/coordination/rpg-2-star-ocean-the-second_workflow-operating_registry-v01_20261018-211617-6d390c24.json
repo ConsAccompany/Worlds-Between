@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-19T21:04:56.187480+00:00",
+  "updatedAt": "2026-10-19T21:15:51.875912+00:00",
   "purpose": "Operating queue and worktree ownership; no progress points or account details",
   "workflow": "docs/workflow.md",
   "canonicalLedger": "outputs/rpg-2-star-ocean-the-second_production-completion_task-ledger_v01_20261018-140533-3de52073.json",
@@ -724,7 +724,7 @@
       "id": "support.vfx.mvp-skills-native",
       "ledgerTask": "content.vfx.mvp-skills",
       "owner": "deepseek",
-      "status": "active",
+      "status": "done",
       "lane": "supporting",
       "worktree": "work/dual02/ds-skills",
       "output": "Eight compact native cues for existing four personal and four job-series MVP skills",
@@ -735,7 +735,28 @@
       "writeScope": [
         "New skills-v01 author/package only; no simulation or shared files"
       ],
-      "nextAction": "Produce bounded native package without sandbox ACL detours; Codex owns loader/hooks/tests."
+      "nextAction": "Produced/wired opt-in. Root389native,191loader,1375actual game checks pass; creator artistic acceptance and continuous temporal review remain separate.",
+      "evidence": [
+        "docs/qa/rpg-2-star-ocean-the-second_mvp-skill-vfx_root-production-closeout_v01_20261019-170721-90a8737c.md"
+      ]
+    },
+    {
+      "id": "primary.ui.battle-hud-native",
+      "ledgerTask": "content.ui-visual.battle",
+      "owner": "claude",
+      "status": "active",
+      "lane": "primary",
+      "worktree": "work/dual02/cl-hud",
+      "output": "One complete editable battle HUD/pause/result skin kit and non-mutating prevalidated helper",
+      "writeScope": [
+        "New native UI kit/source/helper only; arena read-only"
+      ],
+      "completion": [
+        "Coherent eleven-or-fewer native skins, editable sources and hashes",
+        "Prevalidate-before-mutate helper preserves rectangles/text/input",
+        "Root actual EN/ZH normal/pause/results plus off-default pixel/combat parity"
+      ],
+      "nextAction": "Claude finishes native UI source/helper; Codex integrates behind explicit opt-in and judges actual captures."
     }
   ],
   "nextProductionMilestones": [
@@ -795,18 +816,17 @@
   ],
   "activeDualProviderBatch": {
     "primary": {
-      "task": "support.character.female.battle-static-legibility",
+      "task": "content.ui-visual.battle",
       "owner": "claude",
-      "workspace": "work/max0840-battle",
-      "output": "One source-bound complete v17r2 still; no animation/default changes",
-      "status": "produced-root-inspected"
+      "workspace": "work/dual02/cl-hud",
+      "status": "active"
     },
     "supporting": [
       {
         "task": "content.vfx.mvp-skills",
         "owner": "deepseek",
         "workspace": "work/dual02/ds-skills",
-        "status": "active"
+        "status": "done"
       }
     ],
     "integrationOwner": "codex",

@@ -2,7 +2,7 @@
   "id": "rpg-2-star-ocean-the-second_production-completion_v01",
   "schemaVersion": 2,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-19T21:04:34Z",
+  "updatedAt": "2026-10-19T21:15:30Z",
   "zh": "制作完成度任务台账：衡量已完成的工作量（编码 40% + 内容 60%）；检查／审查与创作者批准分开计量，均不改变制作分；免除的审查不算已执行的工作；运营任务列出负责方但不计百分比。",
   "en": "Production-completion task ledger: measures work done (coding 40% + content 60%); inspection/review and creator approval are separate meters and never change production credit; waived reviews are not performed work; operations tasks list owners but carry no percentage.",
   "brief": "docs/rpg-2-star-ocean-the-second_production-completion_bilingual-brief_v01_20261018-140533-3ea2a621.md",
@@ -515,8 +515,8 @@
     "production": {
       "zh": "制作完成度",
       "en": "Production completion",
-      "percent": 51.9,
-      "percentLabel": "51.9%",
+      "percent": 52.1,
+      "percentLabel": "52.1%",
       "formula": "round1(40 * codingDonePoints/codingTotalPoints + 60 * contentDonePoints/contentTotalPoints)",
       "coding": {
         "done": 111,
@@ -527,29 +527,29 @@
         "tasksDone": 23
       },
       "content": {
-        "done": 374,
+        "done": 378,
         "total": 1879,
-        "percent": 19.9,
+        "percent": 20.1,
         "weight": 60,
         "tasks": 714,
-        "tasksDone": 122
+        "tasksDone": 123
       }
     },
     "inspection": {
       "zh": "检查与审查（已执行的）",
       "en": "Inspection and review (performed)",
-      "done": 27,
+      "done": 28,
       "total": 204,
-      "percent": 13.2,
+      "percent": 13.7,
       "technical": {
         "done": 14,
         "total": 77,
         "percent": 18.2
       },
       "visual": {
-        "done": 13,
+        "done": 14,
         "total": 126,
-        "percent": 10.3
+        "percent": 11.1
       },
       "contentQa": {
         "done": 0,
@@ -597,11 +597,11 @@
         "waivedPoints": 0
       },
       "content": {
-        "done": 374,
+        "done": 378,
         "total": 1879,
-        "percent": 19.9,
+        "percent": 20.1,
         "tasks": 714,
-        "tasksDone": 122,
+        "tasksDone": 123,
         "waivedTasks": 0,
         "waivedPoints": 0
       },
@@ -615,11 +615,11 @@
         "waivedPoints": 0
       },
       "visual-review": {
-        "done": 13,
+        "done": 14,
         "total": 126,
-        "percent": 10.3,
+        "percent": 11.1,
         "tasks": 126,
-        "tasksDone": 13,
+        "tasksDone": 14,
         "waivedTasks": 4,
         "waivedPoints": 4
       },
@@ -668,10 +668,9 @@
         "tasks": 3,
         "operationsTasks": 0,
         "points": 12,
-        "pointsDone": 8,
+        "pointsDone": 12,
         "byStatus": {
-          "done": 2,
-          "todo": 1
+          "done": 3
         },
         "readyInQueue": 0,
         "revisionsBlockingApproval": 0
@@ -680,10 +679,10 @@
         "tasks": 200,
         "operationsTasks": 2,
         "points": 244,
-        "pointsDone": 130,
+        "pointsDone": 131,
         "byStatus": {
-          "done": 82,
-          "todo": 114,
+          "done": 83,
+          "todo": 113,
           "not_required": 4
         },
         "readyInQueue": 0,
@@ -698,7 +697,7 @@
           "done": 17,
           "todo": 222
         },
-        "readyInQueue": 53,
+        "readyInQueue": 54,
         "revisionsBlockingApproval": 0
       }
     },
@@ -821,11 +820,11 @@
       },
       "vfx": {
         "content": {
-          "done": 8,
+          "done": 12,
           "total": 12
         },
         "visual-review": {
-          "done": 0,
+          "done": 1,
           "total": 1
         },
         "creator-approval": {
@@ -881,7 +880,7 @@
     "queue": {
       "zh": "待处理（依赖已完成）",
       "en": "Ready (dependencies done)",
-      "count": 53,
+      "count": 54,
       "items": [
         {
           "id": "creator.char.protagonist-male.approve-portrait",
@@ -1235,6 +1234,13 @@
         },
         {
           "id": "creator.scene.chicago-loop.accept",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.content.vfx.accept",
           "stage": "creator-approval",
           "owner": "creator",
           "status": "todo",
@@ -2461,7 +2467,7 @@
     {"id":"review.scene.chicago-loop","type":"visual-review","title":{"zh":"芝加哥卢普区街区 · 视觉审查","en":"Chicago Loop block · visual review"},"area":"scenes","stage":"visual-review","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"Codex 审查 640×360 实机画面并记录结论","en":"Codex reviews actual 640x360 captures and records a verdict"},"dependsOn":["qa.scene.chicago-loop.check"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_chicago-loop_v06-codex-visual-verdict_unapproved-v01_20261018-174138-428dc70b.md","outputs/chicago-loop-state-lake-v06/godot-runtime/rpg-2-star-ocean-the-second_chicago-loop_state-lake-godot-en-entry-heroine-ref48-640x360_v06_20261018-173306-719a3bc2.png","outputs/chicago-loop-state-lake-v06/godot-runtime/rpg-2-star-ocean-the-second_chicago-loop_state-lake-godot-zh-occlusion-west-column-reveal-heroine-ref48-640x360_v06_20261018-173306-719a3bc2.png"],"subject":{"kind":"scene-gate","id":"visual-scene.chicago-loop-outdoor"},"target":"content.scene.chicago-loop.native-pass","statusAt":"2026-10-18T21:46:43Z","note":{"zh":"Codex 已完成并查看 v06 材质修订的真实实机截图：钢梁深度、铺地和受光树丛改善，可交创作者审查。仍为测试注入候选；不代表默认接入或美术验收。","en":"Codex finished and inspected v06 native material revision; actual test-injected gameplay evidence, no default adoption or creator art approval."},"history":[{"outcome":"changes_requested","statusAt":"2026-10-18T19:35:26Z","evidence":["docs/qa/rpg-2-star-ocean-the-second_codex-visual-review_six-verdicts_qa-receipt_v01_20261018-153526-67e353de.md","outputs/chicago-loop-state-lake-v05/godot-runtime/rpg-2-star-ocean-the-second_chicago-loop_state-lake-godot-en-entry-640x360_v05_20261018-000240-1d1b9337.png"]},{"outcome":"passed","statusAt":"2026-10-18T21:41:38.803668+00:00","evidence":["docs/qa/rpg-2-star-ocean-the-second_chicago-loop_v06-codex-visual-verdict_unapproved-v01_20261018-174138-428dc70b.md","outputs/chicago-loop-state-lake-v06/godot-runtime/rpg-2-star-ocean-the-second_chicago-loop_state-lake-godot-en-entry-heroine-ref48-640x360_v06_20261018-173306-719a3bc2.png","outputs/chicago-loop-state-lake-v06/godot-runtime/rpg-2-star-ocean-the-second_chicago-loop_state-lake-godot-zh-occlusion-west-column-reveal-heroine-ref48-640x360_v06_20261018-173306-719a3bc2.png"]}],"outcome":"passed"},
     {"id":"creator.scene.chicago-loop.accept","type":"creator-acceptance","title":{"zh":"芝加哥卢普区街区 · 场景画质验收","en":"Chicago Loop block · scene-quality acceptance"},"area":"scenes","stage":"creator-approval","owner":"creator","status":"todo","points":1,"doneCriterion":{"zh":"approvalLedger 记有 acceptanceKind scene-visual 的验收条目","en":"approvalLedger records an acceptanceKind scene-visual item"},"dependsOn":["content.scene.chicago-loop.native-pass"],"evidence":[],"subject":{"kind":"scene-gate","id":"visual-scene.chicago-loop-outdoor"},"target":"content.scene.chicago-loop.native-pass"},
     {"id":"content.vfx.common","type":"native-pixel","title":{"zh":"通用战斗特效（攻击、闪避、防御、受击、治疗）","en":"Common combat effects (attack, dodge, guard, hit, heal)"},"area":"vfx","stage":"content","owner":"deepseek","status":"done","points":5,"doneCriterion":{"zh":"五类特效已提交并接入","en":"Five effect sets committed and wired"},"dependsOn":["code.runtime.vfx-system"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_common-combat-vfx_root-production-closeout_v01_20261019-164412-1f3bff80.md","outputs/common-vfx-v01/rpg-2-star-ocean-the-second_common-vfx_root-native-report_v01_20261019-164412-1f3bff80.json","outputs/common-vfx-v01/hooks/rpg-2-star-ocean-the-second_common-vfx_root-runtime-report_v01_20261019-164412-1f3bff80.json"],"subject":{"kind":"asset","id":"vfx.common"},"statusAt":"2026-10-19T20:55:22Z","note":{"zh":"","en":"Five editable native sets produced by DeepSeek and wired opt-in; Codex native245, actual-game1312, malformed-loader122 and existing regression33 checks pass. Original SCRIPT ERROR retained and corrected. Artistic approval, GUI save/reopen and default adoption remain separate."}},
-    {"id":"content.vfx.mvp-skills","type":"native-pixel","title":{"zh":"MVP 个人与职业技能特效","en":"MVP personal and job skill effects"},"area":"vfx","stage":"content","owner":"deepseek","status":"todo","points":4,"doneCriterion":{"zh":"MVP 技能特效已提交并接入","en":"MVP skill effects committed and wired"},"dependsOn":["code.runtime.vfx-system"],"evidence":[],"subject":{"kind":"asset","id":"vfx.mvp-skills"}},
+    {"id":"content.vfx.mvp-skills","type":"native-pixel","title":{"zh":"MVP 个人与职业技能特效","en":"MVP personal and job skill effects"},"area":"vfx","stage":"content","owner":"deepseek","status":"done","points":4,"doneCriterion":{"zh":"MVP 技能特效已提交并接入","en":"MVP skill effects committed and wired"},"dependsOn":["code.runtime.vfx-system"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_mvp-skill-vfx_root-production-closeout_v01_20261019-170721-90a8737c.md","outputs/skill-vfx-v01/actual-v03/rpg-2-star-ocean-the-second_skill-vfx_root-runtime-report_v01_20261019-170721-90a8737c.json"],"subject":{"kind":"asset","id":"vfx.mvp-skills"},"statusAt":"2026-10-19T21:15:30Z","note":{"zh":"","en":"Eight editable native cue sets wired to existing four personal and four job-family skills, including both existing job stages. Root389native,191loader,1375actual-game checks pass; defaults and simulation unchanged. Art approval and temporal review separate."}},
     {"id":"content.vfx.encounter","type":"native-pixel","title":{"zh":"接敌、胜利、战败与恢复特效","en":"Encounter, victory, defeat and recovery effects"},"area":"vfx","stage":"content","owner":"deepseek","status":"done","points":3,"doneCriterion":{"zh":"四类反馈特效已提交并接入","en":"Four feedback effects committed and wired"},"dependsOn":[],"evidence":["docs/qa/rpg-2-star-ocean-the-second_encounter-vfx_native-and-runtime-closeout_v02_20261019-003427-73b5efb4.md"],"subject":{"kind":"asset","id":"vfx.encounter"},"statusAt":"2026-10-19T04:56:14Z","note":{"zh":"","en":"DeepSeek produced4editable effect sets with correct native timing; optional encounter/victory/defeat/recovery wiring, missing-frame guard and visible result-margin surface. Root checks84+184+20+1220passed, default render and combat parity retained. Unapproved pilot stays off default."}},
     {"id":"content.audio.ambient-loops","type":"audio-production","title":{"zh":"四段原创环境循环","en":"Four original ambient loops"},"area":"audio","stage":"content","owner":"claude","status":"done","points":3,"doneCriterion":{"zh":"城镇、野外、遗址、战斗循环已接入","en":"Town, field, ruin and battle loops are wired"},"dependsOn":[],"evidence":["game/assets/audio/rpg-2-star-ocean-the-second_scifi-city_ambient-loop_m7_20261013-211230-c8e1159a.wav","game/assets/audio/rpg-2-star-ocean-the-second_scifi-battle_ambient-loop_m7_20261013-211230-37fcaa02.wav","game/tests/m7_smoke.gd"],"subject":{"kind":"asset","id":"music.mvp"}},
     {"id":"content.audio.themed-music","type":"audio-production","title":{"zh":"MVP 主题配乐","en":"MVP themed music"},"area":"audio","stage":"content","owner":"claude","status":"todo","points":6,"doneCriterion":{"zh":"四段主题配乐已提交并接入","en":"Four themed tracks committed and wired"},"dependsOn":["content.audio.ambient-loops"],"evidence":[],"subject":{"kind":"asset","id":"music.mvp"}},
@@ -2472,7 +2478,7 @@
     {"id":"content.ui-visual.battle","type":"native-pixel","title":{"zh":"战斗界面正式视觉","en":"Battle UI final visuals"},"area":"ui-visual","stage":"content","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"战斗 HUD、技能、结算正式视觉已接入","en":"Final battle HUD, skills and results visuals wired"},"dependsOn":[],"evidence":[],"subject":{"kind":"asset","id":"ui.battle-hud"}},
     {"id":"content.ui-visual.management","type":"native-pixel","title":{"zh":"队伍、职业、存档界面正式视觉","en":"Party, jobs and saves UI final visuals"},"area":"ui-visual","stage":"content","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"管理界面正式视觉已接入","en":"Final management UI visuals wired"},"dependsOn":[],"evidence":[],"subject":{"kind":"asset","id":"ui.party"}},
     {"id":"content.ui-visual.character-portraits","type":"native-pixel","title":{"zh":"队伍头像与对话立绘裁切","en":"Party icons and dialogue portrait crops"},"area":"ui-visual","stage":"content","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"头像与立绘裁切已提交并接入","en":"Icons and portrait crops committed and wired"},"dependsOn":[],"evidence":[],"subject":{"kind":"asset","id":"character-ui.portraits"}},
-    {"id":"review.content.vfx","type":"visual-review","title":{"zh":"特效 · 视觉审查","en":"VFX · visual review"},"area":"vfx","stage":"visual-review","owner":"codex","status":"todo","points":1,"doneCriterion":{"zh":"Codex 审查实机特效并记录结论","en":"Codex reviews the effects in game and records a verdict"},"dependsOn":["content.vfx.common","content.vfx.mvp-skills","content.vfx.encounter"],"evidence":[],"subject":{"kind":"feature","id":"content.vfx"}},
+    {"id":"review.content.vfx","type":"visual-review","title":{"zh":"特效 · 视觉审查","en":"VFX · visual review"},"area":"vfx","stage":"visual-review","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"Codex 审查实机特效并记录结论","en":"Codex reviews the effects in game and records a verdict"},"dependsOn":["content.vfx.common","content.vfx.mvp-skills","content.vfx.encounter"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_mvp-skill-vfx_root-production-closeout_v01_20261019-170721-90a8737c.md","docs/qa/rpg-2-star-ocean-the-second_common-combat-vfx_root-production-closeout_v01_20261019-164412-1f3bff80.md"],"subject":{"kind":"feature","id":"content.vfx"},"statusAt":"2026-10-19T21:15:30Z","outcome":"technical-pass","note":{"zh":"","en":"Actual-game composition and technical review performed: common/skill cues local and quiet, encounter cues separately verified; some support accents blend with dark clothing. Static composition inspection only; no creator artistic or continuous temporal-quality approval."}},
     {"id":"review.content.audio","type":"audio-qa","title":{"zh":"音频 · 内容／音频质量检查","en":"Audio · content / audio QA"},"area":"audio","stage":"content-qa","owner":"codex","status":"todo","points":1,"doneCriterion":{"zh":"Codex 在游戏中试听音乐与音效并记录结论","en":"Codex listens to the music and sounds in game and records a verdict"},"dependsOn":["content.audio.themed-music","content.audio.ui-sfx","content.audio.combat-sfx"],"evidence":[],"subject":{"kind":"feature","id":"content.audio"}},
     {"id":"review.content.ui-visuals","type":"visual-review","title":{"zh":"界面正式视觉 · 视觉审查","en":"UI final visuals · visual review"},"area":"ui-visual","stage":"visual-review","owner":"codex","status":"todo","points":1,"doneCriterion":{"zh":"Codex 审查实机界面并记录结论","en":"Codex reviews the in-game UI and records a verdict"},"dependsOn":["content.ui-visual.navigation","content.ui-visual.battle","content.ui-visual.management","content.ui-visual.character-portraits"],"evidence":[],"subject":{"kind":"feature","id":"content.ui-visuals"}},
     {"id":"creator.content.vfx.accept","type":"creator-acceptance","title":{"zh":"特效 · 创作者验收","en":"VFX · creator acceptance"},"area":"vfx","stage":"creator-approval","owner":"creator","status":"todo","points":1,"doneCriterion":{"zh":"创作者在清单中勾选相应条目","en":"The creator checks the matching inventory items"},"dependsOn":["content.vfx.common","content.vfx.mvp-skills","content.vfx.encounter"],"evidence":[],"subject":{"kind":"feature","id":"content.vfx"}},
