@@ -4,7 +4,7 @@ Read [the operating workflow](docs/workflow.md) before starting a batch. Its lin
 
 ## Ownership and execution
 
-- Codex coordinates and inspects; Claude normally implements code/native assets; the creator decides artistic acceptance and scope. The creator explicitly authorizes **Codex to implement, test and integrate during Claude quota gaps**. Reassign the task and continue useful work without waiting for quota.
+- Codex coordinates, independently inspects and integrates; Claude handles complex gameplay, animation and visual implementation; DeepSeek handles bounded code/content tasks with clear checks. The creator authorizes both providers concurrently when Max is available, then DeepSeek alone when Max is depleted. Codex may implement and test where useful. The creator decides artistic acceptance and scope.
 - One accountable owner per task. Run one primary completion task and at most two supporting tasks with disjoint write scopes. Finish existing work before opening additional candidates. Delegate to agents only when the current user instructions or an applicable skill authorize delegation.
 - Each task needs an output, dependencies, completion conditions, evidence and a bounded next action. Technical parameters are implementation decisions; ask the creator only for essential creative/scope decisions and continue independent work meanwhile.
 - Use the registry's single integration checkout. Preserve the dirty primary checkout and unrelated partial work. Producers do not edit the shared ledger, Git index or published dashboard. The integration coordinator stages explicit verified paths; never use blanket staging or reset another checkout.
@@ -23,7 +23,7 @@ Read [the operating workflow](docs/workflow.md) before starting a batch. Its lin
 ## Accounts, schedules and assets
 
 - Before each new Claude session verify signed-in Max through `claude.ai`/`firstParty`, with `ANTHROPIC_API_KEY` absent. Honor the latest recorded reset; stop inference on actual quota exhaustion. The one-time promotional credit allowance is closed: no cloud credits, API billing, extra paid usage, purchases, auto-reload or paid fallback.
-- All schedules are canceled. Do not recreate schedules without fresh user authorization. Coalesce any authorized wakeup with active work; never duplicate or interrupt workers.
+- The creator authorized an alarm at the actual reported Claude Max reset on depletion. Honor that reset, schedule one coalesced wakeup, verify Max/firstParty again and resume Claude alongside DeepSeek. Do not add periodic polling or duplicate active workers. If DeepSeek reports insufficient credit, stop both providers and cancel pending resumption; never top up, purchase credits or switch its billing route. Record balances/reset/account state only in ignored local files.
 - Save each requested generated image separately. Generated assets, captures, exports and manifests use lowercase `[project-slug]_[subject]_[purpose]_[variant]_[YYYYMMDD-HHMMSS]-[unique-id].[ext]`; keep directories short for Windows. Preserve editable native sources and provenance.
 - Canon remains the science US/Canada MVP, NYC/Catskills, 2537-05-25 start, 51 identities/52 variants, no persistent companion followers and simple whole-hour travel. Consult the Bible for full canon; do not revive superseded precision travel rules.
 

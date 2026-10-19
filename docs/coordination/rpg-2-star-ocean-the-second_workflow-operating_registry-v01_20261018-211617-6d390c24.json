@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-19T02:44:57.519456+00:00",
+  "updatedAt": "2026-10-19T04:17:00.757160+00:00",
   "purpose": "Operating queue and worktree ownership; no progress points or account details",
   "workflow": "docs/workflow.md",
   "canonicalLedger": "outputs/rpg-2-star-ocean-the-second_production-completion_task-ledger_v01_20261018-140533-3de52073.json",
@@ -12,8 +12,10 @@
     "finishExistingFirst": true
   },
   "schedules": {
-    "state": "canceled",
-    "recreationRequiresFreshAuthorization": true
+    "state": "reset-alarm-authorized-on-actual-max-depletion",
+    "recreationRequiresFreshAuthorization": false,
+    "periodicPolling": false,
+    "cancelOnDeepSeekCreditDepletion": true
   },
   "worktrees": [
     {
@@ -67,6 +69,13 @@
       "owner": "claude",
       "baseAtRegistration": "0b0e7d915324686a8cf29cf74c4b3b6841cf3fa4",
       "writePolicy": "Combat audio WAV/source and game_audio_cues.gd ASSETS only; protect exact UI assets, frozen tests and unrelated dirty files; no shared ledger/index/Site"
+    },
+    {
+      "id": "deepseek-vfx-producer",
+      "pathFromPrimary": "work/dual01/deepseek",
+      "role": "producer",
+      "owner": "deepseek",
+      "writePolicy": "Task-b production-v02 timing fix only; preserve benchmark sources; no shared index/ledger/defaults"
     }
   ],
   "tasks": [
@@ -559,7 +568,7 @@
     {
       "id": "support.character.female.battle-static-legibility",
       "owner": "claude",
-      "status": "in_progress",
+      "status": "blocked",
       "lane": "supporting",
       "worktree": "chicago-producer",
       "dependsOn": [],
@@ -576,7 +585,9 @@
       ],
       "startedAt": "2026-10-19T00:59:24.562061+00:00",
       "nextAction": "v17 actual1280 density method independently verified; brow/lash masses and striped bangs need one bounded v17r1 face/hair cleanup. No animation, full package or approval request yet.",
-      "blockedBy": [],
+      "blockedBy": [
+        "Parked while current primary motion and supporting VFX task finish; partial source preserved."
+      ],
       "evidence": [
         "docs/qa/rpg-2-star-ocean-the-second_female-battle-static_creator-coarseness-rejection_v16_20261018-220102-1a4c22a8.md",
         "docs/qa/rpg-2-star-ocean-the-second_female-battle_root-density-review_v17_20261018-223904-4d31fba3.md"
@@ -663,6 +674,27 @@
         "docs/qa/rpg-2-star-ocean-the-second_combat-sfx_root-integration-closeout_v01_20261018-224442-5a271961.md",
         "outputs/rpg-2-star-ocean-the-second_combat-sfx_root-integration-manifest_v01_20261018-224442-5a271961.json"
       ]
+    },
+    {
+      "id": "content.vfx.encounter",
+      "owner": "deepseek",
+      "status": "in_progress",
+      "lane": "supporting",
+      "worktree": "deepseek-vfx-producer",
+      "dependsOn": [],
+      "output": "Corrected editable4-effect native package preserving exact gameplay pixels/timing, ready for wiring",
+      "writeScope": [
+        "New task-b production-v02 author/assets/module/checker/QA only"
+      ],
+      "completion": [
+        "Correct native timeline multipliers for all4 effects",
+        "32PNG pixel parity with original submission",
+        "Independent timing checker includes negative seconds-as-multiplier case",
+        "Coordinator runs Godot and integration checks before credit"
+      ],
+      "startedAt": "2026-10-19T04:16:03.161820+00:00",
+      "nextAction": "Bounded native timing/package fix dispatched; coordinator will inspect before wiring",
+      "blockedBy": []
     }
   ],
   "nextProductionMilestones": [
@@ -696,5 +728,16 @@
     ],
     "historicalDurationEstimates": "unknown unless evidenced",
     "note": "Null timestamps mean not reliably recorded; status is an operational snapshot and must be refreshed by the integration coordinator at transitions. No invented throughput totals."
+  },
+  "dispatchPolicy": {
+    "providers": [
+      "claude",
+      "deepseek"
+    ],
+    "claude": "complex gameplay, representative motion and difficult visuals; Max-only",
+    "deepseek": "bounded implementation/content and deterministic package checks",
+    "codex": "independent inspection and serialized integration",
+    "claudeQuota": "DeepSeek alone; one alarm at reported reset",
+    "deepseekCredit": "stop both providers and resumption; no topup or fallback"
   }
 }

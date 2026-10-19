@@ -1,0 +1,32 @@
+'use strict';
+const assert = require('node:assert/strict');
+const path = require('node:path');
+const root = path.resolve(__dirname, '..');
+const api = require('./rpg-2-star-ocean-the-second_production-completion_ledger-cli_v01_20261018-140533-3b436630.js');
+const original = api.load(path.join(root, api.LEDGER_REL));
+const clone = () => JSON.parse(JSON.stringify(original));
+const opts = (task, owner) => ({task, owner, reasonEn: 'Creator authorized concurrent Claude and DeepSeek production.', now: '2026-10-19T04:14:23Z'});
+assert.deepEqual(api.validate(original, root), []);
+const subject = 'content.vfx.encounter';
+const ledger = clone();
+const scores = v => JSON.stringify([v.computed.production, v.computed.inspection, v.computed.approval]);
+const before = scores(ledger);
+api.reassign(ledger, root, opts(subject, 'deepseek'));
+assert.equal(ledger.tasks.find(t => t.id === subject).owner, 'deepseek');
+assert.equal(scores(ledger), before, 'ownership cannot alter completion percentages');
+assert.deepEqual(api.validate(ledger, root), []);
+const priorTasks = original.tasks.map(t => ({...t, owner: undefined}));
+assert.deepEqual(ledger.tasks.map(t => ({...t, owner: undefined})), priorTasks, 'only ownership changes');
+api.reassign(ledger, root, opts(subject, 'codex'));
+api.reassign(ledger, root, opts(subject, 'claude'));
+assert.deepEqual(api.validate(ledger, root), []);
+assert.equal(scores(ledger), before);
+for (const task of ['creator.content.vfx.accept', 'review.content.vfx', 'ops.codex.site-publication']) {
+  assert.throws(() => api.reassign(clone(), root, opts(task, 'deepseek')), /only a producer or technical-check/);
+}
+assert.throws(() => api.reassign(clone(), root, opts(subject, 'unknown-provider')), /needs --owner/);
+const tampered = JSON.parse(JSON.stringify(ledger));
+tampered.tasks.find(t => t.id === subject).points++;
+assert.ok(api.validate(tampered, root).length > 0, 'audit must reject scoring tampering');
+const out = {passed: 12, failed: 0, unchangedProductionAndInspectionAndApproval: true, testedSource: path.basename(__filename)};
+console.log(JSON.stringify(out));

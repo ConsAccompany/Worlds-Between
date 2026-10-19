@@ -14,7 +14,7 @@
 //        [--note-en ".."] [--note-zh ".."] [--now <ISO>]
 //   node tools/<this file> revise --for <production task id> --reason-en ".." [--reason-zh ".."] [--now <ISO>]
 //        opens (or reopens) the ONE fixed revision bucket of a deliverable; points are fixed, never chosen
-//   node tools/<this file> reassign --task <producer-or-technical-check id> --owner codex|claude --reason-en ".."
+//   node tools/<this file> reassign --task <producer-or-technical-check id> --owner codex|claude|deepseek --reason-en ".."
 //        audited ownership transfer only; an existing revision bucket follows its parent; no scoring/status changes
 //   node tools/<this file> summary | queue | list [--owner o] [--stage s] [--status s] [--area a]
 // Options for every command: --ledger <path> (tests work on a copy), --dry-run.
@@ -42,7 +42,7 @@ const STAGES = {
   'creator-approval': {kind: 'approval', zh: '创作者批准', en: 'Creator approval'},
   'operations': {kind: 'operations', zh: '运营（看板检查与发布，不计入百分比）', en: 'Operations (dashboard inspection and publication; no percentage)'},
 };
-// Default owners follow the task type. Producer/technical-check ownership can transfer between Codex and Claude through
+// Default owners follow the task type. Producer/technical-check ownership can transfer between Codex, Claude and DeepSeek through
 // an audited reassign; creative review, creator approval and operations ownership remain fixed.
 const TASK_TYPES = {
   'feature-code': {stage: 'coding', owner: 'claude'},
@@ -64,6 +64,7 @@ const TASK_TYPES = {
 };
 const DEFAULT_TYPE = {coding: 'feature-code', content: 'native-pixel', 'technical-inspection': 'technical-check', 'visual-review': 'visual-review', 'creator-approval': 'creator-acceptance'};
 const OWNERS = {claude: {zh: 'Claude（原生 Pixelorama 内容、编码、测试、技术文档、整合）', en: 'Claude (native Pixelorama content, coding, tests, technical writing, integration)'},
+  deepseek: {zh: 'DeepSeek（范围明确的内容制作、编码与测试；Codex 独立检查）', en: 'DeepSeek (bounded content, coding and tests; independently inspected by Codex)'},
   codex: {zh: 'Codex（协调、独立检查与云端发布；Claude 配额不足时接手编码、原生内容、测试和整合）', en: 'Codex (coordination, independent inspection and cloud publication; takes over coding, native content, tests and integration during Claude quota gaps)'},
   creator: {zh: '创作者（美术验收、正典选择、两轮真人试玩）', en: 'Creator (art acceptance, canon choices, the two human playthroughs)'}};
 const STATUSES = {
@@ -82,7 +83,7 @@ const REJECTED_BASELINE_PATTERN = /\/(native-prototypes|native-animation|combat-
 const isProduction = t => STAGES[t.stage]?.kind === 'production';
 const isInspection = t => STAGES[t.stage]?.kind === 'inspection';
 const canReassign = t => t.type !== 'revision' && (isProduction(t) || t.type === 'technical-check');
-const workerOwner = owner => owner === 'codex' || owner === 'claude';
+const workerOwner = owner => owner === 'codex' || owner === 'claude' || owner === 'deepseek';
 const validAuditTime = at => typeof at === 'string' && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/.test(at) && Number.isFinite(Date.parse(at));
 
 const QA = name => 'docs/qa/rpg-2-star-ocean-the-second_' + name;
@@ -584,7 +585,7 @@ function assignmentAudit(ledger) {
       const target = tasks.find(t => t.id === r.taskId), bucket = tasks.find(t => t.id === r.taskId + '.revision');
       const affected = target ? [target, ...(bucket ? [bucket] : [])] : [];
       if (!target || !canReassign(target)) errors.push(where + 'owner assignment must target a producer or technical-check (reassign the parent of a revision)');
-      if (!workerOwner(r.fromOwner) || !workerOwner(r.toOwner) || r.fromOwner === r.toOwner) errors.push(where + 'owner assignment must transfer Codex <-> Claude');
+      if (!workerOwner(r.fromOwner) || !workerOwner(r.toOwner) || r.fromOwner === r.toOwner) errors.push(where + 'owner assignment must transfer between distinct Codex, Claude or DeepSeek workers');
       if (!validAuditTime(r.at) || typeof r.reason?.en !== 'string' || !r.reason.en.trim()) errors.push(where + 'owner assignment needs an ISO timestamp and reason-en');
       const ids = affected.map(t => t.id).sort();
       if (!Array.isArray(r.changedTaskIds) || JSON.stringify([...r.changedTaskIds].sort()) !== JSON.stringify(ids)) errors.push(where + 'owner assignment must include its exact parent/revision task ids');
@@ -778,7 +779,7 @@ function reassign(ledger, root, opts) {
   const target = ledger.tasks.find(x => x.id === opts.task);
   if (!target) throw new Error('unknown task ' + opts.task);
   if (!canReassign(target)) throw new Error('reassign targets only a producer or technical-check; reassign the parent of a revision (review/approval/operations owners remain fixed)');
-  if (!workerOwner(opts.owner)) throw new Error('reassign needs --owner codex|claude');
+  if (!workerOwner(opts.owner)) throw new Error('reassign needs --owner codex|claude|deepseek');
   if (typeof opts.reasonEn !== 'string' || !opts.reasonEn.trim()) throw new Error('reassign needs --reason-en');
   if (!validAuditTime(opts.now)) throw new Error('reassign needs a valid ISO --now timestamp');
   if (target.owner === opts.owner) return refresh(ledger, root);

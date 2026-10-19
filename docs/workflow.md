@@ -23,7 +23,7 @@ The registry is an operating queue, not a second progress system. The dashboard 
 6. **Integrate serially:** the coordinator reviews explicit diffs, merges selected verified work into the designated integration checkout, runs the relevant combined checks and updates the ledger through its CLI. Reconcile stale producer bases without resetting their partial work.
 7. **Publish and close:** refresh the Bible/fallback from verified commits, check live, then report completed/integrated/revised/blocked/next. No filler closeouts for unchanged polling or repeated audits.
 
-The coordinator records producer/technical-check transfers with the existing ledger CLI: `reassign --task <id> --owner codex|claude --reason-en "<reason>"`. It audits the hash chain, moves any existing revision bucket with its parent, and preserves every score/status/evidence field. Never hand-edit owners or reassign creator approvals, creative reviews or operations. The operating registry mirrors the actual assignment after the ledger transition.
+The coordinator records producer/technical-check transfers with the existing ledger CLI: `reassign --task <id> --owner codex|claude|deepseek --reason-en "<reason>"`. It audits the hash chain, moves any existing revision bucket with its parent, and preserves every score/status/evidence field. Never hand-edit owners or reassign creator approvals, creative reviews or operations. The operating registry mirrors the actual assignment after the ledger transition.
 
 ### Command and snapshot gates
 
@@ -69,3 +69,13 @@ Use task start/finish/revision timestamps and existing evidence to report comple
 ### Windows private Site packaging
 
 After a successful source build, use the official source helper with credentials only on hidden stdin. The current Windows environment needs Git\bin and the bundled Node\bin on the helper process PATH for Bash and packaging Node; do not change system PATH. If the package-manager shim fails before compilation, run the existing project framework build directly with the verified Node executable and gate its exit before packaging unchanged inputs. For the Bash/tar archive argument use an absolute MSYS `/c/...` path (a `C:/...` colon is interpreted as a tar remote). Verify the resulting ordinary Windows archive path before passing it to private publication. Preserve source SHA, audience, errors and proof; never put credentials in files, argv or output.
+
+## Dual-provider dispatch policy (creator-authorized 2026-10-19)
+
+Run Claude Max and DeepSeek V4.1 Flash concurrently on disjoint useful scopes when both are available. Claude leads complex gameplay changes, the representative character motion and difficult visual implementation. DeepSeek takes bounded code/content production, package corrections and deterministic validation suited to its demonstrated results. Use observed task results and account state to adjust assignments; neither model approves its own work. Codex coordinates, inspects and serially integrates.
+
+On actual Claude quota exhaustion, capture its exact reset message, stop Claude inference, schedule one alarm for that reset and continue DeepSeek alone. At the alarm, coalesce with active work, verify Max/claude.ai/firstParty and no API key, then resume Claude alongside DeepSeek. No routine repeated polling, premature inference, Claude cloud credits or paid fallback.
+
+On DeepSeek insufficient credit, stop both providers and pending resumption. Never top up, purchase credits, enable paid fallback or substitute another DeepSeek billing route. Check the signed-in account balance before new batches, record its currency and any display delay in the ignored account controller, and retain provider exhaustion errors. Existing DeepSeek account credit is authorized; this does not reopen the closed Claude promotional-cloud allowance. Account balances and reset logs stay local.
+
+Assign bounded completion contracts and preserve the one-primary/two-supporting limit. Transfer producer/technical-check owners through the ledger CLI, now accepting `deepseek`, without changing points, production status or creative approval. An alarm is a resumption mechanism, not production evidence.
