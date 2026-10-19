@@ -1,0 +1,44 @@
+{
+  "recordedAt": "2026-10-19T21:41:38Z",
+  "sourceBase": "b629d6b29ad3364fcdbe78a45e4bfe474e80f771",
+  "filesRawSha256": {
+    "app/api/[resource]/route.ts": "498a7c85fc21e85a92841dde736e1fb2fec58093e58dab1d1b8bcdbf9a341ddb",
+    "app/project-data.ts": "21a9ef4c6fbee79ffc9b9b0b9cbbbe11f66de29a0d35fde0627ca59e5311454f",
+    "public/bible.js": "9a3f27fd5ffade2b9ff7444da8e7cf3896ddff3776de79036ee118a7d304c4e0",
+    "scripts/mcp/project-atomic-check.mjs": "b68226c5bb03c70fa80fccddea2fe81bca4254282a3cf0fb56b1667ba5ceed11",
+    "scripts/mcp/verified-snapshot-check.mjs": "0bc91f155ee437af5acf46f197e02e7a36fe8fefab82656b72b21fcef4c05fbb",
+    "scripts/mcp/source-check.mjs": "bf04eacb578dc1afac1700109642de779c8815e7346f70183a297be64523bd07",
+    "scripts/mcp/production-check.mjs": "7bff9ca82fd43e9c7f7851a7d07751f09bfc8874bf0037589d5b8858ab133e47",
+    "scripts/mcp/production-search-check.mjs": "2bff436c880c5382a6fe2972d2856ae7ace9fc7bd8e12b41ae4620e00207edea",
+    "scripts/mcp/current-candidates-check.mjs": "732c3210c58c4189b85132245502fa09caa6d0b33f42d58f171ce3bef21f348c",
+    "scripts/mcp/board-label-check.mjs": "a71df9e084011019f0b2a0544db57ff916200601ea342560b1d326b9bb7ada41",
+    "scripts/mcp/completion-check.mjs": "d6d31d4f747260d48fbc9fa3310879ed91d51a95d87476bde5f18b7d8a0e2cc1",
+    "scripts/mcp/review-queue-check.mjs": "e2607a304c544a842461c98c4f51750c5b2732f0852270f15da78a121db4514e"
+  },
+  "passedSuites": [
+    "project-atomic-check",
+    "verified-snapshot-check",
+    "source-check",
+    "production-check",
+    "production-search-check",
+    "current-candidates-check",
+    "board-label-check",
+    "completion-check",
+    "review-queue-check"
+  ],
+  "change": "One /api/project GET and one projectData(force) result supplies Bible/inventory/state/production/meta; optional production fallback retains separate productionSha and productionLive=false.",
+  "preserved": [
+    "Signed-in asset review overlay checks exact file+stage and modifies clone only.",
+    "Feedback and playtest records stay in separate authenticated routes.",
+    "No audience/auth/storage writes changes.",
+    "Eight second abort/coalescing/backoff and video/query/focus behavior retained."
+  ],
+  "testChanges": [
+    "Six existing browser-controller mocks expose atomic project resource; their behavior assertions retained.",
+    "Old review-queue whole-page invalid-SHA expectation corrected to fail-closed/noimages consistent with preexisting controller validation; component no-SHA placeholder cases remain unchanged."
+  ],
+  "limitations": [
+    "Local source/tests only. No framework build, live UI verification, publication, source Git/index changes or compiled fallback edits.",
+    "Native production metadata may be fallback under a newer Bible head; productionSha and not-live flag explicitly distinguish this."
+  ]
+}
