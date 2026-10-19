@@ -1,5 +1,10 @@
 extends Control
 
+const ManagementUiSkin := preload("res://scripts/rpg-2-star-ocean-the-second_management-ui_skin-helper_v01_20261019-173546-f3412b43.gd")
+static var management_ui_skin_override := -1
+var management_ui_skin: RefCounted = null
+var management_ui_skin_status := "off"
+
 var title_label: Label
 var back_button: Button
 var auto_title: Label
@@ -15,6 +20,9 @@ func _ready() -> void:
 	_build_ui()
 	AppState.language_changed.connect(_refresh)
 	_refresh()
+	if management_ui_skin_override == 1 or (management_ui_skin_override < 0 and OS.get_cmdline_user_args().has("--management-ui-skin-pilot")):
+		management_ui_skin = ManagementUiSkin.new("res://assets/ui/battle-skin-v01")
+		management_ui_skin_status = "applied" if management_ui_skin.apply(self) else "fallback"
 
 
 func _build_ui() -> void:
@@ -144,3 +152,8 @@ func _back() -> void:
 		AppState.resume_annex_pending = true
 		AppState.resume_annex_position = AppState.save_return_position
 	get_tree().change_scene_to_file(AppState.save_return_scene)
+
+
+func _exit_tree() -> void:
+	if management_ui_skin != null:
+		management_ui_skin.revert()

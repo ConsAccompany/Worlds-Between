@@ -1,5 +1,10 @@
 extends Control
 
+const ManagementUiSkin := preload("res://scripts/rpg-2-star-ocean-the-second_management-ui_skin-helper_v01_20261019-173546-f3412b43.gd")
+static var management_ui_skin_override := -1
+var management_ui_skin: RefCounted = null
+var management_ui_skin_status := "off"
+
 const SERIES_IDS := ["sword", "firearms", "tactics", "relics", "merchant"]
 
 var selected_id := "hero"
@@ -34,6 +39,9 @@ func _ready() -> void:
 	_build_ui()
 	AppState.language_changed.connect(_refresh)
 	_refresh()
+	if management_ui_skin_override == 1 or (management_ui_skin_override < 0 and OS.get_cmdline_user_args().has("--management-ui-skin-pilot")):
+		management_ui_skin = ManagementUiSkin.new("res://assets/ui/battle-skin-v01")
+		management_ui_skin_status = "applied" if management_ui_skin.apply(self) else "fallback"
 
 
 func _build_ui() -> void:
@@ -291,3 +299,8 @@ func _node_state_text(opened: bool, has_effect: bool, rank: int, cost: int, lock
 	if cost < 0:
 		return AppState.text_for("growth_node_max") % rank
 	return AppState.text_for("growth_node_upgrade") % [rank, cost]
+
+
+func _exit_tree() -> void:
+	if management_ui_skin != null:
+		management_ui_skin.revert()

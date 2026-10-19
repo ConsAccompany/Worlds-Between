@@ -2,7 +2,7 @@
   "id": "rpg-2-star-ocean-the-second_production-completion_v01",
   "schemaVersion": 2,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-19T21:35:22Z",
+  "updatedAt": "2026-10-19T21:44:27Z",
   "zh": "制作完成度任务台账：衡量已完成的工作量（编码 40% + 内容 60%）；检查／审查与创作者批准分开计量，均不改变制作分；免除的审查不算已执行的工作；运营任务列出负责方但不计百分比。",
   "en": "Production-completion task ledger: measures work done (coding 40% + content 60%); inspection/review and creator approval are separate meters and never change production credit; waived reviews are not performed work; operations tasks list owners but carry no percentage.",
   "brief": "docs/rpg-2-star-ocean-the-second_production-completion_bilingual-brief_v01_20261018-140533-3ea2a621.md",
@@ -531,8 +531,8 @@
     "production": {
       "zh": "制作完成度",
       "en": "Production completion",
-      "percent": 52.2,
-      "percentLabel": "52.2%",
+      "percent": 52.3,
+      "percentLabel": "52.3%",
       "formula": "round1(40 * codingDonePoints/codingTotalPoints + 60 * contentDonePoints/contentTotalPoints)",
       "coding": {
         "done": 111,
@@ -543,12 +543,12 @@
         "tasksDone": 23
       },
       "content": {
-        "done": 381,
+        "done": 384,
         "total": 1879,
-        "percent": 20.3,
+        "percent": 20.4,
         "weight": 60,
         "tasks": 714,
-        "tasksDone": 124
+        "tasksDone": 125
       }
     },
     "inspection": {
@@ -613,11 +613,11 @@
         "waivedPoints": 0
       },
       "content": {
-        "done": 381,
+        "done": 384,
         "total": 1879,
-        "percent": 20.3,
+        "percent": 20.4,
         "tasks": 714,
-        "tasksDone": 124,
+        "tasksDone": 125,
         "waivedTasks": 0,
         "waivedPoints": 0
       },
@@ -672,10 +672,10 @@
         "tasks": 739,
         "operationsTasks": 0,
         "points": 1932,
-        "pointsDone": 377,
+        "pointsDone": 380,
         "byStatus": {
-          "done": 89,
-          "todo": 650
+          "done": 90,
+          "todo": 649
         },
         "readyInQueue": 0,
         "revisionsBlockingApproval": 2
@@ -865,7 +865,7 @@
       },
       "ui-visual": {
         "content": {
-          "done": 3,
+          "done": 6,
           "total": 13
         },
         "visual-review": {
@@ -2493,7 +2493,7 @@
     {"id":"content.audio.combat-sfx","type":"audio-production","title":{"zh":"攻击、防御、技能、胜败音效","en":"Attack, guard, skill, win/lose sounds"},"area":"audio","stage":"content","owner":"claude","status":"done","points":3,"doneCriterion":{"zh":"战斗音效已提交并接入","en":"Combat sounds committed and wired"},"dependsOn":["code.runtime.audio-cues"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_combat-sfx_root-integration-closeout_v01_20261018-224442-5a271961.md","outputs/rpg-2-star-ocean-the-second_combat-sfx_root-integration-manifest_v01_20261018-224442-5a271961.json"],"subject":{"kind":"asset","id":"sfx.combat"},"statusAt":"2026-10-19T02:44:42Z","note":{"zh":"八种原创可编辑战斗音效接入现有战斗事件；独立验证通过，未作听感验收。","en":"Eight original editable combat cues wired into normal arena pilot; root172WAV/88arena/44UI checks pass. No audition or approval."}},
     {"id":"content.ui-visual.navigation","type":"native-pixel","title":{"zh":"探索界面正式视觉","en":"Exploration UI final visuals"},"area":"ui-visual","stage":"content","owner":"claude","status":"todo","points":4,"doneCriterion":{"zh":"导航与探索界面正式视觉已接入","en":"Final navigation / exploration UI visuals wired"},"dependsOn":[],"evidence":[],"subject":{"kind":"asset","id":"ui.explore"}},
     {"id":"content.ui-visual.battle","type":"native-pixel","title":{"zh":"战斗界面正式视觉","en":"Battle UI final visuals"},"area":"ui-visual","stage":"content","owner":"claude","status":"done","points":3,"doneCriterion":{"zh":"战斗 HUD、技能、结算正式视觉已接入","en":"Final battle HUD, skills and results visuals wired"},"dependsOn":[],"evidence":["docs/qa/rpg-2-star-ocean-the-second_battle-ui_root-production-closeout_v01_20261019-172332-dc55a291.md"],"subject":{"kind":"asset","id":"ui.battle-hud"},"statusAt":"2026-10-19T21:35:22Z","note":{"zh":"11种可编辑原生界面皮肤默认关闭接入；独立355原生/407无效包/1250实机检查通过；用户验收另计。","en":"11 editable native skins wired off-default; root355native/407invalid/1250actual-game checks. Creator approval remains separate."}},
-    {"id":"content.ui-visual.management","type":"native-pixel","title":{"zh":"队伍、职业、存档界面正式视觉","en":"Party, jobs and saves UI final visuals"},"area":"ui-visual","stage":"content","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"管理界面正式视觉已接入","en":"Final management UI visuals wired"},"dependsOn":[],"evidence":[],"subject":{"kind":"asset","id":"ui.party"}},
+    {"id":"content.ui-visual.management","type":"native-pixel","title":{"zh":"队伍、职业、存档界面正式视觉","en":"Party, jobs and saves UI final visuals"},"area":"ui-visual","stage":"content","owner":"claude","status":"done","points":3,"doneCriterion":{"zh":"管理界面正式视觉已接入","en":"Final management UI visuals wired"},"dependsOn":[],"evidence":["docs/qa/rpg-2-star-ocean-the-second_management-ui_root-production-closeout_v01_20261019-180100-fd60b5a8.md"],"subject":{"kind":"asset","id":"ui.party"},"statusAt":"2026-10-19T21:44:27Z","note":{"zh":"","en":"Shared native skin wired to party/jobs, nodegrids and saves;85actual bilingual checks, production only; initial prepaint discrepancy disclosed."}},
     {"id":"content.ui-visual.character-portraits","type":"native-pixel","title":{"zh":"队伍头像与对话立绘裁切","en":"Party icons and dialogue portrait crops"},"area":"ui-visual","stage":"content","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"头像与立绘裁切已提交并接入","en":"Icons and portrait crops committed and wired"},"dependsOn":[],"evidence":[],"subject":{"kind":"asset","id":"character-ui.portraits"}},
     {"id":"review.content.vfx","type":"visual-review","title":{"zh":"特效 · 视觉审查","en":"VFX · visual review"},"area":"vfx","stage":"visual-review","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"Codex 审查实机特效并记录结论","en":"Codex reviews the effects in game and records a verdict"},"dependsOn":["content.vfx.common","content.vfx.mvp-skills","content.vfx.encounter"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_mvp-skill-vfx_root-production-closeout_v01_20261019-170721-90a8737c.md","docs/qa/rpg-2-star-ocean-the-second_common-combat-vfx_root-production-closeout_v01_20261019-164412-1f3bff80.md"],"subject":{"kind":"feature","id":"content.vfx"},"statusAt":"2026-10-19T21:15:30Z","outcome":"technical-pass","note":{"zh":"","en":"Actual-game composition and technical review performed: common/skill cues local and quiet, encounter cues separately verified; some support accents blend with dark clothing. Static composition inspection only; no creator artistic or continuous temporal-quality approval."}},
     {"id":"review.content.audio","type":"audio-qa","title":{"zh":"音频 · 内容／音频质量检查","en":"Audio · content / audio QA"},"area":"audio","stage":"content-qa","owner":"codex","status":"todo","points":1,"doneCriterion":{"zh":"Codex 在游戏中试听音乐与音效并记录结论","en":"Codex listens to the music and sounds in game and records a verdict"},"dependsOn":["content.audio.themed-music","content.audio.ui-sfx","content.audio.combat-sfx"],"evidence":[],"subject":{"kind":"feature","id":"content.audio"}},

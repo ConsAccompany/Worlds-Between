@@ -1,0 +1,11 @@
+# Management interface production closeout
+
+Task content.ui-visual.management. ProducerClaude, root integration/independent checksCodex. Base68ba3b0bde50c532487aec377c91f09ffd770d2b. Reuses already verified11nativebattle skins unchanged. No additional per-version/contentasset credit. Art approvalfalse.
+
+New helper covers party/jobs, bothten-nodegrids and manual/autosave slots. Opt-in --management-ui-skin-pilot; existing default screens remainexact. Root adds13lines to each screen (preload, flag/override, state, readyapply, exitrevert); existing gameplay/save logic unchanged.
+
+Independent actualGodot final85/85 checks, clean checkedrunner v08: EN/ZH growth/main/node/save640x360 captures; frozenbefore-wiring/default0px; every existing visible rect/minsize/text/fontsize/buttondisabled/focus/signal method list exact; 4growth/9save decorativeskins accountedfor and inputtransparent; realmouse selectsLiang, opens/closes nodes, writesmanualslot inisolateduserdata; sameinstanceidempotence/revert; missingtargetrefs/missingpackage/invalidJSON/null/arrays/changedmanifest reject withoutmutation ordiagnostics. Nativepackage355/355 evidence inherited unchanged frombattlecloseout. Producer152Pythonselfchecks were static only, notsubstitutedforactualgame.
+
+Root initialtest falselyincluded prefixednewplate names inoldcontrols; corrected explicitbegins_withfilter AND addednonvacuousexpectedplatecounts. Firstlogretained. A later prepaint node snapshot differed once inChinese andfailed strictgate; unchangeddiagnostic runs4–7 passed, nodifference wascaptured. Finaltest waitsframe_post_draw onbothvisible nodecontexts andpasses85/85; exactcomparisons retained, no numericthresholdweakened. This verifies paintedcontexts only, not all transient prelayoutstates; initialone-frame discrepancy not attributedtoamodeldefect without evidence. Failures/logs retained.
+
+Codex viewedactual Englishgrowth/save andChinesenodes: finewarmbronze panels, quietnavy andteal states, readable compactlabels andexistingdisabled controls. The existingnodeplaceholders remain clearlydescribed as notdesigned; no newmechanics, names orapproval. Nativeapplication GUI reliability untested. FullUIreview stilldepends onnavigation/portraits; no creatorapproval orplaytest credit.
