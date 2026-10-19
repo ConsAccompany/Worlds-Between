@@ -224,3 +224,19 @@ outputs/management-ui-v01/** -text -eol whitespace=trailing-space,space-before-t
 tools/*management-ui*fd60b5a8.gd text eol=lf
 
 outputs/tracker-atomic-v01/** -text -eol whitespace=trailing-space,space-before-tab,cr-at-eol
+
+# Exact deterministic music and source-bound evidence.
+game/assets/music/themed-v01/** -text -eol whitespace=trailing-space,space-before-tab,cr-at-eol
+game/scripts/audio/*themed-music* -text -eol whitespace=trailing-space,space-before-tab,cr-at-eol
+outputs/themed-music-v01/** -text -eol whitespace=trailing-space,space-before-tab,cr-at-eol
+outputs/themed-music-v01/*.log whitespace=trailing-space,space-before-tab,cr-at-eol,-blank-at-eof
+tools/*themed-music* -text -eol whitespace=trailing-space,space-before-tab,cr-at-eol
+
+# These tested source files use explicit LF to preserve raw SHA in staged Git.
+game/scripts/scifi_exploration_area.gd text eol=lf
+game/scripts/survey_annex.gd text eol=lf
+
+# Exact legacy loop repair and bound diagnostic source.
+tools/*music_legacy-loop-repair* -text -eol whitespace=trailing-space,space-before-tab,cr-at-eol
+tools/*music_startup-diagnostic* -text -eol whitespace=trailing-space,space-before-tab,cr-at-eol
+game/scripts/battle_arena.gd text eol=lf

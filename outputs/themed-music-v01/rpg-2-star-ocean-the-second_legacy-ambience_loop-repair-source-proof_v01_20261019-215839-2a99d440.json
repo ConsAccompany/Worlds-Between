@@ -1,0 +1,96 @@
+{
+  "recordedAt": "2026-10-19T22:01:20Z",
+  "baseRevision": "8d56d51aeb7adc9e2886a9f7b3297be4d4c49543",
+  "stageExactlyTheseReferenceBytesAsOriginalGamePaths": [
+    {
+      "kind": "area",
+      "originalGitRevision": "8d56d51aeb7adc9e2886a9f7b3297be4d4c49543",
+      "originalGitPath": "game/scripts/scifi_exploration_area.gd",
+      "originalRawSha256": "6fe049f1778016ebfda1af330becf1012b4f6ed2b7e8a87353fed1544bee0b60",
+      "repairedBaseline": "outputs/themed-music-v01/rpg-2-star-ocean-the-second_music-area_repaired-baseline-only_v01_20261019-215839-2a99d440.gd",
+      "repairedRawSha256": "f38f7f101a285219818b1a42a1e2d719639464a9691249ac505172eaea6bb507",
+      "delta": "Only missing/invalid loop-bound guard after existing LOOP_FORWARD; no themed music selection."
+    },
+    {
+      "kind": "annex",
+      "originalGitRevision": "8d56d51aeb7adc9e2886a9f7b3297be4d4c49543",
+      "originalGitPath": "game/scripts/survey_annex.gd",
+      "originalRawSha256": "521f5335e01723267c1a5bcc4d1720f7394b5ab1bb72742e7bdac309d0ad8078",
+      "repairedBaseline": "outputs/themed-music-v01/rpg-2-star-ocean-the-second_music-annex_repaired-baseline-only_v01_20261019-215839-2a99d440.gd",
+      "repairedRawSha256": "42c681eec97737644467e836070c49087f04dd25c2970ffb4fecd642b84191b3",
+      "delta": "Only missing/invalid loop-bound guard after existing LOOP_FORWARD; no themed music selection."
+    },
+    {
+      "kind": "battle",
+      "originalGitRevision": "8d56d51aeb7adc9e2886a9f7b3297be4d4c49543",
+      "originalGitPath": "game/scripts/battle_arena.gd",
+      "originalRawSha256": "4f461bd9a66accc0c2aef698f78dca2e5fcbeb076a359dd122e03f1a3435808b",
+      "repairedBaseline": "outputs/themed-music-v01/rpg-2-star-ocean-the-second_music-battle_repaired-baseline-only_v01_20261019-215839-2a99d440.gd",
+      "repairedRawSha256": "3396203ab2a7e9baf2f0f3a9b1ba0353af8f23d3f07942e72e12455f49623f94",
+      "delta": "Only missing/invalid loop-bound guard after existing LOOP_FORWARD; no themed music selection."
+    }
+  ],
+  "checks": [
+    {
+      "key": "area-exact-three-guard-lines-only",
+      "pass": true
+    },
+    {
+      "key": "area-repaired-reference-sha",
+      "pass": true
+    },
+    {
+      "key": "area-no-theme-selector",
+      "pass": true
+    },
+    {
+      "key": "annex-exact-three-guard-lines-only",
+      "pass": true
+    },
+    {
+      "key": "annex-repaired-reference-sha",
+      "pass": true
+    },
+    {
+      "key": "annex-no-theme-selector",
+      "pass": true
+    },
+    {
+      "key": "battle-exact-three-guard-lines-only",
+      "pass": true
+    },
+    {
+      "key": "battle-repaired-reference-sha",
+      "pass": true
+    },
+    {
+      "key": "battle-no-theme-selector",
+      "pass": true
+    },
+    {
+      "key": "130-actual-contracts",
+      "pass": true
+    },
+    {
+      "key": "final-no-error-warning-markers",
+      "pass": true
+    },
+    {
+      "key": "two-real-cleanup-mixes",
+      "pass": true
+    }
+  ],
+  "failed": [],
+  "actual": {
+    "passed": 130,
+    "total": 130,
+    "backend": "Dummy",
+    "listened": false
+  },
+  "testedHarnessRawSha256": "e30ece398ff4517bfebcc5e10fe3485b3244eb3995e2d5dac0572bb6c29d4d74",
+  "finalLog": "outputs/themed-music-v01/rpg-2-star-ocean-the-second_music_legacy-loop-repair-drained-log_v01_20261019-215839-2a99d440.log",
+  "finalLogRawSha256": "399b647e00cf77305a75a703579d9a5a2949525ed0b38940fb360a4a6de53f88",
+  "diagnostics": "Earlier normal-mode two-ObjectDB cleanup warnings preserved; deferred quit alone did not fix. Final TEST-only stop/detach streams and bounded two-mix drain passed130 clean. Originalzero-loop playback defect is explicitly reproduced, not suppressed.",
+  "defaultMetadataChange": "loop_end changes0 tofull validframecount only where invalid. IdenticaloldPCM retained. No original-baseline-zero-metadatadifference claim.",
+  "approval": false
+}

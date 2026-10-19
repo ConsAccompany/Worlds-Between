@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-19T21:44:39.943984+00:00",
+  "updatedAt": "2026-10-19T22:03:45.837823+00:00",
   "purpose": "Operating queue and worktree ownership; no progress points or account details",
   "workflow": "docs/workflow.md",
   "canonicalLedger": "outputs/rpg-2-star-ocean-the-second_production-completion_task-ledger_v01_20261018-140533-3de52073.json",
@@ -570,7 +570,7 @@
       "id": "support.character.female.battle-static-legibility",
       "owner": "claude",
       "status": "done",
-      "lane": "primary",
+      "lane": "closed",
       "worktree": "chicago-producer",
       "dependsOn": [],
       "output": "One bounded battle STATIC material/legibility refinement answering the standing creator request",
@@ -704,7 +704,7 @@
       "ledgerTask": "content.vfx.common",
       "owner": "deepseek",
       "status": "done",
-      "lane": "supporting",
+      "lane": "closed",
       "worktree": "work/dual02/ds-common",
       "output": "Five editable64x64 combat effect sets plus compatible opt-in loader",
       "writeScope": [
@@ -725,7 +725,7 @@
       "ledgerTask": "content.vfx.mvp-skills",
       "owner": "deepseek",
       "status": "done",
-      "lane": "supporting",
+      "lane": "closed",
       "worktree": "work/dual02/ds-skills",
       "output": "Eight compact native cues for existing four personal and four job-series MVP skills",
       "completion": [
@@ -744,8 +744,8 @@
       "id": "primary.ui.battle-hud-native",
       "ledgerTask": "content.ui-visual.battle",
       "owner": "claude",
-      "status": "active",
-      "lane": "primary",
+      "status": "done",
+      "lane": "closed",
       "worktree": "work/dual02/cl-hud",
       "output": "One complete editable battle HUD/pause/result skin kit and non-mutating prevalidated helper",
       "writeScope": [
@@ -756,7 +756,7 @@
         "Prevalidate-before-mutate helper preserves rectangles/text/input",
         "Root actual EN/ZH normal/pause/results plus off-default pixel/combat parity"
       ],
-      "nextAction": "Claude finishes native UI source/helper; Codex integrates behind explicit opt-in and judges actual captures."
+      "nextAction": "Produced and integrated68ba3b0; full UI art review remains separate."
     },
     {
       "id": "support.audio.four-themes",
@@ -774,7 +774,22 @@
         "Score/MIDI/WAV exact source hashes and technical audio checks",
         "Codex actual integration; no listening/creator approval claim from statistics"
       ],
-      "nextAction": "DeepSeek produces bounded source; Codex checks musical structure/signal files and runtime wiring; listening approval remains separate."
+      "nextAction": "Package validated; finalize actual music checks against separately repaired legacy loop before production closeout."
+    },
+    {
+      "id": "content.audio.ambient-loops.revision",
+      "owner": "codex",
+      "status": "done",
+      "lane": "closed",
+      "output": "Repair missing old ambient loop bounds in all three scene classes; unchanged sound bytes/players/settings",
+      "completion": [
+        "130 actual original-versus-repaired checks; real8s wrap, Master mute/volume",
+        "Only guarded bound repair staged independently of pending opt-in music"
+      ],
+      "evidence": [
+        "docs/qa/rpg-2-star-ocean-the-second_legacy-ambience_loop-bound-repair_v01_20261019-215839-2a99d440.md"
+      ],
+      "nextAction": "Integrate the separate four-theme pilot against the repaired baseline; listening remains unperformed."
     }
   ],
   "nextProductionMilestones": [
@@ -841,10 +856,11 @@
     },
     "supporting": [
       {
-        "task": "content.audio.themed-music",
+        "task": "support.enemy.sentry-editable-native",
         "owner": "deepseek",
-        "workspace": "work/dual02/ds-music",
-        "status": "active-correction-and-selector"
+        "workspace": "work/dual02/ds-common",
+        "status": "active",
+        "progressCredit": "none; source-editability gap on existing produced candidate"
       }
     ],
     "integrationOwner": "codex",

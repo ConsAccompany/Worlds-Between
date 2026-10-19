@@ -259,6 +259,9 @@ func _ready() -> void:
 	var audio_player := AudioStreamPlayer.new()
 	var ambient: AudioStreamWAV = BATTLE_AMBIENCE.duplicate()
 	ambient.loop_mode = AudioStreamWAV.LOOP_FORWARD
+	if ambient.loop_end <= ambient.loop_begin:
+		ambient.loop_begin = 0
+		ambient.loop_end = int(round(ambient.get_length() * ambient.mix_rate))
 	audio_player.stream = ambient
 	audio_player.volume_db = -13.0
 	add_child(audio_player)

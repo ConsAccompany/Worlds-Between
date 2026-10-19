@@ -2,7 +2,7 @@
   "id": "rpg-2-star-ocean-the-second_production-completion_v01",
   "schemaVersion": 2,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-19T21:49:33Z",
+  "updatedAt": "2026-10-19T22:03:17Z",
   "zh": "制作完成度任务台账：衡量已完成的工作量（编码 40% + 内容 60%）；检查／审查与创作者批准分开计量，均不改变制作分；免除的审查不算已执行的工作；运营任务列出负责方但不计百分比。",
   "en": "Production-completion task ledger: measures work done (coding 40% + content 60%); inspection/review and creator approval are separate meters and never change production credit; waived reviews are not performed work; operations tasks list owners but carry no percentage.",
   "brief": "docs/rpg-2-star-ocean-the-second_production-completion_bilingual-brief_v01_20261018-140533-3ea2a621.md",
@@ -499,6 +499,39 @@
         },
         "previousTaskSetSha256": "a2966f4213e68e4540e70aae635d97c3be2ac0dd5ddfa67fcba909e3563a0a92",
         "taskSetSha256": "1820b94009326a71783ea2b00d2760e14203b404c20654ff93d3014d806fa2f6"
+      },
+      {
+        "at": "2026-10-19T21:59:09Z",
+        "kind": "owner-assignment",
+        "taskId": "content.audio.ambient-loops",
+        "fromOwner": "claude",
+        "toOwner": "codex",
+        "changedTaskIds": [
+          "content.audio.ambient-loops"
+        ],
+        "reason": {
+          "zh": "",
+          "en": "Codex independently diagnosed inherited zero-lengthQOA loop causing actual baseline ambience to stop after firstmix; bounded default-loop repair, original source/audio retained."
+        },
+        "previousTaskSetSha256": "1820b94009326a71783ea2b00d2760e14203b404c20654ff93d3014d806fa2f6",
+        "taskSetSha256": "38644dbd8cddaf89caf88c6f71157639c81b1c047db0282d3fe3215c41355ab2"
+      },
+      {
+        "at": "2026-10-19T21:59:10Z",
+        "kind": "revision-bucket",
+        "addedTaskIds": [
+          "content.audio.ambient-loops.revision"
+        ],
+        "reason": {
+          "zh": "",
+          "en": "Actual oldQOA audio has LOOP_FORWARD with zero loopend; freezesbaseline stopafterfirstmix. One defined revision bucket repairs fullsample bounds and verifies continued/wrapped playback without changing source audio."
+        },
+        "effect": {
+          "zh": "只增加分母；已完成的原始制作保持计分；本交付物之后的版本只重开此桶。",
+          "en": "Adds to the denominator only; the finished original keeps its credit; later versions of this deliverable only reopen this bucket."
+        },
+        "previousTaskSetSha256": "38644dbd8cddaf89caf88c6f71157639c81b1c047db0282d3fe3215c41355ab2",
+        "taskSetSha256": "5e60144bcca367fec043bc1bc9709d2ca1c4067e17c0502ee23b1a978389a69a"
       }
     ],
     "pointsByStage": {
@@ -543,12 +576,12 @@
         "tasksDone": 23
       },
       "content": {
-        "done": 384,
-        "total": 1879,
-        "percent": 20.4,
+        "done": 386,
+        "total": 1881,
+        "percent": 20.5,
         "weight": 60,
-        "tasks": 714,
-        "tasksDone": 125
+        "tasks": 715,
+        "tasksDone": 126
       }
     },
     "inspection": {
@@ -613,11 +646,11 @@
         "waivedPoints": 0
       },
       "content": {
-        "done": 384,
-        "total": 1879,
-        "percent": 20.4,
-        "tasks": 714,
-        "tasksDone": 125,
+        "done": 386,
+        "total": 1881,
+        "percent": 20.5,
+        "tasks": 715,
+        "tasksDone": 126,
         "waivedTasks": 0,
         "waivedPoints": 0
       },
@@ -669,12 +702,12 @@
     },
     "byOwner": {
       "claude": {
-        "tasks": 739,
+        "tasks": 738,
         "operationsTasks": 0,
-        "points": 1932,
-        "pointsDone": 380,
+        "points": 1929,
+        "pointsDone": 377,
         "byStatus": {
-          "done": 90,
+          "done": 89,
           "todo": 649
         },
         "readyInQueue": 0,
@@ -693,12 +726,12 @@
         "revisionsBlockingApproval": 0
       },
       "codex": {
-        "tasks": 200,
+        "tasks": 202,
         "operationsTasks": 2,
-        "points": 244,
-        "pointsDone": 131,
+        "points": 249,
+        "pointsDone": 136,
         "byStatus": {
-          "done": 83,
+          "done": 85,
           "todo": 113,
           "not_required": 4
         },
@@ -851,8 +884,8 @@
       },
       "audio": {
         "content": {
-          "done": 9,
-          "total": 15
+          "done": 11,
+          "total": 17
         },
         "content-qa": {
           "done": 0,
@@ -2486,7 +2519,7 @@
     {"id":"content.vfx.common","type":"native-pixel","title":{"zh":"通用战斗特效（攻击、闪避、防御、受击、治疗）","en":"Common combat effects (attack, dodge, guard, hit, heal)"},"area":"vfx","stage":"content","owner":"deepseek","status":"done","points":5,"doneCriterion":{"zh":"五类特效已提交并接入","en":"Five effect sets committed and wired"},"dependsOn":["code.runtime.vfx-system"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_common-combat-vfx_root-production-closeout_v01_20261019-164412-1f3bff80.md","outputs/common-vfx-v01/rpg-2-star-ocean-the-second_common-vfx_root-native-report_v01_20261019-164412-1f3bff80.json","outputs/common-vfx-v01/hooks/rpg-2-star-ocean-the-second_common-vfx_root-runtime-report_v01_20261019-164412-1f3bff80.json"],"subject":{"kind":"asset","id":"vfx.common"},"statusAt":"2026-10-19T20:55:22Z","note":{"zh":"","en":"Five editable native sets produced by DeepSeek and wired opt-in; Codex native245, actual-game1312, malformed-loader122 and existing regression33 checks pass. Original SCRIPT ERROR retained and corrected. Artistic approval, GUI save/reopen and default adoption remain separate."}},
     {"id":"content.vfx.mvp-skills","type":"native-pixel","title":{"zh":"MVP 个人与职业技能特效","en":"MVP personal and job skill effects"},"area":"vfx","stage":"content","owner":"deepseek","status":"done","points":4,"doneCriterion":{"zh":"MVP 技能特效已提交并接入","en":"MVP skill effects committed and wired"},"dependsOn":["code.runtime.vfx-system"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_mvp-skill-vfx_root-production-closeout_v01_20261019-170721-90a8737c.md","outputs/skill-vfx-v01/actual-v03/rpg-2-star-ocean-the-second_skill-vfx_root-runtime-report_v01_20261019-170721-90a8737c.json"],"subject":{"kind":"asset","id":"vfx.mvp-skills"},"statusAt":"2026-10-19T21:15:30Z","note":{"zh":"","en":"Eight editable native cue sets wired to existing four personal and four job-family skills, including both existing job stages. Root389native,191loader,1375actual-game checks pass; defaults and simulation unchanged. Art approval and temporal review separate."}},
     {"id":"content.vfx.encounter","type":"native-pixel","title":{"zh":"接敌、胜利、战败与恢复特效","en":"Encounter, victory, defeat and recovery effects"},"area":"vfx","stage":"content","owner":"deepseek","status":"done","points":3,"doneCriterion":{"zh":"四类反馈特效已提交并接入","en":"Four feedback effects committed and wired"},"dependsOn":[],"evidence":["docs/qa/rpg-2-star-ocean-the-second_encounter-vfx_native-and-runtime-closeout_v02_20261019-003427-73b5efb4.md"],"subject":{"kind":"asset","id":"vfx.encounter"},"statusAt":"2026-10-19T04:56:14Z","note":{"zh":"","en":"DeepSeek produced4editable effect sets with correct native timing; optional encounter/victory/defeat/recovery wiring, missing-frame guard and visible result-margin surface. Root checks84+184+20+1220passed, default render and combat parity retained. Unapproved pilot stays off default."}},
-    {"id":"content.audio.ambient-loops","type":"audio-production","title":{"zh":"四段原创环境循环","en":"Four original ambient loops"},"area":"audio","stage":"content","owner":"claude","status":"done","points":3,"doneCriterion":{"zh":"城镇、野外、遗址、战斗循环已接入","en":"Town, field, ruin and battle loops are wired"},"dependsOn":[],"evidence":["game/assets/audio/rpg-2-star-ocean-the-second_scifi-city_ambient-loop_m7_20261013-211230-c8e1159a.wav","game/assets/audio/rpg-2-star-ocean-the-second_scifi-battle_ambient-loop_m7_20261013-211230-37fcaa02.wav","game/tests/m7_smoke.gd"],"subject":{"kind":"asset","id":"music.mvp"}},
+    {"id":"content.audio.ambient-loops","type":"audio-production","title":{"zh":"四段原创环境循环","en":"Four original ambient loops"},"area":"audio","stage":"content","owner":"codex","status":"done","points":3,"doneCriterion":{"zh":"城镇、野外、遗址、战斗循环已接入","en":"Town, field, ruin and battle loops are wired"},"dependsOn":[],"evidence":["game/assets/audio/rpg-2-star-ocean-the-second_scifi-city_ambient-loop_m7_20261013-211230-c8e1159a.wav","game/assets/audio/rpg-2-star-ocean-the-second_scifi-battle_ambient-loop_m7_20261013-211230-37fcaa02.wav","game/tests/m7_smoke.gd"],"subject":{"kind":"asset","id":"music.mvp"}},
     {"id":"content.audio.themed-music","type":"audio-production","title":{"zh":"MVP 主题配乐","en":"MVP themed music"},"area":"audio","stage":"content","owner":"deepseek","status":"todo","points":6,"doneCriterion":{"zh":"四段主题配乐已提交并接入","en":"Four themed tracks committed and wired"},"dependsOn":["content.audio.ambient-loops"],"evidence":[],"subject":{"kind":"asset","id":"music.mvp"}},
     {"id":"content.audio.discovery-cue","type":"audio-production","title":{"zh":"调查发现提示音","en":"Discovery cue"},"area":"audio","stage":"content","owner":"claude","status":"done","points":1,"doneCriterion":{"zh":"调查发现时播放提示音","en":"Discovery plays the cue"},"dependsOn":[],"evidence":["game/assets/audio/rpg-2-star-ocean-the-second_discovery_interaction-cue_m7_20261013-211230-ad781e52.wav","game/tests/m7_smoke.gd"],"subject":{"kind":"asset","id":"sfx.discovery"}},
     {"id":"content.audio.ui-sfx","type":"audio-production","title":{"zh":"按钮、菜单、提示音","en":"Button, menu and prompt sounds"},"area":"audio","stage":"content","owner":"claude","status":"done","points":2,"doneCriterion":{"zh":"界面音效已提交并接入","en":"UI sounds committed and wired"},"dependsOn":["code.runtime.audio-cues"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_ui-sfx_root-integration-closeout_v01_20261018-221446-b952ad55.md","outputs/rpg-2-star-ocean-the-second_ui-sfx_root-integration-manifest_v01_20261018-221446-b952ad55.json"],"subject":{"kind":"asset","id":"sfx.ui"},"statusAt":"2026-10-19T02:14:46Z","note":{"zh":"三种原创界面音效及正常试点钩子；独立重建45/45，1280与640窗口各44/44，不等于听感或用户验收。","en":"Three authored UI WAVs and normal pilot hooks; root45/45 waveform rebuild and44/44 windowed checks at1280 and640. Not listening/creator approval."}},
@@ -2517,6 +2550,7 @@
     {"id":"content.combat.protagonist-female.combat-static.revision","type":"revision","title":{"zh":"主角·女 · 横向战斗静止帧 · 按创作者对 v11 的意见修订（v12–v14）","en":"Female protagonist · side-view combat static · Revision after the creator feedback on v11 (v12-v14)"},"area":"combat","stage":"content","owner":"claude","status":"done","points":2,"doneCriterion":{"zh":"针对最近一次审查／创作者意见的修订版已提交并有 QA；后续版本只更新本条，不新增分值","en":"A revision answering the latest review / creator request is committed with QA; later versions update this bucket and add no points"},"dependsOn":["content.combat.protagonist-female.combat-static"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_female-battle_root-production-closeout_v17r2_20261019-164412-1f3bff80.md","outputs/battle-static-v17r2/rpg-2-star-ocean-the-second_female-battle_root-proof_v17r2_20261019-164412-1f3bff80.json"],"subject":{"kind":"character-variant","id":"protagonist-female"},"target":"content.combat.protagonist-female.combat-static","statusAt":"2026-10-19T21:04:34Z","note":{"zh":"创作者否决v16的人物与面部粗糙度；重开同一个固定修订桶，改用更细的人脸与呈现方法。","en":"Complete dense still revision:20source and53independent native/actual-render checks pass. Protected face survives all four1280captures. Pixelorama exports exact but application diagnostics/GUI reliability remain open. Art and motion approval remain pending."}},
     {"id":"content.char.protagonist-female.walk-south.revision","type":"revision","title":{"zh":"主角·女 · 南向行走／跑动 · 跑动／停步打磨（v10 + r1，已制作的技术修订；步态与流畅度未批准）","en":"Female protagonist · south walk/run · Run/stop polish (v10 + r1, produced technical revision; gait and fluidity unapproved)"},"area":"characters","stage":"content","owner":"claude","status":"done","points":2,"doneCriterion":{"zh":"针对最近一次审查／创作者意见的修订版已提交并有 QA；后续版本只更新本条，不新增分值","en":"A revision answering the latest review / creator request is committed with QA; later versions update this bucket and add no points"},"dependsOn":["content.char.protagonist-female.walk-south"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_female-south-run-v10r1_reach-landing-amendment_qa-note_unapproved-nonruntime_20261018-142136-249dbf66.md","outputs/rpg-2-star-ocean-the-second_city-annex_female-south-run-v10r1-capture-receipt-h48_unapproved_20261018-182800-9ee66cb8.json"],"subject":{"kind":"character-variant","id":"protagonist-female"},"target":"content.char.protagonist-female.walk-south","statusAt":"2026-10-18T18:36:18Z"},
     {"id":"content.char.liang-xu.static-south.revision","type":"revision","title":{"zh":"梁序 · 南向高密度静止帧 · 按 Codex 视觉审查意见修订南向静止帧","en":"Liang Xu · south high-density static · South static revision after the Codex visual audit"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"针对最近一次审查／创作者意见的修订版已提交并有 QA；后续版本只更新本条，不新增分值","en":"A revision answering the latest review / creator request is committed with QA; later versions update this bucket and add no points"},"dependsOn":["content.char.liang-xu.static-south"],"evidence":[],"subject":{"kind":"character-variant","id":"liang-xu"},"target":"content.char.liang-xu.static-south"},
-    {"id":"content.scene.chicago-loop.native-pass.revision","type":"revision","title":{"zh":"芝加哥卢普区街区 · 原生像素画质版 · 修订","en":"Chicago Loop block · native pixel quality pass · revision"},"area":"scenes","stage":"content","owner":"codex","status":"done","points":6,"doneCriterion":{"zh":"针对最近一次审查／创作者意见的修订版已提交并有 QA；后续版本只更新本条，不新增分值","en":"A revision answering the latest review / creator request is committed with QA; later versions update this bucket and add no points"},"dependsOn":["content.scene.chicago-loop.native-pass"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_chicago-loop_material-depth-v06-completed-revision_unapproved-v01_20261018-173531-058a4701.md","docs/qa/rpg-2-star-ocean-the-second_chicago-loop_v06-codex-visual-verdict_unapproved-v01_20261018-174138-428dc70b.md"],"subject":{"kind":"scene-gate","id":"visual-scene.chicago-loop-outdoor"},"target":"content.scene.chicago-loop.native-pass","statusAt":"2026-10-18T21:41:38.803668+00:00","note":{"zh":"","en":"Codex finished and inspected v06 native material revision; actual test-injected gameplay evidence, no default adoption or creator art approval."}}
+    {"id":"content.scene.chicago-loop.native-pass.revision","type":"revision","title":{"zh":"芝加哥卢普区街区 · 原生像素画质版 · 修订","en":"Chicago Loop block · native pixel quality pass · revision"},"area":"scenes","stage":"content","owner":"codex","status":"done","points":6,"doneCriterion":{"zh":"针对最近一次审查／创作者意见的修订版已提交并有 QA；后续版本只更新本条，不新增分值","en":"A revision answering the latest review / creator request is committed with QA; later versions update this bucket and add no points"},"dependsOn":["content.scene.chicago-loop.native-pass"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_chicago-loop_material-depth-v06-completed-revision_unapproved-v01_20261018-173531-058a4701.md","docs/qa/rpg-2-star-ocean-the-second_chicago-loop_v06-codex-visual-verdict_unapproved-v01_20261018-174138-428dc70b.md"],"subject":{"kind":"scene-gate","id":"visual-scene.chicago-loop-outdoor"},"target":"content.scene.chicago-loop.native-pass","statusAt":"2026-10-18T21:41:38.803668+00:00","note":{"zh":"","en":"Codex finished and inspected v06 native material revision; actual test-injected gameplay evidence, no default adoption or creator art approval."}},
+    {"id":"content.audio.ambient-loops.revision","type":"revision","title":{"zh":"四段原创环境循环 · 修订","en":"Four original ambient loops · revision"},"area":"audio","stage":"content","owner":"codex","status":"done","points":2,"doneCriterion":{"zh":"针对最近一次审查／创作者意见的修订版已提交并有 QA；后续版本只更新本条，不新增分值","en":"A revision answering the latest review / creator request is committed with QA; later versions update this bucket and add no points"},"dependsOn":["content.audio.ambient-loops"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_legacy-ambience_loop-bound-repair_v01_20261019-215839-2a99d440.md"],"subject":{"kind":"asset","id":"music.mvp"},"target":"content.audio.ambient-loops","statusAt":"2026-10-19T22:03:17Z","note":{"zh":"","en":"Actual oldQOA audio has LOOP_FORWARD with zero loopend; freezesbaseline stopafterfirstmix. One defined revision bucket repairs fullsample bounds and verifies continued/wrapped playback without changing source audio."}}
   ]
 }

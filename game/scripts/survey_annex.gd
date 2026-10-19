@@ -504,6 +504,9 @@ func _start_audio() -> void:
 	var ambience := AudioStreamPlayer.new()
 	var stream: AudioStreamWAV = load(AMBIENCE[destination_id]).duplicate()
 	stream.loop_mode = AudioStreamWAV.LOOP_FORWARD
+	if stream.loop_end <= stream.loop_begin:
+		stream.loop_begin = 0
+		stream.loop_end = int(round(stream.get_length() * stream.mix_rate))
 	ambience.stream = stream
 	ambience.volume_db = -12.0
 	add_child(ambience)
