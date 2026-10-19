@@ -1,8 +1,8 @@
 extends Node
 
-# Presentation capability. Combat cues are generated, cached PCM (no external files or global
-# RNG changes); interface cues play authored WAVs and fall back to that PCM when an asset is
-# missing or unusable. Default OFF until sound content is accepted.
+# Presentation capability. Interface and combat cues play authored WAVs and fall back to
+# generated, cached PCM (no global RNG changes) when an asset is missing or unusable.
+# Default OFF until sound content is accepted.
 const FLAG := "--audio-cues-pilot"
 const RATE := 22050
 const VOICES := 4
@@ -12,6 +12,16 @@ const ASSETS := {
 	"ui.confirm": "res://assets/audio/rpg-2-star-ocean-the-second_ui-confirm_interface-sfx_v01_20261018-215528-fd2f02df.wav",
 	"ui.cancel": "res://assets/audio/rpg-2-star-ocean-the-second_ui-cancel_interface-sfx_v01_20261018-215528-b6b84df7.wav",
 	"ui.notice": "res://assets/audio/rpg-2-star-ocean-the-second_ui-notice_interface-sfx_v01_20261018-215528-09a0a294.wav",
+	# Authored combat set v01, same format. Source:
+	# tools/rpg-2-star-ocean-the-second_combat-sfx_wav-source-builder_v01_20261018-222500-47342433.py
+	"attack": "res://assets/audio/rpg-2-star-ocean-the-second_combat-attack_battle-sfx_v01_20261018-222500-44fc6fe0.wav",
+	"dodge": "res://assets/audio/rpg-2-star-ocean-the-second_combat-dodge_battle-sfx_v01_20261018-222500-de3cac5f.wav",
+	"guard": "res://assets/audio/rpg-2-star-ocean-the-second_combat-guard_battle-sfx_v01_20261018-222500-f17092a4.wav",
+	"hit": "res://assets/audio/rpg-2-star-ocean-the-second_combat-hit_battle-sfx_v01_20261018-222500-58dc96e7.wav",
+	"skill": "res://assets/audio/rpg-2-star-ocean-the-second_combat-skill_battle-sfx_v01_20261018-222500-7576322a.wav",
+	"heal": "res://assets/audio/rpg-2-star-ocean-the-second_combat-heal_battle-sfx_v01_20261018-222500-868719df.wav",
+	"victory": "res://assets/audio/rpg-2-star-ocean-the-second_combat-victory_battle-sfx_v01_20261018-222500-3e851f4e.wav",
+	"defeat": "res://assets/audio/rpg-2-star-ocean-the-second_combat-defeat_battle-sfx_v01_20261018-222500-5b91e159.wav",
 }
 # A specific interface cue replaces the generic button click of the same press.
 const SUPERSEDE_CONFIRM := ["ui.cancel", "ui.notice"]

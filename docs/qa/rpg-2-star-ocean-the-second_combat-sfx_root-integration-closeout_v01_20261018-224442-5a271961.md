@@ -1,0 +1,13 @@
+# Combat sound production: independent integration closeout
+
+Task `content.audio.combat-sfx`, Claude producer, Codex integration. Eight original deterministic editable44.1kHz mono16-bit WAVs are wired to existing attack/dodge/guard/hit/skill/heal/victory/defeat cue mappings. The exact production diff from prior UI commit is the eight asset entries plus header/source comments; code after SUPERSEDE_CONFIRM is unchanged. Existing UI assets and source remain exact. DefaultOFF, voices, player gain, coalescing, game state/RNG, mute and volume policy are unchanged.
+
+Root verified all54 producer manifest files using declared raw WAV/LF-normalized text hashes, independently rebuilt all WAVs twice172/172, imported8assets cleanly, and reran actual canonical1280x720 WASAPI normal-arena combined contract88/88 under isolated temporary APPDATA. Imported11PCM data identities, actual cue dispatch/mixer windows, mute/40%volume, exact39/40ms boundary, bounded pool/cache, malformed assets and win/loss simulation parity pass. The heal event is presentation-only; this does not implement a healing mechanic. No human sound audition or quality approval.
+
+Historical UIv01/v02 tests are preserved; their procedural-combat assertion is explicitly superseded by authored content. New root UIv03 retains every otherv02 predicate and changes only that one semantic expectation to the registered44100Hz assets. Root's first call omitted its required verification-report argument and failed40/44 (missing expected hashes plus three identities). That failed report/log are retained. Passing rerun with the required existing UI WAV verification input is44/44, same source/assets and unchanged thresholds. Engine-injected controls are not physical desktop input.
+
+Producer preserved sound-synthesis threshold failures166/172 and170/172, contract tries1–5 and their diagnostic limitations; only final try6/7 bind final source. Root inspected the actual minimal production diff and source-bound pass evidence. Credit only existing3content points after selected commit; no new task/denominator, inspection/approval or acceptance counter credit. All full character/environment/human playtest gates remain separate.
+
+Hashes: raw WAVs; text CRLF→LF only. Root manifest binds exact selected sources and failure/pass evidence; account controller and unrelated import sidecars remain local.
+
+Some frozen logs contain literal emitted trailing spaces. Selected logs are delivered losslessly as `.log.gz` with raw compressed/original and LF-normalized original hashes. Decompress to the recorded original paths when replaying the frozen producer manifest. Original files remain preserved locally; no failure/output whitespace was trimmed or gate disabled.
