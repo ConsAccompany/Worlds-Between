@@ -1,6 +1,10 @@
 extends Node2D
 
 const CONTENT := preload("res://scripts/survey_content.gd")
+const ThemedMusic := preload("res://scripts/audio/rpg-2-star-ocean-the-second_themed-music_selector_v01_20261019-212037-7f3c2a26.gd")
+# Unapproved audio pilot: disabled by default; the existing player/settings/fallback stay in use.
+static var themed_music_override := -1
+static var themed_music_asset_dir := ThemedMusic.DEFAULT_ASSET_DIR
 const NativeIdle := preload("res://scripts/character_directional_idle.gd")
 const NativeMotion := preload("res://scripts/character_directional_motion.gd")
 const SpriteSetPilot := preload("res://scripts/exploration_sprite_set_pilot.gd")
@@ -502,7 +506,10 @@ func _build_hero() -> void:
 
 func _start_audio() -> void:
 	var ambience := AudioStreamPlayer.new()
-	var stream: AudioStreamWAV = load(AMBIENCE[destination_id]).duplicate()
+	var music_context: String = {"scifi.city": "city", "scifi.outskirts": "field", "scifi.ruins": "ruins"}[destination_id]
+	var stream: AudioStreamWAV = ThemedMusic.select(music_context, themed_music_override, themed_music_asset_dir)
+	if stream == null:
+		stream = load(AMBIENCE[destination_id]).duplicate()
 	stream.loop_mode = AudioStreamWAV.LOOP_FORWARD
 	if stream.loop_end <= stream.loop_begin:
 		stream.loop_begin = 0

@@ -17,6 +17,10 @@ const MOVE_SPEED := 168.0
 const DODGE_COST := 12
 const GUARD_HIT_COST := 6
 const BATTLE_AMBIENCE := preload("res://assets/audio/rpg-2-star-ocean-the-second_scifi-battle_ambient-loop_m7_20261013-211230-37fcaa02.wav")
+const ThemedMusic := preload("res://scripts/audio/rpg-2-star-ocean-the-second_themed-music_selector_v01_20261019-212037-7f3c2a26.gd")
+# Unapproved audio pilot: disabled by default; the existing player/settings/fallback stay in use.
+static var themed_music_override := -1
+static var themed_music_asset_dir := ThemedMusic.DEFAULT_ASSET_DIR
 const MaleCombatFrames := preload("res://scripts/rpg-2-star-ocean-the-second_protagonist-male_sideview-combat-frames_m8-prototype_20261014-142500-75b6d7ec.gd")
 const FemaleCombatFrames := preload("res://scripts/rpg-2-star-ocean-the-second_protagonist-female_sideview-combat-frames_m8-prototype_20261014-143330-d94057ea.gd")
 const LiangCombatFrames := preload("res://scripts/rpg-2-star-ocean-the-second_liang-xu_sideview-combat-frames_m8-prototype_20261014-144100-a41f6b9c.gd")
@@ -257,7 +261,9 @@ func _ready() -> void:
 		_emit_encounter_feedback("encounter", _encounter_party_origin())
 	_build_ui()
 	var audio_player := AudioStreamPlayer.new()
-	var ambient: AudioStreamWAV = BATTLE_AMBIENCE.duplicate()
+	var ambient: AudioStreamWAV = ThemedMusic.select("battle", themed_music_override, themed_music_asset_dir)
+	if ambient == null:
+		ambient = BATTLE_AMBIENCE.duplicate()
 	ambient.loop_mode = AudioStreamWAV.LOOP_FORWARD
 	if ambient.loop_end <= ambient.loop_begin:
 		ambient.loop_begin = 0

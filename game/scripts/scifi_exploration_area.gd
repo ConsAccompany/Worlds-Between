@@ -7,6 +7,10 @@ const NativeIdle := preload("res://scripts/character_directional_idle.gd")
 const NativeMotion := preload("res://scripts/character_directional_motion.gd")
 const SpriteSetPilot := preload("res://scripts/exploration_sprite_set_pilot.gd")
 const BATTLE_SCENE := preload("res://scenes/battle_arena.tscn")
+const ThemedMusic := preload("res://scripts/audio/rpg-2-star-ocean-the-second_themed-music_selector_v01_20261019-212037-7f3c2a26.gd")
+# Unapproved audio pilot: disabled by default; the existing player/settings/fallback stay in use.
+static var themed_music_override := -1
+static var themed_music_asset_dir := ThemedMusic.DEFAULT_ASSET_DIR
 const CityNavigation := preload("res://scripts/city_navigation.gd")
 const CityHallParkV06 := preload("res://scripts/city_hall_park_v06_scene.gd")
 const MOVE_SPEED := 140.0
@@ -407,7 +411,10 @@ func _build_actors() -> void:
 
 func _start_audio() -> void:
 	var ambient_player := AudioStreamPlayer.new()
-	var ambient: AudioStreamWAV = load(AMBIENCE[destination_id]).duplicate()
+	var music_context: String = {"scifi.city": "city", "scifi.outskirts": "field", "scifi.ruins": "ruins"}[destination_id]
+	var ambient: AudioStreamWAV = ThemedMusic.select(music_context, themed_music_override, themed_music_asset_dir)
+	if ambient == null:
+		ambient = load(AMBIENCE[destination_id]).duplicate()
 	ambient.loop_mode = AudioStreamWAV.LOOP_FORWARD
 	if ambient.loop_end <= ambient.loop_begin:
 		ambient.loop_begin = 0
