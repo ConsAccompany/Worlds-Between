@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-19T22:36:50.879937+00:00",
+  "updatedAt": "2026-10-19T22:46:05.162926+00:00",
   "purpose": "Operating queue and worktree ownership; no progress points or account details",
   "workflow": "docs/workflow.md",
   "canonicalLedger": "outputs/rpg-2-star-ocean-the-second_production-completion_task-ledger_v01_20261018-140533-3de52073.json",
@@ -827,6 +827,17 @@
         "docs/qa/rpg-2-star-ocean-the-second_female-display_exact-crop-runtime_v01_20261019-182839-4d72f1c6.md"
       ],
       "nextAction": "Creator art/canon approval separate; no whole UI-portrait kit completion."
+    },
+    {
+      "id": "support.ui.pause-skill-overlap",
+      "owner": "codex",
+      "status": "done",
+      "lane": "closed",
+      "output": "Two-row pause menu fixes translated skill overlap and Resume overflow, exact existing callbacks/simulation preserved",
+      "evidence": [
+        "docs/qa/rpg-2-star-ocean-the-second_battle-pause_two-row-layout-repair_v01_20261019-184022-8ea4b1d9.md"
+      ],
+      "progressCredit": "none; existing usability defect repair"
     }
   ],
   "nextProductionMilestones": [
@@ -889,16 +900,16 @@
       "task": "support.character.female.complete-exploration-pilot",
       "owner": "claude",
       "workspace": "work/dual02/cl-management",
-      "status": "engineering-resolution-before-resume",
+      "status": "active",
       "scope": "Integrate already-produced four-direction female idle/run/stop coherently behindoptin; no newart/defaultadoption."
     },
     "supporting": [
       {
-        "task": "support.site.inventory-snapshot-links",
+        "task": "content.char.mvp-four-display-images",
         "owner": "deepseek",
-        "workspace": "work/dual02/ds-inventory-links",
+        "workspace": "work/dual02/ds-portrait",
         "status": "active",
-        "scope": "Inventory URL snapshot pinning and unsafe href refusal; no data/auth/review changes."
+        "scope": "Existing-source exact portrait crops and shared optional display helper; four separate content tasks, no art approval."
       }
     ],
     "integrationOwner": "codex",

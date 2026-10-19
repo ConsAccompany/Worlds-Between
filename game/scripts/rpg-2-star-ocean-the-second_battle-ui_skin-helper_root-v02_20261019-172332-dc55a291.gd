@@ -40,7 +40,7 @@ const FONT_COLOR_NAMES := ["font_color", "font_hover_color", "font_pressed_color
 const BAR_FILLS := {"hp_bar": "bar-fill-health", "energy_bar": "bar-fill-energy", "enemy_bar": "bar-fill-enemy"}
 const HEADER_RECT := Rect2(0, 0, 640, 90)
 const FOOTER_RECT := Rect2(0, 302, 640, 58)
-const PAUSE_PANEL_RECT := Rect2(55, 43, 530, 265)
+const PAUSE_PANEL_RECT := Rect2(55, 43, 530, 286)
 const RESULT_PANEL_RECT := Rect2(112, 99, 416, 171)
 
 var asset_dir := ""
