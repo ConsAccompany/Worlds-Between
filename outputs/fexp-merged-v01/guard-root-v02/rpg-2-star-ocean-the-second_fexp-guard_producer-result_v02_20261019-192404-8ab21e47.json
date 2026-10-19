@@ -1,0 +1,125 @@
+{
+  "project": "rpg-2-star-ocean-the-second",
+  "subject": "female-complete-exploration-pilot",
+  "purpose": "strict-atomic-fallback-and-per-driver-motion-state-guard",
+  "variant": "v01",
+  "timestamp": "20261019-192006",
+  "id": "a7d3e9b1",
+  "workspace": "work/dual02/ds-fexp-guard",
+  "frozen_game_snapshot": "fcx-v02",
+  "global_stop": {
+    "path": "work/dual01/control/rpg-2-star-ocean-the-second_dual-provider_global-stop_v01_20261019-001423-861097ca.json",
+    "present_before_mutations": false,
+    "checked_at": "2026-10-19T19:19:08-04:00"
+  },
+  "scope": {
+    "owned_modified": [
+      "game/scripts/fexp/rpg-2-star-ocean-the-second_female-complete-explore_driver_pilot-v01_20261019-184900-f2c0a7e1.gd"
+    ],
+    "owned_new": [
+      "game/scripts/fexp/rpg-2-star-ocean-the-second_female-complete-explore_input-guard_v01_20261019-190507-a7d3e9b1.gd",
+      "game/tests/rpg-2-star-ocean-the-second_female-complete-explore_guard-contract-check_v01_20261019-190507-a7d3e9b1.gd"
+    ],
+    "not_edited": [
+      "game/scripts/fexp/*model*.gd (EAST/WEST/NORTH/SOUTH renderers)",
+      "game/scripts/exploration_sprite_set_pilot.gd (host)",
+      "game/scenes/*",
+      "game/assets/* source inputs",
+      "game/data/fexp/* package/runtime JSON",
+      "package.json / ledger / git index / Site / account"
+    ]
+  },
+  "pins": {
+    "package_raw_sha256": "8918ccf5ea4517514595091c2b0b90102c49dc70903caead11cc67a8d61bc6b6",
+    "south_runtime_raw_sha256": "90fcf3ed873be0b67dec823cb09c596550db23553def89f6e899a4976a7a5da8",
+    "north_pxo_raw_sha256": "7ca7dbdffe9787948ea56ae033b55e738cbd3f80bfbd694ed2d3a9a110756ef9",
+    "north_pxo_path": "res://assets/characters/protagonist-female/north-idle-static-pilot-unapproved-v01/rpg-2-star-ocean-the-second_protagonist-female_north-idle-static-pilot-editable_unapproved-v01_20261018-090713-99e861ce.pxo"
+  },
+  "files": {
+    "driver": {
+      "path": "game/scripts/fexp/rpg-2-star-ocean-the-second_female-complete-explore_driver_pilot-v01_20261019-184900-f2c0a7e1.gd",
+      "sha256_before": "e468c1f9560be06c9ef63a1394c2fc3b9e7b3f556c4984aa598e2be80ca67a5b",
+      "sha256_after": "48535c156f801d41f7367717cc8c0da05b7faabfaf65799d5b9ce7d95adbd453",
+      "bytes_after": 17529
+    },
+    "input_guard": {
+      "path": "game/scripts/fexp/rpg-2-star-ocean-the-second_female-complete-explore_input-guard_v01_20261019-190507-a7d3e9b1.gd",
+      "sha256": "b3cfa3d38b8f1e557bd85fecd3bb93e239a8aaca756cf285780187b2947b07be",
+      "bytes": 39083
+    },
+    "guard_contract_test": {
+      "path": "game/tests/rpg-2-star-ocean-the-second_female-complete-explore_guard-contract-check_v01_20261019-190507-a7d3e9b1.gd",
+      "sha256": "802c2ba9e01225b26e80b53933534ce0575e30572e8ad4477ddaa01f8472a65",
+      "bytes": 25287
+    },
+    "driver_diff": {
+      "path": "tools/rpg-2-star-ocean-the-second_fexp-guard_driver-diff_v01_20261019-190507-a7d3e9b1.diff",
+      "sha256": "e02a318dcf8da22f4d6ea50428750e36794cd6133f972a814c98bef2c46b0de4",
+      "bytes": 18221,
+      "stat": "1 file changed, 133 insertions(+), 80 deletions(-)"
+    },
+    "package_unchanged": {
+      "path": "game/data/fexp/rpg-2-star-ocean-the-second_female-complete-explore_package_v01_20261019-184500-f2c0a7e1.json",
+      "sha256": "8918ccf5ea4517514595091c2b0b90102c49dc70903caead11cc67a8d61bc6b6",
+      "bytes": 23785
+    },
+    "south_runtime_unchanged": {
+      "path": "game/data/fexp/rpg-2-star-ocean-the-second_female-complete-explore_south-runtime_v01_20261019-184900-f2c0a7e1.json",
+      "sha256": "90fcf3ed873be0b67dec823cb09c596550db23553def89f6e899a4976a7a5da8",
+      "bytes": 119981
+    }
+  },
+  "behavior_changes": {
+    "strict_atomic_fallback": "Raw-SHA pin of the exact known package and SOUTH runtime before JSON parse/index; all nested field types/ranges/phase arrays and every runtime file are validated before any model constructor, SOUTH Comp10 or target child/scale/flip mutation.",
+    "runtime_inputs_validated": [
+      "all 48 idle PNGs: res:// path, raw SHA-256, decode, 80x112",
+      "EAST/WEST PXO: package raw hash, ZIP open, data.json, required non-guide layer entries, exact 80x112x4 layer bytes",
+      "NORTH PXO: pinned raw hash + same ZIP/layer checks (previously unchecked)",
+      "model text copies: copy_sha256_text_lf_v1 with CRLF->LF only, including NORTH (previously skipped)",
+      "SOUTH v8 PNG raw hash + decode/size",
+      "all 68 SOUTH part PNGs: raw hash, 80x120, binary alpha, opaque-texel count, res:// roots, no traversal/external/missing",
+      "SOUTH runtime manifest/rig/gait/stop/restart/art/leg_rule/part_lists type, finite, range and count checks"
+    ],
+    "per_driver_state": "Static cache now holds only validated scripts, idle textures, phase timing and the immutable runtime contract. Each attached driver owns its EAST/WEST/NORTH model objects, rest snapshots, SOUTH Comp10, Loco10r1, render cache and idle clock.",
+    "preserved_behavior": "Turn reset/bootstrap, same-facing re-press, actual-displacement floor coordinate, SOUTH stop contact/shadow, floor-pin offset and body/shadow oracle behavior are unchanged; SOUTH oracle now compares both body and shadow.",
+    "refusal": "attach() returns null; static refusal() exposes {stage,error}; no push_warning/push_error on normal refusal; rejected attach leaves no child, scale or flip change; flag-off performs no IO."
+  },
+  "tests": {
+    "fresh_import": {
+      "log": "tools/rpg-2-star-ocean-the-second_fexp-guard_import-direct_v01_20261019-230104-65e27fa1.log",
+      "sha256": "c5063b0d107f33c9bcab41315cd3f1da7016d7ff4613081e624b85fa3f74ca89",
+      "result": "import completed; later editor-settings save warnings only"
+    },
+    "guard_contract": {
+      "command": "python tools/rpg-2-star-ocean-the-second_godot_checked-runner_v01_20261018-203400-f74ac6d1.py --timeout 180 --expect FEXP_GUARD_TESTS_OK --log ... -- <python stderr-wrapper> <godot> --headless --path game --script res://tests/rpg-2-star-ocean-the-second_female-complete-explore_guard-contract-check_v01_20261019-190507-a7d3e9b1.gd",
+      "result": "CHECKED_RUN PASS; FEXP_GUARD_TESTS_OK checks=99",
+      "elapsed_seconds": 8.922,
+      "log": "tools/rpg-2-star-ocean-the-second_fexp-guard_checked_v06_20261019-191600-a7d3e9b1.log",
+      "log_sha256": "868e7e6fed917ba29a080c3be3b40537c42eae9aa2053ef05af738319876d6e1",
+      "stderr_log": "tools/rpg-2-star-ocean-the-second_fexp-guard_checked-stderr_v06_20261019-191600-a7d3e9b1.log",
+      "stderr_sha256": "87aa7af2c64a2c5bf8f03fcd1f58b6108b151a36a927b7a5d8458699439eb312",
+      "stderr_only_known": "user://logs rotation and Windows root-cert-store read errors only; no SCRIPT ERROR / Parse Error / unexpected ERROR",
+      "malformed_cases": "41 table mutations plus 13 explicit file/oracle/positive checks: package/runtime schema and type errors, missing/extra directions, 11-frame arrays, non-finite/negative durations, external/traversal/missing paths, wrong raw hashes, wrong text-LF hash, wrong PXO ZIP/required layer/short layer, wrong-size PNG, CRLF-positive model copy, NORTH pin, part hash/missing/traversal/file_dir/opaque count, alpha fixture, v8 missing/hash, stop/gait type and range cases",
+      "integration_cases": "flag-off no IO; off-path package/runtime; mutated whole-package/runtime pin refusal with zero constructors and unchanged target; two valid drivers with distinct model/comp/loco/rest/cache/clock; valid source rest; south idle->move->stop with body+shadow oracle and floor pin; NORTH turn/re-press/oracle/floor; A cannot be advanced by B"
+    },
+    "m1_regression": {
+      "result": "CHECKED_RUN PASS; M1_SMOKE_OK",
+      "log": "tools/rpg-2-star-ocean-the-second_fexp-guard_m1-regression_v01_20261019-191600-a7d3e9b1.log",
+      "log_sha256": "7f5c828437d97aa9f7e616c9603bbf017f9e7bcfac91d86e9a83ee172cffee2d",
+      "stderr_log": "tools/rpg-2-star-ocean-the-second_fexp-guard_m1-regression-stderr_v01_20261019-191600-a7d3e9b1.log",
+      "stderr_sha256": "e77cf93ac43b24610ac9e4d08ed0e397d16ce699a4e8b4d14d2911eff3f94d3c"
+    },
+    "compile_checks": "Godot --check-only passed for the driver and exploration_sprite_set_pilot.gd host"
+  },
+  "failure_history": [
+    "Initial validator iterations failed on a missing _check_res helper, indentation, NUL-escape source warnings, ZIPPacker.end_file() API name, entry[10] south-model having no source field, runtime cell fields living under manifest, L/R arm_peak_px keys, no-trailing-slash file_dir, zero-delta cache-hit assumptions and north forward being decreasing y. All were fixed; final checked run is clean.",
+    "Import was attempted through the checked runner first; its benign Windows root-certificate-store ERROR was classified as a diagnostic. A direct import completed, and later checked runs redirect stderr to a separate log while a stderr whitelist permits only the three known environment messages."
+  ],
+  "gaps": [
+    "Export/globalized raw source paths in the model SOURCE constants and missing export templates remain the known export gap; this change does not claim a shipping/export fix.",
+    "Root must re-pin PINNED_PACKAGE_RAW_SHA256, PINNED_RUNTIME_RAW_SHA256 and NORTH_PXO_SHA256 after the 4 renderers are optimized and the package/manifest is regenerated. The current pins are only for this frozen fcx-v02 package.",
+    "No arbitrary custom package acceptance: only the exact known package/runtime content is accepted (a same-content copy may be at another res:// path).",
+    "Headless tests only; no art, fluidity, default integration, shipping or performance credit. Full export/run on a packaged build was not performed.",
+    "Fresh import generated .godot and updated .import metadata; these are import artifacts, not product source edits."
+  ]
+}

@@ -159,8 +159,10 @@ func _exit_tree() -> void:
 
 
 func _process(delta: float) -> void:
+	var pilot_from := hero.position
 	if dialogue_open:
 		_reset_walk_animation()
+		_step_sprite_pilot(delta, pilot_from)
 		_update_city_labels()
 		return
 	var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
@@ -195,7 +197,14 @@ func _process(delta: float) -> void:
 		AppState.machine_observed = true
 		feedback_key = "bypass_notice"
 		_refresh_text()
+	_step_sprite_pilot(delta, pilot_from)
 	_update_city_labels()
+
+
+# Presentation-only hook for the opt-in female complete-exploration pilot (after movement, before the silhouette copy).
+func _step_sprite_pilot(delta: float, from: Vector2) -> void:
+	if sprite_pilot != null and sprite_pilot.has_method("step"):
+		sprite_pilot.step(delta, from, hero.position, city_facing)
 
 
 func _draw() -> void:

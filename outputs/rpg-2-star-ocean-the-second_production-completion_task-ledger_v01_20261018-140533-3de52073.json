@@ -2,7 +2,7 @@
   "id": "rpg-2-star-ocean-the-second_production-completion_v01",
   "schemaVersion": 2,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-19T23:02:52Z",
+  "updatedAt": "2026-10-19T23:36:15Z",
   "zh": "制作完成度任务台账：衡量已完成的工作量（编码 40% + 内容 60%）；检查／审查与创作者批准分开计量，均不改变制作分；免除的审查不算已执行的工作；运营任务列出负责方但不计百分比。",
   "en": "Production-completion task ledger: measures work done (coding 40% + content 60%); inspection/review and creator approval are separate meters and never change production credit; waived reviews are not performed work; operations tasks list owners but carry no percentage.",
   "brief": "docs/rpg-2-star-ocean-the-second_production-completion_bilingual-brief_v01_20261018-140533-3ea2a621.md",
@@ -612,6 +612,22 @@
         },
         "previousTaskSetSha256": "8eecdc02e568d395dc683f063c827f39c2b711d3575dda1724253b75e3f63a9e",
         "taskSetSha256": "65850053b433df57188060e5d9fcc64332681ef797377cc002b06c6d3be68f02"
+      },
+      {
+        "at": "2026-10-19T23:35:52Z",
+        "kind": "owner-assignment",
+        "taskId": "content.ui-visual.character-portraits",
+        "fromOwner": "claude",
+        "toOwner": "deepseek",
+        "changedTaskIds": [
+          "content.ui-visual.character-portraits"
+        ],
+        "reason": {
+          "zh": "",
+          "en": "Creator authorized dual providers; bounded exact-source MVP icon and dialogue crop kit with deterministic UI checks suits DeepSeek. Codex independently integrates."
+        },
+        "previousTaskSetSha256": "65850053b433df57188060e5d9fcc64332681ef797377cc002b06c6d3be68f02",
+        "taskSetSha256": "e886947b7ea29fde35a0c7a6a91a25e32dffdc4b633114fe0d8a707e918abeee"
       }
     ],
     "pointsByStage": {
@@ -782,24 +798,26 @@
     },
     "byOwner": {
       "claude": {
-        "tasks": 733,
+        "tasks": 732,
         "operationsTasks": 0,
-        "points": 1919,
+        "points": 1916,
         "pointsDone": 381,
         "byStatus": {
           "done": 90,
-          "todo": 643
+          "todo": 641,
+          "in_progress": 1
         },
         "readyInQueue": 0,
         "revisionsBlockingApproval": 2
       },
       "deepseek": {
-        "tasks": 9,
+        "tasks": 10,
         "operationsTasks": 0,
-        "points": 28,
+        "points": 31,
         "pointsDone": 28,
         "byStatus": {
-          "done": 9
+          "done": 9,
+          "in_progress": 1
         },
         "readyInQueue": 0,
         "revisionsBlockingApproval": 0
@@ -2554,7 +2572,7 @@
     {"id":"review.enemy.sentry","type":"visual-review","title":{"zh":"防卫机（哨卫） · 视觉审查","en":"Sentry automaton · visual review"},"area":"enemies","stage":"visual-review","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"Codex／root 审查实机画面并记录结论","en":"Codex / root reviews actual captures and records a verdict"},"dependsOn":["qa.enemy.sentry.check"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_scifi-sentry-automaton_v2-optin-portability_qa-note_unapproved-v01_20261018-103500-7d2e91b4.md","outputs/rpg-2-star-ocean-the-second_mvp-progress_state_v01_20261013-183804-28a1c7e4.json"],"subject":{"kind":"enemy","id":"sentry"},"target":"content.enemy.sentry.battle-animation","outcome":"technical-pass","note":{"zh":"root 看过实机 en640/zh640：只接受技术代码移植；眼部部分遮挡与几何占位背景仍在（closeout fa4c8600）。","en":"Root viewed actual en640/zh640 captures: technical code port only; partly occluded eye and geometric backdrop remain (closeout fa4c8600)."},"statusAt":"2026-10-18T17:55:49Z"},
     {"id":"creator.enemy.sentry.accept-art","type":"creator-acceptance","title":{"zh":"防卫机（哨卫） · 验收美术","en":"Sentry automaton · accept art"},"area":"enemies","stage":"creator-approval","owner":"creator","status":"todo","points":1,"doneCriterion":{"zh":"创作者验收该敌人美术","en":"The creator accepts the enemy art"},"dependsOn":["content.enemy.sentry.runtime-default"],"evidence":[],"subject":{"kind":"enemy","id":"sentry"},"target":"content.enemy.sentry.runtime-default"},
     {"id":"content.enemy.patrol.static","type":"native-pixel","title":{"zh":"巡逻机 · 战斗静止精灵","en":"Patrol drone · battle static sprite"},"area":"enemies","stage":"content","owner":"claude","status":"done","points":2,"doneCriterion":{"zh":"原生像素静止精灵已提交并有 QA","en":"Native pixel static committed with QA"},"dependsOn":[],"evidence":["docs/qa/rpg-2-star-ocean-the-second_patrol-static_selected-production-integration_v01_20261019-001423-861097ca.md"],"subject":{"kind":"enemy","id":"patrol"},"statusAt":"2026-10-19T04:25:04Z","note":{"zh":"","en":"Selected Claude benchmark native64x64 static copied intact with editable6-layer PXO/ORA, reproducible author/helper, raw hash manifest and actual source-bound Godot capture. Production only; animation/default/creator acceptance remain open."}},
-    {"id":"content.enemy.patrol.battle-animation","type":"native-pixel","title":{"zh":"巡逻机 · 战斗动画条","en":"Patrol drone · battle animation strip"},"area":"enemies","stage":"content","owner":"claude","status":"todo","points":6,"doneCriterion":{"zh":"全部战斗状态的动画条已提交并有帧检查","en":"A strip covering every battle state committed with frame checks"},"dependsOn":["content.enemy.patrol.static"],"evidence":[],"subject":{"kind":"enemy","id":"patrol"}},
+    {"id":"content.enemy.patrol.battle-animation","type":"native-pixel","title":{"zh":"巡逻机 · 战斗动画条","en":"Patrol drone · battle animation strip"},"area":"enemies","stage":"content","owner":"claude","status":"in_progress","points":6,"doneCriterion":{"zh":"全部战斗状态的动画条已提交并有帧检查","en":"A strip covering every battle state committed with frame checks"},"dependsOn":["content.enemy.patrol.static"],"evidence":[],"subject":{"kind":"enemy","id":"patrol"},"statusAt":"2026-10-19T23:36:15Z"},
     {"id":"content.enemy.patrol.runtime-default","type":"integration","title":{"zh":"巡逻机 · 运行时默认使用","en":"Patrol drone · runtime default"},"area":"enemies","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"不加参数时战斗默认绘制该动画","en":"Battles draw the animation by default, without a flag"},"dependsOn":["content.enemy.patrol.battle-animation","code.runtime.enemy-sprite-pipeline"],"evidence":[],"subject":{"kind":"enemy","id":"patrol"}},
     {"id":"qa.enemy.patrol.check","type":"technical-check","title":{"zh":"巡逻机 · 技术检查","en":"Patrol drone · technical check"},"area":"enemies","stage":"technical-inspection","owner":"claude","status":"todo","points":1,"doneCriterion":{"zh":"动画与战斗一致性检查通过","en":"Animation and combat-parity checks pass"},"dependsOn":["content.enemy.patrol.battle-animation"],"evidence":[],"subject":{"kind":"enemy","id":"patrol"},"target":"content.enemy.patrol.battle-animation"},
     {"id":"review.enemy.patrol","type":"visual-review","title":{"zh":"巡逻机 · 视觉审查","en":"Patrol drone · visual review"},"area":"enemies","stage":"visual-review","owner":"codex","status":"todo","points":1,"doneCriterion":{"zh":"Codex／root 审查实机画面并记录结论","en":"Codex / root reviews actual captures and records a verdict"},"dependsOn":["qa.enemy.patrol.check"],"evidence":[],"subject":{"kind":"enemy","id":"patrol"},"target":"content.enemy.patrol.battle-animation"},
@@ -2655,7 +2673,7 @@
     {"id":"content.ui-visual.navigation","type":"native-pixel","title":{"zh":"探索界面正式视觉","en":"Exploration UI final visuals"},"area":"ui-visual","stage":"content","owner":"claude","status":"done","points":4,"doneCriterion":{"zh":"导航与探索界面正式视觉已接入","en":"Final navigation / exploration UI visuals wired"},"dependsOn":[],"evidence":["docs/qa/rpg-2-star-ocean-the-second_navigation-ui_root-combined-navigation-music-verification_unapproved-v04r1_20261019-222456-7d2c965e.md"],"subject":{"kind":"asset","id":"ui.explore"},"statusAt":"2026-10-19T22:26:08Z"},
     {"id":"content.ui-visual.battle","type":"native-pixel","title":{"zh":"战斗界面正式视觉","en":"Battle UI final visuals"},"area":"ui-visual","stage":"content","owner":"claude","status":"done","points":3,"doneCriterion":{"zh":"战斗 HUD、技能、结算正式视觉已接入","en":"Final battle HUD, skills and results visuals wired"},"dependsOn":[],"evidence":["docs/qa/rpg-2-star-ocean-the-second_battle-ui_root-production-closeout_v01_20261019-172332-dc55a291.md"],"subject":{"kind":"asset","id":"ui.battle-hud"},"statusAt":"2026-10-19T21:35:22Z","note":{"zh":"11种可编辑原生界面皮肤默认关闭接入；独立355原生/407无效包/1250实机检查通过；用户验收另计。","en":"11 editable native skins wired off-default; root355native/407invalid/1250actual-game checks. Creator approval remains separate."}},
     {"id":"content.ui-visual.management","type":"native-pixel","title":{"zh":"队伍、职业、存档界面正式视觉","en":"Party, jobs and saves UI final visuals"},"area":"ui-visual","stage":"content","owner":"claude","status":"done","points":3,"doneCriterion":{"zh":"管理界面正式视觉已接入","en":"Final management UI visuals wired"},"dependsOn":[],"evidence":["docs/qa/rpg-2-star-ocean-the-second_management-ui_root-production-closeout_v01_20261019-180100-fd60b5a8.md"],"subject":{"kind":"asset","id":"ui.party"},"statusAt":"2026-10-19T21:44:27Z","note":{"zh":"","en":"Shared native skin wired to party/jobs, nodegrids and saves;85actual bilingual checks, production only; initial prepaint discrepancy disclosed."}},
-    {"id":"content.ui-visual.character-portraits","type":"native-pixel","title":{"zh":"队伍头像与对话立绘裁切","en":"Party icons and dialogue portrait crops"},"area":"ui-visual","stage":"content","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"头像与立绘裁切已提交并接入","en":"Icons and portrait crops committed and wired"},"dependsOn":[],"evidence":[],"subject":{"kind":"asset","id":"character-ui.portraits"}},
+    {"id":"content.ui-visual.character-portraits","type":"native-pixel","title":{"zh":"队伍头像与对话立绘裁切","en":"Party icons and dialogue portrait crops"},"area":"ui-visual","stage":"content","owner":"deepseek","status":"in_progress","points":3,"doneCriterion":{"zh":"头像与立绘裁切已提交并接入","en":"Icons and portrait crops committed and wired"},"dependsOn":[],"evidence":[],"subject":{"kind":"asset","id":"character-ui.portraits"},"statusAt":"2026-10-19T23:36:14Z"},
     {"id":"review.content.vfx","type":"visual-review","title":{"zh":"特效 · 视觉审查","en":"VFX · visual review"},"area":"vfx","stage":"visual-review","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"Codex 审查实机特效并记录结论","en":"Codex reviews the effects in game and records a verdict"},"dependsOn":["content.vfx.common","content.vfx.mvp-skills","content.vfx.encounter"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_mvp-skill-vfx_root-production-closeout_v01_20261019-170721-90a8737c.md","docs/qa/rpg-2-star-ocean-the-second_common-combat-vfx_root-production-closeout_v01_20261019-164412-1f3bff80.md"],"subject":{"kind":"feature","id":"content.vfx"},"statusAt":"2026-10-19T21:15:30Z","outcome":"technical-pass","note":{"zh":"","en":"Actual-game composition and technical review performed: common/skill cues local and quiet, encounter cues separately verified; some support accents blend with dark clothing. Static composition inspection only; no creator artistic or continuous temporal-quality approval."}},
     {"id":"review.content.audio","type":"audio-qa","title":{"zh":"音频 · 内容／音频质量检查","en":"Audio · content / audio QA"},"area":"audio","stage":"content-qa","owner":"codex","status":"todo","points":1,"doneCriterion":{"zh":"Codex 在游戏中试听音乐与音效并记录结论","en":"Codex listens to the music and sounds in game and records a verdict"},"dependsOn":["content.audio.themed-music","content.audio.ui-sfx","content.audio.combat-sfx"],"evidence":[],"subject":{"kind":"feature","id":"content.audio"}},
     {"id":"review.content.ui-visuals","type":"visual-review","title":{"zh":"界面正式视觉 · 视觉审查","en":"UI final visuals · visual review"},"area":"ui-visual","stage":"visual-review","owner":"codex","status":"todo","points":1,"doneCriterion":{"zh":"Codex 审查实机界面并记录结论","en":"Codex reviews the in-game UI and records a verdict"},"dependsOn":["content.ui-visual.navigation","content.ui-visual.battle","content.ui-visual.management","content.ui-visual.character-portraits"],"evidence":[],"subject":{"kind":"feature","id":"content.ui-visuals"}},

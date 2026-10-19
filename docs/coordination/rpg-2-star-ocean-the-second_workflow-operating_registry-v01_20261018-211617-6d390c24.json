@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-19T23:03:25.537744+00:00",
+  "updatedAt": "2026-10-19T23:41:57.625623+00:00",
   "purpose": "Operating queue and worktree ownership; no progress points or account details",
   "workflow": "docs/workflow.md",
   "canonicalLedger": "outputs/rpg-2-star-ocean-the-second_production-completion_task-ledger_v01_20261018-140533-3de52073.json",
@@ -77,6 +77,22 @@
       "role": "producer",
       "owner": "deepseek",
       "writePolicy": "Completed isolated encounter-feedback native/wiring/foreground sources preserved; coordinator integrates selected verified paths only."
+    },
+    {
+      "id": "patrol-producer",
+      "pathFromPrimary": "work/dual03/cl-patrol",
+      "role": "producer",
+      "owner": "claude",
+      "baseAtRegistration": "e600241b9f732e8f8db2a5e645d4947b88ac1142",
+      "writePolicy": "Only assigned isolated production scope; no shared ledger/index/Site/provider-account edits."
+    },
+    {
+      "id": "ui-portrait-producer",
+      "pathFromPrimary": "work/dual03/ds-ui-portraits",
+      "role": "producer",
+      "owner": "deepseek",
+      "baseAtRegistration": "e600241b9f732e8f8db2a5e645d4947b88ac1142",
+      "writePolicy": "Only assigned isolated production scope; no shared ledger/index/Site/provider-account edits."
     }
   ],
   "tasks": [
@@ -899,11 +915,12 @@
     {
       "id": "representative-character",
       "owner": "codex",
-      "status": "queued",
+      "status": "in_progress",
       "subject": "protagonist-female",
       "goal": "One complete required exploration and combat set with pivots, editable exports and normal-runtime evidence before roster expansion",
       "approvalOwner": "creator",
-      "productionCanContinueBeforeApproval": true
+      "productionCanContinueBeforeApproval": true,
+      "nextAction": "Optional four-direction exploration integration verified. Battle action production remains gated by creator still-frame approval; no full sprite acceptance."
     },
     {
       "id": "representative-scene",
@@ -940,34 +957,43 @@
   },
   "nextDispatchPreferences": [
     {
-      "task": "support.character.female.battle-static-legibility",
+      "task": "content.enemy.patrol.battle-animation",
       "preferredProducer": "claude",
-      "reason": "Complex identity/detail finishing answering creator coarseness rejection; static only before motion."
+      "status": "active",
+      "reason": "Complex mechanical motion and native editable pixel implementation."
     },
     {
-      "task": "content.vfx.common",
+      "task": "content.ui-visual.character-portraits",
       "preferredProducer": "deepseek",
-      "reason": "Bounded native effect builder and deterministic asset checks; audited reassign before dispatch."
+      "status": "active",
+      "reason": "Bounded exact-source image crops, package validation and predictable UI layout."
     }
   ],
   "activeDualProviderBatch": {
     "primary": {
-      "task": "support.character.female.render-performance-v03",
+      "task": "content.enemy.patrol.battle-animation",
       "owner": "claude",
-      "workspace": "work/dual02/cl-management",
+      "workspace": "work/dual03/cl-patrol",
       "status": "active",
-      "scope": "Exact RGBA-preserving optimization of four motion renderers only; prior19msP95 remainsunaccepted."
+      "scope": "One complete editable mechanical Patrol animation candidate and optional battle hookup; no simulation/default changes."
     },
     "supporting": [
       {
-        "task": "support.character.female.driver-safe-fallback-v03",
+        "task": "content.ui-visual.character-portraits",
         "owner": "deepseek",
-        "workspace": "work/dual02/ds-fexp-guard",
+        "workspace": "work/dual03/ds-ui-portraits",
         "status": "active",
-        "scope": "Strict immutable-package validation and per-driver mutable state isolation; rootseriallymerges."
+        "scope": "Exact-source MVP party icons and dialogue crops; only growth/dialogue/helper and own asset files."
       }
     ],
     "integrationOwner": "codex",
-    "status": "active"
+    "status": "active",
+    "previousVerifiedCompletion": {
+      "task": "support.character.female.complete-exploration-runtime",
+      "qa": "outputs/fexp-merged-v01/rpg-2-star-ocean-the-second_female-complete-explore_canonical-integration-qa_unapproved-v01_20261019-233439-bc8a3150.md",
+      "status": "technical verification complete; selective sync pending",
+      "productionCredit": 0,
+      "perFramePerformanceCorrection": "Old process monitor was a one-second maximum. Current measured frame process P95 about3.1–3.5ms on this machine; no universal60fps claim."
+    }
   }
 }

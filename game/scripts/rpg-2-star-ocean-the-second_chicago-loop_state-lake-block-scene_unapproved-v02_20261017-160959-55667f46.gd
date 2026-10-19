@@ -144,6 +144,7 @@ func _process(delta: float) -> void:
 	var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	if direction == Vector2.ZERO:
 		_reset_walk_animation()
+		_step_sprite_pilot(delta, hero.position)
 		return
 	_set_facing(direction)
 	var previous := hero.position
@@ -152,6 +153,13 @@ func _process(delta: float) -> void:
 		_update_walk_animation(delta)
 	else:
 		_reset_walk_animation()
+	_step_sprite_pilot(delta, previous)
+
+
+# Presentation-only hook for the opt-in female complete-exploration pilot (after movement and collision).
+func _step_sprite_pilot(delta: float, from: Vector2) -> void:
+	if sprite_pilot != null and sprite_pilot.has_method("step"):
+		sprite_pilot.step(delta, from, hero.position, facing)
 
 
 func _set_facing(direction: Vector2) -> void:

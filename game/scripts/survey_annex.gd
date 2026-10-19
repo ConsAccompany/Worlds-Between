@@ -238,8 +238,10 @@ func _linked_clue(index: int) -> bool:
 func _process(delta: float) -> void:
 	if wdc_front != null:
 		_wdc_update_front()
+	var pilot_from := hero.position
 	if overlay.visible:
 		_reset_walk_animation()
+		_step_sprite_pilot(delta, pilot_from)
 		return
 	var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	if direction != Vector2.ZERO:
@@ -261,6 +263,13 @@ func _process(delta: float) -> void:
 			_reset_walk_animation()
 	else:
 		_reset_walk_animation()
+	_step_sprite_pilot(delta, pilot_from)
+
+
+# Presentation-only hook for the opt-in female complete-exploration pilot (after movement and collision).
+func _step_sprite_pilot(delta: float, from: Vector2) -> void:
+	if sprite_pilot != null and sprite_pilot.has_method("step"):
+		sprite_pilot.step(delta, from, hero.position, hero_facing)
 
 
 func _set_hero_facing(direction: Vector2) -> void:

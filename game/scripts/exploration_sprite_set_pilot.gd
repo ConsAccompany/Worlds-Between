@@ -32,6 +32,7 @@ const DIRECTIONS := ["south", "west", "north", "east"]
 const ACTIONS := ["idle", "walk"]
 const MIN_FRAMES := {"idle": 1, "walk": 2}
 const MAX_FRAMES := 16
+const FemaleCompletePilot := preload("res://scripts/fexp/rpg-2-star-ocean-the-second_female-complete-explore_driver_pilot-v01_20261019-184900-f2c0a7e1.gd")
 const MIN_DURATION_MS := 40
 const MAX_DURATION_MS := 2000
 const BODY_LOGICAL := 48
@@ -80,6 +81,11 @@ static func clear_cache() -> void:
 
 # Returns the driver now drawing `target`, or null (flag off, no set for the actor, or set rejected).
 static func attach(target: Sprite2D, actor: String, initial_facing: String) -> Node:
+	# Separate opt-in female complete-exploration pilot (own flag, default off); null falls through unchanged.
+	if FemaleCompletePilot.enabled():
+		var complete: Node = FemaleCompletePilot.attach(target, actor, initial_facing)
+		if complete != null:
+			return complete
 	if not enabled():
 		return null
 	var registry := load_registry(registry_path())
