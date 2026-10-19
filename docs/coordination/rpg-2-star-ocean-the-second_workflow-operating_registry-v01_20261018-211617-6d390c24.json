@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-19T20:44:12.112111+00:00",
+  "updatedAt": "2026-10-19T21:04:56.187480+00:00",
   "purpose": "Operating queue and worktree ownership; no progress points or account details",
   "workflow": "docs/workflow.md",
   "canonicalLedger": "outputs/rpg-2-star-ocean-the-second_production-completion_task-ledger_v01_20261018-140533-3de52073.json",
@@ -569,7 +569,7 @@
     {
       "id": "support.character.female.battle-static-legibility",
       "owner": "claude",
-      "status": "active",
+      "status": "done",
       "lane": "primary",
       "worktree": "chicago-producer",
       "dependsOn": [],
@@ -584,11 +584,12 @@
         "Root inspection; art remains unapproved and no animation before baseline acceptance"
       ],
       "startedAt": "2026-10-19T00:59:24.562061+00:00",
-      "nextAction": "Claude resumes the existing v17r2 full-still body finishing over the frozen v17r1 face; inspect actual1280 EN/ZH bright/dark and native editable evidence before presentation.",
-      "blockedBy": [],
+      "nextAction": "One complete v17r2 still delivered and root-inspected; wait only for scoped artistic acceptance before animation. Independent UI/VFX production continues.",
+      "blockedBy": [
+        "Creator artistic baseline acceptance is required before combat animation"
+      ],
       "evidence": [
-        "docs/qa/rpg-2-star-ocean-the-second_female-battle-static_creator-coarseness-rejection_v16_20261018-220102-1a4c22a8.md",
-        "docs/qa/rpg-2-star-ocean-the-second_female-battle_root-density-review_v17_20261018-223904-4d31fba3.md"
+        "docs/qa/rpg-2-star-ocean-the-second_female-battle_root-production-closeout_v17r2_20261019-164412-1f3bff80.md"
       ]
     },
     {
@@ -718,6 +719,23 @@
       "evidence": [
         "docs/qa/rpg-2-star-ocean-the-second_common-combat-vfx_root-production-closeout_v01_20261019-164412-1f3bff80.md"
       ]
+    },
+    {
+      "id": "support.vfx.mvp-skills-native",
+      "ledgerTask": "content.vfx.mvp-skills",
+      "owner": "deepseek",
+      "status": "active",
+      "lane": "supporting",
+      "worktree": "work/dual02/ds-skills",
+      "output": "Eight compact native cues for existing four personal and four job-series MVP skills",
+      "completion": [
+        "Native64x64/pivot32,32/8cels exact duration and editable source",
+        "Root independent rebuild and actual game hooks before production closeout"
+      ],
+      "writeScope": [
+        "New skills-v01 author/package only; no simulation or shared files"
+      ],
+      "nextAction": "Produce bounded native package without sandbox ACL detours; Codex owns loader/hooks/tests."
     }
   ],
   "nextProductionMilestones": [
@@ -780,15 +798,15 @@
       "task": "support.character.female.battle-static-legibility",
       "owner": "claude",
       "workspace": "work/max0840-battle",
-      "output": "One source-bound complete v17r2 still; no animation/default changes"
+      "output": "One source-bound complete v17r2 still; no animation/default changes",
+      "status": "produced-root-inspected"
     },
     "supporting": [
       {
-        "task": "content.vfx.common",
+        "task": "content.vfx.mvp-skills",
         "owner": "deepseek",
-        "workspace": "work/dual02/ds-common",
-        "output": "Five native effect sets and compatible loader; root wires and verifies",
-        "status": "done"
+        "workspace": "work/dual02/ds-skills",
+        "status": "active"
       }
     ],
     "integrationOwner": "codex",

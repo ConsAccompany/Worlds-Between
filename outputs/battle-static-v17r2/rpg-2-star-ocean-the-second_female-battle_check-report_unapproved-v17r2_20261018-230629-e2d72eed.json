@@ -1,0 +1,232 @@
+{
+ "status": "UNAPPROVED v17r2 still technical check; not art approval",
+ "pass": true,
+ "passed": 20,
+ "total": 20,
+ "gates": [
+  {
+   "gate": "deterministic rebuild (two independent authoring passes, identical bytes)",
+   "pass": true,
+   "detail": null
+  },
+  {
+   "gate": "every built file on disk equals this tool's deterministic output",
+   "pass": true,
+   "detail": {
+    "png": true,
+    "face": true,
+    "ora": true,
+    "pxo": true,
+    "inspect": true,
+    "manifest": true
+   }
+  },
+  {
+   "gate": "all content gates re-evaluated on the on-disk bytes",
+   "pass": true,
+   "detail": 17
+  },
+  {
+   "gate": "v17r1 inputs present and sha-pinned (native PNG, layered ORA, head PNG)",
+   "pass": true,
+   "detail": null
+  },
+  {
+   "gate": "cell 136x144, binary alpha",
+   "pass": true,
+   "detail": [
+    144,
+    136,
+    4
+   ]
+  },
+  {
+   "gate": "every opaque texel is a v17r1 palette colour (no new colour), <= 48 used",
+   "pass": true,
+   "detail": {
+    "used": 44,
+    "keys": "1234CDEGKLMNOPQSTWZabcdefghijklmnopqrstvwxyz",
+    "offPalette": [],
+    "v17r1Used": 44
+   }
+  },
+  {
+   "gate": "silhouette edge is outline K or deep skin profile k only (no rim/neon/halo)",
+   "pass": true,
+   "detail": [
+    "K",
+    "k"
+   ]
+  },
+  {
+   "gate": "face/hair protected rows 0-44: composite byte-identical to v17r1 (incl. outline pass)",
+   "pass": true,
+   "detail": 0
+  },
+  {
+   "gate": "separate face/hair PNG = composite crop and = the v17r1 head PNG minus its 3 body rows",
+   "pass": true,
+   "detail": [
+    52,
+    12,
+    96,
+    45
+   ]
+  },
+  {
+   "gate": "soles, pin and padding rows 132-143 byte-identical to v17r1",
+   "pass": true,
+   "detail": 0
+  },
+  {
+   "gate": "pin (64,136) transparent; rows 136+ clear; feet either side of x64 on row 135",
+   "pass": true,
+   "detail": null
+  },
+  {
+   "gate": "figure bounds identical to v17r1 (logical extent, blade endpoint, apparent proportion)",
+   "pass": true,
+   "detail": {
+    "v17r2": [
+     29,
+     3,
+     120,
+     135
+    ],
+    "v17r1": [
+     29,
+     3,
+     120,
+     135
+    ]
+   }
+  },
+  {
+   "gate": "opacity changes only inside the boot and glove zones (no new silhouette clutter elsewhere)",
+   "pass": true,
+   "detail": {
+    "opacityChanged": 23,
+    "outsideZones": 0,
+    "opaqueTexels": [
+     6260,
+     6263
+    ],
+    "zones": [
+     [
+      40,
+      112,
+      101,
+      132
+     ],
+     [
+      84,
+      51,
+      98,
+      65
+     ]
+    ]
+   }
+  },
+  {
+   "gate": "native density kept: >= 25% of fully opaque 2x2 blocks carry sub-logical detail",
+   "pass": true,
+   "detail": {
+    "blocks": 1468,
+    "nonUniform": 949
+   }
+  },
+  {
+   "gate": "ORA mimetype first; layer files, names and order identical to v17r1",
+   "pass": true,
+   "detail": 25
+  },
+  {
+   "gate": "ORA layers stacked bottom->top and ORA mergedimage both equal the native PNG",
+   "pass": true,
+   "detail": null
+  },
+  {
+   "gate": "frozen layers (hair, face, tie, drape, bedroll, far leg, belt, collar, scarf, blade, guard) identical to v17r1 layers",
+   "pass": true,
+   "detail": {}
+  },
+  {
+   "gate": "outline reconciliation only outside the protected face/hair rows (0-44)",
+   "pass": true,
+   "detail": {
+    "outlineTexelsChanged": 80,
+    "insideProtectedRows": 0
+   }
+  },
+  {
+   "gate": "PXO: pixelorama mimetype, 136x144, exactly 1 frame, layer names/order = ORA",
+   "pass": true,
+   "detail": null
+  },
+  {
+   "gate": "PXO raw cels byte-equal the ORA layer pixels; cel stack and preview.png equal the native PNG",
+   "pass": true,
+   "detail": null
+  }
+ ],
+ "info": {
+  "largestFlatBodyRun": {
+   "v17r1": {
+    "texels": 400,
+    "key": "c"
+   },
+   "v17r2": {
+    "texels": 318,
+    "key": "e"
+   }
+  },
+  "bodyDistinctKeys": {
+   "v17r1": 31,
+   "v17r2": 32
+  },
+  "changedLayersTexels": {
+   "pack": 30,
+   "canister": 18,
+   "far-boot": 178,
+   "coat-tail": 251,
+   "near-leg": 17,
+   "near-boot": 208,
+   "coat": 355,
+   "shirt": 53,
+   "near-arm": 118,
+   "hands": 51,
+   "outline": 80
+  },
+  "changedTexels": 1063
+ },
+ "files": {
+  "png": {
+   "name": "rpg-2-star-ocean-the-second_female-battle_still-native136_unapproved-v17r2_20261018-230629-7b467dc6.png",
+   "sha256": "8759026a8bf8f2376bf08c1fe45c264f92562fd613815e0bd46165e7faa8fa3d"
+  },
+  "face": {
+   "name": "rpg-2-star-ocean-the-second_female-battle_face-hair-native_unapproved-v17r2_20261018-230629-c525dda0.png",
+   "sha256": "cfd4c358b96d7567adf1b7d3435e056a2aa7b0386954320b3123eec217c97eba"
+  },
+  "ora": {
+   "name": "rpg-2-star-ocean-the-second_female-battle_still-layered_unapproved-v17r2_20261018-230629-5bcb4248.ora",
+   "sha256": "2e7420a93e6044dd7fcfb58e65e58e7486bd8258b08599e8c1dabedf427c3373"
+  },
+  "pxo": {
+   "name": "rpg-2-star-ocean-the-second_female-battle_still-editable_unapproved-v17r2_20261018-230629-ce2c72b7.pxo",
+   "sha256": "d46d514708d85e89a2c34dc45164d39c00ec95a9af52945d83539db97123155c"
+  },
+  "inspect": {
+   "name": "rpg-2-star-ocean-the-second_female-battle_body-inspection-x4_unapproved-v17r2_20261018-230629-4079f836.png",
+   "sha256": "c6578c5913d0fb22a1c172852c132477a574aab2bb34934a8861ea5ed0374904"
+  },
+  "manifest": {
+   "name": "rpg-2-star-ocean-the-second_female-battle_source-manifest_unapproved-v17r2_20261018-230629-9fa011ee.json",
+   "sha256": "eeb883172fcaf6010edae0bf898ff4a957b8b62dbea08a89da35885736f1602c"
+  }
+ },
+ "tool": {
+  "file": "tools/rpg-2-star-ocean-the-second_female-battle_body-finish_codex-v17r2_20261018-230629-6d304fae.py",
+  "sha256TextLf": "44666f0a00939a60102a39ddec0655dfd069b8c8229efd0ba87266a864bc2213"
+ }
+}
