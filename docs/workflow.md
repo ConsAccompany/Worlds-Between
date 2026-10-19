@@ -65,3 +65,7 @@ At the end of a substantive batch report only: completed and integrated outputs,
 ## Minimal operational measures
 
 Use task start/finish/revision timestamps and existing evidence to report completed integrated deliverables, task age, active task count, repeated revisions and periods blocked on account availability. Categorize time only when actually measured (production/testing/coordination/waiting); otherwise say unknown. Do not invent historical hours, count scheduled wakeups as work, or build a new monitoring service. Review these measures when choosing the next batch, not on every polling tick.
+
+### Windows private Site packaging
+
+After a successful source build, use the official source helper with credentials only on hidden stdin. The current Windows environment needs Git\bin and the bundled Node\bin on the helper process PATH for Bash and packaging Node; do not change system PATH. If the package-manager shim fails before compilation, run the existing project framework build directly with the verified Node executable and gate its exit before packaging unchanged inputs. For the Bash/tar archive argument use an absolute MSYS `/c/...` path (a `C:/...` colon is interpreted as a tar remote). Verify the resulting ordinary Windows archive path before passing it to private publication. Preserve source SHA, audience, errors and proof; never put credentials in files, argv or output.

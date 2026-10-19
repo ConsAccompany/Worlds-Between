@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-19T01:48:09.925245+00:00",
+  "updatedAt": "2026-10-19T01:53:08.268834+00:00",
   "purpose": "Operating queue and worktree ownership; no progress points or account details",
   "workflow": "docs/workflow.md",
   "canonicalLedger": "outputs/rpg-2-star-ocean-the-second_production-completion_task-ledger_v01_20261018-140533-3de52073.json",
@@ -59,6 +59,14 @@
       "role": "producer",
       "owner": "codex",
       "writePolicy": "Female representative exploration source, native authoring and actual gameplay evidence only; no shared ledger/index or defaults"
+    },
+    {
+      "id": "ui-audio-producer",
+      "pathFromPrimary": "work/max-ui-audio",
+      "role": "producer",
+      "owner": "claude",
+      "baseAtRegistration": "0b0e7d915324686a8cf29cf74c4b3b6841cf3fa4",
+      "writePolicy": "Bounded UI WAV/source and game_audio_cues.gd only; no other game sources/shared ledger/index/Site"
     }
   ],
   "tasks": [
@@ -593,6 +601,34 @@
         "outputs/rpg-2-star-ocean-the-second_battle-arena_current-main-proof_manifest-v01_20261018-214000-4d87ef21.json"
       ],
       "finishedAt": "2026-10-19T01:39:40.152365+00:00"
+    },
+    {
+      "id": "content.audio.ui-sfx",
+      "owner": "claude",
+      "status": "in_progress",
+      "lane": "supporting",
+      "worktree": "ui-audio-producer",
+      "dependsOn": [
+        "code.runtime.audio-cues"
+      ],
+      "output": "Authored UI sounds committed and wired into existing pilot hooks",
+      "writeScope": [
+        "game/assets/audio/*ui*",
+        "game/scripts/game_audio_cues.gd",
+        "game/tests/*ui-audio*",
+        "tools/*ui-audio*",
+        "outputs/*ui-audio*",
+        "docs/qa/*ui-audio*"
+      ],
+      "completion": [
+        "Existing frozen UI sounds committed/wired production criterion",
+        "Distinct authored PCM files with editable deterministic source/manifest and no clipping/DC/seam artifacts",
+        "Actual button hook dispatch, volume/mute/default-off/fallback checks",
+        "Independent root inspection/integration; no listening quality approval claimed"
+      ],
+      "nextAction": "Build one bounded confirm/cancel/notice asset set plus existing hook mapping; keep audio default off until accepted.",
+      "startedAt": "2026-10-19T01:53:08.268834+00:00",
+      "blockedBy": []
     }
   ],
   "nextProductionMilestones": [
