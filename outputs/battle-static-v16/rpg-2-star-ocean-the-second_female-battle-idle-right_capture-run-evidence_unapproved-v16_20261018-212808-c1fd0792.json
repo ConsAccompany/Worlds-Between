@@ -1,0 +1,101 @@
+{
+ "status": "UNAPPROVED evidence for the female battle static v16 captures; writes nothing in game/",
+ "context_label": "FROZEN REFERENCE CONTEXT: an isolated git archive of 160b823 game/ plus the unchanged v14 probe script (probe mode). The arena bands, their tint and the radius-18 / y-scale-0.28 contact shadow are drawn by the probe's in-memory test subclass as test-presentation context. They are NOT proof that current main draws this art by default, and these captures make NO runtime / default-integration claim for v16. The root captures the current canonical game's own geometry separately during integration.",
+ "isolated_tree": {
+  "recipe": "git -c core.autocrlf=false archive 160b823 game | tar -x into C:/Users/hkzha/AppData/Local/Temp/fv16iso (no other files); the candidate PNGs are read by absolute path from C:/Users/hkzha/AppData/Local/Temp/fv16/cand and sha256-checked by the probe",
+  "verify_after_runs": {
+   "commit": "160b823",
+   "isolated_dir": "C:\\Users\\hkzha\\AppData\\Local\\Temp\\fv16iso",
+   "commit_game_files": 1760,
+   "missing": [],
+   "not_byte_identical_to_blob": [],
+   "added_after_import_and_runs": {
+    "godot_dir": 873,
+    "import": 53,
+    "uid": 37,
+    "unexpected": []
+   }
+  }
+ },
+ "godot": "work/tooling/godot-4-7-2/Godot_v4.7.2-stable_win64_console.exe (4.7.2 stable official)",
+ "checked_runner": {
+  "file": "work/max0840-sentry-sync/tools/rpg-2-star-ocean-the-second_godot_checked-runner_v01_20261018-203400-f74ac6d1.py",
+  "sha256": "0a3e036aded8fca3a536c279b4da0c534d7cb94ede684440f7ef6d1ed9890bd5",
+  "rule": "finite --timeout, unique --log per run, --expect marker; any SCRIPT ERROR / ERROR / parse line fails the run even with exit 0"
+ },
+ "probe": {
+  "file": "tools/rpg-2-star-ocean-the-second_protagonist-female_sideview-battle-idle-right-native-0p65-party-capture-probe_unapproved-v14_20261018-084553-2c7e5a90.gd",
+  "sha256": "720c8377794ac65458ab203fa664b483ffc76ec1022ef31419c676359f2457a3",
+  "changed": false
+ },
+ "import": {
+  "command": "runner --timeout 300 --expect \"Godot Engine v4.7.2\" --log <unique> -- Godot --headless --path <iso>/game --import",
+  "result": "CHECKED_RUN PASS None exit= 0 elapsed= 20.562 missing= []",
+  "note": "the expect marker is only the engine banner: import has no success marker"
+ },
+ "capture_command": "runner --timeout 150 --expect \"CAPTURE PASS\" --log <unique per run> -- Godot --path <iso>/game --resolution 640x360 -s <v14 probe, unchanged> -- <candidate png> <sha256> <out png> <out json> <floor> <nosprite png> 640x360 probe <iso band png> <band sha256> <zh|en>",
+ "candidates": {
+  "v16": "ce6d294c23f89556e3822470966704ef68534d4deb69500a03d47f63ca79b768",
+  "v15_control": "c6aca9b804d1fd83c284c1491cbeb347190d2528d8f05c460e1e055800e1f4e2"
+ },
+ "runs": {
+  "v15_control_archive-640-zh": {
+   "checked_run": "CHECKED_RUN PASS None exit= 0 elapsed= 2.703 missing= []",
+   "diagnostic_lines": [
+    "WARNING: 1 RID of type \"CanvasItem\" was leaked.",
+    "WARNING: 3 ObjectDB instances were leaked at exit (run with `--verbose` for details)."
+   ]
+  },
+  "v15_control_archive-640-en": {
+   "checked_run": "CHECKED_RUN PASS None exit= 0 elapsed= 2.922 missing= []",
+   "diagnostic_lines": [
+    "WARNING: 1 RID of type \"CanvasItem\" was leaked.",
+    "WARNING: 3 ObjectDB instances were leaked at exit (run with `--verbose` for details)."
+   ]
+  },
+  "v15_control_outskirts-640-zh": {
+   "checked_run": "CHECKED_RUN PASS None exit= 0 elapsed= 2.656 missing= []",
+   "diagnostic_lines": [
+    "WARNING: 1 RID of type \"CanvasItem\" was leaked.",
+    "WARNING: 3 ObjectDB instances were leaked at exit (run with `--verbose` for details)."
+   ]
+  },
+  "v15_control_outskirts-640-en": {
+   "checked_run": "CHECKED_RUN PASS None exit= 0 elapsed= 2.609 missing= []",
+   "diagnostic_lines": [
+    "WARNING: 1 RID of type \"CanvasItem\" was leaked.",
+    "WARNING: 3 ObjectDB instances were leaked at exit (run with `--verbose` for details)."
+   ]
+  },
+  "v16_archive-640-zh": {
+   "checked_run": "CHECKED_RUN PASS None exit= 0 elapsed= 2.672 missing= []",
+   "diagnostic_lines": [
+    "WARNING: 1 RID of type \"CanvasItem\" was leaked.",
+    "WARNING: 3 ObjectDB instances were leaked at exit (run with `--verbose` for details)."
+   ]
+  },
+  "v16_archive-640-en": {
+   "checked_run": "CHECKED_RUN PASS None exit= 0 elapsed= 2.813 missing= []",
+   "diagnostic_lines": [
+    "WARNING: 1 RID of type \"CanvasItem\" was leaked.",
+    "WARNING: 3 ObjectDB instances were leaked at exit (run with `--verbose` for details)."
+   ]
+  },
+  "v16_outskirts-640-zh": {
+   "checked_run": "CHECKED_RUN PASS None exit= 0 elapsed= 2.625 missing= []",
+   "diagnostic_lines": [
+    "WARNING: 1 RID of type \"CanvasItem\" was leaked.",
+    "WARNING: 3 ObjectDB instances were leaked at exit (run with `--verbose` for details)."
+   ]
+  },
+  "v16_outskirts-640-en": {
+   "checked_run": "CHECKED_RUN PASS None exit= 0 elapsed= 2.578 missing= []",
+   "diagnostic_lines": [
+    "WARNING: 1 RID of type \"CanvasItem\" was leaked.",
+    "WARNING: 3 ObjectDB instances were leaked at exit (run with `--verbose` for details)."
+   ]
+  }
+ },
+ "v15_control": "the same probe on the unchanged v15 PNG in this tree reproduced all four root-reviewed v15 captures byte for byte, and every v16 no-sprite frame equals the v15 control's (see the capture-measure report)",
+ "rerun_disclosure": "the first v16 capture run (21:38) used longer names (…party-capture-ref160b823-probe-<tag>…) whose absolute paths reached 253-265 characters (Windows MAX_PATH 260). Those 8 files, created by this session minutes earlier, were deleted and the four v16 runs repeated in the same isolated tree with the shorter label cap-ref160b823 (absolute paths 237-249). Both runs were CHECKED_RUN PASS; only the second is delivered."
+}

@@ -1,0 +1,86 @@
+{
+ "status": "UNAPPROVED evidence for the female battle static v15 captures; writes nothing in game/",
+ "isolated_tree": {
+  "recipe": "git -c core.autocrlf=false archive 160b823 game | tar -x into C:/Users/hkzha/AppData/Local/Temp/fv15iso (no other files); the candidate PNGs are read by absolute path from C:/Users/hkzha/AppData/Local/Temp/fv15/cand and sha256-checked by the probe",
+  "verify_after_runs": {
+   "commit": "160b823",
+   "isolated_dir": "C:\\Users\\hkzha\\AppData\\Local\\Temp\\fv15iso",
+   "commit_game_files": 1760,
+   "missing": [],
+   "not_byte_identical_to_blob": [],
+   "added_after_import_and_runs": {
+    "godot_dir": 873,
+    "import": 53,
+    "uid": 37,
+    "unexpected": []
+   }
+  }
+ },
+ "godot": "work/tooling/godot-4-7-2/Godot_v4.7.2-stable_win64_console.exe (4.7.2 stable official)",
+ "checked_runner": "work/max0840-sentry-sync/tools/rpg-2-star-ocean-the-second_godot_checked-runner_v01_20261018-203400-f74ac6d1.py",
+ "import": {
+  "command": "runner --timeout 300 --expect \"Godot Engine v4.7.2\" -- Godot --headless --path <iso>/game --import",
+  "result": "CHECKED_RUN PASS (exit 0); the expect marker is only the engine banner: import has no success marker",
+  "diagnostic_lines": []
+ },
+ "capture_command": "runner --timeout 150 --expect \"CAPTURE PASS\" -- Godot --path <iso>/game --resolution 640x360 -s tools/<v14 probe, unchanged, sha256 720c8377...> -- <candidate png> <sha256> <out png> <out json> <floor> <nosprite png> 640x360 probe <iso band png> <band sha256> <zh|en>",
+ "runs": {
+  "v14_archive-640-en": {
+   "checked_run": "CHECKED_RUN PASS None exit= 0 elapsed= 2.625 missing= []",
+   "warnings": [
+    "WARNING: 1 RID of type \"CanvasItem\" was leaked.",
+    "WARNING: 3 ObjectDB instances were leaked at exit (run with `--verbose` for details)."
+   ]
+  },
+  "v14_archive-640-zh": {
+   "checked_run": "CHECKED_RUN PASS None exit= 0 elapsed= 2.719 missing= []",
+   "warnings": [
+    "WARNING: 1 RID of type \"CanvasItem\" was leaked.",
+    "WARNING: 3 ObjectDB instances were leaked at exit (run with `--verbose` for details)."
+   ]
+  },
+  "v14_outskirts-640-en": {
+   "checked_run": "CHECKED_RUN PASS None exit= 0 elapsed= 2.657 missing= []",
+   "warnings": [
+    "WARNING: 1 RID of type \"CanvasItem\" was leaked.",
+    "WARNING: 3 ObjectDB instances were leaked at exit (run with `--verbose` for details)."
+   ]
+  },
+  "v14_outskirts-640-zh": {
+   "checked_run": "CHECKED_RUN PASS None exit= 0 elapsed= 2.61 missing= []",
+   "warnings": [
+    "WARNING: 1 RID of type \"CanvasItem\" was leaked.",
+    "WARNING: 3 ObjectDB instances were leaked at exit (run with `--verbose` for details)."
+   ]
+  },
+  "v15_archive-640-en": {
+   "checked_run": "CHECKED_RUN PASS None exit= 0 elapsed= 2.656 missing= []",
+   "warnings": [
+    "WARNING: 1 RID of type \"CanvasItem\" was leaked.",
+    "WARNING: 3 ObjectDB instances were leaked at exit (run with `--verbose` for details)."
+   ]
+  },
+  "v15_archive-640-zh": {
+   "checked_run": "CHECKED_RUN PASS None exit= 0 elapsed= 2.547 missing= []",
+   "warnings": [
+    "WARNING: 1 RID of type \"CanvasItem\" was leaked.",
+    "WARNING: 3 ObjectDB instances were leaked at exit (run with `--verbose` for details)."
+   ]
+  },
+  "v15_outskirts-640-en": {
+   "checked_run": "CHECKED_RUN PASS None exit= 0 elapsed= 2.703 missing= []",
+   "warnings": [
+    "WARNING: 1 RID of type \"CanvasItem\" was leaked.",
+    "WARNING: 3 ObjectDB instances were leaked at exit (run with `--verbose` for details)."
+   ]
+  },
+  "v15_outskirts-640-zh": {
+   "checked_run": "CHECKED_RUN PASS None exit= 0 elapsed= 2.719 missing= []",
+   "warnings": [
+    "WARNING: 1 RID of type \"CanvasItem\" was leaked.",
+    "WARNING: 3 ObjectDB instances were leaked at exit (run with `--verbose` for details)."
+   ]
+  }
+ },
+ "v14_control": "the same v14 probe on the unchanged v14 PNG in the same tree reproduced all four root-reviewed v14 captures byte for byte (see capture-measure-report gates)"
+}
