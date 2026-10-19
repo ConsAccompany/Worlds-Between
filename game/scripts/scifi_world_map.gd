@@ -15,6 +15,12 @@ const GeoProjection := preload("res://scripts/world_geo_projection.gd")
 const MapData := preload("res://scripts/world_map_data.gd")
 const MapText := preload("res://scripts/world_map_text.gd")
 const RouteAdapter := preload("res://scripts/world_map_route_adapter.gd")
+# Opt-in UNAPPROVED navigation UI skin pilot (presentation only): `-- --navigation-ui-skin-pilot`, or set
+# navigation_ui_skin_override = 1 before the scene loads. Off by default; a refused package changes nothing. The map
+# frame, routes, labels and route card are never touched by it.
+const NavigationUiSkin := preload("res://scripts/rpg-2-star-ocean-the-second_navigation-ui_skin-helper_v01_20261019-174604-f7b34a81.gd")
+const NAVIGATION_UI_SKIN_FLAG := "--navigation-ui-skin-pilot"
+const NAVIGATION_UI_SKIN_DIR := "res://assets/ui/battle-skin-v01"
 
 const MAP_RECT := Rect2(0, 44, 640, 268)
 const CARD_RECT := Rect2(424, 48, 210, 238)
@@ -110,6 +116,8 @@ const RETICLE_REACH := 14.0
 const FOCAL_REACH := 140.0
 
 static var last_mode := "global"
+static var navigation_ui_skin_override := -1
+var navigation_ui_skin
 
 var title_label: Label
 var help_label: Label
@@ -210,9 +218,19 @@ func _ready() -> void:
 	else:
 		enter_global()
 	_refresh_text()
+	if navigation_ui_skin_enabled():
+		navigation_ui_skin = NavigationUiSkin.new(NAVIGATION_UI_SKIN_DIR)
+		if not navigation_ui_skin.apply(self):
+			navigation_ui_skin = null
 	if AppState.show_initial_guide:
 		AppState.show_initial_guide = false
 		call_deferred("_open_field_log")
+
+
+static func navigation_ui_skin_enabled() -> bool:
+	if navigation_ui_skin_override >= 0:
+		return navigation_ui_skin_override == 1
+	return OS.get_cmdline_user_args().has(NAVIGATION_UI_SKIN_FLAG)
 
 
 func _initial_region_id() -> String:
@@ -2271,6 +2289,9 @@ func _open_save() -> void:
 func _exit_tree() -> void:
 	if route_adapter != null and route_state.get("status", "") == "ready":
 		route_adapter.cancel()
+	if navigation_ui_skin != null:
+		navigation_ui_skin.revert()
+		navigation_ui_skin = null
 
 
 func _unhandled_input(event: InputEvent) -> void:

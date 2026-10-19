@@ -13,6 +13,12 @@ static var themed_music_override := -1
 static var themed_music_asset_dir := ThemedMusic.DEFAULT_ASSET_DIR
 const CityNavigation := preload("res://scripts/city_navigation.gd")
 const CityHallParkV06 := preload("res://scripts/city_hall_park_v06_scene.gd")
+# Opt-in UNAPPROVED navigation UI skin pilot (presentation only): `-- --navigation-ui-skin-pilot`, or set
+# navigation_ui_skin_override = 1 before the scene loads. Off by default; a refused package changes nothing.
+const NavigationUiSkin := preload("res://scripts/rpg-2-star-ocean-the-second_navigation-ui_skin-helper_v01_20261019-174604-f7b34a81.gd")
+const NAVIGATION_UI_SKIN_FLAG := "--navigation-ui-skin-pilot"
+const NAVIGATION_UI_SKIN_DIR := "res://assets/ui/battle-skin-v01"
+static var navigation_ui_skin_override := -1
 const MOVE_SPEED := 140.0
 const SPAWN := Vector2(82, 260)
 const CITY_SPAWN := Vector2(340, 253)
@@ -91,6 +97,13 @@ var trace_index := -1
 var feedback_key := "npc_prompt"
 var feedback_message := ""
 var cue_player: AudioStreamPlayer
+var navigation_ui_skin
+
+
+static func navigation_ui_skin_enabled() -> bool:
+	if navigation_ui_skin_override >= 0:
+		return navigation_ui_skin_override == 1
+	return OS.get_cmdline_user_args().has(NAVIGATION_UI_SKIN_FLAG)
 
 
 func _ready() -> void:
@@ -133,6 +146,16 @@ func _ready() -> void:
 	AppState.language_changed.connect(_refresh_text)
 	_refresh_text()
 	_update_city_labels()
+	if navigation_ui_skin_enabled():
+		navigation_ui_skin = NavigationUiSkin.new(NAVIGATION_UI_SKIN_DIR)
+		if not navigation_ui_skin.apply(self):
+			navigation_ui_skin = null
+
+
+func _exit_tree() -> void:
+	if navigation_ui_skin != null:
+		navigation_ui_skin.revert()
+		navigation_ui_skin = null
 
 
 func _process(delta: float) -> void:

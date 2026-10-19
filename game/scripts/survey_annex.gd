@@ -70,6 +70,12 @@ const WDC_FIXTURE_BASE_Y := 228.0
 # Clue fixtures are y-sorted with the heroine and carry their clue marker; the terminal table sorts first and its
 # blocker keeps her clear of it.
 const WDC_ROOM_TWO_FLAG := "--wdc-records-chamber-v01"
+# Opt-in UNAPPROVED navigation UI skin pilot (presentation only): `-- --navigation-ui-skin-pilot`, or set
+# navigation_ui_skin_override = 1 before the scene loads. Off by default; a refused package changes nothing.
+const NavigationUiSkin := preload("res://scripts/rpg-2-star-ocean-the-second_navigation-ui_skin-helper_v01_20261019-174604-f7b34a81.gd")
+const NAVIGATION_UI_SKIN_FLAG := "--navigation-ui-skin-pilot"
+const NAVIGATION_UI_SKIN_DIR := "res://assets/ui/battle-skin-v01"
+static var navigation_ui_skin_override := -1
 const WDC_ROOM_TWO_FIXTURES := [
 	preload("res://assets/props/wdc-annex-room2/rpg-2-star-ocean-the-second_wdc-annex-room2_machine-translation-pixel-fixture_unapproved-v01_20261018-001157-151fb8d0.png"),
 	preload("res://assets/props/wdc-annex-room2/rpg-2-star-ocean-the-second_wdc-annex-room2_parallel-inscription-pixel-fixture_unapproved-v01_20261018-001157-151fb8d0.png"),
@@ -148,6 +154,13 @@ var yonkers_room_one := false
 var wdc_room_two := false
 var wdc_room_two_walls := false
 var wdc_room_two_markers: Array[Node2D] = []
+var navigation_ui_skin
+
+
+static func navigation_ui_skin_enabled() -> bool:
+	if navigation_ui_skin_override >= 0:
+		return navigation_ui_skin_override == 1
+	return OS.get_cmdline_user_args().has(NAVIGATION_UI_SKIN_FLAG)
 
 
 func _ready() -> void:
@@ -174,6 +187,16 @@ func _ready() -> void:
 	_start_audio()
 	AppState.language_changed.connect(_refresh_text)
 	_refresh_text()
+	if navigation_ui_skin_enabled():
+		navigation_ui_skin = NavigationUiSkin.new(NAVIGATION_UI_SKIN_DIR)
+		if not navigation_ui_skin.apply(self):
+			navigation_ui_skin = null
+
+
+func _exit_tree() -> void:
+	if navigation_ui_skin != null:
+		navigation_ui_skin.revert()
+		navigation_ui_skin = null
 
 
 func _data() -> Dictionary:
@@ -623,7 +646,7 @@ func _button(parent: Node, position: Vector2, size: Vector2, callback: Callable)
 func _refresh_text() -> void:
 	var data := _data()
 	title_label.text = AppState.destination_name(destination_id) + " · " + String(data["rooms"][room - 1])
-	title_label.add_theme_font_size_override("font_size", 14 if AppState.language == "en" and (destination_id == "scifi.city" and room == 2 or destination_id == "scifi.ruins") else 18)
+	title_label.add_theme_font_size_override("font_size", 14 if AppState.language == "en" and (destination_id in ["scifi.city", "scifi.ruins"]) else 18)
 	progress_label.text = AppState.text_for("survey_progress") % [_clue_count(), AppState.text_for("field_yes" if AppState.survey_solved.has(destination_id) else "field_no")]
 	help_label.text = AppState.text_for("survey_help")
 	back_button.text = AppState.text_for("survey_leave" if room == 1 else "survey_previous")
@@ -634,9 +657,9 @@ func _refresh_text() -> void:
 		save_button.position.x = 398.0 if wide else 418.0
 		back_button.position.x = 503.0 if wide else 525.0
 		back_button.size.x = 125.0 if wide else 98.0
-	elif destination_id == "scifi.ruins":
-		# Washington rooms: a label too long for the 98 px button ("Return outside", "Outer room") steps its font
-		# down until it fits; labels that already fit keep the default size.
+	elif destination_id in ["scifi.ruins", "scifi.city"]:
+		# Washington and NYC rooms: a label too long for the 98 px button ("Return outside", "Outer room") steps its
+		# font down until it fits; labels that already fit keep the default size.
 		back_button.remove_theme_font_size_override("font_size")
 		var font_size := back_button.get_theme_font_size("font_size")
 		while font_size > 11 and back_button.get_minimum_size().x > 98.0:
