@@ -29,6 +29,8 @@ The coordinator records producer/technical-check transfers with the existing led
 
 For dependent native commands in PowerShell, stop on each nonzero `$LASTEXITCODE` before running the next build, commit or push. A final process exit can otherwise conceal an earlier Python assertion or failed validation. Do not combine validation with publication unless the intermediate result is explicitly checked; inspect diagnostic markers and required predicates in addition to exit status.
 
+New SceneTree probes use the [bounded checked runner](../tools/rpg-2-star-ocean-the-second_godot_checked-runner_v01_20261018-203400-f74ac6d1.py) with a finite deadline, unique log and expected success marker. It terminates its owned normal process tree on compiler/runtime diagnostics even if the caller event loop stays alive. This prevents waiting through a long command timeout after a failed inner script load. It is a test-process controller, not a security sandbox for intentionally detached children.
+
 For raw-hash evidence, compare every frozen file with its staged Git blob before publishing. Working-file hashes alone miss checkout/filter conversion. Use scoped attributes for the exact source/report snapshots, preserve historical CRLF when that is what was tested, and state any normalization. Recognizing CRLF as a line ending must retain other whitespace checks. A failed hash gate requires correction and disclosure, not a silently rewritten report.
 
 ## Completion and handoff contract

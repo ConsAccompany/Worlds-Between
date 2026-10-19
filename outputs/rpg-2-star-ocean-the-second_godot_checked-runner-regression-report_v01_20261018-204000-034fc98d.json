@@ -1,0 +1,81 @@
+{
+  "passed": 10,
+  "failed": 0,
+  "checks": [
+    {
+      "case": "success-with-required-marker",
+      "pass": true,
+      "reason": null,
+      "seconds": 0.063
+    },
+    {
+      "case": "nonzero-even-with-marker",
+      "pass": true,
+      "reason": "exit-code",
+      "seconds": 0.062
+    },
+    {
+      "case": "missing-required-marker",
+      "pass": true,
+      "reason": "missing-marker",
+      "seconds": 0.063
+    },
+    {
+      "case": "script-error-even-exit-zero",
+      "pass": true,
+      "reason": "diagnostic",
+      "seconds": 0.64
+    },
+    {
+      "case": "colored-compiler-error",
+      "pass": true,
+      "reason": "diagnostic",
+      "seconds": 0.813
+    },
+    {
+      "case": "compiler-error-and-hang",
+      "pass": true,
+      "reason": "diagnostic",
+      "seconds": 0.641
+    },
+    {
+      "case": "partial-line-and-hang-timeout",
+      "pass": true,
+      "reason": "timeout",
+      "seconds": 0.968
+    },
+    {
+      "case": "unrelated-process-preserved",
+      "pass": true,
+      "reason": "diagnostic",
+      "seconds": 0.641
+    },
+    {
+      "case": "log-preserved-and-overwrite-refused",
+      "pass": true
+    },
+    {
+      "case": "nonpositive-or-nonfinite-timeout-refused",
+      "pass": true
+    }
+  ],
+  "actualGodotIncident": {
+    "passed": false,
+    "reason": "diagnostic",
+    "exitCode": 1,
+    "missingMarkers": [],
+    "elapsedSeconds": 1.219,
+    "compilerDiagnosticObserved": true,
+    "fixture": "Inner dependency has an uninferrable nil type; main calls new on the failed load and otherwise leaves its SceneTree event loop alive.",
+    "diagnosticExcerpt": [
+      "SCRIPT ERROR: Parse Error: Cannot infer the type of \"impossible\" variable because the value is \"null\".",
+      "SCRIPT ERROR: Invalid call. Nonexistent function 'new' in base 'GDScript'."
+    ]
+  },
+  "sourceSha256Lf": {
+    "tools/rpg-2-star-ocean-the-second_godot_checked-runner_v01_20261018-203400-f74ac6d1.py": "0a3e036aded8fca3a536c279b4da0c534d7cb94ede684440f7ef6d1ed9890bd5",
+    "tests/rpg-2-star-ocean-the-second_godot_checked-runner-regression_v01_20261018-203900-2a21b1e2.py": "1d13b0ed03386cc7da74fd00f371c1c72755a280ac0e1af3849015082bc6f2ec"
+  },
+  "scope": "Local bounded diagnostic/deadline runner for owned normal Godot process trees, not a hostile-process security sandbox. Descendants that intentionally detach/escape after a parent exits are not covered.",
+  "verifiedAt": "2026-10-19T00:53:12.736369+00:00"
+}
