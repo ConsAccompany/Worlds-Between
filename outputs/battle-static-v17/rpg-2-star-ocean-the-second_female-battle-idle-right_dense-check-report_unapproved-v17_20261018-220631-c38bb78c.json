@@ -1,0 +1,244 @@
+{
+ "status": "UNAPPROVED v17 density prototype check",
+ "pass": true,
+ "passed": 21,
+ "total": 21,
+ "gates": [
+  {
+   "gate": "built png equals this tool's deterministic output",
+   "pass": true,
+   "detail": "rpg-2-star-ocean-the-second_female-battle-idle-right_dense-native136_unapproved-v17_20261018-220631-cde3a961.png"
+  },
+  {
+   "gate": "built head equals this tool's deterministic output",
+   "pass": true,
+   "detail": "rpg-2-star-ocean-the-second_female-battle-idle-right_dense-head-native_unapproved-v17_20261018-220631-64242174.png"
+  },
+  {
+   "gate": "built ora equals this tool's deterministic output",
+   "pass": true,
+   "detail": "rpg-2-star-ocean-the-second_female-battle-idle-right_dense-layers_unapproved-v17_20261018-220631-59156ff8.ora"
+  },
+  {
+   "gate": "built manifest equals this tool's deterministic output",
+   "pass": true,
+   "detail": "rpg-2-star-ocean-the-second_female-battle-idle-right_dense-manifest_unapproved-v17_20261018-220631-36233c94.json"
+  },
+  {
+   "gate": "native cell 136x144",
+   "pass": true,
+   "detail": [
+    144,
+    136,
+    4
+   ]
+  },
+  {
+   "gate": "binary alpha (no antialias fringe)",
+   "pass": true,
+   "detail": null
+  },
+  {
+   "gate": "every opaque texel is a palette colour",
+   "pass": true,
+   "detail": []
+  },
+  {
+   "gate": "palette used <= 48 colours",
+   "pass": true,
+   "detail": {
+    "used": 44,
+    "keys": "1234CDEGKLMNOPQSTWZabcdefghijklmnopqrstvwxyz"
+   }
+  },
+  {
+   "gate": "silhouette edge is the outline K or the deep skin profile k only (no halo / rim / neon)",
+   "pass": true,
+   "detail": [
+    "K",
+    "k"
+   ]
+  },
+  {
+   "gate": "rows 136..143 transparent (soles end on row 135)",
+   "pass": true,
+   "detail": null
+  },
+  {
+   "gate": "pin (64,136) transparent; feet on both sides of x64 on row 135",
+   "pass": true,
+   "detail": [
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99
+   ]
+  },
+  {
+   "gate": "v16 PNG present and unchanged (protected evidence)",
+   "pass": true,
+   "detail": "ce6d294c23f89556"
+  },
+  {
+   "gate": "same apparent bounds as v16 (every bbox edge within 2 logical px)",
+   "pass": true,
+   "detail": {
+    "v17NativeInclusive": [
+     29,
+     3,
+     120,
+     135
+    ],
+    "v17Logical": [
+     14.5,
+     1.5,
+     59.5,
+     67.0
+    ],
+    "v16LogicalInclusive": [
+     15,
+     1,
+     60,
+     67
+    ],
+    "deltaLogical": [
+     -0.5,
+     0.5,
+     -0.5,
+     0.0
+    ]
+   }
+  },
+  {
+   "gate": "not a nearest-neighbour upscale: >= 25% of fully opaque 2x2 blocks carry sub-logical detail",
+   "pass": true,
+   "detail": {
+    "opaqueTexels": 6255,
+    "v16OpaqueTexels": 1590,
+    "fullyOpaque2x2Blocks": 1469,
+    "nonUniform2x2Blocks": 896,
+    "nonUniformShare": 0.6099,
+    "texelsEqualToNearestUpscaledV16": 1605,
+    "texelsOpaqueInBoth": 5755,
+    "equalShare": 0.2789
+   }
+  },
+  {
+   "gate": "not v16 re-used: < 50% of shared opaque texels equal the nearest-upscaled v16",
+   "pass": true,
+   "detail": 0.2789
+  },
+  {
+   "gate": "face carries distinct eye white, iris, pupil/lash, lip and deep skin keys",
+   "pass": true,
+   "detail": {
+    "v17NativeFaceTexels": 394,
+    "v17FaceColours": 19,
+    "v16LogicalFaceTexels": 104,
+    "v16FaceColours": 12,
+    "v17FeatureKeys": "1234EGKSbghijkqrsxy"
+   }
+  },
+  {
+   "gate": "head PNG equals the composite crop",
+   "pass": true,
+   "detail": [
+    52,
+    12,
+    96,
+    48
+   ]
+  },
+  {
+   "gate": "ora mimetype stored first",
+   "pass": true,
+   "detail": null
+  },
+  {
+   "gate": "ora layers stacked bottom->top equal the PNG exactly",
+   "pass": true,
+   "detail": {
+    "layers": 25
+   }
+  },
+  {
+   "gate": "ora mergedimage equals the PNG",
+   "pass": true,
+   "detail": null
+  },
+  {
+   "gate": "nothing game-side written to the output folder",
+   "pass": true,
+   "detail": []
+  }
+ ],
+ "info": {
+  "newKeysUsed": [
+   "j",
+   "k",
+   "r",
+   "y",
+   "i",
+   "b",
+   "O",
+   "f",
+   "N",
+   "v",
+   "a",
+   "z"
+  ],
+  "density": {
+   "opaqueTexels": 6255,
+   "v16OpaqueTexels": 1590,
+   "fullyOpaque2x2Blocks": 1469,
+   "nonUniform2x2Blocks": 896,
+   "nonUniformShare": 0.6099,
+   "texelsEqualToNearestUpscaledV16": 1605,
+   "texelsOpaqueInBoth": 5755,
+   "equalShare": 0.2789
+  },
+  "face": {
+   "v17NativeFaceTexels": 394,
+   "v17FaceColours": 19,
+   "v16LogicalFaceTexels": 104,
+   "v16FaceColours": 12,
+   "v17FeatureKeys": "1234EGKSbghijkqrsxy"
+  }
+ },
+ "pngSha256": "3cf05f0d3e560bdba5c4910b1192f5ff6ce34c99d747f2643e974fcaeb1d07db",
+ "tool": "tools/rpg-2-star-ocean-the-second_female-battle-static_dense-author_unapproved-v17_20261018-220631-3c9e7a41.py"
+}

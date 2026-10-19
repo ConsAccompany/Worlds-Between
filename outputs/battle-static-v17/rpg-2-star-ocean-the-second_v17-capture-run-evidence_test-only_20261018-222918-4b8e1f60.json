@@ -1,0 +1,78 @@
+{
+ "status": "TEST-ONLY evidence for the v17 density-method prototype captures; nothing written under any game/ tree",
+ "testedCanonicalRevision": "ec0c784969d5be55e3b6f49f219e6678734966c1",
+ "canonicalHeadAtReport": "b429e8e9357901d4a27992a8b8181c6f2491918e (ec0c784..b429e8e touches UI audio scripts/assets only; battle_arena.gd and project.godot unchanged; not re-captured)",
+ "isolatedTree": {
+  "recipe": "git -c core.autocrlf=true archive ec0c784 game | tar -x -C %TEMP%/fv17iso (CRLF checkout bytes, so battle_arena.gd = 404eabfd..., the canonical working-file hash); bounded --import first",
+  "battleArenaSha256": "404eabfd519703bd8ae4d9705732d46b896ea4e93e7649d3c5f21b69d4be85e4",
+  "battleArenaBlob": "025de0518e1674e68db429412becaddd4f5800ad",
+  "projectGodotSha256": "38ed61a4142c024cb664d7874993d66d63ed8a17aff96359a4d60280e6be19cb",
+  "verifyAfterRuns": {
+   "commitFiles": 2033,
+   "missing": 0,
+   "notByteIdentical": "436, all tracked .import files rewritten by Godot's --import (same class as the canonical checkout's own modified .import files); 0 .gd/.tscn/.png/.godot changes",
+   "added": {
+    "dotGodotDir": 993,
+    "import": 55,
+    "uid": 41,
+    "other": 0
+   }
+  },
+  "appdata": "APPDATA=%TEMP%/fv17ad for every Godot run (user saves / prefs untouched); harness SaveStore root user://test-saves/v17-density-capture inside that profile"
+ },
+ "godot": "work/tooling/godot-4-7-2/Godot_v4.7.2-stable_win64_console.exe (4.7.2 stable official), Compatibility renderer, NVIDIA RTX 3080, windowed (not headless)",
+ "checkedRunner": {
+  "file": "work/max0840-sentry-sync/tools/rpg-2-star-ocean-the-second_godot_checked-runner_v01_20261018-203400-f74ac6d1.py",
+  "sha256": "0a3e036aded8fca3a536c279b4da0c534d7cb94ede684440f7ef6d1ed9890bd5",
+  "rule": "finite --timeout 75, unique --log, --expect V17_DENSITY_CAPTURE_OK; any SCRIPT ERROR / ERROR / parse line fails even with exit 0"
+ },
+ "import": {
+  "command": "runner --timeout 300 --expect 'Godot Engine v4.7.2' -- Godot --headless --path <iso>/game --import",
+  "result": "CHECKED_RUN PASS exit 0 elapsed 18.7 s; 0 ERROR / WARNING lines (log kept in %TEMP% only)"
+ },
+ "captureCommand": "runner --timeout 75 --expect V17_DENSITY_CAPTURE_OK --log <unique> -- Godot --path <iso>/game --resolution <1280x720|640x360> -s <harness> -- <sprite png> <sha256> <out dir> <tag> ec0c784 <ci1280|native640> <default|outskirts>",
+ "runs": {
+  "k1280-def-v16": "CHECKED_RUN PASS exit 0 3.09 s",
+  "k1280-def-v17": "CHECKED_RUN PASS exit 0 3.11 s",
+  "k1280-osk-v16": "CHECKED_RUN PASS exit 0 3.13 s",
+  "k1280-osk-v17": "CHECKED_RUN PASS exit 0 3.17 s",
+  "n640-def-v17": "CHECKED_RUN PASS exit 0 2.88 s"
+ },
+ "diagnostics": "all five capture logs contain only the engine banner, OpenGL line, BATTLE_TRANSITION_MS and the success marker: no SCRIPT ERROR, ERROR, WARNING, shader or leak lines this time (v16's runs had CanvasItem RID / ObjectDB leak warnings at exit)",
+ "logs": {
+  "outputs/battle-static-v17/logs/rpg-2-star-ocean-the-second_v17-capture-log_k1280-def-v16_test-only_20261018-222918-a685d98d.log": "f370de5e4b47b0af88a671339a7b49f211c5dd8e656aaa6dd3514727436271b8",
+  "outputs/battle-static-v17/logs/rpg-2-star-ocean-the-second_v17-capture-log_k1280-def-v17_test-only_20261018-222918-a3ac7ff8.log": "6f0eb9c80e0f95bd09e0af41ddfb9e5906ae3f1a66a65afa8ba86baf7b680ca0",
+  "outputs/battle-static-v17/logs/rpg-2-star-ocean-the-second_v17-capture-log_k1280-osk-v16_test-only_20261018-222918-5141ccff.log": "86f6e6c87ae0195a67edbaa3ca45b2bb74dc16fac42f42144d6ac54932f76bde",
+  "outputs/battle-static-v17/logs/rpg-2-star-ocean-the-second_v17-capture-log_k1280-osk-v17_test-only_20261018-222918-e53cb39a.log": "dc31e94f652f6b69eabbe7c130daf0066e217add4bc74171c0316c19b7a9feaa",
+  "outputs/battle-static-v17/logs/rpg-2-star-ocean-the-second_v17-capture-log_n640-def-v17_test-only_20261018-222918-30d9d1e8.log": "7f454aaf1a806195c150aaf53a1a6da493a754e2e06dc15fc2d17e7f70ee5c19"
+ },
+ "tools": {
+  "tools/rpg-2-star-ocean-the-second_female-battle-static_ci1280-density-capture_test-only-v17_20261018-220631-5a17d0c3.gd": "28e5e7d5e66a9c071c18d43c4d59be8cc9bf1a5705e50e70221ef302814835d0",
+  "tools/rpg-2-star-ocean-the-second_female-battle-static_ci1280-density-measure_test-only-v17_20261018-222918-7d41e2b6.py": "4d54e08012ccfcc94f8a3142134a345e9dd745bcc3e254e4c20e9e06c65fb6fa",
+  "tools/rpg-2-star-ocean-the-second_female-battle-static_dense-author_unapproved-v17_20261018-220631-3c9e7a41.py": "2b3b09c1b0b12c939a38df7684e4c083eb10ce9f8ad19f893e44a8cd40e3385f"
+ },
+ "sprites": {
+  "v17": {
+   "file": "outputs/battle-static-v17/rpg-2-star-ocean-the-second_female-battle-idle-right_dense-native136_unapproved-v17_20261018-220631-cde3a961.png",
+   "sha256": "3cf05f0d3e560bdba5c4910b1192f5ff6ce34c99d747f2643e974fcaeb1d07db",
+   "size": [
+    136,
+    144
+   ]
+  },
+  "v16_control": {
+   "file": "outputs/battle-static-v16/rpg-2-star-ocean-the-second_female-battle-idle-right_static-native0p65_unapproved-v16_20261018-212808-e75685af.png",
+   "sha256": "ce6d294c23f89556e3822470966704ef68534d4deb69500a03d47f63ca79b768",
+   "size": [
+    68,
+    72
+   ]
+  }
+ },
+ "scratchRunsNotDelivered": [
+  "%TEMP%/fv17trial1: feasibility trial of the harness with v16 at ci1280 (CHECKED_RUN PASS)",
+  "%TEMP%/fv17scr4: one in-game ci1280 outskirts check of an earlier v17 draft (CHECKED_RUN PASS)"
+ ],
+ "rebuildDisclosure": "the first v17 build (22:2x) failed check gate 'pin (64,136)' (far boot toe reached x65 on the sole row); the six files that build wrote minutes earlier were deleted, the toe pulled back to x63, and the build repeated (same names, new content); check then PASS 21/21",
+ "measureDisclosure": "measure attempt 1 (report ..._v17-capture-measure-report_test-only_...json, kept) failed 10 fidelity gates because the next party member is drawn over the blade tip in the normal layout (and at 640 nearest sampling mixes texel phases); attempt 2 (report-r2) excludes and counts pixels overdrawn by later draw calls (identical in the main-hero frame) and, at 640, requires each pixel to equal one of its 4 native texels: PASS 72/72"
+}
