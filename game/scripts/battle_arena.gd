@@ -82,7 +82,8 @@ const BATTLE_BACKDROP_BANDS := {
 # A fighter without a valid set (missing, invalid, unknown or partial) keeps its existing frames. Visual only: stats, reach,
 # AI, input, hit timing, positions, party order and saves are the same with the pilot on or off.
 const CombatSpriteSets := preload("res://scripts/rpg-2-star-ocean-the-second_combat-sprite-set_loader-playback_pilot-v01_20261018-153656-43a19158.gd")
-const BattleVfx := preload("res://scripts/rpg-2-star-ocean-the-second_battle-vfx_transient-event-layer_pilot-v01_20261018-172229-71d0d38e.gd")
+const BattleVfx := preload("res://scripts/rpg-2-star-ocean-the-second_common-vfx_native-layer_root-v02_20261019-164412-1f3bff80.gd")
+const COMMON_VFX_ASSET_DIR := "res://assets/vfx/common-v01"
 const BATTLE_VFX_CLI_FLAG := "--battle-vfx-pilot"
 static var battle_vfx_override := -1
 # Optional four-effect encounter pilot (presentation only, UNAPPROVED). Opt-in only: launch with
@@ -237,7 +238,7 @@ func _ready() -> void:
 	_load_battle_backdrop()
 	_load_combat_sprite_sets()
 	if battle_vfx_override == 1 or (battle_vfx_override < 0 and OS.get_cmdline_user_args().has(BATTLE_VFX_CLI_FLAG)):
-		battle_vfx = BattleVfx.new()
+		battle_vfx = BattleVfx.new(COMMON_VFX_ASSET_DIR)
 	if encounter_feedback_override == 1 or (encounter_feedback_override < 0 and OS.get_cmdline_user_args().has(ENCOUNTER_FEEDBACK_CLI_FLAG)):
 		encounter_feedback = EncounterFeedback.new(ENCOUNTER_FEEDBACK_ASSET_DIR)
 		_build_encounter_result_surface()

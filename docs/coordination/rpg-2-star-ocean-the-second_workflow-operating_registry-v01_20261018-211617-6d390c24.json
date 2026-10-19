@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-19T04:58:05.436173+00:00",
+  "updatedAt": "2026-10-19T20:44:12.112111+00:00",
   "purpose": "Operating queue and worktree ownership; no progress points or account details",
   "workflow": "docs/workflow.md",
   "canonicalLedger": "outputs/rpg-2-star-ocean-the-second_production-completion_task-ledger_v01_20261018-140533-3de52073.json",
@@ -569,26 +569,23 @@
     {
       "id": "support.character.female.battle-static-legibility",
       "owner": "claude",
-      "status": "blocked",
-      "lane": "supporting",
+      "status": "active",
+      "lane": "primary",
       "worktree": "chicago-producer",
       "dependsOn": [],
       "output": "One bounded battle STATIC material/legibility refinement answering the standing creator request",
       "writeScope": [
-        "New battle-static-v15 source/assets/evidence only",
-        "No Chicago files, defaults/shared ledger/index/Site"
+        "Existing/new v17r2 still author, native source, actual captures and QA only",
+        "Preserve Chicago and all older candidates; no defaults/shared ledger/index/Site"
       ],
       "completion": [
-        "Preserve v14 identity, source size/pivot/proportion and battle geometry",
-        "Improve dark-floor coat/boot read and reduce busy back details",
-        "Separate native layered source plus actual four-person bright/dark640x360 captures",
-        "Root visual inspection; no motion, final art approval or automatic production credit"
+        "One complete native136x144 still preserving protected face/hair, pin and0.65 apparent proportion",
+        "Source-bound editable package and actual1280 normal party EN/ZH bright/dark captures",
+        "Root inspection; art remains unapproved and no animation before baseline acceptance"
       ],
       "startedAt": "2026-10-19T00:59:24.562061+00:00",
-      "nextAction": "v17 actual1280 density method independently verified; brow/lash masses and striped bangs need one bounded v17r1 face/hair cleanup. No animation, full package or approval request yet.",
-      "blockedBy": [
-        "Parked while current primary motion and supporting VFX task finish; partial source preserved."
-      ],
+      "nextAction": "Claude resumes the existing v17r2 full-still body finishing over the frozen v17r1 face; inspect actual1280 EN/ZH bright/dark and native editable evidence before presentation.",
+      "blockedBy": [],
       "evidence": [
         "docs/qa/rpg-2-star-ocean-the-second_female-battle-static_creator-coarseness-rejection_v16_20261018-220102-1a4c22a8.md",
         "docs/qa/rpg-2-star-ocean-the-second_female-battle_root-density-review_v17_20261018-223904-4d31fba3.md"
@@ -700,6 +697,27 @@
       "evidence": [
         "docs/qa/rpg-2-star-ocean-the-second_encounter-vfx_native-and-runtime-closeout_v02_20261019-003427-73b5efb4.md"
       ]
+    },
+    {
+      "id": "support.vfx.common-native",
+      "ledgerTask": "content.vfx.common",
+      "owner": "deepseek",
+      "status": "done",
+      "lane": "supporting",
+      "worktree": "work/dual02/ds-common",
+      "output": "Five editable64x64 combat effect sets plus compatible opt-in loader",
+      "writeScope": [
+        "New common-v01 source/package/loader/checks only"
+      ],
+      "completion": [
+        "Attack/dodge/guard/hit/heal eightframes each",
+        "Exact native timing and deterministic rawcel/PNG rebuild",
+        "Codex actual game integration/API/boundary/default parity checks"
+      ],
+      "nextAction": "Produced/wired opt-in; root245native,1312actual hooks,122loader boundary and33existing regression checks pass; art approval and GUI save/reopen separate.",
+      "evidence": [
+        "docs/qa/rpg-2-star-ocean-the-second_common-combat-vfx_root-production-closeout_v01_20261019-164412-1f3bff80.md"
+      ]
     }
   ],
   "nextProductionMilestones": [
@@ -756,5 +774,24 @@
       "preferredProducer": "deepseek",
       "reason": "Bounded native effect builder and deterministic asset checks; audited reassign before dispatch."
     }
-  ]
+  ],
+  "activeDualProviderBatch": {
+    "primary": {
+      "task": "support.character.female.battle-static-legibility",
+      "owner": "claude",
+      "workspace": "work/max0840-battle",
+      "output": "One source-bound complete v17r2 still; no animation/default changes"
+    },
+    "supporting": [
+      {
+        "task": "content.vfx.common",
+        "owner": "deepseek",
+        "workspace": "work/dual02/ds-common",
+        "output": "Five native effect sets and compatible loader; root wires and verifies",
+        "status": "done"
+      }
+    ],
+    "integrationOwner": "codex",
+    "status": "active"
+  }
 }

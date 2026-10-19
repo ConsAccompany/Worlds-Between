@@ -1,0 +1,45 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS isolated fresh profile
+PASS invalid events reject without mutation
+PASS attack event accepted
+PASS dodge event accepted
+PASS guard event accepted
+PASS hit event accepted
+PASS heal event accepted
+PASS negative delta ignored
+PASS all five event lifetimes clean up by 600ms
+PASS 24-event cap drops oldest; no unbounded queue
+PASS attack advances by elapsed time at 30/60fps; stable pixel origin
+PASS dodge advances by elapsed time at 30/60fps; stable pixel origin
+PASS guard advances by elapsed time at 30/60fps; stable pixel origin
+PASS hit advances by elapsed time at 30/60fps; stable pixel origin
+PASS heal advances by elapsed time at 30/60fps; stable pixel origin
+PASS test launches without VFX opt-in flag
+BATTLE_TRANSITION_MS 9.94
+PASS no VFX helper with default selection
+BATTLE_TRANSITION_MS 64.01
+PASS missed out-of-range attack emits no contact effect
+PASS successful normal attack contact emits once
+PASS cooldown-rejected attack does not emit
+PASS successful normal dodge emits once
+PASS cooldown-rejected dodge does not emit
+PASS enemy contact evaded during real dodge emits no hit or guard
+PASS actual energy-funded blocked contact emits guard
+PASS actual damage contact emits hit
+PASS guard with insufficient energy emits damage hit, not blocked-contact cue
+PASS heal presentation API emits without inventing healing or energy changes
+PASS invalid heal target rejected
+PASS pause freezes VFX elapsed time and lifetime
+PASS one second of normal updates clears events without per-frame emission spam
+BATTLE_TRANSITION_MS 65.89
+BATTLE_TRANSITION_MS 4.48
+PASS patrol sentry0/backdrop0: 600-step simulation/save parity with effects emitted only on
+BATTLE_TRANSITION_MS 66.14
+BATTLE_TRANSITION_MS 4.32
+PASS sentry sentry0/backdrop0: 600-step simulation/save parity with effects emitted only on
+BATTLE_TRANSITION_MS 86.49
+BATTLE_TRANSITION_MS 25.13
+PASS sentry sentry1/backdrop1: 600-step simulation/save parity with effects emitted only on
+REPORT C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/outputs/common-vfx-v01/legacy-hooks/rpg-2-star-ocean-the-second_battle-vfx_capability-report_v01_20261019-165346-d607aac9.json
+BATTLE_VFX PASS checks=33 captures=0
