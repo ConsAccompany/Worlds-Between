@@ -1,0 +1,30 @@
+config_version=5
+
+[application]
+
+config/name="Worlds Between"
+run/main_scene="res://scenes/main_menu.tscn"
+config/features=PackedStringArray("4.7", "GL Compatibility")
+config/description="Exploration and companion recruitment RPG prototype"
+
+[autoload]
+
+AppState="*res://scripts/app_state.gd"
+
+[display]
+
+window/size/viewport_width=640
+window/size/viewport_height=360
+window/size/window_width_override=1280
+window/size/window_height_override=720
+window/stretch/mode="canvas_items"
+window/stretch/scale_mode="integer"
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+textures/default_filters/use_nearest_mipmap_filter=true
+textures/canvas_textures/default_texture_filter=0
+environment/defaults/default_clear_color=Color(0.048, 0.071, 0.094, 1)
+
