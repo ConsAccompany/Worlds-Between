@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-19T04:17:00.757160+00:00",
+  "updatedAt": "2026-10-19T04:58:05.436173+00:00",
   "purpose": "Operating queue and worktree ownership; no progress points or account details",
   "workflow": "docs/workflow.md",
   "canonicalLedger": "outputs/rpg-2-star-ocean-the-second_production-completion_task-ledger_v01_20261018-140533-3de52073.json",
@@ -13,9 +13,10 @@
   },
   "schedules": {
     "state": "reset-alarm-authorized-on-actual-max-depletion",
-    "recreationRequiresFreshAuthorization": false,
+    "recreationRequiresFreshAuthorization": true,
     "periodicPolling": false,
-    "cancelOnDeepSeekCreditDepletion": true
+    "cancelOnDeepSeekCreditDepletion": true,
+    "authorizedScope": "Creator2026-10-19: one alarm at actual reported Max reset; no unrelated or periodic schedules"
   },
   "worktrees": [
     {
@@ -72,10 +73,10 @@
     },
     {
       "id": "deepseek-vfx-producer",
-      "pathFromPrimary": "work/dual01/deepseek",
+      "pathFromPrimary": "work/dual01/ds-result",
       "role": "producer",
       "owner": "deepseek",
-      "writePolicy": "Task-b production-v02 timing fix only; preserve benchmark sources; no shared index/ledger/defaults"
+      "writePolicy": "Completed isolated encounter-feedback native/wiring/foreground sources preserved; coordinator integrates selected verified paths only."
     }
   ],
   "tasks": [
@@ -515,8 +516,8 @@
     {
       "id": "content.char.protagonist-female.walk-north",
       "owner": "claude",
-      "status": "in_progress",
-      "lane": "primary",
+      "status": "done",
+      "lane": "closed",
       "worktree": "heroine-producer",
       "dependsOn": [
         "content.char.protagonist-female.static-north"
@@ -533,11 +534,11 @@
         "Then editable native source, full timing/contact boundaries and actual normal1x bright/dark gameplay evidence"
       ],
       "startedAt": "2026-10-19T00:16:47.781632+00:00",
-      "finishedAt": null,
-      "nextAction": "v04 compact stance independently254/254, leg length improved but bouncy short-contact gait disclosed. v05 complete native package in progress; no production or motion approval yet.",
+      "finishedAt": "2026-10-19T04:58:05.436173+00:00",
+      "nextAction": "Produced nativev06 run/stop package;78636/0 full matrix, actualEN30/ZH60 captures and independent2201/0 archive verification. Steady gait appearance, GUIclean/SaveAs and creator approval remain separate.",
       "blockedBy": [],
       "evidence": [
-        "docs/qa/rpg-2-star-ocean-the-second_female-north_root-contact-method-verdict_unapproved-v02_20261018-211744-f189986f.md"
+        "docs/qa/rpg-2-star-ocean-the-second_female-north_root-production-closeout_v06_20261019-005555-a983112d.md"
       ]
     },
     {
@@ -678,13 +679,13 @@
     {
       "id": "content.vfx.encounter",
       "owner": "deepseek",
-      "status": "in_progress",
-      "lane": "supporting",
+      "status": "done",
+      "lane": "closed",
       "worktree": "deepseek-vfx-producer",
       "dependsOn": [],
-      "output": "Corrected editable4-effect native package preserving exact gameplay pixels/timing, ready for wiring",
+      "output": "4editable feedback effect sets with correct timing, safe optional loader and actual game triggers/result foreground",
       "writeScope": [
-        "New task-b production-v02 author/assets/module/checker/QA only"
+        "Isolated native author/guard/wiring/result-surface sources and evidence only; no shared ledger/index/defaults"
       ],
       "completion": [
         "Correct native timeline multipliers for all4 effects",
@@ -693,8 +694,12 @@
         "Coordinator runs Godot and integration checks before credit"
       ],
       "startedAt": "2026-10-19T04:16:03.161820+00:00",
-      "nextAction": "Bounded native timing/package fix dispatched; coordinator will inspect before wiring",
-      "blockedBy": []
+      "nextAction": "Produced and connected behind optional flag; final1220/0 arena checks, no gameplay/default difference. Art approval remains separate.",
+      "blockedBy": [],
+      "finishedAt": "2026-10-19T04:58:05.436173+00:00",
+      "evidence": [
+        "docs/qa/rpg-2-star-ocean-the-second_encounter-vfx_native-and-runtime-closeout_v02_20261019-003427-73b5efb4.md"
+      ]
     }
   ],
   "nextProductionMilestones": [
@@ -738,6 +743,18 @@
     "deepseek": "bounded implementation/content and deterministic package checks",
     "codex": "independent inspection and serialized integration",
     "claudeQuota": "DeepSeek alone; one alarm at reported reset",
-    "deepseekCredit": "stop both providers and resumption; no topup or fallback"
-  }
+    "deepseekCredit": "Stop all project production including Codex and both providers, save handoff, cancel pending resumption; no topup/fallback"
+  },
+  "nextDispatchPreferences": [
+    {
+      "task": "support.character.female.battle-static-legibility",
+      "preferredProducer": "claude",
+      "reason": "Complex identity/detail finishing answering creator coarseness rejection; static only before motion."
+    },
+    {
+      "task": "content.vfx.common",
+      "preferredProducer": "deepseek",
+      "reason": "Bounded native effect builder and deterministic asset checks; audited reassign before dispatch."
+    }
+  ]
 }

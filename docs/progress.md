@@ -1,5 +1,14 @@
 # Open World Pixel RPG Implementation Progress
 
+## Latest production batch — 2026-10-19
+
+Production **51.7%** (coding100%, content19.5%); inspection13.2%; creator approval7%. These separate meters come from the canonical ledger, not the archived40.8% mixed acceptance estimate.
+
+Claude and DeepSeek ran disjoint tasks concurrently. Selected patrol native static is committed as produced content. Claude completed NORTHv06 mechanical stop/repress repair, full78636/0 matrix, editable run/stopPXO+ORA and actualEN30/ZH60 normal1xmovies. DeepSeek completed4encounter/result/recovery native effects, correct editable timing, missing-frame guard and optional foreground wiring; root1220/0 game checks retain default pixel/combat parity. Native editor shader diagnostics remain disclosed; no cleanGUI/SaveAs or artistic acceptance claim.
+
+Accepted complete sprites0/52, scene art3/12, human plays0/2 and formal acceptancefalse remain unchanged. ExactMax-reset alarms are authorized only on actual quota depletion; DeepSeek credit depletion stops all project production. No purchases or Claude paid fallback.
+
+
 Last updated: 2026-10-18
 
 ## Summary

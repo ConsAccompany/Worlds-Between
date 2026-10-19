@@ -1,5 +1,14 @@
 extends Node2D
 
+# Result-only drawing surface for the opt-in encounter pilot. It lives on its own
+# high canvas layer so finished-battle effects stay above the result overlay.
+class EncounterResultSurface extends Node2D:
+	var module: RefCounted = null
+
+	func _draw() -> void:
+		if module != null:
+			module.draw(self)
+
 const ENEMIES := {
 	"patrol": {"name": "enemy_patrol", "max_hp": 64, "damage": 12, "speed": 55.0, "windup": 0.65, "cooldown": 1.35, "color": Color("#ab5b52")},
 	"sentry": {"name": "enemy_sentry", "max_hp": 96, "damage": 18, "speed": 68.0, "windup": 0.48, "cooldown": 1.10, "color": Color("#96516f")},
@@ -76,6 +85,13 @@ const CombatSpriteSets := preload("res://scripts/rpg-2-star-ocean-the-second_com
 const BattleVfx := preload("res://scripts/rpg-2-star-ocean-the-second_battle-vfx_transient-event-layer_pilot-v01_20261018-172229-71d0d38e.gd")
 const BATTLE_VFX_CLI_FLAG := "--battle-vfx-pilot"
 static var battle_vfx_override := -1
+# Optional four-effect encounter pilot (presentation only, UNAPPROVED). Opt-in only: launch with
+# `-- --encounter-feedback-pilot`, or set encounter_feedback_override = 1 before the battle scene loads. Off by
+# default, so the module and its assets are never created. Missing or invalid assets draw nothing.
+const EncounterFeedback := preload("res://scripts/rpg-2-star-ocean-the-second_encounter_feedback-layer_timing-v03_20261019-003109-1e5c2cef.gd")
+const ENCOUNTER_FEEDBACK_CLI_FLAG := "--encounter-feedback-pilot"
+const ENCOUNTER_FEEDBACK_ASSET_DIR := "res://assets/vfx/encounter-v02"
+static var encounter_feedback_override := -1
 
 const COMBAT_SPRITE_SET_CLI_FLAG := "--combat-sprite-set-pilot"
 const COMBAT_SPRITE_SET_INDEX_ARG := "--combat-sprite-set-index="
@@ -139,6 +155,11 @@ var battle_backdrop_texture: Texture2D
 var combat_sprite_sets: RefCounted = null
 # Opt-in provisional presentation only; disabled renderer and simulation stay unchanged.
 var battle_vfx: RefCounted = null
+# Null unless the encounter feedback pilot is on; its module and assets load only in that case.
+var encounter_feedback: RefCounted = null
+# Foreground result surface, created with the module and hidden until a finished battle has effects.
+var encounter_result_layer: CanvasLayer = null
+var encounter_result_surface: EncounterResultSurface = null
 
 var title_label: Label
 var help_label: Label
@@ -217,6 +238,10 @@ func _ready() -> void:
 	_load_combat_sprite_sets()
 	if battle_vfx_override == 1 or (battle_vfx_override < 0 and OS.get_cmdline_user_args().has(BATTLE_VFX_CLI_FLAG)):
 		battle_vfx = BattleVfx.new()
+	if encounter_feedback_override == 1 or (encounter_feedback_override < 0 and OS.get_cmdline_user_args().has(ENCOUNTER_FEEDBACK_CLI_FLAG)):
+		encounter_feedback = EncounterFeedback.new(ENCOUNTER_FEEDBACK_ASSET_DIR)
+		_build_encounter_result_surface()
+		_emit_encounter_feedback("encounter", _encounter_party_origin())
 	_build_ui()
 	var audio_player := AudioStreamPlayer.new()
 	var ambient: AudioStreamWAV = BATTLE_AMBIENCE.duplicate()
@@ -236,10 +261,13 @@ func _process(delta: float) -> void:
 		return
 	if battle_vfx != null:
 		battle_vfx.advance(delta)
+	if encounter_feedback != null:
+		encounter_feedback.advance(delta)
 	if battle_finished:
 		_advance_fighter_visuals(delta, [])
 		_advance_combat_sprite_sets(delta)
 		_advance_enemy_visual(delta, false)
+		_refresh_encounter_result_surface()
 		queue_redraw()
 		return
 	var initial_positions: Array[float] = []
@@ -785,6 +813,7 @@ func _finish_battle(won: bool) -> void:
 	pause_overlay.visible = false
 	battle_won = won
 	_emit_battle_cue("victory" if won else "defeat")
+	_emit_encounter_feedback("victory" if won else "defeat", _encounter_result_origin())
 	AppState.record_playtest_event("battle_win" if won else "battle_loss", AppState.current_destination_id)
 	if won:
 		AppState.machine_observed = true
@@ -795,6 +824,11 @@ func _finish_battle(won: bool) -> void:
 				AppState.hero_state = recovered
 			else:
 				AppState.member_states[member_id] = recovered
+		var recovery_slot := 0
+		for index in fighters.size():
+			if _is_alive(index):
+				_emit_encounter_feedback("recovery", _encounter_result_origin(recovery_slot))
+				recovery_slot += 1
 		AppState.enemy_cleared_for_return = true
 		AppState.returning_from_battle = true
 		var rewards := AppState.award_battle_rewards(enemy_id)
@@ -805,6 +839,7 @@ func _finish_battle(won: bool) -> void:
 		AppState.returning_from_battle = false
 		get_tree().create_timer(2.0).timeout.connect(_return_to_menu)
 	result_overlay.visible = true
+	_refresh_encounter_result_surface()
 	_refresh_text()
 	result_button.grab_focus()
 	queue_redraw()
@@ -958,6 +993,8 @@ func _draw() -> void:
 
 	if battle_vfx != null:
 		battle_vfx.draw(self)
+	if encounter_feedback != null and not _encounter_result_surface_draws():
+		encounter_feedback.draw(self)
 
 
 func _emit_battle_cue(event: String) -> void:
@@ -978,6 +1015,58 @@ func show_heal_vfx(index: int) -> bool:
 	if not _is_alive(index):
 		return false
 	return _emit_battle_vfx("heal", Vector2(float(fighters[index]["x"]), ARENA_FLOOR_Y - 26.0))
+
+
+func _emit_encounter_feedback(kind: String, origin: Vector2) -> bool:
+	return encounter_feedback.emit(kind, origin) if encounter_feedback != null else false
+
+
+func _build_encounter_result_surface() -> void:
+	if encounter_feedback == null or is_instance_valid(encounter_result_surface):
+		return
+	encounter_result_layer = CanvasLayer.new()
+	encounter_result_layer.layer = 100
+	add_child(encounter_result_layer)
+	encounter_result_surface = EncounterResultSurface.new()
+	encounter_result_surface.module = encounter_feedback
+	encounter_result_surface.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	encounter_result_surface.z_index = 100
+	encounter_result_surface.visible = false
+	encounter_result_layer.add_child(encounter_result_surface)
+
+
+func _refresh_encounter_result_surface() -> void:
+	if not is_instance_valid(encounter_result_surface) or encounter_feedback == null:
+		return
+	var active: bool = battle_finished and not encounter_feedback.events.is_empty()
+	encounter_result_surface.visible = active
+	if active:
+		encounter_result_surface.queue_redraw()
+
+
+func _encounter_result_surface_draws() -> bool:
+	return battle_finished and is_instance_valid(encounter_result_surface) and encounter_result_surface.visible
+
+
+func _encounter_result_origin(recovery_slot: int = -1) -> Vector2:
+	# Victory/defeat sit in the left margin; recoveries stack compact slots there.
+	if recovery_slot < 0:
+		return Vector2(64.0, 176.0)
+	var slot := clampi(recovery_slot, 0, AppState.PARTY_CAPACITY - 1)
+	return Vector2(64.0, 134.0 + slot * 30.0)
+
+
+func _encounter_party_origin() -> Vector2:
+	var index := controlled_index if _is_alive(controlled_index) else _nearest_living()
+	if index < 0 and not fighters.is_empty():
+		index = clampi(controlled_index, 0, fighters.size() - 1)
+	if index < 0:
+		return Vector2(160.0, ARENA_FLOOR_Y - 26.0)
+	return _encounter_fighter_origin(index)
+
+
+func _encounter_fighter_origin(index: int) -> Vector2:
+	return Vector2(float(fighters[index]["x"]), ARENA_FLOOR_Y - 26.0)
 
 
 func _draw_fighter(fighter: Dictionary, index: int) -> void:
