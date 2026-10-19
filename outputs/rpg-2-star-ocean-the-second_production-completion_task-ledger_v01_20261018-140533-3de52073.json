@@ -2,7 +2,7 @@
   "id": "rpg-2-star-ocean-the-second_production-completion_v01",
   "schemaVersion": 2,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-19T00:16:47Z",
+  "updatedAt": "2026-10-19T01:39:48Z",
   "zh": "制作完成度任务台账：衡量已完成的工作量（编码 40% + 内容 60%）；检查／审查与创作者批准分开计量，均不改变制作分；免除的审查不算已执行的工作；运营任务列出负责方但不计百分比。",
   "en": "Production-completion task ledger: measures work done (coding 40% + content 60%); inspection/review and creator approval are separate meters and never change production credit; waived reviews are not performed work; operations tasks list owners but carry no percentage.",
   "brief": "docs/rpg-2-star-ocean-the-second_production-completion_bilingual-brief_v01_20261018-140533-3ea2a621.md",
@@ -429,8 +429,8 @@
     "production": {
       "zh": "制作完成度",
       "en": "Production completion",
-      "percent": 51.2,
-      "percentLabel": "51.2%",
+      "percent": 51.4,
+      "percentLabel": "51.4%",
       "formula": "round1(40 * codingDonePoints/codingTotalPoints + 60 * contentDonePoints/contentTotalPoints)",
       "coding": {
         "done": 111,
@@ -441,12 +441,12 @@
         "tasksDone": 23
       },
       "content": {
-        "done": 352,
+        "done": 356,
         "total": 1879,
-        "percent": 18.7,
+        "percent": 18.9,
         "weight": 60,
         "tasks": 714,
-        "tasksDone": 115
+        "tasksDone": 116
       }
     },
     "inspection": {
@@ -511,11 +511,11 @@
         "waivedPoints": 0
       },
       "content": {
-        "done": 352,
+        "done": 356,
         "total": 1879,
-        "percent": 18.7,
+        "percent": 18.9,
         "tasks": 714,
-        "tasksDone": 115,
+        "tasksDone": 116,
         "waivedTasks": 0,
         "waivedPoints": 0
       },
@@ -570,10 +570,10 @@
         "tasks": 743,
         "operationsTasks": 0,
         "points": 1950,
-        "pointsDone": 360,
+        "pointsDone": 364,
         "byStatus": {
-          "done": 83,
-          "todo": 659,
+          "done": 84,
+          "todo": 658,
           "in_progress": 1
         },
         "readyInQueue": 0,
@@ -706,7 +706,7 @@
       },
       "scenes": {
         "content": {
-          "done": 239,
+          "done": 243,
           "total": 282
         },
         "technical-inspection": {
@@ -2349,7 +2349,7 @@
     {"id":"qa.scene.ruins-survey-inner.check","type":"technical-check","title":{"zh":"华盛顿勘察附楼 2 号房（档案室） · 技术检查","en":"Washington survey annex room 2 (records) · technical check"},"area":"scenes","stage":"technical-inspection","owner":"claude","status":"done","points":1,"doneCriterion":{"zh":"当前画质版的 Godot 检查全部通过","en":"Godot checks of the current quality pass all pass"},"dependsOn":["content.scene.ruins-survey-inner.native-pass"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_wdc-annex-room2_records-chamber-playable-integration_qa-note_unapproved-v01_20261018-035908-3a34d132.md","docs/qa/rpg-2-star-ocean-the-second_wdc-annex-rooms_default-layout-collision-fix_qa-note_unapproved-v01_20261018-041322-c3ff819c.md"],"subject":{"kind":"scene-gate","id":"visual-scene.ruins-survey-inner"},"target":"content.scene.ruins-survey-inner.native-pass","outcome":"passed"},
     {"id":"review.scene.ruins-survey-inner","type":"visual-review","title":{"zh":"华盛顿勘察附楼 2 号房（档案室） · 视觉审查","en":"Washington survey annex room 2 (records) · visual review"},"area":"scenes","stage":"visual-review","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"Codex 审查 640×360 实机画面并记录结论","en":"Codex reviews actual 640x360 captures and records a verdict"},"dependsOn":["qa.scene.ruins-survey-inner.check"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_codex-visual-review_six-verdicts_qa-receipt_v01_20261018-153526-67e353de.md","outputs/wdc-rc2-v01i_3a34d132/cap/rpg-2-star-ocean-the-second_wdc-annex-room2_v01-godot-en-entry-640x360_20261018-035908-3a34d132.png"],"subject":{"kind":"scene-gate","id":"visual-scene.ruins-survey-inner"},"target":"content.scene.ruins-survey-inner.native-pass","statusAt":"2026-10-18T19:35:26Z","outcome":"passed","note":{"zh":"root（Codex）查看了 v01 整合版英文入口实机画面：可交创作者审查。角色参考说明同上；无新测试，未批准。","en":"Root (Codex) viewed the actual v01 integration EN entry capture: ready for creator review. Same character-reference caveat; no new tests, no approval."}},
     {"id":"creator.scene.ruins-survey-inner.accept","type":"creator-acceptance","title":{"zh":"华盛顿勘察附楼 2 号房（档案室） · 场景画质验收","en":"Washington survey annex room 2 (records) · scene-quality acceptance"},"area":"scenes","stage":"creator-approval","owner":"creator","status":"todo","points":1,"doneCriterion":{"zh":"approvalLedger 记有 acceptanceKind scene-visual 的验收条目","en":"approvalLedger records an acceptanceKind scene-visual item"},"dependsOn":["content.scene.ruins-survey-inner.native-pass"],"evidence":[],"subject":{"kind":"scene-gate","id":"visual-scene.ruins-survey-inner"},"target":"content.scene.ruins-survey-inner.native-pass"},
-    {"id":"content.scene.battle-arena.plate","type":"integration","title":{"zh":"科技区横向战场 · 场景底板","en":"Science side-view battle arena · scene plate"},"area":"scenes","stage":"content","owner":"claude","status":"todo","points":4,"doneCriterion":{"zh":"可玩场景底板已提交并在运行时可进入（概念图不算）","en":"A playable scene plate is committed and enterable in the runtime (a concept image does not count)"},"dependsOn":[],"evidence":[],"subject":{"kind":"scene-gate","id":"visual-scene.battle-arena"}},
+    {"id":"content.scene.battle-arena.plate","type":"integration","title":{"zh":"科技区横向战场 · 场景底板","en":"Science side-view battle arena · scene plate"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":4,"doneCriterion":{"zh":"可玩场景底板已提交并在运行时可进入（概念图不算）","en":"A playable scene plate is committed and enterable in the runtime (a concept image does not count)"},"dependsOn":[],"evidence":["docs/qa/rpg-2-star-ocean-the-second_battle-arena_existing-playable-plate-verification_v01_20261018-214000-4d87ef21.md","outputs/rpg-2-star-ocean-the-second_battle-arena_current-main-proof_manifest-v01_20261018-214000-4d87ef21.json"],"subject":{"kind":"scene-gate","id":"visual-scene.battle-arena"},"statusAt":"2026-10-19T01:39:48Z","note":{"zh":"已提交的可选扬克斯战斗背景通过当前实机进入验证；补记既有4分制作，不是新美术，原生打磨、默认采用与验收仍独立。","en":"Previously committed opt-in outskirts plate now verified enterable in current arena; existing4-point credit, not new artwork. Native polish/default/approval remain open."}},
     {"id":"content.scene.battle-arena.wiring","type":"integration","title":{"zh":"科技区横向战场 · 碰撞、热点与出入口","en":"Science side-view battle arena · collision, hotspots and exits"},"area":"scenes","stage":"content","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"碰撞、热点、出入口与存档有自动检查","en":"Collision, hotspots, exits and saves have automated checks"},"dependsOn":["content.scene.battle-arena.plate"],"evidence":[],"subject":{"kind":"scene-gate","id":"visual-scene.battle-arena"}},
     {"id":"content.scene.battle-arena.native-pass","type":"native-pixel","title":{"zh":"科技区横向战场 · 原生像素画质版","en":"Science side-view battle arena · native pixel quality pass"},"area":"scenes","stage":"content","owner":"claude","status":"todo","points":12,"doneCriterion":{"zh":"原生像素画质版（道具／分层）已提交并有 QA，可为可选启用","en":"A native pixel quality pass (fixtures / layers) is committed with QA; opt-in is allowed"},"dependsOn":["content.scene.battle-arena.plate"],"evidence":[],"subject":{"kind":"scene-gate","id":"visual-scene.battle-arena"}},
     {"id":"content.scene.battle-arena.native-default","type":"integration","title":{"zh":"科技区横向战场 · 画质版默认接入","en":"Science side-view battle arena · quality pass on by default"},"area":"scenes","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"画质版默认在游戏中使用","en":"The quality pass is used in the game by default"},"dependsOn":["content.scene.battle-arena.native-pass","content.scene.battle-arena.wiring"],"evidence":[],"subject":{"kind":"scene-gate","id":"visual-scene.battle-arena"}},
