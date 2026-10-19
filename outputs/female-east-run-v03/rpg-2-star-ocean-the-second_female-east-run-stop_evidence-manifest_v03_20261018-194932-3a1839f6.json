@@ -1,0 +1,3718 @@
+{
+  "task": "content.char.protagonist-female.walk-east",
+  "stage": "v03 production package (one EAST run + representative stop), produced candidate only",
+  "approval": {
+    "art": false,
+    "motion": false,
+    "fluidity": false,
+    "fullSprite": false,
+    "ledgerUpdated": false
+  },
+  "hashNormalization": {
+    "text": "sha256-text-lf-v1 (CRLF->LF only) for .py/.gd/.md/.json/.log",
+    "binary": "sha256-bytes",
+    "gz": "file sha256-bytes + uncompressedSha256"
+  },
+  "baseRevision": "1eed160cc10cd605c1ed3a405b286b810260068f",
+  "model": {
+    "path": "tools/rpg-2-star-ocean-the-second_female-east_run-stop-source_unapproved-v03_20261018-193030-48da69c1.gd",
+    "sha256Bytes": "e783de5d8ab6b1e3f678299eb8cffde11109d1aab06c47155831ebc4388bb07f",
+    "before": "e783de5d8ab6b1e3f678299eb8cffde11109d1aab06c47155831ebc4388bb07f",
+    "after": "e783de5d8ab6b1e3f678299eb8cffde11109d1aab06c47155831ebc4388bb07f"
+  },
+  "nativeManifest": "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run-stop_native-source-manifest_unapproved-v03_20261018-194932-3a1839f6.json",
+  "nativeReport": "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run-stop_native-report_v03_20261018-194932-3a1839f6.json",
+  "nativeExport": [
+    {
+      "kind": "run",
+      "exit": 0,
+      "cells": 1536,
+      "exact": 1536,
+      "knownInheritedShaderDiagnostics": 4,
+      "unexpectedDiagnostics": "",
+      "cleanAppSuccess": false
+    },
+    {
+      "kind": "stop",
+      "exit": 0,
+      "cells": 180,
+      "exact": 180,
+      "knownInheritedShaderDiagnostics": 4,
+      "unexpectedDiagnostics": "",
+      "cleanAppSuccess": false
+    }
+  ],
+  "exactBoundary": {
+    "report": {
+      "file": "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run_exact-boundary-report_v03_20261018-194932-3a1839f6.json.gz",
+      "sha256": "6c0ff0ebe53b933a4e4ca1ba219d0a8ea8ede43141117a263b28541fa5cdc6d4",
+      "uncompressedSha256": "c2dbf90680d3af22ec791ae06a49604b31d09c8cdda40b026ea361fd81ddd8dc"
+    },
+    "passed": 25381,
+    "failed": 0,
+    "durationSeconds": 58.384487,
+    "checkFamilies": {
+      "seed-real-advance-state": 128,
+      "run-visible-world-contact": 197,
+      "contact-pixels": 240,
+      "rendered-world-contact": 190,
+      "run-full-floor": 256,
+      "physical-stop": 2688,
+      "stop-boundary-full-floor": 256,
+      "stop-visible-world-contact": 3047,
+      "final-static": 256,
+      "settle-deadline": 256,
+      "raised-foot-deadline": 512,
+      "repress-boundary-full-floor": 768,
+      "repress-visible-world-contact": 6593,
+      "repress-support": 1624,
+      "repress-landing": 768,
+      "mixed-run-visible-world-contact": 92,
+      "mixed-contact-pixels": 116,
+      "mixed-rendered-world-contact": 89,
+      "mixed-run-full-floor": 128,
+      "mixed-physical-stop": 1024,
+      "mixed-stop-boundary-full-floor": 128,
+      "mixed-stop-visible-world-contact": 953,
+      "mixed-final-static": 128,
+      "mixed-settle-deadline": 128,
+      "mixed-raised-foot-deadline": 256,
+      "mixed-repress-boundary-full-floor": 384,
+      "mixed-repress-visible-world-contact": 2967,
+      "mixed-repress-support": 825,
+      "mixed-repress-landing": 384
+    },
+    "maxima": {
+      "settleSeconds": {
+        "30": 0.233333333333333,
+        "60": 0.233333333333333,
+        "mixed": 0.225
+      },
+      "raisedFootLandingSeconds": {
+        "30": 0.0666666666666667,
+        "60": 0.0666666666666667,
+        "mixed": 0.0791666666666667
+      },
+      "repressFirstSupportSeconds": {
+        "30": 0.0333333333333333,
+        "60": 0.05,
+        "mixed": 0.0416666666666667
+      }
+    },
+    "seedSource": "real 280 Hz advance() states (native PXO cels), checked against independent expected_body()/gait_foot()",
+    "limits": {
+      "settleSeconds": "<=0.250001 at 30/60, <=0.300001 mixed",
+      "raisedFootLandingSeconds": "<=0.100001",
+      "repressFirstSupportSeconds": "<=0.100001"
+    }
+  },
+  "rootBodyReport": {
+    "file": "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east_body-continuity-report_v03_20261018-193030-6d8bd4ef.json",
+    "sha256Bytes": "53ebd98a2bdf6f2ebf8ef7f9012a0de3e3f2331046fa71ef8ce04055530f9bc5",
+    "checker": "tools/rpg-2-star-ocean-the-second_female-east_rendered-coat-projection-trajectory-check_test-only-v02_20261018-193030-5ce91065.gd",
+    "checkerSha256": "0b110a628a84e0a53674db73e8f5b0ea7b92bcb05c6030aa59f753be0afaa4f3",
+    "passed": 15744,
+    "checkCount": 15744,
+    "durationSeconds": 68.297937,
+    "summary": {
+      "30": {
+        "maxDy": 2,
+        "maxPenultimateLegMaterialResidual": {
+          "far-leg-boot": 0,
+          "near-leg-boot": 0
+        },
+        "maxRiseAboveAllowed": 0,
+        "maxSettleEarlierStep": 1645,
+        "maxSettleFinalStep": 2,
+        "maxStep": 2,
+        "minDy": -2,
+        "penultimateEqualsFinalPhases": 119,
+        "steadyRunMaxStep": 2
+      },
+      "60": {
+        "maxDy": 2,
+        "maxPenultimateLegMaterialResidual": {
+          "far-leg-boot": 0,
+          "near-leg-boot": 0
+        },
+        "maxRiseAboveAllowed": 0,
+        "maxSettleEarlierStep": 1350,
+        "maxSettleFinalStep": 0,
+        "maxStep": 1,
+        "minDy": -2,
+        "penultimateEqualsFinalPhases": 128,
+        "steadyRunMaxStep": 1
+      },
+      "mixed": {
+        "maxDy": 2,
+        "maxPenultimateLegMaterialResidual": {
+          "far-leg-boot": 55,
+          "near-leg-boot": 0
+        },
+        "maxRiseAboveAllowed": 0,
+        "maxSettleEarlierStep": 1608,
+        "maxSettleFinalStep": 79,
+        "maxStep": 2,
+        "minDy": -2,
+        "penultimateEqualsFinalPhases": 0,
+        "steadyRunMaxStep": 2
+      }
+    },
+    "fullStopRendersRetainedMeaning": "projection.fullStopRendersRetained=384 counts the initial (release) frame render of each of 384 full plain-stop sequences (128 phases x 3 schedules); every later settle frame of those sequences was also fully rendered but is not counted there. It is not the total number of full render_pose calls.",
+    "notRerun": true,
+    "slowFailureEvidence": {
+      "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east_traj_v01_slow-failure-evidence_v01_20261018-193030-113d603b.json.gz": "5ed1086bbf1e5af976f59282d6d41533fb5ba5380def5c2fe059ca9551c1aa5f",
+      "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east_traj_v02b_slow-failure-evidence_v01_20261018-193030-113d603b.json.gz": "f43e8c5ec1febeb2e09eaafde36c1951c6a01f90d4cb3c03cc2f53e707e85874"
+    }
+  },
+  "captures": [
+    {
+      "scene": "city-bright",
+      "language": "en",
+      "fps": 30,
+      "frames": 120,
+      "simulationSeconds": 4.0,
+      "recordingWallClockMs": 8392,
+      "report": {
+        "file": "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run_actual-report-city-bright-en-30fps_v03_20261018-194932-3a1839f6.json.gz",
+        "sha256": "24763c9fcfe5ec1af83bf3a6c5a8fbc7991784d5f364c3887681d7fb0f78edcc",
+        "uncompressedSha256": "62b36f5ad3df8d070cda7a4627aaf85a83bdf1092292456cbab30f0b94ac58ff"
+      },
+      "log": {
+        "file": "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run_actual-log-city-bright-en-30fps_v03_20261018-194932-3a1839f6.log",
+        "sha256": "9391720f0814a0b657d7a8335f8bc63b10d34052873de4476d834d475915ed17"
+      },
+      "movie": {
+        "file": "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run_normal1x-city-bright-en-30fps_v03_20261018-194932-3a1839f6.mp4",
+        "sha256": "36ee9f3542fbf6558faf1efb87fdd85018f12f04a9773b1adf138e907e2b7226",
+        "probe": {
+          "codec_name": "h264",
+          "width": 640,
+          "height": 360,
+          "pix_fmt": "yuv420p",
+          "r_frame_rate": "30/1",
+          "nb_read_frames": "120"
+        }
+      },
+      "steadyRunFrames": 68,
+      "steadyEqualNativeCel": 68,
+      "steadyTorsoGuardHeld": 0,
+      "idleFrames": 15,
+      "reversalPlaceholderFrames": 6,
+      "captureSourceDeltas": {
+        "columns": [
+          "tick",
+          "heroDeltaX",
+          "renderDeltaX",
+          "sourceAndOriginUnchanged",
+          "spriteWindowChangedPixels",
+          "wholeFrameChangedPixels"
+        ],
+        "rows": [
+          [
+            1,
+            0.0,
+            0.0,
+            true,
+            0,
+            0
+          ],
+          [
+            2,
+            0.0,
+            0.0,
+            true,
+            0,
+            0
+          ],
+          [
+            3,
+            0.0,
+            0.0,
+            true,
+            0,
+            0
+          ],
+          [
+            4,
+            0.0,
+            0.0,
+            true,
+            0,
+            0
+          ],
+          [
+            5,
+            0.0,
+            0.0,
+            true,
+            0,
+            0
+          ],
+          [
+            6,
+            0.0,
+            0.0,
+            true,
+            0,
+            0
+          ],
+          [
+            7,
+            0.0,
+            0.0,
+            true,
+            0,
+            0
+          ],
+          [
+            8,
+            0.0,
+            0.0,
+            true,
+            0,
+            0
+          ],
+          [
+            9,
+            4.666672,
+            4.5,
+            false,
+            1096,
+            1110
+          ],
+          [
+            10,
+            4.666672,
+            5.0,
+            false,
+            691,
+            691
+          ],
+          [
+            11,
+            4.666672,
+            4.5,
+            false,
+            767,
+            767
+          ],
+          [
+            12,
+            4.666672,
+            4.5,
+            false,
+            798,
+            798
+          ],
+          [
+            13,
+            4.666672,
+            5.0,
+            false,
+            807,
+            807
+          ],
+          [
+            14,
+            4.666672,
+            4.5,
+            false,
+            747,
+            747
+          ],
+          [
+            15,
+            4.666672,
+            4.5,
+            false,
+            653,
+            653
+          ],
+          [
+            16,
+            4.666672,
+            5.0,
+            false,
+            672,
+            672
+          ],
+          [
+            17,
+            4.666672,
+            4.5,
+            false,
+            655,
+            1354
+          ],
+          [
+            18,
+            4.666672,
+            4.5,
+            false,
+            768,
+            768
+          ],
+          [
+            19,
+            4.666672,
+            5.0,
+            false,
+            839,
+            839
+          ],
+          [
+            20,
+            4.666672,
+            4.5,
+            false,
+            785,
+            785
+          ],
+          [
+            21,
+            4.666672,
+            4.5,
+            false,
+            699,
+            699
+          ],
+          [
+            22,
+            4.666672,
+            5.0,
+            false,
+            631,
+            631
+          ],
+          [
+            23,
+            4.666672,
+            4.5,
+            false,
+            606,
+            606
+          ],
+          [
+            24,
+            4.666672,
+            4.5,
+            false,
+            692,
+            692
+          ],
+          [
+            25,
+            4.666672,
+            5.0,
+            false,
+            801,
+            801
+          ],
+          [
+            26,
+            4.666672,
+            4.5,
+            false,
+            805,
+            805
+          ],
+          [
+            27,
+            4.666672,
+            4.5,
+            false,
+            791,
+            791
+          ],
+          [
+            28,
+            4.666672,
+            5.0,
+            false,
+            727,
+            727
+          ],
+          [
+            29,
+            4.666656,
+            4.5,
+            false,
+            649,
+            649
+          ],
+          [
+            30,
+            4.666626,
+            4.5,
+            false,
+            644,
+            644
+          ],
+          [
+            31,
+            4.666626,
+            5.0,
+            false,
+            721,
+            721
+          ],
+          [
+            32,
+            4.666626,
+            4.5,
+            false,
+            789,
+            789
+          ],
+          [
+            33,
+            4.666626,
+            4.5,
+            false,
+            804,
+            804
+          ],
+          [
+            34,
+            4.666626,
+            5.0,
+            false,
+            788,
+            788
+          ],
+          [
+            35,
+            4.666626,
+            4.5,
+            false,
+            643,
+            643
+          ],
+          [
+            36,
+            4.666626,
+            4.5,
+            false,
+            612,
+            612
+          ],
+          [
+            37,
+            4.666626,
+            5.0,
+            false,
+            636,
+            636
+          ],
+          [
+            38,
+            4.666626,
+            4.5,
+            false,
+            727,
+            727
+          ],
+          [
+            39,
+            4.666626,
+            4.5,
+            false,
+            795,
+            795
+          ],
+          [
+            40,
+            4.666626,
+            5.0,
+            false,
+            826,
+            1110
+          ],
+          [
+            41,
+            4.666626,
+            4.5,
+            false,
+            793,
+            793
+          ],
+          [
+            42,
+            0.0,
+            0.0,
+            false,
+            154,
+            154
+          ],
+          [
+            43,
+            0.0,
+            0.0,
+            false,
+            36,
+            36
+          ],
+          [
+            44,
+            0.0,
+            0.0,
+            false,
+            350,
+            350
+          ],
+          [
+            45,
+            0.0,
+            0.0,
+            false,
+            125,
+            125
+          ],
+          [
+            46,
+            0.0,
+            0.0,
+            false,
+            308,
+            308
+          ],
+          [
+            47,
+            0.0,
+            0.0,
+            false,
+            91,
+            91
+          ],
+          [
+            48,
+            0.0,
+            0.0,
+            false,
+            1,
+            1
+          ],
+          [
+            49,
+            4.666626,
+            4.5,
+            false,
+            706,
+            706
+          ],
+          [
+            50,
+            4.666626,
+            5.0,
+            false,
+            691,
+            691
+          ],
+          [
+            51,
+            4.666626,
+            4.5,
+            false,
+            777,
+            777
+          ],
+          [
+            52,
+            4.666626,
+            4.5,
+            false,
+            800,
+            800
+          ],
+          [
+            53,
+            4.666626,
+            5.0,
+            false,
+            807,
+            807
+          ],
+          [
+            54,
+            4.666626,
+            4.5,
+            false,
+            747,
+            747
+          ],
+          [
+            55,
+            4.666626,
+            4.5,
+            false,
+            653,
+            653
+          ],
+          [
+            56,
+            4.666626,
+            5.0,
+            false,
+            655,
+            655
+          ],
+          [
+            57,
+            4.666626,
+            4.5,
+            false,
+            630,
+            630
+          ],
+          [
+            58,
+            4.666626,
+            4.5,
+            false,
+            727,
+            727
+          ],
+          [
+            59,
+            4.666626,
+            5.0,
+            false,
+            776,
+            776
+          ],
+          [
+            60,
+            4.666626,
+            4.5,
+            false,
+            726,
+            726
+          ],
+          [
+            61,
+            4.666626,
+            4.5,
+            false,
+            636,
+            636
+          ],
+          [
+            62,
+            4.666626,
+            5.0,
+            false,
+            569,
+            569
+          ],
+          [
+            63,
+            4.666626,
+            4.5,
+            false,
+            557,
+            557
+          ],
+          [
+            64,
+            0.0,
+            0.0,
+            false,
+            60,
+            60
+          ],
+          [
+            65,
+            4.666626,
+            4.5,
+            false,
+            670,
+            670
+          ],
+          [
+            66,
+            4.666626,
+            5.0,
+            false,
+            710,
+            710
+          ],
+          [
+            67,
+            4.666626,
+            4.5,
+            false,
+            725,
+            725
+          ],
+          [
+            68,
+            4.666626,
+            4.5,
+            false,
+            676,
+            676
+          ],
+          [
+            69,
+            4.666626,
+            5.0,
+            false,
+            669,
+            669
+          ],
+          [
+            70,
+            4.666626,
+            4.5,
+            false,
+            769,
+            769
+          ],
+          [
+            71,
+            4.666626,
+            4.5,
+            false,
+            812,
+            812
+          ],
+          [
+            72,
+            4.666626,
+            5.0,
+            false,
+            804,
+            804
+          ],
+          [
+            73,
+            4.666626,
+            4.5,
+            false,
+            703,
+            703
+          ],
+          [
+            74,
+            4.666626,
+            4.5,
+            false,
+            622,
+            622
+          ],
+          [
+            75,
+            4.666626,
+            5.0,
+            false,
+            627,
+            627
+          ],
+          [
+            76,
+            4.666626,
+            4.5,
+            false,
+            684,
+            684
+          ],
+          [
+            77,
+            4.666626,
+            4.5,
+            false,
+            778,
+            778
+          ],
+          [
+            78,
+            4.666626,
+            5.0,
+            false,
+            820,
+            820
+          ],
+          [
+            79,
+            4.666626,
+            4.5,
+            false,
+            792,
+            1076
+          ],
+          [
+            80,
+            0.0,
+            0.0,
+            false,
+            158,
+            158
+          ],
+          [
+            81,
+            0.0,
+            0.0,
+            false,
+            76,
+            76
+          ],
+          [
+            82,
+            0.0,
+            0.0,
+            false,
+            361,
+            361
+          ],
+          [
+            83,
+            0.0,
+            0.0,
+            false,
+            139,
+            139
+          ],
+          [
+            84,
+            0.0,
+            0.0,
+            false,
+            312,
+            312
+          ],
+          [
+            85,
+            0.0,
+            0.0,
+            false,
+            91,
+            91
+          ],
+          [
+            86,
+            0.0,
+            0.0,
+            false,
+            1,
+            1
+          ],
+          [
+            87,
+            0.0,
+            0.0,
+            true,
+            0,
+            0
+          ],
+          [
+            88,
+            -4.666626,
+            -4.5,
+            false,
+            707,
+            991
+          ],
+          [
+            89,
+            -4.666626,
+            -5.0,
+            false,
+            735,
+            735
+          ],
+          [
+            90,
+            -4.666626,
+            -4.5,
+            false,
+            713,
+            713
+          ],
+          [
+            91,
+            -4.666626,
+            -4.5,
+            false,
+            699,
+            699
+          ],
+          [
+            92,
+            -4.666626,
+            -5.0,
+            false,
+            735,
+            735
+          ],
+          [
+            93,
+            -4.666626,
+            -4.5,
+            false,
+            713,
+            713
+          ],
+          [
+            94,
+            4.666626,
+            4.5,
+            false,
+            725,
+            725
+          ],
+          [
+            95,
+            4.666626,
+            5.0,
+            false,
+            691,
+            691
+          ],
+          [
+            96,
+            4.666626,
+            4.5,
+            false,
+            777,
+            777
+          ],
+          [
+            97,
+            4.666626,
+            4.5,
+            false,
+            800,
+            800
+          ],
+          [
+            98,
+            4.666626,
+            5.0,
+            false,
+            807,
+            807
+          ],
+          [
+            99,
+            4.666626,
+            4.5,
+            false,
+            747,
+            1031
+          ],
+          [
+            100,
+            4.666626,
+            4.5,
+            false,
+            653,
+            653
+          ],
+          [
+            101,
+            4.666626,
+            5.0,
+            false,
+            672,
+            672
+          ],
+          [
+            102,
+            4.666626,
+            4.5,
+            false,
+            655,
+            655
+          ],
+          [
+            103,
+            4.666626,
+            4.5,
+            false,
+            768,
+            768
+          ],
+          [
+            104,
+            4.666626,
+            5.0,
+            false,
+            839,
+            839
+          ],
+          [
+            105,
+            4.666626,
+            4.5,
+            false,
+            785,
+            785
+          ],
+          [
+            106,
+            4.666626,
+            4.5,
+            false,
+            699,
+            699
+          ],
+          [
+            107,
+            4.666626,
+            5.0,
+            false,
+            589,
+            589
+          ],
+          [
+            108,
+            4.666626,
+            4.5,
+            false,
+            466,
+            466
+          ],
+          [
+            109,
+            4.666626,
+            4.5,
+            false,
+            440,
+            440
+          ],
+          [
+            110,
+            4.666626,
+            5.0,
+            false,
+            401,
+            401
+          ],
+          [
+            111,
+            0.0,
+            0.0,
+            false,
+            41,
+            41
+          ],
+          [
+            112,
+            0.0,
+            0.0,
+            false,
+            9,
+            9
+          ],
+          [
+            113,
+            0.0,
+            0.0,
+            false,
+            123,
+            123
+          ],
+          [
+            114,
+            0.0,
+            0.0,
+            false,
+            96,
+            96
+          ],
+          [
+            115,
+            0.0,
+            0.0,
+            false,
+            104,
+            104
+          ],
+          [
+            116,
+            0.0,
+            0.0,
+            false,
+            0,
+            0
+          ],
+          [
+            117,
+            0.0,
+            0.0,
+            true,
+            0,
+            0
+          ],
+          [
+            118,
+            0.0,
+            0.0,
+            true,
+            0,
+            0
+          ],
+          [
+            119,
+            0.0,
+            0.0,
+            true,
+            0,
+            0
+          ]
+        ]
+      },
+      "unchangedSourcePairs": 12,
+      "onScreenSpriteTexelDiagnostic": {
+        "framesCompared": 89,
+        "unambiguousTexelsMatched": 14552,
+        "unambiguousTexelsCompared": 17387,
+        "scope": "Not a gate. Remaining pixels are covered by scene overlays (y-sorted NPC/props, name labels, interaction markers)."
+      },
+      "critical": [
+        {
+          "purpose": "contact",
+          "tick": 34,
+          "segment": "start-run",
+          "mode": "run",
+          "q": 0.0,
+          "file": "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run_critical-city-bright-en-contact-640_v03_20261018-194932-3a1839f6.png",
+          "sha256": "ff15ee66f450d8cbf08dc916c6604ba2cfd581bc81afea3ef3c1b113a4f833f2",
+          "sourceRgbaSha256": "855c043f52c425e013079f41ed0dc589d6081619c28c2bc1399e6a1a8262ff61"
+        },
+        {
+          "purpose": "passing",
+          "tick": 36,
+          "segment": "start-run",
+          "mode": "run",
+          "q": 18.0,
+          "file": "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run_critical-city-bright-en-passing-640_v03_20261018-194932-3a1839f6.png",
+          "sha256": "1bedf7d732ef1e78272aeea8413eaa7e2321133323c188877e60ea884feb1124",
+          "sourceRgbaSha256": "91d3c278088bb94ec565e9a5218a7d3985d4ea80af10f187d57b2581b83a4207"
+        },
+        {
+          "purpose": "flight",
+          "tick": 12,
+          "segment": "start-run",
+          "mode": "run",
+          "q": 50.0,
+          "file": "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run_critical-city-bright-en-flight-640_v03_20261018-194932-3a1839f6.png",
+          "sha256": "e348ae17cd31cf180b8f5f09648de41050b91ade9ccf83800970c60eccb186db",
+          "sourceRgbaSha256": "95b41944bfda4ef1815fa21fd01e8a7ede30b61b77b71c4c078396f33869610c"
+        },
+        {
+          "purpose": "release-first",
+          "tick": 42,
+          "segment": "release",
+          "mode": "stop",
+          "q": 65.0,
+          "file": "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run_critical-city-bright-en-release-first-640_v03_20261018-194932-3a1839f6.png",
+          "sha256": "520bc136cf98926c58f3ab0b2290ac1bfcee3011feca7855e2f2f1b8b0476248",
+          "sourceRgbaSha256": "e639360b87f305fa26c63ab747c6724827e633516972a96143550a01175568c9"
+        },
+        {
+          "purpose": "repress-first",
+          "tick": 65,
+          "segment": "repress",
+          "mode": "run",
+          "q": 59.0,
+          "file": "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run_critical-city-bright-en-repress-first-640_v03_20261018-194932-3a1839f6.png",
+          "sha256": "e1e48934006cb3b51bec1d80f6bb0f6233d9a976f7833bbaf001bb2701b369e9",
+          "sourceRgbaSha256": "bd89e31d625a79280f23b0b0f074edb60506fd4bb25a55ef322c95ef89fca1dc"
+        },
+        {
+          "purpose": "settle-before-idle",
+          "tick": 116,
+          "segment": "final-stop",
+          "mode": "stop",
+          "q": 44.0,
+          "file": "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run_critical-city-bright-en-settle-before-idle-640_v03_20261018-194932-3a1839f6.png",
+          "sha256": "660e0e52ba992f1ceeb1d8b8c65f1b7f644cf511d8e07f8ef6dd1e568573977f",
+          "sourceRgbaSha256": "366bb7b3dbe4dc5872cba93fbeac6c9de1645d6d2c64191b6e84a1f986d7d413"
+        },
+        {
+          "purpose": "final-static",
+          "tick": 119,
+          "segment": "final-stop",
+          "mode": "idle",
+          "q": 44.0,
+          "file": "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run_critical-city-bright-en-final-static-640_v03_20261018-194932-3a1839f6.png",
+          "sha256": "660e0e52ba992f1ceeb1d8b8c65f1b7f644cf511d8e07f8ef6dd1e568573977f",
+          "sourceRgbaSha256": "366bb7b3dbe4dc5872cba93fbeac6c9de1645d6d2c64191b6e84a1f986d7d413"
+        }
+      ],
+      "rawFramesTempOnly": "C:\\Users\\hkzha\\AppData\\Local\\Temp\\fe3\\cap30"
+    },
+    {
+      "scene": "annex-room2-dark",
+      "language": "zh",
+      "fps": 60,
+      "frames": 238,
+      "simulationSeconds": 3.966666666666667,
+      "recordingWallClockMs": 21221,
+      "report": {
+        "file": "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run_actual-report-annex-room2-dark-zh-60fps_v03_20261018-194932-3a1839f6.json.gz",
+        "sha256": "1aeabeed64fb781b4f754f6a83a82d8f39e20bc83cf848c82c590098b87887a4",
+        "uncompressedSha256": "b096dbc838e33ce6e52c78788c3685b6351a983ef9af79121a3f61d0fe57f70e"
+      },
+      "log": {
+        "file": "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run_actual-log-annex-room2-dark-zh-60fps_v03_20261018-194932-3a1839f6.log",
+        "sha256": "4ddfe6b16d52226850729cf8dcfe4f152c2a13c3bb524fd95ab12bb22fff1466"
+      },
+      "movie": {
+        "file": "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run_normal1x-annex-room2-dark-zh-60fps_v03_20261018-194932-3a1839f6.mp4",
+        "sha256": "82095ea7a8f99a0b9a96faf4346d27d44c7b465ce3e07d7f7522eba8ebf4b260",
+        "probe": {
+          "codec_name": "h264",
+          "width": 640,
+          "height": 360,
+          "pix_fmt": "yuv420p",
+          "r_frame_rate": "60/1",
+          "nb_read_frames": "238"
+        }
+      },
+      "steadyRunFrames": 131,
+      "steadyEqualNativeCel": 131,
+      "steadyTorsoGuardHeld": 0,
+      "idleFrames": 27,
+      "reversalPlaceholderFrames": 12,
+      "captureSourceDeltas": {
+        "columns": [
+          "tick",
+          "heroDeltaX",
+          "renderDeltaX",
+          "sourceAndOriginUnchanged",
+          "spriteWindowChangedPixels",
+          "wholeFrameChangedPixels"
+        ],
+        "rows": [
+          [
+            1,
+            0.0,
+            0.0,
+            true,
+            0,
+            0
+          ],
+          [
+            2,
+            0.0,
+            0.0,
+            true,
+            0,
+            0
+          ],
+          [
+            3,
+            0.0,
+            0.0,
+            true,
+            0,
+            0
+          ],
+          [
+            4,
+            0.0,
+            0.0,
+            true,
+            0,
+            0
+          ],
+          [
+            5,
+            0.0,
+            0.0,
+            true,
+            0,
+            0
+          ],
+          [
+            6,
+            0.0,
+            0.0,
+            true,
+            0,
+            0
+          ],
+          [
+            7,
+            0.0,
+            0.0,
+            true,
+            0,
+            0
+          ],
+          [
+            8,
+            0.0,
+            0.0,
+            true,
+            0,
+            0
+          ],
+          [
+            9,
+            0.0,
+            0.0,
+            true,
+            0,
+            0
+          ],
+          [
+            10,
+            0.0,
+            0.0,
+            true,
+            0,
+            0
+          ],
+          [
+            11,
+            0.0,
+            0.0,
+            true,
+            0,
+            0
+          ],
+          [
+            12,
+            0.0,
+            0.0,
+            true,
+            0,
+            0
+          ],
+          [
+            13,
+            0.0,
+            0.0,
+            true,
+            0,
+            0
+          ],
+          [
+            14,
+            0.0,
+            0.0,
+            true,
+            0,
+            0
+          ],
+          [
+            15,
+            0.0,
+            0.0,
+            true,
+            0,
+            0
+          ],
+          [
+            16,
+            0.0,
+            0.0,
+            true,
+            0,
+            0
+          ],
+          [
+            17,
+            0.0,
+            0.0,
+            true,
+            0,
+            0
+          ],
+          [
+            18,
+            2.333328,
+            2.5,
+            false,
+            582,
+            582
+          ],
+          [
+            19,
+            2.333328,
+            2.0,
+            false,
+            557,
+            557
+          ],
+          [
+            20,
+            2.333328,
+            2.5,
+            false,
+            550,
+            550
+          ],
+          [
+            21,
+            2.333328,
+            2.5,
+            false,
+            572,
+            572
+          ],
+          [
+            22,
+            2.333328,
+            2.0,
+            false,
+            591,
+            591
+          ],
+          [
+            23,
+            2.333328,
+            2.5,
+            false,
+            634,
+            634
+          ],
+          [
+            24,
+            2.333328,
+            2.5,
+            false,
+            675,
+            675
+          ],
+          [
+            25,
+            2.333328,
+            2.0,
+            false,
+            617,
+            617
+          ],
+          [
+            26,
+            2.333328,
+            2.5,
+            false,
+            673,
+            673
+          ],
+          [
+            27,
+            2.333328,
+            2.5,
+            false,
+            689,
+            689
+          ],
+          [
+            28,
+            2.333328,
+            2.0,
+            false,
+            606,
+            606
+          ],
+          [
+            29,
+            2.333328,
+            2.5,
+            false,
+            575,
+            575
+          ],
+          [
+            30,
+            2.333328,
+            2.5,
+            false,
+            545,
+            545
+          ],
+          [
+            31,
+            2.333328,
+            2.0,
+            false,
+            517,
+            517
+          ],
+          [
+            32,
+            2.333328,
+            2.5,
+            false,
+            555,
+            555
+          ],
+          [
+            33,
+            2.333328,
+            2.5,
+            false,
+            552,
+            552
+          ],
+          [
+            34,
+            2.333328,
+            2.0,
+            false,
+            518,
+            518
+          ],
+          [
+            35,
+            2.333328,
+            2.5,
+            false,
+            577,
+            577
+          ],
+          [
+            36,
+            2.333328,
+            2.5,
+            false,
+            568,
+            568
+          ],
+          [
+            37,
+            2.333328,
+            2.0,
+            false,
+            634,
+            634
+          ],
+          [
+            38,
+            2.333328,
+            2.5,
+            false,
+            683,
+            683
+          ],
+          [
+            39,
+            2.333328,
+            2.5,
+            false,
+            675,
+            675
+          ],
+          [
+            40,
+            2.333328,
+            2.0,
+            false,
+            617,
+            617
+          ],
+          [
+            41,
+            2.333328,
+            2.5,
+            false,
+            665,
+            665
+          ],
+          [
+            42,
+            2.333328,
+            2.5,
+            false,
+            629,
+            629
+          ],
+          [
+            43,
+            2.333328,
+            2.0,
+            false,
+            510,
+            510
+          ],
+          [
+            44,
+            2.333328,
+            2.5,
+            false,
+            532,
+            532
+          ],
+          [
+            45,
+            2.333328,
+            2.5,
+            false,
+            512,
+            512
+          ],
+          [
+            46,
+            2.333328,
+            2.0,
+            false,
+            453,
+            453
+          ],
+          [
+            47,
+            2.333328,
+            2.5,
+            false,
+            512,
+            512
+          ],
+          [
+            48,
+            2.333328,
+            2.5,
+            false,
+            543,
+            543
+          ],
+          [
+            49,
+            2.333328,
+            2.0,
+            false,
+            544,
+            544
+          ],
+          [
+            50,
+            2.333328,
+            2.5,
+            false,
+            587,
+            587
+          ],
+          [
+            51,
+            2.333328,
+            2.5,
+            false,
+            677,
+            677
+          ],
+          [
+            52,
+            2.333328,
+            2.0,
+            false,
+            624,
+            624
+          ],
+          [
+            53,
+            2.333328,
+            2.5,
+            false,
+            667,
+            667
+          ],
+          [
+            54,
+            2.333328,
+            2.5,
+            false,
+            686,
+            686
+          ],
+          [
+            55,
+            2.333328,
+            2.0,
+            false,
+            611,
+            611
+          ],
+          [
+            56,
+            2.333328,
+            2.5,
+            false,
+            630,
+            630
+          ],
+          [
+            57,
+            2.333328,
+            2.5,
+            false,
+            564,
+            564
+          ],
+          [
+            58,
+            2.333328,
+            2.0,
+            false,
+            522,
+            522
+          ],
+          [
+            59,
+            2.333328,
+            2.5,
+            false,
+            555,
+            555
+          ],
+          [
+            60,
+            2.333344,
+            2.5,
+            false,
+            548,
+            548
+          ],
+          [
+            61,
+            2.333344,
+            2.0,
+            false,
+            499,
+            499
+          ],
+          [
+            62,
+            2.333344,
+            2.5,
+            false,
+            536,
+            536
+          ],
+          [
+            63,
+            2.333344,
+            2.5,
+            false,
+            607,
+            607
+          ],
+          [
+            64,
+            2.333344,
+            2.0,
+            false,
+            541,
+            541
+          ],
+          [
+            65,
+            2.333344,
+            2.5,
+            false,
+            651,
+            651
+          ],
+          [
+            66,
+            2.333344,
+            2.5,
+            false,
+            656,
+            656
+          ],
+          [
+            67,
+            2.333344,
+            2.0,
+            false,
+            583,
+            583
+          ],
+          [
+            68,
+            2.333344,
+            2.5,
+            false,
+            645,
+            645
+          ],
+          [
+            69,
+            2.333344,
+            2.5,
+            false,
+            610,
+            610
+          ],
+          [
+            70,
+            2.333344,
+            2.0,
+            false,
+            468,
+            468
+          ],
+          [
+            71,
+            2.333344,
+            2.5,
+            false,
+            499,
+            499
+          ],
+          [
+            72,
+            2.333344,
+            2.5,
+            false,
+            493,
+            493
+          ],
+          [
+            73,
+            2.333344,
+            2.0,
+            false,
+            428,
+            428
+          ],
+          [
+            74,
+            2.333344,
+            2.5,
+            false,
+            462,
+            462
+          ],
+          [
+            75,
+            2.333344,
+            2.5,
+            false,
+            499,
+            499
+          ],
+          [
+            76,
+            2.333344,
+            2.0,
+            false,
+            468,
+            468
+          ],
+          [
+            77,
+            2.333344,
+            2.5,
+            false,
+            549,
+            549
+          ],
+          [
+            78,
+            2.333344,
+            2.5,
+            false,
+            612,
+            612
+          ],
+          [
+            79,
+            2.333344,
+            2.0,
+            false,
+            554,
+            554
+          ],
+          [
+            80,
+            2.333344,
+            2.5,
+            false,
+            578,
+            578
+          ],
+          [
+            81,
+            2.333344,
+            2.5,
+            false,
+            603,
+            603
+          ],
+          [
+            82,
+            2.333344,
+            2.0,
+            false,
+            565,
+            565
+          ],
+          [
+            83,
+            2.333344,
+            2.5,
+            false,
+            586,
+            586
+          ],
+          [
+            84,
+            0.0,
+            0.0,
+            false,
+            116,
+            116
+          ],
+          [
+            85,
+            0.0,
+            0.0,
+            false,
+            135,
+            135
+          ],
+          [
+            86,
+            0.0,
+            0.0,
+            false,
+            17,
+            17
+          ],
+          [
+            87,
+            0.0,
+            0.0,
+            false,
+            25,
+            25
+          ],
+          [
+            88,
+            0.0,
+            0.0,
+            false,
+            261,
+            261
+          ],
+          [
+            89,
+            0.0,
+            0.0,
+            false,
+            130,
+            130
+          ],
+          [
+            90,
+            0.0,
+            0.0,
+            false,
+            107,
+            107
+          ],
+          [
+            91,
+            0.0,
+            0.0,
+            false,
+            73,
+            73
+          ],
+          [
+            92,
+            0.0,
+            0.0,
+            false,
+            252,
+            252
+          ],
+          [
+            93,
+            0.0,
+            0.0,
+            false,
+            62,
+            62
+          ],
+          [
+            94,
+            0.0,
+            0.0,
+            false,
+            60,
+            60
+          ],
+          [
+            95,
+            0.0,
+            0.0,
+            false,
+            52,
+            52
+          ],
+          [
+            96,
+            0.0,
+            0.0,
+            false,
+            1,
+            1
+          ],
+          [
+            97,
+            0.0,
+            0.0,
+            true,
+            0,
+            0
+          ],
+          [
+            98,
+            2.333344,
+            2.5,
+            false,
+            515,
+            515
+          ],
+          [
+            99,
+            2.333344,
+            2.0,
+            false,
+            498,
+            498
+          ],
+          [
+            100,
+            2.333344,
+            2.5,
+            false,
+            512,
+            512
+          ],
+          [
+            101,
+            2.333344,
+            2.5,
+            false,
+            548,
+            548
+          ],
+          [
+            102,
+            2.333344,
+            2.0,
+            false,
+            585,
+            585
+          ],
+          [
+            103,
+            2.333344,
+            2.5,
+            false,
+            634,
+            634
+          ],
+          [
+            104,
+            2.333344,
+            2.5,
+            false,
+            675,
+            675
+          ],
+          [
+            105,
+            2.333344,
+            2.0,
+            false,
+            617,
+            617
+          ],
+          [
+            106,
+            2.333344,
+            2.5,
+            false,
+            673,
+            673
+          ],
+          [
+            107,
+            2.333344,
+            2.5,
+            false,
+            689,
+            689
+          ],
+          [
+            108,
+            2.333344,
+            2.0,
+            false,
+            606,
+            606
+          ],
+          [
+            109,
+            2.333344,
+            2.5,
+            false,
+            575,
+            575
+          ],
+          [
+            110,
+            2.333344,
+            2.5,
+            false,
+            545,
+            545
+          ],
+          [
+            111,
+            2.333344,
+            2.0,
+            false,
+            517,
+            517
+          ],
+          [
+            112,
+            2.333344,
+            2.5,
+            false,
+            555,
+            555
+          ],
+          [
+            113,
+            2.333344,
+            2.5,
+            false,
+            552,
+            552
+          ],
+          [
+            114,
+            2.333344,
+            2.0,
+            false,
+            518,
+            518
+          ],
+          [
+            115,
+            2.333344,
+            2.5,
+            false,
+            577,
+            577
+          ],
+          [
+            116,
+            2.333344,
+            2.5,
+            false,
+            568,
+            568
+          ],
+          [
+            117,
+            2.333344,
+            2.0,
+            false,
+            634,
+            634
+          ],
+          [
+            118,
+            2.333344,
+            2.5,
+            false,
+            683,
+            683
+          ],
+          [
+            119,
+            2.333344,
+            2.5,
+            false,
+            675,
+            675
+          ],
+          [
+            120,
+            2.333344,
+            2.0,
+            false,
+            617,
+            617
+          ],
+          [
+            121,
+            2.333344,
+            2.5,
+            false,
+            665,
+            665
+          ],
+          [
+            122,
+            2.333344,
+            2.5,
+            false,
+            629,
+            629
+          ],
+          [
+            123,
+            2.333344,
+            2.0,
+            false,
+            510,
+            510
+          ],
+          [
+            124,
+            2.333344,
+            2.5,
+            false,
+            532,
+            532
+          ],
+          [
+            125,
+            2.333344,
+            2.5,
+            false,
+            512,
+            512
+          ],
+          [
+            126,
+            2.333344,
+            2.0,
+            false,
+            453,
+            453
+          ],
+          [
+            127,
+            2.333344,
+            2.5,
+            false,
+            512,
+            512
+          ],
+          [
+            128,
+            0.0,
+            0.0,
+            false,
+            24,
+            24
+          ],
+          [
+            129,
+            2.333344,
+            2.5,
+            false,
+            579,
+            579
+          ],
+          [
+            130,
+            2.333344,
+            2.0,
+            false,
+            566,
+            566
+          ],
+          [
+            131,
+            2.333344,
+            2.5,
+            false,
+            626,
+            626
+          ],
+          [
+            132,
+            2.333344,
+            2.5,
+            false,
+            534,
+            534
+          ],
+          [
+            133,
+            2.333344,
+            2.0,
+            false,
+            563,
+            563
+          ],
+          [
+            134,
+            2.333344,
+            2.5,
+            false,
+            625,
+            625
+          ],
+          [
+            135,
+            2.333344,
+            2.5,
+            false,
+            594,
+            594
+          ],
+          [
+            136,
+            2.333344,
+            2.0,
+            false,
+            510,
+            510
+          ],
+          [
+            137,
+            2.333344,
+            2.5,
+            false,
+            554,
+            554
+          ],
+          [
+            138,
+            2.333344,
+            2.5,
+            false,
+            560,
+            560
+          ],
+          [
+            139,
+            2.333344,
+            2.0,
+            false,
+            568,
+            568
+          ],
+          [
+            140,
+            2.333344,
+            2.5,
+            false,
+            646,
+            646
+          ],
+          [
+            141,
+            2.333344,
+            2.5,
+            false,
+            671,
+            671
+          ],
+          [
+            142,
+            2.333344,
+            2.0,
+            false,
+            612,
+            612
+          ],
+          [
+            143,
+            2.333344,
+            2.5,
+            false,
+            673,
+            673
+          ],
+          [
+            144,
+            2.333344,
+            2.5,
+            false,
+            667,
+            667
+          ],
+          [
+            145,
+            2.333344,
+            2.0,
+            false,
+            577,
+            577
+          ],
+          [
+            146,
+            2.333344,
+            2.5,
+            false,
+            547,
+            547
+          ],
+          [
+            147,
+            2.333344,
+            2.5,
+            false,
+            533,
+            533
+          ],
+          [
+            148,
+            2.333344,
+            2.0,
+            false,
+            474,
+            474
+          ],
+          [
+            149,
+            2.333344,
+            2.5,
+            false,
+            496,
+            496
+          ],
+          [
+            150,
+            2.333344,
+            2.5,
+            false,
+            517,
+            517
+          ],
+          [
+            151,
+            2.333344,
+            2.0,
+            false,
+            501,
+            501
+          ],
+          [
+            152,
+            2.333344,
+            2.5,
+            false,
+            586,
+            586
+          ],
+          [
+            153,
+            2.333344,
+            2.5,
+            false,
+            571,
+            571
+          ],
+          [
+            154,
+            2.333344,
+            2.0,
+            false,
+            634,
+            634
+          ],
+          [
+            155,
+            2.333344,
+            2.5,
+            false,
+            672,
+            672
+          ],
+          [
+            156,
+            2.333344,
+            2.5,
+            false,
+            675,
+            675
+          ],
+          [
+            157,
+            2.333344,
+            2.0,
+            false,
+            639,
+            639
+          ],
+          [
+            158,
+            2.333344,
+            2.5,
+            false,
+            668,
+            668
+          ],
+          [
+            159,
+            0.0,
+            0.0,
+            false,
+            116,
+            116
+          ],
+          [
+            160,
+            0.0,
+            0.0,
+            false,
+            116,
+            116
+          ],
+          [
+            161,
+            0.0,
+            0.0,
+            false,
+            35,
+            35
+          ],
+          [
+            162,
+            0.0,
+            0.0,
+            false,
+            47,
+            47
+          ],
+          [
+            163,
+            0.0,
+            0.0,
+            false,
+            284,
+            284
+          ],
+          [
+            164,
+            0.0,
+            0.0,
+            false,
+            142,
+            142
+          ],
+          [
+            165,
+            0.0,
+            0.0,
+            false,
+            121,
+            121
+          ],
+          [
+            166,
+            0.0,
+            0.0,
+            false,
+            74,
+            74
+          ],
+          [
+            167,
+            0.0,
+            0.0,
+            false,
+            286,
+            286
+          ],
+          [
+            168,
+            0.0,
+            0.0,
+            false,
+            69,
+            69
+          ],
+          [
+            169,
+            0.0,
+            0.0,
+            false,
+            59,
+            59
+          ],
+          [
+            170,
+            0.0,
+            0.0,
+            false,
+            53,
+            53
+          ],
+          [
+            171,
+            0.0,
+            0.0,
+            false,
+            1,
+            1
+          ],
+          [
+            172,
+            0.0,
+            0.0,
+            true,
+            0,
+            0
+          ],
+          [
+            173,
+            0.0,
+            0.0,
+            true,
+            0,
+            0
+          ],
+          [
+            174,
+            0.0,
+            0.0,
+            true,
+            0,
+            0
+          ],
+          [
+            175,
+            -2.333344,
+            -2.5,
+            false,
+            614,
+            614
+          ],
+          [
+            176,
+            -2.333344,
+            -2.0,
+            false,
+            563,
+            563
+          ],
+          [
+            177,
+            -2.333344,
+            -2.5,
+            false,
+            612,
+            612
+          ],
+          [
+            178,
+            -2.333344,
+            -2.5,
+            false,
+            601,
+            601
+          ],
+          [
+            179,
+            -2.333344,
+            -2.0,
+            false,
+            563,
+            563
+          ],
+          [
+            180,
+            -2.333344,
+            -2.5,
+            false,
+            612,
+            612
+          ],
+          [
+            181,
+            -2.333344,
+            -2.5,
+            false,
+            601,
+            601
+          ],
+          [
+            182,
+            -2.333344,
+            -2.0,
+            false,
+            563,
+            563
+          ],
+          [
+            183,
+            -2.333344,
+            -2.5,
+            false,
+            612,
+            612
+          ],
+          [
+            184,
+            -2.333344,
+            -2.5,
+            false,
+            601,
+            601
+          ],
+          [
+            185,
+            -2.333344,
+            -2.0,
+            false,
+            563,
+            563
+          ],
+          [
+            186,
+            -2.333344,
+            -2.5,
+            false,
+            612,
+            612
+          ],
+          [
+            187,
+            2.333344,
+            2.5,
+            false,
+            624,
+            624
+          ],
+          [
+            188,
+            2.333344,
+            2.0,
+            false,
+            557,
+            557
+          ],
+          [
+            189,
+            2.333344,
+            2.5,
+            false,
+            550,
+            550
+          ],
+          [
+            190,
+            2.333344,
+            2.5,
+            false,
+            572,
+            572
+          ],
+          [
+            191,
+            2.333344,
+            2.0,
+            false,
+            591,
+            591
+          ],
+          [
+            192,
+            2.333344,
+            2.5,
+            false,
+            634,
+            634
+          ],
+          [
+            193,
+            2.333344,
+            2.5,
+            false,
+            675,
+            675
+          ],
+          [
+            194,
+            2.333344,
+            2.0,
+            false,
+            617,
+            617
+          ],
+          [
+            195,
+            2.333344,
+            2.5,
+            false,
+            673,
+            673
+          ],
+          [
+            196,
+            2.333344,
+            2.5,
+            false,
+            689,
+            689
+          ],
+          [
+            197,
+            2.333344,
+            2.0,
+            false,
+            606,
+            606
+          ],
+          [
+            198,
+            2.333344,
+            2.5,
+            false,
+            575,
+            575
+          ],
+          [
+            199,
+            2.333344,
+            2.5,
+            false,
+            545,
+            545
+          ],
+          [
+            200,
+            2.333344,
+            2.0,
+            false,
+            517,
+            517
+          ],
+          [
+            201,
+            2.333344,
+            2.5,
+            false,
+            555,
+            555
+          ],
+          [
+            202,
+            2.333344,
+            2.5,
+            false,
+            552,
+            552
+          ],
+          [
+            203,
+            2.333344,
+            2.0,
+            false,
+            518,
+            518
+          ],
+          [
+            204,
+            2.333344,
+            2.5,
+            false,
+            577,
+            577
+          ],
+          [
+            205,
+            2.333344,
+            2.5,
+            false,
+            568,
+            568
+          ],
+          [
+            206,
+            2.333344,
+            2.0,
+            false,
+            634,
+            634
+          ],
+          [
+            207,
+            2.333344,
+            2.5,
+            false,
+            683,
+            683
+          ],
+          [
+            208,
+            2.333344,
+            2.5,
+            false,
+            675,
+            675
+          ],
+          [
+            209,
+            2.333344,
+            2.0,
+            false,
+            617,
+            617
+          ],
+          [
+            210,
+            2.333344,
+            2.5,
+            false,
+            665,
+            665
+          ],
+          [
+            211,
+            2.333344,
+            2.5,
+            false,
+            629,
+            629
+          ],
+          [
+            212,
+            2.333344,
+            2.0,
+            false,
+            510,
+            510
+          ],
+          [
+            213,
+            2.333344,
+            2.5,
+            false,
+            532,
+            532
+          ],
+          [
+            214,
+            2.333344,
+            2.5,
+            false,
+            512,
+            512
+          ],
+          [
+            215,
+            2.333344,
+            2.0,
+            false,
+            453,
+            453
+          ],
+          [
+            216,
+            2.333344,
+            2.5,
+            false,
+            512,
+            512
+          ],
+          [
+            217,
+            2.333344,
+            2.5,
+            false,
+            543,
+            543
+          ],
+          [
+            218,
+            2.333344,
+            2.0,
+            false,
+            544,
+            544
+          ],
+          [
+            219,
+            2.333344,
+            2.5,
+            false,
+            587,
+            587
+          ],
+          [
+            220,
+            0.0,
+            0.0,
+            false,
+            62,
+            62
+          ],
+          [
+            221,
+            0.0,
+            0.0,
+            false,
+            104,
+            104
+          ],
+          [
+            222,
+            0.0,
+            0.0,
+            false,
+            95,
+            95
+          ],
+          [
+            223,
+            0.0,
+            0.0,
+            false,
+            77,
+            77
+          ],
+          [
+            224,
+            0.0,
+            0.0,
+            false,
+            285,
+            285
+          ],
+          [
+            225,
+            0.0,
+            0.0,
+            false,
+            142,
+            142
+          ],
+          [
+            226,
+            0.0,
+            0.0,
+            false,
+            152,
+            152
+          ],
+          [
+            227,
+            0.0,
+            0.0,
+            false,
+            65,
+            65
+          ],
+          [
+            228,
+            0.0,
+            0.0,
+            false,
+            242,
+            242
+          ],
+          [
+            229,
+            0.0,
+            0.0,
+            false,
+            47,
+            47
+          ],
+          [
+            230,
+            0.0,
+            0.0,
+            false,
+            48,
+            48
+          ],
+          [
+            231,
+            0.0,
+            0.0,
+            false,
+            47,
+            47
+          ],
+          [
+            232,
+            0.0,
+            0.0,
+            true,
+            0,
+            0
+          ],
+          [
+            233,
+            0.0,
+            0.0,
+            true,
+            0,
+            0
+          ],
+          [
+            234,
+            0.0,
+            0.0,
+            true,
+            0,
+            0
+          ],
+          [
+            235,
+            0.0,
+            0.0,
+            true,
+            0,
+            0
+          ],
+          [
+            236,
+            0.0,
+            0.0,
+            true,
+            0,
+            0
+          ],
+          [
+            237,
+            0.0,
+            0.0,
+            true,
+            0,
+            0
+          ]
+        ]
+      },
+      "unchangedSourcePairs": 27,
+      "onScreenSpriteTexelDiagnostic": {
+        "framesCompared": 170,
+        "unambiguousTexelsMatched": 32746,
+        "unambiguousTexelsCompared": 33252,
+        "scope": "Not a gate. Remaining pixels are covered by scene overlays (y-sorted NPC/props, name labels, interaction markers)."
+      },
+      "critical": [
+        {
+          "purpose": "contact",
+          "tick": 69,
+          "segment": "start-run",
+          "mode": "run",
+          "q": 0.0,
+          "file": "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run_critical-annex-room2-dark-zh-contact-640_v03_20261018-194932-3a1839f6.png",
+          "sha256": "85fbcded456d4f32703e3bff172c96d83972531f31980076bc30f5e17c18b7dc",
+          "sourceRgbaSha256": "855c043f52c425e013079f41ed0dc589d6081619c28c2bc1399e6a1a8262ff61"
+        },
+        {
+          "purpose": "passing",
+          "tick": 46,
+          "segment": "start-run",
+          "mode": "run",
+          "q": 20.0,
+          "file": "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run_critical-annex-room2-dark-zh-passing-640_v03_20261018-194932-3a1839f6.png",
+          "sha256": "836fc529426cd2bc65968d0cd81a0b0e8ae9e18c59b54e5c3516b6997d1967ef",
+          "sourceRgbaSha256": "e98f033fcdf3509a9129f63a170402da716f0b4e4b30f102a1843d0bf61f4335"
+        },
+        {
+          "purpose": "flight",
+          "tick": 80,
+          "segment": "start-run",
+          "mode": "run",
+          "q": 51.0,
+          "file": "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run_critical-annex-room2-dark-zh-flight-640_v03_20261018-194932-3a1839f6.png",
+          "sha256": "27b2f208db134397b03389f93ed35fe501f918b1814f641a3d5e33a192f674a8",
+          "sourceRgbaSha256": "a02654f75062edb097bc2e450e2a4f0cc5fc2f9b495f80ed86dfe88bc3ddf54b"
+        },
+        {
+          "purpose": "release-first",
+          "tick": 84,
+          "segment": "release",
+          "mode": "stop",
+          "q": 65.0,
+          "file": "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run_critical-annex-room2-dark-zh-release-first-640_v03_20261018-194932-3a1839f6.png",
+          "sha256": "3f8564415789d0cbd3d631be3135db32762b5c497702bc2f3c333cf62ed06dd0",
+          "sourceRgbaSha256": "8f4cf0fa933f7a7e0c94cd10719c255ea00e942687da13a64f536ae14c8934fc"
+        },
+        {
+          "purpose": "repress-first",
+          "tick": 129,
+          "segment": "repress",
+          "mode": "run",
+          "q": 55.0,
+          "file": "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run_critical-annex-room2-dark-zh-repress-first-640_v03_20261018-194932-3a1839f6.png",
+          "sha256": "46274c22cedfd3cdd302854f57ec9296efb35be142afe41ae78f5d00cd485099",
+          "sourceRgbaSha256": "96d1bfa76e8d0b2bbfbb3191ef42df004253b2b65b1205a99d68347ad2d53f79"
+        },
+        {
+          "purpose": "settle-before-idle",
+          "tick": 232,
+          "segment": "final-stop",
+          "mode": "stop",
+          "q": 39.0,
+          "file": "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run_critical-annex-room2-dark-zh-settle-before-idle-640_v03_20261018-194932-3a1839f6.png",
+          "sha256": "ad3c731457413457b958007de2aa0b67965af157c451fb2afac8a8e828312e17",
+          "sourceRgbaSha256": "366bb7b3dbe4dc5872cba93fbeac6c9de1645d6d2c64191b6e84a1f986d7d413"
+        },
+        {
+          "purpose": "final-static",
+          "tick": 237,
+          "segment": "final-stop",
+          "mode": "idle",
+          "q": 39.0,
+          "file": "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run_critical-annex-room2-dark-zh-final-static-640_v03_20261018-194932-3a1839f6.png",
+          "sha256": "ad3c731457413457b958007de2aa0b67965af157c451fb2afac8a8e828312e17",
+          "sourceRgbaSha256": "366bb7b3dbe4dc5872cba93fbeac6c9de1645d6d2c64191b6e84a1f986d7d413"
+        }
+      ],
+      "rawFramesTempOnly": "C:\\Users\\hkzha\\AppData\\Local\\Temp\\fe3\\cap60"
+    }
+  ],
+  "v02RendererComparison": {
+    "identicalRunCels": 9,
+    "changedRunCels": 119,
+    "changedTexelsMin": 1,
+    "changedTexelsMax": 77,
+    "cause": "v03 rounds/guards the torso y; render_pose places the near-arm shoulder at the continuous body, so the arm pivot is now integer-aligned. Representative q000/q019/q051 and the q060 stop sequence are byte-identical to v02."
+  },
+  "preservedEarlierEvidence": {
+    "outputs/female-east-run-v01/rpg-2-star-ocean-the-second_female-east-run_prototype-evidence-manifest_v01_20261018-184444-8aa2a7e3.json": "6b36e255733a9afc3e92f9425fcd69c941936f91521728611df40edc8187c953",
+    "outputs/female-east-run-v02/rpg-2-star-ocean-the-second_female-east-run_native-poses-report_v02_20261018-190542-52b0e405.json": "27079a8da57bc9ad67f7437619d42283060ba1ac95c3b5562ca805e38c9d406e",
+    "outputs/female-east-run-v02/rpg-2-star-ocean-the-second_female-east-run_normal1x-annex-room2-dark-zh-60fps_v02_20261018-190542-52b0e405.mp4": "8048d169b64ba5311ff3cedb27da721e963fcd9eee57331085bc593fbaf50534"
+  },
+  "protectedGameSourcesHead": {
+    "game/scripts/app_state.gd": "60f3622f1dfcaa554861391b552442636a7870c7d250de4c4122da9245c4f2ee",
+    "game/scripts/scifi_exploration_area.gd": "6fe049f1778016ebfda1af330becf1012b4f6ed2b7e8a87353fed1544bee0b60",
+    "game/scripts/survey_annex.gd": "521f5335e01723267c1a5bcc4d1720f7394b5ab1bb72742e7bdac309d0ad8078",
+    "game/project.godot": "dd3208a25b8339cd87bf48262607df76ccba2cec30af4d051763f997ec15e714",
+    "game/scenes/scifi_exploration_area.tscn": "b60cf71490b5aacb0163c3336cefefac7b7ed16de6940924f875d23499a5cdc7",
+    "game/scenes/survey_annex.tscn": "d8848f4bba333771f5b65cabfeeb652f0ea33db922e80ab1f5daeb269ab98779"
+  },
+  "checks": {
+    "model_locked_before": {
+      "pass": true,
+      "detail": null
+    },
+    "native_report_all_gates": {
+      "pass": true,
+      "detail": [
+        731,
+        731
+      ]
+    },
+    "native_report_binds_manifest": {
+      "pass": true,
+      "detail": null
+    },
+    "native_model_bound": {
+      "pass": true,
+      "detail": null
+    },
+    "transition_all_pass": {
+      "pass": true,
+      "detail": [
+        25381,
+        0
+      ]
+    },
+    "transition_model_bound": {
+      "pass": true,
+      "detail": null
+    },
+    "root_body_report_valid": {
+      "pass": true,
+      "detail": [
+        15744,
+        0
+      ]
+    },
+    "root_body_checker_bytes_match_report": {
+      "pass": true,
+      "detail": "0b110a628a84e0a53674db73e8f5b0ea7b92bcb05c6030aa59f753be0afaa4f3"
+    },
+    "city-bright-30:internal_checks": {
+      "pass": true,
+      "detail": [
+        480,
+        0
+      ]
+    },
+    "city-bright-30:model_bound": {
+      "pass": true,
+      "detail": null
+    },
+    "city-bright-30:fps_language_frames": {
+      "pass": true,
+      "detail": null
+    },
+    "city-bright-30:capture_png_hashes": {
+      "pass": true,
+      "detail": null
+    },
+    "city-bright-30:steady_equals_native_cel": {
+      "pass": true,
+      "detail": {
+        "steady": 68,
+        "torsoEqual": 68,
+        "guardHeld": 0
+      }
+    },
+    "city-bright-30:idle_equals_east_static": {
+      "pass": true,
+      "detail": 15
+    },
+    "city-bright-30:reversal_is_west_static_placeholder": {
+      "pass": true,
+      "detail": 6
+    },
+    "city-bright-30:final_frame_exact_static": {
+      "pass": true,
+      "detail": null
+    },
+    "city-bright-30:sprite_at_source_renderx": {
+      "pass": true,
+      "detail": null
+    },
+    "city-bright-30:unchanged_source_unchanged_sprite_window": {
+      "pass": true,
+      "detail": {
+        "pairs": 12,
+        "changedPixels": 0
+      }
+    },
+    "city-bright-30:movie_normal1x": {
+      "pass": true,
+      "detail": {
+        "codec_name": "h264",
+        "width": 640,
+        "height": 360,
+        "pix_fmt": "yuv420p",
+        "r_frame_rate": "30/1",
+        "nb_read_frames": "120"
+      }
+    },
+    "city-bright-30:log_clean": {
+      "pass": true,
+      "detail": null
+    },
+    "annex-room2-dark-60:internal_checks": {
+      "pass": true,
+      "detail": [
+        952,
+        0
+      ]
+    },
+    "annex-room2-dark-60:model_bound": {
+      "pass": true,
+      "detail": null
+    },
+    "annex-room2-dark-60:fps_language_frames": {
+      "pass": true,
+      "detail": null
+    },
+    "annex-room2-dark-60:capture_png_hashes": {
+      "pass": true,
+      "detail": null
+    },
+    "annex-room2-dark-60:steady_equals_native_cel": {
+      "pass": true,
+      "detail": {
+        "steady": 131,
+        "torsoEqual": 131,
+        "guardHeld": 0
+      }
+    },
+    "annex-room2-dark-60:idle_equals_east_static": {
+      "pass": true,
+      "detail": 27
+    },
+    "annex-room2-dark-60:reversal_is_west_static_placeholder": {
+      "pass": true,
+      "detail": 12
+    },
+    "annex-room2-dark-60:final_frame_exact_static": {
+      "pass": true,
+      "detail": null
+    },
+    "annex-room2-dark-60:sprite_at_source_renderx": {
+      "pass": true,
+      "detail": null
+    },
+    "annex-room2-dark-60:unchanged_source_unchanged_sprite_window": {
+      "pass": true,
+      "detail": {
+        "pairs": 27,
+        "changedPixels": 0
+      }
+    },
+    "annex-room2-dark-60:movie_normal1x": {
+      "pass": true,
+      "detail": {
+        "codec_name": "h264",
+        "width": 640,
+        "height": 360,
+        "pix_fmt": "yuv420p",
+        "r_frame_rate": "60/1",
+        "nb_read_frames": "238"
+      }
+    },
+    "annex-room2-dark-60:log_clean": {
+      "pass": true,
+      "detail": null
+    },
+    "unchanged:game/scripts/app_state.gd": {
+      "pass": true,
+      "detail": null
+    },
+    "unchanged:game/scripts/scifi_exploration_area.gd": {
+      "pass": true,
+      "detail": null
+    },
+    "unchanged:game/scripts/survey_annex.gd": {
+      "pass": true,
+      "detail": null
+    },
+    "unchanged:game/project.godot": {
+      "pass": true,
+      "detail": null
+    },
+    "unchanged:game/scenes/scifi_exploration_area.tscn": {
+      "pass": true,
+      "detail": null
+    },
+    "unchanged:game/scenes/survey_annex.tscn": {
+      "pass": true,
+      "detail": null
+    },
+    "model_locked_after": {
+      "pass": true,
+      "detail": null
+    }
+  },
+  "passed": 39,
+  "total": 39,
+  "failed": [],
+  "files": {
+    "docs/qa/rpg-2-star-ocean-the-second_female-east-run-stop_produced-candidate-unapproved-v03_20261018-194932-3a1839f6.md": {
+      "sha256": "3a387a9758b74b5751792af46e905fd0167e990196607f0df2341f19bbcfb279",
+      "textLf": true,
+      "bytes": 10713
+    },
+    "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run-stop_native-report_v03_20261018-194932-3a1839f6.json": {
+      "sha256": "33d9b6bf394da35e337e6e2e4442a4fc684dd255d6bc386ee234d21a9db08c06",
+      "textLf": true,
+      "bytes": 29072
+    },
+    "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run-stop_native-source-manifest_unapproved-v03_20261018-194932-3a1839f6.json": {
+      "sha256": "d84734460ddefbf733f9e38e80d3cf3e6f66493d9198ee90aa6a0d30aee1bab6",
+      "textLf": true,
+      "bytes": 365202
+    },
+    "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run_actual-log-annex-room2-dark-zh-60fps_v03_20261018-194932-3a1839f6.log": {
+      "sha256": "4ddfe6b16d52226850729cf8dcfe4f152c2a13c3bb524fd95ab12bb22fff1466",
+      "textLf": true,
+      "bytes": 214
+    },
+    "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run_actual-log-city-bright-en-30fps_v03_20261018-194932-3a1839f6.log": {
+      "sha256": "9391720f0814a0b657d7a8335f8bc63b10d34052873de4476d834d475915ed17",
+      "textLf": true,
+      "bytes": 214
+    },
+    "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run_actual-report-annex-room2-dark-zh-60fps_v03_20261018-194932-3a1839f6.json.gz": {
+      "sha256": "1aeabeed64fb781b4f754f6a83a82d8f39e20bc83cf848c82c590098b87887a4",
+      "textLf": false,
+      "bytes": 38217
+    },
+    "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run_actual-report-city-bright-en-30fps_v03_20261018-194932-3a1839f6.json.gz": {
+      "sha256": "24763c9fcfe5ec1af83bf3a6c5a8fbc7991784d5f364c3887681d7fb0f78edcc",
+      "textLf": false,
+      "bytes": 20137
+    },
+    "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run_animated-source_unapproved-v03_20261018-194932-3a1839f6.pxo": {
+      "sha256": "426897d9fd4f8f145d7288f4aafe037f900c25e5c9d89109fac3ce171059ec9b",
+      "textLf": false,
+      "bytes": 930538
+    },
+    "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run_critical-annex-room2-dark-zh-contact-640_v03_20261018-194932-3a1839f6.png": {
+      "sha256": "85fbcded456d4f32703e3bff172c96d83972531f31980076bc30f5e17c18b7dc",
+      "textLf": false,
+      "bytes": 377908
+    },
+    "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run_critical-annex-room2-dark-zh-final-static-640_v03_20261018-194932-3a1839f6.png": {
+      "sha256": "ad3c731457413457b958007de2aa0b67965af157c451fb2afac8a8e828312e17",
+      "textLf": false,
+      "bytes": 377869
+    },
+    "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run_critical-annex-room2-dark-zh-flight-640_v03_20261018-194932-3a1839f6.png": {
+      "sha256": "27b2f208db134397b03389f93ed35fe501f918b1814f641a3d5e33a192f674a8",
+      "textLf": false,
+      "bytes": 377861
+    },
+    "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run_critical-annex-room2-dark-zh-passing-640_v03_20261018-194932-3a1839f6.png": {
+      "sha256": "836fc529426cd2bc65968d0cd81a0b0e8ae9e18c59b54e5c3516b6997d1967ef",
+      "textLf": false,
+      "bytes": 377970
+    },
+    "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run_critical-annex-room2-dark-zh-release-first-640_v03_20261018-194932-3a1839f6.png": {
+      "sha256": "3f8564415789d0cbd3d631be3135db32762b5c497702bc2f3c333cf62ed06dd0",
+      "textLf": false,
+      "bytes": 377859
+    },
+    "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run_critical-annex-room2-dark-zh-repress-first-640_v03_20261018-194932-3a1839f6.png": {
+      "sha256": "46274c22cedfd3cdd302854f57ec9296efb35be142afe41ae78f5d00cd485099",
+      "textLf": false,
+      "bytes": 378020
+    },
+    "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run_critical-annex-room2-dark-zh-settle-before-idle-640_v03_20261018-194932-3a1839f6.png": {
+      "sha256": "ad3c731457413457b958007de2aa0b67965af157c451fb2afac8a8e828312e17",
+      "textLf": false,
+      "bytes": 377869
+    },
+    "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run_critical-city-bright-en-contact-640_v03_20261018-194932-3a1839f6.png": {
+      "sha256": "ff15ee66f450d8cbf08dc916c6604ba2cfd581bc81afea3ef3c1b113a4f833f2",
+      "textLf": false,
+      "bytes": 460402
+    },
+    "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run_critical-city-bright-en-final-static-640_v03_20261018-194932-3a1839f6.png": {
+      "sha256": "660e0e52ba992f1ceeb1d8b8c65f1b7f644cf511d8e07f8ef6dd1e568573977f",
+      "textLf": false,
+      "bytes": 459738
+    },
+    "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run_critical-city-bright-en-flight-640_v03_20261018-194932-3a1839f6.png": {
+      "sha256": "e348ae17cd31cf180b8f5f09648de41050b91ade9ccf83800970c60eccb186db",
+      "textLf": false,
+      "bytes": 460236
+    },
+    "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run_critical-city-bright-en-passing-640_v03_20261018-194932-3a1839f6.png": {
+      "sha256": "1bedf7d732ef1e78272aeea8413eaa7e2321133323c188877e60ea884feb1124",
+      "textLf": false,
+      "bytes": 460078
+    },
+    "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run_critical-city-bright-en-release-first-640_v03_20261018-194932-3a1839f6.png": {
+      "sha256": "520bc136cf98926c58f3ab0b2290ac1bfcee3011feca7855e2f2f1b8b0476248",
+      "textLf": false,
+      "bytes": 460070
+    },
+    "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run_critical-city-bright-en-repress-first-640_v03_20261018-194932-3a1839f6.png": {
+      "sha256": "e1e48934006cb3b51bec1d80f6bb0f6233d9a976f7833bbaf001bb2701b369e9",
+      "textLf": false,
+      "bytes": 460032
+    },
+    "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run_critical-city-bright-en-settle-before-idle-640_v03_20261018-194932-3a1839f6.png": {
+      "sha256": "660e0e52ba992f1ceeb1d8b8c65f1b7f644cf511d8e07f8ef6dd1e568573977f",
+      "textLf": false,
+      "bytes": 459738
+    },
+    "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run_exact-boundary-report_v03_20261018-194932-3a1839f6.json.gz": {
+      "sha256": "6c0ff0ebe53b933a4e4ca1ba219d0a8ea8ede43141117a263b28541fa5cdc6d4",
+      "textLf": false,
+      "bytes": 215347
+    },
+    "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run_native-contact-q000_v03_20261018-194932-3a1839f6.png": {
+      "sha256": "38b019b1463e8be2c1aca248d51c079ec92f02820103fe12785f3a0f913e4cc5",
+      "textLf": false,
+      "bytes": 2720
+    },
+    "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run_native-flight-q051_v03_20261018-194932-3a1839f6.png": {
+      "sha256": "5ac8a0a812dcec0339879d0805a5cb1dba22ccf73cd3f9089e9c295f5592cb2c",
+      "textLf": false,
+      "bytes": 2752
+    },
+    "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run_native-passing-q019_v03_20261018-194932-3a1839f6.png": {
+      "sha256": "375fd96d4faa6417c7abd49aab59e5ba7cb8027fe90cfb967fcdeaea016739e3",
+      "textLf": false,
+      "bytes": 2497
+    },
+    "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run_normal1x-annex-room2-dark-zh-60fps_v03_20261018-194932-3a1839f6.mp4": {
+      "sha256": "82095ea7a8f99a0b9a96faf4346d27d44c7b465ce3e07d7f7522eba8ebf4b260",
+      "textLf": false,
+      "bytes": 218412
+    },
+    "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run_normal1x-city-bright-en-30fps_v03_20261018-194932-3a1839f6.mp4": {
+      "sha256": "36ee9f3542fbf6558faf1efb87fdd85018f12f04a9773b1adf138e907e2b7226",
+      "textLf": false,
+      "bytes": 231667
+    },
+    "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-stop_animated-source_unapproved-v03_20261018-194932-3a1839f6.pxo": {
+      "sha256": "2c06469efc5c40bae14ccf1ccc411d3e79c2490a0fb6a570b577dee918d2be85",
+      "textLf": false,
+      "bytes": 111409
+    },
+    "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-stop_native-final-60fps-f14-q060_v03_20261018-194932-3a1839f6.png": {
+      "sha256": "d4cb949213cec05750271af552635c475b6ba0fd732dbbf3313361728848d2de",
+      "textLf": false,
+      "bytes": 2423
+    },
+    "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-stop_native-lastmoving-60fps-f12-q060_v03_20261018-194932-3a1839f6.png": {
+      "sha256": "cc115ce18e87cf11fdc1034f35ccf274ac7a5d2ff53306b633ad043f1130efff",
+      "textLf": false,
+      "bytes": 2426
+    },
+    "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-stop_native-penultimate-60fps-f13-q060_v03_20261018-194932-3a1839f6.png": {
+      "sha256": "d4cb949213cec05750271af552635c475b6ba0fd732dbbf3313361728848d2de",
+      "textLf": false,
+      "bytes": 2423
+    },
+    "tools/rpg-2-star-ocean-the-second_female-east_run-stop-actual-prototype_test-only-v03_20261018-194932-3a1839f6.gd": {
+      "sha256": "21972dab10921a812f008535b12660110191f57582548c5accc459f16f1bb3d0",
+      "textLf": true,
+      "bytes": 7628
+    },
+    "tools/rpg-2-star-ocean-the-second_female-east_run-stop-evidence-check_v03_20261018-194932-3a1839f6.py": {
+      "sha256": "fde682786869568edd2fafee0e1200edaff2774dcec9edfa567e399f02af6be0",
+      "textLf": true,
+      "bytes": 5681
+    },
+    "tools/rpg-2-star-ocean-the-second_female-east_run-stop-native-bake_test-only-v03_20261018-194932-3a1839f6.gd": {
+      "sha256": "abdec9ea66516ec5c64468eef5b9b8991912fc612457d720fc743b48b3dcd215",
+      "textLf": true,
+      "bytes": 7147
+    },
+    "tools/rpg-2-star-ocean-the-second_female-east_run-stop-native-package_v03_20261018-194932-3a1839f6.py": {
+      "sha256": "20d4d352fd768db42b40210e32053922a7fdc584bf78622eb8af729bff8c50c8",
+      "textLf": true,
+      "bytes": 14993
+    },
+    "tools/rpg-2-star-ocean-the-second_female-east_run-stop-package-evidence_v03_20261018-194932-3a1839f6.py": {
+      "sha256": "12da3b0a7c0fe2daac086b3e21555c1e76f0a502068a8e01a2cd8ea9a6e1c838",
+      "textLf": true,
+      "bytes": 20361
+    },
+    "tools/rpg-2-star-ocean-the-second_female-east_run-stop-transition-check_test-only-v03_20261018-194932-3a1839f6.gd": {
+      "sha256": "bfce919da9dfd8e6eb4e8f7b91221a6c231d8ba4ee002d18cee078f65688079d",
+      "textLf": true,
+      "bytes": 9248
+    }
+  },
+  "limitations": [
+    "WEST input shows the produced WEST static placeholder; no WEST motion or reversal animation is claimed.",
+    "Test-only presenter: no game/default/navigation/registry/Site/ledger change; the game still shows its existing hero.",
+    "Pixelorama CLI reopen/export is exact but every process prints 4 inherited headless shader-compiler diagnostics: not a clean-app result. No GUI Save As/reopen claim for EAST.",
+    "Native PXO cels are the 280 Hz reference states; live 30/60 fps uses the same controller and may hold the torso 1 source px for a frame (0 such steady frames in these two captures).",
+    "Bright 30 fps idle start position is partly covered by scene overlays (inherited lane); one language per scene."
+  ],
+  "integration": {
+    "canonicalBaseRevision": "1eed160cc10cd605c1ed3a405b286b810260068f",
+    "producerBaseRevision": "4b0ff5880b722cad2272928489f65b3b11bf1758",
+    "producerBodyCheckerPath": "../max0840-wdc-ruin/tools/rpg-2-star-ocean-the-second_female-east_rendered-coat-projection-trajectory-check_test-only-v02_20261018-193030-5ce91065.gd",
+    "protectedSourcesSameAsProducer": true,
+    "producerManifestSnapshot": "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east_producer-manifest-snapshot_v03_20261018-201148-753ec083.gz",
+    "frozenProducerEvidence": {
+      "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east_producer-manifest-snapshot_v03_20261018-201148-753ec083.gz": {
+        "sha256": "858beaf47452070fcf654fc820ad384c713d867bf609eade17cc8d39b805c95d",
+        "uncompressedSha256": "483cf115fa360ab080d98bce2d0179b4ead1b9d6db7c087dafc606dc8833fe45",
+        "originalPath": "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east-run-stop_evidence-manifest_v03_20261018-194932-3a1839f6.json"
+      },
+      "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east_producer-checker-snapshot_v03_20261018-201148-753ec083.gz": {
+        "sha256": "88b0176d63b8f44e1d9a17d868c2cc7414809683ac2694084d58147174d359f6",
+        "uncompressedSha256": "b8d9d59e57effacc9cc19640de9a985740e281f672118375fcb0b3213d5b9c52",
+        "originalPath": "tools/rpg-2-star-ocean-the-second_female-east_run-stop-evidence-check_v03_20261018-194932-3a1839f6.py"
+      },
+      "outputs/female-east-run-v03/rpg-2-star-ocean-the-second_female-east_producer-packager-snapshot_v03_20261018-201148-753ec083.gz": {
+        "sha256": "7cd6ed29cc3e959d362cf84d85659526b5fa63aff09522d8f54a6e8200f6e20a",
+        "uncompressedSha256": "92722b4f35c3db765a35a39ad84af2a46d26e37e7b4cbd9aab35ee24add1d7b1",
+        "originalPath": "tools/rpg-2-star-ocean-the-second_female-east_run-stop-package-evidence_v03_20261018-194932-3a1839f6.py"
+      }
+    },
+    "changeScope": "Canonical reachable baseline with identical protected source hashes; repository-local body checker; explicit git errors; original producer manifest/helpers preserved losslessly. No model, art, capture, timing, gate or threshold changes."
+  }
+}
