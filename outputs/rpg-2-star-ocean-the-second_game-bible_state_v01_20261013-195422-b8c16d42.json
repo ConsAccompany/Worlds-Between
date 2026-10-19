@@ -4298,6 +4298,18 @@
         "zh": "东向跑动与停步已制作；独立技术证据通过；美术和流畅度未验收。",
         "en": "EAST run/stop produced with independent technical evidence; art and perceived fluidity unapproved."
       }
+    },
+    "latestBattleStaticReview": {
+      "version": "v16",
+      "creatorApproved": false,
+      "runtimeIntegrated": false,
+      "animationApproved": false,
+      "rootVerdict": "ready-for-scoped-static-review-with-limitations",
+      "qa": "docs/qa/rpg-2-star-ocean-the-second_female-battle-static_current-main-root-review_unapproved-v16_20261018-215100-b7bb8e10.md",
+      "nativeSource": "outputs/battle-static-v16/rpg-2-star-ocean-the-second_female-battle-idle-right_editable-layers_unapproved-v16_20261018-212808-42bf565b.pxo",
+      "currentMainCapture": "outputs/v16-current-outskirts-20261018-214458-ba09fb88/rpg-2-star-ocean-the-second_battle-static-current-main-en-injected_test-only-v01_20261018-214458-ba09fb88.png",
+      "currentMainSource": "6e3d4e48bc80bbb9a86c67cb573fcdd0c3849f6a",
+      "productionPointsForVersion": 0
     }
   },
   "environmentVisualReview": {
@@ -4787,16 +4799,17 @@
         }
       ],
       "currentCandidates": {
-        "asOf": "2026-10-18T22:14:33.285056+00:00",
-        "zh": "十三项已提交候选，当前版本优先；旧版本保留在折叠历史区。新增四方向待机循环的明/暗正常1×录屏，扬克斯v07取代v06；这些画面仍未批准。南向v8只批准这一张静态帧与48逻辑像素比例。制作完成度、已执行检查与用户批准独立记录；候选不增加已验收场景3/12、完整精灵0/52或试玩0/2。",
-        "en": "Thirteen committed current candidates, with replaced versions retained in collapsed history. New bright/dark normal1x four-direction idle recordings; Yonkersv07 replacesv06. These candidates remain unapproved. Southv8 approval covers its static frame and48logical-pixel scale only. Production, performed inspection and creator approval are tracked separately; candidates add no accepted scenes(3/12), fullsprites(0/52) or humanplays(0/2).",
+        "asOf": "2026-10-19T01:50:03.339069+00:00",
+        "zh": "十三项已提交候选，旧版本在折叠历史区。战斗女主v16取代v14：仅为静止帧参考展示，尚未批准；另有当前main实际截图。其他候选、动作与验收数不变。制作、检查和创作者批准独立记录。",
+        "en": "Thirteen committed candidates with older versions in collapsed history. Battle heroinev16 replacesv14 as a static reference presentation, still unapproved, with additional current-main gameplay checks. Other candidates, motion and acceptance counters are unchanged. Production, inspection and creator approval are separate.",
         "scopedReferenceOrders": [
           1
         ],
         "historyCollapsed": true,
         "evidence": [
           "outputs/rpg-2-star-ocean-the-second_mvp-completion-ledger_yonkers-v03-battle-v12-map-v03r2-closeout-evidence-index_v01_20261017-231612-47a0716c.json",
-          "docs/qa/rpg-2-star-ocean-the-second_game-bible_three-candidate-closeouts-and-review-queue-stale-text-correction_qa-note_unapproved-v01_20261017-231612-098ce0ff.md"
+          "docs/qa/rpg-2-star-ocean-the-second_game-bible_three-candidate-closeouts-and-review-queue-stale-text-correction_qa-note_unapproved-v01_20261017-231612-098ce0ff.md",
+          "docs/qa/rpg-2-star-ocean-the-second_female-battle-static_current-main-root-review_unapproved-v16_20261018-215100-b7bb8e10.md"
         ],
         "items": [
           {
@@ -4876,22 +4889,22 @@
             "kind": "actual-godot-capture",
             "creatorApproved": false,
             "artAccepted": false,
-            "id": "current-battle-heroine-static-v14",
+            "id": "current-battle-heroine-static-v16",
             "rank": 3,
             "label": {
-              "zh": "战斗女主 朝右待机静止帧 v14 · 档案馆探针（中文）",
-              "en": "Battle heroine, right idle static v14, archive probe (zh)"
+              "zh": "战斗女主朝右静止帧v16 · 档案馆参考实机（英文，女主最右）",
+              "en": "Battle heroine right static v16, archive reference gameplay (en, heroine far right)"
             },
-            "file": "outputs/rpg-2-star-ocean-the-second_protagonist-female_sideview-idle-right-static-native0p65_party-capture-archive-640-probe-zh_unapproved-v14_20261018-084553-5a0ec9d0.png",
+            "file": "outputs/battle-static-v16/rpg-2-star-ocean-the-second_female-battle-idle-right_cap-ref160b823-archive-640-en_unapproved-v16_20261018-212808-018e4300.png",
             "runtimeIntegrated": false,
             "technicalCandidate": true,
             "approvedScopeOnly": "0.65 battle display proportion",
             "scope": {
-              "zh": "仅为测试用静止帧，未接入运行时；root 仅接受为技术静止候选；只有 0.65 比例已批准；不是完整角色精灵，没有动画；精灵仍为 0/52。",
-              "en": "Test-only static frame, nonruntime; root accepted it as a technical static candidate only; only the 0.65 proportion is approved; not a complete character sprite, no animation; sprites stay 0/52."
+              "zh": "仅审单张战斗静止帧美术。图为冻结160b823场景的真实Godot参考展示，保留原阴影及队列位置；不是当前默认场景。另有当前main中英实机检查，见来源。0.65比例已烘焙进68×72像素，不二次缩小；动作、整套精灵未验收。",
+              "en": "Single battle still art only. Actual Godot reference presentation from frozen160b823, with its original shadow and party layout; not the current default. Separate current-main bilingual game checks are linked in the QA source. The0.65 proportion is baked into68x72 pixels, not scaled twice. No motion or complete-sprite approval."
             },
             "supersedesCurrentIds": [
-              "current-battle-heroine-static-v13"
+              "current-battle-heroine-static-v14"
             ],
             "badge": {
               "zh": "未批准 · 技术静止候选 · 未接入运行时（美术未验收）",
@@ -4899,14 +4912,14 @@
               "tone": "warn"
             },
             "caption": {
-              "zh": "衣料更饱满，细靴与膝间更自然；但暗地面上外套与双脚仍融在一起，背部细节偏碎。未批准，不计入美术验收；制作进度另行记录。",
-              "en": "Fuller cloth and more natural slim boots and knee gap, but on the dark floor the coat and feet still blend and the back details are busy. Unapproved; not counted as art acceptance; production is tracked separately."
+              "zh": "水壶辨识恢复，背包更整洁，靴子重画为有体积的材质面。旧郊区参考阴影中鞋底仍偏暗；当前main没有那层额外阴影，另行实机可读。21可见层及PXO/ORA精确重建已验证，但应用诊断与GUI保存重开仍有限制。Codex认为可作限定静态审阅；尚未获用户批准。",
+              "en": "Canister restored, calmer pack and boots redrawn as material volumes. Soles remain dark inside the old outskirts reference shadow; current main lacks that added overlay and reads separately.21visible layers and PXO/ORA exact rebuild verified; application diagnostics/GUI save-reopen limits remain. Codex finds it ready for scoped static review; creator approval pending."
             },
-            "qa": "docs/qa/rpg-2-star-ocean-the-second_protagonist-female_battle-static-v14-cloth-volume-leg-anatomy_qa-note_unapproved-v01_20261018-084553-dda2c05f.md",
-            "closeoutId": "closeout-20261018-134000-e7fe3594",
-            "syncState": "committed-at-8e57dd3",
-            "gitBlob": "b17662797da7b836408ebdf9f2f50444e5b533bd",
-            "sha256": "775803bfb013097db6450605548018f7e56c8bcc601f17849ff993518f92b414"
+            "qa": "docs/qa/rpg-2-star-ocean-the-second_female-battle-static_current-main-root-review_unapproved-v16_20261018-215100-b7bb8e10.md",
+            "closeoutId": "root-review-v16-20261018-215100-b7bb8e10",
+            "syncState": "committed-at-b8cd5f1",
+            "gitBlob": "15b6c777215d91afd1b64aa423e04b6331dde453",
+            "sha256": "413b2f710a404e75088c4a177e58df53f673eaf4b90feff1ff97a44a245e9994"
           },
           {
             "kind": "actual-godot-capture",
@@ -5739,6 +5752,43 @@
             "sha256": "86bc64f039de1abcd18656d8ff60b8286e60fb2e0c5b97b2c3658b6f294d05a0",
             "supersededBy": "current-yonkers-antenna-room1-v07",
             "supersededAt": "2026-10-18"
+          },
+          {
+            "kind": "actual-godot-capture",
+            "creatorApproved": false,
+            "artAccepted": false,
+            "id": "current-battle-heroine-static-v14",
+            "rank": 3,
+            "label": {
+              "zh": "战斗女主 朝右待机静止帧 v14 · 档案馆探针（中文）",
+              "en": "Battle heroine, right idle static v14, archive probe (zh)"
+            },
+            "file": "outputs/rpg-2-star-ocean-the-second_protagonist-female_sideview-idle-right-static-native0p65_party-capture-archive-640-probe-zh_unapproved-v14_20261018-084553-5a0ec9d0.png",
+            "runtimeIntegrated": false,
+            "technicalCandidate": true,
+            "approvedScopeOnly": "0.65 battle display proportion",
+            "scope": {
+              "zh": "仅为测试用静止帧，未接入运行时；root 仅接受为技术静止候选；只有 0.65 比例已批准；不是完整角色精灵，没有动画；精灵仍为 0/52。",
+              "en": "Test-only static frame, nonruntime; root accepted it as a technical static candidate only; only the 0.65 proportion is approved; not a complete character sprite, no animation; sprites stay 0/52."
+            },
+            "supersedesCurrentIds": [
+              "current-battle-heroine-static-v13"
+            ],
+            "badge": {
+              "zh": "未批准 · 技术静止候选 · 未接入运行时（美术未验收）",
+              "en": "Unapproved · technical static candidate · nonruntime (art not accepted)",
+              "tone": "warn"
+            },
+            "caption": {
+              "zh": "衣料更饱满，细靴与膝间更自然；但暗地面上外套与双脚仍融在一起，背部细节偏碎。未批准，不计入美术验收；制作进度另行记录。",
+              "en": "Fuller cloth and more natural slim boots and knee gap, but on the dark floor the coat and feet still blend and the back details are busy. Unapproved; not counted as art acceptance; production is tracked separately."
+            },
+            "qa": "docs/qa/rpg-2-star-ocean-the-second_protagonist-female_battle-static-v14-cloth-volume-leg-anatomy_qa-note_unapproved-v01_20261018-084553-dda2c05f.md",
+            "closeoutId": "closeout-20261018-134000-e7fe3594",
+            "syncState": "committed-at-8e57dd3",
+            "gitBlob": "b17662797da7b836408ebdf9f2f50444e5b533bd",
+            "sha256": "775803bfb013097db6450605548018f7e56c8bcc601f17849ff993518f92b414",
+            "supersededBy": "current-battle-heroine-static-v16"
           }
         ],
         "syncStateRule": "committed-at-<7-hex> names the commit that first added the exact file; gitBlob is that file at that commit and sha256 is its bytes."
