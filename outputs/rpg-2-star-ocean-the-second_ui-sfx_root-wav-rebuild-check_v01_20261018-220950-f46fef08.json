@@ -1,0 +1,352 @@
+{
+  "builder": "rpg-2-star-ocean-the-second_ui-sfx_wav-source-builder_v01_20261018-215528-960dcf71.py",
+  "builderSha256TextLfV1": "c4214a5c3ee586338e5363a47a266189fbf7516aa70487222e9d92373966f83e",
+  "assets": {
+    "ui.confirm": {
+      "file": "rpg-2-star-ocean-the-second_ui-confirm_interface-sfx_v01_20261018-215528-fd2f02df.wav",
+      "sha256-bytes": "329cf03a0581318e0c693674486c1ef8fa126de899a8916df1654e90f7c5e64d",
+      "bytes": 7982
+    },
+    "ui.cancel": {
+      "file": "rpg-2-star-ocean-the-second_ui-cancel_interface-sfx_v01_20261018-215528-b6b84df7.wav",
+      "sha256-bytes": "aac80c0c2516f7052e812a11e2e32362b95fa208b7e62109d1f0efca75117637",
+      "bytes": 10628
+    },
+    "ui.notice": {
+      "file": "rpg-2-star-ocean-the-second_ui-notice_interface-sfx_v01_20261018-215528-09a0a294.wav",
+      "sha256-bytes": "e25466d79530edd78fcb90151f6bbd129f6a9939366d145ab85990d298dd1ff7",
+      "bytes": 26504
+    }
+  },
+  "signal": {
+    "ui.confirm": {
+      "fmt": {
+        "format": 1,
+        "channels": 1,
+        "rate": 44100,
+        "byteRate": 88200,
+        "blockAlign": 2,
+        "bits": 16
+      },
+      "frames": 3969,
+      "durationMs": 90.0,
+      "peakDbfs": -14.0,
+      "maxAbsSample": 6538,
+      "clippedSamples": 0,
+      "dcFs": -0.0001862,
+      "firstSample": 0,
+      "lastSample": 0,
+      "edgeMaxAbsFs": 0.007111,
+      "maxStepFs": 0.059906,
+      "loudest30msRmsDbfs": -23.217,
+      "centroidHz": 1414.8,
+      "dataChunkSha256": "0a7fe2738ceb9c9f99178adeae2b6fe5bcedaa25080196d517f9e2a34260457e"
+    },
+    "ui.cancel": {
+      "fmt": {
+        "format": 1,
+        "channels": 1,
+        "rate": 44100,
+        "byteRate": 88200,
+        "blockAlign": 2,
+        "bits": 16
+      },
+      "frames": 5292,
+      "durationMs": 120.0,
+      "peakDbfs": -14.0,
+      "maxAbsSample": 6538,
+      "clippedSamples": 0,
+      "dcFs": -7.32e-06,
+      "firstSample": 0,
+      "lastSample": 0,
+      "edgeMaxAbsFs": 0.001526,
+      "maxStepFs": 0.021332,
+      "loudest30msRmsDbfs": -22.038,
+      "centroidHz": 912.0,
+      "dataChunkSha256": "901cb2fac6de78a3a2c83831410806c5d2381c67941e69cca1f8ff49dd8ebbbc"
+    },
+    "ui.notice": {
+      "fmt": {
+        "format": 1,
+        "channels": 1,
+        "rate": 44100,
+        "byteRate": 88200,
+        "blockAlign": 2,
+        "bits": 16
+      },
+      "frames": 13230,
+      "durationMs": 300.0,
+      "peakDbfs": -14.0,
+      "maxAbsSample": 6538,
+      "clippedSamples": 0,
+      "dcFs": -2.65e-06,
+      "firstSample": 0,
+      "lastSample": 0,
+      "edgeMaxAbsFs": 0.000641,
+      "maxStepFs": 0.029907,
+      "loudest30msRmsDbfs": -20.53,
+      "centroidHz": 1390.8,
+      "dataChunkSha256": "0c3883e8e07929b947be6f73c005d58e21f3b979b6e3a273a777bd2b369619b2"
+    }
+  },
+  "checks": [
+    {
+      "check": "ui.confirm rebuild is deterministic (two rebuilds byte-equal)",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "ui.confirm delivered WAV bytes equal rebuild",
+      "passed": true,
+      "detail": "329cf03a0581318e0c693674486c1ef8fa126de899a8916df1654e90f7c5e64d"
+    },
+    {
+      "check": "ui.cancel rebuild is deterministic (two rebuilds byte-equal)",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "ui.cancel delivered WAV bytes equal rebuild",
+      "passed": true,
+      "detail": "aac80c0c2516f7052e812a11e2e32362b95fa208b7e62109d1f0efca75117637"
+    },
+    {
+      "check": "ui.notice rebuild is deterministic (two rebuilds byte-equal)",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "ui.notice delivered WAV bytes equal rebuild",
+      "passed": true,
+      "detail": "e25466d79530edd78fcb90151f6bbd129f6a9939366d145ab85990d298dd1ff7"
+    },
+    {
+      "check": "ui.confirm PCM 16-bit mono 44.1 kHz",
+      "passed": true,
+      "detail": {
+        "format": 1,
+        "channels": 1,
+        "rate": 44100,
+        "byteRate": 88200,
+        "blockAlign": 2,
+        "bits": 16
+      }
+    },
+    {
+      "check": "ui.confirm frames match authored duration",
+      "passed": true,
+      "detail": 3969
+    },
+    {
+      "check": "ui.confirm short enough for menus (<= 320 ms)",
+      "passed": true,
+      "detail": 90.0
+    },
+    {
+      "check": "ui.confirm peak within -16..-12 dBFS",
+      "passed": true,
+      "detail": -14.0
+    },
+    {
+      "check": "ui.confirm no clipped samples",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "ui.confirm near-zero DC (|mean| < 0.001 FS)",
+      "passed": true,
+      "detail": -0.00018619644038170825
+    },
+    {
+      "check": "ui.confirm zero first/last sample",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "ui.confirm smooth edges (first/last 16 samples < 0.01 FS)",
+      "passed": true,
+      "detail": 0.007111
+    },
+    {
+      "check": "ui.confirm no sample-step discontinuity (< 0.1 FS)",
+      "passed": true,
+      "detail": 0.059906
+    },
+    {
+      "check": "ui.confirm not silence (loudest 30 ms RMS > -40 dBFS)",
+      "passed": true,
+      "detail": -23.217
+    },
+    {
+      "check": "ui.cancel PCM 16-bit mono 44.1 kHz",
+      "passed": true,
+      "detail": {
+        "format": 1,
+        "channels": 1,
+        "rate": 44100,
+        "byteRate": 88200,
+        "blockAlign": 2,
+        "bits": 16
+      }
+    },
+    {
+      "check": "ui.cancel frames match authored duration",
+      "passed": true,
+      "detail": 5292
+    },
+    {
+      "check": "ui.cancel short enough for menus (<= 320 ms)",
+      "passed": true,
+      "detail": 120.0
+    },
+    {
+      "check": "ui.cancel peak within -16..-12 dBFS",
+      "passed": true,
+      "detail": -14.0
+    },
+    {
+      "check": "ui.cancel no clipped samples",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "ui.cancel near-zero DC (|mean| < 0.001 FS)",
+      "passed": true,
+      "detail": -7.317990672831632e-06
+    },
+    {
+      "check": "ui.cancel zero first/last sample",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "ui.cancel smooth edges (first/last 16 samples < 0.01 FS)",
+      "passed": true,
+      "detail": 0.001526
+    },
+    {
+      "check": "ui.cancel no sample-step discontinuity (< 0.1 FS)",
+      "passed": true,
+      "detail": 0.021332
+    },
+    {
+      "check": "ui.cancel not silence (loudest 30 ms RMS > -40 dBFS)",
+      "passed": true,
+      "detail": -22.038
+    },
+    {
+      "check": "ui.notice PCM 16-bit mono 44.1 kHz",
+      "passed": true,
+      "detail": {
+        "format": 1,
+        "channels": 1,
+        "rate": 44100,
+        "byteRate": 88200,
+        "blockAlign": 2,
+        "bits": 16
+      }
+    },
+    {
+      "check": "ui.notice frames match authored duration",
+      "passed": true,
+      "detail": 13230
+    },
+    {
+      "check": "ui.notice short enough for menus (<= 320 ms)",
+      "passed": true,
+      "detail": 300.0
+    },
+    {
+      "check": "ui.notice peak within -16..-12 dBFS",
+      "passed": true,
+      "detail": -14.0
+    },
+    {
+      "check": "ui.notice no clipped samples",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "ui.notice near-zero DC (|mean| < 0.001 FS)",
+      "passed": true,
+      "detail": -2.650392839427438e-06
+    },
+    {
+      "check": "ui.notice zero first/last sample",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "ui.notice smooth edges (first/last 16 samples < 0.01 FS)",
+      "passed": true,
+      "detail": 0.000641
+    },
+    {
+      "check": "ui.notice no sample-step discontinuity (< 0.1 FS)",
+      "passed": true,
+      "detail": 0.029907
+    },
+    {
+      "check": "ui.notice not silence (loudest 30 ms RMS > -40 dBFS)",
+      "passed": true,
+      "detail": -20.53
+    },
+    {
+      "check": "levels consistent (loudest 30 ms RMS spread <= 4 dB)",
+      "passed": true,
+      "detail": 2.687
+    },
+    {
+      "check": "distinct waveforms ui.confirm vs ui.cancel (max xcorr < 0.5)",
+      "passed": true,
+      "detail": 0.0742
+    },
+    {
+      "check": "distinct hashes ui.confirm vs ui.cancel",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "distinct waveforms ui.confirm vs ui.notice (max xcorr < 0.5)",
+      "passed": true,
+      "detail": 0.0795
+    },
+    {
+      "check": "distinct hashes ui.confirm vs ui.notice",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "distinct waveforms ui.cancel vs ui.notice (max xcorr < 0.5)",
+      "passed": true,
+      "detail": 0.0617
+    },
+    {
+      "check": "distinct hashes ui.cancel vs ui.notice",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "distinct durations/envelopes",
+      "passed": true,
+      "detail": [
+        90.0,
+        120.0,
+        300.0
+      ]
+    },
+    {
+      "check": "cancel is darker than confirm (centroid)",
+      "passed": true,
+      "detail": {
+        "ui.confirm": 1414.8,
+        "ui.cancel": 912.0,
+        "ui.notice": 1390.8
+      }
+    }
+  ],
+  "passed": 45,
+  "total": 45,
+  "auditioned": false,
+  "audioArtApproved": false
+}

@@ -2,7 +2,7 @@
   "id": "rpg-2-star-ocean-the-second_production-completion_v01",
   "schemaVersion": 2,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-19T02:01:02Z",
+  "updatedAt": "2026-10-19T02:14:46Z",
   "zh": "制作完成度任务台账：衡量已完成的工作量（编码 40% + 内容 60%）；检查／审查与创作者批准分开计量，均不改变制作分；免除的审查不算已执行的工作；运营任务列出负责方但不计百分比。",
   "en": "Production-completion task ledger: measures work done (coding 40% + content 60%); inspection/review and creator approval are separate meters and never change production credit; waived reviews are not performed work; operations tasks list owners but carry no percentage.",
   "brief": "docs/rpg-2-star-ocean-the-second_production-completion_bilingual-brief_v01_20261018-140533-3ea2a621.md",
@@ -429,8 +429,8 @@
     "production": {
       "zh": "制作完成度",
       "en": "Production completion",
-      "percent": 51.3,
-      "percentLabel": "51.3%",
+      "percent": 51.4,
+      "percentLabel": "51.4%",
       "formula": "round1(40 * codingDonePoints/codingTotalPoints + 60 * contentDonePoints/contentTotalPoints)",
       "coding": {
         "done": 111,
@@ -441,12 +441,12 @@
         "tasksDone": 23
       },
       "content": {
-        "done": 354,
+        "done": 356,
         "total": 1879,
-        "percent": 18.8,
+        "percent": 18.9,
         "weight": 60,
         "tasks": 714,
-        "tasksDone": 115
+        "tasksDone": 116
       }
     },
     "inspection": {
@@ -511,11 +511,11 @@
         "waivedPoints": 0
       },
       "content": {
-        "done": 354,
+        "done": 356,
         "total": 1879,
-        "percent": 18.8,
+        "percent": 18.9,
         "tasks": 714,
-        "tasksDone": 115,
+        "tasksDone": 116,
         "waivedTasks": 0,
         "waivedPoints": 0
       },
@@ -570,11 +570,11 @@
         "tasks": 743,
         "operationsTasks": 0,
         "points": 1950,
-        "pointsDone": 362,
+        "pointsDone": 364,
         "byStatus": {
-          "done": 83,
+          "done": 84,
           "todo": 657,
-          "in_progress": 3
+          "in_progress": 2
         },
         "readyInQueue": 0,
         "revisionsBlockingApproval": 2
@@ -738,7 +738,7 @@
       },
       "audio": {
         "content": {
-          "done": 4,
+          "done": 6,
           "total": 15
         },
         "content-qa": {
@@ -2369,7 +2369,7 @@
     {"id":"content.audio.ambient-loops","type":"audio-production","title":{"zh":"四段原创环境循环","en":"Four original ambient loops"},"area":"audio","stage":"content","owner":"claude","status":"done","points":3,"doneCriterion":{"zh":"城镇、野外、遗址、战斗循环已接入","en":"Town, field, ruin and battle loops are wired"},"dependsOn":[],"evidence":["game/assets/audio/rpg-2-star-ocean-the-second_scifi-city_ambient-loop_m7_20261013-211230-c8e1159a.wav","game/assets/audio/rpg-2-star-ocean-the-second_scifi-battle_ambient-loop_m7_20261013-211230-37fcaa02.wav","game/tests/m7_smoke.gd"],"subject":{"kind":"asset","id":"music.mvp"}},
     {"id":"content.audio.themed-music","type":"audio-production","title":{"zh":"MVP 主题配乐","en":"MVP themed music"},"area":"audio","stage":"content","owner":"claude","status":"todo","points":6,"doneCriterion":{"zh":"四段主题配乐已提交并接入","en":"Four themed tracks committed and wired"},"dependsOn":["content.audio.ambient-loops"],"evidence":[],"subject":{"kind":"asset","id":"music.mvp"}},
     {"id":"content.audio.discovery-cue","type":"audio-production","title":{"zh":"调查发现提示音","en":"Discovery cue"},"area":"audio","stage":"content","owner":"claude","status":"done","points":1,"doneCriterion":{"zh":"调查发现时播放提示音","en":"Discovery plays the cue"},"dependsOn":[],"evidence":["game/assets/audio/rpg-2-star-ocean-the-second_discovery_interaction-cue_m7_20261013-211230-ad781e52.wav","game/tests/m7_smoke.gd"],"subject":{"kind":"asset","id":"sfx.discovery"}},
-    {"id":"content.audio.ui-sfx","type":"audio-production","title":{"zh":"按钮、菜单、提示音","en":"Button, menu and prompt sounds"},"area":"audio","stage":"content","owner":"claude","status":"in_progress","points":2,"doneCriterion":{"zh":"界面音效已提交并接入","en":"UI sounds committed and wired"},"dependsOn":["code.runtime.audio-cues"],"evidence":[],"subject":{"kind":"asset","id":"sfx.ui"},"statusAt":"2026-10-19T01:53:08Z","note":{"zh":"制作小组界面音效并接入现有试点钩子，最终试听独立。","en":"Bounded authored UI WAV set and existing pilot-hook mapping; final audition remains separate."}},
+    {"id":"content.audio.ui-sfx","type":"audio-production","title":{"zh":"按钮、菜单、提示音","en":"Button, menu and prompt sounds"},"area":"audio","stage":"content","owner":"claude","status":"done","points":2,"doneCriterion":{"zh":"界面音效已提交并接入","en":"UI sounds committed and wired"},"dependsOn":["code.runtime.audio-cues"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_ui-sfx_root-integration-closeout_v01_20261018-221446-b952ad55.md","outputs/rpg-2-star-ocean-the-second_ui-sfx_root-integration-manifest_v01_20261018-221446-b952ad55.json"],"subject":{"kind":"asset","id":"sfx.ui"},"statusAt":"2026-10-19T02:14:46Z","note":{"zh":"三种原创界面音效及正常试点钩子；独立重建45/45，1280与640窗口各44/44，不等于听感或用户验收。","en":"Three authored UI WAVs and normal pilot hooks; root45/45 waveform rebuild and44/44 windowed checks at1280 and640. Not listening/creator approval."}},
     {"id":"content.audio.combat-sfx","type":"audio-production","title":{"zh":"攻击、防御、技能、胜败音效","en":"Attack, guard, skill, win/lose sounds"},"area":"audio","stage":"content","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"战斗音效已提交并接入","en":"Combat sounds committed and wired"},"dependsOn":["code.runtime.audio-cues"],"evidence":[],"subject":{"kind":"asset","id":"sfx.combat"}},
     {"id":"content.ui-visual.navigation","type":"native-pixel","title":{"zh":"探索界面正式视觉","en":"Exploration UI final visuals"},"area":"ui-visual","stage":"content","owner":"claude","status":"todo","points":4,"doneCriterion":{"zh":"导航与探索界面正式视觉已接入","en":"Final navigation / exploration UI visuals wired"},"dependsOn":[],"evidence":[],"subject":{"kind":"asset","id":"ui.explore"}},
     {"id":"content.ui-visual.battle","type":"native-pixel","title":{"zh":"战斗界面正式视觉","en":"Battle UI final visuals"},"area":"ui-visual","stage":"content","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"战斗 HUD、技能、结算正式视觉已接入","en":"Final battle HUD, skills and results visuals wired"},"dependsOn":[],"evidence":[],"subject":{"kind":"asset","id":"ui.battle-hud"}},

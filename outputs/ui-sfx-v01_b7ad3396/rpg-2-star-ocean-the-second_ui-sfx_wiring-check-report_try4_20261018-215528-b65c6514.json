@@ -1,0 +1,233 @@
+{
+  "audioArtApproved": false,
+  "audioDriver": "WASAPI",
+  "auditionedByListener": false,
+  "checks": [
+    {
+      "check": "verify report supplies three data-chunk hashes",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "windowed run (real audio players, not headless dispatch)",
+      "detail": [
+        "Windows",
+        "WASAPI"
+      ],
+      "passed": true
+    },
+    {
+      "check": "isolated user data dir under a temp APPDATA",
+      "detail": "C:/Users/hkzha/AppData/Local/Temp/wb-uisfx-run4/Godot/app_userdata/Worlds Between",
+      "passed": true
+    },
+    {
+      "check": "flag name unchanged",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "default disabled without the flag",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "F10 opens settings overlay",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "Esc closes settings overlay",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "default OFF: real clicks/close accepted no cue, no players/streams",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "default OFF: direct UI cues rejected",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "settings overlay pauses gameplay",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "real reset-button click accepted ui.confirm once",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "ui.confirm uses authored asset",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "ui.confirm voice actually playing",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "real Esc close accepted ui.cancel once",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "ui.cancel uses authored asset",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "ui.cancel voice actually playing",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "real Close-button click: one ui.cancel, generic confirm superseded",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "save screen loaded",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "real Save click: save succeeded",
+      "detail": "已保存至 手动栏 1",
+      "passed": true
+    },
+    {
+      "check": "real Save click accepted ui.notice once; generic confirm superseded",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "ui.notice uses authored asset",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "ui.notice voice actually playing",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "save click leaves game snapshot unchanged apart from the running play clock",
+      "detail": [
+        "playTimeSeconds"
+      ],
+      "passed": true
+    },
+    {
+      "check": "same-frame UI cue playback leaves the full snapshot byte-identical",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "Master-bus recording of real UI dispatch is non-silent (peak > -50 dBFS)",
+      "detail": {
+        "peakDbfs": -22.0,
+        "peakSample": 2604
+      },
+      "passed": true
+    },
+    {
+      "check": "real Back click accepted ui.cancel and returned",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "asset identity ui.confirm: 44.1 kHz mono 16-bit, no loop, data sha256 = WAV data chunk",
+      "detail": "0a7fe2738ceb9c9f99178adeae2b6fe5bcedaa25080196d517f9e2a34260457e",
+      "passed": true
+    },
+    {
+      "check": "asset identity ui.cancel: 44.1 kHz mono 16-bit, no loop, data sha256 = WAV data chunk",
+      "detail": "901cb2fac6de78a3a2c83831410806c5d2381c67941e69cca1f8ff49dd8ebbbc",
+      "passed": true
+    },
+    {
+      "check": "asset identity ui.notice: 44.1 kHz mono 16-bit, no loop, data sha256 = WAV data chunk",
+      "detail": "0c3883e8e07929b947be6f73c005d58e21f3b979b6e3a273a777bd2b369619b2",
+      "passed": true
+    },
+    {
+      "check": "all voices route to Master at the existing -14 dB",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "settings volume 0 mutes the cue bus",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "settings volume 40 applies to the cue bus",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "same-tick duplicate notice coalesced",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "confirm after a same-tick cancel is suppressed",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "notice after a same-tick confirm replaces that confirm voice",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "coalescing boundary: rejected at 39 ms, accepted at 41 ms",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "four-voice pool reused",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "stream cache bounded by known cues and reused",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior combat cues keep generated 22.05 kHz PCM",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "fallback ui.confirm (missing-ui-confirm.wav) plays generated PCM",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "fallback ui.cancel (rpg-2-star-ocean-the-second_ji-cheng_sideview-idle-right-phase-01_m8-prototype_20261014-144815-e729aa41.png) plays generated PCM",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "fallback ui.notice (rpg-2-star-ocean-the-second_scifi-battle_ambient-loop_m7_20261013-211230-37fcaa02.wav) plays generated PCM",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "usable_asset rejects empty, 8-bit and null",
+      "detail": null,
+      "passed": true
+    }
+  ],
+  "display": "Windows",
+  "passed": 43,
+  "total": 43
+}

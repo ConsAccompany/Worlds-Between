@@ -142,6 +142,8 @@ func close() -> void:
 	if not is_open():
 		return
 	overlay.hide_overlay()
+	if app != null and app.get("audio_cues") != null:
+		app.audio_cues.play_cue("ui.cancel")
 	get_tree().paused = _previous_paused
 	if is_instance_valid(_previous_focus) and _previous_focus.is_inside_tree() and _previous_focus.is_visible_in_tree():
 		_previous_focus.grab_focus()

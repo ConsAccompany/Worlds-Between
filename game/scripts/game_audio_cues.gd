@@ -1,12 +1,24 @@
 extends Node
 
-# Presentation capability, not final SFX art. Generated, cached PCM avoids external
-# files and global RNG changes. Default OFF until sound content is accepted.
+# Presentation capability. Combat cues are generated, cached PCM (no external files or global
+# RNG changes); interface cues play authored WAVs and fall back to that PCM when an asset is
+# missing or unusable. Default OFF until sound content is accepted.
 const FLAG := "--audio-cues-pilot"
 const RATE := 22050
 const VOICES := 4
+# Authored interface set v01 (44.1 kHz mono 16-bit PCM, imported uncompressed). Source:
+# tools/rpg-2-star-ocean-the-second_ui-sfx_wav-source-builder_v01_20261018-215528-960dcf71.py
+const ASSETS := {
+	"ui.confirm": "res://assets/audio/rpg-2-star-ocean-the-second_ui-confirm_interface-sfx_v01_20261018-215528-fd2f02df.wav",
+	"ui.cancel": "res://assets/audio/rpg-2-star-ocean-the-second_ui-cancel_interface-sfx_v01_20261018-215528-b6b84df7.wav",
+	"ui.notice": "res://assets/audio/rpg-2-star-ocean-the-second_ui-notice_interface-sfx_v01_20261018-215528-09a0a294.wav",
+}
+# A specific interface cue replaces the generic button click of the same press.
+const SUPERSEDE_CONFIRM := ["ui.cancel", "ui.notice"]
 const SPECS := {
 	"ui.confirm": [880.0, 0.055, 0.0],
+	"ui.cancel": [520.0, 0.07, 0.0],
+	"ui.notice": [660.0, 0.12, 0.0],
 	"attack": [210.0, 0.09, 0.4],
 	"dodge": [520.0, 0.10, 0.22],
 	"guard": [360.0, 0.11, 0.12],
@@ -20,9 +32,13 @@ var enabled_override := -1
 var players: Array[AudioStreamPlayer] = []
 var streams: Dictionary = {}
 var accepted_events: Dictionary = {}
+# Tests may point an entry at a missing or unusable resource to exercise the fallback.
+var asset_paths: Dictionary = ASSETS.duplicate()
+var stream_sources: Dictionary = {}
 var _last: Dictionary = {}
 var _clock := 0.0
 var _voice := 0
+var _confirm_voice := -1
 
 
 func _ready() -> void:
@@ -62,6 +78,8 @@ func play_cue(event: String) -> bool:
 	# Coalesce repeated AI/UI events; four voices bound overlapping playback.
 	if _clock - float(_last.get(event, -1.0)) < 0.04:
 		return false
+	if event == "ui.confirm" and SUPERSEDE_CONFIRM.any(func(other): return _clock - float(_last.get(other, -1.0)) < 0.04):
+		return false
 	if players.is_empty():
 		for index in VOICES:
 			var player := AudioStreamPlayer.new()
@@ -70,9 +88,15 @@ func play_cue(event: String) -> bool:
 			add_child(player)
 			players.append(player)
 	if not streams.has(event):
-		streams[event] = _make_stream(SPECS[event])
-	var voice := players[_voice]
-	_voice = (_voice + 1) % VOICES
+		streams[event] = _stream_for(event)
+	var index := _voice
+	if SUPERSEDE_CONFIRM.has(event) and _confirm_voice >= 0 and _clock - float(_last.get("ui.confirm", -1.0)) < 0.04:
+		index = _confirm_voice
+	else:
+		_voice = (_voice + 1) % VOICES
+	if event == "ui.confirm":
+		_confirm_voice = index
+	var voice := players[index]
 	voice.stop()
 	voice.stream = streams[event]
 	# Headless runs prove dispatch/PCM/routing only; their dummy audio backend
@@ -82,6 +106,26 @@ func play_cue(event: String) -> bool:
 	_last[event] = _clock
 	accepted_events[event] = int(accepted_events.get(event, 0)) + 1
 	return true
+
+
+func _stream_for(event: String) -> AudioStreamWAV:
+	var path := String(asset_paths.get(event, ""))
+	# exists() is silent for missing paths; only usable authored PCM replaces the generated cue.
+	if path != "" and ResourceLoader.exists(path):
+		var asset := ResourceLoader.load(path)
+		if usable_asset(asset):
+			stream_sources[event] = "asset"
+			return asset
+	stream_sources[event] = "procedural"
+	return _make_stream(SPECS[event])
+
+
+static func usable_asset(asset: Resource) -> bool:
+	if not asset is AudioStreamWAV:
+		return false
+	var wav: AudioStreamWAV = asset
+	return wav.format == AudioStreamWAV.FORMAT_16_BITS and not wav.stereo and wav.mix_rate == 44100 \
+		and wav.loop_mode == AudioStreamWAV.LOOP_DISABLED and wav.data.size() >= 2 and wav.data.size() <= 44100 * 2
 
 
 static func _make_stream(spec: Array) -> AudioStreamWAV:

@@ -40,7 +40,7 @@ func _run() -> void:
 		var peak := 0
 		for index in stream.data.size() / 2:
 			peak = maxi(peak, absi(stream.data.decode_s16(index * 2)))
-		check("bounded click-free PCM: " + event, stream.mix_rate == 22050 and not stream.stereo and stream.data.decode_s16(0) == 0 and stream.data.decode_s16(stream.data.size() - 2) == 0 and peak > 100 and peak < 8000)
+		check("bounded click-free PCM: " + event, stream.mix_rate == (44100 if Cues.ASSETS.has(event) else 22050) and not stream.stereo and stream.data.decode_s16(0) == 0 and stream.data.decode_s16(stream.data.size() - 2) == 0 and peak > 100 and peak < 8000)
 	check("four-voice pool and one cached stream per cue", cues.players.size() == 4 and cues.streams.size() == Cues.SPECS.size())
 	var cached: AudioStreamWAV = cues.streams["attack"]
 	cues._process(0.05)

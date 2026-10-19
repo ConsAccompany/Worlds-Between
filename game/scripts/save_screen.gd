@@ -111,6 +111,8 @@ func _refresh() -> void:
 
 func _save(slot: int) -> void:
 	var id := AppState.write_manual_save(slot)
+	if id != "":
+		AppState.audio_cues.play_cue("ui.notice")
 	feedback_label.text = AppState.text_for("save_ok") % (AppState.text_for("save_manual_slot") % slot) if id != "" else AppState.text_for("save_failed")
 	_refresh()
 
@@ -134,6 +136,7 @@ func _load(id: String) -> void:
 
 
 func _back() -> void:
+	AppState.audio_cues.play_cue("ui.cancel")
 	if AppState.save_screen_mode == "save" and AppState.is_area_scene(AppState.save_return_scene):
 		AppState.resume_area_pending = true
 		AppState.resume_area_position = AppState.save_return_position

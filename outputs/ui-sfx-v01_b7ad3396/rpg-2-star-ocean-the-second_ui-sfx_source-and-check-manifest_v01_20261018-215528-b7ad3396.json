@@ -1,0 +1,209 @@
+{
+  "task": "content.audio.ui-sfx",
+  "owner": "claude",
+  "producerCheckout": "work/max-ui-audio",
+  "branch": "codex/ui-sound-content-20261018-2155",
+  "baseRevision": "0b0e7d915324686a8cf29cf74c4b3b6841cf3fa4",
+  "testedState": "uncommitted working tree on the base revision; files below are bound by hash",
+  "hashNormalization": {
+    "wav": "sha256-bytes",
+    "text": "sha256-text-lf-v1 (CRLF->LF only)",
+    "gitBlob": "git hash-object --path (checkout filters applied); WAV raw == filtered"
+  },
+  "state": {
+    "produced": "candidate (awaiting root verification/integration)",
+    "integrated": false,
+    "inspected": "automated technical checks only",
+    "auditionedByListener": false,
+    "approved": false
+  },
+  "flag": "--audio-cues-pilot (default OFF; unchanged)",
+  "eventMapping": {
+    "ui.confirm": "every BaseButton.pressed (existing generic hook, unchanged)",
+    "ui.cancel": "GameSettings.close() (F10/Esc/Close on the settings overlay, any screen) and SaveScreen._back()",
+    "ui.notice": "SaveScreen._save() after a successful manual save (write_manual_save returned an id)",
+    "supersession": "within the existing 40 ms coalescing window, ui.cancel/ui.notice replace the generic ui.confirm of the same press (same voice); combat cues untouched"
+  },
+  "assets": {
+    "ui.confirm": {
+      "path": "game/assets/audio/rpg-2-star-ocean-the-second_ui-confirm_interface-sfx_v01_20261018-215528-fd2f02df.wav",
+      "sha256-bytes": "329cf03a0581318e0c693674486c1ef8fa126de899a8916df1654e90f7c5e64d",
+      "bytes": 7982,
+      "gitBlobFiltered": "bb871a2d6188781c42d5186b2a7aa1f9e175bdd8",
+      "gitBlobRaw": "bb871a2d6188781c42d5186b2a7aa1f9e175bdd8",
+      "dataChunkSha256": "0a7fe2738ceb9c9f99178adeae2b6fe5bcedaa25080196d517f9e2a34260457e",
+      "frames": 3969,
+      "durationMs": 90.0,
+      "peakDbfs": -14.0,
+      "dcFs": -0.0001862,
+      "loudest30msRmsDbfs": -23.217,
+      "centroidHz": 1414.8,
+      "importParams": "compress/mode=0 (uncompressed PCM), trim/normalize off, loop off"
+    },
+    "ui.cancel": {
+      "path": "game/assets/audio/rpg-2-star-ocean-the-second_ui-cancel_interface-sfx_v01_20261018-215528-b6b84df7.wav",
+      "sha256-bytes": "aac80c0c2516f7052e812a11e2e32362b95fa208b7e62109d1f0efca75117637",
+      "bytes": 10628,
+      "gitBlobFiltered": "c66456434625d048cf479ce2c05ed8650d067b0c",
+      "gitBlobRaw": "c66456434625d048cf479ce2c05ed8650d067b0c",
+      "dataChunkSha256": "901cb2fac6de78a3a2c83831410806c5d2381c67941e69cca1f8ff49dd8ebbbc",
+      "frames": 5292,
+      "durationMs": 120.0,
+      "peakDbfs": -14.0,
+      "dcFs": -7.32e-06,
+      "loudest30msRmsDbfs": -22.038,
+      "centroidHz": 912.0,
+      "importParams": "compress/mode=0 (uncompressed PCM), trim/normalize off, loop off"
+    },
+    "ui.notice": {
+      "path": "game/assets/audio/rpg-2-star-ocean-the-second_ui-notice_interface-sfx_v01_20261018-215528-09a0a294.wav",
+      "sha256-bytes": "e25466d79530edd78fcb90151f6bbd129f6a9939366d145ab85990d298dd1ff7",
+      "bytes": 26504,
+      "gitBlobFiltered": "4fcd121f07ae399b9d760c58995993c5d7820f2f",
+      "gitBlobRaw": "4fcd121f07ae399b9d760c58995993c5d7820f2f",
+      "dataChunkSha256": "0c3883e8e07929b947be6f73c005d58e21f3b979b6e3a273a777bd2b369619b2",
+      "frames": 13230,
+      "durationMs": 300.0,
+      "peakDbfs": -14.0,
+      "dcFs": -2.65e-06,
+      "loudest30msRmsDbfs": -20.53,
+      "centroidHz": 1390.8,
+      "importParams": "compress/mode=0 (uncompressed PCM), trim/normalize off, loop off"
+    }
+  },
+  "sourceAndCode": {
+    "tools/rpg-2-star-ocean-the-second_ui-sfx_wav-source-builder_v01_20261018-215528-960dcf71.py": {
+      "sha256-text-lf-v1": "c4214a5c3ee586338e5363a47a266189fbf7516aa70487222e9d92373966f83e",
+      "gitBlobFiltered": "63b0313a85549322f00d031298ee7036da702a3f"
+    },
+    "game/scripts/game_audio_cues.gd": {
+      "sha256-text-lf-v1": "cd5e8458d61a8127a5572235595e6a21ab7806560543cde02801e16709f04862",
+      "gitBlobFiltered": "f26e587baeda346981c361fa8957b3f65e6df87c"
+    },
+    "game/scripts/game_settings.gd": {
+      "sha256-text-lf-v1": "a7507410864118692a2bf9c0da7bf8cf8ffa89adbf0a6d6ecaaf00593c38efcd",
+      "gitBlobFiltered": "8752b7a0c14a3340447a0bd3b7a41c1a29f57573"
+    },
+    "game/scripts/save_screen.gd": {
+      "sha256-text-lf-v1": "9860db3845cf6edafd83f8f4b990d96c901383ac737ef353416c3de82cd0d82f",
+      "gitBlobFiltered": "68f1238b5e9e609f2e3524535f32592cb7141d02"
+    },
+    "game/tests/rpg-2-star-ocean-the-second_ui-sfx_asset-wiring-check_v01_20261018-215528-b65c6514.gd": {
+      "sha256-text-lf-v1": "e30f6dc06f491020c8f644d959882ccc2a0bd354ae4a9e35b17944769bf8ee50",
+      "gitBlobFiltered": "269918656005ca67870a72a17886c0926c988568"
+    },
+    "game/tests/rpg-2-star-ocean-the-second_audio-cues_runtime-check_v01_20261018-173100-6ebea990.gd": {
+      "sha256-text-lf-v1": "eaa62cc6152e262763f8e08e509946be6b462393991556e2f30616fbcd3456f2",
+      "gitBlobFiltered": "478c00f570d65384d98198f0bbb15c2cd4c7cf26"
+    },
+    ".gitattributes": {
+      "sha256-text-lf-v1": "3bcea0b35ab6f4871b2edc50723c738e9eb17703fef5eed18d9ebe7683f17d2d",
+      "gitBlobFiltered": "539c06f7b0c2ad5122c25747db7199dfc4d23a57"
+    },
+    "game/assets/audio/rpg-2-star-ocean-the-second_ui-confirm_interface-sfx_v01_20261018-215528-fd2f02df.wav.import": {
+      "sha256-text-lf-v1": "7c6bf49185d9334413ada5d4323379ffb91111525510ff49e02ff132191831c5",
+      "gitBlobFiltered": "a634718be19d7c83a6f1183eafeda6f9a63493bd"
+    },
+    "game/assets/audio/rpg-2-star-ocean-the-second_ui-cancel_interface-sfx_v01_20261018-215528-b6b84df7.wav.import": {
+      "sha256-text-lf-v1": "0efe4df43963a586aac8a8f651214d8167a1313b6e4eb1730cbd228c5e20fbd0",
+      "gitBlobFiltered": "70c0d569fd22a916bf88a73758cd5643c5f2b9d9"
+    },
+    "game/assets/audio/rpg-2-star-ocean-the-second_ui-notice_interface-sfx_v01_20261018-215528-09a0a294.wav.import": {
+      "sha256-text-lf-v1": "6f198d5f0595db967399f01d966371aecf899cc1bcff955e7d904727101908b3",
+      "gitBlobFiltered": "6c1c0b9ee9bec746c58bdb1f99783da36e52458d"
+    }
+  },
+  "evidence": {
+    "outputs/ui-sfx-v01_b7ad3396/rpg-2-star-ocean-the-second_ui-sfx_m7-smoke-regression-log_v01_20261018-215528-b7ad3396.log": {
+      "sha256-text-lf-v1": "bb9d86cf6bccc81a3cca579f6c6c7d669dcce0e59898ec1fa05b23ac050a8c47"
+    },
+    "outputs/ui-sfx-v01_b7ad3396/rpg-2-star-ocean-the-second_ui-sfx_prior-audio-cues-regression-headless-log_v01_20261018-215528-b7ad3396.log": {
+      "sha256-text-lf-v1": "0938858aa40be8e72ff2c42aa08ca75bb564b5d43de2cebe506f89457d752ddf"
+    },
+    "outputs/ui-sfx-v01_b7ad3396/rpg-2-star-ocean-the-second_ui-sfx_prior-audio-cues-regression-headless-report_v01_20261018-215528-b7ad3396.json": {
+      "sha256-text-lf-v1": "dd9eba5aeca26a5bc71ff75ae474a8e5d67ab39711ef0bce0481443c89e331cd"
+    },
+    "outputs/ui-sfx-v01_b7ad3396/rpg-2-star-ocean-the-second_ui-sfx_prior-audio-cues-regression-windowed-log_v01_20261018-215528-b7ad3396.log": {
+      "sha256-text-lf-v1": "8b22afb94488bf59c8f854a963253fa7d1338409039a52c6e760a13d625a035a"
+    },
+    "outputs/ui-sfx-v01_b7ad3396/rpg-2-star-ocean-the-second_ui-sfx_prior-audio-cues-regression-windowed-report_v01_20261018-215528-b7ad3396.json": {
+      "sha256-text-lf-v1": "762ad9200da12a13704a653688367d444d69c5cd2da3d7f3b1d2a05e464359cf"
+    },
+    "outputs/ui-sfx-v01_b7ad3396/rpg-2-star-ocean-the-second_ui-sfx_save-ui-smoke-regression-log_v01_20261018-215528-b7ad3396.log": {
+      "sha256-text-lf-v1": "12c38c7a065662b337d0e6c795e53b89b5980de5551a0f47d4a6050cb2513d08"
+    },
+    "outputs/ui-sfx-v01_b7ad3396/rpg-2-star-ocean-the-second_ui-sfx_settings-regression-corrupt-log_v01_20261018-215528-b7ad3396.log": {
+      "sha256-text-lf-v1": "ca78eb26c517ed9eb0ca87cac42c48409018703bbbc5e9b323fb079d1e191472"
+    },
+    "outputs/ui-sfx-v01_b7ad3396/rpg-2-star-ocean-the-second_ui-sfx_settings-regression-fresh-log_v01_20261018-215528-b7ad3396.log": {
+      "sha256-text-lf-v1": "9003f6d94429cbebc9e09ddf0fa0c231fd203f18c21ae1c8ebd3a80d6ee696f0"
+    },
+    "outputs/ui-sfx-v01_b7ad3396/rpg-2-star-ocean-the-second_ui-sfx_settings-regression-invalid-log_v01_20261018-215528-b7ad3396.log": {
+      "sha256-text-lf-v1": "c4b78e4c6970f2cadcf5586df757d51104a392beea1604483b1561d5dc4543dd"
+    },
+    "outputs/ui-sfx-v01_b7ad3396/rpg-2-star-ocean-the-second_ui-sfx_settings-regression-restart-log_v01_20261018-215528-b7ad3396.log": {
+      "sha256-text-lf-v1": "34eda7c79548a7030d50c07c140fcd7d01bc55ebad89700780821d2f82abed39"
+    },
+    "outputs/ui-sfx-v01_b7ad3396/rpg-2-star-ocean-the-second_ui-sfx_wav-verify-report_try1_20261018-215528-b7ad3396.json": {
+      "sha256-text-lf-v1": "c73014b21dc76bc24a4f9aed80c9a5ef2fc897ceae2f5e4b86354095f9c31d4c"
+    },
+    "outputs/ui-sfx-v01_b7ad3396/rpg-2-star-ocean-the-second_ui-sfx_wav-verify-report_try2_20261018-215528-b7ad3396.json": {
+      "sha256-text-lf-v1": "e8d5bba8872b3511b248bf15b3bf9919288cdb59a6c44749737c739a85196a25"
+    },
+    "outputs/ui-sfx-v01_b7ad3396/rpg-2-star-ocean-the-second_ui-sfx_wiring-check-log_try1_20261018-215528-b65c6514.log": {
+      "sha256-text-lf-v1": "2456b5b86ff840c355e8f3c1810facdb0b7d98aa5cb7e0a037630166336022d0"
+    },
+    "outputs/ui-sfx-v01_b7ad3396/rpg-2-star-ocean-the-second_ui-sfx_wiring-check-log_try2_20261018-215528-b65c6514.log": {
+      "sha256-text-lf-v1": "3afc00601b921bb0400eb5c635ca2859384ef15d53002cbdead365481042f31d"
+    },
+    "outputs/ui-sfx-v01_b7ad3396/rpg-2-star-ocean-the-second_ui-sfx_wiring-check-log_try3_20261018-215528-b65c6514.log": {
+      "sha256-text-lf-v1": "fc6ed6a509bec257ed3bac9bf03963b136bf31e515c5bcdcead40e60e3ffc311"
+    },
+    "outputs/ui-sfx-v01_b7ad3396/rpg-2-star-ocean-the-second_ui-sfx_wiring-check-log_try4_20261018-215528-b65c6514.log": {
+      "sha256-text-lf-v1": "d43e8e68892bc46775df92fd9f6ff7e37fa1a1a1b60f5adc757c9f58ac33e414"
+    },
+    "outputs/ui-sfx-v01_b7ad3396/rpg-2-star-ocean-the-second_ui-sfx_wiring-check-report_try2_20261018-215528-b65c6514.json": {
+      "sha256-text-lf-v1": "3e325837ff305764baa0d5f7538eb16d8eabcd5023f4f20b2db73c6580d68e3d"
+    },
+    "outputs/ui-sfx-v01_b7ad3396/rpg-2-star-ocean-the-second_ui-sfx_wiring-check-report_try3_20261018-215528-b65c6514.json": {
+      "sha256-text-lf-v1": "014026133d5cbb70e83d457e576ee2f0c719183a4bd8c316f856a6197e1bead1"
+    },
+    "outputs/ui-sfx-v01_b7ad3396/rpg-2-star-ocean-the-second_ui-sfx_wiring-check-report_try4_20261018-215528-b65c6514.json": {
+      "sha256-text-lf-v1": "74fb4f254c0505ce77bbc98966d622505dac9d6f7dc993cf2e744b7ecd85f465"
+    }
+  },
+  "results": {
+    "wavVerify": {
+      "try1": "FAIL 44/45 (ui.confirm edge 0.0245 FS with 0.6 ms fade-in; source fixed to 1.2 ms, threshold unchanged)",
+      "try2": "45/45 PASS"
+    },
+    "wiringWindowed": {
+      "try1": "FAIL parse error in probe (untyped :=), runner diagnostic stop",
+      "try2": "41/42 (snapshot compare spanned real frames: playTimeSeconds advanced; check corrected to exclude only that field + strict same-frame check added); runner console crashed on cp1252",
+      "try3": "43/43 marker present; runner console crashed on cp1252 (-I ignores PYTHONIOENCODING)",
+      "try4": "43/43 PASS, CHECKED_RUN exit 0 (python -I -X utf8)"
+    },
+    "priorAudioCuesRegression": {
+      "headless": "46/46 PASS",
+      "windowed": "47/47 PASS",
+      "edit": "rate predicate now expects 44100 for ASSETS events, 22050 otherwise"
+    },
+    "settingsOverlayRegression": {
+      "fresh": "49 checks PASS",
+      "restart": "4 PASS",
+      "invalid": "10 PASS",
+      "corrupt": "6 checks PHASE_OK but CHECKED_RUN FAIL(diagnostic): engine 'ConfigFile parse error' deliberately provoked by that phase; identical line in the original 150534-67d7cb3c delivery log"
+    },
+    "saveUiSmoke": "PROGRESSION_TEN_NODE_OK 494 checks PASS (headless)",
+    "m7Smoke": "M7_SMOKE_OK PASS (headless)"
+  },
+  "limitations": [
+    "No human listening audition was performed; quality/tactile character is by design intent and signal checks only.",
+    "Master-bus AudioEffectRecord shows non-silent mixed output in a windowed run; it is not an audibility or quality claim.",
+    "Only GameSettings.close and the save screen were given specific cues; world-map/exploration Esc paths remain silent (no invasive rewrites).",
+    "Save-failure path keeps only the generic confirm click.",
+    "Creator acceptance and Codex in-game listening review (review.content.audio) remain open."
+  ],
+  "runner": "../max0840-sentry-sync/tools/rpg-2-star-ocean-the-second_godot_checked-runner_v01_20261018-203400-f74ac6d1.py (90 s deadline, unique logs, required markers, isolated %TEMP% APPDATA per run)",
+  "qaNote": "docs/qa/rpg-2-star-ocean-the-second_ui-sfx_production-candidate_qa-note_v01_20261018-215528-ddd067a0.md"
+}
