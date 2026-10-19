@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-19T02:21:35.853997+00:00",
+  "updatedAt": "2026-10-19T02:23:22.450061+00:00",
   "purpose": "Operating queue and worktree ownership; no progress points or account details",
   "workflow": "docs/workflow.md",
   "canonicalLedger": "outputs/rpg-2-star-ocean-the-second_production-completion_task-ledger_v01_20261018-140533-3de52073.json",
@@ -66,7 +66,7 @@
       "role": "producer",
       "owner": "claude",
       "baseAtRegistration": "0b0e7d915324686a8cf29cf74c4b3b6841cf3fa4",
-      "writePolicy": "Bounded UI WAV/source and game_audio_cues.gd only; no other game sources/shared ledger/index/Site"
+      "writePolicy": "Combat audio WAV/source and game_audio_cues.gd ASSETS only; protect exact UI assets, frozen tests and unrelated dirty files; no shared ledger/index/Site"
     }
   ],
   "tasks": [
@@ -632,6 +632,31 @@
         "docs/qa/rpg-2-star-ocean-the-second_ui-sfx_root-integration-closeout_v01_20261018-221446-b952ad55.md",
         "outputs/rpg-2-star-ocean-the-second_ui-sfx_root-integration-manifest_v01_20261018-221446-b952ad55.json"
       ]
+    },
+    {
+      "id": "content.audio.combat-sfx",
+      "owner": "claude",
+      "status": "in_progress",
+      "lane": "supporting",
+      "worktree": "ui-audio-producer",
+      "dependsOn": [
+        "code.runtime.audio-cues"
+      ],
+      "output": "Eight original editable combat sound files wired to existing normal-arena cue events",
+      "writeScope": [
+        "game/assets/audio/*combat*",
+        "game/scripts/game_audio_cues.gd ASSETS/comment only",
+        "new combat audio builder/tests/evidence"
+      ],
+      "completion": [
+        "Existing committed/wired criterion only; no audition or art approval",
+        "Exact double rebuild and nonclipping edge-safe signal",
+        "Actual windowed normal arena dispatch/mixer and unchanged simulation/default/UI contracts",
+        "Independent root inspection and selected integration"
+      ],
+      "startedAt": "2026-10-19T02:23:22.450061+00:00",
+      "nextAction": "Bounded authored candidate and source-bound actual-arena tests; stop after evidence or actual quota",
+      "blockedBy": []
     }
   ],
   "nextProductionMilestones": [
