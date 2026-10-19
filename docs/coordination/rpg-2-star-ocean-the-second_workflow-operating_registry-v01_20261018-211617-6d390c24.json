@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-19T22:26:58.740182+00:00",
+  "updatedAt": "2026-10-19T22:36:50.879937+00:00",
   "purpose": "Operating queue and worktree ownership; no progress points or account details",
   "workflow": "docs/workflow.md",
   "canonicalLedger": "outputs/rpg-2-star-ocean-the-second_production-completion_task-ledger_v01_20261018-140533-3de52073.json",
@@ -816,6 +816,17 @@
         "docs/qa/rpg-2-star-ocean-the-second_navigation-ui_root-combined-navigation-music-verification_unapproved-v04r1_20261019-222456-7d2c965e.md"
       ],
       "nextAction": "Creator UI acceptance separate; map geography/art gate remainsopen."
+    },
+    {
+      "id": "content.char.protagonist-female.display",
+      "owner": "deepseek",
+      "status": "done",
+      "lane": "closed",
+      "output": "Exact existing-source portrait crop and female-only optional menu display",
+      "evidence": [
+        "docs/qa/rpg-2-star-ocean-the-second_female-display_exact-crop-runtime_v01_20261019-182839-4d72f1c6.md"
+      ],
+      "nextAction": "Creator art/canon approval separate; no whole UI-portrait kit completion."
     }
   ],
   "nextProductionMilestones": [
@@ -878,16 +889,16 @@
       "task": "support.character.female.complete-exploration-pilot",
       "owner": "claude",
       "workspace": "work/dual02/cl-management",
-      "status": "active",
+      "status": "engineering-resolution-before-resume",
       "scope": "Integrate already-produced four-direction female idle/run/stop coherently behindoptin; no newart/defaultadoption."
     },
     "supporting": [
       {
-        "task": "content.char.protagonist-female.display",
+        "task": "support.site.inventory-snapshot-links",
         "owner": "deepseek",
-        "workspace": "work/dual02/ds-portrait",
+        "workspace": "work/dual02/ds-inventory-links",
         "status": "active",
-        "scope": "Existing unapproved concept neutral bust crop and safe menu helper; no extra identities"
+        "scope": "Inventory URL snapshot pinning and unsafe href refusal; no data/auth/review changes."
       }
     ],
     "integrationOwner": "codex",
