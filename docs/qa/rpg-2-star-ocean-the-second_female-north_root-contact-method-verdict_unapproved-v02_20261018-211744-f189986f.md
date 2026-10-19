@@ -1,0 +1,11 @@
+# NORTH v02 — contact correction verified, anatomy revision required
+
+Codex independently reran the unchanged v02 model and small raster-contact test in the canonical integration checkout: **131/131**, no errors, checked-runner elapsed12.719seconds. Model SHA256 `9c5435aaefb8c6ecbaee2052385d6c29f219cd78e79525cfd898ebb5c1e196d4`. The source heel-cap feature stays fixed at world0.0px travel in the checked30/60Hz stances; v01 under this same raster measure travels12.5px. The earlier14.5px figure was a different inferred-geometry diagnostic on the v01 final capture; these values must not be conflated.
+
+Root inspected separate native contact/flight/late-stance/final poses. The planted-contact correction works, but the trailing leg becomes an elongated thin column. The source preserves upper-body scale and world idle placement by padding80x112 to80x128 below the original image, yet late-stance trousers can stretch roughly2.1x and boot shaft1.56x. This fails the desired anatomy. Numeric contact success is not artistic or fluidity acceptance.
+
+Producer actual ordinary-input EN annex captures separately report558/558 at60fps and290/290 at30fps, with0.0px measured heel travel on both axes. Movies are1280x720 windows showing640x360logical canvas at2x, normal1x **time**. Root has independently verified the headless raster test, not every reported viewport measurement. Full128phase matrix, mixed/re-press-airborne cases, native PXO packaging, bright/ZH contexts and human review remain undone.
+
+The next bounded task changes the construction method: an authored bent-knee/foreshortened thigh/calf for the trailing phase, preserving the demonstrated heel contact, speed, stance duration, scale and exact idle endpoint. It does not repeat curve tuning or lower thresholds. v01/v02 remain immutable failure/iteration evidence. v02 is not production complete; the task stays in progress and production remains51.2%, acceptedsceneart3/12, fullsprites0/52, humanplays0/2.
+
+All selected JSON reports are stored losslessly as gzip; the evidence index maps their original paths and raw hashes. Original producer notes retain their stated limits. Intermediate iter1 files stay in the protected producer, not this selected archive. No claim that all temporary captured PNG frames are committed.
