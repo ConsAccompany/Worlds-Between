@@ -84,6 +84,9 @@ const BATTLE_BACKDROP_BANDS := {
 const CombatSpriteSets := preload("res://scripts/rpg-2-star-ocean-the-second_combat-sprite-set_loader-playback_pilot-v01_20261018-153656-43a19158.gd")
 const BattleVfx := preload("res://scripts/rpg-2-star-ocean-the-second_common-vfx_native-layer_root-v02_20261019-164412-1f3bff80.gd")
 const COMMON_VFX_ASSET_DIR := "res://assets/vfx/common-v01"
+const BattleUiSkin := preload("res://scripts/rpg-2-star-ocean-the-second_battle-ui_skin-helper_root-v02_20261019-172332-dc55a291.gd")
+const BATTLE_UI_SKIN_CLI_FLAG := "--battle-ui-skin-pilot"
+static var battle_ui_skin_override := -1
 const SkillVfx := preload("res://scripts/rpg-2-star-ocean-the-second_mvp-skill-vfx_native-layer_v01_20261019-170721-90a8737c.gd")
 const SKILL_VFX_ASSET_DIR := "res://assets/vfx/skills-v01"
 const SKILL_VFX_CLI_FLAG := "--mvp-skill-vfx-pilot"
@@ -159,6 +162,8 @@ var battle_backdrop_texture: Texture2D
 # Null unless the combat sprite set pilot is on.
 var combat_sprite_sets: RefCounted = null
 # Opt-in provisional presentation only; disabled renderer and simulation stay unchanged.
+var battle_ui_skin: RefCounted = null
+var battle_ui_skin_status := "off"
 var battle_vfx: RefCounted = null
 var skill_vfx: RefCounted = null
 # Null unless the encounter feedback pilot is on; its module and assets load only in that case.
@@ -260,6 +265,9 @@ func _ready() -> void:
 	audio_player.play()
 	AppState.language_changed.connect(_refresh_text)
 	_refresh_text()
+	if battle_ui_skin_override == 1 or (battle_ui_skin_override < 0 and OS.get_cmdline_user_args().has(BATTLE_UI_SKIN_CLI_FLAG)):
+		battle_ui_skin = BattleUiSkin.new("res://assets/ui/battle-skin-v01")
+		battle_ui_skin_status = "applied" if battle_ui_skin.apply(self) else "fallback"
 	AppState.last_battle_transition_ms = float(Time.get_ticks_usec() - AppState.battle_transition_started_usec) / 1000.0
 	print("BATTLE_TRANSITION_MS %.2f" % AppState.last_battle_transition_ms)
 
@@ -1402,3 +1410,8 @@ func _update_hud() -> void:
 		var button: Button = party_buttons[slot]
 		button.disabled = slot >= fighters.size() or (slot < fighters.size() and not _is_alive(slot))
 		button.text = "%d %s" % [slot + 1, AppState.member_name(String(fighters[slot]["id"]))] if slot < fighters.size() else "%d —" % [slot + 1]
+
+
+func _exit_tree() -> void:
+	if battle_ui_skin != null:
+		battle_ui_skin.revert()

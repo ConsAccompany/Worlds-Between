@@ -1,0 +1,23 @@
+{
+  "tag": "20261019-174000-89f5e61d",
+  "nativeArchivePixelAndRebuild": {"pass": true, "passed": 355, "total": 355},
+  "malformedPackage": {
+    "pass": false,
+    "innerAssertionsPassed": 407,
+    "innerAssertionsTotal": 407,
+    "processExitCode": 0,
+    "checkedRunnerPass": false,
+    "checkedRunnerReason": "diagnostic",
+    "testedHelperRawSha256": "69f2cd517c259abd2256024e4d8de7136d010fb68f0af988d09f1fb1fdb8463b",
+    "defect": "root-v02 helper line142 compares the computed PNG SHA String against untyped manifest hash values; Dictionary, Array, and float values each emit SCRIPT ERROR Invalid operands in !=.",
+    "requiredFix": "Require the retrieved PNG hash value to be a String before comparing it; rerun the unchanged negative test through the checked runner."
+  },
+  "evidence": [
+    "rpg-2-star-ocean-the-second_battle-ui_native-independent-report_v01_20261019-174000-89f5e61d.json",
+    "rpg-2-star-ocean-the-second_battle-ui_invalid-package-report_v01_20261019-174000-89f5e61d.json",
+    "rpg-2-star-ocean-the-second_battle-ui_invalid-package-log_v01_20261019-174000-89f5e61d.log"
+  ],
+  "harnessLimitation": "Initial native rebuild CLI attempt in deep mirrored fixture exceeded Windows MAX_PATH. Failed first report preserved. Fresh-process invocation of the exact author's render function used the original package path for relative manifest provenance and wrote all 34 unchanged generated files into a short ignored peer directory; all bytes matched.",
+  "approval": false,
+  "limitations": ["No native application or GUI save/reopen verification.", "No artistic acceptance.", "No fullgame repeat; parent has separate actual UI gameplay evidence."]
+}
