@@ -4,7 +4,7 @@
   "title": "世界之间",
   "englishTitle": "Worlds Between",
   "edition": "设计基线 v0.2 · 2026-10-15 创作者决定",
-  "updatedAt": "2026-10-20T23:19:59.581Z",
+  "updatedAt": "2026-10-20T23:50:16.345Z",
   "note": "规则以玩家确认的设计稿为基线，并已并入 2026-10-15 创作者决定；人物姓名与外观是待审提案，具体剧情留待后续设计。",
   "pitch": "从地下社区走出的旅人，以好奇心探索多元文明，招募伙伴，并成为不同世界认知差异的桥梁。",
   "pillars": [
@@ -5083,7 +5083,7 @@
     ]
   },
   "environmentVisualReview": {
-    "status": "The playable map is now a real-geography global map with US Northeast and Great Lakes regional layers (US science sphere, implemented as a technical candidate, automated tests pass; the runtime map shows the unapproved native map-art candidate v01r1, and map art v02 is being built separately and remains unapproved). The Chicago Loop runs the unapproved State/Lake v02 runtime visual candidate (pushed 00199fc), still a technical arrival scene. City/outskirts/ruins outdoor candidates and six survey room candidates are referenced by playable Godot scenes; the Washington survey annex room 1 runs the unapproved v02 runtime visual candidate (pushed 00199fc); battle arena candidates are separate. City Hall Park walkable pilots v01-v04 are unapproved, v05 is a test candidate and v06 is being built separately; the Capitol exterior candidates (walkable v01-v08, dome vista v01-v02) are unapproved and not in the runtime; since ffa165c the Capitol west exterior v12r2 (--wdc-capitol-west-v12r2) and the annex records room 2 v01 (--wdc-records-chamber-v01) are committed technical opt-ins, off by default, art not accepted. The old fictional three-node map background is no longer used. The stone-plaza ruins and the stone-column ruins arena remain regression items under the 2026-10-14 geography rule. Scene visual acceptance is 3/12: on 2026-10-17 the creator accepted the environment quality of NYC public facilities rooms 1 and 2 and the Yonkers signal maintenance room 2 only (approvalLedger). That accepts no character motion, runtime sprite, other scene, human playtest or the science chapter as a whole; overall art acceptance stays false.",
+    "status": "The playable map is now a real-geography global map with US Northeast and Great Lakes regional layers (US science sphere, implemented as a technical candidate, automated tests pass; the runtime map shows the unapproved native map-art candidate v01r1, and map art v02 is being built separately and remains unapproved). The Chicago Loop runs the unapproved State/Lake v02 runtime visual candidate (pushed 00199fc), still a technical arrival scene. City/outskirts/ruins outdoor candidates and six survey room candidates are referenced by playable Godot scenes; the Washington survey annex room 1 runs the unapproved v02 runtime visual candidate (pushed 00199fc); battle arena candidates are separate. City Hall Park walkable pilots v01-v04 are unapproved, v05 is a test candidate and v06 is being built separately; the Capitol exterior candidates (walkable v01-v08, dome vista v01-v02) are unapproved and not in the runtime; since ffa165c the Capitol west exterior v12r2 (--wdc-capitol-west-v12r2) and the annex records room 2 v01 (--wdc-records-chamber-v01) are committed technical opt-ins, off by default, art not accepted. The old fictional three-node map background is no longer used. The stone-plaza ruins and the stone-column ruins arena remain regression items under the 2026-10-14 geography rule. Scene visual acceptance is 4/12: on 2026-10-17 the creator accepted the environment quality of NYC public facilities rooms 1 and 2 and the Yonkers signal maintenance room 2 only (approvalLedger). That accepts no character motion, runtime sprite, other scene, human playtest or the science chapter as a whole; overall art acceptance stays false. On2026-10-20 the creator accepted the displayed native layered science battle environment as scene4/12; this accepts no character/enemy/motion/default adoption/editor reliability/playtest.",
     "canvasInputRegression": "docs/qa/rpg-2-star-ocean-the-second_scifi-canvas_input-ui-regression_m8-v01_20261014-195518-4f27b39c.md",
     "canvasInputRegressionPassed": true,
     "englishMapHelpOverlapFixed": true,
@@ -5092,7 +5092,7 @@
     "surveyRoomCandidatesIntegrated": 6,
     "battleArenaCandidatesAuthored": 1,
     "battleArenaCandidatesIntegrated": 1,
-    "sceneQualityAccepted": 3,
+    "sceneQualityAccepted": 4,
     "sceneQualityTarget": 12,
     "artAccepted": false,
     "humanReview": false,
@@ -5569,9 +5569,9 @@
         }
       ],
       "currentCandidates": {
-        "asOf": "2026-10-20T23:19:48.980593+00:00",
-        "zh": "14项当前展示：2张女主静止外观基准已批准，12项未批准；完整精灵仍为0/52。",
-        "en": "14 current items:2 heroine static appearance baselines approved;12 remain unapproved. Complete runtime sprites remain0/52.",
+        "asOf": "2026-10-20T23:50:05Z",
+        "zh": "14项当前展示：2张女主静止外观基准和1个战场环境已批准；11项未批准。完整精灵仍为0/52。",
+        "en": "14 current items:2 heroine static appearance baselines and1 battle environment accepted;11 remain unapproved. Complete runtime sprites remain0/52.",
         "scopedReferenceOrders": [
           1
         ],
@@ -5586,7 +5586,8 @@
           "docs/qa/rpg-2-star-ocean-the-second_heroine-sea_battle-static-root-closeout_v01_20261020-182831-69f29955.md",
           "docs/qa/rpg-2-star-ocean-the-second_heroine-sea_exploration-static-visual-review_v01_20261020-182420-1d4edf96.md",
           "docs/character-visuals/rpg-2-star-ocean-the-second_heroine-sea_static-baselines-creator-approval_v01_20261020-185828-8775642a.md",
-          "docs/qa/rpg-2-star-ocean-the-second_battle-arena_native-production-root-closeout_v01_20261020-231908-6f6bae69.md"
+          "docs/qa/rpg-2-star-ocean-the-second_battle-arena_native-production-root-closeout_v01_20261020-231908-6f6bae69.md",
+          "docs/qa/rpg-2-star-ocean-the-second_battle-arena_scene-visual-acceptance_v01_20261020-234940-8308e1d9.md"
         ],
         "items": [
           {
@@ -6174,30 +6175,39 @@
               "en": "Science battle arena · native layered environment"
             },
             "caption": {
-              "zh": "七层原生设备、框架、投影与植栽，保留已披露的旧庭院底板。真实640×360战斗；角色与敌人仍为旧占位图，不在本次环境审查范围。",
-              "en": "Seven authored fixture, framing, shadow and planting layers over the declared inherited courtyard plate. Actual640x360 battle; legacy character/enemy placeholders are outside this environment review."
+              "zh": "创作者已正式验收本图的战场环境画质，记为科技区第4/12个场景。七层原生设施覆盖已披露的旧庭院底板；角色、敌人与动作不在验收范围。",
+              "en": "Creator accepted this environment visual as science scene4/12. Seven native fixture layers over the declared inherited courtyard plate; characters,enemies and motion remain outside scope."
             },
             "file": "outputs/benv12/rpg-2-star-ocean-the-second_battle-native_patrol-en-entry_native_20261020-231550-54097070.png",
             "scope": {
-              "zh": "只审查环境画质；不包括角色、动作、默认采用或完整试玩。编辑器诊断仍有两项失败，源/导出像素一致。",
-              "en": "Environment appearance only; excludes character art, motion, default adoption and human playtesting. Two editor-diagnostic checks remain failed; source/export pixels match."
+              "zh": "环境画质已验收；不包括角色、敌人、动作、其他场景、默认采用或试玩。两项编辑器诊断仍失败，源/导出像素一致。",
+              "en": "Environment appearance accepted only; excludes characters,enemies,motion,other scenes,default adoption and playtesting. Two editor-diagnostic checks remain failed; source/export pixels match."
             },
-            "creatorApproved": false,
-            "artAccepted": false,
+            "creatorApproved": true,
+            "artAccepted": true,
             "runtimeIntegrated": true,
             "testOnly": false,
             "technicalCandidate": true,
-            "readyForCreatorReview": true,
+            "readyForCreatorReview": false,
             "badge": {
-              "zh": "已制作 · 可选接入 · 待验收",
-              "en": "Produced · runtime opt-in · awaiting review",
-              "tone": "warn"
+              "zh": "环境已验收 · 可选接入",
+              "en": "Environment accepted · runtime opt-in",
+              "tone": "good"
             },
             "qa": "docs/qa/rpg-2-star-ocean-the-second_battle-arena_native-production-root-closeout_v01_20261020-231908-6f6bae69.md",
             "gitBlob": "95f13127398b77c1590a996af136a32c39cf8938",
             "sha256": "0531aec7db37be78cc5128557bfbacd4fe8fec9acf4639ee5ab30370b9a86064",
             "syncState": "committed-at-31c92aa",
-            "hashPinnedIn": "31c92aa8c76bced04af5a684a6c377c2ebf14885"
+            "hashPinnedIn": "31c92aa8c76bced04af5a684a6c377c2ebf14885",
+            "approvedScopeOnly": "This battle environment visual only; excludes characters,enemies,motion,default adoption,editor reliability and playtests.",
+            "creatorDecision": {
+              "answer": "approved",
+              "acceptedAt": "2026-10-20T23:50:05Z",
+              "evidence": "docs/qa/rpg-2-star-ocean-the-second_battle-arena_scene-visual-acceptance_v01_20261020-234940-8308e1d9.md"
+            },
+            "acceptanceKind": "scene-visual",
+            "optInOnly": true,
+            "defaultOff": true
           }
         ],
         "supersededCurrent": [
@@ -7081,11 +7091,14 @@
         "diagnostics": "FAILED: shader error also occurs on unchanged older PXO control; pixel exports exact"
       },
       "guiSaveReopenVerified": false,
-      "creatorApproved": false,
+      "creatorApproved": true,
       "defaultAdopted": false,
       "beforeProductionPercent": 53.6,
       "afterProductionPercent": 54,
-      "recordedAt": "2026-10-20T23:19:48.980593+00:00"
+      "recordedAt": "2026-10-20T23:19:48.980593+00:00",
+      "environmentArtAccepted": true,
+      "creatorApprovalEvidence": "docs/qa/rpg-2-star-ocean-the-second_battle-arena_scene-visual-acceptance_v01_20261020-234940-8308e1d9.md",
+      "creatorApprovedAt": "2026-10-20T23:50:05Z"
     }
   },
   "creatorDecisions": {
@@ -7679,35 +7692,35 @@
     "combinedWiringCheck": "297/297 on39f252e, clean raw log; actual Chinese victory inspected."
   },
   "latestTaskProgress": {
-    "id": "content.scene.battle-arena.native-pass",
+    "id": "creator.scene.battle-arena.accept",
     "status": "completed",
     "title": {
-      "zh": "完成科技区战场原生分层与设施美术",
-      "en": "Complete native layered science battle environment"
+      "zh": "记录创作者对科技区战场环境的正式验收",
+      "en": "Record creator acceptance of the science battle environment"
     },
-    "startedAt": "2026-10-20T23:01:00.606Z",
-    "sourceBefore": "2fdc90b3c738f1f99911b33afa85ad5e9517022d",
+    "startedAt": "2026-10-20T23:49:41.044Z",
+    "sourceBefore": "80e53119bb4c721b8f521daa109945525f1eff35",
     "meters": {
       "production": {
-        "before": 53.6,
+        "before": 54,
         "after": 54,
-        "changePercentagePoints": 0.4
+        "changePercentagePoints": 0
       },
       "inspection": {
-        "before": 14.2,
+        "before": 15.2,
         "after": 15.2,
-        "changePercentagePoints": 1
+        "changePercentagePoints": 0
       },
       "approval": {
         "before": 7,
-        "after": 7,
-        "changePercentagePoints": 0
+        "after": 7.4,
+        "changePercentagePoints": 0.4
       }
     },
-    "completedAt": "2026-10-20T23:19:59.581Z",
-    "sourceAfter": "31c92aa8c76bced04af5a684a6c377c2ebf14885",
+    "completedAt": "2026-10-20T23:50:16.345Z",
+    "sourceAfter": "80e53119bb4c721b8f521daa109945525f1eff35",
     "evidence": [
-      "docs/qa/rpg-2-star-ocean-the-second_battle-arena_native-production-root-closeout_v01_20261020-231908-6f6bae69.md"
+      "docs/qa/rpg-2-star-ocean-the-second_battle-arena_scene-visual-acceptance_v01_20261020-234940-8308e1d9.md"
     ]
   },
   "progressReporting": {
@@ -7875,6 +7888,38 @@
       "evidence": [
         "docs/qa/rpg-2-star-ocean-the-second_heroine-sea_arm-stop-root-closeout_unapproved-v08_20261020-223022-d20c0a9b.md"
       ]
+    },
+    {
+      "id": "content.scene.battle-arena.native-pass",
+      "status": "completed",
+      "title": {
+        "zh": "完成科技区战场原生分层与设施美术",
+        "en": "Complete native layered science battle environment"
+      },
+      "startedAt": "2026-10-20T23:01:00.606Z",
+      "sourceBefore": "2fdc90b3c738f1f99911b33afa85ad5e9517022d",
+      "meters": {
+        "production": {
+          "before": 53.6,
+          "after": 54,
+          "changePercentagePoints": 0.4
+        },
+        "inspection": {
+          "before": 14.2,
+          "after": 15.2,
+          "changePercentagePoints": 1
+        },
+        "approval": {
+          "before": 7,
+          "after": 7,
+          "changePercentagePoints": 0
+        }
+      },
+      "completedAt": "2026-10-20T23:19:59.581Z",
+      "sourceAfter": "31c92aa8c76bced04af5a684a6c377c2ebf14885",
+      "evidence": [
+        "docs/qa/rpg-2-star-ocean-the-second_battle-arena_native-production-root-closeout_v01_20261020-231908-6f6bae69.md"
+      ]
     }
   ],
   "latestBattleEnvironmentProduction": {
@@ -7903,10 +7948,13 @@
       "diagnostics": "FAILED: shader error also occurs on unchanged older PXO control; pixel exports exact"
     },
     "guiSaveReopenVerified": false,
-    "creatorApproved": false,
+    "creatorApproved": true,
     "defaultAdopted": false,
     "beforeProductionPercent": 53.6,
     "afterProductionPercent": 54,
-    "recordedAt": "2026-10-20T23:19:48.980593+00:00"
+    "recordedAt": "2026-10-20T23:19:48.980593+00:00",
+    "environmentArtAccepted": true,
+    "creatorApprovalEvidence": "docs/qa/rpg-2-star-ocean-the-second_battle-arena_scene-visual-acceptance_v01_20261020-234940-8308e1d9.md",
+    "creatorApprovedAt": "2026-10-20T23:50:05Z"
   }
 }

@@ -2,7 +2,7 @@
   "id": "rpg-2-star-ocean-the-second_production-completion_v01",
   "schemaVersion": 2,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-20T23:19:49Z",
+  "updatedAt": "2026-10-20T23:50:16Z",
   "zh": "制作完成度任务台账：衡量已完成的工作量（编码 40% + 内容 60%）；检查／审查与创作者批准分开计量，均不改变制作分；免除的审查不算已执行的工作；运营任务列出负责方但不计百分比。",
   "en": "Production-completion task ledger: measures work done (coding 40% + content 60%); inspection/review and creator approval are separate meters and never change production credit; waived reviews are not performed work; operations tasks list owners but carry no percentage.",
   "brief": "docs/rpg-2-star-ocean-the-second_production-completion_bilingual-brief_v01_20261018-140533-3ea2a621.md",
@@ -775,11 +775,11 @@
     "approval": {
       "zh": "创作者批准",
       "en": "Creator approval",
-      "done": 17,
+      "done": 18,
       "total": 244,
-      "percent": 7,
+      "percent": 7.4,
       "tasks": 239,
-      "tasksDone": 17
+      "tasksDone": 18
     },
     "operations": {
       "zh": "运营任务（不计入任何百分比）",
@@ -842,11 +842,11 @@
         "waivedPoints": 0
       },
       "creator-approval": {
-        "done": 17,
+        "done": 18,
         "total": 244,
-        "percent": 7,
+        "percent": 7.4,
         "tasks": 239,
-        "tasksDone": 17,
+        "tasksDone": 18,
         "waivedTasks": 0,
         "waivedPoints": 0
       },
@@ -901,12 +901,12 @@
         "tasks": 239,
         "operationsTasks": 0,
         "points": 244,
-        "pointsDone": 17,
+        "pointsDone": 18,
         "byStatus": {
-          "done": 17,
-          "todo": 222
+          "done": 18,
+          "todo": 221
         },
-        "readyInQueue": 62,
+        "readyInQueue": 61,
         "revisionsBlockingApproval": 0
       }
     },
@@ -1023,7 +1023,7 @@
           "total": 9
         },
         "creator-approval": {
-          "done": 3,
+          "done": 4,
           "total": 12
         }
       },
@@ -1089,7 +1089,7 @@
     "queue": {
       "zh": "待处理（依赖已完成）",
       "en": "Ready (dependencies done)",
-      "count": 65,
+      "count": 64,
       "items": [
         {
           "id": "creator.char.protagonist-male.approve-portrait",
@@ -1484,13 +1484,6 @@
           "points": 1
         },
         {
-          "id": "creator.scene.battle-arena.accept",
-          "stage": "creator-approval",
-          "owner": "creator",
-          "status": "todo",
-          "points": 1
-        },
-        {
           "id": "creator.scene.chicago-loop.accept",
           "stage": "creator-approval",
           "owner": "creator",
@@ -1585,14 +1578,14 @@
     "legacy": {
       "zh": "旧版混合交付／验收估算（不是正式验收）",
       "en": "Legacy mixed delivery/acceptance estimate (not formal acceptance)",
-      "percent": 40.8,
-      "percentLabel": "40.8%",
+      "percent": 42.5,
+      "percentLabel": "42.5%",
       "counters": {
         "identities": 51,
         "visualVariants": 52,
         "runtimeSpritesAccepted": 0,
         "runtimeSpritesTarget": 52,
-        "sceneVisualsAccepted": 3,
+        "sceneVisualsAccepted": 4,
         "sceneVisualsTarget": 12,
         "humanPlaytests": 0,
         "humanPlaytestsTarget": 2
@@ -2744,7 +2737,7 @@
     {"id":"content.scene.battle-arena.native-default","type":"integration","title":{"zh":"科技区横向战场 · 画质版默认接入","en":"Science side-view battle arena · quality pass on by default"},"area":"scenes","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"画质版默认在游戏中使用","en":"The quality pass is used in the game by default"},"dependsOn":["content.scene.battle-arena.native-pass","content.scene.battle-arena.wiring"],"evidence":[],"subject":{"kind":"scene-gate","id":"visual-scene.battle-arena"}},
     {"id":"qa.scene.battle-arena.check","type":"technical-check","title":{"zh":"科技区横向战场 · 技术检查","en":"Science side-view battle arena · technical check"},"area":"scenes","stage":"technical-inspection","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"当前画质版的 Godot 检查全部通过","en":"Godot checks of the current quality pass all pass"},"dependsOn":["content.scene.battle-arena.native-pass"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_battle-arena_native-production-root-closeout_v01_20261020-231908-6f6bae69.md"],"subject":{"kind":"scene-gate","id":"visual-scene.battle-arena"},"target":"content.scene.battle-arena.native-pass","statusAt":"2026-10-20T23:19:49Z","outcome":"technical-pass","note":{"zh":"","en":"Codex independent Godot52/52 native,48/48 default,52/52 oldplate;24 old captures exact and12 native-only-band comparisons; combat traces and safe returns identical. Native ObjectDB exit warning disclosed."}},
     {"id":"review.scene.battle-arena","type":"visual-review","title":{"zh":"科技区横向战场 · 视觉审查","en":"Science side-view battle arena · visual review"},"area":"scenes","stage":"visual-review","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"Codex 审查 640×360 实机画面并记录结论","en":"Codex reviews actual 640x360 captures and records a verdict"},"dependsOn":["qa.scene.battle-arena.check"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_battle-arena_native-production-root-closeout_v01_20261020-231908-6f6bae69.md"],"subject":{"kind":"scene-gate","id":"visual-scene.battle-arena"},"target":"content.scene.battle-arena.native-pass","statusAt":"2026-10-20T23:19:49Z","outcome":"passed","note":{"zh":"","en":"Codex viewed actual640x360 EN entry andZH combat. Distinct grounded fixtures and clear combat lane; cleaner native props over inherited textured base. Ready for environment-only creator review, not creator acceptance."}},
-    {"id":"creator.scene.battle-arena.accept","type":"creator-acceptance","title":{"zh":"科技区横向战场 · 场景画质验收","en":"Science side-view battle arena · scene-quality acceptance"},"area":"scenes","stage":"creator-approval","owner":"creator","status":"todo","points":1,"doneCriterion":{"zh":"approvalLedger 记有 acceptanceKind scene-visual 的验收条目","en":"approvalLedger records an acceptanceKind scene-visual item"},"dependsOn":["content.scene.battle-arena.native-pass"],"evidence":[],"subject":{"kind":"scene-gate","id":"visual-scene.battle-arena"},"target":"content.scene.battle-arena.native-pass"},
+    {"id":"creator.scene.battle-arena.accept","type":"creator-acceptance","title":{"zh":"科技区横向战场 · 场景画质验收","en":"Science side-view battle arena · scene-quality acceptance"},"area":"scenes","stage":"creator-approval","owner":"creator","status":"done","points":1,"doneCriterion":{"zh":"approvalLedger 记有 acceptanceKind scene-visual 的验收条目","en":"approvalLedger records an acceptanceKind scene-visual item"},"dependsOn":["content.scene.battle-arena.native-pass"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_battle-arena_scene-visual-acceptance_v01_20261020-234940-8308e1d9.md"],"subject":{"kind":"scene-gate","id":"visual-scene.battle-arena"},"target":"content.scene.battle-arena.native-pass","statusAt":"2026-10-20T23:50:16Z","note":{"zh":"","en":"Creator exact reply approved to displayed environment-only visual. Scene4/12; no character/enemy/motion/default adoption/editor-reliability/playtest approval. Production unchanged."}},
     {"id":"content.scene.chicago-loop.plate","type":"integration","title":{"zh":"芝加哥卢普区街区 · 场景底板","en":"Chicago Loop block · scene plate"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":4,"doneCriterion":{"zh":"可玩场景底板已提交并在运行时可进入（概念图不算）","en":"A playable scene plate is committed and enterable in the runtime (a concept image does not count)"},"dependsOn":[],"evidence":["docs/qa/rpg-2-star-ocean-the-second_chicago-loop_state-lake-arrival-block-native-scene_qa-note_unapproved-v02_20261017-160959-6bcff07f.md"],"subject":{"kind":"scene-gate","id":"visual-scene.chicago-loop-outdoor"}},
     {"id":"content.scene.chicago-loop.wiring","type":"integration","title":{"zh":"芝加哥卢普区街区 · 碰撞、热点与出入口","en":"Chicago Loop block · collision, hotspots and exits"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":3,"doneCriterion":{"zh":"碰撞、热点、出入口与存档有自动检查","en":"Collision, hotspots, exits and saves have automated checks"},"dependsOn":["content.scene.chicago-loop.plate"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_chicago-loop_state-lake-arrival-block-native-scene_qa-note_unapproved-v02_20261017-160959-6bcff07f.md"],"subject":{"kind":"scene-gate","id":"visual-scene.chicago-loop-outdoor"}},
     {"id":"content.scene.chicago-loop.native-pass","type":"native-pixel","title":{"zh":"芝加哥卢普区街区 · 原生像素画质版","en":"Chicago Loop block · native pixel quality pass"},"area":"scenes","stage":"content","owner":"codex","status":"done","points":12,"doneCriterion":{"zh":"原生像素画质版（道具／分层）已提交并有 QA，可为可选启用","en":"A native pixel quality pass (fixtures / layers) is committed with QA; opt-in is allowed"},"dependsOn":["content.scene.chicago-loop.plate"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_chicago-loop_state-lake-arrival-block-native-scene_qa-note_unapproved-v03r1_20261017-184340-49dde4dd.md"],"subject":{"kind":"scene-gate","id":"visual-scene.chicago-loop-outdoor"}},

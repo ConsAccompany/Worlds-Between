@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
   "planVersion": "v0.2",
-  "updatedAt": "2026-10-18T22:08:10.716934+00:00",
+  "updatedAt": "2026-10-20T23:50:15Z",
   "currentStep": "M8",
   "steps": [
     {
@@ -277,14 +277,14 @@
     }
   ],
   "approvalLedger": {
-    "updatedAt": "2026-10-17T05:35:31Z",
-    "note": "Approval scope is recorded exactly as the user gave it. Direction and scoped baseline approvals do not count as asset acceptance. NYC public facilities rooms 2 and 1, then the Yonkers signal maintenance room, are the first three creator-accepted scene-visual gates.",
+    "updatedAt": "2026-10-20T23:49:40Z",
+    "note": "Exact scoped creator approvals; four accepted scene-visual gates:NYC public facilities rooms1/2,Yonkers maintenance room2 and the science battle arena. Characters/enemies/motion/default adoption/editor reliability/playtests are separate.",
     "counters": {
       "identities": 51,
       "visualVariants": 52,
       "runtimeSpritesAccepted": 0,
       "runtimeSpritesTarget": 52,
-      "sceneVisualsAccepted": 3,
+      "sceneVisualsAccepted": 4,
       "sceneVisualsTarget": 12,
       "humanPlaytests": 0,
       "humanPlaytestsTarget": 2
@@ -394,6 +394,22 @@
           "docs/qa/rpg-2-star-ocean-the-second_yonkers-maintenance-room2_scene-visual-acceptance_v01_20261017-013504-6a0c92d1.md",
           "game/scripts/survey_annex.gd"
         ]
+      },
+      {
+        "id": "battle-arena-scene-visual-accepted",
+        "status": "accepted",
+        "acceptanceKind": "scene-visual",
+        "units": 1,
+        "zh": "科技区横向战场环境画质正式验收",
+        "en": "Science side-view battle arena environment visual accepted",
+        "scope": "仅批准已展示的640×360实机图内的战场环境画质；不含角色、敌人、动作、其他场景、默认采用、编辑器可靠性或人工试玩。",
+        "evidence": [
+          "docs/qa/rpg-2-star-ocean-the-second_battle-arena_scene-visual-acceptance_v01_20261020-234940-8308e1d9.md",
+          "outputs/benv12/rpg-2-star-ocean-the-second_battle-native_patrol-en-entry_native_20261020-231550-54097070.png"
+        ],
+        "sourceCommit": "31c92aa8c76bced04af5a684a6c377c2ebf14885",
+        "creatorAnswer": "approved",
+        "acceptedAt": "2026-10-20T23:49:40Z"
       }
     ]
   },
@@ -662,10 +678,10 @@
     "kind": "weighted_delivery_estimate",
     "zh": "MVP 加权交付估算（不是正式批准）",
     "en": "MVP weighted delivery estimate (not formal approval)",
-    "updatedAt": "2026-10-18T18:14:52Z",
-    "percent": 40.8,
-    "percentLabel": "40.8%",
-    "weightedPoints": 40.83,
+    "updatedAt": "2026-10-20T23:50:15Z",
+    "percent": 42.5,
+    "percentLabel": "42.5%",
+    "weightedPoints": 42.5,
     "weightTotal": 100,
     "countingRules": [
       {
@@ -694,7 +710,7 @@
       "en": "Formal approval is separate from this weighted estimate: only creator acceptance recorded in approvalLedger and the two M9 integrated human playtests count as approval. This percentage approves no asset, scene or milestone.",
       "mvpFormallyAccepted": false,
       "runtimeSpritesAccepted": "0/52",
-      "sceneVisualsAccepted": "3/12",
+      "sceneVisualsAccepted": "4/12",
       "humanPlaytests": "0/2",
       "scopedApprovalsNotCountedAsAcceptance": [
         {
@@ -926,11 +942,11 @@
         "zh": "科技圈环境美术（已验收场景画质门）",
         "en": "Science environment art (accepted scene-quality gates)",
         "weight": 20,
-        "numerator": 3,
+        "numerator": 4,
         "denominator": 12,
-        "ratio": "3/12",
-        "percent": 25,
-        "weightedPoints": 5,
+        "ratio": "4/12",
+        "percent": 33.3,
+        "weightedPoints": 6.67,
         "source": {
           "path": "approvalLedger",
           "rule": {
@@ -945,7 +961,9 @@
           "docs/qa/rpg-2-star-ocean-the-second_nyc-public-facilities-room2_scene-visual-acceptance_v01_20261017-010900-8f4a2c6e.md",
           "game/scripts/survey_annex.gd",
           "docs/qa/rpg-2-star-ocean-the-second_nyc-public-facilities-room1_scene-visual-acceptance_v01_20261017-013027-3e7d91c4.md",
-          "docs/qa/rpg-2-star-ocean-the-second_yonkers-maintenance-room2_scene-visual-acceptance_v01_20261017-013504-6a0c92d1.md"
+          "docs/qa/rpg-2-star-ocean-the-second_yonkers-maintenance-room2_scene-visual-acceptance_v01_20261017-013504-6a0c92d1.md",
+          "docs/qa/rpg-2-star-ocean-the-second_battle-arena_scene-visual-acceptance_v01_20261020-234940-8308e1d9.md",
+          "outputs/benv12/rpg-2-star-ocean-the-second_battle-native_patrol-en-entry_native_20261020-231550-54097070.png"
         ],
         "nextGate": {
           "zh": "下一道门：创作者在 640×360 可玩画面中验收下一处科技圈场景画质，并登记 acceptanceKind=scene-visual 条目。",
@@ -982,9 +1000,9 @@
     ],
     "updater": "tools/rpg-2-star-ocean-the-second_mvp-completion-meter_recompute-and-task-closeout-cli_v01_20261015-233032-d296a2cb.js",
     "lastUpdated": {
-      "at": "2026-10-18T18:14:52Z",
-      "closeoutId": "closeout-20261018-181452-d30cac4c",
-      "percent": 40.8
+      "at": "2026-10-20T23:50:15Z",
+      "closeoutId": "closeout-20261020-235015-63d3567a",
+      "percent": 42.5
     },
     "taskCloseouts": [
       {
@@ -4024,6 +4042,42 @@
           "outputs/rpg-2-star-ocean-the-second_production-completion_task-ledger_v01_20261018-140533-3de52073.json",
           "tools/rpg-2-star-ocean-the-second_production-completion_ledger-cli_v01_20261018-140533-3b436630.js",
           "tests/production-completion/rpg-2-star-ocean-the-second_production-completion_invariants_check_v01_20261018-140533-2978305e.js"
+        ]
+      },
+      {
+        "id": "closeout-20261020-235015-63d3567a",
+        "recordedAt": "2026-10-20T23:50:15Z",
+        "kind": "task",
+        "title": {
+          "zh": "创作者验收科技区战场环境画质",
+          "en": "Creator accepted science battle arena environment visual"
+        },
+        "impact": {
+          "changed": true,
+          "percentBefore": 40.8,
+          "percentAfter": 42.5,
+          "deltaPoints": 1.67,
+          "gateChanges": [
+            {
+              "key": "science-environment-art",
+              "category": "science-environment-art",
+              "gate": null,
+              "from": "3/12",
+              "to": "4/12"
+            }
+          ],
+          "categoryChanges": [
+            {
+              "id": "science-environment-art",
+              "before": "3/12",
+              "after": "4/12",
+              "weightedPointsBefore": 5,
+              "weightedPointsAfter": 6.67
+            }
+          ]
+        },
+        "evidence": [
+          "docs/qa/rpg-2-star-ocean-the-second_battle-arena_scene-visual-acceptance_v01_20261020-234940-8308e1d9.md"
         ]
       }
     ]
