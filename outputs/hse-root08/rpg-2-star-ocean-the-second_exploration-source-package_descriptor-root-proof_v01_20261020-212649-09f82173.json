@@ -1,0 +1,45 @@
+{
+  "completedAt": "2026-10-20T21:26:50.958122+00:00",
+  "cases": [
+    {
+      "case": "wrong-hash",
+      "exit": 1,
+      "atomicNoOutput": true,
+      "input": "outputs/hsea-exp03/rpg-2-star-ocean-the-second_heroine-sea-explore_source-mutated-wrong-hash_test-only-v01_20261020-212649-09f82173.json",
+      "errors": [
+        "source manifest C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/outputs/hsea-exp03/rpg-2-star-ocean-the-second_heroine-sea-explore_source-mutated-wrong-hash_test-only-v01_20261020-212649-09f82173.json: source_files[0] does not match its sha256 pin"
+      ]
+    },
+    {
+      "case": "malformed-hash",
+      "exit": 1,
+      "atomicNoOutput": true,
+      "input": "outputs/hsea-exp03/rpg-2-star-ocean-the-second_heroine-sea-explore_source-mutated-malformed-hash_test-only-v01_20261020-212649-09f82173.json",
+      "errors": [
+        "source manifest C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/outputs/hsea-exp03/rpg-2-star-ocean-the-second_heroine-sea-explore_source-mutated-malformed-hash_test-only-v01_20261020-212649-09f82173.json: source_files[0] has an invalid sha256 pin"
+      ]
+    },
+    {
+      "case": "traversal",
+      "exit": 1,
+      "atomicNoOutput": true,
+      "input": "outputs/hsea-exp03/rpg-2-star-ocean-the-second_heroine-sea-explore_source-mutated-traversal_test-only-v01_20261020-212649-09f82173.json",
+      "errors": [
+        "source manifest C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/outputs/hsea-exp03/rpg-2-star-ocean-the-second_heroine-sea-explore_source-mutated-traversal_test-only-v01_20261020-212649-09f82173.json: source_files[0]: traversal or empty path component in '../outside.pxo'"
+      ]
+    },
+    {
+      "case": "bad-file-type",
+      "exit": 1,
+      "atomicNoOutput": true,
+      "input": "outputs/hsea-exp03/rpg-2-star-ocean-the-second_heroine-sea-explore_source-mutated-bad-file-type_test-only-v01_20261020-212649-09f82173.json",
+      "errors": [
+        "source manifest C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/outputs/hsea-exp03/rpg-2-star-ocean-the-second_heroine-sea-explore_source-mutated-bad-file-type_test-only-v01_20261020-212649-09f82173.json: source_files[0] must be a relative path string or file descriptor"
+      ]
+    }
+  ],
+  "allPass": true,
+  "toolSha256Raw": "ee5d033f9cc07a118eab7b047f24e18c29867650e38d47ecd485e5fcf607d4f6",
+  "sourceManifestSha256Raw": "21a2ddda29485d62ec19385902b73fc28e0bbc972b2b2d1339e593723bdf5e2c",
+  "nativeCheckLog": "outputs/hse-root08/rpg-2-star-ocean-the-second_heroine-sea-explore_native-root-check_v01_20261020-212649-09f82173.log"
+}
