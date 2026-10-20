@@ -4,7 +4,7 @@
   "title": "世界之间",
   "englishTitle": "Worlds Between",
   "edition": "设计基线 v0.2 · 2026-10-15 创作者决定",
-  "updatedAt": "2026-10-20T22:31:46.809Z",
+  "updatedAt": "2026-10-20T23:19:59.581Z",
   "note": "规则以玩家确认的设计稿为基线，并已并入 2026-10-15 创作者决定；人物姓名与外观是待审提案，具体剧情留待后续设计。",
   "pitch": "从地下社区走出的旅人，以好奇心探索多元文明，招募伙伴，并成为不同世界认知差异的桥梁。",
   "pillars": [
@@ -5091,7 +5091,7 @@
     "outdoorCandidatesIntegrated": 3,
     "surveyRoomCandidatesIntegrated": 6,
     "battleArenaCandidatesAuthored": 1,
-    "battleArenaCandidatesIntegrated": 0,
+    "battleArenaCandidatesIntegrated": 1,
     "sceneQualityAccepted": 3,
     "sceneQualityTarget": 12,
     "artAccepted": false,
@@ -5569,9 +5569,9 @@
         }
       ],
       "currentCandidates": {
-        "asOf": "2026-10-20T18:58:28.265961Z",
-        "zh": "13项当前展示：2张女主静止外观基准已批准，11项仍未批准。完整精灵仍为0/52。",
-        "en": "13 current items: 2 heroine static appearance baselines approved; 11 remain unapproved. Complete runtime sprites remain 0/52.",
+        "asOf": "2026-10-20T23:19:48.980593+00:00",
+        "zh": "14项当前展示：2张女主静止外观基准已批准，12项未批准；完整精灵仍为0/52。",
+        "en": "14 current items:2 heroine static appearance baselines approved;12 remain unapproved. Complete runtime sprites remain0/52.",
         "scopedReferenceOrders": [
           1
         ],
@@ -5585,7 +5585,8 @@
           "outputs/fexp-merged-v01/rpg-2-star-ocean-the-second_female-complete-explore_canonical-integration-qa_unapproved-v01_20261019-233439-bc8a3150.md",
           "docs/qa/rpg-2-star-ocean-the-second_heroine-sea_battle-static-root-closeout_v01_20261020-182831-69f29955.md",
           "docs/qa/rpg-2-star-ocean-the-second_heroine-sea_exploration-static-visual-review_v01_20261020-182420-1d4edf96.md",
-          "docs/character-visuals/rpg-2-star-ocean-the-second_heroine-sea_static-baselines-creator-approval_v01_20261020-185828-8775642a.md"
+          "docs/character-visuals/rpg-2-star-ocean-the-second_heroine-sea_static-baselines-creator-approval_v01_20261020-185828-8775642a.md",
+          "docs/qa/rpg-2-star-ocean-the-second_battle-arena_native-production-root-closeout_v01_20261020-231908-6f6bae69.md"
         ],
         "items": [
           {
@@ -6163,6 +6164,40 @@
             "gitBlob": "e5069b2ec29c37c2925ba09be5eea72fb7d2110e",
             "sha256": "9fb6ebfb9256a5c104c2cab0f6ec4f6a52623cd8e3d94cf012d88a6e37c5b1b2",
             "bytes": 654847
+          },
+          {
+            "id": "current-science-battle-environment-native-v01",
+            "rank": 14,
+            "kind": "actual-godot-capture",
+            "label": {
+              "zh": "科技区战场 · 原生分层环境",
+              "en": "Science battle arena · native layered environment"
+            },
+            "caption": {
+              "zh": "七层原生设备、框架、投影与植栽，保留已披露的旧庭院底板。真实640×360战斗；角色与敌人仍为旧占位图，不在本次环境审查范围。",
+              "en": "Seven authored fixture, framing, shadow and planting layers over the declared inherited courtyard plate. Actual640x360 battle; legacy character/enemy placeholders are outside this environment review."
+            },
+            "file": "outputs/benv12/rpg-2-star-ocean-the-second_battle-native_patrol-en-entry_native_20261020-231550-54097070.png",
+            "scope": {
+              "zh": "只审查环境画质；不包括角色、动作、默认采用或完整试玩。编辑器诊断仍有两项失败，源/导出像素一致。",
+              "en": "Environment appearance only; excludes character art, motion, default adoption and human playtesting. Two editor-diagnostic checks remain failed; source/export pixels match."
+            },
+            "creatorApproved": false,
+            "artAccepted": false,
+            "runtimeIntegrated": true,
+            "testOnly": false,
+            "technicalCandidate": true,
+            "readyForCreatorReview": true,
+            "badge": {
+              "zh": "已制作 · 可选接入 · 待验收",
+              "en": "Produced · runtime opt-in · awaiting review",
+              "tone": "warn"
+            },
+            "qa": "docs/qa/rpg-2-star-ocean-the-second_battle-arena_native-production-root-closeout_v01_20261020-231908-6f6bae69.md",
+            "gitBlob": "95f13127398b77c1590a996af136a32c39cf8938",
+            "sha256": "0531aec7db37be78cc5128557bfbacd4fe8fec9acf4639ee5ab30370b9a86064",
+            "syncState": "committed-at-31c92aa",
+            "hashPinnedIn": "31c92aa8c76bced04af5a684a6c377c2ebf14885"
           }
         ],
         "supersededCurrent": [
@@ -7019,6 +7054,38 @@
         ]
       },
       "note": "docs/design/rpg-2-star-ocean-the-second_creator-decisions-2026-10-15_world-skills-ai-endgame_reconciliation-note_v01_20261015-174559-39efc292.md"
+    },
+    "battleArenaNativeOptIn": {
+      "task": "content.scene.battle-arena.native-pass",
+      "status": "produced-integrated-opt-in",
+      "sourceCommit": "31c92aa8c76bced04af5a684a6c377c2ebf14885",
+      "owner": "claude",
+      "sourceValidationOwner": "deepseek",
+      "inspectionOwner": "codex",
+      "creatorDecisionOwner": "creator",
+      "qa": "docs/qa/rpg-2-star-ocean-the-second_battle-arena_native-production-root-closeout_v01_20261020-231908-6f6bae69.md",
+      "nativeCanvas": [
+        640,
+        212
+      ],
+      "nativeLayers": 7,
+      "inheritedFlatBase": true,
+      "runtimeFlag": "--battle-native-environment-v01",
+      "runtimeGodotChecks": {
+        "passed": 52,
+        "total": 52
+      },
+      "pixeloramaChecks": {
+        "passed": 71,
+        "total": 73,
+        "diagnostics": "FAILED: shader error also occurs on unchanged older PXO control; pixel exports exact"
+      },
+      "guiSaveReopenVerified": false,
+      "creatorApproved": false,
+      "defaultAdopted": false,
+      "beforeProductionPercent": 53.6,
+      "afterProductionPercent": 54,
+      "recordedAt": "2026-10-20T23:19:48.980593+00:00"
     }
   },
   "creatorDecisions": {
@@ -7612,24 +7679,24 @@
     "combinedWiringCheck": "297/297 on39f252e, clean raw log; actual Chinese victory inspected."
   },
   "latestTaskProgress": {
-    "id": "support.heroine-sea.arms-and-stop",
+    "id": "content.scene.battle-arena.native-pass",
     "status": "completed",
     "title": {
-      "zh": "侧向摆臂与停步姿势衔接",
-      "en": "Side arm motion and authored stop handoff"
+      "zh": "完成科技区战场原生分层与设施美术",
+      "en": "Complete native layered science battle environment"
     },
-    "startedAt": "2026-10-20T22:16:21.839Z",
-    "sourceBefore": "fa93738c21ea16f0941f02959952058bb9a933fe",
+    "startedAt": "2026-10-20T23:01:00.606Z",
+    "sourceBefore": "2fdc90b3c738f1f99911b33afa85ad5e9517022d",
     "meters": {
       "production": {
         "before": 53.6,
-        "after": 53.6,
-        "changePercentagePoints": 0
+        "after": 54,
+        "changePercentagePoints": 0.4
       },
       "inspection": {
         "before": 14.2,
-        "after": 14.2,
-        "changePercentagePoints": 0
+        "after": 15.2,
+        "changePercentagePoints": 1
       },
       "approval": {
         "before": 7,
@@ -7637,10 +7704,10 @@
         "changePercentagePoints": 0
       }
     },
-    "completedAt": "2026-10-20T22:31:46.809Z",
-    "sourceAfter": "fd9177f0e92c1e356e9d2bbd3187353bff2b08ec",
+    "completedAt": "2026-10-20T23:19:59.581Z",
+    "sourceAfter": "31c92aa8c76bced04af5a684a6c377c2ebf14885",
     "evidence": [
-      "docs/qa/rpg-2-star-ocean-the-second_heroine-sea_arm-stop-root-closeout_unapproved-v08_20261020-223022-d20c0a9b.md"
+      "docs/qa/rpg-2-star-ocean-the-second_battle-arena_native-production-root-closeout_v01_20261020-231908-6f6bae69.md"
     ]
   },
   "progressReporting": {
@@ -7776,6 +7843,70 @@
       "evidence": [
         "docs/qa/rpg-2-star-ocean-the-second_heroine-sea_distance-gait-root-closeout_unapproved-v06_20261020-220500-c073a61e.md"
       ]
+    },
+    {
+      "id": "support.heroine-sea.arms-and-stop",
+      "status": "completed",
+      "title": {
+        "zh": "侧向摆臂与停步姿势衔接",
+        "en": "Side arm motion and authored stop handoff"
+      },
+      "startedAt": "2026-10-20T22:16:21.839Z",
+      "sourceBefore": "fa93738c21ea16f0941f02959952058bb9a933fe",
+      "meters": {
+        "production": {
+          "before": 53.6,
+          "after": 53.6,
+          "changePercentagePoints": 0
+        },
+        "inspection": {
+          "before": 14.2,
+          "after": 14.2,
+          "changePercentagePoints": 0
+        },
+        "approval": {
+          "before": 7,
+          "after": 7,
+          "changePercentagePoints": 0
+        }
+      },
+      "completedAt": "2026-10-20T22:31:46.809Z",
+      "sourceAfter": "fd9177f0e92c1e356e9d2bbd3187353bff2b08ec",
+      "evidence": [
+        "docs/qa/rpg-2-star-ocean-the-second_heroine-sea_arm-stop-root-closeout_unapproved-v08_20261020-223022-d20c0a9b.md"
+      ]
     }
-  ]
+  ],
+  "latestBattleEnvironmentProduction": {
+    "task": "content.scene.battle-arena.native-pass",
+    "status": "produced-integrated-opt-in",
+    "sourceCommit": "31c92aa8c76bced04af5a684a6c377c2ebf14885",
+    "owner": "claude",
+    "sourceValidationOwner": "deepseek",
+    "inspectionOwner": "codex",
+    "creatorDecisionOwner": "creator",
+    "qa": "docs/qa/rpg-2-star-ocean-the-second_battle-arena_native-production-root-closeout_v01_20261020-231908-6f6bae69.md",
+    "nativeCanvas": [
+      640,
+      212
+    ],
+    "nativeLayers": 7,
+    "inheritedFlatBase": true,
+    "runtimeFlag": "--battle-native-environment-v01",
+    "runtimeGodotChecks": {
+      "passed": 52,
+      "total": 52
+    },
+    "pixeloramaChecks": {
+      "passed": 71,
+      "total": 73,
+      "diagnostics": "FAILED: shader error also occurs on unchanged older PXO control; pixel exports exact"
+    },
+    "guiSaveReopenVerified": false,
+    "creatorApproved": false,
+    "defaultAdopted": false,
+    "beforeProductionPercent": 53.6,
+    "afterProductionPercent": 54,
+    "recordedAt": "2026-10-20T23:19:48.980593+00:00"
+  }
 }
