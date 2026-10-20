@@ -1,0 +1,11 @@
+# Private Bible v48 publication and live-verification limit
+
+Recorded 2026-10-20T21:07:51.135704+00:00. Game commit038e51b36585645df8add9b8b752209686d5978f; Site sourcee6935488c6b543656255b393ddb755c8fa7c5437. Deploymentappgdep_6ad7d751b84c8191b0bcde6a9e959ca1 succeeded. Audience owner/custom with one permitted user, zero groups/external visitors preserved. No access widening.
+
+Nine targeted Site checks and the existing framework build passed. New normal scripted combat reels use the exact committed sha256/Git-blob pins and existing size/path/range/hash gates; duplicates across runtime/staged/current/history lists are refused. Source staged reels and the13-card creator approval queue are unchanged. Snapshot and compact panel are exact game038e51b blobs. Before/afterproduction53.6→53.6(+0.0), inspection14.2,approval7.0; formalfalse.
+
+Actual live UI confirmed the pinned038e51b bundled snapshot, completed before/after card and new separate combat-flow section with both exact URLs/scopes. The GitHub live-refresh request did not complete before its client timeout; bundled snapshot remained correctly labelled nonlive. All10video elements, including preexisting ones, remained readyState0/no decoded dimensions at observation. Subsequent direct-video navigation timed out and browser focus commands also timed out, including one same-tab reconnect. Thus live browser playback is UNVERIFIED, not claimed passed. No security or media gate was bypassed; no speculative code changes made to hide it. Root ffprobe and actual game frames/recordings pass independently. Worker logs were examined locally; no account/header records are published.
+
+Full screenshot: `outputs/rpg-2-star-ocean-the-second_bible-natural-flow_live-v48_20261020-210657-69d17cf4.png`. Mechanical no-resize crop: `outputs/rpg-2-star-ocean-the-second_bible-natural-flow_readable-live-v48_20261020-210751-b5724f01.png` (1150x650 at1975,599 from5120x1269). It shows the published section and loading state, not successful playback.
+
+Next: verify native video playback once browser control is responsive; inspect full motion at normal speed before any artistic/default adoption claim. Core natural encounter/victory/return/reload and one-shot facing are complete and independently source-bound in09fa76bd closeout. No scoring change.
