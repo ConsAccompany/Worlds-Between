@@ -76,6 +76,9 @@ const ENEMY_TELEGRAPH_COLOR := Color(1.0, 0.23, 0.20, 0.28)
 # An arena without a band, a missing file or a band that is not an integer multiple of the play band falls back to the geometric
 # backdrop. Visual only: stats, AI, input, timers and positions are the same with the pilot on or off.
 const BATTLE_BACKDROP_CLI_FLAG := "--battle-backdrop-pilot"
+# Editable environment candidate; explicit opt-in, no combat or default change.
+const BATTLE_NATIVE_ENVIRONMENT_FLAG := "--battle-native-environment-v01"
+const BATTLE_NATIVE_ENVIRONMENT_PATH := "res://assets/environments/battle-native-v01/rpg-2-star-ocean-the-second_outskirts-arena_merged-flat_env12-v01_20261020-230516-b1e5838c.png"
 const BATTLE_BACKDROP_ARENA_ARG := "--battle-backdrop-arena="
 const BATTLE_BACKDROP_ART_APPROVED := false
 # The logical play band between the opaque header (0-90) and footer (302-360).
@@ -1189,13 +1192,17 @@ func _load_battle_backdrop() -> void:
 	battle_backdrop_texture = null
 	battle_backdrop_arena_id = ""
 	battle_backdrop_status = "off"
-	if not battle_backdrop_enabled():
+	var selected_arena := battle_backdrop_arena(AppState.current_destination_id)
+	var native_selected := OS.get_cmdline_user_args().has(BATTLE_NATIVE_ENVIRONMENT_FLAG) and selected_arena == "outskirts"
+	if not battle_backdrop_enabled() and not native_selected:
 		return
-	battle_backdrop_arena_id = battle_backdrop_arena(AppState.current_destination_id)
+	battle_backdrop_arena_id = selected_arena
 	if not BATTLE_BACKDROP_BANDS.has(battle_backdrop_arena_id):
 		battle_backdrop_status = "no_band"
 		return
 	var path: String = battle_backdrop_path_override if battle_backdrop_path_override != "" else BATTLE_BACKDROP_BANDS[battle_backdrop_arena_id]
+	if native_selected:
+		path = BATTLE_NATIVE_ENVIRONMENT_PATH
 	if not ResourceLoader.exists(path):
 		battle_backdrop_status = "missing"
 		return
