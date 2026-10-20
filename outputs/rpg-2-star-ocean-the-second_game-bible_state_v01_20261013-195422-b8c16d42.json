@@ -4466,32 +4466,137 @@
     },
     "previousStatusBeforeSeaStaticApproval": "The creator approved the 48-logical-pixel display scale for male/female protagonist and Liang Xu in the three-character Godot city comparison. This is scale approval only. Five native 32x48 exploration sets remain integrated as rejected-quality functional placeholders. The three characters each have south/east/north premium static direction concepts (nine total), technically captured at that scale. Liang east has a partly three-quarter torso and north a slightly turned head; cross-direction continuity and low-alpha edges remain open. One female south left-stride movement concept has a 48-pixel capture. An independently generated four-phase south walk feasibility loop has scarf-tail and knee-guard side jumps; animation acceptance is blocked pending repair. West and formal animation remain open. No premium concept is integrated or art-approved. Runtime exploration sprites accepted: 0/52.",
     "latestCombatMotionPilot": {
-      "recordedAt": "2026-10-20T19:39:35.786205+00:00",
-      "status": "partial-source-and-staged-playback",
+      "recordedAt": "2026-10-20T19:56:42.092554+00:00",
+      "status": "eight-action-source-production-complete",
       "task": "content.combat.protagonist-female.combat-actions",
       "actionsProduced": [
         "idle",
-        "attack"
+        "move",
+        "attack",
+        "guard",
+        "dodge",
+        "hit",
+        "skill",
+        "down"
       ],
       "requiredActionCount": 8,
-      "taskComplete": false,
-      "qa": "docs/qa/rpg-2-star-ocean-the-second_heroine-sea_idle-attack-root-closeout_partial-v01_20261020-194020-04c85acd.md",
-      "proof": "outputs/hero-sea-motion-capture-v02/rpg-2-star-ocean-the-second_heroine-sea-motion_root-path-and-source-check_v03_20261020-193902-851a7ebc.json",
+      "taskComplete": true,
+      "qa": "docs/qa/rpg-2-star-ocean-the-second_heroine-sea_all-eight-actions-source-production_v01_20261020-195702-e93457f8.md",
+      "proof": "outputs/hero-sea-all8-20261020-194846-0b4d8016/rpg-2-star-ocean-the-second_heroine-sea-all8_source-playback-proof_staged-v01_20261020-194846-0b4d8016.json",
       "clips": [
-        "outputs/hero-sea-motion-capture-v02/rpg-2-star-ocean-the-second_heroine-sea-motion_en30-outskirts-bright_staged-partialpilot_v02_20261020-193528-841e9bf3.mp4",
-        "outputs/hero-sea-motion-capture-v02/rpg-2-star-ocean-the-second_heroine-sea-motion_zh60-default-dark_staged-partialpilot_v02_20261020-193528-841e9bf3.mp4"
+        "outputs/hero-sea-all8-20261020-194846-0b4d8016/rpg-2-star-ocean-the-second_heroine-sea-all8_en-30fps_staged-v01_20261020-194846-0b4d8016.mp4",
+        "outputs/hero-sea-all8-20261020-194846-0b4d8016/rpg-2-star-ocean-the-second_heroine-sea-all8_zh-60fps_staged-v01_20261020-194846-0b4d8016.mp4"
       ],
-      "sourceChecks": "119/119 independently reproduced",
-      "nativePixelEquality": "32/32",
-      "nativeCleanApplication": "failed0/32",
-      "rootCaptureEvidence": "49/49, two ObjectDB warnings retained",
+      "sourceChecks": {
+        "v01": 119,
+        "v02": 224,
+        "v03": 68
+      },
+      "nativePixelEquality": "V01:32/32; V02guard representative1/1; V03down representative1/1",
+      "nativeCleanApplication": "failed, Pixelorama shader/ORA diagnostics retained; GUI SaveAs untested",
+      "rootCaptureEvidence": "all8 covered in283/566 actual frames,16critical captures per context; isolated halfscale texel render verified separately",
       "creatorApproved": false,
       "continuousFluidityCertified": false,
       "runtimeIntegrated": false,
       "stagedContactMs": 166.667,
       "realDamageMs": 0,
       "hitSynchronized": false,
-      "nextAction": "Complete6remaining actions and half-scale compatibility, then event-driven playback/contact integration; no full sprite or motion acceptance."
+      "nextAction": "Prepare optional runtime package with exact authored-clock support, then event-driven combat playback/hit integration and artistic review; no default adoption yet.",
+      "effectivePoseCountIncludingApprovedBase": 29,
+      "productionComplete": true,
+      "sourceCommit": "cd7d6b15cee490b43c4d49b018776a8ff1c93c7e",
+      "reels": [
+        {
+          "id": "production-heroine-sea-all8-en30-v01",
+          "kind": "actual-godot-capture",
+          "mediaType": "video/mp4",
+          "file": "outputs/hero-sea-all8-20261020-194846-0b4d8016/rpg-2-star-ocean-the-second_heroine-sea-all8_en-30fps_staged-v01_20261020-194846-0b4d8016.mp4",
+          "sha256": "e46624854bd5523d928f9f30bf858190a5e376e28ac4b05d81a80857bbb3054e",
+          "gitBlob": "f9d5ab2e830bc9958796c3bb36d14e7c92022a20",
+          "rank": 0,
+          "syncState": "committed-at-cd7d6b1",
+          "label": {
+            "zh": "女主八种战斗动作首版 · 明亮30fps",
+            "en": "Heroine eight-action first source set · bright30fps"
+          },
+          "caption": {
+            "zh": "Godot实机分段展示；按制作时长正常1×播放。不是连续玩家输入，尚未验收。",
+            "en": "Staged actual-Godot visual state reel at authored normal1x speed. Not continuous player input; motion unapproved."
+          },
+          "scope": {
+            "zh": "只展示已制作的待机、移动、攻击、防御、闪避、受击、技能与倒地。未接入默认实战；完整精灵仍0/52。",
+            "en": "Produced idle, move, attack, guard, dodge, hit, skill and down only. Not adopted for default combat; complete sprites remain0/52."
+          },
+          "creatorApproved": false,
+          "artAccepted": false,
+          "runtimeIntegrated": false,
+          "technicalCandidate": true,
+          "staged": true,
+          "readyForCreatorReview": false,
+          "qa": "docs/qa/rpg-2-star-ocean-the-second_heroine-sea_all-eight-actions-source-production_v01_20261020-195702-e93457f8.md",
+          "motionView": {
+            "limits": {
+              "zh": [
+                "分段冻结实机展示，不是连续输入或命中同步证明。",
+                "攻击实际按键即扣血，动作接触在166.667ms；移动、后腿和手臂纹理仍需打磨。"
+              ],
+              "en": [
+                "Frozen-arena staged visual state playback, not continuous-input or hit-sync proof.",
+                "Actual attack damage is atpress, visualcontact166.667ms later; move, rear shin and sleeve texture need polish."
+              ]
+            },
+            "approvalNote": {
+              "zh": "八种动作的首版源文件已完成制作；动作与画质批准另行进行。",
+              "en": "Eight-action first source set is production-complete; motion/artistic acceptance remains separate."
+            }
+          }
+        },
+        {
+          "id": "production-heroine-sea-all8-zh60-v01",
+          "kind": "actual-godot-capture",
+          "mediaType": "video/mp4",
+          "file": "outputs/hero-sea-all8-20261020-194846-0b4d8016/rpg-2-star-ocean-the-second_heroine-sea-all8_zh-60fps_staged-v01_20261020-194846-0b4d8016.mp4",
+          "sha256": "a69db4bbd73dc26b72d3e6318e0deaabbe3b154fc082e01e884a800a8478a698",
+          "gitBlob": "9da00482eaa210a7510a155b8d74f81eba59c8da",
+          "rank": 1,
+          "syncState": "committed-at-cd7d6b1",
+          "label": {
+            "zh": "女主八种战斗动作首版 · 暗色60fps",
+            "en": "Heroine eight-action first source set · dark60fps"
+          },
+          "caption": {
+            "zh": "Godot实机分段展示；按制作时长正常1×播放。不是连续玩家输入，尚未验收。",
+            "en": "Staged actual-Godot visual state reel at authored normal1x speed. Not continuous player input; motion unapproved."
+          },
+          "scope": {
+            "zh": "只展示已制作的待机、移动、攻击、防御、闪避、受击、技能与倒地。未接入默认实战；完整精灵仍0/52。",
+            "en": "Produced idle, move, attack, guard, dodge, hit, skill and down only. Not adopted for default combat; complete sprites remain0/52."
+          },
+          "creatorApproved": false,
+          "artAccepted": false,
+          "runtimeIntegrated": false,
+          "technicalCandidate": true,
+          "staged": true,
+          "readyForCreatorReview": false,
+          "qa": "docs/qa/rpg-2-star-ocean-the-second_heroine-sea_all-eight-actions-source-production_v01_20261020-195702-e93457f8.md",
+          "motionView": {
+            "limits": {
+              "zh": [
+                "分段冻结实机展示，不是连续输入或命中同步证明。",
+                "攻击实际按键即扣血，动作接触在166.667ms；移动、后腿和手臂纹理仍需打磨。"
+              ],
+              "en": [
+                "Frozen-arena staged visual state playback, not continuous-input or hit-sync proof.",
+                "Actual attack damage is atpress, visualcontact166.667ms later; move, rear shin and sleeve texture need polish."
+              ]
+            },
+            "approvalNote": {
+              "zh": "八种动作的首版源文件已完成制作；动作与画质批准另行进行。",
+              "en": "Eight-action first source set is production-complete; motion/artistic acceptance remains separate."
+            }
+          }
+        }
+      ]
     }
   },
   "environmentVisualReview": {

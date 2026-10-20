@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-20T19:39:35.795205+00:00",
+  "updatedAt": "2026-10-20T19:56:42.101553+00:00",
   "purpose": "Operating queue and worktree ownership; no progress points or account details",
   "workflow": "docs/workflow.md",
   "canonicalLedger": "outputs/rpg-2-star-ocean-the-second_production-completion_task-ledger_v01_20261018-140533-3de52073.json",
@@ -959,8 +959,8 @@
     {
       "task": "content.combat.protagonist-female.combat-actions",
       "preferredProducer": "claude",
-      "status": "ready",
-      "reason": "Both static appearance baselines approved. Paint occluded anatomy and coherent new poses; flat mask slices alone are not animation-ready anatomy."
+      "status": "source-production-complete",
+      "reason": "Eight-action source boundary completed; next is optional authored-clock runtime package plus contact binding, not more still-art microversions."
     },
     {
       "task": "content.scene.battle-arena.wiring",
@@ -973,29 +973,33 @@
     "primary": {
       "task": "content.combat.protagonist-female.combat-actions",
       "owner": "claude",
-      "status": "in_progress",
+      "status": "done-produced",
       "base": "99bf35a",
       "worktree": "work/dual05/cl-motion",
-      "scope": "FrozenV01 idle/attack partial pilot source and staged playback; V02 remaining6actions in progress. No default/art approval.",
+      "scope": "All8 source actions: V01idle/attack,V02move/guard/dodge/skill,V03hit/down;29effectiveposes; no default/adoption/creator approval.",
       "doneCriterion": "Coherent authored poses, editable source and actual normal1x bright/dark captures with diagnostic and timing limitations; all8 parent actions not complete from a subset.",
-      "evidence": "docs/qa/rpg-2-star-ocean-the-second_heroine-sea_idle-attack-root-closeout_partial-v01_20261020-194020-04c85acd.md",
-      "sourceCheck": "119/119",
-      "playbackCheck": "root49/49, staged only; native application gate fails0/32; warning limits retained",
-      "nextAction": "Complete8action source set; then event-driven normal playback/hit timing."
+      "evidence": "docs/qa/rpg-2-star-ocean-the-second_heroine-sea_all-eight-actions-source-production_v01_20261020-195702-e93457f8.md",
+      "sourceCheck": "119+224+68 independently reproduced; native exact export vs diagnostic failure separated",
+      "playbackCheck": "283bright30/566dark60 staged actual frames,32critical screenshots; normal-input/contact binding open",
+      "nextAction": "Exact authored-clock runtime package and contact-event integration before default adoption.",
+      "sourceCommit": "cd7d6b15cee490b43c4d49b018776a8ff1c93c7e"
     },
     "supporting": [
       {
         "task": "support.combat-loader.half-scale",
         "owner": "deepseek",
-        "status": "in_progress",
+        "status": "done-independently-verified",
         "base": "9b4c2f4",
         "worktree": "work/dual05/ds-scale",
         "scope": "Exact0.5logical-scale compatibility with frozen required-action validation/defaultoff, independent synthetic complete fixtures; no partial heroine set integration.",
-        "doneCriterion": "Independent validation/mirror/pivot/render geometry and default scale1 parity checks without weakening thresholds."
+        "doneCriterion": "Independent validation/mirror/pivot/render geometry and default scale1 parity checks without weakening thresholds.",
+        "evidence": "docs/qa/rpg-2-star-ocean-the-second_combat-half-scale_root-maintenance-closeout_v02_20261020-195702-8b1664c0.md",
+        "checks": "273targeted+162legacy strict root checks; twofacing exact native texel render; warnings/failures retained",
+        "sourceCommit": "cd7d6b15cee490b43c4d49b018776a8ff1c93c7e"
       }
     ],
     "integrationOwner": "codex",
-    "status": "running",
+    "status": "completed-source-production-and-maintenance",
     "previousVerifiedCompletion": {
       "commit": "d5cfb11e9c7f576ad39c39c238f3f94a4408879d",
       "tasks": [
