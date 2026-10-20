@@ -26,3 +26,7 @@ Head/torso remain translated flat masks with painted joint/arm underlay; rear ar
 - [Dark ZH60 staged1x](../../outputs/hero-sea-motion-capture-v02/rpg-2-star-ocean-the-second_heroine-sea-motion_zh60-default-dark_staged-partialpilot_v02_20261020-193528-841e9bf3.mp4)
 - [Root49/49 proof](../../outputs/hero-sea-motion-capture-v02/rpg-2-star-ocean-the-second_heroine-sea-motion_root-path-and-source-check_v03_20261020-193902-851a7ebc.json)
 - [Source package](../../outputs/hero-sea-motion-v01/)
+
+## Packaged evidence paths
+
+Generic internal raw JSON/log fixture outputs were renamed with the creator project naming rule, preserving raw bytes. The v04 path-map documents historical-to-packaged names; v04 evidence checker resolves aliases and keeps the original v02 failure/report intact. Generated raw frame directories/profiles remain local only.
