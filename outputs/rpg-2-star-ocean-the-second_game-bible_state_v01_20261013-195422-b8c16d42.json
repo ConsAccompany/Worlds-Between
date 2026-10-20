@@ -4,7 +4,7 @@
   "title": "世界之间",
   "englishTitle": "Worlds Between",
   "edition": "设计基线 v0.2 · 2026-10-15 创作者决定",
-  "updatedAt": "2026-10-20T20:30:01.365Z",
+  "updatedAt": "2026-10-20T21:02:48.191Z",
   "note": "规则以玩家确认的设计稿为基线，并已并入 2026-10-15 创作者决定；人物姓名与外观是待审提案，具体剧情留待后续设计。",
   "pitch": "从地下社区走出的旅人，以好奇心探索多元文明，招募伙伴，并成为不同世界认知差异的桥梁。",
   "pillars": [
@@ -4604,8 +4604,8 @@
         "runtimePackage": "deepseek",
         "inspectionRepairIntegration": "codex"
       },
-      "sourceCommit": "34b61602a0e8aac8ff3dfbcf825e0984d7366843",
-      "qa": "docs/qa/rpg-2-star-ocean-the-second_heroine-contact_combined-production-closeout_v01_20261020-202822-b09ea1fd.md",
+      "sourceCommit": "d299ad8ebb13201bb97a27d54553e13c8e06db38",
+      "qa": "docs/qa/rpg-2-star-ocean-the-second_heroine-natural-facing_combined-closeout_v01_20261020-210143-09fa76bd.md",
       "states": 8,
       "effectivePoses": 29,
       "optionalRuntimeIntegrated": true,
@@ -4616,8 +4616,8 @@
       "attackContactSynchronized": true,
       "attackContactSecondsFraction": "5/30",
       "scope": {
-        "zh": "女主八动作可选运行时包；普通战斗输入的攻击与最后一击同步已检查。不是默认接入或动作验收。",
-        "en": "Optional eight-action runtime package; normal arena input/attack and finishing-contact checks pass. Not default adoption or motion acceptance."
+        "zh": "女主八动作可选运行时包；已通过真实探索遇敌、脚本按键战斗、胜利返回和读档验证。不是默认采用或动作验收。",
+        "en": "Optional eight-action runtime package verified through actual encounter entry, scripted game-input victory, return and reload. Not default adoption or motion acceptance."
       },
       "flags": [
         "--combat-sprite-set-pilot",
@@ -4626,9 +4626,100 @@
       ],
       "evidence": {
         "combined": "outputs/hero-sea-contact-root-v01/combined-20261020-202641-882d2e5d/rpg-2-star-ocean-the-second_heroine-contact_combined-proof_v01_20261020-202641-882d2e5d.json",
-        "normalInput": "outputs/hero-sea-contact-root-v01/input-20261020-202403-8b0e5607/rpg-2-star-ocean-the-second_heroine-contact_normal-input-proof_v01_20261020-202403-8b0e5607.json"
+        "normalInput": "outputs/hero-sea-contact-root-v01/input-20261020-202403-8b0e5607/rpg-2-star-ocean-the-second_heroine-contact_normal-input-proof_v01_20261020-202403-8b0e5607.json",
+        "naturalRoundtrip": "outputs/hsea07/rpg-2-star-ocean-the-second_natural-battle_combined-root-proof-v01_20261020-205944-af162133.json",
+        "facingAndBonus": "outputs/hsea07/rpg-2-star-ocean-the-second_heroine-facing-bonus_combined-proof-v01_20261020-205746-2bf9a6d1.json"
       },
-      "updatedAt": "2026-10-20T20:30:01.223032+00:00"
+      "updatedAt": "2026-10-20T21:02:47.544389+00:00",
+      "naturalBattleReturnReloadVerified": true,
+      "oneShotFacingLatched": true,
+      "sharedBonusOrderChecked": true,
+      "reels": [
+        {
+          "id": "runtime-heroine-sea-natural-patrol-v01",
+          "kind": "actual-godot-capture",
+          "mediaType": "video/mp4",
+          "file": "outputs/hsea07/rpg-2-star-ocean-the-second_heroine-natural-battle_patrol-en30-bright_scripted-normal-v01_20261020-205944-af162133.mp4",
+          "sha256": "30f3864b636531813a7b322e501c4f233d8ebf037c2c788f11e2bd1962eb1001",
+          "gitBlob": "b65c62937467b5af982d310cd129b851e015176c",
+          "syncState": "committed-at-d299ad8",
+          "label": {
+            "zh": "女主完整战斗流程 · 明亮英文30fps",
+            "en": "Heroine complete battle flow · bright EN30fps"
+          },
+          "caption": {
+            "zh": "探索步行遇敌→按键战斗→胜利结算→返回→读取战后存档。脚本输入，单女主；初始探索位置调整一次。",
+            "en": "Explore/walk into encounter → input combat → victory → return → reload. Scripted input, solo heroine; one initial exploration placement."
+          },
+          "scope": {
+            "zh": "可选女主动作与命中时序的实战技术证据；非默认采用、真人试玩或动作/画质验收。",
+            "en": "Technical evidence for optional heroine motion/contact timing; not default adoption, human playtest or motion/art acceptance."
+          },
+          "creatorApproved": false,
+          "artAccepted": false,
+          "runtimeIntegrated": true,
+          "defaultAdopted": false,
+          "technicalCandidate": true,
+          "staged": false,
+          "scriptedInput": true,
+          "readyForCreatorReview": false,
+          "qa": "docs/qa/rpg-2-star-ocean-the-second_heroine-natural-facing_combined-closeout_v01_20261020-210143-09fa76bd.md",
+          "motionView": {
+            "limits": {
+              "zh": [
+                "Godot固定步长实际渲染，原始帧按30/60fps播放；不是墙钟真人操作。",
+                "敌人与选中标记仍含占位画面；完整动作流畅度仍须另行审查。"
+              ],
+              "en": [
+                "Godot fixed-step actual renders played at original30/60fps; not wall-clock human play.",
+                "Enemy and selected marker include placeholders; full motion fluidity remains separately reviewable."
+              ]
+            }
+          }
+        },
+        {
+          "id": "runtime-heroine-sea-natural-sentry-v01",
+          "kind": "actual-godot-capture",
+          "mediaType": "video/mp4",
+          "file": "outputs/hsea07/rpg-2-star-ocean-the-second_heroine-natural-battle_sentry-zh60-default_scripted-normal-v01_20261020-205944-af162133.mp4",
+          "sha256": "bf644a18097ba0d87c90f44f3137e357abb8ba05249b3b7b5fb81194d0a8b3fc",
+          "gitBlob": "9710d53b8524d6cfc53439b2e0610d179ec5beb1",
+          "syncState": "committed-at-d299ad8",
+          "label": {
+            "zh": "女主完整战斗流程 · 默认场景中文60fps",
+            "en": "Heroine complete battle flow · default ZH60fps"
+          },
+          "caption": {
+            "zh": "探索步行遇敌→按键战斗→胜利结算→返回→读取战后存档。脚本输入，单女主；初始探索位置调整一次。",
+            "en": "Explore/walk into encounter → input combat → victory → return → reload. Scripted input, solo heroine; one initial exploration placement."
+          },
+          "scope": {
+            "zh": "可选女主动作与命中时序的实战技术证据；非默认采用、真人试玩或动作/画质验收。",
+            "en": "Technical evidence for optional heroine motion/contact timing; not default adoption, human playtest or motion/art acceptance."
+          },
+          "creatorApproved": false,
+          "artAccepted": false,
+          "runtimeIntegrated": true,
+          "defaultAdopted": false,
+          "technicalCandidate": true,
+          "staged": false,
+          "scriptedInput": true,
+          "readyForCreatorReview": false,
+          "qa": "docs/qa/rpg-2-star-ocean-the-second_heroine-natural-facing_combined-closeout_v01_20261020-210143-09fa76bd.md",
+          "motionView": {
+            "limits": {
+              "zh": [
+                "Godot固定步长实际渲染，原始帧按30/60fps播放；不是墙钟真人操作。",
+                "敌人与选中标记仍含占位画面；完整动作流畅度仍须另行审查。"
+              ],
+              "en": [
+                "Godot fixed-step actual renders played at original30/60fps; not wall-clock human play.",
+                "Enemy and selected marker include placeholders; full motion fluidity remains separately reviewable."
+              ]
+            }
+          }
+        }
+      ]
     }
   },
   "environmentVisualReview": {
@@ -7161,14 +7252,14 @@
     "combinedWiringCheck": "297/297 on39f252e, clean raw log; actual Chinese victory inspected."
   },
   "latestTaskProgress": {
-    "id": "support.heroine-sea.contact-and-runtime-batch",
+    "id": "support.heroine-sea.natural-battle-and-motion-binding",
     "status": "completed",
     "title": {
-      "zh": "女主战斗动作运行时打包与命中同步",
-      "en": "Heroine combat runtime package and contact synchronization"
+      "zh": "女主完整战斗、返回读档与动作朝向衔接",
+      "en": "Heroine complete battle, return/reload and action-facing continuity"
     },
-    "startedAt": "2026-10-20T20:17:15.910Z",
-    "sourceBefore": "11973af6492ef60a99ca1f2eacb01e12c091ccb9",
+    "startedAt": "2026-10-20T20:49:02.339Z",
+    "sourceBefore": "4ef439193286d271d5311987773ca3f96229c4ce",
     "meters": {
       "production": {
         "before": 53.6,
@@ -7186,15 +7277,49 @@
         "changePercentagePoints": 0
       }
     },
-    "completedAt": "2026-10-20T20:30:01.365Z",
-    "sourceAfter": "34b61602a0e8aac8ff3dfbcf825e0984d7366843",
+    "completedAt": "2026-10-20T21:02:48.191Z",
+    "sourceAfter": "d299ad8ebb13201bb97a27d54553e13c8e06db38",
     "evidence": [
-      "docs/qa/rpg-2-star-ocean-the-second_heroine-contact_combined-production-closeout_v01_20261020-202822-b09ea1fd.md"
+      "docs/qa/rpg-2-star-ocean-the-second_heroine-natural-facing_combined-closeout_v01_20261020-210143-09fa76bd.md"
     ]
   },
   "progressReporting": {
     "requiredFormat": "before → after (change in percentage points)",
     "sameMetricAndFrozenBaseline": true,
     "productionInspectionApprovalSeparate": true
-  }
+  },
+  "taskProgressHistory": [
+    {
+      "id": "support.heroine-sea.contact-and-runtime-batch",
+      "status": "completed",
+      "title": {
+        "zh": "女主战斗动作运行时打包与命中同步",
+        "en": "Heroine combat runtime package and contact synchronization"
+      },
+      "startedAt": "2026-10-20T20:17:15.910Z",
+      "sourceBefore": "11973af6492ef60a99ca1f2eacb01e12c091ccb9",
+      "meters": {
+        "production": {
+          "before": 53.6,
+          "after": 53.6,
+          "changePercentagePoints": 0
+        },
+        "inspection": {
+          "before": 14.2,
+          "after": 14.2,
+          "changePercentagePoints": 0
+        },
+        "approval": {
+          "before": 7,
+          "after": 7,
+          "changePercentagePoints": 0
+        }
+      },
+      "completedAt": "2026-10-20T20:30:01.365Z",
+      "sourceAfter": "34b61602a0e8aac8ff3dfbcf825e0984d7366843",
+      "evidence": [
+        "docs/qa/rpg-2-star-ocean-the-second_heroine-contact_combined-production-closeout_v01_20261020-202822-b09ea1fd.md"
+      ]
+    }
+  ]
 }

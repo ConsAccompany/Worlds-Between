@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-20T20:30:01.223032+00:00",
+  "updatedAt": "2026-10-20T21:02:47.544389+00:00",
   "purpose": "Operating queue and worktree ownership; no progress points or account details",
   "workflow": "docs/workflow.md",
   "canonicalLedger": "outputs/rpg-2-star-ocean-the-second_production-completion_task-ledger_v01_20261018-140533-3de52073.json",
@@ -956,6 +956,40 @@
       ],
       "integratedCommit": "34b61602a0e8aac8ff3dfbcf825e0984d7366843",
       "nextAction": "Optional technical integration verified; default adoption and creator motion approval remain separate."
+    },
+    {
+      "id": "support.heroine-sea.natural-roundtrip",
+      "owner": "claude",
+      "status": "done-independently-verified",
+      "lane": "primary",
+      "pathFromPrimary": "work/dual07/cl-full",
+      "output": "Natural opt-in combat roundtrip and real1xmovies",
+      "startedAt": "2026-10-20T20:50:16.511286+00:00",
+      "progressCredit": "No new score for maintenance; frozen gates remain separate",
+      "completion": [
+        "Source-bound targeted evidence, independent Codex inspection and serialized integration, defaults preserved"
+      ],
+      "completedAt": "2026-10-20T21:02:47.544389+00:00",
+      "evidence": "docs/qa/rpg-2-star-ocean-the-second_heroine-natural-facing_combined-closeout_v01_20261020-210143-09fa76bd.md",
+      "sourceCommit": "d299ad8ebb13201bb97a27d54553e13c8e06db38",
+      "nextAction": "Closed; full motion review/default adoption remain separate."
+    },
+    {
+      "id": "support.heroine-sea.oneshot-facing",
+      "owner": "deepseek",
+      "status": "done-independently-verified",
+      "lane": "supporting",
+      "pathFromPrimary": "work/dual07/ds-face",
+      "output": "Optional nonattack oneshot-facing continuity defect repair",
+      "startedAt": "2026-10-20T20:50:16.511286+00:00",
+      "progressCredit": "No new score for maintenance; frozen gates remain separate",
+      "completion": [
+        "Source-bound targeted evidence, independent Codex inspection and serialized integration, defaults preserved"
+      ],
+      "completedAt": "2026-10-20T21:02:47.544389+00:00",
+      "evidence": "docs/qa/rpg-2-star-ocean-the-second_heroine-natural-facing_combined-closeout_v01_20261020-210143-09fa76bd.md",
+      "sourceCommit": "d299ad8ebb13201bb97a27d54553e13c8e06db38",
+      "nextAction": "Closed; full motion review/default adoption remain separate."
     }
   ],
   "nextProductionMilestones": [
@@ -1018,43 +1052,26 @@
   ],
   "activeDualProviderBatch": {
     "primary": {
-      "task": "content.combat.protagonist-female.combat-actions",
+      "task": "support.heroine-sea.natural-roundtrip",
       "owner": "claude",
-      "status": "done-produced",
-      "base": "99bf35a",
-      "worktree": "work/dual05/cl-motion",
-      "scope": "All8 source actions: V01idle/attack,V02move/guard/dodge/skill,V03hit/down;29effectiveposes; no default/adoption/creator approval.",
-      "doneCriterion": "Coherent authored poses, editable source and actual normal1x bright/dark captures with diagnostic and timing limitations; all8 parent actions not complete from a subset.",
-      "evidence": "docs/qa/rpg-2-star-ocean-the-second_heroine-sea_all-eight-actions-source-production_v01_20261020-195702-e93457f8.md",
-      "sourceCheck": "119+224+68 independently reproduced; native exact export vs diagnostic failure separated",
-      "playbackCheck": "283bright30/566dark60 staged actual frames,32critical screenshots; normal-input/contact binding open",
-      "nextAction": "Exact authored-clock runtime package and contact-event integration before default adoption.",
-      "sourceCommit": "cd7d6b15cee490b43c4d49b018776a8ff1c93c7e"
+      "status": "done-independently-verified",
+      "worktree": "work/dual07/cl-full",
+      "evidence": "docs/qa/rpg-2-star-ocean-the-second_heroine-natural-facing_combined-closeout_v01_20261020-210143-09fa76bd.md",
+      "sourceCommit": "d299ad8ebb13201bb97a27d54553e13c8e06db38"
     },
     "supporting": [
       {
-        "task": "support.combat-loader.half-scale",
+        "task": "support.heroine-sea.oneshot-facing",
         "owner": "deepseek",
         "status": "done-independently-verified",
-        "base": "9b4c2f4",
-        "worktree": "work/dual05/ds-scale",
-        "scope": "Exact0.5logical-scale compatibility with frozen required-action validation/defaultoff, independent synthetic complete fixtures; no partial heroine set integration.",
-        "doneCriterion": "Independent validation/mirror/pivot/render geometry and default scale1 parity checks without weakening thresholds.",
-        "evidence": "docs/qa/rpg-2-star-ocean-the-second_combat-half-scale_root-maintenance-closeout_v02_20261020-195702-8b1664c0.md",
-        "checks": "273targeted+162legacy strict root checks; twofacing exact native texel render; warnings/failures retained",
-        "sourceCommit": "cd7d6b15cee490b43c4d49b018776a8ff1c93c7e"
+        "worktree": "work/dual07/ds-face",
+        "evidence": "docs/qa/rpg-2-star-ocean-the-second_heroine-natural-facing_combined-closeout_v01_20261020-210143-09fa76bd.md",
+        "sourceCommit": "d299ad8ebb13201bb97a27d54553e13c8e06db38"
       }
     ],
     "integrationOwner": "codex",
-    "status": "completed-source-production-and-maintenance",
-    "previousVerifiedCompletion": {
-      "commit": "d5cfb11e9c7f576ad39c39c238f3f94a4408879d",
-      "tasks": [
-        "content.combat.protagonist-female.combat-static.revision",
-        "content.char.protagonist-female.static-south"
-      ],
-      "artApprovalChanged": false
-    }
+    "status": "completed-natural-roundtrip-and-facing-maintenance",
+    "noNewScoringTasks": true
   },
   "characterSpriteStyleDirection": {
     "reference": "Sea of Stars",
@@ -1066,12 +1083,12 @@
   "progressReporting": {
     "requiredFormat": "before → after (change in percentage points)",
     "currentBatchProductionBefore": 53.6,
-    "startedAt": "2026-10-20T20:15:28.197537+00:00",
-    "sourceCommit": "11973af6492ef60a99ca1f2eacb01e12c091ccb9",
+    "startedAt": "2026-10-20T20:50:16.511286+00:00",
+    "sourceCommit": "4ef439193286d271d5311987773ca3f96229c4ce",
     "baselineChange": false,
     "currentBatchProductionAfter": 53.6,
     "changePercentagePoints": 0.0,
-    "completedAt": "2026-10-20T20:30:01.223032+00:00",
-    "recordTool": "tools/rpg-2-star-ocean-the-second_progress-task_record-v01_20261020-201756-0613b8f0.js"
+    "completedAt": "2026-10-20T21:02:47.544389+00:00",
+    "evidence": "docs/qa/rpg-2-star-ocean-the-second_heroine-natural-facing_combined-closeout_v01_20261020-210143-09fa76bd.md"
   }
 }
