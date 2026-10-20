@@ -1,0 +1,286 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS helper parses and exposes the half-scale geometry/scale API
+PASS synthetic half-scale and frozen scale-1 manifests parse
+PASS valid 0.5 and 1.0 sets load (statuses loaded, loaded)
+PASS accepts supported logical_scale 1
+PASS accepts supported logical_scale 1.0
+PASS accepts supported logical_scale 0.5
+PASS accepts supported logical_scale 0.5
+PASS rejects unsupported logical_scale 0
+PASS rejects unsupported logical_scale 0.0
+PASS rejects unsupported logical_scale -0.5
+PASS rejects unsupported logical_scale -1
+PASS rejects unsupported logical_scale 2
+PASS rejects unsupported logical_scale 0.25
+PASS rejects unsupported logical_scale 0.75
+PASS rejects unsupported logical_scale 0.5000001
+PASS rejects unsupported logical_scale 1.0000001
+PASS rejects unsupported logical_scale 0.5
+PASS rejects unsupported logical_scale 1
+PASS rejects unsupported logical_scale 
+PASS rejects unsupported logical_scale true
+PASS rejects unsupported logical_scale false
+PASS rejects unsupported logical_scale <null>
+PASS rejects unsupported logical_scale []
+PASS rejects unsupported logical_scale {  }
+PASS rejects unsupported logical_scale (0.5, 0.5)
+PASS rejects unsupported logical_scale nan
+PASS rejects unsupported logical_scale inf
+PASS rejects unsupported logical_scale -inf
+PASS scale-zero (JSON) rejects as unsupported_scale (got unsupported_scale)
+PASS scale-negative (JSON) rejects as unsupported_scale (got unsupported_scale)
+PASS scale-two (JSON) rejects as unsupported_scale (got unsupported_scale)
+PASS scale-quarter (JSON) rejects as unsupported_scale (got unsupported_scale)
+PASS scale-three-quarter (JSON) rejects as unsupported_scale (got unsupported_scale)
+PASS scale-string (JSON) rejects as unsupported_scale (got unsupported_scale)
+PASS scale-true (JSON) rejects as unsupported_scale (got unsupported_scale)
+PASS scale-false (JSON) rejects as unsupported_scale (got unsupported_scale)
+PASS scale-null (JSON) rejects as unsupported_scale (got unsupported_scale)
+PASS scale-array (JSON) rejects as unsupported_scale (got unsupported_scale)
+PASS scale-object (JSON) rejects as unsupported_scale (got unsupported_scale)
+PASS missing logical_scale rejects as unsupported_scale
+WARNING: Exponent too high
+   at: built_in_strtod (core/string/ustring.cpp:2553)
+   GDScript backtrace (most recent call first):
+       [0] _read_json (res://scripts/rpg-2-star-ocean-the-second_combat-sprite-set_loader-playback_pilot-v01_20261018-153656-43a19158.gd:95)
+       [1] _validate (res://scripts/rpg-2-star-ocean-the-second_combat-sprite-set_loader-playback_pilot-v01_20261018-153656-43a19158.gd:131)
+       [2] load_set (res://scripts/rpg-2-star-ocean-the-second_combat-sprite-set_loader-playback_pilot-v01_20261018-153656-43a19158.gd:87)
+       [3] _check_scale_values (C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/tools/rpg-2-star-ocean-the-second_combat-half-scale_root-check_v02_20261020-195118-1b6c6fdd.gd:160)
+       [4] _run (C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/tools/rpg-2-star-ocean-the-second_combat-half-scale_root-check_v02_20261020-195118-1b6c6fdd.gd:62)
+PASS non-finite JSON scale rejects as unsupported_scale (got unsupported_scale)
+PASS half fixture loads as hero:female and stays labelled unapproved diagnostic data
+PASS source cell 136x144 and source pivot [68,140] are preserved
+PASS 0.5 maps the source cell to a whole 68x72 logical draw cell
+PASS 0.65 display-proportion metadata remains accepted
+PASS all 8 actions load (7 required plus skill)
+PASS required action idle is present with frames
+PASS required action move is present with frames
+PASS required action guard is present with frames
+PASS required action attack is present with frames
+PASS required action dodge is present with frames
+PASS required action hit is present with frames
+PASS required action defeat is present with frames
+PASS authored skill action loads instead of falling back
+PASS every source pivot is even; the two dodge overrides keep [66,140]
+PASS per-frame dodge pivot override [66,140] is preserved
+PASS both authored dodge override frames are exact
+PASS source cell origins remain integer sheet coordinates
+PASS odd-cell-x rejects atomically as invalid_cell (got invalid_cell)
+PASS odd-cell-y rejects atomically as invalid_cell (got invalid_cell)
+PASS odd-cell-both rejects atomically as invalid_cell (got invalid_cell)
+PASS odd-pivot-x rejects atomically as invalid_pivot (got invalid_pivot)
+PASS odd-pivot-y rejects atomically as invalid_pivot (got invalid_pivot)
+PASS out-of-bounds-pivot rejects atomically as invalid_pivot (got invalid_pivot)
+PASS odd-frame-pivot-x rejects atomically as invalid_pivot (got invalid_pivot)
+PASS odd-frame-pivot-y rejects atomically as invalid_pivot (got invalid_pivot)
+PASS out-of-bounds-frame-pivot rejects atomically as invalid_pivot (got invalid_pivot)
+PASS missing-required-action rejects atomically as missing_action (got missing_action)
+PASS unknown-action rejects atomically as unknown_action (got unknown_action)
+PASS invalid-mode rejects atomically as invalid_mode (got invalid_mode)
+PASS out-of-range-frame rejects atomically as frame_out_of_range (got frame_out_of_range)
+PASS bad-display-proportion rejects atomically as unsupported_proportion (got unsupported_proportion)
+PASS valid 0.5 set is validated once and reused from cache (1 -> 1)
+PASS malformed 0.5 set stays atomically rejected and cached (status invalid_cell)
+PASS a cached valid set still loads after a cached malformed set
+PASS the original loaded half-scale dictionary is unchanged
+PASS scale 1 exact old geometry idle frame 0 facing 1 (dest [P: (260.0, 196.0), S: (96.0, 80.0)] src [P: (0.0, 0.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry idle frame 0 facing -1 (dest [P: (245.0, 196.0), S: (96.0, 80.0)] src [P: (672.0, 0.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry idle frame 1 facing 1 (dest [P: (260.0, 196.0), S: (96.0, 80.0)] src [P: (96.0, 0.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry idle frame 1 facing -1 (dest [P: (245.0, 196.0), S: (96.0, 80.0)] src [P: (576.0, 0.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry idle frame 2 facing 1 (dest [P: (260.0, 196.0), S: (96.0, 80.0)] src [P: (192.0, 0.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry idle frame 2 facing -1 (dest [P: (245.0, 196.0), S: (96.0, 80.0)] src [P: (480.0, 0.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry idle frame 3 facing 1 (dest [P: (260.0, 196.0), S: (96.0, 80.0)] src [P: (288.0, 0.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry idle frame 3 facing -1 (dest [P: (245.0, 196.0), S: (96.0, 80.0)] src [P: (384.0, 0.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry move frame 0 facing 1 (dest [P: (260.0, 196.0), S: (96.0, 80.0)] src [P: (384.0, 0.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry move frame 0 facing -1 (dest [P: (245.0, 196.0), S: (96.0, 80.0)] src [P: (288.0, 0.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry move frame 1 facing 1 (dest [P: (260.0, 196.0), S: (96.0, 80.0)] src [P: (480.0, 0.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry move frame 1 facing -1 (dest [P: (245.0, 196.0), S: (96.0, 80.0)] src [P: (192.0, 0.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry move frame 2 facing 1 (dest [P: (260.0, 196.0), S: (96.0, 80.0)] src [P: (576.0, 0.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry move frame 2 facing -1 (dest [P: (245.0, 196.0), S: (96.0, 80.0)] src [P: (96.0, 0.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry move frame 3 facing 1 (dest [P: (260.0, 196.0), S: (96.0, 80.0)] src [P: (672.0, 0.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry move frame 3 facing -1 (dest [P: (245.0, 196.0), S: (96.0, 80.0)] src [P: (0.0, 0.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry move frame 4 facing 1 (dest [P: (260.0, 196.0), S: (96.0, 80.0)] src [P: (0.0, 80.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry move frame 4 facing -1 (dest [P: (245.0, 196.0), S: (96.0, 80.0)] src [P: (672.0, 80.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry move frame 5 facing 1 (dest [P: (260.0, 196.0), S: (96.0, 80.0)] src [P: (96.0, 80.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry move frame 5 facing -1 (dest [P: (245.0, 196.0), S: (96.0, 80.0)] src [P: (576.0, 80.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry move frame 6 facing 1 (dest [P: (260.0, 196.0), S: (96.0, 80.0)] src [P: (192.0, 80.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry move frame 6 facing -1 (dest [P: (245.0, 196.0), S: (96.0, 80.0)] src [P: (480.0, 80.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry move frame 7 facing 1 (dest [P: (260.0, 196.0), S: (96.0, 80.0)] src [P: (288.0, 80.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry move frame 7 facing -1 (dest [P: (245.0, 196.0), S: (96.0, 80.0)] src [P: (384.0, 80.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry attack frame 0 facing 1 (dest [P: (260.0, 196.0), S: (96.0, 80.0)] src [P: (384.0, 80.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry attack frame 0 facing -1 (dest [P: (245.0, 196.0), S: (96.0, 80.0)] src [P: (288.0, 80.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry attack frame 1 facing 1 (dest [P: (260.0, 196.0), S: (96.0, 80.0)] src [P: (480.0, 80.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry attack frame 1 facing -1 (dest [P: (245.0, 196.0), S: (96.0, 80.0)] src [P: (192.0, 80.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry attack frame 2 facing 1 (dest [P: (260.0, 196.0), S: (96.0, 80.0)] src [P: (576.0, 80.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry attack frame 2 facing -1 (dest [P: (245.0, 196.0), S: (96.0, 80.0)] src [P: (96.0, 80.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry attack frame 3 facing 1 (dest [P: (260.0, 196.0), S: (96.0, 80.0)] src [P: (672.0, 80.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry attack frame 3 facing -1 (dest [P: (245.0, 196.0), S: (96.0, 80.0)] src [P: (0.0, 80.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry attack frame 4 facing 1 (dest [P: (260.0, 196.0), S: (96.0, 80.0)] src [P: (0.0, 160.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry attack frame 4 facing -1 (dest [P: (245.0, 196.0), S: (96.0, 80.0)] src [P: (672.0, 160.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry attack frame 5 facing 1 (dest [P: (260.0, 196.0), S: (96.0, 80.0)] src [P: (96.0, 160.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry attack frame 5 facing -1 (dest [P: (245.0, 196.0), S: (96.0, 80.0)] src [P: (576.0, 160.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry skill frame 0 facing 1 (dest [P: (260.0, 196.0), S: (96.0, 80.0)] src [P: (192.0, 160.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry skill frame 0 facing -1 (dest [P: (245.0, 196.0), S: (96.0, 80.0)] src [P: (480.0, 160.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry skill frame 1 facing 1 (dest [P: (260.0, 196.0), S: (96.0, 80.0)] src [P: (288.0, 160.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry skill frame 1 facing -1 (dest [P: (245.0, 196.0), S: (96.0, 80.0)] src [P: (384.0, 160.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry skill frame 2 facing 1 (dest [P: (260.0, 196.0), S: (96.0, 80.0)] src [P: (384.0, 160.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry skill frame 2 facing -1 (dest [P: (245.0, 196.0), S: (96.0, 80.0)] src [P: (288.0, 160.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry skill frame 3 facing 1 (dest [P: (260.0, 196.0), S: (96.0, 80.0)] src [P: (480.0, 160.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry skill frame 3 facing -1 (dest [P: (245.0, 196.0), S: (96.0, 80.0)] src [P: (192.0, 160.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry skill frame 4 facing 1 (dest [P: (260.0, 196.0), S: (96.0, 80.0)] src [P: (576.0, 160.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry skill frame 4 facing -1 (dest [P: (245.0, 196.0), S: (96.0, 80.0)] src [P: (96.0, 160.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry skill frame 5 facing 1 (dest [P: (260.0, 196.0), S: (96.0, 80.0)] src [P: (672.0, 160.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry skill frame 5 facing -1 (dest [P: (245.0, 196.0), S: (96.0, 80.0)] src [P: (0.0, 160.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry dodge frame 0 facing 1 (dest [P: (260.0, 196.0), S: (96.0, 80.0)] src [P: (0.0, 240.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry dodge frame 0 facing -1 (dest [P: (245.0, 196.0), S: (96.0, 80.0)] src [P: (672.0, 240.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry dodge frame 1 facing 1 (dest [P: (266.0, 196.0), S: (96.0, 80.0)] src [P: (96.0, 240.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry dodge frame 1 facing -1 (dest [P: (239.0, 196.0), S: (96.0, 80.0)] src [P: (576.0, 240.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry dodge frame 2 facing 1 (dest [P: (266.0, 196.0), S: (96.0, 80.0)] src [P: (192.0, 240.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry dodge frame 2 facing -1 (dest [P: (239.0, 196.0), S: (96.0, 80.0)] src [P: (480.0, 240.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry dodge frame 3 facing 1 (dest [P: (260.0, 196.0), S: (96.0, 80.0)] src [P: (288.0, 240.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry dodge frame 3 facing -1 (dest [P: (245.0, 196.0), S: (96.0, 80.0)] src [P: (384.0, 240.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry guard frame 0 facing 1 (dest [P: (260.0, 196.0), S: (96.0, 80.0)] src [P: (384.0, 240.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry guard frame 0 facing -1 (dest [P: (245.0, 196.0), S: (96.0, 80.0)] src [P: (288.0, 240.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry guard frame 1 facing 1 (dest [P: (260.0, 196.0), S: (96.0, 80.0)] src [P: (480.0, 240.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry guard frame 1 facing -1 (dest [P: (245.0, 196.0), S: (96.0, 80.0)] src [P: (192.0, 240.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry hit frame 0 facing 1 (dest [P: (260.0, 196.0), S: (96.0, 80.0)] src [P: (576.0, 240.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry hit frame 0 facing -1 (dest [P: (245.0, 196.0), S: (96.0, 80.0)] src [P: (96.0, 240.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry hit frame 1 facing 1 (dest [P: (260.0, 196.0), S: (96.0, 80.0)] src [P: (672.0, 240.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry hit frame 1 facing -1 (dest [P: (245.0, 196.0), S: (96.0, 80.0)] src [P: (0.0, 240.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry hit frame 2 facing 1 (dest [P: (260.0, 196.0), S: (96.0, 80.0)] src [P: (0.0, 320.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry hit frame 2 facing -1 (dest [P: (245.0, 196.0), S: (96.0, 80.0)] src [P: (672.0, 320.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry defeat frame 0 facing 1 (dest [P: (260.0, 196.0), S: (96.0, 80.0)] src [P: (96.0, 320.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry defeat frame 0 facing -1 (dest [P: (245.0, 196.0), S: (96.0, 80.0)] src [P: (576.0, 320.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry defeat frame 1 facing 1 (dest [P: (260.0, 196.0), S: (96.0, 80.0)] src [P: (192.0, 320.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry defeat frame 1 facing -1 (dest [P: (245.0, 196.0), S: (96.0, 80.0)] src [P: (480.0, 320.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry defeat frame 2 facing 1 (dest [P: (260.0, 196.0), S: (96.0, 80.0)] src [P: (288.0, 320.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry defeat frame 2 facing -1 (dest [P: (245.0, 196.0), S: (96.0, 80.0)] src [P: (384.0, 320.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry defeat frame 3 facing 1 (dest [P: (260.0, 196.0), S: (96.0, 80.0)] src [P: (384.0, 320.0), S: (96.0, 80.0)])
+PASS scale 1 exact old geometry defeat frame 3 facing -1 (dest [P: (245.0, 196.0), S: (96.0, 80.0)] src [P: (288.0, 320.0), S: (96.0, 80.0)])
+PASS scale 1 covers every frame/facing with the unchanged old transform (74 cases)
+PASS half exact draw geometry idle frame 0 facing 1 (dest [P: (266.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (0.0, 0.0), S: (136.0, 144.0)])
+PASS half exact draw geometry idle frame 0 facing -1 (dest [P: (267.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (1224.0, 0.0), S: (136.0, 144.0)])
+PASS half exact draw geometry idle frame 1 facing 1 (dest [P: (266.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (136.0, 0.0), S: (136.0, 144.0)])
+PASS half exact draw geometry idle frame 1 facing -1 (dest [P: (267.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (1088.0, 0.0), S: (136.0, 144.0)])
+PASS half exact draw geometry idle frame 2 facing 1 (dest [P: (266.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (272.0, 0.0), S: (136.0, 144.0)])
+PASS half exact draw geometry idle frame 2 facing -1 (dest [P: (267.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (952.0, 0.0), S: (136.0, 144.0)])
+PASS half exact draw geometry idle frame 3 facing 1 (dest [P: (266.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (408.0, 0.0), S: (136.0, 144.0)])
+PASS half exact draw geometry idle frame 3 facing -1 (dest [P: (267.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (816.0, 0.0), S: (136.0, 144.0)])
+PASS half exact draw geometry move frame 0 facing 1 (dest [P: (266.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (544.0, 0.0), S: (136.0, 144.0)])
+PASS half exact draw geometry move frame 0 facing -1 (dest [P: (267.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (680.0, 0.0), S: (136.0, 144.0)])
+PASS half exact draw geometry move frame 1 facing 1 (dest [P: (266.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (680.0, 0.0), S: (136.0, 144.0)])
+PASS half exact draw geometry move frame 1 facing -1 (dest [P: (267.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (544.0, 0.0), S: (136.0, 144.0)])
+PASS half exact draw geometry move frame 2 facing 1 (dest [P: (266.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (816.0, 0.0), S: (136.0, 144.0)])
+PASS half exact draw geometry move frame 2 facing -1 (dest [P: (267.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (408.0, 0.0), S: (136.0, 144.0)])
+PASS half exact draw geometry move frame 3 facing 1 (dest [P: (266.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (952.0, 0.0), S: (136.0, 144.0)])
+PASS half exact draw geometry move frame 3 facing -1 (dest [P: (267.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (272.0, 0.0), S: (136.0, 144.0)])
+PASS half exact draw geometry move frame 4 facing 1 (dest [P: (266.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (1088.0, 0.0), S: (136.0, 144.0)])
+PASS half exact draw geometry move frame 4 facing -1 (dest [P: (267.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (136.0, 0.0), S: (136.0, 144.0)])
+PASS half exact draw geometry move frame 5 facing 1 (dest [P: (266.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (1224.0, 0.0), S: (136.0, 144.0)])
+PASS half exact draw geometry move frame 5 facing -1 (dest [P: (267.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (0.0, 0.0), S: (136.0, 144.0)])
+PASS half exact draw geometry move frame 6 facing 1 (dest [P: (266.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (0.0, 144.0), S: (136.0, 144.0)])
+PASS half exact draw geometry move frame 6 facing -1 (dest [P: (267.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (1224.0, 144.0), S: (136.0, 144.0)])
+PASS half exact draw geometry move frame 7 facing 1 (dest [P: (266.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (136.0, 144.0), S: (136.0, 144.0)])
+PASS half exact draw geometry move frame 7 facing -1 (dest [P: (267.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (1088.0, 144.0), S: (136.0, 144.0)])
+PASS half exact draw geometry attack frame 0 facing 1 (dest [P: (266.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (272.0, 144.0), S: (136.0, 144.0)])
+PASS half exact draw geometry attack frame 0 facing -1 (dest [P: (267.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (952.0, 144.0), S: (136.0, 144.0)])
+PASS half exact draw geometry attack frame 1 facing 1 (dest [P: (266.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (408.0, 144.0), S: (136.0, 144.0)])
+PASS half exact draw geometry attack frame 1 facing -1 (dest [P: (267.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (816.0, 144.0), S: (136.0, 144.0)])
+PASS half exact draw geometry attack frame 2 facing 1 (dest [P: (266.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (544.0, 144.0), S: (136.0, 144.0)])
+PASS half exact draw geometry attack frame 2 facing -1 (dest [P: (267.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (680.0, 144.0), S: (136.0, 144.0)])
+PASS half exact draw geometry attack frame 3 facing 1 (dest [P: (266.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (680.0, 144.0), S: (136.0, 144.0)])
+PASS half exact draw geometry attack frame 3 facing -1 (dest [P: (267.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (544.0, 144.0), S: (136.0, 144.0)])
+PASS half exact draw geometry attack frame 4 facing 1 (dest [P: (266.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (816.0, 144.0), S: (136.0, 144.0)])
+PASS half exact draw geometry attack frame 4 facing -1 (dest [P: (267.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (408.0, 144.0), S: (136.0, 144.0)])
+PASS half exact draw geometry attack frame 5 facing 1 (dest [P: (266.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (952.0, 144.0), S: (136.0, 144.0)])
+PASS half exact draw geometry attack frame 5 facing -1 (dest [P: (267.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (272.0, 144.0), S: (136.0, 144.0)])
+PASS half exact draw geometry skill frame 0 facing 1 (dest [P: (266.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (1088.0, 144.0), S: (136.0, 144.0)])
+PASS half exact draw geometry skill frame 0 facing -1 (dest [P: (267.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (136.0, 144.0), S: (136.0, 144.0)])
+PASS half exact draw geometry skill frame 1 facing 1 (dest [P: (266.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (1224.0, 144.0), S: (136.0, 144.0)])
+PASS half exact draw geometry skill frame 1 facing -1 (dest [P: (267.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (0.0, 144.0), S: (136.0, 144.0)])
+PASS half exact draw geometry skill frame 2 facing 1 (dest [P: (266.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (0.0, 288.0), S: (136.0, 144.0)])
+PASS half exact draw geometry skill frame 2 facing -1 (dest [P: (267.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (1224.0, 288.0), S: (136.0, 144.0)])
+PASS half exact draw geometry skill frame 3 facing 1 (dest [P: (266.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (136.0, 288.0), S: (136.0, 144.0)])
+PASS half exact draw geometry skill frame 3 facing -1 (dest [P: (267.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (1088.0, 288.0), S: (136.0, 144.0)])
+PASS half exact draw geometry skill frame 4 facing 1 (dest [P: (266.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (272.0, 288.0), S: (136.0, 144.0)])
+PASS half exact draw geometry skill frame 4 facing -1 (dest [P: (267.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (952.0, 288.0), S: (136.0, 144.0)])
+PASS half exact draw geometry skill frame 5 facing 1 (dest [P: (266.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (408.0, 288.0), S: (136.0, 144.0)])
+PASS half exact draw geometry skill frame 5 facing -1 (dest [P: (267.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (816.0, 288.0), S: (136.0, 144.0)])
+PASS half exact draw geometry dodge frame 0 facing 1 (dest [P: (266.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (544.0, 288.0), S: (136.0, 144.0)])
+PASS half exact draw geometry dodge frame 0 facing -1 (dest [P: (267.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (680.0, 288.0), S: (136.0, 144.0)])
+PASS half exact draw geometry dodge frame 1 facing 1 (dest [P: (267.0, 202.0), S: (68.0, 72.0)] drawPivot (33, 70) src [P: (680.0, 288.0), S: (136.0, 144.0)])
+PASS half exact draw geometry dodge frame 1 facing -1 (dest [P: (266.0, 202.0), S: (68.0, 72.0)] drawPivot (33, 70) src [P: (544.0, 288.0), S: (136.0, 144.0)])
+PASS half exact draw geometry dodge frame 2 facing 1 (dest [P: (267.0, 202.0), S: (68.0, 72.0)] drawPivot (33, 70) src [P: (816.0, 288.0), S: (136.0, 144.0)])
+PASS half exact draw geometry dodge frame 2 facing -1 (dest [P: (266.0, 202.0), S: (68.0, 72.0)] drawPivot (33, 70) src [P: (408.0, 288.0), S: (136.0, 144.0)])
+PASS half exact draw geometry dodge frame 3 facing 1 (dest [P: (266.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (952.0, 288.0), S: (136.0, 144.0)])
+PASS half exact draw geometry dodge frame 3 facing -1 (dest [P: (267.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (272.0, 288.0), S: (136.0, 144.0)])
+PASS half exact draw geometry guard frame 0 facing 1 (dest [P: (266.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (1088.0, 288.0), S: (136.0, 144.0)])
+PASS half exact draw geometry guard frame 0 facing -1 (dest [P: (267.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (136.0, 288.0), S: (136.0, 144.0)])
+PASS half exact draw geometry guard frame 1 facing 1 (dest [P: (266.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (1224.0, 288.0), S: (136.0, 144.0)])
+PASS half exact draw geometry guard frame 1 facing -1 (dest [P: (267.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (0.0, 288.0), S: (136.0, 144.0)])
+PASS half exact draw geometry hit frame 0 facing 1 (dest [P: (266.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (0.0, 432.0), S: (136.0, 144.0)])
+PASS half exact draw geometry hit frame 0 facing -1 (dest [P: (267.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (1224.0, 432.0), S: (136.0, 144.0)])
+PASS half exact draw geometry hit frame 1 facing 1 (dest [P: (266.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (136.0, 432.0), S: (136.0, 144.0)])
+PASS half exact draw geometry hit frame 1 facing -1 (dest [P: (267.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (1088.0, 432.0), S: (136.0, 144.0)])
+PASS half exact draw geometry hit frame 2 facing 1 (dest [P: (266.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (272.0, 432.0), S: (136.0, 144.0)])
+PASS half exact draw geometry hit frame 2 facing -1 (dest [P: (267.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (952.0, 432.0), S: (136.0, 144.0)])
+PASS half exact draw geometry defeat frame 0 facing 1 (dest [P: (266.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (408.0, 432.0), S: (136.0, 144.0)])
+PASS half exact draw geometry defeat frame 0 facing -1 (dest [P: (267.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (816.0, 432.0), S: (136.0, 144.0)])
+PASS half exact draw geometry defeat frame 1 facing 1 (dest [P: (266.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (544.0, 432.0), S: (136.0, 144.0)])
+PASS half exact draw geometry defeat frame 1 facing -1 (dest [P: (267.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (680.0, 432.0), S: (136.0, 144.0)])
+PASS half exact draw geometry defeat frame 2 facing 1 (dest [P: (266.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (680.0, 432.0), S: (136.0, 144.0)])
+PASS half exact draw geometry defeat frame 2 facing -1 (dest [P: (267.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (544.0, 432.0), S: (136.0, 144.0)])
+PASS half exact draw geometry defeat frame 3 facing 1 (dest [P: (266.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (816.0, 432.0), S: (136.0, 144.0)])
+PASS half exact draw geometry defeat frame 3 facing -1 (dest [P: (267.0, 202.0), S: (68.0, 72.0)] drawPivot (34, 70) src [P: (408.0, 432.0), S: (136.0, 144.0)])
+PASS half-scale unmirrored and mirrored cells reflect about the same logical pivot column for every frame
+PASS half-scale covers every frame/facing with whole logical geometry (74 cases)
+PASS per-frame dodge override [66,140] draws at logical pivot [33,70], planted for both facings
+PASS idle boundary 0.240000: frame 0 before, 1 at the exact boundary
+PASS idle boundary 0.480000: frame 1 before, 2 at the exact boundary
+PASS idle boundary 0.720000: frame 2 before, 3 at the exact boundary
+PASS idle loop wraps to frame 0 exactly at 0.960000
+PASS move boundary 0.090000: frame 0 before, 1 at the exact boundary
+PASS move boundary 0.180000: frame 1 before, 2 at the exact boundary
+PASS move boundary 0.270000: frame 2 before, 3 at the exact boundary
+PASS move boundary 0.360000: frame 3 before, 4 at the exact boundary
+PASS move boundary 0.450000: frame 4 before, 5 at the exact boundary
+PASS move boundary 0.540000: frame 5 before, 6 at the exact boundary
+PASS move boundary 0.630000: frame 6 before, 7 at the exact boundary
+PASS move loop wraps to frame 0 exactly at 0.720000
+PASS attack boundary 0.050000: frame 0 before, 1 at the exact boundary
+PASS attack boundary 0.100000: frame 1 before, 2 at the exact boundary
+PASS attack boundary 0.170000: frame 2 before, 3 at the exact boundary
+PASS attack boundary 0.260000: frame 3 before, 4 at the exact boundary
+PASS attack boundary 0.330000: frame 4 before, 5 at the exact boundary
+PASS attack one-shot holds its last frame at and after 0.390000
+PASS skill boundary 0.075000: frame 0 before, 1 at the exact boundary
+PASS skill boundary 0.150000: frame 1 before, 2 at the exact boundary
+PASS skill boundary 0.225000: frame 2 before, 3 at the exact boundary
+PASS skill boundary 0.300000: frame 3 before, 4 at the exact boundary
+PASS skill boundary 0.375000: frame 4 before, 5 at the exact boundary
+PASS skill one-shot holds its last frame at and after 0.450000
+PASS dodge boundary 0.060000: frame 0 before, 1 at the exact boundary
+PASS dodge boundary 0.120000: frame 1 before, 2 at the exact boundary
+PASS dodge boundary 0.180000: frame 2 before, 3 at the exact boundary
+PASS dodge one-shot holds its last frame at and after 0.240000
+PASS guard boundary 0.180000: frame 0 before, 1 at the exact boundary
+PASS guard loop wraps to frame 0 exactly at 0.360000
+PASS hit boundary 0.080000: frame 0 before, 1 at the exact boundary
+PASS hit boundary 0.160000: frame 1 before, 2 at the exact boundary
+PASS hit one-shot holds its last frame at and after 0.240000
+PASS defeat boundary 0.080000: frame 0 before, 1 at the exact boundary
+PASS defeat boundary 0.160000: frame 1 before, 2 at the exact boundary
+PASS defeat boundary 0.240000: frame 2 before, 3 at the exact boundary
+PASS defeat one-shot holds its last frame at and after 0.320000
+PASS all action boundaries and shared 30/60 frame_at timestamps are deterministic (53 cases)
+PASS idle playback at 30 and 60 fps agrees at every shared tick and matches the manifest boundary (60/120 ticks)
+PASS move playback at 30 and 60 fps agrees at every shared tick and matches the manifest boundary (60/120 ticks)
+PASS guard playback at 30 and 60 fps agrees at every shared tick and matches the manifest boundary (60/120 ticks)
+PASS attack playback at 30 and 60 fps agrees at every shared tick and matches the manifest boundary (60/120 ticks)
+PASS half-scale index loads and resolves the heroine key
+PASS configure loads the 0.5 set for the heroine without a runtime insertion
+PASS index/configure reuse the validated cache
+COMBAT_HALF_SCALE PASS checks=273 failures=0
+REPORT C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/outputs/half-scale-root-20261020-195118-1b6c6fdd/rpg-2-star-ocean-the-second_combat-half-scale_check-report_v01_20261020-154048-7d4bddce.json
+CHECKED_RUN PASS None exit= 0 elapsed= 0.828 missing= []

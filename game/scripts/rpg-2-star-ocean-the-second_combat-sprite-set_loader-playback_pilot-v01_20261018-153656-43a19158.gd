@@ -13,9 +13,11 @@ extends RefCounted
 # Set manifest JSON (schema worlds-between.combat-sprite-set/1):
 #   character        {"member_id", "appearance" (hero only)}; must match the key it is loaded for
 #   sheet            PNG of equal cells, left to right then top to bottom (res:// path, or a file name next to the manifest)
-#   cell_size        [w, h]; pivot [x, y] = the cell pixel drawn at (round(fighter x), floor y), i.e. the ground anchor
+#   cell_size        [w, h] source sheet pixels; pivot [x, y] = the cell pixel drawn at (round(fighter x), floor y), i.e. the ground anchor
 #   authored_facing  "right" or "left"; the other facing is the sheet mirrored about the pivot column, so feet stay put
-#   logical_scale    1 only (native logical pixels; the 0.65 battle display proportion is authored into the frames)
+#   logical_scale    1 (native) or 0.5 (source cells are 2x the logical draw size). At 0.5 the source cell dimensions,
+#                    the base pivot and every per-frame pivot override must be even, so all logical dimensions and anchors
+#                    are whole pixels. The 0.65 battle display proportion is authored into the frames.
 #   actions          {name: {"loop": bool, "frames": [{"cell": int, "ms": int, "pivot": [x, y] (optional)}]}}
 #                    idle, move, guard loop; attack, dodge, hit, defeat play once (defeat holds its last frame).
 #                    skill is optional and falls back to the attack frames.
@@ -31,6 +33,8 @@ const SKILL_FALLBACK := "attack"
 # One-shot actions started by the combat state's visual_action event.
 const EVENT_ACTIONS := ["attack", "hit", "skill"]
 const DISPLAY_PROPORTION := "0.65"
+# Native logical pixels (1) or a 2:1 source-to-logical downscale (0.5). Only these exact values are accepted.
+const SUPPORTED_LOGICAL_SCALES := [1.0, 0.5]
 # Frame boundaries are compared with this slack, so 30 and 60 fps clocks pick the same frame at shared timestamps.
 const CLOCK_EPSILON := 0.000001
 
@@ -102,6 +106,14 @@ static func _integer(value: Variant, minimum: int, maximum: int) -> bool:
 	return (value is int or value is float) and is_finite(float(value)) and float(value) == floorf(float(value)) and float(value) >= minimum and float(value) <= maximum
 
 
+# Bool, strings, null, NaN, infinities and every fraction other than exactly 0.5 or 1.0 are unsupported.
+static func is_supported_logical_scale(value: Variant) -> bool:
+	if value is bool or not (value is int or value is float):
+		return false
+	var scale := float(value)
+	return is_finite(scale) and SUPPORTED_LOGICAL_SCALES.has(scale)
+
+
 static func _vec2i(value: Variant) -> Variant:
 	if not value is Array or value.size() != 2:
 		return null
@@ -134,8 +146,11 @@ static func _validate(path: String, key: String) -> Dictionary:
 		return _fail("identity_mismatch")
 	if set_key(member_id, appearance) != key:
 		return _fail("identity_mismatch")
-	if not (data.get("logical_scale") is float or data.get("logical_scale") is int) or float(data["logical_scale"]) != 1.0:
+	var scale_value: Variant = data.get("logical_scale")
+	if not is_supported_logical_scale(scale_value):
 		return _fail("unsupported_scale")
+	var logical_scale := float(scale_value)
+	var half_scale := logical_scale == 0.5
 	if not data.get("display_proportion") is String or data["display_proportion"] != DISPLAY_PROPORTION:
 		return _fail("unsupported_proportion")
 	if not data.get("authored_facing") is String:
@@ -147,7 +162,11 @@ static func _validate(path: String, key: String) -> Dictionary:
 	var pivot: Variant = _vec2i(data.get("pivot"))
 	if cell == null or cell.x <= 0 or cell.y <= 0:
 		return _fail("invalid_cell")
+	if half_scale and (cell.x % 2 != 0 or cell.y % 2 != 0):
+		return _fail("invalid_cell")
 	if pivot == null or not Rect2i(Vector2i.ZERO, cell).has_point(pivot):
+		return _fail("invalid_pivot")
+	if half_scale and (pivot.x % 2 != 0 or pivot.y % 2 != 0):
 		return _fail("invalid_pivot")
 	var actions_data: Variant = data.get("actions")
 	if not actions_data is Dictionary:
@@ -206,6 +225,8 @@ static func _validate(path: String, key: String) -> Dictionary:
 				frame_pivot = _vec2i(frame_data["pivot"])
 				if frame_pivot == null or not Rect2i(Vector2i.ZERO, cell).has_point(frame_pivot):
 					return _fail("invalid_pivot")
+				if half_scale and (frame_pivot.x % 2 != 0 or frame_pivot.y % 2 != 0):
+					return _fail("invalid_pivot")
 			var origin := Vector2i(cell_index % columns * cell.x, cell_index / columns * cell.y)
 			if not empty_checked.has(cell_index):
 				if image.get_region(Rect2i(origin, cell)).is_invisible():
@@ -217,6 +238,8 @@ static func _validate(path: String, key: String) -> Dictionary:
 	if not actions.has("skill"):
 		actions["skill"] = actions[SKILL_FALLBACK].duplicate()
 		actions["skill"]["source"] = SKILL_FALLBACK
+	var draw_divisor := 2 if half_scale else 1
+	var draw_cell := Vector2i(cell.x / draw_divisor, cell.y / draw_divisor)
 	var mirrored_image := image.duplicate() as Image
 	mirrored_image.flip_x()
 	return {
@@ -231,6 +254,11 @@ static func _validate(path: String, key: String) -> Dictionary:
 		"mirrored": ImageTexture.create_from_image(mirrored_image),
 		"sheet_size": sheet_size,
 		"cell": cell,
+		"pivot": pivot,
+		"logical_scale": logical_scale,
+		"display_proportion": String(data["display_proportion"]),
+		"draw_cell": draw_cell,
+		"scale_divisor": draw_divisor,
 		"facing": 1 if facing == "right" else -1,
 		"actions": actions,
 	}
@@ -344,28 +372,59 @@ func current_frame(index: int) -> Dictionary:
 	return {"action": action_name, "source": action["source"], "frame": frame_index, "cell": frame["cell"], "origin": frame["origin"], "pivot": frame["pivot"], "facing": state["facing"], "mirrored": int(state["facing"]) != int(sprite_set["facing"])}
 
 
-# Top-left screen pixel of the drawn cell. Mirrored cells reflect about the pivot column: a cell pixel at column c lands on
-# x - pivot.x + c unmirrored and on x + pivot.x - c mirrored, so the pivot pixel stays on round(x) either way.
-func cell_screen_origin(index: int, x: float, floor_y: float) -> Vector2i:
+# Exact draw geometry for the current frame. Source cell/pivot stay in sheet pixels. At logical_scale 0.5 the destination
+# cell and pivot are the source values divided by 2; validation guarantees those are whole integers. The mirrored
+# destination offset uses the logical pivot cell, so both facings keep the whole pivot block on round(x) / floor_y instead
+# of straddling a half logical pixel.
+func frame_geometry(index: int, x: float, floor_y: float) -> Dictionary:
+	if not has_set(index):
+		return {}
+	var sprite_set: Dictionary = sets[index]
 	var frame := current_frame(index)
-	var cell: Vector2i = sets[index]["cell"]
+	var cell: Vector2i = sprite_set["cell"]
+	var draw_cell: Vector2i = sprite_set["draw_cell"]
+	var divisor: int = int(sprite_set["scale_divisor"])
 	var pivot: Vector2i = frame["pivot"]
+	var draw_pivot := pivot if divisor == 1 else Vector2i(pivot.x / divisor, pivot.y / divisor)
+	var mirrored: bool = frame["mirrored"]
 	var anchor_x := roundi(x)
-	var left := anchor_x - pivot.x if not frame["mirrored"] else anchor_x - (cell.x - 1 - pivot.x)
-	return Vector2i(left, int(floor_y) - pivot.y)
+	var left := anchor_x - draw_pivot.x if not mirrored else anchor_x - (draw_cell.x - 1 - draw_pivot.x)
+	var dest := Rect2(Vector2(left, int(floor_y) - draw_pivot.y), Vector2(draw_cell))
+	var source_origin: Vector2i = frame["origin"]
+	var texture: Texture2D = sprite_set["texture"]
+	if mirrored:
+		# The mirrored sheet is the whole sheet flipped, so a cell's column moves to the other side.
+		texture = sprite_set["mirrored"]
+		source_origin.x = int(sprite_set["sheet_size"].x) - source_origin.x - cell.x
+	return {
+		"texture": texture,
+		"dest": dest,
+		"src": Rect2(Vector2(source_origin), Vector2(cell)),
+		"mirrored": mirrored,
+		"cell": cell,
+		"draw_cell": draw_cell,
+		"pivot": pivot,
+		"draw_pivot": draw_pivot,
+		"origin": frame["origin"],
+		"source_origin": source_origin,
+		"anchor": Vector2i(anchor_x, int(floor_y)),
+	}
+
+
+# Top-left screen pixel of the drawn cell. Mirrored cells reflect about the pivot column: a cell pixel at column c lands on
+# x - pivot.x + c unmirrored and on x + pivot.x - c mirrored, so the pivot pixel stays on round(x) either way. At 0.5 the
+# same formula uses the logical cell/pivot, keeping every destination pixel and anchor whole.
+func cell_screen_origin(index: int, x: float, floor_y: float) -> Vector2i:
+	var geometry := frame_geometry(index, x, floor_y)
+	if geometry.is_empty():
+		return Vector2i.ZERO
+	var dest: Rect2 = geometry["dest"]
+	return Vector2i(dest.position)
 
 
 func draw_fighter(canvas: CanvasItem, index: int, x: float, floor_y: float) -> bool:
 	if not has_set(index):
 		return false
-	var sprite_set: Dictionary = sets[index]
-	var frame := current_frame(index)
-	var cell: Vector2i = sprite_set["cell"]
-	var origin: Vector2i = frame["origin"]
-	var texture: Texture2D = sprite_set["texture"]
-	if frame["mirrored"]:
-		# The mirrored sheet is the whole sheet flipped, so a cell's column moves to the other side.
-		texture = sprite_set["mirrored"]
-		origin.x = int(sprite_set["sheet_size"].x) - origin.x - cell.x
-	canvas.draw_texture_rect_region(texture, Rect2(Vector2(cell_screen_origin(index, x, floor_y)), Vector2(cell)), Rect2(Vector2(origin), Vector2(cell)))
+	var geometry := frame_geometry(index, x, floor_y)
+	canvas.draw_texture_rect_region(geometry["texture"], geometry["dest"], geometry["src"])
 	return true
