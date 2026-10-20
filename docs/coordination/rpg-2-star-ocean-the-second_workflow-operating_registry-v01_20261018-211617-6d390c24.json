@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-20T21:33:32.180312+00:00",
+  "updatedAt": "2026-10-20T22:07:45.563867+00:00",
   "purpose": "Operating queue and worktree ownership; no progress points or account details",
   "workflow": "docs/workflow.md",
   "canonicalLedger": "outputs/rpg-2-star-ocean-the-second_production-completion_task-ledger_v01_20261018-140533-3de52073.json",
@@ -1025,6 +1025,40 @@
       "evidence": "docs/qa/rpg-2-star-ocean-the-second_bible-video_resource-bound-live-fix_v49_20261020-211831-62fe413b.md",
       "sourceSiteCommit": "0de458fbd299fa1118b9d0a5bec73aa5e3fc4054",
       "noProgressPoints": true
+    },
+    {
+      "id": "support.heroine-sea.gait-source-v04",
+      "owner": "claude",
+      "status": "produced-technical-candidate-needs-visual-revision",
+      "lane": "primary",
+      "worktree": "C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\dual09\\cl-gait",
+      "startedAt": "2026-10-20T21:42:14.634531+00:00",
+      "output": "Four-direction authored12phase gait source",
+      "completion": [
+        "Source-bound checks, root independent inspection, normal-game evidence after serial integration"
+      ],
+      "progressCredit": "Existing frozen task/revision only; no per-version score",
+      "completedAt": "2026-10-20T22:07:45.562867+00:00",
+      "sourceCommit": "852a855d3ffa24aa586ca19ba295dfa4a97ec3dc",
+      "evidence": "docs/qa/rpg-2-star-ocean-the-second_heroine-sea_distance-gait-root-closeout_unapproved-v06_20261020-220500-c073a61e.md",
+      "nextAction": "Full-body authored arm motion, front/back gait and clean final idle handoff; no metric-only parameter search."
+    },
+    {
+      "id": "support.heroine-sea.distance-phase-model",
+      "owner": "deepseek",
+      "status": "done-independently-corrected-and-verified",
+      "lane": "supporting",
+      "worktree": "C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\dual09\\ds-drive",
+      "startedAt": "2026-10-20T21:42:14.634531+00:00",
+      "output": "Deterministic actual-distance phase model",
+      "completion": [
+        "Source-bound checks, root independent inspection, normal-game evidence after serial integration"
+      ],
+      "progressCredit": "Existing frozen task/revision only; no per-version score",
+      "completedAt": "2026-10-20T22:07:45.563867+00:00",
+      "sourceCommit": "852a855d3ffa24aa586ca19ba295dfa4a97ec3dc",
+      "evidence": "docs/qa/rpg-2-star-ocean-the-second_heroine-sea_distance-gait-root-closeout_unapproved-v06_20261020-220500-c073a61e.md",
+      "nextAction": "Closed; first-stop-tick and completion-diagnostic corrections integrated by Codex."
     }
   ],
   "nextProductionMilestones": [
@@ -1086,30 +1120,39 @@
     }
   ],
   "activeDualProviderBatch": {
+    "status": "completed-bounded-distance-and-side-stance-candidate",
     "primary": {
-      "task": "support.heroine-sea.explore-four-source",
+      "id": "support.heroine-sea.gait-source-v04",
       "owner": "claude",
-      "status": "done-source-candidate",
-      "evidence": "docs/qa/rpg-2-star-ocean-the-second_heroine-sea-explore_source-package-root-closeout_unapproved-v03_20261020-213009-2085940c.md",
-      "sourceCommit": "2fd149dc124d7a6667b35773696041877605df3b"
+      "status": "in_progress",
+      "lane": "primary",
+      "worktree": "C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\dual09\\cl-gait",
+      "startedAt": "2026-10-20T21:42:14.634531+00:00",
+      "output": "Four-direction authored12phase gait source",
+      "completion": [
+        "Source-bound checks, root independent inspection, normal-game evidence after serial integration"
+      ],
+      "progressCredit": "Existing frozen task/revision only; no per-version score"
     },
     "supporting": [
       {
-        "task": "support.heroine-sea.explore-lossless-package",
+        "id": "support.heroine-sea.distance-phase-model",
         "owner": "deepseek",
-        "status": "done-root-corrected-and-verified",
-        "evidence": "docs/qa/rpg-2-star-ocean-the-second_heroine-sea-explore_source-package-root-closeout_unapproved-v03_20261020-213009-2085940c.md"
-      },
-      {
-        "task": "support.tracker.media-resource-bounds",
-        "owner": "codex",
-        "status": "done-live-verified",
-        "evidence": "docs/qa/rpg-2-star-ocean-the-second_bible-video_resource-bound-live-fix_v49_20261020-211831-62fe413b.md"
+        "status": "in_progress",
+        "lane": "supporting",
+        "worktree": "C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\dual09\\ds-drive",
+        "startedAt": "2026-10-20T21:42:14.634531+00:00",
+        "output": "Deterministic actual-distance phase model",
+        "completion": [
+          "Source-bound checks, root independent inspection, normal-game evidence after serial integration"
+        ],
+        "progressCredit": "Existing frozen task/revision only; no per-version score"
       }
     ],
     "integrationOwner": "codex",
-    "status": "completed-source-candidate-and-packaging",
-    "noNewScoringTasks": true
+    "noNewScoringTasks": true,
+    "sourceCommit": "852a855d3ffa24aa586ca19ba295dfa4a97ec3dc",
+    "evidence": "docs/qa/rpg-2-star-ocean-the-second_heroine-sea_distance-gait-root-closeout_unapproved-v06_20261020-220500-c073a61e.md"
   },
   "characterSpriteStyleDirection": {
     "reference": "Sea of Stars",
@@ -1121,13 +1164,13 @@
   "progressReporting": {
     "requiredFormat": "before → after (change in percentage points)",
     "currentBatchProductionBefore": 53.6,
-    "startedAt": "2026-10-20T21:10:45.271130+00:00",
-    "sourceCommit": "2fd149dc124d7a6667b35773696041877605df3b",
+    "startedAt": "2026-10-20T21:42:14.747Z",
+    "sourceCommit": "852a855d3ffa24aa586ca19ba295dfa4a97ec3dc",
     "baselineChange": false,
     "currentBatchProductionAfter": 53.6,
     "changePercentagePoints": 0.0,
     "completedAt": "2026-10-20T21:33:32.180312+00:00",
-    "evidence": "docs/qa/rpg-2-star-ocean-the-second_heroine-sea-explore_source-package-root-closeout_unapproved-v03_20261020-213009-2085940c.md",
+    "evidence": "docs/qa/rpg-2-star-ocean-the-second_heroine-sea_distance-gait-root-closeout_unapproved-v06_20261020-220500-c073a61e.md",
     "publicationEvidence": "docs/qa/rpg-2-star-ocean-the-second_bible-exploration-source_live-verification_v50_20261020-213930-842e7d15.md"
   }
 }
