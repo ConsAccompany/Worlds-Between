@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-20T21:02:47.544389+00:00",
+  "updatedAt": "2026-10-20T21:33:32.180312+00:00",
   "purpose": "Operating queue and worktree ownership; no progress points or account details",
   "workflow": "docs/workflow.md",
   "canonicalLedger": "outputs/rpg-2-star-ocean-the-second_production-completion_task-ledger_v01_20261018-140533-3de52073.json",
@@ -990,6 +990,41 @@
       "evidence": "docs/qa/rpg-2-star-ocean-the-second_heroine-natural-facing_combined-closeout_v01_20261020-210143-09fa76bd.md",
       "sourceCommit": "d299ad8ebb13201bb97a27d54553e13c8e06db38",
       "nextAction": "Closed; full motion review/default adoption remain separate."
+    },
+    {
+      "task": "support.heroine-sea.explore-four-source",
+      "owner": "claude",
+      "status": "done-source-candidate",
+      "worktree": "C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\dual08\\cl-explore",
+      "scope": "New Sea heroine four-direction source production",
+      "completion": "Full4dir source manifest with exact approved south base/native source and actual QA",
+      "startedAt": "2026-10-20T21:10:45.271130+00:00",
+      "completedAt": "2026-10-20T21:33:32.180312+00:00",
+      "sourceCommit": "2fd149dc124d7a6667b35773696041877605df3b",
+      "evidence": "docs/qa/rpg-2-star-ocean-the-second_heroine-sea-explore_source-package-root-closeout_unapproved-v03_20261020-213009-2085940c.md",
+      "nextAction": "Distance/anchor-aware stance and full-body motion revision; not another cosmetic source batch."
+    },
+    {
+      "task": "support.heroine-sea.explore-lossless-package",
+      "owner": "deepseek",
+      "status": "done-root-corrected-and-verified",
+      "worktree": "C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\dual08\\ds-pack",
+      "scope": "Lossless reusable exploration source package",
+      "completion": "Validated atomic no-edit source package plus positive/negative checks",
+      "startedAt": "2026-10-20T21:10:45.271130+00:00",
+      "completedAt": "2026-10-20T21:33:32.180312+00:00",
+      "sourceCommit": "2fd149dc124d7a6667b35773696041877605df3b",
+      "evidence": "docs/qa/rpg-2-star-ocean-the-second_heroine-sea-explore_source-package-root-closeout_unapproved-v03_20261020-213009-2085940c.md",
+      "nextAction": "Use the committed corrected actor/native-descriptor schema; no duplicate packager."
+    },
+    {
+      "task": "support.tracker.media-resource-bounds",
+      "owner": "codex",
+      "status": "done-live-verified",
+      "completedAt": "2026-10-20T21:33:32.180312+00:00",
+      "evidence": "docs/qa/rpg-2-star-ocean-the-second_bible-video_resource-bound-live-fix_v49_20261020-211831-62fe413b.md",
+      "sourceSiteCommit": "0de458fbd299fa1118b9d0a5bec73aa5e3fc4054",
+      "noProgressPoints": true
     }
   ],
   "nextProductionMilestones": [
@@ -1052,25 +1087,28 @@
   ],
   "activeDualProviderBatch": {
     "primary": {
-      "task": "support.heroine-sea.natural-roundtrip",
+      "task": "support.heroine-sea.explore-four-source",
       "owner": "claude",
-      "status": "done-independently-verified",
-      "worktree": "work/dual07/cl-full",
-      "evidence": "docs/qa/rpg-2-star-ocean-the-second_heroine-natural-facing_combined-closeout_v01_20261020-210143-09fa76bd.md",
-      "sourceCommit": "d299ad8ebb13201bb97a27d54553e13c8e06db38"
+      "status": "done-source-candidate",
+      "evidence": "docs/qa/rpg-2-star-ocean-the-second_heroine-sea-explore_source-package-root-closeout_unapproved-v03_20261020-213009-2085940c.md",
+      "sourceCommit": "2fd149dc124d7a6667b35773696041877605df3b"
     },
     "supporting": [
       {
-        "task": "support.heroine-sea.oneshot-facing",
+        "task": "support.heroine-sea.explore-lossless-package",
         "owner": "deepseek",
-        "status": "done-independently-verified",
-        "worktree": "work/dual07/ds-face",
-        "evidence": "docs/qa/rpg-2-star-ocean-the-second_heroine-natural-facing_combined-closeout_v01_20261020-210143-09fa76bd.md",
-        "sourceCommit": "d299ad8ebb13201bb97a27d54553e13c8e06db38"
+        "status": "done-root-corrected-and-verified",
+        "evidence": "docs/qa/rpg-2-star-ocean-the-second_heroine-sea-explore_source-package-root-closeout_unapproved-v03_20261020-213009-2085940c.md"
+      },
+      {
+        "task": "support.tracker.media-resource-bounds",
+        "owner": "codex",
+        "status": "done-live-verified",
+        "evidence": "docs/qa/rpg-2-star-ocean-the-second_bible-video_resource-bound-live-fix_v49_20261020-211831-62fe413b.md"
       }
     ],
     "integrationOwner": "codex",
-    "status": "completed-natural-roundtrip-and-facing-maintenance",
+    "status": "completed-source-candidate-and-packaging",
     "noNewScoringTasks": true
   },
   "characterSpriteStyleDirection": {
@@ -1088,7 +1126,7 @@
     "baselineChange": false,
     "currentBatchProductionAfter": 53.6,
     "changePercentagePoints": 0.0,
-    "completedAt": "2026-10-20T21:02:47.544389+00:00",
-    "evidence": "docs/qa/rpg-2-star-ocean-the-second_heroine-natural-facing_combined-closeout_v01_20261020-210143-09fa76bd.md"
+    "completedAt": "2026-10-20T21:33:32.180312+00:00",
+    "evidence": "docs/qa/rpg-2-star-ocean-the-second_heroine-sea-explore_source-package-root-closeout_unapproved-v03_20261020-213009-2085940c.md"
   }
 }

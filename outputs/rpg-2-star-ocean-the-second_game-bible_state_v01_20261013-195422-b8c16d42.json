@@ -4,7 +4,7 @@
   "title": "世界之间",
   "englishTitle": "Worlds Between",
   "edition": "设计基线 v0.2 · 2026-10-15 创作者决定",
-  "updatedAt": "2026-10-20T21:02:48.191Z",
+  "updatedAt": "2026-10-20T21:33:34.720Z",
   "note": "规则以玩家确认的设计稿为基线，并已并入 2026-10-15 创作者决定；人物姓名与外观是待审提案，具体剧情留待后续设计。",
   "pitch": "从地下社区走出的旅人，以好奇心探索多元文明，招募伙伴，并成为不同世界认知差异的桥梁。",
   "pillars": [
@@ -4720,6 +4720,121 @@
           }
         }
       ]
+    },
+    "latestExplorationStylePilot": {
+      "sourceCommit": "2fd149dc124d7a6667b35773696041877605df3b",
+      "qa": "docs/qa/rpg-2-star-ocean-the-second_heroine-sea-explore_source-package-root-closeout_unapproved-v03_20261020-213009-2085940c.md",
+      "sourceManifest": "outputs/hsea-exp03/rpg-2-star-ocean-the-second_heroine-sea_explore-source-manifest_unapproved-v03_20261020-172100-4aceb0cb.json",
+      "poseCount": 36,
+      "idlePosesPerDirection": 1,
+      "walkPosesPerDirection": 8,
+      "directions": [
+        "south",
+        "west",
+        "north",
+        "east"
+      ],
+      "displayBodyLogicalPixels": 48,
+      "optionalRuntimeIntegrated": true,
+      "normalSceneInputVerified": true,
+      "defaultAdopted": false,
+      "creatorApproved": false,
+      "artAccepted": false,
+      "readyForCreatorReview": false,
+      "continuousFluidityCertified": false,
+      "registry": "res://data/heroine-sea-explore-v03/rpg-2-star-ocean-the-second_hero-female_exploration-sprite-set-registry_runtime-v01_20261020-172334-c4090bb7.json",
+      "updatedAt": "2026-10-20T21:33:32.180312+00:00",
+      "ownerSplit": {
+        "directionalSourceReferencesAndIntegration": "codex",
+        "articulationAndEditableSource": "claude",
+        "losslessPackager": "deepseek"
+      },
+      "limits": {
+        "zh": [
+          "四方向各一张待机静止帧与八张行走姿势，尚无新待机呼吸循环。",
+          "脚步滑动、手臂摆动、围巾与马尾动态、停步衔接仍需打磨。",
+          "Pixelorama原生打开/导出与GUI保存重开尚未证明可靠。"
+        ],
+        "en": [
+          "One still idle and eight walk poses per direction; no new breathing cycle.",
+          "Foot sliding, arm swing, scarf/ponytail motion and stopping transitions need work.",
+          "Native Pixelorama open/export and GUI save/reopen not established."
+        ]
+      },
+      "evidence": {
+        "normalGame": "outputs/hse-root08/rpg-2-star-ocean-the-second_heroine-sea-explore_combined-root-proof_v01_20261020-212435-2222c4f9.json"
+      },
+      "reels": [
+        {
+          "id": "source-heroine-sea-explore-city-v03",
+          "kind": "actual-godot-capture",
+          "mediaType": "video/mp4",
+          "file": "outputs/hse-root08/rpg-2-star-ocean-the-second_heroine-sea-explore_city-30fps-normal-input_unapproved-v03_20261020-212435-2222c4f9.mp4",
+          "sha256": "423a1c7fd1e0ad96f6506daf823eb3fa9d515e59d9093898488d05adefd566b3",
+          "gitBlob": "030d5261e5d782043fe21d01cf32faf9eaf94413",
+          "syncState": "committed-at-2fd149d",
+          "label": {
+            "zh": "新风格女主四方向探索 · 室外英文30fps",
+            "en": "New-style heroine four-direction exploration · city EN30fps"
+          },
+          "caption": {
+            "zh": "普通探索场景的实际按键移动；36姿势试作。源文件与资源包已检查；步态、滑步及停步仍待打磨。",
+            "en": "Actual movement input in normal exploration scenes;36-pose source candidate. Source/package checked; gait, foot sliding and stops need polish."
+          },
+          "scope": {
+            "zh": "48逻辑像素，可选预览，非默认采用；仅原南向静止外观获批准，其他方向和动作尚未验收。",
+            "en": "48logical pixels,opt-in preview,not default adoption. Only the original south static appearance is approved; other directions/motion remain unaccepted."
+          },
+          "creatorApproved": false,
+          "artAccepted": false,
+          "runtimeIntegrated": true,
+          "optInOnly": true,
+          "defaultAdopted": false,
+          "technicalCandidate": true,
+          "staged": false,
+          "scriptedInput": true,
+          "readyForCreatorReview": false,
+          "qa": "docs/qa/rpg-2-star-ocean-the-second_heroine-sea-explore_source-package-root-closeout_unapproved-v03_20261020-213009-2085940c.md"
+        },
+        {
+          "id": "source-heroine-sea-explore-room-v03",
+          "kind": "actual-godot-capture",
+          "mediaType": "video/mp4",
+          "file": "outputs/hse-root08/rpg-2-star-ocean-the-second_heroine-sea-explore_room-60fps-normal-input_unapproved-v03_20261020-212435-2222c4f9.mp4",
+          "sha256": "d953cf59cbb7bdf55ce1f07c322760c3d9ab4366275ee99695d262c959abcb12",
+          "gitBlob": "816314347fb74f745e8c92504a5f52386ad00e23",
+          "syncState": "committed-at-2fd149d",
+          "label": {
+            "zh": "新风格女主四方向探索 · 室内中文60fps",
+            "en": "New-style heroine four-direction exploration · interior ZH60fps"
+          },
+          "caption": {
+            "zh": "普通探索场景的实际按键移动；36姿势试作。源文件与资源包已检查；步态、滑步及停步仍待打磨。",
+            "en": "Actual movement input in normal exploration scenes;36-pose source candidate. Source/package checked; gait, foot sliding and stops need polish."
+          },
+          "scope": {
+            "zh": "48逻辑像素，可选预览，非默认采用；仅原南向静止外观获批准，其他方向和动作尚未验收。",
+            "en": "48logical pixels,opt-in preview,not default adoption. Only the original south static appearance is approved; other directions/motion remain unaccepted."
+          },
+          "creatorApproved": false,
+          "artAccepted": false,
+          "runtimeIntegrated": true,
+          "optInOnly": true,
+          "defaultAdopted": false,
+          "technicalCandidate": true,
+          "staged": false,
+          "scriptedInput": true,
+          "readyForCreatorReview": false,
+          "qa": "docs/qa/rpg-2-star-ocean-the-second_heroine-sea-explore_source-package-root-closeout_unapproved-v03_20261020-213009-2085940c.md"
+        }
+      ]
+    },
+    "runtimeVideoDelivery": {
+      "siteVersion": 49,
+      "siteSource": "0de458fbd299fa1118b9d0a5bec73aa5e3fc4054",
+      "status": "both-natural-combat-reels-live-playback-verified",
+      "qa": "docs/qa/rpg-2-star-ocean-the-second_bible-video_resource-bound-live-fix_v49_20261020-211831-62fe413b.md",
+      "updatedAt": "2026-10-20T21:33:32.180312+00:00"
     }
   },
   "environmentVisualReview": {
@@ -7252,14 +7367,14 @@
     "combinedWiringCheck": "297/297 on39f252e, clean raw log; actual Chinese victory inspected."
   },
   "latestTaskProgress": {
-    "id": "support.heroine-sea.natural-battle-and-motion-binding",
+    "id": "support.heroine-sea.explore-four-source-and-package",
     "status": "completed",
     "title": {
-      "zh": "女主完整战斗、返回读档与动作朝向衔接",
-      "en": "Heroine complete battle, return/reload and action-facing continuity"
+      "zh": "新风格女主四方向探索动作与无损打包",
+      "en": "New-style heroine four-direction exploration source and lossless package"
     },
-    "startedAt": "2026-10-20T20:49:02.339Z",
-    "sourceBefore": "4ef439193286d271d5311987773ca3f96229c4ce",
+    "startedAt": "2026-10-20T21:10:45.379Z",
+    "sourceBefore": "e6a97c87a265dacbc1399607176a29c3f12f9a93",
     "meters": {
       "production": {
         "before": 53.6,
@@ -7277,10 +7392,10 @@
         "changePercentagePoints": 0
       }
     },
-    "completedAt": "2026-10-20T21:02:48.191Z",
-    "sourceAfter": "d299ad8ebb13201bb97a27d54553e13c8e06db38",
+    "completedAt": "2026-10-20T21:33:34.720Z",
+    "sourceAfter": "2fd149dc124d7a6667b35773696041877605df3b",
     "evidence": [
-      "docs/qa/rpg-2-star-ocean-the-second_heroine-natural-facing_combined-closeout_v01_20261020-210143-09fa76bd.md"
+      "docs/qa/rpg-2-star-ocean-the-second_heroine-sea-explore_source-package-root-closeout_unapproved-v03_20261020-213009-2085940c.md"
     ]
   },
   "progressReporting": {
@@ -7319,6 +7434,38 @@
       "sourceAfter": "34b61602a0e8aac8ff3dfbcf825e0984d7366843",
       "evidence": [
         "docs/qa/rpg-2-star-ocean-the-second_heroine-contact_combined-production-closeout_v01_20261020-202822-b09ea1fd.md"
+      ]
+    },
+    {
+      "id": "support.heroine-sea.natural-battle-and-motion-binding",
+      "status": "completed",
+      "title": {
+        "zh": "女主完整战斗、返回读档与动作朝向衔接",
+        "en": "Heroine complete battle, return/reload and action-facing continuity"
+      },
+      "startedAt": "2026-10-20T20:49:02.339Z",
+      "sourceBefore": "4ef439193286d271d5311987773ca3f96229c4ce",
+      "meters": {
+        "production": {
+          "before": 53.6,
+          "after": 53.6,
+          "changePercentagePoints": 0
+        },
+        "inspection": {
+          "before": 14.2,
+          "after": 14.2,
+          "changePercentagePoints": 0
+        },
+        "approval": {
+          "before": 7,
+          "after": 7,
+          "changePercentagePoints": 0
+        }
+      },
+      "completedAt": "2026-10-20T21:02:48.191Z",
+      "sourceAfter": "d299ad8ebb13201bb97a27d54553e13c8e06db38",
+      "evidence": [
+        "docs/qa/rpg-2-star-ocean-the-second_heroine-natural-facing_combined-closeout_v01_20261020-210143-09fa76bd.md"
       ]
     }
   ]

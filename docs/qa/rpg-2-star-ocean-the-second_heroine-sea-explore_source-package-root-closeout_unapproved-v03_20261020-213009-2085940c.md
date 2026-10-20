@@ -25,3 +25,5 @@ This is a36-pose technical candidate, not a completed polished motion set. No ne
 Rejected primitivev02 and its failures remain local in the producer checkout; not promoted. Producer previewAVIs/diagnostics are staged source-view evidence, not the root normal-scene movie. Their raw videos remain local; selected reports/logs retained. Root first invoked a broad-glob global-map checker by mistake; failure log retained, then the exact heroine checker passed68/68. No threshold weakened.
 
 Production53.6%→53.6%(+0.0pp); inspection14.2→14.2;creator7.0→7.0. This migrates already-credited heroine source production and adds a package utility; no new tasks/weights/revision buckets. Fullsprites0/52,scenes3/12,humanplays0/2,formalfalse. Private Bible playback1102 issue separately repaired/liveverified in v49 note62fe413b.
+
+Staged-byte gate initially caught CRLF normalization of the new Site QA note. Added exact-file raw-byte attributes and explicitly renormalized only that owned path. Final189/189 selected files matched working raw bytes before source commit2fd149d; unrelated metadata remained unstaged.
