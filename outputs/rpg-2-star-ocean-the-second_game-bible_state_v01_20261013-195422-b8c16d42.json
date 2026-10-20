@@ -4372,6 +4372,54 @@
         "battleNodeScale": 0.65
       },
       "nextAction": "Reauthor the heroine static baseline using expressive proportions, readable silhouettes and controlled shading; inspect actual gameplay before presenting, then respect the combat-static approval gate."
+    },
+    "latestStaticApproval": {
+      "recordedAt": "2026-10-20T18:58:28.265961Z",
+      "answer": "approved",
+      "evidence": "docs/character-visuals/rpg-2-star-ocean-the-second_heroine-sea_static-baselines-creator-approval_v01_20261020-185828-8775642a.md",
+      "records": [
+        {
+          "answer": "approved",
+          "recordedAt": "2026-10-20T18:58:28.265961Z",
+          "timestampMeaning": "Recording time; exact user-message time unavailable",
+          "scope": "Right-facing combat static appearance",
+          "evidence": "docs/character-visuals/rpg-2-star-ocean-the-second_heroine-sea_static-baselines-creator-approval_v01_20261020-185828-8775642a.md",
+          "sourceCommit": "d5cfb11e9c7f576ad39c39c238f3f94a4408879d",
+          "nativeFile": "outputs/hero-sea-v01/rpg-2-star-ocean-the-second_heroine-battle_still-native136_sea-unapproved-v01_20261020-181955-1294c865.png",
+          "nativeSha256": "4ce65a7915c0c0270a4ca353152b45b7d68b42672cb1483dd4f3e9cf4ac9d5e6",
+          "captureFile": "outputs/hero-sea-v01/root-20261020-182710-dd45d8bd/rpg-2-star-ocean-the-second_heroine-battle-sea-v01-ci1280-outskirts-en-injected_test-only_20261020-182710-dd45d8bd.png",
+          "captureSha256": "9cb3874350792c3d04114b40453d72ac54d5d8661aaa2ae4740698ec7f83f1fe",
+          "excludes": [
+            "motion",
+            "other directions",
+            "other characters",
+            "environments",
+            "complete runtime sprite set",
+            "native-editor reliability"
+          ]
+        },
+        {
+          "answer": "approved",
+          "recordedAt": "2026-10-20T18:58:28.265961Z",
+          "timestampMeaning": "Recording time; exact user-message time unavailable",
+          "scope": "South-facing exploration static appearance at 48 logical pixels",
+          "evidence": "docs/character-visuals/rpg-2-star-ocean-the-second_heroine-sea_static-baselines-creator-approval_v01_20261020-185828-8775642a.md",
+          "sourceCommit": "d5cfb11e9c7f576ad39c39c238f3f94a4408879d",
+          "nativeFile": "outputs/hero-sea-exp-v01/rpg-2-star-ocean-the-second_heroine-sea_exploration-native80x112_unapproved-v01_20261020-181941-4449ed55.png",
+          "nativeSha256": "6bf1d688487bd3fcc71eeb2e7c9b7c74f1fe6b6cd6362860b7fa0d42e009e429",
+          "captureFile": "outputs/hero-sea-exp-v01/capture-20261020-182023-3f2b9c9b/rpg-2-star-ocean-the-second_heroine-sea_exploration-city-bright-en-sea1280_test-only-v01_20261020-142025-f86a9397.png",
+          "captureSha256": "7fed9db978070c4d547c26d1af083b6f185b66ef1fbceda390c6815f26929c9b",
+          "excludes": [
+            "motion",
+            "other directions",
+            "other characters",
+            "environments",
+            "complete runtime sprite set",
+            "native-editor reliability"
+          ]
+        }
+      ],
+      "completeSpriteApproved": false
     }
   },
   "environmentVisualReview": {
@@ -4861,9 +4909,9 @@
         }
       ],
       "currentCandidates": {
-        "asOf": "2026-10-20T18:38:04.676Z",
-        "zh": "13项当前候选；女主Sea of Stars方向两张新静止实机待验收。",
-        "en": "13 current candidates; two new Sea of Stars-direction heroine gameplay stills await scoped static review.",
+        "asOf": "2026-10-20T18:58:28.265961Z",
+        "zh": "13项当前展示：2张女主静止外观基准已批准，11项仍未批准。完整精灵仍为0/52。",
+        "en": "13 current items: 2 heroine static appearance baselines approved; 11 remain unapproved. Complete runtime sprites remain 0/52.",
         "scopedReferenceOrders": [
           1
         ],
@@ -4876,7 +4924,8 @@
           "docs/qa/rpg-2-star-ocean-the-second_female-battle_root-production-closeout_v17r2_20261019-164412-1f3bff80.md",
           "outputs/fexp-merged-v01/rpg-2-star-ocean-the-second_female-complete-explore_canonical-integration-qa_unapproved-v01_20261019-233439-bc8a3150.md",
           "docs/qa/rpg-2-star-ocean-the-second_heroine-sea_battle-static-root-closeout_v01_20261020-182831-69f29955.md",
-          "docs/qa/rpg-2-star-ocean-the-second_heroine-sea_exploration-static-visual-review_v01_20261020-182420-1d4edf96.md"
+          "docs/qa/rpg-2-star-ocean-the-second_heroine-sea_exploration-static-visual-review_v01_20261020-182420-1d4edf96.md",
+          "docs/character-visuals/rpg-2-star-ocean-the-second_heroine-sea_static-baselines-creator-approval_v01_20261020-185828-8775642a.md"
         ],
         "items": [
           {
@@ -4888,30 +4937,51 @@
               "en": "Heroine · Sea of Stars direction · battle static in game"
             },
             "caption": {
-              "zh": "最左侧女主的新静止外观；清晰头发、面部与色块，保留原显示比例。其他队员仍是旧占位图。仅请求女主静止外观验收。",
-              "en": "New static heroine at far left, with clearer hair/face shapes and controlled shading at the existing display proportion. Other party members remain legacy placeholders. Review heroine static appearance only."
+              "zh": "最左侧女主的新静止外观；清晰头发、面部与色块，保留原显示比例。其他队员仍是旧占位图。创作者已批准此静止外观基准，可以开始动作制作。",
+              "en": "New static heroine at far left, with clearer hair/face shapes and controlled shading at the existing display proportion. Other party members remain legacy placeholders. Creator approved this static appearance baseline; motion production may proceed."
             },
             "file": "outputs/hero-sea-v01/root-20261020-182710-dd45d8bd/rpg-2-star-ocean-the-second_heroine-battle-sea-v01-ci1280-outskirts-en-injected_test-only_20261020-182710-dd45d8bd.png",
             "scope": {
-              "zh": "仅女主静止外观，不含动作、其他角色、环境或完整精灵；尚未批准。",
-              "en": "Heroine static appearance only; excludes motion, other characters, environments and complete sprites. Unapproved."
+              "zh": "已批准这张女主静止帧的外观基准；不含动作、其他方向、其他角色、环境或完整运行时精灵。",
+              "en": "Right-facing combat static appearance approved as an appearance baseline only. Motion, other directions, other characters, environments and the complete runtime sprite set remain unapproved."
             },
-            "creatorApproved": false,
+            "creatorApproved": true,
             "artAccepted": false,
             "runtimeIntegrated": false,
             "testOnly": true,
             "technicalCandidate": true,
-            "readyForCreatorReview": true,
+            "readyForCreatorReview": false,
             "badge": {
-              "zh": "Sea of Stars方向 · 静止帧待验收",
-              "en": "Sea of Stars direction · static approval pending",
-              "tone": "warn"
+              "zh": "已批准静止外观基准",
+              "en": "Approved static appearance baseline",
+              "tone": "good"
             },
             "qa": "docs/qa/rpg-2-star-ocean-the-second_heroine-sea_battle-static-root-closeout_v01_20261020-182831-69f29955.md",
             "hashPinnedIn": "d5cfb11e9c7f576ad39c39c238f3f94a4408879d",
             "syncState": "committed-at-d5cfb11",
             "gitBlob": "62e7ff816bb41b2ec76a99d29a5063c643e51c44",
-            "sha256": "9cb3874350792c3d04114b40453d72ac54d5d8661aaa2ae4740698ec7f83f1fe"
+            "sha256": "9cb3874350792c3d04114b40453d72ac54d5d8661aaa2ae4740698ec7f83f1fe",
+            "approvedScopeOnly": "Right-facing combat static appearance",
+            "creatorDecision": {
+              "answer": "approved",
+              "recordedAt": "2026-10-20T18:58:28.265961Z",
+              "timestampMeaning": "Recording time; exact user-message time unavailable",
+              "scope": "Right-facing combat static appearance",
+              "evidence": "docs/character-visuals/rpg-2-star-ocean-the-second_heroine-sea_static-baselines-creator-approval_v01_20261020-185828-8775642a.md",
+              "sourceCommit": "d5cfb11e9c7f576ad39c39c238f3f94a4408879d",
+              "nativeFile": "outputs/hero-sea-v01/rpg-2-star-ocean-the-second_heroine-battle_still-native136_sea-unapproved-v01_20261020-181955-1294c865.png",
+              "nativeSha256": "4ce65a7915c0c0270a4ca353152b45b7d68b42672cb1483dd4f3e9cf4ac9d5e6",
+              "captureFile": "outputs/hero-sea-v01/root-20261020-182710-dd45d8bd/rpg-2-star-ocean-the-second_heroine-battle-sea-v01-ci1280-outskirts-en-injected_test-only_20261020-182710-dd45d8bd.png",
+              "captureSha256": "9cb3874350792c3d04114b40453d72ac54d5d8661aaa2ae4740698ec7f83f1fe",
+              "excludes": [
+                "motion",
+                "other directions",
+                "other characters",
+                "environments",
+                "complete runtime sprite set",
+                "native-editor reliability"
+              ]
+            }
           },
           {
             "id": "current-heroine-sea-exploration-static-v01",
@@ -4927,25 +4997,46 @@
             },
             "file": "outputs/hero-sea-exp-v01/capture-20261020-182023-3f2b9c9b/rpg-2-star-ocean-the-second_heroine-sea_exploration-city-bright-en-sea1280_test-only-v01_20261020-142025-f86a9397.png",
             "scope": {
-              "zh": "仅女主静止外观，不含动作、其他角色、环境或完整精灵；尚未批准。",
-              "en": "Heroine static appearance only; excludes motion, other characters, environments and complete sprites. Unapproved."
+              "zh": "已批准这张女主静止帧的外观基准；不含动作、其他方向、其他角色、环境或完整运行时精灵。",
+              "en": "South-facing exploration static appearance at 48 logical pixels approved as an appearance baseline only. Motion, other directions, other characters, environments and the complete runtime sprite set remain unapproved."
             },
-            "creatorApproved": false,
+            "creatorApproved": true,
             "artAccepted": false,
             "runtimeIntegrated": false,
             "testOnly": true,
             "technicalCandidate": true,
-            "readyForCreatorReview": true,
+            "readyForCreatorReview": false,
             "badge": {
-              "zh": "Sea of Stars方向 · 静止帧待验收",
-              "en": "Sea of Stars direction · static approval pending",
-              "tone": "warn"
+              "zh": "已批准静止外观基准",
+              "en": "Approved static appearance baseline",
+              "tone": "good"
             },
             "qa": "docs/qa/rpg-2-star-ocean-the-second_heroine-sea_exploration-static-visual-review_v01_20261020-182420-1d4edf96.md",
             "hashPinnedIn": "d5cfb11e9c7f576ad39c39c238f3f94a4408879d",
             "syncState": "committed-at-d5cfb11",
             "gitBlob": "12ed52b67825f5ecc9e9b418ab21a1213ef4af0d",
-            "sha256": "7fed9db978070c4d547c26d1af083b6f185b66ef1fbceda390c6815f26929c9b"
+            "sha256": "7fed9db978070c4d547c26d1af083b6f185b66ef1fbceda390c6815f26929c9b",
+            "approvedScopeOnly": "South-facing exploration static appearance at 48 logical pixels",
+            "creatorDecision": {
+              "answer": "approved",
+              "recordedAt": "2026-10-20T18:58:28.265961Z",
+              "timestampMeaning": "Recording time; exact user-message time unavailable",
+              "scope": "South-facing exploration static appearance at 48 logical pixels",
+              "evidence": "docs/character-visuals/rpg-2-star-ocean-the-second_heroine-sea_static-baselines-creator-approval_v01_20261020-185828-8775642a.md",
+              "sourceCommit": "d5cfb11e9c7f576ad39c39c238f3f94a4408879d",
+              "nativeFile": "outputs/hero-sea-exp-v01/rpg-2-star-ocean-the-second_heroine-sea_exploration-native80x112_unapproved-v01_20261020-181941-4449ed55.png",
+              "nativeSha256": "6bf1d688487bd3fcc71eeb2e7c9b7c74f1fe6b6cd6362860b7fa0d42e009e429",
+              "captureFile": "outputs/hero-sea-exp-v01/capture-20261020-182023-3f2b9c9b/rpg-2-star-ocean-the-second_heroine-sea_exploration-city-bright-en-sea1280_test-only-v01_20261020-142025-f86a9397.png",
+              "captureSha256": "7fed9db978070c4d547c26d1af083b6f185b66ef1fbceda390c6815f26929c9b",
+              "excludes": [
+                "motion",
+                "other directions",
+                "other characters",
+                "environments",
+                "complete runtime sprite set",
+                "native-editor reliability"
+              ]
+            }
           },
           {
             "id": "current-global-map-v03r2",
@@ -6426,6 +6517,54 @@
         "battleNodeScale": 0.65
       },
       "nextAction": "Reauthor the heroine static baseline using expressive proportions, readable silhouettes and controlled shading; inspect actual gameplay before presenting, then respect the combat-static approval gate."
+    },
+    "heroineSeaStaticBaselines": {
+      "recordedAt": "2026-10-20T18:58:28.265961Z",
+      "answer": "approved",
+      "evidence": "docs/character-visuals/rpg-2-star-ocean-the-second_heroine-sea_static-baselines-creator-approval_v01_20261020-185828-8775642a.md",
+      "records": [
+        {
+          "answer": "approved",
+          "recordedAt": "2026-10-20T18:58:28.265961Z",
+          "timestampMeaning": "Recording time; exact user-message time unavailable",
+          "scope": "Right-facing combat static appearance",
+          "evidence": "docs/character-visuals/rpg-2-star-ocean-the-second_heroine-sea_static-baselines-creator-approval_v01_20261020-185828-8775642a.md",
+          "sourceCommit": "d5cfb11e9c7f576ad39c39c238f3f94a4408879d",
+          "nativeFile": "outputs/hero-sea-v01/rpg-2-star-ocean-the-second_heroine-battle_still-native136_sea-unapproved-v01_20261020-181955-1294c865.png",
+          "nativeSha256": "4ce65a7915c0c0270a4ca353152b45b7d68b42672cb1483dd4f3e9cf4ac9d5e6",
+          "captureFile": "outputs/hero-sea-v01/root-20261020-182710-dd45d8bd/rpg-2-star-ocean-the-second_heroine-battle-sea-v01-ci1280-outskirts-en-injected_test-only_20261020-182710-dd45d8bd.png",
+          "captureSha256": "9cb3874350792c3d04114b40453d72ac54d5d8661aaa2ae4740698ec7f83f1fe",
+          "excludes": [
+            "motion",
+            "other directions",
+            "other characters",
+            "environments",
+            "complete runtime sprite set",
+            "native-editor reliability"
+          ]
+        },
+        {
+          "answer": "approved",
+          "recordedAt": "2026-10-20T18:58:28.265961Z",
+          "timestampMeaning": "Recording time; exact user-message time unavailable",
+          "scope": "South-facing exploration static appearance at 48 logical pixels",
+          "evidence": "docs/character-visuals/rpg-2-star-ocean-the-second_heroine-sea_static-baselines-creator-approval_v01_20261020-185828-8775642a.md",
+          "sourceCommit": "d5cfb11e9c7f576ad39c39c238f3f94a4408879d",
+          "nativeFile": "outputs/hero-sea-exp-v01/rpg-2-star-ocean-the-second_heroine-sea_exploration-native80x112_unapproved-v01_20261020-181941-4449ed55.png",
+          "nativeSha256": "6bf1d688487bd3fcc71eeb2e7c9b7c74f1fe6b6cd6362860b7fa0d42e009e429",
+          "captureFile": "outputs/hero-sea-exp-v01/capture-20261020-182023-3f2b9c9b/rpg-2-star-ocean-the-second_heroine-sea_exploration-city-bright-en-sea1280_test-only-v01_20261020-142025-f86a9397.png",
+          "captureSha256": "7fed9db978070c4d547c26d1af083b6f185b66ef1fbceda390c6815f26929c9b",
+          "excludes": [
+            "motion",
+            "other directions",
+            "other characters",
+            "environments",
+            "complete runtime sprite set",
+            "native-editor reliability"
+          ]
+        }
+      ],
+      "completeSpriteApproved": false
     }
   },
   "audioProduction": {
@@ -6754,7 +6893,7 @@
   },
   "latestHeroineSeaOfStarsStylePilot": {
     "recordedAt": "2026-10-20T18:38:04.676Z",
-    "status": "produced-and-independently-inspected-static-candidates",
+    "status": "creator-approved-static-appearance-baselines",
     "sourceCommit": "d5cfb11e9c7f576ad39c39c238f3f94a4408879d",
     "battleCapture": "outputs/hero-sea-v01/root-20261020-182710-dd45d8bd/rpg-2-star-ocean-the-second_heroine-battle-sea-v01-ci1280-outskirts-en-injected_test-only_20261020-182710-dd45d8bd.png",
     "explorationCapture": "outputs/hero-sea-exp-v01/capture-20261020-182023-3f2b9c9b/rpg-2-star-ocean-the-second_heroine-sea_exploration-city-bright-en-sea1280_test-only-v01_20261020-142025-f86a9397.png",
@@ -6767,6 +6906,13 @@
     "motionApproved": false,
     "defaultChanged": false,
     "nativeAppDiagnosticsClean": false,
-    "nextAction": "Show actual gameplay stills and request static appearance approval before new combat animation."
+    "nextAction": "Author heroine combat and exploration motion from these approved still designs; inspect normal-speed actual gameplay before creator motion review.",
+    "staticAppearanceApproved": true,
+    "approvalEvidence": "docs/character-visuals/rpg-2-star-ocean-the-second_heroine-sea_static-baselines-creator-approval_v01_20261020-185828-8775642a.md",
+    "creatorDecisionRecordedAt": "2026-10-20T18:58:28.265961Z",
+    "approvedScopes": [
+      "Right-facing combat static appearance",
+      "South-facing exploration static appearance at 48 logical pixels"
+    ]
   }
 }
