@@ -1,0 +1,83 @@
+{
+  "task": "hsea09",
+  "fixture": "synthetic deterministic numeric headless fixture; NOT actual gameplay",
+  "generatedUtc": "2026-10-20T21:53:01.314836+00:00",
+  "result": "MODEL_PASS_CHECKED_RUN_ENVIRONMENT_FAIL",
+  "modelChecks": {
+    "total": 2204,
+    "failures": 0,
+    "successMarker": true,
+    "pass": true
+  },
+  "checkedRun": {
+    "passed": false,
+    "reason": "diagnostic",
+    "exitCode": 0,
+    "elapsedSeconds": 0.75,
+    "timedOut": false,
+    "timeoutSeconds": 20,
+    "log": "outputs/hsea09/rpg-2-star-ocean-the-second_hsea09_locomotion-phase_model_engine-run_v01_20261020-174416-39e12f18.log",
+    "logSha256": "79e9275a7e5bcaa797de7aa4b2c413037519500ae5131ecfc496ca0f78564c66",
+    "command": [
+      "C:\\Users\\hkzha\\AppData\\Local\\Programs\\DeepSeek Harness\\resources\\runtime\\primary-runtime\\dependencies\\python\\python.exe",
+      "-I",
+      "C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\dual09\\ds-drive\\tools\\rpg-2-star-ocean-the-second_godot_checked-runner_v01_20261018-203400-f74ac6d1.py",
+      "--timeout",
+      "20",
+      "--expect",
+      "HSEA09_TESTS_OK",
+      "--log",
+      "C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\dual09\\ds-drive\\outputs\\hsea09\\rpg-2-star-ocean-the-second_hsea09_locomotion-phase_model_engine-run_v01_20261020-174416-39e12f18.log",
+      "--",
+      "C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\tooling\\godot-4-7-2\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--path",
+      "C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\dual09\\ds-drive\\game",
+      "--audio-driver",
+      "Dummy",
+      "--script",
+      "C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\dual09\\ds-drive\\tests\\hsea09\\rpg-2-star-ocean-the-second_hsea09_locomotion-phase_model_checked-tests_test-only-v01_20261020-174416-39e12f18.gd"
+    ],
+    "summaryLine": "CHECKED_RUN FAIL diagnostic exit= 0 elapsed= 0.75 missing= []"
+  },
+  "environment": {
+    "rootCertificateStoreError": true,
+    "rootCertificateSourceFrame": true,
+    "controlReproduced": true,
+    "controlExitCode": 0,
+    "diagnosticsFiltered": false,
+    "note": "The checked runner correctly rejects any ERROR even at exit 0. This host emits a known Godot startup/exit root-certificate-store ERROR; it is reported, not suppressed."
+  },
+  "files": {
+    "model": {
+      "path": "game/scripts/rpg-2-star-ocean-the-second_hsea09_locomotion-phase_model_v01_20261020-174416-39e12f18.gd",
+      "sha256": "1f5e6d91132c294f16a8de447436b8c6b0c8842e2be93216dece7a4810c903b3"
+    },
+    "test": {
+      "path": "tests/hsea09/rpg-2-star-ocean-the-second_hsea09_locomotion-phase_model_checked-tests_test-only-v01_20261020-174416-39e12f18.gd",
+      "sha256": "044b9b4e4ac30f70d215c7111fb3b31d147a5e9307bcca7b2ae25265b592b97e"
+    },
+    "runner": {
+      "path": "tools/rpg-2-star-ocean-the-second_hsea09_locomotion-phase_model_checked-run_v01_20261020-174416-39e12f18.py",
+      "sha256": "a5411ef21e9a6cd0fc8bbaa37f3d31f1b3f2a6192c17560bc15c3ab50a01357b"
+    },
+    "checkedRunner": {
+      "path": "tools/rpg-2-star-ocean-the-second_godot_checked-runner_v01_20261018-203400-f74ac6d1.py",
+      "sha256": "29b3073f409e346332ecfb6b2caac422b28ca8e96a728a0f07bcaa1e84e8e5ba"
+    }
+  },
+  "godot": {
+    "path": "C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\tooling\\godot-4-7-2\\Godot_v4.7.2-stable_win64_console.exe",
+    "version": "4.7.2.stable.official.ed1daf0bf"
+  },
+  "textHashNormalization": "raw bytes, LF files written by the author; no CRLF normalization",
+  "noGitCommitOrPush": true,
+  "limitations": [
+    "Synthetic numeric fixture only; it is not gameplay, actual movement/collision, driver integration, visual motion review or creator approval.",
+    "No host/scene/loader/art/ledger/index/dashboard file was changed.",
+    "The model is intentionally pure and returns a display phase; it never asserts true world foot lock.",
+    "Settle uses wallclock only for the cosmetic bounded transition; walk phase uses actual Euclidean displacement only.",
+    "The checked-run gate is FAIL solely on the known Godot root-certificate-store environment ERROR emitted at exit 0; model assertions themselves pass. No diagnostic filter was applied.",
+    "The report cannot certify engine sprite position/speed/collision because the model does not own or mutate those systems; that is verified by source scope, not a gameplay run."
+  ]
+}

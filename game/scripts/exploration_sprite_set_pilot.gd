@@ -81,6 +81,10 @@ static func clear_cache() -> void:
 
 # Returns the driver now drawing `target`, or null (flag off, no set for the actor, or set rejected).
 static func attach(target: Sprite2D, actor: String, initial_facing: String) -> Node:
+	# Separate Sea-style distance pilot: opt-in, whole-package refusal, unchanged default.
+	var sea_driver = load("res://scripts/hsea09/rpg-2-star-ocean-the-second_heroine-sea_distance-driver_opt-in-v01_20261020-214620-4be375a2.gd")
+	if sea_driver.enabled():
+		return sea_driver.attach(target, actor, initial_facing)
 	# Separate opt-in female complete-exploration pilot (own flag, default off); null falls through unchanged.
 	if FemaleCompletePilot.enabled():
 		var complete: Node = FemaleCompletePilot.attach(target, actor, initial_facing)
