@@ -1,0 +1,189 @@
+{
+ "status": "UNAPPROVED technical static candidate. Generated input + deterministic resample/curation; not hand-pixel-authored, not art approval, no animation, no runtime/default adoption, no game-source change.",
+ "styleDirection": "docs/design/rpg-2-star-ocean-the-second_characters_sea-of-stars-style-direction_v01_20261020-181026-f5938409.md",
+ "rejectedPredecessor": "v17r2 8759026a (procedural texel authoring) rejected by the creator",
+ "provenance": {
+  "input": "rpg-2-star-ocean-the-second_heroine_battle-keypose-generated-input_unapproved-v01_20261020-181640-a8fdf0f7.png",
+  "inputSha256": "2dd9b1d3ae928cfcb45dea1998631c6e4aa35a2e0e5b4162c8cb521d7eb34ee9",
+  "inputKind": "generated image selected by Codex (generator output; transparent, pixel-looking, irregular grid ~8.0-8.9 src px by FFT); production input, not native pixel art, not approved",
+  "generatorDetailsKnownToThisTool": false,
+  "handPaintedTexels": 0,
+  "resamplingSteps": 1,
+  "resampling": "palette-index cell mode (central 60% window), coverage>=0.5 alpha; no filtering/dither"
+ },
+ "cell": [
+  136,
+  144
+ ],
+ "logicalExtent": [
+  68,
+  72
+ ],
+ "pinNative": [
+  64,
+  136
+ ],
+ "pinLogical": [
+  32,
+  68
+ ],
+ "displayRequirement": "draw_texture_rect(texture, Rect2(round(x)-32, 204, 68, 72)), nearest; same as v17/v17r2",
+ "proportion": "occupied rows 3..135 (133 rows) = v17r2 occupied rows; no scale change hidden in cropping",
+ "layers": [
+  "legs",
+  "body",
+  "scarf",
+  "weapon",
+  "hair",
+  "head"
+ ],
+ "frameCount": 1,
+ "inputSize": [
+  1122,
+  1402
+ ],
+ "sourceAlpha": {
+  "threshold": 128,
+  "pxAboveThreshold": 431464,
+  "pxKept": 428838,
+  "componentsDropped": 1,
+  "rule": "8-connected on 2x-decimated mask, keep >=100 (= ~400 src px)"
+ },
+ "geometry": {
+  "sourceOccupiedRows": [
+   58,
+   1324
+  ],
+  "srcPxPerTexel": 9.5263,
+  "originSrc": [
+   -35.947,
+   29.421
+  ],
+  "soleBandBootsSrcX": [
+   [
+    308,
+    423
+   ],
+   [
+    734,
+    906
+   ]
+  ],
+  "pinColumnSrcX": 578.5,
+  "nativeTopRow": 3,
+  "nativeLowestRow": 135
+ },
+ "curation": {
+  "strayAlphaTexelsRemoved": 3,
+  "pinholesFilled": 4,
+  "interiorSpecklesMerged": 47,
+  "faceBoxSrc": [
+   468,
+   228,
+   662,
+   444
+  ],
+  "faceTexelsExempt": 460,
+  "rules": [
+   "remove 8-connected opaque islands < 6 texels",
+   "fill transparent texels with 4/4 opaque orthogonal neighbours (orth. majority colour)",
+   "interior texel whose colour matches none of 8 opaque neighbours -> neighbour majority if >=5/8; face box exempt"
+  ],
+  "texelsChangedByCuration": 54
+ },
+ "layerRule": {
+  "method": "MASK SLICES of the single flattened curated still (partition, no overlap, nothing painted behind)",
+  "weapon": "metal/low-saturation inside source box [742, 410, 1022, 735]",
+  "scarf": "teal hue 165-200, sat>0.35, anywhere (neck wrap + trailing tail)",
+  "hair": "brown (hue<45,sat>0.3,non-skin) above source y 470, largest 4-connected mass only",
+  "head": "remaining non-dark, non-navy texels above source y 470 (skin, eyes, brows, mouth, ear)",
+  "legs": "non-dark, non-navy texels below source y 742 (trousers, knee pad, straps, boots)",
+  "body": "everything else (jacket, vest, belt, pouch, arms, gloves)",
+  "outlines": "dark texels (V<0.22) take the majority part of their 8 neighbours, iterated"
+ },
+ "layerTexels": {
+  "legs": 1511,
+  "body": 1590,
+  "scarf": 297,
+  "weapon": 183,
+  "hair": 491,
+  "head": 676
+ },
+ "palette": {
+  "colors": 30,
+  "method": "PIL median-cut, no dither: 26 over all kept opaque source pixels + 4 over low-saturation light pixels in the sword box; nearest mapping",
+  "used": 30,
+  "hex": [
+   "#f0d0b2",
+   "#ddb395",
+   "#aca098",
+   "#27969a",
+   "#97664d",
+   "#545454",
+   "#255c66",
+   "#744a38",
+   "#6e4636",
+   "#624033",
+   "#424c61",
+   "#434352",
+   "#1e4055",
+   "#4d332c",
+   "#462d28",
+   "#3b2827",
+   "#2d3445",
+   "#2c3238",
+   "#2f2123",
+   "#1d2d44",
+   "#1c2134",
+   "#21161d",
+   "#151728",
+   "#120e16",
+   "#0d0a12",
+   "#090911",
+   "#ebeaea",
+   "#b8bbc3",
+   "#9ca3ae",
+   "#868d9b"
+  ]
+ },
+ "source": {
+  "file": "tools/rpg-2-star-ocean-the-second_heroine-battle_sea-native-curate_unapproved-v01_20261020-181955-5e1a7c02.py",
+  "sha256TextLf": "9ae74f971ccf8188fe1cff7cd8f5ca1b4e2c713bae644176e76d113f466fdf78"
+ },
+ "inputs": {
+  "pxoWriter": {
+   "file": "tools/rpg-2-star-ocean-the-second_protagonist-female_south-run-v06-build_m8-w09_20261017-211600-f8e736cc.py",
+   "sha256TextLf": "2b83a2216438384c0eff9829d44a3f2f11f5ec3854507bff40b704e8d57c7a8a"
+  }
+ },
+ "files": {
+  "png": {
+   "name": "rpg-2-star-ocean-the-second_heroine-battle_still-native136_sea-unapproved-v01_20261020-181955-1294c865.png",
+   "sha256": "4ce65a7915c0c0270a4ca353152b45b7d68b42672cb1483dd4f3e9cf4ac9d5e6"
+  },
+  "ora": {
+   "name": "rpg-2-star-ocean-the-second_heroine-battle_still-layered_sea-unapproved-v01_20261020-181955-5c3755ce.ora",
+   "sha256": "397675a07d24cb133ed26b18274350397bb568fa899cf9db2778cc8566cb8628"
+  },
+  "pxo": {
+   "name": "rpg-2-star-ocean-the-second_heroine-battle_still-editable_sea-unapproved-v01_20261020-181955-bd7423ec.pxo",
+   "sha256": "9ddb90a0a40f526244a3019a5978559e43c5c0397d82ad1e2c0d4b98c175fbf1"
+  },
+  "inspect": {
+   "name": "rpg-2-star-ocean-the-second_heroine-battle_inspection-x4-grey_sea-unapproved-v01_20261020-181955-5d511de2.png",
+   "sha256": "b4e1bcc0e423d29fee6d4ac02cc7a62d579f44e1cf013ecbac609da38f670c58"
+  }
+ },
+ "inspectionNote": "inspection-x4-grey is nearest x4 on flat grey for viewing only; it is not runtime art",
+ "artApproved": false,
+ "animationMade": false,
+ "runtimeDefaultChanged": false,
+ "gameSourceChanged": false,
+ "guiSaveAsVerified": false,
+ "limits": [
+  "640x360 native path samples 1 of 4 native texels (nearest) so 1-texel face features alias there",
+  "layers are slices of a flattened still; moving a part reveals holes (no painted occluded pixels)",
+  "outline continuity after resampling is not re-drawn; generator outline breaks are kept",
+  "automated gates are technical only; face quality needs visual judgement at actual size"
+ ]
+}
