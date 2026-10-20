@@ -152,6 +152,8 @@ var battle_won := false
 var feedback_key := "battle_ready"
 var feedback_message := ""
 var result_reward_text := ""
+var result_reward_xp := 0
+var result_reward_jp := 0
 # Per-instance switches only narrow the opt-in pilot (static only, or none); they never enable it without the flag.
 var enemy_sprite_pilot_enabled := true
 var enemy_sprite_override := ""
@@ -885,7 +887,8 @@ func _finish_battle(won: bool) -> void:
 		AppState.enemy_cleared_for_return = true
 		AppState.returning_from_battle = true
 		var rewards := AppState.award_battle_rewards(enemy_id)
-		result_reward_text = AppState.text_for("growth_rewards") % [int(rewards["xp"]), int(rewards["jp"])]
+		result_reward_xp = int(rewards["xp"])
+		result_reward_jp = int(rewards["jp"])
 		AppState.write_auto_save("area", AppState.battle_return_position, "after_battle")
 	else:
 		AppState.enemy_cleared_for_return = false
@@ -1467,6 +1470,7 @@ func _refresh_text() -> void:
 				for connection in button.pressed.get_connections():
 					button.pressed.disconnect(connection["callable"])
 				button.pressed.connect(_select_order_target.bind(targets[slot]))
+	result_reward_text = AppState.text_for("growth_rewards") % [result_reward_xp, result_reward_jp] if battle_won else ""
 	result_title.text = AppState.text_for("battle_win" if battle_won else "battle_loss")
 	result_note.text = AppState.text_for("battle_win_note" if battle_won else "battle_loss_note") + ("\n" + result_reward_text if battle_won else "")
 	result_button.text = AppState.text_for("battle_continue" if battle_won else "battle_menu")
