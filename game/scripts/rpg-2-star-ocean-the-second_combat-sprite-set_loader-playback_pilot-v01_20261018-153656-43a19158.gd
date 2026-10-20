@@ -364,9 +364,11 @@ func advance(index: int, fighter: Dictionary, alive: bool, enemy_x: float, delta
 	var sprite_set: Dictionary = sets[index]
 	var state: Dictionary = states[index]
 	var dx := enemy_x - float(fighter["x"])
-	# Face the enemy; within half a pixel keep the current facing so it never flickers.
+	# Current enemy-facing; within half a pixel keep the previous facing so it never flickers. Optional-pilot one-shots
+	# below keep the facing captured when they started instead of following a crossing enemy mid-action.
+	var enemy_facing := int(state["facing"])
 	if absf(dx) >= 0.5:
-		state["facing"] = 1 if dx > 0.0 else -1
+		enemy_facing = 1 if dx > 0.0 else -1
 	var visual_action := String(fighter["visual_action"])
 	var visual_elapsed := float(fighter["visual_elapsed"])
 	var dodge_time := float(fighter["dodge_time"])
@@ -418,6 +420,14 @@ func advance(index: int, fighter: Dictionary, alive: bool, enemy_x: float, delta
 		var latched := int(fighter.get("contact_event_facing", 0))
 		if latched != 0:
 			state["facing"] = latched
+		else:
+			state["facing"] = enemy_facing
+	elif explicit and current in ["dodge", "hit", "skill", "defeat"] and next == current and not restart:
+		# The optional timing pilot latches a non-attack one-shot's entry facing until it is interrupted or ends.
+		# Defeat keeps the latch; returning to idle/move/guard resumes following the current enemy below.
+		pass
+	else:
+		state["facing"] = enemy_facing
 
 
 # The frame a fighter shows now: {"action", "source", "frame", "cell", "pivot", "facing", "mirrored"}; empty without a set.

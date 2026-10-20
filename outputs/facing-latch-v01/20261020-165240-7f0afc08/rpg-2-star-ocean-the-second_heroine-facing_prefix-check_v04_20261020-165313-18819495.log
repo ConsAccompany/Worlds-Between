@@ -1,0 +1,43 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+ERROR: Failed to read the root certificate store.
+   at: get_system_ca_certificates (platform/windows/os_windows.cpp:2582)
+PASS dodge entry facing 1 (enemy right)
+FAIL dodge holds facing 1 after the enemy crosses to the other side
+PASS dodge release follows the current enemy (facing 1 -> -1)
+PASS dodge entry facing -1 (enemy left)
+FAIL dodge holds facing -1 after the enemy crosses to the other side
+PASS dodge release follows the current enemy (facing -1 -> 1)
+PASS hit entry facing 1
+FAIL hit holds facing 1 after the enemy crosses
+PASS new skill interrupts hit and relatches current enemy facing -1
+FAIL skill holds facing -1 after a second crossing
+PASS idle entry facing 1
+PASS defeat entry facing 1
+FAIL defeat holds facing 1 for 0.5 s after the enemy crosses
+PASS revive to idle follows current enemy facing -1
+PASS enemy exactly same x retains previous facing 1 while idle
+PASS enemy exactly same x retains previous facing -1 while idle
+PASS enemy exactly same x during dodge keeps the latched facing 1
+PASS hit still active at 0.230 s
+PASS hit ending boundary (0.240 s) releases to current enemy facing -1
+PASS skill ending boundary (0.450 s) releases to current enemy facing -1
+PASS dodge ending boundary (dodge_time 0) releases to current enemy facing -1
+PASS two explicit fighters latch opposite facings independently
+FAIL enemy at 600 latches left fighter 1 and right fighter -1
+PASS left fighter releases independently to current enemy facing -1
+PASS right fighter keeps its own dodge latch and clock
+PASS 30 and 60 fps agree on action/facing/frame/mirrored at all 30 shared timestamps
+FAIL shared-time dodge after an enemy crossing still faces right at t=1.0 s
+PASS explicit fighter without a cross has byte-identical state/render to the same-set legacy fighter at all 45 common ticks
+PASS explicit attack entry uses event clock 0 and contact facing 1
+PASS explicit attack keeps event clock/facing after enemy crosses
+PASS new dodge preempts explicit attack and relatches current enemy facing -1
+PASS new skill preempts explicit attack and relatches current enemy facing -1
+PASS new hit preempts explicit attack and relatches current enemy facing -1
+PASS missing index falls back with no set and no frame
+PASS advance on a missing set is a no-op and never writes the fighter
+PASS empty index sets fall back per fighter
+PASS malformed manifest rejects atomically with set_status unknown_schema
+PASS empty key list loads nothing without errors
+FACING_TEST FAIL checks=38 failures=7 loader=res://tests/fixtures/facing-latch-v01/rpg-2-star-ocean-the-second_heroine-facing_prefix-loader_v01_20261020-165240-7f0afc08.gd
