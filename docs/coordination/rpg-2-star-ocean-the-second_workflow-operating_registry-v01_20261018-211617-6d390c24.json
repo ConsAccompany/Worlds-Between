@@ -965,38 +965,42 @@
     {
       "task": "content.scene.battle-arena.wiring",
       "preferredProducer": "deepseek",
-      "status": "blocked-unfiltered-diagnostic",
-      "reason": "DeepSeek v03 preserves ERROR diagnostic; source/cooldown correction is local and no gate credit awarded."
+      "status": "done",
+      "reason": "Independent Codex clean-context run closes this existing gate. No further retries or filler reports."
     }
   ],
   "activeDualProviderBatch": {
     "primary": {
-      "task": "content.combat.protagonist-female.combat-static.revision",
+      "task": "content.combat.protagonist-female.combat-actions",
       "owner": "claude",
-      "status": "creator-approved-static-baseline",
-      "sourceCommit": "d5cfb11e9c7f576ad39c39c238f3f94a4408879d",
-      "evidence": "docs/qa/rpg-2-star-ocean-the-second_heroine-sea_battle-static-root-closeout_v01_20261020-182831-69f29955.md",
-      "scope": "Sea of Stars sprite direction; heroine static only, no motion/defaults",
-      "approvalEvidence": "docs/character-visuals/rpg-2-star-ocean-the-second_heroine-sea_static-baselines-creator-approval_v01_20261020-185828-8775642a.md"
+      "status": "in_progress",
+      "base": "99bf35a",
+      "worktree": "work/dual05/cl-motion",
+      "scope": "Approved Sea-style heroine: authored idle/attack motion pilot, partial action set; test-only and default unchanged.",
+      "doneCriterion": "Coherent authored poses, editable source and actual normal1x bright/dark captures with diagnostic and timing limitations; all8 parent actions not complete from a subset."
     },
     "supporting": [
       {
         "task": "content.scene.battle-arena.wiring",
         "owner": "deepseek",
-        "status": "blocked-pending-independent-host-diagnostic-check",
-        "scope": "Localv03 corrected natural-timing verification; ERROR diagnostic remains, no completion credit."
+        "status": "done-independently-verified",
+        "base": "99bf35a",
+        "worktree": "work/dual05/ds-wiring",
+        "scope": "Source-reconciled natural-timing fixture and coordinator-run clean-context package; no game edits, prior diagnostics retained.",
+        "doneCriterion": "Codex must run clean unfiltered normal-entry victory/result/save/return and separate boundary/defeat cases before completion.",
+        "evidence": "docs/qa/rpg-2-star-ocean-the-second_battle-arena-wiring_root-clean-context-closeout_v04_20261020-191841-072db685.md",
+        "checks": "297/297 clean; original wrapper and metadata handling repairs disclosed"
       },
       {
-        "task": "content.char.protagonist-female.static-south",
+        "task": "bug.battle.result-reward-language-refresh",
         "owner": "codex",
-        "status": "creator-approved-static-baseline",
-        "evidence": "docs/qa/rpg-2-star-ocean-the-second_heroine-sea_exploration-static-visual-review_v01_20261020-182420-1d4edf96.md",
-        "scope": "Sea of Stars-direction south static at unchanged48logicalpixels; existing production credit retained.",
-        "approvalEvidence": "docs/character-visuals/rpg-2-star-ocean-the-second_heroine-sea_static-baselines-creator-approval_v01_20261020-185828-8775642a.md"
+        "status": "in_progress",
+        "worktree": "work/dual05/cx-result-locale",
+        "scope": "Small cached reward-text language refresh defect discovered in actual wiring screenshot; no mechanical changes and no new scoring bucket."
       }
     ],
     "integrationOwner": "codex",
-    "status": "static-baselines-approved-ready-for-motion",
+    "status": "running",
     "previousVerifiedCompletion": {
       "commit": "d5cfb11e9c7f576ad39c39c238f3f94a4408879d",
       "tasks": [
