@@ -1,0 +1,317 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 610.88 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 3080
+
+BATTLE_WIRING PASS windowed renderer is active (not headless) Windows
+BATTLE_WIRING PASS fresh isolated v04 profile under this task worktree C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/outputs/battle-wiring-v04/run-26de518d/appdata/Godot/app_userdata/Worlds Between
+BATTLE_WIRING PASS test save store is isolated from the normal game saves user://battle-wiring-v04/saves
+BATTLE_WIRING PASS backdrop selector default is off without the CLI flag
+BATTLE_WIRING PASS backdrop destination mapping is patrol=outskirts, sentry=ruins, city=city-terrace
+BATTLE_WIRING PASS only the outskirts tracked band exists; ruins/city intentionally fall back
+BATTLE_WIRING PASS normal scene entry: scifi.outskirts en loads exploration
+BATTLE_WIRING PASS patrol en exploration title is localized Yonkers outskirts
+BATTLE_WIRING PASS patrol: safe position records the >43 px retreat point [399.0, 238.0]
+BATTLE_WIRING PASS patrol: exactly 23 px does not open an encounter { "scene": true, "enemy": "" }
+BATTLE_WIRING PASS patrol: safe position is retained inside 43 px [399.0, 238.0]
+BATTLE_WIRING PASS patrol: <23 px starts the intended encounter with the pre-battle save position { "enemy": "patrol", "return": [399.0, 238.0], "safe": [399.0, 238.0] }
+BATTLE_TRANSITION_MS 3.59
+BATTLE_WIRING PASS patrol: normal scene change reaches the real battle arena { "scene": "res://scenes/battle_arena.tscn" }
+BATTLE_WIRING PASS patrol: pre-battle autosave exists at the safe point and enemy is not cleared { "count": 1, "id": "auto-00000001.json", "position": [399.0, 238.0], "enemyCleared": false, "destination": "scifi.outskirts" }
+BATTLE_WIRING PASS patrol: boundary-only fixture is a separate arena from the victory arena
+BATTLE_WIRING PASS patrol: protected combat constants unchanged { "move": 168.0, "dodge": 12, "guard": 6, "patrolHp": 64, "patrolDamage": 12, "sentryHp": 96, "sentryDamage": 18 }
+BATTLE_WIRING PASS patrol: left movement clamps at x=28 28.0
+BATTLE_WIRING PASS patrol: right movement clamps at x=612 612.0
+BATTLE_WIRING PASS patrol: dodge movement stays inside left clamp 28.0
+BATTLE_WIRING PASS patrol: hero attack hits at exactly 61.0 px 45
+BATTLE_WIRING PASS patrol: hero attack misses just outside 61.0 px and reports battle_far { "hp": 64, "feedback": "battle_far" }
+BATTLE_WIRING PASS patrol: enemy contact hits at exactly 69 px { "before": 100, "after": 88, "damage": 12 }
+BATTLE_WIRING PASS patrol: enemy contact misses just outside 69 px { "at": 88, "outside": 88 }
+BATTLE_WIRING PASS patrol: battle_pause _input opens the pause overlay
+BATTLE_WIRING PASS patrol: paused _process does not move the fighter
+BATTLE_WIRING PASS patrol: pause Resume text is English Resume battle
+BATTLE_WIRING PASS patrol: pause Resume text is Chinese 继续战斗
+BATTLE_WIRING PASS patrol: second battle_pause _input resumes and hides the overlay
+BATTLE_WIRING PASS normal scene entry: scifi.outskirts en loads exploration
+BATTLE_WIRING PASS patrol: safe position records the >43 px retreat point [399.0, 238.0]
+BATTLE_WIRING PASS patrol: exactly 23 px does not open an encounter { "scene": true, "enemy": "" }
+BATTLE_WIRING PASS patrol: safe position is retained inside 43 px [399.0, 238.0]
+BATTLE_WIRING PASS patrol: <23 px starts the intended encounter with the pre-battle save position { "enemy": "patrol", "return": [399.0, 238.0], "safe": [399.0, 238.0] }
+BATTLE_TRANSITION_MS 3.48
+BATTLE_WIRING PASS patrol: normal scene change reaches the real battle arena { "scene": "res://scenes/battle_arena.tscn" }
+BATTLE_WIRING PASS patrol: pre-battle autosave exists at the safe point and enemy is not cleared { "count": 2, "id": "auto-00000002.json", "position": [399.0, 238.0], "enemyCleared": false, "destination": "scifi.outskirts" }
+BATTLE_WIRING PASS capture patrol-en-victory-start is a saved 640x360 windowed image { "size": [640, 360], "err": 0, "file": "rpg-2-star-ocean-the-second_battle-arena-wiring_patrol-en-victory-start_640x360_test-only-v04_20261020-192412-26de518d.png", "display": "Windows" }
+BATTLE_WIRING PASS patrol: FRESH normal-entry victory arena starts at real max HP 64 (not boundary 64) { "hp": 64, "expected": 64, "maxHp": 64 }
+BATTLE_WIRING PASS patrol: victory uses the real hero damage 19 19
+BATTLE_WIRING PASS patrol: victory arena starts unfinished and unwon (no outcome pre-set) { "finished": false, "won": false, "hp": 64 }
+BATTLE_WIRING PASS patrol: ONE-TIME SETUP places the hero once at 30.0 px from the enemy (within 61.0 px reach) { "heroX": 462.266666666667, "enemyX": 492.266666666667, "reach": 61.0 }
+BATTLE_WIRING PASS patrol: 1200-step guard was not exhausted and victory came from the real process { "steps": 79, "finished": true, "won": true, "hp": 0 }
+BATTLE_WIRING PASS patrol: natural 1/60 stepping takes exactly 4 real _try_attack hits from 64 HP { "attacks": 4, "expectedAttacks": 4, "steps": 79, "hitSteps": [1, 27, 53, 79], "trace": [[true, 64, 45], [true, 45, 26], [true, 26, 7], [true, 7, 0]] }
+BATTLE_WIRING PASS patrol: every victory hit is a real 19-damage attack (no HP/finished injection) [[true, 64, 45], [true, 45, 26], [true, 26, 7], [true, 7, 0]]
+BATTLE_WIRING PASS patrol: every harness attack saw a naturally zero cooldown (no timer reset) { "cooldownsAtHit": [0.0, 0.0, 0.0, 0.0] }
+BATTLE_WIRING PASS patrol: every harness attack used the same single setup x (no per-hit teleport) { "setupX": 462.266666666667, "positionsAtHit": [462.266666666667, 462.266666666667, 462.266666666667, 462.266666666667] }
+BATTLE_WIRING PASS patrol: attacks were gated by the real 0.43 s cooldown, not a forced timer { "minGapSteps": 26, "minGapSeconds": 0.43333333333333, "hitSteps": [1, 27, 53, 79] }
+BATTLE_WIRING PASS patrol: the real attack counter matches exactly 4 player attacks 4
+BATTLE_WIRING PASS patrol: hero stayed at the single declared setup position (no per-hit teleport) { "setupX": 462.266666666667, "finalX": 462.266666666667 }
+BATTLE_WIRING PASS patrol: normal enemy AI damaged the hero before the final hit (real HP, no injection) { "enemyAttacks": 1, "hpStart": 100, "hpBeforeFinal": 88, "heroHpAtAttack": [100, 100, 100, 88] }
+BATTLE_WIRING PASS patrol: victory applies the expected one-time reward (26 xp / 12 jp) { "xpAwarded": 26, "jpAwarded": 12, "levelBefore": 1, "levelAfter": 1, "xpRemainder": 26 }
+BATTLE_WIRING PASS patrol: victory sets the return contract and machine observation
+BATTLE_WIRING PASS patrol: real post-victory recovery matches the bounded 20% contract from HP immediately before the final hit { "hpBeforeFinal": 88, "after": 100, "maxBefore": 100, "maxAfter": 100, "expected": 100, "levelBefore": 1, "levelAfter": 1 }
+BATTLE_WIRING PASS patrol: victory writes exactly one new after-battle autosave { "newIds": ["auto-00000003.json"], "total": 1 }
+BATTLE_WIRING PASS patrol: the new after-battle save is destination/position filtered and enemy-cleared { "filtered": 1, "destination": "scifi.outskirts", "position": [399.0, 238.0] }
+BATTLE_WIRING PASS patrol: reload target is the destination-filtered after_battle record, not auto_notes()[0] { "saveId": "auto-00000003.json", "allFirstId": "auto-00000003.json" }
+BATTLE_WIRING PASS patrol: repeated finish callback is idempotent (no second reward or save)
+BATTLE_WIRING PASS patrol: result Continue text is English ["Victory", "Keep exploring"]
+BATTLE_WIRING PASS capture patrol-en-result-en is a saved 640x360 windowed image { "size": [640, 360], "err": 0, "file": "rpg-2-star-ocean-the-second_battle-arena-wiring_patrol-en-result-en_640x360_test-only-v04_20261020-192412-26de518d.png", "display": "Windows" }
+BATTLE_WIRING PASS patrol: result Continue text is Chinese ["战斗胜利", "继续探索"]
+BATTLE_WIRING PASS capture patrol-en-result-zh is a saved 640x360 windowed image { "size": [640, 360], "err": 0, "file": "rpg-2-star-ocean-the-second_battle-arena-wiring_patrol-en-result-zh_640x360_test-only-v04_20261020-192412-26de518d.png", "display": "Windows" }
+BATTLE_WIRING PASS patrol: result button is bound to the real _return_after_result callback
+BATTLE_WIRING PASS patrol: result click returns to the normal exploration scene res://scenes/scifi_exploration_area.tscn
+BATTLE_WIRING PASS patrol: return spawn equals the saved battle return position { "hero": [399.0, 238.0], "return": [399.0, 238.0] }
+BATTLE_WIRING PASS patrol: return clears transient battle state and hides the defeated enemy { "enemy": "", "returning": false, "cleared": true, "visible": false }
+BATTLE_WIRING PASS capture patrol-en-return-en is a saved 640x360 windowed image { "size": [640, 360], "err": 0, "file": "rpg-2-star-ocean-the-second_battle-arena-wiring_patrol-en-return-en_640x360_test-only-v04_20261020-192412-26de518d.png", "display": "Windows" }
+BATTLE_WIRING PASS capture patrol-en-return-zh is a saved 640x360 windowed image { "size": [640, 360], "err": 0, "file": "rpg-2-star-ocean-the-second_battle-arena-wiring_patrol-en-return-zh_640x360_test-only-v04_20261020-192412-26de518d.png", "display": "Windows" }
+BATTLE_WIRING PASS patrol: saved snapshot is an area checkpoint with enemyCleared and the return position { "id": "auto-00000003.json", "scene": "area", "position": [399.0, 238.0] }
+BATTLE_WIRING PASS patrol: load_save restores the checkpoint and resume position { "resumePending": true, "kind": "area", "position": [399.0, 238.0] }
+BATTLE_WIRING PASS patrol: reloaded checkpoint spawns at the saved position and keeps the enemy cleared { "position": [399.0, 238.0], "visible": false }
+BATTLE_WIRING PASS capture patrol-en-save-reload-en is a saved 640x360 windowed image { "size": [640, 360], "err": 0, "file": "rpg-2-star-ocean-the-second_battle-arena-wiring_patrol-en-save-reload-en_640x360_test-only-v04_20261020-192412-26de518d.png", "display": "Windows" }
+BATTLE_WIRING_CASE patrol en {"attacks":4,"category":"victory","cooldownsAtHit":[0.0,0.0,0.0,0.0],"enemyAttacks":1,"expectedHits":4,"hitSteps":[1,27,53,79],"hpBeforeFinal":88,"hpTrace":[[true,64,45],[true,45,26],[true,26,7],[true,7,0]],"minGapSteps":26,"positionsAtHit":[462.266666666667,462.266666666667,462.266666666667,462.266666666667],"return":[399.0,238.0],"save":"auto-00000003.json","setupX":462.266666666667,"startHp":64,"steps":79}
+BATTLE_WIRING PASS normal scene entry: scifi.outskirts zh loads exploration
+BATTLE_WIRING PASS patrol zh exploration title is localized 扬克斯郊外
+BATTLE_WIRING PASS patrol: safe position records the >43 px retreat point [399.0, 238.0]
+BATTLE_WIRING PASS patrol: exactly 23 px does not open an encounter { "scene": true, "enemy": "" }
+BATTLE_WIRING PASS patrol: safe position is retained inside 43 px [399.0, 238.0]
+BATTLE_WIRING PASS patrol: <23 px starts the intended encounter with the pre-battle save position { "enemy": "patrol", "return": [399.0, 238.0], "safe": [399.0, 238.0] }
+BATTLE_TRANSITION_MS 3.36
+BATTLE_WIRING PASS patrol: normal scene change reaches the real battle arena { "scene": "res://scenes/battle_arena.tscn" }
+BATTLE_WIRING PASS patrol: pre-battle autosave exists at the safe point and enemy is not cleared { "count": 3, "id": "auto-00000004.json", "position": [399.0, 238.0], "enemyCleared": false, "destination": "scifi.outskirts" }
+BATTLE_WIRING PASS patrol: boundary-only fixture is a separate arena from the victory arena
+BATTLE_WIRING PASS patrol: protected combat constants unchanged { "move": 168.0, "dodge": 12, "guard": 6, "patrolHp": 64, "patrolDamage": 12, "sentryHp": 96, "sentryDamage": 18 }
+BATTLE_WIRING PASS patrol: left movement clamps at x=28 28.0
+BATTLE_WIRING PASS patrol: right movement clamps at x=612 612.0
+BATTLE_WIRING PASS patrol: dodge movement stays inside left clamp 28.0
+BATTLE_WIRING PASS patrol: hero attack hits at exactly 61.0 px 45
+BATTLE_WIRING PASS patrol: hero attack misses just outside 61.0 px and reports battle_far { "hp": 64, "feedback": "battle_far" }
+BATTLE_WIRING PASS patrol: enemy contact hits at exactly 69 px { "before": 100, "after": 88, "damage": 12 }
+BATTLE_WIRING PASS patrol: enemy contact misses just outside 69 px { "at": 88, "outside": 88 }
+BATTLE_WIRING PASS patrol: battle_pause _input opens the pause overlay
+BATTLE_WIRING PASS patrol: paused _process does not move the fighter
+BATTLE_WIRING PASS patrol: pause Resume text is English Resume battle
+BATTLE_WIRING PASS patrol: pause Resume text is Chinese 继续战斗
+BATTLE_WIRING PASS patrol: second battle_pause _input resumes and hides the overlay
+BATTLE_WIRING PASS normal scene entry: scifi.outskirts zh loads exploration
+BATTLE_WIRING PASS patrol: safe position records the >43 px retreat point [399.0, 238.0]
+BATTLE_WIRING PASS patrol: exactly 23 px does not open an encounter { "scene": true, "enemy": "" }
+BATTLE_WIRING PASS patrol: safe position is retained inside 43 px [399.0, 238.0]
+BATTLE_WIRING PASS patrol: <23 px starts the intended encounter with the pre-battle save position { "enemy": "patrol", "return": [399.0, 238.0], "safe": [399.0, 238.0] }
+BATTLE_TRANSITION_MS 4.06
+BATTLE_WIRING PASS patrol: normal scene change reaches the real battle arena { "scene": "res://scenes/battle_arena.tscn" }
+BATTLE_WIRING PASS patrol: pre-battle autosave exists at the safe point and enemy is not cleared { "count": 4, "id": "auto-00000005.json", "position": [399.0, 238.0], "enemyCleared": false, "destination": "scifi.outskirts" }
+BATTLE_WIRING PASS capture patrol-zh-victory-start is a saved 640x360 windowed image { "size": [640, 360], "err": 0, "file": "rpg-2-star-ocean-the-second_battle-arena-wiring_patrol-zh-victory-start_640x360_test-only-v04_20261020-192412-26de518d.png", "display": "Windows" }
+BATTLE_WIRING PASS patrol: FRESH normal-entry victory arena starts at real max HP 64 (not boundary 64) { "hp": 64, "expected": 64, "maxHp": 64 }
+BATTLE_WIRING PASS patrol: victory uses the real hero damage 19 19
+BATTLE_WIRING PASS patrol: victory arena starts unfinished and unwon (no outcome pre-set) { "finished": false, "won": false, "hp": 64 }
+BATTLE_WIRING PASS patrol: ONE-TIME SETUP places the hero once at 30.0 px from the enemy (within 61.0 px reach) { "heroX": 461.451890555556, "enemyX": 491.451890555556, "reach": 61.0 }
+BATTLE_WIRING PASS patrol: 1200-step guard was not exhausted and victory came from the real process { "steps": 79, "finished": true, "won": true, "hp": 0 }
+BATTLE_WIRING PASS patrol: natural 1/60 stepping takes exactly 4 real _try_attack hits from 64 HP { "attacks": 4, "expectedAttacks": 4, "steps": 79, "hitSteps": [1, 27, 53, 79], "trace": [[true, 64, 45], [true, 45, 26], [true, 26, 7], [true, 7, 0]] }
+BATTLE_WIRING PASS patrol: every victory hit is a real 19-damage attack (no HP/finished injection) [[true, 64, 45], [true, 45, 26], [true, 26, 7], [true, 7, 0]]
+BATTLE_WIRING PASS patrol: every harness attack saw a naturally zero cooldown (no timer reset) { "cooldownsAtHit": [0.0, 0.0, 0.0, 0.0] }
+BATTLE_WIRING PASS patrol: every harness attack used the same single setup x (no per-hit teleport) { "setupX": 461.451890555556, "positionsAtHit": [461.451890555556, 461.451890555556, 461.451890555556, 461.451890555556] }
+BATTLE_WIRING PASS patrol: attacks were gated by the real 0.43 s cooldown, not a forced timer { "minGapSteps": 26, "minGapSeconds": 0.43333333333333, "hitSteps": [1, 27, 53, 79] }
+BATTLE_WIRING PASS patrol: the real attack counter matches exactly 4 player attacks 4
+BATTLE_WIRING PASS patrol: hero stayed at the single declared setup position (no per-hit teleport) { "setupX": 461.451890555556, "finalX": 461.451890555556 }
+BATTLE_WIRING PASS patrol: normal enemy AI damaged the hero before the final hit (real HP, no injection) { "enemyAttacks": 1, "hpStart": 100, "hpBeforeFinal": 88, "heroHpAtAttack": [100, 100, 100, 88] }
+BATTLE_WIRING PASS patrol: victory applies the expected one-time reward (26 xp / 12 jp) { "xpAwarded": 26, "jpAwarded": 12, "levelBefore": 1, "levelAfter": 1, "xpRemainder": 26 }
+BATTLE_WIRING PASS patrol: victory sets the return contract and machine observation
+BATTLE_WIRING PASS patrol: real post-victory recovery matches the bounded 20% contract from HP immediately before the final hit { "hpBeforeFinal": 88, "after": 100, "maxBefore": 100, "maxAfter": 100, "expected": 100, "levelBefore": 1, "levelAfter": 1 }
+BATTLE_WIRING PASS patrol: victory writes exactly one new after-battle autosave { "newIds": ["auto-00000006.json"], "total": 2 }
+BATTLE_WIRING PASS patrol: the new after-battle save is destination/position filtered and enemy-cleared { "filtered": 1, "destination": "scifi.outskirts", "position": [399.0, 238.0] }
+BATTLE_WIRING PASS patrol: reload target is the destination-filtered after_battle record, not auto_notes()[0] { "saveId": "auto-00000006.json", "allFirstId": "auto-00000006.json" }
+BATTLE_WIRING PASS patrol: repeated finish callback is idempotent (no second reward or save)
+BATTLE_WIRING PASS patrol: result Continue text is English ["Victory", "Keep exploring"]
+BATTLE_WIRING PASS capture patrol-zh-result-en is a saved 640x360 windowed image { "size": [640, 360], "err": 0, "file": "rpg-2-star-ocean-the-second_battle-arena-wiring_patrol-zh-result-en_640x360_test-only-v04_20261020-192412-26de518d.png", "display": "Windows" }
+BATTLE_WIRING PASS patrol: result Continue text is Chinese ["战斗胜利", "继续探索"]
+BATTLE_WIRING PASS capture patrol-zh-result-zh is a saved 640x360 windowed image { "size": [640, 360], "err": 0, "file": "rpg-2-star-ocean-the-second_battle-arena-wiring_patrol-zh-result-zh_640x360_test-only-v04_20261020-192412-26de518d.png", "display": "Windows" }
+BATTLE_WIRING PASS patrol: result button is bound to the real _return_after_result callback
+BATTLE_WIRING PASS patrol: result click returns to the normal exploration scene res://scenes/scifi_exploration_area.tscn
+BATTLE_WIRING PASS patrol: return spawn equals the saved battle return position { "hero": [399.0, 238.0], "return": [399.0, 238.0] }
+BATTLE_WIRING PASS patrol: return clears transient battle state and hides the defeated enemy { "enemy": "", "returning": false, "cleared": true, "visible": false }
+BATTLE_WIRING PASS capture patrol-zh-return-en is a saved 640x360 windowed image { "size": [640, 360], "err": 0, "file": "rpg-2-star-ocean-the-second_battle-arena-wiring_patrol-zh-return-en_640x360_test-only-v04_20261020-192412-26de518d.png", "display": "Windows" }
+BATTLE_WIRING PASS capture patrol-zh-return-zh is a saved 640x360 windowed image { "size": [640, 360], "err": 0, "file": "rpg-2-star-ocean-the-second_battle-arena-wiring_patrol-zh-return-zh_640x360_test-only-v04_20261020-192412-26de518d.png", "display": "Windows" }
+BATTLE_WIRING PASS patrol: saved snapshot is an area checkpoint with enemyCleared and the return position { "id": "auto-00000006.json", "scene": "area", "position": [399.0, 238.0] }
+BATTLE_WIRING PASS patrol: load_save restores the checkpoint and resume position { "resumePending": true, "kind": "area", "position": [399.0, 238.0] }
+BATTLE_WIRING PASS patrol: reloaded checkpoint spawns at the saved position and keeps the enemy cleared { "position": [399.0, 238.0], "visible": false }
+BATTLE_WIRING PASS capture patrol-zh-save-reload-en is a saved 640x360 windowed image { "size": [640, 360], "err": 0, "file": "rpg-2-star-ocean-the-second_battle-arena-wiring_patrol-zh-save-reload-en_640x360_test-only-v04_20261020-192412-26de518d.png", "display": "Windows" }
+BATTLE_WIRING_CASE patrol zh {"attacks":4,"category":"victory","cooldownsAtHit":[0.0,0.0,0.0,0.0],"enemyAttacks":1,"expectedHits":4,"hitSteps":[1,27,53,79],"hpBeforeFinal":88,"hpTrace":[[true,64,45],[true,45,26],[true,26,7],[true,7,0]],"minGapSteps":26,"positionsAtHit":[461.451890555556,461.451890555556,461.451890555556,461.451890555556],"return":[399.0,238.0],"save":"auto-00000006.json","setupX":461.451890555556,"startHp":64,"steps":79}
+BATTLE_WIRING PASS normal scene entry: scifi.ruins en loads exploration
+BATTLE_WIRING PASS sentry en exploration title is localized Washington, D.C. ruins · U.S. Capitol
+BATTLE_WIRING PASS sentry: safe position records the >43 px retreat point [464.0, 225.0]
+BATTLE_WIRING PASS sentry: exactly 23 px does not open an encounter { "scene": true, "enemy": "" }
+BATTLE_WIRING PASS sentry: safe position is retained inside 43 px [464.0, 225.0]
+BATTLE_WIRING PASS sentry: <23 px starts the intended encounter with the pre-battle save position { "enemy": "sentry", "return": [464.0, 225.0], "safe": [464.0, 225.0] }
+BATTLE_TRANSITION_MS 3.29
+BATTLE_WIRING PASS sentry: normal scene change reaches the real battle arena { "scene": "res://scenes/battle_arena.tscn" }
+BATTLE_WIRING PASS sentry: pre-battle autosave exists at the safe point and enemy is not cleared { "count": 1, "id": "auto-00000007.json", "position": [464.0, 225.0], "enemyCleared": false, "destination": "scifi.ruins" }
+BATTLE_WIRING PASS sentry: boundary-only fixture is a separate arena from the victory arena
+BATTLE_WIRING PASS sentry: protected combat constants unchanged { "move": 168.0, "dodge": 12, "guard": 6, "patrolHp": 64, "patrolDamage": 12, "sentryHp": 96, "sentryDamage": 18 }
+BATTLE_WIRING PASS sentry: left movement clamps at x=28 28.0
+BATTLE_WIRING PASS sentry: right movement clamps at x=612 612.0
+BATTLE_WIRING PASS sentry: dodge movement stays inside left clamp 28.0
+BATTLE_WIRING PASS sentry: hero attack hits at exactly 61.0 px 45
+BATTLE_WIRING PASS sentry: hero attack misses just outside 61.0 px and reports battle_far { "hp": 64, "feedback": "battle_far" }
+BATTLE_WIRING PASS sentry: enemy contact hits at exactly 69 px { "before": 100, "after": 82, "damage": 18 }
+BATTLE_WIRING PASS sentry: enemy contact misses just outside 69 px { "at": 82, "outside": 82 }
+BATTLE_WIRING PASS sentry: battle_pause _input opens the pause overlay
+BATTLE_WIRING PASS sentry: paused _process does not move the fighter
+BATTLE_WIRING PASS sentry: pause Resume text is English Resume battle
+BATTLE_WIRING PASS sentry: pause Resume text is Chinese 继续战斗
+BATTLE_WIRING PASS sentry: second battle_pause _input resumes and hides the overlay
+BATTLE_WIRING PASS normal scene entry: scifi.ruins en loads exploration
+BATTLE_WIRING PASS sentry: safe position records the >43 px retreat point [464.0, 225.0]
+BATTLE_WIRING PASS sentry: exactly 23 px does not open an encounter { "scene": true, "enemy": "" }
+BATTLE_WIRING PASS sentry: safe position is retained inside 43 px [464.0, 225.0]
+BATTLE_WIRING PASS sentry: <23 px starts the intended encounter with the pre-battle save position { "enemy": "sentry", "return": [464.0, 225.0], "safe": [464.0, 225.0] }
+BATTLE_TRANSITION_MS 4.32
+BATTLE_WIRING PASS sentry: normal scene change reaches the real battle arena { "scene": "res://scenes/battle_arena.tscn" }
+BATTLE_WIRING PASS sentry: pre-battle autosave exists at the safe point and enemy is not cleared { "count": 2, "id": "auto-00000008.json", "position": [464.0, 225.0], "enemyCleared": false, "destination": "scifi.ruins" }
+BATTLE_WIRING PASS capture sentry-en-victory-start is a saved 640x360 windowed image { "size": [640, 360], "err": 0, "file": "rpg-2-star-ocean-the-second_battle-arena-wiring_sentry-en-victory-start_640x360_test-only-v04_20261020-192412-26de518d.png", "display": "Windows" }
+BATTLE_WIRING PASS sentry: FRESH normal-entry victory arena starts at real max HP 96 (not boundary 64) { "hp": 96, "expected": 96, "maxHp": 96 }
+BATTLE_WIRING PASS sentry: victory uses the real hero damage 19 19
+BATTLE_WIRING PASS sentry: victory arena starts unfinished and unwon (no outcome pre-set) { "finished": false, "won": false, "hp": 96 }
+BATTLE_WIRING PASS sentry: ONE-TIME SETUP places the hero once at 30.0 px from the enemy (within 61.0 px reach) { "heroX": 461.615406666667, "enemyX": 491.615406666667, "reach": 61.0 }
+BATTLE_WIRING PASS sentry: 1200-step guard was not exhausted and victory came from the real process { "steps": 131, "finished": true, "won": true, "hp": 0 }
+BATTLE_WIRING PASS sentry: natural 1/60 stepping takes exactly 6 real _try_attack hits from 96 HP { "attacks": 6, "expectedAttacks": 6, "steps": 131, "hitSteps": [1, 27, 53, 79, 105, 131], "trace": [[true, 96, 77], [true, 77, 58], [true, 58, 39], [true, 39, 20], [true, 20, 1], [true, 1, 0]] }
+BATTLE_WIRING PASS sentry: every victory hit is a real 19-damage attack (no HP/finished injection) [[true, 96, 77], [true, 77, 58], [true, 58, 39], [true, 39, 20], [true, 20, 1], [true, 1, 0]]
+BATTLE_WIRING PASS sentry: every harness attack saw a naturally zero cooldown (no timer reset) { "cooldownsAtHit": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0] }
+BATTLE_WIRING PASS sentry: every harness attack used the same single setup x (no per-hit teleport) { "setupX": 461.615406666667, "positionsAtHit": [461.615406666667, 461.615406666667, 461.615406666667, 461.615406666667, 461.615406666667, 461.615406666667] }
+BATTLE_WIRING PASS sentry: attacks were gated by the real 0.43 s cooldown, not a forced timer { "minGapSteps": 26, "minGapSeconds": 0.43333333333333, "hitSteps": [1, 27, 53, 79, 105, 131] }
+BATTLE_WIRING PASS sentry: the real attack counter matches exactly 6 player attacks 6
+BATTLE_WIRING PASS sentry: hero stayed at the single declared setup position (no per-hit teleport) { "setupX": 461.615406666667, "finalX": 461.615406666667 }
+BATTLE_WIRING PASS sentry: normal enemy AI damaged the hero before the final hit (real HP, no injection) { "enemyAttacks": 1, "hpStart": 100, "hpBeforeFinal": 82, "heroHpAtAttack": [100, 100, 100, 82, 82, 82] }
+BATTLE_WIRING PASS sentry: victory applies the expected one-time reward (44 xp / 20 jp) { "xpAwarded": 44, "jpAwarded": 20, "levelBefore": 1, "levelAfter": 2, "xpRemainder": 14 }
+BATTLE_WIRING PASS sentry: victory sets the return contract and machine observation
+BATTLE_WIRING PASS sentry: real post-victory recovery matches the bounded 20% contract from HP immediately before the final hit { "hpBeforeFinal": 82, "after": 103, "maxBefore": 100, "maxAfter": 103, "expected": 103, "levelBefore": 1, "levelAfter": 2 }
+BATTLE_WIRING PASS sentry: victory writes exactly one new after-battle autosave { "newIds": ["auto-00000009.json"], "total": 2 }
+BATTLE_WIRING PASS sentry: the new after-battle save is destination/position filtered and enemy-cleared { "filtered": 1, "destination": "scifi.ruins", "position": [464.0, 225.0] }
+BATTLE_WIRING PASS sentry: reload target is the destination-filtered after_battle record, not auto_notes()[0] { "saveId": "auto-00000009.json", "allFirstId": "auto-00000009.json" }
+BATTLE_WIRING PASS sentry: repeated finish callback is idempotent (no second reward or save)
+BATTLE_WIRING PASS sentry: result Continue text is English ["Victory", "Keep exploring"]
+BATTLE_WIRING PASS capture sentry-en-result-en is a saved 640x360 windowed image { "size": [640, 360], "err": 0, "file": "rpg-2-star-ocean-the-second_battle-arena-wiring_sentry-en-result-en_640x360_test-only-v04_20261020-192412-26de518d.png", "display": "Windows" }
+BATTLE_WIRING PASS sentry: result Continue text is Chinese ["战斗胜利", "继续探索"]
+BATTLE_WIRING PASS capture sentry-en-result-zh is a saved 640x360 windowed image { "size": [640, 360], "err": 0, "file": "rpg-2-star-ocean-the-second_battle-arena-wiring_sentry-en-result-zh_640x360_test-only-v04_20261020-192412-26de518d.png", "display": "Windows" }
+BATTLE_WIRING PASS sentry: result button is bound to the real _return_after_result callback
+BATTLE_WIRING PASS sentry: result click returns to the normal exploration scene res://scenes/scifi_exploration_area.tscn
+BATTLE_WIRING PASS sentry: return spawn equals the saved battle return position { "hero": [464.0, 225.0], "return": [464.0, 225.0] }
+BATTLE_WIRING PASS sentry: return clears transient battle state and hides the defeated enemy { "enemy": "", "returning": false, "cleared": true, "visible": false }
+BATTLE_WIRING PASS capture sentry-en-return-en is a saved 640x360 windowed image { "size": [640, 360], "err": 0, "file": "rpg-2-star-ocean-the-second_battle-arena-wiring_sentry-en-return-en_640x360_test-only-v04_20261020-192412-26de518d.png", "display": "Windows" }
+BATTLE_WIRING PASS capture sentry-en-return-zh is a saved 640x360 windowed image { "size": [640, 360], "err": 0, "file": "rpg-2-star-ocean-the-second_battle-arena-wiring_sentry-en-return-zh_640x360_test-only-v04_20261020-192412-26de518d.png", "display": "Windows" }
+BATTLE_WIRING PASS sentry: saved snapshot is an area checkpoint with enemyCleared and the return position { "id": "auto-00000009.json", "scene": "area", "position": [464.0, 225.0] }
+BATTLE_WIRING PASS sentry: load_save restores the checkpoint and resume position { "resumePending": true, "kind": "area", "position": [464.0, 225.0] }
+BATTLE_WIRING PASS sentry: reloaded checkpoint spawns at the saved position and keeps the enemy cleared { "position": [464.0, 225.0], "visible": false }
+BATTLE_WIRING PASS capture sentry-en-save-reload-en is a saved 640x360 windowed image { "size": [640, 360], "err": 0, "file": "rpg-2-star-ocean-the-second_battle-arena-wiring_sentry-en-save-reload-en_640x360_test-only-v04_20261020-192412-26de518d.png", "display": "Windows" }
+BATTLE_WIRING_CASE sentry en {"attacks":6,"category":"victory","cooldownsAtHit":[0.0,0.0,0.0,0.0,0.0,0.0],"enemyAttacks":1,"expectedHits":6,"hitSteps":[1,27,53,79,105,131],"hpBeforeFinal":82,"hpTrace":[[true,96,77],[true,77,58],[true,58,39],[true,39,20],[true,20,1],[true,1,0]],"minGapSteps":26,"positionsAtHit":[461.615406666667,461.615406666667,461.615406666667,461.615406666667,461.615406666667,461.615406666667],"return":[464.0,225.0],"save":"auto-00000009.json","setupX":461.615406666667,"startHp":96,"steps":131}
+BATTLE_WIRING PASS normal scene entry: scifi.ruins zh loads exploration
+BATTLE_WIRING PASS sentry zh exploration title is localized 华盛顿特区废墟 · 国会大厦
+BATTLE_WIRING PASS sentry: safe position records the >43 px retreat point [464.0, 225.0]
+BATTLE_WIRING PASS sentry: exactly 23 px does not open an encounter { "scene": true, "enemy": "" }
+BATTLE_WIRING PASS sentry: safe position is retained inside 43 px [464.0, 225.0]
+BATTLE_WIRING PASS sentry: <23 px starts the intended encounter with the pre-battle save position { "enemy": "sentry", "return": [464.0, 225.0], "safe": [464.0, 225.0] }
+BATTLE_TRANSITION_MS 3.53
+BATTLE_WIRING PASS sentry: normal scene change reaches the real battle arena { "scene": "res://scenes/battle_arena.tscn" }
+BATTLE_WIRING PASS sentry: pre-battle autosave exists at the safe point and enemy is not cleared { "count": 3, "id": "auto-00000010.json", "position": [464.0, 225.0], "enemyCleared": false, "destination": "scifi.ruins" }
+BATTLE_WIRING PASS sentry: boundary-only fixture is a separate arena from the victory arena
+BATTLE_WIRING PASS sentry: protected combat constants unchanged { "move": 168.0, "dodge": 12, "guard": 6, "patrolHp": 64, "patrolDamage": 12, "sentryHp": 96, "sentryDamage": 18 }
+BATTLE_WIRING PASS sentry: left movement clamps at x=28 28.0
+BATTLE_WIRING PASS sentry: right movement clamps at x=612 612.0
+BATTLE_WIRING PASS sentry: dodge movement stays inside left clamp 28.0
+BATTLE_WIRING PASS sentry: hero attack hits at exactly 61.0 px 45
+BATTLE_WIRING PASS sentry: hero attack misses just outside 61.0 px and reports battle_far { "hp": 64, "feedback": "battle_far" }
+BATTLE_WIRING PASS sentry: enemy contact hits at exactly 69 px { "before": 100, "after": 82, "damage": 18 }
+BATTLE_WIRING PASS sentry: enemy contact misses just outside 69 px { "at": 82, "outside": 82 }
+BATTLE_WIRING PASS sentry: battle_pause _input opens the pause overlay
+BATTLE_WIRING PASS sentry: paused _process does not move the fighter
+BATTLE_WIRING PASS sentry: pause Resume text is English Resume battle
+BATTLE_WIRING PASS sentry: pause Resume text is Chinese 继续战斗
+BATTLE_WIRING PASS sentry: second battle_pause _input resumes and hides the overlay
+BATTLE_WIRING PASS normal scene entry: scifi.ruins zh loads exploration
+BATTLE_WIRING PASS sentry: safe position records the >43 px retreat point [464.0, 225.0]
+BATTLE_WIRING PASS sentry: exactly 23 px does not open an encounter { "scene": true, "enemy": "" }
+BATTLE_WIRING PASS sentry: safe position is retained inside 43 px [464.0, 225.0]
+BATTLE_WIRING PASS sentry: <23 px starts the intended encounter with the pre-battle save position { "enemy": "sentry", "return": [464.0, 225.0], "safe": [464.0, 225.0] }
+BATTLE_TRANSITION_MS 3.49
+BATTLE_WIRING PASS sentry: normal scene change reaches the real battle arena { "scene": "res://scenes/battle_arena.tscn" }
+BATTLE_WIRING PASS sentry: pre-battle autosave exists at the safe point and enemy is not cleared { "count": 4, "id": "auto-00000011.json", "position": [464.0, 225.0], "enemyCleared": false, "destination": "scifi.ruins" }
+BATTLE_WIRING PASS capture sentry-zh-victory-start is a saved 640x360 windowed image { "size": [640, 360], "err": 0, "file": "rpg-2-star-ocean-the-second_battle-arena-wiring_sentry-zh-victory-start_640x360_test-only-v04_20261020-192412-26de518d.png", "display": "Windows" }
+BATTLE_WIRING PASS sentry: FRESH normal-entry victory arena starts at real max HP 96 (not boundary 64) { "hp": 96, "expected": 96, "maxHp": 96 }
+BATTLE_WIRING PASS sentry: victory uses the real hero damage 19 19
+BATTLE_WIRING PASS sentry: victory arena starts unfinished and unwon (no outcome pre-set) { "finished": false, "won": false, "hp": 96 }
+BATTLE_WIRING PASS sentry: ONE-TIME SETUP places the hero once at 30.0 px from the enemy (within 61.0 px reach) { "heroX": 461.64748, "enemyX": 491.64748, "reach": 61.0 }
+BATTLE_WIRING PASS sentry: 1200-step guard was not exhausted and victory came from the real process { "steps": 131, "finished": true, "won": true, "hp": 0 }
+BATTLE_WIRING PASS sentry: natural 1/60 stepping takes exactly 6 real _try_attack hits from 96 HP { "attacks": 6, "expectedAttacks": 6, "steps": 131, "hitSteps": [1, 27, 53, 79, 105, 131], "trace": [[true, 96, 77], [true, 77, 58], [true, 58, 39], [true, 39, 20], [true, 20, 1], [true, 1, 0]] }
+BATTLE_WIRING PASS sentry: every victory hit is a real 19-damage attack (no HP/finished injection) [[true, 96, 77], [true, 77, 58], [true, 58, 39], [true, 39, 20], [true, 20, 1], [true, 1, 0]]
+BATTLE_WIRING PASS sentry: every harness attack saw a naturally zero cooldown (no timer reset) { "cooldownsAtHit": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0] }
+BATTLE_WIRING PASS sentry: every harness attack used the same single setup x (no per-hit teleport) { "setupX": 461.64748, "positionsAtHit": [461.64748, 461.64748, 461.64748, 461.64748, 461.64748, 461.64748] }
+BATTLE_WIRING PASS sentry: attacks were gated by the real 0.43 s cooldown, not a forced timer { "minGapSteps": 26, "minGapSeconds": 0.43333333333333, "hitSteps": [1, 27, 53, 79, 105, 131] }
+BATTLE_WIRING PASS sentry: the real attack counter matches exactly 6 player attacks 6
+BATTLE_WIRING PASS sentry: hero stayed at the single declared setup position (no per-hit teleport) { "setupX": 461.64748, "finalX": 461.64748 }
+BATTLE_WIRING PASS sentry: normal enemy AI damaged the hero before the final hit (real HP, no injection) { "enemyAttacks": 1, "hpStart": 100, "hpBeforeFinal": 82, "heroHpAtAttack": [100, 100, 100, 82, 82, 82] }
+BATTLE_WIRING PASS sentry: victory applies the expected one-time reward (44 xp / 20 jp) { "xpAwarded": 44, "jpAwarded": 20, "levelBefore": 1, "levelAfter": 2, "xpRemainder": 14 }
+BATTLE_WIRING PASS sentry: victory sets the return contract and machine observation
+BATTLE_WIRING PASS sentry: real post-victory recovery matches the bounded 20% contract from HP immediately before the final hit { "hpBeforeFinal": 82, "after": 103, "maxBefore": 100, "maxAfter": 103, "expected": 103, "levelBefore": 1, "levelAfter": 2 }
+BATTLE_WIRING PASS sentry: victory writes exactly one new after-battle autosave { "newIds": ["auto-00000012.json"], "total": 2 }
+BATTLE_WIRING PASS sentry: the new after-battle save is destination/position filtered and enemy-cleared { "filtered": 1, "destination": "scifi.ruins", "position": [464.0, 225.0] }
+BATTLE_WIRING PASS sentry: reload target is the destination-filtered after_battle record, not auto_notes()[0] { "saveId": "auto-00000012.json", "allFirstId": "auto-00000012.json" }
+BATTLE_WIRING PASS sentry: repeated finish callback is idempotent (no second reward or save)
+BATTLE_WIRING PASS sentry: result Continue text is English ["Victory", "Keep exploring"]
+BATTLE_WIRING PASS capture sentry-zh-result-en is a saved 640x360 windowed image { "size": [640, 360], "err": 0, "file": "rpg-2-star-ocean-the-second_battle-arena-wiring_sentry-zh-result-en_640x360_test-only-v04_20261020-192412-26de518d.png", "display": "Windows" }
+BATTLE_WIRING PASS sentry: result Continue text is Chinese ["战斗胜利", "继续探索"]
+BATTLE_WIRING PASS capture sentry-zh-result-zh is a saved 640x360 windowed image { "size": [640, 360], "err": 0, "file": "rpg-2-star-ocean-the-second_battle-arena-wiring_sentry-zh-result-zh_640x360_test-only-v04_20261020-192412-26de518d.png", "display": "Windows" }
+BATTLE_WIRING PASS sentry: result button is bound to the real _return_after_result callback
+BATTLE_WIRING PASS sentry: result click returns to the normal exploration scene res://scenes/scifi_exploration_area.tscn
+BATTLE_WIRING PASS sentry: return spawn equals the saved battle return position { "hero": [464.0, 225.0], "return": [464.0, 225.0] }
+BATTLE_WIRING PASS sentry: return clears transient battle state and hides the defeated enemy { "enemy": "", "returning": false, "cleared": true, "visible": false }
+BATTLE_WIRING PASS capture sentry-zh-return-en is a saved 640x360 windowed image { "size": [640, 360], "err": 0, "file": "rpg-2-star-ocean-the-second_battle-arena-wiring_sentry-zh-return-en_640x360_test-only-v04_20261020-192412-26de518d.png", "display": "Windows" }
+BATTLE_WIRING PASS capture sentry-zh-return-zh is a saved 640x360 windowed image { "size": [640, 360], "err": 0, "file": "rpg-2-star-ocean-the-second_battle-arena-wiring_sentry-zh-return-zh_640x360_test-only-v04_20261020-192412-26de518d.png", "display": "Windows" }
+BATTLE_WIRING PASS sentry: saved snapshot is an area checkpoint with enemyCleared and the return position { "id": "auto-00000012.json", "scene": "area", "position": [464.0, 225.0] }
+BATTLE_WIRING PASS sentry: load_save restores the checkpoint and resume position { "resumePending": true, "kind": "area", "position": [464.0, 225.0] }
+BATTLE_WIRING PASS sentry: reloaded checkpoint spawns at the saved position and keeps the enemy cleared { "position": [464.0, 225.0], "visible": false }
+BATTLE_WIRING PASS capture sentry-zh-save-reload-en is a saved 640x360 windowed image { "size": [640, 360], "err": 0, "file": "rpg-2-star-ocean-the-second_battle-arena-wiring_sentry-zh-save-reload-en_640x360_test-only-v04_20261020-192412-26de518d.png", "display": "Windows" }
+BATTLE_WIRING_CASE sentry zh {"attacks":6,"category":"victory","cooldownsAtHit":[0.0,0.0,0.0,0.0,0.0,0.0],"enemyAttacks":1,"expectedHits":6,"hitSteps":[1,27,53,79,105,131],"hpBeforeFinal":82,"hpTrace":[[true,96,77],[true,77,58],[true,58,39],[true,39,20],[true,20,1],[true,1,0]],"minGapSteps":26,"positionsAtHit":[461.64748,461.64748,461.64748,461.64748,461.64748,461.64748],"return":[464.0,225.0],"save":"auto-00000012.json","setupX":461.64748,"startHp":96,"steps":131}
+BATTLE_WIRING PASS normal scene entry: scifi.outskirts en loads exploration
+BATTLE_WIRING PASS patrol: safe position records the >43 px retreat point [399.0, 238.0]
+BATTLE_WIRING PASS patrol: exactly 23 px does not open an encounter { "scene": true, "enemy": "" }
+BATTLE_WIRING PASS patrol: safe position is retained inside 43 px [399.0, 238.0]
+BATTLE_WIRING PASS patrol: <23 px starts the intended encounter with the pre-battle save position { "enemy": "patrol", "return": [399.0, 238.0], "safe": [399.0, 238.0] }
+BATTLE_TRANSITION_MS 3.37
+BATTLE_WIRING PASS patrol: normal scene change reaches the real battle arena { "scene": "res://scenes/battle_arena.tscn" }
+BATTLE_WIRING PASS patrol: pre-battle autosave exists at the safe point and enemy is not cleared { "count": 1, "id": "auto-00000013.json", "position": [399.0, 238.0], "enemyCleared": false, "destination": "scifi.outskirts" }
+BATTLE_WIRING PASS capture patrol-defeat-start is a saved 640x360 windowed image { "size": [640, 360], "err": 0, "file": "rpg-2-star-ocean-the-second_battle-arena-wiring_patrol-defeat-start_640x360_test-only-v04_20261020-192412-26de518d.png", "display": "Windows" }
+BATTLE_WIRING PASS patrol: DEFEAT-ONLY setup starts at real max HP 64 and one declared contact position { "enemyHp": 64, "setupX": 462.264986111111 }
+BATTLE_WIRING PASS patrol: DEFEAT-ONLY repeated real enemy contact defeats the party without injected HP { "hits": 9, "hp": 0, "enemyAttacks": 9 }
+BATTLE_WIRING PASS patrol: DEFEAT-ONLY leaves the single contact position unchanged { "setupX": 462.264986111111, "finalX": 462.264986111111 }
+BATTLE_WIRING PASS patrol: DEFEAT-ONLY grants no reward and no cleared-return state
+BATTLE_WIRING PASS patrol: DEFEAT-ONLY does not write an after-battle save
+BATTLE_WIRING PASS patrol: DEFEAT-ONLY result text/button are English ["Defeat", "Main menu"]
+BATTLE_WIRING PASS capture patrol-defeat-result-en is a saved 640x360 windowed image { "size": [640, 360], "err": 0, "file": "rpg-2-star-ocean-the-second_battle-arena-wiring_patrol-defeat-result-en_640x360_test-only-v04_20261020-192412-26de518d.png", "display": "Windows" }
+BATTLE_WIRING PASS patrol: DEFEAT-ONLY result text/button are Chinese ["战斗失败", "返回主菜单"]
+BATTLE_WIRING PASS capture patrol-defeat-result-zh is a saved 640x360 windowed image { "size": [640, 360], "err": 0, "file": "rpg-2-star-ocean-the-second_battle-arena-wiring_patrol-defeat-result-zh_640x360_test-only-v04_20261020-192412-26de518d.png", "display": "Windows" }
+BATTLE_WIRING PASS patrol: DEFEAT-ONLY result button is bound to the real _return_after_result callback
+BATTLE_WIRING PASS patrol: DEFEAT-ONLY result click returns to the main menu res://scenes/main_menu.tscn
+BATTLE_WIRING PASS patrol: DEFEAT-ONLY return clears the pending enemy id and keeps the enemy uncleared
+BATTLE_WIRING_DEFEAT_CASE patrol en {"category":"defeat","enemyAttacks":9,"hits":9,"hp":0}
+BATTLE_WIRING PASS base commit is the declared 39f252e checkout { "base": "39f252e57c6e67f40e35757aaa5471448ef46522", "expected": "39f252e57c6e67f40e35757aaa5471448ef46522" }
+BATTLE_WIRING PASS raw source hash binds res://scripts/battle_arena.gd to 39f252e { "actual": "41548c86eb04fb12a988c211373601f7c08d579b408d4951aa6d0f03302cb197", "expected": "41548c86eb04fb12a988c211373601f7c08d579b408d4951aa6d0f03302cb197" }
+BATTLE_WIRING PASS raw source hash binds res://scripts/scifi_exploration_area.gd to 39f252e { "actual": "13f89322c328598fcaeac94536182aef2e936bbf33a61a1bf89f741f9806b4b3", "expected": "13f89322c328598fcaeac94536182aef2e936bbf33a61a1bf89f741f9806b4b3" }
+BATTLE_WIRING PASS raw source hash binds res://scripts/app_state.gd to 39f252e { "actual": "e3a162ef3d70aafbb97f4a668b69813dc8aed3e327ee6a87b398aba29fdbc33f", "expected": "e3a162ef3d70aafbb97f4a668b69813dc8aed3e327ee6a87b398aba29fdbc33f" }
+BATTLE_WIRING PASS raw source hash binds res://scripts/save_store.gd to 39f252e { "actual": "88c2d71d1f9faa0c7a840b2098a146808e0a1ef6d1f7315f2951a00eacdd7a0a", "expected": "88c2d71d1f9faa0c7a840b2098a146808e0a1ef6d1f7315f2951a00eacdd7a0a" }
+BATTLE_WIRING PASS raw source hash binds res://scripts/battle_rules.gd to 39f252e { "actual": "e95400251485fce27d496c0a100ec9fe1a1f2e2430bb5f9c6899497370a3263c", "expected": "e95400251485fce27d496c0a100ec9fe1a1f2e2430bb5f9c6899497370a3263c" }
+BATTLE_WIRING PASS raw source hash binds res://scenes/battle_arena.tscn to 39f252e { "actual": "dfd2ed1ce9642a4519926e3aa45dae5bd2b6bad11dfa0f3152d5cf80de9d4310", "expected": "dfd2ed1ce9642a4519926e3aa45dae5bd2b6bad11dfa0f3152d5cf80de9d4310" }
+BATTLE_WIRING PASS raw source hash binds res://scenes/scifi_exploration_area.tscn to 39f252e { "actual": "b3be08cde8a8d9c4fa0edaa49c3ef30965291691d1b3c30184776ec3553b8ae8", "expected": "b3be08cde8a8d9c4fa0edaa49c3ef30965291691d1b3c30184776ec3553b8ae8" }
+BATTLE_WIRING PASS LF-normalized text hash binds res://scripts/battle_arena.gd to 39f252e { "actual": "41548c86eb04fb12a988c211373601f7c08d579b408d4951aa6d0f03302cb197", "expected": "41548c86eb04fb12a988c211373601f7c08d579b408d4951aa6d0f03302cb197" }
+BATTLE_WIRING PASS LF-normalized text hash binds res://scripts/scifi_exploration_area.gd to 39f252e { "actual": "13f89322c328598fcaeac94536182aef2e936bbf33a61a1bf89f741f9806b4b3", "expected": "13f89322c328598fcaeac94536182aef2e936bbf33a61a1bf89f741f9806b4b3" }
+BATTLE_WIRING PASS LF-normalized text hash binds res://scripts/app_state.gd to 39f252e { "actual": "60f3622f1dfcaa554861391b552442636a7870c7d250de4c4122da9245c4f2ee", "expected": "60f3622f1dfcaa554861391b552442636a7870c7d250de4c4122da9245c4f2ee" }
+BATTLE_WIRING PASS LF-normalized text hash binds res://scripts/save_store.gd to 39f252e { "actual": "0980b722686e05a227bee8c71bfe6a04ee71c84826937a552b0248e5ebeff6d1", "expected": "0980b722686e05a227bee8c71bfe6a04ee71c84826937a552b0248e5ebeff6d1" }
+BATTLE_WIRING PASS LF-normalized text hash binds res://scripts/battle_rules.gd to 39f252e { "actual": "98d0ed2e9b723859cdd42782f57e222c66e2b61b3f9772fa2cd72f44c09cca7b", "expected": "98d0ed2e9b723859cdd42782f57e222c66e2b61b3f9772fa2cd72f44c09cca7b" }
+BATTLE_WIRING PASS LF-normalized text hash binds res://scenes/battle_arena.tscn to 39f252e { "actual": "a41247599f910aabd35bfd8e4015a2ff3e4ab22dafe19a73b11044ba3743e322", "expected": "a41247599f910aabd35bfd8e4015a2ff3e4ab22dafe19a73b11044ba3743e322" }
+BATTLE_WIRING PASS LF-normalized text hash binds res://scenes/scifi_exploration_area.tscn to 39f252e { "actual": "b60cf71490b5aacb0163c3336cefefac7b7ed16de6940924f875d23499a5cdc7", "expected": "b60cf71490b5aacb0163c3336cefefac7b7ed16de6940924f875d23499a5cdc7" }
+REPORT C:\Users\hkzha\Documents\Codex\2026-10-12\rpg-2-star-ocean-the-second\work\max0840-sentry-sync\outputs\battle-wiring-v04\rpg-2-star-ocean-the-second_battle-arena-wiring_natural-victory-report_test-only-v04_20261020-192337-26de518d.json
+BATTLE_WIRING_RESULT 297/297 captures=27
+BATTLE_WIRING_OK

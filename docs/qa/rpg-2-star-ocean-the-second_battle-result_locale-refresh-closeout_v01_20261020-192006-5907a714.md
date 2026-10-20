@@ -32,3 +32,7 @@ Runner creates a fresh unique output/profile folder on every run, inherits certi
 ## Canonical integration inspection
 
 Codex inspected the exact +5/-1 runtime diff and reran the unit fixture in the canonical checkout:50/50, clean checked runner, six actual captures. Codex viewed the EN→ZH and ZH→EN result screenshots; the reward line now matches the title/button language. XP/JP and exact save IDs remain unchanged after refresh and repeated finish. The original runner is preserved for the producer worktree; canonical reproduction uses `tools/rpg-2-star-ocean-the-second_battle-result_locale-refresh-root-runner_v02_20261020-192206-ac8c7d5e.py fixed`, whose tooling discovery supports both worktree depths. No new completion points.
+
+## Combined normal-path check
+
+After the locale-only change, Codex reran the full wiring suite from a clean isolated checkout of `39f252e`:297/297, clean unfiltered engine log, four natural victories, separate boundary/defeat, before/after saves, return and reload. Root viewed the actual Chinese sentry victory: title/button and44XP/20JP reward now all translate. This is additional regression evidence, not extra completion credit. Evidence: `outputs/battle-wiring-v04/rpg-2-star-ocean-the-second_battle-arena-wiring_combined-locale-proof_v05_20261020-192847-90fabaf5.json`. The canonical dirty checkout was preserved; fresh import changed only verified generated metadata and the first cold-cache wrapper status guard failure is retained.
