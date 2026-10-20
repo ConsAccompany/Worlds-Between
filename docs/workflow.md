@@ -62,6 +62,10 @@ Before each new Claude session, verify Max/firstParty authentication and no API 
 
 At the end of a substantive batch report only: completed and integrated outputs, remaining real blockers/creator decisions, current separate meters, and the next task. Use concise progress updates during long work; quiet checks do not constitute production.
 
+### Before and after progress (creator instruction, 2026-10-20)
+
+Capture the canonical production percentage at the start of each task or bounded batch. Every progress report must show **before → after (change in percentage points)** for the same metric and frozen baseline. For an active task, label the starting percentage and leave the final value pending. At closeout, retain both values and the measured change in the Bible with the task ID, evidence and timestamps. Use `tools/rpg-2-star-ocean-the-second_progress-task_record-v01_20261020-201756-0613b8f0.js begin|finish` to snapshot the canonical meters into the existing Bible; it never changes ledger scores. A verified maintenance task can legitimately show +0.0; describe its delivered result without inventing points. Report inspection and creator approval separately, with their own before/after values when quoted. Never compare the historical mixed estimate with production completion or imply that pending approval removes completed production credit.
+
 ## Minimal operational measures
 
 Use task start/finish/revision timestamps and existing evidence to report completed integrated deliverables, task age, active task count, repeated revisions and periods blocked on account availability. Categorize time only when actually measured (production/testing/coordination/waiting); otherwise say unknown. Do not invent historical hours, count scheduled wakeups as work, or build a new monitoring service. Review these measures when choosing the next batch, not on every polling tick.

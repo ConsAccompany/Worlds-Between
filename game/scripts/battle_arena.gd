@@ -117,6 +117,19 @@ const COMBAT_SPRITE_SET_CLI_FLAG := "--combat-sprite-set-pilot"
 const COMBAT_SPRITE_SET_INDEX_ARG := "--combat-sprite-set-index="
 const COMBAT_SPRITE_SET_ART_APPROVED := false
 const COMBAT_SPRITE_SET_INDEX := "res://tests/fixtures/csp-fixture-v01_03f4172a/rpg-2-star-ocean-the-second_combat-set_fixture-index_not-art-v01_20261018-153656-03f4172a.json"
+# Heroine contact timing pilot (UNAPPROVED, TECHNICAL). Opt-in only: launch with `-- --heroine-sea-contact-pilot`, or set
+# heroine_sea_contact_override = 1 before the battle scene loads. Off by default, so every fighter keeps the immediate attack.
+# Scoped to the female protagonist only ("hero" with appearance female); every other fighter and the enemy are unchanged.
+# Her attack request starts a per-fighter event (monotonic id, elapsed 0, latched facing); damage, VFX and the shared bonus
+# resolve exactly once at contact (5/30 s, range rechecked then); recovery ends at 12/30 s. Cooldown (0.43 s) and the attack
+# count are spent at the request. A dodge, skill, job skill, hit or down before contact cancels it with no damage and no
+# refund; a result, pause or scene exit never resolves it. Draw with --combat-sprite-set-pilot to share the event clock.
+const HEROINE_CONTACT_CLI_FLAG := "--heroine-sea-contact-pilot"
+const HEROINE_CONTACT_ART_APPROVED := false
+const HEROINE_CONTACT_TICK_RATE := 30
+const HEROINE_CONTACT_TICKS := 5
+const HEROINE_RECOVERY_END_TICKS := 12
+const HEROINE_CONTACT_LOG_LIMIT := 64
 
 static var sentry_v2_override := -1
 static var patrol_animation_override := -1
@@ -125,6 +138,7 @@ static var battle_backdrop_override := -1
 static var battle_backdrop_arena_override := ""
 static var combat_sprite_set_override := -1
 static var combat_sprite_set_index_override := ""
+static var heroine_sea_contact_override := -1
 
 var enemy_id := "patrol"
 var enemy: Dictionary
@@ -144,9 +158,13 @@ var queued_job_skill := false
 var queued_job_skill_id := ""
 var selected_order_id := ""
 var next_attack_bonus := 0
+# Heroine contact pilot: monotonic event ids across the battle, and a bounded resolution log for checks.
+var contact_event_serial := 0
+var contact_event_log: Array[Dictionary] = []
 var battle_finished := false
 # Presentation-only hold: a valid Patrol pilot defeat is visible before the victory panel.
 var patrol_result_pending := false
+var heroine_result_pending := false
 var patrol_result_elapsed := 0.0
 var battle_won := false
 var feedback_key := "battle_ready"
@@ -253,6 +271,12 @@ static func combat_sprite_set_enabled() -> bool:
 	return OS.get_cmdline_user_args().has(COMBAT_SPRITE_SET_CLI_FLAG)
 
 
+static func heroine_sea_contact_enabled() -> bool:
+	if heroine_sea_contact_override >= 0:
+		return heroine_sea_contact_override == 1
+	return OS.get_cmdline_user_args().has(HEROINE_CONTACT_CLI_FLAG)
+
+
 static func combat_sprite_set_index() -> String:
 	if combat_sprite_set_index_override != "":
 		return combat_sprite_set_index_override
@@ -269,6 +293,9 @@ func _ready() -> void:
 	enemy_hp = int(enemy["max_hp"])
 	for index in AppState.active_party_ids.size():
 		fighters.append({"id": AppState.active_party_ids[index], "x": 135.0 + index * 36.0, "attack_cooldown": 0.0, "dodge_cooldown": 0.0, "dodge_time": 0.0, "dodge_direction": -1.0, "skill_cooldown": 0.0, "command": "default", "guard": false, "boost": 0, "visual_action": "", "visual_elapsed": 0.0, "visual_loop_kind": "idle", "visual_loop_clock": 0.0, "visual_moving": false})
+		# Only the pilot fighter carries event keys; their presence selects the contact path and the loader's explicit clock.
+		if heroine_sea_contact_enabled() and AppState.active_party_ids[index] == "hero" and AppState.hero_appearance == "female":
+			fighters[index].merge({"contact_event_id": 0, "contact_event_clock": 0.0, "contact_event_facing": 0, "contact_event_active": false, "contact_event_state": "none"})
 	_load_enemy_sprite_pilot()
 	_load_battle_backdrop()
 	_load_combat_sprite_sets()
@@ -312,6 +339,7 @@ func _process(delta: float) -> void:
 	if encounter_feedback != null:
 		encounter_feedback.advance(delta)
 	if battle_finished:
+		_advance_finished_contact_recovery(delta)
 		_advance_fighter_visuals(delta, [])
 		_advance_combat_sprite_sets(delta)
 		_advance_enemy_visual(delta, false)
@@ -322,6 +350,15 @@ func _process(delta: float) -> void:
 	var initial_positions: Array[float] = []
 	for fighter in fighters:
 		initial_positions.append(float(fighter["x"]))
+	# Pilot events requested in earlier frames advance first; requests made later in this frame start at elapsed 0.
+	_advance_contact_events(delta)
+	if battle_finished:
+		_advance_fighter_visuals(delta, [])
+		_advance_combat_sprite_sets(delta)
+		_advance_enemy_visual(delta, false)
+		_update_hud()
+		queue_redraw()
+		return
 	for fighter in fighters:
 		fighter["attack_cooldown"] = maxf(0.0, float(fighter["attack_cooldown"]) - delta)
 		fighter["dodge_cooldown"] = maxf(0.0, float(fighter["dodge_cooldown"]) - delta)
@@ -358,6 +395,9 @@ func _process(delta: float) -> void:
 
 
 func _set_fighter_visual_action(fighter: Dictionary, action: String) -> void:
+	# Any other action (dodge, skill, job skill, hit, down) interrupts the pilot fighter's attack event.
+	if action != "attack" and fighter.has("contact_event_id"):
+		_interrupt_contact_event(fighter, action)
 	fighter["visual_action"] = action
 	fighter["visual_elapsed"] = 0.0
 	if action == "skill":
@@ -602,6 +642,8 @@ func _try_attack(index: int = -1) -> bool:
 	var fighter: Dictionary = fighters[index]
 	if float(fighter["attack_cooldown"]) > 0.0:
 		return false
+	if fighter.has("contact_event_id"):
+		return _request_contact_attack(index)
 	fighter["attack_cooldown"] = 0.43
 	_set_fighter_visual_action(fighter, "attack")
 	player_attack_count += 1
@@ -621,6 +663,110 @@ func _try_attack(index: int = -1) -> bool:
 	if enemy_hp == 0:
 		_finish_battle(true)
 	return true
+
+
+# Pilot request: spends cooldown and the attack count now; damage waits for contact. Returns true when the request starts.
+func _request_contact_attack(index: int) -> bool:
+	var fighter: Dictionary = fighters[index]
+	# Cooldown (0.43 s) outlasts recovery (0.40 s), so an older event is never pending here; cancel defensively if it were.
+	if String(fighter["contact_event_state"]) == "pending":
+		_resolve_contact_log(fighter, "cancelled_repress", 0)
+	fighter["attack_cooldown"] = 0.43
+	_set_fighter_visual_action(fighter, "attack")
+	player_attack_count += 1
+	contact_event_serial += 1
+	var dx := enemy_x - float(fighter["x"])
+	fighter["contact_event_id"] = contact_event_serial
+	fighter["contact_event_clock"] = 0.0
+	fighter["contact_event_facing"] = -1 if dx < 0.0 else 1
+	fighter["contact_event_active"] = true
+	fighter["contact_event_state"] = "pending"
+	return true
+
+
+func _advance_contact_events(delta: float) -> void:
+	for index in fighters.size():
+		var fighter: Dictionary = fighters[index]
+		if not fighter.has("contact_event_id") or not bool(fighter["contact_event_active"]):
+			continue
+		var elapsed := float(fighter["contact_event_clock"]) + delta
+		fighter["contact_event_clock"] = elapsed
+		# Same boundary predicate as the sprite loader's frame_at, so the contact pose and the hit share one instant.
+		var tolerance: float = CombatSpriteSets.CLOCK_EPSILON
+		if String(fighter["contact_event_state"]) == "pending" and elapsed + tolerance >= float(HEROINE_CONTACT_TICKS) / HEROINE_CONTACT_TICK_RATE:
+			_commit_contact(index)
+		if battle_finished:
+			return
+		if String(fighter["contact_event_state"]) == "recovery" and elapsed + tolerance >= float(HEROINE_RECOVERY_END_TICKS) / HEROINE_CONTACT_TICK_RATE:
+			fighter["contact_event_state"] = "ended"
+			fighter["contact_event_active"] = false
+
+
+func _commit_contact(index: int) -> void:
+	var fighter: Dictionary = fighters[index]
+	fighter["contact_event_state"] = "recovery"
+	if not _is_alive(index):
+		_resolve_contact_log(fighter, "cancelled_down", 0)
+		fighter["contact_event_state"] = "cancelled"
+		fighter["contact_event_active"] = false
+		return
+	var definition: Dictionary = AppState.MEMBER_DEFS[String(fighter["id"])]
+	if absf(enemy_x - float(fighter["x"])) > float(definition["attack_range"]):
+		# A miss keeps the fighter boost and the shared bonus for the next successful contact.
+		if index == controlled_index:
+			feedback_message = ""
+			feedback_key = "battle_far"
+		_resolve_contact_log(fighter, "missed", 0)
+		return
+	var damage := int(definition["attack_damage"]) + int(fighter["boost"]) + next_attack_bonus
+	fighter["boost"] = 0
+	next_attack_bonus = 0
+	enemy_hp = maxi(0, enemy_hp - damage)
+	_emit_battle_vfx("attack", Vector2(enemy_x, ARENA_FLOOR_Y - 28.0), float(fighter["contact_event_facing"]))
+	feedback_message = ""
+	feedback_key = "battle_hit"
+	_resolve_contact_log(fighter, "hit", damage)
+	if enemy_hp == 0:
+		_finish_battle(true)
+
+
+# Results cancel unresolved damage, but a hit already committed must still show its
+# contact/recovery poses. This path advances presentation only and can never hit again.
+func _advance_finished_contact_recovery(delta: float) -> void:
+	for fighter in fighters:
+		if not fighter.has("contact_event_id") or not bool(fighter["contact_event_active"]):
+			continue
+		if String(fighter["contact_event_state"]) != "recovery":
+			continue
+		var elapsed := float(fighter["contact_event_clock"]) + delta
+		fighter["contact_event_clock"] = elapsed
+		if elapsed + CombatSpriteSets.CLOCK_EPSILON >= float(HEROINE_RECOVERY_END_TICKS) / HEROINE_CONTACT_TICK_RATE:
+			fighter["contact_event_state"] = "ended"
+			fighter["contact_event_active"] = false
+
+
+func _has_contact_recovery() -> bool:
+	for fighter in fighters:
+		if fighter.has("contact_event_id") and bool(fighter["contact_event_active"]) and String(fighter["contact_event_state"]) == "recovery":
+			return true
+	return false
+
+
+func _interrupt_contact_event(fighter: Dictionary, reason: String) -> void:
+	if not bool(fighter["contact_event_active"]):
+		return
+	if String(fighter["contact_event_state"]) == "pending":
+		_resolve_contact_log(fighter, "cancelled_" + reason, 0)
+		fighter["contact_event_state"] = "cancelled"
+	else:
+		fighter["contact_event_state"] = "interrupted"
+	fighter["contact_event_active"] = false
+
+
+func _resolve_contact_log(fighter: Dictionary, outcome: String, damage: int) -> void:
+	contact_event_log.append({"id": int(fighter["contact_event_id"]), "outcome": outcome, "damage": damage, "clock": float(fighter["contact_event_clock"]), "facing": int(fighter["contact_event_facing"]), "enemy_hp": enemy_hp})
+	if contact_event_log.size() > HEROINE_CONTACT_LOG_LIMIT:
+		contact_event_log.pop_front()
 
 
 func _try_dodge(index: int = -1) -> bool:
@@ -864,6 +1010,11 @@ func _finish_battle(won: bool) -> void:
 	if battle_finished:
 		return
 	battle_finished = true
+	# A pending contact never resolves behind results. A committed hit retains only
+	# presentation recovery, so the finishing contact frame is not replaced by idle.
+	for fighter in fighters:
+		if fighter.has("contact_event_id") and String(fighter["contact_event_state"]) == "pending":
+			_interrupt_contact_event(fighter, "result")
 	paused = false
 	pause_overlay.visible = false
 	battle_won = won
@@ -895,28 +1046,34 @@ func _finish_battle(won: bool) -> void:
 		AppState.returning_from_battle = false
 		get_tree().create_timer(2.0).timeout.connect(_return_to_menu)
 	patrol_result_pending = won and enemy_hp <= 0 and enemy_id == "patrol" and patrol_animation_enabled() and enemy_animation_texture != null
+	heroine_result_pending = won and _has_contact_recovery()
 	patrol_result_elapsed = 0.0
-	result_overlay.visible = not patrol_result_pending
+	result_overlay.visible = not (patrol_result_pending or heroine_result_pending)
 	if patrol_result_pending:
 		_advance_enemy_visual(0.0, false)
+	if patrol_result_pending or heroine_result_pending:
 		result_button.disabled = true
 		result_button.focus_mode = Control.FOCUS_NONE
 		result_button.release_focus()
 	_refresh_encounter_result_surface()
 	_refresh_text()
-	if not patrol_result_pending:
+	if not patrol_result_pending and not heroine_result_pending:
 		result_button.grab_focus()
 	queue_redraw()
 
 
 func _advance_patrol_result_presentation(delta: float) -> void:
-	if not patrol_result_pending:
+	if not patrol_result_pending and not heroine_result_pending:
 		return
-	patrol_result_elapsed += delta
-	# Epsilon compensates binary floating-point summation only (one nanosecond, never a frame).
-	if patrol_result_elapsed + 0.000000001 < _enemy_visual_duration("defeat"):
+	if patrol_result_pending:
+		patrol_result_elapsed += delta
+		# Epsilon compensates binary floating-point summation only (one nanosecond, never a frame).
+		if patrol_result_elapsed + 0.000000001 >= _enemy_visual_duration("defeat"):
+			patrol_result_pending = false
+	if heroine_result_pending and not _has_contact_recovery():
+		heroine_result_pending = false
+	if patrol_result_pending or heroine_result_pending:
 		return
-	patrol_result_pending = false
 	result_overlay.visible = true
 	result_button.disabled = false
 	result_button.focus_mode = Control.FOCUS_ALL
@@ -924,7 +1081,7 @@ func _advance_patrol_result_presentation(delta: float) -> void:
 
 
 func _return_after_result() -> void:
-	if patrol_result_pending:
+	if patrol_result_pending or heroine_result_pending:
 		return
 	if battle_won:
 		AppState.battle_enemy_id = ""

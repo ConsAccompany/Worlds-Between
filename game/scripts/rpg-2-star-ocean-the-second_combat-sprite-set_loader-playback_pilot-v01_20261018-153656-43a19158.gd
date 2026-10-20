@@ -21,6 +21,14 @@ extends RefCounted
 #   actions          {name: {"loop": bool, "frames": [{"cell": int, "ms": int, "pivot": [x, y] (optional)}]}}
 #                    idle, move, guard loop; attack, dodge, hit, defeat play once (defeat holds its last frame).
 #                    skill is optional and falls back to the attack frames.
+#                    Optional per action "tick_rate" (integer 1..1000 ticks per second): then every frame gives "ticks"
+#                    (positive integer) and no "ms"; frame ends are the exact rational cumulative_ticks / tick_rate (never
+#                    rounded to milliseconds). Without tick_rate every frame gives "ms" and no "ticks", exactly as before.
+#                    Optional "loop_start" (loop actions only, frame index, default 0): frames before it play once as an
+#                    intro, then the loop repeats from that frame.
+# Optional explicit event clock (heroine contact pilot only): when the fighter dictionary carries "contact_event_id", an
+# attack starts on a new id (not on inferred elapsed resets), its clock is the arena's own event clock (so pose and mechanical
+# contact share one boundary) and its facing is the latched "contact_event_facing". Fighters without that key are unchanged.
 # A set is validated and cached once per manifest path. Anything missing, malformed, unknown or partial rejects the whole set
 # (atomic): that fighter keeps the existing renderer, and the reason is kept in set_status().
 
@@ -37,6 +45,7 @@ const DISPLAY_PROPORTION := "0.65"
 const SUPPORTED_LOGICAL_SCALES := [1.0, 0.5]
 # Frame boundaries are compared with this slack, so 30 and 60 fps clocks pick the same frame at shared timestamps.
 const CLOCK_EPSILON := 0.000001
+const MAX_TICK_RATE := 1000
 
 static var _set_cache: Dictionary = {}
 static var _index_cache: Dictionary = {}
@@ -209,8 +218,21 @@ static func _validate(path: String, key: String) -> Dictionary:
 			return _fail("invalid_action")
 		if bool(entry["loop"]) != bool(all_modes[action]):
 			return _fail("invalid_mode")
+		var tick_rate := 0
+		if entry.has("tick_rate"):
+			if not _integer(entry["tick_rate"], 1, MAX_TICK_RATE):
+				return _fail("invalid_tick_rate")
+			tick_rate = int(entry["tick_rate"])
+		var loop_start := 0
+		if entry.has("loop_start"):
+			if not bool(entry["loop"]):
+				return _fail("invalid_loop_start")
+			if not _integer(entry["loop_start"], 0, entry["frames"].size() - 1):
+				return _fail("invalid_loop_start")
+			loop_start = int(entry["loop_start"])
 		var frames: Array[Dictionary] = []
 		var end_time := 0.0
+		var end_ticks := 0
 		for frame_data in entry["frames"]:
 			if not frame_data is Dictionary or not _integer(frame_data.get("cell"), 0, cell_count - 1):
 				return _fail("frame_out_of_range")
@@ -218,7 +240,11 @@ static func _validate(path: String, key: String) -> Dictionary:
 			if float(frame_data["cell"]) != float(cell_index) or cell_index < 0 or cell_index >= cell_count:
 				return _fail("frame_out_of_range")
 			var ms: Variant = frame_data.get("ms")
-			if not _integer(ms, 1, 2147483647):
+			if tick_rate > 0:
+				# Tick timing: integer ticks only; ms (or both) is rejected rather than mixed.
+				if frame_data.has("ms") or not _integer(frame_data.get("ticks"), 1, 2147483647):
+					return _fail("invalid_frame")
+			elif frame_data.has("ticks") or not _integer(ms, 1, 2147483647):
 				return _fail("invalid_frame")
 			var frame_pivot: Variant = pivot
 			if frame_data.has("pivot"):
@@ -232,9 +258,18 @@ static func _validate(path: String, key: String) -> Dictionary:
 				if image.get_region(Rect2i(origin, cell)).is_invisible():
 					return _fail("empty_frame")
 				empty_checked[cell_index] = true
-			end_time += int(ms) / 1000.0
+			if tick_rate > 0:
+				end_ticks += int(frame_data["ticks"])
+				end_time = float(end_ticks) / float(tick_rate)
+			else:
+				end_time += int(ms) / 1000.0
 			frames.append({"cell": cell_index, "origin": origin, "pivot": frame_pivot, "end": end_time})
 		actions[action] = {"loop": bool(entry["loop"]), "frames": frames, "duration": end_time, "source": action}
+		if tick_rate > 0:
+			actions[action]["tick_rate"] = tick_rate
+			actions[action]["duration_ticks"] = end_ticks
+		if loop_start > 0:
+			actions[action]["loop_start"] = loop_start
 	if not actions.has("skill"):
 		actions["skill"] = actions[SKILL_FALLBACK].duplicate()
 		actions["skill"]["source"] = SKILL_FALLBACK
@@ -269,7 +304,13 @@ static func frame_at(action: Dictionary, clock: float) -> int:
 	var frames: Array = action["frames"]
 	var duration: float = action["duration"]
 	var t := clock
-	if bool(action["loop"]):
+	var loop_start := int(action.get("loop_start", 0))
+	if bool(action["loop"]) and loop_start > 0:
+		# The intro plays once; afterwards the clock wraps inside [loop start time, duration).
+		var start_time: float = float(frames[loop_start - 1]["end"])
+		if clock + CLOCK_EPSILON >= duration:
+			t = start_time + fmod(clock - start_time + CLOCK_EPSILON, duration - start_time) - CLOCK_EPSILON
+	elif bool(action["loop"]):
 		t = fmod(clock + CLOCK_EPSILON, duration) - CLOCK_EPSILON
 	for index in frames.size():
 		if t + CLOCK_EPSILON < float(frames[index]["end"]):
@@ -298,7 +339,7 @@ func configure(path: String, keys: Array[String]) -> void:
 					loaded = {}
 		sets.append(loaded)
 		statuses.append(status)
-		states.append({"action": "", "clock": 0.0, "facing": int(loaded.get("facing", 1)), "last_visual_action": "", "last_visual_elapsed": 0.0, "last_dodge_time": 0.0})
+		states.append({"action": "", "clock": 0.0, "facing": int(loaded.get("facing", 1)), "last_visual_action": "", "last_visual_elapsed": 0.0, "last_dodge_time": 0.0, "last_event_id": 0})
 
 
 func has_set(index: int) -> bool:
@@ -331,6 +372,13 @@ func advance(index: int, fighter: Dictionary, alive: bool, enemy_x: float, delta
 	var dodge_time := float(fighter["dodge_time"])
 	# A new attack / hit / skill: the event action changed, or the same one restarted (its elapsed time went back).
 	var event := EVENT_ACTIONS.has(visual_action) and (visual_action != String(state["last_visual_action"]) or visual_elapsed < float(state["last_visual_elapsed"]))
+	# Explicit event clock: an attack is identified by its event id, so a same-frame restart is never missed or doubled.
+	var explicit := fighter.has("contact_event_id")
+	var event_id := int(fighter.get("contact_event_id", 0))
+	var event_active := explicit and bool(fighter.get("contact_event_active", false))
+	var explicit_new := event_active and event_id != int(state["last_event_id"])
+	if explicit and visual_action == "attack":
+		event = false
 	var current := String(state["action"])
 	var next := "idle"
 	var restart := false
@@ -339,9 +387,15 @@ func advance(index: int, fighter: Dictionary, alive: bool, enemy_x: float, delta
 	elif dodge_time > 0.0:
 		next = "dodge"
 		restart = dodge_time > float(state["last_dodge_time"]) and current == "dodge"
+	elif explicit_new or (event_active and current == "attack"):
+		next = "attack"
+		restart = explicit_new
 	elif event:
 		next = visual_action
 		restart = true
+	elif explicit and current == "attack":
+		# The explicit attack ended (recovery end) or was interrupted; it does not run on its own clock.
+		next = "guard" if bool(fighter["guard"]) else ("move" if bool(fighter["visual_moving"]) else "idle")
 	elif EVENT_ACTIONS.has(current) and float(state["clock"]) + delta + CLOCK_EPSILON < float(sprite_set["actions"][current]["duration"]):
 		# A one-shot plays to its own end unless defeat, a dodge or a new event cuts it.
 		next = current
@@ -352,11 +406,18 @@ func advance(index: int, fighter: Dictionary, alive: bool, enemy_x: float, delta
 	state["last_visual_action"] = visual_action
 	state["last_visual_elapsed"] = visual_elapsed
 	state["last_dodge_time"] = dodge_time
+	if explicit:
+		state["last_event_id"] = event_id
 	if restart or next != current:
 		state["action"] = next
 		state["clock"] = 0.0
 	else:
 		state["clock"] = float(state["clock"]) + delta
+	if explicit and next == "attack" and event_active:
+		state["clock"] = float(fighter.get("contact_event_clock", 0.0))
+		var latched := int(fighter.get("contact_event_facing", 0))
+		if latched != 0:
+			state["facing"] = latched
 
 
 # The frame a fighter shows now: {"action", "source", "frame", "cell", "pivot", "facing", "mirrored"}; empty without a set.
