@@ -4,7 +4,7 @@
   "title": "世界之间",
   "englishTitle": "Worlds Between",
   "edition": "设计基线 v0.2 · 2026-10-15 创作者决定",
-  "updatedAt": "2026-10-19T23:46:08.717456+00:00",
+  "updatedAt": "2026-10-20T18:38:04.676Z",
   "note": "规则以玩家确认的设计稿为基线，并已并入 2026-10-15 创作者决定；人物姓名与外观是待审提案，具体剧情留待后续设计。",
   "pitch": "从地下社区走出的旅人，以好奇心探索多元文明，招募伙伴，并成为不同世界认知差异的桥梁。",
   "pillars": [
@@ -4353,6 +4353,25 @@
       "runtimeDefaultChanged": false,
       "animationMade": false,
       "nextDecision": "Creator may accept or request changes to this one still baseline; no animation until that scope is accepted."
+    },
+    "currentStyleDirection": {
+      "recordedAt": "2026-10-20T18:10:26.112Z",
+      "exactCreatorAnswer": "sea of stars, that's the style we are going with",
+      "status": "direction-approved",
+      "referenceGame": "Sea of Stars",
+      "referenceUrl": "https://seaofstarsgame.co/",
+      "scope": "Character sprites: expressive stylized pixel art; original Worlds Between identities",
+      "brief": "docs/design/rpg-2-star-ocean-the-second_characters_sea-of-stars-style-direction_v01_20261020-181026-f5938409.md",
+      "productionOwner": "claude",
+      "inspectionOwner": "codex",
+      "acceptanceOwner": "creator",
+      "firstSubject": "protagonist-female",
+      "approvedAssetCountIncrease": 0,
+      "existingScalePreserved": {
+        "explorationLogicalHeight": 48,
+        "battleNodeScale": 0.65
+      },
+      "nextAction": "Reauthor the heroine static baseline using expressive proportions, readable silhouettes and controlled shading; inspect actual gameplay before presenting, then respect the combat-static approval gate."
     }
   },
   "environmentVisualReview": {
@@ -4842,9 +4861,9 @@
         }
       ],
       "currentCandidates": {
-        "asOf": "2026-10-19T23:46:08.717456+00:00",
-        "zh": "十二项当前候选；女主新增四方向正常游戏可选动作片，两个旧南向测试片移入历史。制作、检查、创作者批准独立，当前候选均未批准。",
-        "en": "Twelve current candidates; new normal-game four-direction heroine pilot replaces two old south-only tests. Production, inspection and creator approval remain separate; current candidates are unapproved.",
+        "asOf": "2026-10-20T18:38:04.676Z",
+        "zh": "13项当前候选；女主Sea of Stars方向两张新静止实机待验收。",
+        "en": "13 current candidates; two new Sea of Stars-direction heroine gameplay stills await scoped static review.",
         "scopedReferenceOrders": [
           1
         ],
@@ -4855,12 +4874,82 @@
           "docs/qa/rpg-2-star-ocean-the-second_female-battle-static_current-main-root-review_unapproved-v16_20261018-215100-b7bb8e10.md",
           "docs/qa/rpg-2-star-ocean-the-second_female-battle-static_creator-coarseness-rejection_v16_20261018-220102-1a4c22a8.md",
           "docs/qa/rpg-2-star-ocean-the-second_female-battle_root-production-closeout_v17r2_20261019-164412-1f3bff80.md",
-          "outputs/fexp-merged-v01/rpg-2-star-ocean-the-second_female-complete-explore_canonical-integration-qa_unapproved-v01_20261019-233439-bc8a3150.md"
+          "outputs/fexp-merged-v01/rpg-2-star-ocean-the-second_female-complete-explore_canonical-integration-qa_unapproved-v01_20261019-233439-bc8a3150.md",
+          "docs/qa/rpg-2-star-ocean-the-second_heroine-sea_battle-static-root-closeout_v01_20261020-182831-69f29955.md",
+          "docs/qa/rpg-2-star-ocean-the-second_heroine-sea_exploration-static-visual-review_v01_20261020-182420-1d4edf96.md"
         ],
         "items": [
           {
-            "id": "current-global-map-v03r2",
+            "id": "current-heroine-sea-battle-static-v01",
             "rank": 1,
+            "kind": "actual-godot-capture",
+            "label": {
+              "zh": "女主 · Sea of Stars方向 · 战斗静止实机",
+              "en": "Heroine · Sea of Stars direction · battle static in game"
+            },
+            "caption": {
+              "zh": "最左侧女主的新静止外观；清晰头发、面部与色块，保留原显示比例。其他队员仍是旧占位图。仅请求女主静止外观验收。",
+              "en": "New static heroine at far left, with clearer hair/face shapes and controlled shading at the existing display proportion. Other party members remain legacy placeholders. Review heroine static appearance only."
+            },
+            "file": "outputs/hero-sea-v01/root-20261020-182710-dd45d8bd/rpg-2-star-ocean-the-second_heroine-battle-sea-v01-ci1280-outskirts-en-injected_test-only_20261020-182710-dd45d8bd.png",
+            "scope": {
+              "zh": "仅女主静止外观，不含动作、其他角色、环境或完整精灵；尚未批准。",
+              "en": "Heroine static appearance only; excludes motion, other characters, environments and complete sprites. Unapproved."
+            },
+            "creatorApproved": false,
+            "artAccepted": false,
+            "runtimeIntegrated": false,
+            "testOnly": true,
+            "technicalCandidate": true,
+            "readyForCreatorReview": true,
+            "badge": {
+              "zh": "Sea of Stars方向 · 静止帧待验收",
+              "en": "Sea of Stars direction · static approval pending",
+              "tone": "warn"
+            },
+            "qa": "docs/qa/rpg-2-star-ocean-the-second_heroine-sea_battle-static-root-closeout_v01_20261020-182831-69f29955.md",
+            "hashPinnedIn": "d5cfb11e9c7f576ad39c39c238f3f94a4408879d",
+            "syncState": "committed-at-d5cfb11",
+            "gitBlob": "62e7ff816bb41b2ec76a99d29a5063c643e51c44",
+            "sha256": "9cb3874350792c3d04114b40453d72ac54d5d8661aaa2ae4740698ec7f83f1fe"
+          },
+          {
+            "id": "current-heroine-sea-exploration-static-v01",
+            "rank": 2,
+            "kind": "actual-godot-capture",
+            "label": {
+              "zh": "女主 · Sea of Stars方向 · 探索静止实机",
+              "en": "Heroine · Sea of Stars direction · exploration static in game"
+            },
+            "caption": {
+              "zh": "新南向静止外观，保持48逻辑像素身高。源自独立生成图并转为原生像素候选；动作、其他方向及完整精灵未验收。",
+              "en": "New south-facing static at the existing48-logical-pixel height. Generated source adapted into a native pixel candidate; motion, other directions and full sprites are not accepted."
+            },
+            "file": "outputs/hero-sea-exp-v01/capture-20261020-182023-3f2b9c9b/rpg-2-star-ocean-the-second_heroine-sea_exploration-city-bright-en-sea1280_test-only-v01_20261020-142025-f86a9397.png",
+            "scope": {
+              "zh": "仅女主静止外观，不含动作、其他角色、环境或完整精灵；尚未批准。",
+              "en": "Heroine static appearance only; excludes motion, other characters, environments and complete sprites. Unapproved."
+            },
+            "creatorApproved": false,
+            "artAccepted": false,
+            "runtimeIntegrated": false,
+            "testOnly": true,
+            "technicalCandidate": true,
+            "readyForCreatorReview": true,
+            "badge": {
+              "zh": "Sea of Stars方向 · 静止帧待验收",
+              "en": "Sea of Stars direction · static approval pending",
+              "tone": "warn"
+            },
+            "qa": "docs/qa/rpg-2-star-ocean-the-second_heroine-sea_exploration-static-visual-review_v01_20261020-182420-1d4edf96.md",
+            "hashPinnedIn": "d5cfb11e9c7f576ad39c39c238f3f94a4408879d",
+            "syncState": "committed-at-d5cfb11",
+            "gitBlob": "12ed52b67825f5ecc9e9b418ab21a1213ef4af0d",
+            "sha256": "7fed9db978070c4d547c26d1af083b6f185b66ef1fbceda390c6815f26929c9b"
+          },
+          {
+            "id": "current-global-map-v03r2",
+            "rank": 3,
             "kind": "actual-godot-capture",
             "label": {
               "zh": "世界地图 v03r2 · 芝加哥航班卡（中文）",
@@ -4899,7 +4988,7 @@
             "creatorApproved": false,
             "artAccepted": false,
             "id": "current-yonkers-antenna-room1-v07",
-            "rank": 2,
+            "rank": 4,
             "label": {
               "zh": "扬克斯天线走廊1号房 v07 · 结构与材质候选",
               "en": "Yonkers antenna walkway room1 v07, structural/material candidate"
@@ -4935,44 +5024,8 @@
             "kind": "actual-godot-capture",
             "creatorApproved": false,
             "artAccepted": false,
-            "id": "current-battle-heroine-static-v17r2",
-            "rank": 3,
-            "label": {
-              "zh": "战斗女主朝右静止帧v17r2 · 当前队列1280实机（英文，女主最左）",
-              "en": "Battle heroine right still v17r2, current party1280 gameplay (en, heroine far left)"
-            },
-            "file": "outputs/battle-static-v17r2/root-default-v02-20261019-164412-1f3bff80/rpg-2-star-ocean-the-second_female-battle-v17r2-ci1280-default-en-injected_test-only_20261019-164412-1f3bff80.png",
-            "runtimeIntegrated": false,
-            "technicalCandidate": true,
-            "approvedScopeOnly": "0.65 battle display proportion",
-            "scope": {
-              "zh": "只审这一张战斗静止帧；实际1280×720窗口保留更细的原生136×144像素，逻辑人物范围与已批准显示比例不变。点击原图查看；640缩小显示会丢面部细节。不是动画、完整精灵或默认替换。",
-              "en": "One battle still only; actual1280x720 backing preserves the finer native136x144 pixels, keeping logical extent and approved display proportion. Open native image;640display loses face detail. Not animation, a full sprite or default replacement."
-            },
-            "supersedesCurrentIds": [
-              "current-battle-heroine-static-v16"
-            ],
-            "badge": {
-              "zh": "未批准 · 技术静止候选 · 未接入运行时（美术未验收）",
-              "en": "Unapproved · technical static candidate · nonruntime (art not accepted)",
-              "tone": "warn"
-            },
-            "caption": {
-              "zh": "面部沿用清理后的v17r1，衣袖、腰部、衣摆与靴子完成一次整体修整。root独立检查399面部像素在四张实机图中完整保留；剑尖仍被伙伴遮挡，姿势偏僵硬。Pixelorama导出精确但应用诊断/GUI可靠性仍未解决。未批准。",
-              "en": "Cleaned v17r1 face retained; sleeve, waist, coat tail and boots finished in one pass. Root verifies all399face texels survive four gameplay captures. Blade tip still overlaps a companion and pose is stiff. Pixelorama exports exact but application diagnostics/GUI reliability remain unresolved. Unapproved."
-            },
-            "qa": "docs/qa/rpg-2-star-ocean-the-second_female-battle_root-production-closeout_v17r2_20261019-164412-1f3bff80.md",
-            "closeoutId": "battle-still-v17r2-20261019-164412-1f3bff80",
-            "syncState": "committed-at-6d41f00",
-            "gitBlob": "d3d9982854dd06bdfbf71bfcce985b8a0c9693a7",
-            "sha256": "f7efe44b6c12e58d326dfe9b59385372ecd69dcb9c620cbe4e6f0a3e2a63f63b"
-          },
-          {
-            "kind": "actual-godot-capture",
-            "creatorApproved": false,
-            "artAccepted": false,
             "id": "current-wdc-capitol-west-exterior-v13-flag",
-            "rank": 4,
+            "rank": 5,
             "label": {
               "zh": "华盛顿国会西侧外景 v13 · 中文入口（正常游戏中的可选开关）",
               "en": "Washington Capitol west exterior v13, zh entry (opt-in flag in the normal game)"
@@ -5009,7 +5062,7 @@
             "creatorApproved": false,
             "artAccepted": false,
             "id": "current-wdc-annex-records-room2-v01",
-            "rank": 5,
+            "rank": 6,
             "label": {
               "zh": "华盛顿勘察附楼 2 号房 记录室 v01 · 中文入口（选择性开启）",
               "en": "Washington annex room 2 records chamber v01, zh entry (opt-in)"
@@ -5039,7 +5092,7 @@
           },
           {
             "id": "current-chicago-state-lake-v06",
-            "rank": 6,
+            "rank": 7,
             "kind": "actual-godot-capture",
             "label": {
               "zh": "芝加哥 State/Lake v06 · 材质修订与抵达实机图",
@@ -5079,7 +5132,7 @@
             "kind": "actual-godot-capture",
             "mediaType": "video/mp4",
             "id": "current-heroine-complete-exploration-v03",
-            "rank": 7,
+            "rank": 8,
             "label": {
               "zh": "女主四方向探索 v03 · 正常游戏 60fps 1×（可选开关）",
               "en": "Heroine four-direction exploration v03, normal game60fps1x (opt-in)"
@@ -5144,7 +5197,7 @@
             "creatorApproved": false,
             "artAccepted": false,
             "id": "current-heroine-north-idle-static-v01",
-            "rank": 8,
+            "rank": 9,
             "label": {
               "zh": "女主朝北待机静止帧 v01 · 明亮城市（设计候选）",
               "en": "Heroine north idle static v01, city-bright (design candidate)"
@@ -5187,7 +5240,7 @@
             "creatorApproved": false,
             "artAccepted": false,
             "id": "current-male-south-idle-static-v8pair-v01",
-            "rank": 9,
+            "rank": 10,
             "label": {
               "zh": "男主朝南待机静止帧 v8pair v01 · 明亮城市（英文界面，与女主 v8 并列）",
               "en": "Male protagonist south idle static v8pair v01, city-bright (en UI, beside female v8)"
@@ -5219,7 +5272,7 @@
             "creatorApproved": false,
             "artAccepted": false,
             "id": "current-ji-cheng-south-idle-static-v01",
-            "rank": 10,
+            "rank": 11,
             "label": {
               "zh": "纪澄朝南待机静止帧 v01 · 暗色附楼（英文界面，与女主 v8 并列）",
               "en": "Ji Cheng south idle static v01, dark annex (en UI, beside female v8)"
@@ -5248,7 +5301,7 @@
           },
           {
             "id": "current-heroine-idle-four-v01-30fps",
-            "rank": 11,
+            "rank": 12,
             "kind": "actual-godot-capture",
             "mediaType": "video/mp4",
             "label": {
@@ -5305,7 +5358,7 @@
           },
           {
             "id": "current-heroine-idle-four-v01-60fps",
-            "rank": 12,
+            "rank": 13,
             "kind": "actual-godot-capture",
             "mediaType": "video/mp4",
             "label": {
@@ -5949,6 +6002,55 @@
             "supersededAt": "2026-10-19T23:46:08.717456+00:00",
             "supersededBy": "current-heroine-complete-exploration-v03",
             "supersededReason": "Combined normal-CLI runtime pilot includes the same SOUTHart/cadence plus actual other-direction models; old single-direction tests remain historical."
+          },
+          {
+            "kind": "actual-godot-capture",
+            "creatorApproved": false,
+            "artAccepted": false,
+            "id": "current-battle-heroine-static-v17r2",
+            "rank": 3,
+            "label": {
+              "zh": "战斗女主朝右静止帧v17r2 · 当前队列1280实机（英文，女主最左）",
+              "en": "Battle heroine right still v17r2, current party1280 gameplay (en, heroine far left)"
+            },
+            "file": "outputs/battle-static-v17r2/root-default-v02-20261019-164412-1f3bff80/rpg-2-star-ocean-the-second_female-battle-v17r2-ci1280-default-en-injected_test-only_20261019-164412-1f3bff80.png",
+            "runtimeIntegrated": false,
+            "technicalCandidate": true,
+            "approvedScopeOnly": "0.65 battle display proportion",
+            "scope": {
+              "zh": "只审这一张战斗静止帧；实际1280×720窗口保留更细的原生136×144像素，逻辑人物范围与已批准显示比例不变。点击原图查看；640缩小显示会丢面部细节。不是动画、完整精灵或默认替换。",
+              "en": "One battle still only; actual1280x720 backing preserves the finer native136x144 pixels, keeping logical extent and approved display proportion. Open native image;640display loses face detail. Not animation, a full sprite or default replacement."
+            },
+            "supersedesCurrentIds": [
+              "current-battle-heroine-static-v16"
+            ],
+            "badge": {
+              "zh": "创作者要求精修 · 未批准",
+              "en": "Changes requested by creator · unapproved",
+              "tone": "warn"
+            },
+            "caption": {
+              "zh": "该版已退回精修。下一版需改变实际显示尺寸下面部辨识的处理方法；静止帧未批准前不制作女主战斗动作。",
+              "en": "Returned for refinement. Next pass changes the face/readability method at actual display size; female battle motion stays gated on static approval."
+            },
+            "qa": "docs/qa/rpg-2-star-ocean-the-second_female-battle_root-production-closeout_v17r2_20261019-164412-1f3bff80.md",
+            "closeoutId": "battle-still-v17r2-20261019-164412-1f3bff80",
+            "syncState": "committed-at-6d41f00",
+            "gitBlob": "d3d9982854dd06bdfbf71bfcce985b8a0c9693a7",
+            "sha256": "f7efe44b6c12e58d326dfe9b59385372ecd69dcb9c620cbe4e6f0a3e2a63f63b",
+            "creatorDecision": {
+              "at": "2026-10-20T00:29:14.302117+00:00",
+              "status": "changes_requested",
+              "imageVisibilityConfirmed": true,
+              "exactAnswer": "继续精修脸部或画质",
+              "scope": "One female battle static frame only; not animation/other characters/environment",
+              "workingDisplayLink": "https://github.com/ConsAccompany/Worlds-Between/blob/6d41f0096654b2c46feb651de44e21b6211822ae/outputs/battle-static-v17r2/root-default-v02-20261019-164412-1f3bff80/rpg-2-star-ocean-the-second_female-battle-v17r2-ci1280-default-en-injected_test-only_20261019-164412-1f3bff80.png"
+            },
+            "readyForCreatorReview": false,
+            "supersededReason": {
+              "zh": "创作者确认图片可见后要求继续精修脸部或画质，退出待验收队列。",
+              "en": "Creator confirmed image visible then requested further face/art refinement; removed from the ready review queue."
+            }
           }
         ],
         "syncStateRule": "committed-at-<7-hex> names the commit that first added the exact file; gitBlob is that file at that commit and sha256 is its bytes."
@@ -6303,6 +6405,25 @@
         "docs/qa/rpg-2-star-ocean-the-second_progression-ten-node_science-mvp-rules-slice_qa-note_unapproved-v01_20261016-005300-e36e5d2c.md",
         "docs/qa/rpg-2-star-ocean-the-second_progression-ten-node_science-mvp-integration-sync_qa-note_unapproved-v01_20261016-034534-9c77a9cb.md"
       ]
+    },
+    "spriteStyleDirection": {
+      "recordedAt": "2026-10-20T18:10:26.112Z",
+      "exactCreatorAnswer": "sea of stars, that's the style we are going with",
+      "status": "direction-approved",
+      "referenceGame": "Sea of Stars",
+      "referenceUrl": "https://seaofstarsgame.co/",
+      "scope": "Character sprites: expressive stylized pixel art; original Worlds Between identities",
+      "brief": "docs/design/rpg-2-star-ocean-the-second_characters_sea-of-stars-style-direction_v01_20261020-181026-f5938409.md",
+      "productionOwner": "claude",
+      "inspectionOwner": "codex",
+      "acceptanceOwner": "creator",
+      "firstSubject": "protagonist-female",
+      "approvedAssetCountIncrease": 0,
+      "existingScalePreserved": {
+        "explorationLogicalHeight": 48,
+        "battleNodeScale": 0.65
+      },
+      "nextAction": "Reauthor the heroine static baseline using expressive proportions, readable silhouettes and controlled shading; inspect actual gameplay before presenting, then respect the combat-static approval gate."
     }
   },
   "audioProduction": {
@@ -6566,5 +6687,84 @@
     ],
     "integratedCommit": "92a9f9443b7a46a28b6f159ea48c84e528065e9b",
     "rootVisualInspection": "Viewed separate actual640clearplaza north/south moving poses; full actor visible and no obvious missing body parts in these samples. Not a continuous-motion/fluidity verdict."
+  },
+  "latestFemaleBattleStaticCreatorDecision": {
+    "at": "2026-10-20T00:29:14.302117+00:00",
+    "version": "v17r2",
+    "status": "changes_requested",
+    "visibilityInitiallyFailed": true,
+    "visibilityConfirmedAfterGithubBlobLink": true,
+    "exactAnswer": "继续精修脸部或画质",
+    "unchangedApprovedScope": "battle display proportion0.65 only",
+    "nextAction": "Reauthor readable head/face identity and coherent static at protected extent, using approved v8 exploration identity reference; no new texel-count-only pass, no battle motion before approval.",
+    "baseProductionCreditRetained": true,
+    "sameFixedRevisionBucketReopened": true
+  },
+  "latestPatrolAnimationProduction": {
+    "at": "2026-10-20T00:29:14.302117+00:00",
+    "commit": "bcec9de48413c0136c2025bc920f14e5ed79fca0",
+    "task": "content.enemy.patrol.battle-animation",
+    "producer": "claude",
+    "independentInspector": "codex",
+    "nativeFrames": 24,
+    "nativeLayers": 7,
+    "states": [
+      "idle",
+      "move",
+      "windup",
+      "strike",
+      "hit",
+      "defeat"
+    ],
+    "runtimeIntegrated": true,
+    "optInOnly": true,
+    "defaultOff": true,
+    "creatorApproved": false,
+    "artAccepted": false,
+    "actualVisibleDefeatFramesPerLanguage": 45,
+    "normalMovie": "outputs/patrol-victory-v01/rpg-2-star-ocean-the-second_patrol_native-visible-defeat_v01_20261019-201644-86ca79af.mp4",
+    "qa": "docs/qa/rpg-2-star-ocean-the-second_patrol_canonical-native-and-visible-battle-closeout_v01_20261020-002601-cdd87b66.md",
+    "limitations": [
+      "Pixelorama flattened alpha rounding and shader diagnostics remain; no GUI reliability claim.",
+      "Normal party kills Patrol before first strike; held supplementary clips explicitly test-only.",
+      "Native visible-defeat movie is fixed60game-time, not wall-clock performance or fluidity acceptance."
+    ]
+  },
+  "latestCharacterUiPortraitProduction": {
+    "at": "2026-10-20T00:29:14.302117+00:00",
+    "commit": "bcec9de48413c0136c2025bc920f14e5ed79fca0",
+    "task": "content.ui-visual.character-portraits",
+    "initialProducer": "deepseek",
+    "completionOwner": "codex",
+    "variants": 5,
+    "wholeHeadIcons": 5,
+    "originalDisplayPortraitsUnchanged": true,
+    "sourceArt": "existing unapproved AI concept crops, no new identity/canon",
+    "runtimeIntegrated": true,
+    "optInOnly": true,
+    "defaultOff": true,
+    "creatorApproved": false,
+    "artAccepted": false,
+    "qa": "docs/qa/rpg-2-star-ocean-the-second_character-ui-portraits_canonical-combined-closeout_v02_20261020-002601-cdd87b66.md",
+    "normalSuitePredicates": 604,
+    "packagePredicates": 111,
+    "packedCombinedPassed": true
+  },
+  "latestHeroineSeaOfStarsStylePilot": {
+    "recordedAt": "2026-10-20T18:38:04.676Z",
+    "status": "produced-and-independently-inspected-static-candidates",
+    "sourceCommit": "d5cfb11e9c7f576ad39c39c238f3f94a4408879d",
+    "battleCapture": "outputs/hero-sea-v01/root-20261020-182710-dd45d8bd/rpg-2-star-ocean-the-second_heroine-battle-sea-v01-ci1280-outskirts-en-injected_test-only_20261020-182710-dd45d8bd.png",
+    "explorationCapture": "outputs/hero-sea-exp-v01/capture-20261020-182023-3f2b9c9b/rpg-2-star-ocean-the-second_heroine-sea_exploration-city-bright-en-sea1280_test-only-v01_20261020-142025-f86a9397.png",
+    "qa": [
+      "docs/qa/rpg-2-star-ocean-the-second_heroine-sea_battle-static-root-closeout_v01_20261020-182831-69f29955.md",
+      "docs/qa/rpg-2-star-ocean-the-second_heroine-sea_exploration-static-visual-review_v01_20261020-182420-1d4edf96.md"
+    ],
+    "sourceMethod": "Built-in image_gen masters + deterministic native palette/cluster adaptation; editable flat-image slices, not fully painted occluded anatomy",
+    "artApproved": false,
+    "motionApproved": false,
+    "defaultChanged": false,
+    "nativeAppDiagnosticsClean": false,
+    "nextAction": "Show actual gameplay stills and request static appearance approval before new combat animation."
   }
 }

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-19T23:03:25.537744+00:00",
+  "updatedAt": "2026-10-20T18:38:04.676Z",
   "definition": "A check means that the specific asset has been accepted for its stated purpose. Source character sheets, in-game displays, exploration sprites, combat sprites and scene quality have separate acceptance gates.",
   "categories": [
     {
@@ -625,10 +625,12 @@
               "name": "队伍头像与对话立绘裁切",
               "scope": "MVP",
               "target": 4,
-              "stage": "planned",
+              "stage": "production",
               "checked": false,
-              "note": "",
-              "file": null
+              "note": "五个既有概念裁切版本的完整头部图标及对话立绘已制作并可选接入；技术检查通过，美术/正典未批准。",
+              "file": "https://raw.githubusercontent.com/ConsAccompany/Worlds-Between/bcec9de48413c0136c2025bc920f14e5ed79fca0/outputs/ui-root-v02/rpg-2-star-ocean-the-second_character-ui_growth-pilot-en-640_capture_640x360_v01_20261020-001810-4a69a641.png",
+              "producedVariants": 5,
+              "productionCommit": "bcec9de48413c0136c2025bc920f14e5ed79fca0"
             },
             {
               "id": "character-ui.relationships",
@@ -2259,8 +2261,9 @@
               "target": 2,
               "stage": "production",
               "checked": false,
-              "note": "巡逻机与防卫机已可战斗；正式逐帧动画待制作",
-              "file": "/assets/rpg-2-star-ocean-the-second_scifi-sentry_battle-visual-proof_m3_20261013-201830-6ee1e4e4.png"
+              "note": "巡逻机械24帧/7层与Sentry既有21帧可编辑来源已制作；均为可选候选，默认未替换，美术和动作未正式验收。",
+              "file": "https://raw.githubusercontent.com/ConsAccompany/Worlds-Between/bcec9de48413c0136c2025bc920f14e5ed79fca0/outputs/patrol-victory-v01/rpg-2-star-ocean-the-second_patrol_visible-defeat-zh_v01_20261019-201644-86ca79af.png",
+              "productionCommit": "bcec9de48413c0136c2025bc920f14e5ed79fca0"
             },
             {
               "id": "enemy.board",
@@ -2768,5 +2771,22 @@
         }
       ]
     }
-  ]
+  ],
+  "latestHeroineSpriteStylePilot": {
+    "recordedAt": "2026-10-20T18:38:04.676Z",
+    "status": "produced-and-independently-inspected-static-candidates",
+    "sourceCommit": "d5cfb11e9c7f576ad39c39c238f3f94a4408879d",
+    "battleCapture": "outputs/hero-sea-v01/root-20261020-182710-dd45d8bd/rpg-2-star-ocean-the-second_heroine-battle-sea-v01-ci1280-outskirts-en-injected_test-only_20261020-182710-dd45d8bd.png",
+    "explorationCapture": "outputs/hero-sea-exp-v01/capture-20261020-182023-3f2b9c9b/rpg-2-star-ocean-the-second_heroine-sea_exploration-city-bright-en-sea1280_test-only-v01_20261020-142025-f86a9397.png",
+    "qa": [
+      "docs/qa/rpg-2-star-ocean-the-second_heroine-sea_battle-static-root-closeout_v01_20261020-182831-69f29955.md",
+      "docs/qa/rpg-2-star-ocean-the-second_heroine-sea_exploration-static-visual-review_v01_20261020-182420-1d4edf96.md"
+    ],
+    "sourceMethod": "Built-in image_gen masters + deterministic native palette/cluster adaptation; editable flat-image slices, not fully painted occluded anatomy",
+    "artApproved": false,
+    "motionApproved": false,
+    "defaultChanged": false,
+    "nativeAppDiagnosticsClean": false,
+    "nextAction": "Show actual gameplay stills and request static appearance approval before new combat animation."
+  }
 }

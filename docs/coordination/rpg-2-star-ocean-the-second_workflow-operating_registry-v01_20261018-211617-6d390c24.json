@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-19T23:41:57.625623+00:00",
+  "updatedAt": "2026-10-20T18:38:04.676Z",
   "purpose": "Operating queue and worktree ownership; no progress points or account details",
   "workflow": "docs/workflow.md",
   "canonicalLedger": "outputs/rpg-2-star-ocean-the-second_production-completion_task-ledger_v01_20261018-140533-3de52073.json",
@@ -957,43 +957,58 @@
   },
   "nextDispatchPreferences": [
     {
-      "task": "content.enemy.patrol.battle-animation",
+      "task": "content.combat.protagonist-female.combat-static.revision",
       "preferredProducer": "claude",
-      "status": "active",
-      "reason": "Complex mechanical motion and native editable pixel implementation."
+      "status": "awaiting-creator-static-baseline",
+      "reason": "New Sea of Stars-direction still delivered; no battle animation before static approval."
     },
     {
-      "task": "content.ui-visual.character-portraits",
+      "task": "content.scene.battle-arena.wiring",
       "preferredProducer": "deepseek",
-      "status": "active",
-      "reason": "Bounded exact-source image crops, package validation and predictable UI layout."
+      "status": "blocked-unfiltered-diagnostic",
+      "reason": "DeepSeek v03 preserves ERROR diagnostic; source/cooldown correction is local and no gate credit awarded."
     }
   ],
   "activeDualProviderBatch": {
     "primary": {
-      "task": "content.enemy.patrol.battle-animation",
+      "task": "content.combat.protagonist-female.combat-static.revision",
       "owner": "claude",
-      "workspace": "work/dual03/cl-patrol",
-      "status": "active",
-      "scope": "One complete editable mechanical Patrol animation candidate and optional battle hookup; no simulation/default changes."
+      "status": "produced-awaiting-creator-static-review",
+      "sourceCommit": "d5cfb11e9c7f576ad39c39c238f3f94a4408879d",
+      "evidence": "docs/qa/rpg-2-star-ocean-the-second_heroine-sea_battle-static-root-closeout_v01_20261020-182831-69f29955.md",
+      "scope": "Sea of Stars sprite direction; heroine static only, no motion/defaults"
     },
     "supporting": [
       {
-        "task": "content.ui-visual.character-portraits",
+        "task": "content.scene.battle-arena.wiring",
         "owner": "deepseek",
-        "workspace": "work/dual03/ds-ui-portraits",
-        "status": "active",
-        "scope": "Exact-source MVP party icons and dialogue crops; only growth/dialogue/helper and own asset files."
+        "status": "blocked-pending-independent-host-diagnostic-check",
+        "scope": "Localv03 corrected natural-timing verification; ERROR diagnostic remains, no completion credit."
+      },
+      {
+        "task": "content.char.protagonist-female.static-south",
+        "owner": "codex",
+        "status": "produced-awaiting-static-review",
+        "evidence": "docs/qa/rpg-2-star-ocean-the-second_heroine-sea_exploration-static-visual-review_v01_20261020-182420-1d4edf96.md",
+        "scope": "Sea of Stars-direction south static at unchanged48logicalpixels; existing production credit retained."
       }
     ],
     "integrationOwner": "codex",
-    "status": "active",
+    "status": "primary-delivered-review-pending",
     "previousVerifiedCompletion": {
-      "task": "support.character.female.complete-exploration-runtime",
-      "qa": "outputs/fexp-merged-v01/rpg-2-star-ocean-the-second_female-complete-explore_canonical-integration-qa_unapproved-v01_20261019-233439-bc8a3150.md",
-      "status": "technical verification complete; selective sync pending",
-      "productionCredit": 0,
-      "perFramePerformanceCorrection": "Old process monitor was a one-second maximum. Current measured frame process P95 about3.1–3.5ms on this machine; no universal60fps claim."
+      "commit": "d5cfb11e9c7f576ad39c39c238f3f94a4408879d",
+      "tasks": [
+        "content.combat.protagonist-female.combat-static.revision",
+        "content.char.protagonist-female.static-south"
+      ],
+      "artApprovalChanged": false
     }
+  },
+  "characterSpriteStyleDirection": {
+    "reference": "Sea of Stars",
+    "status": "creator-approved-direction-only",
+    "brief": "docs/design/rpg-2-star-ocean-the-second_characters_sea-of-stars-style-direction_v01_20261020-181026-f5938409.md",
+    "firstSubject": "protagonist-female",
+    "noBatchExpansionBeforeRepresentativeSet": true
   }
 }

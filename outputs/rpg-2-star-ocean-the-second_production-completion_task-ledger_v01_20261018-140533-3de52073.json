@@ -2,7 +2,7 @@
   "id": "rpg-2-star-ocean-the-second_production-completion_v01",
   "schemaVersion": 2,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-19T23:36:15Z",
+  "updatedAt": "2026-10-20T18:37:19Z",
   "zh": "制作完成度任务台账：衡量已完成的工作量（编码 40% + 内容 60%）；检查／审查与创作者批准分开计量，均不改变制作分；免除的审查不算已执行的工作；运营任务列出负责方但不计百分比。",
   "en": "Production-completion task ledger: measures work done (coding 40% + content 60%); inspection/review and creator approval are separate meters and never change production credit; waived reviews are not performed work; operations tasks list owners but carry no percentage.",
   "brief": "docs/rpg-2-star-ocean-the-second_production-completion_bilingual-brief_v01_20261018-140533-3ea2a621.md",
@@ -628,6 +628,54 @@
         },
         "previousTaskSetSha256": "65850053b433df57188060e5d9fcc64332681ef797377cc002b06c6d3be68f02",
         "taskSetSha256": "e886947b7ea29fde35a0c7a6a91a25e32dffdc4b633114fe0d8a707e918abeee"
+      },
+      {
+        "at": "2026-10-20T00:06:40Z",
+        "kind": "owner-assignment",
+        "taskId": "content.ui-visual.character-portraits",
+        "fromOwner": "deepseek",
+        "toOwner": "codex",
+        "changedTaskIds": [
+          "content.ui-visual.character-portraits"
+        ],
+        "reason": {
+          "zh": "",
+          "en": "DeepSeek bounded build deadline reached without completion; Codex takes over concrete validation/layout defects and unfiltered normal-game verification. No quota or credit failure."
+        },
+        "previousTaskSetSha256": "e886947b7ea29fde35a0c7a6a91a25e32dffdc4b633114fe0d8a707e918abeee",
+        "taskSetSha256": "bee0913429f9ddd681100307d92f7e5230ecee12565f01f85a94d5a0fa1c6a9b"
+      },
+      {
+        "at": "2026-10-20T00:07:26Z",
+        "kind": "owner-assignment",
+        "taskId": "content.scene.battle-arena.wiring",
+        "fromOwner": "claude",
+        "toOwner": "deepseek",
+        "changedTaskIds": [
+          "content.scene.battle-arena.wiring"
+        ],
+        "reason": {
+          "zh": "",
+          "en": "Bounded actual battle entry, boundaries, return and save verification suited to DeepSeek; root independently validates combined canonical path."
+        },
+        "previousTaskSetSha256": "bee0913429f9ddd681100307d92f7e5230ecee12565f01f85a94d5a0fa1c6a9b",
+        "taskSetSha256": "6c22923cdc5bb0983c72f1133d2106715861ed61a79c82227b40aab476028c3c"
+      },
+      {
+        "at": "2026-10-20T00:28:20Z",
+        "kind": "owner-assignment",
+        "taskId": "qa.enemy.patrol.check",
+        "fromOwner": "claude",
+        "toOwner": "codex",
+        "changedTaskIds": [
+          "qa.enemy.patrol.check"
+        ],
+        "reason": {
+          "zh": "",
+          "en": "Independent Codex source/native/frame/combat/parity and actual normal/PCK verification completed, including loader and defeat-visibility repairs."
+        },
+        "previousTaskSetSha256": "6c22923cdc5bb0983c72f1133d2106715861ed61a79c82227b40aab476028c3c",
+        "taskSetSha256": "b4cc78618fc20eda752df336c186ebe9bfd8b863eef92851a10ec0e62b9e96b7"
       }
     ],
     "pointsByStage": {
@@ -660,8 +708,8 @@
     "production": {
       "zh": "制作完成度",
       "en": "Production completion",
-      "percent": 53,
-      "percentLabel": "53.0%",
+      "percent": 53.2,
+      "percentLabel": "53.2%",
       "formula": "round1(40 * codingDonePoints/codingTotalPoints + 60 * contentDonePoints/contentTotalPoints)",
       "coding": {
         "done": 111,
@@ -672,24 +720,24 @@
         "tasksDone": 23
       },
       "content": {
-        "done": 406,
+        "done": 415,
         "total": 1881,
-        "percent": 21.6,
+        "percent": 22.1,
         "weight": 60,
         "tasks": 715,
-        "tasksDone": 133
+        "tasksDone": 135
       }
     },
     "inspection": {
       "zh": "检查与审查（已执行的）",
       "en": "Inspection and review (performed)",
-      "done": 28,
+      "done": 29,
       "total": 204,
-      "percent": 13.7,
+      "percent": 14.2,
       "technical": {
-        "done": 14,
+        "done": 15,
         "total": 77,
-        "percent": 18.2
+        "percent": 19.5
       },
       "visual": {
         "done": 14,
@@ -742,20 +790,20 @@
         "waivedPoints": 0
       },
       "content": {
-        "done": 406,
+        "done": 415,
         "total": 1881,
-        "percent": 21.6,
+        "percent": 22.1,
         "tasks": 715,
-        "tasksDone": 133,
+        "tasksDone": 135,
         "waivedTasks": 0,
         "waivedPoints": 0
       },
       "technical-inspection": {
-        "done": 14,
+        "done": 15,
         "total": 77,
-        "percent": 18.2,
+        "percent": 19.5,
         "tasks": 73,
-        "tasksDone": 12,
+        "tasksDone": 13,
         "waivedTasks": 0,
         "waivedPoints": 0
       },
@@ -798,14 +846,13 @@
     },
     "byOwner": {
       "claude": {
-        "tasks": 732,
+        "tasks": 730,
         "operationsTasks": 0,
-        "points": 1916,
-        "pointsDone": 381,
+        "points": 1912,
+        "pointsDone": 387,
         "byStatus": {
-          "done": 90,
-          "todo": 641,
-          "in_progress": 1
+          "done": 91,
+          "todo": 639
         },
         "readyInQueue": 0,
         "revisionsBlockingApproval": 2
@@ -823,16 +870,16 @@
         "revisionsBlockingApproval": 0
       },
       "codex": {
-        "tasks": 202,
+        "tasks": 204,
         "operationsTasks": 2,
-        "points": 249,
-        "pointsDone": 136,
+        "points": 253,
+        "pointsDone": 140,
         "byStatus": {
-          "done": 85,
+          "done": 87,
           "todo": 113,
           "not_required": 4
         },
-        "readyInQueue": 1,
+        "readyInQueue": 3,
         "revisionsBlockingApproval": 1
       },
       "creator": {
@@ -844,7 +891,7 @@
           "done": 17,
           "todo": 222
         },
-        "readyInQueue": 60,
+        "readyInQueue": 61,
         "revisionsBlockingApproval": 0
       }
     },
@@ -931,11 +978,11 @@
       },
       "enemies": {
         "content": {
-          "done": 10,
+          "done": 16,
           "total": 20
         },
         "technical-inspection": {
-          "done": 1,
+          "done": 2,
           "total": 2
         },
         "visual-review": {
@@ -995,7 +1042,7 @@
       },
       "ui-visual": {
         "content": {
-          "done": 10,
+          "done": 13,
           "total": 13
         },
         "visual-review": {
@@ -1027,7 +1074,7 @@
     "queue": {
       "zh": "待处理（依赖已完成）",
       "en": "Ready (dependencies done)",
-      "count": 61,
+      "count": 64,
       "items": [
         {
           "id": "creator.char.protagonist-male.approve-portrait",
@@ -1387,6 +1434,13 @@
           "points": 1
         },
         {
+          "id": "review.enemy.patrol",
+          "stage": "visual-review",
+          "owner": "codex",
+          "status": "todo",
+          "points": 1
+        },
+        {
           "id": "creator.scene.map.accept",
           "stage": "creator-approval",
           "owner": "creator",
@@ -1429,6 +1483,13 @@
           "points": 1
         },
         {
+          "id": "review.content.ui-visuals",
+          "stage": "visual-review",
+          "owner": "codex",
+          "status": "todo",
+          "points": 1
+        },
+        {
           "id": "creator.content.vfx.accept",
           "stage": "creator-approval",
           "owner": "creator",
@@ -1437,6 +1498,13 @@
         },
         {
           "id": "creator.content.audio.accept",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.content.ui-visuals.accept",
           "stage": "creator-approval",
           "owner": "creator",
           "status": "todo",
@@ -1562,7 +1630,7 @@
     {"id":"creator.char.protagonist-male.accept-runtime-sprite","type":"creator-acceptance","title":{"zh":"主角·男 · 验收运行时精灵","en":"Male protagonist · accept runtime sprite"},"area":"characters","stage":"creator-approval","owner":"creator","status":"todo","points":1,"doneCriterion":{"zh":"approvalLedger 记有 acceptanceKind runtime-sprite 的验收条目","en":"approvalLedger records an acceptanceKind runtime-sprite item"},"dependsOn":["content.char.protagonist-male.runtime-integration"],"evidence":[],"subject":{"kind":"character-variant","id":"protagonist-male"},"target":"content.char.protagonist-male.runtime-integration"},
     {"id":"creator.char.protagonist-male.accept-display","type":"creator-acceptance","title":{"zh":"主角·男 · 验收展示图","en":"Male protagonist · accept display image"},"area":"characters","stage":"creator-approval","owner":"creator","status":"todo","points":1,"doneCriterion":{"zh":"清单 display 项被创作者勾选","en":"The creator checks the inventory display item"},"dependsOn":["content.char.protagonist-male.display"],"evidence":[],"subject":{"kind":"character-variant","id":"protagonist-male"},"target":"content.char.protagonist-male.display"},
     {"id":"content.char.protagonist-female.portrait","type":"concept-generation","title":{"zh":"主角·女 · 人物设定图（图像生成）","en":"Female protagonist · source portrait (image generation)"},"area":"characters","stage":"content","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"设定图文件已入库","en":"The source portrait file is committed"},"dependsOn":[],"evidence":["outputs/rpg-2-star-ocean-the-second_protagonist_character-sheet_female_20261013-153316-8fa4d0c3.png"],"subject":{"kind":"character-variant","id":"protagonist-female"}},
-    {"id":"content.char.protagonist-female.static-south","type":"native-pixel","title":{"zh":"主角·女 · 南向高密度静止帧","en":"Female protagonist · south high-density static"},"area":"characters","stage":"content","owner":"claude","status":"done","points":3,"doneCriterion":{"zh":"南向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"south native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":[],"evidence":["docs/character-visuals/rpg-2-star-ocean-the-second_protagonist-female_south-idle-static-baseline-decision_m8-v08_20261015-022700-07161696.md","docs/qa/rpg-2-star-ocean-the-second_protagonist-female_south-idle-selout-v8_visual-qa-note_m8-v08_20261015-021600-c1694107.md"],"subject":{"kind":"character-variant","id":"protagonist-female"}},
+    {"id":"content.char.protagonist-female.static-south","type":"native-pixel","title":{"zh":"主角·女 · 南向高密度静止帧","en":"Female protagonist · south high-density static"},"area":"characters","stage":"content","owner":"claude","status":"done","points":3,"doneCriterion":{"zh":"南向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"south native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":[],"evidence":["docs/qa/rpg-2-star-ocean-the-second_heroine-sea_exploration-static-visual-review_v01_20261020-182420-1d4edf96.md"],"subject":{"kind":"character-variant","id":"protagonist-female"},"statusAt":"2026-10-20T18:37:19Z","note":{"zh":"","en":"New style-direction exploration still delivered at unchanged48logicalpixels with actualcity/room2EN/ZH640/1280captures. Existing production credit retained; this generated-art adaptation is unapproved and does not replace the approvedv8 baseline or constitute an animation set."}},
     {"id":"content.char.protagonist-female.static-west","type":"native-pixel","title":{"zh":"主角·女 · 西向高密度静止帧","en":"Female protagonist · west high-density static"},"area":"characters","stage":"content","owner":"codex","status":"done","points":2,"doneCriterion":{"zh":"西向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"west native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":["content.char.protagonist-female.static-south"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_protagonist-female_west-static-produced-candidate_unapproved-v01_20261018-174858-e21f1813.md","outputs/female-west-static-v01/rpg-2-star-ocean-the-second_protagonist-female_west-static-evidence-manifest_v01_20261018-174753-9b21bd7f.json"],"subject":{"kind":"character-variant","id":"protagonist-female"},"statusAt":"2026-10-18T21:50:56Z","note":{"zh":"Codex已制作真实西向静止帧，并独立核对源文件与实机证据；仅静态、未接入、未批准。","en":"Codex-authored true west static produced and source/gameplay evidence independently verified; static-only, nonruntime, unapproved."}},
     {"id":"content.char.protagonist-female.static-north","type":"native-pixel","title":{"zh":"主角·女 · 北向高密度静止帧","en":"Female protagonist · north high-density static"},"area":"characters","stage":"content","owner":"claude","status":"done","points":2,"doneCriterion":{"zh":"北向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"north native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":["content.char.protagonist-female.static-south"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_protagonist-female_north-idle-static-pilot_qa-note_unapproved-nonruntime-v01_20261018-090713-4bcb9cdb.md"],"subject":{"kind":"character-variant","id":"protagonist-female"}},
     {"id":"content.char.protagonist-female.static-east","type":"native-pixel","title":{"zh":"主角·女 · 东向高密度静止帧","en":"Female protagonist · east high-density static"},"area":"characters","stage":"content","owner":"codex","status":"done","points":2,"doneCriterion":{"zh":"东向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"east native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":["content.char.protagonist-female.static-south"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_protagonist-female_east-static-produced-candidate_unapproved-v01_20261018-175227-be96490e.md","outputs/female-east-static-v01/rpg-2-star-ocean-the-second_protagonist-female_east-static-evidence-manifest_v01_20261018-175207-452cc5f9.json"],"subject":{"kind":"character-variant","id":"protagonist-female"},"statusAt":"2026-10-18T21:53:43Z","note":{"zh":"Codex已制作东向侧面并查看明暗实机图，独立源文件与原生/截图哈希检查通过；仅静态、未接入、未批准。","en":"Codex-authored east profile inspected in bright/dark actual gameplay; independent source/native/capture hash check passed. Static-only, nonruntime, unapproved."}},
@@ -2572,9 +2640,9 @@
     {"id":"review.enemy.sentry","type":"visual-review","title":{"zh":"防卫机（哨卫） · 视觉审查","en":"Sentry automaton · visual review"},"area":"enemies","stage":"visual-review","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"Codex／root 审查实机画面并记录结论","en":"Codex / root reviews actual captures and records a verdict"},"dependsOn":["qa.enemy.sentry.check"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_scifi-sentry-automaton_v2-optin-portability_qa-note_unapproved-v01_20261018-103500-7d2e91b4.md","outputs/rpg-2-star-ocean-the-second_mvp-progress_state_v01_20261013-183804-28a1c7e4.json"],"subject":{"kind":"enemy","id":"sentry"},"target":"content.enemy.sentry.battle-animation","outcome":"technical-pass","note":{"zh":"root 看过实机 en640/zh640：只接受技术代码移植；眼部部分遮挡与几何占位背景仍在（closeout fa4c8600）。","en":"Root viewed actual en640/zh640 captures: technical code port only; partly occluded eye and geometric backdrop remain (closeout fa4c8600)."},"statusAt":"2026-10-18T17:55:49Z"},
     {"id":"creator.enemy.sentry.accept-art","type":"creator-acceptance","title":{"zh":"防卫机（哨卫） · 验收美术","en":"Sentry automaton · accept art"},"area":"enemies","stage":"creator-approval","owner":"creator","status":"todo","points":1,"doneCriterion":{"zh":"创作者验收该敌人美术","en":"The creator accepts the enemy art"},"dependsOn":["content.enemy.sentry.runtime-default"],"evidence":[],"subject":{"kind":"enemy","id":"sentry"},"target":"content.enemy.sentry.runtime-default"},
     {"id":"content.enemy.patrol.static","type":"native-pixel","title":{"zh":"巡逻机 · 战斗静止精灵","en":"Patrol drone · battle static sprite"},"area":"enemies","stage":"content","owner":"claude","status":"done","points":2,"doneCriterion":{"zh":"原生像素静止精灵已提交并有 QA","en":"Native pixel static committed with QA"},"dependsOn":[],"evidence":["docs/qa/rpg-2-star-ocean-the-second_patrol-static_selected-production-integration_v01_20261019-001423-861097ca.md"],"subject":{"kind":"enemy","id":"patrol"},"statusAt":"2026-10-19T04:25:04Z","note":{"zh":"","en":"Selected Claude benchmark native64x64 static copied intact with editable6-layer PXO/ORA, reproducible author/helper, raw hash manifest and actual source-bound Godot capture. Production only; animation/default/creator acceptance remain open."}},
-    {"id":"content.enemy.patrol.battle-animation","type":"native-pixel","title":{"zh":"巡逻机 · 战斗动画条","en":"Patrol drone · battle animation strip"},"area":"enemies","stage":"content","owner":"claude","status":"in_progress","points":6,"doneCriterion":{"zh":"全部战斗状态的动画条已提交并有帧检查","en":"A strip covering every battle state committed with frame checks"},"dependsOn":["content.enemy.patrol.static"],"evidence":[],"subject":{"kind":"enemy","id":"patrol"},"statusAt":"2026-10-19T23:36:15Z"},
+    {"id":"content.enemy.patrol.battle-animation","type":"native-pixel","title":{"zh":"巡逻机 · 战斗动画条","en":"Patrol drone · battle animation strip"},"area":"enemies","stage":"content","owner":"claude","status":"done","points":6,"doneCriterion":{"zh":"全部战斗状态的动画条已提交并有帧检查","en":"A strip covering every battle state committed with frame checks"},"dependsOn":["content.enemy.patrol.static"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_patrol_canonical-native-and-visible-battle-closeout_v01_20261020-002601-cdd87b66.md"],"subject":{"kind":"enemy","id":"patrol"},"statusAt":"2026-10-20T00:28:20Z","note":{"zh":"","en":"Committed bcec9de: complete editable24frame six-state strip, native/frame/combat checks and opt-in actual/packed hookup. Art/default/fullsprite acceptance separate."}},
     {"id":"content.enemy.patrol.runtime-default","type":"integration","title":{"zh":"巡逻机 · 运行时默认使用","en":"Patrol drone · runtime default"},"area":"enemies","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"不加参数时战斗默认绘制该动画","en":"Battles draw the animation by default, without a flag"},"dependsOn":["content.enemy.patrol.battle-animation","code.runtime.enemy-sprite-pipeline"],"evidence":[],"subject":{"kind":"enemy","id":"patrol"}},
-    {"id":"qa.enemy.patrol.check","type":"technical-check","title":{"zh":"巡逻机 · 技术检查","en":"Patrol drone · technical check"},"area":"enemies","stage":"technical-inspection","owner":"claude","status":"todo","points":1,"doneCriterion":{"zh":"动画与战斗一致性检查通过","en":"Animation and combat-parity checks pass"},"dependsOn":["content.enemy.patrol.battle-animation"],"evidence":[],"subject":{"kind":"enemy","id":"patrol"},"target":"content.enemy.patrol.battle-animation"},
+    {"id":"qa.enemy.patrol.check","type":"technical-check","title":{"zh":"巡逻机 · 技术检查","en":"Patrol drone · technical check"},"area":"enemies","stage":"technical-inspection","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"动画与战斗一致性检查通过","en":"Animation and combat-parity checks pass"},"dependsOn":["content.enemy.patrol.battle-animation"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_patrol_canonical-native-and-visible-battle-closeout_v01_20261020-002601-cdd87b66.md"],"subject":{"kind":"enemy","id":"patrol"},"target":"content.enemy.patrol.battle-animation","statusAt":"2026-10-20T00:28:21Z","outcome":"technical-pass","note":{"zh":"","en":"20combatdigests,31loaderchecks,32default/Sentrypixels,185UI-boundarychecks and actualnormal/packed verification; native-app shader/flattening limitations disclosed. No creative approval."}},
     {"id":"review.enemy.patrol","type":"visual-review","title":{"zh":"巡逻机 · 视觉审查","en":"Patrol drone · visual review"},"area":"enemies","stage":"visual-review","owner":"codex","status":"todo","points":1,"doneCriterion":{"zh":"Codex／root 审查实机画面并记录结论","en":"Codex / root reviews actual captures and records a verdict"},"dependsOn":["qa.enemy.patrol.check"],"evidence":[],"subject":{"kind":"enemy","id":"patrol"},"target":"content.enemy.patrol.battle-animation"},
     {"id":"creator.enemy.patrol.accept-art","type":"creator-acceptance","title":{"zh":"巡逻机 · 验收美术","en":"Patrol drone · accept art"},"area":"enemies","stage":"creator-approval","owner":"creator","status":"todo","points":1,"doneCriterion":{"zh":"创作者验收该敌人美术","en":"The creator accepts the enemy art"},"dependsOn":["content.enemy.patrol.runtime-default"],"evidence":[],"subject":{"kind":"enemy","id":"patrol"},"target":"content.enemy.patrol.runtime-default"},
     {"id":"creator.enemy.sentry.approve-direction","type":"creator-acceptance","title":{"zh":"防卫机 · 批准动作方向","en":"Sentry · approve action direction"},"area":"enemies","stage":"creator-approval","owner":"creator","status":"done","points":1,"doneCriterion":{"zh":"创作者批准动作方向（不含美术）","en":"The creator approves the action direction (not the art)"},"dependsOn":["content.enemy.sentry.battle-animation"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_scifi-sentry-automaton_battle-animation-pilot_qa-note_m8-anim-v02_20261014-231549-748c6de8.md"],"subject":{"kind":"enemy","id":"sentry"},"target":"content.enemy.sentry.battle-animation"},
@@ -2649,7 +2717,7 @@
     {"id":"review.scene.ruins-survey-inner","type":"visual-review","title":{"zh":"华盛顿勘察附楼 2 号房（档案室） · 视觉审查","en":"Washington survey annex room 2 (records) · visual review"},"area":"scenes","stage":"visual-review","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"Codex 审查 640×360 实机画面并记录结论","en":"Codex reviews actual 640x360 captures and records a verdict"},"dependsOn":["qa.scene.ruins-survey-inner.check"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_codex-visual-review_six-verdicts_qa-receipt_v01_20261018-153526-67e353de.md","outputs/wdc-rc2-v01i_3a34d132/cap/rpg-2-star-ocean-the-second_wdc-annex-room2_v01-godot-en-entry-640x360_20261018-035908-3a34d132.png"],"subject":{"kind":"scene-gate","id":"visual-scene.ruins-survey-inner"},"target":"content.scene.ruins-survey-inner.native-pass","statusAt":"2026-10-18T19:35:26Z","outcome":"passed","note":{"zh":"root（Codex）查看了 v01 整合版英文入口实机画面：可交创作者审查。角色参考说明同上；无新测试，未批准。","en":"Root (Codex) viewed the actual v01 integration EN entry capture: ready for creator review. Same character-reference caveat; no new tests, no approval."}},
     {"id":"creator.scene.ruins-survey-inner.accept","type":"creator-acceptance","title":{"zh":"华盛顿勘察附楼 2 号房（档案室） · 场景画质验收","en":"Washington survey annex room 2 (records) · scene-quality acceptance"},"area":"scenes","stage":"creator-approval","owner":"creator","status":"todo","points":1,"doneCriterion":{"zh":"approvalLedger 记有 acceptanceKind scene-visual 的验收条目","en":"approvalLedger records an acceptanceKind scene-visual item"},"dependsOn":["content.scene.ruins-survey-inner.native-pass"],"evidence":[],"subject":{"kind":"scene-gate","id":"visual-scene.ruins-survey-inner"},"target":"content.scene.ruins-survey-inner.native-pass"},
     {"id":"content.scene.battle-arena.plate","type":"integration","title":{"zh":"科技区横向战场 · 场景底板","en":"Science side-view battle arena · scene plate"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":4,"doneCriterion":{"zh":"可玩场景底板已提交并在运行时可进入（概念图不算）","en":"A playable scene plate is committed and enterable in the runtime (a concept image does not count)"},"dependsOn":[],"evidence":["docs/qa/rpg-2-star-ocean-the-second_battle-arena_existing-playable-plate-verification_v01_20261018-214000-4d87ef21.md","outputs/rpg-2-star-ocean-the-second_battle-arena_current-main-proof_manifest-v01_20261018-214000-4d87ef21.json"],"subject":{"kind":"scene-gate","id":"visual-scene.battle-arena"},"statusAt":"2026-10-19T01:39:48Z","note":{"zh":"已提交的可选扬克斯战斗背景通过当前实机进入验证；补记既有4分制作，不是新美术，原生打磨、默认采用与验收仍独立。","en":"Previously committed opt-in outskirts plate now verified enterable in current arena; existing4-point credit, not new artwork. Native polish/default/approval remain open."}},
-    {"id":"content.scene.battle-arena.wiring","type":"integration","title":{"zh":"科技区横向战场 · 碰撞、热点与出入口","en":"Science side-view battle arena · collision, hotspots and exits"},"area":"scenes","stage":"content","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"碰撞、热点、出入口与存档有自动检查","en":"Collision, hotspots, exits and saves have automated checks"},"dependsOn":["content.scene.battle-arena.plate"],"evidence":[],"subject":{"kind":"scene-gate","id":"visual-scene.battle-arena"}},
+    {"id":"content.scene.battle-arena.wiring","type":"integration","title":{"zh":"科技区横向战场 · 碰撞、热点与出入口","en":"Science side-view battle arena · collision, hotspots and exits"},"area":"scenes","stage":"content","owner":"deepseek","status":"in_progress","points":3,"doneCriterion":{"zh":"碰撞、热点、出入口与存档有自动检查","en":"Collision, hotspots, exits and saves have automated checks"},"dependsOn":["content.scene.battle-arena.plate"],"evidence":[],"subject":{"kind":"scene-gate","id":"visual-scene.battle-arena"},"statusAt":"2026-10-20T00:07:26Z"},
     {"id":"content.scene.battle-arena.native-pass","type":"native-pixel","title":{"zh":"科技区横向战场 · 原生像素画质版","en":"Science side-view battle arena · native pixel quality pass"},"area":"scenes","stage":"content","owner":"claude","status":"todo","points":12,"doneCriterion":{"zh":"原生像素画质版（道具／分层）已提交并有 QA，可为可选启用","en":"A native pixel quality pass (fixtures / layers) is committed with QA; opt-in is allowed"},"dependsOn":["content.scene.battle-arena.plate"],"evidence":[],"subject":{"kind":"scene-gate","id":"visual-scene.battle-arena"}},
     {"id":"content.scene.battle-arena.native-default","type":"integration","title":{"zh":"科技区横向战场 · 画质版默认接入","en":"Science side-view battle arena · quality pass on by default"},"area":"scenes","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"画质版默认在游戏中使用","en":"The quality pass is used in the game by default"},"dependsOn":["content.scene.battle-arena.native-pass","content.scene.battle-arena.wiring"],"evidence":[],"subject":{"kind":"scene-gate","id":"visual-scene.battle-arena"}},
     {"id":"qa.scene.battle-arena.check","type":"technical-check","title":{"zh":"科技区横向战场 · 技术检查","en":"Science side-view battle arena · technical check"},"area":"scenes","stage":"technical-inspection","owner":"claude","status":"todo","points":1,"doneCriterion":{"zh":"当前画质版的 Godot 检查全部通过","en":"Godot checks of the current quality pass all pass"},"dependsOn":["content.scene.battle-arena.native-pass"],"evidence":[],"subject":{"kind":"scene-gate","id":"visual-scene.battle-arena"},"target":"content.scene.battle-arena.native-pass"},
@@ -2673,7 +2741,7 @@
     {"id":"content.ui-visual.navigation","type":"native-pixel","title":{"zh":"探索界面正式视觉","en":"Exploration UI final visuals"},"area":"ui-visual","stage":"content","owner":"claude","status":"done","points":4,"doneCriterion":{"zh":"导航与探索界面正式视觉已接入","en":"Final navigation / exploration UI visuals wired"},"dependsOn":[],"evidence":["docs/qa/rpg-2-star-ocean-the-second_navigation-ui_root-combined-navigation-music-verification_unapproved-v04r1_20261019-222456-7d2c965e.md"],"subject":{"kind":"asset","id":"ui.explore"},"statusAt":"2026-10-19T22:26:08Z"},
     {"id":"content.ui-visual.battle","type":"native-pixel","title":{"zh":"战斗界面正式视觉","en":"Battle UI final visuals"},"area":"ui-visual","stage":"content","owner":"claude","status":"done","points":3,"doneCriterion":{"zh":"战斗 HUD、技能、结算正式视觉已接入","en":"Final battle HUD, skills and results visuals wired"},"dependsOn":[],"evidence":["docs/qa/rpg-2-star-ocean-the-second_battle-ui_root-production-closeout_v01_20261019-172332-dc55a291.md"],"subject":{"kind":"asset","id":"ui.battle-hud"},"statusAt":"2026-10-19T21:35:22Z","note":{"zh":"11种可编辑原生界面皮肤默认关闭接入；独立355原生/407无效包/1250实机检查通过；用户验收另计。","en":"11 editable native skins wired off-default; root355native/407invalid/1250actual-game checks. Creator approval remains separate."}},
     {"id":"content.ui-visual.management","type":"native-pixel","title":{"zh":"队伍、职业、存档界面正式视觉","en":"Party, jobs and saves UI final visuals"},"area":"ui-visual","stage":"content","owner":"claude","status":"done","points":3,"doneCriterion":{"zh":"管理界面正式视觉已接入","en":"Final management UI visuals wired"},"dependsOn":[],"evidence":["docs/qa/rpg-2-star-ocean-the-second_management-ui_root-production-closeout_v01_20261019-180100-fd60b5a8.md"],"subject":{"kind":"asset","id":"ui.party"},"statusAt":"2026-10-19T21:44:27Z","note":{"zh":"","en":"Shared native skin wired to party/jobs, nodegrids and saves;85actual bilingual checks, production only; initial prepaint discrepancy disclosed."}},
-    {"id":"content.ui-visual.character-portraits","type":"native-pixel","title":{"zh":"队伍头像与对话立绘裁切","en":"Party icons and dialogue portrait crops"},"area":"ui-visual","stage":"content","owner":"deepseek","status":"in_progress","points":3,"doneCriterion":{"zh":"头像与立绘裁切已提交并接入","en":"Icons and portrait crops committed and wired"},"dependsOn":[],"evidence":[],"subject":{"kind":"asset","id":"character-ui.portraits"},"statusAt":"2026-10-19T23:36:14Z"},
+    {"id":"content.ui-visual.character-portraits","type":"native-pixel","title":{"zh":"队伍头像与对话立绘裁切","en":"Party icons and dialogue portrait crops"},"area":"ui-visual","stage":"content","owner":"codex","status":"done","points":3,"doneCriterion":{"zh":"头像与立绘裁切已提交并接入","en":"Icons and portrait crops committed and wired"},"dependsOn":[],"evidence":["docs/qa/rpg-2-star-ocean-the-second_character-ui-portraits_canonical-combined-closeout_v02_20261020-002601-cdd87b66.md"],"subject":{"kind":"asset","id":"character-ui.portraits"},"statusAt":"2026-10-20T00:28:20Z","note":{"zh":"","en":"Committed bcec9de: five whole-head source-crop icons plus unchanged dialogue crops wired and verified normal/packed. DeepSeek initial build, Codex takeover repairs; art/canon approval separate."}},
     {"id":"review.content.vfx","type":"visual-review","title":{"zh":"特效 · 视觉审查","en":"VFX · visual review"},"area":"vfx","stage":"visual-review","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"Codex 审查实机特效并记录结论","en":"Codex reviews the effects in game and records a verdict"},"dependsOn":["content.vfx.common","content.vfx.mvp-skills","content.vfx.encounter"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_mvp-skill-vfx_root-production-closeout_v01_20261019-170721-90a8737c.md","docs/qa/rpg-2-star-ocean-the-second_common-combat-vfx_root-production-closeout_v01_20261019-164412-1f3bff80.md"],"subject":{"kind":"feature","id":"content.vfx"},"statusAt":"2026-10-19T21:15:30Z","outcome":"technical-pass","note":{"zh":"","en":"Actual-game composition and technical review performed: common/skill cues local and quiet, encounter cues separately verified; some support accents blend with dark clothing. Static composition inspection only; no creator artistic or continuous temporal-quality approval."}},
     {"id":"review.content.audio","type":"audio-qa","title":{"zh":"音频 · 内容／音频质量检查","en":"Audio · content / audio QA"},"area":"audio","stage":"content-qa","owner":"codex","status":"todo","points":1,"doneCriterion":{"zh":"Codex 在游戏中试听音乐与音效并记录结论","en":"Codex listens to the music and sounds in game and records a verdict"},"dependsOn":["content.audio.themed-music","content.audio.ui-sfx","content.audio.combat-sfx"],"evidence":[],"subject":{"kind":"feature","id":"content.audio"}},
     {"id":"review.content.ui-visuals","type":"visual-review","title":{"zh":"界面正式视觉 · 视觉审查","en":"UI final visuals · visual review"},"area":"ui-visual","stage":"visual-review","owner":"codex","status":"todo","points":1,"doneCriterion":{"zh":"Codex 审查实机界面并记录结论","en":"Codex reviews the in-game UI and records a verdict"},"dependsOn":["content.ui-visual.navigation","content.ui-visual.battle","content.ui-visual.management","content.ui-visual.character-portraits"],"evidence":[],"subject":{"kind":"feature","id":"content.ui-visuals"}},
@@ -2693,7 +2761,7 @@
     {"id":"content.scene.city.native-pass.revision","type":"revision","title":{"zh":"纽约市政厅公园（城市） · 原生像素画质版 · 创作者否决 v04 后的修订（v06）","en":"NYC City Hall Park (city) · native pixel quality pass · Revision after the creator rejected v04 (v06)"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":6,"doneCriterion":{"zh":"针对最近一次审查／创作者意见的修订版已提交并有 QA；后续版本只更新本条，不新增分值","en":"A revision answering the latest review / creator request is committed with QA; later versions update this bucket and add no points"},"dependsOn":["content.scene.city.native-pass"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_nyc-city-hall-park_style-alignment-visual-direction_unapproved-v01_20261016-225800-2a4e7c91.md","docs/qa/rpg-2-star-ocean-the-second_nyc-city-hall-park_scene-candidate-640x360_qa-note_unapproved-v06_20261017-165253-4519dffe.md"],"subject":{"kind":"scene-gate","id":"visual-scene.city"},"target":"content.scene.city.native-pass","statusAt":"2026-10-17T20:52:53Z"},
     {"id":"content.scene.outskirts-survey-outer.native-pass.revision","type":"revision","title":{"zh":"扬克斯天线走廊 1 号房 · 原生像素画质版 · 创作者否决 v02 室外观感后的修订（v03 起，最新 v06）","en":"Yonkers antenna corridor room 1 · native pixel quality pass · Revision after the creator rejected the v02 outdoor look (v03 onward, latest v06)"},"area":"scenes","stage":"content","owner":"codex","status":"done","points":6,"doneCriterion":{"zh":"针对最近一次审查／创作者意见的修订版已提交并有 QA；后续版本只更新本条，不新增分值","en":"A revision answering the latest review / creator request is committed with QA; later versions update this bucket and add no points"},"dependsOn":["content.scene.outskirts-survey-outer.native-pass"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_yonkers-antenna-room1_structural-v07-bounded-technical-closeout_unapproved-v01_20261018-220530-6b4370ca.md","outputs/yk1-v07_7a10f835/rpg-2-star-ocean-the-second_yonkers-antenna-room1_structural-evidence-package_unapproved-v07_20261018-220210-4d281c37.json"],"subject":{"kind":"scene-gate","id":"visual-scene.outskirts-survey-outer"},"target":"content.scene.outskirts-survey-outer.native-pass","statusAt":"2026-10-18T22:14:33Z","note":{"zh":"v07结构/材质修订已制作，不按新版本增加分值。原生导出像素一致，但软件诊断仍有错误；美术仍需打磨。","en":"v07 bounded structural/material revision produced; no new version points. Native exports exact but application diagnostics unresolved; art changes_requested."}},
     {"id":"content.scene.ruins.native-pass.revision","type":"revision","title":{"zh":"华盛顿国会大厦西侧废墟 · 原生像素画质版 · root 对 v12r2 外观意见后的修订（v13 局部坍塌，可选启用）","en":"Washington Capitol west ruins · native pixel quality pass · Revision after root's v12r2 critique (v13 localized collapse, opt-in flag)"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":6,"doneCriterion":{"zh":"针对最近一次审查／创作者意见的修订版已提交并有 QA；后续版本只更新本条，不新增分值","en":"A revision answering the latest review / creator request is committed with QA; later versions update this bucket and add no points"},"dependsOn":["content.scene.ruins.native-pass"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_ruin-material-collapse_qa-note_unapproved-v13_20261018-100938-075675cf.md","docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_v13-flag-integration_qa-note_unapproved-v13_20261018-135539-63201688.md"],"subject":{"kind":"scene-gate","id":"visual-scene.ruins"},"target":"content.scene.ruins.native-pass","statusAt":"2026-10-18T18:06:24Z"},
-    {"id":"content.combat.protagonist-female.combat-static.revision","type":"revision","title":{"zh":"主角·女 · 横向战斗静止帧 · 按创作者对 v11 的意见修订（v12–v14）","en":"Female protagonist · side-view combat static · Revision after the creator feedback on v11 (v12-v14)"},"area":"combat","stage":"content","owner":"claude","status":"done","points":2,"doneCriterion":{"zh":"针对最近一次审查／创作者意见的修订版已提交并有 QA；后续版本只更新本条，不新增分值","en":"A revision answering the latest review / creator request is committed with QA; later versions update this bucket and add no points"},"dependsOn":["content.combat.protagonist-female.combat-static"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_female-battle_root-production-closeout_v17r2_20261019-164412-1f3bff80.md","outputs/battle-static-v17r2/rpg-2-star-ocean-the-second_female-battle_root-proof_v17r2_20261019-164412-1f3bff80.json"],"subject":{"kind":"character-variant","id":"protagonist-female"},"target":"content.combat.protagonist-female.combat-static","statusAt":"2026-10-19T21:04:34Z","note":{"zh":"创作者否决v16的人物与面部粗糙度；重开同一个固定修订桶，改用更细的人脸与呈现方法。","en":"Complete dense still revision:20source and53independent native/actual-render checks pass. Protected face survives all four1280captures. Pixelorama exports exact but application diagnostics/GUI reliability remain open. Art and motion approval remain pending."}},
+    {"id":"content.combat.protagonist-female.combat-static.revision","type":"revision","title":{"zh":"主角·女 · 横向战斗静止帧 · 按创作者对 v11 的意见修订（v12–v14）","en":"Female protagonist · side-view combat static · Revision after the creator feedback on v11 (v12-v14)"},"area":"combat","stage":"content","owner":"claude","status":"done","points":2,"doneCriterion":{"zh":"针对最近一次审查／创作者意见的修订版已提交并有 QA；后续版本只更新本条，不新增分值","en":"A revision answering the latest review / creator request is committed with QA; later versions update this bucket and add no points"},"dependsOn":["content.combat.protagonist-female.combat-static"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_heroine-sea_battle-static-root-closeout_v01_20261020-182831-69f29955.md"],"subject":{"kind":"character-variant","id":"protagonist-female"},"target":"content.combat.protagonist-female.combat-static","statusAt":"2026-10-20T18:37:19Z","note":{"zh":"创作者确认v17r2图片可见后，要求继续精修脸部或画质。重开同一个固定修订桶，保留底稿制作分与全部历史；改为实际显示尺寸下面部辨识优先的处理方式，静止帧批准前不制作战斗动画。","en":"Produced and committed Sea of Stars-inspired generated-and-curated static remake with native editable slices and independently checked actual640/1280 bilingual gameplay. Same fixed revision bucket; no new per-version points. Native editor diagnostics and creator static approval remain open."}},
     {"id":"content.char.protagonist-female.walk-south.revision","type":"revision","title":{"zh":"主角·女 · 南向行走／跑动 · 跑动／停步打磨（v10 + r1，已制作的技术修订；步态与流畅度未批准）","en":"Female protagonist · south walk/run · Run/stop polish (v10 + r1, produced technical revision; gait and fluidity unapproved)"},"area":"characters","stage":"content","owner":"claude","status":"done","points":2,"doneCriterion":{"zh":"针对最近一次审查／创作者意见的修订版已提交并有 QA；后续版本只更新本条，不新增分值","en":"A revision answering the latest review / creator request is committed with QA; later versions update this bucket and add no points"},"dependsOn":["content.char.protagonist-female.walk-south"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_female-south-run-v10r1_reach-landing-amendment_qa-note_unapproved-nonruntime_20261018-142136-249dbf66.md","outputs/rpg-2-star-ocean-the-second_city-annex_female-south-run-v10r1-capture-receipt-h48_unapproved_20261018-182800-9ee66cb8.json"],"subject":{"kind":"character-variant","id":"protagonist-female"},"target":"content.char.protagonist-female.walk-south","statusAt":"2026-10-18T18:36:18Z"},
     {"id":"content.char.liang-xu.static-south.revision","type":"revision","title":{"zh":"梁序 · 南向高密度静止帧 · 按 Codex 视觉审查意见修订南向静止帧","en":"Liang Xu · south high-density static · South static revision after the Codex visual audit"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"针对最近一次审查／创作者意见的修订版已提交并有 QA；后续版本只更新本条，不新增分值","en":"A revision answering the latest review / creator request is committed with QA; later versions update this bucket and add no points"},"dependsOn":["content.char.liang-xu.static-south"],"evidence":[],"subject":{"kind":"character-variant","id":"liang-xu"},"target":"content.char.liang-xu.static-south"},
     {"id":"content.scene.chicago-loop.native-pass.revision","type":"revision","title":{"zh":"芝加哥卢普区街区 · 原生像素画质版 · 修订","en":"Chicago Loop block · native pixel quality pass · revision"},"area":"scenes","stage":"content","owner":"codex","status":"done","points":6,"doneCriterion":{"zh":"针对最近一次审查／创作者意见的修订版已提交并有 QA；后续版本只更新本条，不新增分值","en":"A revision answering the latest review / creator request is committed with QA; later versions update this bucket and add no points"},"dependsOn":["content.scene.chicago-loop.native-pass"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_chicago-loop_material-depth-v06-completed-revision_unapproved-v01_20261018-173531-058a4701.md","docs/qa/rpg-2-star-ocean-the-second_chicago-loop_v06-codex-visual-verdict_unapproved-v01_20261018-174138-428dc70b.md"],"subject":{"kind":"scene-gate","id":"visual-scene.chicago-loop-outdoor"},"target":"content.scene.chicago-loop.native-pass","statusAt":"2026-10-18T21:41:38.803668+00:00","note":{"zh":"","en":"Codex finished and inspected v06 native material revision; actual test-injected gameplay evidence, no default adoption or creator art approval."}},
