@@ -30,3 +30,7 @@ Read [the operating workflow](docs/workflow.md) before starting a batch. Its lin
 ## Windows execution
 
 Use explicit UTF-8 for file/subprocess text and extended-length paths when needed. Keep directory names short; preserve descriptive asset filenames. Check each command result before dependent work.
+
+## Current character sprite direction
+
+The creator selected **Sea of Stars** as the character sprite style reference on 2026-10-20. Read [the approved direction contract](docs/design/rpg-2-star-ocean-the-second_characters_sea-of-stars-style-direction_v01_20261020-181026-f5938409.md) before character art or animation work. Apply it to one complete heroine path first. This is direction approval only; existing assets, scale changes and environments are not automatically approved.
