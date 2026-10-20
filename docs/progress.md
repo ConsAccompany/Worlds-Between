@@ -1,5 +1,13 @@
 # Open World Pixel RPG Implementation Progress
 
+## Latest completed batch — 2026-10-20
+
+Production **53.6% →53.6% (+0.0percentage points)**. Inspection14.2%→14.2%; creator7.0%→7.0%. Same frozen baseline; no added points for packaging already-produced content or maintaining an already-credited runtime pipeline.
+
+Claude completed optional heroine contact/rational-clock code. DeepSeek packed29effectiveposes into an eight-action runtime set. Codex verified byte-exact cells, normal-input timing and default-off parity, then fixed the finishing contact being obscured by results. The result surface now waits for presentation recovery while reward/save still resolve once. Final46normal-input,220clock,80contact,273halfscale and261windowed legacy checks passed, with declared warnings. Actual bright/dark critical captures are retained. Optional integration only; no new default adoption, art acceptance or human playtest. Accepted scenes3/12,fullsprites0/52,humanplays0/2.
+
+Task start/end values are now recorded in the Bible by a read-only-ledger recorder; future reports include before→after/change, includingzero. [Source-bound closeout](../docs/qa/rpg-2-star-ocean-the-second_heroine-contact_combined-production-closeout_v01_20261020-202822-b09ea1fd.md). Next: natural full encounter/return coverage for the optional timing mode and normal-speed motion review; do not certify fluidity from metrics or static frames.
+
 ## Latest production batch — 2026-10-19
 
 Production **51.7%** (coding100%, content19.5%); inspection13.2%; creator approval7%. These separate meters come from the canonical ledger, not the archived40.8% mixed acceptance estimate.

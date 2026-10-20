@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-20T19:56:42.101553+00:00",
+  "updatedAt": "2026-10-20T20:30:01.223032+00:00",
   "purpose": "Operating queue and worktree ownership; no progress points or account details",
   "workflow": "docs/workflow.md",
   "canonicalLedger": "outputs/rpg-2-star-ocean-the-second_production-completion_task-ledger_v01_20261018-140533-3de52073.json",
@@ -909,6 +909,53 @@
         "docs/qa/rpg-2-star-ocean-the-second_mvp-display_four-crops-normal-integration_v01_20261019-185434-7c95e421.md"
       ],
       "nextAction": "Creator art/canon approval separate; no fullsprite completion."
+    },
+    {
+      "id": "support.heroine-sea.contact-integration",
+      "owner": "claude",
+      "status": "done",
+      "lane": "closed",
+      "pathFromPrimary": "work/dual06/cl-contact",
+      "output": "Optional real input/contact synchronization with exact authored ticks",
+      "writeScope": [
+        "game/scripts/battle_arena.gd",
+        "game/scripts/*combat-sprite-set*",
+        "new contact/timing QA and tools"
+      ],
+      "startedAt": "2026-10-20T20:15:28.197537+00:00",
+      "completion": [
+        "Independent source-bound checks and normal game integration; no default adoption or art approval"
+      ],
+      "progressCredit": "none until an existing frozen gate is met",
+      "finishedAt": "2026-10-20T20:30:01.223032+00:00",
+      "evidence": [
+        "docs/qa/rpg-2-star-ocean-the-second_heroine-contact_combined-production-closeout_v01_20261020-202822-b09ea1fd.md"
+      ],
+      "integratedCommit": "34b61602a0e8aac8ff3dfbcf825e0984d7366843",
+      "nextAction": "Optional technical integration verified; default adoption and creator motion approval remain separate."
+    },
+    {
+      "id": "support.heroine-sea.runtime-package",
+      "owner": "deepseek",
+      "status": "done",
+      "lane": "closed",
+      "pathFromPrimary": "work/dual06/ds-pack",
+      "output": "Lossless 29-pose, eight-action runtime sheet/index and provenance",
+      "writeScope": [
+        "game/data/heroine-sea-combat-v01",
+        "new package tools and QA"
+      ],
+      "startedAt": "2026-10-20T20:15:28.197537+00:00",
+      "completion": [
+        "Independent source-bound checks and normal game integration; no default adoption or art approval"
+      ],
+      "progressCredit": "none until an existing frozen gate is met",
+      "finishedAt": "2026-10-20T20:30:01.223032+00:00",
+      "evidence": [
+        "docs/qa/rpg-2-star-ocean-the-second_heroine-contact_combined-production-closeout_v01_20261020-202822-b09ea1fd.md"
+      ],
+      "integratedCommit": "34b61602a0e8aac8ff3dfbcf825e0984d7366843",
+      "nextAction": "Optional technical integration verified; default adoption and creator motion approval remain separate."
     }
   ],
   "nextProductionMilestones": [
@@ -1015,5 +1062,16 @@
     "brief": "docs/design/rpg-2-star-ocean-the-second_characters_sea-of-stars-style-direction_v01_20261020-181026-f5938409.md",
     "firstSubject": "protagonist-female",
     "noBatchExpansionBeforeRepresentativeSet": true
+  },
+  "progressReporting": {
+    "requiredFormat": "before → after (change in percentage points)",
+    "currentBatchProductionBefore": 53.6,
+    "startedAt": "2026-10-20T20:15:28.197537+00:00",
+    "sourceCommit": "11973af6492ef60a99ca1f2eacb01e12c091ccb9",
+    "baselineChange": false,
+    "currentBatchProductionAfter": 53.6,
+    "changePercentagePoints": 0.0,
+    "completedAt": "2026-10-20T20:30:01.223032+00:00",
+    "recordTool": "tools/rpg-2-star-ocean-the-second_progress-task_record-v01_20261020-201756-0613b8f0.js"
   }
 }
