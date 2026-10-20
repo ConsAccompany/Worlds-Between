@@ -1,0 +1,102 @@
+{
+  "producerRawSha256": "d9c3bea05533f387fc03b02f31c425419daefdbb459da836235bf156ed4882fa",
+  "integratedRawSha256": "2efcc31122386977ba44a35336fd4ab1211bb56578de434264f483943979167a",
+  "corrections": [
+    "Recognize authored near/far-arm-sleeve layer roles; nonempty required across12walkframes, originalglove may own exactidle/finalbridge.",
+    "Descriptive arm frame statistics use resolved role layer.",
+    "Verify recursive copied-fixture cleanup remains within its generated output root."
+  ],
+  "producerFixtureResult": {
+    "schema": "worlds-between.heroine-sea-armcheck.selftest.v1",
+    "ok": true,
+    "baseline_manifest": "C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\max0840-sentry-sync\\work\\dual10\\ds-proof\\outputs\\hsea-gait09\\src-v04-20261020-180500\\rpg-2-star-ocean-the-second_heroine-sea_explore-source-manifest_unapproved-v04_20261020-180500-5283c7ff.json",
+    "baseline_hashes_unchanged": true,
+    "original_baseline_hashes_unchanged": true,
+    "cases": [
+      {
+        "name": "unchanged",
+        "expected_ok": true,
+        "actual_ok": true,
+        "cli_exit": 0,
+        "traceback": false,
+        "source_hashes_unchanged": true,
+        "failed_gates": [],
+        "reason": null,
+        "ok": true
+      },
+      {
+        "name": "mutated_protected_leg",
+        "expected_ok": false,
+        "actual_ok": false,
+        "cli_exit": 1,
+        "traceback": false,
+        "source_hashes_unchanged": true,
+        "failed_gates": [
+          "side_walk_leg_layer_equality"
+        ],
+        "reason": null,
+        "ok": true
+      },
+      {
+        "name": "mutated_idle_png",
+        "expected_ok": false,
+        "actual_ok": false,
+        "cli_exit": 1,
+        "traceback": false,
+        "source_hashes_unchanged": true,
+        "failed_gates": [
+          "protected_idle_raw_equality",
+          "reconstruction_all_17"
+        ],
+        "reason": null,
+        "ok": true
+      },
+      {
+        "name": "corrupt_native",
+        "expected_ok": false,
+        "actual_ok": false,
+        "cli_exit": 1,
+        "traceback": false,
+        "source_hashes_unchanged": true,
+        "failed_gates": [
+          "declared_source_hashes",
+          "manifest_structure",
+          "png_counts_52_16",
+          "pxo_frames_17",
+          "reconstruction_all_17"
+        ],
+        "reason": null,
+        "ok": true
+      },
+      {
+        "name": "corrupt_export",
+        "expected_ok": false,
+        "actual_ok": false,
+        "cli_exit": 1,
+        "traceback": false,
+        "source_hashes_unchanged": true,
+        "failed_gates": [
+          "manifest_structure",
+          "png_counts_52_16",
+          "reconstruction_all_17"
+        ],
+        "reason": null,
+        "ok": true
+      },
+      {
+        "name": "malformed_manifest",
+        "expected_ok": false,
+        "actual_ok": false,
+        "cli_exit": 1,
+        "traceback": false,
+        "source_hashes_unchanged": true,
+        "failed_gates": [],
+        "reason": null,
+        "ok": true
+      }
+    ],
+    "limitations": [
+      "Negative tests use copies in a temp directory; original sources are never mutated."
+    ]
+  }
+}

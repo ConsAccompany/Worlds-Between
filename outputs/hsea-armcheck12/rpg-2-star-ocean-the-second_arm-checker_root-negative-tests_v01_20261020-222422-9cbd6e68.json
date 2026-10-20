@@ -1,0 +1,93 @@
+{
+  "schema": "worlds-between.heroine-sea-armcheck.selftest.v1",
+  "ok": true,
+  "baseline_manifest": "C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\max0840-sentry-sync\\outputs\\hsea-gait11\\src-v06-20261020-175838\\rpg-2-star-ocean-the-second_heroine-sea_explore-source-manifest_unapproved-v06_20261020-175838-408e8b21.json",
+  "baseline_hashes_unchanged": true,
+  "original_baseline_hashes_unchanged": true,
+  "cases": [
+    {
+      "name": "unchanged",
+      "expected_ok": true,
+      "actual_ok": true,
+      "cli_exit": 0,
+      "traceback": false,
+      "source_hashes_unchanged": true,
+      "failed_gates": [],
+      "reason": null,
+      "ok": true
+    },
+    {
+      "name": "mutated_protected_leg",
+      "expected_ok": false,
+      "actual_ok": false,
+      "cli_exit": 1,
+      "traceback": false,
+      "source_hashes_unchanged": true,
+      "failed_gates": [
+        "side_walk_leg_layer_equality"
+      ],
+      "reason": null,
+      "ok": true
+    },
+    {
+      "name": "mutated_idle_png",
+      "expected_ok": false,
+      "actual_ok": false,
+      "cli_exit": 1,
+      "traceback": false,
+      "source_hashes_unchanged": true,
+      "failed_gates": [
+        "protected_idle_raw_equality",
+        "reconstruction_all_17"
+      ],
+      "reason": null,
+      "ok": true
+    },
+    {
+      "name": "corrupt_native",
+      "expected_ok": false,
+      "actual_ok": false,
+      "cli_exit": 1,
+      "traceback": false,
+      "source_hashes_unchanged": true,
+      "failed_gates": [
+        "declared_source_hashes",
+        "manifest_structure",
+        "png_counts_52_16",
+        "pxo_frames_17",
+        "reconstruction_all_17"
+      ],
+      "reason": null,
+      "ok": true
+    },
+    {
+      "name": "corrupt_export",
+      "expected_ok": false,
+      "actual_ok": false,
+      "cli_exit": 1,
+      "traceback": false,
+      "source_hashes_unchanged": true,
+      "failed_gates": [
+        "manifest_structure",
+        "png_counts_52_16",
+        "reconstruction_all_17"
+      ],
+      "reason": null,
+      "ok": true
+    },
+    {
+      "name": "malformed_manifest",
+      "expected_ok": false,
+      "actual_ok": false,
+      "cli_exit": 1,
+      "traceback": false,
+      "source_hashes_unchanged": true,
+      "failed_gates": [],
+      "reason": null,
+      "ok": true
+    }
+  ],
+  "limitations": [
+    "Negative tests use copies in a temp directory; original sources are never mutated."
+  ]
+}

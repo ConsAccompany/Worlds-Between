@@ -9,6 +9,22 @@ const TRANSITION_SHA256 := "a05df1930f3423cbdbe9f822cfe01acfcac900bb413dbf666703
 const SOURCE_SET_SHA256 := "8c5cca3c43ece810955573744b7586981fe86525025166c12eb12c4c3a1e50b5"
 const PROVENANCE_PATH := "res://data/hsea-gait11/rpg-2-star-ocean-the-second_hero-female_exploration-source-package-provenance_v01_20261020-175959-4806a4f6.json"
 const PROVENANCE_SHA256 := "52a61c70b9ca94b091fde76c60b7e0e184b4d014557afbe40c681c9b09513f45"
+# Exact, coordinator-inspected package profiles. Never infer a bridge/provenance path from untrusted JSON.
+const ADDITIONAL_SOURCE_PROFILES := {
+ "b0c2b02764dcb19020a21bd2538633125e79a5399d521b33e6f2286671ce902e": {
+  "transition_path": "res://data/hsea-arms12/rpg-2-star-ocean-the-second_heroine-sea_explore-stop-transition-manifest_unapproved-v08_20261020-222336-0ad0e3f5.json",
+  "transition_sha256": "23905e6976028f9e01d2beab5bcaded2e6a2cc181a4b4bbdb8bd70c63db6dc64",
+  "provenance_path": "res://data/hsea-arms12/rpg-2-star-ocean-the-second_hero-female_exploration-source-package-provenance_v01_20261020-182605-7f130933.json",
+  "provenance_sha256": "1a307cc178c939437ed77a2f8e1cad78e10ceffd329088468a26ba7c991c3f3c"
+ }
+}
+
+static func _profile_for_set(set_hash: String) -> Dictionary:
+	if set_hash == SOURCE_SET_SHA256:
+		return {"transition_path": TRANSITION_PATH, "transition_sha256": TRANSITION_SHA256,
+			"provenance_path": PROVENANCE_PATH, "provenance_sha256": PROVENANCE_SHA256}
+	return ADDITIONAL_SOURCE_PROFILES.get(set_hash, {}).duplicate(true)
+
 static var enabled_override := -1
 var sprite: Sprite2D
 var sprite_set := {}
@@ -34,7 +50,10 @@ static func attach(target: Sprite2D, actor: String, initial_facing: String) -> N
 	var set_path: String = registry["actors"].get(actor, "")
 	if set_path.is_empty():
 		return null
-	if not FileAccess.file_exists(set_path) or FileAccess.get_sha256(set_path) != SOURCE_SET_SHA256 or not _source_bytes_match(set_path.get_base_dir()):
+	if not FileAccess.file_exists(set_path):
+		return null
+	var profile := _profile_for_set(FileAccess.get_sha256(set_path))
+	if profile.is_empty() or not _source_bytes_match(set_path.get_base_dir(), profile):
 		return null
 	var result: Dictionary = loader.load_set(set_path, actor)
 	if not result.get("ok", false):
@@ -46,7 +65,7 @@ static func attach(target: Sprite2D, actor: String, initial_facing: String) -> N
 	for direction in ["south", "west", "north", "east"]:
 		if candidate["clips"]["walk"][direction]["textures"].size() != 12:
 			return null
-	var bridge_set := _load_bridges(loader)
+	var bridge_set := _load_bridges(loader, profile)
 	if bridge_set.is_empty():
 		return null
 	var script = load(MODEL_PATH)
@@ -66,10 +85,11 @@ static func attach(target: Sprite2D, actor: String, initial_facing: String) -> N
 	driver._apply({"action": "idle", "frame": 0, "facing": initial_facing})
 	return driver
 
-static func _source_bytes_match(base: String) -> bool:
-	if not FileAccess.file_exists(PROVENANCE_PATH) or FileAccess.get_sha256(PROVENANCE_PATH) != PROVENANCE_SHA256:
+static func _source_bytes_match(base: String, profile: Dictionary) -> bool:
+	var provenance_path: String = profile["provenance_path"]
+	if not FileAccess.file_exists(provenance_path) or FileAccess.get_sha256(provenance_path) != profile["provenance_sha256"]:
 		return false
-	var data = JSON.parse_string(FileAccess.get_file_as_string(PROVENANCE_PATH))
+	var data = JSON.parse_string(FileAccess.get_file_as_string(provenance_path))
 	if not data is Dictionary or not data.get("source_pngs") is Array or data["source_pngs"].size() != 52:
 		return false
 	var seen := {}
@@ -85,11 +105,12 @@ static func _source_bytes_match(base: String) -> bool:
 			return false
 	return true
 
-static func _load_bridges(loader) -> Dictionary:
+static func _load_bridges(loader, profile: Dictionary) -> Dictionary:
+	var transition_path: String = profile["transition_path"]
 	# Fixed source-bound supplemental file. Refuse all before changing any target field.
-	if not FileAccess.file_exists(TRANSITION_PATH) or FileAccess.get_sha256(TRANSITION_PATH) != TRANSITION_SHA256:
+	if not FileAccess.file_exists(transition_path) or FileAccess.get_sha256(transition_path) != profile["transition_sha256"]:
 		return {}
-	var data = JSON.parse_string(FileAccess.get_file_as_string(TRANSITION_PATH))
+	var data = JSON.parse_string(FileAccess.get_file_as_string(transition_path))
 	if not data is Dictionary or data.get("schema") != "worlds-between.exploration-stop-transition.supplemental.v1":
 		return {}
 	if not data.get("directions") is Dictionary:
@@ -111,12 +132,12 @@ static func _load_bridges(loader) -> Dictionary:
 				var name: String = entry["file"]
 				if name.is_empty() or name.contains("/") or name.contains("\\") or name.contains("..") or not name.ends_with(".png"):
 					return {}
-				var file := TRANSITION_PATH.get_base_dir().path_join(name)
+				var file := transition_path.get_base_dir().path_join(name)
 				if not FileAccess.file_exists(file) or FileAccess.get_sha256(file) != entry["sha256"]:
 					return {}
 				frames.append({"file": name, "duration_ms": 40})
 			var errors: Array[String] = []
-			var clip: Dictionary = loader._clip(frames, direction + " bridge", "walk", TRANSITION_PATH.get_base_dir(),2,Vector2i(80,112),Vector2i(40,104),errors)
+			var clip: Dictionary = loader._clip(frames, direction + " bridge", "walk", transition_path.get_base_dir(),2,Vector2i(80,112),Vector2i(40,104),errors)
 			if not errors.is_empty():
 				return {}
 			result[direction][contact] = clip["textures"]

@@ -1,0 +1,67 @@
+PASS bytes equal explore-east-idle-f00
+PASS bytes equal explore-north-idle-f00
+PASS bytes equal explore-north-stop-c00-b0
+PASS bytes equal explore-north-stop-c00-b1
+PASS bytes equal explore-north-stop-c06-b0
+PASS bytes equal explore-north-stop-c06-b1
+PASS bytes equal explore-north-walk-f00
+PASS bytes equal explore-north-walk-f01
+PASS bytes equal explore-north-walk-f02
+PASS bytes equal explore-north-walk-f03
+PASS bytes equal explore-north-walk-f04
+PASS bytes equal explore-north-walk-f05
+PASS bytes equal explore-north-walk-f06
+PASS bytes equal explore-north-walk-f07
+PASS bytes equal explore-north-walk-f08
+PASS bytes equal explore-north-walk-f09
+PASS bytes equal explore-north-walk-f10
+PASS bytes equal explore-north-walk-f11
+PASS bytes equal explore-south-idle-f00
+PASS bytes equal explore-south-stop-c00-b0
+PASS bytes equal explore-south-stop-c00-b1
+PASS bytes equal explore-south-stop-c06-b0
+PASS bytes equal explore-south-stop-c06-b1
+PASS bytes equal explore-south-walk-f00
+PASS bytes equal explore-south-walk-f01
+PASS bytes equal explore-south-walk-f02
+PASS bytes equal explore-south-walk-f03
+PASS bytes equal explore-south-walk-f04
+PASS bytes equal explore-south-walk-f05
+PASS bytes equal explore-south-walk-f06
+PASS bytes equal explore-south-walk-f07
+PASS bytes equal explore-south-walk-f08
+PASS bytes equal explore-south-walk-f09
+PASS bytes equal explore-south-walk-f10
+PASS bytes equal explore-south-walk-f11
+PASS bytes equal explore-west-idle-f00
+PASS south idle0 exact sha
+PASS east pxo 17 frames :: (17, 17)
+INFO east layers v07 ['under-trouser-paint', 'far-arm-sleeve', 'far-leg', 'near-leg', 'upper-body', 'idle-arm-glove', 'coat-front-edge', 'near-arm-sleeve', 'hair-scarf-follow']
+PASS east near-leg idle+walk layer bytes equal v06 :: 0 differing
+PASS east far-leg idle+walk layer bytes equal v06 :: 0 differing
+PASS east bridge frame 14 legs == idle0 legs
+PASS east bridge frame 16 legs == idle0 legs
+FAIL east idle glove only in idle0
+PASS east near arm painted every walk frame :: [156, 152, 151, 151, 147, 151, 148, 150, 148, 153, 150, 153]
+INFO east v07 hand (lowest arm rows) x [30.5, 31.0, 34.0, 39.0, 45.0, 49.5, 51.5, 51.0, 48.5, 43.5, 37.5, 33.0] y [63, 63, 64, 64, 64, 63, 63, 63, 63, 63, 63, 63]; travel 21.0 px
+INFO east v06 glove (old far-arm layer) x [35.5, 35.5, 34.5, 33.5, 33.5, 33.5, 33.5, 33.5, 34.5, 34.5, 35.5, 35.5]; travel 2.0 px
+INFO east contact0 changed px per step walk0->b0->b1->idle0 [2158, 922, 0]
+PASS west pxo 17 frames :: (17, 17)
+INFO west layers v07 ['under-trouser-paint', 'far-arm-sleeve', 'far-leg', 'near-leg', 'upper-body', 'idle-arm-glove', 'coat-front-edge', 'near-arm-sleeve', 'hair-scarf-follow']
+PASS west near-leg idle+walk layer bytes equal v06 :: 0 differing
+PASS west far-leg idle+walk layer bytes equal v06 :: 0 differing
+PASS west bridge frame 14 legs == idle0 legs
+PASS west bridge frame 16 legs == idle0 legs
+FAIL west idle glove only in idle0
+PASS west near arm painted every walk frame :: [156, 152, 151, 151, 147, 151, 148, 150, 148, 153, 150, 153]
+INFO west v07 hand (lowest arm rows) x [48.5, 48.0, 45.0, 40.0, 34.0, 29.5, 27.5, 28.0, 30.5, 35.5, 41.5, 46.0] y [63, 63, 64, 64, 64, 63, 63, 63, 63, 63, 63, 63]; travel 21.0 px
+INFO west contact0 changed px per step walk0->b0->b1->idle0 [2158, 922, 0]
+PASS north pxo 17 frames :: (17, 17)
+INFO north layers v07 ['under-trouser-paint', 'far-leg', 'near-leg', 'upper-body', 'far-arm', 'near-arm', 'hair-scarf-follow']
+PASS north near-leg idle+walk layer bytes equal v06 :: 0 differing
+PASS north far-leg idle+walk layer bytes equal v06 :: 0 differing
+PASS south pxo 17 frames :: (17, 17)
+INFO south layers v07 ['under-trouser-paint', 'far-leg', 'near-leg', 'upper-body', 'far-arm', 'near-arm', 'hair-scarf-follow']
+PASS south near-leg idle+walk layer bytes equal v06 :: 0 differing
+PASS south far-leg idle+walk layer bytes equal v06 :: 0 differing
+SUMMARY 55/57 PASS
