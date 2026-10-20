@@ -1,0 +1,974 @@
+{
+ "status": "TEST-ONLY partial combat-action pilot (idle + short-blade attack). UNAPPROVED motion. Not a runtime package, not loaded by the game, no default/runtime/camera/party change. Full task needs all 8 actions; stays IN_PROGRESS.",
+ "task": "content.combat.protagonist-female.combat-actions",
+ "approvedSource": {
+  "file": "outputs/hero-sea-v01/rpg-2-star-ocean-the-second_heroine-battle_still-native136_sea-unapproved-v01_20261020-181955-1294c865.png",
+  "sha256": "4ce65a7915c0c0270a4ca353152b45b7d68b42672cb1483dd4f3e9cf4ac9d5e6",
+  "approval": "docs/character-visuals/rpg-2-star-ocean-the-second_heroine-sea_static-baselines-creator-approval_v01_20261020-185828-8775642a.md",
+  "rewritten": false,
+  "usedAsPose": "base"
+ },
+ "cell": [
+  136,
+  144
+ ],
+ "logicalExtent": [
+  68,
+  72
+ ],
+ "pinNative": [
+  64,
+  136
+ ],
+ "pinLogical": [
+  32,
+  68
+ ],
+ "displayRequirement": "draw_texture_rect(texture, Rect2(round(x)-32, 204, 68, 72), tile=false), nearest, no mipmaps (136 native texels into 68 logical px = 2 native per logical; 1:1 physical at 1280x720)",
+ "notForLogicalScale1Helper": "the existing combat sprite-set helper only accepts logical_scale 1; this 136-texel source must not be drawn at 136 logical px, so it is NOT packaged for that loader",
+ "tickSeconds": 0.033333333,
+ "fpsParity": "every duration is whole 1/30 s ticks: 30 fps shows each pose for N frames, 60 fps for 2N",
+ "clips": {
+  "idle": {
+   "loop": true,
+   "frames": [
+    {
+     "pose": "base",
+     "ticks": 8,
+     "start_s": 0.0,
+     "duration_s": 0.266667
+    },
+    {
+     "pose": "idle-b1",
+     "ticks": 6,
+     "start_s": 0.266667,
+     "duration_s": 0.2
+    },
+    {
+     "pose": "idle-b2",
+     "ticks": 8,
+     "start_s": 0.466667,
+     "duration_s": 0.266667
+    },
+    {
+     "pose": "idle-b1",
+     "ticks": 6,
+     "start_s": 0.733333,
+     "duration_s": 0.2
+    }
+   ],
+   "total_ticks": 28,
+   "total_s": 0.933333
+  },
+  "attack": {
+   "loop": false,
+   "frames": [
+    {
+     "pose": "atk-antic-a",
+     "ticks": 2,
+     "start_s": 0.0,
+     "duration_s": 0.066667
+    },
+    {
+     "pose": "atk-antic-b",
+     "ticks": 2,
+     "start_s": 0.066667,
+     "duration_s": 0.066667
+    },
+    {
+     "pose": "atk-smear",
+     "ticks": 1,
+     "start_s": 0.133333,
+     "duration_s": 0.033333
+    },
+    {
+     "pose": "atk-contact",
+     "ticks": 2,
+     "start_s": 0.166667,
+     "duration_s": 0.066667
+    },
+    {
+     "pose": "atk-follow",
+     "ticks": 2,
+     "start_s": 0.233333,
+     "duration_s": 0.066667
+    },
+    {
+     "pose": "atk-recover",
+     "ticks": 2,
+     "start_s": 0.3,
+     "duration_s": 0.066667
+    },
+    {
+     "pose": "idle-b1",
+     "ticks": 1,
+     "start_s": 0.366667,
+     "duration_s": 0.033333
+    }
+   ],
+   "total_ticks": 12,
+   "total_s": 0.4,
+   "then": "base"
+  }
+ },
+ "stagedContact": {
+  "pose": "atk-contact",
+  "start_s": 0.166667,
+  "note": "staged visual timeline only; the arena applies damage and the hit VFX on the press frame (t=0)"
+ },
+ "arenaTiming": {
+  "attackVisualSeconds": 0.39,
+  "attackCooldownSeconds": 0.43,
+  "damageAt": "press frame (_try_attack)",
+  "pilotAttackTotalSeconds": 0.4,
+  "pilotFitsCooldown": true
+ },
+ "poses": {
+  "idle-b1": {
+   "body": [
+    0,
+    1
+   ],
+   "ponytailLag": [
+    0,
+    0
+   ],
+   "arm": null,
+   "rig": {
+    "joints": {
+     "back": {
+      "hip": [
+       53.5,
+       87.5
+      ],
+      "knee": [
+       49.5,
+       101.0
+      ],
+      "ankle": [
+       45.5,
+       110.5
+      ],
+      "thighDeg": 0.559,
+      "shinDeg": 1.032,
+      "thighStretch": -0.48,
+      "shinStretch": -0.463
+     },
+     "front": {
+      "hip": [
+       67.5,
+       87.5
+      ],
+      "knee": [
+       79.0,
+       100.0
+      ],
+      "ankle": [
+       82.5,
+       109.5
+      ],
+      "thighDeg": -2.378,
+      "shinDeg": 1.577,
+      "thighStretch": -0.044,
+      "shinStretch": -0.646
+     }
+    },
+    "arm": null
+   },
+   "layerTexels": {
+    "seams": 33,
+    "ponytail": 590,
+    "leg-back": 563,
+    "leg-front": 644,
+    "torso": 2367,
+    "head": 596,
+    "arm": 0,
+    "weapon": 0,
+    "fx": 0
+   }
+  },
+  "idle-b2": {
+   "body": [
+    0,
+    2
+   ],
+   "ponytailLag": [
+    0,
+    -1
+   ],
+   "arm": null,
+   "rig": {
+    "joints": {
+     "back": {
+      "hip": [
+       53.5,
+       88.5
+      ],
+      "knee": [
+       50.0,
+       101.5
+      ],
+      "ankle": [
+       45.5,
+       110.5
+      ],
+      "thighDeg": -0.877,
+      "shinDeg": 4.764,
+      "thighStretch": -1.097,
+      "shinStretch": -0.708
+     },
+     "front": {
+      "hip": [
+       67.5,
+       88.5
+      ],
+      "knee": [
+       79.5,
+       100.5
+      ],
+      "ankle": [
+       82.5,
+       109.5
+      ],
+      "thighDeg": -4.764,
+      "shinDeg": 3.366,
+      "thighStretch": -0.059,
+      "shinStretch": -1.283
+     }
+    },
+    "arm": null
+   },
+   "layerTexels": {
+    "seams": 45,
+    "ponytail": 599,
+    "leg-back": 553,
+    "leg-front": 636,
+    "torso": 2367,
+    "head": 596,
+    "arm": 0,
+    "weapon": 0,
+    "fx": 0
+   }
+  },
+  "atk-antic-a": {
+   "body": [
+    -1,
+    1
+   ],
+   "ponytailLag": [
+    1,
+    0
+   ],
+   "arm": {
+    "grip": [
+     85,
+     51
+    ],
+    "bladeDeg": -68.0,
+    "smearFrom": null
+   },
+   "rig": {
+    "joints": {
+     "back": {
+      "hip": [
+       52.5,
+       87.5
+      ],
+      "knee": [
+       49.0,
+       101.0
+      ],
+      "ankle": [
+       45.5,
+       110.5
+      ],
+      "thighDeg": -1.411,
+      "shinDeg": -1.577,
+      "thighStretch": -0.614,
+      "shinStretch": -0.646
+     },
+     "front": {
+      "hip": [
+       66.5,
+       87.5
+      ],
+      "knee": [
+       78.5,
+       100.0
+      ],
+      "ankle": [
+       82.5,
+       109.5
+      ],
+      "thighDeg": -3.595,
+      "shinDeg": -1.032,
+      "thighStretch": 0.298,
+      "shinStretch": -0.463
+     }
+    },
+    "arm": {
+     "shoulder": [
+      73.5,
+      48.5
+     ],
+     "elbow": [
+      76.243,
+      61.207
+     ],
+     "grip": [
+      84.5,
+      52.5
+     ],
+     "tip": [
+      97.217,
+      21.024
+     ]
+    }
+   },
+   "layerTexels": {
+    "seams": 39,
+    "ponytail": 584,
+    "leg-back": 563,
+    "leg-front": 647,
+    "torso": 1940,
+    "head": 596,
+    "arm": 252,
+    "weapon": 270,
+    "fx": 0
+   }
+  },
+  "atk-antic-b": {
+   "body": [
+    -2,
+    2
+   ],
+   "ponytailLag": [
+    1,
+    -1
+   ],
+   "arm": {
+    "grip": [
+     83,
+     42
+    ],
+    "bladeDeg": -80.0,
+    "smearFrom": null
+   },
+   "rig": {
+    "joints": {
+     "back": {
+      "hip": [
+       51.5,
+       88.5
+      ],
+      "knee": [
+       49.0,
+       101.5
+      ],
+      "ankle": [
+       45.5,
+       110.5
+      ],
+      "thighDeg": -5.06,
+      "shinDeg": -0.551,
+      "thighStretch": -1.322,
+      "shinStretch": -1.114
+     },
+     "front": {
+      "hip": [
+       65.5,
+       88.5
+      ],
+      "knee": [
+       78.5,
+       100.5
+      ],
+      "ankle": [
+       82.5,
+       109.5
+      ],
+      "thighDeg": -7.054,
+      "shinDeg": -2.161,
+      "thighStretch": 0.662,
+      "shinStretch": -0.921
+     }
+    },
+    "arm": {
+     "shoulder": [
+      72.5,
+      49.5
+     ],
+     "elbow": [
+      83.567,
+      56.321
+     ],
+     "grip": [
+      81.5,
+      44.5
+     ],
+     "tip": [
+      87.395,
+      11.067
+     ]
+    }
+   },
+   "layerTexels": {
+    "seams": 40,
+    "ponytail": 592,
+    "leg-back": 551,
+    "leg-front": 649,
+    "torso": 1940,
+    "head": 596,
+    "arm": 243,
+    "weapon": 268,
+    "fx": 0
+   }
+  },
+  "atk-smear": {
+   "body": [
+    1,
+    2
+   ],
+   "ponytailLag": [
+    -1,
+    0
+   ],
+   "arm": {
+    "grip": [
+     95,
+     50
+    ],
+    "bladeDeg": -28.0,
+    "smearFrom": "atk-antic-b"
+   },
+   "rig": {
+    "joints": {
+     "back": {
+      "hip": [
+       54.5,
+       88.5
+      ],
+      "knee": [
+       50.5,
+       101.5
+      ],
+      "ankle": [
+       45.5,
+       110.5
+      ],
+      "thighDeg": 1.157,
+      "shinDeg": 7.253,
+      "thighStretch": -0.959,
+      "shinStretch": -0.475
+     },
+     "front": {
+      "hip": [
+       68.5,
+       88.5
+      ],
+      "knee": [
+       80.0,
+       100.5
+      ],
+      "ankle": [
+       82.5,
+       109.5
+      ],
+      "thighDeg": -3.545,
+      "shinDeg": 6.277,
+      "thighStretch": -0.409,
+      "shinStretch": -1.43
+     }
+    },
+    "arm": {
+     "shoulder": [
+      75.5,
+      49.5
+     ],
+     "elbow": [
+      85.649,
+      57.624
+     ],
+     "grip": [
+      96.5,
+      52.5
+     ],
+     "tip": [
+      126.475,
+      36.562
+     ]
+    }
+   },
+   "layerTexels": {
+    "seams": 48,
+    "ponytail": 606,
+    "leg-back": 555,
+    "leg-front": 633,
+    "torso": 1940,
+    "head": 596,
+    "arm": 253,
+    "weapon": 269,
+    "fx": 204
+   }
+  },
+  "atk-contact": {
+   "body": [
+    4,
+    3
+   ],
+   "ponytailLag": [
+    -2,
+    -1
+   ],
+   "arm": {
+    "grip": [
+     92,
+     58
+    ],
+    "bladeDeg": 8.0,
+    "smearFrom": "atk-smear"
+   },
+   "rig": {
+    "joints": {
+     "back": {
+      "hip": [
+       57.5,
+       89.5
+      ],
+      "knee": [
+       52.0,
+       102.0
+      ],
+      "ankle": [
+       45.5,
+       110.5
+      ],
+      "thighDeg": 7.804,
+      "shinDeg": 15.604,
+      "thighStretch": -0.904,
+      "shinStretch": -0.07
+     },
+     "front": {
+      "hip": [
+       71.5,
+       89.5
+      ],
+      "knee": [
+       82.5,
+       101.0
+      ],
+      "ankle": [
+       82.5,
+       109.5
+      ],
+      "thighDeg": -3.491,
+      "shinDeg": 21.801,
+      "thighStretch": -1.116,
+      "shinStretch": -2.27
+     }
+    },
+    "arm": {
+     "shoulder": [
+      78.5,
+      50.5
+     ],
+     "elbow": [
+      84.512,
+      62.027
+     ],
+     "grip": [
+      96.5,
+      61.5
+     ],
+     "tip": [
+      130.118,
+      66.225
+     ]
+    }
+   },
+   "layerTexels": {
+    "seams": 60,
+    "ponytail": 621,
+    "leg-back": 563,
+    "leg-front": 621,
+    "torso": 1940,
+    "head": 596,
+    "arm": 258,
+    "weapon": 267,
+    "fx": 81
+   }
+  },
+  "atk-follow": {
+   "body": [
+    4,
+    3
+   ],
+   "ponytailLag": [
+    -2,
+    0
+   ],
+   "arm": {
+    "grip": [
+     86,
+     65
+    ],
+    "bladeDeg": 42.0,
+    "smearFrom": null
+   },
+   "rig": {
+    "joints": {
+     "back": {
+      "hip": [
+       57.5,
+       89.5
+      ],
+      "knee": [
+       52.0,
+       102.0
+      ],
+      "ankle": [
+       45.5,
+       110.5
+      ],
+      "thighDeg": 7.804,
+      "shinDeg": 15.604,
+      "thighStretch": -0.904,
+      "shinStretch": -0.07
+     },
+     "front": {
+      "hip": [
+       71.5,
+       89.5
+      ],
+      "knee": [
+       82.5,
+       101.0
+      ],
+      "ankle": [
+       82.5,
+       109.5
+      ],
+      "thighDeg": -3.491,
+      "shinDeg": 21.801,
+      "thighStretch": -1.116,
+      "shinStretch": -2.27
+     }
+    },
+    "arm": {
+     "shoulder": [
+      78.5,
+      50.5
+     ],
+     "elbow": [
+      79.613,
+      63.452
+     ],
+     "grip": [
+      90.5,
+      68.5
+     ],
+     "tip": [
+      115.729,
+      91.216
+     ]
+    }
+   },
+   "layerTexels": {
+    "seams": 95,
+    "ponytail": 620,
+    "leg-back": 563,
+    "leg-front": 621,
+    "torso": 1940,
+    "head": 596,
+    "arm": 260,
+    "weapon": 271,
+    "fx": 0
+   }
+  },
+  "atk-recover": {
+   "body": [
+    2,
+    2
+   ],
+   "ponytailLag": [
+    -1,
+    0
+   ],
+   "arm": {
+    "grip": [
+     87,
+     63
+    ],
+    "bladeDeg": -12.0,
+    "smearFrom": null
+   },
+   "rig": {
+    "joints": {
+     "back": {
+      "hip": [
+       55.5,
+       88.5
+      ],
+      "knee": [
+       50.5,
+       101.5
+      ],
+      "ankle": [
+       45.5,
+       110.5
+      ],
+      "thighDeg": 5.092,
+      "shinDeg": 7.253,
+      "thighStretch": -0.632,
+      "shinStretch": -0.475
+     },
+     "front": {
+      "hip": [
+       69.5,
+       88.5
+      ],
+      "knee": [
+       80.5,
+       100.5
+      ],
+      "ankle": [
+       82.5,
+       109.5
+      ],
+      "thighDeg": -2.274,
+      "shinDeg": 9.273,
+      "thighStretch": -0.751,
+      "shinStretch": -1.551
+     }
+    },
+    "arm": {
+     "shoulder": [
+      76.5,
+      49.5
+     ],
+     "elbow": [
+      77.901,
+      62.424
+     ],
+     "grip": [
+      89.5,
+      65.5
+     ],
+     "tip": [
+      122.707,
+      58.442
+     ]
+    }
+   },
+   "layerTexels": {
+    "seams": 49,
+    "ponytail": 606,
+    "leg-back": 559,
+    "leg-front": 627,
+    "torso": 1940,
+    "head": 596,
+    "arm": 261,
+    "weapon": 272,
+    "fx": 0
+   }
+  }
+ },
+ "poseFiles": {
+  "base": {
+   "name": "rpg-2-star-ocean-the-second_heroine-battle_still-native136_sea-unapproved-v01_20261020-181955-1294c865.png",
+   "sha256": "4ce65a7915c0c0270a4ca353152b45b7d68b42672cb1483dd4f3e9cf4ac9d5e6",
+   "path": "outputs/hero-sea-v01/rpg-2-star-ocean-the-second_heroine-battle_still-native136_sea-unapproved-v01_20261020-181955-1294c865.png"
+  },
+  "idle-b1": {
+   "name": "rpg-2-star-ocean-the-second_heroine-sea-combat_pose-idle-b1-native136_test-only-v01_20261020-192028-b07bea19.png",
+   "sha256": "68726810a0050395c19ad6b95a47978fbaa5071ef0911620774fdd04011258b5"
+  },
+  "idle-b2": {
+   "name": "rpg-2-star-ocean-the-second_heroine-sea-combat_pose-idle-b2-native136_test-only-v01_20261020-192028-67fbfa18.png",
+   "sha256": "035978c53a8d2a876a3d2383c0c62d609a40e98485bad294803514458367252a"
+  },
+  "atk-antic-a": {
+   "name": "rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-antic-a-native136_test-only-v01_20261020-192028-754aa427.png",
+   "sha256": "b214e6d5b82c3fde00b154fa30a690b61c7890c376558ab4ce8ff7074cfb44f3"
+  },
+  "atk-antic-b": {
+   "name": "rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-antic-b-native136_test-only-v01_20261020-192028-4a2e8bf9.png",
+   "sha256": "dc0b99c8e5e9568c7ad0410bc74365f2745378cb0478b4f6ec87877bd1d2a4f2"
+  },
+  "atk-smear": {
+   "name": "rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-smear-native136_test-only-v01_20261020-192028-84458630.png",
+   "sha256": "cfa9098eac42897d5e4c4453c5080617eb409a03abf5dbf143137fca76443ceb"
+  },
+  "atk-contact": {
+   "name": "rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-contact-native136_test-only-v01_20261020-192028-b01a6e0c.png",
+   "sha256": "d095cb7ede2b86613c16b83d8311e2515d9201411a22d4afb29b2eac85721b68"
+  },
+  "atk-follow": {
+   "name": "rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-follow-native136_test-only-v01_20261020-192028-27db8c30.png",
+   "sha256": "a83b10a04014441521e578ed44aeced9dc6bb3579195cad79b3f31b13377b1a0"
+  },
+  "atk-recover": {
+   "name": "rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-recover-native136_test-only-v01_20261020-192028-b5b23440.png",
+   "sha256": "18d051f58da195d5d84f851d7320fe1fd416f80466b414c351114ab4fe650ca6"
+  }
+ },
+ "layers": [
+  "seams",
+  "ponytail",
+  "leg-back",
+  "leg-front",
+  "torso",
+  "head",
+  "arm",
+  "weapon",
+  "fx"
+ ],
+ "method": "Source: the creator-approved right-facing combat still (136x144 native, sha 4ce65a79...), read byte-exact and never\nrewritten. Each new pose is authored on a small reusable rig built from that still:",
+ "source": {
+  "file": "tools/rpg-2-star-ocean-the-second_heroine-sea_combat-motion-author_test-only-v01_20261020-192028-9bab493d.py",
+  "sha256TextLf": "b5d0926c75bdd5da27299fec18f5293da8c68e6ae51e5956cfa5395ec41d64cc"
+ },
+ "inputs": {
+  "pxoWriter": {
+   "file": "tools/rpg-2-star-ocean-the-second_protagonist-female_south-run-v06-build_m8-w09_20261017-211600-f8e736cc.py",
+   "sha256TextLf": "2b83a2216438384c0eff9829d44a3f2f11f5ec3854507bff40b704e8d57c7a8a"
+  }
+ },
+ "files": {
+  "atk-antic-a.ora": {
+   "name": "rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-antic-a-layered_test-only-v01_20261020-192028-54975feb.ora",
+   "sha256": "f62624319360e2efbe843c05b7d32f18e0311e062fbcf8168bf7646aefee2193"
+  },
+  "atk-antic-a.png": {
+   "name": "rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-antic-a-native136_test-only-v01_20261020-192028-754aa427.png",
+   "sha256": "b214e6d5b82c3fde00b154fa30a690b61c7890c376558ab4ce8ff7074cfb44f3"
+  },
+  "atk-antic-a.pxo": {
+   "name": "rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-antic-a-editable_test-only-v01_20261020-192028-bbfe27a1.pxo",
+   "sha256": "bba27a054329c394773274440c557cdc314c60a437c70561885cf452ba7b966f"
+  },
+  "atk-antic-a.x4": {
+   "name": "rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-antic-a-inspect-x4_test-only-v01_20261020-192028-48416194.png",
+   "sha256": "83d6950c70d6fba5bb76e8bdc8792c5cbf2caa6a4a0d852efd9d8163da9c63d5"
+  },
+  "atk-antic-b.ora": {
+   "name": "rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-antic-b-layered_test-only-v01_20261020-192028-7a190525.ora",
+   "sha256": "9c0f57883681eed9c9db7412804c41383950e865a0d44b91dfa11329504ae84e"
+  },
+  "atk-antic-b.png": {
+   "name": "rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-antic-b-native136_test-only-v01_20261020-192028-4a2e8bf9.png",
+   "sha256": "dc0b99c8e5e9568c7ad0410bc74365f2745378cb0478b4f6ec87877bd1d2a4f2"
+  },
+  "atk-antic-b.pxo": {
+   "name": "rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-antic-b-editable_test-only-v01_20261020-192028-f4d9f92a.pxo",
+   "sha256": "16d81bb2db47fa56bcbb92494d2cf9c81ef4fb69cf922edea749ef650db423da"
+  },
+  "atk-antic-b.x4": {
+   "name": "rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-antic-b-inspect-x4_test-only-v01_20261020-192028-9f174725.png",
+   "sha256": "5bb8774ab8f79bede0345eae62bdc4af0d6147117a538edc610f553dcdcef2cf"
+  },
+  "atk-contact.ora": {
+   "name": "rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-contact-layered_test-only-v01_20261020-192028-dc4b766e.ora",
+   "sha256": "57090dd71d2e44c757829abee439a25196f72d3a55c54d69aedcf726c5f5e324"
+  },
+  "atk-contact.png": {
+   "name": "rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-contact-native136_test-only-v01_20261020-192028-b01a6e0c.png",
+   "sha256": "d095cb7ede2b86613c16b83d8311e2515d9201411a22d4afb29b2eac85721b68"
+  },
+  "atk-contact.pxo": {
+   "name": "rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-contact-editable_test-only-v01_20261020-192028-f978125f.pxo",
+   "sha256": "8a9fce5cd6088293a72ecba5a9db0dadf086e675d5ca143c27f7746d3f87ccc6"
+  },
+  "atk-contact.x4": {
+   "name": "rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-contact-inspect-x4_test-only-v01_20261020-192028-b6738a03.png",
+   "sha256": "7cbb2caa350a6aac37097ee3b82610e24829e762498f7f5a9b91706304725689"
+  },
+  "atk-follow.ora": {
+   "name": "rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-follow-layered_test-only-v01_20261020-192028-c3d69424.ora",
+   "sha256": "04ed489920c14ca31d24240732316ab3448b75ebe354d94e8e189e5b314bd604"
+  },
+  "atk-follow.png": {
+   "name": "rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-follow-native136_test-only-v01_20261020-192028-27db8c30.png",
+   "sha256": "a83b10a04014441521e578ed44aeced9dc6bb3579195cad79b3f31b13377b1a0"
+  },
+  "atk-follow.pxo": {
+   "name": "rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-follow-editable_test-only-v01_20261020-192028-eae3796d.pxo",
+   "sha256": "174e5621652d86f2e97de67050be26b3cf023735b95e757f537a0062fb90f7ce"
+  },
+  "atk-follow.x4": {
+   "name": "rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-follow-inspect-x4_test-only-v01_20261020-192028-0df046b6.png",
+   "sha256": "0e9344623714a6621defa36d2df6e4bc5cb57f44018161d92ef8b28456bddecf"
+  },
+  "atk-recover.ora": {
+   "name": "rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-recover-layered_test-only-v01_20261020-192028-b3f3c018.ora",
+   "sha256": "0631a1eaea9f5e6f53f8b357e482c8690b72cd518e9cc7ec5716c28783af2e14"
+  },
+  "atk-recover.png": {
+   "name": "rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-recover-native136_test-only-v01_20261020-192028-b5b23440.png",
+   "sha256": "18d051f58da195d5d84f851d7320fe1fd416f80466b414c351114ab4fe650ca6"
+  },
+  "atk-recover.pxo": {
+   "name": "rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-recover-editable_test-only-v01_20261020-192028-ce62c1b0.pxo",
+   "sha256": "548238f3322b69d732800b52ec5cf6a1798e5a37b7e68330caea888b57a241f8"
+  },
+  "atk-recover.x4": {
+   "name": "rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-recover-inspect-x4_test-only-v01_20261020-192028-9896683c.png",
+   "sha256": "ea155d372816b593fa7a04013899fb64a509171507e0221d877a40ca190288ba"
+  },
+  "atk-smear.ora": {
+   "name": "rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-smear-layered_test-only-v01_20261020-192028-a3f4e97e.ora",
+   "sha256": "2685979c64941ddeda7e00d8a7136c7c243b63d32ba63b93bc794bbf85f841f8"
+  },
+  "atk-smear.png": {
+   "name": "rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-smear-native136_test-only-v01_20261020-192028-84458630.png",
+   "sha256": "cfa9098eac42897d5e4c4453c5080617eb409a03abf5dbf143137fca76443ceb"
+  },
+  "atk-smear.pxo": {
+   "name": "rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-smear-editable_test-only-v01_20261020-192028-e70f7987.pxo",
+   "sha256": "40366df7186f3afc7f077c651d1d4934400c93d2fdc478945edddb785fef48a9"
+  },
+  "atk-smear.x4": {
+   "name": "rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-smear-inspect-x4_test-only-v01_20261020-192028-9a0d77ca.png",
+   "sha256": "0975070c4ca8346272e1a6997b2c25a9811185b359e0e0f501c171542bc7a755"
+  },
+  "idle-b1.ora": {
+   "name": "rpg-2-star-ocean-the-second_heroine-sea-combat_pose-idle-b1-layered_test-only-v01_20261020-192028-cd183750.ora",
+   "sha256": "ad07972fd9b9dd655784779ae7f8945b36e2f9c08c4dc02eb90af6394779dd78"
+  },
+  "idle-b1.png": {
+   "name": "rpg-2-star-ocean-the-second_heroine-sea-combat_pose-idle-b1-native136_test-only-v01_20261020-192028-b07bea19.png",
+   "sha256": "68726810a0050395c19ad6b95a47978fbaa5071ef0911620774fdd04011258b5"
+  },
+  "idle-b1.pxo": {
+   "name": "rpg-2-star-ocean-the-second_heroine-sea-combat_pose-idle-b1-editable_test-only-v01_20261020-192028-81c43ab4.pxo",
+   "sha256": "36e8e7b282bce3542c8833155ab125bb2bc12c5689d9f2b2d94f38e77364a6fe"
+  },
+  "idle-b1.x4": {
+   "name": "rpg-2-star-ocean-the-second_heroine-sea-combat_pose-idle-b1-inspect-x4_test-only-v01_20261020-192028-58d10dac.png",
+   "sha256": "2308b62171a00e5a0a95d2c9daa3f2a9786472f5bb4cfef47e0b850b95f363e1"
+  },
+  "idle-b2.ora": {
+   "name": "rpg-2-star-ocean-the-second_heroine-sea-combat_pose-idle-b2-layered_test-only-v01_20261020-192028-ca356c6e.ora",
+   "sha256": "d9c50e1acb43d39aeecbd8c285d9f59e36b5ee9e94b7a39841b984487242fa05"
+  },
+  "idle-b2.png": {
+   "name": "rpg-2-star-ocean-the-second_heroine-sea-combat_pose-idle-b2-native136_test-only-v01_20261020-192028-67fbfa18.png",
+   "sha256": "035978c53a8d2a876a3d2383c0c62d609a40e98485bad294803514458367252a"
+  },
+  "idle-b2.pxo": {
+   "name": "rpg-2-star-ocean-the-second_heroine-sea-combat_pose-idle-b2-editable_test-only-v01_20261020-192028-ac14968d.pxo",
+   "sha256": "af49eda2669f0c7f8034114aed06289cbdb20bef43006033c5b1830de9f2a8ed"
+  },
+  "idle-b2.x4": {
+   "name": "rpg-2-star-ocean-the-second_heroine-sea-combat_pose-idle-b2-inspect-x4_test-only-v01_20261020-192028-ff94cf3e.png",
+   "sha256": "c631fe3646c066c3e47c15e9a6888e1c41de479132c3940644f6ba5b0bcf7857"
+  }
+ },
+ "inspectionNote": "inspect-x4 files are nearest x4 on flat grey, one pose per file, for viewing only (not runtime art)",
+ "artApproved": false,
+ "motionApproved": false,
+ "runtimeDefaultChanged": false,
+ "gameSourceChanged": false,
+ "guiSaveAsVerified": false,
+ "hitSynchronized": false
+}
