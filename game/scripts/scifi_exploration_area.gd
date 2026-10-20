@@ -19,6 +19,11 @@ const NavigationUiSkin := preload("res://scripts/rpg-2-star-ocean-the-second_nav
 const NAVIGATION_UI_SKIN_FLAG := "--navigation-ui-skin-pilot"
 const NAVIGATION_UI_SKIN_DIR := "res://assets/ui/battle-skin-v01"
 static var navigation_ui_skin_override := -1
+# Opt-in UNAPPROVED dialogue sideportrait from the fixed five-variant exact-crop
+# kit. Trace/system/unknown speakers hide it; flag-off geometry is untouched.
+const CharacterUiPortraits := preload("res://scripts/rpg-2-star-ocean-the-second_character-ui-portraits_helper_v01_20261019-233832-b7c4e912.gd")
+static var character_ui_portraits_override := -1
+var character_ui_portraits: Control = null
 const MOVE_SPEED := 140.0
 const SPAWN := Vector2(82, 260)
 const CITY_SPAWN := Vector2(340, 253)
@@ -87,6 +92,7 @@ var survey_label: Label
 var assist_label: Label
 var trace_labels: Array[Label] = []
 var dialogue_overlay: ColorRect
+var dialogue_panel: ColorRect
 var dialogue_title: Label
 var dialogue_text: Label
 var invite_button: Button
@@ -104,6 +110,12 @@ static func navigation_ui_skin_enabled() -> bool:
 	if navigation_ui_skin_override >= 0:
 		return navigation_ui_skin_override == 1
 	return OS.get_cmdline_user_args().has(NAVIGATION_UI_SKIN_FLAG)
+
+
+static func character_ui_portraits_enabled() -> bool:
+	if character_ui_portraits_override >= 0:
+		return character_ui_portraits_override == 1
+	return CharacterUiPortraits.pilot_requested(OS.get_cmdline_user_args())
 
 
 func _ready() -> void:
@@ -142,6 +154,10 @@ func _ready() -> void:
 		AppState.record_playtest_event("visit", destination_id)
 	AppState.areas_visited[destination_id] = true
 	_build_ui()
+	if character_ui_portraits_enabled():
+		character_ui_portraits = CharacterUiPortraits.new()
+		if not character_ui_portraits.install_dialogue(self, dialogue_overlay, dialogue_panel, dialogue_title, dialogue_text, invite_button, later_button):
+			character_ui_portraits = null
 	_start_audio()
 	AppState.language_changed.connect(_refresh_text)
 	_refresh_text()
@@ -153,6 +169,9 @@ func _ready() -> void:
 
 
 func _exit_tree() -> void:
+	if character_ui_portraits != null:
+		character_ui_portraits.revert()
+		character_ui_portraits = null
 	if navigation_ui_skin != null:
 		navigation_ui_skin.revert()
 		navigation_ui_skin = null
@@ -562,11 +581,11 @@ func _build_dialogue(canvas: CanvasLayer) -> void:
 	dialogue_overlay.size = Vector2(640, 360)
 	dialogue_overlay.visible = false
 	canvas.add_child(dialogue_overlay)
-	var panel := ColorRect.new()
-	panel.position = Vector2(87, 93)
-	panel.size = Vector2(466, 185)
-	panel.color = Color("#263e48")
-	dialogue_overlay.add_child(panel)
+	dialogue_panel = ColorRect.new()
+	dialogue_panel.position = Vector2(87, 93)
+	dialogue_panel.size = Vector2(466, 185)
+	dialogue_panel.color = Color("#263e48")
+	dialogue_overlay.add_child(dialogue_panel)
 	dialogue_title = Label.new()
 	dialogue_title.position = Vector2(110, 109)
 	dialogue_title.add_theme_font_size_override("font_size", 19)
@@ -642,6 +661,18 @@ func _refresh_text() -> void:
 		invite_button.text = AppState.text_for("recruit_invite")
 		invite_button.disabled = recruit_id == "ji-cheng" and not AppState.ji_records_checked
 		later_button.text = AppState.text_for("recruit_later")
+	_refresh_character_ui_portrait()
+
+
+func _refresh_character_ui_portrait() -> void:
+	if character_ui_portraits == null:
+		return
+	var speaker := ""
+	if dialogue_mode == "recruit":
+		speaker = recruit_id
+	elif dialogue_mode == "assist":
+		speaker = String(FIELD_ASSISTS[destination_id]["member"])
+	character_ui_portraits.apply_dialogue(dialogue_mode, speaker, true)
 
 
 func _open_dialogue() -> void:
@@ -699,6 +730,8 @@ func _dialogue_primary() -> void:
 func _close_dialogue() -> void:
 	dialogue_open = false
 	dialogue_overlay.visible = false
+	if character_ui_portraits != null:
+		character_ui_portraits.hide_dialogue()
 	back_button.grab_focus()
 
 

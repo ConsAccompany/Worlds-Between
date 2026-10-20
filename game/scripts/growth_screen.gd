@@ -14,6 +14,12 @@ const MvpDisplayPortraits := preload("res://scripts/rpg-2-star-ocean-the-second_
 static var mvp_display_portraits_override := -1
 var mvp_display_portraits: Control = null
 
+# Opt-in UNAPPROVED five-variant party-icon kit. This flag takes precedence over
+# the legacy female/MVP display flags so only one portrait helper is ever created.
+const CharacterUiPortraits := preload("res://scripts/rpg-2-star-ocean-the-second_character-ui-portraits_helper_v01_20261019-233832-b7c4e912.gd")
+static var character_ui_portraits_override := -1
+var character_ui_portraits: Control = null
+
 const SERIES_IDS := ["sword", "firearms", "tactics", "relics", "merchant"]
 
 var selected_id := "hero"
@@ -51,7 +57,12 @@ func _ready() -> void:
 	if management_ui_skin_override == 1 or (management_ui_skin_override < 0 and OS.get_cmdline_user_args().has("--management-ui-skin-pilot")):
 		management_ui_skin = ManagementUiSkin.new("res://assets/ui/battle-skin-v01")
 		management_ui_skin_status = "applied" if management_ui_skin.apply(self) else "fallback"
-	if mvp_display_portraits_override == 1 or (mvp_display_portraits_override < 0 and MvpDisplayPortraits.pilot_requested(OS.get_cmdline_user_args())):
+	var new_party_portraits := character_ui_portraits_override == 1 or (character_ui_portraits_override < 0 and CharacterUiPortraits.pilot_requested(OS.get_cmdline_user_args()))
+	if new_party_portraits:
+		character_ui_portraits = CharacterUiPortraits.new()
+		character_ui_portraits.install_party(self, member_buttons)
+		call_deferred("_refresh_character_ui_portraits")
+	elif mvp_display_portraits_override == 1 or (mvp_display_portraits_override < 0 and MvpDisplayPortraits.pilot_requested(OS.get_cmdline_user_args())):
 		mvp_display_portraits = MvpDisplayPortraits.new()
 		mvp_display_portraits.install(self, node_panel)
 		call_deferred("_refresh_display_portrait")
@@ -250,7 +261,9 @@ func _refresh() -> void:
 	nodes_button.text = AppState.text_for("growth_nodes_open")
 	if node_panel.visible:
 		_refresh_nodes(member)
-	if female_display_portrait != null or mvp_display_portraits != null:
+	if character_ui_portraits != null:
+		call_deferred("_refresh_character_ui_portraits")
+	elif female_display_portrait != null or mvp_display_portraits != null:
 		call_deferred("_refresh_display_portrait")
 
 
@@ -320,6 +333,11 @@ func _node_state_text(opened: bool, has_effect: bool, rank: int, cost: int, lock
 	return AppState.text_for("growth_node_upgrade") % [rank, cost]
 
 
+func _refresh_character_ui_portraits() -> void:
+	if character_ui_portraits != null:
+		character_ui_portraits.apply_party(AppState.active_party_ids, AppState.hero_appearance, true)
+
+
 func _refresh_display_portrait() -> void:
 	if mvp_display_portraits != null:
 		mvp_display_portraits.update(AppState.hero_appearance, selected_id, not node_panel.visible)
@@ -328,6 +346,9 @@ func _refresh_display_portrait() -> void:
 
 
 func _exit_tree() -> void:
+	if character_ui_portraits != null:
+		character_ui_portraits.revert()
+		character_ui_portraits = null
 	if mvp_display_portraits != null:
 		mvp_display_portraits.revert()
 	if female_display_portrait != null:

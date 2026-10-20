@@ -1,0 +1,855 @@
+{
+ "runStamp": "v02_20261019-201401-67aa0149",
+ "toolStamp": "v02_20261019-201213-12f10190",
+ "utcFinished": "2026-10-20T00:14:35+00:00",
+ "status": "UNAPPROVED technical evidence for an off-by-default candidate; not art acceptance, no smoothness claim",
+ "gitHead": "e600241b9f732e8f8db2a5e645d4947b88ac1142",
+ "hashNormalization": "sha256-bytes of working files (no text normalization)",
+ "provenance": {
+  "adaptedFrom": {
+   "tools/rpg-2-star-ocean-the-second_patrol_motion-capture-harness_v01_20261019-200500-5b7c2e19.gd": "af3fd15c53afcedb0138f0fd3ecb6d06428238feec437dab316cf2a3c291b9ec",
+   "tools/rpg-2-star-ocean-the-second_patrol_motion-capture-run_v01_20261019-200500-5b7c2e19.py": "a48b93a5d29869c2de0c002d636cf99633c3d6bbdd5e2f13c4fa344828768cb0"
+  },
+  "captureChange": "Engine.max_fps = 60 set in the v02 capture harness only (game sets no max_fps); vsync, physics ticks, time scale, scene, CLI flag, input and combat untouched",
+  "notDerivedFrom": "no frame, video or timing is taken from the v01 240 Hz recordings"
+ },
+ "boundSha256AtStart": {
+  "game/scripts/battle_arena.gd": "799308e292b0cfebf3406aa30b283cd4ab595397c5a027e7edd0a7085355d3d2",
+  "game/assets/enemies/patrol-anim-v01/rpg-2-star-ocean-the-second_patrol_battle-animation-loader_v01_20261019-194007-a4b10a85.gd": "f051d5938afa9f6208b1ddebd1eb263c11f82451585b28ec980312c052dda853",
+  "game/assets/enemies/patrol-anim-v01/rpg-2-star-ocean-the-second_patrol_battle-animation-runtime-package_v01_20261019-194007-a4b10a85.json": "075a438e13d80b86b1b69b5d80c6ba14678cb464d68c8dfb5e9eae7b10f8f46a",
+  "game/assets/enemies/patrol-anim-v01/rpg-2-star-ocean-the-second_patrol_battle-animation-strip_v01_20261019-194007-a4b10a85.png": "e91f4373fb8f4f4b1ae3fbe0db966e8f807614863a5dc62ce8b861667ed99fa0",
+  "game/assets/enemies/patrol-anim-v01/rpg-2-star-ocean-the-second_patrol_battle-animation-manifest_v01_20261019-194007-a4b10a85.json": "3f34afc6f5aa13e138c6dc72d82ad6fab6cb7d19704e5606c46eb5fe1bb3d877",
+  "tools/rpg-2-star-ocean-the-second_patrol_motion-capture-harness_v01_20261019-200500-5b7c2e19.gd": "af3fd15c53afcedb0138f0fd3ecb6d06428238feec437dab316cf2a3c291b9ec",
+  "tools/rpg-2-star-ocean-the-second_patrol_motion-capture-run_v01_20261019-200500-5b7c2e19.py": "a48b93a5d29869c2de0c002d636cf99633c3d6bbdd5e2f13c4fa344828768cb0",
+  "outputs/patrol-motion60-v02/rpg-2-star-ocean-the-second_patrol_motion60-capture-harness_v02_20261019-201213-12f10190.gd": "826b9fb87428805c00032539e3f2d621749ead034ac39436e90689c3d7971f3d",
+  "outputs/patrol-motion60-v02/rpg-2-star-ocean-the-second_patrol_motion60-capture-run_v02_20261019-201213-12f10190.py": "fcfdb4aa754d682f8ac3d5244ac5a9a39499209616cd2abd4fab68647962e39f"
+ },
+ "boundSha256AtEnd": {
+  "game/scripts/battle_arena.gd": "799308e292b0cfebf3406aa30b283cd4ab595397c5a027e7edd0a7085355d3d2",
+  "game/assets/enemies/patrol-anim-v01/rpg-2-star-ocean-the-second_patrol_battle-animation-loader_v01_20261019-194007-a4b10a85.gd": "f051d5938afa9f6208b1ddebd1eb263c11f82451585b28ec980312c052dda853",
+  "game/assets/enemies/patrol-anim-v01/rpg-2-star-ocean-the-second_patrol_battle-animation-runtime-package_v01_20261019-194007-a4b10a85.json": "075a438e13d80b86b1b69b5d80c6ba14678cb464d68c8dfb5e9eae7b10f8f46a",
+  "game/assets/enemies/patrol-anim-v01/rpg-2-star-ocean-the-second_patrol_battle-animation-strip_v01_20261019-194007-a4b10a85.png": "e91f4373fb8f4f4b1ae3fbe0db966e8f807614863a5dc62ce8b861667ed99fa0",
+  "game/assets/enemies/patrol-anim-v01/rpg-2-star-ocean-the-second_patrol_battle-animation-manifest_v01_20261019-194007-a4b10a85.json": "3f34afc6f5aa13e138c6dc72d82ad6fab6cb7d19704e5606c46eb5fe1bb3d877",
+  "tools/rpg-2-star-ocean-the-second_patrol_motion-capture-harness_v01_20261019-200500-5b7c2e19.gd": "af3fd15c53afcedb0138f0fd3ecb6d06428238feec437dab316cf2a3c291b9ec",
+  "tools/rpg-2-star-ocean-the-second_patrol_motion-capture-run_v01_20261019-200500-5b7c2e19.py": "a48b93a5d29869c2de0c002d636cf99633c3d6bbdd5e2f13c4fa344828768cb0",
+  "outputs/patrol-motion60-v02/rpg-2-star-ocean-the-second_patrol_motion60-capture-harness_v02_20261019-201213-12f10190.gd": "826b9fb87428805c00032539e3f2d621749ead034ac39436e90689c3d7971f3d",
+  "outputs/patrol-motion60-v02/rpg-2-star-ocean-the-second_patrol_motion60-capture-run_v02_20261019-201213-12f10190.py": "fcfdb4aa754d682f8ac3d5244ac5a9a39499209616cd2abd4fab68647962e39f"
+ },
+ "frozenExpected": {
+  "game/scripts/battle_arena.gd": "799308e292b0cfebf3406aa30b283cd4ab595397c5a027e7edd0a7085355d3d2",
+  "game/assets/enemies/patrol-anim-v01/rpg-2-star-ocean-the-second_patrol_battle-animation-loader_v01_20261019-194007-a4b10a85.gd": "f051d5938afa9f6208b1ddebd1eb263c11f82451585b28ec980312c052dda853",
+  "game/assets/enemies/patrol-anim-v01/rpg-2-star-ocean-the-second_patrol_battle-animation-runtime-package_v01_20261019-194007-a4b10a85.json": "075a438e13d80b86b1b69b5d80c6ba14678cb464d68c8dfb5e9eae7b10f8f46a",
+  "game/assets/enemies/patrol-anim-v01/rpg-2-star-ocean-the-second_patrol_battle-animation-strip_v01_20261019-194007-a4b10a85.png": "e91f4373fb8f4f4b1ae3fbe0db966e8f807614863a5dc62ce8b861667ed99fa0",
+  "game/assets/enemies/patrol-anim-v01/rpg-2-star-ocean-the-second_patrol_battle-animation-manifest_v01_20261019-194007-a4b10a85.json": "3f34afc6f5aa13e138c6dc72d82ad6fab6cb7d19704e5606c46eb5fe1bb3d877",
+  "tools/rpg-2-star-ocean-the-second_patrol_motion-capture-harness_v01_20261019-200500-5b7c2e19.gd": "af3fd15c53afcedb0138f0fd3ecb6d06428238feec437dab316cf2a3c291b9ec",
+  "tools/rpg-2-star-ocean-the-second_patrol_motion-capture-run_v01_20261019-200500-5b7c2e19.py": "a48b93a5d29869c2de0c002d636cf99633c3d6bbdd5e2f13c4fa344828768cb0"
+ },
+ "runner": {
+  "exit": 0,
+  "seconds": 30.666648,
+  "log": "outputs/patrol-motion60-v02/rpg-2-star-ocean-the-second_patrol_motion60-runner-log_v02_20261019-201401-67aa0149.log",
+  "logSha256": "52a5bd2048a89fc6f877c01e6cc545e1e24e343fca6bccc0b15551673303776f",
+  "stdout": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\nOpenGL API 3.3.0 NVIDIA 610.88 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 3080\n\nBATTLE_TRANSITION_MS 524.16\nBATTLE_TRANSITION_MS 12.57\nBATTLE_TRANSITION_MS 13.18\nBATTLE_TRANSITION_MS 13.14\nPATROL_MOTION60_CAPTURE OK clips=4\nCHECKED_RUN PASS None exit= 0 elapsed= 30.593 missing= []\n",
+  "stderr": "",
+  "command": [
+   "C:\\Users\\hkzha\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+   "-I",
+   "C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\dual03\\cl-patrol\\tools\\rpg-2-star-ocean-the-second_godot_checked-runner_v01_20261018-203400-f74ac6d1.py",
+   "--timeout",
+   "300",
+   "--expect",
+   "PATROL_MOTION60_CAPTURE OK",
+   "--log",
+   "C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\dual03\\cl-patrol\\outputs\\patrol-motion60-v02\\rpg-2-star-ocean-the-second_patrol_motion60-runner-log_v02_20261019-201401-67aa0149.log",
+   "--",
+   "C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\tooling\\godot-4-7-2\\Godot_v4.7.2-stable_win64_console.exe",
+   "--path",
+   "C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\dual03\\cl-patrol\\game",
+   "--resolution",
+   "640x360",
+   "-s",
+   "C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\dual03\\cl-patrol\\outputs\\patrol-motion60-v02\\rpg-2-star-ocean-the-second_patrol_motion60-capture-harness_v02_20261019-201213-12f10190.gd",
+   "--",
+   "--patrol-battle-animation-pilot",
+   "--cache-dir=C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\dual03\\cl-patrol\\outputs\\patrol-motion60-v02\\cache\\r201401",
+   "--raw-path=C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\dual03\\cl-patrol\\outputs\\patrol-motion60-v02\\rpg-2-star-ocean-the-second_patrol_motion60-capture-raw_v02_20261019-201401-67aa0149.json"
+  ]
+ },
+ "ffmpeg": "ffmpeg version 8.1.1-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers",
+ "freshAppData": {
+  "APPDATA": "outputs/patrol-motion60-v02/cache/r201401/app",
+  "LOCALAPPDATA": "outputs/patrol-motion60-v02/cache/r201401/local"
+ },
+ "engine": {
+  "maxFps": 60,
+  "maxFpsBeforeHarness": 0,
+  "physicsTicks": 60,
+  "renderer": "opengl3",
+  "screenRefresh": 239.761001586914,
+  "timeScale": 1.0,
+  "version": "4.7.2-stable (official)",
+  "vsync": 1
+ },
+ "engineMaxFpsAtEnd": 60,
+ "rawCapture": "outputs/patrol-motion60-v02/rpg-2-star-ocean-the-second_patrol_motion60-capture-raw_v02_20261019-201401-67aa0149.json",
+ "rawCaptureSha256Bytes": "609585cc9ceed133f400821f8dbde1f437e76994adea6a97515abc5ebf8ac1ef",
+ "harnessSourceSha256": {
+  "res://assets/enemies/patrol-anim-v01/rpg-2-star-ocean-the-second_patrol_battle-animation-loader_v01_20261019-194007-a4b10a85.gd": "f051d5938afa9f6208b1ddebd1eb263c11f82451585b28ec980312c052dda853",
+  "res://assets/enemies/patrol-anim-v01/rpg-2-star-ocean-the-second_patrol_battle-animation-runtime-package_v01_20261019-194007-a4b10a85.json": "075a438e13d80b86b1b69b5d80c6ba14678cb464d68c8dfb5e9eae7b10f8f46a",
+  "res://scripts/battle_arena.gd": "799308e292b0cfebf3406aa30b283cd4ab595397c5a027e7edd0a7085355d3d2"
+ },
+ "clips": [
+  {
+   "name": "normal-en",
+   "kind": "normal",
+   "language": "en",
+   "durabilityHold": false,
+   "holdWrites": 0,
+   "label": "normal unmodified combat (one battle_auto key input; no state/HP writes)",
+   "mp4": "outputs/patrol-motion60-v02/rpg-2-star-ocean-the-second_patrol_motion60-normal-en-normal1x-640_v02_20261019-201401-67aa0149.mp4",
+   "mp4Sha256": "b653d7733859ff274da85dd4526d7c7a2b4d644871b06b2fb4defcdbec3518c9",
+   "mp4Bytes": 123992,
+   "concatListLocalCache": "outputs/patrol-motion60-v02/cache/r201401/concat-normal-en.txt",
+   "concatSha256Bytes": "a1f0bca4c99f1c2813c24fa178d9104d326956618f6cf539611735c54b4dc7c3",
+   "frameCacheLocalOnly": "outputs/patrol-motion60-v02/cache/r201401/frames/normal-en",
+   "frames": 177,
+   "frameSha256ListSha256": "c0200fe2b15b9739351f7081b7c21402a6f8c5620a854fa39189b9d1f3e1d8f3",
+   "capturedSpanSeconds": 2.933163,
+   "autoPressedAt": 0.257154,
+   "battleFinishedAt": 1.441931,
+   "statesFrameCount": {
+    "defeat": 92,
+    "hit": 34,
+    "move": 51
+   },
+   "stateFirstSeenSeconds": {
+    "move": 0.040565,
+    "hit": 0.673818,
+    "defeat": 1.441931
+   },
+   "stateFirstRunRows": {
+    "move": [
+     0,
+     38
+    ],
+    "hit": [
+     39,
+     55
+    ],
+    "defeat": [
+     85,
+     176
+    ]
+   },
+   "statesMissing": [
+    "idle",
+    "windup",
+    "strike"
+   ],
+   "initialSceneEntrySample": {
+    "row": 0,
+    "t": 0.040565,
+    "wallDelta": 0.040565,
+    "processDelta": 0.142181,
+    "note": "first frame after instantiate/add_child; includes scene load and first _process; kept in the clip and the MP4"
+   },
+   "postStartFrames": {
+    "rows": "1..176",
+    "wallDelta": {
+     "n": 176,
+     "min": 0.00573,
+     "p50": 0.016666,
+     "p95": 0.016704,
+     "p99": 0.016941,
+     "max": 0.01815,
+     "mean": 0.016571,
+     "over20ms": 0,
+     "over25ms": 0,
+     "over34ms": 0
+    },
+    "processDelta": {
+     "n": 176,
+     "min": 0.00072,
+     "p50": 0.016667,
+     "p95": 0.016667,
+     "p99": 0.01708,
+     "max": 0.017577,
+     "mean": 0.016533,
+     "over20ms": 0,
+     "over25ms": 0,
+     "over34ms": 0
+    },
+    "effectiveFps": 60.228
+   },
+   "allFramesIncludingEntry": {
+    "wallDelta": {
+     "n": 177,
+     "min": 0.00573,
+     "p50": 0.016666,
+     "p95": 0.016709,
+     "p99": 0.017459,
+     "max": 0.040565,
+     "mean": 0.016707,
+     "over20ms": 1,
+     "over25ms": 1,
+     "over34ms": 1
+    },
+    "processDelta": {
+     "n": 177,
+     "min": 0.00072,
+     "p50": 0.016667,
+     "p95": 0.016667,
+     "p99": 0.017197,
+     "max": 0.142181,
+     "mean": 0.017243,
+     "over20ms": 1,
+     "over25ms": 1,
+     "over34ms": 1
+    },
+    "effectiveFpsRow0ToLast": 60.346
+   },
+   "mp4Probe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+     {
+      "codec_name": "h264",
+      "profile": "High",
+      "width": 640,
+      "height": 360,
+      "pix_fmt": "yuv420p",
+      "level": 40,
+      "r_frame_rate": "120/1",
+      "avg_frame_rate": "59000000/966589",
+      "time_base": "1/1000000",
+      "duration": "2.899767",
+      "nb_frames": "177",
+      "nb_read_frames": "177"
+     }
+    ],
+    "format": {
+     "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+     "duration": "2.899767",
+     "size": "123992",
+     "tags": {
+      "major_brand": "isom",
+      "minor_version": "512",
+      "compatible_brands": "isomiso2avc1mp41",
+      "encoder": "Lavf62.12.101"
+     }
+    }
+   },
+   "mp4PtsFirst5": [
+    0.0,
+    0.010855,
+    0.016585,
+    0.033289,
+    0.049947
+   ],
+   "mp4PtsLast": 2.916497,
+   "mp4PtsGap": {
+    "min": 0.005729999999999999,
+    "max": 0.01814999999999989,
+    "maxErrorVsCapture": 4.440892098500626e-16,
+    "count": 176
+   },
+   "encoder": "ffmpeg -v error -y -f concat -safe 0 -i C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\dual03\\cl-patrol\\outputs\\patrol-motion60-v02\\cache\\r201401\\concat-normal-en.txt -fps_mode passthrough -c:v libx264 -preset slow -crf 12 -profile:v high -level:v 4.0 -pix_fmt yuv420p -video_track_timescale 1000000 -movflags +faststart <mp4>"
+  },
+  {
+   "name": "normal-zh",
+   "kind": "normal",
+   "language": "zh",
+   "durabilityHold": false,
+   "holdWrites": 0,
+   "label": "normal unmodified combat (one battle_auto key input; no state/HP writes)",
+   "mp4": "outputs/patrol-motion60-v02/rpg-2-star-ocean-the-second_patrol_motion60-normal-zh-normal1x-640_v02_20261019-201401-67aa0149.mp4",
+   "mp4Sha256": "bfbabac49906aa5c111d7d06f228feca7b34eebd1998b040038860896910609e",
+   "mp4Bytes": 119613,
+   "concatListLocalCache": "outputs/patrol-motion60-v02/cache/r201401/concat-normal-zh.txt",
+   "concatSha256Bytes": "a9f25913e08527cf8962b117f3380898a2d9382904a5c7b4159a74ad5222ddba",
+   "frameCacheLocalOnly": "outputs/patrol-motion60-v02/cache/r201401/frames/normal-zh",
+   "frames": 176,
+   "frameSha256ListSha256": "e52f7f77088ae64d6fc93477de3c724705ce0b5af8b345da0635feb0b6a759f0",
+   "capturedSpanSeconds": 2.919924,
+   "autoPressedAt": 0.264817,
+   "battleFinishedAt": 1.416345,
+   "statesFrameCount": {
+    "defeat": 92,
+    "hit": 34,
+    "move": 50
+   },
+   "stateFirstSeenSeconds": {
+    "move": 0.028137,
+    "hit": 0.648127,
+    "defeat": 1.416345
+   },
+   "stateFirstRunRows": {
+    "move": [
+     0,
+     37
+    ],
+    "hit": [
+     38,
+     54
+    ],
+    "defeat": [
+     84,
+     175
+    ]
+   },
+   "statesMissing": [
+    "idle",
+    "windup",
+    "strike"
+   ],
+   "initialSceneEntrySample": {
+    "row": 0,
+    "t": 0.028137,
+    "wallDelta": 0.028137,
+    "processDelta": 0.139486,
+    "note": "first frame after instantiate/add_child; includes scene load and first _process; kept in the clip and the MP4"
+   },
+   "postStartFrames": {
+    "rows": "1..175",
+    "wallDelta": {
+     "n": 175,
+     "min": 0.003563,
+     "p50": 0.016665,
+     "p95": 0.016707,
+     "p99": 0.020021,
+     "max": 0.023563,
+     "mean": 0.01659,
+     "over20ms": 3,
+     "over25ms": 0,
+     "over34ms": 0
+    },
+    "processDelta": {
+     "n": 175,
+     "min": 0.003589,
+     "p50": 0.016666,
+     "p95": 0.016667,
+     "p99": 0.016667,
+     "max": 0.021014,
+     "mean": 0.01659,
+     "over20ms": 2,
+     "over25ms": 0,
+     "over34ms": 0
+    },
+    "effectiveFps": 60.349
+   },
+   "allFramesIncludingEntry": {
+    "wallDelta": {
+     "n": 176,
+     "min": 0.003563,
+     "p50": 0.016665,
+     "p95": 0.016754,
+     "p99": 0.022476,
+     "max": 0.028137,
+     "mean": 0.016656,
+     "over20ms": 4,
+     "over25ms": 1,
+     "over34ms": 0
+    },
+    "processDelta": {
+     "n": 176,
+     "min": 0.003589,
+     "p50": 0.016666,
+     "p95": 0.016667,
+     "p99": 0.020025,
+     "max": 0.139486,
+     "mean": 0.017288,
+     "over20ms": 3,
+     "over25ms": 1,
+     "over34ms": 1
+    },
+    "effectiveFpsRow0ToLast": 60.277
+   },
+   "mp4Probe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+     {
+      "codec_name": "h264",
+      "profile": "High",
+      "width": 640,
+      "height": 360,
+      "pix_fmt": "yuv420p",
+      "level": 40,
+      "r_frame_rate": "240/1",
+      "avg_frame_rate": "35200000/578701",
+      "time_base": "1/1000000",
+      "duration": "2.893505",
+      "nb_frames": "176",
+      "nb_read_frames": "176"
+     }
+    ],
+    "format": {
+     "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+     "duration": "2.893505",
+     "size": "119613",
+     "tags": {
+      "major_brand": "isom",
+      "minor_version": "512",
+      "compatible_brands": "isomiso2avc1mp41",
+      "encoder": "Lavf62.12.101"
+     }
+    }
+   },
+   "mp4PtsFirst5": [
+    0.0,
+    0.020021,
+    0.023584,
+    0.036684,
+    0.053343
+   ],
+   "mp4PtsLast": 2.903248,
+   "mp4PtsGap": {
+    "min": 0.003563,
+    "max": 0.023563,
+    "maxErrorVsCapture": 4.440892098500626e-16,
+    "count": 175
+   },
+   "encoder": "ffmpeg -v error -y -f concat -safe 0 -i C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\dual03\\cl-patrol\\outputs\\patrol-motion60-v02\\cache\\r201401\\concat-normal-zh.txt -fps_mode passthrough -c:v libx264 -preset slow -crf 12 -profile:v high -level:v 4.0 -pix_fmt yuv420p -video_track_timescale 1000000 -movflags +faststart <mp4>"
+  },
+  {
+   "name": "held-en",
+   "kind": "held",
+   "language": "en",
+   "durabilityHold": true,
+   "holdWrites": 18,
+   "label": "TEST-ONLY durability-held supplement (Patrol HP floored at 40 until 2 strikes; not normal gameplay)",
+   "mp4": "outputs/patrol-motion60-v02/rpg-2-star-ocean-the-second_patrol_motion60-held-en-normal1x-640_v02_20261019-201401-67aa0149.mp4",
+   "mp4Sha256": "81fbfd8bb0985a752d6ae7d82f62d15d3b0897389480e12c88fa70185bc3fbd9",
+   "mp4Bytes": 294615,
+   "concatListLocalCache": "outputs/patrol-motion60-v02/cache/r201401/concat-held-en.txt",
+   "concatSha256Bytes": "5a29af600325500985536bcf88678611bced446115109c4176422e1379c72c5f",
+   "frameCacheLocalOnly": "outputs/patrol-motion60-v02/cache/r201401/frames/held-en",
+   "frames": 362,
+   "frameSha256ListSha256": "19b346622cd859dedca47c04cdc6264c27538d6d91fca11e218a8481f73ab7fd",
+   "capturedSpanSeconds": 6.016419,
+   "autoPressedAt": 0.252139,
+   "battleFinishedAt": 4.486688,
+   "statesFrameCount": {
+    "defeat": 92,
+    "hit": 89,
+    "idle": 9,
+    "move": 52,
+    "strike": 40,
+    "windup": 80
+   },
+   "stateFirstSeenSeconds": {
+    "move": 0.002136,
+    "hit": 0.585431,
+    "windup": 1.418719,
+    "strike": 2.085363,
+    "idle": 2.735344,
+    "defeat": 4.486688
+   },
+   "stateFirstRunRows": {
+    "move": [
+     0,
+     35
+    ],
+    "hit": [
+     36,
+     52
+    ],
+    "windup": [
+     86,
+     125
+    ],
+    "strike": [
+     126,
+     145
+    ],
+    "idle": [
+     165,
+     165
+    ],
+    "defeat": [
+     270,
+     361
+    ]
+   },
+   "statesMissing": [],
+   "initialSceneEntrySample": {
+    "row": 0,
+    "t": 0.002136,
+    "wallDelta": 0.002136,
+    "processDelta": 0.147969,
+    "note": "first frame after instantiate/add_child; includes scene load and first _process; kept in the clip and the MP4"
+   },
+   "postStartFrames": {
+    "rows": "1..361",
+    "wallDelta": {
+     "n": 361,
+     "min": 0.001938,
+     "p50": 0.016665,
+     "p95": 0.016689,
+     "p99": 0.016725,
+     "max": 0.018054,
+     "mean": 0.01662,
+     "over20ms": 0,
+     "over25ms": 0,
+     "over34ms": 0
+    },
+    "processDelta": {
+     "n": 361,
+     "min": 0.016666,
+     "p50": 0.016666,
+     "p95": 0.016666,
+     "p99": 0.016666,
+     "max": 0.020833,
+     "mean": 0.016698,
+     "over20ms": 1,
+     "over25ms": 0,
+     "over34ms": 0
+    },
+    "effectiveFps": 60.022
+   },
+   "allFramesIncludingEntry": {
+    "wallDelta": {
+     "n": 362,
+     "min": 0.001938,
+     "p50": 0.016665,
+     "p95": 0.016689,
+     "p99": 0.016725,
+     "max": 0.018054,
+     "mean": 0.01658,
+     "over20ms": 0,
+     "over25ms": 0,
+     "over34ms": 0
+    },
+    "processDelta": {
+     "n": 362,
+     "min": 0.016666,
+     "p50": 0.016666,
+     "p95": 0.016666,
+     "p99": 0.017498,
+     "max": 0.147969,
+     "mean": 0.017061,
+     "over20ms": 2,
+     "over25ms": 1,
+     "over34ms": 1
+    },
+    "effectiveFpsRow0ToLast": 60.169
+   },
+   "mp4Probe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+     {
+      "codec_name": "h264",
+      "profile": "High",
+      "width": 640,
+      "height": 360,
+      "pix_fmt": "yuv420p",
+      "level": 40,
+      "r_frame_rate": "60/1",
+      "avg_frame_rate": "2828125/46743",
+      "time_base": "1/1000000",
+      "duration": "5.983104",
+      "nb_frames": "362",
+      "nb_read_frames": "362"
+     }
+    ],
+    "format": {
+     "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+     "duration": "5.983104",
+     "size": "294615",
+     "tags": {
+      "major_brand": "isom",
+      "minor_version": "512",
+      "compatible_brands": "isomiso2avc1mp41",
+      "encoder": "Lavf62.12.101"
+     }
+    }
+   },
+   "mp4PtsFirst5": [
+    0.0,
+    0.001938,
+    0.016679,
+    0.033331,
+    0.05
+   ],
+   "mp4PtsLast": 5.999762,
+   "mp4PtsGap": {
+    "min": 0.001938,
+    "max": 0.018054000000000237,
+    "maxErrorVsCapture": 8.881784197001252e-16,
+    "count": 361
+   },
+   "encoder": "ffmpeg -v error -y -f concat -safe 0 -i C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\dual03\\cl-patrol\\outputs\\patrol-motion60-v02\\cache\\r201401\\concat-held-en.txt -fps_mode passthrough -c:v libx264 -preset slow -crf 12 -profile:v high -level:v 4.0 -pix_fmt yuv420p -video_track_timescale 1000000 -movflags +faststart <mp4>"
+  },
+  {
+   "name": "held-zh",
+   "kind": "held",
+   "language": "zh",
+   "durabilityHold": true,
+   "holdWrites": 18,
+   "label": "TEST-ONLY durability-held supplement (Patrol HP floored at 40 until 2 strikes; not normal gameplay)",
+   "mp4": "outputs/patrol-motion60-v02/rpg-2-star-ocean-the-second_patrol_motion60-held-zh-normal1x-640_v02_20261019-201401-67aa0149.mp4",
+   "mp4Sha256": "15601b5b565e490a038d221ab7110845b5227ae85bc57b95c98d561b19a7ed3f",
+   "mp4Bytes": 288535,
+   "concatListLocalCache": "outputs/patrol-motion60-v02/cache/r201401/concat-held-zh.txt",
+   "concatSha256Bytes": "c2e1c81691caddbdc9daa91e68c6e3c0f85ac49b4616e97a727539b43aa95138",
+   "frameCacheLocalOnly": "outputs/patrol-motion60-v02/cache/r201401/frames/held-zh",
+   "frames": 362,
+   "frameSha256ListSha256": "295beb6bd09a4ad3853784d2bf5a1025476dded77b447a7bab064426dc9c748b",
+   "capturedSpanSeconds": 6.01641,
+   "autoPressedAt": 0.260793,
+   "battleFinishedAt": 4.500668,
+   "statesFrameCount": {
+    "defeat": 92,
+    "hit": 87,
+    "idle": 9,
+    "move": 54,
+    "strike": 40,
+    "windup": 80
+   },
+   "stateFirstSeenSeconds": {
+    "move": 0.010697,
+    "hit": 0.610692,
+    "windup": 1.410655,
+    "strike": 2.077272,
+    "idle": 2.727246,
+    "defeat": 4.500668
+   },
+   "stateFirstRunRows": {
+    "move": [
+     0,
+     36
+    ],
+    "hit": [
+     37,
+     53
+    ],
+    "windup": [
+     85,
+     124
+    ],
+    "strike": [
+     125,
+     144
+    ],
+    "idle": [
+     164,
+     166
+    ],
+    "defeat": [
+     270,
+     361
+    ]
+   },
+   "statesMissing": [],
+   "initialSceneEntrySample": {
+    "row": 0,
+    "t": 0.010697,
+    "wallDelta": 0.010697,
+    "processDelta": 0.138701,
+    "note": "first frame after instantiate/add_child; includes scene load and first _process; kept in the clip and the MP4"
+   },
+   "postStartFrames": {
+    "rows": "1..361",
+    "wallDelta": {
+     "n": 361,
+     "min": 0.00316,
+     "p50": 0.016666,
+     "p95": 0.016699,
+     "p99": 0.016837,
+     "max": 0.023476,
+     "mean": 0.01662,
+     "over20ms": 2,
+     "over25ms": 0,
+     "over34ms": 0
+    },
+    "processDelta": {
+     "n": 361,
+     "min": 0.016666,
+     "p50": 0.016666,
+     "p95": 0.016666,
+     "p99": 0.016666,
+     "max": 0.023526,
+     "mean": 0.016708,
+     "over20ms": 2,
+     "over25ms": 0,
+     "over34ms": 0
+    },
+    "effectiveFps": 60.034
+   },
+   "allFramesIncludingEntry": {
+    "wallDelta": {
+     "n": 362,
+     "min": 0.00316,
+     "p50": 0.016665,
+     "p95": 0.016699,
+     "p99": 0.016837,
+     "max": 0.023476,
+     "mean": 0.016603,
+     "over20ms": 2,
+     "over25ms": 0,
+     "over34ms": 0
+    },
+    "processDelta": {
+     "n": 362,
+     "min": 0.016666,
+     "p50": 0.016666,
+     "p95": 0.016666,
+     "p99": 0.017498,
+     "max": 0.138701,
+     "mean": 0.017045,
+     "over20ms": 3,
+     "over25ms": 1,
+     "over34ms": 1
+    },
+    "effectiveFpsRow0ToLast": 60.169
+   },
+   "mp4Probe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+     {
+      "codec_name": "h264",
+      "profile": "High",
+      "width": 640,
+      "height": 360,
+      "pix_fmt": "yuv420p",
+      "level": 40,
+      "r_frame_rate": "240/1",
+      "avg_frame_rate": "362000000/5983093",
+      "time_base": "1/1000000",
+      "duration": "5.983093",
+      "nb_frames": "362",
+      "nb_read_frames": "362"
+     }
+    ],
+    "format": {
+     "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+     "duration": "5.983093",
+     "size": "288535",
+     "tags": {
+      "major_brand": "isom",
+      "minor_version": "512",
+      "compatible_brands": "isomiso2avc1mp41",
+      "encoder": "Lavf62.12.101"
+     }
+    }
+   },
+   "mp4PtsFirst5": [
+    0.0,
+    0.00316,
+    0.01665,
+    0.033348,
+    0.050008
+   ],
+   "mp4PtsLast": 5.999753,
+   "mp4PtsGap": {
+    "min": 0.00316,
+    "max": 0.02347599999999961,
+    "maxErrorVsCapture": 8.881784197001252e-16,
+    "count": 361
+   },
+   "encoder": "ffmpeg -v error -y -f concat -safe 0 -i C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\dual03\\cl-patrol\\outputs\\patrol-motion60-v02\\cache\\r201401\\concat-held-zh.txt -fps_mode passthrough -c:v libx264 -preset slow -crf 12 -profile:v high -level:v 4.0 -pix_fmt yuv420p -video_track_timescale 1000000 -movflags +faststart <mp4>"
+  }
+ ],
+ "criticalStills": [
+  {
+   "png": "outputs/patrol-motion60-v02/rpg-2-star-ocean-the-second_patrol_motion60-critical-strike-en-held-640_v02_20261019-201401-67aa0149.png",
+   "sha256Bytes": "3807895bcdbb95128b6463541e63e47132d3917d69dc02a72427a803a2ea9811",
+   "clip": "held-en",
+   "state": "strike",
+   "source": "durability-held supplement (TEST-ONLY)",
+   "row": 135,
+   "stateRunRows": [
+    126,
+    145
+   ],
+   "t": 2.235379,
+   "enemyFrame": 14,
+   "enemyHp": 40,
+   "cacheFrame": "outputs/patrol-motion60-v02/cache/r201401/frames/held-en/f00135.png"
+  },
+  {
+   "png": "outputs/patrol-motion60-v02/rpg-2-star-ocean-the-second_patrol_motion60-critical-hit-en-normal-640_v02_20261019-201401-67aa0149.png",
+   "sha256Bytes": "bc9040e8c3beab95647200b22b80fd135e2ccbd2e4cf489c86851832eb6e6fb4",
+   "clip": "normal-en",
+   "state": "hit",
+   "source": "normal unmodified combat",
+   "row": 47,
+   "stateRunRows": [
+    39,
+    55
+   ],
+   "t": 0.807142,
+   "enemyFrame": 17,
+   "enemyHp": 50,
+   "cacheFrame": "outputs/patrol-motion60-v02/cache/r201401/frames/normal-en/f00047.png"
+  },
+  {
+   "png": "outputs/patrol-motion60-v02/rpg-2-star-ocean-the-second_patrol_motion60-critical-defeat-en-normal-640_v02_20261019-201401-67aa0149.png",
+   "sha256Bytes": "8ab36fd5979e6719e5557f1bee3d9bce4d8ba2f06b0fc1eafa045c85893776cc",
+   "clip": "normal-en",
+   "state": "defeat",
+   "source": "normal unmodified combat",
+   "row": 130,
+   "stateRunRows": [
+    85,
+    176
+   ],
+   "t": 2.19046,
+   "enemyFrame": 23,
+   "enemyHp": 0,
+   "cacheFrame": "outputs/patrol-motion60-v02/cache/r201401/frames/normal-en/f00130.png"
+  },
+  {
+   "png": "outputs/patrol-motion60-v02/rpg-2-star-ocean-the-second_patrol_motion60-critical-strike-zh-held-640_v02_20261019-201401-67aa0149.png",
+   "sha256Bytes": "35e13a0dab63886e481ef3a29cb92bf3ab22e122354117d759288ec5ec89d8c7",
+   "clip": "held-zh",
+   "state": "strike",
+   "source": "durability-held supplement (TEST-ONLY)",
+   "row": 134,
+   "stateRunRows": [
+    125,
+    144
+   ],
+   "t": 2.227269,
+   "enemyFrame": 14,
+   "enemyHp": 40,
+   "cacheFrame": "outputs/patrol-motion60-v02/cache/r201401/frames/held-zh/f00134.png"
+  },
+  {
+   "png": "outputs/patrol-motion60-v02/rpg-2-star-ocean-the-second_patrol_motion60-critical-hit-zh-normal-640_v02_20261019-201401-67aa0149.png",
+   "sha256Bytes": "4c7d619c7cd651335e2994a14c11ca249eb55f514776573ce29094a2b3c38f54",
+   "clip": "normal-zh",
+   "state": "hit",
+   "source": "normal unmodified combat",
+   "row": 46,
+   "stateRunRows": [
+    38,
+    54
+   ],
+   "t": 0.781473,
+   "enemyFrame": 17,
+   "enemyHp": 50,
+   "cacheFrame": "outputs/patrol-motion60-v02/cache/r201401/frames/normal-zh/f00046.png"
+  },
+  {
+   "png": "outputs/patrol-motion60-v02/rpg-2-star-ocean-the-second_patrol_motion60-critical-defeat-zh-normal-640_v02_20261019-201401-67aa0149.png",
+   "sha256Bytes": "f9f0fea6a6e386eaa9e568c072e3f7417f8b4fc7d4065a5e82c773b17f8ab4eb",
+   "clip": "normal-zh",
+   "state": "defeat",
+   "source": "normal unmodified combat",
+   "row": 129,
+   "stateRunRows": [
+    84,
+    175
+   ],
+   "t": 2.164758,
+   "enemyFrame": 23,
+   "enemyHp": 0,
+   "cacheFrame": "outputs/patrol-motion60-v02/cache/r201401/frames/normal-zh/f00129.png"
+  }
+ ],
+ "failures": [],
+ "result": "PASS"
+}

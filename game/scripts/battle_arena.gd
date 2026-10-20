@@ -57,6 +57,14 @@ const ENEMY_SPRITE_ANIMATIONS := {
 		"front_states": ["strike"],
 	},
 }
+# Patrol machine battle animation pilot v01 (UNAPPROVED; art acceptance 0). Opt-in only: launch with
+# `-- --patrol-battle-animation-pilot`, or set patrol_animation_override = 1 before the battle scene loads. Off by default,
+# so the patrol keeps the placeholder block and the loader script is never loaded. It is independent of the sentry flag.
+# Any package, file or type defect keeps the placeholder. Visual only: stats, reach, AI, timers and positions are unchanged.
+const PATROL_ANIMATION_CLI_FLAG := "--patrol-battle-animation-pilot"
+const PATROL_ANIMATION_ART_APPROVED := false
+const PATROL_ANIMATION_LOADER := "res://assets/enemies/patrol-anim-v01/rpg-2-star-ocean-the-second_patrol_battle-animation-loader_v01_20261019-194007-a4b10a85.gd"
+const PATROL_ANIMATION_PACKAGE := "res://assets/enemies/patrol-anim-v01/rpg-2-star-ocean-the-second_patrol_battle-animation-runtime-package_v01_20261019-194007-a4b10a85.json"
 const ENEMY_WINDUP_MODULATE := Color(1.0, 0.70, 0.66)
 const ENEMY_TELEGRAPH_CENTER_Y := 240.0
 const ENEMY_TELEGRAPH_RADIUS := 30.0
@@ -111,6 +119,8 @@ const COMBAT_SPRITE_SET_ART_APPROVED := false
 const COMBAT_SPRITE_SET_INDEX := "res://tests/fixtures/csp-fixture-v01_03f4172a/rpg-2-star-ocean-the-second_combat-set_fixture-index_not-art-v01_20261018-153656-03f4172a.json"
 
 static var sentry_v2_override := -1
+static var patrol_animation_override := -1
+static var patrol_animation_package_override := ""
 static var battle_backdrop_override := -1
 static var battle_backdrop_arena_override := ""
 static var combat_sprite_set_override := -1
@@ -135,6 +145,9 @@ var queued_job_skill_id := ""
 var selected_order_id := ""
 var next_attack_bonus := 0
 var battle_finished := false
+# Presentation-only hold: a valid Patrol pilot defeat is visible before the victory panel.
+var patrol_result_pending := false
+var patrol_result_elapsed := 0.0
 var battle_won := false
 var feedback_key := "battle_ready"
 var feedback_message := ""
@@ -203,6 +216,12 @@ var result_overlay: ColorRect
 var result_title: Label
 var result_note: Label
 var result_button: Button
+
+
+static func patrol_animation_enabled() -> bool:
+	if patrol_animation_override >= 0:
+		return patrol_animation_override == 1
+	return OS.get_cmdline_user_args().has(PATROL_ANIMATION_CLI_FLAG)
 
 
 static func sentry_v2_enabled() -> bool:
@@ -294,6 +313,7 @@ func _process(delta: float) -> void:
 		_advance_fighter_visuals(delta, [])
 		_advance_combat_sprite_sets(delta)
 		_advance_enemy_visual(delta, false)
+		_advance_patrol_result_presentation(delta)
 		_refresh_encounter_result_surface()
 		queue_redraw()
 		return
@@ -443,7 +463,10 @@ func _enemy_visual_frame() -> int:
 	var frames: Array = enemy_animation["states"][enemy_visual_state]
 	var frame_time: float = enemy_animation["frame_time"].get(enemy_visual_state, 0.0)
 	var index := 0
-	if enemy_visual_state == "windup":
+	if enemy_visual_state == "windup" and enemy_animation.get("windup_phases", false):
+		# Evenly spaced phases across the real wind-up time (the patrol pilot); the sentry keeps its two halves.
+		index = clampi(int((1.0 - enemy_windup / float(enemy["windup"])) * frames.size()), 0, frames.size() - 1)
+	elif enemy_visual_state == "windup":
 		index = 0 if enemy_windup > float(enemy["windup"]) * 0.5 else 1
 	elif _enemy_distance_gait():
 		index = posmod(_enemy_gait_step(), frames.size())
@@ -868,14 +891,38 @@ func _finish_battle(won: bool) -> void:
 		AppState.enemy_cleared_for_return = false
 		AppState.returning_from_battle = false
 		get_tree().create_timer(2.0).timeout.connect(_return_to_menu)
-	result_overlay.visible = true
+	patrol_result_pending = won and enemy_hp <= 0 and enemy_id == "patrol" and patrol_animation_enabled() and enemy_animation_texture != null
+	patrol_result_elapsed = 0.0
+	result_overlay.visible = not patrol_result_pending
+	if patrol_result_pending:
+		_advance_enemy_visual(0.0, false)
+		result_button.disabled = true
+		result_button.focus_mode = Control.FOCUS_NONE
+		result_button.release_focus()
 	_refresh_encounter_result_surface()
 	_refresh_text()
-	result_button.grab_focus()
+	if not patrol_result_pending:
+		result_button.grab_focus()
 	queue_redraw()
 
 
+func _advance_patrol_result_presentation(delta: float) -> void:
+	if not patrol_result_pending:
+		return
+	patrol_result_elapsed += delta
+	# Epsilon compensates binary floating-point summation only (one nanosecond, never a frame).
+	if patrol_result_elapsed + 0.000000001 < _enemy_visual_duration("defeat"):
+		return
+	patrol_result_pending = false
+	result_overlay.visible = true
+	result_button.disabled = false
+	result_button.focus_mode = Control.FOCUS_ALL
+	result_button.grab_focus()
+
+
 func _return_after_result() -> void:
+	if patrol_result_pending:
+		return
 	if battle_won:
 		AppState.battle_enemy_id = ""
 		if AppState.has_pending_job_choice():
@@ -910,6 +957,9 @@ func _load_enemy_sprite_pilot() -> void:
 	enemy_texture = null
 	enemy_telegraph_center_y = ENEMY_TELEGRAPH_CENTER_Y
 	enemy_telegraph_scale = Vector2.ONE
+	if enemy_id == "patrol" and enemy_sprite_pilot_enabled and patrol_animation_enabled():
+		_load_patrol_animation_pilot()
+		return
 	if not sentry_v2_enabled() or not enemy_sprite_pilot_enabled or not ENEMY_SPRITE_PILOTS.has(enemy_id):
 		return
 	var pilot: Dictionary = ENEMY_SPRITE_PILOTS[enemy_id]
@@ -953,6 +1003,26 @@ func _load_enemy_animation() -> void:
 	enemy_animation = animation
 	enemy_animation_cell = cell
 	enemy_animation_anchor = animation.get("anchor", enemy_anchor)
+
+
+func _load_patrol_animation_pilot() -> void:
+	# Resets the visual state like the sentry path; the loader validates everything and returns {} on any defect.
+	_load_enemy_animation()
+	var loader: Script = load(PATROL_ANIMATION_LOADER)
+	if loader == null:
+		return
+	var path := patrol_animation_package_override if patrol_animation_package_override != "" else PATROL_ANIMATION_PACKAGE
+	var package: Dictionary = loader.load_package(path)
+	if package.is_empty():
+		return
+	enemy_texture = package["texture"]
+	enemy_animation_texture = package["texture"]
+	enemy_animation = package["animation"]
+	enemy_animation_cell = enemy_animation["cell"]
+	enemy_anchor = enemy_animation["anchor"]
+	enemy_animation_anchor = enemy_anchor
+	enemy_telegraph_center_y = package["telegraph_center_y"]
+	enemy_telegraph_scale = package["telegraph_scale"]
 
 
 func _load_battle_backdrop() -> void:
