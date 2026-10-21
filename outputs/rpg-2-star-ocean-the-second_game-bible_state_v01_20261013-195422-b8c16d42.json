@@ -4,7 +4,7 @@
   "title": "世界之间",
   "englishTitle": "Worlds Between",
   "edition": "设计基线 v0.2 · 2026-10-15 创作者决定",
-  "updatedAt": "2026-10-21T01:01:51.105Z",
+  "updatedAt": "2026-10-21T02:10:50.084Z",
   "note": "规则以玩家确认的设计稿为基线，并已并入 2026-10-15 创作者决定；人物姓名与外观是待审提案，具体剧情留待后续设计。",
   "pitch": "从地下社区走出的旅人，以好奇心探索多元文明，招募伙伴，并成为不同世界认知差异的桥梁。",
   "pillars": [
@@ -5569,7 +5569,7 @@
         }
       ],
       "currentCandidates": {
-        "asOf": "2026-10-21T01:01:32.783404+00:00",
+        "asOf": "2026-10-21T02:10:49.982742+00:00",
         "zh": "15项当前展示：2张女主静止基准、战场及扬克斯城外环境已批准，11项待批准。完整精灵0/52。",
         "en": "15current items:2heroine static baselines and2environment visuals accepted;11pending. Complete sprites0/52.",
         "scopedReferenceOrders": [
@@ -5589,7 +5589,8 @@
           "docs/qa/rpg-2-star-ocean-the-second_battle-arena_native-production-root-closeout_v01_20261020-231908-6f6bae69.md",
           "docs/qa/rpg-2-star-ocean-the-second_battle-arena_scene-visual-acceptance_v01_20261020-234940-8308e1d9.md",
           "docs/qa/rpg-2-star-ocean-the-second_yonkers-outskirts_native-production-root-closeout_v01_20261021-000925-2c3e7d5f.md",
-          "docs/qa/rpg-2-star-ocean-the-second_yonkers-outskirts_scene-visual-acceptance_v01_20261021-005144-ee3c6278.md"
+          "docs/qa/rpg-2-star-ocean-the-second_yonkers-outskirts_scene-visual-acceptance_v01_20261021-005144-ee3c6278.md",
+          "docs/qa/rpg-2-star-ocean-the-second_heroine_playable-path-and-workflow-closeout_v01_20261021-020447-2e046dd4.md"
         ],
         "items": [
           {
@@ -5886,27 +5887,27 @@
           {
             "kind": "actual-godot-capture",
             "mediaType": "video/mp4",
-            "id": "current-heroine-complete-exploration-v03",
+            "id": "current-heroine-playable-path-v16",
             "rank": 8,
             "label": {
-              "zh": "女主四方向探索 v03 · 正常游戏 60fps 1×（可选开关）",
-              "en": "Heroine four-direction exploration v03, normal game60fps1x (opt-in)"
+              "zh": "女主完整可玩链路 · 探索→战斗→返回 · 原速",
+              "en": "Complete playable heroine path · exploration → battle → return · 1×"
             },
-            "file": "outputs/fexp-merged-v01/rpg-2-star-ocean-the-second_female-complete-explore_combined-city-60fps_unapproved-v01_20261019-233249-7b9d1468.mp4",
+            "file": "outputs/heroine-path16/rpg-2-star-ocean-the-second_heroine-playable-path_zh-patrol_normal-speed_v16_20261021-020115-6f145c72.mp4",
             "runtimeIntegrated": true,
             "technicalCandidate": true,
             "creatorApproved": false,
             "artAccepted": false,
             "optInOnly": true,
-            "optInFlag": "--female-complete-exploration-pilot",
+            "optInFlag": "dedicated-playable-path-entry",
             "defaultOff": true,
             "scope": {
-              "zh": "真实正常游戏可选开关，四方向起步/跑动/停步/重按/反向；48逻辑像素。只有已批准南向v8静态和比例获批准；动作、其他朝向、整套精灵未批准。",
-              "en": "Actual normal-game opt-in with four-direction start/run/stop/repress/reversal at48logical pixels. Only the previously approved southv8 static and scale are approved; no motion, other-direction or full-sprite approval."
+              "zh": "可选女主完整技术试玩；未改普通游戏默认角色，不代表动作或整套美术已验收。",
+              "en": "Complete heroine technical play preview; opt-in only, OFF by default, not default adoption. No full motion/art approval."
             },
             "caption": {
-              "zh": "保持既有像素、步态和节奏；优化渲染并修复输入校验/独立状态，已通过正常游戏与资源包运行。默认关闭，不是默认美术采用。根节点仅检查了清晰南北采样图及技术证据，未认证连续流畅度。",
-              "en": "Existing pixels/gait/timing retained; rendering optimized and validation/state isolation repaired. Verified in normal scenes and an exported resource pack. Off by default. Root inspected clear north/south pose samples and technical evidence, not continuous fluidity."
+              "zh": "四方向正常输入、走入遭遇战、正常攻击获胜、返回探索及读档均已通过中英文实机检查。左右停步按实际步态衔接。前后向肢体与整体流畅度仍需精修；其他角色和敌人仍有占位图。",
+              "en": "Bilingual real-game checks pass four-direction input, walk-in encounter, natural attack victory, exploration return and save reload. Side stop follows the actual outgoing pose. Front/back articulation and overall fluidity still need refinement; other actors/enemies retain placeholders."
             },
             "badge": {
               "zh": "未批准 · 运行时可选 · 默认关闭",
@@ -5914,24 +5915,25 @@
               "tone": "warn"
             },
             "motionView": {
-              "canvas": "Actual640x360 Godot viewport",
+              "canvas": "Actual1280x720 Godot viewport",
               "heroineHeightLogicalPx": 48,
               "playback": "normal speed1x",
+              "fps": 30,
               "autoplay": false,
               "inspection": {
-                "zh": "原生清晰南北移动采样图已检查；实际1×录屏文件已制作，不等于连续流畅度认证。",
-                "en": "Clear native north/south moving samples inspected; actual1x movie produced, not continuous-fluidity certification."
+                "zh": "已检查实机关键帧、完整技术流程及原速媒体播放；未认证整套动作流畅度。",
+                "en": "Actual key captures, combined technical flow and normal-speed media playback inspected; not full-motion fluidity certification."
               },
               "limits": {
                 "zh": [
-                  "转向仍为即刻交接，没有额外转身过渡",
-                  "暗光仅有明确标注的测试调暗片段",
-                  "完整精灵、美术和动作仍未验收"
+                  "前后向肢体及整体动作仍需打磨",
+                  "西向服装仍为镜像，NPC/敌人有占位图",
+                  "完整精灵与动作未验收，普通游戏默认采用未完成"
                 ],
                 "en": [
-                  "Immediate facing handoff; no authored turn transition",
-                  "Dark condition exists only in explicitly dimmed test capture",
-                  "Full sprite/art/motion remain unaccepted"
+                  "Front/back articulation and overall motion still require refinement",
+                  "West costume mirrored; NPC/enemy placeholders remain",
+                  "Full sprite/motion unaccepted; ordinary-game default adoption unfinished"
                 ]
               }
             },
@@ -5939,13 +5941,15 @@
               "current-heroine-south-run-v10r1-bright-30fps",
               "current-heroine-south-run-v10r1-dark-60fps"
             ],
-            "qa": "outputs/fexp-merged-v01/rpg-2-star-ocean-the-second_female-complete-explore_canonical-integration-qa_unapproved-v01_20261019-233439-bc8a3150.md",
-            "integrationEvidence": "outputs/fexp-merged-v01/rpg-2-star-ocean-the-second_female-complete-explore_final-source-proof_v01_20261019-233348-17681c25.json",
-            "syncState": "committed-at-92a9f94",
-            "hashPinnedIn": "92a9f9443b7a46a28b6f159ea48c84e528065e9b",
-            "gitBlob": "f24c29655b3ae3681d505222ecd5a88c1fbb5ee1",
-            "sha256": "f71223c12738f903d4474ad2d942c9bbfafba17eb9e2a4ec3355ae704b464379",
-            "bytes": 1214726
+            "qa": "docs/qa/rpg-2-star-ocean-the-second_heroine_playable-path-and-workflow-closeout_v01_20261021-020447-2e046dd4.md",
+            "integrationEvidence": "outputs/heroine-path16/rpg-2-star-ocean-the-second_heroine-playable-path_combined-root-proof_v16_20261021-020115-6f145c72.json",
+            "syncState": "committed-at-0da0d7c",
+            "hashPinnedIn": "0da0d7c763f14c177b7bc4444beb16030fd7acf7",
+            "gitBlob": "2f6bdaaf7f8bad8b7a505a4f7333c006810046f1",
+            "sha256": "e51aeabdddb76ea23f86416bf8a1bdc827dd2d3d09c126eee6cecc8e835f4a78",
+            "bytes": 1171248,
+            "readyForCreatorReview": false,
+            "testOnly": true
           },
           {
             "kind": "actual-godot-capture",
@@ -6901,6 +6905,75 @@
             },
             "supersededBy": "current-heroine-sea-battle-static-v01",
             "supersededAt": "2026-10-20T18:39:36.556Z"
+          },
+          {
+            "kind": "actual-godot-capture",
+            "mediaType": "video/mp4",
+            "id": "current-heroine-complete-exploration-v03",
+            "rank": 8,
+            "label": {
+              "zh": "女主四方向探索 v03 · 正常游戏 60fps 1×（可选开关）",
+              "en": "Heroine four-direction exploration v03, normal game60fps1x (opt-in)"
+            },
+            "file": "outputs/fexp-merged-v01/rpg-2-star-ocean-the-second_female-complete-explore_combined-city-60fps_unapproved-v01_20261019-233249-7b9d1468.mp4",
+            "runtimeIntegrated": true,
+            "technicalCandidate": true,
+            "creatorApproved": false,
+            "artAccepted": false,
+            "optInOnly": true,
+            "optInFlag": "--female-complete-exploration-pilot",
+            "defaultOff": true,
+            "scope": {
+              "zh": "真实正常游戏可选开关，四方向起步/跑动/停步/重按/反向；48逻辑像素。只有已批准南向v8静态和比例获批准；动作、其他朝向、整套精灵未批准。",
+              "en": "Actual normal-game opt-in with four-direction start/run/stop/repress/reversal at48logical pixels. Only the previously approved southv8 static and scale are approved; no motion, other-direction or full-sprite approval."
+            },
+            "caption": {
+              "zh": "保持既有像素、步态和节奏；优化渲染并修复输入校验/独立状态，已通过正常游戏与资源包运行。默认关闭，不是默认美术采用。根节点仅检查了清晰南北采样图及技术证据，未认证连续流畅度。",
+              "en": "Existing pixels/gait/timing retained; rendering optimized and validation/state isolation repaired. Verified in normal scenes and an exported resource pack. Off by default. Root inspected clear north/south pose samples and technical evidence, not continuous fluidity."
+            },
+            "badge": {
+              "zh": "未批准 · 运行时可选 · 默认关闭",
+              "en": "Unapproved · runtime opt-in · default off",
+              "tone": "warn"
+            },
+            "motionView": {
+              "canvas": "Actual640x360 Godot viewport",
+              "heroineHeightLogicalPx": 48,
+              "playback": "normal speed1x",
+              "autoplay": false,
+              "inspection": {
+                "zh": "原生清晰南北移动采样图已检查；实际1×录屏文件已制作，不等于连续流畅度认证。",
+                "en": "Clear native north/south moving samples inspected; actual1x movie produced, not continuous-fluidity certification."
+              },
+              "limits": {
+                "zh": [
+                  "转向仍为即刻交接，没有额外转身过渡",
+                  "暗光仅有明确标注的测试调暗片段",
+                  "完整精灵、美术和动作仍未验收"
+                ],
+                "en": [
+                  "Immediate facing handoff; no authored turn transition",
+                  "Dark condition exists only in explicitly dimmed test capture",
+                  "Full sprite/art/motion remain unaccepted"
+                ]
+              }
+            },
+            "supersedesCurrentIds": [
+              "current-heroine-south-run-v10r1-bright-30fps",
+              "current-heroine-south-run-v10r1-dark-60fps"
+            ],
+            "qa": "outputs/fexp-merged-v01/rpg-2-star-ocean-the-second_female-complete-explore_canonical-integration-qa_unapproved-v01_20261019-233439-bc8a3150.md",
+            "integrationEvidence": "outputs/fexp-merged-v01/rpg-2-star-ocean-the-second_female-complete-explore_final-source-proof_v01_20261019-233348-17681c25.json",
+            "syncState": "committed-at-92a9f94",
+            "hashPinnedIn": "92a9f9443b7a46a28b6f159ea48c84e528065e9b",
+            "gitBlob": "f24c29655b3ae3681d505222ecd5a88c1fbb5ee1",
+            "sha256": "f71223c12738f903d4474ad2d942c9bbfafba17eb9e2a4ec3355ae704b464379",
+            "bytes": 1214726,
+            "supersededBy": "current-heroine-playable-path-v16",
+            "supersededReason": {
+              "zh": "由女主探索—战斗—返回的完整可玩链路录像替代；旧录像保留作历史对照。",
+              "en": "Replaced by the complete playable heroine exploration/battle/return recording; earlier reel retained as history."
+            }
           }
         ],
         "syncStateRule": "committed-at-<7-hex> names the commit that first added the exact file; gitBlob is that file at that commit and sha256 is its bytes."
@@ -7785,24 +7858,24 @@
     "combinedWiringCheck": "297/297 on39f252e, clean raw log; actual Chinese victory inspected."
   },
   "latestTaskProgress": {
-    "id": "content.scene.outskirts.native-default",
+    "id": "support.heroine-sea.phase-aware-stop",
     "status": "completed",
     "title": {
-      "zh": "默认接入已验收环境并完成女主战斗动作技术检查",
-      "en": "Default integration of accepted environments and heroine combat technical check"
+      "zh": "女主完整可玩链路与停步衔接修复",
+      "en": "Complete playable heroine path and phase-aware stop repair"
     },
-    "startedAt": "2026-10-21T00:51:48.935Z",
-    "sourceBefore": "e3f49a5528884f745d2eb436e6743dc441388f99",
+    "startedAt": "2026-10-21T01:37:30.563Z",
+    "sourceBefore": "bb3449d4928fdb9495ebda9c8b61f1f41b47bac3",
     "meters": {
       "production": {
-        "before": 54.4,
+        "before": 54.5,
         "after": 54.5,
-        "changePercentagePoints": 0.1
+        "changePercentagePoints": 0
       },
       "inspection": {
-        "before": 16.2,
+        "before": 16.7,
         "after": 16.7,
-        "changePercentagePoints": 0.5
+        "changePercentagePoints": 0
       },
       "approval": {
         "before": 7.8,
@@ -7810,10 +7883,10 @@
         "changePercentagePoints": 0
       }
     },
-    "completedAt": "2026-10-21T01:01:51.105Z",
-    "sourceAfter": "2a5be26456ed7ddb2ac61480de0994479cc738dd",
+    "completedAt": "2026-10-21T02:10:50.084Z",
+    "sourceAfter": "0da0d7c763f14c177b7bc4444beb16030fd7acf7",
     "evidence": [
-      "docs/qa/rpg-2-star-ocean-the-second_accepted-environments_default-adoption-root-closeout_v01_20261021-005731-c39c5a23.md"
+      "docs/qa/rpg-2-star-ocean-the-second_heroine_playable-path-and-workflow-closeout_v01_20261021-020447-2e046dd4.md"
     ]
   },
   "progressReporting": {
@@ -8109,6 +8182,38 @@
       "evidence": [
         "docs/qa/rpg-2-star-ocean-the-second_yonkers-outskirts_scene-visual-acceptance_v01_20261021-005144-ee3c6278.md"
       ]
+    },
+    {
+      "id": "content.scene.outskirts.native-default",
+      "status": "completed",
+      "title": {
+        "zh": "默认接入已验收环境并完成女主战斗动作技术检查",
+        "en": "Default integration of accepted environments and heroine combat technical check"
+      },
+      "startedAt": "2026-10-21T00:51:48.935Z",
+      "sourceBefore": "e3f49a5528884f745d2eb436e6743dc441388f99",
+      "meters": {
+        "production": {
+          "before": 54.4,
+          "after": 54.5,
+          "changePercentagePoints": 0.1
+        },
+        "inspection": {
+          "before": 16.2,
+          "after": 16.7,
+          "changePercentagePoints": 0.5
+        },
+        "approval": {
+          "before": 7.8,
+          "after": 7.8,
+          "changePercentagePoints": 0
+        }
+      },
+      "completedAt": "2026-10-21T01:01:51.105Z",
+      "sourceAfter": "2a5be26456ed7ddb2ac61480de0994479cc738dd",
+      "evidence": [
+        "docs/qa/rpg-2-star-ocean-the-second_accepted-environments_default-adoption-root-closeout_v01_20261021-005731-c39c5a23.md"
+      ]
     }
   ],
   "latestBattleEnvironmentProduction": {
@@ -8200,5 +8305,28 @@
     "rawDirtyAggregateFailureRetained": true,
     "motionVisuallyAccepted": false,
     "fullSpriteAccepted": false
+  },
+  "heroinePlayablePath": {
+    "state": "technical-candidate-playable",
+    "artApproved": false,
+    "defaultAdopted": false,
+    "sourceSet": "game/data/hsea-stop15",
+    "entry": "game/scripts/hsea16/rpg-2-star-ocean-the-second_heroine-playable-path_entry_opt-in-v01_20261021-015453-1036fbad.gd",
+    "launcher": "tools/rpg-2-star-ocean-the-second_heroine-playable-path_launch-cli_opt-in-v01_20261021-015453-1036fbad.py",
+    "proof": "outputs/heroine-path16/rpg-2-star-ocean-the-second_heroine-playable-path_combined-root-proof_v16_20261021-020115-6f145c72.json",
+    "normalInputFlow": "four-direction exploration -> natural patrol encounter -> combat/contact -> victory/result -> return -> load",
+    "languages": [
+      "en",
+      "zh"
+    ],
+    "checksPerLanguage": 104,
+    "normalSpeed": true,
+    "motionReview": "front/back articulation and overall fluidity still require refinement; not offered as accepted full set",
+    "owner": "codex",
+    "producer": "claude",
+    "technicalCheck": "deepseek",
+    "creator": "art acceptance and human playtest",
+    "productionBefore": 54.5,
+    "sourceCommit": "0da0d7c763f14c177b7bc4444beb16030fd7acf7"
   }
 }
