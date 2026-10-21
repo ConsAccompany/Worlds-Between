@@ -11,6 +11,7 @@ const PROVENANCE_PATH := "res://data/hsea-gait11/rpg-2-star-ocean-the-second_her
 const PROVENANCE_SHA256 := "52a61c70b9ca94b091fde76c60b7e0e184b4d014557afbe40c681c9b09513f45"
 # Exact, coordinator-inspected package profiles. Never infer a bridge/provenance path from untrusted JSON.
 const ADDITIONAL_SOURCE_PROFILES := {
+ "3ccf615a536fef4938dafa869ea7f454860a3dca72fdb0c6c566e03f4fea3fa1": {"transition_path": "res://data/hsea-front17/rpg-2-star-ocean-the-second_heroine-sea_explore-stop-transition-manifest_unapproved-front17-v01_20261021-022403-cabad530.json", "transition_sha256": "90c76f29573b37151b4016899351124d4a5e636c19b1fda72c4047959f372172", "provenance_path": "res://data/hsea-front17/rpg-2-star-ocean-the-second_hero-female_exploration-source-package-provenance_v01_20261020-222654-045bcd59.json", "provenance_sha256": "73629644b4f63d3486d7b44012b378d4c9fda260f5b4714e8a8960a4ddae468e", "phase_aware_stop": true, "phase_directions": ["south", "west", "north", "east"], "source_set_sha256": "5a644d10a94f5a7a56084f7c914c23d135c443150986fb97486c8f01fa112b7c"},
  "2a0953d1cbfa9fdf9700abce4d7ee8c59c2eeb6b59b9e5764d64b7704583bb24": {"transition_path": "res://data/hsea-stop15/rpg-2-star-ocean-the-second_heroine-sea_explore-stop-transition-manifest_unapproved-stop15-v01_20261021-015000-f141d653.json", "transition_sha256": "1d8b5dbad470ce33508073517641eabc8663dc142a866d15aadfa0ac7b598657", "provenance_path": "res://data/hsea-stop15/rpg-2-star-ocean-the-second_hero-female_exploration-source-package-provenance_v01_20261020-215528-cf35a07b.json", "provenance_sha256": "76bcfce2e4abfc088e964ad23bc7a521ddc440252209a04a1dcef471fc3f556a", "phase_aware_stop": true, "source_set_sha256": "2311c4a5e904b2501fb2fd09c9d7bfc0fd416a7298ec81877cde9a2ae04550ba"},
  "b0c2b02764dcb19020a21bd2538633125e79a5399d521b33e6f2286671ce902e": {
   "transition_path": "res://data/hsea-arms12/rpg-2-star-ocean-the-second_heroine-sea_explore-stop-transition-manifest_unapproved-v08_20261020-222336-0ad0e3f5.json",
@@ -145,18 +146,18 @@ static func _load_bridges(loader, profile: Dictionary, candidate: Dictionary = {
 	if profile.get("phase_aware_stop", false):
 		if data.get("source_set_sha256") != profile.get("source_set_sha256"):
 			return {}
-		var phases := _load_phase_bridges(loader, transition_path, data, candidate)
+		var phases := _load_phase_bridges(loader, transition_path, data, candidate, profile.get("phase_directions", ["east", "west"]))
 		if phases.is_empty():
 			return {}
 		result["phase_bridges"] = phases
 	return result
 
-static func _load_phase_bridges(loader, manifest_path: String, data: Dictionary, candidate: Dictionary) -> Dictionary:
+static func _load_phase_bridges(loader, manifest_path: String, data: Dictionary, candidate: Dictionary, allowed_directions: Array = ["east", "west"]) -> Dictionary:
 	var listed = data.get("phase_bridges")
-	if not listed is Dictionary or listed.size() != 2 or not listed.has_all(["east", "west"]) or candidate.is_empty():
+	if not listed is Dictionary or listed.size() != allowed_directions.size() or not listed.has_all(allowed_directions) or candidate.is_empty():
 		return {}
 	var result := {}
-	for direction in ["east", "west"]:
+	for direction in allowed_directions:
 		var by_direction = listed[direction]
 		if not by_direction is Dictionary or by_direction.size() != 12:
 			return {}

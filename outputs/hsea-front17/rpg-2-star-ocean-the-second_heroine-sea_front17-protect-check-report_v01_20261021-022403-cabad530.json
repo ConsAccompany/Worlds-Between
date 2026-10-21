@@ -1,0 +1,78 @@
+{
+ "run": "src-v01-20261021-022403",
+ "baseline": "outputs/hsea-stop15/src-v01-20261021-015000",
+ "hash_normalization": "sha256 raw bytes (PNG/PXO/JSON as written, LF)",
+ "checks": [
+  {
+   "check": "transition source_set_sha256 matches",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "check": "phase_bridges directions exact",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "check": "12 phases x 4 samples each",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "check": "4 idle PNG bytes protected",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "check": "south idle == approved 6bf1d688",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "check": "24 east/west walk bytes protected",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "check": "96 east/west phase bytes protected",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "check": "8 side legacy bridge bytes protected",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "check": "changed counts recorded (allowed: 24 N/S walk, 8 N/S legacy)",
+   "pass": true,
+   "info": "walk changed 24/24, legacy changed 8/8"
+  },
+  {
+   "check": "192 samples: s0==outgoing walk, s3==idle0, hashes",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "check": "front/back legacy final == idle0",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "check": "front/back authored: 80x112, nothing below sole row 104, binary alpha, colours from stop15 palette",
+   "pass": true,
+   "info": []
+  },
+  {
+   "check": "source PXO sha256 + frame counts",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "check": "side phase PXOs byte-identical to stop15",
+   "pass": true,
+   "info": ""
+  }
+ ],
+ "all_pass": true
+}

@@ -1,8 +1,16 @@
-"""Independent read-only checker for the heroine-sea phase-aware side stop.
+"""Independent read-only checker for the heroine-sea phase-aware stop.
 
 CLI:
   python -I <this> --manifest NEW_TRANSITION_JSON --baseline V08_TRANSITION_JSON \
-      --report REPORT_JSON [--evidence-class synthetic_fixture|real_candidate]
+      --report REPORT_JSON [--evidence-class synthetic_fixture|real_candidate] \
+      [--front-back-revision]
+
+Default mode is the unchanged v15 east/west phase-stop check against the v08
+baseline. --front-back-revision selects the stop15-baseline front/back
+completion check: 28 protected pose PNGs (4 idle + 24 side walk), 96 protected
+side phase PNGs, 8 protected side legacy PNGs, 24 allowed front walk PNGs, 8
+allowed front legacy PNGs, all 52 pose + 192 phase PNGs bounds/hashes, and
+2 front 13-frame plus 4 phase 48-frame native PXO exports.
 
 The checker never imports candidate code. Every referenced asset is a basename
 resolved under the manifest or source-set directory. PXO frames are parsed
@@ -27,6 +35,7 @@ from PIL import Image
 W, H, GROUND = 80, 112, 104
 DIRS = ("south", "west", "north", "east")
 SIDE = ("east", "west")
+FRONT = ("south", "north")
 CONTACTS = ("contact0", "contact6")
 HEX64 = re.compile(r"^[0-9a-f]{64}$")
 
@@ -647,14 +656,630 @@ def validate(manifest_path, baseline_path, report_path, evidence_class):
     return rep
 
 
+def prep_baseline_front_back(path):
+    """Load the stop15 baseline: 52 pose, 16 legacy, 96 side phase PNGs, 2 side PXOs."""
+    bdir = os.path.dirname(os.path.abspath(path))
+    bm = load_json(path, "front/back baseline transition")
+    if bm.get("schema") != "worlds-between.exploration-stop-transition.supplemental.v1":
+        raise CheckError("baseline_integrity", "front/back baseline schema is not supplemental.v1")
+    if bm.get("frame_ms") != 40 or bm.get("pivot") != [40, GROUND]:
+        raise CheckError("baseline_integrity", "front/back baseline frame_ms/pivot mismatch")
+    if bm.get("logical_height") != 48 or bm.get("settle_ms_inclusive") != 120:
+        raise CheckError("baseline_integrity", "front/back baseline logical height/settle mismatch")
+    sm_name = bm.get("source_manifest") or bm.get("source_set")
+    if not isinstance(sm_name, str):
+        raise CheckError("baseline_integrity", "front/back baseline source_manifest missing")
+    sm_path = safe_file(bdir, sm_name, "front/back baseline source manifest")
+    sm = load_json(sm_path, "front/back baseline source manifest")
+    if sm.get("schema") != "worlds-between.exploration-source.v1":
+        raise CheckError("baseline_integrity", "front/back baseline source schema mismatch")
+    if sm.get("actor_id") != "protagonist-female" or sm.get("density") != 2:
+        raise CheckError("baseline_integrity", "front/back baseline actor_id/density mismatch")
+    if sm.get("frame_size") != [W, H] or sm.get("pivot") != [40, GROUND]:
+        raise CheckError("baseline_integrity", "front/back baseline frame_size/pivot mismatch")
+    acts = sm.get("actions")
+    if not isinstance(acts, dict) or set(acts) != {"idle", "walk"}:
+        raise CheckError("baseline_integrity", "front/back baseline actions must be idle/walk")
+    pose = {}
+    for d0 in DIRS:
+        if not isinstance(acts["idle"].get(d0), list) or len(acts["idle"][d0]) != 1:
+            raise CheckError("baseline_integrity", "front/back baseline idle/%s must have 1 frame" % d0)
+        if not isinstance(acts["walk"].get(d0), list) or len(acts["walk"][d0]) != 12:
+            raise CheckError("baseline_integrity", "front/back baseline walk/%s must have 12 frames" % d0)
+        for act, count in (("idle", 1), ("walk", 12)):
+            for i, ent in enumerate(acts[act][d0]):
+                if not isinstance(ent, dict) or not isinstance(ent.get("file"), str):
+                    raise CheckError("baseline_integrity", "front/back baseline pose entry malformed")
+                p = safe_file(bdir, ent["file"], "baseline pose %s/%s/%02d" % (d0, act, i))
+                data = rb(p)
+                h = sha(data)
+                if ent.get("sha256") is not None and ent["sha256"] != h:
+                    raise CheckError("baseline_integrity",
+                                     "baseline pose hash mismatch %s/%s/%02d" % (d0, act, i))
+                arr = load_png_bytes(data, "baseline pose %s/%s/%02d" % (d0, act, i))
+                okb, why = png_bounds_ok(arr)
+                if not okb:
+                    raise CheckError("baseline_integrity",
+                                     "baseline pose bounds %s/%s/%02d: %s" % (d0, act, i, why))
+                pose[(d0, act, i)] = {"file": ent["file"], "bytes": data, "sha": h, "arr": arr}
+    dirs = bm.get("directions")
+    if not isinstance(dirs, dict) or set(dirs) != set(DIRS):
+        raise CheckError("baseline_integrity", "front/back baseline directions incomplete")
+    legacy = {}
+    for d0 in DIRS:
+        cs = dirs.get(d0)
+        if not isinstance(cs, dict) or set(cs) != set(CONTACTS):
+            raise CheckError("baseline_integrity", "front/back baseline contacts incomplete %s" % d0)
+        for c in CONTACTS:
+            ent = cs[c]
+            if not isinstance(ent, dict) or set(ent) != {"from_walk_frame", "bridge", "final"}:
+                raise CheckError("baseline_integrity", "front/back baseline %s/%s shape mismatch" % (d0, c))
+            want = 0 if c == "contact0" else 6
+            if ent["from_walk_frame"] != want:
+                raise CheckError("baseline_integrity", "front/back baseline %s/%s contact mismatch" % (d0, c))
+            if not isinstance(ent["bridge"], list) or len(ent["bridge"]) != 2:
+                raise CheckError("baseline_integrity", "front/back baseline %s/%s bridge count mismatch" % (d0, c))
+            rows = []
+            for i, be in enumerate(ent["bridge"]):
+                if not isinstance(be, dict) or set(be) != {"file", "sha256"}:
+                    raise CheckError("baseline_integrity", "front/back baseline bridge entry malformed")
+                p = safe_file(bdir, be["file"], "baseline bridge %s/%s/%d" % (d0, c, i))
+                data = rb(p)
+                if sha(data) != be["sha256"]:
+                    raise CheckError("baseline_integrity", "front/back baseline bridge hash mismatch")
+                arr = load_png_bytes(data, "baseline bridge %s/%s/%d" % (d0, c, i))
+                rows.append({"file": be["file"], "sha256": be["sha256"], "bytes": data, "arr": arr})
+            fp = safe_file(bdir, ent["final"], "baseline final %s/%s" % (d0, c))
+            fdata = rb(fp)
+            if fdata != pose[(d0, "idle", 0)]["bytes"]:
+                raise CheckError("baseline_integrity",
+                                 "baseline final %s/%s is not exact idle0" % (d0, c))
+            legacy[(d0, c)] = {"from_walk_frame": ent["from_walk_frame"], "bridge": rows,
+                               "final": ent["final"], "final_bytes": fdata, "final_sha": sha(fdata)}
+    pb = bm.get("phase_bridges")
+    if not isinstance(pb, dict) or set(pb) != set(SIDE):
+        raise CheckError("baseline_integrity", "front/back baseline phase_bridges must be side-only")
+    phase = {}
+    for d0 in SIDE:
+        phases = pb.get(d0)
+        if not isinstance(phases, dict) or set(phases) != set("phase%d" % i for i in range(12)):
+            raise CheckError("baseline_integrity", "front/back baseline %s phases incomplete" % d0)
+        for pi in range(12):
+            ph = phases["phase%d" % pi]
+            if not isinstance(ph, dict) or set(ph) != {"from_walk_frame", "bridge"}:
+                raise CheckError("baseline_integrity", "front/back baseline phase shape mismatch")
+            if ph["from_walk_frame"] != pi:
+                raise CheckError("baseline_integrity", "front/back baseline phase from_walk mismatch")
+            if not isinstance(ph["bridge"], list) or len(ph["bridge"]) != 4:
+                raise CheckError("baseline_integrity", "front/back baseline phase bridge count mismatch")
+            for si, be in enumerate(ph["bridge"]):
+                if not isinstance(be, dict) or set(be) != {"file", "sha256"}:
+                    raise CheckError("baseline_integrity", "front/back baseline phase entry malformed")
+                p = safe_file(bdir, be["file"], "baseline phase %s/%d/%d" % (d0, pi, si))
+                data = rb(p)
+                if sha(data) != be["sha256"]:
+                    raise CheckError("baseline_integrity", "front/back baseline phase hash mismatch")
+                arr = load_png_bytes(data, "baseline phase %s/%d/%d" % (d0, pi, si))
+                phase[(d0, pi, si)] = {"file": be["file"], "sha256": be["sha256"],
+                                       "bytes": data, "arr": arr}
+    for d0 in SIDE:
+        for pi in range(12):
+            if phase[(d0, pi, 0)]["bytes"] != pose[(d0, "walk", pi)]["bytes"]:
+                raise CheckError("baseline_integrity", "baseline %s phase%d s0 is not walk" % (d0, pi))
+            if phase[(d0, pi, 3)]["bytes"] != pose[(d0, "idle", 0)]["bytes"]:
+                raise CheckError("baseline_integrity", "baseline %s phase%d s3 is not idle" % (d0, pi))
+    srcs = sm.get("source_files")
+    if not isinstance(srcs, list):
+        raise CheckError("baseline_integrity", "front/back baseline source_files missing")
+    pxo = {}
+    for sf in srcs:
+        if not isinstance(sf, dict) or sf.get("format") != "pixelorama-pxo":
+            continue
+        d0 = sf.get("direction")
+        if d0 not in DIRS or not isinstance(sf.get("file"), str):
+            raise CheckError("baseline_integrity", "front/back baseline PXO entry malformed")
+        p = safe_file(bdir, sf["file"], "baseline PXO %s" % d0)
+        data = rb(p)
+        if sha(data) != sf.get("sha256"):
+            raise CheckError("baseline_integrity", "front/back baseline PXO hash mismatch %s" % d0)
+        decoded = decode_pxo(p, "baseline PXO %s" % d0)
+        if decoded["frames"] != 48:
+            raise CheckError("baseline_integrity",
+                             "baseline %s PXO must have 48 phase frames, got %d" % (d0, decoded["frames"]))
+        for pi in range(12):
+            for si in range(4):
+                if not np.array_equal(decoded["comps"][pi * 4 + si], phase[(d0, pi, si)]["arr"]):
+                    raise CheckError("baseline_integrity",
+                                     "baseline %s PXO frame %d does not match phase sample" % (d0, pi * 4 + si))
+        pxo[d0] = {"file": sf["file"], "sha256": sf["sha256"], "bytes": data, "pxo": decoded}
+    for d0 in SIDE:
+        if d0 not in pxo:
+            raise CheckError("baseline_integrity", "baseline side phase PXO missing for %s" % d0)
+    return {"dir": bdir, "transition": bm, "source_set": sm, "pose": pose,
+            "legacy": legacy, "phase": phase, "pxo": pxo}
+
+
+def load_pose_actions_front_back(cdir, ss, hash_issues, png_bad):
+    actions = ss.get("actions")
+    if not isinstance(actions, dict) or set(actions) != {"idle", "walk"}:
+        raise CheckError("source_set_structure", "candidate source set actions must be idle/walk")
+    pose, declared = {}, 0
+    for act, count in (("idle", 1), ("walk", 12)):
+        for d0 in DIRS:
+            fl = actions[act].get(d0)
+            if not isinstance(fl, list) or len(fl) != count:
+                raise CheckError("source_set_structure",
+                                 "candidate %s/%s must have %d frames" % (act, d0, count))
+            for i, ent in enumerate(fl):
+                if not isinstance(ent, dict) or not isinstance(ent.get("file"), str):
+                    raise CheckError("source_set_structure", "candidate pose entry malformed")
+                p = safe_file(cdir, ent["file"], "candidate pose %s/%s/%02d" % (d0, act, i))
+                data = rb(p)
+                arr = load_png_bytes(data, "candidate pose %s/%s/%02d" % (d0, act, i))
+                okb, why = png_bounds_ok(arr)
+                if not okb:
+                    png_bad.append("pose %s/%s/%02d: %s" % (d0, act, i, why))
+                h = sha(data)
+                ds = ent.get("sha256")
+                if ds is not None:
+                    if not isinstance(ds, str) or not HEX64.match(ds):
+                        raise CheckError("source_set_structure",
+                                         "candidate pose sha256 must be 64 lowercase hex")
+                    declared += 1
+                    if ds != h:
+                        hash_issues.append("candidate pose %s/%s/%02d" % (d0, act, i))
+                pose[(d0, act, i)] = {"file": ent["file"], "data": data, "sha": h, "arr": arr}
+    return pose, declared
+
+
+def check_legacy_front_back(man, cdir, base, pose, hash_issues, png_bad):
+    dirs = man.get("directions")
+    if not isinstance(dirs, dict) or set(dirs) != set(DIRS):
+        raise CheckError("manifest_structure", "candidate directions are incomplete")
+    cand, legacy_issues, side_bad, front_changed = {}, [], [], 0
+    for d0 in DIRS:
+        cs = dirs.get(d0)
+        if not isinstance(cs, dict) or set(cs) != set(CONTACTS):
+            raise CheckError("manifest_structure", "candidate contacts incomplete for %s" % d0)
+        for c in CONTACTS:
+            ent = cs[c]
+            if not isinstance(ent, dict) or set(ent) != {"from_walk_frame", "bridge", "final"}:
+                raise CheckError("manifest_structure", "candidate %s/%s legacy shape mismatch" % (d0, c))
+            b = base["legacy"][(d0, c)]
+            if ent["from_walk_frame"] != b["from_walk_frame"]:
+                legacy_issues.append("%s/%s from_walk_frame" % (d0, c))
+            if not isinstance(ent["bridge"], list) or len(ent["bridge"]) != 2:
+                raise CheckError("manifest_structure", "candidate %s/%s bridge must have 2 entries" % (d0, c))
+            rows = []
+            for i, be in enumerate(ent["bridge"]):
+                if not isinstance(be, dict) or set(be) != {"file", "sha256"}:
+                    raise CheckError("manifest_structure", "candidate bridge entry shape mismatch")
+                p = safe_file(cdir, be["file"], "candidate bridge %s/%s/%d" % (d0, c, i))
+                data = rb(p)
+                arr = load_png_bytes(data, "candidate bridge %s/%s/%d" % (d0, c, i))
+                okb, why = png_bounds_ok(arr)
+                if not okb:
+                    png_bad.append("legacy %s/%s/%d: %s" % (d0, c, i, why))
+                if sha(data) != be["sha256"]:
+                    hash_issues.append("candidate bridge %s/%s/%d" % (d0, c, i))
+                if d0 in SIDE:
+                    if data != b["bridge"][i]["bytes"]:
+                        side_bad.append("%s/%s/bridge%d" % (d0, c, i))
+                elif data != b["bridge"][i]["bytes"]:
+                    front_changed += 1
+                rows.append({"file": be["file"], "sha256": be["sha256"], "data": data, "arr": arr})
+            if not isinstance(ent.get("final"), str):
+                raise CheckError("manifest_structure", "candidate %s/%s final missing" % (d0, c))
+            fp = safe_file(cdir, ent["final"], "candidate final %s/%s" % (d0, c))
+            fdata = rb(fp)
+            if d0 in SIDE:
+                if fdata != b["final_bytes"]:
+                    side_bad.append("%s/%s/final" % (d0, c))
+            elif fdata != pose[(d0, "idle", 0)]["data"]:
+                legacy_issues.append("%s/%s/final!=idle" % (d0, c))
+            cand[(d0, c)] = {"bridge": rows, "final": ent["final"], "final_sha": sha(fdata)}
+    return cand, legacy_issues, side_bad, front_changed
+
+
+def check_phase_front_back(man, cdir, base, pose, hash_issues, png_bad):
+    pb = man.get("phase_bridges")
+    if not isinstance(pb, dict) or set(pb) != set(DIRS):
+        raise CheckError("manifest_structure", "phase_bridges must contain exactly all four directions")
+    expected_phases = set("phase%d" % i for i in range(12))
+    samples, sample_by_file, side_bad, endpoints = {}, {}, [], []
+    for d0 in DIRS:
+        phases = pb.get(d0)
+        if not isinstance(phases, dict) or set(phases) != expected_phases:
+            raise CheckError("manifest_structure", "%s must contain phase0..phase11" % d0)
+        for pi in range(12):
+            ph = phases["phase%d" % pi]
+            if not isinstance(ph, dict) or set(ph) != {"from_walk_frame", "bridge"}:
+                raise CheckError("manifest_structure", "%s/phase%d shape mismatch" % (d0, pi))
+            if ph["from_walk_frame"] != pi:
+                raise CheckError("manifest_structure", "%s/phase%d from_walk_frame must equal phase" % (d0, pi))
+            if not isinstance(ph["bridge"], list) or len(ph["bridge"]) != 4:
+                raise CheckError("manifest_structure", "%s/phase%d bridge must have 4 samples" % (d0, pi))
+            for si, be in enumerate(ph["bridge"]):
+                if not isinstance(be, dict) or set(be) != {"file", "sha256"}:
+                    raise CheckError("manifest_structure", "phase bridge entry shape mismatch")
+                if not isinstance(be["sha256"], str) or not HEX64.match(be["sha256"]):
+                    raise CheckError("manifest_structure",
+                                     "%s/phase%d/sample%d sha256 must be lowercase hex" % (d0, pi, si))
+                p = safe_file(cdir, be["file"], "phase %s/%d/%d" % (d0, pi, si))
+                data = rb(p)
+                if sha(data) != be["sha256"]:
+                    hash_issues.append("phase %s/%d/%d declared hash" % (d0, pi, si))
+                arr = load_png_bytes(data, "phase %s/%d/%d" % (d0, pi, si))
+                okb, why = png_bounds_ok(arr)
+                if not okb:
+                    png_bad.append("phase %s/%d/%d: %s" % (d0, pi, si, why))
+                if be["file"] in sample_by_file:
+                    raise CheckError("manifest_structure", "duplicate phase sample file %r" % be["file"])
+                sample_by_file[be["file"]] = (pi, si)
+                samples[(d0, pi, si)] = {"file": be["file"], "sha256": be["sha256"],
+                                         "data": data, "arr": arr}
+                if d0 in SIDE and data != base["phase"][(d0, pi, si)]["bytes"]:
+                    side_bad.append("%s/phase%d/sample%d" % (d0, pi, si))
+    for d0 in DIRS:
+        for pi in range(12):
+            if samples[(d0, pi, 0)]["data"] != pose[(d0, "walk", pi)]["data"]:
+                endpoints.append("%s/phase%d/s0!=walk" % (d0, pi))
+            if samples[(d0, pi, 3)]["data"] != pose[(d0, "idle", 0)]["data"]:
+                endpoints.append("%s/phase%d/s3!=idle" % (d0, pi))
+    return samples, sample_by_file, side_bad, endpoints
+
+
+def check_native_front_back(ss, cdir, base, pose, samples, sample_by_file, hash_issues):
+    entries, seen = [], set()
+    for key in ("native_sources", "source_files"):
+        val = ss.get(key)
+        if val is None:
+            continue
+        if not isinstance(val, list):
+            raise CheckError("source_set_structure", "candidate %s must be a list" % key)
+        for ent in val:
+            if not isinstance(ent, dict):
+                raise CheckError("source_set_structure", "candidate native source entry malformed")
+            if ent.get("format") != "pixelorama-pxo":
+                continue
+            f = ent.get("file")
+            if not isinstance(f, str):
+                raise CheckError("source_set_structure", "candidate native source file missing")
+            if f not in seen:
+                seen.add(f)
+                entries.append(ent)
+    front, phase, side_pose = {}, {}, {}
+    for ent in entries:
+        d0 = ent.get("direction")
+        if d0 not in DIRS:
+            raise CheckError("native_sources", "candidate native source direction invalid")
+        if not isinstance(ent.get("sha256"), str) or not HEX64.match(ent["sha256"]):
+            raise CheckError("native_sources", "candidate native source sha256 must be lowercase hex")
+        p = safe_file(cdir, ent["file"], "native %s" % d0)
+        data = rb(p)
+        if sha(data) != ent["sha256"]:
+            hash_issues.append("native %s source" % d0)
+        decoded = decode_pxo(p, "candidate native %s" % d0)
+        if ent.get("frames") is not None and ent["frames"] != decoded["frames"]:
+            raise CheckError("native_sources",
+                             "%s declared %r frames but parsed %d" % (d0, ent["frames"], decoded["frames"]))
+        row = {"ent": ent, "direction": d0, "data": data, "pxo": decoded}
+        if decoded["frames"] == 48:
+            if d0 in phase:
+                raise CheckError("native_sources", "duplicate phase PXO direction %s" % d0)
+            phase[d0] = row
+        elif decoded["frames"] == 13:
+            if d0 not in FRONT:
+                raise CheckError("native_sources", "13-frame pose PXO must be front, got %s" % d0)
+            if d0 in front:
+                raise CheckError("native_sources", "duplicate front pose PXO direction %s" % d0)
+            front[d0] = row
+        elif decoded["frames"] == 17:
+            if d0 not in SIDE:
+                raise CheckError("native_sources", "17-frame pose PXO must be side, got %s" % d0)
+            if d0 in side_pose:
+                raise CheckError("native_sources", "duplicate side pose PXO direction %s" % d0)
+            side_pose[d0] = row
+        else:
+            raise CheckError("native_sources",
+                             "%s PXO has %d frames; expected 13 front, 17 side or 48 phase" %
+                             (d0, decoded["frames"]))
+    if set(front) != set(FRONT):
+        raise CheckError("native_sources", "front/back revision requires 13-frame PXOs for south and north")
+    if set(phase) != set(DIRS):
+        raise CheckError("native_sources", "front/back revision requires one 48-frame phase PXO per direction")
+    problems, exported = [], {"front_pose": 0, "phase": 0, "side_pose": 0}
+    phase_order = [(pi, si) for pi in range(12) for si in range(4)]
+
+    for d0 in DIRS:
+        row = phase[d0]
+        ent, decoded = row["ent"], row["pxo"]
+        mapping = {}
+        exports = extract_exports(ent)
+        if exports is not None:
+            if len(exports) != 48:
+                raise CheckError("native_sources", "%s phase PXO must declare 48 frame exports" % d0)
+            for i, ex in enumerate(exports):
+                if not isinstance(ex, dict):
+                    raise CheckError("native_sources", "%s phase export entry malformed" % d0)
+                slot = slot_from_export(ex, sample_by_file)
+                if slot is None:
+                    raise CheckError("native_sources", "%s phase export slot unresolvable" % d0)
+                if slot in mapping:
+                    raise CheckError("native_sources", "%s duplicate phase export slot %r" % (d0, slot))
+                fi = ex.get("frame", i)
+                if not isinstance(fi, int) or fi < 0 or fi >= decoded["frames"]:
+                    raise CheckError("native_sources", "%s phase export frame invalid" % d0)
+                mapping[slot] = fi
+                if isinstance(ex.get("file"), str):
+                    want = samples[(d0, slot[0], slot[1])]
+                    if ex["file"] != want["file"]:
+                        problems.append("%s/%d/%d export file name" % (d0, slot[0], slot[1]))
+                    sp = safe_file(cdir, ex["file"], "native phase export %s" % d0)
+                    sdata = rb(sp)
+                    if sdata != want["data"]:
+                        problems.append("%s/%d/%d export file bytes" % (d0, slot[0], slot[1]))
+                    if ex.get("sha256") is not None and sha(sdata) != ex["sha256"]:
+                        problems.append("%s/%d/%d export hash" % (d0, slot[0], slot[1]))
+        else:
+            if not isinstance(ent.get("frame_order"), str) or not ent["frame_order"]:
+                raise CheckError("native_sources",
+                                 "%s phase PXO must declare frame_order or 48 frame exports" % d0)
+            mapping = {slot: i for i, slot in enumerate(phase_order)}
+        if set(mapping) != set(phase_order):
+            raise CheckError("native_sources", "%s phase exports do not cover phase0..11 x sample0..3" % d0)
+        if len(set(mapping.values())) != 48:
+            raise CheckError("native_sources", "%s reuses a phase frame for multiple samples" % d0)
+        if max(mapping.values()) >= decoded["frames"]:
+            raise CheckError("native_sources", "%s phase export exceeds parsed frame count" % d0)
+        for pi, si in phase_order:
+            exported["phase"] += 1
+            if not np.array_equal(decoded["comps"][mapping[(pi, si)]], samples[(d0, pi, si)]["arr"]):
+                problems.append("%s/phase%d/sample%d native mismatch" % (d0, pi, si))
+
+    for d0 in FRONT:
+        row = front[d0]
+        ent, decoded = row["ent"], row["pxo"]
+        mapping = {}
+        exports = extract_exports(ent)
+        if exports is not None:
+            if len(exports) != 13:
+                raise CheckError("native_sources", "%s front pose PXO must declare 13 frame exports" % d0)
+            for i, ex in enumerate(exports):
+                if not isinstance(ex, dict):
+                    raise CheckError("native_sources", "%s front pose export malformed" % d0)
+                role = ex.get("role") or ex.get("name") or ex.get("slot")
+                if not isinstance(role, str):
+                    raise CheckError("native_sources", "%s front pose export role missing" % d0)
+                low = role.lower()
+                if "idle" in low:
+                    slot = ("idle", 0)
+                else:
+                    m = re.search(r"walk[^0-9]*(\d{1,2})", low) or re.search(r"(\d{1,2})", low)
+                    if not m:
+                        raise CheckError("native_sources", "%s front pose export role unresolvable" % d0)
+                    slot = ("walk", int(m.group(1)))
+                if slot in mapping:
+                    raise CheckError("native_sources", "%s duplicate front pose export slot" % d0)
+                fi = ex.get("frame", i)
+                if not isinstance(fi, int) or fi < 0 or fi >= decoded["frames"]:
+                    raise CheckError("native_sources", "%s front pose export frame invalid" % d0)
+                mapping[slot] = fi
+                if isinstance(ex.get("file"), str):
+                    want = pose[(d0, slot[0], slot[1])]
+                    if ex["file"] != want["file"]:
+                        problems.append("%s/%s/%d export file name" % (d0, slot[0], slot[1]))
+                    sp = safe_file(cdir, ex["file"], "native pose export %s" % d0)
+                    sdata = rb(sp)
+                    if sdata != want["data"]:
+                        problems.append("%s/%s/%d export file bytes" % (d0, slot[0], slot[1]))
+                    if ex.get("sha256") is not None and sha(sdata) != ex["sha256"]:
+                        problems.append("%s/%s/%d export hash" % (d0, slot[0], slot[1]))
+        else:
+            if not isinstance(ent.get("frame_order"), str) or not ent["frame_order"]:
+                raise CheckError("native_sources",
+                                 "%s front pose PXO must declare frame_order or frame exports" % d0)
+            mapping = {("idle", 0): 0}
+            mapping.update({("walk", i): i + 1 for i in range(12)})
+        expected = {("idle", 0)} | set(("walk", i) for i in range(12))
+        if set(mapping) != expected:
+            raise CheckError("native_sources", "%s front pose exports must cover idle0 + walk0..11" % d0)
+        if len(set(mapping.values())) != 13:
+            raise CheckError("native_sources", "%s reuses a front pose frame" % d0)
+        if max(mapping.values()) >= decoded["frames"]:
+            raise CheckError("native_sources", "%s front pose export exceeds frame count" % d0)
+        for act, i in sorted(expected):
+            exported["front_pose"] += 1
+            if not np.array_equal(decoded["comps"][mapping[(act, i)]], pose[(d0, act, i)]["arr"]):
+                problems.append("%s/%s/%02d native mismatch" % (d0, act, i))
+
+    for d0 in side_pose:
+        row = side_pose[d0]
+        decoded = row["pxo"]
+        mapping = {("idle", 0): 0}
+        mapping.update({("walk", i): i + 1 for i in range(12)})
+        for act, i in sorted(mapping):
+            exported["side_pose"] += 1
+            if not np.array_equal(decoded["comps"][mapping[(act, i)]], base["pose"][(d0, act, i)]["arr"]):
+                problems.append("%s/%s/%02d side pose native mismatch" % (d0, act, i))
+    reuse = {d0: (phase[d0]["data"] == base["pxo"][d0]["bytes"]) for d0 in SIDE}
+    summary = {d: {"file": phase[d]["ent"]["file"], "frames": phase[d]["pxo"]["frames"],
+                   "layers": len(phase[d]["pxo"]["layers"])} for d in DIRS}
+    summary["front_pose"] = {d: {"file": front[d]["ent"]["file"], "frames": front[d]["pxo"]["frames"],
+                                 "layers": len(front[d]["pxo"]["layers"])} for d in FRONT}
+    summary["side_pose_sources"] = len(side_pose)
+    return problems, exported, reuse, summary
+
+
+def validate_front_back(manifest_path, baseline_path, report_path, evidence_class):
+    before_base = tree_hashes(os.path.dirname(os.path.abspath(baseline_path)))
+    before_cand = tree_hashes(os.path.dirname(os.path.abspath(manifest_path)))
+    rep = {
+        "schema": "worlds-between.heroine-sea-phase-aware-stop-check.front-back-revision.v1",
+        "generated_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "mode": "front_back_revision",
+        "evidence_class": evidence_class,
+        "note": "Structural, read-only front/back completion validation against the stop15 baseline. "
+                "No motion, cadence, art-quality, GUI, gameplay or native-runtime inference.",
+        "inputs": {"manifest": os.path.abspath(manifest_path),
+                   "baseline": os.path.abspath(baseline_path),
+                   "report": os.path.abspath(report_path)},
+        "limitations": [
+            "Synthetic fixtures copy stop15 protected bytes and add marker-pixel front/phase samples; they are not art approval.",
+            "Native PXO layers and frame mappings are parsed dynamically from PXO data.json and source-set declarations.",
+            "No GUI reopening, Godot runtime, motion review, network, provider or source mutation is performed."],
+        "gates": {},
+        "measurements": {},
+        "ok": False,
+    }
+    gates = rep["gates"]
+
+    def gate(name, ok, detail):
+        gates[name] = {"ok": bool(ok), "detail": detail}
+
+    try:
+        base = prep_baseline_front_back(baseline_path)
+        gate("baseline_integrity", True,
+             {"pose_png": 52, "legacy_png": 16, "side_phase_png": 96,
+              "side_phase_pxo": 2, "pxo_frames_per_side": 48})
+        man = load_json(manifest_path, "candidate transition")
+        cdir = os.path.dirname(os.path.abspath(manifest_path))
+        if man.get("schema") != "worlds-between.exploration-stop-transition.supplemental.v1":
+            raise CheckError("manifest_structure", "candidate schema is not supplemental.v1")
+        if not isinstance(man.get("source_set"), str):
+            raise CheckError("manifest_structure", "manifest source_set must name a source-set JSON")
+        if not isinstance(man.get("source_set_sha256"), str) or not HEX64.match(man["source_set_sha256"]):
+            raise CheckError("manifest_structure", "manifest source_set_sha256 must be 64 lowercase hex")
+        ss_path = safe_file(cdir, man["source_set"], "source_set")
+        ss_data = rb(ss_path)
+        if sha(ss_data) != man["source_set_sha256"]:
+            raise CheckError("source_set_pin", "source_set_sha256 does not match source-set bytes")
+        ss = load_json_bytes(ss_data, "source set")
+        if not isinstance(ss, dict) or ss.get("schema") != "worlds-between.exploration-source.v1":
+            raise CheckError("source_set_structure", "candidate source set schema mismatch")
+        gate("source_set_pin", True, {"file": man["source_set"], "sha256": man["source_set_sha256"]})
+
+        hash_issues, png_bad, protected_bad = [], [], []
+        pose, pose_declared = load_pose_actions_front_back(cdir, ss, hash_issues, png_bad)
+        idle_changed = side_walk_changed = front_walk_changed = 0
+        front_walk_changed_files = []
+        for d0 in DIRS:
+            for act, count in (("idle", 1), ("walk", 12)):
+                for i in range(count):
+                    key = (d0, act, i)
+                    changed = pose[key]["data"] != base["pose"][key]["bytes"]
+                    if act == "idle":
+                        if changed:
+                            idle_changed += 1
+                            protected_bad.append("%s/idle/%02d" % (d0, i))
+                    elif d0 in SIDE:
+                        if changed:
+                            side_walk_changed += 1
+                            protected_bad.append("%s/walk/%02d" % (d0, i))
+                    elif changed:
+                        front_walk_changed += 1
+                        front_walk_changed_files.append("%s/walk/%02d" % (d0, i))
+        gate("protected_28_pose_bytes_equal_baseline", not protected_bad,
+             {"checked": 28, "mismatched": protected_bad[:12]})
+        gate("pose_png_bounds_hashes_52", not [p for p in png_bad if p.startswith("pose ")],
+             {"checked": 52, "declared_hashes": pose_declared,
+              "invalid": [p for p in png_bad if p.startswith("pose ")][:12]})
+
+        cand_legacy, legacy_issues, side_legacy_bad, front_legacy_changed = check_legacy_front_back(
+            man, cdir, base, pose, hash_issues, png_bad)
+        gate("legacy_schema_unchanged", not legacy_issues, legacy_issues[:12])
+        gate("side_legacy_8_bytes_equal_baseline", not side_legacy_bad,
+             {"checked": 8, "mismatched": side_legacy_bad[:12]})
+        gate("front_legacy_final_idle", not [x for x in legacy_issues if x.endswith("final!=idle")],
+             {"checked": 8, "violations": [x for x in legacy_issues if x.endswith("final!=idle")][:12]})
+
+        samples, sample_by_file, side_phase_bad, endpoints = check_phase_front_back(
+            man, cdir, base, pose, hash_issues, png_bad)
+        gate("phase_all_4dirs_12x4", len(samples) == 192,
+             {"directions": list(DIRS), "phases_per_direction": 12, "samples_per_phase": 4,
+              "checked": len(samples)})
+        gate("phase_endpoints_walk_idle_all4", not endpoints,
+             {"checked": 96, "mismatched": endpoints[:12]})
+        gate("side_phase_96_bytes_equal_baseline", not side_phase_bad,
+             {"checked": 96, "mismatched": side_phase_bad[:12]})
+
+        native_problems, native_exported, side_pxo_reuse, native_summary = check_native_front_back(
+            ss, cdir, base, pose, samples, sample_by_file, hash_issues)
+        phase_pxo_count = sum(1 for d0 in DIRS
+                              if isinstance(native_summary.get(d0), dict)
+                              and native_summary[d0].get("frames") == 48)
+        front_pxo_count = len(native_summary.get("front_pose", {}))
+        gate("native_sources_layout", front_pxo_count == 2 and phase_pxo_count == 4,
+             {"front_pose_pxo": front_pxo_count, "phase_pxo": phase_pxo_count,
+              "optional_side_pose_pxo": native_summary.get("side_pose_sources", 0),
+              "sources": native_summary})
+        gate("native_exports_and_composition", not native_problems,
+             {"front_pose_frames": native_exported["front_pose"],
+              "phase_frames": native_exported["phase"],
+              "optional_side_pose_frames": native_exported["side_pose"],
+              "problems": native_problems[:12]})
+        gate("declared_hashes", not hash_issues, hash_issues[:12])
+        gate("path_safety", True, {"refs": "all basenames confined to manifest/source-set dirs"})
+        all_png_bad = [p for p in png_bad if p]
+        gate("png_format_alpha_bounds_260", not all_png_bad,
+             {"checked": 52 + 16 + 192, "invalid": all_png_bad[:12]})
+
+        changes = {
+            "pose_total": 52, "pose_protected": 28, "pose_allowed_front": 24,
+            "idle_changed": idle_changed, "side_walk_changed": side_walk_changed,
+            "front_walk_changed": front_walk_changed,
+            "legacy_total": 16, "side_legacy_changed": len(side_legacy_bad),
+            "front_legacy_changed": front_legacy_changed,
+            "phase_total": 192, "side_phase_changed": len(side_phase_bad),
+            "front_phase_samples": 96,
+            "front_walk_changed_files": front_walk_changed_files,
+        }
+        allowed_ok = (idle_changed == 0 and side_walk_changed == 0 and
+                      len(side_legacy_bad) == 0 and len(side_phase_bad) == 0 and
+                      front_walk_changed <= 24 and front_legacy_changed <= 8 and
+                      len(samples) == 192 and not endpoints)
+        gate("allowed_changes_report", allowed_ok, changes)
+
+        after_base = tree_hashes(os.path.dirname(os.path.abspath(baseline_path)))
+        after_cand = tree_hashes(cdir)
+        gate("read_only_inputs_unchanged", before_base == after_base and before_cand == after_cand,
+             {"baseline_changed": before_base != after_base,
+              "candidate_changed": before_cand != after_cand})
+        rep["measurements"] = {
+            "protected_png": {"idle": 4, "side_walk": 24, "side_phase": 96, "side_legacy": 8},
+            "allowed_png": {"front_walk": 24, "front_legacy": 8, "front_phase": 96},
+            "pose_png": 52, "legacy_png": 16, "phase_samples": 192,
+            "native_sources": native_summary,
+            "native_exports_checked": native_exported,
+            "side_phase_pxo_byte_identical": side_pxo_reuse,
+            "changes": changes,
+            "baseline_pxo_frames_per_side": 48,
+        }
+    except CheckError as exc:
+        gate(exc.gate, False, {"error": exc.message})
+    except Exception as exc:
+        gate("internal_error", False, {"error": "%s: %s" % (type(exc).__name__, exc)})
+    rep["ok"] = bool(gates) and all(g.get("ok") for g in gates.values())
+    if not rep["ok"]:
+        rep["failed_gates"] = sorted(k for k, v in gates.items() if not v.get("ok"))
+    wb(report_path, (json.dumps(rep, indent=1, ensure_ascii=False) + "\n").encode("utf-8"))
+    return rep
+
+
 def parse_args(argv):
     allowed = {"--manifest", "--baseline", "--report", "--evidence-class"}
-    vals, i = {}, 0
+    vals, i, revision = {}, 0, False
     while i < len(argv):
         k = argv[i]
+        if k == "--front-back-revision":
+            if revision:
+                raise ValueError("--front-back-revision may be given only once")
+            revision = True
+            i += 1
+            continue
         if k not in allowed or k in vals or i + 1 >= len(argv):
             raise ValueError("usage: checker --manifest NEW.json --baseline V08.json --report OUT.json "
-                             "[--evidence-class synthetic_fixture|real_candidate]")
+                             "[--evidence-class synthetic_fixture|real_candidate] [--front-back-revision]")
         vals[k] = argv[i + 1]
         i += 2
     for k in ("--manifest", "--baseline", "--report"):
@@ -664,12 +1289,12 @@ def parse_args(argv):
     cls = vals.get("--evidence-class", "unclassified")
     if cls not in ("synthetic_fixture", "real_candidate", "unclassified"):
         raise ValueError("--evidence-class must be synthetic_fixture, real_candidate or unclassified")
-    return vals["--manifest"], vals["--baseline"], vals["--report"], cls
+    return vals["--manifest"], vals["--baseline"], vals["--report"], cls, revision
 
 
 def main(argv):
     try:
-        manifest, baseline, report, cls = parse_args(argv)
+        manifest, baseline, report, cls, revision = parse_args(argv)
     except ValueError as exc:
         print(str(exc), file=sys.stderr)
         return 2
@@ -683,7 +1308,10 @@ def main(argv):
         except ValueError:
             pass
     try:
-        rep = validate(manifest, baseline, report, cls)
+        if revision:
+            rep = validate_front_back(manifest, baseline, report, cls)
+        else:
+            rep = validate(manifest, baseline, report, cls)
     except Exception as exc:
         print("checker failed safely: %s: %s" % (type(exc).__name__, exc), file=sys.stderr)
         return 1

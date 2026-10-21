@@ -8,7 +8,7 @@ extends RefCounted
 # main menu, saved preferences or any default; the overrides live only in this process.
 # Missing pinned files are refused: the caller must not fall back to the legacy heroine.
 
-const REGISTRY_PATH := "res://data/hsea-stop15/rpg-2-star-ocean-the-second_heroine-phase-stop_registry_test-only-v01_20261021-015453-1036fbad.json"
+const REGISTRY_PATH := "res://data/hsea-front17/rpg-2-star-ocean-the-second_hero-female_exploration-sprite-set-registry_runtime-v01_20261020-222654-e8633039.json"
 const COMBAT_INDEX_PATH := "res://data/heroine-sea-combat-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_spritesheet-index_v01_20261020-201338-38ecfcb0.json"
 const SPRITE_SET_PILOT_PATH := "res://scripts/exploration_sprite_set_pilot.gd"
 const SEA_DRIVER_PATH := "res://scripts/hsea09/rpg-2-star-ocean-the-second_heroine-sea_distance-driver_opt-in-v01_20261020-214620-4be375a2.gd"

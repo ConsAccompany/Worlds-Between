@@ -86,6 +86,19 @@ def plan(args: argparse.Namespace) -> dict:
             "pinned": pins, "art_and_motion": "UNAPPROVED", "controls": read_controls()}
 
 
+def prepare_assets(godot: str, env: dict) -> bool:
+    print("Preparing game assets...", flush=True)
+    import_command = [godot, "--headless", "--path", str(GAME), "--editor", "--import", "--quit"]
+    prepared = subprocess.run(import_command, env=env, capture_output=True, text=True, encoding="utf8", errors="replace", timeout=120)
+    stamp = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S") + "-" + uuid.uuid4().hex[:8]
+    import_text = prepared.stdout + prepared.stderr
+    (PROFILE / ("rpg-2-star-ocean-the-second_heroine-playable-path_asset-preparation_v01_" + stamp + ".log")).write_text(import_text, encoding="utf8")
+    if prepared.returncode != 0 or "SCRIPT_ERROR" in import_text or any(line.lstrip().startswith("ERROR:") for line in import_text.splitlines()):
+        print("Game assets could not be prepared. See the local preview log.", file=sys.stderr)
+        return False
+    return True
+
+
 def play(args: argparse.Namespace) -> int:
     info = plan(args)
     if args.dry_run:
@@ -96,14 +109,7 @@ def play(args: argparse.Namespace) -> int:
         return 1
     PROFILE.mkdir(parents=True, exist_ok=True)
     env = dict(os.environ, APPDATA=str(PROFILE), LOCALAPPDATA=str(PROFILE))
-    print("Preparing game assets...", flush=True)
-    import_command = [info["command"][0], "--headless", "--path", str(GAME), "--editor", "--import", "--quit"]
-    prepared = subprocess.run(import_command, env=env, capture_output=True, text=True, encoding="utf8", errors="replace", timeout=120)
-    stamp = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S") + "-" + uuid.uuid4().hex[:8]
-    import_text = prepared.stdout + prepared.stderr
-    (PROFILE / ("rpg-2-star-ocean-the-second_heroine-playable-path_asset-preparation_v01_" + stamp + ".log")).write_text(import_text, encoding="utf8")
-    if prepared.returncode != 0 or "SCRIPT_ERROR" in import_text or any(line.lstrip().startswith("ERROR:") for line in import_text.splitlines()):
-        print("Game assets could not be prepared. See the local preview log.", file=sys.stderr)
+    if not prepare_assets(info["command"][0], env):
         return 1
     print_controls()
     proc = subprocess.Popen(info["command"], env=env, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
@@ -155,7 +161,25 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--dry-run", action="store_true", help="print the JSON launch plan; do not start the engine")
     p.add_argument("--godot", help="explicit Godot console executable")
     sub.add_parser("controls", help="list the game controls")
+    check = sub.add_parser("check", help="run the existing complete normal-input heroine path check")
+    check.add_argument("--language", choices=LANGUAGES, action="append", default=[])
+    check.add_argument("--scenario", choices=("victory", "defeat"), default="victory")
+    check.add_argument("--movie", action="store_true", help="also record one original-speed video per language")
     args = parser.parse_args(argv)
+    if args.cmd == "check":
+        godot = find_godot(None)
+        if godot is None:
+            raise SystemExit("Godot runtime missing")
+        PROFILE.mkdir(parents=True, exist_ok=True)
+        if not prepare_assets(str(godot), dict(os.environ, APPDATA=str(PROFILE), LOCALAPPDATA=str(PROFILE))):
+            return 1
+        runner = REPO / "tools/rpg-2-star-ocean-the-second_heroine-playable-path_root-runner_test-only-v16_20261021-015641-e106bdfa.py"
+        command = [sys.executable, "-I", str(runner), "--scenario", args.scenario]
+        for language in args.language:
+            command += ["--language", language]
+        if args.movie:
+            command += ["--movie"]
+        return subprocess.run(command, cwd=REPO).returncode
     if args.cmd == "controls":
         print_controls()
         return 0

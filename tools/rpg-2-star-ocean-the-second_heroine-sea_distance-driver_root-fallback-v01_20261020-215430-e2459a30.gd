@@ -38,10 +38,11 @@ func run() -> void:
 				driver.step(1.0/60,Vector2(31,42),Vector2(31,42),"south")
 			ck(driver.action == "idle" and driver.frame == 0,"blocked zero actual displacement stays idle")
 			ck(sprite.position == Vector2(31,42),"driver never moves target")
-	if args[1] == "phase" and driver != null:
+	if args[1] in ["phase", "phase-all"] and driver != null:
+		var phase_directions := ["south", "west", "north", "east"] if args[1] == "phase-all" else ["east", "west"]
 		ck(driver.bridges.has("phase_bridges"), "phase-aware package active")
 		var points := [[0.0,0], [0.249999,0], [0.25,1], [0.499999,1], [0.5,2], [0.799999,2], [0.8,3], [1.0,3]]
-		for direction in ["east", "west"]:
+		for direction in phase_directions:
 			for phase in range(12):
 				for sample in points:
 					driver._apply({"action":"settle", "facing":direction, "frame":6 if phase < 6 else 0, "settle_entry_frame":phase, "settle_progress":sample[0], "diagnostics":{"settle_target_frame":0}})
@@ -49,9 +50,11 @@ func run() -> void:
 					ck(driver.state().get("bridge_phase") == phase and driver.state().get("bridge_frame") == sample[1], "state records phase sample")
 				ck(driver.bridges["phase_bridges"][direction][phase][0].get_image().get_data() == driver.sprite_set["clips"]["walk"][direction]["textures"][phase].get_image().get_data(), "entry exact walk")
 				ck(driver.bridges["phase_bridges"][direction][phase][3].get_image().get_data() == driver.sprite_set["clips"]["idle"][direction]["textures"][0].get_image().get_data(), "end exact idle")
-		for direction in ["north", "south"]:
+		for direction in ([] if args[1] == "phase-all" else ["north", "south"]):
 			driver._apply({"action":"settle", "facing":direction, "frame":0, "settle_entry_frame":3, "settle_progress":0.6, "diagnostics":{"settle_target_frame":6}})
 			ck(sprite.texture == driver.bridges[direction][6][0], "legacy front/back contact remains " + direction)
+		if args[1] == "phase-all":
+			ck(Driver._load_phase_bridges(Loader, "unused", {}, driver.sprite_set).is_empty(), "empty phase manifest refuses")
 		var reg: Dictionary = Loader.load_registry(args[0])
 		var setpath: String = reg["actors"]["protagonist-female"]
 		var profile: Dictionary = Driver._profile_for_set(FileAccess.get_sha256(setpath))
@@ -59,16 +62,16 @@ func run() -> void:
 		var data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(manifest_path))
 		var broken: Dictionary = data.duplicate(true)
 		broken["phase_bridges"]["east"].erase("phase4")
-		ck(Driver._load_phase_bridges(Loader, manifest_path, broken, driver.sprite_set).is_empty(), "missing phase refuses")
+		ck(Driver._load_phase_bridges(Loader, manifest_path, broken, driver.sprite_set, phase_directions).is_empty(), "missing phase refuses")
 		broken = data.duplicate(true)
 		broken["phase_bridges"]["west"]["phase3"]["from_walk_frame"] = 4
-		ck(Driver._load_phase_bridges(Loader, manifest_path, broken, driver.sprite_set).is_empty(), "wrong outgoing index refuses")
+		ck(Driver._load_phase_bridges(Loader, manifest_path, broken, driver.sprite_set, phase_directions).is_empty(), "wrong outgoing index refuses")
 		broken = data.duplicate(true)
 		broken["phase_bridges"]["east"]["phase3"]["bridge"][0] = broken["phase_bridges"]["east"]["phase4"]["bridge"][0]
-		ck(Driver._load_phase_bridges(Loader, manifest_path, broken, driver.sprite_set).is_empty(), "valid other-pose endpoint refuses")
+		ck(Driver._load_phase_bridges(Loader, manifest_path, broken, driver.sprite_set, phase_directions).is_empty(), "valid other-pose endpoint refuses")
 		broken = data.duplicate(true)
 		broken["phase_bridges"]["east"]["phase0"]["bridge"][1]["file"] = "../escape.png"
-		ck(Driver._load_phase_bridges(Loader, manifest_path, broken, driver.sprite_set).is_empty(), "traversal refuses")
+		ck(Driver._load_phase_bridges(Loader, manifest_path, broken, driver.sprite_set, phase_directions).is_empty(), "traversal refuses")
 		ck(sprite.position == Vector2(31,42), "phase selection does not move physical target")
 	sprite.free()
 	Loader.clear_cache()

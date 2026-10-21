@@ -1,0 +1,318 @@
+{
+ "schema": "worlds-between.heroine-sea-phase-aware-stop-check.front-back-revision.v1",
+ "generated_utc": "2026-10-21T02:26:19Z",
+ "mode": "front_back_revision",
+ "evidence_class": "real_candidate",
+ "note": "Structural, read-only front/back completion validation against the stop15 baseline. No motion, cadence, art-quality, GUI, gameplay or native-runtime inference.",
+ "inputs": {
+  "manifest": "C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\dual14\\cl-stop\\outputs\\hsea-front17\\src-v01-20261021-022403\\rpg-2-star-ocean-the-second_heroine-sea_explore-stop-transition-manifest_unapproved-front17-v01_20261021-022403-cabad530.json",
+  "baseline": "C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\max0840-sentry-sync\\outputs\\hsea-stop15\\src-v01-20261021-015000\\rpg-2-star-ocean-the-second_heroine-sea_explore-stop-transition-manifest_unapproved-stop15-v01_20261021-015000-f141d653.json",
+  "report": "C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\max0840-sentry-sync\\outputs\\hsea-front17-root\\rpg-2-star-ocean-the-second_heroine_front-back-independent-source-check_v01_20261021-022700-e4d8c305.json"
+ },
+ "limitations": [
+  "Synthetic fixtures copy stop15 protected bytes and add marker-pixel front/phase samples; they are not art approval.",
+  "Native PXO layers and frame mappings are parsed dynamically from PXO data.json and source-set declarations.",
+  "No GUI reopening, Godot runtime, motion review, network, provider or source mutation is performed."
+ ],
+ "gates": {
+  "baseline_integrity": {
+   "ok": true,
+   "detail": {
+    "pose_png": 52,
+    "legacy_png": 16,
+    "side_phase_png": 96,
+    "side_phase_pxo": 2,
+    "pxo_frames_per_side": 48
+   }
+  },
+  "source_set_pin": {
+   "ok": true,
+   "detail": {
+    "file": "rpg-2-star-ocean-the-second_heroine-sea_explore-source-set_unapproved-front17-v01_20261021-022403-cabad530.json",
+    "sha256": "5a644d10a94f5a7a56084f7c914c23d135c443150986fb97486c8f01fa112b7c"
+   }
+  },
+  "protected_28_pose_bytes_equal_baseline": {
+   "ok": true,
+   "detail": {
+    "checked": 28,
+    "mismatched": []
+   }
+  },
+  "pose_png_bounds_hashes_52": {
+   "ok": true,
+   "detail": {
+    "checked": 52,
+    "declared_hashes": 0,
+    "invalid": []
+   }
+  },
+  "legacy_schema_unchanged": {
+   "ok": true,
+   "detail": []
+  },
+  "side_legacy_8_bytes_equal_baseline": {
+   "ok": true,
+   "detail": {
+    "checked": 8,
+    "mismatched": []
+   }
+  },
+  "front_legacy_final_idle": {
+   "ok": true,
+   "detail": {
+    "checked": 8,
+    "violations": []
+   }
+  },
+  "phase_all_4dirs_12x4": {
+   "ok": true,
+   "detail": {
+    "directions": [
+     "south",
+     "west",
+     "north",
+     "east"
+    ],
+    "phases_per_direction": 12,
+    "samples_per_phase": 4,
+    "checked": 192
+   }
+  },
+  "phase_endpoints_walk_idle_all4": {
+   "ok": true,
+   "detail": {
+    "checked": 96,
+    "mismatched": []
+   }
+  },
+  "side_phase_96_bytes_equal_baseline": {
+   "ok": true,
+   "detail": {
+    "checked": 96,
+    "mismatched": []
+   }
+  },
+  "native_sources_layout": {
+   "ok": true,
+   "detail": {
+    "front_pose_pxo": 2,
+    "phase_pxo": 4,
+    "optional_side_pose_pxo": 0,
+    "sources": {
+     "south": {
+      "file": "rpg-2-star-ocean-the-second_heroine-sea_explore-south-phstop-layers_unapproved-front17-v01_20261021-022403-cabad530.pxo",
+      "frames": 48,
+      "layers": 7
+     },
+     "west": {
+      "file": "rpg-2-star-ocean-the-second_heroine-sea_explore-west-phstop-layers_unapproved-front17-v01_20261021-022403-cabad530.pxo",
+      "frames": 48,
+      "layers": 9
+     },
+     "north": {
+      "file": "rpg-2-star-ocean-the-second_heroine-sea_explore-north-phstop-layers_unapproved-front17-v01_20261021-022403-cabad530.pxo",
+      "frames": 48,
+      "layers": 7
+     },
+     "east": {
+      "file": "rpg-2-star-ocean-the-second_heroine-sea_explore-east-phstop-layers_unapproved-front17-v01_20261021-022403-cabad530.pxo",
+      "frames": 48,
+      "layers": 9
+     },
+     "front_pose": {
+      "south": {
+       "file": "rpg-2-star-ocean-the-second_heroine-sea_explore-south-layers_unapproved-front17-v01_20261021-022403-cabad530.pxo",
+       "frames": 13,
+       "layers": 7
+      },
+      "north": {
+       "file": "rpg-2-star-ocean-the-second_heroine-sea_explore-north-layers_unapproved-front17-v01_20261021-022403-cabad530.pxo",
+       "frames": 13,
+       "layers": 7
+      }
+     },
+     "side_pose_sources": 0
+    }
+   }
+  },
+  "native_exports_and_composition": {
+   "ok": true,
+   "detail": {
+    "front_pose_frames": 26,
+    "phase_frames": 192,
+    "optional_side_pose_frames": 0,
+    "problems": []
+   }
+  },
+  "declared_hashes": {
+   "ok": true,
+   "detail": []
+  },
+  "path_safety": {
+   "ok": true,
+   "detail": {
+    "refs": "all basenames confined to manifest/source-set dirs"
+   }
+  },
+  "png_format_alpha_bounds_260": {
+   "ok": true,
+   "detail": {
+    "checked": 260,
+    "invalid": []
+   }
+  },
+  "allowed_changes_report": {
+   "ok": true,
+   "detail": {
+    "pose_total": 52,
+    "pose_protected": 28,
+    "pose_allowed_front": 24,
+    "idle_changed": 0,
+    "side_walk_changed": 0,
+    "front_walk_changed": 24,
+    "legacy_total": 16,
+    "side_legacy_changed": 0,
+    "front_legacy_changed": 8,
+    "phase_total": 192,
+    "side_phase_changed": 0,
+    "front_phase_samples": 96,
+    "front_walk_changed_files": [
+     "south/walk/00",
+     "south/walk/01",
+     "south/walk/02",
+     "south/walk/03",
+     "south/walk/04",
+     "south/walk/05",
+     "south/walk/06",
+     "south/walk/07",
+     "south/walk/08",
+     "south/walk/09",
+     "south/walk/10",
+     "south/walk/11",
+     "north/walk/00",
+     "north/walk/01",
+     "north/walk/02",
+     "north/walk/03",
+     "north/walk/04",
+     "north/walk/05",
+     "north/walk/06",
+     "north/walk/07",
+     "north/walk/08",
+     "north/walk/09",
+     "north/walk/10",
+     "north/walk/11"
+    ]
+   }
+  },
+  "read_only_inputs_unchanged": {
+   "ok": true,
+   "detail": {
+    "baseline_changed": false,
+    "candidate_changed": false
+   }
+  }
+ },
+ "measurements": {
+  "protected_png": {
+   "idle": 4,
+   "side_walk": 24,
+   "side_phase": 96,
+   "side_legacy": 8
+  },
+  "allowed_png": {
+   "front_walk": 24,
+   "front_legacy": 8,
+   "front_phase": 96
+  },
+  "pose_png": 52,
+  "legacy_png": 16,
+  "phase_samples": 192,
+  "native_sources": {
+   "south": {
+    "file": "rpg-2-star-ocean-the-second_heroine-sea_explore-south-phstop-layers_unapproved-front17-v01_20261021-022403-cabad530.pxo",
+    "frames": 48,
+    "layers": 7
+   },
+   "west": {
+    "file": "rpg-2-star-ocean-the-second_heroine-sea_explore-west-phstop-layers_unapproved-front17-v01_20261021-022403-cabad530.pxo",
+    "frames": 48,
+    "layers": 9
+   },
+   "north": {
+    "file": "rpg-2-star-ocean-the-second_heroine-sea_explore-north-phstop-layers_unapproved-front17-v01_20261021-022403-cabad530.pxo",
+    "frames": 48,
+    "layers": 7
+   },
+   "east": {
+    "file": "rpg-2-star-ocean-the-second_heroine-sea_explore-east-phstop-layers_unapproved-front17-v01_20261021-022403-cabad530.pxo",
+    "frames": 48,
+    "layers": 9
+   },
+   "front_pose": {
+    "south": {
+     "file": "rpg-2-star-ocean-the-second_heroine-sea_explore-south-layers_unapproved-front17-v01_20261021-022403-cabad530.pxo",
+     "frames": 13,
+     "layers": 7
+    },
+    "north": {
+     "file": "rpg-2-star-ocean-the-second_heroine-sea_explore-north-layers_unapproved-front17-v01_20261021-022403-cabad530.pxo",
+     "frames": 13,
+     "layers": 7
+    }
+   },
+   "side_pose_sources": 0
+  },
+  "native_exports_checked": {
+   "front_pose": 26,
+   "phase": 192,
+   "side_pose": 0
+  },
+  "side_phase_pxo_byte_identical": {
+   "east": true,
+   "west": true
+  },
+  "changes": {
+   "pose_total": 52,
+   "pose_protected": 28,
+   "pose_allowed_front": 24,
+   "idle_changed": 0,
+   "side_walk_changed": 0,
+   "front_walk_changed": 24,
+   "legacy_total": 16,
+   "side_legacy_changed": 0,
+   "front_legacy_changed": 8,
+   "phase_total": 192,
+   "side_phase_changed": 0,
+   "front_phase_samples": 96,
+   "front_walk_changed_files": [
+    "south/walk/00",
+    "south/walk/01",
+    "south/walk/02",
+    "south/walk/03",
+    "south/walk/04",
+    "south/walk/05",
+    "south/walk/06",
+    "south/walk/07",
+    "south/walk/08",
+    "south/walk/09",
+    "south/walk/10",
+    "south/walk/11",
+    "north/walk/00",
+    "north/walk/01",
+    "north/walk/02",
+    "north/walk/03",
+    "north/walk/04",
+    "north/walk/05",
+    "north/walk/06",
+    "north/walk/07",
+    "north/walk/08",
+    "north/walk/09",
+    "north/walk/10",
+    "north/walk/11"
+   ]
+  },
+  "baseline_pxo_frames_per_side": 48
+ },
+ "ok": true
+}

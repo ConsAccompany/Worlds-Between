@@ -33,8 +33,8 @@ ENTRY_RES = "res://scripts/hsea16/rpg-2-star-ocean-the-second_heroine-playable-p
 ENTRY_FILE = C / "game/scripts/hsea16/rpg-2-star-ocean-the-second_heroine-playable-path_entry_opt-in-v01_20261021-015453-1036fbad.gd"
 INDEX_RES = "res://data/heroine-sea-combat-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_spritesheet-index_v01_20261020-201338-38ecfcb0.json"
 INDEX_FILE = C / "game/data/heroine-sea-combat-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_spritesheet-index_v01_20261020-201338-38ecfcb0.json"
-REGISTRY_RES = "res://data/hsea-stop15/rpg-2-star-ocean-the-second_heroine-phase-stop_registry_test-only-v01_20261021-015453-1036fbad.json"
-REGISTRY_FILE = C / "game/data/hsea-stop15/rpg-2-star-ocean-the-second_heroine-phase-stop_registry_test-only-v01_20261021-015453-1036fbad.json"
+REGISTRY_RES = "res://data/hsea-front17/rpg-2-star-ocean-the-second_hero-female_exploration-sprite-set-registry_runtime-v01_20261020-222654-e8633039.json"
+REGISTRY_FILE = C / "game/data/hsea-front17/rpg-2-star-ocean-the-second_hero-female_exploration-sprite-set-registry_runtime-v01_20261020-222654-e8633039.json"
 MAX_WALL = 120.0
 
 
@@ -146,7 +146,7 @@ def encode_movie(ffmpeg, ffprobe, raw_dir, stem, language, tag):
     return {"file": movie.relative_to(C).as_posix(), "sha256": sha(movie), "frames": len(frames), "probe": data, "normalSpeedFps": 30}
 
 
-def run_full(languages, make_movie, tag):
+def run_full(languages, make_movie, tag, scenario="victory", timeout=MAX_WALL):
     if not GODOT.is_file():
         raise SystemExit(f"Godot missing: {GODOT}")
     checked = module("checked", CHECKED)
@@ -174,9 +174,9 @@ def run_full(languages, make_movie, tag):
             if make_movie:
                 cmd += ["--write-movie", str(raw_dir / (stem + ".avi"))]
             cmd += ["--path", str(C / "game"), "--script", str(HARNESS), "--",
-                    str(OUT), CONFIG_RES, INDEX_RES, language, tag, str(profile)]
+                    str(OUT), CONFIG_RES, INDEX_RES, language, tag, str(profile), scenario]
             log = OUT / f"rpg-2-star-ocean-the-second_heroine-playable-path_{language}-combined-flow_v16_{tag}.log"
-            r = checked.run_checked(cmd, MAX_WALL, expected=[f"PATH16_ALL_PASS language={language}"], log_path=lp(log))
+            r = checked.run_checked(cmd, timeout, expected=[f"PATH16_ALL_PASS language={language}"], log_path=lp(log))
             print(language, r["passed"], r["reason"], r["elapsedSeconds"], flush=True)
             if not r["passed"]:
                 raise AssertionError(f"{language} failed: {r['reason']}\n{r['log'][-2500:]}")
@@ -186,7 +186,7 @@ def run_full(languages, make_movie, tag):
             assert report["package"]["poseCount"] == 29, report["package"]
             assert report["package"]["artApproved"] is False and report["package"]["defaultAdoption"] is False
             labels = {c["label"] for c in report["captures"]}
-            for required in ("explore-start", "explore-move", "anticipation", "contact", "result", "return"):
+            for required in (("explore-start", "explore-move", "anticipation", "contact", "result", "return") if scenario == "victory" else ("explore-start", "explore-move", "natural-hit", "natural-defeat", "loss-menu", "retry")):
                 assert required in labels, (required, labels)
             for cap in report["captures"]:
                 path = OUT / cap["file"]
@@ -208,7 +208,7 @@ def run_full(languages, make_movie, tag):
             else:
                 os.environ[key] = value
     proof = {"status": "PASS", "completedAt": datetime.now(timezone.utc).isoformat(), "tag": tag,
-             "runs": runs, "allPass": True, "harness": HARNESS.relative_to(C).as_posix(), "harnessSha256": sha(HARNESS),
+             "runs": runs, "allPass": True, "scenario":scenario, "harness": HARNESS.relative_to(C).as_posix(), "harnessSha256": sha(HARNESS),
              "runner": Path(__file__).relative_to(C).as_posix(), "runnerSha256": sha(Path(__file__)),
              "config": {"path": CONFIG_RES, "sha256": sha(CONFIG_FILE)},
              "entry": {"path": ENTRY_RES, "sha256": sha(ENTRY_FILE) if ENTRY_FILE.is_file() else None},
@@ -253,6 +253,7 @@ def run_pending(languages, tag):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--language", action="append", default=[], help="en or zh; repeat or comma-separate; default en+zh")
+    parser.add_argument("--scenario", choices=["victory","defeat"], default="victory")
     parser.add_argument("--movie", action="store_true", help="one normal-speed 30 fps movie per language")
     parser.add_argument("--timeout", type=float, default=MAX_WALL, help="per-Godot wall bound (max 120)")
     args = parser.parse_args()
@@ -263,7 +264,7 @@ def main():
     tag = stamp()
     if not CONFIG_FILE.is_file() or not INDEX_FILE.is_file():
         return run_pending(languages, tag)
-    run_full(languages, args.movie, tag)
+    run_full(languages, args.movie, tag, args.scenario, args.timeout)
     return 0
 
 

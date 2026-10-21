@@ -94,3 +94,7 @@ Creator-authorized priority: finish one complete playable heroine path before ne
 - Complete the representative heroine before roster expansion. Reuse accepted environment fixtures/materials for later scenes and perform one small in-game fit check before adopting an external asset pack.
 - After two unsuccessful revisions of the same visible defect, change method. Judge normal-speed gameplay; test counts and export equality do not establish fluidity. Human review is grouped by complete visual scope.
 - Use existing task timestamps/evidence for elapsed time, retries and creator interventions when actually measured; do not add another metrics service or invent historical savings.
+
+### Existing native science prop kit
+
+Reuse `outputs/science-prop-kit/rpg-2-star-ocean-the-second_science-prop-kit_existing-native-catalog_v01_20261021-022234-4e609fc4.json` by semantic purpose before requesting new props. Its10 entries reference existing source PNG/ORA/author and runtime PNG with raw hashes, canvas and opaque bounds. Run the linked `science-prop-kit_catalog` tool with `--check` before adoption. Source/runtime bytes and native merged exports are checked; no files are duplicated or repainted. Keep original scale/placement as a reference and inspect collision/occlusion in the new scene. Original scene acceptance does not automatically approve a new scene or standalone prop.

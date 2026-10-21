@@ -8,7 +8,7 @@ extends SceneTree
 # Args: <out_dir> <config_res> <package_index_res> <language en|zh> <tag> <profile_path>
 const EXPLORE_PATH := "res://scenes/scifi_exploration_area.tscn"
 const ARENA_SCRIPT := "res://scripts/battle_arena.gd"
-const SOURCES := ["res://scripts/battle_arena.gd", "res://scripts/scifi_exploration_area.gd", "res://scripts/app_state.gd", "res://scripts/save_store.gd", "res://scripts/battle_rules.gd", "res://scripts/rpg-2-star-ocean-the-second_combat-sprite-set_loader-playback_pilot-v01_20261018-153656-43a19158.gd", "res://scenes/battle_arena.tscn", "res://scenes/scifi_exploration_area.tscn"]
+const SOURCES := ["res://scripts/hsea09/rpg-2-star-ocean-the-second_heroine-sea_distance-driver_opt-in-v01_20261020-214620-4be375a2.gd", "res://scripts/rpg-2-star-ocean-the-second_hsea09_locomotion-phase_model_v01_20261020-174416-39e12f18.gd", "res://scripts/battle_arena.gd", "res://scripts/scifi_exploration_area.gd", "res://scripts/app_state.gd", "res://scripts/save_store.gd", "res://scripts/battle_rules.gd", "res://scripts/rpg-2-star-ocean-the-second_combat-sprite-set_loader-playback_pilot-v01_20261018-153656-43a19158.gd", "res://scenes/battle_arena.tscn", "res://scenes/scifi_exploration_area.tscn"]
 var app: Node
 var arena_script: GDScript
 var save_store: GDScript
@@ -25,6 +25,7 @@ var inputs: Array = []
 var captures: Array = []
 var frame := 0
 var explore: Node
+var scenario := "victory"
 
 
 func _initialize() -> void:
@@ -162,6 +163,10 @@ func _run() -> void:
 		quit(2)
 		return
 	out = args[0]; config_path = args[1]; index_path = args[2]; language = args[3]; tag = args[4]; profile_path = args[5]
+	scenario = args[6] if args.size() > 6 else "victory"
+	if scenario not in ["victory", "defeat"]:
+		quit(2)
+		return
 	if not language in ["en", "zh"]:
 		print("PATH16_BAD_LANGUAGE ", language)
 		quit(2)
@@ -236,6 +241,9 @@ func _run() -> void:
 	var pkg := package_pose_count()
 	ck(pkg.get("ok", false) and int(pkg.get("poseCount", 0)) == 29, "runtime package exposes all 29 authored poses", pkg)
 	ck(pkg.get("artApproved", null) == false and pkg.get("defaultAdoption", null) == false, "package keeps unapproved/default-off metadata", pkg)
+	if scenario == "defeat":
+		await loss_and_reload(battle, pkg)
+		return
 	var growth_before := growth()
 	var after_before := after_notes().size()
 	var fighter: Dictionary = battle.fighters[0]
@@ -347,4 +355,62 @@ func _run() -> void:
 		quit(0)
 	else:
 		print("PATH16_FAILED language=%s failures=%s" % [language, failures])
+		quit(1)
+
+
+# A separate normal loss path: no attack, no artificial HP/damage/timer changes.
+func loss_and_reload(battle: Node, pkg: Dictionary) -> void:
+	var before := growth()
+	var before_after_saves := after_notes().size()
+	var saw_hit := false
+	for n in 1800:
+		await tick()
+		if not is_instance_valid(battle) or current_scene != battle:
+			break
+		var pose: Dictionary = battle.combat_sprite_sets.current_frame(0)
+		if pose.get("action") == "hit" and not saw_hit:
+			saw_hit = true
+			shot("natural-hit")
+		if battle.battle_finished:
+			break
+	ck(is_instance_valid(battle) and current_scene == battle and battle.battle_finished and not battle.battle_won, "normal enemy AI naturally defeats heroine without attack")
+	if not is_instance_valid(battle) or current_scene != battle:
+		quit(1)
+		return
+	ck(int(app.hero_state["hp"]) == 0 and battle.player_attack_count == 0 and battle.enemy_hp == int(arena_script.ENEMIES["patrol"]["max_hp"]), "loss uses real enemy damage; no player attacks or enemy HP edits")
+	ck(saw_hit, "authored hit action observed under real enemy damage")
+	for n in 18:
+		await tick()
+	var down: Dictionary = battle.combat_sprite_sets.current_frame(0)
+	ck(down.get("action") == "defeat" and int(down.get("frame", -1)) == 2, "natural down animation reaches and holds its final authored frame", down)
+	shot("natural-defeat")
+	ck(growth()["xp"] == before["xp"] and growth()["jp"] == before["jp"] and after_notes().size() == before_after_saves, "loss awards no XP/JP and no after-battle victory autosave")
+	for n in 100:
+		await tick()
+		trace.append({"phase":"loss-menu-transition", "frame":frame, "scene":current_scene.scene_file_path if current_scene != null else "<handoff-null>"})
+		if current_scene != null and current_scene.scene_file_path == "res://scenes/main_menu.tscn" and current_scene.is_node_ready():
+			break
+	ck(current_scene != null and current_scene.scene_file_path == "res://scenes/main_menu.tscn" and current_scene.is_node_ready(), "normal defeat timer returns to the ready main menu")
+	shot("loss-menu")
+	var saves: Array = save_store.list_entries().filter(func(e): return String(e.get("snapshot", {}).get("note", "")) == "before_battle")
+	ck(not saves.is_empty(), "natural encounter retained a pre-battle recovery save")
+	var count: int = save_store.list_entries().size()
+	var loaded: bool = not saves.is_empty() and app.load_save(String(saves[0]["id"]))
+	ck(loaded, "pre-battle save loads after natural defeat")
+	ck(change_scene_to_file(EXPLORE_PATH) == OK, "retry returns through normal exploration scene")
+	for n in 4:
+		await tick()
+	var retry: Node = current_scene
+	driver_check(retry, "after defeat and pre-battle reload")
+	ck(int(app.hero_state["hp"]) == before["hp"] and retry.enemy_visible and not app.enemy_cleared_for_return and app.battle_enemy_id == "", "pre-battle retry restores heroine health and the uncleared enemy")
+	ck(growth()["xp"] == before["xp"] and growth()["jp"] == before["jp"] and save_store.list_entries().size() == count, "retry grants no reward and writes no extra save")
+	shot("retry")
+	var f := FileAccess.open(out.path_join("rpg-2-star-ocean-the-second_heroine-playable-path_%s-combined-flow-report_test-only-v16_%s.json" % [language,tag]), FileAccess.WRITE)
+	f.store_string(JSON.stringify({"scenario":"defeat", "trace":trace, "checks":checks, "failures":failures, "captures":captures, "package":pkg, "inputs":inputs, "sourceSetup":"same shared opt-in entry; actual enemy damage; no gameplay state edits", "humanPlaytest":false, "artApproved":false}," "))
+	f.close()
+	if failures.is_empty():
+		print("PATH16_ALL_PASS language=%s scenario=defeat checks=%d" % [language,checks.size()])
+		quit(0)
+	else:
+		print("PATH16_FAILED ",failures)
 		quit(1)

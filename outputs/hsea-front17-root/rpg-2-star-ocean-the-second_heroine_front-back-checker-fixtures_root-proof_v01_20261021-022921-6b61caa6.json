@@ -1,0 +1,244 @@
+{
+  "schema": "worlds-between.heroine-sea-phase-aware-stop-check.fixtures.front-back-revision.v1",
+  "generated_utc": "2026-10-21T02:29:34Z",
+  "ok": true,
+  "evidence_class": "synthetic_fixture",
+  "mode": "front_back_revision",
+  "baseline": {
+    "manifest": "C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\max0840-sentry-sync\\outputs\\hsea-stop15\\src-v01-20261021-015000\\rpg-2-star-ocean-the-second_heroine-sea_explore-stop-transition-manifest_unapproved-stop15-v01_20261021-015000-f141d653.json",
+    "sha256": "1d8b5dbad470ce33508073517641eabc8663dc142a866d15aadfa0ac7b598657"
+  },
+  "positive_fixture": "fixtures\\positive",
+  "expected_changes": {
+    "idle_changed": 0,
+    "side_walk_changed": 0,
+    "front_walk_changed": 24,
+    "side_legacy_changed": 0,
+    "front_legacy_changed": 8,
+    "side_phase_changed": 0,
+    "front_phase_samples": 96,
+    "pose_total": 52,
+    "legacy_total": 16,
+    "phase_total": 192
+  },
+  "cases": [
+    {
+      "case": "positive",
+      "expected_ok": true,
+      "expected_gate": null,
+      "actual_ok": true,
+      "exit": 0,
+      "failed_gates": [],
+      "traceback": false,
+      "fixture_unchanged": true,
+      "baseline_unchanged": true,
+      "changes_match": true,
+      "changes": {
+        "pose_total": 52,
+        "pose_protected": 28,
+        "pose_allowed_front": 24,
+        "idle_changed": 0,
+        "side_walk_changed": 0,
+        "front_walk_changed": 24,
+        "legacy_total": 16,
+        "side_legacy_changed": 0,
+        "front_legacy_changed": 8,
+        "phase_total": 192,
+        "side_phase_changed": 0,
+        "front_phase_samples": 96,
+        "front_walk_changed_files": [
+          "south/walk/00",
+          "south/walk/01",
+          "south/walk/02",
+          "south/walk/03",
+          "south/walk/04",
+          "south/walk/05",
+          "south/walk/06",
+          "south/walk/07",
+          "south/walk/08",
+          "south/walk/09",
+          "south/walk/10",
+          "south/walk/11",
+          "north/walk/00",
+          "north/walk/01",
+          "north/walk/02",
+          "north/walk/03",
+          "north/walk/04",
+          "north/walk/05",
+          "north/walk/06",
+          "north/walk/07",
+          "north/walk/08",
+          "north/walk/09",
+          "north/walk/10",
+          "north/walk/11"
+        ]
+      },
+      "report": "reports\\positive.json",
+      "ok": true
+    },
+    {
+      "case": "negative-protectedsidewalk",
+      "kind": "protectedsidewalk",
+      "expected_ok": false,
+      "expected_gate": "protected_28_pose_bytes_equal_baseline",
+      "actual_ok": false,
+      "exit": 1,
+      "failed_gates": [
+        "allowed_changes_report",
+        "phase_endpoints_walk_idle_all4",
+        "protected_28_pose_bytes_equal_baseline"
+      ],
+      "traceback": false,
+      "fixture_unchanged": true,
+      "baseline_unchanged": true,
+      "report": "reports\\negative-protectedsidewalk.json",
+      "ok": true
+    },
+    {
+      "case": "negative-protectedidle",
+      "kind": "protectedidle",
+      "expected_ok": false,
+      "expected_gate": "protected_28_pose_bytes_equal_baseline",
+      "actual_ok": false,
+      "exit": 1,
+      "failed_gates": [
+        "allowed_changes_report",
+        "phase_endpoints_walk_idle_all4",
+        "protected_28_pose_bytes_equal_baseline",
+        "side_legacy_8_bytes_equal_baseline"
+      ],
+      "traceback": false,
+      "fixture_unchanged": true,
+      "baseline_unchanged": true,
+      "report": "reports\\negative-protectedidle.json",
+      "ok": true
+    },
+    {
+      "case": "negative-sidephase",
+      "kind": "sidephase",
+      "expected_ok": false,
+      "expected_gate": "side_phase_96_bytes_equal_baseline",
+      "actual_ok": false,
+      "exit": 1,
+      "failed_gates": [
+        "allowed_changes_report",
+        "native_exports_and_composition",
+        "side_phase_96_bytes_equal_baseline"
+      ],
+      "traceback": false,
+      "fixture_unchanged": true,
+      "baseline_unchanged": true,
+      "report": "reports\\negative-sidephase.json",
+      "ok": true
+    },
+    {
+      "case": "negative-missingfrontphase",
+      "kind": "missingfrontphase",
+      "expected_ok": false,
+      "expected_gate": "manifest_structure",
+      "actual_ok": false,
+      "exit": 1,
+      "failed_gates": [
+        "manifest_structure"
+      ],
+      "traceback": false,
+      "fixture_unchanged": true,
+      "baseline_unchanged": true,
+      "report": "reports\\negative-missingfrontphase.json",
+      "ok": true
+    },
+    {
+      "case": "negative-nativeexport",
+      "kind": "nativeexport",
+      "expected_ok": false,
+      "expected_gate": "native_exports_and_composition",
+      "actual_ok": false,
+      "exit": 1,
+      "failed_gates": [
+        "native_exports_and_composition"
+      ],
+      "traceback": false,
+      "fixture_unchanged": true,
+      "baseline_unchanged": true,
+      "report": "reports\\negative-nativeexport.json",
+      "ok": true
+    },
+    {
+      "case": "negative-badhash",
+      "kind": "badhash",
+      "expected_ok": false,
+      "expected_gate": "declared_hashes",
+      "actual_ok": false,
+      "exit": 1,
+      "failed_gates": [
+        "declared_hashes"
+      ],
+      "traceback": false,
+      "fixture_unchanged": true,
+      "baseline_unchanged": true,
+      "report": "reports\\negative-badhash.json",
+      "ok": true
+    },
+    {
+      "case": "negative-pathescape",
+      "kind": "pathescape",
+      "expected_ok": false,
+      "expected_gate": "path_safety",
+      "actual_ok": false,
+      "exit": 1,
+      "failed_gates": [
+        "path_safety"
+      ],
+      "traceback": false,
+      "fixture_unchanged": true,
+      "baseline_unchanged": true,
+      "report": "reports\\negative-pathescape.json",
+      "ok": true
+    },
+    {
+      "case": "negative-malformed",
+      "kind": "malformed",
+      "expected_ok": false,
+      "expected_gate": "inputs_parse",
+      "actual_ok": false,
+      "exit": 1,
+      "failed_gates": [
+        "inputs_parse"
+      ],
+      "traceback": false,
+      "fixture_unchanged": true,
+      "baseline_unchanged": true,
+      "report": "reports\\negative-malformed.json",
+      "ok": true
+    }
+  ],
+  "checked_contract": {
+    "protected_pose_png": 28,
+    "allowed_front_walk_png": 24,
+    "allowed_front_legacy_png": 8,
+    "side_phase_png_exact": 96,
+    "side_legacy_png_exact": 8,
+    "all_pose_png_bounds_hashes": 52,
+    "all_phase_png_bounds_hashes": 192,
+    "phase_endpoints_all4": "phase0..phase11 x sample0/sample3",
+    "native_front_pose_pxo": 2,
+    "native_front_pose_frames": 13,
+    "native_phase_pxo": 4,
+    "native_phase_frames": 48,
+    "dynamic_export_mapping": true,
+    "changed_count_report": true,
+    "path_confinement": true,
+    "no_candidate_code_execution": true
+  },
+  "synthetic_vs_real": [
+    "REAL BYTES: stop15 baseline 52 pose, 16 legacy, 96 side phase PNGs and 2 side phase PXOs are read read-only.",
+    "SYNTHETIC: front walk, front legacy and front phase PNGs carry marker pixels; they are not art or motion evidence.",
+    "SYNTHETIC: the 2 front 13-frame PXOs are generated containers; side phase PXOs are copied byte-identically.",
+    "REAL CANDIDATE: not present at build time; pass --front-back-revision to the checker against the produced candidate."
+  ],
+  "limitations": [
+    "Marker pixels are not art, motion, cadence or GUI evidence.",
+    "The validator checks structure, byte equality, bounds, native composition, changed counts and read-only behavior only.",
+    "No Godot, Pixelorama GUI, network, credential, provider, ledger or Git action was used."
+  ]
+}
