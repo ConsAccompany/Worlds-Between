@@ -58,13 +58,13 @@ static func validate(app: Node, language: String, destination: String, registry:
 	return {"ok": true, "error": "", "registry": registry_path, "supplement": supplement_path, "combat_index": index_path}
 
 
-static func configure(app: Node, language: String, destination: String, registry: String = "", supplement: String = "", combat_index: String = "") -> Dictionary:
+static func configure(app: Node, language: String, destination: String, registry: String = "", supplement: String = "", combat_index: String = "", normal_defaults: bool = false) -> Dictionary:
 	var checked := validate(app, language, destination, registry, supplement, combat_index)
 	if not checked["ok"]:
 		return checked
 	var driver = load(DRIVER_PATH)
 	var arena = load(BATTLE_ARENA_PATH)
-	if _previous_overrides.is_empty():
+	if not normal_defaults and _previous_overrides.is_empty():
 		_previous_overrides = {"enabled": driver.male_enabled_override, "registry": driver.registry_path_override, "supplement": driver.supplement_path_override, "combat": arena.male_playable_path_index_override}
 	app.begin_new_run()
 	app.hero_appearance = "male"
@@ -73,10 +73,11 @@ static func configure(app: Node, language: String, destination: String, registry
 		app.toggle_language()
 	if not app.select_destination(destination):
 		return _fail("destination '%s' could not be selected" % destination)
-	driver.registry_path_override = checked["registry"] if checked["registry"] != driver.REGISTRY_PATH else ""
-	driver.supplement_path_override = checked["supplement"] if checked["supplement"] != driver.SUPPLEMENT_PATH else ""
-	driver.male_enabled_override = 1
-	arena.male_playable_path_index_override = checked["combat_index"]
+	if not normal_defaults:
+		driver.registry_path_override = checked["registry"] if checked["registry"] != driver.REGISTRY_PATH else ""
+		driver.supplement_path_override = checked["supplement"] if checked["supplement"] != driver.SUPPLEMENT_PATH else ""
+		driver.male_enabled_override = 1
+		arena.male_playable_path_index_override = checked["combat_index"]
 	return {"ok": true, "error": "", "language": language, "destination": destination, "scene": EXPLORATION_SCENE}
 
 

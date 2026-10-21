@@ -6,7 +6,7 @@ extends "res://scripts/exploration_sprite_set_pilot.gd"
 # stops at walk frame p, play [walk p, s1, s2, idle f00] at frame_ms each, then idle. Any walk() during a bridge
 # (re-press or reversal) cancels it at once and restarts walk frame 0; a facing change cancels it too.
 # Off unless enabled_override = 1 (set by the mpath24 config) or DEFAULT_ADOPTED is true. DEFAULT_ADOPTED is the
-# dormant creator-only adoption switch and stays false; battle consults the same switch.
+# creator-authorized ordinary default (2026-10-21); battle consults the same switch. Art/motion remain unapproved.
 
 const REGISTRY_PATH := "res://data/mexplore23/rpg-2-star-ocean-the-second_protagonist-male_explore-sprite-set-registry_unapproved-mexplore23-v01_20261021-162551-15fcefc2.json"
 const SUPPLEMENT_PATH := "res://data/mexplore23/rpg-2-star-ocean-the-second_protagonist-male_explore-stop-transition-supplemental_unapproved-mexplore23-v01_20261021-162551-76a51a59.json"
@@ -14,7 +14,7 @@ const SUPPLEMENT_SCHEMA := "worlds-between.exploration-stop-transition.supplemen
 const ACTOR := "protagonist-male"
 const COMBAT_INDEX_PATH := "res://data/mcombat22/rpg-2-star-ocean-the-second_protagonist-male-combat_runtime-index_unapproved-v01_20261021-154716-8dee0dda.json"
 const COMBAT_LOADER_PATH := "res://scripts/rpg-2-star-ocean-the-second_combat-sprite-set_loader-playback_pilot-v01_20261018-153656-43a19158.gd"
-const DEFAULT_ADOPTED := false
+const DEFAULT_ADOPTED := true
 const BRIDGE_LENGTH := 4
 
 static var male_enabled_override := -1

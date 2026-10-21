@@ -17,7 +17,7 @@ func ck(ok: bool, label: String) -> void:
 func _run() -> void:
 	Arena = load("res://scripts/battle_arena.gd")
 	var app: Node = root.get_node("AppState")
-	ck(not Driver.DEFAULT_ADOPTED, "ordinary male adoption remains false")
+	ck(Driver.DEFAULT_ADOPTED, "creator-authorized ordinary male adoption is active")
 	var cfg := Config.configure(app, "en", "scifi.outskirts")
 	ck(cfg.get("ok", false), "complete male package validates")
 	ck(Arena.combat_sprite_set_override == -1 and Arena.combat_sprite_set_index_override == "", "male config does not change generic combat choices")
@@ -47,6 +47,20 @@ func _run() -> void:
 	ck(Arena.combat_sprite_set_override == 0 and Arena.combat_sprite_set_index_override == "user://prior-generic-combat.json" and Arena.male_playable_path_index_override == "user://prior-male-combat.json", "rollback preserves earlier generic and actor-specific battle choices")
 	Config.rollback()
 	ck(Driver.male_enabled_override == 0, "repeated rollback is harmless")
+	Driver.male_enabled_override = -1
+	Driver.registry_path_override = ""
+	Driver.supplement_path_override = ""
+	Arena.male_playable_path_index_override = ""
+	Arena.combat_sprite_set_index_override = ""
+	var generic = load("res://scripts/exploration_sprite_set_pilot.gd")
+	generic.enabled_override = 0
+	var avatar := Sprite2D.new()
+	root.add_child(avatar)
+	ck(generic.attach(avatar, "protagonist-male", "south") == null, "explicit exploration disable still retains legacy presentation")
+	avatar.queue_free()
+	var disabled_arena: Node = Arena.new()
+	ck(disabled_arena._male_playable_path_index() == "", "explicit combat disable still retains legacy presentation")
+	disabled_arena.free()
 	if not failed:
 		print("MALE_SCOPE_ALL_PASS checks=", checks)
 	quit(1 if failed else 0)

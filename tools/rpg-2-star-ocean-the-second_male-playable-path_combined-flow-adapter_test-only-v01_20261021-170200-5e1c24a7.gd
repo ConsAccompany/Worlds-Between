@@ -58,11 +58,13 @@ func malformed_supplement(kind: String) -> String:
 
 
 func refusal_and_defaults() -> void:
-	ck(male_driver.DEFAULT_ADOPTED == false and male_driver.male_enabled() == false, "dormant male default-adoption switch is false and the male path is off by default")
+	ck(male_driver.DEFAULT_ADOPTED and male_driver.male_enabled(), "creator-authorized male ordinary default is active")
 	var probe := Sprite2D.new()
 	root.add_child(probe)
 	var legacy_male: Variant = load("res://scripts/exploration_sprite_set_pilot.gd").attach(probe, "protagonist-male", "south")
-	ck(legacy_male == null, "ordinary male exploration stays legacy without the opt-in", legacy_male)
+	ck(legacy_male != null and legacy_male.get_script().resource_path == MALE_DRIVER, "ordinary male exploration loads the new source without an opt-in")
+	if legacy_male != null:
+		legacy_male.queue_free()
 	var female: Node = load("res://scripts/exploration_sprite_set_pilot.gd").attach(probe, "protagonist-female", "south")
 	ck(female != null and female.get_script().resource_path == SEA_DRIVER, "ordinary female default still uses the authorized heroine Sea driver", female.get_script().resource_path if female != null else null)
 	if female != null:
@@ -141,6 +143,7 @@ func _run() -> void:
 		return
 	out = args[0]; language = args[1]; tag = args[2]; profile_path = args[3]
 	scenario = args[4] if args.size() > 4 else "victory"
+	normal_defaults = args.size() > 5 and args[5] == "normal-default"
 	app = root.get_node("AppState")
 	arena_script = load(ARENA_SCRIPT)
 	save_store = load("res://scripts/save_store.gd")
@@ -151,12 +154,14 @@ func _run() -> void:
 	var user_dir := ProjectSettings.globalize_path("user://").replace("\\", "/")
 	ck(user_dir.begins_with(profile_path.replace("\\", "/")), "saves are isolated to the runner profile", user_dir)
 	refusal_and_defaults()
-	var result: Dictionary = male_config.configure(app, language, "scifi.outskirts")
+	var result: Dictionary = male_config.configure(app, language, "scifi.outskirts", "", "", "", normal_defaults)
 	ck(result.get("ok", false), "mpath24 male config accepted the whole package", result)
 	if not result.get("ok", false):
 		print("MPATH24_FAILED ", failures)
 		quit(1)
 		return
+	if normal_defaults:
+		ck(male_driver.male_enabled_override == -1 and arena_script.male_playable_path_index_override == "" and arena_script.combat_sprite_set_override == -1 and arena_script.combat_sprite_set_index_override == "", "ordinary default run sets no exploration/combat presentation override")
 	ck(app.hero_appearance == "male" and String(app.language) == language and app.active_party_ids == ["hero"], "config selects male, language and the solo party", [app.hero_appearance, app.language])
 	ck(change_scene_to_file(EXPLORE_PATH) == OK, "normal exploration scene entry")
 	for i in 3:
@@ -191,7 +196,7 @@ func _run() -> void:
 	ck(save_store.list_entries().size() == before_saves + 1, "exactly one pre-battle autosave written by the encounter")
 	ck(battle.combat_sprite_sets != null and battle.combat_sprite_sets.index_path == MALE_INDEX and battle.combat_sprite_sets.has_set(0), "male combat package loaded from the mcombat22 index")
 	ck(not battle.fighters[0].has("contact_event_id") and not battle.heroine_default_active, "male keeps the legacy immediate attack mechanics (no contact retiming)")
-	var pkg := {"index": MALE_INDEX, "artApproved": false, "defaultAdoption": false}
+	var pkg := {"index": MALE_INDEX, "artApproved": false, "defaultAdoption": normal_defaults}
 	if scenario == "defeat":
 		await loss_and_reload(battle, pkg)
 		return
@@ -282,8 +287,8 @@ func male_victory(battle: Node) -> void:
 	ck(change_scene_to_file(EXPLORE_PATH) == OK, "post-rollback exploration entry")
 	for i in 4:
 		await tick()
-	ck(current_scene != null and current_scene.sprite_pilot == null, "after rollback the male run shows the ordinary legacy male")
-	var report := {"harness": "male-playable-path-adapter-v01 over combined-flow-check v16", "language": language, "scenario": "victory", "checks": checks, "failures": failures, "captures": captures, "inputs": inputs, "trace": trace, "observedActions": observed_actions.keys(), "actionTraceRows": action_trace.size(), "humanPlaytest": false, "artApproved": false, "defaultAdoption": false, "saves": save_store.list_entries().size() - saves0}
+	ck(current_scene != null and male_config.driver_attached(current_scene), "after rollback the male run keeps the authorized ordinary male default")
+	var report := {"harness": "male-playable-path-adapter-v01 over combined-flow-check v16", "language": language, "scenario": "victory", "checks": checks, "failures": failures, "captures": captures, "inputs": inputs, "trace": trace, "observedActions": observed_actions.keys(), "actionTraceRows": action_trace.size(), "humanPlaytest": false, "artApproved": false, "defaultAdoption": normal_defaults, "saves": save_store.list_entries().size() - saves0}
 	var f := FileAccess.open(out.path_join("rpg-2-star-ocean-the-second_male-playable-path_%s-victory-report_test-only-v01_%s.json" % [language, tag]), FileAccess.WRITE)
 	f.store_string(JSON.stringify(report, " "))
 	f.close()

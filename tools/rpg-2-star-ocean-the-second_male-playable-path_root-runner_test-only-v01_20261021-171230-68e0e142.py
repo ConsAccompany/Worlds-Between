@@ -21,6 +21,7 @@ CHECKED = ROOT / "tools/rpg-2-star-ocean-the-second_godot_checked-runner_v01_202
 
 def main():
     args = argparse.ArgumentParser()
+    args.add_argument("--normal-default", action="store_true", help="Use ordinary presentation selection without profile overrides")
     args.add_argument("--language", choices=("en", "zh"), action="append")
     args.add_argument("--scenario", choices=("victory", "defeat"), action="append")
     opts = args.parse_args()
@@ -37,9 +38,9 @@ def main():
     out.mkdir(parents=True)
     pins = [HARNESS, Path(__file__), ROOT / "game/scripts/battle_arena.gd", ROOT / "game/scripts/exploration_sprite_set_pilot.gd",
             *sorted((ROOT / "game/scripts/mpath24").glob("*.gd"))]
-    result = {"base": "bbbfbde84cdc2d07556eded68eeb618522cc183b", "startedAt": datetime.now(timezone.utc).isoformat(),
+    result = {"base": "e544db07621bbf9e493fea6fcb927e5a7559e291", "startedAt": datetime.now(timezone.utc).isoformat(),
               "sourceSha256Raw": {p.relative_to(ROOT).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest() for p in pins},
-              "runs": [], "humanPlaytest": False, "artApproved": False, "ordinaryMaleDefaultAdopted": False}
+              "runs": [], "humanPlaytest": False, "artApproved": False, "ordinaryMaleDefaultAdopted": opts.normal_default}
     manifest = out / ("rpg-2-star-ocean-the-second_male-playable-path_root-proof_test-only-v01_" + tag + ".json")
     for language in opts.language or ("en", "zh"):
         for scenario in opts.scenario or ("victory", "defeat"):
@@ -50,7 +51,7 @@ def main():
                 # This dedicated runner process has no other workers; children inherit this isolated profile.
                 os.environ.update(APPDATA=profile, LOCALAPPDATA=profile)
                 command = [str(godot), "--resolution", "1280x720", "--position", "40,40", "--audio-driver", "Dummy", "--fixed-fps", "30",
-                           "--path", str(ROOT / "game"), "--script", str(HARNESS), "--", str(run_dir), language, tag, profile, scenario]
+                           "--path", str(ROOT / "game"), "--script", str(HARNESS), "--", str(run_dir), language, tag, profile, scenario, "normal-default" if opts.normal_default else "opt-in"]
                 r = checked.run_checked(command, 120, expected=["PATH16_ALL_PASS language=" + language], log_path=run_dir / (stem + ".log"))
             result["runs"].append({"language": language, "scenario": scenario, "command": command,
                                    **{k: v for k, v in r.items() if k != "log"}})
