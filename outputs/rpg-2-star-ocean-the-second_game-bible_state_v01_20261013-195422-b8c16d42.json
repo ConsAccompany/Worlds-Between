@@ -4,7 +4,7 @@
   "title": "世界之间",
   "englishTitle": "Worlds Between",
   "edition": "设计基线 v0.2 · 2026-10-15 创作者决定",
-  "updatedAt": "2026-10-21T20:36:42.764Z",
+  "updatedAt": "2026-10-21T21:15:31.928242+00:00",
   "note": "规则以玩家确认的设计稿为基线，并已并入 2026-10-15 创作者决定；人物姓名与外观是待审提案，具体剧情留待后续设计。",
   "pitch": "从地下社区走出的旅人，以好奇心探索多元文明，招募伙伴，并成为不同世界认知差异的桥梁。",
   "pillars": [
@@ -7918,19 +7918,19 @@
     "combinedWiringCheck": "297/297 on39f252e, clean raw log; actual Chinese victory inspected."
   },
   "latestTaskProgress": {
-    "id": "content.char.protagonist-male.exploration-source-set",
+    "id": "male-playable-path-integration",
     "status": "completed",
     "title": {
-      "zh": "补齐男主四方向探索源文件",
-      "en": "Complete missing male four-direction exploration source set"
+      "zh": "接通男主完整可玩路径",
+      "en": "Connect the male protagonist playable path"
     },
-    "startedAt": "2026-10-21T20:19:28.288Z",
-    "sourceBefore": "ccd33bf7638cb1f3782181178db2cfc5185f0b44",
+    "startedAt": "2026-10-21T20:58:59.384Z",
+    "sourceBefore": "bbbfbde84cdc2d07556eded68eeb618522cc183b",
     "meters": {
       "production": {
-        "before": 55,
+        "before": 55.6,
         "after": 55.6,
-        "changePercentagePoints": 0.6
+        "changePercentagePoints": 0
       },
       "inspection": {
         "before": 18.1,
@@ -7943,10 +7943,10 @@
         "changePercentagePoints": 0
       }
     },
-    "completedAt": "2026-10-21T20:36:42.764Z",
-    "sourceAfter": "87f95b6c2c214021a93d84b9a55dc03bb874917b",
+    "completedAt": "2026-10-21T21:14:59.729Z",
+    "sourceAfter": "77e870dca831625d5879c35ec74befbe8f4a27b8",
     "evidence": [
-      "docs/qa/rpg-2-star-ocean-the-second_male-exploration_missing-source-set-closeout_v01_20261021-163044-17f059fa.md"
+      "docs/qa/rpg-2-star-ocean-the-second_male-playable-path_integration-closeout_v01_20261021-171500-7d916d8c.md"
     ]
   },
   "progressReporting": {
@@ -8530,6 +8530,38 @@
       "evidence": [
         "docs/qa/rpg-2-star-ocean-the-second_male-combat_missing-source-set-closeout_v01_20261021-154716-8dee0dda.md"
       ]
+    },
+    {
+      "id": "content.char.protagonist-male.exploration-source-set",
+      "status": "completed",
+      "title": {
+        "zh": "补齐男主四方向探索源文件",
+        "en": "Complete missing male four-direction exploration source set"
+      },
+      "startedAt": "2026-10-21T20:19:28.288Z",
+      "sourceBefore": "ccd33bf7638cb1f3782181178db2cfc5185f0b44",
+      "meters": {
+        "production": {
+          "before": 55,
+          "after": 55.6,
+          "changePercentagePoints": 0.6
+        },
+        "inspection": {
+          "before": 18.1,
+          "after": 18.1,
+          "changePercentagePoints": 0
+        },
+        "approval": {
+          "before": 7.8,
+          "after": 7.8,
+          "changePercentagePoints": 0
+        }
+      },
+      "completedAt": "2026-10-21T20:36:42.764Z",
+      "sourceAfter": "87f95b6c2c214021a93d84b9a55dc03bb874917b",
+      "evidence": [
+        "docs/qa/rpg-2-star-ocean-the-second_male-exploration_missing-source-set-closeout_v01_20261021-163044-17f059fa.md"
+      ]
     }
   ],
   "latestBattleEnvironmentProduction": {
@@ -8771,12 +8803,47 @@
     "source": "outputs/mexplore23",
     "runtimeCandidate": "game/data/mexplore23",
     "evidence": "docs/qa/rpg-2-star-ocean-the-second_male-exploration_missing-source-set-closeout_v01_20261021-163044-17f059fa.md",
-    "productionBefore": 55.0,
+    "productionBefore": 55,
     "productionAfter": 55.6,
     "changePercentagePoints": 0.6,
     "defaultAdoption": false,
     "artApproved": false,
     "fullCharacterAccepted": false,
     "remaining": "Generic opt-in clock does not implement authored phase-aware stop bank; source cadence and stop drift disclosed for playable-path integration."
+  },
+  "malePlayablePath": {
+    "status": "integrated-opt-in-default-authorization-pending",
+    "owner": "codex",
+    "producer": "claude",
+    "sourceCommit": "77e870dca831625d5879c35ec74befbe8f4a27b8",
+    "evidence": [
+      "docs/qa/rpg-2-star-ocean-the-second_male-playable-path_integration-closeout_v01_20261021-171500-7d916d8c.md",
+      "outputs/mpath24/20261021-211004-35c7ce7d/rpg-2-star-ocean-the-second_male-playable-path_root-proof_test-only-v01_20261021-211004-35c7ce7d.json"
+    ],
+    "delivered": [
+      "Four-direction exploration with authored stop banks",
+      "Eight combat states through natural encounter and battle",
+      "Victory/result/return and post-battle reload",
+      "Natural defeat/pre-battle retry",
+      "Actor-scoped profile and exact override rollback",
+      "Separate-save-profile launcher"
+    ],
+    "normalInputChecks": 510,
+    "profileScopeChecks": 14,
+    "heroineNormalDefaultRegressionChecks": 124,
+    "ordinaryDefaultAdopted": false,
+    "artApproved": false,
+    "motionApproved": false,
+    "humanPlaytest": false,
+    "productionBefore": 55.6,
+    "productionAfter": 55.6,
+    "remainingCreatorDecision": "Authorize ordinary male default display; full artistic acceptance remains separate",
+    "knownDeferred": [
+      "Gait/source foot-slip refinements",
+      "Immediate mechanical contact versus male visual anticipation",
+      "Full normal-speed artistic review"
+    ],
+    "launchCli": "tools/rpg-2-star-ocean-the-second_male-playable-path_launch-cli_opt-in-v01_20261021-170550-24d80b63.py",
+    "preparedDefaultSwitch": "game/scripts/mpath24/rpg-2-star-ocean-the-second_male-playable-path_explore-driver_opt-in-v01_20261021-170200-5e1c24a7.gd: DEFAULT_ADOPTED false"
   }
 }

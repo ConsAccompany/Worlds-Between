@@ -1,6 +1,15 @@
 # Open World Pixel RPG Implementation Progress
 
-## Latest completed batch — 2026-10-21: male exploration sources
+## Latest completed batch — 2026-10-21: male playable path
+
+Production **55.6% →55.6% (+0.0pp)**. Inspection **18.1% →18.1% (+0.0pp)**; creator approval **7.8% →7.8% (+0.0pp)**. Same frozen baseline.
+
+The male exploration and eight-state combat packages now form one reproducible opt-in path: normal movement/stop/re-press/reversal → walk-in battle → natural victory/result/return → save/reload, plus natural defeat/retry. Canonical EN/ZH victory/defeat510checks, profile isolation/rollback14checks and unchanged heroine normal-default124checks pass. Codex corrected cross-actor override scope and exact rollback, and supplied a separate-save-profile launcher. Existing artwork, game speed/collision, damage, AI, rewards and save rules are preserved.
+
+The one shared ordinary-default switch is prepared and false. The two frozen production integration criteria require ordinary default use; they remain in progress until the creator authorizes adoption and that default path is actually verified. This is not artistic acceptance. Foot-slip/contact-art timing refinements remain deferred; no human playtest or full-sprite approval is counted. [Integration closeout](qa/rpg-2-star-ocean-the-second_male-playable-path_integration-closeout_v01_20261021-171500-7d916d8c.md).
+
+
+## Prior completed batch — 2026-10-21: male exploration sources
 
 Production **55.0% → 55.6% (+0.6 percentage points)**. Coding100%→100%; content24.9%→26.0% (469→489 of1881points). Inspection18.1%→18.1%; creator approval7.8%→7.8%. Frozen baseline unchanged.
 
