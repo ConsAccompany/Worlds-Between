@@ -2,7 +2,7 @@
   "id": "rpg-2-star-ocean-the-second_production-completion_v01",
   "schemaVersion": 2,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-20T23:50:16Z",
+  "updatedAt": "2026-10-21T00:11:03Z",
   "zh": "制作完成度任务台账：衡量已完成的工作量（编码 40% + 内容 60%）；检查／审查与创作者批准分开计量，均不改变制作分；免除的审查不算已执行的工作；运营任务列出负责方但不计百分比。",
   "en": "Production-completion task ledger: measures work done (coding 40% + content 60%); inspection/review and creator approval are separate meters and never change production credit; waived reviews are not performed work; operations tasks list owners but carry no percentage.",
   "brief": "docs/rpg-2-star-ocean-the-second_production-completion_bilingual-brief_v01_20261018-140533-3ea2a621.md",
@@ -692,6 +692,22 @@
         },
         "previousTaskSetSha256": "b4cc78618fc20eda752df336c186ebe9bfd8b863eef92851a10ec0e62b9e96b7",
         "taskSetSha256": "a911b29f8d53384e8a0ca9fd6d1f46210e7416ca9244d571d4c30875ea84a299"
+      },
+      {
+        "at": "2026-10-21T00:11:01Z",
+        "kind": "owner-assignment",
+        "taskId": "qa.scene.outskirts.check",
+        "fromOwner": "claude",
+        "toOwner": "codex",
+        "changedTaskIds": [
+          "qa.scene.outskirts.check"
+        ],
+        "reason": {
+          "zh": "",
+          "en": "Codex independently executes normal-path72/72 and baseline comparisons; provider source-check support remains separate."
+        },
+        "previousTaskSetSha256": "a911b29f8d53384e8a0ca9fd6d1f46210e7416ca9244d571d4c30875ea84a299",
+        "taskSetSha256": "b0b690e6e0031282fb21527b18a129f52870570e327a379159b5c9da001a1817"
       }
     ],
     "pointsByStage": {
@@ -724,8 +740,8 @@
     "production": {
       "zh": "制作完成度",
       "en": "Production completion",
-      "percent": 54,
-      "percentLabel": "54.0%",
+      "percent": 54.4,
+      "percentLabel": "54.4%",
       "formula": "round1(40 * codingDonePoints/codingTotalPoints + 60 * contentDonePoints/contentTotalPoints)",
       "coding": {
         "done": 111,
@@ -736,29 +752,29 @@
         "tasksDone": 23
       },
       "content": {
-        "done": 438,
+        "done": 450,
         "total": 1881,
-        "percent": 23.3,
+        "percent": 23.9,
         "weight": 60,
         "tasks": 715,
-        "tasksDone": 138
+        "tasksDone": 139
       }
     },
     "inspection": {
       "zh": "检查与审查（已执行的）",
       "en": "Inspection and review (performed)",
-      "done": 31,
+      "done": 33,
       "total": 204,
-      "percent": 15.2,
+      "percent": 16.2,
       "technical": {
-        "done": 16,
+        "done": 17,
         "total": 77,
-        "percent": 20.8
+        "percent": 22.1
       },
       "visual": {
-        "done": 15,
+        "done": 16,
         "total": 126,
-        "percent": 11.9
+        "percent": 12.7
       },
       "contentQa": {
         "done": 0,
@@ -806,29 +822,29 @@
         "waivedPoints": 0
       },
       "content": {
-        "done": 438,
+        "done": 450,
         "total": 1881,
-        "percent": 23.3,
+        "percent": 23.9,
         "tasks": 715,
-        "tasksDone": 138,
+        "tasksDone": 139,
         "waivedTasks": 0,
         "waivedPoints": 0
       },
       "technical-inspection": {
-        "done": 16,
+        "done": 17,
         "total": 77,
-        "percent": 20.8,
+        "percent": 22.1,
         "tasks": 73,
-        "tasksDone": 14,
+        "tasksDone": 15,
         "waivedTasks": 0,
         "waivedPoints": 0
       },
       "visual-review": {
-        "done": 15,
+        "done": 16,
         "total": 126,
-        "percent": 11.9,
+        "percent": 12.7,
         "tasks": 126,
-        "tasksDone": 15,
+        "tasksDone": 16,
         "waivedTasks": 4,
         "waivedPoints": 4
       },
@@ -862,13 +878,13 @@
     },
     "byOwner": {
       "claude": {
-        "tasks": 729,
+        "tasks": 728,
         "operationsTasks": 0,
-        "points": 1911,
-        "pointsDone": 407,
+        "points": 1910,
+        "pointsDone": 419,
         "byStatus": {
-          "done": 93,
-          "todo": 636
+          "done": 94,
+          "todo": 634
         },
         "readyInQueue": 0,
         "revisionsBlockingApproval": 2
@@ -885,13 +901,13 @@
         "revisionsBlockingApproval": 0
       },
       "codex": {
-        "tasks": 205,
+        "tasks": 206,
         "operationsTasks": 2,
-        "points": 254,
-        "pointsDone": 142,
+        "points": 255,
+        "pointsDone": 144,
         "byStatus": {
-          "done": 89,
-          "todo": 112,
+          "done": 91,
+          "todo": 111,
           "not_required": 4
         },
         "readyInQueue": 3,
@@ -906,7 +922,7 @@
           "done": 18,
           "todo": 221
         },
-        "readyInQueue": 61,
+        "readyInQueue": 62,
         "revisionsBlockingApproval": 0
       }
     },
@@ -1011,15 +1027,15 @@
       },
       "scenes": {
         "content": {
-          "done": 258,
+          "done": 270,
           "total": 282
         },
         "technical-inspection": {
-          "done": 11,
+          "done": 12,
           "total": 12
         },
         "visual-review": {
-          "done": 8,
+          "done": 9,
           "total": 9
         },
         "creator-approval": {
@@ -1089,7 +1105,7 @@
     "queue": {
       "zh": "待处理（依赖已完成）",
       "en": "Ready (dependencies done)",
-      "count": 64,
+      "count": 65,
       "items": [
         {
           "id": "creator.char.protagonist-male.approve-portrait",
@@ -1464,6 +1480,13 @@
         },
         {
           "id": "creator.scene.city.accept",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.scene.outskirts.accept",
           "stage": "creator-approval",
           "owner": "creator",
           "status": "todo",
@@ -2677,10 +2700,10 @@
     {"id":"creator.scene.city.accept","type":"creator-acceptance","title":{"zh":"纽约市政厅公园（城市） · 场景画质验收","en":"NYC City Hall Park (city) · scene-quality acceptance"},"area":"scenes","stage":"creator-approval","owner":"creator","status":"todo","points":1,"doneCriterion":{"zh":"approvalLedger 记有 acceptanceKind scene-visual 的验收条目","en":"approvalLedger records an acceptanceKind scene-visual item"},"dependsOn":["content.scene.city.native-pass"],"evidence":[],"subject":{"kind":"scene-gate","id":"visual-scene.city"},"target":"content.scene.city.native-pass"},
     {"id":"content.scene.outskirts.plate","type":"integration","title":{"zh":"扬克斯城外 · 场景底板","en":"Yonkers outskirts · scene plate"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":4,"doneCriterion":{"zh":"可玩场景底板已提交并在运行时可进入（概念图不算）","en":"A playable scene plate is committed and enterable in the runtime (a concept image does not count)"},"dependsOn":[],"evidence":["docs/qa/rpg-2-star-ocean-the-second_scifi-region-eleven-scene_visual-gate-audit_m8-v01_20261014-201003-6b73e7a4.md"],"subject":{"kind":"scene-gate","id":"visual-scene.outskirts"}},
     {"id":"content.scene.outskirts.wiring","type":"integration","title":{"zh":"扬克斯城外 · 碰撞、热点与出入口","en":"Yonkers outskirts · collision, hotspots and exits"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":3,"doneCriterion":{"zh":"碰撞、热点、出入口与存档有自动检查","en":"Collision, hotspots, exits and saves have automated checks"},"dependsOn":["content.scene.outskirts.plate"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_scifi-region-eleven-scene_visual-gate-audit_m8-v01_20261014-201003-6b73e7a4.md","game/tests/m7_smoke.gd"],"subject":{"kind":"scene-gate","id":"visual-scene.outskirts"}},
-    {"id":"content.scene.outskirts.native-pass","type":"native-pixel","title":{"zh":"扬克斯城外 · 原生像素画质版","en":"Yonkers outskirts · native pixel quality pass"},"area":"scenes","stage":"content","owner":"claude","status":"todo","points":12,"doneCriterion":{"zh":"原生像素画质版（道具／分层）已提交并有 QA，可为可选启用","en":"A native pixel quality pass (fixtures / layers) is committed with QA; opt-in is allowed"},"dependsOn":["content.scene.outskirts.plate"],"evidence":[],"subject":{"kind":"scene-gate","id":"visual-scene.outskirts"}},
+    {"id":"content.scene.outskirts.native-pass","type":"native-pixel","title":{"zh":"扬克斯城外 · 原生像素画质版","en":"Yonkers outskirts · native pixel quality pass"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":12,"doneCriterion":{"zh":"原生像素画质版（道具／分层）已提交并有 QA，可为可选启用","en":"A native pixel quality pass (fixtures / layers) is committed with QA; opt-in is allowed"},"dependsOn":["content.scene.outskirts.plate"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_yonkers-outskirts_native-production-root-closeout_v01_20261021-000925-2c3e7d5f.md"],"subject":{"kind":"scene-gate","id":"visual-scene.outskirts"},"statusAt":"2026-10-21T00:11:02Z","note":{"zh":"","en":"Eight native editable fixture layers/PXO/ORA over declared inherited flat base; committed b3e127e; opt-in normal runtime72/72. Editor diagnostics remain2failed, no GUI reliability/default/approval claim."}},
     {"id":"content.scene.outskirts.native-default","type":"integration","title":{"zh":"扬克斯城外 · 画质版默认接入","en":"Yonkers outskirts · quality pass on by default"},"area":"scenes","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"画质版默认在游戏中使用","en":"The quality pass is used in the game by default"},"dependsOn":["content.scene.outskirts.native-pass","content.scene.outskirts.wiring"],"evidence":[],"subject":{"kind":"scene-gate","id":"visual-scene.outskirts"}},
-    {"id":"qa.scene.outskirts.check","type":"technical-check","title":{"zh":"扬克斯城外 · 技术检查","en":"Yonkers outskirts · technical check"},"area":"scenes","stage":"technical-inspection","owner":"claude","status":"todo","points":1,"doneCriterion":{"zh":"当前画质版的 Godot 检查全部通过","en":"Godot checks of the current quality pass all pass"},"dependsOn":["content.scene.outskirts.native-pass"],"evidence":[],"subject":{"kind":"scene-gate","id":"visual-scene.outskirts"},"target":"content.scene.outskirts.native-pass"},
-    {"id":"review.scene.outskirts","type":"visual-review","title":{"zh":"扬克斯城外 · 视觉审查","en":"Yonkers outskirts · visual review"},"area":"scenes","stage":"visual-review","owner":"codex","status":"todo","points":1,"doneCriterion":{"zh":"Codex 审查 640×360 实机画面并记录结论","en":"Codex reviews actual 640x360 captures and records a verdict"},"dependsOn":["qa.scene.outskirts.check"],"evidence":[],"subject":{"kind":"scene-gate","id":"visual-scene.outskirts"},"target":"content.scene.outskirts.native-pass"},
+    {"id":"qa.scene.outskirts.check","type":"technical-check","title":{"zh":"扬克斯城外 · 技术检查","en":"Yonkers outskirts · technical check"},"area":"scenes","stage":"technical-inspection","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"当前画质版的 Godot 检查全部通过","en":"Godot checks of the current quality pass all pass"},"dependsOn":["content.scene.outskirts.native-pass"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_yonkers-outskirts_native-production-root-closeout_v01_20261021-000925-2c3e7d5f.md"],"subject":{"kind":"scene-gate","id":"visual-scene.outskirts"},"target":"content.scene.outskirts.native-pass","statusAt":"2026-10-21T00:11:02Z","outcome":"technical-pass","note":{"zh":"","en":"Codex normal Input/button EN/ZH walkthrough: native72/72,default68/68; six default captures pixel-identical, state/interaction/save/return exact. Two baseline/candidate exit warnings disclosed. Source checker7tests after real-PXO directory fix."}},
+    {"id":"review.scene.outskirts","type":"visual-review","title":{"zh":"扬克斯城外 · 视觉审查","en":"Yonkers outskirts · visual review"},"area":"scenes","stage":"visual-review","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"Codex 审查 640×360 实机画面并记录结论","en":"Codex reviews actual 640x360 captures and records a verdict"},"dependsOn":["qa.scene.outskirts.check"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_yonkers-outskirts_native-production-root-closeout_v01_20261021-000925-2c3e7d5f.md"],"subject":{"kind":"scene-gate","id":"visual-scene.outskirts"},"target":"content.scene.outskirts.native-pass","statusAt":"2026-10-21T00:11:03Z","outcome":"passed","note":{"zh":"","en":"Viewed actual640x360 ENentry/ZHrelay; native floor hardware visible after removing large covering icons only in pilot. Recessed groove and separate edge modules improve scene fit. Inherited texture/planter-wall trace limits disclosed; ready for environment-only creator review, not accepted."}},
     {"id":"creator.scene.outskirts.accept","type":"creator-acceptance","title":{"zh":"扬克斯城外 · 场景画质验收","en":"Yonkers outskirts · scene-quality acceptance"},"area":"scenes","stage":"creator-approval","owner":"creator","status":"todo","points":1,"doneCriterion":{"zh":"approvalLedger 记有 acceptanceKind scene-visual 的验收条目","en":"approvalLedger records an acceptanceKind scene-visual item"},"dependsOn":["content.scene.outskirts.native-pass"],"evidence":[],"subject":{"kind":"scene-gate","id":"visual-scene.outskirts"},"target":"content.scene.outskirts.native-pass"},
     {"id":"content.scene.ruins.plate","type":"integration","title":{"zh":"华盛顿国会大厦西侧废墟 · 场景底板","en":"Washington Capitol west ruins · scene plate"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":4,"doneCriterion":{"zh":"可玩场景底板已提交并在运行时可进入（概念图不算）","en":"A playable scene plate is committed and enterable in the runtime (a concept image does not count)"},"dependsOn":[],"evidence":["docs/qa/rpg-2-star-ocean-the-second_scifi-region-eleven-scene_visual-gate-audit_m8-v01_20261014-201003-6b73e7a4.md"],"subject":{"kind":"scene-gate","id":"visual-scene.ruins"}},
     {"id":"content.scene.ruins.wiring","type":"integration","title":{"zh":"华盛顿国会大厦西侧废墟 · 碰撞、热点与出入口","en":"Washington Capitol west ruins · collision, hotspots and exits"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":3,"doneCriterion":{"zh":"碰撞、热点、出入口与存档有自动检查","en":"Collision, hotspots, exits and saves have automated checks"},"dependsOn":["content.scene.ruins.plate"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_scifi-region-eleven-scene_visual-gate-audit_m8-v01_20261014-201003-6b73e7a4.md","game/tests/m7_smoke.gd"],"subject":{"kind":"scene-gate","id":"visual-scene.ruins"}},
