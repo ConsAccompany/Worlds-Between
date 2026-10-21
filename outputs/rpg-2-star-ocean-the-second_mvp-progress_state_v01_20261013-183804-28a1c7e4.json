@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
   "planVersion": "v0.2",
-  "updatedAt": "2026-10-21T00:51:44Z",
+  "updatedAt": "2026-10-21T03:57:35.385952+00:00",
   "currentStep": "M8",
   "steps": [
     {
@@ -55,7 +55,7 @@
         "已实现并通过 Godot 自动测试：真实地球全图与美国东北部、五大湖两个地区层（缩放、平移、点选、中英文地名）；路线卡预览、出发一次性结算、取消／Esc 不扣时间、所在地免费进入；固定整点旅时与日历（2026-10-16 起每段按整小时结算；玩家只看到年月日，内部仍按整数分钟计，跨日、跨年、闰年进位，同一时间轴上发出周交替信号）；存读档与旧档迁移（不凭空加天、不重复扣时；旧上海组合 ID 作为隐藏别名解析到纽约、扬克斯、华盛顿）。",
         "测试标记（2026-10-15 整合复跑）：GLOBAL_TRAVEL_CORE_OK；GLOBAL_EARTH_MAP_SMOKE_OK checks=212；GLOBAL_MAP_TRAVEL_INTEGRATION_OK checks=105；COMMERCE_WEEKLY_SETTLEMENT_OK checks=149；US_SCIENCE_MIGRATION_SMOKE_OK checks=32；新版 M2_SMOKE_OK。实机截图只是运行证据，未验收。旧三点 M2_SMOKE_OK 不计入新规则。 2026-10-16 整点旅时与仅显示日期复跑（m2-v10／v11）：M2_WHOLE_HOUR_TRAVEL_OK checks=246；GLOBAL_MAP_TRAVEL_INTEGRATION_OK checks=105；US_SCIENCE_MIGRATION_SMOKE_OK checks=32；MERCHANT_CITY_COMMERCE_PATH_OK checks=110。",
         "创作者决定（2026-10-15）已在运行时实现为技术候选：科技中心纽约（新游戏起点，曼哈顿下城市政厅公园场景），城外扬克斯，华盛顿特区国会大厦废墟（勘察站与巡逻自动机），首条航线纽约—芝加哥，芝加哥卢普区为明确标注“技术占位 · 美术未验收”的可步行街区；新游戏从 2537-05-25 开始（内部时钟从 08:00 起算，界面只显示日期）。旅行数据登记五个地球文明圈（科技：美国＋加拿大；魔法：南美洲；武侠：亚洲；自然：大洋洲；文化：欧洲＋非洲，原奇幻只作别名）与独立的传送门终局星球；只有科技圈有地点。地下社区（卡茨基尔山附近）尚无运行时地点。",
-        "仍待制作或核实：整点旅时（1／5／5／6 小时）所依据的参考里程与分钟仍为初步估算：汽车来自 OSRM 演示服务器（非商业条款），纽约—芝加哥为内部研究合计（含 BTS 12 个月航班块时间中位数），只作取整依据，从不按分项结算或显示；扬克斯—芝加哥、华盛顿—芝加哥无路线。市政厅公园、可辨认的国会大厦废墟与卢普区都没有已验收的美术：卢普区 State/Lake v02 已作为运行时画面候选接入（未批准，仍是技术到达场景）；国会大厦外景只有未批准、未接入运行时的 Pixelorama 候选（可步行 v01–v08、独立定场远景 v01–v02）；市政厅公园有未批准的可步行试作 v01–v04，另有 v05 测试候选，v06 另行制作；均未验收。运行时地图为未批准的原生美术候选 v01r1，v02 另行制作，均未验收；科技区场景画质 3/12（创作者只验收了纽约公共设施一号、二号室与扬克斯信号维修二号室的环境画质，不含角色动作、其他场景或试玩）；未经人工审阅与试玩。",
+        "仍待制作或核实：整点旅时（1／5／5／6 小时）所依据的参考里程与分钟仍为初步估算：汽车来自 OSRM 演示服务器（非商业条款），纽约—芝加哥为内部研究合计（含 BTS 12 个月航班块时间中位数），只作取整依据，从不按分项结算或显示；扬克斯—芝加哥、华盛顿—芝加哥无路线。市政厅公园、可辨认的国会大厦废墟与卢普区都没有已验收的美术：卢普区 State/Lake v02 已作为运行时画面候选接入（未批准，仍是技术到达场景）；国会大厦外景只有未批准、未接入运行时的 Pixelorama 候选（可步行 v01–v08、独立定场远景 v01–v02）；市政厅公园有未批准的可步行试作 v01–v04，另有 v05 测试候选，v06 另行制作；均未验收。运行时地图为未批准的原生美术候选 v01r1，v02 另行制作，均未验收；科技区场景画质 5/12（纽约公共设施一号、二号室、扬克斯信号维修二号室、科技区战场及扬克斯城外环境已按各自批准范围验收；不含人物、敌人、动作或试玩）；未经人工审阅与试玩。",
         "商会：暂定 CommerceLedger 已接入日历周结算（提交 192c63b，COMMERCE_WEEKLY_SETTLEMENT_OK checks=149）。工程候选（未验收）：伙伴可在 10 级职业选择时转为行商（只做 行商 → 契约经理 两阶 MVP，完整 20 系列 × 5 阶职业设定留待以后），并在已发现的城市从世界地图「商会」派驻经营（MERCHANT_CITY_COMMERCE_PATH_OK checks=109）。行商职业技能在战斗中都不可用；一阶补给协议仍是占位，不能花 JP；二阶公平报价是暂定的经营被动，可花 JP 升级，每级为伙伴全效周加基础收益的 5 %（1/2/3 级 = 105/110/115 %），NPC 经营周不加成；商会面板标明满周收益，并在派驻或重新派驻后的未满一周注明按普通 NPC 80 % 结算；旧存档中已是 1 级的契约经理下次结算得 105（MERCHANT_FAIR_QUOTE_OK checks=91）；账目点数不是货币，没有平衡、劫匪事件或价格影响。首城与开始日期已按创作者决定实现为技术候选。"
       ]
     },
@@ -581,7 +581,7 @@
         "en": "Human review & playtests",
         "owner": "用户",
         "status": "human_pending",
-        "detail": "地图与 M2 美国地点场景（市政厅公园、国会大厦外景、卢普区）均未验收；人工计时试玩 0/2；科技区场景画质 3/12（创作者只验收了纽约公共设施一号、二号室与扬克斯信号维修二号室的环境画质，不含角色动作、其他场景或试玩）。截图只是运行证据。",
+        "detail": "地图与 M2 美国地点场景（市政厅公园、国会大厦外景、卢普区）均未验收；人工计时试玩 0/2；科技区场景画质 5/12（纽约公共设施一号、二号室、扬克斯信号维修二号室、科技区战场及扬克斯城外环境已按各自批准范围验收；不含人物、敌人、动作或试玩）。截图只是运行证据。",
         "evidence": []
       }
     ],
@@ -628,8 +628,8 @@
       "kind": "candidate",
       "zh": "女主完整探索与战斗路径",
       "en": "Complete heroine exploration and combat path",
-      "detail": "Sea of Stars 静止外观基准已按原批准范围保留。前后向肢体与四向停步已接入完整可选试玩；中英文胜利返回/读档及自然战败/重试已通过。完整动作、普通游戏默认接入和真人试玩尚未完成。",
-      "awaiting": "完整动作视觉验收；普通游戏默认接入与真人试玩未完成",
+      "detail": "Sea of Stars 静止基准保留原批准范围；女主四向探索与八种战斗状态已经按创作者授权设为普通游戏默认。新版加强闪避/技能身体姿势，中英文正常操作、胜利返回/读档和自然战败/重试通过。完整动作美术验收与真人试玩仍待完成；探索呼吸待机尚未接入。",
+      "awaiting": "完整动作美术验收与两轮真人试玩；默认接入已完成。",
       "history": [
         {
           "asOf": "2026-10-15",
@@ -641,9 +641,15 @@
           "asOf": "2026-10-21T02:20:11.134127+00:00",
           "status": "superseded summary; creator rejection preserved as history",
           "detail": "创作者最后审看的南向跑动v04仍未批准，并要求继续打磨跑动/停步以及顺滑、流畅、节奏自然的动作。最新已制作的v10r1有明亮30fps与暗色60fps的真实正常1×录屏（见当前候选区），仍有步态与停步观感限制，未批准、未成为默认，不是完整精灵。四方向静止帧已制作，其中只有南向v8获批准；四方向待机循环已制作但美术/流畅度未批准，西向跑动/停步已制作并通过触地、停步与重按边界检查；美术/流畅度仍未批准，其他方向跑动继续制作。技术检查与制作完成分别记录，不等于流畅度或美术验收。"
+        },
+        {
+          "asOf": "2026-10-21T03:57:35.385952+00:00",
+          "status": "superseded summary before default-adoption correction",
+          "detail": "Sea of Stars 静止外观基准已按原批准范围保留。前后向肢体与四向停步已接入完整可选试玩；中英文胜利返回/读档及自然战败/重试已通过。完整动作、普通游戏默认接入和真人试玩尚未完成。",
+          "detailEn": "Approved Sea of Stars static baselines retain their original scope. Front/back articulation and four-direction phase stops share a complete opt-in path; bilingual victory/return/load and natural defeat/retry pass. Full-motion approval, default adoption and human playtests remain pending."
         }
       ],
-      "detailEn": "Approved Sea of Stars static baselines retain their original scope. Front/back articulation and four-direction phase stops share a complete opt-in path; bilingual victory/return/load and natural defeat/retry pass. Full-motion approval, default adoption and human playtests remain pending."
+      "detailEn": "Original scoped Sea of Stars static approvals retained. Four-direction exploration and eight combat states are ordinary female defaults under creator authorization. Revised dodge/skill body poses pass bilingual normal inputs, victory/return/load and natural defeat/retry. Full-motion/art approval and human plays remain pending; breathing idle is not yet hooked up."
     },
     {
       "id": "prologue-start-date",

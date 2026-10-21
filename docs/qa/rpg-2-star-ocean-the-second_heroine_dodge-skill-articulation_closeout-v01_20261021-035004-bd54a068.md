@@ -23,3 +23,5 @@ Dodge lowers the hips and bends the knees. Skill preparation brings the blade ac
 Production54.6%→54.6%(+0.0pp): the eight actions already had production credit; no points per version. Inspection17.6%→18.1%(+0.5pp) comes from the pending four-direction exploration review, recorded separately. Creator approval7.8%→7.8%(+0.0pp). Full sprites0/52, environments5/12, human integrated plays0/2 unchanged.
 
 Next: connect the produced breathing idle to ordinary exploration while preserving stop/repress/reversal; review complete normal-speed heroine flow before roster expansion.
+
+Live verification found two stale current summaries (default adoption pending, scenes3/12). Corrected only those current summaries to creator-authorized defaults and existing5/12scoped approvals; prior text retained in history. No new approval awarded.
