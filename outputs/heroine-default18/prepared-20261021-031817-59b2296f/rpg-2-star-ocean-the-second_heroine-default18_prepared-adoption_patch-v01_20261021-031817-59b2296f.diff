@@ -1,0 +1,245 @@
+--- a/game/scripts/battle_arena.gd
++++ b/game/scripts/battle_arena.gd
+@@ -98,0 +99,2 @@
++# Exception (prepared, creator adoption pending, art UNAPPROVED): see heroine_default_battle_applies() for the female hero.
++const HeroineDefault := preload("res://scripts/hsea18/rpg-2-star-ocean-the-second_heroine-normal-default_policy_prepared-v01_20261021-031342-a6976498.gd")
+@@ -171 +173 @@
+-# The authored heroine defeat stays visible before results, without extending the existing two-second loss timer.
++# Authored defeat is visible before results; existing two-second return timer is preserved.
+@@ -205,0 +208,2 @@
++# True only while the prepared heroine default (not an explicit flag/override) drives the hero set and contact.
++var heroine_default_active := false
+@@ -284,0 +289,17 @@
++# Prepared heroine default (creator adoption pending, art UNAPPROVED): the female hero gets the heroine combat set and
++# contact timing exactly as the opt-in path does, but only when no combat set flag/override/index and no explicit contact
++# enable is given (contact override 0 still keeps the immediate attack) and the whole pinned heroine package passes.
++static func heroine_default_battle_applies(party_ids: Array, appearance: String) -> bool:
++	if appearance != "female" or not party_ids.has("hero"):
++		return false
++	var args := OS.get_cmdline_user_args()
++	if combat_sprite_set_override >= 0 or args.has(COMBAT_SPRITE_SET_CLI_FLAG) or combat_sprite_set_index_override != "":
++		return false
++	for argument in args:
++		if argument.begins_with(COMBAT_SPRITE_SET_INDEX_ARG):
++			return false
++	if heroine_sea_contact_override == 1 or (heroine_sea_contact_override < 0 and args.has(HEROINE_CONTACT_CLI_FLAG)):
++		return false
++	return HeroineDefault.package_ok()
++
++
+@@ -298,0 +320,2 @@
++	heroine_default_active = heroine_default_battle_applies(AppState.active_party_ids, AppState.hero_appearance)
++	var heroine_contact := heroine_sea_contact_enabled() or (heroine_default_active and heroine_sea_contact_override < 0)
+@@ -302 +325 @@
+-		if heroine_sea_contact_enabled() and AppState.active_party_ids[index] == "hero" and AppState.hero_appearance == "female":
++		if heroine_contact and AppState.active_party_ids[index] == "hero" and AppState.hero_appearance == "female":
+@@ -1093 +1116 @@
+-	if not heroine_sea_contact_enabled() or combat_sprite_sets == null or AppState.hero_appearance != "female":
++	if not (heroine_sea_contact_enabled() or (heroine_default_active and heroine_sea_contact_override < 0)) or combat_sprite_sets == null or AppState.hero_appearance != "female":
+@@ -1106,0 +1130 @@
++
+@@ -1247 +1271,2 @@
+-	if not combat_sprite_set_enabled():
++	var explicit := combat_sprite_set_enabled()
++	if not explicit and not heroine_default_active:
+@@ -1253 +1278,12 @@
+-	combat_sprite_sets.configure(combat_sprite_set_index(), keys)
++	combat_sprite_sets.configure(combat_sprite_set_index() if explicit else HeroineDefault.COMBAT_INDEX_PATH, keys)
++	if not explicit:
++		var hero_index := AppState.active_party_ids.find("hero")
++		if not combat_sprite_sets.has_set(hero_index) or combat_sprite_sets.loaded_count() != 1:
++			# Fail closed as one unit: legacy frames and the legacy immediate attack, never retimed placeholder art.
++			push_warning("Heroine normal default combat set refused at load; legacy hero kept")
++			combat_sprite_sets = null
++			heroine_default_active = false
++			for fighter in fighters:
++				for key in ["contact_event_id", "contact_event_clock", "contact_event_facing", "contact_event_active", "contact_event_state"]:
++					fighter.erase(key)
++			return
+--- a/game/scripts/exploration_sprite_set_pilot.gd
++++ b/game/scripts/exploration_sprite_set_pilot.gd
+@@ -9,0 +10,2 @@
++# Exception (prepared, creator adoption pending, art UNAPPROVED): with no explicit exploration flag/override the
++# female protagonist gets the front17 Sea distance driver via the hsea18 heroine default policy, or legacy if refused.
+@@ -35,0 +38 @@
++const HeroineDefault := preload("res://scripts/hsea18/rpg-2-star-ocean-the-second_heroine-normal-default_policy_prepared-v01_20261021-031342-a6976498.gd")
+@@ -79,0 +83 @@
++	HeroineDefault.clear_cache()
+@@ -85,0 +90,6 @@
++	# Prepared heroine default (creator adoption pending, art UNAPPROVED): only with no explicit exploration knob.
++	# A refused package returns null here (legacy textures), never a generic or partial presentation of it.
++	if HeroineDefault.exploration_default_applies(actor):
++		if not HeroineDefault.package_ok():
++			return null
++		return sea_driver.attach_registry(target, actor, initial_facing, HeroineDefault.REGISTRY_PATH)
+--- a/game/scripts/hsea09/rpg-2-star-ocean-the-second_heroine-sea_distance-driver_opt-in-v01_20261020-214620-4be375a2.gd
++++ b/game/scripts/hsea09/rpg-2-star-ocean-the-second_heroine-sea_distance-driver_opt-in-v01_20261020-214620-4be375a2.gd
+@@ -45 +45 @@
+-	if not enabled() or target == null or actor != "protagonist-female" or initial_facing not in ["south","west","north","east"]:
++	if not enabled():
+@@ -49,24 +49,11 @@
+-	var registry: Dictionary = loader.load_registry(loader.registry_path())
+-	if not registry.get("ok", false):
+-		return null
+-	var set_path: String = registry["actors"].get(actor, "")
+-	if set_path.is_empty():
+-		return null
+-	if not FileAccess.file_exists(set_path):
+-		return null
+-	var profile := _profile_for_set(FileAccess.get_sha256(set_path))
+-	if profile.is_empty() or not _source_bytes_match(set_path.get_base_dir(), profile):
+-		return null
+-	var result: Dictionary = loader.load_set(set_path, actor)
+-	if not result.get("ok", false):
+-		return null
+-	var candidate: Dictionary = result["set"]
+-	# This specific pilot requires the four new 12-phase clips; old packages fall back whole.
+-	if int(candidate["density"]) != 2 or candidate["frame_size"] != Vector2(80, 112) or candidate["pivot"] != Vector2(40, 104):
+-		return null
+-	for direction in ["south", "west", "north", "east"]:
+-		if candidate["clips"]["walk"][direction]["textures"].size() != 12:
+-			return null
+-	var bridge_set := _load_bridges(loader, profile, candidate)
+-	if bridge_set.is_empty():
+-		return null
++	return attach_registry(target, actor, initial_facing, loader.registry_path())
++
++# Same whole-package checks as the opt-in path for an explicit registry; used by the prepared heroine default.
++static func attach_registry(target: Sprite2D, actor: String, initial_facing: String, registry_path: String) -> Node:
++	if target == null or initial_facing not in ["south","west","north","east"]:
++		return null
++	var prepared := prepare(actor, registry_path)
++	if prepared.is_empty():
++		return null
++	var candidate: Dictionary = prepared["set"]
++	var bridge_set: Dictionary = prepared["bridges"]
+@@ -88,0 +76,31 @@
++
++# Read-only validation; changes no target field. {} means the whole package is refused.
++static func prepare(actor: String, registry_path: String) -> Dictionary:
++	if actor != "protagonist-female":
++		return {}
++	var loader = load("res://scripts/exploration_sprite_set_pilot.gd")
++	var registry: Dictionary = loader.load_registry(registry_path)
++	if not registry.get("ok", false):
++		return {}
++	var set_path: String = registry["actors"].get(actor, "")
++	if set_path.is_empty():
++		return {}
++	if not FileAccess.file_exists(set_path):
++		return {}
++	var profile := _profile_for_set(FileAccess.get_sha256(set_path))
++	if profile.is_empty() or not _source_bytes_match(set_path.get_base_dir(), profile):
++		return {}
++	var result: Dictionary = loader.load_set(set_path, actor)
++	if not result.get("ok", false):
++		return {}
++	var candidate: Dictionary = result["set"]
++	# This specific pilot requires the four new 12-phase clips; old packages fall back whole.
++	if int(candidate["density"]) != 2 or candidate["frame_size"] != Vector2(80, 112) or candidate["pivot"] != Vector2(40, 104):
++		return {}
++	for direction in ["south", "west", "north", "east"]:
++		if candidate["clips"]["walk"][direction]["textures"].size() != 12:
++			return {}
++	var bridge_set := _load_bridges(loader, profile, candidate)
++	if bridge_set.is_empty():
++		return {}
++	return {"set": candidate, "bridges": bridge_set}
+--- /dev/null
++++ b/game/scripts/hsea18/rpg-2-star-ocean-the-second_heroine-normal-default_policy_prepared-v01_20261021-031342-a6976498.gd
+@@ -0,0 +1,95 @@
++extends RefCounted
++
++# Prepared ordinary-game default for the female protagonist (creator adoption PENDING; art and motion UNAPPROVED).
++# Default use of this package is not art approval. With no explicit pilot flag or override, the exploration avatar
++# "protagonist-female" uses the front17 Sea distance/phase driver and the battle hero (appearance female) uses the
++# heroine-sea combat set with the heroine contact/recovery timing: the same files, driver and calls as the opt-in
++# playable path (hsea16 config). Any explicit exploration or battle knob (flag, enabled/registry/index override, or an
++# explicit contact enable) keeps the existing explicit semantics instead, so override 0 still disables and older
++# technical profiles still mean what they did. Male and every other actor are never touched.
++# The package is checked whole (exploration registry/set/52 PNGs/bridges/phase bridges and the combat index/manifest/
++# sheet) once per session: if any piece is missing or differs from the pinned bytes, exploration keeps the legacy
++# textures and battle keeps the legacy frames with the legacy immediate attack. Refusal only warns; never fatal.
++
++const REGISTRY_PATH := "res://data/hsea-front17/rpg-2-star-ocean-the-second_hero-female_exploration-sprite-set-registry_runtime-v01_20261020-222654-e8633039.json"
++const REGISTRY_SHA256 := "a0c6eeb745cc4116beb3ca402047c120cfd70922f0128f9b11c4cbee6b7805f6"
++const COMBAT_INDEX_PATH := "res://data/heroine-sea-combat-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_spritesheet-index_v01_20261020-201338-38ecfcb0.json"
++const COMBAT_PINNED := {
++	COMBAT_INDEX_PATH: "1abb5b67b3bf59c02b3c747068789a01509812aee97c105b9f5c15c7a60ffa49",
++	"res://data/heroine-sea-combat-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_spritesheet-manifest_v01_20261020-201338-38ecfcb0.json": "6a4c663d859818d8b1714c6485fc927443c316acaa0602547f0c6e367df6df78",
++	"res://data/heroine-sea-combat-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_spritesheet_v01_20261020-201338-38ecfcb0.png": "f55db8cca615d4d64e8c07eb949b375cc6afb7562fc8ab9ac03062d78bd29a60",
++}
++const SPRITE_SET_PILOT_PATH := "res://scripts/exploration_sprite_set_pilot.gd"
++const SEA_DRIVER_PATH := "res://scripts/hsea09/rpg-2-star-ocean-the-second_heroine-sea_distance-driver_opt-in-v01_20261020-214620-4be375a2.gd"
++const FEMALE_COMPLETE_PATH := "res://scripts/fexp/rpg-2-star-ocean-the-second_female-complete-explore_driver_pilot-v01_20261019-184900-f2c0a7e1.gd"
++const COMBAT_LOADER_PATH := "res://scripts/rpg-2-star-ocean-the-second_combat-sprite-set_loader-playback_pilot-v01_20261018-153656-43a19158.gd"
++const ACTOR_ID := "protagonist-female"
++const COMBAT_KEY := "hero:female"
++const ART_APPROVED := false
++const CREATOR_DEFAULT_ADOPTED := false
++
++# {} = not checked yet; otherwise {"ok": bool, "reason": String}. Failures are cached too.
++static var _package := {}
++
++
++static func clear_cache() -> void:
++	_package = {}
++
++
++static func _has_arg_prefix(prefix: String) -> bool:
++	for argument in OS.get_cmdline_user_args():
++		if argument.begins_with(prefix):
++			return true
++	return false
++
++
++# True when no explicit exploration knob is set, so the prepared default may select the driver for `actor`.
++static func exploration_default_applies(actor: String) -> bool:
++	if actor != ACTOR_ID:
++		return false
++	var args := OS.get_cmdline_user_args()
++	var sea = load(SEA_DRIVER_PATH)
++	if sea.enabled_override >= 0 or args.has(sea.FLAG):
++		return false
++	var loader = load(SPRITE_SET_PILOT_PATH)
++	if loader.enabled_override >= 0 or args.has(loader.FLAG) or loader.registry_override != "" or _has_arg_prefix(loader.REGISTRY_ARG):
++		return false
++	var complete = load(FEMALE_COMPLETE_PATH)
++	if complete.enabled_override >= 0 or complete.enabled():
++		return false
++	return true
++
++
++static func package_ok() -> bool:
++	return bool(package_status()["ok"])
++
++
++static func package_status() -> Dictionary:
++	if _package.is_empty():
++		_package = _check_package()
++		if not _package["ok"]:
++			push_warning("Heroine normal default refused (legacy heroine kept): " + String(_package["reason"]))
++	return _package
++
++
++static func _refuse(reason: String) -> Dictionary:
++	return {"ok": false, "reason": reason}
++
++
++static func _check_package() -> Dictionary:
++	if not FileAccess.file_exists(REGISTRY_PATH) or FileAccess.get_sha256(REGISTRY_PATH) != REGISTRY_SHA256:
++		return _refuse("exploration registry missing or not the pinned bytes")
++	for path in COMBAT_PINNED:
++		if not FileAccess.file_exists(path) or FileAccess.get_sha256(path) != COMBAT_PINNED[path]:
++			return _refuse("combat file missing or not the pinned bytes: " + String(path).get_file())
++	# Whole exploration package through the driver's own checks (set hash profile, 52 source PNGs, bridges, phase bridges).
++	if load(SEA_DRIVER_PATH).prepare(ACTOR_ID, REGISTRY_PATH).is_empty():
++		return _refuse("front17 exploration package rejected by the distance driver")
++	var combat = load(COMBAT_LOADER_PATH)
++	var index: Dictionary = combat.load_index(COMBAT_INDEX_PATH)
++	if String(index.get("status", "")) != "loaded" or not index["sets"].has(COMBAT_KEY):
++		return _refuse("combat index rejected or lists no " + COMBAT_KEY)
++	var loaded: Dictionary = combat.load_set(String(index["sets"][COMBAT_KEY]), COMBAT_KEY)
++	if String(loaded.get("status", "")) != "loaded":
++		return _refuse("combat set rejected: " + String(loaded.get("status", "")))
++	return {"ok": true, "reason": ""}

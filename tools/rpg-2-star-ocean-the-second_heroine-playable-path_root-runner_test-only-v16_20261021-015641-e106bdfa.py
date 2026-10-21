@@ -19,14 +19,35 @@ import re
 import shutil
 import struct
 import subprocess
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
-C = Path(__file__).resolve().parents[1]
-GODOT = Path(r"C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/tooling/godot-4-7-2/Godot_v4.7.2-stable_win64_console.exe")
+def find_root() -> Path:
+    """Bounded ancestor search from this file; works in the producer and the canonical checkout."""
+    here = Path(__file__).resolve()
+    for ancestor in [here.parent, *here.parents][:8]:
+        if (ancestor / "game").is_dir() and (ancestor / "tools").is_dir() and (ancestor / "assets").is_dir():
+            return ancestor
+    raise SystemExit(f"project root not found in bounded ancestors above {here}")
+
+
+def find_godot(root: Path) -> Path:
+    rel = Path("work/tooling/godot-4-7-2/Godot_v4.7.2-stable_win64_console.exe")
+    for ancestor in [root, *root.parents][:6]:
+        candidate = ancestor / rel
+        if candidate.is_file():
+            return candidate
+    raise SystemExit(f"Godot console runtime not found in bounded ancestors above {root}")
+
+
+C = find_root()
+GODOT = find_godot(C)
 CHECKED = C / "tools/rpg-2-star-ocean-the-second_godot_checked-runner_v01_20261018-203400-f74ac6d1.py"
 HARNESS = C / "tools/rpg-2-star-ocean-the-second_heroine-playable-path_combined-flow-check_test-only-v16_20261021-015641-e106bdfa.gd"
-OUT = C / "outputs/heroine-path16"
+LAUNCHER = C / "tools/rpg-2-star-ocean-the-second_heroine-playable-path_launch-cli_opt-in-v01_20261021-015453-1036fbad.py"
+OUT = C / "outputs/heroine-actions18"
+ACTIONS = ["idle", "move", "attack", "guard", "dodge", "skill", "hit", "defeat"]
 CONFIG_RES = "res://scripts/hsea16/rpg-2-star-ocean-the-second_heroine-playable-path_config_opt-in-v01_20261021-015453-1036fbad.gd"
 CONFIG_FILE = C / "game/scripts/hsea16/rpg-2-star-ocean-the-second_heroine-playable-path_config_opt-in-v01_20261021-015453-1036fbad.gd"
 ENTRY_RES = "res://scripts/hsea16/rpg-2-star-ocean-the-second_heroine-playable-path_entry_opt-in-v01_20261021-015453-1036fbad.gd"
@@ -52,6 +73,32 @@ def module(name, path):
     m = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(m)
     return m
+
+
+def cache_ready() -> bool:
+    imported = C / "game/.godot/imported"
+    if not imported.is_dir() or not any(imported.iterdir()):
+        return False
+    if not any((C / "game/data/heroine-sea-combat-v01").glob("*.png.import")):
+        return False
+    if not any((C / "game/data/hsea-front17").glob("*.png.import")):
+        return False
+    return True
+
+
+def native_prepare(tag):
+    """Reuse the CLI's shared Godot import preparation, with the log/profile inside this output dir."""
+    launcher = module("launch_cli", LAUNCHER)
+    prep = OUT / "preparation" / tag
+    prep.mkdir(parents=True, exist_ok=True)
+    launcher.PROFILE = prep
+    env = dict(os.environ, APPDATA=str(prep), LOCALAPPDATA=str(prep))
+    if cache_ready():
+        return {"profile": prep.relative_to(C).as_posix(), "import": "reused-complete-editor-cache"}
+    ok = launcher.prepare_assets(str(GODOT), env)
+    if ok:
+        return {"profile": prep.relative_to(C).as_posix(), "import": "completed"}
+    raise AssertionError("native Godot asset import/preparation failed")
 
 
 def png_size(path):
@@ -106,13 +153,13 @@ def parse_check(tag):
     return checked.run_checked(cmd, 60, expected=[], log_path=lp(log)), log
 
 
-def encode_movie(ffmpeg, ffprobe, raw_dir, stem, language, tag):
+def encode_movie(ffmpeg, ffprobe, raw_dir, stem, language, tag, subject="patrol"):
     avi = raw_dir / (stem + ".avi")
     if avi.exists():
         probe0 = subprocess.run([str(ffprobe), "-v", "error", "-count_frames", "-select_streams", "v:0", "-show_entries", "stream=width,height,avg_frame_rate,nb_read_frames", "-of", "json", str(avi)], capture_output=True, text=True, encoding="utf8", check=True)
         original = json.loads(probe0.stdout)["streams"][0]
         assert (original["width"],original["height"],original["avg_frame_rate"]) == (1280,720,"30/1")
-        movie = OUT / f"rpg-2-star-ocean-the-second_heroine-playable-path_{language}-patrol_normal-speed_v16_{tag}.mp4"
+        movie = OUT / f"rpg-2-star-ocean-the-second_heroine-{subject}_{language}-normal-speed_v16_{tag}.mp4"
         subprocess.run([str(ffmpeg),"-hide_banner","-v","error","-y","-i",str(avi),"-an","-c:v","libx264","-preset","fast","-crf","18","-pix_fmt","yuv420p","-movflags","+faststart",str(movie)],capture_output=True,text=True,encoding="utf8",check=True)
         probe = subprocess.run([str(ffprobe),"-v","error","-count_frames","-select_streams","v:0","-show_entries","stream=codec_name,width,height,avg_frame_rate,nb_read_frames:format=duration,size","-of","json",str(movie)],capture_output=True,text=True,encoding="utf8",check=True)
         info=json.loads(probe.stdout);st=info["streams"][0]
@@ -124,7 +171,7 @@ def encode_movie(ffmpeg, ffprobe, raw_dir, stem, language, tag):
         raise AssertionError(f"no raw movie frames for {language}")
     nums = [int(re.search(r"(\d+)\.png$", f.name).group(1)) for f in frames]
     start = min(nums)
-    movie = OUT / f"rpg-2-star-ocean-the-second_heroine-playable-path_{language}-patrol_normal-speed_v16_{tag}.mp4"
+    movie = OUT / f"rpg-2-star-ocean-the-second_heroine-{subject}_{language}-normal-speed_v16_{tag}.mp4"
     cmd = [str(ffmpeg), "-hide_banner", "-v", "error", "-y", "-framerate", "30", "-start_number", str(start),
            "-i", str(raw_dir / (stem + "%08d.png")), "-c:v", "libx264", "-preset", "slow", "-crf", "18",
            "-pix_fmt", "yuv420p", "-movflags", "+faststart", str(movie)]
@@ -169,12 +216,13 @@ def run_full(languages, make_movie, tag, scenario="victory", timeout=MAX_WALL):
             raw_dir = OUT / "raw" / tag / language
             raw_dir.mkdir(parents=True)
             stem = f"rpg-2-star-ocean-the-second_heroine-playable-path_{language}-raw_v16_{tag}"
-            cmd = [str(GODOT), "--resolution", "1280x720", "--position", "40,40", "--audio-driver", "Dummy",
-                   "--fixed-fps", "30"]
+            godot_cmd = [str(GODOT), "--resolution", "1280x720", "--position", "40,40", "--audio-driver", "Dummy",
+                         "--fixed-fps", "30"]
             if make_movie:
-                cmd += ["--write-movie", str(raw_dir / (stem + ".avi"))]
-            cmd += ["--path", str(C / "game"), "--script", str(HARNESS), "--",
-                    str(OUT), CONFIG_RES, INDEX_RES, language, tag, str(profile), scenario]
+                godot_cmd += ["--write-movie", str(raw_dir / (stem + ".avi"))]
+            godot_cmd += ["--path", str(C / "game"), "--script", str(HARNESS), "--",
+                          str(OUT), CONFIG_RES, INDEX_RES, language, tag, str(profile), scenario]
+            cmd = godot_cmd
             log = OUT / f"rpg-2-star-ocean-the-second_heroine-playable-path_{language}-combined-flow_v16_{tag}.log"
             r = checked.run_checked(cmd, timeout, expected=[f"PATH16_ALL_PASS language={language}"], log_path=lp(log))
             print(language, r["passed"], r["reason"], r["elapsedSeconds"], flush=True)
@@ -186,19 +234,32 @@ def run_full(languages, make_movie, tag, scenario="victory", timeout=MAX_WALL):
             assert report["package"]["poseCount"] == 29, report["package"]
             assert report["package"]["artApproved"] is False and report["package"]["defaultAdoption"] is False
             labels = {c["label"] for c in report["captures"]}
-            for required in (("explore-start", "explore-move", "anticipation", "contact", "result", "return") if scenario == "victory" else ("explore-start", "explore-move", "natural-hit", "natural-defeat", "loss-menu", "retry")):
-                assert required in labels, (required, labels)
+            if scenario == "actions":
+                observed = report.get("observedActions", {})
+                assert set(ACTIONS) <= set(observed), sorted(set(ACTIONS) - set(observed))
+                required = ("explore-start", "explore-move", "action-idle", "action-move", "action-attack",
+                            "action-guard", "action-dodge", "action-skill", "action-hit", "action-defeat",
+                            "actions-loss-menu", "retry")
+            elif scenario == "victory":
+                required = ("explore-start", "explore-move", "anticipation", "contact", "result", "return")
+            else:
+                required = ("explore-start", "explore-move", "natural-hit", "natural-defeat", "loss-menu", "retry")
+            for label in required:
+                assert label in labels, (label, labels)
             for cap in report["captures"]:
                 path = OUT / cap["file"]
                 assert path.is_file() and png_size(path) == (1280, 720), cap
                 assert sha(path) == cap["sha256"], cap
             movie = None
             if make_movie:
-                movie = encode_movie(ffmpeg, ffprobe, raw_dir, stem, language, tag)
-            runs.append({"language": language, "status": "pass", "command": cmd, "elapsedSeconds": r["elapsedSeconds"],
+                movie = encode_movie(ffmpeg, ffprobe, raw_dir, stem, language, tag,
+                                     "actions18" if scenario == "actions" else "patrol")
+            runs.append({"language": language, "status": "pass", "command": godot_cmd, "elapsedSeconds": r["elapsedSeconds"],
                          "checks": len(report["checks"]), "flowReport": flow.relative_to(C).as_posix(),
                          "log": log.relative_to(C).as_posix(), "captures": report["captures"], "movie": movie,
                          "profile": profile.relative_to(C).as_posix(),
+                         "actionsObserved": sorted(report.get("observedActions", {}).keys()) if scenario == "actions" else None,
+                         "actionTraceCount": report.get("actionTraceCount") if scenario == "actions" else None,
                          "warnings": [line for line in r["log"].splitlines() if "WARNING" in line]})
             print("PATH16_RUN_PASS", language, len(report["checks"]), flush=True)
     finally:
@@ -207,14 +268,26 @@ def run_full(languages, make_movie, tag, scenario="victory", timeout=MAX_WALL):
                 os.environ.pop(key, None)
             else:
                 os.environ[key] = value
+    source_files = {
+        "host": C / "game/scripts/battle_arena.gd",
+        "arena": C / "game/scenes/battle_arena.tscn",
+        "model": C / "game/scripts/rpg-2-star-ocean-the-second_combat-sprite-set_loader-playback_pilot-v01_20261018-153656-43a19158.gd",
+        "driver": C / "game/scripts/hsea09/rpg-2-star-ocean-the-second_heroine-sea_distance-driver_opt-in-v01_20261020-214620-4be375a2.gd",
+        "config": CONFIG_FILE,
+        "entry": ENTRY_FILE,
+        "registry": REGISTRY_FILE,
+        "packageIndex": INDEX_FILE,
+    }
     proof = {"status": "PASS", "completedAt": datetime.now(timezone.utc).isoformat(), "tag": tag,
              "runs": runs, "allPass": True, "scenario":scenario, "harness": HARNESS.relative_to(C).as_posix(), "harnessSha256": sha(HARNESS),
              "runner": Path(__file__).relative_to(C).as_posix(), "runnerSha256": sha(Path(__file__)),
+             "root": str(C), "godot": str(GODOT),
+             "sourcePins": {role: {"path": p.relative_to(C).as_posix(), "sha256": sha(p) if p.is_file() else None} for role, p in source_files.items()},
              "config": {"path": CONFIG_RES, "sha256": sha(CONFIG_FILE)},
              "entry": {"path": ENTRY_RES, "sha256": sha(ENTRY_FILE) if ENTRY_FILE.is_file() else None},
              "packageIndex": {"path": INDEX_RES, "sha256": sha(INDEX_FILE)},
              "registry": {"path": REGISTRY_RES, "sha256": sha(REGISTRY_FILE) if REGISTRY_FILE.is_file() else None},
-             "saveProfiles": "per-run APPDATA/LOCALAPPDATA under outputs/heroine-path16/profiles; actual user saves untouched",
+             "saveProfiles": "per-run APPDATA/LOCALAPPDATA under outputs/heroine-actions18/profiles; actual user saves untouched",
              "humanPlaytest": False, "artApproved": False, "defaultAdoption": False,
              "note": "Scripted normal-input evidence. Not a human playtest, motion/art/default approval or score change."}
     proof_file = OUT / f"rpg-2-star-ocean-the-second_heroine-playable-path_combined-root-proof_v16_{tag}.json"
@@ -253,7 +326,7 @@ def run_pending(languages, tag):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--language", action="append", default=[], help="en or zh; repeat or comma-separate; default en+zh")
-    parser.add_argument("--scenario", choices=["victory","defeat"], default="victory")
+    parser.add_argument("--scenario", choices=["victory","defeat","actions"], default="victory")
     parser.add_argument("--movie", action="store_true", help="one normal-speed 30 fps movie per language")
     parser.add_argument("--timeout", type=float, default=MAX_WALL, help="per-Godot wall bound (max 120)")
     args = parser.parse_args()
@@ -264,7 +337,9 @@ def main():
     tag = stamp()
     if not CONFIG_FILE.is_file() or not INDEX_FILE.is_file():
         return run_pending(languages, tag)
+    prepared = native_prepare(tag)
     run_full(languages, args.movie, tag, args.scenario, args.timeout)
+    print("PATH16_PREPARED", prepared, flush=True)
     return 0
 
 

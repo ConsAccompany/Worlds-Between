@@ -168,6 +168,8 @@ var battle_finished := false
 # Presentation-only hold: a valid Patrol pilot defeat is visible before the victory panel.
 var patrol_result_pending := false
 var heroine_result_pending := false
+# The authored heroine defeat stays visible before results, without extending the existing two-second loss timer.
+var heroine_defeat_result_pending := false
 var patrol_result_elapsed := 0.0
 var battle_won := false
 var feedback_key := "battle_ready"
@@ -1050,23 +1052,24 @@ func _finish_battle(won: bool) -> void:
 		get_tree().create_timer(2.0).timeout.connect(_return_to_menu)
 	patrol_result_pending = won and enemy_hp <= 0 and enemy_id == "patrol" and patrol_animation_enabled() and enemy_animation_texture != null
 	heroine_result_pending = won and _has_contact_recovery()
+	heroine_defeat_result_pending = not won and _authored_heroine_defeat_playing()
 	patrol_result_elapsed = 0.0
-	result_overlay.visible = not (patrol_result_pending or heroine_result_pending)
+	result_overlay.visible = not (patrol_result_pending or heroine_result_pending or heroine_defeat_result_pending)
 	if patrol_result_pending:
 		_advance_enemy_visual(0.0, false)
-	if patrol_result_pending or heroine_result_pending:
+	if patrol_result_pending or heroine_result_pending or heroine_defeat_result_pending:
 		result_button.disabled = true
 		result_button.focus_mode = Control.FOCUS_NONE
 		result_button.release_focus()
 	_refresh_encounter_result_surface()
 	_refresh_text()
-	if not patrol_result_pending and not heroine_result_pending:
+	if not patrol_result_pending and not heroine_result_pending and not heroine_defeat_result_pending:
 		result_button.grab_focus()
 	queue_redraw()
 
 
 func _advance_patrol_result_presentation(delta: float) -> void:
-	if not patrol_result_pending and not heroine_result_pending:
+	if not patrol_result_pending and not heroine_result_pending and not heroine_defeat_result_pending:
 		return
 	if patrol_result_pending:
 		patrol_result_elapsed += delta
@@ -1075,7 +1078,9 @@ func _advance_patrol_result_presentation(delta: float) -> void:
 			patrol_result_pending = false
 	if heroine_result_pending and not _has_contact_recovery():
 		heroine_result_pending = false
-	if patrol_result_pending or heroine_result_pending:
+	if heroine_defeat_result_pending and not _authored_heroine_defeat_playing():
+		heroine_defeat_result_pending = false
+	if patrol_result_pending or heroine_result_pending or heroine_defeat_result_pending:
 		return
 	result_overlay.visible = true
 	result_button.disabled = false
@@ -1083,8 +1088,24 @@ func _advance_patrol_result_presentation(delta: float) -> void:
 	result_button.grab_focus()
 
 
+func _authored_heroine_defeat_playing() -> bool:
+	# Only the current source-bound heroine package participates; male/legacy/fallback behavior is unchanged.
+	if not heroine_sea_contact_enabled() or combat_sprite_sets == null or AppState.hero_appearance != "female":
+		return false
+	for index in fighters.size():
+		if String(fighters[index]["id"]) != "hero" or _is_alive(index) or not combat_sprite_sets.has_set(index):
+			continue
+		var sprite_set: Dictionary = combat_sprite_sets.sets[index]
+		if sprite_set.get("key") != "hero:female" or sprite_set.get("set_id") != "heroine-sea-combat-v01":
+			continue
+		var clip: Dictionary = sprite_set["actions"]["defeat"]
+		var state: Dictionary = combat_sprite_sets.states[index]
+		# At the finishing damage frame the playback can still be in hit; wait for the real defeat clock.
+		return String(state["action"]) != "defeat" or float(state["clock"]) + 0.000000001 < float(clip["duration"])
+	return false
+
 func _return_after_result() -> void:
-	if patrol_result_pending or heroine_result_pending:
+	if patrol_result_pending or heroine_result_pending or heroine_defeat_result_pending:
 		return
 	if battle_won:
 		AppState.battle_enemy_id = ""

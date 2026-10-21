@@ -3,6 +3,7 @@
     python <this> play [--language en|zh] [--destination scifi.outskirts|scifi.city|scifi.ruins]
     python <this> play --dry-run        # JSON plan only, never starts the engine
     python <this> controls              # plain-language control list read from the game's input setup
+    python <this> check --scenario actions [--language en] [--movie]
 
 The game runs with a separate local profile (work/hsea16-profile, ignored by Git): its settings and
 saves never touch the player's normal saves. Uses the existing project Godot console runtime only.
@@ -163,7 +164,7 @@ def main(argv: list[str] | None = None) -> int:
     sub.add_parser("controls", help="list the game controls")
     check = sub.add_parser("check", help="run the existing complete normal-input heroine path check")
     check.add_argument("--language", choices=LANGUAGES, action="append", default=[])
-    check.add_argument("--scenario", choices=("victory", "defeat"), default="victory")
+    check.add_argument("--scenario", choices=("victory", "defeat", "actions"), default="victory")
     check.add_argument("--movie", action="store_true", help="also record one original-speed video per language")
     args = parser.parse_args(argv)
     if args.cmd == "check":

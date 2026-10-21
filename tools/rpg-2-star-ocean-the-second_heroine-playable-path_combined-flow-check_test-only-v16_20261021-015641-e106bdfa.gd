@@ -5,7 +5,12 @@ extends SceneTree
 # Setup is the shared Claude config module: load(config).configure(app, language, destination). This harness does not
 # begin runs, select destinations, set appearance, or override battle/package/contact values itself.
 # No HP/damage/timer/cooldown/AI writes and no _try_attack/_finish_battle calls.
-# Args: <out_dir> <config_res> <package_index_res> <language en|zh> <tag> <profile_path>
+# Actions scenario (--scenario actions) exercises all eight authored actions (idle, move, attack,
+# guard, dodge, skill, hit, defeat) with normal Input plus normal enemy AI, then reuses the natural
+# defeat -> menu -> pre-battle retry recovery. Source action/cell is only observed from the loader.
+# Header source pins (sha256 recorded in report sourcePins): host=battle_arena.gd; arena=battle_arena.tscn;
+# model=combat-sprite-set loader-playback pilot; driver=hsea09 heroine-sea distance driver; config=hsea16 opt-in config.
+# Args: <out_dir> <config_res> <package_index_res> <language en|zh> <tag> <profile_path> [victory|defeat|actions]
 const EXPLORE_PATH := "res://scenes/scifi_exploration_area.tscn"
 const ARENA_SCRIPT := "res://scripts/battle_arena.gd"
 const SOURCES := ["res://scripts/hsea09/rpg-2-star-ocean-the-second_heroine-sea_distance-driver_opt-in-v01_20261020-214620-4be375a2.gd", "res://scripts/rpg-2-star-ocean-the-second_hsea09_locomotion-phase_model_v01_20261020-174416-39e12f18.gd", "res://scripts/battle_arena.gd", "res://scripts/scifi_exploration_area.gd", "res://scripts/app_state.gd", "res://scripts/save_store.gd", "res://scripts/battle_rules.gd", "res://scripts/rpg-2-star-ocean-the-second_combat-sprite-set_loader-playback_pilot-v01_20261018-153656-43a19158.gd", "res://scenes/battle_arena.tscn", "res://scenes/scifi_exploration_area.tscn"]
@@ -23,6 +28,8 @@ var failures: Array = []
 var trace: Array = []
 var inputs: Array = []
 var captures: Array = []
+var action_trace: Array = []
+var observed_actions := {}
 var frame := 0
 var explore: Node
 var scenario := "victory"
@@ -164,7 +171,7 @@ func _run() -> void:
 		return
 	out = args[0]; config_path = args[1]; index_path = args[2]; language = args[3]; tag = args[4]; profile_path = args[5]
 	scenario = args[6] if args.size() > 6 else "victory"
-	if scenario not in ["victory", "defeat"]:
+	if scenario not in ["victory", "defeat", "actions"]:
 		quit(2)
 		return
 	if not language in ["en", "zh"]:
@@ -243,6 +250,9 @@ func _run() -> void:
 	ck(pkg.get("artApproved", null) == false and pkg.get("defaultAdoption", null) == false, "package keeps unapproved/default-off metadata", pkg)
 	if scenario == "defeat":
 		await loss_and_reload(battle, pkg)
+		return
+	if scenario == "actions":
+		await actions_and_loss(battle, pkg)
 		return
 	var growth_before := growth()
 	var after_before := after_notes().size()
@@ -379,8 +389,22 @@ func loss_and_reload(battle: Node, pkg: Dictionary) -> void:
 		return
 	ck(int(app.hero_state["hp"]) == 0 and battle.player_attack_count == 0 and battle.enemy_hp == int(arena_script.ENEMIES["patrol"]["max_hp"]), "loss uses real enemy damage; no player attacks or enemy HP edits")
 	ck(saw_hit, "authored hit action observed under real enemy damage")
+	var visible_down_frames := {}
+	var loss_frame := frame
+	var final_down_visible := false
 	for n in 18:
+		var current_down: Dictionary = battle.combat_sprite_sets.current_frame(0)
+		var overlay_visible: bool = battle.result_overlay.visible
+		trace.append({"phase":"defeat-presentation", "frame":frame, "sinceLoss":frame-loss_frame, "overlay":overlay_visible, "sprite":current_down})
+		if current_down.get("action") == "defeat" and not overlay_visible:
+			visible_down_frames[int(current_down.get("frame", -1))] = true
+			if int(current_down.get("frame", -1)) == 2 and not final_down_visible:
+				final_down_visible = true
+				shot("defeat-final-visible")
 		await tick()
+	ck(visible_down_frames.has_all([0,1,2]), "all three authored defeat frames visibly precede the result overlay", visible_down_frames.keys())
+	ck(final_down_visible, "final heroine defeat pose is visible on the actual battlefield")
+	ck(battle.result_overlay.visible and not battle.result_button.disabled, "defeat result becomes interactive after authored animation")
 	var down: Dictionary = battle.combat_sprite_sets.current_frame(0)
 	ck(down.get("action") == "defeat" and int(down.get("frame", -1)) == 2, "natural down animation reaches and holds its final authored frame", down)
 	shot("natural-defeat")
@@ -413,4 +437,290 @@ func loss_and_reload(battle: Node, pkg: Dictionary) -> void:
 		quit(0)
 	else:
 		print("PATH16_FAILED ",failures)
+		quit(1)
+
+func action_row(battle: Node) -> Dictionary:
+	var fighter: Dictionary = battle.fighters[0]
+	var pose: Dictionary = battle.combat_sprite_sets.current_frame(0)
+	return {
+		"frame": frame,
+		"action": String(pose.get("action", "")),
+		"source": String(pose.get("source", "")),
+		"sourceCell": int(pose.get("cell", -1)),
+		"poseFrame": int(pose.get("frame", -1)),
+		"heroHP": int(app.hero_state["hp"]),
+		"heroEnergy": int(app.hero_state["energy"]),
+		"enemyHP": int(battle.enemy_hp),
+		"heroX": snappedf(float(fighter["x"]), 0.01),
+		"enemyX": snappedf(float(battle.enemy_x), 0.01),
+		"attackCooldown": snappedf(float(fighter["attack_cooldown"]), 0.0001),
+		"dodgeCooldown": snappedf(float(fighter["dodge_cooldown"]), 0.0001),
+		"dodgeTime": snappedf(float(fighter["dodge_time"]), 0.0001),
+		"skillCooldown": snappedf(float(fighter["skill_cooldown"]), 0.0001),
+		"guard": bool(fighter["guard"]),
+		"enemyWindup": snappedf(float(battle.enemy_windup), 0.0001),
+		"enemyCooldown": snappedf(float(battle.enemy_cooldown), 0.0001),
+		"visualAction": String(fighter["visual_action"]),
+		"playerAttacks": int(battle.player_attack_count),
+		"enemyAttacks": int(battle.enemy_attack_count),
+		"battleFinished": bool(battle.battle_finished),
+		"resultVisible": bool(battle.result_overlay.visible),
+		"contactState": String(fighter.get("contact_event_state", ""))
+	}
+
+
+func record_action_row(battle: Node) -> Dictionary:
+	var row := action_row(battle)
+	action_trace.append(row)
+	var name := String(row["action"])
+	if name != "" and not observed_actions.has(name):
+		observed_actions[name] = row.duplicate(true)
+		ck(true, "observed authored action " + name, {"frame": row["frame"], "cell": row["sourceCell"], "poseFrame": row["poseFrame"], "heroHP": row["heroHP"], "heroEnergy": row["heroEnergy"], "enemyHP": row["enemyHP"]})
+		shot("action-" + name)
+	return row
+
+
+func action_tick(battle: Node) -> Dictionary:
+	await process_frame
+	await RenderingServer.frame_post_draw
+	frame += 1
+	return record_action_row(battle)
+
+
+# Edge input must be pressed after process_frame, before the node _process step, so is_action_just_pressed sees it.
+func action_press_frame(battle: Node, action: String) -> Dictionary:
+	await process_frame
+	press(action)
+	await RenderingServer.frame_post_draw
+	frame += 1
+	var row := record_action_row(battle)
+	release(action)
+	return row
+
+
+func wait_for_action(battle: Node, name: String, limit: int) -> bool:
+	for i in limit:
+		var row: Dictionary = await action_tick(battle)
+		if String(row["action"]) == name:
+			return true
+		if battle.battle_finished:
+			return false
+	return false
+
+
+func actions_and_loss(battle: Node, pkg: Dictionary) -> void:
+	var fighter: Dictionary = battle.fighters[0]
+	var start_hp := int(app.hero_state["hp"])
+	var start_energy := int(app.hero_state["energy"])
+	var enemy_max: int = int(arena_script.ENEMIES["patrol"]["max_hp"])
+	var idle_ok: bool = await wait_for_action(battle, "idle", 8)
+	ck(idle_ok, "idle action observed before any battle input")
+	# Move toward the normal enemy with physical input; stop inside the heroine attack range.
+	var x0 := float(fighter["x"])
+	press("move_right")
+	for i in 120:
+		await action_tick(battle)
+		if absf(float(battle.enemy_x) - float(fighter["x"])) <= 54.0:
+			break
+	release("move_right")
+	await action_tick(battle)
+	var moved_px := absf(float(fighter["x"]) - x0)
+	ck(observed_actions.has("move") and moved_px > 8.0, "normal Input moved the heroine in battle", {"movedPx": snappedf(moved_px, 0.01)})
+	# One normal attack only, so the enemy cannot die before the natural hit/defeat observations.
+	var enemy_hp0 := int(battle.enemy_hp)
+	var attack_log0: int = battle.contact_event_log.size()
+	await action_press_frame(battle, "battle_attack")
+	for i in 24:
+		await action_tick(battle)
+		if battle.contact_event_log.size() > attack_log0:
+			break
+	var atk_event: Dictionary = battle.contact_event_log[-1] if battle.contact_event_log.size() > attack_log0 else {}
+	ck(observed_actions.has("attack"), "authored attack action observed")
+	ck(battle.player_attack_count == 1, "exactly one normal attack input", battle.player_attack_count)
+	var attack_outcome := String(atk_event.get("outcome", "none"))
+	ck(attack_outcome == "hit" or attack_outcome == "missed", "attack resolved through the normal contact event", {"outcome": attack_outcome, "enemyHP": battle.enemy_hp})
+	ck(int(battle.enemy_hp) > 0, "single attack did not end the battle before hit/defeat", {"enemyHP": battle.enemy_hp, "enemyMax": enemy_max})
+	var enemy_hp_after_attack: int = int(battle.enemy_hp)
+	# Guard: hold the normal action and take one real enemy hit; the guard rule costs 6 energy and 30% damage.
+	var guard_energy0 := int(app.hero_state["energy"])
+	var guard_hp0 := int(app.hero_state["hp"])
+	var guard_attacks0 := int(battle.enemy_attack_count)
+	press("battle_guard")
+	var guard_hit := false
+	for i in 150:
+		await action_tick(battle)
+		if int(battle.enemy_attack_count) > guard_attacks0:
+			guard_hit = true
+			break
+		if battle.battle_finished:
+			break
+	release("battle_guard")
+	await action_tick(battle)
+	ck(observed_actions.has("guard"), "authored guard action observed")
+	ck(guard_hit, "enemy landed a normal hit while guard was held")
+	ck(guard_energy0 - int(app.hero_state["energy"]) == 6, "guarded hit spent exactly 6 energy", [guard_energy0, app.hero_state["energy"]])
+	ck(guard_hp0 - int(app.hero_state["hp"]) == 4, "guarded hit reduced 12 damage to 4", [guard_hp0, app.hero_state["hp"]])
+	# Dodge: press on the last windup frame so the normal i-frame, not distance, avoids the hit.
+	var dodge_window := false
+	for i in 300:
+		if float(battle.enemy_windup) > 0.0 and float(battle.enemy_windup) <= 0.04:
+			dodge_window = true
+			break
+		await action_tick(battle)
+		if battle.battle_finished:
+			break
+	var dodge_energy0 := int(app.hero_state["energy"])
+	var dodge_hp0 := int(app.hero_state["hp"])
+	var dodge_attacks0 := int(battle.enemy_attack_count)
+	await action_press_frame(battle, "battle_dodge")
+	var dodge_hit := false
+	for i in 60:
+		await action_tick(battle)
+		if int(battle.enemy_attack_count) > dodge_attacks0:
+			dodge_hit = true
+			break
+		if battle.battle_finished:
+			break
+	ck(observed_actions.has("dodge"), "authored dodge action observed")
+	ck(dodge_energy0 - int(app.hero_state["energy"]) == 12, "dodge spent exactly 12 energy", [dodge_energy0, app.hero_state["energy"]])
+	ck(dodge_window, "dodge was pressed on the last enemy windup frame")
+	ck(dodge_hit and dodge_hp0 == int(app.hero_state["hp"]), "normal dodge i-frame avoided the enemy hit", {"dodgeHit": dodge_hit, "hp": [dodge_hp0, app.hero_state["hp"]]})
+	# Let the dodge one-shot finish first; the loader prioritizes dodge_time over a new skill event.
+	for i in 20:
+		await action_tick(battle)
+		var dpose: Dictionary = battle.combat_sprite_sets.current_frame(0)
+		if float(fighter["dodge_time"]) == 0.0 and String(dpose.get("action", "")) != "dodge":
+			break
+	# Skill: normal input, 12 energy, no immediate damage, so the enemy survives to the natural defeat.
+	var skill_energy0 := int(app.hero_state["energy"])
+	await action_press_frame(battle, "battle_skill")
+	for i in 18:
+		await action_tick(battle)
+	ck(observed_actions.has("skill"), "authored skill action observed")
+	ck(skill_energy0 - int(app.hero_state["energy"]) == 12, "skill spent exactly 12 energy", [skill_energy0, app.hero_state["energy"]])
+	ck(float(fighter["skill_cooldown"]) > 0.0, "skill set its normal cooldown", fighter["skill_cooldown"])
+	ck(int(battle.enemy_hp) > 0, "skill did not kill the enemy", battle.enemy_hp)
+	# Hit: stop input and let normal enemy AI land a real hit.
+	var hit_hp0 := int(app.hero_state["hp"])
+	var saw_hit: bool = await wait_for_action(battle, "hit", 360)
+	ck(saw_hit, "authored hit action observed from normal enemy damage")
+	ck(int(app.hero_state["hp"]) < hit_hp0, "natural hit removed real heroine HP", [hit_hp0, app.hero_state["hp"]])
+	# Defeat: keep the normal enemy AI running until it naturally defeats the heroine.
+	for i in 900:
+		if battle.battle_finished:
+			break
+		await action_tick(battle)
+	var visible_down_frames := {}
+	for i in 30:
+		var down_row: Dictionary = await action_tick(battle)
+		if String(down_row["action"]) == "defeat" and not bool(down_row["resultVisible"]):
+			visible_down_frames[int(down_row["poseFrame"])] = true
+			if int(down_row["poseFrame"]) == 2 and not visible_down_frames.has("captured"):
+				shot("action-defeat-final-visible")
+				visible_down_frames["captured"] = true
+		if current_scene != battle:
+			break
+	ck(visible_down_frames.has(0) and visible_down_frames.has(1) and visible_down_frames.has(2), "all three authored defeat frames visibly precede the result overlay", visible_down_frames)
+	ck(visible_down_frames.has("captured"), "final heroine defeat pose is visible on the actual battlefield")
+	ck(battle.result_overlay.visible, "result overlay appears after the authored defeat clip")
+	ck(battle.battle_finished and not battle.battle_won, "normal enemy AI naturally defeated the heroine", {"frame": frame})
+	ck(int(app.hero_state["hp"]) == 0, "natural defeat reached zero HP", app.hero_state["hp"])
+	ck(observed_actions.has("defeat"), "authored defeat action observed")
+	var down: Dictionary = battle.combat_sprite_sets.current_frame(0)
+	ck(String(down.get("action", "")) == "defeat" and int(down.get("frame", -1)) == 2, "defeat holds its final authored frame", down)
+	shot("action-defeat-hold")
+	var contact_log_snapshot: Array = battle.contact_event_log.duplicate(true)
+	# Reuse the normal defeat -> ready menu -> pre-battle save -> exploration retry recovery.
+	var before_xp := int(app.hero_state["xp"])
+	var before_jp := int(app.hero_state["jp"])
+	var menu_ok := false
+	for n in 120:
+		await tick()
+		trace.append({"phase": "actions-loss-menu-transition", "frame": frame, "scene": current_scene.scene_file_path if current_scene != null else "<handoff-null>"})
+		if current_scene != null and current_scene.scene_file_path == "res://scenes/main_menu.tscn" and current_scene.is_node_ready():
+			menu_ok = true
+			break
+	ck(menu_ok, "natural defeat timer returns to the ready main menu")
+	shot("actions-loss-menu")
+	var saves: Array = save_store.list_entries().filter(func(e): return String(e.get("snapshot", {}).get("note", "")) == "before_battle")
+	ck(not saves.is_empty(), "natural encounter retained a pre-battle recovery save")
+	var count: int = save_store.list_entries().size()
+	var loaded: bool = not saves.is_empty() and app.load_save(String(saves[0]["id"]))
+	ck(loaded, "pre-battle save loads after the actions route")
+	ck(change_scene_to_file(EXPLORE_PATH) == OK, "actions retry returns through normal exploration scene")
+	for n in 4:
+		await tick()
+	var retry: Node = current_scene
+	driver_check(retry, "after actions defeat and pre-battle reload")
+	ck(retry != null and retry.enemy_visible and not app.enemy_cleared_for_return and app.battle_enemy_id == "", "pre-battle retry restores the uncleared enemy")
+	ck(int(app.hero_state["hp"]) == start_hp, "pre-battle retry restores the starting heroine HP", [start_hp, app.hero_state["hp"]])
+	ck(growth()["xp"] == before_xp and growth()["jp"] == before_jp and save_store.list_entries().size() == count, "retry grants no reward and writes no extra save")
+	shot("retry")
+	# Report with actual source/registry pins and every observed action row.
+	var pins := {
+		"host": "res://scripts/battle_arena.gd",
+		"arena": "res://scenes/battle_arena.tscn",
+		"model": "res://scripts/rpg-2-star-ocean-the-second_combat-sprite-set_loader-playback_pilot-v01_20261018-153656-43a19158.gd",
+		"driver": "res://scripts/hsea09/rpg-2-star-ocean-the-second_heroine-sea_distance-driver_opt-in-v01_20261020-214620-4be375a2.gd",
+		"config": config_path,
+		"index": index_path
+	}
+	var registry_res := ""
+	var cfg_text: String = FileAccess.get_file_as_string(config_path) if FileAccess.file_exists(config_path) else ""
+	var re := RegEx.new()
+	re.compile('REGISTRY_PATH := "([^"]+)"')
+	var m := re.search(cfg_text)
+	if m != null:
+		registry_res = m.get_string(1)
+	if registry_res != "":
+		pins["registry"] = registry_res
+	var pin_hashes := {}
+	for role in pins:
+		var p := String(pins[role])
+		pin_hashes[role] = {"path": p, "sha256": FileAccess.get_sha256(p) if FileAccess.file_exists(p) else null}
+	var actions_expected := ["idle", "move", "attack", "guard", "dodge", "skill", "hit", "defeat"]
+	var observed_list: Array = observed_actions.keys()
+	observed_list.sort()
+	var report := {
+		"harness": "combined-playable-path-v16-actions",
+		"scenario": "actions",
+		"destination": "scifi.outskirts",
+		"language": language,
+		"platform": OS.get_name(),
+		"godotVersion": Engine.get_version_info().get("string", ""),
+		"fixedFps": Engine.physics_ticks_per_second,
+		"engineMaxFps": Engine.max_fps,
+		"party": app.active_party_ids,
+		"configPath": config_path,
+		"packageIndex": index_path,
+		"profilePath": profile_path,
+		"declaredSetup": "shared config configure(app, language, destination); existing disclosed exploration probes and 70 px-left walk-in; all battle actions through normal Input and normal enemy AI; no battle placement or state writes",
+		"actionsExpected": actions_expected,
+		"actionsObserved": observed_list,
+		"observedActions": observed_actions,
+		"actionTrace": action_trace,
+		"actionTraceCount": action_trace.size(),
+		"energy": {"start": start_energy, "afterGuard": guard_energy0 - 6, "afterDodge": dodge_energy0 - 12, "afterSkill": skill_energy0 - 12},
+		"points": {"heroStartHP": start_hp, "heroStartEnergy": start_energy, "enemyMaxHP": enemy_max, "enemyHPAfterAttack": enemy_hp_after_attack, "attackOutcome": attack_outcome},
+		"checks": checks,
+		"failures": failures,
+		"contactLog": contact_log_snapshot,
+		"inputs": inputs,
+		"trace": trace,
+		"captures": captures,
+		"package": pkg,
+		"sourcePins": pin_hashes,
+		"humanPlaytest": false,
+		"artApproved": false,
+		"defaultAdoption": false,
+		"note": "Scripted normal-input action coverage. Not a human playtest, motion/art/default approval or score change."
+	}
+	var f := FileAccess.open(out.path_join("rpg-2-star-ocean-the-second_heroine-actions18_%s-combined-flow-report_test-only-v16_%s.json" % [language, tag]), FileAccess.WRITE)
+	f.store_string(JSON.stringify(report, " "))
+	f.close()
+	if failures.is_empty():
+		print("PATH16_ALL_PASS language=%s scenario=actions checks=%d" % [language, checks.size()])
+		quit(0)
+	else:
+		print("PATH16_FAILED language=%s scenario=actions failures=%s" % [language, failures])
 		quit(1)
