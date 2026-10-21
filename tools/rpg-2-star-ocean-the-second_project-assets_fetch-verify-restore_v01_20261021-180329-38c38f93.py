@@ -40,8 +40,9 @@ def download(data, cache):
         if lp(target).exists():
             if sha(target) != b["sha256"]: raise ValueError("existing cache differs: " + b["name"])
             print("CACHE OK", b["name"], flush=True); continue
-        prefix = "https://github.com/ConsAccompany/Worlds-Between/releases/download/" + data["releaseTag"] + "/"
-        if b["url"] != prefix + b["name"]: raise ValueError("unexpected download destination")
+        prefix = "https://raw.githubusercontent.com/ConsAccompany/Worlds-Between/main/"
+        expected = prefix + b["repositoryPath"]
+        if b["url"] != expected: raise ValueError("unexpected download destination")
         fd, temp = tempfile.mkstemp(prefix="wb-assets-", suffix=".part", dir=cache)
         try:
             with os.fdopen(fd, "wb") as out, urllib.request.urlopen(b["url"], timeout=90) as response:
@@ -123,7 +124,7 @@ def restore(data, cache, root_id, destination):
     print("ASSET_RESTORE_PASS", root_id, count, str(destination))
 def main():
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument("--manifest"); p.add_argument("--cache-dir", default=str(ROOT/"work/asset-library-downloads"))
+    p.add_argument("--manifest"); p.add_argument("--cache-dir", default=str(ROOT/"assets/handoff/packages"))
     p.add_argument("--download",action="store_true"); p.add_argument("--verify",action="store_true")
     p.add_argument("--verify-main",action="store_true"); p.add_argument("--restore-root"); p.add_argument("--destination")
     a = p.parse_args()

@@ -4,7 +4,7 @@ This is a content-deduplicated snapshot for DeepSeek takeover, not a playable ga
 
 - **8,773 unique files:**8,199 media/native assets plus574source/provenance manifests and authoring sources.
 - **4,361 already in this Git repository**, reused at their existing paths.
-- **4,412 additional files in9GitHub Release ZIP bundles**,1,996,409,202bytes total.
+- **4,412 additional files in22ordinary-Git ZIP bundles**,each below100MiB.
 -47registered project worktrees plus project scratch authoring locations were inventoried with0scan errors.
 - Excluded: private account/credential/controller folders, engines/dependencies/import caches, reproducible raw recording/per-frame debug sequences and test fixtures. Nothing outside the listed project/worktree scope is claimed covered.
 - Historical, rejected and unapproved assets are preserved as archives. **No default or approval changed.**
@@ -14,11 +14,11 @@ This is a content-deduplicated snapshot for DeepSeek takeover, not a playable ga
 
 - [Full searchable JSON index](rpg-2-star-ocean-the-second_project-assets_complete-index_v01_20261021-180244-718e0ceb.json)
 - [Browse/download CSV](rpg-2-star-ocean-the-second_project-assets_browse-index_v01_20261021-180244-718e0ceb.csv)
-- [GitHub asset download release](https://github.com/ConsAccompany/Worlds-Between/releases/tag/asset-handoff-20261021-180244-718e0ceb)
+- [Downloadable asset packages](packages/)
 - [Fetch, verify and safe historical restore tool](../../tools/rpg-2-star-ocean-the-second_project-assets_fetch-verify-restore_v01_20261021-180329-38c38f93.py)
 - [Canonical artistic inventory](../../outputs/rpg-2-star-ocean-the-second_asset-inventory_state_v01_20261013-191033-7d1e0a8b.json)
 
-The release upload is in preparation until a publication proof is linked below. Check the actual release before claiming availability.
+Package upload is in progress until the remote publication proof is linked below.
 
 ## DeepSeek: get every indexed asset
 
@@ -28,7 +28,7 @@ Clone/pull ConsAccompany/Worlds-Between main. From its repository root, using a 
 python -X utf8 -I "tools/rpg-2-star-ocean-the-second_project-assets_fetch-verify-restore_v01_20261021-180329-38c38f93.py" --manifest "assets/handoff/rpg-2-star-ocean-the-second_project-assets_complete-index_v01_20261021-180244-718e0ceb.json" --download --verify
 ```
 
-This downloads9archive files into ignored work/asset-library-downloads, verifies every archive SHA-256 and every indexed member, and checks existing Git files. No LFS, model inference or credential export is required for the published public release.
+A normal full clone already contains all archive files in assets/handoff/packages. This verifies them and every indexed member, plus existing Git files. If a package is missing, the command can fetch its public raw GitHub URL. No LFS, model inference or credential export is required.
 
 The tool verifies exact Git object bytes for text source when a Windows working copy differs only by CRLF conversion. It never normalizes a hash and calls it exact. Binary/source content changes beyond line endings are refused.
 
