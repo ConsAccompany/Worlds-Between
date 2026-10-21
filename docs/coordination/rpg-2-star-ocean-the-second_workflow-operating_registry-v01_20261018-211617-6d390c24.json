@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-21T19:52:48.581397+00:00",
+  "updatedAt": "2026-10-21T20:37:05.393860+00:00",
   "purpose": "Operating queue and worktree ownership; no progress points or account details",
   "workflow": "docs/workflow.md",
   "canonicalLedger": "outputs/rpg-2-star-ocean-the-second_production-completion_task-ledger_v01_20261018-140533-3de52073.json",
@@ -1231,6 +1231,39 @@
         "docs/qa/rpg-2-star-ocean-the-second_male-combat_missing-source-set-closeout_v01_20261021-154716-8dee0dda.md",
         "outputs/mcombat22/rpg-2-star-ocean-the-second_male-combat_root-production-proof_v01_20261021-154716-8dee0dda.json"
       ]
+    },
+    {
+      "id": "content.char.protagonist-male.exploration-source-set",
+      "owner": "claude",
+      "inspectionOwner": "codex",
+      "lane": "closed",
+      "status": "done-independently-verified",
+      "worktree": "work/needle23/cl-explore",
+      "startedAt": "2026-10-21T20:20:03.513706+00:00",
+      "output": "Missing directional statics, four idle loops, four walk/stop source sets",
+      "dependsOn": [
+        "content.char.protagonist-male.static-south"
+      ],
+      "completion": [
+        "Frozen3static+idle+4walk criteria",
+        "Preserve existing south neutral source texels",
+        "Editable native/export integrity",
+        "Contact/slip evidence and actual scene compatibility",
+        "No default or approval changes"
+      ],
+      "writeScope": [
+        "new author tools",
+        "outputs/mexplore23",
+        "game/data/mexplore23"
+      ],
+      "progressCredit": "Existing20content points only after independently verified source completion",
+      "nextAction": "Connect male source packages into reproducible opt-in exploration/battle/return/save path. No cosmetic refinement loop.",
+      "completedAt": "2026-10-21T20:37:05.393860+00:00",
+      "sourceCommit": "87f95b6c2c214021a93d84b9a55dc03bb874917b",
+      "evidence": [
+        "docs/qa/rpg-2-star-ocean-the-second_male-exploration_missing-source-set-closeout_v01_20261021-163044-17f059fa.md",
+        "outputs/mexplore23/rpg-2-star-ocean-the-second_male-exploration_root-source-closeout-proof_v01_20261021-163044-17f059fa.json"
+      ]
     }
   ],
   "nextProductionMilestones": [
@@ -1279,22 +1312,22 @@
   },
   "nextDispatchPreferences": [
     {
-      "task": "content.char.protagonist-male.static-west",
+      "task": "content.char.protagonist-male.runtime-integration",
       "preferredProducer": "claude",
-      "status": "next-missing-content",
-      "reason": "Reuse representative source pipeline to complete missing directional exploration content."
+      "status": "prepare-opt-in-playable-boundary",
+      "reason": "Required normal path/cadence/stop/combined combat evidence before proposing default use. Default-adoption criterion stays open until authorized."
     }
   ],
   "activeDualProviderBatch": {
     "status": "completed-source-production-integrated",
-    "primary": "content.combat.protagonist-male.combat-static+combat-actions",
+    "primary": "content.char.protagonist-male.exploration-source-set",
     "supports": [],
     "producer": "claude",
-    "codex": "Independent source/runtime inspection and serial integration",
+    "codex": "Existing-loader fit, independent source/contact checks and serial integration",
     "defaultChanges": false,
-    "next": "Missing male four-direction exploration source set; no new cosmetic heroine revisions.",
-    "sourceCommit": "9b49f6fc0f022c81ce8e08b4ae9820fbd13f84c6",
-    "evidence": "docs/qa/rpg-2-star-ocean-the-second_male-combat_missing-source-set-closeout_v01_20261021-154716-8dee0dda.md"
+    "next": "Male playable-path integration, including source cadence/stop binding; default adoption remains separate.",
+    "sourceCommit": "87f95b6c2c214021a93d84b9a55dc03bb874917b",
+    "evidence": "docs/qa/rpg-2-star-ocean-the-second_male-exploration_missing-source-set-closeout_v01_20261021-163044-17f059fa.md"
   },
   "characterSpriteStyleDirection": {
     "reference": "Sea of Stars",
@@ -1305,14 +1338,14 @@
   },
   "progressReporting": {
     "requiredFormat": "before â†’ after (change in percentage points)",
-    "currentBatchProductionBefore": 54.6,
+    "currentBatchProductionBefore": 55.0,
     "startedAt": "2026-10-20T21:42:14.747Z",
-    "sourceCommit": "9b49f6fc0f022c81ce8e08b4ae9820fbd13f84c6",
+    "sourceCommit": "87f95b6c2c214021a93d84b9a55dc03bb874917b",
     "baselineChange": false,
-    "currentBatchProductionAfter": 55.0,
-    "changePercentagePoints": 0.4,
-    "completedAt": "2026-10-21T19:52:48.581397+00:00",
-    "evidence": "docs/qa/rpg-2-star-ocean-the-second_male-combat_missing-source-set-closeout_v01_20261021-154716-8dee0dda.md",
+    "currentBatchProductionAfter": 55.6,
+    "changePercentagePoints": 0.6,
+    "completedAt": "2026-10-21T20:37:05.393860+00:00",
+    "evidence": "docs/qa/rpg-2-star-ocean-the-second_male-exploration_missing-source-set-closeout_v01_20261021-163044-17f059fa.md",
     "publicationEvidence": "docs/qa/rpg-2-star-ocean-the-second_bible-exploration-source_live-verification_v50_20261020-213930-842e7d15.md"
   },
   "heroinePlayablePathPriority": {

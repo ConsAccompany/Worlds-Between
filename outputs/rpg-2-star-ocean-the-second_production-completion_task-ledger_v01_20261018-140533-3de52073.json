@@ -2,7 +2,7 @@
   "id": "rpg-2-star-ocean-the-second_production-completion_v01",
   "schemaVersion": 2,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-21T19:52:27Z",
+  "updatedAt": "2026-10-21T20:36:42Z",
   "zh": "制作完成度任务台账：衡量已完成的工作量（编码 40% + 内容 60%）；检查／审查与创作者批准分开计量，均不改变制作分；免除的审查不算已执行的工作；运营任务列出负责方但不计百分比。",
   "en": "Production-completion task ledger: measures work done (coding 40% + content 60%); inspection/review and creator approval are separate meters and never change production credit; waived reviews are not performed work; operations tasks list owners but carry no percentage.",
   "brief": "docs/rpg-2-star-ocean-the-second_production-completion_bilingual-brief_v01_20261018-140533-3ea2a621.md",
@@ -836,8 +836,8 @@
     "production": {
       "zh": "制作完成度",
       "en": "Production completion",
-      "percent": 55,
-      "percentLabel": "55.0%",
+      "percent": 55.6,
+      "percentLabel": "55.6%",
       "formula": "round1(40 * codingDonePoints/codingTotalPoints + 60 * contentDonePoints/contentTotalPoints)",
       "coding": {
         "done": 111,
@@ -848,12 +848,12 @@
         "tasksDone": 23
       },
       "content": {
-        "done": 469,
+        "done": 489,
         "total": 1881,
-        "percent": 24.9,
+        "percent": 26,
         "weight": 60,
         "tasks": 715,
-        "tasksDone": 145
+        "tasksDone": 153
       }
     },
     "inspection": {
@@ -918,11 +918,11 @@
         "waivedPoints": 0
       },
       "content": {
-        "done": 469,
+        "done": 489,
         "total": 1881,
-        "percent": 24.9,
+        "percent": 26,
         "tasks": 715,
-        "tasksDone": 145,
+        "tasksDone": 153,
         "waivedTasks": 0,
         "waivedPoints": 0
       },
@@ -977,10 +977,10 @@
         "tasks": 723,
         "operationsTasks": 0,
         "points": 1901,
-        "pointsDone": 431,
+        "pointsDone": 451,
         "byStatus": {
-          "done": 97,
-          "todo": 626
+          "done": 105,
+          "todo": 618
         },
         "readyInQueue": 0,
         "revisionsBlockingApproval": 2
@@ -1069,7 +1069,7 @@
       },
       "characters": {
         "content": {
-          "done": 101,
+          "done": 121,
           "total": 1460
         },
         "technical-inspection": {
@@ -1764,14 +1764,14 @@
     {"id":"code.runtime.audio-cues","type":"pipeline-code","title":{"zh":"界面与战斗音效触发","en":"UI and combat sound cues"},"area":"runtime","stage":"coding","owner":"codex","status":"done","points":2,"doneCriterion":{"zh":"界面与战斗事件触发音效并有测试","en":"UI and combat events trigger sounds, with tests"},"dependsOn":[],"evidence":["game/scripts/game_audio_cues.gd","docs/qa/rpg-2-star-ocean-the-second_audio-cues_runtime-capability-closeout_v01_20261018-172948-94147d28.md","outputs/audio-cues-6ebea990/rpg-2-star-ocean-the-second_audio-cues_source-and-check-manifest_v01_20261018-172948-94147d28.json"],"subject":{"kind":"asset","id":"sfx.combat"},"statusAt":"2026-10-18T21:30:42Z","note":{"zh":"","en":"Codex delivered and independently checked normal-runtime opt-in presentation capability. Final effect/audio artistry and creator approval remain separate."}},
     {"id":"content.char.protagonist-male.portrait","type":"concept-generation","title":{"zh":"主角·男 · 人物设定图（图像生成）","en":"Male protagonist · source portrait (image generation)"},"area":"characters","stage":"content","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"设定图文件已入库","en":"The source portrait file is committed"},"dependsOn":[],"evidence":["outputs/rpg-2-star-ocean-the-second_protagonist_character-sheet_male_20261013-153316-5b7c19e2.png"],"subject":{"kind":"character-variant","id":"protagonist-male"}},
     {"id":"content.char.protagonist-male.static-south","type":"native-pixel","title":{"zh":"主角·男 · 南向高密度静止帧","en":"Male protagonist · south high-density static"},"area":"characters","stage":"content","owner":"claude","status":"done","points":3,"doneCriterion":{"zh":"南向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"south native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":[],"evidence":["docs/qa/rpg-2-star-ocean-the-second_protagonist-male_south-idle-v8pair-static-pilot_qa-note_unapproved-v01_20261018-130225-3fad02c7.md"],"subject":{"kind":"character-variant","id":"protagonist-male"}},
-    {"id":"content.char.protagonist-male.static-west","type":"native-pixel","title":{"zh":"主角·男 · 西向高密度静止帧","en":"Male protagonist · west high-density static"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"西向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"west native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":["content.char.protagonist-male.static-south"],"evidence":[],"subject":{"kind":"character-variant","id":"protagonist-male"}},
-    {"id":"content.char.protagonist-male.static-north","type":"native-pixel","title":{"zh":"主角·男 · 北向高密度静止帧","en":"Male protagonist · north high-density static"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"北向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"north native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":["content.char.protagonist-male.static-south"],"evidence":[],"subject":{"kind":"character-variant","id":"protagonist-male"}},
-    {"id":"content.char.protagonist-male.static-east","type":"native-pixel","title":{"zh":"主角·男 · 东向高密度静止帧","en":"Male protagonist · east high-density static"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"东向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"east native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":["content.char.protagonist-male.static-south"],"evidence":[],"subject":{"kind":"character-variant","id":"protagonist-male"}},
-    {"id":"content.char.protagonist-male.idle-anim","type":"native-pixel","title":{"zh":"主角·男 · 四方向待机动画","en":"Male protagonist · four-direction idle animation"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"四个方向的待机循环已提交并有 QA","en":"Idle loops for all four directions committed with QA"},"dependsOn":["content.char.protagonist-male.static-south","content.char.protagonist-male.static-west","content.char.protagonist-male.static-north","content.char.protagonist-male.static-east"],"evidence":[],"subject":{"kind":"character-variant","id":"protagonist-male"}},
-    {"id":"content.char.protagonist-male.walk-south","type":"native-pixel","title":{"zh":"主角·男 · 南向行走／跑动","en":"Male protagonist · south walk/run"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"南向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"south walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.protagonist-male.static-south"],"evidence":[],"subject":{"kind":"character-variant","id":"protagonist-male"}},
-    {"id":"content.char.protagonist-male.walk-west","type":"native-pixel","title":{"zh":"主角·男 · 西向行走／跑动","en":"Male protagonist · west walk/run"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"西向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"west walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.protagonist-male.static-west"],"evidence":[],"subject":{"kind":"character-variant","id":"protagonist-male"}},
-    {"id":"content.char.protagonist-male.walk-north","type":"native-pixel","title":{"zh":"主角·男 · 北向行走／跑动","en":"Male protagonist · north walk/run"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"北向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"north walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.protagonist-male.static-north"],"evidence":[],"subject":{"kind":"character-variant","id":"protagonist-male"}},
-    {"id":"content.char.protagonist-male.walk-east","type":"native-pixel","title":{"zh":"主角·男 · 东向行走／跑动","en":"Male protagonist · east walk/run"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"东向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"east walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.protagonist-male.static-east"],"evidence":[],"subject":{"kind":"character-variant","id":"protagonist-male"}},
+    {"id":"content.char.protagonist-male.static-west","type":"native-pixel","title":{"zh":"主角·男 · 西向高密度静止帧","en":"Male protagonist · west high-density static"},"area":"characters","stage":"content","owner":"claude","status":"done","points":2,"doneCriterion":{"zh":"西向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"west native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":["content.char.protagonist-male.static-south"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_male-exploration_missing-source-set-closeout_v01_20261021-163044-17f059fa.md","outputs/mexplore23/rpg-2-star-ocean-the-second_male-exploration_root-source-closeout-proof_v01_20261021-163044-17f059fa.json"],"subject":{"kind":"character-variant","id":"protagonist-male"},"statusAt":"2026-10-21T20:36:38Z","note":{"zh":"","en":"Committed87f95b6c: required source produced and independently checked; art/motion/default adoption remain separate. Known source slip and stop/cadence integration limits disclosed."}},
+    {"id":"content.char.protagonist-male.static-north","type":"native-pixel","title":{"zh":"主角·男 · 北向高密度静止帧","en":"Male protagonist · north high-density static"},"area":"characters","stage":"content","owner":"claude","status":"done","points":2,"doneCriterion":{"zh":"北向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"north native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":["content.char.protagonist-male.static-south"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_male-exploration_missing-source-set-closeout_v01_20261021-163044-17f059fa.md","outputs/mexplore23/rpg-2-star-ocean-the-second_male-exploration_root-source-closeout-proof_v01_20261021-163044-17f059fa.json"],"subject":{"kind":"character-variant","id":"protagonist-male"},"statusAt":"2026-10-21T20:36:39Z","note":{"zh":"","en":"Committed87f95b6c: required source produced and independently checked; art/motion/default adoption remain separate. Known source slip and stop/cadence integration limits disclosed."}},
+    {"id":"content.char.protagonist-male.static-east","type":"native-pixel","title":{"zh":"主角·男 · 东向高密度静止帧","en":"Male protagonist · east high-density static"},"area":"characters","stage":"content","owner":"claude","status":"done","points":2,"doneCriterion":{"zh":"东向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"east native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":["content.char.protagonist-male.static-south"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_male-exploration_missing-source-set-closeout_v01_20261021-163044-17f059fa.md","outputs/mexplore23/rpg-2-star-ocean-the-second_male-exploration_root-source-closeout-proof_v01_20261021-163044-17f059fa.json"],"subject":{"kind":"character-variant","id":"protagonist-male"},"statusAt":"2026-10-21T20:36:39Z","note":{"zh":"","en":"Committed87f95b6c: required source produced and independently checked; art/motion/default adoption remain separate. Known source slip and stop/cadence integration limits disclosed."}},
+    {"id":"content.char.protagonist-male.idle-anim","type":"native-pixel","title":{"zh":"主角·男 · 四方向待机动画","en":"Male protagonist · four-direction idle animation"},"area":"characters","stage":"content","owner":"claude","status":"done","points":2,"doneCriterion":{"zh":"四个方向的待机循环已提交并有 QA","en":"Idle loops for all four directions committed with QA"},"dependsOn":["content.char.protagonist-male.static-south","content.char.protagonist-male.static-west","content.char.protagonist-male.static-north","content.char.protagonist-male.static-east"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_male-exploration_missing-source-set-closeout_v01_20261021-163044-17f059fa.md","outputs/mexplore23/rpg-2-star-ocean-the-second_male-exploration_root-source-closeout-proof_v01_20261021-163044-17f059fa.json"],"subject":{"kind":"character-variant","id":"protagonist-male"},"statusAt":"2026-10-21T20:36:39Z","note":{"zh":"","en":"Committed87f95b6c: required source produced and independently checked; art/motion/default adoption remain separate. Known source slip and stop/cadence integration limits disclosed."}},
+    {"id":"content.char.protagonist-male.walk-south","type":"native-pixel","title":{"zh":"主角·男 · 南向行走／跑动","en":"Male protagonist · south walk/run"},"area":"characters","stage":"content","owner":"claude","status":"done","points":3,"doneCriterion":{"zh":"南向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"south walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.protagonist-male.static-south"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_male-exploration_missing-source-set-closeout_v01_20261021-163044-17f059fa.md","outputs/mexplore23/rpg-2-star-ocean-the-second_male-exploration_root-source-closeout-proof_v01_20261021-163044-17f059fa.json"],"subject":{"kind":"character-variant","id":"protagonist-male"},"statusAt":"2026-10-21T20:36:40Z","note":{"zh":"","en":"Committed87f95b6c: required source produced and independently checked; art/motion/default adoption remain separate. Known source slip and stop/cadence integration limits disclosed."}},
+    {"id":"content.char.protagonist-male.walk-west","type":"native-pixel","title":{"zh":"主角·男 · 西向行走／跑动","en":"Male protagonist · west walk/run"},"area":"characters","stage":"content","owner":"claude","status":"done","points":3,"doneCriterion":{"zh":"西向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"west walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.protagonist-male.static-west"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_male-exploration_missing-source-set-closeout_v01_20261021-163044-17f059fa.md","outputs/mexplore23/rpg-2-star-ocean-the-second_male-exploration_root-source-closeout-proof_v01_20261021-163044-17f059fa.json"],"subject":{"kind":"character-variant","id":"protagonist-male"},"statusAt":"2026-10-21T20:36:40Z","note":{"zh":"","en":"Committed87f95b6c: required source produced and independently checked; art/motion/default adoption remain separate. Known source slip and stop/cadence integration limits disclosed."}},
+    {"id":"content.char.protagonist-male.walk-north","type":"native-pixel","title":{"zh":"主角·男 · 北向行走／跑动","en":"Male protagonist · north walk/run"},"area":"characters","stage":"content","owner":"claude","status":"done","points":3,"doneCriterion":{"zh":"北向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"north walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.protagonist-male.static-north"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_male-exploration_missing-source-set-closeout_v01_20261021-163044-17f059fa.md","outputs/mexplore23/rpg-2-star-ocean-the-second_male-exploration_root-source-closeout-proof_v01_20261021-163044-17f059fa.json"],"subject":{"kind":"character-variant","id":"protagonist-male"},"statusAt":"2026-10-21T20:36:41Z","note":{"zh":"","en":"Committed87f95b6c: required source produced and independently checked; art/motion/default adoption remain separate. Known source slip and stop/cadence integration limits disclosed."}},
+    {"id":"content.char.protagonist-male.walk-east","type":"native-pixel","title":{"zh":"主角·男 · 东向行走／跑动","en":"Male protagonist · east walk/run"},"area":"characters","stage":"content","owner":"claude","status":"done","points":3,"doneCriterion":{"zh":"东向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"east walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.protagonist-male.static-east"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_male-exploration_missing-source-set-closeout_v01_20261021-163044-17f059fa.md","outputs/mexplore23/rpg-2-star-ocean-the-second_male-exploration_root-source-closeout-proof_v01_20261021-163044-17f059fa.json"],"subject":{"kind":"character-variant","id":"protagonist-male"},"statusAt":"2026-10-21T20:36:42Z","note":{"zh":"","en":"Committed87f95b6c: required source produced and independently checked; art/motion/default adoption remain separate. Known source slip and stop/cadence integration limits disclosed."}},
     {"id":"content.char.protagonist-male.display","type":"native-pixel","title":{"zh":"主角·男 · 游戏内展示图","en":"Male protagonist · in-game display image"},"area":"characters","stage":"content","owner":"deepseek","status":"done","points":2,"doneCriterion":{"zh":"游戏内展示图已提交并在界面中显示","en":"The in-game display image is committed and shown in the UI"},"dependsOn":["content.char.protagonist-male.static-south"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_mvp-display_four-crops-normal-integration_v01_20261019-185434-7c95e421.md","outputs/mvp-portraits-v01/rpg-2-star-ocean-the-second_mvp-display_source-bound-proof_v01_20261019-185434-7c95e421.json"],"subject":{"kind":"character-variant","id":"protagonist-male"},"statusAt":"2026-10-19T23:02:51Z","note":{"zh":"","en":"DeepSeek existing-concept exact crop, Codex package corrections and normal UI wiring;62package and121actualchecks. Creator approval/fullsprite/wholeUIportraitkit unchanged."}},
     {"id":"content.char.protagonist-male.runtime-integration","type":"integration","title":{"zh":"主角·男 · 运行时默认接入","en":"Male protagonist · runtime default integration"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"整套四方向待机与行走默认在游戏中使用","en":"The full four-direction idle+walk set is used in the game by default"},"dependsOn":["content.char.protagonist-male.idle-anim","content.char.protagonist-male.walk-south","content.char.protagonist-male.walk-west","content.char.protagonist-male.walk-north","content.char.protagonist-male.walk-east","code.runtime.character-sprite-pipeline"],"evidence":[],"subject":{"kind":"character-variant","id":"protagonist-male"}},
     {"id":"qa.char.protagonist-male.runtime-set-check","type":"technical-check","title":{"zh":"主角·男 · 运行时整套技术检查","en":"Male protagonist · runtime set technical check"},"area":"characters","stage":"technical-inspection","owner":"claude","status":"todo","points":1,"doneCriterion":{"zh":"Godot 实机检查（帧、锚点、方向、滑步）全部通过","en":"Godot checks (frames, anchors, directions, slip) all pass"},"dependsOn":["content.char.protagonist-male.runtime-integration"],"evidence":[],"subject":{"kind":"character-variant","id":"protagonist-male"},"target":"content.char.protagonist-male.runtime-integration"},

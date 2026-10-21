@@ -4,7 +4,7 @@
   "title": "世界之间",
   "englishTitle": "Worlds Between",
   "edition": "设计基线 v0.2 · 2026-10-15 创作者决定",
-  "updatedAt": "2026-10-21T19:52:27.941Z",
+  "updatedAt": "2026-10-21T20:36:42.764Z",
   "note": "规则以玩家确认的设计稿为基线，并已并入 2026-10-15 创作者决定；人物姓名与外观是待审提案，具体剧情留待后续设计。",
   "pitch": "从地下社区走出的旅人，以好奇心探索多元文明，招募伙伴，并成为不同世界认知差异的桥梁。",
   "pillars": [
@@ -7918,19 +7918,19 @@
     "combinedWiringCheck": "297/297 on39f252e, clean raw log; actual Chinese victory inspected."
   },
   "latestTaskProgress": {
-    "id": "content.combat.protagonist-male.source-set",
+    "id": "content.char.protagonist-male.exploration-source-set",
     "status": "completed",
     "title": {
-      "zh": "补齐男主战斗静止帧与八动作",
-      "en": "Complete missing male combat static and eight-action source set"
+      "zh": "补齐男主四方向探索源文件",
+      "en": "Complete missing male four-direction exploration source set"
     },
-    "startedAt": "2026-10-21T19:37:52.451Z",
-    "sourceBefore": "1284e75bf09164366e822bfa6418459ea1c46b16",
+    "startedAt": "2026-10-21T20:19:28.288Z",
+    "sourceBefore": "ccd33bf7638cb1f3782181178db2cfc5185f0b44",
     "meters": {
       "production": {
-        "before": 54.6,
-        "after": 55,
-        "changePercentagePoints": 0.4
+        "before": 55,
+        "after": 55.6,
+        "changePercentagePoints": 0.6
       },
       "inspection": {
         "before": 18.1,
@@ -7943,10 +7943,10 @@
         "changePercentagePoints": 0
       }
     },
-    "completedAt": "2026-10-21T19:52:27.941Z",
-    "sourceAfter": "9b49f6fc0f022c81ce8e08b4ae9820fbd13f84c6",
+    "completedAt": "2026-10-21T20:36:42.764Z",
+    "sourceAfter": "87f95b6c2c214021a93d84b9a55dc03bb874917b",
     "evidence": [
-      "docs/qa/rpg-2-star-ocean-the-second_male-combat_missing-source-set-closeout_v01_20261021-154716-8dee0dda.md"
+      "docs/qa/rpg-2-star-ocean-the-second_male-exploration_missing-source-set-closeout_v01_20261021-163044-17f059fa.md"
     ]
   },
   "progressReporting": {
@@ -8498,6 +8498,38 @@
       "evidence": [
         "docs/qa/rpg-2-star-ocean-the-second_heroine-breathing-idle_ordinary-path-closeout_v01_20261021-152533-405ccef9.md"
       ]
+    },
+    {
+      "id": "content.combat.protagonist-male.source-set",
+      "status": "completed",
+      "title": {
+        "zh": "补齐男主战斗静止帧与八动作",
+        "en": "Complete missing male combat static and eight-action source set"
+      },
+      "startedAt": "2026-10-21T19:37:52.451Z",
+      "sourceBefore": "1284e75bf09164366e822bfa6418459ea1c46b16",
+      "meters": {
+        "production": {
+          "before": 54.6,
+          "after": 55,
+          "changePercentagePoints": 0.4
+        },
+        "inspection": {
+          "before": 18.1,
+          "after": 18.1,
+          "changePercentagePoints": 0
+        },
+        "approval": {
+          "before": 7.8,
+          "after": 7.8,
+          "changePercentagePoints": 0
+        }
+      },
+      "completedAt": "2026-10-21T19:52:27.941Z",
+      "sourceAfter": "9b49f6fc0f022c81ce8e08b4ae9820fbd13f84c6",
+      "evidence": [
+        "docs/qa/rpg-2-star-ocean-the-second_male-combat_missing-source-set-closeout_v01_20261021-154716-8dee0dda.md"
+      ]
     }
   ],
   "latestBattleEnvironmentProduction": {
@@ -8718,7 +8750,7 @@
     "runtimeCandidate": "game/data/mcombat22",
     "evidence": "docs/qa/rpg-2-star-ocean-the-second_male-combat_missing-source-set-closeout_v01_20261021-154716-8dee0dda.md",
     "productionBefore": 54.6,
-    "productionAfter": 55.0,
+    "productionAfter": 55,
     "changePercentagePoints": 0.4,
     "defaultAdoption": false,
     "artApproved": false,
@@ -8727,7 +8759,24 @@
   "mvpCompletionPriority": {
     "creatorInstruction": "Finish missing MVP work; refinements after MVP",
     "heroineBaseline": "technically connected; cosmetic refinements deferred",
-    "next": "Missing male exploration source set",
+    "next": "Male opt-in playable-path integration; cosmetic refinements deferred",
     "noScoringBaselineChange": true
+  },
+  "latestMaleExplorationProduction": {
+    "recordedAt": "2026-10-21T20:37:05.393860+00:00",
+    "status": "source-production-complete-unapproved-opt-in",
+    "sourceCommit": "87f95b6c2c214021a93d84b9a55dc03bb874917b",
+    "completedExistingTasks": 8,
+    "contentPoints": 20,
+    "source": "outputs/mexplore23",
+    "runtimeCandidate": "game/data/mexplore23",
+    "evidence": "docs/qa/rpg-2-star-ocean-the-second_male-exploration_missing-source-set-closeout_v01_20261021-163044-17f059fa.md",
+    "productionBefore": 55.0,
+    "productionAfter": 55.6,
+    "changePercentagePoints": 0.6,
+    "defaultAdoption": false,
+    "artApproved": false,
+    "fullCharacterAccepted": false,
+    "remaining": "Generic opt-in clock does not implement authored phase-aware stop bank; source cadence and stop drift disclosed for playable-path integration."
   }
 }
