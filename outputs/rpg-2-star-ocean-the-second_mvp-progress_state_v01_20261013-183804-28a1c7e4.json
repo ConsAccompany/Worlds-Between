@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
   "planVersion": "v0.2",
-  "updatedAt": "2026-10-20T23:50:15Z",
+  "updatedAt": "2026-10-21T00:51:44Z",
   "currentStep": "M8",
   "steps": [
     {
@@ -277,14 +277,14 @@
     }
   ],
   "approvalLedger": {
-    "updatedAt": "2026-10-20T23:49:40Z",
-    "note": "Exact scoped creator approvals; four accepted scene-visual gates:NYC public facilities rooms1/2,Yonkers maintenance room2 and the science battle arena. Characters/enemies/motion/default adoption/editor reliability/playtests are separate.",
+    "updatedAt": "2026-10-21T00:51:44Z",
+    "note": "Five exact environment-only creator acceptances: NYC public facilities rooms1/2,Yonkers maintenance room2,science battle arena,and Yonkers outskirts. No character,motion,default-adoption,editor or playtest approval.",
     "counters": {
       "identities": 51,
       "visualVariants": 52,
       "runtimeSpritesAccepted": 0,
       "runtimeSpritesTarget": 52,
-      "sceneVisualsAccepted": 4,
+      "sceneVisualsAccepted": 5,
       "sceneVisualsTarget": 12,
       "humanPlaytests": 0,
       "humanPlaytestsTarget": 2
@@ -410,6 +410,22 @@
         "sourceCommit": "31c92aa8c76bced04af5a684a6c377c2ebf14885",
         "creatorAnswer": "approved",
         "acceptedAt": "2026-10-20T23:49:40Z"
+      },
+      {
+        "id": "yonkers-outskirts-scene-visual-accepted",
+        "status": "accepted",
+        "acceptanceKind": "scene-visual",
+        "units": 1,
+        "zh": "扬克斯城外环境画质正式验收",
+        "en": "Yonkers outskirts environment visual accepted",
+        "scope": "仅批准已展示640×360实机图的环境画质，不包括角色、敌人、动作、其他场景、默认采用、编辑器可靠性或试玩。",
+        "evidence": [
+          "docs/qa/rpg-2-star-ocean-the-second_yonkers-outskirts_scene-visual-acceptance_v01_20261021-005144-ee3c6278.md",
+          "outputs/outskirts-root13/rpg-2-star-ocean-the-second_yonkers-outskirts_en-entry_native_20261021-000817-0755cb2f.png"
+        ],
+        "sourceCommit": "b3e127e5941b81a3e88afb6a7d6b8cdddd9ed820",
+        "creatorAnswer": "approved, next",
+        "acceptedAt": "2026-10-21T00:51:44Z"
       }
     ]
   },
@@ -678,10 +694,10 @@
     "kind": "weighted_delivery_estimate",
     "zh": "MVP 加权交付估算（不是正式批准）",
     "en": "MVP weighted delivery estimate (not formal approval)",
-    "updatedAt": "2026-10-20T23:50:15Z",
-    "percent": 42.5,
-    "percentLabel": "42.5%",
-    "weightedPoints": 42.5,
+    "updatedAt": "2026-10-21T00:51:44Z",
+    "percent": 44.2,
+    "percentLabel": "44.2%",
+    "weightedPoints": 44.17,
     "weightTotal": 100,
     "countingRules": [
       {
@@ -710,7 +726,7 @@
       "en": "Formal approval is separate from this weighted estimate: only creator acceptance recorded in approvalLedger and the two M9 integrated human playtests count as approval. This percentage approves no asset, scene or milestone.",
       "mvpFormallyAccepted": false,
       "runtimeSpritesAccepted": "0/52",
-      "sceneVisualsAccepted": "4/12",
+      "sceneVisualsAccepted": "5/12",
       "humanPlaytests": "0/2",
       "scopedApprovalsNotCountedAsAcceptance": [
         {
@@ -942,11 +958,11 @@
         "zh": "科技圈环境美术（已验收场景画质门）",
         "en": "Science environment art (accepted scene-quality gates)",
         "weight": 20,
-        "numerator": 4,
+        "numerator": 5,
         "denominator": 12,
-        "ratio": "4/12",
-        "percent": 33.3,
-        "weightedPoints": 6.67,
+        "ratio": "5/12",
+        "percent": 41.7,
+        "weightedPoints": 8.33,
         "source": {
           "path": "approvalLedger",
           "rule": {
@@ -963,7 +979,9 @@
           "docs/qa/rpg-2-star-ocean-the-second_nyc-public-facilities-room1_scene-visual-acceptance_v01_20261017-013027-3e7d91c4.md",
           "docs/qa/rpg-2-star-ocean-the-second_yonkers-maintenance-room2_scene-visual-acceptance_v01_20261017-013504-6a0c92d1.md",
           "docs/qa/rpg-2-star-ocean-the-second_battle-arena_scene-visual-acceptance_v01_20261020-234940-8308e1d9.md",
-          "outputs/benv12/rpg-2-star-ocean-the-second_battle-native_patrol-en-entry_native_20261020-231550-54097070.png"
+          "outputs/benv12/rpg-2-star-ocean-the-second_battle-native_patrol-en-entry_native_20261020-231550-54097070.png",
+          "docs/qa/rpg-2-star-ocean-the-second_yonkers-outskirts_scene-visual-acceptance_v01_20261021-005144-ee3c6278.md",
+          "outputs/outskirts-root13/rpg-2-star-ocean-the-second_yonkers-outskirts_en-entry_native_20261021-000817-0755cb2f.png"
         ],
         "nextGate": {
           "zh": "下一道门：创作者在 640×360 可玩画面中验收下一处科技圈场景画质，并登记 acceptanceKind=scene-visual 条目。",
@@ -1000,9 +1018,9 @@
     ],
     "updater": "tools/rpg-2-star-ocean-the-second_mvp-completion-meter_recompute-and-task-closeout-cli_v01_20261015-233032-d296a2cb.js",
     "lastUpdated": {
-      "at": "2026-10-20T23:50:15Z",
-      "closeoutId": "closeout-20261020-235015-63d3567a",
-      "percent": 42.5
+      "at": "2026-10-21T00:51:44Z",
+      "closeoutId": "closeout-20261021-005144-6887f90b",
+      "percent": 44.2
     },
     "taskCloseouts": [
       {
@@ -4078,6 +4096,42 @@
         },
         "evidence": [
           "docs/qa/rpg-2-star-ocean-the-second_battle-arena_scene-visual-acceptance_v01_20261020-234940-8308e1d9.md"
+        ]
+      },
+      {
+        "id": "closeout-20261021-005144-6887f90b",
+        "recordedAt": "2026-10-21T00:51:44Z",
+        "kind": "task",
+        "title": {
+          "zh": null,
+          "en": "Creator accepted Yonkers outskirts environment"
+        },
+        "impact": {
+          "changed": true,
+          "percentBefore": 42.5,
+          "percentAfter": 44.2,
+          "deltaPoints": 1.67,
+          "gateChanges": [
+            {
+              "key": "science-environment-art",
+              "category": "science-environment-art",
+              "gate": null,
+              "from": "4/12",
+              "to": "5/12"
+            }
+          ],
+          "categoryChanges": [
+            {
+              "id": "science-environment-art",
+              "before": "4/12",
+              "after": "5/12",
+              "weightedPointsBefore": 6.67,
+              "weightedPointsAfter": 8.33
+            }
+          ]
+        },
+        "evidence": [
+          "docs/qa/rpg-2-star-ocean-the-second_yonkers-outskirts_scene-visual-acceptance_v01_20261021-005144-ee3c6278.md"
         ]
       }
     ]
