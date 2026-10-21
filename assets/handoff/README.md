@@ -2,7 +2,7 @@
 
 This is a content-deduplicated snapshot for DeepSeek takeover, not a playable game release or new artistic approval.
 
-- **8,815 unique files:**8,199 media/native assets plus616 source/provenance manifests and authoring sources.
+- **8,815 unique files:**8,199 media/native assets plus 616 source/provenance manifests and authoring sources.
 - **4,379 already in this Git repository**, reused at their existing paths.
 - **4,436 additional files in 23 ordinary-Git ZIP bundles**,each below100MiB.
 -47registered project worktrees plus project scratch authoring locations were inventoried with0scan errors.
@@ -18,7 +18,10 @@ This is a content-deduplicated snapshot for DeepSeek takeover, not a playable ga
 - [Fetch, verify and safe historical restore tool](../../tools/rpg-2-star-ocean-the-second_project-assets_fetch-verify-restore_v01_20261021-180329-38c38f93.py)
 - [Canonical artistic inventory](../../outputs/rpg-2-star-ocean-the-second_asset-inventory_state_v01_20261013-191033-7d1e0a8b.json)
 
-Package upload is in progress until the remote publication proof is linked below.
+**Published and verified on GitHub.** All 23 packages and 4,379 existing asset/source Git objects were matched against remote commit `9c7ef74a036d6793c6be39cccf8b89da3cedd92f`. Two public package downloads also passed SHA-256 and ZIP CRC checks.
+
+- [Remote publication evidence](rpg-2-star-ocean-the-second_project-assets_remote-publication-proof_v01_20261021-145113-e91b77ee.json)
+- [Complete local integrity evidence](rpg-2-star-ocean-the-second_project-assets_local-integrity-proof_v01_20261021-180529-f702d967.json)
 
 ## DeepSeek: get every indexed asset
 
