@@ -3,6 +3,7 @@ extends Node
 # Presentation-only opt-in. The host supplies actual post-collision movement through step().
 # No clock process, position/speed/collision mutation, interpolation, default adoption or art approval.
 const FLAG := "--heroine-sea-distance-pilot"
+const BREATHING_PLAYBACK_PATH := "res://scripts/hsea21/rpg-2-star-ocean-the-second_heroine-breathing-idle_playback-runtime_v01_20261021-151045-1217a1ff.gd"
 const MODEL_PATH := "res://scripts/rpg-2-star-ocean-the-second_hsea09_locomotion-phase_model_v01_20261020-174416-39e12f18.gd"
 const TRANSITION_PATH := "res://data/hsea-gait11/rpg-2-star-ocean-the-second_heroine-sea_explore-stop-transition-manifest_unapproved-v06_20261020-175838-408e8b21.json"
 const TRANSITION_SHA256 := "a05df1930f3423cbdbe9f822cfe01acfcac900bb413dbf6667033f4cb9739a94"
@@ -11,7 +12,7 @@ const PROVENANCE_PATH := "res://data/hsea-gait11/rpg-2-star-ocean-the-second_her
 const PROVENANCE_SHA256 := "52a61c70b9ca94b091fde76c60b7e0e184b4d014557afbe40c681c9b09513f45"
 # Exact, coordinator-inspected package profiles. Never infer a bridge/provenance path from untrusted JSON.
 const ADDITIONAL_SOURCE_PROFILES := {
- "3ccf615a536fef4938dafa869ea7f454860a3dca72fdb0c6c566e03f4fea3fa1": {"transition_path": "res://data/hsea-front17/rpg-2-star-ocean-the-second_heroine-sea_explore-stop-transition-manifest_unapproved-front17-v01_20261021-022403-cabad530.json", "transition_sha256": "90c76f29573b37151b4016899351124d4a5e636c19b1fda72c4047959f372172", "provenance_path": "res://data/hsea-front17/rpg-2-star-ocean-the-second_hero-female_exploration-source-package-provenance_v01_20261020-222654-045bcd59.json", "provenance_sha256": "73629644b4f63d3486d7b44012b378d4c9fda260f5b4714e8a8960a4ddae468e", "phase_aware_stop": true, "phase_directions": ["south", "west", "north", "east"], "source_set_sha256": "5a644d10a94f5a7a56084f7c914c23d135c443150986fb97486c8f01fa112b7c"},
+ "3ccf615a536fef4938dafa869ea7f454860a3dca72fdb0c6c566e03f4fea3fa1": {"idle_supplement_path": "res://data/hsea-idle21/rpg-2-star-ocean-the-second_heroine-sea_explore-breathing-idle-manifest_unapproved-idle21-v01_20261021-151339-cf9f5d3c.json", "idle_supplement_sha256": "dc6f4496fe268fd07d1ba674c415f8063977263a29549e82a578d5901c657e96", "transition_path": "res://data/hsea-front17/rpg-2-star-ocean-the-second_heroine-sea_explore-stop-transition-manifest_unapproved-front17-v01_20261021-022403-cabad530.json", "transition_sha256": "90c76f29573b37151b4016899351124d4a5e636c19b1fda72c4047959f372172", "provenance_path": "res://data/hsea-front17/rpg-2-star-ocean-the-second_hero-female_exploration-source-package-provenance_v01_20261020-222654-045bcd59.json", "provenance_sha256": "73629644b4f63d3486d7b44012b378d4c9fda260f5b4714e8a8960a4ddae468e", "phase_aware_stop": true, "phase_directions": ["south", "west", "north", "east"], "source_set_sha256": "5a644d10a94f5a7a56084f7c914c23d135c443150986fb97486c8f01fa112b7c"},
  "2a0953d1cbfa9fdf9700abce4d7ee8c59c2eeb6b59b9e5764d64b7704583bb24": {"transition_path": "res://data/hsea-stop15/rpg-2-star-ocean-the-second_heroine-sea_explore-stop-transition-manifest_unapproved-stop15-v01_20261021-015000-f141d653.json", "transition_sha256": "1d8b5dbad470ce33508073517641eabc8663dc142a866d15aadfa0ac7b598657", "provenance_path": "res://data/hsea-stop15/rpg-2-star-ocean-the-second_hero-female_exploration-source-package-provenance_v01_20261020-215528-cf35a07b.json", "provenance_sha256": "76bcfce2e4abfc088e964ad23bc7a521ddc440252209a04a1dcef471fc3f556a", "phase_aware_stop": true, "source_set_sha256": "2311c4a5e904b2501fb2fd09c9d7bfc0fd416a7298ec81877cde9a2ae04550ba"},
  "b0c2b02764dcb19020a21bd2538633125e79a5399d521b33e6f2286671ce902e": {
   "transition_path": "res://data/hsea-arms12/rpg-2-star-ocean-the-second_heroine-sea_explore-stop-transition-manifest_unapproved-v08_20261020-222336-0ad0e3f5.json",
@@ -37,6 +38,7 @@ var facing := "south"
 var frame := 0
 var last_state := {}
 var bridges := {}
+var breathing: RefCounted
 
 static func enabled() -> bool:
 	return enabled_override == 1 if enabled_override >= 0 else OS.get_cmdline_user_args().has(FLAG)
@@ -67,6 +69,9 @@ static func attach_registry(target: Sprite2D, actor: String, initial_facing: Str
 	driver.sprite_set = candidate
 	driver.model = state_model
 	driver.bridges = bridge_set
+	driver.breathing = load(BREATHING_PLAYBACK_PATH).new()
+	driver.breathing.clips = prepared.get("breathing_clips", {})
+	driver.breathing.reset(initial_facing)
 	driver.facing = initial_facing
 	target.scale = Vector2(0.5, 0.5)
 	target.offset = Vector2(0, -46)
@@ -103,7 +108,12 @@ static func prepare(actor: String, registry_path: String) -> Dictionary:
 	var bridge_set := _load_bridges(loader, profile, candidate)
 	if bridge_set.is_empty():
 		return {}
-	return {"set": candidate, "bridges": bridge_set}
+	var breathing_clips := {}
+	if profile.has("idle_supplement_path"):
+		breathing_clips = load(BREATHING_PLAYBACK_PATH).load_supplement(profile["idle_supplement_path"], profile["idle_supplement_sha256"], FileAccess.get_sha256(set_path), candidate, loader)
+		if breathing_clips.is_empty():
+			return {}
+	return {"set": candidate, "bridges": bridge_set, "breathing_clips": breathing_clips}
 
 static func _source_bytes_match(base: String, profile: Dictionary) -> bool:
 	var provenance_path: String = profile["provenance_path"]
@@ -234,6 +244,9 @@ func step(delta: float, previous: Vector2, actual: Vector2, direction: String) -
 	var next: Dictionary = model.step(delta, previous, actual, direction)
 	if next.get("refused", false) or next.get("ok", true) == false:
 		return
+	if breathing != null:
+		var diagnostics: Dictionary = next.get("diagnostics", {})
+		breathing.step(delta, str(next["action"]), str(next["facing"]), bool(diagnostics.get("teleport", false)) or bool(diagnostics.get("settle_completed", false)))
 	_apply(next)
 
 func _apply(next: Dictionary) -> void:
@@ -245,6 +258,13 @@ func _apply(next: Dictionary) -> void:
 	var clip: Dictionary = sprite_set["clips"][clip_action][facing]
 	frame = clampi(frame, 0, clip["textures"].size() - 1)
 	sprite.texture = clip["textures"][frame]
+	if action == "idle" and breathing != null and breathing.clips.has(facing):
+		var idle_clip: Dictionary = breathing.clips[facing]
+		# Keep the exact existing neutral resource at both endpoints.
+		if breathing.sample_index > 0 and breathing.sample_index < idle_clip["textures"].size() - 1:
+			sprite.texture = idle_clip["textures"][breathing.sample_index]
+		last_state["idle_frame"] = breathing.sample_index
+		last_state["idle_elapsed_ms"] = breathing.elapsed_us / 1000.0
 	if action == "settle" and bridges.has("phase_bridges") and bridges["phase_bridges"].has(facing):
 		var outgoing: int = int(next.get("settle_entry_frame", -1))
 		if outgoing >= 0 and outgoing < 12:

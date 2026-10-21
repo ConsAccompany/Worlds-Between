@@ -1,5 +1,8 @@
 # Worlds Between — DeepSeek 4.1 Flash takeover document
 
+> Status update: the creator canceled the DeepSeek takeover on2026-10-21. Codex remains project coordinator. This document and the asset guide are retained as reference; this is not an active handoff.
+
+
 **Prepared:** 2026-10-21T17:42:46.139450+00:00
 **Verified game revision:** f41b7ed93b30f517bcf1cd98c447979d7e427dad (before committing this document)
 **Creator timezone:** America/New_York
@@ -126,7 +129,7 @@ Normal female selection, without pilot flags, now supports:
 
 Latest revision changed only cells16–22 (seven dodge/skill poses). All23 protected cells, including unused29, and all eight action dictionaries/ticks/loops are exact. Cell136×144,pivot64,136,binary alpha. Set identity intentionally remains `heroine-sea-combat-v01` for loader compatibility.
 
-**Active exploration:** `game/data/hsea-front17/`. Its current idle is one frame per direction, and the phase model intentionally does not advance idle time. Historical breathing-idle candidates exist, but their compatibility with the current Sea heroine is unproven.
+**Active exploration:** `game/data/hsea-front17/`. Its neutral anchors and walk/stop package remain unchanged. A current source-bound four-direction breathing supplement is integrated under `game/data/hsea-idle21/`, with a separate presentation clock; the locomotion model remains unchanged. See the current Bible breathingIdle entry and root closeout.
 
 ### Active sources and reusable checks
 
@@ -158,7 +161,9 @@ Native-source limitation: baseline plus seven new PXOs export8/8pixel-exact and 
 
 ## 6. First bounded DeepSeek task
 
-**Finish compatible four-direction breathing idle in the ordinary heroine exploration path without regressing movement.**
+**Completed by Codex/Claude after takeover cancellation: compatible four-direction breathing idle in the ordinary heroine path.**
+
+Reference closeout: `docs/qa/rpg-2-star-ocean-the-second_heroine-breathing-idle_ordinary-path-closeout_v01_20261021-152533-405ccef9.md`. Continue with the largest visible locomotion defect; full motion/art acceptance remains pending. The original completion contract follows for historical context.
 
 Inspect active idle/driver/model and historical candidate sources. Decide whether existing loops can preserve the current approved static identity; if not, author the smallest compatible supplement. Do not silently insert older-style art.
 
@@ -329,7 +334,7 @@ Last confirmed private publication:
 
 A final check/build terminal result was lost during the session transition. Re-run current targeted checks before packaging; do not assume a lost result passed. Game integration itself is committed.
 
-If the official Sites connector is available, use its current skill/source helper, preserve owner-private audience, keep credentials only on hidden stdin and verify deployment/live UI. Never extract credentials from another session or enable a paid workaround.
+On2026-10-21 the current official Sites connector returned project-not-found for the existing hosting ID and an empty site list. This remains a publication blocker. If access becomes available, use its current skill/source helper, preserve owner-private audience, keep credentials only on hidden stdin and verify deployment/live UI. Never extract credentials from another session or enable a paid workaround.
 
 Four snapshots: `data/bible.json`, `inventory.json`, `state.json`, `production.json`. Fallback: `app/project-data.ts`. Existing panel builder: `scripts/build-tracker-ui.mjs`. Reuse existing `scripts/mcp` checks and framework build. Exact raw Git-blob checks now preserve CRLF with scoped -text; do not normalize bytes then call the hash exact.
 
