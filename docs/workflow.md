@@ -15,6 +15,12 @@ The registry is an operating queue, not a second progress system. The dashboard 
 
 ## Batch loop
 
+### Current priority: finish the MVP before refinements (2026-10-21)
+
+The creator has deferred refinements until after MVP completion. Choose an unfinished production deliverable or a concrete defect blocking play/release. Freeze the connected heroine path as the reusable baseline; breathing, face, arm, foot and material micro-revisions belong in the post-MVP backlog unless they break required behavior. This instruction supersedes older registry suggestions to continue heroine cosmetic iteration.
+
+Before dispatch, identify the existing task IDs, their dependencies and completion criteria. Complete a useful source/integration boundary and run only the checks needed for its remaining risks. A task that neither completes missing content nor unblocks play/release should be deferred. Required QA and creator acceptance remain separate; deferral does not waive either or authorize default adoption. Preserve the frozen scoring baseline.
+
 1. **Orient once:** read current decisions, ledger, registry, relevant source/QA and Git status. Preserve dirty work. Confirm the task is useful and not already active elsewhere.
 2. **Select:** one primary finishable deliverable, plus at most two disjoint supporting tasks. Assign one owner, output, dependencies, file scope, completion conditions and next action. Choose the smallest useful completion boundary; do not add scoring milestones retrospectively.
 3. **Build:** Claude normally implements; Codex takes over bounded coding/testing/integration when Max is unavailable. Quota is an ownership transition, not a project-wide blocker. Keep the creator out of routine implementation parameters.

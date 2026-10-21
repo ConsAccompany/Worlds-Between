@@ -1,5 +1,9 @@
 # Worlds Between working rules
 
+## MVP completion priority (creator instruction, 2026-10-21)
+
+Work on missing MVP deliverables and defects that block play or release. Defer cosmetic refinements of already produced assets until after the MVP. The technically connected heroine path is the reuse baseline, not an open-ended polish task. Select existing unfinished ledger tasks with concrete completion criteria; prioritize playable dependencies before roster breadth. Keep necessary targeted validation, accessibility and data-loss fixes. Do not create per-version points, weaken criteria or infer creator approval to move a meter.
+
 Read [the operating workflow](docs/workflow.md) before starting a batch. Its linked operating registry assigns the current primary task, supporting tasks and integration checkout. Read the latest creator decisions and the canonical production ledger; historical plan text does not override them.
 
 ## Ownership and execution

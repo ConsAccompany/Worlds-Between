@@ -1,0 +1,3572 @@
+{
+ "status": "UNAPPROVED male combat static + action source set; technical source only; runtime default unchanged.",
+ "identityRampsFrom": "tools/rpg-2-star-ocean-the-second_protagonist-male_south-idle-v8pair-static-pilot-build-and-check_unapproved-v01_20261018-130225-f28bd26d.py",
+ "contractFrom": "game/data/hsc19/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-revision_spritesheet-manifest_20261021-034640-07587a3c.json",
+ "layers": [
+  "scarf-tail",
+  "pack",
+  "arm-back",
+  "coat-back",
+  "leg-back",
+  "leg-front",
+  "torso",
+  "head",
+  "weapon",
+  "arm-front",
+  "fx"
+ ],
+ "cell": [
+  136,
+  144
+ ],
+ "pivot": [
+  64,
+  136
+ ],
+ "tickRate": 30,
+ "combatStatic": {
+  "pose": "idle-a",
+  "png": "rpg-2-star-ocean-the-second_protagonist-male-combat_battle-still-native136_unapproved-v01_20261021-120000-45939436.png",
+  "ora": "rpg-2-star-ocean-the-second_protagonist-male-combat_battle-still-layered_unapproved-v01_20261021-120000-7eba8adb.ora",
+  "pxo": "rpg-2-star-ocean-the-second_protagonist-male-combat_battle-still-editable_unapproved-v01_20261021-120000-a0efa498.pxo"
+ },
+ "runtimeActions": {
+  "idle": {
+   "frames": [
+    [
+     "idle-a",
+     14
+    ],
+    [
+     "idle-b",
+     14
+    ]
+   ],
+   "loop": true,
+   "totalTicks": 28
+  },
+  "attack": {
+   "frames": [
+    [
+     "attack-windup",
+     3
+    ],
+    [
+     "attack-strike",
+     1
+    ],
+    [
+     "attack-contact",
+     2
+    ],
+    [
+     "attack-follow",
+     3
+    ],
+    [
+     "attack-recover",
+     3
+    ],
+    [
+     "idle-a",
+     1
+    ]
+   ],
+   "loop": false,
+   "totalTicks": 13
+  },
+  "move": {
+   "frames": [
+    [
+     "move-a",
+     3
+    ],
+    [
+     "move-b",
+     3
+    ],
+    [
+     "move-c",
+     3
+    ],
+    [
+     "move-d",
+     3
+    ]
+   ],
+   "loop": true,
+   "totalTicks": 12
+  },
+  "guard": {
+   "frames": [
+    [
+     "guard-in",
+     2
+    ],
+    [
+     "guard-hold",
+     12
+    ]
+   ],
+   "loop": true,
+   "totalTicks": 14
+  },
+  "dodge": {
+   "frames": [
+    [
+     "dodge-hop",
+     4
+    ],
+    [
+     "dodge-land",
+     4
+    ],
+    [
+     "idle-a",
+     1
+    ]
+   ],
+   "loop": false,
+   "totalTicks": 9
+  },
+  "skill": {
+   "frames": [
+    [
+     "skill-coil",
+     4
+    ],
+    [
+     "skill-raise",
+     3
+    ],
+    [
+     "skill-flare",
+     3
+    ],
+    [
+     "skill-settle",
+     3
+    ],
+    [
+     "idle-a",
+     1
+    ]
+   ],
+   "loop": false,
+   "totalTicks": 14
+  },
+  "hit": {
+   "frames": [
+    [
+     "hit-recoil",
+     3
+    ],
+    [
+     "hit-stagger",
+     4
+    ],
+    [
+     "idle-a",
+     1
+    ]
+   ],
+   "loop": false,
+   "totalTicks": 8
+  },
+  "defeat": {
+   "frames": [
+    [
+     "defeat-buckle",
+     3
+    ],
+    [
+     "defeat-knee",
+     3
+    ],
+    [
+     "defeat-down",
+     3
+    ]
+   ],
+   "loop": false,
+   "totalTicks": 9
+  }
+ },
+ "attackContactStartTick": 4,
+ "supplementalActions": {
+  "victory": {
+   "frames": [
+    [
+     "victory-flourish",
+     6
+    ],
+    [
+     "victory-hold",
+     30
+    ]
+   ],
+   "reason": "loader REQUIRED/OPTIONAL_ACTIONS has no victory; unknown actions reject a set"
+  }
+ },
+ "poses": {
+  "idle-a": {
+   "params": {
+    "pel": [
+     0,
+     0
+    ],
+    "lean": 4.0,
+    "feet": [
+     [
+      51,
+      130
+     ],
+     [
+      77,
+      130
+     ]
+    ],
+    "fh": [
+     9,
+     14
+    ],
+    "bh": [
+     6,
+     15
+    ],
+    "blade": -38.0,
+    "coat": 0,
+    "scarf": 168.0,
+    "eyes": "open",
+    "fx": "none",
+    "head": [
+     0,
+     0
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     62.0,
+     92.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       59.01,
+       91.79
+      ],
+      "knee": [
+       62.58,
+       112.48
+      ],
+      "ankle": [
+       51,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       64.99,
+       92.21
+      ],
+      "knee": [
+       77.59,
+       109.01
+      ],
+      "ankle": [
+       77,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       61.89,
+       64.93
+      ],
+      "elbow": [
+       56.34,
+       76.68
+      ],
+      "hand": [
+       67.89,
+       79.93
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       66.81,
+       66.27
+      ],
+      "elbow": [
+       63.88,
+       78.94
+      ],
+      "hand": [
+       75.81,
+       80.27
+      ],
+      "stretch": 0.0
+     }
+    },
+    "blade": {
+     "grip": [
+      75.81,
+      80.27
+     ],
+     "tip": [
+      99.45,
+      61.8
+     ],
+     "deg": -38.0
+    }
+   },
+   "runtimeCell": 0
+  },
+  "idle-b": {
+   "params": {
+    "pel": [
+     0,
+     1
+    ],
+    "lean": 5.0,
+    "feet": [
+     [
+      51,
+      130
+     ],
+     [
+      77,
+      130
+     ]
+    ],
+    "fh": [
+     9,
+     15
+    ],
+    "bh": [
+     6,
+     16
+    ],
+    "blade": -36.0,
+    "coat": -1,
+    "scarf": 172.0,
+    "eyes": "open",
+    "fx": "none",
+    "head": [
+     0,
+     0
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     62.0,
+     93.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       59.01,
+       92.74
+      ],
+      "knee": [
+       63.63,
+       113.22
+      ],
+      "ankle": [
+       51,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       64.99,
+       93.26
+      ],
+      "knee": [
+       78.8,
+       109.08
+      ],
+      "ankle": [
+       77,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       62.36,
+       65.93
+      ],
+      "elbow": [
+       57.09,
+       77.81
+      ],
+      "hand": [
+       68.36,
+       81.93
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       67.25,
+       67.36
+      ],
+      "elbow": [
+       64.48,
+       80.06
+      ],
+      "hand": [
+       76.25,
+       82.36
+      ],
+      "stretch": 0.0
+     }
+    },
+    "blade": {
+     "grip": [
+      76.25,
+      82.36
+     ],
+     "tip": [
+      100.53,
+      64.73
+     ],
+     "deg": -36.0
+    }
+   },
+   "runtimeCell": 1
+  },
+  "move-a": {
+   "params": {
+    "pel": [
+     1,
+     1
+    ],
+    "lean": 9.0,
+    "feet": [
+     [
+      49,
+      130
+     ],
+     [
+      81,
+      130
+     ]
+    ],
+    "fh": [
+     10,
+     13
+    ],
+    "bh": [
+     4,
+     16
+    ],
+    "blade": -30.0,
+    "coat": -3,
+    "scarf": 176.0,
+    "eyes": "open",
+    "fx": "none",
+    "head": [
+     0,
+     0
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     63.0,
+     93.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       60.04,
+       92.53
+      ],
+      "knee": [
+       61.92,
+       113.45
+      ],
+      "ankle": [
+       49,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       65.96,
+       93.47
+      ],
+      "knee": [
+       80.08,
+       109.02
+      ],
+      "ankle": [
+       81,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       65.25,
+       66.02
+      ],
+      "elbow": [
+       58.34,
+       77.03
+      ],
+      "hand": [
+       69.25,
+       82.02
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       70.03,
+       67.79
+      ],
+      "elbow": [
+       68.03,
+       80.63
+      ],
+      "hand": [
+       80.03,
+       80.79
+      ],
+      "stretch": 0.0
+     }
+    },
+    "blade": {
+     "grip": [
+      80.03,
+      80.79
+     ],
+     "tip": [
+      106.01,
+      65.79
+     ],
+     "deg": -30.0
+    }
+   },
+   "runtimeCell": 2
+  },
+  "move-b": {
+   "params": {
+    "pel": [
+     3,
+     -2
+    ],
+    "lean": 8.0,
+    "feet": [
+     [
+      56,
+      126
+     ],
+     [
+      79,
+      130
+     ]
+    ],
+    "fh": [
+     10,
+     12
+    ],
+    "bh": [
+     5,
+     15
+    ],
+    "blade": -32.0,
+    "coat": -4,
+    "scarf": 180.0,
+    "eyes": "open",
+    "fx": "none",
+    "head": [
+     0,
+     0
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     65.0,
+     90.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       62.03,
+       89.58
+      ],
+      "knee": [
+       68.9,
+       109.43
+      ],
+      "ankle": [
+       56,
+       126
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       67.97,
+       90.42
+      ],
+      "knee": [
+       77.67,
+       109.04
+      ],
+      "ankle": [
+       79,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       66.78,
+       62.98
+      ],
+      "elbow": [
+       60.36,
+       74.29
+      ],
+      "hand": [
+       71.78,
+       77.98
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       71.59,
+       64.67
+      ],
+      "elbow": [
+       69.62,
+       77.52
+      ],
+      "hand": [
+       81.59,
+       76.67
+      ],
+      "stretch": 0.0
+     }
+    },
+    "blade": {
+     "grip": [
+      81.59,
+      76.67
+     ],
+     "tip": [
+      107.03,
+      60.77
+     ],
+     "deg": -32.0
+    }
+   },
+   "runtimeCell": 3
+  },
+  "move-c": {
+   "params": {
+    "pel": [
+     4,
+     1
+    ],
+    "lean": 9.0,
+    "feet": [
+     [
+      55,
+      130
+     ],
+     [
+      85,
+      128
+     ]
+    ],
+    "fh": [
+     10,
+     13
+    ],
+    "bh": [
+     4,
+     16
+    ],
+    "blade": -30.0,
+    "coat": -3,
+    "scarf": 176.0,
+    "eyes": "open",
+    "fx": "none",
+    "head": [
+     0,
+     0
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     66.0,
+     93.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       63.04,
+       92.53
+      ],
+      "knee": [
+       67.42,
+       113.07
+      ],
+      "ankle": [
+       55,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       68.96,
+       93.47
+      ],
+      "knee": [
+       85.02,
+       107.0
+      ],
+      "ankle": [
+       85,
+       128
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       68.25,
+       66.02
+      ],
+      "elbow": [
+       61.34,
+       77.03
+      ],
+      "hand": [
+       72.25,
+       82.02
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       73.03,
+       67.79
+      ],
+      "elbow": [
+       71.03,
+       80.63
+      ],
+      "hand": [
+       83.03,
+       80.79
+      ],
+      "stretch": 0.0
+     }
+    },
+    "blade": {
+     "grip": [
+      83.03,
+      80.79
+     ],
+     "tip": [
+      109.01,
+      65.79
+     ],
+     "deg": -30.0
+    }
+   },
+   "runtimeCell": 4
+  },
+  "move-d": {
+   "params": {
+    "pel": [
+     3,
+     -1
+    ],
+    "lean": 8.0,
+    "feet": [
+     [
+      53,
+      130
+     ],
+     [
+      82,
+      130
+     ]
+    ],
+    "fh": [
+     11,
+     12
+    ],
+    "bh": [
+     5,
+     15
+    ],
+    "blade": -33.0,
+    "coat": -2,
+    "scarf": 178.0,
+    "eyes": "open",
+    "fx": "none",
+    "head": [
+     0,
+     0
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     65.0,
+     91.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       62.03,
+       90.58
+      ],
+      "knee": [
+       63.04,
+       111.56
+      ],
+      "ankle": [
+       53,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       67.97,
+       91.42
+      ],
+      "knee": [
+       79.15,
+       109.19
+      ],
+      "ankle": [
+       82,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       66.78,
+       63.98
+      ],
+      "elbow": [
+       60.36,
+       75.29
+      ],
+      "hand": [
+       71.78,
+       78.98
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       71.59,
+       65.67
+      ],
+      "elbow": [
+       70.63,
+       78.63
+      ],
+      "hand": [
+       82.59,
+       77.67
+      ],
+      "stretch": 0.0
+     }
+    },
+    "blade": {
+     "grip": [
+      82.59,
+      77.67
+     ],
+     "tip": [
+      107.75,
+      61.33
+     ],
+     "deg": -33.0
+    }
+   },
+   "runtimeCell": 5
+  },
+  "guard-in": {
+   "params": {
+    "pel": [
+     -1,
+     2
+    ],
+    "lean": 0.0,
+    "feet": [
+     [
+      51,
+      130
+     ],
+     [
+      77,
+      130
+     ]
+    ],
+    "fh": [
+     12,
+     4
+    ],
+    "bh": [
+     12,
+     8
+    ],
+    "blade": -80.0,
+    "coat": 1,
+    "scarf": 165.0,
+    "eyes": "open",
+    "fx": "none",
+    "head": [
+     0,
+     0
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     61.0,
+     94.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       58.0,
+       94.0
+      ],
+      "knee": [
+       64.55,
+       113.95
+      ],
+      "ankle": [
+       51,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       64.0,
+       94.0
+      ],
+      "knee": [
+       78.63,
+       109.06
+      ],
+      "ankle": [
+       77,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       59.0,
+       67.0
+      ],
+      "elbow": [
+       60.07,
+       79.96
+      ],
+      "hand": [
+       71.0,
+       75.0
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       64.0,
+       68.0
+      ],
+      "elbow": [
+       67.54,
+       80.51
+      ],
+      "hand": [
+       76.0,
+       72.0
+      ],
+      "stretch": 0.0
+     }
+    },
+    "blade": {
+     "grip": [
+      76.0,
+      72.0
+     ],
+     "tip": [
+      81.21,
+      42.46
+     ],
+     "deg": -80.0
+    }
+   },
+   "runtimeCell": 6
+  },
+  "guard-hold": {
+   "params": {
+    "pel": [
+     -2,
+     4
+    ],
+    "lean": -3.0,
+    "feet": [
+     [
+      49,
+      130
+     ],
+     [
+      77,
+      130
+     ]
+    ],
+    "fh": [
+     13,
+     2
+    ],
+    "bh": [
+     13,
+     6
+    ],
+    "blade": -88.0,
+    "coat": 2,
+    "scarf": 160.0,
+    "eyes": "open",
+    "fx": "none",
+    "head": [
+     0,
+     0
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     60.0,
+     96.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       57.0,
+       96.16
+      ],
+      "knee": [
+       64.46,
+       115.79
+      ],
+      "ankle": [
+       49,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       63.0,
+       95.84
+      ],
+      "knee": [
+       79.26,
+       109.12
+      ],
+      "ankle": [
+       77,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       56.59,
+       69.14
+      ],
+      "elbow": [
+       59.6,
+       81.79
+      ],
+      "hand": [
+       69.59,
+       75.14
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       61.64,
+       69.88
+      ],
+      "elbow": [
+       67.46,
+       81.5
+      ],
+      "hand": [
+       74.64,
+       71.88
+      ],
+      "stretch": 0.0
+     }
+    },
+    "blade": {
+     "grip": [
+      74.64,
+      71.88
+     ],
+     "tip": [
+      75.68,
+      41.9
+     ],
+     "deg": -88.0
+    }
+   },
+   "runtimeCell": 7
+  },
+  "attack-windup": {
+   "params": {
+    "pel": [
+     -4,
+     3
+    ],
+    "lean": -10.0,
+    "feet": [
+     [
+      50,
+      130
+     ],
+     [
+      78,
+      130
+     ]
+    ],
+    "fh": [
+     -12,
+     -4
+    ],
+    "bh": [
+     8,
+     12
+    ],
+    "blade": -150.0,
+    "coat": 3,
+    "scarf": 150.0,
+    "eyes": "open",
+    "fx": "none",
+    "head": [
+     0,
+     0
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     58.0,
+     95.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       55.05,
+       95.52
+      ],
+      "knee": [
+       64.12,
+       114.46
+      ],
+      "ankle": [
+       50,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       60.95,
+       94.48
+      ],
+      "knee": [
+       76.04,
+       109.09
+      ],
+      "ankle": [
+       78,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       51.34,
+       68.76
+      ],
+      "elbow": [
+       47.35,
+       81.13
+      ],
+      "hand": [
+       59.34,
+       80.76
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       56.44,
+       68.87
+      ],
+      "elbow": [
+       46.1,
+       76.76
+      ],
+      "hand": [
+       44.44,
+       64.87
+      ],
+      "stretch": 0.0
+     }
+    },
+    "blade": {
+     "grip": [
+      44.44,
+      64.87
+     ],
+     "tip": [
+      18.46,
+      49.87
+     ],
+     "deg": -150.0
+    }
+   },
+   "runtimeCell": 8
+  },
+  "attack-strike": {
+   "params": {
+    "pel": [
+     6,
+     4
+    ],
+    "lean": 14.0,
+    "feet": [
+     [
+      51,
+      130
+     ],
+     [
+      88,
+      130
+     ]
+    ],
+    "fh": [
+     14,
+     -2
+    ],
+    "bh": [
+     -6,
+     14
+    ],
+    "blade": -40.0,
+    "coat": -5,
+    "scarf": 185.0,
+    "eyes": "open",
+    "fx": "smear",
+    "head": [
+     0,
+     0
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     68.0,
+     96.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       65.09,
+       95.27
+      ],
+      "knee": [
+       66.83,
+       116.2
+      ],
+      "ankle": [
+       51,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       70.91,
+       96.73
+      ],
+      "knee": [
+       87.95,
+       109.0
+      ],
+      "ankle": [
+       88,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       72.59,
+       69.32
+      ],
+      "elbow": [
+       78.36,
+       80.97
+      ],
+      "hand": [
+       66.59,
+       83.32
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       77.2,
+       71.5
+      ],
+      "elbow": [
+       86.53,
+       80.55
+      ],
+      "hand": [
+       91.2,
+       69.5
+      ],
+      "stretch": 0.0
+     }
+    },
+    "blade": {
+     "grip": [
+      91.2,
+      69.5
+     ],
+     "tip": [
+      114.18,
+      50.21
+     ],
+     "deg": -40.0
+    }
+   },
+   "runtimeCell": 9
+  },
+  "attack-contact": {
+   "params": {
+    "pel": [
+     10,
+     6
+    ],
+    "lean": 20.0,
+    "feet": [
+     [
+      53,
+      130
+     ],
+     [
+      93,
+      130
+     ]
+    ],
+    "fh": [
+     17,
+     8
+    ],
+    "bh": [
+     -8,
+     12
+    ],
+    "blade": 10.0,
+    "coat": -7,
+    "scarf": 190.0,
+    "eyes": "open",
+    "fx": "smear",
+    "head": [
+     0,
+     0
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     72.0,
+     98.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       69.18,
+       96.97
+      ],
+      "knee": [
+       70.2,
+       117.95
+      ],
+      "ankle": [
+       53,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       74.82,
+       99.03
+      ],
+      "knee": [
+       93.3,
+       109.0
+      ],
+      "ankle": [
+       93,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       79.36,
+       71.94
+      ],
+      "elbow": [
+       83.35,
+       84.32
+      ],
+      "hand": [
+       71.36,
+       83.94
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       83.71,
+       74.59
+      ],
+      "elbow": [
+       89.31,
+       86.33
+      ],
+      "hand": [
+       100.71,
+       82.59
+      ],
+      "stretch": 0.0
+     }
+    },
+    "blade": {
+     "grip": [
+      100.71,
+      82.59
+     ],
+     "tip": [
+      130.26,
+      87.8
+     ],
+     "deg": 10.0
+    }
+   },
+   "runtimeCell": 10
+  },
+  "attack-follow": {
+   "params": {
+    "pel": [
+     9,
+     6
+    ],
+    "lean": 18.0,
+    "feet": [
+     [
+      54,
+      130
+     ],
+     [
+      93,
+      130
+     ]
+    ],
+    "fh": [
+     13,
+     16
+    ],
+    "bh": [
+     -7,
+     10
+    ],
+    "blade": 40.0,
+    "coat": -5,
+    "scarf": 186.0,
+    "eyes": "open",
+    "fx": "none",
+    "head": [
+     0,
+     0
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     71.0,
+     98.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       68.15,
+       97.07
+      ],
+      "knee": [
+       71.13,
+       117.86
+      ],
+      "ankle": [
+       54,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       73.85,
+       98.93
+      ],
+      "knee": [
+       92.27,
+       109.01
+      ],
+      "ankle": [
+       93,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       77.44,
+       71.7
+      ],
+      "elbow": [
+       82.26,
+       83.78
+      ],
+      "hand": [
+       70.44,
+       81.7
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       81.89,
+       74.2
+      ],
+      "elbow": [
+       83.29,
+       87.12
+      ],
+      "hand": [
+       94.89,
+       90.2
+      ],
+      "stretch": 0.0
+     }
+    },
+    "blade": {
+     "grip": [
+      94.89,
+      90.2
+     ],
+     "tip": [
+      117.87,
+      109.48
+     ],
+     "deg": 40.0
+    }
+   },
+   "runtimeCell": 11
+  },
+  "attack-recover": {
+   "params": {
+    "pel": [
+     4,
+     3
+    ],
+    "lean": 9.0,
+    "feet": [
+     [
+      52,
+      130
+     ],
+     [
+      84,
+      130
+     ]
+    ],
+    "fh": [
+     10,
+     14
+    ],
+    "bh": [
+     3,
+     14
+    ],
+    "blade": -20.0,
+    "coat": -2,
+    "scarf": 176.0,
+    "eyes": "open",
+    "fx": "none",
+    "head": [
+     0,
+     0
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     66.0,
+     95.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       63.04,
+       94.53
+      ],
+      "knee": [
+       66.88,
+       115.18
+      ],
+      "ankle": [
+       52,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       68.96,
+       95.47
+      ],
+      "knee": [
+       85.0,
+       109.02
+      ],
+      "ankle": [
+       84,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       68.25,
+       68.02
+      ],
+      "elbow": [
+       59.94,
+       78.01
+      ],
+      "hand": [
+       71.25,
+       82.02
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       73.03,
+       69.79
+      ],
+      "elbow": [
+       71.09,
+       82.64
+      ],
+      "hand": [
+       83.03,
+       83.79
+      ],
+      "stretch": 0.0
+     }
+    },
+    "blade": {
+     "grip": [
+      83.03,
+      83.79
+     ],
+     "tip": [
+      111.22,
+      73.53
+     ],
+     "deg": -20.0
+    }
+   },
+   "runtimeCell": 12
+  },
+  "dodge-hop": {
+   "params": {
+    "pel": [
+     -9,
+     -6
+    ],
+    "lean": 12.0,
+    "feet": [
+     [
+      40,
+      122
+     ],
+     [
+      62,
+      124
+     ]
+    ],
+    "fh": [
+     8,
+     16
+    ],
+    "bh": [
+     -3,
+     16
+    ],
+    "blade": -30.0,
+    "coat": 7,
+    "scarf": 205.0,
+    "eyes": "open",
+    "fx": "none",
+    "head": [
+     0,
+     1
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     53.0,
+     86.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       50.07,
+       85.38
+      ],
+      "knee": [
+       53.68,
+       106.06
+      ],
+      "ankle": [
+       40,
+       122
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       55.93,
+       86.62
+      ],
+      "knee": [
+       67.94,
+       103.86
+      ],
+      "ankle": [
+       62,
+       124
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       56.66,
+       59.17
+      ],
+      "elbow": [
+       64.32,
+       69.67
+      ],
+      "hand": [
+       53.66,
+       75.17
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       61.34,
+       61.19
+      ],
+      "elbow": [
+       57.85,
+       73.72
+      ],
+      "hand": [
+       69.34,
+       77.19
+      ],
+      "stretch": 0.0
+     }
+    },
+    "blade": {
+     "grip": [
+      69.34,
+      77.19
+     ],
+     "tip": [
+      95.32,
+      62.19
+     ],
+     "deg": -30.0
+    }
+   },
+   "runtimeCell": 13
+  },
+  "dodge-land": {
+   "params": {
+    "pel": [
+     -12,
+     9
+    ],
+    "lean": 16.0,
+    "feet": [
+     [
+      38,
+      130
+     ],
+     [
+      62,
+      130
+     ]
+    ],
+    "fh": [
+     11,
+     15
+    ],
+    "bh": [
+     4,
+     17
+    ],
+    "blade": -18.0,
+    "coat": 5,
+    "scarf": 196.0,
+    "eyes": "open",
+    "fx": "none",
+    "head": [
+     0,
+     0
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     50.0,
+     101.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       47.12,
+       100.17
+      ],
+      "knee": [
+       56.01,
+       119.2
+      ],
+      "ankle": [
+       38,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       52.88,
+       101.83
+      ],
+      "knee": [
+       71.61,
+       111.33
+      ],
+      "ankle": [
+       62,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       55.52,
+       74.49
+      ],
+      "elbow": [
+       48.99,
+       85.74
+      ],
+      "hand": [
+       59.52,
+       91.49
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       60.05,
+       76.83
+      ],
+      "elbow": [
+       59.22,
+       89.81
+      ],
+      "hand": [
+       71.05,
+       91.83
+      ],
+      "stretch": 0.0
+     }
+    },
+    "blade": {
+     "grip": [
+      71.05,
+      91.83
+     ],
+     "tip": [
+      99.58,
+      82.56
+     ],
+     "deg": -18.0
+    }
+   },
+   "runtimeCell": 14
+  },
+  "skill-coil": {
+   "params": {
+    "pel": [
+     -2,
+     7
+    ],
+    "lean": 14.0,
+    "feet": [
+     [
+      50,
+      130
+     ],
+     [
+      76,
+      130
+     ]
+    ],
+    "fh": [
+     -4,
+     17
+    ],
+    "bh": [
+     7,
+     9
+    ],
+    "blade": 168.0,
+    "coat": 1,
+    "scarf": 178.0,
+    "eyes": "shut",
+    "fx": "none",
+    "head": [
+     0,
+     0
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     60.0,
+     99.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       57.09,
+       98.27
+      ],
+      "knee": [
+       66.52,
+       117.04
+      ],
+      "ankle": [
+       50,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       62.91,
+       99.73
+      ],
+      "knee": [
+       81.39,
+       109.7
+      ],
+      "ankle": [
+       76,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       64.59,
+       72.32
+      ],
+      "elbow": [
+       60.02,
+       84.49
+      ],
+      "hand": [
+       71.59,
+       81.32
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       69.2,
+       74.5
+      ],
+      "elbow": [
+       75.73,
+       85.74
+      ],
+      "hand": [
+       65.2,
+       91.5
+      ],
+      "stretch": 0.0
+     }
+    },
+    "blade": {
+     "grip": [
+      65.2,
+      91.5
+     ],
+     "tip": [
+      35.86,
+      97.74
+     ],
+     "deg": 168.0
+    }
+   },
+   "runtimeCell": 15
+  },
+  "skill-raise": {
+   "params": {
+    "pel": [
+     0,
+     2
+    ],
+    "lean": -8.0,
+    "feet": [
+     [
+      51,
+      130
+     ],
+     [
+      78,
+      130
+     ]
+    ],
+    "fh": [
+     9,
+     -6
+    ],
+    "bh": [
+     10,
+     2
+    ],
+    "blade": -86.0,
+    "coat": -1,
+    "scarf": 150.0,
+    "eyes": "open",
+    "fx": "none",
+    "head": [
+     0,
+     0
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     62.0,
+     94.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       59.03,
+       94.42
+      ],
+      "knee": [
+       65.17,
+       114.5
+      ],
+      "ankle": [
+       51,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       64.97,
+       93.58
+      ],
+      "knee": [
+       79.19,
+       109.03
+      ],
+      "ankle": [
+       78,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       56.26,
+       67.54
+      ],
+      "elbow": [
+       60.24,
+       79.92
+      ],
+      "hand": [
+       66.26,
+       69.54
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       61.35,
+       67.84
+      ],
+      "elbow": [
+       73.04,
+       73.53
+      ],
+      "hand": [
+       70.35,
+       61.84
+      ],
+      "stretch": 0.0
+     }
+    },
+    "blade": {
+     "grip": [
+      70.35,
+      61.84
+     ],
+     "tip": [
+      72.44,
+      31.91
+     ],
+     "deg": -86.0
+    }
+   },
+   "runtimeCell": 16
+  },
+  "skill-flare": {
+   "params": {
+    "pel": [
+     1,
+     1
+    ],
+    "lean": -12.0,
+    "feet": [
+     [
+      51,
+      130
+     ],
+     [
+      79,
+      130
+     ]
+    ],
+    "fh": [
+     10,
+     -9
+    ],
+    "bh": [
+     13,
+     -2
+    ],
+    "blade": -90.0,
+    "coat": -2,
+    "scarf": 140.0,
+    "eyes": "open",
+    "fx": "flare",
+    "head": [
+     0,
+     0
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     63.0,
+     93.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       60.07,
+       93.62
+      ],
+      "knee": [
+       64.72,
+       114.1
+      ],
+      "ankle": [
+       51,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       65.93,
+       92.38
+      ],
+      "knee": [
+       78.76,
+       109.0
+      ],
+      "ankle": [
+       79,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       55.43,
+       67.01
+      ],
+      "elbow": [
+       64.48,
+       76.34
+      ],
+      "hand": [
+       68.43,
+       65.01
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       60.53,
+       66.94
+      ],
+      "elbow": [
+       73.25,
+       69.63
+      ],
+      "hand": [
+       70.53,
+       57.94
+      ],
+      "stretch": 0.0
+     }
+    },
+    "blade": {
+     "grip": [
+      70.53,
+      57.94
+     ],
+     "tip": [
+      70.53,
+      27.94
+     ],
+     "deg": -90.0
+    }
+   },
+   "runtimeCell": 17
+  },
+  "skill-settle": {
+   "params": {
+    "pel": [
+     0,
+     2
+    ],
+    "lean": -2.0,
+    "feet": [
+     [
+      51,
+      130
+     ],
+     [
+      77,
+      130
+     ]
+    ],
+    "fh": [
+     10,
+     10
+    ],
+    "bh": [
+     8,
+     12
+    ],
+    "blade": -55.0,
+    "coat": 0,
+    "scarf": 162.0,
+    "eyes": "open",
+    "fx": "none",
+    "head": [
+     0,
+     0
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     62.0,
+     94.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       59.0,
+       94.1
+      ],
+      "knee": [
+       64.9,
+       114.26
+      ],
+      "ankle": [
+       51,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       65.0,
+       93.9
+      ],
+      "knee": [
+       79.44,
+       109.14
+      ],
+      "ankle": [
+       77,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       59.06,
+       67.09
+      ],
+      "elbow": [
+       55.06,
+       79.46
+      ],
+      "hand": [
+       67.06,
+       79.09
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       64.09,
+       67.91
+      ],
+      "elbow": [
+       62.45,
+       80.81
+      ],
+      "hand": [
+       74.09,
+       77.91
+      ],
+      "stretch": 0.0
+     }
+    },
+    "blade": {
+     "grip": [
+      74.09,
+      77.91
+     ],
+     "tip": [
+      91.3,
+      53.34
+     ],
+     "deg": -55.0
+    }
+   },
+   "runtimeCell": 18
+  },
+  "hit-recoil": {
+   "params": {
+    "pel": [
+     -6,
+     3
+    ],
+    "lean": -16.0,
+    "feet": [
+     [
+      49,
+      130
+     ],
+     [
+      74,
+      130
+     ]
+    ],
+    "fh": [
+     4,
+     16
+    ],
+    "bh": [
+     -8,
+     12
+    ],
+    "blade": -10.0,
+    "coat": 6,
+    "scarf": 200.0,
+    "eyes": "wince",
+    "fx": "none",
+    "head": [
+     -2,
+     0
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     56.0,
+     95.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       53.12,
+       95.83
+      ],
+      "knee": [
+       63.01,
+       114.35
+      ],
+      "ankle": [
+       49,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       58.88,
+       94.17
+      ],
+      "knee": [
+       73.75,
+       109.0
+      ],
+      "ankle": [
+       74,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       46.64,
+       69.6
+      ],
+      "elbow": [
+       50.63,
+       81.97
+      ],
+      "hand": [
+       38.64,
+       81.6
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       51.72,
+       69.18
+      ],
+      "elbow": [
+       44.8,
+       80.19
+      ],
+      "hand": [
+       55.72,
+       85.18
+      ],
+      "stretch": 0.0
+     }
+    },
+    "blade": {
+     "grip": [
+      55.72,
+      85.18
+     ],
+     "tip": [
+      85.26,
+      79.97
+     ],
+     "deg": -10.0
+    }
+   },
+   "runtimeCell": 19
+  },
+  "hit-stagger": {
+   "params": {
+    "pel": [
+     -5,
+     6
+    ],
+    "lean": 10.0,
+    "feet": [
+     [
+      47,
+      130
+     ],
+     [
+      73,
+      130
+     ]
+    ],
+    "fh": [
+     8,
+     17
+    ],
+    "bh": [
+     2,
+     18
+    ],
+    "blade": -12.0,
+    "coat": 4,
+    "scarf": 192.0,
+    "eyes": "wince",
+    "fx": "none",
+    "head": [
+     0,
+     0
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     57.0,
+     98.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       54.05,
+       97.48
+      ],
+      "knee": [
+       63.05,
+       116.45
+      ],
+      "ankle": [
+       47,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       59.95,
+       98.52
+      ],
+      "knee": [
+       77.82,
+       109.56
+      ],
+      "ankle": [
+       73,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       59.72,
+       71.06
+      ],
+      "elbow": [
+       52.24,
+       81.7
+      ],
+      "hand": [
+       61.72,
+       89.06
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       64.47,
+       72.92
+      ],
+      "elbow": [
+       61.3,
+       85.52
+      ],
+      "hand": [
+       72.47,
+       89.92
+      ],
+      "stretch": 0.0
+     }
+    },
+    "blade": {
+     "grip": [
+      72.47,
+      89.92
+     ],
+     "tip": [
+      101.81,
+      83.68
+     ],
+     "deg": -12.0
+    }
+   },
+   "runtimeCell": 20
+  },
+  "defeat-buckle": {
+   "params": {
+    "pel": [
+     -4,
+     10
+    ],
+    "lean": 18.0,
+    "feet": [
+     [
+      48,
+      130
+     ],
+     [
+      74,
+      130
+     ]
+    ],
+    "fh": [
+     6,
+     20
+    ],
+    "bh": [
+     3,
+     20
+    ],
+    "blade": 60.0,
+    "coat": 3,
+    "scarf": 188.0,
+    "eyes": "wince",
+    "fx": "none",
+    "head": [
+     0,
+     0
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     58.0,
+     102.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       55.15,
+       101.07
+      ],
+      "knee": [
+       65.94,
+       119.09
+      ],
+      "ankle": [
+       48,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       60.85,
+       102.93
+      ],
+      "knee": [
+       80.6,
+       110.07
+      ],
+      "ankle": [
+       74,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       64.44,
+       75.7
+      ],
+      "elbow": [
+       58.77,
+       87.4
+      ],
+      "hand": [
+       67.44,
+       95.7
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       68.89,
+       78.2
+      ],
+      "elbow": [
+       65.48,
+       90.75
+      ],
+      "hand": [
+       74.89,
+       98.2
+      ],
+      "stretch": 0.0
+     }
+    },
+    "blade": {
+     "grip": [
+      74.89,
+      98.2
+     ],
+     "tip": [
+      89.89,
+      124.18
+     ],
+     "deg": 60.0
+    }
+   },
+   "runtimeCell": 21
+  },
+  "defeat-knee": {
+   "params": {
+    "pel": [
+     -3,
+     22
+    ],
+    "lean": 26.0,
+    "feet": [
+     [
+      40,
+      130
+     ],
+     [
+      74,
+      130
+     ]
+    ],
+    "fh": [
+     12,
+     22
+    ],
+    "bh": [
+     8,
+     20
+    ],
+    "blade": 80.0,
+    "coat": 2,
+    "scarf": 186.0,
+    "eyes": "shut",
+    "fx": "none",
+    "head": [
+     0,
+     0
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     59.0,
+     114.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       56.3,
+       112.68
+      ],
+      "knee": [
+       59.9,
+       131.0
+      ],
+      "ankle": [
+       40.9,
+       131.0
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       61.7,
+       115.32
+      ],
+      "knee": [
+       82.17,
+       110.66
+      ],
+      "ankle": [
+       74,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       69.04,
+       88.86
+      ],
+      "elbow": [
+       67.37,
+       101.75
+      ],
+      "hand": [
+       77.04,
+       108.86
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       73.09,
+       91.95
+      ],
+      "elbow": [
+       79.32,
+       103.36
+      ],
+      "hand": [
+       85.09,
+       113.95
+      ],
+      "stretch": 0.06
+     }
+    },
+    "blade": {
+     "grip": [
+      85.09,
+      113.95
+     ],
+     "tip": [
+      90.3,
+      143.49
+     ],
+     "deg": 80.0
+    }
+   },
+   "runtimeCell": 22
+  },
+  "defeat-down": {
+   "params": {
+    "pel": [
+     -2,
+     30
+    ],
+    "lean": 40.0,
+    "feet": [
+     [
+      36,
+      130
+     ],
+     [
+      66,
+      130
+     ]
+    ],
+    "fh": [
+     16,
+     18
+    ],
+    "bh": [
+     12,
+     18
+    ],
+    "blade": 6.0,
+    "coat": 2,
+    "scarf": 184.0,
+    "eyes": "shut",
+    "fx": "none",
+    "head": [
+     0,
+     2
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     60.0,
+     122.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       57.7,
+       120.07
+      ],
+      "knee": [
+       63.98,
+       131.0
+      ],
+      "ankle": [
+       44.98,
+       131.0
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       62.3,
+       123.93
+      ],
+      "knee": [
+       78.12,
+       131.0
+      ],
+      "ankle": [
+       59.12,
+       131.0
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       75.82,
+       100.03
+      ],
+      "elbow": [
+       76.94,
+       112.98
+      ],
+      "hand": [
+       87.82,
+       118.03
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       79.01,
+       104.01
+      ],
+      "elbow": [
+       84.85,
+       115.63
+      ],
+      "hand": [
+       95.01,
+       122.01
+      ],
+      "stretch": 0.0
+     }
+    },
+    "blade": {
+     "grip": [
+      95.01,
+      122.01
+     ],
+     "tip": [
+      124.85,
+      125.15
+     ],
+     "deg": 6.0
+    }
+   },
+   "runtimeCell": 23
+  },
+  "victory-flourish": {
+   "params": {
+    "pel": [
+     0,
+     -1
+    ],
+    "lean": -4.0,
+    "feet": [
+     [
+      51,
+      130
+     ],
+     [
+      77,
+      130
+     ]
+    ],
+    "fh": [
+     8,
+     -12
+    ],
+    "bh": [
+     -2,
+     18
+    ],
+    "blade": -70.0,
+    "coat": -1,
+    "scarf": 150.0,
+    "eyes": "open",
+    "fx": "flare",
+    "head": [
+     0,
+     0
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     62.0,
+     91.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       59.01,
+       91.21
+      ],
+      "knee": [
+       61.84,
+       112.02
+      ],
+      "ankle": [
+       51,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       64.99,
+       90.79
+      ],
+      "knee": [
+       75.34,
+       109.07
+      ],
+      "ankle": [
+       77,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       58.12,
+       64.21
+      ],
+      "elbow": [
+       65.6,
+       74.84
+      ],
+      "hand": [
+       56.12,
+       82.21
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       63.18,
+       64.85
+      ],
+      "elbow": [
+       76.13,
+       63.78
+      ],
+      "hand": [
+       71.18,
+       52.85
+      ],
+      "stretch": 0.0
+     }
+    },
+    "blade": {
+     "grip": [
+      71.18,
+      52.85
+     ],
+     "tip": [
+      81.44,
+      24.66
+     ],
+     "deg": -70.0
+    }
+   },
+   "runtimeCell": null
+  },
+  "victory-hold": {
+   "params": {
+    "pel": [
+     0,
+     0
+    ],
+    "lean": -2.0,
+    "feet": [
+     [
+      53,
+      130
+     ],
+     [
+      75,
+      130
+     ]
+    ],
+    "fh": [
+     -1,
+     -4
+    ],
+    "bh": [
+     4,
+     14
+    ],
+    "blade": -150.0,
+    "coat": 0,
+    "scarf": 158.0,
+    "eyes": "open",
+    "fx": "none",
+    "head": [
+     0,
+     0
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     62.0,
+     92.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       59.0,
+       92.1
+      ],
+      "knee": [
+       64.44,
+       112.39
+      ],
+      "ankle": [
+       53,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       65.0,
+       91.9
+      ],
+      "knee": [
+       77.04,
+       109.1
+      ],
+      "ankle": [
+       75,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       59.06,
+       65.09
+      ],
+      "elbow": [
+       51.55,
+       75.7
+      ],
+      "hand": [
+       63.06,
+       79.09
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       64.09,
+       65.91
+      ],
+      "elbow": [
+       51.25,
+       63.87
+      ],
+      "hand": [
+       63.09,
+       61.91
+      ],
+      "stretch": 0.0
+     }
+    },
+    "blade": {
+     "grip": [
+      63.09,
+      61.91
+     ],
+     "tip": [
+      37.11,
+      46.91
+     ],
+     "deg": -150.0
+    }
+   },
+   "runtimeCell": null
+  }
+ },
+ "source": {
+  "file": "tools/rpg-2-star-ocean-the-second_protagonist-male_combat-static-and-actions-author_unapproved-v01_20261021-120000-b7e2c4d1.py",
+  "sha256TextLf": "9ca4dc9d98826f2daa4f804ccaef8f857ee76c35e12bfd56a6341f0c1e10eb78",
+  "textHashNormalization": "sha256-text-lf-v1 (CRLF->LF)"
+ },
+ "files": {
+  "attack-contact.ora": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_attack-contact-layered_unapproved-v01_20261021-120000-07f16311.ora",
+   "sha256": "d852c3df19cc8ba34cfd229615f76c26b3199a7b3bb4d24d4d74ab083a1c55f7"
+  },
+  "attack-contact.png": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_attack-contact-native136_unapproved-v01_20261021-120000-a2523418.png",
+   "sha256": "28de03a7024d83286d7ff32053785bef9f933d43e92c6944ec16a0febb4f1e85"
+  },
+  "attack-contact.pxo": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_attack-contact-editable_unapproved-v01_20261021-120000-2ed4a662.pxo",
+   "sha256": "d01acbcaa0d5638ba364f6293e00525312f9e9ba678c673f5896da96d1a56f12"
+  },
+  "attack-follow.ora": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_attack-follow-layered_unapproved-v01_20261021-120000-d98f2d69.ora",
+   "sha256": "a072fe0b5e6420e837a541727edf3ac684c52d4a59f4513b3f592506834057db"
+  },
+  "attack-follow.png": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_attack-follow-native136_unapproved-v01_20261021-120000-453c583c.png",
+   "sha256": "48d39511eb15570fa9b62dd3cb238c6296114d1339118b91f15fe673428be475"
+  },
+  "attack-follow.pxo": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_attack-follow-editable_unapproved-v01_20261021-120000-feaab9d8.pxo",
+   "sha256": "f7cc7cba9dc3613a97c76b4f7283d8a79cc9ad8c74b9a48ccc409ebe3655b63b"
+  },
+  "attack-recover.ora": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_attack-recover-layered_unapproved-v01_20261021-120000-15722761.ora",
+   "sha256": "28c8fb68591743e48c79259debf47af255ecf01960b863f9b190bf029bd74509"
+  },
+  "attack-recover.png": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_attack-recover-native136_unapproved-v01_20261021-120000-479b355f.png",
+   "sha256": "f8d7bb4f070e98aadc4fce80ad1d1949e16b38f4a645f319b78ba1213eb6540b"
+  },
+  "attack-recover.pxo": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_attack-recover-editable_unapproved-v01_20261021-120000-cfc705b8.pxo",
+   "sha256": "577b5bb432cc045733600af8c5615f3b8b78c351a743404757ff17611714577c"
+  },
+  "attack-strike.ora": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_attack-strike-layered_unapproved-v01_20261021-120000-7eb90a73.ora",
+   "sha256": "2b41bd3d0517b1188146ff6d1b3910ca690d7b3276b9f994926b42d278181c1a"
+  },
+  "attack-strike.png": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_attack-strike-native136_unapproved-v01_20261021-120000-3282c2cb.png",
+   "sha256": "d752e20ff02ee9c832b58bc43c8245c9d4224a0e3b71a2bd45c4db29c7b4ef10"
+  },
+  "attack-strike.pxo": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_attack-strike-editable_unapproved-v01_20261021-120000-35f4bf73.pxo",
+   "sha256": "74aa974d571230885109ebf120089a8a65b6ae74cd9f8ef9de90ff1b7f18049b"
+  },
+  "attack-windup.ora": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_attack-windup-layered_unapproved-v01_20261021-120000-eacc2cc5.ora",
+   "sha256": "cbef5ef7555ff69826e53acbac1d1f6455f1e4809cf5f0792d969ee36306d704"
+  },
+  "attack-windup.png": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_attack-windup-native136_unapproved-v01_20261021-120000-77e09c4e.png",
+   "sha256": "c4a00eb9cc21d85c3efa9f504f264f769b7e497e4d477033d16d4479d1abde5c"
+  },
+  "attack-windup.pxo": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_attack-windup-editable_unapproved-v01_20261021-120000-a4feaa61.pxo",
+   "sha256": "c21588c2b81bb89c39566bde2fb002f4516beba849b23adfdfc7f3387ec58109"
+  },
+  "defeat-buckle.ora": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_defeat-buckle-layered_unapproved-v01_20261021-120000-99cc1cd9.ora",
+   "sha256": "6087e43da993c4386b2dc55a1bec2e5bcf66c6f2d6248f634f27095f40a4cd70"
+  },
+  "defeat-buckle.png": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_defeat-buckle-native136_unapproved-v01_20261021-120000-f5b6b8cd.png",
+   "sha256": "b139099de55f221c5efa841b25a76f6e1145b233e512130ebd4b9f1bcbd6f310"
+  },
+  "defeat-buckle.pxo": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_defeat-buckle-editable_unapproved-v01_20261021-120000-fd0cc629.pxo",
+   "sha256": "eae859bc1995874aa4ada929546a34d6dab4c75cdcd377608b87e7a58449831b"
+  },
+  "defeat-down.ora": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_defeat-down-layered_unapproved-v01_20261021-120000-0cb27de1.ora",
+   "sha256": "cb0089846581d8492c72eef06a3ab382c0f7c9a70d8da276bcfe04344a2bb389"
+  },
+  "defeat-down.png": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_defeat-down-native136_unapproved-v01_20261021-120000-8dc43c43.png",
+   "sha256": "5aed4ba24c0e69a56a47492481dbe88191268a035436026b2b7ef08fa3997a43"
+  },
+  "defeat-down.pxo": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_defeat-down-editable_unapproved-v01_20261021-120000-146e7584.pxo",
+   "sha256": "824632404eaa52b1dd41c20325cf450ec05594ba5b3b4749911696834c7135e4"
+  },
+  "defeat-knee.ora": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_defeat-knee-layered_unapproved-v01_20261021-120000-848bb896.ora",
+   "sha256": "7477ad4982458e74a09318a374320158caf82f4e547986c9e5fc254b88fbd9ca"
+  },
+  "defeat-knee.png": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_defeat-knee-native136_unapproved-v01_20261021-120000-625b8f6d.png",
+   "sha256": "bc19b9d2ae357f0b86e48b55abd076d50993aadab1a84f0fa8d85bbda7914cbd"
+  },
+  "defeat-knee.pxo": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_defeat-knee-editable_unapproved-v01_20261021-120000-c2ce7890.pxo",
+   "sha256": "0fefe7bbdf7c57afc907eddb8cc943aa1a5d28547bc822b9a4ce1e0ab99aa55e"
+  },
+  "dodge-hop.ora": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_dodge-hop-layered_unapproved-v01_20261021-120000-ec8c66a1.ora",
+   "sha256": "e0fc43339c47be673ce214969548853013a8d27a20467ed891a216b7b4827210"
+  },
+  "dodge-hop.png": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_dodge-hop-native136_unapproved-v01_20261021-120000-af5d35c8.png",
+   "sha256": "d8082fdad918e25d31fd0eba4a6e07605d8a760f14107c62c785b7fe5db99be6"
+  },
+  "dodge-hop.pxo": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_dodge-hop-editable_unapproved-v01_20261021-120000-638d4498.pxo",
+   "sha256": "e4c0bbe8cc98e104885bced9d2a6670de38a5c54fe7ca1bb2dfa8efdd20395e8"
+  },
+  "dodge-land.ora": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_dodge-land-layered_unapproved-v01_20261021-120000-f6ae9556.ora",
+   "sha256": "585ad67e650ca6fea06a88b15e649614a4b323f4141bdb8d7a72b78174a704a2"
+  },
+  "dodge-land.png": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_dodge-land-native136_unapproved-v01_20261021-120000-cac7945a.png",
+   "sha256": "6728d06f9b1bb31c5a4003d857e821bd08b7c95633e56b00761a453cd416c101"
+  },
+  "dodge-land.pxo": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_dodge-land-editable_unapproved-v01_20261021-120000-fd493733.pxo",
+   "sha256": "b4b21ec704437afab07d30daf315d15a857d212959bb850a0529e3845f0e4101"
+  },
+  "guard-hold.ora": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_guard-hold-layered_unapproved-v01_20261021-120000-1b18bf9c.ora",
+   "sha256": "15167fc922b3b7754d8acaf09b80ab0170a24dc5be19e3c116e71fab484484be"
+  },
+  "guard-hold.png": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_guard-hold-native136_unapproved-v01_20261021-120000-7954b2c2.png",
+   "sha256": "5adea3b7518e4e1f5333a138e6d81ad3eaad3da9668e137c975d373260ab4839"
+  },
+  "guard-hold.pxo": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_guard-hold-editable_unapproved-v01_20261021-120000-4f7ee1df.pxo",
+   "sha256": "d35666ce3504f56d22a4f0a683a9ae8d775098450b7437c112e89d8780163b7c"
+  },
+  "guard-in.ora": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_guard-in-layered_unapproved-v01_20261021-120000-e781ff92.ora",
+   "sha256": "ecf2fab6bd3072bbdb972e61cf3d4ec11fd3d10cc854fcb573788047f0b4ffe5"
+  },
+  "guard-in.png": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_guard-in-native136_unapproved-v01_20261021-120000-4d8606c1.png",
+   "sha256": "c3211c3464aee7c6d3854922766266305085ba3541eb193ad5037b3fd02d81e4"
+  },
+  "guard-in.pxo": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_guard-in-editable_unapproved-v01_20261021-120000-ae5c1e5c.pxo",
+   "sha256": "45b2719f03df4346ff79afc0d73a726cc1b704b039967b1a60b36654a8d8be83"
+  },
+  "hit-recoil.ora": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_hit-recoil-layered_unapproved-v01_20261021-120000-a17aac9d.ora",
+   "sha256": "f3e5bb3a4ed534e68781a5e6fd0c5d48cfc57e429f06b03ab58d5ef5c658ec84"
+  },
+  "hit-recoil.png": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_hit-recoil-native136_unapproved-v01_20261021-120000-9bd5ecd8.png",
+   "sha256": "64e2d6224d60fcdd0b721aacba225d3ca66fa4b88c098a2684fe6f24fd69fee1"
+  },
+  "hit-recoil.pxo": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_hit-recoil-editable_unapproved-v01_20261021-120000-37680eee.pxo",
+   "sha256": "bed34d7a3cdb2a084622fbce870438db9fed7661bb503be5f210338b2ecd5a61"
+  },
+  "hit-stagger.ora": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_hit-stagger-layered_unapproved-v01_20261021-120000-b60c4937.ora",
+   "sha256": "7f41106b3f9309083037b3fe8f8f37334775b6132665a98f10e85135bddad523"
+  },
+  "hit-stagger.png": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_hit-stagger-native136_unapproved-v01_20261021-120000-c65ff4e6.png",
+   "sha256": "fb5c543baaeb2622f9ec966bdb50ef244c0aaeb33cedd1fa638b51f1ed057912"
+  },
+  "hit-stagger.pxo": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_hit-stagger-editable_unapproved-v01_20261021-120000-614e98ef.pxo",
+   "sha256": "d311505ecfd94e4cad49391d9ff8159e86cec2df3e59dd28bc4dc161e855c514"
+  },
+  "idle-a.ora": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_idle-a-layered_unapproved-v01_20261021-120000-a94b8590.ora",
+   "sha256": "344cfad1063769003e4377210e6a51a7cdb14126961adc48d5a7da715b4d4e49"
+  },
+  "idle-a.png": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_idle-a-native136_unapproved-v01_20261021-120000-aaa31de4.png",
+   "sha256": "a22d274047198420386df27ca8fd2c26d883f470e1307df704440509f498c0c6"
+  },
+  "idle-a.pxo": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_idle-a-editable_unapproved-v01_20261021-120000-c270ee30.pxo",
+   "sha256": "6223ee828099b75676d32c09a2bf6346de6037842f526ccf5c6376fe5b3644f0"
+  },
+  "idle-b.ora": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_idle-b-layered_unapproved-v01_20261021-120000-f5ff3012.ora",
+   "sha256": "6f94e1b5c1e41d172f89232f96dc2496369e76883c20e749deb69ded432f02d4"
+  },
+  "idle-b.png": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_idle-b-native136_unapproved-v01_20261021-120000-765d46f5.png",
+   "sha256": "12c9e8a3a0afb1bcb0fe6a7c477926f8da92f78f2732fba9244a3ca80b0297bc"
+  },
+  "idle-b.pxo": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_idle-b-editable_unapproved-v01_20261021-120000-e5710838.pxo",
+   "sha256": "e6fca37401d87d6b6e33bd3e7211536dbe4995932834b5d63940c06e7e4eed64"
+  },
+  "manifest": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_runtime-spritesheet-manifest_unapproved-v01_20261021-120000-82abb5b6.json",
+   "sha256": "24d30c03faca73b868c8f3443fd91a478bf8eaf011fa72a5d12dba8f367e228f"
+  },
+  "move-a.ora": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_move-a-layered_unapproved-v01_20261021-120000-4a285eda.ora",
+   "sha256": "a9e9b1512cd01f96456a3febfd7c536ba29140cc45a431e772d8a66978850ae3"
+  },
+  "move-a.png": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_move-a-native136_unapproved-v01_20261021-120000-d613cddc.png",
+   "sha256": "6a24b91e64973851a11959f9767243051514b574715b533e5aecc012ab95d3cd"
+  },
+  "move-a.pxo": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_move-a-editable_unapproved-v01_20261021-120000-ff8b84f7.pxo",
+   "sha256": "701abe74d63514327bcc0096cd5012b1d4c61a7512112fd891446a5575b454ec"
+  },
+  "move-b.ora": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_move-b-layered_unapproved-v01_20261021-120000-e18aefde.ora",
+   "sha256": "51f587ee4bfd3d93e1720ab20556f7e7f572d50e22cfa925c5f958d050862e8f"
+  },
+  "move-b.png": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_move-b-native136_unapproved-v01_20261021-120000-b0d55821.png",
+   "sha256": "821687db05a40d1e20175650d493d8e07fc504d7a9678fb42fe1a1fd59a5aae2"
+  },
+  "move-b.pxo": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_move-b-editable_unapproved-v01_20261021-120000-f712e8d4.pxo",
+   "sha256": "c82f5264f06db2442b10f33aa3b85db62ac564626b6a675e49d7cd7449e0686a"
+  },
+  "move-c.ora": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_move-c-layered_unapproved-v01_20261021-120000-d40013d8.ora",
+   "sha256": "d051f5ea6a2df6eebc6566554fbe34d18af78dee70e23e48e8f027005d522e99"
+  },
+  "move-c.png": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_move-c-native136_unapproved-v01_20261021-120000-a35960cb.png",
+   "sha256": "b74bb05cfb8af03efa3ec635e13e0a971b1504906dc80f09ff39f78ad9f1553f"
+  },
+  "move-c.pxo": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_move-c-editable_unapproved-v01_20261021-120000-bf753f83.pxo",
+   "sha256": "5ba34c82cfde1e0518e6c1aabf2d536199514a6eaac1e40bbfcb367138aa7a23"
+  },
+  "move-d.ora": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_move-d-layered_unapproved-v01_20261021-120000-8205b8cb.ora",
+   "sha256": "694c94ac4c77456237343c0ffc7ab1fde158e4e3ca86316cbee8c20da3091600"
+  },
+  "move-d.png": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_move-d-native136_unapproved-v01_20261021-120000-3792eb97.png",
+   "sha256": "c61020200d0990006506735770d59fccb52d7cafcabc7046a59135f3945b06bd"
+  },
+  "move-d.pxo": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_move-d-editable_unapproved-v01_20261021-120000-d9f367a6.pxo",
+   "sha256": "b3c779850eef89194ff6f2995a788cead19f893d03a839dd686c58c7b210dcb5"
+  },
+  "sheet": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_runtime-spritesheet_unapproved-v01_20261021-120000-a376c0d6.png",
+   "sha256": "3e835ac49370d21d00ea9d7bc64d1e552a10f6f21a2f8f8ef6a7a1c5a1b7e0ff"
+  },
+  "skill-coil.ora": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_skill-coil-layered_unapproved-v01_20261021-120000-cae32b48.ora",
+   "sha256": "5f8f10e6d52d6fd71358b2bd4e18d855a8a1035dca4ddc14caf95beccddbd243"
+  },
+  "skill-coil.png": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_skill-coil-native136_unapproved-v01_20261021-120000-867db1ee.png",
+   "sha256": "cb01f8274b566796b0b369ca6c871cdddb20dc32480e374a173f6247695ee0fb"
+  },
+  "skill-coil.pxo": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_skill-coil-editable_unapproved-v01_20261021-120000-4bcb876f.pxo",
+   "sha256": "796a829a1e4435301311282497494792b97dd381c9afe0956d28d8eecc1d50d8"
+  },
+  "skill-flare.ora": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_skill-flare-layered_unapproved-v01_20261021-120000-2451027e.ora",
+   "sha256": "05ebf6c7c345be95bb5960369d466febb7d160bfd99d1c365285ce2d1fab85ee"
+  },
+  "skill-flare.png": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_skill-flare-native136_unapproved-v01_20261021-120000-580b4f70.png",
+   "sha256": "e13324c0bbff4d9ca9b3567024b441e830e1d8701ce1bd22462e6f0fddb6e8b0"
+  },
+  "skill-flare.pxo": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_skill-flare-editable_unapproved-v01_20261021-120000-87418493.pxo",
+   "sha256": "d553bd2b1b8e4d2efdbe5676d241cccbb099ca381cbd9b7bfab62f108d89f901"
+  },
+  "skill-raise.ora": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_skill-raise-layered_unapproved-v01_20261021-120000-7e2b4012.ora",
+   "sha256": "1a0786e0b7469727bf1e9289bde124e3e94b0af1575e34f13397193f16781020"
+  },
+  "skill-raise.png": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_skill-raise-native136_unapproved-v01_20261021-120000-bd4ec381.png",
+   "sha256": "387d0b6206c38f9afdab749147cb2ad494f47da208975d991fc46f66aebe307c"
+  },
+  "skill-raise.pxo": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_skill-raise-editable_unapproved-v01_20261021-120000-7eee6358.pxo",
+   "sha256": "ffd45a87b9d932db03bde1ff7f617104701a31638c85c1be87709bf7ded24809"
+  },
+  "skill-settle.ora": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_skill-settle-layered_unapproved-v01_20261021-120000-af29bb93.ora",
+   "sha256": "68f85ed4f166d867d60b1558fe98a421edde13960ed022afdf0120ac7d0c2bb5"
+  },
+  "skill-settle.png": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_skill-settle-native136_unapproved-v01_20261021-120000-bc8815a4.png",
+   "sha256": "0f2506a46096fa680714efe24bade0ab53a25e89f608f6ee756537a0416f2671"
+  },
+  "skill-settle.pxo": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_skill-settle-editable_unapproved-v01_20261021-120000-f753330a.pxo",
+   "sha256": "def5d5d46a548edadd1164d8507074e3327034590eef334c599c15dbebe4c93e"
+  },
+  "still.ora": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_battle-still-layered_unapproved-v01_20261021-120000-7eba8adb.ora",
+   "sha256": "344cfad1063769003e4377210e6a51a7cdb14126961adc48d5a7da715b4d4e49"
+  },
+  "still.png": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_battle-still-native136_unapproved-v01_20261021-120000-45939436.png",
+   "sha256": "a22d274047198420386df27ca8fd2c26d883f470e1307df704440509f498c0c6"
+  },
+  "still.pxo": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_battle-still-editable_unapproved-v01_20261021-120000-a0efa498.pxo",
+   "sha256": "88a49037e20fc31ae21ec206e29b4e63bd63f9286d15051bffb8ecb1ec84e6be"
+  },
+  "victory-flourish.ora": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_victory-flourish-layered_unapproved-v01_20261021-120000-cc061446.ora",
+   "sha256": "97dbd1ca7d948ece1471e2d88af24b605e3734c4ca88b7f5535281c0f49c7d68"
+  },
+  "victory-flourish.png": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_victory-flourish-native136_unapproved-v01_20261021-120000-67db62a8.png",
+   "sha256": "66dd169c10099e2e55c9038f42c446eaa6546805235ab92304518ad81bbaf9bf"
+  },
+  "victory-flourish.pxo": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_victory-flourish-editable_unapproved-v01_20261021-120000-539093ad.pxo",
+   "sha256": "526b66d898d77e4eefc9ffc4ecb4d2efd09c31ad2514916736a166c8d6e87397"
+  },
+  "victory-hold.ora": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_victory-hold-layered_unapproved-v01_20261021-120000-adb8223b.ora",
+   "sha256": "76fbc9f7bb441ae09c0fee77be60167a013fd8830317ce3a415e388ce73261ee"
+  },
+  "victory-hold.png": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_victory-hold-native136_unapproved-v01_20261021-120000-3a86e432.png",
+   "sha256": "32fdcb0525a01c18461701e8d64a68ffc9207fbe2ed7a64c69a57bdf8f1d9169"
+  },
+  "victory-hold.pxo": {
+   "name": "rpg-2-star-ocean-the-second_protagonist-male-combat_victory-hold-editable_unapproved-v01_20261021-120000-4bf7f96f.pxo",
+   "sha256": "07d449c1836f553c1a5e5eb3c6132176ad427d3e99283ef6707b9ef7a9c06530"
+  }
+ },
+ "artApproved": false,
+ "motionApproved": false,
+ "runtimeDefaultChanged": false,
+ "guiSaveAsVerified": false
+}
