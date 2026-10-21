@@ -344,3 +344,7 @@ Report completed/integrated work, real limitations, separate before/after meters
 Suggested opening, **only after actually checking these facts**:
 
 > I verified the canonical checkout, ledger and account availability. The heroine already runs as the ordinary-game default. I will first finish compatible four-direction breathing idle while preserving movement/combat. Starting production54.6%, inspection18.1%, creator approval7.8%. I will not start a new roster batch or count pending review as unfinished production.
+
+## 13. Complete downloadable asset handoff (added after this document)
+
+The source/runtime/native/reference assets have a dedicated content-deduplicated index and GitHub download bundles. Read [the asset handoff guide](../../assets/handoff/README.md), then run its fetch/verify command. It maps existing repository files and historical archives, with original paths, SHA-256 and approval-scope references. The guide distinguishes packaging from confirmed release publication; verify the release/proof status rather than assuming a prepared ZIP is online.
