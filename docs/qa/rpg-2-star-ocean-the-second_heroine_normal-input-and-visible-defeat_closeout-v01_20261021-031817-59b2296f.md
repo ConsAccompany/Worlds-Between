@@ -27,3 +27,7 @@ Remaining observable art issue: dodge retains a near-idle upright silhouette whi
 - Initial root default-candidate run refused a missing-sheet resource after producer import-sidecar restoration. Strict native import passed, then all38 candidate predicates passed. Refused run retained locally.
 - Claude hit the bounded660s task deadline, not subscription quota. Codex finished candidate validation. Producer future-labelled evidence not published; root-created source/probe/evidence names use actual timestamps.
 - No denominator changes or points for version/test counts. Default integration milestones remain in_progress. Artistic acceptance and both timed human playtests remain separate.
+
+## Closeout meters
+
+Production54.5→54.5 (+0.0pp); inspection16.7→17.2 (+0.5pp,35/204); creator7.8→7.8 (+0.0pp,19/244). The existing combat-set visual review is now recorded with changes_requested. No point awarded per screenshot, test or version. Source/evidence commit a424c8b3e91f6161637d3b5ecdb6e12fcdb316f7; selected100 working/staged files matched raw hashes. CRLF is recognized only on selected raw evidence while other whitespace checks remain enabled. The prepared patch is zero-context; verify before-byte pins and use --unidiff-zero only after creator authorization.
