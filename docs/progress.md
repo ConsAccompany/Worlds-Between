@@ -1,6 +1,15 @@
 # Open World Pixel RPG Implementation Progress
 
-## Latest completed batch — 2026-10-21: authorized male defaults
+## Latest completed batch — 2026-10-21: Zhao Ling exploration source set
+
+Production **55.7% →56.4% (+0.7pp)**. Content493→513/1881 (26.2%→27.3%); coding111/111 remains100%. Inspection **18.1% →18.1%**; creator approval **7.8% →7.8%**. Frozen baseline unchanged.
+
+Completed8existing source tasks: west/north/east statics, four-direction idle, four walk/stop banks. Existing south neutral stays byte-exact. Four editable41-frame Pixelorama sources, four layered ORAs and164 separate PNGs are committed; deterministic341-file rebuild and164-frame native export equality pass, with16 shader diagnostic lines explicitly retained. Independent2676 source checks and EN30/ZH60actual Input571/1027checks pass through a labelled test-only avatar injection. Ordinary roster/defaults and all255 protected files remain unchanged. Stop/slip and artistic limitations are recorded, not silently approved. [Source closeout](qa/rpg-2-star-ocean-the-second_zhao-ling_exploration-source-closeout_v01_20261021-213558-83a6c19e.md).
+
+Next: Zhao Ling firearm combat static and action sources. Cosmetic refinements remain deferred.
+
+
+## Prior completed batch — 2026-10-21: authorized male defaults
 
 Production **55.6% →55.7% (+0.1pp)**. Content489→493/1881 (26.0%→26.2%); coding111/111 remains100%. Inspection **18.1% →18.1%** and creator approval **7.8% →7.8%** remain separate. Frozen baseline unchanged.
 
