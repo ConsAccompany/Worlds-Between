@@ -4,7 +4,7 @@
   "title": "世界之间",
   "englishTitle": "Worlds Between",
   "edition": "设计基线 v0.2 · 2026-10-15 创作者决定",
-  "updatedAt": "2026-10-21T23:04:38.937163+00:00",
+  "updatedAt": "2026-10-21T23:12:39.384867+00:00",
   "note": "规则以玩家确认的设计稿为基线，并已并入 2026-10-15 创作者决定；人物姓名与外观是待审提案，具体剧情留待后续设计。",
   "pitch": "从地下社区走出的旅人，以好奇心探索多元文明，招募伙伴，并成为不同世界认知差异的桥梁。",
   "pillars": [
@@ -7918,19 +7918,19 @@
     "combinedWiringCheck": "297/297 on39f252e, clean raw log; actual Chinese victory inspected."
   },
   "latestTaskProgress": {
-    "id": "zhao-motion-display",
+    "id": "zhao-default-adoption",
     "status": "completed",
     "title": {
-      "zh": "赵铃动态预览显示修复",
-      "en": "Zhao motion preview delivery"
+      "zh": "赵铃 MVP 默认接入",
+      "en": "Zhao MVP default adoption"
     },
-    "startedAt": "2026-10-21T23:01:55.058Z",
-    "sourceBefore": "20e6addab49928f1eb91da7272b906bfa09f643c",
+    "startedAt": "2026-10-21T23:09:02.008Z",
+    "sourceBefore": "9a64115ab9186e82308c88511d2da50237402330",
     "meters": {
       "production": {
         "before": 56.7,
-        "after": 56.7,
-        "changePercentagePoints": 0
+        "after": 56.8,
+        "changePercentagePoints": 0.1
       },
       "inspection": {
         "before": 18.1,
@@ -7943,10 +7943,10 @@
         "changePercentagePoints": 0
       }
     },
-    "completedAt": "2026-10-21T23:02:58.759Z",
-    "sourceAfter": "20e6addab49928f1eb91da7272b906bfa09f643c",
+    "completedAt": "2026-10-21T23:12:18.124Z",
+    "sourceAfter": "b99ce437673ee04d44e3bfb297e14f9c133fcfc9",
     "evidence": [
-      "docs/qa/rpg-2-star-ocean-the-second_zhao-ling_motion-review-display_closeout_20261021-190257-8cfa6292.md"
+      "docs/qa/rpg-2-star-ocean-the-second_zhao-ling_mvp-default-adoption_closeout_20261021-191203-19d8117b.md"
     ]
   },
   "progressReporting": {
@@ -8723,6 +8723,38 @@
         "docs/qa/rpg-2-star-ocean-the-second_zhao-playable-path_opt-in-readiness-closeout_v01_20261021-225457-642566e5.md"
       ],
       "ordinaryDefaultAuthorizationPending": true
+    },
+    {
+      "id": "zhao-motion-display",
+      "status": "completed",
+      "title": {
+        "zh": "赵铃动态预览显示修复",
+        "en": "Zhao motion preview delivery"
+      },
+      "startedAt": "2026-10-21T23:01:55.058Z",
+      "sourceBefore": "20e6addab49928f1eb91da7272b906bfa09f643c",
+      "meters": {
+        "production": {
+          "before": 56.7,
+          "after": 56.7,
+          "changePercentagePoints": 0
+        },
+        "inspection": {
+          "before": 18.1,
+          "after": 18.1,
+          "changePercentagePoints": 0
+        },
+        "approval": {
+          "before": 7.8,
+          "after": 7.8,
+          "changePercentagePoints": 0
+        }
+      },
+      "completedAt": "2026-10-21T23:02:58.759Z",
+      "sourceAfter": "20e6addab49928f1eb91da7272b906bfa09f643c",
+      "evidence": [
+        "docs/qa/rpg-2-star-ocean-the-second_zhao-ling_motion-review-display_closeout_20261021-190257-8cfa6292.md"
+      ]
     }
   ],
   "latestBattleEnvironmentProduction": {
@@ -8952,7 +8984,7 @@
   "mvpCompletionPriority": {
     "creatorInstruction": "Finish missing MVP work; refinements after MVP",
     "heroineBaseline": "technically connected; cosmetic refinements deferred",
-    "next": "Male opt-in playable-path integration; cosmetic refinements deferred",
+    "next": "Select the next missing MVP playable dependency from the canonical ledger; defer cosmetic refinements.",
     "noScoringBaselineChange": true
   },
   "latestMaleExplorationProduction": {
@@ -9041,7 +9073,7 @@
     },
     "southNeutralByteExact": true,
     "testOnlyAvatarInjection": true,
-    "ordinaryDefaultAdopted": false,
+    "ordinaryDefaultAdopted": true,
     "artApproved": false,
     "motionApproved": false,
     "humanPlaytest": false,
@@ -9059,7 +9091,8 @@
     "stillCaptureDimensions": [
       640,
       360
-    ]
+    ],
+    "defaultAdoptionCommit": "b99ce437673ee04d44e3bfb297e14f9c133fcfc9"
   },
   "latestZhaoLingCombatProduction": {
     "completedAt": "2026-10-21T22:11:58.279942+00:00",
@@ -9086,38 +9119,37 @@
       "docs/qa/rpg-2-star-ocean-the-second_zhao-ling-combat_missing-source-set-closeout_v01_20261021-221057-36b3e16d.md",
       "outputs/zcombat26/root/rpg-2-star-ocean-the-second_zhao-ling-combat_root-production-proof_v01_20261021-221030-0c1dfb9d.json"
     ],
-    "ordinaryDefaultAdopted": false,
+    "ordinaryDefaultAdopted": true,
     "artApproved": false,
     "motionApproved": false,
-    "humanPlaytestsAdded": 0
+    "humanPlaytestsAdded": 0,
+    "defaultAdoptionCommit": "b99ce437673ee04d44e3bfb297e14f9c133fcfc9"
   },
   "zhaoPlayablePath": {
-    "status": "opt-in-ready-awaiting-default-authorization",
-    "sourceCommit": "4be53683e9182eb2154fc2e8c296b634fa016222",
-    "completedAt": "2026-10-21T22:56:03.855799+00:00",
-    "owner": "claude + codex",
+    "status": "ordinary-default-integrated",
+    "sourceCommit": "b99ce437673ee04d44e3bfb297e14f9c133fcfc9",
+    "completedAt": "2026-10-21T23:12:39.384867+00:00",
+    "owner": "codex",
     "independentSupport": "deepseek",
     "evidence": [
-      "docs/qa/rpg-2-star-ocean-the-second_zhao-playable-path_opt-in-readiness-closeout_v01_20261021-225457-642566e5.md",
-      "outputs/zpath27/root/rpg-2-star-ocean-the-second_zhao-path_root-readiness-proof_v01_20261021-225417-3905714f.json"
+      "docs/qa/rpg-2-star-ocean-the-second_zhao-ling_mvp-default-adoption_closeout_20261021-191203-19d8117b.md",
+      "outputs/zpath27/adopt-20261021-190923-68fdb2b0/rpg-2-star-ocean-the-second_zhao-ling_default-adoption_root-proof_20261021-191114-4ee445f3.json"
     ],
     "production": {
       "before": 56.7,
-      "after": 56.7,
-      "changePercentagePoints": 0
+      "after": 56.8,
+      "changePercentagePoints": 0.1
     },
-    "normalInputChecks": 196,
-    "parityChecks": 380,
-    "scopeRollbackChecks": 109,
-    "boundaryChecks": 13,
-    "ordinaryDefaultAdopted": false,
+    "normalInputChecks": 155,
+    "boundaryChecks": 30,
+    "ordinaryDefaultAdopted": true,
     "artApproved": false,
     "motionApproved": false,
     "humanPlaytestsAdded": 0,
     "previewLauncher": "tools/rpg-2-star-ocean-the-second_zhao-playable-path_launch-cli_opt-in-v01_20261021-224100-8094fb72.py",
     "note": {
-      "zh": "真实伙伴招募、战斗取胜返回和自动存档重载通过；低生命存档边界验证败北重试。默认更换仍需单独授权，无跟随者。",
-      "en": "Real companion recruit, battle victory/return and autosave reload pass; a declared low-health save fixture covers defeat/retry. Default adoption needs separate authorization; no follower."
+      "zh": "已按创作者授权设为 MVP 默认；普通无预览开关的招募、战斗、返回、自动存档重载及败北重试通过。人物精修后置；无跟随者。",
+      "en": "Creator-authorized MVP defaults integrated; ordinary no-preview recruit/combat/return/autosave and declared defeat/retry pass. Sprite refinement deferred; no follower."
     },
     "creatorFeedback": {
       "at": "2026-10-21T23:04:38.937163+00:00",
@@ -9129,6 +9161,19 @@
       "finalArtApproved": false,
       "evidenceCommit": "3217d4046dd95bfc3e1e1887b84bba676995b592"
     },
-    "spriteRefinementPhase": "post-mvp"
+    "spriteRefinementPhase": "post-mvp",
+    "defaultAuthorization": {
+      "at": "2026-10-21T23:12:39.384867+00:00",
+      "quote": "先设为 MVP 默认，精修后置（推荐）",
+      "scope": "ordinary MVP default use only",
+      "finalArtApproved": false,
+      "finalMotionApproved": false
+    },
+    "priorOptInChecks": {
+      "parityChecks": 380,
+      "scopeRollbackChecks": 109,
+      "sourceCommit": "4be53683e9182eb2154fc2e8c296b634fa016222",
+      "note": "Historical preview checks; current ordinary-default source evidence is separately linked."
+    }
   }
 }

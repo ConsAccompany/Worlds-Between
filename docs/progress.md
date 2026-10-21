@@ -1,6 +1,14 @@
 # Open World Pixel RPG Implementation Progress
 
-## Latest completed batch — 2026-10-21: Zhao companion playable preview
+## Latest completed batch — 2026-10-21: Zhao MVP ordinary defaults
+
+Production **56.7% →56.8% (+0.1pp)**; content524→528/1881. Inspection **18.1% →18.1% (+0.0pp)**; creator approval **7.8% →7.8% (+0.0pp)**. Both existing Zhao default-integration tasks are complete; frozen weights and denominators are unchanged.
+
+The creator authorized current Zhao sprites for ordinary MVP use and deferred refinement. EN male/ZH female ordinary no-preview victory paths55checks each, ZH female declared low-health defeat/retry45checks, and both hero disable/malformed/rollback boundaries15checks each pass.171 character source/runtime files remain exact. No follower, mechanics change, final art/motion approval or human playtest is claimed. Source `b99ce437673ee04d44e3bfb297e14f9c133fcfc9`. [Default-adoption closeout](qa/rpg-2-star-ocean-the-second_zhao-ling_mvp-default-adoption_closeout_20261021-191203-19d8117b.md).
+
+Next: finish missing MVP playable dependencies; keep sprite refinements in the post-MVP backlog.
+
+## Prior completed batch — 2026-10-21: Zhao companion playable preview
 
 Production **56.7% →56.7% (+0.0pp)**; inspection **18.1% →18.1% (+0.0pp)**; creator approval **7.8% →7.8% (+0.0pp)**. The two frozen integration tasks require ordinary default use, so remain in progress until creator authorization. The bounded opt-in path is complete; no scoring criterion or denominator was changed.
 
