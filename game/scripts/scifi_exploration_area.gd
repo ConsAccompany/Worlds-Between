@@ -24,6 +24,9 @@ static var navigation_ui_skin_override := -1
 const CharacterUiPortraits := preload("res://scripts/rpg-2-star-ocean-the-second_character-ui-portraits_helper_v01_20261019-233832-b7c4e912.gd")
 static var character_ui_portraits_override := -1
 var character_ui_portraits: Control = null
+# Opt-in editable Yonkers environment; presentation only, no movement/interaction change.
+const OUTSKIRTS_NATIVE_FLAG := "--yonkers-outskirts-native-v01"
+const OUTSKIRTS_NATIVE_PATH := "res://assets/environments/outskirts-native-v01/rpg-2-star-ocean-the-second_yonkers-outskirts_merged-flat_native13-v01_20261020-200047-3e58269e.png"
 const MOVE_SPEED := 140.0
 const SPAWN := Vector2(82, 260)
 const CITY_SPAWN := Vector2(340, 253)
@@ -58,6 +61,8 @@ const AREA_CONFIG := {
 }
 
 var destination_id := ""
+var outskirts_native_active := false
+var outskirts_native_background: Texture2D
 var hero: Sprite2D
 var city_npc: Sprite2D
 var field_npc: Sprite2D
@@ -129,6 +134,11 @@ func _ready() -> void:
 	enemy_position = config["enemy"]
 	enemy_visible = destination_id != "scifi.city" and not AppState.enemy_cleared_for_return
 	texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
+	if destination_id == "scifi.outskirts" and OS.get_cmdline_user_args().has(OUTSKIRTS_NATIVE_FLAG) and ResourceLoader.exists(OUTSKIRTS_NATIVE_PATH):
+		var candidate := load(OUTSKIRTS_NATIVE_PATH) as Texture2D
+		if candidate != null and candidate.get_size() == Vector2(640, 360):
+			outskirts_native_background = candidate
+			outskirts_native_active = true
 	if destination_id == "scifi.city" and CityHallParkV06.enabled():
 		city_hall_park = CityHallParkV06.new()
 	if city_hall_park != null:
@@ -235,6 +245,8 @@ func _draw() -> void:
 		_draw_city_hotspots()
 		return
 	var background: Texture2D = OUTSKIRTS_BACKGROUND if destination_id == "scifi.outskirts" else RUINS_BACKGROUND
+	if outskirts_native_active and destination_id == "scifi.outskirts":
+		background = outskirts_native_background
 	draw_texture_rect(background, Rect2(0, 0, 640, 360), false)
 	if enemy_visible:
 		_draw_enemy()
@@ -254,6 +266,12 @@ func _draw() -> void:
 
 
 func _draw_field_marker(at: Vector2, color: Color, kind: String) -> void:
+	# Native fixtures provide the physical affordance; retain a small progress indicator beside them.
+	if outskirts_native_active and kind in ["relay", "survey", "assist", "trace"]:
+		var corner := at + Vector2(15, -11)
+		draw_circle(corner, 4.0, Color(0.04, 0.12, 0.16, 0.85))
+		draw_rect(Rect2(corner - Vector2.ONE, Vector2(3, 3)), color)
+		return
 	draw_circle(at, 14.0, Color(0.04, 0.12, 0.16, 0.82))
 	draw_arc(at, 12.0, 0.0, TAU, 26, color, 1.8)
 	match kind:
