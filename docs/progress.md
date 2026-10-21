@@ -1,6 +1,15 @@
 # Open World Pixel RPG Implementation Progress
 
-## Latest completed batch — 2026-10-21: male playable path
+## Latest completed batch — 2026-10-21: authorized male defaults
+
+Production **55.6% →55.7% (+0.1pp)**. Content489→493/1881 (26.0%→26.2%); coding111/111 remains100%. Inspection **18.1% →18.1%** and creator approval **7.8% →7.8%** remain separate. Frozen baseline unchanged.
+
+The creator authorized the new male ordinary-game display. Both existing default-integration tasks are now complete: four-direction exploration/stop and all eight combat actions are selected without test flags or overrides. Canonical EN/ZH victory/defeat514checks, including result/return and save/reload, pass; scope/rollback/explicit-disable16checks pass. No artistic acceptance or human playtest is inferred. [Default closeout](qa/rpg-2-star-ocean-the-second_male-default-adoption_closeout_v01_20261021-211928-6dbf02a1.md).
+
+Next: the missing Zhao Ling four-direction exploration source set. Existing hero cosmetic refinements remain deferred.
+
+
+## Prior completed batch — 2026-10-21: male playable path
 
 Production **55.6% →55.6% (+0.0pp)**. Inspection **18.1% →18.1% (+0.0pp)**; creator approval **7.8% →7.8% (+0.0pp)**. Same frozen baseline.
 
