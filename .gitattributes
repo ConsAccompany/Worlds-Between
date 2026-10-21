@@ -464,3 +464,11 @@ outputs/environments-adopt14/** -text whitespace=cr-at-eol
 tools/rpg-2-star-ocean-the-second_yonkers-outskirts_default-adoption* -text whitespace=cr-at-eol
 tools/rpg-2-star-ocean-the-second_battle-environment_default-adoption* -text whitespace=cr-at-eol
 docs/qa/rpg-2-star-ocean-the-second_accepted-environments_default-adoption* -text whitespace=cr-at-eol
+
+# Heroine set-check raw evidence, including retained failures.
+outputs/hsc-v01/** -text whitespace=cr-at-eol
+tools/rpg-2-star-ocean-the-second_heroine-combat_set-check* -text whitespace=cr-at-eol
+docs/qa/rpg-2-star-ocean-the-second_heroine-combat_* -text whitespace=cr-at-eol
+
+# Preserve intentional trailing space in raw malformed-input test stdout only.
+outputs/hsc-v01/**/*.log -text whitespace=cr-at-eol,-blank-at-eol

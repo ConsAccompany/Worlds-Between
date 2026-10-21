@@ -1,0 +1,3257 @@
+{
+  "schema": "worlds-between.combat-sprite-set-verification/1",
+  "verdict": "fail",
+  "checked_at_utc": "2026-10-21T00:59:23.545829+00:00",
+  "base_revision": "11973af6492ef60a99ca1f2eacb01e12c091ccb9",
+  "python": "3.12.14",
+  "pillow": "12.3.0",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "package": {
+    "directory": "game/data/heroine-sea-combat-v01",
+    "sheet": {
+      "file": "rpg-2-star-ocean-the-second_heroine-sea-combat_spritesheet_v01_20261020-201338-38ecfcb0.png",
+      "sha256": "f55db8cca615d4d64e8c07eb949b375cc6afb7562fc8ab9ac03062d78bd29a60",
+      "size": [
+        816,
+        720
+      ]
+    },
+    "manifest": {
+      "file": "rpg-2-star-ocean-the-second_heroine-sea-combat_spritesheet-manifest_v01_20261020-201338-38ecfcb0.json",
+      "sha256": "6a4c663d859818d8b1714c6485fc927443c316acaa0602547f0c6e367df6df78"
+    },
+    "index": {
+      "file": "rpg-2-star-ocean-the-second_heroine-sea-combat_spritesheet-index_v01_20261020-201338-38ecfcb0.json",
+      "sha256": "1abb5b67b3bf59c02b3c747068789a01509812aee97c105b9f5c15c7a60ffa49"
+    },
+    "provenance": {
+      "file": "rpg-2-star-ocean-the-second_heroine-sea-combat_source-provenance_v01_20261020-201338-38ecfcb0.json",
+      "sha256": "d9d0a1ec0aeac0d83dcf9852b123b4e932d41e0137f4e7b79ec3e2c2cbda4e70"
+    },
+    "verifier": {
+      "file": "tools/rpg-2-star-ocean-the-second_heroine-sea-combat_package-verifier_v01_20261020-201338-38ecfcb0.py",
+      "sha256": "8a07f3e7da68a6f11db6e3506700109016aa74a19f513dc24a382d751e35a12c"
+    }
+  },
+  "checks": [
+    {
+      "id": "package_file_set",
+      "pass": true,
+      "detail": "package contains exactly the four expected files; present=['rpg-2-star-ocean-the-second_heroine-sea-combat_source-provenance_v01_20261020-201338-38ecfcb0.json', 'rpg-2-star-ocean-the-second_heroine-sea-combat_spritesheet-index_v01_20261020-201338-38ecfcb0.json', 'rpg-2-star-ocean-the-second_heroine-sea-combat_spritesheet-manifest_v01_20261020-201338-38ecfcb0.json', 'rpg-2-star-ocean-the-second_heroine-sea-combat_spritesheet_v01_20261020-201338-38ecfcb0.png']"
+    },
+    {
+      "id": "index_schema",
+      "pass": true,
+      "detail": "index schema is 'worlds-between.combat-sprite-set-index/1'"
+    },
+    {
+      "id": "index_sets",
+      "pass": true,
+      "detail": "index sets must be exactly one hero:female key"
+    },
+    {
+      "id": "index_relative_manifest",
+      "pass": true,
+      "detail": "index maps hero:female to the adjacent relative manifest name"
+    },
+    {
+      "id": "index_manifest_resolves",
+      "pass": true,
+      "detail": "index manifest path resolves next to the index"
+    },
+    {
+      "id": "manifest_schema",
+      "pass": true,
+      "detail": "manifest schema is 'worlds-between.combat-sprite-set/1'"
+    },
+    {
+      "id": "manifest_set_id",
+      "pass": true,
+      "detail": "set_id is the package identity"
+    },
+    {
+      "id": "manifest_character",
+      "pass": true,
+      "detail": "character is hero/female"
+    },
+    {
+      "id": "manifest_art_unapproved",
+      "pass": true,
+      "detail": "art_approved=false and motion_approved=false"
+    },
+    {
+      "id": "manifest_not_default",
+      "pass": true,
+      "detail": "default_adoption=false"
+    },
+    {
+      "id": "manifest_art_status",
+      "pass": true,
+      "detail": "art_status explicitly unapproved / motion pending"
+    },
+    {
+      "id": "manifest_sheet_relative",
+      "pass": true,
+      "detail": "sheet is the adjacent relative spritesheet name"
+    },
+    {
+      "id": "manifest_provenance_relative",
+      "pass": true,
+      "detail": "source provenance is the adjacent relative file name"
+    },
+    {
+      "id": "manifest_cell",
+      "pass": true,
+      "detail": "cell_size is [136,144]"
+    },
+    {
+      "id": "manifest_pivot",
+      "pass": true,
+      "detail": "pivot is [64,136]"
+    },
+    {
+      "id": "manifest_pivot_even",
+      "pass": true,
+      "detail": "0.5-scale pivot is even"
+    },
+    {
+      "id": "manifest_facing",
+      "pass": true,
+      "detail": "authored_facing is right"
+    },
+    {
+      "id": "manifest_scale",
+      "pass": true,
+      "detail": "logical_scale is numeric 0.5"
+    },
+    {
+      "id": "manifest_proportion",
+      "pass": true,
+      "detail": "display_proportion is the string '0.65'"
+    },
+    {
+      "id": "actions_order",
+      "pass": true,
+      "detail": "action order is ['idle', 'attack', 'move', 'guard', 'dodge', 'skill', 'hit', 'defeat']"
+    },
+    {
+      "id": "actions_all_eight",
+      "pass": true,
+      "detail": "all eight required actions present"
+    },
+    {
+      "id": "defeat_maps_down",
+      "pass": true,
+      "detail": "authored down is mapped to the required defeat action"
+    },
+    {
+      "id": "action_idle_keys",
+      "pass": true,
+      "detail": "action idle uses only loop/loop_start/tick_rate/frames"
+    },
+    {
+      "id": "action_idle_loop",
+      "pass": true,
+      "detail": "action idle loop flag"
+    },
+    {
+      "id": "action_idle_tick_rate",
+      "pass": true,
+      "detail": "action idle tick_rate is integer 30"
+    },
+    {
+      "id": "action_idle_loop_start",
+      "pass": true,
+      "detail": "action idle loop_start is 0"
+    },
+    {
+      "id": "action_idle_frame_count",
+      "pass": true,
+      "detail": "action idle has 4 frames"
+    },
+    {
+      "id": "action_idle_duration_ticks",
+      "pass": true,
+      "detail": "action idle totals 28 integer ticks"
+    },
+    {
+      "id": "frame_idle_0_keys",
+      "pass": true,
+      "detail": "frame uses exactly cell+ticks (no ms) at idle[0]"
+    },
+    {
+      "id": "frame_idle_0_cell",
+      "pass": true,
+      "detail": "idle[0] cell is 0 for base"
+    },
+    {
+      "id": "frame_idle_0_ticks",
+      "pass": true,
+      "detail": "idle[0] is 8 ticks for base"
+    },
+    {
+      "id": "frame_idle_1_keys",
+      "pass": true,
+      "detail": "frame uses exactly cell+ticks (no ms) at idle[1]"
+    },
+    {
+      "id": "frame_idle_1_cell",
+      "pass": true,
+      "detail": "idle[1] cell is 1 for idle-b1"
+    },
+    {
+      "id": "frame_idle_1_ticks",
+      "pass": true,
+      "detail": "idle[1] is 6 ticks for idle-b1"
+    },
+    {
+      "id": "frame_idle_2_keys",
+      "pass": true,
+      "detail": "frame uses exactly cell+ticks (no ms) at idle[2]"
+    },
+    {
+      "id": "frame_idle_2_cell",
+      "pass": true,
+      "detail": "idle[2] cell is 2 for idle-b2"
+    },
+    {
+      "id": "frame_idle_2_ticks",
+      "pass": true,
+      "detail": "idle[2] is 8 ticks for idle-b2"
+    },
+    {
+      "id": "frame_idle_3_keys",
+      "pass": true,
+      "detail": "frame uses exactly cell+ticks (no ms) at idle[3]"
+    },
+    {
+      "id": "frame_idle_3_cell",
+      "pass": true,
+      "detail": "idle[3] cell is 1 for idle-b1"
+    },
+    {
+      "id": "frame_idle_3_ticks",
+      "pass": true,
+      "detail": "idle[3] is 6 ticks for idle-b1"
+    },
+    {
+      "id": "action_attack_keys",
+      "pass": true,
+      "detail": "action attack uses only loop/loop_start/tick_rate/frames"
+    },
+    {
+      "id": "action_attack_loop",
+      "pass": true,
+      "detail": "action attack loop flag"
+    },
+    {
+      "id": "action_attack_tick_rate",
+      "pass": true,
+      "detail": "action attack tick_rate is integer 30"
+    },
+    {
+      "id": "action_attack_no_loop_start",
+      "pass": true,
+      "detail": "non-loop action attack has no loop_start"
+    },
+    {
+      "id": "action_attack_frame_count",
+      "pass": true,
+      "detail": "action attack has 8 frames"
+    },
+    {
+      "id": "action_attack_duration_ticks",
+      "pass": true,
+      "detail": "action attack totals 13 integer ticks"
+    },
+    {
+      "id": "frame_attack_0_keys",
+      "pass": true,
+      "detail": "frame uses exactly cell+ticks (no ms) at attack[0]"
+    },
+    {
+      "id": "frame_attack_0_cell",
+      "pass": true,
+      "detail": "attack[0] cell is 3 for atk-antic-a"
+    },
+    {
+      "id": "frame_attack_0_ticks",
+      "pass": true,
+      "detail": "attack[0] is 2 ticks for atk-antic-a"
+    },
+    {
+      "id": "frame_attack_1_keys",
+      "pass": true,
+      "detail": "frame uses exactly cell+ticks (no ms) at attack[1]"
+    },
+    {
+      "id": "frame_attack_1_cell",
+      "pass": true,
+      "detail": "attack[1] cell is 4 for atk-antic-b"
+    },
+    {
+      "id": "frame_attack_1_ticks",
+      "pass": true,
+      "detail": "attack[1] is 2 ticks for atk-antic-b"
+    },
+    {
+      "id": "frame_attack_2_keys",
+      "pass": true,
+      "detail": "frame uses exactly cell+ticks (no ms) at attack[2]"
+    },
+    {
+      "id": "frame_attack_2_cell",
+      "pass": true,
+      "detail": "attack[2] cell is 5 for atk-smear"
+    },
+    {
+      "id": "frame_attack_2_ticks",
+      "pass": true,
+      "detail": "attack[2] is 1 ticks for atk-smear"
+    },
+    {
+      "id": "frame_attack_3_keys",
+      "pass": true,
+      "detail": "frame uses exactly cell+ticks (no ms) at attack[3]"
+    },
+    {
+      "id": "frame_attack_3_cell",
+      "pass": true,
+      "detail": "attack[3] cell is 6 for atk-contact"
+    },
+    {
+      "id": "frame_attack_3_ticks",
+      "pass": true,
+      "detail": "attack[3] is 2 ticks for atk-contact"
+    },
+    {
+      "id": "frame_attack_4_keys",
+      "pass": true,
+      "detail": "frame uses exactly cell+ticks (no ms) at attack[4]"
+    },
+    {
+      "id": "frame_attack_4_cell",
+      "pass": true,
+      "detail": "attack[4] cell is 7 for atk-follow"
+    },
+    {
+      "id": "frame_attack_4_ticks",
+      "pass": true,
+      "detail": "attack[4] is 2 ticks for atk-follow"
+    },
+    {
+      "id": "frame_attack_5_keys",
+      "pass": true,
+      "detail": "frame uses exactly cell+ticks (no ms) at attack[5]"
+    },
+    {
+      "id": "frame_attack_5_cell",
+      "pass": true,
+      "detail": "attack[5] cell is 8 for atk-recover"
+    },
+    {
+      "id": "frame_attack_5_ticks",
+      "pass": true,
+      "detail": "attack[5] is 2 ticks for atk-recover"
+    },
+    {
+      "id": "frame_attack_6_keys",
+      "pass": true,
+      "detail": "frame uses exactly cell+ticks (no ms) at attack[6]"
+    },
+    {
+      "id": "frame_attack_6_cell",
+      "pass": true,
+      "detail": "attack[6] cell is 1 for idle-b1"
+    },
+    {
+      "id": "frame_attack_6_ticks",
+      "pass": true,
+      "detail": "attack[6] is 1 ticks for idle-b1"
+    },
+    {
+      "id": "frame_attack_7_keys",
+      "pass": true,
+      "detail": "frame uses exactly cell+ticks (no ms) at attack[7]"
+    },
+    {
+      "id": "frame_attack_7_cell",
+      "pass": true,
+      "detail": "attack[7] cell is 0 for base"
+    },
+    {
+      "id": "frame_attack_7_ticks",
+      "pass": true,
+      "detail": "attack[7] is 1 ticks for base"
+    },
+    {
+      "id": "action_move_keys",
+      "pass": true,
+      "detail": "action move uses only loop/loop_start/tick_rate/frames"
+    },
+    {
+      "id": "action_move_loop",
+      "pass": true,
+      "detail": "action move loop flag"
+    },
+    {
+      "id": "action_move_tick_rate",
+      "pass": true,
+      "detail": "action move tick_rate is integer 30"
+    },
+    {
+      "id": "action_move_loop_start",
+      "pass": true,
+      "detail": "action move loop_start is 0"
+    },
+    {
+      "id": "action_move_frame_count",
+      "pass": true,
+      "detail": "action move has 4 frames"
+    },
+    {
+      "id": "action_move_duration_ticks",
+      "pass": true,
+      "detail": "action move totals 12 integer ticks"
+    },
+    {
+      "id": "frame_move_0_keys",
+      "pass": true,
+      "detail": "frame uses exactly cell+ticks (no ms) at move[0]"
+    },
+    {
+      "id": "frame_move_0_cell",
+      "pass": true,
+      "detail": "move[0] cell is 9 for move-a"
+    },
+    {
+      "id": "frame_move_0_ticks",
+      "pass": true,
+      "detail": "move[0] is 3 ticks for move-a"
+    },
+    {
+      "id": "frame_move_1_keys",
+      "pass": true,
+      "detail": "frame uses exactly cell+ticks (no ms) at move[1]"
+    },
+    {
+      "id": "frame_move_1_cell",
+      "pass": true,
+      "detail": "move[1] cell is 10 for move-b"
+    },
+    {
+      "id": "frame_move_1_ticks",
+      "pass": true,
+      "detail": "move[1] is 3 ticks for move-b"
+    },
+    {
+      "id": "frame_move_2_keys",
+      "pass": true,
+      "detail": "frame uses exactly cell+ticks (no ms) at move[2]"
+    },
+    {
+      "id": "frame_move_2_cell",
+      "pass": true,
+      "detail": "move[2] cell is 11 for move-c"
+    },
+    {
+      "id": "frame_move_2_ticks",
+      "pass": true,
+      "detail": "move[2] is 3 ticks for move-c"
+    },
+    {
+      "id": "frame_move_3_keys",
+      "pass": true,
+      "detail": "frame uses exactly cell+ticks (no ms) at move[3]"
+    },
+    {
+      "id": "frame_move_3_cell",
+      "pass": true,
+      "detail": "move[3] cell is 12 for move-d"
+    },
+    {
+      "id": "frame_move_3_ticks",
+      "pass": true,
+      "detail": "move[3] is 3 ticks for move-d"
+    },
+    {
+      "id": "action_guard_keys",
+      "pass": true,
+      "detail": "action guard uses only loop/loop_start/tick_rate/frames"
+    },
+    {
+      "id": "action_guard_loop",
+      "pass": true,
+      "detail": "action guard loop flag"
+    },
+    {
+      "id": "action_guard_tick_rate",
+      "pass": true,
+      "detail": "action guard tick_rate is integer 30"
+    },
+    {
+      "id": "action_guard_loop_start",
+      "pass": true,
+      "detail": "action guard loop_start is 1"
+    },
+    {
+      "id": "action_guard_frame_count",
+      "pass": true,
+      "detail": "action guard has 3 frames"
+    },
+    {
+      "id": "action_guard_duration_ticks",
+      "pass": true,
+      "detail": "action guard totals 14 integer ticks"
+    },
+    {
+      "id": "frame_guard_0_keys",
+      "pass": true,
+      "detail": "frame uses exactly cell+ticks (no ms) at guard[0]"
+    },
+    {
+      "id": "frame_guard_0_cell",
+      "pass": true,
+      "detail": "guard[0] cell is 13 for guard-a"
+    },
+    {
+      "id": "frame_guard_0_ticks",
+      "pass": true,
+      "detail": "guard[0] is 2 ticks for guard-a"
+    },
+    {
+      "id": "frame_guard_1_keys",
+      "pass": true,
+      "detail": "frame uses exactly cell+ticks (no ms) at guard[1]"
+    },
+    {
+      "id": "frame_guard_1_cell",
+      "pass": true,
+      "detail": "guard[1] cell is 14 for guard-b"
+    },
+    {
+      "id": "frame_guard_1_ticks",
+      "pass": true,
+      "detail": "guard[1] is 6 ticks for guard-b"
+    },
+    {
+      "id": "frame_guard_2_keys",
+      "pass": true,
+      "detail": "frame uses exactly cell+ticks (no ms) at guard[2]"
+    },
+    {
+      "id": "frame_guard_2_cell",
+      "pass": true,
+      "detail": "guard[2] cell is 15 for guard-c"
+    },
+    {
+      "id": "frame_guard_2_ticks",
+      "pass": true,
+      "detail": "guard[2] is 6 ticks for guard-c"
+    },
+    {
+      "id": "action_dodge_keys",
+      "pass": true,
+      "detail": "action dodge uses only loop/loop_start/tick_rate/frames"
+    },
+    {
+      "id": "action_dodge_loop",
+      "pass": true,
+      "detail": "action dodge loop flag"
+    },
+    {
+      "id": "action_dodge_tick_rate",
+      "pass": true,
+      "detail": "action dodge tick_rate is integer 30"
+    },
+    {
+      "id": "action_dodge_no_loop_start",
+      "pass": true,
+      "detail": "non-loop action dodge has no loop_start"
+    },
+    {
+      "id": "action_dodge_frame_count",
+      "pass": true,
+      "detail": "action dodge has 3 frames"
+    },
+    {
+      "id": "action_dodge_duration_ticks",
+      "pass": true,
+      "detail": "action dodge totals 9 integer ticks"
+    },
+    {
+      "id": "frame_dodge_0_keys",
+      "pass": true,
+      "detail": "frame uses exactly cell+ticks (no ms) at dodge[0]"
+    },
+    {
+      "id": "frame_dodge_0_cell",
+      "pass": true,
+      "detail": "dodge[0] cell is 16 for dodge-a"
+    },
+    {
+      "id": "frame_dodge_0_ticks",
+      "pass": true,
+      "detail": "dodge[0] is 4 ticks for dodge-a"
+    },
+    {
+      "id": "frame_dodge_1_keys",
+      "pass": true,
+      "detail": "frame uses exactly cell+ticks (no ms) at dodge[1]"
+    },
+    {
+      "id": "frame_dodge_1_cell",
+      "pass": true,
+      "detail": "dodge[1] cell is 17 for dodge-b"
+    },
+    {
+      "id": "frame_dodge_1_ticks",
+      "pass": true,
+      "detail": "dodge[1] is 4 ticks for dodge-b"
+    },
+    {
+      "id": "frame_dodge_2_keys",
+      "pass": true,
+      "detail": "frame uses exactly cell+ticks (no ms) at dodge[2]"
+    },
+    {
+      "id": "frame_dodge_2_cell",
+      "pass": true,
+      "detail": "dodge[2] cell is 0 for base"
+    },
+    {
+      "id": "frame_dodge_2_ticks",
+      "pass": true,
+      "detail": "dodge[2] is 1 ticks for base"
+    },
+    {
+      "id": "action_skill_keys",
+      "pass": true,
+      "detail": "action skill uses only loop/loop_start/tick_rate/frames"
+    },
+    {
+      "id": "action_skill_loop",
+      "pass": true,
+      "detail": "action skill loop flag"
+    },
+    {
+      "id": "action_skill_tick_rate",
+      "pass": true,
+      "detail": "action skill tick_rate is integer 30"
+    },
+    {
+      "id": "action_skill_no_loop_start",
+      "pass": true,
+      "detail": "non-loop action skill has no loop_start"
+    },
+    {
+      "id": "action_skill_frame_count",
+      "pass": true,
+      "detail": "action skill has 6 frames"
+    },
+    {
+      "id": "action_skill_duration_ticks",
+      "pass": true,
+      "detail": "action skill totals 14 integer ticks"
+    },
+    {
+      "id": "frame_skill_0_keys",
+      "pass": true,
+      "detail": "frame uses exactly cell+ticks (no ms) at skill[0]"
+    },
+    {
+      "id": "frame_skill_0_cell",
+      "pass": true,
+      "detail": "skill[0] cell is 18 for skill-tel-a"
+    },
+    {
+      "id": "frame_skill_0_ticks",
+      "pass": true,
+      "detail": "skill[0] is 4 ticks for skill-tel-a"
+    },
+    {
+      "id": "frame_skill_1_keys",
+      "pass": true,
+      "detail": "frame uses exactly cell+ticks (no ms) at skill[1]"
+    },
+    {
+      "id": "frame_skill_1_cell",
+      "pass": true,
+      "detail": "skill[1] cell is 19 for skill-tel-b"
+    },
+    {
+      "id": "frame_skill_1_ticks",
+      "pass": true,
+      "detail": "skill[1] is 3 ticks for skill-tel-b"
+    },
+    {
+      "id": "frame_skill_2_keys",
+      "pass": true,
+      "detail": "frame uses exactly cell+ticks (no ms) at skill[2]"
+    },
+    {
+      "id": "frame_skill_2_cell",
+      "pass": true,
+      "detail": "skill[2] cell is 20 for skill-strike"
+    },
+    {
+      "id": "frame_skill_2_ticks",
+      "pass": true,
+      "detail": "skill[2] is 1 ticks for skill-strike"
+    },
+    {
+      "id": "frame_skill_3_keys",
+      "pass": true,
+      "detail": "frame uses exactly cell+ticks (no ms) at skill[3]"
+    },
+    {
+      "id": "frame_skill_3_cell",
+      "pass": true,
+      "detail": "skill[3] cell is 21 for skill-contact"
+    },
+    {
+      "id": "frame_skill_3_ticks",
+      "pass": true,
+      "detail": "skill[3] is 2 ticks for skill-contact"
+    },
+    {
+      "id": "frame_skill_4_keys",
+      "pass": true,
+      "detail": "frame uses exactly cell+ticks (no ms) at skill[4]"
+    },
+    {
+      "id": "frame_skill_4_cell",
+      "pass": true,
+      "detail": "skill[4] cell is 22 for skill-recover"
+    },
+    {
+      "id": "frame_skill_4_ticks",
+      "pass": true,
+      "detail": "skill[4] is 3 ticks for skill-recover"
+    },
+    {
+      "id": "frame_skill_5_keys",
+      "pass": true,
+      "detail": "frame uses exactly cell+ticks (no ms) at skill[5]"
+    },
+    {
+      "id": "frame_skill_5_cell",
+      "pass": true,
+      "detail": "skill[5] cell is 0 for base"
+    },
+    {
+      "id": "frame_skill_5_ticks",
+      "pass": true,
+      "detail": "skill[5] is 1 ticks for base"
+    },
+    {
+      "id": "action_hit_keys",
+      "pass": true,
+      "detail": "action hit uses only loop/loop_start/tick_rate/frames"
+    },
+    {
+      "id": "action_hit_loop",
+      "pass": true,
+      "detail": "action hit loop flag"
+    },
+    {
+      "id": "action_hit_tick_rate",
+      "pass": true,
+      "detail": "action hit tick_rate is integer 30"
+    },
+    {
+      "id": "action_hit_no_loop_start",
+      "pass": true,
+      "detail": "non-loop action hit has no loop_start"
+    },
+    {
+      "id": "action_hit_frame_count",
+      "pass": true,
+      "detail": "action hit has 4 frames"
+    },
+    {
+      "id": "action_hit_duration_ticks",
+      "pass": true,
+      "detail": "action hit totals 8 integer ticks"
+    },
+    {
+      "id": "frame_hit_0_keys",
+      "pass": true,
+      "detail": "frame uses exactly cell+ticks (no ms) at hit[0]"
+    },
+    {
+      "id": "frame_hit_0_cell",
+      "pass": true,
+      "detail": "hit[0] cell is 23 for hit-a"
+    },
+    {
+      "id": "frame_hit_0_ticks",
+      "pass": true,
+      "detail": "hit[0] is 2 ticks for hit-a"
+    },
+    {
+      "id": "frame_hit_1_keys",
+      "pass": true,
+      "detail": "frame uses exactly cell+ticks (no ms) at hit[1]"
+    },
+    {
+      "id": "frame_hit_1_cell",
+      "pass": true,
+      "detail": "hit[1] cell is 24 for hit-b"
+    },
+    {
+      "id": "frame_hit_1_ticks",
+      "pass": true,
+      "detail": "hit[1] is 3 ticks for hit-b"
+    },
+    {
+      "id": "frame_hit_2_keys",
+      "pass": true,
+      "detail": "frame uses exactly cell+ticks (no ms) at hit[2]"
+    },
+    {
+      "id": "frame_hit_2_cell",
+      "pass": true,
+      "detail": "hit[2] cell is 25 for hit-c"
+    },
+    {
+      "id": "frame_hit_2_ticks",
+      "pass": true,
+      "detail": "hit[2] is 2 ticks for hit-c"
+    },
+    {
+      "id": "frame_hit_3_keys",
+      "pass": true,
+      "detail": "frame uses exactly cell+ticks (no ms) at hit[3]"
+    },
+    {
+      "id": "frame_hit_3_cell",
+      "pass": true,
+      "detail": "hit[3] cell is 0 for base"
+    },
+    {
+      "id": "frame_hit_3_ticks",
+      "pass": true,
+      "detail": "hit[3] is 1 ticks for base"
+    },
+    {
+      "id": "action_defeat_keys",
+      "pass": true,
+      "detail": "action defeat uses only loop/loop_start/tick_rate/frames"
+    },
+    {
+      "id": "action_defeat_loop",
+      "pass": true,
+      "detail": "action defeat loop flag"
+    },
+    {
+      "id": "action_defeat_tick_rate",
+      "pass": true,
+      "detail": "action defeat tick_rate is integer 30"
+    },
+    {
+      "id": "action_defeat_no_loop_start",
+      "pass": true,
+      "detail": "non-loop action defeat has no loop_start"
+    },
+    {
+      "id": "action_defeat_frame_count",
+      "pass": true,
+      "detail": "action defeat has 3 frames"
+    },
+    {
+      "id": "action_defeat_duration_ticks",
+      "pass": true,
+      "detail": "action defeat totals 9 integer ticks"
+    },
+    {
+      "id": "frame_defeat_0_keys",
+      "pass": true,
+      "detail": "frame uses exactly cell+ticks (no ms) at defeat[0]"
+    },
+    {
+      "id": "frame_defeat_0_cell",
+      "pass": true,
+      "detail": "defeat[0] cell is 26 for down-a"
+    },
+    {
+      "id": "frame_defeat_0_ticks",
+      "pass": true,
+      "detail": "defeat[0] is 3 ticks for down-a"
+    },
+    {
+      "id": "frame_defeat_1_keys",
+      "pass": true,
+      "detail": "frame uses exactly cell+ticks (no ms) at defeat[1]"
+    },
+    {
+      "id": "frame_defeat_1_cell",
+      "pass": true,
+      "detail": "defeat[1] cell is 27 for down-b"
+    },
+    {
+      "id": "frame_defeat_1_ticks",
+      "pass": true,
+      "detail": "defeat[1] is 3 ticks for down-b"
+    },
+    {
+      "id": "frame_defeat_2_keys",
+      "pass": true,
+      "detail": "frame uses exactly cell+ticks (no ms) at defeat[2]"
+    },
+    {
+      "id": "frame_defeat_2_cell",
+      "pass": true,
+      "detail": "defeat[2] cell is 28 for down-c"
+    },
+    {
+      "id": "frame_defeat_2_ticks",
+      "pass": true,
+      "detail": "defeat[2] is 3 ticks for down-c"
+    },
+    {
+      "id": "cells_all_29_used",
+      "pass": true,
+      "detail": "all 29 effective cells are referenced"
+    },
+    {
+      "id": "cells_no_unused_reference",
+      "pass": true,
+      "detail": "the transparent unused cell is not referenced"
+    },
+    {
+      "id": "cells_unique_count",
+      "pass": true,
+      "detail": "cell map has 29 distinct poses"
+    },
+    {
+      "id": "base_reused",
+      "pass": true,
+      "detail": "base cell is used by idle/attack/dodge/skill/hit"
+    },
+    {
+      "id": "guard_pattern",
+      "pass": true,
+      "detail": "guard-a2,guard-b6,guard-c6 with loop_start 1 intro-once"
+    },
+    {
+      "id": "attack_tail",
+      "pass": true,
+      "detail": "v01 attack keeps final idle-b1 then one base tick"
+    },
+    {
+      "id": "dodge_tail",
+      "pass": true,
+      "detail": "dodge ends with base 1 tick"
+    },
+    {
+      "id": "hit_tail",
+      "pass": true,
+      "detail": "hit ends with base 1 tick"
+    },
+    {
+      "id": "skill_tail",
+      "pass": true,
+      "detail": "skill ends with base 1 tick"
+    },
+    {
+      "id": "defeat_hold",
+      "pass": true,
+      "detail": "defeat is one-shot and holds the final down-c cell"
+    },
+    {
+      "id": "source_manifest_v01_path",
+      "pass": true,
+      "detail": "v01 manifest path matches"
+    },
+    {
+      "id": "source_manifest_v01_sha",
+      "pass": true,
+      "detail": "v01 manifest SHA-256 matches"
+    },
+    {
+      "id": "source_manifest_v02_path",
+      "pass": true,
+      "detail": "v02 manifest path matches"
+    },
+    {
+      "id": "source_manifest_v02_sha",
+      "pass": true,
+      "detail": "v02 manifest SHA-256 matches"
+    },
+    {
+      "id": "source_manifest_v03_path",
+      "pass": true,
+      "detail": "v03 manifest path matches"
+    },
+    {
+      "id": "source_manifest_v03_sha",
+      "pass": true,
+      "detail": "v03 manifest SHA-256 matches"
+    },
+    {
+      "id": "source_v01_cell",
+      "pass": true,
+      "detail": "v01 source cell is 136x144"
+    },
+    {
+      "id": "source_v01_pin",
+      "pass": true,
+      "detail": "v01 source pin is 64/136"
+    },
+    {
+      "id": "source_v02_cell",
+      "pass": true,
+      "detail": "v02 source cell is 136x144"
+    },
+    {
+      "id": "source_v02_pin",
+      "pass": true,
+      "detail": "v02 source pin is 64/136"
+    },
+    {
+      "id": "source_v03_cell",
+      "pass": true,
+      "detail": "v03 source cell is 136x144"
+    },
+    {
+      "id": "source_v03_pin",
+      "pass": true,
+      "detail": "v03 source pin is 64/136"
+    },
+    {
+      "id": "source_frames_exact",
+      "pass": true,
+      "detail": "actual v01/v02/v03 frame ticks match the checked source sequences"
+    },
+    {
+      "id": "source_flags",
+      "pass": true,
+      "detail": "source loop/then/hold flags match the runtime mapping"
+    },
+    {
+      "id": "base_source_path",
+      "pass": true,
+      "detail": "base is the approved outputs/hero-sea-v01 native136 1294c865 still"
+    },
+    {
+      "id": "base_source_sha",
+      "pass": true,
+      "detail": "base source SHA-256 is frozen and unchanged"
+    },
+    {
+      "id": "provenance_cells",
+      "pass": true,
+      "detail": "provenance cell map covers 0..28"
+    },
+    {
+      "id": "source_base_role",
+      "pass": true,
+      "detail": "base uses the v01 source"
+    },
+    {
+      "id": "source_base_png_sha",
+      "pass": true,
+      "detail": "base PNG SHA-256 matches its source manifest"
+    },
+    {
+      "id": "source_base_native_pxo",
+      "pass": true,
+      "detail": "base native PXO exists and is unchanged"
+    },
+    {
+      "id": "source_base_native_ora",
+      "pass": true,
+      "detail": "base native ORA exists and is unchanged"
+    },
+    {
+      "id": "source_base_format",
+      "pass": true,
+      "detail": "base is exact 136x144 RGBA PNG"
+    },
+    {
+      "id": "prov_base_pose",
+      "pass": true,
+      "detail": "base provenance pose matches cell 0"
+    },
+    {
+      "id": "prov_base_source",
+      "pass": true,
+      "detail": "base provenance source path/SHA match"
+    },
+    {
+      "id": "prov_base_native",
+      "pass": true,
+      "detail": "base provenance PXO/ORA path/SHA match"
+    },
+    {
+      "id": "prov_base_users",
+      "pass": true,
+      "detail": "base provenance action users match"
+    },
+    {
+      "id": "source_idle-b1_role",
+      "pass": true,
+      "detail": "idle-b1 uses the v01 source"
+    },
+    {
+      "id": "source_idle-b1_png_sha",
+      "pass": true,
+      "detail": "idle-b1 PNG SHA-256 matches its source manifest"
+    },
+    {
+      "id": "source_idle-b1_native_pxo",
+      "pass": true,
+      "detail": "idle-b1 native PXO exists and is unchanged"
+    },
+    {
+      "id": "source_idle-b1_native_ora",
+      "pass": true,
+      "detail": "idle-b1 native ORA exists and is unchanged"
+    },
+    {
+      "id": "source_idle-b1_format",
+      "pass": true,
+      "detail": "idle-b1 is exact 136x144 RGBA PNG"
+    },
+    {
+      "id": "prov_idle-b1_pose",
+      "pass": true,
+      "detail": "idle-b1 provenance pose matches cell 1"
+    },
+    {
+      "id": "prov_idle-b1_source",
+      "pass": true,
+      "detail": "idle-b1 provenance source path/SHA match"
+    },
+    {
+      "id": "prov_idle-b1_native",
+      "pass": true,
+      "detail": "idle-b1 provenance PXO/ORA path/SHA match"
+    },
+    {
+      "id": "prov_idle-b1_users",
+      "pass": true,
+      "detail": "idle-b1 provenance action users match"
+    },
+    {
+      "id": "source_idle-b2_role",
+      "pass": true,
+      "detail": "idle-b2 uses the v01 source"
+    },
+    {
+      "id": "source_idle-b2_png_sha",
+      "pass": true,
+      "detail": "idle-b2 PNG SHA-256 matches its source manifest"
+    },
+    {
+      "id": "source_idle-b2_native_pxo",
+      "pass": true,
+      "detail": "idle-b2 native PXO exists and is unchanged"
+    },
+    {
+      "id": "source_idle-b2_native_ora",
+      "pass": true,
+      "detail": "idle-b2 native ORA exists and is unchanged"
+    },
+    {
+      "id": "source_idle-b2_format",
+      "pass": true,
+      "detail": "idle-b2 is exact 136x144 RGBA PNG"
+    },
+    {
+      "id": "prov_idle-b2_pose",
+      "pass": true,
+      "detail": "idle-b2 provenance pose matches cell 2"
+    },
+    {
+      "id": "prov_idle-b2_source",
+      "pass": true,
+      "detail": "idle-b2 provenance source path/SHA match"
+    },
+    {
+      "id": "prov_idle-b2_native",
+      "pass": true,
+      "detail": "idle-b2 provenance PXO/ORA path/SHA match"
+    },
+    {
+      "id": "prov_idle-b2_users",
+      "pass": true,
+      "detail": "idle-b2 provenance action users match"
+    },
+    {
+      "id": "source_atk-antic-a_role",
+      "pass": true,
+      "detail": "atk-antic-a uses the v01 source"
+    },
+    {
+      "id": "source_atk-antic-a_png_sha",
+      "pass": true,
+      "detail": "atk-antic-a PNG SHA-256 matches its source manifest"
+    },
+    {
+      "id": "source_atk-antic-a_native_pxo",
+      "pass": true,
+      "detail": "atk-antic-a native PXO exists and is unchanged"
+    },
+    {
+      "id": "source_atk-antic-a_native_ora",
+      "pass": true,
+      "detail": "atk-antic-a native ORA exists and is unchanged"
+    },
+    {
+      "id": "source_atk-antic-a_format",
+      "pass": true,
+      "detail": "atk-antic-a is exact 136x144 RGBA PNG"
+    },
+    {
+      "id": "prov_atk-antic-a_pose",
+      "pass": true,
+      "detail": "atk-antic-a provenance pose matches cell 3"
+    },
+    {
+      "id": "prov_atk-antic-a_source",
+      "pass": true,
+      "detail": "atk-antic-a provenance source path/SHA match"
+    },
+    {
+      "id": "prov_atk-antic-a_native",
+      "pass": true,
+      "detail": "atk-antic-a provenance PXO/ORA path/SHA match"
+    },
+    {
+      "id": "prov_atk-antic-a_users",
+      "pass": true,
+      "detail": "atk-antic-a provenance action users match"
+    },
+    {
+      "id": "source_atk-antic-b_role",
+      "pass": true,
+      "detail": "atk-antic-b uses the v01 source"
+    },
+    {
+      "id": "source_atk-antic-b_png_sha",
+      "pass": true,
+      "detail": "atk-antic-b PNG SHA-256 matches its source manifest"
+    },
+    {
+      "id": "source_atk-antic-b_native_pxo",
+      "pass": true,
+      "detail": "atk-antic-b native PXO exists and is unchanged"
+    },
+    {
+      "id": "source_atk-antic-b_native_ora",
+      "pass": true,
+      "detail": "atk-antic-b native ORA exists and is unchanged"
+    },
+    {
+      "id": "source_atk-antic-b_format",
+      "pass": true,
+      "detail": "atk-antic-b is exact 136x144 RGBA PNG"
+    },
+    {
+      "id": "prov_atk-antic-b_pose",
+      "pass": true,
+      "detail": "atk-antic-b provenance pose matches cell 4"
+    },
+    {
+      "id": "prov_atk-antic-b_source",
+      "pass": true,
+      "detail": "atk-antic-b provenance source path/SHA match"
+    },
+    {
+      "id": "prov_atk-antic-b_native",
+      "pass": true,
+      "detail": "atk-antic-b provenance PXO/ORA path/SHA match"
+    },
+    {
+      "id": "prov_atk-antic-b_users",
+      "pass": true,
+      "detail": "atk-antic-b provenance action users match"
+    },
+    {
+      "id": "source_atk-smear_role",
+      "pass": true,
+      "detail": "atk-smear uses the v01 source"
+    },
+    {
+      "id": "source_atk-smear_png_sha",
+      "pass": true,
+      "detail": "atk-smear PNG SHA-256 matches its source manifest"
+    },
+    {
+      "id": "source_atk-smear_native_pxo",
+      "pass": true,
+      "detail": "atk-smear native PXO exists and is unchanged"
+    },
+    {
+      "id": "source_atk-smear_native_ora",
+      "pass": true,
+      "detail": "atk-smear native ORA exists and is unchanged"
+    },
+    {
+      "id": "source_atk-smear_format",
+      "pass": true,
+      "detail": "atk-smear is exact 136x144 RGBA PNG"
+    },
+    {
+      "id": "prov_atk-smear_pose",
+      "pass": true,
+      "detail": "atk-smear provenance pose matches cell 5"
+    },
+    {
+      "id": "prov_atk-smear_source",
+      "pass": true,
+      "detail": "atk-smear provenance source path/SHA match"
+    },
+    {
+      "id": "prov_atk-smear_native",
+      "pass": true,
+      "detail": "atk-smear provenance PXO/ORA path/SHA match"
+    },
+    {
+      "id": "prov_atk-smear_users",
+      "pass": true,
+      "detail": "atk-smear provenance action users match"
+    },
+    {
+      "id": "source_atk-contact_role",
+      "pass": true,
+      "detail": "atk-contact uses the v01 source"
+    },
+    {
+      "id": "source_atk-contact_png_sha",
+      "pass": true,
+      "detail": "atk-contact PNG SHA-256 matches its source manifest"
+    },
+    {
+      "id": "source_atk-contact_native_pxo",
+      "pass": true,
+      "detail": "atk-contact native PXO exists and is unchanged"
+    },
+    {
+      "id": "source_atk-contact_native_ora",
+      "pass": true,
+      "detail": "atk-contact native ORA exists and is unchanged"
+    },
+    {
+      "id": "source_atk-contact_format",
+      "pass": true,
+      "detail": "atk-contact is exact 136x144 RGBA PNG"
+    },
+    {
+      "id": "prov_atk-contact_pose",
+      "pass": true,
+      "detail": "atk-contact provenance pose matches cell 6"
+    },
+    {
+      "id": "prov_atk-contact_source",
+      "pass": true,
+      "detail": "atk-contact provenance source path/SHA match"
+    },
+    {
+      "id": "prov_atk-contact_native",
+      "pass": true,
+      "detail": "atk-contact provenance PXO/ORA path/SHA match"
+    },
+    {
+      "id": "prov_atk-contact_users",
+      "pass": true,
+      "detail": "atk-contact provenance action users match"
+    },
+    {
+      "id": "source_atk-follow_role",
+      "pass": true,
+      "detail": "atk-follow uses the v01 source"
+    },
+    {
+      "id": "source_atk-follow_png_sha",
+      "pass": true,
+      "detail": "atk-follow PNG SHA-256 matches its source manifest"
+    },
+    {
+      "id": "source_atk-follow_native_pxo",
+      "pass": true,
+      "detail": "atk-follow native PXO exists and is unchanged"
+    },
+    {
+      "id": "source_atk-follow_native_ora",
+      "pass": true,
+      "detail": "atk-follow native ORA exists and is unchanged"
+    },
+    {
+      "id": "source_atk-follow_format",
+      "pass": true,
+      "detail": "atk-follow is exact 136x144 RGBA PNG"
+    },
+    {
+      "id": "prov_atk-follow_pose",
+      "pass": true,
+      "detail": "atk-follow provenance pose matches cell 7"
+    },
+    {
+      "id": "prov_atk-follow_source",
+      "pass": true,
+      "detail": "atk-follow provenance source path/SHA match"
+    },
+    {
+      "id": "prov_atk-follow_native",
+      "pass": true,
+      "detail": "atk-follow provenance PXO/ORA path/SHA match"
+    },
+    {
+      "id": "prov_atk-follow_users",
+      "pass": true,
+      "detail": "atk-follow provenance action users match"
+    },
+    {
+      "id": "source_atk-recover_role",
+      "pass": true,
+      "detail": "atk-recover uses the v01 source"
+    },
+    {
+      "id": "source_atk-recover_png_sha",
+      "pass": true,
+      "detail": "atk-recover PNG SHA-256 matches its source manifest"
+    },
+    {
+      "id": "source_atk-recover_native_pxo",
+      "pass": true,
+      "detail": "atk-recover native PXO exists and is unchanged"
+    },
+    {
+      "id": "source_atk-recover_native_ora",
+      "pass": true,
+      "detail": "atk-recover native ORA exists and is unchanged"
+    },
+    {
+      "id": "source_atk-recover_format",
+      "pass": true,
+      "detail": "atk-recover is exact 136x144 RGBA PNG"
+    },
+    {
+      "id": "prov_atk-recover_pose",
+      "pass": true,
+      "detail": "atk-recover provenance pose matches cell 8"
+    },
+    {
+      "id": "prov_atk-recover_source",
+      "pass": true,
+      "detail": "atk-recover provenance source path/SHA match"
+    },
+    {
+      "id": "prov_atk-recover_native",
+      "pass": true,
+      "detail": "atk-recover provenance PXO/ORA path/SHA match"
+    },
+    {
+      "id": "prov_atk-recover_users",
+      "pass": true,
+      "detail": "atk-recover provenance action users match"
+    },
+    {
+      "id": "source_move-a_role",
+      "pass": true,
+      "detail": "move-a uses the v02 source"
+    },
+    {
+      "id": "source_move-a_png_sha",
+      "pass": true,
+      "detail": "move-a PNG SHA-256 matches its source manifest"
+    },
+    {
+      "id": "source_move-a_native_pxo",
+      "pass": true,
+      "detail": "move-a native PXO exists and is unchanged"
+    },
+    {
+      "id": "source_move-a_native_ora",
+      "pass": true,
+      "detail": "move-a native ORA exists and is unchanged"
+    },
+    {
+      "id": "source_move-a_format",
+      "pass": true,
+      "detail": "move-a is exact 136x144 RGBA PNG"
+    },
+    {
+      "id": "prov_move-a_pose",
+      "pass": true,
+      "detail": "move-a provenance pose matches cell 9"
+    },
+    {
+      "id": "prov_move-a_source",
+      "pass": true,
+      "detail": "move-a provenance source path/SHA match"
+    },
+    {
+      "id": "prov_move-a_native",
+      "pass": true,
+      "detail": "move-a provenance PXO/ORA path/SHA match"
+    },
+    {
+      "id": "prov_move-a_users",
+      "pass": true,
+      "detail": "move-a provenance action users match"
+    },
+    {
+      "id": "source_move-b_role",
+      "pass": true,
+      "detail": "move-b uses the v02 source"
+    },
+    {
+      "id": "source_move-b_png_sha",
+      "pass": true,
+      "detail": "move-b PNG SHA-256 matches its source manifest"
+    },
+    {
+      "id": "source_move-b_native_pxo",
+      "pass": true,
+      "detail": "move-b native PXO exists and is unchanged"
+    },
+    {
+      "id": "source_move-b_native_ora",
+      "pass": true,
+      "detail": "move-b native ORA exists and is unchanged"
+    },
+    {
+      "id": "source_move-b_format",
+      "pass": true,
+      "detail": "move-b is exact 136x144 RGBA PNG"
+    },
+    {
+      "id": "prov_move-b_pose",
+      "pass": true,
+      "detail": "move-b provenance pose matches cell 10"
+    },
+    {
+      "id": "prov_move-b_source",
+      "pass": true,
+      "detail": "move-b provenance source path/SHA match"
+    },
+    {
+      "id": "prov_move-b_native",
+      "pass": true,
+      "detail": "move-b provenance PXO/ORA path/SHA match"
+    },
+    {
+      "id": "prov_move-b_users",
+      "pass": true,
+      "detail": "move-b provenance action users match"
+    },
+    {
+      "id": "source_move-c_role",
+      "pass": true,
+      "detail": "move-c uses the v02 source"
+    },
+    {
+      "id": "source_move-c_png_sha",
+      "pass": true,
+      "detail": "move-c PNG SHA-256 matches its source manifest"
+    },
+    {
+      "id": "source_move-c_native_pxo",
+      "pass": true,
+      "detail": "move-c native PXO exists and is unchanged"
+    },
+    {
+      "id": "source_move-c_native_ora",
+      "pass": true,
+      "detail": "move-c native ORA exists and is unchanged"
+    },
+    {
+      "id": "source_move-c_format",
+      "pass": true,
+      "detail": "move-c is exact 136x144 RGBA PNG"
+    },
+    {
+      "id": "prov_move-c_pose",
+      "pass": true,
+      "detail": "move-c provenance pose matches cell 11"
+    },
+    {
+      "id": "prov_move-c_source",
+      "pass": true,
+      "detail": "move-c provenance source path/SHA match"
+    },
+    {
+      "id": "prov_move-c_native",
+      "pass": true,
+      "detail": "move-c provenance PXO/ORA path/SHA match"
+    },
+    {
+      "id": "prov_move-c_users",
+      "pass": true,
+      "detail": "move-c provenance action users match"
+    },
+    {
+      "id": "source_move-d_role",
+      "pass": true,
+      "detail": "move-d uses the v02 source"
+    },
+    {
+      "id": "source_move-d_png_sha",
+      "pass": true,
+      "detail": "move-d PNG SHA-256 matches its source manifest"
+    },
+    {
+      "id": "source_move-d_native_pxo",
+      "pass": true,
+      "detail": "move-d native PXO exists and is unchanged"
+    },
+    {
+      "id": "source_move-d_native_ora",
+      "pass": true,
+      "detail": "move-d native ORA exists and is unchanged"
+    },
+    {
+      "id": "source_move-d_format",
+      "pass": true,
+      "detail": "move-d is exact 136x144 RGBA PNG"
+    },
+    {
+      "id": "prov_move-d_pose",
+      "pass": true,
+      "detail": "move-d provenance pose matches cell 12"
+    },
+    {
+      "id": "prov_move-d_source",
+      "pass": true,
+      "detail": "move-d provenance source path/SHA match"
+    },
+    {
+      "id": "prov_move-d_native",
+      "pass": true,
+      "detail": "move-d provenance PXO/ORA path/SHA match"
+    },
+    {
+      "id": "prov_move-d_users",
+      "pass": true,
+      "detail": "move-d provenance action users match"
+    },
+    {
+      "id": "source_guard-a_role",
+      "pass": true,
+      "detail": "guard-a uses the v02 source"
+    },
+    {
+      "id": "source_guard-a_png_sha",
+      "pass": true,
+      "detail": "guard-a PNG SHA-256 matches its source manifest"
+    },
+    {
+      "id": "source_guard-a_native_pxo",
+      "pass": true,
+      "detail": "guard-a native PXO exists and is unchanged"
+    },
+    {
+      "id": "source_guard-a_native_ora",
+      "pass": true,
+      "detail": "guard-a native ORA exists and is unchanged"
+    },
+    {
+      "id": "source_guard-a_format",
+      "pass": true,
+      "detail": "guard-a is exact 136x144 RGBA PNG"
+    },
+    {
+      "id": "prov_guard-a_pose",
+      "pass": true,
+      "detail": "guard-a provenance pose matches cell 13"
+    },
+    {
+      "id": "prov_guard-a_source",
+      "pass": true,
+      "detail": "guard-a provenance source path/SHA match"
+    },
+    {
+      "id": "prov_guard-a_native",
+      "pass": true,
+      "detail": "guard-a provenance PXO/ORA path/SHA match"
+    },
+    {
+      "id": "prov_guard-a_users",
+      "pass": true,
+      "detail": "guard-a provenance action users match"
+    },
+    {
+      "id": "source_guard-b_role",
+      "pass": true,
+      "detail": "guard-b uses the v02 source"
+    },
+    {
+      "id": "source_guard-b_png_sha",
+      "pass": true,
+      "detail": "guard-b PNG SHA-256 matches its source manifest"
+    },
+    {
+      "id": "source_guard-b_native_pxo",
+      "pass": true,
+      "detail": "guard-b native PXO exists and is unchanged"
+    },
+    {
+      "id": "source_guard-b_native_ora",
+      "pass": true,
+      "detail": "guard-b native ORA exists and is unchanged"
+    },
+    {
+      "id": "source_guard-b_format",
+      "pass": true,
+      "detail": "guard-b is exact 136x144 RGBA PNG"
+    },
+    {
+      "id": "prov_guard-b_pose",
+      "pass": true,
+      "detail": "guard-b provenance pose matches cell 14"
+    },
+    {
+      "id": "prov_guard-b_source",
+      "pass": true,
+      "detail": "guard-b provenance source path/SHA match"
+    },
+    {
+      "id": "prov_guard-b_native",
+      "pass": true,
+      "detail": "guard-b provenance PXO/ORA path/SHA match"
+    },
+    {
+      "id": "prov_guard-b_users",
+      "pass": true,
+      "detail": "guard-b provenance action users match"
+    },
+    {
+      "id": "source_guard-c_role",
+      "pass": true,
+      "detail": "guard-c uses the v02 source"
+    },
+    {
+      "id": "source_guard-c_png_sha",
+      "pass": true,
+      "detail": "guard-c PNG SHA-256 matches its source manifest"
+    },
+    {
+      "id": "source_guard-c_native_pxo",
+      "pass": true,
+      "detail": "guard-c native PXO exists and is unchanged"
+    },
+    {
+      "id": "source_guard-c_native_ora",
+      "pass": true,
+      "detail": "guard-c native ORA exists and is unchanged"
+    },
+    {
+      "id": "source_guard-c_format",
+      "pass": true,
+      "detail": "guard-c is exact 136x144 RGBA PNG"
+    },
+    {
+      "id": "prov_guard-c_pose",
+      "pass": true,
+      "detail": "guard-c provenance pose matches cell 15"
+    },
+    {
+      "id": "prov_guard-c_source",
+      "pass": true,
+      "detail": "guard-c provenance source path/SHA match"
+    },
+    {
+      "id": "prov_guard-c_native",
+      "pass": true,
+      "detail": "guard-c provenance PXO/ORA path/SHA match"
+    },
+    {
+      "id": "prov_guard-c_users",
+      "pass": true,
+      "detail": "guard-c provenance action users match"
+    },
+    {
+      "id": "source_dodge-a_role",
+      "pass": true,
+      "detail": "dodge-a uses the v02 source"
+    },
+    {
+      "id": "source_dodge-a_png_sha",
+      "pass": true,
+      "detail": "dodge-a PNG SHA-256 matches its source manifest"
+    },
+    {
+      "id": "source_dodge-a_native_pxo",
+      "pass": true,
+      "detail": "dodge-a native PXO exists and is unchanged"
+    },
+    {
+      "id": "source_dodge-a_native_ora",
+      "pass": true,
+      "detail": "dodge-a native ORA exists and is unchanged"
+    },
+    {
+      "id": "source_dodge-a_format",
+      "pass": true,
+      "detail": "dodge-a is exact 136x144 RGBA PNG"
+    },
+    {
+      "id": "prov_dodge-a_pose",
+      "pass": true,
+      "detail": "dodge-a provenance pose matches cell 16"
+    },
+    {
+      "id": "prov_dodge-a_source",
+      "pass": true,
+      "detail": "dodge-a provenance source path/SHA match"
+    },
+    {
+      "id": "prov_dodge-a_native",
+      "pass": true,
+      "detail": "dodge-a provenance PXO/ORA path/SHA match"
+    },
+    {
+      "id": "prov_dodge-a_users",
+      "pass": true,
+      "detail": "dodge-a provenance action users match"
+    },
+    {
+      "id": "source_dodge-b_role",
+      "pass": true,
+      "detail": "dodge-b uses the v02 source"
+    },
+    {
+      "id": "source_dodge-b_png_sha",
+      "pass": true,
+      "detail": "dodge-b PNG SHA-256 matches its source manifest"
+    },
+    {
+      "id": "source_dodge-b_native_pxo",
+      "pass": true,
+      "detail": "dodge-b native PXO exists and is unchanged"
+    },
+    {
+      "id": "source_dodge-b_native_ora",
+      "pass": true,
+      "detail": "dodge-b native ORA exists and is unchanged"
+    },
+    {
+      "id": "source_dodge-b_format",
+      "pass": true,
+      "detail": "dodge-b is exact 136x144 RGBA PNG"
+    },
+    {
+      "id": "prov_dodge-b_pose",
+      "pass": true,
+      "detail": "dodge-b provenance pose matches cell 17"
+    },
+    {
+      "id": "prov_dodge-b_source",
+      "pass": true,
+      "detail": "dodge-b provenance source path/SHA match"
+    },
+    {
+      "id": "prov_dodge-b_native",
+      "pass": true,
+      "detail": "dodge-b provenance PXO/ORA path/SHA match"
+    },
+    {
+      "id": "prov_dodge-b_users",
+      "pass": true,
+      "detail": "dodge-b provenance action users match"
+    },
+    {
+      "id": "source_skill-tel-a_role",
+      "pass": true,
+      "detail": "skill-tel-a uses the v02 source"
+    },
+    {
+      "id": "source_skill-tel-a_png_sha",
+      "pass": true,
+      "detail": "skill-tel-a PNG SHA-256 matches its source manifest"
+    },
+    {
+      "id": "source_skill-tel-a_native_pxo",
+      "pass": true,
+      "detail": "skill-tel-a native PXO exists and is unchanged"
+    },
+    {
+      "id": "source_skill-tel-a_native_ora",
+      "pass": true,
+      "detail": "skill-tel-a native ORA exists and is unchanged"
+    },
+    {
+      "id": "source_skill-tel-a_format",
+      "pass": true,
+      "detail": "skill-tel-a is exact 136x144 RGBA PNG"
+    },
+    {
+      "id": "prov_skill-tel-a_pose",
+      "pass": true,
+      "detail": "skill-tel-a provenance pose matches cell 18"
+    },
+    {
+      "id": "prov_skill-tel-a_source",
+      "pass": true,
+      "detail": "skill-tel-a provenance source path/SHA match"
+    },
+    {
+      "id": "prov_skill-tel-a_native",
+      "pass": true,
+      "detail": "skill-tel-a provenance PXO/ORA path/SHA match"
+    },
+    {
+      "id": "prov_skill-tel-a_users",
+      "pass": true,
+      "detail": "skill-tel-a provenance action users match"
+    },
+    {
+      "id": "source_skill-tel-b_role",
+      "pass": true,
+      "detail": "skill-tel-b uses the v02 source"
+    },
+    {
+      "id": "source_skill-tel-b_png_sha",
+      "pass": true,
+      "detail": "skill-tel-b PNG SHA-256 matches its source manifest"
+    },
+    {
+      "id": "source_skill-tel-b_native_pxo",
+      "pass": true,
+      "detail": "skill-tel-b native PXO exists and is unchanged"
+    },
+    {
+      "id": "source_skill-tel-b_native_ora",
+      "pass": true,
+      "detail": "skill-tel-b native ORA exists and is unchanged"
+    },
+    {
+      "id": "source_skill-tel-b_format",
+      "pass": true,
+      "detail": "skill-tel-b is exact 136x144 RGBA PNG"
+    },
+    {
+      "id": "prov_skill-tel-b_pose",
+      "pass": true,
+      "detail": "skill-tel-b provenance pose matches cell 19"
+    },
+    {
+      "id": "prov_skill-tel-b_source",
+      "pass": true,
+      "detail": "skill-tel-b provenance source path/SHA match"
+    },
+    {
+      "id": "prov_skill-tel-b_native",
+      "pass": true,
+      "detail": "skill-tel-b provenance PXO/ORA path/SHA match"
+    },
+    {
+      "id": "prov_skill-tel-b_users",
+      "pass": true,
+      "detail": "skill-tel-b provenance action users match"
+    },
+    {
+      "id": "source_skill-strike_role",
+      "pass": true,
+      "detail": "skill-strike uses the v02 source"
+    },
+    {
+      "id": "source_skill-strike_png_sha",
+      "pass": true,
+      "detail": "skill-strike PNG SHA-256 matches its source manifest"
+    },
+    {
+      "id": "source_skill-strike_native_pxo",
+      "pass": true,
+      "detail": "skill-strike native PXO exists and is unchanged"
+    },
+    {
+      "id": "source_skill-strike_native_ora",
+      "pass": true,
+      "detail": "skill-strike native ORA exists and is unchanged"
+    },
+    {
+      "id": "source_skill-strike_format",
+      "pass": true,
+      "detail": "skill-strike is exact 136x144 RGBA PNG"
+    },
+    {
+      "id": "prov_skill-strike_pose",
+      "pass": true,
+      "detail": "skill-strike provenance pose matches cell 20"
+    },
+    {
+      "id": "prov_skill-strike_source",
+      "pass": true,
+      "detail": "skill-strike provenance source path/SHA match"
+    },
+    {
+      "id": "prov_skill-strike_native",
+      "pass": true,
+      "detail": "skill-strike provenance PXO/ORA path/SHA match"
+    },
+    {
+      "id": "prov_skill-strike_users",
+      "pass": true,
+      "detail": "skill-strike provenance action users match"
+    },
+    {
+      "id": "source_skill-contact_role",
+      "pass": true,
+      "detail": "skill-contact uses the v02 source"
+    },
+    {
+      "id": "source_skill-contact_png_sha",
+      "pass": true,
+      "detail": "skill-contact PNG SHA-256 matches its source manifest"
+    },
+    {
+      "id": "source_skill-contact_native_pxo",
+      "pass": true,
+      "detail": "skill-contact native PXO exists and is unchanged"
+    },
+    {
+      "id": "source_skill-contact_native_ora",
+      "pass": true,
+      "detail": "skill-contact native ORA exists and is unchanged"
+    },
+    {
+      "id": "source_skill-contact_format",
+      "pass": true,
+      "detail": "skill-contact is exact 136x144 RGBA PNG"
+    },
+    {
+      "id": "prov_skill-contact_pose",
+      "pass": true,
+      "detail": "skill-contact provenance pose matches cell 21"
+    },
+    {
+      "id": "prov_skill-contact_source",
+      "pass": true,
+      "detail": "skill-contact provenance source path/SHA match"
+    },
+    {
+      "id": "prov_skill-contact_native",
+      "pass": true,
+      "detail": "skill-contact provenance PXO/ORA path/SHA match"
+    },
+    {
+      "id": "prov_skill-contact_users",
+      "pass": true,
+      "detail": "skill-contact provenance action users match"
+    },
+    {
+      "id": "source_skill-recover_role",
+      "pass": true,
+      "detail": "skill-recover uses the v02 source"
+    },
+    {
+      "id": "source_skill-recover_png_sha",
+      "pass": true,
+      "detail": "skill-recover PNG SHA-256 matches its source manifest"
+    },
+    {
+      "id": "source_skill-recover_native_pxo",
+      "pass": true,
+      "detail": "skill-recover native PXO exists and is unchanged"
+    },
+    {
+      "id": "source_skill-recover_native_ora",
+      "pass": true,
+      "detail": "skill-recover native ORA exists and is unchanged"
+    },
+    {
+      "id": "source_skill-recover_format",
+      "pass": true,
+      "detail": "skill-recover is exact 136x144 RGBA PNG"
+    },
+    {
+      "id": "prov_skill-recover_pose",
+      "pass": true,
+      "detail": "skill-recover provenance pose matches cell 22"
+    },
+    {
+      "id": "prov_skill-recover_source",
+      "pass": true,
+      "detail": "skill-recover provenance source path/SHA match"
+    },
+    {
+      "id": "prov_skill-recover_native",
+      "pass": true,
+      "detail": "skill-recover provenance PXO/ORA path/SHA match"
+    },
+    {
+      "id": "prov_skill-recover_users",
+      "pass": true,
+      "detail": "skill-recover provenance action users match"
+    },
+    {
+      "id": "source_hit-a_role",
+      "pass": true,
+      "detail": "hit-a uses the v03 source"
+    },
+    {
+      "id": "source_hit-a_png_sha",
+      "pass": true,
+      "detail": "hit-a PNG SHA-256 matches its source manifest"
+    },
+    {
+      "id": "source_hit-a_native_pxo",
+      "pass": true,
+      "detail": "hit-a native PXO exists and is unchanged"
+    },
+    {
+      "id": "source_hit-a_native_ora",
+      "pass": true,
+      "detail": "hit-a native ORA exists and is unchanged"
+    },
+    {
+      "id": "source_hit-a_format",
+      "pass": true,
+      "detail": "hit-a is exact 136x144 RGBA PNG"
+    },
+    {
+      "id": "prov_hit-a_pose",
+      "pass": true,
+      "detail": "hit-a provenance pose matches cell 23"
+    },
+    {
+      "id": "prov_hit-a_source",
+      "pass": true,
+      "detail": "hit-a provenance source path/SHA match"
+    },
+    {
+      "id": "prov_hit-a_native",
+      "pass": true,
+      "detail": "hit-a provenance PXO/ORA path/SHA match"
+    },
+    {
+      "id": "prov_hit-a_users",
+      "pass": true,
+      "detail": "hit-a provenance action users match"
+    },
+    {
+      "id": "source_hit-b_role",
+      "pass": true,
+      "detail": "hit-b uses the v03 source"
+    },
+    {
+      "id": "source_hit-b_png_sha",
+      "pass": true,
+      "detail": "hit-b PNG SHA-256 matches its source manifest"
+    },
+    {
+      "id": "source_hit-b_native_pxo",
+      "pass": true,
+      "detail": "hit-b native PXO exists and is unchanged"
+    },
+    {
+      "id": "source_hit-b_native_ora",
+      "pass": true,
+      "detail": "hit-b native ORA exists and is unchanged"
+    },
+    {
+      "id": "source_hit-b_format",
+      "pass": true,
+      "detail": "hit-b is exact 136x144 RGBA PNG"
+    },
+    {
+      "id": "prov_hit-b_pose",
+      "pass": true,
+      "detail": "hit-b provenance pose matches cell 24"
+    },
+    {
+      "id": "prov_hit-b_source",
+      "pass": true,
+      "detail": "hit-b provenance source path/SHA match"
+    },
+    {
+      "id": "prov_hit-b_native",
+      "pass": true,
+      "detail": "hit-b provenance PXO/ORA path/SHA match"
+    },
+    {
+      "id": "prov_hit-b_users",
+      "pass": true,
+      "detail": "hit-b provenance action users match"
+    },
+    {
+      "id": "source_hit-c_role",
+      "pass": true,
+      "detail": "hit-c uses the v03 source"
+    },
+    {
+      "id": "source_hit-c_png_sha",
+      "pass": true,
+      "detail": "hit-c PNG SHA-256 matches its source manifest"
+    },
+    {
+      "id": "source_hit-c_native_pxo",
+      "pass": true,
+      "detail": "hit-c native PXO exists and is unchanged"
+    },
+    {
+      "id": "source_hit-c_native_ora",
+      "pass": true,
+      "detail": "hit-c native ORA exists and is unchanged"
+    },
+    {
+      "id": "source_hit-c_format",
+      "pass": true,
+      "detail": "hit-c is exact 136x144 RGBA PNG"
+    },
+    {
+      "id": "prov_hit-c_pose",
+      "pass": true,
+      "detail": "hit-c provenance pose matches cell 25"
+    },
+    {
+      "id": "prov_hit-c_source",
+      "pass": true,
+      "detail": "hit-c provenance source path/SHA match"
+    },
+    {
+      "id": "prov_hit-c_native",
+      "pass": true,
+      "detail": "hit-c provenance PXO/ORA path/SHA match"
+    },
+    {
+      "id": "prov_hit-c_users",
+      "pass": true,
+      "detail": "hit-c provenance action users match"
+    },
+    {
+      "id": "source_down-a_role",
+      "pass": true,
+      "detail": "down-a uses the v03 source"
+    },
+    {
+      "id": "source_down-a_png_sha",
+      "pass": true,
+      "detail": "down-a PNG SHA-256 matches its source manifest"
+    },
+    {
+      "id": "source_down-a_native_pxo",
+      "pass": true,
+      "detail": "down-a native PXO exists and is unchanged"
+    },
+    {
+      "id": "source_down-a_native_ora",
+      "pass": true,
+      "detail": "down-a native ORA exists and is unchanged"
+    },
+    {
+      "id": "source_down-a_format",
+      "pass": true,
+      "detail": "down-a is exact 136x144 RGBA PNG"
+    },
+    {
+      "id": "prov_down-a_pose",
+      "pass": true,
+      "detail": "down-a provenance pose matches cell 26"
+    },
+    {
+      "id": "prov_down-a_source",
+      "pass": true,
+      "detail": "down-a provenance source path/SHA match"
+    },
+    {
+      "id": "prov_down-a_native",
+      "pass": true,
+      "detail": "down-a provenance PXO/ORA path/SHA match"
+    },
+    {
+      "id": "prov_down-a_users",
+      "pass": true,
+      "detail": "down-a provenance action users match"
+    },
+    {
+      "id": "source_down-b_role",
+      "pass": true,
+      "detail": "down-b uses the v03 source"
+    },
+    {
+      "id": "source_down-b_png_sha",
+      "pass": true,
+      "detail": "down-b PNG SHA-256 matches its source manifest"
+    },
+    {
+      "id": "source_down-b_native_pxo",
+      "pass": true,
+      "detail": "down-b native PXO exists and is unchanged"
+    },
+    {
+      "id": "source_down-b_native_ora",
+      "pass": true,
+      "detail": "down-b native ORA exists and is unchanged"
+    },
+    {
+      "id": "source_down-b_format",
+      "pass": true,
+      "detail": "down-b is exact 136x144 RGBA PNG"
+    },
+    {
+      "id": "prov_down-b_pose",
+      "pass": true,
+      "detail": "down-b provenance pose matches cell 27"
+    },
+    {
+      "id": "prov_down-b_source",
+      "pass": true,
+      "detail": "down-b provenance source path/SHA match"
+    },
+    {
+      "id": "prov_down-b_native",
+      "pass": true,
+      "detail": "down-b provenance PXO/ORA path/SHA match"
+    },
+    {
+      "id": "prov_down-b_users",
+      "pass": true,
+      "detail": "down-b provenance action users match"
+    },
+    {
+      "id": "source_down-c_role",
+      "pass": true,
+      "detail": "down-c uses the v03 source"
+    },
+    {
+      "id": "source_down-c_png_sha",
+      "pass": true,
+      "detail": "down-c PNG SHA-256 matches its source manifest"
+    },
+    {
+      "id": "source_down-c_native_pxo",
+      "pass": true,
+      "detail": "down-c native PXO exists and is unchanged"
+    },
+    {
+      "id": "source_down-c_native_ora",
+      "pass": true,
+      "detail": "down-c native ORA exists and is unchanged"
+    },
+    {
+      "id": "source_down-c_format",
+      "pass": true,
+      "detail": "down-c is exact 136x144 RGBA PNG"
+    },
+    {
+      "id": "prov_down-c_pose",
+      "pass": true,
+      "detail": "down-c provenance pose matches cell 28"
+    },
+    {
+      "id": "prov_down-c_source",
+      "pass": true,
+      "detail": "down-c provenance source path/SHA match"
+    },
+    {
+      "id": "prov_down-c_native",
+      "pass": true,
+      "detail": "down-c provenance PXO/ORA path/SHA match"
+    },
+    {
+      "id": "prov_down-c_users",
+      "pass": true,
+      "detail": "down-c provenance action users match"
+    },
+    {
+      "id": "native_counts",
+      "pass": true,
+      "detail": "29 distinct PXO and 29 distinct ORA sources"
+    },
+    {
+      "id": "source_manifest_count",
+      "pass": true,
+      "detail": "three source manifests frozen"
+    },
+    {
+      "id": "provenance_frozen_counts",
+      "pass": true,
+      "detail": "provenance frozen counts are 29/29/29/3"
+    },
+    {
+      "id": "provenance_schema",
+      "pass": true,
+      "detail": "provenance schema"
+    },
+    {
+      "id": "provenance_identity",
+      "pass": true,
+      "detail": "provenance identity"
+    },
+    {
+      "id": "provenance_unapproved",
+      "pass": true,
+      "detail": "provenance records no approval/default"
+    },
+    {
+      "id": "provenance_packaging",
+      "pass": true,
+      "detail": "packaging grid records 30 cells, 29 used, unused [29]"
+    },
+    {
+      "id": "provenance_action_order",
+      "pass": true,
+      "detail": "provenance action order"
+    },
+    {
+      "id": "prov_action_idle_name",
+      "pass": true,
+      "detail": "provenance action idle"
+    },
+    {
+      "id": "prov_action_idle_ticks",
+      "pass": true,
+      "detail": "idle provenance duration is 28/30"
+    },
+    {
+      "id": "prov_action_idle_frames",
+      "pass": true,
+      "detail": "idle provenance frame map"
+    },
+    {
+      "id": "prov_action_attack_name",
+      "pass": true,
+      "detail": "provenance action attack"
+    },
+    {
+      "id": "prov_action_attack_ticks",
+      "pass": true,
+      "detail": "attack provenance duration is 13/30"
+    },
+    {
+      "id": "prov_action_attack_frames",
+      "pass": true,
+      "detail": "attack provenance frame map"
+    },
+    {
+      "id": "prov_action_move_name",
+      "pass": true,
+      "detail": "provenance action move"
+    },
+    {
+      "id": "prov_action_move_ticks",
+      "pass": true,
+      "detail": "move provenance duration is 12/30"
+    },
+    {
+      "id": "prov_action_move_frames",
+      "pass": true,
+      "detail": "move provenance frame map"
+    },
+    {
+      "id": "prov_action_guard_name",
+      "pass": true,
+      "detail": "provenance action guard"
+    },
+    {
+      "id": "prov_action_guard_ticks",
+      "pass": true,
+      "detail": "guard provenance duration is 14/30"
+    },
+    {
+      "id": "prov_action_guard_frames",
+      "pass": true,
+      "detail": "guard provenance frame map"
+    },
+    {
+      "id": "prov_action_dodge_name",
+      "pass": true,
+      "detail": "provenance action dodge"
+    },
+    {
+      "id": "prov_action_dodge_ticks",
+      "pass": true,
+      "detail": "dodge provenance duration is 9/30"
+    },
+    {
+      "id": "prov_action_dodge_frames",
+      "pass": true,
+      "detail": "dodge provenance frame map"
+    },
+    {
+      "id": "prov_action_skill_name",
+      "pass": true,
+      "detail": "provenance action skill"
+    },
+    {
+      "id": "prov_action_skill_ticks",
+      "pass": true,
+      "detail": "skill provenance duration is 14/30"
+    },
+    {
+      "id": "prov_action_skill_frames",
+      "pass": true,
+      "detail": "skill provenance frame map"
+    },
+    {
+      "id": "prov_action_hit_name",
+      "pass": true,
+      "detail": "provenance action hit"
+    },
+    {
+      "id": "prov_action_hit_ticks",
+      "pass": true,
+      "detail": "hit provenance duration is 8/30"
+    },
+    {
+      "id": "prov_action_hit_frames",
+      "pass": true,
+      "detail": "hit provenance frame map"
+    },
+    {
+      "id": "prov_action_defeat_name",
+      "pass": true,
+      "detail": "provenance action defeat"
+    },
+    {
+      "id": "prov_action_defeat_ticks",
+      "pass": true,
+      "detail": "defeat provenance duration is 9/30"
+    },
+    {
+      "id": "prov_action_defeat_frames",
+      "pass": true,
+      "detail": "defeat provenance frame map"
+    },
+    {
+      "id": "provenance_durations",
+      "pass": true,
+      "detail": "provenance authored durations are exact integer ticks/30"
+    },
+    {
+      "id": "provenance_sheet_sha",
+      "pass": true,
+      "detail": "provenance sheet SHA matches"
+    },
+    {
+      "id": "provenance_manifest_sha",
+      "pass": true,
+      "detail": "provenance manifest SHA matches"
+    },
+    {
+      "id": "provenance_index_sha",
+      "pass": true,
+      "detail": "provenance index SHA matches"
+    },
+    {
+      "id": "provenance_build_tool",
+      "pass": true,
+      "detail": "provenance build-tool SHA matches"
+    },
+    {
+      "id": "sheet_format",
+      "pass": true,
+      "detail": "sheet is an 816x720 RGBA PNG"
+    },
+    {
+      "id": "sheet_sha",
+      "pass": true,
+      "detail": "sheet file SHA-256 is stable"
+    },
+    {
+      "id": "sheet_multiple",
+      "pass": true,
+      "detail": "sheet dimensions are exact cell multiples"
+    },
+    {
+      "id": "sheet_independent_rebuild",
+      "pass": true,
+      "detail": "independent RGBA rebuild equals the sheet"
+    },
+    {
+      "id": "cell_base_bytes",
+      "pass": true,
+      "detail": "base cell is byte-for-byte equal to the source PNG's decoded RGBA"
+    },
+    {
+      "id": "cell_base_alpha",
+      "pass": true,
+      "detail": "base cell preserves the source alpha set"
+    },
+    {
+      "id": "cell_idle-b1_bytes",
+      "pass": true,
+      "detail": "idle-b1 cell is byte-for-byte equal to the source PNG's decoded RGBA"
+    },
+    {
+      "id": "cell_idle-b1_alpha",
+      "pass": true,
+      "detail": "idle-b1 cell preserves the source alpha set"
+    },
+    {
+      "id": "cell_idle-b2_bytes",
+      "pass": true,
+      "detail": "idle-b2 cell is byte-for-byte equal to the source PNG's decoded RGBA"
+    },
+    {
+      "id": "cell_idle-b2_alpha",
+      "pass": true,
+      "detail": "idle-b2 cell preserves the source alpha set"
+    },
+    {
+      "id": "cell_atk-antic-a_bytes",
+      "pass": true,
+      "detail": "atk-antic-a cell is byte-for-byte equal to the source PNG's decoded RGBA"
+    },
+    {
+      "id": "cell_atk-antic-a_alpha",
+      "pass": true,
+      "detail": "atk-antic-a cell preserves the source alpha set"
+    },
+    {
+      "id": "cell_atk-antic-b_bytes",
+      "pass": true,
+      "detail": "atk-antic-b cell is byte-for-byte equal to the source PNG's decoded RGBA"
+    },
+    {
+      "id": "cell_atk-antic-b_alpha",
+      "pass": true,
+      "detail": "atk-antic-b cell preserves the source alpha set"
+    },
+    {
+      "id": "cell_atk-smear_bytes",
+      "pass": true,
+      "detail": "atk-smear cell is byte-for-byte equal to the source PNG's decoded RGBA"
+    },
+    {
+      "id": "cell_atk-smear_alpha",
+      "pass": true,
+      "detail": "atk-smear cell preserves the source alpha set"
+    },
+    {
+      "id": "cell_atk-contact_bytes",
+      "pass": true,
+      "detail": "atk-contact cell is byte-for-byte equal to the source PNG's decoded RGBA"
+    },
+    {
+      "id": "cell_atk-contact_alpha",
+      "pass": true,
+      "detail": "atk-contact cell preserves the source alpha set"
+    },
+    {
+      "id": "cell_atk-follow_bytes",
+      "pass": true,
+      "detail": "atk-follow cell is byte-for-byte equal to the source PNG's decoded RGBA"
+    },
+    {
+      "id": "cell_atk-follow_alpha",
+      "pass": true,
+      "detail": "atk-follow cell preserves the source alpha set"
+    },
+    {
+      "id": "cell_atk-recover_bytes",
+      "pass": true,
+      "detail": "atk-recover cell is byte-for-byte equal to the source PNG's decoded RGBA"
+    },
+    {
+      "id": "cell_atk-recover_alpha",
+      "pass": true,
+      "detail": "atk-recover cell preserves the source alpha set"
+    },
+    {
+      "id": "cell_move-a_bytes",
+      "pass": true,
+      "detail": "move-a cell is byte-for-byte equal to the source PNG's decoded RGBA"
+    },
+    {
+      "id": "cell_move-a_alpha",
+      "pass": true,
+      "detail": "move-a cell preserves the source alpha set"
+    },
+    {
+      "id": "cell_move-b_bytes",
+      "pass": true,
+      "detail": "move-b cell is byte-for-byte equal to the source PNG's decoded RGBA"
+    },
+    {
+      "id": "cell_move-b_alpha",
+      "pass": true,
+      "detail": "move-b cell preserves the source alpha set"
+    },
+    {
+      "id": "cell_move-c_bytes",
+      "pass": true,
+      "detail": "move-c cell is byte-for-byte equal to the source PNG's decoded RGBA"
+    },
+    {
+      "id": "cell_move-c_alpha",
+      "pass": true,
+      "detail": "move-c cell preserves the source alpha set"
+    },
+    {
+      "id": "cell_move-d_bytes",
+      "pass": true,
+      "detail": "move-d cell is byte-for-byte equal to the source PNG's decoded RGBA"
+    },
+    {
+      "id": "cell_move-d_alpha",
+      "pass": true,
+      "detail": "move-d cell preserves the source alpha set"
+    },
+    {
+      "id": "cell_guard-a_bytes",
+      "pass": true,
+      "detail": "guard-a cell is byte-for-byte equal to the source PNG's decoded RGBA"
+    },
+    {
+      "id": "cell_guard-a_alpha",
+      "pass": true,
+      "detail": "guard-a cell preserves the source alpha set"
+    },
+    {
+      "id": "cell_guard-b_bytes",
+      "pass": true,
+      "detail": "guard-b cell is byte-for-byte equal to the source PNG's decoded RGBA"
+    },
+    {
+      "id": "cell_guard-b_alpha",
+      "pass": true,
+      "detail": "guard-b cell preserves the source alpha set"
+    },
+    {
+      "id": "cell_guard-c_bytes",
+      "pass": true,
+      "detail": "guard-c cell is byte-for-byte equal to the source PNG's decoded RGBA"
+    },
+    {
+      "id": "cell_guard-c_alpha",
+      "pass": true,
+      "detail": "guard-c cell preserves the source alpha set"
+    },
+    {
+      "id": "cell_dodge-a_bytes",
+      "pass": true,
+      "detail": "dodge-a cell is byte-for-byte equal to the source PNG's decoded RGBA"
+    },
+    {
+      "id": "cell_dodge-a_alpha",
+      "pass": true,
+      "detail": "dodge-a cell preserves the source alpha set"
+    },
+    {
+      "id": "cell_dodge-b_bytes",
+      "pass": true,
+      "detail": "dodge-b cell is byte-for-byte equal to the source PNG's decoded RGBA"
+    },
+    {
+      "id": "cell_dodge-b_alpha",
+      "pass": true,
+      "detail": "dodge-b cell preserves the source alpha set"
+    },
+    {
+      "id": "cell_skill-tel-a_bytes",
+      "pass": true,
+      "detail": "skill-tel-a cell is byte-for-byte equal to the source PNG's decoded RGBA"
+    },
+    {
+      "id": "cell_skill-tel-a_alpha",
+      "pass": true,
+      "detail": "skill-tel-a cell preserves the source alpha set"
+    },
+    {
+      "id": "cell_skill-tel-b_bytes",
+      "pass": true,
+      "detail": "skill-tel-b cell is byte-for-byte equal to the source PNG's decoded RGBA"
+    },
+    {
+      "id": "cell_skill-tel-b_alpha",
+      "pass": true,
+      "detail": "skill-tel-b cell preserves the source alpha set"
+    },
+    {
+      "id": "cell_skill-strike_bytes",
+      "pass": true,
+      "detail": "skill-strike cell is byte-for-byte equal to the source PNG's decoded RGBA"
+    },
+    {
+      "id": "cell_skill-strike_alpha",
+      "pass": true,
+      "detail": "skill-strike cell preserves the source alpha set"
+    },
+    {
+      "id": "cell_skill-contact_bytes",
+      "pass": true,
+      "detail": "skill-contact cell is byte-for-byte equal to the source PNG's decoded RGBA"
+    },
+    {
+      "id": "cell_skill-contact_alpha",
+      "pass": true,
+      "detail": "skill-contact cell preserves the source alpha set"
+    },
+    {
+      "id": "cell_skill-recover_bytes",
+      "pass": true,
+      "detail": "skill-recover cell is byte-for-byte equal to the source PNG's decoded RGBA"
+    },
+    {
+      "id": "cell_skill-recover_alpha",
+      "pass": true,
+      "detail": "skill-recover cell preserves the source alpha set"
+    },
+    {
+      "id": "cell_hit-a_bytes",
+      "pass": true,
+      "detail": "hit-a cell is byte-for-byte equal to the source PNG's decoded RGBA"
+    },
+    {
+      "id": "cell_hit-a_alpha",
+      "pass": true,
+      "detail": "hit-a cell preserves the source alpha set"
+    },
+    {
+      "id": "cell_hit-b_bytes",
+      "pass": true,
+      "detail": "hit-b cell is byte-for-byte equal to the source PNG's decoded RGBA"
+    },
+    {
+      "id": "cell_hit-b_alpha",
+      "pass": true,
+      "detail": "hit-b cell preserves the source alpha set"
+    },
+    {
+      "id": "cell_hit-c_bytes",
+      "pass": true,
+      "detail": "hit-c cell is byte-for-byte equal to the source PNG's decoded RGBA"
+    },
+    {
+      "id": "cell_hit-c_alpha",
+      "pass": true,
+      "detail": "hit-c cell preserves the source alpha set"
+    },
+    {
+      "id": "cell_down-a_bytes",
+      "pass": true,
+      "detail": "down-a cell is byte-for-byte equal to the source PNG's decoded RGBA"
+    },
+    {
+      "id": "cell_down-a_alpha",
+      "pass": true,
+      "detail": "down-a cell preserves the source alpha set"
+    },
+    {
+      "id": "cell_down-b_bytes",
+      "pass": true,
+      "detail": "down-b cell is byte-for-byte equal to the source PNG's decoded RGBA"
+    },
+    {
+      "id": "cell_down-b_alpha",
+      "pass": true,
+      "detail": "down-b cell preserves the source alpha set"
+    },
+    {
+      "id": "cell_down-c_bytes",
+      "pass": true,
+      "detail": "down-c cell is byte-for-byte equal to the source PNG's decoded RGBA"
+    },
+    {
+      "id": "cell_down-c_alpha",
+      "pass": true,
+      "detail": "down-c cell preserves the source alpha set"
+    },
+    {
+      "id": "unused_cell_transparent",
+      "pass": true,
+      "detail": "cell 29 is fully transparent"
+    },
+    {
+      "id": "sheet_alpha_hard",
+      "pass": true,
+      "detail": "sheet alpha contains only 0/255, no partial-alpha blend"
+    },
+    {
+      "id": "cell_bleed",
+      "pass": true,
+      "detail": "every cell region exactly matches its own source (no packing bleed)"
+    },
+    {
+      "id": "base_revision",
+      "pass": false,
+      "detail": "checkout HEAD is the assigned base 11973af"
+    },
+    {
+      "id": "no_tracked_changes",
+      "pass": true,
+      "detail": "git status has no tracked/staged changes"
+    },
+    {
+      "id": "scope_untracked",
+      "pass": true,
+      "detail": "all untracked paths are the new package/tools/QA scope"
+    },
+    {
+      "id": "no_staged_changes",
+      "pass": true,
+      "detail": "git index is untouched"
+    },
+    {
+      "id": "no_unstaged_tracked_changes",
+      "pass": true,
+      "detail": "no tracked working file changed"
+    },
+    {
+      "id": "existing_loader_present",
+      "pass": true,
+      "detail": "existing loader and battle code are present and untouched"
+    }
+  ],
+  "failed_checks": [
+    "base_revision"
+  ],
+  "actions": [
+    {
+      "name": "idle",
+      "ticks": 28,
+      "seconds_fraction": "28/30",
+      "loop": true,
+      "loop_start": 0
+    },
+    {
+      "name": "attack",
+      "ticks": 13,
+      "seconds_fraction": "13/30",
+      "loop": false,
+      "loop_start": null
+    },
+    {
+      "name": "move",
+      "ticks": 12,
+      "seconds_fraction": "12/30",
+      "loop": true,
+      "loop_start": 0
+    },
+    {
+      "name": "guard",
+      "ticks": 14,
+      "seconds_fraction": "14/30",
+      "loop": true,
+      "loop_start": 1
+    },
+    {
+      "name": "dodge",
+      "ticks": 9,
+      "seconds_fraction": "9/30",
+      "loop": false,
+      "loop_start": null
+    },
+    {
+      "name": "skill",
+      "ticks": 14,
+      "seconds_fraction": "14/30",
+      "loop": false,
+      "loop_start": null
+    },
+    {
+      "name": "hit",
+      "ticks": 8,
+      "seconds_fraction": "8/30",
+      "loop": false,
+      "loop_start": null
+    },
+    {
+      "name": "defeat",
+      "ticks": 9,
+      "seconds_fraction": "9/30",
+      "loop": false,
+      "loop_start": null
+    }
+  ],
+  "cells": [
+    {
+      "cell": 0,
+      "pose": "base",
+      "origin": [
+        0,
+        0
+      ],
+      "source_png": "outputs/hero-sea-v01/rpg-2-star-ocean-the-second_heroine-battle_still-native136_sea-unapproved-v01_20261020-181955-1294c865.png",
+      "source_png_sha256": "4ce65a7915c0c0270a4ca353152b45b7d68b42672cb1483dd4f3e9cf4ac9d5e6"
+    },
+    {
+      "cell": 1,
+      "pose": "idle-b1",
+      "origin": [
+        136,
+        0
+      ],
+      "source_png": "outputs/hero-sea-motion-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-idle-b1-native136_test-only-v01_20261020-192028-b07bea19.png",
+      "source_png_sha256": "68726810a0050395c19ad6b95a47978fbaa5071ef0911620774fdd04011258b5"
+    },
+    {
+      "cell": 2,
+      "pose": "idle-b2",
+      "origin": [
+        272,
+        0
+      ],
+      "source_png": "outputs/hero-sea-motion-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-idle-b2-native136_test-only-v01_20261020-192028-67fbfa18.png",
+      "source_png_sha256": "035978c53a8d2a876a3d2383c0c62d609a40e98485bad294803514458367252a"
+    },
+    {
+      "cell": 3,
+      "pose": "atk-antic-a",
+      "origin": [
+        408,
+        0
+      ],
+      "source_png": "outputs/hero-sea-motion-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-antic-a-native136_test-only-v01_20261020-192028-754aa427.png",
+      "source_png_sha256": "b214e6d5b82c3fde00b154fa30a690b61c7890c376558ab4ce8ff7074cfb44f3"
+    },
+    {
+      "cell": 4,
+      "pose": "atk-antic-b",
+      "origin": [
+        544,
+        0
+      ],
+      "source_png": "outputs/hero-sea-motion-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-antic-b-native136_test-only-v01_20261020-192028-4a2e8bf9.png",
+      "source_png_sha256": "dc0b99c8e5e9568c7ad0410bc74365f2745378cb0478b4f6ec87877bd1d2a4f2"
+    },
+    {
+      "cell": 5,
+      "pose": "atk-smear",
+      "origin": [
+        680,
+        0
+      ],
+      "source_png": "outputs/hero-sea-motion-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-smear-native136_test-only-v01_20261020-192028-84458630.png",
+      "source_png_sha256": "cfa9098eac42897d5e4c4453c5080617eb409a03abf5dbf143137fca76443ceb"
+    },
+    {
+      "cell": 6,
+      "pose": "atk-contact",
+      "origin": [
+        0,
+        144
+      ],
+      "source_png": "outputs/hero-sea-motion-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-contact-native136_test-only-v01_20261020-192028-b01a6e0c.png",
+      "source_png_sha256": "d095cb7ede2b86613c16b83d8311e2515d9201411a22d4afb29b2eac85721b68"
+    },
+    {
+      "cell": 7,
+      "pose": "atk-follow",
+      "origin": [
+        136,
+        144
+      ],
+      "source_png": "outputs/hero-sea-motion-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-follow-native136_test-only-v01_20261020-192028-27db8c30.png",
+      "source_png_sha256": "a83b10a04014441521e578ed44aeced9dc6bb3579195cad79b3f31b13377b1a0"
+    },
+    {
+      "cell": 8,
+      "pose": "atk-recover",
+      "origin": [
+        272,
+        144
+      ],
+      "source_png": "outputs/hero-sea-motion-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-recover-native136_test-only-v01_20261020-192028-b5b23440.png",
+      "source_png_sha256": "18d051f58da195d5d84f851d7320fe1fd416f80466b414c351114ab4fe650ca6"
+    },
+    {
+      "cell": 9,
+      "pose": "move-a",
+      "origin": [
+        408,
+        144
+      ],
+      "source_png": "outputs/hero-sea-motion-v02/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-move-a-native136_test-only-v02_20261020-193906-5a0cabf2.png",
+      "source_png_sha256": "9928cd32b5e39c600bea2e2dcc7a43e19f94241f6dddc2f7510a0d4abdceb1c5"
+    },
+    {
+      "cell": 10,
+      "pose": "move-b",
+      "origin": [
+        544,
+        144
+      ],
+      "source_png": "outputs/hero-sea-motion-v02/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-move-b-native136_test-only-v02_20261020-193906-dd4fd7d0.png",
+      "source_png_sha256": "a94f5270450cfd009771eb631c744b28afa014d6f70a9515fa429c640b3c96b3"
+    },
+    {
+      "cell": 11,
+      "pose": "move-c",
+      "origin": [
+        680,
+        144
+      ],
+      "source_png": "outputs/hero-sea-motion-v02/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-move-c-native136_test-only-v02_20261020-193906-40876903.png",
+      "source_png_sha256": "f20c38c0e07fb467fa4844805db1a6a771b16034bfddfba42b9f47a2863ba259"
+    },
+    {
+      "cell": 12,
+      "pose": "move-d",
+      "origin": [
+        0,
+        288
+      ],
+      "source_png": "outputs/hero-sea-motion-v02/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-move-d-native136_test-only-v02_20261020-193906-f69843ff.png",
+      "source_png_sha256": "309cb461c98a14650099d07f1a1c58f79e7c92cf61ba7f25e9eb75852893bfe3"
+    },
+    {
+      "cell": 13,
+      "pose": "guard-a",
+      "origin": [
+        136,
+        288
+      ],
+      "source_png": "outputs/hero-sea-motion-v02/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-guard-a-native136_test-only-v02_20261020-193906-f03be00b.png",
+      "source_png_sha256": "aa2613cd0eef2b7b36696de8095dda37b96bff1f23b09d2cf88fb727c9675478"
+    },
+    {
+      "cell": 14,
+      "pose": "guard-b",
+      "origin": [
+        272,
+        288
+      ],
+      "source_png": "outputs/hero-sea-motion-v02/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-guard-b-native136_test-only-v02_20261020-193906-fb202812.png",
+      "source_png_sha256": "c53d94491159bbdb8ebb86b91c31c3ead9a700c7f9b167b99e9e12d4e2e8c9b1"
+    },
+    {
+      "cell": 15,
+      "pose": "guard-c",
+      "origin": [
+        408,
+        288
+      ],
+      "source_png": "outputs/hero-sea-motion-v02/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-guard-c-native136_test-only-v02_20261020-193906-e6215934.png",
+      "source_png_sha256": "9d49870117403106e01e90b7ad137344894698cdf7a698d13f27daf20d01ed95"
+    },
+    {
+      "cell": 16,
+      "pose": "dodge-a",
+      "origin": [
+        544,
+        288
+      ],
+      "source_png": "outputs/hero-sea-motion-v02/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-dodge-a-native136_test-only-v02_20261020-193906-61f545a6.png",
+      "source_png_sha256": "a49075a2808a21ee00597a578d02bb09c352c994941e4296954839dbebc2be3a"
+    },
+    {
+      "cell": 17,
+      "pose": "dodge-b",
+      "origin": [
+        680,
+        288
+      ],
+      "source_png": "outputs/hero-sea-motion-v02/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-dodge-b-native136_test-only-v02_20261020-193906-2bb17585.png",
+      "source_png_sha256": "c4eba17a9fa9bdfb348e47bae482b72f3d06da3c14133c508ed939a11c5b9e81"
+    },
+    {
+      "cell": 18,
+      "pose": "skill-tel-a",
+      "origin": [
+        0,
+        432
+      ],
+      "source_png": "outputs/hero-sea-motion-v02/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-skill-tel-a-native136_test-only-v02_20261020-193906-9b572dc8.png",
+      "source_png_sha256": "0039e03241450ead15e12e9a1041d5c1245b4bf38178ab325e0d015c7cc71ffb"
+    },
+    {
+      "cell": 19,
+      "pose": "skill-tel-b",
+      "origin": [
+        136,
+        432
+      ],
+      "source_png": "outputs/hero-sea-motion-v02/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-skill-tel-b-native136_test-only-v02_20261020-193906-63606d9f.png",
+      "source_png_sha256": "f58de210aaf3ea9fcf265541ee2c6be992b0c61fafd772bc7e1bebbfdd6fc388"
+    },
+    {
+      "cell": 20,
+      "pose": "skill-strike",
+      "origin": [
+        272,
+        432
+      ],
+      "source_png": "outputs/hero-sea-motion-v02/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-skill-strike-native136_test-only-v02_20261020-193906-41d91207.png",
+      "source_png_sha256": "a8a6254166e4a7240b824204117fbd027d709e5070cb5de5693ac4dd8c26370e"
+    },
+    {
+      "cell": 21,
+      "pose": "skill-contact",
+      "origin": [
+        408,
+        432
+      ],
+      "source_png": "outputs/hero-sea-motion-v02/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-skill-contact-native136_test-only-v02_20261020-193906-0de730b8.png",
+      "source_png_sha256": "5b014a347dc349c908954df26b976665f1d68b23349175eaaa8ea611b4e5949e"
+    },
+    {
+      "cell": 22,
+      "pose": "skill-recover",
+      "origin": [
+        544,
+        432
+      ],
+      "source_png": "outputs/hero-sea-motion-v02/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-skill-recover-native136_test-only-v02_20261020-193906-6f777816.png",
+      "source_png_sha256": "26f7c249b1d3056af3ed7268b072354dc79fc58673e01fe8ad21b340e7e13706"
+    },
+    {
+      "cell": 23,
+      "pose": "hit-a",
+      "origin": [
+        680,
+        432
+      ],
+      "source_png": "outputs/hero-sea-motion-v03/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-hit-a-native136_test-only-v03_20261020-194523-cb7919ae.png",
+      "source_png_sha256": "d49aa202fe2906c00e847a459b30032ec81ea48c942838d772640e9abaddaab3"
+    },
+    {
+      "cell": 24,
+      "pose": "hit-b",
+      "origin": [
+        0,
+        576
+      ],
+      "source_png": "outputs/hero-sea-motion-v03/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-hit-b-native136_test-only-v03_20261020-194523-41246631.png",
+      "source_png_sha256": "240016981e56db1357394fa81c2dbd62e97c52ac5918cf68c9fe0ed51e6ee28e"
+    },
+    {
+      "cell": 25,
+      "pose": "hit-c",
+      "origin": [
+        136,
+        576
+      ],
+      "source_png": "outputs/hero-sea-motion-v03/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-hit-c-native136_test-only-v03_20261020-194523-90c8c8af.png",
+      "source_png_sha256": "e79a1e1f6910b8a80d4db48c94a17cef3a4467a997060836b6332a3c0eb8a17f"
+    },
+    {
+      "cell": 26,
+      "pose": "down-a",
+      "origin": [
+        272,
+        576
+      ],
+      "source_png": "outputs/hero-sea-motion-v03/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-down-a-native136_test-only-v03_20261020-194523-9936dbee.png",
+      "source_png_sha256": "e93968af8057c3e1f51e9f9bbe26d6701c8db3ab6265b2eb89300a90b01fe833"
+    },
+    {
+      "cell": 27,
+      "pose": "down-b",
+      "origin": [
+        408,
+        576
+      ],
+      "source_png": "outputs/hero-sea-motion-v03/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-down-b-native136_test-only-v03_20261020-194523-a0e4af21.png",
+      "source_png_sha256": "bf73f705afdd705c48d41b679395276b4aedfe1475975e69e0d04263d9fbb143"
+    },
+    {
+      "cell": 28,
+      "pose": "down-c",
+      "origin": [
+        544,
+        576
+      ],
+      "source_png": "outputs/hero-sea-motion-v03/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-down-c-native136_test-only-v03_20261020-194523-be56c095.png",
+      "source_png_sha256": "03c0dd59c4e431404d4705a1b68e8f76b75481f97c3a0c8acd0fa61b5dfcfe26"
+    }
+  ],
+  "art_approved": false,
+  "motion_approved": false,
+  "default_adoption": false,
+  "limitations": [
+    "No Godot run: the loader tick_rate/loop_start implementation is concurrent and is not in this checkout at verification time; coordinator must run the combined loader/game path.",
+    "Technical packing only. Art and motion are not creator-approved; this package is not a default and does not change default adoption.",
+    "The requested explicit one-tick base tail makes attack 13/30 s, dodge 9/30 s, skill 14/30 s and hit 8/30 s, versus the shorter source clips/arena visual durations; the source clips were not reauthored.",
+    "Sheet RGBA bytes are exact and the unused cell is transparent. Runtime texture filtering/import settings are integration concerns; nearest sampling is required to preserve hard alpha and avoid sampling neighbours.",
+    "The v01/v02/v03 source manifests are TEST-ONLY authored-motion evidence. The base still is the source referenced by v01's approved static baseline; this verifier does not grant any new approval.",
+    "No commit, staging, ledger, Bible, Site, registry, account or billing change was made."
+  ]
+}
