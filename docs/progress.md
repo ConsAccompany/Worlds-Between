@@ -1,6 +1,14 @@
 # Open World Pixel RPG Implementation Progress
 
-## Latest completed batch — 2026-10-21: Zhao Ling exploration source set
+## Latest completed batch — 2026-10-21: Zhao Ling combat source set
+
+Production **56.4% →56.7% (+0.3pp)**. Content513→524/1881 (27.3%→27.9%); coding111/111 remains100%. Inspection **18.1% →18.1% (+0.0pp)**; creator approval **7.8% →7.8% (+0.0pp)**. Frozen baseline unchanged.
+
+Completed two existing production tasks: firearm battle static and all eight combat source actions.23 runtime pose cells plus separately packaged still,24 editable PXO/ORA/PNG packages; member-only runtime index. Canonical source290/290, independent native composition1128/1128, runtime contract180/180 and8 malformed-fixture tests pass. Actual EN30/ZH60battle source probes82/82each and16native captures pass.185 protected existing files remain exact. Native export24/24exact with112 disclosed shader diagnostics; no clean-app/GUI Save As or motion acceptance claim. Source commit `9c5ec05`. [Closeout](qa/rpg-2-star-ocean-the-second_zhao-ling-combat_missing-source-set-closeout_v01_20261021-221057-36b3e16d.md).
+
+Next: one bounded Zhao exploration/combat playable integration path. Ordinary default authorization and artistic acceptance remain separate; cosmetic refinements remain deferred.
+
+## Prior completed batch — 2026-10-21: Zhao Ling exploration source set
 
 Production **55.7% →56.4% (+0.7pp)**. Content493→513/1881 (26.2%→27.3%); coding111/111 remains100%. Inspection **18.1% →18.1%**; creator approval **7.8% →7.8%**. Frozen baseline unchanged.
 

@@ -4,7 +4,7 @@
   "title": "世界之间",
   "englishTitle": "Worlds Between",
   "edition": "设计基线 v0.2 · 2026-10-15 创作者决定",
-  "updatedAt": "2026-10-21T21:38:07.921426+00:00",
+  "updatedAt": "2026-10-21T22:11:58.279942+00:00",
   "note": "规则以玩家确认的设计稿为基线，并已并入 2026-10-15 创作者决定；人物姓名与外观是待审提案，具体剧情留待后续设计。",
   "pitch": "从地下社区走出的旅人，以好奇心探索多元文明，招募伙伴，并成为不同世界认知差异的桥梁。",
   "pillars": [
@@ -7918,19 +7918,19 @@
     "combinedWiringCheck": "297/297 on39f252e, clean raw log; actual Chinese victory inspected."
   },
   "latestTaskProgress": {
-    "id": "zhao-ling-exploration-source-set",
+    "id": "zhao-combat26",
     "status": "completed",
     "title": {
-      "zh": "补齐赵铃四方向探索资源",
-      "en": "Complete Zhao Ling four-direction exploration sources"
+      "zh": "赵铃战斗静止帧与八种动作源文件",
+      "en": "Zhao Ling combat static and eight source actions"
     },
-    "startedAt": "2026-10-21T21:22:55.177Z",
-    "sourceBefore": "fa855d4d21235e241b2dd5b2687610b31e15faf1",
+    "startedAt": "2026-10-21T22:00:28.557Z",
+    "sourceBefore": "13e59ccb8452b778a642b095d5927d2c4af224b8",
     "meters": {
       "production": {
-        "before": 55.7,
-        "after": 56.4,
-        "changePercentagePoints": 0.7
+        "before": 56.4,
+        "after": 56.7,
+        "changePercentagePoints": 0.3
       },
       "inspection": {
         "before": 18.1,
@@ -7943,10 +7943,10 @@
         "changePercentagePoints": 0
       }
     },
-    "completedAt": "2026-10-21T21:37:13.802Z",
-    "sourceAfter": "b315a6b4fe395607b2a5a0b66ecb318d69b84825",
+    "completedAt": "2026-10-21T22:11:28.632Z",
+    "sourceAfter": "9c5ec05ddaa52463654756355959af0a6c13b772",
     "evidence": [
-      "docs/qa/rpg-2-star-ocean-the-second_zhao-ling_exploration-source-closeout_v01_20261021-213558-83a6c19e.md"
+      "docs/qa/rpg-2-star-ocean-the-second_zhao-ling-combat_missing-source-set-closeout_v01_20261021-221057-36b3e16d.md"
     ]
   },
   "progressReporting": {
@@ -8626,6 +8626,38 @@
       "evidence": [
         "docs/qa/rpg-2-star-ocean-the-second_male-default-adoption_closeout_v01_20261021-211928-6dbf02a1.md"
       ]
+    },
+    {
+      "id": "zhao-ling-exploration-source-set",
+      "status": "completed",
+      "title": {
+        "zh": "补齐赵铃四方向探索资源",
+        "en": "Complete Zhao Ling four-direction exploration sources"
+      },
+      "startedAt": "2026-10-21T21:22:55.177Z",
+      "sourceBefore": "fa855d4d21235e241b2dd5b2687610b31e15faf1",
+      "meters": {
+        "production": {
+          "before": 55.7,
+          "after": 56.4,
+          "changePercentagePoints": 0.7
+        },
+        "inspection": {
+          "before": 18.1,
+          "after": 18.1,
+          "changePercentagePoints": 0
+        },
+        "approval": {
+          "before": 7.8,
+          "after": 7.8,
+          "changePercentagePoints": 0
+        }
+      },
+      "completedAt": "2026-10-21T21:37:13.802Z",
+      "sourceAfter": "b315a6b4fe395607b2a5a0b66ecb318d69b84825",
+      "evidence": [
+        "docs/qa/rpg-2-star-ocean-the-second_zhao-ling_exploration-source-closeout_v01_20261021-213558-83a6c19e.md"
+      ]
     }
   ],
   "latestBattleEnvironmentProduction": {
@@ -8963,5 +8995,35 @@
       640,
       360
     ]
+  },
+  "latestZhaoLingCombatProduction": {
+    "completedAt": "2026-10-21T22:11:58.279942+00:00",
+    "sourceCommit": "9c5ec05ddaa52463654756355959af0a6c13b772",
+    "owner": "claude",
+    "support": "deepseek",
+    "inspector": "codex",
+    "tasks": [
+      "content.combat.zhao-ling.combat-static",
+      "content.combat.zhao-ling.combat-actions"
+    ],
+    "production": {
+      "before": 56.4,
+      "after": 56.7,
+      "changePercentagePoints": 0.3
+    },
+    "summary": {
+      "zh": "赵铃横向枪械静止帧与八种战斗动作源文件已完成；原生可编辑包、独立检查及中英文实机场景证据已提交。",
+      "en": "Zhao firearm combat static and all eight source actions completed with editable native files, independent checks and bilingual actual-arena evidence."
+    },
+    "sourcePoses": 23,
+    "editableNativePackages": 24,
+    "evidence": [
+      "docs/qa/rpg-2-star-ocean-the-second_zhao-ling-combat_missing-source-set-closeout_v01_20261021-221057-36b3e16d.md",
+      "outputs/zcombat26/root/rpg-2-star-ocean-the-second_zhao-ling-combat_root-production-proof_v01_20261021-221030-0c1dfb9d.json"
+    ],
+    "ordinaryDefaultAdopted": false,
+    "artApproved": false,
+    "motionApproved": false,
+    "humanPlaytestsAdded": 0
   }
 }
