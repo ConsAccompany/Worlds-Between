@@ -28,3 +28,7 @@ Final current-source proofs:
 - actions: outputs/heroine-actions18/rpg-2-star-ocean-the-second_heroine-playable-path_combined-root-proof_v16_20261021-032317-978801e5.json; [('en', 133), ('zh', 133)]
 - victory: outputs/heroine-actions18/rpg-2-star-ocean-the-second_heroine-playable-path_combined-root-proof_v16_20261021-032435-d1dc9817.json; [('en', 108), ('zh', 108)]
 - defeat: outputs/heroine-actions18/rpg-2-star-ocean-the-second_heroine-playable-path_combined-root-proof_v16_20261021-032458-eae68d08.json; [('en', 98), ('zh', 98)]
+
+Source integration commit d41e91fa2fb2eaa03dd4b0037cd1b00409ce0df7. Selected92 staged files match exact working bytes. Creator approval is default-use only; no accepted-sprite counter increased.
+
+Closeout meters: production54.5→54.6 (+0.1pp); inspection17.2→17.6 (+0.4pp); creator7.8→7.8 (+0.0pp). Default integration4 existing points and1 existing technical-inspection point earned; no art approval counter changed.
