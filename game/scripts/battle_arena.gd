@@ -96,6 +96,8 @@ const BATTLE_BACKDROP_BANDS := {
 # fixtures (not art); `-- --combat-sprite-set-index=<res path>` or combat_sprite_set_index_override picks another index.
 # A fighter without a valid set (missing, invalid, unknown or partial) keeps its existing frames. Visual only: stats, reach,
 # AI, input, hit timing, positions, party order and saves are the same with the pilot on or off.
+# Exception (prepared, creator adoption pending, art UNAPPROVED): see heroine_default_battle_applies() for the female hero.
+const HeroineDefault := preload("res://scripts/hsea18/rpg-2-star-ocean-the-second_heroine-normal-default_policy_runtime-v01_20261021-032237-7c02af94.gd")
 const CombatSpriteSets := preload("res://scripts/rpg-2-star-ocean-the-second_combat-sprite-set_loader-playback_pilot-v01_20261018-153656-43a19158.gd")
 const BattleVfx := preload("res://scripts/rpg-2-star-ocean-the-second_common-vfx_native-layer_root-v02_20261019-164412-1f3bff80.gd")
 const COMMON_VFX_ASSET_DIR := "res://assets/vfx/common-v01"
@@ -168,7 +170,7 @@ var battle_finished := false
 # Presentation-only hold: a valid Patrol pilot defeat is visible before the victory panel.
 var patrol_result_pending := false
 var heroine_result_pending := false
-# The authored heroine defeat stays visible before results, without extending the existing two-second loss timer.
+# Authored defeat is visible before results; existing two-second return timer is preserved.
 var heroine_defeat_result_pending := false
 var patrol_result_elapsed := 0.0
 var battle_won := false
@@ -203,6 +205,8 @@ var battle_backdrop_status := "off"
 var battle_backdrop_texture: Texture2D
 # Null unless the combat sprite set pilot is on.
 var combat_sprite_sets: RefCounted = null
+# True only while the prepared heroine default (not an explicit flag/override) drives the hero set and contact.
+var heroine_default_active := false
 # Opt-in provisional presentation only; disabled renderer and simulation stay unchanged.
 var battle_ui_skin: RefCounted = null
 var battle_ui_skin_status := "off"
@@ -282,6 +286,23 @@ static func heroine_sea_contact_enabled() -> bool:
 	return OS.get_cmdline_user_args().has(HEROINE_CONTACT_CLI_FLAG)
 
 
+# Prepared heroine default (creator adoption pending, art UNAPPROVED): the female hero gets the heroine combat set and
+# contact timing exactly as the opt-in path does, but only when no combat set flag/override/index and no explicit contact
+# enable is given (contact override 0 still keeps the immediate attack) and the whole pinned heroine package passes.
+static func heroine_default_battle_applies(party_ids: Array, appearance: String) -> bool:
+	if appearance != "female" or not party_ids.has("hero"):
+		return false
+	var args := OS.get_cmdline_user_args()
+	if combat_sprite_set_override >= 0 or args.has(COMBAT_SPRITE_SET_CLI_FLAG) or combat_sprite_set_index_override != "":
+		return false
+	for argument in args:
+		if argument.begins_with(COMBAT_SPRITE_SET_INDEX_ARG):
+			return false
+	if heroine_sea_contact_override == 1 or (heroine_sea_contact_override < 0 and args.has(HEROINE_CONTACT_CLI_FLAG)):
+		return false
+	return HeroineDefault.package_ok()
+
+
 static func combat_sprite_set_index() -> String:
 	if combat_sprite_set_index_override != "":
 		return combat_sprite_set_index_override
@@ -296,10 +317,12 @@ func _ready() -> void:
 	enemy_id = AppState.battle_enemy_id if ENEMIES.has(AppState.battle_enemy_id) else "patrol"
 	enemy = ENEMIES[enemy_id]
 	enemy_hp = int(enemy["max_hp"])
+	heroine_default_active = heroine_default_battle_applies(AppState.active_party_ids, AppState.hero_appearance)
+	var heroine_contact := heroine_sea_contact_enabled() or (heroine_default_active and heroine_sea_contact_override < 0)
 	for index in AppState.active_party_ids.size():
 		fighters.append({"id": AppState.active_party_ids[index], "x": 135.0 + index * 36.0, "attack_cooldown": 0.0, "dodge_cooldown": 0.0, "dodge_time": 0.0, "dodge_direction": -1.0, "skill_cooldown": 0.0, "command": "default", "guard": false, "boost": 0, "visual_action": "", "visual_elapsed": 0.0, "visual_loop_kind": "idle", "visual_loop_clock": 0.0, "visual_moving": false})
 		# Only the pilot fighter carries event keys; their presence selects the contact path and the loader's explicit clock.
-		if heroine_sea_contact_enabled() and AppState.active_party_ids[index] == "hero" and AppState.hero_appearance == "female":
+		if heroine_contact and AppState.active_party_ids[index] == "hero" and AppState.hero_appearance == "female":
 			fighters[index].merge({"contact_event_id": 0, "contact_event_clock": 0.0, "contact_event_facing": 0, "contact_event_active": false, "contact_event_state": "none"})
 	_load_enemy_sprite_pilot()
 	_load_battle_backdrop()
@@ -1090,7 +1113,7 @@ func _advance_patrol_result_presentation(delta: float) -> void:
 
 func _authored_heroine_defeat_playing() -> bool:
 	# Only the current source-bound heroine package participates; male/legacy/fallback behavior is unchanged.
-	if not heroine_sea_contact_enabled() or combat_sprite_sets == null or AppState.hero_appearance != "female":
+	if not (heroine_sea_contact_enabled() or (heroine_default_active and heroine_sea_contact_override < 0)) or combat_sprite_sets == null or AppState.hero_appearance != "female":
 		return false
 	for index in fighters.size():
 		if String(fighters[index]["id"]) != "hero" or _is_alive(index) or not combat_sprite_sets.has_set(index):
@@ -1103,6 +1126,7 @@ func _authored_heroine_defeat_playing() -> bool:
 		# At the finishing damage frame the playback can still be in hit; wait for the real defeat clock.
 		return String(state["action"]) != "defeat" or float(state["clock"]) + 0.000000001 < float(clip["duration"])
 	return false
+
 
 func _return_after_result() -> void:
 	if patrol_result_pending or heroine_result_pending or heroine_defeat_result_pending:
@@ -1244,13 +1268,25 @@ func _load_battle_backdrop() -> void:
 
 func _load_combat_sprite_sets() -> void:
 	combat_sprite_sets = null
-	if not combat_sprite_set_enabled():
+	var explicit := combat_sprite_set_enabled()
+	if not explicit and not heroine_default_active:
 		return
 	var keys: Array[String] = []
 	for fighter in fighters:
 		keys.append(CombatSpriteSets.set_key(String(fighter["id"]), AppState.hero_appearance))
 	combat_sprite_sets = CombatSpriteSets.new()
-	combat_sprite_sets.configure(combat_sprite_set_index(), keys)
+	combat_sprite_sets.configure(combat_sprite_set_index() if explicit else HeroineDefault.COMBAT_INDEX_PATH, keys)
+	if not explicit:
+		var hero_index := AppState.active_party_ids.find("hero")
+		if not combat_sprite_sets.has_set(hero_index) or combat_sprite_sets.loaded_count() != 1:
+			# Fail closed as one unit: legacy frames and the legacy immediate attack, never retimed placeholder art.
+			push_warning("Heroine normal default combat set refused at load; legacy hero kept")
+			combat_sprite_sets = null
+			heroine_default_active = false
+			for fighter in fighters:
+				for key in ["contact_event_id", "contact_event_clock", "contact_event_facing", "contact_event_active", "contact_event_state"]:
+					fighter.erase(key)
+			return
 	# The first frame shows each fighter's current state even before a combat step runs.
 	_advance_combat_sprite_sets(0.0)
 

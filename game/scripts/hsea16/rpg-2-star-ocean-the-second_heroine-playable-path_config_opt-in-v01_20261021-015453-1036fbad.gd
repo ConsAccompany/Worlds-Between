@@ -47,7 +47,7 @@ static func validate(app: Node, language: String, destination: String) -> Dictio
 	return {"ok": true, "error": ""}
 
 
-static func configure(app: Node, language: String, destination: String) -> Dictionary:
+static func configure(app: Node, language: String, destination: String, normal_defaults: bool = false) -> Dictionary:
 	var checked := validate(app, language, destination)
 	if not checked["ok"]:
 		return checked
@@ -58,14 +58,15 @@ static func configure(app: Node, language: String, destination: String) -> Dicti
 		app.toggle_language()
 	if not app.select_destination(destination):
 		return _fail("destination '%s' could not be selected" % destination)
-	var loader = load(SPRITE_SET_PILOT_PATH)
-	loader.registry_override = REGISTRY_PATH
-	loader.clear_cache()
-	load(SEA_DRIVER_PATH).enabled_override = 1
-	var arena = load(BATTLE_ARENA_PATH)
-	arena.combat_sprite_set_override = 1
-	arena.combat_sprite_set_index_override = COMBAT_INDEX_PATH
-	arena.heroine_sea_contact_override = 1
+	if not normal_defaults:
+		var loader = load(SPRITE_SET_PILOT_PATH)
+		loader.registry_override = REGISTRY_PATH
+		loader.clear_cache()
+		load(SEA_DRIVER_PATH).enabled_override = 1
+		var arena = load(BATTLE_ARENA_PATH)
+		arena.combat_sprite_set_override = 1
+		arena.combat_sprite_set_index_override = COMBAT_INDEX_PATH
+		arena.heroine_sea_contact_override = 1
 	return {"ok": true, "error": "", "language": language, "destination": destination, "scene": EXPLORATION_SCENE}
 
 

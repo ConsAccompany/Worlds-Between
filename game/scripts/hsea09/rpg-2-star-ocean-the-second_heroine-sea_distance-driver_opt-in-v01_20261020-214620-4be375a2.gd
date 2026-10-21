@@ -42,34 +42,21 @@ static func enabled() -> bool:
 	return enabled_override == 1 if enabled_override >= 0 else OS.get_cmdline_user_args().has(FLAG)
 
 static func attach(target: Sprite2D, actor: String, initial_facing: String) -> Node:
-	if not enabled() or target == null or actor != "protagonist-female" or initial_facing not in ["south","west","north","east"]:
+	if not enabled():
 		return null
 	# Dynamic lookup avoids circular preloads with the unchanged generic validator.
 	var loader = load("res://scripts/exploration_sprite_set_pilot.gd")
-	var registry: Dictionary = loader.load_registry(loader.registry_path())
-	if not registry.get("ok", false):
+	return attach_registry(target, actor, initial_facing, loader.registry_path())
+
+# Same whole-package checks as the opt-in path for an explicit registry; used by the prepared heroine default.
+static func attach_registry(target: Sprite2D, actor: String, initial_facing: String, registry_path: String) -> Node:
+	if target == null or initial_facing not in ["south","west","north","east"]:
 		return null
-	var set_path: String = registry["actors"].get(actor, "")
-	if set_path.is_empty():
+	var prepared := prepare(actor, registry_path)
+	if prepared.is_empty():
 		return null
-	if not FileAccess.file_exists(set_path):
-		return null
-	var profile := _profile_for_set(FileAccess.get_sha256(set_path))
-	if profile.is_empty() or not _source_bytes_match(set_path.get_base_dir(), profile):
-		return null
-	var result: Dictionary = loader.load_set(set_path, actor)
-	if not result.get("ok", false):
-		return null
-	var candidate: Dictionary = result["set"]
-	# This specific pilot requires the four new 12-phase clips; old packages fall back whole.
-	if int(candidate["density"]) != 2 or candidate["frame_size"] != Vector2(80, 112) or candidate["pivot"] != Vector2(40, 104):
-		return null
-	for direction in ["south", "west", "north", "east"]:
-		if candidate["clips"]["walk"][direction]["textures"].size() != 12:
-			return null
-	var bridge_set := _load_bridges(loader, profile, candidate)
-	if bridge_set.is_empty():
-		return null
+	var candidate: Dictionary = prepared["set"]
+	var bridge_set: Dictionary = prepared["bridges"]
 	var script = load(MODEL_PATH)
 	if script == null:
 		return null
@@ -86,6 +73,37 @@ static func attach(target: Sprite2D, actor: String, initial_facing: String) -> N
 	target.add_child(driver)
 	driver._apply({"action": "idle", "frame": 0, "facing": initial_facing})
 	return driver
+
+# Read-only validation; changes no target field. {} means the whole package is refused.
+static func prepare(actor: String, registry_path: String) -> Dictionary:
+	if actor != "protagonist-female":
+		return {}
+	var loader = load("res://scripts/exploration_sprite_set_pilot.gd")
+	var registry: Dictionary = loader.load_registry(registry_path)
+	if not registry.get("ok", false):
+		return {}
+	var set_path: String = registry["actors"].get(actor, "")
+	if set_path.is_empty():
+		return {}
+	if not FileAccess.file_exists(set_path):
+		return {}
+	var profile := _profile_for_set(FileAccess.get_sha256(set_path))
+	if profile.is_empty() or not _source_bytes_match(set_path.get_base_dir(), profile):
+		return {}
+	var result: Dictionary = loader.load_set(set_path, actor)
+	if not result.get("ok", false):
+		return {}
+	var candidate: Dictionary = result["set"]
+	# This specific pilot requires the four new 12-phase clips; old packages fall back whole.
+	if int(candidate["density"]) != 2 or candidate["frame_size"] != Vector2(80, 112) or candidate["pivot"] != Vector2(40, 104):
+		return {}
+	for direction in ["south", "west", "north", "east"]:
+		if candidate["clips"]["walk"][direction]["textures"].size() != 12:
+			return {}
+	var bridge_set := _load_bridges(loader, profile, candidate)
+	if bridge_set.is_empty():
+		return {}
+	return {"set": candidate, "bridges": bridge_set}
 
 static func _source_bytes_match(base: String, profile: Dictionary) -> bool:
 	var provenance_path: String = profile["provenance_path"]

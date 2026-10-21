@@ -7,6 +7,8 @@ extends Node
 # default DEFAULT_REGISTRY, which lists no sets because no high-density set is approved yet), validates the
 # set listed for the actor and, only if every frame passes, drives the host's Sprite2D from it. A set with
 # any bad frame is rejected whole (no mixing with legacy frames); the actor then keeps the legacy textures.
+# Exception (prepared, creator adoption pending, art UNAPPROVED): with no explicit exploration flag/override the
+# female protagonist gets the front17 Sea distance driver via the hsea18 heroine default policy, or legacy if refused.
 #
 # Set contract (schema SET_SCHEMA, one JSON per actor, frame files relative to the JSON or res://):
 #   density: 2..4 source texels per logical px (display scale 1/density; 2 = the 80x112 master cell).
@@ -33,6 +35,7 @@ const ACTIONS := ["idle", "walk"]
 const MIN_FRAMES := {"idle": 1, "walk": 2}
 const MAX_FRAMES := 16
 const FemaleCompletePilot := preload("res://scripts/fexp/rpg-2-star-ocean-the-second_female-complete-explore_driver_pilot-v01_20261019-184900-f2c0a7e1.gd")
+const HeroineDefault := preload("res://scripts/hsea18/rpg-2-star-ocean-the-second_heroine-normal-default_policy_runtime-v01_20261021-032237-7c02af94.gd")
 const MIN_DURATION_MS := 40
 const MAX_DURATION_MS := 2000
 const BODY_LOGICAL := 48
@@ -77,12 +80,19 @@ static func clear_cache() -> void:
 	_sets.clear()
 	texture_loads = 0
 	manifest_reads = 0
+	HeroineDefault.clear_cache()
 
 
 # Returns the driver now drawing `target`, or null (flag off, no set for the actor, or set rejected).
 static func attach(target: Sprite2D, actor: String, initial_facing: String) -> Node:
 	# Separate Sea-style distance pilot: opt-in, whole-package refusal, unchanged default.
 	var sea_driver = load("res://scripts/hsea09/rpg-2-star-ocean-the-second_heroine-sea_distance-driver_opt-in-v01_20261020-214620-4be375a2.gd")
+	# Prepared heroine default (creator adoption pending, art UNAPPROVED): only with no explicit exploration knob.
+	# A refused package returns null here (legacy textures), never a generic or partial presentation of it.
+	if HeroineDefault.exploration_default_applies(actor):
+		if not HeroineDefault.package_ok():
+			return null
+		return sea_driver.attach_registry(target, actor, initial_facing, HeroineDefault.REGISTRY_PATH)
 	if sea_driver.enabled():
 		return sea_driver.attach(target, actor, initial_facing)
 	# Separate opt-in female complete-exploration pilot (own flag, default off); null falls through unchanged.

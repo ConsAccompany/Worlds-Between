@@ -33,6 +33,7 @@ var observed_actions := {}
 var frame := 0
 var explore: Node
 var scenario := "victory"
+var normal_defaults := false
 
 
 func _initialize() -> void:
@@ -171,6 +172,7 @@ func _run() -> void:
 		return
 	out = args[0]; config_path = args[1]; index_path = args[2]; language = args[3]; tag = args[4]; profile_path = args[5]
 	scenario = args[6] if args.size() > 6 else "victory"
+	normal_defaults = args.size() > 7 and args[7] == "normal-default"
 	if scenario not in ["victory", "defeat", "actions"]:
 		quit(2)
 		return
@@ -195,7 +197,7 @@ func _run() -> void:
 		print("PATH16_FAILED language=%s failures=%s" % [language, failures])
 		quit(1)
 		return
-	var config_result: Variant = config_script.configure(app, language, destination)
+	var config_result: Variant = config_script.configure(app, language, destination, normal_defaults)
 	ck(config_result is Dictionary and config_result.get("ok", false), "shared config accepted pinned heroine packages", config_result)
 	if not config_result is Dictionary or not config_result.get("ok", false):
 		quit(1)
@@ -245,9 +247,17 @@ func _run() -> void:
 	ck(battle.enemy_hp == int(arena_script.ENEMIES["patrol"]["max_hp"]) and battle.fighters.size() == 1 and battle.fighters[0]["id"] == "hero", "normal enemy max HP and solo heroine party", {"hp": battle.enemy_hp, "party": app.active_party_ids})
 	ck(battle.combat_sprite_sets != null and battle.combat_sprite_sets.index_path == index_path and battle.combat_sprite_sets.index_status == "loaded" and battle.combat_sprite_sets.has_set(0), "real combat package is loaded from the supplied index", {"index": battle.combat_sprite_sets.index_path if battle.combat_sprite_sets != null else "", "status": battle.combat_sprite_sets.index_status if battle.combat_sprite_sets != null else ""})
 	ck(battle.fighters[0].has("contact_event_id"), "heroine contact timing mode is active")
+	if normal_defaults:
+		var loader = load("res://scripts/exploration_sprite_set_pilot.gd")
+		var sea = load("res://scripts/hsea09/rpg-2-star-ocean-the-second_heroine-sea_distance-driver_opt-in-v01_20261020-214620-4be375a2.gd")
+		ck(loader.enabled_override == -1 and loader.registry_override == "" and sea.enabled_override == -1, "normal-default exploration uses no pilot overrides")
+		ck(arena_script.combat_sprite_set_override == -1 and arena_script.combat_sprite_set_index_override == "" and arena_script.heroine_sea_contact_override == -1, "normal-default combat uses no pilot overrides")
+		ck(battle.heroine_default_active, "ordinary-game heroine default policy is active")
+		ck(Array(OS.get_cmdline_user_args()).all(func(arg): return not String(arg).begins_with("--")), "no runtime pilot flags passed in the normal-default route")
+
 	var pkg := package_pose_count()
 	ck(pkg.get("ok", false) and int(pkg.get("poseCount", 0)) == 29, "runtime package exposes all 29 authored poses", pkg)
-	ck(pkg.get("artApproved", null) == false and pkg.get("defaultAdoption", null) == false, "package keeps unapproved/default-off metadata", pkg)
+	ck(pkg.get("artApproved", null) == false and pkg.get("defaultAdoption", null) == false, "source package retains its original unapproved metadata; adoption is recorded separately", pkg)
 	if scenario == "defeat":
 		await loss_and_reload(battle, pkg)
 		return
@@ -356,7 +366,7 @@ func _run() -> void:
 		driver_check(reloaded, "after reload")
 	ck(growth()["xp"] == g_after["xp"] and growth()["jp"] == g_after["jp"] and growth()["hp"] == g_after["hp"], "reload grants no reward and applies no damage", [g_after, growth()])
 	ck(save_store.list_entries().size() == saves_before_reload, "reload writes no new save")
-	var report := {"harness": "combined-playable-path-v16", "destination": destination, "language": language, "fixedFps": Engine.physics_ticks_per_second, "engineMaxFps": Engine.max_fps, "party": app.active_party_ids, "configPath": config_path, "packageIndex": index_path, "profilePath": profile_path, "declaredSetup": "shared config configure(app, language, destination); four-direction probes at disclosed safe points; one 70 px-left walk-in for the actual encounter; no battle placement", "checks": checks, "failures": failures, "contactLog": elog, "inputs": inputs, "trace": trace, "captures": captures, "package": pkg, "growthBefore": growth_before, "growthAfterVictory": g_after, "rewardXP": xp_reward, "rewardJP": jp_reward, "sourceSha256Raw": hashes, "configResultType": typeof(config_result), "humanPlaytest": false, "artApproved": false, "defaultAdoption": false}
+	var report := {"harness": "combined-playable-path-v16", "destination": destination, "language": language, "fixedFps": Engine.physics_ticks_per_second, "engineMaxFps": Engine.max_fps, "party": app.active_party_ids, "configPath": config_path, "packageIndex": index_path, "profilePath": profile_path, "declaredSetup": "shared config configure(app, language, destination); four-direction probes at disclosed safe points; one 70 px-left walk-in for the actual encounter; no battle placement", "checks": checks, "failures": failures, "contactLog": elog, "inputs": inputs, "trace": trace, "captures": captures, "package": pkg, "growthBefore": growth_before, "growthAfterVictory": g_after, "rewardXP": xp_reward, "rewardJP": jp_reward, "sourceSha256Raw": hashes, "configResultType": typeof(config_result), "humanPlaytest": false, "artApproved": false, "defaultAdoption": normal_defaults}
 	var f := FileAccess.open(out.path_join("rpg-2-star-ocean-the-second_heroine-playable-path_%s-combined-flow-report_test-only-v16_%s.json" % [language, tag]), FileAccess.WRITE)
 	f.store_string(JSON.stringify(report, " "))
 	f.close()
@@ -712,7 +722,7 @@ func actions_and_loss(battle: Node, pkg: Dictionary) -> void:
 		"sourcePins": pin_hashes,
 		"humanPlaytest": false,
 		"artApproved": false,
-		"defaultAdoption": false,
+		"defaultAdoption": normal_defaults,
 		"note": "Scripted normal-input action coverage. Not a human playtest, motion/art/default approval or score change."
 	}
 	var f := FileAccess.open(out.path_join("rpg-2-star-ocean-the-second_heroine-actions18_%s-combined-flow-report_test-only-v16_%s.json" % [language, tag]), FileAccess.WRITE)

@@ -193,7 +193,7 @@ def encode_movie(ffmpeg, ffprobe, raw_dir, stem, language, tag, subject="patrol"
     return {"file": movie.relative_to(C).as_posix(), "sha256": sha(movie), "frames": len(frames), "probe": data, "normalSpeedFps": 30}
 
 
-def run_full(languages, make_movie, tag, scenario="victory", timeout=MAX_WALL):
+def run_full(languages, make_movie, tag, scenario="victory", timeout=MAX_WALL, normal_defaults=False):
     if not GODOT.is_file():
         raise SystemExit(f"Godot missing: {GODOT}")
     checked = module("checked", CHECKED)
@@ -221,7 +221,7 @@ def run_full(languages, make_movie, tag, scenario="victory", timeout=MAX_WALL):
             if make_movie:
                 godot_cmd += ["--write-movie", str(raw_dir / (stem + ".avi"))]
             godot_cmd += ["--path", str(C / "game"), "--script", str(HARNESS), "--",
-                          str(OUT), CONFIG_RES, INDEX_RES, language, tag, str(profile), scenario]
+                          str(OUT), CONFIG_RES, INDEX_RES, language, tag, str(profile), scenario, "normal-default" if normal_defaults else "opt-in"]
             cmd = godot_cmd
             log = OUT / f"rpg-2-star-ocean-the-second_heroine-playable-path_{language}-combined-flow_v16_{tag}.log"
             r = checked.run_checked(cmd, timeout, expected=[f"PATH16_ALL_PASS language={language}"], log_path=lp(log))
@@ -274,6 +274,7 @@ def run_full(languages, make_movie, tag, scenario="victory", timeout=MAX_WALL):
         "model": C / "game/scripts/rpg-2-star-ocean-the-second_combat-sprite-set_loader-playback_pilot-v01_20261018-153656-43a19158.gd",
         "driver": C / "game/scripts/hsea09/rpg-2-star-ocean-the-second_heroine-sea_distance-driver_opt-in-v01_20261020-214620-4be375a2.gd",
         "config": CONFIG_FILE,
+        "defaultPolicy": next((C / "game/scripts/hsea18").glob("*policy_runtime*gd")),
         "entry": ENTRY_FILE,
         "registry": REGISTRY_FILE,
         "packageIndex": INDEX_FILE,
@@ -288,7 +289,7 @@ def run_full(languages, make_movie, tag, scenario="victory", timeout=MAX_WALL):
              "packageIndex": {"path": INDEX_RES, "sha256": sha(INDEX_FILE)},
              "registry": {"path": REGISTRY_RES, "sha256": sha(REGISTRY_FILE) if REGISTRY_FILE.is_file() else None},
              "saveProfiles": "per-run APPDATA/LOCALAPPDATA under outputs/heroine-actions18/profiles; actual user saves untouched",
-             "humanPlaytest": False, "artApproved": False, "defaultAdoption": False,
+             "humanPlaytest": False, "artApproved": False, "defaultAdoption": normal_defaults,
              "note": "Scripted normal-input evidence. Not a human playtest, motion/art/default approval or score change."}
     proof_file = OUT / f"rpg-2-star-ocean-the-second_heroine-playable-path_combined-root-proof_v16_{tag}.json"
     lp(proof_file).write_text(json.dumps(proof, indent=2) + "\n", encoding="utf-8")
@@ -327,6 +328,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--language", action="append", default=[], help="en or zh; repeat or comma-separate; default en+zh")
     parser.add_argument("--scenario", choices=["victory","defeat","actions"], default="victory")
+    parser.add_argument("--normal-default", action="store_true", help="ordinary female selection; no runtime pilot overrides or flags")
     parser.add_argument("--movie", action="store_true", help="one normal-speed 30 fps movie per language")
     parser.add_argument("--timeout", type=float, default=MAX_WALL, help="per-Godot wall bound (max 120)")
     args = parser.parse_args()
@@ -338,7 +340,7 @@ def main():
     if not CONFIG_FILE.is_file() or not INDEX_FILE.is_file():
         return run_pending(languages, tag)
     prepared = native_prepare(tag)
-    run_full(languages, args.movie, tag, args.scenario, args.timeout)
+    run_full(languages, args.movie, tag, args.scenario, args.timeout, args.normal_default)
     print("PATH16_PREPARED", prepared, flush=True)
     return 0
 
