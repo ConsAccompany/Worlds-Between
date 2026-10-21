@@ -4,7 +4,7 @@
   "title": "世界之间",
   "englishTitle": "Worlds Between",
   "edition": "设计基线 v0.2 · 2026-10-15 创作者决定",
-  "updatedAt": "2026-10-21T22:11:58.279942+00:00",
+  "updatedAt": "2026-10-21T22:56:03.855799+00:00",
   "note": "规则以玩家确认的设计稿为基线，并已并入 2026-10-15 创作者决定；人物姓名与外观是待审提案，具体剧情留待后续设计。",
   "pitch": "从地下社区走出的旅人，以好奇心探索多元文明，招募伙伴，并成为不同世界认知差异的桥梁。",
   "pillars": [
@@ -7918,19 +7918,19 @@
     "combinedWiringCheck": "297/297 on39f252e, clean raw log; actual Chinese victory inspected."
   },
   "latestTaskProgress": {
-    "id": "zhao-combat26",
+    "id": "zhao-path27",
     "status": "completed",
     "title": {
-      "zh": "赵铃战斗静止帧与八种动作源文件",
-      "en": "Zhao Ling combat static and eight source actions"
+      "zh": "赵铃伙伴可玩预览接入",
+      "en": "Zhao companion playable preview integration"
     },
-    "startedAt": "2026-10-21T22:00:28.557Z",
-    "sourceBefore": "13e59ccb8452b778a642b095d5927d2c4af224b8",
+    "startedAt": "2026-10-21T22:33:00.507Z",
+    "sourceBefore": "b8aef915702e59f1486db6c005d3208f3ffc9b2a",
     "meters": {
       "production": {
-        "before": 56.4,
+        "before": 56.7,
         "after": 56.7,
-        "changePercentagePoints": 0.3
+        "changePercentagePoints": 0
       },
       "inspection": {
         "before": 18.1,
@@ -7943,11 +7943,12 @@
         "changePercentagePoints": 0
       }
     },
-    "completedAt": "2026-10-21T22:11:28.632Z",
-    "sourceAfter": "9c5ec05ddaa52463654756355959af0a6c13b772",
+    "completedAt": "2026-10-21T22:56:03.721Z",
+    "sourceAfter": "4be53683e9182eb2154fc2e8c296b634fa016222",
     "evidence": [
-      "docs/qa/rpg-2-star-ocean-the-second_zhao-ling-combat_missing-source-set-closeout_v01_20261021-221057-36b3e16d.md"
-    ]
+      "docs/qa/rpg-2-star-ocean-the-second_zhao-playable-path_opt-in-readiness-closeout_v01_20261021-225457-642566e5.md"
+    ],
+    "ordinaryDefaultAuthorizationPending": true
   },
   "progressReporting": {
     "requiredFormat": "before → after (change in percentage points)",
@@ -8658,6 +8659,38 @@
       "evidence": [
         "docs/qa/rpg-2-star-ocean-the-second_zhao-ling_exploration-source-closeout_v01_20261021-213558-83a6c19e.md"
       ]
+    },
+    {
+      "id": "zhao-combat26",
+      "status": "completed",
+      "title": {
+        "zh": "赵铃战斗静止帧与八种动作源文件",
+        "en": "Zhao Ling combat static and eight source actions"
+      },
+      "startedAt": "2026-10-21T22:00:28.557Z",
+      "sourceBefore": "13e59ccb8452b778a642b095d5927d2c4af224b8",
+      "meters": {
+        "production": {
+          "before": 56.4,
+          "after": 56.7,
+          "changePercentagePoints": 0.3
+        },
+        "inspection": {
+          "before": 18.1,
+          "after": 18.1,
+          "changePercentagePoints": 0
+        },
+        "approval": {
+          "before": 7.8,
+          "after": 7.8,
+          "changePercentagePoints": 0
+        }
+      },
+      "completedAt": "2026-10-21T22:11:28.632Z",
+      "sourceAfter": "9c5ec05ddaa52463654756355959af0a6c13b772",
+      "evidence": [
+        "docs/qa/rpg-2-star-ocean-the-second_zhao-ling-combat_missing-source-set-closeout_v01_20261021-221057-36b3e16d.md"
+      ]
     }
   ],
   "latestBattleEnvironmentProduction": {
@@ -9025,5 +9058,34 @@
     "artApproved": false,
     "motionApproved": false,
     "humanPlaytestsAdded": 0
+  },
+  "zhaoPlayablePath": {
+    "status": "opt-in-ready-awaiting-default-authorization",
+    "sourceCommit": "4be53683e9182eb2154fc2e8c296b634fa016222",
+    "completedAt": "2026-10-21T22:56:03.855799+00:00",
+    "owner": "claude + codex",
+    "independentSupport": "deepseek",
+    "evidence": [
+      "docs/qa/rpg-2-star-ocean-the-second_zhao-playable-path_opt-in-readiness-closeout_v01_20261021-225457-642566e5.md",
+      "outputs/zpath27/root/rpg-2-star-ocean-the-second_zhao-path_root-readiness-proof_v01_20261021-225417-3905714f.json"
+    ],
+    "production": {
+      "before": 56.7,
+      "after": 56.7,
+      "changePercentagePoints": 0.0
+    },
+    "normalInputChecks": 196,
+    "parityChecks": 380,
+    "scopeRollbackChecks": 109,
+    "boundaryChecks": 13,
+    "ordinaryDefaultAdopted": false,
+    "artApproved": false,
+    "motionApproved": false,
+    "humanPlaytestsAdded": 0,
+    "previewLauncher": "tools/rpg-2-star-ocean-the-second_zhao-playable-path_launch-cli_opt-in-v01_20261021-224100-8094fb72.py",
+    "note": {
+      "zh": "真实伙伴招募、战斗取胜返回和自动存档重载通过；低生命存档边界验证败北重试。默认更换仍需单独授权，无跟随者。",
+      "en": "Real companion recruit, battle victory/return and autosave reload pass; a declared low-health save fixture covers defeat/retry. Default adoption needs separate authorization; no follower."
+    }
   }
 }

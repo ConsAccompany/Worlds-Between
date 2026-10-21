@@ -1,6 +1,14 @@
 # Open World Pixel RPG Implementation Progress
 
-## Latest completed batch — 2026-10-21: Zhao Ling combat source set
+## Latest completed batch — 2026-10-21: Zhao companion playable preview
+
+Production **56.7% →56.7% (+0.0pp)**; inspection **18.1% →18.1% (+0.0pp)**; creator approval **7.8% →7.8% (+0.0pp)**. The two frozen integration tasks require ordinary default use, so remain in progress until creator authorization. The bounded opt-in path is complete; no scoring criterion or denominator was changed.
+
+Normal input recruits the real Zhao NPC, checks the relay, enters battle, Tab-controls Zhao, uses the combat actions, wins and returns/reloads the game's autosave. EN+ZH54checks each; explicit low-health checkpoint defeat/retry44each;196combined predicates and56native captures. Manual simulation parity380, integration45per hero appearance, scope/rollback109 and13host boundaries pass.669protected assets/source files remain exact; existing hero defaults and mechanics are preserved. No field followers or art/motion acceptance. The healthy-new-run loss diagnostic instead wins under existing ally AI; boundary save setup is separately declared. [Readiness closeout](qa/rpg-2-star-ocean-the-second_zhao-playable-path_opt-in-readiness-closeout_v01_20261021-225457-642566e5.md).
+
+Next: creator decision on ordinary Zhao NPC/combat default display; patch and rollback are ready. Final art/motion acceptance remains separate.
+
+## Prior completed batch — 2026-10-21: Zhao Ling combat source set
 
 Production **56.4% →56.7% (+0.3pp)**. Content513→524/1881 (27.3%→27.9%); coding111/111 remains100%. Inspection **18.1% →18.1% (+0.0pp)**; creator approval **7.8% →7.8% (+0.0pp)**. Frozen baseline unchanged.
 
