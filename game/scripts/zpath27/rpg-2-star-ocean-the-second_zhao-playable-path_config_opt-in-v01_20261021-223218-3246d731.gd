@@ -1,6 +1,6 @@
 extends RefCounted
 
-# Opt-in Zhao Ling (赵铃) companion path (art/motion UNAPPROVED). Zhao stays a companion: recruited at the existing Yonkers
+# Creator-authorized MVP-default Zhao Ling (赵铃) companion path (final art/motion UNAPPROVED). Zhao stays a companion: recruited at the existing Yonkers
 # (scifi.outskirts) field NPC through the normal dialogue, Tab-controlled in battle, never a follower or hero replacement.
 #   exploration: the existing field NPC Sprite2D gets the zexplore25 driver (4-direction idle/walk + stop supplement);
 #   battle: a separate member-scoped companion combat model with the zcombat26 index draws only the Zhao slot.
@@ -8,9 +8,9 @@ extends RefCounted
 # prepares a fresh separate-save preview run at scifi.outskirts (no forced recruit) and sets only this file's knobs and the
 # two guarded host hooks. rollback() restores exactly what configure() replaced. Hero generic knobs, hero package
 # defaults, AI, damage, cooldowns, input, party order, saves, story, collisions and encounters are untouched.
-# DEFAULT_ADOPTED stays false until the creator authorizes ordinary Zhao use; no default credit is implied.
+# Creator authorized ordinary MVP default use on 2026-10-21; sprite refinement remains post-MVP.
 
-const DEFAULT_ADOPTED := false
+const DEFAULT_ADOPTED := true
 const ART_APPROVED := false
 const MEMBER_ID := "zhao-ling"
 const DESTINATION := "scifi.outskirts"

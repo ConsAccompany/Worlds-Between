@@ -26,6 +26,8 @@ var language := ""
 var tag := ""
 var profile := ""
 var scenario := "victory"
+var mode := "preview"
+var appearance := "male"
 var checks: Array = []
 var failures: Array = []
 var inputs: Array = []
@@ -139,15 +141,29 @@ func _run() -> void:
 		quit(2)
 		return
 	out = args[0]; language = args[1]; tag = args[2]; profile = args[3]; scenario = args[4]
+	mode = args[5] if args.size() > 5 else "preview"
+	appearance = args[6] if args.size() > 6 else "male"
 	app = root.get_node("AppState")
 	save_store = load("res://scripts/save_store.gd")
 	config = load(CONFIG)
 	var user_dir := ProjectSettings.globalize_path("user://").replace("\\", "/")
 	ck(user_dir.begins_with(profile.replace("\\", "/")), "saves isolated to runner profile", {"user": user_dir, "profile": profile})
-	ck(config.DEFAULT_ADOPTED == false and not config.enabled(), "ordinary Zhao default off before setup")
-	# SETUP FIXTURE: the coordinator's configure() is the only state setup.
-	var r: Dictionary = config.configure(app, language, "male")
-	ck(r.get("ok", false), "SETUP FIXTURE configure(app,%s,male)" % language, r)
+	var r: Dictionary
+	if mode == "ordinary-default":
+		var area = load(config.EXPLORATION_PATH)
+		var arena = load(config.BATTLE_ARENA_PATH)
+		ck(config.DEFAULT_ADOPTED and config.enabled_override == -1 and config.enabled(), "ordinary Zhao policy enabled without override")
+		ck(area.field_npc_presenter_override == "" and arena.companion_combat_member_override == "" and arena.companion_combat_index_override == "", "no preview presenter/member/index host overrides")
+		app.begin_new_run()
+		app.hero_appearance = appearance
+		app.show_initial_guide = false
+		if app.language != language:
+			app.toggle_language()
+		r = {"ok": app.select_destination(config.DESTINATION)}
+		ck(r["ok"], "SETUP FIXTURE fresh ordinary run and destination; configure() never called")
+	else:
+		r = config.configure(app, language, appearance)
+		ck(r.get("ok", false), "SETUP FIXTURE configure preview", r)
 	if not r.get("ok", false):
 		_finish()
 		return
@@ -356,12 +372,12 @@ func _write_report() -> void:
 		pins[p] = FileAccess.get_sha256(p) if FileAccess.file_exists(p) else null
 	var obs: Array = zhao_actions.keys()
 	obs.sort()
-	var report := {"harness": "zhao-real-input-flow-v01", "scenario": scenario, "language": language, "appearance": "male",
+	var report := {"harness": "zhao-real-input-flow-v01", "scenario": scenario, "language": language, "appearance": appearance, "mode": mode,
 		"godot": Engine.get_version_info().get("string", ""), "display": DisplayServer.get_name(), "maxFps": Engine.max_fps,
-		"declaredLowHealthBoundaryFixture": scenario == "defeat-boundary", "declaredSetup": "For defeat-boundary only, after real recruitment a valid saved checkpoint supplies both actors at1HP/0energy; subsequent deaths/results are engine-caused. SETUP FIXTURE: zpath27 configure(app, language, 'male') = fresh demo run at scifi.outskirts. All later steps are Input.parse_input_event keys (WASD/E/Tab/Q/L/K/D/J) and left-clicks on the real Invite/Result buttons. Reload = AppState.load_save of the game-written autosave + normal scene entry, not the Save/Load UI.",
+		"declaredLowHealthBoundaryFixture": scenario == "defeat-boundary", "ordinaryDefaultSetup": "ordinary-default mode starts a fresh ordinary AppState run and selects the destination, without configure() or host overrides; all subsequent inputs are real handlers.", "declaredSetup": "PREVIEW MODE ONLY: For defeat-boundary only, after real recruitment a valid saved checkpoint supplies both actors at1HP/0energy; subsequent deaths/results are engine-caused. SETUP FIXTURE: zpath27 configure(app, language, 'male') = fresh demo run at scifi.outskirts. All later steps are Input.parse_input_event keys (WASD/E/Tab/Q/L/K/D/J) and left-clicks on the real Invite/Result buttons. Reload = AppState.load_save of the game-written autosave + normal scene entry, not the Save/Load UI.",
 		"zhaoActionsObserved": obs, "zhaoActionFirstRows": zhao_actions, "checks": checks, "failures": failures, "inputs": inputs,
 		"captures": captures, "trace": trace, "sourceSha256Raw": pins, "harnessSha256Raw": FileAccess.get_sha256(ProjectSettings.globalize_path("res://").path_join("../tools/rpg-2-star-ocean-the-second_zhao-playable-path_real-input-flow_test-only-v01_20261021-225020-4199f994.gd")),
-		"humanPlaytest": false, "artApproved": false, "defaultAdopted": false}
+		"humanPlaytest": false, "artApproved": false, "defaultAdopted": config.DEFAULT_ADOPTED}
 	var f := FileAccess.open(out.path_join("rpg-2-star-ocean-the-second_zhao-rif_%s-%s_report_%s.json" % [language, scenario, tag]), FileAccess.WRITE)
 	if f != null:
 		f.store_string(JSON.stringify(report, " "))

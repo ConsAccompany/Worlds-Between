@@ -22,7 +22,9 @@ def main():
     p = argparse.ArgumentParser()
     p.add_argument("--language", choices=("en", "zh"), required=True)
     p.add_argument("--scenario", choices=("victory", "defeat", "defeat-boundary"), required=True)
-    p.add_argument("--timeout", type=float, default=200.0)
+    p.add_argument("--timeout", type=float, default=90.0)
+    p.add_argument("--mode", choices=("preview", "ordinary-default"), default="preview")
+    p.add_argument("--appearance", choices=("male", "female"), default="male")
     a = p.parse_args()
     spec = importlib.util.spec_from_file_location("checked_runner", RUNNER)
     runner = importlib.util.module_from_spec(spec)
@@ -36,10 +38,10 @@ def main():
     os.environ["LOCALAPPDATA"] = str(prof / "localappdata")
     os.environ.pop("ANTHROPIC_API_KEY", None)
     cmd = [str(GODOT), "--path", str(ROOT / "game"), "--resolution", "640x360", "--fixed-fps", "-1",
-           "-s", str(HARNESS), "--", str(out).replace("\\", "/"), a.language, tag, str(prof).replace("\\", "/"), a.scenario]
+           "-s", str(HARNESS), "--", str(out).replace("\\", "/"), a.language, tag, str(prof).replace("\\", "/"), a.scenario, a.mode, a.appearance]
     log = out / f"rpg-2-star-ocean-the-second_zhao-rif_{a.language}-{a.scenario}_godot-log_{tag}.log"
     r = runner.run_checked(cmd, a.timeout, ["ZRIF_ALL_PASS"], str(log))
-    receipt = {"tag": tag, "language": a.language, "scenario": a.scenario, "passed": r["passed"], "reason": r["reason"],
+    receipt = {"tag": tag, "language": a.language, "scenario": a.scenario, "mode": a.mode, "appearance": a.appearance, "passed": r["passed"], "reason": r["reason"],
                "exitCode": r["exitCode"], "elapsedSeconds": r["elapsedSeconds"], "missingMarkers": r["missingMarkers"],
                "command": cmd, "harnessSha256Raw": hashlib.sha256(HARNESS.read_bytes()).hexdigest(),
                "runnerSha256Raw": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(), "profile": str(prof)}

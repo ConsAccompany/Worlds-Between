@@ -23,8 +23,9 @@ func run() -> void:
  area=load("res://scripts/scifi_exploration_area.gd")
  arena=load("res://scripts/battle_arena.gd")
  app=root.get_node("AppState")
- ck(not config.DEFAULT_ADOPTED,"creator adoption remains off")
- ck(config.configure(app,"en","male").get("ok",false),"whole candidate config valid")
+ ck(config.DEFAULT_ADOPTED and config.enabled_override == -1 and config.enabled(),"creator-authorized default on, no override")
+ var appearance := "female" if OS.get_cmdline_user_args().has("--female") else "male"
+ ck(config.configure(app,"en",appearance).get("ok",false),"whole candidate config valid")
  var host: Node=scene("scifi_exploration_area")
  ck(config.npc_attached(host),"valid field NPC binds full set")
  host.free()
@@ -68,7 +69,8 @@ func run() -> void:
  ck(host.companion_sprite_sets!=null and host.companion_sprite_sets.loaded_count()==1,"prepared ordinary combat hook works without demo bindings")
  host.free()
  config.rollback()
- config.enabled_override=-1
+ ck(config.enabled_override == -1 and area.field_npc_presenter_override == "" and arena.companion_combat_member_override == "" and arena.companion_combat_index_override == "", "rollback restores all override values")
+ ck(config.enabled(), "rollback returns to authorized default")
  config.clear_cache()
  print("ZPATH_BOUNDARY_PASS checks=" if not failed else "ZPATH_BOUNDARY_FAILED checks=",count)
  quit(1 if failed else 0)
