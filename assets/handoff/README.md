@@ -2,9 +2,9 @@
 
 This is a content-deduplicated snapshot for DeepSeek takeover, not a playable game release or new artistic approval.
 
-- **8,773 unique files:**8,199 media/native assets plus574source/provenance manifests and authoring sources.
-- **4,361 already in this Git repository**, reused at their existing paths.
-- **4,412 additional files in22ordinary-Git ZIP bundles**,each below100MiB.
+- **8,815 unique files:**8,199 media/native assets plus616 source/provenance manifests and authoring sources.
+- **4,379 already in this Git repository**, reused at their existing paths.
+- **4,436 additional files in 23 ordinary-Git ZIP bundles**,each below100MiB.
 -47registered project worktrees plus project scratch authoring locations were inventoried with0scan errors.
 - Excluded: private account/credential/controller folders, engines/dependencies/import caches, reproducible raw recording/per-frame debug sequences and test fixtures. Nothing outside the listed project/worktree scope is claimed covered.
 - Historical, rejected and unapproved assets are preserved as archives. **No default or approval changed.**

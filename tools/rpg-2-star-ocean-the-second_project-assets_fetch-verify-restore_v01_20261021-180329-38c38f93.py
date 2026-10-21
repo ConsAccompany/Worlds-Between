@@ -59,7 +59,7 @@ def repository_bytes(asset):
         return raw, False
     # Windows text checkouts may convert CRLF. Verify the exact stored Git blob;
     # only a line-ending-only working-copy difference is permitted for text source.
-    if path.suffix.lower() not in {".py",".gd",".js",".mjs",".json",".svg",".md",".txt"}:
+    if path.suffix.lower() not in {".py",".gd",".js",".mjs",".json",".svg",".md",".txt",".tscn",".tres"}:
         raise ValueError("binary repository asset differs: " + asset["storage"]["path"])
     gitraw = subprocess.check_output(["git","cat-file","blob",asset["gitBlob"]],cwd=ROOT)
     if len(gitraw) != asset["bytes"] or hashlib.sha256(gitraw).hexdigest() != asset["sha256"]:
