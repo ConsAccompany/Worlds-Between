@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-21T00:11:01.813923+00:00",
+  "updatedAt": "2026-10-21T01:01:51.006035+00:00",
   "purpose": "Operating queue and worktree ownership; no progress points or account details",
   "workflow": "docs/workflow.md",
   "canonicalLedger": "outputs/rpg-2-star-ocean-the-second_production-completion_task-ledger_v01_20261018-140533-3de52073.json",
@@ -1138,6 +1138,45 @@
       "nextAction": "Environment-only creator review; production is complete independent of approval. Continue remaining required heroine content rather than another scene revision loop.",
       "completedAt": "2026-10-21T00:11:01.813923+00:00",
       "sourceCommit": "b3e127e5941b81a3e88afb6a7d6b8cdddd9ed820"
+    },
+    {
+      "id": "content.scene.outskirts.native-default",
+      "owner": "codex",
+      "status": "done",
+      "lane": "closed",
+      "completedAt": "2026-10-21T01:01:51.006035+00:00",
+      "evidence": [
+        "docs/qa/rpg-2-star-ocean-the-second_accepted-environments_default-adoption-root-closeout_v01_20261021-005731-c39c5a23.md"
+      ],
+      "inspectionOwner": "codex",
+      "sourceCommit": "aeb49202939f3b0cac58e2264e2e3a8149c2c5d5",
+      "nextAction": "Closed; creator motion approval and full sprite acceptance remain separate."
+    },
+    {
+      "id": "content.scene.battle-arena.native-default",
+      "owner": "codex",
+      "status": "done",
+      "lane": "closed",
+      "completedAt": "2026-10-21T01:01:51.006035+00:00",
+      "evidence": [
+        "docs/qa/rpg-2-star-ocean-the-second_accepted-environments_default-adoption-root-closeout_v01_20261021-005731-c39c5a23.md"
+      ],
+      "inspectionOwner": "codex",
+      "sourceCommit": "aeb49202939f3b0cac58e2264e2e3a8149c2c5d5",
+      "nextAction": "Closed; creator motion approval and full sprite acceptance remain separate."
+    },
+    {
+      "id": "qa.combat.protagonist-female.set-check",
+      "owner": "claude",
+      "status": "done",
+      "lane": "closed",
+      "completedAt": "2026-10-21T01:01:51.006035+00:00",
+      "evidence": [
+        "docs/qa/rpg-2-star-ocean-the-second_heroine-combat_current-runtime-root-verdict_v01_20261021-010057-f0c24af5.md"
+      ],
+      "inspectionOwner": "codex",
+      "sourceCommit": "aeb49202939f3b0cac58e2264e2e3a8149c2c5d5",
+      "nextAction": "Closed; creator motion approval and full sprite acceptance remain separate."
     }
   ],
   "nextProductionMilestones": [
@@ -1199,23 +1238,16 @@
     }
   ],
   "activeDualProviderBatch": {
-    "status": "completed-outskirts-native-production",
-    "primary": {
-      "id": "content.scene.outskirts.native-pass",
-      "owner": "claude",
-      "status": "done",
-      "sourceCommit": "b3e127e5941b81a3e88afb6a7d6b8cdddd9ed820"
-    },
-    "supporting": [
-      {
-        "id": "support.outskirts-native.source-check",
-        "owner": "deepseek",
-        "status": "done-codex-corrected-real-directory-case"
-      }
+    "status": "completed",
+    "primary": "content.scene.outskirts.native-default",
+    "supports": [
+      "content.scene.battle-arena.native-default",
+      "qa.combat.protagonist-female.set-check"
     ],
-    "integrationOwner": "codex",
-    "evidence": "docs/qa/rpg-2-star-ocean-the-second_yonkers-outskirts_native-production-root-closeout_v01_20261021-000925-2c3e7d5f.md",
-    "noNewScoringTasks": true
+    "claude": "completed-setcheck",
+    "deepseek": "stopped-before-source-edits; Codex took over default selectors",
+    "codex": "independent checks and serial integration",
+    "noCreditOrQuotaDepletionObserved": true
   },
   "characterSpriteStyleDirection": {
     "reference": "Sea of Stars",

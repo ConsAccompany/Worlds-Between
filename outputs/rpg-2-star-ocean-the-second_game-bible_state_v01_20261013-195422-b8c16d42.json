@@ -4,7 +4,7 @@
   "title": "世界之间",
   "englishTitle": "Worlds Between",
   "edition": "设计基线 v0.2 · 2026-10-15 创作者决定",
-  "updatedAt": "2026-10-21T00:51:45.293Z",
+  "updatedAt": "2026-10-21T01:01:51.105Z",
   "note": "规则以玩家确认的设计稿为基线，并已并入 2026-10-15 创作者决定；人物姓名与外观是待审提案，具体剧情留待后续设计。",
   "pitch": "从地下社区走出的旅人，以好奇心探索多元文明，招募伙伴，并成为不同世界认知差异的桥梁。",
   "pillars": [
@@ -5083,7 +5083,7 @@
     ]
   },
   "environmentVisualReview": {
-    "status": "The playable map is now a real-geography global map with US Northeast and Great Lakes regional layers (US science sphere, implemented as a technical candidate, automated tests pass; the runtime map shows the unapproved native map-art candidate v01r1, and map art v02 is being built separately and remains unapproved). The Chicago Loop runs the unapproved State/Lake v02 runtime visual candidate (pushed 00199fc), still a technical arrival scene. City/outskirts/ruins outdoor candidates and six survey room candidates are referenced by playable Godot scenes; the Washington survey annex room 1 runs the unapproved v02 runtime visual candidate (pushed 00199fc); battle arena candidates are separate. City Hall Park walkable pilots v01-v04 are unapproved, v05 is a test candidate and v06 is being built separately; the Capitol exterior candidates (walkable v01-v08, dome vista v01-v02) are unapproved and not in the runtime; since ffa165c the Capitol west exterior v12r2 (--wdc-capitol-west-v12r2) and the annex records room 2 v01 (--wdc-records-chamber-v01) are committed technical opt-ins, off by default, art not accepted. The old fictional three-node map background is no longer used. The stone-plaza ruins and the stone-column ruins arena remain regression items under the 2026-10-14 geography rule. Scene visual acceptance is 5/12: on 2026-10-17 the creator accepted the environment quality of NYC public facilities rooms 1 and 2 and the Yonkers signal maintenance room 2 only (approvalLedger). That accepts no character motion, runtime sprite, other scene, human playtest or the science chapter as a whole; overall art acceptance stays false. On2026-10-20 the creator accepted the displayed native layered science battle environment as scene4/12; this accepts no character/enemy/motion/default adoption/editor reliability/playtest. Creator now explicitly accepted Yonkers outskirts native environment as scene5/12, excluding characters/enemies/motion/default adoption/editor reliability/playtests.",
+    "status": "The playable map is now a real-geography global map with US Northeast and Great Lakes regional layers (US science sphere, implemented as a technical candidate, automated tests pass; the runtime map shows the unapproved native map-art candidate v01r1, and map art v02 is being built separately and remains unapproved). The Chicago Loop runs the unapproved State/Lake v02 runtime visual candidate (pushed 00199fc), still a technical arrival scene. City/outskirts/ruins outdoor candidates and six survey room candidates are referenced by playable Godot scenes; the Washington survey annex room 1 runs the unapproved v02 runtime visual candidate (pushed 00199fc); battle arena candidates are separate. City Hall Park walkable pilots v01-v04 are unapproved, v05 is a test candidate and v06 is being built separately; the Capitol exterior candidates (walkable v01-v08, dome vista v01-v02) are unapproved and not in the runtime; since ffa165c the Capitol west exterior v12r2 (--wdc-capitol-west-v12r2) and the annex records room 2 v01 (--wdc-records-chamber-v01) are committed technical opt-ins, off by default, art not accepted. The old fictional three-node map background is no longer used. The stone-plaza ruins and the stone-column ruins arena remain regression items under the 2026-10-14 geography rule. Scene visual acceptance is 5/12: on 2026-10-17 the creator accepted the environment quality of NYC public facilities rooms 1 and 2 and the Yonkers signal maintenance room 2 only (approvalLedger). That accepts no character motion, runtime sprite, other scene, human playtest or the science chapter as a whole; overall art acceptance stays false. On2026-10-20 the creator accepted the displayed native layered science battle environment as scene4/12; this accepts no character/enemy/motion/default adoption/editor reliability/playtest. Creator now explicitly accepted Yonkers outskirts native environment as scene5/12, excluding characters/enemies/motion/default adoption/editor reliability/playtests. The creator-accepted Yonkers outskirts and its science battle environment are now defaults as ofaeb4920. Their appearance was not revised; other environments and heroine motion remain separately unapproved.",
     "canvasInputRegression": "docs/qa/rpg-2-star-ocean-the-second_scifi-canvas_input-ui-regression_m8-v01_20261014-195518-4f27b39c.md",
     "canvasInputRegressionPassed": true,
     "englishMapHelpOverlapFixed": true,
@@ -5569,7 +5569,7 @@
         }
       ],
       "currentCandidates": {
-        "asOf": "2026-10-21T00:51:44Z",
+        "asOf": "2026-10-21T01:01:32.783404+00:00",
         "zh": "15项当前展示：2张女主静止基准、战场及扬克斯城外环境已批准，11项待批准。完整精灵0/52。",
         "en": "15current items:2heroine static baselines and2environment visuals accepted;11pending. Complete sprites0/52.",
         "scopedReferenceOrders": [
@@ -6182,18 +6182,18 @@
             },
             "file": "outputs/benv12/rpg-2-star-ocean-the-second_battle-native_patrol-en-entry_native_20261020-231550-54097070.png",
             "scope": {
-              "zh": "环境画质已验收；不包括角色、敌人、动作、其他场景、默认采用或试玩。两项编辑器诊断仍失败，源/导出像素一致。",
-              "en": "Environment appearance accepted only; excludes characters,enemies,motion,other scenes,default adoption and playtesting. Two editor-diagnostic checks remain failed; source/export pixels match."
+              "zh": "环境画质已验收并完成默认接入；不包括角色、敌人、动作、其他场景、编辑器可靠性或试玩。两项编辑器诊断仍失败。",
+              "en": "Environment appearance accepted and default integration technically verified. Excludes characters,enemies,motion,other scenes,editor reliability and human playtests. Two editor-diagnostic checks remain failed."
             },
             "creatorApproved": true,
             "artAccepted": true,
             "runtimeIntegrated": true,
             "testOnly": false,
-            "technicalCandidate": true,
+            "technicalCandidate": false,
             "readyForCreatorReview": false,
             "badge": {
-              "zh": "环境已验收 · 可选接入",
-              "en": "Environment accepted · runtime opt-in",
+              "zh": "环境已验收 · 已默认接入",
+              "en": "Environment accepted · default integrated",
               "tone": "good"
             },
             "qa": "docs/qa/rpg-2-star-ocean-the-second_battle-arena_native-production-root-closeout_v01_20261020-231908-6f6bae69.md",
@@ -6208,8 +6208,11 @@
               "evidence": "docs/qa/rpg-2-star-ocean-the-second_battle-arena_scene-visual-acceptance_v01_20261020-234940-8308e1d9.md"
             },
             "acceptanceKind": "scene-visual",
-            "optInOnly": true,
-            "defaultOff": true
+            "optInOnly": false,
+            "defaultOff": false,
+            "defaultAdopted": true,
+            "defaultAdoptionCommit": "aeb49202939f3b0cac58e2264e2e3a8149c2c5d5",
+            "defaultAdoptionEvidence": "docs/qa/rpg-2-star-ocean-the-second_accepted-environments_default-adoption-root-closeout_v01_20261021-005731-c39c5a23.md"
           },
           {
             "id": "current-yonkers-outskirts-native-v01",
@@ -6225,21 +6228,21 @@
             },
             "file": "outputs/outskirts-root13/rpg-2-star-ocean-the-second_yonkers-outskirts_en-entry_native_20261021-000817-0755cb2f.png",
             "scope": {
-              "zh": "环境画质已正式验收；不含角色、敌人、动作、其他场景、默认采用、编辑器可靠性或试玩。两项编辑器诊断仍失败。",
-              "en": "Environment visual accepted only. Characters,enemies,motion,other scenes,default adoption,editor reliability and human playtests excluded;2editor diagnostics remain failed."
+              "zh": "环境画质已验收并完成默认接入；不包括角色、敌人、动作、其他场景、编辑器可靠性或试玩。两项编辑器诊断仍失败。",
+              "en": "Environment appearance accepted and default integration technically verified. Excludes characters,enemies,motion,other scenes,editor reliability and human playtests. Two editor-diagnostic checks remain failed."
             },
             "creatorApproved": true,
             "artAccepted": true,
             "runtimeIntegrated": true,
             "testOnly": false,
-            "technicalCandidate": true,
+            "technicalCandidate": false,
             "readyForCreatorReview": false,
-            "optInOnly": true,
-            "defaultOff": true,
+            "optInOnly": false,
+            "defaultOff": false,
             "optInFlag": "--yonkers-outskirts-native-v01",
             "badge": {
-              "zh": "环境已验收 · 可选接入",
-              "en": "Environment accepted · runtime opt-in",
+              "zh": "环境已验收 · 已默认接入",
+              "en": "Environment accepted · default integrated",
               "tone": "good"
             },
             "qa": "docs/qa/rpg-2-star-ocean-the-second_yonkers-outskirts_native-production-root-closeout_v01_20261021-000925-2c3e7d5f.md",
@@ -6253,7 +6256,10 @@
               "answer": "approved, next",
               "acceptedAt": "2026-10-21T00:51:44Z",
               "evidence": "docs/qa/rpg-2-star-ocean-the-second_yonkers-outskirts_scene-visual-acceptance_v01_20261021-005144-ee3c6278.md"
-            }
+            },
+            "defaultAdopted": true,
+            "defaultAdoptionCommit": "aeb49202939f3b0cac58e2264e2e3a8149c2c5d5",
+            "defaultAdoptionEvidence": "docs/qa/rpg-2-star-ocean-the-second_accepted-environments_default-adoption-root-closeout_v01_20261021-005731-c39c5a23.md"
           }
         ],
         "supersededCurrent": [
@@ -7113,7 +7119,7 @@
     },
     "battleArenaNativeOptIn": {
       "task": "content.scene.battle-arena.native-pass",
-      "status": "produced-integrated-opt-in",
+      "status": "produced-integrated-default",
       "sourceCommit": "31c92aa8c76bced04af5a684a6c377c2ebf14885",
       "owner": "claude",
       "sourceValidationOwner": "deepseek",
@@ -7138,17 +7144,19 @@
       },
       "guiSaveReopenVerified": false,
       "creatorApproved": true,
-      "defaultAdopted": false,
+      "defaultAdopted": true,
       "beforeProductionPercent": 53.6,
       "afterProductionPercent": 54,
       "recordedAt": "2026-10-20T23:19:48.980593+00:00",
       "environmentArtAccepted": true,
       "creatorApprovalEvidence": "docs/qa/rpg-2-star-ocean-the-second_battle-arena_scene-visual-acceptance_v01_20261020-234940-8308e1d9.md",
-      "creatorApprovedAt": "2026-10-20T23:50:05Z"
+      "creatorApprovedAt": "2026-10-20T23:50:05Z",
+      "defaultAdoptionCommit": "aeb49202939f3b0cac58e2264e2e3a8149c2c5d5",
+      "defaultAdoptionEvidence": "docs/qa/rpg-2-star-ocean-the-second_accepted-environments_default-adoption-root-closeout_v01_20261021-005731-c39c5a23.md"
     },
     "outskirtsNativeOptIn": {
       "task": "content.scene.outskirts.native-pass",
-      "status": "produced-integrated-opt-in",
+      "status": "produced-integrated-default",
       "sourceCommit": "b3e127e5941b81a3e88afb6a7d6b8cdddd9ed820",
       "productionOwner": "claude",
       "sourceCheckOwner": "deepseek",
@@ -7175,13 +7183,15 @@
         "guiSaveReopenVerified": false
       },
       "creatorApproved": true,
-      "defaultAdopted": false,
+      "defaultAdopted": true,
       "beforeProductionPercent": 54,
       "afterProductionPercent": 54.4,
       "recordedAt": "2026-10-21T00:11:01.813923+00:00",
       "environmentArtAccepted": true,
       "creatorApprovalEvidence": "docs/qa/rpg-2-star-ocean-the-second_yonkers-outskirts_scene-visual-acceptance_v01_20261021-005144-ee3c6278.md",
-      "creatorApprovedAt": "2026-10-21T00:51:44Z"
+      "creatorApprovedAt": "2026-10-21T00:51:44Z",
+      "defaultAdoptionCommit": "aeb49202939f3b0cac58e2264e2e3a8149c2c5d5",
+      "defaultAdoptionEvidence": "docs/qa/rpg-2-star-ocean-the-second_accepted-environments_default-adoption-root-closeout_v01_20261021-005731-c39c5a23.md"
     }
   },
   "creatorDecisions": {
@@ -7775,35 +7785,35 @@
     "combinedWiringCheck": "297/297 on39f252e, clean raw log; actual Chinese victory inspected."
   },
   "latestTaskProgress": {
-    "id": "creator.scene.outskirts.accept",
+    "id": "content.scene.outskirts.native-default",
     "status": "completed",
     "title": {
-      "zh": "记录扬克斯城外环境画质正式验收",
-      "en": "Record creator acceptance of Yonkers outskirts environment"
+      "zh": "默认接入已验收环境并完成女主战斗动作技术检查",
+      "en": "Default integration of accepted environments and heroine combat technical check"
     },
-    "startedAt": "2026-10-21T00:51:44.282Z",
-    "sourceBefore": "85a32e34fc40b3bb4db6a9bc4ed6fcf8623d5c58",
+    "startedAt": "2026-10-21T00:51:48.935Z",
+    "sourceBefore": "e3f49a5528884f745d2eb436e6743dc441388f99",
     "meters": {
       "production": {
         "before": 54.4,
-        "after": 54.4,
-        "changePercentagePoints": 0
+        "after": 54.5,
+        "changePercentagePoints": 0.1
       },
       "inspection": {
         "before": 16.2,
-        "after": 16.2,
-        "changePercentagePoints": 0
+        "after": 16.7,
+        "changePercentagePoints": 0.5
       },
       "approval": {
-        "before": 7.4,
+        "before": 7.8,
         "after": 7.8,
-        "changePercentagePoints": 0.4
+        "changePercentagePoints": 0
       }
     },
-    "completedAt": "2026-10-21T00:51:45.293Z",
-    "sourceAfter": "85a32e34fc40b3bb4db6a9bc4ed6fcf8623d5c58",
+    "completedAt": "2026-10-21T01:01:51.105Z",
+    "sourceAfter": "2a5be26456ed7ddb2ac61480de0994479cc738dd",
     "evidence": [
-      "docs/qa/rpg-2-star-ocean-the-second_yonkers-outskirts_scene-visual-acceptance_v01_20261021-005144-ee3c6278.md"
+      "docs/qa/rpg-2-star-ocean-the-second_accepted-environments_default-adoption-root-closeout_v01_20261021-005731-c39c5a23.md"
     ]
   },
   "progressReporting": {
@@ -8067,11 +8077,43 @@
       "evidence": [
         "docs/qa/rpg-2-star-ocean-the-second_yonkers-outskirts_native-production-root-closeout_v01_20261021-000925-2c3e7d5f.md"
       ]
+    },
+    {
+      "id": "creator.scene.outskirts.accept",
+      "status": "completed",
+      "title": {
+        "zh": "记录扬克斯城外环境画质正式验收",
+        "en": "Record creator acceptance of Yonkers outskirts environment"
+      },
+      "startedAt": "2026-10-21T00:51:44.282Z",
+      "sourceBefore": "85a32e34fc40b3bb4db6a9bc4ed6fcf8623d5c58",
+      "meters": {
+        "production": {
+          "before": 54.4,
+          "after": 54.4,
+          "changePercentagePoints": 0
+        },
+        "inspection": {
+          "before": 16.2,
+          "after": 16.2,
+          "changePercentagePoints": 0
+        },
+        "approval": {
+          "before": 7.4,
+          "after": 7.8,
+          "changePercentagePoints": 0.4
+        }
+      },
+      "completedAt": "2026-10-21T00:51:45.293Z",
+      "sourceAfter": "85a32e34fc40b3bb4db6a9bc4ed6fcf8623d5c58",
+      "evidence": [
+        "docs/qa/rpg-2-star-ocean-the-second_yonkers-outskirts_scene-visual-acceptance_v01_20261021-005144-ee3c6278.md"
+      ]
     }
   ],
   "latestBattleEnvironmentProduction": {
     "task": "content.scene.battle-arena.native-pass",
-    "status": "produced-integrated-opt-in",
+    "status": "produced-integrated-default",
     "sourceCommit": "31c92aa8c76bced04af5a684a6c377c2ebf14885",
     "owner": "claude",
     "sourceValidationOwner": "deepseek",
@@ -8096,17 +8138,19 @@
     },
     "guiSaveReopenVerified": false,
     "creatorApproved": true,
-    "defaultAdopted": false,
+    "defaultAdopted": true,
     "beforeProductionPercent": 53.6,
     "afterProductionPercent": 54,
     "recordedAt": "2026-10-20T23:19:48.980593+00:00",
     "environmentArtAccepted": true,
     "creatorApprovalEvidence": "docs/qa/rpg-2-star-ocean-the-second_battle-arena_scene-visual-acceptance_v01_20261020-234940-8308e1d9.md",
-    "creatorApprovedAt": "2026-10-20T23:50:05Z"
+    "creatorApprovedAt": "2026-10-20T23:50:05Z",
+    "defaultAdoptionCommit": "aeb49202939f3b0cac58e2264e2e3a8149c2c5d5",
+    "defaultAdoptionEvidence": "docs/qa/rpg-2-star-ocean-the-second_accepted-environments_default-adoption-root-closeout_v01_20261021-005731-c39c5a23.md"
   },
   "latestOutskirtsNativeProduction": {
     "task": "content.scene.outskirts.native-pass",
-    "status": "produced-integrated-opt-in",
+    "status": "produced-integrated-default",
     "sourceCommit": "b3e127e5941b81a3e88afb6a7d6b8cdddd9ed820",
     "productionOwner": "claude",
     "sourceCheckOwner": "deepseek",
@@ -8133,12 +8177,28 @@
       "guiSaveReopenVerified": false
     },
     "creatorApproved": true,
-    "defaultAdopted": false,
+    "defaultAdopted": true,
     "beforeProductionPercent": 54,
     "afterProductionPercent": 54.4,
     "recordedAt": "2026-10-21T00:11:01.813923+00:00",
     "environmentArtAccepted": true,
     "creatorApprovalEvidence": "docs/qa/rpg-2-star-ocean-the-second_yonkers-outskirts_scene-visual-acceptance_v01_20261021-005144-ee3c6278.md",
-    "creatorApprovedAt": "2026-10-21T00:51:44Z"
+    "creatorApprovedAt": "2026-10-21T00:51:44Z",
+    "defaultAdoptionCommit": "aeb49202939f3b0cac58e2264e2e3a8149c2c5d5",
+    "defaultAdoptionEvidence": "docs/qa/rpg-2-star-ocean-the-second_accepted-environments_default-adoption-root-closeout_v01_20261021-005731-c39c5a23.md"
+  },
+  "latestHeroineCombatSetCheck": {
+    "task": "qa.combat.protagonist-female.set-check",
+    "status": "godot-technical-pass",
+    "producer": "claude",
+    "independentInspector": "codex",
+    "testedRevision": "aeb49202939f3b0cac58e2264e2e3a8149c2c5d5",
+    "qa": "docs/qa/rpg-2-star-ocean-the-second_heroine-combat_current-runtime-root-verdict_v01_20261021-010057-f0c24af5.md",
+    "godotInvocationsPassed": 11,
+    "godotPredicateChecks": 1185,
+    "unmodifiedPackageVerifier": "570/571 clean; historical base_revision11973af predicate remains failed",
+    "rawDirtyAggregateFailureRetained": true,
+    "motionVisuallyAccepted": false,
+    "fullSpriteAccepted": false
   }
 }
