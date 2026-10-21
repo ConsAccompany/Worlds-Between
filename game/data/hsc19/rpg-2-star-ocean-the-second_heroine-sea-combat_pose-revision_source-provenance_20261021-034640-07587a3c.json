@@ -1,0 +1,1465 @@
+{
+  "schema": "worlds-between.combat-sprite-set-provenance/1",
+  "set_id": "heroine-sea-combat-v01",
+  "package_directory": "outputs/heroine-packer19/a4",
+  "build_reference_tag": "20261021-034640-07587a3c",
+  "character": {
+    "member_id": "hero",
+    "appearance": "female"
+  },
+  "art_status": "unapproved-heroine-sea-combat-pose-revision-motion-pending",
+  "art_approved": false,
+  "motion_approved": false,
+  "default_adoption": false,
+  "note": "Technical selective revision packing evidence only. Seven pose cells were replaced from the revision manifest; the other 22 poses and unused cell 29 are byte-exact baseline sheet copies. This package is not art approval, motion approval or default adoption.",
+  "packaging": {
+    "method": "Exact decoded baseline sheet copy with seven RGBA cell replacements at provenance-derived cell origins; no resize, resample, filter or alpha blend.",
+    "pillow_version": "12.3.0",
+    "sheet_columns": 6,
+    "sheet_rows": 5,
+    "cell_count": 30,
+    "used_cell_count": 29,
+    "unused_cells": [
+      29
+    ]
+  },
+  "sheet": {
+    "file": "rpg-2-star-ocean-the-second_heroine-sea-combat_pose-revision_spritesheet_20261021-034640-07587a3c.png",
+    "sha256": "6ec802cfb11bff6441c407307e65bfc528a9220129acc7d8ecd49ef4cfc43e7c",
+    "width": 816,
+    "height": 720,
+    "mode": "RGBA",
+    "cell_size": [
+      136,
+      144
+    ],
+    "pivot": [
+      64,
+      136
+    ]
+  },
+  "manifest": {
+    "file": "rpg-2-star-ocean-the-second_heroine-sea-combat_pose-revision_spritesheet-manifest_20261021-034640-07587a3c.json",
+    "sha256": "e32403b3218ff35221d2a6ef1c2c186acef8d2de048f9fa3f5c50fde35e2ee62",
+    "schema": "worlds-between.combat-sprite-set/1"
+  },
+  "index": {
+    "file": "rpg-2-star-ocean-the-second_heroine-sea-combat_pose-revision_spritesheet-index_20261021-034640-07587a3c.json",
+    "sha256": "59d07551ad128f096e679e7eb32567d320120a61f6b14fff905c515af4fd7938",
+    "schema": "worlds-between.combat-sprite-set-index/1"
+  },
+  "build_tool": {
+    "path": "tools/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-revision-packer_v02_20261021-033729-7add3acc.py",
+    "sha256": "e6d49c7ddb792982487d1b2373adff47a9cb25e8ff9b9971848706e8932686cb"
+  },
+  "source_manifests": [
+    {
+      "role": "v01",
+      "path": "outputs/hero-sea-motion-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_manifest_test-only-v01_20261020-192028-7e93a93c.json",
+      "sha256": "a012cc3d42c4b81f6c73cdc984ccb10f15d37fcb73b2c06938a01595be790657",
+      "declared_tick_seconds": 0.033333333,
+      "cell": [
+        136,
+        144
+      ],
+      "pinNative": [
+        64,
+        136
+      ],
+      "clips": {
+        "idle": {
+          "loop": true,
+          "frames": [
+            {
+              "pose": "base",
+              "ticks": 8
+            },
+            {
+              "pose": "idle-b1",
+              "ticks": 6
+            },
+            {
+              "pose": "idle-b2",
+              "ticks": 8
+            },
+            {
+              "pose": "idle-b1",
+              "ticks": 6
+            }
+          ]
+        },
+        "attack": {
+          "loop": false,
+          "frames": [
+            {
+              "pose": "atk-antic-a",
+              "ticks": 2
+            },
+            {
+              "pose": "atk-antic-b",
+              "ticks": 2
+            },
+            {
+              "pose": "atk-smear",
+              "ticks": 1
+            },
+            {
+              "pose": "atk-contact",
+              "ticks": 2
+            },
+            {
+              "pose": "atk-follow",
+              "ticks": 2
+            },
+            {
+              "pose": "atk-recover",
+              "ticks": 2
+            },
+            {
+              "pose": "idle-b1",
+              "ticks": 1
+            }
+          ],
+          "then": "base"
+        }
+      }
+    },
+    {
+      "role": "v02",
+      "path": "outputs/hero-sea-motion-v02/rpg-2-star-ocean-the-second_heroine-sea-combat_manifest_test-only-v02_20261020-193906-15478d2e.json",
+      "sha256": "b6d8a14e4b15ab52095476764992e45ba2d3b51614033b6e67b7d7ae31965151",
+      "declared_tick_seconds": 0.033333333,
+      "cell": [
+        136,
+        144
+      ],
+      "pinNative": [
+        64,
+        136
+      ],
+      "clips": {
+        "move": {
+          "loop": true,
+          "frames": [
+            {
+              "pose": "move-a",
+              "ticks": 3
+            },
+            {
+              "pose": "move-b",
+              "ticks": 3
+            },
+            {
+              "pose": "move-c",
+              "ticks": 3
+            },
+            {
+              "pose": "move-d",
+              "ticks": 3
+            }
+          ]
+        },
+        "guard": {
+          "loop": true,
+          "enter": [
+            {
+              "pose": "guard-a",
+              "ticks": 2
+            }
+          ],
+          "frames": [
+            {
+              "pose": "guard-b",
+              "ticks": 6
+            },
+            {
+              "pose": "guard-c",
+              "ticks": 6
+            }
+          ]
+        },
+        "dodge": {
+          "loop": false,
+          "frames": [
+            {
+              "pose": "dodge-a",
+              "ticks": 4
+            },
+            {
+              "pose": "dodge-b",
+              "ticks": 4
+            }
+          ],
+          "then": "base"
+        },
+        "skill": {
+          "loop": false,
+          "frames": [
+            {
+              "pose": "skill-tel-a",
+              "ticks": 4
+            },
+            {
+              "pose": "skill-tel-b",
+              "ticks": 3
+            },
+            {
+              "pose": "skill-strike",
+              "ticks": 1
+            },
+            {
+              "pose": "skill-contact",
+              "ticks": 2
+            },
+            {
+              "pose": "skill-recover",
+              "ticks": 3
+            }
+          ],
+          "then": "base"
+        }
+      }
+    },
+    {
+      "role": "v03",
+      "path": "outputs/hero-sea-motion-v03/rpg-2-star-ocean-the-second_heroine-sea-combat_manifest_test-only-v03_20261020-194523-5d441ac3.json",
+      "sha256": "66f7804ca7fa980e63c468ef8f38f2a9c8506571eb2eb902b2d70951a5700edd",
+      "declared_tick_seconds": null,
+      "cell": [
+        136,
+        144
+      ],
+      "pinNative": [
+        64,
+        136
+      ],
+      "clips": {
+        "hit": {
+          "loop": false,
+          "frames": [
+            {
+              "pose": "hit-a",
+              "ticks": 2
+            },
+            {
+              "pose": "hit-b",
+              "ticks": 3
+            },
+            {
+              "pose": "hit-c",
+              "ticks": 2
+            }
+          ],
+          "then": "base"
+        },
+        "down": {
+          "loop": false,
+          "frames": [
+            {
+              "pose": "down-a",
+              "ticks": 3
+            },
+            {
+              "pose": "down-b",
+              "ticks": 3
+            },
+            {
+              "pose": "down-c",
+              "ticks": 3
+            }
+          ],
+          "hold": true
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "cell": 0,
+      "cell_origin": [
+        0,
+        0
+      ],
+      "pose": "base",
+      "role": "v01",
+      "used_by_actions": [
+        "idle",
+        "attack",
+        "dodge",
+        "skill",
+        "hit"
+      ],
+      "source_png": "outputs/hero-sea-v01/rpg-2-star-ocean-the-second_heroine-battle_still-native136_sea-unapproved-v01_20261020-181955-1294c865.png",
+      "source_png_sha256": "4ce65a7915c0c0270a4ca353152b45b7d68b42672cb1483dd4f3e9cf4ac9d5e6",
+      "source_dimensions": [
+        136,
+        144
+      ],
+      "source_mode": "RGBA",
+      "source_alpha_values": [
+        0,
+        255
+      ],
+      "native_pxo": "outputs/hero-sea-v01/rpg-2-star-ocean-the-second_heroine-battle_still-editable_sea-unapproved-v01_20261020-181955-bd7423ec.pxo",
+      "native_pxo_sha256": "9ddb90a0a40f526244a3019a5978559e43c5c0397d82ad1e2c0d4b98c175fbf1",
+      "native_ora": "outputs/hero-sea-v01/rpg-2-star-ocean-the-second_heroine-battle_still-layered_sea-unapproved-v01_20261020-181955-5c3755ce.ora",
+      "native_ora_sha256": "397675a07d24cb133ed26b18274350397bb568fa899cf9db2778cc8566cb8628"
+    },
+    {
+      "cell": 1,
+      "cell_origin": [
+        136,
+        0
+      ],
+      "pose": "idle-b1",
+      "role": "v01",
+      "used_by_actions": [
+        "idle",
+        "attack"
+      ],
+      "source_png": "outputs/hero-sea-motion-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-idle-b1-native136_test-only-v01_20261020-192028-b07bea19.png",
+      "source_png_sha256": "68726810a0050395c19ad6b95a47978fbaa5071ef0911620774fdd04011258b5",
+      "source_dimensions": [
+        136,
+        144
+      ],
+      "source_mode": "RGBA",
+      "source_alpha_values": [
+        0,
+        255
+      ],
+      "native_pxo": "outputs/hero-sea-motion-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-idle-b1-editable_test-only-v01_20261020-192028-81c43ab4.pxo",
+      "native_pxo_sha256": "36e8e7b282bce3542c8833155ab125bb2bc12c5689d9f2b2d94f38e77364a6fe",
+      "native_ora": "outputs/hero-sea-motion-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-idle-b1-layered_test-only-v01_20261020-192028-cd183750.ora",
+      "native_ora_sha256": "ad07972fd9b9dd655784779ae7f8945b36e2f9c08c4dc02eb90af6394779dd78"
+    },
+    {
+      "cell": 2,
+      "cell_origin": [
+        272,
+        0
+      ],
+      "pose": "idle-b2",
+      "role": "v01",
+      "used_by_actions": [
+        "idle"
+      ],
+      "source_png": "outputs/hero-sea-motion-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-idle-b2-native136_test-only-v01_20261020-192028-67fbfa18.png",
+      "source_png_sha256": "035978c53a8d2a876a3d2383c0c62d609a40e98485bad294803514458367252a",
+      "source_dimensions": [
+        136,
+        144
+      ],
+      "source_mode": "RGBA",
+      "source_alpha_values": [
+        0,
+        255
+      ],
+      "native_pxo": "outputs/hero-sea-motion-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-idle-b2-editable_test-only-v01_20261020-192028-ac14968d.pxo",
+      "native_pxo_sha256": "af49eda2669f0c7f8034114aed06289cbdb20bef43006033c5b1830de9f2a8ed",
+      "native_ora": "outputs/hero-sea-motion-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-idle-b2-layered_test-only-v01_20261020-192028-ca356c6e.ora",
+      "native_ora_sha256": "d9c50e1acb43d39aeecbd8c285d9f59e36b5ee9e94b7a39841b984487242fa05"
+    },
+    {
+      "cell": 3,
+      "cell_origin": [
+        408,
+        0
+      ],
+      "pose": "atk-antic-a",
+      "role": "v01",
+      "used_by_actions": [
+        "attack"
+      ],
+      "source_png": "outputs/hero-sea-motion-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-antic-a-native136_test-only-v01_20261020-192028-754aa427.png",
+      "source_png_sha256": "b214e6d5b82c3fde00b154fa30a690b61c7890c376558ab4ce8ff7074cfb44f3",
+      "source_dimensions": [
+        136,
+        144
+      ],
+      "source_mode": "RGBA",
+      "source_alpha_values": [
+        0,
+        255
+      ],
+      "native_pxo": "outputs/hero-sea-motion-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-antic-a-editable_test-only-v01_20261020-192028-bbfe27a1.pxo",
+      "native_pxo_sha256": "bba27a054329c394773274440c557cdc314c60a437c70561885cf452ba7b966f",
+      "native_ora": "outputs/hero-sea-motion-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-antic-a-layered_test-only-v01_20261020-192028-54975feb.ora",
+      "native_ora_sha256": "f62624319360e2efbe843c05b7d32f18e0311e062fbcf8168bf7646aefee2193"
+    },
+    {
+      "cell": 4,
+      "cell_origin": [
+        544,
+        0
+      ],
+      "pose": "atk-antic-b",
+      "role": "v01",
+      "used_by_actions": [
+        "attack"
+      ],
+      "source_png": "outputs/hero-sea-motion-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-antic-b-native136_test-only-v01_20261020-192028-4a2e8bf9.png",
+      "source_png_sha256": "dc0b99c8e5e9568c7ad0410bc74365f2745378cb0478b4f6ec87877bd1d2a4f2",
+      "source_dimensions": [
+        136,
+        144
+      ],
+      "source_mode": "RGBA",
+      "source_alpha_values": [
+        0,
+        255
+      ],
+      "native_pxo": "outputs/hero-sea-motion-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-antic-b-editable_test-only-v01_20261020-192028-f4d9f92a.pxo",
+      "native_pxo_sha256": "16d81bb2db47fa56bcbb92494d2cf9c81ef4fb69cf922edea749ef650db423da",
+      "native_ora": "outputs/hero-sea-motion-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-antic-b-layered_test-only-v01_20261020-192028-7a190525.ora",
+      "native_ora_sha256": "9c0f57883681eed9c9db7412804c41383950e865a0d44b91dfa11329504ae84e"
+    },
+    {
+      "cell": 5,
+      "cell_origin": [
+        680,
+        0
+      ],
+      "pose": "atk-smear",
+      "role": "v01",
+      "used_by_actions": [
+        "attack"
+      ],
+      "source_png": "outputs/hero-sea-motion-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-smear-native136_test-only-v01_20261020-192028-84458630.png",
+      "source_png_sha256": "cfa9098eac42897d5e4c4453c5080617eb409a03abf5dbf143137fca76443ceb",
+      "source_dimensions": [
+        136,
+        144
+      ],
+      "source_mode": "RGBA",
+      "source_alpha_values": [
+        0,
+        255
+      ],
+      "native_pxo": "outputs/hero-sea-motion-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-smear-editable_test-only-v01_20261020-192028-e70f7987.pxo",
+      "native_pxo_sha256": "40366df7186f3afc7f077c651d1d4934400c93d2fdc478945edddb785fef48a9",
+      "native_ora": "outputs/hero-sea-motion-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-smear-layered_test-only-v01_20261020-192028-a3f4e97e.ora",
+      "native_ora_sha256": "2685979c64941ddeda7e00d8a7136c7c243b63d32ba63b93bc794bbf85f841f8"
+    },
+    {
+      "cell": 6,
+      "cell_origin": [
+        0,
+        144
+      ],
+      "pose": "atk-contact",
+      "role": "v01",
+      "used_by_actions": [
+        "attack"
+      ],
+      "source_png": "outputs/hero-sea-motion-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-contact-native136_test-only-v01_20261020-192028-b01a6e0c.png",
+      "source_png_sha256": "d095cb7ede2b86613c16b83d8311e2515d9201411a22d4afb29b2eac85721b68",
+      "source_dimensions": [
+        136,
+        144
+      ],
+      "source_mode": "RGBA",
+      "source_alpha_values": [
+        0,
+        255
+      ],
+      "native_pxo": "outputs/hero-sea-motion-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-contact-editable_test-only-v01_20261020-192028-f978125f.pxo",
+      "native_pxo_sha256": "8a9fce5cd6088293a72ecba5a9db0dadf086e675d5ca143c27f7746d3f87ccc6",
+      "native_ora": "outputs/hero-sea-motion-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-contact-layered_test-only-v01_20261020-192028-dc4b766e.ora",
+      "native_ora_sha256": "57090dd71d2e44c757829abee439a25196f72d3a55c54d69aedcf726c5f5e324"
+    },
+    {
+      "cell": 7,
+      "cell_origin": [
+        136,
+        144
+      ],
+      "pose": "atk-follow",
+      "role": "v01",
+      "used_by_actions": [
+        "attack"
+      ],
+      "source_png": "outputs/hero-sea-motion-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-follow-native136_test-only-v01_20261020-192028-27db8c30.png",
+      "source_png_sha256": "a83b10a04014441521e578ed44aeced9dc6bb3579195cad79b3f31b13377b1a0",
+      "source_dimensions": [
+        136,
+        144
+      ],
+      "source_mode": "RGBA",
+      "source_alpha_values": [
+        0,
+        255
+      ],
+      "native_pxo": "outputs/hero-sea-motion-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-follow-editable_test-only-v01_20261020-192028-eae3796d.pxo",
+      "native_pxo_sha256": "174e5621652d86f2e97de67050be26b3cf023735b95e757f537a0062fb90f7ce",
+      "native_ora": "outputs/hero-sea-motion-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-follow-layered_test-only-v01_20261020-192028-c3d69424.ora",
+      "native_ora_sha256": "04ed489920c14ca31d24240732316ab3448b75ebe354d94e8e189e5b314bd604"
+    },
+    {
+      "cell": 8,
+      "cell_origin": [
+        272,
+        144
+      ],
+      "pose": "atk-recover",
+      "role": "v01",
+      "used_by_actions": [
+        "attack"
+      ],
+      "source_png": "outputs/hero-sea-motion-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-recover-native136_test-only-v01_20261020-192028-b5b23440.png",
+      "source_png_sha256": "18d051f58da195d5d84f851d7320fe1fd416f80466b414c351114ab4fe650ca6",
+      "source_dimensions": [
+        136,
+        144
+      ],
+      "source_mode": "RGBA",
+      "source_alpha_values": [
+        0,
+        255
+      ],
+      "native_pxo": "outputs/hero-sea-motion-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-recover-editable_test-only-v01_20261020-192028-ce62c1b0.pxo",
+      "native_pxo_sha256": "548238f3322b69d732800b52ec5cf6a1798e5a37b7e68330caea888b57a241f8",
+      "native_ora": "outputs/hero-sea-motion-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-atk-recover-layered_test-only-v01_20261020-192028-b3f3c018.ora",
+      "native_ora_sha256": "0631a1eaea9f5e6f53f8b357e482c8690b72cd518e9cc7ec5716c28783af2e14"
+    },
+    {
+      "cell": 9,
+      "cell_origin": [
+        408,
+        144
+      ],
+      "pose": "move-a",
+      "role": "v02",
+      "used_by_actions": [
+        "move"
+      ],
+      "source_png": "outputs/hero-sea-motion-v02/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-move-a-native136_test-only-v02_20261020-193906-5a0cabf2.png",
+      "source_png_sha256": "9928cd32b5e39c600bea2e2dcc7a43e19f94241f6dddc2f7510a0d4abdceb1c5",
+      "source_dimensions": [
+        136,
+        144
+      ],
+      "source_mode": "RGBA",
+      "source_alpha_values": [
+        0,
+        255
+      ],
+      "native_pxo": "outputs/hero-sea-motion-v02/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-move-a-editable_test-only-v02_20261020-193906-4208fb60.pxo",
+      "native_pxo_sha256": "4310beba882d5b75c43ba75d5a8a25fd0ac4055e314d1d600ad0ec3e2d774aee",
+      "native_ora": "outputs/hero-sea-motion-v02/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-move-a-layered_test-only-v02_20261020-193906-0f869bb1.ora",
+      "native_ora_sha256": "e2e4a76e5dbe1d050f3be7260205d4c940c5b578cf0c1dcf739f398877101fcb"
+    },
+    {
+      "cell": 10,
+      "cell_origin": [
+        544,
+        144
+      ],
+      "pose": "move-b",
+      "role": "v02",
+      "used_by_actions": [
+        "move"
+      ],
+      "source_png": "outputs/hero-sea-motion-v02/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-move-b-native136_test-only-v02_20261020-193906-dd4fd7d0.png",
+      "source_png_sha256": "a94f5270450cfd009771eb631c744b28afa014d6f70a9515fa429c640b3c96b3",
+      "source_dimensions": [
+        136,
+        144
+      ],
+      "source_mode": "RGBA",
+      "source_alpha_values": [
+        0,
+        255
+      ],
+      "native_pxo": "outputs/hero-sea-motion-v02/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-move-b-editable_test-only-v02_20261020-193906-398485d4.pxo",
+      "native_pxo_sha256": "a630e6c35d585e10e43ec40d720910aed96c5745ba55bd2f7d5049ed61a29692",
+      "native_ora": "outputs/hero-sea-motion-v02/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-move-b-layered_test-only-v02_20261020-193906-b7fa3ed5.ora",
+      "native_ora_sha256": "4822e40763774d8af063268b7602c6bcad9ef56ad25786655fc28fe943adde25"
+    },
+    {
+      "cell": 11,
+      "cell_origin": [
+        680,
+        144
+      ],
+      "pose": "move-c",
+      "role": "v02",
+      "used_by_actions": [
+        "move"
+      ],
+      "source_png": "outputs/hero-sea-motion-v02/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-move-c-native136_test-only-v02_20261020-193906-40876903.png",
+      "source_png_sha256": "f20c38c0e07fb467fa4844805db1a6a771b16034bfddfba42b9f47a2863ba259",
+      "source_dimensions": [
+        136,
+        144
+      ],
+      "source_mode": "RGBA",
+      "source_alpha_values": [
+        0,
+        255
+      ],
+      "native_pxo": "outputs/hero-sea-motion-v02/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-move-c-editable_test-only-v02_20261020-193906-ce386c7f.pxo",
+      "native_pxo_sha256": "7a2c3d92df7e970a85785d96602c39dacac33b5ef1510781c43df52179cf5bef",
+      "native_ora": "outputs/hero-sea-motion-v02/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-move-c-layered_test-only-v02_20261020-193906-e064e270.ora",
+      "native_ora_sha256": "b1df9a695b69b927bc39f235961204f7151e5139466257b1bb44013bc606e312"
+    },
+    {
+      "cell": 12,
+      "cell_origin": [
+        0,
+        288
+      ],
+      "pose": "move-d",
+      "role": "v02",
+      "used_by_actions": [
+        "move"
+      ],
+      "source_png": "outputs/hero-sea-motion-v02/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-move-d-native136_test-only-v02_20261020-193906-f69843ff.png",
+      "source_png_sha256": "309cb461c98a14650099d07f1a1c58f79e7c92cf61ba7f25e9eb75852893bfe3",
+      "source_dimensions": [
+        136,
+        144
+      ],
+      "source_mode": "RGBA",
+      "source_alpha_values": [
+        0,
+        255
+      ],
+      "native_pxo": "outputs/hero-sea-motion-v02/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-move-d-editable_test-only-v02_20261020-193906-f1809fc3.pxo",
+      "native_pxo_sha256": "749a43bd250f1f43d90c115bdf337b26832f04069686a83fa527f407f25afd46",
+      "native_ora": "outputs/hero-sea-motion-v02/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-move-d-layered_test-only-v02_20261020-193906-c807ad3f.ora",
+      "native_ora_sha256": "1f6904d6bd04bab9c52bfba8d4c3eb2851963e4acc2daed5fe2e364c6f5d7abe"
+    },
+    {
+      "cell": 13,
+      "cell_origin": [
+        136,
+        288
+      ],
+      "pose": "guard-a",
+      "role": "v02",
+      "used_by_actions": [
+        "guard"
+      ],
+      "source_png": "outputs/hero-sea-motion-v02/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-guard-a-native136_test-only-v02_20261020-193906-f03be00b.png",
+      "source_png_sha256": "aa2613cd0eef2b7b36696de8095dda37b96bff1f23b09d2cf88fb727c9675478",
+      "source_dimensions": [
+        136,
+        144
+      ],
+      "source_mode": "RGBA",
+      "source_alpha_values": [
+        0,
+        255
+      ],
+      "native_pxo": "outputs/hero-sea-motion-v02/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-guard-a-editable_test-only-v02_20261020-193906-620d2dfa.pxo",
+      "native_pxo_sha256": "bf01b3baf9d5f1c729b2b08ed65acded4231ab3986a69473b00bde47dd065260",
+      "native_ora": "outputs/hero-sea-motion-v02/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-guard-a-layered_test-only-v02_20261020-193906-fa395aaa.ora",
+      "native_ora_sha256": "dc51a7060860f0041d19d67880b90cfc8ad6eb6b0b597a2674abcd5536016b94"
+    },
+    {
+      "cell": 14,
+      "cell_origin": [
+        272,
+        288
+      ],
+      "pose": "guard-b",
+      "role": "v02",
+      "used_by_actions": [
+        "guard"
+      ],
+      "source_png": "outputs/hero-sea-motion-v02/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-guard-b-native136_test-only-v02_20261020-193906-fb202812.png",
+      "source_png_sha256": "c53d94491159bbdb8ebb86b91c31c3ead9a700c7f9b167b99e9e12d4e2e8c9b1",
+      "source_dimensions": [
+        136,
+        144
+      ],
+      "source_mode": "RGBA",
+      "source_alpha_values": [
+        0,
+        255
+      ],
+      "native_pxo": "outputs/hero-sea-motion-v02/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-guard-b-editable_test-only-v02_20261020-193906-85c23b2a.pxo",
+      "native_pxo_sha256": "559feb526bb53f2458faee12d2d2138d0f251f133526ded09c667689e7dab144",
+      "native_ora": "outputs/hero-sea-motion-v02/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-guard-b-layered_test-only-v02_20261020-193906-e1609151.ora",
+      "native_ora_sha256": "2f9bffc45457f4f9b9f7b41bb52a9d46633422daf6bdbad26ea73b29958b2ee3"
+    },
+    {
+      "cell": 15,
+      "cell_origin": [
+        408,
+        288
+      ],
+      "pose": "guard-c",
+      "role": "v02",
+      "used_by_actions": [
+        "guard"
+      ],
+      "source_png": "outputs/hero-sea-motion-v02/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-guard-c-native136_test-only-v02_20261020-193906-e6215934.png",
+      "source_png_sha256": "9d49870117403106e01e90b7ad137344894698cdf7a698d13f27daf20d01ed95",
+      "source_dimensions": [
+        136,
+        144
+      ],
+      "source_mode": "RGBA",
+      "source_alpha_values": [
+        0,
+        255
+      ],
+      "native_pxo": "outputs/hero-sea-motion-v02/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-guard-c-editable_test-only-v02_20261020-193906-7a03b689.pxo",
+      "native_pxo_sha256": "fe8a5680d73783a75630fdd297786b100307d633ffedb3d9fe6a879f600733a5",
+      "native_ora": "outputs/hero-sea-motion-v02/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-guard-c-layered_test-only-v02_20261020-193906-6f0298cb.ora",
+      "native_ora_sha256": "3c6eed79b85c410ceedc4cea1b480c46e82dfd5a81b22f6a66762b62c1dc3a6a"
+    },
+    {
+      "cell": 16,
+      "cell_origin": [
+        544,
+        288
+      ],
+      "pose": "dodge-a",
+      "role": "revision",
+      "used_by_actions": [
+        "dodge"
+      ],
+      "source_png": "outputs/hero-sea-motion-v04/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-dodge-a-native136_test-only-v04_20261021-033551-38021acf.png",
+      "source_png_sha256": "da75ee8ba30e640d6d660b5c6e994cbd486b32a68c386d66d652287e4f0c315c",
+      "source_dimensions": [
+        136,
+        144
+      ],
+      "source_mode": "RGBA",
+      "source_alpha_values": [
+        0,
+        255
+      ],
+      "native_pxo": "outputs/hero-sea-motion-v04/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-dodge-a-editable_test-only-v04_20261021-033551-e2d03fb6.pxo",
+      "native_pxo_sha256": "f88738207c32473482529b5122ba2bcb24b49437837023c7df332138f9495838",
+      "native_ora": "outputs/hero-sea-motion-v04/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-dodge-a-layered_test-only-v04_20261021-033551-4fc4a87a.ora",
+      "native_ora_sha256": "405679768acfd8ded7a0d6ca3810aa122a2b2c1b9d6b7180e0afd273ed60ce95",
+      "baseline_source_png": "outputs/hero-sea-motion-v02/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-dodge-a-native136_test-only-v02_20261020-193906-61f545a6.png",
+      "baseline_source_png_sha256": "a49075a2808a21ee00597a578d02bb09c352c994941e4296954839dbebc2be3a"
+    },
+    {
+      "cell": 17,
+      "cell_origin": [
+        680,
+        288
+      ],
+      "pose": "dodge-b",
+      "role": "revision",
+      "used_by_actions": [
+        "dodge"
+      ],
+      "source_png": "outputs/hero-sea-motion-v04/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-dodge-b-native136_test-only-v04_20261021-033551-7eb6f409.png",
+      "source_png_sha256": "0195709eb1f3282dd80b3b1420699817765e2dddd178d888ca5730432f798a26",
+      "source_dimensions": [
+        136,
+        144
+      ],
+      "source_mode": "RGBA",
+      "source_alpha_values": [
+        0,
+        255
+      ],
+      "native_pxo": "outputs/hero-sea-motion-v04/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-dodge-b-editable_test-only-v04_20261021-033551-615bfc68.pxo",
+      "native_pxo_sha256": "5ec83756da595305e8a6e76ab57002a583b61c0b81bca4d895f24720e1f4d7da",
+      "native_ora": "outputs/hero-sea-motion-v04/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-dodge-b-layered_test-only-v04_20261021-033551-2c69b4af.ora",
+      "native_ora_sha256": "47f8f13d466b3bd46d0c4c6328fdaa2d9777fede3699bbb91d88288acfe04bf4",
+      "baseline_source_png": "outputs/hero-sea-motion-v02/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-dodge-b-native136_test-only-v02_20261020-193906-2bb17585.png",
+      "baseline_source_png_sha256": "c4eba17a9fa9bdfb348e47bae482b72f3d06da3c14133c508ed939a11c5b9e81"
+    },
+    {
+      "cell": 18,
+      "cell_origin": [
+        0,
+        432
+      ],
+      "pose": "skill-tel-a",
+      "role": "revision",
+      "used_by_actions": [
+        "skill"
+      ],
+      "source_png": "outputs/hero-sea-motion-v04/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-skill-tel-a-native136_test-only-v04_20261021-033551-bcbe4455.png",
+      "source_png_sha256": "1b597d4e3bd6520b93332193ac48b05060044b9777c13727caead6146c73c8a9",
+      "source_dimensions": [
+        136,
+        144
+      ],
+      "source_mode": "RGBA",
+      "source_alpha_values": [
+        0,
+        255
+      ],
+      "native_pxo": "outputs/hero-sea-motion-v04/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-skill-tel-a-editable_test-only-v04_20261021-033551-52a079c7.pxo",
+      "native_pxo_sha256": "d288de206ca5249031718802395694a28a4988750d0dd81368d3e83f316fa294",
+      "native_ora": "outputs/hero-sea-motion-v04/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-skill-tel-a-layered_test-only-v04_20261021-033551-80c79d50.ora",
+      "native_ora_sha256": "f93b6aa52661c89fb7b93f1aa1488efa4c6417be7d0091d5b6cd1a0f449e80e1",
+      "baseline_source_png": "outputs/hero-sea-motion-v02/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-skill-tel-a-native136_test-only-v02_20261020-193906-9b572dc8.png",
+      "baseline_source_png_sha256": "0039e03241450ead15e12e9a1041d5c1245b4bf38178ab325e0d015c7cc71ffb"
+    },
+    {
+      "cell": 19,
+      "cell_origin": [
+        136,
+        432
+      ],
+      "pose": "skill-tel-b",
+      "role": "revision",
+      "used_by_actions": [
+        "skill"
+      ],
+      "source_png": "outputs/hero-sea-motion-v04/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-skill-tel-b-native136_test-only-v04_20261021-033551-a801723f.png",
+      "source_png_sha256": "1a72071edd3c3e6468370081e6821cac30de0d9ecd730c6cb7fc10e8055ce00a",
+      "source_dimensions": [
+        136,
+        144
+      ],
+      "source_mode": "RGBA",
+      "source_alpha_values": [
+        0,
+        255
+      ],
+      "native_pxo": "outputs/hero-sea-motion-v04/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-skill-tel-b-editable_test-only-v04_20261021-033551-e44472f6.pxo",
+      "native_pxo_sha256": "54aa43332e58ec0f12a9e8fa552ee956bdb02204c831126630c2f02397673ca2",
+      "native_ora": "outputs/hero-sea-motion-v04/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-skill-tel-b-layered_test-only-v04_20261021-033551-1260fc37.ora",
+      "native_ora_sha256": "5f25c4ac2d288ea60c13cd41fd4226ed3e64c0a131e82f1fcd13502ae4ca0933",
+      "baseline_source_png": "outputs/hero-sea-motion-v02/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-skill-tel-b-native136_test-only-v02_20261020-193906-63606d9f.png",
+      "baseline_source_png_sha256": "f58de210aaf3ea9fcf265541ee2c6be992b0c61fafd772bc7e1bebbfdd6fc388"
+    },
+    {
+      "cell": 20,
+      "cell_origin": [
+        272,
+        432
+      ],
+      "pose": "skill-strike",
+      "role": "revision",
+      "used_by_actions": [
+        "skill"
+      ],
+      "source_png": "outputs/hero-sea-motion-v04/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-skill-strike-native136_test-only-v04_20261021-033551-6d773d21.png",
+      "source_png_sha256": "56af75ac27c4c2df7404e6fac604adde89f2e16cd7934bc84744274a14e0dc0e",
+      "source_dimensions": [
+        136,
+        144
+      ],
+      "source_mode": "RGBA",
+      "source_alpha_values": [
+        0,
+        255
+      ],
+      "native_pxo": "outputs/hero-sea-motion-v04/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-skill-strike-editable_test-only-v04_20261021-033551-10f22aae.pxo",
+      "native_pxo_sha256": "263e1cb94c842e43007bf157d0fbaa80fef28c076fdf1c3feb917312ccd4d67d",
+      "native_ora": "outputs/hero-sea-motion-v04/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-skill-strike-layered_test-only-v04_20261021-033551-7e1cfc1a.ora",
+      "native_ora_sha256": "5b9c3ed6bf76f5d7077cc609bb5f6b3830c1a87f7a215929196ad08853366548",
+      "baseline_source_png": "outputs/hero-sea-motion-v02/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-skill-strike-native136_test-only-v02_20261020-193906-41d91207.png",
+      "baseline_source_png_sha256": "a8a6254166e4a7240b824204117fbd027d709e5070cb5de5693ac4dd8c26370e"
+    },
+    {
+      "cell": 21,
+      "cell_origin": [
+        408,
+        432
+      ],
+      "pose": "skill-contact",
+      "role": "revision",
+      "used_by_actions": [
+        "skill"
+      ],
+      "source_png": "outputs/hero-sea-motion-v04/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-skill-contact-native136_test-only-v04_20261021-033551-ddaf518e.png",
+      "source_png_sha256": "49e1bb0ec5d05558d5ee27fb78f1e6860f04eb1dbf475730bd66ee1256ef7fb2",
+      "source_dimensions": [
+        136,
+        144
+      ],
+      "source_mode": "RGBA",
+      "source_alpha_values": [
+        0,
+        255
+      ],
+      "native_pxo": "outputs/hero-sea-motion-v04/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-skill-contact-editable_test-only-v04_20261021-033551-c76979fe.pxo",
+      "native_pxo_sha256": "1cbcca5fd9a1f3aed980c50268f49afad4513a8b484ebf952b220b0f2fee6768",
+      "native_ora": "outputs/hero-sea-motion-v04/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-skill-contact-layered_test-only-v04_20261021-033551-d00c965d.ora",
+      "native_ora_sha256": "716b8cf80e7eb56cd32750de27e1d3420d031c62a7023360b3f443588c73aa04",
+      "baseline_source_png": "outputs/hero-sea-motion-v02/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-skill-contact-native136_test-only-v02_20261020-193906-0de730b8.png",
+      "baseline_source_png_sha256": "5b014a347dc349c908954df26b976665f1d68b23349175eaaa8ea611b4e5949e"
+    },
+    {
+      "cell": 22,
+      "cell_origin": [
+        544,
+        432
+      ],
+      "pose": "skill-recover",
+      "role": "revision",
+      "used_by_actions": [
+        "skill"
+      ],
+      "source_png": "outputs/hero-sea-motion-v04/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-skill-recover-native136_test-only-v04_20261021-033551-c6c08e15.png",
+      "source_png_sha256": "691220849ea29032ff466125f2fabb27f5147adf3a664858d76b0a5b11addf0a",
+      "source_dimensions": [
+        136,
+        144
+      ],
+      "source_mode": "RGBA",
+      "source_alpha_values": [
+        0,
+        255
+      ],
+      "native_pxo": "outputs/hero-sea-motion-v04/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-skill-recover-editable_test-only-v04_20261021-033551-8523abae.pxo",
+      "native_pxo_sha256": "0de5bf086f0c623f8af2b1b782a0852c406a9d6136ba5c53a2acbabe9171683b",
+      "native_ora": "outputs/hero-sea-motion-v04/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-skill-recover-layered_test-only-v04_20261021-033551-ac7bf295.ora",
+      "native_ora_sha256": "a7ece911eb2c80dace6b966d80bede7ccf60c8a12fa31018230b0346b8c83a02",
+      "baseline_source_png": "outputs/hero-sea-motion-v02/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-skill-recover-native136_test-only-v02_20261020-193906-6f777816.png",
+      "baseline_source_png_sha256": "26f7c249b1d3056af3ed7268b072354dc79fc58673e01fe8ad21b340e7e13706"
+    },
+    {
+      "cell": 23,
+      "cell_origin": [
+        680,
+        432
+      ],
+      "pose": "hit-a",
+      "role": "v03",
+      "used_by_actions": [
+        "hit"
+      ],
+      "source_png": "outputs/hero-sea-motion-v03/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-hit-a-native136_test-only-v03_20261020-194523-cb7919ae.png",
+      "source_png_sha256": "d49aa202fe2906c00e847a459b30032ec81ea48c942838d772640e9abaddaab3",
+      "source_dimensions": [
+        136,
+        144
+      ],
+      "source_mode": "RGBA",
+      "source_alpha_values": [
+        0,
+        255
+      ],
+      "native_pxo": "outputs/hero-sea-motion-v03/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-hit-a-editable_test-only-v03_20261020-194523-57b23722.pxo",
+      "native_pxo_sha256": "43dd6444d26adfb4113f991323ec64699853b565faee9a9533e694385fe82022",
+      "native_ora": "outputs/hero-sea-motion-v03/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-hit-a-layered_test-only-v03_20261020-194523-42ddf5a9.ora",
+      "native_ora_sha256": "d22f9462f5b2a5ea96b3c85cfff21b71e0ece51e7e27b1f6b2fb785938018d85"
+    },
+    {
+      "cell": 24,
+      "cell_origin": [
+        0,
+        576
+      ],
+      "pose": "hit-b",
+      "role": "v03",
+      "used_by_actions": [
+        "hit"
+      ],
+      "source_png": "outputs/hero-sea-motion-v03/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-hit-b-native136_test-only-v03_20261020-194523-41246631.png",
+      "source_png_sha256": "240016981e56db1357394fa81c2dbd62e97c52ac5918cf68c9fe0ed51e6ee28e",
+      "source_dimensions": [
+        136,
+        144
+      ],
+      "source_mode": "RGBA",
+      "source_alpha_values": [
+        0,
+        255
+      ],
+      "native_pxo": "outputs/hero-sea-motion-v03/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-hit-b-editable_test-only-v03_20261020-194523-4933b68c.pxo",
+      "native_pxo_sha256": "ee12ee7094bd57968404150a2cf62f0b2e8300ff2a25f87df8833f76364baaf3",
+      "native_ora": "outputs/hero-sea-motion-v03/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-hit-b-layered_test-only-v03_20261020-194523-368038f2.ora",
+      "native_ora_sha256": "e8ea3cb0980e2ee658ac274165e806f5609258e43c728380a09e08e9f12717f7"
+    },
+    {
+      "cell": 25,
+      "cell_origin": [
+        136,
+        576
+      ],
+      "pose": "hit-c",
+      "role": "v03",
+      "used_by_actions": [
+        "hit"
+      ],
+      "source_png": "outputs/hero-sea-motion-v03/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-hit-c-native136_test-only-v03_20261020-194523-90c8c8af.png",
+      "source_png_sha256": "e79a1e1f6910b8a80d4db48c94a17cef3a4467a997060836b6332a3c0eb8a17f",
+      "source_dimensions": [
+        136,
+        144
+      ],
+      "source_mode": "RGBA",
+      "source_alpha_values": [
+        0,
+        255
+      ],
+      "native_pxo": "outputs/hero-sea-motion-v03/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-hit-c-editable_test-only-v03_20261020-194523-30038356.pxo",
+      "native_pxo_sha256": "8bda772d0ef5eab6040e577c0e3f184a04deedcff7bd1fd1787c4a9cab2e986c",
+      "native_ora": "outputs/hero-sea-motion-v03/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-hit-c-layered_test-only-v03_20261020-194523-6dcda8e7.ora",
+      "native_ora_sha256": "061da9110f083dfdcf1b77cb59f1c06309905319e72cfbcf9c4c2bc234b324df"
+    },
+    {
+      "cell": 26,
+      "cell_origin": [
+        272,
+        576
+      ],
+      "pose": "down-a",
+      "role": "v03",
+      "used_by_actions": [
+        "defeat"
+      ],
+      "source_png": "outputs/hero-sea-motion-v03/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-down-a-native136_test-only-v03_20261020-194523-9936dbee.png",
+      "source_png_sha256": "e93968af8057c3e1f51e9f9bbe26d6701c8db3ab6265b2eb89300a90b01fe833",
+      "source_dimensions": [
+        136,
+        144
+      ],
+      "source_mode": "RGBA",
+      "source_alpha_values": [
+        0,
+        255
+      ],
+      "native_pxo": "outputs/hero-sea-motion-v03/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-down-a-editable_test-only-v03_20261020-194523-7223c2de.pxo",
+      "native_pxo_sha256": "57a7b5ebc017f9a139e9b71ca5162e40783c04b5dd8d65a8eae6d19b730f4b0b",
+      "native_ora": "outputs/hero-sea-motion-v03/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-down-a-layered_test-only-v03_20261020-194523-e8f926d0.ora",
+      "native_ora_sha256": "6f0abaf09c072c3f740c0dcfef3e6fb46e5c552d2cede03b6566eb40cea06ab1"
+    },
+    {
+      "cell": 27,
+      "cell_origin": [
+        408,
+        576
+      ],
+      "pose": "down-b",
+      "role": "v03",
+      "used_by_actions": [
+        "defeat"
+      ],
+      "source_png": "outputs/hero-sea-motion-v03/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-down-b-native136_test-only-v03_20261020-194523-a0e4af21.png",
+      "source_png_sha256": "bf73f705afdd705c48d41b679395276b4aedfe1475975e69e0d04263d9fbb143",
+      "source_dimensions": [
+        136,
+        144
+      ],
+      "source_mode": "RGBA",
+      "source_alpha_values": [
+        0,
+        255
+      ],
+      "native_pxo": "outputs/hero-sea-motion-v03/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-down-b-editable_test-only-v03_20261020-194523-0082217c.pxo",
+      "native_pxo_sha256": "7f7467c26cb72b61f3c7e3b8f298ba33acc617e799dea79f96ef2b00451bba4a",
+      "native_ora": "outputs/hero-sea-motion-v03/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-down-b-layered_test-only-v03_20261020-194523-38806337.ora",
+      "native_ora_sha256": "3551a1dc7699d362cacf5ab0e0d8804a14efa0cbfe895a0843599881df7233ac"
+    },
+    {
+      "cell": 28,
+      "cell_origin": [
+        544,
+        576
+      ],
+      "pose": "down-c",
+      "role": "v03",
+      "used_by_actions": [
+        "defeat"
+      ],
+      "source_png": "outputs/hero-sea-motion-v03/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-down-c-native136_test-only-v03_20261020-194523-be56c095.png",
+      "source_png_sha256": "03c0dd59c4e431404d4705a1b68e8f76b75481f97c3a0c8acd0fa61b5dfcfe26",
+      "source_dimensions": [
+        136,
+        144
+      ],
+      "source_mode": "RGBA",
+      "source_alpha_values": [
+        0,
+        255
+      ],
+      "native_pxo": "outputs/hero-sea-motion-v03/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-down-c-editable_test-only-v03_20261020-194523-815de9ee.pxo",
+      "native_pxo_sha256": "b02f5b9a1c1e48fa9a10b74494ec881559d8e737cb2615c731119ebeb93d0f96",
+      "native_ora": "outputs/hero-sea-motion-v03/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-down-c-layered_test-only-v03_20261020-194523-55fca706.ora",
+      "native_ora_sha256": "09fb706c09833ae14f30505f4573cb418e996364f25f979e092bfbf675e5b066"
+    }
+  ],
+  "actions": [
+    {
+      "name": "idle",
+      "loop": true,
+      "tick_rate": 30,
+      "frame_count": 4,
+      "duration_ticks": 28,
+      "duration_seconds_fraction": "28/30",
+      "frames": [
+        {
+          "index": 0,
+          "pose": "base",
+          "cell": 0,
+          "ticks": 8
+        },
+        {
+          "index": 1,
+          "pose": "idle-b1",
+          "cell": 1,
+          "ticks": 6
+        },
+        {
+          "index": 2,
+          "pose": "idle-b2",
+          "cell": 2,
+          "ticks": 8
+        },
+        {
+          "index": 3,
+          "pose": "idle-b1",
+          "cell": 1,
+          "ticks": 6
+        }
+      ],
+      "loop_start": 0,
+      "loop_cycle_ticks": 28
+    },
+    {
+      "name": "attack",
+      "loop": false,
+      "tick_rate": 30,
+      "frame_count": 8,
+      "duration_ticks": 13,
+      "duration_seconds_fraction": "13/30",
+      "frames": [
+        {
+          "index": 0,
+          "pose": "atk-antic-a",
+          "cell": 3,
+          "ticks": 2
+        },
+        {
+          "index": 1,
+          "pose": "atk-antic-b",
+          "cell": 4,
+          "ticks": 2
+        },
+        {
+          "index": 2,
+          "pose": "atk-smear",
+          "cell": 5,
+          "ticks": 1
+        },
+        {
+          "index": 3,
+          "pose": "atk-contact",
+          "cell": 6,
+          "ticks": 2
+        },
+        {
+          "index": 4,
+          "pose": "atk-follow",
+          "cell": 7,
+          "ticks": 2
+        },
+        {
+          "index": 5,
+          "pose": "atk-recover",
+          "cell": 8,
+          "ticks": 2
+        },
+        {
+          "index": 6,
+          "pose": "idle-b1",
+          "cell": 1,
+          "ticks": 1
+        },
+        {
+          "index": 7,
+          "pose": "base",
+          "cell": 0,
+          "ticks": 1
+        }
+      ]
+    },
+    {
+      "name": "move",
+      "loop": true,
+      "tick_rate": 30,
+      "frame_count": 4,
+      "duration_ticks": 12,
+      "duration_seconds_fraction": "12/30",
+      "frames": [
+        {
+          "index": 0,
+          "pose": "move-a",
+          "cell": 9,
+          "ticks": 3
+        },
+        {
+          "index": 1,
+          "pose": "move-b",
+          "cell": 10,
+          "ticks": 3
+        },
+        {
+          "index": 2,
+          "pose": "move-c",
+          "cell": 11,
+          "ticks": 3
+        },
+        {
+          "index": 3,
+          "pose": "move-d",
+          "cell": 12,
+          "ticks": 3
+        }
+      ],
+      "loop_start": 0,
+      "loop_cycle_ticks": 12
+    },
+    {
+      "name": "guard",
+      "loop": true,
+      "tick_rate": 30,
+      "frame_count": 3,
+      "duration_ticks": 14,
+      "duration_seconds_fraction": "14/30",
+      "frames": [
+        {
+          "index": 0,
+          "pose": "guard-a",
+          "cell": 13,
+          "ticks": 2
+        },
+        {
+          "index": 1,
+          "pose": "guard-b",
+          "cell": 14,
+          "ticks": 6
+        },
+        {
+          "index": 2,
+          "pose": "guard-c",
+          "cell": 15,
+          "ticks": 6
+        }
+      ],
+      "loop_start": 1,
+      "loop_cycle_ticks": 12
+    },
+    {
+      "name": "dodge",
+      "loop": false,
+      "tick_rate": 30,
+      "frame_count": 3,
+      "duration_ticks": 9,
+      "duration_seconds_fraction": "9/30",
+      "frames": [
+        {
+          "index": 0,
+          "pose": "dodge-a",
+          "cell": 16,
+          "ticks": 4
+        },
+        {
+          "index": 1,
+          "pose": "dodge-b",
+          "cell": 17,
+          "ticks": 4
+        },
+        {
+          "index": 2,
+          "pose": "base",
+          "cell": 0,
+          "ticks": 1
+        }
+      ]
+    },
+    {
+      "name": "skill",
+      "loop": false,
+      "tick_rate": 30,
+      "frame_count": 6,
+      "duration_ticks": 14,
+      "duration_seconds_fraction": "14/30",
+      "frames": [
+        {
+          "index": 0,
+          "pose": "skill-tel-a",
+          "cell": 18,
+          "ticks": 4
+        },
+        {
+          "index": 1,
+          "pose": "skill-tel-b",
+          "cell": 19,
+          "ticks": 3
+        },
+        {
+          "index": 2,
+          "pose": "skill-strike",
+          "cell": 20,
+          "ticks": 1
+        },
+        {
+          "index": 3,
+          "pose": "skill-contact",
+          "cell": 21,
+          "ticks": 2
+        },
+        {
+          "index": 4,
+          "pose": "skill-recover",
+          "cell": 22,
+          "ticks": 3
+        },
+        {
+          "index": 5,
+          "pose": "base",
+          "cell": 0,
+          "ticks": 1
+        }
+      ]
+    },
+    {
+      "name": "hit",
+      "loop": false,
+      "tick_rate": 30,
+      "frame_count": 4,
+      "duration_ticks": 8,
+      "duration_seconds_fraction": "8/30",
+      "frames": [
+        {
+          "index": 0,
+          "pose": "hit-a",
+          "cell": 23,
+          "ticks": 2
+        },
+        {
+          "index": 1,
+          "pose": "hit-b",
+          "cell": 24,
+          "ticks": 3
+        },
+        {
+          "index": 2,
+          "pose": "hit-c",
+          "cell": 25,
+          "ticks": 2
+        },
+        {
+          "index": 3,
+          "pose": "base",
+          "cell": 0,
+          "ticks": 1
+        }
+      ]
+    },
+    {
+      "name": "defeat",
+      "loop": false,
+      "tick_rate": 30,
+      "frame_count": 3,
+      "duration_ticks": 9,
+      "duration_seconds_fraction": "9/30",
+      "frames": [
+        {
+          "index": 0,
+          "pose": "down-a",
+          "cell": 26,
+          "ticks": 3
+        },
+        {
+          "index": 1,
+          "pose": "down-b",
+          "cell": 27,
+          "ticks": 3
+        },
+        {
+          "index": 2,
+          "pose": "down-c",
+          "cell": 28,
+          "ticks": 3
+        }
+      ],
+      "holds_last": true
+    }
+  ],
+  "authored_durations": {
+    "idle": {
+      "ticks": 28,
+      "seconds_fraction": "28/30"
+    },
+    "attack": {
+      "ticks": 13,
+      "seconds_fraction": "13/30"
+    },
+    "move": {
+      "ticks": 12,
+      "seconds_fraction": "12/30"
+    },
+    "guard": {
+      "ticks": 14,
+      "seconds_fraction": "14/30"
+    },
+    "dodge": {
+      "ticks": 9,
+      "seconds_fraction": "9/30"
+    },
+    "skill": {
+      "ticks": 14,
+      "seconds_fraction": "14/30"
+    },
+    "hit": {
+      "ticks": 8,
+      "seconds_fraction": "8/30"
+    },
+    "defeat": {
+      "ticks": 9,
+      "seconds_fraction": "9/30"
+    }
+  },
+  "action_order": [
+    "idle",
+    "attack",
+    "move",
+    "guard",
+    "dodge",
+    "skill",
+    "hit",
+    "defeat"
+  ],
+  "frozen_counts": {
+    "source_png": 29,
+    "native_pxo": 29,
+    "native_ora": 29,
+    "source_manifests": 3
+  },
+  "baseline_package": {
+    "base_commit": "dedf44ddb83e29d3864da4dca9a6b9fe1e6673cf",
+    "index": {
+      "file": "game/data/heroine-sea-combat-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_spritesheet-index_v01_20261020-201338-38ecfcb0.json",
+      "sha256": "1abb5b67b3bf59c02b3c747068789a01509812aee97c105b9f5c15c7a60ffa49"
+    },
+    "manifest": {
+      "file": "game/data/heroine-sea-combat-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_spritesheet-manifest_v01_20261020-201338-38ecfcb0.json",
+      "sha256": "6a4c663d859818d8b1714c6485fc927443c316acaa0602547f0c6e367df6df78"
+    },
+    "sheet": {
+      "file": "game/data/heroine-sea-combat-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_spritesheet_v01_20261020-201338-38ecfcb0.png",
+      "sha256": "f55db8cca615d4d64e8c07eb949b375cc6afb7562fc8ab9ac03062d78bd29a60"
+    },
+    "provenance": {
+      "file": "game/data/heroine-sea-combat-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_source-provenance_v01_20261020-201338-38ecfcb0.json",
+      "sha256": "d9d0a1ec0aeac0d83dcf9852b123b4e932d41e0137f4e7b79ec3e2c2cbda4e70"
+    }
+  },
+  "revision": {
+    "schema": "worlds-between.heroine-combat-pose-revision/1",
+    "manifest_file": "outputs/hero-sea-motion-v04/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-revision-manifest_test-only-v04_20261021-033551-1f7ca5ab.json",
+    "manifest_sha256": "f0c0cfea66e0aaa467ba577b5b9c11fc753327b9a43f04fedb800842d5274877",
+    "tag": "20261021-034640-07587a3c",
+    "changed_cells": [
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22
+    ],
+    "art_approved": false,
+    "motion_approved": false
+  }
+}

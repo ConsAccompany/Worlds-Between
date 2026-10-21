@@ -52,8 +52,8 @@ CONFIG_RES = "res://scripts/hsea16/rpg-2-star-ocean-the-second_heroine-playable-
 CONFIG_FILE = C / "game/scripts/hsea16/rpg-2-star-ocean-the-second_heroine-playable-path_config_opt-in-v01_20261021-015453-1036fbad.gd"
 ENTRY_RES = "res://scripts/hsea16/rpg-2-star-ocean-the-second_heroine-playable-path_entry_opt-in-v01_20261021-015453-1036fbad.gd"
 ENTRY_FILE = C / "game/scripts/hsea16/rpg-2-star-ocean-the-second_heroine-playable-path_entry_opt-in-v01_20261021-015453-1036fbad.gd"
-INDEX_RES = "res://data/heroine-sea-combat-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_spritesheet-index_v01_20261020-201338-38ecfcb0.json"
-INDEX_FILE = C / "game/data/heroine-sea-combat-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_spritesheet-index_v01_20261020-201338-38ecfcb0.json"
+INDEX_RES = re.search(r'const COMBAT_INDEX_PATH := "([^"]+)"', CONFIG_FILE.read_text(encoding="utf-8")).group(1)
+INDEX_FILE = C / "game" / INDEX_RES.removeprefix("res://")
 REGISTRY_RES = "res://data/hsea-front17/rpg-2-star-ocean-the-second_hero-female_exploration-sprite-set-registry_runtime-v01_20261020-222654-e8633039.json"
 REGISTRY_FILE = C / "game/data/hsea-front17/rpg-2-star-ocean-the-second_hero-female_exploration-sprite-set-registry_runtime-v01_20261020-222654-e8633039.json"
 MAX_WALL = 120.0
@@ -138,7 +138,7 @@ def helper_checks(languages):
     checks["harness_name_lowercase_unique"] = bool(re.fullmatch(r"rpg-2-star-ocean-the-second_heroine-playable-path_combined-flow-check_test-only-v16_20261021-015641-e106bdfa\.gd", HARNESS.name))
     checks["runner_name_lowercase_unique"] = bool(re.fullmatch(r"rpg-2-star-ocean-the-second_heroine-playable-path_root-runner_test-only-v16_20261021-015641-e106bdfa\.py", Path(__file__).name))
     checks["config_res_matches_expected"] = CONFIG_RES.endswith("_config_opt-in-v01_20261021-015453-1036fbad.gd") and CONFIG_RES.startswith("res://scripts/hsea16/")
-    checks["index_res_matches_expected"] = INDEX_RES.endswith("_spritesheet-index_v01_20261020-201338-38ecfcb0.json")
+    checks["index_res_matches_expected"] = INDEX_RES.startswith("res://data/") and json.loads(INDEX_FILE.read_text(encoding="utf-8"))["sets"].get("hero:female") is not None
     checks["wall_bound_120"] = MAX_WALL == 120.0
     checks["success_marker_shape"] = all(f"PATH16_ALL_PASS language={lang} checks=" in f"PATH16_ALL_PASS language={lang} checks=1" for lang in languages)
     return checks

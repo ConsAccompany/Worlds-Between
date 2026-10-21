@@ -9,7 +9,7 @@ extends RefCounted
 # Missing pinned files are refused: the caller must not fall back to the legacy heroine.
 
 const REGISTRY_PATH := "res://data/hsea-front17/rpg-2-star-ocean-the-second_hero-female_exploration-sprite-set-registry_runtime-v01_20261020-222654-e8633039.json"
-const COMBAT_INDEX_PATH := "res://data/heroine-sea-combat-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_spritesheet-index_v01_20261020-201338-38ecfcb0.json"
+const COMBAT_INDEX_PATH := "res://data/hsc19/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-revision_spritesheet-index_20261021-034640-07587a3c.json"
 const SPRITE_SET_PILOT_PATH := "res://scripts/exploration_sprite_set_pilot.gd"
 const SEA_DRIVER_PATH := "res://scripts/hsea09/rpg-2-star-ocean-the-second_heroine-sea_distance-driver_opt-in-v01_20261020-214620-4be375a2.gd"
 const BATTLE_ARENA_PATH := "res://scripts/battle_arena.gd"

@@ -13,11 +13,11 @@ extends RefCounted
 
 const REGISTRY_PATH := "res://data/hsea-front17/rpg-2-star-ocean-the-second_hero-female_exploration-sprite-set-registry_runtime-v01_20261020-222654-e8633039.json"
 const REGISTRY_SHA256 := "a0c6eeb745cc4116beb3ca402047c120cfd70922f0128f9b11c4cbee6b7805f6"
-const COMBAT_INDEX_PATH := "res://data/heroine-sea-combat-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_spritesheet-index_v01_20261020-201338-38ecfcb0.json"
+const COMBAT_INDEX_PATH := "res://data/hsc19/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-revision_spritesheet-index_20261021-034640-07587a3c.json"
 const COMBAT_PINNED := {
-	COMBAT_INDEX_PATH: "1abb5b67b3bf59c02b3c747068789a01509812aee97c105b9f5c15c7a60ffa49",
-	"res://data/heroine-sea-combat-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_spritesheet-manifest_v01_20261020-201338-38ecfcb0.json": "6a4c663d859818d8b1714c6485fc927443c316acaa0602547f0c6e367df6df78",
-	"res://data/heroine-sea-combat-v01/rpg-2-star-ocean-the-second_heroine-sea-combat_spritesheet_v01_20261020-201338-38ecfcb0.png": "f55db8cca615d4d64e8c07eb949b375cc6afb7562fc8ab9ac03062d78bd29a60",
+	COMBAT_INDEX_PATH: "59d07551ad128f096e679e7eb32567d320120a61f6b14fff905c515af4fd7938",
+	"res://data/hsc19/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-revision_spritesheet-manifest_20261021-034640-07587a3c.json": "e32403b3218ff35221d2a6ef1c2c186acef8d2de048f9fa3f5c50fde35e2ee62",
+	"res://data/hsc19/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-revision_spritesheet_20261021-034640-07587a3c.png": "6ec802cfb11bff6441c407307e65bfc528a9220129acc7d8ecd49ef4cfc43e7c",
 }
 const SPRITE_SET_PILOT_PATH := "res://scripts/exploration_sprite_set_pilot.gd"
 const SEA_DRIVER_PATH := "res://scripts/hsea09/rpg-2-star-ocean-the-second_heroine-sea_distance-driver_opt-in-v01_20261020-214620-4be375a2.gd"

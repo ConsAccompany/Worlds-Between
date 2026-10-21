@@ -113,6 +113,7 @@ func probe_direction(dir_name: String, action: String, opposite: String, expecte
 	press(action)
 	for i in 10:
 		await tick()
+	shot("explore-%s-walk" % dir_name)
 	if dir_name == "east":
 		shot("explore-move")
 	release(action)
@@ -124,11 +125,14 @@ func probe_direction(dir_name: String, action: String, opposite: String, expecte
 	for i in 6:
 		await tick()
 		ck(explore.hero.position == stopped, "physical stop unchanged %s frame %d" % [dir_name, i], [explore.hero.position.x, explore.hero.position.y])
+	shot("explore-%s-settled" % dir_name)
+	trace.append({"phase": "direction-settled", "direction": dir_name, "frame": frame, "position": [explore.hero.position.x, explore.hero.position.y], "state": explore.sprite_pilot.state()})
 	press(action)
 	for i in 6:
 		await tick()
 	release(action)
 	await tick()
+	shot("explore-%s-repress" % dir_name)
 	var p2: Vector2 = explore.hero.position
 	ck((p2 - stopped).dot(expected) > 3.0, "same-direction re-press resumes %s" % dir_name, [p2.x - stopped.x, p2.y - stopped.y])
 	var p3: Vector2 = p2
@@ -137,6 +141,7 @@ func probe_direction(dir_name: String, action: String, opposite: String, expecte
 		await tick()
 	release(opposite)
 	await tick()
+	shot("explore-%s-reverse" % dir_name)
 	var p4: Vector2 = explore.hero.position
 	ck((p4 - p3).dot(-expected) > 3.0, "reversal %s turns the heroine" % dir_name, [p4.x - p3.x, p4.y - p3.y])
 
