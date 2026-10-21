@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-21T19:26:31.716388+00:00",
+  "updatedAt": "2026-10-21T19:52:48.581397+00:00",
   "purpose": "Operating queue and worktree ownership; no progress points or account details",
   "workflow": "docs/workflow.md",
   "canonicalLedger": "outputs/rpg-2-star-ocean-the-second_production-completion_task-ledger_v01_20261018-140533-3de52073.json",
@@ -1192,25 +1192,57 @@
         "Source-bound actual gameplay evidence and combined ordinary-default path"
       ],
       "progressCredit": "Existing idle credit only; no duplicate score",
-      "nextAction": "Address the largest remaining heroine locomotion defect using the current source contract; no new roster batch and no artistic approval inferred.",
+      "nextAction": "Closed; all further cosmetic refinements deferred until after MVP.",
       "completedAt": "2026-10-21T19:26:31.716388+00:00",
       "evidence": [
         "docs/qa/rpg-2-star-ocean-the-second_heroine-breathing-idle_ordinary-path-closeout_v01_20261021-152533-405ccef9.md",
         "outputs/idle21/rpg-2-star-ocean-the-second_heroine-breathing-idle_root-closeout-proof_v01_20261021-152533-405ccef9.json"
       ],
       "sourceCommit": "85ed0a621479f2da53fe887d4facacb925354272"
+    },
+    {
+      "id": "content.combat.protagonist-male.source-set",
+      "owner": "claude",
+      "inspectionOwner": "codex",
+      "lane": "closed",
+      "status": "done-independently-verified",
+      "worktree": "work/needle22/cl-male",
+      "startedAt": "2026-10-21T19:38:14.539059+00:00",
+      "output": "Distinct male combat static and complete eight-state editable source set",
+      "dependsOn": [
+        "content.char.protagonist-male.static-south"
+      ],
+      "completion": [
+        "Existing static/actions ledger criteria",
+        "Native source/export integrity and explicit pivots/timing",
+        "Actual normal-game size rendering reviewed by Codex",
+        "No default or creator approval changes"
+      ],
+      "writeScope": [
+        "new author tools",
+        "outputs/mcombat22",
+        "game/data/mcombat22"
+      ],
+      "progressCredit": "Existing3+8points only after independently verified completion",
+      "nextAction": "Source boundary closed. Default adoption and artistic/motion review separate; next unfinished male exploration sources, not polish.",
+      "completedAt": "2026-10-21T19:52:48.581397+00:00",
+      "sourceCommit": "9b49f6fc0f022c81ce8e08b4ae9820fbd13f84c6",
+      "evidence": [
+        "docs/qa/rpg-2-star-ocean-the-second_male-combat_missing-source-set-closeout_v01_20261021-154716-8dee0dda.md",
+        "outputs/mcombat22/rpg-2-star-ocean-the-second_male-combat_root-production-proof_v01_20261021-154716-8dee0dda.json"
+      ]
     }
   ],
   "nextProductionMilestones": [
     {
       "id": "representative-character",
       "owner": "codex",
-      "status": "in_progress",
+      "status": "source-and-playable-path-complete-art-approval-separate",
       "subject": "protagonist-female",
       "goal": "One complete required exploration and combat set with pivots, editable exports and normal-runtime evidence before roster expansion",
       "approvalOwner": "creator",
       "productionCanContinueBeforeApproval": true,
-      "nextAction": "Both Sea of Stars-direction heroine static baselines are creator-approved. Author coherent combat actions and exploration motion from these exact appearances; no full sprite acceptance."
+      "nextAction": "Do not extend heroine polish; use the connected implementation as a reuse baseline for missing required content."
     },
     {
       "id": "representative-scene",
@@ -1247,34 +1279,22 @@
   },
   "nextDispatchPreferences": [
     {
-      "task": "content.combat.protagonist-female.combat-actions",
+      "task": "content.char.protagonist-male.static-west",
       "preferredProducer": "claude",
-      "status": "source-production-complete",
-      "reason": "Eight-action source boundary completed; next is optional authored-clock runtime package plus contact binding, not more still-art microversions."
-    },
-    {
-      "task": "content.scene.battle-arena.wiring",
-      "preferredProducer": "deepseek",
-      "status": "done",
-      "reason": "Independent Codex clean-context run closes this existing gate. No further retries or filler reports."
+      "status": "next-missing-content",
+      "reason": "Reuse representative source pipeline to complete missing directional exploration content."
     }
   ],
   "activeDualProviderBatch": {
-    "status": "completed-and-default-adopted",
-    "primary": "content.heroine.normal-default-adoption",
-    "supports": [
-      "support.heroine.normal-input-eight-actions",
-      "review.combat.protagonist-female.set"
-    ],
-    "claude": "prepared default-use policy; bounded task deadline reached, no quota observed",
-    "deepseek": "completed8-action harness; diagnostic filtering rejected by Codex",
-    "codex": "visible-defeat fix, strict bilingual reruns, independent sampled visual review, serial integration",
-    "noCreditOrQuotaDepletionObserved": true,
-    "evidence": "docs/qa/rpg-2-star-ocean-the-second_heroine_ordinary-game-default-adoption_closeout-v01_20261021-032508-3d9cdbbd.md",
-    "sourceCommit": "a424c8b3e91f6161637d3b5ecdb6e12fcdb316f7",
-    "creatorDefaultUse": "authorized: 设为女主默认显示",
-    "canonicalDefaultsChanged": true,
-    "next": "Strengthen dodge/skill torso poses in the existing heroine source; preserve current source/contact semantics. Full art acceptance remains separate."
+    "status": "completed-source-production-integrated",
+    "primary": "content.combat.protagonist-male.combat-static+combat-actions",
+    "supports": [],
+    "producer": "claude",
+    "codex": "Independent source/runtime inspection and serial integration",
+    "defaultChanges": false,
+    "next": "Missing male four-direction exploration source set; no new cosmetic heroine revisions.",
+    "sourceCommit": "9b49f6fc0f022c81ce8e08b4ae9820fbd13f84c6",
+    "evidence": "docs/qa/rpg-2-star-ocean-the-second_male-combat_missing-source-set-closeout_v01_20261021-154716-8dee0dda.md"
   },
   "characterSpriteStyleDirection": {
     "reference": "Sea of Stars",
@@ -1285,27 +1305,28 @@
   },
   "progressReporting": {
     "requiredFormat": "before â†’ after (change in percentage points)",
-    "currentBatchProductionBefore": 53.6,
+    "currentBatchProductionBefore": 54.6,
     "startedAt": "2026-10-20T21:42:14.747Z",
-    "sourceCommit": "852a855d3ffa24aa586ca19ba295dfa4a97ec3dc",
+    "sourceCommit": "9b49f6fc0f022c81ce8e08b4ae9820fbd13f84c6",
     "baselineChange": false,
-    "currentBatchProductionAfter": 53.6,
-    "changePercentagePoints": 0.0,
-    "completedAt": "2026-10-20T22:07:45.672Z",
-    "evidence": "docs/qa/rpg-2-star-ocean-the-second_heroine-sea_distance-gait-root-closeout_unapproved-v06_20261020-220500-c073a61e.md",
+    "currentBatchProductionAfter": 55.0,
+    "changePercentagePoints": 0.4,
+    "completedAt": "2026-10-21T19:52:48.581397+00:00",
+    "evidence": "docs/qa/rpg-2-star-ocean-the-second_male-combat_missing-source-set-closeout_v01_20261021-154716-8dee0dda.md",
     "publicationEvidence": "docs/qa/rpg-2-star-ocean-the-second_bible-exploration-source_live-verification_v50_20261020-213930-842e7d15.md"
   },
   "heroinePlayablePathPriority": {
     "owner": "codex",
     "productionBefore": 54.5,
-    "state": "in-progress",
+    "state": "technically-connected-refinements-deferred",
     "scope": "one heroine four-direction exploration -> natural battle with full combat set -> result -> exploration return -> save/reload",
     "producer": "claude",
     "technicalCheck": "deepseek",
     "creator": "artistic acceptance and human playtest only",
     "reuse": "existing package builders, checked runner, input harnesses",
     "publicationBoundary": "completed combined playable deliverable",
-    "noPerVersionPoints": true
+    "noPerVersionPoints": true,
+    "nextAction": "Reuse current normal-game heroine baseline; remaining artistic acceptance and human playtests separate."
   },
   "reusableSciencePropKit": {
     "catalog": "outputs/science-prop-kit/rpg-2-star-ocean-the-second_science-prop-kit_existing-native-catalog_v01_20261021-022234-4e609fc4.json",
@@ -1330,12 +1351,40 @@
       "before": 7.8,
       "after": 7.8
     },
-    "remaining": "Breathing idle hookup, complete motion polish and creator acceptance; fullsprites0/52."
+    "remaining": "Cosmetic refinements deferred until after MVP; creator artistic acceptance remains separate."
   },
   "coordinationOwner": "codex",
   "deepseekTakeover": {
     "status": "canceled-by-creator",
     "recordedAt": "2026-10-21T19:10:45.991993+00:00",
     "scope": "Codex resumes project ownership; existing handoff remains reference documentation"
+  },
+  "mvpCompletionPriority": {
+    "creatorInstruction": "Only tasks that move the needle; refinements after MVP",
+    "effectiveAt": "2026-10-21T19:38:14.539059+00:00",
+    "selectionRule": "Existing unfinished production deliverable or concrete play/release blocker",
+    "defer": [
+      "heroine breathing/face/limb micro-revisions",
+      "additional material polish of produced scenes",
+      "repeated QA of unchanged candidates",
+      "tracker redesign and account audits without a verified change"
+    ],
+    "exceptions": [
+      "crashes",
+      "broken required interactions",
+      "save/data loss",
+      "required integration and targeted validation"
+    ],
+    "scoringUnchanged": true,
+    "approvalsRemainSeparate": true
+  },
+  "postMvpRefinements": {
+    "status": "deferred-by-creator",
+    "items": [
+      "Heroine breathing/face/arm/foot visual micro-revisions beyond the connected baseline",
+      "Further material/foliage polish on already produced scene candidates"
+    ],
+    "resumeCondition": "MVP complete, or a specific issue becomes a concrete play/release blocker",
+    "approvalsNotWaived": true
   }
 }

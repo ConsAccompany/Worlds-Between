@@ -1,6 +1,15 @@
 # Open World Pixel RPG Implementation Progress
 
-## Latest completed batch — 2026-10-20
+## Latest completed batch — 2026-10-21
+
+Production **54.6% → 55.0% (+0.4 percentage points)**. Coding100%→100%; content24.3%→24.9% (458→469 of1881points). Inspection18.1%→18.1%; creator approval7.8%→7.8%. Frozen baseline unchanged.
+
+Completed the male protagonist's previously missing combat static and all8combat action sources: editable layered native files, deterministic author, source checks288/288, independent layer recomposition27/27 and actual EN/ZHarena source probes72checks each. Runtime-compatible opt-in package is committed; default-integration points remain open. Pixelorama exports match27/27, but shader diagnostics and GUI reliability limitations remain explicit. No creator art/motion approval or human playtest is inferred.
+
+Creator priority now defers refinements until after MVP. The connected heroine baseline is frozen for reuse; focus on missing required content and concrete play/release blockers. [Source closeout](../docs/qa/rpg-2-star-ocean-the-second_male-combat_missing-source-set-closeout_v01_20261021-154716-8dee0dda.md).
+
+
+## Prior completed batch — 2026-10-20
 
 Production **53.6% →53.6% (+0.0percentage points)**. Inspection14.2%→14.2%; creator7.0%→7.0%. Same frozen baseline; no added points for packaging already-produced content or maintaining an already-credited runtime pipeline.
 

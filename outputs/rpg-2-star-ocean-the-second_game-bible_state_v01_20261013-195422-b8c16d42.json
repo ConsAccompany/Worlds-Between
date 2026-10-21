@@ -4,7 +4,7 @@
   "title": "世界之间",
   "englishTitle": "Worlds Between",
   "edition": "设计基线 v0.2 · 2026-10-15 创作者决定",
-  "updatedAt": "2026-10-21T19:30:11.531Z",
+  "updatedAt": "2026-10-21T19:52:27.941Z",
   "note": "规则以玩家确认的设计稿为基线，并已并入 2026-10-15 创作者决定；人物姓名与外观是待审提案，具体剧情留待后续设计。",
   "pitch": "从地下社区走出的旅人，以好奇心探索多元文明，招募伙伴，并成为不同世界认知差异的桥梁。",
   "pillars": [
@@ -7918,19 +7918,19 @@
     "combinedWiringCheck": "297/297 on39f252e, clean raw log; actual Chinese victory inspected."
   },
   "latestTaskProgress": {
-    "id": "content.char.protagonist-female.breathing-idle-integration",
+    "id": "content.combat.protagonist-male.source-set",
     "status": "completed",
     "title": {
-      "zh": "女主四方向呼吸待机与正常流程衔接",
-      "en": "Heroine four-direction breathing idle and ordinary-path continuity"
+      "zh": "补齐男主战斗静止帧与八动作",
+      "en": "Complete missing male combat static and eight-action source set"
     },
-    "startedAt": "2026-10-21T19:09:54.101Z",
-    "sourceBefore": "8691090722d8d23352841fc3e94ce08d7fbf5247",
+    "startedAt": "2026-10-21T19:37:52.451Z",
+    "sourceBefore": "1284e75bf09164366e822bfa6418459ea1c46b16",
     "meters": {
       "production": {
         "before": 54.6,
-        "after": 54.6,
-        "changePercentagePoints": 0
+        "after": 55,
+        "changePercentagePoints": 0.4
       },
       "inspection": {
         "before": 18.1,
@@ -7943,10 +7943,10 @@
         "changePercentagePoints": 0
       }
     },
-    "completedAt": "2026-10-21T19:30:11.531Z",
-    "sourceAfter": "85ed0a621479f2da53fe887d4facacb925354272",
+    "completedAt": "2026-10-21T19:52:27.941Z",
+    "sourceAfter": "9b49f6fc0f022c81ce8e08b4ae9820fbd13f84c6",
     "evidence": [
-      "docs/qa/rpg-2-star-ocean-the-second_heroine-breathing-idle_ordinary-path-closeout_v01_20261021-152533-405ccef9.md"
+      "docs/qa/rpg-2-star-ocean-the-second_male-combat_missing-source-set-closeout_v01_20261021-154716-8dee0dda.md"
     ]
   },
   "progressReporting": {
@@ -8466,6 +8466,38 @@
       "evidence": [
         "assets/handoff/rpg-2-star-ocean-the-second_project-assets_remote-publication-proof_v01_20261021-145113-e91b77ee.json"
       ]
+    },
+    {
+      "id": "content.char.protagonist-female.breathing-idle-integration",
+      "status": "completed",
+      "title": {
+        "zh": "女主四方向呼吸待机与正常流程衔接",
+        "en": "Heroine four-direction breathing idle and ordinary-path continuity"
+      },
+      "startedAt": "2026-10-21T19:09:54.101Z",
+      "sourceBefore": "8691090722d8d23352841fc3e94ce08d7fbf5247",
+      "meters": {
+        "production": {
+          "before": 54.6,
+          "after": 54.6,
+          "changePercentagePoints": 0
+        },
+        "inspection": {
+          "before": 18.1,
+          "after": 18.1,
+          "changePercentagePoints": 0
+        },
+        "approval": {
+          "before": 7.8,
+          "after": 7.8,
+          "changePercentagePoints": 0
+        }
+      },
+      "completedAt": "2026-10-21T19:30:11.531Z",
+      "sourceAfter": "85ed0a621479f2da53fe887d4facacb925354272",
+      "evidence": [
+        "docs/qa/rpg-2-star-ocean-the-second_heroine-breathing-idle_ordinary-path-closeout_v01_20261021-152533-405ccef9.md"
+      ]
     }
   ],
   "latestBattleEnvironmentProduction": {
@@ -8673,5 +8705,29 @@
     "listSitesResult": "empty list",
     "repoBibleUpdated": true,
     "livePublicationClaimed": false
+  },
+  "latestMaleCombatProduction": {
+    "recordedAt": "2026-10-21T19:53:12.239420+00:00",
+    "status": "source-production-complete-unapproved-opt-in",
+    "sourceCommit": "9b49f6fc0f022c81ce8e08b4ae9820fbd13f84c6",
+    "tasks": [
+      "content.combat.protagonist-male.combat-static",
+      "content.combat.protagonist-male.combat-actions"
+    ],
+    "source": "outputs/mcombat22",
+    "runtimeCandidate": "game/data/mcombat22",
+    "evidence": "docs/qa/rpg-2-star-ocean-the-second_male-combat_missing-source-set-closeout_v01_20261021-154716-8dee0dda.md",
+    "productionBefore": 54.6,
+    "productionAfter": 55.0,
+    "changePercentagePoints": 0.4,
+    "defaultAdoption": false,
+    "artApproved": false,
+    "fullCharacterAccepted": false
+  },
+  "mvpCompletionPriority": {
+    "creatorInstruction": "Finish missing MVP work; refinements after MVP",
+    "heroineBaseline": "technically connected; cosmetic refinements deferred",
+    "next": "Missing male exploration source set",
+    "noScoringBaselineChange": true
   }
 }
