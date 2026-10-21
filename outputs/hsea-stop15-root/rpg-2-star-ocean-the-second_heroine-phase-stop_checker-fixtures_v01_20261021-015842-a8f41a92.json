@@ -1,0 +1,144 @@
+{
+ "schema": "worlds-between.heroine-sea-phase-aware-stop-check.fixtures.v1",
+ "generated_utc": "2026-10-21T01:58:48Z",
+ "ok": true,
+ "evidence_class": "synthetic_fixture",
+ "real_candidate": {
+  "manifest": "C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\max0840-sentry-sync\\outputs\\hsea-stop15\\src-v01-20261021-015000\\rpg-2-star-ocean-the-second_heroine-sea_explore-stop-transition-manifest_unapproved-stop15-v01_20261021-015000-f141d653.json",
+  "sha256": "1d8b5dbad470ce33508073517641eabc8663dc142a866d15aadfa0ac7b598657",
+  "ok": true,
+  "actual_ok": true,
+  "exit": 0,
+  "failed_gates": [],
+  "traceback": false,
+  "report": "reports\\real-candidate.json",
+  "baseline_unchanged": true
+ },
+ "baseline": {
+  "manifest": "C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\max0840-sentry-sync\\outputs\\hsea-arms12\\src-v08-20261020-222336\\rpg-2-star-ocean-the-second_heroine-sea_explore-stop-transition-manifest_unapproved-v08_20261020-222336-0ad0e3f5.json",
+  "sha256": "23905e6976028f9e01d2beab5bcaded2e6a2cc181a4b4bbdb8bd70c63db6dc64"
+ },
+ "positive_fixture": "fixtures\\positive",
+ "cases": [
+  {
+   "case": "positive",
+   "expected_ok": true,
+   "expected_gate": null,
+   "actual_ok": true,
+   "exit": 0,
+   "failed_gates": [],
+   "traceback": false,
+   "fixture_unchanged": true,
+   "baseline_unchanged": true,
+   "report": "reports\\positive.json",
+   "ok": true
+  },
+  {
+   "case": "negative-badsha",
+   "kind": "badsha",
+   "expected_ok": false,
+   "expected_gate": "declared_hashes",
+   "actual_ok": false,
+   "exit": 1,
+   "failed_gates": [
+    "declared_hashes"
+   ],
+   "traceback": false,
+   "fixture_unchanged": true,
+   "baseline_unchanged": true,
+   "report": "reports\\negative-badsha.json",
+   "ok": true
+  },
+  {
+   "case": "negative-missingphase",
+   "kind": "missingphase",
+   "expected_ok": false,
+   "expected_gate": "manifest_structure",
+   "actual_ok": false,
+   "exit": 1,
+   "failed_gates": [
+    "manifest_structure"
+   ],
+   "traceback": false,
+   "fixture_unchanged": true,
+   "baseline_unchanged": true,
+   "report": "reports\\negative-missingphase.json",
+   "ok": true
+  },
+  {
+   "case": "negative-protectedidle",
+   "kind": "protectedidle",
+   "expected_ok": false,
+   "expected_gate": "protected_52_bytes_equal_baseline",
+   "actual_ok": false,
+   "exit": 1,
+   "failed_gates": [
+    "declared_hashes",
+    "legacy_schema_unchanged",
+    "phase_endpoints_walk_idle",
+    "protected_52_bytes_equal_baseline"
+   ],
+   "traceback": false,
+   "fixture_unchanged": true,
+   "baseline_unchanged": true,
+   "report": "reports\\negative-protectedidle.json",
+   "ok": true
+  },
+  {
+   "case": "negative-pathescape",
+   "kind": "pathescape",
+   "expected_ok": false,
+   "expected_gate": "path_safety",
+   "actual_ok": false,
+   "exit": 1,
+   "failed_gates": [
+    "path_safety"
+   ],
+   "traceback": false,
+   "fixture_unchanged": true,
+   "baseline_unchanged": true,
+   "report": "reports\\negative-pathescape.json",
+   "ok": true
+  },
+  {
+   "case": "negative-malformed",
+   "kind": "malformed",
+   "expected_ok": false,
+   "expected_gate": "inputs_parse",
+   "actual_ok": false,
+   "exit": 1,
+   "failed_gates": [
+    "inputs_parse"
+   ],
+   "traceback": false,
+   "fixture_unchanged": true,
+   "baseline_unchanged": true,
+   "report": "reports\\negative-malformed.json",
+   "ok": true
+  }
+ ],
+ "checked_contract": {
+  "protected_png_exact_v08_bytes": 52,
+  "legacy_stop_png_unchanged": 16,
+  "side_phase_keys": "east/west x phase0..phase11",
+  "samples_per_phase": 4,
+  "sample0": "exact outgoing walk phase",
+  "sample3": "exact original idle",
+  "native_export_equality": 96,
+  "native_pxo_sources": 2,
+  "dynamic_pxo_frame_mapping": true,
+  "path_confinement": true,
+  "no_candidate_code_execution": true
+ },
+ "synthetic_vs_real": [
+  "REAL BYTES: baseline v08 52 idle/walk PNGs, 16 legacy stop PNGs and 4 baseline PXOs are read from the checked-in v08 profile and independently reconstructed.",
+  "SYNTHETIC: positive candidate copies those protected/legacy bytes under new names and adds marker-pixel samples 1/2; its two 48-frame native PXOs are a synthetic container built from copied/synthetic endpoint pixels.",
+  "SYNTHETIC: all six test cases, including the five negatives, are copied synthetic fixture trees; only the protected/legacy bytes originate from the real v08 baseline.",
+  "REAL CANDIDATE: validated separately and read-only when --real-manifest is supplied; its result is not counted as one of the six synthetic fixture cases and no threshold is lowered."
+ ],
+ "limitations": [
+  "Synthetic marker pixels are not art, motion, cadence or GUI evidence.",
+  "The validator checks structure, byte equality, native-frame composition, path confinement and read-only behavior only.",
+  "No Godot, Pixelorama GUI, network, credential, provider, ledger or Git action was used."
+ ]
+}

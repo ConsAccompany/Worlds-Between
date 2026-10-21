@@ -1,0 +1,27 @@
+{
+  "result": "PASS",
+  "runs": [
+    {
+      "language": "en",
+      "expectedRefusal": false,
+      "ok": true,
+      "exit": 0,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nHSEA16_PLAYABLE_READY language=en destination=scifi.outskirts\nWARNING: 2 ObjectDB instances were leaked at exit (run with `--verbose` for details).\n   at: cleanup (core/object/object.cpp:2536)\n"
+    },
+    {
+      "language": "zh",
+      "expectedRefusal": false,
+      "ok": true,
+      "exit": 0,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nHSEA16_PLAYABLE_READY language=zh destination=scifi.outskirts\nWARNING: 2 ObjectDB instances were leaked at exit (run with `--verbose` for details).\n   at: cleanup (core/object/object.cpp:2536)\n"
+    },
+    {
+      "language": "fr",
+      "expectedRefusal": true,
+      "ok": true,
+      "exit": 1,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nHSEA16_PLAYABLE_REFUSED language must be en or zh, got 'fr'\n"
+    }
+  ],
+  "note": "Interactive entry tested with engine quit-after20 so smoke exits normally. No human playtest or default adoption."
+}

@@ -1,0 +1,122 @@
+{
+ "schema": "worlds-between.heroine-sea-phase-aware-stop-check.v1",
+ "generated_utc": "2026-10-21T01:44:26Z",
+ "evidence_class": "real_candidate",
+ "note": "Structural, read-only validation of copied/synthetic or real candidate bytes. No motion, cadence, art-quality, GUI, gameplay or native-runtime inference.",
+ "inputs": {
+  "manifest": "C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\max0840-sentry-sync\\outputs\\hsea-stop15\\src-v01-20261021-015000\\rpg-2-star-ocean-the-second_heroine-sea_explore-stop-transition-manifest_unapproved-stop15-v01_20261021-015000-f141d653.json",
+  "baseline": "C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\max0840-sentry-sync\\outputs\\hsea-arms12\\src-v08-20261020-222336\\rpg-2-star-ocean-the-second_heroine-sea_explore-stop-transition-manifest_unapproved-v08_20261020-222336-0ad0e3f5.json",
+  "report": "C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\max0840-sentry-sync\\outputs\\hsea-stop15-root\\rpg-2-star-ocean-the-second_heroine-sea_phase-stop-independent-source-check_v01_20261021-020100-c6c468d8.json"
+ },
+ "limitations": [
+  "Synthetic fixtures reuse exact v08 protected bytes plus synthetic phase endpoints; they are not art approval.",
+  "Native PXO layers are parsed dynamically from PXO data.json; frame counts are not fixed to 49/65.",
+  "The fixture builder does not require the real hsea-stop15 producer output; when present the same CLI is run read-only against it as a separate real-candidate report.",
+  "No GUI reopening, Godot runtime, motion review, network, provider or source mutation is performed."
+ ],
+ "gates": {
+  "baseline_integrity": {
+   "ok": true,
+   "detail": {
+    "source_manifest_checked": true,
+    "protected_png": 52,
+    "legacy_bridge_png": 16,
+    "pxo_frames_per_direction": 17
+   }
+  },
+  "source_set_pin": {
+   "ok": true,
+   "detail": {
+    "file": "rpg-2-star-ocean-the-second_heroine-sea_explore-source-set_unapproved-stop15-v01_20261021-015000-f141d653.json",
+    "sha256": "2311c4a5e904b2501fb2fd09c9d7bfc0fd416a7298ec81877cde9a2ae04550ba"
+   }
+  },
+  "legacy_schema_unchanged": {
+   "ok": true,
+   "detail": {
+    "contacts": 8,
+    "from_walk_frame_and_hashes": "equal baseline"
+   }
+  },
+  "protected_52_bytes_equal_baseline": {
+   "ok": true,
+   "detail": {
+    "checked": 52,
+    "mismatched": []
+   }
+  },
+  "phase_endpoints_walk_idle": {
+   "ok": true,
+   "detail": {
+    "checked": 24,
+    "mismatched": []
+   }
+  },
+  "png_format_alpha_bounds_148": {
+   "ok": true,
+   "detail": {
+    "checked": 148,
+    "invalid": []
+   }
+  },
+  "declared_hashes": {
+   "ok": true,
+   "detail": []
+  },
+  "path_safety": {
+   "ok": true,
+   "detail": {
+    "refs": "all basenames confined to manifest/source-set dirs"
+   }
+  },
+  "native_sources_and_dynamic_exports": {
+   "ok": true,
+   "detail": {
+    "sources": [
+     {
+      "direction": "east",
+      "file": "rpg-2-star-ocean-the-second_heroine-sea_explore-east-phstop-layers_unapproved-stop15-v01_20261021-015000-f141d653.pxo",
+      "parsed_frames": 48,
+      "declared_exports": 48,
+      "layers": 9
+     },
+     {
+      "direction": "west",
+      "file": "rpg-2-star-ocean-the-second_heroine-sea_explore-west-phstop-layers_unapproved-stop15-v01_20261021-015000-f141d653.pxo",
+      "parsed_frames": 48,
+      "declared_exports": 48,
+      "layers": 9
+     }
+    ],
+    "problems": []
+   }
+  },
+  "native_pxo_exports_equal_96_png": {
+   "ok": true,
+   "detail": {
+    "checked": 96,
+    "mismatched": []
+   }
+  },
+  "read_only_inputs_unchanged": {
+   "ok": true,
+   "detail": {
+    "baseline_changed": false,
+    "candidate_changed": false
+   }
+  }
+ },
+ "measurements": {
+  "protected_png": 52,
+  "legacy_stop_png": 16,
+  "phase_samples": 96,
+  "native_sources": 2,
+  "native_exports_checked": 96,
+  "baseline_pxo_frames_per_direction": 17,
+  "candidate_pxo_frames": {
+   "east": 48,
+   "west": 48
+  }
+ },
+ "ok": true
+}

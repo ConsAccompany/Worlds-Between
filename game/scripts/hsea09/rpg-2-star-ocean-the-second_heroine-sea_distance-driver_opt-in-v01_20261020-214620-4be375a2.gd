@@ -11,6 +11,7 @@ const PROVENANCE_PATH := "res://data/hsea-gait11/rpg-2-star-ocean-the-second_her
 const PROVENANCE_SHA256 := "52a61c70b9ca94b091fde76c60b7e0e184b4d014557afbe40c681c9b09513f45"
 # Exact, coordinator-inspected package profiles. Never infer a bridge/provenance path from untrusted JSON.
 const ADDITIONAL_SOURCE_PROFILES := {
+ "2a0953d1cbfa9fdf9700abce4d7ee8c59c2eeb6b59b9e5764d64b7704583bb24": {"transition_path": "res://data/hsea-stop15/rpg-2-star-ocean-the-second_heroine-sea_explore-stop-transition-manifest_unapproved-stop15-v01_20261021-015000-f141d653.json", "transition_sha256": "1d8b5dbad470ce33508073517641eabc8663dc142a866d15aadfa0ac7b598657", "provenance_path": "res://data/hsea-stop15/rpg-2-star-ocean-the-second_hero-female_exploration-source-package-provenance_v01_20261020-215528-cf35a07b.json", "provenance_sha256": "76bcfce2e4abfc088e964ad23bc7a521ddc440252209a04a1dcef471fc3f556a", "phase_aware_stop": true, "source_set_sha256": "2311c4a5e904b2501fb2fd09c9d7bfc0fd416a7298ec81877cde9a2ae04550ba"},
  "b0c2b02764dcb19020a21bd2538633125e79a5399d521b33e6f2286671ce902e": {
   "transition_path": "res://data/hsea-arms12/rpg-2-star-ocean-the-second_heroine-sea_explore-stop-transition-manifest_unapproved-v08_20261020-222336-0ad0e3f5.json",
   "transition_sha256": "23905e6976028f9e01d2beab5bcaded2e6a2cc181a4b4bbdb8bd70c63db6dc64",
@@ -65,7 +66,7 @@ static func attach(target: Sprite2D, actor: String, initial_facing: String) -> N
 	for direction in ["south", "west", "north", "east"]:
 		if candidate["clips"]["walk"][direction]["textures"].size() != 12:
 			return null
-	var bridge_set := _load_bridges(loader, profile)
+	var bridge_set := _load_bridges(loader, profile, candidate)
 	if bridge_set.is_empty():
 		return null
 	var script = load(MODEL_PATH)
@@ -105,7 +106,7 @@ static func _source_bytes_match(base: String, profile: Dictionary) -> bool:
 			return false
 	return true
 
-static func _load_bridges(loader, profile: Dictionary) -> Dictionary:
+static func _load_bridges(loader, profile: Dictionary, candidate: Dictionary = {}) -> Dictionary:
 	var transition_path: String = profile["transition_path"]
 	# Fixed source-bound supplemental file. Refuse all before changing any target field.
 	if not FileAccess.file_exists(transition_path) or FileAccess.get_sha256(transition_path) != profile["transition_sha256"]:
@@ -141,7 +142,65 @@ static func _load_bridges(loader, profile: Dictionary) -> Dictionary:
 			if not errors.is_empty():
 				return {}
 			result[direction][contact] = clip["textures"]
+	if profile.get("phase_aware_stop", false):
+		if data.get("source_set_sha256") != profile.get("source_set_sha256"):
+			return {}
+		var phases := _load_phase_bridges(loader, transition_path, data, candidate)
+		if phases.is_empty():
+			return {}
+		result["phase_bridges"] = phases
 	return result
+
+static func _load_phase_bridges(loader, manifest_path: String, data: Dictionary, candidate: Dictionary) -> Dictionary:
+	var listed = data.get("phase_bridges")
+	if not listed is Dictionary or listed.size() != 2 or not listed.has_all(["east", "west"]) or candidate.is_empty():
+		return {}
+	var result := {}
+	for direction in ["east", "west"]:
+		var by_direction = listed[direction]
+		if not by_direction is Dictionary or by_direction.size() != 12:
+			return {}
+		result[direction] = {}
+		for phase in range(12):
+			var spec = by_direction.get("phase" + str(phase))
+			if not spec is Dictionary or spec.get("from_walk_frame") != phase or not spec.get("bridge") is Array or spec["bridge"].size() != 4:
+				return {}
+			var frames := []
+			for index in range(4):
+				var entry = spec["bridge"][index]
+				if not entry is Dictionary or not entry.get("file") is String or not entry.get("sha256") is String:
+					return {}
+				var name: String = entry["file"]
+				if name.is_empty() or name.contains("/") or name.contains("\\") or name.contains("..") or not name.ends_with(".png"):
+					return {}
+				var file := manifest_path.get_base_dir().path_join(name)
+				if not FileAccess.file_exists(file) or FileAccess.get_sha256(file) != entry["sha256"]:
+					return {}
+				# Endpoint equality is checked against the already validated protected walk/idle source bytes.
+				if index == 0 or index == 3:
+					var action_name := "walk" if index == 0 else "idle"
+					var endpoint := phase if index == 0 else 0
+					var original: String = candidate["clips"][action_name][direction]["paths"][endpoint]
+					if FileAccess.get_sha256(original) != entry["sha256"]:
+						return {}
+				frames.append({"file": name, "duration_ms": 40})
+			var errors: Array[String] = []
+			var clip: Dictionary = loader._clip(frames, direction + " phase stop " + str(phase), "walk", manifest_path.get_base_dir(), 2, Vector2i(80,112), Vector2i(40,104), errors)
+			if not errors.is_empty():
+				return {}
+			result[direction][phase] = clip["textures"]
+	return result
+
+static func _phase_bridge_index(progress: float) -> int:
+	# Inclusive 120ms settle remains model-owned: four samples over the existing window.
+	# At 30fps the three settle ticks show release/near-rest/idle; 60fps also holds the entry pose.
+	if progress < 0.25:
+		return 0
+	if progress < 0.5:
+		return 1
+	if progress < 0.8:
+		return 2
+	return 3
 
 func face(_next_facing: String) -> void:
 	pass
@@ -167,6 +226,14 @@ func _apply(next: Dictionary) -> void:
 	var clip: Dictionary = sprite_set["clips"][clip_action][facing]
 	frame = clampi(frame, 0, clip["textures"].size() - 1)
 	sprite.texture = clip["textures"][frame]
+	if action == "settle" and bridges.has("phase_bridges") and bridges["phase_bridges"].has(facing):
+		var outgoing: int = int(next.get("settle_entry_frame", -1))
+		if outgoing >= 0 and outgoing < 12:
+			var phase_sample := _phase_bridge_index(float(next.get("settle_progress", 0.0)))
+			sprite.texture = bridges["phase_bridges"][facing][outgoing][phase_sample]
+			last_state["bridge_frame"] = phase_sample
+			last_state["bridge_phase"] = outgoing
+			return
 	# The last half of the existing <=120ms settling window uses two authored bridges.
 	# No extra post-stop timer and no alpha interpolation. The phase model stays authoritative
 	# for a same-facing re-press. This does not assert continuous pose/foot identity.
