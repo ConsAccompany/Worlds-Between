@@ -78,6 +78,9 @@ var sprite_pilot
 var walk_time := 0.0
 var walk_phase := 0
 var npc_position := Vector2.ZERO
+# Opt-in companion field-NPC presenter (zpath27 config path, set only by that config); "" = existing static texture.
+static var field_npc_presenter_override := ""
+var field_npc_driver
 var recruit_id := ""
 var enemy_position := Vector2(-100, -100)
 var enemy_visible := false
@@ -476,6 +479,14 @@ func _build_actors() -> void:
 		field_npc.position = npc_position
 		field_npc.visible = not AppState.recruited_members.has(recruit_id)
 		add_child(field_npc)
+		var presenter_path := field_npc_presenter_override
+		if presenter_path == "" and recruit_id == "zhao-ling":
+			var zhao = load("res://scripts/zpath27/rpg-2-star-ocean-the-second_zhao-playable-path_config_opt-in-v01_20261021-223218-3246d731.gd")
+			if zhao.enabled():
+				presenter_path = "res://scripts/zpath27/rpg-2-star-ocean-the-second_zhao-playable-path_config_opt-in-v01_20261021-223218-3246d731.gd"
+		if presenter_path != "":
+			var presenter = load(presenter_path)
+			field_npc_driver = presenter.attach_field_npc(field_npc, recruit_id) if presenter != null else null
 	add_child(hero)
 
 
