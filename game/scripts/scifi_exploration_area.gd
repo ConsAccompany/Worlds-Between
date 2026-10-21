@@ -24,8 +24,9 @@ static var navigation_ui_skin_override := -1
 const CharacterUiPortraits := preload("res://scripts/rpg-2-star-ocean-the-second_character-ui-portraits_helper_v01_20261019-233832-b7c4e912.gd")
 static var character_ui_portraits_override := -1
 var character_ui_portraits: Control = null
-# Opt-in editable Yonkers environment; presentation only, no movement/interaction change.
+# Creator-accepted Yonkers environment used by default; legacy flag is a diagnostic fallback.
 const OUTSKIRTS_NATIVE_FLAG := "--yonkers-outskirts-native-v01"
+const OUTSKIRTS_LEGACY_FLAG := "--yonkers-outskirts-legacy"
 const OUTSKIRTS_NATIVE_PATH := "res://assets/environments/outskirts-native-v01/rpg-2-star-ocean-the-second_yonkers-outskirts_merged-flat_native13-v01_20261020-200047-3e58269e.png"
 const MOVE_SPEED := 140.0
 const SPAWN := Vector2(82, 260)
@@ -134,7 +135,7 @@ func _ready() -> void:
 	enemy_position = config["enemy"]
 	enemy_visible = destination_id != "scifi.city" and not AppState.enemy_cleared_for_return
 	texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
-	if destination_id == "scifi.outskirts" and OS.get_cmdline_user_args().has(OUTSKIRTS_NATIVE_FLAG) and ResourceLoader.exists(OUTSKIRTS_NATIVE_PATH):
+	if destination_id == "scifi.outskirts" and not OS.get_cmdline_user_args().has(OUTSKIRTS_LEGACY_FLAG) and ResourceLoader.exists(OUTSKIRTS_NATIVE_PATH):
 		var candidate := load(OUTSKIRTS_NATIVE_PATH) as Texture2D
 		if candidate != null and candidate.get_size() == Vector2(640, 360):
 			outskirts_native_background = candidate

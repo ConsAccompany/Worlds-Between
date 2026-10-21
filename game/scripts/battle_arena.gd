@@ -1193,7 +1193,7 @@ func _load_battle_backdrop() -> void:
 	battle_backdrop_arena_id = ""
 	battle_backdrop_status = "off"
 	var selected_arena := battle_backdrop_arena(AppState.current_destination_id)
-	var native_selected := OS.get_cmdline_user_args().has(BATTLE_NATIVE_ENVIRONMENT_FLAG) and selected_arena == "outskirts"
+	var native_selected := selected_arena == "outskirts" and (OS.get_cmdline_user_args().has(BATTLE_NATIVE_ENVIRONMENT_FLAG) or battle_backdrop_override == -1)
 	if not battle_backdrop_enabled() and not native_selected:
 		return
 	battle_backdrop_arena_id = selected_arena
