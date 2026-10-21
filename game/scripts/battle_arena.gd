@@ -143,6 +143,8 @@ static var battle_backdrop_override := -1
 static var battle_backdrop_arena_override := ""
 static var combat_sprite_set_override := -1
 static var combat_sprite_set_index_override := ""
+# Actor-scoped male demonstration profile; it cannot suppress the authorized heroine default.
+static var male_playable_path_index_override := ""
 static var heroine_sea_contact_override := -1
 
 var enemy_id := "patrol"
@@ -1112,14 +1114,18 @@ func _advance_patrol_result_presentation(delta: float) -> void:
 
 
 func _authored_heroine_defeat_playing() -> bool:
-	# Only the current source-bound heroine package participates; male/legacy/fallback behavior is unchanged.
-	if not (heroine_sea_contact_enabled() or (heroine_default_active and heroine_sea_contact_override < 0)) or combat_sprite_sets == null or AppState.hero_appearance != "female":
+	# Current source-bound protagonist packages show defeat before results. Legacy/other fighters remain unchanged.
+	var female_source := AppState.hero_appearance == "female" and (heroine_sea_contact_enabled() or (heroine_default_active and heroine_sea_contact_override < 0))
+	var male_source := AppState.hero_appearance == "male" and _male_playable_path_index() != ""
+	if combat_sprite_sets == null or not (female_source or male_source):
 		return false
 	for index in fighters.size():
 		if String(fighters[index]["id"]) != "hero" or _is_alive(index) or not combat_sprite_sets.has_set(index):
 			continue
 		var sprite_set: Dictionary = combat_sprite_sets.sets[index]
-		if sprite_set.get("key") != "hero:female" or sprite_set.get("set_id") != "heroine-sea-combat-v01":
+		var expected_key := "hero:male" if male_source else "hero:female"
+		var expected_set := "protagonist-male-combat-mcombat22-v01" if male_source else "heroine-sea-combat-v01"
+		if sprite_set.get("key") != expected_key or sprite_set.get("set_id") != expected_set:
 			continue
 		var clip: Dictionary = sprite_set["actions"]["defeat"]
 		var state: Dictionary = combat_sprite_sets.states[index]
@@ -1266,17 +1272,38 @@ func _load_battle_backdrop() -> void:
 	battle_backdrop_status = "loaded"
 
 
+func _male_playable_path_index() -> String:
+	if AppState.hero_appearance != "male" or not AppState.active_party_ids.has("hero"):
+		return ""
+	if male_playable_path_index_override != "":
+		return male_playable_path_index_override
+	# Ordinary male use stays false until creator authorization. Explicit combat choices retain their semantics.
+	var male_driver = load("res://scripts/mpath24/rpg-2-star-ocean-the-second_male-playable-path_explore-driver_opt-in-v01_20261021-170200-5e1c24a7.gd")
+	if not male_driver.DEFAULT_ADOPTED or combat_sprite_set_override >= 0 or combat_sprite_set_index_override != "":
+		return ""
+	for arg in OS.get_cmdline_user_args():
+		if arg.begins_with(COMBAT_SPRITE_SET_INDEX_ARG):
+			return ""
+	var package: Dictionary = male_driver.prepare_package(male_driver.REGISTRY_PATH, male_driver.SUPPLEMENT_PATH)
+	return male_driver.COMBAT_INDEX_PATH if package.get("ok", false) else ""
+
+
 func _load_combat_sprite_sets() -> void:
 	combat_sprite_sets = null
 	var explicit := combat_sprite_set_enabled()
-	if not explicit and not heroine_default_active:
+	var male_index := "" if explicit else _male_playable_path_index()
+	if not explicit and not heroine_default_active and male_index == "":
 		return
 	var keys: Array[String] = []
 	for fighter in fighters:
 		keys.append(CombatSpriteSets.set_key(String(fighter["id"]), AppState.hero_appearance))
 	combat_sprite_sets = CombatSpriteSets.new()
-	combat_sprite_sets.configure(combat_sprite_set_index() if explicit else HeroineDefault.COMBAT_INDEX_PATH, keys)
-	if not explicit:
+	combat_sprite_sets.configure(combat_sprite_set_index() if explicit else (male_index if male_index != "" else HeroineDefault.COMBAT_INDEX_PATH), keys)
+	if not explicit and male_index != "":
+		if not combat_sprite_sets.has_set(AppState.active_party_ids.find("hero")):
+			combat_sprite_sets = null
+			return
+	if not explicit and male_index == "":
 		var hero_index := AppState.active_party_ids.find("hero")
 		if not combat_sprite_sets.has_set(hero_index) or combat_sprite_sets.loaded_count() != 1:
 			# Fail closed as one unit: legacy frames and the legacy immediate attack, never retimed placeholder art.

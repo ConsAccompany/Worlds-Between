@@ -93,6 +93,11 @@ static func attach(target: Sprite2D, actor: String, initial_facing: String) -> N
 		if not HeroineDefault.package_ok():
 			return null
 		return sea_driver.attach_registry(target, actor, initial_facing, HeroineDefault.REGISTRY_PATH)
+	# Male playable path: actor-scoped, off by default; refused whole packages keep legacy textures.
+	if actor == "protagonist-male":
+		var male_driver = load("res://scripts/mpath24/rpg-2-star-ocean-the-second_male-playable-path_explore-driver_opt-in-v01_20261021-170200-5e1c24a7.gd")
+		if male_driver.male_enabled():
+			return male_driver.attach_male(target, actor, initial_facing)
 	if sea_driver.enabled():
 		return sea_driver.attach(target, actor, initial_facing)
 	# Separate opt-in female complete-exploration pilot (own flag, default off); null falls through unchanged.
