@@ -2,7 +2,15 @@
 
 Last updated: 2026-10-21
 
-## Latest completed implementation — 2026-10-21: Ji Cheng complete playable preview
+## Latest completed implementation — 2026-10-21: Ji Cheng MVP default adoption
+
+Production **58.9% →59.1% (+0.2 pp)**; inspection **18.1% →18.1% (+0.0 pp)**; creator approval **7.8% →7.8% (+0.0 pp)**. The two existing Ji default-integration tasks are complete (content594→598/1881); frozen weights and denominator unchanged.
+
+Creator-authorized ordinary default use is active. Fresh ordinary-run EN male records/recruit/control/victory/return/autosave reload62 and ZH female declared low-health defeat/retry51 pass without configure() or presentation/member/index overrides. Boundary150 and explicit-pair15 pass, including coexistence and rollback to the authorized default. All2376other tracked runtime/source files unchanged in content (2241raw-exact;135legacy CRLF checkout conversions declared). Codex viewed actual ordinary ruins and battle captures. Source `22d3e7f5e8a9d206d3ec6284b6a1c4d0b8b17651`. [Closeout](../docs/qa/rpg-2-star-ocean-the-second_ji-cheng_default-adoption_codex-closeout-v01_20261021-224827-742b5598.md).
+
+Female and male protagonists plus Zhao Ling, Liang Xu and Ji Cheng now have ordinary MVP packages. Final full art/motion acceptance0/52, scene visuals5/12 and human timed plays0/2 remain separate. Refinements deferred. Next: finish outstanding ordinary-runtime technical inspection; do not start another cosmetic revision loop.
+
+## Prior completed implementation — 2026-10-21: Ji Cheng complete playable preview
 
 Production **58.9% →58.9% (+0.0 pp)**; inspection **18.1% →18.1% (+0.0 pp)**; creator approval **7.8% →7.8% (+0.0 pp)**. The two frozen integration tasks require ordinary default use and remain in progress until the separate authorization required by AGENTS.md. Preview implementation is complete; no per-preview points or denominator changes.
 
