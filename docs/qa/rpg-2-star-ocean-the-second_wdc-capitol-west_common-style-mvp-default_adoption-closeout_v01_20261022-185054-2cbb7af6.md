@@ -1,0 +1,13 @@
+# Washington common-style ordinary MVP default adoption
+
+Creator explicitly answered **先设为 MVP 默认，精修后置** to the displayed STYLE45 actual gameplay review (call_4a6038f411f14cf382e7b217a3707389). Scope: ordinary MVP default use only; final-art/motion acceptance and human playtests remain separate. Codex implements and independently verifies; no new provider inference or account spending.
+
+Changes on57dd126: set RUINS_V13_DEFAULT true; shared exploration root points to a small additive derived default router. The STYLE45 native assembly/router remains byte-identical and reproducible. Derived router primes its existing textures for the ordinary ruins default; explicit new flag delegates to original STYLE45 behavior, older flags and override0 retain old/rollback behavior. No assets, collision, anchors, battle/result code, calendar, roster or saves changed. 2551/2553 other tracked game files raw-identical.
+
+Actual no-art-flag bilingual GPU run: 56 checks,16 native captures, zero diagnostic/errors: source-bound new pixels, held traversal, records interaction, sentry encounter, real auto battle/result and return to same new-art scene at exact texel/current camera. The reused harness waits for the current authored heroine result lock and handles ordinary required growth UI, as documented in STYLE45. Fresh isolated profiles,12HP encounter fixture and declared pose placements; not a human timed play or complete menu-to-end playtest. Existing user profile not opened/independently hashed.
+
+Precedence cases run separately: explicit STYLE45 flag/new pixels; explicit v13 flag/old pixels; override0/original placeholder. Each also compares city/outskirts entry, movement-render hashes and positions to their pre-adoption snapshot. Finite checked runner fails on any diagnostic. Source proof at `outputs/style47/rpg-2-star-ocean-the-second_wdc-style47_source-scope-proof_v01_20261022-185054-2cbb7af6.json`; actual commands/results in outputs/style47.
+
+Original generated-raster/hidden-plate/rim and Pixelorama4shader diagnostic limitations remain unchanged; no polishing or new art accepted. Creator accepted MVP use with refinements deferred. Existing native-default task2points completes; no new scoring bucket.
+
+Production59.9%→60.0%(rounded+0.1pp); exact59.9362041467%→60.0000000000%(+0.0637958533pp), content625→627/1881; coding111/111. Inspection20.6% unchanged; creator-art approval7.8% unchanged. Final scene-art5/12, complete sprites0/52, human plays0/2 unchanged; final MVP false. Next: NYC common-style candidate default decision and Washington records-room common-style conversion.
