@@ -1,0 +1,118 @@
+{
+  "self_test": "PASS",
+  "cases": [
+    {
+      "name": "valid_all_eight_tick_actions",
+      "status": "PASS",
+      "exit": 0,
+      "expected_exit": 0,
+      "expected_failure_substring": null,
+      "failed_predicates": [],
+      "checks": {
+        "checks": 124,
+        "failed": 0
+      }
+    },
+    {
+      "name": "mismatch_sheet_geometry",
+      "status": "PASS",
+      "exit": 1,
+      "expected_exit": 1,
+      "expected_failure_substring": "sheet.cell_multiple",
+      "failed_predicates": [
+        "sheet.cell_multiple: sheet 64x24 must be a multiple of cell 16x10"
+      ],
+      "checks": {
+        "checks": 94,
+        "failed": 1
+      }
+    },
+    {
+      "name": "missing_skill_action",
+      "status": "PASS",
+      "exit": 1,
+      "expected_exit": 1,
+      "expected_failure_substring": "actions.all_eight_required",
+      "failed_predicates": [
+        "actions.all_eight_required: missing required actions: ['skill']"
+      ],
+      "checks": {
+        "checks": 111,
+        "failed": 1
+      }
+    },
+    {
+      "name": "zero_ticks",
+      "status": "PASS",
+      "exit": 1,
+      "expected_exit": 1,
+      "expected_failure_substring": "actions.idle.frames[0].ticks",
+      "failed_predicates": [
+        "actions.idle.frames[0].ticks: ticks must be an exact integer in 1..2147483647; got 0"
+      ],
+      "checks": {
+        "checks": 124,
+        "failed": 1
+      }
+    },
+    {
+      "name": "bool_ticks_not_int",
+      "status": "PASS",
+      "exit": 1,
+      "expected_exit": 1,
+      "expected_failure_substring": "actions.idle.frames[0].ticks",
+      "failed_predicates": [
+        "actions.idle.frames[0].ticks: ticks must be an exact integer in 1..2147483647; got True"
+      ],
+      "checks": {
+        "checks": 124,
+        "failed": 1
+      }
+    },
+    {
+      "name": "blank_transparent_cell",
+      "status": "PASS",
+      "exit": 1,
+      "expected_exit": 1,
+      "expected_failure_substring": "pixels_nonblank",
+      "failed_predicates": [
+        "actions.idle.frames[0].pixels_nonblank: cell 0 alpha max=0; fully transparent action frame is forbidden",
+        "actions.skill.frames[0].pixels_nonblank: cell 0 alpha max=0; fully transparent action frame is forbidden"
+      ],
+      "checks": {
+        "checks": 124,
+        "failed": 2
+      }
+    },
+    {
+      "name": "missing_png",
+      "status": "PASS",
+      "exit": 1,
+      "expected_exit": 1,
+      "expected_failure_substring": "sheet.file_exists",
+      "failed_predicates": [
+        "sheet.file_exists: missing PNG: C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\max0840-sentry-sync\\tools\\.wb-cs-validator-selftest-3a2a310c\\missing_png\\missing.png"
+      ],
+      "checks": {
+        "checks": 90,
+        "failed": 1
+      }
+    },
+    {
+      "name": "declared_sha_mismatch",
+      "status": "PASS",
+      "exit": 1,
+      "expected_exit": 1,
+      "expected_failure_substring": "sheet.sha256_matches",
+      "failed_predicates": [
+        "sheet.sha256_matches: declared sheet_sha256='0000000000000000000000000000000000000000000000000000000000000000'; actual=b266e34ea5bd86c0f626dc90d0d67d4642451b4cea43f8940196df50e9a5b525"
+      ],
+      "checks": {
+        "checks": 124,
+        "failed": 1
+      }
+    }
+  ]
+}
+
+STDERR

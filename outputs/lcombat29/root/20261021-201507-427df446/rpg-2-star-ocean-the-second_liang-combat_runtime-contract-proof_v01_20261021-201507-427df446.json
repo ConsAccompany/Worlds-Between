@@ -1,0 +1,1080 @@
+{
+  "tool": "worlds-between-combat-runtime-spritesheet-validator",
+  "tool_path": "C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\max0840-sentry-sync\\tools\\rpg-2-star-ocean-the-second_zhao-ling-combat-runtime-spritesheet_validator_v01_20261021-180142-b8f4d2.py",
+  "generated_utc": "2026-10-22T00:15:10.767965+00:00",
+  "input_mode": "read-only manifest+sheet; the only write is --out",
+  "manifest": {
+    "path": "C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\max0840-sentry-sync\\game\\data\\lcombat29\\rpg-2-star-ocean-the-second_liang-xu-combat_runtime-spritesheet-manifest_unapproved-lcombat29-v01_20261021-201025-9e22747e.json",
+    "sha256": "f459aa9709ce6363fa0da65aec7d4830fc7d174882d3ebadd4c6760ed7b8e38d",
+    "bytes": 3514
+  },
+  "sheet": {
+    "path": "C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\max0840-sentry-sync\\game\\data\\lcombat29\\rpg-2-star-ocean-the-second_liang-xu-combat_runtime-spritesheet_unapproved-lcombat29-v01_20261021-201025-e7f7aac4.png",
+    "declared_sheet_sha256": null,
+    "sha256_present": false,
+    "actual_sha256": "8462d1facd9baa413c6f88659e2a41dc515ffffd775f586318e96a07dbb1b6b0",
+    "bytes": 34364,
+    "width": 816,
+    "height": 576,
+    "columns": 6,
+    "rows": 4,
+    "cell_count": 24
+  },
+  "sha_fields_observed": [],
+  "target_contract": {
+    "cells_136x144": true,
+    "pivot_64_136": true,
+    "logical_scale": 0.5,
+    "display_proportion": "0.65",
+    "matches_required_target_contract": true
+  },
+  "checks": [
+    {
+      "id": "input.manifest_readable",
+      "ok": true,
+      "detail": "read 3514 bytes; sha256=f459aa9709ce6363fa0da65aec7d4830fc7d174882d3ebadd4c6760ed7b8e38d"
+    },
+    {
+      "id": "manifest.schema",
+      "ok": true,
+      "detail": "expected 'worlds-between.combat-sprite-set/1'; got 'worlds-between.combat-sprite-set/1'"
+    },
+    {
+      "id": "character.member_id",
+      "ok": true,
+      "detail": "member_id must be a non-empty string; got 'liang-xu'"
+    },
+    {
+      "id": "manifest.logical_scale",
+      "ok": true,
+      "detail": "logical_scale must be exactly 1 or 0.5 (bool rejected); got 0.5"
+    },
+    {
+      "id": "manifest.display_proportion",
+      "ok": true,
+      "detail": "display_proportion must be exactly '0.65'; got '0.65'"
+    },
+    {
+      "id": "manifest.authored_facing",
+      "ok": true,
+      "detail": "authored_facing must be 'left' or 'right'; got 'right'"
+    },
+    {
+      "id": "metadata.set_id_type",
+      "ok": true,
+      "detail": "set_id must be str; got 'liang-xu-combat-lcombat29-v01'"
+    },
+    {
+      "id": "metadata.art_status_type",
+      "ok": true,
+      "detail": "art_status must be str; got 'unapproved-liang-xu-combat-source-poses-technical-only'"
+    },
+    {
+      "id": "metadata.art_approved_type",
+      "ok": true,
+      "detail": "art_approved must be bool; got False"
+    },
+    {
+      "id": "sheet.cell_size",
+      "ok": true,
+      "detail": "cell_size must be two positive exact integers; got [136, 144]"
+    },
+    {
+      "id": "sheet.cell_size_even_at_half_scale",
+      "ok": true,
+      "detail": "0.5 scale requires even cell dimensions; got (136, 144)"
+    },
+    {
+      "id": "sheet.pivot_in_cell",
+      "ok": true,
+      "detail": "pivot must be two exact integers inside the cell; got [64, 136], cell=(136, 144)"
+    },
+    {
+      "id": "sheet.pivot_even_at_half_scale",
+      "ok": true,
+      "detail": "0.5 scale requires even pivot values; got (64, 136)"
+    },
+    {
+      "id": "sheet.declared",
+      "ok": true,
+      "detail": "sheet must be a non-empty string path; got 'rpg-2-star-ocean-the-second_liang-xu-combat_runtime-spritesheet_unapproved-lcombat29-v01_20261021-201025-e7f7aac4.png'"
+    },
+    {
+      "id": "sheet.sha256_present",
+      "ok": true,
+      "detail": "no sheet_sha256 declared; no hash field invented or required"
+    },
+    {
+      "id": "sheet.file_exists",
+      "ok": true,
+      "detail": "missing PNG: C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\max0840-sentry-sync\\game\\data\\lcombat29\\rpg-2-star-ocean-the-second_liang-xu-combat_runtime-spritesheet_unapproved-lcombat29-v01_20261021-201025-e7f7aac4.png"
+    },
+    {
+      "id": "sheet.png_format",
+      "ok": true,
+      "detail": "expected PNG; got 'PNG'"
+    },
+    {
+      "id": "sheet.image_mode",
+      "ok": true,
+      "detail": "supported 8-bit PNG modes ['1', 'L', 'LA', 'P', 'RGB', 'RGBA']; got 'RGBA'"
+    },
+    {
+      "id": "sheet.cell_multiple",
+      "ok": true,
+      "detail": "sheet 816x576 must be a multiple of cell 136x144"
+    },
+    {
+      "id": "actions.known_only",
+      "ok": true,
+      "detail": "no unknown actions"
+    },
+    {
+      "id": "actions.all_eight_required",
+      "ok": true,
+      "detail": "idle, move, guard, attack, dodge, hit, defeat, skill all present"
+    },
+    {
+      "id": "actions.attack.loop",
+      "ok": true,
+      "detail": "loop must be exactly False; got False"
+    },
+    {
+      "id": "actions.attack.tick_rate",
+      "ok": true,
+      "detail": "tick_rate must be an exact integer in 1..1000; got 30"
+    },
+    {
+      "id": "actions.attack.frames[0].cell",
+      "ok": true,
+      "detail": "cell must be an exact integer in 0..23; got 8"
+    },
+    {
+      "id": "actions.attack.frames[0].timing_mode",
+      "ok": true,
+      "detail": "'ms' is forbidden when tick_rate is used (no mixed clocks)"
+    },
+    {
+      "id": "actions.attack.frames[0].ticks",
+      "ok": true,
+      "detail": "ticks must be an exact integer in 1..2147483647; got 2"
+    },
+    {
+      "id": "actions.attack.frames[0].pixels_nonblank",
+      "ok": true,
+      "detail": "cell 8 alpha max=255"
+    },
+    {
+      "id": "actions.attack.frames[0].pixels_alpha_bounds",
+      "ok": true,
+      "detail": "cell 8 alpha range 0..255 must be within 0..255"
+    },
+    {
+      "id": "actions.attack.frames[1].cell",
+      "ok": true,
+      "detail": "cell must be an exact integer in 0..23; got 9"
+    },
+    {
+      "id": "actions.attack.frames[1].timing_mode",
+      "ok": true,
+      "detail": "'ms' is forbidden when tick_rate is used (no mixed clocks)"
+    },
+    {
+      "id": "actions.attack.frames[1].ticks",
+      "ok": true,
+      "detail": "ticks must be an exact integer in 1..2147483647; got 3"
+    },
+    {
+      "id": "actions.attack.frames[1].pixels_nonblank",
+      "ok": true,
+      "detail": "cell 9 alpha max=255"
+    },
+    {
+      "id": "actions.attack.frames[1].pixels_alpha_bounds",
+      "ok": true,
+      "detail": "cell 9 alpha range 0..255 must be within 0..255"
+    },
+    {
+      "id": "actions.attack.frames[2].cell",
+      "ok": true,
+      "detail": "cell must be an exact integer in 0..23; got 10"
+    },
+    {
+      "id": "actions.attack.frames[2].timing_mode",
+      "ok": true,
+      "detail": "'ms' is forbidden when tick_rate is used (no mixed clocks)"
+    },
+    {
+      "id": "actions.attack.frames[2].ticks",
+      "ok": true,
+      "detail": "ticks must be an exact integer in 1..2147483647; got 3"
+    },
+    {
+      "id": "actions.attack.frames[2].pixels_nonblank",
+      "ok": true,
+      "detail": "cell 10 alpha max=255"
+    },
+    {
+      "id": "actions.attack.frames[2].pixels_alpha_bounds",
+      "ok": true,
+      "detail": "cell 10 alpha range 0..255 must be within 0..255"
+    },
+    {
+      "id": "actions.attack.frames[3].cell",
+      "ok": true,
+      "detail": "cell must be an exact integer in 0..23; got 11"
+    },
+    {
+      "id": "actions.attack.frames[3].timing_mode",
+      "ok": true,
+      "detail": "'ms' is forbidden when tick_rate is used (no mixed clocks)"
+    },
+    {
+      "id": "actions.attack.frames[3].ticks",
+      "ok": true,
+      "detail": "ticks must be an exact integer in 1..2147483647; got 4"
+    },
+    {
+      "id": "actions.attack.frames[3].pixels_nonblank",
+      "ok": true,
+      "detail": "cell 11 alpha max=255"
+    },
+    {
+      "id": "actions.attack.frames[3].pixels_alpha_bounds",
+      "ok": true,
+      "detail": "cell 11 alpha range 0..255 must be within 0..255"
+    },
+    {
+      "id": "actions.attack.frames[4].cell",
+      "ok": true,
+      "detail": "cell must be an exact integer in 0..23; got 0"
+    },
+    {
+      "id": "actions.attack.frames[4].timing_mode",
+      "ok": true,
+      "detail": "'ms' is forbidden when tick_rate is used (no mixed clocks)"
+    },
+    {
+      "id": "actions.attack.frames[4].ticks",
+      "ok": true,
+      "detail": "ticks must be an exact integer in 1..2147483647; got 1"
+    },
+    {
+      "id": "actions.attack.frames[4].pixels_nonblank",
+      "ok": true,
+      "detail": "cell 0 alpha max=255"
+    },
+    {
+      "id": "actions.attack.frames[4].pixels_alpha_bounds",
+      "ok": true,
+      "detail": "cell 0 alpha range 0..255 must be within 0..255"
+    },
+    {
+      "id": "actions.attack.loop_start_default",
+      "ok": true,
+      "detail": "loop_start absent; default 0 applies"
+    },
+    {
+      "id": "actions.defeat.loop",
+      "ok": true,
+      "detail": "loop must be exactly False; got False"
+    },
+    {
+      "id": "actions.defeat.tick_rate",
+      "ok": true,
+      "detail": "tick_rate must be an exact integer in 1..1000; got 30"
+    },
+    {
+      "id": "actions.defeat.frames[0].cell",
+      "ok": true,
+      "detail": "cell must be an exact integer in 0..23; got 20"
+    },
+    {
+      "id": "actions.defeat.frames[0].timing_mode",
+      "ok": true,
+      "detail": "'ms' is forbidden when tick_rate is used (no mixed clocks)"
+    },
+    {
+      "id": "actions.defeat.frames[0].ticks",
+      "ok": true,
+      "detail": "ticks must be an exact integer in 1..2147483647; got 3"
+    },
+    {
+      "id": "actions.defeat.frames[0].pixels_nonblank",
+      "ok": true,
+      "detail": "cell 20 alpha max=255"
+    },
+    {
+      "id": "actions.defeat.frames[0].pixels_alpha_bounds",
+      "ok": true,
+      "detail": "cell 20 alpha range 0..255 must be within 0..255"
+    },
+    {
+      "id": "actions.defeat.frames[1].cell",
+      "ok": true,
+      "detail": "cell must be an exact integer in 0..23; got 21"
+    },
+    {
+      "id": "actions.defeat.frames[1].timing_mode",
+      "ok": true,
+      "detail": "'ms' is forbidden when tick_rate is used (no mixed clocks)"
+    },
+    {
+      "id": "actions.defeat.frames[1].ticks",
+      "ok": true,
+      "detail": "ticks must be an exact integer in 1..2147483647; got 3"
+    },
+    {
+      "id": "actions.defeat.frames[1].pixels_nonblank",
+      "ok": true,
+      "detail": "cell 21 alpha max=255"
+    },
+    {
+      "id": "actions.defeat.frames[1].pixels_alpha_bounds",
+      "ok": true,
+      "detail": "cell 21 alpha range 0..255 must be within 0..255"
+    },
+    {
+      "id": "actions.defeat.frames[2].cell",
+      "ok": true,
+      "detail": "cell must be an exact integer in 0..23; got 22"
+    },
+    {
+      "id": "actions.defeat.frames[2].timing_mode",
+      "ok": true,
+      "detail": "'ms' is forbidden when tick_rate is used (no mixed clocks)"
+    },
+    {
+      "id": "actions.defeat.frames[2].ticks",
+      "ok": true,
+      "detail": "ticks must be an exact integer in 1..2147483647; got 3"
+    },
+    {
+      "id": "actions.defeat.frames[2].pixels_nonblank",
+      "ok": true,
+      "detail": "cell 22 alpha max=255"
+    },
+    {
+      "id": "actions.defeat.frames[2].pixels_alpha_bounds",
+      "ok": true,
+      "detail": "cell 22 alpha range 0..255 must be within 0..255"
+    },
+    {
+      "id": "actions.defeat.loop_start_default",
+      "ok": true,
+      "detail": "loop_start absent; default 0 applies"
+    },
+    {
+      "id": "actions.dodge.loop",
+      "ok": true,
+      "detail": "loop must be exactly False; got False"
+    },
+    {
+      "id": "actions.dodge.tick_rate",
+      "ok": true,
+      "detail": "tick_rate must be an exact integer in 1..1000; got 30"
+    },
+    {
+      "id": "actions.dodge.frames[0].cell",
+      "ok": true,
+      "detail": "cell must be an exact integer in 0..23; got 12"
+    },
+    {
+      "id": "actions.dodge.frames[0].timing_mode",
+      "ok": true,
+      "detail": "'ms' is forbidden when tick_rate is used (no mixed clocks)"
+    },
+    {
+      "id": "actions.dodge.frames[0].ticks",
+      "ok": true,
+      "detail": "ticks must be an exact integer in 1..2147483647; got 4"
+    },
+    {
+      "id": "actions.dodge.frames[0].pixels_nonblank",
+      "ok": true,
+      "detail": "cell 12 alpha max=255"
+    },
+    {
+      "id": "actions.dodge.frames[0].pixels_alpha_bounds",
+      "ok": true,
+      "detail": "cell 12 alpha range 0..255 must be within 0..255"
+    },
+    {
+      "id": "actions.dodge.frames[1].cell",
+      "ok": true,
+      "detail": "cell must be an exact integer in 0..23; got 13"
+    },
+    {
+      "id": "actions.dodge.frames[1].timing_mode",
+      "ok": true,
+      "detail": "'ms' is forbidden when tick_rate is used (no mixed clocks)"
+    },
+    {
+      "id": "actions.dodge.frames[1].ticks",
+      "ok": true,
+      "detail": "ticks must be an exact integer in 1..2147483647; got 4"
+    },
+    {
+      "id": "actions.dodge.frames[1].pixels_nonblank",
+      "ok": true,
+      "detail": "cell 13 alpha max=255"
+    },
+    {
+      "id": "actions.dodge.frames[1].pixels_alpha_bounds",
+      "ok": true,
+      "detail": "cell 13 alpha range 0..255 must be within 0..255"
+    },
+    {
+      "id": "actions.dodge.frames[2].cell",
+      "ok": true,
+      "detail": "cell must be an exact integer in 0..23; got 0"
+    },
+    {
+      "id": "actions.dodge.frames[2].timing_mode",
+      "ok": true,
+      "detail": "'ms' is forbidden when tick_rate is used (no mixed clocks)"
+    },
+    {
+      "id": "actions.dodge.frames[2].ticks",
+      "ok": true,
+      "detail": "ticks must be an exact integer in 1..2147483647; got 1"
+    },
+    {
+      "id": "actions.dodge.frames[2].pixels_nonblank",
+      "ok": true,
+      "detail": "cell 0 alpha max=255"
+    },
+    {
+      "id": "actions.dodge.frames[2].pixels_alpha_bounds",
+      "ok": true,
+      "detail": "cell 0 alpha range 0..255 must be within 0..255"
+    },
+    {
+      "id": "actions.dodge.loop_start_default",
+      "ok": true,
+      "detail": "loop_start absent; default 0 applies"
+    },
+    {
+      "id": "actions.guard.loop",
+      "ok": true,
+      "detail": "loop must be exactly True; got True"
+    },
+    {
+      "id": "actions.guard.tick_rate",
+      "ok": true,
+      "detail": "tick_rate must be an exact integer in 1..1000; got 30"
+    },
+    {
+      "id": "actions.guard.frames[0].cell",
+      "ok": true,
+      "detail": "cell must be an exact integer in 0..23; got 6"
+    },
+    {
+      "id": "actions.guard.frames[0].timing_mode",
+      "ok": true,
+      "detail": "'ms' is forbidden when tick_rate is used (no mixed clocks)"
+    },
+    {
+      "id": "actions.guard.frames[0].ticks",
+      "ok": true,
+      "detail": "ticks must be an exact integer in 1..2147483647; got 2"
+    },
+    {
+      "id": "actions.guard.frames[0].pixels_nonblank",
+      "ok": true,
+      "detail": "cell 6 alpha max=255"
+    },
+    {
+      "id": "actions.guard.frames[0].pixels_alpha_bounds",
+      "ok": true,
+      "detail": "cell 6 alpha range 0..255 must be within 0..255"
+    },
+    {
+      "id": "actions.guard.frames[1].cell",
+      "ok": true,
+      "detail": "cell must be an exact integer in 0..23; got 7"
+    },
+    {
+      "id": "actions.guard.frames[1].timing_mode",
+      "ok": true,
+      "detail": "'ms' is forbidden when tick_rate is used (no mixed clocks)"
+    },
+    {
+      "id": "actions.guard.frames[1].ticks",
+      "ok": true,
+      "detail": "ticks must be an exact integer in 1..2147483647; got 12"
+    },
+    {
+      "id": "actions.guard.frames[1].pixels_nonblank",
+      "ok": true,
+      "detail": "cell 7 alpha max=255"
+    },
+    {
+      "id": "actions.guard.frames[1].pixels_alpha_bounds",
+      "ok": true,
+      "detail": "cell 7 alpha range 0..255 must be within 0..255"
+    },
+    {
+      "id": "actions.guard.loop_start",
+      "ok": true,
+      "detail": "loop_start must be an exact integer frame index for a looping action; got 1"
+    },
+    {
+      "id": "actions.hit.loop",
+      "ok": true,
+      "detail": "loop must be exactly False; got False"
+    },
+    {
+      "id": "actions.hit.tick_rate",
+      "ok": true,
+      "detail": "tick_rate must be an exact integer in 1..1000; got 30"
+    },
+    {
+      "id": "actions.hit.frames[0].cell",
+      "ok": true,
+      "detail": "cell must be an exact integer in 0..23; got 18"
+    },
+    {
+      "id": "actions.hit.frames[0].timing_mode",
+      "ok": true,
+      "detail": "'ms' is forbidden when tick_rate is used (no mixed clocks)"
+    },
+    {
+      "id": "actions.hit.frames[0].ticks",
+      "ok": true,
+      "detail": "ticks must be an exact integer in 1..2147483647; got 3"
+    },
+    {
+      "id": "actions.hit.frames[0].pixels_nonblank",
+      "ok": true,
+      "detail": "cell 18 alpha max=255"
+    },
+    {
+      "id": "actions.hit.frames[0].pixels_alpha_bounds",
+      "ok": true,
+      "detail": "cell 18 alpha range 0..255 must be within 0..255"
+    },
+    {
+      "id": "actions.hit.frames[1].cell",
+      "ok": true,
+      "detail": "cell must be an exact integer in 0..23; got 19"
+    },
+    {
+      "id": "actions.hit.frames[1].timing_mode",
+      "ok": true,
+      "detail": "'ms' is forbidden when tick_rate is used (no mixed clocks)"
+    },
+    {
+      "id": "actions.hit.frames[1].ticks",
+      "ok": true,
+      "detail": "ticks must be an exact integer in 1..2147483647; got 4"
+    },
+    {
+      "id": "actions.hit.frames[1].pixels_nonblank",
+      "ok": true,
+      "detail": "cell 19 alpha max=255"
+    },
+    {
+      "id": "actions.hit.frames[1].pixels_alpha_bounds",
+      "ok": true,
+      "detail": "cell 19 alpha range 0..255 must be within 0..255"
+    },
+    {
+      "id": "actions.hit.frames[2].cell",
+      "ok": true,
+      "detail": "cell must be an exact integer in 0..23; got 0"
+    },
+    {
+      "id": "actions.hit.frames[2].timing_mode",
+      "ok": true,
+      "detail": "'ms' is forbidden when tick_rate is used (no mixed clocks)"
+    },
+    {
+      "id": "actions.hit.frames[2].ticks",
+      "ok": true,
+      "detail": "ticks must be an exact integer in 1..2147483647; got 1"
+    },
+    {
+      "id": "actions.hit.frames[2].pixels_nonblank",
+      "ok": true,
+      "detail": "cell 0 alpha max=255"
+    },
+    {
+      "id": "actions.hit.frames[2].pixels_alpha_bounds",
+      "ok": true,
+      "detail": "cell 0 alpha range 0..255 must be within 0..255"
+    },
+    {
+      "id": "actions.hit.loop_start_default",
+      "ok": true,
+      "detail": "loop_start absent; default 0 applies"
+    },
+    {
+      "id": "actions.idle.loop",
+      "ok": true,
+      "detail": "loop must be exactly True; got True"
+    },
+    {
+      "id": "actions.idle.tick_rate",
+      "ok": true,
+      "detail": "tick_rate must be an exact integer in 1..1000; got 30"
+    },
+    {
+      "id": "actions.idle.frames[0].cell",
+      "ok": true,
+      "detail": "cell must be an exact integer in 0..23; got 0"
+    },
+    {
+      "id": "actions.idle.frames[0].timing_mode",
+      "ok": true,
+      "detail": "'ms' is forbidden when tick_rate is used (no mixed clocks)"
+    },
+    {
+      "id": "actions.idle.frames[0].ticks",
+      "ok": true,
+      "detail": "ticks must be an exact integer in 1..2147483647; got 14"
+    },
+    {
+      "id": "actions.idle.frames[0].pixels_nonblank",
+      "ok": true,
+      "detail": "cell 0 alpha max=255"
+    },
+    {
+      "id": "actions.idle.frames[0].pixels_alpha_bounds",
+      "ok": true,
+      "detail": "cell 0 alpha range 0..255 must be within 0..255"
+    },
+    {
+      "id": "actions.idle.frames[1].cell",
+      "ok": true,
+      "detail": "cell must be an exact integer in 0..23; got 1"
+    },
+    {
+      "id": "actions.idle.frames[1].timing_mode",
+      "ok": true,
+      "detail": "'ms' is forbidden when tick_rate is used (no mixed clocks)"
+    },
+    {
+      "id": "actions.idle.frames[1].ticks",
+      "ok": true,
+      "detail": "ticks must be an exact integer in 1..2147483647; got 14"
+    },
+    {
+      "id": "actions.idle.frames[1].pixels_nonblank",
+      "ok": true,
+      "detail": "cell 1 alpha max=255"
+    },
+    {
+      "id": "actions.idle.frames[1].pixels_alpha_bounds",
+      "ok": true,
+      "detail": "cell 1 alpha range 0..255 must be within 0..255"
+    },
+    {
+      "id": "actions.idle.loop_start",
+      "ok": true,
+      "detail": "loop_start must be an exact integer frame index for a looping action; got 0"
+    },
+    {
+      "id": "actions.move.loop",
+      "ok": true,
+      "detail": "loop must be exactly True; got True"
+    },
+    {
+      "id": "actions.move.tick_rate",
+      "ok": true,
+      "detail": "tick_rate must be an exact integer in 1..1000; got 30"
+    },
+    {
+      "id": "actions.move.frames[0].cell",
+      "ok": true,
+      "detail": "cell must be an exact integer in 0..23; got 2"
+    },
+    {
+      "id": "actions.move.frames[0].timing_mode",
+      "ok": true,
+      "detail": "'ms' is forbidden when tick_rate is used (no mixed clocks)"
+    },
+    {
+      "id": "actions.move.frames[0].ticks",
+      "ok": true,
+      "detail": "ticks must be an exact integer in 1..2147483647; got 3"
+    },
+    {
+      "id": "actions.move.frames[0].pixels_nonblank",
+      "ok": true,
+      "detail": "cell 2 alpha max=255"
+    },
+    {
+      "id": "actions.move.frames[0].pixels_alpha_bounds",
+      "ok": true,
+      "detail": "cell 2 alpha range 0..255 must be within 0..255"
+    },
+    {
+      "id": "actions.move.frames[1].cell",
+      "ok": true,
+      "detail": "cell must be an exact integer in 0..23; got 3"
+    },
+    {
+      "id": "actions.move.frames[1].timing_mode",
+      "ok": true,
+      "detail": "'ms' is forbidden when tick_rate is used (no mixed clocks)"
+    },
+    {
+      "id": "actions.move.frames[1].ticks",
+      "ok": true,
+      "detail": "ticks must be an exact integer in 1..2147483647; got 3"
+    },
+    {
+      "id": "actions.move.frames[1].pixels_nonblank",
+      "ok": true,
+      "detail": "cell 3 alpha max=255"
+    },
+    {
+      "id": "actions.move.frames[1].pixels_alpha_bounds",
+      "ok": true,
+      "detail": "cell 3 alpha range 0..255 must be within 0..255"
+    },
+    {
+      "id": "actions.move.frames[2].cell",
+      "ok": true,
+      "detail": "cell must be an exact integer in 0..23; got 4"
+    },
+    {
+      "id": "actions.move.frames[2].timing_mode",
+      "ok": true,
+      "detail": "'ms' is forbidden when tick_rate is used (no mixed clocks)"
+    },
+    {
+      "id": "actions.move.frames[2].ticks",
+      "ok": true,
+      "detail": "ticks must be an exact integer in 1..2147483647; got 3"
+    },
+    {
+      "id": "actions.move.frames[2].pixels_nonblank",
+      "ok": true,
+      "detail": "cell 4 alpha max=255"
+    },
+    {
+      "id": "actions.move.frames[2].pixels_alpha_bounds",
+      "ok": true,
+      "detail": "cell 4 alpha range 0..255 must be within 0..255"
+    },
+    {
+      "id": "actions.move.frames[3].cell",
+      "ok": true,
+      "detail": "cell must be an exact integer in 0..23; got 5"
+    },
+    {
+      "id": "actions.move.frames[3].timing_mode",
+      "ok": true,
+      "detail": "'ms' is forbidden when tick_rate is used (no mixed clocks)"
+    },
+    {
+      "id": "actions.move.frames[3].ticks",
+      "ok": true,
+      "detail": "ticks must be an exact integer in 1..2147483647; got 3"
+    },
+    {
+      "id": "actions.move.frames[3].pixels_nonblank",
+      "ok": true,
+      "detail": "cell 5 alpha max=255"
+    },
+    {
+      "id": "actions.move.frames[3].pixels_alpha_bounds",
+      "ok": true,
+      "detail": "cell 5 alpha range 0..255 must be within 0..255"
+    },
+    {
+      "id": "actions.move.loop_start",
+      "ok": true,
+      "detail": "loop_start must be an exact integer frame index for a looping action; got 0"
+    },
+    {
+      "id": "actions.skill.loop",
+      "ok": true,
+      "detail": "loop must be exactly False; got False"
+    },
+    {
+      "id": "actions.skill.tick_rate",
+      "ok": true,
+      "detail": "tick_rate must be an exact integer in 1..1000; got 30"
+    },
+    {
+      "id": "actions.skill.frames[0].cell",
+      "ok": true,
+      "detail": "cell must be an exact integer in 0..23; got 14"
+    },
+    {
+      "id": "actions.skill.frames[0].timing_mode",
+      "ok": true,
+      "detail": "'ms' is forbidden when tick_rate is used (no mixed clocks)"
+    },
+    {
+      "id": "actions.skill.frames[0].ticks",
+      "ok": true,
+      "detail": "ticks must be an exact integer in 1..2147483647; got 4"
+    },
+    {
+      "id": "actions.skill.frames[0].pixels_nonblank",
+      "ok": true,
+      "detail": "cell 14 alpha max=255"
+    },
+    {
+      "id": "actions.skill.frames[0].pixels_alpha_bounds",
+      "ok": true,
+      "detail": "cell 14 alpha range 0..255 must be within 0..255"
+    },
+    {
+      "id": "actions.skill.frames[1].cell",
+      "ok": true,
+      "detail": "cell must be an exact integer in 0..23; got 15"
+    },
+    {
+      "id": "actions.skill.frames[1].timing_mode",
+      "ok": true,
+      "detail": "'ms' is forbidden when tick_rate is used (no mixed clocks)"
+    },
+    {
+      "id": "actions.skill.frames[1].ticks",
+      "ok": true,
+      "detail": "ticks must be an exact integer in 1..2147483647; got 3"
+    },
+    {
+      "id": "actions.skill.frames[1].pixels_nonblank",
+      "ok": true,
+      "detail": "cell 15 alpha max=255"
+    },
+    {
+      "id": "actions.skill.frames[1].pixels_alpha_bounds",
+      "ok": true,
+      "detail": "cell 15 alpha range 0..255 must be within 0..255"
+    },
+    {
+      "id": "actions.skill.frames[2].cell",
+      "ok": true,
+      "detail": "cell must be an exact integer in 0..23; got 16"
+    },
+    {
+      "id": "actions.skill.frames[2].timing_mode",
+      "ok": true,
+      "detail": "'ms' is forbidden when tick_rate is used (no mixed clocks)"
+    },
+    {
+      "id": "actions.skill.frames[2].ticks",
+      "ok": true,
+      "detail": "ticks must be an exact integer in 1..2147483647; got 3"
+    },
+    {
+      "id": "actions.skill.frames[2].pixels_nonblank",
+      "ok": true,
+      "detail": "cell 16 alpha max=255"
+    },
+    {
+      "id": "actions.skill.frames[2].pixels_alpha_bounds",
+      "ok": true,
+      "detail": "cell 16 alpha range 0..255 must be within 0..255"
+    },
+    {
+      "id": "actions.skill.frames[3].cell",
+      "ok": true,
+      "detail": "cell must be an exact integer in 0..23; got 17"
+    },
+    {
+      "id": "actions.skill.frames[3].timing_mode",
+      "ok": true,
+      "detail": "'ms' is forbidden when tick_rate is used (no mixed clocks)"
+    },
+    {
+      "id": "actions.skill.frames[3].ticks",
+      "ok": true,
+      "detail": "ticks must be an exact integer in 1..2147483647; got 3"
+    },
+    {
+      "id": "actions.skill.frames[3].pixels_nonblank",
+      "ok": true,
+      "detail": "cell 17 alpha max=255"
+    },
+    {
+      "id": "actions.skill.frames[3].pixels_alpha_bounds",
+      "ok": true,
+      "detail": "cell 17 alpha range 0..255 must be within 0..255"
+    },
+    {
+      "id": "actions.skill.frames[4].cell",
+      "ok": true,
+      "detail": "cell must be an exact integer in 0..23; got 0"
+    },
+    {
+      "id": "actions.skill.frames[4].timing_mode",
+      "ok": true,
+      "detail": "'ms' is forbidden when tick_rate is used (no mixed clocks)"
+    },
+    {
+      "id": "actions.skill.frames[4].ticks",
+      "ok": true,
+      "detail": "ticks must be an exact integer in 1..2147483647; got 1"
+    },
+    {
+      "id": "actions.skill.frames[4].pixels_nonblank",
+      "ok": true,
+      "detail": "cell 0 alpha max=255"
+    },
+    {
+      "id": "actions.skill.frames[4].pixels_alpha_bounds",
+      "ok": true,
+      "detail": "cell 0 alpha range 0..255 must be within 0..255"
+    },
+    {
+      "id": "actions.skill.loop_start_default",
+      "ok": true,
+      "detail": "loop_start absent; default 0 applies"
+    }
+  ],
+  "failed_predicates": [],
+  "limitations": [
+    "Static schema, geometry and pixel checks only; no Godot import/load, playback timing, motion fluidity, art quality or human acceptance is claimed.",
+    "Reads only --manifest and its declared PNG; set-index membership and the loader's external set key are not validated.",
+    "Tick/timing values must be exact JSON integers; integral floats (which the GDScript loader tolerates) are rejected as malformed rather than silently coerced.",
+    "Only a declared top-level sheet_sha256 is verified; when absent no hash field is invented. Other sha-looking fields are reported but not guessed as sheet bindings.",
+    "Non-empty means at least one alpha>0 pixel in the referenced cell; palette indices and alpha extrema are checked inside the declared cell bounds.",
+    "Text hashes bind raw file bytes with no normalization. PNG decode uses Pillow; engine import/compression settings are outside this checker."
+  ],
+  "actions": {
+    "attack": {
+      "loop": false,
+      "frame_count": 5,
+      "timing": "ticks",
+      "tick_rate": 30,
+      "duration_ticks": 13,
+      "duration": "13/30",
+      "frame_end_rationals": [
+        "2/30",
+        "5/30",
+        "8/30",
+        "12/30",
+        "13/30"
+      ],
+      "loop_start": 0,
+      "ok": true
+    },
+    "defeat": {
+      "loop": false,
+      "frame_count": 3,
+      "timing": "ticks",
+      "tick_rate": 30,
+      "duration_ticks": 9,
+      "duration": "9/30",
+      "frame_end_rationals": [
+        "3/30",
+        "6/30",
+        "9/30"
+      ],
+      "loop_start": 0,
+      "ok": true
+    },
+    "dodge": {
+      "loop": false,
+      "frame_count": 3,
+      "timing": "ticks",
+      "tick_rate": 30,
+      "duration_ticks": 9,
+      "duration": "9/30",
+      "frame_end_rationals": [
+        "4/30",
+        "8/30",
+        "9/30"
+      ],
+      "loop_start": 0,
+      "ok": true
+    },
+    "guard": {
+      "loop": true,
+      "frame_count": 2,
+      "timing": "ticks",
+      "tick_rate": 30,
+      "duration_ticks": 14,
+      "duration": "14/30",
+      "frame_end_rationals": [
+        "2/30",
+        "14/30"
+      ],
+      "loop_start": 1,
+      "ok": true
+    },
+    "hit": {
+      "loop": false,
+      "frame_count": 3,
+      "timing": "ticks",
+      "tick_rate": 30,
+      "duration_ticks": 8,
+      "duration": "8/30",
+      "frame_end_rationals": [
+        "3/30",
+        "7/30",
+        "8/30"
+      ],
+      "loop_start": 0,
+      "ok": true
+    },
+    "idle": {
+      "loop": true,
+      "frame_count": 2,
+      "timing": "ticks",
+      "tick_rate": 30,
+      "duration_ticks": 28,
+      "duration": "28/30",
+      "frame_end_rationals": [
+        "14/30",
+        "28/30"
+      ],
+      "loop_start": 0,
+      "ok": true
+    },
+    "move": {
+      "loop": true,
+      "frame_count": 4,
+      "timing": "ticks",
+      "tick_rate": 30,
+      "duration_ticks": 12,
+      "duration": "12/30",
+      "frame_end_rationals": [
+        "3/30",
+        "6/30",
+        "9/30",
+        "12/30"
+      ],
+      "loop_start": 0,
+      "ok": true
+    },
+    "skill": {
+      "loop": false,
+      "frame_count": 5,
+      "timing": "ticks",
+      "tick_rate": 30,
+      "duration_ticks": 14,
+      "duration": "14/30",
+      "frame_end_rationals": [
+        "4/30",
+        "7/30",
+        "10/30",
+        "13/30",
+        "14/30"
+      ],
+      "loop_start": 0,
+      "ok": true
+    }
+  },
+  "summary": {
+    "checks": 180,
+    "failed": 0
+  },
+  "status": "PASS",
+  "hash_binding": {
+    "algorithm": "sha256",
+    "text_normalization": "none; raw bytes",
+    "manifest_sha256": "f459aa9709ce6363fa0da65aec7d4830fc7d174882d3ebadd4c6760ed7b8e38d",
+    "sheet_sha256_actual": "8462d1facd9baa413c6f88659e2a41dc515ffffd775f586318e96a07dbb1b6b0",
+    "sheet_sha256_declared": null
+  },
+  "report_path": "C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\max0840-sentry-sync\\outputs\\lcombat29\\root\\20261021-201507-427df446\\rpg-2-star-ocean-the-second_liang-combat_runtime-contract-proof_v01_20261021-201507-427df446.json"
+}

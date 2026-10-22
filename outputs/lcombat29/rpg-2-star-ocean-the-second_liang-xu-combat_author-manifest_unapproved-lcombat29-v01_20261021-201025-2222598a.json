@@ -1,0 +1,3223 @@
+{
+ "status": "UNAPPROVED Liang Xu combat static + eight-action source set; technical source only; runtime default unchanged.",
+ "member_id": "liang-xu",
+ "architectureFrom": "tools/rpg-2-star-ocean-the-second_zhao-ling_combat-static-and-actions-author_unapproved-zcombat26-v01_20261021-180157-5d3c9a71.py",
+ "paletteFrom": "tools/rpg-2-star-ocean-the-second_liang-xu_explore-source-author_unapproved-lexplore28-v01_20261021-194350-3acdbd6e.py",
+ "identityReference": {
+  "portraitConcept": "outputs/rpg-2-star-ocean-the-second_liang-xu_character-sheet_v01_20261013-153556-c7630671.png",
+  "portraitIsConceptNotApproval": true,
+  "exploreEastStatic": "game/data/lexplore28/png/rpg-2-star-ocean-the-second_liang-xu_explore-east-static_unapproved-lexplore28-v01_20261021-194350-6d681674.png"
+ },
+ "identity": "tactical mentor, age 46; pinned dark hair with copper pin, silver temple streak, navy high collar, copper placket, split graphite long coat, folding tactical board in the far (left) hand",
+ "contractFrom": "game/data/hsc19/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-revision_spritesheet-manifest_20261021-034640-07587a3c.json",
+ "layers": [
+  "coat-back",
+  "arm-back",
+  "leg-back",
+  "leg-front",
+  "torso",
+  "board",
+  "head",
+  "arm-front",
+  "fx"
+ ],
+ "cell": [
+  136,
+  144
+ ],
+ "pivot": [
+  64,
+  136
+ ],
+ "tickRate": 30,
+ "signature": "folding tactical board: edge-first close-range strike (attack_range 65), opened two-panel guard; no gun, no blade",
+ "skill": "Tactical Calibration: board opens -> calibration grid -> signal to allies -> link ticks as the board folds",
+ "mechanicsRead": {
+  "file": "game/scripts/app_state.gd MEMBER_DEFS liang-xu + game/scripts/battle_arena.gd _try_attack/_use_skill",
+  "attack_damage": 16,
+  "attack_range": 65.0,
+  "attack_cooldown_s": 0.43,
+  "skill_energy_cost": 16,
+  "skill_cooldown_s": 2.2,
+  "skill_effect": "allies command=focus, boost += 4*rank",
+  "damage": "immediate on attack press"
+ },
+ "combatStatic": {
+  "pose": "idle-a",
+  "png": "rpg-2-star-ocean-the-second_liang-xu-combat_battle-still-native136_unapproved-lcombat29-v01_20261021-201025-2db9e209.png",
+  "ora": "rpg-2-star-ocean-the-second_liang-xu-combat_battle-still-layered_unapproved-lcombat29-v01_20261021-201025-16b2821a.ora",
+  "pxo": "rpg-2-star-ocean-the-second_liang-xu-combat_battle-still-editable_unapproved-lcombat29-v01_20261021-201025-46ff8585.pxo"
+ },
+ "runtimeActions": {
+  "idle": {
+   "frames": [
+    [
+     "idle-a",
+     14
+    ],
+    [
+     "idle-b",
+     14
+    ]
+   ],
+   "loop": true,
+   "totalTicks": 28
+  },
+  "attack": {
+   "frames": [
+    [
+     "attack-strike",
+     2
+    ],
+    [
+     "attack-follow",
+     3
+    ],
+    [
+     "attack-fold",
+     3
+    ],
+    [
+     "attack-recover",
+     4
+    ],
+    [
+     "idle-a",
+     1
+    ]
+   ],
+   "loop": false,
+   "totalTicks": 13
+  },
+  "move": {
+   "frames": [
+    [
+     "move-a",
+     3
+    ],
+    [
+     "move-b",
+     3
+    ],
+    [
+     "move-c",
+     3
+    ],
+    [
+     "move-d",
+     3
+    ]
+   ],
+   "loop": true,
+   "totalTicks": 12
+  },
+  "guard": {
+   "frames": [
+    [
+     "guard-in",
+     2
+    ],
+    [
+     "guard-hold",
+     12
+    ]
+   ],
+   "loop": true,
+   "totalTicks": 14
+  },
+  "dodge": {
+   "frames": [
+    [
+     "dodge-hop",
+     4
+    ],
+    [
+     "dodge-land",
+     4
+    ],
+    [
+     "idle-a",
+     1
+    ]
+   ],
+   "loop": false,
+   "totalTicks": 9
+  },
+  "skill": {
+   "frames": [
+    [
+     "skill-open",
+     4
+    ],
+    [
+     "skill-grid",
+     3
+    ],
+    [
+     "skill-signal",
+     3
+    ],
+    [
+     "skill-set",
+     3
+    ],
+    [
+     "idle-a",
+     1
+    ]
+   ],
+   "loop": false,
+   "totalTicks": 14
+  },
+  "hit": {
+   "frames": [
+    [
+     "hit-recoil",
+     3
+    ],
+    [
+     "hit-stagger",
+     4
+    ],
+    [
+     "idle-a",
+     1
+    ]
+   ],
+   "loop": false,
+   "totalTicks": 8
+  },
+  "defeat": {
+   "frames": [
+    [
+     "defeat-buckle",
+     3
+    ],
+    [
+     "defeat-knee",
+     3
+    ],
+    [
+     "defeat-down",
+     3
+    ]
+   ],
+   "loop": false,
+   "totalTicks": 9
+  }
+ },
+ "strikeCueTick": 0,
+ "strikeCueNote": "board strike contact (impact burst) is attack frame 0 (tick 0), matching the existing immediate companion attack; no timer or damage change",
+ "poses": {
+  "idle-a": {
+   "params": {
+    "pel": [
+     0,
+     0
+    ],
+    "lean": 2.0,
+    "feet": [
+     [
+      52,
+      130
+     ],
+     [
+      76,
+      130
+     ]
+    ],
+    "fh": [
+     9,
+     16
+    ],
+    "bh": [
+     10,
+     12
+    ],
+    "bdeg": -70.0,
+    "fold": 0,
+    "hem": 0,
+    "eyes": "open",
+    "fx": "none",
+    "head": [
+     0,
+     0
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     62.0,
+     92.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       59.0,
+       91.9
+      ],
+      "knee": [
+       63.48,
+       112.41
+      ],
+      "ankle": [
+       52,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       65.0,
+       92.1
+      ],
+      "knee": [
+       77.41,
+       109.05
+      ],
+      "ankle": [
+       76,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       60.94,
+       64.95
+      ],
+      "elbow": [
+       58.97,
+       77.8
+      ],
+      "hand": [
+       70.94,
+       76.95
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       65.91,
+       66.12
+      ],
+      "elbow": [
+       63.35,
+       78.87
+      ],
+      "hand": [
+       74.91,
+       82.12
+      ],
+      "stretch": 0.0
+     }
+    },
+    "board": {
+     "grip": [
+      70.94,
+      76.95
+     ],
+     "tip": [
+      77.44,
+      59.09
+     ],
+     "deg": -70.0,
+     "open": false
+    }
+   },
+   "runtimeCell": 0
+  },
+  "idle-b": {
+   "params": {
+    "pel": [
+     0,
+     1
+    ],
+    "lean": 3.0,
+    "feet": [
+     [
+      52,
+      130
+     ],
+     [
+      76,
+      130
+     ]
+    ],
+    "fh": [
+     9,
+     17
+    ],
+    "bh": [
+     10,
+     13
+    ],
+    "bdeg": -66.0,
+    "fold": 0,
+    "hem": -1,
+    "eyes": "open",
+    "fx": "none",
+    "head": [
+     0,
+     0
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     62.0,
+     93.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       59.0,
+       92.84
+      ],
+      "knee": [
+       64.49,
+       113.11
+      ],
+      "ankle": [
+       52,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       65.0,
+       93.16
+      ],
+      "knee": [
+       78.59,
+       109.16
+      ],
+      "ankle": [
+       76,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       61.42,
+       65.93
+      ],
+      "elbow": [
+       59.42,
+       78.78
+      ],
+      "hand": [
+       71.42,
+       78.93
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       66.36,
+       67.19
+      ],
+      "elbow": [
+       64.11,
+       80.0
+      ],
+      "hand": [
+       75.36,
+       84.19
+      ],
+      "stretch": 0.0
+     }
+    },
+    "board": {
+     "grip": [
+      71.42,
+      78.93
+     ],
+     "tip": [
+      79.14,
+      61.57
+     ],
+     "deg": -66.0,
+     "open": false
+    }
+   },
+   "runtimeCell": 1
+  },
+  "move-a": {
+   "params": {
+    "pel": [
+     1,
+     1
+    ],
+    "lean": 7.0,
+    "feet": [
+     [
+      49,
+      130
+     ],
+     [
+      81,
+      130
+     ]
+    ],
+    "fh": [
+     5,
+     16
+    ],
+    "bh": [
+     12,
+     11
+    ],
+    "bdeg": -60.0,
+    "fold": 0,
+    "hem": -3,
+    "eyes": "open",
+    "fx": "none",
+    "head": [
+     0,
+     0
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     63.0,
+     93.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       60.02,
+       92.63
+      ],
+      "knee": [
+       62.04,
+       113.54
+      ],
+      "ankle": [
+       49,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       65.98,
+       93.37
+      ],
+      "knee": [
+       79.97,
+       109.03
+      ],
+      "ankle": [
+       81,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       64.31,
+       65.96
+      ],
+      "elbow": [
+       64.47,
+       78.96
+      ],
+      "hand": [
+       76.31,
+       76.96
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       69.15,
+       67.56
+      ],
+      "elbow": [
+       63.03,
+       79.03
+      ],
+      "hand": [
+       74.15,
+       83.56
+      ],
+      "stretch": 0.0
+     }
+    },
+    "board": {
+     "grip": [
+      76.31,
+      76.96
+     ],
+     "tip": [
+      85.81,
+      60.5
+     ],
+     "deg": -60.0,
+     "open": false
+    }
+   },
+   "runtimeCell": 2
+  },
+  "move-b": {
+   "params": {
+    "pel": [
+     3,
+     -2
+    ],
+    "lean": 6.0,
+    "feet": [
+     [
+      56,
+      126
+     ],
+     [
+      79,
+      130
+     ]
+    ],
+    "fh": [
+     7,
+     15
+    ],
+    "bh": [
+     11,
+     12
+    ],
+    "bdeg": -64.0,
+    "fold": 0,
+    "hem": -5,
+    "eyes": "open",
+    "fx": "none",
+    "head": [
+     0,
+     0
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     65.0,
+     90.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       62.02,
+       89.69
+      ],
+      "knee": [
+       68.99,
+       109.5
+      ],
+      "ankle": [
+       56,
+       126
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       67.98,
+       90.31
+      ],
+      "knee": [
+       77.45,
+       109.06
+      ],
+      "ankle": [
+       79,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       65.83,
+       62.94
+      ],
+      "elbow": [
+       64.87,
+       75.9
+      ],
+      "hand": [
+       76.83,
+       74.94
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       70.7,
+       64.46
+      ],
+      "elbow": [
+       66.05,
+       76.59
+      ],
+      "hand": [
+       77.7,
+       79.46
+      ],
+      "stretch": 0.0
+     }
+    },
+    "board": {
+     "grip": [
+      76.83,
+      74.94
+     ],
+     "tip": [
+      85.16,
+      57.86
+     ],
+     "deg": -64.0,
+     "open": false
+    }
+   },
+   "runtimeCell": 3
+  },
+  "move-c": {
+   "params": {
+    "pel": [
+     4,
+     1
+    ],
+    "lean": 7.0,
+    "feet": [
+     [
+      55,
+      130
+     ],
+     [
+      85,
+      128
+     ]
+    ],
+    "fh": [
+     11,
+     15
+    ],
+    "bh": [
+     9,
+     12
+    ],
+    "bdeg": -60.0,
+    "fold": 0,
+    "hem": -3,
+    "eyes": "open",
+    "fx": "none",
+    "head": [
+     0,
+     0
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     66.0,
+     93.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       63.02,
+       92.63
+      ],
+      "knee": [
+       67.53,
+       113.15
+      ],
+      "ankle": [
+       55,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       68.98,
+       93.37
+      ],
+      "knee": [
+       84.95,
+       107.0
+      ],
+      "ankle": [
+       85,
+       128
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       67.31,
+       65.96
+      ],
+      "elbow": [
+       64.32,
+       78.61
+      ],
+      "hand": [
+       76.31,
+       77.96
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       72.15,
+       67.56
+      ],
+      "elbow": [
+       71.32,
+       80.53
+      ],
+      "hand": [
+       83.15,
+       82.56
+      ],
+      "stretch": 0.0
+     }
+    },
+    "board": {
+     "grip": [
+      76.31,
+      77.96
+     ],
+     "tip": [
+      85.81,
+      61.5
+     ],
+     "deg": -60.0,
+     "open": false
+    }
+   },
+   "runtimeCell": 4
+  },
+  "move-d": {
+   "params": {
+    "pel": [
+     3,
+     -1
+    ],
+    "lean": 6.0,
+    "feet": [
+     [
+      53,
+      130
+     ],
+     [
+      82,
+      130
+     ]
+    ],
+    "fh": [
+     8,
+     15
+    ],
+    "bh": [
+     11,
+     11
+    ],
+    "bdeg": -64.0,
+    "fold": 0,
+    "hem": -4,
+    "eyes": "open",
+    "fx": "none",
+    "head": [
+     0,
+     0
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     65.0,
+     91.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       62.02,
+       90.69
+      ],
+      "knee": [
+       63.22,
+       111.65
+      ],
+      "ankle": [
+       53,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       67.98,
+       91.31
+      ],
+      "knee": [
+       78.95,
+       109.22
+      ],
+      "ankle": [
+       82,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       65.83,
+       63.94
+      ],
+      "elbow": [
+       65.0,
+       76.91
+      ],
+      "hand": [
+       76.83,
+       74.94
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       70.7,
+       65.46
+      ],
+      "elbow": [
+       66.97,
+       77.91
+      ],
+      "hand": [
+       78.7,
+       80.46
+      ],
+      "stretch": 0.0
+     }
+    },
+    "board": {
+     "grip": [
+      76.83,
+      74.94
+     ],
+     "tip": [
+      85.16,
+      57.86
+     ],
+     "deg": -64.0,
+     "open": false
+    }
+   },
+   "runtimeCell": 5
+  },
+  "guard-in": {
+   "params": {
+    "pel": [
+     -1,
+     2
+    ],
+    "lean": -1.0,
+    "feet": [
+     [
+      52,
+      130
+     ],
+     [
+      76,
+      130
+     ]
+    ],
+    "fh": [
+     12,
+     4
+    ],
+    "bh": [
+     15,
+     0
+    ],
+    "bdeg": -95.0,
+    "fold": 1,
+    "hem": 1,
+    "eyes": "focus",
+    "fx": "none",
+    "head": [
+     0,
+     0
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     61.0,
+     94.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       58.0,
+       94.05
+      ],
+      "knee": [
+       65.3,
+       113.74
+      ],
+      "ankle": [
+       52,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       64.0,
+       93.95
+      ],
+      "knee": [
+       78.49,
+       109.15
+      ],
+      "ankle": [
+       76,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       58.53,
+       67.04
+      ],
+      "elbow": [
+       66.86,
+       77.02
+      ],
+      "hand": [
+       73.53,
+       67.04
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       63.55,
+       67.95
+      ],
+      "elbow": [
+       67.08,
+       80.46
+      ],
+      "hand": [
+       75.55,
+       71.95
+      ],
+      "stretch": 0.0
+     }
+    },
+    "board": {
+     "grip": [
+      73.53,
+      67.04
+     ],
+     "tip": [
+      71.87,
+      48.11
+     ],
+     "deg": -95.0,
+     "open": true
+    }
+   },
+   "runtimeCell": 6
+  },
+  "guard-hold": {
+   "params": {
+    "pel": [
+     -2,
+     4
+    ],
+    "lean": -3.0,
+    "feet": [
+     [
+      49,
+      130
+     ],
+     [
+      77,
+      130
+     ]
+    ],
+    "fh": [
+     13,
+     0
+    ],
+    "bh": [
+     16,
+     -3
+    ],
+    "bdeg": -92.0,
+    "fold": 1,
+    "hem": 2,
+    "eyes": "focus",
+    "fx": "none",
+    "head": [
+     0,
+     0
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     60.0,
+     96.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       57.0,
+       96.16
+      ],
+      "knee": [
+       64.46,
+       115.79
+      ],
+      "ankle": [
+       49,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       63.0,
+       95.84
+      ],
+      "knee": [
+       79.26,
+       109.12
+      ],
+      "ankle": [
+       77,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       56.59,
+       69.14
+      ],
+      "elbow": [
+       67.09,
+       76.81
+      ],
+      "hand": [
+       72.59,
+       66.14
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       61.64,
+       69.88
+      ],
+      "elbow": [
+       69.1,
+       80.52
+      ],
+      "hand": [
+       74.64,
+       69.88
+      ],
+      "stretch": 0.0
+     }
+    },
+    "board": {
+     "grip": [
+      72.59,
+      66.14
+     ],
+     "tip": [
+      71.93,
+      47.15
+     ],
+     "deg": -92.0,
+     "open": true
+    }
+   },
+   "runtimeCell": 7
+  },
+  "attack-strike": {
+   "params": {
+    "pel": [
+     3,
+     2
+    ],
+    "lean": 9.0,
+    "feet": [
+     [
+      50,
+      130
+     ],
+     [
+      84,
+      130
+     ]
+    ],
+    "fh": [
+     -6,
+     14
+    ],
+    "bh": [
+     22,
+     -3
+    ],
+    "bdeg": 12.0,
+    "fold": 0,
+    "hem": -4,
+    "eyes": "focus",
+    "fx": "impact",
+    "head": [
+     0,
+     0
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     65.0,
+     94.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       62.04,
+       93.53
+      ],
+      "knee": [
+       64.09,
+       114.43
+      ],
+      "ankle": [
+       50,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       67.96,
+       94.47
+      ],
+      "knee": [
+       83.11,
+       109.02
+      ],
+      "ankle": [
+       84,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       67.25,
+       67.02
+      ],
+      "elbow": [
+       79.58,
+       71.13
+      ],
+      "hand": [
+       89.25,
+       64.02
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       72.03,
+       68.79
+      ],
+      "elbow": [
+       77.8,
+       80.44
+      ],
+      "hand": [
+       66.03,
+       82.79
+      ],
+      "stretch": 0.0
+     }
+    },
+    "board": {
+     "grip": [
+      89.25,
+      64.02
+     ],
+     "tip": [
+      107.83,
+      67.97
+     ],
+     "deg": 12.0,
+     "open": false
+    }
+   },
+   "runtimeCell": 8
+  },
+  "attack-follow": {
+   "params": {
+    "pel": [
+     3,
+     3
+    ],
+    "lean": 11.0,
+    "feet": [
+     [
+      50,
+      130
+     ],
+     [
+      84,
+      130
+     ]
+    ],
+    "fh": [
+     -5,
+     15
+    ],
+    "bh": [
+     19,
+     7
+    ],
+    "bdeg": 48.0,
+    "fold": 0,
+    "hem": -2,
+    "eyes": "focus",
+    "fx": "trail",
+    "head": [
+     0,
+     0
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     65.0,
+     95.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       62.06,
+       94.43
+      ],
+      "knee": [
+       64.93,
+       115.23
+      ],
+      "ankle": [
+       50,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       67.94,
+       95.57
+      ],
+      "knee": [
+       84.09,
+       109.0
+      ],
+      "ankle": [
+       84,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       68.19,
+       68.11
+      ],
+      "elbow": [
+       75.74,
+       78.7
+      ],
+      "hand": [
+       87.19,
+       75.11
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       72.91,
+       70.05
+      ],
+      "elbow": [
+       79.32,
+       81.36
+      ],
+      "hand": [
+       67.91,
+       85.05
+      ],
+      "stretch": 0.0
+     }
+    },
+    "board": {
+     "grip": [
+      87.19,
+      75.11
+     ],
+     "tip": [
+      99.9,
+      89.23
+     ],
+     "deg": 48.0,
+     "open": false
+    }
+   },
+   "runtimeCell": 9
+  },
+  "attack-fold": {
+   "params": {
+    "pel": [
+     1,
+     2
+    ],
+    "lean": 5.0,
+    "feet": [
+     [
+      51,
+      130
+     ],
+     [
+      81,
+      130
+     ]
+    ],
+    "fh": [
+     3,
+     16
+    ],
+    "bh": [
+     14,
+     6
+    ],
+    "bdeg": -25.0,
+    "fold": 0,
+    "hem": 1,
+    "eyes": "focus",
+    "fx": "none",
+    "head": [
+     0,
+     0
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     63.0,
+     94.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       60.01,
+       93.74
+      ],
+      "knee": [
+       64.81,
+       114.18
+      ],
+      "ankle": [
+       51,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       65.99,
+       94.26
+      ],
+      "knee": [
+       80.95,
+       109.0
+      ],
+      "ankle": [
+       81,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       63.36,
+       66.93
+      ],
+      "elbow": [
+       67.22,
+       79.34
+      ],
+      "hand": [
+       77.36,
+       72.93
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       68.25,
+       68.36
+      ],
+      "elbow": [
+       60.59,
+       78.86
+      ],
+      "hand": [
+       71.25,
+       84.36
+      ],
+      "stretch": 0.0
+     }
+    },
+    "board": {
+     "grip": [
+      77.36,
+      72.93
+     ],
+     "tip": [
+      94.58,
+      64.9
+     ],
+     "deg": -25.0,
+     "open": false
+    }
+   },
+   "runtimeCell": 10
+  },
+  "attack-recover": {
+   "params": {
+    "pel": [
+     0,
+     1
+    ],
+    "lean": 3.0,
+    "feet": [
+     [
+      52,
+      130
+     ],
+     [
+      78,
+      130
+     ]
+    ],
+    "fh": [
+     7,
+     16
+    ],
+    "bh": [
+     11,
+     10
+    ],
+    "bdeg": -55.0,
+    "fold": 0,
+    "hem": 1,
+    "eyes": "open",
+    "fx": "none",
+    "head": [
+     0,
+     0
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     62.0,
+     93.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       59.0,
+       92.84
+      ],
+      "knee": [
+       64.49,
+       113.11
+      ],
+      "ankle": [
+       52,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       65.0,
+       93.16
+      ],
+      "knee": [
+       78.76,
+       109.01
+      ],
+      "ankle": [
+       78,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       61.42,
+       65.93
+      ],
+      "elbow": [
+       60.79,
+       78.92
+      ],
+      "hand": [
+       72.42,
+       75.93
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       66.36,
+       67.19
+      ],
+      "elbow": [
+       61.96,
+       79.43
+      ],
+      "hand": [
+       73.36,
+       83.19
+      ],
+      "stretch": 0.0
+     }
+    },
+    "board": {
+     "grip": [
+      72.42,
+      75.93
+     ],
+     "tip": [
+      83.31,
+      60.37
+     ],
+     "deg": -55.0,
+     "open": false
+    }
+   },
+   "runtimeCell": 11
+  },
+  "dodge-hop": {
+   "params": {
+    "pel": [
+     -9,
+     -6
+    ],
+    "lean": 9.0,
+    "feet": [
+     [
+      40,
+      122
+     ],
+     [
+      62,
+      124
+     ]
+    ],
+    "fh": [
+     4,
+     14
+    ],
+    "bh": [
+     9,
+     12
+    ],
+    "bdeg": -50.0,
+    "fold": 0,
+    "hem": 7,
+    "eyes": "open",
+    "fx": "none",
+    "head": [
+     0,
+     1
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     53.0,
+     86.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       50.04,
+       85.53
+      ],
+      "knee": [
+       53.82,
+       106.19
+      ],
+      "ankle": [
+       40,
+       122
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       55.96,
+       86.47
+      ],
+      "knee": [
+       67.8,
+       103.82
+      ],
+      "ankle": [
+       62,
+       124
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       55.25,
+       59.02
+      ],
+      "elbow": [
+       52.27,
+       71.67
+      ],
+      "hand": [
+       64.25,
+       71.02
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       60.03,
+       60.79
+      ],
+      "elbow": [
+       52.52,
+       71.4
+      ],
+      "hand": [
+       64.03,
+       74.79
+      ],
+      "stretch": 0.0
+     }
+    },
+    "board": {
+     "grip": [
+      64.25,
+      71.02
+     ],
+     "tip": [
+      76.46,
+      56.46
+     ],
+     "deg": -50.0,
+     "open": false
+    }
+   },
+   "runtimeCell": 12
+  },
+  "dodge-land": {
+   "params": {
+    "pel": [
+     -12,
+     9
+    ],
+    "lean": 13.0,
+    "feet": [
+     [
+      38,
+      130
+     ],
+     [
+      62,
+      130
+     ]
+    ],
+    "fh": [
+     10,
+     13
+    ],
+    "bh": [
+     13,
+     10
+    ],
+    "bdeg": -40.0,
+    "fold": 0,
+    "hem": 5,
+    "eyes": "open",
+    "fx": "none",
+    "head": [
+     0,
+     0
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     50.0,
+     101.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       47.08,
+       100.33
+      ],
+      "knee": [
+       56.07,
+       119.3
+      ],
+      "ankle": [
+       38,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       52.92,
+       101.67
+      ],
+      "knee": [
+       71.58,
+       111.31
+      ],
+      "ankle": [
+       62,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       54.12,
+       74.24
+      ],
+      "elbow": [
+       55.49,
+       87.17
+      ],
+      "hand": [
+       67.12,
+       84.24
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       58.77,
+       76.34
+      ],
+      "elbow": [
+       56.77,
+       89.19
+      ],
+      "hand": [
+       68.77,
+       89.34
+      ],
+      "stretch": 0.0
+     }
+    },
+    "board": {
+     "grip": [
+      67.12,
+      84.24
+     ],
+     "tip": [
+      81.68,
+      72.03
+     ],
+     "deg": -40.0,
+     "open": false
+    }
+   },
+   "runtimeCell": 13
+  },
+  "skill-open": {
+   "params": {
+    "pel": [
+     -1,
+     2
+    ],
+    "lean": 4.0,
+    "feet": [
+     [
+      51,
+      130
+     ],
+     [
+      76,
+      130
+     ]
+    ],
+    "fh": [
+     13,
+     6
+    ],
+    "bh": [
+     14,
+     4
+    ],
+    "bdeg": -8.0,
+    "fold": 1,
+    "hem": 0,
+    "eyes": "read",
+    "fx": "none",
+    "head": [
+     0,
+     1
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     61.0,
+     94.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       58.01,
+       93.79
+      ],
+      "knee": [
+       64.37,
+       113.8
+      ],
+      "ankle": [
+       51,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       63.99,
+       94.21
+      ],
+      "knee": [
+       78.72,
+       109.18
+      ],
+      "ankle": [
+       76,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       60.89,
+       66.93
+      ],
+      "elbow": [
+       65.93,
+       78.91
+      ],
+      "hand": [
+       74.89,
+       70.93
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       65.81,
+       68.27
+      ],
+      "elbow": [
+       68.82,
+       80.92
+      ],
+      "hand": [
+       78.81,
+       74.27
+      ],
+      "stretch": 0.0
+     }
+    },
+    "board": {
+     "grip": [
+      74.89,
+      70.93
+     ],
+     "tip": [
+      93.7,
+      68.28
+     ],
+     "deg": -8.0,
+     "open": true
+    }
+   },
+   "runtimeCell": 14
+  },
+  "skill-grid": {
+   "params": {
+    "pel": [
+     0,
+     2
+    ],
+    "lean": 1.0,
+    "feet": [
+     [
+      51,
+      130
+     ],
+     [
+      77,
+      130
+     ]
+    ],
+    "fh": [
+     14,
+     3
+    ],
+    "bh": [
+     15,
+     3
+    ],
+    "bdeg": -14.0,
+    "fold": 1,
+    "hem": -1,
+    "eyes": "read",
+    "fx": "grid",
+    "head": [
+     0,
+     0
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     62.0,
+     94.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       59.0,
+       93.95
+      ],
+      "knee": [
+       64.77,
+       114.14
+      ],
+      "ankle": [
+       51,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       65.0,
+       94.05
+      ],
+      "knee": [
+       79.59,
+       109.16
+      ],
+      "ankle": [
+       77,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       60.47,
+       66.97
+      ],
+      "elbow": [
+       66.84,
+       78.3
+      ],
+      "hand": [
+       75.47,
+       69.97
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       65.45,
+       68.06
+      ],
+      "elbow": [
+       71.17,
+       79.73
+      ],
+      "hand": [
+       79.45,
+       71.06
+      ],
+      "stretch": 0.0
+     }
+    },
+    "board": {
+     "grip": [
+      75.47,
+      69.97
+     ],
+     "tip": [
+      93.91,
+      65.37
+     ],
+     "deg": -14.0,
+     "open": true
+    }
+   },
+   "runtimeCell": 15
+  },
+  "skill-signal": {
+   "params": {
+    "pel": [
+     0,
+     2
+    ],
+    "lean": -4.0,
+    "feet": [
+     [
+      51,
+      130
+     ],
+     [
+      78,
+      130
+     ]
+    ],
+    "fh": [
+     -12,
+     -6
+    ],
+    "bh": [
+     15,
+     4
+    ],
+    "bdeg": -10.0,
+    "fold": 1,
+    "hem": 2,
+    "eyes": "focus",
+    "fx": "signal",
+    "head": [
+     -1,
+     0
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     62.0,
+     94.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       59.01,
+       94.21
+      ],
+      "knee": [
+       64.99,
+       114.34
+      ],
+      "ankle": [
+       51,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       64.99,
+       93.79
+      ],
+      "knee": [
+       79.42,
+       109.05
+      ],
+      "ankle": [
+       78,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       58.12,
+       67.21
+      ],
+      "elbow": [
+       63.88,
+       78.86
+      ],
+      "hand": [
+       73.12,
+       71.21
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       63.18,
+       67.85
+      ],
+      "elbow": [
+       51.64,
+       73.85
+      ],
+      "hand": [
+       51.18,
+       61.85
+      ],
+      "stretch": 0.0
+     }
+    },
+    "board": {
+     "grip": [
+      73.12,
+      71.21
+     ],
+     "tip": [
+      91.83,
+      67.91
+     ],
+     "deg": -10.0,
+     "open": true
+    }
+   },
+   "runtimeCell": 16
+  },
+  "skill-set": {
+   "params": {
+    "pel": [
+     1,
+     1
+    ],
+    "lean": 2.0,
+    "feet": [
+     [
+      51,
+      130
+     ],
+     [
+      78,
+      130
+     ]
+    ],
+    "fh": [
+     9,
+     14
+    ],
+    "bh": [
+     12,
+     9
+    ],
+    "bdeg": -60.0,
+    "fold": 0,
+    "hem": 0,
+    "eyes": "focus",
+    "fx": "link",
+    "head": [
+     0,
+     0
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     63.0,
+     93.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       60.0,
+       92.9
+      ],
+      "knee": [
+       64.0,
+       113.51
+      ],
+      "ankle": [
+       51,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       66.0,
+       93.1
+      ],
+      "knee": [
+       79.65,
+       109.06
+      ],
+      "ankle": [
+       78,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       61.94,
+       65.95
+      ],
+      "elbow": [
+       62.62,
+       78.93
+      ],
+      "hand": [
+       73.94,
+       74.95
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       66.91,
+       67.12
+      ],
+      "elbow": [
+       63.98,
+       79.79
+      ],
+      "hand": [
+       75.91,
+       81.12
+      ],
+      "stretch": 0.0
+     }
+    },
+    "board": {
+     "grip": [
+      73.94,
+      74.95
+     ],
+     "tip": [
+      83.44,
+      58.49
+     ],
+     "deg": -60.0,
+     "open": false
+    }
+   },
+   "runtimeCell": 17
+  },
+  "hit-recoil": {
+   "params": {
+    "pel": [
+     -6,
+     3
+    ],
+    "lean": -14.0,
+    "feet": [
+     [
+      49,
+      130
+     ],
+     [
+      74,
+      130
+     ]
+    ],
+    "fh": [
+     -4,
+     14
+    ],
+    "bh": [
+     4,
+     14
+    ],
+    "bdeg": -110.0,
+    "fold": 0,
+    "hem": 7,
+    "eyes": "wince",
+    "fx": "none",
+    "head": [
+     -2,
+     0
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     56.0,
+     95.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       53.09,
+       95.73
+      ],
+      "knee": [
+       62.92,
+       114.28
+      ],
+      "ankle": [
+       49,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       58.91,
+       94.27
+      ],
+      "knee": [
+       73.88,
+       109.0
+      ],
+      "ankle": [
+       74,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       47.53,
+       69.29
+      ],
+      "elbow": [
+       40.02,
+       79.9
+      ],
+      "hand": [
+       51.53,
+       83.29
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       52.62,
+       69.05
+      ],
+      "elbow": [
+       60.13,
+       79.66
+      ],
+      "hand": [
+       48.62,
+       83.05
+      ],
+      "stretch": 0.0
+     }
+    },
+    "board": {
+     "grip": [
+      51.53,
+      83.29
+     ],
+     "tip": [
+      45.03,
+      65.43
+     ],
+     "deg": -110.0,
+     "open": false
+    }
+   },
+   "runtimeCell": 18
+  },
+  "hit-stagger": {
+   "params": {
+    "pel": [
+     -5,
+     6
+    ],
+    "lean": 9.0,
+    "feet": [
+     [
+      47,
+      130
+     ],
+     [
+      73,
+      130
+     ]
+    ],
+    "fh": [
+     6,
+     17
+    ],
+    "bh": [
+     10,
+     14
+    ],
+    "bdeg": -80.0,
+    "fold": 0,
+    "hem": 4,
+    "eyes": "wince",
+    "fx": "none",
+    "head": [
+     0,
+     0
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     57.0,
+     98.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       54.04,
+       97.53
+      ],
+      "knee": [
+       63.07,
+       116.49
+      ],
+      "ankle": [
+       47,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       59.96,
+       98.47
+      ],
+      "knee": [
+       77.8,
+       109.56
+      ],
+      "ankle": [
+       73,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       59.25,
+       71.02
+      ],
+      "elbow": [
+       57.3,
+       83.87
+      ],
+      "hand": [
+       69.25,
+       85.02
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       64.03,
+       72.79
+      ],
+      "elbow": [
+       59.11,
+       84.82
+      ],
+      "hand": [
+       70.03,
+       89.79
+      ],
+      "stretch": 0.0
+     }
+    },
+    "board": {
+     "grip": [
+      69.25,
+      85.02
+     ],
+     "tip": [
+      72.55,
+      66.31
+     ],
+     "deg": -80.0,
+     "open": false
+    }
+   },
+   "runtimeCell": 19
+  },
+  "defeat-buckle": {
+   "params": {
+    "pel": [
+     -4,
+     10
+    ],
+    "lean": 18.0,
+    "feet": [
+     [
+      48,
+      130
+     ],
+     [
+      74,
+      130
+     ]
+    ],
+    "fh": [
+     6,
+     19
+    ],
+    "bh": [
+     9,
+     18
+    ],
+    "bdeg": 70.0,
+    "fold": 0,
+    "hem": 3,
+    "eyes": "wince",
+    "fx": "none",
+    "head": [
+     0,
+     0
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     58.0,
+     102.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       55.15,
+       101.07
+      ],
+      "knee": [
+       65.94,
+       119.09
+      ],
+      "ankle": [
+       48,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       60.85,
+       102.93
+      ],
+      "knee": [
+       80.6,
+       110.07
+      ],
+      "ankle": [
+       74,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       64.44,
+       75.7
+      ],
+      "elbow": [
+       62.59,
+       88.57
+      ],
+      "hand": [
+       73.44,
+       93.7
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       68.89,
+       78.2
+      ],
+      "elbow": [
+       64.89,
+       90.57
+      ],
+      "hand": [
+       74.89,
+       97.2
+      ],
+      "stretch": 0.0
+     }
+    },
+    "board": {
+     "grip": [
+      73.44,
+      93.7
+     ],
+     "tip": [
+      79.94,
+      111.56
+     ],
+     "deg": 70.0,
+     "open": false
+    }
+   },
+   "runtimeCell": 20
+  },
+  "defeat-knee": {
+   "params": {
+    "pel": [
+     -3,
+     22
+    ],
+    "lean": 26.0,
+    "feet": [
+     [
+      40,
+      130
+     ],
+     [
+      74,
+      130
+     ]
+    ],
+    "fh": [
+     12,
+     21
+    ],
+    "bh": [
+     14,
+     20
+    ],
+    "bdeg": 95.0,
+    "fold": 0,
+    "hem": 2,
+    "eyes": "shut",
+    "fx": "none",
+    "head": [
+     0,
+     0
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     59.0,
+     114.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       56.3,
+       112.68
+      ],
+      "knee": [
+       59.9,
+       131.0
+      ],
+      "ankle": [
+       40.9,
+       131.0
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       61.7,
+       115.32
+      ],
+      "knee": [
+       82.17,
+       110.66
+      ],
+      "ankle": [
+       74,
+       130
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       69.04,
+       88.86
+      ],
+      "elbow": [
+       74.13,
+       100.82
+      ],
+      "hand": [
+       83.04,
+       108.86
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       73.09,
+       91.95
+      ],
+      "elbow": [
+       76.61,
+       104.46
+      ],
+      "hand": [
+       85.09,
+       112.95
+      ],
+      "stretch": 0.0
+     }
+    },
+    "board": {
+     "grip": [
+      83.04,
+      108.86
+     ],
+     "tip": [
+      81.38,
+      127.78
+     ],
+     "deg": 95.0,
+     "open": false
+    }
+   },
+   "runtimeCell": 21
+  },
+  "defeat-down": {
+   "params": {
+    "pel": [
+     -2,
+     30
+    ],
+    "lean": 40.0,
+    "feet": [
+     [
+      36,
+      130
+     ],
+     [
+      66,
+      130
+     ]
+    ],
+    "fh": [
+     16,
+     18
+    ],
+    "bh": [
+     18,
+     17
+    ],
+    "bdeg": 158.0,
+    "fold": 0,
+    "hem": 2,
+    "eyes": "shut",
+    "fx": "none",
+    "head": [
+     0,
+     2
+    ]
+   },
+   "rig": {
+    "pelvis": [
+     60.0,
+     122.0
+    ],
+    "joints": {
+     "back": {
+      "hip": [
+       57.7,
+       120.07
+      ],
+      "knee": [
+       63.98,
+       131.0
+      ],
+      "ankle": [
+       44.98,
+       131.0
+      ],
+      "stretch": 0.0
+     },
+     "front": {
+      "hip": [
+       62.3,
+       123.93
+      ],
+      "knee": [
+       78.12,
+       131.0
+      ],
+      "ankle": [
+       59.12,
+       131.0
+      ],
+      "stretch": 0.0
+     },
+     "arm-back": {
+      "shoulder": [
+       75.82,
+       100.03
+      ],
+      "elbow": [
+       84.0,
+       110.14
+      ],
+      "hand": [
+       93.82,
+       117.03
+      ],
+      "stretch": 0.0
+     },
+     "arm-front": {
+      "shoulder": [
+       79.01,
+       104.01
+      ],
+      "elbow": [
+       84.85,
+       115.63
+      ],
+      "hand": [
+       95.01,
+       122.01
+      ],
+      "stretch": 0.0
+     }
+    },
+    "board": {
+     "grip": [
+      93.82,
+      117.03
+     ],
+     "tip": [
+      76.21,
+      124.15
+     ],
+     "deg": 158.0,
+     "open": false
+    }
+   },
+   "runtimeCell": 22
+  }
+ },
+ "source": {
+  "file": "tools/rpg-2-star-ocean-the-second_liang-xu_combat-static-and-actions-author_unapproved-lcombat29-v01_20261021-201025-efc98984.py",
+  "sha256TextLf": "016782559277330b99b08da3122187213f5644bd4cf489fcaea4115faf8f4c70",
+  "textHashNormalization": "sha256-text-lf-v1 (CRLF->LF)"
+ },
+ "files": {
+  "attack-fold.ora": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_attack-fold-layered_unapproved-lcombat29-v01_20261021-201025-44a64c34.ora",
+   "sha256": "63c33f7f016ab705995ff4502608e4cd62ec52e056de0bc8bac5f0bb4c6c916c"
+  },
+  "attack-fold.png": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_attack-fold-native136_unapproved-lcombat29-v01_20261021-201025-ad4cc963.png",
+   "sha256": "db8610ac68fdb6408a93d4ae254389f1a7f2f5b7d69ab7db0d638a3dcf267774"
+  },
+  "attack-fold.pxo": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_attack-fold-editable_unapproved-lcombat29-v01_20261021-201025-89c44e76.pxo",
+   "sha256": "004714285f5d24a559339f540b25f3fc4f2be0a6ff88cdad4e443b0a4d540a92"
+  },
+  "attack-follow.ora": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_attack-follow-layered_unapproved-lcombat29-v01_20261021-201025-7bae0a71.ora",
+   "sha256": "54aab04329bd27cf371390819cb66bb4bfc3edb46f1df077ff4c28b8a25f8ad4"
+  },
+  "attack-follow.png": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_attack-follow-native136_unapproved-lcombat29-v01_20261021-201025-0dc095ce.png",
+   "sha256": "8de0f45a5e0943a2f20ba6b7dc6f092236c8074d890efcbc173b8ffc05cb2645"
+  },
+  "attack-follow.pxo": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_attack-follow-editable_unapproved-lcombat29-v01_20261021-201025-9b425614.pxo",
+   "sha256": "ac822db749f42809fca27621824cd189e55ceeb574e82e00343542792d83b1ca"
+  },
+  "attack-recover.ora": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_attack-recover-layered_unapproved-lcombat29-v01_20261021-201025-3a8fcd00.ora",
+   "sha256": "78e2927e36f24d79af1bf7ff4b2d2b7e4d1d2de0f44c98225c03870b45578a14"
+  },
+  "attack-recover.png": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_attack-recover-native136_unapproved-lcombat29-v01_20261021-201025-46e087e9.png",
+   "sha256": "b99a6e8f3066d3be9d402ddd2e0f66af458b080e941605b01729ab5eb17f9bdd"
+  },
+  "attack-recover.pxo": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_attack-recover-editable_unapproved-lcombat29-v01_20261021-201025-acca0ba2.pxo",
+   "sha256": "4301925f99050b25b097b6be7625f4f14d83a3339430399b767410814e818a63"
+  },
+  "attack-strike.ora": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_attack-strike-layered_unapproved-lcombat29-v01_20261021-201025-421cefe7.ora",
+   "sha256": "6220da532f06b5dac904d964f7e8eb84b75e5af66a258080522956e06484b22d"
+  },
+  "attack-strike.png": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_attack-strike-native136_unapproved-lcombat29-v01_20261021-201025-3fbba5fe.png",
+   "sha256": "717f13fa2c1beb89840a3899d8a703eed489771164e11f4723aaff4b9170fd04"
+  },
+  "attack-strike.pxo": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_attack-strike-editable_unapproved-lcombat29-v01_20261021-201025-34ac40ff.pxo",
+   "sha256": "e3f68c246243f73bf7b2e9574f4a0890cb75a6170293ff9b21c1f010f446d175"
+  },
+  "defeat-buckle.ora": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_defeat-buckle-layered_unapproved-lcombat29-v01_20261021-201025-2b79baa1.ora",
+   "sha256": "0ddf3cde3001658f2687485655f66e7f5fd0dcd42f9383b49d1146effee83052"
+  },
+  "defeat-buckle.png": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_defeat-buckle-native136_unapproved-lcombat29-v01_20261021-201025-b26987ad.png",
+   "sha256": "c7a7a340d7a2d2c4fe7844d1911b238a73a1ea3733db598f3b180bed9c719dc3"
+  },
+  "defeat-buckle.pxo": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_defeat-buckle-editable_unapproved-lcombat29-v01_20261021-201025-8d716d67.pxo",
+   "sha256": "42c8ab7c51dae29d8b94248aea207d58a772d54f7e7b2ca1d696c6cd8dca1bb2"
+  },
+  "defeat-down.ora": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_defeat-down-layered_unapproved-lcombat29-v01_20261021-201025-e2a863bb.ora",
+   "sha256": "9bbf5f1c558e9384fd09f74b0577527ae1aa3523a05abdf27fc1bf9ad64349b4"
+  },
+  "defeat-down.png": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_defeat-down-native136_unapproved-lcombat29-v01_20261021-201025-b269bbbf.png",
+   "sha256": "15470d1ba9cd98652bc5aeb8e9d9272898587017b9f3f60337e974f6134a7736"
+  },
+  "defeat-down.pxo": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_defeat-down-editable_unapproved-lcombat29-v01_20261021-201025-3883a5d8.pxo",
+   "sha256": "032b31e3daa3ce81ad4c642c360f96e08f1e6e6e4842948c149004feced51d47"
+  },
+  "defeat-knee.ora": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_defeat-knee-layered_unapproved-lcombat29-v01_20261021-201025-c347ed26.ora",
+   "sha256": "a57f0fa9b346ca32b1308b63d1447a9ef72b6a58623e2af8ef98379820ce2e92"
+  },
+  "defeat-knee.png": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_defeat-knee-native136_unapproved-lcombat29-v01_20261021-201025-a228fa2b.png",
+   "sha256": "c5a4779c0b0407f2cbe1b8f16d7eb3444509e3cfc85e65e5d9a7ca4bfad4a806"
+  },
+  "defeat-knee.pxo": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_defeat-knee-editable_unapproved-lcombat29-v01_20261021-201025-9e60ff33.pxo",
+   "sha256": "b867fb4ee504a485ce035d8466b6182626aff01beac76b95b02114a8ac993479"
+  },
+  "dodge-hop.ora": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_dodge-hop-layered_unapproved-lcombat29-v01_20261021-201025-6411c614.ora",
+   "sha256": "d993b712726af41e30e3eace40d366477f37b8b3dfdde746914ae455b7738144"
+  },
+  "dodge-hop.png": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_dodge-hop-native136_unapproved-lcombat29-v01_20261021-201025-4b2c4f07.png",
+   "sha256": "446a7aee204f7711ca602a23b1aff4d77e1e21d1b70ed5df5c25ef20a50dd42f"
+  },
+  "dodge-hop.pxo": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_dodge-hop-editable_unapproved-lcombat29-v01_20261021-201025-54fa9da7.pxo",
+   "sha256": "e239e71b97e45494e74ae9b701369670581a106c17849317741c228423a9b792"
+  },
+  "dodge-land.ora": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_dodge-land-layered_unapproved-lcombat29-v01_20261021-201025-e61a404e.ora",
+   "sha256": "e20e64e2d7fd281b270f1e008432082a72037970a32a7fe11ab6b3e110da0b1f"
+  },
+  "dodge-land.png": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_dodge-land-native136_unapproved-lcombat29-v01_20261021-201025-701c50af.png",
+   "sha256": "9a344185daebe9e55d385c7883d421fb1522d9b1195593eff488646f4e58f0e9"
+  },
+  "dodge-land.pxo": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_dodge-land-editable_unapproved-lcombat29-v01_20261021-201025-515a45be.pxo",
+   "sha256": "5f34ca50a1a956af5aed2182e73430619c1844868834a4ea4b28c5d5615d8bd8"
+  },
+  "guard-hold.ora": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_guard-hold-layered_unapproved-lcombat29-v01_20261021-201025-e1e49505.ora",
+   "sha256": "0dfb494d7b175aeb14acd9c425c714cd46593a17a0271963a2d62e282c0949ae"
+  },
+  "guard-hold.png": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_guard-hold-native136_unapproved-lcombat29-v01_20261021-201025-86bf1165.png",
+   "sha256": "14c97fdf51de98657eafbdeb61796083a15bf6876945cf2afbf7a392d3453d5a"
+  },
+  "guard-hold.pxo": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_guard-hold-editable_unapproved-lcombat29-v01_20261021-201025-0e501ab0.pxo",
+   "sha256": "cddb896bf983a9c5dc70b7d73697c7de649e6effcbd643a3eafdfb294a3ce52f"
+  },
+  "guard-in.ora": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_guard-in-layered_unapproved-lcombat29-v01_20261021-201025-c86c6b0c.ora",
+   "sha256": "9b049d90b9f56552db94f026fd8071fd48f95f611c819c3963324da37fd8b01e"
+  },
+  "guard-in.png": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_guard-in-native136_unapproved-lcombat29-v01_20261021-201025-65fc34b6.png",
+   "sha256": "46220a142205934131ad21b88aba102a6499c2011bdfe085a1cf805ea2fd51b2"
+  },
+  "guard-in.pxo": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_guard-in-editable_unapproved-lcombat29-v01_20261021-201025-e311a320.pxo",
+   "sha256": "2bf275e67cd2af64247275053bbe07674f16886159e85911e85125f76adf4e30"
+  },
+  "hit-recoil.ora": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_hit-recoil-layered_unapproved-lcombat29-v01_20261021-201025-e7e5a9e9.ora",
+   "sha256": "f2febc6a16fa8044c399a33fa41e1ede5da57b88b880a1c8916c8156789c6d3b"
+  },
+  "hit-recoil.png": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_hit-recoil-native136_unapproved-lcombat29-v01_20261021-201025-bb0bcd82.png",
+   "sha256": "65b91eca10df16cbb1aabca9052d45ac177a34e457704fd862704ac41a10d8af"
+  },
+  "hit-recoil.pxo": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_hit-recoil-editable_unapproved-lcombat29-v01_20261021-201025-bfa741a9.pxo",
+   "sha256": "3a7b217b0bbc5942c9f4ce47e335e2889323ce9de379206966218cb77df9c12c"
+  },
+  "hit-stagger.ora": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_hit-stagger-layered_unapproved-lcombat29-v01_20261021-201025-d9b783f2.ora",
+   "sha256": "450cfa132ec7f0a8fdaf20d0c8a86e627aa414dc8f44232062cda86214a9742f"
+  },
+  "hit-stagger.png": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_hit-stagger-native136_unapproved-lcombat29-v01_20261021-201025-a6e93bb3.png",
+   "sha256": "d094aadb2d023042ad2fe83c43d41c20a82ce4e2889e27965a23ca472a31cca3"
+  },
+  "hit-stagger.pxo": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_hit-stagger-editable_unapproved-lcombat29-v01_20261021-201025-78db781c.pxo",
+   "sha256": "c04b995309e312af56e49d82d85c1c181d5249c64dba4d100e75d97b9b2b7bb0"
+  },
+  "idle-a.ora": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_idle-a-layered_unapproved-lcombat29-v01_20261021-201025-e18c8156.ora",
+   "sha256": "43574b01e7b5b7e4fd7003f9f7ba1e01e29aef09cfbd6d87b4042a1a7dfdc063"
+  },
+  "idle-a.png": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_idle-a-native136_unapproved-lcombat29-v01_20261021-201025-687aabce.png",
+   "sha256": "cd4061d1db9295a9a56450ad0c45411a451293da00cb9b0e6d638d09f4a0cb29"
+  },
+  "idle-a.pxo": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_idle-a-editable_unapproved-lcombat29-v01_20261021-201025-430d0d90.pxo",
+   "sha256": "ce1cdec1a4690c5b6d48d8dab5914a0da054613132a652eaa51ffd6a8c9228ea"
+  },
+  "idle-b.ora": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_idle-b-layered_unapproved-lcombat29-v01_20261021-201025-e7e428c2.ora",
+   "sha256": "354dfe3a666dfe2f75722eab59573a9b00a7e9d94ee9f5fc69efabf04ab517f7"
+  },
+  "idle-b.png": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_idle-b-native136_unapproved-lcombat29-v01_20261021-201025-b3574e5a.png",
+   "sha256": "a2916332c53609f06a9fe9e3737d9213979259dfe1091977ae1944d9a9618d3e"
+  },
+  "idle-b.pxo": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_idle-b-editable_unapproved-lcombat29-v01_20261021-201025-26271ce4.pxo",
+   "sha256": "ee29dd11825290e2baccca6e90230099bb404b5f7e103abe21963596cbb009a8"
+  },
+  "manifest": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_runtime-spritesheet-manifest_unapproved-lcombat29-v01_20261021-201025-9e22747e.json",
+   "sha256": "f459aa9709ce6363fa0da65aec7d4830fc7d174882d3ebadd4c6760ed7b8e38d"
+  },
+  "move-a.ora": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_move-a-layered_unapproved-lcombat29-v01_20261021-201025-680436ff.ora",
+   "sha256": "90d7f9ff5df410b55e4b6e8e5e47b09eff517cf47b36de35b8bb2ddfdca605f6"
+  },
+  "move-a.png": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_move-a-native136_unapproved-lcombat29-v01_20261021-201025-98fcbbac.png",
+   "sha256": "795a0ed4e4b35a55f4216bca1a2a4c2a1daaa08eb80581f9aa581ee13abf0e1b"
+  },
+  "move-a.pxo": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_move-a-editable_unapproved-lcombat29-v01_20261021-201025-4b27e858.pxo",
+   "sha256": "b3e511b0d9b2ddb0ed28a8593e9b36aae2004e77549ee3d1582e725e52f297f9"
+  },
+  "move-b.ora": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_move-b-layered_unapproved-lcombat29-v01_20261021-201025-80640a43.ora",
+   "sha256": "de2971474d5e3086d429e13a99a17dafe82fc798e4adaedbcd0414f99d7602f3"
+  },
+  "move-b.png": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_move-b-native136_unapproved-lcombat29-v01_20261021-201025-9cd607ed.png",
+   "sha256": "9b07a449f31df8b1ce708e4bab2130cb19871e7be7b07809af516f2490ce4f1d"
+  },
+  "move-b.pxo": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_move-b-editable_unapproved-lcombat29-v01_20261021-201025-ce64633d.pxo",
+   "sha256": "af1e8bc0becefa7fac519b6f0f8768e21f6bc632831b5596e0c42ebd4420c44f"
+  },
+  "move-c.ora": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_move-c-layered_unapproved-lcombat29-v01_20261021-201025-715f68a2.ora",
+   "sha256": "13c24fa4703968f85e843174a86bbc9731f007d700d94caeb457557c1a7a8aa2"
+  },
+  "move-c.png": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_move-c-native136_unapproved-lcombat29-v01_20261021-201025-4d270169.png",
+   "sha256": "d0dfa4470c4df6a31fe1289ea147e398c3db1c14c2f2a38e9e1f1f84b0118ee9"
+  },
+  "move-c.pxo": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_move-c-editable_unapproved-lcombat29-v01_20261021-201025-1ff58e16.pxo",
+   "sha256": "2aa1c926b84a07b8e5e7cb8e8f02fb4562c298032199169bc66860e93319ad1a"
+  },
+  "move-d.ora": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_move-d-layered_unapproved-lcombat29-v01_20261021-201025-8ce2631d.ora",
+   "sha256": "f5da13b85e7694ec9ec4f0e5b921554daed2bee1b46c296e1378b5cf0f7e190d"
+  },
+  "move-d.png": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_move-d-native136_unapproved-lcombat29-v01_20261021-201025-e462ce19.png",
+   "sha256": "6ef4160e059860dcdae4ef06ef4f83dc552d158b255107afeaba799295e58bba"
+  },
+  "move-d.pxo": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_move-d-editable_unapproved-lcombat29-v01_20261021-201025-f123b559.pxo",
+   "sha256": "353f5d3fdc62dcf416ddfa51e2b0c8996975c687dd93f72c6465a7e44db2ddac"
+  },
+  "pkg.index": {
+   "path": "game/data/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_runtime-index_unapproved-lcombat29-v01_20261021-201025-69179dd4.json",
+   "sha256": "8bcb8addd7f4658065ecf52e858e57cd14e1d85f2a5b63ac82fbf29820f64da2"
+  },
+  "pkg.manifest": {
+   "path": "game/data/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_runtime-spritesheet-manifest_unapproved-lcombat29-v01_20261021-201025-9e22747e.json",
+   "sha256": "f459aa9709ce6363fa0da65aec7d4830fc7d174882d3ebadd4c6760ed7b8e38d"
+  },
+  "pkg.sheet": {
+   "path": "game/data/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_runtime-spritesheet_unapproved-lcombat29-v01_20261021-201025-e7f7aac4.png",
+   "sha256": "8462d1facd9baa413c6f88659e2a41dc515ffffd775f586318e96a07dbb1b6b0"
+  },
+  "sheet": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_runtime-spritesheet_unapproved-lcombat29-v01_20261021-201025-e7f7aac4.png",
+   "sha256": "8462d1facd9baa413c6f88659e2a41dc515ffffd775f586318e96a07dbb1b6b0"
+  },
+  "skill-grid.ora": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_skill-grid-layered_unapproved-lcombat29-v01_20261021-201025-79590ecf.ora",
+   "sha256": "95e4c8e824fe589b78f914d71c958160538b0ac58ff7daf92360256180fc2833"
+  },
+  "skill-grid.png": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_skill-grid-native136_unapproved-lcombat29-v01_20261021-201025-c93d4e5f.png",
+   "sha256": "6db0c3b7dbf70154371e4af1874b3b7b0dc9db9e334a5e013a8cf66ebd3a6a12"
+  },
+  "skill-grid.pxo": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_skill-grid-editable_unapproved-lcombat29-v01_20261021-201025-75e4d3d3.pxo",
+   "sha256": "a7c90dd1f1c5a8f851d9cd7fb3c934d7e8f647dd546dbccd87ddcb715b16bf66"
+  },
+  "skill-open.ora": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_skill-open-layered_unapproved-lcombat29-v01_20261021-201025-654731d3.ora",
+   "sha256": "a04d02850f2cad1ac89070f131add120ee099e49738b14d6ba11f3e0bfa1bfd6"
+  },
+  "skill-open.png": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_skill-open-native136_unapproved-lcombat29-v01_20261021-201025-74fa626d.png",
+   "sha256": "2920cdfa2d04f43bfaf50c17020e1f4653dc94474e19629014925f7473e472c1"
+  },
+  "skill-open.pxo": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_skill-open-editable_unapproved-lcombat29-v01_20261021-201025-dac33379.pxo",
+   "sha256": "122afd339367a8b14fc4a3c57b0181d20876e0ebc1246e24121e55f9f52f5731"
+  },
+  "skill-set.ora": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_skill-set-layered_unapproved-lcombat29-v01_20261021-201025-21898367.ora",
+   "sha256": "77d489e5cbeed85df93adea406f3575decf3c3fbef41737b667ef8faf65b9a1e"
+  },
+  "skill-set.png": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_skill-set-native136_unapproved-lcombat29-v01_20261021-201025-553a1fe9.png",
+   "sha256": "24ec9fc9ee33f1a35834aacdabef7b3146d90e86818a2941f45eefcee31cd8d0"
+  },
+  "skill-set.pxo": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_skill-set-editable_unapproved-lcombat29-v01_20261021-201025-e27994f0.pxo",
+   "sha256": "5186d1b502f9b5b848b8efd39006271ede7d104afb2ea4263b733d98322e0406"
+  },
+  "skill-signal.ora": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_skill-signal-layered_unapproved-lcombat29-v01_20261021-201025-6f13ef31.ora",
+   "sha256": "9b8a2ab7507d7ac932d9a1c706f44891a40d17e36d224d1324af1e76008cb69d"
+  },
+  "skill-signal.png": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_skill-signal-native136_unapproved-lcombat29-v01_20261021-201025-f0c883b3.png",
+   "sha256": "d169b4bd9e3429237b0b89a3857b28ca4243127a5df7f45e938f20a8a3640519"
+  },
+  "skill-signal.pxo": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_skill-signal-editable_unapproved-lcombat29-v01_20261021-201025-067e6980.pxo",
+   "sha256": "57d39352225558a7ca54ad36a5a645048f333bdeabe89c49c7740be9a9d90341"
+  },
+  "still.ora": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_battle-still-layered_unapproved-lcombat29-v01_20261021-201025-16b2821a.ora",
+   "sha256": "43574b01e7b5b7e4fd7003f9f7ba1e01e29aef09cfbd6d87b4042a1a7dfdc063"
+  },
+  "still.png": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_battle-still-native136_unapproved-lcombat29-v01_20261021-201025-2db9e209.png",
+   "sha256": "cd4061d1db9295a9a56450ad0c45411a451293da00cb9b0e6d638d09f4a0cb29"
+  },
+  "still.pxo": {
+   "path": "outputs/lcombat29/rpg-2-star-ocean-the-second_liang-xu-combat_battle-still-editable_unapproved-lcombat29-v01_20261021-201025-46ff8585.pxo",
+   "sha256": "45f07315a99a112b0ccbad392f7c582414867cf382f51071e86517f36fb1078b"
+  }
+ },
+ "artApproved": false,
+ "motionApproved": false,
+ "runtimeDefaultChanged": false,
+ "guiSaveAsVerified": false
+}
