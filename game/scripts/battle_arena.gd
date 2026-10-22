@@ -149,6 +149,12 @@ static var heroine_sea_contact_override := -1
 # Opt-in member-scoped companion combat set (zpath27); "" = off. Separate from combat_sprite_sets so hero sets stay exact.
 static var companion_combat_member_override := ""
 static var companion_combat_index_override := ""
+const ZHAO_MEMBER_ID := "zhao-ling"
+# Zhao first: the companion_sprite_sets alias prefers it.
+const COMPANION_COMBAT_POLICIES := [
+	"res://scripts/zpath27/rpg-2-star-ocean-the-second_zhao-playable-path_config_opt-in-v01_20261021-223218-3246d731.gd",
+	"res://scripts/lpath30/rpg-2-star-ocean-the-second_liang-playable-path_config_opt-in-v01_20261021-202247-ca439d91.gd",
+]
 
 var enemy_id := "patrol"
 var enemy: Dictionary
@@ -210,7 +216,10 @@ var battle_backdrop_status := "off"
 var battle_backdrop_texture: Texture2D
 # Null unless the combat sprite set pilot is on.
 var combat_sprite_sets: RefCounted = null
-# Null unless the companion override loads exactly its own member slot.
+# Per-member companion models (member_id -> model / slot); each model loads exactly its own member slot.
+var companion_sets_by_member := {}
+var companion_slot_by_member := {}
+# Aliases kept for existing callers: the Zhao model if loaded, else the first loaded companion model; null/-1 when none.
 var companion_sprite_sets: RefCounted = null
 var companion_index := -1
 # True only while the prepared heroine default (not an explicit flag/override) drives the hero set and contact.
@@ -467,8 +476,9 @@ func _advance_fighter_visuals(delta: float, initial_positions: Array[float]) -> 
 
 func _advance_combat_sprite_sets(delta: float) -> void:
 	# Reads combat state only; it never changes stats, timers or positions.
-	if companion_sprite_sets != null:
-		companion_sprite_sets.advance(companion_index, fighters[companion_index], _is_alive(companion_index), enemy_x, delta)
+	for member in companion_sets_by_member:
+		var slot: int = companion_slot_by_member[member]
+		companion_sets_by_member[member].advance(slot, fighters[slot], _is_alive(slot), enemy_x, delta)
 	if combat_sprite_sets == null:
 		return
 	for index in fighters.size():
@@ -1327,29 +1337,49 @@ func _load_combat_sprite_sets() -> void:
 	_advance_combat_sprite_sets(0.0)
 
 
-# Companion set: only the configured member slot loads; any explicit combat set choice (flag or override, including 0) or a
-# hero-model set already drawing that slot keeps its existing behaviour. A refused set leaves only that member legacy.
+# Companion sets: each enabled companion config (Zhao default on, Liang opt-in) loads only its own member slot; any explicit
+# combat set choice (flag or override, including 0) or a hero-model set already drawing that slot keeps its existing
+# behaviour. A disabled, malformed or refused config leaves only that member legacy.
 func _load_companion_sprite_sets() -> void:
 	companion_sprite_sets = null
 	companion_index = -1
+	companion_sets_by_member = {}
+	companion_slot_by_member = {}
 	# Existing explicit generic choices win, including an index given without the pilot flag.
 	if combat_sprite_set_override >= 0 or combat_sprite_set_index_override != "" or OS.get_cmdline_user_args().has(COMBAT_SPRITE_SET_CLI_FLAG):
 		return
 	for argument in OS.get_cmdline_user_args():
 		if argument.begins_with(COMBAT_SPRITE_SET_INDEX_ARG):
 			return
-	var zhao = load("res://scripts/zpath27/rpg-2-star-ocean-the-second_zhao-playable-path_config_opt-in-v01_20261021-223218-3246d731.gd")
-	if not zhao.enabled():
+	for policy_path in COMPANION_COMBAT_POLICIES:
+		_load_companion_member(load(policy_path))
+	if companion_sets_by_member.is_empty():
 		return
-	var member: String = companion_combat_member_override
-	var source_index: String = companion_combat_index_override
-	if member == "" and source_index == "":
-		member = zhao.MEMBER_ID
-		source_index = zhao.combat_index_path()
-	if member != zhao.MEMBER_ID or source_index == "" or not zhao.validate(AppState.language, AppState.hero_appearance).get("ok", false):
+	var alias: String = ZHAO_MEMBER_ID if companion_sets_by_member.has(ZHAO_MEMBER_ID) else String(companion_sets_by_member.keys()[0])
+	companion_sprite_sets = companion_sets_by_member[alias]
+	companion_index = companion_slot_by_member[alias]
+
+
+func _load_companion_member(policy) -> void:
+	if policy == null or not policy.enabled():
+		return
+	var member: String = policy.MEMBER_ID
+	var source_index: String = policy.combat_index_path()
+	# The existing companion override pair (set by the zpath27 configure) selects one member and its index. Zhao keeps
+	# its original selected-member semantics: a pair naming another member suppresses this policy.
+	if companion_combat_member_override != "" or companion_combat_index_override != "":
+		if companion_combat_member_override != member:
+			return
+		source_index = companion_combat_index_override
+	if source_index == "" or not policy.validate(AppState.language, AppState.hero_appearance).get("ok", false):
+		return
+	# Validate the actual selected override, not only the policy's own index.
+	var selected_index: Dictionary = CombatSpriteSets.load_index(source_index)
+	var selected_sets: Dictionary = selected_index.get("sets", {})
+	if String(selected_index.get("status", "")) != "loaded" or selected_sets.size() != 1 or not selected_sets.has(member):
 		return
 	var slot := AppState.active_party_ids.find(member)
-	if slot < 0 or (combat_sprite_sets != null and combat_sprite_sets.has_set(slot)):
+	if slot < 0 or slot >= fighters.size() or (combat_sprite_sets != null and combat_sprite_sets.has_set(slot)):
 		return
 	var keys: Array[String] = []
 	for fighter in fighters:
@@ -1359,9 +1389,9 @@ func _load_companion_sprite_sets() -> void:
 	if not model.has_set(slot) or model.loaded_count() != 1:
 		push_warning("Companion combat set refused for %s; legacy frames kept for that member only" % member)
 		return
-	companion_sprite_sets = model
-	companion_index = slot
-	companion_sprite_sets.advance(slot, fighters[slot], _is_alive(slot), enemy_x, 0.0)
+	companion_sets_by_member[member] = model
+	companion_slot_by_member[member] = slot
+	model.advance(slot, fighters[slot], _is_alive(slot), enemy_x, 0.0)
 
 func _draw() -> void:
 	draw_rect(Rect2(0, 0, 640, 360), Color("#101a27"))
@@ -1479,10 +1509,10 @@ func _draw_fighter(fighter: Dictionary, index: int) -> void:
 			draw_circle(Vector2(x, 272), 13.0, Color("#f5e1a6"))
 		combat_sprite_sets.draw_fighter(self, index, x, ARENA_FLOOR_Y)
 		return
-	if companion_sprite_sets != null and index == companion_index:
+	if companion_sets_by_member.has(member_id) and int(companion_slot_by_member[member_id]) == index:
 		if _is_alive(index) and index == controlled_index and not auto_mode:
 			draw_circle(Vector2(x, 272), 13.0, Color("#f5e1a6"))
-		companion_sprite_sets.draw_fighter(self, index, x, ARENA_FLOOR_Y)
+		companion_sets_by_member[member_id].draw_fighter(self, index, x, ARENA_FLOOR_Y)
 		return
 	if (member_id == "hero" and ["male", "female"].has(AppState.hero_appearance)) or ["liang-xu", "zhao-ling", "ji-cheng"].has(member_id):
 		if _is_alive(index) and index == controlled_index and not auto_mode:

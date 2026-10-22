@@ -80,6 +80,11 @@ var walk_phase := 0
 var npc_position := Vector2.ZERO
 # Opt-in companion field-NPC presenter (zpath27 config path, set only by that config); "" = existing static texture.
 static var field_npc_presenter_override := ""
+# Companion config per recruit id, used only when no presenter override is set; each config owns its enabled() policy.
+const FIELD_NPC_PRESENTERS := {
+	"zhao-ling": "res://scripts/zpath27/rpg-2-star-ocean-the-second_zhao-playable-path_config_opt-in-v01_20261021-223218-3246d731.gd",
+	"liang-xu": "res://scripts/lpath30/rpg-2-star-ocean-the-second_liang-playable-path_config_opt-in-v01_20261021-202247-ca439d91.gd",
+}
 var field_npc_driver
 var recruit_id := ""
 var enemy_position := Vector2(-100, -100)
@@ -470,6 +475,7 @@ func _build_actors() -> void:
 		city_npc.z_index = int(npc_position.y)
 		city_npc.visible = not AppState.recruited_members.has(recruit_id)
 		add_child(city_npc)
+		_attach_field_npc_presenter(city_npc)
 	else:
 		hero.position = SPAWN
 		field_npc = Sprite2D.new()
@@ -479,15 +485,21 @@ func _build_actors() -> void:
 		field_npc.position = npc_position
 		field_npc.visible = not AppState.recruited_members.has(recruit_id)
 		add_child(field_npc)
-		var presenter_path := field_npc_presenter_override
-		if presenter_path == "" and recruit_id == "zhao-ling":
-			var zhao = load("res://scripts/zpath27/rpg-2-star-ocean-the-second_zhao-playable-path_config_opt-in-v01_20261021-223218-3246d731.gd")
-			if zhao.enabled():
-				presenter_path = "res://scripts/zpath27/rpg-2-star-ocean-the-second_zhao-playable-path_config_opt-in-v01_20261021-223218-3246d731.gd"
-		if presenter_path != "":
-			var presenter = load(presenter_path)
-			field_npc_driver = presenter.attach_field_npc(field_npc, recruit_id) if presenter != null else null
+		_attach_field_npc_presenter(field_npc)
 	add_child(hero)
+
+
+# An explicit presenter override wins; otherwise the recruit's own companion config is used when it is enabled
+# (Zhao default on, Liang opt-in). A refused or disabled config leaves that NPC's existing static texture.
+func _attach_field_npc_presenter(target: Sprite2D) -> void:
+	var presenter_path := field_npc_presenter_override
+	if presenter_path == "" and FIELD_NPC_PRESENTERS.has(recruit_id):
+		var policy = load(FIELD_NPC_PRESENTERS[recruit_id])
+		if policy != null and policy.enabled():
+			presenter_path = FIELD_NPC_PRESENTERS[recruit_id]
+	if presenter_path != "":
+		var presenter = load(presenter_path)
+		field_npc_driver = presenter.attach_field_npc(target, recruit_id) if presenter != null else null
 
 
 func _start_audio() -> void:
