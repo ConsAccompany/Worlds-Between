@@ -1,7 +1,7 @@
 extends SceneTree
 # New source-set compatibility using existing normal exploration host/input. Not default adoption or human playtest.
 # Authored stop source integrity/contact checks are separate; this generic loader hands off directly to idle.
-# Optional fifth positional actor: zhao-ling uses an explicitly labelled test-only avatar injection.
+# Optional fifth positional actor: companion sources use an explicitly labelled test-only avatar injection.
 # Normal roster assignments/defaults stay unchanged; the existing male invocation remains supported.
 const Pilot=preload("res://scripts/exploration_sprite_set_pilot.gd")
 var checks: Array=[]
@@ -40,7 +40,7 @@ func run() -> void:
  if args.size()>4 and not args[4].begins_with("--"):
   source_actor=args[4]
   output_subject=source_actor+"-exploration"
- if not source_actor in ["protagonist-male","zhao-ling"]:
+ if not source_actor in ["protagonist-male","zhao-ling","liang-xu"]:
   print("MEXP23_BAD_ACTOR");quit(2);return
  DirAccess.make_dir_recursive_absolute(out)
  root.size=Vector2i(640,360)
