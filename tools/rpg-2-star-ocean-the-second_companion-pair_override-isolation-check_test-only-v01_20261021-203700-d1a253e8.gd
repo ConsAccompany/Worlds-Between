@@ -31,7 +31,7 @@ func run() -> void:
  app.recruit_member("liang-xu")
  app.recruit_member("zhao-ling")
  L=load(LIANG);Z=load(ZHAO);arena=load("res://scripts/battle_arena.gd")
- ck(not L.DEFAULT_ADOPTED and Z.DEFAULT_ADOPTED,"existing adoption scopes unchanged")
+ ck(L.DEFAULT_ADOPTED == OS.get_cmdline_user_args().has("--expect-default-adopted") and Z.DEFAULT_ADOPTED,"expected adoption scopes preserved")
  L.enabled_override=1
  check_binding("zhao-ling",Z.combat_index_path(),"zhao-ling")
  check_binding("liang-xu",L.combat_index_path(),"liang-xu")

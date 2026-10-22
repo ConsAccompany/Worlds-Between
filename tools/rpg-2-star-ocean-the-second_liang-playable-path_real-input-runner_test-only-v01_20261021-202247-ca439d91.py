@@ -24,6 +24,7 @@ def main():
     a.add_argument('--scenario',choices=['victory','defeat-boundary'],required=True)
     a.add_argument('--fps',type=int,choices=[30,60],default=60)
     a.add_argument('--timeout',type=float,default=120)
+    a.add_argument('--mode',choices=['preview','ordinary-default'],default='preview')
     a.add_argument('--movie',action='store_true')
     args=a.parse_args()
     tag=time.strftime('%Y%m%d-%H%M%S')+'-'+uuid.uuid4().hex[:8]
@@ -40,14 +41,14 @@ def main():
     movie=profile/f'rpg-2-star-ocean-the-second_liang-playable-path_actual-input-normal-{args.fps}fps_{tag}.avi'
     if args.movie:
         command+=['--write-movie',str(movie)]
-    command+=['--script',str(HARNESS),'--',out.as_posix(),args.language,tag,profile.as_posix(),args.scenario,'preview',args.appearance]
+    command+=['--script',str(HARNESS),'--',out.as_posix(),args.language,tag,profile.as_posix(),args.scenario,args.mode,args.appearance]
     log=out/f'rpg-2-star-ocean-the-second_liang-rif_{args.language}-{args.scenario}_godot-log_{tag}.log'
     result=checked.run_checked(command,args.timeout,['LRIF_ALL_PASS'],str(log))
-    receipt={'tag':tag,'language':args.language,'appearance':args.appearance,'scenario':args.scenario,'mode':'preview',
+    receipt={'tag':tag,'language':args.language,'appearance':args.appearance,'scenario':args.scenario,'mode':args.mode,
         'passed':result['passed'],'reason':result['reason'],'exitCode':result['exitCode'],'elapsedSeconds':result['elapsedSeconds'],
         'fixedFps':args.fps,'command':command,'harnessSha256Raw':hashlib.sha256(HARNESS.read_bytes()).hexdigest(),
         'runnerSha256Raw':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),'profile':str(profile),
-        'movie':str(movie) if args.movie else None,'humanPlaytest':False,'artApproved':False,'defaultAdoption':False}
+        'movie':str(movie) if args.movie else None,'humanPlaytest':False,'artApproved':False,'defaultAdoption':args.mode=='ordinary-default'}
     target=out/f'rpg-2-star-ocean-the-second_liang-rif_{args.language}-{args.scenario}_receipt_{tag}.json'
     target.write_bytes((json.dumps(receipt,indent=2)+'\n').encode())
     for line in result['log'].splitlines():

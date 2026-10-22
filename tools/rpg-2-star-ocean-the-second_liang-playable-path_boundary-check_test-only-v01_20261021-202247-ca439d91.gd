@@ -1,6 +1,6 @@
 extends SceneTree
 # LPATH30 independent boundary harness (test-only; no normal-input, motion, art or creator-approval claim).
-# Liang is opt-in and NOT default-adopted. Recruit calls below are a DECLARED rendering fixture that only places
+# Use --expect-default-adopted after creator authorization; historical no-flag checks expect the preview default. Recruit calls below are a DECLARED rendering fixture that only places
 # Zhao/Liang in party slots so the separately validated companion combat models can bind; they are not recruitment,
 # dialogue, story or save evidence. All malformed inputs are isolated files under user:// and are removed at the end.
 const TAG := "20261021-202247-ca439d91"
@@ -12,6 +12,7 @@ const ARENA_PATH := "res://scripts/battle_arena.gd"
 const FIXTURE_DIR := "user://lpath30-check-" + TAG
 const DIRECTIONS := ["south", "west", "north", "east"]
 
+var expected_default := OS.get_cmdline_user_args().has("--expect-default-adopted")
 var failed := false
 var count := 0
 var app: Node
@@ -180,9 +181,9 @@ func run() -> void:
 	reset_overrides(Z)
 	L.clear_cache()
 
-	# Defaults: Liang off, Zhao on, both art-unapproved, no override adopted.
-	ck(not L.DEFAULT_ADOPTED and not L.ART_APPROVED, "Liang DEFAULT_ADOPTED/ART_APPROVED are false")
-	ck(L.enabled_override == -1 and not L.enabled(), "Liang default off with no override")
+	# Defaults follow the explicitly requested adoption contract; art remains unapproved.
+	ck(L.DEFAULT_ADOPTED == expected_default and not L.ART_APPROVED, "Liang default matches expected authorization; art unapproved")
+	ck(L.enabled_override == -1 and L.enabled() == expected_default, "Liang no-override enable matches expected default")
 	ck(String(L.MEMBER_ID) == "liang-xu" and String(L.DESTINATION) == "scifi.city",
 		"Liang member/destination are liang-xu/scifi.city")
 	ck(Z.DEFAULT_ADOPTED and not Z.ART_APPROVED and Z.enabled_override == -1 and Z.enabled(),
@@ -399,20 +400,20 @@ func run() -> void:
 
 	# Rollback restores only this config's knob; Zhao controls/defaults remain exactly as before.
 	L.rollback()
-	ck(L.enabled_override == -1 and not L.enabled(), "rollback restores Liang own knob")
+	ck(L.enabled_override == -1 and L.enabled() == expected_default, "rollback restores Liang authorized default knob")
 	ck(area.field_npc_presenter_override == "" and arena.companion_combat_member_override == ""
 		and arena.companion_combat_index_override == "" and Z.enabled_override == -1 and Z.enabled(),
 		"rollback leaves Zhao controls/default untouched")
 	battle = scene("battle_arena")
 	by_member = battle.get("companion_sets_by_member")
-	ck(by_member is Dictionary and by_member.has("zhao-ling") and not by_member.has("liang-xu"),
-		"post-rollback defaults load Zhao only")
+	ck(by_member is Dictionary and by_member.has("zhao-ling") and by_member.has("liang-xu") == expected_default,
+		"post-rollback companion models match expected defaults")
 	ck(battle.get("companion_sprite_sets") == by_member.get("zhao-ling"),
 		"post-rollback alias is Zhao")
 	battle.free()
 	app.select_destination("scifi.city")
 	city = scene("scifi_exploration_area")
-	ck(not L.npc_attached(city), "post-rollback Liang city NPC is off")
+	ck(L.npc_attached(city) == expected_default, "post-rollback Liang city NPC matches expected default")
 	city.free()
 	app.select_destination("scifi.outskirts")
 	outskirts = scene("scifi_exploration_area")

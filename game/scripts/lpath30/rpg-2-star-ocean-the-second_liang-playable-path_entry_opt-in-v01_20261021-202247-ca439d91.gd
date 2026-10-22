@@ -1,6 +1,6 @@
 extends SceneTree
 # Separate-profile preview entry (run it with APPDATA/LOCALAPPDATA pointed at a dedicated profile directory, as the
-# zpath27 launcher does). Liang remains the real recruitable companion at scifi.city, not the hero; default stays off.
+# zpath27 launcher does). Liang remains the real recruitable companion at scifi.city, not the hero; ordinary MVP default use is creator-authorized.
 const Config = preload("res://scripts/lpath30/rpg-2-star-ocean-the-second_liang-playable-path_config_opt-in-v01_20261021-202247-ca439d91.gd")
 func _initialize() -> void:
  call_deferred("run")

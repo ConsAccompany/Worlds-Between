@@ -1,7 +1,7 @@
 extends RefCounted
 
-# Opt-in Liang Xu (梁序) companion preview path. NOT default-adopted and art/motion UNAPPROVED: enabled() is false unless
-# enabled_override is 1. Liang stays a companion: recruited at the existing scifi.city recruit NPC through the normal
+# Liang Xu (梁序) companion path: creator-authorized MVP default; art/motion remain UNAPPROVED.
+# enabled_override can disable this actor independently. Refinement is deferred until after MVP. Liang stays a companion: recruited at the existing scifi.city recruit NPC through the normal
 # dialogue, Tab-controlled in battle, never a follower or hero replacement.
 #   exploration: the existing city recruit Sprite2D gets the lpath30 driver (zpath27 driver reused with lexplore28 paths);
 #   battle: a separate member-scoped companion combat model with the lcombat29 index draws only the Liang slot.
@@ -11,7 +11,7 @@ extends RefCounted
 # hosts pick this config by recruit/member id. rollback() restores exactly what configure() replaced. Hero and Zhao
 # defaults, AI, damage, cooldowns, input, party order, saves, story, collisions and encounters are untouched.
 
-const DEFAULT_ADOPTED := false
+const DEFAULT_ADOPTED := true
 const ART_APPROVED := false
 const MEMBER_ID := "liang-xu"
 const DESTINATION := "scifi.city"

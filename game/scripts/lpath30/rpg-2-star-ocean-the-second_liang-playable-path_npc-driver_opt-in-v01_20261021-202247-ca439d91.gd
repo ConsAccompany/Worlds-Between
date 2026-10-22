@@ -1,6 +1,6 @@
 extends "res://scripts/zpath27/rpg-2-star-ocean-the-second_zhao-playable-path_npc-driver_opt-in-v01_20261021-223218-3246d731.gd"
 
-# Opt-in Liang Xu (梁序) field-NPC driver (art/motion UNAPPROVED, default NOT adopted). Reuses the zpath27 Zhao driver's
+# Liang Xu (梁序) field-NPC driver (creator-authorized MVP default; art/motion UNAPPROVED). Reuses the zpath27 Zhao driver's
 # instance behaviour unchanged (four-direction idle/walk, phase-aware stop bridges, frame_ms clock, state()). Only the
 # actor, the frozen lexplore28 package paths and a separate per-actor cache differ: the parent's ACTOR constant and its
 # static cache are Zhao's, so validation is re-run here with LIANG_ACTOR using the same rules as zpath27. The node only

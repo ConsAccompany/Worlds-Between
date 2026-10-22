@@ -151,7 +151,7 @@ func _run() -> void:
 	var r: Dictionary
 	if mode == "ordinary-default":
 		var area = load(config.EXPLORATION_PATH)
-		var arena = load(config.BATTLE_ARENA_PATH)
+		var arena = load("res://scripts/battle_arena.gd")
 		ck(config.DEFAULT_ADOPTED and config.enabled_override == -1 and config.enabled(), "ordinary Liang policy enabled without override")
 		ck(area.field_npc_presenter_override == "" and arena.companion_combat_member_override == "" and arena.companion_combat_index_override == "", "no preview presenter/member/index host overrides")
 		app.begin_new_run()
