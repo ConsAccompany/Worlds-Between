@@ -2,7 +2,15 @@
 
 Last updated: 2026-10-21
 
-## Latest delivered preview — 2026-10-21: Liang complete companion path
+## Latest completed batch — 2026-10-21: Liang MVP ordinary defaults
+
+Production **57.8% → 58.0% (+0.2 pp)**; content559 →563/1881. Inspection **18.1% →18.1% (+0.0 pp)**; creator approval **7.8% →7.8% (+0.0 pp)**. The two existing default-integration tasks are complete; no weights, denominators or artistic approval changed.
+
+The creator authorized “先设为 MVP 默认，精修后置（推荐）” after seeing actual gameplay. Liang now uses the frozen four-direction exploration/companion battle packages in ordinary gameplay. EN male real-input victory/recruit/map/return/reload62 and ZH female declared low-health defeat/retry51 pass without configure() or presentation/member/index overrides. Boundary120 and explicit-pair15 checks pass, including Zhao coexistence, independent disable, malformed refusal and rollback to the authorized default.356 protected source/default files stay byte exact. The first default test caught a missing test-only constant; its failure and exact source are retained. No mechanics or checks weakened. Source `84290259346c41f5125beccf688fb2126f597b27`. [Closeout](../docs/qa/rpg-2-star-ocean-the-second_liang-xu_default-adoption_codex-closeout-v01_20261021-204851-c60063e2.md).
+
+Refinements stay post-MVP. Full art/motion acceptance remains separate: complete sprites0/52, scene art5/12, human plays0/2.
+
+## Prior delivered preview — 2026-10-21: Liang complete companion path
 
 Production **57.8% → 57.8% (+0.0 pp)**; inspection **18.1% → 18.1% (+0.0 pp)**; creator approval **7.8% → 7.8% (+0.0 pp)**. The existing integration tasks require ordinary default use and remain in progress pending the separate authorization required by AGENTS.md. No per-preview points or denominator change.
 
