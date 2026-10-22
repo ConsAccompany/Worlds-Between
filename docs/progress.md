@@ -2,7 +2,17 @@
 
 Last updated: 2026-10-21
 
-## Latest completed batch — 2026-10-21: Liang MVP ordinary defaults
+## Latest completed batch — 2026-10-21: Ji Cheng exploration source
+
+Production **58.0% →58.6% (+0.6 pp)**; content563→583/1881. Inspection **18.1% →18.1% (+0.0 pp)**; creator approval **7.8% →7.8% (+0.0 pp)**. Eight existing missing source-production tasks complete; no scoring baseline change.
+
+Four-direction statics/idle/walk/stop:164source PNGs and exact runtime copies,4editable41-frame PXOs,4layered static ORAs. Original south neutral remains exact. Canonical rebuild341/341,source52/52,native exports164/164,independent native2799 and runtime393 checks plus corruption refusals pass. DeepSeek's independent source/runtime proposal was actually rerun on Ji:2596checks and2corruption refusals. Actual source-fit EN30fps571 and ZH60fps1027 checks pass with16native captures and an original-speed movie; these are TEST-ONLY avatar injections, not ordinary Ji integration or human plays.494protected files unchanged. Source `c030f4f573c838d99efe4400a9b214884e32a69c`. [Closeout](../docs/qa/rpg-2-star-ocean-the-second_ji-cheng_exploration-source_codex-closeout_unapproved-v01_20261021-212415-382d3721.md).
+
+Original staggered foot rows are now checked per-foot and independently against actual PNGs; exact initial failures remain. East idle variation was corrected. First ZH renderer initialization failed; an unchanged-code sequential retry passed, and the failure remains recorded. Pixelorama shader diagnostics and GUI/motion/source-slip limitations remain disclosed. Refinements stay post-MVP. Full art acceptance0/52,scene art5/12,humanplays0/2.
+
+Next: missing Ji battle static/actions, then companion playable integration. Existing defaults preserved.
+
+## Prior completed batch — 2026-10-21: Liang MVP ordinary defaults
 
 Production **57.8% → 58.0% (+0.2 pp)**; content559 →563/1881. Inspection **18.1% →18.1% (+0.0 pp)**; creator approval **7.8% →7.8% (+0.0 pp)**. The two existing default-integration tasks are complete; no weights, denominators or artistic approval changed.
 

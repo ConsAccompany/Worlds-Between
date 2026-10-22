@@ -2,7 +2,7 @@
   "id": "rpg-2-star-ocean-the-second_production-completion_v01",
   "schemaVersion": 2,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-22T00:49:20Z",
+  "updatedAt": "2026-10-22T01:25:40Z",
   "zh": "制作完成度任务台账：衡量已完成的工作量（编码 40% + 内容 60%）；检查／审查与创作者批准分开计量，均不改变制作分；免除的审查不算已执行的工作；运营任务列出负责方但不计百分比。",
   "en": "Production-completion task ledger: measures work done (coding 40% + content 60%); inspection/review and creator approval are separate meters and never change production credit; waived reviews are not performed work; operations tasks list owners but carry no percentage.",
   "brief": "docs/rpg-2-star-ocean-the-second_production-completion_bilingual-brief_v01_20261018-140533-3ea2a621.md",
@@ -900,8 +900,8 @@
     "production": {
       "zh": "制作完成度",
       "en": "Production completion",
-      "percent": 58,
-      "percentLabel": "58.0%",
+      "percent": 58.6,
+      "percentLabel": "58.6%",
       "formula": "round1(40 * codingDonePoints/codingTotalPoints + 60 * contentDonePoints/contentTotalPoints)",
       "coding": {
         "done": 111,
@@ -912,12 +912,12 @@
         "tasksDone": 23
       },
       "content": {
-        "done": 563,
+        "done": 583,
         "total": 1881,
-        "percent": 29.9,
+        "percent": 31,
         "weight": 60,
         "tasks": 715,
-        "tasksDone": 179
+        "tasksDone": 187
       }
     },
     "inspection": {
@@ -982,11 +982,11 @@
         "waivedPoints": 0
       },
       "content": {
-        "done": 563,
+        "done": 583,
         "total": 1881,
-        "percent": 29.9,
+        "percent": 31,
         "tasks": 715,
-        "tasksDone": 179,
+        "tasksDone": 187,
         "waivedTasks": 0,
         "waivedPoints": 0
       },
@@ -1041,10 +1041,10 @@
         "tasks": 719,
         "operationsTasks": 0,
         "points": 1893,
-        "pointsDone": 517,
+        "pointsDone": 537,
         "byStatus": {
-          "done": 127,
-          "todo": 592
+          "done": 135,
+          "todo": 584
         },
         "readyInQueue": 6,
         "revisionsBlockingApproval": 2
@@ -1133,7 +1133,7 @@
       },
       "characters": {
         "content": {
-          "done": 167,
+          "done": 187,
           "total": 1460
         },
         "technical-inspection": {
@@ -2249,14 +2249,14 @@
     {"id":"creator.char.luowen.accept-display","type":"creator-acceptance","title":{"zh":"洛纹 · 验收展示图","en":"Luowen · accept display image"},"area":"characters","stage":"creator-approval","owner":"creator","status":"todo","points":1,"doneCriterion":{"zh":"清单 display 项被创作者勾选","en":"The creator checks the inventory display item"},"dependsOn":["content.char.luowen.display"],"evidence":[],"subject":{"kind":"character-variant","id":"luowen"},"target":"content.char.luowen.display"},
     {"id":"content.char.ji-cheng.portrait","type":"concept-generation","title":{"zh":"纪澄 · 人物设定图（图像生成）","en":"Ji Cheng · source portrait (image generation)"},"area":"characters","stage":"content","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"设定图文件已入库","en":"The source portrait file is committed"},"dependsOn":[],"evidence":["outputs/rpg-2-star-ocean-the-second_ji-cheng_character-sheet_v01_20261013-190436-dcea1a37.png"],"subject":{"kind":"character-variant","id":"ji-cheng"}},
     {"id":"content.char.ji-cheng.static-south","type":"native-pixel","title":{"zh":"纪澄 · 南向高密度静止帧","en":"Ji Cheng · south high-density static"},"area":"characters","stage":"content","owner":"claude","status":"done","points":3,"doneCriterion":{"zh":"南向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"south native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":[],"evidence":["docs/qa/rpg-2-star-ocean-the-second_ji-cheng_south-idle-static-pilot_qa-note_unapproved-v01_20261018-132812-23499262.md"],"subject":{"kind":"character-variant","id":"ji-cheng"}},
-    {"id":"content.char.ji-cheng.static-west","type":"native-pixel","title":{"zh":"纪澄 · 西向高密度静止帧","en":"Ji Cheng · west high-density static"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"西向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"west native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":["content.char.ji-cheng.static-south"],"evidence":[],"subject":{"kind":"character-variant","id":"ji-cheng"}},
-    {"id":"content.char.ji-cheng.static-north","type":"native-pixel","title":{"zh":"纪澄 · 北向高密度静止帧","en":"Ji Cheng · north high-density static"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"北向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"north native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":["content.char.ji-cheng.static-south"],"evidence":[],"subject":{"kind":"character-variant","id":"ji-cheng"}},
-    {"id":"content.char.ji-cheng.static-east","type":"native-pixel","title":{"zh":"纪澄 · 东向高密度静止帧","en":"Ji Cheng · east high-density static"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"东向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"east native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":["content.char.ji-cheng.static-south"],"evidence":[],"subject":{"kind":"character-variant","id":"ji-cheng"}},
-    {"id":"content.char.ji-cheng.idle-anim","type":"native-pixel","title":{"zh":"纪澄 · 四方向待机动画","en":"Ji Cheng · four-direction idle animation"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"四个方向的待机循环已提交并有 QA","en":"Idle loops for all four directions committed with QA"},"dependsOn":["content.char.ji-cheng.static-south","content.char.ji-cheng.static-west","content.char.ji-cheng.static-north","content.char.ji-cheng.static-east"],"evidence":[],"subject":{"kind":"character-variant","id":"ji-cheng"}},
-    {"id":"content.char.ji-cheng.walk-south","type":"native-pixel","title":{"zh":"纪澄 · 南向行走／跑动","en":"Ji Cheng · south walk/run"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"南向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"south walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.ji-cheng.static-south"],"evidence":[],"subject":{"kind":"character-variant","id":"ji-cheng"}},
-    {"id":"content.char.ji-cheng.walk-west","type":"native-pixel","title":{"zh":"纪澄 · 西向行走／跑动","en":"Ji Cheng · west walk/run"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"西向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"west walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.ji-cheng.static-west"],"evidence":[],"subject":{"kind":"character-variant","id":"ji-cheng"}},
-    {"id":"content.char.ji-cheng.walk-north","type":"native-pixel","title":{"zh":"纪澄 · 北向行走／跑动","en":"Ji Cheng · north walk/run"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"北向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"north walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.ji-cheng.static-north"],"evidence":[],"subject":{"kind":"character-variant","id":"ji-cheng"}},
-    {"id":"content.char.ji-cheng.walk-east","type":"native-pixel","title":{"zh":"纪澄 · 东向行走／跑动","en":"Ji Cheng · east walk/run"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"东向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"east walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.ji-cheng.static-east"],"evidence":[],"subject":{"kind":"character-variant","id":"ji-cheng"}},
+    {"id":"content.char.ji-cheng.static-west","type":"native-pixel","title":{"zh":"纪澄 · 西向高密度静止帧","en":"Ji Cheng · west high-density static"},"area":"characters","stage":"content","owner":"claude","status":"done","points":2,"doneCriterion":{"zh":"西向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"west native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":["content.char.ji-cheng.static-south"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_ji-cheng_exploration-source_codex-closeout_unapproved-v01_20261021-212415-382d3721.md"],"subject":{"kind":"character-variant","id":"ji-cheng"},"statusAt":"2026-10-22T01:25:37Z","note":{"zh":"","en":"Complete four-direction editable source, canonical 341-file rebuild, 52 source checks, 164 native exact exports, independent source/runtime checks and actual EN30/ZH60 input source fit. No ordinary default adoption, art/motion approval or human playtest; source slip/GUI/shader limits disclosed."}},
+    {"id":"content.char.ji-cheng.static-north","type":"native-pixel","title":{"zh":"纪澄 · 北向高密度静止帧","en":"Ji Cheng · north high-density static"},"area":"characters","stage":"content","owner":"claude","status":"done","points":2,"doneCriterion":{"zh":"北向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"north native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":["content.char.ji-cheng.static-south"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_ji-cheng_exploration-source_codex-closeout_unapproved-v01_20261021-212415-382d3721.md"],"subject":{"kind":"character-variant","id":"ji-cheng"},"statusAt":"2026-10-22T01:25:37Z","note":{"zh":"","en":"Complete four-direction editable source, canonical 341-file rebuild, 52 source checks, 164 native exact exports, independent source/runtime checks and actual EN30/ZH60 input source fit. No ordinary default adoption, art/motion approval or human playtest; source slip/GUI/shader limits disclosed."}},
+    {"id":"content.char.ji-cheng.static-east","type":"native-pixel","title":{"zh":"纪澄 · 东向高密度静止帧","en":"Ji Cheng · east high-density static"},"area":"characters","stage":"content","owner":"claude","status":"done","points":2,"doneCriterion":{"zh":"东向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"east native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":["content.char.ji-cheng.static-south"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_ji-cheng_exploration-source_codex-closeout_unapproved-v01_20261021-212415-382d3721.md"],"subject":{"kind":"character-variant","id":"ji-cheng"},"statusAt":"2026-10-22T01:25:38Z","note":{"zh":"","en":"Complete four-direction editable source, canonical 341-file rebuild, 52 source checks, 164 native exact exports, independent source/runtime checks and actual EN30/ZH60 input source fit. No ordinary default adoption, art/motion approval or human playtest; source slip/GUI/shader limits disclosed."}},
+    {"id":"content.char.ji-cheng.idle-anim","type":"native-pixel","title":{"zh":"纪澄 · 四方向待机动画","en":"Ji Cheng · four-direction idle animation"},"area":"characters","stage":"content","owner":"claude","status":"done","points":2,"doneCriterion":{"zh":"四个方向的待机循环已提交并有 QA","en":"Idle loops for all four directions committed with QA"},"dependsOn":["content.char.ji-cheng.static-south","content.char.ji-cheng.static-west","content.char.ji-cheng.static-north","content.char.ji-cheng.static-east"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_ji-cheng_exploration-source_codex-closeout_unapproved-v01_20261021-212415-382d3721.md"],"subject":{"kind":"character-variant","id":"ji-cheng"},"statusAt":"2026-10-22T01:25:38Z","note":{"zh":"","en":"Complete four-direction editable source, canonical 341-file rebuild, 52 source checks, 164 native exact exports, independent source/runtime checks and actual EN30/ZH60 input source fit. No ordinary default adoption, art/motion approval or human playtest; source slip/GUI/shader limits disclosed."}},
+    {"id":"content.char.ji-cheng.walk-south","type":"native-pixel","title":{"zh":"纪澄 · 南向行走／跑动","en":"Ji Cheng · south walk/run"},"area":"characters","stage":"content","owner":"claude","status":"done","points":3,"doneCriterion":{"zh":"南向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"south walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.ji-cheng.static-south"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_ji-cheng_exploration-source_codex-closeout_unapproved-v01_20261021-212415-382d3721.md"],"subject":{"kind":"character-variant","id":"ji-cheng"},"statusAt":"2026-10-22T01:25:39Z","note":{"zh":"","en":"Complete four-direction editable source, canonical 341-file rebuild, 52 source checks, 164 native exact exports, independent source/runtime checks and actual EN30/ZH60 input source fit. No ordinary default adoption, art/motion approval or human playtest; source slip/GUI/shader limits disclosed."}},
+    {"id":"content.char.ji-cheng.walk-west","type":"native-pixel","title":{"zh":"纪澄 · 西向行走／跑动","en":"Ji Cheng · west walk/run"},"area":"characters","stage":"content","owner":"claude","status":"done","points":3,"doneCriterion":{"zh":"西向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"west walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.ji-cheng.static-west"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_ji-cheng_exploration-source_codex-closeout_unapproved-v01_20261021-212415-382d3721.md"],"subject":{"kind":"character-variant","id":"ji-cheng"},"statusAt":"2026-10-22T01:25:39Z","note":{"zh":"","en":"Complete four-direction editable source, canonical 341-file rebuild, 52 source checks, 164 native exact exports, independent source/runtime checks and actual EN30/ZH60 input source fit. No ordinary default adoption, art/motion approval or human playtest; source slip/GUI/shader limits disclosed."}},
+    {"id":"content.char.ji-cheng.walk-north","type":"native-pixel","title":{"zh":"纪澄 · 北向行走／跑动","en":"Ji Cheng · north walk/run"},"area":"characters","stage":"content","owner":"claude","status":"done","points":3,"doneCriterion":{"zh":"北向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"north walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.ji-cheng.static-north"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_ji-cheng_exploration-source_codex-closeout_unapproved-v01_20261021-212415-382d3721.md"],"subject":{"kind":"character-variant","id":"ji-cheng"},"statusAt":"2026-10-22T01:25:40Z","note":{"zh":"","en":"Complete four-direction editable source, canonical 341-file rebuild, 52 source checks, 164 native exact exports, independent source/runtime checks and actual EN30/ZH60 input source fit. No ordinary default adoption, art/motion approval or human playtest; source slip/GUI/shader limits disclosed."}},
+    {"id":"content.char.ji-cheng.walk-east","type":"native-pixel","title":{"zh":"纪澄 · 东向行走／跑动","en":"Ji Cheng · east walk/run"},"area":"characters","stage":"content","owner":"claude","status":"done","points":3,"doneCriterion":{"zh":"东向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"east walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.ji-cheng.static-east"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_ji-cheng_exploration-source_codex-closeout_unapproved-v01_20261021-212415-382d3721.md"],"subject":{"kind":"character-variant","id":"ji-cheng"},"statusAt":"2026-10-22T01:25:40Z","note":{"zh":"","en":"Complete four-direction editable source, canonical 341-file rebuild, 52 source checks, 164 native exact exports, independent source/runtime checks and actual EN30/ZH60 input source fit. No ordinary default adoption, art/motion approval or human playtest; source slip/GUI/shader limits disclosed."}},
     {"id":"content.char.ji-cheng.display","type":"native-pixel","title":{"zh":"纪澄 · 游戏内展示图","en":"Ji Cheng · in-game display image"},"area":"characters","stage":"content","owner":"deepseek","status":"done","points":2,"doneCriterion":{"zh":"游戏内展示图已提交并在界面中显示","en":"The in-game display image is committed and shown in the UI"},"dependsOn":["content.char.ji-cheng.static-south"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_mvp-display_four-crops-normal-integration_v01_20261019-185434-7c95e421.md","outputs/mvp-portraits-v01/rpg-2-star-ocean-the-second_mvp-display_source-bound-proof_v01_20261019-185434-7c95e421.json"],"subject":{"kind":"character-variant","id":"ji-cheng"},"statusAt":"2026-10-19T23:02:52Z","note":{"zh":"","en":"DeepSeek existing-concept exact crop, Codex package corrections and normal UI wiring;62package and121actualchecks. Creator approval/fullsprite/wholeUIportraitkit unchanged."}},
     {"id":"content.char.ji-cheng.runtime-integration","type":"integration","title":{"zh":"纪澄 · 运行时默认接入","en":"Ji Cheng · runtime default integration"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"整套四方向待机与行走默认在游戏中使用","en":"The full four-direction idle+walk set is used in the game by default"},"dependsOn":["content.char.ji-cheng.idle-anim","content.char.ji-cheng.walk-south","content.char.ji-cheng.walk-west","content.char.ji-cheng.walk-north","content.char.ji-cheng.walk-east","code.runtime.character-sprite-pipeline"],"evidence":[],"subject":{"kind":"character-variant","id":"ji-cheng"}},
     {"id":"qa.char.ji-cheng.runtime-set-check","type":"technical-check","title":{"zh":"纪澄 · 运行时整套技术检查","en":"Ji Cheng · runtime set technical check"},"area":"characters","stage":"technical-inspection","owner":"claude","status":"todo","points":1,"doneCriterion":{"zh":"Godot 实机检查（帧、锚点、方向、滑步）全部通过","en":"Godot checks (frames, anchors, directions, slip) all pass"},"dependsOn":["content.char.ji-cheng.runtime-integration"],"evidence":[],"subject":{"kind":"character-variant","id":"ji-cheng"},"target":"content.char.ji-cheng.runtime-integration"},
