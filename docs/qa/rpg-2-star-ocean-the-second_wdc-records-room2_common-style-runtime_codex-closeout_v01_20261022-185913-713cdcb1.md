@@ -1,0 +1,31 @@
+# Washington records chamber common-style playable candidate STYLE48
+
+Base53cf3581d65f9ac5049f795b110f9074a3e38871. Existing production task content.scene.ruins-survey-inner.native-pass, already credited; no new per-version task or score. Claude assembled sources; Codex inspected, fixed the texture lifetime defect, integrated and independently tested. The creator approved the common material direction, not this image, its ordinary default use, or final art.
+
+## Completed boundary
+
+- One640×360 runtime background, sampled once by exact nearest source-pixel selection from the generated1672×941 reference. This is generated raster assembly, not hand-placed pixel art. Four existing native fixture PNGs remain byte-identical at their original positions; no runtime duplication, movement/collision/content/policy changes.
+- Editable ORA/PXO: five visible full-canvas planes (background, terminal, three clue planes), plus hidden locked blocker guide. Deterministic builder6/6; independent package checker84 predicates pass: input and output hashes, exact nearest sampling, four original paths/positions/canvases, flat composition, ORA merged/visible stack and PXO preview/cel reconstruction.
+- Minimal shared survey_annex.gd patch(+14/-2): explicit --wdc-records-style48 adds the fixtures and common background only to Washington room2. Persistent preloaded Texture2D; legacy flag retains its old plate; all ordinary defaults remain unchanged. Source snapshot is immutable for reproducibility. Sole changed file among2554 protected existing game files is survey_annex.gd.
+- Final actual-r2 checked GPU run at fixed60fps passed with no ERROR/SCRIPT ERROR. Current ordinary heroine, no substituted static sprite; room host processing enabled. Real held-key approaches to three clues, E/Esc overlays with exact bilingual content, locked/linking terminal,18 collision approaches, slide/escape, lane traversal,12 side/front/back interactions, six non-target sites; mouse Save screen slot1 Save/Back, title Load/manual and autosave, room1 deeper/room2 Esc and E return all pass. Terminal all-six-clue/linking and solved-marker state are seeded test prerequisites, not a claim of a complete human puzzle playthrough.
+- New rendered-background guard checks selected texture path plus four unoccluded floor pixels (maximum per-channel GPU tolerance1.01/255); this detects the original all-white draw. Native640×360 bilingual actual frames include entry, front/behind fixtures, clue/terminal overlays, load and door return.
+- Final noflag parity versus immutable original script: city/outskirts/ruins ×2rooms ×2languages, all12pairs have0 differing pixels. This uses current ordinary heroine with processing frozen only for deterministic parity images. Before/first-after checks also passed.
+- All Godot cases ran with fresh isolated APPDATA/LOCALAPPDATA and test SaveStore paths, checked diagnostic runner and finite deadline. No production-profile save opened or independently hashed. These are automated fixtures/direct scene instances, not two human timed playtests.
+
+## Failures, correction and unresolved native limitations
+
+1. Producer's first helper returned load(path) from _draw without retaining the texture. Functional tests initially passed but Codex actually viewed white-background captures in actual-r1. Replaced it with a constant preloaded Texture2D, updated deterministic builder/patch/manifest, added rendered-pixel checks and reran full actual path and noflag parity. Final actual-r2 entry, occlusion and after-load frames were directly inspected: warm stone/brass, restrained teal, distinct fixtures grounded on the floor, current heroine and bilingual labels readable. Initial white capture/log and producer source/manifest retained under root/actual-r1 and root/pre-fix. No geometry/threshold was weakened.
+2. Pixelorama headless export exit0, but exact export check FAILED:1917pixels differ by at most1channel value over unchanged semi-transparent fixture composition. Independent source cel/ORA/PXO reconstruction is exact. Four shader ERROR diagnostics remain. Do not claim exact native application export, clean application behavior or GUI SaveAs/reopen; these remain unverified/failed limitations. No native tolerance was relaxed to manufacture a pass.
+3. DeepSeek's122.7s attempt drifted into unnecessary web format discovery. Codex stopped its exact owned process and wrote the small fixed-schema checker. This was coordinator cancellation, not credit/quota depletion. No provider retry, cloud credits or paid fallback.
+4. Legacy helper generated generic hidden-hero probe filenames; those generated files were renamed to project/subject/purpose/variant/timestamp/id names, mapping retained. Main gameplay captures already use compliant names.
+
+The candidate can be shown for a scoped MVP-default decision with final material/edge polish deferred. Native application limitations above remain open. No default authorization inferred. Existing final scene approvals5/12, complete runtime sprite approvals0/52 and human timed plays0/2 unchanged; formalMVPfalse.
+
+## Reproduce
+
+Use tools/rpg-2-star-ocean-the-second_godot_checked-runner_v01_20261018-203400-f74ac6d1.py with finite timeout180, expected STYLE48_RUNTIME_ALL_OK, fresh isolated user directories and:
+Godot --path game --resolution640x360 --fixed-fps60 --script tools/rpg-2-star-ocean-the-second_wdc-records-room2_actual-runtime-check_style48-v01_20261022-185913-713cdcb1.gd -- <capture-dir> <report-dir> <unique-tag> --wdc-records-style48
+(Resolution CLI arguments are two separate tokens: --resolution 640x360.)
+For noflag parity append the immutable input-module path then --style48-parity instead of the style48 flag. Expected STYLE48_PARITY_ALL_OK. Export and test logs/results plus raw source hashes are under outputs/style48/root. Native application export must continue to be reported as nonexact/diagnostic-bearing.
+
+Production60.0%→60.0%(+0.0pp), inspection20.6%→20.6%, creator approval7.8%→7.8%. Frozen1183tasks/weights unchanged. This reworks an already credited native scene task to resolve the creator's cross-scene style rejection; it does not add another production bucket. Next: separate records-room MVP-default authorization. NYC default choice also remains pending.
