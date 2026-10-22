@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-22T03:49:35.659535+00:00",
+  "updatedAt": "2026-10-22T19:26:50.744013+00:00",
   "purpose": "Operating queue and worktree ownership; no progress points or account details",
   "workflow": "docs/workflow.md",
   "canonicalLedger": "outputs/rpg-2-star-ocean-the-second_production-completion_task-ledger_v01_20261018-140533-3de52073.json",
@@ -1310,29 +1310,22 @@
     "claudeQuota": "DeepSeek alone; one alarm at reported reset",
     "deepseekCredit": "Stop all project production including Codex and both providers, save handoff, cancel pending resumption; no topup/fallback"
   },
-  "nextDispatchPreferences": [
-    {
-      "task": "content.char.protagonist-male.runtime-integration",
-      "preferredProducer": "claude",
-      "status": "prepare-opt-in-playable-boundary",
-      "reason": "Required normal path/cadence/stop/combined combat evidence before proposing default use. Default-adoption criterion stays open until authorized."
-    }
-  ],
+  "nextDispatchPreferences": {
+    "primary": "missing-Jiang-Lan-other-three-statics",
+    "support": "bounded-independent-source-native-parity",
+    "constraints": "Do not reopen existing cosmetic gait or actor art searches. Keep four scene defaults false until explicit authorization. Verify providers before fresh sessions."
+  },
   "activeDualProviderBatch": {
-    "primary": "mvp-exploration-runtime-checks",
+    "primary": "content.char.jiang-lan.static-south",
     "owner": "claude",
     "support": "deepseek",
-    "status": "closed-technical-gate-not-passed",
-    "base": "66ae88e706d57d029a247dcba64a963066673683",
-    "writeScope": "new xcheck36 tests/outputs only",
-    "taskIds": [
-      "qa.char.protagonist-male.runtime-set-check",
-      "qa.char.liang-xu.runtime-set-check"
-    ],
-    "sourceCommit": "209337f184549f87c5b45fd56a7d361bf7a0bb55",
-    "finishedAt": "2026-10-22T03:49:35.659535+00:00",
-    "claudeStatus": "bounded-deadline-source-proposal-unaccepted",
-    "deepseekStatus": "source-only-pass-root-rerun"
+    "status": "closed-source-recovered-and-verified",
+    "base": "0fbfc26cef1a39311105cb4f7c09b74bfbb8fa4d",
+    "scope": "one missing editable native south static, no runtime adoption",
+    "sourceCommit": "577e9d1b9404ed5fedf019fe33d874820e4f6452",
+    "finishedAt": "2026-10-22T19:26:50.744013+00:00",
+    "claudeStatus": "source-complete-stream-interrupted-no-final-receipt",
+    "deepseekStatus": "interrupted-checker-schema-corrected-and-root-verified"
   },
   "characterSpriteStyleDirection": {
     "reference": "Sea of Stars",
@@ -1428,68 +1421,78 @@
     "approvalsNotWaived": true
   },
   "nextProductionTask": {
-    "kind": "mvp-scene-default-integration",
-    "status": "prepared-awaiting-creator-default-use-authorization",
+    "kind": "missing-native-sprite-directions",
+    "status": "queued",
+    "tasks": [
+      "content.char.jiang-lan.static-west",
+      "content.char.jiang-lan.static-north",
+      "content.char.jiang-lan.static-east"
+    ],
     "owner": "claude",
     "coordinator": "codex",
-    "tasks": [
-      "content.scene.city.native-default",
-      "content.scene.ruins.native-default",
-      "content.scene.ruins-survey-inner.native-default",
-      "content.scene.chicago-loop.native-default"
-    ],
-    "nextAction": "Show four separate actual scene review images. Enable only creator-authorized named defaults, then verify ordinary entry and close existing tasks. No cosmetic expansion.",
-    "base": "15695aa8bb5802b57c374e9344a6fcaae03d55c9",
-    "startedAt": "2026-10-22T03:14:35.644057+00:00",
-    "ordinaryAdoptionAuthorized": false,
-    "policyPath": "game/scripts/sdef35/rpg-2-star-ocean-the-second_mvp-scene-defaults_policy_prepared-v01_20261021-231349-a83c4bae.gd",
-    "supportingTask": {
-      "owner": "deepseek",
-      "scope": "independent default-off parity, routing and rollback boundaries"
-    },
-    "sourceCommit": "90e88f10447f1a774fe68ff404d9290227d91d2c",
-    "evidence": [
-      "docs/qa/rpg-2-star-ocean-the-second_four-scene-defaults_prepared-integration-verdict_v01_20261021-233359-a9b0909a.md",
-      "outputs/sdef35/root/rpg-2-star-ocean-the-second_four-scene-defaults_root-verification_prepared-v01_20261021-233359-a9b0909a.json"
-    ]
+    "nextAction": "Produce missing west/north/east Jiang Lan statics from same approved identity and native source contract; defer cosmetic changes to already produced actors.",
+    "requiresCreatorDecision": false
   },
   "lastCompletedProductionTask": {
-    "subject": "ji-cheng",
-    "kind": "complete-companion-playable-path",
-    "owner": "codex",
-    "coordinator": "codex",
-    "status": "completed",
-    "tasks": [
-      "content.char.ji-cheng.runtime-integration",
-      "content.combat.ji-cheng.combat-integration"
-    ],
-    "doneBoundary": "Real recruitment/control/exploration/normal encounter/eight combat actions/victory return/autosave reload and defeat-retry; ordinary default use separately authorized. Preview alone does not complete integration ledger tasks.",
-    "sourceDependencies": [
-      "c030f4f573c838d99efe4400a9b214884e32a69c",
-      "e4e586bc2574dbcd8dfb2014b042fd233bbdf22f"
-    ],
-    "protected": [
-      "existing female/male/Zhao/Liang ordinary defaults",
-      "mechanics/input/save schema",
-      "no persistent followers"
-    ],
-    "supportingTask": {
-      "owner": "deepseek",
-      "scope": "Bounded independent coexistence/refusal/save and existing driver checks; no new framework",
-      "status": "complete-canonical-unfiltered-check-passed"
-    },
-    "nextAction": "Complete outstanding technical checks on the ordinary integrated five-actor MVP; defer cosmetic refinements. Artistic approval and human playtests stay separate.",
-    "productionBefore": 58.9,
-    "implementationComplete": true,
-    "sourceCommit": "22d3e7f5e8a9d206d3ec6284b6a1c4d0b8b17651",
+    "status": "produced-and-reviewed-source-only",
+    "task": "content.char.jiang-lan.static-south",
+    "reviewTask": "review.char.jiang-lan.static-south",
+    "producer": "claude",
+    "support": "deepseek-proposal-corrected-by-codex",
+    "inspectorAndIntegrator": "codex",
+    "sourceCommit": "577e9d1b9404ed5fedf019fe33d874820e4f6452",
+    "completedAt": "2026-10-22T19:26:50.744013+00:00",
     "evidence": [
-      "docs/qa/rpg-2-star-ocean-the-second_ji-cheng_default-adoption_codex-closeout-v01_20261021-224827-742b5598.md",
-      "outputs/jpath33/adoption-20261021-224827-742b5598/rpg-2-star-ocean-the-second_ji-default_codex-proof_v01_20261021-224827-742b5598.json"
+      "docs/qa/rpg-2-star-ocean-the-second_jiang-lan_native-south_source-and-visual-verdict_unapproved-v01_20261022-152453-30bf0f7a.md",
+      "outputs/jiang37/root/rpg-2-star-ocean-the-second_jiang-lan_native-south_codex-closeout-proof_v01_20261022-152453-30bf0f7a.json"
     ],
-    "creatorDecisionOwner": "creator",
-    "productionAfter": 59.1,
-    "ordinaryAdoptionAuthorized": true,
-    "completedAt": "2026-10-22T02:51:07.948685+00:00"
+    "sourceFiles": [
+      "game/assets/characters/jiang-lan-native-south-v01/.gdignore",
+      "game/assets/characters/jiang-lan-native-south-v01/rpg-2-star-ocean-the-second_jiang-lan_south-idle-manifest_unapproved-v01_20261021-235007-e4a7c3d9.json",
+      "game/assets/characters/jiang-lan-native-south-v01/rpg-2-star-ocean-the-second_jiang-lan_south-idle-palette_unapproved-v01_20261021-235007-2b9f6d07.json",
+      "game/assets/characters/jiang-lan-native-south-v01/rpg-2-star-ocean-the-second_jiang-lan_south-idle-static-editable_unapproved-v01_20261021-235007-a3e07b14.pxo",
+      "game/assets/characters/jiang-lan-native-south-v01/rpg-2-star-ocean-the-second_jiang-lan_south-idle-static-editable_unapproved-v01_20261021-235007-c81d4e62.ora",
+      "game/assets/characters/jiang-lan-native-south-v01/rpg-2-star-ocean-the-second_jiang-lan_south-idle-static_unapproved-v01_20261021-235007-5f1c2a90.png"
+    ],
+    "captures": [
+      "outputs/jiang37/root/fit-v02/rpg-2-star-ocean-the-second_jiang-lan_source-fit-city-en_test-only-640-v01_20261022-152111-2df1e16c.png",
+      "outputs/jiang37/root/fit-v02/rpg-2-star-ocean-the-second_jiang-lan_source-fit-city-zh_test-only-640-v01_20261022-152111-2df1e16c.png",
+      "outputs/jiang37/root/fit-v02/rpg-2-star-ocean-the-second_jiang-lan_source-fit-ruins-en_test-only-640-v01_20261022-152111-2df1e16c.png",
+      "outputs/jiang37/root/fit-v02/rpg-2-star-ocean-the-second_jiang-lan_source-fit-ruins-zh_test-only-640-v01_20261022-152111-2df1e16c.png"
+    ],
+    "nativeCanvas": [
+      80,
+      112
+    ],
+    "logicalHeight": 48,
+    "roleLayers": 9,
+    "hiddenGuides": 1,
+    "paletteColours": 27,
+    "primaryFormat": "PXO",
+    "supplementalFormat": "ORA",
+    "nativeFlatExportsExact": true,
+    "nativeCleanApplicationGatePassed": false,
+    "guiSaveReopenVerified": false,
+    "artApproved": false,
+    "ordinaryDefaultAdopted": false,
+    "completeSpriteAccepted": false,
+    "humanPlaytestsAdded": 0,
+    "production": {
+      "before": 59.1,
+      "after": 59.2,
+      "changePercentagePoints": 0.1
+    },
+    "inspection": {
+      "before": 20.1,
+      "after": 20.6,
+      "changePercentagePoints": 0.5
+    },
+    "approval": {
+      "before": 7.8,
+      "after": 7.8,
+      "changePercentagePoints": 0
+    },
+    "next": "Produce missing west/north/east Jiang Lan statics from same approved identity and native source contract; defer cosmetic changes to already produced actors."
   },
   "latestImplementationBoundary": {
     "subject": "ji-cheng",
@@ -1644,6 +1647,44 @@
       ],
       "productionAfter": 58.6,
       "completedAt": "2026-10-22T01:26:07.053966+00:00"
+    },
+    {
+      "subject": "ji-cheng",
+      "kind": "complete-companion-playable-path",
+      "owner": "codex",
+      "coordinator": "codex",
+      "status": "completed",
+      "tasks": [
+        "content.char.ji-cheng.runtime-integration",
+        "content.combat.ji-cheng.combat-integration"
+      ],
+      "doneBoundary": "Real recruitment/control/exploration/normal encounter/eight combat actions/victory return/autosave reload and defeat-retry; ordinary default use separately authorized. Preview alone does not complete integration ledger tasks.",
+      "sourceDependencies": [
+        "c030f4f573c838d99efe4400a9b214884e32a69c",
+        "e4e586bc2574dbcd8dfb2014b042fd233bbdf22f"
+      ],
+      "protected": [
+        "existing female/male/Zhao/Liang ordinary defaults",
+        "mechanics/input/save schema",
+        "no persistent followers"
+      ],
+      "supportingTask": {
+        "owner": "deepseek",
+        "scope": "Bounded independent coexistence/refusal/save and existing driver checks; no new framework",
+        "status": "complete-canonical-unfiltered-check-passed"
+      },
+      "nextAction": "Complete outstanding technical checks on the ordinary integrated five-actor MVP; defer cosmetic refinements. Artistic approval and human playtests stay separate.",
+      "productionBefore": 58.9,
+      "implementationComplete": true,
+      "sourceCommit": "22d3e7f5e8a9d206d3ec6284b6a1c4d0b8b17651",
+      "evidence": [
+        "docs/qa/rpg-2-star-ocean-the-second_ji-cheng_default-adoption_codex-closeout-v01_20261021-224827-742b5598.md",
+        "outputs/jpath33/adoption-20261021-224827-742b5598/rpg-2-star-ocean-the-second_ji-default_codex-proof_v01_20261021-224827-742b5598.json"
+      ],
+      "creatorDecisionOwner": "creator",
+      "productionAfter": 59.1,
+      "ordinaryAdoptionAuthorized": true,
+      "completedAt": "2026-10-22T02:51:07.948685+00:00"
     },
     {
       "subject": "ji-cheng",
@@ -1900,5 +1941,66 @@
       "after": 7.8,
       "changePercentagePoints": 0
     }
+  },
+  "latestJiangLanNativeSouthProduction": {
+    "status": "produced-and-reviewed-source-only",
+    "task": "content.char.jiang-lan.static-south",
+    "reviewTask": "review.char.jiang-lan.static-south",
+    "producer": "claude",
+    "support": "deepseek-proposal-corrected-by-codex",
+    "inspectorAndIntegrator": "codex",
+    "sourceCommit": "577e9d1b9404ed5fedf019fe33d874820e4f6452",
+    "completedAt": "2026-10-22T19:26:50.744013+00:00",
+    "evidence": [
+      "docs/qa/rpg-2-star-ocean-the-second_jiang-lan_native-south_source-and-visual-verdict_unapproved-v01_20261022-152453-30bf0f7a.md",
+      "outputs/jiang37/root/rpg-2-star-ocean-the-second_jiang-lan_native-south_codex-closeout-proof_v01_20261022-152453-30bf0f7a.json"
+    ],
+    "sourceFiles": [
+      "game/assets/characters/jiang-lan-native-south-v01/.gdignore",
+      "game/assets/characters/jiang-lan-native-south-v01/rpg-2-star-ocean-the-second_jiang-lan_south-idle-manifest_unapproved-v01_20261021-235007-e4a7c3d9.json",
+      "game/assets/characters/jiang-lan-native-south-v01/rpg-2-star-ocean-the-second_jiang-lan_south-idle-palette_unapproved-v01_20261021-235007-2b9f6d07.json",
+      "game/assets/characters/jiang-lan-native-south-v01/rpg-2-star-ocean-the-second_jiang-lan_south-idle-static-editable_unapproved-v01_20261021-235007-a3e07b14.pxo",
+      "game/assets/characters/jiang-lan-native-south-v01/rpg-2-star-ocean-the-second_jiang-lan_south-idle-static-editable_unapproved-v01_20261021-235007-c81d4e62.ora",
+      "game/assets/characters/jiang-lan-native-south-v01/rpg-2-star-ocean-the-second_jiang-lan_south-idle-static_unapproved-v01_20261021-235007-5f1c2a90.png"
+    ],
+    "captures": [
+      "outputs/jiang37/root/fit-v02/rpg-2-star-ocean-the-second_jiang-lan_source-fit-city-en_test-only-640-v01_20261022-152111-2df1e16c.png",
+      "outputs/jiang37/root/fit-v02/rpg-2-star-ocean-the-second_jiang-lan_source-fit-city-zh_test-only-640-v01_20261022-152111-2df1e16c.png",
+      "outputs/jiang37/root/fit-v02/rpg-2-star-ocean-the-second_jiang-lan_source-fit-ruins-en_test-only-640-v01_20261022-152111-2df1e16c.png",
+      "outputs/jiang37/root/fit-v02/rpg-2-star-ocean-the-second_jiang-lan_source-fit-ruins-zh_test-only-640-v01_20261022-152111-2df1e16c.png"
+    ],
+    "nativeCanvas": [
+      80,
+      112
+    ],
+    "logicalHeight": 48,
+    "roleLayers": 9,
+    "hiddenGuides": 1,
+    "paletteColours": 27,
+    "primaryFormat": "PXO",
+    "supplementalFormat": "ORA",
+    "nativeFlatExportsExact": true,
+    "nativeCleanApplicationGatePassed": false,
+    "guiSaveReopenVerified": false,
+    "artApproved": false,
+    "ordinaryDefaultAdopted": false,
+    "completeSpriteAccepted": false,
+    "humanPlaytestsAdded": 0,
+    "production": {
+      "before": 59.1,
+      "after": 59.2,
+      "changePercentagePoints": 0.1
+    },
+    "inspection": {
+      "before": 20.1,
+      "after": 20.6,
+      "changePercentagePoints": 0.5
+    },
+    "approval": {
+      "before": 7.8,
+      "after": 7.8,
+      "changePercentagePoints": 0
+    },
+    "next": "Produce missing west/north/east Jiang Lan statics from same approved identity and native source contract; defer cosmetic changes to already produced actors."
   }
 }

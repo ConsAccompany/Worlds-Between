@@ -1,6 +1,14 @@
 # Open World Pixel RPG Implementation Progress
 
-Last updated: 2026-10-21
+Last updated: 2026-10-22
+
+## Latest completed production — 2026-10-22: Jiang Lan native south static
+
+Production **59.1% →59.2% (+0.1pp)**; content598→601/1881. Inspection **20.1% →20.6% (+0.5pp)**; one actual source-fit review completed. Creator approval **7.8% →7.8% (+0.0pp)**; frozen1183task baseline unchanged.
+
+Missing source frame is now80×112,48logical body,27colours,9genuine visible role layers+hidden guides, editable primaryPXO/supplementalORA, deterministic author/palette/manifest. Root rebuild, independent17source/negative-hash checks, exact native flat exports and four final EN/ZH bright/dark640×360 source-fit captures pass. Pixelorama application-clean gates **fail** with unchanged-control4/11diagnostic families; raw errors retained, GUI SaveAs/reopen unverified. Source production and performed visual review do not imply app-clean/art/motion/default approval. Narrow body and simple shading are post-MVP polish. All2378protected runtime/data/scene files remain exact. Source `577e9d1b9404ed5fedf019fe33d874820e4f6452`. [Verdict](../docs/qa/rpg-2-star-ocean-the-second_jiang-lan_native-south_source-and-visual-verdict_unapproved-v01_20261022-152453-30bf0f7a.md).
+
+Other three Jiang directions/idle/walk/combat remain missing. Four prepared scene defaults still await explicit authorization. Existing male/Liang contact QA remains blocked, without repeated cosmetic tuning. Complete accepted sprites0/52,accepted science visuals5/12,humanplays0/2 remain separate.
 
 ## Latest technical check — 2026-10-21: exploration contact gate remains blocked
 
