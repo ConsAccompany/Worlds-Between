@@ -1,8 +1,9 @@
 extends RefCounted
 
-# MVP scene default policy (PREPARED, NOT ADOPTED). Four default bits for the four unfinished
-# ledger tasks content.scene.{city,ruins,ruins-survey-inner,chicago-loop}.native-default. All four are
-# false: no creator default authorization exists, so the ordinary game is unchanged. Each consumer asks
+# MVP scene default policy. Chicago and Washington exterior/records common-style defaults are
+# creator-authorized MVP use, with final art approval separate. NYC default authorization remains pending.
+# Existing ledger tasks content.scene.{city,ruins,ruins-survey-inner,chicago-loop}.native-default.
+# Each consumer asks
 # this policy only after its own explicit override and CLI flags (and, for Washington and Chicago, after
 # every older candidate flag), so it is a fallback, never a precedence change.
 # Candidates (all UNAPPROVED art; switching a bit is a creator decision, not a test result):
@@ -10,7 +11,7 @@ extends RefCounted
 #             palette-reduced recomposition of an imported AI-generated reference plus native overlays;
 #             not final native accepted art.
 #   RUINS     Washington Capitol west v13 selector (scifi_exploration_area.tscn).
-#   RECORDS   Washington survey annex room 2 records chamber (survey_annex.gd, scifi.ruins room 2 only).
+#   RECORDS   Washington common-style STYLE48 records chamber (survey_annex.gd, scifi.ruins room2 only).
 #   CHICAGO   Chicago Loop State/Lake v05 selector (Loop .tscn).
 # Adoption = change exactly one `false` below to `true` (prepared one-line patches live under
 # outputs/sdef35). Rollback = change it back; no other file needs to change.
@@ -24,7 +25,7 @@ const CHICAGO := "chicago_loop"
 
 const CITY_V06_DEFAULT := false
 const RUINS_V13_DEFAULT := true
-const RECORDS_ROOM2_DEFAULT := false
+const RECORDS_ROOM2_DEFAULT := true
 const CHICAGO_V05_DEFAULT := true
 
 static var preview_override := {}

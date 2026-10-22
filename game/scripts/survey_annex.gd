@@ -469,7 +469,7 @@ func _yonkers_blocked(at: Vector2) -> bool:
 # STYLE48: the new background only in Washington room 2 with its flag (or the sdef35 RECORDS default once the
 # creator authorizes it); --wdc-records-chamber-v01 alone and every other destination/room keep the original plate.
 func _room_two_background() -> Texture2D:
-	if destination_id == "scifi.ruins" and room == 2 and (OS.get_cmdline_user_args().has(WDC_RECORDS_STYLE48_FLAG) or SceneDefaults35.default_on(SceneDefaults35.RECORDS)):
+	if destination_id == "scifi.ruins" and room == 2 and (OS.get_cmdline_user_args().has(WDC_RECORDS_STYLE48_FLAG) or (not OS.get_cmdline_user_args().has(WDC_ROOM_TWO_FLAG) and SceneDefaults35.default_on(SceneDefaults35.RECORDS))):
 		return WDC_RECORDS_STYLE48_BACKGROUND
 	return ROOM_TWO_BACKGROUND[destination_id]
 

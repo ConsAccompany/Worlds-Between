@@ -1,0 +1,121 @@
+{
+  "schema": "rpg-2-star-ocean-the-second_enemy-battle_default-scope-check_v01",
+  "status": "PASS",
+  "ok": true,
+  "normalization": "UTF-8 strict; CRLF and lone CR normalized to LF; hashes are over LF text",
+  "source_paths": {
+    "original": "C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\max0840-sentry-sync\\outputs\\enemy49\\rpg-2-star-ocean-the-second_enemy-battle_default-input-snapshot_v01_20261022-191350-b9786fd1.gd",
+    "candidate": "C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\max0840-sentry-sync\\game\\scripts\\battle_arena.gd"
+  },
+  "hashes": {
+    "original_sha256_lf": "c9c01b86589caffe57b63c33c1d8428f2ed7b414e700ceaac046089ed70ff543",
+    "candidate_sha256_lf": "e10638b75ba33be277fc8e47a15179aa13a5d703bc5f1721bb9a938000a4009c",
+    "original_bytes_lf": 85760,
+    "candidate_bytes_lf": 86030
+  },
+  "checks": [
+    {
+      "id": "inputs_are_lf_text",
+      "status": "PASS",
+      "detail": "both snapshots are non-empty UTF-8 text; CRLF/lone CR normalized to LF"
+    },
+    {
+      "id": "original_has_no_default_consts",
+      "status": "PASS",
+      "detail": "original source contains neither SENTRY_MVP_DEFAULT nor PATROL_MVP_DEFAULT"
+    },
+    {
+      "id": "original_has_exact_anchors_and_enabled_methods",
+      "status": "PASS",
+      "detail": "one sentry anchor, one patrol anchor, and the two override-first enabled methods; shape as expected"
+    },
+    {
+      "id": "candidate_equals_exact_authorized_transformation",
+      "status": "PASS",
+      "detail": "candidate equals original plus exactly: comment+const after each CLI_FLAG, and 'existing flag or MVP_DEFAULT' in the two enabled returns; no other byte differs"
+    },
+    {
+      "id": "new_defaults_are_false_and_unique",
+      "status": "PASS",
+      "detail": "each new MVP default is declared once and stays false (activation is not authorized)"
+    },
+    {
+      "id": "new_defaults_have_only_declaration_and_one_return_use",
+      "status": "PASS",
+      "detail": "each default appears exactly twice: its false declaration and one enabled-return tail"
+    },
+    {
+      "id": "enabled_methods_override_priority_and_fallback",
+      "status": "PASS",
+      "detail": "both methods keep 'override >= 0 -> override == 1' first, then existing CLI flag or new false default"
+    },
+    {
+      "id": "unchanged_remainder_equals_original_exactly",
+      "status": "PASS",
+      "detail": "removing only the two authorized insertions and restoring the two old returns reproduces the original exactly: ENEMIES stats, hitboxes/telegraph timing, _finish_battle and result/presentation logic are unchanged"
+    },
+    {
+      "id": "enemies_block_exact",
+      "status": "PASS",
+      "detail": "the whole const ENEMIES block (names, max_hp, damage, speed, windup, cooldown, color) is byte-identical"
+    },
+    {
+      "id": "enemies_expected_max_hp",
+      "status": "PASS",
+      "detail": "patrol max_hp 64 and sentry max_hp 96 remain present"
+    },
+    {
+      "id": "three_negative_copies_refused",
+      "status": "PASS",
+      "detail": "in-memory copies with changed max_hp, flipped SENTRY_MVP_DEFAULT, or dropped patrol flag condition are all refused"
+    },
+    {
+      "id": "inputs_not_mutated",
+      "status": "PASS",
+      "detail": "re-read after validation is byte-identical to the hashed normalized sources"
+    }
+  ],
+  "negative_tests": [
+    {
+      "name": "max_hp_changed",
+      "description": "ENEMIES patrol max_hp 64 -> 65",
+      "refused": true,
+      "failed_checks": [
+        "candidate_equals_exact_authorized_transformation",
+        "unchanged_remainder_equals_original_exactly",
+        "enemies_block_exact",
+        "enemies_expected_max_hp"
+      ]
+    },
+    {
+      "name": "sentry_default_flipped_true",
+      "description": "SENTRY_MVP_DEFAULT false -> true",
+      "refused": true,
+      "failed_checks": [
+        "candidate_equals_exact_authorized_transformation",
+        "new_defaults_are_false_and_unique",
+        "new_defaults_have_only_declaration_and_one_return_use",
+        "unchanged_remainder_equals_original_exactly"
+      ]
+    },
+    {
+      "name": "patrol_flag_condition_dropped",
+      "description": "patrol enabled return loses the existing CLI-flag condition",
+      "refused": true,
+      "failed_checks": [
+        "candidate_equals_exact_authorized_transformation",
+        "enabled_methods_override_priority_and_fallback",
+        "unchanged_remainder_equals_original_exactly"
+      ]
+    }
+  ],
+  "authorization": {
+    "creator_activation_authorized": "not inferred",
+    "final_art_approved": "not inferred"
+  },
+  "limitations": [
+    "text-only scope check; GDScript is not evaluated or executed",
+    "passing proves this snapshot's byte-level preparation scope, not gameplay or art approval"
+  ],
+  "python": "3.12.14"
+}

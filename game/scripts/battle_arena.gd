@@ -34,6 +34,8 @@ const ARENA_FLOOR_Y := 272.0
 # sentry_v2_override = 1 before the battle scene loads. Off by default, so the sentry keeps the placeholder block.
 # Visual only: stats, reach, AI, timers and positions are the same with the pilot on or off.
 const SENTRY_V2_CLI_FLAG := "--sentry-v2-pilot"
+# Prepared MVP switch; separate creator authorization is required before true.
+const SENTRY_MVP_DEFAULT := false
 const SENTRY_V2_ART_APPROVED := false
 const SENTRY_V2_SPRITE_ACCEPTED := false
 const ENEMY_SPRITE_PILOTS := {
@@ -62,6 +64,8 @@ const ENEMY_SPRITE_ANIMATIONS := {
 # so the patrol keeps the placeholder block and the loader script is never loaded. It is independent of the sentry flag.
 # Any package, file or type defect keeps the placeholder. Visual only: stats, reach, AI, timers and positions are unchanged.
 const PATROL_ANIMATION_CLI_FLAG := "--patrol-battle-animation-pilot"
+# Prepared MVP switch; separate creator authorization is required before true.
+const PATROL_MVP_DEFAULT := false
 const PATROL_ANIMATION_ART_APPROVED := false
 const PATROL_ANIMATION_LOADER := "res://assets/enemies/patrol-anim-v01/rpg-2-star-ocean-the-second_patrol_battle-animation-loader_v01_20261019-194007-a4b10a85.gd"
 const PATROL_ANIMATION_PACKAGE := "res://assets/enemies/patrol-anim-v01/rpg-2-star-ocean-the-second_patrol_battle-animation-runtime-package_v01_20261019-194007-a4b10a85.json"
@@ -268,13 +272,13 @@ var result_button: Button
 static func patrol_animation_enabled() -> bool:
 	if patrol_animation_override >= 0:
 		return patrol_animation_override == 1
-	return OS.get_cmdline_user_args().has(PATROL_ANIMATION_CLI_FLAG)
+	return OS.get_cmdline_user_args().has(PATROL_ANIMATION_CLI_FLAG) or PATROL_MVP_DEFAULT
 
 
 static func sentry_v2_enabled() -> bool:
 	if sentry_v2_override >= 0:
 		return sentry_v2_override == 1
-	return OS.get_cmdline_user_args().has(SENTRY_V2_CLI_FLAG)
+	return OS.get_cmdline_user_args().has(SENTRY_V2_CLI_FLAG) or SENTRY_MVP_DEFAULT
 
 
 static func battle_backdrop_enabled() -> bool:

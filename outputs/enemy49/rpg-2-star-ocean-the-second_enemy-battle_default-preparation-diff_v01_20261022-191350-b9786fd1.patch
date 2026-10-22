@@ -1,0 +1,14 @@
+--- a/game/scripts/battle_arena.gd
++++ b/game/scripts/battle_arena.gd
+@@ -36,0 +37,2 @@
++# Prepared MVP switch; separate creator authorization is required before true.
++const SENTRY_MVP_DEFAULT := false
+@@ -64,0 +67,2 @@
++# Prepared MVP switch; separate creator authorization is required before true.
++const PATROL_MVP_DEFAULT := false
+@@ -271 +275 @@
+-	return OS.get_cmdline_user_args().has(PATROL_ANIMATION_CLI_FLAG)
++	return OS.get_cmdline_user_args().has(PATROL_ANIMATION_CLI_FLAG) or PATROL_MVP_DEFAULT
+@@ -277 +281 @@
+-	return OS.get_cmdline_user_args().has(SENTRY_V2_CLI_FLAG)
++	return OS.get_cmdline_user_args().has(SENTRY_V2_CLI_FLAG) or SENTRY_MVP_DEFAULT
