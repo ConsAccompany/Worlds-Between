@@ -37,7 +37,7 @@ func _ready() -> void:
 		target = V04Selector.V03R1Selector.V03Selector.V03_SCENE
 	elif v05_override != 0 and SceneDefaults35.default_on(SceneDefaults35.CHICAGO):
 		# MVP default fallback after every explicit flag (sdef35 policy; false until the creator authorizes it).
-		target = V05_SCENE
+		target = "res://scenes/style42/rpg-2-star-ocean-the-second_chicago-loop-style42_state-lake-scene_unapproved-v01_20261022-161615-69eb4eee.tscn"
 	if target == "":
 		super()
 		return

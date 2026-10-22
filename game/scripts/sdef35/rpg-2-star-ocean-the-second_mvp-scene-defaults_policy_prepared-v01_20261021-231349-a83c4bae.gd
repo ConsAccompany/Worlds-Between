@@ -25,7 +25,7 @@ const CHICAGO := "chicago_loop"
 const CITY_V06_DEFAULT := false
 const RUINS_V13_DEFAULT := false
 const RECORDS_ROOM2_DEFAULT := false
-const CHICAGO_V05_DEFAULT := false
+const CHICAGO_V05_DEFAULT := true
 
 static var preview_override := {}
 

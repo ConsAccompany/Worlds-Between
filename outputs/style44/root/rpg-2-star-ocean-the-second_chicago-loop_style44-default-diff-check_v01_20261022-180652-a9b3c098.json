@@ -1,0 +1,51 @@
+{
+  "actual_sha256": {
+    "policy": "e9dc09f7f484cf4c6c8d9c11d16768c64a63bc25988cbdf6b2b624db79d382d9",
+    "selector": "4af8385facf2db4911327e2a7676b3eef0265517641121f32600e2a3eaa6a5c5"
+  },
+  "base_commit": "b92f3f4f98b0a71c53893ea689f51c8165275139",
+  "baseline_sha256": {
+    "policy": "42abd0badb091aa56bd157188f9fda1f0dad94cb2a30275e38f63becb3f9ddf0",
+    "selector": "487f5e8f99b93d5df3606a8b35d923f1d7f297001f6572c78b77be647e3ae47a"
+  },
+  "checks": {
+    "negative_fixtures": {
+      "explicit_flag_target_changed": {
+        "errors": [
+          "selector_not_exact_one_default_target_replacement",
+          "earlier_explicit_targets_changed"
+        ],
+        "ok": false,
+        "valid_control_passed": true
+      },
+      "other_bit_true": {
+        "errors": [
+          "policy_not_exact_chicago_false_to_true",
+          "CITY_V06_DEFAULT_not_exactly_false"
+        ],
+        "ok": false,
+        "valid_control_passed": true
+      },
+      "unexpected_extra_code": {
+        "errors": [
+          "selector_not_exact_one_default_target_replacement"
+        ],
+        "ok": false,
+        "valid_control_passed": true
+      }
+    },
+    "negative_fixtures_return_false": true,
+    "two_file_exact": true
+  },
+  "errors": [],
+  "limitations": [
+    "No runtime, rendering, Godot, packaging, or gameplay claim; unrelated dirty sources/imports outside the two targets are ignored."
+  ],
+  "manifest": "outputs/style42/rpg-2-star-ocean-the-second_chicago-loop-style42_native-manifest_unapproved-v01_20261022-161615-69eb4eee.json",
+  "policy": "game/scripts/sdef35/rpg-2-star-ocean-the-second_mvp-scene-defaults_policy_prepared-v01_20261021-231349-a83c4bae.gd",
+  "scene": "res://scenes/style42/rpg-2-star-ocean-the-second_chicago-loop-style42_state-lake-scene_unapproved-v01_20261022-161615-69eb4eee.tscn",
+  "scope": "source-integrity only",
+  "selector": "game/scripts/rpg-2-star-ocean-the-second_chicago-loop_state-lake-scene-opt-in-selector_unapproved-v05_20261017-234337-84862412.gd",
+  "status": "PASS",
+  "tool": "style44-default-diff-check"
+}
