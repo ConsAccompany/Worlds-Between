@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-22T00:03:34.906798+00:00",
+  "updatedAt": "2026-10-22T00:21:07.630732+00:00",
   "purpose": "Operating queue and worktree ownership; no progress points or account details",
   "workflow": "docs/workflow.md",
   "canonicalLedger": "outputs/rpg-2-star-ocean-the-second_production-completion_task-ledger_v01_20261018-140533-3de52073.json",
@@ -1319,17 +1319,17 @@
     }
   ],
   "activeDualProviderBatch": {
-    "primary": "Zhao companion exploration/combat playable integration",
-    "status": "opt-in-readiness-completed",
+    "primary": "liang-combat-source",
+    "status": "completed-source-boundary",
     "owner": "claude",
-    "support": "DeepSeek malformed-package/rollback checks; Codex mechanical parity and independent integration",
-    "base": "b8aef915702e59f1486db6c005d3208f3ffc9b2a",
+    "support": "deepseek",
+    "base": "96e1a1a860e9022541bb69c4930476f369db8d7d",
     "ordinaryAdoptionAuthorized": false,
     "sourceArtFrozen": true,
-    "sourceCommit": "4be53683e9182eb2154fc2e8c296b634fa016222",
+    "sourceCommit": "8fa0dd279891617badf32502b96cf41fdf2fb895",
     "evidence": [
-      "docs/qa/rpg-2-star-ocean-the-second_zhao-playable-path_opt-in-readiness-closeout_v01_20261021-225457-642566e5.md",
-      "outputs/zpath27/root/rpg-2-star-ocean-the-second_zhao-path_root-readiness-proof_v01_20261021-225417-3905714f.json"
+      "docs/qa/rpg-2-star-ocean-the-second_liang-xu_combat-source_codex-closeout_unapproved-v01_20261021-201856-3d4f380f.md",
+      "outputs/lcombat29/root/20261021-201507-427df446/rpg-2-star-ocean-the-second_liang-combat_root-production-proof_v01_20261021-201856-3d4f380f.json"
     ]
   },
   "characterSpriteStyleDirection": {
@@ -1412,7 +1412,8 @@
       "required integration and targeted validation"
     ],
     "scoringUnchanged": true,
-    "approvalsRemainSeparate": true
+    "approvalsRemainSeparate": true,
+    "next": "Liang complete playable companion integration; refinements deferred."
   },
   "postMvpRefinements": {
     "status": "deferred-by-creator",
@@ -1426,81 +1427,66 @@
   },
   "nextProductionTask": {
     "subject": "liang-xu",
-    "kind": "four-direction-exploration-source-production",
+    "kind": "combat-static-eight-actions-source",
     "owner": "claude",
     "coordinator": "codex",
     "status": "done",
     "tasks": [
-      "content.char.liang-xu.static-west",
-      "content.char.liang-xu.static-north",
-      "content.char.liang-xu.static-east",
-      "content.char.liang-xu.idle-anim",
-      "content.char.liang-xu.walk-south",
-      "content.char.liang-xu.walk-west",
-      "content.char.liang-xu.walk-north",
-      "content.char.liang-xu.walk-east"
+      "content.combat.liang-xu.combat-static",
+      "content.combat.liang-xu.combat-actions"
     ],
-    "doneBoundary": "Complete four-direction editable source banks, runtime-compatible files, deterministic/native/contact checks and actual host evidence. No ordinary-default adoption or art acceptance inferred.",
-    "protected": [
-      "existing south neutral",
-      "all previous character sources and defaults",
-      "no followers or canon changes"
-    ],
+    "doneBoundary": "Complete editable native static and eight action sources, actor-only runtime-compatible set, independent source/native and actual arena renderer checks; no ordinary adoption or approval.",
     "supportingTask": {
       "owner": "deepseek",
-      "scope": "Independent reusable source-bank negative contract check; new tool/output paths only",
-      "status": "done-and-independently-rerun"
+      "scope": "Read-only independent source/index validation and adversarial fixtures; new tool and output paths",
+      "status": "done-independent-root-rerun-strict-snapshot"
     },
-    "nextAction": "Missing Liang battle static/eight actions before normal companion integration; refinements deferred.",
-    "sourceCommit": "8d4563e09ab1af867f0bd742a48b0ed7f9a67205",
-    "completedAt": "2026-10-22T00:03:34.906798+00:00",
-    "evidence": [
-      "docs/qa/rpg-2-star-ocean-the-second_liang-xu_exploration-source_codex-closeout_unapproved-v01_20261021-200105-1c24409b.md",
-      "outputs/lexplore28/root/20261021-195814-aa1fa26c/rpg-2-star-ocean-the-second_liang-xu_source-set_codex-closeout-proof_20261021-200028-67e6fdec.json"
+    "protected": [
+      "runtime defaults",
+      "combat mechanics",
+      "gender-unspecified canon",
+      "all existing approved sources"
     ],
-    "productionBefore": 56.8,
-    "productionAfter": 57.5
+    "nextAction": "Finish Liang ordinary companion recruitment/control/battle-return/save integration; new default use remains separately authorized.",
+    "sourceCommit": "8fa0dd279891617badf32502b96cf41fdf2fb895",
+    "completedAt": "2026-10-22T00:21:07.630732+00:00",
+    "evidence": [
+      "docs/qa/rpg-2-star-ocean-the-second_liang-xu_combat-source_codex-closeout_unapproved-v01_20261021-201856-3d4f380f.md",
+      "outputs/lcombat29/root/20261021-201507-427df446/rpg-2-star-ocean-the-second_liang-combat_root-production-proof_v01_20261021-201856-3d4f380f.json"
+    ],
+    "productionBefore": 57.5,
+    "productionAfter": 57.8
   },
   "lastCompletedProductionTask": {
-    "subject": "zhao-ling",
-    "kind": "playable-runtime-integration",
-    "owner": "codex",
+    "subject": "liang-xu",
+    "kind": "combat-static-eight-actions-source",
+    "owner": "claude",
     "coordinator": "codex",
     "status": "done",
     "tasks": [
-      "content.char.zhao-ling.runtime-integration",
-      "content.combat.zhao-ling.combat-integration"
+      "content.combat.liang-xu.combat-static",
+      "content.combat.liang-xu.combat-actions"
     ],
-    "doneBoundary": "One bounded exploration/combat companion path, actual normal gameplay and rollback evidence; prepare adoption before requesting default authorization",
-    "protected": [
-      "hero defaults and game mechanics",
-      "no persistent companion followers",
-      "existing simple travel and saves"
-    ],
-    "defaultAdoptionAndArtApprovalSeparate": true,
-    "evidence": [
-      "docs/qa/rpg-2-star-ocean-the-second_zhao-ling_mvp-default-adoption_closeout_20261021-191203-19d8117b.md",
-      "outputs/zpath27/adopt-20261021-190923-68fdb2b0/rpg-2-star-ocean-the-second_zhao-ling_default-adoption_root-proof_20261021-191114-4ee445f3.json"
-    ],
-    "creatorFeedback": {
-      "at": "2026-10-21T23:04:38.937163+00:00",
-      "quote": "能看到，动作还好，人物精灵需要精修",
-      "visibilityConfirmed": true,
-      "motionFeedback": "Creator says motion is okay; full formal motion acceptance not inferred.",
-      "spriteFeedback": "Needs refinement; deferred under the existing MVP-first creator instruction.",
-      "defaultAuthorizationGranted": false,
-      "finalArtApproved": false,
-      "evidenceCommit": "3217d4046dd95bfc3e1e1887b84bba676995b592"
+    "doneBoundary": "Complete editable native static and eight action sources, actor-only runtime-compatible set, independent source/native and actual arena renderer checks; no ordinary adoption or approval.",
+    "supportingTask": {
+      "owner": "deepseek",
+      "scope": "Read-only independent source/index validation and adversarial fixtures; new tool and output paths",
+      "status": "done-independent-root-rerun-strict-snapshot"
     },
-    "nextAction": "Default integration completed; select the next unfinished MVP playable dependency. Sprite refinements stay post-MVP.",
-    "sourceCommit": "b99ce437673ee04d44e3bfb297e14f9c133fcfc9",
-    "completedAt": "2026-10-21T23:12:39.384867+00:00",
-    "defaultAuthorization": {
-      "at": "2026-10-21T23:12:39.384867+00:00",
-      "quote": "先设为 MVP 默认，精修后置（推荐）",
-      "scope": "ordinary MVP default use only",
-      "finalArtApproved": false,
-      "finalMotionApproved": false
-    }
+    "protected": [
+      "runtime defaults",
+      "combat mechanics",
+      "gender-unspecified canon",
+      "all existing approved sources"
+    ],
+    "nextAction": "Finish Liang ordinary companion recruitment/control/battle-return/save integration; new default use remains separately authorized.",
+    "sourceCommit": "8fa0dd279891617badf32502b96cf41fdf2fb895",
+    "completedAt": "2026-10-22T00:21:07.630732+00:00",
+    "evidence": [
+      "docs/qa/rpg-2-star-ocean-the-second_liang-xu_combat-source_codex-closeout_unapproved-v01_20261021-201856-3d4f380f.md",
+      "outputs/lcombat29/root/20261021-201507-427df446/rpg-2-star-ocean-the-second_liang-combat_root-production-proof_v01_20261021-201856-3d4f380f.json"
+    ],
+    "productionBefore": 57.5,
+    "productionAfter": 57.8
   }
 }

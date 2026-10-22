@@ -2,7 +2,15 @@
 
 Last updated: 2026-10-21
 
-## Latest completed batch — 2026-10-21: Liang exploration source set
+## Latest completed batch — 2026-10-21: Liang combat source set
+
+Production **57.5% → 57.8% (+0.3 pp)**; content 548 → 559/1881. Inspection **18.1% → 18.1% (+0.0 pp)**; creator approval **7.8% → 7.8% (+0.0 pp)**. Two existing source-production tasks complete; frozen weights and denominators unchanged.
+
+Combat static plus all eight clips are produced: 23 runtime cells and a separate still, 24 editable PXO/ORA/PNG packages. Source checks 295/295, independent composition 984/984, runtime contract 180/180, source/index binding 38/38, existing eight malformed cases and two new isolated source/index refusals pass. Native exports 24/24 flat and five representative split packages match exactly. The 116 known shader-diagnostic entries remain disclosed; clean-app and GUI Save As/reopen gates are not claimed. Actual scripted source probes in EN30/ZH60 arena windows pass 82/82 each with 16 captures; 369 protected files are unchanged. Mixed-party proportion, full motion inspection and artistic acceptance remain pending. Source `8fa0dd279891617badf32502b96cf41fdf2fb895`. [Closeout](qa/rpg-2-star-ocean-the-second_liang-xu_combat-source_codex-closeout_unapproved-v01_20261021-201856-3d4f380f.md).
+
+Next: finish Liang recruitment/control/battle-return/save companion integration from the completed exploration and combat sources. Ordinary default adoption remains separately authorized. Refinements remain post-MVP.
+
+## Prior completed batch — 2026-10-21: Liang exploration source set
 
 Production **56.8% →57.5% (+0.7pp)**; content528→548/1881. Inspection **18.1% →18.1% (+0.0pp)**; creator approval **7.8% →7.8% (+0.0pp)**. Eight existing production tasks complete; no baseline/denominator change.
 
