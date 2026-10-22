@@ -30,12 +30,12 @@ const HERO_COMBAT_ANCHOR := Vector2(30, 73)
 const HERO_COMBAT_ACTION_DURATION := {"attack": 0.39, "hit": 0.24, "skill": 0.45, "down": 0.30}
 const ARENA_FLOOR_Y := 272.0
 # M8 sentry automaton sprite + animation v2 pilot (UNAPPROVED; art acceptance 0). The creator approved v2 as the action
-# direction baseline only, not the sprite or its art. Opt-in only: launch with `-- --sentry-v2-pilot`, or set
-# sentry_v2_override = 1 before the battle scene loads. Off by default, so the sentry keeps the placeholder block.
+# direction baseline; ordinary MVP default use was separately authorized. Set sentry_v2_override = 0
+# to restore the placeholder; the existing opt-in flag and positive override remain supported.
 # Visual only: stats, reach, AI, timers and positions are the same with the pilot on or off.
 const SENTRY_V2_CLI_FLAG := "--sentry-v2-pilot"
-# Prepared MVP switch; separate creator authorization is required before true.
-const SENTRY_MVP_DEFAULT := false
+# Creator-authorized MVP default use; final art and full-motion acceptance remain separate.
+const SENTRY_MVP_DEFAULT := true
 const SENTRY_V2_ART_APPROVED := false
 const SENTRY_V2_SPRITE_ACCEPTED := false
 const ENEMY_SPRITE_PILOTS := {
@@ -59,13 +59,13 @@ const ENEMY_SPRITE_ANIMATIONS := {
 		"front_states": ["strike"],
 	},
 }
-# Patrol machine battle animation pilot v01 (UNAPPROVED; art acceptance 0). Opt-in only: launch with
-# `-- --patrol-battle-animation-pilot`, or set patrol_animation_override = 1 before the battle scene loads. Off by default,
-# so the patrol keeps the placeholder block and the loader script is never loaded. It is independent of the sentry flag.
+# Patrol machine animation v01: creator-authorized ordinary MVP default use; final art unapproved.
+# Set patrol_animation_override = 0 to restore the placeholder; the existing opt-in flag and positive override
+# remain supported independently of the sentry override.
 # Any package, file or type defect keeps the placeholder. Visual only: stats, reach, AI, timers and positions are unchanged.
 const PATROL_ANIMATION_CLI_FLAG := "--patrol-battle-animation-pilot"
-# Prepared MVP switch; separate creator authorization is required before true.
-const PATROL_MVP_DEFAULT := false
+# Creator-authorized MVP default use; final art and full-motion acceptance remain separate.
+const PATROL_MVP_DEFAULT := true
 const PATROL_ANIMATION_ART_APPROVED := false
 const PATROL_ANIMATION_LOADER := "res://assets/enemies/patrol-anim-v01/rpg-2-star-ocean-the-second_patrol_battle-animation-loader_v01_20261019-194007-a4b10a85.gd"
 const PATROL_ANIMATION_PACKAGE := "res://assets/enemies/patrol-anim-v01/rpg-2-star-ocean-the-second_patrol_battle-animation-runtime-package_v01_20261019-194007-a4b10a85.json"
