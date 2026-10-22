@@ -40,7 +40,7 @@ func run() -> void:
  if args.size()>4 and not args[4].begins_with("--"):
   source_actor=args[4]
   output_subject=source_actor+"-exploration"
- if not source_actor in ["protagonist-male","zhao-ling","liang-xu"]:
+ if not source_actor in ["protagonist-male","zhao-ling","liang-xu","ji-cheng"]:
   print("MEXP23_BAD_ACTOR");quit(2);return
  DirAccess.make_dir_recursive_absolute(out)
  root.size=Vector2i(640,360)
