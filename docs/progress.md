@@ -2,6 +2,10 @@
 
 Last updated: 2026-10-21
 
+## Latest technical check — 2026-10-21: exploration contact gate remains blocked
+
+Production **59.1% →59.1% (+0.0pp)**; inspection **20.1% →20.1% (+0.0pp)**; creator approval **7.8% →7.8% (+0.0pp)**. No runtime changes. Current male ordinary host reproduces3.6logical px planted-foot drift per40ms because the50px/s source stride and140px/s runtime speed differ. Liang moving-source geometry has the same gap; its ordinary NPC stays stationary, with no follower. Source/bridge support and corruption refusal pass, but the full frames/anchors/directions/slip gates are **not passed**. Unaccepted producer adapter/parser assertions remain archived; no false game defects inferred from them. Refinement deferred; continue missing native content. [Verdict](../docs/qa/rpg-2-star-ocean-the-second_male-liang_explore-technical-check_blocked-verdict_v01_20261021-234911-bd5a14a9.md).
+
 ## Latest completed inspection — 2026-10-21: four ordinary-default combat sets
 
 Production **59.1% →59.1% (+0.0 pp)**; inspection **18.1% →20.1% (+2.0 pp)**; creator approval **7.8% →7.8% (+0.0 pp)**. Four existing technical tasks complete;41/204inspection points, no new scoring buckets or art acceptance.

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-22T03:35:23.393765+00:00",
+  "updatedAt": "2026-10-22T03:49:35.659535+00:00",
   "purpose": "Operating queue and worktree ownership; no progress points or account details",
   "workflow": "docs/workflow.md",
   "canonicalLedger": "outputs/rpg-2-star-ocean-the-second_production-completion_task-ledger_v01_20261018-140533-3de52073.json",
@@ -1319,19 +1319,20 @@
     }
   ],
   "activeDualProviderBatch": {
-    "primary": "mvp-scene-default-preparation",
+    "primary": "mvp-exploration-runtime-checks",
     "owner": "claude",
     "support": "deepseek",
-    "status": "closed-awaiting-creator-decision",
-    "base": "15695aa8bb5802b57c374e9344a6fcaae03d55c9",
-    "worktrees": {
-      "claude": "C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\needle35\\cl-scenes",
-      "deepseek": "C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\needle31\\ds-jcheck"
-    },
-    "sourceCommit": "90e88f10447f1a774fe68ff404d9290227d91d2c",
-    "finishedAt": "2026-10-22T03:35:23.393765+00:00",
-    "claudeStatus": "completed",
-    "deepseekStatus": "stopped-coordinator-support-proposal-retained-and-corrected"
+    "status": "closed-technical-gate-not-passed",
+    "base": "66ae88e706d57d029a247dcba64a963066673683",
+    "writeScope": "new xcheck36 tests/outputs only",
+    "taskIds": [
+      "qa.char.protagonist-male.runtime-set-check",
+      "qa.char.liang-xu.runtime-set-check"
+    ],
+    "sourceCommit": "209337f184549f87c5b45fd56a7d361bf7a0bb55",
+    "finishedAt": "2026-10-22T03:49:35.659535+00:00",
+    "claudeStatus": "bounded-deadline-source-proposal-unaccepted",
+    "deepseekStatus": "source-only-pass-root-rerun"
   },
   "characterSpriteStyleDirection": {
     "reference": "Sea of Stars",
@@ -1847,5 +1848,57 @@
       "changePercentagePoints": 0
     },
     "provenanceCaveat": "City Hall v06 includes generated-reference-derived underpainting and native overlays; not wholly hand-authored pixel art."
+  },
+  "nextInspectionTask": {
+    "status": "blocked-existing-contact-mismatch",
+    "tasks": [
+      "qa.char.protagonist-male.runtime-set-check",
+      "qa.char.liang-xu.runtime-set-check"
+    ],
+    "owner": "claude",
+    "support": "deepseek",
+    "inspectorAndIntegrator": "codex",
+    "startedAt": "2026-10-22T03:38:07.940820+00:00",
+    "completion": "current ordinary actors, full direction/frame/anchor/stop contact checks; preserve honest slip limitations",
+    "evidence": [
+      "docs/qa/rpg-2-star-ocean-the-second_male-liang_explore-technical-check_blocked-verdict_v01_20261021-234911-bd5a14a9.md",
+      "outputs/xcheck36/root/rpg-2-star-ocean-the-second_male-liang_runtime-contact_verdict-not-passed_v01_20261021-234911-bd5a14a9.json"
+    ],
+    "sourceCommit": "209337f184549f87c5b45fd56a7d361bf7a0bb55",
+    "nextAction": "No repeat audit: keep precise foot-contact gap for deferred coherent gait refinement."
+  },
+  "latestExplorationRuntimeTechnicalCheck": {
+    "status": "not-passed-refinement-deferred",
+    "tasks": [
+      "qa.char.protagonist-male.runtime-set-check",
+      "qa.char.liang-xu.runtime-set-check"
+    ],
+    "sourceCommit": "209337f184549f87c5b45fd56a7d361bf7a0bb55",
+    "completedAt": "2026-10-22T03:49:35.659535+00:00",
+    "evidence": [
+      "docs/qa/rpg-2-star-ocean-the-second_male-liang_explore-technical-check_blocked-verdict_v01_20261021-234911-bd5a14a9.md",
+      "outputs/xcheck36/root/rpg-2-star-ocean-the-second_male-liang_runtime-contact_verdict-not-passed_v01_20261021-234911-bd5a14a9.json"
+    ],
+    "runtimeChanged": false,
+    "sourceSupportPass": true,
+    "fullTechnicalGatePass": false,
+    "ordinaryMaleFootDriftLogicalPer40ms": 3.5999755859375,
+    "ordinaryLiangIsStationary": true,
+    "next": "Missing Jiang Lan native south static from approved identity sheet; no further cosmetic gait search now",
+    "production": {
+      "before": 59.1,
+      "after": 59.1,
+      "changePercentagePoints": 0
+    },
+    "inspection": {
+      "before": 20.1,
+      "after": 20.1,
+      "changePercentagePoints": 0
+    },
+    "approval": {
+      "before": 7.8,
+      "after": 7.8,
+      "changePercentagePoints": 0
+    }
   }
 }
