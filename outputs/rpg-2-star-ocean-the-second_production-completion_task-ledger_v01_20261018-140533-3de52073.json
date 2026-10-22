@@ -2,7 +2,7 @@
   "id": "rpg-2-star-ocean-the-second_production-completion_v01",
   "schemaVersion": 2,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-22T23:26:19Z",
+  "updatedAt": "2026-10-22T23:40:42Z",
   "zh": "制作完成度任务台账：衡量已完成的工作量（编码 40% + 内容 60%）；检查／审查与创作者批准分开计量，均不改变制作分；免除的审查不算已执行的工作；运营任务列出负责方但不计百分比。",
   "en": "Production-completion task ledger: measures work done (coding 40% + content 60%); inspection/review and creator approval are separate meters and never change production credit; waived reviews are not performed work; operations tasks list owners but carry no percentage.",
   "brief": "docs/rpg-2-star-ocean-the-second_production-completion_bilingual-brief_v01_20261018-140533-3ea2a621.md",
@@ -1060,8 +1060,8 @@
     "production": {
       "zh": "制作完成度",
       "en": "Production completion",
-      "percent": 60.1,
-      "percentLabel": "60.1%",
+      "percent": 60.2,
+      "percentLabel": "60.2%",
       "formula": "round1(40 * codingDonePoints/codingTotalPoints + 60 * contentDonePoints/contentTotalPoints)",
       "coding": {
         "done": 111,
@@ -1072,12 +1072,12 @@
         "tasksDone": 23
       },
       "content": {
-        "done": 629,
+        "done": 633,
         "total": 1881,
-        "percent": 33.4,
+        "percent": 33.7,
         "weight": 60,
         "tasks": 715,
-        "tasksDone": 204
+        "tasksDone": 206
       }
     },
     "inspection": {
@@ -1142,11 +1142,11 @@
         "waivedPoints": 0
       },
       "content": {
-        "done": 629,
+        "done": 633,
         "total": 1881,
-        "percent": 33.4,
+        "percent": 33.7,
         "tasks": 715,
-        "tasksDone": 204,
+        "tasksDone": 206,
         "waivedTasks": 0,
         "waivedPoints": 0
       },
@@ -1225,12 +1225,11 @@
         "tasks": 225,
         "operationsTasks": 2,
         "points": 289,
-        "pointsDone": 178,
+        "pointsDone": 182,
         "byStatus": {
-          "done": 112,
+          "done": 114,
           "todo": 107,
-          "not_required": 4,
-          "blocked": 2
+          "not_required": 4
         },
         "readyInQueue": 10,
         "revisionsBlockingApproval": 3
@@ -1244,7 +1243,7 @@
           "done": 19,
           "todo": 220
         },
-        "readyInQueue": 72,
+        "readyInQueue": 74,
         "revisionsBlockingApproval": 0
       }
     },
@@ -1331,7 +1330,7 @@
       },
       "enemies": {
         "content": {
-          "done": 16,
+          "done": 20,
           "total": 20
         },
         "technical-inspection": {
@@ -1427,7 +1426,7 @@
     "queue": {
       "zh": "待处理（依赖已完成）",
       "en": "Ready (dependencies done)",
-      "count": 84,
+      "count": 86,
       "items": [
         {
           "id": "creator.char.protagonist-male.approve-portrait",
@@ -1921,6 +1920,20 @@
         },
         {
           "id": "creator.combat.zhao-ling.accept-set",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.enemy.sentry.accept-art",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.enemy.patrol.accept-art",
           "stage": "creator-approval",
           "owner": "creator",
           "status": "todo",
@@ -3137,13 +3150,13 @@
     {"id":"creator.combat.zhao-ling.accept-set","type":"creator-acceptance","title":{"zh":"赵铃 · 验收战斗形象","en":"Zhao Ling · accept combat set"},"area":"combat","stage":"creator-approval","owner":"creator","status":"todo","points":1,"doneCriterion":{"zh":"清单 playable-combat 项被创作者勾选","en":"The creator checks the inventory playable-combat item"},"dependsOn":["content.combat.zhao-ling.combat-integration"],"evidence":[],"subject":{"kind":"character-variant","id":"zhao-ling"},"target":"content.combat.zhao-ling.combat-integration"},
     {"id":"content.enemy.sentry.static","type":"native-pixel","title":{"zh":"防卫机（哨卫） · 战斗静止精灵","en":"Sentry automaton · battle static sprite"},"area":"enemies","stage":"content","owner":"claude","status":"done","points":2,"doneCriterion":{"zh":"原生像素静止精灵已提交并有 QA","en":"Native pixel static committed with QA"},"dependsOn":[],"evidence":["docs/qa/rpg-2-star-ocean-the-second_scifi-sentry-automaton_battle-sprite-pilot_qa-note_m8-v01_20261014-221953-96ac4035.md"],"subject":{"kind":"enemy","id":"sentry"}},
     {"id":"content.enemy.sentry.battle-animation","type":"native-pixel","title":{"zh":"防卫机（哨卫） · 战斗动画条","en":"Sentry automaton · battle animation strip"},"area":"enemies","stage":"content","owner":"claude","status":"done","points":6,"doneCriterion":{"zh":"全部战斗状态的动画条已提交并有帧检查","en":"A strip covering every battle state committed with frame checks"},"dependsOn":["content.enemy.sentry.static"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_scifi-sentry-automaton_battle-animation-pilot_qa-note_m8-anim-v02_20261014-231549-748c6de8.md","docs/qa/rpg-2-star-ocean-the-second_scifi-sentry-automaton_v2-optin-portability_qa-note_unapproved-v01_20261018-103500-7d2e91b4.md"],"subject":{"kind":"enemy","id":"sentry"}},
-    {"id":"content.enemy.sentry.runtime-default","type":"integration","title":{"zh":"防卫机（哨卫） · 运行时默认使用","en":"Sentry automaton · runtime default"},"area":"enemies","stage":"content","owner":"codex","status":"blocked","points":2,"doneCriterion":{"zh":"不加参数时战斗默认绘制该动画","en":"Battles draw the animation by default, without a flag"},"dependsOn":["content.enemy.sentry.battle-animation","code.runtime.enemy-sprite-pipeline"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_enemy-battle_mvp-default-preparation_codex-closeout_v01_20261022-191350-b9786fd1.md"],"subject":{"kind":"enemy","id":"sentry"},"statusAt":"2026-10-22T23:26:18Z","note":{"zh":"","en":"False default switch prepared, exact source boundary and full actual bilingual battle movies checked. Waiting for separate creator MVP default-use authorization; final art not inferred."}},
+    {"id":"content.enemy.sentry.runtime-default","type":"integration","title":{"zh":"防卫机（哨卫） · 运行时默认使用","en":"Sentry automaton · runtime default"},"area":"enemies","stage":"content","owner":"codex","status":"done","points":2,"doneCriterion":{"zh":"不加参数时战斗默认绘制该动画","en":"Battles draw the animation by default, without a flag"},"dependsOn":["content.enemy.sentry.battle-animation","code.runtime.enemy-sprite-pipeline"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_enemy-battle_mvp-default-adoption_codex-closeout_v01_20261022-193048-04f6b70e.md"],"subject":{"kind":"enemy","id":"sentry"},"statusAt":"2026-10-22T23:40:41Z","note":{"zh":"","en":"Creator authorized MVP default via call_24bbbdabdfea4b0ab7cd25ecc9eece96. Enabled318da96; actual bilingual exploration proximity encounter, ordinary animation, result/return and explicit-off rollback passed. Final art and full-motion approval remain separate."}},
     {"id":"qa.enemy.sentry.check","type":"technical-check","title":{"zh":"防卫机（哨卫） · 技术检查","en":"Sentry automaton · technical check"},"area":"enemies","stage":"technical-inspection","owner":"claude","status":"done","points":1,"doneCriterion":{"zh":"动画与战斗一致性检查通过","en":"Animation and combat-parity checks pass"},"dependsOn":["content.enemy.sentry.battle-animation"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_scifi-sentry-automaton_v2-optin-portability_qa-note_unapproved-v01_20261018-103500-7d2e91b4.md"],"subject":{"kind":"enemy","id":"sentry"},"target":"content.enemy.sentry.battle-animation","outcome":"passed"},
     {"id":"review.enemy.sentry","type":"visual-review","title":{"zh":"防卫机（哨卫） · 视觉审查","en":"Sentry automaton · visual review"},"area":"enemies","stage":"visual-review","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"Codex／root 审查实机画面并记录结论","en":"Codex / root reviews actual captures and records a verdict"},"dependsOn":["qa.enemy.sentry.check"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_scifi-sentry-automaton_v2-optin-portability_qa-note_unapproved-v01_20261018-103500-7d2e91b4.md","outputs/rpg-2-star-ocean-the-second_mvp-progress_state_v01_20261013-183804-28a1c7e4.json"],"subject":{"kind":"enemy","id":"sentry"},"target":"content.enemy.sentry.battle-animation","outcome":"technical-pass","note":{"zh":"root 看过实机 en640/zh640：只接受技术代码移植；眼部部分遮挡与几何占位背景仍在（closeout fa4c8600）。","en":"Root viewed actual en640/zh640 captures: technical code port only; partly occluded eye and geometric backdrop remain (closeout fa4c8600)."},"statusAt":"2026-10-18T17:55:49Z"},
     {"id":"creator.enemy.sentry.accept-art","type":"creator-acceptance","title":{"zh":"防卫机（哨卫） · 验收美术","en":"Sentry automaton · accept art"},"area":"enemies","stage":"creator-approval","owner":"creator","status":"todo","points":1,"doneCriterion":{"zh":"创作者验收该敌人美术","en":"The creator accepts the enemy art"},"dependsOn":["content.enemy.sentry.runtime-default"],"evidence":[],"subject":{"kind":"enemy","id":"sentry"},"target":"content.enemy.sentry.runtime-default"},
     {"id":"content.enemy.patrol.static","type":"native-pixel","title":{"zh":"巡逻机 · 战斗静止精灵","en":"Patrol drone · battle static sprite"},"area":"enemies","stage":"content","owner":"claude","status":"done","points":2,"doneCriterion":{"zh":"原生像素静止精灵已提交并有 QA","en":"Native pixel static committed with QA"},"dependsOn":[],"evidence":["docs/qa/rpg-2-star-ocean-the-second_patrol-static_selected-production-integration_v01_20261019-001423-861097ca.md"],"subject":{"kind":"enemy","id":"patrol"},"statusAt":"2026-10-19T04:25:04Z","note":{"zh":"","en":"Selected Claude benchmark native64x64 static copied intact with editable6-layer PXO/ORA, reproducible author/helper, raw hash manifest and actual source-bound Godot capture. Production only; animation/default/creator acceptance remain open."}},
     {"id":"content.enemy.patrol.battle-animation","type":"native-pixel","title":{"zh":"巡逻机 · 战斗动画条","en":"Patrol drone · battle animation strip"},"area":"enemies","stage":"content","owner":"claude","status":"done","points":6,"doneCriterion":{"zh":"全部战斗状态的动画条已提交并有帧检查","en":"A strip covering every battle state committed with frame checks"},"dependsOn":["content.enemy.patrol.static"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_patrol_canonical-native-and-visible-battle-closeout_v01_20261020-002601-cdd87b66.md"],"subject":{"kind":"enemy","id":"patrol"},"statusAt":"2026-10-20T00:28:20Z","note":{"zh":"","en":"Committed bcec9de: complete editable24frame six-state strip, native/frame/combat checks and opt-in actual/packed hookup. Art/default/fullsprite acceptance separate."}},
-    {"id":"content.enemy.patrol.runtime-default","type":"integration","title":{"zh":"巡逻机 · 运行时默认使用","en":"Patrol drone · runtime default"},"area":"enemies","stage":"content","owner":"codex","status":"blocked","points":2,"doneCriterion":{"zh":"不加参数时战斗默认绘制该动画","en":"Battles draw the animation by default, without a flag"},"dependsOn":["content.enemy.patrol.battle-animation","code.runtime.enemy-sprite-pipeline"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_enemy-battle_mvp-default-preparation_codex-closeout_v01_20261022-191350-b9786fd1.md"],"subject":{"kind":"enemy","id":"patrol"},"statusAt":"2026-10-22T23:26:19Z","note":{"zh":"","en":"False default switch prepared, exact source boundary and full actual bilingual battle movies checked. Waiting for separate creator MVP default-use authorization; final art not inferred."}},
+    {"id":"content.enemy.patrol.runtime-default","type":"integration","title":{"zh":"巡逻机 · 运行时默认使用","en":"Patrol drone · runtime default"},"area":"enemies","stage":"content","owner":"codex","status":"done","points":2,"doneCriterion":{"zh":"不加参数时战斗默认绘制该动画","en":"Battles draw the animation by default, without a flag"},"dependsOn":["content.enemy.patrol.battle-animation","code.runtime.enemy-sprite-pipeline"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_enemy-battle_mvp-default-adoption_codex-closeout_v01_20261022-193048-04f6b70e.md"],"subject":{"kind":"enemy","id":"patrol"},"statusAt":"2026-10-22T23:40:42Z","note":{"zh":"","en":"Creator authorized MVP default via call_24bbbdabdfea4b0ab7cd25ecc9eece96. Enabled318da96; actual bilingual exploration proximity encounter, ordinary animation, result/return and explicit-off rollback passed. Final art and full-motion approval remain separate."}},
     {"id":"qa.enemy.patrol.check","type":"technical-check","title":{"zh":"巡逻机 · 技术检查","en":"Patrol drone · technical check"},"area":"enemies","stage":"technical-inspection","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"动画与战斗一致性检查通过","en":"Animation and combat-parity checks pass"},"dependsOn":["content.enemy.patrol.battle-animation"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_patrol_canonical-native-and-visible-battle-closeout_v01_20261020-002601-cdd87b66.md"],"subject":{"kind":"enemy","id":"patrol"},"target":"content.enemy.patrol.battle-animation","statusAt":"2026-10-20T00:28:21Z","outcome":"technical-pass","note":{"zh":"","en":"20combatdigests,31loaderchecks,32default/Sentrypixels,185UI-boundarychecks and actualnormal/packed verification; native-app shader/flattening limitations disclosed. No creative approval."}},
     {"id":"review.enemy.patrol","type":"visual-review","title":{"zh":"巡逻机 · 视觉审查","en":"Patrol drone · visual review"},"area":"enemies","stage":"visual-review","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"Codex／root 审查实机画面并记录结论","en":"Codex / root reviews actual captures and records a verdict"},"dependsOn":["qa.enemy.patrol.check"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_enemy-battle_mvp-default-preparation_codex-closeout_v01_20261022-191350-b9786fd1.md"],"subject":{"kind":"enemy","id":"patrol"},"target":"content.enemy.patrol.battle-animation","statusAt":"2026-10-22T23:26:19Z","outcome":"technical-pass","note":{"zh":"","en":"Codex viewed actual patrol strike/windup/defeat captures and recorded temporal/state coverage from the actual1x recorder. Ready for scoped MVP-default choice, not final art/motion acceptance."}},
     {"id":"creator.enemy.patrol.accept-art","type":"creator-acceptance","title":{"zh":"巡逻机 · 验收美术","en":"Patrol drone · accept art"},"area":"enemies","stage":"creator-approval","owner":"creator","status":"todo","points":1,"doneCriterion":{"zh":"创作者验收该敌人美术","en":"The creator accepts the enemy art"},"dependsOn":["content.enemy.patrol.runtime-default"],"evidence":[],"subject":{"kind":"enemy","id":"patrol"},"target":"content.enemy.patrol.runtime-default"},

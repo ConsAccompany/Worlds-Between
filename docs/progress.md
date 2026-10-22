@@ -1,3 +1,15 @@
+# Current verified state —2026-10-22
+
+Production **60.1%→60.2%(+0.1 rounded pp)**; exact weighted60.0638%→60.1914%(+0.1276pp). Coding111/111; content629→633/1881. Inspection21.1%→21.1%; final-art approval7.8%→7.8%. Frozen1183tasks unchanged.
+
+Creator-authorized sentry and patrol battle animations now load by default without flags. Four real exploration-proximity encounter cases(EN/ZH per enemy), auto battle, victory/result return and explicit-off rollback passed. Independent5785simulation assertions and exact two-constant source comparison passed. No new art or animation timing edits; final art and full-motion acceptance remain separate. Source `318da96f2a91f56204aab715109fd503f4ed4bc2`. [Closeout](../docs/qa/rpg-2-star-ocean-the-second_enemy-battle_mvp-default-adoption_codex-closeout_v01_20261022-193048-04f6b70e.md).
+
+NYC common-style ordinary default remains pending explicit authorization; Washington exterior/records and Chicago defaults are already authorized. Final scene art5/12,fullsprites0/52,human post-art timed plays0/2; formalMVPfalse.
+
+The entries below are historical batch records.
+
+---
+
 # Current progress
 
 Last updated:2026-10-22

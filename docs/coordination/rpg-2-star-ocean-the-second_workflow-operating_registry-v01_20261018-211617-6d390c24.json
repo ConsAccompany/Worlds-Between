@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-22T23:27:17.302923+00:00",
+  "updatedAt": "2026-10-22T23:41:12.670345+00:00",
   "purpose": "Operating queue and worktree ownership; no progress points or account details",
   "workflow": "docs/workflow.md",
   "canonicalLedger": "outputs/rpg-2-star-ocean-the-second_production-completion_task-ledger_v01_20261018-140533-3de52073.json",
@@ -1316,16 +1316,15 @@
     "constraints": "Do not reopen existing cosmetic gait or actor art searches. Keep four scene defaults false until explicit authorization. Verify providers before fresh sessions."
   },
   "activeDualProviderBatch": {
-    "id": "enemy49",
+    "id": "enemy51",
     "status": "closed-integrated",
-    "sourceCommit": "1dd7472e714005e2e265657af3dc4b3068193a04",
-    "claude": "capture-harness-finished",
-    "deepseek": "bounded-scope-check-finished",
-    "codex": "integration-actual-capture-inspection-encoding-and-authorized-records-adoption",
+    "sourceCommit": "318da96f2a91f56204aab715109fd503f4ed4bc2",
     "evidence": [
-      "docs/qa/rpg-2-star-ocean-the-second_enemy-battle_mvp-default-preparation_codex-closeout_v01_20261022-191350-b9786fd1.md",
-      "docs/qa/rpg-2-star-ocean-the-second_wdc-records-room2_mvp-default-adoption_codex-closeout_style50-v01_20261022-191753-081f996e.md"
-    ]
+      "docs/qa/rpg-2-star-ocean-the-second_enemy-battle_mvp-default-adoption_codex-closeout_v01_20261022-193048-04f6b70e.md"
+    ],
+    "claude": "encounter-adapter-delivered223s",
+    "deepseek": "bounded240s-timeout-no-output",
+    "codex": "source-validator-default-activation-boundary-and-real-encounter-checks-integration"
   },
   "characterSpriteStyleDirection": {
     "reference": "Sea of Stars",
@@ -1421,15 +1420,11 @@
     "approvalsNotWaived": true
   },
   "nextProductionTask": {
-    "kind": "authorized-default-adoptions",
+    "kind": "NYC-common-scene-default-adoption",
     "status": "awaiting-creator-authorization",
     "owner": "codex",
-    "tasks": [
-      "content.enemy.sentry.runtime-default",
-      "content.enemy.patrol.runtime-default",
-      "content.scene.city.native-default"
-    ],
-    "nextAction": "Show two enemy previews and apply only each explicitly authorized default. NYC default choice remains pending. No points or final art acceptance for prepared switches."
+    "task": "content.scene.city.native-default",
+    "nextAction": "NYC common-style candidate already produced and inspected; adopt only after separate explicit default-use authorization. Do not infer from next. Avoid cosmetic revisions."
   },
   "lastCompletedProductionTask": {
     "status": "produced-source-only",
@@ -2663,5 +2658,54 @@
       "after": 21.1,
       "changePercentagePoints": 0.5
     }
+  },
+  "latestEnemyMvpDefaultAdoption": {
+    "status": "creator-authorized-MVP-defaults-integrated",
+    "tasks": [
+      "content.enemy.sentry.runtime-default",
+      "content.enemy.patrol.runtime-default"
+    ],
+    "owner": "codex",
+    "captureAdapterProducer": "claude",
+    "independentSourceCheck": "codex-after-deepseek-bounded-timeout",
+    "sourceCommit": "318da96f2a91f56204aab715109fd503f4ed4bc2",
+    "completedAt": "2026-10-22T23:41:12.670345+00:00",
+    "evidence": [
+      "docs/qa/rpg-2-star-ocean-the-second_enemy-battle_mvp-default-adoption_codex-closeout_v01_20261022-193048-04f6b70e.md"
+    ],
+    "decision": {
+      "question": "call_24bbbdabdfea4b0ab7cd25ecc9eece96",
+      "items": {
+        "0": "sentry",
+        "1": "patrol"
+      },
+      "quote": "先设为 MVP 默认，精修后置",
+      "scope": "Battle animation MVP defaults only; final art/full-motion acceptance separate"
+    },
+    "defaultEnabled": {
+      "sentry": true,
+      "patrol": true
+    },
+    "actualNoflagEncounterCases": 4,
+    "allCasesPassed": true,
+    "simulationAssertions": 5785,
+    "explicitOffRestoresPlaceholder": true,
+    "finalArtAccepted": false,
+    "production": {
+      "before": 60.1,
+      "after": 60.2,
+      "changePercentagePointsRounded": 0.1,
+      "exactWeightedChangePercentagePoints": 0.12759170653907495
+    },
+    "contentPoints": {
+      "before": 629,
+      "after": 633,
+      "total": 1881
+    }
+  },
+  "providerRoutingLesson": {
+    "at": "2026-10-22T23:41:12.670345+00:00",
+    "evidence": "docs/qa/rpg-2-star-ocean-the-second_enemy-battle_mvp-default-adoption_codex-closeout_v01_20261022-193048-04f6b70e.md",
+    "lesson": "Do mechanical two-constant comparisons directly. DeepSeek received an85KBsource pair and produced nothing within240s; use small data/code context tasks with concrete outputs instead of asking it to reread full actor source. Do not duplicate active workers or retry a timed-out mechanical task. Claude handles combined gameplay adapters; Codex independently verifies/integrates."
   }
 }
