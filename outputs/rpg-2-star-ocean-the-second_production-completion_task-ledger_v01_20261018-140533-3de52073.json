@@ -2,7 +2,7 @@
   "id": "rpg-2-star-ocean-the-second_production-completion_v01",
   "schemaVersion": 2,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-22T22:53:36Z",
+  "updatedAt": "2026-10-22T23:10:28Z",
   "zh": "制作完成度任务台账：衡量已完成的工作量（编码 40% + 内容 60%）；检查／审查与创作者批准分开计量，均不改变制作分；免除的审查不算已执行的工作；运营任务列出负责方但不计百分比。",
   "en": "Production-completion task ledger: measures work done (coding 40% + content 60%); inspection/review and creator approval are separate meters and never change production credit; waived reviews are not performed work; operations tasks list owners but carry no percentage.",
   "brief": "docs/rpg-2-star-ocean-the-second_production-completion_bilingual-brief_v01_20261018-140533-3ea2a621.md",
@@ -964,6 +964,22 @@
         },
         "previousTaskSetSha256": "61c1fc95614c22995dee36c10d8bf68647a7c568cd9c5202832c271615277ca3",
         "taskSetSha256": "c6024da7df5b3c83c8bc9fa1bafac44ae6b2885dab7f1b8eeb06cb7db3065642"
+      },
+      {
+        "at": "2026-10-22T23:10:27Z",
+        "kind": "owner-assignment",
+        "taskId": "qa.scene.ruins-survey-inner.check",
+        "fromOwner": "claude",
+        "toOwner": "codex",
+        "changedTaskIds": [
+          "qa.scene.ruins-survey-inner.check"
+        ],
+        "reason": {
+          "zh": "",
+          "en": "Codex independently ran the actual STYLE48 room flow, parity and source checks."
+        },
+        "previousTaskSetSha256": "c6024da7df5b3c83c8bc9fa1bafac44ae6b2885dab7f1b8eeb06cb7db3065642",
+        "taskSetSha256": "da139de4d55c3b77cffba65e78e60614bbadb49dbc476b1ae3f8719f9435f2d3"
       }
     ],
     "pointsByStage": {
@@ -1134,12 +1150,12 @@
     },
     "byOwner": {
       "claude": {
-        "tasks": 713,
+        "tasks": 712,
         "operationsTasks": 0,
-        "points": 1883,
-        "pointsDone": 575,
+        "points": 1882,
+        "pointsDone": 574,
         "byStatus": {
-          "done": 149,
+          "done": 148,
           "blocked": 5,
           "todo": 559
         },
@@ -1158,12 +1174,12 @@
         "revisionsBlockingApproval": 0
       },
       "codex": {
-        "tasks": 221,
+        "tasks": 222,
         "operationsTasks": 2,
-        "points": 282,
-        "pointsDone": 174,
+        "points": 283,
+        "pointsDone": 175,
         "byStatus": {
-          "done": 109,
+          "done": 110,
           "todo": 108,
           "not_required": 4
         },
@@ -3155,10 +3171,10 @@
     {"id":"creator.scene.ruins-survey-outer.accept","type":"creator-acceptance","title":{"zh":"华盛顿勘察附楼 1 号房 · 场景画质验收","en":"Washington survey annex room 1 · scene-quality acceptance"},"area":"scenes","stage":"creator-approval","owner":"creator","status":"todo","points":1,"doneCriterion":{"zh":"approvalLedger 记有 acceptanceKind scene-visual 的验收条目","en":"approvalLedger records an acceptanceKind scene-visual item"},"dependsOn":["content.scene.ruins-survey-outer.native-pass"],"evidence":[],"subject":{"kind":"scene-gate","id":"visual-scene.ruins-survey-outer"},"target":"content.scene.ruins-survey-outer.native-pass"},
     {"id":"content.scene.ruins-survey-inner.plate","type":"integration","title":{"zh":"华盛顿勘察附楼 2 号房（档案室） · 场景底板","en":"Washington survey annex room 2 (records) · scene plate"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":4,"doneCriterion":{"zh":"可玩场景底板已提交并在运行时可进入（概念图不算）","en":"A playable scene plate is committed and enterable in the runtime (a concept image does not count)"},"dependsOn":[],"evidence":["docs/qa/rpg-2-star-ocean-the-second_scifi-region-eleven-scene_visual-gate-audit_m8-v01_20261014-201003-6b73e7a4.md"],"subject":{"kind":"scene-gate","id":"visual-scene.ruins-survey-inner"}},
     {"id":"content.scene.ruins-survey-inner.wiring","type":"integration","title":{"zh":"华盛顿勘察附楼 2 号房（档案室） · 碰撞、热点与出入口","en":"Washington survey annex room 2 (records) · collision, hotspots and exits"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":3,"doneCriterion":{"zh":"碰撞、热点、出入口与存档有自动检查","en":"Collision, hotspots, exits and saves have automated checks"},"dependsOn":["content.scene.ruins-survey-inner.plate"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_scifi-region-eleven-scene_visual-gate-audit_m8-v01_20261014-201003-6b73e7a4.md","game/tests/m7_smoke.gd"],"subject":{"kind":"scene-gate","id":"visual-scene.ruins-survey-inner"}},
-    {"id":"content.scene.ruins-survey-inner.native-pass","type":"native-pixel","title":{"zh":"华盛顿勘察附楼 2 号房（档案室） · 原生像素画质版","en":"Washington survey annex room 2 (records) · native pixel quality pass"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":12,"doneCriterion":{"zh":"原生像素画质版（道具／分层）已提交并有 QA，可为可选启用","en":"A native pixel quality pass (fixtures / layers) is committed with QA; opt-in is allowed"},"dependsOn":["content.scene.ruins-survey-inner.plate"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_wdc-annex-room2_records-chamber-playable-integration_qa-note_unapproved-v01_20261018-035908-3a34d132.md"],"subject":{"kind":"scene-gate","id":"visual-scene.ruins-survey-inner"}},
+    {"id":"content.scene.ruins-survey-inner.native-pass","type":"native-pixel","title":{"zh":"华盛顿勘察附楼 2 号房（档案室） · 原生像素画质版","en":"Washington survey annex room 2 (records) · native pixel quality pass"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":12,"doneCriterion":{"zh":"原生像素画质版（道具／分层）已提交并有 QA，可为可选启用","en":"A native pixel quality pass (fixtures / layers) is committed with QA; opt-in is allowed"},"dependsOn":["content.scene.ruins-survey-inner.plate"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_wdc-records-room2_common-style-runtime_codex-closeout_v01_20261022-185913-713cdcb1.md"],"subject":{"kind":"scene-gate","id":"visual-scene.ruins-survey-inner"},"statusAt":"2026-10-22T23:10:27Z","note":{"zh":"","en":"Common-style layered candidate committed b5ff5a9; existing credited deliverable updated, not a new task. Generated raster plus unchanged native fixtures. Native exact application export failed by max1 value and four shader errors; GUI unverified. Default and final art unapproved."}},
     {"id":"content.scene.ruins-survey-inner.native-default","type":"integration","title":{"zh":"华盛顿勘察附楼 2 号房（档案室） · 画质版默认接入","en":"Washington survey annex room 2 (records) · quality pass on by default"},"area":"scenes","stage":"content","owner":"claude","status":"blocked","points":2,"doneCriterion":{"zh":"画质版默认在游戏中使用","en":"The quality pass is used in the game by default"},"dependsOn":["content.scene.ruins-survey-inner.native-pass","content.scene.ruins-survey-inner.wiring"],"evidence":["docs/design/rpg-2-star-ocean-the-second_science-scenes_creator-style-consistency-revision_v01_20261022-155956-1414792c.md"],"subject":{"kind":"scene-gate","id":"visual-scene.ruins-survey-inner"},"statusAt":"2026-10-22T20:09:20Z","note":{"zh":"","en":"Creator reports inconsistent art styles; no default-use authorization. Unify one outdoor sample against accepted science interior material/light language before propagation; all switches remain false."}},
-    {"id":"qa.scene.ruins-survey-inner.check","type":"technical-check","title":{"zh":"华盛顿勘察附楼 2 号房（档案室） · 技术检查","en":"Washington survey annex room 2 (records) · technical check"},"area":"scenes","stage":"technical-inspection","owner":"claude","status":"done","points":1,"doneCriterion":{"zh":"当前画质版的 Godot 检查全部通过","en":"Godot checks of the current quality pass all pass"},"dependsOn":["content.scene.ruins-survey-inner.native-pass"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_wdc-annex-room2_records-chamber-playable-integration_qa-note_unapproved-v01_20261018-035908-3a34d132.md","docs/qa/rpg-2-star-ocean-the-second_wdc-annex-rooms_default-layout-collision-fix_qa-note_unapproved-v01_20261018-041322-c3ff819c.md"],"subject":{"kind":"scene-gate","id":"visual-scene.ruins-survey-inner"},"target":"content.scene.ruins-survey-inner.native-pass","outcome":"passed"},
-    {"id":"review.scene.ruins-survey-inner","type":"visual-review","title":{"zh":"华盛顿勘察附楼 2 号房（档案室） · 视觉审查","en":"Washington survey annex room 2 (records) · visual review"},"area":"scenes","stage":"visual-review","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"Codex 审查 640×360 实机画面并记录结论","en":"Codex reviews actual 640x360 captures and records a verdict"},"dependsOn":["qa.scene.ruins-survey-inner.check"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_codex-visual-review_six-verdicts_qa-receipt_v01_20261018-153526-67e353de.md","outputs/wdc-rc2-v01i_3a34d132/cap/rpg-2-star-ocean-the-second_wdc-annex-room2_v01-godot-en-entry-640x360_20261018-035908-3a34d132.png"],"subject":{"kind":"scene-gate","id":"visual-scene.ruins-survey-inner"},"target":"content.scene.ruins-survey-inner.native-pass","statusAt":"2026-10-18T19:35:26Z","outcome":"passed","note":{"zh":"root（Codex）查看了 v01 整合版英文入口实机画面：可交创作者审查。角色参考说明同上；无新测试，未批准。","en":"Root (Codex) viewed the actual v01 integration EN entry capture: ready for creator review. Same character-reference caveat; no new tests, no approval."}},
+    {"id":"qa.scene.ruins-survey-inner.check","type":"technical-check","title":{"zh":"华盛顿勘察附楼 2 号房（档案室） · 技术检查","en":"Washington survey annex room 2 (records) · technical check"},"area":"scenes","stage":"technical-inspection","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"当前画质版的 Godot 检查全部通过","en":"Godot checks of the current quality pass all pass"},"dependsOn":["content.scene.ruins-survey-inner.native-pass"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_wdc-records-room2_common-style-runtime_codex-closeout_v01_20261022-185913-713cdcb1.md"],"subject":{"kind":"scene-gate","id":"visual-scene.ruins-survey-inner"},"target":"content.scene.ruins-survey-inner.native-pass","statusAt":"2026-10-22T23:10:28Z","outcome":"passed","note":{"zh":"","en":"Final actual-r2 Godot path and12-pair noflag parity pass, no diagnostics; render pixels checked after preload fix. Native application limitations remain separate."},"history":[{"outcome":"passed","statusAt":null,"evidence":["docs/qa/rpg-2-star-ocean-the-second_wdc-annex-room2_records-chamber-playable-integration_qa-note_unapproved-v01_20261018-035908-3a34d132.md","docs/qa/rpg-2-star-ocean-the-second_wdc-annex-rooms_default-layout-collision-fix_qa-note_unapproved-v01_20261018-041322-c3ff819c.md"]}]},
+    {"id":"review.scene.ruins-survey-inner","type":"visual-review","title":{"zh":"华盛顿勘察附楼 2 号房（档案室） · 视觉审查","en":"Washington survey annex room 2 (records) · visual review"},"area":"scenes","stage":"visual-review","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"Codex 审查 640×360 实机画面并记录结论","en":"Codex reviews actual 640x360 captures and records a verdict"},"dependsOn":["qa.scene.ruins-survey-inner.check"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_wdc-records-room2_common-style-runtime_codex-closeout_v01_20261022-185913-713cdcb1.md"],"subject":{"kind":"scene-gate","id":"visual-scene.ruins-survey-inner"},"target":"content.scene.ruins-survey-inner.native-pass","statusAt":"2026-10-22T23:10:28Z","note":{"zh":"root（Codex）查看了 v01 整合版英文入口实机画面：可交创作者审查。角色参考说明同上；无新测试，未批准。","en":"Codex inspected actual entry, after-load and behind-fixture640x360 frames. Ready for scoped MVP-default choice; final art remains unapproved."},"outcome":"passed","history":[{"outcome":"passed","statusAt":"2026-10-18T19:35:26Z","evidence":["docs/qa/rpg-2-star-ocean-the-second_codex-visual-review_six-verdicts_qa-receipt_v01_20261018-153526-67e353de.md","outputs/wdc-rc2-v01i_3a34d132/cap/rpg-2-star-ocean-the-second_wdc-annex-room2_v01-godot-en-entry-640x360_20261018-035908-3a34d132.png"]}]},
     {"id":"creator.scene.ruins-survey-inner.accept","type":"creator-acceptance","title":{"zh":"华盛顿勘察附楼 2 号房（档案室） · 场景画质验收","en":"Washington survey annex room 2 (records) · scene-quality acceptance"},"area":"scenes","stage":"creator-approval","owner":"creator","status":"todo","points":1,"doneCriterion":{"zh":"approvalLedger 记有 acceptanceKind scene-visual 的验收条目","en":"approvalLedger records an acceptanceKind scene-visual item"},"dependsOn":["content.scene.ruins-survey-inner.native-pass"],"evidence":[],"subject":{"kind":"scene-gate","id":"visual-scene.ruins-survey-inner"},"target":"content.scene.ruins-survey-inner.native-pass"},
     {"id":"content.scene.battle-arena.plate","type":"integration","title":{"zh":"科技区横向战场 · 场景底板","en":"Science side-view battle arena · scene plate"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":4,"doneCriterion":{"zh":"可玩场景底板已提交并在运行时可进入（概念图不算）","en":"A playable scene plate is committed and enterable in the runtime (a concept image does not count)"},"dependsOn":[],"evidence":["docs/qa/rpg-2-star-ocean-the-second_battle-arena_existing-playable-plate-verification_v01_20261018-214000-4d87ef21.md","outputs/rpg-2-star-ocean-the-second_battle-arena_current-main-proof_manifest-v01_20261018-214000-4d87ef21.json"],"subject":{"kind":"scene-gate","id":"visual-scene.battle-arena"},"statusAt":"2026-10-19T01:39:48Z","note":{"zh":"已提交的可选扬克斯战斗背景通过当前实机进入验证；补记既有4分制作，不是新美术，原生打磨、默认采用与验收仍独立。","en":"Previously committed opt-in outskirts plate now verified enterable in current arena; existing4-point credit, not new artwork. Native polish/default/approval remain open."}},
     {"id":"content.scene.battle-arena.wiring","type":"integration","title":{"zh":"科技区横向战场 · 碰撞、热点与出入口","en":"Science side-view battle arena · collision, hotspots and exits"},"area":"scenes","stage":"content","owner":"deepseek","status":"done","points":3,"doneCriterion":{"zh":"碰撞、热点、出入口与存档有自动检查","en":"Collision, hotspots, exits and saves have automated checks"},"dependsOn":["content.scene.battle-arena.plate"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_battle-arena-wiring_root-clean-context-closeout_v04_20261020-191841-072db685.md"],"subject":{"kind":"scene-gate","id":"visual-scene.battle-arena"},"statusAt":"2026-10-20T19:18:53Z","note":{"zh":"Codex独立执行297/297无引擎错误检查，覆盖正常节奏胜利、独立失败/边界、安全出入与存读档；包装器修正已披露，不代表美术或完整本地化验收。","en":"DeepSeek fixture independently executed by Codex:297/297 clean, four natural-timing victories, separate defeat/boundaries, safe entry/result/return and exact saves/reload. Wrapper hash/import-metadata corrections disclosed; no art or full localization acceptance."}},
