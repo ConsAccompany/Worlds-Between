@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-22T02:20:44.041334+00:00",
+  "updatedAt": "2026-10-22T02:41:28.009573+00:00",
   "purpose": "Operating queue and worktree ownership; no progress points or account details",
   "workflow": "docs/workflow.md",
   "canonicalLedger": "outputs/rpg-2-star-ocean-the-second_production-completion_task-ledger_v01_20261018-140533-3de52073.json",
@@ -1319,14 +1319,14 @@
     }
   ],
   "activeDualProviderBatch": {
-    "primary": "ji-combat-source",
-    "status": "completed",
+    "primary": "ji-complete-companion-path",
+    "status": "completed-preview",
     "owner": "claude",
     "support": "deepseek",
-    "base": "f22556c7d36b7f7db127f8a73568ec8a36c02941",
-    "sourceCommit": "e4e586bc2574dbcd8dfb2014b042fd233bbdf22f",
-    "completedAt": "2026-10-22T02:20:44.041334+00:00",
-    "ordinaryAdoptionAuthorized": false
+    "base": "759f2b9ffc1d2e236f5ab15dca3350b20e7943bb",
+    "ordinaryAdoptionAuthorized": false,
+    "completedAt": "2026-10-22T02:41:28.009573+00:00",
+    "sourceCommit": "b97daa00655f77f245b8d7346455e08b7298eca2"
   },
   "characterSpriteStyleDirection": {
     "reference": "Sea of Stars",
@@ -1426,7 +1426,7 @@
     "kind": "complete-companion-playable-path",
     "owner": "claude",
     "coordinator": "codex",
-    "status": "ready",
+    "status": "awaiting_creator_default_authorization",
     "tasks": [
       "content.char.ji-cheng.runtime-integration",
       "content.combat.ji-cheng.combat-integration"
@@ -1443,9 +1443,20 @@
     ],
     "supportingTask": {
       "owner": "deepseek",
-      "scope": "Bounded independent coexistence/refusal/save and existing driver checks; no new framework"
+      "scope": "Bounded independent coexistence/refusal/save and existing driver checks; no new framework",
+      "status": "complete-canonical-unfiltered-check-passed"
     },
-    "nextAction": "Reuse Liang companion path with Ji-specific source indexes and actual recruitment conditions. Complete one useful playable boundary."
+    "nextAction": "Show actual Ji gameplay and obtain separate MVP default-use authorization. Then apply the prepared one-line switch and recheck the ordinary path. Cosmetic refinement remains post-MVP.",
+    "productionBefore": 58.9,
+    "implementationComplete": true,
+    "sourceCommit": "b97daa00655f77f245b8d7346455e08b7298eca2",
+    "evidence": [
+      "docs/qa/rpg-2-star-ocean-the-second_ji-cheng_complete-companion-path_codex-closeout_opt-in-v01_20261021-224010-3f4e96c3.md",
+      "outputs/jpath33/root/20261021-224010-3f4e96c3/rpg-2-star-ocean-the-second_ji-cheng_complete-companion-path_codex-proof_opt-in-v01_20261021-224010-3f4e96c3.json",
+      "outputs/jpath33/view-20261021-223827-3c4170a4/rpg-2-star-ocean-the-second_ji-cheng_actual-gameplay-preview_manifest_unapproved-v01_20261021-223827-3c4170a4.json"
+    ],
+    "creatorDecisionOwner": "creator",
+    "productionAfter": 58.9
   },
   "lastCompletedProductionTask": {
     "subject": "ji-cheng",
@@ -1486,46 +1497,44 @@
   },
   "latestImplementationBoundary": {
     "subject": "ji-cheng",
-    "status": "source-complete-unapproved-not-default-integrated",
+    "status": "complete-opt-in-playable-preview-awaiting-separate-default-authorization",
     "owner": "claude",
     "independentSupport": "deepseek",
     "integrationOwner": "codex",
-    "sourceCommit": "e4e586bc2574dbcd8dfb2014b042fd233bbdf22f",
-    "completedAt": "2026-10-22T02:20:44.041334+00:00",
+    "sourceCommit": "b97daa00655f77f245b8d7346455e08b7298eca2",
+    "completedAt": "2026-10-22T02:41:28.009573+00:00",
     "evidence": [
-      "docs/qa/rpg-2-star-ocean-the-second_ji-cheng_combat-source_codex-closeout_unapproved-v01_20261021-221958-82e9a825.md",
-      "outputs/jcombat32/root/20261021-221920-a82f2634/rpg-2-star-ocean-the-second_ji-cheng-combat_root-production-proof_unapproved-v01_20261021-221958-82e9a825.json"
+      "docs/qa/rpg-2-star-ocean-the-second_ji-cheng_complete-companion-path_codex-closeout_opt-in-v01_20261021-224010-3f4e96c3.md",
+      "outputs/jpath33/root/20261021-224010-3f4e96c3/rpg-2-star-ocean-the-second_ji-cheng_complete-companion-path_codex-proof_opt-in-v01_20261021-224010-3f4e96c3.json",
+      "outputs/jpath33/view-20261021-223827-3c4170a4/rpg-2-star-ocean-the-second_ji-cheng_actual-gameplay-preview_manifest_unapproved-v01_20261021-223827-3c4170a4.json"
     ],
     "production": {
-      "before": 58.6,
+      "before": 58.9,
       "after": 58.9,
-      "changePercentagePoints": 0.3
+      "changePercentagePoints": 0
     },
-    "editablePackages": 24,
-    "runtimePoseCells": 23,
-    "roleLayers": 10,
-    "nativeSourceChecks": 297,
-    "nativeFlatExportsEqual": 24,
-    "independentCompositionChecks": 1056,
-    "runtimeContractChecks": 180,
-    "sourceIndexChecks": 38,
-    "sourceIndexRefusalCases": 2,
-    "bilingualArenaSourceFit": true,
-    "actual640Captures": 16,
-    "scriptedSourcePoses": true,
-    "normalInput": false,
-    "protectedFilesUnchanged": 661,
     "ordinaryDefaultAdopted": false,
+    "defaultAuthorizationPending": true,
+    "separateProfileProtected": true,
+    "npcIsCompanionNotHero": true,
+    "noPersistentFollower": true,
+    "independentBoundaryChecks": 150,
+    "explicitPairIsolationChecks": 15,
+    "realInputChecks": {
+      "enMaleVictory": 60,
+      "enFemaleVictory30fpsMovie": 60,
+      "zhFemaleDefeatRetry": 49,
+      "existingLiangOrdinaryVictoryRegression": 62
+    },
+    "protectedFilesUnchanged": 1603,
+    "noDiagnosticFilterAccepted": true,
+    "defaultPatchPreparedUnapplied": true,
+    "movie": "outputs/jpath33/view-20261021-223827-3c4170a4/rpg-2-star-ocean-the-second_ji-cheng_actual-gameplay-full-path-normal-30fps_unapproved-v01_20261021-223827-3c4170a4.mp4",
+    "gif": "outputs/jpath33/view-20261021-223827-3c4170a4/rpg-2-star-ocean-the-second_ji-cheng_actual-controlled-battle-motion-excerpt-normal-speed_unapproved-v01_20261021-223827-3c4170a4.gif",
     "artApproved": false,
     "motionApproved": false,
     "humanPlaytestsAdded": 0,
-    "visualLimits": [
-      "Ji is visibly smaller than the other current actors in the mixed-party source fixture.",
-      "Face/near hair remain simple at actual gameplay scale; left shaved temple is far-side when facing right.",
-      "Only source production was completed; full normal-speed motion and mixed-party/default presentation remain pending."
-    ],
-    "nativeLimits": "Pixelorama shader-sampler diagnostics persist; exports equal but no clean-GUI/SaveAs/reopen claim.",
-    "next": "Complete Ji recruitment/control/exploration/battle-return/save path. Separate default-use authorization required; refinements remain post-MVP."
+    "next": "Show actual Ji gameplay and obtain separate MVP default-use authorization. Then apply the prepared one-line switch and recheck the ordinary path. Cosmetic refinement remains post-MVP."
   },
   "completedProductionTaskHistory": [
     {

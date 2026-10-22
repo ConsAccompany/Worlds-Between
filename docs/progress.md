@@ -2,7 +2,15 @@
 
 Last updated: 2026-10-21
 
-## Latest completed batch — 2026-10-21: Ji Cheng combat source
+## Latest completed implementation — 2026-10-21: Ji Cheng complete playable preview
+
+Production **58.9% →58.9% (+0.0 pp)**; inspection **18.1% →18.1% (+0.0 pp)**; creator approval **7.8% →7.8% (+0.0 pp)**. The two frozen integration tasks require ordinary default use and remain in progress until the separate authorization required by AGENTS.md. Preview implementation is complete; no per-preview points or denominator changes.
+
+Real locked-dialogue → records-console → invite → sentry encounter → controlled Ji battle → natural victory/return/autosave reload path passes. Canonical EN male60checks, EN female30fps movie60, ZH female declared1HP defeat/retry49; independent unfiltered boundary150, explicit-pair15, existing ordinary Liang victory/reload62. Direct preview protects ordinary saves;1603existing source/runtime files unchanged. Full12.833s normal-clock movie and5s battle GIF produced; cosmetics/full motion-art approval deferred. Source `b97daa00655f77f245b8d7346455e08b7298eca2`. [Closeout](../docs/qa/rpg-2-star-ocean-the-second_ji-cheng_complete-companion-path_codex-closeout_opt-in-v01_20261021-224010-3f4e96c3.md).
+
+Prepared single-line default switch remains unapplied. Next: show actual media, obtain Ji MVP default-use authorization, then verify the ordinary path. Complete sprites0/52,accepted scene art5/12,humanplays0/2 remain separate.
+
+## Prior completed batch — 2026-10-21: Ji Cheng combat source
 
 Production **58.6% →58.9% (+0.3 pp)**; content583→594/1881. Inspection **18.1% →18.1% (+0.0 pp)**; creator approval **7.8% →7.8% (+0.0 pp)**. Two existing missing-source tasks complete; frozen baseline unchanged.
 

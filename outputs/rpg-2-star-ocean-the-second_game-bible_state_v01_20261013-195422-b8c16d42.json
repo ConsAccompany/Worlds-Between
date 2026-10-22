@@ -4,7 +4,7 @@
   "title": "世界之间",
   "englishTitle": "Worlds Between",
   "edition": "设计基线 v0.2 · 2026-10-15 创作者决定",
-  "updatedAt": "2026-10-22T02:20:44.041334+00:00",
+  "updatedAt": "2026-10-22T02:41:28.009573+00:00",
   "note": "规则以玩家确认的设计稿为基线，并已并入 2026-10-15 创作者决定；人物姓名与外观是待审提案，具体剧情留待后续设计。",
   "pitch": "从地下社区走出的旅人，以好奇心探索多元文明，招募伙伴，并成为不同世界认知差异的桥梁。",
   "pillars": [
@@ -7968,19 +7968,19 @@
     "combinedWiringCheck": "297/297 on39f252e, clean raw log; actual Chinese victory inspected."
   },
   "latestTaskProgress": {
-    "id": "ji-combat-source",
+    "id": "ji-playable-path",
     "status": "completed",
     "title": {
-      "zh": "纪澄战斗静止帧与八种动作源资产",
-      "en": "Ji combat static and eight source actions"
+      "zh": "纪澄完整同伴可玩路径",
+      "en": "Ji Cheng complete companion playable path"
     },
-    "startedAt": "2026-10-22T02:06:57.455Z",
-    "sourceBefore": "f22556c7d36b7f7db127f8a73568ec8a36c02941",
+    "startedAt": "2026-10-22T02:23:00.268Z",
+    "sourceBefore": "759f2b9ffc1d2e236f5ab15dca3350b20e7943bb",
     "meters": {
       "production": {
-        "before": 58.6,
+        "before": 58.9,
         "after": 58.9,
-        "changePercentagePoints": 0.3
+        "changePercentagePoints": 0
       },
       "inspection": {
         "before": 18.1,
@@ -7993,10 +7993,10 @@
         "changePercentagePoints": 0
       }
     },
-    "completedAt": "2026-10-22T02:20:21.611Z",
-    "sourceAfter": "e4e586bc2574dbcd8dfb2014b042fd233bbdf22f",
+    "completedAt": "2026-10-22T02:41:27.469Z",
+    "sourceAfter": "b97daa00655f77f245b8d7346455e08b7298eca2",
     "evidence": [
-      "docs/qa/rpg-2-star-ocean-the-second_ji-cheng_combat-source_codex-closeout_unapproved-v01_20261021-221958-82e9a825.md"
+      "docs/qa/rpg-2-star-ocean-the-second_ji-cheng_complete-companion-path_codex-closeout_opt-in-v01_20261021-224010-3f4e96c3.md"
     ]
   },
   "progressReporting": {
@@ -8997,6 +8997,38 @@
       "evidence": [
         "docs/qa/rpg-2-star-ocean-the-second_ji-cheng_exploration-source_codex-closeout_unapproved-v01_20261021-212415-382d3721.md"
       ]
+    },
+    {
+      "id": "ji-combat-source",
+      "status": "completed",
+      "title": {
+        "zh": "纪澄战斗静止帧与八种动作源资产",
+        "en": "Ji combat static and eight source actions"
+      },
+      "startedAt": "2026-10-22T02:06:57.455Z",
+      "sourceBefore": "f22556c7d36b7f7db127f8a73568ec8a36c02941",
+      "meters": {
+        "production": {
+          "before": 58.6,
+          "after": 58.9,
+          "changePercentagePoints": 0.3
+        },
+        "inspection": {
+          "before": 18.1,
+          "after": 18.1,
+          "changePercentagePoints": 0
+        },
+        "approval": {
+          "before": 7.8,
+          "after": 7.8,
+          "changePercentagePoints": 0
+        }
+      },
+      "completedAt": "2026-10-22T02:20:21.611Z",
+      "sourceAfter": "e4e586bc2574dbcd8dfb2014b042fd233bbdf22f",
+      "evidence": [
+        "docs/qa/rpg-2-star-ocean-the-second_ji-cheng_combat-source_codex-closeout_unapproved-v01_20261021-221958-82e9a825.md"
+      ]
     }
   ],
   "latestBattleEnvironmentProduction": {
@@ -9631,7 +9663,7 @@
     "artApproved": false,
     "motionApproved": false,
     "humanPlaytestsAdded": 0,
-    "next": "Complete Ji recruitment/control/exploration/battle-return/save path. Separate default-use authorization required; refinements remain post-MVP."
+    "next": "Show actual Ji gameplay and obtain separate MVP default-use authorization. Then apply the prepared one-line switch and recheck the ordinary path. Cosmetic refinement remains post-MVP."
   },
   "latestJiChengCombatProduction": {
     "subject": "ji-cheng",
@@ -9674,6 +9706,47 @@
       "Only source production was completed; full normal-speed motion and mixed-party/default presentation remain pending."
     ],
     "nativeLimits": "Pixelorama shader-sampler diagnostics persist; exports equal but no clean-GUI/SaveAs/reopen claim.",
-    "next": "Complete Ji recruitment/control/exploration/battle-return/save path. Separate default-use authorization required; refinements remain post-MVP."
+    "next": "Show actual Ji gameplay and obtain separate MVP default-use authorization. Then apply the prepared one-line switch and recheck the ordinary path. Cosmetic refinement remains post-MVP."
+  },
+  "jiPlayablePath": {
+    "subject": "ji-cheng",
+    "status": "complete-opt-in-playable-preview-awaiting-separate-default-authorization",
+    "owner": "claude",
+    "independentSupport": "deepseek",
+    "integrationOwner": "codex",
+    "sourceCommit": "b97daa00655f77f245b8d7346455e08b7298eca2",
+    "completedAt": "2026-10-22T02:41:28.009573+00:00",
+    "evidence": [
+      "docs/qa/rpg-2-star-ocean-the-second_ji-cheng_complete-companion-path_codex-closeout_opt-in-v01_20261021-224010-3f4e96c3.md",
+      "outputs/jpath33/root/20261021-224010-3f4e96c3/rpg-2-star-ocean-the-second_ji-cheng_complete-companion-path_codex-proof_opt-in-v01_20261021-224010-3f4e96c3.json",
+      "outputs/jpath33/view-20261021-223827-3c4170a4/rpg-2-star-ocean-the-second_ji-cheng_actual-gameplay-preview_manifest_unapproved-v01_20261021-223827-3c4170a4.json"
+    ],
+    "production": {
+      "before": 58.9,
+      "after": 58.9,
+      "changePercentagePoints": 0
+    },
+    "ordinaryDefaultAdopted": false,
+    "defaultAuthorizationPending": true,
+    "separateProfileProtected": true,
+    "npcIsCompanionNotHero": true,
+    "noPersistentFollower": true,
+    "independentBoundaryChecks": 150,
+    "explicitPairIsolationChecks": 15,
+    "realInputChecks": {
+      "enMaleVictory": 60,
+      "enFemaleVictory30fpsMovie": 60,
+      "zhFemaleDefeatRetry": 49,
+      "existingLiangOrdinaryVictoryRegression": 62
+    },
+    "protectedFilesUnchanged": 1603,
+    "noDiagnosticFilterAccepted": true,
+    "defaultPatchPreparedUnapplied": true,
+    "movie": "outputs/jpath33/view-20261021-223827-3c4170a4/rpg-2-star-ocean-the-second_ji-cheng_actual-gameplay-full-path-normal-30fps_unapproved-v01_20261021-223827-3c4170a4.mp4",
+    "gif": "outputs/jpath33/view-20261021-223827-3c4170a4/rpg-2-star-ocean-the-second_ji-cheng_actual-controlled-battle-motion-excerpt-normal-speed_unapproved-v01_20261021-223827-3c4170a4.gif",
+    "artApproved": false,
+    "motionApproved": false,
+    "humanPlaytestsAdded": 0,
+    "next": "Show actual Ji gameplay and obtain separate MVP default-use authorization. Then apply the prepared one-line switch and recheck the ordinary path. Cosmetic refinement remains post-MVP."
   }
 }
