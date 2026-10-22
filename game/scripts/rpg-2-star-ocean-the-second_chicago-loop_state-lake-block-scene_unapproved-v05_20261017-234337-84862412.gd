@@ -2,8 +2,8 @@ extends Node2D
 
 # Chicago Loop: one walkable arrival block at State St and Lake St, under the 1895 Lake Street
 # elevated (State/Lake station). Native 640x360 scene candidate v05 (UNAPPROVED, art not accepted),
-# test-harness opt-in only: the runtime Loop .tscn is not wired to the v05 selector in this pass, so the
-# game keeps v02 by default (see the v05 opt-in selector script and the v05 Godot capture check). Art from
+# Available through the actual Loop selector; scene-default policy remains off pending authorization.
+# Reuses creator-authorized ordinary protagonist presentation through SpriteSetPilot. Art from
 # tools/rpg-2-star-ocean-the-second_chicago-loop_state-lake-block-pixel-author_unapproved-v05_20261017-234337-84862412.py (one bounded
 # material-depth pass over v04: facade, storefront and windbreak backdrop layers only; this script is the
 # v04 scene script with only this header and the art path changed), whose geometry must match the
@@ -15,6 +15,7 @@ extends Node2D
 
 const NativeIdle := preload("res://scripts/character_directional_idle.gd")
 const NativeMotion := preload("res://scripts/character_directional_motion.gd")
+const SpriteSetPilot := preload("res://scripts/exploration_sprite_set_pilot.gd")
 const MAP_SCENE := "res://scenes/scifi_world_map.tscn"
 const MOVE_SPEED := 140.0
 const ART := "res://assets/environments/chicago-loop-state-lake-v05/rpg-2-star-ocean-the-second_chicago-loop_state-lake_%s_unapproved-v05_20261017-234337-84862412.png"
@@ -123,6 +124,7 @@ var hero: Sprite2D
 var facing := "south"
 var walk_time := 0.0
 var walk_phase := 0
+var sprite_pilot
 var title_label: Label
 var hint_label: Label
 var badge_label: Label
@@ -174,6 +176,7 @@ func _ready() -> void:
 	hero.texture = NativeIdle.texture_for("protagonist-" + AppState.hero_appearance, facing)
 	hero.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	hero.offset = Vector2(0, -20)
+	sprite_pilot = SpriteSetPilot.attach(hero, "protagonist-" + AppState.hero_appearance, facing)
 	hero.position = SPAWN
 	if AppState.resume_area_pending:
 		hero.position = safe_position(AppState.resume_area_position)
@@ -253,6 +256,7 @@ func _process(delta: float) -> void:
 	var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	if direction == Vector2.ZERO:
 		_reset_walk_animation()
+		_step_sprite_pilot(delta, hero.position)
 		_update_reveal(delta)
 		return
 	_set_facing(direction)
@@ -262,7 +266,13 @@ func _process(delta: float) -> void:
 		_update_walk_animation(delta)
 	else:
 		_reset_walk_animation()
+	_step_sprite_pilot(delta, previous)
 	_update_reveal(delta)
+
+
+func _step_sprite_pilot(delta: float, from: Vector2) -> void:
+	if sprite_pilot != null and sprite_pilot.has_method("step"):
+		sprite_pilot.step(delta, from, hero.position, facing)
 
 
 func _site_point(id: String) -> Vector2:
@@ -281,10 +291,16 @@ func _set_facing(direction: Vector2) -> void:
 	facing = next
 	walk_time = 0.0
 	walk_phase = 0
+	if sprite_pilot != null:
+		sprite_pilot.face(facing)
+		return
 	hero.texture = NativeIdle.texture_for("protagonist-" + AppState.hero_appearance, facing)
 
 
 func _update_walk_animation(delta: float) -> void:
+	if sprite_pilot != null:
+		sprite_pilot.walk()
+		return
 	walk_time += delta
 	var next_phase := int(floor(walk_time / 0.12)) % 4 + 1
 	if next_phase == walk_phase:
@@ -294,6 +310,9 @@ func _update_walk_animation(delta: float) -> void:
 
 
 func _reset_walk_animation() -> void:
+	if sprite_pilot != null:
+		sprite_pilot.idle()
+		return
 	if walk_phase == 0:
 		return
 	walk_time = 0.0

@@ -13,6 +13,7 @@ extends "res://scripts/rpg-2-star-ocean-the-second_wdc-capitol-west_exploration-
 # Checks: tools/rpg-2-star-ocean-the-second_wdc-capitol-west_v13-flag-integration-check_unapproved-v13_20261018-135539-63201688.py
 
 const V13_FLAG := "--wdc-capitol-west-v13"
+const SceneDefaults35 := preload("res://scripts/sdef35/rpg-2-star-ocean-the-second_mvp-scene-defaults_policy_prepared-v01_20261021-231349-a83c4bae.gd")
 const V13_BASE_PATH := "res://assets/environments/candidates/wdc-cw-v13_20261018-100938-075675cf/rpg-2-star-ocean-the-second_wdc-capitol-west_rt-base_unapproved-v13_20261018-100938-075675cf.png"
 
 static var v13_override := -1
@@ -23,7 +24,16 @@ var v13_active := false
 static func v13_enabled() -> bool:
 	if v13_override >= 0:
 		return v13_override == 1
-	return OS.get_cmdline_user_args().has(V13_FLAG)
+	var args := OS.get_cmdline_user_args()
+	if args.has(V13_FLAG):
+		return true
+	# MVP default fallback (sdef35 policy; false until the creator authorizes it). Any explicit older
+	# v12/v12r1/v12r2 override or flag keeps its own behaviour.
+	if v12_override >= 0 or r1_override >= 0 or r2_override >= 0:
+		return false
+	if args.has(V12_FLAG) or args.has(R1_FLAG) or args.has(R2_FLAG):
+		return false
+	return SceneDefaults35.default_on(SceneDefaults35.RUINS)
 
 
 func _ready() -> void:

@@ -70,6 +70,7 @@ const WDC_FIXTURE_BASE_Y := 228.0
 # Clue fixtures are y-sorted with the heroine and carry their clue marker; the terminal table sorts first and its
 # blocker keeps her clear of it.
 const WDC_ROOM_TWO_FLAG := "--wdc-records-chamber-v01"
+const SceneDefaults35 := preload("res://scripts/sdef35/rpg-2-star-ocean-the-second_mvp-scene-defaults_policy_prepared-v01_20261021-231349-a83c4bae.gd")
 # Opt-in UNAPPROVED navigation UI skin pilot (presentation only): `-- --navigation-ui-skin-pilot`, or set
 # navigation_ui_skin_override = 1 before the scene loads. Off by default; a refused package changes nothing.
 const NavigationUiSkin := preload("res://scripts/rpg-2-star-ocean-the-second_navigation-ui_skin-helper_v01_20261019-174604-f7b34a81.gd")
@@ -181,7 +182,8 @@ func _ready() -> void:
 	if room == 1 and destination_id == "scifi.outskirts":
 		_build_yonkers_room_one()
 	wdc_room_two_walls = room == 2 and destination_id == "scifi.ruins"
-	if wdc_room_two_walls and OS.get_cmdline_user_args().has(WDC_ROOM_TWO_FLAG):
+	# Flag first, then the MVP default fallback (sdef35 policy; false until the creator authorizes it).
+	if wdc_room_two_walls and (OS.get_cmdline_user_args().has(WDC_ROOM_TWO_FLAG) or SceneDefaults35.default_on(SceneDefaults35.RECORDS)):
 		_build_wdc_room_two()
 	_build_ui()
 	_start_audio()

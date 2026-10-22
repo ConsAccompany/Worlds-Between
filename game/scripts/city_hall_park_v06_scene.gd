@@ -12,6 +12,7 @@ const RUN_DIR := "res://assets/environments/candidates/nyc-chp-v06_20261017-1652
 const SCENE_RES := "rpg-2-star-ocean-the-second_nyc-city-hall-park_scene_unapproved-v06_20261017-165253-4519dffe.tres"
 const SCENE_JSON := "rpg-2-star-ocean-the-second_nyc-city-hall-park_scene_unapproved-v06_20261017-165253-4519dffe.json"
 const CLI_FLAG := "--city-hall-park-v06"
+const SceneDefaults35 := preload("res://scripts/sdef35/rpg-2-star-ocean-the-second_mvp-scene-defaults_policy_prepared-v01_20261021-231349-a83c4bae.gd")
 const DEV_DIR_PREFIX := "--chp6-dir="
 const SPAWN := Vector2(340, 253)
 const SILHOUETTE_Z := 3000
@@ -60,7 +61,10 @@ var reveal_driver: Node
 static func enabled() -> bool:
 	if enabled_override >= 0:
 		return enabled_override == 1
-	return OS.get_cmdline_user_args().has(CLI_FLAG)
+	if OS.get_cmdline_user_args().has(CLI_FLAG):
+		return true
+	# MVP default fallback (sdef35 policy; false until the creator authorizes it).
+	return SceneDefaults35.default_on(SceneDefaults35.CITY)
 
 
 static func dev_dir() -> String:
