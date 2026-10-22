@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-22T01:26:07.053966+00:00",
+  "updatedAt": "2026-10-22T02:20:44.041334+00:00",
   "purpose": "Operating queue and worktree ownership; no progress points or account details",
   "workflow": "docs/workflow.md",
   "canonicalLedger": "outputs/rpg-2-star-ocean-the-second_production-completion_task-ledger_v01_20261018-140533-3de52073.json",
@@ -1319,20 +1319,14 @@
     }
   ],
   "activeDualProviderBatch": {
-    "primary": "ji-exploration-source",
-    "status": "completed-and-integrated",
+    "primary": "ji-combat-source",
+    "status": "completed",
     "owner": "claude",
     "support": "deepseek",
-    "base": "d23d66397e69ff736bdfbedf8c7bd8d42a5d7167",
-    "ordinaryAdoptionAuthorized": false,
-    "sourceArtFrozen": false,
-    "protectedOriginalSourceArtFrozen": true,
-    "sourceCommit": "c030f4f573c838d99efe4400a9b214884e32a69c",
-    "evidence": [
-      "docs/qa/rpg-2-star-ocean-the-second_ji-cheng_exploration-source_codex-closeout_unapproved-v01_20261021-212415-382d3721.md",
-      "outputs/jexplore31/root/20261021-212415-382d3721/rpg-2-star-ocean-the-second_ji-cheng_source-set_codex-proof-v01_20261021-212415-382d3721.json"
-    ],
-    "completedAt": "2026-10-22T01:26:07.053966+00:00"
+    "base": "f22556c7d36b7f7db127f8a73568ec8a36c02941",
+    "sourceCommit": "e4e586bc2574dbcd8dfb2014b042fd233bbdf22f",
+    "completedAt": "2026-10-22T02:20:44.041334+00:00",
+    "ordinaryAdoptionAuthorized": false
   },
   "characterSpriteStyleDirection": {
     "reference": "Sea of Stars",
@@ -1429,91 +1423,148 @@
   },
   "nextProductionTask": {
     "subject": "ji-cheng",
-    "kind": "four-direction-exploration-source",
+    "kind": "complete-companion-playable-path",
     "owner": "claude",
     "coordinator": "codex",
-    "status": "completed",
+    "status": "ready",
     "tasks": [
-      "content.char.ji-cheng.static-west",
-      "content.char.ji-cheng.static-north",
-      "content.char.ji-cheng.static-east",
-      "content.char.ji-cheng.idle-anim",
-      "content.char.ji-cheng.walk-south",
-      "content.char.ji-cheng.walk-west",
-      "content.char.ji-cheng.walk-north",
-      "content.char.ji-cheng.walk-east"
+      "content.char.ji-cheng.runtime-integration",
+      "content.combat.ji-cheng.combat-integration"
     ],
-    "doneBoundary": "Missing original four-direction statics/idle/walk/stop editable packages, native exports, independent package contracts and actual Godot source fit; no default switch or artistic acceptance.",
-    "supportingTask": {
-      "owner": "deepseek",
-      "scope": "Independent actor/source/runtime package contract checks",
-      "status": "done-independently-rerun-on-ji",
-      "maintainedImplementation": "Existing native compositor plus compact Codex runtime parity adapter; full DeepSeek proposal retained as QA snapshot."
-    },
-    "writeScope": [
-      "new Ji source author",
-      "outputs/jexplore31",
-      "game/data/jexplore31"
+    "doneBoundary": "Real recruitment/control/exploration/normal encounter/eight combat actions/victory return/autosave reload and defeat-retry; ordinary default use separately authorized. Preview alone does not complete integration ledger tasks.",
+    "sourceDependencies": [
+      "c030f4f573c838d99efe4400a9b214884e32a69c",
+      "e4e586bc2574dbcd8dfb2014b042fd233bbdf22f"
     ],
     "protected": [
-      "all original south/actor art",
-      "existing defaults/runtime/mechanics/saves",
-      "no followers"
+      "existing female/male/Zhao/Liang ordinary defaults",
+      "mechanics/input/save schema",
+      "no persistent followers"
     ],
-    "productionBefore": 58.0,
-    "nextAction": "Produce missing Ji Cheng battle static and eight source actions, then companion playable integration. Existing defaults preserved; refinement stays post-MVP.",
-    "sourceCommit": "c030f4f573c838d99efe4400a9b214884e32a69c",
-    "evidence": [
-      "docs/qa/rpg-2-star-ocean-the-second_ji-cheng_exploration-source_codex-closeout_unapproved-v01_20261021-212415-382d3721.md",
-      "outputs/jexplore31/root/20261021-212415-382d3721/rpg-2-star-ocean-the-second_ji-cheng_source-set_codex-proof-v01_20261021-212415-382d3721.json"
-    ],
-    "productionAfter": 58.6,
-    "completedAt": "2026-10-22T01:26:07.053966+00:00"
+    "supportingTask": {
+      "owner": "deepseek",
+      "scope": "Bounded independent coexistence/refusal/save and existing driver checks; no new framework"
+    },
+    "nextAction": "Reuse Liang companion path with Ji-specific source indexes and actual recruitment conditions. Complete one useful playable boundary."
   },
   "lastCompletedProductionTask": {
-    "subject": "liang-xu",
-    "kind": "combat-static-eight-actions-source",
+    "subject": "ji-cheng",
+    "kind": "combat-static-eight-action-source",
     "owner": "claude",
     "coordinator": "codex",
-    "status": "done",
+    "status": "source_complete",
     "tasks": [
-      "content.combat.liang-xu.combat-static",
-      "content.combat.liang-xu.combat-actions"
+      "content.combat.ji-cheng.combat-static",
+      "content.combat.ji-cheng.combat-actions"
     ],
-    "doneBoundary": "Complete editable native static and eight action sources, actor-only runtime-compatible set, independent source/native and actual arena renderer checks; no ordinary adoption or approval.",
+    "doneBoundary": "Ji-specific static plus eight editable action source packages, deterministic/native/runtime validation and actual arena source-fit captures. Ordinary playable integration and artistic approval remain separate.",
     "supportingTask": {
       "owner": "deepseek",
-      "scope": "Read-only independent source/index validation and adversarial fixtures; new tool and output paths",
-      "status": "done-independent-root-rerun-strict-snapshot"
+      "scope": "Independent current Ji mechanics/skill/source-contract audit and existing validation only; no new framework",
+      "status": "complete-with-retained-initial-selftest-path-failure"
     },
+    "writeScope": [
+      "new Ji combat author",
+      "outputs/jcombat32",
+      "game/data/jcombat32"
+    ],
     "protected": [
-      "runtime defaults",
-      "combat mechanics",
-      "gender-unspecified canon",
-      "all existing approved sources"
+      "existing exploration and combat source",
+      "ordinary defaults",
+      "mechanics/input/saves/collisions",
+      "no followers"
     ],
-    "nextAction": "Finish Liang ordinary companion recruitment/control/battle-return/save integration; new default use remains separately authorized.",
-    "sourceCommit": "8fa0dd279891617badf32502b96cf41fdf2fb895",
-    "completedAt": "2026-10-22T00:21:07.630732+00:00",
+    "productionBefore": 58.6,
+    "nextAction": "Complete Ji recruitment/control/exploration/battle-return/save path. Separate default-use authorization required; refinements remain post-MVP.",
+    "completedAt": "2026-10-22T02:20:44.041334+00:00",
+    "sourceCommit": "e4e586bc2574dbcd8dfb2014b042fd233bbdf22f",
     "evidence": [
-      "docs/qa/rpg-2-star-ocean-the-second_liang-xu_combat-source_codex-closeout_unapproved-v01_20261021-201856-3d4f380f.md",
-      "outputs/lcombat29/root/20261021-201507-427df446/rpg-2-star-ocean-the-second_liang-combat_root-production-proof_v01_20261021-201856-3d4f380f.json"
+      "docs/qa/rpg-2-star-ocean-the-second_ji-cheng_combat-source_codex-closeout_unapproved-v01_20261021-221958-82e9a825.md",
+      "outputs/jcombat32/root/20261021-221920-a82f2634/rpg-2-star-ocean-the-second_ji-cheng-combat_root-production-proof_unapproved-v01_20261021-221958-82e9a825.json"
     ],
-    "productionBefore": 57.5,
-    "productionAfter": 57.8
+    "productionAfter": 58.9
   },
   "latestImplementationBoundary": {
-    "task": "ji-exploration-source",
-    "status": "verified-source-production-complete",
-    "sourceCommit": "c030f4f573c838d99efe4400a9b214884e32a69c",
+    "subject": "ji-cheng",
+    "status": "source-complete-unapproved-not-default-integrated",
+    "owner": "claude",
+    "independentSupport": "deepseek",
+    "integrationOwner": "codex",
+    "sourceCommit": "e4e586bc2574dbcd8dfb2014b042fd233bbdf22f",
+    "completedAt": "2026-10-22T02:20:44.041334+00:00",
     "evidence": [
-      "docs/qa/rpg-2-star-ocean-the-second_ji-cheng_exploration-source_codex-closeout_unapproved-v01_20261021-212415-382d3721.md",
-      "outputs/jexplore31/root/20261021-212415-382d3721/rpg-2-star-ocean-the-second_ji-cheng_source-set_codex-proof-v01_20261021-212415-382d3721.json"
+      "docs/qa/rpg-2-star-ocean-the-second_ji-cheng_combat-source_codex-closeout_unapproved-v01_20261021-221958-82e9a825.md",
+      "outputs/jcombat32/root/20261021-221920-a82f2634/rpg-2-star-ocean-the-second_ji-cheng-combat_root-production-proof_unapproved-v01_20261021-221958-82e9a825.json"
     ],
-    "ordinaryRuntimeIntegrationPending": true,
-    "artApproved": false
+    "production": {
+      "before": 58.6,
+      "after": 58.9,
+      "changePercentagePoints": 0.3
+    },
+    "editablePackages": 24,
+    "runtimePoseCells": 23,
+    "roleLayers": 10,
+    "nativeSourceChecks": 297,
+    "nativeFlatExportsEqual": 24,
+    "independentCompositionChecks": 1056,
+    "runtimeContractChecks": 180,
+    "sourceIndexChecks": 38,
+    "sourceIndexRefusalCases": 2,
+    "bilingualArenaSourceFit": true,
+    "actual640Captures": 16,
+    "scriptedSourcePoses": true,
+    "normalInput": false,
+    "protectedFilesUnchanged": 661,
+    "ordinaryDefaultAdopted": false,
+    "artApproved": false,
+    "motionApproved": false,
+    "humanPlaytestsAdded": 0,
+    "visualLimits": [
+      "Ji is visibly smaller than the other current actors in the mixed-party source fixture.",
+      "Face/near hair remain simple at actual gameplay scale; left shaved temple is far-side when facing right.",
+      "Only source production was completed; full normal-speed motion and mixed-party/default presentation remain pending."
+    ],
+    "nativeLimits": "Pixelorama shader-sampler diagnostics persist; exports equal but no clean-GUI/SaveAs/reopen claim.",
+    "next": "Complete Ji recruitment/control/exploration/battle-return/save path. Separate default-use authorization required; refinements remain post-MVP."
   },
   "completedProductionTaskHistory": [
+    {
+      "subject": "ji-cheng",
+      "kind": "combat-static-eight-action-source",
+      "owner": "claude",
+      "coordinator": "codex",
+      "status": "source_complete",
+      "tasks": [
+        "content.combat.ji-cheng.combat-static",
+        "content.combat.ji-cheng.combat-actions"
+      ],
+      "doneBoundary": "Ji-specific static plus eight editable action source packages, deterministic/native/runtime validation and actual arena source-fit captures. Ordinary playable integration and artistic approval remain separate.",
+      "supportingTask": {
+        "owner": "deepseek",
+        "scope": "Independent current Ji mechanics/skill/source-contract audit and existing validation only; no new framework",
+        "status": "complete-with-retained-initial-selftest-path-failure"
+      },
+      "writeScope": [
+        "new Ji combat author",
+        "outputs/jcombat32",
+        "game/data/jcombat32"
+      ],
+      "protected": [
+        "existing exploration and combat source",
+        "ordinary defaults",
+        "mechanics/input/saves/collisions",
+        "no followers"
+      ],
+      "productionBefore": 58.6,
+      "nextAction": "Complete Ji recruitment/control/exploration/battle-return/save path. Separate default-use authorization required; refinements remain post-MVP.",
+      "completedAt": "2026-10-22T02:20:44.041334+00:00",
+      "sourceCommit": "e4e586bc2574dbcd8dfb2014b042fd233bbdf22f",
+      "evidence": [
+        "docs/qa/rpg-2-star-ocean-the-second_ji-cheng_combat-source_codex-closeout_unapproved-v01_20261021-221958-82e9a825.md",
+        "outputs/jcombat32/root/20261021-221920-a82f2634/rpg-2-star-ocean-the-second_ji-cheng-combat_root-production-proof_unapproved-v01_20261021-221958-82e9a825.json"
+      ],
+      "productionAfter": 58.9
+    },
     {
       "subject": "liang-xu",
       "kind": "complete-companion-playable-path",
@@ -1546,6 +1597,49 @@
       "productionBefore": 57.8,
       "productionAfter": 58.0,
       "completedAt": "2026-10-22T00:49:47.937657+00:00"
+    },
+    {
+      "subject": "ji-cheng",
+      "kind": "four-direction-exploration-source",
+      "owner": "claude",
+      "coordinator": "codex",
+      "status": "completed",
+      "tasks": [
+        "content.char.ji-cheng.static-west",
+        "content.char.ji-cheng.static-north",
+        "content.char.ji-cheng.static-east",
+        "content.char.ji-cheng.idle-anim",
+        "content.char.ji-cheng.walk-south",
+        "content.char.ji-cheng.walk-west",
+        "content.char.ji-cheng.walk-north",
+        "content.char.ji-cheng.walk-east"
+      ],
+      "doneBoundary": "Missing original four-direction statics/idle/walk/stop editable packages, native exports, independent package contracts and actual Godot source fit; no default switch or artistic acceptance.",
+      "supportingTask": {
+        "owner": "deepseek",
+        "scope": "Independent actor/source/runtime package contract checks",
+        "status": "done-independently-rerun-on-ji",
+        "maintainedImplementation": "Existing native compositor plus compact Codex runtime parity adapter; full DeepSeek proposal retained as QA snapshot."
+      },
+      "writeScope": [
+        "new Ji source author",
+        "outputs/jexplore31",
+        "game/data/jexplore31"
+      ],
+      "protected": [
+        "all original south/actor art",
+        "existing defaults/runtime/mechanics/saves",
+        "no followers"
+      ],
+      "productionBefore": 58.0,
+      "nextAction": "Produce missing Ji Cheng battle static and eight source actions, then companion playable integration. Existing defaults preserved; refinement stays post-MVP.",
+      "sourceCommit": "c030f4f573c838d99efe4400a9b214884e32a69c",
+      "evidence": [
+        "docs/qa/rpg-2-star-ocean-the-second_ji-cheng_exploration-source_codex-closeout_unapproved-v01_20261021-212415-382d3721.md",
+        "outputs/jexplore31/root/20261021-212415-382d3721/rpg-2-star-ocean-the-second_ji-cheng_source-set_codex-proof-v01_20261021-212415-382d3721.json"
+      ],
+      "productionAfter": 58.6,
+      "completedAt": "2026-10-22T01:26:07.053966+00:00"
     }
   ]
 }

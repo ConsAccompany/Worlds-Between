@@ -2,7 +2,15 @@
 
 Last updated: 2026-10-21
 
-## Latest completed batch — 2026-10-21: Ji Cheng exploration source
+## Latest completed batch — 2026-10-21: Ji Cheng combat source
+
+Production **58.6% →58.9% (+0.3 pp)**; content583→594/1881. Inspection **18.1% →18.1% (+0.0 pp)**; creator approval **7.8% →7.8% (+0.0 pp)**. Two existing missing-source tasks complete; frozen baseline unchanged.
+
+Battle static and all eight combat clips:23runtime poses plus separate still,24editablePXO/ORA/PNG packages,10role layers. Source/native297checks,independent composition1056,runtime180,member/source/index38 and2refusal cases pass. Native24flat/five split-package equality verified. Actual scripted EN30/ZH60 arena source probes pass with16captures;661protected files unchanged. Initial independent selftest output-root failure and first ZH GLES3 startup error are retained; same-root/fresh-profile reruns passed without source or threshold changes. Native shader diagnostics remain disclosed. Source `e4e586bc2574dbcd8dfb2014b042fd233bbdf22f`. [Closeout](../docs/qa/rpg-2-star-ocean-the-second_ji-cheng_combat-source_codex-closeout_unapproved-v01_20261021-221958-82e9a825.md).
+
+Source-only completion: Ji is visibly smaller than existing actors in the mixed-party fixture. Cosmetic refinement stays post-MVP; normal-input companion integration is next, and default adoption requires separate authorization. Full art/motion approval remains pending; full sprites0/52,scene art5/12,humanplays0/2.
+
+## Prior completed batch — 2026-10-21: Ji Cheng exploration source
 
 Production **58.0% →58.6% (+0.6 pp)**; content563→583/1881. Inspection **18.1% →18.1% (+0.0 pp)**; creator approval **7.8% →7.8% (+0.0 pp)**. Eight existing missing source-production tasks complete; no scoring baseline change.
 
