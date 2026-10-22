@@ -1,0 +1,448 @@
+{
+  "schema": "worlds-between.ji-combat-source-check/1",
+  "status": "TARGET-PRODUCTION-CHECKS-PASS-SELFTEST-NOT-ISOLATED",
+  "generated_utc": "2026-10-22T02:20:00Z",
+  "base": "f22556c7d36b7f7db127f8a73568ec8a36c02941",
+  "producer_root": "C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/needle32/cl-jcombat",
+  "canonical_root": "C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync",
+  "source_manifest_present": true,
+  "source_manifest": {
+    "path": "outputs/jcombat32/rpg-2-star-ocean-the-second_ji-cheng-combat_author-manifest_unapproved-jcombat32-v01_20261021-220632-53e4c35a.json",
+    "sha256": "ce6f6b4209dccdc633b3b5dda9d8d2ca7f8b50bd4c99fd561fd5ff89cea72d34",
+    "bytes": 63182,
+    "member_id": "ji-cheng",
+    "generator_tool": {
+      "path": "tools/rpg-2-star-ocean-the-second_ji-cheng_combat-static-and-actions-author_unapproved-jcombat32-v01_20261021-220632-060661dc.py",
+      "raw_sha256_snapshot": "828efa79b0cb13cbf556a9e98f8fcb736e3a74dde402548388560552e3a5abce",
+      "manifest_text_hash": "f9200c7b98779eb8163954f5227e91681463e1ebce5b1866e8d76d250be4ba58",
+      "normalization": "sha256-text-lf-v1 (CRLF->LF)"
+    }
+  },
+  "claims": {
+    "technical_source_checks": "wrapper 38/38, runtime validator 180/180, native composition reader 1056/1056 on the emitted author manifest",
+    "wrapper_self_test": "FAIL: positive control PASS, but member_index_extra and action_source_drift were not isolated (native reader ValueError on temp fixtures outside the producer root)",
+    "ji_assets_passed": false,
+    "art_approved": false,
+    "motion_approved": false,
+    "default_changed": false,
+    "gameplay_or_mechanics_changed": false,
+    "note": "No blanket asset/art/default pass; only the exact static source/index/export checks above passed, with the self-test gate not clean."
+  },
+  "canonical_sources": {
+    "game/scripts/app_state.gd": {
+      "sha256": "e3a162ef3d70aafbb97f4a668b69813dc8aed3e327ee6a87b398aba29fdbc33f",
+      "bytes": 95282,
+      "lines": 1781,
+      "producer_copy_byte_equal": true
+    },
+    "game/scripts/battle_arena.gd": {
+      "sha256": "a73fe020f0fbcf3621ced1286b89d03f88993d1b400ee52faec026b91a370818",
+      "bytes": 85624,
+      "lines": 1828,
+      "producer_copy_byte_equal": true
+    }
+  },
+  "wrapper_runs": {
+    "wrapper": {
+      "path": "tools/rpg-2-star-ocean-the-second_lcombat29_combat-source-independent-check_wrapper-v01_20261021-201231-0fa32a.py",
+      "sha256": "452bfa43e80989de312d633a76666a0f6567ab54b7f1ac2b79a37e031d1e6989",
+      "python": "C:/Users/hkzha/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe"
+    },
+    "self_test": {
+      "report": "outputs/jcombat32-check/rpg-2-star-ocean-the-second_ji-cheng_combat-source-check_unapproved-jcombat32-v01_20261021-221500-8b2e6d47.json",
+      "report_sha256": "0a26759aabc78a00d03baf4d080ce2bbedec24fa01d90abba0019abc0ae4f466",
+      "exit": 1,
+      "status": "FAIL",
+      "positive_control": "PASS (exit 0, validator PASS, native reader true, 0 failed predicates)",
+      "failures": [
+        "member_index_extra did not isolate its expected gap",
+        "action_source_drift did not isolate its expected gap"
+      ],
+      "matched_expected_predicates": [
+        "index.member_only",
+        "actions.skill.source_match"
+      ],
+      "cause": "The existing native composition reader raised ValueError at path.relative_to(ROOT) because the self-test temp fixtures were created under the writable check directory outside the producer root. The expected predicates matched, but the reader crash prevented isolation.",
+      "out_location": "workspace outputs/jcombat32-check (producer outputs write denied by the sandbox; no approval channel for the escalation)"
+    },
+    "production": {
+      "report": "outputs/jcombat32-check/rpg-2-star-ocean-the-second_ji-cheng_combat-source-check_production_unapproved-jcombat32-v01_20261021-221900-4c7a0e15.json",
+      "report_sha256": "88eea9836849cfeb1af4ce6b1e1c49eae05e39a0f6a7a67d9ea374b04de667cf",
+      "exit": 0,
+      "status": "PASS",
+      "wrapper_checks": "38/38",
+      "validator": "180/180 PASS, exit 0",
+      "native_reader": "1056/1056 PASS, exit 0, 73 files, 96 raw-hash checks",
+      "failed_predicates": []
+    }
+  },
+  "target_verification": {
+    "member_only_index": {
+      "keys": [
+        "ji-cheng"
+      ],
+      "index_sha256": "9677d8e36cf080031d95610fe0d8b51ce9ad2c5ed49c3e7785da0dc4a0caf9e0",
+      "target_manifest_sha256": "aa49f9432145707290c989df9332ee9b075108c48f764fd38b7e83f3c272ff28",
+      "target_matches_pkg_manifest": true
+    },
+    "runtime_manifest_member": "ji-cheng",
+    "runtime_actions": [
+      "attack",
+      "defeat",
+      "dodge",
+      "guard",
+      "hit",
+      "idle",
+      "move",
+      "skill"
+    ],
+    "tick_rate": 30,
+    "source_cells": "23 distinct poses -> 23 distinct cells; all in bounds",
+    "sheet": {
+      "sha256": "2093f9022fc80c9d690fd9b58c7663bba3808bf1b2dd72f70b2d983f9a8fbdaf",
+      "bytes": 34595,
+      "width": 816,
+      "height": 576,
+      "columns": 6,
+      "rows": 4,
+      "cell_count": 24,
+      "referenced_cells": 23
+    },
+    "source_provenance": "runtime manifest source_provenance basename equals the passed author-manifest basename",
+    "strike_cue_tick": 0
+  },
+  "identity": {
+    "member_id": "ji-cheng",
+    "name_zh": "纪澄",
+    "name_key": "member_ji",
+    "age": 28,
+    "sex": "female",
+    "role": "records restorer",
+    "identity_basis": "task input; not new canon",
+    "source_status": "concept reference UNAPPROVED; not art approval",
+    "concept_sheet": {
+      "path": "outputs/rpg-2-star-ocean-the-second_ji-cheng_character-sheet_v01_20261013-190436-dcea1a37.png",
+      "sha256": "4165c47e28329e2d4fd2dd160886118a70cb06fd160172b90ba45f00584cc546",
+      "approved": false
+    },
+    "signature": "shaved LEFT temple with razor lines and rectangular drop earring; straight dark shoulder bob with silver tips; ink-green long coat with uneven cream panels; grey sleeve lining; crossed harness, hip vials, thigh strap and pouch; brass folding magnifier; small book",
+    "visible_side_rule": "At authored_facing right the near side is her RIGHT: silver-tipped curtain over the near ear, magnifier in the near hand, book in the far hand, hip vials/thigh strap/pouch, long cream panel and ragged point. The shaved LEFT temple/left-ear earring are far-side. The emitted author manifest discloses this as the undercut wrap plus earring glint; do not relocate the shaved temple to the visible right side. The loader mirrors one sheet for the other facing, so the shaved left temple cannot be shown in both facings."
+  },
+  "combat_set_contract": {
+    "runtime_schema": "worlds-between.combat-sprite-set/1",
+    "index_schema": "worlds-between.combat-sprite-set-index/1",
+    "set_id": "ji-cheng-combat-jcombat32-v01",
+    "character": {
+      "member_id": "ji-cheng"
+    },
+    "tick_rate": 30,
+    "cell": [
+      136,
+      144
+    ],
+    "pivot": [
+      64,
+      136
+    ],
+    "logical_scale": 0.5,
+    "display_proportion": "0.65",
+    "authored_facing": "right",
+    "sheet_layout": "6 columns; 24 cells; 23 referenced pose cells",
+    "editable_role_layers": 10,
+    "layer_note": "coat-back, arm-back, leg-back, leg-front, torso, head, book, arm-front, magnifier, fx; the existing native reader only requires >=2",
+    "frame_count_binding": false,
+    "frame_source": "compact frames here are the emitted set; hsc19's 4/8/4/3/3/6/4/3 frames are the reference, not a frame-count contract. Binding is per-action total ticks.",
+    "actions": {
+      "idle": {
+        "frames": 2,
+        "ticks": 28,
+        "seconds_fraction": "28/30",
+        "loop": true
+      },
+      "attack": {
+        "frames": 5,
+        "ticks": 13,
+        "seconds_fraction": "13/30",
+        "loop": false
+      },
+      "move": {
+        "frames": 4,
+        "ticks": 12,
+        "seconds_fraction": "12/30",
+        "loop": true
+      },
+      "guard": {
+        "frames": 2,
+        "ticks": 14,
+        "seconds_fraction": "14/30",
+        "loop": true
+      },
+      "dodge": {
+        "frames": 3,
+        "ticks": 9,
+        "seconds_fraction": "9/30",
+        "loop": false
+      },
+      "skill": {
+        "frames": 5,
+        "ticks": 14,
+        "seconds_fraction": "14/30",
+        "loop": false
+      },
+      "hit": {
+        "frames": 3,
+        "ticks": 8,
+        "seconds_fraction": "8/30",
+        "loop": false
+      },
+      "defeat": {
+        "frames": 3,
+        "ticks": 9,
+        "seconds_fraction": "9/30",
+        "loop": false
+      }
+    },
+    "totals": {
+      "runtime_frames": 27,
+      "ticks": 107,
+      "seconds_fraction": "107/30",
+      "hsc19_reference_frames": 35,
+      "hsc19_reference_ticks": 107,
+      "accepted_pose_cells_plus_still": 23
+    },
+    "reference_manifest": {
+      "path": "game/data/hsc19/rpg-2-star-ocean-the-second_heroine-sea-combat_pose-revision_spritesheet-manifest_20261021-034640-07587a3c.json",
+      "sha256": "e32403b3218ff35221d2a6ef1c2c186acef8d2de048f9fa3f5c50fde35e2ee62"
+    }
+  },
+  "mechanics": {
+    "member_def": {
+      "path": "game/scripts/app_state.gd",
+      "line": 581,
+      "job_series": "relics",
+      "max_hp": 80,
+      "max_energy": 80,
+      "attack_damage": 12,
+      "attack_range": 100.0,
+      "skill_key": "battle_skill_ji",
+      "color": "#6da78b"
+    },
+    "attack": {
+      "damage": 12,
+      "damage_formula": "attack_damage + fighter.boost + next_attack_bonus; boost and bonus are consumed",
+      "range": 100.0,
+      "cooldown_s": 0.43,
+      "timing": "immediate on request; no contact delay for ji-cheng",
+      "vfx": "attack cue at enemy_x, ARENA_FLOOR_Y-28, facing sign",
+      "evidence": "game/scripts/battle_arena.gd lines 696-713"
+    },
+    "personal_skill": {
+      "key": "battle_skill_ji",
+      "zh": "断层回读",
+      "en": "Fault-Line Recall",
+      "energy_cost": 14,
+      "cooldown_s": 2.2,
+      "rank": "personal_skill_rank, default 1",
+      "effect": "enemy_cooldown += 0.65*rank; enemy_windup += 0.65*rank only when already winding up; no damage, heal or boost",
+      "vfx": "personal-ji-cheng at fighter x, ARENA_FLOOR_Y-34, facing sign",
+      "evidence": "game/scripts/battle_arena.gd lines 852-879; app_state.gd line 120 and 359"
+    },
+    "relics_job_skill": {
+      "energy_cost": "10 + 3*skill_stage",
+      "cooldown_s": 2.2,
+      "range_gate": "none for relics; 105 sword / 175 firearms gates do not apply",
+      "effect": "enemy_cooldown += 0.25 + 0.2*rank + 0.2*(skill_stage-1); enemy_windup += same if already winding up; no damage",
+      "vfx": "job-relics at fighter x, ARENA_FLOOR_Y-28",
+      "evidence": "game/scripts/battle_arena.gd lines 891-929"
+    },
+    "guard": {
+      "damage_multiplier": 0.30,
+      "energy_cost": 6,
+      "evidence": "game/scripts/battle_arena.gd lines 952-955"
+    },
+    "dodge": {
+      "energy_cost": 12,
+      "invulnerable_s": 0.27,
+      "cooldown_s": 0.75,
+      "vfx": "dodge cue at fighter x, ARENA_FLOOR_Y-3",
+      "evidence": "game/scripts/battle_arena.gd lines 830-840"
+    },
+    "hit_and_down": {
+      "enemy_damage": "patrol 12 / sentry 18",
+      "enemy_reach": 69.0,
+      "visual_action": "down",
+      "clip_key": "defeat",
+      "evidence": "game/scripts/battle_arena.gd lines 13-14, 942-965"
+    }
+  },
+  "control_state_mapping": {
+    "input": {
+      "battle_attack": "_try_attack",
+      "battle_dodge": "_try_dodge",
+      "battle_skill": "_use_skill",
+      "battle_job_skill": "_use_job_skill",
+      "battle_guard_held": "fighter.guard",
+      "battle_pause": "_toggle_pause",
+      "battle_switch": "cycle controlled_index",
+      "battle_auto": "toggle auto_mode",
+      "evidence": "game/scripts/battle_arena.gd lines 417-425, 1177-1185"
+    },
+    "visual_state": {
+      "rule": "not alive -> defeat; dodge_time>0 -> dodge; attack event -> attack; skill/hit event -> skill/hit; one-shot continues to its own clip duration; guard -> guard; visual_moving -> move; else idle",
+      "down_note": "arena sets visual_action 'down'; the loaded set exposes 'defeat', which the loader selects when not alive",
+      "evidence": "game/scripts/rpg-2-star-ocean-the-second_combat-sprite-set_loader-playback_pilot-v01_20261018-153656-43a19158.gd lines 382-407; battle_arena.gd line 965"
+    }
+  },
+  "cue_contract": {
+    "attack": "contact/FX at tick 0 because damage resolves on request; do NOT use the heroine 5/30 contact cue",
+    "skill": "effect and FX at tick 0 on request; clip 14/30",
+    "guard": "open on tick 0; 14/30 loop; emitted guard has a 2-tick intro then loops from the hold frame",
+    "dodge": "cue at tick 0; clip 9/30 but loader exits at dodge_time 0.27",
+    "hit": "cue at tick 0; 8/30 one-shot",
+    "defeat": "cue at tick 0; 9/30 one-shot, holds last frame",
+    "heroine_contact_scope": "contact_event keys exist only for hero + female; ji-cheng keeps the immediate attack",
+    "emitted_strike_cue": 0,
+    "evidence": "game/scripts/battle_arena.gd lines 342, 696-709, 745-749, 875-878; author manifest strikeCueTick=0"
+  },
+  "timing_findings": [
+    {
+      "id": "attack_clip_exceeds_cooldown",
+      "detail": "attack 13/30 = 0.433333 s exceeds attack_cooldown 0.43 s by 1/300 s on Ji's immediate companion path. A new request at the exact cooldown restarts the one-shot and cuts its last 1/300 s. The heroine reference has the same tick total but its explicit recovery ends at 12/30 = 0.40 s and cuts there, so this boundary is specific to the non-explicit Ji path.",
+      "recommendation": "keep 13/30 to match the frozen tick totals; do not silently change to 12/30 without root approval",
+      "severity": "boundary-only"
+    },
+    {
+      "id": "dodge_clip_exceeds_dodge_time",
+      "detail": "dodge 9/30 = 0.30 s but dodge_time = 0.27 s; the loader leaves dodge at 0.27 s, so the final 0.03 s (0.9 tick) is not displayed. Inherited from the shared loader.",
+      "severity": "boundary-only"
+    },
+    {
+      "id": "legacy_durations_do_not_clip_sets",
+      "detail": "HERO_COMBAT_ACTION_DURATION attack 0.39/hit 0.24/skill 0.45/down 0.30 clears visual_action, but the loader keeps a one-shot until its own clip duration (loader line 401). The set's authored ticks therefore govern playback; do not re-time to the legacy 0.39/0.24/0.45 values.",
+      "severity": "contract"
+    }
+  ],
+  "palette_reference": {
+    "tool": "tools/rpg-2-star-ocean-the-second_ji-cheng_explore-source-author_unapproved-jexplore31-v01_20261021-210451-b2782add.py",
+    "tool_sha256": "eac4d03afa45366d8cb21c71c632212ea0071d3190e2f0890a7d9fea029929ef",
+    "palette_source_tool": "tools/rpg-2-star-ocean-the-second_ji-cheng_south-idle-static-pilot-build-and-check_unapproved-v01_20261018-132812-0d31a6f9.py",
+    "palette_source_sha256": "18ef5efcc95a05518360998fb5ed1ce6e2abce6820e6586a0fa1ea0ca72b61b8",
+    "tool_refs": "jexplore31 author line 67 (PAL from jx) and lines 48-59; jx RAMPS lines 86-103, LAYER_NOTES lines 112-126",
+    "ramps": {
+      "outline": {
+        "K": "0c0a0e"
+      },
+      "hair-blue-black": {
+        "1": "6c7482",
+        "2": "434852",
+        "3": "292c34",
+        "4": "111216"
+      },
+      "hair-silver-tips": {
+        "5": "e2e4e6",
+        "6": "b2b8c0",
+        "7": "7e848e"
+      },
+      "skin": {
+        "F": "f0d0bc",
+        "f": "d8aa94",
+        "e": "b47e6c"
+      },
+      "shaved-scalp": {
+        "n": "c4aca2",
+        "N": "927e84"
+      },
+      "eye": {
+        "y": "2a2630"
+      },
+      "lip": {
+        "R": "b8706a"
+      },
+      "coat-forest-green": {
+        "G": "5a7450",
+        "g": "3c5338",
+        "H": "223524",
+        "J": "0f1a11"
+      },
+      "coat-lining-grey": {
+        "C": "a9ada4",
+        "c": "787d76"
+      },
+      "top-gloves-black": {
+        "B": "3c3c46",
+        "b": "1f1f26"
+      },
+      "trousers-charcoal": {
+        "P": "504e58",
+        "p": "32313a",
+        "o": "19181e"
+      },
+      "boots-black-leather": {
+        "O": "54494a",
+        "w": "2e2629"
+      },
+      "leather-brown": {
+        "L": "a2724a",
+        "l": "77513a",
+        "m": "4b3327"
+      },
+      "brass": {
+        "M": "e2c272",
+        "X": "a8844a",
+        "Y": "6c5432"
+      },
+      "lens-glass": {
+        "Z": "d2e4e8",
+        "z": "7c98a2"
+      },
+      "cloth-cream": {
+        "A": "dcd0b2",
+        "a": "a89c84"
+      }
+    },
+    "exploration_reference": {
+      "runtime": "game/data/jexplore31/rpg-2-star-ocean-the-second_ji-cheng_explore-sprite-set-runtime_unapproved-jexplore31-v01_20261021-210451-58d91a02.json",
+      "sha256": "8999aad32aeb7057014a76030df4eb3ea1004f10fe0fdc298531d0c68568107d",
+      "frame_size": [
+        80,
+        112
+      ],
+      "pivot": [
+        40,
+        104
+      ],
+      "density": 2,
+      "use": "identity/palette reference only; combat cells use 136x144/64,136, not the exploration cell",
+      "east_static": {
+        "path": "game/data/jexplore31/png/rpg-2-star-ocean-the-second_ji-cheng_explore-east-static_unapproved-jexplore31-v01_20261021-210451-1c39fa48.png",
+        "sha256": "2c61d647794faf636f59bfdf373dbf9bb0200bade1c42960c0acfc3ccd11cbf1",
+        "approved": false
+      }
+    }
+  },
+  "index_binding": {
+    "expected_index_key": "ji-cheng",
+    "actual_index_keys": [
+      "ji-cheng"
+    ],
+    "rule": "manifest character.member_id, runtime character.member_id and the single index key are all 'ji-cheng'; no hero:* key and no extra member",
+    "slot_rule": "companion slot = AppState.active_party_ids.find('ji-cheng'); only that slot receives the member key; loaded_count must be 1 or the member keeps legacy frames",
+    "evidence": "battle_arena.gd lines 1343-1394, 1504-1526; loader lines 69-70; wrapper checks index.member_only/index.member_key/index.target_matches_pkg_manifest"
+  },
+  "integration_gap": {
+    "status": "not wired",
+    "detail": "battle_arena.gd COMPANION_COMBAT_POLICIES lists only zhao-ling and liang-xu (lines 154-157); no Ji companion policy exists, so this source cannot load in the current canonical path without root-owned integration. Ji still draws the legacy JiCombatFrames (lines 1517, 1525-1526). No default change.",
+    "ordinary_adoption": false
+  },
+  "commands": {
+    "self_test_clean_rerun": "C:/Users/hkzha/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe -X utf8 -I \"<PRODUCER>/tools/rpg-2-star-ocean-the-second_lcombat29_combat-source-independent-check_wrapper-v01_20261021-201231-0fa32a.py\" --root \"<PRODUCER>\" --manifest \"<PRODUCER>/outputs/jcombat32/<AUTHOR_MANIFEST>.json\" --out \"<PRODUCER>/outputs/jcombat32-check/<REPORT>.json\" --self-test",
+    "note": "Use --out under the producer root so the self-test temp fixtures stay inside the native reader's ROOT; the workspace run could not satisfy that and is reported as FAIL, not waived."
+  },
+  "limitations": [
+    "The wrapper self-test is not a clean pass: its two adversarial cases matched the expected predicates but were not isolated because the existing native reader raised ValueError on temp fixture paths outside the producer root. No approval channel was available to write the report under the producer root.",
+    "The production-mode run of the same wrapper on the emitted author manifest passed 38/38 wrapper checks, 180/180 validator checks and 1056/1056 native-reader checks; this is static source/index/export evidence only.",
+    "No Godot import/load, playback, motion, normal input, scale, art, default adoption, save or creator approval is claimed. The source is UNAPPROVED and not wired.",
+    "The single-sheet mirror cannot preserve the shaved LEFT temple/drop earring in both facings; the emitted set discloses the far-side undercut wrap and earring glint.",
+    "No runtime, default, mechanics, input, save, collision, ledger, Bible, registry or Git index file was edited; the producer checkout remained otherwise untouched."
+  ]
+}

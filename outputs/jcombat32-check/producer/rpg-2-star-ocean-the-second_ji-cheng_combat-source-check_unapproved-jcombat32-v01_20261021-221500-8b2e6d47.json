@@ -1,0 +1,83 @@
+{
+  "tool": "worlds-between-lcombat29-combat-source-independent-check",
+  "mode": "self-test",
+  "tool_sha256": "452bfa43e80989de312d633a76666a0f6567ab54b7f1ac2b79a37e031d1e6989",
+  "generated_utc": "2026-10-22T02:14:17.862176+00:00",
+  "source": {
+    "path": "C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\needle32\\cl-jcombat\\outputs\\jcombat32\\rpg-2-star-ocean-the-second_ji-cheng-combat_author-manifest_unapproved-jcombat32-v01_20261021-220632-53e4c35a.json",
+    "sha256": "ce6f6b4209dccdc633b3b5dda9d8d2ca7f8b50bd4c99fd561fd5ff89cea72d34"
+  },
+  "cases": [
+    {
+      "name": "positive_control",
+      "expected_failure": null,
+      "expected_validator": "PASS",
+      "status": "PASS",
+      "exit": 0,
+      "failed_predicates": [],
+      "validator": "PASS",
+      "native_reader": true
+    },
+    {
+      "name": "member_index_extra",
+      "expected_failure": "index.member_only",
+      "expected_validator": "PASS",
+      "status": "FAIL",
+      "exit": 1,
+      "failed_predicates": [
+        "index.member_only: expected exactly {'ji-cheng'}; got ['intruder', 'ji-cheng']",
+        "native_reader.run: Traceback (most recent call last):\n  File \"C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\needle32\\cl-jcombat\\tools\\rpg-2-star-ocean-the-second_lcombat29_combat-source-independent-check_wrapper-v01_20261021-201231-0fa32a.py\", line 503, in evaluate\n    reader_code, reader_result = run_existing_reader(reader_path, source_path, reader_report, root)\n                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\needle32\\cl-jcombat\\tools\\rpg-2-star-ocean-the-second_lcombat29_combat-source-independent-check_wrapper-v01_20261021-201231-0fa32a.py\", line 188, in run_existing_reader\n    code = module.main()\n           ^^^^^^^^^^^^^\n  File \"C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\needle32\\cl-jcombat\\tools\\rpg-2-star-ocean-the-second_combat-source_native-composition-check_test-only-v01_20261021-220211-e5ac281a.py\", line 88, in main\n    report={'scope':'independent source composition; not art/motion/default approval','manifest':path.relative_to(ROOT).as_posix(),'manifestSha256Raw':digest(raw),'checkerSha256Raw':digest(lp(__file__).read_bytes()),'files':hashes,'checks':checks,'passed':all(c['passed'] for c in checks)}\n                                                                                                 ^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\hkzha\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\Lib\\pathlib.py\", line 682, in relative_to\n    raise ValueError(f\"{str(self)!r} is not in the subpath of {str(other)!r}\")\nValueError: 'C:\\\\Users\\\\hkzha\\\\Documents\\\\Codex\\\\2026-10-12\\\\rpg-2-star-ocean-the-second\\\\work\\\\needle31\\\\ds-jcheck\\\\outputs\\\\jcombat32-check\\\\_lcombat29-selftest-8685ec64\\\\member-index-extra\\\\src.json' is not in the subpath of 'C:\\\\Users\\\\hkzha\\\\Documents\\\\Codex\\\\2026-10-12\\\\rpg-2-star-ocean-the-second\\\\work\\\\needle32\\\\cl-jcombat'\n"
+      ],
+      "expected_failure_matched": true,
+      "validator": "PASS",
+      "native_reader": null,
+      "isolated": false
+    },
+    {
+      "name": "action_source_drift",
+      "expected_failure": "actions.skill.source_match",
+      "expected_validator": "PASS",
+      "status": "FAIL",
+      "exit": 1,
+      "failed_predicates": [
+        "actions.skill.source_match: frame[0] cell runtime=15 source pose 'skill-open'=14",
+        "native_reader.run: Traceback (most recent call last):\n  File \"C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\needle32\\cl-jcombat\\tools\\rpg-2-star-ocean-the-second_lcombat29_combat-source-independent-check_wrapper-v01_20261021-201231-0fa32a.py\", line 503, in evaluate\n    reader_code, reader_result = run_existing_reader(reader_path, source_path, reader_report, root)\n                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\needle32\\cl-jcombat\\tools\\rpg-2-star-ocean-the-second_lcombat29_combat-source-independent-check_wrapper-v01_20261021-201231-0fa32a.py\", line 188, in run_existing_reader\n    code = module.main()\n           ^^^^^^^^^^^^^\n  File \"C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\needle32\\cl-jcombat\\tools\\rpg-2-star-ocean-the-second_combat-source_native-composition-check_test-only-v01_20261021-220211-e5ac281a.py\", line 88, in main\n    report={'scope':'independent source composition; not art/motion/default approval','manifest':path.relative_to(ROOT).as_posix(),'manifestSha256Raw':digest(raw),'checkerSha256Raw':digest(lp(__file__).read_bytes()),'files':hashes,'checks':checks,'passed':all(c['passed'] for c in checks)}\n                                                                                                 ^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\hkzha\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\Lib\\pathlib.py\", line 682, in relative_to\n    raise ValueError(f\"{str(self)!r} is not in the subpath of {str(other)!r}\")\nValueError: 'C:\\\\Users\\\\hkzha\\\\Documents\\\\Codex\\\\2026-10-12\\\\rpg-2-star-ocean-the-second\\\\work\\\\needle31\\\\ds-jcheck\\\\outputs\\\\jcombat32-check\\\\_lcombat29-selftest-8685ec64\\\\action-source-drift\\\\src.json' is not in the subpath of 'C:\\\\Users\\\\hkzha\\\\Documents\\\\Codex\\\\2026-10-12\\\\rpg-2-star-ocean-the-second\\\\work\\\\needle32\\\\cl-jcombat'\n"
+      ],
+      "expected_failure_matched": true,
+      "validator": "PASS",
+      "native_reader": null,
+      "isolated": false
+    }
+  ],
+  "checks": [
+    {
+      "id": "selftest.positive",
+      "ok": true
+    },
+    {
+      "id": "selftest.adversarial",
+      "ok": false
+    },
+    {
+      "id": "selftest.no_failures",
+      "ok": false
+    }
+  ],
+  "status": "FAIL",
+  "failed_predicates": [
+    "member_index_extra did not isolate its expected gap",
+    "action_source_drift did not isolate its expected gap"
+  ],
+  "summary": {
+    "cases": 3,
+    "failed": 2
+  },
+  "limitations": [
+    "Static source/export/index validation only; no Godot import/load, playback, motion, art quality, default adoption, save or creator approval is claimed.",
+    "Native PXO/ORA composition and source-to-atlas checks are delegated to the existing composition reader; GUI save/reopen is not established.",
+    "All hashes bind raw file bytes with no newline normalization; text/JSON normalization is not applied.",
+    "The existing composition reader resolves files[*].path from the repository root, so the source manifest and its referenced files must stay inside that root (absolute paths are also accepted by the reader).",
+    "Index path resolution mirrors the loader's base-directory join; res:// is mapped to the repository root only for inspection.",
+    "Self-test mutations are temporary generated fixtures derived from the target source manifest, not production art or approval evidence."
+  ]
+}
