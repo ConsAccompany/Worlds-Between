@@ -2,6 +2,18 @@
 
 Last updated:2026-10-22
 
+## Latest completed implementation — Chicago common-style ordinary MVP default
+
+Creator authorized “先设为 MVP 默认，精修后置”. New Chicago is now the ordinary no-flag map arrival scene. Otherthree scene defaults remainOFF. EN/ZH188checks each,28final native captures, actual isolated manualsave/back/load and exact position/time retained. Default/explicitoldv05/rollback10checks each;2549other protected scripts/scenes/data raw unchanged. Source `b410bae764fc05c33181f9e68a48e40663e545b3`. [Closeout](../docs/qa/rpg-2-star-ocean-the-second_chicago-loop_common-style-mvp-default_adoption-closeout_v01_20261022-180652-a9b3c098.md). No finalart/humanplay acceptance inferred.
+
+Production exact **59.8724% →59.9362% (+0.0638pp)**; one-decimal dashboard **59.9% →59.9% (+0.0 rounded pp)**. Content623→625/1881 (existing2-point default task), coding111/111 unchanged. Inspection **20.6% →20.6% (+0.0pp)**; creator approval **7.8% →7.8% (+0.0pp)**. Frozenbaseline unchanged; no new version points. Acceptedsceneart5/12,fullsprites0/52,humanplays0/2.
+
+Next: Washington exterior common-style native/runtime conversion using the approved direction and saved local reference; keep real Capitol ruin silhouette, walk/interaction geometry and battle return. Do not infer its default authorization. No environment setup or new generator framework.
+
+# Current progress
+
+Last updated:2026-10-22
+
 ## Latest completed revision — Chicago common science-scene style
 
 Production **59.9% →59.9% (+0.0pp)**; inspection **20.6% →20.6% (+0.0pp)**; creator approval **7.8% →7.8% (+0.0pp)**. Existing revision reopened then completed; no per-version points. Coding111/111,content623/1881 unchanged. Creator approved the common style direction only.
