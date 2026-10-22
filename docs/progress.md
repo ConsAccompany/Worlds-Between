@@ -1,5 +1,17 @@
 # Current progress
 
+## Latest completed production — Jiang Lan four-direction exploration source
+
+Production **59.4% →59.8% (+0.4pp)**; content607→621/1881,coding111/111 unchanged. Inspection **20.6% →20.6% (+0.0pp)**; creator approval **7.8% →7.8% (+0.0pp)**. Frozen1183tasks/weights unchanged.
+
+Four4-frame idle loops,four12-phase walk/jog cycles,48phase-aware stop bridges;164source PNGs+164lossless runtime copies,4editable41-frame PXOs+4static layeredORAs. All4neutral sources exact. Canonical rebuild341/341,source52/52,independent native2389 and corrected DeepSeek proposal135 checks pass; native164/164frames exact with16known shader errors retained. No clean-app/GUI claim. Actual input source-fit EN30fps571 and fresh-profile ZH60fps1027 with16captures and normal-speed movie pass; initialZH GLES3failure retained. Test-only avatar injection, generic immediateidle handoff; no ordinary default or live authored-stop playback claim.
+
+Contact/slip independently recorded:0.4logicalpx side and5.6front/back per40ms; side60fpssource sample excursion5.333logicalpx. Stop near toe+heel/far toe anchors fixed; far heel occlusion/outline change remains unpassed. Fullfootlock/fluidity/art acceptance not claimed; cosmetics deferred. All2401protected files exact. [Closeout](../docs/qa/rpg-2-star-ocean-the-second_jiang-lan_exploration-source_codex-closeout_unapproved-v01_20261022-154032-5bca7193.md). Source `d3053f3028797cc54d301da73565bad586ed63b0`.
+
+Next: existing Jiang display and runtime integration, respecting canonical assignment and separate default-use authorization. Full accepted sprites0/52,scene art5/12,humanplays0/2 unchanged.
+
+# Current progress
+
 ## Latest completed production — Jiang Lan west/north/east native statics
 
 Production **59.2% →59.4% (+0.2pp)**; content601→607/1881, coding111/111 unchanged. Inspection **20.6% →20.6% (+0.0pp)**; creator approval **7.8% →7.8% (+0.0pp)**. Frozen1183tasks/weights unchanged.

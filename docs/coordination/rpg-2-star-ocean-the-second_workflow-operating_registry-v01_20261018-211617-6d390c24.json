@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-22T19:38:59.753478+00:00",
+  "updatedAt": "2026-10-22T19:57:11.807605+00:00",
   "purpose": "Operating queue and worktree ownership; no progress points or account details",
   "workflow": "docs/workflow.md",
   "canonicalLedger": "outputs/rpg-2-star-ocean-the-second_production-completion_task-ledger_v01_20261018-140533-3de52073.json",
@@ -1316,17 +1316,17 @@
     "constraints": "Do not reopen existing cosmetic gait or actor art searches. Keep four scene defaults false until explicit authorization. Verify providers before fresh sessions."
   },
   "activeDualProviderBatch": {
-    "primary": "jiang-lan-other-directions",
+    "primary": "jiang-lan-exploration-source",
     "owner": "claude",
-    "support": "deepseek",
+    "support": "deepseek-isolated-validator",
     "status": "closed-verified",
-    "base": "ed762aeea819b3f1a6f0b15eda1b8598b6fc5ba8",
-    "scope": "three missing native west/north/east statics; source only",
-    "startedAt": "2026-10-22T19:30:54.109912+00:00",
-    "sourceCommit": "01f7e4692888e7a3fbc83f010d20d035c7a95159",
-    "finishedAt": "2026-10-22T19:38:59.753478+00:00",
+    "base": "8c97b6597f7b692f54bd16b277157d7ccb36b906",
+    "scope": "missing idle walk stop sources; no cosmetic/default edits",
+    "startedAt": "2026-10-22T19:41:11.667674+00:00",
+    "sourceCommit": "d3053f3028797cc54d301da73565bad586ed63b0",
+    "finishedAt": "2026-10-22T19:57:11.807605+00:00",
     "claudeStatus": "source-complete",
-    "deepseekStatus": "stopped-for-write-scope-violation; draft-local-only; no credited support output"
+    "deepseekStatus": "bounded-proposal-complete-stopped; actual135checks-rerun-with-codex-corrections"
   },
   "characterSpriteStyleDirection": {
     "reference": "Sea of Stars",
@@ -1422,8 +1422,20 @@
     "approvalsNotWaived": true
   },
   "nextProductionTask": {
-    "kind": "missing-native-sprite-animation",
+    "kind": "jiang-in-game-display-and-runtime-integration",
     "status": "queued",
+    "tasks": [
+      "content.char.jiang-lan.display",
+      "content.char.jiang-lan.runtime-integration"
+    ],
+    "owner": "claude",
+    "coordinator": "codex",
+    "nextAction": "Complete existing Jiang in-game display/runtime integration boundary, confirm canonical roster/UI assignment, prepare separate default-use decision; no new battle/recruitment scope inferred.",
+    "requiresCreatorDecisionForPreparation": false,
+    "requiresCreatorDecisionForDefaultAdoption": true
+  },
+  "lastCompletedProductionTask": {
+    "status": "produced-source-only",
     "tasks": [
       "content.char.jiang-lan.idle-anim",
       "content.char.jiang-lan.walk-south",
@@ -1431,59 +1443,61 @@
       "content.char.jiang-lan.walk-north",
       "content.char.jiang-lan.walk-east"
     ],
-    "owner": "claude",
-    "coordinator": "codex",
-    "nextAction": "Produce missing Jiang Lan idle/walk source bank, preserve all four neutral statics, then companion playable integration. Cosmetic polish deferred.",
-    "requiresCreatorDecision": false
-  },
-  "lastCompletedProductionTask": {
-    "status": "produced-source-only",
-    "tasks": [
-      "content.char.jiang-lan.static-west",
-      "content.char.jiang-lan.static-north",
-      "content.char.jiang-lan.static-east"
-    ],
     "producer": "claude",
-    "independentInspectorAndIntegrator": "codex",
-    "deepseekStatus": "stopped-for-write-scope-violation; draft-local-only; no credited support output",
-    "sourceCommit": "01f7e4692888e7a3fbc83f010d20d035c7a95159",
-    "completedAt": "2026-10-22T19:38:59.753478+00:00",
+    "independentSupport": "deepseek-proposal-corrected-and-actually-rerun-by-codex",
+    "inspectorAndIntegrator": "codex",
+    "sourceCommit": "d3053f3028797cc54d301da73565bad586ed63b0",
+    "completedAt": "2026-10-22T19:57:11.807605+00:00",
     "evidence": [
-      "docs/qa/rpg-2-star-ocean-the-second_jiang-lan_missing-three-directions_codex-closeout_unapproved-v01_20261022-153020-105a0103.md",
-      "outputs/jiang38/root/rpg-2-star-ocean-the-second_jiang-lan_missing-three-directions_source-bound-proof_v01_20261022-153020-105a0103.json"
+      "docs/qa/rpg-2-star-ocean-the-second_jiang-lan_exploration-source_codex-closeout_unapproved-v01_20261022-154032-5bca7193.md",
+      "outputs/jexplore39/root/rpg-2-star-ocean-the-second_jiang-lan_exploration-source_codex-proof_v01_20261022-154032-5bca7193.json"
     ],
-    "sourceFiles": [
-      "game/assets/characters/jiang-lan-native-directions-v01/west/rpg-2-star-ocean-the-second_jiang-lan_west-static_unapproved-v01_20261022-153020-a657c4cc.png",
-      "game/assets/characters/jiang-lan-native-directions-v01/west/rpg-2-star-ocean-the-second_jiang-lan_west-edit_unapproved-v01_20261022-153020-ad7a2399.pxo",
-      "game/assets/characters/jiang-lan-native-directions-v01/west/rpg-2-star-ocean-the-second_jiang-lan_west-edit_unapproved-v01_20261022-153020-a9aedf6f.ora",
-      "game/assets/characters/jiang-lan-native-directions-v01/west/rpg-2-star-ocean-the-second_jiang-lan_west-palette_unapproved-v01_20261022-153020-c5cacb3a.json",
-      "game/assets/characters/jiang-lan-native-directions-v01/west/rpg-2-star-ocean-the-second_jiang-lan_west-manifest_unapproved-v01_20261022-153020-eafa515e.json",
-      "game/assets/characters/jiang-lan-native-directions-v01/north/rpg-2-star-ocean-the-second_jiang-lan_north-static_unapproved-v01_20261022-153020-28e75f42.png",
-      "game/assets/characters/jiang-lan-native-directions-v01/north/rpg-2-star-ocean-the-second_jiang-lan_north-edit_unapproved-v01_20261022-153020-ec8c2637.pxo",
-      "game/assets/characters/jiang-lan-native-directions-v01/north/rpg-2-star-ocean-the-second_jiang-lan_north-edit_unapproved-v01_20261022-153020-8b79a2c1.ora",
-      "game/assets/characters/jiang-lan-native-directions-v01/north/rpg-2-star-ocean-the-second_jiang-lan_north-palette_unapproved-v01_20261022-153020-e15635a4.json",
-      "game/assets/characters/jiang-lan-native-directions-v01/north/rpg-2-star-ocean-the-second_jiang-lan_north-manifest_unapproved-v01_20261022-153020-3909fa0e.json",
-      "game/assets/characters/jiang-lan-native-directions-v01/east/rpg-2-star-ocean-the-second_jiang-lan_east-static_unapproved-v01_20261022-153020-609cc5bb.png",
-      "game/assets/characters/jiang-lan-native-directions-v01/east/rpg-2-star-ocean-the-second_jiang-lan_east-edit_unapproved-v01_20261022-153020-3668a51e.pxo",
-      "game/assets/characters/jiang-lan-native-directions-v01/east/rpg-2-star-ocean-the-second_jiang-lan_east-edit_unapproved-v01_20261022-153020-f9908af9.ora",
-      "game/assets/characters/jiang-lan-native-directions-v01/east/rpg-2-star-ocean-the-second_jiang-lan_east-palette_unapproved-v01_20261022-153020-a6bbf646.json",
-      "game/assets/characters/jiang-lan-native-directions-v01/east/rpg-2-star-ocean-the-second_jiang-lan_east-manifest_unapproved-v01_20261022-153020-b23be7bb.json",
-      "game/assets/characters/jiang-lan-native-directions-v01/rpg-2-star-ocean-the-second_jiang-lan_directions-batch-manifest_unapproved-v01_20261022-153020-c4239121.json",
-      "game/assets/characters/jiang-lan-native-directions-v01/.gdignore",
-      "tools/rpg-2-star-ocean-the-second_jiang-lan_directions-static-author_unapproved-v01_20261022-153020-105a0103.py",
-      "tools/rpg-2-star-ocean-the-second_jiang-lan_directions-source-check_v01_20261022-153020-105a0103.py"
-    ],
-    "nativeFlatExportsExact": 6,
-    "sourceFitCaptures": 12,
-    "protectedFilesRawExact": 2384,
-    "nativeCleanApplicationGatePassed": false,
+    "sourceManifest": "outputs/jexplore39/rpg-2-star-ocean-the-second_jiang-lan_explore-source-manifest_unapproved-jexplore39-v01_20261022-154032-8984b31f.json",
+    "normalSpeedPreview": "outputs/jexplore39/root/en30/rpg-2-star-ocean-the-second_jiang-lan_normal-speed-source-fit-640_nearest-derived-test-only-v01_20261022-154032-5bca7193.mp4",
+    "sourcePngs": 164,
+    "runtimePngCopies": 164,
+    "editablePxoBanks": 4,
+    "staticLayeredOra": 4,
+    "idleFramesPerDirection": 4,
+    "walkFramesPerDirection": 12,
+    "stopIntermediateFramesPerDirection": 24,
+    "rebuild": {
+      "passed": 341,
+      "total": 341
+    },
+    "sourceChecks": {
+      "passed": 52,
+      "total": 52
+    },
+    "independentNativeChecks": 2389,
+    "independentProposalChecks": 135,
+    "nativeFlatFramesExact": 164,
+    "nativeCleanApplicationPassed": false,
     "guiSaveReopenVerified": false,
+    "protectedFilesRawUnchanged": 2401,
+    "realInputSourceFit": {
+      "en30Checks": 571,
+      "zh60Checks": 1027,
+      "captures": 16,
+      "testOnlyAvatarInjection": true,
+      "ordinaryDefaultAdopted": false,
+      "liveAuthoredStopBridgePlayback": false,
+      "initialZhShaderFailurePreserved": true
+    },
+    "contact": {
+      "sideBoundarySlipLogicalPx": 0.4,
+      "frontBackBoundarySlipLogicalPx": 5.6,
+      "sideSourceReported60fpsExcursionLogicalPx": 5.333,
+      "stopAnchorMovementLogical": 0,
+      "scope": "near toe+heel, far toe; occluded far heel/full outline continuity not passed",
+      "fullFootlockPassed": false
+    },
     "artApproved": false,
-    "runtimeAdopted": false,
+    "humanPlaytestsAdded": 0,
     "production": {
-      "before": 59.2,
-      "after": 59.4,
-      "changePercentagePoints": 0.2
+      "before": 59.4,
+      "after": 59.8,
+      "changePercentagePoints": 0.4
     },
     "inspection": {
       "before": 20.6,
@@ -1495,7 +1509,7 @@
       "after": 7.8,
       "changePercentagePoints": 0
     },
-    "next": "Produce missing Jiang Lan idle/walk source bank, preserve all four neutral statics, then companion playable integration. Cosmetic polish deferred."
+    "next": "Complete existing Jiang in-game display/runtime integration boundary, confirm canonical roster/UI assignment, prepare separate default-use decision; no new battle/recruitment scope inferred."
   },
   "latestImplementationBoundary": {
     "subject": "ji-cheng",
@@ -2066,5 +2080,82 @@
       "changePercentagePoints": 0
     },
     "next": "Produce missing Jiang Lan idle/walk source bank, preserve all four neutral statics, then companion playable integration. Cosmetic polish deferred."
+  },
+  "latestJiangLanExplorationProduction": {
+    "status": "produced-source-only",
+    "tasks": [
+      "content.char.jiang-lan.idle-anim",
+      "content.char.jiang-lan.walk-south",
+      "content.char.jiang-lan.walk-west",
+      "content.char.jiang-lan.walk-north",
+      "content.char.jiang-lan.walk-east"
+    ],
+    "producer": "claude",
+    "independentSupport": "deepseek-proposal-corrected-and-actually-rerun-by-codex",
+    "inspectorAndIntegrator": "codex",
+    "sourceCommit": "d3053f3028797cc54d301da73565bad586ed63b0",
+    "completedAt": "2026-10-22T19:57:11.807605+00:00",
+    "evidence": [
+      "docs/qa/rpg-2-star-ocean-the-second_jiang-lan_exploration-source_codex-closeout_unapproved-v01_20261022-154032-5bca7193.md",
+      "outputs/jexplore39/root/rpg-2-star-ocean-the-second_jiang-lan_exploration-source_codex-proof_v01_20261022-154032-5bca7193.json"
+    ],
+    "sourceManifest": "outputs/jexplore39/rpg-2-star-ocean-the-second_jiang-lan_explore-source-manifest_unapproved-jexplore39-v01_20261022-154032-8984b31f.json",
+    "normalSpeedPreview": "outputs/jexplore39/root/en30/rpg-2-star-ocean-the-second_jiang-lan_normal-speed-source-fit-640_nearest-derived-test-only-v01_20261022-154032-5bca7193.mp4",
+    "sourcePngs": 164,
+    "runtimePngCopies": 164,
+    "editablePxoBanks": 4,
+    "staticLayeredOra": 4,
+    "idleFramesPerDirection": 4,
+    "walkFramesPerDirection": 12,
+    "stopIntermediateFramesPerDirection": 24,
+    "rebuild": {
+      "passed": 341,
+      "total": 341
+    },
+    "sourceChecks": {
+      "passed": 52,
+      "total": 52
+    },
+    "independentNativeChecks": 2389,
+    "independentProposalChecks": 135,
+    "nativeFlatFramesExact": 164,
+    "nativeCleanApplicationPassed": false,
+    "guiSaveReopenVerified": false,
+    "protectedFilesRawUnchanged": 2401,
+    "realInputSourceFit": {
+      "en30Checks": 571,
+      "zh60Checks": 1027,
+      "captures": 16,
+      "testOnlyAvatarInjection": true,
+      "ordinaryDefaultAdopted": false,
+      "liveAuthoredStopBridgePlayback": false,
+      "initialZhShaderFailurePreserved": true
+    },
+    "contact": {
+      "sideBoundarySlipLogicalPx": 0.4,
+      "frontBackBoundarySlipLogicalPx": 5.6,
+      "sideSourceReported60fpsExcursionLogicalPx": 5.333,
+      "stopAnchorMovementLogical": 0,
+      "scope": "near toe+heel, far toe; occluded far heel/full outline continuity not passed",
+      "fullFootlockPassed": false
+    },
+    "artApproved": false,
+    "humanPlaytestsAdded": 0,
+    "production": {
+      "before": 59.4,
+      "after": 59.8,
+      "changePercentagePoints": 0.4
+    },
+    "inspection": {
+      "before": 20.6,
+      "after": 20.6,
+      "changePercentagePoints": 0
+    },
+    "approval": {
+      "before": 7.8,
+      "after": 7.8,
+      "changePercentagePoints": 0
+    },
+    "next": "Complete existing Jiang in-game display/runtime integration boundary, confirm canonical roster/UI assignment, prepare separate default-use decision; no new battle/recruitment scope inferred."
   }
 }
