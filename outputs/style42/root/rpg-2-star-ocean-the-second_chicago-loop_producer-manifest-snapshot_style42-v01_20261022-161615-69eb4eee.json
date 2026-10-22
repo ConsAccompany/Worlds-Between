@@ -1,0 +1,1028 @@
+{
+  "project": "Worlds Between",
+  "scene": {
+    "script": "game/scripts/style42/rpg-2-star-ocean-the-second_chicago-loop-style42_state-lake-scene_unapproved-v01_20261022-161615-69eb4eee.gd",
+    "tscn": "game/scenes/style42/rpg-2-star-ocean-the-second_chicago-loop-style42_state-lake-scene_unapproved-v01_20261022-161615-69eb4eee.tscn",
+    "clone_of": [
+      "game/scripts/rpg-2-star-ocean-the-second_chicago-loop_state-lake-block-scene_unapproved-v05_20261017-234337-84862412.gd",
+      "game/scenes/rpg-2-star-ocean-the-second_chicago-loop_state-lake-block-scene_unapproved-v05_20261017-234337-84862412.tscn"
+    ],
+    "differences": [
+      "header comment lines 3-14 replaced by 10 STYLE42 lines",
+      "const ART path",
+      ".tscn script path"
+    ],
+    "text_normalization": "LF",
+    "ui_text": "unchanged v05 English/Chinese strings; no generated UI or text"
+  },
+  "status": "UNAPPROVED candidate; art not accepted; not a default; no existing game file, selector, ledger, Bible or counter changed",
+  "art_unapproved": true,
+  "default_adopted": false,
+  "defaults": {
+    "policy": "game/scripts/sdef35/rpg-2-star-ocean-the-second_mvp-scene-defaults_policy_prepared-v01_20261021-231349-a83c4bae.gd",
+    "present": true,
+    "policy_sha256_text_lf": "42abd0badb091aa56bd157188f9fda1f0dad94cb2a30275e38f63becb3f9ddf0",
+    "switches": {
+      "CITY_V06_DEFAULT": false,
+      "RUINS_V13_DEFAULT": false,
+      "RECORDS_ROOM2_DEFAULT": false,
+      "CHICAGO_V05_DEFAULT": false
+    },
+    "edited_by_this_tool": false
+  },
+  "approval_scope": "Creator approved the common style DIRECTION in the style41 reference only, not final native scene art or defaults.",
+  "authorship": "Generated-reference-derived raster candidate, not hand-pixel authorship. Every visible no-actor pixel is an exact sample of the generated style41 reference. Planes are raster layers cut by the v05 alpha masks, not vector or individually authored objects. Assembled by Claude (Claude Code).",
+  "generated_reference": {
+    "file": "outputs/style41/rpg-2-star-ocean-the-second_chicago-loop_science-style-alignment-reference_nonruntime-v01_20261022-161221-0e519466.png",
+    "sha256": "6cc3069cc15cb41f17c80c49073a9d841b1647c8eaafbfdf8e4a76d85c6d9f52",
+    "size": [
+      1672,
+      941
+    ],
+    "generator": "built-in image_gen (style transfer of the v06 flat source with an accepted-room material reference)",
+    "provenance_manifest": "outputs/style41/rpg-2-star-ocean-the-second_chicago-loop_style-reference-manifest_nonruntime-v01_20261022-161221-0e519466.json",
+    "provenance_manifest_sha256_text_lf": "49da23bc1d734869e20105a2684ce1517f86481b8ae449764b89f5eeadc81d19",
+    "provenance_manifest_present_here": false
+  },
+  "conversion": {
+    "method": "NEAREST exact source-pixel sampling, single pass, src = floor((2*dst+1)*src_size/(2*dst_size))",
+    "no": [
+      "smoothing",
+      "filtering",
+      "quantization",
+      "palette mapping",
+      "new generated pixels",
+      "dithering"
+    ],
+    "scale_x": 0.3827751196172249,
+    "scale_y": 0.38257173219978746,
+    "aspect_note": "1672/640 = 2.6125 vs 941/360 = 2.6139: non-uniform by 0.05%; no crop",
+    "unique_colours_640": 73057,
+    "source_columns_sample": [
+      1,
+      3,
+      6,
+      9,
+      11,
+      14
+    ],
+    "source_rows_sample": [
+      1,
+      3,
+      6,
+      9,
+      11,
+      14
+    ]
+  },
+  "hidden_pixels": {
+    "method": "v05 ground-far clean plate copied under every opaque y-sort pixel (old v05 code-authored art, old style)",
+    "count": 38388,
+    "share_of_canvas": 0.1666,
+    "visible_when": "only through the occlusion reveal window around the hero; never in the no-actor composite",
+    "not_claimed": "not newly authored, not inpainted, not repainted in the style41 look"
+  },
+  "composite_check": "ground-far + 5 y-sort planes == flat == converted reference (exact RGBA); ground-far opaque; y-sort alpha == v05 alpha",
+  "layers_bottom_to_top": [
+    "cleanplate-hidden-v05-ground",
+    "backdrop-ground-reference",
+    "ysort-underdeck-props",
+    "ysort-l-columns",
+    "ysort-station-stair-east",
+    "ysort-plaza-props",
+    "ysort-foreground",
+    "guides-walkmask (hidden, locked)"
+  ],
+  "runtime_layers": [
+    {
+      "name": "ground-far",
+      "from": [
+        "cleanplate-hidden-v05-ground",
+        "backdrop-ground-reference"
+      ]
+    },
+    {
+      "name": "ysort-underdeck-props",
+      "alpha": "v05 mask, exact"
+    },
+    {
+      "name": "ysort-l-columns",
+      "alpha": "v05 mask, exact"
+    },
+    {
+      "name": "ysort-station-stair-east",
+      "alpha": "v05 mask, exact"
+    },
+    {
+      "name": "ysort-plaza-props",
+      "alpha": "v05 mask, exact"
+    },
+    {
+      "name": "ysort-foreground",
+      "alpha": "v05 mask, exact"
+    }
+  ],
+  "ysort_props": [
+    {
+      "layer": "ysort-underdeck-props",
+      "name": "chicago-lamp",
+      "region": [
+        80,
+        128,
+        19,
+        55
+      ],
+      "pivot": 182.5
+    },
+    {
+      "layer": "ysort-underdeck-props",
+      "name": "planter-stone-west",
+      "region": [
+        214,
+        153,
+        40,
+        33
+      ],
+      "pivot": 185.5
+    },
+    {
+      "layer": "ysort-underdeck-props",
+      "name": "bench",
+      "region": [
+        258,
+        172,
+        43,
+        16
+      ],
+      "pivot": 186.5
+    },
+    {
+      "layer": "ysort-underdeck-props",
+      "name": "planter-iron",
+      "region": [
+        304,
+        158,
+        14,
+        26
+      ],
+      "pivot": 184.5
+    },
+    {
+      "layer": "ysort-underdeck-props",
+      "name": "planter-stone-east",
+      "region": [
+        364,
+        156,
+        22,
+        29
+      ],
+      "pivot": 184.5
+    },
+    {
+      "layer": "ysort-underdeck-props",
+      "name": "litter-bin",
+      "region": [
+        397,
+        171,
+        16,
+        21
+      ],
+      "pivot": 190.5
+    },
+    {
+      "layer": "ysort-underdeck-props",
+      "name": "civic-kiosk",
+      "region": [
+        419,
+        147,
+        26,
+        54
+      ],
+      "pivot": 200.5
+    },
+    {
+      "layer": "ysort-underdeck-props",
+      "name": "conifer-planter",
+      "region": [
+        498,
+        140,
+        26,
+        48
+      ],
+      "pivot": 187.5
+    },
+    {
+      "layer": "ysort-l-columns",
+      "name": "l-column-west",
+      "region": [
+        102,
+        135,
+        77,
+        129
+      ],
+      "pivot": 263.5
+    },
+    {
+      "layer": "ysort-l-columns",
+      "name": "l-column-east",
+      "region": [
+        436,
+        135,
+        77,
+        129
+      ],
+      "pivot": 263.5
+    },
+    {
+      "layer": "ysort-station-stair-east",
+      "name": "station-stair",
+      "region": [
+        540,
+        130,
+        68,
+        77
+      ],
+      "pivot": 206.5
+    },
+    {
+      "layer": "ysort-station-stair-east",
+      "name": "east-terrace",
+      "region": [
+        608,
+        128,
+        32,
+        136
+      ],
+      "pivot": 263.5
+    },
+    {
+      "layer": "ysort-plaza-props",
+      "name": "fountain",
+      "region": [
+        566,
+        256,
+        74,
+        42
+      ],
+      "pivot": 297.5
+    },
+    {
+      "layer": "ysort-plaza-props",
+      "name": "planter-column-west",
+      "region": [
+        100,
+        235,
+        22,
+        26
+      ],
+      "pivot": 261.5
+    },
+    {
+      "layer": "ysort-plaza-props",
+      "name": "planter-column-east",
+      "region": [
+        488,
+        236,
+        22,
+        25
+      ],
+      "pivot": 261.5
+    },
+    {
+      "layer": "ysort-plaza-props",
+      "name": "bollard-213",
+      "region": [
+        89,
+        206,
+        3,
+        8
+      ],
+      "pivot": 213.5
+    },
+    {
+      "layer": "ysort-plaza-props",
+      "name": "bollard-225",
+      "region": [
+        89,
+        218,
+        3,
+        8
+      ],
+      "pivot": 225.5
+    },
+    {
+      "layer": "ysort-plaza-props",
+      "name": "bollard-253",
+      "region": [
+        89,
+        246,
+        3,
+        8
+      ],
+      "pivot": 253.5
+    },
+    {
+      "layer": "ysort-plaza-props",
+      "name": "bollard-265",
+      "region": [
+        89,
+        258,
+        3,
+        8
+      ],
+      "pivot": 265.5
+    },
+    {
+      "layer": "ysort-plaza-props",
+      "name": "wayfinding-pylon",
+      "region": [
+        235,
+        194,
+        10,
+        39
+      ],
+      "pivot": 232.5
+    },
+    {
+      "layer": "ysort-plaza-props",
+      "name": "granite-seat-west",
+      "region": [
+        232,
+        252,
+        30,
+        15
+      ],
+      "pivot": 265.5
+    },
+    {
+      "layer": "ysort-plaza-props",
+      "name": "granite-seat-east",
+      "region": [
+        372,
+        252,
+        30,
+        15
+      ],
+      "pivot": 265.5
+    },
+    {
+      "layer": "ysort-plaza-props",
+      "name": "honey-locust-west",
+      "region": [
+        171,
+        220,
+        54,
+        72
+      ],
+      "pivot": 293.5
+    },
+    {
+      "layer": "ysort-plaza-props",
+      "name": "honey-locust-east",
+      "region": [
+        406,
+        220,
+        53,
+        72
+      ],
+      "pivot": 293.5
+    },
+    {
+      "layer": "ysort-plaza-props",
+      "name": "bike-share-dock",
+      "region": [
+        324,
+        272,
+        80,
+        25
+      ],
+      "pivot": 297.5
+    },
+    {
+      "layer": "ysort-foreground",
+      "name": "south-parapet-fence",
+      "region": [
+        96,
+        252,
+        464,
+        70
+      ],
+      "pivot": 340.5
+    }
+  ],
+  "geometry": {
+    "walk": [
+      8,
+      178,
+      624,
+      120
+    ],
+    "blocks": [
+      [
+        258,
+        181,
+        42,
+        6
+      ],
+      [
+        419,
+        189,
+        26,
+        12
+      ],
+      [
+        397,
+        182,
+        14,
+        9
+      ],
+      [
+        83,
+        178,
+        11,
+        5
+      ],
+      [
+        214,
+        178,
+        40,
+        8
+      ],
+      [
+        304,
+        178,
+        14,
+        7
+      ],
+      [
+        364,
+        178,
+        22,
+        7
+      ],
+      [
+        498,
+        180,
+        26,
+        8
+      ],
+      [
+        126,
+        250,
+        28,
+        14
+      ],
+      [
+        460,
+        250,
+        28,
+        14
+      ],
+      [
+        100,
+        251,
+        22,
+        11
+      ],
+      [
+        488,
+        251,
+        22,
+        11
+      ],
+      [
+        236,
+        228,
+        8,
+        5
+      ],
+      [
+        232,
+        258,
+        28,
+        8
+      ],
+      [
+        372,
+        258,
+        28,
+        8
+      ],
+      [
+        191,
+        285,
+        15,
+        9
+      ],
+      [
+        425,
+        285,
+        15,
+        9
+      ],
+      [
+        324,
+        288,
+        80,
+        10
+      ],
+      [
+        89,
+        212,
+        3,
+        2
+      ],
+      [
+        89,
+        224,
+        3,
+        2
+      ],
+      [
+        89,
+        252,
+        3,
+        2
+      ],
+      [
+        89,
+        264,
+        3,
+        2
+      ],
+      [
+        540,
+        178,
+        68,
+        29
+      ],
+      [
+        608,
+        178,
+        32,
+        86
+      ],
+      [
+        566,
+        264,
+        74,
+        34
+      ]
+    ],
+    "spawn": [
+      320,
+      286
+    ],
+    "kiosk": [
+      432,
+      214
+    ],
+    "stair": [
+      574,
+      214
+    ],
+    "pylon": [
+      240,
+      240
+    ],
+    "interact_radius": 26,
+    "deck_rows": [
+      95,
+      134
+    ],
+    "station_plate": [
+      296,
+      112,
+      356,
+      123
+    ]
+  },
+  "reveal_mask": "v05 bytes, exact copy",
+  "walk_mask": "v05 walkmask() code, equals v05 guide",
+  "alignment": {
+    "method": "Pearson correlation of |dx|+|dy| luma edge maps, v05 composite vs converted reference, integer shifts -4..4 (diagnostic only; not a production metric). A non-zero best shift means the generated reference's feature is offset from the v05 silhouette, so the plane can carry rim pixels of the wrong surface.",
+    "global_rows_62_359": {
+      "corr_at_0": 0.4127,
+      "best_shift": [
+        0,
+        0
+      ],
+      "best_corr": 0.4127
+    },
+    "top_strip_first_bright_row_reference": 61,
+    "top_strip_first_row_v05": 62,
+    "props": [
+      {
+        "name": "chicago-lamp",
+        "corr_at_0": 0.5429,
+        "best_shift": [
+          0,
+          0
+        ],
+        "best_corr": 0.5429
+      },
+      {
+        "name": "planter-stone-west",
+        "corr_at_0": 0.2363,
+        "best_shift": [
+          -3,
+          1
+        ],
+        "best_corr": 0.2638
+      },
+      {
+        "name": "bench",
+        "corr_at_0": 0.4539,
+        "best_shift": [
+          -4,
+          0
+        ],
+        "best_corr": 0.4556
+      },
+      {
+        "name": "planter-iron",
+        "corr_at_0": 0.1348,
+        "best_shift": [
+          2,
+          1
+        ],
+        "best_corr": 0.3558
+      },
+      {
+        "name": "planter-stone-east",
+        "corr_at_0": 0.1742,
+        "best_shift": [
+          -3,
+          3
+        ],
+        "best_corr": 0.2582
+      },
+      {
+        "name": "litter-bin",
+        "corr_at_0": 0.3118,
+        "best_shift": [
+          -1,
+          0
+        ],
+        "best_corr": 0.3889
+      },
+      {
+        "name": "civic-kiosk",
+        "corr_at_0": 0.4864,
+        "best_shift": [
+          0,
+          0
+        ],
+        "best_corr": 0.4864
+      },
+      {
+        "name": "conifer-planter",
+        "corr_at_0": 0.1868,
+        "best_shift": [
+          0,
+          0
+        ],
+        "best_corr": 0.1868
+      },
+      {
+        "name": "l-column-west",
+        "corr_at_0": 0.3664,
+        "best_shift": [
+          0,
+          0
+        ],
+        "best_corr": 0.3664
+      },
+      {
+        "name": "l-column-east",
+        "corr_at_0": 0.3325,
+        "best_shift": [
+          0,
+          0
+        ],
+        "best_corr": 0.3325
+      },
+      {
+        "name": "station-stair",
+        "corr_at_0": 0.1816,
+        "best_shift": [
+          1,
+          2
+        ],
+        "best_corr": 0.2573
+      },
+      {
+        "name": "east-terrace",
+        "corr_at_0": 0.3512,
+        "best_shift": [
+          0,
+          0
+        ],
+        "best_corr": 0.3512
+      },
+      {
+        "name": "fountain",
+        "corr_at_0": 0.3292,
+        "best_shift": [
+          0,
+          0
+        ],
+        "best_corr": 0.3292
+      },
+      {
+        "name": "planter-column-west",
+        "corr_at_0": 0.254,
+        "best_shift": [
+          1,
+          0
+        ],
+        "best_corr": 0.3223
+      },
+      {
+        "name": "planter-column-east",
+        "corr_at_0": 0.3607,
+        "best_shift": [
+          0,
+          0
+        ],
+        "best_corr": 0.3607
+      },
+      {
+        "name": "bollard-213",
+        "corr_at_0": 0.3504,
+        "best_shift": [
+          0,
+          1
+        ],
+        "best_corr": 0.447
+      },
+      {
+        "name": "bollard-225",
+        "corr_at_0": 0.489,
+        "best_shift": [
+          0,
+          0
+        ],
+        "best_corr": 0.489
+      },
+      {
+        "name": "bollard-253",
+        "corr_at_0": 0.5039,
+        "best_shift": [
+          0,
+          0
+        ],
+        "best_corr": 0.5039
+      },
+      {
+        "name": "bollard-265",
+        "corr_at_0": 0.3061,
+        "best_shift": [
+          0,
+          1
+        ],
+        "best_corr": 0.348
+      },
+      {
+        "name": "wayfinding-pylon",
+        "corr_at_0": 0.3757,
+        "best_shift": [
+          1,
+          0
+        ],
+        "best_corr": 0.4269
+      },
+      {
+        "name": "granite-seat-west",
+        "corr_at_0": 0.0544,
+        "best_shift": [
+          1,
+          -1
+        ],
+        "best_corr": 0.2731
+      },
+      {
+        "name": "granite-seat-east",
+        "corr_at_0": 0.0126,
+        "best_shift": [
+          -1,
+          -1
+        ],
+        "best_corr": 0.3046
+      },
+      {
+        "name": "honey-locust-west",
+        "corr_at_0": 0.1294,
+        "best_shift": [
+          2,
+          0
+        ],
+        "best_corr": 0.1767
+      },
+      {
+        "name": "honey-locust-east",
+        "corr_at_0": 0.2056,
+        "best_shift": [
+          0,
+          0
+        ],
+        "best_corr": 0.2056
+      },
+      {
+        "name": "bike-share-dock",
+        "corr_at_0": 0.3338,
+        "best_shift": [
+          0,
+          1
+        ],
+        "best_corr": 0.3954
+      },
+      {
+        "name": "south-parapet-fence",
+        "corr_at_0": 0.2251,
+        "best_shift": [
+          0,
+          1
+        ],
+        "best_corr": 0.2351
+      }
+    ],
+    "props_with_nonzero_best_shift": [
+      "planter-stone-west",
+      "bench",
+      "planter-iron",
+      "planter-stone-east",
+      "litter-bin",
+      "station-stair",
+      "planter-column-west",
+      "bollard-213",
+      "bollard-265",
+      "wayfinding-pylon",
+      "granite-seat-west",
+      "granite-seat-east",
+      "honey-locust-west",
+      "bike-share-dock",
+      "south-parapet-fence"
+    ]
+  },
+  "inputs": {
+    "reference": {
+      "file": "outputs/style41/rpg-2-star-ocean-the-second_chicago-loop_science-style-alignment-reference_nonruntime-v01_20261022-161221-0e519466.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "6cc3069cc15cb41f17c80c49073a9d841b1647c8eaafbfdf8e4a76d85c6d9f52"
+    },
+    "ground-far": {
+      "file": "game/assets/environments/chicago-loop-state-lake-v05/rpg-2-star-ocean-the-second_chicago-loop_state-lake_ground-far_unapproved-v05_20261017-234337-84862412.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "b56b639c9f3e99f29fcfad17977f8af1d98deb9a7bdfdfb54fdf66ff52ec23d2"
+    },
+    "occlusion-reveal-mask": {
+      "file": "game/assets/environments/chicago-loop-state-lake-v05/rpg-2-star-ocean-the-second_chicago-loop_state-lake_occlusion-reveal-mask_unapproved-v05_20261017-234337-84862412.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "f812801e2eb4840c4290319345545015425e894f05b6d8c4a34b33cb3052bc28"
+    },
+    "ysort-foreground": {
+      "file": "game/assets/environments/chicago-loop-state-lake-v05/rpg-2-star-ocean-the-second_chicago-loop_state-lake_ysort-foreground_unapproved-v05_20261017-234337-84862412.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "9b2b2196e502af031d5e4777022ba0ff74be80e9bcdc77e68ad993e5f16a1a05"
+    },
+    "ysort-l-columns": {
+      "file": "game/assets/environments/chicago-loop-state-lake-v05/rpg-2-star-ocean-the-second_chicago-loop_state-lake_ysort-l-columns_unapproved-v05_20261017-234337-84862412.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "72c1f0a1b5242cd67404c9d74e500db41bb20a7fecee02a822e20fd45a06e199"
+    },
+    "ysort-plaza-props": {
+      "file": "game/assets/environments/chicago-loop-state-lake-v05/rpg-2-star-ocean-the-second_chicago-loop_state-lake_ysort-plaza-props_unapproved-v05_20261017-234337-84862412.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "4c27a813c4b982c0096655b9baa77ebf4bd96af348f7eaae893dda2470c63bd0"
+    },
+    "ysort-station-stair-east": {
+      "file": "game/assets/environments/chicago-loop-state-lake-v05/rpg-2-star-ocean-the-second_chicago-loop_state-lake_ysort-station-stair-east_unapproved-v05_20261017-234337-84862412.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "81a0db696c01c6c5a15a1a37f3388a8a18bb7de2b453b1e8abbfee4064a05f99"
+    },
+    "ysort-underdeck-props": {
+      "file": "game/assets/environments/chicago-loop-state-lake-v05/rpg-2-star-ocean-the-second_chicago-loop_state-lake_ysort-underdeck-props_unapproved-v05_20261017-234337-84862412.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "fda8072631f655aabcb43cdb1375ce0baf9f7b52cb0dc6da31fad7e28c1feba3"
+    },
+    "v05-walkmask-guide": {
+      "file": "outputs/chicago-loop-state-lake-v05/rpg-2-star-ocean-the-second_chicago-loop_state-lake_guides-walkmask_unapproved-v05_20261017-234337-84862412.png",
+      "hash_algorithm": "sha256-bytes",
+      "sha256": "e1f98ed5b653037c7f1969b24a17cc7049df06eff6bb38ecf7a12b8eae259c36"
+    },
+    "v05-manifest": {
+      "file": "outputs/chicago-loop-state-lake-v05/rpg-2-star-ocean-the-second_chicago-loop_state-lake_layer-manifest_unapproved-v05_20261017-234337-84862412.json",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "fe51ad8b37e7bba7fc3c4fc509187e15faa8bb4353ab187796c6459bffc3294a"
+    },
+    "v05-scene-script": {
+      "file": "game/scripts/rpg-2-star-ocean-the-second_chicago-loop_state-lake-block-scene_unapproved-v05_20261017-234337-84862412.gd",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "bee89d7451d87d70ca80ca29c00132068d4824c60eb9de7417561c123addb08e"
+    },
+    "v05-scene-tscn": {
+      "file": "game/scenes/rpg-2-star-ocean-the-second_chicago-loop_state-lake-block-scene_unapproved-v05_20261017-234337-84862412.tscn",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "238c18cc5d49baa8cf2601f9c36debd2fda0611e0eaacef6d9cb2b117f0f57ec"
+    },
+    "v05-author": {
+      "file": "tools/rpg-2-star-ocean-the-second_chicago-loop_state-lake-block-pixel-author_unapproved-v05_20261017-234337-84862412.py",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "sha256": "d4fa8a4f58140e46865339b0c9032883ec0e8399d674b246f047d014fb3428bb"
+    }
+  },
+  "writers": {
+    "imported": "tools/rpg-2-star-ocean-the-second_chicago-loop_state-lake-block-pixel-author_unapproved-v05_20261017-234337-84862412.py",
+    "used": [
+      "walkmask",
+      "png_bytes",
+      "ora_bytes",
+      "pxo_bytes"
+    ],
+    "pxo_rename_pattern_from": "tools/rpg-2-star-ocean-the-second_chicago-loop_state-lake-block-pixel-author_unapproved-v06_20261018-155129-19790a70.py",
+    "pattern_sha256_text_lf": "ea2d3a98ef8e377409e27d193f92a3c927dcee70142d9451df831f8ea522cd20"
+  },
+  "toolchain": {
+    "pillow": "12.3.0",
+    "numpy": "2.3.5"
+  },
+  "limitations": [
+    "Art is unapproved; the style41 reference was generated by an image model, so its pixel clusters are not native hand-placed pixels.",
+    "The generated reference is not geometrically identical to v05: see alignment; mask equality alone proves nothing about rim fit.",
+    "Honey-locust crowns: the reference draws full crowns, the v05 masks are open sparse crowns, so the reference leaves outside the masks are baked into ground-far and will draw under the hero when she stands behind a tree (speckled crown).",
+    "Granite seats, under-deck planters, bench, stair and bin sit 1-4 px off their v05 silhouettes in the reference (alignment best shifts), so thin rims of the wrong surface ride on those planes and in the backdrop next to them.",
+    "Top rim: the reference's art starts at row 61, v05's at row 62 (one row of facade where v05 has the dark strip).",
+    "Hidden clean-plate pixels are old-style v05 art and will show in the reveal window when the hero stands behind a prop.",
+    "Not run in Godot by the producer (no import/render in this checkout); root must verify entry, interactions, occlusion and captures."
+  ],
+  "files": {
+    "game/assets/environments/style42/rpg-2-star-ocean-the-second_chicago-loop-style42_ground-far_unapproved-v01_20261022-161615-69eb4eee.png": {
+      "sha256": "9bb5c747fb2aeb75e68697c6f540b8916975e979532a1e6b33cde71ded0074f7",
+      "hash_algorithm": "sha256-bytes",
+      "role": "runtime texture 640x360 RGBA"
+    },
+    "game/assets/environments/style42/rpg-2-star-ocean-the-second_chicago-loop-style42_ysort-underdeck-props_unapproved-v01_20261022-161615-69eb4eee.png": {
+      "sha256": "9e03c73f0666f7175f081e047a91d90cd3333fa3c00467d31f12f80f010502f1",
+      "hash_algorithm": "sha256-bytes",
+      "role": "runtime texture 640x360 RGBA"
+    },
+    "game/assets/environments/style42/rpg-2-star-ocean-the-second_chicago-loop-style42_ysort-l-columns_unapproved-v01_20261022-161615-69eb4eee.png": {
+      "sha256": "32ae020ddca13566b12f738f2b07240e4a87c9d0f890cf3d655d3b289e342831",
+      "hash_algorithm": "sha256-bytes",
+      "role": "runtime texture 640x360 RGBA"
+    },
+    "game/assets/environments/style42/rpg-2-star-ocean-the-second_chicago-loop-style42_ysort-station-stair-east_unapproved-v01_20261022-161615-69eb4eee.png": {
+      "sha256": "447cd57f75f7fb003bd8bcc2c057dd377bf4a7e05eb26374d6f89a4e26b43782",
+      "hash_algorithm": "sha256-bytes",
+      "role": "runtime texture 640x360 RGBA"
+    },
+    "game/assets/environments/style42/rpg-2-star-ocean-the-second_chicago-loop-style42_ysort-plaza-props_unapproved-v01_20261022-161615-69eb4eee.png": {
+      "sha256": "cb32dbbb781280e038d3bba786dd654005e61cb00c979b512fa0bb25dfad0bd3",
+      "hash_algorithm": "sha256-bytes",
+      "role": "runtime texture 640x360 RGBA"
+    },
+    "game/assets/environments/style42/rpg-2-star-ocean-the-second_chicago-loop-style42_ysort-foreground_unapproved-v01_20261022-161615-69eb4eee.png": {
+      "sha256": "82c51264296781270fb17db35d57bd7e240fd57efbcb6b21b171cc5b34e97d7f",
+      "hash_algorithm": "sha256-bytes",
+      "role": "runtime texture 640x360 RGBA"
+    },
+    "game/assets/environments/style42/rpg-2-star-ocean-the-second_chicago-loop-style42_occlusion-reveal-mask_unapproved-v01_20261022-161615-69eb4eee.png": {
+      "sha256": "f812801e2eb4840c4290319345545015425e894f05b6d8c4a34b33cb3052bc28",
+      "hash_algorithm": "sha256-bytes",
+      "role": "runtime reveal mask (v05 bytes, exact copy)"
+    },
+    "outputs/style42/rpg-2-star-ocean-the-second_chicago-loop-style42_flat-source_unapproved-v01_20261022-161615-69eb4eee.png": {
+      "sha256": "4a6a0f626ef13c3e5beec30ba8e47b088d8eb59ba42f9900a54469f4dc170908",
+      "hash_algorithm": "sha256-bytes",
+      "role": "flat no-actor composite (= converted reference)"
+    },
+    "outputs/style42/rpg-2-star-ocean-the-second_chicago-loop-style42_guides-walkmask_unapproved-v01_20261022-161615-69eb4eee.png": {
+      "sha256": "e1f98ed5b653037c7f1969b24a17cc7049df06eff6bb38ecf7a12b8eae259c36",
+      "hash_algorithm": "sha256-bytes",
+      "role": "walk mask guide (v05 code, equals v05 guide)"
+    },
+    "outputs/style42/rpg-2-star-ocean-the-second_chicago-loop-style42_layered-source_unapproved-v01_20261022-161615-69eb4eee.ora": {
+      "sha256": "5b615a005aa3faf3794472bac861cb5e10ca650d74f7f9bb30e7c8344aa95b0d",
+      "hash_algorithm": "sha256-bytes",
+      "role": "OpenRaster layered source"
+    },
+    "outputs/style42/rpg-2-star-ocean-the-second_chicago-loop-style42_layered-source_unapproved-v01_20261022-161615-69eb4eee.pxo": {
+      "sha256": "aa02bd57b83dcceb541bd5ac63e5b55e848ca2db8d24ec2a5c5d1cce0d1e7c7e",
+      "hash_algorithm": "sha256-bytes",
+      "role": "Pixelorama layered source (pxo_version 7)"
+    },
+    "game/scripts/style42/rpg-2-star-ocean-the-second_chicago-loop-style42_state-lake-scene_unapproved-v01_20261022-161615-69eb4eee.gd": {
+      "sha256": "6ccbc9c8f47ad28dab4bb72e72df70029d84faed91c20bc5ced814d604a8b39b",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "role": "standalone scene script (v05 clone, header + ART changed)"
+    },
+    "game/scenes/style42/rpg-2-star-ocean-the-second_chicago-loop-style42_state-lake-scene_unapproved-v01_20261022-161615-69eb4eee.tscn": {
+      "sha256": "63c11c3e8ae3251b7aef7c5d18ae3f2e27f81825fb8060b6a19314b5a2ae6218",
+      "hash_algorithm": "sha256-text-lf-v1",
+      "role": "standalone scene (v05 .tscn clone, script path changed)"
+    }
+  },
+  "source": "tools/rpg-2-star-ocean-the-second_chicago-loop_style42-source-assembly-builder_unapproved-v01_20261022-161615-69eb4eee.py",
+  "source_sha256_text_lf": "d590db81381fb3f6d201a707baa269e96b1c40f11fb457ab39bdc239859f46fc"
+}
