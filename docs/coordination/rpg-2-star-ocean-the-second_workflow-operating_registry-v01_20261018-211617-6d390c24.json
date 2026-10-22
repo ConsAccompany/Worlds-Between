@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-22T02:51:07.948685+00:00",
+  "updatedAt": "2026-10-22T03:10:52.181005+00:00",
   "purpose": "Operating queue and worktree ownership; no progress points or account details",
   "workflow": "docs/workflow.md",
   "canonicalLedger": "outputs/rpg-2-star-ocean-the-second_production-completion_task-ledger_v01_20261018-140533-3de52073.json",
@@ -1319,14 +1319,17 @@
     }
   ],
   "activeDualProviderBatch": {
-    "primary": "ji-complete-companion-path",
-    "status": "closed-default-adopted",
+    "primary": "ordinary-combat-set-checks",
     "owner": "claude",
     "support": "deepseek",
-    "base": "759f2b9ffc1d2e236f5ab15dca3350b20e7943bb",
-    "ordinaryAdoptionAuthorized": true,
-    "completedAt": "2026-10-22T02:51:07.948685+00:00",
-    "sourceCommit": "22d3e7f5e8a9d206d3ec6284b6a1c4d0b8b17651"
+    "status": "completed-independently-verified",
+    "base": "78000e24b3bf0668b8fa41fbcd8758e00bcdc494",
+    "workers": {
+      "claude": "C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\needle34\\cl-combat-qa",
+      "deepseek": "C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\needle31\\ds-jcheck"
+    },
+    "completedAt": "2026-10-22T03:10:52.181005+00:00",
+    "sourceCommit": "9dae18465285b34f9d3da7801d76e393ba7a07b3"
   },
   "characterSpriteStyleDirection": {
     "reference": "Sea of Stars",
@@ -1409,7 +1412,7 @@
     ],
     "scoringUnchanged": true,
     "approvalsRemainSeparate": true,
-    "next": "Complete outstanding technical checks on the ordinary integrated five-actor MVP; defer cosmetic refinements. Artistic approval and human playtests stay separate."
+    "next": "Use existing produced/wired scene candidates, prepare actual gameplay entry/fallback evidence without cosmetic revision. Obtain separate MVP default-use authorization before switching unapproved visual defaults. Final art acceptance remains separate."
   },
   "postMvpRefinements": {
     "status": "deferred-by-creator",
@@ -1422,17 +1425,17 @@
     "approvalsNotWaived": true
   },
   "nextProductionTask": {
-    "kind": "ordinary-default-combat-technical-inspection",
+    "kind": "mvp-scene-default-integration",
     "status": "ready-not-started",
     "owner": "claude",
     "coordinator": "codex",
     "tasks": [
-      "qa.combat.protagonist-male.set-check",
-      "qa.combat.zhao-ling.set-check",
-      "qa.combat.liang-xu.set-check",
-      "qa.combat.ji-cheng.set-check"
+      "content.scene.city.native-default",
+      "content.scene.ruins.native-default",
+      "content.scene.ruins-survey-inner.native-default",
+      "content.scene.chicago-loop.native-default"
     ],
-    "nextAction": "Choose a bounded actor check from existing ordinary defaults; reuse the maintained runtime checker and finish missing technical criteria. No cosmetic source revision or artistic acceptance credit."
+    "nextAction": "Use existing produced/wired scene candidates, prepare actual gameplay entry/fallback evidence without cosmetic revision. Obtain separate MVP default-use authorization before switching unapproved visual defaults. Final art acceptance remains separate."
   },
   "lastCompletedProductionTask": {
     "subject": "ji-cheng",
@@ -1663,6 +1666,100 @@
       "productionAfter": 59.1,
       "ordinaryAdoptionAuthorized": true,
       "completedAt": "2026-10-22T02:51:07.948685+00:00"
+    }
+  ],
+  "lastCompletedInspectionTask": {
+    "status": "completed-technical-pass",
+    "tasks": [
+      "qa.combat.protagonist-male.set-check",
+      "qa.combat.zhao-ling.set-check",
+      "qa.combat.liang-xu.set-check",
+      "qa.combat.ji-cheng.set-check"
+    ],
+    "producer": "claude",
+    "independentSupport": "deepseek",
+    "inspectorAndIntegrator": "codex",
+    "sourceCommit": "9dae18465285b34f9d3da7801d76e393ba7a07b3",
+    "testedRuntimeRevision": "78000e24b3bf0668b8fa41fbcd8758e00bcdc494",
+    "completedAt": "2026-10-22T03:10:52.181005+00:00",
+    "checks": {
+      "ordinaryEn": 1572,
+      "ordinaryZh": 1572,
+      "sharedClock": 220,
+      "sharedHalfScale": 273,
+      "independentBoundary": 339
+    },
+    "evidence": [
+      "docs/qa/rpg-2-star-ocean-the-second_four-actor-combat_ordinary-default-technical-verdict_v01_20261021-230945-83d44982.md",
+      "outputs/cts34/closeout-20261021-230945-83d44982/rpg-2-star-ocean-the-second_combat-set_codex-closeout-proof_v01_20261021-230945-83d44982.json"
+    ],
+    "runtimeChanges": false,
+    "artApproved": false,
+    "motionFluidityApproved": false,
+    "humanPlaytestsAdded": 0,
+    "production": {
+      "before": 59.1,
+      "after": 59.1,
+      "changePercentagePoints": 0
+    },
+    "inspection": {
+      "before": 18.1,
+      "after": 20.1,
+      "changePercentagePoints": 2.0
+    },
+    "approval": {
+      "before": 7.8,
+      "after": 7.8,
+      "changePercentagePoints": 0
+    },
+    "limitations": "Labeled deterministic state/pose/handler fixtures; not normal-input gameplay or human motion review. Original parser and provider certificate-store failures retained; canonical unfiltered rerun passed."
+  },
+  "completedInspectionTaskHistory": [
+    {
+      "status": "completed-technical-pass",
+      "tasks": [
+        "qa.combat.protagonist-male.set-check",
+        "qa.combat.zhao-ling.set-check",
+        "qa.combat.liang-xu.set-check",
+        "qa.combat.ji-cheng.set-check"
+      ],
+      "producer": "claude",
+      "independentSupport": "deepseek",
+      "inspectorAndIntegrator": "codex",
+      "sourceCommit": "9dae18465285b34f9d3da7801d76e393ba7a07b3",
+      "testedRuntimeRevision": "78000e24b3bf0668b8fa41fbcd8758e00bcdc494",
+      "completedAt": "2026-10-22T03:10:52.181005+00:00",
+      "checks": {
+        "ordinaryEn": 1572,
+        "ordinaryZh": 1572,
+        "sharedClock": 220,
+        "sharedHalfScale": 273,
+        "independentBoundary": 339
+      },
+      "evidence": [
+        "docs/qa/rpg-2-star-ocean-the-second_four-actor-combat_ordinary-default-technical-verdict_v01_20261021-230945-83d44982.md",
+        "outputs/cts34/closeout-20261021-230945-83d44982/rpg-2-star-ocean-the-second_combat-set_codex-closeout-proof_v01_20261021-230945-83d44982.json"
+      ],
+      "runtimeChanges": false,
+      "artApproved": false,
+      "motionFluidityApproved": false,
+      "humanPlaytestsAdded": 0,
+      "production": {
+        "before": 59.1,
+        "after": 59.1,
+        "changePercentagePoints": 0
+      },
+      "inspection": {
+        "before": 18.1,
+        "after": 20.1,
+        "changePercentagePoints": 2.0
+      },
+      "approval": {
+        "before": 7.8,
+        "after": 7.8,
+        "changePercentagePoints": 0
+      },
+      "limitations": "Labeled deterministic state/pose/handler fixtures; not normal-input gameplay or human motion review. Original parser and provider certificate-store failures retained; canonical unfiltered rerun passed."
     }
   ]
 }

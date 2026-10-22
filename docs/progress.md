@@ -2,7 +2,15 @@
 
 Last updated: 2026-10-21
 
-## Latest completed implementation — 2026-10-21: Ji Cheng MVP default adoption
+## Latest completed inspection — 2026-10-21: four ordinary-default combat sets
+
+Production **59.1% →59.1% (+0.0 pp)**; inspection **18.1% →20.1% (+2.0 pp)**; creator approval **7.8% →7.8% (+0.0 pp)**. Four existing technical tasks complete;41/204inspection points, no new scoring buckets or art acceptance.
+
+Male protagonist, Zhao Ling, Liang Xu and Ji Cheng pass all8clip binding/timing/anchors,30/60step fixtures in both facings, release/retrigger and hit/dodge/defeat priorities through ordinary default arena models. Codex independently reran EN1572 and ZH1572 predicates with18native captures, shared clock220/scale273, plus DeepSeek boundary339 unfiltered. Real handlers preserve existing damage/costs, rendering does not mutate mechanics; female default/contact path remains separate. All2377tracked runtime/data/scene files byte-exact unchanged. Source `9dae18465285b34f9d3da7801d76e393ba7a07b3`. [Closeout](../docs/qa/rpg-2-star-ocean-the-second_four-actor-combat_ordinary-default-technical-verdict_v01_20261021-230945-83d44982.md).
+
+Initial checker parse error and provider certificate-store errors retained; canonical final checks reject all ERROR/SCRIPT_ERROR lines. Captures and state/handler tests use explicit fixtures, not normal-speed human gameplay or a new revival mechanic. Refinement remains post-MVP. Full art0/52,scene visuals5/12,human plays0/2 unchanged. Next: existing scene candidates' MVP default integration, with separate creator default-use authorization.
+
+## Prior completed implementation — 2026-10-21: Ji Cheng MVP default adoption
 
 Production **58.9% →59.1% (+0.2 pp)**; inspection **18.1% →18.1% (+0.0 pp)**; creator approval **7.8% →7.8% (+0.0 pp)**. The two existing Ji default-integration tasks are complete (content594→598/1881); frozen weights and denominator unchanged.
 

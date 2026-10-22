@@ -4,7 +4,7 @@
   "title": "世界之间",
   "englishTitle": "Worlds Between",
   "edition": "设计基线 v0.2 · 2026-10-15 创作者决定",
-  "updatedAt": "2026-10-22T02:51:08.047Z",
+  "updatedAt": "2026-10-22T03:10:52.283Z",
   "note": "规则以玩家确认的设计稿为基线，并已并入 2026-10-15 创作者决定；人物姓名与外观是待审提案，具体剧情留待后续设计。",
   "pitch": "从地下社区走出的旅人，以好奇心探索多元文明，招募伙伴，并成为不同世界认知差异的桥梁。",
   "pillars": [
@@ -7976,24 +7976,24 @@
     "combinedWiringCheck": "297/297 on39f252e, clean raw log; actual Chinese victory inspected."
   },
   "latestTaskProgress": {
-    "id": "ji-cheng-default-adoption",
+    "id": "ordinary-combat-set-checks",
     "status": "completed",
     "title": {
-      "zh": "纪澄 MVP 默认接入",
-      "en": "Ji Cheng MVP ordinary default adoption"
+      "zh": "四名角色普通默认战斗技术检查",
+      "en": "Four ordinary-default actor combat technical checks"
     },
-    "startedAt": "2026-10-22T02:46:53.689Z",
-    "sourceBefore": "ad9582c2d3ab61d4247b7a458fa1a236d11cfbd3",
+    "startedAt": "2026-10-22T02:58:38.086Z",
+    "sourceBefore": "78000e24b3bf0668b8fa41fbcd8758e00bcdc494",
     "meters": {
       "production": {
-        "before": 58.9,
+        "before": 59.1,
         "after": 59.1,
-        "changePercentagePoints": 0.2
+        "changePercentagePoints": 0
       },
       "inspection": {
         "before": 18.1,
-        "after": 18.1,
-        "changePercentagePoints": 0
+        "after": 20.1,
+        "changePercentagePoints": 2
       },
       "approval": {
         "before": 7.8,
@@ -8001,10 +8001,10 @@
         "changePercentagePoints": 0
       }
     },
-    "completedAt": "2026-10-22T02:51:08.047Z",
-    "sourceAfter": "22d3e7f5e8a9d206d3ec6284b6a1c4d0b8b17651",
+    "completedAt": "2026-10-22T03:10:52.283Z",
+    "sourceAfter": "9dae18465285b34f9d3da7801d76e393ba7a07b3",
     "evidence": [
-      "docs/qa/rpg-2-star-ocean-the-second_ji-cheng_default-adoption_codex-closeout-v01_20261021-224827-742b5598.md"
+      "docs/qa/rpg-2-star-ocean-the-second_four-actor-combat_ordinary-default-technical-verdict_v01_20261021-230945-83d44982.md"
     ]
   },
   "progressReporting": {
@@ -9069,6 +9069,38 @@
       "evidence": [
         "docs/qa/rpg-2-star-ocean-the-second_ji-cheng_complete-companion-path_codex-closeout_opt-in-v01_20261021-224010-3f4e96c3.md"
       ]
+    },
+    {
+      "id": "ji-cheng-default-adoption",
+      "status": "completed",
+      "title": {
+        "zh": "纪澄 MVP 默认接入",
+        "en": "Ji Cheng MVP ordinary default adoption"
+      },
+      "startedAt": "2026-10-22T02:46:53.689Z",
+      "sourceBefore": "ad9582c2d3ab61d4247b7a458fa1a236d11cfbd3",
+      "meters": {
+        "production": {
+          "before": 58.9,
+          "after": 59.1,
+          "changePercentagePoints": 0.2
+        },
+        "inspection": {
+          "before": 18.1,
+          "after": 18.1,
+          "changePercentagePoints": 0
+        },
+        "approval": {
+          "before": 7.8,
+          "after": 7.8,
+          "changePercentagePoints": 0
+        }
+      },
+      "completedAt": "2026-10-22T02:51:08.047Z",
+      "sourceAfter": "22d3e7f5e8a9d206d3ec6284b6a1c4d0b8b17651",
+      "evidence": [
+        "docs/qa/rpg-2-star-ocean-the-second_ji-cheng_default-adoption_codex-closeout-v01_20261021-224827-742b5598.md"
+      ]
     }
   ],
   "latestBattleEnvironmentProduction": {
@@ -9830,5 +9862,51 @@
       "humanPlaytestsAdded": 0,
       "next": "Show actual Ji gameplay and obtain separate MVP default-use authorization. Then apply the prepared one-line switch and recheck the ordinary path. Cosmetic refinement remains post-MVP."
     }
-  ]
+  ],
+  "latestMvpCombatTechnicalInspection": {
+    "status": "completed-technical-pass",
+    "tasks": [
+      "qa.combat.protagonist-male.set-check",
+      "qa.combat.zhao-ling.set-check",
+      "qa.combat.liang-xu.set-check",
+      "qa.combat.ji-cheng.set-check"
+    ],
+    "producer": "claude",
+    "independentSupport": "deepseek",
+    "inspectorAndIntegrator": "codex",
+    "sourceCommit": "9dae18465285b34f9d3da7801d76e393ba7a07b3",
+    "testedRuntimeRevision": "78000e24b3bf0668b8fa41fbcd8758e00bcdc494",
+    "completedAt": "2026-10-22T03:10:52.181005+00:00",
+    "checks": {
+      "ordinaryEn": 1572,
+      "ordinaryZh": 1572,
+      "sharedClock": 220,
+      "sharedHalfScale": 273,
+      "independentBoundary": 339
+    },
+    "evidence": [
+      "docs/qa/rpg-2-star-ocean-the-second_four-actor-combat_ordinary-default-technical-verdict_v01_20261021-230945-83d44982.md",
+      "outputs/cts34/closeout-20261021-230945-83d44982/rpg-2-star-ocean-the-second_combat-set_codex-closeout-proof_v01_20261021-230945-83d44982.json"
+    ],
+    "runtimeChanges": false,
+    "artApproved": false,
+    "motionFluidityApproved": false,
+    "humanPlaytestsAdded": 0,
+    "production": {
+      "before": 59.1,
+      "after": 59.1,
+      "changePercentagePoints": 0
+    },
+    "inspection": {
+      "before": 18.1,
+      "after": 20.1,
+      "changePercentagePoints": 2
+    },
+    "approval": {
+      "before": 7.8,
+      "after": 7.8,
+      "changePercentagePoints": 0
+    },
+    "limitations": "Labeled deterministic state/pose/handler fixtures; not normal-input gameplay or human motion review. Original parser and provider certificate-store failures retained; canonical unfiltered rerun passed."
+  }
 }
