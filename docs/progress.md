@@ -1,5 +1,17 @@
 # Current progress
 
+Last updated:2026-10-22
+
+## Latest completed revision — Chicago common science-scene style
+
+Production **59.9% →59.9% (+0.0pp)**; inspection **20.6% →20.6% (+0.0pp)**; creator approval **7.8% →7.8% (+0.0pp)**. Existing revision reopened then completed; no per-version points. Coding111/111,content623/1881 unchanged. Creator approved the common style direction only.
+
+One generated-reference-derived640x360 playable raster-plane scene, editablePXO/ORA,90independent sourcechecks,173actualGodotchecks each EN/ZH,24finalcaptures. All2548protectedfiles exact; nativePXOflat exact with4applicationdiagnostic errors retained (clean-app/GUI gate not passed). Original layout/26propregions/pivots/route/interactions retained; minor silhouette offsets and old hidden-ground reveal pixels disclosed. Source `62e91be3bd0d7cd1ff13f9d7c1f4742b6855cb1c`. [Codex verdict](../docs/qa/rpg-2-star-ocean-the-second_chicago-loop_common-style-runtime-candidate_codex-verdict_v01_20261022-161615-69eb4eee.md).
+
+Next: show actual native gameplay for separate Chicago MVP-default-use authorization, then apply prepared two-file fallback patch and verify ordinary map arrival. Allfourdefaults stillOFF; finalart5/12,fullsprites0/52,humanplays0/2 unchanged. Other scenes adopt this direction only after the representative runtime sample is approved for MVP use.
+
+# Current progress
+
 ## Latest completed production — Jiang Lan standalone display
 
 Production **59.8% →59.9% (+0.1pp)**; content621→623/1881, coding111/111 unchanged. Inspection **20.6% →20.6% (+0.0pp)**; creator approval **7.8% →7.8% (+0.0pp)**. Exact source crop plus actual bilingual 640x360 standalone UI, 47 checks per language; all2568 protected files unchanged. Original failures and root correction retained. Source `c41a69b9374bd5b7f8ba2b5d2d914af6f29cd0a8`. [Closeout](../docs/qa/rpg-2-star-ocean-the-second_jiang-lan_display-preview_codex-closeout_v01_20261022-155956-1414792c.md). This is a separate preview, not ordinary Jiang gameplay; runtime integration blocked without a current MVP host/role.
