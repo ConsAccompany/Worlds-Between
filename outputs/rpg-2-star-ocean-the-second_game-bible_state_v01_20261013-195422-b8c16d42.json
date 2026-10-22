@@ -4,7 +4,7 @@
   "title": "世界之间",
   "englishTitle": "Worlds Between",
   "edition": "设计基线 v0.2 · 2026-10-15 创作者决定",
-  "updatedAt": "2026-10-22T19:26:51.321Z",
+  "updatedAt": "2026-10-22T19:38:59.753478+00:00",
   "note": "规则以玩家确认的设计稿为基线，并已并入 2026-10-15 创作者决定；人物姓名与外观是待审提案，具体剧情留待后续设计。",
   "pitch": "从地下社区走出的旅人，以好奇心探索多元文明，招募伙伴，并成为不同世界认知差异的桥梁。",
   "pillars": [
@@ -7976,24 +7976,24 @@
     "combinedWiringCheck": "297/297 on39f252e, clean raw log; actual Chinese victory inspected."
   },
   "latestTaskProgress": {
-    "id": "jiang-lan-native-south",
+    "id": "jiang-lan-other-directions",
     "status": "completed",
     "title": {
-      "zh": "蒋岚南向原生静止帧制作",
-      "en": "Jiang Lan missing native south static"
+      "zh": "蒋岚西北东三向原生静帧",
+      "en": "Jiang Lan missing west north east native statics"
     },
-    "startedAt": "2026-10-22T03:50:08.458Z",
-    "sourceBefore": "0fbfc26cef1a39311105cb4f7c09b74bfbb8fa4d",
+    "startedAt": "2026-10-22T19:30:54.200Z",
+    "sourceBefore": "ed762aeea819b3f1a6f0b15eda1b8598b6fc5ba8",
     "meters": {
       "production": {
-        "before": 59.1,
-        "after": 59.2,
-        "changePercentagePoints": 0.1
+        "before": 59.2,
+        "after": 59.4,
+        "changePercentagePoints": 0.2
       },
       "inspection": {
-        "before": 20.1,
+        "before": 20.6,
         "after": 20.6,
-        "changePercentagePoints": 0.5
+        "changePercentagePoints": 0
       },
       "approval": {
         "before": 7.8,
@@ -8001,10 +8001,10 @@
         "changePercentagePoints": 0
       }
     },
-    "completedAt": "2026-10-22T19:26:51.321Z",
-    "sourceAfter": "577e9d1b9404ed5fedf019fe33d874820e4f6452",
+    "completedAt": "2026-10-22T19:38:59.674Z",
+    "sourceAfter": "01f7e4692888e7a3fbc83f010d20d035c7a95159",
     "evidence": [
-      "docs/qa/rpg-2-star-ocean-the-second_jiang-lan_native-south_source-and-visual-verdict_unapproved-v01_20261022-152453-30bf0f7a.md"
+      "docs/qa/rpg-2-star-ocean-the-second_jiang-lan_missing-three-directions_codex-closeout_unapproved-v01_20261022-153020-105a0103.md"
     ]
   },
   "progressReporting": {
@@ -9197,6 +9197,38 @@
       "evidence": [
         "docs/qa/rpg-2-star-ocean-the-second_male-liang_explore-technical-check_blocked-verdict_v01_20261021-234911-bd5a14a9.md"
       ]
+    },
+    {
+      "id": "jiang-lan-native-south",
+      "status": "completed",
+      "title": {
+        "zh": "蒋岚南向原生静止帧制作",
+        "en": "Jiang Lan missing native south static"
+      },
+      "startedAt": "2026-10-22T03:50:08.458Z",
+      "sourceBefore": "0fbfc26cef1a39311105cb4f7c09b74bfbb8fa4d",
+      "meters": {
+        "production": {
+          "before": 59.1,
+          "after": 59.2,
+          "changePercentagePoints": 0.1
+        },
+        "inspection": {
+          "before": 20.1,
+          "after": 20.6,
+          "changePercentagePoints": 0.5
+        },
+        "approval": {
+          "before": 7.8,
+          "after": 7.8,
+          "changePercentagePoints": 0
+        }
+      },
+      "completedAt": "2026-10-22T19:26:51.321Z",
+      "sourceAfter": "577e9d1b9404ed5fedf019fe33d874820e4f6452",
+      "evidence": [
+        "docs/qa/rpg-2-star-ocean-the-second_jiang-lan_native-south_source-and-visual-verdict_unapproved-v01_20261022-152453-30bf0f7a.md"
+      ]
     }
   ],
   "latestBattleEnvironmentProduction": {
@@ -10170,5 +10202,66 @@
       "changePercentagePoints": 0
     },
     "next": "Produce missing west/north/east Jiang Lan statics from same approved identity and native source contract; defer cosmetic changes to already produced actors."
+  },
+  "latestJiangLanNativeDirectionsProduction": {
+    "status": "produced-source-only",
+    "tasks": [
+      "content.char.jiang-lan.static-west",
+      "content.char.jiang-lan.static-north",
+      "content.char.jiang-lan.static-east"
+    ],
+    "producer": "claude",
+    "independentInspectorAndIntegrator": "codex",
+    "deepseekStatus": "stopped-for-write-scope-violation; draft-local-only; no credited support output",
+    "sourceCommit": "01f7e4692888e7a3fbc83f010d20d035c7a95159",
+    "completedAt": "2026-10-22T19:38:59.753478+00:00",
+    "evidence": [
+      "docs/qa/rpg-2-star-ocean-the-second_jiang-lan_missing-three-directions_codex-closeout_unapproved-v01_20261022-153020-105a0103.md",
+      "outputs/jiang38/root/rpg-2-star-ocean-the-second_jiang-lan_missing-three-directions_source-bound-proof_v01_20261022-153020-105a0103.json"
+    ],
+    "sourceFiles": [
+      "game/assets/characters/jiang-lan-native-directions-v01/west/rpg-2-star-ocean-the-second_jiang-lan_west-static_unapproved-v01_20261022-153020-a657c4cc.png",
+      "game/assets/characters/jiang-lan-native-directions-v01/west/rpg-2-star-ocean-the-second_jiang-lan_west-edit_unapproved-v01_20261022-153020-ad7a2399.pxo",
+      "game/assets/characters/jiang-lan-native-directions-v01/west/rpg-2-star-ocean-the-second_jiang-lan_west-edit_unapproved-v01_20261022-153020-a9aedf6f.ora",
+      "game/assets/characters/jiang-lan-native-directions-v01/west/rpg-2-star-ocean-the-second_jiang-lan_west-palette_unapproved-v01_20261022-153020-c5cacb3a.json",
+      "game/assets/characters/jiang-lan-native-directions-v01/west/rpg-2-star-ocean-the-second_jiang-lan_west-manifest_unapproved-v01_20261022-153020-eafa515e.json",
+      "game/assets/characters/jiang-lan-native-directions-v01/north/rpg-2-star-ocean-the-second_jiang-lan_north-static_unapproved-v01_20261022-153020-28e75f42.png",
+      "game/assets/characters/jiang-lan-native-directions-v01/north/rpg-2-star-ocean-the-second_jiang-lan_north-edit_unapproved-v01_20261022-153020-ec8c2637.pxo",
+      "game/assets/characters/jiang-lan-native-directions-v01/north/rpg-2-star-ocean-the-second_jiang-lan_north-edit_unapproved-v01_20261022-153020-8b79a2c1.ora",
+      "game/assets/characters/jiang-lan-native-directions-v01/north/rpg-2-star-ocean-the-second_jiang-lan_north-palette_unapproved-v01_20261022-153020-e15635a4.json",
+      "game/assets/characters/jiang-lan-native-directions-v01/north/rpg-2-star-ocean-the-second_jiang-lan_north-manifest_unapproved-v01_20261022-153020-3909fa0e.json",
+      "game/assets/characters/jiang-lan-native-directions-v01/east/rpg-2-star-ocean-the-second_jiang-lan_east-static_unapproved-v01_20261022-153020-609cc5bb.png",
+      "game/assets/characters/jiang-lan-native-directions-v01/east/rpg-2-star-ocean-the-second_jiang-lan_east-edit_unapproved-v01_20261022-153020-3668a51e.pxo",
+      "game/assets/characters/jiang-lan-native-directions-v01/east/rpg-2-star-ocean-the-second_jiang-lan_east-edit_unapproved-v01_20261022-153020-f9908af9.ora",
+      "game/assets/characters/jiang-lan-native-directions-v01/east/rpg-2-star-ocean-the-second_jiang-lan_east-palette_unapproved-v01_20261022-153020-a6bbf646.json",
+      "game/assets/characters/jiang-lan-native-directions-v01/east/rpg-2-star-ocean-the-second_jiang-lan_east-manifest_unapproved-v01_20261022-153020-b23be7bb.json",
+      "game/assets/characters/jiang-lan-native-directions-v01/rpg-2-star-ocean-the-second_jiang-lan_directions-batch-manifest_unapproved-v01_20261022-153020-c4239121.json",
+      "game/assets/characters/jiang-lan-native-directions-v01/.gdignore",
+      "tools/rpg-2-star-ocean-the-second_jiang-lan_directions-static-author_unapproved-v01_20261022-153020-105a0103.py",
+      "tools/rpg-2-star-ocean-the-second_jiang-lan_directions-source-check_v01_20261022-153020-105a0103.py"
+    ],
+    "nativeFlatExportsExact": 6,
+    "sourceFitCaptures": 12,
+    "protectedFilesRawExact": 2384,
+    "nativeCleanApplicationGatePassed": false,
+    "guiSaveReopenVerified": false,
+    "artApproved": false,
+    "runtimeAdopted": false,
+    "production": {
+      "before": 59.2,
+      "after": 59.4,
+      "changePercentagePoints": 0.2
+    },
+    "inspection": {
+      "before": 20.6,
+      "after": 20.6,
+      "changePercentagePoints": 0
+    },
+    "approval": {
+      "before": 7.8,
+      "after": 7.8,
+      "changePercentagePoints": 0
+    },
+    "next": "Produce missing Jiang Lan idle/walk source bank, preserve all four neutral statics, then companion playable integration. Cosmetic polish deferred."
   }
 }

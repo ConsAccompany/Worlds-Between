@@ -2,7 +2,7 @@
   "id": "rpg-2-star-ocean-the-second_production-completion_v01",
   "schemaVersion": 2,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-22T19:26:50Z",
+  "updatedAt": "2026-10-22T19:38:58Z",
   "zh": "制作完成度任务台账：衡量已完成的工作量（编码 40% + 内容 60%）；检查／审查与创作者批准分开计量，均不改变制作分；免除的审查不算已执行的工作；运营任务列出负责方但不计百分比。",
   "en": "Production-completion task ledger: measures work done (coding 40% + content 60%); inspection/review and creator approval are separate meters and never change production credit; waived reviews are not performed work; operations tasks list owners but carry no percentage.",
   "brief": "docs/rpg-2-star-ocean-the-second_production-completion_bilingual-brief_v01_20261018-140533-3ea2a621.md",
@@ -932,8 +932,8 @@
     "production": {
       "zh": "制作完成度",
       "en": "Production completion",
-      "percent": 59.2,
-      "percentLabel": "59.2%",
+      "percent": 59.4,
+      "percentLabel": "59.4%",
       "formula": "round1(40 * codingDonePoints/codingTotalPoints + 60 * contentDonePoints/contentTotalPoints)",
       "coding": {
         "done": 111,
@@ -944,12 +944,12 @@
         "tasksDone": 23
       },
       "content": {
-        "done": 601,
+        "done": 607,
         "total": 1881,
-        "percent": 32,
+        "percent": 32.3,
         "weight": 60,
         "tasks": 715,
-        "tasksDone": 192
+        "tasksDone": 195
       }
     },
     "inspection": {
@@ -1014,11 +1014,11 @@
         "waivedPoints": 0
       },
       "content": {
-        "done": 601,
+        "done": 607,
         "total": 1881,
-        "percent": 32,
+        "percent": 32.3,
         "tasks": 715,
-        "tasksDone": 192,
+        "tasksDone": 195,
         "waivedTasks": 0,
         "waivedPoints": 0
       },
@@ -1073,11 +1073,11 @@
         "tasks": 717,
         "operationsTasks": 0,
         "points": 1889,
-        "pointsDone": 555,
+        "pointsDone": 561,
         "byStatus": {
-          "done": 142,
+          "done": 145,
           "blocked": 2,
-          "todo": 569,
+          "todo": 566,
           "in_progress": 4
         },
         "readyInQueue": 2,
@@ -1167,7 +1167,7 @@
       },
       "characters": {
         "content": {
-          "done": 192,
+          "done": 198,
           "total": 1460
         },
         "technical-inspection": {
@@ -2045,9 +2045,9 @@
     {"id":"creator.char.liang-xu.accept-display","type":"creator-acceptance","title":{"zh":"梁序 · 验收展示图","en":"Liang Xu · accept display image"},"area":"characters","stage":"creator-approval","owner":"creator","status":"todo","points":1,"doneCriterion":{"zh":"清单 display 项被创作者勾选","en":"The creator checks the inventory display item"},"dependsOn":["content.char.liang-xu.display"],"evidence":[],"subject":{"kind":"character-variant","id":"liang-xu"},"target":"content.char.liang-xu.display"},
     {"id":"content.char.jiang-lan.portrait","type":"concept-generation","title":{"zh":"蒋岚 · 人物设定图（图像生成）","en":"Jiang Lan · source portrait (image generation)"},"area":"characters","stage":"content","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"设定图文件已入库","en":"The source portrait file is committed"},"dependsOn":[],"evidence":["outputs/rpg-2-star-ocean-the-second_jiang-lan_character-sheet_hairstyle-v02_20261013-161317-c21bd255.png"],"subject":{"kind":"character-variant","id":"jiang-lan"}},
     {"id":"content.char.jiang-lan.static-south","type":"native-pixel","title":{"zh":"蒋岚 · 南向高密度静止帧","en":"Jiang Lan · south high-density static"},"area":"characters","stage":"content","owner":"claude","status":"done","points":3,"doneCriterion":{"zh":"南向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"south native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":[],"evidence":["docs/qa/rpg-2-star-ocean-the-second_jiang-lan_native-south_source-and-visual-verdict_unapproved-v01_20261022-152453-30bf0f7a.md"],"subject":{"kind":"character-variant","id":"jiang-lan"},"statusAt":"2026-10-22T19:26:15Z","note":{"zh":"","en":"Missing native80x112 south static committed:48logical body,27colours,9role layers+hidden guides, editablePXO/ORA, exact rebuild/native-flat equality and actual bilingual source-fit. Native clean-app/GUI gate not passed; final art/default adoption separate."}},
-    {"id":"content.char.jiang-lan.static-west","type":"native-pixel","title":{"zh":"蒋岚 · 西向高密度静止帧","en":"Jiang Lan · west high-density static"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"西向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"west native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":["content.char.jiang-lan.static-south"],"evidence":[],"subject":{"kind":"character-variant","id":"jiang-lan"}},
-    {"id":"content.char.jiang-lan.static-north","type":"native-pixel","title":{"zh":"蒋岚 · 北向高密度静止帧","en":"Jiang Lan · north high-density static"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"北向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"north native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":["content.char.jiang-lan.static-south"],"evidence":[],"subject":{"kind":"character-variant","id":"jiang-lan"}},
-    {"id":"content.char.jiang-lan.static-east","type":"native-pixel","title":{"zh":"蒋岚 · 东向高密度静止帧","en":"Jiang Lan · east high-density static"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"东向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"east native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":["content.char.jiang-lan.static-south"],"evidence":[],"subject":{"kind":"character-variant","id":"jiang-lan"}},
+    {"id":"content.char.jiang-lan.static-west","type":"native-pixel","title":{"zh":"蒋岚 · 西向高密度静止帧","en":"Jiang Lan · west high-density static"},"area":"characters","stage":"content","owner":"claude","status":"done","points":2,"doneCriterion":{"zh":"西向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"west native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":["content.char.jiang-lan.static-south"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_jiang-lan_missing-three-directions_codex-closeout_unapproved-v01_20261022-153020-105a0103.md"],"subject":{"kind":"character-variant","id":"jiang-lan"},"statusAt":"2026-10-22T19:38:58Z","note":{"zh":"","en":"Missing native80x112/48logical static committed with editable PXO/ORA, deterministic rebuild, independent composition/hash refusal and exact native-flat/actual bilingual source-fit. No runtime default, clean-app, motion or art-approval claim."}},
+    {"id":"content.char.jiang-lan.static-north","type":"native-pixel","title":{"zh":"蒋岚 · 北向高密度静止帧","en":"Jiang Lan · north high-density static"},"area":"characters","stage":"content","owner":"claude","status":"done","points":2,"doneCriterion":{"zh":"北向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"north native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":["content.char.jiang-lan.static-south"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_jiang-lan_missing-three-directions_codex-closeout_unapproved-v01_20261022-153020-105a0103.md"],"subject":{"kind":"character-variant","id":"jiang-lan"},"statusAt":"2026-10-22T19:38:58Z","note":{"zh":"","en":"Missing native80x112/48logical static committed with editable PXO/ORA, deterministic rebuild, independent composition/hash refusal and exact native-flat/actual bilingual source-fit. No runtime default, clean-app, motion or art-approval claim."}},
+    {"id":"content.char.jiang-lan.static-east","type":"native-pixel","title":{"zh":"蒋岚 · 东向高密度静止帧","en":"Jiang Lan · east high-density static"},"area":"characters","stage":"content","owner":"claude","status":"done","points":2,"doneCriterion":{"zh":"东向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"east native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":["content.char.jiang-lan.static-south"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_jiang-lan_missing-three-directions_codex-closeout_unapproved-v01_20261022-153020-105a0103.md"],"subject":{"kind":"character-variant","id":"jiang-lan"},"statusAt":"2026-10-22T19:38:58Z","note":{"zh":"","en":"Missing native80x112/48logical static committed with editable PXO/ORA, deterministic rebuild, independent composition/hash refusal and exact native-flat/actual bilingual source-fit. No runtime default, clean-app, motion or art-approval claim."}},
     {"id":"content.char.jiang-lan.idle-anim","type":"native-pixel","title":{"zh":"蒋岚 · 四方向待机动画","en":"Jiang Lan · four-direction idle animation"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"四个方向的待机循环已提交并有 QA","en":"Idle loops for all four directions committed with QA"},"dependsOn":["content.char.jiang-lan.static-south","content.char.jiang-lan.static-west","content.char.jiang-lan.static-north","content.char.jiang-lan.static-east"],"evidence":[],"subject":{"kind":"character-variant","id":"jiang-lan"}},
     {"id":"content.char.jiang-lan.walk-south","type":"native-pixel","title":{"zh":"蒋岚 · 南向行走／跑动","en":"Jiang Lan · south walk/run"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"南向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"south walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.jiang-lan.static-south"],"evidence":[],"subject":{"kind":"character-variant","id":"jiang-lan"}},
     {"id":"content.char.jiang-lan.walk-west","type":"native-pixel","title":{"zh":"蒋岚 · 西向行走／跑动","en":"Jiang Lan · west walk/run"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"西向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"west walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.jiang-lan.static-west"],"evidence":[],"subject":{"kind":"character-variant","id":"jiang-lan"}},

@@ -1,3 +1,13 @@
+# Current progress
+
+## Latest completed production — Jiang Lan west/north/east native statics
+
+Production **59.2% →59.4% (+0.2pp)**; content601→607/1881, coding111/111 unchanged. Inspection **20.6% →20.6% (+0.0pp)**; creator approval **7.8% →7.8% (+0.0pp)**. Frozen1183tasks/weights unchanged.
+
+Three missing80×112 native statics,48logical body,pivot40,104,9genuine role layers+hidden guides, separate editablePXO/ORA/PNG/palette/hashmanifests. Original south remains exact. Root deterministic rebuild, independent68checks including3bad-hash refusals,6exact native flat exports and12actual bilingual640×360 source-fit captures pass. Native Pixelorama4/11diagnostic families persist; clean-app/GUI gates not claimed. Direct test-only overlays are not runtime adoption or motion approval. All2384protected runtime/data/scene/south files raw unchanged. Narrow side profiles, suspended device read and rear hair/heel refinements deferred.
+
+Source `01f7e4692888e7a3fbc83f010d20d035c7a95159`. [Codex closeout](../docs/qa/rpg-2-star-ocean-the-second_jiang-lan_missing-three-directions_codex-closeout_unapproved-v01_20261022-153020-105a0103.md). DeepSeek support wrote out of scope and was stopped; its draft excluded, Codex performed independent checks. Next: missing Jiang idle/walk source bank and companion integration. Accepted full sprites0/52,scene art5/12,human plays0/2 unchanged. Four prepared scene defaults still need separate creator authorization.
+
 # Open World Pixel RPG Implementation Progress
 
 Last updated: 2026-10-22
