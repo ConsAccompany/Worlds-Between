@@ -1,0 +1,24 @@
+--- a/game/scripts/city_hall_park_v06_scene.gd
++++ b/game/scripts/city_hall_park_v06_scene.gd
+@@ -14,0 +15,4 @@
++# STYLE46 common-style candidate (UNAPPROVED, opt-in only): same scene data, new art files.
++const STYLE46_FLAG := "--nyc-common-style46"
++const STYLE46_DIR := "res://assets/environments/style46/"
++const STYLE46_RES := "rpg-2-star-ocean-the-second_nyc-city-hall-park_style46-scene_unapproved-v01_20261022-183638-a4e273b9.tres"
+@@ -56,0 +61 @@
++var runtime_dir := RUN_DIR
+@@ -64 +69 @@
+-	if OS.get_cmdline_user_args().has(CLI_FLAG):
++	if OS.get_cmdline_user_args().has(CLI_FLAG) or OS.get_cmdline_user_args().has(STYLE46_FLAG):
+@@ -79,0 +85,2 @@
++	var style46 := OS.get_cmdline_user_args().has(STYLE46_FLAG)
++	runtime_dir = STYLE46_DIR if style46 else RUN_DIR
+@@ -82 +89 @@
+-		var resource: Resource = load(RUN_DIR + SCENE_RES)
++		var resource: Resource = load(runtime_dir + (STYLE46_RES if style46 else SCENE_RES))
+@@ -105 +112 @@
+-		var texture: Texture2D = load(RUN_DIR + file_name)
++		var texture: Texture2D = load(runtime_dir + file_name)
+@@ -112 +119 @@
+-		return load(RUN_DIR + file_name)
++		return load(runtime_dir + file_name)

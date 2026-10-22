@@ -12,6 +12,10 @@ const RUN_DIR := "res://assets/environments/candidates/nyc-chp-v06_20261017-1652
 const SCENE_RES := "rpg-2-star-ocean-the-second_nyc-city-hall-park_scene_unapproved-v06_20261017-165253-4519dffe.tres"
 const SCENE_JSON := "rpg-2-star-ocean-the-second_nyc-city-hall-park_scene_unapproved-v06_20261017-165253-4519dffe.json"
 const CLI_FLAG := "--city-hall-park-v06"
+# STYLE46 common-style candidate (UNAPPROVED, opt-in only): same scene data, new art files.
+const STYLE46_FLAG := "--nyc-common-style46"
+const STYLE46_DIR := "res://assets/environments/style46/"
+const STYLE46_RES := "rpg-2-star-ocean-the-second_nyc-city-hall-park_style46-scene_unapproved-v01_20261022-183638-a4e273b9.tres"
 const SceneDefaults35 := preload("res://scripts/sdef35/rpg-2-star-ocean-the-second_mvp-scene-defaults_policy_prepared-v01_20261021-231349-a83c4bae.gd")
 const DEV_DIR_PREFIX := "--chp6-dir="
 const SPAWN := Vector2(340, 253)
@@ -54,6 +58,7 @@ var canopy_layers: Array[Dictionary] = []
 var nodes: Array[Sprite2D] = []
 var legacy: Array[Dictionary] = []
 var source_dir := ""
+var runtime_dir := RUN_DIR
 var host_node: Node2D
 var reveal_driver: Node
 
@@ -61,7 +66,7 @@ var reveal_driver: Node
 static func enabled() -> bool:
 	if enabled_override >= 0:
 		return enabled_override == 1
-	if OS.get_cmdline_user_args().has(CLI_FLAG):
+	if OS.get_cmdline_user_args().has(CLI_FLAG) or OS.get_cmdline_user_args().has(STYLE46_FLAG):
 		return true
 	# MVP default fallback (sdef35 policy; false until the creator authorizes it).
 	return SceneDefaults35.default_on(SceneDefaults35.CITY)
@@ -77,9 +82,11 @@ static func dev_dir() -> String:
 
 func load_scene() -> bool:
 	source_dir = dev_dir()
+	var style46 := OS.get_cmdline_user_args().has(STYLE46_FLAG)
+	runtime_dir = STYLE46_DIR if style46 else RUN_DIR
 	var json_text := ""
 	if source_dir.is_empty():
-		var resource: Resource = load(RUN_DIR + SCENE_RES)
+		var resource: Resource = load(runtime_dir + (STYLE46_RES if style46 else SCENE_RES))
 		if resource != null and resource.has_meta("scene_json"):
 			json_text = resource.get_meta("scene_json")
 	else:
@@ -102,14 +109,14 @@ func load_scene() -> bool:
 
 func _image(file_name: String) -> Image:
 	if source_dir.is_empty():
-		var texture: Texture2D = load(RUN_DIR + file_name)
+		var texture: Texture2D = load(runtime_dir + file_name)
 		return texture.get_image() if texture != null else null
 	return Image.load_from_file(source_dir.path_join(file_name))
 
 
 func _texture(file_name: String) -> Texture2D:
 	if source_dir.is_empty():
-		return load(RUN_DIR + file_name)
+		return load(runtime_dir + file_name)
 	return ImageTexture.create_from_image(Image.load_from_file(source_dir.path_join(file_name)))
 
 
