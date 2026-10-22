@@ -2,7 +2,7 @@
   "id": "rpg-2-star-ocean-the-second_production-completion_v01",
   "schemaVersion": 2,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-22T22:11:44Z",
+  "updatedAt": "2026-10-22T22:32:20Z",
   "zh": "制作完成度任务台账：衡量已完成的工作量（编码 40% + 内容 60%）；检查／审查与创作者批准分开计量，均不改变制作分；免除的审查不算已执行的工作；运营任务列出负责方但不计百分比。",
   "en": "Production-completion task ledger: measures work done (coding 40% + content 60%); inspection/review and creator approval are separate meters and never change production credit; waived reviews are not performed work; operations tasks list owners but carry no percentage.",
   "brief": "docs/rpg-2-star-ocean-the-second_production-completion_bilingual-brief_v01_20261018-140533-3ea2a621.md",
@@ -916,6 +916,22 @@
         },
         "previousTaskSetSha256": "c82b669227bc75c9aa274221dfa276cfd1fc385e8cba10f645bfa531331d6fa8",
         "taskSetSha256": "77fa559bf521769d230adb354d1ffa97412c8f952a09da4b7e2bd5d18020f706"
+      },
+      {
+        "at": "2026-10-22T22:32:19Z",
+        "kind": "owner-assignment",
+        "taskId": "qa.scene.ruins.check",
+        "fromOwner": "claude",
+        "toOwner": "codex",
+        "changedTaskIds": [
+          "qa.scene.ruins.check"
+        ],
+        "reason": {
+          "zh": "",
+          "en": "Codex independently executes current STYLE45 package and actual combined runtime checks; DeepSeek checker proposal corrected and rerun."
+        },
+        "previousTaskSetSha256": "77fa559bf521769d230adb354d1ffa97412c8f952a09da4b7e2bd5d18020f706",
+        "taskSetSha256": "0f8e723e46f87641fcb288a8b99dca01c6874c476ded0ec22dafc3a8b5a32b17"
       }
     ],
     "pointsByStage": {
@@ -1086,17 +1102,17 @@
     },
     "byOwner": {
       "claude": {
-        "tasks": 716,
+        "tasks": 715,
         "operationsTasks": 0,
-        "points": 1887,
-        "pointsDone": 577,
+        "points": 1886,
+        "pointsDone": 576,
         "byStatus": {
-          "done": 151,
+          "done": 150,
           "blocked": 6,
           "todo": 559
         },
         "readyInQueue": 2,
-        "revisionsBlockingApproval": 2
+        "revisionsBlockingApproval": 1
       },
       "deepseek": {
         "tasks": 10,
@@ -1110,12 +1126,12 @@
         "revisionsBlockingApproval": 0
       },
       "codex": {
-        "tasks": 218,
+        "tasks": 219,
         "operationsTasks": 2,
-        "points": 278,
-        "pointsDone": 170,
+        "points": 279,
+        "pointsDone": 171,
         "byStatus": {
-          "done": 106,
+          "done": 107,
           "todo": 108,
           "not_required": 4
         },
@@ -1131,7 +1147,7 @@
           "done": 19,
           "todo": 220
         },
-        "readyInQueue": 71,
+        "readyInQueue": 72,
         "revisionsBlockingApproval": 0
       }
     },
@@ -1314,7 +1330,7 @@
     "queue": {
       "zh": "待处理（依赖已完成）",
       "en": "Ready (dependencies done)",
-      "count": 84,
+      "count": 85,
       "items": [
         {
           "id": "creator.char.protagonist-male.approve-portrait",
@@ -1835,6 +1851,13 @@
           "points": 1
         },
         {
+          "id": "creator.scene.ruins.accept",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
           "id": "creator.scene.ruins-survey-outer.accept",
           "stage": "creator-approval",
           "owner": "creator",
@@ -1908,7 +1931,7 @@
       "needsRevision": {
         "zh": "需要修订后才能验收（负责方见任务；最近一次审查要求修改）",
         "en": "Needs revision before acceptance (see assigned owner; the latest review asked for changes)",
-        "count": 5,
+        "count": 4,
         "items": [
           {
             "id": "creator.char.protagonist-female.accept-runtime-sprite",
@@ -1936,15 +1959,6 @@
             "revision": null,
             "revisionStatus": "missing",
             "nextOwner": "codex"
-          },
-          {
-            "id": "creator.scene.ruins.accept",
-            "owner": "creator",
-            "stage": "creator-approval",
-            "review": "review.scene.ruins",
-            "revision": "content.scene.ruins.native-pass.revision",
-            "revisionStatus": "delivered-before-latest-review",
-            "nextOwner": "claude"
           },
           {
             "id": "creator.scene.outskirts-survey-outer.accept",
@@ -3069,8 +3083,8 @@
     {"id":"content.scene.ruins.wiring","type":"integration","title":{"zh":"华盛顿国会大厦西侧废墟 · 碰撞、热点与出入口","en":"Washington Capitol west ruins · collision, hotspots and exits"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":3,"doneCriterion":{"zh":"碰撞、热点、出入口与存档有自动检查","en":"Collision, hotspots, exits and saves have automated checks"},"dependsOn":["content.scene.ruins.plate"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_scifi-region-eleven-scene_visual-gate-audit_m8-v01_20261014-201003-6b73e7a4.md","game/tests/m7_smoke.gd"],"subject":{"kind":"scene-gate","id":"visual-scene.ruins"}},
     {"id":"content.scene.ruins.native-pass","type":"native-pixel","title":{"zh":"华盛顿国会大厦西侧废墟 · 原生像素画质版","en":"Washington Capitol west ruins · native pixel quality pass"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":12,"doneCriterion":{"zh":"原生像素画质版（道具／分层）已提交并有 QA，可为可选启用","en":"A native pixel quality pass (fixtures / layers) is committed with QA; opt-in is allowed"},"dependsOn":["content.scene.ruins.plate"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_actual-viewport-integration_qa-note_unapproved-v12_20261017-235608-66d00477.md","docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_sentry-encounter-viewport_qa-note_unapproved-v12r2_20261018-042200-7c1e5b39.md"],"subject":{"kind":"scene-gate","id":"visual-scene.ruins"}},
     {"id":"content.scene.ruins.native-default","type":"integration","title":{"zh":"华盛顿国会大厦西侧废墟 · 画质版默认接入","en":"Washington Capitol west ruins · quality pass on by default"},"area":"scenes","stage":"content","owner":"claude","status":"blocked","points":2,"doneCriterion":{"zh":"画质版默认在游戏中使用","en":"The quality pass is used in the game by default"},"dependsOn":["content.scene.ruins.native-pass","content.scene.ruins.wiring"],"evidence":["docs/design/rpg-2-star-ocean-the-second_science-scenes_creator-style-consistency-revision_v01_20261022-155956-1414792c.md"],"subject":{"kind":"scene-gate","id":"visual-scene.ruins"},"statusAt":"2026-10-22T20:09:20Z","note":{"zh":"","en":"Creator reports inconsistent art styles; no default-use authorization. Unify one outdoor sample against accepted science interior material/light language before propagation; all switches remain false."}},
-    {"id":"qa.scene.ruins.check","type":"technical-check","title":{"zh":"华盛顿国会大厦西侧废墟 · 技术检查","en":"Washington Capitol west ruins · technical check"},"area":"scenes","stage":"technical-inspection","owner":"claude","status":"done","points":1,"doneCriterion":{"zh":"当前画质版的 Godot 检查全部通过","en":"Godot checks of the current quality pass all pass"},"dependsOn":["content.scene.ruins.native-pass"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_v13-flag-deterministic-check_qa-note_unapproved-v13_20261018-141558-22d034ba.md","outputs/wdc-cw-v13flagdet_20261018-141558-22d034ba/rpg-2-star-ocean-the-second_wdc-capitol-west_deterministic-check-report_unapproved-v13_20261018-141558-22d034ba.json"],"subject":{"kind":"scene-gate","id":"visual-scene.ruins"},"target":"content.scene.ruins.native-pass","outcome":"passed","note":{"zh":"root 接受 v13 开关的确定性检查 22/22（固定 60 fps，20 个固定帧，8 个已验收房间 0 像素差异；0636b40）；仅技术检查，美术未批准。","en":"Root accepted the deterministic v13 flag check at 22/22 (fixed 60 fps, 20 fixed frames, 8 accepted rooms 0 px; 0636b40); technical inspection only, art unapproved."},"statusAt":"2026-10-18T18:25:12Z"},
-    {"id":"review.scene.ruins","type":"visual-review","title":{"zh":"华盛顿国会大厦西侧废墟 · 视觉审查","en":"Washington Capitol west ruins · visual review"},"area":"scenes","stage":"visual-review","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"Codex 审查 640×360 实机画面并记录结论","en":"Codex reviews actual 640x360 captures and records a verdict"},"dependsOn":["qa.scene.ruins.check"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_ruin-material-collapse_qa-note_unapproved-v13_20261018-100938-075675cf.md","docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_v13-flag-integration_qa-note_unapproved-v13_20261018-135539-63201688.md"],"subject":{"kind":"scene-gate","id":"visual-scene.ruins"},"target":"content.scene.ruins.native-pass","outcome":"changes_requested","note":{"zh":"root 看过 v13 开关的实机入口与战后返回画面：穹顶清楚、局部坍塌改善了废墟观感；地面颗粒感重、植被块状。美术未批准。","en":"Root viewed the actual v13 flag entry and battle-return frames: the dome stays clear and the localized collapse improves the ruin read; the ground is grainy and the foliage blocky. Art unapproved."},"statusAt":"2026-10-18T18:54:14Z"},
+    {"id":"qa.scene.ruins.check","type":"technical-check","title":{"zh":"华盛顿国会大厦西侧废墟 · 技术检查","en":"Washington Capitol west ruins · technical check"},"area":"scenes","stage":"technical-inspection","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"当前画质版的 Godot 检查全部通过","en":"Godot checks of the current quality pass all pass"},"dependsOn":["content.scene.ruins.native-pass"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_common-style-runtime_codex-closeout_v01_20261022-182109-a780b895.md"],"subject":{"kind":"scene-gate","id":"visual-scene.ruins"},"target":"content.scene.ruins.native-pass","note":{"zh":"root 接受 v13 开关的确定性检查 22/22（固定 60 fps，20 个固定帧，8 个已验收房间 0 像素差异；0636b40）；仅技术检查，美术未批准。","en":"Current opt-in game import and control12/bilingual56 runtime checks pass, package14 predicates+4 negative fixtures, unchanged protected game2550/2551 except shared router resource. Native editor clean-app gate not passed (4 known shader errors), GUI save/reopen unverified; not waived or counted."},"statusAt":"2026-10-22T22:32:20Z","outcome":"passed","history":[{"outcome":"passed","statusAt":"2026-10-18T18:25:12Z","evidence":["docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_v13-flag-deterministic-check_qa-note_unapproved-v13_20261018-141558-22d034ba.md","outputs/wdc-cw-v13flagdet_20261018-141558-22d034ba/rpg-2-star-ocean-the-second_wdc-capitol-west_deterministic-check-report_unapproved-v13_20261018-141558-22d034ba.json"]}]},
+    {"id":"review.scene.ruins","type":"visual-review","title":{"zh":"华盛顿国会大厦西侧废墟 · 视觉审查","en":"Washington Capitol west ruins · visual review"},"area":"scenes","stage":"visual-review","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"Codex 审查 640×360 实机画面并记录结论","en":"Codex reviews actual 640x360 captures and records a verdict"},"dependsOn":["qa.scene.ruins.check"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_common-style-runtime_codex-closeout_v01_20261022-182109-a780b895.md"],"subject":{"kind":"scene-gate","id":"visual-scene.ruins"},"target":"content.scene.ruins.native-pass","note":{"zh":"root 看过 v13 开关的实机入口与战后返回画面：穹顶清楚、局部坍塌改善了废墟观感；地面颗粒感重、植被块状。美术未批准。","en":"Codex viewed actual entry, records, occlusion, breach and battle-return. Warm stone/foliage/teal direction coherent with Chicago; suitable to present for separate MVP-default decision. Generated raster, legacy alpha/hiddenplate/rim limits disclosed; not finalart acceptance."},"statusAt":"2026-10-22T22:32:20Z","history":[{"outcome":"changes_requested","statusAt":"2026-10-18T18:54:14Z","evidence":["docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_ruin-material-collapse_qa-note_unapproved-v13_20261018-100938-075675cf.md","docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_v13-flag-integration_qa-note_unapproved-v13_20261018-135539-63201688.md"]}],"outcome":"technical-pass"},
     {"id":"creator.scene.ruins.accept","type":"creator-acceptance","title":{"zh":"华盛顿国会大厦西侧废墟 · 场景画质验收","en":"Washington Capitol west ruins · scene-quality acceptance"},"area":"scenes","stage":"creator-approval","owner":"creator","status":"todo","points":1,"doneCriterion":{"zh":"approvalLedger 记有 acceptanceKind scene-visual 的验收条目","en":"approvalLedger records an acceptanceKind scene-visual item"},"dependsOn":["content.scene.ruins.native-pass"],"evidence":[],"subject":{"kind":"scene-gate","id":"visual-scene.ruins"},"target":"content.scene.ruins.native-pass"},
     {"id":"content.scene.city-survey-outer.plate","type":"integration","title":{"zh":"纽约公共设施 1 号房 · 场景底板","en":"NYC public facilities room 1 · scene plate"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":4,"doneCriterion":{"zh":"可玩场景底板已提交并在运行时可进入（概念图不算）","en":"A playable scene plate is committed and enterable in the runtime (a concept image does not count)"},"dependsOn":[],"evidence":["docs/qa/rpg-2-star-ocean-the-second_scifi-region-eleven-scene_visual-gate-audit_m8-v01_20261014-201003-6b73e7a4.md"],"subject":{"kind":"scene-gate","id":"visual-scene.city-survey-outer"}},
     {"id":"content.scene.city-survey-outer.wiring","type":"integration","title":{"zh":"纽约公共设施 1 号房 · 碰撞、热点与出入口","en":"NYC public facilities room 1 · collision, hotspots and exits"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":3,"doneCriterion":{"zh":"碰撞、热点、出入口与存档有自动检查","en":"Collision, hotspots, exits and saves have automated checks"},"dependsOn":["content.scene.city-survey-outer.plate"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_scifi-region-eleven-scene_visual-gate-audit_m8-v01_20261014-201003-6b73e7a4.md","game/tests/m7_smoke.gd"],"subject":{"kind":"scene-gate","id":"visual-scene.city-survey-outer"}},
@@ -3158,7 +3172,7 @@
     {"id":"content.scene.map.native-pass.revision","type":"revision","title":{"zh":"科技区世界地图 · 原生像素画质版 · Codex 对 v03r1 视觉判断后的修订（v03r2）","en":"Science-sphere world map · native pixel quality pass · Revision after the Codex v03r1 visual judgment (v03r2)"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":6,"doneCriterion":{"zh":"针对最近一次审查／创作者意见的修订版已提交并有 QA；后续版本只更新本条，不新增分值","en":"A revision answering the latest review / creator request is committed with QA; later versions update this bucket and add no points"},"dependsOn":["content.scene.map.native-pass"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_global-map_v03r1-codex-native-visual-judgment_unapproved-v01_20261017-194711-66d8a7b4.md","docs/qa/rpg-2-star-ocean-the-second_global-map_v03r2-bounded-visual-gate_qa-note_unapproved-v03r2_20261017-224631-9875b9e2.md"],"subject":{"kind":"scene-gate","id":"visual-scene.map"},"target":"content.scene.map.native-pass","statusAt":"2026-10-18T02:46:31Z"},
     {"id":"content.scene.city.native-pass.revision","type":"revision","title":{"zh":"纽约市政厅公园（城市） · 原生像素画质版 · 创作者否决 v04 后的修订（v06）","en":"NYC City Hall Park (city) · native pixel quality pass · Revision after the creator rejected v04 (v06)"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":6,"doneCriterion":{"zh":"针对最近一次审查／创作者意见的修订版已提交并有 QA；后续版本只更新本条，不新增分值","en":"A revision answering the latest review / creator request is committed with QA; later versions update this bucket and add no points"},"dependsOn":["content.scene.city.native-pass"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_nyc-city-hall-park_style-alignment-visual-direction_unapproved-v01_20261016-225800-2a4e7c91.md","docs/qa/rpg-2-star-ocean-the-second_nyc-city-hall-park_scene-candidate-640x360_qa-note_unapproved-v06_20261017-165253-4519dffe.md"],"subject":{"kind":"scene-gate","id":"visual-scene.city"},"target":"content.scene.city.native-pass","statusAt":"2026-10-17T20:52:53Z"},
     {"id":"content.scene.outskirts-survey-outer.native-pass.revision","type":"revision","title":{"zh":"扬克斯天线走廊 1 号房 · 原生像素画质版 · 创作者否决 v02 室外观感后的修订（v03 起，最新 v06）","en":"Yonkers antenna corridor room 1 · native pixel quality pass · Revision after the creator rejected the v02 outdoor look (v03 onward, latest v06)"},"area":"scenes","stage":"content","owner":"codex","status":"done","points":6,"doneCriterion":{"zh":"针对最近一次审查／创作者意见的修订版已提交并有 QA；后续版本只更新本条，不新增分值","en":"A revision answering the latest review / creator request is committed with QA; later versions update this bucket and add no points"},"dependsOn":["content.scene.outskirts-survey-outer.native-pass"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_yonkers-antenna-room1_structural-v07-bounded-technical-closeout_unapproved-v01_20261018-220530-6b4370ca.md","outputs/yk1-v07_7a10f835/rpg-2-star-ocean-the-second_yonkers-antenna-room1_structural-evidence-package_unapproved-v07_20261018-220210-4d281c37.json"],"subject":{"kind":"scene-gate","id":"visual-scene.outskirts-survey-outer"},"target":"content.scene.outskirts-survey-outer.native-pass","statusAt":"2026-10-18T22:14:33Z","note":{"zh":"v07结构/材质修订已制作，不按新版本增加分值。原生导出像素一致，但软件诊断仍有错误；美术仍需打磨。","en":"v07 bounded structural/material revision produced; no new version points. Native exports exact but application diagnostics unresolved; art changes_requested."}},
-    {"id":"content.scene.ruins.native-pass.revision","type":"revision","title":{"zh":"华盛顿国会大厦西侧废墟 · 原生像素画质版 · root 对 v12r2 外观意见后的修订（v13 局部坍塌，可选启用）","en":"Washington Capitol west ruins · native pixel quality pass · Revision after root's v12r2 critique (v13 localized collapse, opt-in flag)"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":6,"doneCriterion":{"zh":"针对最近一次审查／创作者意见的修订版已提交并有 QA；后续版本只更新本条，不新增分值","en":"A revision answering the latest review / creator request is committed with QA; later versions update this bucket and add no points"},"dependsOn":["content.scene.ruins.native-pass"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_ruin-material-collapse_qa-note_unapproved-v13_20261018-100938-075675cf.md","docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_v13-flag-integration_qa-note_unapproved-v13_20261018-135539-63201688.md"],"subject":{"kind":"scene-gate","id":"visual-scene.ruins"},"target":"content.scene.ruins.native-pass","statusAt":"2026-10-18T18:06:24Z"},
+    {"id":"content.scene.ruins.native-pass.revision","type":"revision","title":{"zh":"华盛顿国会大厦西侧废墟 · 原生像素画质版 · root 对 v12r2 外观意见后的修订（v13 局部坍塌，可选启用）","en":"Washington Capitol west ruins · native pixel quality pass · Revision after root's v12r2 critique (v13 localized collapse, opt-in flag)"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":6,"doneCriterion":{"zh":"针对最近一次审查／创作者意见的修订版已提交并有 QA；后续版本只更新本条，不新增分值","en":"A revision answering the latest review / creator request is committed with QA; later versions update this bucket and add no points"},"dependsOn":["content.scene.ruins.native-pass"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_common-style-runtime_codex-closeout_v01_20261022-182109-a780b895.md"],"subject":{"kind":"scene-gate","id":"visual-scene.ruins"},"target":"content.scene.ruins.native-pass","statusAt":"2026-10-22T22:32:18Z","note":{"zh":"","en":"STYLE45 common-style layered generated-raster candidate committed ec53f418. Deterministic/native-flat/pixel contracts plus actual bilingual flag gameplay and return checked by Codex; art/default not approved. Existing revision credit only."}},
     {"id":"content.combat.protagonist-female.combat-static.revision","type":"revision","title":{"zh":"主角·女 · 横向战斗静止帧 · 按创作者对 v11 的意见修订（v12–v14）","en":"Female protagonist · side-view combat static · Revision after the creator feedback on v11 (v12-v14)"},"area":"combat","stage":"content","owner":"claude","status":"done","points":2,"doneCriterion":{"zh":"针对最近一次审查／创作者意见的修订版已提交并有 QA；后续版本只更新本条，不新增分值","en":"A revision answering the latest review / creator request is committed with QA; later versions update this bucket and add no points"},"dependsOn":["content.combat.protagonist-female.combat-static"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_heroine-sea_battle-static-root-closeout_v01_20261020-182831-69f29955.md"],"subject":{"kind":"character-variant","id":"protagonist-female"},"target":"content.combat.protagonist-female.combat-static","statusAt":"2026-10-20T18:37:19Z","note":{"zh":"创作者确认v17r2图片可见后，要求继续精修脸部或画质。重开同一个固定修订桶，保留底稿制作分与全部历史；改为实际显示尺寸下面部辨识优先的处理方式，静止帧批准前不制作战斗动画。","en":"Produced and committed Sea of Stars-inspired generated-and-curated static remake with native editable slices and independently checked actual640/1280 bilingual gameplay. Same fixed revision bucket; no new per-version points. Native editor diagnostics and creator static approval remain open."}},
     {"id":"content.char.protagonist-female.walk-south.revision","type":"revision","title":{"zh":"主角·女 · 南向行走／跑动 · 跑动／停步打磨（v10 + r1，已制作的技术修订；步态与流畅度未批准）","en":"Female protagonist · south walk/run · Run/stop polish (v10 + r1, produced technical revision; gait and fluidity unapproved)"},"area":"characters","stage":"content","owner":"claude","status":"done","points":2,"doneCriterion":{"zh":"针对最近一次审查／创作者意见的修订版已提交并有 QA；后续版本只更新本条，不新增分值","en":"A revision answering the latest review / creator request is committed with QA; later versions update this bucket and add no points"},"dependsOn":["content.char.protagonist-female.walk-south"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_female-south-run-v10r1_reach-landing-amendment_qa-note_unapproved-nonruntime_20261018-142136-249dbf66.md","outputs/rpg-2-star-ocean-the-second_city-annex_female-south-run-v10r1-capture-receipt-h48_unapproved_20261018-182800-9ee66cb8.json","docs/qa/rpg-2-star-ocean-the-second_heroine_front-back-playable-completion_closeout-v01_20261021-023200-7e487714.md"],"subject":{"kind":"character-variant","id":"protagonist-female"},"target":"content.char.protagonist-female.walk-south","statusAt":"2026-10-21T02:34:02Z","note":{"zh":"","en":"Source revision completed within existing credited deliverable; all four phase stops integrated only in the complete opt-in play entry. No additional points or creator approval."}},
     {"id":"content.char.liang-xu.static-south.revision","type":"revision","title":{"zh":"梁序 · 南向高密度静止帧 · 按 Codex 视觉审查意见修订南向静止帧","en":"Liang Xu · south high-density static · South static revision after the Codex visual audit"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"针对最近一次审查／创作者意见的修订版已提交并有 QA；后续版本只更新本条，不新增分值","en":"A revision answering the latest review / creator request is committed with QA; later versions update this bucket and add no points"},"dependsOn":["content.char.liang-xu.static-south"],"evidence":[],"subject":{"kind":"character-variant","id":"liang-xu"},"target":"content.char.liang-xu.static-south"},

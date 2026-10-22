@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-22T22:12:09.770805+00:00",
+  "updatedAt": "2026-10-22T22:32:57.417218+00:00",
   "purpose": "Operating queue and worktree ownership; no progress points or account details",
   "workflow": "docs/workflow.md",
   "canonicalLedger": "outputs/rpg-2-star-ocean-the-second_production-completion_task-ledger_v01_20261018-140533-3de52073.json",
@@ -1316,13 +1316,16 @@
     "constraints": "Do not reopen existing cosmetic gait or actor art searches. Keep four scene defaults false until explicit authorization. Verify providers before fresh sessions."
   },
   "activeDualProviderBatch": {
-    "primary": "content.char.jiang-lan.display",
-    "owner": "claude",
-    "support": "deepseek-isolated-crop-validator",
-    "status": "active",
-    "base": "530edeedd1742706794d7e5b517e76715098eedd",
-    "scope": "exact display crop and standalone preview; no ordinary world/member/default changes",
-    "startedAt": "2026-10-22T20:00:49.584905+00:00"
+    "id": "style45",
+    "status": "closed-verified-and-integrated",
+    "primary": "content.scene.ruins.native-pass.revision",
+    "producer": "claude",
+    "support": "deepseek checker proposal corrected by codex",
+    "coordinator": "codex",
+    "sourceCommit": "ec53f418a4dc357e275f0a24d222ac522bc1ae72",
+    "evidence": [
+      "docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_common-style-runtime_codex-closeout_v01_20261022-182109-a780b895.md"
+    ]
   },
   "characterSpriteStyleDirection": {
     "reference": "Sea of Stars",
@@ -1418,17 +1421,17 @@
     "approvalsNotWaived": true
   },
   "nextProductionTask": {
-    "kind": "washington-common-style-runtime-conversion",
-    "status": "ready-with-local-nonruntime-reference",
-    "owner": "claude",
-    "coordinator": "codex",
-    "tasks": [
-      "content.scene.ruins.native-pass.revision",
-      "content.scene.ruins.native-default"
+    "kind": "washington-common-style-mvp-default-adoption",
+    "status": "awaiting-separate-creator-default-authorization",
+    "owner": "codex",
+    "task": "content.scene.ruins.native-default",
+    "sourceCommit": "ec53f418a4dc357e275f0a24d222ac522bc1ae72",
+    "evidence": [
+      "docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_common-style-runtime_codex-closeout_v01_20261022-182109-a780b895.md"
     ],
-    "nextAction": "Convert saved Washington common-style reference into one layered native640x360 playable candidate, preserve existing Capitol ruin/read/geometry/interactions/battle-return; no default use before separate authorization. Reuse proven writers and normal-path capture tools; no new framework/environment installation.",
-    "requiresCreatorDecisionForPreparation": false,
-    "requiresCreatorDecisionForDefaultAdoption": true
+    "nextAction": "Present actual common-style gameplay and request separate Washington MVP default authorization. If granted, change only policy fallback, check normal noflag route and explicit older/rollback precedence. Native source revision completed; no further cosmetic passes.",
+    "requiresCreatorDecision": true,
+    "independentNext": "NYC City Hall common-style playable conversion; reuse native writers and protected geometry. No new framework."
   },
   "lastCompletedProductionTask": {
     "status": "produced-source-only",
@@ -2375,5 +2378,67 @@
       "changePercentagePoints": 0
     },
     "ordinaryCapture": "outputs/style44/root/final-zh/rpg-2-star-ocean-the-second_chicago-loop_style44-ordinary-gameplay_zh-entry_20261022-180652-a9b3c098.png"
+  },
+  "latestWashingtonCommonStyleProduction": {
+    "status": "native-resolution-playable-candidate-ready-for-mvp-default-decision",
+    "task": "content.scene.ruins.native-pass.revision",
+    "producer": "claude",
+    "inspectorAndIntegrator": "codex",
+    "support": "DeepSeek checker proposal; Codex corrected and reran positive and negative contracts",
+    "sourceCommit": "ec53f418a4dc357e275f0a24d222ac522bc1ae72",
+    "completedAt": "2026-10-22T22:32:57.417218+00:00",
+    "evidence": [
+      "docs/qa/rpg-2-star-ocean-the-second_wdc-capitol-west_common-style-runtime_codex-closeout_v01_20261022-182109-a780b895.md"
+    ],
+    "nativeSize": [
+      640,
+      360
+    ],
+    "editablePxo": true,
+    "editableOra": true,
+    "referenceProvenance": "Generated style43 reference follows creator-approved Chicago common material/light direction; exact nearest sampling and original runtime alpha masks, not hand-placed pixel art. This specific reference has no creator approval.",
+    "builderExactFiles": 12,
+    "independentSourceChecks": 14,
+    "negativeMutationRejections": 4,
+    "actualBilingualRuntimeChecksCombined": 56,
+    "defaultOffParityChecks": 12,
+    "finalActualCaptures": 16,
+    "protectedOtherFilesRawExact": 2550,
+    "nativeFlatExact": true,
+    "nativeCleanAppPassed": false,
+    "nativeDiagnosticErrors": 4,
+    "guiSaveReopenVerified": false,
+    "reviewCapture": "outputs/style45/root/flag-r3/rpg-2-star-ocean-the-second_wdc-capitol-west_rt640-zh-entry_style45-flag_20261022-182109-a780b895.png",
+    "reviewCaptureSha256": "7274e0c04b4b2d434ba2f2ca8939ae202dea0f73549938150373c9a38f432b12",
+    "rawUrl": "https://raw.githubusercontent.com/ConsAccompany/Worlds-Between/ec53f418a4dc357e275f0a24d222ac522bc1ae72/outputs/style45/root/flag-r3/rpg-2-star-ocean-the-second_wdc-capitol-west_rt640-zh-entry_style45-flag_20261022-182109-a780b895.png",
+    "defaultUseAuthorized": false,
+    "ordinaryDefaultAdopted": false,
+    "finalArtApproved": false,
+    "humanPlaytestsAdded": 0,
+    "limits": [
+      "Old v13 hiddenplate25093pixels remains under foreground; exact no-actor composite is new flat",
+      "Generated silhouette alignment to original foreground alpha masks is not proven; rims/reveal require later refinement",
+      "Automated battle fixture uses12HP enemy, real input and authored-result wait; not human timed play",
+      "Per-test app profiles isolated; real production profile was not opened or independently hashed"
+    ],
+    "production": {
+      "before": 59.9,
+      "after": 59.9,
+      "changePercentagePoints": 0,
+      "exactBefore": 59.93620414673046,
+      "exactAfter": 59.93620414673046,
+      "contentDone": 625,
+      "contentTotal": 1881
+    },
+    "inspection": {
+      "before": 20.6,
+      "after": 20.6,
+      "changePercentagePoints": 0
+    },
+    "approval": {
+      "before": 7.8,
+      "after": 7.8,
+      "changePercentagePoints": 0
+    }
   }
 }
