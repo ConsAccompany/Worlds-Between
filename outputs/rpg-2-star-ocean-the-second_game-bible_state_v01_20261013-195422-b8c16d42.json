@@ -4,7 +4,7 @@
   "title": "世界之间",
   "englishTitle": "Worlds Between",
   "edition": "设计基线 v0.2 · 2026-10-15 创作者决定",
-  "updatedAt": "2026-10-22T00:21:07.630732+00:00",
+  "updatedAt": "2026-10-22T00:43:50.830002+00:00",
   "note": "规则以玩家确认的设计稿为基线，并已并入 2026-10-15 创作者决定；人物姓名与外观是待审提案，具体剧情留待后续设计。",
   "pitch": "从地下社区走出的旅人，以好奇心探索多元文明，招募伙伴，并成为不同世界认知差异的桥梁。",
   "pillars": [
@@ -4042,7 +4042,7 @@
     }
   },
   "characterVisualReview": {
-    "status": "Sea of Stars is the current character sprite direction. The creator approved the new heroine south exploration still at48logical pixels and right-facing combat still at the preserved battle display proportion. Claude is producing a new authored combat motion pilot. Older direction/motion packages are historical technical production, not approval under this style. Motion, complete runtime sprites and display packages remain unapproved; full runtime sprites0/52, scene art3/12, human post-art playtests0/2.",
+    "status": "Sea of Stars remains the selected character direction. Heroine, male protagonist and Zhao use creator-authorized MVP defaults; Liang has a verified opt-in recruit/combat/return/save path pending separate default-use authorization. Refinements remain post-MVP. Full runtime art acceptance 0/52, environment art 5/12, human post-art playtests 0/2; default use is not artistic acceptance.",
     "registry": "game/data/character-visuals/rpg-2-star-ocean-the-second_character-visual-registry_m8-v01_20261014-134810-2a5d1b3c.json",
     "spec": "docs/character-visuals/rpg-2-star-ocean-the-second_character-visual-spec_topdown-v01_20261014-135700-17a0c9d4.md",
     "review": "docs/character-visuals/rpg-2-star-ocean-the-second_native-walk-integration-review_m8-v01_20261014-181700-4d0ca611.md",
@@ -5089,6 +5089,14 @@
         "outputs/idle21/rpg-2-star-ocean-the-second_heroine-breathing-idle_ruins-zh-60fps_actual-default-v01_20261021-152117-0e452461.mp4"
       ],
       "sourceApproval": false
+    },
+    "latestCompanionPlayablePath": {
+      "memberId": "liang-xu",
+      "sourceCommit": "2b86179d50a0f882db44f760d57829872810841b",
+      "status": "verified-opt-in-awaiting-default-authorization",
+      "gif": "outputs/lpath30/view-20261021-203718-ae05790c/rpg-2-star-ocean-the-second_liang-xu_actual-battle-input-motion_normal-speed-preview_20261021-203718-ae05790c.gif",
+      "artApproved": false,
+      "motionApproved": false
     }
   },
   "environmentVisualReview": {
@@ -7918,19 +7926,19 @@
     "combinedWiringCheck": "297/297 on39f252e, clean raw log; actual Chinese victory inspected."
   },
   "latestTaskProgress": {
-    "id": "liang-combat-source",
+    "id": "liang-playable-path",
     "status": "completed",
     "title": {
-      "zh": "梁序战斗静止帧与八种动作源文件",
-      "en": "Liang combat static and eight source actions"
+      "zh": "梁序完整可玩路径接入",
+      "en": "Liang complete playable companion path"
     },
-    "startedAt": "2026-10-22T00:07:41.517Z",
-    "sourceBefore": "96e1a1a860e9022541bb69c4930476f369db8d7d",
+    "startedAt": "2026-10-22T00:23:40.590Z",
+    "sourceBefore": "1cf65d314d93dee489cbf611afc448baa7a6d085",
     "meters": {
       "production": {
-        "before": 57.5,
+        "before": 57.8,
         "after": 57.8,
-        "changePercentagePoints": 0.3
+        "changePercentagePoints": 0
       },
       "inspection": {
         "before": 18.1,
@@ -7943,10 +7951,10 @@
         "changePercentagePoints": 0
       }
     },
-    "completedAt": "2026-10-22T00:20:43.006Z",
-    "sourceAfter": "8fa0dd279891617badf32502b96cf41fdf2fb895",
+    "completedAt": "2026-10-22T00:43:09.916Z",
+    "sourceAfter": "2b86179d50a0f882db44f760d57829872810841b",
     "evidence": [
-      "docs/qa/rpg-2-star-ocean-the-second_liang-xu_combat-source_codex-closeout_unapproved-v01_20261021-201856-3d4f380f.md"
+      "docs/qa/rpg-2-star-ocean-the-second_liang-xu_complete-companion-path_codex-closeout_opt-in-v01_20261021-204043-c7e58d94.md"
     ]
   },
   "progressReporting": {
@@ -8819,6 +8827,38 @@
       "evidence": [
         "docs/qa/rpg-2-star-ocean-the-second_liang-xu_exploration-source_codex-closeout_unapproved-v01_20261021-200105-1c24409b.md"
       ]
+    },
+    {
+      "id": "liang-combat-source",
+      "status": "completed",
+      "title": {
+        "zh": "梁序战斗静止帧与八种动作源文件",
+        "en": "Liang combat static and eight source actions"
+      },
+      "startedAt": "2026-10-22T00:07:41.517Z",
+      "sourceBefore": "96e1a1a860e9022541bb69c4930476f369db8d7d",
+      "meters": {
+        "production": {
+          "before": 57.5,
+          "after": 57.8,
+          "changePercentagePoints": 0.3
+        },
+        "inspection": {
+          "before": 18.1,
+          "after": 18.1,
+          "changePercentagePoints": 0
+        },
+        "approval": {
+          "before": 7.8,
+          "after": 7.8,
+          "changePercentagePoints": 0
+        }
+      },
+      "completedAt": "2026-10-22T00:20:43.006Z",
+      "sourceAfter": "8fa0dd279891617badf32502b96cf41fdf2fb895",
+      "evidence": [
+        "docs/qa/rpg-2-star-ocean-the-second_liang-xu_combat-source_codex-closeout_unapproved-v01_20261021-201856-3d4f380f.md"
+      ]
     }
   ],
   "latestBattleEnvironmentProduction": {
@@ -9048,7 +9088,7 @@
   "mvpCompletionPriority": {
     "creatorInstruction": "Finish missing MVP work; refinements after MVP",
     "heroineBaseline": "technically connected; cosmetic refinements deferred",
-    "next": "Finish Liang companion playable integration from the completed exploration and combat sources.",
+    "next": "Creator default-use decision for the completed Liang companion path; then verify ordinary defaults. Cosmetic refinement stays post-MVP.",
     "noScoringBaselineChange": true
   },
   "latestMaleExplorationProduction": {
@@ -9327,5 +9367,47 @@
     "humanPlaytestsAdded": 0,
     "protectedRuntimeFilesUnchanged": 369,
     "next": "Real Liang companion recruitment/control/battle-return/save path; default adoption separate, cosmetic refinement post-MVP."
+  },
+  "liangPlayablePath": {
+    "status": "verified-opt-in-awaiting-default-authorization",
+    "sourceCommit": "2b86179d50a0f882db44f760d57829872810841b",
+    "completedAt": "2026-10-22T00:43:50.830002+00:00",
+    "owner": "claude",
+    "independentSupport": "deepseek",
+    "integrationOwner": "codex",
+    "evidence": [
+      "docs/qa/rpg-2-star-ocean-the-second_liang-xu_complete-companion-path_codex-closeout_opt-in-v01_20261021-204043-c7e58d94.md",
+      "outputs/lpath30/root/rpg-2-star-ocean-the-second_liang-playable-path_codex-production-proof_v01_20261021-204011-4dc924fd.json"
+    ],
+    "production": {
+      "before": 57.8,
+      "after": 57.8,
+      "changePercentagePoints": 0.0
+    },
+    "normalInputChecks": {
+      "enMaleVictory60fps": 60,
+      "enFemaleVictory30fpsMovie": 60,
+      "zhFemaleDeclaredDefeatRetry60fps": 49
+    },
+    "zhaoOrdinaryRegressionChecks": 55,
+    "independentBoundaryChecks": 120,
+    "explicitPairBoundaryChecks": 15,
+    "existingZhaoBoundaryChecks": {
+      "male": 15,
+      "female": 15
+    },
+    "sourceFilesUnchanged": 356,
+    "ordinaryDefaultAdopted": false,
+    "artApproved": false,
+    "motionApproved": false,
+    "humanPlaytestsAdded": 0,
+    "gif": "outputs/lpath30/view-20261021-203718-ae05790c/rpg-2-star-ocean-the-second_liang-xu_actual-battle-input-motion_normal-speed-preview_20261021-203718-ae05790c.gif",
+    "movie": "outputs/lpath30/view-20261021-203718-ae05790c/rpg-2-star-ocean-the-second_liang-xu_actual-input-gameplay_normal-30fps_20261021-203718-ae05790c.mp4",
+    "defaultAuthorizationRequiredBy": "AGENTS.md: defaults remain unchanged unless separately authorized",
+    "remainingDecision": "Creator authorizes ordinary Liang default use only; artistic and motion acceptance remain separate.",
+    "note": {
+      "zh": "纽约真实对话招募、地图前往扬克斯、玩家控制战斗、返回及自动存档重载与败北重试已通过。默认开关仍关闭；精修后置，无跟随者。",
+      "en": "NYC recruit, real map travel to Yonkers, controlled combat, return/autosave reload and declared defeat/retry pass. Default remains off; refinement deferred and no follower."
+    }
   }
 }

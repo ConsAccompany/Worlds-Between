@@ -2,7 +2,15 @@
 
 Last updated: 2026-10-21
 
-## Latest completed batch — 2026-10-21: Liang combat source set
+## Latest delivered preview — 2026-10-21: Liang complete companion path
+
+Production **57.8% → 57.8% (+0.0 pp)**; inspection **18.1% → 18.1% (+0.0 pp)**; creator approval **7.8% → 7.8% (+0.0 pp)**. The existing integration tasks require ordinary default use and remain in progress pending the separate authorization required by AGENTS.md. No per-preview points or denominator change.
+
+The opt-in path now supports actual NYC recruitment, UI map travel to Yonkers, controlled combat, victory return/autosave reload and declared low-health defeat/retry. Real input checks: EN male victory60, EN female30fps movie60, ZH female defeat/retry49. Independent coexistence/refusal/driver suite120, explicit companion-pair isolation15, existing Zhao boundaries15 per hero appearance and ordinary Zhao victory regression55 pass.356 existing source/default files remain exact. No source-art, mechanics, input or save-schema changes; no follower. Separate preview-profile guard passes. Source `2b86179d50a0f882db44f760d57829872810841b`. [Closeout](qa/rpg-2-star-ocean-the-second_liang-xu_complete-companion-path_codex-closeout_opt-in-v01_20261021-204043-c7e58d94.md).
+
+The real30fps movie and normal-speed GIF are published for the creator's default-use decision. Full art/motion acceptance and human playtests remain separate; refinement stays post-MVP.
+
+## Prior completed batch — 2026-10-21: Liang combat source set
 
 Production **57.5% → 57.8% (+0.3 pp)**; content 548 → 559/1881. Inspection **18.1% → 18.1% (+0.0 pp)**; creator approval **7.8% → 7.8% (+0.0 pp)**. Two existing source-production tasks complete; frozen weights and denominators unchanged.
 
