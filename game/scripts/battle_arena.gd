@@ -154,6 +154,7 @@ const ZHAO_MEMBER_ID := "zhao-ling"
 const COMPANION_COMBAT_POLICIES := [
 	"res://scripts/zpath27/rpg-2-star-ocean-the-second_zhao-playable-path_config_opt-in-v01_20261021-223218-3246d731.gd",
 	"res://scripts/lpath30/rpg-2-star-ocean-the-second_liang-playable-path_config_opt-in-v01_20261021-202247-ca439d91.gd",
+	"res://scripts/jpath33/rpg-2-star-ocean-the-second_ji-playable-path_config_opt-in-v01_20261021-222438-7d4b2e91.gd",
 ]
 
 var enemy_id := "patrol"
@@ -1337,7 +1338,7 @@ func _load_combat_sprite_sets() -> void:
 	_advance_combat_sprite_sets(0.0)
 
 
-# Companion sets: each enabled companion config (Zhao default on, Liang opt-in) loads only its own member slot; any explicit
+# Companion sets: each enabled companion config (Zhao and Liang default on, Ji opt-in/default off) loads only its own member slot; any explicit
 # combat set choice (flag or override, including 0) or a hero-model set already drawing that slot keeps its existing
 # behaviour. A disabled, malformed or refused config leaves only that member legacy.
 func _load_companion_sprite_sets() -> void:

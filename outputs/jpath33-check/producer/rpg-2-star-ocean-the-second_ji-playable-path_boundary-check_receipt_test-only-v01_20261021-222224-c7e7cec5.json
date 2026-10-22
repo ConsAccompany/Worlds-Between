@@ -1,0 +1,58 @@
+{
+  "schema": "rpg-2-star-ocean-the-second_ji-playable-path_boundary-check_receipt_test-only-v01",
+  "tag": "20261021-222224-c7e7cec5",
+  "owner": "DeepSeek support (test-only)",
+  "verdict": "PASS",
+  "checks": 150,
+  "failed": 0,
+  "successMarker": "JPATH33_BOUNDARY_PASS checks=150",
+  "checkedRunner": {
+    "path": "work/needle31/ds-jcheck/tools/rpg-2-star-ocean-the-second_godot_checked-runner_v01_20261018-203400-f74ac6d1.py",
+    "result": "CHECKED_RUN PASS None exit= 0 elapsed= 11.344 missing= []",
+    "timeoutSeconds": 180,
+    "log": "outputs/jpath33-check/run-20261021-222224-c7e7cec5/boundary-02.log",
+    "logSha256": "C088D0653C2C7E8FA893276BA7BC724BE78942F0561AB92293964DDAEDFA5A21",
+    "passLines": 150,
+    "failLines": 0,
+    "diagnosticLines": 0
+  },
+  "base": "759f2b9ffc1d2e236f5ab15dca3350b20e7943bb",
+  "producerCheckout": "work/needle33/cl-jpath",
+  "testedSources": {
+    "game/scripts/jpath33/rpg-2-star-ocean-the-second_ji-playable-path_config_opt-in-v01_20261021-222438-7d4b2e91.gd": "90826C1C3F25531F0AE5D1EAFA8FB40971F584D5B6FC3B6BADAA0124D661625E",
+    "game/scripts/jpath33/rpg-2-star-ocean-the-second_ji-playable-path_entry_opt-in-v01_20261021-222438-7d4b2e91.gd": "91F5D770FF84EE2453F1E99AD6CB7DEE3D264D9E97D823418D6D67A2BA0DF779",
+    "game/scripts/jpath33/rpg-2-star-ocean-the-second_ji-playable-path_npc-driver_opt-in-v01_20261021-222438-7d4b2e91.gd": "003CE85B39BA492703BD3B8C29F95C70DEAC47C29BBE3A5014D27BB0B7CE5AD6",
+    "game/scripts/scifi_exploration_area.gd": "A8E147F11E1487E8DDEC57BC068CA10B96451636E99F7187B6362EC50E3E3F70",
+    "game/scripts/battle_arena.gd": "C9C01B86589CAFFE57B63C33C1D8428F2ED7B414E700CEAAC046089ED70FF543"
+  },
+  "harness": {
+    "path": "work/needle31/ds-jcheck/tools/rpg-2-star-ocean-the-second_ji-playable-path_boundary-check_test-only-v01_20261021-222224-c7e7cec5.gd",
+    "sha256": "8D1B224B643DA6D8971FDA7772B484238AB9A5BCED38DAEAEE6A04D5E8F2311A"
+  },
+  "scopeEvidence": [
+    "Ji default false; Zhao/Liang authorized defaults on; art unapproved",
+    "invalid locale/appearance atomic refusal; member-only jcombat32 index",
+    "whole-package rejection: missing/wrong-member registry, missing/wrong-actor supplement, missing/wrong-member/surplus-member index",
+    "no state mutation on refusal; rollback restores only Ji enabled_override",
+    "real scifi.ruins field_npc driver at (200,145); no follower",
+    "records-console prerequisite enforced before invite; real dialogue invite handler recruits",
+    "hero/Zhao/Liang/Ji three-model coexistence, member-only slots, Zhao alias, hero slot 0",
+    "female and male hero combat model regression"
+  ],
+  "failureRetained": {
+    "log": "outputs/jpath33-check/run-20261021-222224-c7e7cec5/boundary-01.log",
+    "cause": "Harness instantiated battle_arena before any run initialized hero_state; SCRIPT ERROR 'job_series' at battle_arena.gd:1767. Fixed in harness by calling AppState.begin_new_run() before the default hero regression; host code unchanged."
+  },
+  "bootstrapFilter": {
+    "what": "Confined-Windows Godot bootstrap line 'ERROR: Failed to read the root certificate store.' plus its immediate at: get_system_ca_certificates continuation",
+    "scope": "test-local output filter only; all other diagnostics still fail the checked runner; import exited 0",
+    "path": "outputs/jpath33-check/rpg-2-star-ocean-the-second_ji-playable-path_godot-cert-store-filter_test-only-v01_20261021-222224-c7e7cec5.py"
+  },
+  "limitations": [
+    "Not real human input, full gameplay, save/reload, combat balance, dialogue content, collision, AI, stats, art or motion approval.",
+    "Console/invite were exercised through the real host handlers, not by human input; root owns the real-input/movie and combined canonical run.",
+    "Ji remains DEFAULT_ADOPTED=false; no default/art adoption, ledger/Bible/registry edit, commit, push, account or paid-credit change.",
+    "Evidence is bound to the source hashes above; re-run after any later producer edit."
+  ],
+  "runtimeCopy": "outputs/jpath33-check/runtime-c7e7cec5 (byte-identical tested copy; removed after evidence collection)"
+}

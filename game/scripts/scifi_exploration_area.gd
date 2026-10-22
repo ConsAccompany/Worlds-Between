@@ -84,6 +84,7 @@ static var field_npc_presenter_override := ""
 const FIELD_NPC_PRESENTERS := {
 	"zhao-ling": "res://scripts/zpath27/rpg-2-star-ocean-the-second_zhao-playable-path_config_opt-in-v01_20261021-223218-3246d731.gd",
 	"liang-xu": "res://scripts/lpath30/rpg-2-star-ocean-the-second_liang-playable-path_config_opt-in-v01_20261021-202247-ca439d91.gd",
+	"ji-cheng": "res://scripts/jpath33/rpg-2-star-ocean-the-second_ji-playable-path_config_opt-in-v01_20261021-222438-7d4b2e91.gd",
 }
 var field_npc_driver
 var recruit_id := ""
@@ -490,7 +491,7 @@ func _build_actors() -> void:
 
 
 # An explicit presenter override wins; otherwise the recruit's own companion config is used when it is enabled
-# (Zhao default on, Liang opt-in). A refused or disabled config leaves that NPC's existing static texture.
+# (Zhao and Liang default on, Ji opt-in/default off). A refused or disabled config leaves that NPC's existing static texture.
 func _attach_field_npc_presenter(target: Sprite2D) -> void:
 	var presenter_path := field_npc_presenter_override
 	if presenter_path == "" and FIELD_NPC_PRESENTERS.has(recruit_id):

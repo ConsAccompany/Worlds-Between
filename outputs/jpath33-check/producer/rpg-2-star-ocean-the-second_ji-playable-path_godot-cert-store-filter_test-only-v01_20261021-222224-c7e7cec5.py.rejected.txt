@@ -1,0 +1,31 @@
+"""Test-local output filter for the known confined-Windows Godot bootstrap line.
+
+Forwards the wrapped command's stdout/stderr and exit code unchanged, except for the single
+`ERROR: Failed to read the root certificate store.` bootstrap line and its immediate
+`at: get_system_ca_certificates (...)` continuation. Every other line, including any other
+ERROR/SCRIPT ERROR/Parse Error, is forwarded so the checked runner still fails on it.
+No production behavior, engine setting or source file is modified.
+"""
+import subprocess
+import sys
+
+CERT = "Failed to read the root certificate store"
+CONT = "at: get_system_ca_certificates"
+skip_cont = False
+
+process = subprocess.Popen(
+    sys.argv[1:], stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+    text=True, encoding="utf-8", errors="replace", bufsize=1,
+)
+for line in process.stdout:
+    if CERT in line:
+        skip_cont = True
+        continue
+    if skip_cont and line.strip().startswith(CONT):
+        skip_cont = False
+        continue
+    skip_cont = False
+    sys.stdout.write(line)
+    sys.stdout.flush()
+process.stdout.close()
+raise SystemExit(process.wait())
