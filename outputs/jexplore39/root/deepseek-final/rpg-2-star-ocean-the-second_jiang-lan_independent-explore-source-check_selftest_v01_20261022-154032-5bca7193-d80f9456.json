@@ -1,0 +1,180 @@
+{
+  "schema": "worlds-between.jiang-lan.independent-explore-source-check.selftest.v1",
+  "status": "pass",
+  "actor": "jiang-lan",
+  "cases": [
+    {
+      "id": "clean-control",
+      "expected": "accept",
+      "passed": true,
+      "observed": {
+        "hash": true,
+        "present": true,
+        "duration": true
+      }
+    },
+    {
+      "id": "wrong-hash",
+      "expected": "refuse",
+      "passed": true,
+      "observed": false,
+      "mutation": "temporary manifest hash flipped"
+    },
+    {
+      "id": "missing-frame",
+      "expected": "refuse",
+      "passed": true,
+      "observed": false,
+      "mutation": "temporary frame copy removed"
+    },
+    {
+      "id": "zero-duration",
+      "expected": "refuse",
+      "passed": true,
+      "observed": false,
+      "mutation": "temporary manifest duration set to 0"
+    },
+    {
+      "id": "source-untouched",
+      "expected": "unchanged",
+      "passed": true,
+      "observed": "fixture used copies only"
+    }
+  ],
+  "frozen_role_checks": {
+    "south": {
+      "status": "pass",
+      "pxo_9_role_composition": true,
+      "ora_hidden_guide_static_composition": true,
+      "detail": {
+        "pxo_layers": [
+          "boots",
+          "trousers",
+          "shirt",
+          "vest",
+          "arms",
+          "devices",
+          "face",
+          "hair",
+          "goggles",
+          "guides"
+        ],
+        "ora_layers": [
+          "guides",
+          "goggles",
+          "hair",
+          "face",
+          "devices",
+          "arms",
+          "vest",
+          "shirt",
+          "trousers",
+          "boots"
+        ]
+      }
+    },
+    "west": {
+      "status": "pass",
+      "pxo_9_role_composition": true,
+      "ora_hidden_guide_static_composition": true,
+      "detail": {
+        "pxo_layers": [
+          "boots",
+          "trousers",
+          "shirt",
+          "vest",
+          "arms",
+          "devices",
+          "face",
+          "hair",
+          "goggles",
+          "guides"
+        ],
+        "ora_layers": [
+          "guides",
+          "goggles",
+          "hair",
+          "face",
+          "devices",
+          "arms",
+          "vest",
+          "shirt",
+          "trousers",
+          "boots"
+        ]
+      }
+    },
+    "north": {
+      "status": "pass",
+      "pxo_9_role_composition": true,
+      "ora_hidden_guide_static_composition": true,
+      "detail": {
+        "pxo_layers": [
+          "boots",
+          "trousers",
+          "shirt",
+          "vest",
+          "arms",
+          "devices",
+          "face",
+          "hair",
+          "goggles",
+          "guides"
+        ],
+        "ora_layers": [
+          "guides",
+          "goggles",
+          "hair",
+          "face",
+          "devices",
+          "arms",
+          "vest",
+          "shirt",
+          "trousers",
+          "boots"
+        ]
+      }
+    },
+    "east": {
+      "status": "pass",
+      "pxo_9_role_composition": true,
+      "ora_hidden_guide_static_composition": true,
+      "detail": {
+        "pxo_layers": [
+          "boots",
+          "trousers",
+          "shirt",
+          "vest",
+          "arms",
+          "devices",
+          "face",
+          "hair",
+          "goggles",
+          "guides"
+        ],
+        "ora_layers": [
+          "guides",
+          "goggles",
+          "hair",
+          "face",
+          "devices",
+          "arms",
+          "vest",
+          "shirt",
+          "trousers",
+          "boots"
+        ]
+      }
+    }
+  },
+  "cleanup": {
+    "target": "C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\max0840-sentry-sync\\outputs\\jexplore39\\root\\deepseek-final\\.selftest-d80f9456",
+    "marker": "C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\max0840-sentry-sync\\outputs\\jexplore39\\root\\deepseek-final\\.selftest-d80f9456\\.jexplore39-selftest",
+    "removed": true
+  },
+  "source_touched": false,
+  "limitations": [
+    "Selftest uses existing frozen neutral assets and temporary copies only.",
+    "It does not approve art, motion or runtime integration."
+  ]
+}
