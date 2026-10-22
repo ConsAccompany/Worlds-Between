@@ -1,0 +1,185 @@
+{
+  "schema": "jiang-display-contract-check/v1",
+  "project": "rpg-2-star-ocean-the-second",
+  "subject": "jiang-lan",
+  "purpose": "display-contract-check",
+  "variant": "v01",
+  "run": {
+    "timestamp_utc": "2026-10-22T20:06:40.087177+00:00",
+    "unique_id": "20261022-155956-1414792c"
+  },
+  "expected": {
+    "actor_id": "jiang-lan",
+    "source_sha256": "bbddf46f3c1370742c86d1934e36adf7969e5f43a4e6d67ddbf9ba8d44902e4a",
+    "source_dimensions": [
+      1915,
+      821
+    ],
+    "source_rect": [
+      0,
+      0,
+      480,
+      630
+    ],
+    "output_dimensions": [
+      480,
+      630
+    ],
+    "resample": false
+  },
+  "scope": "independent exact-crop/manifest contract only; no motion, default-use, runtime, or art-approval claims; source and producer files are read-only",
+  "manifest_path": "C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\max0840-sentry-sync\\game\\assets\\portraits\\jiang-display40\\rpg-2-star-ocean-the-second_jiang-lan_display-portrait-manifest_v01_20261022-155956-1414792c.json",
+  "manifest_sha256": "e9b35f18e467a1a81efa43652f0764a97e3c1b00932ac501ff50f982dcf9b1ee",
+  "status": "PASS",
+  "exit_code": 0,
+  "checks": [
+    {
+      "id": "actor.present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "actor.jiang-lan",
+      "ok": true,
+      "detail": "[('subject', 'jiang-lan')]"
+    },
+    {
+      "id": "source.source-sha",
+      "ok": true,
+      "detail": "bbddf46f3c1370742c86d1934e36adf7969e5f43a4e6d67ddbf9ba8d44902e4a"
+    },
+    {
+      "id": "source.source-size",
+      "ok": true,
+      "detail": "(1915, 821)"
+    },
+    {
+      "id": "source.actual-sha",
+      "ok": true,
+      "detail": "bbddf46f3c1370742c86d1934e36adf7969e5f43a4e6d67ddbf9ba8d44902e4a"
+    },
+    {
+      "id": "source.actual-size",
+      "ok": true,
+      "detail": "(1915, 821)"
+    },
+    {
+      "id": "crop.declared",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "crop.consistent",
+      "ok": true,
+      "detail": "[('crop', (0, 0, 480, 630))]"
+    },
+    {
+      "id": "crop.rect",
+      "ok": true,
+      "detail": "(0, 0, 480, 630) != (0, 0, 480, 630)"
+    },
+    {
+      "id": "crop.size",
+      "ok": true,
+      "detail": "(480, 630)"
+    },
+    {
+      "id": "crop.bounds",
+      "ok": true,
+      "detail": "(0, 0, 480, 630) in (1915, 821)"
+    },
+    {
+      "id": "crop.resampled",
+      "ok": true,
+      "detail": "False"
+    },
+    {
+      "id": "crop.method",
+      "ok": true,
+      "detail": "exact-pixel-rectangle-slice"
+    },
+    {
+      "id": "image.size",
+      "ok": true,
+      "detail": "(480, 630)"
+    },
+    {
+      "id": "output.image-sha",
+      "ok": true,
+      "detail": "0bed68c35c4cf2dcb69248609f91a6f52125285aeec2003122bc1fb886a6d4e4"
+    },
+    {
+      "id": "output.image-size",
+      "ok": true,
+      "detail": "(480, 630)"
+    },
+    {
+      "id": "image.manifest-sha-present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "pixels.exact-crop",
+      "ok": true,
+      "detail": "302400 pixels"
+    },
+    {
+      "id": "source.path",
+      "ok": true,
+      "detail": "outputs/rpg-2-star-ocean-the-second_jiang-lan_character-sheet_hairstyle-v02_20261013-161317-c21bd255.png"
+    },
+    {
+      "id": "source.unchanged",
+      "ok": true,
+      "detail": "before=bbddf46f3c1370742c86d1934e36adf7969e5f43a4e6d67ddbf9ba8d44902e4a"
+    },
+    {
+      "id": "fixtures.source-unchanged",
+      "ok": true,
+      "detail": "after=bbddf46f3c1370742c86d1934e36adf7969e5f43a4e6d67ddbf9ba8d44902e4a"
+    }
+  ],
+  "negativeFixtures": {
+    "wrong-hash": {
+      "id": "wrong-hash",
+      "refused": true,
+      "failedChecks": [
+        "output.image-sha"
+      ]
+    },
+    "wrong-actor": {
+      "id": "wrong-actor",
+      "refused": true,
+      "failedChecks": [
+        "actor.jiang-lan"
+      ]
+    },
+    "out-of-bounds-crop": {
+      "id": "out-of-bounds-crop",
+      "refused": true,
+      "failedChecks": [
+        "crop.rect",
+        "crop.size",
+        "crop.bounds",
+        "pixels.exact-crop"
+      ]
+    }
+  },
+  "source": {
+    "path": "outputs\\rpg-2-star-ocean-the-second_jiang-lan_character-sheet_hairstyle-v02_20261013-161317-c21bd255.png",
+    "sha256": "bbddf46f3c1370742c86d1934e36adf7969e5f43a4e6d67ddbf9ba8d44902e4a",
+    "dimensions": [
+      1915,
+      821
+    ]
+  },
+  "image": {
+    "path": "game\\assets\\portraits\\jiang-display40\\rpg-2-star-ocean-the-second_jiang-lan_display-portrait-crop_v01_20261022-155956-1414792c.png",
+    "sha256": "0bed68c35c4cf2dcb69248609f91a6f52125285aeec2003122bc1fb886a6d4e4",
+    "dimensions": [
+      480,
+      630
+    ]
+  },
+  "reason": "contract verified"
+}
