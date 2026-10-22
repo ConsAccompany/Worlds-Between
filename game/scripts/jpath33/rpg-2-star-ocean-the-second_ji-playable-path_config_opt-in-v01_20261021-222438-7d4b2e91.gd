@@ -1,6 +1,6 @@
 extends RefCounted
 
-# Ji Cheng (纪澄) companion path: OPT-IN, default OFF until separate creator authorization; art/motion UNAPPROVED.
+# Ji Cheng (纪澄) companion path: creator-authorized MVP default; final art/motion UNAPPROVED.
 # Ji stays a companion: recruited at the existing scifi.ruins recruit NPC through the normal dialogue only after the
 # existing records console sets ji_records_checked, Tab-controlled in battle, never a follower or hero replacement.
 #   exploration: the existing ruins recruit Sprite2D (field_npc) gets the jpath33 driver (lpath30 driver reused with jexplore31 paths);
@@ -11,7 +11,7 @@ extends RefCounted
 # index_override): the hosts pick this config by recruit/member id. rollback() restores exactly what configure() replaced.
 # Hero, Zhao and Liang defaults, AI, damage, cooldowns, input, party order, saves, story, collisions and encounters are untouched.
 
-const DEFAULT_ADOPTED := false
+const DEFAULT_ADOPTED := true
 const ART_APPROVED := false
 const MEMBER_ID := "ji-cheng"
 const DESTINATION := "scifi.ruins"

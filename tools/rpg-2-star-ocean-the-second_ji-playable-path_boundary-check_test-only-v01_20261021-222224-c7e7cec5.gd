@@ -3,7 +3,7 @@ extends SceneTree
 # creator-approval claim). Adapted from the Liang LPATH30 120-case harness ca439d91, not a new framework.
 # The console -> dialogue -> invite sequence below is exercised through the real ruins UI handler; the party
 # additions for Zhao/Liang are a DECLARED rendering fixture for companion-model binding only. All malformed inputs
-# are isolated user:// files and are removed at the end. Ji must stay DEFAULT_ADOPTED=false until creator authorization.
+# are isolated user:// files and are removed at the end. Ji DEFAULT_ADOPTED=true is separately authorized for MVP use; final art/motion remain unapproved.
 const TAG := "20261021-222224-c7e7cec5"
 const JI_CONFIG := "res://scripts/jpath33/rpg-2-star-ocean-the-second_ji-playable-path_config_opt-in-v01_20261021-222438-7d4b2e91.gd"
 const JI_ENTRY := "res://scripts/jpath33/rpg-2-star-ocean-the-second_ji-playable-path_entry_opt-in-v01_20261021-222438-7d4b2e91.gd"
@@ -202,9 +202,9 @@ func run() -> void:
 	reset_overrides(Z)
 	J.clear_cache()
 
-	# Defaults: Ji stays off until separate creator authorization; Zhao/Liang authorized defaults stay on, art unapproved.
-	ck(J.DEFAULT_ADOPTED == false and not J.ART_APPROVED, "Ji default false, art unapproved (no creator authorization)")
-	ck(J.enabled_override == -1 and J.enabled() == false, "Ji no-override enable is false")
+	# Defaults: Ji, Zhao and Liang authorized MVP defaults stay on; final art remains unapproved.
+	ck(J.DEFAULT_ADOPTED and not J.ART_APPROVED, "Ji creator-authorized default on, final art unapproved")
+	ck(J.enabled_override == -1 and J.enabled(), "Ji no-override enable is true")
 	ck(String(J.MEMBER_ID) == "ji-cheng" and String(J.DESTINATION) == "scifi.ruins",
 		"Ji member/destination are ji-cheng/scifi.ruins")
 	ck(Z.DEFAULT_ADOPTED and not Z.ART_APPROVED and Z.enabled_override == -1 and Z.enabled(),
@@ -493,7 +493,7 @@ func run() -> void:
 
 	# Rollback restores only this config's knob; Zhao/Liang controls/defaults remain exactly as before.
 	J.rollback()
-	ck(J.enabled_override == -1 and J.enabled() == false, "rollback restores Ji unauthorized default off")
+	ck(J.enabled_override == -1 and J.enabled(), "rollback restores Ji authorized default on")
 	ck(area.field_npc_presenter_override == "" and arena.companion_combat_member_override == ""
 		and arena.companion_combat_index_override == "" and L.enabled_override == -1 and L.enabled()
 		and Z.enabled_override == -1 and Z.enabled(),
@@ -501,13 +501,13 @@ func run() -> void:
 	battle = scene("battle_arena")
 	by_member = battle.get("companion_sets_by_member")
 	ck(by_member is Dictionary and by_member.has("zhao-ling") and by_member.has("liang-xu")
-		and not by_member.has("ji-cheng"), "post-rollback companions are Zhao/Liang only, Ji off")
+		and by_member.has("ji-cheng"), "post-rollback companions are Zhao/Liang/Ji, authorized defaults on")
 	ck(battle.get("companion_sprite_sets") == by_member.get("zhao-ling"),
 		"post-rollback alias is Zhao")
 	battle.free()
 	app.select_destination("scifi.ruins")
 	ruins = scene("scifi_exploration_area")
-	ck(not J.npc_attached(ruins), "post-rollback Ji ruins NPC is off")
+	ck(J.npc_attached(ruins), "post-rollback Ji ruins NPC authorized default is on")
 	ruins.free()
 	app.select_destination("scifi.city")
 	city = scene("scifi_exploration_area")

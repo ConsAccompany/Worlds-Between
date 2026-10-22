@@ -153,7 +153,7 @@ func _run() -> void:
 	if mode == "ordinary-default":
 		var area = load(config.EXPLORATION_PATH)
 		var arena = load("res://scripts/battle_arena.gd")
-		ck(not config.DEFAULT_ADOPTED and config.enabled_override == -1 and not config.enabled(), "ordinary Ji policy default OFF without override")
+		ck(config.DEFAULT_ADOPTED and config.enabled_override == -1 and config.enabled(), "ordinary Ji policy enabled without override")
 		ck(area.field_npc_presenter_override == "" and arena.companion_combat_member_override == "" and arena.companion_combat_index_override == "", "no preview presenter/member/index host overrides")
 		app.begin_new_run()
 		app.hero_appearance = appearance
@@ -162,14 +162,6 @@ func _run() -> void:
 			app.toggle_language()
 		r = {"ok": app.select_destination(config.DESTINATION)}
 		ck(r["ok"], "SETUP FIXTURE fresh ordinary run and destination; configure() never called")
-		ck(change_scene_to_file(EXPLORE) == OK, "ordinary ruins scene entry")
-		for i in 4:
-			await tick()
-		var off: Node = current_scene
-		ck(off != null and off.destination_id == "scifi.ruins" and off.field_npc != null and off.field_npc.visible and off.field_npc_driver == null and not config.npc_attached(off), "default OFF: existing static Ji NPC texture, no jpath33 driver")
-		shot("default-off-ruins")
-		_finish()
-		return
 	else:
 		r = config.configure(app, language, appearance)
 		ck(r.get("ok", false), "SETUP FIXTURE configure preview", r)
