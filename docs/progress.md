@@ -1,6 +1,16 @@
 # Open World Pixel RPG Implementation Progress
 
-## Latest completed batch — 2026-10-21: Zhao MVP ordinary defaults
+Last updated: 2026-10-21
+
+## Latest completed batch — 2026-10-21: Liang exploration source set
+
+Production **56.8% →57.5% (+0.7pp)**; content528→548/1881. Inspection **18.1% →18.1% (+0.0pp)**; creator approval **7.8% →7.8% (+0.0pp)**. Eight existing production tasks complete; no baseline/denominator change.
+
+Four-direction editable statics, idle/walk/stop source banks,164 source PNGs plus lossless runtime copies,4PXO/4ORA, registry/set/stop supplement. Existing south neutral remains exact. Canonical341-file rebuild,47source checks,2430independent native checks,164-frame native export equality and4corruption refusals pass. Pixelorama retains16shader diagnostics; no clean-app/GUI gate claimed. Real normal-host source fit EN30fps571checks and ZH60fps1027checks pass with16native captures and an original-speed video. This is a TEST-ONLY avatar injection, not ordinary default integration or full motion approval. Source slip/pose and prior south refinements remain disclosed/deferred. Source `8d4563e09ab1af867f0bd742a48b0ed7f9a67205`. [Closeout](qa/rpg-2-star-ocean-the-second_liang-xu_exploration-source_codex-closeout_unapproved-v01_20261021-200105-1c24409b.md).
+
+Next: missing Liang combat source set, then complete companion playable integration. Current defaults are preserved.
+
+## Prior completed batch — 2026-10-21: Zhao MVP ordinary defaults
 
 Production **56.7% →56.8% (+0.1pp)**; content524→528/1881. Inspection **18.1% →18.1% (+0.0pp)**; creator approval **7.8% →7.8% (+0.0pp)**. Both existing Zhao default-integration tasks are complete; frozen weights and denominators are unchanged.
 
