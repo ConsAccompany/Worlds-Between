@@ -1,5 +1,15 @@
 # Current progress
 
+## Latest completed production — Jiang Lan standalone display
+
+Production **59.8% →59.9% (+0.1pp)**; content621→623/1881, coding111/111 unchanged. Inspection **20.6% →20.6% (+0.0pp)**; creator approval **7.8% →7.8% (+0.0pp)**. Exact source crop plus actual bilingual 640x360 standalone UI, 47 checks per language; all2568 protected files unchanged. Original failures and root correction retained. Source `c41a69b9374bd5b7f8ba2b5d2d914af6f29cd0a8`. [Closeout](../docs/qa/rpg-2-star-ocean-the-second_jiang-lan_display-preview_codex-closeout_v01_20261022-155956-1414792c.md). This is a separate preview, not ordinary Jiang gameplay; runtime integration blocked without a current MVP host/role.
+
+## Creator scene-style correction
+
+Creator answered **美术风格不统一** on the four scene-default candidates. All four remain OFF; default adoption is blocked pending style consistency and separate authorization. Next: one editable outdoor sample matched to accepted science interior material/light language, actual Godot capture, then reuse. No new art approval, playtest or score inferred. [Correction](../docs/design/rpg-2-star-ocean-the-second_science-scenes_creator-style-consistency-revision_v01_20261022-155956-1414792c.md). Accepted scene art5/12, full sprites0/52, human timed plays0/2 unchanged.
+
+# Current progress
+
 ## Latest completed production — Jiang Lan four-direction exploration source
 
 Production **59.4% →59.8% (+0.4pp)**; content607→621/1881,coding111/111 unchanged. Inspection **20.6% →20.6% (+0.0pp)**; creator approval **7.8% →7.8% (+0.0pp)**. Frozen1183tasks/weights unchanged.

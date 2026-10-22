@@ -1,0 +1,9 @@
+# Creator correction: unify science-scene style before default adoption
+
+The creator reviewed the four actual sdef35 images and answered **“美术风格不统一”** on 2026-10-22. This is not default-use authorization or final art approval. Keep CITY_V06_DEFAULT, RUINS_V13_DEFAULT, RECORDS_ROOM2_DEFAULT and CHICAGO_V05_DEFAULT false. Preserve the five already accepted scene visuals, character approvals and playtest counters.
+
+The observed mismatch spans material detail, edge density, light/shadow and palette: NYC is richly textured warm stone/foliage with teal accents, WDC exterior is flatter pale gray-green, records room is warm and detailed, while Chicago has hard geometric slabs and dark dotted beam shadows. A global palette filter alone will not resolve the rendering mismatch.
+
+Next bounded output: ONE editable outdoor sample, actual native 640x360 Godot capture, using the accepted NYC public-facilities room 2 as the material/light/technology anchor. Preserve each location's real silhouette, depth, walk lanes, clue positions, collisions, occlusion, UI and existing ordinary defaults. Material language: grouped pixel clusters, readable plane lighting, warm masonry, subdued cool shadows, restrained teal technology; avoid grain noise, flat vector-like slabs and oversized generated reference pastes. Reuse one material implementation only after the sample visually works. Sea of Stars remains the creator's character direction; it does not automatically approve these environments.
+
+Codex judges actual result and presents a working gameplay image before seeking a new scoped decision. Claude authors the bounded native scene/material implementation; DeepSeek independently checks source/geometry contracts where useful. No new score bucket/version points, roster breadth or repeated concept-only work. Scene adoption tasks stay blocked until this correction and explicit authorization.

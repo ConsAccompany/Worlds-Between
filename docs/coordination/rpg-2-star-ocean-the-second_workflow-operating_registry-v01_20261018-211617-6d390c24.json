@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-22T19:57:11.807605+00:00",
+  "updatedAt": "2026-10-22T20:09:19.813183+00:00",
   "purpose": "Operating queue and worktree ownership; no progress points or account details",
   "workflow": "docs/workflow.md",
   "canonicalLedger": "outputs/rpg-2-star-ocean-the-second_production-completion_task-ledger_v01_20261018-140533-3de52073.json",
@@ -1316,17 +1316,13 @@
     "constraints": "Do not reopen existing cosmetic gait or actor art searches. Keep four scene defaults false until explicit authorization. Verify providers before fresh sessions."
   },
   "activeDualProviderBatch": {
-    "primary": "jiang-lan-exploration-source",
+    "primary": "content.char.jiang-lan.display",
     "owner": "claude",
-    "support": "deepseek-isolated-validator",
-    "status": "closed-verified",
-    "base": "8c97b6597f7b692f54bd16b277157d7ccb36b906",
-    "scope": "missing idle walk stop sources; no cosmetic/default edits",
-    "startedAt": "2026-10-22T19:41:11.667674+00:00",
-    "sourceCommit": "d3053f3028797cc54d301da73565bad586ed63b0",
-    "finishedAt": "2026-10-22T19:57:11.807605+00:00",
-    "claudeStatus": "source-complete",
-    "deepseekStatus": "bounded-proposal-complete-stopped; actual135checks-rerun-with-codex-corrections"
+    "support": "deepseek-isolated-crop-validator",
+    "status": "active",
+    "base": "530edeedd1742706794d7e5b517e76715098eedd",
+    "scope": "exact display crop and standalone preview; no ordinary world/member/default changes",
+    "startedAt": "2026-10-22T20:00:49.584905+00:00"
   },
   "characterSpriteStyleDirection": {
     "reference": "Sea of Stars",
@@ -1422,15 +1418,17 @@
     "approvalsNotWaived": true
   },
   "nextProductionTask": {
-    "kind": "jiang-in-game-display-and-runtime-integration",
-    "status": "queued",
-    "tasks": [
-      "content.char.jiang-lan.display",
-      "content.char.jiang-lan.runtime-integration"
-    ],
+    "kind": "science-outdoor-style-unification-sample",
+    "status": "ready",
     "owner": "claude",
     "coordinator": "codex",
-    "nextAction": "Complete existing Jiang in-game display/runtime integration boundary, confirm canonical roster/UI assignment, prepare separate default-use decision; no new battle/recruitment scope inferred.",
+    "tasks": [
+      "content.scene.chicago-loop.native-default"
+    ],
+    "nextAction": "Make one material/light-consistent outdoor sample using accepted science interior anchor, preserve play geometry and ordinary defaults; inspect actual native Godot capture before propagation.",
+    "evidence": [
+      "docs/design/rpg-2-star-ocean-the-second_science-scenes_creator-style-consistency-revision_v01_20261022-155956-1414792c.md"
+    ],
     "requiresCreatorDecisionForPreparation": false,
     "requiresCreatorDecisionForDefaultAdoption": true
   },
@@ -1837,7 +1835,7 @@
     }
   ],
   "latestSceneDefaultPreparation": {
-    "status": "prepared-awaiting-creator-default-use-authorization",
+    "status": "blocked-creator-requested-style-unification",
     "sourceCommit": "90e88f10447f1a774fe68ff404d9290227d91d2c",
     "base": "15695aa8bb5802b57c374e9344a6fcaae03d55c9",
     "completedAt": "2026-10-22T03:35:23.393765+00:00",
@@ -1905,7 +1903,14 @@
       "after": 7.8,
       "changePercentagePoints": 0
     },
-    "provenanceCaveat": "City Hall v06 includes generated-reference-derived underpainting and native overlays; not wholly hand-authored pixel art."
+    "provenanceCaveat": "City Hall v06 includes generated-reference-derived underpainting and native overlays; not wholly hand-authored pixel art.",
+    "creatorFeedback": {
+      "at": "2026-10-22T20:09:19.813183+00:00",
+      "exactText": "美术风格不统一",
+      "evidence": "docs/design/rpg-2-star-ocean-the-second_science-scenes_creator-style-consistency-revision_v01_20261022-155956-1414792c.md",
+      "defaultUseAuthorized": false,
+      "finalArtApproved": false
+    }
   },
   "nextInspectionTask": {
     "status": "blocked-existing-contact-mismatch",
@@ -2157,5 +2162,43 @@
       "changePercentagePoints": 0
     },
     "next": "Complete existing Jiang in-game display/runtime integration boundary, confirm canonical roster/UI assignment, prepare separate default-use decision; no new battle/recruitment scope inferred."
+  },
+  "latestJiangLanDisplayProduction": {
+    "status": "produced-standalone-preview-only",
+    "task": "content.char.jiang-lan.display",
+    "producer": "claude",
+    "independentChecker": "deepseek-schema-adapted-by-codex",
+    "inspectorAndIntegrator": "codex",
+    "sourceCommit": "c41a69b9374bd5b7f8ba2b5d2d914af6f29cd0a8",
+    "completedAt": "2026-10-22T20:09:19.813183+00:00",
+    "evidence": [
+      "docs/qa/rpg-2-star-ocean-the-second_jiang-lan_display-preview_codex-closeout_v01_20261022-155956-1414792c.md"
+    ],
+    "crop": [
+      0,
+      0,
+      480,
+      630
+    ],
+    "actualBilingualChecksEach": 47,
+    "normalGameIntegration": false,
+    "protectedFilesUnchanged": 2568,
+    "artApproved": false,
+    "production": {
+      "before": 59.8,
+      "after": 59.9,
+      "changePercentagePoints": 0.1
+    },
+    "inspection": {
+      "before": 20.6,
+      "after": 20.6,
+      "changePercentagePoints": 0
+    },
+    "approval": {
+      "before": 7.8,
+      "after": 7.8,
+      "changePercentagePoints": 0
+    },
+    "next": "Ordinary Jiang integration stays blocked: no current MVP host/role; prioritize creator scene-style correction."
   }
 }
