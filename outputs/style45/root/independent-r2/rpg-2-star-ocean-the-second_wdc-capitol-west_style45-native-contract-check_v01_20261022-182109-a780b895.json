@@ -1,0 +1,62 @@
+{
+  "checks": {
+    "base_hidden_plate": true,
+    "five_foreground_alphas": true,
+    "flat_nearest_reference": true,
+    "foreground_opaque_rgb": true,
+    "manifest_hashes": true,
+    "ora_composite": true,
+    "ora_guide": true,
+    "ora_merged": true,
+    "pxo_cels": true,
+    "pxo_guide": true,
+    "reference_oversized": true,
+    "reference_sha256": true,
+    "runtime_composite": true,
+    "walk_bytes": true
+  },
+  "errors": [],
+  "fixtures": {
+    "bad_alpha": {
+      "errors": [
+        "alpha:rt-fg",
+        "runtime_composite"
+      ],
+      "rejected": true
+    },
+    "bad_hash": {
+      "errors": [
+        "hash:outputs/style45/rpg-2-star-ocean-the-second_wdc-capitol-west_style45-flat-640x360_unapproved-v01_20261022-182109-a780b895.png"
+      ],
+      "rejected": true
+    },
+    "bad_size": {
+      "errors": [
+        "canvas:rt-base",
+        "base",
+        "runtime_composite"
+      ],
+      "rejected": true
+    },
+    "malformed_path": {
+      "errors": [
+        "schema:files:path"
+      ],
+      "rejected": true
+    }
+  },
+  "limitations": [
+    "Static archive/pixel checks only; no Pixelorama/GUI, Godot runtime, native editor, performance, art or default approval claim.",
+    "Never writes producer files; the fixed generated reference is oversized and is not native hand-authored art.",
+    "Flat is required to be its exact floor-centre NEAREST sample; generated provenance is not art approval."
+  ],
+  "manifest": "C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\max0840-sentry-sync\\outputs\\style45\\rpg-2-star-ocean-the-second_wdc-capitol-west_style45-manifest_unapproved-v01_20261022-182109-a780b895.json",
+  "reference": {
+    "file": "outputs/style43/rpg-2-star-ocean-the-second_wdc-capitol-west_common-style-reference_nonruntime-v01_20261022-180616-f9471bf4.png",
+    "sha256": "8e3a1cb78b3ba7bd645fa7c0e3c57194fb62147079369d6dc7ae4a6bad7cafe4"
+  },
+  "root": "C:\\Users\\hkzha\\Documents\\Codex\\2026-10-12\\rpg-2-star-ocean-the-second\\work\\max0840-sentry-sync",
+  "status": "PASS",
+  "tag": "20261022-182109-a780b895",
+  "tool": "style45-native-contract-check"
+}
