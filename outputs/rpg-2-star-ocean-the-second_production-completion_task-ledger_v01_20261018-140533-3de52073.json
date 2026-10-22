@@ -2,7 +2,7 @@
   "id": "rpg-2-star-ocean-the-second_production-completion_v01",
   "schemaVersion": 2,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-22T23:10:28Z",
+  "updatedAt": "2026-10-22T23:26:19Z",
   "zh": "制作完成度任务台账：衡量已完成的工作量（编码 40% + 内容 60%）；检查／审查与创作者批准分开计量，均不改变制作分；免除的审查不算已执行的工作；运营任务列出负责方但不计百分比。",
   "en": "Production-completion task ledger: measures work done (coding 40% + content 60%); inspection/review and creator approval are separate meters and never change production credit; waived reviews are not performed work; operations tasks list owners but carry no percentage.",
   "brief": "docs/rpg-2-star-ocean-the-second_production-completion_bilingual-brief_v01_20261018-140533-3ea2a621.md",
@@ -980,6 +980,54 @@
         },
         "previousTaskSetSha256": "c6024da7df5b3c83c8bc9fa1bafac44ae6b2885dab7f1b8eeb06cb7db3065642",
         "taskSetSha256": "da139de4d55c3b77cffba65e78e60614bbadb49dbc476b1ae3f8719f9435f2d3"
+      },
+      {
+        "at": "2026-10-22T23:26:16Z",
+        "kind": "owner-assignment",
+        "taskId": "content.scene.ruins-survey-inner.native-default",
+        "fromOwner": "claude",
+        "toOwner": "codex",
+        "changedTaskIds": [
+          "content.scene.ruins-survey-inner.native-default"
+        ],
+        "reason": {
+          "zh": "",
+          "en": "Codex implements and independently verifies the prepared/default integration; provider captures/checks are supporting work."
+        },
+        "previousTaskSetSha256": "da139de4d55c3b77cffba65e78e60614bbadb49dbc476b1ae3f8719f9435f2d3",
+        "taskSetSha256": "0b7ba8ce988ccbd90dfe5c0593170dfdd2af36be36a4257c8738704a785e4433"
+      },
+      {
+        "at": "2026-10-22T23:26:16Z",
+        "kind": "owner-assignment",
+        "taskId": "content.enemy.sentry.runtime-default",
+        "fromOwner": "claude",
+        "toOwner": "codex",
+        "changedTaskIds": [
+          "content.enemy.sentry.runtime-default"
+        ],
+        "reason": {
+          "zh": "",
+          "en": "Codex implements and independently verifies the prepared/default integration; provider captures/checks are supporting work."
+        },
+        "previousTaskSetSha256": "0b7ba8ce988ccbd90dfe5c0593170dfdd2af36be36a4257c8738704a785e4433",
+        "taskSetSha256": "bb3aa7abeb638abf8ac326e4bcbcc61493b06f04081b766de5acd194bf3d281a"
+      },
+      {
+        "at": "2026-10-22T23:26:17Z",
+        "kind": "owner-assignment",
+        "taskId": "content.enemy.patrol.runtime-default",
+        "fromOwner": "claude",
+        "toOwner": "codex",
+        "changedTaskIds": [
+          "content.enemy.patrol.runtime-default"
+        ],
+        "reason": {
+          "zh": "",
+          "en": "Codex implements and independently verifies the prepared/default integration; provider captures/checks are supporting work."
+        },
+        "previousTaskSetSha256": "bb3aa7abeb638abf8ac326e4bcbcc61493b06f04081b766de5acd194bf3d281a",
+        "taskSetSha256": "1da4c2f2c0f34c913ece252b9a4037fbe7320fa99a0bdd4ebfe77a8f0086410d"
       }
     ],
     "pointsByStage": {
@@ -1012,8 +1060,8 @@
     "production": {
       "zh": "制作完成度",
       "en": "Production completion",
-      "percent": 60,
-      "percentLabel": "60.0%",
+      "percent": 60.1,
+      "percentLabel": "60.1%",
       "formula": "round1(40 * codingDonePoints/codingTotalPoints + 60 * contentDonePoints/contentTotalPoints)",
       "coding": {
         "done": 111,
@@ -1024,29 +1072,29 @@
         "tasksDone": 23
       },
       "content": {
-        "done": 627,
+        "done": 629,
         "total": 1881,
-        "percent": 33.3,
+        "percent": 33.4,
         "weight": 60,
         "tasks": 715,
-        "tasksDone": 203
+        "tasksDone": 204
       }
     },
     "inspection": {
       "zh": "检查与审查（已执行的）",
       "en": "Inspection and review (performed)",
-      "done": 42,
+      "done": 43,
       "total": 204,
-      "percent": 20.6,
+      "percent": 21.1,
       "technical": {
         "done": 23,
         "total": 77,
         "percent": 29.9
       },
       "visual": {
-        "done": 19,
+        "done": 20,
         "total": 126,
-        "percent": 15.1
+        "percent": 15.9
       },
       "contentQa": {
         "done": 0,
@@ -1094,11 +1142,11 @@
         "waivedPoints": 0
       },
       "content": {
-        "done": 627,
+        "done": 629,
         "total": 1881,
-        "percent": 33.3,
+        "percent": 33.4,
         "tasks": 715,
-        "tasksDone": 203,
+        "tasksDone": 204,
         "waivedTasks": 0,
         "waivedPoints": 0
       },
@@ -1112,11 +1160,11 @@
         "waivedPoints": 0
       },
       "visual-review": {
-        "done": 19,
+        "done": 20,
         "total": 126,
-        "percent": 15.1,
+        "percent": 15.9,
         "tasks": 126,
-        "tasksDone": 19,
+        "tasksDone": 20,
         "waivedTasks": 4,
         "waivedPoints": 4
       },
@@ -1150,14 +1198,14 @@
     },
     "byOwner": {
       "claude": {
-        "tasks": 712,
+        "tasks": 709,
         "operationsTasks": 0,
-        "points": 1882,
+        "points": 1876,
         "pointsDone": 574,
         "byStatus": {
           "done": 148,
-          "blocked": 5,
-          "todo": 559
+          "blocked": 4,
+          "todo": 557
         },
         "readyInQueue": 2,
         "revisionsBlockingApproval": 1
@@ -1174,16 +1222,17 @@
         "revisionsBlockingApproval": 0
       },
       "codex": {
-        "tasks": 222,
+        "tasks": 225,
         "operationsTasks": 2,
-        "points": 283,
-        "pointsDone": 175,
+        "points": 289,
+        "pointsDone": 178,
         "byStatus": {
-          "done": 110,
-          "todo": 108,
-          "not_required": 4
+          "done": 112,
+          "todo": 107,
+          "not_required": 4,
+          "blocked": 2
         },
-        "readyInQueue": 11,
+        "readyInQueue": 10,
         "revisionsBlockingApproval": 3
       },
       "creator": {
@@ -1290,7 +1339,7 @@
           "total": 2
         },
         "visual-review": {
-          "done": 1,
+          "done": 2,
           "total": 2
         },
         "creator-approval": {
@@ -1300,7 +1349,7 @@
       },
       "scenes": {
         "content": {
-          "done": 278,
+          "done": 280,
           "total": 282
         },
         "technical-inspection": {
@@ -1378,7 +1427,7 @@
     "queue": {
       "zh": "待处理（依赖已完成）",
       "en": "Ready (dependencies done)",
-      "count": 85,
+      "count": 84,
       "items": [
         {
           "id": "creator.char.protagonist-male.approve-portrait",
@@ -1874,13 +1923,6 @@
           "id": "creator.combat.zhao-ling.accept-set",
           "stage": "creator-approval",
           "owner": "creator",
-          "status": "todo",
-          "points": 1
-        },
-        {
-          "id": "review.enemy.patrol",
-          "stage": "visual-review",
-          "owner": "codex",
           "status": "todo",
           "points": 1
         },
@@ -3095,15 +3137,15 @@
     {"id":"creator.combat.zhao-ling.accept-set","type":"creator-acceptance","title":{"zh":"赵铃 · 验收战斗形象","en":"Zhao Ling · accept combat set"},"area":"combat","stage":"creator-approval","owner":"creator","status":"todo","points":1,"doneCriterion":{"zh":"清单 playable-combat 项被创作者勾选","en":"The creator checks the inventory playable-combat item"},"dependsOn":["content.combat.zhao-ling.combat-integration"],"evidence":[],"subject":{"kind":"character-variant","id":"zhao-ling"},"target":"content.combat.zhao-ling.combat-integration"},
     {"id":"content.enemy.sentry.static","type":"native-pixel","title":{"zh":"防卫机（哨卫） · 战斗静止精灵","en":"Sentry automaton · battle static sprite"},"area":"enemies","stage":"content","owner":"claude","status":"done","points":2,"doneCriterion":{"zh":"原生像素静止精灵已提交并有 QA","en":"Native pixel static committed with QA"},"dependsOn":[],"evidence":["docs/qa/rpg-2-star-ocean-the-second_scifi-sentry-automaton_battle-sprite-pilot_qa-note_m8-v01_20261014-221953-96ac4035.md"],"subject":{"kind":"enemy","id":"sentry"}},
     {"id":"content.enemy.sentry.battle-animation","type":"native-pixel","title":{"zh":"防卫机（哨卫） · 战斗动画条","en":"Sentry automaton · battle animation strip"},"area":"enemies","stage":"content","owner":"claude","status":"done","points":6,"doneCriterion":{"zh":"全部战斗状态的动画条已提交并有帧检查","en":"A strip covering every battle state committed with frame checks"},"dependsOn":["content.enemy.sentry.static"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_scifi-sentry-automaton_battle-animation-pilot_qa-note_m8-anim-v02_20261014-231549-748c6de8.md","docs/qa/rpg-2-star-ocean-the-second_scifi-sentry-automaton_v2-optin-portability_qa-note_unapproved-v01_20261018-103500-7d2e91b4.md"],"subject":{"kind":"enemy","id":"sentry"}},
-    {"id":"content.enemy.sentry.runtime-default","type":"integration","title":{"zh":"防卫机（哨卫） · 运行时默认使用","en":"Sentry automaton · runtime default"},"area":"enemies","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"不加参数时战斗默认绘制该动画","en":"Battles draw the animation by default, without a flag"},"dependsOn":["content.enemy.sentry.battle-animation","code.runtime.enemy-sprite-pipeline"],"evidence":[],"subject":{"kind":"enemy","id":"sentry"}},
+    {"id":"content.enemy.sentry.runtime-default","type":"integration","title":{"zh":"防卫机（哨卫） · 运行时默认使用","en":"Sentry automaton · runtime default"},"area":"enemies","stage":"content","owner":"codex","status":"blocked","points":2,"doneCriterion":{"zh":"不加参数时战斗默认绘制该动画","en":"Battles draw the animation by default, without a flag"},"dependsOn":["content.enemy.sentry.battle-animation","code.runtime.enemy-sprite-pipeline"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_enemy-battle_mvp-default-preparation_codex-closeout_v01_20261022-191350-b9786fd1.md"],"subject":{"kind":"enemy","id":"sentry"},"statusAt":"2026-10-22T23:26:18Z","note":{"zh":"","en":"False default switch prepared, exact source boundary and full actual bilingual battle movies checked. Waiting for separate creator MVP default-use authorization; final art not inferred."}},
     {"id":"qa.enemy.sentry.check","type":"technical-check","title":{"zh":"防卫机（哨卫） · 技术检查","en":"Sentry automaton · technical check"},"area":"enemies","stage":"technical-inspection","owner":"claude","status":"done","points":1,"doneCriterion":{"zh":"动画与战斗一致性检查通过","en":"Animation and combat-parity checks pass"},"dependsOn":["content.enemy.sentry.battle-animation"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_scifi-sentry-automaton_v2-optin-portability_qa-note_unapproved-v01_20261018-103500-7d2e91b4.md"],"subject":{"kind":"enemy","id":"sentry"},"target":"content.enemy.sentry.battle-animation","outcome":"passed"},
     {"id":"review.enemy.sentry","type":"visual-review","title":{"zh":"防卫机（哨卫） · 视觉审查","en":"Sentry automaton · visual review"},"area":"enemies","stage":"visual-review","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"Codex／root 审查实机画面并记录结论","en":"Codex / root reviews actual captures and records a verdict"},"dependsOn":["qa.enemy.sentry.check"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_scifi-sentry-automaton_v2-optin-portability_qa-note_unapproved-v01_20261018-103500-7d2e91b4.md","outputs/rpg-2-star-ocean-the-second_mvp-progress_state_v01_20261013-183804-28a1c7e4.json"],"subject":{"kind":"enemy","id":"sentry"},"target":"content.enemy.sentry.battle-animation","outcome":"technical-pass","note":{"zh":"root 看过实机 en640/zh640：只接受技术代码移植；眼部部分遮挡与几何占位背景仍在（closeout fa4c8600）。","en":"Root viewed actual en640/zh640 captures: technical code port only; partly occluded eye and geometric backdrop remain (closeout fa4c8600)."},"statusAt":"2026-10-18T17:55:49Z"},
     {"id":"creator.enemy.sentry.accept-art","type":"creator-acceptance","title":{"zh":"防卫机（哨卫） · 验收美术","en":"Sentry automaton · accept art"},"area":"enemies","stage":"creator-approval","owner":"creator","status":"todo","points":1,"doneCriterion":{"zh":"创作者验收该敌人美术","en":"The creator accepts the enemy art"},"dependsOn":["content.enemy.sentry.runtime-default"],"evidence":[],"subject":{"kind":"enemy","id":"sentry"},"target":"content.enemy.sentry.runtime-default"},
     {"id":"content.enemy.patrol.static","type":"native-pixel","title":{"zh":"巡逻机 · 战斗静止精灵","en":"Patrol drone · battle static sprite"},"area":"enemies","stage":"content","owner":"claude","status":"done","points":2,"doneCriterion":{"zh":"原生像素静止精灵已提交并有 QA","en":"Native pixel static committed with QA"},"dependsOn":[],"evidence":["docs/qa/rpg-2-star-ocean-the-second_patrol-static_selected-production-integration_v01_20261019-001423-861097ca.md"],"subject":{"kind":"enemy","id":"patrol"},"statusAt":"2026-10-19T04:25:04Z","note":{"zh":"","en":"Selected Claude benchmark native64x64 static copied intact with editable6-layer PXO/ORA, reproducible author/helper, raw hash manifest and actual source-bound Godot capture. Production only; animation/default/creator acceptance remain open."}},
     {"id":"content.enemy.patrol.battle-animation","type":"native-pixel","title":{"zh":"巡逻机 · 战斗动画条","en":"Patrol drone · battle animation strip"},"area":"enemies","stage":"content","owner":"claude","status":"done","points":6,"doneCriterion":{"zh":"全部战斗状态的动画条已提交并有帧检查","en":"A strip covering every battle state committed with frame checks"},"dependsOn":["content.enemy.patrol.static"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_patrol_canonical-native-and-visible-battle-closeout_v01_20261020-002601-cdd87b66.md"],"subject":{"kind":"enemy","id":"patrol"},"statusAt":"2026-10-20T00:28:20Z","note":{"zh":"","en":"Committed bcec9de: complete editable24frame six-state strip, native/frame/combat checks and opt-in actual/packed hookup. Art/default/fullsprite acceptance separate."}},
-    {"id":"content.enemy.patrol.runtime-default","type":"integration","title":{"zh":"巡逻机 · 运行时默认使用","en":"Patrol drone · runtime default"},"area":"enemies","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"不加参数时战斗默认绘制该动画","en":"Battles draw the animation by default, without a flag"},"dependsOn":["content.enemy.patrol.battle-animation","code.runtime.enemy-sprite-pipeline"],"evidence":[],"subject":{"kind":"enemy","id":"patrol"}},
+    {"id":"content.enemy.patrol.runtime-default","type":"integration","title":{"zh":"巡逻机 · 运行时默认使用","en":"Patrol drone · runtime default"},"area":"enemies","stage":"content","owner":"codex","status":"blocked","points":2,"doneCriterion":{"zh":"不加参数时战斗默认绘制该动画","en":"Battles draw the animation by default, without a flag"},"dependsOn":["content.enemy.patrol.battle-animation","code.runtime.enemy-sprite-pipeline"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_enemy-battle_mvp-default-preparation_codex-closeout_v01_20261022-191350-b9786fd1.md"],"subject":{"kind":"enemy","id":"patrol"},"statusAt":"2026-10-22T23:26:19Z","note":{"zh":"","en":"False default switch prepared, exact source boundary and full actual bilingual battle movies checked. Waiting for separate creator MVP default-use authorization; final art not inferred."}},
     {"id":"qa.enemy.patrol.check","type":"technical-check","title":{"zh":"巡逻机 · 技术检查","en":"Patrol drone · technical check"},"area":"enemies","stage":"technical-inspection","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"动画与战斗一致性检查通过","en":"Animation and combat-parity checks pass"},"dependsOn":["content.enemy.patrol.battle-animation"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_patrol_canonical-native-and-visible-battle-closeout_v01_20261020-002601-cdd87b66.md"],"subject":{"kind":"enemy","id":"patrol"},"target":"content.enemy.patrol.battle-animation","statusAt":"2026-10-20T00:28:21Z","outcome":"technical-pass","note":{"zh":"","en":"20combatdigests,31loaderchecks,32default/Sentrypixels,185UI-boundarychecks and actualnormal/packed verification; native-app shader/flattening limitations disclosed. No creative approval."}},
-    {"id":"review.enemy.patrol","type":"visual-review","title":{"zh":"巡逻机 · 视觉审查","en":"Patrol drone · visual review"},"area":"enemies","stage":"visual-review","owner":"codex","status":"todo","points":1,"doneCriterion":{"zh":"Codex／root 审查实机画面并记录结论","en":"Codex / root reviews actual captures and records a verdict"},"dependsOn":["qa.enemy.patrol.check"],"evidence":[],"subject":{"kind":"enemy","id":"patrol"},"target":"content.enemy.patrol.battle-animation"},
+    {"id":"review.enemy.patrol","type":"visual-review","title":{"zh":"巡逻机 · 视觉审查","en":"Patrol drone · visual review"},"area":"enemies","stage":"visual-review","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"Codex／root 审查实机画面并记录结论","en":"Codex / root reviews actual captures and records a verdict"},"dependsOn":["qa.enemy.patrol.check"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_enemy-battle_mvp-default-preparation_codex-closeout_v01_20261022-191350-b9786fd1.md"],"subject":{"kind":"enemy","id":"patrol"},"target":"content.enemy.patrol.battle-animation","statusAt":"2026-10-22T23:26:19Z","outcome":"technical-pass","note":{"zh":"","en":"Codex viewed actual patrol strike/windup/defeat captures and recorded temporal/state coverage from the actual1x recorder. Ready for scoped MVP-default choice, not final art/motion acceptance."}},
     {"id":"creator.enemy.patrol.accept-art","type":"creator-acceptance","title":{"zh":"巡逻机 · 验收美术","en":"Patrol drone · accept art"},"area":"enemies","stage":"creator-approval","owner":"creator","status":"todo","points":1,"doneCriterion":{"zh":"创作者验收该敌人美术","en":"The creator accepts the enemy art"},"dependsOn":["content.enemy.patrol.runtime-default"],"evidence":[],"subject":{"kind":"enemy","id":"patrol"},"target":"content.enemy.patrol.runtime-default"},
     {"id":"creator.enemy.sentry.approve-direction","type":"creator-acceptance","title":{"zh":"防卫机 · 批准动作方向","en":"Sentry · approve action direction"},"area":"enemies","stage":"creator-approval","owner":"creator","status":"done","points":1,"doneCriterion":{"zh":"创作者批准动作方向（不含美术）","en":"The creator approves the action direction (not the art)"},"dependsOn":["content.enemy.sentry.battle-animation"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_scifi-sentry-automaton_battle-animation-pilot_qa-note_m8-anim-v02_20261014-231549-748c6de8.md"],"subject":{"kind":"enemy","id":"sentry"},"target":"content.enemy.sentry.battle-animation"},
     {"id":"content.scene.map.plate","type":"integration","title":{"zh":"科技区世界地图 · 场景底板","en":"Science-sphere world map · scene plate"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":4,"doneCriterion":{"zh":"可玩场景底板已提交并在运行时可进入（概念图不算）","en":"A playable scene plate is committed and enterable in the runtime (a concept image does not count)"},"dependsOn":[],"evidence":["docs/qa/rpg-2-star-ocean-the-second_global-map-art_northeast-and-globe-candidate_qa-note_candidate-unapproved-v01_20261016-164615-f9e453b0.md"],"subject":{"kind":"scene-gate","id":"visual-scene.map"}},
@@ -3172,7 +3214,7 @@
     {"id":"content.scene.ruins-survey-inner.plate","type":"integration","title":{"zh":"华盛顿勘察附楼 2 号房（档案室） · 场景底板","en":"Washington survey annex room 2 (records) · scene plate"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":4,"doneCriterion":{"zh":"可玩场景底板已提交并在运行时可进入（概念图不算）","en":"A playable scene plate is committed and enterable in the runtime (a concept image does not count)"},"dependsOn":[],"evidence":["docs/qa/rpg-2-star-ocean-the-second_scifi-region-eleven-scene_visual-gate-audit_m8-v01_20261014-201003-6b73e7a4.md"],"subject":{"kind":"scene-gate","id":"visual-scene.ruins-survey-inner"}},
     {"id":"content.scene.ruins-survey-inner.wiring","type":"integration","title":{"zh":"华盛顿勘察附楼 2 号房（档案室） · 碰撞、热点与出入口","en":"Washington survey annex room 2 (records) · collision, hotspots and exits"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":3,"doneCriterion":{"zh":"碰撞、热点、出入口与存档有自动检查","en":"Collision, hotspots, exits and saves have automated checks"},"dependsOn":["content.scene.ruins-survey-inner.plate"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_scifi-region-eleven-scene_visual-gate-audit_m8-v01_20261014-201003-6b73e7a4.md","game/tests/m7_smoke.gd"],"subject":{"kind":"scene-gate","id":"visual-scene.ruins-survey-inner"}},
     {"id":"content.scene.ruins-survey-inner.native-pass","type":"native-pixel","title":{"zh":"华盛顿勘察附楼 2 号房（档案室） · 原生像素画质版","en":"Washington survey annex room 2 (records) · native pixel quality pass"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":12,"doneCriterion":{"zh":"原生像素画质版（道具／分层）已提交并有 QA，可为可选启用","en":"A native pixel quality pass (fixtures / layers) is committed with QA; opt-in is allowed"},"dependsOn":["content.scene.ruins-survey-inner.plate"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_wdc-records-room2_common-style-runtime_codex-closeout_v01_20261022-185913-713cdcb1.md"],"subject":{"kind":"scene-gate","id":"visual-scene.ruins-survey-inner"},"statusAt":"2026-10-22T23:10:27Z","note":{"zh":"","en":"Common-style layered candidate committed b5ff5a9; existing credited deliverable updated, not a new task. Generated raster plus unchanged native fixtures. Native exact application export failed by max1 value and four shader errors; GUI unverified. Default and final art unapproved."}},
-    {"id":"content.scene.ruins-survey-inner.native-default","type":"integration","title":{"zh":"华盛顿勘察附楼 2 号房（档案室） · 画质版默认接入","en":"Washington survey annex room 2 (records) · quality pass on by default"},"area":"scenes","stage":"content","owner":"claude","status":"blocked","points":2,"doneCriterion":{"zh":"画质版默认在游戏中使用","en":"The quality pass is used in the game by default"},"dependsOn":["content.scene.ruins-survey-inner.native-pass","content.scene.ruins-survey-inner.wiring"],"evidence":["docs/design/rpg-2-star-ocean-the-second_science-scenes_creator-style-consistency-revision_v01_20261022-155956-1414792c.md"],"subject":{"kind":"scene-gate","id":"visual-scene.ruins-survey-inner"},"statusAt":"2026-10-22T20:09:20Z","note":{"zh":"","en":"Creator reports inconsistent art styles; no default-use authorization. Unify one outdoor sample against accepted science interior material/light language before propagation; all switches remain false."}},
+    {"id":"content.scene.ruins-survey-inner.native-default","type":"integration","title":{"zh":"华盛顿勘察附楼 2 号房（档案室） · 画质版默认接入","en":"Washington survey annex room 2 (records) · quality pass on by default"},"area":"scenes","stage":"content","owner":"codex","status":"done","points":2,"doneCriterion":{"zh":"画质版默认在游戏中使用","en":"The quality pass is used in the game by default"},"dependsOn":["content.scene.ruins-survey-inner.native-pass","content.scene.ruins-survey-inner.wiring"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_wdc-records-room2_mvp-default-adoption_codex-closeout_style50-v01_20261022-191753-081f996e.md"],"subject":{"kind":"scene-gate","id":"visual-scene.ruins-survey-inner"},"statusAt":"2026-10-22T23:26:18Z","note":{"zh":"","en":"Creator explicitly authorized MVP default via call_1a1aa69e438541e5b3d4c9e5612e697a. Integrated1dd7472; actual noflag room/save/return and precedence/rollback passed; final art separate."}},
     {"id":"qa.scene.ruins-survey-inner.check","type":"technical-check","title":{"zh":"华盛顿勘察附楼 2 号房（档案室） · 技术检查","en":"Washington survey annex room 2 (records) · technical check"},"area":"scenes","stage":"technical-inspection","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"当前画质版的 Godot 检查全部通过","en":"Godot checks of the current quality pass all pass"},"dependsOn":["content.scene.ruins-survey-inner.native-pass"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_wdc-records-room2_common-style-runtime_codex-closeout_v01_20261022-185913-713cdcb1.md"],"subject":{"kind":"scene-gate","id":"visual-scene.ruins-survey-inner"},"target":"content.scene.ruins-survey-inner.native-pass","statusAt":"2026-10-22T23:10:28Z","outcome":"passed","note":{"zh":"","en":"Final actual-r2 Godot path and12-pair noflag parity pass, no diagnostics; render pixels checked after preload fix. Native application limitations remain separate."},"history":[{"outcome":"passed","statusAt":null,"evidence":["docs/qa/rpg-2-star-ocean-the-second_wdc-annex-room2_records-chamber-playable-integration_qa-note_unapproved-v01_20261018-035908-3a34d132.md","docs/qa/rpg-2-star-ocean-the-second_wdc-annex-rooms_default-layout-collision-fix_qa-note_unapproved-v01_20261018-041322-c3ff819c.md"]}]},
     {"id":"review.scene.ruins-survey-inner","type":"visual-review","title":{"zh":"华盛顿勘察附楼 2 号房（档案室） · 视觉审查","en":"Washington survey annex room 2 (records) · visual review"},"area":"scenes","stage":"visual-review","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"Codex 审查 640×360 实机画面并记录结论","en":"Codex reviews actual 640x360 captures and records a verdict"},"dependsOn":["qa.scene.ruins-survey-inner.check"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_wdc-records-room2_common-style-runtime_codex-closeout_v01_20261022-185913-713cdcb1.md"],"subject":{"kind":"scene-gate","id":"visual-scene.ruins-survey-inner"},"target":"content.scene.ruins-survey-inner.native-pass","statusAt":"2026-10-22T23:10:28Z","note":{"zh":"root（Codex）查看了 v01 整合版英文入口实机画面：可交创作者审查。角色参考说明同上；无新测试，未批准。","en":"Codex inspected actual entry, after-load and behind-fixture640x360 frames. Ready for scoped MVP-default choice; final art remains unapproved."},"outcome":"passed","history":[{"outcome":"passed","statusAt":"2026-10-18T19:35:26Z","evidence":["docs/qa/rpg-2-star-ocean-the-second_codex-visual-review_six-verdicts_qa-receipt_v01_20261018-153526-67e353de.md","outputs/wdc-rc2-v01i_3a34d132/cap/rpg-2-star-ocean-the-second_wdc-annex-room2_v01-godot-en-entry-640x360_20261018-035908-3a34d132.png"]}]},
     {"id":"creator.scene.ruins-survey-inner.accept","type":"creator-acceptance","title":{"zh":"华盛顿勘察附楼 2 号房（档案室） · 场景画质验收","en":"Washington survey annex room 2 (records) · scene-quality acceptance"},"area":"scenes","stage":"creator-approval","owner":"creator","status":"todo","points":1,"doneCriterion":{"zh":"approvalLedger 记有 acceptanceKind scene-visual 的验收条目","en":"approvalLedger records an acceptanceKind scene-visual item"},"dependsOn":["content.scene.ruins-survey-inner.native-pass"],"evidence":[],"subject":{"kind":"scene-gate","id":"visual-scene.ruins-survey-inner"},"target":"content.scene.ruins-survey-inner.native-pass"},
