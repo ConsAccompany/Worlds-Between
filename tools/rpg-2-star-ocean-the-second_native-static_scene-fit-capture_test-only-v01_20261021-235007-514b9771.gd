@@ -11,13 +11,15 @@ func quiet(node: Node) -> void:
  for child in node.get_children(): quiet(child)
 func run() -> void:
  var args = OS.get_cmdline_user_args()
- if args.size()!=3: push_error("expected png_absolute outdir tag");quit(2);return
+ if args.size()<3 or args.size()>4: push_error("expected png_absolute outdir tag [actor]");quit(2);return
+ var actor: String=args[3] if args.size()==4 else "jiang-lan"
+ if not actor.is_valid_filename():push_error("invalid source actor label");quit(2);return
  var source = Image.load_from_file(args[0])
  if source==null or source.get_size()!=Vector2i(80,112): push_error("source80x112 missing");quit(2);return
  var texture = ImageTexture.create_from_image(source)
  var app = root.get_node("AppState")
  app.set_process(false)
- SaveStore.root_path = "user://test-saves/jiang37-source-fit"
+ SaveStore.root_path = "user://test-saves/"+actor+"-static-source-fit"
  root.size = Vector2i(640,360)
  var files = []
  for destination in ["scifi.city","scifi.ruins"]:
@@ -32,6 +34,9 @@ func run() -> void:
    root.add_child(host)
    quiet(host)
    for tween in get_processed_tweens(): tween.kill()
+   var source_layer = CanvasLayer.new()
+   source_layer.layer=5
+   host.add_child(source_layer)
    var candidate = Sprite2D.new()
    candidate.texture=texture
    candidate.texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST
@@ -39,24 +44,24 @@ func run() -> void:
    candidate.offset=Vector2(0,-46)
    candidate.position=Vector2(400,280)
    candidate.z_index=50
-   host.add_child(candidate)
+   source_layer.add_child(candidate)
    var label=Label.new()
-   label.text="JIANG LAN SOURCE FIT / TEST ONLY" if language=="en" else "蒋岚源帧适配 / 仅测试"
+   label.text=actor.to_upper()+" SOURCE FIT / TEST ONLY" if language=="en" else actor+" 源帧适配 / 仅测试"
    label.position=Vector2(310,293)
    label.add_theme_font_size_override("font_size",10)
    label.z_index=51
-   host.add_child(label)
+   source_layer.add_child(label)
    for i in 3: await process_frame
    await RenderingServer.frame_post_draw
    var png=root.get_texture().get_image()
    if png.get_size()!=Vector2i(640,360):push_error("wrong viewport size");quit(2);return
-   var file="rpg-2-star-ocean-the-second_jiang-lan_source-fit-"+destination.replace("scifi.","")+"-"+language+"_test-only-640-v01_"+args[2]+".png"
+   var file="rpg-2-star-ocean-the-second_"+actor+"_source-fit-"+destination.replace("scifi.","")+"-"+language+"_test-only-640-v01_"+args[2]+".png"
    if png.save_png(args[1].path_join(file))!=OK:push_error("capture write failed");quit(2);return
    files.append({"file":file,"sha256":FileAccess.get_sha256(args[1].path_join(file)),"sourceSha256":FileAccess.get_sha256(args[0]),"destination":destination,"language":language,"candidatePosition":[400,280],"scale":0.5,"testOnly":true})
    quiet(host)
    host.free()
    await process_frame
- var report=FileAccess.open(args[1].path_join("rpg-2-star-ocean-the-second_jiang-lan_source-fit-manifest_test-only-v01_"+args[2]+".json"),FileAccess.WRITE)
+ var report=FileAccess.open(args[1].path_join("rpg-2-star-ocean-the-second_"+actor+"_source-fit-manifest_test-only-v01_"+args[2]+".json"),FileAccess.WRITE)
  report.store_string(JSON.stringify({"captures":files,"runtimeAdopted":false,"artApproved":false,"inputKind":"direct deterministic source-fit overlay"},"  ")+"\n")
  report.close()
  print("JIANG37_SOURCE_FIT_PASS captures=",files.size())
