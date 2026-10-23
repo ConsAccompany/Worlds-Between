@@ -2,7 +2,7 @@
   "id": "rpg-2-star-ocean-the-second_production-completion_v01",
   "schemaVersion": 2,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-23T02:57:17Z",
+  "updatedAt": "2026-10-23T03:43:42Z",
   "zh": "制作完成度任务台账：衡量已完成的工作量（编码 40% + 内容 60%）；检查／审查与创作者批准分开计量，均不改变制作分；免除的审查不算已执行的工作；运营任务列出负责方但不计百分比。",
   "en": "Production-completion task ledger: measures work done (coding 40% + content 60%); inspection/review and creator approval are separate meters and never change production credit; waived reviews are not performed work; operations tasks list owners but carry no percentage.",
   "brief": "docs/rpg-2-star-ocean-the-second_production-completion_bilingual-brief_v01_20261018-140533-3ea2a621.md",
@@ -128,6 +128,10 @@
     "codex": {
       "zh": "Codex（协调、独立检查与云端发布；Claude 配额不足时接手编码、原生内容、测试和整合）",
       "en": "Codex (coordination, independent inspection and cloud publication; takes over coding, native content, tests and integration during Claude quota gaps)"
+    },
+    "hermes": {
+      "zh": "Hermes（接任协调、制作、检查与整合；创作者批准仍独立）",
+      "en": "Hermes (incoming coordination, production, inspection and integration; creator approval remains separate)"
     },
     "creator": {
       "zh": "创作者（美术验收、正典选择、两轮真人试玩）",
@@ -1044,6 +1048,86 @@
         },
         "previousTaskSetSha256": "1da4c2f2c0f34c913ece252b9a4037fbe7320fa99a0bdd4ebfe77a8f0086410d",
         "taskSetSha256": "631b8c57290c3c873dbec3ba0aaa9dffd9312be806080f16e53fe010e737fe02"
+      },
+      {
+        "at": "2026-10-23T03:43:37Z",
+        "kind": "owner-assignment",
+        "taskId": "content.char.lin-que.idle-anim",
+        "fromOwner": "claude",
+        "toOwner": "hermes",
+        "changedTaskIds": [
+          "content.char.lin-que.idle-anim"
+        ],
+        "reason": {
+          "zh": "",
+          "en": "Creator explicitly authorized Hermes project takeover; transfer pending source-bank work without completion credit."
+        },
+        "previousTaskSetSha256": "631b8c57290c3c873dbec3ba0aaa9dffd9312be806080f16e53fe010e737fe02",
+        "taskSetSha256": "5d8eca41a43fdbff5d59697519ff03c0d271013d826df9450df3a6f8789f9da9"
+      },
+      {
+        "at": "2026-10-23T03:43:38Z",
+        "kind": "owner-assignment",
+        "taskId": "content.char.lin-que.walk-south",
+        "fromOwner": "claude",
+        "toOwner": "hermes",
+        "changedTaskIds": [
+          "content.char.lin-que.walk-south"
+        ],
+        "reason": {
+          "zh": "",
+          "en": "Creator explicitly authorized Hermes project takeover; transfer pending source-bank work without completion credit."
+        },
+        "previousTaskSetSha256": "5d8eca41a43fdbff5d59697519ff03c0d271013d826df9450df3a6f8789f9da9",
+        "taskSetSha256": "3359ede43e1e218e7896746934ac9e9155f057e16fe10fe596d58e3048a8c423"
+      },
+      {
+        "at": "2026-10-23T03:43:39Z",
+        "kind": "owner-assignment",
+        "taskId": "content.char.lin-que.walk-west",
+        "fromOwner": "claude",
+        "toOwner": "hermes",
+        "changedTaskIds": [
+          "content.char.lin-que.walk-west"
+        ],
+        "reason": {
+          "zh": "",
+          "en": "Creator explicitly authorized Hermes project takeover; transfer pending source-bank work without completion credit."
+        },
+        "previousTaskSetSha256": "3359ede43e1e218e7896746934ac9e9155f057e16fe10fe596d58e3048a8c423",
+        "taskSetSha256": "268599df338c116f7b72d633b8167aad0fb3156c227bce4b4e1c337aae4d769b"
+      },
+      {
+        "at": "2026-10-23T03:43:41Z",
+        "kind": "owner-assignment",
+        "taskId": "content.char.lin-que.walk-north",
+        "fromOwner": "claude",
+        "toOwner": "hermes",
+        "changedTaskIds": [
+          "content.char.lin-que.walk-north"
+        ],
+        "reason": {
+          "zh": "",
+          "en": "Creator explicitly authorized Hermes project takeover; transfer pending source-bank work without completion credit."
+        },
+        "previousTaskSetSha256": "268599df338c116f7b72d633b8167aad0fb3156c227bce4b4e1c337aae4d769b",
+        "taskSetSha256": "165f9f5d53e44b9f3a078d52d493bd7a0c83d93f1ef8144b5f8c6638088e3513"
+      },
+      {
+        "at": "2026-10-23T03:43:42Z",
+        "kind": "owner-assignment",
+        "taskId": "content.char.lin-que.walk-east",
+        "fromOwner": "claude",
+        "toOwner": "hermes",
+        "changedTaskIds": [
+          "content.char.lin-que.walk-east"
+        ],
+        "reason": {
+          "zh": "",
+          "en": "Creator explicitly authorized Hermes project takeover; transfer pending source-bank work without completion credit."
+        },
+        "previousTaskSetSha256": "165f9f5d53e44b9f3a078d52d493bd7a0c83d93f1ef8144b5f8c6638088e3513",
+        "taskSetSha256": "8f58a1b1f440a40b23b5b7e83b424cba4c8a524f53e9876d0f8e91deec0a46ee"
       }
     ],
     "pointsByStage": {
@@ -1214,14 +1298,14 @@
     },
     "byOwner": {
       "claude": {
-        "tasks": 708,
+        "tasks": 703,
         "operationsTasks": 0,
-        "points": 1874,
+        "points": 1860,
         "pointsDone": 583,
         "byStatus": {
           "done": 152,
           "blocked": 4,
-          "todo": 552
+          "todo": 547
         },
         "readyInQueue": 1,
         "revisionsBlockingApproval": 1
@@ -1250,6 +1334,17 @@
         },
         "readyInQueue": 9,
         "revisionsBlockingApproval": 3
+      },
+      "hermes": {
+        "tasks": 5,
+        "operationsTasks": 0,
+        "points": 14,
+        "pointsDone": 0,
+        "byStatus": {
+          "todo": 5
+        },
+        "readyInQueue": 0,
+        "revisionsBlockingApproval": 0
       },
       "creator": {
         "tasks": 239,
@@ -2216,11 +2311,11 @@
     {"id":"content.char.lin-que.static-west","type":"native-pixel","title":{"zh":"林阙 · 西向高密度静止帧","en":"Lin Que · west high-density static"},"area":"characters","stage":"content","owner":"claude","status":"done","points":2,"doneCriterion":{"zh":"西向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"west native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":["content.char.lin-que.static-south"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_lin-que_four-direction-static_codex-closeout_unapproved-v01_20261022-222500-3d61c74e.md"],"subject":{"kind":"character-variant","id":"lin-que"},"statusAt":"2026-10-23T02:57:16Z","note":{"zh":"","en":"Native editable static source committed; independent source, native exact-export and source-fit checks passed. Art, animation and ordinary default use remain separate."}},
     {"id":"content.char.lin-que.static-north","type":"native-pixel","title":{"zh":"林阙 · 北向高密度静止帧","en":"Lin Que · north high-density static"},"area":"characters","stage":"content","owner":"claude","status":"done","points":2,"doneCriterion":{"zh":"北向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"north native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":["content.char.lin-que.static-south"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_lin-que_four-direction-static_codex-closeout_unapproved-v01_20261022-222500-3d61c74e.md"],"subject":{"kind":"character-variant","id":"lin-que"},"statusAt":"2026-10-23T02:57:16Z","note":{"zh":"","en":"Native editable static source committed; independent source, native exact-export and source-fit checks passed. Art, animation and ordinary default use remain separate."}},
     {"id":"content.char.lin-que.static-east","type":"native-pixel","title":{"zh":"林阙 · 东向高密度静止帧","en":"Lin Que · east high-density static"},"area":"characters","stage":"content","owner":"claude","status":"done","points":2,"doneCriterion":{"zh":"东向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"east native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":["content.char.lin-que.static-south"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_lin-que_four-direction-static_codex-closeout_unapproved-v01_20261022-222500-3d61c74e.md"],"subject":{"kind":"character-variant","id":"lin-que"},"statusAt":"2026-10-23T02:57:17Z","note":{"zh":"","en":"Native editable static source committed; independent source, native exact-export and source-fit checks passed. Art, animation and ordinary default use remain separate."}},
-    {"id":"content.char.lin-que.idle-anim","type":"native-pixel","title":{"zh":"林阙 · 四方向待机动画","en":"Lin Que · four-direction idle animation"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"四个方向的待机循环已提交并有 QA","en":"Idle loops for all four directions committed with QA"},"dependsOn":["content.char.lin-que.static-south","content.char.lin-que.static-west","content.char.lin-que.static-north","content.char.lin-que.static-east"],"evidence":[],"subject":{"kind":"character-variant","id":"lin-que"}},
-    {"id":"content.char.lin-que.walk-south","type":"native-pixel","title":{"zh":"林阙 · 南向行走／跑动","en":"Lin Que · south walk/run"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"南向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"south walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.lin-que.static-south"],"evidence":[],"subject":{"kind":"character-variant","id":"lin-que"}},
-    {"id":"content.char.lin-que.walk-west","type":"native-pixel","title":{"zh":"林阙 · 西向行走／跑动","en":"Lin Que · west walk/run"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"西向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"west walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.lin-que.static-west"],"evidence":[],"subject":{"kind":"character-variant","id":"lin-que"}},
-    {"id":"content.char.lin-que.walk-north","type":"native-pixel","title":{"zh":"林阙 · 北向行走／跑动","en":"Lin Que · north walk/run"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"北向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"north walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.lin-que.static-north"],"evidence":[],"subject":{"kind":"character-variant","id":"lin-que"}},
-    {"id":"content.char.lin-que.walk-east","type":"native-pixel","title":{"zh":"林阙 · 东向行走／跑动","en":"Lin Que · east walk/run"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"东向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"east walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.lin-que.static-east"],"evidence":[],"subject":{"kind":"character-variant","id":"lin-que"}},
+    {"id":"content.char.lin-que.idle-anim","type":"native-pixel","title":{"zh":"林阙 · 四方向待机动画","en":"Lin Que · four-direction idle animation"},"area":"characters","stage":"content","owner":"hermes","status":"todo","points":2,"doneCriterion":{"zh":"四个方向的待机循环已提交并有 QA","en":"Idle loops for all four directions committed with QA"},"dependsOn":["content.char.lin-que.static-south","content.char.lin-que.static-west","content.char.lin-que.static-north","content.char.lin-que.static-east"],"evidence":[],"subject":{"kind":"character-variant","id":"lin-que"}},
+    {"id":"content.char.lin-que.walk-south","type":"native-pixel","title":{"zh":"林阙 · 南向行走／跑动","en":"Lin Que · south walk/run"},"area":"characters","stage":"content","owner":"hermes","status":"todo","points":3,"doneCriterion":{"zh":"南向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"south walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.lin-que.static-south"],"evidence":[],"subject":{"kind":"character-variant","id":"lin-que"}},
+    {"id":"content.char.lin-que.walk-west","type":"native-pixel","title":{"zh":"林阙 · 西向行走／跑动","en":"Lin Que · west walk/run"},"area":"characters","stage":"content","owner":"hermes","status":"todo","points":3,"doneCriterion":{"zh":"西向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"west walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.lin-que.static-west"],"evidence":[],"subject":{"kind":"character-variant","id":"lin-que"}},
+    {"id":"content.char.lin-que.walk-north","type":"native-pixel","title":{"zh":"林阙 · 北向行走／跑动","en":"Lin Que · north walk/run"},"area":"characters","stage":"content","owner":"hermes","status":"todo","points":3,"doneCriterion":{"zh":"北向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"north walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.lin-que.static-north"],"evidence":[],"subject":{"kind":"character-variant","id":"lin-que"}},
+    {"id":"content.char.lin-que.walk-east","type":"native-pixel","title":{"zh":"林阙 · 东向行走／跑动","en":"Lin Que · east walk/run"},"area":"characters","stage":"content","owner":"hermes","status":"todo","points":3,"doneCriterion":{"zh":"东向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"east walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.lin-que.static-east"],"evidence":[],"subject":{"kind":"character-variant","id":"lin-que"}},
     {"id":"content.char.lin-que.display","type":"native-pixel","title":{"zh":"林阙 · 游戏内展示图","en":"Lin Que · in-game display image"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"游戏内展示图已提交并在界面中显示","en":"The in-game display image is committed and shown in the UI"},"dependsOn":["content.char.lin-que.static-south"],"evidence":[],"subject":{"kind":"character-variant","id":"lin-que"}},
     {"id":"content.char.lin-que.runtime-integration","type":"integration","title":{"zh":"林阙 · 运行时默认接入","en":"Lin Que · runtime default integration"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"整套四方向待机与行走默认在游戏中使用","en":"The full four-direction idle+walk set is used in the game by default"},"dependsOn":["content.char.lin-que.idle-anim","content.char.lin-que.walk-south","content.char.lin-que.walk-west","content.char.lin-que.walk-north","content.char.lin-que.walk-east","code.runtime.character-sprite-pipeline"],"evidence":[],"subject":{"kind":"character-variant","id":"lin-que"}},
     {"id":"qa.char.lin-que.runtime-set-check","type":"technical-check","title":{"zh":"林阙 · 运行时整套技术检查","en":"Lin Que · runtime set technical check"},"area":"characters","stage":"technical-inspection","owner":"claude","status":"todo","points":1,"doneCriterion":{"zh":"Godot 实机检查（帧、锚点、方向、滑步）全部通过","en":"Godot checks (frames, anchors, directions, slip) all pass"},"dependsOn":["content.char.lin-que.runtime-integration"],"evidence":[],"subject":{"kind":"character-variant","id":"lin-que"},"target":"content.char.lin-que.runtime-integration"},

@@ -66,6 +66,7 @@ const DEFAULT_TYPE = {coding: 'feature-code', content: 'native-pixel', 'technica
 const OWNERS = {claude: {zh: 'Claude（原生 Pixelorama 内容、编码、测试、技术文档、整合）', en: 'Claude (native Pixelorama content, coding, tests, technical writing, integration)'},
   deepseek: {zh: 'DeepSeek（范围明确的内容制作、编码与测试；Codex 独立检查）', en: 'DeepSeek (bounded content, coding and tests; independently inspected by Codex)'},
   codex: {zh: 'Codex（协调、独立检查与云端发布；Claude 配额不足时接手编码、原生内容、测试和整合）', en: 'Codex (coordination, independent inspection and cloud publication; takes over coding, native content, tests and integration during Claude quota gaps)'},
+  hermes: {zh: 'Hermes（接任协调、制作、检查与整合；创作者批准仍独立）', en: 'Hermes (incoming coordination, production, inspection and integration; creator approval remains separate)'},
   creator: {zh: '创作者（美术验收、正典选择、两轮真人试玩）', en: 'Creator (art acceptance, canon choices, the two human playthroughs)'}};
 const STATUSES = {
   production: ['todo', 'in_progress', 'done', 'blocked'],
@@ -82,8 +83,8 @@ const revisionPoints = points => Math.ceil(points / 2);
 const REJECTED_BASELINE_PATTERN = /\/(native-prototypes|native-animation|combat-prototypes)\/|_m8-prototype_|native-idle-(south|west|north|east)_m8-v01_/;
 const isProduction = t => STAGES[t.stage]?.kind === 'production';
 const isInspection = t => STAGES[t.stage]?.kind === 'inspection';
-const canReassign = t => t.type !== 'revision' && (isProduction(t) || t.type === 'technical-check');
-const workerOwner = owner => owner === 'codex' || owner === 'claude' || owner === 'deepseek';
+const canReassign = t => t.type !== 'revision' && ['production', 'inspection', 'operations'].includes(STAGES[t.stage]?.kind);
+const workerOwner = owner => owner === 'codex' || owner === 'claude' || owner === 'deepseek' || owner === 'hermes';
 const validAuditTime = at => typeof at === 'string' && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/.test(at) && Number.isFinite(Date.parse(at));
 
 const QA = name => 'docs/qa/rpg-2-star-ocean-the-second_' + name;
@@ -584,8 +585,8 @@ function assignmentAudit(ledger) {
     if (r.kind === 'owner-assignment') {
       const target = tasks.find(t => t.id === r.taskId), bucket = tasks.find(t => t.id === r.taskId + '.revision');
       const affected = target ? [target, ...(bucket ? [bucket] : [])] : [];
-      if (!target || !canReassign(target)) errors.push(where + 'owner assignment must target a producer or technical-check (reassign the parent of a revision)');
-      if (!workerOwner(r.fromOwner) || !workerOwner(r.toOwner) || r.fromOwner === r.toOwner) errors.push(where + 'owner assignment must transfer between distinct Codex, Claude or DeepSeek workers');
+      if (!target || !canReassign(target)) errors.push(where + 'owner assignment must target a non-creator task (reassign the parent of a revision)');
+      if (!workerOwner(r.fromOwner) || !workerOwner(r.toOwner) || r.fromOwner === r.toOwner) errors.push(where + 'owner assignment must transfer between distinct registered workers');
       if (!validAuditTime(r.at) || typeof r.reason?.en !== 'string' || !r.reason.en.trim()) errors.push(where + 'owner assignment needs an ISO timestamp and reason-en');
       const ids = affected.map(t => t.id).sort();
       if (!Array.isArray(r.changedTaskIds) || JSON.stringify([...r.changedTaskIds].sort()) !== JSON.stringify(ids)) errors.push(where + 'owner assignment must include its exact parent/revision task ids');
@@ -635,7 +636,7 @@ function validate(ledger, root, {checkBaseline = true} = {}) {
         if (x.points !== revisionPoints(target.points)) errors.push(where + 'revision points are fixed at ceil(deliverable points / 2)');
       }
     } else {
-      if (x.owner !== rule.owner && !(canReassign(x) && workerOwner(x.owner) && audit.owners.get(x.id) === x.owner)) errors.push(where + `owner ${x.owner} is not the ${x.type} owner ${rule.owner} (use audited reassign for producer/technical-check transfers)`);
+      if (x.owner !== rule.owner && !(canReassign(x) && workerOwner(x.owner) && audit.owners.get(x.id) === x.owner)) errors.push(where + `owner ${x.owner} is not the ${x.type} owner ${rule.owner} (use audited reassign for non-creator transfers)`);
       if (x.stage !== rule.stage) errors.push(where + `stage ${x.stage} is not the ${x.type} stage ${rule.stage}`);
       if (/\.revision/.test(x.id)) errors.push(where + 'revision ids are reserved for revision buckets');
     }
@@ -778,8 +779,8 @@ function reassign(ledger, root, opts) {
   if (existingErrors.length) throw new Error('refused invalid ledger before reassign:\n  ' + existingErrors.join('\n  '));
   const target = ledger.tasks.find(x => x.id === opts.task);
   if (!target) throw new Error('unknown task ' + opts.task);
-  if (!canReassign(target)) throw new Error('reassign targets only a producer or technical-check; reassign the parent of a revision (review/approval/operations owners remain fixed)');
-  if (!workerOwner(opts.owner)) throw new Error('reassign needs --owner codex|claude|deepseek');
+  if (!canReassign(target)) throw new Error('reassign targets only non-creator tasks; reassign the parent of a revision; creator approvals remain creator-owned');
+  if (!workerOwner(opts.owner)) throw new Error('reassign needs --owner codex|claude|deepseek|hermes');
   if (typeof opts.reasonEn !== 'string' || !opts.reasonEn.trim()) throw new Error('reassign needs --reason-en');
   if (!validAuditTime(opts.now)) throw new Error('reassign needs a valid ISO --now timestamp');
   if (target.owner === opts.owner) return refresh(ledger, root);

@@ -104,3 +104,8 @@ Creator-authorized priority: finish one complete playable heroine path before ne
 ### Existing native science prop kit
 
 Reuse `outputs/science-prop-kit/rpg-2-star-ocean-the-second_science-prop-kit_existing-native-catalog_v01_20261021-022234-4e609fc4.json` by semantic purpose before requesting new props. Its10 entries reference existing source PNG/ORA/author and runtime PNG with raw hashes, canvas and opaque bounds. Run the linked `science-prop-kit_catalog` tool with `--check` before adoption. Source/runtime bytes and native merged exports are checked; no files are duplicated or repainted. Keep original scale/placement as a reference and inspect collision/occlusion in the new scene. Original scene acceptance does not automatically approve a new scene or standalone prop.
+
+
+## Creator-authorized Hermes takeover (2026-10-23 UTC)
+
+Hermes is now the incoming project coordinator on the Hostinger VPS. Read [rpg-2-star-ocean-the-second_hermes_project-takeover_v01_20261023-034257-b6c39f27.md](../docs/handoff/rpg-2-star-ocean-the-second_hermes_project-takeover_v01_20261023-034257-b6c39f27.md) before starting. The latest direct creator request supersedes older Codex-coordinator assignments; historical completion owners and creator acceptance remain truthful. Use audited `--owner hermes` transfers for actually started non-creator work; no bulk relabeling or score changes. Parent VPS rules remain in place. PC harness/account credentials were not transferred, and hosted Site publication is not available on this VM.

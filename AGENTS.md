@@ -38,3 +38,8 @@ Use explicit UTF-8 for file/subprocess text and extended-length paths when neede
 ## Current character sprite direction
 
 The creator selected **Sea of Stars** as the character sprite style reference on 2026-10-20. Read [the approved direction contract](docs/design/rpg-2-star-ocean-the-second_characters_sea-of-stars-style-direction_v01_20261020-181026-f5938409.md) before character art or animation work. Apply it to one complete heroine path first. This is direction approval only; existing assets, scale changes and environments are not automatically approved.
+
+
+## Creator-authorized Hermes takeover (2026-10-23 UTC)
+
+Hermes is now the incoming project coordinator on the Hostinger VPS. Read [rpg-2-star-ocean-the-second_hermes_project-takeover_v01_20261023-034257-b6c39f27.md](docs/handoff/rpg-2-star-ocean-the-second_hermes_project-takeover_v01_20261023-034257-b6c39f27.md) before starting. The latest direct creator request supersedes older Codex-coordinator assignments; historical completion owners and creator acceptance remain truthful. Use audited `--owner hermes` transfers for actually started non-creator work; no bulk relabeling or score changes. Parent VPS rules remain in place. PC harness/account credentials were not transferred, and hosted Site publication is not available on this VM.
