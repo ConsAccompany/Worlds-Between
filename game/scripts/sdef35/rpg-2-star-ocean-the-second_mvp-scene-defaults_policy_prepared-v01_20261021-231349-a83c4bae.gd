@@ -1,20 +1,20 @@
 extends RefCounted
 
 # MVP scene default policy. Chicago and Washington exterior/records common-style defaults are
-# creator-authorized MVP use, with final art approval separate. NYC default authorization remains pending.
+# creator-authorized MVP use, including NYC STYLE46, with final art approval separate.
 # Existing ledger tasks content.scene.{city,ruins,ruins-survey-inner,chicago-loop}.native-default.
 # Each consumer asks
 # this policy only after its own explicit override and CLI flags (and, for Washington and Chicago, after
 # every older candidate flag), so it is a fallback, never a precedence change.
 # Candidates (all UNAPPROVED art; switching a bit is a creator decision, not a test result):
-#   CITY      NYC City Hall Park v06 (city_hall_park_v06_scene.gd). Most visible pixels are a
+#   CITY      NYC City Hall Park STYLE46 via v06 loader (city_hall_park_v06_scene.gd). Visible pixels include a
 #             palette-reduced recomposition of an imported AI-generated reference plus native overlays;
 #             not final native accepted art.
 #   RUINS     Washington Capitol west v13 selector (scifi_exploration_area.tscn).
 #   RECORDS   Washington common-style STYLE48 records chamber (survey_annex.gd, scifi.ruins room2 only).
 #   CHICAGO   Chicago Loop State/Lake v05 selector (Loop .tscn).
-# Adoption = change exactly one `false` below to `true` (prepared one-line patches live under
-# outputs/sdef35). Rollback = change it back; no other file needs to change.
+# Adoption bits select the currently authorized common-style consumer. Historical prepared
+# patches live under outputs/sdef35; rollback to the old default sets the corresponding bit false.
 # preview_override is TEST/PREVIEW ONLY (never set by game code): key -> bool, consulted before the bits;
 # clear_preview() restores the bits.
 
@@ -23,7 +23,7 @@ const RUINS := "ruins"
 const RECORDS := "ruins_survey_inner"
 const CHICAGO := "chicago_loop"
 
-const CITY_V06_DEFAULT := false
+const CITY_V06_DEFAULT := true
 const RUINS_V13_DEFAULT := true
 const RECORDS_ROOM2_DEFAULT := true
 const CHICAGO_V05_DEFAULT := true

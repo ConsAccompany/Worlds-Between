@@ -1,9 +1,9 @@
 extends RefCounted
 
 # NYC City Hall Park scene candidate v06 (UNAPPROVED; scene art not accepted).
-# Opt-in only: launch with `-- --city-hall-park-v06`, or set enabled_override = 1
-# before the city scene loads. Off by default, so the existing city plate and
-# its tests stay unchanged; v05 (city_hall_park_scene.gd) stays as the audit baseline.
+# Ordinary NYC STYLE46 is creator-authorized for MVP use; final art remains unapproved.
+# Explicit `--city-hall-park-v06` or enabled_override=1 retains the older v06 candidate;
+# enabled_override=0 restores the old city plate. v05 remains the historical audit baseline.
 # Most visible pixels are a palette-reduced recomposition of an imported AI-generated
 # nonruntime reference, plus native layers (walks, fixtures, collision, occluders).
 # Scene data ships as a .tres resource so exported builds include it.
@@ -12,7 +12,7 @@ const RUN_DIR := "res://assets/environments/candidates/nyc-chp-v06_20261017-1652
 const SCENE_RES := "rpg-2-star-ocean-the-second_nyc-city-hall-park_scene_unapproved-v06_20261017-165253-4519dffe.tres"
 const SCENE_JSON := "rpg-2-star-ocean-the-second_nyc-city-hall-park_scene_unapproved-v06_20261017-165253-4519dffe.json"
 const CLI_FLAG := "--city-hall-park-v06"
-# STYLE46 common-style candidate (UNAPPROVED, opt-in only): same scene data, new art files.
+# STYLE46: creator-authorized ordinary MVP default; final art remains UNAPPROVED. Same scene data, new art files.
 const STYLE46_FLAG := "--nyc-common-style46"
 const STYLE46_DIR := "res://assets/environments/style46/"
 const STYLE46_RES := "rpg-2-star-ocean-the-second_nyc-city-hall-park_style46-scene_unapproved-v01_20261022-183638-a4e273b9.tres"
@@ -68,7 +68,7 @@ static func enabled() -> bool:
 		return enabled_override == 1
 	if OS.get_cmdline_user_args().has(CLI_FLAG) or OS.get_cmdline_user_args().has(STYLE46_FLAG):
 		return true
-	# MVP default fallback (sdef35 policy; false until the creator authorizes it).
+	# Creator-authorized MVP default fallback (sdef35 policy).
 	return SceneDefaults35.default_on(SceneDefaults35.CITY)
 
 
@@ -82,7 +82,9 @@ static func dev_dir() -> String:
 
 func load_scene() -> bool:
 	source_dir = dev_dir()
-	var style46 := OS.get_cmdline_user_args().has(STYLE46_FLAG)
+	var args := OS.get_cmdline_user_args()
+	# Ordinary creator-authorized STYLE46 default; preserve explicit old v06, test override and dev-directory selection.
+	var style46 := args.has(STYLE46_FLAG) or (source_dir.is_empty() and enabled_override < 0 and not args.has(CLI_FLAG) and SceneDefaults35.default_on(SceneDefaults35.CITY))
 	runtime_dir = STYLE46_DIR if style46 else RUN_DIR
 	var json_text := ""
 	if source_dir.is_empty():
