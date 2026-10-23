@@ -1,0 +1,270 @@
+{
+  "schemaVersion": 1,
+  "taskId": "qa.validation.pre-playtest-regression",
+  "producer": "claude",
+  "independentChecker": "hermes",
+  "testedBase": "8a00eeaf9e302fc538aad0daf6f48515cc177901",
+  "source": {
+    "path": "game/tests/m7_smoke.gd",
+    "sha256": "74542ad80660b364cd96f15d4481fb414d29889947028fbbca64b39f0703cd2f"
+  },
+  "originalSourceSHA256": "14d7122f4342c0c1ff923dfae79f7e10f1ace100a82d1d3c1be5b138c3373f80",
+  "negativeFixtureSHA256": "54c61466c70058bf1e02f800dd69cfbd26078aa85052eb17d845281f3d0d7027",
+  "independentResults": [
+    {
+      "passed": false,
+      "reason": "diagnostic",
+      "exitCode": -9,
+      "missingMarkers": [],
+      "elapsedSeconds": 2.665,
+      "name": "original-red",
+      "command": [
+        "/home/kel/projects/worlds-between/tooling/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "--headless",
+        "--audio-driver",
+        "Dummy",
+        "--path",
+        "/home/kel/projects/worlds-between/repo/game",
+        "--script",
+        "/home/kel/projects/worlds-between/repo/work/m7-rotation/original-m7-20261023-054232.gd"
+      ],
+      "logPath": "work/m7-rotation/independent-original-red-20261023-054232.log",
+      "expectedFailure": "field station opens scifi.ruins",
+      "accepted": true,
+      "logSHA256": "0f19f5aaec8f939f0656e6231797537f4bc61b7428b08ccd881931ff8044ae86"
+    },
+    {
+      "passed": false,
+      "reason": "diagnostic",
+      "exitCode": -9,
+      "missingMarkers": [],
+      "elapsedSeconds": 2.624,
+      "name": "recruit-negative",
+      "command": [
+        "/home/kel/projects/worlds-between/tooling/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "--headless",
+        "--audio-driver",
+        "Dummy",
+        "--path",
+        "/home/kel/projects/worlds-between/repo/game",
+        "--script",
+        "/home/kel/projects/worlds-between/repo/work/m7-rotation/legacy-coordinate-negative-20261023-054232.gd"
+      ],
+      "logPath": "work/m7-rotation/independent-recruit-negative-20261023-054232.log",
+      "expectedFailure": "ruin recruitment dialogue opens",
+      "accepted": true,
+      "logSHA256": "36d92fdd1432a82be16f63aec1c1e26524943404b8c3e7ab6c9beaeb93d22091"
+    },
+    {
+      "passed": true,
+      "reason": null,
+      "exitCode": 0,
+      "missingMarkers": [],
+      "elapsedSeconds": 3.634,
+      "name": "m7-green",
+      "command": [
+        "/home/kel/projects/worlds-between/tooling/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "--headless",
+        "--audio-driver",
+        "Dummy",
+        "--path",
+        "/home/kel/projects/worlds-between/repo/game",
+        "--script",
+        "res://tests/m7_smoke.gd"
+      ],
+      "logPath": "work/m7-rotation/independent-m7-green-20261023-054232.log",
+      "expectedFailure": null,
+      "accepted": true,
+      "logSHA256": "7be589b0a2e51262b6475349ecdc0e645a45f6879b20d8cbcf1f0158822638da"
+    },
+    {
+      "passed": true,
+      "reason": null,
+      "exitCode": 0,
+      "missingMarkers": [],
+      "elapsedSeconds": 0.648,
+      "name": "m1",
+      "command": [
+        "/home/kel/projects/worlds-between/tooling/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "--headless",
+        "--audio-driver",
+        "Dummy",
+        "--path",
+        "/home/kel/projects/worlds-between/repo/game",
+        "--script",
+        "res://tests/m1_smoke.gd"
+      ],
+      "logPath": "work/m7-rotation/independent-m1-20261023-054232.log",
+      "expectedFailure": null,
+      "accepted": true,
+      "logSHA256": "7f5c828437d97aa9f7e616c9603bbf017f9e7bcfac91d86e9a83ee172cffee2d"
+    },
+    {
+      "passed": true,
+      "reason": null,
+      "exitCode": 0,
+      "missingMarkers": [],
+      "elapsedSeconds": 0.372,
+      "name": "city-navigation",
+      "command": [
+        "/home/kel/projects/worlds-between/tooling/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "--headless",
+        "--audio-driver",
+        "Dummy",
+        "--path",
+        "/home/kel/projects/worlds-between/repo/game",
+        "--script",
+        "res://tests/m8_city_navigation_smoke.gd"
+      ],
+      "logPath": "work/m7-rotation/independent-city-navigation-20261023-054232.log",
+      "expectedFailure": null,
+      "accepted": true,
+      "logSHA256": "f9255c1b1dc8cd86a324264e340334b9b8aa4f73020a73bbb154a2f8f68faf0d"
+    },
+    {
+      "passed": false,
+      "reason": "diagnostic",
+      "exitCode": -9,
+      "missingMarkers": [
+        "M8_CITY_INTEGRATION_OK"
+      ],
+      "elapsedSeconds": 1.273,
+      "name": "city-integration",
+      "command": [
+        "/home/kel/projects/worlds-between/tooling/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "--headless",
+        "--audio-driver",
+        "Dummy",
+        "--path",
+        "/home/kel/projects/worlds-between/repo/game",
+        "--script",
+        "res://tests/m8_city_integration_smoke.gd"
+      ],
+      "logPath": "work/m7-rotation/independent-city-integration-20261023-054232.log",
+      "expectedFailure": null,
+      "accepted": false,
+      "logSHA256": "1afd3f7988f965c39fece99ca316fe3035abf6b08386cfed14d0298aacee30cb"
+    },
+    {
+      "passed": true,
+      "reason": null,
+      "exitCode": 0,
+      "missingMarkers": [],
+      "elapsedSeconds": 1.681,
+      "name": "city-reentry",
+      "command": [
+        "/home/kel/projects/worlds-between/tooling/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "--headless",
+        "--audio-driver",
+        "Dummy",
+        "--path",
+        "/home/kel/projects/worlds-between/repo/game",
+        "--script",
+        "res://tests/m8_city_reentry_smoke.gd"
+      ],
+      "logPath": "work/m7-rotation/independent-city-reentry-20261023-054232.log",
+      "expectedFailure": null,
+      "accepted": true,
+      "logSHA256": "bc201078f8d999c85a137997381efe3c334b5202ff8325378fe3d1c973168567"
+    }
+  ],
+  "allRegressionChecksPassed": false,
+  "baselineCityFailure": {
+    "passed": false,
+    "reason": "diagnostic",
+    "exitCode": -9,
+    "missingMarkers": [
+      "M8_CITY_INTEGRATION_OK"
+    ],
+    "elapsedSeconds": 1.385,
+    "command": [
+      "/home/kel/projects/worlds-between/tooling/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+      "--headless",
+      "--audio-driver",
+      "Dummy",
+      "--path",
+      "/home/kel/projects/worlds-between/checks/system61-20261023-050756-b6a2ebec/repo/game",
+      "--script",
+      "res://tests/m8_city_integration_smoke.gd"
+    ],
+    "logPath": "work/m7-rotation/baseline-city-integration-20261023-isolated-b677e290.log",
+    "baselineHead": "53769f4cf99071b0c090cfa6fa92f2e48957682b"
+  },
+  "artifactCount": 11,
+  "artifacts": [
+    {
+      "path": "outputs/m7reg62/rpg-2-star-ocean-the-second_m7-regression_independent-city-integration-20261023-054232_v01_20261023-054500-a37c62f1.log",
+      "sha256": "1afd3f7988f965c39fece99ca316fe3035abf6b08386cfed14d0298aacee30cb",
+      "sourcePath": "work/m7-rotation/independent-city-integration-20261023-054232.log"
+    },
+    {
+      "path": "outputs/m7reg62/rpg-2-star-ocean-the-second_m7-regression_independent-city-navigation-20261023-054232_v01_20261023-054500-a37c62f1.log",
+      "sha256": "f9255c1b1dc8cd86a324264e340334b9b8aa4f73020a73bbb154a2f8f68faf0d",
+      "sourcePath": "work/m7-rotation/independent-city-navigation-20261023-054232.log"
+    },
+    {
+      "path": "outputs/m7reg62/rpg-2-star-ocean-the-second_m7-regression_independent-city-reentry-20261023-054232_v01_20261023-054500-a37c62f1.log",
+      "sha256": "bc201078f8d999c85a137997381efe3c334b5202ff8325378fe3d1c973168567",
+      "sourcePath": "work/m7-rotation/independent-city-reentry-20261023-054232.log"
+    },
+    {
+      "path": "outputs/m7reg62/rpg-2-star-ocean-the-second_m7-regression_independent-m1-20261023-054232_v01_20261023-054500-a37c62f1.log",
+      "sha256": "7f5c828437d97aa9f7e616c9603bbf017f9e7bcfac91d86e9a83ee172cffee2d",
+      "sourcePath": "work/m7-rotation/independent-m1-20261023-054232.log"
+    },
+    {
+      "path": "outputs/m7reg62/rpg-2-star-ocean-the-second_m7-regression_independent-m7-green-20261023-054232_v01_20261023-054500-a37c62f1.log",
+      "sha256": "7be589b0a2e51262b6475349ecdc0e645a45f6879b20d8cbcf1f0158822638da",
+      "sourcePath": "work/m7-rotation/independent-m7-green-20261023-054232.log"
+    },
+    {
+      "path": "outputs/m7reg62/rpg-2-star-ocean-the-second_m7-regression_independent-original-red-20261023-054232_v01_20261023-054500-a37c62f1.log",
+      "sha256": "0f19f5aaec8f939f0656e6231797537f4bc61b7428b08ccd881931ff8044ae86",
+      "sourcePath": "work/m7-rotation/independent-original-red-20261023-054232.log"
+    },
+    {
+      "path": "outputs/m7reg62/rpg-2-star-ocean-the-second_m7-regression_independent-recruit-negative-20261023-054232_v01_20261023-054500-a37c62f1.log",
+      "sha256": "36d92fdd1432a82be16f63aec1c1e26524943404b8c3e7ab6c9beaeb93d22091",
+      "sourcePath": "work/m7-rotation/independent-recruit-negative-20261023-054232.log"
+    },
+    {
+      "path": "outputs/m7reg62/rpg-2-star-ocean-the-second_m7-regression_baseline-city-integration-20261023-isolated-b677e290_v01_20261023-054500-a37c62f1.log",
+      "sha256": "1afd3f7988f965c39fece99ca316fe3035abf6b08386cfed14d0298aacee30cb",
+      "sourcePath": "work/m7-rotation/baseline-city-integration-20261023-isolated-b677e290.log"
+    },
+    {
+      "path": "outputs/m7reg62/rpg-2-star-ocean-the-second_m7-regression_m7-red2-20261023-dialogue-assert-legacy-coords_v01_20261023-054500-a37c62f1.log",
+      "sha256": "a69f97c12e7e995c5af0103808eddaebaa8dcdf101d8af9c889f3dfdf24a2540",
+      "sourcePath": "work/m7-rotation/m7-red2_20261023-dialogue-assert-legacy-coords.log"
+    },
+    {
+      "path": "outputs/m7reg62/rpg-2-star-ocean-the-second_m7-regression_m7-green-20261023-v12-anchors_v01_20261023-054500-a37c62f1.log",
+      "sha256": "83b91646d26cf6ec14c9cdab3cecfa177ed51501d41024c2d90e3adddc4bacc9",
+      "sourcePath": "work/m7-rotation/m7-green_20261023-v12-anchors.log"
+    },
+    {
+      "path": "outputs/m7reg62/rpg-2-star-ocean-the-second_m7-regression_claude-report_v01_20261023-054500-a37c62f1.md",
+      "sha256": "eda367916f56061117c601c8faa9466001e7187d3902cbb29f7b677cab4ee181",
+      "sourcePath": "work/m7-rotation/claude-report.md"
+    }
+  ],
+  "runtimeChanges": false,
+  "creatorApprovalChanged": false,
+  "meters": {
+    "production": {
+      "before": 61.0,
+      "after": 61.0,
+      "changePercentagePoints": 0
+    },
+    "inspection": {
+      "before": 21.6,
+      "after": 21.6,
+      "changePercentagePoints": 0
+    },
+    "approval": {
+      "before": 7.8,
+      "after": 7.8,
+      "changePercentagePoints": 0
+    }
+  }
+}

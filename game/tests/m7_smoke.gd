@@ -2,6 +2,9 @@ extends SceneTree
 
 const CONTENT := preload("res://scripts/survey_content.gd")
 const TALK := preload("res://scripts/party_talk_content.gd")
+# Ruins anchors when the v12-based Capitol west chain (the creator-authorized ordinary default) is active.
+# Loaded at run time: preloading would compile the area script before the AppState autoload exists.
+const RUINS_V12_PATH := "res://scripts/rpg-2-star-ocean-the-second_wdc-capitol-west_exploration-opt-in-selector_unapproved-v12_20261017-235608-66d00477.gd"
 
 
 func _initialize() -> void:
@@ -11,6 +14,7 @@ func _initialize() -> void:
 func _run() -> void:
 	SaveStore.root_path = "user://test-saves/m7"
 	var app: Node = root.get_node("AppState")
+	var ruins_v12_anchors: Dictionary = load(RUINS_V12_PATH).get_script_constant_map()
 	app.begin_new_run()
 	app.play_time_seconds = 65.0
 	app.playtest_events = [
@@ -77,11 +81,23 @@ func _run() -> void:
 			var area: Node2D = current_scene
 			if not _check(app.areas_visited.has(destination), "visit logged " + destination):
 				return
+			var ruins_v12: bool = destination == "scifi.ruins" and area.get("v12_active") == true
+			if destination == "scifi.ruins":
+				print("M7_RUINS_ANCHORS ", "v12" if ruins_v12 else "legacy")
+			# v12 anchors mark props; stand on the nearest walkable mask point, as a player must.
+			var ruins_stand := {}
+			if ruins_v12:
+				for anchor in ["V12_SURVEY", "V12_RECORDS", "V12_NPC", "V12_ASSIST"]:
+					ruins_stand[anchor] = area._v12_safe(ruins_v12_anchors[anchor])
+				assist_positions["scifi.ruins"] = ruins_stand["V12_ASSIST"]
+				trace_positions["scifi.ruins"] = [area._v12_safe(ruins_v12_anchors["V12_TRACES"][0]), area._v12_safe(ruins_v12_anchors["V12_TRACES"][1])]
 			match destination:
 				"scifi.city":
 					if route == 0:
 						area.get("hero").position = Vector2(282, 180)
 						area._unhandled_input(_interact())
+						if not _check(_recruit_dialogue_ready(area), "city recruitment dialogue opens"):
+							return
 						area.get("invite_button").pressed.emit()
 						if not _check(app.recruited_members.has("liang-xu"), "city companion invited"):
 							return
@@ -93,6 +109,8 @@ func _run() -> void:
 					if route == 0:
 						area.get("hero").position = Vector2(190, 150)
 						area._unhandled_input(_interact())
+						if not _check(_recruit_dialogue_ready(area), "outskirts recruitment dialogue opens"):
+							return
 						area.get("invite_button").pressed.emit()
 						if not _check(app.recruited_members.has("zhao-ling"), "outskirts companion invited"):
 							return
@@ -104,12 +122,14 @@ func _run() -> void:
 					if not _check(app.machine_observed, "machine observation by bypass"):
 						return
 				"scifi.ruins":
-					area.get("hero").position = Vector2(320, 250)
+					area.get("hero").position = ruins_stand["V12_RECORDS"] if ruins_v12 else Vector2(320, 250)
 					area._unhandled_input(_interact())
 					if not _check(app.ji_records_checked, "ruin discovery"):
 						return
-					area.get("hero").position = Vector2(200, 145)
+					area.get("hero").position = ruins_stand["V12_NPC"] if ruins_v12 else Vector2(200, 145)
 					area._unhandled_input(_interact())
+					if not _check(_recruit_dialogue_ready(area), "ruin recruitment dialogue opens"):
+						return
 					area.get("invite_button").pressed.emit()
 					if not _check(app.recruited_members.has("ji-cheng"), "ruin companion invited"):
 						return
@@ -147,7 +167,7 @@ func _run() -> void:
 				if not _check(area.get("invite_button").disabled and not app.field_insights.has(destination), "field station waits for optional recruitment " + destination):
 					return
 			area.get("later_button").pressed.emit()
-			var entrance := Vector2(558, 166) if destination == "scifi.city" else (Vector2(558, 277) if destination == "scifi.outskirts" else Vector2(548, 142))
+			var entrance: Vector2 = Vector2(558, 166) if destination == "scifi.city" else (Vector2(558, 277) if destination == "scifi.outskirts" else (ruins_stand["V12_SURVEY"] if ruins_v12 else Vector2(548, 142)))
 			area.get("hero").position = entrance
 			area._unhandled_input(_interact())
 			await _settle()
@@ -328,6 +348,10 @@ func _interact() -> InputEventAction:
 	event.action = "interact"
 	event.pressed = true
 	return event
+
+
+func _recruit_dialogue_ready(area: Node) -> bool:
+	return area.get("dialogue_open") and area.get("dialogue_mode") == "recruit" and area.get("dialogue_overlay").visible and not area.get("invite_button").disabled
 
 
 func _settle() -> void:

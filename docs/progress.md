@@ -1,5 +1,11 @@
 > Current coordination (2026-10-23): Hermes on the Hostinger VPS. Production61.0%, performed inspection21.6%, creator approval7.8%; formal MVP acceptancefalse. Read HERMES_START_HERE.md and the canonical production ledger for the current handoff. Historical milestone/percentage notes below do not override those records.
 
+## Latest bounded maintenance: M7 regression repair (2026-10-23 UTC)
+
+- Claude repaired stale current-default ruins coordinates in `game/tests/m7_smoke.gd` and added real recruitment-dialogue guards. Hermes independently reproduced original/negative failures and passing repaired bilingual M7, M1, city navigation and city re-entry. No runtime, asset or default changes.
+- City integration still fails `native pixel actor male`, independently reproduced in the pre-repair isolated readiness checkout `53769f4c`. Full pre-playtest regression remains TODO and NOT green; next diagnose its stale native-size/default assumptions versus a real defect without weakening acceptance.
+- Production **61.0% →61.0% (+0.0 pp)**; inspection **21.6% →21.6% (+0.0 pp)**; creator approval **7.8% →7.8% (+0.0 pp)**. No scoring/creator gates changed. [Source-bound report](qa/rpg-2-star-ocean-the-second_m7-field-station_bounded-regression-repair_v01_20261023-054500-a37c62f1.md).
+
 ## Latest bounded production: Lin Que idle/walk/stop source bank (2026-10-23T05:23:40.935Z)
 
 - Production **60.5% →61.0% (+0.5 rounded pp)**; content644→658/1881, five existing source tasks; coding111/111 unchanged. Performed inspection **21.6% →21.6% (+0.0pp)**; creator approval **7.8% →7.8% (+0.0pp)**. Frozen1183tasks, final art/default/human gates unchanged.
