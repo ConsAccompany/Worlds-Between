@@ -1,0 +1,55 @@
+[
+  {
+    "kind": "snapshot",
+    "number": 1,
+    "tool_id": "toolu_018GtWJj8S4jD9WRXAWrABuw",
+    "path": "work/m8reg63/provider-snapshot-1.gd",
+    "sha256": "1ccd7e2ee65b3415bb798f861bf393952cc9114cbd6c3bb2ae149ab922a2793e"
+  },
+  {
+    "kind": "run",
+    "afterSnapshot": 1,
+    "command": "python3 -I work/m8reg63/run_checks.py headless"
+  },
+  {
+    "kind": "snapshot",
+    "number": 2,
+    "tool_id": "toolu_014pVzffgvvKmAsYzKnmnMyR",
+    "path": "work/m8reg63/provider-snapshot-2.gd",
+    "sha256": "6ebbd422fd0d77711b804c9c30d5137851f4f6af023faa0ea3c2cf2e705ebb2b"
+  },
+  {
+    "kind": "run",
+    "afterSnapshot": 2,
+    "command": "python3 -I work/m8reg63/run_checks.py headless | tail -8"
+  },
+  {
+    "kind": "snapshot",
+    "number": 3,
+    "tool_id": "toolu_01LtXarxJfqAvrBnDp3xDkxd",
+    "path": "work/m8reg63/provider-snapshot-3.gd",
+    "sha256": "e40606a9755b8fc8d04b5bff97cb7a847a3269d1fc3f042b902cf572b20721cb"
+  },
+  {
+    "kind": "run",
+    "afterSnapshot": 3,
+    "command": "python3 -I work/m8reg63/run_checks.py headless | grep -v \"^ \\\"/\\|^  \\\"\" | tail -40"
+  },
+  {
+    "kind": "snapshot",
+    "number": 4,
+    "tool_id": "toolu_01M7RnDdqQKpv4apHLs8EB7g",
+    "path": "work/m8reg63/provider-snapshot-4.gd",
+    "sha256": "3a73e14cdd95d2b802407dc2dd0902c9e38a4201d8b4868e00d64bee488d3b81"
+  },
+  {
+    "kind": "run",
+    "afterSnapshot": 4,
+    "command": "python3 -I work/m8reg63/run_checks.py headless > work/m8reg63/headless-final-summary.txt; python3 -I work/m8reg63/run_checks.py xvfb > work/m8reg63/xvfb-final-summary.txt; grep -A6 '\"passed\"\\|negativeMarkers\\|diagnostics\\|testSHA\\|\"log\"' work/m8reg63/headless-final-summary.txt work/m8reg63/xvfb-final-summary.txt | grep -v '^\\S*-  \"/' ; ls work/m8reg63/"
+  },
+  {
+    "kind": "run",
+    "afterSnapshot": 4,
+    "command": "python3 -I work/m8reg63/run_checks.py headless && python3 -I work/m8reg63/run_checks.py xvfb"
+  }
+]

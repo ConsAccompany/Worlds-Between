@@ -2,7 +2,7 @@
   "id": "rpg-2-star-ocean-the-second_production-completion_v01",
   "schemaVersion": 2,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-23T05:53:16Z",
+  "updatedAt": "2026-10-23T20:38:25Z",
   "zh": "制作完成度任务台账：衡量已完成的工作量（编码 40% + 内容 60%）；检查／审查与创作者批准分开计量，均不改变制作分；免除的审查不算已执行的工作；运营任务列出负责方但不计百分比。",
   "en": "Production-completion task ledger: measures work done (coding 40% + content 60%); inspection/review and creator approval are separate meters and never change production credit; waived reviews are not performed work; operations tasks list owners but carry no percentage.",
   "brief": "docs/rpg-2-star-ocean-the-second_production-completion_bilingual-brief_v01_20261018-140533-3ea2a621.md",
@@ -1128,6 +1128,22 @@
         },
         "previousTaskSetSha256": "165f9f5d53e44b9f3a078d52d493bd7a0c83d93f1ef8144b5f8c6638088e3513",
         "taskSetSha256": "8f58a1b1f440a40b23b5b7e83b424cba4c8a524f53e9876d0f8e91deec0a46ee"
+      },
+      {
+        "at": "2026-10-23T20:29:07Z",
+        "kind": "owner-assignment",
+        "taskId": "qa.validation.pre-playtest-regression",
+        "fromOwner": "claude",
+        "toOwner": "hermes",
+        "changedTaskIds": [
+          "qa.validation.pre-playtest-regression"
+        ],
+        "reason": {
+          "zh": "",
+          "en": "Hermes owns this actually-started bounded independent M8 regression inspection and integration; Claude remains implementation producer. Full task stays TODO, all points and creator dependencies unchanged."
+        },
+        "previousTaskSetSha256": "8f58a1b1f440a40b23b5b7e83b424cba4c8a524f53e9876d0f8e91deec0a46ee",
+        "taskSetSha256": "8195f3f57f0eaa7f84779f6afcd70a1839d7aea2be5522cd037a2e84e0ff8676"
       }
     ],
     "pointsByStage": {
@@ -1298,14 +1314,14 @@
     },
     "byOwner": {
       "claude": {
-        "tasks": 703,
+        "tasks": 702,
         "operationsTasks": 0,
-        "points": 1860,
+        "points": 1857,
         "pointsDone": 583,
         "byStatus": {
           "done": 152,
           "blocked": 4,
-          "todo": 547
+          "todo": 546
         },
         "readyInQueue": 1,
         "revisionsBlockingApproval": 1
@@ -1336,12 +1352,13 @@
         "revisionsBlockingApproval": 3
       },
       "hermes": {
-        "tasks": 5,
+        "tasks": 6,
         "operationsTasks": 0,
-        "points": 14,
+        "points": 17,
         "pointsDone": 14,
         "byStatus": {
-          "done": 5
+          "done": 5,
+          "todo": 1
         },
         "readyInQueue": 0,
         "revisionsBlockingApproval": 0
@@ -3371,7 +3388,7 @@
     {"id":"creator.canon.display-scale","type":"canon-choice","title":{"zh":"正典决定：48 逻辑像素显示比例","en":"Canon choice: 48-logical-pixel display scale"},"area":"canon","stage":"creator-approval","owner":"creator","status":"done","points":1,"doneCriterion":{"zh":"创作者批准显示比例","en":"The creator approves the display scale"},"dependsOn":[],"evidence":["outputs/rpg-2-star-ocean-the-second_scifi-city_liang-xu-male-female-south-scale-review_m8-concept_20261014-153644-9226ceab.png"],"subject":{"kind":"decision","id":"display-scale-48"}},
     {"id":"creator.canon.prologue-start-date","type":"canon-choice","title":{"zh":"正典决定：受训序章起始日期","en":"Canon choice: Training prologue start date"},"area":"canon","stage":"creator-approval","owner":"creator","status":"todo","points":1,"doneCriterion":{"zh":"创作者作出决定并记录在进度状态","en":"The creator decides and it is recorded in the progress state"},"dependsOn":[],"evidence":[],"subject":{"kind":"decision","id":"prologue-start-date"}},
     {"id":"creator.canon.old-save-dates","type":"canon-choice","title":{"zh":"正典决定：旧档日期是否平移到 2537","en":"Canon choice: Shift old saves into 2537?"},"area":"canon","stage":"creator-approval","owner":"creator","status":"todo","points":1,"doneCriterion":{"zh":"创作者作出决定并记录在进度状态","en":"The creator decides and it is recorded in the progress state"},"dependsOn":[],"evidence":[],"subject":{"kind":"decision","id":"old-save-dates"}},
-    {"id":"qa.validation.pre-playtest-regression","type":"technical-check","title":{"zh":"整体试玩前回归检查","en":"Pre-playtest integrated regression"},"area":"validation","stage":"technical-inspection","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"全部 Godot 测试与中英文实机截图在最终整合版本上通过","en":"All Godot tests and zh/en captures pass on the final integrated build"},"dependsOn":["creator.char.protagonist-male.accept-runtime-sprite","creator.char.protagonist-female.accept-runtime-sprite","creator.char.liang-xu.accept-runtime-sprite","creator.char.jiang-lan.accept-runtime-sprite","creator.char.lin-que.accept-runtime-sprite","creator.char.milo.accept-runtime-sprite","creator.char.adi.accept-runtime-sprite","creator.char.muxiu.accept-runtime-sprite","creator.char.yanke.accept-runtime-sprite","creator.char.sangguo.accept-runtime-sprite","creator.char.nalia.accept-runtime-sprite","creator.char.isai.accept-runtime-sprite","creator.char.sain.accept-runtime-sprite","creator.char.daga.accept-runtime-sprite","creator.char.chenxian.accept-runtime-sprite","creator.char.yelan.accept-runtime-sprite","creator.char.luowen.accept-runtime-sprite","creator.char.ji-cheng.accept-runtime-sprite","creator.char.zhou-he.accept-runtime-sprite","creator.char.aiti.accept-runtime-sprite","creator.char.ye-qiao.accept-runtime-sprite","creator.char.mi-yi.accept-runtime-sprite","creator.char.luo-qi.accept-runtime-sprite","creator.char.avila.accept-runtime-sprite","creator.char.kern.accept-runtime-sprite","creator.char.lairui.accept-runtime-sprite","creator.char.mi-luo.accept-runtime-sprite","creator.char.heya.accept-runtime-sprite","creator.char.wu-li.accept-runtime-sprite","creator.char.huan-7.accept-runtime-sprite","creator.char.suiya.accept-runtime-sprite","creator.char.zhongdu.accept-runtime-sprite","creator.char.zhao-ling.accept-runtime-sprite","creator.char.pei-zhi.accept-runtime-sprite","creator.char.an-suo.accept-runtime-sprite","creator.char.su-yan.accept-runtime-sprite","creator.char.tao-yu.accept-runtime-sprite","creator.char.ruan-tian.accept-runtime-sprite","creator.char.bu-he.accept-runtime-sprite","creator.char.han-ze.accept-runtime-sprite","creator.char.xida.accept-runtime-sprite","creator.char.gu-lin.accept-runtime-sprite","creator.char.ruima.accept-runtime-sprite","creator.char.tao-li.accept-runtime-sprite","creator.char.lin-yan.accept-runtime-sprite","creator.char.he-huai.accept-runtime-sprite","creator.char.xuan-ya.accept-runtime-sprite","creator.char.que-zhi.accept-runtime-sprite","creator.char.menling.accept-runtime-sprite","creator.char.lingbing.accept-runtime-sprite","creator.char.lengjing.accept-runtime-sprite","creator.char.yuyin.accept-runtime-sprite","creator.combat.protagonist-male.accept-set","creator.combat.protagonist-female.accept-set","creator.combat.liang-xu.accept-set","creator.combat.ji-cheng.accept-set","creator.combat.zhao-ling.accept-set","creator.scene.map.accept","creator.scene.city.accept","creator.scene.outskirts.accept","creator.scene.ruins.accept","creator.scene.city-survey-outer.accept","creator.scene.city-survey-inner.accept","creator.scene.outskirts-survey-outer.accept","creator.scene.outskirts-survey-inner.accept","creator.scene.ruins-survey-outer.accept","creator.scene.ruins-survey-inner.accept","creator.scene.battle-arena.accept","creator.scene.chicago-loop.accept"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_m7-field-station_bounded-regression-repair_v01_20261023-054500-a37c62f1.md"],"subject":{"kind":"feature","id":"M9"},"statusAt":"2026-10-23T05:53:16Z","note":{"zh":"","en":"Claude repaired M7 stale ruins fixture and strengthened recruitment guard; Hermes independent red/negative/green plus M1/navigation/reentry checks pass. Full regression is NOT green: M8 native pixel actor male fails on active and pre-repair isolated base. Full creator dependencies remain unchanged; no inspection credit."}},
+    {"id":"qa.validation.pre-playtest-regression","type":"technical-check","title":{"zh":"整体试玩前回归检查","en":"Pre-playtest integrated regression"},"area":"validation","stage":"technical-inspection","owner":"hermes","status":"todo","points":3,"doneCriterion":{"zh":"全部 Godot 测试与中英文实机截图在最终整合版本上通过","en":"All Godot tests and zh/en captures pass on the final integrated build"},"dependsOn":["creator.char.protagonist-male.accept-runtime-sprite","creator.char.protagonist-female.accept-runtime-sprite","creator.char.liang-xu.accept-runtime-sprite","creator.char.jiang-lan.accept-runtime-sprite","creator.char.lin-que.accept-runtime-sprite","creator.char.milo.accept-runtime-sprite","creator.char.adi.accept-runtime-sprite","creator.char.muxiu.accept-runtime-sprite","creator.char.yanke.accept-runtime-sprite","creator.char.sangguo.accept-runtime-sprite","creator.char.nalia.accept-runtime-sprite","creator.char.isai.accept-runtime-sprite","creator.char.sain.accept-runtime-sprite","creator.char.daga.accept-runtime-sprite","creator.char.chenxian.accept-runtime-sprite","creator.char.yelan.accept-runtime-sprite","creator.char.luowen.accept-runtime-sprite","creator.char.ji-cheng.accept-runtime-sprite","creator.char.zhou-he.accept-runtime-sprite","creator.char.aiti.accept-runtime-sprite","creator.char.ye-qiao.accept-runtime-sprite","creator.char.mi-yi.accept-runtime-sprite","creator.char.luo-qi.accept-runtime-sprite","creator.char.avila.accept-runtime-sprite","creator.char.kern.accept-runtime-sprite","creator.char.lairui.accept-runtime-sprite","creator.char.mi-luo.accept-runtime-sprite","creator.char.heya.accept-runtime-sprite","creator.char.wu-li.accept-runtime-sprite","creator.char.huan-7.accept-runtime-sprite","creator.char.suiya.accept-runtime-sprite","creator.char.zhongdu.accept-runtime-sprite","creator.char.zhao-ling.accept-runtime-sprite","creator.char.pei-zhi.accept-runtime-sprite","creator.char.an-suo.accept-runtime-sprite","creator.char.su-yan.accept-runtime-sprite","creator.char.tao-yu.accept-runtime-sprite","creator.char.ruan-tian.accept-runtime-sprite","creator.char.bu-he.accept-runtime-sprite","creator.char.han-ze.accept-runtime-sprite","creator.char.xida.accept-runtime-sprite","creator.char.gu-lin.accept-runtime-sprite","creator.char.ruima.accept-runtime-sprite","creator.char.tao-li.accept-runtime-sprite","creator.char.lin-yan.accept-runtime-sprite","creator.char.he-huai.accept-runtime-sprite","creator.char.xuan-ya.accept-runtime-sprite","creator.char.que-zhi.accept-runtime-sprite","creator.char.menling.accept-runtime-sprite","creator.char.lingbing.accept-runtime-sprite","creator.char.lengjing.accept-runtime-sprite","creator.char.yuyin.accept-runtime-sprite","creator.combat.protagonist-male.accept-set","creator.combat.protagonist-female.accept-set","creator.combat.liang-xu.accept-set","creator.combat.ji-cheng.accept-set","creator.combat.zhao-ling.accept-set","creator.scene.map.accept","creator.scene.city.accept","creator.scene.outskirts.accept","creator.scene.ruins.accept","creator.scene.city-survey-outer.accept","creator.scene.city-survey-inner.accept","creator.scene.outskirts-survey-outer.accept","creator.scene.outskirts-survey-inner.accept","creator.scene.ruins-survey-outer.accept","creator.scene.ruins-survey-inner.accept","creator.scene.battle-arena.accept","creator.scene.chicago-loop.accept"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_m7-field-station_bounded-regression-repair_v01_20261023-054500-a37c62f1.md","docs/qa/rpg-2-star-ocean-the-second_m8-city-integration_bounded-regression-repair_v01_20261023-203621-b1c63a0f.md"],"subject":{"kind":"feature","id":"M9"},"statusAt":"2026-10-23T20:38:25Z","note":{"zh":"","en":"Claude implemented bounded M8 stale-fixture repair through guarded run-provider; Hermes independently reproduced RED and verified final M8/M7/M1/navigation/reentry, source/scale/pivot/direction negatives and actual bilingual Xvfb captures. Only M8 test changed in game tree. Full frozen all-tests/captures regression and creator dependencies remain TODO; zero inspection or production credit."}},
     {"id":"creator.playtest.1","type":"playtest","title":{"zh":"第 1 轮真人整合试玩","en":"Human integrated playthrough 1"},"area":"validation","stage":"creator-approval","owner":"creator","status":"todo","points":3,"doneCriterion":{"zh":"新档按不同路线顺序 25–35 分钟通关，并记录试玩回执","en":"A fresh save finishes a different route order in 25-35 minutes, with a playtest receipt"},"dependsOn":["qa.validation.pre-playtest-regression"],"evidence":[],"subject":{"kind":"feature","id":"M9"}},
     {"id":"creator.playtest.2","type":"playtest","title":{"zh":"第 2 轮真人整合试玩","en":"Human integrated playthrough 2"},"area":"validation","stage":"creator-approval","owner":"creator","status":"todo","points":3,"doneCriterion":{"zh":"新档按不同路线顺序 25–35 分钟通关，并记录试玩回执","en":"A fresh save finishes a different route order in 25-35 minutes, with a playtest receipt"},"dependsOn":["qa.validation.pre-playtest-regression"],"evidence":[],"subject":{"kind":"feature","id":"M9"}},
     {"id":"creator.mvp.final-acceptance","type":"creator-acceptance","title":{"zh":"MVP 正式验收","en":"Formal MVP acceptance"},"area":"validation","stage":"creator-approval","owner":"creator","status":"todo","points":2,"doneCriterion":{"zh":"创作者正式验收 MVP（现有门全部通过）","en":"The creator formally accepts the MVP (all existing gates pass)"},"dependsOn":["creator.playtest.1","creator.playtest.2"],"evidence":[],"subject":{"kind":"feature","id":"M9"}},
