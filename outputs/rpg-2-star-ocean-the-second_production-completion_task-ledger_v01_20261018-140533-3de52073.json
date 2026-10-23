@@ -2,7 +2,7 @@
   "id": "rpg-2-star-ocean-the-second_production-completion_v01",
   "schemaVersion": 2,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-23T21:54:38Z",
+  "updatedAt": "2026-10-23T22:15:37Z",
   "zh": "制作完成度任务台账：衡量已完成的工作量（编码 40% + 内容 60%）；检查／审查与创作者批准分开计量，均不改变制作分；免除的审查不算已执行的工作；运营任务列出负责方但不计百分比。",
   "en": "Production-completion task ledger: measures work done (coding 40% + content 60%); inspection/review and creator approval are separate meters and never change production credit; waived reviews are not performed work; operations tasks list owners but carry no percentage.",
   "brief": "docs/rpg-2-star-ocean-the-second_production-completion_bilingual-brief_v01_20261018-140533-3ea2a621.md",
@@ -1144,6 +1144,22 @@
         },
         "previousTaskSetSha256": "8f58a1b1f440a40b23b5b7e83b424cba4c8a524f53e9876d0f8e91deec0a46ee",
         "taskSetSha256": "8195f3f57f0eaa7f84779f6afcd70a1839d7aea2be5522cd037a2e84e0ff8676"
+      },
+      {
+        "at": "2026-10-23T21:57:10Z",
+        "kind": "owner-assignment",
+        "taskId": "content.char.milo.static-south",
+        "fromOwner": "claude",
+        "toOwner": "hermes",
+        "changedTaskIds": [
+          "content.char.milo.static-south"
+        ],
+        "reason": {
+          "zh": "",
+          "en": "Creator-authorized autonomous batch 10: Hermes coordinates independent validation and integration; sole implementation writer runs through the authorized provider adapter."
+        },
+        "previousTaskSetSha256": "8195f3f57f0eaa7f84779f6afcd70a1839d7aea2be5522cd037a2e84e0ff8676",
+        "taskSetSha256": "c0a47a409f3a4539dc1df0b44964a630491d8da504acf3ef6f4ee7839a928b9f"
       }
     ],
     "pointsByStage": {
@@ -1188,12 +1204,12 @@
         "tasksDone": 23
       },
       "content": {
-        "done": 660,
+        "done": 663,
         "total": 1881,
-        "percent": 35.1,
+        "percent": 35.2,
         "weight": 60,
         "tasks": 715,
-        "tasksDone": 217
+        "tasksDone": 218
       }
     },
     "inspection": {
@@ -1258,11 +1274,11 @@
         "waivedPoints": 0
       },
       "content": {
-        "done": 660,
+        "done": 663,
         "total": 1881,
-        "percent": 35.1,
+        "percent": 35.2,
         "tasks": 715,
-        "tasksDone": 217,
+        "tasksDone": 218,
         "waivedTasks": 0,
         "waivedPoints": 0
       },
@@ -1314,14 +1330,14 @@
     },
     "byOwner": {
       "claude": {
-        "tasks": 702,
+        "tasks": 701,
         "operationsTasks": 0,
-        "points": 1857,
+        "points": 1854,
         "pointsDone": 585,
         "byStatus": {
           "done": 153,
           "blocked": 4,
-          "todo": 545
+          "todo": 544
         },
         "readyInQueue": 1,
         "revisionsBlockingApproval": 1
@@ -1348,16 +1364,16 @@
           "not_required": 4,
           "blocked": 1
         },
-        "readyInQueue": 9,
+        "readyInQueue": 10,
         "revisionsBlockingApproval": 3
       },
       "hermes": {
-        "tasks": 6,
+        "tasks": 7,
         "operationsTasks": 0,
-        "points": 17,
-        "pointsDone": 14,
+        "points": 20,
+        "pointsDone": 17,
         "byStatus": {
-          "done": 5,
+          "done": 6,
           "todo": 1
         },
         "readyInQueue": 0,
@@ -1372,7 +1388,7 @@
           "done": 19,
           "todo": 220
         },
-        "readyInQueue": 76,
+        "readyInQueue": 77,
         "revisionsBlockingApproval": 0
       }
     },
@@ -1423,7 +1439,7 @@
       },
       "characters": {
         "content": {
-          "done": 239,
+          "done": 242,
           "total": 1460
         },
         "technical-inspection": {
@@ -1555,7 +1571,7 @@
     "queue": {
       "zh": "待处理（依赖已完成）",
       "en": "Ready (dependencies done)",
-      "count": 86,
+      "count": 88,
       "items": [
         {
           "id": "creator.char.protagonist-male.approve-portrait",
@@ -1657,6 +1673,20 @@
         },
         {
           "id": "creator.char.lin-que.accept-display",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "review.char.milo.static-south",
+          "stage": "visual-review",
+          "owner": "codex",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.milo.approve-static-south",
           "stage": "creator-approval",
           "owner": "creator",
           "status": "todo",
@@ -2350,7 +2380,7 @@
     {"id":"creator.char.lin-que.accept-runtime-sprite","type":"creator-acceptance","title":{"zh":"林阙 · 验收运行时精灵","en":"Lin Que · accept runtime sprite"},"area":"characters","stage":"creator-approval","owner":"creator","status":"todo","points":1,"doneCriterion":{"zh":"approvalLedger 记有 acceptanceKind runtime-sprite 的验收条目","en":"approvalLedger records an acceptanceKind runtime-sprite item"},"dependsOn":["content.char.lin-que.runtime-integration"],"evidence":[],"subject":{"kind":"character-variant","id":"lin-que"},"target":"content.char.lin-que.runtime-integration"},
     {"id":"creator.char.lin-que.accept-display","type":"creator-acceptance","title":{"zh":"林阙 · 验收展示图","en":"Lin Que · accept display image"},"area":"characters","stage":"creator-approval","owner":"creator","status":"todo","points":1,"doneCriterion":{"zh":"清单 display 项被创作者勾选","en":"The creator checks the inventory display item"},"dependsOn":["content.char.lin-que.display"],"evidence":[],"subject":{"kind":"character-variant","id":"lin-que"},"target":"content.char.lin-que.display"},
     {"id":"content.char.milo.portrait","type":"concept-generation","title":{"zh":"米洛 · 人物设定图（图像生成）","en":"Milo · source portrait (image generation)"},"area":"characters","stage":"content","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"设定图文件已入库","en":"The source portrait file is committed"},"dependsOn":[],"evidence":["outputs/rpg-2-star-ocean-the-second_milo_character-sheet_hairstyle-v02_20261013-161317-f1651dc0.png"],"subject":{"kind":"character-variant","id":"milo"}},
-    {"id":"content.char.milo.static-south","type":"native-pixel","title":{"zh":"米洛 · 南向高密度静止帧","en":"Milo · south high-density static"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"南向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"south native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":[],"evidence":[],"subject":{"kind":"character-variant","id":"milo"}},
+    {"id":"content.char.milo.static-south","type":"native-pixel","title":{"zh":"米洛 · 南向高密度静止帧","en":"Milo · south high-density static"},"area":"characters","stage":"content","owner":"hermes","status":"done","points":3,"doneCriterion":{"zh":"南向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"south native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":[],"evidence":["game/assets/characters/milo-native-v01/south/rpg-2-star-ocean-the-second_milo_south-static_unapproved-v01_20261023-215823-28a012bd.png","game/assets/characters/milo-native-v01/south/rpg-2-star-ocean-the-second_milo_south-edit_unapproved-v01_20261023-215823-aaf32a0b.pxo","docs/qa/rpg-2-star-ocean-the-second_milo_south-static-closeout_unapproved-v01_20261023-221500-b13a0001.md","outputs/milo65/independent13/rpg-2-star-ocean-the-second_milo_independent-verification_v01_20261023-221500-b13a0001.json"],"subject":{"kind":"character-variant","id":"milo"},"statusAt":"2026-10-23T22:15:37Z","note":{"zh":"","en":"Source committed in 8fb2c8e4: Claude adapter production, Hermes independent verification; 48 logical px south static, layered PXO/ORA, QA. Native export pixel equality passes; native application diagnostics remain failed. No default adoption, art approval, motion or normal runtime integration."}},
     {"id":"content.char.milo.static-west","type":"native-pixel","title":{"zh":"米洛 · 西向高密度静止帧","en":"Milo · west high-density static"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"西向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"west native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":["content.char.milo.static-south"],"evidence":[],"subject":{"kind":"character-variant","id":"milo"}},
     {"id":"content.char.milo.static-north","type":"native-pixel","title":{"zh":"米洛 · 北向高密度静止帧","en":"Milo · north high-density static"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"北向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"north native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":["content.char.milo.static-south"],"evidence":[],"subject":{"kind":"character-variant","id":"milo"}},
     {"id":"content.char.milo.static-east","type":"native-pixel","title":{"zh":"米洛 · 东向高密度静止帧","en":"Milo · east high-density static"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"东向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"east native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":["content.char.milo.static-south"],"evidence":[],"subject":{"kind":"character-variant","id":"milo"}},
