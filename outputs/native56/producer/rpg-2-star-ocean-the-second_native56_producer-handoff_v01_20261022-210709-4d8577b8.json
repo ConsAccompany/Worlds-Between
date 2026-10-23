@@ -1,0 +1,21 @@
+{
+ "tool": "tools/rpg-2-star-ocean-the-second_mvp_native-windows-build_v01_20261022-210709-4d8577b8.py",
+ "toolSha256": "ec7af327d30930eaa622f8066a75e813b450ec69c9bbb3f0355a08927158be01",
+ "helper": "tools/rpg-2-star-ocean-the-second_mvp_portable-playtest-build_v01_20261022-202347-7fea20f0.py",
+ "helperSha256": "a03a1f467643822a71a1bca52df4283df486e5e3977215c3c333df9f487ae479",
+ "state": "implemented + py_compile + offline unit checks (isolated_preset CRLF delta, baseline notice manifest verify); NOT run, no Godot export performed",
+ "runCommand": "<python> -X utf8 tools/<tool> --template-dir <primary>/work/tooling/godot-4-7-2/windows-templates-4.7.2.stable [--template-tpz <tpz>|none] [--console-wrapper]",
+ "outputs": {
+  "report": "outputs/native56/producer/rpg-2-star-ocean-the-second_native56_build-report_v01_<tag>.json",
+  "manifest": "outputs/native56/producer/rpg-2-star-ocean-the-second_mvp_native-playtest-manifest_unsigned_<tag>.json",
+  "logs": "outputs/native56/producer/rpg-2-star-ocean-the-second_native56_<step>-log_v01_<tag>.log",
+  "delivery": "<primary>/work/n56-<id8>/Worlds Between playtest <id8>/",
+  "zip": "<primary>/work/n56-<id8>/rpg-2-star-ocean-the-second_mvp_native-playtest-bundle_unsigned_<tag>.zip"
+ },
+ "limitations": [
+  "export-release expects RAW_INPUT_EXPORT_FILE_COUNTS marker from the raw-png export addon (as play54 export-pack); unverified for release export",
+  "preset keys application/modify_resources, codesign/enable, debug/export_console_wrapper assumed per Godot 4.x Windows exporter; not verified against 4.7.2",
+  "startup, save and double-click behaviour not tested; coordinator must test independently",
+  "notices reused from play54 bundle 20261022-203718-2fd4b10c (engine dump), no game-specific third-party notice file added"
+ ]
+}

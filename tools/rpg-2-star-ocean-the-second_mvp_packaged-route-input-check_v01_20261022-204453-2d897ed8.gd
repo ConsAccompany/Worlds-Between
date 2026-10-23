@@ -140,7 +140,7 @@ func _run() -> void:
 	ck(not OS.get_cmdline_args().has("--path"), "no --path game (packaged run)")
 	change_scene_to_file(MENU)
 	ck(await scene_is(MENU), "main menu entered")
-	if phase == "reload":
+	if phase in ["reload", "native-reload"]:
 		await reload_phase()
 		return
 	var menu := current_scene
@@ -188,6 +188,9 @@ func _run() -> void:
 	ck(await scene_is(area_path, 300), "NYC area entered", area_path)
 	await wait(20)
 	shot("05-nyc-entry")
+	if phase == "native-smoke":
+		await native_smoke_save()
+		return
 	checkpoint("nyc-entry")
 	# Read-only geometry inventory for the next phase (Liang + clue sites); no movement is claimed here.
 	var area := current_scene
@@ -339,7 +342,7 @@ func write_report() -> void:
 func _finish() -> void:
 	write_report()
 	var okay := failures.is_empty() and checks.all(func(c): return c["passed"])
-	if okay and phase == "reload" and restart_ready:
+	if okay and phase in ["reload", "native-reload"] and restart_ready:
 		print("ROUTE55_ALL_PASS")
 	quit(0 if okay else 1)
 
@@ -418,6 +421,42 @@ func finish_journey() -> void:
 	await click(current_scene.quit_button)
 	await wait(20)
 	push_error("ordinary Quit button did not end process")
+
+
+# Native-release packaging smoke: no quest or battle repeat; reuse actual menu/map
+# input above and existing persistence comparison below in a second process.
+func native_smoke_save() -> void:
+	var area := current_scene
+	var initial_position: Vector2 = area.hero.position
+	key(KEY_D, true)
+	await wait(10)
+	key(KEY_D, false)
+	await wait(3)
+	var saved_position: Vector2 = area.hero.position
+	ck(saved_position.distance_to(initial_position) > 5.0, "native executable actual movement")
+	shot("native-moved-before-save")
+	await click(area.save_button)
+	ck(await scene_is("res://scenes/save_screen.tscn"), "native area Save opened UI")
+	await click(current_scene.manual_save_buttons[0])
+	await wait(4)
+	var entry := manual_one()
+	ck(not entry.is_empty() and not entry.snapshot.demoCompleted, "native manual save ordinary incomplete run")
+	ck(Vector2(float(entry.snapshot.position[0]), float(entry.snapshot.position[1])).distance_to(saved_position) < 0.01, "native save recorded moved position")
+	write_json(expected_path, {"entry": entry, "processId": OS.get_process_id(), "state": state_oracle(), "savedPosition": [saved_position.x, saved_position.y]})
+	shot("native-ui-manual-save")
+	checkpoint("native-ui-save")
+	restart_ready = true
+	await click(current_scene.back_button)
+	await scene_is("res://scenes/scifi_exploration_area.tscn")
+	await tap(KEY_ESCAPE)
+	await scene_is("res://scenes/scifi_world_map.tscn")
+	await click(current_scene.back_button)
+	await scene_is(MENU)
+	write_report()
+	print("ROUTE55_SAVED_FOR_RESTART")
+	await click(current_scene.quit_button)
+	await wait(20)
+	push_error("native ordinary Quit button did not end process")
 
 
 func enter_survey(at: Vector2) -> void:
@@ -540,8 +579,19 @@ func reload_phase() -> void:
 	for pair in [["calendarMinutes", "calendar_minutes"], ["calendarWeekIndex", "calendar_week_index"], ["locationId", "current_location_id"], ["discovered", "discovered_locations"], ["lastTravel", "last_travel"]]:
 		ck(app.get(pair[1]) == snap.travel[pair[0]], "restarted travel exact " + pair[0])
 	var expected_foot := Vector2(float(snap.position[0]), float(snap.position[1]))
-	ck(current_scene.hero.position.distance_to(expected_foot) < 0.01, "restarted physical area position exact", [current_scene.hero.position, expected_foot])
-	ck(app.can_submit_report() and app.demo_completed, "report and all journey prerequisites survive UI load")
+	if phase == "native-reload":
+		# Existing CityHallPark v06 safe_position() intentionally rounds restored
+		# valid feet to the nearest logical pixel. Save JSON above remains exact.
+		# Assert the exact specified integer destination; never round actual state.
+		var restored_target := expected_foot.round()
+		ck(current_scene.hero.position.distance_to(restored_target) < 0.01, "native restored foot exact existing nearest-pixel contract", {"actual": current_scene.hero.position, "rawSaved": expected_foot, "expected": restored_target})
+		ck(not same_value([restored_target.x, restored_target.y], [restored_target.x + 1, restored_target.y]), "one-pixel wrong destination rejected")
+	else:
+		ck(current_scene.hero.position.distance_to(expected_foot) < 0.01, "restarted physical area position exact", [current_scene.hero.position, expected_foot])
+	if phase == "reload":
+		ck(app.can_submit_report() and app.demo_completed, "report and all journey prerequisites survive UI load")
+	else:
+		ck(not app.demo_completed and app.recruited_members.is_empty(), "native smoke did not seed completed report or recruits")
 	ck(app.play_time_seconds >= float(snap.playTimeSeconds) and app.play_time_seconds - float(snap.playTimeSeconds) < 2.0, "play time restored with bounded subsequent frames")
 	shot("restarted-ui-load-verified")
 	checkpoint("relaunch-ui-load-verify")

@@ -1,0 +1,83 @@
+{
+  "selfTest": true,
+  "cases": 11,
+  "results": [
+    {
+      "case": "native-valid",
+      "expectedPassed": true,
+      "actualPassed": true,
+      "expectedFailureFragment": null,
+      "ok": true
+    },
+    {
+      "case": "changed-pck-bytes",
+      "expectedPassed": false,
+      "actualPassed": false,
+      "expectedFailureFragment": "member-sha256-game.pck",
+      "ok": true
+    },
+    {
+      "case": "changed-pck-size",
+      "expectedPassed": false,
+      "actualPassed": false,
+      "expectedFailureFragment": "member-size-game.pck",
+      "ok": true
+    },
+    {
+      "case": "manifest-hash-lie",
+      "expectedPassed": false,
+      "actualPassed": false,
+      "expectedFailureFragment": "member-sha256-game.pck",
+      "ok": true
+    },
+    {
+      "case": "missing-pck",
+      "expectedPassed": false,
+      "actualPassed": false,
+      "expectedFailureFragment": "file-present-game.pck",
+      "ok": true
+    },
+    {
+      "case": "missing-launcher",
+      "expectedPassed": false,
+      "actualPassed": false,
+      "expectedFailureFragment": "file-present-run.cmd",
+      "ok": true
+    },
+    {
+      "case": "wrong-pck-reference",
+      "expectedPassed": false,
+      "actualPassed": false,
+      "expectedFailureFragment": "launcher-pck-reference",
+      "ok": true
+    },
+    {
+      "case": "path-traversal-key",
+      "expectedPassed": false,
+      "actualPassed": false,
+      "expectedFailureFragment": "manifest-safe-basename",
+      "ok": true
+    },
+    {
+      "case": "editor-runtime-native",
+      "expectedPassed": false,
+      "actualPassed": false,
+      "expectedFailureFragment": "no-editor-runtime-for-native",
+      "ok": true
+    },
+    {
+      "case": "unsigned-not-declared",
+      "expectedPassed": false,
+      "actualPassed": false,
+      "expectedFailureFragment": "unsigned-status-declared",
+      "ok": true
+    },
+    {
+      "case": "signed-without-cert",
+      "expectedPassed": false,
+      "actualPassed": false,
+      "expectedFailureFragment": "declared-signature-matches-header",
+      "ok": true
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+Worlds Between — Windows 原生 MVP 快速上手（草案） / Windows native MVP quickstart (DRAFT)
+
+[草案状态 / DRAFT STATUS]
+本文件是静态支持草案，不是已构建或已启动的原生包验收记录。原生包的可执行文件名、清单和 PCK 名称以最终交付目录为准；本任务没有运行游戏、没有做 UI 或真人试玩。 / This is a static support draft, not evidence that a native bundle was built or launched. The executable, manifest and PCK names must be taken from the final delivery; this task did not run the game, UI or a human playtest.
+游戏源提交 / Game source commit: d5f204373c17c62e45e92dea14c3a2e85c525062
+引擎参考 / Engine reference: Godot 4.7.2-stable, https://godotengine.org/download/archive/4.7.2-stable/
+
+[启动 / Launch]
+1. 将整个 ZIP 解压到一个普通文件夹；不要在压缩包内直接运行。保持 .exe、.pck、清单和许可/notice 文件在同一目录。 / Extract the whole ZIP to an ordinary folder. Do not run inside the archive. Keep the .exe, .pck, manifest and license/notice files together.
+2. 双击游戏的 Windows 主程序（文件名以 _mvp_native.exe 结尾，具体名称以清单 entrypoint 为准），或双击随包提供的 normal 启动脚本。 / Double-click the Windows game executable (name ends with _mvp_native.exe; use the manifest entrypoint as the authority), or the supplied normal launcher.
+3. 不需要安装 Godot 编辑器。不要双击 Godot 编辑器程序，也不要单独打开 .pck。 / No Godot editor installation is required. Do not launch a Godot editor binary, and do not open the .pck by itself.
+4. 这是未签名的 MVP 包，尚未购买或配置代码签名证书。Windows SmartScreen 可能提示未知发布者；只有在文件 SHA-256 与清单一致时才选择“更多信息 → 仍要运行”。签名证书不是可玩 MVP 的前置条件。 / This is an unsigned MVP; no code-signing certificate was purchased or configured. Windows SmartScreen may warn about an unknown publisher. Only choose More info → Run anyway when the file SHA-256 matches the manifest. A signing certificate is not a prerequisite for the playable MVP.
+
+[怎么玩 / Play]
+探索 / Explore: WASD 移动，E 调查/交谈，Esc 返回地图。 / WASD move, E investigate/talk, Esc return to the map.
+战斗 / Battle: A/D 移动；J 攻击；K 闪避；按住 L 防御；Q 个人技能；R 职业技能；Tab 切换操纵角色；P 暂停下指令；T 切换全自动。 / A/D move; J attack; K dodge; hold L to guard; Q personal skill; R job skill; Tab switch character; P pause for commands; T toggle full auto.
+设置中可切换方向键移动。 / Settings can switch movement to the arrow keys.
+按当前调查目标推进纽约、扬克斯和华盛顿的调查，再返回纽约汇报。 / Follow the current objectives through NYC, Yonkers and Washington, then return to NYC to report.
+同伴梁序、赵铃、纪澄可招募并参与战斗；探索时没有持久跟随队伍。 / Liang Xu, Zhao Ling and Ji Cheng can be recruited and fight with you; there are no persistent exploration followers.
+
+[存档 / Saves]
+地图及管理界面提供存档入口；主菜单“读取”可继续。不要覆盖想保留的旧存档槽。 / Use the Save entry in the map/management screens; use Load on the main menu to resume. Avoid overwriting save slots you want to keep.
+默认存档位于 %APPDATA%\Godot\app_userdata\Worlds Between 下，关闭游戏后仍保留。 / Saves default under %APPDATA%\Godot\app_userdata\Worlds Between and persist after the game closes.
+
+[完整性检查 / Integrity]
+随包清单应列出每个成员的字节数和 SHA-256，并声明 sourceCommit、原生模板来源（官方 Godot 4.7.2-stable、版本、哈希）以及签名状态。 / The shipped manifest should list bytes and SHA-256 for every member, plus sourceCommit, native template provenance (official Godot 4.7.2-stable, version, hash) and signing status.
+可运行静态检查器核对清单、PE64/AMD64 头、PCK 名称、危险附加文件、私密认证/配置文件、符号链接/路径逃逸和签名声明；它不启动游戏。 / The static checker can verify the manifest, PE64/AMD64 headers, PCK name, dangerous extras, private auth/config files, symlinks/path escapes and the signing declaration; it does not launch the game.
+如果清单或任一成员哈希不匹配，停止并重新获取完整包，不要继续运行。 / If the manifest or any member hash does not match, stop and obtain a complete copy; do not run it.
+许可与第三方 notice 文件是发行包的一部分，请保留，不要当作私密配置删除。 / License and third-party notice files are part of the package; keep them and do not delete them as private configuration.
+
+[遇到问题 / Troubleshooting]
+需要诊断时使用随包的 console-log 启动方式，保留控制台输出。 / For diagnostics, use the supplied console-log launch method and retain the console output.
+记录：语言、操作步骤、预期结果、实际结果、截图，以及 manifest 的 SHA-256。 / Record: language, steps, expected result, actual result, screenshot, and the manifest SHA-256.
+本包使用创作者已授权的 MVP 默认角色、场景和敌人显示；人物与场景精修后置。 / This package uses creator-authorized MVP default characters, environments and enemies; polish is deferred.
+这是未签名的 Windows 原生 MVP 草案，不声称最终美术验收、真人试玩通过或正式发行状态。 / This is an unsigned Windows native MVP draft; it does not claim final art approval, a completed human playthrough or release status.
