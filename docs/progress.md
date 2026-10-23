@@ -1,3 +1,10 @@
+## Latest verified production: Lin Que static directions (2026-10-23T02:58:33.843993+00:00)
+
+- Production **60.3% → 60.5% (+0.2 rounded pp)**; coding111/111 unchanged, content635→644/1881. Inspection21.6%→21.6%; creator approval7.8%→7.8%. Existing four static tasks only; no new point buckets.
+- Source `63ff4f7c7289faba34eb176383bc800713e259a4`: four separate80x112 editable native static source packages,48logicalpixels. Codex78/78 independent checks,8/8 exact Pixelorama exports,16 final bilingual native Godot source-fit captures. Existing native app diagnostics persist; GUI SaveAs/reopen and artistic acceptance unverified.
+- Project migrated to D:/UserData/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second; canonical Git link repaired without resetting dirty files. Ordinary game defaults and existing game files unchanged. This source-only batch does not refresh the packaged game build.
+- [Closeout](../docs/qa/rpg-2-star-ocean-the-second_lin-que_four-direction-static_codex-closeout_unapproved-v01_20261022-222500-3d61c74e.md). Next: Lin Que four-direction idle/walk/stop source production. Final sprites0/52,sceneart5/12,humanplays0/2,formalfalse remain unchanged. Earlier entries are historical.
+
 ## Current packed-audio output preflight (2026-10-23T01:41:54.201686+00:00)
 
 - Default and opt-in themed city music +11 isolated cue outputs captured from the shipped PCK using a declared scene/audio fixture. Master100%->50% output ratios0.503272/0.500326; Master mute, final silence, nonzero cues and clipping checks pass (8 each mode),22 exact cue-asset bindings. Defaults/game bytes unchanged; existing Windows package is current.

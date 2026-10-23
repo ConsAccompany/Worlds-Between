@@ -2,7 +2,7 @@
   "id": "rpg-2-star-ocean-the-second_production-completion_v01",
   "schemaVersion": 2,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-23T01:40:29Z",
+  "updatedAt": "2026-10-23T02:57:17Z",
   "zh": "制作完成度任务台账：衡量已完成的工作量（编码 40% + 内容 60%）；检查／审查与创作者批准分开计量，均不改变制作分；免除的审查不算已执行的工作；运营任务列出负责方但不计百分比。",
   "en": "Production-completion task ledger: measures work done (coding 40% + content 60%); inspection/review and creator approval are separate meters and never change production credit; waived reviews are not performed work; operations tasks list owners but carry no percentage.",
   "brief": "docs/rpg-2-star-ocean-the-second_production-completion_bilingual-brief_v01_20261018-140533-3ea2a621.md",
@@ -1076,8 +1076,8 @@
     "production": {
       "zh": "制作完成度",
       "en": "Production completion",
-      "percent": 60.3,
-      "percentLabel": "60.3%",
+      "percent": 60.5,
+      "percentLabel": "60.5%",
       "formula": "round1(40 * codingDonePoints/codingTotalPoints + 60 * contentDonePoints/contentTotalPoints)",
       "coding": {
         "done": 111,
@@ -1088,12 +1088,12 @@
         "tasksDone": 23
       },
       "content": {
-        "done": 635,
+        "done": 644,
         "total": 1881,
-        "percent": 33.8,
+        "percent": 34.2,
         "weight": 60,
         "tasks": 715,
-        "tasksDone": 207
+        "tasksDone": 211
       }
     },
     "inspection": {
@@ -1158,11 +1158,11 @@
         "waivedPoints": 0
       },
       "content": {
-        "done": 635,
+        "done": 644,
         "total": 1881,
-        "percent": 33.8,
+        "percent": 34.2,
         "tasks": 715,
-        "tasksDone": 207,
+        "tasksDone": 211,
         "waivedTasks": 0,
         "waivedPoints": 0
       },
@@ -1217,11 +1217,11 @@
         "tasks": 708,
         "operationsTasks": 0,
         "points": 1874,
-        "pointsDone": 574,
+        "pointsDone": 583,
         "byStatus": {
-          "done": 148,
+          "done": 152,
           "blocked": 4,
-          "todo": 556
+          "todo": 552
         },
         "readyInQueue": 1,
         "revisionsBlockingApproval": 1
@@ -1248,7 +1248,7 @@
           "not_required": 4,
           "blocked": 1
         },
-        "readyInQueue": 8,
+        "readyInQueue": 9,
         "revisionsBlockingApproval": 3
       },
       "creator": {
@@ -1260,7 +1260,7 @@
           "done": 19,
           "todo": 220
         },
-        "readyInQueue": 74,
+        "readyInQueue": 75,
         "revisionsBlockingApproval": 0
       }
     },
@@ -1311,7 +1311,7 @@
       },
       "characters": {
         "content": {
-          "done": 214,
+          "done": 223,
           "total": 1460
         },
         "technical-inspection": {
@@ -1443,7 +1443,7 @@
     "queue": {
       "zh": "待处理（依赖已完成）",
       "en": "Ready (dependencies done)",
-      "count": 83,
+      "count": 85,
       "items": [
         {
           "id": "creator.char.protagonist-male.approve-portrait",
@@ -1523,7 +1523,21 @@
           "points": 1
         },
         {
+          "id": "review.char.lin-que.static-south",
+          "stage": "visual-review",
+          "owner": "codex",
+          "status": "todo",
+          "points": 1
+        },
+        {
           "id": "creator.char.lin-que.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.lin-que.approve-static-south",
           "stage": "creator-approval",
           "owner": "creator",
           "status": "todo",
@@ -2198,10 +2212,10 @@
     {"id":"creator.char.jiang-lan.accept-runtime-sprite","type":"creator-acceptance","title":{"zh":"蒋岚 · 验收运行时精灵","en":"Jiang Lan · accept runtime sprite"},"area":"characters","stage":"creator-approval","owner":"creator","status":"todo","points":1,"doneCriterion":{"zh":"approvalLedger 记有 acceptanceKind runtime-sprite 的验收条目","en":"approvalLedger records an acceptanceKind runtime-sprite item"},"dependsOn":["content.char.jiang-lan.runtime-integration"],"evidence":[],"subject":{"kind":"character-variant","id":"jiang-lan"},"target":"content.char.jiang-lan.runtime-integration"},
     {"id":"creator.char.jiang-lan.accept-display","type":"creator-acceptance","title":{"zh":"蒋岚 · 验收展示图","en":"Jiang Lan · accept display image"},"area":"characters","stage":"creator-approval","owner":"creator","status":"todo","points":1,"doneCriterion":{"zh":"清单 display 项被创作者勾选","en":"The creator checks the inventory display item"},"dependsOn":["content.char.jiang-lan.display"],"evidence":[],"subject":{"kind":"character-variant","id":"jiang-lan"},"target":"content.char.jiang-lan.display"},
     {"id":"content.char.lin-que.portrait","type":"concept-generation","title":{"zh":"林阙 · 人物设定图（图像生成）","en":"Lin Que · source portrait (image generation)"},"area":"characters","stage":"content","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"设定图文件已入库","en":"The source portrait file is committed"},"dependsOn":[],"evidence":["outputs/rpg-2-star-ocean-the-second_lin-que_character-sheet_v01_20261013-153556-88b92720.png"],"subject":{"kind":"character-variant","id":"lin-que"}},
-    {"id":"content.char.lin-que.static-south","type":"native-pixel","title":{"zh":"林阙 · 南向高密度静止帧","en":"Lin Que · south high-density static"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"南向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"south native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":[],"evidence":[],"subject":{"kind":"character-variant","id":"lin-que"}},
-    {"id":"content.char.lin-que.static-west","type":"native-pixel","title":{"zh":"林阙 · 西向高密度静止帧","en":"Lin Que · west high-density static"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"西向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"west native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":["content.char.lin-que.static-south"],"evidence":[],"subject":{"kind":"character-variant","id":"lin-que"}},
-    {"id":"content.char.lin-que.static-north","type":"native-pixel","title":{"zh":"林阙 · 北向高密度静止帧","en":"Lin Que · north high-density static"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"北向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"north native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":["content.char.lin-que.static-south"],"evidence":[],"subject":{"kind":"character-variant","id":"lin-que"}},
-    {"id":"content.char.lin-que.static-east","type":"native-pixel","title":{"zh":"林阙 · 东向高密度静止帧","en":"Lin Que · east high-density static"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"东向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"east native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":["content.char.lin-que.static-south"],"evidence":[],"subject":{"kind":"character-variant","id":"lin-que"}},
+    {"id":"content.char.lin-que.static-south","type":"native-pixel","title":{"zh":"林阙 · 南向高密度静止帧","en":"Lin Que · south high-density static"},"area":"characters","stage":"content","owner":"claude","status":"done","points":3,"doneCriterion":{"zh":"南向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"south native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":[],"evidence":["docs/qa/rpg-2-star-ocean-the-second_lin-que_four-direction-static_codex-closeout_unapproved-v01_20261022-222500-3d61c74e.md"],"subject":{"kind":"character-variant","id":"lin-que"},"statusAt":"2026-10-23T02:57:15Z","note":{"zh":"","en":"Native editable static source committed; independent source, native exact-export and source-fit checks passed. Art, animation and ordinary default use remain separate."}},
+    {"id":"content.char.lin-que.static-west","type":"native-pixel","title":{"zh":"林阙 · 西向高密度静止帧","en":"Lin Que · west high-density static"},"area":"characters","stage":"content","owner":"claude","status":"done","points":2,"doneCriterion":{"zh":"西向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"west native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":["content.char.lin-que.static-south"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_lin-que_four-direction-static_codex-closeout_unapproved-v01_20261022-222500-3d61c74e.md"],"subject":{"kind":"character-variant","id":"lin-que"},"statusAt":"2026-10-23T02:57:16Z","note":{"zh":"","en":"Native editable static source committed; independent source, native exact-export and source-fit checks passed. Art, animation and ordinary default use remain separate."}},
+    {"id":"content.char.lin-que.static-north","type":"native-pixel","title":{"zh":"林阙 · 北向高密度静止帧","en":"Lin Que · north high-density static"},"area":"characters","stage":"content","owner":"claude","status":"done","points":2,"doneCriterion":{"zh":"北向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"north native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":["content.char.lin-que.static-south"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_lin-que_four-direction-static_codex-closeout_unapproved-v01_20261022-222500-3d61c74e.md"],"subject":{"kind":"character-variant","id":"lin-que"},"statusAt":"2026-10-23T02:57:16Z","note":{"zh":"","en":"Native editable static source committed; independent source, native exact-export and source-fit checks passed. Art, animation and ordinary default use remain separate."}},
+    {"id":"content.char.lin-que.static-east","type":"native-pixel","title":{"zh":"林阙 · 东向高密度静止帧","en":"Lin Que · east high-density static"},"area":"characters","stage":"content","owner":"claude","status":"done","points":2,"doneCriterion":{"zh":"东向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"east native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":["content.char.lin-que.static-south"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_lin-que_four-direction-static_codex-closeout_unapproved-v01_20261022-222500-3d61c74e.md"],"subject":{"kind":"character-variant","id":"lin-que"},"statusAt":"2026-10-23T02:57:17Z","note":{"zh":"","en":"Native editable static source committed; independent source, native exact-export and source-fit checks passed. Art, animation and ordinary default use remain separate."}},
     {"id":"content.char.lin-que.idle-anim","type":"native-pixel","title":{"zh":"林阙 · 四方向待机动画","en":"Lin Que · four-direction idle animation"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"四个方向的待机循环已提交并有 QA","en":"Idle loops for all four directions committed with QA"},"dependsOn":["content.char.lin-que.static-south","content.char.lin-que.static-west","content.char.lin-que.static-north","content.char.lin-que.static-east"],"evidence":[],"subject":{"kind":"character-variant","id":"lin-que"}},
     {"id":"content.char.lin-que.walk-south","type":"native-pixel","title":{"zh":"林阙 · 南向行走／跑动","en":"Lin Que · south walk/run"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"南向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"south walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.lin-que.static-south"],"evidence":[],"subject":{"kind":"character-variant","id":"lin-que"}},
     {"id":"content.char.lin-que.walk-west","type":"native-pixel","title":{"zh":"林阙 · 西向行走／跑动","en":"Lin Que · west walk/run"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"西向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"west walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.lin-que.static-west"],"evidence":[],"subject":{"kind":"character-variant","id":"lin-que"}},

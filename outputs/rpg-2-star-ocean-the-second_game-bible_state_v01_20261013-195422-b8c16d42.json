@@ -4,7 +4,7 @@
   "title": "世界之间",
   "englishTitle": "Worlds Between",
   "edition": "设计基线 v0.2 · 2026-10-15 创作者决定",
-  "updatedAt": "2026-10-23T01:41:54.391Z",
+  "updatedAt": "2026-10-23T02:58:33.843993+00:00",
   "note": "规则以玩家确认的设计稿为基线，并已并入 2026-10-15 创作者决定；人物姓名与外观是待审提案，具体剧情留待后续设计。",
   "pitch": "从地下社区走出的旅人，以好奇心探索多元文明，招募伙伴，并成为不同世界认知差异的桥梁。",
   "pillars": [
@@ -8414,19 +8414,19 @@
     "combinedWiringCheck": "297/297 on39f252e, clean raw log; actual Chinese victory inspected."
   },
   "latestTaskProgress": {
-    "id": "review.content.audio",
+    "id": "lin58-four-direction-source",
     "status": "completed",
     "title": {
-      "en": "Audio output technical preflight; listening criterion pending",
-      "zh": "音频输出技术检查；听感门未完成"
+      "zh": "林阙缺失的四方向探索源文件",
+      "en": "Lin Que missing four-direction exploration source package"
     },
-    "startedAt": "2026-10-23T01:26:57.544Z",
-    "sourceBefore": "f1d2faca0a353cc2d916351eaac69ee8897850bc",
+    "startedAt": "2026-10-23T02:08:18.116Z",
+    "sourceBefore": "0d44b398648abbbcfb3483dd4df4a7966511f7ea",
     "meters": {
       "production": {
         "before": 60.3,
-        "after": 60.3,
-        "changePercentagePoints": 0
+        "after": 60.5,
+        "changePercentagePoints": 0.2
       },
       "inspection": {
         "before": 21.6,
@@ -8439,14 +8439,19 @@
         "changePercentagePoints": 0
       }
     },
-    "completedAt": "2026-10-23T01:41:54.391Z",
-    "sourceAfter": "f7aeb7a1991d5969905300e3b260e4cf65bc4e7f",
+    "completedAt": "2026-10-23T02:57:56.823Z",
+    "sourceAfter": "63ff4f7c7289faba34eb176383bc800713e259a4",
     "evidence": [
-      "docs/qa/rpg-2-star-ocean-the-second_mvp-audio_real-output-preflight_codex-verdict-v01_20261022-212657-710850bf.md"
+      "docs/qa/rpg-2-star-ocean-the-second_lin-que_four-direction-static_codex-closeout_unapproved-v01_20261022-222500-3d61c74e.md"
     ],
-    "completedScope": "technical output preflight only",
-    "ledgerTaskStatus": "blocked",
-    "ledgerTaskCompleted": false
+    "completedScope": "four static directions only; idle/walk/stop/runtime integration unfinished",
+    "completedProductionTaskIds": [
+      "content.char.lin-que.static-south",
+      "content.char.lin-que.static-west",
+      "content.char.lin-que.static-north",
+      "content.char.lin-que.static-east"
+    ],
+    "ledgerTasksCompleted": true
   },
   "progressReporting": {
     "requiredFormat": "before → after (change in percentage points)",
@@ -10220,6 +10225,41 @@
       "evidence": [
         "docs/qa/rpg-2-star-ocean-the-second_mvp_native-windows-playtest_codex-closeout-v01_20261022-210709-4d8577b8.md"
       ]
+    },
+    {
+      "id": "review.content.audio",
+      "status": "completed",
+      "title": {
+        "en": "Audio output technical preflight; listening criterion pending",
+        "zh": "音频输出技术检查；听感门未完成"
+      },
+      "startedAt": "2026-10-23T01:26:57.544Z",
+      "sourceBefore": "f1d2faca0a353cc2d916351eaac69ee8897850bc",
+      "meters": {
+        "production": {
+          "before": 60.3,
+          "after": 60.3,
+          "changePercentagePoints": 0
+        },
+        "inspection": {
+          "before": 21.6,
+          "after": 21.6,
+          "changePercentagePoints": 0
+        },
+        "approval": {
+          "before": 7.8,
+          "after": 7.8,
+          "changePercentagePoints": 0
+        }
+      },
+      "completedAt": "2026-10-23T01:41:54.391Z",
+      "sourceAfter": "f7aeb7a1991d5969905300e3b260e4cf65bc4e7f",
+      "evidence": [
+        "docs/qa/rpg-2-star-ocean-the-second_mvp-audio_real-output-preflight_codex-verdict-v01_20261022-212657-710850bf.md"
+      ],
+      "completedScope": "technical output preflight only",
+      "ledgerTaskStatus": "blocked",
+      "ledgerTaskCompleted": false
     }
   ],
   "latestBattleEnvironmentProduction": {
@@ -12234,5 +12274,30 @@
     },
     "defaultFlagsChanged": false,
     "existingWindowsBundleStillCurrent": true
+  },
+  "latestLinQueNativeStaticProduction": {
+    "id": "lin58-four-direction-source",
+    "status": "completed",
+    "scope": "four static directions only; idle/walk/stop/runtime integration unfinished",
+    "sourceCommit": "63ff4f7c7289faba34eb176383bc800713e259a4",
+    "at": "2026-10-23T02:58:33.843993+00:00",
+    "taskIds": [
+      "content.char.lin-que.static-south",
+      "content.char.lin-que.static-west",
+      "content.char.lin-que.static-north",
+      "content.char.lin-que.static-east"
+    ],
+    "owner": "claude",
+    "integrationOwner": "codex",
+    "evidence": [
+      "docs/qa/rpg-2-star-ocean-the-second_lin-que_four-direction-static_codex-closeout_unapproved-v01_20261022-222500-3d61c74e.md"
+    ],
+    "production": {
+      "before": 60.3,
+      "after": 60.5,
+      "changePercentagePoints": 0.2
+    },
+    "artApproval": "unapproved",
+    "ordinaryDefaultsChanged": false
   }
 }
