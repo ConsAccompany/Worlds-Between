@@ -1,0 +1,196 @@
+{
+  "task": "content.char.lin-que.display",
+  "base": "92efd6bbfb200ca03407f0c4904a970a05520ea9",
+  "hashNormalization": "none; raw file bytes SHA-256",
+  "sourceHashes": {
+    "game/assets/portraits/ldisplay64/rpg-2-star-ocean-the-second_lin-que_display-portrait-crop_v01_20261023-214513-92b6d62b.png": "9f755bcb4fde08b149a8153ac8572fa72ca3d3112126648012246921d60d320f",
+    "game/assets/portraits/ldisplay64/rpg-2-star-ocean-the-second_lin-que_display-portrait-manifest_v01_20261023-214513-92b6d62b.json": "7f2eef8f754251624d1e61c187a048ba2d7f13704b5dd82a537fd32d53759623",
+    "game/scenes/ldisplay64/rpg-2-star-ocean-the-second_lin-que_display-preview_standalone-v01_20261023-214513-92b6d62b.tscn": "19645ba9f082d1c001a351d6c8f87864a800ad83ba38fbd5201e688ba0b5b61e",
+
+    "game/scripts/ldisplay64/rpg-2-star-ocean-the-second_lin-que_display-preview_standalone-v01_20261023-214513-92b6d62b.gd": "aff068b250cd7abfb7829df56510e13904f0363ce18d839d9d4cfd6eb6026752",
+    "tools/rpg-2-star-ocean-the-second_lin-que_display-crop-build_v01_20261023-214513-92b6d62b.py": "4bb1b0fd5926b89eaa7f50f701c581b967f9ced95ddff2eb71c888ccaacfcdd0",
+    "tools/rpg-2-star-ocean-the-second_lin-que_display-preview-probe_v01_20261023-214513-92b6d62b.gd": "a115f794b1b7a1716e4e505ad054e03af74dfef496a4a0e314cc1ee6d8c408ff",
+    "tools/rpg-2-star-ocean-the-second_lin-que_display-malformed-check_v01_20261023-214513-92b6d62b.py": "901262f5a8f487c906d26f22e4ccd02676e743c2d9b4df0b759095fa00a6be7f",
+    "tools/rpg-2-star-ocean-the-second_lin-que_display-contract-check_v01_20261023-214513-92b6d62b.py": "e019b03a82ebac3f4b38f9dbeea596bbcee4f16f7a5ea197953824f0b98be2e7"
+  },
+  "checks": [
+    {
+      "name": "crop-check",
+      "command": [
+        "/home/kel/projects/worlds-between/tooling/venv/bin/python",
+        "-I",
+        "tools/rpg-2-star-ocean-the-second_lin-que_display-crop-build_v01_20261023-214513-92b6d62b.py",
+        "check"
+      ],
+      "exit": 0,
+      "pass": true
+    },
+    {
+      "name": "contract",
+      "command": [
+        "/home/kel/projects/worlds-between/tooling/venv/bin/python",
+        "-I",
+        "tools/rpg-2-star-ocean-the-second_lin-que_display-contract-check_v01_20261023-214513-92b6d62b.py",
+        "--root",
+        ".",
+        "--manifest",
+        "game/assets/portraits/ldisplay64/rpg-2-star-ocean-the-second_lin-que_display-portrait-manifest_v01_20261023-214513-92b6d62b.json",
+        "--out",
+        "/home/kel/projects/worlds-between/repo/outputs/ldisplay64/hermes6/contract"
+      ],
+      "exit": 0,
+      "pass": true
+    },
+    {
+      "name": "malformed",
+      "command": [
+        "/home/kel/projects/worlds-between/tooling/venv/bin/python",
+        "-I",
+        "tools/rpg-2-star-ocean-the-second_lin-que_display-malformed-check_v01_20261023-214513-92b6d62b.py",
+        "--out",
+        "/home/kel/projects/worlds-between/repo/outputs/ldisplay64/hermes6/malformed"
+      ],
+      "exit": 0,
+      "pass": true
+    },
+    {
+      "name": "import",
+      "command": [
+        "/home/kel/projects/worlds-between/tooling/venv/bin/python",
+        "/home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_godot_checked-runner_v01_20261018-203400-f74ac6d1.py",
+        "--timeout",
+        "180",
+        "--log",
+        "/home/kel/projects/worlds-between/repo/outputs/ldisplay64/hermes6/import.engine.log",
+        "--",
+        "/home/kel/projects/worlds-between/tooling/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "--headless",
+        "--audio-driver",
+        "Dummy",
+        "--path",
+        "game",
+        "--import"
+      ],
+      "exit": 0,
+      "pass": true
+    },
+    {
+      "name": "probe-en",
+      "command": [
+        "xvfb-run",
+        "-a",
+        "-s",
+        "-screen 0 640x360x24",
+        "/home/kel/projects/worlds-between/tooling/venv/bin/python",
+        "/home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_godot_checked-runner_v01_20261018-203400-f74ac6d1.py",
+        "--timeout",
+        "90",
+        "--expect",
+        "LDISPLAY64_PROBE_OK",
+        "--expect",
+        "CAPTURES true",
+        "--log",
+        "/home/kel/projects/worlds-between/repo/outputs/ldisplay64/hermes6/probe-en.engine.log",
+        "--",
+        "/home/kel/projects/worlds-between/tooling/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "--audio-driver",
+        "Dummy",
+        "--rendering-driver",
+        "opengl3",
+        "--resolution",
+        "640x360",
+        "--path",
+        "game",
+        "--script",
+        "/home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_lin-que_display-preview-probe_v01_20261023-214513-92b6d62b.gd",
+        "--",
+        "--lang=en",
+        "--out=/home/kel/projects/worlds-between/repo/outputs/ldisplay64/hermes6/cap-en"
+      ],
+      "exit": 0,
+      "pass": true
+    },
+    {
+      "name": "probe-zh",
+      "command": [
+        "xvfb-run",
+        "-a",
+        "-s",
+        "-screen 0 640x360x24",
+        "/home/kel/projects/worlds-between/tooling/venv/bin/python",
+        "/home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_godot_checked-runner_v01_20261018-203400-f74ac6d1.py",
+        "--timeout",
+        "90",
+        "--expect",
+        "LDISPLAY64_PROBE_OK",
+        "--expect",
+        "CAPTURES true",
+        "--log",
+        "/home/kel/projects/worlds-between/repo/outputs/ldisplay64/hermes6/probe-zh.engine.log",
+        "--",
+        "/home/kel/projects/worlds-between/tooling/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "--audio-driver",
+        "Dummy",
+        "--rendering-driver",
+        "opengl3",
+        "--resolution",
+        "640x360",
+        "--path",
+        "game",
+        "--script",
+        "/home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_lin-que_display-preview-probe_v01_20261023-214513-92b6d62b.gd",
+        "--",
+        "--lang=zh",
+        "--out=/home/kel/projects/worlds-between/repo/outputs/ldisplay64/hermes6/cap-zh"
+      ],
+      "exit": 0,
+      "pass": true
+    },
+    {
+      "name": "m1-smoke",
+      "command": [
+        "/home/kel/projects/worlds-between/tooling/venv/bin/python",
+        "/home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_godot_checked-runner_v01_20261018-203400-f74ac6d1.py",
+        "--timeout",
+        "60",
+        "--expect",
+        "M1_SMOKE_OK",
+        "--log",
+        "/home/kel/projects/worlds-between/repo/outputs/ldisplay64/hermes6/m1.engine.log",
+        "--",
+        "/home/kel/projects/worlds-between/tooling/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "--headless",
+        "--audio-driver",
+        "Dummy",
+        "--path",
+        "game",
+        "--script",
+        "res://tests/m1_smoke.gd"
+      ],
+      "exit": 0,
+      "pass": true
+    }
+  ],
+  "captures": {
+    "outputs/ldisplay64/hermes6/cap-en/rpg-2-star-ocean-the-second_lin-que_display-preview-capture_standalone-en-west-idle_20261023-214513-92b6d62b.png": "f60db37a39eb4eb7be7d94fc0648df47d313669ae72e9d50bdc51191a9778dc5",
+    "outputs/ldisplay64/hermes6/cap-en/rpg-2-star-ocean-the-second_lin-que_display-preview-capture_standalone-en-north-walk_20261023-214513-92b6d62b.png": "c36f0cfbc5099d74c31c75dabcb29cdb782a1c569083f19661d8908f48e20ffc",
+    "outputs/ldisplay64/hermes6/cap-en/rpg-2-star-ocean-the-second_lin-que_display-preview-capture_standalone-en-south-walk_20261023-214513-92b6d62b.png": "6260e3d0f05bafc4ffcdb6bb1c74e7bca18457330a50aa6d2db564490aac9f8a",
+    "outputs/ldisplay64/hermes6/cap-en/rpg-2-star-ocean-the-second_lin-que_display-preview-capture_standalone-en-east-walk_20261023-214513-92b6d62b.png": "08fdb8be4f7cb42f309f6e1f9535f63735546e3fd5f20f956bdbdb4bdca12d90",
+    "outputs/ldisplay64/hermes6/cap-en/rpg-2-star-ocean-the-second_lin-que_display-preview-capture_standalone-en-east-idle_20261023-214513-92b6d62b.png": "c4eed28b6b81e723cf67ab6eef7413ef76c3d6dff65c31b967abefccdb2c0a59",
+    "outputs/ldisplay64/hermes6/cap-en/rpg-2-star-ocean-the-second_lin-que_display-preview-capture_fallback-missing-portrait-en_20261023-214513-92b6d62b.png": "ba33fed5e062f52aa2b7c556a0f6d656ece48d36a532a5e77e56f42534ddea33",
+    "outputs/ldisplay64/hermes6/cap-en/rpg-2-star-ocean-the-second_lin-que_display-preview-capture_standalone-en-north-idle_20261023-214513-92b6d62b.png": "94ff9846fd0ee7e1276f9df567ee9ef51807c6970539b22826adc63016ac09d5",
+    "outputs/ldisplay64/hermes6/cap-en/rpg-2-star-ocean-the-second_lin-que_display-preview-capture_standalone-en-south-idle_20261023-214513-92b6d62b.png": "ec43a0014c4529b1a89effdf7789b0a1b93b0db205aca7e4a0e352da6c5a6675",
+    "outputs/ldisplay64/hermes6/cap-en/rpg-2-star-ocean-the-second_lin-que_display-preview-capture_standalone-en-west-walk_20261023-214513-92b6d62b.png": "0f7bd5eda3c9302181f7c5bfa5b6ba1af8df75033f1e8294031cd3a2c4683f59",
+    "outputs/ldisplay64/hermes6/cap-zh/rpg-2-star-ocean-the-second_lin-que_display-preview-capture_standalone-zh-east-walk_20261023-214513-92b6d62b.png": "0bcea88749253d3eb54d5c5be5213292715c8b6dc19a95a68f7308c682e21fdb",
+    "outputs/ldisplay64/hermes6/cap-zh/rpg-2-star-ocean-the-second_lin-que_display-preview-capture_standalone-zh-south-idle_20261023-214513-92b6d62b.png": "19d19f957d5a70f24464b45140fa60cc710e67b7aeaad78ff02c68f3817c598f",
+    "outputs/ldisplay64/hermes6/cap-zh/rpg-2-star-ocean-the-second_lin-que_display-preview-capture_standalone-zh-north-idle_20261023-214513-92b6d62b.png": "2843725272aff885ff74ca1265cc729312502c34d846bb7e581548efb8e6a6fe",
+    "outputs/ldisplay64/hermes6/cap-zh/rpg-2-star-ocean-the-second_lin-que_display-preview-capture_fallback-missing-portrait-zh_20261023-214513-92b6d62b.png": "4cacfd3a876d02de70d48e1999b56ecfc4f803e8f5f9e447811a38733e9a2f5d",
+    "outputs/ldisplay64/hermes6/cap-zh/rpg-2-star-ocean-the-second_lin-que_display-preview-capture_standalone-zh-east-idle_20261023-214513-92b6d62b.png": "88c591c148976868dfa564fe2a545d2f0f699dd317810b73107a7e681a240cd7",
+    "outputs/ldisplay64/hermes6/cap-zh/rpg-2-star-ocean-the-second_lin-que_display-preview-capture_standalone-zh-south-walk_20261023-214513-92b6d62b.png": "9c86ea1cb7caf0a0a44f9cb28f2bbb07807af8cbcacbdc8cf9ca5200f28b5170",
+    "outputs/ldisplay64/hermes6/cap-zh/rpg-2-star-ocean-the-second_lin-que_display-preview-capture_standalone-zh-west-walk_20261023-214513-92b6d62b.png": "dcd4bf6c863b41eb57291653f0cc0b1d42fd1547aff6065f1bc2b2f0a6f6d3ff",
+    "outputs/ldisplay64/hermes6/cap-zh/rpg-2-star-ocean-the-second_lin-que_display-preview-capture_standalone-zh-north-walk_20261023-214513-92b6d62b.png": "8fbb2b89911a3b0ee6cb246522419a50cbf5f6418f5c79ec024269f5911ab12d",
+    "outputs/ldisplay64/hermes6/cap-zh/rpg-2-star-ocean-the-second_lin-que_display-preview-capture_standalone-zh-west-idle_20261023-214513-92b6d62b.png": "d76903b4f0abd47c2d5b25e29c2c3b810ff29aae5edc2d0da91c269da2a2512b"
+  },
+  "approval": "unapproved",
+  "ordinaryDefaultsChanged": false
+}

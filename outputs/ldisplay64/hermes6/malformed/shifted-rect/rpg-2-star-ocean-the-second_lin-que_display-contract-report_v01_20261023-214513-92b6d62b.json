@@ -1,0 +1,189 @@
+{
+  "schema": "lin-display-contract-check/v1",
+  "project": "rpg-2-star-ocean-the-second",
+  "subject": "lin-que",
+  "purpose": "display-contract-check",
+  "variant": "v01",
+  "run": {
+    "timestamp_utc": "2026-10-23T21:51:55.328056+00:00",
+    "unique_id": "20261023-214513-92b6d62b"
+  },
+  "expected": {
+    "actor_id": "lin-que",
+    "source_sha256": "24007e147c9dd67b330af4a84ac13054f65989cddb9bdf2702dc5c80de7fb352",
+    "source_dimensions": [
+      1916,
+      821
+    ],
+    "source_rect": [
+      16,
+      0,
+      592,
+      800
+    ],
+    "output_dimensions": [
+      576,
+      800
+    ],
+    "resample": false
+  },
+  "scope": "independent exact-crop/manifest contract only; no motion, default-use, runtime, or art-approval claims; source and producer files are read-only",
+  "manifest_path": "/home/kel/projects/worlds-between/repo/outputs/ldisplay64/hermes6/malformed/rpg-2-star-ocean-the-second_lin-que_display-manifest-fixture_shifted-rect_20261023-214513-92b6d62b.json",
+  "manifest_sha256": "09b1e4cb98fee8cb7f73e9a2ce40ad36d2585183f63df42997e2bae9c6e94d14",
+  "status": "FAIL",
+  "exit_code": 1,
+  "checks": [
+    {
+      "id": "actor.present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "actor.lin-que",
+      "ok": true,
+      "detail": "[('subject', 'lin-que')]"
+    },
+    {
+      "id": "source.source-sha",
+      "ok": true,
+      "detail": "24007e147c9dd67b330af4a84ac13054f65989cddb9bdf2702dc5c80de7fb352"
+    },
+    {
+      "id": "source.source-size",
+      "ok": true,
+      "detail": "(1916, 821)"
+    },
+    {
+      "id": "source.actual-sha",
+      "ok": true,
+      "detail": "24007e147c9dd67b330af4a84ac13054f65989cddb9bdf2702dc5c80de7fb352"
+    },
+    {
+      "id": "source.actual-size",
+      "ok": true,
+      "detail": "(1916, 821)"
+    },
+    {
+      "id": "crop.declared",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "crop.consistent",
+      "ok": true,
+      "detail": "[('crop', (17, 0, 593, 800))]"
+    },
+    {
+      "id": "crop.rect",
+      "ok": false,
+      "detail": "(17, 0, 593, 800) != (16, 0, 592, 800)"
+    },
+    {
+      "id": "crop.size",
+      "ok": true,
+      "detail": "(576, 800)"
+    },
+    {
+      "id": "crop.bounds",
+      "ok": true,
+      "detail": "(17, 0, 593, 800) in (1916, 821)"
+    },
+    {
+      "id": "crop.resampled",
+      "ok": true,
+      "detail": "False"
+    },
+    {
+      "id": "crop.method",
+      "ok": true,
+      "detail": "exact-pixel-rectangle-slice"
+    },
+    {
+      "id": "image.size",
+      "ok": true,
+      "detail": "(576, 800)"
+    },
+    {
+      "id": "output.image-sha",
+      "ok": true,
+      "detail": "9f755bcb4fde08b149a8153ac8572fa72ca3d3112126648012246921d60d320f"
+    },
+    {
+      "id": "output.image-size",
+      "ok": true,
+      "detail": "(576, 800)"
+    },
+    {
+      "id": "image.manifest-sha-present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "pixels.exact-crop",
+      "ok": false,
+      "detail": "460800 pixels"
+    },
+    {
+      "id": "source.path",
+      "ok": true,
+      "detail": "outputs/rpg-2-star-ocean-the-second_lin-que_character-sheet_v01_20261013-153556-88b92720.png"
+    },
+    {
+      "id": "source.unchanged",
+      "ok": true,
+      "detail": "before=24007e147c9dd67b330af4a84ac13054f65989cddb9bdf2702dc5c80de7fb352"
+    },
+    {
+      "id": "fixtures.source-unchanged",
+      "ok": true,
+      "detail": "after=24007e147c9dd67b330af4a84ac13054f65989cddb9bdf2702dc5c80de7fb352"
+    }
+  ],
+  "negativeFixtures": {
+    "wrong-hash": {
+      "id": "wrong-hash",
+      "refused": true,
+      "failedChecks": [
+        "crop.rect",
+        "output.image-sha",
+        "pixels.exact-crop"
+      ]
+    },
+    "wrong-actor": {
+      "id": "wrong-actor",
+      "refused": true,
+      "failedChecks": [
+        "actor.lin-que",
+        "crop.rect",
+        "pixels.exact-crop"
+      ]
+    },
+    "out-of-bounds-crop": {
+      "id": "out-of-bounds-crop",
+      "refused": true,
+      "failedChecks": [
+        "crop.rect",
+        "crop.size",
+        "crop.bounds",
+        "pixels.exact-crop"
+      ]
+    }
+  },
+  "source": {
+    "path": "outputs/rpg-2-star-ocean-the-second_lin-que_character-sheet_v01_20261013-153556-88b92720.png",
+    "sha256": "24007e147c9dd67b330af4a84ac13054f65989cddb9bdf2702dc5c80de7fb352",
+    "dimensions": [
+      1916,
+      821
+    ]
+  },
+  "image": {
+    "path": "game/assets/portraits/ldisplay64/rpg-2-star-ocean-the-second_lin-que_display-portrait-crop_v01_20261023-214513-92b6d62b.png",
+    "sha256": "9f755bcb4fde08b149a8153ac8572fa72ca3d3112126648012246921d60d320f",
+    "dimensions": [
+      576,
+      800
+    ]
+  },
+  "reason": "contract check failed"
+}

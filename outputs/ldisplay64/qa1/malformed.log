@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_lin-que_display-malformed-check_v01_20261023-214513-92b6d62b.py", line 105, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_lin-que_display-malformed-check_v01_20261023-214513-92b6d62b.py", line 51, in main
+    rep = json.loads((out / "real" / f"{P}_lin-que_display-contract-report_v01_{RUN}.json").read_text(encoding="utf-8"))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1029, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/home/kel/projects/worlds-between/repo/outputs/ldisplay64/qa1/malformed/real/rpg-2-star-ocean-the-second_lin-que_display-contract-report_v01_20261023-214513-92b6d62b.json'
