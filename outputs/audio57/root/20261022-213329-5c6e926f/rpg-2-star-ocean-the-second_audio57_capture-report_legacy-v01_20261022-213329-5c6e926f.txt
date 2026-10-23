@@ -1,0 +1,46 @@
+tool=rpg-2-star-ocean-the-second_audio_real-mix-capture_test-only-v01_20261022-212657-710850bf
+status=FAIL
+source_head_declared=f1d2faca0a353cc2d916351eaac69ee8897850bc
+source_head_verified_by_harness=false
+scope=technical QA support only; not artistic approval; no listening claim
+fixture=AppState.begin_new_run + actual city scene + GameSettings.set_master_volume(...,false) + game_audio_cues.play_cue direct dispatch
+scene_path=res://scenes/scifi_exploration_area.tscn
+scene_kind=normal city exploration scene
+game_defaults_modified=false
+settings_written=false
+save_written=false
+audio_cues_enabled_override_fixture=1
+music_selector_override_fixture=-1
+themed_music_pilot_arg=false
+audio_cues_pilot_arg=false
+hash_normalization=none (no source/asset bytes hashed by this harness)
+expected_cue_count=11
+schedule_fixed_fps=60
+schedule_a_music100_frames=120
+schedule_b_music50_restart0_frames=120
+schedule_c_master0_frames=60
+schedule_cue_gap_frames=27
+schedule_final_silence_frames=60
+schedule_expected_total_frames=657
+schedule_expected_total_seconds=10.95
+fatal=audio driver is Dummy; a dummy driver cannot provide the required real Master output
+engine_version=4.7.2-stable (official)
+display_driver=Windows
+audio_driver=Dummy
+mix_rate=48000
+master_bus_index=0
+master_bus_effects=[]
+master_capture_effect_count=0
+movie_path=C:\Users\hkzha\Documents\Codex\2026-10-12\rpg-2-star-ocean-the-second\work\a57-5c6e926f\rpg-2-star-ocean-the-second_audio57_actual-master_legacy-v01_20261022-213329-5c6e926f.avi
+movie_extension=avi
+movie_writer_active=true
+capture_method=Godot Movie Maker AVI postmix Master capture; no AudioEffectCapture tap
+restored_master_volume=100
+restored_cue_override=-1
+music_stopped_at_exit=true
+report_path=C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/outputs/audio57/root/20261022-213329-5c6e926f/rpg-2-star-ocean-the-second_audio57_capture-report_legacy-v01_20261022-213329-5c6e926f.txt
+final_marker=AUDIO57_CAPTURE_FAIL
+phase_events:
+cue_events:
+limitations=Movie Maker AVI is the audio evidence; this harness records postmix capture metadata, frame boundaries, stream paths/gains and direct cue dispatch only. It does not listen to, inspect or judge the captured audio and does not establish ordinary-input gameplay, artistic approval or content acceptance.
+AUDIO57_CAPTURE_FAIL

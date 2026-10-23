@@ -1,0 +1,89 @@
+tool=rpg-2-star-ocean-the-second_audio_real-mix-capture_test-only-v01_20261022-212657-710850bf
+status=READY
+source_head_declared=f1d2faca0a353cc2d916351eaac69ee8897850bc
+source_head_verified_by_harness=false
+scope=technical QA support only; not artistic approval; no listening claim
+fixture=AppState.begin_new_run + actual city scene + GameSettings.set_master_volume(...,false) + game_audio_cues.play_cue direct dispatch
+scene_path=res://scenes/scifi_exploration_area.tscn
+scene_kind=normal city exploration scene
+game_defaults_modified=false
+settings_written=false
+save_written=false
+audio_cues_enabled_override_fixture=1
+music_selector_override_fixture=-1
+themed_music_pilot_arg=true
+audio_cues_pilot_arg=false
+hash_normalization=none (no source/asset bytes hashed by this harness)
+expected_cue_count=11
+schedule_fixed_fps=60
+schedule_a_music100_frames=120
+schedule_b_music50_restart0_frames=120
+schedule_c_master0_frames=60
+schedule_cue_gap_frames=27
+schedule_final_silence_frames=60
+schedule_expected_total_frames=769
+schedule_expected_total_seconds=12.8166666666667
+fatal=
+engine_version=4.7.2-stable (official)
+display_driver=Windows
+audio_driver=Dummy
+offline_movie_mix_not_physical_audition=true
+mix_rate=48000
+master_bus_index=0
+master_bus_effects=[]
+master_capture_effect_count=0
+movie_path=C:\Users\hkzha\Documents\Codex\2026-10-12\rpg-2-star-ocean-the-second\work\a57-50466a99\rpg-2-star-ocean-the-second_audio57_actual-master_themed-v01_20261022-213747-50466a99.avi
+movie_extension=avi
+movie_writer_active=true
+capture_method=Godot Movie Maker AVI postmix Master capture; no AudioEffectCapture tap
+prior_master_volume=100
+prior_cue_override=-1
+fixture_master_volume_set=100
+fixture_cue_override_set=1
+music_player_count=2
+music_stream={"bus":"Master","class":"AudioStreamWAV","data_bytes":4850528,"gain_db":-11.0,"length_sec":50.526,"loop_mode":1,"mix_rate":24000,"playing":true,"position_sec":0.027,"resource_path":"(in-memory AudioStreamWAV; no resource path)","stereo":true}
+music_player_instance_id=186545866784
+music_player_bus=Master
+music_player_gain_db=-11.0
+music_player_stream_path=(in-memory AudioStreamWAV; no resource path)
+music_playing_at_schedule_start=true
+schedule_start_frame=1
+restart_same_player_instance_id=186545866784
+restart_same_player_after_instance_id=186545866784
+restart_from_position_sec=0.005
+music_stopped_before_cues=true
+cue_gap_rule=max(27frames, actual stream duration rounded up to frames +6frames); isolated cues
+final_frame=770
+elapsed_frames=769
+elapsed_seconds=12.817
+boundary_drift_max_frames=0
+boundary_drift_ok=true
+cue_events_accepted=11
+cue_voice_play_confirmed=11
+master_volume_at_final=100
+music_playing_at_final=false
+restored_master_volume=100
+restored_cue_override=-1
+music_stopped_at_exit=true
+report_path=C:/Users/hkzha/Documents/Codex/2026-10-12/rpg-2-star-ocean-the-second/work/max0840-sentry-sync/outputs/audio57/root/20261022-213747-50466a99/rpg-2-star-ocean-the-second_audio57_capture-report_themed-v01_20261022-213747-50466a99.txt
+final_marker=AUDIO57_CAPTURE_READY
+phase_events:
+  phase=A_music100 frame=1 target_offset_frames=0 actual_offset_frames=0 drift_frames=0 requested_master_volume=100 settings_master_volume=100 master_bus_mute=false master_bus_db=0.0 music_playing=true music_position_sec=0.005 music_stream_path=(in-memory AudioStreamWAV; no resource path) music_gain_db=-11.0
+  phase=B_music50_restart0 frame=121 target_offset_frames=120 actual_offset_frames=120 drift_frames=0 requested_master_volume=50 settings_master_volume=50 master_bus_mute=false master_bus_db=-6.021 music_playing=true music_position_sec=0.005 music_stream_path=(in-memory AudioStreamWAV; no resource path) music_gain_db=-11.0
+  phase=C_master0_music_playing frame=241 target_offset_frames=240 actual_offset_frames=240 drift_frames=0 requested_master_volume=0 settings_master_volume=0 master_bus_mute=true master_bus_db=-6.021 music_playing=true music_position_sec=2.0 music_stream_path=(in-memory AudioStreamWAV; no resource path) music_gain_db=-11.0
+  phase=D_master100_music_stopped_cues frame=301 target_offset_frames=300 actual_offset_frames=300 drift_frames=0 requested_master_volume=100 settings_master_volume=100 master_bus_mute=false master_bus_db=0.0 music_playing=false music_position_sec=0.0 music_stream_path=(in-memory AudioStreamWAV; no resource path) music_gain_db=-11.0
+  phase=E_final_isolated_silence frame=710 target_offset_frames=709 actual_offset_frames=709 drift_frames=0 requested_master_volume=100 settings_master_volume=100 master_bus_mute=false master_bus_db=0.0 music_playing=false music_position_sec=0.0 music_stream_path=(in-memory AudioStreamWAV; no resource path) music_gain_db=-11.0
+cue_events:
+  index=0 event=ui.confirm planned_gap_frames=27 stream_duration_seconds=0.09 frame=301 target_offset_frames=300 actual_offset_frames=300 drift_frames=0 accepted=true accepted_count=1 voice_index=0 voice_playing=true voice_gain_db=-14.0 voice_stream_path=res://assets/audio/rpg-2-star-ocean-the-second_ui-confirm_interface-sfx_v01_20261018-215528-fd2f02df.wav cue_stream_source=asset music_playing=false
+  index=1 event=ui.cancel planned_gap_frames=27 stream_duration_seconds=0.12 frame=328 target_offset_frames=327 actual_offset_frames=327 drift_frames=0 accepted=true accepted_count=1 voice_index=1 voice_playing=true voice_gain_db=-14.0 voice_stream_path=res://assets/audio/rpg-2-star-ocean-the-second_ui-cancel_interface-sfx_v01_20261018-215528-b6b84df7.wav cue_stream_source=asset music_playing=false
+  index=2 event=ui.notice planned_gap_frames=27 stream_duration_seconds=0.3 frame=355 target_offset_frames=354 actual_offset_frames=354 drift_frames=0 accepted=true accepted_count=1 voice_index=2 voice_playing=true voice_gain_db=-14.0 voice_stream_path=res://assets/audio/rpg-2-star-ocean-the-second_ui-notice_interface-sfx_v01_20261018-215528-09a0a294.wav cue_stream_source=asset music_playing=false
+  index=3 event=attack planned_gap_frames=27 stream_duration_seconds=0.23 frame=382 target_offset_frames=381 actual_offset_frames=381 drift_frames=0 accepted=true accepted_count=1 voice_index=3 voice_playing=true voice_gain_db=-14.0 voice_stream_path=res://assets/audio/rpg-2-star-ocean-the-second_combat-attack_battle-sfx_v01_20261018-222500-44fc6fe0.wav cue_stream_source=asset music_playing=false
+  index=4 event=dodge planned_gap_frames=27 stream_duration_seconds=0.25 frame=409 target_offset_frames=408 actual_offset_frames=408 drift_frames=0 accepted=true accepted_count=1 voice_index=0 voice_playing=true voice_gain_db=-14.0 voice_stream_path=res://assets/audio/rpg-2-star-ocean-the-second_combat-dodge_battle-sfx_v01_20261018-222500-de3cac5f.wav cue_stream_source=asset music_playing=false
+  index=5 event=guard planned_gap_frames=32 stream_duration_seconds=0.42 frame=436 target_offset_frames=435 actual_offset_frames=435 drift_frames=0 accepted=true accepted_count=1 voice_index=1 voice_playing=true voice_gain_db=-14.0 voice_stream_path=res://assets/audio/rpg-2-star-ocean-the-second_combat-guard_battle-sfx_v01_20261018-222500-f17092a4.wav cue_stream_source=asset music_playing=false
+  index=6 event=hit planned_gap_frames=27 stream_duration_seconds=0.26 frame=468 target_offset_frames=467 actual_offset_frames=467 drift_frames=0 accepted=true accepted_count=1 voice_index=2 voice_playing=true voice_gain_db=-14.0 voice_stream_path=res://assets/audio/rpg-2-star-ocean-the-second_combat-hit_battle-sfx_v01_20261018-222500-58dc96e7.wav cue_stream_source=asset music_playing=false
+  index=7 event=skill planned_gap_frames=40 stream_duration_seconds=0.56 frame=495 target_offset_frames=494 actual_offset_frames=494 drift_frames=0 accepted=true accepted_count=1 voice_index=3 voice_playing=true voice_gain_db=-14.0 voice_stream_path=res://assets/audio/rpg-2-star-ocean-the-second_combat-skill_battle-sfx_v01_20261018-222500-7576322a.wav cue_stream_source=asset music_playing=false
+  index=8 event=heal planned_gap_frames=50 stream_duration_seconds=0.72 frame=535 target_offset_frames=534 actual_offset_frames=534 drift_frames=0 accepted=true accepted_count=1 voice_index=0 voice_playing=true voice_gain_db=-14.0 voice_stream_path=res://assets/audio/rpg-2-star-ocean-the-second_combat-heal_battle-sfx_v01_20261018-222500-868719df.wav cue_stream_source=asset music_playing=false
+  index=9 event=victory planned_gap_frames=65 stream_duration_seconds=0.98 frame=585 target_offset_frames=584 actual_offset_frames=584 drift_frames=0 accepted=true accepted_count=1 voice_index=1 voice_playing=true voice_gain_db=-14.0 voice_stream_path=res://assets/audio/rpg-2-star-ocean-the-second_combat-victory_battle-sfx_v01_20261018-222500-3e851f4e.wav cue_stream_source=asset music_playing=false
+  index=10 event=defeat planned_gap_frames=60 stream_duration_seconds=0.9 frame=650 target_offset_frames=649 actual_offset_frames=649 drift_frames=0 accepted=true accepted_count=1 voice_index=2 voice_playing=true voice_gain_db=-14.0 voice_stream_path=res://assets/audio/rpg-2-star-ocean-the-second_combat-defeat_battle-sfx_v01_20261018-222500-5b91e159.wav cue_stream_source=asset music_playing=false
+limitations=Movie Maker AVI is the audio evidence; this harness records postmix capture metadata, frame boundaries, stream paths/gains and direct cue dispatch only. It does not listen to, inspect or judge the captured audio and does not establish ordinary-input gameplay, artistic approval or content acceptance.
+AUDIO57_CAPTURE_READY
