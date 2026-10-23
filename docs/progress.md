@@ -1,4 +1,12 @@
-> Current coordination (2026-10-23): Hermes on the Hostinger VPS. Production60.5%, performed inspection21.6%, creator approval7.8%; formal MVP acceptancefalse. Read HERMES_START_HERE.md and the canonical production ledger for the current handoff. Historical milestone/percentage notes below do not override those records.
+> Current coordination (2026-10-23): Hermes on the Hostinger VPS. Production61.0%, performed inspection21.6%, creator approval7.8%; formal MVP acceptancefalse. Read HERMES_START_HERE.md and the canonical production ledger for the current handoff. Historical milestone/percentage notes below do not override those records.
+
+## Latest bounded production: Lin Que idle/walk/stop source bank (2026-10-23T05:23:40.935Z)
+
+- Production **60.5% →61.0% (+0.5 rounded pp)**; content644→658/1881, five existing source tasks; coding111/111 unchanged. Performed inspection **21.6% →21.6% (+0.0pp)**; creator approval **7.8% →7.8% (+0.0pp)**. Frozen1183tasks, final art/default/human gates unchanged.
+- Source commit `eab63d62ccd47f08dd79ed0a9870484cae6cc3f0`: Claude-authored four41-frame PXOs, four static ORAs,164sourcePNGs and164runtimecopies; DeepSeek package checker rerun independently by Hermes.346originalfiles raw exact;4939previous game files unchanged. Source52/52,raw-native2717/2717,package6/6,native164/164exact. ActualEN30/ZH60 source-fit631/1087checks,16captures,two1280x720movies; four actual stills inspected through native main-model image input.
+- Strict cross-host raw rebuild remains **failed18/341**; all340reconstructed content entries and340original file-list hashes pass separately. Original PC encoded bytes retained. Four shader diagnostics per bank remain; animated GUI SaveAs/reopen, continuous motion, full runtime-slip/default adoption and art acceptance unperformed. No all-pass or fluidity claim.
+- M1 smoke passes. Existing M7 fails `field station opens scifi.ruins`, independently reproduced on untouched `b677e290`; combined regression is NOT green. Next: distinguish stale fixture from real field-station interaction defect under existing regression work before new production candidates.
+- Creator-supplied readiness commit `53769f4c` integrated as `5d46e5a4`, no game points. Native still perception and representative static GUI reopen are verified; no environment audit repeated. [Source verdict](../docs/qa/rpg-2-star-ocean-the-second_lin-que_source-production-verdict_unapproved-v01_20261023-050631-c52d784a.md). Earlier entries below are historical.
 
 ## Latest verified production: Lin Que static directions (2026-10-23T02:58:33.843993+00:00)
 
