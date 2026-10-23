@@ -1,0 +1,61 @@
+cmd: ['/home/kel/projects/worlds-between/tooling/venv/bin/python', '-X', 'utf8', '-I', 'outputs/milo-n01/scratch/milo_north_pxl_compare.py', 'hermes38-pxl']
+rc: 0
+
+{
+ "reference": "game/assets/characters/milo-native-v01/north/rpg-2-star-ocean-the-second_milo_north-static_unapproved-v01_20261023-225642-5968ba0c.png",
+ "reference_sha256": "cf1e559885f2a87c31a3c6cf9feee953d95c8c1ca138ecd9bd8d6838bee8da61",
+ "pxo": [
+  {
+   "file": "outputs/milo-n01/logs/hermes38-pxl/export-pxo/milo-north-idle-static-v01.png",
+   "sha256": "6b48418d2a0bb3a612018287093165ac77aa585b8b432d273ca173575902a985",
+   "mode": "RGBA",
+   "size": [
+    80,
+    112
+   ],
+   "pixel_exact": true,
+   "differing_texels": 0
+  }
+ ],
+ "ora": [
+  {
+   "file": "outputs/milo-n01/logs/hermes38-pxl/export-ora/rpg-2-star-ocean-the-second_milo_north-edit_unapproved-v01_20261023-225642-af5a9058.png",
+   "sha256": "6b48418d2a0bb3a612018287093165ac77aa585b8b432d273ca173575902a985",
+   "mode": "RGBA",
+   "size": [
+    80,
+    112
+   ],
+   "pixel_exact": true,
+   "differing_texels": 0
+  }
+ ],
+ "application_diagnostics_separate": {
+  "pxo": {
+   "rc": "0",
+   "error_lines": 4,
+   "warning_lines": 0,
+   "script_error_lines": 0,
+   "distinct": [
+    "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing."
+   ]
+  },
+  "ora": {
+   "rc": "0",
+   "error_lines": 11,
+   "warning_lines": 1,
+   "script_error_lines": 0,
+   "distinct": [
+    "ERROR: 12 RID allocations of type 'PN13RendererDummy14TextureStorage12DummyTextureE' were leaked at exit.",
+    "ERROR: 16 resources still in use at exit (run with --verbose for details).",
+    "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing.",
+    "ERROR: Index p_index = 0 is out of bounds ((int)data.children_cache.size() - data.internal_children_front_count_cache - data.internal_children_back_count_cache = 0).",
+    "ERROR: Must be an ancestor of the control.",
+    "ERROR: Required object \"rp_node\" is null.",
+    "WARNING: 160 ObjectDB instances were leaked at exit (run with `--verbose` for details)."
+   ]
+  }
+ }
+}
+MILO_NORTH_PXL_EXPORT_PIXEL_EXACT
+MILO_NORTH_PXL_APP_DIAGNOSTICS {'pxo': (4, 0, 0), 'ora': (11, 1, 0)} (errors, warnings, script errors; not app-clean if nonzero)
