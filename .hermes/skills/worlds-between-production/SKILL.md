@@ -22,3 +22,6 @@ Continuing this existing RPG, choosing work or updating progress. Do not scaffol
 Default use is not art approval. Old C: paths and canceled DeepSeek handoff are historical. Do not switch providers, spend extra credit, copy credentials or create recurring schedules.
 ## Verification
 Canonical ledger check passes, exact output and evidence exist, actual owner recorded, creator approvals unchanged unless explicitly granted.
+
+## Readiness and active work
+Read the latest system-readiness link in HERMES_START_HERE.md. Worlds Between MVP production is already working on Lin Que; do not duplicate an active task. Setup/audit earns no game points. Native vision_analyze works through the existing main subscription route; Site publishing and broader gh API auth were not installed.
