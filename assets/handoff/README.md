@@ -64,3 +64,8 @@ This reconstructs original asset/source paths from Git files or verified archive
 The ZIPs retain byte-exact files in content-addressed members. All archived bytes were checked against their source SHA-256 at packaging and each ZIP passed a complete CRC read. The full index preserves origin aliases without publishing absolute account paths. Source images, editable PXO/ORA, animation/video references, audio, and available manifests/authoring tools are included.
 
 After downloading, do not replace live game assets wholesale. Use the index to choose a source, inspect it in the actual game and follow the canonical production/inspection/creator-approval workflow. Production stays54.6%; this transfer earns no duplicate asset-production points.
+
+
+## Current coordinator and newer VPS transfer
+
+The creator authorized Hermes takeover on2026-10-23. Start with `HERMES_START_HERE.md` at the repository root. This page remains the2026-10-21 historical Git archive; newer/local/external-working-folder assets are in the verified VPS vault described by the current handoff. On a newer game checkout, use the Hermes project-ops `archive-verify` command for historical verification: it reads frozen Git blobs rather than forcing mutable current scenes back to old bytes.

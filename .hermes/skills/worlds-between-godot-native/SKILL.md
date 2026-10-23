@@ -22,6 +22,6 @@ Use the parent project tooling environment (`terminal(command="source ../tooling
 4. Use `terminal` with xvfb-run for real rendered bilingual/gameplay captures and `vision_analyze` on actual files when available. Motion requires normal-speed review of start/run/stop/repress/reversal and battle timing.
 5. Keep source production, loader integration, native GUI save/reopen, visual inspection and human acceptance distinct.
 ## Pitfalls
-Headless test passes are not visual proof; source stop bridges are not demonstrated by an immediate-idle host. Do not broaden parameter searches or call residual foot slip footlocked. Known app diagnostics must remain disclosed.
+For VPS renders use --audio-driver Dummy. Pixelorama may retain the stored export basename: inspect a fresh unique output directory and compare actual pixels before renaming. Four shader diagnostics are known and must stay disclosed. Current game viewport1280x720 differs from historical640x360 source plates; preserve configuration. Headless test passes are not visual proof; source stop bridges are not demonstrated by an immediate-idle host. Do not broaden parameter searches or call residual foot slip footlocked. Known app diagnostics must remain disclosed.
 ## Verification
 Required source/native and targeted gameplay checks pass with source-bound logs; captures actually load, no default changes without creator authorization, no unsupported visual claims.

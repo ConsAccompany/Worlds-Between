@@ -48,7 +48,26 @@ def verify_archive():
         proc.stdin.close();proc.wait(timeout=10)
         for z in zips.values():z.close()
     print(json.dumps({'historicalAssetsVerified':count,'archivePackagesVerified':len(d['bundles']),'method':'Frozen gitBlob objects and exact ZIP members, not mutable current working paths.'}))
-def vault_index():return json.loads((HOME/'vault/index.json').read_text(encoding='utf8'))
+def vault_index():
+    matches=list((HOME/'vault').glob('rpg-2-star-ocean-the-second_hermes_full-asset-vault_manifest-v01_*.json'))
+    if len(matches)!=1:raise ValueError('expected exactly one descriptive full-asset-vault manifest')
+    data=json.loads(matches[0].read_text(encoding='utf8'))
+    objects={o['sha256']:o for o in data['objects']}
+    data['supplements']=[]
+    for p in sorted((HOME/'vault').glob('rpg-2-star-ocean-the-second_hermes_external-worktrees_manifest-v01_*.json')):
+        supplement=json.loads(p.read_text(encoding='utf8'));added=0
+        for o in supplement['objects']:
+            if o['sha256'] in objects:
+                current=objects[o['sha256']];assert current['bytes']==o['bytes'] and current['storage']==o['storage']
+                current['aliases']=list(dict.fromkeys(current['aliases']+o['aliases']))
+            else:objects[o['sha256']]=o;added+=1
+        data['errors'].extend(supplement['errors'])
+        data['summary']['newTransferredUniqueFiles']+=added
+        data['summary']['newTransferredBytes']+=supplement['summary']['additionalUniqueBytes']
+        data['supplements'].append({'file':p.name,'sha256':sha_file(p),'newUniqueFiles':added})
+    data['objects']=list(objects.values())
+    data['summary'].update({'uniqueFiles':len(objects),'uniqueBytes':sum(o['bytes'] for o in objects.values()),'eligibleOccurrences':sum(len(o['aliases']) for o in objects.values())})
+    return data
 def verify_vault():
     d=vault_index();count=0;total=0
     for o in d['objects']:
@@ -75,5 +94,5 @@ def main():
         print(target);return
     result={'root':str(ROOT),'head':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),'tools':{x:shutil.which(x) for x in ['git','node','ffmpeg','xvfb-run','gh']},'ledger':json.loads((ROOT/LEDGER).read_text(encoding='utf8'))['computed']}
     for name,path in [('godot',HOME/'tooling/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64'),('pixelorama',HOME/'tooling/pixelorama-1.2.3/Pixelorama-Linux-64bit/Pixelorama.x86_64')]:result['tools'][name]=str(path) if path.is_file() else None
-    result['vaultPresent']=(HOME/'vault/index.json').exists();print(json.dumps(result,ensure_ascii=False,indent=2))
+    result['vaultPresent']=bool(list((HOME/'vault').glob('rpg-2-star-ocean-the-second_hermes_full-asset-vault_manifest-v01_*.json')));print(json.dumps(result,ensure_ascii=False,indent=2))
 if __name__=='__main__':main()

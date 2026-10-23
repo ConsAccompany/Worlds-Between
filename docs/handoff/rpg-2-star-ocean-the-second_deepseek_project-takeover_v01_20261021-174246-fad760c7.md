@@ -1,6 +1,6 @@
 # Worlds Between — DeepSeek 4.1 Flash takeover document
 
-> Status update: the creator canceled the DeepSeek takeover on2026-10-21. Codex remains project coordinator. This document and the asset guide are retained as reference; this is not an active handoff.
+> Status update: the creator canceled the DeepSeek takeover on2026-10-21. Historical note: Codex coordinated after that cancellation; the creator authorized Hermes to take over on2026-10-23. Read HERMES_START_HERE.md for the current handoff. This document and the asset guide are retained as reference; this is not an active handoff.
 
 
 **Prepared:** 2026-10-21T17:42:46.139450+00:00

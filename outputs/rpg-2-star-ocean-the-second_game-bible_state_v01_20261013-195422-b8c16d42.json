@@ -4,7 +4,7 @@
   "title": "世界之间",
   "englishTitle": "Worlds Between",
   "edition": "设计基线 v0.2 · 2026-10-15 创作者决定",
-  "updatedAt": "2026-10-23T02:58:33.843993+00:00",
+  "updatedAt": "2026-10-23T04:55:44.402403+00:00",
   "note": "规则以玩家确认的设计稿为基线，并已并入 2026-10-15 创作者决定；人物姓名与外观是待审提案，具体剧情留待后续设计。",
   "pitch": "从地下社区走出的旅人，以好奇心探索多元文明，招募伙伴，并成为不同世界认知差异的桥梁。",
   "pillars": [
@@ -8414,44 +8414,38 @@
     "combinedWiringCheck": "297/297 on39f252e, clean raw log; actual Chinese victory inspected."
   },
   "latestTaskProgress": {
-    "id": "lin58-four-direction-source",
-    "status": "completed",
+    "id": "lexplore59-source-set",
+    "status": "in_progress",
     "title": {
-      "zh": "林阙缺失的四方向探索源文件",
-      "en": "Lin Que missing four-direction exploration source package"
+      "zh": "林阙缺失的四方向待机行走停步源动画",
+      "en": "Lin Que missing four-direction idle, walk and stop source bank"
     },
-    "startedAt": "2026-10-23T02:08:18.116Z",
-    "sourceBefore": "0d44b398648abbbcfb3483dd4df4a7966511f7ea",
+    "startedAt": "2026-10-23T03:17:21.385Z",
+    "sourceBefore": "1c5793224c2d5b77f2dc9fc19b92cefff15b0ec9",
     "meters": {
       "production": {
-        "before": 60.3,
-        "after": 60.5,
-        "changePercentagePoints": 0.2
+        "before": 60.5,
+        "after": null,
+        "changePercentagePoints": null
       },
       "inspection": {
         "before": 21.6,
-        "after": 21.6,
-        "changePercentagePoints": 0
+        "after": null,
+        "changePercentagePoints": null
       },
       "approval": {
         "before": 7.8,
-        "after": 7.8,
-        "changePercentagePoints": 0
+        "after": null,
+        "changePercentagePoints": null
       }
     },
-    "completedAt": "2026-10-23T02:57:56.823Z",
-    "sourceAfter": "63ff4f7c7289faba34eb176383bc800713e259a4",
-    "evidence": [
-      "docs/qa/rpg-2-star-ocean-the-second_lin-que_four-direction-static_codex-closeout_unapproved-v01_20261022-222500-3d61c74e.md"
-    ],
-    "completedScope": "four static directions only; idle/walk/stop/runtime integration unfinished",
-    "completedProductionTaskIds": [
-      "content.char.lin-que.static-south",
-      "content.char.lin-que.static-west",
-      "content.char.lin-que.static-north",
-      "content.char.lin-que.static-east"
-    ],
-    "ledgerTasksCompleted": true
+    "handoff": {
+      "incomingOwner": "hermes",
+      "at": "2026-10-23T04:55:44.402403+00:00",
+      "state": "continues-in-independent-validation",
+      "evidence": "docs/qa/rpg-2-star-ocean-the-second_hermes_project-takeover-verified-closeout_v01_20261023-045544-4d905b53.md",
+      "notMarkedCompletedByTransfer": true
+    }
   },
   "progressReporting": {
     "requiredFormat": "before → after (change in percentage points)",
@@ -10260,6 +10254,46 @@
       "completedScope": "technical output preflight only",
       "ledgerTaskStatus": "blocked",
       "ledgerTaskCompleted": false
+    },
+    {
+      "id": "lin58-four-direction-source",
+      "status": "completed",
+      "title": {
+        "zh": "林阙缺失的四方向探索源文件",
+        "en": "Lin Que missing four-direction exploration source package"
+      },
+      "startedAt": "2026-10-23T02:08:18.116Z",
+      "sourceBefore": "0d44b398648abbbcfb3483dd4df4a7966511f7ea",
+      "meters": {
+        "production": {
+          "before": 60.3,
+          "after": 60.5,
+          "changePercentagePoints": 0.2
+        },
+        "inspection": {
+          "before": 21.6,
+          "after": 21.6,
+          "changePercentagePoints": 0
+        },
+        "approval": {
+          "before": 7.8,
+          "after": 7.8,
+          "changePercentagePoints": 0
+        }
+      },
+      "completedAt": "2026-10-23T02:57:56.823Z",
+      "sourceAfter": "63ff4f7c7289faba34eb176383bc800713e259a4",
+      "evidence": [
+        "docs/qa/rpg-2-star-ocean-the-second_lin-que_four-direction-static_codex-closeout_unapproved-v01_20261022-222500-3d61c74e.md"
+      ],
+      "completedScope": "four static directions only; idle/walk/stop/runtime integration unfinished",
+      "completedProductionTaskIds": [
+        "content.char.lin-que.static-south",
+        "content.char.lin-que.static-west",
+        "content.char.lin-que.static-north",
+        "content.char.lin-que.static-east"
+      ],
+      "ledgerTasksCompleted": true
     }
   ],
   "latestBattleEnvironmentProduction": {
@@ -10449,15 +10483,27 @@
     "archiveBytes": 1996429952,
     "approvalChanged": false,
     "defaultsChanged": false,
-    "progressPointsAdded": 0
+    "progressPointsAdded": 0,
+    "hermesVpsTransfer": {
+      "verified": true,
+      "at": "2026-10-23T04:55:44.402403+00:00",
+      "evidence": "outputs/hermes60/rpg-2-star-ocean-the-second_hermes_verified-takeover-evidence_v01_20261023-045544-4d905b53.json",
+      "uniqueFiles": 40814,
+      "nativeEditableAndHistoricalAssetsPreserved": true
+    }
   },
   "projectCoordination": {
-    "owner": "codex",
+    "owner": "hermes",
     "status": "active",
-    "deepseekTakeover": "canceled-by-creator",
-    "recordedAt": "2026-10-21T19:26:31.716388+00:00",
-    "exactCreatorMessage": "i decided against letting deepseek take over the project. resume your work",
-    "handoffRetainedAs": "reference-only"
+    "recordedAt": "2026-10-23T04:55:44.402403+00:00",
+    "canonicalRoot": "/home/kel/projects/worlds-between/repo",
+    "handoffDocument": "docs/handoff/rpg-2-star-ocean-the-second_hermes_project-takeover_v01_20261023-034257-b6c39f27.md",
+    "evidence": [
+      "docs/qa/rpg-2-star-ocean-the-second_hermes_project-takeover-verified-closeout_v01_20261023-045544-4d905b53.md",
+      "outputs/hermes60/rpg-2-star-ocean-the-second_hermes_verified-takeover-evidence_v01_20261023-045544-4d905b53.json"
+    ],
+    "previousTakeovers": "DeepSeek takeover remains canceled; previous Codex coordination is historical.",
+    "creatorRequestSummary": "Hand off the project to Hermes on the Hostinger VPS, including all associated assets, GitHub access, skills, current state, remaining work and next steps."
   },
   "sitePublicationFollowUp": {
     "status": "blocked-current-connector-cannot-find-existing-site",
@@ -12299,5 +12345,53 @@
     },
     "artApproval": "unapproved",
     "ordinaryDefaultsChanged": false
+  },
+  "projectCoordinationHistory": [
+    {
+      "owner": "codex",
+      "status": "active",
+      "deepseekTakeover": "canceled-by-creator",
+      "recordedAt": "2026-10-21T19:26:31.716388+00:00",
+      "exactCreatorMessage": "i decided against letting deepseek take over the project. resume your work",
+      "handoffRetainedAs": "reference-only"
+    }
+  ],
+  "latestProjectHandoff": {
+    "type": "operations-no-game-production-points",
+    "state": "verified",
+    "at": "2026-10-23T04:55:44.402403+00:00",
+    "to": "hermes",
+    "uniqueFiles": 40814,
+    "uniqueBytes": 15607319451,
+    "pathReferences": 552820,
+    "siteSourceFiles": 183,
+    "progress": {
+      "production": {
+        "before": 60.5,
+        "after": 60.5,
+        "changePercentagePoints": 0
+      },
+      "inspection": {
+        "before": 21.6,
+        "after": 21.6,
+        "changePercentagePoints": 0
+      },
+      "approval": {
+        "before": 7.8,
+        "after": 7.8,
+        "changePercentagePoints": 0
+      }
+    },
+    "nextTaskIds": [
+      "content.char.lin-que.idle-anim",
+      "content.char.lin-que.walk-south",
+      "content.char.lin-que.walk-west",
+      "content.char.lin-que.walk-north",
+      "content.char.lin-que.walk-east"
+    ],
+    "evidence": [
+      "docs/qa/rpg-2-star-ocean-the-second_hermes_project-takeover-verified-closeout_v01_20261023-045544-4d905b53.md",
+      "outputs/hermes60/rpg-2-star-ocean-the-second_hermes_verified-takeover-evidence_v01_20261023-045544-4d905b53.json"
+    ]
   }
 }

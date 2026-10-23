@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-23T03:42:58.806993+00:00",
+  "updatedAt": "2026-10-23T04:55:44.402403+00:00",
   "purpose": "Operating queue and worktree ownership; no progress points or account details",
   "workflow": "docs/workflow.md",
   "canonicalLedger": "outputs/rpg-2-star-ocean-the-second_production-completion_task-ledger_v01_20261018-140533-3de52073.json",
@@ -22,10 +22,11 @@
     {
       "id": "integration",
       "pathFromPrimary": "work/max0840-sentry-sync",
-      "role": "canonical-integration",
+      "role": "historical-local-integration",
       "owner": "codex",
       "baseAtRegistration": "c1a6ab3e40f679d28a6bac45f5ac7f25d0d210c2",
-      "writePolicy": "Coordinator only; explicit verified paths and serialized ledger/index updates"
+      "writePolicy": "Coordinator only; explicit verified paths and serialized ledger/index updates",
+      "currentUse": "Preserved PC source; not the active VPS integration checkout."
     },
     {
       "id": "primary-protected",
@@ -93,6 +94,14 @@
       "owner": "deepseek",
       "baseAtRegistration": "e600241b9f732e8f8db2a5e645d4947b88ac1142",
       "writePolicy": "Only assigned isolated production scope; no shared ledger/index/Site/provider-account edits."
+    },
+    {
+      "id": "hermes-vps",
+      "role": "canonical-integration",
+      "owner": "hermes",
+      "absolutePath": "/home/kel/projects/worlds-between/repo",
+      "pathFromPrimary": ".",
+      "writePolicy": "Hermes serializes reviewed explicit source/ledger/Git updates; human approval remains creator-owned."
     }
   ],
   "tasks": [
@@ -3142,7 +3151,7 @@
     "verifiedAt": "2026-10-23T02:58:33.843993+00:00"
   },
   "takeover": {
-    "state": "transfer-and-readiness-verification-in-progress",
+    "state": "assets-history-tools-and-readiness-verified",
     "authorizedBy": "creator direct request in this chat",
     "incomingCoordinator": "hermes",
     "outgoingCoordinator": "codex",
@@ -3152,6 +3161,38 @@
     "taskMap": "docs/handoff/rpg-2-star-ocean-the-second_hermes_complete-task-map_v01_20261023-034257-b6c39f27.json",
     "firstTask": "lexplore59 source bank: inspect incoming bytes and complete missing source/native/gameplay gates; no defaults or artistic approval",
     "noNewSchedules": true,
-    "providerCredentialsTransferred": false
+    "providerCredentialsTransferred": false,
+    "verifiedAt": "2026-10-23T04:55:44.402403+00:00",
+    "evidence": [
+      "docs/qa/rpg-2-star-ocean-the-second_hermes_project-takeover-verified-closeout_v01_20261023-045544-4d905b53.md",
+      "outputs/hermes60/rpg-2-star-ocean-the-second_hermes_verified-takeover-evidence_v01_20261023-045544-4d905b53.json"
+    ],
+    "combinedUniqueFiles": 40814,
+    "newSchedulesCreated": false
+  },
+  "canonicalIntegration": {
+    "id": "hermes-vps",
+    "owner": "hermes",
+    "root": "/home/kel/projects/worlds-between/repo"
+  },
+  "currentQueue": {
+    "primary": {
+      "id": "lexplore59-source-set",
+      "owner": "hermes",
+      "worktree": "hermes-vps",
+      "status": "ready-to-continue",
+      "taskIds": [
+        "content.char.lin-que.idle-anim",
+        "content.char.lin-que.walk-south",
+        "content.char.lin-que.walk-west",
+        "content.char.lin-que.walk-north",
+        "content.char.lin-que.walk-east"
+      ],
+      "doneWhen": "Existing source-production criteria and missing native/gameplay evidence actually pass; no default/art acceptance inferred.",
+      "inputs": "../incoming/lexplore59",
+      "nextAction": "Safely materialize absent/identical incoming paths, independently validate the existing source bank; finish before new candidates."
+    },
+    "supporting": [],
+    "historicalTasksBelowAreNotNewAssignments": true
   }
 }
