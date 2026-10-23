@@ -2,7 +2,7 @@
   "id": "rpg-2-star-ocean-the-second_production-completion_v01",
   "schemaVersion": 2,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-22T23:40:42Z",
+  "updatedAt": "2026-10-23T00:00:19Z",
   "zh": "制作完成度任务台账：衡量已完成的工作量（编码 40% + 内容 60%）；检查／审查与创作者批准分开计量，均不改变制作分；免除的审查不算已执行的工作；运营任务列出负责方但不计百分比。",
   "en": "Production-completion task ledger: measures work done (coding 40% + content 60%); inspection/review and creator approval are separate meters and never change production credit; waived reviews are not performed work; operations tasks list owners but carry no percentage.",
   "brief": "docs/rpg-2-star-ocean-the-second_production-completion_bilingual-brief_v01_20261018-140533-3ea2a621.md",
@@ -1083,18 +1083,18 @@
     "inspection": {
       "zh": "检查与审查（已执行的）",
       "en": "Inspection and review (performed)",
-      "done": 43,
+      "done": 44,
       "total": 204,
-      "percent": 21.1,
+      "percent": 21.6,
       "technical": {
         "done": 23,
         "total": 77,
         "percent": 29.9
       },
       "visual": {
-        "done": 20,
+        "done": 21,
         "total": 126,
-        "percent": 15.9
+        "percent": 16.7
       },
       "contentQa": {
         "done": 0,
@@ -1160,11 +1160,11 @@
         "waivedPoints": 0
       },
       "visual-review": {
-        "done": 20,
+        "done": 21,
         "total": 126,
-        "percent": 15.9,
+        "percent": 16.7,
         "tasks": 126,
-        "tasksDone": 20,
+        "tasksDone": 21,
         "waivedTasks": 4,
         "waivedPoints": 4
       },
@@ -1225,13 +1225,13 @@
         "tasks": 225,
         "operationsTasks": 2,
         "points": 289,
-        "pointsDone": 182,
+        "pointsDone": 183,
         "byStatus": {
-          "done": 114,
-          "todo": 107,
+          "done": 115,
+          "todo": 106,
           "not_required": 4
         },
-        "readyInQueue": 10,
+        "readyInQueue": 9,
         "revisionsBlockingApproval": 3
       },
       "creator": {
@@ -1398,7 +1398,7 @@
           "total": 13
         },
         "visual-review": {
-          "done": 0,
+          "done": 1,
           "total": 1
         },
         "creator-approval": {
@@ -1426,7 +1426,7 @@
     "queue": {
       "zh": "待处理（依赖已完成）",
       "en": "Ready (dependencies done)",
-      "count": 86,
+      "count": 85,
       "items": [
         {
           "id": "creator.char.protagonist-male.approve-portrait",
@@ -1984,13 +1984,6 @@
         {
           "id": "review.content.audio",
           "stage": "content-qa",
-          "owner": "codex",
-          "status": "todo",
-          "points": 1
-        },
-        {
-          "id": "review.content.ui-visuals",
-          "stage": "visual-review",
           "owner": "codex",
           "status": "todo",
           "points": 1
@@ -3259,7 +3252,7 @@
     {"id":"content.ui-visual.character-portraits","type":"native-pixel","title":{"zh":"队伍头像与对话立绘裁切","en":"Party icons and dialogue portrait crops"},"area":"ui-visual","stage":"content","owner":"codex","status":"done","points":3,"doneCriterion":{"zh":"头像与立绘裁切已提交并接入","en":"Icons and portrait crops committed and wired"},"dependsOn":[],"evidence":["docs/qa/rpg-2-star-ocean-the-second_character-ui-portraits_canonical-combined-closeout_v02_20261020-002601-cdd87b66.md"],"subject":{"kind":"asset","id":"character-ui.portraits"},"statusAt":"2026-10-20T00:28:20Z","note":{"zh":"","en":"Committed bcec9de: five whole-head source-crop icons plus unchanged dialogue crops wired and verified normal/packed. DeepSeek initial build, Codex takeover repairs; art/canon approval separate."}},
     {"id":"review.content.vfx","type":"visual-review","title":{"zh":"特效 · 视觉审查","en":"VFX · visual review"},"area":"vfx","stage":"visual-review","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"Codex 审查实机特效并记录结论","en":"Codex reviews the effects in game and records a verdict"},"dependsOn":["content.vfx.common","content.vfx.mvp-skills","content.vfx.encounter"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_mvp-skill-vfx_root-production-closeout_v01_20261019-170721-90a8737c.md","docs/qa/rpg-2-star-ocean-the-second_common-combat-vfx_root-production-closeout_v01_20261019-164412-1f3bff80.md"],"subject":{"kind":"feature","id":"content.vfx"},"statusAt":"2026-10-19T21:15:30Z","outcome":"technical-pass","note":{"zh":"","en":"Actual-game composition and technical review performed: common/skill cues local and quiet, encounter cues separately verified; some support accents blend with dark clothing. Static composition inspection only; no creator artistic or continuous temporal-quality approval."}},
     {"id":"review.content.audio","type":"audio-qa","title":{"zh":"音频 · 内容／音频质量检查","en":"Audio · content / audio QA"},"area":"audio","stage":"content-qa","owner":"codex","status":"todo","points":1,"doneCriterion":{"zh":"Codex 在游戏中试听音乐与音效并记录结论","en":"Codex listens to the music and sounds in game and records a verdict"},"dependsOn":["content.audio.themed-music","content.audio.ui-sfx","content.audio.combat-sfx"],"evidence":[],"subject":{"kind":"feature","id":"content.audio"}},
-    {"id":"review.content.ui-visuals","type":"visual-review","title":{"zh":"界面正式视觉 · 视觉审查","en":"UI final visuals · visual review"},"area":"ui-visual","stage":"visual-review","owner":"codex","status":"todo","points":1,"doneCriterion":{"zh":"Codex 审查实机界面并记录结论","en":"Codex reviews the in-game UI and records a verdict"},"dependsOn":["content.ui-visual.navigation","content.ui-visual.battle","content.ui-visual.management","content.ui-visual.character-portraits"],"evidence":[],"subject":{"kind":"feature","id":"content.ui-visuals"}},
+    {"id":"review.content.ui-visuals","type":"visual-review","title":{"zh":"界面正式视觉 · 视觉审查","en":"UI final visuals · visual review"},"area":"ui-visual","stage":"visual-review","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"Codex 审查实机界面并记录结论","en":"Codex reviews the in-game UI and records a verdict"},"dependsOn":["content.ui-visual.navigation","content.ui-visual.battle","content.ui-visual.management","content.ui-visual.character-portraits"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_ui-runtime_compatibility-and-visual-review_codex-closeout-v01_20261022-194554-e9ce78bd.md"],"subject":{"kind":"feature","id":"content.ui-visuals"},"statusAt":"2026-10-23T00:00:19Z","outcome":"passed","note":{"zh":"","en":"Codex inspected 32 native bilingual ordinary/optional UI captures plus 8 final combined exploration states. Repaired and independently verified the navigation+portrait integration conflict; displayed-state review only, not final art, ordinary pilot adoption, packed export or human play."}},
     {"id":"creator.content.vfx.accept","type":"creator-acceptance","title":{"zh":"特效 · 创作者验收","en":"VFX · creator acceptance"},"area":"vfx","stage":"creator-approval","owner":"creator","status":"todo","points":1,"doneCriterion":{"zh":"创作者在清单中勾选相应条目","en":"The creator checks the matching inventory items"},"dependsOn":["content.vfx.common","content.vfx.mvp-skills","content.vfx.encounter"],"evidence":[],"subject":{"kind":"feature","id":"content.vfx"}},
     {"id":"creator.content.audio.accept","type":"creator-acceptance","title":{"zh":"音频 · 创作者验收","en":"Audio · creator acceptance"},"area":"audio","stage":"creator-approval","owner":"creator","status":"todo","points":1,"doneCriterion":{"zh":"创作者在清单中勾选相应条目","en":"The creator checks the matching inventory items"},"dependsOn":["content.audio.themed-music","content.audio.ui-sfx","content.audio.combat-sfx"],"evidence":[],"subject":{"kind":"feature","id":"content.audio"}},
     {"id":"creator.content.ui-visuals.accept","type":"creator-acceptance","title":{"zh":"界面正式视觉 · 创作者验收","en":"UI final visuals · creator acceptance"},"area":"ui-visual","stage":"creator-approval","owner":"creator","status":"todo","points":1,"doneCriterion":{"zh":"创作者在清单中勾选相应条目","en":"The creator checks the matching inventory items"},"dependsOn":["content.ui-visual.navigation","content.ui-visual.battle","content.ui-visual.management","content.ui-visual.character-portraits"],"evidence":[],"subject":{"kind":"feature","id":"content.ui-visuals"}},

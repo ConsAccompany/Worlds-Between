@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-22T23:41:12.670345+00:00",
+  "updatedAt": "2026-10-23T00:00:57.020556+00:00",
   "purpose": "Operating queue and worktree ownership; no progress points or account details",
   "workflow": "docs/workflow.md",
   "canonicalLedger": "outputs/rpg-2-star-ocean-the-second_production-completion_task-ledger_v01_20261018-140533-3de52073.json",
@@ -1316,15 +1316,15 @@
     "constraints": "Do not reopen existing cosmetic gait or actor art searches. Keep four scene defaults false until explicit authorization. Verify providers before fresh sessions."
   },
   "activeDualProviderBatch": {
-    "id": "enemy51",
-    "status": "closed-integrated",
-    "sourceCommit": "318da96f2a91f56204aab715109fd503f4ed4bc2",
-    "evidence": [
-      "docs/qa/rpg-2-star-ocean-the-second_enemy-battle_mvp-default-adoption_codex-closeout_v01_20261022-193048-04f6b70e.md"
-    ],
-    "claude": "encounter-adapter-delivered223s",
-    "deepseek": "bounded240s-timeout-no-output",
-    "codex": "source-validator-default-activation-boundary-and-real-encounter-checks-integration"
+    "id": "ui52",
+    "status": "completed-verified",
+    "primary": {
+      "task": "review.content.ui-visuals",
+      "owner": "codex"
+    },
+    "claude": "Untested helper implementation; root corrected and verified.",
+    "deepseek": "Bounded deadline without output; no quota/credit event.",
+    "sharedIntegration": "Codex serialized source, inspection ledger and publication."
   },
   "characterSpriteStyleDirection": {
     "reference": "Sea of Stars",
@@ -1735,52 +1735,82 @@
     }
   ],
   "lastCompletedInspectionTask": {
-    "status": "completed-technical-pass",
-    "tasks": [
-      "qa.combat.protagonist-male.set-check",
-      "qa.combat.zhao-ling.set-check",
-      "qa.combat.liang-xu.set-check",
-      "qa.combat.ji-cheng.set-check"
-    ],
-    "producer": "claude",
-    "independentSupport": "deepseek",
-    "inspectorAndIntegrator": "codex",
-    "sourceCommit": "9dae18465285b34f9d3da7801d76e393ba7a07b3",
-    "testedRuntimeRevision": "78000e24b3bf0668b8fa41fbcd8758e00bcdc494",
-    "completedAt": "2026-10-22T03:10:52.181005+00:00",
-    "checks": {
-      "ordinaryEn": 1572,
-      "ordinaryZh": 1572,
-      "sharedClock": 220,
-      "sharedHalfScale": 273,
-      "independentBoundary": 339
-    },
+    "task": "review.content.ui-visuals",
+    "owner": "codex",
+    "status": "done",
+    "outcome": "passed",
+    "completedAt": "2026-10-23T00:00:57.020556+00:00",
+    "sourceCommit": "19e8e0bc829bae8431957e95739e7211805f3f91",
     "evidence": [
-      "docs/qa/rpg-2-star-ocean-the-second_four-actor-combat_ordinary-default-technical-verdict_v01_20261021-230945-83d44982.md",
-      "outputs/cts34/closeout-20261021-230945-83d44982/rpg-2-star-ocean-the-second_combat-set_codex-closeout-proof_v01_20261021-230945-83d44982.json"
+      "docs/qa/rpg-2-star-ocean-the-second_ui-runtime_compatibility-and-visual-review_codex-closeout-v01_20261022-194554-e9ce78bd.md",
+      "outputs/ui52/rpg-2-star-ocean-the-second_ui-runtime_codex-proof_v01_20261022-194554-e9ce78bd.json"
     ],
-    "runtimeChanges": false,
-    "artApproved": false,
-    "motionFluidityApproved": false,
-    "humanPlaytestsAdded": 0,
-    "production": {
-      "before": 59.1,
-      "after": 59.1,
-      "changePercentagePoints": 0
-    },
-    "inspection": {
-      "before": 18.1,
-      "after": 20.1,
-      "changePercentagePoints": 2.0
-    },
-    "approval": {
-      "before": 7.8,
-      "after": 7.8,
-      "changePercentagePoints": 0
-    },
-    "limitations": "Labeled deterministic state/pose/handler fixtures; not normal-input gameplay or human motion review. Original parser and provider certificate-store failures retained; canonical unfiltered rerun passed."
+    "repair": "Existing navigation UI skin now supports the installed character-portrait dialogue profile and follows profile restoration. Unknown/moved profiles still refused; defaults unchanged.",
+    "actualInitialCaptureCount": 32,
+    "finalCombinedExplorationCaptures": 8,
+    "regressionChecks": 73,
+    "normalSceneFixtureOnly": true,
+    "productionBefore": 60.2,
+    "productionAfter": 60.2,
+    "inspectionBefore": 21.1,
+    "inspectionAfter": 21.6,
+    "approvalBefore": 7.8,
+    "approvalAfter": 7.8,
+    "creatorArtApproved": false,
+    "fullHumanPlaytest": false,
+    "remainingLimits": [
+      "Empty-save and selected scene-entry states only; populated/long-content states not exhaustively reviewed.",
+      "Post-fix packed export not rerun; known Script identity used.",
+      "NYC common scene default remains pending explicit authorization."
+    ]
   },
   "completedInspectionTaskHistory": [
+    {
+      "status": "completed-technical-pass",
+      "tasks": [
+        "qa.combat.protagonist-male.set-check",
+        "qa.combat.zhao-ling.set-check",
+        "qa.combat.liang-xu.set-check",
+        "qa.combat.ji-cheng.set-check"
+      ],
+      "producer": "claude",
+      "independentSupport": "deepseek",
+      "inspectorAndIntegrator": "codex",
+      "sourceCommit": "9dae18465285b34f9d3da7801d76e393ba7a07b3",
+      "testedRuntimeRevision": "78000e24b3bf0668b8fa41fbcd8758e00bcdc494",
+      "completedAt": "2026-10-22T03:10:52.181005+00:00",
+      "checks": {
+        "ordinaryEn": 1572,
+        "ordinaryZh": 1572,
+        "sharedClock": 220,
+        "sharedHalfScale": 273,
+        "independentBoundary": 339
+      },
+      "evidence": [
+        "docs/qa/rpg-2-star-ocean-the-second_four-actor-combat_ordinary-default-technical-verdict_v01_20261021-230945-83d44982.md",
+        "outputs/cts34/closeout-20261021-230945-83d44982/rpg-2-star-ocean-the-second_combat-set_codex-closeout-proof_v01_20261021-230945-83d44982.json"
+      ],
+      "runtimeChanges": false,
+      "artApproved": false,
+      "motionFluidityApproved": false,
+      "humanPlaytestsAdded": 0,
+      "production": {
+        "before": 59.1,
+        "after": 59.1,
+        "changePercentagePoints": 0
+      },
+      "inspection": {
+        "before": 18.1,
+        "after": 20.1,
+        "changePercentagePoints": 2.0
+      },
+      "approval": {
+        "before": 7.8,
+        "after": 7.8,
+        "changePercentagePoints": 0
+      },
+      "limitations": "Labeled deterministic state/pose/handler fixtures; not normal-input gameplay or human motion review. Original parser and provider certificate-store failures retained; canonical unfiltered rerun passed."
+    },
     {
       "status": "completed-technical-pass",
       "tasks": [
@@ -2707,5 +2737,35 @@
     "at": "2026-10-22T23:41:12.670345+00:00",
     "evidence": "docs/qa/rpg-2-star-ocean-the-second_enemy-battle_mvp-default-adoption_codex-closeout_v01_20261022-193048-04f6b70e.md",
     "lesson": "Do mechanical two-constant comparisons directly. DeepSeek received an85KBsource pair and produced nothing within240s; use small data/code context tasks with concrete outputs instead of asking it to reread full actor source. Do not duplicate active workers or retry a timed-out mechanical task. Claude handles combined gameplay adapters; Codex independently verifies/integrates."
+  },
+  "latestUiRuntimeReview": {
+    "task": "review.content.ui-visuals",
+    "owner": "codex",
+    "status": "done",
+    "outcome": "passed",
+    "completedAt": "2026-10-23T00:00:57.020556+00:00",
+    "sourceCommit": "19e8e0bc829bae8431957e95739e7211805f3f91",
+    "evidence": [
+      "docs/qa/rpg-2-star-ocean-the-second_ui-runtime_compatibility-and-visual-review_codex-closeout-v01_20261022-194554-e9ce78bd.md",
+      "outputs/ui52/rpg-2-star-ocean-the-second_ui-runtime_codex-proof_v01_20261022-194554-e9ce78bd.json"
+    ],
+    "repair": "Existing navigation UI skin now supports the installed character-portrait dialogue profile and follows profile restoration. Unknown/moved profiles still refused; defaults unchanged.",
+    "actualInitialCaptureCount": 32,
+    "finalCombinedExplorationCaptures": 8,
+    "regressionChecks": 73,
+    "normalSceneFixtureOnly": true,
+    "productionBefore": 60.2,
+    "productionAfter": 60.2,
+    "inspectionBefore": 21.1,
+    "inspectionAfter": 21.6,
+    "approvalBefore": 7.8,
+    "approvalAfter": 7.8,
+    "creatorArtApproved": false,
+    "fullHumanPlaytest": false,
+    "remainingLimits": [
+      "Empty-save and selected scene-entry states only; populated/long-content states not exhaustively reviewed.",
+      "Post-fix packed export not rerun; known Script identity used.",
+      "NYC common scene default remains pending explicit authorization."
+    ]
   }
 }

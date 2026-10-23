@@ -1,3 +1,11 @@
+## Current verified UI compatibility and inspection closeout (2026-10-23T00:00:57.020556+00:00)
+
+- Source `19e8e0bc829bae8431957e95739e7211805f3f91`: repaired the existing optional navigation-skin + character-portrait dialogue conflict; default visuals remain unchanged.
+- Codex viewed32 actual bilingual ordinary/optional UI states and8 final combined exploration/dialogue/trace/closed states. Independent actual Godot73/73 compatibility checks passed. Ordinary EN/ZH header/footer RGBA and visible semantic control contract remain exact.
+- Production **60.2% ->60.2%(+0.0pp)**; inspection **21.1% ->21.6%(+0.5pp)**; creator approval **7.8% ->7.8%(+0.0pp)**. Coding111/111, content633/1881, inspection44/204, creator19/244. Frozen1183 tasks unchanged; no new version points.
+- Scene-entry fixtures only, not a human campaign playtest, final art acceptance, UI-pilot default authorization or a new packed-export pass. NYC common scene default awaits explicit creator authorization.
+- [Closeout](../docs/qa/rpg-2-star-ocean-the-second_ui-runtime_compatibility-and-visual-review_codex-closeout-v01_20261022-194554-e9ce78bd.md). Earlier entries below are historical snapshots.
+
 # Current verified state —2026-10-22
 
 Production **60.1%→60.2%(+0.1 rounded pp)**; exact weighted60.0638%→60.1914%(+0.1276pp). Coding111/111; content629→633/1881. Inspection21.1%→21.1%; final-art approval7.8%→7.8%. Frozen1183tasks unchanged.
