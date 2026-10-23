@@ -4,7 +4,7 @@
   "title": "世界之间",
   "englishTitle": "Worlds Between",
   "edition": "设计基线 v0.2 · 2026-10-15 创作者决定",
-  "updatedAt": "2026-10-23T01:24:09.038Z",
+  "updatedAt": "2026-10-23T01:41:54.391Z",
   "note": "规则以玩家确认的设计稿为基线，并已并入 2026-10-15 创作者决定；人物姓名与外观是待审提案，具体剧情留待后续设计。",
   "pitch": "从地下社区走出的旅人，以好奇心探索多元文明，招募伙伴，并成为不同世界认知差异的桥梁。",
   "pillars": [
@@ -8414,14 +8414,14 @@
     "combinedWiringCheck": "297/297 on39f252e, clean raw log; actual Chinese victory inspected."
   },
   "latestTaskProgress": {
-    "id": "current-native-windows-playtest-export",
+    "id": "review.content.audio",
     "status": "completed",
     "title": {
-      "zh": "原生 Windows 试玩包",
-      "en": "Native Windows playtest delivery"
+      "en": "Audio output technical preflight; listening criterion pending",
+      "zh": "音频输出技术检查；听感门未完成"
     },
-    "startedAt": "2026-10-23T01:07:09.701Z",
-    "sourceBefore": "bc42ae7ef8ea92eea54a53f99d55df19dcb432ab",
+    "startedAt": "2026-10-23T01:26:57.544Z",
+    "sourceBefore": "f1d2faca0a353cc2d916351eaac69ee8897850bc",
     "meters": {
       "production": {
         "before": 60.3,
@@ -8439,11 +8439,14 @@
         "changePercentagePoints": 0
       }
     },
-    "completedAt": "2026-10-23T01:24:09.038Z",
-    "sourceAfter": "39da062c68f69c74f8e5b243239ac2f9e28647dd",
+    "completedAt": "2026-10-23T01:41:54.391Z",
+    "sourceAfter": "f7aeb7a1991d5969905300e3b260e4cf65bc4e7f",
     "evidence": [
-      "docs/qa/rpg-2-star-ocean-the-second_mvp_native-windows-playtest_codex-closeout-v01_20261022-210709-4d8577b8.md"
-    ]
+      "docs/qa/rpg-2-star-ocean-the-second_mvp-audio_real-output-preflight_codex-verdict-v01_20261022-212657-710850bf.md"
+    ],
+    "completedScope": "technical output preflight only",
+    "ledgerTaskStatus": "blocked",
+    "ledgerTaskCompleted": false
   },
   "progressReporting": {
     "requiredFormat": "before → after (change in percentage points)",
@@ -10184,6 +10187,38 @@
       "sourceAfter": "3df5adae2fa38daf8fba5341bb0223685e1e267d",
       "evidence": [
         "docs/qa/rpg-2-star-ocean-the-second_mvp_packed-science-route_codex-closeout-v01_20261022-204453-2d897ed8.md"
+      ]
+    },
+    {
+      "id": "current-native-windows-playtest-export",
+      "status": "completed",
+      "title": {
+        "zh": "原生 Windows 试玩包",
+        "en": "Native Windows playtest delivery"
+      },
+      "startedAt": "2026-10-23T01:07:09.701Z",
+      "sourceBefore": "bc42ae7ef8ea92eea54a53f99d55df19dcb432ab",
+      "meters": {
+        "production": {
+          "before": 60.3,
+          "after": 60.3,
+          "changePercentagePoints": 0
+        },
+        "inspection": {
+          "before": 21.6,
+          "after": 21.6,
+          "changePercentagePoints": 0
+        },
+        "approval": {
+          "before": 7.8,
+          "after": 7.8,
+          "changePercentagePoints": 0
+        }
+      },
+      "completedAt": "2026-10-23T01:24:09.038Z",
+      "sourceAfter": "39da062c68f69c74f8e5b243239ac2f9e28647dd",
+      "evidence": [
+        "docs/qa/rpg-2-star-ocean-the-second_mvp_native-windows-playtest_codex-closeout-v01_20261022-210709-4d8577b8.md"
       ]
     }
   ],
@@ -12109,5 +12144,95 @@
       "docs/qa/rpg-2-star-ocean-the-second_mvp_native-windows-playtest_codex-closeout-v01_20261022-210709-4d8577b8.md",
       "outputs/native56/root/rpg-2-star-ocean-the-second_native56_delivery_codex-closeout-proof_v01_20261022-210709-4d8577b8.json"
     ]
+  },
+  "latestAudioTechnicalPreflight": {
+    "task": "review.content.audio",
+    "boundary": "actual-packed-audio-mix-technical-preflight",
+    "recordedAt": "2026-10-23T01:41:54.201686+00:00",
+    "sourceCommit": "f7aeb7a1991d5969905300e3b260e4cf65bc4e7f",
+    "gameSourceCommit": "d5f204373c17c62e45e92dea14c3a2e85c525062",
+    "pckSha256": "bded12fa9ea7b9db7d12c1078be7d5cfb5e3c72afab5582d70fdfd8c05bd98fe",
+    "results": [
+      {
+        "mode": "legacy",
+        "ratio": 0.5032720439239409,
+        "captureTag": "20261022-213747-7b703b9e",
+        "wav": "outputs/audio57/root/20261022-213747-7b703b9e/rpg-2-star-ocean-the-second_audio57_actual-mix_legacy-v01_20261022-213747-7b703b9e.wav",
+        "wavSha256": "6ccbe936fd953c572590663e01a83fe1f261424ff241cb703d5924d9d68a1326",
+        "seconds": 12.85,
+        "technicalChecks": 8,
+        "cueVoiceBindings": 11,
+        "actualMusicMix": {
+          "bus": "Master",
+          "class": "AudioStreamWAV",
+          "data_bytes": 71408,
+          "gain_db": -11,
+          "length_sec": 8,
+          "loop_mode": 1,
+          "mix_rate": 22050,
+          "playing": true,
+          "position_sec": 0.023,
+          "resource_path": "(in-memory AudioStreamWAV; no resource path)",
+          "stereo": false
+        },
+        "decoderWarning": "[aist#0:1/pcm_s16le @ 0000020f3f3c4d80] Guessed Channel Layout: stereo\r\n",
+        "riffDeclarationExact": false
+      },
+      {
+        "mode": "themed",
+        "ratio": 0.5003258015681998,
+        "captureTag": "20261022-213747-50466a99",
+        "wav": "outputs/audio57/root/20261022-213747-50466a99/rpg-2-star-ocean-the-second_audio57_actual-mix_themed-v01_20261022-213747-50466a99.wav",
+        "wavSha256": "f3dcf7a592d8c4c39db51832253fb5caa1e29787c81dfa44ee4ad00a4becb584",
+        "seconds": 12.85,
+        "technicalChecks": 8,
+        "cueVoiceBindings": 11,
+        "actualMusicMix": {
+          "bus": "Master",
+          "class": "AudioStreamWAV",
+          "data_bytes": 4850528,
+          "gain_db": -11,
+          "length_sec": 50.526,
+          "loop_mode": 1,
+          "mix_rate": 24000,
+          "playing": true,
+          "position_sec": 0.027,
+          "resource_path": "(in-memory AudioStreamWAV; no resource path)",
+          "stereo": true
+        },
+        "decoderWarning": "[aist#0:1/pcm_s16le @ 000001ba0e411780] Guessed Channel Layout: stereo\r\n",
+        "riffDeclarationExact": false
+      }
+    ],
+    "evidence": [
+      "docs/qa/rpg-2-star-ocean-the-second_mvp-audio_real-output-preflight_codex-verdict-v01_20261022-212657-710850bf.md",
+      "outputs/audio57/root/rpg-2-star-ocean-the-second_audio57_technical-closeout-proof_v01_20261022-212657-710850bf.json"
+    ],
+    "gameFilesChanged": 0,
+    "protectedTrackedGameFiles": 4917,
+    "technicalBoundaryPassed": true,
+    "listeningPerformed": false,
+    "audioQaGatePassed": false,
+    "creatorArtApproval": false,
+    "humanPlaytestsAdded": 0,
+    "status": "technical-output-pass-listening-gate-blocked",
+    "blocker": "This text/tool session has no verified listening input from game audio. Offline PCM analysis is not audition. No full review.content.audio completion claim.",
+    "production": {
+      "before": 60.3,
+      "after": 60.3,
+      "changePercentagePoints": 0
+    },
+    "inspection": {
+      "before": 21.6,
+      "after": 21.6,
+      "changePercentagePoints": 0
+    },
+    "approval": {
+      "before": 7.8,
+      "after": 7.8,
+      "changePercentagePoints": 0
+    },
+    "defaultFlagsChanged": false,
+    "existingWindowsBundleStillCurrent": true
   }
 }

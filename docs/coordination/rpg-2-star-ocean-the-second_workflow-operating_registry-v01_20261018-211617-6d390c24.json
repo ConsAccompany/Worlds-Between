@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-23T01:24:08.836292+00:00",
+  "updatedAt": "2026-10-23T01:41:54.201686+00:00",
   "purpose": "Operating queue and worktree ownership; no progress points or account details",
   "workflow": "docs/workflow.md",
   "canonicalLedger": "outputs/rpg-2-star-ocean-the-second_production-completion_task-ledger_v01_20261018-140533-3de52073.json",
@@ -1311,8 +1311,9 @@
     "deepseekCredit": "Stop all project production including Codex and both providers, save handoff, cancel pending resumption; no topup/fallback"
   },
   "nextDispatchPreferences": {
-    "primary": "review.content.audio",
-    "constraints": "One bounded existing audio QA criterion; useful disjoint support only. Provider auth/balance before fresh calls. No new packaging iterations or per-version points."
+    "primary": "missing-lin-que-four-direction-native-source",
+    "support": "independent-source-contract-and-export-checks",
+    "constraints": "Complex Godot/source generation to Claude or Codex; DeepSeek bounded package/schema validation. Audio hearing gate stays blocked; no repeated captures or provider retries to pretend listening."
   },
   "activeDualProviderBatch": {
     "id": "route55",
@@ -1420,11 +1421,25 @@
     "approvalsNotWaived": true
   },
   "nextProductionTask": {
-    "kind": "existing-content-qa",
-    "task": "review.content.audio",
+    "kind": "missing-required-character-exploration-source",
+    "task": "content.char.lin-que.static-south",
+    "relatedExistingTasks": [
+      "content.char.lin-que.static-south",
+      "content.char.lin-que.static-west",
+      "content.char.lin-que.static-north",
+      "content.char.lin-que.static-east",
+      "content.char.lin-que.idle-anim",
+      "content.char.lin-que.walk-south",
+      "content.char.lin-que.walk-west",
+      "content.char.lin-que.walk-north",
+      "content.char.lin-que.walk-east"
+    ],
     "status": "ready",
-    "owner": "codex",
-    "nextAction": "Inspect and actually audition the already produced science-MVP music/SFX against the existing audio-QA criterion. No default adoption, cosmetic sprite iteration, broad new test framework or final M9 claim. Preserve isolated audio/test profiles."
+    "owner": "claude",
+    "integrationOwner": "codex",
+    "supportOwner": "deepseek",
+    "output": "One coherent Lin Que four-direction exploration source package using the established native source/export/loader pipeline",
+    "nextAction": "Read existing Lin Que identity/character sheet and approved Sea-of-Stars direction. Preserve dark-blue layered short hair; source sheet remains concept/unapproved. Produce genuinely missing high-density native static/idle/walk sources toward the full four-direction set; no recolored 32x48 batching, cosmetic rework of completed actors, invented host/role, ordinary default adoption or art approval. Reuse existing author/checker pipeline; bounded independent source checks."
   },
   "lastCompletedProductionTask": {
     "task": "content.scene.city.native-default",
@@ -3059,5 +3074,18 @@
     "gameFilesChanged": 0,
     "productionBefore": 60.3,
     "productionAfter": 60.3
+  },
+  "latestAudioTechnicalPreflight": {
+    "sourceCommit": "f7aeb7a1991d5969905300e3b260e4cf65bc4e7f",
+    "evidence": [
+      "docs/qa/rpg-2-star-ocean-the-second_mvp-audio_real-output-preflight_codex-verdict-v01_20261022-212657-710850bf.md",
+      "outputs/audio57/root/rpg-2-star-ocean-the-second_audio57_technical-closeout-proof_v01_20261022-212657-710850bf.json"
+    ],
+    "technicalBoundary": "pass",
+    "ledgerTask": "review.content.audio",
+    "ledgerTaskStatus": "blocked-unmet-listening-criterion",
+    "gameFilesChanged": 0,
+    "defaultFlagsChanged": false,
+    "doNotRepeatPreflight": true
   }
 }

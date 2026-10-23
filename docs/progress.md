@@ -1,3 +1,10 @@
+## Current packed-audio output preflight (2026-10-23T01:41:54.201686+00:00)
+
+- Default and opt-in themed city music +11 isolated cue outputs captured from the shipped PCK using a declared scene/audio fixture. Master100%->50% output ratios0.503272/0.500326; Master mute, final silence, nonzero cues and clipping checks pass (8 each mode),22 exact cue-asset bindings. Defaults/game bytes unchanged; existing Windows package is current.
+- This is offline rendered PCM, **not listening**. Existing `review.content.audio` stays blocked for its actual in-game audition criterion; no points or approval inferred. Source `f7aeb7a1991d5969905300e3b260e4cf65bc4e7f`. [Verdict](docs/qa/rpg-2-star-ocean-the-second_mvp-audio_real-output-preflight_codex-verdict-v01_20261022-212657-710850bf.md).
+- Production **60.3% ->60.3%(+0.0pp)**; inspection **21.6% ->21.6%(+0.0pp)**; creator approval **7.8% ->7.8%(+0.0pp)**. Frozen baseline and final acceptance unchanged.
+- Next missing production: Lin Que's coherent four-direction exploration source package; preserve existing identity and approved style direction, no default/canon changes or cosmetic iteration of completed actors.
+
 ## Current native Windows playtest delivery (2026-10-23T01:24:08.836292+00:00)
 
 - Native unsigned x86_64 EXE + paired PCK + notices/readme/manifest exported from unchanged game source. Local ZIP202540824bytes; no editor install required. Existing developer bundle preserved.
