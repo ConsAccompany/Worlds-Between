@@ -1,3 +1,10 @@
+## Current verified NYC MVP default adoption (2026-10-23T00:18:40.399163+00:00)
+
+- Creator explicitly authorized NYC STYLE46 default use, polish deferred. Source `daf04af0f120069da7330f16f432376dbd8690af` enables the common-style plate in ordinary gameplay; final art acceptance remains separate.
+- No city-art flags or static/policy overrides in bilingual runtime traversal:56 checks,920 held-input movement frames,0 off-mask,12 native captures.145 precedence checks preserve explicit old/common flags, development directory and old-city explicit-off rollback.
+- Production **60.2% ->60.3%(+0.1pp rounded)**; inspection **21.6% ->21.6%**; creator art approval **7.8% ->7.8%**. Coding111/111, content635/1881, inspection44/204, creator19/244; frozen1183 tasks unchanged.
+- [Closeout](../docs/qa/rpg-2-star-ocean-the-second_nyc-city-hall-park_mvp-default-adoption_codex-closeout-v01_20261022-201234-12794449.md). Scene-entry fixture, not full-menu/campaign or human timed play. All four common-style scene default adoptions implemented; source/editor/refinement limitations remain separate. Older entries below are historical snapshots.
+
 ## Current verified UI compatibility and inspection closeout (2026-10-23T00:00:57.020556+00:00)
 
 - Source `19e8e0bc829bae8431957e95739e7211805f3f91`: repaired the existing optional navigation-skin + character-portrait dialogue conflict; default visuals remain unchanged.

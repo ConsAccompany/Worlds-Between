@@ -2,7 +2,7 @@
   "id": "rpg-2-star-ocean-the-second_production-completion_v01",
   "schemaVersion": 2,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-23T00:00:19Z",
+  "updatedAt": "2026-10-23T00:16:54Z",
   "zh": "制作完成度任务台账：衡量已完成的工作量（编码 40% + 内容 60%）；检查／审查与创作者批准分开计量，均不改变制作分；免除的审查不算已执行的工作；运营任务列出负责方但不计百分比。",
   "en": "Production-completion task ledger: measures work done (coding 40% + content 60%); inspection/review and creator approval are separate meters and never change production credit; waived reviews are not performed work; operations tasks list owners but carry no percentage.",
   "brief": "docs/rpg-2-star-ocean-the-second_production-completion_bilingual-brief_v01_20261018-140533-3ea2a621.md",
@@ -1028,6 +1028,22 @@
         },
         "previousTaskSetSha256": "bb3aa7abeb638abf8ac326e4bcbcc61493b06f04081b766de5acd194bf3d281a",
         "taskSetSha256": "1da4c2f2c0f34c913ece252b9a4037fbe7320fa99a0bdd4ebfe77a8f0086410d"
+      },
+      {
+        "at": "2026-10-23T00:12:37Z",
+        "kind": "owner-assignment",
+        "taskId": "content.scene.city.native-default",
+        "fromOwner": "claude",
+        "toOwner": "codex",
+        "changedTaskIds": [
+          "content.scene.city.native-default"
+        ],
+        "reason": {
+          "zh": "",
+          "en": "Creator explicitly authorized NYC STYLE46 default use. Codex applies the bounded existing default selector and verifies the normal path; no new art production."
+        },
+        "previousTaskSetSha256": "1da4c2f2c0f34c913ece252b9a4037fbe7320fa99a0bdd4ebfe77a8f0086410d",
+        "taskSetSha256": "631b8c57290c3c873dbec3ba0aaa9dffd9312be806080f16e53fe010e737fe02"
       }
     ],
     "pointsByStage": {
@@ -1060,8 +1076,8 @@
     "production": {
       "zh": "制作完成度",
       "en": "Production completion",
-      "percent": 60.2,
-      "percentLabel": "60.2%",
+      "percent": 60.3,
+      "percentLabel": "60.3%",
       "formula": "round1(40 * codingDonePoints/codingTotalPoints + 60 * contentDonePoints/contentTotalPoints)",
       "coding": {
         "done": 111,
@@ -1072,12 +1088,12 @@
         "tasksDone": 23
       },
       "content": {
-        "done": 633,
+        "done": 635,
         "total": 1881,
-        "percent": 33.7,
+        "percent": 33.8,
         "weight": 60,
         "tasks": 715,
-        "tasksDone": 206
+        "tasksDone": 207
       }
     },
     "inspection": {
@@ -1142,11 +1158,11 @@
         "waivedPoints": 0
       },
       "content": {
-        "done": 633,
+        "done": 635,
         "total": 1881,
-        "percent": 33.7,
+        "percent": 33.8,
         "tasks": 715,
-        "tasksDone": 206,
+        "tasksDone": 207,
         "waivedTasks": 0,
         "waivedPoints": 0
       },
@@ -1198,13 +1214,13 @@
     },
     "byOwner": {
       "claude": {
-        "tasks": 709,
+        "tasks": 708,
         "operationsTasks": 0,
-        "points": 1876,
+        "points": 1874,
         "pointsDone": 574,
         "byStatus": {
           "done": 148,
-          "blocked": 4,
+          "blocked": 3,
           "todo": 557
         },
         "readyInQueue": 2,
@@ -1222,12 +1238,12 @@
         "revisionsBlockingApproval": 0
       },
       "codex": {
-        "tasks": 225,
+        "tasks": 226,
         "operationsTasks": 2,
-        "points": 289,
-        "pointsDone": 183,
+        "points": 291,
+        "pointsDone": 185,
         "byStatus": {
-          "done": 115,
+          "done": 116,
           "todo": 106,
           "not_required": 4
         },
@@ -1348,7 +1364,7 @@
       },
       "scenes": {
         "content": {
-          "done": 280,
+          "done": 282,
           "total": 282
         },
         "technical-inspection": {
@@ -3164,7 +3180,7 @@
     {"id":"content.scene.city.plate","type":"integration","title":{"zh":"纽约市政厅公园（城市） · 场景底板","en":"NYC City Hall Park (city) · scene plate"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":4,"doneCriterion":{"zh":"可玩场景底板已提交并在运行时可进入（概念图不算）","en":"A playable scene plate is committed and enterable in the runtime (a concept image does not count)"},"dependsOn":[],"evidence":["docs/qa/rpg-2-star-ocean-the-second_scifi-region-eleven-scene_visual-gate-audit_m8-v01_20261014-201003-6b73e7a4.md","outputs/rpg-2-star-ocean-the-second_scifi-city_navigation-manifest_m8-boundaries_20261014-063728-a19da10f.json"],"subject":{"kind":"scene-gate","id":"visual-scene.city"}},
     {"id":"content.scene.city.wiring","type":"integration","title":{"zh":"纽约市政厅公园（城市） · 碰撞、热点与出入口","en":"NYC City Hall Park (city) · collision, hotspots and exits"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":3,"doneCriterion":{"zh":"碰撞、热点、出入口与存档有自动检查","en":"Collision, hotspots, exits and saves have automated checks"},"dependsOn":["content.scene.city.plate"],"evidence":["outputs/rpg-2-star-ocean-the-second_scifi-city_navigation-manifest_m8-boundaries_20261014-063728-a19da10f.json","game/tests/m7_smoke.gd"],"subject":{"kind":"scene-gate","id":"visual-scene.city"}},
     {"id":"content.scene.city.native-pass","type":"native-pixel","title":{"zh":"纽约市政厅公园（城市） · 原生像素画质版","en":"NYC City Hall Park (city) · native pixel quality pass"},"area":"scenes","stage":"content","owner":"claude","status":"done","points":12,"doneCriterion":{"zh":"原生像素画质版（道具／分层）已提交并有 QA，可为可选启用","en":"A native pixel quality pass (fixtures / layers) is committed with QA; opt-in is allowed"},"dependsOn":["content.scene.city.plate"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_nyc-city-hall-park_walkable-pilot-640x360_qa-note_unapproved-v04_20261016-172144-eb092a52.md"],"subject":{"kind":"scene-gate","id":"visual-scene.city"}},
-    {"id":"content.scene.city.native-default","type":"integration","title":{"zh":"纽约市政厅公园（城市） · 画质版默认接入","en":"NYC City Hall Park (city) · quality pass on by default"},"area":"scenes","stage":"content","owner":"claude","status":"blocked","points":2,"doneCriterion":{"zh":"画质版默认在游戏中使用","en":"The quality pass is used in the game by default"},"dependsOn":["content.scene.city.native-pass","content.scene.city.wiring"],"evidence":["docs/design/rpg-2-star-ocean-the-second_science-scenes_creator-style-consistency-revision_v01_20261022-155956-1414792c.md"],"subject":{"kind":"scene-gate","id":"visual-scene.city"},"statusAt":"2026-10-22T20:09:19Z","note":{"zh":"","en":"Creator reports inconsistent art styles; no default-use authorization. Unify one outdoor sample against accepted science interior material/light language before propagation; all switches remain false."}},
+    {"id":"content.scene.city.native-default","type":"integration","title":{"zh":"纽约市政厅公园（城市） · 画质版默认接入","en":"NYC City Hall Park (city) · quality pass on by default"},"area":"scenes","stage":"content","owner":"codex","status":"done","points":2,"doneCriterion":{"zh":"画质版默认在游戏中使用","en":"The quality pass is used in the game by default"},"dependsOn":["content.scene.city.native-pass","content.scene.city.wiring"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_nyc-city-hall-park_mvp-default-adoption_codex-closeout-v01_20261022-201234-12794449.md"],"subject":{"kind":"scene-gate","id":"visual-scene.city"},"statusAt":"2026-10-23T00:16:54Z","note":{"zh":"","en":"Creator call_db48b343fc4f4addb4767d184d988327 item0 explicitly authorized NYC STYLE46 MVP default use, polish deferred. Ordinary no-city-flag EN/ZH traversal56 checks and145 selector/rollback checks passed; final art and human play acceptance remain separate."}},
     {"id":"qa.scene.city.check","type":"technical-check","title":{"zh":"纽约市政厅公园（城市） · 技术检查","en":"NYC City Hall Park (city) · technical check"},"area":"scenes","stage":"technical-inspection","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"当前画质版的 Godot 检查全部通过","en":"Godot checks of the current quality pass all pass"},"dependsOn":["content.scene.city.native-pass"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_nyc-city-hall-park_common-style-runtime_codex-closeout_v01_20261022-183638-a4e273b9.md"],"subject":{"kind":"scene-gate","id":"visual-scene.city"},"target":"content.scene.city.native-pass","statusAt":"2026-10-22T22:50:28Z","outcome":"passed","note":{"zh":"","en":"Godot final fixed60 bilingual53/53 with926 held movement frames0offmask,69 package predicates and noflag3-destination beforeafter exact. Native app clean gate NOT passed (4 known errors), GUIunverified."},"history":[{"outcome":"passed","statusAt":null,"evidence":["docs/qa/rpg-2-star-ocean-the-second_nyc-city-hall-park_scene-candidate-640x360_qa-note_unapproved-v06_20261017-165253-4519dffe.md"]}]},
     {"id":"review.scene.city","type":"visual-review","title":{"zh":"纽约市政厅公园（城市） · 视觉审查","en":"NYC City Hall Park (city) · visual review"},"area":"scenes","stage":"visual-review","owner":"codex","status":"done","points":1,"doneCriterion":{"zh":"Codex 审查 640×360 实机画面并记录结论","en":"Codex reviews actual 640x360 captures and records a verdict"},"dependsOn":["qa.scene.city.check"],"evidence":["docs/qa/rpg-2-star-ocean-the-second_nyc-city-hall-park_common-style-runtime_codex-closeout_v01_20261022-183638-a4e273b9.md"],"subject":{"kind":"scene-gate","id":"visual-scene.city"},"target":"content.scene.city.native-pass","statusAt":"2026-10-22T22:50:28Z","note":{"zh":"root（Codex）查看了 v06 英文入口实机画面（非已否决的 v04，非生成参考图）：可交创作者审查。无新的碰撞测试。","en":"Viewed actual final entry,fountain,andcanopy: direct-sample initial image placed water against walk lane; runtime UVfit+24rows fixes gross fountain alignment and clock visibility. Generated raster and legacy rim/reveal limits remain unapproved; ready for separate MVP-default decision."},"outcome":"technical-pass","history":[{"outcome":"passed","statusAt":"2026-10-18T19:35:26Z","evidence":["docs/qa/rpg-2-star-ocean-the-second_codex-visual-review_six-verdicts_qa-receipt_v01_20261018-153526-67e353de.md","outputs/nyc-chp-v06_20261017-165253-4519dffe/rpg-2-star-ocean-the-second_nyc-city-hall-park_godot-en-entry-640x360_unapproved-v06_20261017-165253-4519dffe.png"]}]},
     {"id":"creator.scene.city.accept","type":"creator-acceptance","title":{"zh":"纽约市政厅公园（城市） · 场景画质验收","en":"NYC City Hall Park (city) · scene-quality acceptance"},"area":"scenes","stage":"creator-approval","owner":"creator","status":"todo","points":1,"doneCriterion":{"zh":"approvalLedger 记有 acceptanceKind scene-visual 的验收条目","en":"approvalLedger records an acceptanceKind scene-visual item"},"dependsOn":["content.scene.city.native-pass"],"evidence":[],"subject":{"kind":"scene-gate","id":"visual-scene.city"},"target":"content.scene.city.native-pass"},
