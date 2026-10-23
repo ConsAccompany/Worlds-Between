@@ -1,0 +1,65 @@
+{
+  "recordedAt": "2026-10-23T00:48:29.504809+00:00",
+  "kind": "Codex source-verified persistence oracle, no execution claim",
+  "sourceSha256": {
+    "game/scripts/app_state.gd": "e3a162ef3d70aafbb97f4a668b69813dc8aed3e327ee6a87b398aba29fdbc33f",
+    "game/scripts/save_screen.gd": "9e3a956fa9de8a274ac0ccc56d980885e948cb128fe45ffaf4608fa39574ba64"
+  },
+  "snapshotToRuntime": {
+    "heroName": "hero_name",
+    "heroAppearance": "hero_appearance",
+    "language": "language",
+    "destination": "current_destination_id",
+    "hero": "hero_state",
+    "members": "member_states",
+    "activeParty": "active_party_ids",
+    "recruited": "recruited_members",
+    "partyTalkSeen": "party_talk_seen",
+    "partyBonds": "party_bonds",
+    "fieldInsights": "field_insights",
+    "fieldTraces": "field_traces",
+    "jiRecordsChecked": "ji_records_checked",
+    "relayChecked": "relay_checked",
+    "areasVisited": "areas_visited",
+    "machineObserved": "machine_observed",
+    "demoCompleted": "demo_completed",
+    "surveyClues": "survey_clues",
+    "surveyLinks": "survey_links",
+    "surveySolved": "survey_solved",
+    "annexRoom": "current_annex_room",
+    "wrongPairAttempts": "wrong_pair_attempts",
+    "wrongJudgmentAttempts": "wrong_judgment_attempts",
+    "growthFinalQuests": "cleared_final_quests"
+  },
+  "travelExactFields": {
+    "travel.calendarMinutes": "calendar_minutes",
+    "travel.calendarWeekIndex": "calendar_week_index",
+    "travel.locationId": "current_location_id",
+    "travel.discovered": "discovered_locations",
+    "travel.lastTravel": "last_travel"
+  },
+  "locationFields": [
+    "scene",
+    "position",
+    "destination",
+    "annexRoom",
+    "annexSurfaceReturnPosition"
+  ],
+  "elapsedRuntimeCaution": "playTimeSeconds advances under normal process frames; compare snapshot and immediate loaded value with explicitly measured elapsed bound; do not require timeless raw dictionary equality",
+  "uiSteps": [
+    "Save entry button, intended manual slot Save click",
+    "Read exact manual entry id/kind/slot/schema and snapshot before exit",
+    "Real process exit, a distinct PID in same isolated profile",
+    "Main-menu Load then same manual slot Load click",
+    "Assert actual routed scene and compare saved/live fields, not just save-screen summaries"
+  ],
+  "antiFalsePass": [
+    "Do not seed party/surveys/recruitment/quest flags",
+    "Do not call load_save/write_manual_save directly as proof of UI use",
+    "A map saved position of zero is meaningful map context, not area position",
+    "Wrong schema or failed scene load is failure",
+    "Read-only source geometry is not proof of real held-key movement",
+    "Process restart uses a distinct process, not an autoload reset"
+  ],
+  "deepseekReviewDisposition": "Useful warning list; supplied excerpts omitted make_snapshot so calendar names were unconfirmed there. Codex verified exact nested travel keys from full pinned source. No new requirements or points."
+}

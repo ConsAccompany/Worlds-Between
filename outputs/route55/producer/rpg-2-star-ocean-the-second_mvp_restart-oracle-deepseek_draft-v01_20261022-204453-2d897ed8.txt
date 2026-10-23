@@ -1,0 +1,25 @@
+Supporting review only; no tests were run. No score/approval or requirement change. Scope is the supplied excerpts. Unconfirmed: exact calendar/travel keys, auto-save creation/rotation, SaveStore storage/schema values, main-menu route into the save screen, `loaded_scene_path`/snapshot validators, destination IDs, and appearance data beyond `heroAppearance`.
+
+**Persisted oracle — same entry ID before restart vs after UI load**
+- Gate: entry-level `schemaVersion`, `id`, `kind`, `slot`; non-current schema is not loadable.
+- Quest/progress: snapshot `growthFinalQuests` (runtime `cleared_final_quests`), `demoCompleted`, `areasVisited`, `surveySolved`, `surveyClues`, `surveyLinks`, `relayChecked`, `jiRecordsChecked`, `machineObserved`, `enemyCleared`. No generic active-quest log is supplied. At the report checkpoint, `can_submit_report()` must remain true.
+- Party: `activeParty` (IDs/order), `recruited`, `members`, `partyTalkSeen`, `partyBonds`, `fieldInsights`, `fieldTraces`; growth in `hero` and `members`.
+- Appearance: `heroAppearance`; `heroName` is identity, not appearance. Anything else is unconfirmed.
+- Calendar: exact fields unconfirmed. `travel` is only implied by the comment; `_restore_travel_state`/`_restore_commerce_state` inputs are not shown. Test only the stated contract: clock restored exactly, no calendar/week signals, absent travel starts at calendar start. Do not invent day/week keys.
+- Location/position: `destination`, `scene`, `annexRoom`, `position[0]`/`[1]`, `annexSurfaceReturnPosition[0]`/`[1]`, `language`, `playTimeSeconds`. No z/facing is supplied; `annexSurfaceReturnPosition` is separate. `save_return_scene`/`save_return_position` are runtime inputs, not snapshot fields. Also restored: `playtestEvents`, `wrongPairAttempts`, `wrongJudgmentAttempts`.
+
+**UI path**
+Use the packaged build and its own save directory. Run the journey to the checkpoint. Open the save screen in save mode; press the intended `manual_save_buttons[slot-1]` Save. Confirm feedback, but capture the exact entry itself. Fully exit; confirm a new process/PID; relaunch. Reopen the save screen; press that slot's `manual_load_buttons` Load. Confirm the scene change. Compare the entry's snapshot fields and live state: scene/destination, spawned position, party/recruited UI, hero appearance, progress, and calendar behavior. Use a fresh manual slot for continuation evidence.
+
+**Pitfalls / false passes**
+- Direct `write_manual_save`/`load_save`/`SaveStore` calls, `change_scene`, or scene reload are not a process restart; autoload state survives.
+- `_summary` checks only schema, destination, hero level, activeParty size, and note; the screen can look right while party detail, quest flags, bonds, appearance, calendar, and exact position differ.
+- `_save` reports success for any nonempty ID; `load_save` returns true after validation/migration, not equality.
+- `_latest_manual` loads the first slot match; stale/duplicate ordering can load the wrong ID. Assert the entry ID and schema. A disabled button, schema mismatch, or invalid snapshot means no load happened.
+- `load_save` mutates state before `change_scene_to_file`; a failed scene transition can leave correct-looking fields on the old scene.
+- Defaults hide omissions: missing `heroAppearance` becomes `male`, missing `annexSurfaceReturnPosition` becomes `[558,143]`, and missing `partyBonds` gain zeroes. Coincidental defaults are not persistence proof.
+- Raw equality is not the oracle: `GrowthRules.normalize_member` can mutate `hero`/`members`; receipt, battle, guide, and run fields reset on load.
+- `save_return_position` is not proven current; verify the save was taken after movement and that snapshot position matches the observed checkpoint. `resume_annex_position` mirrors `position`, so it is not independent evidence.
+- `playTimeSeconds` advances after load; compare saved/immediate values with tolerance.
+- Back is not Load: it returns to `save_return_scene` and sets resume flags; it does not read the save.
+- Auto-save order/creation is unconfirmed and may overwrite evidence. Calendar fields are unconfirmed, so a clean scene load alone cannot prove calendar correctness.
