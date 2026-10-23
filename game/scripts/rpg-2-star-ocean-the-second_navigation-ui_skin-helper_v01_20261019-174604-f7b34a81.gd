@@ -55,6 +55,10 @@ const FONT_COLOR_NAMES := ["font_color", "font_hover_color", "font_pressed_color
 const EXPLORE_HEADER_RECT := Rect2(0, 0, 640, 62)
 const EXPLORE_FOOTER_RECT := Rect2(0, 318, 640, 42)
 const EXPLORE_DIALOGUE_RECT := Rect2(87, 93, 466, 185)
+# Optional character-ui-portraits pilot: its exact dialogue profile (panel, title, text, invite, later), entered from
+# and reverted to the exact original layout above. Accepted only on the panel that installed helper owns.
+const PORTRAITS_SCRIPT := "res://scripts/rpg-2-star-ocean-the-second_character-ui-portraits_helper_v01_20261019-233832-b7c4e912.gd"
+const PORTRAIT_DIALOGUE_LAYOUT := [Rect2(8, 28, 624, 304), Rect2(274, 42, 344, 26), Rect2(274, 76, 344, 186), Rect2(274, 278, 160, 36), Rect2(446, 278, 160, 36)]
 const ANNEX_HEADER_RECT := Rect2(0, 0, 640, 62)
 const ANNEX_FOOTER_RECT := Rect2(0, 318, 640, 42)
 const ANNEX_OVERLAY_RECT := Rect2(53, 41, 534, 278)
@@ -327,6 +331,57 @@ func _chrome(parent: Node, rect: Rect2, what: String) -> ColorRect:
 	return found
 
 
+# The exploration dialogue panel. Without the portrait pilot this is exactly _chrome(). With the installed portrait
+# helper the panel and its four controls must sit exactly in either the helper's recorded original layout (which must
+# be EXPLORE_DIALOGUE_RECT) or its exact portrait profile; both layouts must clear the plate border, and only that
+# helper's own frame/portrait may be children. Returns [panel, follow] or [] after _fail.
+func _dialogue_panel(screen: Node, overlay: Node, buttons: Array[Button], labels: Array[Control]) -> Array:
+	var helper: Variant = screen.get("character_ui_portraits")
+	if not helper is Control or helper.get_script() == null or helper.get_script() != load(PORTRAITS_SCRIPT) or helper.get("_installed_dialogue") != true:
+		var plain := _chrome(overlay, EXPLORE_DIALOGUE_RECT, "dialogue panel")
+		return [] if plain == null else [plain, false]
+	var panel: Variant = helper.get("_dialogue_panel")
+	var original: Variant = helper.get("_dialogue_original")
+	if not panel is ColorRect or panel.get_parent() != overlay or not original is Dictionary or helper.get("DIALOGUE_PANEL_RECT") != PORTRAIT_DIALOGUE_LAYOUT[0]:
+		_fail("portrait dialogue profile not installed on the dialogue panel")
+		return []
+	if helper.get("_dialogue_title") != labels[0] or helper.get("_dialogue_text") != labels[1] or helper.get("_dialogue_invite") != buttons[0] or helper.get("_dialogue_later") != buttons[1]:
+		_fail("portrait dialogue profile does not own the scene's dialogue controls")
+		return []
+	var controls: Array = [panel, labels[0], labels[1], buttons[0], buttons[1]]
+	var base := []
+	var live := []
+	for index in controls.size():
+		var key: String = ["panel", "title", "text", "invite", "later"][index]
+		if not original.get(key) is Rect2:
+			_fail("portrait dialogue profile has no original " + key)
+			return []
+		base.append(original[key])
+		live.append(Rect2(controls[index].position, controls[index].size))
+	# Godot expands a requested size to the current font/control minimum (e.g. title26 ->27).
+	# Compare exact effective rectangles rather than tolerances or raw requested sizes.
+	var effective_base := []
+	var effective_portrait := []
+	for index in controls.size():
+		var minimum: Vector2 = controls[index].get_combined_minimum_size()
+		effective_base.append(Rect2(base[index].position, base[index].size.max(minimum)))
+		effective_portrait.append(Rect2(PORTRAIT_DIALOGUE_LAYOUT[index].position, PORTRAIT_DIALOGUE_LAYOUT[index].size.max(minimum)))
+	if base[0] != EXPLORE_DIALOGUE_RECT or (live != effective_base and live != effective_portrait):
+		_fail("missing dialogue panel ColorRect " + str(EXPLORE_DIALOGUE_RECT) + " or exact portrait profile")
+		return []
+	for child in panel.get_children():
+		if child != helper.get("_dialogue_frame") and child != helper.get("_dialogue_portrait"):
+			_fail("dialogue panel already has children (already skinned?)")
+			return []
+	for layout in [base, PORTRAIT_DIALOGUE_LAYOUT]:
+		var button_rects := []
+		for index in [3, 4]:
+			button_rects.append(Rect2(layout[index].position, layout[index].size.max(controls[index].get_combined_minimum_size())))
+		if not _check_plate_rects(layout[0], "panel", buttons, button_rects, labels, [layout[1].position, layout[2].position]):
+			return []
+	return [panel, true]
+
+
 # A full-view overlay (dim) ColorRect, as built by the scene; it stays untouched.
 func _overlay(source: Object, ref: String, canvas: Node) -> ColorRect:
 	var overlay: Variant = source.get(ref)
@@ -386,13 +441,17 @@ func _collect_exploration(screen: Node) -> Dictionary:
 		return {}
 	var header := _chrome(canvas, EXPLORE_HEADER_RECT, "header")
 	var footer := _chrome(canvas, EXPLORE_FOOTER_RECT, "footer")
-	var panel := _chrome(overlay, EXPLORE_DIALOGUE_RECT, "dialogue panel")
-	if header == null or footer == null or panel == null:
+	if header == null or footer == null:
 		return {}
+	var found := _dialogue_panel(screen, overlay, dialogue_buttons, dialogue_labels)
+	if found.is_empty():
+		return {}
+	var panel: ColorRect = found[0]
 	var plates := _layer([header, footer], ["hud-band", "hud-band"], bar_buttons, bar_labels, canvas)
 	var dialogue := _layer([panel], ["panel"], dialogue_buttons, dialogue_labels, overlay)
 	if plates.is_empty() or dialogue.is_empty():
 		return {}
+	dialogue[0]["follow"] = found[1]
 	plates.append_array(dialogue)
 	return _targets("exploration", plates, [bar_buttons, dialogue_buttons], [bar_labels, dialogue_labels], [header, footer, panel, overlay])
 
@@ -510,18 +569,29 @@ func _effective_rect(control: Control) -> Rect2:
 
 
 func _check_plate(rect: Rect2, key: String, buttons: Array[Button], labels: Array[Control]) -> bool:
+	var button_rects := []
+	for button in buttons:
+		button_rects.append(_effective_rect(button))
+	var label_points := []
+	for label in labels:
+		label_points.append(label.position)
+	return _check_plate_rects(rect, key, buttons, button_rects, labels, label_points)
+
+
+func _check_plate_rects(rect: Rect2, key: String, buttons: Array[Button], button_rects: Array, labels: Array[Control], label_points: Array) -> bool:
 	var s: Array = _slices[key]
 	if not is_finite(rect.size.x) or not is_finite(rect.size.y) or not VIEW_RECT.encloses(rect) or rect.size.x <= s[0] + s[2] or rect.size.y <= s[1] + s[3]:
 		return _fail("plate outside the 640x360 view or below its slices")
 	var inner := Rect2(rect.position + Vector2(s[0], s[1]), rect.size - Vector2(s[0] + s[2], s[1] + s[3]))
 	var label_inner := Rect2(inner.position - Vector2(0, LABEL_TOP_ALLOWANCE), inner.size + Vector2(0, LABEL_TOP_ALLOWANCE))
-	for button in buttons:
-		var button_rect := _effective_rect(button)
+	for index in buttons.size():
+		var button_rect: Rect2 = button_rects[index]
 		if rect.intersects(button_rect) and not inner.encloses(button_rect):
-			return _fail("plate border would crowd button " + String(button.name))
-	for label in labels:
-		if rect.has_point(label.position) and not label_inner.has_point(label.position):
-			return _fail("plate border would crowd label " + String(label.name))
+			return _fail("plate border would crowd button " + String(buttons[index].name))
+	for index in labels.size():
+		var point: Vector2 = label_points[index]
+		if rect.has_point(point) and not label_inner.has_point(point):
+			return _fail("plate border would crowd label " + String(labels[index].name))
 	return true
 
 
@@ -579,6 +649,10 @@ func _add_plate(item: Dictionary) -> void:
 	parent.add_child(plate)
 	plate.position = Vector2.ZERO
 	plate.size = item["size"]
+	if item.get("follow", false):
+		# Portrait profile: draw under the helper's own frame/portrait and track the panel's exact rect both ways.
+		parent.move_child(plate, 0)
+		plate.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_undo.append(func():
 		if is_instance_valid(plate):
 			if plate.get_parent() != null:
