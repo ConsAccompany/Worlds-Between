@@ -1,3 +1,11 @@
+## Current portable developer playtest delivery (2026-10-23T00:42:30.131145+00:00)
+
+- A current Windows developer runtime+PCK ZIP is now built and independently verified from an extracted directory with spaces; no source project/editor installation required. Source/evidence `cb9e9973946a5e39ea7cccb8eca9a87c2b28aaf3`, game content `d5f204373c17c62e45e92dea14c3a2e85c525062`.
+-94/94 packed checks;20 bilingual native captures;14 visually inspected. Ordinary NYC/Washington exterior/records/Chicago defaults, heroes/three companion combat sets and both enemy animations load.3001 protected game files unchanged.
+- Local binary delivery is under ignored `work/p54-c1425087/` in the primary workspace; GitHub has the verified tools, guide, manifest and evidence, not the251MB ZIP. Developer bundle, not native release export or full campaign/human playtest.
+- Production **60.3% ->60.3%(+0.0pp)**; inspection **21.6% ->21.6%(+0.0pp)**; creator approval **7.8% ->7.8%(+0.0pp)**. No duplicate version/build points. Ji moving-source all-pass inspection stays blocked; polish deferred.
+- [Closeout](../docs/qa/rpg-2-star-ocean-the-second_mvp_portable-playtest_codex-closeout-v01_20261022-202347-7fea20f0.md). Next: packaged normal-route journey through recruitment, report, battle return and save/quit/reload. Older entries below are historical.
+
 ## Current verified NYC MVP default adoption (2026-10-23T00:18:40.399163+00:00)
 
 - Creator explicitly authorized NYC STYLE46 default use, polish deferred. Source `daf04af0f120069da7330f16f432376dbd8690af` enables the common-style plate in ordinary gameplay; final art acceptance remains separate.
