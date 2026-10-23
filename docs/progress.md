@@ -1,3 +1,11 @@
+## Current packaged science-route closure (2026-10-23T01:03:15.812437+00:00)
+
+- Current developer bundle's full female route passes by ordinary key/mouse input in Chinese and English: menu/setup, real travel, all3 recruits,6 survey rooms/18clues/9links/3answers, walking sentry encounter/natural full-auto win/result return, NYC report, manual Save, actual UI Quit, distinct-process UI Load.
+-382/382 checks across4 processes;34 native captures,12 final key captures visually inspected.24 saved-state bindings,5 travel bindings and exact physical position survive restart. JSON float/integer representation is compared by exact value; mutation guards reject real data changes.
+- No game/default/content changes. Existing developer ZIP remains current. Scripted fixed-timestep functional tests; no human pacing, art approval or final M9 regression claim.
+- Production **60.3% ->60.3%(+0.0pp)**; inspection **21.6% ->21.6%(+0.0pp)**; creator approval **7.8% ->7.8%(+0.0pp)**. Frozen1183 tasks unchanged. Source/evidence `3df5adae2fa38daf8fba5341bb0223685e1e267d`; [closeout](../docs/qa/rpg-2-star-ocean-the-second_mvp_packed-science-route_codex-closeout-v01_20261022-204453-2d897ed8.md).
+- Next bounded delivery task: official matching Windows-template preflight and native executable candidate; polish remains deferred. Older entries below are historical.
+
 ## Current portable developer playtest delivery (2026-10-23T00:42:30.131145+00:00)
 
 - A current Windows developer runtime+PCK ZIP is now built and independently verified from an extracted directory with spaces; no source project/editor installation required. Source/evidence `cb9e9973946a5e39ea7cccb8eca9a87c2b28aaf3`, game content `d5f204373c17c62e45e92dea14c3a2e85c525062`.
