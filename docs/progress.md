@@ -1,3 +1,11 @@
+## Current native Windows playtest delivery (2026-10-23T01:24:08.836292+00:00)
+
+- Native unsigned x86_64 EXE + paired PCK + notices/readme/manifest exported from unchanged game source. Local ZIP202540824bytes; no editor install required. Existing developer bundle preserved.
+- Independent ZIP extraction/hash/PE checks and73 static package checks pass;13 checker controls pass after Codex corrections. Actual release-window Chinese new heroine/map/NYC/manual Save/UI Quit -> distinct process UI Load -> separate-slot resave;30 persistent fields exact, original events retained plus one expected location event, first slot untouched. English menu verified;8 game-window captures.
+- Unsupported external-script attempts failed and remain recorded; release-runtime preflight now rejects this false test route. Native movement/full route/human timed plays/art acceptance not claimed; earlier PCK journey evidence remains separate.
+- Production **60.3% ->60.3%(+0.0pp)**; inspection **21.6% ->21.6%(+0.0pp)**; creator approval **7.8% ->7.8%(+0.0pp)**. Frozen scoring unchanged; release false. Source `39da062c68f69c74f8e5b243239ac2f9e28647dd`. [Closeout](docs/qa/rpg-2-star-ocean-the-second_mvp_native-windows-playtest_codex-closeout-v01_20261022-210709-4d8577b8.md).
+- Next: existing `review.content.audio` criterion, actual produced MVP audio QA/audition; no defaults or cosmetic refinement changes.
+
 ## Current packaged science-route closure (2026-10-23T01:03:15.812437+00:00)
 
 - Current developer bundle's full female route passes by ordinary key/mouse input in Chinese and English: menu/setup, real travel, all3 recruits,6 survey rooms/18clues/9links/3answers, walking sentry encounter/natural full-auto win/result return, NYC report, manual Save, actual UI Quit, distinct-process UI Load.
