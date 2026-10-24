@@ -1,0 +1,52 @@
+[
+  {
+    "variant": "wrong-direction",
+    "command": [
+      "/home/kel/projects/worlds-between/tooling/venv/bin/python",
+      "-X",
+      "utf8",
+      "-I",
+      "/home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_yanke_north-static-source-check_v01_20261024-092500-n101north.py",
+      "--root",
+      "/home/kel/projects/worlds-between/repo",
+      "--package",
+      "/home/kel/projects/worlds-between/repo/outputs/yanke-n101/hermes101-control-wrong-direction/package",
+      "--out",
+      "/home/kel/projects/worlds-between/repo/outputs/yanke-n101/hermes101-control-wrong-direction/proof"
+    ],
+    "returncode": 1,
+    "failures": [
+      "identity",
+      "control_wrong_direction_refused"
+    ]
+  },
+  {
+    "variant": "corrupt-png",
+    "command": [
+      "/home/kel/projects/worlds-between/tooling/venv/bin/python",
+      "-X",
+      "utf8",
+      "-I",
+      "/home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_yanke_north-static-source-check_v01_20261024-092500-n101north.py",
+      "--root",
+      "/home/kel/projects/worlds-between/repo",
+      "--package",
+      "/home/kel/projects/worlds-between/repo/outputs/yanke-n101/hermes101-control-corrupt-png/package",
+      "--out",
+      "/home/kel/projects/worlds-between/repo/outputs/yanke-n101/hermes101-control-corrupt-png/proof"
+    ],
+    "returncode": 1,
+    "failures": [
+      "filehashes",
+      "palette",
+      "ora_composition",
+      "ora_merged",
+      "pxo_composition",
+      "control_corrupt_hash_refused"
+    ]
+  },
+  {
+    "provider_hashes_verified": 38,
+    "mismatches": []
+  }
+]

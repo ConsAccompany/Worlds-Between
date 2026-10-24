@@ -1,0 +1,270 @@
+{
+  "task": "content.char.yanke.static-north native Pixelorama export equality (test-only)",
+  "tool": "tools/rpg-2-star-ocean-the-second_yanke_north-static-native-pixelorama-check_v01_20261024-092500-n101north.py",
+  "tool_sha256": "544a233cfc2598f9a24c86cfddd2db6785ff14707ce05401306b772b370929e0",
+  "native_executable": "/home/kel/projects/worlds-between/tooling/pixelorama-1.2.3/Pixelorama-Linux-64bit/Pixelorama.x86_64",
+  "native_executable_sha256": "d9f79ab89b5ae369aeed11c6052d402e8218cd503bf85b4a235f9c30c46a7c63",
+  "run_id": "20261024-093039-dc0ee3bb",
+  "package": {
+    "static_png": "game/assets/characters/yanke-native-v01/north/rpg-2-star-ocean-the-second_yanke_north-static_unapproved-v01_20261024-092500-1acf16c9.png",
+    "static_sha256": "0d08dc76106cb93a44de16af9cc631cc74edce418e99e3b4f35525ac9d0fafca",
+    "pxo": "game/assets/characters/yanke-native-v01/north/rpg-2-star-ocean-the-second_yanke_north-edit_unapproved-v01_20261024-092500-1e3c80a0.pxo",
+    "pxo_sha256": "975938e4eb6442db091c7d1c5e49f880e0642a05d284a46be2c437a0feaf0562",
+    "ora": "game/assets/characters/yanke-native-v01/north/rpg-2-star-ocean-the-second_yanke_north-edit_unapproved-v01_20261024-092500-f6a16389.ora",
+    "ora_sha256": "0b43a0be2f7a9d78c43855236d019ede89950a6619c1d9730724534a0f111495"
+  },
+  "gates": {
+    "pxo_flat_one_export": true,
+    "pxo_flat_exact_static": true,
+    "pxo_split_layer_count": true,
+    "pxo_split_each_layer_exact": true,
+    "pxo_split_merged_exact_static": true,
+    "pxo_no_visible_guide_export": true,
+    "pxo_inputs_unchanged": true,
+    "ora_flat_one_export": true,
+    "ora_flat_exact_static": true,
+    "ora_inputs_unchanged": true,
+    "package_bytes_unchanged": true
+  },
+  "equality_passed": true,
+  "layer_rows": {
+    "hammer": true,
+    "boots": true,
+    "trousers": true,
+    "shirt": true,
+    "apron": true,
+    "harness": true,
+    "grip": true,
+    "belt": true,
+    "arms": true,
+    "face": true,
+    "hair": true,
+    "beard": true
+  },
+  "runs": {
+    "pxo-flat": {
+      "label": "pxo-flat",
+      "command": [
+        "/home/kel/projects/worlds-between/tooling/pixelorama-1.2.3/Pixelorama-Linux-64bit/Pixelorama.x86_64",
+        "--headless",
+        "--quit",
+        "--",
+        "--export",
+        "-o",
+        "/home/kel/projects/worlds-between/repo/outputs/yanke-n101/hermes101-native/20261024-093039-dc0ee3bb/pxo-flat/export/out.png",
+        "/home/kel/projects/worlds-between/repo/outputs/yanke-n101/hermes101-native/20261024-093039-dc0ee3bb/pxo-flat/pxo-flat-input.pxo"
+      ],
+      "start_utc": "2026-10-24T09:30:39.355030+00:00",
+      "end_utc": "2026-10-24T09:30:41.113691+00:00",
+      "exit": 0,
+      "timeout": false,
+      "input_sha256": "975938e4eb6442db091c7d1c5e49f880e0642a05d284a46be2c437a0feaf0562",
+      "input_unchanged": true,
+      "source_unchanged": true,
+      "stdout_log": "outputs/yanke-n101/hermes101-native/20261024-093039-dc0ee3bb/pxo-flat/stdout.log",
+      "stderr_log": "outputs/yanke-n101/hermes101-native/20261024-093039-dc0ee3bb/pxo-flat/stderr.log",
+      "diagnostic_markers": [
+        "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing.",
+        "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing.",
+        "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing.",
+        "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing."
+      ],
+      "diagnostic_clean": false,
+      "exports": [
+        {
+          "path": "outputs/yanke-n101/hermes101-native/20261024-093039-dc0ee3bb/pxo-flat/export/yanke-north-idle-static-v01.png",
+          "sha256": "6d1c51a6de1389eee7294ef80e0a46472046e8b891247777dd09ac25465d48d1",
+          "size": [
+            80,
+            112
+          ]
+        }
+      ]
+    },
+    "pxo-split": {
+      "label": "pxo-split",
+      "command": [
+        "/home/kel/projects/worlds-between/tooling/pixelorama-1.2.3/Pixelorama-Linux-64bit/Pixelorama.x86_64",
+        "--headless",
+        "--quit",
+        "--",
+        "--export",
+        "--split-layers",
+        "-o",
+        "/home/kel/projects/worlds-between/repo/outputs/yanke-n101/hermes101-native/20261024-093039-dc0ee3bb/pxo-split/export/out.png",
+        "/home/kel/projects/worlds-between/repo/outputs/yanke-n101/hermes101-native/20261024-093039-dc0ee3bb/pxo-split/pxo-split-input.pxo"
+      ],
+      "start_utc": "2026-10-24T09:30:41.115743+00:00",
+      "end_utc": "2026-10-24T09:30:42.867078+00:00",
+      "exit": 0,
+      "timeout": false,
+      "input_sha256": "975938e4eb6442db091c7d1c5e49f880e0642a05d284a46be2c437a0feaf0562",
+      "input_unchanged": true,
+      "source_unchanged": true,
+      "stdout_log": "outputs/yanke-n101/hermes101-native/20261024-093039-dc0ee3bb/pxo-split/stdout.log",
+      "stderr_log": "outputs/yanke-n101/hermes101-native/20261024-093039-dc0ee3bb/pxo-split/stderr.log",
+      "diagnostic_markers": [
+        "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing.",
+        "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing.",
+        "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing.",
+        "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing."
+      ],
+      "diagnostic_clean": false,
+      "exports": [
+        {
+          "path": "outputs/yanke-n101/hermes101-native/20261024-093039-dc0ee3bb/pxo-split/export/yanke-north-idle-static-v01(apron) _0001.png",
+          "sha256": "f225e1f5193a6c6fd29f3d72cf30b309f6e855462ed21487580a0bf250869b84",
+          "size": [
+            80,
+            112
+          ]
+        },
+        {
+          "path": "outputs/yanke-n101/hermes101-native/20261024-093039-dc0ee3bb/pxo-split/export/yanke-north-idle-static-v01(arms) _0001.png",
+          "sha256": "78f1bc338367c013eb96816fa0508edbc518939fa18474baf0d584b8eccfbda6",
+          "size": [
+            80,
+            112
+          ]
+        },
+        {
+          "path": "outputs/yanke-n101/hermes101-native/20261024-093039-dc0ee3bb/pxo-split/export/yanke-north-idle-static-v01(beard) _0001.png",
+          "sha256": "c6e7182bf58cf0634f862a4ad48bda93d286fd167840ced753f38e8724a7d082",
+          "size": [
+            80,
+            112
+          ]
+        },
+        {
+          "path": "outputs/yanke-n101/hermes101-native/20261024-093039-dc0ee3bb/pxo-split/export/yanke-north-idle-static-v01(belt) _0001.png",
+          "sha256": "c329f6561180e030827760298fa5256263334f8efb10b54d363ec9f87b9fbeb9",
+          "size": [
+            80,
+            112
+          ]
+        },
+        {
+          "path": "outputs/yanke-n101/hermes101-native/20261024-093039-dc0ee3bb/pxo-split/export/yanke-north-idle-static-v01(boots) _0001.png",
+          "sha256": "0fd5f565d18faf14551638a284313d3155d565389866a869059b16fe16a6fdad",
+          "size": [
+            80,
+            112
+          ]
+        },
+        {
+          "path": "outputs/yanke-n101/hermes101-native/20261024-093039-dc0ee3bb/pxo-split/export/yanke-north-idle-static-v01(face) _0001.png",
+          "sha256": "fdc9f2c09b2744e84d1071dac0502b1258a44e7cc31864519dee3221d1399eb8",
+          "size": [
+            80,
+            112
+          ]
+        },
+        {
+          "path": "outputs/yanke-n101/hermes101-native/20261024-093039-dc0ee3bb/pxo-split/export/yanke-north-idle-static-v01(grip) _0001.png",
+          "sha256": "464ffee8b97313c26acb9c2ba3c66150229da8b1c1048c5336576d92f28fbe38",
+          "size": [
+            80,
+            112
+          ]
+        },
+        {
+          "path": "outputs/yanke-n101/hermes101-native/20261024-093039-dc0ee3bb/pxo-split/export/yanke-north-idle-static-v01(hair) _0001.png",
+          "sha256": "f73a9bdf0848d91d9eb6c0e35b4d3f3846e05c4c4655edd437f6e8a18b079deb",
+          "size": [
+            80,
+            112
+          ]
+        },
+        {
+          "path": "outputs/yanke-n101/hermes101-native/20261024-093039-dc0ee3bb/pxo-split/export/yanke-north-idle-static-v01(hammer) _0001.png",
+          "sha256": "266ce3c18c8149ed089a719caba2bb2612d97f1cd07fe0679146234d3c9aaa57",
+          "size": [
+            80,
+            112
+          ]
+        },
+        {
+          "path": "outputs/yanke-n101/hermes101-native/20261024-093039-dc0ee3bb/pxo-split/export/yanke-north-idle-static-v01(harness) _0001.png",
+          "sha256": "b078a8f8f206aeb7aa4fa7d8b3cd88ada81a7eee927875eb1ee3019debea96f0",
+          "size": [
+            80,
+            112
+          ]
+        },
+        {
+          "path": "outputs/yanke-n101/hermes101-native/20261024-093039-dc0ee3bb/pxo-split/export/yanke-north-idle-static-v01(shirt) _0001.png",
+          "sha256": "6ec958deeabf005ddd27161d006b17708e6f7be27c0fe5ed7497d8248985d72d",
+          "size": [
+            80,
+            112
+          ]
+        },
+        {
+          "path": "outputs/yanke-n101/hermes101-native/20261024-093039-dc0ee3bb/pxo-split/export/yanke-north-idle-static-v01(trousers) _0001.png",
+          "sha256": "dd058aac2d4c109c262bca8c5a6e4ee4d41331836aeb57d4d16fa589dded73c1",
+          "size": [
+            80,
+            112
+          ]
+        }
+      ]
+    },
+    "ora-flat": {
+      "label": "ora-flat",
+      "command": [
+        "/home/kel/projects/worlds-between/tooling/pixelorama-1.2.3/Pixelorama-Linux-64bit/Pixelorama.x86_64",
+        "--headless",
+        "--quit",
+        "--",
+        "--export",
+        "-o",
+        "/home/kel/projects/worlds-between/repo/outputs/yanke-n101/hermes101-native/20261024-093039-dc0ee3bb/ora-flat/export/out.png",
+        "/home/kel/projects/worlds-between/repo/outputs/yanke-n101/hermes101-native/20261024-093039-dc0ee3bb/ora-flat/ora-flat-input.ora"
+      ],
+      "start_utc": "2026-10-24T09:30:42.880072+00:00",
+      "end_utc": "2026-10-24T09:30:44.550498+00:00",
+      "exit": 0,
+      "timeout": false,
+      "input_sha256": "0b43a0be2f7a9d78c43855236d019ede89950a6619c1d9730724534a0f111495",
+      "input_unchanged": true,
+      "source_unchanged": true,
+      "stdout_log": "outputs/yanke-n101/hermes101-native/20261024-093039-dc0ee3bb/ora-flat/stdout.log",
+      "stderr_log": "outputs/yanke-n101/hermes101-native/20261024-093039-dc0ee3bb/ora-flat/stderr.log",
+      "diagnostic_markers": [
+        "ERROR: 13 RID allocations of type 'PN13RendererDummy14TextureStorage12DummyTextureE' were leaked at exit.",
+        "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing.",
+        "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing.",
+        "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing.",
+        "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing.",
+        "ERROR: Index p_index = 0 is out of bounds ((int)data.children_cache.size() - data.internal_children_front_count_cache - data.internal_children_back_count_cache = 0).",
+        "ERROR: Index p_index = 0 is out of bounds ((int)data.children_cache.size() - data.internal_children_front_count_cache - data.internal_children_back_count_cache = 0).",
+        "ERROR: Index p_index = 0 is out of bounds ((int)data.children_cache.size() - data.internal_children_front_count_cache - data.internal_children_back_count_cache = 0).",
+        "ERROR: Required object \"rp_node\" is null.",
+        "ERROR: Must be an ancestor of the control.",
+        "WARNING: 166 ObjectDB instances were leaked at exit (run with `--verbose` for details).",
+        "ERROR: 16 resources still in use at exit (run with --verbose for details)."
+      ],
+      "diagnostic_clean": false,
+      "exports": [
+        {
+          "path": "outputs/yanke-n101/hermes101-native/20261024-093039-dc0ee3bb/ora-flat/export/ora-flat-input.png",
+          "sha256": "6d1c51a6de1389eee7294ef80e0a46472046e8b891247777dd09ac25465d48d1",
+          "size": [
+            80,
+            112
+          ]
+        }
+      ]
+    }
+  },
+  "diagnostic_clean": false,
+  "shader_sampler_diagnostic_counts": {
+    "pxo-flat": 4,
+    "pxo-split": 4,
+    "ora-flat": 4
+  },
+  "diagnostic_note": "Application diagnostics are retained separately and are NOT part of export equality; diagnostic_clean=false is not claimed as a pass.",
+  "gui_saveas_tested": false,
+  "runtime_or_default_changed": false,
+  "art_approved": false
+}

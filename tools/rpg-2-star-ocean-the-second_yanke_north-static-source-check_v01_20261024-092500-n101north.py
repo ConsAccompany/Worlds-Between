@@ -1,0 +1,203 @@
+"""Independent Yanke north static source check (content.char.yanke.static-north). No runtime/art/motion approval.
+
+Does not import the Yanke north author, the Yanke west author or the Yanke south author. Reuses only the ORA stack
+parser/compositor from the Jiang static-source check (as the Yanke south/west, Lin Que, Milo and Muxiu checkers do).
+Reads the game tree; writes only to --out.
+
+  python -X utf8 -I <this> --root . --out outputs/yanke-n101/north/independent
+Exit 0 all checks pass, 1 any failure.
+"""
+from pathlib import Path
+import argparse, hashlib, importlib.util, io, json, os, zipfile
+from PIL import Image
+import numpy as np
+
+ap = argparse.ArgumentParser(); ap.add_argument('--root', default='.'); ap.add_argument('--out', required=True)
+ap.add_argument('--package', default=None,
+                help='optional package directory override for malformed-source controls (default: game tree north)')
+a = ap.parse_args()
+R = Path(a.root).resolve(); O = Path(a.out).resolve(); O.mkdir(parents=True, exist_ok=False)
+if os.name == 'nt': R = Path('\\\\?\\' + str(R)); O = Path('\\\\?\\' + str(O))
+sp = importlib.util.spec_from_file_location('ora_helpers', R / 'tools/rpg-2-star-ocean-the-second_jiang-lan_static-source-check_v01_20261021-235007-514b9771.py')
+Hm = importlib.util.module_from_spec(sp); sp.loader.exec_module(Hm)
+TAG = '20261024-092500-n101north'
+PORTRAIT = 'outputs/rpg-2-star-ocean-the-second_yanke_character-sheet_v01_20261013-153818-244380f3.png'
+PORTRAIT_SHA = '65ded437ee36afd47f2bbd17cefc72a2ec0afe5914d54bcb6f46f17855b8b23f'
+PLACEHOLDER = 'game/assets/characters/native-animation'
+SOUTH = 'game/assets/characters/yanke-native-v01/south'
+WEST = 'game/assets/characters/yanke-native-v01/west'
+OTHERS = {'yanke-south': SOUTH, 'yanke-west': WEST,
+          'jiang-lan': 'game/assets/characters/jiang-lan-native-south-v01',
+          'lin-que': 'game/assets/characters/lin-que-native-v01/south',
+          'milo': 'game/assets/characters/milo-native-v01/south',
+          'muxiu': 'game/assets/characters/muxiu-native-v01/south'}
+ANCHORS = ('hammer', 'grip', 'harness', 'trousers', 'apron', 'hair', 'beard', 'face')
+checks = []
+
+
+def gate(n, v, detail=None): checks.append({'id': n, 'passed': bool(v), 'detail': detail})
+def sha(p): return hashlib.sha256(p.read_bytes()).hexdigest()
+def hashes(m, f): return all(sha(f / v['file']) == v['rawsha256'] for v in m['files'].values())
+def rgba(p): return np.array(Image.open(p).convert('RGBA'))
+def manifest_ok(x):
+    return (x.get('actor_id') == 'yanke' and x.get('content_id') == 'content.char.yanke.static-north'
+            and x.get('direction') == 'north' and x.get('status') == 'UNAPPROVED')
+
+
+def components(mask):
+    seen = set(); n = 0
+    for y, x in zip(*np.nonzero(mask)):
+        if (y, x) in seen: continue
+        n += 1; stack = [(int(y), int(x))]; seen.add((int(y), int(x)))
+        while stack:
+            yy, xx = stack.pop()
+            for dy, dx in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+                ny, nx = yy + dy, xx + dx
+                if 0 <= ny < mask.shape[0] and 0 <= nx < mask.shape[1] and mask[ny, nx] and (ny, nx) not in seen:
+                    seen.add((ny, nx)); stack.append((ny, nx))
+    return n
+
+
+def ora_layer_layer(z, layers, name):
+    hit = [L for L in layers if L['name'] == name]
+    assert len(hit) == 1, f'expected one {name} layer'
+    L = hit[0]
+    im = Image.open(io.BytesIO(z.read(L['src']))).convert('RGBA')
+    canvas = Image.new('RGBA', (Hm.W, Hm.H), (0, 0, 0, 0)); canvas.alpha_composite(im, (L['x'], L['y']))
+    return np.array(canvas)
+
+
+f = Path(a.package).resolve() if a.package else R / 'game/assets/characters/yanke-native-v01/north'
+if os.name == 'nt': f = Path('\\\\?\\' + str(f))
+ms = list(f.glob('*manifest*.json')); assert len(ms) == 1, 'missing/ambiguous manifest'
+m = json.loads(ms[0].read_text(encoding='utf8'))
+gate('identity', manifest_ok(m))
+gate('spec', m['canvas'] == [80, 112] and m['pivot'] == [40, 104] and m['body_rows'] == [8, 103]
+     and m['display_scale'] == .5 and m['logical_height_px'] == 48)
+gate('filehashes', hashes(m, f))
+p = m['portrait_ref']; gate('portrait', p['file'] == PORTRAIT and p['expected_sha256'] == PORTRAIT_SHA
+                            and sha(R / PORTRAIT) == PORTRAIT_SHA and p['approval'] == 'UNAPPROVED')
+gate('filenames_lowercase_pattern', all(v['file'] == v['file'].lower()
+                                       and v['file'].startswith('rpg-2-star-ocean-the-second_yanke_north-')
+                                       and TAG.split('-')[0] in v['file'] for v in m['files'].values()))
+gate('view_notes_back', 'back:' in m.get('view_notes', '') and 'no front face' in m.get('view_notes', ''))
+gate('face_layer_role_back', 'ears' in m.get('face_layer_role', '') and 'nape' in m.get('face_layer_role', '')
+     and 'no eyes' in m.get('face_layer_role', ''))
+png = f / m['files']['png']['file']; im = Image.open(png).convert('RGBA'); ar = np.array(im)
+al = ar[:, :, 3]; ys, xs = np.nonzero(al)
+gate('canvas', im.size == (80, 112)); gate('body_rows_8_103', ys.min() == 8 and ys.max() == 103,
+                                           [int(ys.min()), int(ys.max())])
+gate('logical_height_48', (ys.max() - ys.min() + 1) * .5 == 48)
+feet = xs[ys == 103]; gate('pivot_x_within_feet_span', feet.min() <= 40 <= feet.max(), [int(feet.min()), int(feet.max())])
+gate('binary_alpha', set(np.unique(al)) <= {0, 255})
+gate('borders', not (al[0].any() or al[-1].any() or al[:, 0].any() or al[:, -1].any()))
+pal = json.loads((f / m['files']['palette']['file']).read_text(encoding='utf8'))
+decl = {tuple(bytes.fromhex(v.lstrip('#'))) for v in pal['colors'].values()}
+used = {tuple(x) for x in ar[al == 255, :3]}
+gate('palette', 24 <= len(used) <= 48 and used <= decl and len(decl) <= 40, len(used))
+
+
+def has(*hx): return bool(used & {tuple(bytes.fromhex(pal['colors'][k])) for k in hx})
+
+
+gate('identity_colours', has('r1', 'r2') and has('t1', 't2') and has('k1', 'k2') and has('a1', 'a2')
+     and has('c1', 'c2') and has('f1', 'f2'),
+     'leather, dark-brown trousers, steel tool, olive apron, cream shirt, red rag present')
+steel = {tuple(bytes.fromhex(pal['colors'][k])) for k in ('k1', 'k2', 'k3')}
+steel_n = int(sum(tuple(x) in steel for x in ar[al == 255, :3])); gate('steel_tool_mass', steel_n >= 120, steel_n)
+with zipfile.ZipFile(f / m['files']['ora']['file']) as z:
+    ls = Hm.ora_layers(z); comp = Hm.compose(z, ls)
+    gate('ora_composition', comp.tobytes() == ar.tobytes())
+    gate('ora_merged', Image.open(io.BytesIO(z.read('mergedimage.png'))).convert('RGBA').tobytes() == ar.tobytes())
+    gate('ora_mimetype', z.infolist()[0].filename == 'mimetype' and z.infolist()[0].compress_type == zipfile.ZIP_STORED)
+    visible = [l for l in ls if l['visible'] and not Hm.GUIDE_RE.search(l['name'])]; contrib = {}
+    for l in visible:
+        without = Hm.compose(z, [x for x in ls if x is not l])
+        contrib[l['name']] = int(np.count_nonzero(np.any(np.array(without) != ar, axis=2)))
+    genuine = [n for n, c in contrib.items() if c >= 8]
+    gate('genuine_ora_roles_ge_8', len(genuine) >= 8, contrib)
+    gate('anchor_roles_contribute', all(contrib.get(n, 0) >= 12 for n in ANCHORS), {n: contrib.get(n) for n in ANCHORS})
+    gate('hidden_guides', any(Hm.GUIDE_RE.search(l['name']) and not l['visible'] for l in ls)
+         and not any(Hm.GUIDE_RE.search(l['name']) and l['visible'] for l in ls))
+    shown = [dict(l, visible=True) if Hm.GUIDE_RE.search(l['name']) else l for l in ls]
+    gate('control_visible_guides_detected', Hm.compose(z, shown).tobytes() != ar.tobytes())
+    north_face = ora_layer_layer(z, ls, 'face')
+with zipfile.ZipFile(f / m['files']['pxo']['file']) as z:
+    raw = z.read('data.json'); j = json.loads(raw); canvas = np.zeros_like(ar); roles = 0
+    for i, l in enumerate(j['layers'], 1):
+        x = np.frombuffer(z.read(f'image_data/frames/1/layer_{i}'), np.uint8).reshape(112, 80, 4)
+        if l['visible']:
+            mask = x[:, :, 3] > 0; canvas[mask] = x[mask]
+            roles += int(np.count_nonzero(mask) >= 8 and not Hm.GUIDE_RE.search(l['name']))
+    gate('pxo_composition', np.array_equal(canvas, ar)); gate('pxo_roles', roles >= 8, roles)
+    gate('pxo_labels', all(s not in raw for s in (b'protagonist-male', b'jiang-lan', b'lin-que', b'milo', b'muxiu',
+                                                   b'yanke-south', b'yanke-west')) and b'yanke-north' in raw)
+    gate('pxo_guides', any(l['name'] == 'guides' and not l['visible'] for l in j['layers']))
+    gate('pxo_size', j['size_x'] == 80 and j['size_y'] == 112)
+bad = json.loads(json.dumps(m)); bad['files']['png']['rawsha256'] = '0' * 64
+gate('control_corrupt_hash_refused', hashes(m, f) and not hashes(bad, f))
+(O / f'rpg-2-star-ocean-the-second_yanke_corrupt-hash-control_test-only-v01_{TAG}.json').write_text(
+    json.dumps(bad, indent=2) + '\n', encoding='utf8')
+t = ar.copy(); t[60, 40, :3] ^= 0x10
+gate('control_tampered_png_detected', comp.tobytes() != t.tobytes() and not np.array_equal(canvas, t))
+wrong = json.loads(json.dumps(m)); wrong['direction'] = 'south'; wrong['content_id'] = 'content.char.yanke.static-south'
+gate('control_wrong_direction_refused', manifest_ok(m) and not manifest_ok(wrong))
+ph = sorted((R / PLACEHOLDER).glob('*yanke*.png'))
+gate('not_placeholder', all(Image.open(x).size != (80, 112) or rgba(x).tobytes() != ar.tobytes() for x in ph),
+     [x.name for x in ph])
+mask_diff = {}
+for who, rel in OTHERS.items():
+    others = [x for x in sorted((R / rel).glob('*.png')) if 'static' in x.name]
+    o = rgba(others[0])
+    mask_diff[who] = {'file': others[0].name, 'differing_alpha_texels': int(np.count_nonzero((o[:, :, 3] > 0) != (al > 0)))}
+gate('own_silhouette_not_recolour', all(v['differing_alpha_texels'] >= 400 for v in mask_diff.values()), mask_diff)
+south_png = next((R / SOUTH).glob('*yanke_south-static*.png')); sa = rgba(south_png)[:, :, 3] > 0
+west_png = next((R / WEST).glob('*yanke_west-static*.png')); wa = rgba(west_png)[:, :, 3] > 0
+sn = int(np.count_nonzero((al > 0) != sa)); sm = int(np.count_nonzero((al > 0) != sa[:, ::-1]))
+wn = int(np.count_nonzero((al > 0) != wa)); wm = int(np.count_nonzero((al > 0) != wa[:, ::-1]))
+gate('north_not_south_or_mirror', sn >= 400 and sm >= 400, {'vs_south': sn, 'vs_mirrored_south': sm})
+gate('north_not_west_or_mirror', wn >= 400 and wm >= 400, {'vs_west': wn, 'vs_mirrored_west': wm})
+chest = (al > 0)[38:46]; cols = np.nonzero(chest.any(axis=0))[0]
+gate('stocky_shoulders_ge_34', len(cols) and int(len(cols)) >= 34, int(len(cols)) if len(cols) else 0)
+# A back view must not paint any eye/iris/mouth colour anywhere or in the face layer.
+face_cols = {tuple(bytes.fromhex(pal['colors'][k])) for k in ('e1', 'e2', 'm1')}
+eye_mask = np.zeros((112, 80), bool)
+for yy, xx in zip(*np.nonzero(al > 0)):
+    eye_mask[yy, xx] = tuple(ar[yy, xx, :3]) in face_cols
+n_face_features = components(eye_mask)
+gate('north_zero_face_features', n_face_features == 0, n_face_features)
+skin = {tuple(bytes.fromhex(pal['colors'][k])) for k in ('s1', 's2', 's3', 's4')}
+face_px = np.zeros((112, 80), bool)
+for yy, xx in zip(*np.nonzero(north_face[:, :, 3] > 0)):
+    face_px[yy, xx] = tuple(north_face[yy, xx, :3]) in face_cols
+gate('north_face_layer_no_face_features', components(face_px) == 0, int(face_px.sum()))
+face_used = {tuple(int(v) for v in north_face[yy, xx, :3])
+             for yy, xx in zip(*np.nonzero(north_face[:, :, 3] > 0))}
+gate('north_face_layer_skin_only', face_used <= skin and len(face_used) > 0, sorted(face_used))
+with zipfile.ZipFile(f / m['files']['ora']['file']) as z:
+    hair = ora_layer_layer(z, Hm.ora_layers(z), 'hair')
+gate('back_hair_mass', int(np.count_nonzero(hair[:, :, 3] > 0)) >= 350, int(np.count_nonzero(hair[:, :, 3] > 0)))
+with zipfile.ZipFile(f / m['files']['ora']['file']) as z:
+    grip = ora_layer_layer(z, Hm.ora_layers(z), 'grip')
+    hammer = ora_layer_layer(z, Hm.ora_layers(z), 'hammer')
+gy, gx = np.nonzero(grip[:, :, 3] > 0); hy, hx = np.nonzero(hammer[:, :, 3] > 0)
+gate('handle_spans_back', len(gy) and gy.max() - gy.min() >= 30 and gx.max() - gx.min() >= 25,
+     [int(gx.min()), int(gx.max()), int(gy.min()), int(gy.max())])
+gate('tool_head_above_shoulder', len(hy) and hy.min() <= 14 and hx.max() >= 65,
+     [int(hx.min()), int(hx.max()), int(hy.min()), int(hy.max())])
+gate('north_only_package', not any((f / n).exists() for n in ('south', 'west', 'east')) and (f / '.gdignore').exists())
+pins = {x.name: sha(x) for x in sorted(f.iterdir()) if x.is_file()}
+report = {'passed': all(c['passed'] for c in checks), 'checks': checks, 'package': str(f),
+          'sourceHashes': pins, 'checkerSha256': sha(Path(__file__)), 'hash': 'sha256 of raw bytes, no normalization',
+          'scope': 'editable static source only; no GUI reliability, motion, ordinary adoption or art approval'}
+(O / f'rpg-2-star-ocean-the-second_yanke_north_independent-source-proof_v01_{TAG}.json').write_text(
+    json.dumps(report, indent=2) + '\n', encoding='utf8')
+print('YANKE_N101_NORTH_INDEPENDENT', sum(c['passed'] for c in checks), '/', len(checks))
+print('FAILURES', [c['id'] for c in checks if not c['passed']])
+for c in checks:
+    if not c['passed'] or c['id'] in ('own_silhouette_not_recolour', 'anchor_roles_contribute', 'steel_tool_mass',
+                                      'north_zero_face_features', 'north_face_layer_skin_only',
+                                      'north_not_south_or_mirror', 'north_not_west_or_mirror',
+                                      'stocky_shoulders_ge_34', 'handle_spans_back', 'tool_head_above_shoulder'):
+        print(c['id'], c['passed'], json.dumps(c['detail']))
+raise SystemExit(0 if report['passed'] else 1)
