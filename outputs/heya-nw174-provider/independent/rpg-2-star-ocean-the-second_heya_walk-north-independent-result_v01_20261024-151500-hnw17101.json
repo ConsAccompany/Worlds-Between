@@ -1,0 +1,431 @@
+{
+  "task": "content.char.heya.walk-north",
+  "manifest": "outputs/heya-nw171/rpg-2-star-ocean-the-second_heya_walk-source-manifest_unapproved-hnw171-v01_20261024-151500-3ec3c594.json",
+  "manifest_sha256_raw": "e9da00e81607a3ae147b16ec8559dab62df8a66fde5cec571968852912b94bb2",
+  "checker_sha256_raw": "c1172e367b555fc03e8acb9bb50357c79b1530ee4d828822e4a009c52bd9c987",
+  "checks": [
+    {
+      "check": "exactly one source manifest",
+      "pass": true,
+      "detail": [
+        "rpg-2-star-ocean-the-second_heya_walk-source-manifest_unapproved-hnw171-v01_20261024-151500-3ec3c594.json"
+      ]
+    },
+    {
+      "check": "manifest scope: north only, task content.char.heya.walk-north, UNAPPROVED",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "neutral Heya north PNG pin",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "palette file pin",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "neutral editable pins byte-exact",
+      "pass": true,
+      "detail": 4
+    },
+    {
+      "check": "reused_engine text_lf_v1 hash matches tool file",
+      "pass": true,
+      "detail": "tools/rpg-2-star-ocean-the-second_jiang-lan_exploration-source-author_unapproved-jexplore39-v01_20261022-154032-5bca7193.py"
+    },
+    {
+      "check": "reused_helpers text_lf_v1 hash matches tool file",
+      "pass": true,
+      "detail": "tools/rpg-2-star-ocean-the-second_protagonist-male_explore-4dir-source-author_unapproved-mexplore23-v01_20261021-162551-6e3b1a7d.py"
+    },
+    {
+      "check": "tool text_lf_v1 hash matches tool file",
+      "pass": true,
+      "detail": "tools/rpg-2-star-ocean-the-second_heya_walk-north-source-author_unapproved-hnw171-v01_20261024-151500-hnw17101.py"
+    },
+    {
+      "check": "all 41 frame PNG raw hashes match manifest",
+      "pass": true,
+      "detail": 41
+    },
+    {
+      "check": "frames 80x112, binary alpha, clear border, palette subset of pinned Heya palette",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "static and idle f00 are the neutral bytes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "articulated walk: no phase equals neutral below hip, >=8 distinct lower-body states",
+      "pass": true,
+      "detail": {
+        "phases_equal_neutral_lower": 0,
+        "distinct_lower": 12
+      }
+    },
+    {
+      "check": "PXO raw hash",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "PXO 41 frames, layers far-limbs + 13 Heya roles + guides",
+      "pass": true,
+      "detail": [
+        "far-limbs",
+        "boots",
+        "dress",
+        "coat",
+        "apron",
+        "belt",
+        "strap",
+        "bag",
+        "arms",
+        "herb",
+        "face",
+        "hair",
+        "braid",
+        "scarf",
+        "guides"
+      ]
+    },
+    {
+      "check": "PXO cels recompose to every frame PNG (independent alpha-over)",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "PXO tags north-idle 2-5, north-walk 6-17, 12 stop tags",
+      "pass": true,
+      "detail": [
+        6,
+        17
+      ]
+    },
+    {
+      "check": "package paths under the assigned north-walk root",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "sprite set raw hash",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "sprite set timing/contract/north-only",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "stop supplemental text_lf_v1 hash",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "stop supplemental north structure (12 phase bridges [walk p, s1, s2, idle f00], 40 ms, settle 120 inclusive, non-default)",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "package PNG copies byte-equal to source frames",
+      "pass": true,
+      "detail": 40
+    },
+    {
+      "check": "walk timing boundaries: 39->p0 40->p1 479->p11 480->p0 (cycle 480 ms)",
+      "pass": true,
+      "detail": {
+        "0": 0,
+        "39": 0,
+        "40": 1,
+        "439": 10,
+        "440": 11,
+        "479": 11,
+        "480": 0,
+        "481": 0
+      }
+    },
+    {
+      "check": "idle timing boundaries (700/200/400/200, loop 1500 ms)",
+      "pass": true,
+      "detail": {
+        "699": 0,
+        "700": 1,
+        "899": 1,
+        "900": 2,
+        "1299": 2,
+        "1300": 3,
+        "1499": 3,
+        "1500": 0
+      }
+    },
+    {
+      "check": "stop bridge boundaries: release t0 walk p; 40 s1; 80 s2; 120 (inclusive) idle f00 held",
+      "pass": true,
+      "detail": {
+        "0": 0,
+        "39": 0,
+        "40": 1,
+        "79": 1,
+        "80": 2,
+        "119": 2,
+        "120": 3,
+        "1000": 3
+      }
+    },
+    {
+      "check": "each foot grounded exactly 4 of 12 phases",
+      "pass": true,
+      "detail": [
+        4,
+        4
+      ]
+    },
+    {
+      "check": "planted foot screen position constant while grounded (in place)",
+      "pass": true,
+      "detail": 0
+    },
+    {
+      "check": "north stop bridges (all 12 entry phases): grounded foot never moves (host stopped)",
+      "pass": true,
+      "detail": 0
+    },
+    {
+      "check": "all 12 stop bridges terminate in exact neutral feet + neutral PNG (idle f00)",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "independent contacts agree with author claims (residual 11.2 src, flight phases, stop 0)",
+      "pass": true,
+      "detail": [
+        4,
+        5,
+        10,
+        11
+      ]
+    },
+    {
+      "check": "braid stays on the head (constant offset to hair top in all frames)",
+      "pass": true,
+      "detail": [
+        16
+      ]
+    },
+    {
+      "check": "identity (rear): low braid, scarf back tail screen-left, bag screen-left, herb screen-right, coat + apron in all frames",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "north rear face layer has no eye/mouth colours in any frame",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "north static is not a horizontal mirror of south (>=400 opaque texels differ); rear view is own art",
+      "pass": true,
+      "detail": {
+        "mirror_pixel_diff": 1981
+      }
+    },
+    {
+      "check": "top row never above neutral row 8; soles never below 103",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "north all negative controls rejected",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "native Pixelorama export: 41/41 frames RGBA-exact, exit 0, no timeout, source unchanged",
+      "pass": true,
+      "detail": {
+        "exit": 0,
+        "timeout": false,
+        "frames_emitted": 41,
+        "frames_rgba_exact": 41
+      }
+    }
+  ],
+  "negative_controls": [
+    {
+      "control": "tampered walk PNG byte -> hash mismatch",
+      "rejected": true
+    },
+    {
+      "control": "tampered PXO cel -> recomposition mismatch",
+      "rejected": true
+    },
+    {
+      "control": "malformed stop JSON (bridge ends on idle f01) -> rejected",
+      "rejected": true
+    },
+    {
+      "control": "stop frame_ms 39 -> rejected",
+      "rejected": true
+    },
+    {
+      "control": "stop JSON with west entry (out of scope) -> rejected",
+      "rejected": true
+    },
+    {
+      "control": "stop JSON with missing bridge frame -> rejected",
+      "rejected": true
+    },
+    {
+      "control": "stop JSON missing one entry phase -> rejected",
+      "rejected": true
+    },
+    {
+      "control": "walk duration 0 -> rejected",
+      "rejected": true
+    },
+    {
+      "control": "walk duration 41 (boundary drift) -> rejected",
+      "rejected": true
+    },
+    {
+      "control": "wrong pivot -> rejected",
+      "rejected": true
+    },
+    {
+      "control": "bridge s1 foot slid 1 texel -> stop slip detected",
+      "rejected": true
+    },
+    {
+      "control": "bridge endpoint off-neutral (neutral feet shifted 1 texel) -> endpoint/slip detected",
+      "rejected": true
+    },
+    {
+      "control": "unchanged neutral bitmap labelled as walk -> not articulated",
+      "rejected": true
+    },
+    {
+      "control": "wrong identity (scarf erased in one walk frame) -> identity check rejects",
+      "rejected": true
+    }
+  ],
+  "contacts_independent": {
+    "grounded_phases_per_foot": [
+      4,
+      4
+    ],
+    "flight_phases": [
+      4,
+      5,
+      10,
+      11
+    ],
+    "double_support_phases": [],
+    "swing_phases_per_foot": [
+      [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        10,
+        11
+      ]
+    ],
+    "grounded_pairs": 6,
+    "planted_screen_motion_src_max": 0,
+    "front_inplace_world_slip_src_per_40ms": 11.2,
+    "front_inplace_world_slip_logical_per_40ms": 5.6,
+    "planted_runs": [
+      {
+        "foot": "A",
+        "first_phase": 0,
+        "phases": 4,
+        "held_ms": 160,
+        "in_place_world_travel_src": 44.8,
+        "in_place_world_travel_logical": 22.4
+      },
+      {
+        "foot": "B",
+        "first_phase": 6,
+        "phases": 4,
+        "held_ms": 160,
+        "in_place_world_travel_src": 44.8,
+        "in_place_world_travel_logical": 22.4
+      }
+    ],
+    "frame_hold_assumption": "each walk phase held 40 ms; host root moves continuously at 140 logical px/s (11.2 src/40 ms); sprite root does not move in source frames, so planted-foot world travel == host travel",
+    "stop_bridge_grounded_slip_src_max": 0,
+    "stop_entry_phases_checked": 12,
+    "stop_endpoint_neutral_all": true
+  },
+  "articulation": {
+    "phases_equal_neutral_lower": 0,
+    "distinct_lower": 12
+  },
+  "native": {
+    "run": true,
+    "command": [
+      "/home/kel/projects/worlds-between/tooling/pixelorama-1.2.3/Pixelorama-Linux-64bit/Pixelorama.x86_64",
+      "--headless",
+      "--audio-driver",
+      "Dummy",
+      "--quit",
+      "--",
+      "--export",
+      "-o",
+      "/home/kel/projects/worlds-between/repo/outputs/heya-nw174-provider/independent/native/requested_20261024-151500-hnw17101.png",
+      "/home/kel/projects/worlds-between/repo/outputs/heya-nw171/rpg-2-star-ocean-the-second_heya_walk-north-editable_unapproved-hnw171-v01_20261024-151500-9bd4c27f.pxo"
+    ],
+    "exit": 0,
+    "timeout": false,
+    "elapsed_s": 8.22,
+    "frames_expected": 41,
+    "frames_emitted": 41,
+    "frames_rgba_exact": 41,
+    "source_unchanged": true,
+    "diagnostics": [
+      "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing.",
+      "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing.",
+      "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing.",
+      "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing."
+    ],
+    "application_clean": false,
+    "gui_saveas_reopen_verified": false
+  },
+  "preview": {
+    "gif": "outputs/heya-nw174-provider/independent/rpg-2-star-ocean-the-second_heya_walk-north-normal-speed-preview-source-bound_unapproved-hnw171-v01_20261024-151500-hnw17101.gif",
+    "gif_sha256": "e90726dee8ad10c2e2a79c11757e7b591848026554ac1281e13e761f53d13474",
+    "contact_sheet": "outputs/heya-nw174-provider/independent/rpg-2-star-ocean-the-second_heya_walk-north-contact-sheet-walk-s1-s2_unapproved-hnw171-v01_20261024-151500-hnw17101.png",
+    "contact_sheet_sha256": "6b9b8ea847ea9ded12ceac71a03804579daf9d44be3b0af122307ffd7c6138a3",
+    "scope": "source-bound PIL composite at 40 ms/frame, host 11.2 src px/40 ms; NOT a Godot capture",
+    "sequence": "idle f00 700ms, walk 2 cycles moving north, release at phase 7 -> s1, s2, idle f00"
+  },
+  "not_claimed": [
+    "footlock/slip-free (front is in place: 5.6 logical px/40 ms residual, 22.4 logical per 160 ms plant)",
+    "fluidity or human motion acceptance",
+    "GUI SaveAs/reopen",
+    "Godot runtime/normal-host stop playback",
+    "art approval",
+    "default adoption"
+  ],
+  "passed": true
+}

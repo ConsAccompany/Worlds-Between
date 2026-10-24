@@ -1,0 +1,126 @@
+{
+  "audit": "heya north walk-fit independent continuity",
+  "label": "coordinator-capture-r5",
+  "task": "content.char.heya.walk-north (Batch171 follow-up, fit repair)",
+  "scope": "north-only source fit; no runtime adoption, input approval or art/motion approval",
+  "derivation": {
+    "walk_ms": 40,
+    "start_ms": 320,
+    "stop_ms": 800,
+    "repress_ms": 940,
+    "reversal_ms": 1420,
+    "settle_ms_inclusive": 120,
+    "walk_phases": 12,
+    "forward_prestop_ms": 799,
+    "reverse_prestop_ms": 1419
+  },
+  "actual_capture_sequence": [
+    {
+      "target_ms": 160,
+      "kind": "start",
+      "frame_index": 0,
+      "frame_file": "png/rpg-2-star-ocean-the-second_heya_walk-north-idle-f00_unapproved-hnw171-v01_20261024-151500-740768fc.png"
+    },
+    {
+      "target_ms": 560,
+      "kind": "walk",
+      "frame_index": 6,
+      "frame_file": "png/rpg-2-star-ocean-the-second_heya_walk-north-walk-p06_unapproved-hnw171-v01_20261024-151500-d8e37908.png"
+    },
+    {
+      "target_ms": 780,
+      "kind": "walk",
+      "frame_index": 11,
+      "frame_file": "png/rpg-2-star-ocean-the-second_heya_walk-north-walk-p11_unapproved-hnw171-v01_20261024-151500-10589253.png"
+    },
+    {
+      "target_ms": 820,
+      "kind": "s1",
+      "frame_index": 0,
+      "frame_file": "png/rpg-2-star-ocean-the-second_heya_walk-north-stop-p11-s1_unapproved-hnw171-v01_20261024-151500-3573cd74.png"
+    },
+    {
+      "target_ms": 860,
+      "kind": "s2",
+      "frame_index": 0,
+      "frame_file": "png/rpg-2-star-ocean-the-second_heya_walk-north-stop-p11-s2_unapproved-hnw171-v01_20261024-151500-05cc4e7f.png"
+    },
+    {
+      "target_ms": 900,
+      "kind": "idle",
+      "frame_index": 0,
+      "frame_file": "png/rpg-2-star-ocean-the-second_heya_walk-north-idle-f00_unapproved-hnw171-v01_20261024-151500-740768fc.png"
+    },
+    {
+      "target_ms": 960,
+      "kind": "walk",
+      "frame_index": 0,
+      "frame_file": "png/rpg-2-star-ocean-the-second_heya_walk-north-walk-p00_unapproved-hnw171-v01_20261024-151500-1721b5e9.png"
+    },
+    {
+      "target_ms": 1200,
+      "kind": "walk",
+      "frame_index": 6,
+      "frame_file": "png/rpg-2-star-ocean-the-second_heya_walk-north-walk-p06_unapproved-hnw171-v01_20261024-151500-d8e37908.png"
+    },
+    {
+      "target_ms": 1440,
+      "kind": "s2",
+      "frame_index": 0,
+      "frame_file": "png/rpg-2-star-ocean-the-second_heya_walk-north-stop-p11-s2_unapproved-hnw171-v01_20261024-151500-05cc4e7f.png"
+    },
+    {
+      "target_ms": 1480,
+      "kind": "s1",
+      "frame_index": 0,
+      "frame_file": "png/rpg-2-star-ocean-the-second_heya_walk-north-stop-p11-s1_unapproved-hnw171-v01_20261024-151500-3573cd74.png"
+    },
+    {
+      "target_ms": 1520,
+      "kind": "walk",
+      "frame_index": 11,
+      "frame_file": "png/rpg-2-star-ocean-the-second_heya_walk-north-walk-p11_unapproved-hnw171-v01_20261024-151500-10589253.png"
+    },
+    {
+      "target_ms": 1560,
+      "kind": "idle",
+      "frame_index": 0,
+      "frame_file": "png/rpg-2-star-ocean-the-second_heya_walk-north-idle-f00_unapproved-hnw171-v01_20261024-151500-740768fc.png"
+    }
+  ],
+  "checks": {
+    "forward_prestop_walk_phase_derived": 11,
+    "forward_selected_bridge_phase": 11,
+    "forward_prestop_equals_selected": true,
+    "forward_captured_prestop_frame_is_phase": true,
+    "forward_s1_s2_supplied_by_selected_bridge": true,
+    "forward_stop_endpoints_walk_to_idle": true,
+    "reverse_prestop_walk_phase_derived": 11,
+    "reverse_selected_bridge_phase": 11,
+    "reverse_prestop_equals_selected": true,
+    "reverse_restore_walk_phase": 11,
+    "reverse_restore_equals_reverse_prestop": true,
+    "reverse_s2_s1_supplied_by_selected_bridge": true,
+    "reverse_bridge_endpoints_walk_to_idle": true,
+    "reverse_sequence_ends_idle_f00": true,
+    "exact_targets_preserved": true,
+    "walk_and_settle_durations_preserved": true,
+    "all_stop_and_reverse_endpoints_continuous": true
+  },
+  "fit_proof_self_reported_passed": true,
+  "independent_continuity_passed": true,
+  "verdict": "PASS",
+  "artifacts": {
+    "fit_manifest": "outputs/heya-nw171/fit/capture-r5/rpg-2-star-ocean-the-second_heya_walk-north_normal-speed-manifest_test-only-v01_20261024-151500-hnw17101.json",
+    "fit_manifest_sha256": "38d8f04b15932336e298d35309221a3ab3d27e89242f5156751ca7091124249f",
+    "runtime": "game/assets/characters/heya-native-v01/north-walk/rpg-2-star-ocean-the-second_heya_walk-sprite-set-runtime_unapproved-hnw171-v01_20261024-151500-1eff5ab7.json",
+    "runtime_sha256": "0bb769b19247b6a986b34d7b82528c155402ef621ab12c573bf3d27012cabed6",
+    "stop": "game/assets/characters/heya-native-v01/north-walk/rpg-2-star-ocean-the-second_heya_walk-stop-transition-supplemental_unapproved-hnw171-v01_20261024-151500-4a055ed1.json",
+    "stop_sha256": "5050b1ee4b3901d3f0491b9345d993078015bdfd1329ea8fbb4d90c354e2c1a5",
+    "fit_proof": "outputs/heya-nw171/fit/rpg-2-star-ocean-the-second_heya_walk-north-normal-speed-proof_test-only-v01_20261024-151500-hnw17101-capture-r5.json",
+    "fit_proof_sha256": "d60d523e9ddc53ebd52f3ac4b938b248bcfd5b71f0e54d451ddc2dff4024db00",
+    "audit_script": "outputs/heya-nw171/fit-repair/rpg-2-star-ocean-the-second_heya_walk-north_fit-continuity-audit_v01_20261024-151500-hnw171fr01.py",
+    "audit_script_sha256": "cc5fe601ca551dd5cb2fec323838a89229693151557b3589c48445a53b48353e"
+  },
+  "note": "The proof's own passed field is recorded but not trusted. This audit re-derives the pre-stop phase from frozen timing and maps captured s1/s2 frames back to the stop bridge."
+}
