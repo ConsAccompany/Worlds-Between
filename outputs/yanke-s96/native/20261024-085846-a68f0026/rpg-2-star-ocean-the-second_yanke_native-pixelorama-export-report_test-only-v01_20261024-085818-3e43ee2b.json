@@ -1,0 +1,270 @@
+{
+  "task": "content.char.yanke.static-south native Pixelorama export equality (test-only)",
+  "tool": "tools/rpg-2-star-ocean-the-second_yanke_static-native-pixelorama-check_v01_20261024-085818-3e43ee2b.py",
+  "tool_sha256": "77e6a29f8b588eb269ca8c6ff4355de5b7fd743e39a4898b2969038a852510ab",
+  "native_executable": "/home/kel/projects/worlds-between/tooling/pixelorama-1.2.3/Pixelorama-Linux-64bit/Pixelorama.x86_64",
+  "native_executable_sha256": "d9f79ab89b5ae369aeed11c6052d402e8218cd503bf85b4a235f9c30c46a7c63",
+  "run_id": "20261024-085846-a68f0026",
+  "package": {
+    "static_png": "game/assets/characters/yanke-native-v01/south/rpg-2-star-ocean-the-second_yanke_south-static_unapproved-v01_20261024-084428-73949161.png",
+    "static_sha256": "4f6bcf937390e300e2829ac052bcb1047fdb6387de41561490c757246a32fef0",
+    "pxo": "game/assets/characters/yanke-native-v01/south/rpg-2-star-ocean-the-second_yanke_south-edit_unapproved-v01_20261024-084428-5b76b5f2.pxo",
+    "pxo_sha256": "173779784354c7d2decbc87a0c13edfc2928d70aeabc91772e63d950d0b20992",
+    "ora": "game/assets/characters/yanke-native-v01/south/rpg-2-star-ocean-the-second_yanke_south-edit_unapproved-v01_20261024-084428-e87e7c42.ora",
+    "ora_sha256": "d536eae42395ce5765f6b1f4eb201203ef0c77d44a4285568adf3ed6d2e67267"
+  },
+  "gates": {
+    "pxo_flat_one_export": true,
+    "pxo_flat_exact_static": true,
+    "pxo_split_layer_count": true,
+    "pxo_split_each_layer_exact": true,
+    "pxo_split_merged_exact_static": true,
+    "pxo_no_visible_guide_export": true,
+    "pxo_inputs_unchanged": true,
+    "ora_flat_one_export": true,
+    "ora_flat_exact_static": true,
+    "ora_inputs_unchanged": true,
+    "package_bytes_unchanged": true
+  },
+  "equality_passed": true,
+  "layer_rows": {
+    "hammer": true,
+    "boots": true,
+    "trousers": true,
+    "shirt": true,
+    "apron": true,
+    "harness": true,
+    "grip": true,
+    "belt": true,
+    "arms": true,
+    "face": true,
+    "hair": true,
+    "beard": true
+  },
+  "runs": {
+    "pxo-flat": {
+      "label": "pxo-flat",
+      "command": [
+        "/home/kel/projects/worlds-between/tooling/pixelorama-1.2.3/Pixelorama-Linux-64bit/Pixelorama.x86_64",
+        "--headless",
+        "--quit",
+        "--",
+        "--export",
+        "-o",
+        "/home/kel/projects/worlds-between/repo/outputs/yanke-s96/native/20261024-085846-a68f0026/pxo-flat/export/out.png",
+        "/home/kel/projects/worlds-between/repo/outputs/yanke-s96/native/20261024-085846-a68f0026/pxo-flat/pxo-flat-input.pxo"
+      ],
+      "start_utc": "2026-10-24T08:58:46.212630+00:00",
+      "end_utc": "2026-10-24T08:58:47.974660+00:00",
+      "exit": 0,
+      "timeout": false,
+      "input_sha256": "173779784354c7d2decbc87a0c13edfc2928d70aeabc91772e63d950d0b20992",
+      "input_unchanged": true,
+      "source_unchanged": true,
+      "stdout_log": "outputs/yanke-s96/native/20261024-085846-a68f0026/pxo-flat/stdout.log",
+      "stderr_log": "outputs/yanke-s96/native/20261024-085846-a68f0026/pxo-flat/stderr.log",
+      "diagnostic_markers": [
+        "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing.",
+        "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing.",
+        "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing.",
+        "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing."
+      ],
+      "diagnostic_clean": false,
+      "exports": [
+        {
+          "path": "outputs/yanke-s96/native/20261024-085846-a68f0026/pxo-flat/export/yanke-south-idle-static-v01.png",
+          "sha256": "7a6fd520996a24b26c75738f2ff181c0a664cff0776c3f2f19342761cde326a3",
+          "size": [
+            80,
+            112
+          ]
+        }
+      ]
+    },
+    "pxo-split": {
+      "label": "pxo-split",
+      "command": [
+        "/home/kel/projects/worlds-between/tooling/pixelorama-1.2.3/Pixelorama-Linux-64bit/Pixelorama.x86_64",
+        "--headless",
+        "--quit",
+        "--",
+        "--export",
+        "--split-layers",
+        "-o",
+        "/home/kel/projects/worlds-between/repo/outputs/yanke-s96/native/20261024-085846-a68f0026/pxo-split/export/out.png",
+        "/home/kel/projects/worlds-between/repo/outputs/yanke-s96/native/20261024-085846-a68f0026/pxo-split/pxo-split-input.pxo"
+      ],
+      "start_utc": "2026-10-24T08:58:47.977006+00:00",
+      "end_utc": "2026-10-24T08:58:49.651064+00:00",
+      "exit": 0,
+      "timeout": false,
+      "input_sha256": "173779784354c7d2decbc87a0c13edfc2928d70aeabc91772e63d950d0b20992",
+      "input_unchanged": true,
+      "source_unchanged": true,
+      "stdout_log": "outputs/yanke-s96/native/20261024-085846-a68f0026/pxo-split/stdout.log",
+      "stderr_log": "outputs/yanke-s96/native/20261024-085846-a68f0026/pxo-split/stderr.log",
+      "diagnostic_markers": [
+        "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing.",
+        "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing.",
+        "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing.",
+        "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing."
+      ],
+      "diagnostic_clean": false,
+      "exports": [
+        {
+          "path": "outputs/yanke-s96/native/20261024-085846-a68f0026/pxo-split/export/yanke-south-idle-static-v01(apron) _0001.png",
+          "sha256": "cd28a5f6e2dee6b66a3c59667063d20dea2dfdf1d4064c46348af39e874604ef",
+          "size": [
+            80,
+            112
+          ]
+        },
+        {
+          "path": "outputs/yanke-s96/native/20261024-085846-a68f0026/pxo-split/export/yanke-south-idle-static-v01(arms) _0001.png",
+          "sha256": "1433beed4d7391caedd23a76571d02a0180495b09dc8ead0e84a0c19860cc4a6",
+          "size": [
+            80,
+            112
+          ]
+        },
+        {
+          "path": "outputs/yanke-s96/native/20261024-085846-a68f0026/pxo-split/export/yanke-south-idle-static-v01(beard) _0001.png",
+          "sha256": "54d7f771c690c515ba783ff34b7b993b0232802aef6a0802f35aec18ca19cc9c",
+          "size": [
+            80,
+            112
+          ]
+        },
+        {
+          "path": "outputs/yanke-s96/native/20261024-085846-a68f0026/pxo-split/export/yanke-south-idle-static-v01(belt) _0001.png",
+          "sha256": "19fbfdcbd14faeee6542a248ccb69d51522bba4e88edc5084f98bb8f5cc82e5b",
+          "size": [
+            80,
+            112
+          ]
+        },
+        {
+          "path": "outputs/yanke-s96/native/20261024-085846-a68f0026/pxo-split/export/yanke-south-idle-static-v01(boots) _0001.png",
+          "sha256": "c9fdf62019c3a8087aba0f844e809eb15714cc421dd57b978268b24481198a8f",
+          "size": [
+            80,
+            112
+          ]
+        },
+        {
+          "path": "outputs/yanke-s96/native/20261024-085846-a68f0026/pxo-split/export/yanke-south-idle-static-v01(face) _0001.png",
+          "sha256": "2d3775f3eada2ac04bdcd8de1648e59fb346ad00a5440aa1f9c823e103d53fd1",
+          "size": [
+            80,
+            112
+          ]
+        },
+        {
+          "path": "outputs/yanke-s96/native/20261024-085846-a68f0026/pxo-split/export/yanke-south-idle-static-v01(grip) _0001.png",
+          "sha256": "b3ad13aed555838ad15c8f3bf16376f6d2cc29342834117f5be31c0d89090acf",
+          "size": [
+            80,
+            112
+          ]
+        },
+        {
+          "path": "outputs/yanke-s96/native/20261024-085846-a68f0026/pxo-split/export/yanke-south-idle-static-v01(hair) _0001.png",
+          "sha256": "95462576de1c16dd5cb0e3a98d0d583bbec668c234f65e78635a015b2a0d78cc",
+          "size": [
+            80,
+            112
+          ]
+        },
+        {
+          "path": "outputs/yanke-s96/native/20261024-085846-a68f0026/pxo-split/export/yanke-south-idle-static-v01(hammer) _0001.png",
+          "sha256": "487e0a14e6cfdc4c548ba10a86902285f519e15af2dc171ada710e04190e673f",
+          "size": [
+            80,
+            112
+          ]
+        },
+        {
+          "path": "outputs/yanke-s96/native/20261024-085846-a68f0026/pxo-split/export/yanke-south-idle-static-v01(harness) _0001.png",
+          "sha256": "03666874a86e86b4ecaf814623431046e1ef6c691f57e58f7facc907e72ed5ca",
+          "size": [
+            80,
+            112
+          ]
+        },
+        {
+          "path": "outputs/yanke-s96/native/20261024-085846-a68f0026/pxo-split/export/yanke-south-idle-static-v01(shirt) _0001.png",
+          "sha256": "bb44699958fea7ed882c35fb5f2f6543909794dbb838cb42ef789b23c4a125d2",
+          "size": [
+            80,
+            112
+          ]
+        },
+        {
+          "path": "outputs/yanke-s96/native/20261024-085846-a68f0026/pxo-split/export/yanke-south-idle-static-v01(trousers) _0001.png",
+          "sha256": "e1de82006e94b3feed75d4f24f9d1de6650eb0d7fe4588936a5fc9153a27a0d5",
+          "size": [
+            80,
+            112
+          ]
+        }
+      ]
+    },
+    "ora-flat": {
+      "label": "ora-flat",
+      "command": [
+        "/home/kel/projects/worlds-between/tooling/pixelorama-1.2.3/Pixelorama-Linux-64bit/Pixelorama.x86_64",
+        "--headless",
+        "--quit",
+        "--",
+        "--export",
+        "-o",
+        "/home/kel/projects/worlds-between/repo/outputs/yanke-s96/native/20261024-085846-a68f0026/ora-flat/export/out.png",
+        "/home/kel/projects/worlds-between/repo/outputs/yanke-s96/native/20261024-085846-a68f0026/ora-flat/ora-flat-input.ora"
+      ],
+      "start_utc": "2026-10-24T08:58:49.662550+00:00",
+      "end_utc": "2026-10-24T08:58:51.336375+00:00",
+      "exit": 0,
+      "timeout": false,
+      "input_sha256": "d536eae42395ce5765f6b1f4eb201203ef0c77d44a4285568adf3ed6d2e67267",
+      "input_unchanged": true,
+      "source_unchanged": true,
+      "stdout_log": "outputs/yanke-s96/native/20261024-085846-a68f0026/ora-flat/stdout.log",
+      "stderr_log": "outputs/yanke-s96/native/20261024-085846-a68f0026/ora-flat/stderr.log",
+      "diagnostic_markers": [
+        "ERROR: 13 RID allocations of type 'PN13RendererDummy14TextureStorage12DummyTextureE' were leaked at exit.",
+        "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing.",
+        "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing.",
+        "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing.",
+        "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing.",
+        "ERROR: Index p_index = 0 is out of bounds ((int)data.children_cache.size() - data.internal_children_front_count_cache - data.internal_children_back_count_cache = 0).",
+        "ERROR: Index p_index = 0 is out of bounds ((int)data.children_cache.size() - data.internal_children_front_count_cache - data.internal_children_back_count_cache = 0).",
+        "ERROR: Index p_index = 0 is out of bounds ((int)data.children_cache.size() - data.internal_children_front_count_cache - data.internal_children_back_count_cache = 0).",
+        "ERROR: Required object \"rp_node\" is null.",
+        "ERROR: Must be an ancestor of the control.",
+        "WARNING: 166 ObjectDB instances were leaked at exit (run with `--verbose` for details).",
+        "ERROR: 16 resources still in use at exit (run with --verbose for details)."
+      ],
+      "diagnostic_clean": false,
+      "exports": [
+        {
+          "path": "outputs/yanke-s96/native/20261024-085846-a68f0026/ora-flat/export/ora-flat-input.png",
+          "sha256": "7a6fd520996a24b26c75738f2ff181c0a664cff0776c3f2f19342761cde326a3",
+          "size": [
+            80,
+            112
+          ]
+        }
+      ]
+    }
+  },
+  "diagnostic_clean": false,
+  "shader_sampler_diagnostic_counts": {
+    "pxo-flat": 4,
+    "pxo-split": 4,
+    "ora-flat": 4
+  },
+  "diagnostic_note": "Application diagnostics are retained separately and are NOT part of export equality; diagnostic_clean=false is not claimed as a pass.",
+  "gui_saveas_tested": false,
+  "runtime_or_default_changed": false,
+  "art_approved": false
+}
