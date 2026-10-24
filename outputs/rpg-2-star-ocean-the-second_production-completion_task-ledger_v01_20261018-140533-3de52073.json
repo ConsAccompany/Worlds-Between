@@ -2,7 +2,7 @@
   "id": "rpg-2-star-ocean-the-second_production-completion_v01",
   "schemaVersion": 2,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-23T23:38:08Z",
+  "updatedAt": "2026-10-24T04:37:04Z",
   "zh": "制作完成度任务台账：衡量已完成的工作量（编码 40% + 内容 60%）；检查／审查与创作者批准分开计量，均不改变制作分；免除的审查不算已执行的工作；运营任务列出负责方但不计百分比。",
   "en": "Production-completion task ledger: measures work done (coding 40% + content 60%); inspection/review and creator approval are separate meters and never change production credit; waived reviews are not performed work; operations tasks list owners but carry no percentage.",
   "brief": "docs/rpg-2-star-ocean-the-second_production-completion_bilingual-brief_v01_20261018-140533-3ea2a621.md",
@@ -1192,6 +1192,22 @@
         },
         "previousTaskSetSha256": "55d7021d0d09be8ef8bb0448c03b22a60ed29445fe89e81d2a20add4293cfd21",
         "taskSetSha256": "820675c86e03e226936080b652d77937bff041994a62ee792a1c8e25e2507f39"
+      },
+      {
+        "at": "2026-10-23T23:44:33Z",
+        "kind": "owner-assignment",
+        "taskId": "content.char.milo.static-east",
+        "fromOwner": "claude",
+        "toOwner": "hermes",
+        "changedTaskIds": [
+          "content.char.milo.static-east"
+        ],
+        "reason": {
+          "zh": "",
+          "en": "Creator batch 41: Hermes accountable coordinator; Claude-only production through authorized adapter; no score or approval change."
+        },
+        "previousTaskSetSha256": "820675c86e03e226936080b652d77937bff041994a62ee792a1c8e25e2507f39",
+        "taskSetSha256": "cbeb0b5c42f8dde48cfac81df9d21101d9ebc3dd8c5c770032bd373a3001a004"
       }
     ],
     "pointsByStage": {
@@ -1224,8 +1240,8 @@
     "production": {
       "zh": "制作完成度",
       "en": "Production completion",
-      "percent": 61.2,
-      "percentLabel": "61.2%",
+      "percent": 61.3,
+      "percentLabel": "61.3%",
       "formula": "round1(40 * codingDonePoints/codingTotalPoints + 60 * contentDonePoints/contentTotalPoints)",
       "coding": {
         "done": 111,
@@ -1236,12 +1252,12 @@
         "tasksDone": 23
       },
       "content": {
-        "done": 665,
+        "done": 667,
         "total": 1881,
-        "percent": 35.4,
+        "percent": 35.5,
         "weight": 60,
         "tasks": 715,
-        "tasksDone": 219
+        "tasksDone": 220
       }
     },
     "inspection": {
@@ -1306,11 +1322,11 @@
         "waivedPoints": 0
       },
       "content": {
-        "done": 665,
+        "done": 667,
         "total": 1881,
-        "percent": 35.4,
+        "percent": 35.5,
         "tasks": 715,
-        "tasksDone": 219,
+        "tasksDone": 220,
         "waivedTasks": 0,
         "waivedPoints": 0
       },
@@ -1362,14 +1378,14 @@
     },
     "byOwner": {
       "claude": {
-        "tasks": 699,
+        "tasks": 698,
         "operationsTasks": 0,
-        "points": 1850,
+        "points": 1848,
         "pointsDone": 585,
         "byStatus": {
           "done": 153,
           "blocked": 4,
-          "todo": 542
+          "todo": 541
         },
         "readyInQueue": 1,
         "revisionsBlockingApproval": 1
@@ -1400,12 +1416,12 @@
         "revisionsBlockingApproval": 3
       },
       "hermes": {
-        "tasks": 9,
+        "tasks": 10,
         "operationsTasks": 0,
-        "points": 24,
-        "pointsDone": 19,
+        "points": 26,
+        "pointsDone": 21,
         "byStatus": {
-          "done": 7,
+          "done": 8,
           "todo": 2
         },
         "readyInQueue": 0,
@@ -1471,7 +1487,7 @@
       },
       "characters": {
         "content": {
-          "done": 244,
+          "done": 246,
           "total": 1460
         },
         "technical-inspection": {
@@ -2415,7 +2431,7 @@
     {"id":"content.char.milo.static-south","type":"native-pixel","title":{"zh":"米洛 · 南向高密度静止帧","en":"Milo · south high-density static"},"area":"characters","stage":"content","owner":"hermes","status":"done","points":3,"doneCriterion":{"zh":"南向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"south native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":[],"evidence":["game/assets/characters/milo-native-v01/south/rpg-2-star-ocean-the-second_milo_south-static_unapproved-v01_20261023-215823-28a012bd.png","game/assets/characters/milo-native-v01/south/rpg-2-star-ocean-the-second_milo_south-edit_unapproved-v01_20261023-215823-aaf32a0b.pxo","docs/qa/rpg-2-star-ocean-the-second_milo_south-static-closeout_unapproved-v01_20261023-221500-b13a0001.md","outputs/milo65/independent13/rpg-2-star-ocean-the-second_milo_independent-verification_v01_20261023-221500-b13a0001.json"],"subject":{"kind":"character-variant","id":"milo"},"statusAt":"2026-10-23T22:15:37Z","note":{"zh":"","en":"Source committed in 8fb2c8e4: Claude adapter production, Hermes independent verification; 48 logical px south static, layered PXO/ORA, QA. Native export pixel equality passes; native application diagnostics remain failed. No default adoption, art approval, motion or normal runtime integration."}},
     {"id":"content.char.milo.static-west","type":"native-pixel","title":{"zh":"米洛 · 西向高密度静止帧","en":"Milo · west high-density static"},"area":"characters","stage":"content","owner":"hermes","status":"todo","points":2,"doneCriterion":{"zh":"西向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"west native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":["content.char.milo.static-south"],"evidence":[],"subject":{"kind":"character-variant","id":"milo"}},
     {"id":"content.char.milo.static-north","type":"native-pixel","title":{"zh":"米洛 · 北向高密度静止帧","en":"Milo · north high-density static"},"area":"characters","stage":"content","owner":"hermes","status":"done","points":2,"doneCriterion":{"zh":"北向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"north native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":["content.char.milo.static-south"],"evidence":["game/assets/characters/milo-native-v01/north/rpg-2-star-ocean-the-second_milo_north-static_unapproved-v01_20261023-225642-5968ba0c.png","game/assets/characters/milo-native-v01/north/rpg-2-star-ocean-the-second_milo_north-edit_unapproved-v01_20261023-225642-7f054cac.pxo","docs/qa/rpg-2-star-ocean-the-second_milo_north-static-closeout_unapproved-v01_20261023-233700-b38a0001.md","outputs/milo-n01/logs/hermes38-source/independent/rpg-2-star-ocean-the-second_milo_north-independent-source-proof_v01_20261023-225642-1b612f93.json"],"subject":{"kind":"character-variant","id":"milo"},"statusAt":"2026-10-23T23:38:08Z","note":{"zh":"","en":"Source committed in 70ac7793: existing Claude-adapter source and hand repair, Hermes independent 41/41 checks, exact PXO/ORA exports, bounded fit and M1 smoke. 48 logical px north static with QA. Native application diagnostic gate remains failed. No normal runtime/default adoption, art approval or motion credit."}},
-    {"id":"content.char.milo.static-east","type":"native-pixel","title":{"zh":"米洛 · 东向高密度静止帧","en":"Milo · east high-density static"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"东向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"east native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":["content.char.milo.static-south"],"evidence":[],"subject":{"kind":"character-variant","id":"milo"}},
+    {"id":"content.char.milo.static-east","type":"native-pixel","title":{"zh":"米洛 · 东向高密度静止帧","en":"Milo · east high-density static"},"area":"characters","stage":"content","owner":"hermes","status":"done","points":2,"doneCriterion":{"zh":"东向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算","en":"east native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"},"dependsOn":["content.char.milo.static-south"],"evidence":["game/assets/characters/milo-native-v01/east/rpg-2-star-ocean-the-second_milo_east-static_unapproved-v01_20261024-000137-820dcbf2.png","game/assets/characters/milo-native-v01/east/rpg-2-star-ocean-the-second_milo_east-edit_unapproved-v01_20261024-000137-8799fd7f.pxo","docs/qa/rpg-2-star-ocean-the-second_milo_east-static-closeout_unapproved-v01_20261024-043700-b45a0001.md","outputs/milo-e01/logs/hermes45-source/independent/rpg-2-star-ocean-the-second_milo_east-independent-source-proof_v01_20261024-000137-e4a1c7d2.json"],"subject":{"kind":"character-variant","id":"milo"},"statusAt":"2026-10-24T04:37:04Z","note":{"zh":"","en":"Source committed in 81d49516: existing Claude-adapter east art, batch45 independent checker and Hermes 56/56 verification, exact PXO/ORA exports, four bounded bilingual static fit captures and post-integration M1 smoke. 48 logical px east static with QA. Native application diagnostic gate remains failed; GUI reliability unverified. No normal runtime/default adoption, art approval or motion credit."}},
     {"id":"content.char.milo.idle-anim","type":"native-pixel","title":{"zh":"米洛 · 四方向待机动画","en":"Milo · four-direction idle animation"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"四个方向的待机循环已提交并有 QA","en":"Idle loops for all four directions committed with QA"},"dependsOn":["content.char.milo.static-south","content.char.milo.static-west","content.char.milo.static-north","content.char.milo.static-east"],"evidence":[],"subject":{"kind":"character-variant","id":"milo"}},
     {"id":"content.char.milo.walk-south","type":"native-pixel","title":{"zh":"米洛 · 南向行走／跑动","en":"Milo · south walk/run"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"南向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"south walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.milo.static-south"],"evidence":[],"subject":{"kind":"character-variant","id":"milo"}},
     {"id":"content.char.milo.walk-west","type":"native-pixel","title":{"zh":"米洛 · 西向行走／跑动","en":"Milo · west walk/run"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"西向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"west walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.milo.static-west"],"evidence":[],"subject":{"kind":"character-variant","id":"milo"}},
