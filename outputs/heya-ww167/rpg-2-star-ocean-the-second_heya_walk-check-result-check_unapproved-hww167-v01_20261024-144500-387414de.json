@@ -1,0 +1,242 @@
+{
+  "tool_sha256_text_lf_v1": "2fcdcc2755bdec9a37e91aee696eca389e5a976f1556c1a5cff8b73272584f53",
+  "rebuild": {
+    "checked": 91,
+    "ok": 0
+  },
+  "deterministic": true,
+  "neutral_pins_exact_before_after": true,
+  "source_checks": [
+    {
+      "check": "west all frames 80x112 binary alpha, clear border, Heya palette only",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "west static + idle f00 are the exact neutral PNG bytes",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "west counts idle 4 walk 12 stop bridge frames 24",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "west every bridge = [walk p, s1, s2, idle f00]",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "west idle frames distinct (>=3)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "west walk lower body differs across phases (>=8)",
+      "pass": true,
+      "detail": 12
+    },
+    {
+      "check": "west no walk phase equals the neutral bitmap",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "west top row never above neutral (body never shifted up)",
+      "pass": true,
+      "detail": [
+        8,
+        9
+      ]
+    },
+    {
+      "check": "west ORA role layers recompose to neutral PNG",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "west PXO (Heya 13 roles + far-limbs + guides) cels recompose to every frame PNG",
+      "pass": true,
+      "detail": 41
+    },
+    {
+      "check": "west side planted foot world slip at 40 ms boundaries <= 1 source texel (rounding of 11.2)",
+      "pass": true,
+      "detail": {
+        "max_src": 0.8,
+        "60fps_excursion_src": 10.667
+      }
+    },
+    {
+      "check": "west each foot grounded 4 phases per cycle",
+      "pass": true,
+      "detail": [
+        4,
+        4
+      ]
+    },
+    {
+      "check": "west stop bridges: a grounded foot never moves (host stopped)",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "identity: low braid, grey-white scarf, dark-red bag, herb, ivory coat + pale apron in every frame",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "identity: braid stays on the head (constant offset to hair top in every frame)",
+      "pass": true,
+      "detail": 0
+    },
+    {
+      "check": "structural far limb: every walk/stop cel is one continuous darkened boot silhouette (8-connected, no string)",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "near boots cel excludes far-only columns (x < 37)",
+      "pass": false,
+      "detail": [
+        "walk",
+        "walk",
+        "walk"
+      ]
+    },
+    {
+      "check": "runtime sprite set: schema/actor/west only/explicit durations/relative byte-equal PNG copies",
+      "pass": true,
+      "detail": 16
+    },
+    {
+      "check": "stop supplemental: actor, west only, 24 bridge frames, runtime_default false, byte-equal copies",
+      "pass": true,
+      "detail": 24
+    },
+    {
+      "check": "package-local registry lists ONLY heya -> this set",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "all written paths are under the assigned roots",
+      "pass": true,
+      "detail": ""
+    }
+  ],
+  "contacts": {
+    "walk_max_world_slip_src_at_40ms_boundaries": 0.8,
+    "walk_max_world_slip_logical_at_40ms_boundaries": 0.4,
+    "walk_planted_foot_world_excursion_src_60fps_samples": 10.667,
+    "walk_planted_foot_world_excursion_logical_60fps_samples": 5.333,
+    "flight_phases": [
+      4,
+      5,
+      10,
+      11
+    ],
+    "stop_bridge_grounded_slip_src_max": 0.0
+  },
+  "residual_disclosed": "side planted-foot world slip is integer rounding of 11.2 src/40 ms at boundaries; between held frames the host moves continuously (60 fps excursion reported); not footlocked",
+  "not_run_here": [
+    "Pixelorama native export (independent checker)",
+    "Godot import/runtime",
+    "normal-speed movie"
+  ],
+  "fails": [
+    "missing outputs/heya-ww167/png/rpg-2-star-ocean-the-second_heya_walk-west-static_unapproved-hww167-v01_20261024-144500-310ac0c4.png",
+    "missing outputs/heya-ww167/png/rpg-2-star-ocean-the-second_heya_walk-west-idle-f00_unapproved-hww167-v01_20261024-144500-3b6938c5.png",
+    "missing outputs/heya-ww167/png/rpg-2-star-ocean-the-second_heya_walk-west-idle-f01_unapproved-hww167-v01_20261024-144500-c19162d5.png",
+    "missing outputs/heya-ww167/png/rpg-2-star-ocean-the-second_heya_walk-west-idle-f02_unapproved-hww167-v01_20261024-144500-ef393ef4.png",
+    "missing outputs/heya-ww167/png/rpg-2-star-ocean-the-second_heya_walk-west-idle-f03_unapproved-hww167-v01_20261024-144500-77e7ecbf.png",
+    "missing outputs/heya-ww167/png/rpg-2-star-ocean-the-second_heya_walk-west-walk-p00_unapproved-hww167-v01_20261024-144500-7e3355c8.png",
+    "missing outputs/heya-ww167/png/rpg-2-star-ocean-the-second_heya_walk-west-walk-p01_unapproved-hww167-v01_20261024-144500-acf99a74.png",
+    "missing outputs/heya-ww167/png/rpg-2-star-ocean-the-second_heya_walk-west-walk-p02_unapproved-hww167-v01_20261024-144500-43ec066b.png",
+    "missing outputs/heya-ww167/png/rpg-2-star-ocean-the-second_heya_walk-west-walk-p03_unapproved-hww167-v01_20261024-144500-c60861d9.png",
+    "missing outputs/heya-ww167/png/rpg-2-star-ocean-the-second_heya_walk-west-walk-p04_unapproved-hww167-v01_20261024-144500-8fdcf287.png",
+    "missing outputs/heya-ww167/png/rpg-2-star-ocean-the-second_heya_walk-west-walk-p05_unapproved-hww167-v01_20261024-144500-ba40ae70.png",
+    "missing outputs/heya-ww167/png/rpg-2-star-ocean-the-second_heya_walk-west-walk-p06_unapproved-hww167-v01_20261024-144500-93260d99.png",
+    "missing outputs/heya-ww167/png/rpg-2-star-ocean-the-second_heya_walk-west-walk-p07_unapproved-hww167-v01_20261024-144500-791719df.png",
+    "missing outputs/heya-ww167/png/rpg-2-star-ocean-the-second_heya_walk-west-walk-p08_unapproved-hww167-v01_20261024-144500-c01cfe1b.png",
+    "missing outputs/heya-ww167/png/rpg-2-star-ocean-the-second_heya_walk-west-walk-p09_unapproved-hww167-v01_20261024-144500-605b4282.png",
+    "missing outputs/heya-ww167/png/rpg-2-star-ocean-the-second_heya_walk-west-walk-p10_unapproved-hww167-v01_20261024-144500-85ecdaab.png",
+    "missing outputs/heya-ww167/png/rpg-2-star-ocean-the-second_heya_walk-west-walk-p11_unapproved-hww167-v01_20261024-144500-52cf5ea4.png",
+    "missing outputs/heya-ww167/png/rpg-2-star-ocean-the-second_heya_walk-west-stop-p00-s1_unapproved-hww167-v01_20261024-144500-b917b0a3.png",
+    "missing outputs/heya-ww167/png/rpg-2-star-ocean-the-second_heya_walk-west-stop-p00-s2_unapproved-hww167-v01_20261024-144500-5aafc332.png",
+    "missing outputs/heya-ww167/png/rpg-2-star-ocean-the-second_heya_walk-west-stop-p01-s1_unapproved-hww167-v01_20261024-144500-6d7108ed.png",
+    "missing outputs/heya-ww167/png/rpg-2-star-ocean-the-second_heya_walk-west-stop-p01-s2_unapproved-hww167-v01_20261024-144500-72db2e5a.png",
+    "missing outputs/heya-ww167/png/rpg-2-star-ocean-the-second_heya_walk-west-stop-p02-s1_unapproved-hww167-v01_20261024-144500-269a5a1a.png",
+    "missing outputs/heya-ww167/png/rpg-2-star-ocean-the-second_heya_walk-west-stop-p02-s2_unapproved-hww167-v01_20261024-144500-a288f8a5.png",
+    "missing outputs/heya-ww167/png/rpg-2-star-ocean-the-second_heya_walk-west-stop-p03-s1_unapproved-hww167-v01_20261024-144500-ebece0db.png",
+    "missing outputs/heya-ww167/png/rpg-2-star-ocean-the-second_heya_walk-west-stop-p03-s2_unapproved-hww167-v01_20261024-144500-1664509d.png",
+    "missing outputs/heya-ww167/png/rpg-2-star-ocean-the-second_heya_walk-west-stop-p04-s1_unapproved-hww167-v01_20261024-144500-bfe80cac.png",
+    "missing outputs/heya-ww167/png/rpg-2-star-ocean-the-second_heya_walk-west-stop-p04-s2_unapproved-hww167-v01_20261024-144500-8d2f2d9d.png",
+    "missing outputs/heya-ww167/png/rpg-2-star-ocean-the-second_heya_walk-west-stop-p05-s1_unapproved-hww167-v01_20261024-144500-23197323.png",
+    "missing outputs/heya-ww167/png/rpg-2-star-ocean-the-second_heya_walk-west-stop-p05-s2_unapproved-hww167-v01_20261024-144500-9e765a79.png",
+    "missing outputs/heya-ww167/png/rpg-2-star-ocean-the-second_heya_walk-west-stop-p06-s1_unapproved-hww167-v01_20261024-144500-9fb54061.png",
+    "missing outputs/heya-ww167/png/rpg-2-star-ocean-the-second_heya_walk-west-stop-p06-s2_unapproved-hww167-v01_20261024-144500-e408f477.png",
+    "missing outputs/heya-ww167/png/rpg-2-star-ocean-the-second_heya_walk-west-stop-p07-s1_unapproved-hww167-v01_20261024-144500-62e9be73.png",
+    "missing outputs/heya-ww167/png/rpg-2-star-ocean-the-second_heya_walk-west-stop-p07-s2_unapproved-hww167-v01_20261024-144500-2216addb.png",
+    "missing outputs/heya-ww167/png/rpg-2-star-ocean-the-second_heya_walk-west-stop-p08-s1_unapproved-hww167-v01_20261024-144500-c2a2bddc.png",
+    "missing outputs/heya-ww167/png/rpg-2-star-ocean-the-second_heya_walk-west-stop-p08-s2_unapproved-hww167-v01_20261024-144500-11539b43.png",
+    "missing outputs/heya-ww167/png/rpg-2-star-ocean-the-second_heya_walk-west-stop-p09-s1_unapproved-hww167-v01_20261024-144500-3b97afc6.png",
+    "missing outputs/heya-ww167/png/rpg-2-star-ocean-the-second_heya_walk-west-stop-p09-s2_unapproved-hww167-v01_20261024-144500-71b41323.png",
+    "missing outputs/heya-ww167/png/rpg-2-star-ocean-the-second_heya_walk-west-stop-p10-s1_unapproved-hww167-v01_20261024-144500-c36c9f6c.png",
+    "missing outputs/heya-ww167/png/rpg-2-star-ocean-the-second_heya_walk-west-stop-p10-s2_unapproved-hww167-v01_20261024-144500-fac0923b.png",
+    "missing outputs/heya-ww167/png/rpg-2-star-ocean-the-second_heya_walk-west-stop-p11-s1_unapproved-hww167-v01_20261024-144500-8262e593.png",
+    "missing outputs/heya-ww167/png/rpg-2-star-ocean-the-second_heya_walk-west-stop-p11-s2_unapproved-hww167-v01_20261024-144500-2c70695f.png",
+    "missing outputs/heya-ww167/rpg-2-star-ocean-the-second_heya_walk-west-editable_unapproved-hww167-v01_20261024-144500-84ba70c7.pxo",
+    "missing outputs/heya-ww167/rpg-2-star-ocean-the-second_heya_walk-west-static-layers_unapproved-hww167-v01_20261024-144500-d577cfbd.ora",
+    "missing game/assets/characters/heya-native-v01/west-walk/rpg-2-star-ocean-the-second_heya_walk-sprite-set-runtime_unapproved-hww167-v01_20261024-144500-9bcfcbaf.json",
+    "missing game/assets/characters/heya-native-v01/west-walk/rpg-2-star-ocean-the-second_heya_walk-stop-transition-supplemental_unapproved-hww167-v01_20261024-144500-7f410796.json",
+    "missing game/assets/characters/heya-native-v01/west-walk/png/rpg-2-star-ocean-the-second_heya_walk-west-static_unapproved-hww167-v01_20261024-144500-310ac0c4.png",
+    "missing game/assets/characters/heya-native-v01/west-walk/png/rpg-2-star-ocean-the-second_heya_walk-west-idle-f00_unapproved-hww167-v01_20261024-144500-3b6938c5.png",
+    "missing game/assets/characters/heya-native-v01/west-walk/png/rpg-2-star-ocean-the-second_heya_walk-west-idle-f01_unapproved-hww167-v01_20261024-144500-c19162d5.png",
+    "missing game/assets/characters/heya-native-v01/west-walk/png/rpg-2-star-ocean-the-second_heya_walk-west-idle-f02_unapproved-hww167-v01_20261024-144500-ef393ef4.png",
+    "missing game/assets/characters/heya-native-v01/west-walk/png/rpg-2-star-ocean-the-second_heya_walk-west-idle-f03_unapproved-hww167-v01_20261024-144500-77e7ecbf.png",
+    "missing game/assets/characters/heya-native-v01/west-walk/png/rpg-2-star-ocean-the-second_heya_walk-west-walk-p00_unapproved-hww167-v01_20261024-144500-7e3355c8.png",
+    "missing game/assets/characters/heya-native-v01/west-walk/png/rpg-2-star-ocean-the-second_heya_walk-west-walk-p01_unapproved-hww167-v01_20261024-144500-acf99a74.png",
+    "missing game/assets/characters/heya-native-v01/west-walk/png/rpg-2-star-ocean-the-second_heya_walk-west-walk-p02_unapproved-hww167-v01_20261024-144500-43ec066b.png",
+    "missing game/assets/characters/heya-native-v01/west-walk/png/rpg-2-star-ocean-the-second_heya_walk-west-walk-p03_unapproved-hww167-v01_20261024-144500-c60861d9.png",
+    "missing game/assets/characters/heya-native-v01/west-walk/png/rpg-2-star-ocean-the-second_heya_walk-west-walk-p04_unapproved-hww167-v01_20261024-144500-8fdcf287.png",
+    "missing game/assets/characters/heya-native-v01/west-walk/png/rpg-2-star-ocean-the-second_heya_walk-west-walk-p05_unapproved-hww167-v01_20261024-144500-ba40ae70.png",
+    "missing game/assets/characters/heya-native-v01/west-walk/png/rpg-2-star-ocean-the-second_heya_walk-west-walk-p06_unapproved-hww167-v01_20261024-144500-93260d99.png",
+    "missing game/assets/characters/heya-native-v01/west-walk/png/rpg-2-star-ocean-the-second_heya_walk-west-walk-p07_unapproved-hww167-v01_20261024-144500-791719df.png",
+    "missing game/assets/characters/heya-native-v01/west-walk/png/rpg-2-star-ocean-the-second_heya_walk-west-walk-p08_unapproved-hww167-v01_20261024-144500-c01cfe1b.png",
+    "missing game/assets/characters/heya-native-v01/west-walk/png/rpg-2-star-ocean-the-second_heya_walk-west-walk-p09_unapproved-hww167-v01_20261024-144500-605b4282.png",
+    "missing game/assets/characters/heya-native-v01/west-walk/png/rpg-2-star-ocean-the-second_heya_walk-west-walk-p10_unapproved-hww167-v01_20261024-144500-85ecdaab.png",
+    "missing game/assets/characters/heya-native-v01/west-walk/png/rpg-2-star-ocean-the-second_heya_walk-west-walk-p11_unapproved-hww167-v01_20261024-144500-52cf5ea4.png",
+    "missing game/assets/characters/heya-native-v01/west-walk/png/rpg-2-star-ocean-the-second_heya_walk-west-stop-p00-s1_unapproved-hww167-v01_20261024-144500-b917b0a3.png",
+    "missing game/assets/characters/heya-native-v01/west-walk/png/rpg-2-star-ocean-the-second_heya_walk-west-stop-p00-s2_unapproved-hww167-v01_20261024-144500-5aafc332.png",
+    "missing game/assets/characters/heya-native-v01/west-walk/png/rpg-2-star-ocean-the-second_heya_walk-west-stop-p01-s1_unapproved-hww167-v01_20261024-144500-6d7108ed.png",
+    "missing game/assets/characters/heya-native-v01/west-walk/png/rpg-2-star-ocean-the-second_heya_walk-west-stop-p01-s2_unapproved-hww167-v01_20261024-144500-72db2e5a.png",
+    "missing game/assets/characters/heya-native-v01/west-walk/png/rpg-2-star-ocean-the-second_heya_walk-west-stop-p02-s1_unapproved-hww167-v01_20261024-144500-269a5a1a.png",
+    "missing game/assets/characters/heya-native-v01/west-walk/png/rpg-2-star-ocean-the-second_heya_walk-west-stop-p02-s2_unapproved-hww167-v01_20261024-144500-a288f8a5.png",
+    "missing game/assets/characters/heya-native-v01/west-walk/png/rpg-2-star-ocean-the-second_heya_walk-west-stop-p03-s1_unapproved-hww167-v01_20261024-144500-ebece0db.png",
+    "missing game/assets/characters/heya-native-v01/west-walk/png/rpg-2-star-ocean-the-second_heya_walk-west-stop-p03-s2_unapproved-hww167-v01_20261024-144500-1664509d.png",
+    "missing game/assets/characters/heya-native-v01/west-walk/png/rpg-2-star-ocean-the-second_heya_walk-west-stop-p04-s1_unapproved-hww167-v01_20261024-144500-bfe80cac.png",
+    "missing game/assets/characters/heya-native-v01/west-walk/png/rpg-2-star-ocean-the-second_heya_walk-west-stop-p04-s2_unapproved-hww167-v01_20261024-144500-8d2f2d9d.png",
+    "missing game/assets/characters/heya-native-v01/west-walk/png/rpg-2-star-ocean-the-second_heya_walk-west-stop-p05-s1_unapproved-hww167-v01_20261024-144500-23197323.png",
+    "missing game/assets/characters/heya-native-v01/west-walk/png/rpg-2-star-ocean-the-second_heya_walk-west-stop-p05-s2_unapproved-hww167-v01_20261024-144500-9e765a79.png",
+    "missing game/assets/characters/heya-native-v01/west-walk/png/rpg-2-star-ocean-the-second_heya_walk-west-stop-p06-s1_unapproved-hww167-v01_20261024-144500-9fb54061.png",
+    "missing game/assets/characters/heya-native-v01/west-walk/png/rpg-2-star-ocean-the-second_heya_walk-west-stop-p06-s2_unapproved-hww167-v01_20261024-144500-e408f477.png",
+    "missing game/assets/characters/heya-native-v01/west-walk/png/rpg-2-star-ocean-the-second_heya_walk-west-stop-p07-s1_unapproved-hww167-v01_20261024-144500-62e9be73.png",
+    "missing game/assets/characters/heya-native-v01/west-walk/png/rpg-2-star-ocean-the-second_heya_walk-west-stop-p07-s2_unapproved-hww167-v01_20261024-144500-2216addb.png",
+    "missing game/assets/characters/heya-native-v01/west-walk/png/rpg-2-star-ocean-the-second_heya_walk-west-stop-p08-s1_unapproved-hww167-v01_20261024-144500-c2a2bddc.png",
+    "missing game/assets/characters/heya-native-v01/west-walk/png/rpg-2-star-ocean-the-second_heya_walk-west-stop-p08-s2_unapproved-hww167-v01_20261024-144500-11539b43.png",
+    "missing game/assets/characters/heya-native-v01/west-walk/png/rpg-2-star-ocean-the-second_heya_walk-west-stop-p09-s1_unapproved-hww167-v01_20261024-144500-3b97afc6.png",
+    "missing game/assets/characters/heya-native-v01/west-walk/png/rpg-2-star-ocean-the-second_heya_walk-west-stop-p09-s2_unapproved-hww167-v01_20261024-144500-71b41323.png",
+    "missing game/assets/characters/heya-native-v01/west-walk/png/rpg-2-star-ocean-the-second_heya_walk-west-stop-p10-s1_unapproved-hww167-v01_20261024-144500-c36c9f6c.png",
+    "missing game/assets/characters/heya-native-v01/west-walk/png/rpg-2-star-ocean-the-second_heya_walk-west-stop-p10-s2_unapproved-hww167-v01_20261024-144500-fac0923b.png",
+    "missing game/assets/characters/heya-native-v01/west-walk/png/rpg-2-star-ocean-the-second_heya_walk-west-stop-p11-s1_unapproved-hww167-v01_20261024-144500-8262e593.png",
+    "missing game/assets/characters/heya-native-v01/west-walk/png/rpg-2-star-ocean-the-second_heya_walk-west-stop-p11-s2_unapproved-hww167-v01_20261024-144500-2c70695f.png",
+    "missing game/assets/characters/heya-native-v01/west-walk/rpg-2-star-ocean-the-second_heya_walk-sprite-set-registry_unapproved-hww167-v01_20261024-144500-7d29bdf8.json",
+    "missing outputs/heya-ww167/rpg-2-star-ocean-the-second_heya_walk-source-manifest_unapproved-hww167-v01_20261024-144500-85f7d9bf.json",
+    "missing game/assets/characters/heya-native-v01/west-walk/.gdignore",
+    "missing game/assets/characters/heya-native-v01/west-walk/.gitattributes",
+    "missing outputs/heya-ww167/rpg-2-star-ocean-the-second_heya_walk-file-list_unapproved-hww167-v01_20261024-144500-aed6d3b2.json",
+    "source near boots cel excludes far-only columns (x < 37)"
+  ]
+}
