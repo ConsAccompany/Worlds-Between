@@ -1,0 +1,36 @@
+cd /home/kel/projects/worlds-between/repo && python3 - <<'PY'
+import json
+from pathlib import Path
+p=Path('outputs/hdisplay179/provider-receipt.json')
+d=json.loads(p.read_text(encoding='utf-8'))
+P='rpg-2-star-ocean-the-second'; RUN=d['run_id']
+build=f'tools/{P}_heya_display-build_v01_{RUN}.py'
+contract=f'tools/{P}_heya_display-contract-check_v01_{RUN}.py'
+malformed=f'tools/{P}_heya_display-malformed-check_v01_{RUN}.py'
+probe=f'tools/{P}_heya_display-preview-probe_v01_{RUN}.gd'
+manifest=f'game/assets/portraits/hdisplay179/{P}_heya_display-portrait-manifest_v01_{RUN}.json'
+godot='/home/kel/projects/worlds-between/tooling/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64'
+runner='tools/rpg-2-star-ocean-the-second_godot_checked-runner_v01_20261018-203400-f74ac6d1.py'
+env=('env XDG_CONFIG_HOME=/home/kel/projects/worlds-between/repo/outputs/hdisplay179/xdg/config '
+     'XDG_DATA_HOME=/home/kel/projects/worlds-between/repo/outputs/hdisplay179/xdg/data '
+     'XDG_CACHE_HOME=/home/kel/projects/worlds-between/repo/outputs/hdisplay179/xdg/cache '
+     'TMPDIR=/home/kel/projects/worlds-between/repo/outputs/hdisplay179/xdg/tmp ')
+cmds={
+ 'build':f'python3 -I -X utf8 {build} build',
+ 'build-deterministic-check':f'python3 -I -X utf8 {build} check',
+ 'contract-final':f'python3 -I -X utf8 {contract} --root . --manifest {manifest} --out outputs/hdisplay179/contract-pass2',
+ 'malformed-final':f'python3 -I -X utf8 {malformed} --out outputs/hdisplay179/malformed2',
+ 'godot-import-project-local-xdg':f'{env}python3 -X utf8 {runner} --timeout 180 --log outputs/hdisplay179/import2.runner.log -- {godot} --headless --audio-driver Dummy --path game --import',
+ 'probe-headless-en-final':f'{env}python3 -X utf8 {runner} --timeout 120 --expect HDISPLAY179_PROBE_OK --log outputs/hdisplay179/probe-headless-en-2.runner.log -- {godot} --headless --audio-driver Dummy --path game --script res://../{probe} -- --lang=en',
+ 'probe-headless-zh-final':f'{env}python3 -X utf8 {runner} --timeout 120 --expect HDISPLAY179_PROBE_OK --log outputs/hdisplay179/probe-headless-zh-2.runner.log -- {godot} --headless --audio-driver Dummy --path game --script res://../{probe} -- --lang=zh',
+ 'probe-xvfb-en-rendered':f'{env}python3 -X utf8 {runner} --timeout 150 --expect HDISPLAY179_PROBE_OK --expect "CAPTURES true" --log outputs/hdisplay179/probe-xvfb-en.runner.log -- xvfb-run -a -s "-screen 0 640x360x24" {godot} --audio-driver Dummy --rendering-driver opengl3 --resolution 640x360 --path game --script res://../{probe} -- --lang=en --out=/home/kel/projects/worlds-between/repo/outputs/hdisplay179/captures',
+ 'probe-xvfb-zh-rendered':f'{env}python3 -X utf8 {runner} --timeout 150 --expect HDISPLAY179_PROBE_OK --expect "CAPTURES true" --log outputs/hdisplay179/probe-xvfb-zh.runner.log -- xvfb-run -a -s "-screen 0 640x360x24" {godot} --audio-driver Dummy --rendering-driver opengl3 --resolution 640x360 --path game --script res://../{probe} -- --lang=zh --out=/home/kel/projects/worlds-between/repo/outputs/hdisplay179/captures',
+ 'm1-normal-game-smoke':f'{env}python3 -X utf8 {runner} --timeout 120 --expect M1_SMOKE_OK --log outputs/hdisplay179/m1-smoke.runner.log -- {godot} --headless --audio-driver Dummy --path game --script res://tests/m1_smoke.gd',
+}
+for c in d['checks']:
+    c['command']=cmds[c['name']]
+d['command_note']='All commands were executed from the repository root. The env prefix is the project-local Godot XDG/TMPDIR profile used to avoid writing to the default editor profile.'
+p.write_text(json.dumps(d,indent=2,ensure_ascii=False)+'\n',encoding='utf-8',newline='\n')
+print('updated',p.stat().st_size)
+PY
+python3 -m json.tool outputs/hdisplay179/provider-receipt.json > /dev/null && echo JSON_OK

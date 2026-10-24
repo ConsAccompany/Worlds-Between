@@ -1,0 +1,35 @@
+cd /home/kel/projects/worlds-between/repo && python3 - <<'PY'
+import json, hashlib
+from pathlib import Path
+p=Path('outputs/hdisplay179/provider-receipt.json')
+d=json.loads(p.read_text(encoding='utf-8'))
+def h(x): return hashlib.sha256(Path(x).read_bytes()).hexdigest()
+logs=[
+ 'outputs/hdisplay179/build.log','outputs/hdisplay179/build-check.log',
+ 'outputs/hdisplay179/contract-pass2.log','outputs/hdisplay179/contract.log',
+ 'outputs/hdisplay179/contract-pass.log',
+ 'outputs/hdisplay179/malformed2.log','outputs/hdisplay179/malformed.log',
+ 'outputs/hdisplay179/import.runner.log','outputs/hdisplay179/import.execution.log',
+ 'outputs/hdisplay179/import2.runner.log','outputs/hdisplay179/import2.execution.log',
+ 'outputs/hdisplay179/probe-headless-en.runner.log','outputs/hdisplay179/probe-headless-en.log',
+ 'outputs/hdisplay179/probe-headless-en-2.runner.log','outputs/hdisplay179/probe-headless-en-2.log',
+ 'outputs/hdisplay179/probe-headless-zh.runner.log','outputs/hdisplay179/probe-headless-zh.log',
+ 'outputs/hdisplay179/probe-headless-zh-2.runner.log','outputs/hdisplay179/probe-headless-zh-2.log',
+ 'outputs/hdisplay179/probe-xvfb-en.runner.log','outputs/hdisplay179/probe-xvfb-en.log',
+ 'outputs/hdisplay179/probe-xvfb-zh.runner.log','outputs/hdisplay179/probe-xvfb-zh.log',
+ 'outputs/hdisplay179/m1-smoke.runner.log','outputs/hdisplay179/m1-smoke.execution.log',
+]
+d['evidence_log_hashes']={x:h(x) for x in logs if Path(x).is_file()}
+d['output_metadata']={
+ 'outputs/hdisplay179/.gitattributes':h('outputs/hdisplay179/.gitattributes'),
+ 'outputs/hdisplay179/.gitignore':h('outputs/hdisplay179/.gitignore')
+}
+d['generated_hashes']={
+ 'game/assets/portraits/hdisplay179/rpg-2-star-ocean-the-second_heya_display-portrait_v01_20261024-154240-h179d001.png.import':h('game/assets/portraits/hdisplay179/rpg-2-star-ocean-the-second_heya_display-portrait_v01_20261024-154240-h179d001.png.import'),
+ 'game/scripts/hdisplay179/rpg-2-star-ocean-the-second_heya_display-preview_standalone-v01_20261024-154240-h179d001.gd.uid':h('game/scripts/hdisplay179/rpg-2-star-ocean-the-second_heya_display-preview_standalone-v01_20261024-154240-h179d001.gd.uid')
+}
+d['self_hash_note']='provider-receipt.json cannot include its own hash; the coordinator should hash the staged receipt blob.'
+p.write_text(json.dumps(d,indent=2,ensure_ascii=False)+'\n',encoding='utf-8',newline='\n')
+print('updated',p.stat().st_size)
+PY
+python3 -m json.tool outputs/hdisplay179/provider-receipt.json > /dev/null && echo JSON_OK

@@ -1,0 +1,549 @@
+{
+  "schema": "worlds-between/character-display-provider-receipt/v1",
+  "task": "content.char.heya.display",
+  "title": "Heya in-game display image (UNAPPROVED)",
+  "batch": "batch179",
+  "run_id": "20261024-154240-h179d001",
+  "recorded_at_utc": "2026-10-24T15:46:35Z",
+  "base_revision": "e7c152b33d7734f3f61dbe8b698870f93a45a9e3",
+  "source_commit": {
+    "commit": "dc8ad3b4cff0ac375a00dee3b46ab8135e27e80f",
+    "short": "dc8ad3b4",
+    "subject": "[verified] Produce Heya south static source; preserve native and human gates",
+    "dependency": "content.char.heya.static-south (done)"
+  },
+  "status": "produced-and-shown-in-opt-in-standalone-ui; coordinator commit pending; art unapproved",
+  "outcome": "TARGETED_RENDER_VALIDATION_PASS_UNAPPROVED",
+  "production_done": false,
+  "human_art_approved": false,
+  "not_done_because": "Coordinator integration/commit and human art approval remain outside provider scope; no ledger/Bible/registry/Git index/commit/push performed.",
+  "hash_normalization": "none; all SHA-256 values are raw file bytes. Working text is LF and core.autocrlf is unset. Display PNG/JSON and the UI scene/script are scoped `-text -eol`; the tools and QA note are LF. The coordinator must re-hash the staged blobs.",
+  "producer": "DeepSeek via authorized adapter; sole producer for this bounded task",
+  "coordinator": "Hermes (audited integration pending)",
+  "governance": {
+    "read": [
+      "CLAUDE.md",
+      "HERMES_START_HERE.md",
+      "AGENTS.md",
+      "docs/workflow.md",
+      "Bible character-26 Heya",
+      "Heya south manifest/source",
+      "Yanke ydisplay111 / Muxiu mdisplay91 / Lin Que ldisplay64 pipeline and QA"
+    ],
+    "not_changed": [
+      "outputs/*_production-completion_task-ledger_*.json",
+      "outputs/*_game-bible_state_*.json",
+      "docs/coordination/*_workflow-operating_registry_*.json",
+      "Git index",
+      "commits",
+      "pushes",
+      "scores",
+      "party/exploration/battle defaults",
+      "canon",
+      "other characters"
+    ],
+    "pre_existing_dirty_preserved": true,
+    "direct_provider_launching": false,
+    "spending": "none"
+  },
+  "deliverable": {
+    "kind": "standalone opt-in bilingual character display preview",
+    "display_image_is": "exact integer 2x nearest replication of the committed native south static",
+    "source_is_authoritative": true,
+    "new_concept_or_repaint": false,
+    "ordinary_gameplay_wiring": false,
+    "party_or_default_change": false,
+    "ui": {
+      "scene": "game/scenes/hdisplay179/rpg-2-star-ocean-the-second_heya_display-preview_standalone-v01_20261024-154240-h179d001.tscn",
+      "scene_sha256": "48fbd0be066a2a24460d28da08e60444d02762a2948205716969a04f93e54296",
+      "script": "game/scripts/hdisplay179/rpg-2-star-ocean-the-second_heya_display-preview_standalone-v01_20261024-154240-h179d001.gd",
+      "script_sha256": "b0a6f843818a5deb9893ba83c22d448e3d3b739b66ef5f6fd6b30efbb5d54691",
+      "frame": "180x250 at (16,56)",
+      "image_rect": "160x224 at (26,69)",
+      "filter": "nearest",
+      "stretch": "keep-aspect-centered",
+      "stage": "static south source at 0.5 display scale",
+      "languages": [
+        "en",
+        "zh"
+      ],
+      "fallback": "localized missing-portrait label with static source still bound"
+    }
+  },
+  "source_pins": [
+    {
+      "path": "game/assets/characters/heya-native-v01/south/rpg-2-star-ocean-the-second_heya_south-static_unapproved-v01_20261024-125310-231d2b03.png",
+      "sha256": "f6e60682bc7f5290aff11ec1154e515137a2b0f66a7fd5141ef4a9afa755d2c3",
+      "bytes": 1855,
+      "kind": "native-south-static-source",
+      "width": 80,
+      "height": 112,
+      "raw_rgba_sha256": "59e322f03c33987b28999d3cd6cbeec3e16c41dcc793387d38b168fede145d65"
+    },
+    {
+      "path": "game/assets/characters/heya-native-v01/south/rpg-2-star-ocean-the-second_heya_south-manifest_unapproved-v01_20261024-125310-a9210ea1.json",
+      "sha256": "d6ddec7e38d74083e6a774d96e7235c9b64fe5ba7b7ec3664f5067f82217d80c",
+      "bytes": 6345,
+      "kind": "native-south-source-manifest",
+      "pins_png_rawsha256": "f6e60682bc7f5290aff11ec1154e515137a2b0f66a7fd5141ef4a9afa755d2c3",
+      "content_id": "content.char.heya.static-south",
+      "canvas": [
+        80,
+        112
+      ],
+      "pivot": [
+        40,
+        104
+      ],
+      "body_rows": [
+        8,
+        103
+      ],
+      "display_scale": 0.5
+    },
+    {
+      "path": "game/assets/characters/heya-native-v01/south/rpg-2-star-ocean-the-second_heya_south-edit_unapproved-v01_20261024-125310-9665bd23.pxo",
+      "sha256": "f5613b9d4b787e694eddf0c76bb0de28535495849d427d838c30647b7257b12a",
+      "bytes": 10791,
+      "kind": "editable-pxo-provenance-only"
+    },
+    {
+      "path": "game/assets/characters/heya-native-v01/south/rpg-2-star-ocean-the-second_heya_south-edit_unapproved-v01_20261024-125310-42e46403.ora",
+      "sha256": "694e105375eded54d605698f6c65862f152a3e0c63a2462dd90fe4073c8aff36",
+      "bytes": 10258,
+      "kind": "editable-ora-provenance-only"
+    },
+    {
+      "path": "game/assets/characters/heya-native-v01/south/rpg-2-star-ocean-the-second_heya_south-palette_unapproved-v01_20261024-125310-a902fe49.json",
+      "sha256": "a699845e99d7cc794402b5e31b3e515cafb5459645fbab05d5a4eefb4071e838",
+      "bytes": 791,
+      "kind": "palette-provenance-only"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "game/assets/portraits/hdisplay179/rpg-2-star-ocean-the-second_heya_display-portrait_v01_20261024-154240-h179d001.png",
+      "sha256": "54e4a26d66889d2082dbb4cb9c952fa6b122d0f361d0562556715fe26f97f9b2",
+      "bytes": 2315,
+      "width": 160,
+      "height": 224,
+      "raw_rgba_sha256": "9c3694a7ef1d824f05956babcd90db3cc4d332e15623df9bb808716e0184ec04",
+      "opaque_texels": 10960,
+      "kind": "display-image",
+      "status": "UNAPPROVED"
+    },
+    {
+      "path": "game/assets/portraits/hdisplay179/rpg-2-star-ocean-the-second_heya_display-portrait-manifest_v01_20261024-154240-h179d001.json",
+      "sha256": "e251fd15670bf3909d134957d3da0aa75addd550d88dabbdddbee4dab0c38f21",
+      "bytes": 3628,
+      "kind": "display-manifest"
+    },
+    {
+      "path": "game/assets/portraits/hdisplay179/.gitattributes",
+      "sha256": "01741716c6193635d5703c0d8f4fa009f8a54e0c28555c442f98f564743f3cae",
+      "bytes": 159,
+      "kind": "hash-pin-attributes"
+    },
+    {
+      "path": "game/scenes/hdisplay179/rpg-2-star-ocean-the-second_heya_display-preview_standalone-v01_20261024-154240-h179d001.tscn",
+      "sha256": "48fbd0be066a2a24460d28da08e60444d02762a2948205716969a04f93e54296",
+      "bytes": 345,
+      "kind": "opt-in-scene"
+    },
+    {
+      "path": "game/scenes/hdisplay179/.gitattributes",
+      "sha256": "3240035e31eafaddc00632139483d46d62152e7465fab07da90550fc66cf5047",
+      "bytes": 81,
+      "kind": "hash-pin-attributes"
+    },
+    {
+      "path": "game/scripts/hdisplay179/rpg-2-star-ocean-the-second_heya_display-preview_standalone-v01_20261024-154240-h179d001.gd",
+      "sha256": "b0a6f843818a5deb9893ba83c22d448e3d3b739b66ef5f6fd6b30efbb5d54691",
+      "bytes": 5677,
+      "kind": "opt-in-ui-script"
+    },
+    {
+      "path": "game/scripts/hdisplay179/.gitattributes",
+      "sha256": "0fbb35a43b016f42392ba7d0096989bb036331d6e5a3090484d489b6d4f95974",
+      "bytes": 82,
+      "kind": "hash-pin-attributes"
+    },
+    {
+      "path": "tools/rpg-2-star-ocean-the-second_heya_display-build_v01_20261024-154240-h179d001.py",
+      "sha256": "20a2edc73470893e72745ab55ff33695e4ecf8a631ef82990e200f7fdb4baded",
+      "bytes": 8704,
+      "kind": "builder"
+    },
+    {
+      "path": "tools/rpg-2-star-ocean-the-second_heya_display-contract-check_v01_20261024-154240-h179d001.py",
+      "sha256": "0edeed768dd0a17a1b10d6d53dc08f91cbb2c3291e26b5ef1923121626fb130b",
+      "bytes": 14323,
+      "kind": "independent-contract-checker"
+    },
+    {
+      "path": "tools/rpg-2-star-ocean-the-second_heya_display-malformed-check_v01_20261024-154240-h179d001.py",
+      "sha256": "f436b1f2570979474a0ac6b4460b4d736b7502343882cbd1f42527f68a123b56",
+      "bytes": 7919,
+      "kind": "malformed-negative-controls"
+    },
+    {
+      "path": "tools/rpg-2-star-ocean-the-second_heya_display-preview-probe_v01_20261024-154240-h179d001.gd",
+      "sha256": "c26d84c326a91b134d79ee55294784f7832153636f996fdd87b3fd0333fd3d94",
+      "bytes": 13266,
+      "kind": "rendered-bilingual-probe"
+    },
+    {
+      "path": "outputs/hdisplay179/rpg-2-star-ocean-the-second_heya_display-qa_unapproved-v01_20261024-154240-h179d001.md",
+      "sha256": "38ad49142babb282d7836d11f304ec34ce13f2ccd4bfd501855ede90560be94f",
+      "bytes": 5122,
+      "kind": "qa-note"
+    },
+    {
+      "path": "outputs/hdisplay179/contract-pass2/rpg-2-star-ocean-the-second_heya_display-contract-report_v01_20261024-154240-h179d001.json",
+      "sha256": "b587db2f72b1c685c24e487c5666c84a63a66c048e26bf63a429e38ed17f386e",
+      "bytes": 8159,
+      "kind": "contract-report-final"
+    },
+    {
+      "path": "outputs/hdisplay179/malformed2/rpg-2-star-ocean-the-second_heya_display-malformed-report_v01_20261024-154240-h179d001.json",
+      "sha256": "10e94656eb611fb0e5b88552ff3bba8ee2dc65d49a691e24d85925d78f0b4d59",
+      "bytes": 10494,
+      "kind": "malformed-report-final"
+    }
+  ],
+  "identity": {
+    "en": "Heya",
+    "zh": "赫娅",
+    "age": 44,
+    "role_en": "Clinician",
+    "role_zh": "诊疗师",
+    "anchors_en": [
+      "auburn braided coil low at nape",
+      "grey-white medical scarf",
+      "ivory clinician coat",
+      "dark-red emergency bag"
+    ],
+    "anchors_zh": [
+      "赤褐色盘辫低置颈后",
+      "灰白医巾",
+      "象牙白诊疗外套",
+      "暗红急救袋"
+    ],
+    "canon_ref": "outputs/rpg-2-star-ocean-the-second_game-bible_state_v01_20261013-195422-b8c16d42.json character-26"
+  },
+  "checks": [
+    {
+      "name": "build",
+      "command": "python3 -I -X utf8 tools/rpg-2-star-ocean-the-second_heya_display-build_v01_20261024-154240-h179d001.py build",
+      "exit": 0,
+      "pass": true,
+      "marker": "HDISPLAY179_BUILD OK 59e322f03c33987b28999d3cd6cbeec3e16c41dcc793387d38b168fede145d65 9c3694a7ef1d824f05956babcd90db3cc4d332e15623df9bb808716e0184ec04",
+      "log": "outputs/hdisplay179/build.log"
+    },
+    {
+      "name": "build-deterministic-check",
+      "command": "python3 -I -X utf8 tools/rpg-2-star-ocean-the-second_heya_display-build_v01_20261024-154240-h179d001.py check",
+      "exit": 0,
+      "pass": true,
+      "marker": "HDISPLAY179_BUILD OK 59e322f03c33987b28999d3cd6cbeec3e16c41dcc793387d38b168fede145d65 9c3694a7ef1d824f05956babcd90db3cc4d332e15623df9bb808716e0184ec04",
+      "log": "outputs/hdisplay179/build-check.log"
+    },
+    {
+      "name": "contract-final",
+      "command": "python3 -I -X utf8 tools/rpg-2-star-ocean-the-second_heya_display-contract-check_v01_20261024-154240-h179d001.py --root . --manifest game/assets/portraits/hdisplay179/rpg-2-star-ocean-the-second_heya_display-portrait-manifest_v01_20261024-154240-h179d001.json --out outputs/hdisplay179/contract-pass2",
+      "exit": 0,
+      "pass": true,
+      "status": "PASS",
+      "checks": 44,
+      "negativeFixtures": 3,
+      "report": "outputs/hdisplay179/contract-pass2/rpg-2-star-ocean-the-second_heya_display-contract-report_v01_20261024-154240-h179d001.json",
+      "log": "outputs/hdisplay179/contract-pass2.log"
+    },
+    {
+      "name": "malformed-final",
+      "command": "python3 -I -X utf8 tools/rpg-2-star-ocean-the-second_heya_display-malformed-check_v01_20261024-154240-h179d001.py --out outputs/hdisplay179/malformed2",
+      "exit": 0,
+      "pass": true,
+      "status": "PASS",
+      "cases": 21,
+      "fails": 0,
+      "marker": "HDISPLAY179_MALFORMED_OK",
+      "report": "outputs/hdisplay179/malformed2/rpg-2-star-ocean-the-second_heya_display-malformed-report_v01_20261024-154240-h179d001.json",
+      "log": "outputs/hdisplay179/malformed2.log"
+    },
+    {
+      "name": "godot-import-project-local-xdg",
+      "command": "env XDG_CONFIG_HOME=/home/kel/projects/worlds-between/repo/outputs/hdisplay179/xdg/config XDG_DATA_HOME=/home/kel/projects/worlds-between/repo/outputs/hdisplay179/xdg/data XDG_CACHE_HOME=/home/kel/projects/worlds-between/repo/outputs/hdisplay179/xdg/cache TMPDIR=/home/kel/projects/worlds-between/repo/outputs/hdisplay179/xdg/tmp python3 -X utf8 tools/rpg-2-star-ocean-the-second_godot_checked-runner_v01_20261018-203400-f74ac6d1.py --timeout 180 --log outputs/hdisplay179/import2.runner.log -- /home/kel/projects/worlds-between/tooling/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64 --headless --audio-driver Dummy --path game --import",
+      "exit": 0,
+      "pass": true,
+      "runner_log": "outputs/hdisplay179/import2.runner.log",
+      "stdout_stderr": "outputs/hdisplay179/import2.execution.log"
+    },
+    {
+      "name": "probe-headless-en-final",
+      "command": "env XDG_CONFIG_HOME=/home/kel/projects/worlds-between/repo/outputs/hdisplay179/xdg/config XDG_DATA_HOME=/home/kel/projects/worlds-between/repo/outputs/hdisplay179/xdg/data XDG_CACHE_HOME=/home/kel/projects/worlds-between/repo/outputs/hdisplay179/xdg/cache TMPDIR=/home/kel/projects/worlds-between/repo/outputs/hdisplay179/xdg/tmp python3 -X utf8 tools/rpg-2-star-ocean-the-second_godot_checked-runner_v01_20261018-203400-f74ac6d1.py --timeout 120 --expect HDISPLAY179_PROBE_OK --log outputs/hdisplay179/probe-headless-en-2.runner.log -- /home/kel/projects/worlds-between/tooling/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64 --headless --audio-driver Dummy --path game --script res://../tools/rpg-2-star-ocean-the-second_heya_display-preview-probe_v01_20261024-154240-h179d001.gd -- --lang=en",
+      "exit": 0,
+      "pass": true,
+      "checks": 61,
+      "fails": 0,
+      "captures": false,
+      "runner_log": "outputs/hdisplay179/probe-headless-en-2.runner.log",
+      "stdout_stderr": "outputs/hdisplay179/probe-headless-en-2.log"
+    },
+    {
+      "name": "probe-headless-zh-final",
+      "command": "env XDG_CONFIG_HOME=/home/kel/projects/worlds-between/repo/outputs/hdisplay179/xdg/config XDG_DATA_HOME=/home/kel/projects/worlds-between/repo/outputs/hdisplay179/xdg/data XDG_CACHE_HOME=/home/kel/projects/worlds-between/repo/outputs/hdisplay179/xdg/cache TMPDIR=/home/kel/projects/worlds-between/repo/outputs/hdisplay179/xdg/tmp python3 -X utf8 tools/rpg-2-star-ocean-the-second_godot_checked-runner_v01_20261018-203400-f74ac6d1.py --timeout 120 --expect HDISPLAY179_PROBE_OK --log outputs/hdisplay179/probe-headless-zh-2.runner.log -- /home/kel/projects/worlds-between/tooling/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64 --headless --audio-driver Dummy --path game --script res://../tools/rpg-2-star-ocean-the-second_heya_display-preview-probe_v01_20261024-154240-h179d001.gd -- --lang=zh",
+      "exit": 0,
+      "pass": true,
+      "checks": 61,
+      "fails": 0,
+      "captures": false,
+      "runner_log": "outputs/hdisplay179/probe-headless-zh-2.runner.log",
+      "stdout_stderr": "outputs/hdisplay179/probe-headless-zh-2.log"
+    },
+    {
+      "name": "probe-xvfb-en-rendered",
+      "command": "env XDG_CONFIG_HOME=/home/kel/projects/worlds-between/repo/outputs/hdisplay179/xdg/config XDG_DATA_HOME=/home/kel/projects/worlds-between/repo/outputs/hdisplay179/xdg/data XDG_CACHE_HOME=/home/kel/projects/worlds-between/repo/outputs/hdisplay179/xdg/cache TMPDIR=/home/kel/projects/worlds-between/repo/outputs/hdisplay179/xdg/tmp python3 -X utf8 tools/rpg-2-star-ocean-the-second_godot_checked-runner_v01_20261018-203400-f74ac6d1.py --timeout 150 --expect HDISPLAY179_PROBE_OK --expect \"CAPTURES true\" --log outputs/hdisplay179/probe-xvfb-en.runner.log -- xvfb-run -a -s \"-screen 0 640x360x24\" /home/kel/projects/worlds-between/tooling/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64 --audio-driver Dummy --rendering-driver opengl3 --resolution 640x360 --path game --script res://../tools/rpg-2-star-ocean-the-second_heya_display-preview-probe_v01_20261024-154240-h179d001.gd -- --lang=en --out=/home/kel/projects/worlds-between/repo/outputs/hdisplay179/captures",
+      "exit": 0,
+      "pass": true,
+      "checks": 70,
+      "fails": 0,
+      "captures": true,
+      "portrait_evidence": "matching 10960/10960 origin (26,69) corner_transparent true",
+      "actor_evidence": "inside_stage true expected 685 differing 683 control_differing 0",
+      "runner_log": "outputs/hdisplay179/probe-xvfb-en.runner.log",
+      "stdout_stderr": "outputs/hdisplay179/probe-xvfb-en.log"
+    },
+    {
+      "name": "probe-xvfb-zh-rendered",
+      "command": "env XDG_CONFIG_HOME=/home/kel/projects/worlds-between/repo/outputs/hdisplay179/xdg/config XDG_DATA_HOME=/home/kel/projects/worlds-between/repo/outputs/hdisplay179/xdg/data XDG_CACHE_HOME=/home/kel/projects/worlds-between/repo/outputs/hdisplay179/xdg/cache TMPDIR=/home/kel/projects/worlds-between/repo/outputs/hdisplay179/xdg/tmp python3 -X utf8 tools/rpg-2-star-ocean-the-second_godot_checked-runner_v01_20261018-203400-f74ac6d1.py --timeout 150 --expect HDISPLAY179_PROBE_OK --expect \"CAPTURES true\" --log outputs/hdisplay179/probe-xvfb-zh.runner.log -- xvfb-run -a -s \"-screen 0 640x360x24\" /home/kel/projects/worlds-between/tooling/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64 --audio-driver Dummy --rendering-driver opengl3 --resolution 640x360 --path game --script res://../tools/rpg-2-star-ocean-the-second_heya_display-preview-probe_v01_20261024-154240-h179d001.gd -- --lang=zh --out=/home/kel/projects/worlds-between/repo/outputs/hdisplay179/captures",
+      "exit": 0,
+      "pass": true,
+      "checks": 70,
+      "fails": 0,
+      "captures": true,
+      "portrait_evidence": "matching 10960/10960 origin (26,69) corner_transparent true",
+      "actor_evidence": "inside_stage true expected 685 differing 683 control_differing 0",
+      "runner_log": "outputs/hdisplay179/probe-xvfb-zh.runner.log",
+      "stdout_stderr": "outputs/hdisplay179/probe-xvfb-zh.log"
+    },
+    {
+      "name": "m1-normal-game-smoke",
+      "command": "env XDG_CONFIG_HOME=/home/kel/projects/worlds-between/repo/outputs/hdisplay179/xdg/config XDG_DATA_HOME=/home/kel/projects/worlds-between/repo/outputs/hdisplay179/xdg/data XDG_CACHE_HOME=/home/kel/projects/worlds-between/repo/outputs/hdisplay179/xdg/cache TMPDIR=/home/kel/projects/worlds-between/repo/outputs/hdisplay179/xdg/tmp python3 -X utf8 tools/rpg-2-star-ocean-the-second_godot_checked-runner_v01_20261018-203400-f74ac6d1.py --timeout 120 --expect M1_SMOKE_OK --log outputs/hdisplay179/m1-smoke.runner.log -- /home/kel/projects/worlds-between/tooling/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64 --headless --audio-driver Dummy --path game --script res://tests/m1_smoke.gd",
+      "exit": 0,
+      "pass": true,
+      "marker": "M1_SMOKE_OK",
+      "runner_log": "outputs/hdisplay179/m1-smoke.runner.log",
+      "stdout_stderr": "outputs/hdisplay179/m1-smoke.execution.log"
+    }
+  ],
+  "failed_checks_preserved": [
+    {
+      "name": "contract-attempt1-opaque-texel-expectation",
+      "exit": 1,
+      "pass": false,
+      "failure": "output.opaque-texels detail 10960",
+      "cause": "checker expected the 2740 source opaque texels instead of the 10960 replicated output texels",
+      "report": "outputs/hdisplay179/contract/rpg-2-star-ocean-the-second_heya_display-contract-report_v01_20261024-154240-h179d001.json",
+      "log": "outputs/hdisplay179/contract.log",
+      "fixed": "OPAQUE set to 10960; final contract PASS 44/44"
+    },
+    {
+      "name": "malformed-attempt1-palette-not-validated",
+      "exit": 1,
+      "pass": false,
+      "failure": "wrong-editable-palette.refused {'status': 'PASS', ...}",
+      "cause": "contract checker validated PXO/ORA but not the palette pin",
+      "report": "outputs/hdisplay179/malformed/rpg-2-star-ocean-the-second_heya_display-malformed-report_v01_20261024-154240-h179d001.json",
+      "log": "outputs/hdisplay179/malformed.log",
+      "fixed": "palette added to editable pins; final malformed PASS 21/21"
+    },
+    {
+      "name": "import-attempt1-default-godot-profile",
+      "exit": 1,
+      "pass": false,
+      "failure": "ERROR: Cannot save file '/home/kel/.config/godot/editor_settings-4.7.tres' / Error saving editor settings",
+      "cause": "default editor profile outside the writable workspace; Godot diagnostic, not a tool permission denial",
+      "runner_log": "outputs/hdisplay179/import.runner.log",
+      "stdout_stderr": "outputs/hdisplay179/import.execution.log",
+      "fixed": "retried with project-local XDG config/data/cache/tmp; import exit 0 in 6.088 s"
+    },
+    {
+      "name": "probe-headless-en-attempt1-label-overlap",
+      "exit": 1,
+      "pass": false,
+      "failure": "FAIL identity clear of actor stage: identity",
+      "cause": "English identity line 'Auburn braided coil low at the nape,' was 211 px wide at x=208 (right edge 419) and overlapped the stage at x=404",
+      "runner_log": "outputs/hdisplay179/probe-headless-en.runner.log",
+      "stdout_stderr": "outputs/hdisplay179/probe-headless-en.log",
+      "fixed": "shortened to 'Auburn braided coil low at nape,' (189 px); final en/zh headless and rendered probes pass"
+    }
+  ],
+  "captures": [
+    {
+      "lang": "en",
+      "kind": "standalone",
+      "path": "outputs/hdisplay179/captures/rpg-2-star-ocean-the-second_heya_display-preview-capture_standalone-en-south-static_20261024-154240-h179d001.png",
+      "sha256": "c270e05c090871bec8bbbb0a7a6577a6d8b40e16db5cc80548ab3d7244f52ffc",
+      "bytes": 30894
+    },
+    {
+      "lang": "zh",
+      "kind": "standalone",
+      "path": "outputs/hdisplay179/captures/rpg-2-star-ocean-the-second_heya_display-preview-capture_standalone-zh-south-static_20261024-154240-h179d001.png",
+      "sha256": "8e0759dceb5b3bd8ca3216de1d4a2f0b4f00e63c499c1e31f97b3230718892fd",
+      "bytes": 29239
+    },
+    {
+      "lang": "en",
+      "kind": "fallback-missing-portrait",
+      "path": "outputs/hdisplay179/captures/rpg-2-star-ocean-the-second_heya_display-preview-capture_fallback-missing-portrait-en_20261024-154240-h179d001.png",
+      "sha256": "ef6135f751cb078cbec22990359c8ab69440f99ce8292ba6840ed8a133bb14b1",
+      "bytes": 30209
+    },
+    {
+      "lang": "zh",
+      "kind": "fallback-missing-portrait",
+      "path": "outputs/hdisplay179/captures/rpg-2-star-ocean-the-second_heya_display-preview-capture_fallback-missing-portrait-zh_20261024-154240-h179d001.png",
+      "sha256": "6877244c390878938134012edcaf6826b8aaa14e117ab4c3f69523cc329c2b1e",
+      "bytes": 28521
+    }
+  ],
+  "visual_review": "Agent inspected the four captures. Portrait 160x224 left; identity stack clear of portrait and stage; CJK glyphs render; 0.5x south static centered in the stage; 'Art pending'/'美术待定' visible. Fallback shows the localized missing-portrait label with the static source still bound. This is not human art approval.",
+  "ordinary_defaults": "No shared tracked runtime/default, scene, script, ledger, Bible, registry or other-character file was modified. All writes are new untracked paths under tools/, game/{assets/portraits,scenes,scripts}/hdisplay179/, and outputs/hdisplay179/. The pre-existing dirty primary checkout was preserved.",
+  "limitations": [
+    "Human art approval is false; the source south static remains UNAPPROVED.",
+    "No motion/idle/walk claim; the scene is test-only/opt-in and is not in ordinary game flow.",
+    "No party/exploration/battle/save/default wiring; no roster/default adoption.",
+    "Rendering used llvmpipe software GL under Xvfb; a V-Sync WARNING is non-fatal and no ERROR/SCRIPT ERROR was logged.",
+    "Generated .png.import and .gd.uid files are editor artifacts and are not proposed for commit; the .import file is ignored by .git/info/exclude.",
+    "The contract-pass (43-check) run before palette hardening is superseded by contract-pass2 (44 checks); both are preserved.",
+    "This receipt is a provider self-report; the coordinator must independently re-hash staged blobs and recheck the combined normal game path after integration.",
+    "No provider wall-clock meter was separately logged; the bounded task finished within the 1400 s target."
+  ],
+  "denials": "No adapter permission denial occurred. The first import's editor-settings write error was a Godot runtime diagnostic from the default profile and was resolved with project-local XDG directories; it was not a tool/permission denial and no denial was retried.",
+  "proposed_commit_paths": [
+    "tools/rpg-2-star-ocean-the-second_heya_display-build_v01_20261024-154240-h179d001.py",
+    "tools/rpg-2-star-ocean-the-second_heya_display-contract-check_v01_20261024-154240-h179d001.py",
+    "tools/rpg-2-star-ocean-the-second_heya_display-malformed-check_v01_20261024-154240-h179d001.py",
+    "tools/rpg-2-star-ocean-the-second_heya_display-preview-probe_v01_20261024-154240-h179d001.gd",
+    "game/assets/portraits/hdisplay179/.gitattributes",
+    "game/assets/portraits/hdisplay179/rpg-2-star-ocean-the-second_heya_display-portrait_v01_20261024-154240-h179d001.png",
+    "game/assets/portraits/hdisplay179/rpg-2-star-ocean-the-second_heya_display-portrait-manifest_v01_20261024-154240-h179d001.json",
+    "game/scenes/hdisplay179/.gitattributes",
+    "game/scenes/hdisplay179/rpg-2-star-ocean-the-second_heya_display-preview_standalone-v01_20261024-154240-h179d001.tscn",
+    "game/scripts/hdisplay179/.gitattributes",
+    "game/scripts/hdisplay179/rpg-2-star-ocean-the-second_heya_display-preview_standalone-v01_20261024-154240-h179d001.gd",
+    "outputs/hdisplay179/.gitattributes",
+    "outputs/hdisplay179/.gitignore",
+    "outputs/hdisplay179/rpg-2-star-ocean-the-second_heya_display-qa_unapproved-v01_20261024-154240-h179d001.md",
+    "outputs/hdisplay179/provider-receipt.json",
+    "outputs/hdisplay179/build.log",
+    "outputs/hdisplay179/build-check.log",
+    "outputs/hdisplay179/contract-pass2/rpg-2-star-ocean-the-second_heya_display-contract-report_v01_20261024-154240-h179d001.json",
+    "outputs/hdisplay179/contract-pass2.log",
+    "outputs/hdisplay179/malformed2/rpg-2-star-ocean-the-second_heya_display-malformed-report_v01_20261024-154240-h179d001.json",
+    "outputs/hdisplay179/malformed2.log",
+    "outputs/hdisplay179/contract/rpg-2-star-ocean-the-second_heya_display-contract-report_v01_20261024-154240-h179d001.json",
+    "outputs/hdisplay179/contract.log",
+    "outputs/hdisplay179/malformed/rpg-2-star-ocean-the-second_heya_display-malformed-report_v01_20261024-154240-h179d001.json",
+    "outputs/hdisplay179/malformed.log",
+    "outputs/hdisplay179/import.runner.log",
+    "outputs/hdisplay179/import.execution.log",
+    "outputs/hdisplay179/import2.runner.log",
+    "outputs/hdisplay179/import2.execution.log",
+    "outputs/hdisplay179/probe-headless-en.runner.log",
+    "outputs/hdisplay179/probe-headless-en.log",
+    "outputs/hdisplay179/probe-headless-en-2.runner.log",
+    "outputs/hdisplay179/probe-headless-en-2.log",
+    "outputs/hdisplay179/probe-headless-zh-2.runner.log",
+    "outputs/hdisplay179/probe-headless-zh-2.log",
+    "outputs/hdisplay179/probe-xvfb-en.runner.log",
+    "outputs/hdisplay179/probe-xvfb-en.log",
+    "outputs/hdisplay179/probe-xvfb-zh.runner.log",
+    "outputs/hdisplay179/probe-xvfb-zh.log",
+    "outputs/hdisplay179/m1-smoke.runner.log",
+    "outputs/hdisplay179/m1-smoke.execution.log",
+    "outputs/hdisplay179/captures/rpg-2-star-ocean-the-second_heya_display-preview-capture_standalone-en-south-static_20261024-154240-h179d001.png",
+    "outputs/hdisplay179/captures/rpg-2-star-ocean-the-second_heya_display-preview-capture_standalone-zh-south-static_20261024-154240-h179d001.png",
+    "outputs/hdisplay179/captures/rpg-2-star-ocean-the-second_heya_display-preview-capture_fallback-missing-portrait-en_20261024-154240-h179d001.png",
+    "outputs/hdisplay179/captures/rpg-2-star-ocean-the-second_heya_display-preview-capture_fallback-missing-portrait-zh_20261024-154240-h179d001.png"
+  ],
+  "generated_not_proposed": [
+    "outputs/hdisplay179/xdg/**",
+    "game/assets/portraits/hdisplay179/rpg-2-star-ocean-the-second_heya_display-portrait_v01_20261024-154240-h179d001.png.import",
+    "game/scripts/hdisplay179/rpg-2-star-ocean-the-second_heya_display-preview_standalone-v01_20261024-154240-h179d001.gd.uid"
+  ],
+  "preserved_not_proposed": [
+    "outputs/hdisplay179/contract-pass/ (43-check intermediate PASS superseded by palette hardening)",
+    "outputs/hdisplay179/contract-pass.log",
+    "outputs/hdisplay179/probe-headless-zh.runner.log (pre-edit pass, superseded by -2 final)",
+    "outputs/hdisplay179/probe-headless-zh.log"
+  ],
+  "rerun_commands_for_coordinator": [
+    "python3 -I -X utf8 tools/rpg-2-star-ocean-the-second_heya_display-build_v01_20261024-154240-h179d001.py check   # expect HDISPLAY179_BUILD OK",
+    "python3 -I -X utf8 tools/rpg-2-star-ocean-the-second_heya_display-contract-check_v01_20261024-154240-h179d001.py --root . --manifest game/assets/portraits/hdisplay179/rpg-2-star-ocean-the-second_heya_display-portrait-manifest_v01_20261024-154240-h179d001.json --out outputs/hdisplay179/<NEW-CONTRACT>   # expect JSON status PASS with 44 checks and 3 refused fixtures",
+    "python3 -I -X utf8 tools/rpg-2-star-ocean-the-second_heya_display-malformed-check_v01_20261024-154240-h179d001.py --out outputs/hdisplay179/<NEW-MALFORMED>   # expect HDISPLAY179_MALFORMED 21 CASES 0 FAILS / HDISPLAY179_MALFORMED_OK",
+    "python3 -X utf8 tools/rpg-2-star-ocean-the-second_godot_checked-runner_v01_20261018-203400-f74ac6d1.py --timeout 180 --log outputs/hdisplay179/<NEW>/import.runner.log -- /home/kel/projects/worlds-between/tooling/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64 --headless --audio-driver Dummy --path game --import   # expect CHECKED_RUN PASS; use project-local XDG if the default profile is not writable",
+    "python3 -X utf8 tools/rpg-2-star-ocean-the-second_godot_checked-runner_v01_20261018-203400-f74ac6d1.py --timeout 120 --expect HDISPLAY179_PROBE_OK --log outputs/hdisplay179/<NEW>/probe-headless-<LANG>.runner.log -- /home/kel/projects/worlds-between/tooling/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64 --headless --audio-driver Dummy --path game --script res://../tools/rpg-2-star-ocean-the-second_heya_display-preview-probe_v01_20261024-154240-h179d001.gd -- --lang=<en|zh>   # expect HDISPLAY179_CHECKS 61 FAILS 0 and HDISPLAY179_PROBE_OK",
+    "python3 -X utf8 tools/rpg-2-star-ocean-the-second_godot_checked-runner_v01_20261018-203400-f74ac6d1.py --timeout 150 --expect HDISPLAY179_PROBE_OK --expect \"CAPTURES true\" --log outputs/hdisplay179/<NEW>/probe-xvfb-<LANG>.runner.log -- xvfb-run -a -s \"-screen 0 640x360x24\" /home/kel/projects/worlds-between/tooling/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64 --audio-driver Dummy --rendering-driver opengl3 --resolution 640x360 --path game --script res://../tools/rpg-2-star-ocean-the-second_heya_display-preview-probe_v01_20261024-154240-h179d001.gd -- --lang=<en|zh> --out=/home/kel/projects/worlds-between/repo/outputs/hdisplay179/<NEW-CAPTURES>   # expect HDISPLAY179_CHECKS 70 FAILS 0 CAPTURES true and HDISPLAY179_PROBE_OK",
+    "python3 -X utf8 tools/rpg-2-star-ocean-the-second_godot_checked-runner_v01_20261018-203400-f74ac6d1.py --timeout 120 --expect M1_SMOKE_OK --log outputs/hdisplay179/<NEW>/m1.runner.log -- /home/kel/projects/worlds-between/tooling/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64 --headless --audio-driver Dummy --path game --script res://tests/m1_smoke.gd   # expect M1_SMOKE_OK"
+  ],
+  "expected_markers": [
+    "HDISPLAY179_BUILD OK",
+    "contract JSON: \"status\": \"PASS\", \"checks\": 44, \"failures\": []",
+    "HDISPLAY179_MALFORMED 21 CASES 0 FAILS",
+    "HDISPLAY179_MALFORMED_OK",
+    "HDISPLAY179_CHECKS 61 FAILS 0 ... CAPTURES false",
+    "HDISPLAY179_CHECKS 70 FAILS 0 ... CAPTURES true",
+    "HDISPLAY179_PROBE_OK",
+    "M1_SMOKE_OK",
+    "CHECKED_RUN PASS"
+  ],
+  "notes_for_coordinator": [
+    "The checked runner opens --log exclusively (mode x); use fresh log paths and pre-create the --out capture directory.",
+    "If the default Godot profile is not writable, prefix the runner with project-local XDG_CONFIG_HOME/XDG_DATA_HOME/XDG_CACHE_HOME/TMPDIR as in the commands above.",
+    "Stage explicit paths only; do not blanket-stage. Do not stage outputs/hdisplay179/xdg/**, *.png.import or *.gd.uid.",
+    "The UI is opt-in/test-only: opening the scene directly shows it, but no ordinary default points at it."
+  ],
+  "command_note": "All commands were executed from the repository root. The env prefix is the project-local Godot XDG/TMPDIR profile used to avoid writing to the default editor profile.",
+  "evidence_log_hashes": {
+    "outputs/hdisplay179/build.log": "487a08468ec3516b064383f9133cb580f3f136048b450dd3f556edae0cb0ab32",
+    "outputs/hdisplay179/build-check.log": "487a08468ec3516b064383f9133cb580f3f136048b450dd3f556edae0cb0ab32",
+    "outputs/hdisplay179/contract-pass2.log": "c33b531321429b6c466ec26a1d0d63d8ac3ba7b26034d30c679d9396875d37ec",
+    "outputs/hdisplay179/contract.log": "2c0eb2da1a01a9f974471c13d97ed5f00fc42069255f06caad2d044e497fe9e7",
+    "outputs/hdisplay179/contract-pass.log": "27938e3180078157e356e7db6b274bd4c223bb8f722bbc790459355bacc1a653",
+    "outputs/hdisplay179/malformed2.log": "6d33822e2121af29dc83691e04186af89e038995671bf69e581f9e978dfc6b26",
+    "outputs/hdisplay179/malformed.log": "ee60d486ebaf4ec592ece0a9599a2c9903a2af7bf7185849fb4c9d90c792e769",
+    "outputs/hdisplay179/import.runner.log": "79f499e802fecc73be4cef847027ecb4d52627f6953480db71eda39b4009b511",
+    "outputs/hdisplay179/import.execution.log": "b4564697eecd10310a39973d289f132fe60b2047b4546511604bde7d8a966077",
+    "outputs/hdisplay179/import2.runner.log": "f15ffd4c558b01611d562c8c257508942bdc2dc542124f423ae2a592a46edfa6",
+    "outputs/hdisplay179/import2.execution.log": "21a748e0537e09eeca86c2b3408b065c7580f27e7403e9ccf82001b2723685ea",
+    "outputs/hdisplay179/probe-headless-en.runner.log": "cc6807842c40f900dd71bb0ffe738fc536c8b14b04fca298d0c56c28e13d32c7",
+    "outputs/hdisplay179/probe-headless-en.log": "b04c8afbea1ea60d2817bfe5f44170ea4f1a9f261d92c29ebdc1ea900b1e7670",
+    "outputs/hdisplay179/probe-headless-en-2.runner.log": "01e5881ab1818aa4721161b793ed8aea0c0e3438c458e96fc654875074aa93f9",
+    "outputs/hdisplay179/probe-headless-en-2.log": "7a5a732e5162b333a23e738a78a12f1618a3b84ad726c15c6dd86916b6a81273",
+    "outputs/hdisplay179/probe-headless-zh.runner.log": "07ef08a7a60d57c735bb279a30c9a26ea751ab2dfe67fb08235c6d8c43e63442",
+    "outputs/hdisplay179/probe-headless-zh.log": "1bded1641f68be422d1fea0d00296b2a9b52cc6763f8152f6d7cc10e9dc29e41",
+    "outputs/hdisplay179/probe-headless-zh-2.runner.log": "07ef08a7a60d57c735bb279a30c9a26ea751ab2dfe67fb08235c6d8c43e63442",
+    "outputs/hdisplay179/probe-headless-zh-2.log": "dca634e666d2ffbb887d5742a6d0985112606a8f55c679d7812dba0e05968597",
+    "outputs/hdisplay179/probe-xvfb-en.runner.log": "a773027e8ed1ec0fb10d7a347b6266573d46d72731f5b806267950fbc311896c",
+    "outputs/hdisplay179/probe-xvfb-en.log": "d58ddd6b3aeaec0f88fb1967ecead392eba6ca161d8db0812673517be7d8a0e7",
+    "outputs/hdisplay179/probe-xvfb-zh.runner.log": "4f1d0051afb83f017c3ee548463f52773d256cc47a994576274ae0b279ef58df",
+    "outputs/hdisplay179/probe-xvfb-zh.log": "817f5ab899789a792522f9a3ae7c6d8a0f92897b03c815ac3eb06b986495c7e4",
+    "outputs/hdisplay179/m1-smoke.runner.log": "7f5c828437d97aa9f7e616c9603bbf017f9e7bcfac91d86e9a83ee172cffee2d",
+    "outputs/hdisplay179/m1-smoke.execution.log": "fe659c00b676fe216982be9fef448bd0c83516f60e58e3e9cc17530b1b6dbca1"
+  },
+  "output_metadata": {
+    "outputs/hdisplay179/.gitattributes": "711e45f2852ee8d896bfcc03bbdffa1cfcf51bbbeac09d7a9f74c6fb1322bd88",
+    "outputs/hdisplay179/.gitignore": "0660dba320a89e6d1243bb29b041b99ae71b4a27ccd6074e322bc25b0cbda1a6"
+  },
+  "generated_hashes": {
+    "game/assets/portraits/hdisplay179/rpg-2-star-ocean-the-second_heya_display-portrait_v01_20261024-154240-h179d001.png.import": "f1269f0f2d584c8de1ad6c88db04b740ba1bb3bb1abe7e4e401b9efd596d4347",
+    "game/scripts/hdisplay179/rpg-2-star-ocean-the-second_heya_display-preview_standalone-v01_20261024-154240-h179d001.gd.uid": "54cf64ceb23254458d08e8df103ae07274fdb8acd3fd929910bdd192b9d9866f"
+  },
+  "self_hash_note": "provider-receipt.json cannot include its own hash; the coordinator should hash the staged receipt blob.",
+  "edits_to_existing_files": [],
+  "backups": [],
+  "backups_note": "No existing project file was modified or replaced. All writes are new unique paths under tools/, game/{assets/portraits,scenes,scripts}/hdisplay179/, and outputs/hdisplay179/, so no wb_safe_replace backup call was required. The pre-existing dirty checkout was not staged, reset or altered."
+}

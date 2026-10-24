@@ -1,0 +1,286 @@
+#!/usr/bin/env python3
+"""Independent Heya hdisplay179 display-image contract check (structure reused from the Yanke ydisplay111 checker).
+
+Usage: python <this> --root R --manifest M --out O
+Exit 0 pass, 1 failure, 2 producer artifact pending. One JSON report under O (O must not already hold a report).
+Read-only for source/producer files; no motion/default/art-approval claims.
+The display image must be an exact integer 2x pixel replication of the committed native south static.
+"""
+import argparse
+import copy
+import hashlib
+import io
+import json
+import sys
+from datetime import datetime, timezone
+from pathlib import Path
+
+from PIL import Image
+
+P = "rpg-2-star-ocean-the-second"
+T = "20261024-154240-h179d001"
+A = "heya"
+SDIR = "game/assets/characters/heya-native-v01/south"
+SS = "f6e60682bc7f5290aff11ec1154e515137a2b0f66a7fd5141ef4a9afa755d2c3"
+SRGBA = "59e322f03c33987b28999d3cd6cbeec3e16c41dcc793387d38b168fede145d65"
+ORGBA = "9c3694a7ef1d824f05956babcd90db3cc4d332e15623df9bb808716e0184ec04"
+OPAQUE = 2740
+SCOMMIT = "dc8ad3b4cff0ac375a00dee3b46ab8135e27e80f"
+SM = f"{SDIR}/rpg-2-star-ocean-the-second_heya_south-manifest_unapproved-v01_20261024-125310-a9210ea1.json"
+SMSHA = "d6ddec7e38d74083e6a774d96e7235c9b64fe5ba7b7ec3664f5067f82217d80c"
+EDIT = {
+    "pxo": (f"{SDIR}/rpg-2-star-ocean-the-second_heya_south-edit_unapproved-v01_20261024-125310-9665bd23.pxo",
+            "f5613b9d4b787e694eddf0c76bb0de28535495849d427d838c30647b7257b12a"),
+    "ora": (f"{SDIR}/rpg-2-star-ocean-the-second_heya_south-edit_unapproved-v01_20261024-125310-42e46403.ora",
+            "694e105375eded54d605698f6c65862f152a3e0c63a2462dd90fe4073c8aff36"),
+}
+SD = (80, 112)
+FACTOR = 2
+OD = (160, 224)
+DEF = f"{SDIR}/rpg-2-star-ocean-the-second_heya_south-static_unapproved-v01_20261024-125310-231d2b03.png"
+REP = f"{P}_{A}_display-contract-report_v01_{T}.json"
+SCOPE = ("independent exact integer-replication/manifest contract only; no motion, default-use, "
+         "runtime, or art-approval claims; source and producer files are read-only")
+
+
+def sh(b):
+    return hashlib.sha256(b).hexdigest()
+
+
+def g(c, n, o, d=""):
+    c.append({"id": n, "ok": bool(o), "detail": d})
+
+
+def ins(r, p):
+    try:
+        p.resolve().relative_to(r.resolve())
+        return True
+    except ValueError:
+        return False
+
+
+def pick(r, b, v, pr=False):
+    """Resolve one explicit metadata path; no recursive/glob lookup."""
+    if not v:
+        return None
+    q = Path(str(v).replace("\\", "/"))
+    for f in ([r, b] if pr else [b, r]):
+        x = (q if q.is_absolute() else f / q).resolve()
+        if ins(r, x) and x.is_file():
+            return x
+    return None
+
+
+def wr(o, r):
+    o.mkdir(parents=True, exist_ok=True)
+    p = o / REP
+    if p.exists():
+        raise SystemExit(f"REFUSE overwrite of existing report {p}")
+    with open(p, "x", encoding="utf-8", newline="\n") as f:
+        f.write(json.dumps(r, indent=2, ensure_ascii=False) + "\n")
+    return p
+
+
+def replicate_ok(src, out):
+    if src.size[0] * FACTOR != out.size[0] or src.size[1] * FACTOR != out.size[1]:
+        return False, "size"
+    s, o = src.load(), out.load()
+    for y in range(src.height):
+        for x in range(src.width):
+            want = s[x, y]
+            for dy in range(FACTOR):
+                for dx in range(FACTOR):
+                    if o[x * FACTOR + dx, y * FACTOR + dy] != want:
+                        return False, f"pixel {x},{y}+{dx},{dy}"
+    return True, f"{out.size[0] * out.size[1]} pixels"
+
+
+def val(m, obyt, sbyt, smbyt, root):
+    c = []
+    try:
+        s = Image.open(io.BytesIO(sbyt)).convert("RGBA")
+    except Exception as e:
+        return {"ok": False, "checks": [{"id": "source.decode", "ok": False, "detail": repr(e)}]}
+    g(c, "subject.heya", m.get("subject") == A, str(m.get("subject")))
+    g(c, "content_id", m.get("content_id") == "content.char.heya.display", str(m.get("content_id")))
+    g(c, "status.unapproved", str(m.get("status", "")).startswith("UNAPPROVED"), str(m.get("status")))
+    src = m.get("source") if isinstance(m.get("source"), dict) else {}
+    g(c, "source.path", src.get("path") == DEF, str(src.get("path")))
+    g(c, "source.sha", src.get("sha256") == SS, str(src.get("sha256")))
+    g(c, "source.size", (src.get("width"), src.get("height")) == SD, str((src.get("width"), src.get("height"))))
+    g(c, "source.mode-rgba", src.get("mode") == "RGBA", str(src.get("mode")))
+    g(c, "source.raw-rgba", src.get("raw_rgba_sha256") == SRGBA, str(src.get("raw_rgba_sha256")))
+    g(c, "source.commit", src.get("source_commit") == SCOMMIT, str(src.get("source_commit")))
+    g(c, "source.actual-sha", sh(sbyt) == SS, sh(sbyt))
+    g(c, "source.actual-size", s.size == SD, str(s.size))
+    g(c, "source.actual-rgba", sh(s.tobytes()) == SRGBA, sh(s.tobytes()))
+    sm = m.get("source_manifest") if isinstance(m.get("source_manifest"), dict) else {}
+    g(c, "source-manifest.path", sm.get("path") == SM, str(sm.get("path")))
+    g(c, "source-manifest.sha", sm.get("sha256") == SMSHA and sh(smbyt) == SMSHA, sh(smbyt))
+    try:
+        smj = json.loads(smbyt)
+    except Exception as e:
+        smj = None
+        g(c, "source-manifest.parse", False, repr(e))
+    if smj is not None:
+        g(c, "source-manifest.actor", smj.get("actor_id") == A, str(smj.get("actor_id")))
+        g(c, "source-manifest.content", smj.get("content_id") == "content.char.heya.static-south", str(smj.get("content_id")))
+        g(c, "source-manifest.canvas", smj.get("canvas") == list(SD), str(smj.get("canvas")))
+        g(c, "source-manifest.pivot", smj.get("pivot") == [40, 104], str(smj.get("pivot")))
+        g(c, "source-manifest.scale", smj.get("display_scale") == 0.5, str(smj.get("display_scale")))
+        g(c, "source-manifest.pins-png", ((smj.get("files") or {}).get("png") or {}).get("rawsha256") == SS, "files.png.rawsha256")
+    ed = m.get("editable_sources") if isinstance(m.get("editable_sources"), dict) else {}
+    for k, (p, h) in EDIT.items():
+        e = ed.get(k) if isinstance(ed.get(k), dict) else {}
+        fp = root / p
+        g(c, f"editable.{k}", e.get("path") == p and e.get("sha256") == h and fp.is_file() and sh(fp.read_bytes()) == h, p)
+    tr = m.get("transform") if isinstance(m.get("transform"), dict) else {}
+    g(c, "transform.method", tr.get("method") == "nearest-neighbor-integer-upscale", str(tr.get("method")))
+    g(c, "transform.factor", tr.get("factor") == FACTOR, str(tr.get("factor")))
+    g(c, "transform.rect", tr.get("source_rect") == [0, 0, SD[0], SD[1]], str(tr.get("source_rect")))
+    g(c, "transform.resampled", tr.get("resampled") is True, str(tr.get("resampled")))
+    g(c, "transform.replication", tr.get("pixel_replication_only") is True, str(tr.get("pixel_replication_only")))
+    g(c, "transform.not-repainted", tr.get("repainted") is False, str(tr.get("repainted")))
+    g(c, "transform.no-new-generative", tr.get("ai_generated_new_pixels") is False, str(tr.get("ai_generated_new_pixels")))
+    g(c, "transform.no-new-colours", tr.get("new_colour_values") is False, str(tr.get("new_colour_values")))
+    g(c, "transform.alpha-preserved", tr.get("alpha_preserved") is True, str(tr.get("alpha_preserved")))
+    out = m.get("output") if isinstance(m.get("output"), dict) else {}
+    g(c, "output.size-declared", (out.get("width"), out.get("height")) == OD, str((out.get("width"), out.get("height"))))
+    g(c, "output.file-sha-declared", out.get("file_sha256") == sh(obyt), str(out.get("file_sha256")))
+    g(c, "output.raw-rgba-declared", out.get("raw_rgba_sha256") == ORGBA, str(out.get("raw_rgba_sha256")))
+    try:
+        i = Image.open(io.BytesIO(obyt)).convert("RGBA")
+    except Exception as e:
+        i = None
+        g(c, "output.decode", False, repr(e))
+    if i is not None:
+        g(c, "output.actual-size", i.size == OD, str(i.size))
+        g(c, "output.actual-raw-rgba", sh(i.tobytes()) == ORGBA, sh(i.tobytes()))
+        g(c, "pixels.exact-integer-replication", *replicate_ok(s, i))
+        opaque = sum(1 for a in i.getchannel("A").tobytes() if a > 0)
+        g(c, "output.opaque-texels", opaque == OPAQUE == out.get("opaque_texels"), str(opaque))
+        alphas = set(i.getchannel("A").tobytes())
+        g(c, "output.binary-alpha", alphas <= {0, 255}, str(sorted(alphas)))
+        src_cols = {p for p in s.getdata() if p[3] > 0}
+        out_cols = {p for p in i.getdata() if p[3] > 0}
+        g(c, "output.no-new-colours", out_cols == src_cols, f"{len(out_cols)} colours")
+        border = [i.getpixel((x, 0))[3] for x in range(i.width)] + [i.getpixel((x, i.height - 1))[3] for x in range(i.width)]
+        border += [i.getpixel((0, y))[3] for y in range(i.height)] + [i.getpixel((i.width - 1, y))[3] for y in range(i.height)]
+        g(c, "output.transparent-border", all(a == 0 for a in border), f"{len(border)} border texels")
+    return {"ok": all(x["ok"] for x in c), "checks": c}
+
+
+def wrong_actor(m):
+    m["subject"] = "yanke"
+
+
+def wrong_hash(m):
+    out = m.get("output")
+    if isinstance(out, dict):
+        out["file_sha256"] = "0" * 64
+    else:
+        m["output"] = {"file_sha256": "0" * 64}
+
+
+def wrong_factor(m):
+    tr = m.get("transform")
+    if isinstance(tr, dict):
+        tr["factor"] = 3
+    else:
+        m["transform"] = {"factor": 3}
+
+
+def fx(n, m, obyt, sbyt, smbyt, root, fn):
+    x = copy.deepcopy(m)
+    try:
+        fn(x)
+        q = val(x, obyt, sbyt, smbyt, root)
+        return {"id": n, "refused": not q["ok"], "failedChecks": [z["id"] for z in q["checks"] if not z["ok"]][:8]}
+    except Exception as e:
+        return {"id": n, "refused": True, "failedChecks": [f"exception:{e!r}"]}
+
+
+def main(argv=None):
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--root", default=".")
+    ap.add_argument("--manifest", required=True)
+    ap.add_argument("--out", required=True)
+    a = ap.parse_args(argv)
+    root = Path(a.root).resolve()
+    mp = Path(a.manifest)
+    if not mp.is_absolute():
+        mp = root / mp
+    mp = mp.resolve()
+    out = Path(a.out).resolve()
+    rep = {"schema": "heya-display-contract-check/v1", "project": P, "subject": A,
+           "purpose": "display-contract-check", "variant": "v01",
+           "run": {"timestamp_utc": datetime.now(timezone.utc).isoformat(), "unique_id": T},
+           "expected": {"actor_id": A, "source_sha256": SS, "source_dimensions": list(SD),
+                        "factor": FACTOR, "output_dimensions": list(OD), "output_raw_rgba_sha256": ORGBA,
+                        "source_commit": SCOMMIT, "resampled": True},
+           "scope": SCOPE, "manifest_path": str(mp)}
+    if not mp.is_file():
+        rep.update(status="PENDING", exit_code=2, checks=[], negativeFixtures={},
+                   reason="producer manifest/artifact absent; not inspected")
+        p = wr(out, rep)
+        print(json.dumps({"status": "PENDING", "exit": 2, "report": str(p)}))
+        return 2
+    rep["manifest_sha256"] = sh(mp.read_bytes())
+    try:
+        m = json.loads(mp.read_bytes())
+        if not isinstance(m, dict):
+            raise ValueError("manifest root is not an object")
+    except Exception as e:
+        rep.update(status="FAIL", exit_code=1, negativeFixtures={}, reason=f"manifest parse: {e!r}",
+                   checks=[{"id": "manifest.parse", "ok": False, "detail": repr(e)}])
+        p = wr(out, rep)
+        print(json.dumps({"status": "FAIL", "exit": 1, "report": str(p), "failures": ["manifest.parse"]}))
+        return 1
+
+    def blk(k):
+        v = m.get(k)
+        return v if isinstance(v, dict) else {}
+
+    sp = pick(root, mp.parent, blk("source").get("path"), True) or (root / DEF).resolve()
+    smp = pick(root, mp.parent, blk("source_manifest").get("path"), True) or (root / SM).resolve()
+    op = pick(root, mp.parent, blk("output").get("path"))
+    bad = []
+    if not sp.is_file() or not ins(root, sp):
+        bad.append({"id": "source.file", "ok": False, "detail": f"unresolved {blk('source').get('path')!r}"})
+    if not smp.is_file() or not ins(root, smp):
+        bad.append({"id": "source-manifest.file", "ok": False, "detail": f"unresolved {blk('source_manifest').get('path')!r}"})
+    if op is None or not op.is_file():
+        bad.append({"id": "output.file", "ok": False, "detail": "unresolved image"})
+    if bad:
+        rep.update(status="FAIL", exit_code=1, checks=bad, negativeFixtures={}, reason="artifact path failure")
+        p = wr(out, rep)
+        print(json.dumps({"status": "FAIL", "exit": 1, "report": str(p), "failures": [x["id"] for x in bad]}))
+        return 1
+    sbyt = sp.read_bytes()
+    smbyt = smp.read_bytes()
+    obyt = op.read_bytes()
+    before = (sh(sbyt), sh(smbyt), sh(obyt))
+    q = val(m, obyt, sbyt, smbyt, root)
+    c = q["checks"]
+    g(c, "source.unchanged", sh(sp.read_bytes()) == before[0] == SS, f"before={before[0]}")
+    fs = {
+        "wrong-hash": fx("wrong-hash", m, obyt, sbyt, smbyt, root, wrong_hash),
+        "wrong-actor": fx("wrong-actor", m, obyt, sbyt, smbyt, root, wrong_actor),
+        "wrong-factor": fx("wrong-factor", m, obyt, sbyt, smbyt, root, wrong_factor),
+    }
+    after = (sh(sp.read_bytes()), sh(smp.read_bytes()), sh(op.read_bytes()))
+    g(c, "fixtures.files-unchanged", after == before, str(before))
+    ok = all(x["ok"] for x in c) and all(x["refused"] for x in fs.values())
+    rep.update(status="PASS" if ok else "FAIL", exit_code=0 if ok else 1, checks=c, negativeFixtures=fs,
+               source={"path": str(sp.relative_to(root)), "sha256": after[0], "dimensions": list(SD)},
+               source_manifest={"path": str(smp.relative_to(root)), "sha256": after[1]},
+               image={"path": str(op.relative_to(root)), "sha256": after[2], "dimensions": list(OD)},
+               reason="contract verified" if ok else "contract check failed")
+    p = wr(out, rep)
+    print(json.dumps({"status": rep["status"], "exit": rep["exit_code"], "report": str(p), "checks": len(c),
+                      "failures": [x["id"] for x in c if not x["ok"]] + [f"fixture:{k}" for k, v in fs.items() if not v["refused"]]}))
+    return rep["exit_code"]
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

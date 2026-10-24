@@ -1,0 +1,38 @@
+[
+  {
+    "name": "builder",
+    "command": [
+      "/home/kel/projects/worlds-between/tooling/venv/bin/python",
+      "-I",
+      "tools/rpg-2-star-ocean-the-second_heya_display-build_v01_20261024-154240-h179d001.py",
+      "check"
+    ],
+    "exit": 0
+  },
+  {
+    "name": "contract",
+    "command": [
+      "/home/kel/projects/worlds-between/tooling/venv/bin/python",
+      "-I",
+      "tools/rpg-2-star-ocean-the-second_heya_display-contract-check_v01_20261024-154240-h179d001.py",
+      "--root",
+      ".",
+      "--manifest",
+      "game/assets/portraits/hdisplay179/rpg-2-star-ocean-the-second_heya_display-portrait-manifest_v01_20261024-154240-h179d001.json",
+      "--out",
+      "/home/kel/projects/worlds-between/repo/outputs/hdisplay179/coordinator/contract"
+    ],
+    "exit": 0
+  },
+  {
+    "name": "malformed",
+    "command": [
+      "/home/kel/projects/worlds-between/tooling/venv/bin/python",
+      "-I",
+      "tools/rpg-2-star-ocean-the-second_heya_display-malformed-check_v01_20261024-154240-h179d001.py",
+      "--out",
+      "/home/kel/projects/worlds-between/repo/outputs/hdisplay179/coordinator/malformed"
+    ],
+    "exit": 0
+  }
+]

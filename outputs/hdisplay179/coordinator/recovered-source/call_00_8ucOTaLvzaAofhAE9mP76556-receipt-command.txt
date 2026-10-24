@@ -1,0 +1,14 @@
+cd /home/kel/projects/worlds-between/repo && python3 - <<'PY'
+import json
+from pathlib import Path
+p=Path('outputs/hdisplay179/provider-receipt.json')
+d=json.loads(p.read_text(encoding='utf-8'))
+d['edits_to_existing_files']=[]
+d['backups']=[]
+d['backups_note']=('No existing project file was modified or replaced. All writes are new unique paths under '
+                   'tools/, game/{assets/portraits,scenes,scripts}/hdisplay179/, and outputs/hdisplay179/, so no '
+                   'wb_safe_replace backup call was required. The pre-existing dirty checkout was not staged, reset or altered.')
+p.write_text(json.dumps(d,indent=2,ensure_ascii=False)+'\n',encoding='utf-8',newline='\n')
+print('ok',p.stat().st_size)
+PY
+python3 -m json.tool outputs/hdisplay179/provider-receipt.json > /dev/null && echo JSON_OK
