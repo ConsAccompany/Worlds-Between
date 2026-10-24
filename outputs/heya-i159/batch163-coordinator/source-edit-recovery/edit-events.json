@@ -1,0 +1,164 @@
+[
+  {
+    "call": {
+      "type": "tool_call",
+      "callId": "call_00_HAudyiihEnkfTNeqm5nc7528",
+      "tool": "edit",
+      "input": {
+        "file_path": "/home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_heya_idle-four-direction-author_unapproved-i163-v01_20261024-141806-h163b001.py",
+        "old_string": "\"\"\"Heya four-direction IDLE source bank (i159, UNAPPROVED technical source).\n\nBounded adapters only: the four existing Heya static ORA layer archives are the exact neutral source. No static\npixel is repainted and no walk/stop bank is built. Idle is the existing jexplore39/Jiang idle settle model\n(torso/head/arms integer settle) applied to Heya's role layers, with feet/lower body frozen. f00 is byte-exact\nthe existing static PNG.\n\n  python3 -I <this> build    # fresh staging under outputs/heya-i159/staging\n  python3 -I <this> check    # deterministic rebuild + staging/installed/source checks\n  python3 -I <this> install  # copies staging to game/assets/characters/heya-native-v01/idle (new paths only)\n\nWrites NEW files only. Differing destinations are refused; use tools/wb_safe_replace.py explicitly if needed.\n\"\"\"",
+        "new_string": "\"\"\"Heya four-direction IDLE source bank, batch163 prose-repair (UNAPPROVED technical source).\n\nDerived from the preserved i159 author tool. The animation model, frames, durations, palette, pivots and\nexport bytes are unchanged. This version corrects only the false manifest prose that claimed composite rows\n76..103 were frozen; the established model and the frozen check are rows 90..103 (boots/composite sole),\nwhile torso/leg rows 76..89 settle with the torso group by design. It adds a check that binds the manifest\nprose to the measured rows, and writes fresh staging/report output under the batch163 directory.\n\n  python3 -I <this> build    # fresh staging under outputs/heya-i159/batch163-provider/staging\n  python3 -I <this> check    # deterministic rebuild + staging/installed/source checks\n  python3 -I <this> install  # copies NEW staged paths only; differing manifests use wb_safe_replace.py\n\nWrites NEW files only. Differing destinations are refused; use tools/wb_safe_replace.py explicitly if needed.\n\"\"\""
+      }
+    },
+    "result": {
+      "type": "tool_result",
+      "callId": "call_00_HAudyiihEnkfTNeqm5nc7528",
+      "status": "error",
+      "result": "Error: cannot modify \"/home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_heya_idle-four-direction-author_unapproved-i163-v01_20261024-141806-h163b001.py\": file has not been read \u2014 read the file, then retry"
+    }
+  },
+  {
+    "call": {
+      "type": "tool_call",
+      "callId": "call_00_SRQnk5YZEocSFr27mzab1589",
+      "tool": "edit",
+      "input": {
+        "file_path": "/home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_heya_idle-four-direction-author_unapproved-i163-v01_20261024-141806-h163b001.py",
+        "new_string": "\"\"\"Heya four-direction IDLE source bank, batch163 prose-repair (UNAPPROVED technical source).\n\nDerived from the preserved i159 author tool. The animation model, frames, durations, palette, pivots and\nexport bytes are unchanged. This version corrects only the false manifest prose that claimed composite rows\n76..103 were frozen; the established model and the frozen check are rows 90..103 (boots/composite sole),\nwhile torso/leg rows 76..89 settle with the torso group by design. It adds a check that binds the manifest\nprose to the measured rows, and writes fresh staging/report output under the batch163 directory.\n\n  python3 -I <this> build    # fresh staging under outputs/heya-i159/batch163-provider/staging\n  python3 -I <this> check    # deterministic rebuild + staging/installed/source checks\n  python3 -I <this> install  # copies NEW staged paths only; differing manifests use wb_safe_replace.py\n\nWrites NEW files only. Differing destinations are refused; use tools/wb_safe_replace.py explicitly if needed.\n\"\"\"",
+        "old_string": "\"\"\"Heya four-direction IDLE source bank (i159, UNAPPROVED technical source).\n\nBounded adapters only: the four existing Heya static ORA layer archives are the exact neutral source. No static\npixel is repainted and no walk/stop bank is built. Idle is the existing jexplore39/Jiang idle settle model\n(torso/head/arms integer settle) applied to Heya's role layers, with feet/lower body frozen. f00 is byte-exact\nthe existing static PNG.\n\n  python3 -I <this> build    # fresh staging under outputs/heya-i159/staging\n  python3 -I <this> check    # deterministic rebuild + staging/installed/source checks\n  python3 -I <this> install  # copies staging to game/assets/characters/heya-native-v01/idle (new paths only)\n\nWrites NEW files only. Differing destinations are refused; use tools/wb_safe_replace.py explicitly if needed.\n\"\"\""
+      }
+    },
+    "result": {
+      "type": "tool_result",
+      "callId": "call_00_SRQnk5YZEocSFr27mzab1589",
+      "status": "completed",
+      "result": "The file /home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_heya_idle-four-direction-author_unapproved-i163-v01_20261024-141806-h163b001.py has been updated successfully."
+    }
+  },
+  {
+    "call": {
+      "type": "tool_call",
+      "callId": "call_00_ET_scEPckrRJQNm4s0mdQuu7280",
+      "tool": "edit",
+      "input": {
+        "file_path": "/home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_heya_idle-four-direction-author_unapproved-i163-v01_20261024-141806-h163b001.py",
+        "new_string": "STAMP, RUN = \"20261024-140235\", \"a159i001\"   # artifact bank identity preserved byte-for-byte\nTOOL_STAMP, TOOL_RUN = \"20261024-141806\", \"h163b001\"\nOUT_REL = \"outputs/heya-i159/batch163-provider\"\nSTAGE_REL = OUT_REL + \"/staging/idle\"\nOUT_PNG_REL = OUT_REL + \"/png\"\nOUT_NATIVE_REL = OUT_REL + \"/native\"",
+        "old_string": "STAMP, RUN = \"20261024-140235\", \"a159i001\"\nOUT_REL = \"outputs/heya-i159\"\nSTAGE_REL = OUT_REL + \"/staging/idle\"\nOUT_PNG_REL = OUT_REL + \"/png\"\nOUT_NATIVE_REL = OUT_REL + \"/native\""
+      }
+    },
+    "result": {
+      "type": "tool_result",
+      "callId": "call_00_ET_scEPckrRJQNm4s0mdQuu7280",
+      "status": "completed",
+      "result": "The file /home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_heya_idle-four-direction-author_unapproved-i163-v01_20261024-141806-h163b001.py has been updated successfully."
+    }
+  },
+  {
+    "call": {
+      "type": "tool_call",
+      "callId": "call_00_ET_TttWvF6K8ngiI5stpZac6390",
+      "tool": "edit",
+      "input": {
+        "file_path": "/home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_heya_idle-four-direction-author_unapproved-i163-v01_20261024-141806-h163b001.py",
+        "new_string": "                            \"planted_feet\": \"boots layer and composite sole rows 90..103 unchanged in all 4 frames; torso/leg rows 76..89 settle with the torso group; no global sprite bob\"},",
+        "old_string": "                            \"planted_feet\": \"boots and lower-body rows 76..103 unchanged; no global sprite bob\"},"
+      }
+    },
+    "result": {
+      "type": "tool_result",
+      "callId": "call_00_ET_TttWvF6K8ngiI5stpZac6390",
+      "status": "completed",
+      "result": "The file /home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_heya_idle-four-direction-author_unapproved-i163-v01_20261024-141806-h163b001.py has been updated successfully."
+    }
+  },
+  {
+    "call": {
+      "type": "tool_call",
+      "callId": "call_00_ET_dOjeiTwsAsycsVtiZhqR2949",
+      "tool": "edit",
+      "input": {
+        "file_path": "/home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_heya_idle-four-direction-author_unapproved-i163-v01_20261024-141806-h163b001.py",
+        "new_string": "        ck(f\"{d}_planted_feet_lower_body_frozen\", frozen)\n        # The manifest prose must describe the measured rows, not a blanket 76..103 freeze. The sole rows\n        # 90..103 are frozen; torso/leg rows 76..89 settle by the established model and must be measured as\n        # moving (at least one animated frame), so this check binds text to bytes without weakening 90..103.\n        claim = e[\"idle_model\"][\"planted_feet\"]\n        rows_76_89_move = any(not np.array_equal(decode(rb(STAGE_REL + \"/\" + d + \"/\" + fr[\"file\"]))[76:90],\n                                                 base[76:90]) for fr in e[\"frames\"])\n        prose_ok = (\"90..103\" in claim and \"76..89\" in claim and \"76..103\" not in claim\n                    and \"frozen\" not in claim.split(\"76..89\")[-1].split(\";\")[0]\n                    and rows_76_89_move)\n        ck(f\"{d}_manifest_planted_feet_prose_matches_measured_rows\", prose_ok,\n           f\"rows_76_89_move={rows_76_89_move} claim={claim!r}\")",
+        "old_string": "        ck(f\"{d}_planted_feet_lower_body_frozen\", frozen)"
+      }
+    },
+    "result": {
+      "type": "tool_result",
+      "callId": "call_00_ET_dOjeiTwsAsycsVtiZhqR2949",
+      "status": "completed",
+      "result": "The file /home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_heya_idle-four-direction-author_unapproved-i163-v01_20261024-141806-h163b001.py has been updated successfully."
+    }
+  },
+  {
+    "call": {
+      "type": "tool_call",
+      "callId": "call_00_P23YdmPXg9CoKAUWo1qP4138",
+      "tool": "edit",
+      "input": {
+        "file_path": "/home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_heya_idle-four-direction-author_unapproved-i163-v01_20261024-141806-h163b001.py",
+        "new_string": "        prose_ok = (\"90..103\" in claim and \"76..89\" in claim and \"76..103\" not in claim\n                    and \"frozen\" not in claim and rows_76_89_move)",
+        "old_string": "        prose_ok = (\"90..103\" in claim and \"76..89\" in claim and \"76..103\" not in claim\n                    and \"frozen\" not in claim.split(\"76..89\")[-1].split(\";\")[0]\n                    and rows_76_89_move)"
+      }
+    },
+    "result": {
+      "type": "tool_result",
+      "callId": "call_00_P23YdmPXg9CoKAUWo1qP4138",
+      "status": "completed",
+      "result": "The file /home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_heya_idle-four-direction-author_unapproved-i163-v01_20261024-141806-h163b001.py has been updated successfully."
+    }
+  },
+  {
+    "call": {
+      "type": "tool_call",
+      "callId": "call_00_ET_gbGiLKWdIww9zdShLfhO7466",
+      "tool": "edit",
+      "input": {
+        "file_path": "/home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_heya_idle-four-direction-author_unapproved-i163-v01_20261024-141806-h163b001.py",
+        "new_string": "    res = {\"tool_sha256\": sha(open(os.path.abspath(__file__), \"rb\").read()),\n           \"run\": f\"{TOOL_STAMP}-{TOOL_RUN}\", \"artifact_bank\": f\"{STAMP}-{RUN}\",\n           \"deterministic\": deterministic, \"source_pins_exact\": pins_ok, \"checks\": checks,\n           \"installed_verified\": inst, \"missing\": missing, \"fails\": fails,\n           \"not_run\": [\"Pixelorama native export\", \"Godot runtime fit\", \"human review\"]}\n    os.makedirs(fs(OUT_REL), exist_ok=True)\n    logid = datetime.now(timezone.utc).strftime(\"%Y%m%d-%H%M%S\")\n    with open(fs(OUT_REL + \"/author-check-batch163-\" + TOOL_STAMP + \"-\" + TOOL_RUN + \"-\" + logid + \".json\"), \"wb\") as f:",
+        "old_string": "    res = {\"tool_sha256\": sha(open(os.path.abspath(__file__), \"rb\").read()), \"run\": f\"{STAMP}-{RUN}\",\n           \"deterministic\": deterministic, \"source_pins_exact\": pins_ok, \"checks\": checks,\n           \"installed_verified\": inst, \"missing\": missing, \"fails\": fails,\n           \"not_run\": [\"Pixelorama native export\", \"Godot runtime fit\", \"human review\"]}\n    os.makedirs(fs(OUT_REL), exist_ok=True)\n    logid = datetime.now(timezone.utc).strftime(\"%Y%m%d-%H%M%S\")\n    with open(fs(OUT_REL + \"/author-check-\" + STAMP + \"-\" + RUN + \"-\" + logid + \".json\"), \"wb\") as f:"
+      }
+    },
+    "result": {
+      "type": "tool_result",
+      "callId": "call_00_ET_gbGiLKWdIww9zdShLfhO7466",
+      "status": "completed",
+      "result": "The file /home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_heya_idle-four-direction-author_unapproved-i163-v01_20261024-141806-h163b001.py has been updated successfully."
+    }
+  },
+  {
+    "call": {
+      "type": "tool_call",
+      "callId": "call_00_okDIqr3skcVBQYZvSDLa7754",
+      "tool": "edit",
+      "input": {
+        "file_path": "/home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_heya_idle-four-direction-author_unapproved-i163-v01_20261024-141806-h163b001.py",
+        "new_string": "        claim = json.loads(rb(STAGE_REL + \"/\" + d + \"/\" + fname(d + \"-manifest\", \"json\")))[\"idle_model\"][\"planted_feet\"]",
+        "old_string": "        claim = e[\"idle_model\"][\"planted_feet\"]"
+      }
+    },
+    "result": {
+      "type": "tool_result",
+      "callId": "call_00_okDIqr3skcVBQYZvSDLa7754",
+      "status": "completed",
+      "result": "The file /home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_heya_idle-four-direction-author_unapproved-i163-v01_20261024-141806-h163b001.py has been updated successfully."
+    }
+  },
+  {
+    "call": {
+      "type": "tool_call",
+      "callId": "call_00_pg3wJb1sFmpOAAcYX29p2930",
+      "tool": "edit",
+      "input": {
+        "file_path": "/home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_heya_idle-four-direction-author_unapproved-i163-v01_20261024-141806-h163b001.py",
+        "new_string": "        ck(f\"{d}_all_frames_exact_group_offsets_no_horizontal\", model_ok)\n        mf = json.loads(rb(STAGE_REL + \"/\" + d + \"/\" + fname(d + \"-manifest\", \"json\")))\n        geom_ok = (mf[\"canvas\"] == [W, H] and mf[\"pivot\"] == list(PIN) and mf[\"body_rows\"] == list(BODY_ROWS)\n                   and mf[\"display_scale\"] == SCALE and mf[\"logical_height_px\"] == 48.0\n                   and mf[\"frame_durations_ms\"] == IDLE_MS and mf[\"cycle_ms\"] == 1500\n                   and mf[\"loop\"] is True and len(mf[\"directions\"][\"frames\"]) == 4)\n        ck(f\"{d}_canvas_pivot_scale_logical_height_durations\", geom_ok)\n    rt = json.loads(rb(STAGE_REL + \"/\" + fname(\"sprite-set-runtime\", \"json\")))\n    ck(\"runtime_manifest_geometry_four_directions\",\n       rt[\"frame_size\"] == [W, H] and rt[\"pivot\"] == list(PIN) and rt[\"display_scale\"] == SCALE\n       and rt[\"logical_height_px\"] == 48 and rt[\"loop\"] is True\n       and set(rt[\"actions\"][\"idle\"]) == set(DIRS)\n       and all(len(rt[\"actions\"][\"idle\"][d]) == 4 for d in DIRS))\n    ck(\"no_walk_or_stop_frames_emitted\", not any(\"walk\" in k or \"stop\" in k for k in files))",
+        "old_string": "        ck(f\"{d}_all_frames_exact_group_offsets_no_horizontal\", model_ok)\n    ck(\"no_walk_or_stop_frames_emitted\", not any(\"walk\" in k or \"stop\" in k for k in files))"
+      }
+    },
+    "result": {
+      "type": "tool_result",
+      "callId": "call_00_pg3wJb1sFmpOAAcYX29p2930",
+      "status": "completed",
+      "result": "The file /home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_heya_idle-four-direction-author_unapproved-i163-v01_20261024-141806-h163b001.py has been updated successfully."
+    }
+  }
+]

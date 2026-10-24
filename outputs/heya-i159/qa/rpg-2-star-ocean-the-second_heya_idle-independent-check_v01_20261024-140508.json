@@ -1,0 +1,122 @@
+{
+  "task": "content.char.heya.idle-anim independent source check",
+  "status": "UNAPPROVED",
+  "root": "game/assets/characters/heya-native-v01/idle",
+  "passed": false,
+  "checks": [
+    {
+      "direction": "south",
+      "frames": 4,
+      "changed_pixels_cycle": [
+        424,
+        687,
+        83,
+        357
+      ],
+      "f00_exact_static": true
+    },
+    {
+      "direction": "west",
+      "frames": 4,
+      "changed_pixels_cycle": [
+        262,
+        407,
+        41,
+        187
+      ],
+      "f00_exact_static": true
+    },
+    {
+      "direction": "north",
+      "frames": 4,
+      "changed_pixels_cycle": [
+        396,
+        662,
+        81,
+        352
+      ],
+      "f00_exact_static": true
+    },
+    {
+      "direction": "east",
+      "frames": 4,
+      "changed_pixels_cycle": [
+        291,
+        509,
+        30,
+        248
+      ],
+      "f00_exact_static": true
+    }
+  ],
+  "negative_controls": [
+    {
+      "control": "png_pixel_flip",
+      "rejected": true,
+      "observed_fails": [
+        "south: frame 1 hash",
+        "south: frame 1 palette",
+        "south: PXO cells are not exact model shifts",
+        "west: PXO cells are not exact model shifts"
+      ],
+      "temp": "/tmp/wb-heya-i159-neg-q4re_ui_"
+    },
+    {
+      "control": "pxo_frame_duration",
+      "rejected": true,
+      "observed_fails": [
+        "south: PXO cells are not exact model shifts",
+        "west: PXO metadata",
+        "west: PXO cells are not exact model shifts",
+        "north: PXO cells are not exact model shifts"
+      ],
+      "temp": "/tmp/wb-heya-i159-neg-wefydxld"
+    },
+    {
+      "control": "ora_static_pixel",
+      "rejected": true,
+      "observed_fails": [
+        "south: PXO cells are not exact model shifts",
+        "west: PXO cells are not exact model shifts",
+        "north: ORA != static",
+        "north: PXO cells are not exact model shifts"
+      ],
+      "temp": "/tmp/wb-heya-i159-neg-5tejx1k8"
+    },
+    {
+      "control": "manifest_duration",
+      "rejected": true,
+      "observed_fails": [
+        "south: PXO cells are not exact model shifts",
+        "west: PXO cells are not exact model shifts",
+        "north: PXO cells are not exact model shifts",
+        "east: timing"
+      ],
+      "temp": "/tmp/wb-heya-i159-neg-gn9vy7m5"
+    },
+    {
+      "control": "palette_colour",
+      "rejected": true,
+      "observed_fails": [
+        "south: palette copy hash",
+        "south: frame 0 palette",
+        "south: frame 1 palette",
+        "south: frame 2 palette"
+      ],
+      "temp": "/tmp/wb-heya-i159-neg-sfgj47ch"
+    }
+  ],
+  "negative_controls_all_rejected": true,
+  "failures": [
+    "south: PXO cells are not exact model shifts",
+    "west: PXO cells are not exact model shifts",
+    "north: PXO cells are not exact model shifts",
+    "east: PXO cells are not exact model shifts"
+  ],
+  "limitations": [
+    "no Pixelorama export",
+    "no Godot runtime",
+    "no human review"
+  ],
+  "generated_utc": "2026-10-24T14:05:08.787780+00:00"
+}

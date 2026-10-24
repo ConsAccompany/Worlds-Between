@@ -1,0 +1,108 @@
+{
+  "task": "content.char.heya.idle-anim independent source check",
+  "status": "UNAPPROVED",
+  "root": "game/assets/characters/heya-native-v01/idle",
+  "passed": true,
+  "checks": [
+    {
+      "direction": "south",
+      "frames": 4,
+      "changed_pixels_cycle": [
+        424,
+        687,
+        83,
+        357
+      ],
+      "f00_exact_static": true
+    },
+    {
+      "direction": "west",
+      "frames": 4,
+      "changed_pixels_cycle": [
+        262,
+        407,
+        41,
+        187
+      ],
+      "f00_exact_static": true
+    },
+    {
+      "direction": "north",
+      "frames": 4,
+      "changed_pixels_cycle": [
+        396,
+        662,
+        81,
+        352
+      ],
+      "f00_exact_static": true
+    },
+    {
+      "direction": "east",
+      "frames": 4,
+      "changed_pixels_cycle": [
+        291,
+        509,
+        30,
+        248
+      ],
+      "f00_exact_static": true
+    }
+  ],
+  "negative_controls": [
+    {
+      "control": "png_pixel_flip",
+      "rejected": true,
+      "observed_fails": [
+        "south: frame 1 hash",
+        "south: frame 1 palette",
+        "south: PXO cells are not exact model shifts"
+      ],
+      "temp": "/home/kel/.hermes/cache/scratch/wb-heya-i159-neg-l22dk0cu"
+    },
+    {
+      "control": "pxo_frame_duration",
+      "rejected": true,
+      "observed_fails": [
+        "west: PXO metadata"
+      ],
+      "temp": "/home/kel/.hermes/cache/scratch/wb-heya-i159-neg-9iquzpto"
+    },
+    {
+      "control": "ora_static_pixel",
+      "rejected": true,
+      "observed_fails": [
+        "north: ORA != static",
+        "north: PXO cells are not exact model shifts"
+      ],
+      "temp": "/home/kel/.hermes/cache/scratch/wb-heya-i159-neg-_a9cyuvc"
+    },
+    {
+      "control": "manifest_duration",
+      "rejected": true,
+      "observed_fails": [
+        "east: timing"
+      ],
+      "temp": "/home/kel/.hermes/cache/scratch/wb-heya-i159-neg-mj15c2yo"
+    },
+    {
+      "control": "palette_colour",
+      "rejected": true,
+      "observed_fails": [
+        "south: palette copy hash",
+        "south: frame 0 palette",
+        "south: frame 1 palette",
+        "south: frame 2 palette"
+      ],
+      "temp": "/home/kel/.hermes/cache/scratch/wb-heya-i159-neg-7aje6_v7"
+    }
+  ],
+  "negative_controls_all_rejected": true,
+  "failures": [],
+  "limitations": [
+    "no Pixelorama export",
+    "no Godot runtime",
+    "no human review"
+  ],
+  "generated_utc": "2026-10-24T14:23:24.718876+00:00"
+}

@@ -1,0 +1,108 @@
+{
+  "task": "content.char.heya.idle-anim independent source check",
+  "status": "UNAPPROVED",
+  "root": "game/assets/characters/heya-native-v01/idle",
+  "passed": true,
+  "checks": [
+    {
+      "direction": "south",
+      "frames": 4,
+      "changed_pixels_cycle": [
+        424,
+        687,
+        83,
+        357
+      ],
+      "f00_exact_static": true
+    },
+    {
+      "direction": "west",
+      "frames": 4,
+      "changed_pixels_cycle": [
+        262,
+        407,
+        41,
+        187
+      ],
+      "f00_exact_static": true
+    },
+    {
+      "direction": "north",
+      "frames": 4,
+      "changed_pixels_cycle": [
+        396,
+        662,
+        81,
+        352
+      ],
+      "f00_exact_static": true
+    },
+    {
+      "direction": "east",
+      "frames": 4,
+      "changed_pixels_cycle": [
+        291,
+        509,
+        30,
+        248
+      ],
+      "f00_exact_static": true
+    }
+  ],
+  "negative_controls": [
+    {
+      "control": "png_pixel_flip",
+      "rejected": true,
+      "observed_fails": [
+        "south: frame 1 hash",
+        "south: frame 1 palette",
+        "south: PXO cells are not exact model shifts"
+      ],
+      "temp": "/tmp/wb-heya-i159-neg-3ej6s_oz"
+    },
+    {
+      "control": "pxo_frame_duration",
+      "rejected": true,
+      "observed_fails": [
+        "west: PXO metadata"
+      ],
+      "temp": "/tmp/wb-heya-i159-neg-u7bg91f5"
+    },
+    {
+      "control": "ora_static_pixel",
+      "rejected": true,
+      "observed_fails": [
+        "north: ORA != static",
+        "north: PXO cells are not exact model shifts"
+      ],
+      "temp": "/tmp/wb-heya-i159-neg-4ijvfwfj"
+    },
+    {
+      "control": "manifest_duration",
+      "rejected": true,
+      "observed_fails": [
+        "east: timing"
+      ],
+      "temp": "/tmp/wb-heya-i159-neg-so2jw_c7"
+    },
+    {
+      "control": "palette_colour",
+      "rejected": true,
+      "observed_fails": [
+        "south: palette copy hash",
+        "south: frame 0 palette",
+        "south: frame 1 palette",
+        "south: frame 2 palette"
+      ],
+      "temp": "/tmp/wb-heya-i159-neg-43p5p5cc"
+    }
+  ],
+  "negative_controls_all_rejected": true,
+  "failures": [],
+  "limitations": [
+    "no Pixelorama export",
+    "no Godot runtime",
+    "no human review"
+  ],
+  "generated_utc": "2026-10-24T14:05:51.113981+00:00"
+}
