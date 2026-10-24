@@ -1,0 +1,88 @@
+{
+  "finished_result": {
+    "attempt": 112,
+    "classification": "max_turns",
+    "claudeResetAt": null,
+    "coordinatorAttempt": "111",
+    "note": "Provider exit success is not evidence the game task completed.",
+    "outcome": "exited",
+    "provider": "claude",
+    "reason": null,
+    "returncode": 1,
+    "scope": {
+      "confirmed": true,
+      "unit": "wb-provider-159da5ebf0a94dec967feb5e03c8c8cd.scope"
+    },
+    "stderrPath": "/home/kel/projects/worlds-between/autonomy/provider/112-claude.stderr.log",
+    "stdoutPath": "/home/kel/projects/worlds-between/autonomy/provider/112-claude.stdout.log",
+    "tokens": {
+      "cache_creation_input_tokens": 104378,
+      "cache_read_input_tokens": 2330336,
+      "input_tokens": 70,
+      "output_tokens": 35422
+    }
+  },
+  "provider_stdout_sha256": "638e3051cb0f2fab0ba43dcc6f7c4fe881a76ae5d07d6fc82480293b9ce4a60e",
+  "provider_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "permission_denials": [
+    {
+      "tool_name": "Bash",
+      "tool_use_id": "toolu_01PxxKCyD86ncu9PNZbjHcX7",
+      "tool_input": {
+        "command": "D=game/assets/characters/yanke-native-v01/south; cat $D/*manifest*.json | head -80; sha256sum $D/*; git log --oneline -1 -- $D; git status --short $D; git rev-parse HEAD",
+        "description": "Read Yanke south manifest and hashes"
+      }
+    },
+    {
+      "tool_name": "Bash",
+      "tool_use_id": "toolu_01HtdKFuGA66qY2WCUTNjPVg",
+      "tool_input": {
+        "command": "grep -o '.\\{0,300\\}\u5ca9\u67ef.\\{0,500\\}' outputs/rpg-2-star-ocean-the-second_game-bible_state_v01_20261013-195422-b8c16d42.json | grep -E \"\u5c81|age|\u804c\u4e1a|role|career\" | head -3",
+        "description": "Extract Yanke role/age from Bible"
+      }
+    },
+    {
+      "tool_name": "Bash",
+      "tool_use_id": "toolu_01BUENS8386XYhv1WMxFspYP",
+      "tool_input": {
+        "command": "ls -la game/assets/portraits/mdisplay91 outputs/mdisplay91/hermes91 && cat outputs/mdisplay91/.gitattributes outputs/mdisplay91/.gitignore; ls game/assets/portraits | grep -i ydisplay; ls outputs | grep ydisplay; ls ../tooling/venv/bin/python; which godot xvfb-run; ls ../tooling | head",
+        "description": "Inspect conventions and tooling paths"
+      }
+    },
+    {
+      "tool_name": "Bash",
+      "tool_use_id": "toolu_01RJhJBWjRLxEcCv4kKUdaoD",
+      "tool_input": {
+        "command": "ls -la game/assets/portraits/mdisplay91 outputs/mdisplay91/hermes91 game/assets/portraits/ /home/kel/projects/worlds-between/tooling/venv/bin/python",
+        "description": "List portrait dirs and venv python"
+      }
+    },
+    {
+      "tool_name": "Bash",
+      "tool_use_id": "toolu_01UwmvCFGTbmhbfz6BzUdqXh",
+      "tool_input": {
+        "command": "/home/kel/projects/worlds-between/tooling/venv/bin/python -X utf8 -I tools/rpg-2-star-ocean-the-second_yanke_display-build_v01_20261024-100318-10cf38b5.py build; echo EXIT=$?",
+        "description": "Build Yanke display image and manifest"
+      }
+    },
+    {
+      "tool_name": "Bash",
+      "tool_use_id": "toolu_01584nnfCBnmr6AtZFSiWsND",
+      "tool_input": {
+        "command": "/home/kel/projects/worlds-between/tooling/venv/bin/python -X utf8 -I tools/rpg-2-star-ocean-the-second_yanke_display-build_v01_20261024-100318-10cf38b5.py build",
+        "description": "Build Yanke display image and manifest"
+      }
+    },
+    {
+      "tool_name": "Bash",
+      "tool_use_id": "toolu_015k1Q1Q9bbRTmD22NMkV7AQ",
+      "tool_input": {
+        "command": "mkdir -p outputs/ydisplay111/a1/xdg/config outputs/ydisplay111/a1/xdg/data outputs/ydisplay111/a1/xdg/cache outputs/ydisplay111/a1/tmp && env XDG_CONFIG_HOME=/home/kel/projects/worlds-between/repo/outputs/ydisplay111/a1/xdg/config XDG_DATA_HOME=/home/kel/projects/worlds-between/repo/outputs/ydisplay111/a1/xdg/data XDG_CACHE_HOME=/home/kel/projects/worlds-between/repo/outputs/ydisplay111/a1/xdg/cache TMPDIR=/home/kel/projects/worlds-between/repo/outputs/ydisplay111/a1/tmp python3 -X utf8 tools/rpg-2-star-ocean-the-second_godot_checked-runner_v01_20261018-203400-f74ac6d1.py --timeout 180 --log outputs/ydisplay111/a1/import.runner.log -- /home/kel/projects/worlds-between/tooling/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64 --headless --audio-driver Dummy --path game --import",
+        "timeout": 200000,
+        "description": "Run checked Godot import with fresh XDG profile"
+      }
+    }
+  ],
+  "stop_reason": "tool_use",
+  "checkpoint": "Generated assets, tools, UI/probe exist. Contract and malformed producer checks exist. Godot import/render checks not yet executed; continuation via adapter job fadfd4e140bc4dc7bad67a53303f5b94."
+}

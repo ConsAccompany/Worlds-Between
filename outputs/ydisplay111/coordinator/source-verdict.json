@@ -1,0 +1,19 @@
+{
+  "canonical_task": "content.char.yanke.display",
+  "producer": "claude through authorized provider adapter",
+  "coordinator": "hermes",
+  "tested_base": "cbaa0d95f589bf995d97e703dd62a4459840a26a",
+  "gate": "PASS source image and bilingual standalone UI; commit gate pending selective integration",
+  "independent_checks": {"deterministic_build": "PASS", "contract": "42 checks PASS", "malformed": "19 predicates PASS including absent, invalid actor/hash/transform, shifted/tampered pixels and report overwrite refusal", "rendered_en": "66 checks PASS", "rendered_zh": "66 checks PASS", "capture_display_pixels": "15872 of 15872 opaque pixels match in each locale", "m1_smoke": "PASS"},
+  "commands_and_logs": ["outputs/ydisplay111/coordinator/python-checks.json", "outputs/ydisplay111/coordinator/godot-checks.json"],
+  "visual_inspection": "Coordinator loaded actual independent EN/ZH captures. Portrait and localized name, age, role and visual anchors are visible. Text fits without overlap or clipping; CJK glyphs and Art pending badge are visible. Small native south static appears separately at 0.5 scale. Static UI verification only, not artistic acceptance or motion approval.",
+  "preservation_audit": "Provider tool logs contain new unique writes only, no Edit/MultiEdit operations and no shell source replacements; no development replacement or prior backup was required. Exact source/manifest/editable provenance matches committed dependency bytes. All receipt hashes independently matched.",
+  "provider_failures": ["First job max_turns, returncode 1; preserved in provider1-checkpoint.json. Continued once via authorized adapter after finished result.", "Second job exited0 but classified permission_denied due read-only compound/out-of-directory shell commands; exact denials retained. No permission settings or bypass flags changed. Distinct simple checked-runner commands were permitted and passed; denied XDG/TMPDIR compound operation was not performed."],
+  "other_failures": ["Initial coordinator read-only log parser raised AttributeError on string content; no write occurred. Corrected parsing and preserved in provider-edit-audit.json."],
+  "warnings": ["Xvfb software OpenGL reports unsupported V-Sync; not a runtime ERROR.", "Pillow getdata deprecation warning in contract checker; no failure."],
+  "receipt_correction": "Producer says human art approval prevents production completion. That is not the canonical production criterion: commitment plus UI display is sufficient; approval remains a separate untouched gate. Receipt remains unedited as historical producer evidence.",
+  "unchanged": ["ordinary defaults", "character runtime-integration status", "creator approval", "frozen scoring and criteria", "unrelated pre-existing index and working changes"],
+  "bible_limit": "Existing latestTaskProgress belongs to unfinished Muxiu east static. Begin/finish CLI refuses another active task; preserved unrelated record rather than clobbering it. Baseline captured in coordinator/before.json: production62.3, inspection21.6, approval7.8. Final values to be recorded in closeout.",
+  "hash_normalization": "none; SHA256 raw file bytes. Raw RGBA hashes are explicitly separate.",
+  "remaining": ["selective source commit and audited ledger transition after verified committed bytes", "human art approval remains unperformed; no default adoption"]
+}

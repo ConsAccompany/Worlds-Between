@@ -1,0 +1,44 @@
+[
+  {
+    "name": "build-check",
+    "command": [
+      "/home/kel/projects/worlds-between/tooling/venv/bin/python",
+      "-I",
+      "tools/rpg-2-star-ocean-the-second_yanke_display-build_v01_20261024-100318-10cf38b5.py",
+      "check"
+    ],
+    "returncode": 0,
+    "log": "outputs/ydisplay111/coordinator/build-check.execution.log",
+    "sha256": "ceb0d490944f5278a8a9326fb4b3148125b957fdba86cdcd0036427915e1edf2"
+  },
+  {
+    "name": "contract",
+    "command": [
+      "/home/kel/projects/worlds-between/tooling/venv/bin/python",
+      "-I",
+      "tools/rpg-2-star-ocean-the-second_yanke_display-contract-check_v01_20261024-100318-10cf38b5.py",
+      "--root",
+      ".",
+      "--manifest",
+      "game/assets/portraits/ydisplay111/rpg-2-star-ocean-the-second_yanke_display-portrait-manifest_v01_20261024-100318-10cf38b5.json",
+      "--out",
+      "outputs/ydisplay111/coordinator/contract"
+    ],
+    "returncode": 0,
+    "log": "outputs/ydisplay111/coordinator/contract.execution.log",
+    "sha256": "a8e8fe3edaa3c9e9958650a987ee912b4fee74b1d08c62036b69deaa68c2afa4"
+  },
+  {
+    "name": "malformed",
+    "command": [
+      "/home/kel/projects/worlds-between/tooling/venv/bin/python",
+      "-I",
+      "tools/rpg-2-star-ocean-the-second_yanke_display-malformed-check_v01_20261024-100318-10cf38b5.py",
+      "--out",
+      "outputs/ydisplay111/coordinator/malformed"
+    ],
+    "returncode": 0,
+    "log": "outputs/ydisplay111/coordinator/malformed.execution.log",
+    "sha256": "240d6f97c67deb6300b0292f6b4118c3d16e0d9cebf163ec926cabcbe6a2c39c"
+  }
+]
