@@ -1,0 +1,472 @@
+{
+  "task": "content.char.milo.walk-east",
+  "manifest": "outputs/milo-ew01/rpg-2-star-ocean-the-second_milo_walk-source-manifest_unapproved-mew01-v01_20261024-061500-9c61f2d2.json",
+  "manifest_sha256_raw": "9d2727403559574ae1c89d5f4bf6c0c428d5d70b158ff97fdb1abf6d5eb3a0d3",
+  "checker_sha256_raw": "b9fbeb245b1bf71be464d81989726e36609f8d667fa74b722b201eae03aff7be",
+  "checks": [
+    {
+      "check": "exactly one source manifest",
+      "pass": true,
+      "detail": [
+        "rpg-2-star-ocean-the-second_milo_walk-source-manifest_unapproved-mew01-v01_20261024-061500-9c61f2d2.json"
+      ]
+    },
+    {
+      "check": "manifest scope: east only, task content.char.milo.walk-east, UNAPPROVED",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "neutral Milo east PNG pin",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "palette file pin",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "neutral editable pins byte-exact (east PXO/ORA/manifest/palette)",
+      "pass": true,
+      "detail": 4
+    },
+    {
+      "check": "reused_engine text_lf_v1 hash matches tool file",
+      "pass": true,
+      "detail": "tools/rpg-2-star-ocean-the-second_jiang-lan_exploration-source-author_unapproved-jexplore39-v01_20261022-154032-5bca7193.py"
+    },
+    {
+      "check": "reused_helpers text_lf_v1 hash matches tool file",
+      "pass": true,
+      "detail": "tools/rpg-2-star-ocean-the-second_protagonist-male_explore-4dir-source-author_unapproved-mexplore23-v01_20261021-162551-6e3b1a7d.py"
+    },
+    {
+      "check": "tool text_lf_v1 hash matches tool file",
+      "pass": true,
+      "detail": "tools/rpg-2-star-ocean-the-second_milo_walk-east-source-author_unapproved-mew01-v01_20261024-061500-3e1a5c07.py"
+    },
+    {
+      "check": "milo_east_static_author text_lf_v1 hash matches tool file",
+      "pass": true,
+      "detail": "tools/rpg-2-star-ocean-the-second_milo_east-static-author_unapproved-v01_20261024-000137-e4a1c7d2.py"
+    },
+    {
+      "check": "milo_walk_south_author text_lf_v1 hash matches tool file",
+      "pass": true,
+      "detail": "tools/rpg-2-star-ocean-the-second_milo_walk-south-source-author_unapproved-msw01-v01_20261024-044311-5e7a0c19.py"
+    },
+    {
+      "check": "all 41 frame PNG raw hashes match manifest",
+      "pass": true,
+      "detail": 41
+    },
+    {
+      "check": "frames 80x112, binary alpha, clear border, palette subset of pinned Milo palette",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "static and idle f00 are the neutral bytes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "PXO raw hash",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "PXO 41 frames, layers far-limbs + 11 Milo roles + guides",
+      "pass": true,
+      "detail": [
+        "far-limbs",
+        "boots",
+        "trousers",
+        "undershirt",
+        "coat",
+        "belt",
+        "case",
+        "strap",
+        "arms",
+        "wristband",
+        "face",
+        "hair",
+        "guides"
+      ]
+    },
+    {
+      "check": "PXO cels recompose to every frame PNG (independent alpha-over)",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "PXO tags east-idle 2-5, east-walk 6-17, 12 stop tags",
+      "pass": true,
+      "detail": [
+        6,
+        17
+      ]
+    },
+    {
+      "check": "ORA raw hash; merged == neutral bytes; role layers recompose to neutral",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "sprite set raw hash",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "sprite set timing/contract/east-only",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "stop supplemental text_lf_v1 hash",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "stop supplemental structure (12 phase bridges [walk p, s1, s2, idle f00], 40 ms, settle 120 inclusive, non-default)",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "package PNG copies byte-equal to source frames",
+      "pass": true,
+      "detail": 40
+    },
+    {
+      "check": "stop JSON bridge frames == manifest bridge frames, in order, hashes match bytes",
+      "pass": true,
+      "detail": 24
+    },
+    {
+      "check": "walk timing boundaries: 39->p0 40->p1 479->p11 480->p0 (cycle 480 ms)",
+      "pass": true,
+      "detail": {
+        "0": 0,
+        "39": 0,
+        "40": 1,
+        "439": 10,
+        "440": 11,
+        "479": 11,
+        "480": 0,
+        "481": 0
+      }
+    },
+    {
+      "check": "idle timing boundaries (700/200/400/200, loop 1500 ms)",
+      "pass": true,
+      "detail": {
+        "699": 0,
+        "700": 1,
+        "899": 1,
+        "900": 2,
+        "1299": 2,
+        "1300": 3,
+        "1499": 3,
+        "1500": 0
+      }
+    },
+    {
+      "check": "stop bridge boundaries: release t0 walk p; 40 s1; 80 s2; 120 (inclusive) idle f00 held",
+      "pass": true,
+      "detail": {
+        "0": 0,
+        "39": 0,
+        "40": 1,
+        "79": 1,
+        "80": 2,
+        "119": 2,
+        "120": 3,
+        "1000": 3
+      }
+    },
+    {
+      "check": "every bridge endpoint resolves to exact walk p / neutral idle f00 bytes (stop settles exactly to neutral from all 12 phases)",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "each foot grounded exactly 4 of 12 phases",
+      "pass": true,
+      "detail": [
+        4,
+        4
+      ]
+    },
+    {
+      "check": "side planted foot world slip at 40 ms boundaries <= 1 source texel (frozen jexplore39 gate; rounding of 11.2)",
+      "pass": true,
+      "detail": 0.8
+    },
+    {
+      "check": "stop bridges walk p -> s1 -> s2: grounded foot never moves (host stopped; cel toe and heel)",
+      "pass": true,
+      "detail": 0
+    },
+    {
+      "check": "stop bridges s2 -> idle f00: grounded s2 foot texels reappear unchanged in neutral (all 12 phases)",
+      "pass": false,
+      "detail": [
+        43,
+        24,
+        14,
+        26,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "check": "independent contacts agree with author claims (boundary slip, flight phases, stop 0)",
+      "pass": false,
+      "detail": {
+        "claimed": 0.8,
+        "independent": 0.8
+      }
+    },
+    {
+      "check": "identity: white case w/ green cross (left of pivot), green wristband (right of pivot), silver patch, profile eye in all frames",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "wristband cel attached to forearm texels directly above and below in every frame (raw cels)",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "case cel is the neutral case shifted by 0/+1 row only (rides torso bob)",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "top row never above neutral row 8; soles never below 103",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "all negative controls rejected",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "native Pixelorama export: 41/41 frames RGBA-exact, exit 0, no timeout, source unchanged",
+      "pass": true,
+      "detail": {
+        "exit": 0,
+        "timeout": false,
+        "frames_emitted": 41,
+        "frames_rgba_exact": 41
+      }
+    }
+  ],
+  "negative_controls": [
+    {
+      "control": "tampered walk PNG byte -> hash mismatch",
+      "rejected": true
+    },
+    {
+      "control": "tampered PXO cel -> recomposition mismatch",
+      "rejected": true
+    },
+    {
+      "control": "malformed stop JSON (bridge ends on idle f01) -> rejected",
+      "rejected": true
+    },
+    {
+      "control": "stop frame_ms 39 -> rejected",
+      "rejected": true
+    },
+    {
+      "control": "stop settle 119 ms -> rejected",
+      "rejected": true
+    },
+    {
+      "control": "stop JSON with west entry (paused direction) -> rejected",
+      "rejected": true
+    },
+    {
+      "control": "stop JSON relabelled north -> rejected",
+      "rejected": true
+    },
+    {
+      "control": "stop JSON with missing bridge frame -> rejected",
+      "rejected": true
+    },
+    {
+      "control": "stop JSON missing phase11 -> rejected",
+      "rejected": true
+    },
+    {
+      "control": "truncated (malformed) stop JSON bytes -> parse rejected",
+      "rejected": true
+    },
+    {
+      "control": "walk duration 0 -> rejected",
+      "rejected": true
+    },
+    {
+      "control": "walk duration 41 (boundary drift) -> rejected",
+      "rejected": true
+    },
+    {
+      "control": "idle f00 duration 699 -> rejected",
+      "rejected": true
+    },
+    {
+      "control": "wrong pivot -> rejected",
+      "rejected": true
+    },
+    {
+      "control": "sprite set with extra west entry -> rejected",
+      "rejected": true
+    },
+    {
+      "control": "bridge s1 near foot slid 1 texel -> stop slip detected",
+      "rejected": true
+    },
+    {
+      "control": "stop p00 s2 near-foot cel + composite slid 1 texel -> endpoint slip detected",
+      "rejected": true
+    },
+    {
+      "control": "stop p06 s2 near-foot cel + composite slid 1 texel -> endpoint slip detected",
+      "rejected": true
+    },
+    {
+      "control": "walk p02 planted near foot moved 2 texels -> boundary slip > 1 detected",
+      "rejected": true
+    },
+    {
+      "control": "west-style reversed travel (host -x) -> boundary slip > 1 detected",
+      "rejected": true
+    },
+    {
+      "control": "horizontally mirrored neutral (west-style, case/wristband swapped) -> identity rejected",
+      "rejected": true
+    }
+  ],
+  "contacts_independent": {
+    "grounded_phases_per_foot": [
+      4,
+      4
+    ],
+    "flight_phases": [
+      4,
+      5,
+      10,
+      11
+    ],
+    "grounded_pairs": 6,
+    "walk_max_world_slip_src_at_40ms_boundaries": 0.8,
+    "walk_max_world_slip_logical_at_40ms_boundaries": 0.4,
+    "planted_world_excursion_src_1ms_hold_samples": 11.72,
+    "planted_world_excursion_src_60fps_ticks": 10.667,
+    "near_toe_world_src_at_hold_edges_ms": {
+      "0": 65.0,
+      "39": 75.92,
+      "40": 65.2,
+      "79": 76.12,
+      "80": 64.4,
+      "119": 75.32,
+      "120": 64.6,
+      "159": 75.52,
+      "160": null
+    },
+    "stop_bridge_grounded_slip_src_max": 0,
+    "stop_endpoint_s2_to_idle_f00_mismatched_texels": [
+      43,
+      24,
+      14,
+      26,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "disclosed_residual": {
+    "planted_world_excursion_src_1ms_hold_samples": 11.72,
+    "planted_world_excursion_logical_1ms_hold_samples": 5.86,
+    "planted_world_excursion_src_60fps_ticks": 10.667,
+    "near_toe_world_src_at_hold_edges_ms": {
+      "0": 65.0,
+      "39": 75.92,
+      "40": 65.2,
+      "79": 76.12,
+      "80": 64.4,
+      "119": 75.32,
+      "120": 64.6,
+      "159": 75.52,
+      "160": null
+    },
+    "flight_phases": [
+      4,
+      5,
+      10,
+      11
+    ],
+    "status": "RESIDUAL, NOT A PASS: within each held 40 ms frame the host moves continuously, so the planted foot slides forward up to the listed excursion and snaps back at the next tick; not footlocked/slip-free"
+  },
+  "native": {
+    "run": true,
+    "command": [
+      "/home/kel/projects/worlds-between/tooling/pixelorama-1.2.3/Pixelorama-Linux-64bit/Pixelorama.x86_64",
+      "--headless",
+      "--audio-driver",
+      "Dummy",
+      "--quit",
+      "--",
+      "--export",
+      "-o",
+      "/home/kel/projects/worlds-between/repo/outputs/milo-ew01/indep2/native/requested_20261024-061500-3e1a5c07.png",
+      "/home/kel/projects/worlds-between/repo/outputs/milo-ew01/rpg-2-star-ocean-the-second_milo_walk-east-editable_unapproved-mew01-v01_20261024-061500-04413ee1.pxo"
+    ],
+    "exit": 0,
+    "timeout": false,
+    "elapsed_s": 5.99,
+    "frames_expected": 41,
+    "frames_emitted": 41,
+    "frames_rgba_exact": 41,
+    "source_unchanged": true,
+    "diagnostics": [
+      "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing.",
+      "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing.",
+      "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing.",
+      "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing."
+    ],
+    "application_clean": false,
+    "gui_saveas_reopen_verified": false
+  },
+  "preview": {
+    "gif": "outputs/milo-ew01/indep2/rpg-2-star-ocean-the-second_milo_walk-east-normal-speed-preview-source-bound_unapproved-mew01-v01_20261024-061500-3e1a5c07.gif",
+    "gif_sha256": "5ea97eb2472f14186adb32940c2e262f01834f15822fd7006a2468801e504a10",
+    "contact_sheet": "outputs/milo-ew01/indep2/rpg-2-star-ocean-the-second_milo_walk-east-contact-sheet-walk-s1-s2_unapproved-mew01-v01_20261024-061500-3e1a5c07.png",
+    "contact_sheet_sha256": "84374d1ad2d3b48c34d7c7e385310d0e463e06d37ce217b8e086f854753bf218",
+    "scope": "source-bound PIL composite at 40 ms/frame, host 11.2 src px/40 ms; NOT a Godot capture",
+    "sequence": "idle f00 700ms, walk 2 cycles moving east (screen right), release at phase 7 -> s1, s2, idle f00"
+  },
+  "not_claimed": [
+    "footlock/slip-free (within-hold residual disclosed above)",
+    "fluidity or human motion acceptance",
+    "GUI SaveAs/reopen",
+    "Godot runtime/normal-host stop playback",
+    "art approval",
+    "four-direction loader readiness"
+  ],
+  "passed": false
+}

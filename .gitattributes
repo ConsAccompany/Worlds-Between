@@ -2585,3 +2585,13 @@ docs/qa/rpg-2-star-ocean-the-second_milo_walk-north*20261024-*.md -text
 # Preserve emitted trailing spaces in these two raw logs only; source rules unchanged.
 outputs/milo-nw01/logs/indep1/indep.log whitespace=-blank-at-eol,space-before-tab,cr-at-eol
 outputs/milo-nw01/logs/hermes50-source/indep.log whitespace=-blank-at-eol,space-before-tab,cr-at-eol
+
+# Milo east walk/stop: preserve exact source/evidence bytes; only emitted log spaces exempted.
+outputs/milo-ew01/** -text
+tools/rpg-2-star-ocean-the-second_milo_walk-east*20261024-061500-3e1a5c07.py -text
+docs/qa/rpg-2-star-ocean-the-second_milo_walk-east*20261024-*.md -text
+outputs/milo-ew01/logs/indep1/indep.log whitespace=-blank-at-eol,space-before-tab,cr-at-eol
+outputs/milo-ew01/logs/indep2/indep.log whitespace=-blank-at-eol,space-before-tab,cr-at-eol
+outputs/milo-ew01/logs/indep3/indep.log whitespace=-blank-at-eol,space-before-tab,cr-at-eol
+outputs/milo-ew01/logs/indep4/indep.log whitespace=-blank-at-eol,space-before-tab,cr-at-eol
+outputs/milo-ew01/logs/hermes52-source/indep.log whitespace=-blank-at-eol,space-before-tab,cr-at-eol

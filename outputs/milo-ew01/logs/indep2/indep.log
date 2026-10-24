@@ -1,0 +1,67 @@
+cmd: ['/home/kel/projects/worlds-between/tooling/venv/bin/python', '-X', 'utf8', '-I', 'tools/rpg-2-star-ocean-the-second_milo_walk-east-independent-check_v01_20261024-061500-3e1a5c07.py', '--out', 'outputs/milo-ew01/indep2']
+rc: 1
+
+PASS exactly one source manifest ["rpg-2-star-ocean-the-second_milo_walk-source-manifest_unapproved-mew01-v01_20261024-061500-9c61f2d2.json"]
+PASS manifest scope: east only, task content.char.milo.walk-east, UNAPPROVED 
+PASS neutral Milo east PNG pin 
+PASS palette file pin 
+PASS neutral editable pins byte-exact (east PXO/ORA/manifest/palette) 4
+PASS reused_engine text_lf_v1 hash matches tool file "tools/rpg-2-star-ocean-the-second_jiang-lan_exploration-source-author_unapproved-jexplore39-v01_20261022-154032-5bca7193.py"
+PASS reused_helpers text_lf_v1 hash matches tool file "tools/rpg-2-star-ocean-the-second_protagonist-male_explore-4dir-source-author_unapproved-mexplore23-v01_20261021-162551-6e3b1a7d.py"
+PASS tool text_lf_v1 hash matches tool file "tools/rpg-2-star-ocean-the-second_milo_walk-east-source-author_unapproved-mew01-v01_20261024-061500-3e1a5c07.py"
+PASS milo_east_static_author text_lf_v1 hash matches tool file "tools/rpg-2-star-ocean-the-second_milo_east-static-author_unapproved-v01_20261024-000137-e4a1c7d2.py"
+PASS milo_walk_south_author text_lf_v1 hash matches tool file "tools/rpg-2-star-ocean-the-second_milo_walk-south-source-author_unapproved-msw01-v01_20261024-044311-5e7a0c19.py"
+PASS all 41 frame PNG raw hashes match manifest 41
+PASS frames 80x112, binary alpha, clear border, palette subset of pinned Milo palette []
+PASS static and idle f00 are the neutral bytes 
+PASS PXO raw hash 
+PASS PXO 41 frames, layers far-limbs + 11 Milo roles + guides ["far-limbs", "boots", "trousers", "undershirt", "coat", "belt", "case", "strap", "arms", "wristband", "face", "hair", "guides"]
+PASS PXO cels recompose to every frame PNG (independent alpha-over) []
+PASS PXO tags east-idle 2-5, east-walk 6-17, 12 stop tags [6, 17]
+PASS ORA raw hash; merged == neutral bytes; role layers recompose to neutral 
+PASS sprite set raw hash 
+PASS sprite set timing/contract/east-only []
+PASS stop supplemental text_lf_v1 hash 
+PASS stop supplemental structure (12 phase bridges [walk p, s1, s2, idle f00], 40 ms, settle 120 inclusive, non-default) []
+PASS package PNG copies byte-equal to source frames 40
+PASS stop JSON bridge frames == manifest bridge frames, in order, hashes match bytes 24
+PASS walk timing boundaries: 39->p0 40->p1 479->p11 480->p0 (cycle 480 ms) {"0": 0, "39": 0, "40": 1, "439": 10, "440": 11, "479": 11, "480": 0, "481": 0}
+PASS idle timing boundaries (700/200/400/200, loop 1500 ms) {"699": 0, "700": 1, "899": 1, "900": 2, "1299": 2, "1300": 3, "1499": 3, "1500": 0}
+PASS stop bridge boundaries: release t0 walk p; 40 s1; 80 s2; 120 (inclusive) idle f00 held {"0": 0, "39": 0, "40": 1, "79": 1, "80": 2, "119": 2, "120": 3, "1000": 3}
+PASS every bridge endpoint resolves to exact walk p / neutral idle f00 bytes (stop settles exactly to neutral from all 12 phases) 
+PASS each foot grounded exactly 4 of 12 phases [4, 4]
+PASS side planted foot world slip at 40 ms boundaries <= 1 source texel (frozen jexplore39 gate; rounding of 11.2) 0.8
+PASS stop bridges walk p -> s1 -> s2: grounded foot never moves (host stopped; cel toe and heel) 0
+FAIL stop bridges s2 -> idle f00: grounded s2 foot texels reappear unchanged in neutral (all 12 phases) [43, 24, 14, 26, 0, 0, 0, 0, 0, 0, 0, 0]
+FAIL independent contacts agree with author claims (boundary slip, flight phases, stop 0) {"claimed": 0.8, "independent": 0.8}
+PASS identity: white case w/ green cross (left of pivot), green wristband (right of pivot), silver patch, profile eye in all frames []
+PASS wristband cel attached to forearm texels directly above and below in every frame (raw cels) []
+PASS case cel is the neutral case shifted by 0/+1 row only (rides torso bob) []
+PASS top row never above neutral row 8; soles never below 103 
+DISCLOSED_RESIDUAL {"planted_world_excursion_src_1ms_hold_samples": 11.72, "planted_world_excursion_logical_1ms_hold_samples": 5.86, "planted_world_excursion_src_60fps_ticks": 10.667, "near_toe_world_src_at_hold_edges_ms": {"0": 65.0, "39": 75.92, "40": 65.2, "79": 76.12, "80": 64.4, "119": 75.32, "120": 64.6, "159": 75.52, "160": null}, "flight_phases": [4, 5, 10, 11], "status": "RESIDUAL, NOT A PASS: within each held 40 ms frame the host moves continuously, so the planted foot slides forward up to the listed excursion and snaps back at the next tick; not footlocked/slip-free"}
+REJECTED tampered walk PNG byte -> hash mismatch
+REJECTED tampered PXO cel -> recomposition mismatch
+REJECTED malformed stop JSON (bridge ends on idle f01) -> rejected
+REJECTED stop frame_ms 39 -> rejected
+REJECTED stop settle 119 ms -> rejected
+REJECTED stop JSON with west entry (paused direction) -> rejected
+REJECTED stop JSON relabelled north -> rejected
+REJECTED stop JSON with missing bridge frame -> rejected
+REJECTED stop JSON missing phase11 -> rejected
+REJECTED truncated (malformed) stop JSON bytes -> parse rejected
+REJECTED walk duration 0 -> rejected
+REJECTED walk duration 41 (boundary drift) -> rejected
+REJECTED idle f00 duration 699 -> rejected
+REJECTED wrong pivot -> rejected
+REJECTED sprite set with extra west entry -> rejected
+REJECTED bridge s1 near foot slid 1 texel -> stop slip detected
+REJECTED stop p00 s2 near-foot cel + composite slid 1 texel -> endpoint slip detected
+REJECTED stop p06 s2 near-foot cel + composite slid 1 texel -> endpoint slip detected
+REJECTED walk p02 planted near foot moved 2 texels -> boundary slip > 1 detected
+REJECTED west-style reversed travel (host -x) -> boundary slip > 1 detected
+REJECTED horizontally mirrored neutral (west-style, case/wristband swapped) -> identity rejected
+PASS all negative controls rejected []
+PASS native Pixelorama export: 41/41 frames RGBA-exact, exit 0, no timeout, source unchanged {"exit": 0, "timeout": false, "frames_emitted": 41, "frames_rgba_exact": 41}
+APPLICATION_DIAGNOSTICS (separate, not an export-equality gate): 4
+outputs/milo-ew01/indep2/rpg-2-star-ocean-the-second_milo_walk-east-independent-result_v01_20261024-061500-3e1a5c07.json
+INDEPENDENT FAIL 37 / 39

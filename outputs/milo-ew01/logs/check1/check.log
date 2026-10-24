@@ -1,0 +1,26 @@
+cmd: ['/home/kel/projects/worlds-between/tooling/venv/bin/python', '-X', 'utf8', '-I', 'tools/rpg-2-star-ocean-the-second_milo_walk-east-source-author_unapproved-mew01-v01_20261024-061500-3e1a5c07.py', 'check']
+rc: 1
+
+Traceback (most recent call last):
+  File "/home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_milo_walk-east-source-author_unapproved-mew01-v01_20261024-061500-3e1a5c07.py", line 386, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_milo_walk-east-source-author_unapproved-mew01-v01_20261024-061500-3e1a5c07.py", line 332, in main
+    fsets, files, source = build_all()
+                           ^^^^^^^^^^^
+  File "/home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_milo_walk-east-source-author_unapproved-mew01-v01_20261024-061500-3e1a5c07.py", line 190, in build_all
+    fsets, files, source = J.build_all()
+                           ^^^^^^^^^^^^^
+  File "/home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_jiang-lan_exploration-source-author_unapproved-jexplore39-v01_20261022-154032-5bca7193.py", line 483, in build_all
+    fsets, files, man = artifacts()
+                        ^^^^^^^^^^^
+  File "/home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_jiang-lan_exploration-source-author_unapproved-jexplore39-v01_20261022-154032-5bca7193.py", line 429, in artifacts
+    f = frame_set(d)
+        ^^^^^^^^^^^^
+  File "/home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_jiang-lan_exploration-source-author_unapproved-jexplore39-v01_20261022-154032-5bca7193.py", line 344, in frame_set
+    parts = side_parts(base, d) if side else None
+            ^^^^^^^^^^^^^^^^^^^
+  File "/home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_milo_walk-east-source-author_unapproved-mew01-v01_20261024-061500-3e1a5c07.py", line 120, in side_parts
+    assert np.array_equal(over([a for _, a in lay]), neutral), "east neutral pose != neutral PNG"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: east neutral pose != neutral PNG
