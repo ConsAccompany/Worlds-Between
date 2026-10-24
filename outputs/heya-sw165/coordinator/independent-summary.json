@@ -1,0 +1,134 @@
+{
+  "task": "content.char.heya.walk-south",
+  "base": "ca127ea6f48dc9c2bcdd1a8be88caa27a48d9c71",
+  "raw_hashes": true,
+  "no_text_normalization_for_this_report": true,
+  "timestamp": "2026-10-24T14:37:59.817387+00:00",
+  "provider_job": "52a5834cc8de40fc9a21ecfd6bf41494",
+  "provider": "deepseek",
+  "provider_scope_confirmed": true,
+  "provider_stdout": "/home/kel/projects/worlds-between/autonomy/provider/166-deepseek.stdout.log",
+  "provider_stderr": "/home/kel/projects/worlds-between/autonomy/provider/166-deepseek.stderr.log",
+  "independent_pass": true,
+  "check_count": 35,
+  "negative_controls": 14,
+  "native": {
+    "run": true,
+    "command": [
+      "/home/kel/projects/worlds-between/tooling/pixelorama-1.2.3/Pixelorama-Linux-64bit/Pixelorama.x86_64",
+      "--headless",
+      "--audio-driver",
+      "Dummy",
+      "--quit",
+      "--",
+      "--export",
+      "-o",
+      "/home/kel/projects/worlds-between/repo/outputs/heya-sw165/coordinator/independent/native/requested_20261024-143000-h165s001.png",
+      "/home/kel/projects/worlds-between/repo/outputs/heya-sw165/rpg-2-star-ocean-the-second_heya_walk-south-editable_unapproved-h165sw-v01_20261024-143000-708fa2c2.pxo"
+    ],
+    "exit": 0,
+    "timeout": false,
+    "elapsed_s": 7.39,
+    "frames_expected": 41,
+    "frames_emitted": 41,
+    "frames_rgba_exact": 41,
+    "source_unchanged": true,
+    "diagnostics": [
+      "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing.",
+      "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing.",
+      "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing.",
+      "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing."
+    ],
+    "application_clean": false,
+    "gui_saveas_reopen_verified": false
+  },
+  "source_rebuild": "91/91 deterministic;18/18",
+  "fit_passed": true,
+  "fit_captures": 6,
+  "contacts": {
+    "grounded_phases_per_foot": [
+      4,
+      4
+    ],
+    "flight_phases": [
+      4,
+      5,
+      10,
+      11
+    ],
+    "double_support_phases": [],
+    "swing_phases_per_foot": [
+      [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        10,
+        11
+      ]
+    ],
+    "grounded_pairs": 6,
+    "planted_screen_motion_src_max": 0,
+    "front_inplace_world_slip_src_per_40ms": 11.2,
+    "front_inplace_world_slip_logical_per_40ms": 5.6,
+    "planted_runs": [
+      {
+        "foot": "A",
+        "first_phase": 0,
+        "phases": 4,
+        "held_ms": 160,
+        "in_place_world_travel_src": 44.8,
+        "in_place_world_travel_logical": 22.4
+      },
+      {
+        "foot": "B",
+        "first_phase": 6,
+        "phases": 4,
+        "held_ms": 160,
+        "in_place_world_travel_src": 44.8,
+        "in_place_world_travel_logical": 22.4
+      }
+    ],
+    "frame_hold_assumption": "each walk phase held 40 ms; host root moves continuously at 140 logical px/s (11.2 src/40 ms); sprite root does not move in source frames, so planted-foot world travel == host travel",
+    "stop_bridge_grounded_slip_src_max": 0,
+    "stop_entry_phases_checked": 12,
+    "stop_endpoint_neutral_all": true
+  },
+  "producer_receipt_mismatches_retained": [
+    {
+      "path": "tools/rpg-2-star-ocean-the-second_heya_walk-south-independent-check_v01_20261024-143000-h165s001.py",
+      "declared": "21d845dd500932c0e268be6f9850e36fd2fe70f5239981edfc7503ce50d7fc87",
+      "actual": "a2dc0f8f33851cad0a488cb2a762a59aa4aee5f2900fc98b314081c32a7416b8"
+    }
+  ],
+  "receipt_correction": "Current checker hash shown above supersedes stale deliverables hash only. Original receipt retained unchanged; checker backup matches stale hash. Independent rerun used actual final checker.",
+  "preexisting_index_preserved": true,
+  "shared_records_preserved_before_integration": true,
+  "visual_observation": "Contact sheet and actual fit capture viewed. Heya white coat/apron, scarf, dark-red bag and brown hair preserved. Small alternating boot lifts and torso bob visible; skirt remains rigid. Large and game-scale test sprites are rendered without clipping. Stills establish neither fluidity nor art acceptance. Test-only source-fit, not normal gameplay.",
+  "limitations": [
+    "Native shader application cleanliness FAILED despite41/41 exact RGBA export.",
+    "GUI roundtrip, ordinary actor adoption and human motion approval unverified.",
+    "Front planted-foot world slip5.6logical/40ms and22.4logical/160ms retained.",
+    "Boot-only articulation under rigid hem remains coarse.",
+    "Original provider replacement-preservation audit not established; optional audit hit genuine technical denial and was not bypassed.",
+    "Coordinator first independent launch failed because producer rebuild had removed original coordinator directory; recreated fresh directory; failure retained here.",
+    "Existing unrelated Muxiu Bible active progress record preserved; begin/finish helper cannot safely replace it."
+  ],
+  "meters_before": {
+    "production": 62.7,
+    "inspection": 21.6,
+    "approval": 7.8
+  }
+}
