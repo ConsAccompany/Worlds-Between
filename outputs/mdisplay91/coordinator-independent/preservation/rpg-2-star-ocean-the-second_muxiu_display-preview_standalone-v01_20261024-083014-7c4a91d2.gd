@@ -1,0 +1,130 @@
+extends Control
+# Standalone Muxiu character display preview (test-only, explicit separate scene; not attached to ordinary flow).
+# Derived from the credited Lin Que ldisplay64 preview; same card, binding and fallback rules. The portrait is
+# the deterministic 2x integer replication of the committed native south static (mdisplay91); the stage binds
+# that same static at the native 0.5 display scale through the exploration pilot's documented rendering math.
+# There is no idle/walk/motion claim and no party, exploration, battle, save or default wiring.
+
+const PORTRAIT := "res://assets/portraits/mdisplay91/rpg-2-star-ocean-the-second_muxiu_display-portrait_v01_20261024-083014-7c4a91d2.png"
+const SOURCE := "res://assets/characters/muxiu-native-v01/south/rpg-2-star-ocean-the-second_muxiu_south-static_unapproved-v01_20261024-071500-ca23fad5.png"
+const ACTOR := "muxiu"
+const CARD := Vector2(640, 360)
+const PORTRAIT_BOX := Rect2(16, 56, 180, 250)
+const PORTRAIT_IMAGE := Rect2(26, 69, 160, 224)
+const STAGE := Rect2(404, 64, 220, 220)
+const DENSITY := 2
+const FRAME := Vector2(80, 112)
+const PIVOT := Vector2(40, 104)
+const FLOOR_DROP_LOGICAL := 1.0
+const TEXT := {
+	"en": {"title": "Character Preview", "pending": "Art pending", "name": "Muxiu",
+		"career": "Animal carer · 24",
+		"identity": "Moss-green short cape,\nknotted rope bracelet,\nsmall whistle, moving braid",
+		"no_portrait": "Portrait unavailable",
+		"source_note": "South static · native 80x112 · 0.5 scale",
+		"hint": "Esc: exit · display image is a 2x integer replication of the committed south static"},
+	"zh": {"title": "角色预览", "pending": "美术待定", "name": "牧修",
+		"career": "动物照护者 · 24岁",
+		"identity": "苔绿色短斗篷、\n绳结手环、\n小巧呼哨与轻晃发辫",
+		"no_portrait": "展示图缺失",
+		"source_note": "南向静止帧 · 原生 80×112 · 0.5 倍",
+		"hint": "Esc：退出 · 展示图为已提交南向静止帧的 2 倍整数复制"},
+}
+
+var lang := "en"
+# Set before entering the tree (probe only): alternate portrait path.
+var portrait_path := PORTRAIT
+var card: Control
+var portrait: TextureRect
+var actor: Sprite2D
+var binding := ""
+var labels := {}
+
+
+func _ready() -> void:
+	for arg in OS.get_cmdline_user_args():
+		if arg.begins_with("--lang="):
+			lang = "zh" if arg.substr(7) == "zh" else "en"
+	var t: Dictionary = TEXT[lang]
+	card = Control.new()
+	card.size = CARD
+	add_child(card)
+	var bg := ColorRect.new()
+	bg.color = Color(0.09, 0.11, 0.15)
+	bg.size = CARD
+	card.add_child(bg)
+	labels["title"] = _label(t["title"], Vector2(16, 12), 18)
+	labels["pending"] = _label(t["pending"], Vector2(520, 16), 12, Color(1.0, 0.72, 0.38))
+	portrait = TextureRect.new()
+	portrait.position = PORTRAIT_IMAGE.position
+	portrait.size = PORTRAIT_IMAGE.size
+	portrait.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	portrait.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	portrait.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	portrait.texture = _load_texture(portrait_path)
+	card.add_child(portrait)
+	if portrait.texture == null:
+		labels["no_portrait"] = _label(t["no_portrait"], Vector2(26, 174), 12, Color(1.0, 0.72, 0.38))
+	labels["name"] = _label(t["name"], Vector2(208, 64), 20)
+	labels["career"] = _label(t["career"], Vector2(208, 96), 13)
+	labels["identity"] = _label(t["identity"], Vector2(208, 124), 12, Color(0.8, 0.84, 0.9))
+	var stage_bg := ColorRect.new()
+	stage_bg.color = Color(0.16, 0.19, 0.24)
+	stage_bg.position = STAGE.position
+	stage_bg.size = STAGE.size
+	stage_bg.clip_contents = true
+	card.add_child(stage_bg)
+	actor = Sprite2D.new()
+	actor.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	actor.texture = _load_texture(SOURCE)
+	if actor.texture != null:
+		actor.scale = Vector2.ONE / float(DENSITY)
+		actor.offset = FRAME * 0.5 - PIVOT + Vector2(0.0, FLOOR_DROP_LOGICAL * DENSITY)
+		actor.position = STAGE.size * Vector2(0.5, 0.75)
+		binding = "static-source"
+	else:
+		binding = "none"
+	stage_bg.add_child(actor)
+	labels["source_note"] = _label(t["source_note"], Vector2(404, 290), 11, Color(0.65, 0.7, 0.78))
+	labels["hint"] = _label(t["hint"], Vector2(16, 334), 11, Color(0.65, 0.7, 0.78))
+	get_viewport().size_changed.connect(_fit)
+	_fit()
+
+
+func _fit() -> void:
+	var vp := get_viewport_rect().size
+	var s := minf(vp.x / CARD.x, vp.y / CARD.y)
+	card.scale = Vector2(s, s)
+	card.position = (vp - CARD * s) * 0.5
+
+
+func _label(text: String, pos: Vector2, font_size: int, color := Color(0.93, 0.95, 0.98)) -> Label:
+	var l := Label.new()
+	l.text = text
+	l.position = pos
+	l.add_theme_font_size_override("font_size", font_size)
+	l.add_theme_color_override("font_color", color)
+	card.add_child(l)
+	return l
+
+
+static func _load_texture(path: String) -> Texture2D:
+	if ResourceLoader.exists(path, "Texture2D"):
+		return ResourceLoader.load(path, "Texture2D") as Texture2D
+	if not FileAccess.file_exists(path):
+		return null
+	var image := Image.load_from_file(ProjectSettings.globalize_path(path))
+	return null if image == null or image.is_empty() else ImageTexture.create_from_image(image)
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo:
+		if event.keycode == KEY_ESCAPE:
+			get_tree().quit()
+
+
+func state() -> Dictionary:
+	return {"lang": lang, "binding": binding, "portrait_loaded": portrait.texture != null,
+		"portrait_size": portrait.texture.get_size() if portrait.texture else Vector2.ZERO,
+		"actor_scale": actor.scale, "actor_texture_size": actor.texture.get_size() if actor.texture else Vector2.ZERO,
+		"actor_position": actor.position, "actor_offset": actor.offset}

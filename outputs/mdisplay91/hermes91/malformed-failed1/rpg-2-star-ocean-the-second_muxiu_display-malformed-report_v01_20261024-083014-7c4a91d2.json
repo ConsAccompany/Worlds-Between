@@ -1,0 +1,131 @@
+{
+  "schema": "muxiu-display-malformed-check/v1",
+  "run": "20261024-083014-7c4a91d2",
+  "results": [
+    {
+      "id": "real.pass",
+      "ok": true,
+      "detail": {
+        "status": "PASS",
+        "exit": 0,
+        "report": "/home/kel/projects/worlds-between/repo/outputs/mdisplay91/hermes91/malformed/real/rpg-2-star-ocean-the-second_muxiu_display-contract-report_v01_20261024-083014-7c4a91d2.json",
+        "failures": []
+      }
+    },
+    {
+      "id": "real.all-checks-ok",
+      "ok": true,
+      "detail": 36
+    },
+    {
+      "id": "real.fixtures-refused",
+      "ok": true,
+      "detail": {
+        "wrong-hash": {
+          "id": "wrong-hash",
+          "refused": true,
+          "failedChecks": [
+            "output.file-sha-declared"
+          ]
+        },
+        "wrong-actor": {
+          "id": "wrong-actor",
+          "refused": true,
+          "failedChecks": [
+            "subject.muxiu"
+          ]
+        },
+        "wrong-factor": {
+          "id": "wrong-factor",
+          "refused": true,
+          "failedChecks": [
+            "transform.factor"
+          ]
+        }
+      }
+    },
+    {
+      "id": "wrong-factor.refused",
+      "ok": true,
+      "detail": {
+        "status": "FAIL",
+        "exit": 1,
+        "report": "/home/kel/projects/worlds-between/repo/outputs/mdisplay91/hermes91/malformed/wrong-factor/rpg-2-star-ocean-the-second_muxiu_display-contract-report_v01_20261024-083014-7c4a91d2.json",
+        "failures": [
+          "transform.factor"
+        ]
+      }
+    },
+    {
+      "id": "other-actor.refused",
+      "ok": true,
+      "detail": {
+        "status": "FAIL",
+        "exit": 1,
+        "report": "/home/kel/projects/worlds-between/repo/outputs/mdisplay91/hermes91/malformed/other-actor/rpg-2-star-ocean-the-second_muxiu_display-contract-report_v01_20261024-083014-7c4a91d2.json",
+        "failures": [
+          "subject.muxiu"
+        ]
+      }
+    },
+    {
+      "id": "wrong-source-hash.refused",
+      "ok": true,
+      "detail": {
+        "status": "FAIL",
+        "exit": 1,
+        "report": "/home/kel/projects/worlds-between/repo/outputs/mdisplay91/hermes91/malformed/wrong-source-hash/rpg-2-star-ocean-the-second_muxiu_display-contract-report_v01_20261024-083014-7c4a91d2.json",
+        "failures": [
+          "source.sha"
+        ]
+      }
+    },
+    {
+      "id": "truncated-json.refused",
+      "ok": true,
+      "detail": {
+        "status": "FAIL",
+        "exit": 1,
+        "report": "/home/kel/projects/worlds-between/repo/outputs/mdisplay91/hermes91/malformed/truncated-json/rpg-2-star-ocean-the-second_muxiu_display-contract-report_v01_20261024-083014-7c4a91d2.json"
+      }
+    },
+    {
+      "id": "linque-manifest.refused",
+      "ok": false,
+      "detail": {
+        "status": "UNPARSEABLE",
+        "stdout": "",
+        "stderr": "Traceback (most recent call last):\n  File \"/home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_muxiu_display-contract-check_v01_20261024-083014-7c4a91d2.py\", line 245, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"/home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_muxiu_display-contract-check_v01_20261024-083014-7c4a91d2.py\", line 228, in main\n    \"wrong-factor\": fx(\"wrong-factor\", m, obyt, sbyt, smbyt, wrong_factor),\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_muxiu_display-contract-check_v01_20261024-083014-7c4a91d2.py\", line 162, in fx\n    fn(x)\n  File \"/home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_muxiu_display-contract-check_v01_20261024-083014-7c4a91d2.py\", line 157, in wrong_factor\n    m[\"transform\"][\"factor\"] = 3\n    ~^^^^^^^^^^^^^\nKeyError: 'transform'\n"
+      }
+    },
+    {
+      "id": "absent.pending",
+      "ok": true,
+      "detail": {
+        "status": "PENDING",
+        "exit": 2,
+        "report": "/home/kel/projects/worlds-between/repo/outputs/mdisplay91/hermes91/malformed/absent/rpg-2-star-ocean-the-second_muxiu_display-contract-report_v01_20261024-083014-7c4a91d2.json"
+      }
+    },
+    {
+      "id": "tampered-pixel.refused",
+      "ok": true,
+      "detail": {
+        "status": "FAIL",
+        "exit": 1,
+        "report": "/home/kel/projects/worlds-between/repo/outputs/mdisplay91/hermes91/malformed/tampered-report/rpg-2-star-ocean-the-second_muxiu_display-contract-report_v01_20261024-083014-7c4a91d2.json",
+        "failures": [
+          "output.file-sha-declared",
+          "output.actual-raw-rgba",
+          "pixels.exact-integer-replication"
+        ]
+      }
+    },
+    {
+      "id": "real-display.unchanged",
+      "ok": true,
+      "detail": "b1c35d8367941d0cf90d6484b990dd7a92e53c8a05cf80c703dfa1aab84c0a08"
+    }
+  ],
+  "status": "FAIL"
+}

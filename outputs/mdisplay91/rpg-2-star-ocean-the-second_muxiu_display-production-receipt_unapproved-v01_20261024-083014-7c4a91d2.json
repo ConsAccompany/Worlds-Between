@@ -1,0 +1,594 @@
+{
+  "schema": "worlds-between/character-display-production-receipt/v1",
+  "task": "content.char.muxiu.display",
+  "title": "Muxiu in-game display image (UNAPPROVED)",
+  "status": "produced-and-shown-ui; commit pending coordinator; art unapproved",
+  "run_id": "20261024-083014-7c4a91d2",
+  "base_revision": "aff980c1eb77d547e24af5aa82523300e17e0d5c",
+  "recorded_at_utc": "2026-10-24T08:34:44Z",
+  "hash_normalization": "none; all SHA-256 values are raw file bytes unless a field says raw RGBA. Working text is LF and core.autocrlf is unset. Display PNG/JSON, UI scene and UI script are pinned `-text -eol`; the tools and QA note are LF but not scoped-pinned. The producer did not stage or commit; the coordinator must re-hash the staged blobs.",
+  "producer": "DeepSeek via authorized adapter; sole development writer for this bounded task",
+  "coordinator": "Hermes (audited transition/integration pending)",
+  "governance": {
+    "read": [
+      "CLAUDE.md",
+      "HERMES_START_HERE.md",
+      "AGENTS.md",
+      "docs/workflow.md",
+      "canonical ledger",
+      "Bible character-06",
+      "operating registry",
+      "Sea of Stars character style contract",
+      "Lin Que/Jiang Lan display closeouts and pipeline"
+    ],
+    "not_changed": [
+      "outputs/*_production-completion_task-ledger_*.json",
+      "outputs/*_game-bible_state_*.json",
+      "docs/coordination/*_workflow-operating_registry_*.json",
+      "Git index",
+      "commits",
+      "pushes",
+      "scores",
+      "party/exploration/battle defaults",
+      "canon"
+    ],
+    "pre_existing_dirty_preserved": true
+  },
+  "deliverable": {
+    "kind": "standalone opt-in bilingual character display preview",
+    "display_image_is": "exact integer 2x nearest replication of the committed native south static",
+    "source_is_authoritative": true,
+    "new_concept_or_repaint": false,
+    "ordinary_gameplay_wiring": false,
+    "party_or_default_change": false,
+    "ui": {
+      "scene": "game/scenes/mdisplay91/rpg-2-star-ocean-the-second_muxiu_display-preview_standalone-v01_20261024-083014-7c4a91d2.tscn",
+      "script": "game/scripts/mdisplay91/rpg-2-star-ocean-the-second_muxiu_display-preview_standalone-v01_20261024-083014-7c4a91d2.gd",
+      "frame": "180x250 at (16,56)",
+      "image_rect": "160x224 at (26,69)",
+      "filter": "nearest",
+      "stretch": "keep-aspect-centered",
+      "stage": "static south source at 0.5 display scale",
+      "languages": [
+        "en",
+        "zh"
+      ],
+      "fallback": "localized missing-portrait label with static source still bound"
+    }
+  },
+  "source_pins": [
+    {
+      "path": "game/assets/characters/muxiu-native-v01/south/rpg-2-star-ocean-the-second_muxiu_south-static_unapproved-v01_20261024-071500-ca23fad5.png",
+      "sha256": "e14d5c50890d7fcd0c75eb362d2b08fd1d4ac02c9c33e04fc4861b5a7d7a26fe",
+      "bytes": 1970,
+      "kind": "native-south-static-source",
+      "width": 80,
+      "height": 112
+    },
+    {
+      "path": "game/assets/characters/muxiu-native-v01/south/rpg-2-star-ocean-the-second_muxiu_south-manifest_unapproved-v01_20261024-071500-dd478113.json",
+      "sha256": "24c751575fe02a4857628dbfb8b379cd1d42344167062ae8ddbb033024e114de",
+      "bytes": 5360,
+      "kind": "native-south-source-manifest"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "game/assets/portraits/mdisplay91/rpg-2-star-ocean-the-second_muxiu_display-portrait_v01_20261024-083014-7c4a91d2.png",
+      "sha256": "b1c35d8367941d0cf90d6484b990dd7a92e53c8a05cf80c703dfa1aab84c0a08",
+      "bytes": 2482,
+      "width": 160,
+      "height": 224,
+      "kind": "display-image",
+      "status": "UNAPPROVED"
+    },
+    {
+      "path": "game/assets/portraits/mdisplay91/rpg-2-star-ocean-the-second_muxiu_display-portrait-manifest_v01_20261024-083014-7c4a91d2.json",
+      "sha256": "0e39b5cace8bfd29cc490bb7ef489707d33c775257643ee44fdc35ee3407d656",
+      "bytes": 2589,
+      "kind": "display-manifest"
+    },
+    {
+      "path": "game/scenes/mdisplay91/rpg-2-star-ocean-the-second_muxiu_display-preview_standalone-v01_20261024-083014-7c4a91d2.tscn",
+      "sha256": "8223b4375de14b2686419f0eca570bd65c31db2b139a31acb420bd71744b86a3",
+      "bytes": 346,
+      "kind": "ui-scene"
+    },
+    {
+      "path": "game/scripts/mdisplay91/rpg-2-star-ocean-the-second_muxiu_display-preview_standalone-v01_20261024-083014-7c4a91d2.gd",
+      "sha256": "a15451b39a39581b134a5d7108867f498bec2c5da4f1fde2eb928a66317708a2",
+      "bytes": 5614,
+      "kind": "ui-script"
+    },
+    {
+      "path": "game/scripts/mdisplay91/rpg-2-star-ocean-the-second_muxiu_display-preview_standalone-v01_20261024-083014-7c4a91d2.gd.uid",
+      "sha256": "bec758e32f44111e5407b07d9723d7f19292aa728253a42b71560f6f4e78ab03",
+      "bytes": 20,
+      "kind": "godot-uid"
+    },
+    {
+      "path": "docs/qa/rpg-2-star-ocean-the-second_muxiu_display-production-qa_unapproved-v01_20261024-083014-7c4a91d2.md",
+      "sha256": "fef8bd206344df82db49e1818c8b723827b63de155fe90c27087c7869594259e",
+      "bytes": 12029,
+      "kind": "qa-note"
+    },
+    {
+      "path": "game/assets/portraits/mdisplay91/.gitattributes",
+      "sha256": "d97b9103c63a37c99d943decbf88b1fb908f5ed3dc6e8bc785233409dacf1968",
+      "bytes": 181,
+      "kind": "attributes"
+    },
+    {
+      "path": "outputs/mdisplay91/.gitattributes",
+      "sha256": "7f1284ff40c6f71b8ba4addf1b2404d4a146c6169c66a1cbfe23ffb2444613dc",
+      "bytes": 103,
+      "kind": "attributes"
+    },
+    {
+      "path": "tools/rpg-2-star-ocean-the-second_muxiu_display-build_v01_20261024-083014-7c4a91d2.py",
+      "sha256": "fe48d315243d2f28845bc2b42ce5c1a462c5e216bcab4eadfe174d63ab154c58",
+      "bytes": 7322,
+      "kind": "tool"
+    },
+    {
+      "path": "tools/rpg-2-star-ocean-the-second_muxiu_display-contract-check_v01_20261024-083014-7c4a91d2.py",
+      "sha256": "9dce2e0f7fe67df8ff93d5be81d00fc75948e9c8881e3eb1f88b83dfe52a672f",
+      "bytes": 12277,
+      "kind": "tool"
+    },
+    {
+      "path": "tools/rpg-2-star-ocean-the-second_muxiu_display-malformed-check_v01_20261024-083014-7c4a91d2.py",
+      "sha256": "4dd1dfad06bd975631de5e03cc4de7d12ad01ce21e347bac24ed69c6350cb9a5",
+      "bytes": 5219,
+      "kind": "tool"
+    },
+    {
+      "path": "tools/rpg-2-star-ocean-the-second_muxiu_display-preview-probe_v01_20261024-083014-7c4a91d2.gd",
+      "sha256": "5d9dc720d0f7b0d69bb32c902325cd90465f42e0cc6bbe806fcae93b0b05d865",
+      "bytes": 11321,
+      "kind": "tool"
+    },
+    {
+      "path": "outputs/mdisplay91/.gitignore",
+      "sha256": "ee94387bdc6a9ffc51aabb891411687b102eaca2b3a61c2e0a3ea6bdfb5b8766",
+      "bytes": 173,
+      "kind": "ignore-transient"
+    },
+    {
+      "path": "game/scenes/mdisplay91/.gitattributes",
+      "sha256": "f6741e4b4b7fbb0f0287ba779c4d559724529b8af03f063d7bd1f58153d0fb0f",
+      "bytes": 83,
+      "kind": "attributes"
+    },
+    {
+      "path": "game/scripts/mdisplay91/.gitattributes",
+      "sha256": "f3fcd20eee94970b6c03cc97746ed9b9790a38290d65345e305d455dbb33d8b7",
+      "bytes": 84,
+      "kind": "attributes"
+    }
+  ],
+  "captures": [
+    {
+      "path": "outputs/mdisplay91/hermes91/cap-en/rpg-2-star-ocean-the-second_muxiu_display-preview-capture_standalone-en-south-static_20261024-083014-7c4a91d2.png",
+      "sha256": "625d8b19ea34b3e5e8510c0d0b344f090ed9824521767dc698eb143d3aa849a0",
+      "width": 640,
+      "height": 360,
+      "lang": "en",
+      "variant": "standalone-south-static"
+    },
+    {
+      "path": "outputs/mdisplay91/hermes91/cap-en-failed1/rpg-2-star-ocean-the-second_muxiu_display-preview-capture_standalone-en-south-static_20261024-083014-7c4a91d2.png",
+      "sha256": "625d8b19ea34b3e5e8510c0d0b344f090ed9824521767dc698eb143d3aa849a0",
+      "width": 640,
+      "height": 360,
+      "lang": "en",
+      "variant": "standalone-south-static-failed1"
+    },
+    {
+      "path": "outputs/mdisplay91/hermes91/cap-en/rpg-2-star-ocean-the-second_muxiu_display-preview-capture_fallback-missing-portrait-en_20261024-083014-7c4a91d2.png",
+      "sha256": "50ba2a2c00e20e60cb04df195411c46029bf9e3607310096aef704810c1aba59",
+      "width": 640,
+      "height": 360,
+      "lang": "en",
+      "variant": "fallback-missing-portrait"
+    },
+    {
+      "path": "outputs/mdisplay91/hermes91/cap-zh/rpg-2-star-ocean-the-second_muxiu_display-preview-capture_standalone-zh-south-static_20261024-083014-7c4a91d2.png",
+      "sha256": "5ec877bbd8f6d46f05564cdfdfe753b9420badcd624de55f5d8e31d99026120f",
+      "width": 640,
+      "height": 360,
+      "lang": "zh",
+      "variant": "standalone-south-static"
+    },
+    {
+      "path": "outputs/mdisplay91/hermes91/cap-zh/rpg-2-star-ocean-the-second_muxiu_display-preview-capture_fallback-missing-portrait-zh_20261024-083014-7c4a91d2.png",
+      "sha256": "465761f1a40803efe9d8cd7129d462df89bda24c4e5e504bfb5c3354238c8062",
+      "width": 640,
+      "height": 360,
+      "lang": "zh",
+      "variant": "fallback-missing-portrait"
+    }
+  ],
+  "checks": [
+    {
+      "name": "build-deterministic-check",
+      "command": [
+        "/home/kel/projects/worlds-between/tooling/venv/bin/python",
+        "-X",
+        "utf8",
+        "-I",
+        "tools/rpg-2-star-ocean-the-second_muxiu_display-build_v01_20261024-083014-7c4a91d2.py",
+        "check"
+      ],
+      "exit": 0,
+      "pass": true,
+      "marker": "MDISPLAY91_BUILD OK c5de9401f9f10901061082e342bd1130dddd22e0c8f453f66aae0fcd165663b0",
+      "log": "outputs/mdisplay91/hermes91-final/build-check.log"
+    },
+    {
+      "name": "contract",
+      "command": [
+        "/home/kel/projects/worlds-between/tooling/venv/bin/python",
+        "-X",
+        "utf8",
+        "-I",
+        "tools/rpg-2-star-ocean-the-second_muxiu_display-contract-check_v01_20261024-083014-7c4a91d2.py",
+        "--root",
+        ".",
+        "--manifest",
+        "game/assets/portraits/mdisplay91/rpg-2-star-ocean-the-second_muxiu_display-portrait-manifest_v01_20261024-083014-7c4a91d2.json",
+        "--out",
+        "outputs/mdisplay91/hermes91-final/contract"
+      ],
+      "exit": 0,
+      "pass": true,
+      "status": "PASS",
+      "checks": 36,
+      "negativeFixtures": 3,
+      "report": "outputs/mdisplay91/hermes91-final/contract/rpg-2-star-ocean-the-second_muxiu_display-contract-report_v01_20261024-083014-7c4a91d2.json",
+      "log": "outputs/mdisplay91/hermes91-final/contract.log"
+    },
+    {
+      "name": "malformed",
+      "command": [
+        "/home/kel/projects/worlds-between/tooling/venv/bin/python",
+        "-X",
+        "utf8",
+        "-I",
+        "tools/rpg-2-star-ocean-the-second_muxiu_display-malformed-check_v01_20261024-083014-7c4a91d2.py",
+        "--out",
+        "outputs/mdisplay91/hermes91-final/malformed"
+      ],
+      "exit": 0,
+      "pass": true,
+      "cases": 11,
+      "status": "PASS",
+      "report": "outputs/mdisplay91/hermes91-final/malformed/rpg-2-star-ocean-the-second_muxiu_display-malformed-report_v01_20261024-083014-7c4a91d2.json",
+      "log": "outputs/mdisplay91/hermes91-final/malformed.log"
+    },
+    {
+      "name": "import-attempt1",
+      "command": [
+        "/home/kel/projects/worlds-between/tooling/venv/bin/python",
+        "-X",
+        "utf8",
+        "/home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_godot_checked-runner_v01_20261018-203400-f74ac6d1.py",
+        "--timeout",
+        "180",
+        "--log",
+        "outputs/mdisplay91/hermes91/import.runner.log",
+        "--",
+        "/home/kel/projects/worlds-between/tooling/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "--headless",
+        "--audio-driver",
+        "Dummy",
+        "--path",
+        "game",
+        "--import"
+      ],
+      "exit": 1,
+      "pass": false,
+      "reason": "checked-runner diagnostic: ERROR: Cannot save file '/home/kel/.config/godot/editor_settings-4.7.tres'",
+      "log": "outputs/mdisplay91/hermes91/import.runner.log"
+    },
+    {
+      "name": "import-retry-fresh-xdg",
+      "command": [
+        "/home/kel/projects/worlds-between/tooling/venv/bin/python",
+        "-X",
+        "utf8",
+        "/home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_godot_checked-runner_v01_20261018-203400-f74ac6d1.py",
+        "--timeout",
+        "180",
+        "--log",
+        "outputs/mdisplay91/hermes91/import2.runner.log",
+        "--",
+        "/home/kel/projects/worlds-between/tooling/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "--headless",
+        "--audio-driver",
+        "Dummy",
+        "--path",
+        "game",
+        "--import"
+      ],
+      "exit": 0,
+      "pass": true,
+      "marker": "CHECKED_RUN PASS",
+      "env": "XDG_CONFIG_HOME/XDG_DATA_HOME/XDG_CACHE_HOME under outputs/mdisplay91/hermes91/godot-*",
+      "log": "outputs/mdisplay91/hermes91/import2.runner.log"
+    },
+    {
+      "name": "probe-en-attempt1",
+      "command": [
+        "xvfb-run",
+        "-a",
+        "-s",
+        "-screen 0 640x360x24",
+        "/home/kel/projects/worlds-between/tooling/venv/bin/python",
+        "-X",
+        "utf8",
+        "/home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_godot_checked-runner_v01_20261018-203400-f74ac6d1.py",
+        "--timeout",
+        "90",
+        "--expect",
+        "MDISPLAY91_PROBE_OK",
+        "--expect",
+        "CAPTURES true",
+        "--log",
+        "outputs/mdisplay91/hermes91/probe-en.runner.log",
+        "--",
+        "/home/kel/projects/worlds-between/tooling/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "--audio-driver",
+        "Dummy",
+        "--rendering-driver",
+        "opengl3",
+        "--resolution",
+        "640x360",
+        "--path",
+        "game",
+        "--script",
+        "/home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_muxiu_display-preview-probe_v01_20261024-083014-7c4a91d2.gd",
+        "--",
+        "--lang=en",
+        "--out=/home/kel/projects/worlds-between/repo/outputs/mdisplay91/hermes91/cap-en"
+      ],
+      "exit": 1,
+      "pass": false,
+      "checks": 53,
+      "fails": [
+        "portrait pixels == display raw hash",
+        "display pixels are exact 2x replication of the native south static"
+      ],
+      "reason": "Godot importer sanitised RGB under fully transparent texels; alpha/visible pixels unchanged",
+      "log": "outputs/mdisplay91/hermes91/probe-en-failed1.runner.log",
+      "retained_log": "outputs/mdisplay91/hermes91/probe-en-failed1.runner.log",
+      "retained_captures": "outputs/mdisplay91/hermes91/cap-en-failed1/",
+      "note": "Original paths were renamed with a -failed1 suffix so the passing rerun could use fresh files; the command text is the exact original invocation."
+    },
+    {
+      "name": "probe-en",
+      "command": [
+        "xvfb-run",
+        "-a",
+        "-s",
+        "-screen 0 640x360x24",
+        "/home/kel/projects/worlds-between/tooling/venv/bin/python",
+        "-X",
+        "utf8",
+        "/home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_godot_checked-runner_v01_20261018-203400-f74ac6d1.py",
+        "--timeout",
+        "90",
+        "--expect",
+        "MDISPLAY91_PROBE_OK",
+        "--expect",
+        "CAPTURES true",
+        "--log",
+        "outputs/mdisplay91/hermes91/probe-en.runner.log",
+        "--",
+        "/home/kel/projects/worlds-between/tooling/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "--audio-driver",
+        "Dummy",
+        "--rendering-driver",
+        "opengl3",
+        "--resolution",
+        "640x360",
+        "--path",
+        "game",
+        "--script",
+        "/home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_muxiu_display-preview-probe_v01_20261024-083014-7c4a91d2.gd",
+        "--",
+        "--lang=en",
+        "--out=/home/kel/projects/worlds-between/repo/outputs/mdisplay91/hermes91/cap-en"
+      ],
+      "exit": 0,
+      "pass": true,
+      "checks": 55,
+      "fails": 0,
+      "marker": "MDISPLAY91_PROBE_OK",
+      "captures": 2,
+      "log": "outputs/mdisplay91/hermes91/probe-en.runner.log"
+    },
+    {
+      "name": "probe-zh",
+      "command": [
+        "xvfb-run",
+        "-a",
+        "-s",
+        "-screen 0 640x360x24",
+        "/home/kel/projects/worlds-between/tooling/venv/bin/python",
+        "-X",
+        "utf8",
+        "/home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_godot_checked-runner_v01_20261018-203400-f74ac6d1.py",
+        "--timeout",
+        "90",
+        "--expect",
+        "MDISPLAY91_PROBE_OK",
+        "--expect",
+        "CAPTURES true",
+        "--log",
+        "outputs/mdisplay91/hermes91/probe-zh.runner.log",
+        "--",
+        "/home/kel/projects/worlds-between/tooling/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "--audio-driver",
+        "Dummy",
+        "--rendering-driver",
+        "opengl3",
+        "--resolution",
+        "640x360",
+        "--path",
+        "game",
+        "--script",
+        "/home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_muxiu_display-preview-probe_v01_20261024-083014-7c4a91d2.gd",
+        "--",
+        "--lang=zh",
+        "--out=/home/kel/projects/worlds-between/repo/outputs/mdisplay91/hermes91/cap-zh"
+      ],
+      "exit": 0,
+      "pass": true,
+      "checks": 55,
+      "fails": 0,
+      "marker": "MDISPLAY91_PROBE_OK",
+      "captures": 2,
+      "log": "outputs/mdisplay91/hermes91/probe-zh.runner.log"
+    },
+    {
+      "name": "m1-smoke",
+      "command": [
+        "/home/kel/projects/worlds-between/tooling/venv/bin/python",
+        "-X",
+        "utf8",
+        "/home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_godot_checked-runner_v01_20261018-203400-f74ac6d1.py",
+        "--timeout",
+        "60",
+        "--expect",
+        "M1_SMOKE_OK",
+        "--log",
+        "outputs/mdisplay91/hermes91/m1-smoke.runner.log",
+        "--",
+        "/home/kel/projects/worlds-between/tooling/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "--headless",
+        "--audio-driver",
+        "Dummy",
+        "--path",
+        "game",
+        "--script",
+        "res://tests/m1_smoke.gd"
+      ],
+      "exit": 0,
+      "pass": true,
+      "marker": "M1_SMOKE_OK",
+      "log": "outputs/mdisplay91/hermes91/m1-smoke.runner.log"
+    }
+  ],
+  "failed_attempts": [
+    {
+      "id": "xvfb-tmpdir",
+      "command": "xvfb-run -a ... before TMPDIR override",
+      "exit": null,
+      "pass": false,
+      "error": "mktemp: failed to create directory via template '/home/kel/.hermes/cache/scratch/xvfb-run.XXXXXX': Permission denied",
+      "retained": false,
+      "note": "retried with TMPDIR under outputs/mdisplay91/hermes91/tmp"
+    },
+    {
+      "id": "malformed-attempt1",
+      "command": [
+        "/home/kel/projects/worlds-between/tooling/venv/bin/python",
+        "-X",
+        "utf8",
+        "-I",
+        "tools/rpg-2-star-ocean-the-second_muxiu_display-malformed-check_v01_20261024-083014-7c4a91d2.py",
+        "--out",
+        "outputs/mdisplay91/hermes91/malformed"
+      ],
+      "exit": 1,
+      "pass": false,
+      "reason": "one failure linque-manifest.refused: KeyError 'transform' from a fixture mutator on the foreign manifest",
+      "retained": "outputs/mdisplay91/hermes91/malformed-failed1/",
+      "note": "Original --out was outputs/mdisplay91/hermes91/malformed, renamed with a -failed1 suffix after failure."
+    }
+  ],
+  "visual_observation": {
+    "performed_by": "Hermes via native image input",
+    "viewed": [
+      "committed display PNG",
+      "EN standalone 640x360 capture",
+      "ZH standalone 640x360 capture"
+    ],
+    "observed": "Muxiu head, moss-green cape, screen-left braid, cream whistle and wrist bracelet visible; identity text clear of portrait/stage; Art pending / 美术待定 explicit; stage shows the same south static at 0.5.",
+    "not_claimed": "artistic acceptance, motion quality, full-sprite readiness, canon approval"
+  },
+  "limits": [
+    "Godot importer sanitises RGB under fully transparent texels (fix_alpha_border); committed PNG raw bytes are exact and all visible (alpha>0) UI pixels match exactly. The .import sidecar is engine-generated and not committed.",
+    "Static south only; no idle/walk/stop, motion, continuous gameplay, runtime/default/party/exploration/battle/save/story change.",
+    "One 640x360 opt-in display scene; not a full character-select or campaign UI; not linked to ordinary gameplay.",
+    "Existing source remains UNAPPROVED; creator artistic acceptance and both human playtests remain open; static-south credit is not re-awarded.",
+    "Producer commit is pending coordinator integration; produced and shown-in-UI are evidenced, committed is not claimed."
+  ],
+  "progress": {
+    "starting": {
+      "production_pct": 62.0,
+      "inspection_pct": 21.6,
+      "creator_approval_pct": 7.8
+    },
+    "producer_scoring_change": 0.0,
+    "final": "coordinator-owned audited transition pending",
+    "eligible_task": "content.char.muxiu.display (2 points, existing criterion only)"
+  },
+  "changed_paths": [
+    "game/assets/portraits/mdisplay91/rpg-2-star-ocean-the-second_muxiu_display-portrait_v01_20261024-083014-7c4a91d2.png",
+    "game/assets/portraits/mdisplay91/rpg-2-star-ocean-the-second_muxiu_display-portrait-manifest_v01_20261024-083014-7c4a91d2.json",
+    "game/scenes/mdisplay91/rpg-2-star-ocean-the-second_muxiu_display-preview_standalone-v01_20261024-083014-7c4a91d2.tscn",
+    "game/scripts/mdisplay91/rpg-2-star-ocean-the-second_muxiu_display-preview_standalone-v01_20261024-083014-7c4a91d2.gd",
+    "game/scripts/mdisplay91/rpg-2-star-ocean-the-second_muxiu_display-preview_standalone-v01_20261024-083014-7c4a91d2.gd.uid",
+    "docs/qa/rpg-2-star-ocean-the-second_muxiu_display-production-qa_unapproved-v01_20261024-083014-7c4a91d2.md",
+    "game/assets/portraits/mdisplay91/.gitattributes",
+    "outputs/mdisplay91/.gitattributes",
+    "tools/rpg-2-star-ocean-the-second_muxiu_display-build_v01_20261024-083014-7c4a91d2.py",
+    "tools/rpg-2-star-ocean-the-second_muxiu_display-contract-check_v01_20261024-083014-7c4a91d2.py",
+    "tools/rpg-2-star-ocean-the-second_muxiu_display-malformed-check_v01_20261024-083014-7c4a91d2.py",
+    "tools/rpg-2-star-ocean-the-second_muxiu_display-preview-probe_v01_20261024-083014-7c4a91d2.gd",
+    "outputs/mdisplay91/hermes91-final/build-check.log",
+    "outputs/mdisplay91/hermes91-final/contract/rpg-2-star-ocean-the-second_muxiu_display-contract-report_v01_20261024-083014-7c4a91d2.json",
+    "outputs/mdisplay91/hermes91-final/contract.log",
+    "outputs/mdisplay91/hermes91-final/malformed/rpg-2-star-ocean-the-second_muxiu_display-malformed-report_v01_20261024-083014-7c4a91d2.json",
+    "outputs/mdisplay91/hermes91-final/malformed.log",
+    "outputs/mdisplay91/hermes91/import.runner.log",
+    "outputs/mdisplay91/hermes91/import2.runner.log",
+    "outputs/mdisplay91/hermes91/probe-en-failed1.runner.log",
+    "outputs/mdisplay91/hermes91/probe-en.runner.log",
+    "outputs/mdisplay91/hermes91/probe-zh.runner.log",
+    "outputs/mdisplay91/hermes91/m1-smoke.runner.log",
+    "outputs/mdisplay91/hermes91/contract/",
+    "outputs/mdisplay91/hermes91/malformed/",
+    "outputs/mdisplay91/hermes91/malformed-failed1/",
+    "outputs/mdisplay91/hermes91/cap-en/",
+    "outputs/mdisplay91/hermes91/cap-en-failed1/",
+    "outputs/mdisplay91/hermes91/cap-zh/",
+    "outputs/mdisplay91/rpg-2-star-ocean-the-second_muxiu_display-production-receipt_unapproved-v01_20261024-083014-7c4a91d2.json",
+    "outputs/mdisplay91/.gitignore",
+    "game/scenes/mdisplay91/.gitattributes",
+    "game/scripts/mdisplay91/.gitattributes"
+  ],
+  "reproduction": {
+    "build_check": "../tooling/venv/bin/python -X utf8 -I tools/rpg-2-star-ocean-the-second_muxiu_display-build_v01_20261024-083014-7c4a91d2.py check",
+    "contract": "../tooling/venv/bin/python -X utf8 -I tools/rpg-2-star-ocean-the-second_muxiu_display-contract-check_v01_20261024-083014-7c4a91d2.py --root . --manifest game/assets/portraits/mdisplay91/rpg-2-star-ocean-the-second_muxiu_display-portrait-manifest_v01_20261024-083014-7c4a91d2.json --out <new scoped output>",
+    "malformed": "../tooling/venv/bin/python -X utf8 -I tools/rpg-2-star-ocean-the-second_muxiu_display-malformed-check_v01_20261024-083014-7c4a91d2.py --out <new scoped output>",
+    "probe": "checked runner, xvfb-run, --audio-driver Dummy --rendering-driver opengl3 --resolution 640x360 --path game --script <tools probe> -- --lang=en|zh --out=<fresh capture dir>; require MDISPLAY91_PROBE_OK and CAPTURES true with no diagnostics"
+  },
+  "transient_generated_not_for_integration": [
+    "outputs/mdisplay91/hermes91/godot-config/",
+    "outputs/mdisplay91/hermes91/godot-data/",
+    "outputs/mdisplay91/hermes91/godot-cache/",
+    "outputs/mdisplay91/hermes91/godot-config-en/",
+    "outputs/mdisplay91/hermes91/godot-data-en/",
+    "outputs/mdisplay91/hermes91/godot-cache-en/",
+    "outputs/mdisplay91/hermes91/godot-config-zh/",
+    "outputs/mdisplay91/hermes91/godot-data-zh/",
+    "outputs/mdisplay91/hermes91/godot-cache-zh/",
+    "outputs/mdisplay91/hermes91/tmp/",
+    "game/assets/portraits/mdisplay91/rpg-2-star-ocean-the-second_muxiu_display-portrait_v01_20261024-083014-7c4a91d2.png.import",
+    "game/.godot/"
+  ],
+  "staged_bytes_status": "not staged by producer (index untouched); verify staged blobs against these raw hashes during integration"
+}
