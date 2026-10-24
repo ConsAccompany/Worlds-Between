@@ -1,0 +1,31 @@
+{
+  "checks": [
+    {
+      "check": "ORA layers exactly match neutral",
+      "passed": true
+    },
+    {
+      "check": "ORA merged exact",
+      "passed": true
+    },
+    {
+      "check": "ORA raw manifest hash",
+      "passed": true
+    },
+    {
+      "check": "All file-list raw pins match",
+      "passed": true
+    },
+    {
+      "check": "4 fit capture hashes and source pin",
+      "passed": true
+    },
+    {
+      "check": "PXO effective milliseconds = duration ticks *1000/fps; static600 idle700/200/400/200 walk+stop40",
+      "passed": true
+    }
+  ],
+  "retainedFailedProbe": "outputs/milo-sw01/hermes48-source/extra-checks.json",
+  "correction": "Initial coordinator probe wrongly treated PXO duration as seconds, and expected a700ms static hold. Inspected existing make_pxo serializer lines624-637 and600ms static emission. Corrected units, not source or production thresholds. No asset changed.",
+  "passed": true
+}

@@ -1,0 +1,31 @@
+{
+  "checks": [
+    {
+      "check": "ORA layers exactly match neutral",
+      "passed": true
+    },
+    {
+      "check": "ORA merged exact",
+      "passed": true
+    },
+    {
+      "check": "ORA raw manifest hash",
+      "passed": true
+    },
+    {
+      "check": "PXO frame durations match static+idle+walk+stop contract",
+      "passed": false
+    },
+    {
+      "check": "All file-list raw pins match",
+      "passed": true
+    },
+    {
+      "check": "4 fit capture hashes and source pin",
+      "passed": true
+    }
+  ],
+  "passed": false,
+  "normalization": "All pins raw SHA-256; source manifest text_lf_v1 pins explicitly normalize CRLF/CR to LF",
+  "sourceRevision": "23b8d920f2eb172f8935011ebeb13b9a8b0d2f06"
+}

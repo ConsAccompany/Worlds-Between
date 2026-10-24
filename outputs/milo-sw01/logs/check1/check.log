@@ -1,0 +1,34 @@
+cmd: ['/home/kel/projects/worlds-between/tooling/venv/bin/python', '-X', 'utf8', '-I', 'tools/rpg-2-star-ocean-the-second_milo_walk-south-source-author_unapproved-msw01-v01_20261024-044311-5e7a0c19.py', 'check']
+rc: 1
+
+REBUILD 0/89  DETERMINISTIC True
+SOURCE 17/17
+{"walk_max_world_slip_src_at_40ms_boundaries": 11.2, "walk_max_world_slip_logical_at_40ms_boundaries": 5.6, "flight_phases": [4, 5, 10, 11], "stop_bridge_grounded_slip_src_max": 0.0}
+RESULT FAIL ["missing outputs/milo-sw01/png/rpg-2-star-ocean-the-second_milo_walk-south-static_unapproved-msw01-v01_20261024-044311-bb2eba39.png", "missing outputs/milo-sw01/png/rpg-2-star-ocean-the-second_milo_walk-south-idle-f00_unapproved-msw01-v01_20261024-044311-8657cf3a.png", "missing outputs/milo-sw01/png/rpg-2-star-ocean-the-second_milo_walk-south-idle-f01_unapproved-msw01-v01_20261024-044311-e1cc70ee.png", "missing outputs/milo-sw01/png/rpg-2-star-ocean-the-second_milo_walk-south-idle-f02_unapproved-msw01-v01_20261024-044311-8e2a7b33.png", "missing outputs/milo-sw01/png/rpg-2-star-ocean-the-second_milo_walk-south-idle-f03_unapproved-msw01-v01_20261024-044311-98918c5e.png", "missing outputs/milo-sw01/png/rpg-2-star-ocean-the-second_milo_walk-south-walk-p00_unapproved-msw01-v01_20261024-044311-7e7e9585.png", "missing outputs/milo-sw01/png/rpg-2-star-ocean-the-second_milo_walk-south-walk-p01_unapproved-msw01-v01_20261024-044311-ae512792.png", "missing outputs/milo-sw01/png/rpg-2-star-ocean-the-second_milo_walk-south-walk-p02_unapproved-msw01-v01_20261024-044311-d17c37e2.png", "missing outputs/milo-sw01/png/rpg-2-star-ocean-the-second_milo_walk-south-walk-p03_unapproved-msw01-v01_20261024-044311-2397aa0c.png", "missing outputs/milo-sw01/png/rpg-2-star-ocean-the-second_milo_walk-south-walk-p04_unapproved-msw01-v01_20261024-044311-f465f00d.png", "missing outputs/milo-sw01/png/rpg-2-star-ocean-the-second_milo_walk-south-walk-p05_unapproved-msw01-v01_20261024-044311-dbdd2af9.png", "missing outputs/milo-sw01/png/rpg-2-star-ocean-the-second_milo_walk-south-walk-p06_unapproved-msw01-v01_20261024-044311-02450a32.png"]
+Traceback (most recent call last):
+  File "/home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_milo_walk-south-source-author_unapproved-msw01-v01_20261024-044311-5e7a0c19.py", line 304, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/kel/projects/worlds-between/repo/tools/rpg-2-star-ocean-the-second_milo_walk-south-source-author_unapproved-msw01-v01_20261024-044311-5e7a0c19.py", line 299, in main
+    fh.write((json.dumps(res, indent=2) + "\n").encode())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/encoder.py", line 202, in encode
+    chunks = list(chunks)
+             ^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/encoder.py", line 432, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "/usr/lib/python3.12/json/encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "/usr/lib/python3.12/json/encoder.py", line 326, in _iterencode_list
+    yield from chunks
+  File "/usr/lib/python3.12/json/encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "/usr/lib/python3.12/json/encoder.py", line 439, in _iterencode
+    o = _default(o)
+        ^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type int64 is not JSON serializable

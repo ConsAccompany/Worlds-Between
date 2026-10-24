@@ -1,0 +1,120 @@
+{
+  "tool_sha256_text_lf_v1": "45e380a2d29899254d89c5d1bb34afdf1a3308d83d3de4ba02642271d5080e1a",
+  "rebuild": {
+    "checked": 89,
+    "ok": 89
+  },
+  "deterministic": true,
+  "neutral_pins_exact_before_after": true,
+  "source_checks": [
+    {
+      "check": "south all frames 80x112 binary alpha, clear border, Milo palette only",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "south static + idle f00 are the exact neutral PNG bytes",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "south counts idle 4 walk 12 stop bridge frames 24",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "south every bridge = [walk p, s1, s2, idle f00]",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "south idle frames distinct (>=3)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "south walk lower body differs across phases (>=8)",
+      "pass": true,
+      "detail": 12
+    },
+    {
+      "check": "south top row never above neutral (body never shifted up)",
+      "pass": true,
+      "detail": [
+        8,
+        9
+      ]
+    },
+    {
+      "check": "south ORA role layers recompose to neutral PNG",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "south PXO (Milo 11 roles + far-limbs + guides) cels recompose to every frame PNG",
+      "pass": true,
+      "detail": 41
+    },
+    {
+      "check": "south stop bridges: a grounded foot never moves (host stopped)",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "south each foot grounded 4 phases per cycle (p0-p3 lifted p4-p11)",
+      "pass": true,
+      "detail": [
+        4,
+        4
+      ]
+    },
+    {
+      "check": "identity: case (white + green cross, screen left) and green wristband (screen right) in every frame",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "identity: wristband stays on the arm (constant offset to right-arm top in every frame)",
+      "pass": true,
+      "detail": 0
+    },
+    {
+      "check": "runtime sprite set: schema/actor/south only/explicit durations/relative byte-equal PNG copies",
+      "pass": true,
+      "detail": 16
+    },
+    {
+      "check": "stop supplemental: actor, south only, 24 bridge frames, runtime_default false, byte-equal copies",
+      "pass": true,
+      "detail": 24
+    },
+    {
+      "check": "package-local registry lists ONLY milo -> this set",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "all written paths are under the assigned roots",
+      "pass": true,
+      "detail": ""
+    }
+  ],
+  "contacts": {
+    "walk_max_world_slip_src_at_40ms_boundaries": 11.2,
+    "walk_max_world_slip_logical_at_40ms_boundaries": 5.6,
+    "flight_phases": [
+      4,
+      5,
+      10,
+      11
+    ],
+    "stop_bridge_grounded_slip_src_max": 0.0
+  },
+  "residual_disclosed": "front in-place planted-foot world slip 11.2 src (5.6 logical) per 40 ms; not footlocked",
+  "not_run_here": [
+    "Pixelorama native export (independent checker)",
+    "Godot import/runtime",
+    "normal-speed movie"
+  ],
+  "fails": []
+}
