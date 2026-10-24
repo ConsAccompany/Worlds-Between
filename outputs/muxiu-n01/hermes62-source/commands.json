@@ -1,0 +1,68 @@
+[
+  {
+    "name": "author-check",
+    "cmd": [
+      "../tooling/venv/bin/python",
+      "-X",
+      "utf8",
+      "-I",
+      "tools/rpg-2-star-ocean-the-second_muxiu_north-static-author_unapproved-v01r2_20261024-080000-4e7d2c19.py",
+      "check"
+    ],
+    "exit": 0,
+    "log": "outputs/muxiu-n01/hermes62-source/author-check.log"
+  },
+  {
+    "name": "source-check",
+    "cmd": [
+      "../tooling/venv/bin/python",
+      "-X",
+      "utf8",
+      "-I",
+      "tools/rpg-2-star-ocean-the-second_muxiu_north-static-source-check_v01_20261024-080000-4e7d2c19.py",
+      "--root",
+      ".",
+      "--out",
+      "outputs/muxiu-n01/hermes62-source/proof"
+    ],
+    "exit": 0,
+    "log": "outputs/muxiu-n01/hermes62-source/source-check.log"
+  },
+  {
+    "name": "native-export",
+    "cmd": [
+      "python3",
+      "-I",
+      "outputs/muxiu-n01/rpg-2-star-ocean-the-second_muxiu_north-qa-orchestrate_v03_20261024-080000-4e7d2c19.py",
+      "pixelorama",
+      "hermes62-pxl"
+    ],
+    "exit": 0,
+    "log": "outputs/muxiu-n01/hermes62-source/native-export.log"
+  },
+  {
+    "name": "native-compare",
+    "cmd": [
+      "python3",
+      "-I",
+      "outputs/muxiu-n01/rpg-2-star-ocean-the-second_muxiu_north-qa-orchestrate_v03_20261024-080000-4e7d2c19.py",
+      "compare",
+      "hermes62-compare",
+      "hermes62-pxl"
+    ],
+    "exit": 0,
+    "log": "outputs/muxiu-n01/hermes62-source/native-compare.log"
+  },
+  {
+    "name": "fit",
+    "cmd": [
+      "python3",
+      "-I",
+      "outputs/muxiu-n01/rpg-2-star-ocean-the-second_muxiu_north-qa-orchestrate_v03_20261024-080000-4e7d2c19.py",
+      "fit",
+      "hermes62-fit"
+    ],
+    "exit": 0,
+    "log": "outputs/muxiu-n01/hermes62-source/fit.log"
+  }
+]
