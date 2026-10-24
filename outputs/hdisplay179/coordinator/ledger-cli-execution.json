@@ -1,0 +1,46 @@
+[
+  {
+    "args": [
+      "reassign",
+      "--task",
+      "content.char.heya.display",
+      "--owner",
+      "deepseek",
+      "--reason-en",
+      "Actual DeepSeek producer through authorized adapter after controller-confirmed Claude depletion; Hermes independently inspected and committed display/UI source 0434673a. No points/criterion/approval changes."
+    ],
+    "exit": 0,
+    "stdout": "Production completion / \u5236\u4f5c\u5b8c\u6210\u5ea6: 63.1%  (coding 111/111 pts = 100% x40, content 723/1881 pts = 38.4% x60)\nInspection performed: 44/204 pts = 21.6%  (technical 23/77, visual 21/126, content QA 0/1; waived 4 excluded)\nCreator approval: 19/244 pts = 7.8%   operations 2/2 tasks (no %)   release finalAccepted=false\n  claude   tasks 678 (ops 0) points 594/1796 ready 1 {\"done\":157,\"blocked\":4,\"todo\":517}\n  deepseek tasks 26 (ops 0) points 67/72 ready 0 {\"done\":24,\"todo\":2}\n  codex    tasks 226 (ops 2) points 185/291 ready 13 {\"done\":116,\"todo\":105,\"not_required\":4,\"blocked\":1}\n  hermes   tasks 14 (ops 0) points 32/37 ready 0 {\"done\":12,\"todo\":2}\n  creator  tasks 239 (ops 0) points 19/244 ready 82 {\"done\":19,\"todo\":220}\nReady queue: 96; needs revision before acceptance: 4   Legacy mixed estimate (separate metric): 44.2%\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "set",
+      "--task",
+      "content.char.heya.display",
+      "--status",
+      "done",
+      "--evidence",
+      "docs/qa/rpg-2-star-ocean-the-second_heya_display-coordinator-verdict_unapproved-v01_20261024-155300-h179c001.md",
+      "--evidence",
+      "outputs/hdisplay179/coordinator/source-commit-proof.json",
+      "--evidence",
+      "game/assets/portraits/hdisplay179/rpg-2-star-ocean-the-second_heya_display-portrait_v01_20261024-154240-h179d001.png",
+      "--evidence",
+      "outputs/hdisplay179/coordinator/preservation-verdict.json",
+      "--note-en",
+      "Display and opt-in bilingual UI committed 0434673a57258ef31826bd0a171e453b565b188a. Hermes independently passed44/44 contract,21/21 malformed,70/70 EN and ZH rendered UI, committed provenance pins/exact2x pixels and postcommit M1. Production-only: no default use/art approval; provider backup-before-edit and false preservation claims FAILED, five source states retrospectively recovered with transcript limits; initial failures retained."
+    ],
+    "exit": 0,
+    "stdout": "Production completion / \u5236\u4f5c\u5b8c\u6210\u5ea6: 63.1%  (coding 111/111 pts = 100% x40, content 725/1881 pts = 38.5% x60)\nInspection performed: 44/204 pts = 21.6%  (technical 23/77, visual 21/126, content QA 0/1; waived 4 excluded)\nCreator approval: 19/244 pts = 7.8%   operations 2/2 tasks (no %)   release finalAccepted=false\n  claude   tasks 678 (ops 0) points 594/1796 ready 1 {\"done\":157,\"blocked\":4,\"todo\":517}\n  deepseek tasks 26 (ops 0) points 69/72 ready 0 {\"done\":25,\"todo\":1}\n  codex    tasks 226 (ops 2) points 185/291 ready 13 {\"done\":116,\"todo\":105,\"not_required\":4,\"blocked\":1}\n  hermes   tasks 14 (ops 0) points 32/37 ready 0 {\"done\":12,\"todo\":2}\n  creator  tasks 239 (ops 0) points 19/244 ready 83 {\"done\":19,\"todo\":220}\nReady queue: 97; needs revision before acceptance: 4   Legacy mixed estimate (separate metric): 44.2%\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "check"
+    ],
+    "exit": 0,
+    "stdout": "Production completion / \u5236\u4f5c\u5b8c\u6210\u5ea6: 63.1%  (coding 111/111 pts = 100% x40, content 725/1881 pts = 38.5% x60)\nInspection performed: 44/204 pts = 21.6%  (technical 23/77, visual 21/126, content QA 0/1; waived 4 excluded)\nCreator approval: 19/244 pts = 7.8%   operations 2/2 tasks (no %)   release finalAccepted=false\n  claude   tasks 678 (ops 0) points 594/1796 ready 1 {\"done\":157,\"blocked\":4,\"todo\":517}\n  deepseek tasks 26 (ops 0) points 69/72 ready 0 {\"done\":25,\"todo\":1}\n  codex    tasks 226 (ops 2) points 185/291 ready 13 {\"done\":116,\"todo\":105,\"not_required\":4,\"blocked\":1}\n  hermes   tasks 14 (ops 0) points 32/37 ready 0 {\"done\":12,\"todo\":2}\n  creator  tasks 239 (ops 0) points 19/244 ready 83 {\"done\":19,\"todo\":220}\nReady queue: 97; needs revision before acceptance: 4   Legacy mixed estimate (separate metric): 44.2%\nCHECK OK 1183 tasks; production 63.1%; legacy 44.2% unchanged\n",
+    "stderr": ""
+  }
+]

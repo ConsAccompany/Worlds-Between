@@ -1,0 +1,96 @@
+{
+  "task": "content.char.heya.display",
+  "verdict": "production criterion met; preservation operational failure retained",
+  "source_commit": "0434673a57258ef31826bd0a171e453b565b188a",
+  "producer": "deepseek",
+  "independent_inspector": "hermes",
+  "recorded_at": "2026-10-24T15:54:53.771727+00:00",
+  "provider_finished": {
+    "outcome": "exited",
+    "classification": "success",
+    "scope_confirmed": true,
+    "exit": 0
+  },
+  "criterion_proof": {
+    "image_committed": true,
+    "shown_in_ui": "Explicit opt-in standalone game UI; English and Chinese rendered independently",
+    "normal_default_integration": false
+  },
+  "checks": {
+    "builder": "pass",
+    "contract": {
+      "passed": 44,
+      "total": 44,
+      "builtin_negative_fixtures_refused": 3
+    },
+    "malformed": {
+      "passed": 21,
+      "total": 21
+    },
+    "bilingual_render": {
+      "en": 70,
+      "zh": 70,
+      "fails": 0,
+      "matching_portrait_pixels": 10960
+    },
+    "pillow_independent_replication": "exact",
+    "committed_source_pins": 5,
+    "post_source_commit_M1": "pass"
+  },
+  "preservation": "FAILED provider backup-before-edit requirement; five source states reconstructed, two initial payloads truncated, original metadata/receipt versions unrecovered; false provider assertion explicitly superseded by preservation-verdict.json",
+  "meters": {
+    "production": {
+      "before": 63.1,
+      "after": 63.1,
+      "changePercentagePoints": 0
+    },
+    "inspection": {
+      "before": 21.6,
+      "after": 21.6,
+      "changePercentagePoints": 0
+    },
+    "approval": {
+      "before": 7.8,
+      "after": 7.8,
+      "changePercentagePoints": 0
+    }
+  },
+  "content_points": {
+    "before": 723,
+    "after": 725,
+    "change": 2
+  },
+  "unchanged": {
+    "inspection_percent": 21.6,
+    "approval_percent": 7.8,
+    "creator_art_approval": false,
+    "runtime_defaults": true,
+    "baseline": true,
+    "preexisting_staged_blobs": 153,
+    "unrelated_active_bible_record": true
+  },
+  "shared_tracking": "Canonical ledger updated by audited CLI and installed with hash-verified helper backups; Bible isolated CLI record merged only into history/new Heya display metadata; registry latest Heya record added with verified metadata-preserving backup. Shared files retain pre-existing dirty work and are intentionally not included in the scoped source/evidence commits. No hosted Site publication.",
+  "next_action": "Await separately assigned Heya runtime-default integration; human art approval remains separate. No new work started.",
+  "evidence": [
+    {
+      "path": "docs/qa/rpg-2-star-ocean-the-second_heya_display-coordinator-verdict_unapproved-v01_20261024-155300-h179c001.md",
+      "sha256": "1bbb2640b31bd4c6a4c3ece540a15d57f9ef14a1836125463a60673c44a79d2c"
+    },
+    {
+      "path": "/home/kel/projects/worlds-between/repo/outputs/hdisplay179/coordinator/preservation-verdict.json",
+      "sha256": "a8f01fcf46e363093b1fe84085edb16a3a2a6101c7504878a7e08d5e61ebffa0"
+    },
+    {
+      "path": "/home/kel/projects/worlds-between/repo/outputs/hdisplay179/coordinator/source-commit-proof.json",
+      "sha256": "30956afc214e403aca4381d8dcaee9a1cf626268a148214c9056729125ba5678"
+    },
+    {
+      "path": "/home/kel/projects/worlds-between/repo/outputs/hdisplay179/coordinator/progress-record.json",
+      "sha256": "ede05c5d71945be3daef9237dd0b6ceb4337de21a5d0808ecb7a61657bf997b6"
+    },
+    {
+      "path": "/home/kel/projects/worlds-between/repo/outputs/hdisplay179/coordinator/postcommit-m1.runner.log",
+      "sha256": "7f5c828437d97aa9f7e616c9603bbf017f9e7bcfac91d86e9a83ee172cffee2d"
+    }
+  ]
+}
