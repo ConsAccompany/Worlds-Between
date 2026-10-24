@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-24T04:37:10Z",
+  "updatedAt": "2026-10-24T04:52:07Z",
   "purpose": "Operating queue and worktree ownership; no progress points or account details",
   "workflow": "docs/workflow.md",
   "canonicalLedger": "outputs/rpg-2-star-ocean-the-second_production-completion_task-ledger_v01_20261018-140533-3de52073.json",
@@ -3182,6 +3182,26 @@
   },
   "currentQueue": {
     "primary": {
+      "id": "content.char.milo.walk-south",
+      "owner": "hermes",
+      "producer": "claude-via-authorized-provider-adapter",
+      "worktree": "hermes-vps",
+      "status": "done",
+      "taskIds": ["content.char.milo.walk-south"],
+      "doneWhen": "South walk or run cycle and stop committed with contact / slip checks",
+      "writeScope": "New south-only Milo animation source adapter, outputs/milo-sw01, opt-in supplemental data and source-bound QA. Preserve all existing static sources and west pause; no defaults, human gates or baseline changes.",
+      "authority": "Creator autonomous batch 48, 2026-10-24",
+      "providerJob": "af7905ff784041fa9cf1259782b9cf0e",
+      "sourceCommit": "8016d0df70a76f0242debc5550930872cecaa4f1",
+      "evidence": ["docs/qa/rpg-2-star-ocean-the-second_milo_walk-south-independent-closeout_unapproved-v01_20261024-045800-b48a0001.md"],
+      "meters": {
+        "production": {"before": 61.3, "after": 61.4, "changePercentagePoints": 0.1},
+        "inspection": {"before": 21.6, "after": 21.6, "changePercentagePoints": 0},
+        "approval": {"before": 7.8, "after": 7.8, "changePercentagePoints": 0}
+      },
+      "nextAction": "South source-production criterion closed with independent checks and post-integration M1 smoke. Retain 5.6 logical px/40ms in-place world slip, failed native application diagnostics, provider permission_denied receipt and GUI/runtime/human gates. No new task started; Milo west remains paused."
+    },
+    "priorEastPrimary": {
       "id": "content.char.milo.static-east",
       "owner": "hermes",
       "producer": "claude-via-authorized-provider-adapter",
