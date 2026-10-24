@@ -1,0 +1,145 @@
+{
+  "tool_sha256_text_lf_v1": "9f11b70d382c529cb9a3ebbecc9f8e246ba53b4e1dbae5df87e33257d0f2e20a",
+  "rebuild": {
+    "checked": 91,
+    "ok": 91
+  },
+  "deterministic": true,
+  "neutral_pins_exact_before_after": true,
+  "source_checks": [
+    {
+      "check": "east all frames 80x112 binary alpha, clear border, Heya palette only",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "east static + idle f00 are the exact neutral PNG bytes",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "east counts idle 4 walk 12 stop bridge frames 24",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "east every bridge = [walk p, s1, s2, idle f00]",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "east idle frames distinct (>=3)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "east walk lower body differs across phases (>=8)",
+      "pass": true,
+      "detail": 12
+    },
+    {
+      "check": "east no walk phase equals the neutral bitmap",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "east top row never above neutral (body never shifted up)",
+      "pass": true,
+      "detail": [
+        8,
+        9
+      ]
+    },
+    {
+      "check": "east ORA role layers recompose to neutral PNG",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "east PXO (Heya 13 roles + far-limbs + guides) cels recompose to every frame PNG",
+      "pass": true,
+      "detail": 41
+    },
+    {
+      "check": "east side planted foot world slip at 40 ms boundaries <= 1 source texel (rounding of 11.2)",
+      "pass": true,
+      "detail": {
+        "max_src": 0.8,
+        "60fps_excursion_src": 10.667
+      }
+    },
+    {
+      "check": "east each foot grounded 4 phases per cycle",
+      "pass": true,
+      "detail": [
+        4,
+        4
+      ]
+    },
+    {
+      "check": "east stop bridges: a grounded foot never moves (host stopped)",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "identity: low braid, grey-white scarf, dark-red bag, herb, ivory coat + pale apron in every frame",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "identity: braid stays on the head (constant offset to hair top in every frame)",
+      "pass": true,
+      "detail": 0
+    },
+    {
+      "check": "structural far limb: every walk/stop cel is one continuous darkened boot silhouette (8-connected, no string)",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "near boots cel excludes far-only columns (x < 37)",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "runtime sprite set: schema/actor/east only/explicit durations/relative byte-equal PNG copies",
+      "pass": true,
+      "detail": 16
+    },
+    {
+      "check": "stop supplemental: actor, east only, 24 bridge frames, runtime_default false, byte-equal copies",
+      "pass": true,
+      "detail": 24
+    },
+    {
+      "check": "package-local registry lists ONLY heya -> this set",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "all written paths are under the assigned roots",
+      "pass": true,
+      "detail": ""
+    }
+  ],
+  "contacts": {
+    "walk_max_world_slip_src_at_40ms_boundaries": 0.8,
+    "walk_max_world_slip_logical_at_40ms_boundaries": 0.4,
+    "walk_planted_foot_world_excursion_src_60fps_samples": 10.667,
+    "walk_planted_foot_world_excursion_logical_60fps_samples": 5.333,
+    "flight_phases": [
+      4,
+      5,
+      10,
+      11
+    ],
+    "stop_bridge_grounded_slip_src_max": 0.0
+  },
+  "residual_disclosed": "side planted-foot world slip is integer rounding of 11.2 src/40 ms at boundaries; between held frames the host moves continuously (60 fps excursion reported); not footlocked",
+  "not_run_here": [
+    "Pixelorama native export (independent checker)",
+    "Godot import/runtime",
+    "normal-speed movie"
+  ],
+  "fails": []
+}
