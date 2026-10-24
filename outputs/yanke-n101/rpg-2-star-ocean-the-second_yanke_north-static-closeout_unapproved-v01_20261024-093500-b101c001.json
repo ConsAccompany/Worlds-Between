@@ -1,0 +1,169 @@
+{
+  "canonical_task": "content.char.yanke.static-north",
+  "recordedAt": "2026-10-24T09:34:11.283995+00:00",
+  "sourceCommit": "ec5562d9e45c3acc550cf1488eb097c7448bdcac",
+  "producer": "deepseek",
+  "coordinator": "hermes",
+  "provider_job": "1b68dd913e8f478eb65f411ad2ab445a",
+  "task": {
+    "id": "content.char.yanke.static-north",
+    "type": "native-pixel",
+    "title": {
+      "zh": "岩柯 · 北向高密度静止帧",
+      "en": "Yanke · north high-density static"
+    },
+    "area": "characters",
+    "stage": "content",
+    "owner": "deepseek",
+    "status": "done",
+    "points": 2,
+    "doneCriterion": {
+      "zh": "北向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算",
+      "en": "north native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"
+    },
+    "dependsOn": [
+      "content.char.yanke.static-south"
+    ],
+    "evidence": [
+      "game/assets/characters/yanke-native-v01/north/rpg-2-star-ocean-the-second_yanke_north-edit_unapproved-v01_20261024-092500-1e3c80a0.pxo",
+      "game/assets/characters/yanke-native-v01/north/rpg-2-star-ocean-the-second_yanke_north-static_unapproved-v01_20261024-092500-1acf16c9.png",
+      "game/assets/characters/yanke-native-v01/north/rpg-2-star-ocean-the-second_yanke_north-edit_unapproved-v01_20261024-092500-f6a16389.ora",
+      "docs/qa/rpg-2-star-ocean-the-second_yanke_north-static-coordinator-verdict_unapproved-v01_20261024-093100-b101c001.md",
+      "docs/qa/rpg-2-star-ocean-the-second_yanke_north-static-source-qa_unapproved-v01_20261024-092500-n101north.md"
+    ],
+    "subject": {
+      "kind": "character-variant",
+      "id": "yanke"
+    },
+    "statusAt": "2026-10-24T09:33:42Z",
+    "note": {
+      "zh": "",
+      "en": "DeepSeek native north static source committed in ec5562d9e45c3acc550cf1488eb097c7448bdcac; Hermes independently verified deterministic rebuild,43/43 source checks,malformed controls,11/11 native export equality,bilingual test-only fit and M1.48logical back view,editable PXO/ORA. Source production only:application diagnostics FAILED,GUI unverified,defaults unchanged,art UNAPPROVED."
+    }
+  },
+  "ledgerRawSha256": "dccb1b20c90eb4e77c5a9b08d5483cf0fcc2d0c6e6ba69290c3d7b2cb61aded8",
+  "ledgerState": "audited task-specific owner and status transitions installed locally with unique backup receipts; shared ledger remains dirty with unrelated prior changes, not swept into source commit",
+  "meters": {
+    "production": {
+      "before": 62.2,
+      "after": 62.3,
+      "changePercentagePoints": 0.1
+    },
+    "inspection": {
+      "before": 21.6,
+      "after": 21.6,
+      "changePercentagePoints": 0.0
+    },
+    "approval": {
+      "before": 7.8,
+      "after": 7.8,
+      "changePercentagePoints": 0.0
+    }
+  },
+  "contentPoints": {
+    "before": 696,
+    "after": 698,
+    "total": 1881
+  },
+  "sourceCommittedFilesVerified": 75,
+  "preservedUnrelatedStagedPaths": 153,
+  "checks": {
+    "deterministic_author": true,
+    "independent_source": {
+      "passed": 43,
+      "total": 43
+    },
+    "malformed_controls": "wrong-direction and corrupt-PNG rejected with exit1",
+    "native_export_equality": {
+      "passed": 11,
+      "total": 11
+    },
+    "native_application_clean": false,
+    "bilingual_test_only_fit_captures": 4,
+    "postcommit_m1": "M1_SMOKE_OK;CHECKED_RUN PASS;exit0"
+  },
+  "remaining": [
+    "Pixelorama application shader/import/shutdown diagnostics remain",
+    "GUI SaveAs/reopen unverified",
+    "Full-set/runtime adoption and creator art approval remain separate",
+    "Bible active progress record belongs to unrelated Muxiu east; preserved; task-local progress evidence recorded here"
+  ],
+  "defaultChanged": false,
+  "artApproved": false,
+  "hashNormalization": "none;raw bytes",
+  "evidence": [
+    {
+      "path": "outputs/yanke-n101/hermes101/baseline-m1.runner.log",
+      "sha256": "7f5c828437d97aa9f7e616c9603bbf017f9e7bcfac91d86e9a83ee172cffee2d"
+    },
+    {
+      "path": "outputs/yanke-n101/hermes101/ledger-start-1.log",
+      "sha256": "423948ce4ad578718c94763a5261e95d4d3c46796c6afa87633ac52817dfa9b4"
+    },
+    {
+      "path": "outputs/yanke-n101/hermes101/postcommit-m1.runner.log",
+      "sha256": "7f5c828437d97aa9f7e616c9603bbf017f9e7bcfac91d86e9a83ee172cffee2d"
+    },
+    {
+      "path": "outputs/yanke-n101/hermes101/independent-controls-and-provider-hashes.json",
+      "sha256": "0d3fbaf805805a8f4f4fb78311e2ae864c410d083724e72d6b2421b2f0f92f66"
+    },
+    {
+      "path": "outputs/yanke-n101/hermes101/ledger-done-install-receipt.json",
+      "sha256": "2be99b64130bdea78288e8608a8032e274b0c07a08de620788675d77c88aa066"
+    },
+    {
+      "path": "outputs/yanke-n101/hermes101/ledger-done-transition.log",
+      "sha256": "47b54c683b1f6440f8c90a93f645a804f93a3fd2ebea01c518c207036632f560"
+    },
+    {
+      "path": "outputs/yanke-n101/hermes101/baseline-attempt1-failure.txt",
+      "sha256": "a0cd0b42306fef6d99dedcc1c53911c2d60ebad01f995e8beaf23c0e576d1773"
+    },
+    {
+      "path": "outputs/yanke-n101/hermes101/precommit-m1.runner.log",
+      "sha256": "7f5c828437d97aa9f7e616c9603bbf017f9e7bcfac91d86e9a83ee172cffee2d"
+    },
+    {
+      "path": "outputs/yanke-n101/hermes101/native-check.log",
+      "sha256": "33e10cd345e22afddfa42bd28176cc76cab72f5cf096a07c5e5be92d6918b752"
+    },
+    {
+      "path": "outputs/yanke-n101/hermes101/source-check.log",
+      "sha256": "e02a76c3390498b3b37653ab957153726a4a5253e18ad54a6f6b2d54297f2442"
+    },
+    {
+      "path": "outputs/yanke-n101/hermes101/ledger-start-install-receipt.json",
+      "sha256": "3144033b5d78fdf3786e3f5b989a4f8ed96e14f7c73f2f704681864c67101995"
+    },
+    {
+      "path": "outputs/yanke-n101/hermes101/baseline-ledger-check.log",
+      "sha256": "8f29c8ca620afb664e8fc003d2fda80b4aeb813c2381f5e76b33a478254520e1"
+    },
+    {
+      "path": "outputs/yanke-n101/hermes101/corrupt-png.log",
+      "sha256": "742195055df395f92c1b26fdd20b695b5df0f681481c8d0e5916167c0f96f7f2"
+    },
+    {
+      "path": "outputs/yanke-n101/hermes101/ledger-done-check.log",
+      "sha256": "dfbea9eca0c385c777a899fa3a87edfaca6b613d57793ea03727a5c5c0b2acf0"
+    },
+    {
+      "path": "outputs/yanke-n101/hermes101/fit.runner.log",
+      "sha256": "0e2337bc6f0fa7c8a832d1a8d6c5ed7d98214c35c21f922f120b702d3ecefc3f"
+    },
+    {
+      "path": "outputs/yanke-n101/hermes101/ledger-start-0.log",
+      "sha256": "d4df19ce6b1de2a96141942dc03201a4c0f4bddf32c62315e40e435dcaf0a199"
+    },
+    {
+      "path": "outputs/yanke-n101/hermes101/author-check.log",
+      "sha256": "91af41a08c796bdd7381a33447f5d176601ee9ee01790263865dfcda0b789b97"
+    },
+    {
+      "path": "outputs/yanke-n101/hermes101/wrong-direction.log",
+      "sha256": "74884b291872231463b9505a0f77d3301f0112998b8296723d63e44d5d1bd1c3"
+    }
+  ],
+  "next_action": "Next queued Yanke east static source task, if separately assigned; keep north art/runtime gates open."
+}
