@@ -1,0 +1,513 @@
+"""Heya EAST idle static, native 80x112 source package (UNAPPROVED v01).
+
+content.char.heya.static-east. Code-authored native pixels in the Sea of Stars direction (broad clusters,
+upper-left light), 48 logical px at display scale 0.5. East = nose toward screen RIGHT, so the character's
+anatomical LEFT side is the FAR side. The dark-red emergency bag therefore sits on the far left hip and is only
+partly exposed behind the back hip; this is an authored east profile, not a horizontal mirror of west.
+
+Reuses the hash-pinned Heya west v01 author in memory (and through it the Heya south author, Lin Que P/finish/
+gates and the male PNG/PXO/ORA serializers) with the same palette, layers, outline colours and serialization
+contract. Only the direction label is rebound in memory; committed south/west/north tools and packages stay
+byte-identical and are verified against pinned hashes.
+
+  python -X utf8 -I <this> preview  # previews only, no package writes
+  python -X utf8 -I <this> build    # fresh staging package under outputs/heya-e155/staging/east
+  python -X utf8 -I <this> install  # installs verified staging bytes; helper on differing destination
+  python -X utf8 -I <this> check    # rebuilds twice in memory and compares staging + installed files
+"""
+import hashlib, importlib.util, io, json, os, subprocess, sys, zipfile
+import numpy as np
+from PIL import Image
+
+REPO = os.path.abspath(os.environ.get("WB_REPO") or os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+WEST_REL = "tools/rpg-2-star-ocean-the-second_heya_west-static-author_unapproved-v01_20261024-131500-h150w001.py"
+WEST_PIN = "75467c614e38cfedf21c9f27f644ce2df88a518234398c40cff0752a14f8c070"
+NORTH_MANIFEST_REL = ("game/assets/characters/heya-native-v01/north/"
+                      "rpg-2-star-ocean-the-second_heya_north-manifest_unapproved-v01_20261024-134500-ee613b85.json")
+NORTH_MANIFEST_SHA = "7445095eec59c152a0f580acf0d63f17ec900be4824c1eb35cd2fc7a8064c0f7"
+SLUG, ACTOR, D = "rpg-2-star-ocean-the-second", "heya", "east"
+STAMP, RUN_ID = "20261024-141500", "h155e001"
+OUT_REL = "game/assets/characters/heya-native-v01/east"
+STAGE_REL = "outputs/heya-e155/staging/east"
+QA_REL = "outputs/heya-e155/author"
+CONTRACT_REL = ("docs/qa/rpg-2-star-ocean-the-second_heya_east-style-source-contract_unapproved-v01_"
+                "20261024-141500-h155e001.md")
+
+
+def fs(rel):
+    p = os.path.join(REPO, *rel.split("/"))
+    return "\\\\?\\" + p if os.name == "nt" and len(p) > 240 and not p.startswith("\\\\?\\") else p
+
+
+def sha(b):
+    return hashlib.sha256(b).hexdigest()
+
+
+def load(rel, name):
+    spec = importlib.util.spec_from_file_location(name, fs(rel))
+    m = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(m)
+    return m
+
+
+WEST = load(WEST_REL, "heya_west_v01_for_east")
+PIN_OK = {WEST_REL: sha(open(fs(WEST_REL), "rb").read()) == WEST_PIN}
+WEST.D, WEST.STAMP, WEST.RUN_ID = D, STAMP, RUN_ID
+WEST.OUT_REL, WEST.STAGE_REL, WEST.QA_REL, WEST.CONTRACT_REL = OUT_REL, STAGE_REL, QA_REL, CONTRACT_REL
+WEST.MS.D = D
+M, S = WEST.M, WEST.S
+PAL, LAYERS, FILE_KEYS = WEST.PAL, WEST.LAYERS, WEST.FILE_KEYS
+W, H, PIN, BODY_ROWS, L = WEST.W, WEST.H, WEST.PIN, WEST.BODY_ROWS, WEST.L
+
+
+def draw_east(Ls):
+    """Forward coordinates: f > 0 is screen RIGHT (facing direction). Light stays upper-left on screen, so
+    P.shaded highlights the screen-LEFT back plane; a mirror of west would instead light screen-right."""
+    p = {n: M.P(Ls[n], 1) for n in LAYERS}
+
+    # boots: far (left) boot darker and set back; near (right) boot forward with toe screen right
+    b = p["boots"]
+    b.shaded(-7, 91, 1, 102, "r2", "r3", "r3", 1, 1); b.rect(-7, 102, 1, 102, "r3")   # far boot
+    b.shaded(-2, 88, 6, 102, "r1", "r2", "r3", 2, 2)                                  # near boot shaft
+    b.rect(-2, 88, 6, 90, "r1"); b.hline(-2, 6, 88, "r2")                             # folded cuff
+    b.rect(0, 92, 4, 93, "r2"); b.px(2, 92, "y2")                                     # strap + brass eyelet
+    b.rect(5, 98, 7, 102, "r1"); b.rect(6, 98, 7, 99, "r2")                           # near toe (screen right)
+    b.rect(-4, 99, -3, 102, "r3"); b.rect(-4, 102, 7, 102, "r3")                      # heel, welt
+    b.rect(-4, 103, 7, 103, "r3")                                                     # sole
+
+    # dress: charcoal underdress, high collar, front placket in the open coat gap (screen right)
+    d = p["dress"]
+    d.rows({34: (-2, 3), 35: (-3, 4), **{y: (-4, 5) for y in range(36, 41)},
+            **{y: (-5, 6) for y in range(41, 60)}, **{y: (-6, 6) for y in range(60, 66)},
+            **{y: (-7, 7) for y in range(66, 80)}, **{y: (-8, 7) for y in range(80, 89)}}, "c2")
+    d.rect(-4, 36, -3, 58, "c1"); d.rect(5, 36, 6, 58, "c3")
+    d.rect(3, 37, 4, 58, "c1"); d.rect(4, 37, 4, 58, "c2")                            # front placket
+    d.rect(-8, 88, 7, 88, "c4")
+
+    # coat: ivory open clinician coat; lit back plane screen left, shaded front edge screen right
+    c = p["coat"]
+    c.rows({33: (-3, 4), 34: (-5, 5), 35: (-7, 5), **{y: (-8, 6) for y in range(36, 41)},
+            **{y: (-8, 2) for y in range(41, 60)}, **{y: (-9, 4) for y in range(60, 66)},
+            **{y: (-10, 5) for y in range(66, 76)}, **{y: (-11, 6) for y in range(76, 88)}}, "w2")
+    c.rect(-8, 36, -7, 59, "w1"); c.rect(1, 36, 2, 58, "w3")                          # lit back / shaded front
+    c.rect(-9, 60, -8, 65, "w1"); c.rect(-10, 66, -9, 75, "w1"); c.rect(-11, 76, -10, 87, "w1")
+    c.rect(-7, 34, 5, 34, "w3"); c.rect(-8, 35, 6, 35, "w2")                          # shoulder seam
+    c.rows({32: (-3, -1), 33: (-5, 0), **{y: (-6, 0) for y in range(34, 38)}}, "w2")  # standing collar
+    c.rect(-6, 33, -5, 37, "w1"); c.rect(-1, 32, 0, 37, "w3")
+    c.rect(-5, 62, -2, 70, "w3")                                                      # back fold shadow
+    c.hline(-11, 6, 87, "w3"); c.hline(-10, 6, 88, "w4")                              # worn hem
+
+    # apron: pale grey-white half-apron over the near front of the skirt, botanical hem motif
+    ap = p["apron"]
+    ap.rows({59: (0, 6), 60: (0, 7), **{y: (1, 7) for y in range(61, 72)},
+             **{y: (0, 7) for y in range(72, 86)}}, "v2")
+    for y in range(60, 86):
+        x0, x1 = (1, 7) if y < 72 else (0, 7)
+        ap.px(x0, y, "v1"); ap.px(x0 + 1, y, "v1"); ap.px(x1, y, "v3"); ap.px(x1 - 1, y, "v3")
+    ap.rect(0, 85, 7, 85, "v3"); ap.rect(0, 86, 7, 86, "v3")
+    ap.rect(3, 72, 3, 81, "v3"); ap.rect(1, 76, 2, 77, "v3"); ap.rect(5, 78, 6, 79, "v3")
+    ap.rect(2, 80, 3, 81, "v3"); ap.rect(4, 74, 5, 75, "v3")                          # botanical sprig
+    ap.rect(-2, 58, 1, 59, "v3"); ap.px(-3, 59, "v3"); ap.px(4, 59, "v3")             # waist ties
+
+    # belt: slim leather belt, brass buckle at the near front, small medicine pouch at the far back
+    bl = p["belt"]
+    bl.rect(-7, 59, 5, 62, "r2"); bl.hline(-7, 5, 59, "r1"); bl.hline(-7, 5, 62, "r3")
+    bl.rect(4, 59, 6, 62, "y2"); bl.rect(5, 60, 6, 61, "r3"); bl.rect(5, 60, 5, 60, "y1")
+    bl.rect(-10, 63, -7, 67, "r2"); bl.hline(-10, -7, 63, "r1"); bl.hline(-10, -7, 67, "r3")
+    bl.rect(-9, 64, -8, 65, "y1")
+
+    # strap: near (right) shoulder over the back to the far (left) hip bag
+    st = p["strap"]
+    for i in range(26):
+        y = 36 + i
+        f = 5 - (11 * i) // 25
+        colour = "r1" if i % 5 == 0 else ("r3" if i % 7 == 0 else "r2")
+        st.rect(f, y, f + 2, y, colour)
+    st.rect(-2, 47, 0, 49, "y2"); st.rect(-1, 48, 0, 49, "y1")                        # brass adjuster
+
+    # bag: dark-red emergency bag on the anatomical LEFT (FAR) hip, only partly exposed behind the back hip;
+    # brass clasp, leather handle mounts, rolled bandage; a far glove hint at the lower edge
+    bg = p["bag"]
+    bg.rect(-18, 62, -10, 81, "b2")
+    bg.rect(-18, 62, -10, 66, "b1"); bg.hline(-18, -10, 62, "b1"); bg.hline(-18, -10, 66, "b3")
+    bg.rect(-11, 67, -10, 81, "b3"); bg.hline(-18, -10, 81, "b3"); bg.hline(-17, -11, 82, "b3")
+    bg.rect(-16, 64, -14, 65, "y2"); bg.rect(-16, 64, -14, 64, "y1")                   # clasp
+    bg.rect(-18, 59, -16, 61, "r2"); bg.rect(-12, 59, -10, 61, "r2")                   # handle mounts
+    bg.rect(-17, 58, -11, 58, "r2"); bg.hline(-17, -11, 58, "r1")                      # handle
+    bg.rect(-11, 69, -10, 77, "v2"); bg.rect(-11, 69, -10, 69, "v1"); bg.rect(-11, 70, -10, 70, "v3")
+    bg.rect(-11, 78, -10, 81, "k2"); bg.rect(-11, 78, -10, 78, "k1")                   # far glove hint
+
+    # arms: near (right) ivory sleeve, pale cuff, dark glove resting at the apron waist; far arm occluded
+    a = p["arms"]
+    a.rows({36: (1, 4), 37: (1, 5)}, "w2")
+    a.shaded(1, 38, 5, 53, "w1", "w2", "w3", 1, 1)
+    a.rect(1, 54, 5, 57, "w3"); a.rect(1, 54, 5, 54, "w2"); a.rect(1, 57, 5, 57, "w4")  # pale cuff
+    a.shaded(2, 58, 5, 65, "k2", "k1", "k1", 1, 1)                                   # glove
+    a.rect(2, 66, 6, 72, "k1"); a.rect(2, 66, 3, 68, "k2"); a.rect(5, 70, 6, 72, "k2")
+    a.px(6, 68, "k2")                                                                 # thumb at apron
+
+    # herb: small green sprig at the anatomical right chest = near front (screen right), tips past the coat
+    hb = p["herb"]
+    hb.rect(7, 43, 7, 50, "n2")
+    hb.rect(6, 44, 7, 45, "n1"); hb.rect(7, 46, 8, 47, "n1")
+    hb.rect(5, 48, 6, 49, "n2"); hb.rect(6, 50, 7, 51, "n2")
+
+    # face: mature profile, one hazel eye, level brow, nose leading screen RIGHT, ear behind,
+    # restrained closed-lip smile; lit screen-left back plane, shaded front plane
+    f = p["face"]
+    f.rows({15: (-2, 4), 16: (-4, 5), **{y: (-5, 6) for y in range(17, 21)},
+            **{y: (-6, 6) for y in range(21, 24)}, **{y: (-6, 7) for y in range(24, 27)},
+            27: (-6, 8), 28: (-6, 7), 29: (-6, 7), 30: (-6, 6), 31: (-5, 5),
+            32: (-4, 4), 33: (-3, 3)}, "s2")
+    f.rect(-6, 18, -5, 28, "s1"); f.rect(7, 17, 8, 28, "s3")                          # lit back / shaded front
+    f.rect(-4, 21, -2, 26, "s3"); f.rect(-3, 22, -2, 25, "s2"); f.px(-3, 23, "s1")     # ear behind
+    f.rect(2, 21, 7, 21, "h3")                                                        # level brow
+    f.rect(4, 23, 6, 23, "h4"); f.rect(4, 24, 4, 24, "e1"); f.rect(5, 24, 6, 25, "e2")
+    f.px(6, 24, "h4")                                                                 # hazel eye
+    f.rect(9, 24, 11, 26, "s2"); f.rect(10, 26, 12, 26, "s3")                         # nose tip / nostril
+    f.rect(5, 29, 7, 29, "m1"); f.px(6, 28, "m1")                                     # restrained smile
+    f.rect(2, 30, 6, 31, "s3"); f.rect(3, 32, 5, 32, "s2")                            # cheek line / jaw / chin
+    f.rect(-3, 33, 2, 37, "s3"); f.rect(-2, 33, 1, 36, "s2")                          # neck under scarf
+
+    # hair: auburn crown, upper-left sheen, side-swept fringe toward the front, loose near lock, nape layers
+    h = p["hair"]
+    h.rows({8: (-2, 2), 9: (-5, 3), 10: (-7, 4), **{y: (-8, 5) for y in range(11, 16)},
+            16: (-8, 4), **{y: (-8, -6) for y in range(17, 24)}}, "h2")
+    h.rows({9: (-4, 0), 10: (-6, 1), 11: (-7, 2), 12: (-7, 1)}, "h1")                 # upper-left sheen
+    h.rows({10: (2, 4), 11: (3, 5), **{y: (4, 6) for y in range(12, 18)}}, "h3")      # front/right plane
+    h.rows({16: (5, 7), 17: (6, 7), 18: (7, 8), 19: (7, 8), 20: (7, 8), 21: (7, 8)}, "h2")  # fringe lock
+    h.rows({18: (2, 4), 19: (1, 3), 20: (0, 2)}, "h1")                                # fringe sheen
+    h.rows({22: (-7, -5), 23: (-7, -5), 24: (-6, -4), 25: (-6, -4), 26: (-6, -4)}, "h3")  # nape layers
+
+    # braid: auburn braided coil LOW at the nape, behind/below the far ear at screen left, banded, never high
+    br = p["braid"]
+    left = {24: (-9, -6), 25: (-11, -6), 26: (-12, -6), **{y: (-13, -6) for y in range(27, 32)},
+            32: (-12, -6), 33: (-12, -6), 34: (-12, -6), 35: (-11, -6), 36: (-11, -6),
+            37: (-10, -6), 38: (-10, -6), 39: (-9, -7), 40: (-9, -7)}
+    br.rows(left, "h2")
+    br.rect(-12, 26, -7, 26, "h1"); br.rect(-12, 30, -7, 30, "h1"); br.rect(-11, 34, -7, 34, "h1")
+    br.rect(-12, 28, -7, 28, "h3"); br.rect(-11, 32, -7, 32, "h3"); br.rect(-11, 36, -7, 36, "h3")
+    br.rect(-7, 25, -6, 39, "h3"); br.px(-13, 29, "h4"); br.px(-13, 31, "h4")
+    br.rect(-9, 40, -7, 40, "h4"); br.hline(-10, -7, 39, "h1")                        # tie
+
+    # scarf: cool grey-white wrap at the neck, knot at the near front (screen right), long tail down the far back
+    sc = p["scarf"]
+    sc.rows({33: (-4, 4), 34: (-5, 6), **{y: (-7, 6) for y in range(35, 40)},
+             40: (-6, 6), 41: (-5, 5)}, "f1")
+    sc.rect(4, 34, 6, 39, "f2"); sc.rect(5, 35, 6, 38, "f1"); sc.px(6, 36, "f3")      # near-front knot
+    sc.rect(-7, 36, -6, 40, "f2"); sc.rect(-5, 38, -4, 40, "f3")                      # wrap folds
+    sc.rows({**{y: (-9, -6) for y in range(41, 48)}, **{y: (-10, -7) for y in range(48, 54)},
+             54: (-10, -8), 55: (-9, -8), 56: (-9, -8)}, "f1")                        # far-back tail
+    sc.rect(-9, 41, -8, 56, "f2"); sc.rect(-10, 48, -9, 55, "f3")
+    sc.rect(-9, 57, -8, 57, "f3"); sc.px(-10, 57, "f3")                               # fringe
+
+
+def draw():
+    Ls = {n: L() for n in LAYERS}
+    draw_east(Ls)
+    return M.finish(Ls)
+
+
+WEST.draw = draw
+
+
+def south_unchanged():
+    return WEST.south_unchanged()
+
+
+def west_unchanged():
+    m = json.loads(open(fs(WEST.WEST_MANIFEST_REL), "rb").read())
+    files = {v["file"]: sha(open(fs("game/assets/characters/heya-native-v01/west/" + v["file"]), "rb").read())
+             == v["rawsha256"] for v in m["files"].values()}
+    return {"manifest_sha_matches_pin": sha(open(fs(WEST.WEST_MANIFEST_REL), "rb").read()) == WEST.WEST_MANIFEST_SHA,
+            "files_match_manifest": all(files.values()),
+            "palette_colors_identical": json.loads(open(fs(
+                "game/assets/characters/heya-native-v01/west/" + m["files"]["palette"]["file"]), "rb").read())
+            ["colors"] == PAL}
+
+
+def north_unchanged():
+    m = json.loads(open(fs(NORTH_MANIFEST_REL), "rb").read())
+    files = {v["file"]: sha(open(fs("game/assets/characters/heya-native-v01/north/" + v["file"]), "rb").read())
+             == v["rawsha256"] for v in m["files"].values()}
+    return {"manifest_sha_matches_pin": sha(open(fs(NORTH_MANIFEST_REL), "rb").read()) == NORTH_MANIFEST_SHA,
+            "files_match_manifest": all(files.values())}
+
+
+def gates(r):
+    hp, blobs, full, png, pxo, ora, pal = r
+    g = M.gates(D, r)
+    with zipfile.ZipFile(io.BytesIO(pxo)) as z:
+        dj = z.read("data.json")
+    g["pxo_labels_east"] = (b"heya-east" in dj and b"heya-south" not in dj and b"heya-west" not in dj
+                            and b"heya-north" not in dj)
+    g["pxo_no_foreign_metadata"] = all(s not in dj for s in (b"milo", b"jiang", b"lin-que", b"muxiu", b"yanke"))
+    g["palette_fits_pxo_grid_40"] = len(PAL) <= 40
+    al = full[..., 3]
+    g["isolated_texels"] = WEST.isolated(full)
+    g["isolated_texels_le_24"] = g["isolated_texels"] <= 24
+    cols = lambda keys: {S.rgb(k) for k in keys}
+    used = {tuple(c) for c in full[al == 255][:, :3]}
+    g["identity_colours_visible"] = {"auburn_hair": bool(used & cols(("h1", "h2"))),
+                                     "grey_white_scarf": bool(used & cols(("f1", "f2"))),
+                                     "dark_red_bag": bool(used & cols(("b1", "b2"))),
+                                     "ivory_coat": bool(used & cols(("w1", "w2"))),
+                                     "pale_apron": bool(used & cols(("v1", "v2"))),
+                                     "charcoal_dress": bool(used & cols(("c1", "c2"))),
+                                     "leather": bool(used & cols(("r1", "r2"))),
+                                     "brass": bool(used & cols(("y1", "y2"))),
+                                     "herb_green": bool(used & cols(("n1", "n2")))}
+    g["identity_colours_all"] = all(g["identity_colours_visible"].values())
+    vis = g["visible_role_texels"]
+    g["anchor_layers_visible"] = all(vis[n] >= 12 for n in ("braid", "scarf", "bag", "apron", "coat", "hair",
+                                                           "face", "herb", "arms", "boots", "dress"))
+    ys, xs = np.nonzero(al)
+    g["silhouette_width"] = int(xs.max() - xs.min() + 1)
+    g["silhouette_width_24_56"] = 24 <= g["silhouette_width"] <= 56
+    g["profile_depth"] = g["silhouette_width"]
+    g["profile_depth_20_34"] = 20 <= g["profile_depth"] <= 34
+
+    # --- east profile direction: nose leads screen RIGHT, back of head is screen LEFT -------------
+    face = blobs["face"]; fm = face[..., 3] == 255
+    fy, fx = np.nonzero(fm)
+    nose_rows = fm[24:28].any(axis=0); nose_x = int(np.nonzero(nose_rows)[0].max())
+    back_rows = fm[17:22].any(axis=0); back_x = int(np.nonzero(back_rows)[0].min())
+    g["profile_east_facing"] = nose_x >= 48 and back_x <= 35 and int(fx.min()) <= 35
+    g["profile_east_facing_detail"] = {"nose_x": nose_x, "back_x": back_x}
+    g["profile_face_narrow"] = int(fx.max() - fx.min() + 1) <= 20
+    eye_white = np.zeros_like(fm)
+    for yy in range(22, 27):
+        for xx in range(40, 50):
+            if fm[yy, xx] and (blobs["face"][yy, xx, :3] == S.rgb("e1")).all():
+                eye_white[yy, xx] = True
+    g["profile_one_eye"] = 1 <= int(eye_white.sum()) <= 8
+    g["one_eye_detail"] = {"texels": int(eye_white.sum())}
+    # mature 44-year-old: real cheek/jaw shading texels in the mid/lower face (not a smooth young mask)
+    s3 = S.rgb("s3"); mature = 0
+    for yy in range(25, 33):
+        for xx in range(36, 50):
+            if fm[yy, xx] and (blobs["face"][yy, xx, :3] == s3).all():
+                mature += 1
+    g["mature_face_shading"] = mature >= 10
+    g["mature_face_detail"] = {"cheek_jaw_s3_texels": int(mature)}
+
+    # low braided coil at the nape, behind/below the far ear at screen left; never a high bun
+    bm = blobs["braid"][..., 3] == 255; by, bx = np.nonzero(bm)
+    g["coil_low_at_nape_east"] = (int(bm.sum()) >= 80 and by.min() >= 23 and by.max() <= 40
+                                  and float(bx.mean()) <= 37.0 and int(bx.min()) <= 30)
+    g["coil_detail_east"] = {"texels": int(bm.sum()), "rows": [int(by.min()), int(by.max())],
+                             "mean_x": round(float(bx.mean()), 2), "min_x": int(bx.min())}
+    hm = blobs["hair"][..., 3] == 255; hy, _ = np.nonzero(hm)
+    g["hair_not_high_bun_east"] = int(hy.max()) <= 30 and int(hy.min()) >= 8
+
+    # scarf: wrap at the neck plus a long far-back tail; only cool grey-white colours
+    sm = blobs["scarf"][..., 3] == 255; sy, sx = np.nonzero(sm)
+    scols = {tuple(c) for c in blobs["scarf"][sm][:, :3]}
+    g["scarf_east"] = (int(sm.sum()) >= 160 and int(sy.max()) >= 52 and int(sy.min()) <= 34
+                       and scols <= cols(("f1", "f2", "f3")))
+    g["scarf_detail_east"] = {"texels": int(sm.sum()), "rows": [int(sy.min()), int(sy.max())]}
+
+    # bag: dark-red mass on the anatomical LEFT = FAR hip at screen left, partly exposed behind the back
+    gm = blobs["bag"][..., 3] == 255; gy, gx = np.nonzero(gm)
+    gcols = {tuple(c) for c in blobs["bag"][gm][:, :3]}
+    brass = cols(("y1", "y2"))
+    g["bag_left_hip_far_east"] = (int(gm.sum()) >= 80 and float(gx.mean()) <= 30.0 and int(gx.max()) <= 34
+                                  and bool(gcols & cols(("b1", "b2"))) and bool(gcols & brass)
+                                  and int(gy.max() - gy.min() + 1) >= 12)
+    g["bag_detail_east"] = {"texels": int(gm.sum()), "mean_x": round(float(gx.mean()), 2),
+                            "x_range": [int(gx.min()), int(gx.max())], "rows": [int(gy.min()), int(gy.max())]}
+
+    # restrained closed-lip smile at the front of the profile, no teeth
+    mouth = np.zeros_like(fm)
+    for yy in range(27, 32):
+        for xx in range(42, 50):
+            if fm[yy, xx] and (blobs["face"][yy, xx, :3] == S.rgb("m1")).all():
+                mouth[yy, xx] = True
+    my, mx = np.nonzero(mouth)
+    teeth = any((blobs["face"][yy, xx, :3] == S.rgb("e1")).all()
+                for yy in range(28, 31) for xx in range(42, 50) if fm[yy, xx])
+    width = int(mx.max() - mx.min() + 1) if len(mx) else 0
+    g["restrained_smile_east"] = (3 <= int(mouth.sum()) <= 6 and not teeth and width <= 4)
+    g["mouth_detail_east"] = {"texels": int(mouth.sum()), "width": width, "teeth_visible": bool(teeth)}
+
+    # genuine upper-left screen lighting: highlight texel centroids lie LEFT of their shadow colours.
+    # A mirror of west would move h1/w1/s1 to screen right and fail these three comparisons.
+    def mean_x_of(keys):
+        m = np.zeros(al.shape, bool)
+        for k in keys:
+            m |= np.all(full[..., :3] == S.rgb(k), axis=2) & (al == 255)
+        yy, xx = np.nonzero(m)
+        return (round(float(xx.mean()), 2), int(m.sum())) if len(xx) else (None, 0)
+    light = {"hair": [mean_x_of(("h1",)), mean_x_of(("h3",))],
+             "coat": [mean_x_of(("w1",)), mean_x_of(("w3",))],
+             "skin": [mean_x_of(("s1",)), mean_x_of(("s3",))]}
+    g["upper_left_light_east"] = all(a[0] is not None and b[0] is not None and a[1] >= 20 and b[1] >= 20
+                                     and a[0] < b[0] for a, b in light.values())
+    g["upper_left_light_detail"] = light
+    g["herb_visible_east"] = int((blobs["herb"][..., 3] == 255).sum()) >= 12
+    # own silhouette: not a recolour of south/west/north, and not a horizontal mirror of west
+    def alpha_arr(rel):
+        import glob
+        f = sorted(glob.glob(os.path.join(REPO, rel, "*static*.png")))
+        return np.array(Image.open(f[0]).convert("RGBA"))[..., 3] > 0
+    diffs = {k: int(np.count_nonzero(alpha_arr(v) != (al > 0)))
+             for k, v in (("south", "game/assets/characters/heya-native-v01/south"),
+                          ("west", "game/assets/characters/heya-native-v01/west"),
+                          ("north", "game/assets/characters/heya-native-v01/north"))}
+    g["own_silhouette_not_recolour"] = all(v >= 400 for v in diffs.values())
+    g["silhouette_diff_detail"] = diffs
+    g["not_mirrored_west"] = int(np.count_nonzero(np.fliplr(alpha_arr(
+        "game/assets/characters/heya-native-v01/west")) != (al > 0))) >= 250
+    g["not_mirrored_west_detail"] = int(np.count_nonzero(np.fliplr(alpha_arr(
+        "game/assets/characters/heya-native-v01/west")) != (al > 0)))
+    return g
+
+
+HARD = M.HARD + ["pxo_labels_east", "pxo_no_foreign_metadata", "palette_fits_pxo_grid_40",
+                 "isolated_texels_le_24", "identity_colours_all", "anchor_layers_visible",
+                 "silhouette_width_24_56", "profile_depth_20_34", "profile_east_facing",
+                 "profile_face_narrow", "profile_one_eye", "mature_face_shading",
+                 "coil_low_at_nape_east", "hair_not_high_bun_east", "scarf_east", "bag_left_hip_far_east",
+                 "restrained_smile_east", "upper_left_light_east", "herb_visible_east",
+                 "own_silhouette_not_recolour", "not_mirrored_west"]
+
+
+def manifest(files, g):
+    m = json.loads(WEST.manifest(files, g))
+    m.pop("profile_depth", None)
+    m.update({
+        "face_layer_role": "mature east profile: one hazel eye, level brow, nose leading screen right, ear "
+                           "behind, restrained closed-lip smile, cheek/jaw shading, neck; 44-year-old clinician",
+        "braid_layer_role": "auburn braided coil LOW at the nape: one plaited mass behind and below the far ear "
+                            "at the back of the head, alternating light/dark bands; never a high bun",
+        "view_notes": "east profile (nose to screen RIGHT): the character's anatomical LEFT is the FAR side and "
+                      "her right side is near. Upper-left screen light is preserved, so the screen-left back "
+                      "plane of the auburn crown, coat and face is lit and the screen-right front plane is "
+                      "shaded. Auburn hair with upper-left sheen, side-swept fringe toward the front and a loose "
+                      "near lock; low braided coil at the nape behind the far ear. Cool grey-white medical scarf "
+                      "wound at the neck with the knot at the near front and the long tail down the far back. "
+                      "Ivory open clinician coat with the charcoal underdress placket in the near-front gap, pale "
+                      "grey-white apron with botanical hem motif, slim leather belt with brass buckle and far-back "
+                      "medicine pouch. Dark-red emergency bag with brass clasp, leather handle and rolled bandage "
+                      "on the anatomical LEFT hip: only partly exposed behind the back hip at screen LEFT, not a "
+                      "near-side bag. Small green herb sprig at the near right chest with tips past the coat "
+                      "front edge. Near right arm in an ivory sleeve, pale cuff and dark glove at the apron "
+                      "waist; far left arm occluded, with a glove hint at the far bag. Brown leather boots with "
+                      "the near right boot forward and the far left boot darker and set back, brass eyelet.",
+        "authored_deviations_from_sheet": [
+            "East is an authored profile in forward coordinates; it is not a horizontal mirror, rotation, "
+            "squash, recolour or upscale of the west package. Upper-left screen light is preserved rather than "
+            "mirrored, and the bag stays on the anatomical left (far) hip.",
+            "The concept sheet's white head-veil is omitted so the Bible's low auburn braided coil remains "
+            "readable; the canonical grey-white medical scarf is worn at the neck with its tail down the far "
+            "back.",
+            "The sheet's long dark-red shawl is reduced to the canonical dark-red emergency bag; in the east "
+            "profile the far-left bag is deliberately only partly exposed behind the back hip.",
+            "In strict east profile the character's far left arm is occluded by the torso; only a glove hint "
+            "shows at the far bag, while the near right hand rests at the apron waist.",
+            "The herb sprig is kept at the near right chest (its canonical side) with tips past the coat front "
+            "edge, an explicit readability choice in profile.",
+            "Fine embroidery, bag contents, tassels and multiple belt charms beyond the botanical hem motif, "
+            "brass clasp and rolled bandage are omitted for 48 px readability."],
+        "view_contract": CONTRACT_REL,
+        "source_contract": "same as Heya south/west v01: 80x112, pivot (40,104), body rows 8..103, display "
+                           "scale 0.5 = 48 logical px, binary alpha, transparent border, 24..48 used colours, "
+                           ">=8 genuine role layers, hidden guides layer; east-profile gates replace the "
+                           "front/rear face, coil, scarf, bag and lighting gates",
+        "author_tool": "tools/" + os.path.basename(__file__),
+        "reused_tool_pins": {**WEST.PINS, **WEST.MS.PINS, WEST_REL: WEST_PIN},
+        "west_continuity_ref": {"file": WEST.WEST_MANIFEST_REL, "rawsha256": WEST.WEST_MANIFEST_SHA,
+                                "use": "Heya west v01 palette/layers/outline/gates and profile wording; no "
+                                       "pixels copied, mirrored or rotated"},
+        "north_continuity_ref": {"file": NORTH_MANIFEST_REL, "rawsha256": NORTH_MANIFEST_SHA,
+                                 "use": "Heya north v01 rear-view identity wording and gate vocabulary; no "
+                                        "pixels copied"},
+        "limitations": "east static only; no runtime wiring/defaults, no other directions, no motion, no GUI "
+                       "save/reopen proof and no creator art approval"})
+    return (json.dumps(m, indent=2) + "\n").encode()
+
+
+def main():
+    cmd = sys.argv[1] if len(sys.argv) > 1 else "check"
+    r1, r2 = WEST.artifacts(), WEST.artifacts()
+    g = gates(r1)
+    g["deterministic_rebuild"] = WEST.check_r2(r1, r2)
+    su, wu, nu = south_unchanged(), west_unchanged(), north_unchanged()
+    bad = [k for k in HARD + ["deterministic_rebuild"] if not g[k]]
+    bad += [f"tool_pin:{rel}" for rel, ok in {**PIN_OK, **WEST.PIN_OK, **WEST.MS.PIN_OK}.items() if not ok]
+    bad += [f"south:{k}" for k, v in su.items() if not v]
+    bad += [f"west:{k}" for k, v in wu.items() if not v]
+    bad += [f"north:{k}" for k, v in nu.items() if not v]
+    files = dict(zip(("png", "pxo", "ora", "palette"), r1[3:]))
+    named = {f"{STAGE_REL}/{WEST.fname(*FILE_KEYS[k])}": b for k, b in files.items()}
+    named[f"{STAGE_REL}/{WEST.fname('manifest', 'json')}"] = manifest(files, g)
+    from PIL import Image
+    previews = {}
+    if cmd in ("build", "preview"):
+        os.makedirs(fs(QA_REL), exist_ok=True)
+        previews[f"{QA_REL}/{SLUG}_{ACTOR}_{D}-preview-x6_unapproved-v01_{STAMP}-{sha(r1[3])[:8]}.png"] = (
+            Image.fromarray(r1[2], "RGBA").resize((W * 6, H * 6), Image.NEAREST))
+        previews[f"{QA_REL}/{SLUG}_{ACTOR}_{D}-preview-x12_unapproved-v01_{STAMP}-{sha(r1[3])[:8]}.png"] = (
+            Image.fromarray(r1[2], "RGBA").resize((W * 12, H * 12), Image.NEAREST))
+        for rel, im in previews.items():
+            im.save(fs(rel)); print("preview:", rel)
+    if cmd == "build":
+        if bad:
+            raise SystemExit(f"hard gates failed: {bad}")
+        written = WEST.write_stage(named)
+        listing = {"staged": written,
+                   "qa_preview_nonsource": {rel: sha(open(fs(rel), "rb").read()) for rel in previews},
+                   "hash": "sha256 of raw bytes, no normalization"}
+        lp = f"{QA_REL}/{SLUG}_{ACTOR}_{D}-staging-output-paths-rawhashes_unapproved-v01_{STAMP}-{WEST.uid('paths')}.json"
+        open(fs(lp), "wb").write((json.dumps(listing, indent=2) + "\n").encode())
+    if cmd == "install":
+        if bad:
+            raise SystemExit(f"hard gates failed: {bad}")
+        for rel, data in named.items():
+            sp = fs(rel)
+            if not os.path.exists(sp) or open(sp, "rb").read() != data:
+                raise SystemExit(f"staging missing or stale: {rel}; run build first")
+        os.makedirs(fs(OUT_REL), exist_ok=True)
+        for rel, data in named.items():
+            dst = f"{OUT_REL}/{os.path.basename(rel)}"; dp = fs(dst)
+            if os.path.exists(dp):
+                if open(dp, "rb").read() != data:
+                    subprocess.run([sys.executable, "tools/wb_safe_replace.py", rel, dst], cwd=REPO, check=True)
+            else:
+                open(dp, "wb").write(data)
+        for extra, extra_bytes in (("/.gdignore", b""), ("/.gitattributes", b"* -text -eol\n")):
+            er = OUT_REL + extra; ep = fs(er)
+            if not os.path.exists(ep):
+                open(ep, "wb").write(extra_bytes)
+            elif open(ep, "rb").read() != extra_bytes:
+                subprocess.run([sys.executable, "tools/wb_safe_replace.py", er, er], cwd=REPO, check=True)
+    disk = {}
+    for rel, data in named.items():
+        sr = f"{STAGE_REL}/{os.path.basename(rel)}"
+        ir = f"{OUT_REL}/{os.path.basename(rel)}"
+        disk["stage:" + sr] = (sha(open(fs(sr), "rb").read()) == sha(data)) if os.path.exists(fs(sr)) else None
+        disk["install:" + ir] = (sha(open(fs(ir), "rb").read()) == sha(data)) if os.path.exists(fs(ir)) else None
+    report = {k: g[k] for k in ("body_rows", "colour_count", "genuine_visible_role_layers", "visible_role_texels",
+                                "isolated_texels", "identity_colours_visible", "binary_alpha", "no_opaque_border",
+                                "pin_inside_feet_span", "all_colours_declared", "ora_hidden",
+                                "deterministic_rebuild")}
+    report.update({k: g[k] for k in ("silhouette_width", "profile_depth", "profile_east_facing",
+                                     "profile_east_facing_detail", "profile_face_narrow", "profile_one_eye",
+                                     "one_eye_detail", "mature_face_shading", "mature_face_detail",
+                                     "coil_low_at_nape_east", "coil_detail_east", "hair_not_high_bun_east",
+                                     "scarf_east", "scarf_detail_east", "bag_left_hip_far_east",
+                                     "bag_detail_east", "restrained_smile_east", "mouth_detail_east",
+                                     "upper_left_light_east", "upper_left_light_detail", "herb_visible_east",
+                                     "own_silhouette_not_recolour", "silhouette_diff_detail",
+                                     "not_mirrored_west", "not_mirrored_west_detail")})
+    report.update(tool_pins_ok={**PIN_OK, **WEST.PIN_OK, **WEST.MS.PIN_OK}, south_unchanged=su,
+                  west_unchanged=wu, north_unchanged=nu, disk_matches_rebuild=disk, hard_failures=bad)
+    print(json.dumps(report, indent=1))
+    stage_ok = all(v is True for k, v in disk.items() if k.startswith("stage:"))
+    ok = not bad and stage_ok and all(v is not False for v in disk.values())
+    print("HEYA_EAST_V01_" + ("ALL_OK" if ok else "FAIL"))
+    return 0 if ok else 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())

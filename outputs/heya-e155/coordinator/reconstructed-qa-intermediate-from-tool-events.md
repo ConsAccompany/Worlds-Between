@@ -1,0 +1,101 @@
+# Heya east static — producer QA (UNAPPROVED v01)
+
+Task: `content.char.heya.static-east` (batch 155, sole producer). Status: **produced source package, UNAPPROVED**.
+`artApproved=false`, `runtimeAdopted=false`, defaults/selectors unchanged, no ledger/Bible/registry/index edits.
+This QA does not claim task completion: coordinator source commit, independent rerun and integration remain.
+
+## Outputs (installed + fresh staging, raw sha256, no normalization)
+
+Installed under `game/assets/characters/heya-native-v01/east/`; staging under
+`outputs/heya-e155/staging/east/`. Stage and install bytes are identical.
+
+| Role | File | raw sha256 |
+| --- | --- | --- |
+| flat PNG | `rpg-2-star-ocean-the-second_heya_east-static_unapproved-v01_20261024-141500-6041ee95.png` | `273e5e854121fa8ec92dc74e28a67be35920da6442fc20571ff053453fdf9dd4` |
+| editable PXO | `rpg-2-star-ocean-the-second_heya_east-edit_unapproved-v01_20261024-141500-5493fe7b.pxo` | `45ab6257e31b20fb756e1d18c687d1716c73d2fa22489737ed86fd5348e2bf56` |
+| editable ORA | `rpg-2-star-ocean-the-second_heya_east-edit_unapproved-v01_20261024-141500-d23c7857.ora` | `0cf8b0b465560bf6328de320f2e40f356cb5d304c3c546227de3a2ba12e8bc91` |
+| palette JSON | `rpg-2-star-ocean-the-second_heya_east-palette_unapproved-v01_20261024-141500-f7eba38b.json` | `6af85c7ac9e1dfc76a44a53864d9a7ef58c7d02d1c3e3e8ab1d71b50e6d55311` |
+| manifest JSON | `rpg-2-star-ocean-the-second_heya_east-manifest_unapproved-v01_20261024-141500-489081a6.json` | `dc5e13978247c8781955785f2d5ef46a0ac0fe26ced3e03ed98ea1a871a6302d` |
+| `.gdignore` | empty | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` |
+| `.gitattributes` | `* -text -eol\n` | `7db6a4594ca028c9756c1c6f838e247424a086289bc4516147589efdaf27380c` |
+
+Manifest declares the same PNG/PXO/ORA/palette raw hashes; canvas 80x112, pivot (40,104), body rows 8..103,
+display scale 0.5 = 48 logical px, 34 used colours, 18 isolated texels, binary alpha, hidden guides.
+
+Tools / contract (raw sha256):
+
+- author: `tools/rpg-2-star-ocean-the-second_heya_east-static-author_unapproved-v01_20261024-141500-h155e001.py`
+  `42c06afb67653975e3e2a385f2e7cd30c5ba936080f3fc14e9bb7b1e8b5c23e0`
+- independent source checker: `tools/rpg-2-star-ocean-the-second_heya_east-static-source-check_v01_20261024-141500-h155e001.py`
+  `66f691cd68685d3201b07933c7335cdd33148cc13c7983294669ba3d744e2c01`
+- native Pixelorama checker: `tools/rpg-2-star-ocean-the-second_heya_east-static-native-pixelorama-check_v01_20261024-141500-h155e001.py`
+  `544a6eacaf8d35db3d22a4ac31ae45d8fcd7dca2f18ef8df21b01bf37b988973`
+- source-fit driver: `tools/rpg-2-star-ocean-the-second_heya_east-static-source-fit_v01_20261024-141500-h155e001.py`
+  `7609ef8616f306142b0a099b6f25f73af69d1c97fe84807fde6befeeb7eb8d86`
+- style/source contract: `docs/qa/rpg-2-star-ocean-the-second_heya_east-style-source-contract_unapproved-v01_20261024-141500-h155e001.md`
+  `3d34813cf179f72ef3fb30546cb8a62adcbb22974ab7797f2a3bfd1ebeff489a`
+
+## Executed commands and results
+
+All Python runs used `/home/kel/projects/worlds-between/tooling/venv/bin/python3 -I`; Godot used
+`/home/kel/projects/worlds-between/tooling/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64`; Pixelorama used
+`tooling/pixelorama-1.2.3/Pixelorama-Linux-64bit/Pixelorama.x86_64` (resolved as
+`/home/kel/projects/worlds-between/tooling/...`).
+
+1. `author preview` (first completed draft): **FAIL** `identity_colours_all`, `upper_left_light_east`.
+   Retained failing-draft source in `outputs/heya-e155/source-backups/20261024-134415-bb22bc91/original`
+   (`sha256 d6c99ec5403e77a78d6ca3772ca0fd0d2fd3a3cbfc0c1ee802a0949980d55166`) and the failed preview
+   `outputs/heya-e155/author/...preview-x12...645dd370.png`. Three earlier runs also failed on tool/API errors
+   (`P.hline` helper, missing PIL import, wrong west manifest constant); their pre-edit sources are in the
+   backups below. Not counted as passes.
+2. `author build` → exit 0, `HEYA_EAST_V01_ALL_OK`, `hard_failures=[]`; staging written.
+   Log `outputs/heya-e155/author-build.log` (`5da6290edf1339c51384e9637d45ad56ac998b4a19d98844018cd0f77440d673`).
+3. `author install` → exit 0, `HEYA_EAST_V01_ALL_OK`; new east directory only, no differing destination, so the
+   safe-replace helper was not needed for installation. Log `outputs/heya-e155/author-install.log`.
+4. `author check` → exit 0, `HEYA_EAST_V01_ALL_OK`, `deterministic_rebuild=true`, stage and install bytes match.
+   Log `outputs/heya-e155/author-check.log` (`6e75c5d21c123268bc6b0f76a3ab8f0c57230c68e691c239b48f44ae634862bd`).
+5. Independent source checker (does not import the author):
+   `--root . --out outputs/heya-e155/independent-1` → exit 0, **57/57 checks**, all malformed/wrong-facing
+   controls pass. Report
+   `outputs/heya-e155/independent-1/rpg-2-star-ocean-the-second_heya_east_independent-source-proof_v01_20261024-141500-h155e001.json`
+   (`8389823e7419099398e761622c2df3a26ec2c85ef5de558445eea3c88f081bd5`). Log
+   `outputs/heya-e155/independent-1.log`.
+6. Native Pixelorama export equality: `--out outputs/heya-e155/native-1` → exit 0, **equality PASS** (11/11
+   equality gates: flat PXO exact, split PXO layers exact, merged exact, ORA flat exact, inputs unchanged,
+   package bytes unchanged). Report
+   `outputs/heya-e155/native-1/20261024-134516-f81e7cb8/rpg-2-star-ocean-the-second_heya_east_native-pixelorama-export-report_test-only-v01_20261024-141500-h155e001.json`
+   (`d39ae4538b6a68125ad1c4d67258e1a0eff1068451e065ac18323cf3f6ae080d`).
+   **Diagnostics are NOT clean**: `diagnostic_clean=false`; `custom_samplers` shader errors 4/4/4 for
+   pxo-flat/pxo-split/ora-flat, plus ORA-run exit leak/out-of-bounds markers (12 markers). Logs retained under
+   `outputs/heya-e155/native-1/.../{pxo-flat,pxo-split,ora-flat}/{stdout,stderr}.log`. Exact export does not
+   establish application diagnostic cleanliness or GUI save/reopen.
+7. Bilingual bright/dark source fit: `xvfb-run ... --rendering-driver opengl3 --audio-driver Dummy` through the
+   generic scene-fit script and checked runner → exit 0, `HEYA_E155_EAST_SOURCE_FIT PASS`, 4 captures at
+   640x360 (city/ruins × en/zh), `sourceUnchanged=true`, `runtimeAdopted=false`, `artApproved=false`.
+   Proof `outputs/heya-e155/rpg-2-star-ocean-the-second_heya_east_source-fit-proof_test-only-v01_20261024-141500-h155e001-fit.json`
+   (`3749b9ad77e1fea119b11cb40e4669491960c1bc5d8603e6810de2cb68a7b819`). Log `outputs/heya-e155/fit.log`.
+8. M1 smoke: checked runner, headless, Dummy audio, isolated HOME/XDG → exit 0, `CHECKED_RUN PASS`,
+   `M1_SMOKE_OK`. Log `outputs/heya-e155/m1-smoke.log` (`b7e1425de0073c03cdc1bf0cd40ca5d8abbed9369d847316fe040d0d46f36ab6`).
+
+## Real pixel semantics validated (not hardcoded)
+
+The independent checker recomputes from installed PNG/ORA/PXO bytes: nose leads screen RIGHT (`nose_x=52`,
+`back_x=34`), face width <=20 and one eye; mature cheek/jaw `s3` texels >=10; low far-nape braid
+(mean x 31.12, min x 27, rows 24..40); grey-white scarf tail to row 57; dark-red far-left bag (212 texels,
+mean x 26.0, x 22..30, brass present); restrained smile 3 texels/no teeth; charcoal dress 12 visible c1/c2
+texels; herb >=12; upper-left screen light (`h1` mean 36.07 < `h3` 36.34; `w1` 34.67 < `w3` 39.04;
+`s1` 35.55 < `s3` 45.38); own silhouette differs from south/west/north by 1261/642/1221 alpha texels and from
+a horizontal mirror of west by 338 alpha texels. Controls flip the face, mirror the whole image, roll the braid
+into a high bun, zero the scarf, move the bag to the wrong hip, add teeth, hide the dress, show guides, corrupt
+the hash and tamper a PNG; every control is detected.
+
+## Source backups (unique, metadata-preserving, SHA-verified before each edit)
+
+All under `outputs/heya-e155/source-backups/<utc>-<uid>/original` with `receipt.json`; `cp -p` preserved mode and
+mtime, and the receipt `sha256` was verified equal to the live tool before patching.
+
+| pre-edit sha256 | reason |
+| --- | --- |
+| `34aaba4f581552b6576cd729563b87fd89fcd57584937f5d3cc49494310cf090` | west author pin correction |
+| `e4bb22602abe34923233965bbbc6464a0419d2f25a5c946d1ce7093b735757e4` | add PIL import |
+| `1ece4151d491341ee73a3522af3a7e6ce143407d659aac29d26332fcc26d0a6e` | re

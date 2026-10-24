@@ -1,0 +1,59 @@
+{
+  "all_protected_hashes_unchanged": true,
+  "protected_count": 133,
+  "changed": [],
+  "preexisting_index_unchanged": true,
+  "source_backups": [
+    {
+      "path": "outputs/heya-e155/source-backups/20261024-134323-4c8acbf6/original",
+      "sha256": "34aaba4f581552b6576cd729563b87fd89fcd57584937f5d3cc49494310cf090",
+      "matches_receipt": true
+    },
+    {
+      "path": "outputs/heya-e155/source-backups/20261024-134330-be1edbfc/original",
+      "sha256": "e4bb22602abe34923233965bbbc6464a0419d2f25a5c946d1ce7093b735757e4",
+      "matches_receipt": true
+    },
+    {
+      "path": "outputs/heya-e155/source-backups/20261024-134342-d3ceaa5b/original",
+      "sha256": "1ece4151d491341ee73a3522af3a7e6ce143407d659aac29d26332fcc26d0a6e",
+      "matches_receipt": true
+    },
+    {
+      "path": "outputs/heya-e155/source-backups/20261024-134351-57112518/original",
+      "sha256": "b5d5ee5660eb8c3d8b1f134630d42d1bfe0d2df003fd0cf6511f87432ee312c4",
+      "matches_receipt": true
+    },
+    {
+      "path": "outputs/heya-e155/source-backups/20261024-134415-bb22bc91/original",
+      "sha256": "d6c99ec5403e77a78d6ca3772ca0fd0d2fd3a3cbfc0c1ee802a0949980d55166",
+      "matches_receipt": true
+    },
+    {
+      "path": "outputs/heya-e155/source-backups/20261024-134638-8e834318/original",
+      "sha256": "09a40556db6d3a7e552b9b3063f351d24dffdc31a36d8a33819fe7a029a48390",
+      "matches_receipt": true
+    }
+  ],
+  "qa_edit_chain": [
+    {
+      "line": 319,
+      "before_sha256": "09a40556db6d3a7e552b9b3063f351d24dffdc31a36d8a33819fe7a029a48390",
+      "after_sha256": "8331560bc26b32e810f81547fc8d12704e43125be387d2cfbbb59223afe2958e"
+    },
+    {
+      "line": 324,
+      "before_sha256": "8331560bc26b32e810f81547fc8d12704e43125be387d2cfbbb59223afe2958e",
+      "after_sha256": "509697f82078c0d7a2d22a8ae190e49cd7a3d13299e74f3f14351cf918194d34"
+    }
+  ],
+  "preservation_failed": true,
+  "findings": [
+    "Second QA-doc edit followed first without own unique pre-edit backup. Intermediate text recovered exactly from verified initial backup and first recorded edit; reconstruction not retroactive compliance.",
+    "author-preview.log redirected twice with differing content and no verified backup. Original failing source/preview and exact tool outputs preserved; failed-draft-check.log is later rerun, not original log.",
+    "Initial audit reconstruction from write event failed because provider input log truncated at8192bytes; partial file retained as failed reconstruction, final reconstruction from full pre-edit backup passes exact final-file comparison.",
+    "Byte-identical preview rewrites are not differing-image replacements."
+  ],
+  "producer_claim_no_backup_failures_superseded": true,
+  "hash_normalization": "none; raw bytes"
+}
