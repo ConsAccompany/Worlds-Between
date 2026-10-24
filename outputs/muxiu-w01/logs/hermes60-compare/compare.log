@@ -1,0 +1,31 @@
+cmd: ['/home/kel/projects/worlds-between/tooling/venv/bin/python', '-I', '-c', 'import hashlib,json,pathlib,sys\nfrom PIL import Image\nW=pathlib.Path(sys.argv[1]);E=pathlib.Path(sys.argv[2]);sh=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()\nsrc=next(W.glob("*static*.png"));ref=Image.open(src).convert("RGBA");res={"source_png":src.name,"source_sha256":sh(src)}\nfor ext in ("pxo","ora"):\n pngs=sorted((E/f"export-{ext}").glob("*.png"));r={"emitted":[x.name for x in pngs],"rgba_equal":False}\n if len(pngs)==1:\n  im=Image.open(pngs[0]).convert("RGBA");r.update(size=list(im.size),sha256=sh(pngs[0]),rgba_equal=im.size==ref.size and im.tobytes()==ref.tobytes())\n res[ext]=r\nres["all_equal"]=all(res[e]["rgba_equal"] for e in ("pxo","ora"));print(json.dumps(res,indent=1))\nprint("MUXIU_WEST_PXL_EXPORT_"+("EQUAL" if res["all_equal"] else "MISMATCH"));sys.exit(0 if res["all_equal"] else 1)\n', '/home/kel/projects/worlds-between/repo/game/assets/characters/muxiu-native-v01/west', '/home/kel/projects/worlds-between/repo/outputs/muxiu-w01/logs/hermes60-pxl']
+rc: 0
+
+{
+ "source_png": "rpg-2-star-ocean-the-second_muxiu_west-static_unapproved-v01_20261024-055724-74e5c117.png",
+ "source_sha256": "d27f686af6c93a37e8385c85e8760ff5bccf11ed9e221f6c5948e1fa28c3c2e5",
+ "pxo": {
+  "emitted": [
+   "muxiu-west-idle-static-v01.png"
+  ],
+  "rgba_equal": true,
+  "size": [
+   80,
+   112
+  ],
+  "sha256": "d5766889d3279b47ab62bda1ff317c16df5bf1e8e6462c5f38a88ce80498308f"
+ },
+ "ora": {
+  "emitted": [
+   "rpg-2-star-ocean-the-second_muxiu_west-edit_unapproved-v01_20261024-055724-73a0748b.png"
+  ],
+  "rgba_equal": true,
+  "size": [
+   80,
+   112
+  ],
+  "sha256": "d5766889d3279b47ab62bda1ff317c16df5bf1e8e6462c5f38a88ce80498308f"
+ },
+ "all_equal": true
+}
+MUXIU_WEST_PXL_EXPORT_EQUAL
