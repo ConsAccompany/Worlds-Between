@@ -1,0 +1,55 @@
+{
+  "task": [
+    {
+      "id": "content.char.heya.static-west",
+      "type": "native-pixel",
+      "title": {
+        "zh": "赫娅 · 西向高密度静止帧",
+        "en": "Heya · west high-density static"
+      },
+      "area": "characters",
+      "stage": "content",
+      "owner": "deepseek",
+      "status": "done",
+      "points": 2,
+      "doneCriterion": {
+        "zh": "西向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算",
+        "en": "west native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"
+      },
+      "dependsOn": [
+        "content.char.heya.static-south"
+      ],
+      "evidence": [
+        "game/assets/characters/heya-native-v01/west/rpg-2-star-ocean-the-second_heya_west-static_unapproved-v01_20261024-131500-22034c8f.png",
+        "game/assets/characters/heya-native-v01/west/rpg-2-star-ocean-the-second_heya_west-edit_unapproved-v01_20261024-131500-4bc15dd4.pxo",
+        "game/assets/characters/heya-native-v01/west/rpg-2-star-ocean-the-second_heya_west-edit_unapproved-v01_20261024-131500-3346f283.ora",
+        "docs/qa/rpg-2-star-ocean-the-second_heya_west-static-coordinator-verdict_unapproved-v01_20261024-132000-h150c001.md"
+      ],
+      "subject": {
+        "kind": "character-variant",
+        "id": "heya"
+      },
+      "statusAt": "2026-10-24T13:18:58Z",
+      "note": {
+        "zh": "",
+        "en": "Native west static source committed at 6d727227; independent 49/49, deterministic rebuild, native export equality11/11, checked bilingual source-fit and M1 pass. Native application diagnostics fail, GUI unverified, producer backup-before-edit failed and source events retained; no runtime/default/human approval or review score. Source-production criterion only."
+      }
+    }
+  ],
+  "after": {
+    "production": 62.5,
+    "inspection": 21.6,
+    "approval": 7.8
+  },
+  "sourceCommit": "6d7272272c0ed19aa47ba0723b868d51482c2cc9",
+  "before": {
+    "production": 62.4,
+    "inspection": 21.6,
+    "approval": 7.8
+  },
+  "changePercentagePoints": {
+    "production": 0.1,
+    "inspection": 0,
+    "approval": 0
+  }
+}
