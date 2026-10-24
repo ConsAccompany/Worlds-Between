@@ -1,0 +1,140 @@
+{
+  "tool_sha256_text_lf_v1": "3566edc827f2f9ee5414393719ecd433312c8a927b62e20d040d679251447dee",
+  "rebuild": {
+    "checked": 89,
+    "ok": 89
+  },
+  "deterministic": true,
+  "neutral_pins_exact_before_after": true,
+  "source_checks": [
+    {
+      "check": "west all frames 80x112 binary alpha, clear border, Muxiu palette only",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "west static + idle f00 are the exact neutral PNG bytes",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "west counts idle 4 walk 12 stop bridge frames 24",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "west every bridge = [walk p, s1, s2, idle f00]",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "west idle frames distinct (>=3)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "west walk lower body differs across phases (>=8)",
+      "pass": true,
+      "detail": 12
+    },
+    {
+      "check": "west no walk phase equals the neutral bitmap",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "west top row never above neutral (body never shifted up)",
+      "pass": true,
+      "detail": [
+        8,
+        9
+      ]
+    },
+    {
+      "check": "west ORA role layers recompose to neutral PNG",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "west PXO (Muxiu 13 roles + far-limbs + guides) cels recompose to every frame PNG",
+      "pass": true,
+      "detail": 41
+    },
+    {
+      "check": "west side planted foot world slip at 40 ms boundaries <= 1 source texel (rounding of 11.2)",
+      "pass": true,
+      "detail": {
+        "max_src": 0.8,
+        "60fps_excursion_src": 10.667
+      }
+    },
+    {
+      "check": "west each foot grounded 4 phases per cycle",
+      "pass": true,
+      "detail": [
+        4,
+        4
+      ]
+    },
+    {
+      "check": "west stop bridges: a grounded foot never moves (host stopped)",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "identity: braid (front/left), rope bracelet (near wrist), whistle, moss cloak + brass clasp in every frame",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "structural far limb: every walk/stop cel is one continuous clothed boot+wrap+trouser silhouette (8-connected, spans hip->ankle, no 1-texel string, all three leg roles present)",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "identity: bracelet stays on the near arm (constant offset to arm top in every frame)",
+      "pass": true,
+      "detail": 0
+    },
+    {
+      "check": "runtime sprite set: schema/actor/west only/explicit durations/relative byte-equal PNG copies",
+      "pass": true,
+      "detail": 16
+    },
+    {
+      "check": "stop supplemental: actor, west only, 24 bridge frames, runtime_default false, byte-equal copies",
+      "pass": true,
+      "detail": 24
+    },
+    {
+      "check": "package-local registry lists ONLY muxiu -> this set",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "all written paths are under the assigned roots",
+      "pass": true,
+      "detail": ""
+    }
+  ],
+  "contacts": {
+    "walk_max_world_slip_src_at_40ms_boundaries": 0.8,
+    "walk_max_world_slip_logical_at_40ms_boundaries": 0.4,
+    "walk_planted_foot_world_excursion_src_60fps_samples": 10.667,
+    "walk_planted_foot_world_excursion_logical_60fps_samples": 5.333,
+    "flight_phases": [
+      4,
+      5,
+      10,
+      11
+    ],
+    "stop_bridge_grounded_slip_src_max": 0.0
+  },
+  "residual_disclosed": "side planted-foot world slip is integer rounding of 11.2 src/40 ms at boundaries; between held frames the host moves continuously (60 fps excursion reported); not footlocked",
+  "not_run_here": [
+    "Pixelorama native export (independent checker)",
+    "Godot import/runtime",
+    "normal-speed movie"
+  ],
+  "fails": []
+}

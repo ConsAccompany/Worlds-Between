@@ -1,0 +1,467 @@
+{
+  "task": "content.char.muxiu.walk-west",
+  "manifest": "outputs/muxiu-ww84/rpg-2-star-ocean-the-second_muxiu_walk-source-manifest_unapproved-b84ww001-v01_20261024-083000-b08b0952.json",
+  "manifest_sha256_raw": "8f172c7acdab21427f743232fe24fa53702304108bac724a14102167e42cafb6",
+  "checker_sha256_raw": "04bedd43f8aef7da6c35c3060b32616a2ff19577d40b24f5098cb5d09e878c88",
+  "checks": [
+    {
+      "check": "exactly one source manifest",
+      "pass": true,
+      "detail": [
+        "rpg-2-star-ocean-the-second_muxiu_walk-source-manifest_unapproved-b84ww001-v01_20261024-083000-b08b0952.json"
+      ]
+    },
+    {
+      "check": "manifest scope: west only, task content.char.muxiu.walk-west, UNAPPROVED",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "manifest dependency: canonical south TODO, not a west dependency, no completion claim",
+      "pass": true,
+      "detail": "NOT a west dependency; canonical south remains TODO and is not produced or claimed here. Only an uncommitted prior adapter pattern is reused."
+    },
+    {
+      "check": "neutral Muxiu west PNG pin",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "palette file pin",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "neutral editable pins byte-exact",
+      "pass": true,
+      "detail": 4
+    },
+    {
+      "check": "reused_engine text_lf_v1 hash matches tool file",
+      "pass": true,
+      "detail": "tools/rpg-2-star-ocean-the-second_jiang-lan_exploration-source-author_unapproved-jexplore39-v01_20261022-154032-5bca7193.py"
+    },
+    {
+      "check": "reused_helpers text_lf_v1 hash matches tool file",
+      "pass": true,
+      "detail": "tools/rpg-2-star-ocean-the-second_protagonist-male_explore-4dir-source-author_unapproved-mexplore23-v01_20261021-162551-6e3b1a7d.py"
+    },
+    {
+      "check": "tool text_lf_v1 hash matches tool file",
+      "pass": true,
+      "detail": "tools/rpg-2-star-ocean-the-second_muxiu_walk-west-source-author_unapproved-b84ww001-v01_20261024-083000.py"
+    },
+    {
+      "check": "all 41 frame PNG raw hashes match manifest",
+      "pass": true,
+      "detail": 41
+    },
+    {
+      "check": "frames 80x112, binary alpha, clear border, palette subset of pinned Muxiu palette",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "static and idle f00 are the neutral bytes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "articulated walk: no phase equals neutral below hip, >=8 distinct lower-body states",
+      "pass": true,
+      "detail": {
+        "phases_equal_neutral_lower": 0,
+        "distinct_lower": 12
+      }
+    },
+    {
+      "check": "PXO raw hash",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "PXO 41 frames, layers far-limbs + 13 Muxiu roles + guides",
+      "pass": true,
+      "detail": [
+        "far-limbs",
+        "boots",
+        "legwraps",
+        "trousers",
+        "shirt",
+        "belt",
+        "pouches",
+        "cloak",
+        "arms",
+        "bracelet",
+        "whistle",
+        "face",
+        "hair",
+        "braid",
+        "guides"
+      ]
+    },
+    {
+      "check": "PXO cels recompose to every frame PNG (independent alpha-over)",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "PXO tags west-idle 2-5, west-walk 6-17, 12 stop tags",
+      "pass": true,
+      "detail": [
+        6,
+        17
+      ]
+    },
+    {
+      "check": "package paths under the assigned west-walk root",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "sprite set raw hash",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "sprite set timing/contract/west-only",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "stop supplemental text_lf_v1 hash",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "stop supplemental structure (12 phase bridges [walk p, s1, s2, idle f00], 40 ms, settle 120 inclusive, non-default)",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "package PNG copies byte-equal to source frames",
+      "pass": true,
+      "detail": 40
+    },
+    {
+      "check": "walk timing boundaries: 39->p0 40->p1 479->p11 480->p0 (cycle 480 ms)",
+      "pass": true,
+      "detail": {
+        "0": 0,
+        "39": 0,
+        "40": 1,
+        "439": 10,
+        "440": 11,
+        "479": 11,
+        "480": 0,
+        "481": 0
+      }
+    },
+    {
+      "check": "idle timing boundaries (700/200/400/200, loop 1500 ms)",
+      "pass": true,
+      "detail": {
+        "699": 0,
+        "700": 1,
+        "899": 1,
+        "900": 2,
+        "1299": 2,
+        "1300": 3,
+        "1499": 3,
+        "1500": 0
+      }
+    },
+    {
+      "check": "stop bridge boundaries: release t0 walk p; 40 s1; 80 s2; 120 (inclusive) idle f00 held",
+      "pass": true,
+      "detail": {
+        "0": 0,
+        "39": 0,
+        "40": 1,
+        "79": 1,
+        "80": 2,
+        "119": 2,
+        "120": 3,
+        "1000": 3
+      }
+    },
+    {
+      "check": "each foot grounded exactly 4 of 12 phases",
+      "pass": true,
+      "detail": [
+        4,
+        4
+      ]
+    },
+    {
+      "check": "side world slip at 40 ms boundaries is integer rounding <=1 src texel",
+      "pass": true,
+      "detail": 0.8
+    },
+    {
+      "check": "stop bridges (all 12 entry phases): grounded foot never moves (host stopped)",
+      "pass": true,
+      "detail": 0
+    },
+    {
+      "check": "all 12 stop bridges terminate in exact neutral feet + neutral PNG (idle f00)",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "independent contacts agree with author claims (world slip, flight phases, 60fps excursion, stop 0)",
+      "pass": true,
+      "detail": [
+        4,
+        5,
+        10,
+        11
+      ]
+    },
+    {
+      "check": "legwraps articulate across the cycle (>=8 distinct states, no alpha below sole)",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "b84 raw far limb: every walk/stop PXO far-limbs cel is ONE 8-connected clothed boot+wrap+trouser mass (span>=18 rows, no 1-texel string row, all three leg roles present)",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "b84 visible far limb: in all 36 walk/stop composed frames the far leg remains visibly exposed (non-zero, vertical span>=6) rather than collapsing behind the near leg",
+      "pass": true,
+      "detail": {
+        "bad": [],
+        "min_visible_texels": 92
+      }
+    },
+    {
+      "check": "bracelet stays on the near arm (constant offset in all 41 frames)",
+      "pass": true,
+      "detail": [
+        10
+      ]
+    },
+    {
+      "check": "identity: braid (front/left), rope bracelet (near wrist), wooden whistle, moss cloak + brass clasp in all frames",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "top row never above neutral row 8; soles never below 103",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "west art is not a horizontal mirror of any frame (authored profile, independent of east)",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "all negative controls rejected",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "native Pixelorama export: 41/41 frames RGBA-exact, exit 0, no timeout, source unchanged",
+      "pass": true,
+      "detail": {
+        "exit": 0,
+        "timeout": false,
+        "frames_emitted": 41,
+        "frames_rgba_exact": 41
+      }
+    },
+    {
+      "check": "preview translates horizontally WEST at 11.2 src px/40 ms, zero vertical displacement, 40 ms retained",
+      "pass": true,
+      "detail": {
+        "step_src": 11.2,
+        "travel_src": 268.8,
+        "canvas": [
+          389,
+          120
+        ]
+      }
+    }
+  ],
+  "negative_controls": [
+    {
+      "control": "tampered walk PNG byte -> hash mismatch",
+      "rejected": true
+    },
+    {
+      "control": "tampered PXO cel -> recomposition mismatch",
+      "rejected": true
+    },
+    {
+      "control": "malformed stop JSON (bridge ends on idle f01) -> rejected",
+      "rejected": true
+    },
+    {
+      "control": "stop frame_ms 39 -> rejected",
+      "rejected": true
+    },
+    {
+      "control": "stop JSON with south entry (out of scope) -> rejected",
+      "rejected": true
+    },
+    {
+      "control": "stop JSON with missing bridge frame -> rejected",
+      "rejected": true
+    },
+    {
+      "control": "stop JSON missing one entry phase -> rejected",
+      "rejected": true
+    },
+    {
+      "control": "walk duration 0 -> rejected",
+      "rejected": true
+    },
+    {
+      "control": "walk duration 41 (boundary drift) -> rejected",
+      "rejected": true
+    },
+    {
+      "control": "wrong pivot -> rejected",
+      "rejected": true
+    },
+    {
+      "control": "bridge s1 near foot slid 1 texel -> stop slip detected",
+      "rejected": true
+    },
+    {
+      "control": "bridge s2 far foot slid 1 texel -> stop slip detected",
+      "rejected": true
+    },
+    {
+      "control": "neutral endpoint near foot shifted 1 texel -> endpoint/slip detected",
+      "rejected": true
+    },
+    {
+      "control": "unchanged neutral bitmap labelled as walk -> not articulated",
+      "rejected": true
+    },
+    {
+      "control": "ORIGINAL fragmented far-limb geometry (2-5 texel front-boot split) -> rejected by b84 continuity (thin string / missing trouser+wrap mass)",
+      "rejected": true
+    },
+    {
+      "control": "far limb severed above the boot (disconnected mass) -> rejected",
+      "rejected": true
+    }
+  ],
+  "contacts_independent": {
+    "grounded_phases_per_foot": [
+      4,
+      4
+    ],
+    "flight_phases": [
+      4,
+      5,
+      10,
+      11
+    ],
+    "double_support_phases": [],
+    "grounded_pairs": 6,
+    "world_slip_src_max_at_40ms": 0.8,
+    "walk_planted_foot_world_excursion_src_60fps": 10.667,
+    "walk_planted_foot_world_excursion_logical_60fps": 5.333,
+    "stop_bridge_grounded_slip_src_max": 0,
+    "stop_entry_phases_checked": 12,
+    "stop_endpoint_neutral_all": true,
+    "frame_hold_assumption": "each walk phase held 40 ms; host root moves continuously at 140 logical px/s; between held frames a planted foot sweeps the 60 fps excursion (not footlock)"
+  },
+  "articulation": {
+    "phases_equal_neutral_lower": 0,
+    "distinct_lower": 12
+  },
+  "native": {
+    "run": true,
+    "command": [
+      "/home/kel/projects/worlds-between/tooling/pixelorama-1.2.3/Pixelorama-Linux-64bit/Pixelorama.x86_64",
+      "--headless",
+      "--audio-driver",
+      "Dummy",
+      "--quit",
+      "--",
+      "--export",
+      "-o",
+      "/home/kel/projects/worlds-between/repo/outputs/muxiu-ww84/hermes84-independent/native/requested_20261024-083000-b84ww001.png",
+      "/home/kel/projects/worlds-between/repo/outputs/muxiu-ww84/rpg-2-star-ocean-the-second_muxiu_walk-west-editable_unapproved-b84ww001-v01_20261024-083000-02d9de7b.pxo"
+    ],
+    "exit": 0,
+    "timeout": false,
+    "elapsed_s": 6.06,
+    "frames_expected": 41,
+    "frames_emitted": 41,
+    "frames_rgba_exact": 41,
+    "source_unchanged": true,
+    "diagnostics": [
+      "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing.",
+      "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing.",
+      "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing.",
+      "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing."
+    ],
+    "application_clean": false,
+    "gui_saveas_reopen_verified": false
+  },
+  "preview": {
+    "gif": "outputs/muxiu-ww84/hermes84-independent/rpg-2-star-ocean-the-second_muxiu_walk-west-normal-speed-preview-source-bound_unapproved-b84ww001-v01_20261024-083000-b84ww001.gif",
+    "gif_sha256": "2e9a3bfd488c15fddc1e718165ab8c610982c7b92014d743754374bf065509c0",
+    "contact_sheet": "outputs/muxiu-ww84/hermes84-independent/rpg-2-star-ocean-the-second_muxiu_walk-west-contact-sheet-walk-s1-s2_unapproved-b84ww001-v01_20261024-083000-b84ww001.png",
+    "contact_sheet_sha256": "55c58ad25f50fd02e86d237e591802bcfb59a5e0ca380af6042c9b63d72db174",
+    "axis": "horizontal x only, screen-left = west; vertical offset constant 0",
+    "host_logical_px_s": 140.0,
+    "source_px_per_40ms": 11.2,
+    "gif_canvas_px": [
+      1167,
+      360
+    ],
+    "frames": 29,
+    "durations_ms": [
+      700,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      900
+    ],
+    "scope": "source-bound PIL composite at 40 ms/frame, host 140 logical px/s = 11.2 source px per 40 ms westward (screen-left); NOT a Godot capture",
+    "sequence": "idle f00 700ms; walk 2 cycles translating west; release at phase 7 -> s1, s2, idle f00 with host stopped",
+    "supersedes_wrong_b78ww001_preview": "The old b78ww001 preview (retained under indep-r3 and hermes78-independent) translated the sprite DOWNWARD in a tall canvas copied from the south preview. It did not demonstrate west motion. This r1 preview is horizontal westward translation and is the only preview evidence here."
+  },
+  "not_claimed": [
+    "footlock/slip-free (40 ms boundary residual is integer rounding; 60 fps held-frame excursion 5.333 logical px is disclosed)",
+    "fluidity or human motion acceptance",
+    "GUI SaveAs/reopen",
+    "Godot runtime/normal-host stop playback",
+    "art approval",
+    "default adoption"
+  ],
+  "passed": true
+}
