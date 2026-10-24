@@ -1,0 +1,279 @@
+{
+  "task": "content.char.heya.static-west native Pixelorama export equality (test-only)",
+  "tool": "tools/rpg-2-star-ocean-the-second_heya_west-static-native-pixelorama-check_v01_20261024-131500-h150w001.py",
+  "tool_sha256": "5025947c23d7790f1f27e659adbccb010c40fd8c1db86a76d2ff93f0a348dc77",
+  "native_executable": "/home/kel/projects/worlds-between/tooling/pixelorama-1.2.3/Pixelorama-Linux-64bit/Pixelorama.x86_64",
+  "native_executable_sha256": "d9f79ab89b5ae369aeed11c6052d402e8218cd503bf85b4a235f9c30c46a7c63",
+  "run_id": "20261024-131345-b5bec9a0",
+  "package": {
+    "static_png": "game/assets/characters/heya-native-v01/west/rpg-2-star-ocean-the-second_heya_west-static_unapproved-v01_20261024-131500-22034c8f.png",
+    "static_sha256": "f8a167d8df2a554660c01b8cb88e461f878297c8d8da2456a566bdc0c2ed766e",
+    "pxo": "game/assets/characters/heya-native-v01/west/rpg-2-star-ocean-the-second_heya_west-edit_unapproved-v01_20261024-131500-4bc15dd4.pxo",
+    "pxo_sha256": "ee5bd72e1b1297c22909b1c952048acd092aeb146ee320dd7d1a8adb54fd6247",
+    "ora": "game/assets/characters/heya-native-v01/west/rpg-2-star-ocean-the-second_heya_west-edit_unapproved-v01_20261024-131500-3346f283.ora",
+    "ora_sha256": "fc3d332b0b263fba3d6f5be39f38c45b3ed872b76e706471e2671cb4bd4d424b"
+  },
+  "gates": {
+    "pxo_flat_one_export": true,
+    "pxo_flat_exact_static": true,
+    "pxo_split_layer_count": true,
+    "pxo_split_each_layer_exact": true,
+    "pxo_split_merged_exact_static": true,
+    "pxo_no_visible_guide_export": true,
+    "pxo_inputs_unchanged": true,
+    "ora_flat_one_export": true,
+    "ora_flat_exact_static": true,
+    "ora_inputs_unchanged": true,
+    "package_bytes_unchanged": true
+  },
+  "equality_passed": true,
+  "layer_rows": {
+    "boots": true,
+    "dress": true,
+    "coat": true,
+    "apron": true,
+    "belt": true,
+    "strap": true,
+    "bag": true,
+    "arms": true,
+    "herb": true,
+    "face": true,
+    "hair": true,
+    "braid": true,
+    "scarf": true
+  },
+  "runs": {
+    "pxo-flat": {
+      "label": "pxo-flat",
+      "command": [
+        "/home/kel/projects/worlds-between/tooling/pixelorama-1.2.3/Pixelorama-Linux-64bit/Pixelorama.x86_64",
+        "--headless",
+        "--quit",
+        "--",
+        "--export",
+        "-o",
+        "/home/kel/projects/worlds-between/repo/outputs/heya-w150/native-1/20261024-131345-b5bec9a0/pxo-flat/export/out.png",
+        "/home/kel/projects/worlds-between/repo/outputs/heya-w150/native-1/20261024-131345-b5bec9a0/pxo-flat/pxo-flat-input.pxo"
+      ],
+      "start_utc": "2026-10-24T13:13:45.455962+00:00",
+      "end_utc": "2026-10-24T13:13:47.501463+00:00",
+      "exit": 0,
+      "timeout": false,
+      "input_sha256": "ee5bd72e1b1297c22909b1c952048acd092aeb146ee320dd7d1a8adb54fd6247",
+      "input_unchanged": true,
+      "source_unchanged": true,
+      "stdout_log": "outputs/heya-w150/native-1/20261024-131345-b5bec9a0/pxo-flat/stdout.log",
+      "stderr_log": "outputs/heya-w150/native-1/20261024-131345-b5bec9a0/pxo-flat/stderr.log",
+      "diagnostic_markers": [
+        "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing.",
+        "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing.",
+        "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing.",
+        "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing."
+      ],
+      "diagnostic_clean": false,
+      "exports": [
+        {
+          "path": "outputs/heya-w150/native-1/20261024-131345-b5bec9a0/pxo-flat/export/heya-west-idle-static-v01.png",
+          "sha256": "fc4a88304794f94d33a8a2504a2803e9b412d793e470117b4805557b6cf5d2d5",
+          "size": [
+            80,
+            112
+          ]
+        }
+      ]
+    },
+    "pxo-split": {
+      "label": "pxo-split",
+      "command": [
+        "/home/kel/projects/worlds-between/tooling/pixelorama-1.2.3/Pixelorama-Linux-64bit/Pixelorama.x86_64",
+        "--headless",
+        "--quit",
+        "--",
+        "--export",
+        "--split-layers",
+        "-o",
+        "/home/kel/projects/worlds-between/repo/outputs/heya-w150/native-1/20261024-131345-b5bec9a0/pxo-split/export/out.png",
+        "/home/kel/projects/worlds-between/repo/outputs/heya-w150/native-1/20261024-131345-b5bec9a0/pxo-split/pxo-split-input.pxo"
+      ],
+      "start_utc": "2026-10-24T13:13:47.503701+00:00",
+      "end_utc": "2026-10-24T13:13:49.563754+00:00",
+      "exit": 0,
+      "timeout": false,
+      "input_sha256": "ee5bd72e1b1297c22909b1c952048acd092aeb146ee320dd7d1a8adb54fd6247",
+      "input_unchanged": true,
+      "source_unchanged": true,
+      "stdout_log": "outputs/heya-w150/native-1/20261024-131345-b5bec9a0/pxo-split/stdout.log",
+      "stderr_log": "outputs/heya-w150/native-1/20261024-131345-b5bec9a0/pxo-split/stderr.log",
+      "diagnostic_markers": [
+        "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing.",
+        "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing.",
+        "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing.",
+        "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing."
+      ],
+      "diagnostic_clean": false,
+      "exports": [
+        {
+          "path": "outputs/heya-w150/native-1/20261024-131345-b5bec9a0/pxo-split/export/heya-west-idle-static-v01(apron) _0001.png",
+          "sha256": "5125284989101798e6331248e683a751e6001caadeefea5f5e9765bc086dadaf",
+          "size": [
+            80,
+            112
+          ]
+        },
+        {
+          "path": "outputs/heya-w150/native-1/20261024-131345-b5bec9a0/pxo-split/export/heya-west-idle-static-v01(arms) _0001.png",
+          "sha256": "dd9481247041016b00c79b8b870568a1ad2c3b2974a3c264bccdb812ca7038b3",
+          "size": [
+            80,
+            112
+          ]
+        },
+        {
+          "path": "outputs/heya-w150/native-1/20261024-131345-b5bec9a0/pxo-split/export/heya-west-idle-static-v01(bag) _0001.png",
+          "sha256": "35b3fe1f64581ee1506267e51cfaecb9a34fff12100021f324fe40cc8a37a2d7",
+          "size": [
+            80,
+            112
+          ]
+        },
+        {
+          "path": "outputs/heya-w150/native-1/20261024-131345-b5bec9a0/pxo-split/export/heya-west-idle-static-v01(belt) _0001.png",
+          "sha256": "52d810d2c5fae3064e83e65e9bbf748ab7e1a175e65eea500ccecacb75d82149",
+          "size": [
+            80,
+            112
+          ]
+        },
+        {
+          "path": "outputs/heya-w150/native-1/20261024-131345-b5bec9a0/pxo-split/export/heya-west-idle-static-v01(boots) _0001.png",
+          "sha256": "db5f36930425233fd00ba67582beed16637a0a5e9c622aef286af93ef2a2d282",
+          "size": [
+            80,
+            112
+          ]
+        },
+        {
+          "path": "outputs/heya-w150/native-1/20261024-131345-b5bec9a0/pxo-split/export/heya-west-idle-static-v01(braid) _0001.png",
+          "sha256": "1556dc8daef005dcd43aeae7c3a34f418724f51ff901a183984696393d85cc3f",
+          "size": [
+            80,
+            112
+          ]
+        },
+        {
+          "path": "outputs/heya-w150/native-1/20261024-131345-b5bec9a0/pxo-split/export/heya-west-idle-static-v01(coat) _0001.png",
+          "sha256": "be276864cdc5016f0709cb664105028d587cc5930b86aa0a28002f86e94efdc8",
+          "size": [
+            80,
+            112
+          ]
+        },
+        {
+          "path": "outputs/heya-w150/native-1/20261024-131345-b5bec9a0/pxo-split/export/heya-west-idle-static-v01(dress) _0001.png",
+          "sha256": "ff7d86a3b5734399519c549f60e6b87a1e2426b225006ca6efcc340e449a5ee7",
+          "size": [
+            80,
+            112
+          ]
+        },
+        {
+          "path": "outputs/heya-w150/native-1/20261024-131345-b5bec9a0/pxo-split/export/heya-west-idle-static-v01(face) _0001.png",
+          "sha256": "8a6de7d49802b0e567a833b7b3b5209f2ce1b364948162b44e3c10aea4b6bf7a",
+          "size": [
+            80,
+            112
+          ]
+        },
+        {
+          "path": "outputs/heya-w150/native-1/20261024-131345-b5bec9a0/pxo-split/export/heya-west-idle-static-v01(hair) _0001.png",
+          "sha256": "a845e4c3df6a3fb917f791c202207f4dd4fb32f14b91f8df4c97bb37b1bef50d",
+          "size": [
+            80,
+            112
+          ]
+        },
+        {
+          "path": "outputs/heya-w150/native-1/20261024-131345-b5bec9a0/pxo-split/export/heya-west-idle-static-v01(herb) _0001.png",
+          "sha256": "e1c3ac57be08b18750ffd6281f0e26bcaee60b609f099cfde656eb52b7ec13e1",
+          "size": [
+            80,
+            112
+          ]
+        },
+        {
+          "path": "outputs/heya-w150/native-1/20261024-131345-b5bec9a0/pxo-split/export/heya-west-idle-static-v01(scarf) _0001.png",
+          "sha256": "aee2accec92c56a87c4103ecb6d08bbdcbb093cd5123dcfb708124ab785d862c",
+          "size": [
+            80,
+            112
+          ]
+        },
+        {
+          "path": "outputs/heya-w150/native-1/20261024-131345-b5bec9a0/pxo-split/export/heya-west-idle-static-v01(strap) _0001.png",
+          "sha256": "a936768580e68888e8f0a5779e080026c3e428b7bac067bafa49870b49b43331",
+          "size": [
+            80,
+            112
+          ]
+        }
+      ]
+    },
+    "ora-flat": {
+      "label": "ora-flat",
+      "command": [
+        "/home/kel/projects/worlds-between/tooling/pixelorama-1.2.3/Pixelorama-Linux-64bit/Pixelorama.x86_64",
+        "--headless",
+        "--quit",
+        "--",
+        "--export",
+        "-o",
+        "/home/kel/projects/worlds-between/repo/outputs/heya-w150/native-1/20261024-131345-b5bec9a0/ora-flat/export/out.png",
+        "/home/kel/projects/worlds-between/repo/outputs/heya-w150/native-1/20261024-131345-b5bec9a0/ora-flat/ora-flat-input.ora"
+      ],
+      "start_utc": "2026-10-24T13:13:49.578144+00:00",
+      "end_utc": "2026-10-24T13:13:51.532351+00:00",
+      "exit": 0,
+      "timeout": false,
+      "input_sha256": "fc3d332b0b263fba3d6f5be39f38c45b3ed872b76e706471e2671cb4bd4d424b",
+      "input_unchanged": true,
+      "source_unchanged": true,
+      "stdout_log": "outputs/heya-w150/native-1/20261024-131345-b5bec9a0/ora-flat/stdout.log",
+      "stderr_log": "outputs/heya-w150/native-1/20261024-131345-b5bec9a0/ora-flat/stderr.log",
+      "diagnostic_markers": [
+        "ERROR: 14 RID allocations of type 'PN13RendererDummy14TextureStorage12DummyTextureE' were leaked at exit.",
+        "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing.",
+        "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing.",
+        "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing.",
+        "ERROR: Condition \"!actions.custom_samplers.has(function->arguments[j].tex_builtin)\" is true. Continuing.",
+        "ERROR: Index p_index = 0 is out of bounds ((int)data.children_cache.size() - data.internal_children_front_count_cache - data.internal_children_back_count_cache = 0).",
+        "ERROR: Index p_index = 0 is out of bounds ((int)data.children_cache.size() - data.internal_children_front_count_cache - data.internal_children_back_count_cache = 0).",
+        "ERROR: Index p_index = 0 is out of bounds ((int)data.children_cache.size() - data.internal_children_front_count_cache - data.internal_children_back_count_cache = 0).",
+        "ERROR: Required object \"rp_node\" is null.",
+        "ERROR: Must be an ancestor of the control.",
+        "WARNING: 172 ObjectDB instances were leaked at exit (run with `--verbose` for details).",
+        "ERROR: 16 resources still in use at exit (run with --verbose for details)."
+      ],
+      "diagnostic_clean": false,
+      "exports": [
+        {
+          "path": "outputs/heya-w150/native-1/20261024-131345-b5bec9a0/ora-flat/export/ora-flat-input.png",
+          "sha256": "fc4a88304794f94d33a8a2504a2803e9b412d793e470117b4805557b6cf5d2d5",
+          "size": [
+            80,
+            112
+          ]
+        }
+      ]
+    }
+  },
+  "diagnostic_clean": false,
+  "shader_sampler_diagnostic_counts": {
+    "pxo-flat": 4,
+    "pxo-split": 4,
+    "ora-flat": 4
+  },
+  "diagnostic_note": "Application diagnostics are retained separately and are NOT part of export equality; diagnostic_clean=false is not claimed as a pass.",
+  "gui_saveas_tested": false,
+  "runtime_or_default_changed": false,
+  "art_approved": false
+}
