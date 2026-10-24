@@ -1,0 +1,31 @@
+{
+  "coordinatorAttempt": 58,
+  "canonicalTask": "content.char.muxiu.static-south",
+  "job": "467cdb57e9c545adb4982ee45b974b7b",
+  "providerAttempt": 59,
+  "outcome": "exited",
+  "classification": "max_turns",
+  "returncode": 1,
+  "scope": {"confirmed": true, "unit": "wb-provider-1feaea99fff34ce78a2b0c6c02977ee0.scope"},
+  "stdoutPath": "/home/kel/projects/worlds-between/autonomy/provider/59-claude.stdout.log",
+  "stdoutSha256": "23ba513afd38cd3524c77d0589c81ecc8149293836143609077101c4634dc7c8",
+  "stderrPath": "/home/kel/projects/worlds-between/autonomy/provider/59-claude.stderr.log",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "permissionDenials": {
+    "count": 4,
+    "exactCommandsAndResponses": "Retained verbatim in stdoutPath: terminal result permission_denials and matching tool_result records. Denied compound Bash commands concern environment discovery, hash lookup, a compound draft patch/preview and compound final verification. They are genuine tool permission gates, not missing overwrite consent. No denied interpreter invocation appears in this provider session.",
+    "toolUseIds": ["toolu_01Wa6aM8gNjCDXhnwj8H8qhU", "toolu_019NU7H5K5pgUJJQD5nNX2o7", "toolu_01RdmXaBbF3ygg66XMfGNFkv", "toolu_014STgg12mkovZJeSUr145jj"]
+  },
+  "evidenceRetentionIncident": {
+    "path": "outputs/muxiu-s01/author/rpg-2-star-ocean-the-second_muxiu_south-preview-x6_unapproved-v01_20261024-071500-319b5233.png",
+    "finding": "Two failed draft previews reused the same path with different bytes, without a verified backup of the first bitmap. First original preview bytes are not claimed retained. Both failure logs and source mutation history survive in the hashed provider transcript. Final preview uses its source content hash in its name. This violates the backup-before-replacement instruction and is not waived by source completion.",
+    "recovery": "No synthetic recovery attempted; preserve current bitmap, both failure logs and original transcript. Avoid rebuilding into reused output paths."
+  },
+  "coordinatorToolFailure": {
+    "tool": "execute_code",
+    "toolCallsMade": 0,
+    "error": "BLOCKED: execute_code runs arbitrary local Python (including subprocess calls that bypass shell-string approval checks). Single-query mode (-q) runs without a user present to approve it. Use normal tools instead, or set approvals.single_query_mode: approve only if this single-query run is intentionally trusted.",
+    "handling": "No configuration changes and no re-execution of the denied export script via another interpreter. Checkpoint authored using the normal explicit write_file tool."
+  },
+  "completionMeaning": "Provider did not finish cleanly. Coordinator independently evaluates actual static source criterion; no provider-exit, native-application-clean, default adoption, motion or creator approval claim."
+}
