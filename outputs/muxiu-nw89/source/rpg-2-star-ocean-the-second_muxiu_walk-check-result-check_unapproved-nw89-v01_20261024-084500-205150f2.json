@@ -1,0 +1,138 @@
+{
+  "tool_sha256_text_lf_v1": "7e9bd972218656a17fdb6c3e550860ed1f039ce7a2c14f1820c11c87f038f7ff",
+  "rebuild": {
+    "checked": 89,
+    "ok": 89
+  },
+  "deterministic": true,
+  "neutral_pins_exact_before_after": true,
+  "source_checks": [
+    {
+      "check": "north all frames 80x112 binary alpha, clear border, Muxiu palette only",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "north static + idle f00 are the exact neutral PNG bytes",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "north counts idle 4 walk 12 stop bridge frames 24",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "north every bridge = [walk p, s1, s2, idle f00]",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "north idle frames distinct (>=3)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "north walk lower body differs across phases (>=8)",
+      "pass": true,
+      "detail": 12
+    },
+    {
+      "check": "north no walk phase equals the neutral bitmap",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "north top row never above neutral (body never shifted up)",
+      "pass": true,
+      "detail": [
+        8,
+        9
+      ]
+    },
+    {
+      "check": "north ORA role layers recompose to neutral PNG",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "north PXO (Muxiu 13 roles + far-limbs + guides) cels recompose to every frame PNG",
+      "pass": true,
+      "detail": 41
+    },
+    {
+      "check": "north stop bridges: a grounded foot never moves (host stopped)",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "north each foot grounded 4 phases per cycle (p0-p3 lifted p4-p11)",
+      "pass": true,
+      "detail": [
+        4,
+        4
+      ]
+    },
+    {
+      "check": "identity: hair, braid screen-right, bracelet screen-left, moss cloak + cream back tree in every frame",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "north whistle body not drawn through the back (no wood colours)",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "north face layer has no eye/mouth colours in any frame (rear neck/ears only)",
+      "pass": true,
+      "detail": {
+        "frames": 40,
+        "with_eyes": 0
+      }
+    },
+    {
+      "check": "identity: bracelet stays on the left arm (constant offset to left-arm top in every frame)",
+      "pass": true,
+      "detail": 0
+    },
+    {
+      "check": "runtime sprite set: schema/actor/north only/explicit durations/relative byte-equal PNG copies",
+      "pass": true,
+      "detail": 16
+    },
+    {
+      "check": "stop supplemental: actor, north only, 24 bridge frames, runtime_default false, byte-equal copies",
+      "pass": true,
+      "detail": 24
+    },
+    {
+      "check": "package-local registry lists ONLY muxiu -> this set",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "all written paths are under the assigned roots",
+      "pass": true,
+      "detail": ""
+    }
+  ],
+  "contacts": {
+    "walk_max_world_slip_src_at_40ms_boundaries": 11.2,
+    "walk_max_world_slip_logical_at_40ms_boundaries": 5.6,
+    "flight_phases": [
+      4,
+      5,
+      10,
+      11
+    ],
+    "stop_bridge_grounded_slip_src_max": 0.0
+  },
+  "residual_disclosed": "north in-place planted-foot world slip 11.2 src (5.6 logical) per 40 ms; not footlocked",
+  "not_run_here": [
+    "Pixelorama native export (independent checker)",
+    "Godot import/runtime",
+    "normal-speed movie"
+  ],
+  "fails": []
+}

@@ -1,0 +1,60 @@
+PASS exactly one source manifest ["rpg-2-star-ocean-the-second_muxiu_walk-source-manifest_unapproved-nw89-v01_20261024-084500-af95ebb6.json"]
+PASS manifest scope: north only, task content.char.muxiu.walk-north, UNAPPROVED 
+PASS neutral Muxiu north PNG pin 
+PASS palette file pin 
+PASS supplementary neutral ORA pin 
+PASS neutral editable pins byte-exact 4
+PASS reused_engine text_lf_v1 hash matches tool file "tools/rpg-2-star-ocean-the-second_jiang-lan_exploration-source-author_unapproved-jexplore39-v01_20261022-154032-5bca7193.py"
+PASS reused_helpers text_lf_v1 hash matches tool file "tools/rpg-2-star-ocean-the-second_protagonist-male_explore-4dir-source-author_unapproved-mexplore23-v01_20261021-162551-6e3b1a7d.py"
+PASS tool text_lf_v1 hash matches tool file "tools/rpg-2-star-ocean-the-second_muxiu_walk-north-source-author_unapproved-nw89-v01_20261024-084500-nw89a001.py"
+PASS reused north static author hash pinned in manifest 
+PASS all 41 frame PNG raw hashes match manifest 41
+PASS frames 80x112, binary alpha, clear border, palette subset of pinned Muxiu palette []
+PASS static and idle f00 are the neutral bytes 
+PASS articulated walk: no phase equals neutral below hip, >=8 distinct lower-body states {"phases_equal_neutral_lower": 0, "distinct_lower": 12}
+PASS PXO raw hash 
+PASS PXO 41 frames, layers far-limbs + 13 Muxiu roles + guides ["far-limbs", "boots", "legwraps", "trousers", "shirt", "belt", "pouches", "cloak", "arms", "bracelet", "whistle", "face", "hair", "braid", "guides"]
+PASS PXO cels recompose to every frame PNG (independent alpha-over) []
+PASS PXO tags north-idle 2-5, north-walk 6-17, 12 stop tags [6, 17]
+PASS supplementary ORA raw hash 
+PASS ORA role layers recompose to the neutral PNG and mergedimage is the neutral PNG 
+PASS package paths under the assigned north-walk root 
+PASS sprite set raw hash 
+PASS sprite set timing/contract/north-only []
+PASS stop supplemental text_lf_v1 hash 
+PASS stop supplemental structure (12 phase bridges [walk p, s1, s2, idle f00], 40 ms, settle 120 inclusive, non-default) []
+PASS package PNG copies byte-equal to source frames 40
+PASS walk timing boundaries: 39->p0 40->p1 479->p11 480->p0 (cycle 480 ms) {"0": 0, "39": 0, "40": 1, "439": 10, "440": 11, "479": 11, "480": 0, "481": 0}
+PASS idle timing boundaries (700/200/400/200, loop 1500 ms) {"699": 0, "700": 1, "899": 1, "900": 2, "1299": 2, "1300": 3, "1499": 3, "1500": 0}
+PASS stop bridge boundaries: release t0 walk p; 40 s1; 80 s2; 120 (inclusive) idle f00 held {"0": 0, "39": 0, "40": 1, "79": 1, "80": 2, "119": 2, "120": 3, "1000": 3}
+PASS each foot grounded exactly 4 of 12 phases [4, 4]
+PASS planted foot screen position constant while grounded (in place) 0
+PASS stop bridges (all 12 entry phases): grounded foot never moves (host stopped) 0
+PASS all 12 stop bridges terminate in exact neutral feet + neutral PNG (idle f00) 
+PASS independent contacts agree with author claims (residual 11.2 src, flight phases, stop 0) [4, 5, 10, 11]
+PASS legwraps lift exactly with the boots of the same leg in every frame []
+PASS bracelet stays on the left arm (constant offset to left-arm top in all frames) [9]
+PASS identity: hair, braid screen-right, bracelet screen-left, moss cloak + cream back tree in all frames []
+PASS north no eyes/mouth colours in the face layer of any frame 
+PASS north whistle body not drawn through the back (no wood colours) 
+PASS top row never above neutral row 8; soles never below 103 
+REJECTED tampered walk PNG byte -> hash mismatch
+REJECTED tampered PXO cel -> recomposition mismatch
+REJECTED malformed stop JSON (bridge ends on idle f01) -> rejected
+REJECTED stop frame_ms 39 -> rejected
+REJECTED stop JSON with west entry (out of scope) -> rejected
+REJECTED stop JSON with missing bridge frame -> rejected
+REJECTED stop JSON missing one entry phase -> rejected
+REJECTED walk duration 0 -> rejected
+REJECTED walk duration 41 (boundary drift) -> rejected
+REJECTED wrong pivot -> rejected
+REJECTED bridge s1 foot slid 1 texel -> stop slip detected
+REJECTED bridge endpoint off-neutral (neutral feet shifted 1 texel) -> endpoint/slip detected
+REJECTED unchanged neutral bitmap labelled as walk -> not articulated
+REJECTED injected north eye colour in the face layer -> rejected
+REJECTED injected whistle wood through the back -> rejected
+PASS all negative controls rejected []
+PASS native Pixelorama export: 41/41 frames RGBA-exact, exit 0, no timeout, source unchanged {"exit": 0, "timeout": false, "frames_emitted": 41, "frames_rgba_exact": 41}
+APPLICATION_DIAGNOSTICS (separate, not an export-equality gate): 4
+outputs/muxiu-nw89/hermes89-independent/rpg-2-star-ocean-the-second_muxiu_walk-north-independent-result_v01_20261024-084500-nw89a001.json
+INDEPENDENT PASS 42 / 42
