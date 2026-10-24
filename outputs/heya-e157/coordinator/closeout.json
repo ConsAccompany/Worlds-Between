@@ -1,0 +1,89 @@
+{
+  "task": "content.char.heya.static-east",
+  "at": "2026-10-24T13:59:10.454955+00:00",
+  "verdict": "source-production-done-operational-partial",
+  "sourceCommit": "5f9ec6138e368b80abd5ee45fb1a740bd216779f",
+  "nativeAssetHashesUnchangedSinceBatchStart": true,
+  "nativeAssetCount": 28,
+  "canonicalLocalTask": {
+    "id": "content.char.heya.static-east",
+    "type": "native-pixel",
+    "title": {
+      "zh": "赫娅 · 东向高密度静止帧",
+      "en": "Heya · east high-density static"
+    },
+    "area": "characters",
+    "stage": "content",
+    "owner": "hermes",
+    "status": "done",
+    "points": 2,
+    "doneCriterion": {
+      "zh": "东向原生像素静止帧（48 逻辑像素）已提交，带 QA 记录；旧 32×48 占位不算",
+      "en": "east native pixel static (48 logical px) committed with a QA note; the old 32x48 placeholder does not count"
+    },
+    "dependsOn": [
+      "content.char.heya.static-south"
+    ],
+    "evidence": [
+      "game/assets/characters/heya-native-v01/east/rpg-2-star-ocean-the-second_heya_east-static_unapproved-v01_20261024-141500-6041ee95.png",
+      "game/assets/characters/heya-native-v01/east/rpg-2-star-ocean-the-second_heya_east-edit_unapproved-v01_20261024-141500-5493fe7b.pxo",
+      "game/assets/characters/heya-native-v01/east/rpg-2-star-ocean-the-second_heya_east-edit_unapproved-v01_20261024-141500-d23c7857.ora",
+      "docs/qa/rpg-2-star-ocean-the-second_heya_east-static-coordinator-verdict_unapproved-v01_20261024-135700-h157c001.md",
+      "outputs/heya-e157/coordinator/source/rpg-2-star-ocean-the-second_heya_east_independent-source-proof_v01_20261024-141500-h155e001.json"
+    ],
+    "subject": {
+      "kind": "character-variant",
+      "id": "heya"
+    },
+    "statusAt": "2026-10-24T13:57:40Z",
+    "note": {
+      "zh": "",
+      "en": "Existing DeepSeek source committed5f9ec6138e368b80abd5ee45fb1a740bd216779f; Hermes independently passed deterministic rebuild,57/57 source/negative controls,11/11 native export equality, four bilingual test-only source-fit captures and post-source-commit M1. Native application diagnostics fail; GUI untested; prior source-preservation violations and genuine technical denial retained, not cleared. Source-production only: defaults, art approval and unrelated Bible active record unchanged."
+    }
+  },
+  "onlyTaskChangedByThisBatch": [
+    "content.char.heya.static-east"
+  ],
+  "unrelatedStagedPathsPreserved": 153,
+  "sharedRecordsCommitted": false,
+  "sharedRecordsReason": "Ledger, Bible and registry were already dirty on entry. HEAD ledger lacks11 previous modified task records, including already-completed Heya dependencies. Publishing whole files would include unrelated work that batch157 did not independently integrate. Preserve the dirty canonical files; do not reset or bulk-stage. East source itself and QA are committed; local audited ledger done is valid against current dependencies.",
+  "provider": {
+    "job": "fbb58fba89f840428756ccb9f89d4b5a",
+    "outcome": "exited",
+    "classification": "success",
+    "scopeConfirmed": true,
+    "stdoutPath": "/home/kel/projects/worlds-between/autonomy/provider/158-deepseek.stdout.log",
+    "stdoutSha256": "dc0d0b5c5a8b8a37d655b2dc1fde87d9881130930efb99048b3ff05027639403",
+    "stderrPath": "/home/kel/projects/worlds-between/autonomy/provider/158-deepseek.stderr.log",
+    "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "independentChecks": {
+    "source": "57/57 including negative controls",
+    "deterministicRebuild": true,
+    "nativeExportEquality": "11/11",
+    "nativeApplicationDiagnostics": "FAILED; shader and ORA shutdown errors retained",
+    "bilingualSourceFit": "4 captures at640x360, visually opened; test-only daytime city/ruins, not ordinary actor integration or night coverage",
+    "postSourceCommitM1": "CHECKED_RUN PASS, M1_SMOKE_OK, exit0",
+    "canonicalLedger": "CHECK OK1183tasks"
+  },
+  "meters": {
+    "before": {
+      "production": 62.6,
+      "inspection": 21.6,
+      "approval": 7.8
+    },
+    "after": {
+      "production": 62.6,
+      "inspection": 21.6,
+      "approval": 7.8
+    },
+    "contentPointsAdded": 2,
+    "exactProductionAddedPercentagePoints": 0.06379585326953748,
+    "roundedProductionChangePercentagePoints": 0.0,
+    "sourceCommit": "5f9ec6138e368b80abd5ee45fb1a740bd216779f"
+  },
+  "preservation": "Prior second-QA-edit and overwritten-preview-log violations remain failures; recovered intermediate text is not retroactive compliance. New coordinator metadata edits backed up; development replacements through wb_safe_replace.",
+  "creatorArtApproval": false,
+  "runtimeDefaultChange": false,
+  "nextAction": "Integrate accumulated protected shared tracking records as a separately authorized verified boundary. Do not repeat east source or award more points; no new task started."
+}
