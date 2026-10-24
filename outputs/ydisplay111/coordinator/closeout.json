@@ -1,0 +1,132 @@
+{
+  "time": "2026-10-24T10:14:17.228362+00:00",
+  "canonical_task": "content.char.yanke.display",
+  "source_commit": "ac1ab6152dbaf6ccb8f819d1a3aa19bf7e0b3942",
+  "production_criterion": "PASS: display image committed with standalone opt-in bilingual UI; independently shown in actual rendered captures. Same credited precedent as Lin Que/Muxiu.",
+  "canonical_local_status": "done, audited via declared ledger CLI on verified copy, then installed using wb_safe_replace",
+  "ledger_sha256": "76598381a0cc22ca862089079b70042ecf5a0e8aa93a079d07ad781604de4ae4",
+  "ledger_backup_receipt": {
+    "source": "outputs/ydisplay111/coordinator/ledger-done-candidate.json",
+    "destination": "outputs/rpg-2-star-ocean-the-second_production-completion_task-ledger_v01_20261018-140533-3de52073.json",
+    "backup": "outputs/development-backups/c81c71afc88a418aaff7c0007aace327/original",
+    "before_sha256": "dccb1b20c90eb4e77c5a9b08d5483cf0fcc2d0c6e6ba69290c3d7b2cb61aded8",
+    "after_sha256": "76598381a0cc22ca862089079b70042ecf5a0e8aa93a079d07ad781604de4ae4"
+  },
+  "task": {
+    "id": "content.char.yanke.display",
+    "type": "native-pixel",
+    "title": {
+      "zh": "岩柯 · 游戏内展示图",
+      "en": "Yanke · in-game display image"
+    },
+    "area": "characters",
+    "stage": "content",
+    "owner": "claude",
+    "status": "done",
+    "points": 2,
+    "doneCriterion": {
+      "zh": "游戏内展示图已提交并在界面中显示",
+      "en": "The in-game display image is committed and shown in the UI"
+    },
+    "dependsOn": [
+      "content.char.yanke.static-south"
+    ],
+    "evidence": [
+      "outputs/ydisplay111/coordinator/source-verdict.json",
+      "game/assets/portraits/ydisplay111/rpg-2-star-ocean-the-second_yanke_display-portrait-manifest_v01_20261024-100318-10cf38b5.json"
+    ],
+    "subject": {
+      "kind": "character-variant",
+      "id": "yanke"
+    },
+    "statusAt": "2026-10-24T10:13:20Z",
+    "note": {
+      "zh": "",
+      "en": "Claude produced via authorized adapter. Source commit ac1ab6152dbaf6ccb8f819d1a3aa19bf7e0b3942 independently verified: deterministic native-static-derived display,42 contract checks,19 malformed predicates,66 rendered UI checks each EN/ZH and M1 pass. Standalone opt-in UI precedent; ordinary defaults unchanged and human art approval unperformed. Provider max-turn and read-only permission denials preserved, not treated as acceptance."
+    }
+  },
+  "progress": {
+    "production": {
+      "before": 62.3,
+      "after": 62.3,
+      "change_percentage_points": 0.0
+    },
+    "inspection": {
+      "before": 21.6,
+      "after": 21.6,
+      "change_percentage_points": 0.0
+    },
+    "approval": {
+      "before": 7.8,
+      "after": 7.8,
+      "change_percentage_points": 0.0
+    }
+  },
+  "content_points": {
+    "before": 698,
+    "after": 700,
+    "total": 1881
+  },
+  "provider_finished_results": [
+    {
+      "attempt": 112,
+      "classification": "max_turns",
+      "claudeResetAt": null,
+      "coordinatorAttempt": "111",
+      "note": "Provider exit success is not evidence the game task completed.",
+      "outcome": "exited",
+      "provider": "claude",
+      "reason": null,
+      "returncode": 1,
+      "scope": {
+        "confirmed": true,
+        "unit": "wb-provider-159da5ebf0a94dec967feb5e03c8c8cd.scope"
+      },
+      "stderrPath": "/home/kel/projects/worlds-between/autonomy/provider/112-claude.stderr.log",
+      "stdoutPath": "/home/kel/projects/worlds-between/autonomy/provider/112-claude.stdout.log",
+      "tokens": {
+        "cache_creation_input_tokens": 104378,
+        "cache_read_input_tokens": 2330336,
+        "input_tokens": 70,
+        "output_tokens": 35422
+      }
+    },
+    {
+      "attempt": 113,
+      "classification": "permission_denied",
+      "claudeResetAt": null,
+      "coordinatorAttempt": "111",
+      "note": "Provider exit success is not evidence the game task completed.",
+      "outcome": "exited",
+      "provider": "claude",
+      "reason": null,
+      "returncode": 0,
+      "scope": {
+        "confirmed": true,
+        "unit": "wb-provider-72af4ee45af24691ba5a1bbf9c871743.scope"
+      },
+      "stderrPath": "/home/kel/projects/worlds-between/autonomy/provider/113-claude.stderr.log",
+      "stdoutPath": "/home/kel/projects/worlds-between/autonomy/provider/113-claude.stdout.log",
+      "tokens": {
+        "cache_creation_input_tokens": 88562,
+        "cache_read_input_tokens": 956045,
+        "input_tokens": 42,
+        "output_tokens": 17682
+      }
+    }
+  ],
+  "provider_stderr_sha256": [
+    "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  ],
+  "postcommit_smoke": "M1_SMOKE_OK; checked runner PASS exit0, no diagnostic errors",
+  "preexisting_index_preserved": true,
+  "shared_record_sync_limit": "Canonical local ledger was updated and check passes. Its seven pre-existing unrelated task changes and ownership audit were preserved; ledger was not included in the scoped commit. Bible has unrelated Muxiu east-static active progress record; preserved without overwrite. Existing baseline snapshots and this closeout retain before/after meters, not a fabricated Bible finish.",
+  "retained_failures": [
+    "max_turns first provider; follow-up provider classified permission_denied although targeted rendered checks passed; exact denials in receipts/checkpoint",
+    "coordinator read-only parser AttributeError corrected without disk mutation",
+    "first git add exit1 because ignored regenerable gd.uid; all other selected paths staged; ignored uid omitted without force-add"
+  ],
+  "hash_normalization": "none, raw SHA256 file bytes",
+  "human_gates": "Art unapproved; no default adoption, motion or normal-runtime integration credit."
+}
