@@ -2,7 +2,7 @@
   "id": "rpg-2-star-ocean-the-second_production-completion_v01",
   "schemaVersion": 2,
   "project": "rpg-2-star-ocean-the-second",
-  "updatedAt": "2026-10-24T05:03:05Z",
+  "updatedAt": "2026-10-24T05:18:16Z",
   "zh": "制作完成度任务台账：衡量已完成的工作量（编码 40% + 内容 60%）；检查／审查与创作者批准分开计量，均不改变制作分；免除的审查不算已执行的工作；运营任务列出负责方但不计百分比。",
   "en": "Production-completion task ledger: measures work done (coding 40% + content 60%); inspection/review and creator approval are separate meters and never change production credit; waived reviews are not performed work; operations tasks list owners but carry no percentage.",
   "brief": "docs/rpg-2-star-ocean-the-second_production-completion_bilingual-brief_v01_20261018-140533-3ea2a621.md",
@@ -1240,6 +1240,22 @@
         },
         "previousTaskSetSha256": "3653ac64a2e6890daa502ba2c0c119bc98674b6562253984d52bbcbb68ec0857",
         "taskSetSha256": "9e2f29c1751861dd773087cd085806a06e3c9884df24cfb0865e45352597be37"
+      },
+      {
+        "at": "2026-10-24T05:05:56Z",
+        "kind": "owner-assignment",
+        "taskId": "content.char.milo.walk-east",
+        "fromOwner": "claude",
+        "toOwner": "hermes",
+        "changedTaskIds": [
+          "content.char.milo.walk-east"
+        ],
+        "reason": {
+          "zh": "",
+          "en": "Creator batch 52: Hermes coordinates and independently verifies adapter-produced east walk/stop; scope and points unchanged."
+        },
+        "previousTaskSetSha256": "9e2f29c1751861dd773087cd085806a06e3c9884df24cfb0865e45352597be37",
+        "taskSetSha256": "4256133ec7692ca31db047d860226d96ba7c94c7d3b12f7ec1f644ee925858cb"
       }
     ],
     "pointsByStage": {
@@ -1272,8 +1288,8 @@
     "production": {
       "zh": "制作完成度",
       "en": "Production completion",
-      "percent": 61.5,
-      "percentLabel": "61.5%",
+      "percent": 61.6,
+      "percentLabel": "61.6%",
       "formula": "round1(40 * codingDonePoints/codingTotalPoints + 60 * contentDonePoints/contentTotalPoints)",
       "coding": {
         "done": 111,
@@ -1284,12 +1300,12 @@
         "tasksDone": 23
       },
       "content": {
-        "done": 673,
+        "done": 676,
         "total": 1881,
-        "percent": 35.8,
+        "percent": 35.9,
         "weight": 60,
         "tasks": 715,
-        "tasksDone": 222
+        "tasksDone": 223
       }
     },
     "inspection": {
@@ -1354,11 +1370,11 @@
         "waivedPoints": 0
       },
       "content": {
-        "done": 673,
+        "done": 676,
         "total": 1881,
-        "percent": 35.8,
+        "percent": 35.9,
         "tasks": 715,
-        "tasksDone": 222,
+        "tasksDone": 223,
         "waivedTasks": 0,
         "waivedPoints": 0
       },
@@ -1410,14 +1426,14 @@
     },
     "byOwner": {
       "claude": {
-        "tasks": 696,
+        "tasks": 695,
         "operationsTasks": 0,
-        "points": 1842,
+        "points": 1839,
         "pointsDone": 585,
         "byStatus": {
           "done": 153,
           "blocked": 4,
-          "todo": 539
+          "todo": 538
         },
         "readyInQueue": 1,
         "revisionsBlockingApproval": 1
@@ -1448,12 +1464,12 @@
         "revisionsBlockingApproval": 3
       },
       "hermes": {
-        "tasks": 12,
+        "tasks": 13,
         "operationsTasks": 0,
-        "points": 32,
-        "pointsDone": 27,
+        "points": 35,
+        "pointsDone": 30,
         "byStatus": {
-          "done": 10,
+          "done": 11,
           "todo": 2
         },
         "readyInQueue": 0,
@@ -1519,7 +1535,7 @@
       },
       "characters": {
         "content": {
-          "done": 252,
+          "done": 255,
           "total": 1460
         },
         "technical-inspection": {
@@ -2468,7 +2484,7 @@
     {"id":"content.char.milo.walk-south","type":"native-pixel","title":{"zh":"米洛 · 南向行走／跑动","en":"Milo · south walk/run"},"area":"characters","stage":"content","owner":"hermes","status":"done","points":3,"doneCriterion":{"zh":"南向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"south walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.milo.static-south"],"evidence":["outputs/milo-sw01/rpg-2-star-ocean-the-second_milo_walk-south-editable_unapproved-msw01-v01_20261024-044311-64675714.pxo","outputs/milo-sw01/rpg-2-star-ocean-the-second_milo_walk-source-manifest_unapproved-msw01-v01_20261024-044311-c2c90577.json","outputs/milo-sw01/hermes48-source/rpg-2-star-ocean-the-second_milo_walk-south-independent-result_v01_20261024-044311-5e7a0c19.json","docs/qa/rpg-2-star-ocean-the-second_milo_walk-south-independent-closeout_unapproved-v01_20261024-045800-b48a0001.md"],"subject":{"kind":"character-variant","id":"milo"},"statusAt":"2026-10-24T04:51:51Z","note":{"zh":"","en":"Source committed in 8016d0df: Claude adapter authored south-only 12-phase loop and 12 phase-aware stop bridges, Hermes independently reran 31/31 checks and 10 negative controls, 41/41 native export equality, ORA/timing/hash checks, static fit and post-integration M1 smoke. In-place gait retains 5.6 logical px/40ms planted-foot world slip; stop grounded slip zero. Provider receipt permission_denied and native application diagnostics retained, not clean success. No default integration, normal-host stop playback, GUI reliability, human art or motion approval."}},
     {"id":"content.char.milo.walk-west","type":"native-pixel","title":{"zh":"米洛 · 西向行走／跑动","en":"Milo · west walk/run"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"西向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"west walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.milo.static-west"],"evidence":[],"subject":{"kind":"character-variant","id":"milo"}},
     {"id":"content.char.milo.walk-north","type":"native-pixel","title":{"zh":"米洛 · 北向行走／跑动","en":"Milo · north walk/run"},"area":"characters","stage":"content","owner":"hermes","status":"done","points":3,"doneCriterion":{"zh":"北向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"north walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.milo.static-north"],"evidence":["outputs/milo-nw01/rpg-2-star-ocean-the-second_milo_walk-north-editable_unapproved-mnw01-v01_20261024-045533-7283ddae.pxo","outputs/milo-nw01/rpg-2-star-ocean-the-second_milo_walk-source-manifest_unapproved-mnw01-v01_20261024-045533-b137cda1.json","outputs/milo-nw01/hermes50-source/rpg-2-star-ocean-the-second_milo_walk-north-independent-result_v01_20261024-045533-2abbb86c.json","docs/qa/rpg-2-star-ocean-the-second_milo_walk-north-independent-closeout_unapproved-v01_20261024-050200-b50a0001.md"],"subject":{"kind":"character-variant","id":"milo"},"statusAt":"2026-10-24T05:03:05Z","note":{"zh":"","en":"Source committed in 379badd7: Claude adapter north-only 12-phase walk and 12 phase-aware stop bridges. Hermes independently reran 89/89 rebuild, 19/19 source and 37/37 disk/native checks with 16 rejected negative controls, 41/41 native export equality, effective PXO timing, bilingual static fit and post-source-commit M1 smoke. In-place gait retains 5.6 logical px/40ms planted-foot world slip; stop grounded slip zero. Native application diagnostics and provider permission_denied receipt retained. No default/runtime integration, normal-host stop playback, GUI reliability or human art/motion approval."}},
-    {"id":"content.char.milo.walk-east","type":"native-pixel","title":{"zh":"米洛 · 东向行走／跑动","en":"Milo · east walk/run"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":3,"doneCriterion":{"zh":"东向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"east walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.milo.static-east"],"evidence":[],"subject":{"kind":"character-variant","id":"milo"}},
+    {"id":"content.char.milo.walk-east","type":"native-pixel","title":{"zh":"米洛 · 东向行走／跑动","en":"Milo · east walk/run"},"area":"characters","stage":"content","owner":"hermes","status":"done","points":3,"doneCriterion":{"zh":"东向行走或跑动循环与停步已提交，并有触地／滑步检查","en":"east walk or run cycle and stop committed with contact / slip checks"},"dependsOn":["content.char.milo.static-east"],"evidence":["outputs/milo-ew01/rpg-2-star-ocean-the-second_milo_walk-east-editable_unapproved-mew01-v01_20261024-061500-04413ee1.pxo","outputs/milo-ew01/rpg-2-star-ocean-the-second_milo_walk-source-manifest_unapproved-mew01-v01_20261024-061500-9c61f2d2.json","outputs/milo-ew01/hermes52-source/rpg-2-star-ocean-the-second_milo_walk-east-independent-result_v01_20261024-061500-3e1a5c07.json","docs/qa/rpg-2-star-ocean-the-second_milo_walk-east-independent-closeout_unapproved-v01_20261024-051900-b52a0001.md"],"subject":{"kind":"character-variant","id":"milo"},"statusAt":"2026-10-24T05:18:16Z","note":{"zh":"","en":"Source committed in d2435573: Claude adapter east-only 12-phase walk/jog and 12 phase-aware stop bridges. Hermes independently reran 89/89 rebuild,19/19 source,39/39 disk/native checks with21 rejected negative controls,41/41 native export equality, effective PXO timing, bilingual static fit and post-source-commit M1 smoke. Boundary slip0.4logical px, held-frame excursion5.86logical px; source stop sole geometry aligned, not full-foot-outline continuity. Native application diagnostics, permission_denied receipt and unbacked regeneration of failed check-result JSON retained explicitly; original failed raw log survives, original JSON bytes not claimed. No default/runtime integration, normal-host stop playback, GUI reliability or human art/motion approval."}},
     {"id":"content.char.milo.display","type":"native-pixel","title":{"zh":"米洛 · 游戏内展示图","en":"Milo · in-game display image"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"游戏内展示图已提交并在界面中显示","en":"The in-game display image is committed and shown in the UI"},"dependsOn":["content.char.milo.static-south"],"evidence":[],"subject":{"kind":"character-variant","id":"milo"}},
     {"id":"content.char.milo.runtime-integration","type":"integration","title":{"zh":"米洛 · 运行时默认接入","en":"Milo · runtime default integration"},"area":"characters","stage":"content","owner":"claude","status":"todo","points":2,"doneCriterion":{"zh":"整套四方向待机与行走默认在游戏中使用","en":"The full four-direction idle+walk set is used in the game by default"},"dependsOn":["content.char.milo.idle-anim","content.char.milo.walk-south","content.char.milo.walk-west","content.char.milo.walk-north","content.char.milo.walk-east","code.runtime.character-sprite-pipeline"],"evidence":[],"subject":{"kind":"character-variant","id":"milo"}},
     {"id":"qa.char.milo.runtime-set-check","type":"technical-check","title":{"zh":"米洛 · 运行时整套技术检查","en":"Milo · runtime set technical check"},"area":"characters","stage":"technical-inspection","owner":"claude","status":"todo","points":1,"doneCriterion":{"zh":"Godot 实机检查（帧、锚点、方向、滑步）全部通过","en":"Godot checks (frames, anchors, directions, slip) all pass"},"dependsOn":["content.char.milo.runtime-integration"],"evidence":[],"subject":{"kind":"character-variant","id":"milo"},"target":"content.char.milo.runtime-integration"},
