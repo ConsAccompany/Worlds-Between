@@ -1,0 +1,2260 @@
+{
+  "task": "content.char.heya.walk-west",
+  "source_commit": "e6332db5729b4b82dc28797e9e749eccc8f42c56",
+  "before": {
+    "production": {
+      "zh": "制作完成度",
+      "en": "Production completion",
+      "percent": 62.8,
+      "percentLabel": "62.8%",
+      "formula": "round1(40 * codingDonePoints/codingTotalPoints + 60 * contentDonePoints/contentTotalPoints)",
+      "coding": {
+        "done": 111,
+        "total": 111,
+        "percent": 100,
+        "weight": 40,
+        "tasks": 23,
+        "tasksDone": 23
+      },
+      "content": {
+        "done": 714,
+        "total": 1881,
+        "percent": 38,
+        "weight": 60,
+        "tasks": 715,
+        "tasksDone": 239
+      }
+    },
+    "inspection": {
+      "zh": "检查与审查（已执行的）",
+      "en": "Inspection and review (performed)",
+      "done": 44,
+      "total": 204,
+      "percent": 21.6,
+      "technical": {
+        "done": 23,
+        "total": 77,
+        "percent": 29.9
+      },
+      "visual": {
+        "done": 21,
+        "total": 126,
+        "percent": 16.7
+      },
+      "contentQa": {
+        "done": 0,
+        "total": 1,
+        "percent": 0
+      },
+      "waived": {
+        "tasks": 4,
+        "points": 4,
+        "zh": "因创作者已直接批准而免除的审查：不是已执行的工作，不计入分子也不计入分母。",
+        "en": "Reviews waived because the creator approved directly: not performed work, excluded from both numerator and denominator."
+      }
+    },
+    "approval": {
+      "zh": "创作者批准",
+      "en": "Creator approval",
+      "done": 19,
+      "total": 244,
+      "percent": 7.8,
+      "tasks": 239,
+      "tasksDone": 19
+    },
+    "operations": {
+      "zh": "运营任务（不计入任何百分比）",
+      "en": "Operations tasks (no percentage)",
+      "tasks": 2,
+      "tasksDone": 2
+    },
+    "release": {
+      "finalAccepted": false,
+      "source": "outputs/rpg-2-star-ocean-the-second_mvp-progress_state_v01_20261013-183804-28a1c7e4.json#/completionMeter/formalApproval/mvpFormallyAccepted",
+      "rule": {
+        "zh": "正式验收仍为 false，直到 approvalLedger 与 M9 两轮试玩等现有门全部通过；本表不能改变它。",
+        "en": "Final acceptance stays false until the existing gates (approvalLedger, the two M9 playthroughs) pass; this ledger cannot change it."
+      }
+    },
+    "stageTotals": {
+      "coding": {
+        "done": 111,
+        "total": 111,
+        "percent": 100,
+        "tasks": 23,
+        "tasksDone": 23,
+        "waivedTasks": 0,
+        "waivedPoints": 0
+      },
+      "content": {
+        "done": 714,
+        "total": 1881,
+        "percent": 38,
+        "tasks": 715,
+        "tasksDone": 239,
+        "waivedTasks": 0,
+        "waivedPoints": 0
+      },
+      "technical-inspection": {
+        "done": 23,
+        "total": 77,
+        "percent": 29.9,
+        "tasks": 73,
+        "tasksDone": 21,
+        "waivedTasks": 0,
+        "waivedPoints": 0
+      },
+      "visual-review": {
+        "done": 21,
+        "total": 126,
+        "percent": 16.7,
+        "tasks": 126,
+        "tasksDone": 21,
+        "waivedTasks": 4,
+        "waivedPoints": 4
+      },
+      "content-qa": {
+        "done": 0,
+        "total": 1,
+        "percent": 0,
+        "tasks": 1,
+        "tasksDone": 0,
+        "waivedTasks": 0,
+        "waivedPoints": 0
+      },
+      "creator-approval": {
+        "done": 19,
+        "total": 244,
+        "percent": 7.8,
+        "tasks": 239,
+        "tasksDone": 19,
+        "waivedTasks": 0,
+        "waivedPoints": 0
+      },
+      "operations": {
+        "done": 2,
+        "total": 2,
+        "percent": 100,
+        "tasks": 2,
+        "tasksDone": 2,
+        "waivedTasks": 0,
+        "waivedPoints": 0
+      }
+    },
+    "byOwner": {
+      "claude": {
+        "tasks": 682,
+        "operationsTasks": 0,
+        "points": 1807,
+        "pointsDone": 594,
+        "byStatus": {
+          "done": 157,
+          "blocked": 4,
+          "todo": 521
+        },
+        "readyInQueue": 1,
+        "revisionsBlockingApproval": 1
+      },
+      "deepseek": {
+        "tasks": 22,
+        "operationsTasks": 0,
+        "points": 61,
+        "pointsDone": 58,
+        "byStatus": {
+          "done": 21,
+          "todo": 1
+        },
+        "readyInQueue": 0,
+        "revisionsBlockingApproval": 0
+      },
+      "codex": {
+        "tasks": 226,
+        "operationsTasks": 2,
+        "points": 291,
+        "pointsDone": 185,
+        "byStatus": {
+          "done": 116,
+          "todo": 105,
+          "not_required": 4,
+          "blocked": 1
+        },
+        "readyInQueue": 13,
+        "revisionsBlockingApproval": 3
+      },
+      "hermes": {
+        "tasks": 14,
+        "operationsTasks": 0,
+        "points": 37,
+        "pointsDone": 32,
+        "byStatus": {
+          "done": 12,
+          "todo": 2
+        },
+        "readyInQueue": 0,
+        "revisionsBlockingApproval": 0
+      },
+      "creator": {
+        "tasks": 239,
+        "operationsTasks": 0,
+        "points": 244,
+        "pointsDone": 19,
+        "byStatus": {
+          "done": 19,
+          "todo": 220
+        },
+        "readyInQueue": 82,
+        "revisionsBlockingApproval": 0
+      }
+    },
+    "areas": {
+      "core-gameplay": {
+        "coding": {
+          "done": 48,
+          "total": 48
+        }
+      },
+      "global-travel": {
+        "coding": {
+          "done": 31,
+          "total": 31
+        },
+        "technical-inspection": {
+          "done": 3,
+          "total": 3
+        }
+      },
+      "canon": {
+        "creator-approval": {
+          "done": 3,
+          "total": 5
+        }
+      },
+      "science-content": {
+        "coding": {
+          "done": 9,
+          "total": 9
+        },
+        "content": {
+          "done": 10,
+          "total": 10
+        }
+      },
+      "ui": {
+        "coding": {
+          "done": 3,
+          "total": 3
+        }
+      },
+      "runtime": {
+        "coding": {
+          "done": 20,
+          "total": 20
+        }
+      },
+      "characters": {
+        "content": {
+          "done": 293,
+          "total": 1460
+        },
+        "technical-inspection": {
+          "done": 1,
+          "total": 52
+        },
+        "visual-review": {
+          "done": 6,
+          "total": 103
+        },
+        "creator-approval": {
+          "done": 10,
+          "total": 208
+        }
+      },
+      "combat": {
+        "content": {
+          "done": 67,
+          "total": 67
+        },
+        "technical-inspection": {
+          "done": 5,
+          "total": 5
+        },
+        "visual-review": {
+          "done": 2,
+          "total": 10
+        },
+        "creator-approval": {
+          "done": 0,
+          "total": 5
+        }
+      },
+      "enemies": {
+        "content": {
+          "done": 20,
+          "total": 20
+        },
+        "technical-inspection": {
+          "done": 2,
+          "total": 2
+        },
+        "visual-review": {
+          "done": 2,
+          "total": 2
+        },
+        "creator-approval": {
+          "done": 1,
+          "total": 3
+        }
+      },
+      "scenes": {
+        "content": {
+          "done": 282,
+          "total": 282
+        },
+        "technical-inspection": {
+          "done": 12,
+          "total": 12
+        },
+        "visual-review": {
+          "done": 9,
+          "total": 9
+        },
+        "creator-approval": {
+          "done": 5,
+          "total": 12
+        }
+      },
+      "vfx": {
+        "content": {
+          "done": 12,
+          "total": 12
+        },
+        "visual-review": {
+          "done": 1,
+          "total": 1
+        },
+        "creator-approval": {
+          "done": 0,
+          "total": 1
+        }
+      },
+      "audio": {
+        "content": {
+          "done": 17,
+          "total": 17
+        },
+        "content-qa": {
+          "done": 0,
+          "total": 1
+        },
+        "creator-approval": {
+          "done": 0,
+          "total": 1
+        }
+      },
+      "ui-visual": {
+        "content": {
+          "done": 13,
+          "total": 13
+        },
+        "visual-review": {
+          "done": 1,
+          "total": 1
+        },
+        "creator-approval": {
+          "done": 0,
+          "total": 1
+        }
+      },
+      "validation": {
+        "technical-inspection": {
+          "done": 0,
+          "total": 3
+        },
+        "creator-approval": {
+          "done": 0,
+          "total": 8
+        }
+      },
+      "operations": {
+        "operations": {
+          "done": 2,
+          "total": 2
+        }
+      }
+    },
+    "queue": {
+      "zh": "待处理（依赖已完成）",
+      "en": "Ready (dependencies done)",
+      "count": 96,
+      "items": [
+        {
+          "id": "creator.char.protagonist-male.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.protagonist-male.approve-static-south",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.protagonist-male.accept-runtime-sprite",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.protagonist-male.accept-display",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.protagonist-female.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.protagonist-female.accept-display",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.liang-xu.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.liang-xu.accept-runtime-sprite",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.liang-xu.accept-display",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.jiang-lan.approve-static-south",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.jiang-lan.accept-display",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "review.char.lin-que.static-south",
+          "stage": "visual-review",
+          "owner": "codex",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.lin-que.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.lin-que.approve-static-south",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.lin-que.accept-display",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "review.char.milo.static-south",
+          "stage": "visual-review",
+          "owner": "codex",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.milo.approve-static-south",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "review.char.muxiu.static-south",
+          "stage": "visual-review",
+          "owner": "codex",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.muxiu.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.muxiu.approve-static-south",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.muxiu.accept-display",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "review.char.yanke.static-south",
+          "stage": "visual-review",
+          "owner": "codex",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.yanke.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.yanke.approve-static-south",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.yanke.accept-display",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.sangguo.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.sain.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.ji-cheng.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.ji-cheng.approve-static-south",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.ji-cheng.accept-runtime-sprite",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.ji-cheng.accept-display",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.zhou-he.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.aiti.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.ye-qiao.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.mi-yi.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.luo-qi.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.avila.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.kern.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.lairui.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.mi-luo.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "review.char.heya.static-south",
+          "stage": "visual-review",
+          "owner": "codex",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.heya.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.heya.approve-static-south",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.wu-li.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.huan-7.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.suiya.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.zhongdu.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "qa.char.zhao-ling.runtime-set-check",
+          "stage": "technical-inspection",
+          "owner": "claude",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.zhao-ling.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.zhao-ling.approve-static-south",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.zhao-ling.accept-runtime-sprite",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.zhao-ling.accept-display",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.pei-zhi.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.an-suo.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.su-yan.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.tao-yu.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.ruan-tian.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.bu-he.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.han-ze.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.xida.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.gu-lin.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.ruima.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.tao-li.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.lin-yan.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.he-huai.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.xuan-ya.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.que-zhi.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.menling.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.lingbing.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.lengjing.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.yuyin.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "review.combat.protagonist-male.static",
+          "stage": "visual-review",
+          "owner": "codex",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "review.combat.protagonist-male.set",
+          "stage": "visual-review",
+          "owner": "codex",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.combat.protagonist-male.accept-set",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "review.combat.liang-xu.static",
+          "stage": "visual-review",
+          "owner": "codex",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "review.combat.liang-xu.set",
+          "stage": "visual-review",
+          "owner": "codex",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.combat.liang-xu.accept-set",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "review.combat.ji-cheng.static",
+          "stage": "visual-review",
+          "owner": "codex",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "review.combat.ji-cheng.set",
+          "stage": "visual-review",
+          "owner": "codex",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.combat.ji-cheng.accept-set",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "review.combat.zhao-ling.static",
+          "stage": "visual-review",
+          "owner": "codex",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "review.combat.zhao-ling.set",
+          "stage": "visual-review",
+          "owner": "codex",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.combat.zhao-ling.accept-set",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.enemy.sentry.accept-art",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.enemy.patrol.accept-art",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.scene.map.accept",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.scene.city.accept",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.scene.ruins.accept",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.scene.ruins-survey-outer.accept",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.scene.ruins-survey-inner.accept",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.scene.chicago-loop.accept",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.content.vfx.accept",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.content.audio.accept",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.content.ui-visuals.accept",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.canon.prologue-start-date",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.canon.old-save-dates",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        }
+      ],
+      "needsRevision": {
+        "zh": "需要修订后才能验收（负责方见任务；最近一次审查要求修改）",
+        "en": "Needs revision before acceptance (see assigned owner; the latest review asked for changes)",
+        "count": 4,
+        "items": [
+          {
+            "id": "creator.char.protagonist-female.accept-runtime-sprite",
+            "owner": "creator",
+            "stage": "creator-approval",
+            "review": "review.char.protagonist-female.runtime-set",
+            "revision": null,
+            "revisionStatus": "missing",
+            "nextOwner": "codex"
+          },
+          {
+            "id": "creator.char.liang-xu.approve-static-south",
+            "owner": "creator",
+            "stage": "creator-approval",
+            "review": "review.char.liang-xu.static-south",
+            "revision": "content.char.liang-xu.static-south.revision",
+            "revisionStatus": "todo",
+            "nextOwner": "claude"
+          },
+          {
+            "id": "creator.combat.protagonist-female.accept-set",
+            "owner": "creator",
+            "stage": "creator-approval",
+            "review": "review.combat.protagonist-female.set",
+            "revision": null,
+            "revisionStatus": "missing",
+            "nextOwner": "codex"
+          },
+          {
+            "id": "creator.scene.outskirts-survey-outer.accept",
+            "owner": "creator",
+            "stage": "creator-approval",
+            "review": "review.scene.outskirts-survey-outer",
+            "revision": "content.scene.outskirts-survey-outer.native-pass.revision",
+            "revisionStatus": "delivered-before-latest-review",
+            "nextOwner": "codex"
+          }
+        ]
+      }
+    },
+    "legacy": {
+      "zh": "旧版混合交付／验收估算（不是正式验收）",
+      "en": "Legacy mixed delivery/acceptance estimate (not formal acceptance)",
+      "percent": 44.2,
+      "percentLabel": "44.2%",
+      "counters": {
+        "identities": 51,
+        "visualVariants": 52,
+        "runtimeSpritesAccepted": 0,
+        "runtimeSpritesTarget": 52,
+        "sceneVisualsAccepted": 5,
+        "sceneVisualsTarget": 12,
+        "humanPlaytests": 0,
+        "humanPlaytestsTarget": 2
+      },
+      "source": "outputs/rpg-2-star-ocean-the-second_mvp-progress_state_v01_20261013-183804-28a1c7e4.json#/completionMeter",
+      "note": {
+        "zh": "旧指标混合了交付与验收，不表示 40.8% 已被正式验收；与制作完成度是不同指标，两者不能相减或比较为“增长”。",
+        "en": "The old meter mixes delivery and acceptance; it does not mean 40.8% is formally accepted. A different metric from production completion; the two are never subtracted or presented as a gain."
+      }
+    }
+  },
+  "after": {
+    "production": {
+      "zh": "制作完成度",
+      "en": "Production completion",
+      "percent": 62.9,
+      "percentLabel": "62.9%",
+      "formula": "round1(40 * codingDonePoints/codingTotalPoints + 60 * contentDonePoints/contentTotalPoints)",
+      "coding": {
+        "done": 111,
+        "total": 111,
+        "percent": 100,
+        "weight": 40,
+        "tasks": 23,
+        "tasksDone": 23
+      },
+      "content": {
+        "done": 717,
+        "total": 1881,
+        "percent": 38.1,
+        "weight": 60,
+        "tasks": 715,
+        "tasksDone": 240
+      }
+    },
+    "inspection": {
+      "zh": "检查与审查（已执行的）",
+      "en": "Inspection and review (performed)",
+      "done": 44,
+      "total": 204,
+      "percent": 21.6,
+      "technical": {
+        "done": 23,
+        "total": 77,
+        "percent": 29.9
+      },
+      "visual": {
+        "done": 21,
+        "total": 126,
+        "percent": 16.7
+      },
+      "contentQa": {
+        "done": 0,
+        "total": 1,
+        "percent": 0
+      },
+      "waived": {
+        "tasks": 4,
+        "points": 4,
+        "zh": "因创作者已直接批准而免除的审查：不是已执行的工作，不计入分子也不计入分母。",
+        "en": "Reviews waived because the creator approved directly: not performed work, excluded from both numerator and denominator."
+      }
+    },
+    "approval": {
+      "zh": "创作者批准",
+      "en": "Creator approval",
+      "done": 19,
+      "total": 244,
+      "percent": 7.8,
+      "tasks": 239,
+      "tasksDone": 19
+    },
+    "operations": {
+      "zh": "运营任务（不计入任何百分比）",
+      "en": "Operations tasks (no percentage)",
+      "tasks": 2,
+      "tasksDone": 2
+    },
+    "release": {
+      "finalAccepted": false,
+      "source": "outputs/rpg-2-star-ocean-the-second_mvp-progress_state_v01_20261013-183804-28a1c7e4.json#/completionMeter/formalApproval/mvpFormallyAccepted",
+      "rule": {
+        "zh": "正式验收仍为 false，直到 approvalLedger 与 M9 两轮试玩等现有门全部通过；本表不能改变它。",
+        "en": "Final acceptance stays false until the existing gates (approvalLedger, the two M9 playthroughs) pass; this ledger cannot change it."
+      }
+    },
+    "stageTotals": {
+      "coding": {
+        "done": 111,
+        "total": 111,
+        "percent": 100,
+        "tasks": 23,
+        "tasksDone": 23,
+        "waivedTasks": 0,
+        "waivedPoints": 0
+      },
+      "content": {
+        "done": 717,
+        "total": 1881,
+        "percent": 38.1,
+        "tasks": 715,
+        "tasksDone": 240,
+        "waivedTasks": 0,
+        "waivedPoints": 0
+      },
+      "technical-inspection": {
+        "done": 23,
+        "total": 77,
+        "percent": 29.9,
+        "tasks": 73,
+        "tasksDone": 21,
+        "waivedTasks": 0,
+        "waivedPoints": 0
+      },
+      "visual-review": {
+        "done": 21,
+        "total": 126,
+        "percent": 16.7,
+        "tasks": 126,
+        "tasksDone": 21,
+        "waivedTasks": 4,
+        "waivedPoints": 4
+      },
+      "content-qa": {
+        "done": 0,
+        "total": 1,
+        "percent": 0,
+        "tasks": 1,
+        "tasksDone": 0,
+        "waivedTasks": 0,
+        "waivedPoints": 0
+      },
+      "creator-approval": {
+        "done": 19,
+        "total": 244,
+        "percent": 7.8,
+        "tasks": 239,
+        "tasksDone": 19,
+        "waivedTasks": 0,
+        "waivedPoints": 0
+      },
+      "operations": {
+        "done": 2,
+        "total": 2,
+        "percent": 100,
+        "tasks": 2,
+        "tasksDone": 2,
+        "waivedTasks": 0,
+        "waivedPoints": 0
+      }
+    },
+    "byOwner": {
+      "claude": {
+        "tasks": 681,
+        "operationsTasks": 0,
+        "points": 1804,
+        "pointsDone": 594,
+        "byStatus": {
+          "done": 157,
+          "blocked": 4,
+          "todo": 520
+        },
+        "readyInQueue": 1,
+        "revisionsBlockingApproval": 1
+      },
+      "deepseek": {
+        "tasks": 23,
+        "operationsTasks": 0,
+        "points": 64,
+        "pointsDone": 61,
+        "byStatus": {
+          "done": 22,
+          "todo": 1
+        },
+        "readyInQueue": 0,
+        "revisionsBlockingApproval": 0
+      },
+      "codex": {
+        "tasks": 226,
+        "operationsTasks": 2,
+        "points": 291,
+        "pointsDone": 185,
+        "byStatus": {
+          "done": 116,
+          "todo": 105,
+          "not_required": 4,
+          "blocked": 1
+        },
+        "readyInQueue": 13,
+        "revisionsBlockingApproval": 3
+      },
+      "hermes": {
+        "tasks": 14,
+        "operationsTasks": 0,
+        "points": 37,
+        "pointsDone": 32,
+        "byStatus": {
+          "done": 12,
+          "todo": 2
+        },
+        "readyInQueue": 0,
+        "revisionsBlockingApproval": 0
+      },
+      "creator": {
+        "tasks": 239,
+        "operationsTasks": 0,
+        "points": 244,
+        "pointsDone": 19,
+        "byStatus": {
+          "done": 19,
+          "todo": 220
+        },
+        "readyInQueue": 82,
+        "revisionsBlockingApproval": 0
+      }
+    },
+    "areas": {
+      "core-gameplay": {
+        "coding": {
+          "done": 48,
+          "total": 48
+        }
+      },
+      "global-travel": {
+        "coding": {
+          "done": 31,
+          "total": 31
+        },
+        "technical-inspection": {
+          "done": 3,
+          "total": 3
+        }
+      },
+      "canon": {
+        "creator-approval": {
+          "done": 3,
+          "total": 5
+        }
+      },
+      "science-content": {
+        "coding": {
+          "done": 9,
+          "total": 9
+        },
+        "content": {
+          "done": 10,
+          "total": 10
+        }
+      },
+      "ui": {
+        "coding": {
+          "done": 3,
+          "total": 3
+        }
+      },
+      "runtime": {
+        "coding": {
+          "done": 20,
+          "total": 20
+        }
+      },
+      "characters": {
+        "content": {
+          "done": 296,
+          "total": 1460
+        },
+        "technical-inspection": {
+          "done": 1,
+          "total": 52
+        },
+        "visual-review": {
+          "done": 6,
+          "total": 103
+        },
+        "creator-approval": {
+          "done": 10,
+          "total": 208
+        }
+      },
+      "combat": {
+        "content": {
+          "done": 67,
+          "total": 67
+        },
+        "technical-inspection": {
+          "done": 5,
+          "total": 5
+        },
+        "visual-review": {
+          "done": 2,
+          "total": 10
+        },
+        "creator-approval": {
+          "done": 0,
+          "total": 5
+        }
+      },
+      "enemies": {
+        "content": {
+          "done": 20,
+          "total": 20
+        },
+        "technical-inspection": {
+          "done": 2,
+          "total": 2
+        },
+        "visual-review": {
+          "done": 2,
+          "total": 2
+        },
+        "creator-approval": {
+          "done": 1,
+          "total": 3
+        }
+      },
+      "scenes": {
+        "content": {
+          "done": 282,
+          "total": 282
+        },
+        "technical-inspection": {
+          "done": 12,
+          "total": 12
+        },
+        "visual-review": {
+          "done": 9,
+          "total": 9
+        },
+        "creator-approval": {
+          "done": 5,
+          "total": 12
+        }
+      },
+      "vfx": {
+        "content": {
+          "done": 12,
+          "total": 12
+        },
+        "visual-review": {
+          "done": 1,
+          "total": 1
+        },
+        "creator-approval": {
+          "done": 0,
+          "total": 1
+        }
+      },
+      "audio": {
+        "content": {
+          "done": 17,
+          "total": 17
+        },
+        "content-qa": {
+          "done": 0,
+          "total": 1
+        },
+        "creator-approval": {
+          "done": 0,
+          "total": 1
+        }
+      },
+      "ui-visual": {
+        "content": {
+          "done": 13,
+          "total": 13
+        },
+        "visual-review": {
+          "done": 1,
+          "total": 1
+        },
+        "creator-approval": {
+          "done": 0,
+          "total": 1
+        }
+      },
+      "validation": {
+        "technical-inspection": {
+          "done": 0,
+          "total": 3
+        },
+        "creator-approval": {
+          "done": 0,
+          "total": 8
+        }
+      },
+      "operations": {
+        "operations": {
+          "done": 2,
+          "total": 2
+        }
+      }
+    },
+    "queue": {
+      "zh": "待处理（依赖已完成）",
+      "en": "Ready (dependencies done)",
+      "count": 96,
+      "items": [
+        {
+          "id": "creator.char.protagonist-male.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.protagonist-male.approve-static-south",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.protagonist-male.accept-runtime-sprite",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.protagonist-male.accept-display",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.protagonist-female.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.protagonist-female.accept-display",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.liang-xu.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.liang-xu.accept-runtime-sprite",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.liang-xu.accept-display",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.jiang-lan.approve-static-south",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.jiang-lan.accept-display",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "review.char.lin-que.static-south",
+          "stage": "visual-review",
+          "owner": "codex",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.lin-que.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.lin-que.approve-static-south",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.lin-que.accept-display",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "review.char.milo.static-south",
+          "stage": "visual-review",
+          "owner": "codex",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.milo.approve-static-south",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "review.char.muxiu.static-south",
+          "stage": "visual-review",
+          "owner": "codex",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.muxiu.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.muxiu.approve-static-south",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.muxiu.accept-display",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "review.char.yanke.static-south",
+          "stage": "visual-review",
+          "owner": "codex",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.yanke.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.yanke.approve-static-south",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.yanke.accept-display",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.sangguo.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.sain.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.ji-cheng.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.ji-cheng.approve-static-south",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.ji-cheng.accept-runtime-sprite",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.ji-cheng.accept-display",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.zhou-he.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.aiti.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.ye-qiao.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.mi-yi.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.luo-qi.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.avila.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.kern.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.lairui.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.mi-luo.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "review.char.heya.static-south",
+          "stage": "visual-review",
+          "owner": "codex",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.heya.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.heya.approve-static-south",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.wu-li.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.huan-7.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.suiya.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.zhongdu.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "qa.char.zhao-ling.runtime-set-check",
+          "stage": "technical-inspection",
+          "owner": "claude",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.zhao-ling.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.zhao-ling.approve-static-south",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.zhao-ling.accept-runtime-sprite",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.zhao-ling.accept-display",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.pei-zhi.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.an-suo.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.su-yan.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.tao-yu.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.ruan-tian.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.bu-he.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.han-ze.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.xida.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.gu-lin.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.ruima.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.tao-li.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.lin-yan.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.he-huai.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.xuan-ya.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.que-zhi.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.menling.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.lingbing.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.lengjing.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.char.yuyin.approve-portrait",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "review.combat.protagonist-male.static",
+          "stage": "visual-review",
+          "owner": "codex",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "review.combat.protagonist-male.set",
+          "stage": "visual-review",
+          "owner": "codex",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.combat.protagonist-male.accept-set",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "review.combat.liang-xu.static",
+          "stage": "visual-review",
+          "owner": "codex",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "review.combat.liang-xu.set",
+          "stage": "visual-review",
+          "owner": "codex",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.combat.liang-xu.accept-set",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "review.combat.ji-cheng.static",
+          "stage": "visual-review",
+          "owner": "codex",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "review.combat.ji-cheng.set",
+          "stage": "visual-review",
+          "owner": "codex",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.combat.ji-cheng.accept-set",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "review.combat.zhao-ling.static",
+          "stage": "visual-review",
+          "owner": "codex",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "review.combat.zhao-ling.set",
+          "stage": "visual-review",
+          "owner": "codex",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.combat.zhao-ling.accept-set",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.enemy.sentry.accept-art",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.enemy.patrol.accept-art",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.scene.map.accept",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.scene.city.accept",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.scene.ruins.accept",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.scene.ruins-survey-outer.accept",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.scene.ruins-survey-inner.accept",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.scene.chicago-loop.accept",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.content.vfx.accept",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.content.audio.accept",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.content.ui-visuals.accept",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.canon.prologue-start-date",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        },
+        {
+          "id": "creator.canon.old-save-dates",
+          "stage": "creator-approval",
+          "owner": "creator",
+          "status": "todo",
+          "points": 1
+        }
+      ],
+      "needsRevision": {
+        "zh": "需要修订后才能验收（负责方见任务；最近一次审查要求修改）",
+        "en": "Needs revision before acceptance (see assigned owner; the latest review asked for changes)",
+        "count": 4,
+        "items": [
+          {
+            "id": "creator.char.protagonist-female.accept-runtime-sprite",
+            "owner": "creator",
+            "stage": "creator-approval",
+            "review": "review.char.protagonist-female.runtime-set",
+            "revision": null,
+            "revisionStatus": "missing",
+            "nextOwner": "codex"
+          },
+          {
+            "id": "creator.char.liang-xu.approve-static-south",
+            "owner": "creator",
+            "stage": "creator-approval",
+            "review": "review.char.liang-xu.static-south",
+            "revision": "content.char.liang-xu.static-south.revision",
+            "revisionStatus": "todo",
+            "nextOwner": "claude"
+          },
+          {
+            "id": "creator.combat.protagonist-female.accept-set",
+            "owner": "creator",
+            "stage": "creator-approval",
+            "review": "review.combat.protagonist-female.set",
+            "revision": null,
+            "revisionStatus": "missing",
+            "nextOwner": "codex"
+          },
+          {
+            "id": "creator.scene.outskirts-survey-outer.accept",
+            "owner": "creator",
+            "stage": "creator-approval",
+            "review": "review.scene.outskirts-survey-outer",
+            "revision": "content.scene.outskirts-survey-outer.native-pass.revision",
+            "revisionStatus": "delivered-before-latest-review",
+            "nextOwner": "codex"
+          }
+        ]
+      }
+    },
+    "legacy": {
+      "zh": "旧版混合交付／验收估算（不是正式验收）",
+      "en": "Legacy mixed delivery/acceptance estimate (not formal acceptance)",
+      "percent": 44.2,
+      "percentLabel": "44.2%",
+      "counters": {
+        "identities": 51,
+        "visualVariants": 52,
+        "runtimeSpritesAccepted": 0,
+        "runtimeSpritesTarget": 52,
+        "sceneVisualsAccepted": 5,
+        "sceneVisualsTarget": 12,
+        "humanPlaytests": 0,
+        "humanPlaytestsTarget": 2
+      },
+      "source": "outputs/rpg-2-star-ocean-the-second_mvp-progress_state_v01_20261013-183804-28a1c7e4.json#/completionMeter",
+      "note": {
+        "zh": "旧指标混合了交付与验收，不表示 40.8% 已被正式验收；与制作完成度是不同指标，两者不能相减或比较为“增长”。",
+        "en": "The old meter mixes delivery and acceptance; it does not mean 40.8% is formally accepted. A different metric from production completion; the two are never subtracted or presented as a gain."
+      }
+    }
+  },
+  "changed_tasks": [
+    "content.char.heya.walk-west"
+  ],
+  "production_change_points": 0.10000000000000142,
+  "inspection_change_points": 0,
+  "approval_change_points": 0
+}
